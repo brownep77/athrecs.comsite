@@ -147,6 +147,14 @@ try {
   assert.ok(buckley.checked_at >= "2026-10-14");
   assert.ok(buckley.contacts.some((c) => c.email === "buckley.runners@gmail.com"));
   assert.ok(!buckley.contacts.some((c) => /pauldodd07/i.test(c.email ?? "")));
+  assert.equal(bySlug.get("city-of-sheffield-and-dearne-ac").postcode, "");
+  assert.equal(clubProfiles["city-of-sheffield-and-dearne-ac"].founded_year, undefined);
+  assert.equal(bySlug.get("clapham-chasers").address_kind, "clubhouse");
+  assert.ok(bySlug.get("clapham-chasers").sports.includes("Swimming"));
+  assert.equal(bySlug.get("dublin-university-cycling-and-triathlon-club").county, "Dublin");
+  assert.equal(bySlug.get("welsh-athletics-parc-bryn-bach-running-club").address, "");
+  assert.equal(bySlug.get("welsh-athletics-pegasus-running-club").city, "Cardiff");
+  assert.equal(clubProfiles["city-of-preston-triathlon-club-for-juniors"].founded_year, undefined);
   for (const [slug, profile] of Object.entries(clubProfiles)) {
     assert.ok(bySlug.has(slug), `Editorial profile must match a canonical club: ${slug}`);
     assert.equal(bySlug.get(slug).summary, profile.summary);
