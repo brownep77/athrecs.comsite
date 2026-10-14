@@ -304,15 +304,27 @@ try {
     where key='clubs_catalogue_version'`;
   globalThis.__athrecsFullSeedPromise__ = undefined;
   await ensureAthrecsSeeded();
-  assert.deepEqual(await sql`select * from clubs where slug='barnet-and-district-ac'`, beforeClubRefresh);
-  assert.deepEqual(await sql`select
+  assert.deepEqual(
+    await sql`select * from clubs where slug='barnet-and-district-ac'`,
+    beforeClubRefresh,
+  );
+  assert.deepEqual(
+    await sql`select
     (select json_agg(a order by a.id) from athletes a) as athletes,
     (select json_agg(r order by r.id) from results r) as results,
-    (select json_agg(e order by e.id) from events e) as events`, unrelatedBefore);
-  const { CLUB_CATALOGUE_SEED_VERSION } = await server.ssrLoadModule('/src/lib/athrecs/seed.server.ts');
-  assert.equal((await sql`select value from app_meta where key='clubs_catalogue_version'`)[0].value,
-    CLUB_CATALOGUE_SEED_VERSION);
-  console.log('Club-only refresh restores summaries, locations and contacts without changing athletes, results or events.');
+    (select json_agg(e order by e.id) from events e) as events`,
+    unrelatedBefore,
+  );
+  const { CLUB_CATALOGUE_SEED_VERSION } = await server.ssrLoadModule(
+    "/src/lib/athrecs/seed.server.ts",
+  );
+  assert.equal(
+    (await sql`select value from app_meta where key='clubs_catalogue_version'`)[0].value,
+    CLUB_CATALOGUE_SEED_VERSION,
+  );
+  console.log(
+    "Club-only refresh restores summaries, locations and contacts without changing athletes, results or events.",
+  );
 
   // A new fixture catalogue version takes the full refresh path in production.
   // Renamed source events must still count as existing catalogue identities.
@@ -348,6 +360,139 @@ try {
     () => sql`insert into events (slug,name,sport)
       values (${oldSlug},'Must still remain blocked','Running')`,
     /permanent public URL and cannot be reused/,
+  );
+
+  // Adding an unrelated fixture must not attempt historical alias retirement.
+  // This reproduces the production Cardiff blocker with synthetic source data.
+  const { catalogueSeedEventSlugAliases } = await server.ssrLoadModule(
+    "/src/data/entry-options.ts",
+  );
+  const protectedAliasSlug = "wa-cardiff-half-marathon-7240793";
+  const protectedCanonicalSlug = catalogueSeedEventSlugAliases[protectedAliasSlug];
+  assert.equal(protectedCanonicalSlug, "cardiff-half-marathon");
+  const [syntheticAthlete] = await sql`insert into athletes(slug,display_name)
+    values('synthetic-catalogue-protection','Synthetic Catalogue Protection') returning id`;
+  async function syntheticAlias(slug, withResult) {
+    const [event] = await sql`insert into events(slug,name,sport,source_url)
+      values(${slug},'Synthetic source event','Running','https://example.test/catalogue-source') returning id`;
+    const [edition] =
+      await sql`insert into editions(event_id,event_date,distance_code,status,source_url)
+      values(${event.id},'2026-10-04','Half','Closed','https://example.test/catalogue-source') returning id`;
+    if (withResult)
+      await sql`insert into results(edition_id,athlete_id,status,finish_time_seconds,source_url,result_details)
+      values(${edition.id},${syntheticAthlete.id},'finished',1999,'https://example.test/catalogue-source',
+        '{"archive":{"syntheticReview":true},"originalSeconds":2000}'::jsonb)`;
+    return event.id;
+  }
+  const protectedAliasId = await syntheticAlias(protectedAliasSlug, true);
+  // Later verified releases restored this companion 10K. An older migration
+  // from 10K to Half must not delete it or break its private source-record link.
+  const retainedEditions = await sql`select ed.* from editions ed
+    join events e on e.id=ed.event_id
+    where e.slug='monsal-trail-half-marathon-autumn-sunday' order by ed.id`;
+  const retainedTenK = retainedEditions.find((edition) => edition.distance_code === "10K");
+  assert(retainedTenK, "Current catalogue retains the verified companion 10K");
+  await sql`insert into event_register_source_records
+    (record_key,origin,provider,source_url,event_key,event_name,sport,catalogue_event_id,catalogue_edition_id,evidence)
+    values('synthetic-retained-edition','synthetic','synthetic','https://example.test/retained-edition',
+      'synthetic-retained-edition','Synthetic retained edition','Running',${retainedTenK.event_id},${retainedTenK.id},
+      '{"synthetic":true,"review":"source observation only"}'::jsonb)`;
+  const [legacySourceEvent] = await sql`select id from events
+    where slug='holyrood-park-5k-10k-half-marathon-november'`;
+  const [legacySourceEdition] = await sql`insert into editions
+    (event_id,event_date,distance_code,status,source_url)
+    values(${legacySourceEvent.id},'2026-11-08','10K','TBC','https://example.test/legacy-edition')
+    returning *`;
+  await sql`insert into event_register_source_records
+    (record_key,origin,provider,source_url,event_key,event_name,sport,catalogue_event_id,catalogue_edition_id,evidence)
+    values('synthetic-legacy-edition','synthetic','synthetic','https://example.test/legacy-edition',
+      'synthetic-legacy-edition','Synthetic legacy edition','Running',${legacySourceEvent.id},${legacySourceEdition.id},
+      '{"synthetic":true,"review":"requires explicit reconciliation"}'::jsonb)`;
+  const evidenceState = async () => ({
+    athletes: await sql`select * from athletes order by id`,
+    results: await sql`select * from results order by id`,
+    references: await sql`select * from result_source_references order by result_id,source_url`,
+    history: await sql`select * from result_change_history order by id`,
+    redirects: await sql`select * from slug_redirects order by entity_type,old_slug`,
+    registerSources: await sql`select * from event_register_source_records order by record_key`,
+  });
+  const protectedEvidence = await evidenceState();
+  const protectedEvents = await sql`select * from events
+    where slug in (${protectedAliasSlug},${protectedCanonicalSlug}) order by id`;
+  const protectedEditions = await sql`select * from editions
+    where event_id=${protectedAliasId} order by id`;
+  const removedFixture = await sql`delete from events e
+    where e.slug='glenmore-challenge-running-festival-2027'
+      and not exists(select 1 from editions ed join results r on r.edition_id=ed.id where ed.event_id=e.id)
+    returning id`;
+  assert.equal(removedFixture.length, 1, "Simulate one new, result-free catalogue fixture");
+  async function refreshFixtures() {
+    await sql`update app_meta set value='previous-fixture-version'
+      where key in ('seed_version','fixtures_catalogue_version')`;
+    globalThis.__athrecsFullSeedPromise__ = undefined;
+    await ensureAthrecsSeeded();
+  }
+  await refreshFixtures();
+  assert.equal(
+    (await sql`select id from events where slug='glenmore-challenge-running-festival-2027'`).length,
+    1,
+  );
+  assert.deepEqual(await evidenceState(), protectedEvidence);
+  assert.deepEqual(
+    await sql`select ed.* from editions ed join events e on e.id=ed.event_id
+      where e.slug='monsal-trail-half-marathon-autumn-sunday' order by ed.id`,
+    retainedEditions,
+    "A superseded edition migration preserves current verified editions and their identities",
+  );
+  assert.deepEqual(
+    await sql`select * from editions where id=${legacySourceEdition.id}`,
+    [legacySourceEdition],
+    "A source-linked legacy edition requires explicit reconciliation before cleanup",
+  );
+  assert.deepEqual(
+    await sql`select * from events
+    where slug in (${protectedAliasSlug},${protectedCanonicalSlug}) order by id`,
+    protectedEvents,
+  );
+  assert.deepEqual(
+    await sql`select * from editions where event_id=${protectedAliasId} order by id`,
+    protectedEditions,
+  );
+
+  // Alias cleanup still works for a newly introduced canonical card, and still
+  // refuses to delete stored results when that cleanup is actually in scope.
+  const resultFreeSlugs = new Set(
+    (
+      await sql`select e.slug from events e
+    where not exists(select 1 from editions ed join results r on r.edition_id=ed.id where ed.event_id=e.id)`
+    ).map((row) => row.slug),
+  );
+  const existingSlugs = new Set((await sql`select slug from events`).map((row) => row.slug));
+  const cleanupPair = Object.entries(catalogueSeedEventSlugAliases).find(
+    ([alias, canonical]) =>
+      alias !== protectedAliasSlug && !existingSlugs.has(alias) && resultFreeSlugs.has(canonical),
+  );
+  assert(cleanupPair, "A result-free canonical cleanup control exists");
+  const [cleanupAlias, cleanupCanonical] = cleanupPair;
+  await sql`delete from events where slug=${cleanupCanonical}`;
+  await syntheticAlias(cleanupAlias, false);
+  await refreshFixtures();
+  assert.equal((await sql`select id from events where slug=${cleanupAlias}`).length, 0);
+  assert.equal((await sql`select id from events where slug=${cleanupCanonical}`).length, 1);
+  assert.deepEqual(await evidenceState(), protectedEvidence);
+
+  await sql`delete from events where slug=${cleanupCanonical}`;
+  await syntheticAlias(cleanupAlias, true);
+  const beforeRejectedCleanup = await evidenceState();
+  await assert.rejects(refreshFixtures, /Cannot retire event alias .*: it has stored results/);
+  assert.deepEqual(await evidenceState(), beforeRejectedCleanup);
+  assert.equal(
+    (await sql`select id from events where slug=${cleanupCanonical}`).length,
+    0,
+    "Rejected cleanup rolls back the new canonical card instead of leaving a duplicate",
+  );
+  console.log(
+    "New fixture refresh preserves unrelated source aliases and reviewed results; in-scope alias cleanup retains its deletion guard and transaction rollback.",
   );
   console.log(
     "Public-figure and fixture refresh passed: source results follow renamed production events, full catalogue upgrades preserve events, editions, results and redirects, retired URLs remain guarded and cold starts do not replay the import.",

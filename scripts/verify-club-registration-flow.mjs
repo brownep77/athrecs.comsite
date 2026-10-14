@@ -201,6 +201,16 @@ try {
   ]) {
     await page.setViewportSize(viewport);
     const next = page.getByRole("button", { name: "Continue", exact: true });
+    await next.evaluate((element) => element.scrollIntoView({ block: "end" }));
+    assert(
+      await next.evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return element.contains(
+          document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2),
+        );
+      }),
+      `End-aligned Continue clears the mobile navigation at ${viewport.width}px`,
+    );
     await next.click({ trial: true });
     assert(
       await next.evaluate((element) => {

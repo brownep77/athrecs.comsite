@@ -837,6 +837,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   const missingSeries = seriesList.filter(
     (series) => Boolean(series?.slug) && !have.has(series.slug),
   );
+  const missingSlugs = new Set(missingSeries.map((series) => series.slug));
 
   if (missingSeries.length === 0) {
     await sql`
@@ -902,6 +903,10 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   );
 
   for (const [aliasSlug, canonicalSlug] of Object.entries(catalogueSeedEventSlugAliases)) {
+    // Only retire aliases for canonical identities introduced by this refresh.
+    // Existing source identities require their own reviewed reconciliation;
+    // unrelated fixture additions must not attempt to delete their results.
+    if (!missingSlugs.has(canonicalSlug)) continue;
     const matches = await sql<{ id: number; slug: string }>`
       select id, slug from events where slug in (${aliasSlug}, ${canonicalSlug})
     `;
@@ -944,7 +949,20 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
   const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
 
-  for (const replacement of editionReplacements) {
+  // Later verified releases can retain a distance/date that an older migration
+  // replaced. Current catalogue identities take precedence over that migration,
+  // including their source-record links and any reviewed results. Source-linked
+  // legacy editions also require explicit reconciliation, not automatic cleanup.
+  const currentEditionKeys = new Set(
+    editionSeeds.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
+  );
+  const activeEditionReplacements = editionReplacements.filter(
+    (replacement) =>
+      !currentEditionKeys.has(
+        `${replacement.seriesSlug}|${replacement.fromDate}|${replacement.distance}`,
+      ),
+  );
+  for (const replacement of activeEditionReplacements) {
     const eventId = eventIds.get(replacement.seriesSlug);
     if (!eventId) continue;
     const targetDistance = replacement.toDistance ?? replacement.distance;
@@ -957,6 +975,15 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
          and old_edition.distance_code = $3::text
          and not exists (
            select 1 from results where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from event_register_source_records where catalogue_edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_archive_datasets where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_ingestion_editions where edition_id = old_edition.id
          )
          and not exists (
            select 1
@@ -974,6 +1001,15 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
          and old_edition.distance_code = $3::text
          and not exists (
            select 1 from results where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from event_register_source_records where catalogue_edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_archive_datasets where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_ingestion_editions where edition_id = old_edition.id
          )
          and exists (
            select 1
@@ -998,6 +1034,15 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
          and stale_edition.distance_code = 'Half'
          and not exists (
            select 1 from results where edition_id = stale_edition.id
+         )
+         and not exists (
+           select 1 from event_register_source_records where catalogue_edition_id = stale_edition.id
+         )
+         and not exists (
+           select 1 from result_archive_datasets where edition_id = stale_edition.id
+         )
+         and not exists (
+           select 1 from result_ingestion_editions where edition_id = stale_edition.id
          )`,
       [bacchusEventId],
     );
@@ -1041,7 +1086,6 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     100,
   );
 
-  const missingSlugs = new Set(missingSeries.map((series) => series.slug));
   const distanceRows = missingSeries.flatMap((series) =>
     [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
   );
@@ -1131,7 +1175,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   // upsert. An older deployment can recreate an imported source row while a
   // newer deployment is seeding; this final pass makes the corrected target
   // authoritative without touching editions that hold results.
-  for (const replacement of editionReplacements) {
+  for (const replacement of activeEditionReplacements) {
     const eventId = eventIds.get(replacement.seriesSlug);
     if (!eventId) continue;
     const targetDistance = replacement.toDistance ?? replacement.distance;
@@ -1142,6 +1186,15 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
          and old_edition.distance_code = $3::text
          and not exists (
            select 1 from results where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from event_register_source_records where catalogue_edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_archive_datasets where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_ingestion_editions where edition_id = old_edition.id
          )
          and exists (
            select 1

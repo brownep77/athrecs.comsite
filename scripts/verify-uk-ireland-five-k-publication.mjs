@@ -133,6 +133,87 @@ try {
     [batch.id],
   );
   assert.deepEqual(revisionsAfter, revisionsBefore);
+
+  // Production event names/URLs can be reconciled after this release. Replaying
+  // the old source batch must follow those permanent identities, not recreate it.
+  const renamed = [];
+  for (const [oldSlug, currentSlug] of [
+    ["runthrough-edinburgh-running-festival-august-2027", "edinburgh-running-festival"],
+    [
+      "runthrough-goodwood-running-gp-december-2027",
+      "running-grand-prix-goodwood-5k-10k-half-marathon-october",
+    ],
+  ]) {
+    const event = await one(
+      `update events set slug=$2,name='Synthetic canonical event metadata'
+       where slug=$1 returning *`,
+      [oldSlug, currentSlug],
+    );
+    assert(event, `Source event exists before reconciliation: ${oldSlug}`);
+    renamed.push(event);
+  }
+  const eventIds = renamed.map((event) => event.id);
+  const editionIdentities = (
+    await client.query(
+      "select id,event_id,event_date::text,distance_code from editions where event_id=any($1::int[]) order by id",
+      [eventIds],
+    )
+  ).rows;
+  const athlete = await one(
+    "insert into athletes(slug,display_name) values('synthetic-5k-preservation','Synthetic 5K Preservation') returning *",
+  );
+  const reviewedResult = await one(
+    `insert into results(edition_id,athlete_id,status,finish_time_seconds,source_url,result_details)
+     values($1,$2,'finished',1999,'https://example.test/5k-source','{"archive":{"syntheticReview":true}}'::jsonb)
+     returning *`,
+    [editionIdentities[0].id, athlete.id],
+  );
+  const redirects = (
+    await client.query(
+      "select * from slug_redirects where entity_type='event' and entity_id=any($1::int[]) order by old_slug",
+      [eventIds],
+    )
+  ).rows;
+  const redirectedOutput = runNode("scripts/publish-uk-ireland-five-k-release.mjs", publisherEnv);
+  assert.match(
+    redirectedOutput,
+    /published revision \d+: 65 events, 75 editions, 75 entry options/,
+  );
+  for (const event of renamed) {
+    assert.deepEqual(await one("select * from events where id=$1", [event.id]), event);
+  }
+  assert.deepEqual(
+    (
+      await client.query(
+        "select id,event_id,event_date::text,distance_code from editions where event_id=any($1::int[]) order by id",
+        [eventIds],
+      )
+    ).rows,
+    editionIdentities,
+  );
+  assert.deepEqual(await one("select * from athletes where id=$1", [athlete.id]), athlete);
+  assert.deepEqual(
+    await one("select * from results where id=$1", [reviewedResult.id]),
+    reviewedResult,
+  );
+  assert.deepEqual(
+    (
+      await client.query(
+        "select * from slug_redirects where entity_type='event' and entity_id=any($1::int[]) order by old_slug",
+        [eventIds],
+      )
+    ).rows,
+    redirects,
+  );
+  const revisionCount = await one("select count(*)::int as count from catalogue_revisions");
+  assert.match(
+    runNode("scripts/publish-uk-ireland-five-k-release.mjs", publisherEnv),
+    /was already published; no database change needed/,
+  );
+  assert.deepEqual(
+    await one("select count(*)::int as count from catalogue_revisions"),
+    revisionCount,
+  );
 } finally {
   await client.end();
 }

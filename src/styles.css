@@ -47,7 +47,12 @@
     -webkit-tap-highlight-color: transparent;
     /* Keep scrolled/focused controls clear of the sticky header and mobile nav. */
     scroll-padding-top: calc(5rem + env(safe-area-inset-top, 0px));
-    scroll-padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+    scroll-padding-bottom: calc(9rem + env(safe-area-inset-bottom, 0px));
+  }
+  @media (min-width: 40rem) {
+    html {
+      scroll-padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+    }
   }
   @media (min-width: 64rem) {
     html {

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { createServer } from "vite";
+import { resolveCataloguePublisherRedirects } from "./lib/catalogue-publisher-redirects.mjs";
 
 const ACTOR = "athrecs-production-deployment@athrecs.com";
 const SOURCE_KEY = "athrecs-code:uk-ireland-five-k-release:2026-08-28";
@@ -162,15 +163,13 @@ try {
     );
   }
 
-  const staged = await publishing.stageCatalogueBatch(
-    {
-      sourceKey: SOURCE_KEY,
-      sourceUrl: SOURCE_URL,
-      events: selectedSeries.map(eventInput),
-      editions: selectedEditions.map(editionInput),
-    },
-    ACTOR,
-  );
+  const resolved = await resolveCataloguePublisherRedirects(sql, {
+    sourceKey: SOURCE_KEY,
+    sourceUrl: SOURCE_URL,
+    events: selectedSeries.map(eventInput),
+    editions: selectedEditions.map(editionInput),
+  });
+  const staged = await publishing.stageCatalogueBatch(resolved, ACTOR);
   const batchRows = await sql.query(
     `select status, error from catalogue_import_batches where id = $1 limit 1`,
     [staged.batchId],
