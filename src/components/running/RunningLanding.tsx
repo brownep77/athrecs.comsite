@@ -182,37 +182,34 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
     <div className="space-y-8 pb-8">
       {homepage ? tools : null}
       <header className="max-w-4xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-accent">
-          {homepage ? "AthRecs · Races, results and athletes" : "AthRecs · Running"}
-        </p>
-        <h1 className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-          Find your next
-          <br />
-          <span className="text-accent">running event</span>
-        </h1>
-        <p className="mt-5 max-w-3xl text-base leading-7 text-muted">
-          {homepage ? (
-            <>
-              Choose a country and explore marathons, half marathons and ultras, with race dates,
-              entry options, routes and previous results.
-            </>
-          ) : (
-            <>
+        {homepage ? (
+          <h1 className="sr-only">Running races, results and athlete profiles</h1>
+        ) : (
+          <>
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent">
+              AthRecs · Running
+            </p>
+            <h1 className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
+              Find your next
+              <br />
+              <span className="text-accent">running event</span>
+            </h1>
+            <p className="mt-5 max-w-3xl text-base leading-7 text-muted">
               Marathon or half marathon? Choose between 42.195 kilometres and 21.0975 kilometres,
               then find the setting that suits your running. Explore races in the UK, Australia, New
               Zealand, the USA, Canada, Ireland and South Africa, with dates, entry options, course
               maps and previous results. Whether you prefer a busy city start or a smaller field,
               there is plenty to explore. For a longer challenge, discover our UK road ultramarathon
               guide. Then comes the small matter of training for it.
-            </>
-          )}
-        </p>
-        <p className="mt-4 text-sm font-semibold">
-          {ROAD_MARATHONS.length + ROAD_HALF_MARATHONS.length + ROAD_ULTRAS.length} race and event
-          guides · {MARATHON_COUNTRIES.length} countries · Published dates and dates TBC
-        </p>
+            </p>
+            <p className="mt-4 text-sm font-semibold">
+              {ROAD_MARATHONS.length + ROAD_HALF_MARATHONS.length + ROAD_ULTRAS.length} race and event
+              guides · {MARATHON_COUNTRIES.length} countries · Published dates and dates TBC
+            </p>
+          </>
+        )}
         {homepage ? (
-          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold text-accent">
+          <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold text-accent">
             <Link to="/races" className="inline-flex min-h-11 items-center">
               All fixtures
             </Link>
