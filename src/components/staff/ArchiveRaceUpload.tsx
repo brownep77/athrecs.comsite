@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import { parseBrowserCapture } from "@/lib/results-archive/browser-capture";
 import {
   ARCHIVE_FIELDS,
   mapArchiveRows,
@@ -117,6 +118,11 @@ export function ArchiveRaceUpload({ onSaved }: { onSaved: () => void }) {
         files up to 25 MB are processed in resumable batches. Export Excel as CSV first. Unknown
         times stay empty; DNS, DNF and DQ can be retained.
       </p>
+      <p className="rounded-lg border border-cyan-200 bg-cyan-50 p-3 text-sm text-cyan-950">
+        Results open in your browser? <a href="/tools/browser-results.html" target="_blank" rel="noreferrer" className="font-semibold underline">Add the Save results browser button</a>,
+        then upload its .athrecs.json file below. Each capture contains only the loaded page.
+        Keep the same provider and race source ID across pages; leave the expected total blank unless the source states it.
+      </p>
       <fieldset disabled={busy || Boolean(progress.current)} className="grid gap-3 sm:grid-cols-2">
         <label className="text-sm">
           Find race edition
@@ -197,10 +203,10 @@ export function ArchiveRaceUpload({ onSaved }: { onSaved: () => void }) {
           />
         </label>
         <label className="text-sm sm:col-span-2">
-          Results CSV or TSV
+          Results CSV, TSV or browser capture
           <input
             type="file"
-            accept=".csv,.tsv,text/csv,text/tab-separated-values"
+            accept=".csv,.tsv,.json,text/csv,text/tab-separated-values,application/json"
             className={inputClass}
             onChange={async (e) => {
               resetReview();
@@ -212,9 +218,16 @@ export function ArchiveRaceUpload({ onSaved }: { onSaved: () => void }) {
                   throw new Error(
                     "Split files larger than 25 MB into smaller files using the same race source ID",
                   );
-                const parsed = parseDelimited(await file.text());
+                const content = await file.text();
+                const capture = /\.json$/i.test(file.name) ? parseBrowserCapture(content) : null;
+                const parsed = capture?.table ?? parseDelimited(content);
                 setTable(parsed);
                 setMapping(suggestColumns(parsed.headers));
+                if (capture) {
+                  setSourceUrl(capture.sourceUrl);
+                  setExpected("");
+                  setMessage(`Loaded ${parsed.rows.length} captured rows from ${capture.sourceUrl}. This is one page, not a complete-field check. Confirm the edition, stable race source ID and column meanings before saving. ${capture.warnings.join(" ")}`);
+                }
               } catch (error) {
                 setMessage(error instanceof Error ? error.message : "Could not read this file");
               }

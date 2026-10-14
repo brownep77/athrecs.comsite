@@ -19,7 +19,11 @@ export function publicTranslationUrl(pathname: string): string | null {
     // Only the public pathname is shared: never search terms, auth links or fragments.
     if (!pathname.startsWith("/") || pathname.startsWith("//")) return null;
     const decoded = decodeURIComponent(pathname);
-    if (decoded.startsWith("//") || /[?#\\%\u0000-\u0020]/.test(decoded)) return null;
+    if (
+      decoded.startsWith("//") ||
+      /[?#\\%]/.test(decoded) ||
+      [...decoded].some((character) => character.charCodeAt(0) <= 0x20)
+    ) return null;
     const url = new URL(decoded, PUBLIC_ORIGIN);
     if (url.origin !== PUBLIC_ORIGIN) return null;
     const path = decodeURIComponent(url.pathname);
