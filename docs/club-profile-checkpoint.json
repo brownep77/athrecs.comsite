@@ -1,62 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch23",
+  "lastEditorialBatch": "2026-10-14-batch24",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch22",
-  "pullRequest": 705,
-  "publication": "Batch23: 453 assembled profiles. Continues draft PR705 while its broader quality gate remains pending. Batch22 (19) and batch23 (14) together add 33 profiles beyond the 420 confirmed live on main5109ea3. No production publication is claimed. Check latest PR body for exact-commit validation and release status.",
+  "branch": "codex/club-profiles-batch24",
+  "pullRequest": null,
+  "publication": "453 profiles confirmed live after PR705, exact production deployment and all33 public-page checks. Batch24 adds19 profiles on a fresh branch, total472 assembled; new19 are not yet live. Consult latest PR body for exact-head workflow and deployment evidence.",
   "completedProfileSlugs": [
-    "city-of-plymouth-ac",
-    "city-of-preston-triathlon-club-for-juniors",
-    "city-of-salisbury-ac-and-rc",
-    "city-of-sheffield-and-dearne-ac",
-    "clapham-chasers",
-    "dublin-university-cycling-and-triathlon-club",
-    "fingal-triathlon-club",
-    "glin-tri-club",
-    "welsh-athletics-parc-bryn-bach-running-club",
-    "welsh-athletics-paul-popham-running-club",
-    "welsh-athletics-pegasus-running-club",
-    "welsh-athletics-pembrokeshire-harriers",
-    "welsh-athletics-pencoed-panthers",
-    "welsh-athletics-penyffordd-run-club"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 453,
-    "notableMemberEntries": 214,
-    "clubsWithContacts": 606,
-    "contactEntries": 1057,
-    "clubsWithEmail": 590,
-    "clubsWithPhone": 86,
-    "clubsWithSocials": 986,
-    "socialLinks": 2027,
-    "websiteContactRecords": 857
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 14,
-    "notableMemberEntriesAdded": 4,
-    "contactOrSocialRecordsChanged": 14,
-    "newWebsiteContactRecords": 9,
-    "directoryRecordsRefreshed": 0
-  },
-  "validationBeforeCommit": {
-    "status": "catalogue and profile checks passed; local lint/typecheck/build and 14-page production-render checks recorded in PR body; remote checks must match newest head"
-  },
-  "nextCandidateSlugs": [
-    "welsh-athletics-pont-y-pwl-and-district-runners",
-    "welsh-athletics-pontyclun-athletics-club",
-    "welsh-athletics-pontyclun-road-runners",
-    "welsh-athletics-pontypridd-roadents-ac",
-    "welsh-athletics-porthcawl-runners",
-    "welsh-athletics-prestatyn-rc",
-    "hell-yeah-triathlon-club",
-    "kenmare-tc",
-    "killarney-triathlon-club",
-    "kinsale-triathlon-club",
-    "lanesboro-triathlon-club",
-    "liquid-motion-tc",
     "clapham-pioneers",
     "clapham-runners",
     "claremont-road-runners",
@@ -64,12 +14,67 @@
     "clc-striders",
     "cleobury-mortimer-running-club",
     "cliff-village-runners",
-    "clowne-road-runners-club"
+    "clowne-road-runners-club",
+    "kenmare-tc",
+    "killarney-triathlon-club",
+    "kinsale-triathlon-club",
+    "lanesboro-triathlon-club",
+    "liquid-motion-tc",
+    "welsh-athletics-pont-y-pwl-and-district-runners",
+    "welsh-athletics-pontyclun-athletics-club",
+    "welsh-athletics-pontyclun-road-runners",
+    "welsh-athletics-pontypridd-roadents-ac",
+    "welsh-athletics-porthcawl-runners",
+    "welsh-athletics-prestatyn-rc"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 472,
+    "notableMemberEntries": 218,
+    "clubsWithContacts": 612,
+    "contactEntries": 1072,
+    "clubsWithEmail": 596,
+    "clubsWithPhone": 87,
+    "clubsWithSocials": 987,
+    "socialLinks": 2035,
+    "websiteContactRecords": 870
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 19,
+    "notableMemberEntriesAdded": 4,
+    "contactOrSocialRecordsChanged": 19,
+    "newWebsiteContactRecords": 13,
+    "directoryRecordsRefreshed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "PASS: catalogue/profile checks, contact-source assertions, targeted ESLint, TypeScript, production build, all19 actual production-rendered pages (biographies/contacts/flags/registration/metadata), git diff whitespace check. Remote workflow and preview results follow in PR body."
+  },
+  "nextCandidateSlugs": [
+    "welsh-athletics-refail-runners",
+    "welsh-athletics-rhedwyr-hebog-runners",
+    "welsh-athletics-rhondda-ac",
+    "welsh-athletics-rhondda-valley-runners",
+    "welsh-athletics-rhymney-valley-ac",
+    "welsh-athletics-run-free-fell-runners",
+    "mako-tc",
+    "mallow-tc",
+    "midland-tc",
+    "new-ross-triathlon-club",
+    "portmarnock-tc",
+    "predator-triathlon-club",
+    "coalville-triathlon-club",
+    "coastal-striders",
+    "cobra-running-and-triathlon-club",
+    "collingwood-ac",
+    "compton-harriers-rc",
+    "congleton-harriers",
+    "copeland-ac",
+    "copthorne-chasers"
   ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Batch23 adds14 profiles and four historical notable connections, continuing PR705 on codex/club-profiles-batch22 while open. Batch22 remains included. Freshly inspect PR state and head before writing; if merged use current main and a new branch. 420 profiles were last confirmed live. Owner publication authority remains valid, subject to normal checks.",
+    "Batch24 adds19 profiles and four Clayton notable connections, on codex/club-profiles-batch24 after PR705 merged. Inspect current PR/main and exact release status before writing. Owner publication authority remains valid subject to normal checks. Preserve intervening unrelated athlete-verification work.",
     "Check the exact-commit Club profiles workflow and AthRecs preview in the latest PR body. A protected preview cannot be described as visually inspected without authorised access. Draft status, successful build and production publication are distinct."
   ],
   "sourceGaps": [
@@ -95,7 +100,7 @@
       "slug": "athletics-ireland-bandon-a-c",
       "url": "https://www.bandonac.org/wordpress/?page_id=6338",
       "status": "biography-added-from-governing-body-sources",
-      "reason": "Club pages returned a certificate-related 502 error. Athletics Ireland’s 16 April 2026 report establishes the new Clancoolbeg track and historical member connections. Confirm new venue Eircode and current club-site joining details when readable."
+      "reason": "Club pages returned a certificate-related 502 error. Athletics Ireland\u2019s 16 April 2026 report establishes the new Clancoolbeg track and historical member connections. Confirm new venue Eircode and current club-site joining details when readable."
     },
     {
       "slug": "athletics-ireland-ballina-a-c",
@@ -107,7 +112,7 @@
       "slug": "athletics-ireland-ardee-and-district-a-c",
       "url": "https://ardeedistrictac.com/",
       "status": "seasonal-venue-follow-up",
-      "reason": "The homepage’s October 2026 notice supersedes the general contact page for winter juvenile training during St Mary’s GFC pitch maintenance. Revisit for the end of the temporary arrangements."
+      "reason": "The homepage\u2019s October 2026 notice supersedes the general contact page for winter juvenile training during St Mary\u2019s GFC pitch maintenance. Revisit for the end of the temporary arrangements."
     },
     {
       "slug": "athletics-ireland-blackrock-dublin-a-c",
@@ -131,7 +136,7 @@
       "slug": "tipton-harriers",
       "url": "https://www.tiptonharriers.co.uk/",
       "status": "biography-added-from-primary-fallbacks",
-      "reason": "Club homepage returned 403. Venue uses Sandwell’s club directory; history uses the related Dudley & Stourbridge club archive and World Athletics’ Jack Holden tribute. Current joining details and direct role contacts need a readable club source."
+      "reason": "Club homepage returned 403. Venue uses Sandwell\u2019s club directory; history uses the related Dudley & Stourbridge club archive and World Athletics\u2019 Jack Holden tribute. Current joining details and direct role contacts need a readable club source."
     },
     {
       "slug": "athletics-ireland-balbriggan-and-district-a-c",
@@ -155,7 +160,7 @@
       "slug": "west-clare-triathlon-club",
       "url": "http://www.westclaretri.com/",
       "status": "biography-added-from-directory-and-local-club-listing",
-      "reason": "Club homepage returned an empty body. Triathlon Ireland and Kilrush’s club listing support adult multisport activities, Kilrush and the enquiry email, but no exact training venue or schedule."
+      "reason": "Club homepage returned an empty body. Triathlon Ireland and Kilrush\u2019s club listing support adult multisport activities, Kilrush and the enquiry email, but no exact training venue or schedule."
     },
     {
       "slug": "athletics-ni-belfast-running-club",
@@ -233,7 +238,7 @@
       "slug": "athletics-ni-queens-university-ac",
       "url": "https://home.q-su.org/clubssocieties/athletics/",
       "status": "student-union-primary-page-used",
-      "reason": "Queen’s Sport directory returned 403; readable Students’ Union athletics page supports programme, email and club-only socials. Excluded generic SU address/telephone/socials and did not turn over-100-years claim into an exact foundation date."
+      "reason": "Queen\u2019s Sport directory returned 403; readable Students\u2019 Union athletics page supports programme, email and club-only socials. Excluded generic SU address/telephone/socials and did not turn over-100-years claim into an exact foundation date."
     },
     {
       "slug": "castlebar-tri-club",
@@ -251,7 +256,7 @@
       "slug": "athlone-triathlon-club",
       "url": "https://www.athlonetriathlonclub.com/p/training-program.html",
       "status": "website-recovered-timetable-stale",
-      "reason": "Bare-domain address returned 404; working www website corroborated by Triathlon Ireland beginner-race guide. Programme is labelled 2022–23; current times, exact venue and junior fees require confirmation. Generic facebook.com/facebook footer excluded; Instagram hashtag is not a verified account URL."
+      "reason": "Bare-domain address returned 404; working www website corroborated by Triathlon Ireland beginner-race guide. Programme is labelled 2022\u201323; current times, exact venue and junior fees require confirmation. Generic facebook.com/facebook footer excluded; Instagram hashtag is not a verified account URL."
     },
     {
       "slug": "carlow-tc",
@@ -281,13 +286,13 @@
       "slug": "ashford-ac",
       "url": "https://www.ashfordac.org.uk/",
       "status": "junior-waiting-list-closed",
-      "reason": "Homepage says Year 4–8 waiting list closed although ordinary membership begins Year 5. Retain explicit qualification and ask membership team; do not promise immediate admission."
+      "reason": "Homepage says Year 4\u20138 waiting list closed although ordinary membership begins Year 5. Retain explicit qualification and ask membership team; do not promise immediate admission."
     },
     {
       "slug": "andover-ac",
       "url": "https://www.andoverathletics.co.uk/contact",
       "status": "telephone-link-mismatch-and-history-qualified",
-      "reason": "Displayed phone and repeated homepage/footer tel links support 01264 362997; one contact-page tel target differs and is not copied. No exact founded_year: 1950s origins and 1964–65 revival explained. Membership page has inconsistent EA fee copy; no price added."
+      "reason": "Displayed phone and repeated homepage/footer tel links support 01264 362997; one contact-page tel target differs and is not copied. No exact founded_year: 1950s origins and 1964\u201365 revival explained. Membership page has inconsistent EA fee copy; no price added."
     },
     {
       "slug": "welsh-athletics-colwyn-bay-ac",
@@ -713,7 +718,7 @@
       "slug": "down-triathlon-club",
       "url": "https://www.downtriathlonclub.com/juniors",
       "status": "junior-age-conflict",
-      "reason": "About says 9–16; junior page 10–17. Exact age range omitted; confirm eligibility."
+      "reason": "About says 9\u201316; junior page 10\u201317. Exact age range omitted; confirm eligibility."
     },
     {
       "slug": "craven-energy-triathlon-and-multisport-club",
@@ -833,7 +838,7 @@
       "slug": "barrow-and-furness-striders-ac",
       "url": "https://www.barrowstriders.com/gallery",
       "status": "winter-times-conflict",
-      "reason": "Junior page says 17:30–19:00; home says 18:00–19:00 in winter. No fixed winter time copied. Senior page says no coached sessions. Membership fees page is 2024/25; prices omitted. Founding date unknown."
+      "reason": "Junior page says 17:30\u201319:00; home says 18:00\u201319:00 in winter. No fixed winter time copied. Senior page says no coached sessions. Membership fees page is 2024/25; prices omitted. Founding date unknown."
     },
     {
       "slug": "birkenhead-park-running-club",
@@ -875,7 +880,7 @@
       "slug": "bolton-triathlon-club",
       "url": "https://boltontri.com/the-club/",
       "status": "junior-waiting-list-and-old-fees",
-      "reason": "Ten-and-under waiting list explicit; some fees reference 2025 and omitted. Timetable includes Oct–Dec 2026 cycling and confirms Bolton venues rather than old Bury address."
+      "reason": "Ten-and-under waiting list explicit; some fees reference 2025 and omitted. Timetable includes Oct\u2013Dec 2026 cycling and confirms Bolton venues rather than old Bury address."
     },
     {
       "slug": "athletics-ireland-back-2-boston-running-club-a-c",
@@ -911,7 +916,7 @@
       "slug": "tri-limits-tc",
       "url": "https://www.trilimits.com/contact.html",
       "status": "private-lake-and-dated-intake",
-      "reason": "Mapped lake private/no access. Use multi-venue note. New2Tri March–April 2026 course is past, not open intake; some general timetable copy undated."
+      "reason": "Mapped lake private/no access. Use multi-venue note. New2Tri March\u2013April 2026 course is past, not open intake; some general timetable copy undated."
     },
     {
       "slug": "bodmin-womens-rc",
@@ -1104,7 +1109,7 @@
       "slug": "candy-racing",
       "url": "https://candyracing.team/team-roles",
       "status": "programme-version-conflicts",
-      "note": "Homepage still advertises July 2025 start; pathway men’s marathon standards differ between homepage and roles page, as does when UKA membership is included. Confirm current intake/terms; no stale start or exact threshold promised. London club offers remote global cohort, not automatically an exclusively global organisation.",
+      "note": "Homepage still advertises July 2025 start; pathway men\u2019s marathon standards differ between homepage and roles page, as does when UKA membership is included. Confirm current intake/terms; no stale start or exact threshold promised. London club offers remote global cohort, not automatically an exclusively global organisation.",
       "checkedAt": "2026-10-14"
     },
     {
@@ -1146,7 +1151,7 @@
       "slug": "welsh-athletics-dragons-running-club-aberdare",
       "url": "https://www.welshathletics.org/en/club/view/dragons-running-club-aberdare",
       "status": "meeting-point-difference",
-      "note": "Website says Ynys Community Hub; governing-body listing says Duke Street car park. Retain both with first-session confirmation. The website’s 5km pace wording is ambiguous and not copied as an admission threshold. No founding year/alumni established.",
+      "note": "Website says Ynys Community Hub; governing-body listing says Duke Street car park. Retain both with first-session confirmation. The website\u2019s 5km pace wording is ambiguous and not copied as an admission threshold. No founding year/alumni established.",
       "checkedAt": "2026-10-14"
     },
     {
@@ -1405,7 +1410,7 @@
       "slug": "city-of-birmingham-striders",
       "url": "https://cobs.org.uk.connectmyclub.co.uk/",
       "status": "dated-membership-prices",
-      "note": "Readable official hosted club site recovered after cobs.org.uk timeouts. FAQ retains older EA fees, so prices omitted. Number 64 not asserted as clubhouse; St Paul’s Square described only as Thursday meeting area.",
+      "note": "Readable official hosted club site recovered after cobs.org.uk timeouts. FAQ retains older EA fees, so prices omitted. Number 64 not asserted as clubhouse; St Paul\u2019s Square described only as Thursday meeting area.",
       "checkedAt": "2026-10-14"
     },
     {
@@ -1475,7 +1480,7 @@
       "slug": "city-of-preston-triathlon-club-for-juniors",
       "url": "https://prestontriathlon.carrd.co/",
       "status": "conflicting-upper-age",
-      "note": "Same page gives 8–16 and development through age18. Upper age not asserted. UCLAN venue remains directory-only; direct Instagram target extracted from published SafeLinks URL.",
+      "note": "Same page gives 8\u201316 and development through age18. Upper age not asserted. UCLAN venue remains directory-only; direct Instagram target extracted from published SafeLinks URL.",
       "checkedAt": "2026-10-14"
     },
     {
@@ -1531,7 +1536,7 @@
       "slug": "welsh-athletics-pembrokeshire-harriers",
       "url": "https://www.pembrokeshireharriersac.co.uk/membership/joining-and-membership",
       "status": "dated-fees",
-      "note": "2024/25 prices omitted. Paid membership-before-training rule retained. Preseli foundation given as1988–89, not fabricated exact year; predecessor athletes labelled historical.",
+      "note": "2024/25 prices omitted. Paid membership-before-training rule retained. Preseli foundation given as1988\u201389, not fabricated exact year; predecessor athletes labelled historical.",
       "checkedAt": "2026-10-14"
     },
     {
@@ -1540,6 +1545,69 @@
       "status": "empty-club-body",
       "note": "Standalone site returned empty body. Welsh Athletics and league history support biography, contacts and2017 league admission; no founding year or exact meeting address invented.",
       "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "hell-yeah-triathlon-club",
+      "url": "http://www.hellyeahtri.com/",
+      "status": "empty-primary-body",
+      "note": "Site returned200 with no usable club content; insufficient primary evidence for a biography. TI directory-only address/contact retained with original dates.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "clowne-road-runners-club",
+      "url": "https://clowneroadrunners.org/?page_id=1919",
+      "status": "conflicting-timetable",
+      "note": "Homepage and about page give different training weekdays. Biography directs readers to current calendar; junior arrangements distinguished from general-group age guidance.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "kenmare-tc",
+      "url": "https://www.kenmaretri.com/about/membership/",
+      "status": "older-programme",
+      "note": "History supports2006formation and2007/2013event milestones. Timetables, committee and prices are substantially older; no current schedule or fees asserted.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "lanesboro-triathlon-club",
+      "url": "https://trilanesboro.com/membership/",
+      "status": "older-notices",
+      "note": "Recovered working non-www site. Zero2Tri2018 is historical; older membership notices do not establish a current course intake.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "liquid-motion-tc",
+      "url": "https://www.liquidmotion.ie/new-to-tri.html",
+      "status": "historical-beginner-course",
+      "note": "New2Tri course and free introductory offer refer to2025. Current2026training separately sourced; no recurring free membership promise.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "welsh-athletics-pontyclun-athletics-club",
+      "url": "https://pontyclunathletics.wixsite.com/club/contact-us",
+      "status": "conflicting-email-and-age-guidance",
+      "note": "Club contact email differs from earlier directory contact. Public role phone added; email conflict retained unresolved. Old age categories not treated as current eligibility; committee home address excluded as training venue.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "welsh-athletics-prestatyn-rc",
+      "url": "https://www.prestatynrunningclub.com/club-runs-information",
+      "status": "venue-postcode-typo",
+      "note": "October2026notice distinguishes MondayAstrobowl and Wednesdayrear-school access. Apparent Astrobowl postcode typo not silently repaired; combined venue pin cleared.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "welsh-athletics-pont-y-pwl-and-district-runners",
+      "url": "https://www.pontypoolrunners.co.uk/",
+      "status": "supplier-contact-exclusion",
+      "note": "Generic GoDaddy email and unrelated league Facebook omitted. Club Instagram retained. No club founding year inferred from Coity race history.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "killarney-triathlon-club",
+      "url": "https://killarneytriathlonclub.com/about/",
+      "status": "affiliation-not-foundation",
+      "note": "2015firstTIaffiliation is not assigned as foundingyear. Sample seasonal timetable qualified; masked emails not recovered.",
+      "checkedAt": "2026-10-14"
     }
   ],
   "coverageReviewNotes": [
@@ -1547,7 +1615,7 @@
     "Some unreviewed Striders/District listings have Triathlon tags. Check official disciplines when those clubs reach the queue; no blanket classification correction was made in this batch.",
     "Some official sites mask public email text. Contact forms and previously sourced directory contacts were retained where no readable new email was available.",
     "Batch08 checked dates use UTC (13 October 2026; early 14 October in London). England Athletics query pages returned a JavaScript shell and Triathlon Ireland app directory an empty body in this run; their prior per-record check dates are preserved, not refreshed. New biographies primarily use opened official club pages plus readable Welsh Athletics, county, museum and Triathlon Ireland programme sources.",
-    "Batch09 sources were read on 13–14 October UTC; new editorial/contact review date is 14 October. Buckley is the only refreshed governing-body row. Current directory comparisons total 1,682; 55 older rows retain their dates. No blanket manual review, athlete identity or production publication is claimed.",
+    "Batch09 sources were read on 13\u201314 October UTC; new editorial/contact review date is 14 October. Buckley is the only refreshed governing-body row. Current directory comparisons total 1,682; 55 older rows retain their dates. No blanket manual review, athlete identity or production publication is claimed.",
     "Batch10 primary sources read on 14 October UTC. Twenty new biographies and 15 historical/notable associations; no governing-body rows re-dated. Current directory comparisons remain 1,682, with 55 older rows. Public role contacts and exact source links checked; supplier contacts excluded. Seed v10; draft-preview only.",
     "Batch11: 20 profiles, five historical member entries and 19 website-contact/social records on 14 October UTC. Actual merged coverage 253/1737. No blanket directory refresh: 1682 recent comparisons, 55 older. Sports and address corrections only where primary evidence supports them; draft-preview only, seed v11.",
     "Batch12: 16 profiles and five historical/notable associations; 17 contact/social records updated. Actual merged coverage 269/1737. Four candidates deferred rather than padding sparse sources. Former Griffithstown domain replaced; Bray placeholder phone removed. Directory date coverage unchanged (1682 recent,55 older), seed v12, draft-only. Main bceb3ea inspected: intervening athlete/homepage changes do not overlap these data files.",
@@ -1561,23 +1629,24 @@
     "Batch20: four English, seven Irish and five Welsh club profiles; seven historical notable associations; 16 contact records changed, 13 new. Four inaccessible/insufficient candidates deferred. Primary sources opened on 14 October. No athlete accounts, results, registrations or privacy settings changed.",
     "Batch21: eight English, four Irish, two Northern Irish and six Welsh profiles; 20 contact records changed, 12 newly covered. Northumberland Fell Runners corrected from a Scottish directory address to its regional England location. Current checks use 14 October UTC. No athlete identities, results, registrations or privacy changed.",
     "Batch22: ten English, six Welsh and three Irish biographies. 19 contact/social records changed, 12 newly covered. Seven notable connections have dated or hall-of-fame attribution. Unknown details remain empty; no athlete identities, results, verification, registrations or privacy changed.",
-    "Batch23: five English, six Welsh and three Irish biographies;14 contact/social records changed, nine newly covered. Actual assembled totals453/1737 profiles,214notable entries. Preserves registration, metadata, athlete identity, result and privacy behaviour."
+    "Batch23: five English, six Welsh and three Irish biographies;14 contact/social records changed, nine newly covered. Actual assembled totals453/1737 profiles,214notable entries. Preserves registration, metadata, athlete identity, result and privacy behaviour.",
+    "Batch24: eight English, six Welsh and five Irish biographies;19 contact/social records changed,13 newly covered. Actual assembled totals472/1737 profiles,218notable entries; net15contact entries,6email-coveredclubs,1phone-coveredclub,8sociallinks."
   ],
-  "previousPullRequest": 704,
+  "previousPullRequest": 705,
   "productionAuthorization": {
     "date": "2026-10-14",
     "instruction": "can you publish all and continue please",
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 704,
-    "mergeCommit": "5109ea3a065753150441e92e86b581ad80ba657e",
-    "productionDeployment": "dpl_1kAzWKPxBHSyAmD4TqpMe24CEnuB",
+    "previousPullRequest": 705,
+    "mergeCommit": "b0b71cc5efb538b34c24812e93bafeacbd9a70df",
+    "productionDeployment": "dpl_F47E7M5RmMkNH2z7jNhFtZH7RVwx",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
-    "status": "READY production; all 20 batch21 public club pages passed biography, contacts, flags, registration and search-metadata assertions on 14 October 2026. All 16 batch20 pages were also verified after main PR701 restored publication.",
-    "lastConfirmedLiveCommit": "5109ea3a065753150441e92e86b581ad80ba657e",
-    "lastConfirmedLiveDeployment": "dpl_1kAzWKPxBHSyAmD4TqpMe24CEnuB",
-    "lastConfirmedLiveProfiles": 420,
-    "mainProfilesAtStart": 420
+    "status": "READY production; all 33 batch22\u201323 public pages passed full biography, contacts, flags, registration and search-metadata assertions on 14 October 2026.",
+    "lastConfirmedLiveCommit": "b0b71cc5efb538b34c24812e93bafeacbd9a70df",
+    "lastConfirmedLiveDeployment": "dpl_F47E7M5RmMkNH2z7jNhFtZH7RVwx",
+    "lastConfirmedLiveProfiles": 453,
+    "mainProfilesAtStart": 453
   }
 }
