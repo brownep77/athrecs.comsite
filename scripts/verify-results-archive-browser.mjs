@@ -198,13 +198,35 @@ try {
   await page
     .getByLabel("Authority to retain")
     .fill("Synthetic file authority for disposable tests only.");
-  await page.getByLabel("Results CSV or TSV").setInputFiles({
+  await page.getByLabel("Results CSV, TSV or browser capture").setInputFiles({
     name: "synthetic.csv",
     mimeType: "text/csv",
     buffer: Buffer.from(
       "Bib,Name,Chip Time,Gun Time\n1,Morgan Browser Synthetic,00:35:00.25,00:35:02.25\n2,Casey Browser Synthetic,00:36:00.15,00:36:02.15",
     ),
   });
+  await page.getByRole("button", { name: "Check all rows" }).click();
+  await page.getByText("Checked 2 rows.", { exact: false }).waitFor();
+  // Exercise the real browser-file handler before the existing API/database flow.
+  await page.getByLabel("Results CSV, TSV or browser capture").setInputFiles({
+    name: "synthetic.athrecs.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify({
+      format: "athrecs-browser-results-v1", scope: "loaded-page-only",
+      capturedAt: "2026-10-14T12:00:00.000Z",
+      page: { url: "https://example.test/browser-results", title: "Synthetic Browser Race" },
+      table: {
+        label: "Synthetic results", headers: ["Bib", "Name", "Chip Time", "Gun Time"],
+        rows: [["1", "Morgan Browser Synthetic", "00:35:00.25", "00:35:02.25"],
+          ["2", "Casey Browser Synthetic", "00:36:00.15", "00:36:02.15"]],
+        rowLinks: [[], []],
+      }, warnings: [],
+    })),
+  });
+  await page.getByText("Loaded 2 captured rows", { exact: false }).waitFor();
+  assert.equal(await page.getByLabel("Expected entries").inputValue(), "");
+  assert.equal(await page.getByLabel("Official results URL").inputValue(), "https://example.test/browser-results");
+  assert.equal((await sql`select count(*)::int n from result_archive_entries`)[0].n, 0);
   await page.getByRole("button", { name: "Check all rows" }).click();
   await page.getByText("Checked 2 rows.", { exact: false }).waitFor();
   await page.getByRole("button", { name: "Save private race field" }).click();
