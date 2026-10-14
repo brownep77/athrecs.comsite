@@ -35,6 +35,20 @@ try {
   assert.match(birchfield.address, /Alexander Stadium/);
   assert.equal(birchfield.address_kind, "training");
   assert.equal(bySlug.get("unattached").country, "");
+  assert.equal(
+    bySlug.get("welsh-athletics-griffithstown-harriers").website,
+    "https://www.griffithstownharriers.com/",
+  );
+  assert.ok(
+    !bySlug
+      .get("athletics-ireland-bray-runners-a-c")
+      .contacts.some((c) => c.phone === "0871234567"),
+  );
+  assert.equal(bySlug.get("ashford-triathlon-club").city, "Ashford");
+  assert.equal(bySlug.get("deal-tri-club").city, "Deal");
+  assert.equal(bySlug.get("welsh-athletics-deestriders-b-s-rc").postcode, "");
+  assert.equal(clubProfiles["athletics-ireland-borrisokane-a-c"].founded_year, undefined);
+  assert.equal(clubProfiles["camberley-and-district-ac"].founded_year, 1953);
   // Later targeted reviews must preserve safe venue and contact distinctions.
   const rotherham = bySlug.get("rotherham-harriers-and-ac");
   assert.equal(rotherham.city, "Rotherham");

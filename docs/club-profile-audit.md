@@ -6,10 +6,10 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 731 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 539 clubs: 526 publish an email address and 67 a telephone number. There are 917 contact entries in total, including named directory contacts with no direct email or telephone.
-- 942 clubs have social links, with 1,911 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 253 clubs have extended, individually written profiles (14.6% of the catalogue). These contain 125 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
+- Website research contributes contact pages or contact/social details for 742 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The merged catalogue has contact entries for 543 clubs: 529 publish an email address and 68 a telephone number. There are 928 contact entries in total, including named directory contacts with no direct email or telephone.
+- 945 clubs have social links, with 1,916 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
+- 269 clubs have extended, individually written profiles (15.5% of the catalogue). These contain 130 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
 The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. That batch did not change contact or social coverage.
 
@@ -105,11 +105,23 @@ Club descriptions use the club name, location and relevant disciplines naturally
 
 Notable-member text does not create athlete accounts, link unclaimed identities, add results or award verified status. Existing athlete visibility rules and club registration checks remain unchanged.
 
+## Twelfth editorial batch — 14 October 2026 UTC
+
+Added 16 profiles across eight South East England clubs, four Welsh community clubs and four Irish athletics clubs: Ashford & District RRC, Ashford Striders, Ashford Triathlon, Blackwater Valley Runners, Burgess Hill Runners, Camberley & District, Deal Tri, Dorking & Mole Valley, Crickhowell, Deestriders, Griffithstown Harriers, Islwyn, Borrisokane, Bray Runners, Bree and Bridevale. Five sourced associations cover Jonathon Dennis, Deal Tri founders Ian Pettitt and Roger Francis-Darby, Cillian Dunne and former youth athlete Philip Austin. These remain editorial associations, not athlete identity or results imports.
+
+Seventeen website-contact records changed, including eleven new records and contact-only work for Emlyn and Boyne. Net catalogue changes are eleven contact entries, three clubs with email, one with telephone, five social links and three clubs with social coverage. A negative correction removes Bray's placeholder 0871234567 telephone. Bray's visible shared email agrees with its training page and governing-body listing; the mismatched mailto and uncorroborated website phone are excluded. Griffithstown's former .co.uk domain now serves unrelated gambling material and is replaced by the readable .com club website. Venue-hire/vehicle-hire sponsors, governing-body office contacts, website suppliers and Eventmaster support are excluded.
+
+Ashford Triathlon is located in Ashford rather than its old Wye correspondence listing; Deal Tri is located in Deal rather than Margate. Their exact unconfirmed addresses, Burgess Hill's Dunstall Avenue and Bray's combined multi-venue/Eircode field are replaced by location notes. Camberley's King's International College, Crickhowell's Courtyard and Deestriders' Ash Grove meeting point are clarified. Deestriders' conflicting postcodes are withheld. Unsupported multisport tags are corrected for the two Ashford running clubs and Camberley, while supported cycling, athletics and walking programmes are represented. Existing country indicators, registration links, structured data and safeguards are unchanged.
+
+Histories distinguish Deal's 1993 merger from its 1983/1986 predecessors, and Camberley's 1953 formation from 1930s roots. Borrisokane's 1978/1987 conflict remains unresolved; Islwyn's 2023–24 anniversary is not converted into a guessed exact year. Camberley's junior waiting-list closure and Deal's swim-trial restrictions remain explicit. Ashford Triathlon's pages were opened with the web reader after direct-fetch timeouts. Cwmbran Harriers, Emlyn, Boyle and Boyne remain deferred for fuller primary evidence; sparse directories are not padded into invented histories. Bridevale's shorter profile is limited to its club-authored purpose, senior-only scope, venue and contacts.
+
+The checkpoint records actual merged counts, completed clubs, source gaps and a South East England/Northern Ireland/Irish regional queue. No whole-directory refresh was made: 1,682 recent directory comparisons and 55 older rows remain. Main advanced to bceb3ea during research; its intervening athlete/homepage changes were inspected and do not overlap these club data files. Club-only seed version is v12. Source-coverage checks, catalogue/profile/audit checks, targeted lint, TypeScript and slug stability pass locally. Build and exact-commit preview/desktop/mobile outcomes are recorded in the draft PR after the guarded update; nothing is authorised for production publication.
+
 ## Maintenance
 
 - `src/data/club-enrichment-a.ts` and `-b.ts`: directory fields and actual source comparison dates.
 - `src/data/club-website-contacts.ts`: accepted public contact/social discoveries and per-field provenance.
-- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-k.ts`: manually reviewed prose, sources and explicit corrections.
+- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-l.ts`: manually reviewed prose, sources and explicit corrections.
 - `docs/club-profile-checkpoint.json`: completed batch slugs, source gaps and next candidates. Check the live branch and profile map before resuming; the queue is not evidence that a club has been researched.
 - `scripts/audit-club-websites.mjs /absolute/scratch/output.json`: resumable read-only screening into a review queue. It never writes the catalogue.
 

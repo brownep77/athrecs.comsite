@@ -1,69 +1,67 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch11",
+  "lastEditorialBatch": "2026-10-14-batch12",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "amber-valley-and-erewash-athletic-club",
-    "audley-striders-running-club",
-    "badgers",
-    "bakewell-athletics-club",
-    "beeston-ac",
-    "belper-harriers",
-    "biddulph-rc",
-    "black-pear-joggers",
-    "bridgnorth-running-club",
-    "cannock-and-stafford-ac",
-    "mercia-fell-runners",
-    "stafford-harriers",
-    "newport-and-district-rc",
-    "telford-harriers",
-    "welsh-athletics-caerphilly-runners",
-    "welsh-athletics-cardigan-rc",
-    "welsh-athletics-cybi-striders",
-    "welsh-athletics-denbigh-harriers",
-    "athletics-ireland-ballyfin-a-c",
-    "athletics-ireland-banagher-a-c"
+    "ashford-and-district-rrc",
+    "ashford-striders-rc",
+    "ashford-triathlon-club",
+    "blackwater-valley-runners",
+    "burgess-hill-runners",
+    "camberley-and-district-ac",
+    "deal-tri-club",
+    "dorking-and-mole-valley-ac",
+    "welsh-athletics-crickhowell-running-club",
+    "welsh-athletics-deestriders-b-s-rc",
+    "welsh-athletics-griffithstown-harriers",
+    "welsh-athletics-islwyn-rc",
+    "athletics-ireland-borrisokane-a-c",
+    "athletics-ireland-bray-runners-a-c",
+    "athletics-ireland-bree-a-c",
+    "athletics-ireland-bridevale-a-c"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 253,
-    "notableMemberEntries": 125,
-    "clubsWithContacts": 539,
-    "contactEntries": 917,
-    "clubsWithEmail": 526,
-    "clubsWithPhone": 67,
-    "clubsWithSocials": 942,
-    "socialLinks": 1911,
-    "websiteContactRecords": 731
+    "extendedProfiles": 269,
+    "notableMemberEntries": 130,
+    "clubsWithContacts": 543,
+    "contactEntries": 928,
+    "clubsWithEmail": 529,
+    "clubsWithPhone": 68,
+    "clubsWithSocials": 945,
+    "socialLinks": 1916,
+    "websiteContactRecords": 742
   },
   "batchChanges": {
-    "extendedProfilesAdded": 20,
+    "extendedProfilesAdded": 16,
     "notableMemberEntriesAdded": 5,
-    "contactOrSocialRecordsChanged": 19,
+    "contactOrSocialRecordsChanged": 17,
     "directoryRecordsRefreshed": 0,
-    "trainingOrClubhouseVenuesClarified": 11,
+    "unsafeWebsiteReplaced": [
+      "welsh-athletics-griffithstown-harriers"
+    ],
+    "placeholderPhoneRemoved": [
+      "athletics-ireland-bray-runners-a-c"
+    ],
     "combinedOrUnconfirmedAddressesReplacedByNotes": [
-      "belper-harriers",
-      "mercia-fell-runners",
-      "athletics-ireland-ballyfin-a-c"
+      "ashford-triathlon-club",
+      "burgess-hill-runners",
+      "deal-tri-club",
+      "athletics-ireland-bray-runners-a-c"
     ],
     "sportsCorrected": [
-      "audley-striders-running-club",
-      "newport-and-district-rc"
-    ],
-    "locationCorrections": [
-      "audley-striders-running-club",
-      "badgers",
-      "beeston-ac",
-      "biddulph-rc",
-      "welsh-athletics-caerphilly-runners",
-      "welsh-athletics-denbigh-harriers",
-      "athletics-ireland-ballyfin-a-c",
-      "athletics-ireland-banagher-a-c"
+      "ashford-and-district-rrc",
+      "ashford-striders-rc",
+      "ashford-triathlon-club",
+      "burgess-hill-runners",
+      "camberley-and-district-ac",
+      "deal-tri-club",
+      "dorking-and-mole-valley-ac",
+      "welsh-athletics-crickhowell-running-club"
     ]
   },
   "validationBeforeCommit": [
@@ -76,31 +74,31 @@
     "production build (publication hooks skipped)"
   ],
   "nextCandidateSlugs": [
-    "ashford-and-district-rrc",
-    "ashford-striders-rc",
-    "ashford-triathlon-club",
-    "blackwater-valley-runners",
-    "burgess-hill-runners",
-    "camberley-and-district-ac",
-    "deal-tri-club",
-    "dorking-and-mole-valley-ac",
-    "welsh-athletics-crickhowell-running-club",
-    "welsh-athletics-cwmbran-harriers",
-    "welsh-athletics-deestriders-b-s-rc",
-    "welsh-athletics-emlyn-runners",
-    "welsh-athletics-griffithstown-harriers",
-    "welsh-athletics-islwyn-rc",
-    "athletics-ireland-borrisokane-a-c",
-    "athletics-ireland-boyle-a-c",
-    "athletics-ireland-boyne-a-c",
-    "athletics-ireland-bray-runners-a-c",
-    "athletics-ireland-bree-a-c",
-    "athletics-ireland-bridevale-a-c"
+    "crowborough-runners",
+    "farnham-runners",
+    "farnham-triathlon-club",
+    "haslemere-border-ac",
+    "hastings-ac",
+    "hastings-runners",
+    "haywards-heath-harriers",
+    "horsham-blue-star-harriers",
+    "horsham-joggers",
+    "dacorum-athletics-club",
+    "athletics-ireland-beechmount-harriers-a-c",
+    "belfast-ormeau-runners",
+    "special-olympics-newtownabbey-racers",
+    "armagh-pikekickers-triathlon-club",
+    "brown-shoes-tc",
+    "athletics-ireland-ace-a-c",
+    "athletics-ireland-an-bru-a-c",
+    "athletics-ireland-annalee-a-c",
+    "athletics-ireland-ardattin-a-c",
+    "athletics-ireland-ardmore-a-c"
   ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Rotate South East England running/athletics/triathlon, Welsh community clubs and Irish regional athletics. Check actual catalogue slugs and profile map first; queued candidates are not completed research.",
+    "Rotate remaining South East England, Northern Ireland and Irish regional clubs. Check actual catalogue slugs and profile map first. Revisit batch12 deferred clubs only when substantive primary sources become readable.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -547,6 +545,72 @@
       "url": "https://merciafr.club/about/",
       "status": "historical-pdf-not-read",
       "reason": "Current training and role emails read. Club profile PDF linked but not opened; exact origin and historical notables remain empty. Role emails formed by following the page explicit append-domain instruction."
+    },
+    {
+      "slug": "welsh-athletics-griffithstown-harriers",
+      "url": "https://www.griffithstownharriers.co.uk/",
+      "status": "unrelated-gambling-content-replaced",
+      "reason": "Former domain now contains gambling promotion. Replaced with readable .com club website, corroborated against Welsh Athletics contacts and Olive Tree venue. Sponsor venue-hire and vehicle-hire contacts excluded."
+    },
+    {
+      "slug": "athletics-ireland-bray-runners-a-c",
+      "url": "https://brayrunners.com/contact-us",
+      "status": "placeholder-and-conflicting-contact",
+      "reason": "Removed directory phone 0871234567; website tel target not corroborated. Visible shared brayrunnershs Gmail agrees with directory and training text, while mailto omits hs; retained only the supported shared email. Combined venue/Eircode cleared in favour of multi-venue note."
+    },
+    {
+      "slug": "athletics-ireland-borrisokane-a-c",
+      "url": "https://eventmaster.ie/fundraising/club/borrisokane-athletic-club",
+      "status": "founding-year-conflict",
+      "reason": "Club fundraising page gives 1987; official social search extract gives 1978. Exact founding year withheld pending primary reconciliation. Eventmaster support contacts and guest appearances excluded."
+    },
+    {
+      "slug": "welsh-athletics-deestriders-b-s-rc",
+      "url": "https://www.deestridersrunningclub.net/info.html",
+      "status": "postcode-conflict",
+      "reason": "Ash Grove car park CH5 1AF on joining page versus CH5 1AG on event page. Postcode withheld. Home says Coleg Cambria track while information page says Deeside Athletic Stadium; no unsupported equivalence asserted."
+    },
+    {
+      "slug": "camberley-and-district-ac",
+      "url": "https://www.camberleyathletics.org.uk/index.php?pg=2",
+      "status": "junior-waiting-list-restriction",
+      "reason": "Year 5+ waiting list described as closed; Year 4 prospective list and general training-page wording differ. Restriction retained, no promise of available junior places."
+    },
+    {
+      "slug": "welsh-athletics-cwmbran-harriers",
+      "url": "https://www.welshathletics.org/en/club/view/cwmbran-harriers",
+      "status": "limited-primary-history",
+      "reason": "Directory readable with stadium, track/field and cross-country, contacts and Facebook. Full biography deferred without substantive origins, joining or coaching source."
+    },
+    {
+      "slug": "welsh-athletics-emlyn-runners",
+      "url": "https://www.rhedwyremlynrunners.com/",
+      "status": "club-site-502",
+      "reason": "Welsh Athletics listing readable but sparse; main enquiry email refreshed with source date, whole directory row not redated. Full biography deferred; founding year and training venue unknown."
+    },
+    {
+      "slug": "athletics-ireland-boyle-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Boyle_A.C.",
+      "status": "limited-primary-history",
+      "reason": "Senior-only directory and Abbey Park location readable. Full biography deferred; older local-news registration notice insufficient for present programme."
+    },
+    {
+      "slug": "athletics-ireland-boyne-a-c",
+      "url": "https://www.boyneac.com/",
+      "status": "club-site-502",
+      "reason": "County governing body supplies .com domain, Facebook and phone; .com and old .ie return 502. Public county phone and Facebook added; full biography deferred. County named correspondence address is not Lourdes Stadium training location."
+    },
+    {
+      "slug": "athletics-ireland-bridevale-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Bridevale_A.C.",
+      "status": "origins-and-timetable-unconfirmed",
+      "reason": "Profile is limited to club-authored community purpose, Rathcormac venue, senior-only scope and enquiry routes. No unsupported founding date or alumni."
+    },
+    {
+      "slug": "ashford-triathlon-club",
+      "url": "https://ashfordtriclub.co.uk/members/history/",
+      "status": "direct-fetch-timeout-web-reader-recovered",
+      "reason": "History, joining and seasonal training opened with web reader after direct fetch timed out. Spond is current schedule authority; old Wye address not treated as training base."
     }
   ],
   "coverageReviewNotes": [
@@ -556,6 +620,7 @@
     "Batch08 checked dates use UTC (13 October 2026; early 14 October in London). England Athletics query pages returned a JavaScript shell and Triathlon Ireland app directory an empty body in this run; their prior per-record check dates are preserved, not refreshed. New biographies primarily use opened official club pages plus readable Welsh Athletics, county, museum and Triathlon Ireland programme sources.",
     "Batch09 sources were read on 13–14 October UTC; new editorial/contact review date is 14 October. Buckley is the only refreshed governing-body row. Current directory comparisons total 1,682; 55 older rows retain their dates. No blanket manual review, athlete identity or production publication is claimed.",
     "Batch10 primary sources read on 14 October UTC. Twenty new biographies and 15 historical/notable associations; no governing-body rows re-dated. Current directory comparisons remain 1,682, with 55 older rows. Public role contacts and exact source links checked; supplier contacts excluded. Seed v10; draft-preview only.",
-    "Batch11: 20 profiles, five historical member entries and 19 website-contact/social records on 14 October UTC. Actual merged coverage 253/1737. No blanket directory refresh: 1682 recent comparisons, 55 older. Sports and address corrections only where primary evidence supports them; draft-preview only, seed v11."
+    "Batch11: 20 profiles, five historical member entries and 19 website-contact/social records on 14 October UTC. Actual merged coverage 253/1737. No blanket directory refresh: 1682 recent comparisons, 55 older. Sports and address corrections only where primary evidence supports them; draft-preview only, seed v11.",
+    "Batch12: 16 profiles and five historical/notable associations; 17 contact/social records updated. Actual merged coverage 269/1737. Four candidates deferred rather than padding sparse sources. Former Griffithstown domain replaced; Bray placeholder phone removed. Directory date coverage unchanged (1682 recent,55 older), seed v12, draft-only. Main bceb3ea inspected: intervening athlete/homepage changes do not overlap these data files."
   ]
 }
