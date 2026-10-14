@@ -35,6 +35,13 @@ try {
   assert.match(birchfield.address, /Alexander Stadium/);
   assert.equal(birchfield.address_kind, "training");
   assert.equal(bySlug.get("unattached").country, "");
+  assert.equal(bySlug.get("oswestry-olympians").country, "England");
+  assert.equal(bySlug.get("oswestry-olympians").postcode, "");
+  assert.equal(bySlug.get("astley-and-tyldesley-road-runners").postcode, "M29 7DW");
+  assert.equal(bySlug.get("welsh-athletics-3m-gorseinon-road-runners").postcode, "SA2 8QG");
+  assert.equal(bySlug.get("athletics-ireland-ballintotis-fit4life-a-c").postcode, "");
+  assert.equal(bySlug.get("athletics-ireland-ballintotis-fit4life-a-c").adult_only, true);
+  assert.equal(bySlug.get("billinge-running-club").address, "");
   assert.equal(bySlug.get("wakefield-district-h-and-ac").postcode, "WF2 8TY");
   assert.deepEqual(bySlug.get("wakefield-district-h-and-ac").sports, ["Running", "Athletics"]);
   assert.equal(bySlug.get("craven-energy-triathlon-and-multisport-club").city, "Skipton");

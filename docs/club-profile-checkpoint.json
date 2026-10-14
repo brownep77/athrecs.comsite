@@ -1,61 +1,47 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch14",
+  "lastEditorialBatch": "2026-10-14-batch15",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "city-of-york-ac",
-    "craven-energy-triathlon-and-multisport-club",
-    "sheffield-triathlon-club",
-    "south-leeds-lakers-running-club",
-    "wakefield-district-h-and-ac",
-    "york-acorn-running-club",
-    "york-knavesmire-harriers",
-    "york-postal-harriers",
-    "york-triathlon-club",
-    "yorkshire-wolds-runners",
-    "north-york-moors-ac",
-    "down-triathlon-club",
-    "invictus-tri-squad-belfast",
-    "athletics-ireland-aughagower-a-c",
-    "athletics-ireland-aughrim-a-c",
-    "athletics-ireland-b-m-o-h-a-c",
-    "omagh-tc",
-    "olympian-triathlon-club"
+    "ambleside-ac",
+    "astley-and-tyldesley-road-runners",
+    "billinge-running-club",
+    "billingham-marsh-hse-h-and-ac",
+    "billingham-running-club",
+    "oswestry-olympians",
+    "sospan-road-runners",
+    "welsh-athletics-3m-gorseinon-road-runners",
+    "athletics-ireland-ballintotis-fit4life-a-c"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 305,
-    "notableMemberEntries": 148,
-    "clubsWithContacts": 557,
-    "contactEntries": 952,
-    "clubsWithEmail": 543,
-    "clubsWithPhone": 70,
-    "clubsWithSocials": 956,
-    "socialLinks": 1946,
-    "websiteContactRecords": 766
+    "extendedProfiles": 314,
+    "notableMemberEntries": 153,
+    "clubsWithContacts": 560,
+    "contactEntries": 959,
+    "clubsWithEmail": 546,
+    "clubsWithPhone": 71,
+    "clubsWithSocials": 957,
+    "socialLinks": 1951,
+    "websiteContactRecords": 772
   },
   "batchChanges": {
-    "extendedProfilesAdded": 18,
-    "notableMemberEntriesAdded": 8,
-    "contactOrSocialRecordsChanged": 18,
-    "newWebsiteContactRecords": 12,
+    "extendedProfilesAdded": 9,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 9,
+    "newWebsiteContactRecords": 6,
     "directoryRecordsRefreshed": 0,
+    "countryCorrections": [
+      "oswestry-olympians"
+    ],
     "unconfirmedAddressesReplacedByNotes": [
-      "sheffield-triathlon-club",
-      "york-knavesmire-harriers"
-    ],
-    "sportsCorrected": [
-      "wakefield-district-h-and-ac",
-      "craven-energy-triathlon-and-multisport-club",
-      "sheffield-triathlon-club",
-      "york-triathlon-club"
-    ],
-    "unsafeWebsiteReplaced": [
-      "olympian-triathlon-club"
+      "billinge-running-club",
+      "oswestry-olympians",
+      "athletics-ireland-ballintotis-fit4life-a-c"
     ]
   },
   "validationBeforeCommit": [
@@ -69,23 +55,14 @@
   ],
   "nextCandidateSlugs": [
     "achille-ratti-climbing-club",
-    "ambleside-ac",
-    "astley-and-tyldesley-road-runners",
     "aurora-harriers",
     "barrow-and-furness-striders-ac",
     "belle-vue-racers",
-    "billinge-running-club",
-    "billingham-marsh-hse-h-and-ac",
-    "billingham-running-club",
     "birkenhead-ac",
-    "oswestry-olympians",
-    "sospan-road-runners",
-    "welsh-athletics-3m-gorseinon-road-runners",
     "welsh-athletics-afan-nedd-tawe-schools-district",
     "welsh-athletics-albany-road-run-club",
     "athletics-ireland-back-2-boston-running-club-a-c",
     "athletics-ireland-ballinamore-a-c",
-    "athletics-ireland-ballintotis-fit4life-a-c",
     "athletics-ireland-ballon-rathoe-a-c",
     "athletics-ireland-ballybunnion-running-club-a-c",
     "athletics-ireland-ballycastle-a-c",
@@ -94,7 +71,7 @@
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Rotate to North West/North East England, Welsh and Irish clubs in the saved queue. Avoid repeating the Yorkshire/NI batch. Revisit deferred sites only when fuller primary evidence becomes readable.",
+    "Resume the remaining North West/North East England, Welsh and Irish queue. Nine batch15 clubs are completed; do not repeat them. Rotate regions again once the remaining queue is assessed.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -775,6 +752,48 @@
       "url": "https://www.cityofyorkac.com/",
       "status": "decorative-famous-name-excluded",
       "reason": "Usain Bolt appears in decorative homepage content, not evidence of club membership. No unsupported notable association or founding year added."
+    },
+    {
+      "slug": "ambleside-ac",
+      "url": "https://www.amblesideac.org.uk/juniors/join-aac-juniors/",
+      "status": "junior-intake-undated",
+      "reason": "Waiting-list and capacity restriction explicit. September/March intake copy lacks a year; no promised next intake date. About-page early mens team championship years disagree with roll of honour; not repeated."
+    },
+    {
+      "slug": "astley-and-tyldesley-road-runners",
+      "url": "https://astleyrunners.co.uk/about-us/",
+      "status": "founding-year-unconfirmed",
+      "reason": "No founding year or notable alumni established from the current club pages. Gin Pit replaces a directory street address as the published training base."
+    },
+    {
+      "slug": "billinge-running-club",
+      "url": "https://www.billingerunning.club/mondaytraining",
+      "status": "rotating-venues",
+      "reason": "Monday coaching is at The Triangle, top of Moss Road; Wednesday routes vary. Older Delph Tavern address not assumed to cover all sessions. Founding year unconfirmed."
+    },
+    {
+      "slug": "billingham-running-club",
+      "url": "https://billinghamrc.org.uk/contact",
+      "status": "masked-email",
+      "reason": "Public contact form and official socials preserved. Email is masked in readable page, not guessed. Monday venues rotate; Thursday Greenwood Road start is typical, not guaranteed."
+    },
+    {
+      "slug": "oswestry-olympians",
+      "url": "https://oswestryolympians.com/history/",
+      "status": "border-club-country-corrected",
+      "reason": "Home town is Oswestry, Shropshire, England despite dual England/Wales affiliation. Keep Welsh governing-body provenance and region; use England location flag. Old Park Hall track is historical. Junior page says no current specific triathlon coaching."
+    },
+    {
+      "slug": "welsh-athletics-3m-gorseinon-road-runners",
+      "url": "https://3mgorseinonrr.co.uk/sessions/",
+      "status": "seasonal-venue-and-role-conflict",
+      "reason": "Winter 2026/27 Swansea University track supersedes Victoria Road as current session venue; summer locations vary. Club page names Nic Rowe as secretary while Welsh directory names Fay Sharpe. Shared membership role email used; old named directory contact not silently overwritten."
+    },
+    {
+      "slug": "athletics-ireland-ballintotis-fit4life-a-c",
+      "url": "https://ballintotis.com/local-groups-clubs/",
+      "status": "club-distinct-from-race",
+      "reason": "No club founding year or dependable current timetable established. Race organised by community council and East Cork AC, not evidence that its famous visitors belong to Fit4Life. Directory postcode also belongs to school in community page; precise venue left empty. Community council generic phone/email excluded."
     }
   ],
   "coverageReviewNotes": [
@@ -787,6 +806,7 @@
     "Batch11: 20 profiles, five historical member entries and 19 website-contact/social records on 14 October UTC. Actual merged coverage 253/1737. No blanket directory refresh: 1682 recent comparisons, 55 older. Sports and address corrections only where primary evidence supports them; draft-preview only, seed v11.",
     "Batch12: 16 profiles and five historical/notable associations; 17 contact/social records updated. Actual merged coverage 269/1737. Four candidates deferred rather than padding sparse sources. Former Griffithstown domain replaced; Bray placeholder phone removed. Directory date coverage unchanged (1682 recent,55 older), seed v12, draft-only. Main bceb3ea inspected: intervening athlete/homepage changes do not overlap these data files.",
     "Batch13: 18 profiles, ten sourced associations, 17 contact/social records changed (12 new). Actual merged coverage 287/1737; 140 notable entries. Seven more clubs with contacts/email, two with phones, twelve social links. Two candidates deferred. Seed v13, draft-only. Prior 5d39ab1 Club profiles passed; broader quality gate 38505360491 failed mobile registration: Help improve ATHRECS banner / bottom nav intercepted Continue. No safeguard or broad UI changes.",
-    "Batch14: 18 profiles, eight historical/notable associations, 18 website-contact records changed (12 new). Actual merged coverage 305/1737; 148 notable entries. Seven more clubs with email, fourteen contact entries, eighteen social links. Seed v14 draft-only. All 12 workflows for preceding eb01a07 now passed; no UI fix claimed for the earlier intermittent registration obstruction. Directory comparison dates unchanged."
+    "Batch14: 18 profiles, eight historical/notable associations, 18 website-contact records changed (12 new). Actual merged coverage 305/1737; 148 notable entries. Seven more clubs with email, fourteen contact entries, eighteen social links. Seed v14 draft-only. All 12 workflows for preceding eb01a07 now passed; no UI fix claimed for the earlier intermittent registration obstruction. Directory comparison dates unchanged.",
+    "Batch15: immediate continuation adds nine profiles and five historical/member associations, changes nine website-contact records (six new), seed v15. Oswestry country corrected to England with dual-affiliation context. All twelve workflows for prior b41907d passed. Hourly automation confirmed enabled, not duplicated. Directory dates unchanged."
   ]
 }

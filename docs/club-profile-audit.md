@@ -6,10 +6,10 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 766 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 557 clubs: 543 publish an email address and 70 a telephone number. There are 952 contact entries in total, including named directory contacts with no direct email or telephone.
-- 956 clubs have social links, with 1,946 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 305 clubs have extended, individually written profiles (17.6% of the catalogue). These contain 148 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
+- Website research contributes contact pages or contact/social details for 772 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The merged catalogue has contact entries for 560 clubs: 546 publish an email address and 71 a telephone number. There are 959 contact entries in total, including named directory contacts with no direct email or telephone.
+- 957 clubs have social links, with 1,951 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
+- 314 clubs have extended, individually written profiles (18.1% of the catalogue). These contain 153 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
 The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. That batch did not change contact or social coverage.
 
@@ -147,11 +147,27 @@ Hi-Elbow, Island, Lisburn, Artane/Beaumont, Ashford Wicklow, Narrows and Newry r
 
 The previous commit eb01a07 now has all twelve workflows passing, including the broader quality gate. This does not establish a code fix for the older intermittent mobile-registration obstruction; no UI or safeguard changes were made. New regressions protect the postcode, geography, obsolete-link replacement, junior restrictions and proposed-facility distinctions. Local source/contact evidence, catalogue/profile checks, typecheck, targeted lint, slug checks and build are run with database publication disabled. Exact-commit desktop/mobile and AthRecs Vercel preview outcomes are recorded in the draft PR after the guarded push. Seed v14; not authorised for production publication.
 
+## Fifteenth editorial batch — 14 October 2026 UTC
+
+Immediate continuation adds nine profiles: Ambleside AC, Astley & Tyldesley Road Runners, Billinge Running Club, Billingham Marsh House Harriers, Billingham Running Club, Oswestry Olympians, Sospan Road Runners, 3M Gorseinon Road Runners and Ballintotis Fit4Life. Five dated club-honours or historical associations cover Keith Anderson, Sarah McCormack, Scout Adkin, Doug Morris and Mick Ward. Ballintotis race visitors and winners are not labelled Fit4Life members. The two Billingham clubs remain separate canonical organisations.
+
+Nine website-contact records changed, six of them new: net seven contact entries, three more clubs with email, one with telephone, five social links and one more club with social coverage. Role enquiries, the junior coaching contact at Oswestry, club forms and linked official social pages retain their source URLs and 14 October dates. Billingham's masked email remains unfilled; its public contact form is available. The community council's generic Ballintotis email/phone, school contacts and website suppliers were excluded. Existing sourced directory fields and all whole-directory comparison dates remain intact.
+
+Oswestry's home-country indicator changes from Wales to England: the club confirms its home in Shropshire and its cross-border membership and dual English/Welsh affiliations. The Welsh governing-body source and associated region remain as provenance. Park Hall's old track is historical, not a current venue. An unhelpful combined location and postcode are replaced by multi-venue notes. Its junior page explicitly says attendance is members-only and that specific triathlon coaching is not currently provided.
+
+Astley & Tyldesley's published Gin Pit Miners Welfare Club base replaces the Chalfont Drive directory address. Ambleside's Parish Centre is labelled winter Tuesday training, with summer fell venues distinguished. Billinge's older Delph Tavern address is not assumed to cover Monday coaching at The Triangle or changing Wednesday routes. Marsh House's Norton Football Club sign-in and seasonal junior surfaces are clarified. Billingham Running Club's rotating Monday starts and usual Thursday Greenwood Road meeting point are distinguished. Sospan's Pentre Awel base is confirmed. 3M's published October 2026–March 2027 Swansea University track venue replaces the Victoria Road directory address, with changing summer locations explained.
+
+Ballintotis gains its missing town and the senior-only eligibility supplied by Athletics Ireland. The directory Eircode also identifies the school in the community council page; no precise club venue is established, so the exact address and postcode are left empty. The Fit4Life group, the community council and East Cork AC's four-mile race roles are kept distinct. No club founding date is inferred from the race's 2010 start. A dependable current Fit4Life timetable remains unresolved.
+
+Ambleside's undated September/March junior intake copy is qualified as a waiting-list/capacity notice, without promising an intake date. Its About page and roll of honour disagree on early men's team championship years, which are not repeated. 3M's website and directory give different secretary names; the shared membership role contact is used without silently rewriting the named directory entry. These gaps and the remaining North West/North East England, Welsh and Irish queue are saved in the checkpoint. The existing hourly automation was confirmed enabled, with no duplicate task created.
+
+All twelve workflows for preceding commit b41907d now pass. Local source/contact evidence, profile and directory checks, targeted lint, typecheck, slug stability and build are checked for this batch with publication hooks disabled. Exact-commit Club profiles desktop/mobile evidence and AthRecs preview results are recorded in PR #680 after the guarded update. Seed v15; draft previews only, not production publication.
+
 ## Maintenance files
 
 - `src/data/club-enrichment-a.ts` and `-b.ts`: directory fields and actual source comparison dates.
 - `src/data/club-website-contacts.ts`: accepted public contact/social discoveries and per-field provenance.
-- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-n.ts`: manually reviewed prose, sources and explicit corrections.
+- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-o.ts`: manually reviewed prose, sources and explicit corrections.
 - `docs/club-profile-checkpoint.json`: completed batch slugs, source gaps and next candidates. Check the live branch and profile map before resuming; the queue is not evidence that a club has been researched.
 - `scripts/audit-club-websites.mjs /absolute/scratch/output.json`: resumable read-only screening into a review queue. It never writes the catalogue.
 
