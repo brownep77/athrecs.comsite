@@ -13,6 +13,7 @@ for (const key of [
   "POSTGRES_URL_NON_POOLING",
   "RESEND_API_KEY",
   "ATHRECS_CLAIMS_EMAILS",
+  "ATHRECS_VERCEL_ANALYTICS_TOKEN",
 ])
   process.env[key] = "";
 process.env.VITE_AUTH_ENABLED = "true";
@@ -439,6 +440,8 @@ try {
       "PASS: desktop/mobile staff page, filters, group switching, reset, real CSV download and no browser errors.",
     );
   }
+  const { verifyCollectionOperations } = await import("./verify-collection-operations.mjs");
+  await verifyCollectionOperations({ server, sql, browser, origin });
 } finally {
   await browser?.close();
   await database?.close();
