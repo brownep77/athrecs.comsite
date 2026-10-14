@@ -1344,6 +1344,11 @@ export const getClubBySlug = createServerFn({ method: "GET" })
     `,
       [club.id],
     );
+    const visibleMembers = members.slice(0, 100);
+    const sourceCounts = await countPublishedSourceResults(
+      sql,
+      visibleMembers.map((member) => member.id),
+    );
     return {
       club: {
         ...club,
@@ -1351,7 +1356,10 @@ export const getClubBySlug = createServerFn({ method: "GET" })
         contacts: JSON.parse(club.contacts_json || "[]") as ClubContactInfo[],
         socials: JSON.parse(club.socials_json || "[]") as ClubSocialInfo[],
       },
-      members: members.slice(0, 100),
+      members: visibleMembers.map((member) => ({
+        ...member,
+        result_count: member.result_count + (sourceCounts.get(member.id) ?? 0),
+      })),
       moreMembers: members.length > 100,
     };
   });

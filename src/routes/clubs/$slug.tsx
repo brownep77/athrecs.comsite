@@ -312,6 +312,9 @@ function ClubPage() {
 
       <section className="space-y-3">
         <h2 className="font-display text-lg font-semibold text-fg">Athletes at this club</h2>
+        <p className="text-sm text-muted">
+          Open an athlete to view their published race results and profile.
+        </p>
         {members.length === 0 ? (
           <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">
             No athletes linked yet.
@@ -328,7 +331,9 @@ function ClubPage() {
                 <div>
                   <p className="font-semibold text-fg">{m.display_name}</p>
                 </div>
-                <Badge variant="outline">{m.result_count} results</Badge>
+                <Badge variant="outline">
+                  {m.result_count} {m.result_count === 1 ? "result" : "results"}
+                </Badge>
               </Link>
             ))}
           </div>
