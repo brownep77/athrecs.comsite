@@ -10,7 +10,7 @@ const root=resolve('artifacts/workspace-fixture');mkdirSync(root,{recursive:true
 const profile={id:7,slug:'synthetic-athlete',profile_visibility:'public',display_name:'Synthetic Athlete',given_name:'Synthetic',family_name:'Athlete',gender:'U',source_club_name:'Synthetic Club',city:'',county:'',country:'',bio:''};
 const historicalNote='Historical approval rationale visible to staff only.';
 const approvalNote='Opened the official source and checked bib and identity.';
-const result={id:11,race:'Existing Synthetic 10K',date:'2026-09-20',distance:'10K',time:'00:40:00.1',excluded:false,staffApproval:{note:historicalNote,approvedBy:'synthetic-staff',approvedAt:'2026-09-26T12:00:00.000Z',requestId:'00000000-0000-4000-8000-000000000010'}};
+const result={verified:false,syntheticTest:false,id:11,race:'Existing Synthetic 10K',date:'2026-09-20',distance:'10K',time:'00:40:00.1',excluded:false,staffApproval:{note:historicalNote,approvedBy:'synthetic-staff',approvedAt:'2026-09-26T12:00:00.000Z',requestId:'00000000-0000-4000-8000-000000000010'}};
 writeFileSync(resolve(root,'api.js'),`window.calls=[];window.workspace={profile:${JSON.stringify(profile)},profileVersion:'${'a'.repeat(64)}',editable:true,linked:[],results:[${JSON.stringify(result)}],batches:[],email:'staff@example.test'};
 const clone=x=>JSON.parse(JSON.stringify(x));
 export async function searchStaffAthletes(){return [{id:7,name:'Synthetic Athlete',club:'Synthetic Club',visibility:'public',slug:'synthetic-athlete'}]}
@@ -29,7 +29,12 @@ export async function revokeAthleteReviewLink({data}){window.calls.push({kind:'r
 export async function reviewStaffPastedResults({data}){window.calls.push({kind:'publish',data});if(window.failPublish)throw new Error('Synthetic source conflict; nothing saved.');const row=window.batch.entries[0];row.state='approved';row.decisionNote=data.evidenceFor.trim();window.workspace.results.push({id:12,race:row.race,date:row.date,distance:row.distance,time:row.time,excluded:false,staffApproval:{note:data.evidenceFor.trim(),approvedBy:'synthetic-staff',approvedAt:'2026-09-27T13:00:00.000Z',requestId:data.requestId}});window.batch.revision++;return {added:1,duplicates:0,resultIds:[12],replay:false}}
 export async function loadAthleteReview(){return {athleteName:'Synthetic Athlete',rows:[{index:1,race:'Suggested Synthetic Race',date:'2026-09-20',distance:'10K',time:'00:40:00.1',timingBasis:'chip',sourceUrl:'https://example.test/results',bib:'1',place:'1'}]}}
 export async function respondToAthleteReview({data}){window.calls.push({kind:'response',data});return {recorded:true}}
-window.historyRow={year:2012,date:'',dateLabel:'29 Jan · 2011 / 2012',discipline:'60m',performance:'8.04i',venue:'Synthetic arena',meeting:'Synthetic historic games',profileExcluded:false};
+window.verificationRequests=[];
+export async function getMyResultVerificationRequests(){return clone(window.verificationRequests)}
+export async function getStaffResultVerificationInbox(){return []}
+export async function requestResultVerification({data}){window.calls.push({kind:'verification',data});const request={key:data.key,status:'pending',message:'Verification requested. AthRecs staff will review this result.'};window.verificationRequests.push(request);return request}
+export async function reviewResultVerification(){throw new Error('Staff cases are tested against the isolated database.')}
+window.historyRow={verificationVersion:'${'e'.repeat(64)}',year:2012,date:'',dateLabel:'29 Jan · 2011 / 2012',discipline:'60m',performance:'8.04i',venue:'Synthetic arena',meeting:'Synthetic historic games',profileExcluded:false};
 export async function getStaffPerformanceHistory(){return []}
 export async function getOwnedPerformanceHistory(){return clone([{externalId:'00000000-0000-4000-8000-000000000080',performances:[window.historyRow]}])}
 export async function excludeOwnedPerformance({data}){window.calls.push({kind:'history-exclude',data});window.historyRow.profileExcluded=data.excluded;return {saved:true}}
@@ -42,7 +47,7 @@ writeFileSync(resolve(root,'scope.js'),'export const IS_ATHRECS_SITE=true;');
 writeFileSync(resolve(root,'style.css'),`@import "${resolve('src/styles.css')}";\n@source "${resolve('src')}";`);
 writeFileSync(resolve(root,'main.tsx'),`import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{AthleteWorkspace}from'/@fs/${resolve('src/components/athletes/AthleteWorkspace.tsx')}';import{Route}from'/@fs/${resolve('src/routes/review-results.tsx')}';import'./style.css';const Review=Route.options.component;const client=new QueryClient({defaultOptions:{queries:{retry:false}}});createRoot(document.getElementById('root')!).render(<QueryClientProvider client={client}><div style={{maxWidth:1280,margin:'auto',padding:16}}><p>ISOLATED SYNTHETIC TEST — NO LIVE DATA</p>{location.search.includes('review')?<Review/>:<AthleteWorkspace staff={!location.search.includes('member')} initialAthleteId={7}/>}</div></QueryClientProvider>);`);
 writeFileSync(resolve(root,'index.html'),'<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
-const server=await createServer({configFile:false,root,cacheDir:resolve(root,'.vite'),plugins:[react(),tailwindcss()],resolve:{alias:[{find:'@/lib/athlete-workspace/admin-history-api',replacement:resolve(root,'api.js')},{find:'@/lib/athlete-workspace/api',replacement:resolve(root,'api.js')},{find:'@tanstack/react-router',replacement:resolve(root,'router.js')},{find:'@/lib/auth/client',replacement:resolve(root,'auth.js')},{find:'@/lib/auth/use-current-user',replacement:resolve(root,'user.js')},{find:'@/lib/site-scope',replacement:resolve(root,'scope.js')},{find:'@',replacement:resolve('src')}]},server:{host:'127.0.0.1',port:8102,strictPort:true,fs:{allow:[process.cwd()]}}});
+const server=await createServer({configFile:false,root,cacheDir:resolve(root,'.vite'),plugins:[react(),tailwindcss()],resolve:{alias:[{find:'@/lib/athrecs/result-verification-api',replacement:resolve(root,'api.js')},{find:'@/lib/athlete-workspace/admin-history-api',replacement:resolve(root,'api.js')},{find:'@/lib/athlete-workspace/api',replacement:resolve(root,'api.js')},{find:'@tanstack/react-router',replacement:resolve(root,'router.js')},{find:'@/lib/auth/client',replacement:resolve(root,'auth.js')},{find:'@/lib/auth/use-current-user',replacement:resolve(root,'user.js')},{find:'@/lib/site-scope',replacement:resolve(root,'scope.js')},{find:'@',replacement:resolve('src')}]},server:{host:'127.0.0.1',port:8102,strictPort:true,fs:{allow:[process.cwd()]}}});
 await server.listen();const browser=await chromium.launch({headless:true});let page;
 try{
   page=await browser.newPage({viewport:{width:1365,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -93,6 +98,17 @@ try{
   await page.goto('http://127.0.0.1:8102/?member=1');await page.getByRole('heading',{name:'Edit Synthetic Athlete',exact:true}).waitFor();
   assert.equal(await page.getByText('Approval note',{exact:true}).count(),0);assert.equal(await page.getByText(historicalNote,{exact:true}).count(),0);
   assert.equal(await page.getByLabel('Why I approved these races',{exact:true}).count(),0);assert.equal(await page.evaluate(()=>window.calls.length),0);
+  const storedPanel=page.getByRole('heading',{name:'Stored races on this profile',exact:true}).locator('..');
+  const unverifiedRace=storedPanel.getByRole('row').filter({hasText:'Existing Synthetic 10K'});
+  await unverifiedRace.getByRole('button',{name:'Verify result',exact:true}).click();
+  await unverifiedRace.getByLabel('Result link (optional)',{exact:true}).fill('https://example.test/official-results');
+  await unverifiedRace.getByLabel('Note or bib number (optional)',{exact:true}).fill('Bib 42, please check the chip time.');
+  await unverifiedRace.getByRole('button',{name:'Request verification',exact:true}).click();
+  await unverifiedRace.getByRole('button',{name:'Verification requested',exact:true}).waitFor();
+  assert(await unverifiedRace.getByRole('button',{name:'Verification requested',exact:true}).isDisabled());
+  const verification=await page.evaluate(()=>window.calls.find(c=>c.kind==='verification').data);
+  assert.equal(verification.key,'r:11');assert.equal(verification.note,'Bib 42, please check the chip time.');
+  assert.equal(await page.evaluate(()=>window.workspace.results[0].verified),false,'An athlete request cannot self-verify a result');
   const historyPanel=page.getByRole('heading',{name:'Additional performance history (1)',exact:true}).locator('..');
   await historyPanel.getByText('8.04i',{exact:false}).waitFor();
   await historyPanel.getByRole('button',{name:'Remove from profile',exact:true}).click();
@@ -101,11 +117,17 @@ try{
   await historyPanel.getByRole('button',{name:'Restore to profile',exact:true}).click();
   await historyPanel.getByText('Shown on profile · Unverified',{exact:true}).waitFor();
   assert.equal(await page.evaluate(()=>window.historyRow.profileExcluded),false);
+  await historyPanel.getByRole('button',{name:'Verify result',exact:true}).click();
+  await historyPanel.getByRole('button',{name:'Request verification',exact:true}).click();
+  await historyPanel.getByRole('button',{name:'Verification requested',exact:true}).waitFor();
+  const historyVerification=await page.evaluate(()=>window.calls.filter(c=>c.kind==='verification')[1].data);
+  assert.equal(historyVerification.key,'h:7:00000000-0000-4000-8000-000000000080:0');
+  assert.equal(historyVerification.expectedVersion,'e'.repeat(64),'Additional history sends its displayed row version');
   assert.equal(await page.evaluate(()=>window.calls.filter(c=>c.kind==='history-exclude').length),2);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   await page.screenshot({path:'artifacts/workspace-history-mobile.png',fullPage:true});
   await page.goto(`http://127.0.0.1:8102/?review=1#${'c'.repeat(64)}`);await page.getByRole('heading',{name:'Proposed matches for Synthetic Athlete'}).waitFor();assert.equal(await page.evaluate(()=>window.calls.length),0);
   await page.getByLabel('Not mine',{exact:true}).check();const submit=page.getByRole('button',{name:'Submit my responses'});assert(await submit.isDisabled());await page.getByLabel('I have reviewed these answers.',{exact:false}).check();await page.screenshot({path:'artifacts/workspace-recipient-mobile.png',fullPage:true});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await submit.click();await page.getByRole('heading',{name:'Response recorded'}).waitFor();
   const calls=await page.evaluate(()=>window.calls);assert.deepEqual(calls.map(c=>c.kind),['response']);assert.equal(calls[0].data.responses[0].response,'no');assert.equal(await page.evaluate(()=>sessionStorage.getItem('athrecs:recipient-result-review')),null);assert.deepEqual(errors,[]);
-  console.log('PASS: actual React edits, explicit removal, invalid-link recovery, paste preview/private save, link creation, required approval rationale, saved staff-only approval readback, member evidence hiding, identical failed-save retry, persistent receipt, unassigned target selection and recipient denial without publication; desktop/mobile. APIs are synthetic mocks.');
+  console.log('PASS: actual React edits, explicit removal, invalid-link recovery, paste preview/private save, link creation, required approval rationale, saved staff-only approval readback, member evidence hiding, unverified-race and additional-history verification requests without self-verification, identical failed-save retry, persistent receipt, unassigned target selection and recipient denial without publication; desktop/mobile. APIs are synthetic mocks.');
 }catch(e){if(page)await page.screenshot({path:'artifacts/workspace-failure.png',fullPage:true});throw e;}finally{await browser.close();await server.close();rmSync(root,{recursive:true,force:true});}
