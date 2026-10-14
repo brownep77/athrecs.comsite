@@ -10,9 +10,21 @@ export const statsFilters = z
     year: z.number().int().min(1800).max(2200).nullable().default(null),
     raceGroup: z.enum(["sport", "distance", "country", "county", "detail"]).default("sport"),
     gender: filter,
+    profileSport: filter,
+    nationality: filter,
     profileCountry: filter,
     profileCounty: filter,
-    profileGroup: z.enum(["gender", "country", "county", "detail"]).default("gender"),
+    profileGroup: z
+      .enum([
+        "sport",
+        "gender",
+        "nationality",
+        "sportGenderNationality",
+        "country",
+        "county",
+        "detail",
+      ])
+      .default("gender"),
   })
   .strict();
 export type StatsFilters = z.infer<typeof statsFilters>;
@@ -27,6 +39,8 @@ export type RaceStatsRow = RaceCounts & {
   county: string | null;
 };
 export type ProfileStatsRow = ProfileCounts & {
+  sport: string | null;
+  nationality: string | null;
   gender: string | null;
   country: string | null;
   county: string | null;
@@ -43,7 +57,7 @@ export type StatsReport = {
   profiles: {
     totals: ProfileCounts;
     rows: ProfileStatsRow[];
-    gaps: { gender: number; country: number; county: number };
+    gaps: { sport: number; gender: number; nationality: number; country: number; county: number };
   };
   options: {
     sports: string[];
@@ -52,6 +66,8 @@ export type StatsReport = {
     raceCounties: string[];
     years: number[];
     genders: string[];
+    profileSports: string[];
+    nationalities: string[];
     profileCountries: string[];
     profileCounties: string[];
   };
