@@ -1121,7 +1121,13 @@ const readAdministratorPublishedAthlete = createServerOnlyFn(
     if (!athlete) return null;
     const sharing = athlete.sharing;
     if (sharing && (!sharing.enabled || !sharing.share_results)) return null;
-    const profile = await readAthleteProfile(sql, athlete, true);
+    const { loadPublishedAthleteBiography } = await import("./athlete-publication.server");
+    const [profile, publishedBiography] = await Promise.all([
+      readAthleteProfile(sql, athlete, true),
+      sharing?.share_bio === false || athlete.has_account_link
+        ? Promise.resolve("")
+        : loadPublishedAthleteBiography(sql, athlete.id),
+    ]);
     const { results: legacyResults, ...publicProfile } = profile;
     void legacyResults;
     // The publication covers sporting results and basic athlete identity only.
@@ -1129,6 +1135,7 @@ const readAdministratorPublishedAthlete = createServerOnlyFn(
     return {
       ...publicProfile,
       shareBiography: sharing?.share_bio !== false,
+      publishedBiography,
       searchIndexable: athlete.search_indexable,
       athlete: {
         ...profile.athlete,
@@ -1214,7 +1221,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
         nationalitySource: profile.athlete.nationality_source,
         sports: profile.athlete.sports,
         biography: profile.shareBiography
-          ? (career?.biography ?? [athleteSearchContent(profile).bio])
+          ? (career?.biography ?? [profile.publishedBiography || athleteSearchContent(profile).bio])
           : [],
         biographySources: profile.shareBiography ? career?.biographySources : [],
         results: profile.profileResults,

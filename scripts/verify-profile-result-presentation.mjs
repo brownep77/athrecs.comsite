@@ -107,6 +107,44 @@ try {
       verificationStatus: index === 4 ? "source_verified" : index === 3 ? undefined : "unverified",
     },
   }));
+  const triathlonPerformance = historyPerformanceSchema.parse({
+    ...historyResults[4].performance,
+    discipline: "Full-distance triathlon",
+    meeting: "Synthetic triathlon",
+    performance: "12:00:00",
+    place: "",
+    bib: "123",
+    triathlonSplits: { swim: "01:00:00", bike: "06:00:00", run: "04:45:00" },
+    sourceUrls: ["https://example.test/private-triathlon-evidence"],
+    notes: "Private split research notes",
+  });
+  const triathlonRows = withoutProfileEvidence([
+    {
+      key: "synthetic-triathlon",
+      sport: "Triathlon",
+      performance: triathlonPerformance,
+    },
+  ]);
+  const triathlonHtml = renderToStaticMarkup(
+    createElement(CompactResults, {
+      results: [],
+      historyResults: triathlonRows,
+    }),
+  );
+  const triathlonDom = load(triathlonHtml);
+  assert.equal(triathlonDom("tbody tr").length, 1, "Race legs remain part of one triathlon result");
+  for (const text of ["01:00:00", "06:00:00", "04:45:00", "Bib 123", "Run leg:"])
+    assert(triathlonDom.text().includes(text), `Public result includes ${text}`);
+  for (const hidden of ["private-triathlon-evidence", "Private split research", ">Track<"])
+    assert(!triathlonHtml.includes(hidden), hidden);
+  assert.equal(
+    historyPerformanceSchema.safeParse({
+      ...triathlonPerformance,
+      triathlonSplits: { ...triathlonPerformance.triathlonSplits, swim: "01:99:00" },
+    }).success,
+    false,
+    "Invalid split times are not accepted",
+  );
   assert.equal(hasHistoryFinish({ ...historyResults[4].performance, date: "2199-01-01" }), false);
   assert.equal(
     hasHistoryFinish({ ...historyResults[4].performance, labels: ["Intermediate split"] }),
