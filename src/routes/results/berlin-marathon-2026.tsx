@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, stripSearchParams } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Download, Copy, Clock3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
@@ -28,6 +28,7 @@ export const Route = createFileRoute("/results/berlin-marathon-2026")({
     if (IS_RUNRECS_SITE) throw notFound();
   },
   validateSearch: berlinSearch,
+  search: { middlewares: [stripSearchParams(berlinSearch({}))] },
   head: () => ({
     meta: siteGraphMeta({
       title: "Berlin Marathon 2026 results — men, women & age groups | AthRecs",

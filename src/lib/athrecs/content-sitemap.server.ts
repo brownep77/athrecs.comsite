@@ -1,5 +1,10 @@
 import type { Sql } from "../db";
 import { resultSlug } from "./result-slug.ts";
+import { eventSlugAliases } from "../../data/entry-options";
+
+const eventAliases = JSON.stringify(
+  Object.entries(eventSlugAliases).map(([old_slug, current_slug]) => ({ old_slug, current_slug })),
+);
 
 export const CONTENT_SITEMAP_PAGE_SIZE = 5000;
 export type ContentSitemapKind = "races" | "clubs" | "results";
@@ -8,8 +13,15 @@ export type ContentSitemapKind = "races" | "clubs" | "results";
 function selection(kind: ContentSitemapKind): { query: string; values: unknown[] } {
   if (kind === "races")
     return {
-      query: `select e.id, e.slug from events e where e.sport in ('Athletics', 'Running', 'Parkrun')`,
-      values: [],
+      query: `select e.id, e.slug from events e where e.sport in ('Athletics', 'Running', 'Parkrun')
+      and not exists (
+        select 1 from jsonb_to_recordset($1::jsonb) aliases(old_slug text, current_slug text)
+        join events target on target.slug = coalesce(
+          (select current_slug from slug_redirects
+           where entity_type = 'event' and old_slug = aliases.current_slug), aliases.current_slug)
+        where aliases.old_slug = e.slug and target.id <> e.id
+      )`,
+      values: [eventAliases],
     };
   if (kind === "clubs")
     return {
