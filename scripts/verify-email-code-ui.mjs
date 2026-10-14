@@ -42,7 +42,9 @@ try {
     });
   });
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle", timeout: 60000 });
-  await page.getByRole("button", { name: "No thanks", exact: true }).click();
+  // Account routes deliberately exclude analytics and its consent prompt.
+  assert.equal(await page.getByRole("button", { name: "No thanks", exact: true }).count(), 0);
+  assert.equal(await page.locator('script[src*="/_vercel/insights/"]').count(), 0);
   await page.getByRole("button", { name: "Sign in or create account", exact: true }).click();
   const dialog = page.getByRole("dialog");
   await dialog.getByLabel("Email address", { exact: true }).fill("runner@example.test");
