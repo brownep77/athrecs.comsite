@@ -111,3 +111,24 @@ fresh provider CSVs, reconcile every public/held source key, and rehearse on an
 isolated branch. Publication uses one bounded atomic batch. A new directory
 conflict on either proposed sibling holds the entire reviewed component. Keep
 the prior audit, separation evidence and exact remaining queue in private storage.
+
+## Further exact-name review, 14 October 2026
+
+`scripts/continue-tlm-same-name-profiles.py` continues from the distinct-observation
+audit using a fixed previous public/held scope. Each private decision identifies
+all source rows in one held exact-name group and a complete, disjoint partition.
+Every partition retains the existing adult, finish, placing and corroboration
+checks; every pair requires independent source distinctions. Full current-directory
+screening and transactional sibling conflict checks still apply.
+
+Reported places need explicit review: a nickname, abbreviation or village name
+can refer to the same municipality. Known reviewed equivalences are rejected as
+location distinctions. Original locations and age observations remain private;
+the process does not infer residence or date of birth, confirm identities, or
+attach results to an existing athlete. Source-linked profiles remain unclaimed
+and performances remain unverified.
+
+Run `python3 scripts/verify-tlm-same-name-review.py` alongside the earlier distinct
+review checks. Recompare the actual provider CSV rows, prepare against production,
+then create the isolated review branch so its directory snapshot includes the
+prepared fingerprint. Rehearse and check replay before authorized publication.
