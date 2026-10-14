@@ -211,6 +211,34 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
+        <div id="website-statistics">
+          <NoticeSection title="Optional website visitor statistics">
+            <p>
+              If you select Allow anonymous analytics in Privacy choices, AthRecs records page
+              visits in its own reporting system and uses Vercel Web Analytics to report page views,
+              visitor estimates, referring websites, countries and device types. The Vercel tracker
+              is loaded only after you agree. A previous choice covering only AthRecs reporting does
+              not turn on Vercel tracking automatically.
+            </p>
+            <p className="mt-3">
+              We exclude account, staff, claim and registration-management pages and remove query
+              strings and URL fragments from tracked page addresses. We do not send form contents,
+              account details or result-claim evidence. Vercel processes request information to
+              produce its statistics; see{" "}
+              <a className="underline" href="https://vercel.com/docs/analytics/privacy-policy">
+                Vercel’s analytics privacy information
+              </a>
+              .
+            </p>
+            <p className="mt-3">
+              Use Privacy choices and select Keep analytics off to stop future tracking. AthRecs
+              also requests deletion of its own events for the current browser session. This does
+              not delete statistics already aggregated by Vercel. Your choice is saved in this
+              browser and does not change your separate account, research or marketing choices.
+            </p>
+          </NoticeSection>
+        </div>
+
         <NoticeSection title="Public sporting records, private archive and claims">
           <p className="mb-3">
             The optional “Find my race results” choice at sign-up opens suggestions from the AthRecs
@@ -221,19 +249,19 @@ function AthletePrivacyPage() {
           <p>
             ATHRECS preserves factual sporting records from published results and athlete
             submissions. Reviewed records may appear on public race pages and approved public
-            athlete previews, including unclaimed source profiles. These public pages can appear
-            in our athlete directory and search engines. An unclaimed profile does not mean that
-            the athlete has joined or endorsed ATHRECS; uncertain identities and results retain
-            their qualifications. Other profile information and shared account profiles may
-            require sign-in.
+            athlete previews, including unclaimed source profiles. These public pages can appear in
+            our athlete directory and search engines. An unclaimed profile does not mean that the
+            athlete has joined or endorsed ATHRECS; uncertain identities and results retain their
+            qualifications. Other profile information and shared account profiles may require
+            sign-in.
           </p>
           <p className="mt-3">
             Original source captures, identity-review evidence and account contact details remain
             private. We use legitimate interests to preserve accurate sporting history and help
-            athletes find and claim their records, with checks for mistaken identities and
-            existing privacy choices. You can ask us to correct a result, object to publication
-            or review a profile using the contact details below. Claiming does not automatically
-            publish private account information or the contents of your Entry Passport.
+            athletes find and claim their records, with checks for mistaken identities and existing
+            privacy choices. You can ask us to correct a result, object to publication or review a
+            profile using the contact details below. Claiming does not automatically publish private
+            account information or the contents of your Entry Passport.
           </p>
         </NoticeSection>
 
@@ -248,9 +276,9 @@ function AthletePrivacyPage() {
             coach, manager and contact preference can appear on the shared profile. Your birthday
             stays hidden unless you choose to display its day and month or full date in your
             account. Viewers must log in to open an unlisted shared account profile. These unlisted
-            pages are excluded from our search-engine sitemaps and marked not to be indexed. This
-            is separate from approved public sporting-record previews. Search engines may take
-            time to remove older listings.
+            pages are excluded from our search-engine sitemaps and marked not to be indexed. This is
+            separate from approved public sporting-record previews. Search engines may take time to
+            remove older listings.
           </p>
         </NoticeSection>
 
