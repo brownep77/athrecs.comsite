@@ -6,10 +6,10 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 795 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 574 clubs: 560 publish an email address and 74 a telephone number. There are 987 contact entries in total, including named directory contacts with no direct email or telephone.
-- 967 clubs have social links, with 1,976 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 354 clubs have extended, individually written profiles (20.4% of the catalogue). These contain 173 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
+- Website research contributes contact pages or contact/social details for 807 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The merged catalogue has contact entries for 581 clubs: 566 publish an email address and 76 a telephone number. There are 996 contact entries in total, including named directory contacts with no direct email or telephone.
+- 972 clubs have social links, with 1,986 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
+- 374 clubs have extended, individually written profiles (21.5% of the catalogue). These contain 187 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
 The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. That batch did not change contact or social coverage.
 
@@ -199,11 +199,29 @@ Three candidates remain deferred: Bodmin Women's RC (502), Ventoux Triathlon (ho
 
 Main inspected at 763eb52; newer athlete-publication and club-results route work is preserved. All twelve workflows for preceding commit b0d8d3e now pass. Source/contact evidence, catalogue/profile and directory checks, targeted lint, TypeScript, catalogue/slug checks and build pass locally with database publication hooks skipped. The final postcode clarification is covered by the profile check and exact-commit deployment build. Club-only seed v17. Exact-commit Club profiles desktop/mobile evidence and AthRecs preview results are recorded in draft PR #680 after a guarded update. Not merged or published to production.
 
+## Eighteenth editorial batch — 14 October 2026 UTC
+
+Adds 20 profiles: Bridgwater and District Road and Trail Runners, Calne SMaRTT, Carn Runners, Chard, Cheddar, Chippenham, Christchurch, Jersey Spartan, Western AC (Isle of Man), Beara, Belgooly, Bilboa, Birr, BRAV Performance, Cardiff Harlequins Trail Running Club, Bro Dysynni, Pontardawe, Dolly Mixtures, Clevedon and Dawlish Coasters. Fourteen sourced historical, founding or honorary associations include Martin Eddy, Dave Woodman, Chris Constable, Richard Schofield, Dave Phillips, Dana Myhill, Martin Aram, Ebony Hogan, Andrea Goode, Kim Evans, Sharon Davies, Dianne Spencer, Neil Manners and Geoff Hutton. These are editorial associations, not athlete identity claims or imported results.
+
+Twenty website-contact records changed, twelve new. Actual merged totals are 374/1,737 extended profiles (21.5%), 187 notable entries, 581 clubs with contacts (996 entries), 566 with email and 76 with telephone; 972 clubs have 1,986 distinct social links. Net gains are nine contact entries, six email-covered clubs, two phone-covered clubs and ten social links. Accepted evidence was read on 14 October. The 1,682 recent and 55 older directory comparison dates are preserved; this is a targeted review.
+
+Jersey Spartan's country is corrected from the generic Channel Islands label to Jersey, retaining the proper Jersey flag; Western keeps the Isle of Man indicator. Calne SMaRTT's published swimming, cycling and triathlon programme corrects its disciplines, while BADRAT's unsupported multisport tags are removed. Club training venues are distinguished from correspondence addresses. Unsupported exact addresses for BADRAT, Calne SMaRTT, Bro Dysynni, Dolly Mixtures and Clevedon are replaced by meeting-point notes. Beara's current directory sports-complex venue is separated from its historical peninsula programme; Birr's current seniors' venue is distinct from a past race headquarters.
+
+Carn's history documents the Stormforce 10 becoming the Trevithick 12K in 2026; older About copy is not treated as the current race name. Dawlish's Forest Flyer is identified as transferred to Haldon Trail Runners. Jersey's detailed road-running page takes precedence over its general meeting-point copy. Calne SMaRTT remains separate from Calne RC. Dolly Mixtures' Welsh and Shrewsbury branches do not make it a global club. Bro Dysynni's Andrea Goode result is explicitly the shortened 2002 Cader Idris course.
+
+Joining information retains Chippenham's youth waiting list, Cheddar's junior parental supervision, Christchurch's uncoached social sessions and under-eighteen parental responsibility, Jersey's detailed school-year group criteria, Dolly Mixtures' supervision requirements, BADRAT's distinction between continuous-running trials and separate beginner courses, and Dawlish's adult-only sessions and guest emergency-contact form. Old membership fees and stale course dates are not advertised as current offers.
+
+Beara's 2018 new-club account and an older 2007 namesake report do not establish continuity; no exact founding year or earlier alumni are assigned. Belgooly's 1986 founding claim conflicts with an earlier race archive, so its founding year remains empty. Belgooly's and Bilboa's archived programmes are labelled historical, with current enquiry details taken from Athletics Ireland. The national directory is retained as a contact route, not presented as an official club-owned website or sameAs identity. Masked emails, suppliers and race-only contacts are excluded. Chard's conflicting welfare names are recorded as unresolved rather than replaced with a guess.
+
+Barrow Harriers and Barrow Valley remain deferred because the opened primary evidence did not support substantive profiles. The checkpoint records these gaps, remaining timetable/continuity questions and a fresh queue drawn from the actual unprofiled catalogue across English multisport clubs, Wales and Ireland. Queued clubs are not claimed as researched.
+
+Main was inspected at 730712f; its newer work does not overlap these club data. All twelve workflows for preceding commit bd5b1d8 pass. Source coverage, contact evidence, catalogue/profile and directory checks, targeted lint, TypeScript, catalogue/slug checks and the build pass locally, with publication hooks skipped. Club-only seed v18. Exact-commit Club profiles desktop/mobile evidence and the matching AthRecs preview are recorded in draft PR #680 after the guarded branch update. No production publication.
+
 ## Maintenance files
 
 - `src/data/club-enrichment-a.ts` and `-b.ts`: directory fields and actual source comparison dates.
 - `src/data/club-website-contacts.ts`: accepted public contact/social discoveries and per-field provenance.
-- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-q.ts`: manually reviewed prose, sources and explicit corrections.
+- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-r.ts`: manually reviewed prose, sources and explicit corrections.
 - `docs/club-profile-checkpoint.json`: completed batch slugs, source gaps and next candidates. Check the live branch and profile map before resuming; the queue is not evidence that a club has been researched.
 - `scripts/audit-club-websites.mjs /absolute/scratch/output.json`: resumable read-only screening into a review queue. It never writes the catalogue.
 

@@ -1,60 +1,64 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch17",
+  "lastEditorialBatch": "2026-10-14-batch18",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "almost-athletes",
-    "angels-rc",
-    "avon-valley-runners",
-    "bere-alston-trekkers",
-    "bitton-road-runners",
-    "bodmin-running-club",
-    "bourton-roadrunners-club",
-    "bramhall-runners",
-    "burnden-road-runners",
-    "athletics-ireland-ballymore-cobh-a-c",
-    "athletics-ireland-ballymun-a-c",
-    "athletics-ireland-ballyvolane-a-c",
-    "welsh-athletics-betsi-runaways",
-    "welsh-athletics-blaenau-gwent-athletics",
-    "welsh-athletics-cardiff-archers",
-    "welsh-athletics-cdf-runners",
-    "peninsula-triathlon-club",
-    "bridport-runners",
-    "burnham-on-sea-harriers",
-    "calne-running-club"
+    "bridgwater-and-district-road-and-trail-runners",
+    "calne-smartt",
+    "carn-runners",
+    "chard-rrc",
+    "cheddar-rc",
+    "chippenham-harriers",
+    "christchurch-runners",
+    "jersey-spartan-ac",
+    "western-athletic-club-isle-of-man",
+    "athletics-ireland-beara-a-c",
+    "athletics-ireland-belgooly-a-c",
+    "athletics-ireland-bilboa-a-c",
+    "athletics-ireland-birr-a-c",
+    "welsh-athletics-brav-performance",
+    "welsh-athletics-cardiff-harlequins-trail-running-club-clwb-rhedeg-llwybr-harlequins-caerdydd",
+    "welsh-athletics-clwb-rhedeg-bro-dysynni-rc",
+    "welsh-athletics-clwb-rhedeg-pontardawe-rc",
+    "welsh-athletics-dolly-mixtures",
+    "clevedon-ac",
+    "dawlish-coasters"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 354,
-    "notableMemberEntries": 173,
-    "clubsWithContacts": 574,
-    "contactEntries": 987,
-    "clubsWithEmail": 560,
-    "clubsWithPhone": 74,
-    "clubsWithSocials": 967,
-    "socialLinks": 1976,
-    "websiteContactRecords": 795
+    "extendedProfiles": 374,
+    "notableMemberEntries": 187,
+    "clubsWithContacts": 581,
+    "contactEntries": 996,
+    "clubsWithEmail": 566,
+    "clubsWithPhone": 76,
+    "clubsWithSocials": 972,
+    "socialLinks": 1986,
+    "websiteContactRecords": 807
   },
   "batchChanges": {
     "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 9,
+    "notableMemberEntriesAdded": 14,
     "contactOrSocialRecordsChanged": 20,
-    "newWebsiteContactRecords": 14,
+    "newWebsiteContactRecords": 12,
     "directoryRecordsRefreshed": 0,
-    "countryCorrections": [],
+    "countryCorrections": [
+      "jersey-spartan-ac"
+    ],
+    "sportsCorrected": [
+      "bridgwater-and-district-road-and-trail-runners",
+      "calne-smartt"
+    ],
     "unconfirmedAddressesReplacedByNotes": [
-      "bere-alston-trekkers",
-      "bodmin-running-club",
-      "athletics-ireland-ballymore-cobh-a-c",
-      "athletics-ireland-ballymun-a-c",
-      "welsh-athletics-betsi-runaways",
-      "welsh-athletics-cdf-runners",
-      "bridport-runners"
+      "bridgwater-and-district-road-and-trail-runners",
+      "calne-smartt",
+      "welsh-athletics-clwb-rhedeg-bro-dysynni-rc",
+      "welsh-athletics-dolly-mixtures",
+      "clevedon-ac"
     ]
   },
   "validationBeforeCommit": [
@@ -67,31 +71,31 @@
     "production build (publication hooks skipped)"
   ],
   "nextCandidateSlugs": [
-    "jersey-spartan-ac",
-    "western-athletic-club-isle-of-man",
-    "bridgwater-and-district-road-and-trail-runners",
-    "calne-smartt",
-    "carn-runners",
-    "chard-rrc",
-    "cheddar-rc",
-    "chippenham-harriers",
-    "christchurch-runners",
-    "welsh-athletics-brav-performance",
-    "welsh-athletics-cardiff-harlequins-trail-running-club-clwb-rhedeg-llwybr-harlequins-caerdydd",
-    "welsh-athletics-clwb-rhedeg-bro-dysynni-rc",
-    "welsh-athletics-clwb-rhedeg-pontardawe-rc",
-    "welsh-athletics-dolly-mixtures",
-    "athletics-ireland-barrow-harriers-a-c",
-    "athletics-ireland-barrow-valley-a-c",
-    "athletics-ireland-beara-a-c",
-    "athletics-ireland-belgooly-a-c",
-    "athletics-ireland-bilboa-a-c",
-    "athletics-ireland-birr-a-c"
+    "allstride-collective-running-club",
+    "askern-district-rc",
+    "barnet-and-district-ac",
+    "barton-and-district-ac",
+    "bearbrook-running-and-triathlon-club",
+    "beccles-triathlon-club",
+    "caistor-running-club",
+    "calder-valley-fell-runners",
+    "candy-racing",
+    "capel-cheetahs",
+    "welsh-athletics-cardiff-and-vale-schools-district",
+    "welsh-athletics-dragons-running-club-aberdare",
+    "welsh-athletics-dyfed-schools-district",
+    "welsh-athletics-eryri-schools-district",
+    "welsh-athletics-glamorgan-valleys-schools-district",
+    "athletics-ireland-blackwater-a-c",
+    "athletics-ireland-blarney-inniscara-a-c",
+    "athletics-ireland-brothers-pearse-a-c",
+    "athletics-ireland-brow-rangers-a-c",
+    "athletics-ireland-buttevant-a-c"
   ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Do not repeat batch17 completed clubs. Next queue rotates to island clubs, Somerset/Wiltshire/Cornwall, Welsh community running and Irish athletics. Queued candidates have not been researched. Check current branch and active work before edits.",
+    "Do not repeat batch18 completed clubs. Next queue rotates towards English triathlon, other regional English clubs and remaining Welsh/Irish listings. These candidates have not been researched. Confirm current profile map and active edits before work.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -1024,6 +1028,96 @@
       "url": "https://burnham-on-sea-harriers.com",
       "status": "mixed-event-years-and-social-handles",
       "reason": "Homepage mixes2025 and2026 race copy; no future event dates inferred. X label and target differ, so no new X record. Membership page still2025/26; prices omitted. Club history supports dated associations, not current member status."
+    },
+    {
+      "slug": "athletics-ireland-barrow-harriers-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Barrow_Harriers_A.C.",
+      "status": "deferred",
+      "reason": "National directory has only coordinates and a named contact without direct details. Search-index social fragments insufficient for an extended history or current programme; no inferred email or street address."
+    },
+    {
+      "slug": "athletics-ireland-barrow-valley-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Barrow_Valley_A.C.",
+      "status": "deferred",
+      "reason": "Directory confirms Old Leighlin Community Hall and contact, but substantive primary club history and current programme remain sparse. Do not borrow history from Barrow Harriers or the football namesake."
+    },
+    {
+      "slug": "athletics-ireland-beara-a-c",
+      "url": "https://www.corkathletics.org/clubs/159-beara-ac.html",
+      "status": "historical-continuity-unconfirmed",
+      "reason": "County account describes new January 2018 registration, but Athletics Ireland has a 2007 Beara AC article. Continuity not established; no exact founding year and no transfer of earlier coaching/alumni. Launch-era timetable and planned juniors not presented as current."
+    },
+    {
+      "slug": "athletics-ireland-belgooly-a-c",
+      "url": "https://belgoolyac.blogspot.com/",
+      "status": "founding-date-conflict-and-unavailable-website",
+      "reason": "Blog says founded 1986 but county archive describes a Belgooly AC-hosted race in 1983. Exact founding year withheld. Blog explicitly ceased updates in 2015; linked .com site returns502. Current membership contacts/MTU venue use national directory."
+    },
+    {
+      "slug": "athletics-ireland-bilboa-a-c",
+      "url": "https://bilboaac.wordpress.com/about/",
+      "status": "archived-programme",
+      "reason": "Origin given only as 1930s, so no exact year. 2015/16 age criteria, fees and weekly programme treated as historical; current contact hours corroborated by national directory."
+    },
+    {
+      "slug": "jersey-spartan-ac",
+      "url": "https://www.jerseyspartan.com/the-club/training/",
+      "status": "age-and-meeting-point-conflicts",
+      "reason": "General pages say8+, membership7+, detailed Minis school-year criteria used instead. Road sessions detail Freedom Tree/Elizabeth Marina and monthlyWestPark5K; general WestPark wording not copied as universal. Masked email left empty; public road-running phone/contact form used. Country clarified from Channel Islands to Jersey with JE flag."
+    },
+    {
+      "slug": "western-athletic-club-isle-of-man",
+      "url": "https://westernac.org/about/",
+      "status": "history-detail-and-stale-form",
+      "reason": "History says first Inter-Island Games four years after1980; not repeated. Members form2025/26; current availability and timetable require enquiry. Commonwealth associations retained as historical."
+    },
+    {
+      "slug": "carn-runners",
+      "url": "https://www.carnrunners.co.uk/carn-runners-history/",
+      "status": "stale-race-and-membership-copy",
+      "reason": "Current history confirms 2026Trevithick12K supersedes Stormforce10, despite old about copy. Membership page says both38 and35pounds; no price copied. Exact ages and current member totals omitted."
+    },
+    {
+      "slug": "chard-rrc",
+      "url": "https://chard-road-runners.webador.co.uk/contact",
+      "status": "welfare-officer-conflict",
+      "reason": "Homepage names Lizzie Cox as welfare officer while contact page names Emma Male. New biography/contact record uses shared enquiry email; no newly asserted welfare officer. Old existing source preserved."
+    },
+    {
+      "slug": "chippenham-harriers",
+      "url": "https://www.chippenhamharriers.co.uk/about-us/join/",
+      "status": "youth-waiting-list-and-masked-email",
+      "reason": "Youth waiting list preserved. Membership email not readable and not reconstructed. Founder year unresolved; lifetime-member history used without treating it as establishment evidence."
+    },
+    {
+      "slug": "welsh-athletics-brav-performance",
+      "url": "https://bravendurance.co.uk/pages/brav-performance",
+      "status": "founding-year-unconfirmed",
+      "reason": "Weekly programme and national role contacts support profile; no origin year/alumni. Brand athletes and other kit-store clubs are not automatically BRAV Performance members."
+    },
+    {
+      "slug": "welsh-athletics-cardiff-harlequins-trail-running-club-clwb-rhedeg-llwybr-harlequins-caerdydd",
+      "url": "https://www.welshathletics.org/en/club/view/cardiff-harlequins",
+      "status": "history-unconfirmed",
+      "reason": "Current trail programme and direct contacts supported. No founding date/alumni taken from rugby or historical Roath Harriers associations."
+    },
+    {
+      "slug": "welsh-athletics-clwb-rhedeg-pontardawe-rc",
+      "url": "https://www.sientries.co.uk/event.php?elid=Y&event_id=18946",
+      "status": "training-venue-unconfirmed",
+      "reason": "Club-authorised event account supports Christmas fun run and Facebook. Third-party copied timetable not accepted as current primary source; event adult restriction not extended to club membership."
+    },
+    {
+      "slug": "welsh-athletics-dolly-mixtures",
+      "url": "https://www.rundolliesrun.org.uk/?page_id=396",
+      "status": "multi-location-and-junior-supervision",
+      "reason": "Welsh affiliation preserved with Shrewsbury branch explained; no globe. Ages13+ and under16 female-adult supervision explicit. Founding year not supplied."
+    },
+    {
+      "slug": "dawlish-coasters",
+      "url": "https://www.dawlishcoasters.com/about-our-races",
+      "status": "event-handover",
+      "reason": "Forest Flyer now hosted by Haldon Trail Runners; not listed as current Dawlish-hosted race. Founder year/alumni unconfirmed."
     }
   ],
   "coverageReviewNotes": [
@@ -1039,6 +1133,7 @@
     "Batch14: 18 profiles, eight historical/notable associations, 18 website-contact records changed (12 new). Actual merged coverage 305/1737; 148 notable entries. Seven more clubs with email, fourteen contact entries, eighteen social links. Seed v14 draft-only. All 12 workflows for preceding eb01a07 now passed; no UI fix claimed for the earlier intermittent registration obstruction. Directory comparison dates unchanged.",
     "Batch15: immediate continuation adds nine profiles and five historical/member associations, changes nine website-contact records (six new), seed v15. Oswestry country corrected to England with dual-affiliation context. All twelve workflows for prior b41907d passed. Hourly automation confirmed enabled, not duplicated. Directory dates unchanged.",
     "Batch16 adds 20 profiles and 11 historical associations, with 19 website-contact records changed (nine new). Main inspected at 464292e: no overlapping club data changes. Corrected Bolton/Bebington/Consett/Irish/NI towns and Border Harriers postcode. Seed v16. No directory date refresh or production publication. Exact-commit workflow and preview evidence belongs in draft PR #680.",
-    "Batch17 adds 20 profiles and nine historical/coaching associations, with 20 website-contact records changed (14 new). Main inspected at 763eb52; unrelated athlete and club-results route work preserved. Recovered Bridport and Peninsula websites, corrected Bourton town, clarified seven multi-venue addresses and Peninsula junior availability. Seed v17. All twelve preceding b0d8d3e workflows passed. No directory-date refresh or production publication. Exact-commit workflow and preview evidence is recorded in draft PR #680."
+    "Batch17 adds 20 profiles and nine historical/coaching associations, with 20 website-contact records changed (14 new). Main inspected at 763eb52; unrelated athlete and club-results route work preserved. Recovered Bridport and Peninsula websites, corrected Bourton town, clarified seven multi-venue addresses and Peninsula junior availability. Seed v17. All twelve preceding b0d8d3e workflows passed. No directory-date refresh or production publication. Exact-commit workflow and preview evidence is recorded in draft PR #680.",
+    "Batch18:20 profiles,14 historical/founder associations,20 website-contact records changed(12new), seedv18. Actual374/1737 biographies,187notable entries; directorydates unchanged. Jersey country clarified; CalneSMaRTT multisport and BADRAT running-only corrected. TwoBarrow candidates deferred. Main730712f inspected; no overlapping club-data changes. Draft-only."
   ]
 }
