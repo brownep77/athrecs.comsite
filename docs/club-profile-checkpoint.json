@@ -4,7 +4,7 @@
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch20",
-  "pullRequest": null,
+  "pullRequest": 702,
   "publication": "batch20 awaiting validation and authorised publication; previous 384 profiles confirmed live",
   "completedProfileSlugs": [
     "carleton-running-community",
@@ -29,7 +29,7 @@
     "extendedProfiles": 400,
     "notableMemberEntries": 199,
     "clubsWithContacts": 592,
-    "contactEntries": 1018,
+    "contactEntries": 1017,
     "clubsWithEmail": 577,
     "clubsWithPhone": 79,
     "clubsWithSocials": 975,
@@ -44,7 +44,12 @@
     "directoryRecordsRefreshed": 0
   },
   "validationBeforeCommit": {
-    "status": "pending local and GitHub checks"
+    "catalogueAndProfiles": "passed",
+    "typecheck": "passed",
+    "targetedLint": "passed",
+    "build": "passed",
+    "renderedPages": "pending",
+    "githubWorkflows": "pending"
   },
   "nextCandidateSlugs": [
     "northumberland-fell-runners",

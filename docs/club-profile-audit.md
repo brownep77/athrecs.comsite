@@ -7,7 +7,7 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
 - Website research contributes contact pages or contact/social details for 824 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 592 clubs: 577 publish an email address and 79 a telephone number. There are 1,018 contact entries in total, including named directory contacts with no direct email or telephone.
+- The merged catalogue has contact entries for 592 clubs: 577 publish an email address and 79 a telephone number. There are 1,017 contact entries in total, including named directory contacts with no direct email or telephone.
 - 975 clubs have social links, with 1,993 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
 - 400 clubs have extended, individually written profiles (23.0% of the catalogue). These contain 199 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
