@@ -15,6 +15,8 @@ import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 import { cn } from "@/lib/utils";
 import { IS_ATHRECS_SITE } from "@/lib/site-scope";
+import { SiteLanguagePicker } from "@/components/language/SiteLanguagePicker";
+import { publicTranslationUrl } from "@/lib/athrecs/site-translation";
 import {
   HomepageAppearanceProvider,
   HomepageColourPicker,
@@ -106,6 +108,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
 function PublicAppShell({ children, pathname }: { children: React.ReactNode; pathname: string }) {
   const showHomepageColours = IS_ATHRECS_SITE && pathname === "/";
+  const showLanguagePicker = IS_ATHRECS_SITE && publicTranslationUrl(pathname) !== null;
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col overflow-x-hidden bg-bg">
       <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block">
@@ -118,7 +121,7 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
                 to={item.to}
                 aria-current={item.match(pathname) ? "page" : undefined}
                 className={cn(
-                  "inline-flex h-10 items-center gap-1.5 rounded-md px-2 text-sm font-medium no-underline transition-colors",
+                  "inline-flex h-10 items-center gap-1.5 rounded-md px-1.5 text-sm font-medium no-underline transition-colors xl:px-2",
                   item.match(pathname)
                     ? "bg-elevated text-fg"
                     : "text-muted hover:bg-elevated/60 hover:text-fg",
@@ -127,17 +130,21 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
                 {item.label}
               </Link>
             ))}
-            <AthleteAccountAccess compact={showHomepageColours} />
-            {showHomepageColours ? <HomepageColourPicker /> : null}
+            <div className="relative flex shrink-0 items-center gap-1">
+              <AthleteAccountAccess compact={showHomepageColours || showLanguagePicker} />
+              {showHomepageColours ? <HomepageColourPicker /> : null}
+              {showLanguagePicker ? <SiteLanguagePicker pathname={pathname} /> : null}
+            </div>
           </nav>
         </div>
       </header>
       <header className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md lg:hidden">
         <div className="flex h-14 items-center justify-between gap-2 px-4">
           <BrandLink />
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="relative flex shrink-0 items-center gap-2">
             <AthleteAccountAccess compact />
             {showHomepageColours ? <HomepageColourPicker /> : null}
+            {showLanguagePicker ? <SiteLanguagePicker pathname={pathname} /> : null}
           </div>
         </div>
       </header>

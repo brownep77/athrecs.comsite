@@ -122,7 +122,7 @@ export function HomepageColourPicker() {
   return (
     <details
       ref={picker}
-      className="homepage-colour-picker group relative shrink-0"
+      className="homepage-colour-picker group shrink-0"
       style={homepageThemeStyle(theme)}
       onToggle={(event) => setOpen(event.currentTarget.open)}
     >
