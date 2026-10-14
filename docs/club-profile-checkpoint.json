@@ -1,57 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch34",
+  "lastEditorialBatch": "2026-10-14-batch35",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch34",
+  "branch": "codex/club-profiles-batch35",
   "pullRequest": null,
-  "publication": "Batch34 adds 19 profiles and seven historical connections:665/1,737 assembled biographies and280 notable entries. PR742 is confirmed live at646 profiles/273 notable entries. Batch34 awaits exact-head workflow and deployment confirmation; release evidence belongs in its PR body.",
+  "publication": "Batch35 adds 20 profiles and nine historical connections: 685/1,737 assembled biographies and 289 notable entries. PR745 is confirmed published at 665 profiles/280 entries. Batch35 awaits exact-head workflows and deployment confirmation; final release evidence belongs in its PR body.",
   "completedProfileSlugs": [
-    "guildford-and-godalming-ac",
-    "handforth-wilmslow-alderley",
-    "hamwic-harriers-running-club",
-    "hardley-runners",
-    "harborough-ac",
-    "handy-cross-runners",
-    "harlow-running-and-tri-club",
-    "harlow-ac",
-    "harold-wood-running-club",
-    "harpenden-arrows",
-    "harrogate-tri-club",
-    "harrow-ac",
-    "hart-road-runners",
-    "hartlepool-athletics-club",
-    "great-bentley-running-club",
-    "halstead-rrc",
-    "mallow-tc",
-    "ennis-triathlon-club",
-    "belfast-ormeau-runners"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 665,
-    "notableMemberEntries": 280,
-    "clubsWithContacts": 711,
-    "contactEntries": 1235,
-    "clubsWithEmail": 690,
-    "clubsWithPhone": 106,
-    "clubsWithSocials": 1042,
-    "socialLinks": 2166,
-    "websiteContactRecords": 980
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 19,
-    "notableMemberEntriesAdded": 7,
-    "contactOrSocialRecordsChanged": 17,
-    "newWebsiteContactRecords": 9,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 14,
-    "netSocialLinks": 13
-  },
-  "validationBeforeCommit": {
-    "status": "Official primary pages opened and contact/social provenance assertions passed. Catalogue/profile checks, club audit, targeted ESLint, TypeScript and application build passed. Exact rendered-page and remote desktop/mobile evidence belongs in the PR body. Main b7dd262c086e182ccac460a5b58c821da2c76b2e incorporated before editing. No access controls, publication gates, athlete identities or privacy safeguards changed."
-  },
-  "nextCandidateSlugs": [
     "abbey-runners",
     "abingdon-ac",
     "ackworth-road-runners",
@@ -64,7 +19,6 @@
     "arunners-rc",
     "baildon-runners",
     "balsall-common-run-club",
-    "banbury-harriers-ac",
     "barking-road-runners",
     "barnes-runners",
     "barnsley-athletic-club",
@@ -72,15 +26,64 @@
     "barrow-runners",
     "welsh-athletics-white-rock-runners",
     "welsh-athletics-refail-runners",
-    "tinahely-tri-club",
+    "tinahely-tri-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 685,
+    "notableMemberEntries": 289,
+    "clubsWithContacts": 722,
+    "contactEntries": 1253,
+    "clubsWithEmail": 701,
+    "clubsWithPhone": 106,
+    "clubsWithSocials": 1046,
+    "socialLinks": 2182,
+    "websiteContactRecords": 992
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 9,
+    "contactOrSocialRecordsChanged": 20,
+    "newWebsiteContactRecords": 12,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 18,
+    "netSocialLinks": 16
+  },
+  "validationBeforeCommit": {
+    "status": "Primary club, governing-body and community sources opened and read on 14 October 2026. Catalogue/profile/audit checks, targeted ESLint and TypeScript passed. Production-build rendering and exact-head desktop/mobile workflow evidence is maintained in the batch35 PR. Source assertions cover newly gathered contacts/socials; Abbey contacts use the earlier successful direct page reading before later 502 responses. Main 224bd4c1f5d8757ba5842fdd22038ca140ab8635 was incorporated before editing."
+  },
+  "nextCandidateSlugs": [
+    "bedford-and-county-ac",
+    "bedford-harriers-ac",
+    "bicester-ac",
+    "billericay-striders",
+    "boston-and-district-ac",
+    "bourne-town-harriers",
+    "bracknell-ac",
+    "bracknell-forest-runners",
+    "bracknell-road-runners",
+    "bradford-airedale-ac",
+    "bridlington-road-runners",
+    "brighton-and-hove-ac",
+    "brighton-and-hove-frontrunners",
+    "brighton-and-hove-womens-running-club",
+    "brighton-phoenix",
+    "banbury-harriers-ac",
+    "welsh-athletics-barry-and-vale-harriers",
+    "welsh-athletics-cwmbran-harriers",
+    "welsh-athletics-trg-runners",
+    "welsh-athletics-tri-hard-harriers",
+    "athletics-ireland-annalee-a-c",
+    "athletics-ireland-athlone-a-c",
     "tullamore-triathlon-club",
     "athletics-ni-dub-running-club"
   ],
   "resumeInstructions": [
-    "Read current main, PR742 and the batch34 PR, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Do not repeat completed clubs. Hastings Runners already has a batch13 profile and was excluded from this batch.",
-    "Batch34 includes main b7dd262c086e182ccac460a5b58c821da2c76b2e. Fetch main explicitly: the origin fetch refspec only tracks the original audit branch, so FETCH_HEAD or an explicit main refspec is required; origin/main may be stale. Check active work and remote heads before editing.",
-    "Standing publication authority applies after exact-head dedicated Club profiles and wider quality gates pass. Verify matching AthRecs production and changed public pages before claiming new coverage live.",
-    "Keep deployment/workflow evidence in PR descriptions to avoid checkpoint-only rebuild loops. No identities, result imports, verified status, privacy or outreach changes. Rotate through source-recovery candidates and regional clubs; remaining Welsh school districts need district-specific descriptions, not invented conventional club programmes."
+    "Read current main, PR745 and the batch35 PR, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Do not repeat completed clubs. All 20 batch35 slugs were checked against the actual 665-profile baseline.",
+    "Fetch main explicitly: origin/main can be stale because the fetch refspec tracks the original audit branch. Batch35 incorporates main 224bd4c1f5d8757ba5842fdd22038ca140ab8635, including unrelated PR747. Inspect remote heads and active work before editing.",
+    "Standing owner publication authority applies after exact-head dedicated Club profiles and wider quality gates pass. Verify matching AthRecs production and changed public pages before claiming coverage live.",
+    "Keep final deployment/workflow evidence in the PR description to avoid checkpoint-only rebuild loops. Preserve athlete identities, result evidence, registration, verification and privacy safeguards. No outreach.",
+    "Next selection rotates Bedfordshire, Essex, Lincolnshire, Berkshire, Yorkshire and Sussex with Welsh/Irish source recovery. Welsh school districts need district-specific evidence, not invented ordinary club programmes. Banbury homepage is recovered at https://banburyharriers.org/ but substantive training/history/contact work remains."
   ],
   "sourceGaps": [
     {
@@ -1654,9 +1657,10 @@
     {
       "slug": "welsh-athletics-refail-runners",
       "url": "https://www.welshathletics.org/en/club/view/refail-runners",
-      "status": "limited-primary-detail",
+      "status": "superseded-by-batch35-review",
       "note": "Readable directory gives disciplines and role contacts but insufficient substantive location/history/joining information for full biography.",
-      "checkedAt": "2026-10-14"
+      "checkedAt": "2026-10-14",
+      "reason": " See batch35 profile and newest qualified gap; earlier source failures do not describe the current biography status."
     },
     {
       "slug": "congleton-harriers",
@@ -1822,16 +1826,18 @@
     {
       "slug": "tinahely-tri-club",
       "url": "https://www.tinahelytriclub.ie/",
-      "status": "unavailable-source",
+      "status": "superseded-by-batch35-review",
       "note": "Website returned404/unpublished. No biography added.",
-      "checkedAt": "2026-10-14"
+      "checkedAt": "2026-10-14",
+      "reason": " See batch35 profile and newest qualified gap; earlier source failures do not describe the current biography status."
     },
     {
       "slug": "welsh-athletics-white-rock-runners",
       "url": "https://www.whiterockcardiff.co.uk/",
-      "status": "unavailable-source",
+      "status": "superseded-by-batch35-review",
       "note": "Website returned508 resource limit. No biography added.",
-      "checkedAt": "2026-10-14"
+      "checkedAt": "2026-10-14",
+      "reason": " See batch35 profile and newest qualified gap; earlier source failures do not describe the current biography status."
     },
     {
       "slug": "welsh-athletics-welshpool-athletics-club",
@@ -2392,6 +2398,96 @@
       "url": "https://hamwicharriers.co.uk/contact/",
       "status": "profile-added-with-qualified-gap",
       "reason": "Official pages disagree between15 and16 as minimum age. Exact age omitted; contact form and official social links available."
+    },
+    {
+      "slug": "abbey-runners",
+      "url": "https://www.abbeyrunners.co.uk/membership/how-to-join/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Two official pages were successfully opened/read earlier in this run (web refs turn240view0 and turn240view1); subsequent local/web retrieval returned502. Original joining/role contacts retained with14October check date. Unrelated spam footer links excluded. Exact founding year unresolved."
+    },
+    {
+      "slug": "adderbury-running-club",
+      "url": "https://adderburyrunningclub.co.uk/about-us-2/club-history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Working .co.uk replaces obsolete .info. Origins late2007 and first Three Spires event2008 are distinguished; no exact legal founding year assigned. Historical events through2019 are not advertised as current."
+    },
+    {
+      "slug": "airecentre-pacers-rc",
+      "url": "https://airecentrepacers.com/chevin-chase/history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "1979 belongs to Chevin Chase, not confirmed club founding. Famous race participants are not members by inference. Inaccurate/misspelled race-history athlete details omitted."
+    },
+    {
+      "slug": "alchester-running-club",
+      "url": "https://alchester-runningclub.co.uk/training/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Non-www official host recovered. Malformed winter postcode omitted. Thursday Queens Avenue OX26 2NR is distinguished from summer Whitelands venue."
+    },
+    {
+      "slug": "ampthill-and-flitwick-flyers-rc",
+      "url": "https://affrunningclub.org.uk/membership/how-to-join/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official non-www host recovered. Under18 family membership is not permission to attend coached sessions under the current joining rule. Historical race list is not a current event calendar."
+    },
+    {
+      "slug": "ackworth-road-runners",
+      "url": "https://www.ackworthroadrunners.club/about/juniors/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior ages4–14, currently full/waiting list and separate charges retained. Old /contact page looks like a template; its generic email is excluded. Secretary email on training page is incident reporting, so not promoted as a general enquiry contact."
+    },
+    {
+      "slug": "barnes-runners",
+      "url": "https://www.barnesrunners.com/contact",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Adult18+ and separate Barnes Flyers juniors distinguished. Thursday track is in the morning. Current junior details and unconfirmed venue postcodes remain unset."
+    },
+    {
+      "slug": "barnsley-harriers",
+      "url": "https://www.barnsleyharriers.org.uk/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Home/about anniversary counts conflict; no exact founding date inferred. Separate from Barnsley Athletic Club."
+    },
+    {
+      "slug": "barnsley-athletic-club",
+      "url": "https://www.barnsleyac.co.uk/about-the-club/history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current merger described as late1980s;1974 is predecessor Barnsley Road Runners. Overbroad first-mass-road-race/equal-distance historical claims omitted. Dorothy Hyman venue/predecessor naming is not evidence of her membership."
+    },
+    {
+      "slug": "barrow-runners",
+      "url": "https://www.barrowrunners.co.uk/training/beginners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Previous beginners programme completed and no new course planned at review; stale dates not reused. Junior linked-adult membership and adult onsite requirements retained. Public CF-protected enquiry email decoded; website supplier excluded."
+    },
+    {
+      "slug": "tinahely-tri-club",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current club website unavailable. Governing-body directory,25June2024 tourism introduction and scheduled5May2019 duathlon announcement support qualified profile. No current venue, timetable, junior programme, race date or old named PRO telephone inferred."
+    },
+    {
+      "slug": "welsh-athletics-refail-runners",
+      "url": "https://www.welshathletics.org/en/club/view/refail-runners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Governing directory givesMonday7–8pm but no venue; Cardiff governing-body office excluded. Community-awards account supportsTonyrefail connection but displays11October without clear year. No award year, founding date or junior admission inferred."
+    },
+    {
+      "slug": "arunners-rc",
+      "url": "https://arunners.org.uk/JoinUs.php",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Event history requires login; no founding/alumni claims inferred. Website-administrator email and Facebook share link excluded; public joining form and linked Instagram retained."
+    },
+    {
+      "slug": "athletics-ni-dub-running-club",
+      "url": "https://athleticsni.org/Fixtures/Giants-Trail-Race-2026",
+      "status": "deferred",
+      "reason": "Club body empty in retrieval.2026 Giants Trail listing explicitly CANCELLED; do not write as held."
+    },
+    {
+      "slug": "tullamore-triathlon-club",
+      "url": "http://www.tullamoretriathlonclub.com/",
+      "status": "deferred",
+      "reason": "Website remains unavailable.2020 member/advocate account is a possible historical source only; current venue/timetable remain unconfirmed."
     }
   ],
   "coverageReviewNotes": [
@@ -2425,26 +2521,27 @@
     "Batch31 rotates21 English clubs across East Anglia, the North West, North East, London, Surrey, Dorset, Midlands and Bristol: masters, women’s running, fell running, juniors and triathlon.8 historical associations;21 contact/social records changed,11 new;18 net contacts and20 net social links. Other national candidates remain completed/source-blocked or require school-district entity review. Existing directory comparison dates are not renewed.",
     "Batch32:20 English regional profiles including university, women’s running, juniors, community groups and triathlon. Six historical founder/coach associations;20 contact/social records updated(10new),13 net contacts and14 net social links. Other nations remain completed/source-blocked or school-district entities requiring review; next queue includes Guernsey. Directory comparison dates unchanged.",
     "Batch33:20 profiles spanning Guernsey, Wales, nationwide GoodGym Race Team, two explicitly global clubs, and English regional running/athletics. Seven historical founder/athlete associations;20 contact/social records updated(8new),23 net contacts and11 net social links. Source dates retained for unchanged directory fields. More NI clubs revisited without padding thin/unavailable evidence.",
-    "Batch34:19 new profiles across16 English clubs, Mallow and Ennis in Ireland, and Ormeau in Northern Ireland. Seven historical connections;17 website-contact records changed(9new),14 net contacts and13 social links. Hastings was already complete and excluded. No full-directory manual review or athlete identity claims."
+    "Batch34:19 new profiles across16 English clubs, Mallow and Ennis in Ireland, and Ormeau in Northern Ireland. Seven historical connections;17 website-contact records changed(9new),14 net contacts and13 social links. Hastings was already complete and excluded. No full-directory manual review or athlete identity claims.",
+    "Batch35:20 profiles across17 English clubs, White Rock and Refail in Wales, and Tinahely in Ireland. Nine historical connections;20 contact/social records changed(12new),18 net contacts and16 social links. Coverage685/1,737(39.4%),289notable entries. This is a bounded editorial batch, not a full-directory manual review."
   ],
-  "previousPullRequest": 742,
+  "previousPullRequest": 745,
   "productionAuthorization": {
     "date": "2026-10-14",
     "instruction": "can you publish all and continue please",
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 742,
-    "mergeCommit": "e2667633e037d242fe5692ad86feea7ea3f56ddc",
+    "previousPullRequest": 745,
+    "mergeCommit": "da28b6c7338971c0b042873cb80ea9cf149a8251",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
     "team": "athrecs-holding-page-set-up",
-    "status": "PR742 exact production READY; all20 changed live pages passed biography/contact/location/flag/registration/metadata checks on14October2026.",
-    "lastConfirmedLiveCommit": "e2667633e037d242fe5692ad86feea7ea3f56ddc",
-    "lastConfirmedLiveDeployment": "dpl_A9jS9K3PeX6zsLHMJYExaM3ZaM6N",
-    "lastConfirmedLiveProfiles": 646,
-    "lastConfirmedLiveNotableEntries": 273,
-    "mainProfilesAtStart": 646,
-    "clubProfilesWorkflow": 38628413159,
-    "qualityGateWorkflow": 38628413512
+    "status": "PR745 exact production READY; all19 changed live pages passed complete biography/contact/location/flag/registration/metadata assertions on14October2026.",
+    "lastConfirmedLiveCommit": "da28b6c7338971c0b042873cb80ea9cf149a8251",
+    "lastConfirmedLiveDeployment": "dpl_Aswb7EMNjr4udMtQkBRsDRxxfkVh",
+    "lastConfirmedLiveProfiles": 665,
+    "lastConfirmedLiveNotableEntries": 280,
+    "mainProfilesAtStart": 665,
+    "clubProfilesWorkflow": 38635996642,
+    "qualityGateWorkflow": 38635996586
   }
 }
