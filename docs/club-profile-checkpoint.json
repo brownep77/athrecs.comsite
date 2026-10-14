@@ -1,64 +1,47 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch18",
+  "lastEditorialBatch": "2026-10-14-batch19",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-contact-audit",
-  "pullRequest": 680,
-  "publication": "draft-preview-only",
+  "branch": "codex/club-profiles-batch19",
+  "pullRequest": null,
+  "publication": "batch19-draft-preview; batch01-18-release-authorised",
   "completedProfileSlugs": [
-    "bridgwater-and-district-road-and-trail-runners",
-    "calne-smartt",
-    "carn-runners",
-    "chard-rrc",
-    "cheddar-rc",
-    "chippenham-harriers",
-    "christchurch-runners",
-    "jersey-spartan-ac",
-    "western-athletic-club-isle-of-man",
-    "athletics-ireland-beara-a-c",
-    "athletics-ireland-belgooly-a-c",
-    "athletics-ireland-bilboa-a-c",
-    "athletics-ireland-birr-a-c",
-    "welsh-athletics-brav-performance",
-    "welsh-athletics-cardiff-harlequins-trail-running-club-clwb-rhedeg-llwybr-harlequins-caerdydd",
-    "welsh-athletics-clwb-rhedeg-bro-dysynni-rc",
-    "welsh-athletics-clwb-rhedeg-pontardawe-rc",
-    "welsh-athletics-dolly-mixtures",
-    "clevedon-ac",
-    "dawlish-coasters"
+    "askern-district-rc",
+    "barnet-and-district-ac",
+    "bearbrook-running-and-triathlon-club",
+    "beccles-triathlon-club",
+    "caistor-running-club",
+    "calder-valley-fell-runners",
+    "candy-racing",
+    "capel-cheetahs",
+    "athletics-ireland-brothers-pearse-a-c",
+    "welsh-athletics-dragons-running-club-aberdare"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 374,
-    "notableMemberEntries": 187,
-    "clubsWithContacts": 581,
-    "contactEntries": 996,
-    "clubsWithEmail": 566,
-    "clubsWithPhone": 76,
-    "clubsWithSocials": 972,
-    "socialLinks": 1986,
-    "websiteContactRecords": 807
+    "extendedProfiles": 384,
+    "notableMemberEntries": 192,
+    "clubsWithContacts": 588,
+    "contactEntries": 1010,
+    "clubsWithEmail": 573,
+    "clubsWithPhone": 77,
+    "clubsWithSocials": 973,
+    "socialLinks": 1987,
+    "websiteContactRecords": 811
   },
   "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 14,
-    "contactOrSocialRecordsChanged": 20,
-    "newWebsiteContactRecords": 12,
+    "extendedProfilesAdded": 10,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 10,
+    "newWebsiteContactRecords": 4,
     "directoryRecordsRefreshed": 0,
-    "countryCorrections": [
-      "jersey-spartan-ac"
-    ],
     "sportsCorrected": [
-      "bridgwater-and-district-road-and-trail-runners",
-      "calne-smartt"
-    ],
-    "unconfirmedAddressesReplacedByNotes": [
-      "bridgwater-and-district-road-and-trail-runners",
-      "calne-smartt",
-      "welsh-athletics-clwb-rhedeg-bro-dysynni-rc",
-      "welsh-athletics-dolly-mixtures",
-      "clevedon-ac"
+      "askern-district-rc",
+      "barnet-and-district-ac",
+      "bearbrook-running-and-triathlon-club",
+      "beccles-triathlon-club",
+      "candy-racing"
     ]
   },
   "validationBeforeCommit": [
@@ -71,31 +54,31 @@
     "production build (publication hooks skipped)"
   ],
   "nextCandidateSlugs": [
-    "allstride-collective-running-club",
-    "askern-district-rc",
-    "barnet-and-district-ac",
-    "barton-and-district-ac",
-    "bearbrook-running-and-triathlon-club",
-    "beccles-triathlon-club",
-    "caistor-running-club",
-    "calder-valley-fell-runners",
-    "candy-racing",
-    "capel-cheetahs",
-    "welsh-athletics-cardiff-and-vale-schools-district",
-    "welsh-athletics-dragons-running-club-aberdare",
-    "welsh-athletics-dyfed-schools-district",
-    "welsh-athletics-eryri-schools-district",
-    "welsh-athletics-glamorgan-valleys-schools-district",
     "athletics-ireland-blackwater-a-c",
     "athletics-ireland-blarney-inniscara-a-c",
-    "athletics-ireland-brothers-pearse-a-c",
     "athletics-ireland-brow-rangers-a-c",
-    "athletics-ireland-buttevant-a-c"
+    "athletics-ireland-buttevant-a-c",
+    "athletics-ireland-bweeng-trail-blazers-a-c",
+    "athletics-ireland-camross-runners-a-c",
+    "athletics-ireland-castlecomer-a-c",
+    "welsh-athletics-heath-massive-rc",
+    "welsh-athletics-hengoed-harriers",
+    "welsh-athletics-les-croupiers-rc",
+    "welsh-athletics-llanelli-aac",
+    "welsh-athletics-llangollen-running-club",
+    "carleton-running-community",
+    "carlisle-aspatria-ac",
+    "carlisle-tri-club",
+    "castle-point-joggers",
+    "central-lancs-running-and-triathlon-club-clan",
+    "central-park-athletics",
+    "centurion-rc",
+    "chandlers-ford-swifts-running-club"
   ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Do not repeat batch18 completed clubs. Next queue rotates towards English triathlon, other regional English clubs and remaining Welsh/Irish listings. These candidates have not been researched. Confirm current profile map and active edits before work.",
+    "Batch19 has ten new profiles while the earlier 374-profile release is being published under explicit owner authorisation. Inspect PR680, main, this branch and the latest PR body for actual release status before further edits. Check the profile map; do not repeat completed batches.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -1118,6 +1101,62 @@
       "url": "https://www.dawlishcoasters.com/about-our-races",
       "status": "event-handover",
       "reason": "Forest Flyer now hosted by Haldon Trail Runners; not listed as current Dawlish-hosted race. Founder year/alumni unconfirmed."
+    },
+    {
+      "slug": "barnet-and-district-ac",
+      "url": "https://www.barnetadac.com/membership",
+      "status": "ambiguous-mailto-and-dated-fees",
+      "note": "Footer shows secretary@barnetadac.com but mailto targets email@email.com. Use the consistently published membership address; do not add the placeholder. 2025 fees not advertised as current. No exact founding year established.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "candy-racing",
+      "url": "https://candyracing.team/team-roles",
+      "status": "programme-version-conflicts",
+      "note": "Homepage still advertises July 2025 start; pathway men’s marathon standards differ between homepage and roles page, as does when UKA membership is included. Confirm current intake/terms; no stale start or exact threshold promised. London club offers remote global cohort, not automatically an exclusively global organisation.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "athletics-ireland-brothers-pearse-a-c",
+      "url": "https://www.brospearse.com/juvenile-information/juvenile-training-information",
+      "status": "junior-age-and-venue-detail",
+      "note": "General history mentions age five; detailed juvenile programme specifies ages six to eight for Little Athletics, which takes precedence. Some younger groups have waiting lists. Directory Idrone Avenue venue is one of several, not a universal meeting point. Club and national directory use different social handles; existing sourced directory handles preserved pending clarification.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "askern-district-rc",
+      "url": "https://www.askerndrc.org/about/",
+      "status": "postponed-legacy-races",
+      "note": "About page lists Norton 9, Askern 10K and Askern 10-mile as postponed; membership page still describes hosting three races. Preserve historical role, not current editions. Separate February 2026 Bentley 5 Mile announcement is dated.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "beccles-triathlon-club",
+      "url": "https://www.becclestriclub.com/hall-of-fame",
+      "status": "unreadable-honours-content",
+      "note": "Hall-of-fame page shows section labels without readable athlete entries. No named alumni inferred. Only welfare email exposed; general enquiries use homepage form.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "bearbrook-running-and-triathlon-club",
+      "url": "https://www.bearbrookrunningclub.co.uk/page/view/triathlon-club",
+      "status": "informal-training-and-origin",
+      "note": "Triathlon added to name in 2013, not founding year. Over forty years of history does not establish exact founding year. Cycling is informal and swimming ad hoc; no formal coached schedule promised.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "capel-cheetahs",
+      "url": "https://www.capelcheetahs.co.uk",
+      "status": "supplier-social-links",
+      "note": "Wix Facebook/Instagram links excluded. Founding year and notable alumni not established. Training pavilion postcode left empty rather than inferring from old directory row.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "welsh-athletics-dragons-running-club-aberdare",
+      "url": "https://www.welshathletics.org/en/club/view/dragons-running-club-aberdare",
+      "status": "meeting-point-difference",
+      "note": "Website says Ynys Community Hub; governing-body listing says Duke Street car park. Retain both with first-session confirmation. The website’s 5km pace wording is ambiguous and not copied as an admission threshold. No founding year/alumni established.",
+      "checkedAt": "2026-10-14"
     }
   ],
   "coverageReviewNotes": [
@@ -1134,6 +1173,13 @@
     "Batch15: immediate continuation adds nine profiles and five historical/member associations, changes nine website-contact records (six new), seed v15. Oswestry country corrected to England with dual-affiliation context. All twelve workflows for prior b41907d passed. Hourly automation confirmed enabled, not duplicated. Directory dates unchanged.",
     "Batch16 adds 20 profiles and 11 historical associations, with 19 website-contact records changed (nine new). Main inspected at 464292e: no overlapping club data changes. Corrected Bolton/Bebington/Consett/Irish/NI towns and Border Harriers postcode. Seed v16. No directory date refresh or production publication. Exact-commit workflow and preview evidence belongs in draft PR #680.",
     "Batch17 adds 20 profiles and nine historical/coaching associations, with 20 website-contact records changed (14 new). Main inspected at 763eb52; unrelated athlete and club-results route work preserved. Recovered Bridport and Peninsula websites, corrected Bourton town, clarified seven multi-venue addresses and Peninsula junior availability. Seed v17. All twelve preceding b0d8d3e workflows passed. No directory-date refresh or production publication. Exact-commit workflow and preview evidence is recorded in draft PR #680.",
-    "Batch18:20 profiles,14 historical/founder associations,20 website-contact records changed(12new), seedv18. Actual374/1737 biographies,187notable entries; directorydates unchanged. Jersey country clarified; CalneSMaRTT multisport and BADRAT running-only corrected. TwoBarrow candidates deferred. Main730712f inspected; no overlapping club-data changes. Draft-only."
-  ]
+    "Batch18:20 profiles,14 historical/founder associations,20 website-contact records changed(12new), seedv18. Actual374/1737 biographies,187notable entries; directorydates unchanged. Jersey country clarified; CalneSMaRTT multisport and BADRAT running-only corrected. TwoBarrow candidates deferred. Main730712f inspected; no overlapping club-data changes. Draft-only.",
+    "Batch19 adds ten profiles and five sourced notable associations; ten contact records updated (four new). Research read 14 October. The smaller batch accompanies release reconciliation and validation of the previously completed 374 profiles. Publication approval does not alter representative verification, athlete identities or privacy."
+  ],
+  "previousPullRequest": 680,
+  "productionAuthorization": {
+    "date": "2026-10-14",
+    "instruction": "can you publish all and continue please",
+    "releasePullRequest": 680
+  }
 }

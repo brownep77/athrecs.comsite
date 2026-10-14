@@ -6,10 +6,10 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 807 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 581 clubs: 566 publish an email address and 76 a telephone number. There are 996 contact entries in total, including named directory contacts with no direct email or telephone.
-- 972 clubs have social links, with 1,986 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 374 clubs have extended, individually written profiles (21.5% of the catalogue). These contain 187 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
+- Website research contributes contact pages or contact/social details for 811 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The merged catalogue has contact entries for 588 clubs: 573 publish an email address and 77 a telephone number. There are 1,010 contact entries in total, including named directory contacts with no direct email or telephone.
+- 973 clubs have social links, with 1,987 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
+- 384 clubs have extended, individually written profiles (22.1% of the catalogue). These contain 192 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
 The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. That batch did not change contact or social coverage.
 
@@ -217,11 +217,25 @@ Barrow Harriers and Barrow Valley remain deferred because the opened primary evi
 
 Main was inspected at 730712f; its newer work does not overlap these club data. All twelve workflows for preceding commit bd5b1d8 pass. Source coverage, contact evidence, catalogue/profile and directory checks, targeted lint, TypeScript, catalogue/slug checks and the build pass locally, with publication hooks skipped. Club-only seed v18. Exact-commit Club profiles desktop/mobile evidence and the matching AthRecs preview are recorded in draft PR #680 after the guarded branch update. No production publication.
 
+## Nineteenth editorial batch and publication authorisation — 14 October 2026 UTC
+
+Paul explicitly authorised publication of the completed club-profile work with “can you publish all and continue please”. PR #680 covers the first 374 profiles. Its release branch was reconciled with main 730712f in commit 8b0231c, preserving newer public club result counts, athlete-page changes and homepage work. The twelve checks on 38c7352 passed; the reconciled release's final workflow and production status are recorded in PR #680. Do not infer publication from this audit entry alone.
+
+This continuation adds ten profiles: Askern District, Barnet & District, Bearbrook Running & Triathlon, Beccles Triathlon, Caistor, Calder Valley Fell Runners, Candy Racing, Capel Cheetahs, Brothers Pearse and Dragons Running Club (Aberdare). It adds five sourced notable associations: Will Morris, Holly Page, Anne Johnson, Dougie Zinis and Dale Seddon. Ten website-contact records change, four new. Actual merged coverage is 384/1,737 extended biographies (22.1%), 192 notable entries, 588 contact-covered clubs (1,010 entries), 573 with email, 77 with phone, and 973 with 1,987 social links. Website-contact records total 811. Directory comparison dates remain unchanged.
+
+Barnet's base is corrected from its Potters Bar directory address to New Barnet Leisure Centre, with Trent Park and StoneX sessions described separately. Caistor is corrected from South Kelsey to Caistor Sports and Social Club, and its adult-only membership is distinguished from supervised child guests. Capel St Mary and Mytholmroyd gain specific town labels. Brothers Pearse's Cherryfield Park base is distinguished from several school and community venues. Bearbrook and Candy have unconfirmed single-location text replaced by programme-specific notes. Cycling and swimming are retained where supported for Bearbrook and Beccles; unsupported multisport tags are removed from Askern and Barnet, and Candy's documented marathon programme is described as running.
+
+Askern's three legacy races are explicitly postponed; its 2026 Bentley announcement is historical rather than a promised upcoming date. Bearbrook's 2013 triathlon name change is not its founding year, and its informal cycling/swimming arrangements are not advertised as formal coached sessions. Candy's dated July 2025 intake and conflicting eligibility/affiliation terms are left for confirmation. Its remote cohort does not erase the club's Hackney base. Calder Valley's 1992 Pennine Way milestone is recorded historically without claiming an unverified current record. The Brothers Pearse detailed junior age guidance takes precedence over general history copy, and waiting lists are retained.
+
+Barnet's footer mailto placeholder and Capel's Wix social links are excluded. Beccles' welfare email is labelled for welfare only; general enquiries use its form. Existing sourced contacts and social links remain intact. Different Brothers Pearse social handles and Dragons' Hub/car-park meeting-point difference remain recorded gaps. No athlete identities, imported results, account access or privacy settings change. The checkpoint contains reviewed source gaps and a fresh unprofiled Irish/Welsh/regional English queue.
+
+Club-only seed v19. Catalogue/profile checks, targeted lint and TypeScript, source/contact assertions and the build are run for this continuation; final exact-commit workflow, local render and preview status are recorded in its PR. This smaller batch accompanies publication work on the preceding 374 profiles. The continuation remains staged until its release checks are complete.
+
 ## Maintenance files
 
 - `src/data/club-enrichment-a.ts` and `-b.ts`: directory fields and actual source comparison dates.
 - `src/data/club-website-contacts.ts`: accepted public contact/social discoveries and per-field provenance.
-- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-r.ts`: manually reviewed prose, sources and explicit corrections.
+- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-s.ts`: manually reviewed prose, sources and explicit corrections.
 - `docs/club-profile-checkpoint.json`: completed batch slugs, source gaps and next candidates. Check the live branch and profile map before resuming; the queue is not evidence that a club has been researched.
 - `scripts/audit-club-websites.mjs /absolute/scratch/output.json`: resumable read-only screening into a review queue. It never writes the catalogue.
 
