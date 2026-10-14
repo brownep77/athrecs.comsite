@@ -66,3 +66,21 @@ evidence-stripped fields and verification labels. Existing account-linked previe
 limits and owner opt-outs are unchanged. Page counts are computed after the
 existing visibility and hidden-result filters; out-of-range pages redirect to a
 real page rather than generating an empty indexable URL.
+
+The 14 October source-name review is implemented by
+`scripts/continue-tlm-alias-profiles.py`. It considers complete connected groups
+of retained source-name variants only when their previous holds concern names or
+club corroboration. Shared recorded city/state, gender, compatible exact source
+ages, distinct dates, valid placings and non-conflicting clubs remain required.
+Nicknames and spacing differences retain all recorded names as aliases. A
+one-edit spelling difference additionally requires an explicit private decision
+bound to the complete set of source-result keys. Neither route verifies a
+person's identity, infers a birth date or merges an existing profile.
+
+Use `verify-tlm-alias-review.py` for synthetic conflict cases, compare proposed
+records with the actual provider CSVs, and run the existing source-history schema
+validation. The previous private review must still match its live audit; public
+and held source keys must form the original complete partition. Preparation
+screens the current directory, and the existing publisher rechecks it under a
+transaction lock after a successful isolated rehearsal. Retain fresh source
+comparisons, spelling decisions, released keys and the remaining queue privately.
