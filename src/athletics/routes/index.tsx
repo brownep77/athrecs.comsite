@@ -4,6 +4,8 @@ import { ArrowRight, Search } from "lucide-react";
 import { RunningLanding, runningGuidesJsonLd } from "@/components/running/RunningLanding";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { countryCardStyle, neutralPastelCardStyle } from "@/lib/running/country-card-palette";
+import { HomepageAppearance, useHomepageTheme } from "@/components/running/HomepageAppearance";
+import { homepageCardStyle } from "@/lib/running/homepage-themes";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,6 +24,15 @@ export const Route = createFileRoute("/")({
 });
 
 function AthleteHomePage() {
+  return (
+    <HomepageAppearance>
+      <AthleteHomeContent />
+    </HomepageAppearance>
+  );
+}
+
+function AthleteHomeContent() {
+  const theme = useHomepageTheme();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   function search(event: FormEvent<HTMLFormElement>) {
@@ -77,7 +88,10 @@ function AthleteHomePage() {
               to="/athletes"
               search={{ country }}
               className="rounded-full border px-3 py-1.5 font-medium no-underline transition-shadow hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
-              style={palette ? countryCardStyle(palette) : neutralPastelCardStyle}
+              style={homepageCardStyle(
+                theme,
+                palette ? countryCardStyle(palette) : neutralPastelCardStyle,
+              )}
             >
               {label}
             </Link>
@@ -93,7 +107,7 @@ function AthleteHomePage() {
       <section
         id="how-it-works"
         className="scroll-mt-24 rounded-2xl border p-5 text-slate-900 sm:p-6"
-        style={{ ...neutralPastelCardStyle, color: "#0f172a" }}
+        style={homepageCardStyle(theme, { ...neutralPastelCardStyle, color: "#0f172a" }, "country")}
       >
         <h2 className="font-display text-2xl font-semibold">Your records, brought together</h2>
         <div className="mt-5 grid gap-5 md:grid-cols-3">
