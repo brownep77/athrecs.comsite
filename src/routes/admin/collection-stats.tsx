@@ -138,7 +138,7 @@ function CollectionStatsPage() {
             variant="secondary"
             disabled={report.isFetching}
             onClick={() => {
-              refreshRequested.current = true;
+              refreshRequested.current = !countryRaces;
               void report.refetch();
             }}
           >

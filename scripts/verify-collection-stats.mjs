@@ -621,6 +621,26 @@ try {
   await assert.rejects(() => read({ refresh: false }, "member-token"), /Forbidden/);
   const worker = await fetch(`${origin}/api/collection-stats-worker`);
   assert.equal(worker.status, 401);
+  const savedEnv = {
+    CRON_SECRET: process.env.CRON_SECRET,
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    VITE_SITE_BRAND: process.env.VITE_SITE_BRAND,
+  };
+  try {
+    process.env.CRON_SECRET = "synthetic-stats-worker-secret";
+    process.env.VERCEL_ENV = "production";
+    process.env.VITE_SITE_BRAND = "runrecs";
+    const secondary = await fetch(`${origin}/api/collection-stats-worker`, {
+      headers: { authorization: "Bearer synthetic-stats-worker-secret" },
+    });
+    assert.equal(secondary.status, 200);
+    assert.match((await secondary.json()).skipped, /AthRecs maintains/);
+  } finally {
+    for (const [key, value] of Object.entries(savedEnv)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  }
   console.log(
     "PASS: shared snapshot across filters, no athlete/history scans on cached reads, explicit refresh, rollback preservation and staff/worker access controls.",
   );
