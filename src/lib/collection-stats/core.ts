@@ -37,6 +37,7 @@ export const statsFilters = z
       .default("gender"),
   })
   .strict();
+export const statsRequest = statsFilters.extend({ refresh: z.boolean().default(false) });
 export type StatsFilters = z.infer<typeof statsFilters>;
 export const defaultStatsFilters = statsFilters.parse({});
 
@@ -57,6 +58,7 @@ export type ProfileStatsRow = ProfileCounts & {
 };
 export type StatsReport = {
   generatedAt: string;
+  profilesGeneratedAt: string;
   totals: RaceCounts & ProfileCounts;
   excluded: { eventAliases: number; testProfiles: number };
   races: {

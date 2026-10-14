@@ -1,28 +1,25 @@
 import type { Sql } from "../db";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication";
 import { statsFilters, type StatsReport } from "./core";
-import { countryNameAliases } from "../athrecs/country-flags";
-import {
-  profileEvidenceSportNames,
-  profileSportEvidencePredicateSql,
-} from "../athrecs/profile-sport-evidence";
-import { sourceNationalitySql, statedNationalitySql } from "./nationality.server";
-
-const nationalityAliases = JSON.stringify(countryNameAliases());
-const sportAliases = JSON.stringify(
-  Object.fromEntries(profileEvidenceSportNames.map((sport) => [sport.toLowerCase(), sport])),
-);
+import { readProfileSnapshot } from "./profile-snapshot.server";
+import { withDiscoveryRead } from "../athrecs/discovery-read.server";
 
 // Use stored geography only: nationality, club location and race location are
 // not evidence of an athlete's residence. Preserve UK home-nation distinctions.
 const known = (column: string) =>
   `case when lower(trim(coalesce(${column},''))) in ('','unknown','u','n/a','not known','unspecified') then 'Unknown' else trim(${column}) end`;
 
-/** One read-only statement gives totals, filters and tables the same snapshot. */
-export async function readCollectionStats(sql: Sql, input: unknown): Promise<StatsReport> {
+/** Race counts are live; all athlete filters share one dated aggregate snapshot. */
+export async function readCollectionStats(
+  sql: Sql,
+  input: unknown,
+  refresh = false,
+): Promise<StatsReport> {
   const f = statsFilters.parse(input);
-  const rows = await sql.query<{ report: StatsReport }>(
-    `with
+  const snapshot = await readProfileSnapshot(sql, refresh);
+  return withDiscoveryRead(sql, async (tx) => {
+    const rows = await tx.query<{ report: StatsReport }>(
+      `with
     event_base as materialized (
       select id, ${known("sport")} as sport, ${known("country")} as country,
         ${known("county")} as county from events
@@ -57,46 +54,10 @@ export async function readCollectionStats(sql: Sql, input: unknown): Promise<Sta
         count(distinct event_id) as events, count(distinct edition_id) as editions
       from selected_races group by 1,2,3,4
     ),
-    profile_identity as materialized (
-      select a.id, case
-        when lower(trim(gender)) in ('m','male','man') then 'Male'
-        when lower(trim(gender)) in ('f','female','woman') then 'Female'
-        when lower(trim(gender)) in ('nb','non-binary','nonbinary','non binary') then 'Non-binary'
-        when lower(trim(coalesce(gender,''))) in ('','u','unknown','n/a','unspecified') then 'Unknown'
-        else trim(gender) end as gender,
-        ${known("a.country")} as country, ${known("a.county")} as county,
-        coalesce(nullif(${known("private.nationality")},'Unknown'), ${statedNationalitySql},
-          ${sourceNationalitySql("a.profile_details")}, nullif(${known("a.nation")},'Unknown'), 'Unknown') as raw_nationality,
-        (a.profile_visibility='public' or a.profile_type='Public figure') as is_public,
-        a.created_at >= now()-interval '7 days' as added_7d
-      from athletes a
-      left join athlete_account_links owner on owner.athlete_id=a.id and owner.status='active'
-      left join athlete_private_profiles private on private.user_id=owner.user_id
-      where not exists(select 1 from athrecs_test_athletes t where t.athlete_id=a.id)
-        and coalesce(a.profile_details->>'syntheticTest','false') <> 'true'
-    ),
-    profile_sport_evidence as (
-      select r.athlete_id, e.sport from results r
-        join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
-      union
-      select h.athlete_id, unnest(athlete_history_sports_v3(h.provider,h.performances))
-        from athlete_source_histories h
-      union
-      select a.id, unnest(athlete_profile_sports_v1(a.profile_details)) from athletes a
-        where ${profileSportEvidencePredicateSql()}
-      union
-      select owner.athlete_id, sp.sport_code from athlete_account_links owner
-        join athlete_sport_profiles sp on sp.user_id=owner.user_id where owner.status='active'
-    ),
-    profile_sports as (
-      select athlete_id, array_agg(distinct coalesce($15::jsonb->>lower(trim(sport)),trim(sport))) as sports
-      from profile_sport_evidence where ${known("sport")}<>'Unknown'
-      group by athlete_id
-    ),
     profile_base as materialized (
-      select p.*, coalesce($14::jsonb->>lower(regexp_replace(trim(raw_nationality),'[[:space:]]+',' ','g')),raw_nationality) as nationality,
-        coalesce(s.sports,array['Unknown']::text[]) as sports
-      from profile_identity p left join profile_sports s on s.athlete_id=p.id
+      select * from jsonb_to_recordset($14::jsonb->'groups') as p(
+        gender text,country text,county text,nationality text,sports text[],
+        profiles int,public_profiles int,added_7d int)
     ),
     selected_profiles as materialized (
       select * from profile_base where ($8='' or gender=$8)
@@ -109,21 +70,21 @@ export async function readCollectionStats(sql: Sql, input: unknown): Promise<Sta
         case when $11 in ('county','detail') then county end as county,
         sport,
         case when $11 in ('nationality','detail','sportGenderNationality') then nationality end as nationality,
-        count(distinct id) as profiles, count(distinct id) filter(where is_public) as "publicProfiles",
-        count(distinct id) filter(where added_7d) as "added7d"
+        sum(profiles) as profiles, sum(public_profiles) as "publicProfiles",
+        sum(added_7d) as "added7d"
       from selected_profiles cross join lateral unnest(case
         when $11 in ('sport','detail','sportGenderNationality') then sports else array[null::text] end) sport
       where $12='' or sport is null or sport=$12
       group by 1,2,3,4,5
     )
     select jsonb_build_object(
-      'generatedAt',now(),
+      'generatedAt',now(),'profilesGeneratedAt',$15::text,
       'totals',jsonb_build_object('events',(select count(*) from event_base),
-        'editions',(select count(*) from edition_base),'profiles',(select count(*) from profile_base),
-        'publicProfiles',(select count(*) from profile_base where is_public),
-        'added7d',(select count(*) from profile_base where added_7d)),
+        'editions',(select count(*) from edition_base),'profiles',(select coalesce(sum(profiles),0) from profile_base),
+        'publicProfiles',(select coalesce(sum(public_profiles),0) from profile_base),
+        'added7d',(select coalesce(sum(added_7d),0) from profile_base)),
       'excluded',jsonb_build_object('eventAliases',(select count(*) from events where slug=any($1::text[])),
-        'testProfiles',(select count(*) from athletes)-(select count(*) from profile_base)),
+        'testProfiles',($14::jsonb->>'excluded')::int),
       'races',jsonb_build_object(
         'totals',(select jsonb_build_object('events',count(distinct event_id),'editions',count(distinct edition_id)) from selected_races),
         'rows',coalesce((select jsonb_agg(r order by
@@ -137,11 +98,11 @@ export async function readCollectionStats(sql: Sql, input: unknown): Promise<Sta
           'country',count(distinct event_id) filter(where country='Unknown'),
           'county',count(distinct event_id) filter(where county='Unknown')) from selected_races)),
       'profiles',jsonb_build_object(
-        'totals',(select jsonb_build_object('profiles',count(*),'publicProfiles',count(*) filter(where is_public),'added7d',count(*) filter(where added_7d)) from selected_profiles),
+        'totals',(select jsonb_build_object('profiles',coalesce(sum(profiles),0),'publicProfiles',coalesce(sum(public_profiles),0),'added7d',coalesce(sum(added_7d),0)) from selected_profiles),
         'rows',coalesce((select jsonb_agg(p order by profiles desc,sport,gender,nationality,country,county) from profile_groups p),'[]'::jsonb),
-        'gaps',(select jsonb_build_object('sport',count(*) filter(where sports=array['Unknown']::text[]),
-          'nationality',count(*) filter(where nationality='Unknown'),'gender',count(*) filter(where gender='Unknown'),
-          'country',count(*) filter(where country='Unknown'),'county',count(*) filter(where county='Unknown')) from selected_profiles)),
+        'gaps',(select jsonb_build_object('sport',coalesce(sum(profiles) filter(where sports=array['Unknown']::text[]),0),
+          'nationality',coalesce(sum(profiles) filter(where nationality='Unknown'),0),'gender',coalesce(sum(profiles) filter(where gender='Unknown'),0),
+          'country',coalesce(sum(profiles) filter(where country='Unknown'),0),'county',coalesce(sum(profiles) filter(where county='Unknown'),0)) from selected_profiles)),
       'options',jsonb_build_object(
         'sports',coalesce((select jsonb_agg(v order by v) from (select distinct sport v from event_base) x),'[]'::jsonb),
         'distances',coalesce((select jsonb_agg(v order by v) from (select distinct distance v from race_base) x),'[]'::jsonb),
@@ -155,24 +116,25 @@ export async function readCollectionStats(sql: Sql, input: unknown): Promise<Sta
         'profileCounties',coalesce((select jsonb_agg(v order by v) from (select distinct county v from profile_base where $9='' or country=$9) x),'[]'::jsonb)
       )
     ) as report`,
-    [
-      retainedFixtureAliasSlugs,
-      f.sport,
-      f.distance,
-      f.raceCountry,
-      f.raceCounty,
-      f.year,
-      f.raceGroup,
-      f.gender,
-      f.profileCountry,
-      f.profileCounty,
-      f.profileGroup,
-      f.profileSport,
-      f.nationality,
-      nationalityAliases,
-      sportAliases,
-    ],
-  );
-  if (!rows[0]?.report) throw new Error("Collection stats are unavailable");
-  return rows[0].report;
+      [
+        retainedFixtureAliasSlugs,
+        f.sport,
+        f.distance,
+        f.raceCountry,
+        f.raceCounty,
+        f.year,
+        f.raceGroup,
+        f.gender,
+        f.profileCountry,
+        f.profileCounty,
+        f.profileGroup,
+        f.profileSport,
+        f.nationality,
+        JSON.stringify(snapshot.payload),
+        snapshot.generated_at,
+      ],
+    );
+    if (!rows[0]?.report) throw new Error("Collection stats are unavailable");
+    return rows[0].report;
+  });
 }

@@ -1,3 +1,4 @@
+import { withDiscoveryRead } from "../athrecs/discovery-read.server";
 import type { Sql } from "../db";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication";
 import {
@@ -17,14 +18,14 @@ const start = `((now() at time zone 'Europe/London')::date-($3::int-1))::timesta
 const today = `(now() at time zone 'Europe/London')::date`;
 const athleteLink = (v: string) => `'/admin/athletes/'||${v}::text`;
 const base = `params as (select $1::text[], $2::text, $3::int, $4::text, $5::int),
- a as (select a.id,a.display_name,a.gender,a.country,a.county,a.club_id,a.second_club_id,a.parent_athlete_id,a.profile_details,a.nation,a.created_at,a.source_club_name from athletes a where not exists(select 1 from athrecs_test_athletes t where t.athlete_id=a.id)
+ a as not materialized (select a.id,a.display_name,a.gender,a.country,a.county,a.club_id,a.second_club_id,a.parent_athlete_id,a.profile_details,a.nation,a.created_at,a.source_club_name from athletes a where not exists(select 1 from athrecs_test_athletes t where t.athlete_id=a.id)
    and coalesce(a.profile_details->>'syntheticTest','false')<>'true'),
  e as (select id,slug,name,sport,country,county,website,created_at from events where not(slug=any($1::text[]))),
  d as (select d.id,d.event_id,d.event_date,d.distance_code,d.status,d.stats_created_at from editions d join e on e.id=d.event_id),
  r as (select r.id,r.athlete_id,r.edition_id,r.status,r.result_details,r.stats_created_at,r.result_source,r.source_url,r.bib, a.display_name athlete_name,e.name event_name,e.sport,e.country,d.distance_code,d.event_date
    from results r join a on a.id=r.athlete_id join d on d.id=r.edition_id join e on e.id=d.event_id
    where coalesce(r.result_details->>'syntheticTest','false')<>'true'),
- histories as (select h.* from athlete_source_histories h join a on a.id=h.athlete_id),
+ histories as not materialized (select h.* from athlete_source_histories h join a on a.id=h.athlete_id),
  hcounts as (select h.athlete_id,count(*) n from histories h cross join lateral jsonb_array_elements(h.performances) p
    where coalesce(p->>'profileExcluded','false')<>'true' and coalesce(p->>'syntheticTest','false')<>'true' group by 1)`;
 const inventories = `jsonb_build_array(
@@ -504,39 +505,41 @@ const builders = {
 export async function readCollectionOperations(sql: Sql, input: unknown): Promise<OperationReport> {
   const f = operationInput.parse(input);
   const spec = builders[f.section](f);
-  const [row] = await sql.query<{
-    rows: OperationReport["rows"];
-    total: number;
-    metrics: OperationReport["metrics"];
-    generated: string;
-    tracking: string;
-  }>(
-    `
+  return withDiscoveryRead(sql, async (tx) => {
+    const [row] = await tx.query<{
+      rows: OperationReport["rows"];
+      total: number;
+      metrics: OperationReport["metrics"];
+      generated: string;
+      tracking: string;
+    }>(
+      `
  with ${base}${spec.ctes ? `,${spec.ctes}` : ""},
  report_rows as (${spec.rows}),
  filtered as materialized(select * from report_rows where $4='' or strpos(lower(label),lower($4))>0),
  page as (select * from filtered order by ${f.section === "growth" && f.group === "daily" ? "key desc" : "label,key"} limit ${operationPageSize} offset $5)
  select coalesce((select jsonb_agg(page) from page),'[]'::jsonb) rows,
  (select count(*) from filtered) total,${spec.metrics ?? "'[]'::jsonb"} metrics,now()::text generated,(select started_at::text from collection_stats_tracking) tracking`,
-    [retainedFixtureAliasSlugs, f.key, f.days, f.q, f.page * operationPageSize],
-  );
-  if (!row) throw new Error("Operations statistics are unavailable");
-  return {
-    title: operationSections[f.section],
-    description: spec.description,
-    notes: [
-      ...(spec.notes ?? []),
-      ...(f.section === "growth"
-        ? [
-            `Tracking when race dates and results were added or edited began on ${new Date(row.tracking).toLocaleString("en-GB", { timeZone: "Europe/London" })} (UK time).`,
-          ]
-        : []),
-    ],
-    columns: spec.columns,
-    rows: row.rows,
-    total: row.total,
-    page: f.page,
-    generatedAt: row.generated,
-    metrics: row.metrics,
-  };
+      [retainedFixtureAliasSlugs, f.key, f.days, f.q, f.page * operationPageSize],
+    );
+    if (!row) throw new Error("Operations statistics are unavailable");
+    return {
+      title: operationSections[f.section],
+      description: spec.description,
+      notes: [
+        ...(spec.notes ?? []),
+        ...(f.section === "growth"
+          ? [
+              `Tracking when race dates and results were added or edited began on ${new Date(row.tracking).toLocaleString("en-GB", { timeZone: "Europe/London" })} (UK time).`,
+            ]
+          : []),
+      ],
+      columns: spec.columns,
+      rows: row.rows,
+      total: row.total,
+      page: f.page,
+      generatedAt: row.generated,
+      metrics: row.metrics,
+    };
+  });
 }

@@ -45,7 +45,7 @@ async function read(data = {}, token, headers = {}) {
   const result = await runWithStartContext({ startOptions: {} }, () =>
     createClientRpc(rpcId)({
       method: "GET",
-      data,
+      data: { refresh: true, ...data },
       context: {},
       headers: {
         origin,
@@ -564,6 +564,86 @@ try {
   }
   const { verifyCollectionOperations } = await import("./verify-collection-operations.mjs");
   await verifyCollectionOperations({ server, sql, browser, origin });
+  // A filter change must use the stored aggregate, without scanning source histories.
+  const { readCollectionStats } = await server.ssrLoadModule(
+    "/src/lib/collection-stats/service.server.ts",
+  );
+  const { readProfileSnapshot } = await server.ssrLoadModule(
+    "/src/lib/collection-stats/profile-snapshot.server.ts",
+  );
+  const saved = await read({ refresh: true }, "stats-token");
+  const queries = [];
+  const traced = (db) =>
+    Object.assign((...args) => db(...args), {
+      query: (text, params) => {
+        queries.push(text);
+        return db.query(text, params);
+      },
+      transaction: (fn) => db.transaction((tx) => fn(traced(tx))),
+    });
+  const reused = await readCollectionStats(traced(sql), {});
+  assert.deepEqual(reused.profiles, saved.profiles);
+  assert.equal(reused.profilesGeneratedAt, saved.profilesGeneratedAt);
+  assert(
+    queries.every(
+      (q) =>
+        !/from athletes|athlete_source_histories|insert into collection_stats_snapshots/.test(q),
+    ),
+  );
+  const [athlete] = await sql.query(
+    "select id,country from athletes where coalesce(profile_details->>'syntheticTest','false')<>'true' and not exists(select 1 from athrecs_test_athletes t where t.athlete_id=athletes.id) limit 1",
+  );
+  await sql.query("update athletes set country='Snapshot regression country' where id=$1", [
+    athlete.id,
+  ]);
+  assert.deepEqual((await read({ refresh: false }, "stats-token")).profiles, saved.profiles);
+  const renewed = await read({ refresh: true }, "stats-token");
+  assert(renewed.options.profileCountries.includes("Snapshot regression country"));
+  await sql.query("update athletes set country=$2 where id=$1", [athlete.id, athlete.country]);
+  const stable = await readProfileSnapshot(sql, true);
+  const failing = Object.assign((...args) => sql(...args), {
+    query: (...args) => sql.query(...args),
+    transaction: (fn) =>
+      sql.transaction((tx) =>
+        fn(
+          Object.assign((...args) => tx(...args), {
+            query: (q, params) => {
+              if (q.includes("insert into collection_stats_snapshots"))
+                throw new Error("Synthetic refresh failure");
+              return tx.query(q, params);
+            },
+          }),
+        ),
+      ),
+  });
+  await assert.rejects(() => readProfileSnapshot(failing, true), /Synthetic refresh failure/);
+  assert.deepEqual(await readProfileSnapshot(sql), stable);
+  await assert.rejects(() => read({ refresh: false }, "member-token"), /Forbidden/);
+  const worker = await fetch(`${origin}/api/collection-stats-worker`);
+  assert.equal(worker.status, 401);
+  const savedEnv = {
+    CRON_SECRET: process.env.CRON_SECRET,
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    VITE_SITE_BRAND: process.env.VITE_SITE_BRAND,
+  };
+  try {
+    process.env.CRON_SECRET = "synthetic-stats-worker-secret";
+    process.env.VERCEL_ENV = "production";
+    process.env.VITE_SITE_BRAND = "runrecs";
+    const secondary = await fetch(`${origin}/api/collection-stats-worker`, {
+      headers: { authorization: "Bearer synthetic-stats-worker-secret" },
+    });
+    assert.equal(secondary.status, 200);
+    assert.match((await secondary.json()).skipped, /AthRecs maintains/);
+  } finally {
+    for (const [key, value] of Object.entries(savedEnv)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  }
+  console.log(
+    "PASS: shared snapshot across filters, no athlete/history scans on cached reads, explicit refresh, rollback preservation and staff/worker access controls.",
+  );
 } finally {
   await browser?.close();
   await database?.close();

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CollectionOperations } from "@/components/staff/CollectionOperations";
 import { WebsiteStats } from "@/components/staff/WebsiteStats";
 import { createFileRoute } from "@tanstack/react-router";
@@ -58,9 +58,14 @@ function CollectionStatsPage() {
     useState<StatsFilters["raceGroup"]>("countryDistance");
   const countryRaces = section === "races";
   const filters = countryRaces ? { ...savedFilters, raceGroup: countryRaceGroup } : savedFilters;
+  const refreshRequested = useRef(false);
   const report = useQuery({
     queryKey: ["collection-stats", filters],
-    queryFn: () => getCollectionStats({ data: filters }),
+    queryFn: () => {
+      const refresh = refreshRequested.current;
+      refreshRequested.current = false;
+      return getCollectionStats({ data: { ...filters, refresh } });
+    },
     staleTime: 60_000,
     retry: false,
     enabled: section === "collection" || countryRaces,
@@ -132,7 +137,10 @@ function CollectionStatsPage() {
           <Button
             variant="secondary"
             disabled={report.isFetching}
-            onClick={() => void report.refetch()}
+            onClick={() => {
+              refreshRequested.current = !countryRaces;
+              void report.refetch();
+            }}
           >
             <RefreshCw
               className={`size-4 ${report.isFetching ? "animate-spin" : ""}`}
@@ -201,6 +209,18 @@ function CollectionStatsPage() {
             </div>
           ) : null}
 
+          {report.isFetching && data ? (
+            <p role="status" className="text-sm text-slate-600">
+              Updating counts… You can keep viewing the previous counts below.
+            </p>
+          ) : null}
+          {data &&
+          !countryRaces &&
+          Date.now() - Date.parse(data.profilesGeneratedAt) > 15 * 60_000 ? (
+            <p role="status" className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm">
+              Athlete counts are more than 15 minutes old. Use Refresh counts to update them.
+            </p>
+          ) : null}
           {data ? (
             <>
               {!countryRaces ? (
@@ -231,12 +251,17 @@ function CollectionStatsPage() {
                     />
                   </div>
                   <p className="text-xs text-slate-600">
-                    Whole catalogue totals stay unchanged by filters. Snapshot:{" "}
+                    Whole catalogue totals stay unchanged by filters. Race counts checked:{" "}
                     {new Date(data.generatedAt).toLocaleString("en-GB", {
                       timeZone: "Europe/London",
                     })}{" "}
-                    (UK time). {number(data.excluded.eventAliases)} known duplicate event aliases
-                    and {number(data.excluded.testProfiles)} fictional test profiles excluded.
+                    (UK time). Athlete counts updated:{" "}
+                    {new Date(data.profilesGeneratedAt).toLocaleString("en-GB", {
+                      timeZone: "Europe/London",
+                    })}{" "}
+                    (UK time), normally updated every five minutes.{" "}
+                    {number(data.excluded.eventAliases)} known duplicate event aliases and{" "}
+                    {number(data.excluded.testProfiles)} fictional test profiles excluded.
                   </p>
                 </>
               ) : null}
@@ -452,7 +477,7 @@ function CollectionStatsPage() {
                     headers={[...profileColumns, "Profiles", "Marked public", "Added in 7 days"]}
                     rows={profileRows}
                     file="profile-collection-stats"
-                    generatedAt={data.generatedAt}
+                    generatedAt={data.profilesGeneratedAt}
                     filters={filters}
                   />
                   <Gaps

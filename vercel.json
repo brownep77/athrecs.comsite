@@ -570,6 +570,10 @@
     {
       "path": "/api/signup-alerts",
       "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/collection-stats-worker",
+      "schedule": "*/5 * * * *"
     }
   ]
 }
