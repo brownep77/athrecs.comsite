@@ -132,3 +132,26 @@ Run `python3 scripts/verify-tlm-same-name-review.py` alongside the earlier disti
 review checks. Recompare the actual provider CSV rows, prepare against production,
 then create the isolated review branch so its directory snapshot includes the
 prepared fingerprint. Rehearse and check replay before authorized publication.
+
+## Reviewing recorded place variants
+
+`scripts/continue-tlm-place-profiles.py` reviews complete exact-name groups held
+only for missing club corroboration. Each source-key-bound decision records the
+two exact city/state strings and the reviewed relationship: a directional
+abbreviation, a reviewed one-edit spelling difference, or an official municipality
+mapping from the bounded reference list. Municipality matching compares towns,
+not exact addresses or villages. Different towns, missing places and mismatched
+states remain unresolved.
+
+Only the literal city-string requirement changes. Exact recorded name components,
+compatible reported ages, gender, distinct dates, non-conflicting clubs, adult
+source ages and valid placings remain required. Source rows are never edited to
+pass; the interpretation and geography references remain private audit evidence.
+The full current directory and live transaction checks still prevent attaching
+results to an existing profile or account. New profiles remain provisional.
+
+Run `python3 scripts/verify-tlm-place-review.py`, then compare fresh provider CSVs,
+validate every history against the application schema, and rehearse the immutable
+plan on a branch created after the production-directory screen. Recheck stored
+values and replay, publish the authorized batch, then check every new public page
+and sitemap entry. Preserve the previous audit and complete held/public partition.
