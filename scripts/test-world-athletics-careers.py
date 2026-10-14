@@ -8,6 +8,9 @@ import unittest
 spec = importlib.util.spec_from_file_location('collector', pathlib.Path(__file__).with_name('collect-world-athletics-careers.py'))
 collector = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(collector)
+spec2 = importlib.util.spec_from_file_location('reconciler', pathlib.Path(__file__).with_name('reconcile-world-athletics-careers.py'))
+reconciler = importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(reconciler)
 
 
 class CareerEvidenceTests(unittest.TestCase):
@@ -63,10 +66,61 @@ class CareerEvidenceTests(unittest.TestCase):
         self.season['resultsByEvent']=[]
         self.assertFalse(self.build({'2024':self.season})['complete'])
 
+    def test_unc_is_held_even_when_source_not_legal_flag_is_false(self):
+        self.raw.update({'remark':'UNC','notLegal':False})
+        row = self.build({'2024':self.season})['performances'][0]
+        self.assertTrue(row['profileExcluded'])
+        self.assertEqual(row['verificationStatus'],'unverified')
+        self.assertEqual(row['performance'],'10.037')
+
     def test_year_only_result_date_is_not_invented(self):
         self.raw['date']='2024'
         with self.assertRaisesRegex(ValueError,'Unrecognised source date'):
             self.build({'2024':self.season})
+
+
+class ExistingResultTests(unittest.TestCase):
+    def setUp(self):
+        self.raw = {'date':'10 JUN 2024','mark':'31:56','place':'9.', 'race':'F',
+                    'competitionId':'456','eventId':'789','remark':''}
+        self.performance = collector.performance('10 Kilometres Road',self.raw,2024,
+            'https://worldathletics.org/athletes/test-123','123',1)
+        self.candidate = {'target':{'athlete_id':1},'history':{'externalId':'123',
+            'performances':[self.performance]},'originalRows':[{'sourceKey':'wa:123:2024:1',
+            'discipline':'10 Kilometres Road','row':self.raw}]}
+        self.record = {'athlete_id':1,'result_id':2,'event_slug':'synthetic-10k',
+            'event_date':'2024-06-10','distance_code':'10K','gender_place':9,'overall_place':None,
+            'result_visibility':'public','result_details':{'sourceRow':{
+                'sourceAthleteId':'123','url':'https://worldathletics.org/competition/calendar-results/results/456?eventId=789',
+                'raw':{'mark':'31:56','place':'9.'}},'profileExcluded':True,
+                'verificationStatus':'unverified'}}
+
+    def test_exact_overlap_preserves_restriction_and_links_event(self):
+        review=reconciler.reconcile(self.candidate,[self.record])
+        self.assertFalse(review['conflicts'])
+        self.assertEqual(self.performance['eventSlug'],'synthetic-10k')
+        self.assertTrue(self.performance['profileExcluded'])
+        self.assertEqual(self.performance['verificationStatus'],'unverified')
+
+    def test_changed_mark_blocks_publication(self):
+        self.record['result_details']['sourceRow']['raw']['mark']='31:57'
+        self.assertTrue(reconciler.reconcile(self.candidate,[self.record])['conflicts'])
+        self.assertNotIn('eventSlug',self.performance)
+
+    def test_wrong_source_identity_cannot_link(self):
+        self.record['result_details']['sourceRow']['sourceAthleteId']='124'
+        self.assertFalse(reconciler.reconcile(self.candidate,[self.record])['links'])
+        self.assertNotIn('eventSlug',self.performance)
+
+    def test_heat_is_not_merged_into_final(self):
+        self.raw['race']='H1'
+        self.assertTrue(reconciler.reconcile(self.candidate,[self.record])['conflicts'])
+
+    def test_private_result_remains_excluded(self):
+        self.record['result_details'].pop('profileExcluded')
+        self.record['result_visibility']='private'
+        reconciler.reconcile(self.candidate,[self.record])
+        self.assertTrue(self.performance['profileExcluded'])
 
 
 if __name__ == '__main__':

@@ -71,6 +71,19 @@ placings, dates, venues, countries, event IDs, junior implements, relays and
 non-finishes. Only literal duplicate source rows may be collapsed. A source
 verified result does not verify athlete identity.
 
+UNC (uncertified) marks stay in stored evidence with `profileExcluded=true` and
+`verificationStatus=unverified`, including when the source `notLegal` flag is false.
+Before publishing an existing profile, export all its recorded results, including
+private/excluded rows, with their event slug/date/distance and complete source-row
+details. Run `reconcile-world-athletics-careers.py --careers CAREERS
+--recorded-results RECORDED.json`. Inspect every conflict. The script requires an
+exact source athlete/competition/event identity plus date, road discipline, mark,
+round and placing before linking an existing event slug. It preserves exclusions,
+private visibility, unverified status and disqualifications. Do not waive a
+conflict merely to publish. Verify the combined profile timeline removes the
+reviewed overlaps and keeps held rows out. Re-read the stored records before
+production publication; rerun reconciliation if anything changed.
+
 Keep `candidate.json` (identity, honours, PB facts, original rows, source hash and
 capture date) in `source_evidence` when pausing. Mark a partial candidate
 `source_partial`; unsupported source format/access becomes `blocked` with the

@@ -24,6 +24,9 @@ def json_sql(value):
 def prepare(candidate, biography, new_review=None):
     h = candidate['history']
     is_new = not candidate['target']['athlete_id']
+    if not is_new:
+        review = candidate.get('recordedResultsReview')
+        assert review and not review['conflicts'], 'Existing results need an exact overlap and restriction review'
     if is_new:
         assert new_review and new_review['noExistingIdentity'], 'New identities need explicit duplicate review first'
         assert new_review['checkedNames'] and new_review['checkedAt'] and new_review['slug']

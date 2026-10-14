@@ -114,6 +114,7 @@ def performance(discipline, raw, year, source_url, external_id, ordinal):
         labels.append('Not legal')
     if re.search(r'\brelay\b|\d\s*x\s*\d', discipline, re.I):
         labels.append('Relay team result')
+    uncertified = bool(re.search(r'\bUNC\b', raw.get('remark') or '', re.I))
     key = f'wa:{external_id}:{year}:{ordinal}'
     return {
         'year': int(year), 'date': date, 'sourceDate': raw['date'], 'ageGroup': '',
@@ -121,8 +122,10 @@ def performance(discipline, raw, year, source_url, external_id, ordinal):
         'wind': str(raw.get('wind') or ''), 'place': str(raw.get('place') or '').rstrip('.'),
         'venue': raw.get('venue') or '', 'meeting': raw.get('competition') or '',
         'country': raw.get('country') or '', 'sourceUrls': [source_url], 'sourceKeys': [key],
-        'labels': labels, 'verificationStatus': 'source_verified',
-        'notes': ('Not legal. ' if raw.get('notLegal') else '') +
+        'labels': labels, 'verificationStatus': 'unverified' if uncertified else 'source_verified',
+        **({'profileExcluded': True} if uncertified else {}),
+        'notes': ('UNC: uncertified source performance; held from public profile and calculations. ' if uncertified else '') +
+            ('Not legal. ' if raw.get('notLegal') else '') +
             f'World Athletics athlete {external_id}; season {year}; source row {ordinal}; '
             f'competitionId={raw.get("competitionId")}; eventId={raw.get("eventId")}; '
             'placing retained for the stated round; exact source precision retained.',

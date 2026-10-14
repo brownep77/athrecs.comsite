@@ -3,6 +3,7 @@
 import datetime
 import json
 import pathlib
+import re
 import sys
 
 
@@ -42,6 +43,9 @@ def verify(path):
         assert not raw.get('race') or 'Round: ' + raw['race'] in row['labels']
         assert not raw.get('notLegal') or ('Not legal' in row['labels'] and 'Not legal.' in row['notes'])
         assert not raw.get('remark') or raw['remark'] in row['labels']
+        if re.search(r'\bUNC\b', raw.get('remark') or '', re.I):
+            assert row.get('profileExcluded') is True, 'Uncertified result cannot be republished'
+            assert row['verificationStatus'] == 'unverified'
     # Every original source row is represented or an exact duplicate of one that is.
     def source_fingerprint(event, row):
         return json.dumps([event,row], ensure_ascii=False, sort_keys=True)
