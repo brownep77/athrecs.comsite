@@ -80,7 +80,8 @@ def review_components(rows,held,decisions):
         if not flags: proposals.append((partitions,h['sourceKeys'],[witness],1))
     return proposals,reviewed
 
-def prepare(args, previous_batch=None, expected_profiles=17538, expected_results=18930, expected_held=22761):
+def prepare(args, previous_batch=None, expected_profiles=17538, expected_results=18930, expected_held=22761,
+            review_basis=None, evidence_field='separationEvidence'):
     cfg,query = t.base.connection(args.connection,args.confirm_branch,timeout=180)
     if cfg['projectId']!=t.PROJECT or cfg['branchId']!=t.PROD: raise ValueError('Screen production before rehearsal')
     rows,evidence,pages = prior.recover_and_compare(args.output,query)
@@ -100,9 +101,9 @@ def prepare(args, previous_batch=None, expected_profiles=17538, expected_results
             p=t.profile(source,evidence,pages)
             p['details']['archiveCreation'].update({'batchId':BATCH,'approvedAt':dt.datetime.now(dt.timezone.utc).isoformat(),
                 'instruction':'Continue supported public sporting results next to the athlete.',
-                'basis':'Privately reviewed separate source observations; same-programme entries with additional distinctions, or widely separated reported ages and different recorded locations. Identity remains provisional.',
+                'basis':review_basis or 'Privately reviewed separate source observations; same-programme entries with additional distinctions, or widely separated reported ages and different recorded locations. Identity remains provisional.',
                 'previousReviewAuditId':previous['id'],'reviewedComponentSourceKeys':sorted(keys),
-                'separationEvidence':witnesses,'originalSourceNameGroups':name_groups})
+                evidence_field:witnesses,'originalSourceNameGroups':name_groups})
             proposed.append(p)
     allowed=frozenset(k for p in proposed for n in p['details']['aliases'] for k in t.prep.name_keys(n))
     print(json.dumps({'phase':'directory_screen','candidateProfiles':len(proposed),'candidateResults':sum(len(p['performances']) for p in proposed)}),flush=True)
