@@ -1,3 +1,4 @@
+import { ResultVerificationInbox } from "@/components/staff/ResultVerificationInbox";
 import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import {
   EditorialAthleteOverview,
@@ -136,6 +137,11 @@ function StaffAthleteProfile() {
                 initiallyNewContact
               />
             </Suspense>
+          ) : null}
+          {profile.athlete.sources.length ? (
+            <ResultVerificationInbox
+              athleteIds={profile.athlete.sources.map((source) => source.id)}
+            />
           ) : null}
           <div id="messages" className="scroll-mt-20">
             <AthleteMessages

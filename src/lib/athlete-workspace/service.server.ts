@@ -1,3 +1,4 @@
+import { resultVerification } from "../athrecs/profile-result-presentation";
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { getSql, dbSource, type Sql } from "../db";
 import { IS_RUNRECS_SITE } from "../site-scope";
@@ -51,10 +52,11 @@ export async function workspace(athleteId: number | null, actor: Actor) {
   if(athleteId && !actor.staff && !linked.some(p=>p.id===athleteId)) throw new Error("Choose one of your linked athlete profiles.");
   const p=athleteId ? await profile(sql,athleteId) : null;
   const links=athleteId ? await owners(sql,athleteId) : [];
-  const stored=athleteId ? await sql<{id:number;race:string;date:string;distance:string;time:string;excluded:boolean;staffApproval:unknown}>`
+  const stored=athleteId ? await sql<{id:number;race:string;date:string;distance:string;time:string;excluded:boolean;verificationStatus:string|null;resultSource:string|null;syntheticTest:boolean;staffApproval:unknown}>`
     select r.id,e.name as race,ed.event_date::text as date,ed.distance_code as distance,
       coalesce(r.result_details->'timing'->>'finishText',case when r.finish_time_seconds is not null then
         lpad((r.finish_time_seconds/3600)::text,2,'0')||':'||lpad(((r.finish_time_seconds%3600)/60)::text,2,'0')||':'||lpad((r.finish_time_seconds%60)::text,2,'0') end,'') as time,
+      r.result_details->>'verificationStatus' as "verificationStatus",r.result_source as "resultSource",coalesce((r.result_details->>'syntheticTest')::boolean,false) as "syntheticTest",
       coalesce((r.result_details->>'profileExcluded')::boolean,false) as excluded,
       case when ${actor.staff} then coalesce(r.result_details->'staffApproval',
         (select jsonb_build_object('note',trim(a.before_value->>'evidenceFor'),
@@ -68,7 +70,8 @@ export async function workspace(athleteId: number | null, actor: Actor) {
       else null end as "staffApproval"
     from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
     where r.athlete_id=${athleteId} order by ed.event_date desc,r.id desc limit 5000` : [];
-  const results=stored.map(({staffApproval,...result})=>{
+  const results=stored.map(({staffApproval,verificationStatus,resultSource,...record})=>{
+    const result={...record,verified:resultVerification(verificationStatus??undefined,resultSource).verified};
     const approval=actor.staff?staffApprovalSchema.safeParse(staffApproval):null;
     return approval?.success?{...result,staffApproval:approval.data}:result;
   });

@@ -1,3 +1,5 @@
+import { VerifyResultButton } from "./VerifyResultButton";
+import { resultVerification } from "@/lib/athrecs/profile-result-presentation";
 import { ResultMedal } from "./ProfileAward";
 import { buildProfileAchievements } from "@/lib/athrecs/profile-achievements";
 import { CountryFlag } from "./CountryFlag";
@@ -445,14 +447,17 @@ function CompactResultList({
             onConfirm={() => onRemove(result.resultId)}
           />
         ) : (
-          <button
-            type="button"
-            disabled={busyResultId === result.resultId}
-            onClick={() => onAskRemove(result.resultId)}
-            className="min-h-8 text-xs text-red-700 hover:underline"
-          >
-            Remove
-          </button>
+          <div className="flex flex-wrap items-start gap-2">
+            <button
+              type="button"
+              disabled={busyResultId === result.resultId}
+              onClick={() => onAskRemove(result.resultId)}
+              className="min-h-8 text-xs text-red-700 hover:underline"
+            >
+              Remove
+            </button>
+            <ResultVerificationActions result={result} />
+          </div>
         )
       }
     />
@@ -515,6 +520,7 @@ function ResultCardGrid(props: ResultCollectionProps) {
               <Trash2 className="size-4" aria-hidden="true" />
               Remove
             </Button>
+            <ResultVerificationActions result={result} />
           </div>
           <ResultSourceLinks result={result} />
           {props.confirmingResultId === result.resultId ? (
@@ -598,4 +604,14 @@ function ResultSourceLinks({ result }: { result: AthleteResult }) {
       ))}
     </div>
   );
+}
+
+function ResultVerificationActions({ result }: { result: AthleteResult }) {
+  if (result.details?.syntheticTest) return null;
+  const verified = resultVerification(
+    result.details?.verificationStatus,
+    result.resultSource,
+    result.conflicting,
+  ).verified;
+  return <VerifyResultButton resultKey={`r:${result.resultId}`} verified={verified} />;
 }
