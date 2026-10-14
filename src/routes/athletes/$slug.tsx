@@ -7,6 +7,10 @@ import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
 import { publicAthleteSearchContent } from "@/lib/athrecs/public-athlete-search-content";
+import {
+  parsePublicAthleteResultSearch,
+  publicAthleteResultPath,
+} from "@/lib/athrecs/public-athlete-result-pages";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
@@ -56,18 +60,30 @@ import {
 } from "@/lib/athrecs/athlete-search-policy";
 
 export const Route = createFileRoute("/athletes/$slug")({
-  loader: async ({ params }) => {
+  validateSearch: parsePublicAthleteResultSearch,
+  loaderDeps: ({ search }) => ({ resultPage: search.resultsPage ?? 1 }),
+  loader: async ({ params, deps }) => {
     const preview =
-      (await getPublicAthletePreview({ data: params.slug })) ??
-      (await getPublicSharedProfilePreview({ data: { slug: params.slug } }));
-    if (preview && preview.slug !== params.slug && preview.searchIndexable) {
-      throw redirect({ to: "/athletes/$slug", params: { slug: preview.slug }, statusCode: 301 });
+      (await getPublicAthletePreview({
+        data: { slug: params.slug, resultPage: deps.resultPage },
+      })) ?? (await getPublicSharedProfilePreview({ data: { slug: params.slug } }));
+    const resultPage = preview?.resultPage ?? 1;
+    if (
+      preview &&
+      ((preview.slug !== params.slug && preview.searchIndexable) || deps.resultPage !== resultPage)
+    ) {
+      throw redirect({
+        to: "/athletes/$slug",
+        params: { slug: preview.slug },
+        search: resultPage > 1 ? { resultsPage: resultPage } : {},
+        statusCode: 301,
+      });
     }
     if (!preview && !IS_RUNRECS_SITE) {
       const slug = await resolvePublicAthleteSlugRedirect({ data: params.slug });
       if (slug) throw redirect({ to: "/athletes/$slug", params: { slug }, statusCode: 301 });
     }
-    if (!(await canViewAthleteProfiles())) {
+    if (deps.resultPage > 1 || !(await canViewAthleteProfiles())) {
       return preview
         ? { kind: "public-preview" as const, preview, searchIndexable: preview.searchIndexable }
         : { kind: "sign-in" as const };
@@ -139,7 +155,12 @@ export const Route = createFileRoute("/athletes/$slug")({
     const preview = loaderData && "preview" in loaderData ? loaderData.preview : null;
     const searchContent = preview ? publicAthleteSearchContent(preview) : null;
     return {
-      links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
+      links: [
+        {
+          rel: "canonical",
+          href: absoluteUrl(publicAthleteResultPath(params.slug, preview?.resultPage)),
+        },
+      ],
       meta: [
         {
           title: searchContent ? searchContent.title : `Athlete profile | ${SITE_NAME}`,
@@ -160,7 +181,10 @@ export const Route = createFileRoute("/athletes/$slug")({
           ? [
               { property: "og:title", content: searchContent.title },
               { property: "og:description", content: searchContent.description },
-              { property: "og:url", content: absoluteUrl(`/athletes/${params.slug}`) },
+              {
+                property: "og:url",
+                content: absoluteUrl(publicAthleteResultPath(params.slug, preview?.resultPage)),
+              },
               { name: "twitter:card", content: "summary" },
               { name: "twitter:title", content: searchContent.title },
               { name: "twitter:description", content: searchContent.description },
@@ -331,7 +355,9 @@ function AthleteContent() {
   const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
     isPublicProfileSource(link.url, link.label),
   );
-  const bio = athleteSearchContent({ athlete, profileResults, sourceHistories }).bio;
+  const bio =
+    (data.kind === "published-history" && data.publishedBiography) ||
+    athleteSearchContent({ athlete, profileResults, sourceHistories }).bio;
   const dob = formatDob(athlete.date_of_birth);
 
   const isPublicFigure = athlete.profile_type === "Public figure";
@@ -427,7 +453,16 @@ function AthleteContent() {
           ) : isPublicFigure ? (
             <Badge variant="accent">Public figure</Badge>
           ) : null}
-          <Badge variant="outline">
+          <Badge
+            variant="outline"
+            className={
+              athlete.gender === "M"
+                ? "border-blue-200 bg-blue-50 text-blue-900"
+                : athlete.gender === "F"
+                  ? "border-pink-200 bg-pink-50 text-pink-900"
+                  : undefined
+            }
+          >
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
           <Badge variant="outline">{performanceCount} recorded performances</Badge>
@@ -509,22 +544,16 @@ function AthleteContent() {
           coach={data.anzCoach}
         />
 
-        {(!career || profileResults.length > 0 || includedHistory) &&
-          (!isPublicFigure ||
-            profileResults.length > 0 ||
-            sourceHistories.length > 0 ||
-            includedHistory) && (
-            <ProfileRecordHighlights
-              compact
-              highlights={career?.achievements.filter(
-                (achievement) => "showOnBoard" in achievement && achievement.showOnBoard === true,
-              )}
-              results={profileResults}
-              reportedBests={includedHistory?.personalBests}
-              sourceHistories={sourceHistories}
-              sourceGender={athlete.gender}
-            />
+        <ProfileRecordHighlights
+          compact
+          highlights={career?.achievements.filter(
+            (achievement) => "showOnBoard" in achievement && achievement.showOnBoard === true,
           )}
+          results={profileResults}
+          reportedBests={includedHistory?.personalBests}
+          sourceHistories={sourceHistories}
+          sourceGender={athlete.gender}
+        />
       </section>
       <section
         id="results-history"

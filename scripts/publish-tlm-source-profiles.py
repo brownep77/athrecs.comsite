@@ -36,6 +36,13 @@ class CheckedDirectory(wmm.LiveDirectory):
         if current==self.fingerprint: return
         super().refresh()
 
+def publication_candidates(directory, profile):
+    matches=prep.matching(directory.index,profile['details']['aliases'])
+    for r in profile['performances']:
+        key={'event_title':r['meeting'],'result_year':r['year'],'bibnumber':r['archiveReference']['bib']}
+        for k in prep.result_keys(key): matches.update(directory.result_index.get(k,()))
+    return matches
+
 def group_flags(rows):
     flags=[]
     for r in rows:
@@ -128,12 +135,13 @@ def prepare(args):
     directory=wmm.LiveDirectory(query,allowed)
     eligible=[]; held=[]
     for name,rs in groups.items():
-        flags=group_flags(rs); candidates=prep.matching(directory.index,{r['name'] for r in rs})
+        flags=group_flags(rs); proposed=profile(rs,evidence,pages)
+        candidates=publication_candidates(directory,proposed)
         variants=prep.matching(source_index,{r['name'] for r in rs},name)
         if candidates: flags.append('possible_existing_athlete_or_account')
         if variants: flags.append('possible_source_name_variant')
         if flags: held.append({'name':rs[0]['name'],'sourceKeys':[r['sourceKey'] for r in rs],'reasons':sorted(set(flags)),'candidates':sorted(candidates),'sourceVariants':sorted(variants)})
-        else: eligible.append(profile(rs,evidence,pages))
+        else: eligible.append(proposed)
     summary={'batchId':BATCH,'sourceRows':len(rows),'sourceNameGroups':len(groups),'eligibleProfiles':len(eligible),
       'eligibleResultRecords':sum(len(p['performances']) for p in eligible),'heldNameGroups':len(held),
       'heldResultRecords':sum(len(h['sourceKeys']) for h in held),'holdReasons':dict(collections.Counter(reason for h in held for reason in h['reasons'])),
@@ -172,7 +180,7 @@ def apply(args):
         if not original: continue
         directory.refresh();batch=[]
         for p in original:
-            candidates=prep.matching(directory.index,p['details']['aliases'])
+            candidates=publication_candidates(directory,p)
             if candidates: held.append({'externalId':p['externalId'],'sourceKeys':[r['sourceKeys'][0] for r in p['performances']],'reasons':['live_directory_conflict'],'candidates':sorted(candidates)});continue
             batch.append(p)
         if not batch: continue

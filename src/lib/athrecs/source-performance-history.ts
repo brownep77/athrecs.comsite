@@ -41,6 +41,20 @@ export const sourcePerformanceSchema = z.object({
   profileExcluded: z.boolean().optional(),
   sourceDate: z.string(),
   ageGroup: z.string(),
+  // Older imports also used numbers or null for bibs. Keep those readable.
+  bib: z
+    .union([z.string(), z.number()])
+    .transform(String)
+    .pipe(z.string().max(40))
+    .optional()
+    .catch(undefined),
+  triathlonSplits: z
+    .object({
+      swim: z.string().regex(/^\d{1,3}:[0-5]\d:[0-5]\d(?:\.\d+)?$/),
+      bike: z.string().regex(/^\d{1,3}:[0-5]\d:[0-5]\d(?:\.\d+)?$/),
+      run: z.string().regex(/^\d{1,3}:[0-5]\d:[0-5]\d(?:\.\d+)?$/),
+    })
+    .optional(),
   discipline: z.string(),
   performance: z.string(),
   timing: performanceTimingSchema.optional(),

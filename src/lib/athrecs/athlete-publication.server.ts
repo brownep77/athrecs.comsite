@@ -1,6 +1,21 @@
 import type { Sql } from "../db";
 import { sourceHistorySchema } from "./source-performance-history.ts";
 
+/** A result publication does not publish free-text biographies. Require approval of this exact text. */
+export async function loadPublishedAthleteBiography(sql: Sql, athleteId: number) {
+  const [row] = await sql<{ bio: string }>`
+    select a.bio from athletes a
+    where a.id=${athleteId} and a.profile_visibility='public' and a.bio <> ''
+      and not exists (select 1 from athlete_account_links l where l.athlete_id=a.id)
+      and exists (select 1 from network_audit_log approval
+        where approval.action='athlete.biography_admin_published'
+          and approval.entity_type='athlete' and approval.entity_id=a.id::text
+          and approval.after_value->>'athleteId'=a.id::text
+          and approval.after_value->>'biography'=a.bio)
+  `;
+  return row?.bio ?? "";
+}
+
 /** Count the same published rows a public profile can display, including unverified ones. */
 export async function countPublishedSourceResults(sql: Sql, athleteIds: readonly number[]) {
   if (!athleteIds.length) return new Map<number, number>();

@@ -1,6 +1,7 @@
 import type { PublicAthletePreview } from "./public-athlete-preview";
 import { absoluteUrl, SITE_NAME } from "./seo.ts";
 import { publicAthleteNarrative, publicNationality } from "./public-athlete-narrative.ts";
+import { publicAthleteResultPath } from "./public-athlete-result-pages.ts";
 
 import { searchSnippet } from "./search-text.ts";
 export { searchSnippet } from "./search-text.ts";
@@ -60,7 +61,8 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
   const description = searchSnippet(
     `${identity || `${profile.displayName}'s athlete profile.`} ${resultsSummary}`,
   );
-  const url = absoluteUrl(`/athletes/${encodeURIComponent(profile.slug)}`);
+  const athleteUrl = absoluteUrl(publicAthleteResultPath(profile.slug));
+  const url = absoluteUrl(publicAthleteResultPath(profile.slug, profile.resultPage));
   return {
     title,
     description,
@@ -74,9 +76,9 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
       inLanguage: "en-GB",
       mainEntity: {
         "@type": "Person",
-        "@id": `${url}#athlete`,
+        "@id": `${athleteUrl}#athlete`,
         name: profile.displayName,
-        url,
+        url: athleteUrl,
         ...(nationality ? { nationality: { "@type": "Country", name: nationality } } : {}),
         ...(profile.club && !/^(?:unattached|unknown|tbc|n\/?a)$/i.test(profile.club.trim())
           ? {

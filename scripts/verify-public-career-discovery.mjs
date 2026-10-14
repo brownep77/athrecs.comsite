@@ -82,6 +82,37 @@ try {
   assert.equal(profile.response.status, 200);
   assert.equal(profile.$("meta[name=robots]").attr("content"), "index, follow");
   assert.equal(profile.$("#results-history tbody tr").length, 5);
+  assert.equal(
+    profile.$('a[rel="next"]').attr("href"),
+    "/athletes/career-test-runner?resultsPage=2",
+  );
+  const older = await get("/athletes/career-test-runner?resultsPage=2");
+  assert.equal(older.response.status, 200);
+  assert.equal(older.$("#results-history tbody tr").length, 3);
+  assert.equal(older.$("meta[name=robots]").attr("content"), "index, follow");
+  assert.equal(
+    older.$("link[rel=canonical]").attr("href"),
+    "https://www.athrecs.com/athletes/career-test-runner?resultsPage=2",
+  );
+  assert.match(older.$("#results-history").text(), /Showing 6–8 of 8/);
+  assert(older.$('#results-history a[href="/athletes/career-test-runner"]').length);
+  for (const secret of [
+    "Private biography sentinel",
+    "Private evidence sentinel",
+    "Private Race Sentinel",
+  ]) {
+    assert(!older.html.includes(secret), `Later page leaked ${secret}`);
+  }
+  const tooFar = await fetch(origin + "/athletes/career-test-runner?resultsPage=999999", {
+    redirect: "manual",
+  });
+  assert.equal(tooFar.status, 301);
+  assert.equal(tooFar.headers.get("location"), "/athletes/career-test-runner?resultsPage=2");
+  for (const slug of ["career-unapproved", "missing-test-athlete"]) {
+    const hiddenPage = await get(`/athletes/${slug}?resultsPage=2`);
+    assert.equal(hiddenPage.response.status, 404);
+    assert(!hiddenPage.html.includes("Unapproved Sentinel"));
+  }
   assert.match(profile.$("#career-summary").text(), /Career Early Marathon/);
   assert.match(profile.$("#career-summary").text(), /2006/);
   assert.match(profile.$("#career-summary").text(), /Unverified record/);
@@ -169,6 +200,11 @@ try {
   );
   await sql`update athlete_public_shares set search_indexable=true where user_id='career-owner'`;
   assert.equal(await isApprovedAthleteIndexable(sql, athlete), true);
+  const sharedOlder = await fetch(origin + "/athletes/career-test-runner?resultsPage=2", {
+    redirect: "manual",
+  });
+  assert.equal(sharedOlder.status, 301, "Account-owned previews must retain their existing limit");
+  assert.equal(sharedOlder.headers.get("location"), "/athletes/career-test-runner");
   await sql`update athlete_public_shares set share_bio=false,share_club=false where user_id='career-owner'`;
   const noBio = await get("/athletes/career-test-runner");
   assert(!noBio.$("#profile-overview").text().includes("Selected recorded events"));
@@ -182,6 +218,9 @@ try {
   await sql`update athlete_public_shares set share_results=false where user_id='career-owner'`;
   assert.equal(await isApprovedAthleteIndexable(sql, athlete), false);
   assert.deepEqual(await readEventAthleteLinks(sql, "career-early-marathon"), []);
+  const withdrawnOlder = await get("/athletes/career-test-runner?resultsPage=2");
+  assert.equal(withdrawnOlder.response.status, 404);
+  assert(!withdrawnOlder.html.includes("Career Early Marathon"));
   await sql`update athlete_public_shares set share_results=true,enabled=false where user_id='career-owner'`;
   assert.equal(await isApprovedAthleteIndexable(sql, athlete), false);
   console.log(

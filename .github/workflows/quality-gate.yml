@@ -63,6 +63,9 @@ jobs:
           node scripts/verify-athlete-discovery-pagination.mjs
           node scripts/verify-public-career-discovery.mjs
 
+      - name: Achievement progress and public profile pagination
+        run: node --experimental-strip-types scripts/verify-achievement-progress.mjs
+
       - name: Verify indexing recovery and archive privacy
         run: node scripts/verify-indexing-recovery.mjs
 
@@ -91,6 +94,9 @@ jobs:
 
       - name: Club directory and representative registration
         run: npm run verify:club-registration && npm run verify:club-registration-browser && npm run verify:club-registration-flow
+
+      - name: Published result counts on club profiles
+        run: node scripts/verify-club-result-counts.mjs
 
       - name: Verified fixture file import browser check
         run: node scripts/verify-fixture-upload-ui.mjs
@@ -257,13 +263,13 @@ jobs:
               "$GITHUB_WORKSPACE/artifacts/sportsrecs-mobile.png"
 
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||in one profile.||Find an athlete||Your next event starts here' \
+          BROWSER_SMOKE_EXPECT_TEXT='Road marathons by country||Road half marathons by country||Find an athlete||Build my profile' \
           BROWSER_SMOKE_REJECT_TEXT='Upcoming athletics||Event calendar||Browse verified athletics fixtures' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home.png"
           BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
           BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||Find an athlete||Find events' \
+          BROWSER_SMOKE_EXPECT_TEXT='Road marathons by country||Find an athlete||Find my results' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home-mobile.png"
           BROWSER_SMOKE_EXPECT_TEXT='Explore athlete profiles||Sport in results' \
           BROWSER_SMOKE_REJECT_TEXT='Sign in to view athlete profiles' \

@@ -41,3 +41,94 @@ previews separately from unlisted shared account profiles and private archives.
 Public availability is not, by itself, proof of unrestricted reuse: factual
 records, database rights and personal-data processing are distinct questions.
 This workflow records the owner's instruction without asserting legal clearance.
+
+## Continuing the club-only hold queue
+
+`scripts/continue-tlm-source-profiles.py` reviews only groups whose original
+hold was a missing consistent club. It rechecks all 41,691 source rows against
+the retained original CSV bytes and compares the previously published histories
+with those rows. Repeated records must have identical source name components,
+gender and recorded city/state, compatible exact reported-age intervals and
+distinct race dates, with no conflicting clubs. Location and age evidence stays
+private; no nationality or birthday is inferred. The current directory and
+canonical event/year/bib observations are screened again. Existing people are
+never automatically merged or linked. The same immutable-plan, isolated-rehearsal,
+transactional fingerprint and source-capture guards apply before publication.
+
+Run `python3 scripts/verify-tlm-followup.py` and validate every planned history
+against `sourceHistorySchema`. Retain the original hold audit and append the
+follow-up outcome, including source keys that were released and those still held.
+
+Public profile result pages retain five performances per response and link older
+approved, unclaimed records with `?resultsPage=2` and subsequent page numbers.
+Each page is server rendered, uses its own canonical URL, and carries the same
+evidence-stripped fields and verification labels. Existing account-linked preview
+limits and owner opt-outs are unchanged. Page counts are computed after the
+existing visibility and hidden-result filters; out-of-range pages redirect to a
+real page rather than generating an empty indexable URL.
+
+The 14 October source-name review is implemented by
+`scripts/continue-tlm-alias-profiles.py`. It considers complete connected groups
+of retained source-name variants only when their previous holds concern names or
+club corroboration. Shared recorded city/state, gender, compatible exact source
+ages, distinct dates, valid placings and non-conflicting clubs remain required.
+Nicknames and spacing differences retain all recorded names as aliases. A
+one-edit spelling difference additionally requires an explicit private decision
+bound to the complete set of source-result keys. Neither route verifies a
+person's identity, infers a birth date or merges an existing profile.
+
+Use `verify-tlm-alias-review.py` for synthetic conflict cases, compare proposed
+records with the actual provider CSVs, and run the existing source-history schema
+validation. The previous private review must still match its live audit; public
+and held source keys must form the original complete partition. Preparation
+screens the current directory, and the existing publisher rechecks it under a
+transaction lock after a successful isolated rehearsal. Retain fresh source
+comparisons, spelling decisions, released keys and the remaining queue privately.
+
+## Distinguishing separate source observations
+
+`scripts/continue-tlm-distinct-profiles.py` reviews the next retained queue. Similar
+names are not necessarily aliases. A complete component can instead support
+separate provisional profiles when the original CSV contains distinct entries in
+the same programme, with separate bibs and placings plus a material reported-age
+difference or different recorded gender. The other bounded route requires more
+than five years between compatible source-age intervals and different non-empty
+recorded locations for every pair of observations across the proposed profiles.
+These are source distinctions, not verified real-world identities.
+
+Within each profile, repeated observations still require identical recorded name
+components, city/state and gender, compatible ages and distinct dates. A two-row
+exact-name group may be separated only by the same-programme route, with no other
+identity holds or conflicting gender. Each accepted component also requires a
+private decision bound to all its source keys. Unresolved transitive variants,
+unknown/junior ages, invalid placings and possible existing identities stay held.
+No source name, age or location is repaired to qualify an observation.
+
+Run `python3 scripts/verify-tlm-distinct-review.py`, and use
+`node scripts/verify-tlm-followup-plan.mjs PRIVATE_DIRECTORY --allow-single-observation`
+for the actual history schema and source-field comparison. Recheck original and
+fresh provider CSVs, reconcile every public/held source key, and rehearse on an
+isolated branch. Publication uses one bounded atomic batch. A new directory
+conflict on either proposed sibling holds the entire reviewed component. Keep
+the prior audit, separation evidence and exact remaining queue in private storage.
+
+## Further exact-name review, 14 October 2026
+
+`scripts/continue-tlm-same-name-profiles.py` continues from the distinct-observation
+audit using a fixed previous public/held scope. Each private decision identifies
+all source rows in one held exact-name group and a complete, disjoint partition.
+Every partition retains the existing adult, finish, placing and corroboration
+checks; every pair requires independent source distinctions. Full current-directory
+screening and transactional sibling conflict checks still apply.
+
+Reported places need explicit review: a nickname, abbreviation or village name
+can refer to the same municipality. Known reviewed equivalences are rejected as
+location distinctions. Original locations and age observations remain private;
+the process does not infer residence or date of birth, confirm identities, or
+attach results to an existing athlete. Source-linked profiles remain unclaimed
+and performances remain unverified.
+
+Run `python3 scripts/verify-tlm-same-name-review.py` alongside the earlier distinct
+review checks. Recompare the actual provider CSV rows, prepare against production,
+then create the isolated review branch so its directory snapshot includes the
+prepared fingerprint. Rehearse and check replay before authorized publication.

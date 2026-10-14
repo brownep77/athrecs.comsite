@@ -1121,7 +1121,13 @@ const readAdministratorPublishedAthlete = createServerOnlyFn(
     if (!athlete) return null;
     const sharing = athlete.sharing;
     if (sharing && (!sharing.enabled || !sharing.share_results)) return null;
-    const profile = await readAthleteProfile(sql, athlete, true);
+    const { loadPublishedAthleteBiography } = await import("./athlete-publication.server");
+    const [profile, publishedBiography] = await Promise.all([
+      readAthleteProfile(sql, athlete, true),
+      sharing?.share_bio === false || athlete.has_account_link
+        ? Promise.resolve("")
+        : loadPublishedAthleteBiography(sql, athlete.id),
+    ]);
     const { results: legacyResults, ...publicProfile } = profile;
     void legacyResults;
     // The publication covers sporting results and basic athlete identity only.
@@ -1129,6 +1135,7 @@ const readAdministratorPublishedAthlete = createServerOnlyFn(
     return {
       ...publicProfile,
       shareBiography: sharing?.share_bio !== false,
+      publishedBiography,
       searchIndexable: athlete.search_indexable,
       athlete: {
         ...profile.athlete,
@@ -1168,7 +1175,10 @@ export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" }
   });
 
 export const getPublicAthletePreview = createServerFn({ method: "GET" })
-  .validator((slug: string) => slug)
+  .validator(async (input: string | { slug: string; resultPage?: number }) => {
+    const { parsePublicAthletePreviewInput } = await import("./public-athlete-result-pages");
+    return parsePublicAthletePreviewInput(input);
+  })
   .handler(async ({ data }) => {
     const started = performance.now();
     const { setResponseHeader } = await import("@tanstack/react-start/server");
@@ -1176,7 +1186,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
     setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     try {
       if (IS_RUNRECS_SITE) return null;
-      const identity = await readAthleteIdentity(await ready(), data, true);
+      const identity = await readAthleteIdentity(await ready(), data.slug, true);
       if (!identity) return null;
       // Choose the owner-shared path before hydrating a catalogue history that
       // would immediately be discarded. Approval and indexability are live reads.
@@ -1194,7 +1204,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
                 : null,
           };
       }
-      const profile = await readAdministratorPublishedAthlete(data, identity);
+      const profile = await readAdministratorPublishedAthlete(data.slug, identity);
       if (!profile) return null;
       const { buildPublicAthletePreview } = await import("./public-athlete-preview");
       const { getEditorialAthleteCareer } = await import("@/data/freddy-richardson");
@@ -1211,13 +1221,17 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
         nationalitySource: profile.athlete.nationality_source,
         sports: profile.athlete.sports,
         biography: profile.shareBiography
-          ? (career?.biography ?? [athleteSearchContent(profile).bio])
+          ? (career?.biography ?? [profile.publishedBiography || athleteSearchContent(profile).bio])
           : [],
         biographySources: profile.shareBiography ? career?.biographySources : [],
         results: profile.profileResults,
         histories: profile.sourceHistories,
         reportedRecords: getReportedRaceHistory(profile.athlete.slug)?.records,
         searchIndexable: profile.searchIndexable,
+        // Pagination exposes only this same evidence-stripped projection of
+        // approved unclaimed records. Owner-shared profiles retain their limit.
+        allowResultPagination: !identity.has_account_link,
+        resultPage: data.resultPage,
       });
     } finally {
       setResponseHeader(
@@ -1348,6 +1362,11 @@ export const getClubBySlug = createServerFn({ method: "GET" })
     `,
       [club.id],
     );
+    const visibleMembers = members.slice(0, 100);
+    const sourceCounts = await countPublishedSourceResults(
+      sql,
+      visibleMembers.map((member) => member.id),
+    );
     return {
       club: {
         ...club,
@@ -1357,7 +1376,10 @@ export const getClubBySlug = createServerFn({ method: "GET" })
         contacts: JSON.parse(club.contacts_json || "[]") as ClubContactInfo[],
         socials: JSON.parse(club.socials_json || "[]") as ClubSocialInfo[],
       },
-      members: members.slice(0, 100),
+      members: visibleMembers.map((member) => ({
+        ...member,
+        result_count: member.result_count + (sourceCounts.get(member.id) ?? 0),
+      })),
       moreMembers: members.length > 100,
     };
   });

@@ -21,6 +21,8 @@ import { achievementPalette } from "@/lib/athrecs/achievement-colours";
 import { careerAward, careerTier, type ProfileAwardKind } from "@/lib/athrecs/profile-awards";
 import type { CompetitionTier } from "@/lib/athrecs/competition-awards";
 import { ProfileAward } from "./ProfileAward";
+import { AchievementSummary } from "./AchievementSummary";
+import { buildProfileAchievementSummary } from "@/lib/athrecs/profile-achievement-summary";
 
 type BoardHighlight = {
   id: string;
@@ -450,8 +452,13 @@ export function ProfileRecordHighlights({
   showEvidence?: boolean;
   compact?: boolean;
 }) {
+  const summary = useMemo(
+    () => buildProfileAchievementSummary(results, sourceHistories),
+    [results, sourceHistories],
+  );
   return (
     <div className="space-y-4">
+      <AchievementSummary summary={summary} />
       <PersonalBestStrip
         results={results}
         reportedBests={reportedBests}
