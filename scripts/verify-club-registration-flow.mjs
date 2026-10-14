@@ -188,10 +188,50 @@ try {
     waitUntil: "networkidle",
     timeout: 120000,
   });
-  const analytics = page.getByRole("button", { name: "No thanks", exact: true });
-  if (await analytics.isVisible()) await analytics.click();
+  // A representative must be able to continue without deciding about analytics.
+  // Wait for hydration so a late consent panel cannot escape this regression.
+  await page.getByRole("heading", { name: "Help improve ATHRECS", exact: true }).waitFor();
+  await mkdir("artifacts", { recursive: true });
+  for (const viewport of [
+    { width: 320, height: 568 },
+    { width: 390, height: 844 },
+    { width: 768, height: 700 },
+    { width: 1023, height: 768 },
+    { width: 1280, height: 900 },
+  ]) {
+    await page.setViewportSize(viewport);
+    const next = page.getByRole("button", { name: "Continue", exact: true });
+    await next.click({ trial: true });
+    assert(
+      await next.evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return element.contains(
+          document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2),
+        );
+      }),
+      `Continue is unobscured at ${viewport.width}px without analytics consent`,
+    );
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    const primary = page
+      .getByRole("navigation", { name: "Primary", exact: true })
+      .filter({ visible: true });
+    await primary.getByRole("link", { name: "My profile", exact: true }).click({ trial: true });
+    if (viewport.width === 390 || viewport.width === 768)
+      await page.screenshot({
+        path: `artifacts/club-registration-consent-${viewport.width}.png`,
+        fullPage: true,
+      });
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByLabel("Your full name", { exact: true }).fill(details.representativeName);
+  await page.keyboard.press("Tab");
+  assert.equal(
+    await page
+      .getByLabel("Your role in the club", { exact: true })
+      .evaluate((el) => el === document.activeElement),
+    true,
+  );
   await page.getByLabel("Your role in the club", { exact: true }).fill(details.representativeRole);
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
   await page.getByRole("status").filter({ hasText: "Draft saved" }).waitFor();
@@ -210,6 +250,33 @@ try {
   for (const checkbox of await page.getByRole("checkbox").all()) await checkbox.check();
   await page.getByRole("button", { name: "Submit for verification", exact: true }).click();
   await page.getByRole("status").filter({ hasText: "Application submitted" }).waitFor();
+  assert.equal(await page.evaluate(() => localStorage.getItem("athrecs:analytics-consent")), null);
+  assert.equal(
+    (await sql`select count(*)::int n from site_analytics_events`)[0].n,
+    0,
+    "Completing registration without analytics consent sends no analytics",
+  );
+  await page.getByRole("button", { name: "No thanks", exact: true }).click();
+  const privacyChoices = page.getByRole("button", { name: "Review analytics privacy choices" });
+  assert.equal(await privacyChoices.evaluate((el) => el === document.activeElement), true);
+  await page.keyboard.press("Enter");
+  await page.getByRole("region", { name: "Help improve ATHRECS" }).waitFor();
+  await page.keyboard.press("Tab");
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Close privacy choices" })
+      .evaluate((el) => el === document.activeElement),
+    true,
+  );
+  await page.keyboard.press("Enter");
+  assert.equal(await privacyChoices.evaluate((el) => el === document.activeElement), true);
+  await page.reload({ waitUntil: "networkidle" });
+  await privacyChoices.waitFor();
+  assert.equal(await page.getByRole("heading", { name: "Help improve ATHRECS" }).count(), 0);
+  assert.equal(
+    await page.evaluate(() => localStorage.getItem("athrecs:analytics-consent")),
+    "denied",
+  );
   assert(
     await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
     "Mobile form has no overflow",

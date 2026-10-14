@@ -299,11 +299,28 @@ try {
     ...seed.matchAll(/`(on conflict \(edition_id, athlete_id\) do update set[\s\S]*?)`/g),
   ].map((m) => m[1]);
   assert.equal(clauses.length, 2);
-  for (const clause of clauses)
+  const preservedState = async () => ({
+    result: await sql`select * from results where id=${linked.resultId}`,
+    athlete: await sql`select * from athletes where id=${result.athlete_id}`,
+    references:
+      await sql`select * from result_source_references where result_id=${linked.resultId} order by source_url`,
+    history:
+      await sql`select * from result_change_history where result_id=${linked.resultId} order by id`,
+    source: await detail(entries[0].id),
+  });
+  const reviewedState = await preservedState();
+  assert.equal(reviewedState.result[0].finish_time_seconds, 1999);
+  for (const [index, clause] of clauses.entries()) {
     await sql.query(
       `insert into results(edition_id,athlete_id,status,finish_time_seconds) values($1,$2,'finished',9999) ${clause}`,
       [edition.id, result.athlete_id],
     );
+    assert.deepEqual(
+      await preservedState(),
+      reviewedState,
+      `Seed conflict path ${index + 1} preserves the entire reviewed result, identity and evidence`,
+    );
+  }
   const importerClause = readFileSync("src/lib/athrecs/results-import.server.ts", "utf8").match(
     /on conflict \(edition_id, athlete_id\) do update set[\s\S]*?returning id/,
   )[0];
@@ -311,11 +328,44 @@ try {
     `insert into results(edition_id,athlete_id,status,finish_time_seconds,source_url) values($1,$2,'finished',9999,'https://example.test/synthetic-race') ${importerClause}`,
     [edition.id, result.athlete_id],
   );
+  assert.deepEqual(
+    await preservedState(),
+    reviewedState,
+    "Same-source imports cannot overwrite reviewed corrections or their evidence",
+  );
+  // The guard must not disable ordinary catalogue/import reconciliation.
+  const [unreviewed] = await sql`insert into athletes(slug, display_name)
+    values('synthetic-unreviewed-control', 'Unreviewed Synthetic') returning id`;
+  await sql`insert into results(edition_id,athlete_id,status,finish_time_seconds,source_url)
+    values(${edition.id},${unreviewed.id},'finished',2000,'https://example.test/synthetic-race')`;
+  for (const clause of [...clauses, importerClause]) {
+    await sql`update results set finish_time_seconds=2000, source_url='https://example.test/synthetic-race'
+      where athlete_id=${unreviewed.id}`;
+    await sql.query(
+      `insert into results(edition_id,athlete_id,status,finish_time_seconds,source_url)
+       values($1,$2,'finished',1999,'https://example.test/synthetic-race') ${clause}`,
+      [edition.id, unreviewed.id],
+    );
+    assert.equal(
+      (await sql`select finish_time_seconds from results where athlete_id=${unreviewed.id}`)[0]
+        .finish_time_seconds,
+      1999,
+      "Unreviewed same-source corrections still reconcile",
+    );
+  }
+  const conflictingImport = await sql.query(
+    `insert into results(edition_id,athlete_id,status,finish_time_seconds,source_url)
+     values($1,$2,'finished',9999,'https://example.test/different-provider') ${importerClause}`,
+    [edition.id, unreviewed.id],
+  );
+  assert.equal(conflictingImport.length, 0, "Conflicting source imports still require review");
   assert.equal(
-    (await sql`select finish_time_seconds from results where id=${linked.resultId}`)[0]
+    (await sql`select finish_time_seconds from results where athlete_id=${unreviewed.id}`)[0]
       .finish_time_seconds,
     1999,
   );
+  await sql`delete from results where athlete_id=${unreviewed.id}`;
+  await sql`delete from athletes where id=${unreviewed.id}`;
   // A second provider can corroborate one canonical result without copying it.
   const second = await createDataset(edition.id, "Other Synthetic Timing", "other-source");
   await upload(second.id, [row("10", "Riley Synthetic", 1999.15)]);
