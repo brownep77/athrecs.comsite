@@ -1,7 +1,12 @@
 # Six-club research task — activation specification
 
-Status: prepared; not yet created. Activate after the feature is released and the
-six plans have been saved. Do not describe this file as an active schedule.
+Status: activated on 14 October 2026 after PR #724 deployed successfully and all
+six plans were saved. All six automatic scans started in production. The research
+task is enabled; activation does not claim that its first research pass has run.
+
+Task ID: `6acfc00280788191953bd4597605e0f6`. The returned schedule and activation
+record are also retained in private `club_collection_reviews` audits with action
+`research_task_activated`. Check the task and saved plans for current pause state.
 
 Title: **Research club results**
 
@@ -70,6 +75,14 @@ Do not claim whole-club or all-source completeness.
 
 Never contact clubs or athletes, send invitations or email, create accounts,
 change unrelated infrastructure, or merge/deploy code as part of this task.
+
+Rotate fairly: count a recorded failed attempt when choosing which club to
+research next, so an unavailable provider does not repeatedly block the other
+clubs. Retain the last successful checkpoint on failure and write a
+research_blocked audit with the attempted sources, reason and retry-after time.
+Prefer never-attempted clubs first, then the least recently attempted enabled
+club; use club_id as the tie-break. Do not retry the same blocked source within
+24 hours unless new evidence resolves it.
 
 ## Activation checks
 
