@@ -1,47 +1,57 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch15",
+  "lastEditorialBatch": "2026-10-14-batch16",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "ambleside-ac",
-    "astley-and-tyldesley-road-runners",
-    "billinge-running-club",
-    "billingham-marsh-hse-h-and-ac",
-    "billingham-running-club",
-    "oswestry-olympians",
-    "sospan-road-runners",
-    "welsh-athletics-3m-gorseinon-road-runners",
-    "athletics-ireland-ballintotis-fit4life-a-c"
+    "strabane-triathlon-club",
+    "templemore-triathlon-club",
+    "tri-limits-tc",
+    "achille-ratti-climbing-club",
+    "barrow-and-furness-striders-ac",
+    "belle-vue-racers",
+    "birkenhead-ac",
+    "birkenhead-park-running-club",
+    "birtley-ac",
+    "black-combe-runners",
+    "blackhill-bounders",
+    "blackley-north-manchester-ac",
+    "blackpool-wyre-and-fylde-ac",
+    "blaydon-harrier-and-ac",
+    "bolton-triathlon-club",
+    "border-harriers-and-ac",
+    "athletics-ireland-back-2-boston-running-club-a-c",
+    "athletics-ireland-ballinamore-a-c",
+    "athletics-ireland-ballycastle-a-c",
+    "welsh-athletics-albany-road-run-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 314,
-    "notableMemberEntries": 153,
-    "clubsWithContacts": 560,
-    "contactEntries": 959,
-    "clubsWithEmail": 546,
+    "extendedProfiles": 334,
+    "notableMemberEntries": 164,
+    "clubsWithContacts": 567,
+    "contactEntries": 970,
+    "clubsWithEmail": 553,
     "clubsWithPhone": 71,
-    "clubsWithSocials": 957,
-    "socialLinks": 1951,
-    "websiteContactRecords": 772
+    "clubsWithSocials": 960,
+    "socialLinks": 1963,
+    "websiteContactRecords": 781
   },
   "batchChanges": {
-    "extendedProfilesAdded": 9,
-    "notableMemberEntriesAdded": 5,
-    "contactOrSocialRecordsChanged": 9,
-    "newWebsiteContactRecords": 6,
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 11,
+    "contactOrSocialRecordsChanged": 19,
+    "newWebsiteContactRecords": 9,
     "directoryRecordsRefreshed": 0,
-    "countryCorrections": [
-      "oswestry-olympians"
-    ],
+    "countryCorrections": [],
     "unconfirmedAddressesReplacedByNotes": [
-      "billinge-running-club",
-      "oswestry-olympians",
-      "athletics-ireland-ballintotis-fit4life-a-c"
+      "black-combe-runners",
+      "athletics-ireland-back-2-boston-running-club-a-c",
+      "athletics-ireland-ballinamore-a-c",
+      "athletics-ireland-ballycastle-a-c"
     ]
   },
   "validationBeforeCommit": [
@@ -54,24 +64,29 @@
     "production build (publication hooks skipped)"
   ],
   "nextCandidateSlugs": [
-    "achille-ratti-climbing-club",
-    "aurora-harriers",
-    "barrow-and-furness-striders-ac",
-    "belle-vue-racers",
-    "birkenhead-ac",
-    "welsh-athletics-afan-nedd-tawe-schools-district",
-    "welsh-athletics-albany-road-run-club",
-    "athletics-ireland-back-2-boston-running-club-a-c",
-    "athletics-ireland-ballinamore-a-c",
-    "athletics-ireland-ballon-rathoe-a-c",
-    "athletics-ireland-ballybunnion-running-club-a-c",
-    "athletics-ireland-ballycastle-a-c",
-    "athletics-ireland-ballyduff-a-c"
+    "almost-athletes",
+    "angels-rc",
+    "avon-valley-runners",
+    "bere-alston-trekkers",
+    "bitton-road-runners",
+    "bodmin-running-club",
+    "bodmin-womens-rc",
+    "bourton-roadrunners-club",
+    "welsh-athletics-betsi-runaways",
+    "welsh-athletics-blaenau-gwent-athletics",
+    "welsh-athletics-cardiff-archers",
+    "welsh-athletics-cdf-runners",
+    "athletics-ireland-ballymore-cobh-a-c",
+    "athletics-ireland-ballymun-a-c",
+    "athletics-ireland-ballyskenach-a-c",
+    "athletics-ireland-ballyvolane-a-c",
+    "peninsula-triathlon-club",
+    "ventoux-triathlon-club"
   ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Resume the remaining North West/North East England, Welsh and Irish queue. Nine batch15 clubs are completed; do not repeat them. Rotate regions again once the remaining queue is assessed.",
+    "Do not repeat batch16 completed clubs. Rotate next to South West England, remaining Welsh community clubs, Irish athletics and Northern Ireland multisport. Queued candidates are not yet researched; revisit deferred sources only when new primary evidence is available.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -794,6 +809,126 @@
       "url": "https://ballintotis.com/local-groups-clubs/",
       "status": "club-distinct-from-race",
       "reason": "No club founding year or dependable current timetable established. Race organised by community council and East Cork AC, not evidence that its famous visitors belong to Fit4Life. Directory postcode also belongs to school in community page; precise venue left empty. Community council generic phone/email excluded."
+    },
+    {
+      "slug": "aurora-harriers",
+      "url": "http://auroraharriers.weebley.com/",
+      "status": "unavailable-and-name-collision",
+      "reason": "Listed URL returned 502; no confirmed replacement. New Zealand Aurora Harriers is a different club."
+    },
+    {
+      "slug": "boalloy-running-club",
+      "url": "https://www.alsagerfive.co.uk/about",
+      "status": "insufficient-primary-club-source",
+      "reason": "Current race page no longer mentions Boalloy. Council event and school notices do not establish substantive club history or joining arrangements."
+    },
+    {
+      "slug": "welsh-athletics-afan-nedd-tawe-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/afan-nedd-tawe-schools-district",
+      "status": "schools-district-scope",
+      "reason": "Directory supports disciplines, but no ordinary club joining programme. Welsh Schools umbrella socials are not district-specific."
+    },
+    {
+      "slug": "athletics-ireland-ballon-rathoe-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ballon_Rathoe_A.C.",
+      "status": "insufficient-primary-history",
+      "reason": "Mixed club and locality confirmed; old community-games pages insufficient for current club history, training or enquiries."
+    },
+    {
+      "slug": "athletics-ireland-ballybunnion-running-club-a-c",
+      "url": "https://www.discoverkerry.com/event/ballybunion-5k-colour-fun-run-2026/71473101/",
+      "status": "event-body-unavailable",
+      "reason": "Tourism page returned general shell, no event body. Senior-only directory listing insufficient for full biography. Preserve double-n canonical slug."
+    },
+    {
+      "slug": "athletics-ireland-ballyduff-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ballyduff_A.C.",
+      "status": "insufficient-primary-history",
+      "reason": "Waterford senior club, distinct from Kerry/GAA/soccer namesakes. Existing contacts and Instagram supported, but substantive history and training still unresolved."
+    },
+    {
+      "slug": "barrow-and-furness-striders-ac",
+      "url": "https://www.barrowstriders.com/gallery",
+      "status": "winter-times-conflict",
+      "reason": "Junior page says 17:30–19:00; home says 18:00–19:00 in winter. No fixed winter time copied. Senior page says no coached sessions. Membership fees page is 2024/25; prices omitted. Founding date unknown."
+    },
+    {
+      "slug": "birkenhead-park-running-club",
+      "url": "https://birkenheadparkrfc.rfu.club/news/birkenhead-park-running-club",
+      "status": "dated-timetable",
+      "reason": "12 May 2025 host-published club newsletter supports programme/base, not current intake dates. Founding date and separate enquiry email unresolved; rugby contacts excluded."
+    },
+    {
+      "slug": "black-combe-runners",
+      "url": "https://www.bcrunners.org.uk/history/",
+      "status": "history-404",
+      "reason": "History link 404; founding year omitted. someone@bcrunners.org.uk is the explicitly repeated club mailto, not an inferred placeholder; deliverability untested."
+    },
+    {
+      "slug": "blackhill-bounders",
+      "url": "https://blackhillbound.spond.club/",
+      "status": "masked-email-and-timetable",
+      "reason": "Email masked. Public joining route/Facebook used; weekly timetable unconfirmed. Race headquarters not assumed a training base."
+    },
+    {
+      "slug": "birtley-ac",
+      "url": "https://www.birtleyac.co.uk/contact-us.html",
+      "status": "masked-email",
+      "reason": "Readable secretary telephone included; masked email not reconstructed. Old Covid entrance wording means first-time visitors should confirm entrance."
+    },
+    {
+      "slug": "blackley-north-manchester-ac",
+      "url": "https://blackleyathletics.club/membership.html",
+      "status": "waiting-list",
+      "reason": "Separate running-only and Run Jump Throw waiting lists; no unbooked junior invitation."
+    },
+    {
+      "slug": "blaydon-harrier-and-ac",
+      "url": "https://www.blaydonharrier.org.uk/join-us",
+      "status": "junior-intake-restricted",
+      "reason": "Junior induction/endurance waiting lists closed. Hurdles list may exceed six months. Adult four-week tasters arranged. Fees marked 25/26 not repeated."
+    },
+    {
+      "slug": "bolton-triathlon-club",
+      "url": "https://boltontri.com/the-club/",
+      "status": "junior-waiting-list-and-old-fees",
+      "reason": "Ten-and-under waiting list explicit; some fees reference 2025 and omitted. Timetable includes Oct–Dec 2026 cycling and confirms Bolton venues rather than old Bury address."
+    },
+    {
+      "slug": "athletics-ireland-back-2-boston-running-club-a-c",
+      "url": "https://back2boston.ie/mission-statement/",
+      "status": "exact-venue-unconfirmed",
+      "reason": "Corbally locality only. Project founder association explicit; no results import or inference about individual members background."
+    },
+    {
+      "slug": "athletics-ireland-ballinamore-a-c",
+      "url": "https://www.athleticsireland.ie/ballinamore-ac-celebrates-60-years-of-athletic-excellence/",
+      "status": "training-venue-unconfirmed",
+      "reason": "1965 derived from official 60th anniversary in 2025. Aghadark postcode not promoted as public training facility. McKiernan coaching mention and Britton town memorial do not establish membership."
+    },
+    {
+      "slug": "athletics-ireland-ballycastle-a-c",
+      "url": "https://www.mayo.ie/en-ie/mayo-sports/directories/ballycastle-athletics-club",
+      "status": "historical-continuity-unconfirmed",
+      "reason": "Undated Mayo listing differs in contact from Athletics Ireland; AI club role retained. Third-party 1979 history not confidently tied to revived club; year/alumni omitted."
+    },
+    {
+      "slug": "strabane-triathlon-club",
+      "url": "http://strabanetriathlonclub.com/",
+      "status": "website-unavailable",
+      "reason": "502; readable Triathlon Ireland directory replaces website link. Email confirmed there. No founding year, exact venue or timetable. Dated Ward association editorial only."
+    },
+    {
+      "slug": "templemore-triathlon-club",
+      "url": "https://www.templemore.org.uk/triathlon.html",
+      "status": "section-specific-contact",
+      "reason": "Website email masked but readable Triathlon Ireland directory confirms triathlon role email. Dedicated tmoretriathlon Facebook replaces Baths umbrella page. Do not copy swim-school age rules or timetable to triathlon."
+    },
+    {
+      "slug": "tri-limits-tc",
+      "url": "https://www.trilimits.com/contact.html",
+      "status": "private-lake-and-dated-intake",
+      "reason": "Mapped lake private/no access. Use multi-venue note. New2Tri March–April 2026 course is past, not open intake; some general timetable copy undated."
     }
   ],
   "coverageReviewNotes": [
@@ -807,6 +942,7 @@
     "Batch12: 16 profiles and five historical/notable associations; 17 contact/social records updated. Actual merged coverage 269/1737. Four candidates deferred rather than padding sparse sources. Former Griffithstown domain replaced; Bray placeholder phone removed. Directory date coverage unchanged (1682 recent,55 older), seed v12, draft-only. Main bceb3ea inspected: intervening athlete/homepage changes do not overlap these data files.",
     "Batch13: 18 profiles, ten sourced associations, 17 contact/social records changed (12 new). Actual merged coverage 287/1737; 140 notable entries. Seven more clubs with contacts/email, two with phones, twelve social links. Two candidates deferred. Seed v13, draft-only. Prior 5d39ab1 Club profiles passed; broader quality gate 38505360491 failed mobile registration: Help improve ATHRECS banner / bottom nav intercepted Continue. No safeguard or broad UI changes.",
     "Batch14: 18 profiles, eight historical/notable associations, 18 website-contact records changed (12 new). Actual merged coverage 305/1737; 148 notable entries. Seven more clubs with email, fourteen contact entries, eighteen social links. Seed v14 draft-only. All 12 workflows for preceding eb01a07 now passed; no UI fix claimed for the earlier intermittent registration obstruction. Directory comparison dates unchanged.",
-    "Batch15: immediate continuation adds nine profiles and five historical/member associations, changes nine website-contact records (six new), seed v15. Oswestry country corrected to England with dual-affiliation context. All twelve workflows for prior b41907d passed. Hourly automation confirmed enabled, not duplicated. Directory dates unchanged."
+    "Batch15: immediate continuation adds nine profiles and five historical/member associations, changes nine website-contact records (six new), seed v15. Oswestry country corrected to England with dual-affiliation context. All twelve workflows for prior b41907d passed. Hourly automation confirmed enabled, not duplicated. Directory dates unchanged.",
+    "Batch16 adds 20 profiles and 11 historical associations, with 19 website-contact records changed (nine new). Main inspected at 464292e: no overlapping club data changes. Corrected Bolton/Bebington/Consett/Irish/NI towns and Border Harriers postcode. Seed v16. No directory date refresh or production publication. Exact-commit workflow and preview evidence belongs in draft PR #680."
   ]
 }

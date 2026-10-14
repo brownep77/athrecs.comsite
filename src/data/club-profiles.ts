@@ -13,6 +13,7 @@ import { southEastAndCommunityClubProfiles } from "./club-profiles-l.ts";
 import { southEastAndNorthernClubProfiles } from "./club-profiles-m.ts";
 import { yorkshireAndNorthernCommunityProfiles } from "./club-profiles-n.ts";
 import { borderAndCommunityClubProfiles } from "./club-profiles-o.ts";
+import { northWestAndCommunityProfiles } from "./club-profiles-p.ts";
 
 export type ClubProfile = {
   summary: string;
@@ -30,6 +31,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...northWestAndCommunityProfiles,
   ...borderAndCommunityClubProfiles,
   ...yorkshireAndNorthernCommunityProfiles,
   ...southEastAndNorthernClubProfiles,
@@ -767,4 +769,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-14-v15";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-14-v16";
