@@ -303,7 +303,33 @@ try {
   await sql`update app_meta set value=(select value from app_meta where key='seed_version')
     where key='clubs_catalogue_version'`;
   globalThis.__athrecsFullSeedPromise__ = undefined;
-  await ensureAthrecsSeeded();
+  const originalTransaction = sql.transaction;
+  const clubRefreshStatements = [];
+  sql.transaction = (work) =>
+    originalTransaction((tx) => {
+      const query = (text, params) => {
+        clubRefreshStatements.push(text);
+        return tx.query(text, params);
+      };
+      const observed = (strings, ...values) =>
+        query(
+          strings.reduce((text, part, index) => text + (index ? `$${index}` : "") + part, ""),
+          values,
+        );
+      observed.query = query;
+      observed.transaction = (nested) => nested(observed);
+      return work(observed);
+    });
+  try {
+    await ensureAthrecsSeeded();
+  } finally {
+    sql.transaction = originalTransaction;
+  }
+  assert(clubRefreshStatements.length > 0);
+  assert(
+    !clubRefreshStatements.some((text) => /^\s*(alter|create|drop|truncate)\b/i.test(text)),
+    "Club editorial refresh must not take schema locks on live athlete and race tables",
+  );
   assert.deepEqual(
     await sql`select * from clubs where slug='barnet-and-district-ac'`,
     beforeClubRefresh,

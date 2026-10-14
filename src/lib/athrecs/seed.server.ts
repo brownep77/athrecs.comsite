@@ -23,6 +23,7 @@ import { featuredWaHistories } from "@/data/featured-wa-histories-2026-09-30";
 import { nationalAgeAthletes, nationalAgeResults } from "@/data/featured-gbr-irl-age-2026-10-01";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 import { parkrunDates, parkrunDistance } from "./parkrun-dates";
+import { runCatalogueTransaction } from "./catalogue-transaction";
 
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-14-v2";
@@ -54,7 +55,6 @@ function expectedFixtureSeedEditionCount(): number {
   }
   return keys.size;
 }
-const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 const DEV_PREVIEW_USER_ID = "dev-user";
 const DEV_PREVIEW_EMAIL = "dev@example.com";
 const DEV_PREVIEW_ATHLETE_SLUG = "paul-browne";
@@ -2723,7 +2723,9 @@ async function refreshCatalogue(sql: Sql): Promise<void> {
   if (await catalogueMarkersCurrent(sql)) return;
   // Club editorial updates must not replay unrelated fixture or athlete imports.
   if (await catalogueMarkersCurrent(sql, { includeClubs: false })) {
-    await ensureSchema(sql);
+    // Migrations and the current base catalogue already provide the schema.
+    // Replaying ALTER TABLE here takes exclusive locks on unrelated race and
+    // athlete tables, which can deadlock with normal public-page reads.
     await upsertCatalogueClubs(sql, false);
     return;
   }
@@ -3215,13 +3217,7 @@ async function seed(): Promise<void> {
 
   try {
     if (dbSource === "neon") {
-      await sql.transaction(async (tx) => {
-        // Catalogue versions can change while old and new serverless instances are
-        // live together. A database-wide transaction lock prevents their event and
-        // edition upserts from deadlocking one another.
-        await tx.query("select pg_advisory_xact_lock($1)", [CATALOGUE_SEED_LOCK_ID]);
-        await refreshCatalogue(tx);
-      });
+      await runCatalogueTransaction(sql, refreshCatalogue);
       return;
     }
 
