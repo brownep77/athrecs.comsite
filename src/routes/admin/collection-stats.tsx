@@ -5,11 +5,15 @@ import { BarChart3, Download, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCollectionStats } from "@/lib/collection-stats/api";
 import { defaultStatsFilters, statsCsv, type StatsFilters } from "@/lib/collection-stats/core";
+import { WebsiteStats } from "@/components/staff/WebsiteStats";
 
 export const Route = createFileRoute("/admin/collection-stats")({
+  validateSearch: (search: Record<string, unknown>): { section: "collection" | "website" } => ({
+    section: search.section === "website" ? "website" : "collection",
+  }),
   head: () => ({
     meta: [
-      { title: "Data collection stats — ATHRECS Staff" },
+      { title: "Stats — ATHRECS Staff" },
       { name: "robots", content: "noindex, nofollow, noarchive" },
     ],
   }),
@@ -32,12 +36,15 @@ const profileGroups = {
 };
 
 function CollectionStatsPage() {
+  const { section } = Route.useSearch();
+  const navigate = Route.useNavigate();
   const [filters, setFilters] = useState<StatsFilters>(defaultStatsFilters);
   const report = useQuery({
     queryKey: ["collection-stats", filters],
     queryFn: () => getCollectionStats({ data: filters }),
     staleTime: 60_000,
     retry: false,
+    enabled: section === "collection",
   });
   const data = report.data;
   function change<K extends keyof StatsFilters>(key: K, value: StatsFilters[K]) {
@@ -84,250 +91,280 @@ function CollectionStatsPage() {
         <div className="max-w-3xl space-y-2">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-cyan-800">
             <BarChart3 className="size-4" aria-hidden="true" />
-            Collection progress
+            AthRecs statistics
           </p>
-          <h1 className="font-display text-3xl font-semibold">Data collection stats</h1>
+          <h1 className="font-display text-3xl font-semibold">Stats</h1>
           <p className="text-sm leading-6 text-slate-600">
-            See what we have collected and where details are missing. Filter races and profiles
-            independently, then download the tables for planning.
+            Track data collection, website visitors and Google search performance.
           </p>
         </div>
-        <Button
-          variant="secondary"
-          disabled={report.isFetching}
-          onClick={() => void report.refetch()}
-        >
-          <RefreshCw
-            className={`size-4 ${report.isFetching ? "animate-spin" : ""}`}
-            aria-hidden="true"
-          />
-          Refresh counts
-        </Button>
+        {section === "collection" ? (
+          <Button
+            variant="secondary"
+            disabled={report.isFetching}
+            onClick={() => void report.refetch()}
+          >
+            <RefreshCw
+              className={`size-4 ${report.isFetching ? "animate-spin" : ""}`}
+              aria-hidden="true"
+            />
+            Refresh counts
+          </Button>
+        ) : null}
       </header>
 
-      {report.isPending ? (
-        <p role="status" className="rounded-xl border bg-white p-6">
-          Loading collection counts…
-        </p>
-      ) : null}
-      {report.isError ? (
-        <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-5 text-red-900">
-          <p>
-            Counts could not be refreshed.{" "}
-            {data
-              ? "The last successful snapshot is shown below."
-              : "No counts are available; this does not mean the database is empty."}
-          </p>
-          <Button className="mt-3" variant="secondary" onClick={() => void report.refetch()}>
-            Try again
-          </Button>
-        </div>
-      ) : null}
+      <nav className="flex flex-wrap gap-2" aria-label="Statistics sections">
+        <Button
+          variant={section === "collection" ? "default" : "secondary"}
+          aria-current={section === "collection" ? "page" : undefined}
+          onClick={() => void navigate({ search: { section: "collection" } })}
+        >
+          Data collection stats
+        </Button>
+        <Button
+          variant={section === "website" ? "default" : "secondary"}
+          aria-current={section === "website" ? "page" : undefined}
+          onClick={() => void navigate({ search: { section: "website" } })}
+        >
+          Website traffic & Google
+        </Button>
+      </nav>
 
-      {data ? (
+      {section === "website" ? (
+        <WebsiteStats />
+      ) : (
         <>
-          <div
-            className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
-            aria-label="Whole catalogue totals"
-          >
-            <Metric
-              label="Unique events"
-              value={data.totals.events}
-              detail="One per retained event record"
-            />
-            <Metric
-              label="Dated race editions"
-              value={data.totals.editions}
-              detail="One per event, date and distance"
-            />
-            <Metric
-              label="Athlete profiles"
-              value={data.totals.profiles}
-              detail="All real profiles, public and private"
-            />
-            <Metric
-              label="Profiles added in 7 days"
-              value={data.totals.added7d}
-              detail="Based on profile creation time"
-            />
-          </div>
-          <p className="text-xs text-slate-600">
-            Whole catalogue totals stay unchanged by filters. Snapshot:{" "}
-            {new Date(data.generatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" })} (UK
-            time). {number(data.excluded.eventAliases)} known duplicate event aliases and{" "}
-            {number(data.excluded.testProfiles)} fictional test profiles excluded.
-          </p>
-
-          <section
-            aria-labelledby="race-stats-heading"
-            className="space-y-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
-          >
-            <div>
-              <h2 id="race-stats-heading" className="font-display text-2xl font-semibold">
-                Races and fixtures
-              </h2>
-              <p className="mt-1 text-sm text-slate-600">
-                All sports and stored dates, including past, future, TBC and cancelled editions.
-                Select a year to narrow the dated races.
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <Select
-                label="Race sport"
-                value={filters.sport}
-                values={data.options.sports}
-                onChange={(v) => change("sport", v)}
-              />
-              <Select
-                label="Race distance"
-                value={filters.distance}
-                values={data.options.distances}
-                onChange={(v) => change("distance", v)}
-              />
-              <Select
-                label="Race country"
-                value={filters.raceCountry}
-                values={data.options.raceCountries}
-                onChange={(v) => change("raceCountry", v)}
-              />
-              <Select
-                label="Race county"
-                value={filters.raceCounty}
-                values={data.options.raceCounties}
-                onChange={(v) => change("raceCounty", v)}
-              />
-              <Select
-                label="Race year"
-                value={filters.year === null ? "" : String(filters.year)}
-                values={data.options.years.map(String)}
-                onChange={(v) => change("year", v ? Number(v) : null)}
-              />
-              <Select
-                label="Group races by"
-                value={filters.raceGroup}
-                values={raceGroups}
-                onChange={(v) => change("raceGroup", v as StatsFilters["raceGroup"])}
-              />
-            </div>
-            <Button
-              variant="ghost"
-              onClick={() =>
-                setFilters((f) => ({
-                  ...f,
-                  sport: "",
-                  distance: "",
-                  raceCountry: "",
-                  raceCounty: "",
-                  year: null,
-                  raceGroup: "sport",
-                }))
-              }
+          {report.isPending ? (
+            <p role="status" className="rounded-xl border bg-white p-6">
+              Loading collection counts…
+            </p>
+          ) : null}
+          {report.isError ? (
+            <div
+              role="alert"
+              className="rounded-xl border border-red-200 bg-red-50 p-5 text-red-900"
             >
-              Reset race filters
-            </Button>
-            <p className="text-sm font-semibold" role="status">
-              Matching totals: {number(data.races.totals.events)} unique events ·{" "}
-              {number(data.races.totals.editions)} dated race editions
-            </p>
-            <p className="text-xs leading-5 text-slate-600">
-              An event with several distances appears in each relevant distance row. Event counts
-              across those rows overlap; the matching total counts each event once. A listed
-              distance without a dated edition contributes an event but zero editions.
-            </p>
-            <StatsTable
-              key={`races-${JSON.stringify(filters)}`}
-              title="Race collection breakdown"
-              headers={[...raceColumns, "Events", "Dated editions"]}
-              rows={raceRows}
-              file="race-collection-stats"
-              generatedAt={data.generatedAt}
-              filters={filters}
-            />
-            <Gaps title="Missing race details in this selection (events)" gaps={data.races.gaps} />
-          </section>
-
-          <section
-            aria-labelledby="profile-stats-heading"
-            className="space-y-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
-          >
-            <div>
-              <h2 id="profile-stats-heading" className="font-display text-2xl font-semibold">
-                Athlete profiles
-              </h2>
-              <p className="mt-1 text-sm text-slate-600">
-                Count each stored athlete profile once, regardless of how many results or sports it
-                has.
+              <p>
+                Counts could not be refreshed.{" "}
+                {data
+                  ? "The last successful snapshot is shown below."
+                  : "No counts are available; this does not mean the database is empty."}
               </p>
+              <Button className="mt-3" variant="secondary" onClick={() => void report.refetch()}>
+                Try again
+              </Button>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <Select
-                label="Profile gender"
-                value={filters.gender}
-                values={data.options.genders}
-                onChange={(v) => change("gender", v)}
-              />
-              <Select
-                label="Profile country"
-                value={filters.profileCountry}
-                values={data.options.profileCountries}
-                onChange={(v) => change("profileCountry", v)}
-              />
-              <Select
-                label="Profile county"
-                value={filters.profileCounty}
-                values={data.options.profileCounties}
-                onChange={(v) => change("profileCounty", v)}
-              />
-              <Select
-                label="Group profiles by"
-                value={filters.profileGroup}
-                values={profileGroups}
-                onChange={(v) => change("profileGroup", v as StatsFilters["profileGroup"])}
-              />
-            </div>
-            <Button
-              variant="ghost"
-              onClick={() =>
-                setFilters((f) => ({
-                  ...f,
-                  gender: "",
-                  profileCountry: "",
-                  profileCounty: "",
-                  profileGroup: "gender",
-                }))
-              }
-            >
-              Reset profile filters
-            </Button>
-            <p className="text-sm font-semibold" role="status">
-              Matching totals: {number(data.profiles.totals.profiles)} profiles ·{" "}
-              {number(data.profiles.totals.publicProfiles)} marked public ·{" "}
-              {number(data.profiles.totals.added7d)} added in 7 days
-            </p>
-            <StatsTable
-              key={`profiles-${JSON.stringify(filters)}`}
-              title="Profile collection breakdown"
-              headers={[...profileColumns, "Profiles", "Marked public", "Added in 7 days"]}
-              rows={profileRows}
-              file="profile-collection-stats"
-              generatedAt={data.generatedAt}
-              filters={filters}
-            />
-            <Gaps title="Missing profile details in this selection" gaps={data.profiles.gaps} />
-            <p className="text-xs leading-5 text-slate-600">
-              Country and county are the profile’s recorded location, not nationality or club
-              location. Counts include existing imported values; they do not certify those
-              locations. “Marked public” describes the stored visibility, not search indexing or
-              account ownership. Profiles without a saved location or gender remain in Unknown.
-            </p>
-          </section>
-          <p className="text-xs leading-5 text-slate-600">
-            These are stored catalogue counts, not a percentage of all races or athletes worldwide.
-            Unpublished collection queues are separate. Known aliases are excluded; other unresolved
-            duplicate records may still need review.
-          </p>
+          ) : null}
+
+          {data ? (
+            <>
+              <div
+                className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+                aria-label="Whole catalogue totals"
+              >
+                <Metric
+                  label="Unique events"
+                  value={data.totals.events}
+                  detail="One per retained event record"
+                />
+                <Metric
+                  label="Dated race editions"
+                  value={data.totals.editions}
+                  detail="One per event, date and distance"
+                />
+                <Metric
+                  label="Athlete profiles"
+                  value={data.totals.profiles}
+                  detail="All real profiles, public and private"
+                />
+                <Metric
+                  label="Profiles added in 7 days"
+                  value={data.totals.added7d}
+                  detail="Based on profile creation time"
+                />
+              </div>
+              <p className="text-xs text-slate-600">
+                Whole catalogue totals stay unchanged by filters. Snapshot:{" "}
+                {new Date(data.generatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" })}{" "}
+                (UK time). {number(data.excluded.eventAliases)} known duplicate event aliases and{" "}
+                {number(data.excluded.testProfiles)} fictional test profiles excluded.
+              </p>
+
+              <section
+                aria-labelledby="race-stats-heading"
+                className="space-y-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
+              >
+                <div>
+                  <h2 id="race-stats-heading" className="font-display text-2xl font-semibold">
+                    Races and fixtures
+                  </h2>
+                  <p className="mt-1 text-sm text-slate-600">
+                    All sports and stored dates, including past, future, TBC and cancelled editions.
+                    Select a year to narrow the dated races.
+                  </p>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <Select
+                    label="Race sport"
+                    value={filters.sport}
+                    values={data.options.sports}
+                    onChange={(v) => change("sport", v)}
+                  />
+                  <Select
+                    label="Race distance"
+                    value={filters.distance}
+                    values={data.options.distances}
+                    onChange={(v) => change("distance", v)}
+                  />
+                  <Select
+                    label="Race country"
+                    value={filters.raceCountry}
+                    values={data.options.raceCountries}
+                    onChange={(v) => change("raceCountry", v)}
+                  />
+                  <Select
+                    label="Race county"
+                    value={filters.raceCounty}
+                    values={data.options.raceCounties}
+                    onChange={(v) => change("raceCounty", v)}
+                  />
+                  <Select
+                    label="Race year"
+                    value={filters.year === null ? "" : String(filters.year)}
+                    values={data.options.years.map(String)}
+                    onChange={(v) => change("year", v ? Number(v) : null)}
+                  />
+                  <Select
+                    label="Group races by"
+                    value={filters.raceGroup}
+                    values={raceGroups}
+                    onChange={(v) => change("raceGroup", v as StatsFilters["raceGroup"])}
+                  />
+                </div>
+                <Button
+                  variant="ghost"
+                  onClick={() =>
+                    setFilters((f) => ({
+                      ...f,
+                      sport: "",
+                      distance: "",
+                      raceCountry: "",
+                      raceCounty: "",
+                      year: null,
+                      raceGroup: "sport",
+                    }))
+                  }
+                >
+                  Reset race filters
+                </Button>
+                <p className="text-sm font-semibold" role="status">
+                  Matching totals: {number(data.races.totals.events)} unique events ·{" "}
+                  {number(data.races.totals.editions)} dated race editions
+                </p>
+                <p className="text-xs leading-5 text-slate-600">
+                  An event with several distances appears in each relevant distance row. Event
+                  counts across those rows overlap; the matching total counts each event once. A
+                  listed distance without a dated edition contributes an event but zero editions.
+                </p>
+                <StatsTable
+                  key={`races-${JSON.stringify(filters)}`}
+                  title="Race collection breakdown"
+                  headers={[...raceColumns, "Events", "Dated editions"]}
+                  rows={raceRows}
+                  file="race-collection-stats"
+                  generatedAt={data.generatedAt}
+                  filters={filters}
+                />
+                <Gaps
+                  title="Missing race details in this selection (events)"
+                  gaps={data.races.gaps}
+                />
+              </section>
+
+              <section
+                aria-labelledby="profile-stats-heading"
+                className="space-y-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
+              >
+                <div>
+                  <h2 id="profile-stats-heading" className="font-display text-2xl font-semibold">
+                    Athlete profiles
+                  </h2>
+                  <p className="mt-1 text-sm text-slate-600">
+                    Count each stored athlete profile once, regardless of how many results or sports
+                    it has.
+                  </p>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  <Select
+                    label="Profile gender"
+                    value={filters.gender}
+                    values={data.options.genders}
+                    onChange={(v) => change("gender", v)}
+                  />
+                  <Select
+                    label="Profile country"
+                    value={filters.profileCountry}
+                    values={data.options.profileCountries}
+                    onChange={(v) => change("profileCountry", v)}
+                  />
+                  <Select
+                    label="Profile county"
+                    value={filters.profileCounty}
+                    values={data.options.profileCounties}
+                    onChange={(v) => change("profileCounty", v)}
+                  />
+                  <Select
+                    label="Group profiles by"
+                    value={filters.profileGroup}
+                    values={profileGroups}
+                    onChange={(v) => change("profileGroup", v as StatsFilters["profileGroup"])}
+                  />
+                </div>
+                <Button
+                  variant="ghost"
+                  onClick={() =>
+                    setFilters((f) => ({
+                      ...f,
+                      gender: "",
+                      profileCountry: "",
+                      profileCounty: "",
+                      profileGroup: "gender",
+                    }))
+                  }
+                >
+                  Reset profile filters
+                </Button>
+                <p className="text-sm font-semibold" role="status">
+                  Matching totals: {number(data.profiles.totals.profiles)} profiles ·{" "}
+                  {number(data.profiles.totals.publicProfiles)} marked public ·{" "}
+                  {number(data.profiles.totals.added7d)} added in 7 days
+                </p>
+                <StatsTable
+                  key={`profiles-${JSON.stringify(filters)}`}
+                  title="Profile collection breakdown"
+                  headers={[...profileColumns, "Profiles", "Marked public", "Added in 7 days"]}
+                  rows={profileRows}
+                  file="profile-collection-stats"
+                  generatedAt={data.generatedAt}
+                  filters={filters}
+                />
+                <Gaps title="Missing profile details in this selection" gaps={data.profiles.gaps} />
+                <p className="text-xs leading-5 text-slate-600">
+                  Country and county are the profile’s recorded location, not nationality or club
+                  location. Counts include existing imported values; they do not certify those
+                  locations. “Marked public” describes the stored visibility, not search indexing or
+                  account ownership. Profiles without a saved location or gender remain in Unknown.
+                </p>
+              </section>
+              <p className="text-xs leading-5 text-slate-600">
+                These are stored catalogue counts, not a percentage of all races or athletes
+                worldwide. Unpublished collection queues are separate. Known aliases are excluded;
+                other unresolved duplicate records may still need review.
+              </p>
+            </>
+          ) : null}
         </>
-      ) : null}
+      )}
     </div>
   );
 }

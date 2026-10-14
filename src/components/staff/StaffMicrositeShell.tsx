@@ -37,7 +37,7 @@ const configuredStaffHost = normalizeHostname(staffSiteUrl);
 const staffNav = [
   {
     to: "/admin/collection-stats",
-    label: "Data collection stats",
+    label: "Stats",
     icon: BarChart3,
     match: (path: string) => path.startsWith("/admin/collection-stats"),
   },
