@@ -1,5 +1,11 @@
 export const PUBLIC_PROFILE_RESULT_LIMIT = 5;
 
+// Keep route validation aligned with the preview API, including ATH-number
+// aliases and established slugs. Invalid addresses must stop before API calls.
+export function isValidPublicAthleteLookup(value: unknown): value is string {
+  return typeof value === "string" && value.trim().length > 0 && value.length <= 300;
+}
+
 export function publicAthleteResultPage(value: unknown): number {
   const text = typeof value === "number" ? String(value) : value;
   if (typeof text !== "string" || !/^[1-9]\d{0,5}$/.test(text)) return 1;
@@ -27,9 +33,7 @@ export function parsePublicAthletePreviewInput(input: unknown): {
     !value ||
     typeof value !== "object" ||
     !("slug" in value) ||
-    typeof value.slug !== "string" ||
-    !value.slug.trim() ||
-    value.slug.length > 300
+    !isValidPublicAthleteLookup(value.slug)
   ) {
     throw new Error("An athlete profile is required");
   }
