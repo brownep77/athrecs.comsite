@@ -15,6 +15,14 @@ const TEAM = "team_9LaPtmxxgJlZ80PpdxggOibC";
 const count = z.number().finite().nonnegative();
 const visitCounts = z.object({ visitors: count, pageviews: count });
 const visitRows = z.object({ data: z.array(visitCounts.passthrough()) });
+const visitTotals = z.object({
+  data: z.array(visitCounts.extend({ environment: z.literal("production") })).max(1),
+});
+
+function parseVisitTotals(value: unknown) {
+  const row = visitTotals.parse(value).data[0];
+  return { visitors: row?.visitors ?? 0, pageviews: row?.pageviews ?? 0 };
+}
 const searchRow = z.object({
   keys: z.array(z.string()).optional(),
   clicks: count,
@@ -71,7 +79,7 @@ export function decryptCredential(value: string) {
   );
 }
 
-async function vercelQuery(token: string, since: string, until: string, dimension?: string) {
+async function vercelQuery(token: string, since: string, until: string, dimension = "environment") {
   const params = new URLSearchParams({
     projectId: PROJECT,
     teamId: TEAM,
@@ -79,12 +87,10 @@ async function vercelQuery(token: string, since: string, until: string, dimensio
     until,
     filter: "environment eq 'production'",
   });
-  if (dimension) {
-    params.set("by", dimension);
-    params.set("limit", "10");
-  }
+  params.set("by", dimension);
+  params.set("limit", "10");
   return providerJson(
-    `https://api.vercel.com/v1/query/web-analytics/visits/${dimension ? "aggregate" : "count"}?${params}`,
+    `https://api.vercel.com/v1/query/web-analytics/visits/aggregate?${params}`,
     token,
   );
 }
@@ -94,7 +100,7 @@ export async function saveVercelConnection(sql: Sql, token: string, userId: stri
   const until = new Date().toISOString();
   const since = new Date(Date.now() - 86400_000).toISOString();
   try {
-    visitCounts.parse((await vercelQuery(token, since, until)).data);
+    parseVisitTotals(await vercelQuery(token, since, until));
   } catch {
     throw new Error(
       "This token could not read AthRecs Web Analytics. Check its team access and expiry.",
@@ -130,7 +136,10 @@ export async function readVercelReport(
       vercelQuery(token, since, until),
       ...dimensions.map((by) => vercelQuery(token, since, until, by)),
     ]);
-    const totals = visitCounts.parse(total.data);
+    // The count endpoint truncates until to midnight and omits today's traffic.
+    // One production environment group preserves unique visitors for the whole
+    // window and uses the same hourly boundaries as the breakdowns.
+    const totals = parseVisitTotals(total);
     const rows = groups.map((group, index) =>
       visitRows.parse(group).data.map((row) => ({
         label:

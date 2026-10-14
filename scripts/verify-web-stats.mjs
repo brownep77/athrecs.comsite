@@ -28,6 +28,7 @@ let remoteStatus = 200,
   empty = false,
   remoteCalls = 0,
   lastHeaders;
+const vercelRequests = [];
 const seenQueries = [];
 globalThis.fetch = async (input, init) => {
   const url = new URL(
@@ -46,6 +47,7 @@ globalThis.fetch = async (input, init) => {
     return Response.json({ secret: "never-leak-provider-error" }, { status: remoteStatus });
   if (malformed) return Response.json({ data: { visitors: "bad", pageviews: -1 } });
   if (url.hostname === "api.vercel.com") {
+    vercelRequests.push({ path: url.pathname, dimension: url.searchParams.get("by") });
     assert.equal(url.searchParams.get("projectId"), "prj_lbw3shClq8n6SThzl8i825UPBp6I");
     assert.equal(url.searchParams.get("filter"), "environment eq 'production'");
     const dimension = url.searchParams.get("by");
@@ -54,8 +56,9 @@ globalThis.fetch = async (input, init) => {
       data: dimension
         ? empty
           ? []
-          : [{ [dimension]: dimension === "requestPath" ? "/clubs" : "test", ...totals }]
-        : totals,
+          : [{ [dimension]: dimension === "environment" ? "production" : dimension === "requestPath" ? "/clubs" : "test", ...totals }]
+        // Vercel's daily count endpoint omits traffic from today.
+        : { visitors: 0, pageviews: 0 },
     });
   }
   if (url.pathname === "/webmasters/v3/sites")
@@ -144,6 +147,8 @@ try {
   const visits = await rpc("getVercelStats", "GET", { days: 28 }, "web-token");
   assert.equal(visits.report.visitors, 3);
   assert.equal(visits.report.pageviews, 5);
+  assert(vercelRequests.every((request) => request.path.endsWith("/aggregate")));
+  assert(vercelRequests.some((request) => request.dimension === "environment"));
   assert.equal(visits.report.pages[0].label, "/clubs");
   assert.doesNotMatch(JSON.stringify(visits), /synthetic-provider-token|ciphertext|web-staff/);
   const search = await service.readGoogleReport("synthetic-google-token", { days: 28 });
