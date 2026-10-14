@@ -48,8 +48,9 @@ try {
   assert.match(readFileSync("src/routes/admin/result-links.tsx", "utf8"), /Upload result-page links for existing editions/);
   await page.screenshot({ path: "artifacts/import-backend-tasks-desktop.png", fullPage: true });
   await page.getByLabel("Find a backend task").fill("duplicates");
-  assert.equal(await cards.count(), 2);
-  assert.deepEqual((await cards.getByRole("link").evaluateAll(links => links.map(link => link.getAttribute("href")))).sort(), ["/admin/check-results-upload", "/admin/fixture-import"]);
+  // Stats now includes duplicate-review counts as well as the two import tools.
+  assert.equal(await cards.count(), 3);
+  assert.deepEqual((await cards.getByRole("link").evaluateAll(links => links.map(link => link.getAttribute("href")))).sort(), ["/admin/check-results-upload", "/admin/collection-stats", "/admin/fixture-import"]);
   await page.getByLabel('Find a backend task').fill('confirmations');
   assert.equal(await cards.count(),1);assert.equal(await cards.getByRole('link').getAttribute('href'),'/admin/athlete-workspace');
   await page.getByLabel("Find a backend task").fill("does-not-exist-xyz");
