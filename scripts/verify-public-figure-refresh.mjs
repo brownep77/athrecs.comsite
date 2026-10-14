@@ -397,6 +397,17 @@ try {
     values('synthetic-retained-edition','synthetic','synthetic','https://example.test/retained-edition',
       'synthetic-retained-edition','Synthetic retained edition','Running',${retainedTenK.event_id},${retainedTenK.id},
       '{"synthetic":true,"review":"source observation only"}'::jsonb)`;
+  const [legacySourceEvent] = await sql`select id from events
+    where slug='holyrood-park-5k-10k-half-marathon-november'`;
+  const [legacySourceEdition] = await sql`insert into editions
+    (event_id,event_date,distance_code,status,source_url)
+    values(${legacySourceEvent.id},'2026-11-08','10K','TBC','https://example.test/legacy-edition')
+    returning *`;
+  await sql`insert into event_register_source_records
+    (record_key,origin,provider,source_url,event_key,event_name,sport,catalogue_event_id,catalogue_edition_id,evidence)
+    values('synthetic-legacy-edition','synthetic','synthetic','https://example.test/legacy-edition',
+      'synthetic-legacy-edition','Synthetic legacy edition','Running',${legacySourceEvent.id},${legacySourceEdition.id},
+      '{"synthetic":true,"review":"requires explicit reconciliation"}'::jsonb)`;
   const evidenceState = async () => ({
     athletes: await sql`select * from athletes order by id`,
     results: await sql`select * from results order by id`,
@@ -432,6 +443,11 @@ try {
       where e.slug='monsal-trail-half-marathon-autumn-sunday' order by ed.id`,
     retainedEditions,
     "A superseded edition migration preserves current verified editions and their identities",
+  );
+  assert.deepEqual(
+    await sql`select * from editions where id=${legacySourceEdition.id}`,
+    [legacySourceEdition],
+    "A source-linked legacy edition requires explicit reconciliation before cleanup",
   );
   assert.deepEqual(
     await sql`select * from events

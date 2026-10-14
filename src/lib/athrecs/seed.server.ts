@@ -951,7 +951,8 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
 
   // Later verified releases can retain a distance/date that an older migration
   // replaced. Current catalogue identities take precedence over that migration,
-  // including their source-record links and any reviewed results.
+  // including their source-record links and any reviewed results. Source-linked
+  // legacy editions also require explicit reconciliation, not automatic cleanup.
   const currentEditionKeys = new Set(
     editionSeeds.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
   );
@@ -976,6 +977,15 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
            select 1 from results where edition_id = old_edition.id
          )
          and not exists (
+           select 1 from event_register_source_records where catalogue_edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_archive_datasets where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_ingestion_editions where edition_id = old_edition.id
+         )
+         and not exists (
            select 1
            from editions corrected_edition
            where corrected_edition.event_id = old_edition.event_id
@@ -991,6 +1001,15 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
          and old_edition.distance_code = $3::text
          and not exists (
            select 1 from results where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from event_register_source_records where catalogue_edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_archive_datasets where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_ingestion_editions where edition_id = old_edition.id
          )
          and exists (
            select 1
@@ -1015,6 +1034,15 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
          and stale_edition.distance_code = 'Half'
          and not exists (
            select 1 from results where edition_id = stale_edition.id
+         )
+         and not exists (
+           select 1 from event_register_source_records where catalogue_edition_id = stale_edition.id
+         )
+         and not exists (
+           select 1 from result_archive_datasets where edition_id = stale_edition.id
+         )
+         and not exists (
+           select 1 from result_ingestion_editions where edition_id = stale_edition.id
          )`,
       [bacchusEventId],
     );
@@ -1158,6 +1186,15 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
          and old_edition.distance_code = $3::text
          and not exists (
            select 1 from results where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from event_register_source_records where catalogue_edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_archive_datasets where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1 from result_ingestion_editions where edition_id = old_edition.id
          )
          and exists (
            select 1
