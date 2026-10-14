@@ -61,6 +61,9 @@ The collector reads the public profile and the public season-selector query from
 the website's own assets. It does not use a private account or a guessed API.
 Do not log or commit API configuration. HTTP 401, 403 or 429 stops collection;
 preserve the checkpoint and report the source limitation without bypassing it.
+The same stop rule applies when a CONNECT tunnel denial is wrapped in
+`URLError` rather than `HTTPError`; keep the original error and stop the remaining
+season requests. Do not retry through another route after an access denial.
 At most three requests are in flight. Reduce the batch if the source needs it.
 
 For each athlete, compare the returned source ID and every advertised active

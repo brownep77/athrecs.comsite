@@ -57,6 +57,12 @@ def request(url, payload=None, headers=None):
         if exc.code in [401, 403, 429]:
             STOP.set()
         raise
+    except urllib.error.URLError as exc:
+        # CONNECT proxy denials arrive as URLError(OSError), not HTTPError.
+        # Preserve the exact error and stop all workers rather than retrying years.
+        if re.search(r'\b(?:401|403|429)\b', str(exc.reason)):
+            STOP.set()
+        raise
 
 
 def next_data(html):
@@ -210,7 +216,7 @@ def collect(target, output, assets, api, existing_pages=None):
         except Exception as exc:
             errors.append({'year': year, 'error': str(exc)[:500]})
             # Denials/rate limits are a stop signal, never an invitation to bypass.
-            if isinstance(exc, urllib.error.HTTPError) and exc.code in [401, 403, 429]:
+            if STOP.is_set():
                 break
     now = dt.datetime.now(dt.timezone.utc).isoformat()
     history, original_rows = build_history(external_id, url, competitor, seasons, now)

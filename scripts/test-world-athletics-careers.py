@@ -2,8 +2,11 @@
 """Synthetic failure cases for the source capture boundary. No real athlete exports."""
 import copy
 import importlib.util
+import json
 import pathlib
+import tempfile
 import unittest
+from unittest import mock
 
 spec = importlib.util.spec_from_file_location('collector', pathlib.Path(__file__).with_name('collect-world-athletics-careers.py'))
 collector = importlib.util.module_from_spec(spec)
@@ -77,6 +80,60 @@ class CareerEvidenceTests(unittest.TestCase):
         self.raw['date']='2024'
         with self.assertRaisesRegex(ValueError,'Unrecognised source date'):
             self.build({'2024':self.season})
+
+
+class AccessStopTests(unittest.TestCase):
+    def setUp(self):
+        collector.STOP.clear()
+        collector.REQUESTS = 0
+        self.addCleanup(collector.STOP.clear)
+
+    def test_tunnel_denial_stops_all_following_requests_and_keeps_error(self):
+        for code in [401, 403, 429]:
+            with self.subTest(code=code):
+                collector.STOP.clear()
+                error = collector.urllib.error.URLError(
+                    OSError(f'Tunnel connection failed: {code} Denied'))
+                with mock.patch.object(collector.urllib.request, 'urlopen', side_effect=error) as network:
+                    with self.assertRaises(collector.urllib.error.URLError) as caught:
+                        collector.request('https://worldathletics.org/athletes/test-123')
+                    self.assertIs(caught.exception, error)
+                    self.assertTrue(collector.STOP.is_set())
+                    with self.assertRaisesRegex(RuntimeError, 'Collection stopped'):
+                        collector.request('https://worldathletics.org/athletes/test-456')
+                    self.assertEqual(network.call_count, 1)
+
+    def test_http_denial_also_stops_collection(self):
+        error = collector.urllib.error.HTTPError('https://worldathletics.org/', 403, 'Forbidden', {}, None)
+        with mock.patch.object(collector.urllib.request, 'urlopen', side_effect=error):
+            with self.assertRaises(collector.urllib.error.HTTPError):
+                collector.request('https://worldathletics.org/')
+        self.assertTrue(collector.STOP.is_set())
+
+    def test_timeout_is_preserved_without_calling_it_access_denial(self):
+        error = collector.urllib.error.URLError(TimeoutError('timed out'))
+        with mock.patch.object(collector.urllib.request, 'urlopen', side_effect=error):
+            with self.assertRaises(collector.urllib.error.URLError):
+                collector.request('https://worldathletics.org/')
+        self.assertFalse(collector.STOP.is_set())
+
+    def test_season_denial_saves_partial_and_does_not_try_next_year(self):
+        with tempfile.TemporaryDirectory() as folder:
+            output = pathlib.Path(folder)
+            (output / '123').mkdir()
+            source = {'_id': 123, 'basicData': {}, 'resultsByYear': {
+                'activeYears': [2023, 2024], 'parameters': {'resultsByYear': 2024}}}
+            (output / '123' / 'profile.json').write_text(json.dumps(
+                {'props': {'pageProps': {'competitor': source}}}))
+            error = collector.urllib.error.URLError(OSError('Tunnel connection failed: 403 Forbidden'))
+            with mock.patch.object(collector.urllib.request, 'urlopen', side_effect=error) as network:
+                candidate = collector.collect({'external_id': '123', 'athlete_id': None,
+                    'source_url': 'https://worldathletics.org/athletes/test-123'}, output, output,
+                    ('https://example.worldathletics.org/', 'synthetic-key', 'synthetic-query'))
+            self.assertEqual(network.call_count, 1)
+            self.assertFalse(candidate['history']['complete'])
+            self.assertEqual(candidate['errors'], [{'year': 2023, 'error': str(error)}])
+            self.assertTrue((output / '123' / 'candidate.json').exists())
 
 
 class ExistingResultTests(unittest.TestCase):
