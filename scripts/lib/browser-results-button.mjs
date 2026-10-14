@@ -1,3 +1,4 @@
+import { readLondonCollectionPage, startLondonCollection } from './london-page-collection.mjs';
 /** Self-contained functions: embedded in a bookmark, with no remote scripts; handoff is an explicit click. */
 export function collectBrowserResults(doc = document) {
   const win = doc.defaultView;
@@ -114,9 +115,9 @@ export function collectBrowserResults(doc = document) {
   };
 }
 
-export function showBrowserResults(collect) {
+export function showBrowserResults(collect, readLondon, startCollection) {
   const previous = document.querySelector('[data-athrecs-capture]');
-  if (previous) { previous.remove(); return; }
+  if (previous) { previous.stopCollection?.(); previous.remove(); return; }
   let capture;
   try { capture = collect(document); }
   catch (error) { alert(error.message); return; }
@@ -128,7 +129,7 @@ export function showBrowserResults(collect) {
   root.append(style);
   const make = (tag, value, parent = panel) => { const el = document.createElement(tag); if (value) el.textContent = value; parent.append(el); return el; };
   const panel = document.createElement('section'); panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Save results for AthRecs'); root.append(panel);
-  const close = make('button', 'Close'); close.className = 'close'; close.onclick = () => host.remove();
+  const close = make('button', 'Close'); close.className = 'close'; close.onclick = () => { host.stopCollection?.(); host.remove(); };
   make('h2', 'Save results for AthRecs');
   make('p', 'Send the rows loaded on this page to the AthRecs import screen. Check the sample before sending.');
   const source = make('p', capture.page.title + ' · ' + capture.page.url); source.style.overflowWrap = 'anywhere';
@@ -181,6 +182,35 @@ export function showBrowserResults(collect) {
       window.addEventListener('message', receive);
       const timeout = setTimeout(() => finish('The transfer could not be confirmed. Check the AthRecs tab. If it has no capture, use Download a file instead.'), 35000);
     };
+    if (location.hostname === 'results.tcslondonmarathon.com') {
+      try {
+        const first = readLondon(document, location.href);
+        if (first.page !== 1) throw Error('Open page 1 to collect every page for these filters.');
+        make('p', `Collect every page for: ${first.filterLabel} · ${first.totalPages} pages · ${first.totalRows.toLocaleString()} results. To collect the whole field, choose All runners and remove other filters on the results website first.`);
+        const all = make('button', 'Collect all pages', actions);
+        const pause = make('button', 'Pause collection', actions); pause.disabled = true;
+        const resume = make('button', 'Resume collection', actions); resume.disabled = true;
+        all.onclick = () => {
+          const origin = 'https://update.athrecs.com', token = crypto.randomUUID();
+          const target = window.open(origin + '/tools/import-results.html#' + token, '_blank');
+          if (!target) { summary.textContent = 'Allow the AthRecs tab to open, then try Collect all pages again.'; return; }
+          all.disabled = true; send.disabled = true;
+          const collection = { version: 1, firstUrl: first.capture.page.url, totalPages: first.totalPages, totalRows: first.totalRows, pageSize: first.pageSize, filterLabel: first.filterLabel };
+          const stop = startCollection(first, readLondon, target, token, summary, { pause, resume });
+          let received = false;
+          const ready = event => {
+            if (event.source !== target || event.origin !== origin || event.data?.token !== token) return;
+            if (event.data.type === 'athrecs-import-ready') target.postMessage({ type: 'athrecs-import-capture', token, json: JSON.stringify(first.capture), collection }, origin);
+            if (event.data.type === 'athrecs-import-received') { received = true; clearTimeout(timeout); window.removeEventListener('message', ready); summary.textContent = 'In the AthRecs tab, confirm the race and click Save and collect all pages. Keep both tabs open; closing this panel stops collection.'; }
+            if (event.data.type === 'athrecs-import-error') { stop(); summary.textContent = 'AthRecs could not prepare the collection. Check its tab or try the single-page import.'; }
+          };
+          const timeout = setTimeout(() => { if (!received) { stop(); window.removeEventListener('message', ready); summary.textContent = 'Transfer not confirmed. Check the AthRecs tab; reopen this button to restart if needed.'; } }, 35000);
+          window.addEventListener('message', ready);
+          host.stopCollection = () => { clearTimeout(timeout); window.removeEventListener('message', ready); stop(); };
+          summary.textContent = 'Opening AthRecs. Confirm this race once to save all pages automatically.';
+        };
+      } catch (error) { make('p', 'All-pages collection: ' + error.message); }
+    }
     const save = make('button', 'Download a file instead', actions);
     save.onclick = () => {
       const { tables, ...metadata } = capture;
@@ -196,10 +226,10 @@ export function showBrowserResults(collect) {
     const link = make('a', 'Open AthRecs collected results', actions); link.href = 'https://update.athrecs.com/admin/result-archive'; link.target = '_blank'; link.rel = 'noopener noreferrer';
   }
   if (capture.warnings.length) make('p', capture.warnings.join(' '));
-  make('p', 'Use results you are authorised to retain. Only the selected table, its visible row links and capture details are sent. Other pages are not collected. Athlete identity and publication still need review.');
+  make('p', 'Use results you are authorised to retain. Only the selected table, its visible row links and capture details are sent. Other pages are collected only after choosing Collect all pages and confirming the race in AthRecs. Athlete identity and publication still need review.');
   document.documentElement.append(host); close.focus();
 }
 
 export function browserResultsBookmark() {
-  return 'javascript:' + encodeURIComponent(`void (${showBrowserResults.toString()})(${collectBrowserResults.toString()})`);
+  return 'javascript:' + encodeURIComponent(`void (${showBrowserResults.toString()})(${collectBrowserResults.toString()},${readLondonCollectionPage.toString()},${startLondonCollection.toString()})`);
 }

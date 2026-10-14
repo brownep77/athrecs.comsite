@@ -13,6 +13,7 @@ import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { chromium } from "playwright";
+import { londonPaginationFixture, londonFixtureUrl } from "./fixtures/london-pagination.mjs";
 import { browserResultsBookmark } from "./lib/browser-results-button.mjs";
 const require = createRequire(import.meta.url),
   ts = require("typescript");
@@ -131,6 +132,7 @@ file(
 );
 file("style.css", `@import "${resolve("src/styles.css")}";\n@source "${resolve("src")}";`);
 let loseFirstReceipt = true;
+let loseCollectionReceipt = true;
 const server = await createServer({
   configFile: false,
   root,
@@ -152,6 +154,10 @@ const server = await createServer({
             if (name === "saveArchiveBatch" && loseFirstReceipt) {
               loseFirstReceipt = false;
               throw Error("Synthetic lost response after database commit");
+            }
+            if (name === "saveArchiveBatch" && loseCollectionReceipt && JSON.parse(body).rows?.some(r => r.bib === "9003")) {
+              loseCollectionReceipt = false;
+              throw Error("Synthetic collection receipt lost after commit");
             }
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify(value));
@@ -359,6 +365,63 @@ try {
   assert(
     await memberPage.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),
   );
+  // London all-pages collection: confirm once, stream pages into the actual archive,
+  // lose an API receipt and receive an HTTP 429, then resume without duplicates.
+  const collectionContext = await browser.newContext();
+  let blockThirdPage = true;
+  const sourceRequests = [];
+  await collectionContext.route("**/*", async route => {
+    const url = new URL(route.request().url());
+    if (url.origin === "https://results.tcslondonmarathon.com") {
+      const n = Number(url.searchParams.get("page") || 1); sourceRequests.push(n);
+      if (n === 3 && blockThirdPage) { blockThirdPage = false; return route.fulfill({ status: 429, contentType: "text/html", body: "Synthetic rate limit" }); }
+      return route.fulfill({ contentType: "text/html", body: londonPaginationFixture(n) });
+    }
+    if (url.origin !== "https://update.athrecs.com") return route.abort();
+    if (["/tools/import-results.html", "/tools/import-results.js"].includes(url.pathname)) return route.fulfill({ contentType: url.pathname.endsWith(".js") ? "text/javascript" : "text/html", body: readFileSync(`public${url.pathname}`) });
+    const response = await route.fetch({ url: `http://127.0.0.1:8139${url.pathname}${url.search}` });
+    return route.fulfill({ response });
+  });
+  const collectionSource = await collectionContext.newPage();
+  await collectionSource.goto(londonFixtureUrl);
+  await collectionSource.evaluate(decodeURIComponent(browserResultsBookmark().slice("javascript:".length)));
+  const collectionPopup = collectionSource.waitForEvent("popup");
+  await collectionSource.getByRole("button", { name: "Collect all pages", exact: true }).click();
+  const collectionStaff = await collectionPopup;
+  collectionStaff.on("pageerror", e => errors.push(e.message));
+  await collectionStaff.getByRole("link", { name: "Continue to import" }).click();
+  await collectionStaff.getByText("Automatic collection:", { exact: false }).waitFor();
+  assert.deepEqual(sourceRequests, [1], "No other pages requested before staff confirmation");
+  await collectionStaff.getByRole("button", { name: "Continue to race" }).click();
+  await collectionStaff.getByLabel("Find race edition").fill("Synthetic Browser");
+  await collectionStaff.getByLabel("Race, date and distance").selectOption({ label: "Synthetic Browser Race · 2026-10-01 · 10K" });
+  await collectionStaff.getByLabel("Timing/results provider").fill("Synthetic Collection Timing");
+  await collectionStaff.getByLabel("Authority to retain").fill("Synthetic collection authority; disposable test only.");
+  assert.equal(await collectionStaff.getByLabel("Expected entries").inputValue(), "", "Filtered total is not the whole race total");
+  await collectionStaff.getByRole("button", { name: "Continue to preview" }).click();
+  await collectionStaff.getByLabel("I checked the race").check();
+  await collectionStaff.getByRole("button", { name: "Save and collect all pages", exact: true }).click();
+  await collectionSource.getByText("Synthetic collection receipt lost", { exact: false }).waitFor();
+  assert.deepEqual(sourceRequests, [1, 2], "No subsequent page while a save is unconfirmed");
+  assert.equal((await sql`select count(*)::int n from result_archive_entries where payload->>'bib' like '900%'`)[0].n, 4);
+  await collectionSource.getByRole("button", { name: "Resume collection", exact: true }).click();
+  await collectionSource.getByText("HTTP 429", { exact: false }).waitFor();
+  assert.deepEqual(sourceRequests, [1, 2, 3], "HTTP 429 stops without automatic retry");
+  await collectionSource.getByRole("button", { name: "Resume collection", exact: true }).click();
+  await collectionStaff.getByRole("heading", { name: "All selected pages saved", exact: true }).waitFor();
+  await collectionStaff.getByText("5 new · 0 changed · 0 unchanged.", { exact: true }).waitFor();
+  assert.deepEqual(sourceRequests, [1, 2, 3, 3]);
+  assert.equal((await sql`select count(*)::int n from result_archive_entries where payload->>'bib' like '900%'`)[0].n, 5);
+  assert.equal((await sql`select count(*)::int n from results`)[0].n, 1, "Collection adds no automatic profile results");
+  const collectionMatches = await member.memberArchiveMatches(sql, "archive-browser-member");
+  assert(collectionMatches.some(r => r.bib === "9001"), "Collected rows are available for member claim suggestions");
+  assert.equal((await sql`select count(*)::int n from athlete_account_links`)[0].n, 0);
+  const [qualifier] = await sql`select payload->'original'->>'_capture_notes' as note from result_archive_entries where payload->>'bib'='9001'`;
+  assert.equal(qualifier.note, "unofficial results", "Source qualifications remain in stored evidence");
+  await collectionStaff.screenshot({ path: resolve(root, "all-pages-complete.png"), fullPage: true });
+  await collectionStaff.setViewportSize({ width: 390, height: 844 });
+  assert(await collectionStaff.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Collection has no mobile page overflow");
+  await collectionContext.close();
   assert.deepEqual(errors, []);
   console.log(
     "Archive browser -> validated API -> disposable database -> UI passed: upload, lost-response resume, private matching request, staff link, canonical view and mobile layout.",

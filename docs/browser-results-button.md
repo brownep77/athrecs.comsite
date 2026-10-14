@@ -1,8 +1,9 @@
 # Browser results import
 
-Setup: `/tools/browser-results.html?v=3`. Replace any older bookmark by dragging
+Setup: `/tools/browser-results.html?v=4`. Replace any older bookmark by dragging
 **Save results to AthRecs** to the bookmarks bar. On an HTTPS results page, run
-the bookmark, select a detected table and check its preview. **Send to AthRecs**
+the bookmark, select a detected table and check its preview. For a supported London
+listing on page 1, use **Collect all pages**. For a single page, **Send to AthRecs**
 opens a receiving tab. **Continue to import** opens the staff import wizard;
 sign in first if needed. **Download a file instead** remains available if popups,
 browser storage or opener access are blocked. Existing `.athrecs.json`, CSV and
@@ -25,8 +26,9 @@ copies older than 24 hours are discarded when the queue is next opened. A saved
 page is removed from the queue. Handoff and login alone make no database writes.
 All database calls continue to require the existing authenticated staff middleware.
 
-This captures the loaded page, not a whole race. It does not follow pagination,
-load remote bookmark scripts or read credentials/inputs. Unsupported layouts
+Single-page mode captures only the loaded page. The optional London collection
+follows validated next-page links for the selected filters. Neither mode loads
+remote bookmark scripts or reads credentials/inputs. Unsupported layouts
 fail visibly. London/Mika lists with a heading row and typed fields are supported;
 a wide desktop window is required so every heading is visible.
 
@@ -95,3 +97,48 @@ reload, the React wizard, validated API calls and a disposable database. Reimpor
 of the same rows returns unchanged counts without creating results or athletes.
 The existing member request and staff-link path confirms that account ownership
 and private visibility are preserved. No production results are imported by tests.
+
+## Automatic London page collection (version 4)
+
+Sign in to AthRecs first. On page 1 of the chosen London results listing, choose
+**Collect all pages**, continue to AthRecs and confirm the edition, source,
+column mapping and filtered scope once. **Save and collect all pages** saves the
+first page, then acknowledges the source tab to begin the remaining requests.
+Keep both tabs open. Each page is written through the existing staff-only API in
+bounded batches before the next page is requested. Saved unmatched entries are
+immediately eligible for the existing private member suggestion/claim workflow;
+this does not create public profiles, grant account ownership or approve identity.
+
+The London adapter follows actual pagination links (including the site's numeric
+`data-silver` encoding). It never fabricates page URLs or changes race filters.
+Only same-origin London year paths, listing URLs, consistent headings, sequential
+pages, stable totals and unique bibs are accepted. Each page is parsed in an inert
+document; source scripts are not executed. Requests are sequential, at least two
+seconds apart, with a 20-second source timeout. HTTP errors, including 403/429,
+challenge pages, missing rows, conflicting headers and repeated runners stop the
+run. There is no automatic retry of a blocked request or attempt to bypass it.
+
+**Pause collection** stops before the next page; an in-flight save can finish.
+**Resume collection** retries an unconfirmed page with its original request IDs.
+Lost receipts and repeated acknowledgements do not duplicate rows or counts.
+The receiver independently checks scope, page number, row count, headings and row
+keys. It acknowledges only committed batches and refuses premature completion.
+If a tab is closed or refreshed, restart/reconfirm from page 1; the archive checks
+previously saved rows for duplicates. This is a browser session, not an unattended
+server crawler or a background schedule. Other providers retain single-page mode.
+
+The run total belongs to its filters and is never copied into the whole-race
+expected field count. The supplied saved HTML has Women selected, 26,172 source
+results, 27 pages of up to 1,000 rows, and an `unofficial results` qualifier. These
+were read from that file, not inferred or live-crawled. Source qualifiers are
+retained as `_capture_notes`; capture notes are bounded to 4,000 characters.
+
+Validation includes the real generated bookmark, receiver, staff UI, validated
+API and disposable database across three synthetic London pages; loss of a
+committed save response; a 429 with no automatic retry; explicit resume; exact
+final counts; member claim discoverability; unchanged account ownership and no
+automatic profile results. Corrupt headings, missing totals, duplicate bibs,
+changed filters, mismatched page numbers and invalid collection origins are
+rejected. No live London multi-page collection or production result import is
+performed by these tests. The saved real first page was separately parsed and its
+next-page URL and filtered total checked offline.
