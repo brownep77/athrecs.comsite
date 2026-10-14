@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, SearchCheck, Users, UserRound, Footprints, Handshake, Trophy } from "lucide-react";
+import { Home, SearchCheck, Users, UserRound, Footprints, Handshake, Trophy, Building2 } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
@@ -13,6 +13,12 @@ const nav = [
     label: "Athletes",
     icon: Users,
     match: (p: string) => p.startsWith("/athletes"),
+  },
+  {
+    to: "/clubs",
+    label: "Clubs",
+    icon: Building2,
+    match: (p: string) => p === "/clubs" || p.startsWith("/clubs/"),
   },
   {
     to: "/results",
@@ -164,7 +170,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       ) : null}
       <SiteAnalytics />
       <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">{children}</main>
-      <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 lg:pb-5">
+      <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-40 text-xs text-muted sm:pb-24 md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
           <Link to="/running" className="hover:text-accent">
@@ -209,7 +215,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md lg:hidden"
         aria-label="Primary"
       >
-        <ul className="mx-auto grid max-w-xl grid-cols-7 px-1 pt-1">
+        <ul className="mx-auto grid max-w-xl grid-cols-4 px-1 pt-1 sm:grid-cols-8">
           {nav.map((item) => {
             const active = item.match(pathname);
             return (
