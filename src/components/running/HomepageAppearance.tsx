@@ -5,6 +5,7 @@ import {
   HOMEPAGE_THEME_KEY,
   HOMEPAGE_THEMES,
   homepageThemeStyle,
+  homepageThemeIsDark,
   parseHomepageTheme,
   readHomepageTheme,
   saveHomepageTheme,
@@ -43,6 +44,29 @@ export function HomepageAppearanceProvider({ children }: { children: ReactNode }
     return () => window.removeEventListener("storage", syncPreference);
   }, []);
 
+  useEffect(() => {
+    // Body backgrounds, native controls and portalled dialogs share the public theme.
+    // Restore the prior document values when leaving the public shell.
+    const element = document.documentElement;
+    const previousTheme = element.getAttribute("data-site-theme");
+    const variables = Object.entries(homepageThemeStyle(theme));
+    const previousVariables = variables.map(([name]) => ({
+      name,
+      value: element.style.getPropertyValue(name),
+      priority: element.style.getPropertyPriority(name),
+    }));
+    element.setAttribute("data-site-theme", theme);
+    variables.forEach(([name, value]) => element.style.setProperty(name, String(value)));
+    return () => {
+      if (previousTheme === null) element.removeAttribute("data-site-theme");
+      else element.setAttribute("data-site-theme", previousTheme);
+      previousVariables.forEach(({ name, value, priority }) => {
+        if (value) element.style.setProperty(name, value, priority);
+        else element.style.removeProperty(name);
+      });
+    };
+  }, [theme]);
+
   function chooseTheme(id: HomepageThemeId) {
     setTheme(id);
     let saved = false;
@@ -58,7 +82,14 @@ export function HomepageAppearanceProvider({ children }: { children: ReactNode }
 
   return (
     <HomepageThemeContext.Provider value={{ theme, chooseTheme }}>
-      {children}
+      <div
+        className="site-appearance min-h-dvh bg-bg text-fg"
+        data-site-theme={theme}
+        data-colour-mode={homepageThemeIsDark(theme) ? "dark" : "light"}
+        style={homepageThemeStyle(theme)}
+      >
+        {children}
+      </div>
       <p className="sr-only" role="status" aria-live="polite">
         {announcement}
       </p>
@@ -129,17 +160,17 @@ export function HomepageColourPicker() {
       onToggle={(event) => setOpen(event.currentTarget.open)}
     >
       <summary
-        title={`Page colours: ${HOMEPAGE_THEMES[theme].label}`}
+        title={`Site colours: ${HOMEPAGE_THEMES[theme].label}`}
         className="flex size-11 cursor-pointer list-none items-center justify-center gap-0.5 rounded-xl border border-border bg-surface text-fg shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden"
       >
         <Palette className="size-5 text-accent" aria-hidden="true" />
-        <span className="sr-only">Page colours</span>
+        <span className="sr-only">Site colours</span>
         <ChevronDown className="size-3 group-open:rotate-180" aria-hidden="true" />
       </summary>
       <fieldset className="absolute right-0 top-full z-50 mt-2 max-h-[calc(100dvh-12rem)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-border bg-surface p-3 shadow-xl sm:max-h-[calc(100dvh-8rem)] lg:max-h-[calc(100dvh-6rem)]">
         <legend className="px-2 text-sm font-semibold text-fg">Preview 30 colour schemes</legend>
         <p className="mb-3 px-2 text-xs leading-5 text-muted">
-          Try each design on the full homepage. Current colours shows the original.
+          Colours apply across the site, including menus. Current colours shows the original.
         </p>
         <div className="grid gap-2">
           {HOMEPAGE_THEME_IDS.map((id) => {

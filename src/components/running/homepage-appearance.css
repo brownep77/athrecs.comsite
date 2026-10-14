@@ -3,6 +3,56 @@
   color: var(--color-fg);
 }
 
+html[data-site-theme]:not([data-site-theme="colourful"]),
+.site-appearance:not([data-site-theme="colourful"]) {
+  color-scheme: var(--site-colour-scheme);
+}
+
+/* Neutral legacy panels follow the same palette as token-based public pages. */
+.site-appearance:not([data-site-theme="colourful"]) :where(.bg-white, .bg-slate-50, .bg-gray-50) {
+  background-color: var(--color-surface);
+}
+
+.site-appearance:not([data-site-theme="colourful"]) :where(.bg-slate-100, .bg-gray-100) {
+  background-color: var(--color-elevated);
+}
+
+.site-appearance:not([data-site-theme="colourful"])
+  :where(.text-slate-900, .text-slate-800, .text-gray-900, .text-gray-800) {
+  color: var(--homepage-card-heading, var(--color-fg));
+}
+
+.site-appearance:not([data-site-theme="colourful"])
+  :where(
+    .text-slate-700,
+    .text-slate-600,
+    .text-slate-500,
+    .text-gray-700,
+    .text-gray-600,
+    .text-gray-500
+  ) {
+  color: var(--homepage-card-copy, var(--color-muted));
+}
+
+.site-appearance:not([data-site-theme="colourful"])
+  :where(.border-slate-200, .border-slate-300, .border-gray-200, .border-gray-300) {
+  border-color: var(--color-border);
+}
+
+/* Status colours carry meaning and retain dark text on their fixed light fills. */
+.site-appearance:not([data-site-theme="colourful"])
+  :where(.bg-amber-50, .bg-emerald-50, .bg-cyan-50) {
+  --color-fg: #0f172a;
+  --color-muted: #334155;
+  --homepage-card-heading: #0f172a;
+  --homepage-card-copy: #334155;
+  color: var(--color-fg);
+}
+
+.site-appearance[data-colour-mode="dark"] img[src="/athrecs-logo-header.png"] {
+  filter: brightness(0) invert(1);
+}
+
 /* Fixed slate labels on pastel cards follow their own surface when a visitor changes themes. */
 .homepage-appearance:not([data-homepage-theme="colourful"]) .text-slate-900 {
   color: var(--homepage-card-heading, var(--color-fg));

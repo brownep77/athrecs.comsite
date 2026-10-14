@@ -1662,10 +1662,15 @@ export function saveHomepageTheme(
 
 type ThemeStyle = CSSProperties & { [key: `--${string}`]: string };
 
+export function homepageThemeIsDark(id: HomepageThemeId): boolean {
+  return ["midnight", "graphite-lime", "nightfall-amber", "aurora-after-dark"].includes(id);
+}
+
 export function homepageThemeStyle(id: HomepageThemeId): ThemeStyle {
   if (id === "colourful") return {};
   const theme = HOMEPAGE_THEMES[id];
   return {
+    "--site-colour-scheme": homepageThemeIsDark(id) ? "dark" : "light",
     "--color-bg": theme.page,
     "--color-surface": theme.surface,
     "--color-elevated": theme.soft,
@@ -1678,6 +1683,19 @@ export function homepageThemeStyle(id: HomepageThemeId): ThemeStyle {
     "--color-accent-soft": theme.soft,
     "--color-primary": theme.brand,
     "--color-primary-fg": theme.brandText,
+  };
+}
+
+export function siteMenuThemeStyle(id: HomepageThemeId): ThemeStyle {
+  if (id === "colourful") return {};
+  const theme = HOMEPAGE_THEMES[id];
+  const menu = theme.countryTones?.[0];
+  return {
+    ...homepageThemeStyle(id),
+    "--color-bg": menu?.background ?? theme.surface,
+    "--color-fg": menu?.text ?? theme.text,
+    "--color-muted": menu?.copy ?? theme.muted,
+    "--color-accent": menu?.accent ?? theme.brand,
   };
 }
 
