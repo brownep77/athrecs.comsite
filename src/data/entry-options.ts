@@ -92,7 +92,7 @@ export const eventSlugAliases: Readonly<Record<string, string>> = {
 };
 
 export function canonicalEventSlug(slug: string): string {
-  return eventSlugAliases[slug] ?? slug;
+  return Object.hasOwn(eventSlugAliases, slug) ? eventSlugAliases[slug] : slug;
 }
 
 /** All safe edition migrations needed before the catalogue is upserted. */

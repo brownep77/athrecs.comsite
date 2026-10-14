@@ -16,6 +16,7 @@ import { SponsorshipDetails } from "@/components/partners/SponsorshipDetails";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import {
   ENQUIRY_KINDS,
   ENQUIRY_STATUSES,
@@ -38,23 +39,19 @@ export const Route = createFileRoute("/sponsorship")({
         : undefined,
   }),
   head: () => ({
-    meta: [
-      {
-        title: IS_RUNRECS_SITE
-          ? "Race sponsorship | RunRecs"
-          : "Athlete & influencer partnerships | AthRecs",
-      },
-      {
-        name: "description",
-        content: IS_RUNRECS_SITE
-          ? "Connect your brand with the running community through race sponsorship, race-day experiences and product partnerships. Submit a private sponsorship brief."
-          : "Give your brand more exposure through athletes and influencers. Share a private brief for sponsorship, content collaborations or ambassador partnerships.",
-      },
-    ],
+    meta: siteGraphMeta({
+      title: IS_RUNRECS_SITE
+        ? "Race sponsorship | RunRecs"
+        : "Athlete & influencer partnerships | AthRecs",
+      description: IS_RUNRECS_SITE
+        ? "Connect your brand with the running community through race sponsorship, race-day experiences and product partnerships. Submit a private sponsorship brief."
+        : "Give your brand more exposure through athletes and influencers. Share a private brief for sponsorship, content collaborations or ambassador partnerships.",
+      url: `${SITE_URL}/sponsorship`,
+    }),
     links: [
       {
         rel: "canonical",
-        href: `https://www.${IS_RUNRECS_SITE ? "runrecs" : "athrecs"}.com/sponsorship`,
+        href: `${SITE_URL}/sponsorship`,
       },
     ],
   }),

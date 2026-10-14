@@ -140,3 +140,5 @@ if (failures.length) {
 console.log(
   `Slug stability verification passed for ${seriesList.length.toLocaleString("en-GB")} race-series URLs, including legacy compatibility.`,
 );
+
+await import("./verify-page-slug-routing.mjs");

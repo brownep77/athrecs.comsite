@@ -19,14 +19,13 @@ const PUBLIC_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]*$/;
 export const resolveSlugRedirect = createServerFn({ method: "GET" })
   .validator((input: ResolveSlugRedirectInput) => {
     const entityType = input?.entityType;
-    const slug = input?.slug?.trim().toLowerCase();
+    const slug = typeof input?.slug === "string" ? input.slug.trim().toLowerCase() : "";
     if (!ENTITY_TYPES.has(entityType)) throw new Error("Unknown slug entity type");
-    if (!slug || !PUBLIC_SLUG_PATTERN.test(slug)) {
-      throw new Error("Invalid slug");
-    }
-    return { entityType, slug };
+    // A malformed public address is a missing page, not a server failure.
+    return { entityType, slug: PUBLIC_SLUG_PATTERN.test(slug) ? slug : "" };
   })
   .handler(async ({ data }) => {
+    if (!data.slug) return null;
     await ensureAthrecsSeeded();
     const sql = await getSql();
     const rows = await sql<{ current_slug: string }>`

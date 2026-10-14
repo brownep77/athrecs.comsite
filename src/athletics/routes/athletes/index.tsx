@@ -10,7 +10,7 @@ import { ArrowLeft, ArrowRight, Search, UserRound } from "lucide-react";
 import { AthleteDirectoryCard } from "@/components/athletes/AthleteDirectoryCard";
 import { getAthleteDirectory } from "@/lib/athrecs/athlete-directory-api";
 import { ATHLETE_INDEXING_HEADER } from "@/lib/athrecs/athlete-search-policy";
-import { absoluteUrl } from "@/lib/athrecs/seo";
+import { absoluteUrl, siteGraphMeta } from "@/lib/athrecs/seo";
 import { SPORTS } from "@/lib/athrecs/filters";
 import {
   parseAthleteDirectorySearch,
@@ -47,17 +47,16 @@ export const Route = createFileRoute("/athletes/")({
     const query = new URLSearchParams();
     if (search?.letter) query.set("letter", search.letter);
     if (search?.page) query.set("page", String(search.page));
+    const canonical = absoluteUrl(`/athletes${query.size ? `?${query}` : ""}`);
     return {
-      links: [{ rel: "canonical", href: absoluteUrl(`/athletes${query.size ? `?${query}` : ""}`) }],
+      links: [{ rel: "canonical", href: canonical }],
       meta: [
-        {
+        ...siteGraphMeta({
           title: `Athlete profiles, sports and results${search?.letter ? ` — ${search.letter}` : ""}${search?.page ? ` — page ${search.page}` : ""} | ATHRECS`,
-        },
+          description: "Explore public athlete profiles and published results.",
+          url: canonical,
+        }),
         { name: "robots", content: indexable ? "index, follow" : "noindex, follow" },
-        {
-          name: "description",
-          content: "Explore public athlete profiles and published results.",
-        },
       ],
     };
   },

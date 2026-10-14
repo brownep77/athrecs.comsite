@@ -19,7 +19,7 @@ import {
 } from "./public-read-limits";
 import { getSql, dbSource, type Sql } from "@/lib/db";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
-import { canonicalEventSlug } from "@/data/entry-options";
+import { eventByPublicSlug } from "./event-slug.server";
 import { retainedFixtureAliasSlugs } from "@/data/fixture-deduplication";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
@@ -446,10 +446,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data: slug }) => {
     const sql = await ready();
     const today = todayIso();
-    const canonicalSlug = canonicalEventSlug(slug);
-    const events = await sql`
-      select * from events where slug = ${canonicalSlug} limit 1
-    `;
+    const events = await eventByPublicSlug(sql, slug);
     const event = events[0] as
       | {
           id: number;
