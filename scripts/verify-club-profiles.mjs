@@ -43,6 +43,15 @@ try {
   assert.equal(clubProfiles["triangle-triathlon-club"].founded_year, undefined);
   assert.equal(clubProfiles["ballybunion-tc"].founded_year, undefined);
   assert.equal(bySlug.get("ams-triathlon").county, "Dublin");
+  assert.equal(bySlug.get("chessington-unity-running-club").postcode, "");
+  assert.equal(bySlug.get("chiltern-harriers-ac").address, "");
+  assert.equal(bySlug.get("chew-valley-snails").adult_only, true);
+  assert.equal(bySlug.get("welsh-athletics-micky-morris-racing-team").city, "");
+  assert.equal(bySlug.get("welsh-athletics-north-wales-road-runners").city, "Llandudno");
+  assert.equal(bySlug.get("cuilcagh-tc").address_kind, "correspondence");
+  assert.equal(bySlug.get("crosshaven-triathlon-club").socials.find(s => s.url.includes("instagram.com/crosshaventri"))?.platform, "Instagram");
+  assert.match(clubProfiles["chiltern-harriers-ac"].biography.join(" "), /closed indefinitely/);
+  assert.match(clubProfiles["welsh-athletics-north-wales-road-runners"].biography.join(" "), /management passed to Always Aim High Events from 2023/);
   assert.equal(bySlug.get("welsh-athletics-mynyddwyr-de-cymru").adult_only, true);
   assert.equal(bySlug.get("oswestry-olympians").country, "England");
   assert.equal(bySlug.get("oswestry-olympians").postcode, "");
@@ -138,6 +147,14 @@ try {
   assert.ok(buckley.checked_at >= "2026-10-14");
   assert.ok(buckley.contacts.some((c) => c.email === "buckley.runners@gmail.com"));
   assert.ok(!buckley.contacts.some((c) => /pauldodd07/i.test(c.email ?? "")));
+  assert.equal(bySlug.get("city-of-sheffield-and-dearne-ac").postcode, "");
+  assert.equal(clubProfiles["city-of-sheffield-and-dearne-ac"].founded_year, undefined);
+  assert.equal(bySlug.get("clapham-chasers").address_kind, "clubhouse");
+  assert.ok(bySlug.get("clapham-chasers").sports.includes("Swimming"));
+  assert.equal(bySlug.get("dublin-university-cycling-and-triathlon-club").county, "Dublin");
+  assert.equal(bySlug.get("welsh-athletics-parc-bryn-bach-running-club").address, "");
+  assert.equal(bySlug.get("welsh-athletics-pegasus-running-club").city, "Cardiff");
+  assert.equal(clubProfiles["city-of-preston-triathlon-club-for-juniors"].founded_year, undefined);
   for (const [slug, profile] of Object.entries(clubProfiles)) {
     assert.ok(bySlug.has(slug), `Editorial profile must match a canonical club: ${slug}`);
     assert.equal(bySlug.get(slug).summary, profile.summary);
