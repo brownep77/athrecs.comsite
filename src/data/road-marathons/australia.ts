@@ -2351,26 +2351,37 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
     city: "Bunbury",
     region: "Western Australia",
     timeZone: "Australia/Perth",
-    officialUrl: "https://www.runbunbury.com.au/mode-marathon",
+    officialUrl: "https://runbunbury.com.au/races/the-full-three/",
     description:
-      "Bunbury’s 3 Waters Marathon takes its name from the Indian Ocean, Koombana Bay and Leschenault Inlet. The two-lap road and paved-path course also visits Big Swamp Nature Reserve and climbs towards the lighthouse on each circuit. The second visit may feel rather more uphill than the first. The race hub is at Bunbury Runners Club beside Ocean Drive. The next festival is confirmed for 11 April 2027, with online registration opening on 1 October 2026.",
+      "Bunbury’s 3 Waters Marathon is a two-lap tour of the Indian Ocean, Koombana Bay and Leschenault Inlet, based at Bunbury Runners Club on Ocean Drive. The 2027 race, called The Full Three, starts at 6:30am and allows six hours, with an earlier checkpoint at Rocky Point. The lighthouse climb arrives on both laps; familiarity is unlikely to make the second visit feel shorter. This is a coastal road-and-path marathon with a club-run atmosphere, personal nutrition drop-off and published pacer groups. Choose the full 42.2 km race when following the official Race Roster registration link.",
     course: {
       summary:
-        "Two laps from Bunbury Runners Club, taking in Big Swamp, the oceanfront, lighthouse, Jetty Road and Leschenault Inlet.",
+        "Two circuits connect Big Swamp, Back Beach, Marlston Hill lighthouse, Jetty Road, Whalebone Bridge, Koombana Bay and the Leschenault Inlet boardwalk, returning to Ocean Drive. The lighthouse climb and zig-zag descent fall around 8–9 km and again around 29–30 km.",
       surface: "Road and paved paths, with the event hub at the recreation ground",
       profile: "Undulating, including the lighthouse climb on each lap.",
       links: [
         {
-          label: "Official full marathon route",
-          url: "https://www.runbunbury.com.au/mode-marathon",
+          label: "Full marathon and 2027 arrangements",
+          url: "https://runbunbury.com.au/races/the-full-three/",
+        },
+        {
+          label: "Course landmarks, aid and personal nutrition",
+          url: "https://runbunbury.com.au/course/",
         },
       ],
     },
     entryMethods: [
       {
-        name: "Online registration",
-        description: "Registration for 2027 opens on 1 October 2026 through the official site.",
-        url: "https://www.runbunbury.com.au/",
+        name: "2027 online registration",
+        description:
+          "The official entry page links to Race Roster for The Full Three. Select the 42.2 km event and check current availability; the published opening was 1 October 2026.",
+        url: "https://runbunbury.com.au/entries/",
+      },
+      {
+        name: "Organiser-approved transfer",
+        description:
+          "The organiser allows a named replacement through its published email process. Contact the club to arrange the transfer; do not simply pass on a race number.",
+        url: "https://runbunbury.com.au/entries/",
       },
     ],
     editions: [
@@ -2380,7 +2391,32 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
           "https://www.bunburyrunnersclub.org.au/running-events/bunbury-3-waters-running-festival",
       },
     ],
-    practical: [],
+    practical: [
+      {
+        label: "2027 start and cut-offs",
+        value:
+          "Start at 6:30am at Bunbury Runners Club, 1 Ocean Drive. The finish closes at 12:30pm, and runners must reach the Rocky Point car-park checkpoint by 11am.",
+        sourceUrl: "https://runbunbury.com.au/races/the-full-three/",
+      },
+      {
+        label: "2027 minimum age and pacers",
+        value:
+          "Marathon entrants must be 18 on race day. Published pacer targets are 3:00, 3:30, 4:00 and 4:30.",
+        sourceUrl: "https://runbunbury.com.au/races/the-full-three/",
+      },
+      {
+        label: "2027 drinks and personal supplies",
+        value:
+          "The course page lists aid roughly every 5 km. Label personal bottles or gels with your bib number and hand them in at Saturday bib collection or by 5:45am on race morning.",
+        sourceUrl: "https://runbunbury.com.au/course/",
+      },
+      {
+        label: "2027 entry changes",
+        value:
+          "The entry page permits switches to shorter distances if places remain. It also lists a 60% refund window ending 11 February 2027; check the full conditions before booking.",
+        sourceUrl: "https://runbunbury.com.au/entries/",
+      },
+    ],
     media: [
       {
         label: "2026 official race photographs",
@@ -2388,7 +2424,7 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
         kind: "photos",
       },
     ],
-    resultsUrl: "https://www.runbunbury.com.au/2025results-1",
+    resultsUrl: "https://runbunbury.com.au/results/",
     pastEditions: [
       {
         year: 2026,
@@ -2415,8 +2451,8 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
         url: "https://www.bunburyrunnersclub.org.au/running-events/bunbury-3-waters-running-festival",
       },
       {
-        label: "Marathon route",
-        url: "https://www.runbunbury.com.au/mode-marathon",
+        label: "2027 full-marathon information",
+        url: "https://runbunbury.com.au/races/the-full-three/",
       },
       {
         label: "Entry announcement",
@@ -2426,6 +2462,18 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
         label: "2026 podium and archive links",
         url: "https://www.runbunbury.com.au/2025results-1",
       },
+      {
+        label: "Current results archive",
+        url: "https://runbunbury.com.au/results/",
+      },
+      {
+        label: "2027 entry terms",
+        url: "https://runbunbury.com.au/entries/",
+      },
+      {
+        label: "Course and aid",
+        url: "https://runbunbury.com.au/course/",
+      },
     ],
     fieldSize: {
       display: "About 230",
@@ -2434,7 +2482,7 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
       sourceUrl: "https://marathonview.net/race/146395",
       note: "MarathonView records 229 full-marathon finishers in 2026.",
     },
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-14",
   },
   {
     slug: "alice-springs-marathon",

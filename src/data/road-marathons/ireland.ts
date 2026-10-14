@@ -235,6 +235,12 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
           "Follow the council’s Tickets/Waiting list link for the current registration release and availability.",
         url: "https://www.corkcity.ie/en/cork-city-marathon/",
       },
+      {
+        name: "Official entry transfer",
+        description:
+          "Transfers must be made through Eventmaster while the organiser’s transfer window is open. A private exchange of a bib is not an accepted transfer.",
+        url: "https://www.corkcity.ie/en/cork-city-marathon/faqs/frequently-asked-questions/",
+      },
     ],
     editions: [
       {
@@ -299,6 +305,10 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
         label: "2026 race report",
         url: "https://www.corkcity.ie/en/council-services/news-room/latest-news/cork-turns-yellow-and-winners-of-the-2026-analog-devices-cork-city-marathon/",
       },
+      {
+        label: "Entry transfers, collection and accessibility FAQ",
+        url: "https://www.corkcity.ie/en/cork-city-marathon/faqs/frequently-asked-questions/",
+      },
     ],
     fieldSize: {
       display: "About 3,000",
@@ -308,7 +318,34 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
         "https://www.corkcity.ie/en/council-services/news-room/latest-news/cork-turns-yellow-and-winners-of-the-2026-analog-devices-cork-city-marathon/",
       note: "Cork City Council reports approximately 3,000 full-marathon finishers in 2026, excluding the half marathon and 10km.",
     },
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-14",
+
+    practical: [
+      {
+        label: "Race-pack collection — 2026 reference",
+        value:
+          "The previous edition required collection of the bib and timing chip at Cork City Hall before race day; packs were not posted. Wait for the 2027 collection dates and hours before arranging your arrival.",
+        sourceUrl: "https://www.corkcity.ie/en/cork-city-marathon/faqs/frequently-asked-questions/",
+      },
+      {
+        label: "Minimum age",
+        value:
+          "The published FAQ requires full-marathon entrants to be at least 18. Check the current entry conditions before registering.",
+        sourceUrl: "https://www.corkcity.ie/en/cork-city-marathon/faqs/frequently-asked-questions/",
+      },
+      {
+        label: "Start and baggage — 2026 reference",
+        value:
+          "The FAQ still describes the 2026 city-centre marathon start at 8:15am and race-day baggage at City Hall. These are not confirmed 2027 timings.",
+        sourceUrl: "https://www.corkcity.ie/en/cork-city-marathon/faqs/frequently-asked-questions/",
+      },
+      {
+        label: "Accessibility enquiries",
+        value:
+          "Wheelchairs are permitted under the published rules. Specialist running buggies require advance permission, with at least four weeks’ notice; contact the race team to discuss your needs.",
+        sourceUrl: "https://www.corkcity.ie/en/cork-city-marathon/faqs/frequently-asked-questions/",
+      },
+    ],
   },
   {
     slug: "great-limerick-run-marathon",
