@@ -559,9 +559,22 @@ export const NEW_ZEALAND_ROAD_MARATHONS: RoadMarathon[] = [
       },
     ],
     sources: [
-      { label: "Official marathon course", url: dunedinCourse },
-      { label: "Historical results and course versions", url: dunedinArchive },
-      { label: "2026 full-marathon results", url: dunedin2026 },
+      {
+        label: "Official marathon course",
+        url: "https://dunedinmarathon.co.nz/race-entry/full-marathon-course/",
+      },
+      {
+        label: "Historical results and course versions",
+        url: "https://dunedinmarathon.co.nz/results/past-results/",
+      },
+      {
+        label: "2026 full-marathon results",
+        url: "https://dunedinmarathon.co.nz/wp-content/uploads/2026/09/2026-Emersons-Dunedin-Marathon-Full-Marathon.pdf",
+      },
+      {
+        label: "Runner FAQ, transport and certification validity",
+        url: "https://dunedinmarathon.co.nz/about-2/faqs/",
+      },
     ],
     fieldSize: {
       display: "Around 500",
@@ -571,7 +584,34 @@ export const NEW_ZEALAND_ROAD_MARATHONS: RoadMarathon[] = [
         "https://dunedinmarathon.co.nz/wp-content/uploads/2026/09/2026-Emersons-Dunedin-Marathon-Full-Marathon.pdf",
       note: "The official 2026 full-marathon results list 487 ranked finishers. Non-finishers and shorter races are excluded.",
     },
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-14",
+
+    practical: [
+      {
+        label: "Start and finish logistics",
+        value:
+          "The 2026 arrangements included transport to Portobello Recreation Reserve for the full-marathon start. The finish is outside Emerson’s; check the next edition’s transport booking and pick-up instructions.",
+        sourceUrl: "https://dunedinmarathon.co.nz/about-2/faqs/",
+      },
+      {
+        label: "2026 time limit and age",
+        value:
+          "The published FAQ specifies a 7am start, a 1pm cut-off and a minimum age of 18 for the full marathon. These are previous-edition details until a new race guide confirms them.",
+        sourceUrl: "https://dunedinmarathon.co.nz/about-2/faqs/",
+      },
+      {
+        label: "Drinks and personal bottles",
+        value:
+          "The 2026 FAQ places drink stations about 5 km apart and allows labelled personal bottles to be handed in at race-pack collection. Use the course map to find toilets and station locations.",
+        sourceUrl: "https://dunedinmarathon.co.nz/about-2/faqs/",
+      },
+      {
+        label: "Course certification for 2027",
+        value:
+          "The organiser’s FAQ says the existing certification expires at the end of December 2026. Check for renewed certification if you need the next race for a qualifying performance.",
+        sourceUrl: "https://dunedinmarathon.co.nz/about-2/faqs/",
+      },
+    ],
   },
   {
     slug: "buller-gorge-marathon",

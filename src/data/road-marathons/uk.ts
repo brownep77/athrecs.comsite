@@ -258,16 +258,18 @@ const details: Record<string, Enrichment> = {
       links: [link("Official route map", "https://www.manchestermarathon.co.uk/route/route-map/")],
     },
     entryMethods: [
-      entry(
-        "General-entry updates",
-        "Register interest through the organiser for current entry-release information.",
-        "https://www.manchestermarathon.co.uk/home/",
-      ),
-      entry(
-        "Official charity",
-        "Choose an official charity partner and follow its entry and fundraising conditions.",
-        "https://www.manchestermarathon.co.uk/charities/official-charities/",
-      ),
+      {
+        name: "General-entry updates",
+        description:
+          "Register interest through the organiser for current entry-release information.",
+        url: "https://www.manchestermarathon.co.uk/home/",
+      },
+      {
+        name: "Official charity",
+        description:
+          "Apply through an official 2027 charity partner: Alzheimer’s Society, British Heart Foundation, Cancer Research UK, Mind or The Christie Charity. Check its availability, registration fee and fundraising commitment before accepting a place.",
+        url: "https://www.manchestermarathon.co.uk/charities/official-charities/",
+      },
     ],
     media: [news("2026 elite winners and race videos", manchesterReport)],
     resultsUrl: "https://www.manchestermarathon.co.uk/event-info/results/",
@@ -294,6 +296,27 @@ const details: Record<string, Enrichment> = {
           ),
         ],
       ),
+    ],
+
+    practical: [
+      {
+        label: "Which route map to use",
+        value:
+          "The organiser currently presents the 2026 map as a preview of the 18 April 2027 race. It shows drinks and activity points, but is not labelled as the final 2027 route.",
+        sourceUrl: "https://www.manchestermarathon.co.uk/route/route-map/",
+      },
+      {
+        label: "2027 charity entry",
+        value:
+          "The five official partners are Alzheimer’s Society, British Heart Foundation, Cancer Research UK, Mind and The Christie Charity. Each partner sets its own application and fundraising arrangements; a fundraising page alone is not a confirmed place.",
+        sourceUrl: "https://www.manchestermarathon.co.uk/charities/official-charities/",
+      },
+      {
+        label: "Entry changes and runner support",
+        value:
+          "Use the official help centre’s pre-event and unable-to-take-part sections for current entry queries. Check the relevant edition before assuming a previous transfer or deferral rule still applies.",
+        sourceUrl: "https://gmm.zendesk.com/hc/en-us",
+      },
     ],
   },
   brighton: {
@@ -1408,13 +1431,18 @@ const details: Record<string, Enrichment> = {
   newport: {
     slug: "newport-marathon",
     description:
-      "Newport Marathon heads from the Welsh city into the Gwent Levels on a flat road course, passing riverfront landmarks and rural villages. The Transporter Bridge helps set the scene before the route reaches the countryside. It is a useful option to consider when hills are not on the wish list, though 26.2 miles still need running. Standard and charity entries are available through Run 4 Wales. Check the marathon’s own route and results, as the festival also includes shorter races.",
+      "Newport Marathon combines a city-centre start with the open roads of the Gwent Levels. The course begins and ends on Usk Way, visiting the market and castle before heading through the International Sports Village, Redwick and the wetlands around Goldcliff. There is even a lap of an athletics track: a brief reminder that this is still sport, despite the sightseeing. Its flat profile makes it worth considering for a first marathon or a PB attempt. Plan the journey as carefully as the pace; the organiser offers travel advice and a park-and-ride service, with 2027 booking details still to follow.",
     course: {
       summary:
-        "Newport and the Gwent Levels, combining city landmarks, riverfront and rural villages.",
+        "From the Usk Way riverfront, a city loop passes the Victorian Market and castle before the International Sports Village and its athletics track. The course then reaches Redwick and the Gwent Levels, loops through Goldcliff and returns to Newport with views of the Transporter Bridge.",
       surface: "Road",
       profile: "Flat road course.",
-      links: [link("Official marathon route", "https://newportwalesmarathon.co.uk/routes/")],
+      links: [
+        {
+          label: "Official full-marathon route and elevation",
+          url: "https://newportwalesmarathon.co.uk/course/",
+        },
+      ],
     },
     entryMethods: [
       entry(
@@ -1457,6 +1485,33 @@ const details: Record<string, Enrichment> = {
         ],
       ),
     ],
+
+    practical: [
+      {
+        label: "Getting to the start",
+        value:
+          "The organiser estimates a 15-minute walk from Newport railway station to the start. Check the actual Sunday timetable before relying on a race-morning train.",
+        sourceUrl: "https://newportwalesmarathon.co.uk/parking/",
+      },
+      {
+        label: "2027 park and ride",
+        value:
+          "The travel page says 2027 parking will open in the new year. Wait for the new booking release before treating displayed prices and operating times as your edition’s arrangements.",
+        sourceUrl: "https://newportwalesmarathon.co.uk/parking/",
+      },
+      {
+        label: "2026 race-day reference",
+        value:
+          "The previous guide lists posted race bibs, baggage storage at Friars Walk and live tracking through the Run 4 Wales app. Check the new guide for 2027 arrangements.",
+        sourceUrl: "https://newportwalesmarathon.co.uk/race-day-guide/",
+      },
+      {
+        label: "Wheelchair participation",
+        value:
+          "The 2026 guide welcomed wheelchair entrants in the marathon. Use the organiser’s accessibility guidance to discuss the next edition’s requirements before entering.",
+        sourceUrl: "https://newportwalesmarathon.co.uk/race-day-guide/",
+      },
+    ],
   },
 };
 
@@ -1476,6 +1531,7 @@ export const UK_ROAD_MARATHONS: RoadMarathon[] = UK_MARATHONS.map((race) => {
     link("Official event", race.officialUrl),
     link("County / area information", geography.sourceUrl),
     ...enriched.course.links,
+    ...(enriched.practical ?? []).map((item) => link(item.label, item.sourceUrl)),
     ...enriched.entryMethods.map((method) => link(method.name, method.url)),
     link("Official results", enriched.resultsUrl),
     ...enriched.media.map((item) => link(item.label, item.url)),
@@ -1514,6 +1570,8 @@ export const UK_ROAD_MARATHONS: RoadMarathon[] = UK_MARATHONS.map((race) => {
     sources: sourceLinks.filter(
       (source, index, all) => all.findIndex((item) => item.url === source.url) === index,
     ),
-    checkedAt: "2026-09-26",
+    checkedAt: ["newport-marathon", "manchester-marathon"].includes(enriched.slug)
+      ? "2026-10-14"
+      : "2026-09-26",
   };
 });

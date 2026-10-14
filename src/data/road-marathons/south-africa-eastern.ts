@@ -63,6 +63,27 @@ export const SOUTH_AFRICA_EASTERN_MARATHONS: readonly RoadMarathon[] = [
           "The 2026 race used paid buses from Ngodwana to the start. Check the next edition’s bus arrangements before booking travel.",
         sourceUrl: "https://elandsmarathon.co.za/",
       },
+      {
+        label: "Entry deadline — 2026 reference",
+        value:
+          "The previous race accepted advance entries only, with no late entry. Substitutions and distance changes were available during the entry period. Check the 2027 release for new deadlines.",
+        sourceUrl:
+          "https://tracn4.co.za/mpumalanga-s-fastest-comrades-qualifier-returns-this-february/",
+      },
+      {
+        label: "Number collection — 2026 reference",
+        value:
+          "The 2026 expo at Astron Energy Millys in Machadodorp was a number-collection point, with limited collection also offered at LVCC in Mbombela. Confirm the next edition’s venues before setting your travel route.",
+        sourceUrl:
+          "https://tracn4.co.za/mpumalanga-s-fastest-comrades-qualifier-returns-this-february/",
+      },
+      {
+        label: "Qualification rules",
+        value:
+          "TRAC described the 2026 race as a qualifier for Comrades and Two Oceans. Check the destination race’s 2027 qualifying window and requirements before relying on a new performance.",
+        sourceUrl:
+          "https://tracn4.co.za/mpumalanga-s-fastest-comrades-qualifier-returns-this-february/",
+      },
     ],
     media: [
       {
@@ -169,8 +190,12 @@ export const SOUTH_AFRICA_EASTERN_MARATHONS: readonly RoadMarathon[] = [
         label: "Belal Athletics Club’s 2025 roundup",
         url: "https://belalathleticsclub.wordpress.com/2025/03/02/road-the-results-of-the-weekend-12/",
       },
+      {
+        label: "Sponsor’s 2026 entry, expo and qualifying information",
+        url: "https://tracn4.co.za/mpumalanga-s-fastest-comrades-qualifier-returns-this-february/",
+      },
     ],
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-14",
   },
   {
     slug: "nmb-1city-marathon-south-africa",

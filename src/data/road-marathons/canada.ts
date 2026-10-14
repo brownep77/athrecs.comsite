@@ -911,14 +911,41 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
         "url": "https://mraweb.ca/wp-content/uploads/2020/07/MB-Marathon-Full-Marathon-overall.pdf"
       }
     ],
-    "checkedAt": "2026-09-26",
+    "checkedAt": "2026-10-14",
     "fieldSize": {
       "display": "About 1,400",
       "basis": "Finishers",
       "year": "2026",
       "sourceUrl": "https://mraweb.ca/wp-content/uploads/2020/07/MB-Marathon-Full-Marathon-overall.pdf",
       "note": "Rounded from 1,431 ranked full-marathon finishers."
-    }
+    },
+    "practical": [
+      {
+        "label": "Start corrals — previous edition",
+        "value": "The 2026 race assigned corrals using expected finish time and runner numbers. Submit a realistic estimate and wait for your own race-week instructions; the older wave schedule is not a confirmed 2027 timetable.",
+        "sourceUrl": "https://manitobamarathon.mb.ca/marathon/full-marathon/"
+      },
+      {
+        "label": "Aid and course markers — 2026 reference",
+        "value": "The organiser describes kilometre markers and water/electrolyte stations roughly every 2–3 km. Check the new course map for the next edition’s station and nutrition locations.",
+        "sourceUrl": "https://manitobamarathon.mb.ca/marathon/full-marathon/"
+      },
+      {
+        "label": "Adaptive participation",
+        "value": "The organiser asks adaptive athletes to identify their category at registration and contact the race in advance so suitable course and start arrangements can be discussed.",
+        "sourceUrl": "https://manitobamarathon.mb.ca/marathon/full-marathon/"
+      },
+      {
+        "label": "Minimum age — published rule",
+        "value": "The full-marathon page specifies age 16 or above on race day. Check the 2027 entry conditions when registration opens.",
+        "sourceUrl": "https://manitobamarathon.mb.ca/marathon/full-marathon/"
+      },
+      {
+        "label": "The stadium finish",
+        "value": "The course ends on the field inside Princess Auto Stadium, with an infield recovery area. Agree where to meet supporters after leaving the runner recovery area.",
+        "sourceUrl": "https://manitobamarathon.mb.ca/marathon/full-marathon/"
+      }
+    ]
   },
   {
     "slug": "saskatchewan-marathon",
@@ -992,6 +1019,10 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
       {
         "label": "Course maps",
         "url": "https://www.saskmarathon.ca/the-race/racecourse"
+      },
+      {
+        "label": "Runner guide and entry opening",
+        "url": "https://www.saskmarathon.ca/the-race/race-guide"
       }
     ],
     "fieldSize": {
@@ -1001,7 +1032,24 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
       "sourceUrl": "https://marathonview.net/race/140555",
       "note": "Rounded from MarathonView's 276 full-marathon finishers in 2025; shorter races excluded."
     },
-    "checkedAt": "2026-09-26"
+    "checkedAt": "2026-10-14",
+    "practical": [
+      {
+        "label": "2027 registration opening",
+        "value": "The official course and race-guide pages advertise registration opening on 26 November 2026. Follow the organiser’s entry link and select the individual 42.2 km race.",
+        "sourceUrl": "https://www.saskmarathon.ca/the-race/race-guide"
+      },
+      {
+        "label": "Map and aid-station planning",
+        "value": "The map collection is currently labelled 2026. Select Brainsport 42.2K for the full-marathon route and its water stations and washrooms; do not use one of the shorter-distance maps.",
+        "sourceUrl": "https://www.saskmarathon.ca/the-race/racecourse"
+      },
+      {
+        "label": "Runner guide",
+        "value": "Use the organiser’s race-guide page for the latest downloadable instructions. Confirm the edition on the document before relying on collection arrangements or race-day timings.",
+        "sourceUrl": "https://www.saskmarathon.ca/the-race/race-guide"
+      }
+    ]
   },
   {
     "slug": "queen-city-marathon",

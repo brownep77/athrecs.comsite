@@ -602,7 +602,7 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
     timeZone: "America/Los_Angeles",
     officialUrl: "https://www.mccourtfoundation.org/event/los-angeles-marathon/",
     description:
-      "The Los Angeles Marathon runs from Dodger Stadium to Century City on the Stadium to the Stars road course. The finish is on Santa Monica Boulevard at Avenue of the Stars, a useful detail to settle with anyone coming to meet you. The McCourt Foundation offers general registration and an official charity programme. When comparing past performances, note that professional running and wheelchair awards use gun times, while mass-field results also show chip times.",
+      "Los Angeles Marathon takes runners from Dodger Stadium to Century City on the Stadium to the Stars course. The 26.2-mile road race finishes at Santa Monica Boulevard and Avenue of the Stars, so make that the meeting point rather than the beach. For 2027, the published marathon start is 7am and the course limit is six hours 30 minutes from the final starter. The practical work begins earlier: collect your bib at the expo and organise transport between two very different ends of the city. General registration and official charity arrangements are available through The McCourt Foundation.",
     course: {
       summary: "Dodger Stadium to Santa Monica Boulevard at Avenue of the Stars, Century City.",
       surface: "Road",
@@ -836,6 +836,18 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
         label: "Completed-race report and categories",
         url: "https://www.mccourtfoundation.org/event/los-angeles-marathon/2026-awards/",
       },
+      {
+        label: "2027 course and time limit",
+        url: "https://www.mccourtfoundation.org/event/los-angeles-marathon/distances-courses/",
+      },
+      {
+        label: "2027 expo and bib collection",
+        url: "https://www.mccourtfoundation.org/event/los-angeles-marathon/expo-bib-pick-up/",
+      },
+      {
+        label: "2027 transport and shuttles",
+        url: "https://www.mccourtfoundation.org/event/los-angeles-marathon/parking-transportation/",
+      },
     ],
     fieldSize: {
       display: "About 21,500",
@@ -844,7 +856,44 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
       sourceUrl: "https://www.findmymarathon.com/race-detail.php?zname=Los+Angeles+Marathon",
       note: "Rounded from 21,444 full-marathon finishers reported by FindMyMarathon for 2025.",
     },
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-14",
+
+    practical: [
+      {
+        label: "2027 start and course limit",
+        value:
+          "The full marathon starts at 7am on 7 March. The published time limit is 6 hours 30 minutes from the last runner crossing the start line.",
+        sourceUrl:
+          "https://www.mccourtfoundation.org/event/los-angeles-marathon/distances-courses/",
+      },
+      {
+        label: "2027 bib collection",
+        value:
+          "Collect your own bib at Dodger Stadium, Lot G: 5 March, 10am–7pm, or 6 March, 10am–5pm. The organiser does not mail bibs; only a pre-purchased Start Line Hospitality arrangement may allow race-day collection.",
+        sourceUrl: "https://www.mccourtfoundation.org/event/los-angeles-marathon/expo-bib-pick-up/",
+      },
+      {
+        label: "2027 start-line shuttles",
+        value:
+          "Free participant shuttles run from Century City to Dodger Stadium from 3am to 5:30am. The organiser recommends reserving a time during registration.",
+        sourceUrl:
+          "https://www.mccourtfoundation.org/event/los-angeles-marathon/parking-transportation/",
+      },
+      {
+        label: "Getting back after the finish",
+        value:
+          "There is no post-race shuttle back to Dodger Stadium. If you park at the start, arrange your return separately; cars must be removed by 6pm on 7 March.",
+        sourceUrl:
+          "https://www.mccourtfoundation.org/event/los-angeles-marathon/parking-transportation/",
+      },
+      {
+        label: "Arrival planning",
+        value:
+          "The organiser recommends reaching the start at least 90 minutes before your start time. Follow its designated access routes because road closures affect stadium approaches.",
+        sourceUrl:
+          "https://www.mccourtfoundation.org/event/los-angeles-marathon/parking-transportation/",
+      },
+    ],
   },
   {
     slug: "san-francisco-marathon-usa",
@@ -1445,7 +1494,8 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
     editions: [
       {
         date: "2027-10-17",
-        sourceUrl: "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/runningstartreg",
+        sourceUrl:
+          "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/runningstartreg",
       },
       {
         date: "2026-10-04",
