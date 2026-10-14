@@ -107,6 +107,85 @@ try {
       verificationStatus: index === 4 ? "source_verified" : index === 3 ? undefined : "unverified",
     },
   }));
+  const { HistoricalResultRow } = await server.ssrLoadModule(
+    "/src/components/athletes/HistoricalResultRow.tsx",
+  );
+  const { historyResultSurface, profileAchievementResults } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-history-results.ts",
+  );
+  const surfaceBase = {
+    ...historyResults[0].performance,
+    discipline: "10K",
+    meeting: "Synthetic 10K",
+    performance: "46:55",
+    timing: { basis: "unknown" },
+    verificationStatus: "unverified",
+  };
+  for (const [sport, changes, expected] of [
+    ["Running", {}, "Unknown"],
+    ["Running", { discipline: "Marathon" }, "Unknown"],
+    ["Running", { discipline: "Half Marathon" }, "Unknown"],
+    ["Running", { providerName: "World Athletics" }, "Unknown"],
+    ["Running", { providerName: "DUV Ultra Marathon Statistics" }, "Unknown"],
+    ["Running", { providerName: "Road timing", venue: "Trail Road" }, "Unknown"],
+    ["Parkrun", { discipline: "5K parkrun" }, "Unknown"],
+    ["Running", { discipline: "10 Kilometres Road" }, "Road"],
+    ["Running", { labels: [" Road "] }, "Road"],
+    ["Running", { discipline: "10K Trail" }, "Trail"],
+    ["Running", { labels: ["Trail running"] }, "Trail"],
+    ["Running", { labels: ["Cross country"] }, "Cross Country"],
+    ["Running", { discipline: "10K Multi-terrain" }, "Multi-terrain"],
+    ["Running", { labels: ["Fell"] }, "Fell"],
+    ["Running", { labels: ["Mountain running"] }, "Mountain"],
+    ["Running", { labels: ["Road", "Trail"] }, "Unknown"],
+    ["Running", { labels: ["Not a road race"] }, "Unknown"],
+    ["Athletics", { discipline: "1500m" }, "Track"],
+    ["Athletics", { discipline: "Long Jump" }, "Field"],
+    ["Athletics", { discipline: "Decathlon" }, "Combined events"],
+    ["Swimming", { discipline: "100m swimming" }, ""],
+    ["Triathlon", { discipline: "Triathlon" }, ""],
+    ["Unclassified", { discipline: "Wave A" }, ""],
+  ]) {
+    const row = historyPerformanceSchema.parse({ ...surfaceBase, ...changes });
+    const before = JSON.stringify(row);
+    assert.equal(historyResultSurface(row, sport), expected);
+    const safe = withoutProfileEvidence(row);
+    assert.equal(
+      historyResultSurface(safe, sport),
+      expected,
+      "Public projection retains surface evidence",
+    );
+    const markup = load(
+      `<table><tbody>${renderToStaticMarkup(
+        createElement(HistoricalResultRow, {
+          result: { key: "synthetic-surface", sport, performance: safe },
+          hasActions: false,
+        }),
+      )}</tbody></table>`,
+    );
+    const cell = markup('[data-label="Distance / discipline"]');
+    const label = cell.find("span.block").text();
+    assert.equal(label, expected === "Unknown" ? "Surface not recorded" : expected);
+    assert.match(markup('[data-label="Performance"]').text(), /46:55.*Unverified/);
+    assert.equal(JSON.stringify(row), before, "Presentation never rewrites stored observations");
+  }
+  const surfaceHistory = (row) => [
+    {
+      provider: "Synthetic provider",
+      externalId: "surface-test",
+      sourceUrl: "https://example.test/results",
+      capturedAt: "2026-10-14",
+      complete: false,
+      yearsExpected: [],
+      yearsCaptured: [2020],
+      performances: [row],
+    },
+  ];
+  assert.equal(profileAchievementResults([], surfaceHistory(surfaceBase))[0].surface, "Unknown");
+  assert.equal(
+    profileAchievementResults([], surfaceHistory({ ...surfaceBase, labels: ["Road"] }))[0].surface,
+    "Road",
+  );
   assert.equal(hasHistoryFinish({ ...historyResults[4].performance, date: "2199-01-01" }), false);
   assert.equal(
     hasHistoryFinish({ ...historyResults[4].performance, labels: ["Intermediate split"] }),
@@ -277,9 +356,6 @@ try {
       "Unknown or disputed overall place cannot receive a podium medal",
     );
   }
-  const { HistoricalResultRow } = await server.ssrLoadModule(
-    "/src/components/athletes/HistoricalResultRow.tsx",
-  );
   const categoryOnly = {
     ...historyResults[3],
     performance: {

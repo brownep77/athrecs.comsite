@@ -3,8 +3,7 @@ import { distanceResultStyle } from "@/lib/athrecs/profile-colours";
 import {
   historyResultAnchor,
   historyResultCountry,
-  isTrailHistoryResult,
-  isCrossCountryHistoryResult,
+  historyResultSurface,
   type HistoryResult,
 } from "@/lib/athrecs/profile-history-results";
 import { CountryFlag } from "./CountryFlag";
@@ -31,7 +30,8 @@ export function HistoricalResultRow({
   const field = /jump|shot|^sp\d|discus|javelin|hammer/i.test(row.discipline);
   const combined = /pentathlon|heptathlon|decathlon/i.test(row.discipline);
   const discipline = /^\d+$/.test(row.discipline) ? `${row.discipline} m` : row.discipline;
-  const indoor = /i$/.test(row.performance);
+  const indoor = result.sport === "Athletics" && /i$/.test(row.performance);
+  const surface = historyResultSurface(row, result.sport);
   const numericMark = /^\d+(?:\.\d+)?$/.test(row.performance.trim());
   return (
     <tr
@@ -75,19 +75,9 @@ export function HistoricalResultRow({
         className="whitespace-nowrap px-3 py-2 text-xs"
       >
         <ResultDistance distance={profileDisciplineLabel(discipline)} />
-        {row.providerName !== "DUV Ultra Marathon Statistics" ? (
+        {surface ? (
           <span className="block text-[10px] text-subtle">
-            {isCrossCountryHistoryResult(row)
-              ? "Cross country"
-              : result.sport === "Running"
-                ? isTrailHistoryResult(row)
-                  ? "Trail"
-                  : "Road"
-                : combined
-                  ? "Combined events"
-                  : field
-                    ? "Field"
-                    : "Track"}
+            {surface === "Unknown" ? "Surface not recorded" : surface}
             {indoor ? " · Indoor" : ""}
           </span>
         ) : null}

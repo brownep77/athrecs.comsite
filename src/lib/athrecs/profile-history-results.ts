@@ -28,6 +28,37 @@ export function isCrossCountryHistoryResult(row: SourcePerformance): boolean {
   );
 }
 
+/** A distance identifies the discipline, not the course surface. */
+export function historyResultSurface(
+  row: SourcePerformance,
+  sport: HistoryResult["sport"],
+): string {
+  if (sport === "Running" || sport === "Parkrun") {
+    const surfaces = new Set<string>();
+    if (isCrossCountryHistoryResult(row)) surfaces.add("Cross Country");
+    if (isTrailHistoryResult(row)) surfaces.add("Trail");
+    for (const [pattern, surface] of [
+      [/\broad\b/i, "Road"],
+      [/\bmulti[ -]terrain\b/i, "Multi-terrain"],
+      [/\bfell\b/i, "Fell"],
+      [/\bmountain\b/i, "Mountain"],
+    ] as const) {
+      if (
+        pattern.test(row.discipline) ||
+        row.labels.some((label) =>
+          new RegExp(`^(?:${pattern.source})(?: running)?$`, "i").test(label.trim()),
+        )
+      )
+        surfaces.add(surface);
+    }
+    // Conflicting labels cannot establish a surface either.
+    return surfaces.size === 1 ? [...surfaces][0] : "Unknown";
+  }
+  if (sport !== "Athletics") return "";
+  if (/pentathlon|heptathlon|decathlon/i.test(row.discipline)) return "Combined events";
+  return /jump|shot|^sp\d|discus|javelin|hammer/i.test(row.discipline) ? "Field" : "Track";
+}
+
 function historySport(
   discipline: string,
   provider?: string,
@@ -137,17 +168,7 @@ export function profileAchievementResults(
         eventName: row.meeting,
         eventSlug: row.eventSlug ?? "",
         sport: entry.sport,
-        surface: isCrossCountryHistoryResult(row)
-          ? "Cross Country"
-          : entry.sport === "Running"
-            ? isTrailHistoryResult(row)
-              ? "Trail"
-              : "Road"
-            : entry.sport === "Athletics"
-              ? /jump|shot|^sp\d|discus|javelin|hammer/i.test(code)
-                ? "Field"
-                : "Track"
-              : "",
+        surface: historyResultSurface(row, entry.sport),
         country: historyResultCountry(row),
         eventDate: row.date || (/^\d{4}$/.test(year) ? year : ""),
         distanceCode: code,
