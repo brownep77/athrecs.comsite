@@ -35,7 +35,12 @@ const trailRow = row({ labels: ["Trail running", "Finished"] });
 assert.equal(isTrailHistoryResult(trailRow), true);
 assert.equal(isTrailHistoryResult(row()), false);
 assert.equal(profileAchievementResults([], history([trailRow]))[0].surface, "Trail");
-assert.equal(profileAchievementResults([], history([row()]))[0].surface, "Road");
+assert.equal(profileAchievementResults([], history([row()]))[0].surface, "Unknown");
+assert.equal(
+  profileAchievementResults([], history([row({ labels: ["Road running"] })]))[0].surface,
+  "Road",
+  "Explicit road evidence remains road",
+);
 for (const extra of [
   { discipline: "5km XC" },
   { discipline: "Cross-country relay leg" },
