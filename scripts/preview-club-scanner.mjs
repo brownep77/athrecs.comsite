@@ -6,9 +6,29 @@ import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { fixture, service, scope } from "./club-scanner-fixture.mjs";
+import * as collections from "../src/lib/club-scanner/collection.server.ts";
+import { collectionConfigSchema } from "../src/lib/club-scanner/collection.ts";
 const root = resolve("."),
   temp = await mkdtemp(join(tmpdir(), "club-scanner-ui-")),
   f = await fixture();
+await f.db.exec("alter table clubs add column slug text; update clubs set slug='example-ac'");
+await f.db.exec(
+  await readFile(join(root, "migrations/20261014_club_collection_plans.sql"), "utf8"),
+);
+await collections.savePlan(
+  {
+    clubId: 1,
+    revision: 0,
+    enabled: true,
+    config: collectionConfigSchema.parse({
+      aliases: ["Example AC"],
+      sports: ["Running"],
+      historyFrom: "2025-01-01",
+    }),
+  },
+  "staff@example.test",
+  f.sql,
+);
 const run = await service.createRun(scope, "staff@example.test", f.sql);
 await service.runNext(run.id, f.sql, f.fetcher);
 await service.runNext(run.id, f.sql, f.fetcher);
@@ -36,13 +56,17 @@ const names = [
   "recheckClubResults",
   "findClubAthletes",
   "getClubReviewHistory",
+  "getClubCollections",
+  "saveClubCollection",
+  "setupClubPilot",
+  "checkClubCollection",
 ];
 await writeFile(
   join(temp, "api.ts"),
   names
     .map(
       (name) =>
-        `export const ${name}=async({data})=>{const r=await fetch('/fixture/${name}',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});const v=await r.json();if(!r.ok)throw new Error(v.error);return v;};`,
+        `export const ${name}=async({data}={})=>{const r=await fetch('/fixture/${name}',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});const v=await r.json();if(!r.ok)throw new Error(v.error);return v;};`,
     )
     .join("\n"),
 );
@@ -65,6 +89,18 @@ const server = await createServer({
               name = req.url.split("/").at(-1);
             let result;
             switch (name) {
+              case "getClubCollections":
+                result = await collections.collectionDashboard(f.sql);
+                break;
+              case "saveClubCollection":
+                result = await collections.savePlan(data, "staff@example.test", f.sql);
+                break;
+              case "setupClubPilot":
+                result = await collections.setupPilot("staff@example.test", f.sql);
+                break;
+              case "checkClubCollection":
+                result = await collections.checkNow(data.clubId, "staff@example.test", f.sql);
+                break;
               case "getClubScans":
                 result = await service.dashboard(data, f.sql);
                 break;
@@ -116,13 +152,17 @@ if (process.argv.includes("--check-render")) {
   const data = await service.dashboard({ status: "all", q: "", page: 1 }, f.sql);
   await writeFile(
     join(temp, "render-check.tsx"),
-    `import React from 'react';import {renderToString} from 'react-dom/server';import {QueryClient,QueryClientProvider} from '@tanstack/react-query';import {ClubScanner} from '${join(root, "src/components/admin/club-athlete-scanner.tsx")}';export function render(data){const client=new QueryClient();client.setQueryData(['club-scans',{status:'all',q:'',page:1}],data);return renderToString(<QueryClientProvider client={client}><ClubScanner/></QueryClientProvider>);}`,
+    `import React from 'react';import {renderToString} from 'react-dom/server';import {QueryClient,QueryClientProvider} from '@tanstack/react-query';import {ClubScanner} from '${join(root, "src/components/admin/club-athlete-scanner.tsx")}';export function render(data,collections){const client=new QueryClient();client.setQueryData(['club-scans',{status:'all',q:'',page:1}],data);client.setQueryData(['club-collections'],collections);return renderToString(<QueryClientProvider client={client}><ClubScanner/></QueryClientProvider>);}`,
   );
   const { render } = await server.ssrLoadModule("/render-check.tsx");
-  const markup = render(data);
+  const markup = render(data, await collections.collectionDashboard(f.sql));
   const { default: assert } = await import("node:assert/strict");
   for (const expected of [
     "Club athlete scanner",
+    "Regular club checks",
+    "Pause checks",
+    "Results published by scanner",
+    "Last research update",
     "Fresh Runner",
     "Known Runner",
     "Managed Runner",

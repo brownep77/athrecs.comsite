@@ -7,8 +7,10 @@ export const Route = createFileRoute("/api/club-scanner-worker")({
         if (!authorizedWorker(request)) return new Response("Unauthorized", { status: 401 });
         if (process.env.VERCEL_ENV !== "production")
           return Response.json({ skipped: "Production worker only" });
-        const { runNext } = await import("@/lib/club-scanner/service.server");
-        return Response.json(await runNext(), { headers: { "Cache-Control": "no-store" } });
+        const { collectionWorker } = await import("@/lib/club-scanner/collection.server");
+        return Response.json(await collectionWorker(), {
+          headers: { "Cache-Control": "no-store" },
+        });
       },
     },
   },

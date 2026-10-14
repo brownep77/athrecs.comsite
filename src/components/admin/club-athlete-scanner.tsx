@@ -23,6 +23,7 @@ import {
 } from "@/lib/club-scanner/api";
 import type { Candidate, Filters, ReviewInput } from "@/lib/club-scanner/core";
 import { approvalProfileHref, type ApprovalProfile } from "@/lib/club-scanner/profile-links";
+import { ClubCollectionPlans } from "./club-collection-plans";
 
 function AthleteProfileName({
   name,
@@ -223,6 +224,7 @@ export function ClubScanner({ embedded = false }: { embedded?: boolean }) {
               results.
             </p>
           </header>
+          <ClubCollectionPlans />
           <form
             className="grid gap-4 rounded-xl border border-border bg-surface p-5 md:grid-cols-2"
             onSubmit={(e) => {

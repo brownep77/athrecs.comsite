@@ -39,13 +39,29 @@ type Job = {
   club_id: number;
   error: string | null;
 };
-export async function athletes(sql: Sql): Promise<Match[]> {
+export async function athletes(
+  sql: Sql,
+  names?: string[],
+  extraIds: number[] = [],
+): Promise<Match[]> {
+  if (names && !names.length && !extraIds.length) return [];
+  const exact = names?.map(normal) ?? [];
+  const blocks =
+    names?.map(
+      (name) => normal(name).slice(0, 1) + ":" + normal(name.trim().split(/\s+/).at(-1) ?? ""),
+    ) ?? [];
   return sql<Match>`select a.id,a.display_name as name,a.slug,a.gender,a.club_id as "clubId",a.source_club_name as club,a.profile_visibility as visibility,(select athlete_number::text from athlete_resolved_ids where athlete_id=a.id) as number,
- exists(select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active') as managed from athletes a`;
+ exists(select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active') as managed from athletes a
+ where ${names === undefined} or a.id=any(${extraIds}::integer[])
+ or regexp_replace(normalize(lower(a.display_name),NFKD),'[^a-z0-9]','','g')=any(${exact}::text[])
+ or (left(regexp_replace(normalize(lower(a.display_name),NFKD),'[^a-z0-9]','','g'),1)||':'||regexp_replace(normalize(lower(regexp_replace(btrim(a.display_name),'^.*[[:space:]]','')),NFKD),'[^a-z0-9]','','g'))=any(${blocks}::text[])`;
 }
 export async function createRun(input: Scope, actor: string, override?: Sql) {
-  const sql = await db(override),
-    scope = scopeSchema.parse(input);
+  const sql = await db(override);
+  return sql.transaction((tx) => createRunInTransaction(input, actor, tx));
+}
+export async function createRunInTransaction(input: Scope, actor: string, sql: Sql) {
+  const scope = scopeSchema.parse(input);
   const clubs = await sql<{
     name: string;
     source_names: string;
@@ -53,18 +69,17 @@ export async function createRun(input: Scope, actor: string, override?: Sql) {
   if (!clubs.length) throw new Error("Club not found");
   scope.aliases = [...new Set([clubs[0].name, ...scope.aliases])];
   const id = randomUUID();
-  await sql.transaction(async (tx) => {
-    await tx`insert into club_scan_runs(id,club_id,scope,status,created_by) values(${id}::uuid,${scope.clubId},${JSON.stringify(scope)}::jsonb,'running',${actor})`;
-    for (const url of [
-      ...new Set([
-        ...(scope.discover ? [INDEX_URL] : []),
-        ...scope.urls.map((u) => (providerUrl(u) ? u.split("#")[0] : u)),
-      ]),
-    ]) {
-      const kind = url === INDEX_URL ? "index" : providerUrl(url) ? "race" : "manual";
-      await tx`insert into club_scan_jobs(id,run_id,url,kind,status,error) values(${randomUUID()}::uuid,${id}::uuid,${url},${kind},${kind === "manual" ? "held" : "queued"},${kind === "manual" ? "Provider not yet supported. Keep this link for manual source review." : null})`;
-    }
-  });
+  const tx = sql;
+  await tx`insert into club_scan_runs(id,club_id,scope,status,created_by) values(${id}::uuid,${scope.clubId},${JSON.stringify(scope)}::jsonb,'running',${actor})`;
+  for (const url of [
+    ...new Set([
+      ...(scope.discover ? [INDEX_URL] : []),
+      ...scope.urls.map((u) => (providerUrl(u) ? u.split("#")[0] : u)),
+    ]),
+  ]) {
+    const kind = url === INDEX_URL ? "index" : providerUrl(url) ? "race" : "manual";
+    await tx`insert into club_scan_jobs(id,run_id,url,kind,status,error) values(${randomUUID()}::uuid,${id}::uuid,${url},${kind},${kind === "manual" ? "held" : "queued"},${kind === "manual" ? "Provider not yet supported. Keep this link for manual source review." : null})`;
+  }
   return { id };
 }
 async function audit(
@@ -84,7 +99,7 @@ export async function runNext(runId?: string, override?: Sql, fetcher = fetchSou
  select j.id from club_scan_jobs j join club_scan_runs r on r.id=j.run_id
  where r.status='running' and (${runId ?? null}::uuid is null or r.id=${runId ?? null}::uuid)
  and (j.status='queued' or (j.status='processing' and j.lease_until<now())) and j.attempts<3
- order by r.created_at,j.kind,j.id for update of j skip locked limit 1
+ order by case when j.kind='index' then 0 else 1 end,j.url,r.created_at,j.id for update of j skip locked limit 1
  ), claimed as (update club_scan_jobs j set status='processing',attempts=attempts+1,lease_token=${token}::uuid,lease_until=now()+interval '120 seconds' from next_job n where j.id=n.id returning j.*)
  select c.*,r.scope,r.club_id from claimed c join club_scan_runs r on r.id=c.run_id`;
   if (!jobs.length) {
@@ -105,7 +120,10 @@ export async function runNext(runId?: string, override?: Sql, fetcher = fetchSou
       });
     } else {
       const result = extract(html, job.url, job.scope),
-        people = await athletes(sql);
+        people = await athletes(
+          sql,
+          result.rows.map((row) => row.name),
+        );
       const staged = result.rows.map((row) => ({
         id: randomUUID(),
         key: row.key,
@@ -123,6 +141,28 @@ export async function runNext(runId?: string, override?: Sql, fetcher = fetchSou
       await sql.transaction(async (tx) => {
         await lockJob(tx, job, token);
         if (staged.length) {
+          const prior =
+            await tx<Candidate>`select * from club_scan_candidates where club_id=${job.club_id} and source_key=any(${staged.map((x) => x.key)}::text[]) for update`;
+          for (const old of prior) {
+            const current = staged.find((x) => x.key === old.source_key)!;
+            if (
+              old.status === "dismissed" ||
+              (isDeepStrictEqual(old.data.raw, current.data.raw) &&
+                isDeepStrictEqual(old.data.performance, current.data.performance))
+            )
+              continue;
+            const reason =
+              old.status === "published"
+                ? "Source row changed after publication. Review the correction; the published history has been preserved."
+                : "Source row changed. Previous approval cleared for review.";
+            const issues = [...new Set([...current.issues, reason])];
+            await tx`update club_scan_candidates set status='held',decision=null,data=${JSON.stringify(current.data)}::jsonb,matches=${JSON.stringify(current.matches)}::jsonb,issues=${JSON.stringify(issues)}::jsonb,updated_at=now() where id=${old.id}::uuid`;
+            await audit(tx, old, "source-scan", "source_changed", reason, {
+              status: "held",
+              data: current.data,
+              issues,
+            });
+          }
           await tx`insert into club_scan_candidates(id,club_id,source_key,data,matches,issues,status)
      select (x->>'id')::uuid,${job.club_id},x->>'key',x->'data',x->'matches',x->'issues',x->>'status' from jsonb_array_elements(${JSON.stringify(staged)}::jsonb) x
      on conflict(club_id,source_key) do nothing`;
@@ -228,7 +268,11 @@ export async function review(input: ReviewInput, actor: string, override?: Sql) 
       await tx<Candidate>`select * from club_scan_candidates where id=any(${data.ids}::uuid[]) order by id for update`;
     if (rows.length !== new Set(data.ids).size)
       throw new Error("Some selected rows are unavailable");
-    const people = await athletes(tx);
+    const people = await athletes(
+      tx,
+      rows.map((row) => row.data.name),
+      data.athleteId ? [data.athleteId] : [],
+    );
     for (const c of rows) {
       if (c.status === "published")
         throw new Error("Published rows cannot be changed in this queue");
@@ -325,7 +369,13 @@ async function collision(sql: Sql, row: Row, athleteId: number) {
     await sql`select r.id from results r join editions e on e.id=r.edition_id where r.athlete_id=${athleteId} and e.event_date=${row.performance.date}::date`;
   return results.length ? "held" : null;
 }
-export async function publish(ids: string[], actor: string, override?: Sql, fetcher = fetchSource) {
+export async function publish(
+  ids: string[],
+  actor: string,
+  override?: Sql,
+  fetcher = fetchSource,
+  guard?: (tx: Sql) => Promise<boolean>,
+) {
   if (!ids.length || ids.length > 10)
     throw new Error("Publish between 1 and 10 reviewed rows at a time");
   const sql = await db(override),
@@ -371,6 +421,8 @@ export async function publish(ids: string[], actor: string, override?: Sql, fetc
   }
   return sql.transaction(async (tx) => {
     await tx`select pg_advisory_xact_lock(hashtext('athrecs-club-scanner-publication'))`;
+    if (guard && !(await guard(tx)))
+      return { published: 0, newProfiles: 0, duplicates: 0, held: 0 };
     const rows =
       await tx<Candidate>`select * from club_scan_candidates where id=any(${ids}::uuid[]) order by id for update`;
     const created = new Map<string, number>();
@@ -405,7 +457,7 @@ export async function publish(ids: string[], actor: string, override?: Sql, fetc
         else held++;
         continue;
       }
-      const people = await athletes(tx),
+      const people = await athletes(tx, [row.name]),
         exact = people.filter((a) => normal(a.name) === normal(row.name));
       if (d.action === "create") {
         athleteId = created.get(`${c.club_id}:${normal(row.name)}:${row.gender}`);
@@ -464,6 +516,18 @@ export async function publish(ids: string[], actor: string, override?: Sql, fetc
       }
       const performance = {
         ...row.performance,
+        status: "finished",
+        verificationStatus: "source_verified",
+        archiveReference: {
+          sourceRowsCompared: true,
+          checkedAt: row.checkedAt,
+          sourceUrl: row.url,
+          sourceRow: row.key,
+          originalRow: row.raw,
+          sourceHash: row.sourceHash,
+          identityEvidence: d,
+          athleteAccountIdentityVerified: false,
+        },
         labels: [
           ...row.performance.labels,
           "Checked " +
@@ -492,7 +556,10 @@ export async function recheck(ids: string[], actor: string, override?: Sql, fetc
   const sql = await db(override),
     rows =
       await sql<Candidate>`select * from club_scan_candidates where id=any(${ids}::uuid[]) and status<>'published'`,
-    people = await athletes(sql),
+    people = await athletes(
+      sql,
+      rows.map((row) => row.data.name),
+    ),
     htmlCache = new Map<string, string>();
   for (const c of rows) {
     const url = c.data.url.split("#")[0];
