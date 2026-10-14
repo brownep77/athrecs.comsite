@@ -115,11 +115,15 @@ export type ClubContactSeed = {
   name?: string;
   email?: string;
   phone?: string;
+  source_url?: string;
+  checked_at?: string;
 };
 
 export type ClubSocialSeed = {
-  platform: "Facebook" | "Instagram" | "X" | "YouTube" | "LinkedIn";
+  platform: "Facebook" | "Instagram" | "X" | "YouTube" | "LinkedIn" | "Strava" | "TikTok";
   url: string;
+  source_url?: string;
+  checked_at?: string;
 };
 
 export type ClubLocationPrecision = "postcode" | "official-directory" | "area-only" | "unverified";
@@ -149,6 +153,11 @@ export type ClubSeed = {
   contact_url?: string;
   contacts?: ClubContactSeed[];
   socials?: ClubSocialSeed[];
+  /** A directory address is not automatically a place to attend training. */
+  address_kind?: "training" | "clubhouse" | "correspondence" | "directory";
+  disciplines?: string[];
+  adult_only?: boolean;
+  virtual?: boolean;
 };
 
 export type AthleteProfileType = "Athlete" | "Public figure";

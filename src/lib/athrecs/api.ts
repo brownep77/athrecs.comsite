@@ -1271,6 +1271,7 @@ export const listClubs = createServerFn({ method: "GET" })
   .validator((input: { q?: string } | undefined) => input ?? {})
   .handler(async ({ data }) => {
     const sql = await ready();
+    const { clubProfiles } = await import("@/data/club-profiles");
     const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
     const rows = await sql<ClubListItem & { sports_csv: string }>`
       select
@@ -1294,6 +1295,7 @@ export const listClubs = createServerFn({ method: "GET" })
     `;
     return rows.map((r) => ({
       ...r,
+      scope: clubProfiles[r.slug]?.scope,
       sports: r.sports_csv ? r.sports_csv.split(",").filter(Boolean) : [],
     }));
   });
@@ -1302,6 +1304,9 @@ export const getClubBySlug = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
   .handler(async ({ data: slug }) => {
     const sql = await ready();
+    const [{ clubProfiles }, { clubEnrichment }] = await Promise.all([
+      import("@/data/club-profiles"), import("@/data/club-enrichment"),
+    ]);
     const rows = await sql<{
       id: number;
       slug: string;
@@ -1327,6 +1332,12 @@ export const getClubBySlug = createServerFn({ method: "GET" })
     `;
     const club = rows[0];
     if (!club) return null;
+    const editorial = clubProfiles[club.slug];
+    const profile = editorial ? {
+      biography: editorial.biography, founded_year: editorial.founded_year, scope: editorial.scope,
+      location_note: editorial.location_note, contact_note: editorial.contact_note,
+      notable_members: editorial.notable_members ?? [], sources: editorial.sources, reviewed_at: editorial.reviewed_at,
+    } : null;
     const { indexableApprovedAthleteSql } = await import("./athlete-search-policy.server");
     const members = await sql.query<{
       id: number;
@@ -1359,6 +1370,8 @@ export const getClubBySlug = createServerFn({ method: "GET" })
     return {
       club: {
         ...club,
+        profile,
+        address_kind: editorial?.corrections?.address_kind ?? clubEnrichment[club.slug]?.address_kind ?? "directory",
         sports: club.sports ? club.sports.split(",").filter(Boolean) : [],
         contacts: JSON.parse(club.contacts_json || "[]") as ClubContactInfo[],
         socials: JSON.parse(club.socials_json || "[]") as ClubSocialInfo[],

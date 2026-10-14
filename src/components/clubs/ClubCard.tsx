@@ -3,8 +3,8 @@ import { MapPin, Users } from "lucide-react";
 import type { ClubListItem } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { ClubVerificationBadge } from "@/components/clubs/ClubVerificationBadge";
-import { NationFlag } from "@/components/flags/NationFlag";
 import { IS_ATHRECS_SITE } from "@/lib/site-scope";
+import { ClubIdentityFlag } from "@/components/clubs/ClubIdentityFlag";
 
 export function ClubCard({ club }: { club: ClubListItem }) {
   const location = [...new Set([club.city, club.county].map((part) => part.trim()))]
@@ -37,7 +37,7 @@ export function ClubCard({ club }: { club: ClubListItem }) {
         params={{ slug: club.slug }}
         className="flex items-center gap-2 font-semibold text-fg no-underline hover:text-accent"
       >
-        <NationFlag nation={club.country} className="h-5 w-8 border" />
+        <ClubIdentityFlag country={club.country} scope={club.scope} />
         <span>{club.name}</span>
       </Link>
       <p className="mt-1 flex items-center gap-1.5 text-xs text-muted">

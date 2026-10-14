@@ -113,6 +113,7 @@ export type ClubListItem = {
   official_source: string | null;
   summary: string;
   member_count: number;
+  scope?: "national" | "global";
 };
 
 export type ClubContactInfo = {
@@ -120,11 +121,15 @@ export type ClubContactInfo = {
   name?: string;
   email?: string;
   phone?: string;
+  source_url?: string;
+  checked_at?: string;
 };
 
 export type ClubSocialInfo = {
-  platform: "Facebook" | "Instagram" | "X" | "YouTube" | "LinkedIn";
+  platform: "Facebook" | "Instagram" | "X" | "YouTube" | "LinkedIn" | "Strava" | "TikTok";
   url: string;
+  source_url?: string;
+  checked_at?: string;
 };
 
 export type AthleteListItem = {
