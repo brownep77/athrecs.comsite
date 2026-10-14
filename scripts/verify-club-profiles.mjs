@@ -35,6 +35,29 @@ try {
   assert.match(birchfield.address, /Alexander Stadium/);
   assert.equal(birchfield.address_kind, "training");
   assert.equal(bySlug.get("unattached").country, "");
+  assert.equal(bySlug.get("hastings-ac").postcode, "TN34 2PG");
+  assert.equal(bySlug.get("hastings-ac").address_kind, "training");
+  assert.equal(bySlug.get("horsham-joggers").postcode, "RH12 3YS");
+  assert.equal(bySlug.get("horsham-blue-star-harriers").city, "Horsham");
+  assert.equal(bySlug.get("athletics-ireland-ardmore-a-c").address_kind, "correspondence");
+  assert.equal(bySlug.get("athletics-ireland-ardmore-a-c").city, "Ardmore");
+  assert.equal(bySlug.get("armagh-pikekickers-triathlon-club").adult_only, true);
+  assert.equal(clubProfiles["athletics-ireland-ace-a-c"].founded_year, undefined);
+  assert.equal(clubProfiles["dacorum-athletics-club"].founded_year, 1995);
+  assert.equal(clubProfiles["horsham-blue-star-harriers"].founded_year, 1925);
+  assert.match(
+    clubProfiles["brown-shoes-tc"].biography.join(" "),
+    /does not currently organise regular group runs/,
+  );
+  assert.ok(bySlug.get("farnham-triathlon-club").sports.includes("Cycling"));
+  for (const slug of [
+    "haywards-heath-harriers",
+    "horsham-blue-star-harriers",
+    "athletics-ireland-ace-a-c",
+  ]) {
+    assert.equal(bySlug.get(slug).address, "");
+    assert.equal(bySlug.get(slug).postcode, "");
+  }
   assert.equal(
     bySlug.get("welsh-athletics-griffithstown-harriers").website,
     "https://www.griffithstownharriers.com/",

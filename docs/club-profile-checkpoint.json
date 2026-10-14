@@ -1,67 +1,63 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch12",
+  "lastEditorialBatch": "2026-10-14-batch13",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "ashford-and-district-rrc",
-    "ashford-striders-rc",
-    "ashford-triathlon-club",
-    "blackwater-valley-runners",
-    "burgess-hill-runners",
-    "camberley-and-district-ac",
-    "deal-tri-club",
-    "dorking-and-mole-valley-ac",
-    "welsh-athletics-crickhowell-running-club",
-    "welsh-athletics-deestriders-b-s-rc",
-    "welsh-athletics-griffithstown-harriers",
-    "welsh-athletics-islwyn-rc",
-    "athletics-ireland-borrisokane-a-c",
-    "athletics-ireland-bray-runners-a-c",
-    "athletics-ireland-bree-a-c",
-    "athletics-ireland-bridevale-a-c"
+    "crowborough-runners",
+    "dacorum-athletics-club",
+    "farnham-runners",
+    "farnham-triathlon-club",
+    "haslemere-border-ac",
+    "hastings-ac",
+    "hastings-runners",
+    "haywards-heath-harriers",
+    "horsham-blue-star-harriers",
+    "horsham-joggers",
+    "brown-shoes-tc",
+    "special-olympics-newtownabbey-racers",
+    "athletics-ireland-ace-a-c",
+    "athletics-ireland-an-bru-a-c",
+    "athletics-ireland-ardattin-a-c",
+    "athletics-ireland-ardmore-a-c",
+    "athletics-ireland-beechmount-harriers-a-c",
+    "armagh-pikekickers-triathlon-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 269,
-    "notableMemberEntries": 130,
-    "clubsWithContacts": 543,
-    "contactEntries": 928,
-    "clubsWithEmail": 529,
-    "clubsWithPhone": 68,
-    "clubsWithSocials": 945,
-    "socialLinks": 1916,
-    "websiteContactRecords": 742
+    "extendedProfiles": 287,
+    "notableMemberEntries": 140,
+    "clubsWithContacts": 550,
+    "contactEntries": 938,
+    "clubsWithEmail": 536,
+    "clubsWithPhone": 70,
+    "clubsWithSocials": 950,
+    "socialLinks": 1928,
+    "websiteContactRecords": 754
   },
   "batchChanges": {
-    "extendedProfilesAdded": 16,
-    "notableMemberEntriesAdded": 5,
+    "extendedProfilesAdded": 18,
+    "notableMemberEntriesAdded": 10,
     "contactOrSocialRecordsChanged": 17,
+    "newWebsiteContactRecords": 12,
     "directoryRecordsRefreshed": 0,
-    "unsafeWebsiteReplaced": [
-      "welsh-athletics-griffithstown-harriers"
-    ],
-    "placeholderPhoneRemoved": [
-      "athletics-ireland-bray-runners-a-c"
-    ],
     "combinedOrUnconfirmedAddressesReplacedByNotes": [
-      "ashford-triathlon-club",
-      "burgess-hill-runners",
-      "deal-tri-club",
-      "athletics-ireland-bray-runners-a-c"
+      "haywards-heath-harriers",
+      "horsham-blue-star-harriers",
+      "athletics-ireland-ace-a-c"
     ],
     "sportsCorrected": [
-      "ashford-and-district-rrc",
-      "ashford-striders-rc",
-      "ashford-triathlon-club",
-      "burgess-hill-runners",
-      "camberley-and-district-ac",
-      "deal-tri-club",
-      "dorking-and-mole-valley-ac",
-      "welsh-athletics-crickhowell-running-club"
+      "farnham-triathlon-club",
+      "hastings-runners"
+    ],
+    "adultOnlyClarified": [
+      "armagh-pikekickers-triathlon-club"
+    ],
+    "postalAddressLabelCorrected": [
+      "athletics-ireland-ardmore-a-c"
     ]
   },
   "validationBeforeCommit": [
@@ -74,31 +70,32 @@
     "production build (publication hooks skipped)"
   ],
   "nextCandidateSlugs": [
-    "crowborough-runners",
-    "farnham-runners",
-    "farnham-triathlon-club",
-    "haslemere-border-ac",
-    "hastings-ac",
-    "hastings-runners",
-    "haywards-heath-harriers",
-    "horsham-blue-star-harriers",
-    "horsham-joggers",
-    "dacorum-athletics-club",
-    "athletics-ireland-beechmount-harriers-a-c",
-    "belfast-ormeau-runners",
-    "special-olympics-newtownabbey-racers",
-    "armagh-pikekickers-triathlon-club",
-    "brown-shoes-tc",
-    "athletics-ireland-ace-a-c",
-    "athletics-ireland-an-bru-a-c",
-    "athletics-ireland-annalee-a-c",
-    "athletics-ireland-ardattin-a-c",
-    "athletics-ireland-ardmore-a-c"
+    "city-of-york-ac",
+    "york-acorn-running-club",
+    "york-knavesmire-harriers",
+    "york-postal-harriers",
+    "york-triathlon-club",
+    "north-york-moors-ac",
+    "yorkshire-wolds-runners",
+    "south-leeds-lakers-running-club",
+    "wakefield-district-h-and-ac",
+    "sheffield-triathlon-club",
+    "craven-energy-triathlon-and-multisport-club",
+    "down-triathlon-club",
+    "hi-elbow-tc",
+    "invictus-tri-squad-belfast",
+    "island-tc",
+    "lisburn-triathlon-club",
+    "athletics-ireland-artane-beaumont-running-club-a-c",
+    "athletics-ireland-ashford-a-c",
+    "athletics-ireland-aughagower-a-c",
+    "athletics-ireland-aughrim-a-c",
+    "athletics-ireland-b-m-o-h-a-c"
   ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Rotate remaining South East England, Northern Ireland and Irish regional clubs. Check actual catalogue slugs and profile map first. Revisit batch12 deferred clubs only when substantive primary sources become readable.",
+    "Rotate Yorkshire road, fell and triathlon clubs with Northern Ireland and Irish regional athletics. Check canonical slugs/profile map first. Revisit Annalee/Ormeau when substantive club sources recover.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -611,6 +608,72 @@
       "url": "https://ashfordtriclub.co.uk/members/history/",
       "status": "direct-fetch-timeout-web-reader-recovered",
       "reason": "History, joining and seasonal training opened with web reader after direct fetch timed out. Spond is current schedule authority; old Wye address not treated as training base."
+    },
+    {
+      "slug": "belfast-ormeau-runners",
+      "url": "https://www.ormeaurunners.co.uk",
+      "status": "club-site-502",
+      "reason": "Club site unavailable. Opened organiser Eventbrite listing supports an August 2026 Fleadh Run but not a full history or current joining programme. Deferred."
+    },
+    {
+      "slug": "athletics-ireland-annalee-a-c",
+      "url": "https://www.annaleeac.ie/",
+      "status": "club-site-502",
+      "reason": "Club Flickr corroborates Cavan Town and welcomes members; Athletics Ireland gives Breifne Park. Fuller biography deferred pending substantive primary history and joining detail."
+    },
+    {
+      "slug": "athletics-ireland-ace-a-c",
+      "url": "https://www.aceathletics.ie/about",
+      "status": "founding-year-conflict",
+      "reason": "Club About gives April 2019; Athletics Ireland February 2026 spotlight gives 2018. No founded_year. Future eleven-acre site is not an operating facility. Coordinates removed from street-address field."
+    },
+    {
+      "slug": "brown-shoes-tc",
+      "url": "https://brownshoestriathlonclub.co.uk/swim-%2F-bike-%2F-run",
+      "status": "programme-conflict-qualified",
+      "reason": "Generic About says weekly sessions in three disciplines; specific page says no current regular group runs. Specific statement retained; pool entry requires about 250m front crawl."
+    },
+    {
+      "slug": "hastings-runners",
+      "url": "https://hastingsrunners.co.uk/about-us/",
+      "status": "fees-and-origin-unconfirmed",
+      "reason": "Different fees on About/Club Info; no current price repeated. Origins only 1980s, no exact year. Members-only mailing-list email excluded from enquiry contacts."
+    },
+    {
+      "slug": "horsham-blue-star-harriers",
+      "url": "https://www.horshambluestarharriers.org.uk/centenary",
+      "status": "predecessor-history-qualified",
+      "reason": "1925 re-establishment distinguished from earlier 1894 club. Inconsistent 1871 reference omitted. Shrubb is predecessor association; track-opening visitors not members. Masked emails and supplier socials excluded."
+    },
+    {
+      "slug": "haywards-heath-harriers",
+      "url": "https://www.haywardsheathharriers.co.uk/contact-us",
+      "status": "masked-email-and-multiple-venues",
+      "reason": "Contact form retained; masked email not guessed. Whitemans Green Active Track is proposed. Old Bower street address not supported as training venue."
+    },
+    {
+      "slug": "special-olympics-newtownabbey-racers",
+      "url": "https://activelivingnolimits.co.uk/find-an-opportunity/",
+      "status": "limited-history",
+      "reason": "Disability Sport NI supplies club-specific venue, programme, email and phone; founding date and fuller history remain unknown. No individual disability inference."
+    },
+    {
+      "slug": "athletics-ireland-ardattin-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ardattin_A.C.",
+      "status": "direct-contact-unavailable",
+      "reason": "No club-specific email/phone supplied. Governing-body support and Carlow county socials excluded. SETU shared development group not substituted for club venue."
+    },
+    {
+      "slug": "armagh-pikekickers-triathlon-club",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "adult-only-directory",
+      "reason": "Current adult-only listing takes priority over historical teenage-member account. Club site 502. Loughgall race venue not made headquarters; Johnson association historical 2018."
+    },
+    {
+      "slug": "athletics-ireland-beechmount-harriers-a-c",
+      "url": "https://belfastmedia.com/back-on-top-after-covid-paul-elliott-and-beechmount-harriers-stay-firmly-on-the-track",
+      "status": "historical-not-current",
+      "reason": "Firsthand 2022 anniversary interview supports origins, not current timetable or membership. Teresa Duffy uses ANI 2011 interview. Paul McKee medal-placing claim not repeated."
     }
   ],
   "coverageReviewNotes": [
@@ -621,6 +684,7 @@
     "Batch09 sources were read on 13–14 October UTC; new editorial/contact review date is 14 October. Buckley is the only refreshed governing-body row. Current directory comparisons total 1,682; 55 older rows retain their dates. No blanket manual review, athlete identity or production publication is claimed.",
     "Batch10 primary sources read on 14 October UTC. Twenty new biographies and 15 historical/notable associations; no governing-body rows re-dated. Current directory comparisons remain 1,682, with 55 older rows. Public role contacts and exact source links checked; supplier contacts excluded. Seed v10; draft-preview only.",
     "Batch11: 20 profiles, five historical member entries and 19 website-contact/social records on 14 October UTC. Actual merged coverage 253/1737. No blanket directory refresh: 1682 recent comparisons, 55 older. Sports and address corrections only where primary evidence supports them; draft-preview only, seed v11.",
-    "Batch12: 16 profiles and five historical/notable associations; 17 contact/social records updated. Actual merged coverage 269/1737. Four candidates deferred rather than padding sparse sources. Former Griffithstown domain replaced; Bray placeholder phone removed. Directory date coverage unchanged (1682 recent,55 older), seed v12, draft-only. Main bceb3ea inspected: intervening athlete/homepage changes do not overlap these data files."
+    "Batch12: 16 profiles and five historical/notable associations; 17 contact/social records updated. Actual merged coverage 269/1737. Four candidates deferred rather than padding sparse sources. Former Griffithstown domain replaced; Bray placeholder phone removed. Directory date coverage unchanged (1682 recent,55 older), seed v12, draft-only. Main bceb3ea inspected: intervening athlete/homepage changes do not overlap these data files.",
+    "Batch13: 18 profiles, ten sourced associations, 17 contact/social records changed (12 new). Actual merged coverage 287/1737; 140 notable entries. Seven more clubs with contacts/email, two with phones, twelve social links. Two candidates deferred. Seed v13, draft-only. Prior 5d39ab1 Club profiles passed; broader quality gate 38505360491 failed mobile registration: Help improve ATHRECS banner / bottom nav intercepted Continue. No safeguard or broad UI changes."
   ]
 }
