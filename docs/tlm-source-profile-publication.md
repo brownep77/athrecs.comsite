@@ -84,3 +84,30 @@ and held source keys must form the original complete partition. Preparation
 screens the current directory, and the existing publisher rechecks it under a
 transaction lock after a successful isolated rehearsal. Retain fresh source
 comparisons, spelling decisions, released keys and the remaining queue privately.
+
+## Distinguishing separate source observations
+
+`scripts/continue-tlm-distinct-profiles.py` reviews the next retained queue. Similar
+names are not necessarily aliases. A complete component can instead support
+separate provisional profiles when the original CSV contains distinct entries in
+the same programme, with separate bibs and placings plus a material reported-age
+difference or different recorded gender. The other bounded route requires more
+than five years between compatible source-age intervals and different non-empty
+recorded locations for every pair of observations across the proposed profiles.
+These are source distinctions, not verified real-world identities.
+
+Within each profile, repeated observations still require identical recorded name
+components, city/state and gender, compatible ages and distinct dates. A two-row
+exact-name group may be separated only by the same-programme route, with no other
+identity holds or conflicting gender. Each accepted component also requires a
+private decision bound to all its source keys. Unresolved transitive variants,
+unknown/junior ages, invalid placings and possible existing identities stay held.
+No source name, age or location is repaired to qualify an observation.
+
+Run `python3 scripts/verify-tlm-distinct-review.py`, and use
+`node scripts/verify-tlm-followup-plan.mjs PRIVATE_DIRECTORY --allow-single-observation`
+for the actual history schema and source-field comparison. Recheck original and
+fresh provider CSVs, reconcile every public/held source key, and rehearse on an
+isolated branch. Publication uses one bounded atomic batch. A new directory
+conflict on either proposed sibling holds the entire reviewed component. Keep
+the prior audit, separation evidence and exact remaining queue in private storage.
