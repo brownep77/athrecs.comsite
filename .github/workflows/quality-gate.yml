@@ -95,6 +95,9 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Staff collection stats, access controls and responsive tables
+        run: npm run verify:collection-stats -- --browser
+
       - name: Club directory and representative registration
         run: npm run verify:club-registration && npm run verify:club-registration-browser && npm run verify:club-registration-flow
 
