@@ -39,6 +39,7 @@ import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/ad
 import { Route as AdminCheckResultsUploadRouteImport } from './routes/admin/check-results-upload'
 import { Route as AdminClubRegistrationsRouteImport } from './routes/admin/club-registrations'
 import { Route as AdminClubScannerRouteImport } from './routes/admin/club-scanner'
+import { Route as AdminCollectionStatsRouteImport } from './routes/admin/collection-stats'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminEmailInboxRouteImport } from './routes/admin/email-inbox'
 import { Route as AdminEventRegisterRouteImport } from './routes/admin/event-register'
@@ -247,6 +248,11 @@ const AdminClubRegistrationsRoute = AdminClubRegistrationsRouteImport.update({
 const AdminClubScannerRoute = AdminClubScannerRouteImport.update({
   id: '/admin/club-scanner',
   path: '/admin/club-scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCollectionStatsRoute = AdminCollectionStatsRouteImport.update({
+  id: '/admin/collection-stats',
+  path: '/admin/collection-stats',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
@@ -571,6 +577,7 @@ export interface FileRoutesByFullPath {
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
   '/admin/club-registrations': typeof AdminClubRegistrationsRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
+  '/admin/collection-stats': typeof AdminCollectionStatsRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/email-inbox': typeof AdminEmailInboxRoute
   '/admin/event-register': typeof AdminEventRegisterRoute
@@ -660,6 +667,7 @@ export interface FileRoutesByTo {
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
   '/admin/club-registrations': typeof AdminClubRegistrationsRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
+  '/admin/collection-stats': typeof AdminCollectionStatsRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/email-inbox': typeof AdminEmailInboxRoute
   '/admin/event-register': typeof AdminEventRegisterRoute
@@ -750,6 +758,7 @@ export interface FileRoutesById {
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
   '/admin/club-registrations': typeof AdminClubRegistrationsRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
+  '/admin/collection-stats': typeof AdminCollectionStatsRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/email-inbox': typeof AdminEmailInboxRoute
   '/admin/event-register': typeof AdminEventRegisterRoute
@@ -841,6 +850,7 @@ export interface FileRouteTypes {
     | '/admin/check-results-upload'
     | '/admin/club-registrations'
     | '/admin/club-scanner'
+    | '/admin/collection-stats'
     | '/admin/data-intelligence'
     | '/admin/email-inbox'
     | '/admin/event-register'
@@ -930,6 +940,7 @@ export interface FileRouteTypes {
     | '/admin/check-results-upload'
     | '/admin/club-registrations'
     | '/admin/club-scanner'
+    | '/admin/collection-stats'
     | '/admin/data-intelligence'
     | '/admin/email-inbox'
     | '/admin/event-register'
@@ -1019,6 +1030,7 @@ export interface FileRouteTypes {
     | '/admin/check-results-upload'
     | '/admin/club-registrations'
     | '/admin/club-scanner'
+    | '/admin/collection-stats'
     | '/admin/data-intelligence'
     | '/admin/email-inbox'
     | '/admin/event-register'
@@ -1109,6 +1121,7 @@ export interface RootRouteChildren {
   AdminCheckResultsUploadRoute: typeof AdminCheckResultsUploadRoute
   AdminClubRegistrationsRoute: typeof AdminClubRegistrationsRoute
   AdminClubScannerRoute: typeof AdminClubScannerRoute
+  AdminCollectionStatsRoute: typeof AdminCollectionStatsRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminEmailInboxRoute: typeof AdminEmailInboxRoute
   AdminEventRegisterRoute: typeof AdminEventRegisterRoute
@@ -1379,6 +1392,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/club-scanner'
       fullPath: '/admin/club-scanner'
       preLoaderRoute: typeof AdminClubScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/collection-stats': {
+      id: '/admin/collection-stats'
+      path: '/admin/collection-stats'
+      fullPath: '/admin/collection-stats'
+      preLoaderRoute: typeof AdminCollectionStatsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/data-intelligence': {
@@ -1813,6 +1833,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCheckResultsUploadRoute: AdminCheckResultsUploadRoute,
   AdminClubRegistrationsRoute: AdminClubRegistrationsRoute,
   AdminClubScannerRoute: AdminClubScannerRoute,
+  AdminCollectionStatsRoute: AdminCollectionStatsRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminEmailInboxRoute: AdminEmailInboxRoute,
   AdminEventRegisterRoute: AdminEventRegisterRoute,

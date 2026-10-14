@@ -55,6 +55,7 @@
     "verify:postgres-ssl-config": "node scripts/verify-postgres-ssl-config.mjs",
     "verify:staff-microsite": "node --experimental-strip-types scripts/verify-staff-microsite.mjs",
     "verify:data-intelligence": "node scripts/verify-data-intelligence.mjs",
+    "verify:collection-stats": "node scripts/verify-collection-stats.mjs",
     "verify:catalogue-recovery": "node scripts/verify-catalogue-recovery.mjs",
     "verify:home-sports-news": "node --experimental-strip-types scripts/verify-home-sports-news.mjs",
     "verify:uk-10k-workflow": "node scripts/verify-uk-10k-workflow.mjs",
