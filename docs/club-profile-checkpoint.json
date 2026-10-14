@@ -1,63 +1,61 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch13",
+  "lastEditorialBatch": "2026-10-14-batch14",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "crowborough-runners",
-    "dacorum-athletics-club",
-    "farnham-runners",
-    "farnham-triathlon-club",
-    "haslemere-border-ac",
-    "hastings-ac",
-    "hastings-runners",
-    "haywards-heath-harriers",
-    "horsham-blue-star-harriers",
-    "horsham-joggers",
-    "brown-shoes-tc",
-    "special-olympics-newtownabbey-racers",
-    "athletics-ireland-ace-a-c",
-    "athletics-ireland-an-bru-a-c",
-    "athletics-ireland-ardattin-a-c",
-    "athletics-ireland-ardmore-a-c",
-    "athletics-ireland-beechmount-harriers-a-c",
-    "armagh-pikekickers-triathlon-club"
+    "city-of-york-ac",
+    "craven-energy-triathlon-and-multisport-club",
+    "sheffield-triathlon-club",
+    "south-leeds-lakers-running-club",
+    "wakefield-district-h-and-ac",
+    "york-acorn-running-club",
+    "york-knavesmire-harriers",
+    "york-postal-harriers",
+    "york-triathlon-club",
+    "yorkshire-wolds-runners",
+    "north-york-moors-ac",
+    "down-triathlon-club",
+    "invictus-tri-squad-belfast",
+    "athletics-ireland-aughagower-a-c",
+    "athletics-ireland-aughrim-a-c",
+    "athletics-ireland-b-m-o-h-a-c",
+    "omagh-tc",
+    "olympian-triathlon-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 287,
-    "notableMemberEntries": 140,
-    "clubsWithContacts": 550,
-    "contactEntries": 938,
-    "clubsWithEmail": 536,
+    "extendedProfiles": 305,
+    "notableMemberEntries": 148,
+    "clubsWithContacts": 557,
+    "contactEntries": 952,
+    "clubsWithEmail": 543,
     "clubsWithPhone": 70,
-    "clubsWithSocials": 950,
-    "socialLinks": 1928,
-    "websiteContactRecords": 754
+    "clubsWithSocials": 956,
+    "socialLinks": 1946,
+    "websiteContactRecords": 766
   },
   "batchChanges": {
     "extendedProfilesAdded": 18,
-    "notableMemberEntriesAdded": 10,
-    "contactOrSocialRecordsChanged": 17,
+    "notableMemberEntriesAdded": 8,
+    "contactOrSocialRecordsChanged": 18,
     "newWebsiteContactRecords": 12,
     "directoryRecordsRefreshed": 0,
-    "combinedOrUnconfirmedAddressesReplacedByNotes": [
-      "haywards-heath-harriers",
-      "horsham-blue-star-harriers",
-      "athletics-ireland-ace-a-c"
+    "unconfirmedAddressesReplacedByNotes": [
+      "sheffield-triathlon-club",
+      "york-knavesmire-harriers"
     ],
     "sportsCorrected": [
-      "farnham-triathlon-club",
-      "hastings-runners"
+      "wakefield-district-h-and-ac",
+      "craven-energy-triathlon-and-multisport-club",
+      "sheffield-triathlon-club",
+      "york-triathlon-club"
     ],
-    "adultOnlyClarified": [
-      "armagh-pikekickers-triathlon-club"
-    ],
-    "postalAddressLabelCorrected": [
-      "athletics-ireland-ardmore-a-c"
+    "unsafeWebsiteReplaced": [
+      "olympian-triathlon-club"
     ]
   },
   "validationBeforeCommit": [
@@ -70,32 +68,33 @@
     "production build (publication hooks skipped)"
   ],
   "nextCandidateSlugs": [
-    "city-of-york-ac",
-    "york-acorn-running-club",
-    "york-knavesmire-harriers",
-    "york-postal-harriers",
-    "york-triathlon-club",
-    "north-york-moors-ac",
-    "yorkshire-wolds-runners",
-    "south-leeds-lakers-running-club",
-    "wakefield-district-h-and-ac",
-    "sheffield-triathlon-club",
-    "craven-energy-triathlon-and-multisport-club",
-    "down-triathlon-club",
-    "hi-elbow-tc",
-    "invictus-tri-squad-belfast",
-    "island-tc",
-    "lisburn-triathlon-club",
-    "athletics-ireland-artane-beaumont-running-club-a-c",
-    "athletics-ireland-ashford-a-c",
-    "athletics-ireland-aughagower-a-c",
-    "athletics-ireland-aughrim-a-c",
-    "athletics-ireland-b-m-o-h-a-c"
+    "achille-ratti-climbing-club",
+    "ambleside-ac",
+    "astley-and-tyldesley-road-runners",
+    "aurora-harriers",
+    "barrow-and-furness-striders-ac",
+    "belle-vue-racers",
+    "billinge-running-club",
+    "billingham-marsh-hse-h-and-ac",
+    "billingham-running-club",
+    "birkenhead-ac",
+    "oswestry-olympians",
+    "sospan-road-runners",
+    "welsh-athletics-3m-gorseinon-road-runners",
+    "welsh-athletics-afan-nedd-tawe-schools-district",
+    "welsh-athletics-albany-road-run-club",
+    "athletics-ireland-back-2-boston-running-club-a-c",
+    "athletics-ireland-ballinamore-a-c",
+    "athletics-ireland-ballintotis-fit4life-a-c",
+    "athletics-ireland-ballon-rathoe-a-c",
+    "athletics-ireland-ballybunnion-running-club-a-c",
+    "athletics-ireland-ballycastle-a-c",
+    "athletics-ireland-ballyduff-a-c"
   ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Rotate Yorkshire road, fell and triathlon clubs with Northern Ireland and Irish regional athletics. Check canonical slugs/profile map first. Revisit Annalee/Ormeau when substantive club sources recover.",
+    "Rotate to North West/North East England, Welsh and Irish clubs in the saved queue. Avoid repeating the Yorkshire/NI batch. Revisit deferred sites only when fuller primary evidence becomes readable.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -674,6 +673,108 @@
       "url": "https://belfastmedia.com/back-on-top-after-covid-paul-elliott-and-beechmount-harriers-stay-firmly-on-the-track",
       "status": "historical-not-current",
       "reason": "Firsthand 2022 anniversary interview supports origins, not current timetable or membership. Teresa Duffy uses ANI 2011 interview. Paul McKee medal-placing claim not repeated."
+    },
+    {
+      "slug": "hi-elbow-tc",
+      "url": "http://www.hielbow.club/",
+      "status": "sparse-club-page",
+      "reason": "Only a contact form and swim-bike-run heading were readable. Main TI website lists a different email/domain from the retained app directory; no conflicting contact overwritten and no full biography."
+    },
+    {
+      "slug": "island-tc",
+      "url": "http://www.islandtriathlonclub.com/",
+      "status": "expired-hosting",
+      "reason": "HTTP 503 hosting account expired; biography deferred."
+    },
+    {
+      "slug": "lisburn-triathlon-club",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "insufficient-primary-history",
+      "reason": "Adult-only listing and contact retained. No substantive official club history or current training programme read."
+    },
+    {
+      "slug": "athletics-ireland-artane-beaumont-running-club-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Artane/Beaumont_Running_Club_A.C.",
+      "status": "insufficient-primary-programme",
+      "reason": "Senior directory and a 2025 firsthand co-founder quote about an informal ultra were read, but insufficient current programme/history for a full biography. Do not confuse with Beaumont in Leicester."
+    },
+    {
+      "slug": "athletics-ireland-ashford-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ashford_A.C.",
+      "status": "insufficient-primary-history",
+      "reason": "Sparse senior-only Wicklow listing; no club-specific enquiry email. Do not borrow the Kent club history."
+    },
+    {
+      "slug": "narrows-triathlon-club",
+      "url": "http://www.narrowstc.co.uk/",
+      "status": "stale-covid-copy",
+      "reason": "Club homepage still describes 2021 cancellation and 2022 race navigation. Training timetable not promoted as current; biography deferred."
+    },
+    {
+      "slug": "newry-triathlon-club",
+      "url": "http://www.newrytriathlon.com/",
+      "status": "club-site-502",
+      "reason": "Club page returned 502; biography deferred."
+    },
+    {
+      "slug": "olympian-triathlon-club",
+      "url": "http://olympiantriclub.co.uk/",
+      "status": "obsolete-gambling-domain-replaced",
+      "reason": "Old domain serves unrelated SEMUTWIN gambling content. Recovered olympiantriathlon.com; it matches the retained directory email and club Facebook identity. Replaced website/contact URL; old main TI page still points at obsolete domain/email, not copied."
+    },
+    {
+      "slug": "north-york-moors-ac",
+      "url": "https://www.nym.ac/session-day-changes/",
+      "status": "trial-timetable",
+      "reason": "23 September notice moves track to Thursday and Nunthorpe/alternating venues to Tuesday from 12 October 2026, superseding homepage. Homepage trial allowance differs from Instagram embed. Apparent committee-email spelling left unfilled pending corroboration."
+    },
+    {
+      "slug": "sheffield-triathlon-club",
+      "url": "https://www.sheffieldtriclub.com/juniors",
+      "status": "junior-programme-inactive",
+      "reason": "Specific junior page overrides generic all-ages About text. No regular junior sessions currently; limited supervised alternatives require direct enquiry."
+    },
+    {
+      "slug": "down-triathlon-club",
+      "url": "https://www.downtriathlonclub.com/juniors",
+      "status": "junior-age-conflict",
+      "reason": "About says 9–16; junior page 10–17. Exact age range omitted; confirm eligibility."
+    },
+    {
+      "slug": "craven-energy-triathlon-and-multisport-club",
+      "url": "https://clubspark.net/CravenEnergyTriathlonclub/Contact",
+      "status": "base-not-all-session-venues",
+      "reason": "Club-confirmed Skipton base replaces Keighley directory location. Street address remains directory-labelled pending session-specific confirmation. Junior home age range differs from membership categories; no blanket upper age."
+    },
+    {
+      "slug": "athletics-ireland-aughagower-a-c",
+      "url": "https://www.aughagowerathleticsclub.com/track-development",
+      "status": "proposed-track",
+      "reason": "Planning approval July 2024 and fundraising do not establish an open track. Community-centre Eircode not independently established; removed unconfirmed precise postcode."
+    },
+    {
+      "slug": "athletics-ireland-aughrim-a-c",
+      "url": "https://www.aughrimathletics.com/",
+      "status": "limited-intake-and-social-variant",
+      "reason": "2026/27 registration explicitly limited. Club and AI link different Instagram handle spellings; retained separate provenance rather than claiming equivalence. Founding date unconfirmed."
+    },
+    {
+      "slug": "athletics-ireland-b-m-o-h-a-c",
+      "url": "https://bmohac.com/articles/192637",
+      "status": "restart-not-new-founding",
+      "reason": "2012 foundation and July 2026 restart distinguished. About/history bodies empty. No detailed current timetable; numeric Facebook ID and x.com/false placeholder excluded."
+    },
+    {
+      "slug": "omagh-tc",
+      "url": "https://www.omaghtriathlonclub.com/history.html",
+      "status": "history-placeholder",
+      "reason": "History page coming soon; no founding year inferred. Race venue not treated as headquarters."
+    },
+    {
+      "slug": "city-of-york-ac",
+      "url": "https://www.cityofyorkac.com/",
+      "status": "decorative-famous-name-excluded",
+      "reason": "Usain Bolt appears in decorative homepage content, not evidence of club membership. No unsupported notable association or founding year added."
     }
   ],
   "coverageReviewNotes": [
@@ -685,6 +786,7 @@
     "Batch10 primary sources read on 14 October UTC. Twenty new biographies and 15 historical/notable associations; no governing-body rows re-dated. Current directory comparisons remain 1,682, with 55 older rows. Public role contacts and exact source links checked; supplier contacts excluded. Seed v10; draft-preview only.",
     "Batch11: 20 profiles, five historical member entries and 19 website-contact/social records on 14 October UTC. Actual merged coverage 253/1737. No blanket directory refresh: 1682 recent comparisons, 55 older. Sports and address corrections only where primary evidence supports them; draft-preview only, seed v11.",
     "Batch12: 16 profiles and five historical/notable associations; 17 contact/social records updated. Actual merged coverage 269/1737. Four candidates deferred rather than padding sparse sources. Former Griffithstown domain replaced; Bray placeholder phone removed. Directory date coverage unchanged (1682 recent,55 older), seed v12, draft-only. Main bceb3ea inspected: intervening athlete/homepage changes do not overlap these data files.",
-    "Batch13: 18 profiles, ten sourced associations, 17 contact/social records changed (12 new). Actual merged coverage 287/1737; 140 notable entries. Seven more clubs with contacts/email, two with phones, twelve social links. Two candidates deferred. Seed v13, draft-only. Prior 5d39ab1 Club profiles passed; broader quality gate 38505360491 failed mobile registration: Help improve ATHRECS banner / bottom nav intercepted Continue. No safeguard or broad UI changes."
+    "Batch13: 18 profiles, ten sourced associations, 17 contact/social records changed (12 new). Actual merged coverage 287/1737; 140 notable entries. Seven more clubs with contacts/email, two with phones, twelve social links. Two candidates deferred. Seed v13, draft-only. Prior 5d39ab1 Club profiles passed; broader quality gate 38505360491 failed mobile registration: Help improve ATHRECS banner / bottom nav intercepted Continue. No safeguard or broad UI changes.",
+    "Batch14: 18 profiles, eight historical/notable associations, 18 website-contact records changed (12 new). Actual merged coverage 305/1737; 148 notable entries. Seven more clubs with email, fourteen contact entries, eighteen social links. Seed v14 draft-only. All 12 workflows for preceding eb01a07 now passed; no UI fix claimed for the earlier intermittent registration obstruction. Directory comparison dates unchanged."
   ]
 }

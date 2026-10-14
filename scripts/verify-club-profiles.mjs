@@ -35,6 +35,26 @@ try {
   assert.match(birchfield.address, /Alexander Stadium/);
   assert.equal(birchfield.address_kind, "training");
   assert.equal(bySlug.get("unattached").country, "");
+  assert.equal(bySlug.get("wakefield-district-h-and-ac").postcode, "WF2 8TY");
+  assert.deepEqual(bySlug.get("wakefield-district-h-and-ac").sports, ["Running", "Athletics"]);
+  assert.equal(bySlug.get("craven-energy-triathlon-and-multisport-club").city, "Skipton");
+  assert.equal(bySlug.get("craven-energy-triathlon-and-multisport-club").county, "North Yorkshire");
+  assert.equal(bySlug.get("yorkshire-wolds-runners").city, "Driffield");
+  assert.equal(bySlug.get("north-york-moors-ac").address_kind, "correspondence");
+  assert.equal(bySlug.get("north-york-moors-ac").postcode, "TS7 8ED");
+  assert.match(clubProfiles["north-york-moors-ac"].biography.join(" "), /12 October/);
+  assert.match(clubProfiles["sheffield-triathlon-club"].biography.join(" "), /junior section is currently inactive/);
+  assert.match(clubProfiles["athletics-ireland-aughagower-a-c"].biography.join(" "), /not presented here as an open facility/);
+  assert.equal(bySlug.get("athletics-ireland-aughagower-a-c").postcode, "");
+  assert.equal(bySlug.get("olympian-triathlon-club").website, "https://olympiantriathlon.com/");
+  assert.equal(bySlug.get("olympian-triathlon-club").contact_url, "https://olympiantriathlon.com/#contact");
+  assert.equal(clubProfiles["yorkshire-wolds-runners"].founded_year, 2010);
+  assert.equal(clubProfiles["omagh-tc"].founded_year, undefined);
+  assert.equal(bySlug.get("omagh-tc").adult_only, true);
+  for (const slug of ["sheffield-triathlon-club", "york-knavesmire-harriers"]) {
+    assert.equal(bySlug.get(slug).address, "");
+    assert.equal(bySlug.get(slug).postcode, "");
+  }
   assert.equal(bySlug.get("hastings-ac").postcode, "TN34 2PG");
   assert.equal(bySlug.get("hastings-ac").address_kind, "training");
   assert.equal(bySlug.get("horsham-joggers").postcode, "RH12 3YS");
