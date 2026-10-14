@@ -1,65 +1,15 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch29",
+  "lastEditorialBatch": "2026-10-14-batch30",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch27",
-  "pullRequest": 713,
-  "publication": "Batch 29 adds 24 profiles and six historical notable-member associations. PR713 now combines 59 profiles and 18 associations: 565/1,737 assembled biographies, 240 notable entries. Last confirmed live coverage is 506/1,737 via PR710. Standing publication authority applies after exact-head checks and matching production verification.",
+  "branch": "codex/club-profiles-batch30",
+  "pullRequest": null,
+  "publication": "Batch 30 adds 20 profiles and 12 sourced historical/founding/coaching associations: 585/1,737 assembled biographies and 252 notable entries. PR713 is merged and its 59 additions were verified live on 14 October: last confirmed live coverage 565/1,737 and 240 notable entries. New batch requires exact-head CI and matching production verification before its additions are claimed live.",
   "completedProfileSlugs": [
-    "denmead-striders",
-    "derby-athletic-club",
-    "derbyshire-dynamos",
-    "derwent-ac-cockermouth",
-    "derwent-runners-derby",
-    "derwent-valley-running-club",
-    "derwent-valley-trail-runners",
-    "derwentside-ac",
-    "desborough-and-rothwell-running-club",
-    "desford-striders",
-    "devizes-running-club",
-    "dh-runners",
-    "diamond-runners",
-    "didcot-runners",
-    "didsbury-runners",
-    "dili-academy",
-    "dorchester-ac",
-    "dorchester-riot",
-    "dorset-doddlers-rc",
-    "dorset-sole-sisters",
-    "dover-road-runners",
-    "dragons-running-club-leeds",
-    "dragons-running-club-sale",
-    "driffield-striders"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 565,
-    "notableMemberEntries": 240,
-    "clubsWithContacts": 656,
-    "contactEntries": 1150,
-    "clubsWithEmail": 637,
-    "clubsWithPhone": 100,
-    "clubsWithSocials": 1015,
-    "socialLinks": 2093,
-    "websiteContactRecords": 930
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 24,
-    "notableMemberEntriesAdded": 6,
-    "contactOrSocialRecordsChanged": 24,
-    "newWebsiteContactRecords": 13,
-    "directoryRecordsRefreshed": 0,
-    "directorySocialCorrections": 1
-  },
-  "validationBeforeCommit": {
-    "status": "Source/contact assertions, catalogue/profile/audit checks, targeted ESLint, TypeScript and application build passed. All 59 actual PR pages passed full biography, contacts, flags, location notes, registration links, title, description, canonical and SportsOrganization assertions against the final local build. The email-login test asserts no analytics prompt or script on the private account route; exact-head CI must validate the browser flow. Main 37d19e476672fb9556b67cc8c1f247a77cd6cf28 incorporated without conflicts. Workflow, preview and production evidence belongs in PR713."
-  },
-  "nextCandidateSlugs": [
     "drighlington-dynamos-running-club",
     "droitwich-ac",
     "dronfield-rc",
-    "dsfrs-running-club",
     "dudley-and-stourbridge-harriers",
     "dudley-kingswinford-rc",
     "dulwich-park-runners",
@@ -73,13 +23,66 @@
     "ealing-southall-and-middlesex-ac",
     "easingwold-running-club",
     "east-cheshire-harriers-and-tameside-ac",
-    "east-cornwall-harriers"
+    "east-cornwall-harriers",
+    "east-end-road-runners",
+    "east-grinstead-runners",
+    "east-london-runners"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 585,
+    "notableMemberEntries": 252,
+    "clubsWithContacts": 666,
+    "contactEntries": 1167,
+    "clubsWithEmail": 647,
+    "clubsWithPhone": 101,
+    "clubsWithSocials": 1022,
+    "socialLinks": 2108,
+    "websiteContactRecords": 942
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 12,
+    "contactOrSocialRecordsChanged": 18,
+    "newWebsiteContactRecords": 12,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 17,
+    "netSocialLinks": 15
+  },
+  "validationBeforeCommit": {
+    "status": "Primary-source/contact-link assertions, canonical profile checks, catalogue and club audits, targeted ESLint, TypeScript and application build passed. All20 actual rendered production-build pages passed full biography, notable-member, contacts/socials, location notes, flags, registration links, title, description, canonical and SportsOrganization assertions. No database publication occurred during local checks. Exact-head Club profiles desktop/mobile workflow, wider gate and matching preview evidence belong in the new PR. Main5631bc0e7944492a062128c5706c6d00c75160fe was inspected and incorporated without overlapping club-data changes."
+  },
+  "nextCandidateSlugs": [
+    "eastern-masters-ac",
+    "eastleigh-rc",
+    "eden-runners",
+    "edmonton-rc",
+    "egdon-heath-harriers",
+    "ellenborough-ac",
+    "ellesmere-port-rc",
+    "elmbridge-rrc",
+    "elvet-striders",
+    "ely-runners",
+    "ely-tri-club",
+    "emersons-green-running-club",
+    "enfield-and-haringey-a-c",
+    "enfield-chasers",
+    "epsom-and-ewell-harriers",
+    "epsom-allsorts",
+    "epsom-oddballs-rc",
+    "erewash-valley-rc",
+    "esk-valley-fell-club",
+    "essington-harriers-running-club",
+    "eton-manor-ac",
+    "evenwood-road-runners",
+    "evesham-vale-running-club",
+    "evesham-vale-triathletes"
   ],
   "resumeInstructions": [
-    "Read current main, PR713 (or its successor), AGENTS.md, audit, checkpoint and assembled catalogue; do not repeat completed slugs.",
-    "Inspect remote head and running work before editing. Preserve expected-head guards and unrelated work. Do not add a new batch while release checks run.",
-    "PR713 combines batches 27\u201329: 59 profiles and 18 associations. Exact-head Club profiles and AthRecs quality gate must pass before using standing publication authority. Prior gate 38590722048 failed on a stale email-login analytics-prompt click; this batch corrects that test only.",
-    "After merge, confirm matching AthRecs production and all 59 public pages before claiming 565 live; then continue from fresh main. Protected previews must remain protected.",
+    "Read current main, the open PR for codex/club-profiles-batch30 (or its successor), AGENTS.md, audit, checkpoint and assembled catalogue; do not repeat completed slugs.",
+    "Inspect remote head and running work before editing. Preserve expected-head guards and unrelated work. Do not add an overlapping batch while release checks run.",
+    "PR713 is merged: 565 biographies and 240 notable entries were confirmed live. Batch30 adds20 profiles and12 associations; its exact-head Club profiles and complete AthRecs quality gate must pass before using standing publication authority.",
+    "After merging batch30, confirm matching AthRecs production and all20 public pages before claiming585 live; then continue from fresh main. Protected previews must remain protected.",
     "Record deployment and workflow evidence in the PR body without checkpoint-only rebuild loops. No identities, results, verification or privacy changes; no outreach."
   ],
   "sourceGaps": [
@@ -2040,6 +2043,86 @@
       "status": "visitor-not-alumnus",
       "note": "A photograph caption mentions Ron Hill at the Stickler but does not establish club membership; no alumni association added. Current course intake dates are not inferred from the older June notice.",
       "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "dsfrs-running-club",
+      "url": "http://dsfrs-running-club.org.uk/",
+      "reason": "Official website unavailable; directory-only evidence is insufficient for a full biography. No biography added.",
+      "checkedAt": "2026-10-14",
+      "category": "unavailable-source",
+      "status": "deferred"
+    },
+    {
+      "slug": "east-grinstead-and-district-ac",
+      "url": "http://www.eastgrinsteadac.co.uk/",
+      "reason": "Official website returned a Cloudflare/DNS-prohibited 403. No bypass and no biography added.",
+      "checkedAt": "2026-10-14",
+      "category": "unavailable-source",
+      "status": "deferred"
+    },
+    {
+      "slug": "drighlington-dynamos-running-club",
+      "url": "https://groups.runtogether.co.uk/DrighlingtonDynamos/",
+      "reason": "2024 England Athletics award supplies origins and community history. RunTogether pages timed out and separate .co.uk homepage was empty; current timetable and public contact remain unconfirmed.",
+      "checkedAt": "2026-10-14",
+      "category": "limited-current-session-detail",
+      "status": "profiled-with-gap"
+    },
+    {
+      "slug": "durham-fell-runners",
+      "url": "https://www.durhamfellrunners.org/",
+      "reason": "Club site blocked/unavailable. February 2026 county council directory and 2025 England Athletics award support the profile; current club email and phone remain unconfirmed.",
+      "checkedAt": "2026-10-14",
+      "category": "unavailable-club-website",
+      "status": "profiled-with-gap"
+    },
+    {
+      "slug": "durham-university-athletics-and-cross-country-club",
+      "url": "https://dur.ac.uk/discover/international-womens-day/sports-news/max-and-julie-colby/",
+      "reason": "University sports programme names Max and Julie Coleby as coaches, but its November 2024 announcement records their retirement that June. Profile explicitly distinguishes former coaches and honorary presidents; current timetable must be confirmed.",
+      "checkedAt": "2026-10-14",
+      "category": "stale-coach-list",
+      "status": "profiled-with-gap"
+    },
+    {
+      "slug": "east-grinstead-runners",
+      "url": "https://www.eastgrinsteadrunners.co.uk/membership",
+      "reason": "Main membership text says 18+; homepage and snippets say 14. No unconditional adult_only correction applied. Ask membership team for current minimum age.",
+      "checkedAt": "2026-10-14",
+      "category": "conflicting-minimum-age",
+      "status": "profiled-with-gap"
+    },
+    {
+      "slug": "dwain-chambers-sprint-club",
+      "url": "https://www.chambersforsport.com/",
+      "reason": "Academy identity and Lee Valley training hub are supported, but wider organisation pages use 2000 and 2009. No founding year inferred for the listed club. Founder Instagram is not presented as a separate club organisation account.",
+      "checkedAt": "2026-10-14",
+      "category": "ambiguous-founding-date",
+      "status": "profiled-with-gap"
+    },
+    {
+      "slug": "east-cornwall-harriers",
+      "url": "https://eastcornwallharriers.com/contact/",
+      "reason": "Homepage and contact page differ on secretary email; press email label differs from mailto. Membership and chair role emails retained; ambiguous targets excluded. Old beginners course notice is not treated as an open intake.",
+      "checkedAt": "2026-10-14",
+      "category": "conflicting-contact-copy",
+      "status": "profiled-with-gap"
+    },
+    {
+      "slug": "east-london-runners",
+      "url": "https://www.eastlondonrunners.org.uk/content?page=clubhistory",
+      "reason": "History and joining routes exposed navigation/footer only. Homepage and contact form support current activities and contacts; no founding date or trial entitlement invented.",
+      "checkedAt": "2026-10-14",
+      "category": "unread-history-content",
+      "status": "profiled-with-gap"
+    },
+    {
+      "slug": "east-cheshire-harriers-and-tameside-ac",
+      "url": "https://www.eastcheshireharriers.com/membership-information",
+      "reason": "Membership page mixes 2025 and 2026 headings. Fees omitted; applicants directed to membership volunteers. Charity Facebook promotion excluded from club socials.",
+      "checkedAt": "2026-10-14",
+      "category": "mixed-fee-season-labels",
+      "status": "profiled-with-gap"
     }
   ],
   "coverageReviewNotes": [
@@ -2068,22 +2151,27 @@
     "Batch27: six English, five Irish and three Welsh biographies;14 contact/social records changed, nine newly covered.520/1737 biographies and227 notable entries. Sources read14October; other governing-body comparison dates unchanged.",
     "Batch28:15 English and six Irish biographies;21 contact/social records changed,16 newly covered.541/1737 biographies and234 notable entries. Primary pages opened14October2026; other directory comparison dates unchanged.",
     "Batch 29: 24 English regional running/athletics profiles, six historical associations, 24 website contact records updated (13 new), plus one sourced correction of an Instagram domain typo. Assembled 565/1,737 biographies and 240 notable entries; 25 net contact entries and 12 net social links. Primary pages opened 14 October 2026. Other directory comparison dates unchanged.",
-    "Remaining non-English website candidates are eight Welsh school-district listings, requiring an entity-type review before describing them as joinable clubs. The next ordinary-club batch therefore rotates English regions and includes fell, university and sprint clubs."
+    "Remaining non-English website candidates are eight Welsh school-district listings, requiring an entity-type review before describing them as joinable clubs. The next ordinary-club batch therefore rotates English regions and includes fell, university and sprint clubs.",
+    "Batch30:20 English profiles rotating Yorkshire, the North East, Midlands, London and South West, spanning road/fell running, track/field, university sport, sprint coaching and triathlon.12 historical/founding/coaching associations,18 contact/social records changed(12 new). Websites recovered for DK and Chambers; addresses and postcodes corrected without renewing unrelated directory dates. Ordinary non-English candidates remain completed or source-blocked; eight Welsh school-district entities need an entity-type review. No athlete identity, result, privacy, verification, registration or metadata implementation changed."
   ],
-  "previousPullRequest": 710,
+  "previousPullRequest": 713,
   "productionAuthorization": {
     "date": "2026-10-14",
     "instruction": "can you publish all and continue please",
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 710,
-    "mergeCommit": "9a124203f80ce252c2be2ba68d32ef90777f4bbc",
+    "previousPullRequest": 713,
+    "mergeCommit": "777b9c2e2eb36defe5223862067431477ba58d7e",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
-    "status": "PR710 production previously confirmed READY; PR713 additions remain staged pending exact-head checks and a matching production deployment.",
-    "lastConfirmedLiveCommit": "9a124203f80ce252c2be2ba68d32ef90777f4bbc",
-    "lastConfirmedLiveDeployment": "dpl_3sN7JtXBBeNgwi7NnXfszVtTgQ17",
-    "lastConfirmedLiveProfiles": 506,
-    "mainProfilesAtStart": 506
+    "team": "athrecs-holding-page-set-up",
+    "status": "PR713 merged after both exact-head workflows passed. Matching production deployment READY; all59 live release pages passed full content/contact/location/flag/registration/metadata assertions on14October2026. Batch30 not yet claimed live.",
+    "lastConfirmedLiveCommit": "777b9c2e2eb36defe5223862067431477ba58d7e",
+    "lastConfirmedLiveDeployment": "dpl_E3bCdjQaWLygBYtDvggTabTHWNhc",
+    "lastConfirmedLiveProfiles": 565,
+    "lastConfirmedLiveNotableEntries": 240,
+    "mainProfilesAtStart": 565,
+    "clubProfilesWorkflow": 38595447107,
+    "qualityGateWorkflow": 38595447151
   }
 }
