@@ -24,6 +24,39 @@ import {
   runningCountryPalettes,
 } from "@/lib/running/country-card-palette";
 
+const homepageCardStyles = {
+  blue: {
+    background: "linear-gradient(135deg, #dceaff 0%, #edf4ff 100%)",
+    borderColor: "#bbd0ee",
+    color: "#2c4d76",
+  },
+  mint: {
+    background: "linear-gradient(135deg, #def2e5 0%, #eff9f2 100%)",
+    borderColor: "#b9d9c5",
+    color: "#275d43",
+  },
+  lavender: {
+    background: "linear-gradient(135deg, #e8def8 0%, #f4effc 100%)",
+    borderColor: "#cec0e5",
+    color: "#5a3e7e",
+  },
+  peach: {
+    background: "linear-gradient(135deg, #ffe4d4 0%, #fff3e9 100%)",
+    borderColor: "#e9c6ad",
+    color: "#804523",
+  },
+  rose: {
+    background: "linear-gradient(135deg, #f8dce7 0%, #fdf0f5 100%)",
+    borderColor: "#e5bbce",
+    color: "#813953",
+  },
+  butter: {
+    background: "linear-gradient(135deg, #f8edc9 0%, #fff9e6 100%)",
+    borderColor: "#e2d49d",
+    color: "#725719",
+  },
+};
+
 export function runningGuidesJsonLd(url: string) {
   return {
     "@context": "https://schema.org",
@@ -61,23 +94,26 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
           to: "/running/events",
           title: "Search running races",
           detail: "Road, trail, fell, ultras and parkrun. Filter by country, distance and date.",
+          style: homepageCardStyles.blue,
         },
         {
           to: "/running/calendar",
           title: "Running calendar",
           detail: "Browse published race days, start times and locations.",
+          style: homepageCardStyles.mint,
         },
         {
           to: "/running/race-series",
           title: "Race series",
           detail: "Explore the World Marathon Majors and UTMB race collections.",
+          style: homepageCardStyles.lavender,
         },
       ].map((item) => (
         <Link
           key={item.to}
           to={item.to}
           className={pastelCardClassName}
-          style={neutralPastelCardStyle}
+          style={homepage ? item.style : neutralPastelCardStyle}
         >
           <h2 className="font-display text-xl font-semibold text-slate-900">{item.title}</h2>
           <p className="mt-2 text-sm leading-6 text-slate-700">{item.detail}</p>
@@ -103,9 +139,22 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
           title: "Half marathons",
           detail: "13.1 miles",
           icon: Footprints,
+          style: homepageCardStyles.butter,
         },
-        { href: "#countries-title", title: "Marathons", detail: "26.2 miles", icon: Medal },
-        { href: "#ultras", title: "UK road ultras", detail: "Beyond the marathon", icon: Mountain },
+        {
+          href: "#countries-title",
+          title: "Marathons",
+          detail: "26.2 miles",
+          icon: Medal,
+          style: homepageCardStyles.peach,
+        },
+        {
+          href: "#ultras",
+          title: "UK road ultras",
+          detail: "Beyond the marathon",
+          icon: Mountain,
+          style: homepageCardStyles.lavender,
+        },
       ].map((item) => (
         <a
           key={item.href}
@@ -115,7 +164,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
               ? `${compactCardClassName} flex min-h-24 items-center gap-3`
               : "min-h-11 inline-flex items-center"
           }
-          style={homepage ? neutralPastelCardStyle : undefined}
+          style={homepage ? item.style : undefined}
         >
           {homepage ? (
             <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/70">
@@ -264,23 +313,48 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
           >
             {(
               [
-                { to: "/races", title: "All fixtures", icon: CalendarDays },
-                { to: "/results", title: "Race results", icon: Trophy },
-                { to: "/athletes", title: "Find an athlete", icon: Users },
-                { to: "/join", title: "Build my profile", icon: UserPlus },
-                { to: "/athlete-account", title: "Find my results", icon: Search },
+                {
+                  to: "/races",
+                  title: "All fixtures",
+                  icon: CalendarDays,
+                  style: homepageCardStyles.blue,
+                },
+                {
+                  to: "/results",
+                  title: "Race results",
+                  icon: Trophy,
+                  style: homepageCardStyles.peach,
+                },
+                {
+                  to: "/athletes",
+                  title: "Find an athlete",
+                  icon: Users,
+                  style: homepageCardStyles.lavender,
+                },
+                {
+                  to: "/join",
+                  title: "Build my profile",
+                  icon: UserPlus,
+                  style: homepageCardStyles.mint,
+                },
+                {
+                  to: "/athlete-account",
+                  title: "Find my results",
+                  icon: Search,
+                  style: homepageCardStyles.rose,
+                },
               ] as const
             ).map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 className={`${compactCardClassName} flex min-h-24 flex-col gap-3 last:col-span-2 lg:last:col-span-1`}
-                style={neutralPastelCardStyle}
+                style={item.style}
               >
                 <item.icon className="size-5" aria-hidden="true" />
-                <span className="flex items-center justify-between gap-2 text-sm font-semibold text-slate-900">
-                  {item.title}
-                  <ArrowRight className="size-4 shrink-0 text-[#334e7d]" aria-hidden="true" />
+                <span className="flex items-center justify-between gap-2 text-sm font-semibold">
+                  <span className="text-slate-900">{item.title}</span>
+                  <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
                 </span>
               </Link>
             ))}
