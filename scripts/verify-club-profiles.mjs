@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { createServer } from "vite";
 import { clubProfiles } from "../src/data/club-profiles.ts";
@@ -16,6 +17,11 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  const checkpoint = JSON.parse(readFileSync("docs/club-profile-checkpoint.json", "utf8"));
+  for (const slug of checkpoint.nextCandidateSlugs) {
+    assert.ok(bySlug.has(slug), `Next candidate must be canonical: ${slug}`);
+    assert.equal(clubProfiles[slug], undefined, `Next candidate already has a profile: ${slug}`);
+  }
   for (const [alias, canonical] of Object.entries(clubSlugAliases)) {
     const newest = [clubEnrichment[alias], clubEnrichment[canonical]].sort((a, b) =>
       b.checked_at.localeCompare(a.checked_at),
