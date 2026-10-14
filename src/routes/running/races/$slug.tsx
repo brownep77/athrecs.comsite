@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { RoadMarathonPage } from "@/components/running/RoadMarathonPages";
+import { upcomingRoadEditions } from "@/lib/running/road-marathon-calendar";
 import { roadRaceHead } from "@/lib/running/road-marathon-seo";
 
 export const Route = createFileRoute("/running/races/$slug")({
@@ -18,6 +19,7 @@ export const Route = createFileRoute("/running/races/$slug")({
       race.distanceKm === 21.0975
         ? roadHalfMarathonsForCountry(race.country)
         : roadMarathonsForCountry(race.country);
+    const now = new Date().toISOString();
     const related = candidates
       .filter((item) => item.slug !== race.slug)
       .sort(
@@ -26,8 +28,19 @@ export const Route = createFileRoute("/running/races/$slug")({
           a.name.localeCompare(b.name),
       )
       .slice(0, 4)
-      .map(({ slug, name, city, region }) => ({ slug, name, city, region }));
-    return { race, related, now: new Date().toISOString() };
+      .map((item) => ({
+        slug: item.slug,
+        name: item.name,
+        city: item.city,
+        region: item.region,
+        timeZone: item.timeZone,
+        profile: item.course.profile,
+        nextDate: upcomingRoadEditions(item, now)[0]?.date,
+        field: item.fieldSize
+          ? `${item.fieldSize.display} (${item.fieldSize.basis}, ${item.fieldSize.year})`
+          : undefined,
+      }));
+    return { race, related, now };
   },
   staleTime: 0,
   preloadStaleTime: 0,

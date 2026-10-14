@@ -4,8 +4,8 @@ Checked through 14 October 2026 for the catalogue horizon ending 31 December 202
 
 ## Published coverage
 
-- Added 72 officially verified series: 57 half marathons and 15 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
-- Added 45 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
+- The accumulated follow-up contains 77 source-backed series with 80 editions: 63 half-marathon editions and 17 ten-mile editions across England, Scotland, Wales, Northern Ireland and Ireland. These are cumulative totals, not additions from the latest release check.
+- Added 55 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
 - Burnsall, Kettlewell and Malham now use the live official Due North series checkout.
@@ -20,7 +20,7 @@ Oxford Half Marathon is also retained on its established permanent card. The off
 
 ## Held candidates
 
-The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, RunClare, RunCork, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs, Ennis and Glenmore races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Dorney Lake January–March, Brixton, Nantwich, Swindon, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
+The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, RunClare, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs and Ennis races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Dorney Lake January–March, Brixton, Nantwich, Swindon, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
 
 ## 29 August 2026 scan
 
@@ -217,3 +217,19 @@ Oxford Half Marathon now exposes live event-specific checkout for its remaining 
 SPAR Omagh Half Marathon & 5K now has open SiEntries registration. Its existing 4 April 2027 card has been enriched with the verified 09:30 half-marathon start, £37 run price and direct checkout while retaining the 5K on the same canonical event card.
 
 Macclesfield Running Festival remains unpublished. The official page body advertises a half marathon, 10K and 5K on 31 October 2027, but its title and structured date still identify 18 October 2026. Once the organiser resolves that conflict, the edition must enrich the existing Macclesfield Half Marathon card rather than create another series. Current UK licence holds are unchanged, and the Cork City and Waterford Viking permit conflicts remain unresolved.
+
+
+## 14 October 2026 release review and corrections
+
+Rechecked the newer additions against the actual organiser or registration page contents, including Haweswater, Trim, Abbeyknockmoy, RunCork, Limerick, Noreen McCarthy, Glenmore, Settle, Omagh, Oxford and the recent RunThrough editions. This targeted source review is separate from the automated whole-catalogue duplicate audit; it is not a new manual verification of every historical catalogue row.
+
+The following current-source findings supersede earlier scan notes:
+
+- [Abbeyknockmoy's half-marathon ticket](https://eventmaster.ie/event/j9qbiE0TBz/r28DU2wUe) lists sales opening on 31 March 2027 at 12:00 and closing on 11 July at 18:00. Its approved permit, 12 September race date and 10:00 half start remain published, but entry is now `TBC` with no checkout or entry option until sales open.
+- [Glenmore's official registration](https://eventmaster.ie/event/3xxOfx4tZW) prices the half at €35 and the ten-mile race at €30. The half price is corrected; checkout remains hidden until 1 November 2026.
+- [Run Gatwick](https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027) currently lists its half at £41 plus a 5% booking fee. The earlier £38 figure is replaced.
+- The half-marathon checkout links from [Oulton Park on 14 February](https://www.runthrough.co.uk/event/oulton-park-gp-5k-10k-half-marathon-marathon-20-mile-metric-marathon-february-2027) and [Dorney Lake on 3 April](https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027) currently redirect to an unrelated Blackburn event. Their exact verified organiser pages now serve as entry destinations. Regression checks require those same-event URLs.
+
+The fixture verifier checks all 77 accumulated series, 80 new-series editions, 55 editions on existing cards, 45 held candidates and the retired invalid card. Separate catalogue duplicate, publication and archive-preservation checks also pass locally. Held permit/date conflicts remain held, and this release contains no athlete performances or result imports.
+
+The results-archive failure was traced to this branch removing both seed conflict guards for results with archive metadata. Both guards are restored. Expanded regression coverage checks the complete reviewed result, athlete identity, references and correction history after each seed conflict and an import conflict, while confirming ordinary unreviewed updates and cross-provider conflict protection still work. The PostgreSQL archive workflow passed after restoration; the combined release commit must also pass its full CI gates before merge.

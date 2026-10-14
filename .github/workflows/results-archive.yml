@@ -1,17 +1,21 @@
 name: Central results archive
 on:
   pull_request:
-    paths:
+    paths: &archive-paths
       - "src/lib/results-archive/**"
       - "src/components/staff/*Archive*"
       - "src/components/athletes/*Result*"
       - "src/lib/athrecs/seed.server.ts"
+      - "src/lib/athrecs/results-import.server.ts"
       - "migrations/**"
       - "scripts/verify-results-archive*"
       - "scripts/verify-captured-results.mjs"
       - "scripts/verify-private-archive-profiles.py"
       - "src/components/staff/CapturedResultsBrowser.tsx"
       - ".github/workflows/results-archive.yml"
+  push:
+    branches: [main]
+    paths: *archive-paths
   workflow_dispatch:
 permissions:
   contents: read

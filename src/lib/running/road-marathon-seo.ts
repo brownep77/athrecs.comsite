@@ -83,6 +83,16 @@ export function countryMarathonQuestions(
         "Open an individual race guide to compare its entry methods and eligibility rules. Follow the official entry links for registration windows, qualifying requirements, fees and available places.",
     },
     {
+      question: `How can I compare road ${distance} courses in ${location}?`,
+      answer:
+        "Use the course summaries to compare terrain, surface and start-to-finish arrangements, then open the individual guide for official maps. A net-downhill course is not necessarily flat, and a road race may include paved paths or a track finish. Check the receiving event’s rules if you need a qualifying time.",
+    },
+    {
+      question: "Are the approximate fields the number of people who entered?",
+      answer:
+        "Each figure states its basis and year. Entrants, starters and finishers are different counts; a previous finishing field is a guide to scale, not an entry total or a guaranteed future field. Figures are approximate, and Unknown means a reliable estimate is not available. They are not multi-year averages unless explicitly described that way.",
+    },
+    {
       question: "Where can I find past race and category results?",
       answer:
         "Each race guide links to the organiser’s results. Choose the correct distance and edition to find a runner or published category standings.",
@@ -167,6 +177,9 @@ export function countryMarathonHead(
 
 export function roadRaceQuestions(race: RoadMarathon, now: string) {
   const upcoming = upcomingRoadEditions(race, now);
+  const country = (
+    race.distanceKm === 21.0975 ? halfMarathonCountry(race.country) : countryGuide(race.country)
+  )!;
   return [
     {
       question: `When is ${race.name}?`,
@@ -180,7 +193,20 @@ export function roadRaceQuestions(race: RoadMarathon, now: string) {
         ? race.entryMethods.map((method) => `${method.name}: ${method.description}`).join(" ")
         : "Follow the official organiser's entry page for the available entry routes and eligibility requirements.",
     },
-    { question: `What is the ${race.name} course like?`, answer: race.course.summary },
+    {
+      question: `Where is ${race.name} and how far is it?`,
+      answer: `${race.name} takes place in ${roadRaceLocation(race, country.name)}. This guide covers the ${race.distanceKm === 21.0975 ? "21.0975 km half marathon (13.1 miles)" : "42.195 km full marathon (26.2 miles)"}. Surface: ${race.course.surface}`,
+    },
+    {
+      question: `What is the ${race.name} course like?`,
+      answer: `${race.course.summary} ${race.course.profile}`,
+    },
+    {
+      question: `How big is the field at ${race.name}?`,
+      answer: race.fieldSize
+        ? `The approximate field is ${race.fieldSize.display}, based on ${race.fieldSize.basis} for ${race.fieldSize.year}. ${race.fieldSize.note ?? "This gives a sense of the event’s scale; it is not a forecast for the next edition."} Entrants, starters and finishers are different measures.`
+        : "The approximate field is Unknown. A reliable runner estimate is not currently available in this guide.",
+    },
     {
       question: `Where can I find past ${race.name} results?`,
       answer:
@@ -195,8 +221,13 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
   const country = (half ? halfMarathonCountry(race.country) : countryGuide(race.country))!;
   const path = roadRacePath(race);
   const url = `${SITE_URL}${path}`;
-  const title = `${race.name}: Entry, Route, Dates & Results | ATHRECS`;
-  const description = `${race.name} in ${roadRaceLocation(race, country.name)}: find race dates, entry options, the course route, previous results and official race information.`;
+  const nextEdition = upcomingRoadEditions(race, now)[0];
+  const year = nextEdition?.date.slice(0, 4);
+  const title = `${race.name}${year && !race.name.includes(year) ? ` ${year}` : ""}: Date, Route & Entry | ATHRECS`;
+  const dateSummary = nextEdition
+    ? roadMarathonDate(nextEdition.date, nextEdition.endDate)
+    : "Next date TBC";
+  const description = `${race.name}, ${roadRaceLocation(race)}. ${dateSummary}. ${race.course.profile} Entry options, course maps, field estimates and past results.`;
   return head(title, description, path, [
     {
       "@type": "WebPage",
@@ -214,7 +245,7 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
       "@type": "SportsEvent",
       "@id": `${url}#edition-${edition.date}`,
       name: `${race.name} ${edition.date.slice(0, 4)}`,
-      url: `${url}#dates`,
+      url: `${url}#edition-${edition.date}`,
       startDate: edition.date,
       endDate: edition.endDate ?? edition.date,
       sport: "Running",

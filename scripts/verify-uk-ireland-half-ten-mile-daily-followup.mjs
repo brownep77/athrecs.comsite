@@ -986,12 +986,12 @@ assert.equal(gatwickHalfEditions[0].source, gatwickSource, "Run Gatwick lost off
 assert.equal(gatwickHalfEditions[0].entryUrl, gatwickSource, "Run Gatwick lost safe open entry");
 assert.equal(
   gatwickHalfEditions[0].entryOptions?.[0]?.checkedAt,
-  CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+  CURRENT_ENTRY_STATE_SCAN_CHECKED_AT,
   "Run Gatwick entry provenance is stale",
 );
 assert.equal(
   gatwickHalfEditions[0].entryOptions?.[0]?.priceAmount,
-  38,
+  41,
   "Run Gatwick lost its half price",
 );
 assert.equal(
@@ -1217,11 +1217,10 @@ assert.deepEqual(
 );
 assert.equal(abbeyEdition.date, "2027-09-12", "Abbeyknockmoy has the wrong date");
 assert.equal(abbeyEdition.startTime, "10:00", "Abbeyknockmoy has the wrong half start");
-assert.equal(
-  abbeyEdition.entryOptions?.[0]?.checkedAt,
-  CURRENT_PERMIT_REFRESH_CHECKED_AT,
-  "Abbeyknockmoy permit and entry provenance is stale",
-);
+assert.equal(abbeyEdition.status, "TBC", "Abbeyknockmoy ticket sales have not opened");
+assert(!abbeyEdition.entryUrl, "Abbeyknockmoy must not expose checkout before 31 March 2027");
+assert(!abbeyEdition.entryOptions?.length, "Abbeyknockmoy must not expose premature entry options");
+assert.match(abbeyEdition.notes, /31 March 2027 at 12:00/, "Preserve the actual sales opening");
 assert.match(abbeyEdition.notes ?? "", /26\/583/, "Abbeyknockmoy lost its approved permit");
 assert(
   !dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug.includes("abbeyknockmoy")),
@@ -1246,12 +1245,13 @@ for (const [seriesSlug, date, startTime, sourcePattern] of [
   assert.match(editions[0].source, sourcePattern, `${seriesSlug}|${date} lost official provenance`);
   assert.match(
     editions[0].entryUrl ?? "",
-    /^https:\/\/www\.letsdothis\.com\//,
-    `${seriesSlug}|${date} lost its direct checkout`,
+    /^https:\/\/www\.runthrough\.co\.uk\/event\//,
+    `${seriesSlug}|${date} must use its organiser page while checkout redirects to another event`,
   );
+  assert.equal(editions[0].entryUrl, editions[0].source, "Use the exact verified organiser page");
   assert.equal(
     editions[0].entryOptions?.[0]?.checkedAt,
-    CURRENT_PERMIT_REFRESH_CHECKED_AT,
+    CURRENT_ENTRY_STATE_SCAN_CHECKED_AT,
     `${seriesSlug}|${date} entry provenance is stale`,
   );
 }
@@ -1948,7 +1948,11 @@ assert.equal(
   "https://www.sientries.co.uk/enter.php?event_id=18651",
   "Omagh Half lost its direct checkout",
 );
-assert.equal(omaghEdition?.entryOptions?.[0]?.priceAmount, 37, "Omagh Half has the wrong run price");
+assert.equal(
+  omaghEdition?.entryOptions?.[0]?.priceAmount,
+  37,
+  "Omagh Half has the wrong run price",
+);
 assert.equal(
   omaghEdition?.entryOptions?.[0]?.checkedAt,
   CURRENT_ENTRY_STATE_SCAN_CHECKED_AT,
@@ -2091,6 +2095,11 @@ assert.deepEqual(
   "Glenmore Challenge split its same-day distances across cards",
 );
 assert.match(glenmoreEdition.notes, /26\/595/, "Glenmore Challenge lost its permit");
+assert.match(
+  glenmoreEdition.notes,
+  /half marathon costs €35 and the 10-mile race €30/,
+  "Do not use Glenmore's 10-mile price for the half marathon",
+);
 assert(
   !dailyHalfTenMileResearchQueue.some(
     (candidate) => candidate.slug === "glenmore-challenge-running-festival-2027",

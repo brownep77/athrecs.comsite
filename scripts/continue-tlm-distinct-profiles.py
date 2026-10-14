@@ -80,18 +80,19 @@ def review_components(rows,held,decisions):
         if not flags: proposals.append((partitions,h['sourceKeys'],[witness],1))
     return proposals,reviewed
 
-def prepare(args):
+def prepare(args, previous_batch=None, expected_profiles=17538, expected_results=18930, expected_held=22761,
+            review_basis=None, evidence_field='separationEvidence'):
     cfg,query = t.base.connection(args.connection,args.confirm_branch,timeout=180)
     if cfg['projectId']!=t.PROJECT or cfg['branchId']!=t.PROD: raise ValueError('Screen production before rehearsal')
     rows,evidence,pages = prior.recover_and_compare(args.output,query)
     previous = json.loads((args.output/'previous-review.private.json').read_text())
-    live = query([("SELECT after_value FROM network_audit_log WHERE id=$1 AND action='source_batch.publication_followup' AND entity_id=$2",[previous['id'],aliases.BATCH])],True)[0]
+    live = query([("SELECT after_value FROM network_audit_log WHERE id=$1 AND action='source_batch.publication_followup' AND entity_id=$2",[previous['id'],previous_batch or aliases.BATCH])],True)[0]
     if len(live)!=1 or live[0]['after_value']!=previous['after_value']: raise ValueError('Previous review changed')
     existing = query([("SELECT a.id,jsonb_path_query_array(h.performances,'$[*].archiveReference.sourceRow') source_keys FROM athletes a JOIN athlete_source_histories h ON h.athlete_id=a.id WHERE a.profile_details#>>'{archiveCreation,sourceImportBatch}'=$1 AND h.provider=$2",[t.IMPORT,t.PROVIDER])],True)[0]
     public_keys = [k for p in existing for k in p['source_keys']]
     held = previous['after_value']['remainingHeld']; held_keys = [k for h in held for k in h['sourceKeys']]
-    if len(existing)!=17538 or len(public_keys)!=18930 or len(set(public_keys))!=18930: raise ValueError('Published scope changed')
-    if len(held_keys)!=22761 or len(set(held_keys))!=22761 or set(held_keys)&set(public_keys) or set(held_keys)|set(public_keys)!=set(rows): raise ValueError('Source partition changed')
+    if len(existing)!=expected_profiles or len(public_keys)!=expected_results or len(set(public_keys))!=expected_results: raise ValueError('Published scope changed')
+    if len(held_keys)!=expected_held or len(set(held_keys))!=expected_held or set(held_keys)&set(public_keys) or set(held_keys)|set(public_keys)!=set(rows): raise ValueError('Source partition changed')
     decisions = json.loads((args.output/'distinct-review.private.json').read_text())
     components,reviewed = review_components(rows,held,decisions)
     proposed=[]
@@ -100,9 +101,9 @@ def prepare(args):
             p=t.profile(source,evidence,pages)
             p['details']['archiveCreation'].update({'batchId':BATCH,'approvedAt':dt.datetime.now(dt.timezone.utc).isoformat(),
                 'instruction':'Continue supported public sporting results next to the athlete.',
-                'basis':'Privately reviewed separate source observations; same-programme entries with additional distinctions, or widely separated reported ages and different recorded locations. Identity remains provisional.',
+                'basis':review_basis or 'Privately reviewed separate source observations; same-programme entries with additional distinctions, or widely separated reported ages and different recorded locations. Identity remains provisional.',
                 'previousReviewAuditId':previous['id'],'reviewedComponentSourceKeys':sorted(keys),
-                'separationEvidence':witnesses,'originalSourceNameGroups':name_groups})
+                evidence_field:witnesses,'originalSourceNameGroups':name_groups})
             proposed.append(p)
     allowed=frozenset(k for p in proposed for n in p['details']['aliases'] for k in t.prep.name_keys(n))
     print(json.dumps({'phase':'directory_screen','candidateProfiles':len(proposed),'candidateResults':sum(len(p['performances']) for p in proposed)}),flush=True)

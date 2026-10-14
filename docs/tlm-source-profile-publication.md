@@ -111,3 +111,67 @@ fresh provider CSVs, reconcile every public/held source key, and rehearse on an
 isolated branch. Publication uses one bounded atomic batch. A new directory
 conflict on either proposed sibling holds the entire reviewed component. Keep
 the prior audit, separation evidence and exact remaining queue in private storage.
+
+## Further exact-name review, 14 October 2026
+
+`scripts/continue-tlm-same-name-profiles.py` continues from the distinct-observation
+audit using a fixed previous public/held scope. Each private decision identifies
+all source rows in one held exact-name group and a complete, disjoint partition.
+Every partition retains the existing adult, finish, placing and corroboration
+checks; every pair requires independent source distinctions. Full current-directory
+screening and transactional sibling conflict checks still apply.
+
+Reported places need explicit review: a nickname, abbreviation or village name
+can refer to the same municipality. Known reviewed equivalences are rejected as
+location distinctions. Original locations and age observations remain private;
+the process does not infer residence or date of birth, confirm identities, or
+attach results to an existing athlete. Source-linked profiles remain unclaimed
+and performances remain unverified.
+
+Run `python3 scripts/verify-tlm-same-name-review.py` alongside the earlier distinct
+review checks. Recompare the actual provider CSV rows, prepare against production,
+then create the isolated review branch so its directory snapshot includes the
+prepared fingerprint. Rehearse and check replay before authorized publication.
+
+## Reviewing recorded place variants
+
+`scripts/continue-tlm-place-profiles.py` reviews complete exact-name groups held
+only for missing club corroboration. Each source-key-bound decision records the
+two exact city/state strings and the reviewed relationship: a directional
+abbreviation, a reviewed one-edit spelling difference, or an official municipality
+mapping from the bounded reference list. Municipality matching compares towns,
+not exact addresses or villages. Different towns, missing places and mismatched
+states remain unresolved.
+
+Only the literal city-string requirement changes. Exact recorded name components,
+compatible reported ages, gender, distinct dates, non-conflicting clubs, adult
+source ages and valid placings remain required. Source rows are never edited to
+pass; the interpretation and geography references remain private audit evidence.
+The full current directory and live transaction checks still prevent attaching
+results to an existing profile or account. New profiles remain provisional.
+
+Run `python3 scripts/verify-tlm-place-review.py`, then compare fresh provider CSVs,
+validate every history against the application schema, and rehearse the immutable
+plan on a branch created after the production-directory screen. Recheck stored
+values and replay, publish the authorized batch, then check every new public page
+and sitemap entry. Preserve the previous audit and complete held/public partition.
+## Reviewing incomplete recorded places
+
+`continue-tlm-partial-location-profiles.py` handles complete held exact-name
+groups with at least two independently dated observations recording the same
+complete city/state pair. Other location fields must be blank or exactly match
+that pair. One complete location, contradictory places, placeholder values or a
+different state are insufficient. This creates provisional source profiles;
+it does not infer residence or verify identity.
+
+Private decisions bind the full group, recorded place, supporting source keys
+and incomplete source keys. Exact names, adult reported ages, compatible age
+intervals, gender, separate dates, clubs and source-quality checks still apply.
+The original rows remain unchanged, including every blank. Existing-directory
+matches remain held, and no existing profile or account is merged or overwritten.
+
+Run `python3 scripts/verify-tlm-partial-location-review.py` with the other source
+guards, then compare fresh provider files, screen the production directory,
+validate the schema, rehearse and replay on an isolated branch. Publish only
+the bounded reviewed plan and check all public results, including pagination,
+privacy, sitemap inclusion and crawler access.

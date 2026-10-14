@@ -31,6 +31,10 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
     ],
     "editions": [
       {
+        "date": "2027-10-17",
+        "sourceUrl": "https://athletics.ca/events/?_competition_group=athletics-canada-road-race-label&_year=upcoming"
+      },
+      {
         "date": "2026-10-18",
         "sourceUrl": "https://www.torontowaterfrontmarathon.com/event-info/"
       }
@@ -80,6 +84,14 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
     ],
     "sources": [
       {
+        "label": "Athletics Canada 2027 championship date",
+        "url": "https://athletics.ca/events/?_competition_group=athletics-canada-road-race-label&_year=upcoming"
+      },
+      {
+        "label": "Athletics Canada 2027 Toronto Waterfront host confirmation",
+        "url": "https://athletics.ca/blog/2026/05/20/road-ready-2027-2028-canadian-road-championships-hit-canadas-biggest-streets/"
+      },
+      {
         "label": "Official race information",
         "url": "https://www.torontowaterfrontmarathon.com/event-info/"
       },
@@ -115,8 +127,7 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
       "sourceUrl": "https://www.findmymarathon.com/race-detail.php?zname=Toronto+Waterfront+Marathon",
       "note": "Rounded from FindMyMarathon's 7,306 full-marathon finishers in 2025; shorter races excluded."
     },
-    "checkedAt": "2026-09-26",
-    "nextDateNote": "2027 date not yet confirmed.",
+    "checkedAt": "2026-10-09",
     "practical": [
       {
         "label": "2026 start",

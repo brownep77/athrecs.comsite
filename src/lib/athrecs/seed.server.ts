@@ -1,4 +1,5 @@
 import { dbSource, getSql } from "@/lib/db";
+import { CLUB_PROFILE_VERSION } from "@/data/club-profiles";
 import {
   athletes as athleteSeeds,
   catalogueMetadata,
@@ -24,7 +25,7 @@ import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 import { parkrunDates, parkrunDistance } from "./parkrun-dates";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-14-v1";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-14-v2";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
 const FEATURED_RACE_RESULTS_VERSION = "berlin-london-2026-09-27-v1";
@@ -652,7 +653,7 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
     select value from app_meta where key = 'clubs_catalogue_version' limit 1
   `;
   const count = await sql<{ n: number }>`select count(*)::int as n from clubs`;
-  const targetVersion = SEED_VERSION;
+  const targetVersion = `${SEED_VERSION}:${CLUB_PROFILE_VERSION}`;
   if (meta[0]?.value === targetVersion && (count[0]?.n ?? 0) >= EXPECTED.clubs) {
     return;
   }

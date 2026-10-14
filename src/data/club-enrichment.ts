@@ -1,6 +1,7 @@
 import type { ClubSeed } from "./types";
 import { clubEnrichmentPartA } from "./club-enrichment-a.ts";
 import { clubEnrichmentPartB } from "./club-enrichment-b.ts";
+import { clubWebsiteContacts } from "./club-website-contacts.ts";
 
 export const clubSlugAliases: Record<string, string> = {
   "bungay-black-dog": "bungay-black-dog-rc",
@@ -30,7 +31,39 @@ export const auditedClubAdditions: ClubSeed[] = [
   },
 ];
 
-export const clubEnrichment: Record<string, Partial<ClubSeed>> = {
+const directoryEnrichment: Record<string, Partial<ClubSeed>> = {
   ...clubEnrichmentPartA,
   ...clubEnrichmentPartB,
 };
+
+export function clubSocialKey(value: string): string {
+  const url = new URL(value);
+  let host = url.hostname.toLowerCase().replace(/^www\./, "");
+  if (/(^|\.)facebook\.com$/.test(host)) host = "facebook.com";
+  if (host === "twitter.com" || host === "mobile.twitter.com") host = "x.com";
+  const path = url.pathname.replace(/\/+$/, "").toLowerCase();
+  const id = host === "facebook.com" && path === "/profile.php" ? url.searchParams.get("id") : null;
+  return `${host}${path}${id ? `?id=${id}` : ""}`;
+}
+
+export const clubEnrichment: Record<string, Partial<ClubSeed>> = Object.fromEntries(
+  Object.entries(directoryEnrichment).map(([slug, club]) => {
+    const web = clubWebsiteContacts[clubSlugAliases[slug] ?? slug];
+    const contacts = new Map(
+      (club.contacts ?? []).map((c) => [(c.email ?? c.phone ?? c.name ?? "").toLowerCase(), c]),
+    );
+    for (const contact of web?.contacts ?? [])
+      contacts.set((contact.email ?? contact.phone ?? "").toLowerCase(), contact);
+    const socials = new Map((club.socials ?? []).map((s) => [clubSocialKey(s.url), s]));
+    for (const social of web?.socials ?? []) socials.set(clubSocialKey(social.url), social);
+    return [
+      slug,
+      {
+        ...club,
+        contact_url: web?.contact_url ?? club.contact_url,
+        contacts: [...contacts.values()],
+        socials: [...socials.values()],
+      },
+    ];
+  }),
+);

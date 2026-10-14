@@ -39,8 +39,21 @@ assert.equal(Object.keys(clubSlugAliases).length, 11, "Duplicate alias count cha
 assert.equal(enriched.length, 1748, "Every audited club row must retain audit metadata");
 assert(official.length >= 1730, "Official-source coverage fell below the audited baseline");
 assert(
-  enriched.every(([, club]) => club.checked_at === "2026-08-16"),
-  "Every audit record must include the checked date",
+  enriched.every(
+    ([, club]) =>
+      /^\d{4}-\d{2}-\d{2}$/.test(club.checked_at ?? "") &&
+      club.checked_at <= new Date().toISOString().slice(0, 10),
+  ),
+  "Every audit record must retain its actual, non-future check date",
+);
+assert(
+  enriched.filter(([, club]) => club.checked_at >= "2026-10-13").length >= 1681,
+  "Current directory source comparisons were lost",
+);
+assert.equal(
+  clubEnrichment["welsh-athletics-cybi-striders"].checked_at,
+  "2026-08-16",
+  "An unavailable directory page must not acquire a fresh check date",
 );
 assert(
   enriched.every(([, club]) =>
@@ -75,7 +88,11 @@ const abbeyStriders = clubEnrichment["athletics-ireland-abbey-striders-a-c"];
 assert.equal(abbeyStriders.city, "");
 assert.equal(abbeyStriders.postcode, "P51 H589");
 assert(abbeyStriders.contacts?.some((contact) => contact.phone === "0874175374"));
-assert.equal(abbeyStriders.socials, undefined, "Malformed Athletics Ireland social link retained");
+assert.equal(
+  abbeyStriders.socials?.length ?? 0,
+  0,
+  "Malformed Athletics Ireland social link retained",
+);
 
 const albertville = clubEnrichment["athletics-ni-albertville-harriers"];
 assert.equal(albertville.official_source, "Athletics Northern Ireland");
