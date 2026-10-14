@@ -34,9 +34,12 @@ try {
   );
   const markers = new Map(rows.map((row) => [row.key, row.value]));
   for (const key of ["seed_version", "clubs_catalogue_version", "fixtures_catalogue_version"]) {
-    if (markers.get(key) !== seed.CATALOGUE_SEED_VERSION) {
+    const expectedVersion = key === "clubs_catalogue_version"
+      ? seed.CLUB_CATALOGUE_SEED_VERSION
+      : seed.CATALOGUE_SEED_VERSION;
+    if (markers.get(key) !== expectedVersion) {
       throw new Error(
-        `ATHRECS catalogue publication did not advance ${key} to ${seed.CATALOGUE_SEED_VERSION}`,
+        `ATHRECS catalogue publication did not advance ${key} to ${expectedVersion}`,
       );
     }
   }
