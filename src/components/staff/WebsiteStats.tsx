@@ -163,8 +163,8 @@ export function WebsiteStats() {
               >
                 Vercel account settings
               </a>{" "}
-              for the AthRecs team, then connect it here. The token is encrypted on the server and
-              is never shown again.
+              limited to the athrecs-comsite project, then connect it here. The token is encrypted
+              on the server and is never shown again.
             </p>
             <label className="grid gap-1.5 text-sm font-medium">
               Vercel token
