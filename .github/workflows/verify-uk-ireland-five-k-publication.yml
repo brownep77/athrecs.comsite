@@ -7,6 +7,7 @@ on:
       - "src/data/catalogue.ts"
       - "src/data/entry-options.ts"
       - "scripts/publish-uk-ireland-five-k-release.mjs"
+      - "scripts/lib/catalogue-publisher-redirects.mjs"
       - "scripts/verify-uk-ireland-five-k-release.mjs"
       - "scripts/verify-uk-ireland-five-k-publication.mjs"
       - ".github/workflows/verify-uk-ireland-five-k-publication.yml"
@@ -43,5 +44,5 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci
-      - name: Publish twice and verify catalogue state
+      - name: Verify publication, permanent redirects and idempotent repeats
         run: node --experimental-strip-types scripts/verify-uk-ireland-five-k-publication.mjs
