@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { getSql, type Sql } from "../db";
+import { resultSlug } from "../athrecs/result-slug";
 import { normalize, slug, runningClub } from "./core";
 import { prepareUpload, planUpload, type UploadInput, type ReviewedRow } from "./service.server";
 
@@ -144,7 +145,9 @@ export async function commitUpload(request: ImportRequest, actor: { userId: stri
     await tx`insert into result_source_references(result_id,source_url,source_name)
       select unnest(${inserted.map(r => r.id)}::integer[]),${request.upload.sourceUrl},'Total Race Timing' on conflict do nothing`;
     const outcome: ImportReceipt = { runId, editionId, createdProfiles: newEntries.length, linkedProfiles: linked.size,
-      importedResults: inserted.length, heldRows: review.rows.length - selected.length, resultsPath: `/results/${editionId}`, replay: false };
+      importedResults: inserted.length, heldRows: review.rows.length - selected.length,
+      resultsPath: `/results/${resultSlug({ edition_id: editionId, event_name: event.name,
+        event_date: request.upload.date, distance_code: request.upload.distance })}`, replay: false };
     await tx`insert into network_audit_log(actor_user_id,actor_email,action,entity_type,entity_id,before_value,after_value,note)
       values(${actor.userId},${actor.staffEmail},'results.reviewed_upload','result_ingestion_run',${runId},
         ${JSON.stringify({ event: review.event, edition: review.edition, existingProfilesChanged: 0, existingResultsChanged: 0 })}::jsonb,

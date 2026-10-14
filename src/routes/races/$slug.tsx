@@ -310,6 +310,9 @@ export function RacePageContent({
   );
   const formatGuide = raceFormatGuideFor(event.slug);
   const [resultsEditionId, setResultsEditionId] = useState<number | null>(null);
+  const selectedResultsEdition = [...upcoming, ...past].find(
+    (edition) => edition.id === resultsEditionId,
+  );
   const { data: results = [], isFetching } = useQuery({
     queryKey: ["edition-results", resultsEditionId],
     queryFn: () => getEditionResults({ data: resultsEditionId! }),
@@ -854,12 +857,17 @@ export function RacePageContent({
                 Public-figure and athlete-approved results only. Other archived participant rows
                 remain private and are available through the signed-in claim flow.
               </p>
-              {!IS_RUNRECS_SITE && results.length >= PUBLIC_EDITION_PREVIEW_LIMIT ? (
+              {!IS_RUNRECS_SITE && selectedResultsEdition && results.length >= PUBLIC_EDITION_PREVIEW_LIMIT ? (
                 <p className="text-sm text-muted">
                   Showing the first {PUBLIC_EDITION_PREVIEW_LIMIT} results.{" "}
                   <Link
                     to="/results/$editionId"
-                    params={{ editionId: String(resultsEditionId) }}
+                    params={{ editionId: resultSlug({
+                      edition_id: selectedResultsEdition.id,
+                      event_name: event.name,
+                      event_date: selectedResultsEdition.event_date,
+                      distance_code: selectedResultsEdition.distance_code,
+                    }) }}
                     search={{ q: "", page: 1 }}
                     className="font-medium text-accent underline"
                   >

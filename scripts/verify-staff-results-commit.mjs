@@ -48,7 +48,7 @@ let eventName="Synthetic Confirmed 10K";
 const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 const source={fetchSource:async()=>`<h2>${eventName}</h2><h3>10k</h3><p>Start: 20/09/2026 10:00</p><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${escape(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`};
 const service=loadTs("src/lib/staff-results-upload/service.server.ts",{"node:crypto":crypto,cheerio,"../db":connection,"../site-scope":scope,"../club-scanner/provider.server":source,"../../../scripts/lib/result-evidence-audit.mjs":audit,"./core":core,exceljs:require("exceljs")});
-const commit=loadTs("src/lib/staff-results-upload/commit.server.ts",{"node:crypto":crypto,"../db":connection,"./core":core,"./service.server":service});
+const commit=loadTs("src/lib/staff-results-upload/commit.server.ts",{"node:crypto":crypto,"../db":connection,"../athrecs/result-slug":loadTs("src/lib/athrecs/result-slug.ts"),"./core":core,"./service.server":service});
 const actor={userId:"synthetic-import-staff",staffEmail:"synthetic-staff@example.test"};
 const input=()=>({filename:"synthetic.csv",content:csv([headers,...rows]),eventName,date:"2026-09-20",distance:"10K",distanceKm:10,sourceUrl:"https://totalracetiming.co.uk/raceresults/1",timingBasis:"chip"});
 const decision=(index,mode="new",athleteId)=>({index,mode,...(athleteId?{athleteId}:{}),identityNote:"Synthetic staff reviewed source identity evidence for this selected entry."});
@@ -92,6 +92,7 @@ try {
   assert.equal(await snapshot(),before,"A late result failure rolls back profiles, event changes, ledger and audit");
   queryCount=0;
   const saved=await commit.commitUpload(req,actor);
+  assert.equal(saved.resultsPath, `/results/synthetic-confirmed-10k-2026-09-20-10k-${saved.editionId}`);
   assert.equal(saved.createdProfiles,1);assert.equal(saved.linkedProfiles,1);assert.equal(saved.importedResults,2);assert.equal(saved.heldRows,2);
   assert(queryCount<40,"Small batches use a bounded number of set-based statements");
   const inserted=await sql`select r.*,a.date_of_birth,a.country,a.bio from results r join athletes a on a.id=r.athlete_id where r.ingestion_run_id=${saved.runId} order by r.overall_place`;
