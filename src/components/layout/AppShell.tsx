@@ -1,10 +1,24 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, SearchCheck, Users, UserRound, Footprints, Handshake, Trophy, Building2 } from "lucide-react";
+import {
+  Home,
+  SearchCheck,
+  Users,
+  UserRound,
+  Footprints,
+  Handshake,
+  Trophy,
+  Building2,
+} from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 import { cn } from "@/lib/utils";
+import { IS_ATHRECS_SITE } from "@/lib/site-scope";
+import {
+  HomepageAppearanceProvider,
+  HomepageColourPicker,
+} from "@/components/running/HomepageAppearance";
 
 const nav = [
   { to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
@@ -84,6 +98,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   if (pathname.startsWith("/admin")) return <StaffMicrositeShell>{children}</StaffMicrositeShell>;
 
   return (
+    <HomepageAppearanceProvider>
+      <PublicAppShell pathname={pathname}>{children}</PublicAppShell>
+    </HomepageAppearanceProvider>
+  );
+}
+
+function PublicAppShell({ children, pathname }: { children: React.ReactNode; pathname: string }) {
+  const showHomepageColours = IS_ATHRECS_SITE && pathname === "/";
+  return (
     <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col overflow-x-hidden bg-bg">
       <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block">
         <div className="flex h-16 items-center justify-between gap-3 px-6">
@@ -104,14 +127,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 {item.label}
               </Link>
             ))}
-            <AthleteAccountAccess />
+            <AthleteAccountAccess compact={showHomepageColours} />
+            {showHomepageColours ? <HomepageColourPicker /> : null}
           </nav>
         </div>
       </header>
       <header className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md lg:hidden">
         <div className="flex h-14 items-center justify-between gap-2 px-4">
           <BrandLink />
-          <AthleteAccountAccess compact />
+          <div className="flex shrink-0 items-center gap-2">
+            <AthleteAccountAccess compact />
+            {showHomepageColours ? <HomepageColourPicker /> : null}
+          </div>
         </div>
       </header>
       {pathname === "/" ||
