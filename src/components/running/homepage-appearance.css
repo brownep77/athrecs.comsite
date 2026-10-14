@@ -1,0 +1,21 @@
+.homepage-appearance {
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+/* Fixed slate labels on pastel cards follow their own surface when a visitor changes themes. */
+.homepage-appearance:not([data-homepage-theme="colourful"]) .text-slate-900 {
+  color: var(--homepage-card-heading, var(--color-fg));
+}
+
+.homepage-appearance:not([data-homepage-theme="colourful"]) .text-slate-700 {
+  color: var(--homepage-card-copy, var(--color-muted));
+}
+
+.homepage-appearance:not([data-homepage-theme="colourful"]) .homepage-distance-icon {
+  background: var(--homepage-icon-background);
+}
+
+.homepage-appearance:not([data-homepage-theme="colourful"]) :focus-visible {
+  outline-color: var(--color-accent);
+}

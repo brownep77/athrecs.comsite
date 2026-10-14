@@ -15,13 +15,14 @@ import { ROAD_HALF_MARATHONS, roadHalfMarathonsForCountry } from "@/data/road-ha
 import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
 import { ROAD_MARATHONS, roadMarathonsForCountry } from "@/data/road-marathons";
 import { ROAD_ULTRAS } from "@/lib/running/road-ultras";
+import { useHomepageTheme } from "@/components/running/HomepageAppearance";
+import { homepageCardStyle } from "@/lib/running/homepage-themes";
 
 import { SITE_URL } from "@/lib/athrecs/seo";
 import {
   countryCardStyle,
   neutralPastelCardStyle,
   pastelCardClassName,
-  runningCountryPalettes,
 } from "@/lib/running/country-card-palette";
 
 const homepageCardStyles = {
@@ -85,6 +86,7 @@ export function runningGuidesJsonLd(url: string) {
 }
 
 export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
+  const theme = useHomepageTheme();
   const compactCardClassName =
     "group rounded-xl border p-4 no-underline transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600";
   const tools = (
@@ -108,12 +110,16 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
           detail: "Explore the World Marathon Majors and UTMB race collections.",
           style: homepageCardStyles.lavender,
         },
-      ].map((item) => (
+      ].map((item, index) => (
         <Link
           key={item.to}
           to={item.to}
           className={pastelCardClassName}
-          style={homepage ? item.style : neutralPastelCardStyle}
+          style={
+            homepage
+              ? homepageCardStyle(theme, item.style, "tone", index as 0 | 1 | 2)
+              : neutralPastelCardStyle
+          }
         >
           <h2 className="font-display text-xl font-semibold text-slate-900">{item.title}</h2>
           <p className="mt-2 text-sm leading-6 text-slate-700">{item.detail}</p>
@@ -155,7 +161,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
           icon: Mountain,
           style: homepageCardStyles.lavender,
         },
-      ].map((item) => (
+      ].map((item, index) => (
         <a
           key={item.href}
           href={item.href}
@@ -164,10 +170,12 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
               ? `${compactCardClassName} flex min-h-24 items-center gap-3`
               : "min-h-11 inline-flex items-center"
           }
-          style={homepage ? item.style : undefined}
+          style={
+            homepage ? homepageCardStyle(theme, item.style, "tone", index as 0 | 1 | 2) : undefined
+          }
         >
           {homepage ? (
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/70">
+            <span className="homepage-distance-icon flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/70">
               <item.icon className="size-5" aria-hidden="true" />
             </span>
           ) : null}
@@ -209,7 +217,11 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
             to="/running/$guide"
             params={{ guide: country.guide }}
             className={pastelCardClassName}
-            style={countryCardStyle(country.id)}
+            style={
+              homepage
+                ? homepageCardStyle(theme, countryCardStyle(country.id), "country")
+                : countryCardStyle(country.id)
+            }
           >
             <p className="text-sm font-semibold">
               {roadHalfMarathonsForCountry(country.id).length} half marathon guides
@@ -233,11 +245,12 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
       </h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {MARATHON_COUNTRIES.map((country) => {
-          const palette = runningCountryPalettes[country.id];
-          const style = countryCardStyle(country.id);
+          const style = homepage
+            ? homepageCardStyle(theme, countryCardStyle(country.id), "country")
+            : countryCardStyle(country.id);
           const content = (
             <>
-              <div className="flex items-center justify-between" style={{ color: palette.accent }}>
+              <div className="flex items-center justify-between" style={{ color: style.color }}>
                 <Footprints className="size-6" aria-hidden="true" />
                 <span className="text-xs font-semibold">
                   {roadMarathonsForCountry(country.id).length} race guides
@@ -249,7 +262,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
               <p className="mt-3 flex-1 text-sm leading-6 text-slate-700">{country.description}</p>
               <span
                 className="mt-5 inline-flex min-h-10 items-center gap-2 text-sm font-semibold"
-                style={{ color: palette.accent }}
+                style={{ color: style.color }}
               >
                 Explore road marathons <ArrowRight className="size-4" aria-hidden="true" />
               </span>
@@ -349,7 +362,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
                 key={item.to}
                 to={item.to}
                 className={`${compactCardClassName} flex min-h-24 flex-col gap-3 last:col-span-2 lg:last:col-span-1`}
-                style={item.style}
+                style={homepageCardStyle(theme, item.style)}
               >
                 <item.icon className="size-5" aria-hidden="true" />
                 <span className="flex items-center justify-between gap-2 text-sm font-semibold">
@@ -382,7 +395,11 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
         <Link
           to="/running/uk-road-ultramarathons"
           className={`mt-5 max-w-3xl ${pastelCardClassName}`}
-          style={countryCardStyle("uk")}
+          style={
+            homepage
+              ? homepageCardStyle(theme, countryCardStyle("uk"), "country")
+              : countryCardStyle("uk")
+          }
         >
           <p className="text-sm font-semibold">{ROAD_ULTRAS.length} events and event series</p>
           <h3 className="mt-3 font-display text-2xl font-semibold text-slate-900">
