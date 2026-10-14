@@ -27,6 +27,7 @@ import { parkrunDates, parkrunDistance } from "./parkrun-dates";
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-04-v3";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
+export const CLUB_CATALOGUE_SEED_VERSION = `${SEED_VERSION}:${CLUB_PROFILE_VERSION}`;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
 const FEATURED_RACE_RESULTS_VERSION = "berlin-london-2026-09-27-v1";
 const FEATURED_WA_HISTORIES_VERSION = "featured-wa-histories-2026-09-30-v1";
@@ -648,12 +649,12 @@ async function alreadySeeded(sql: Sql): Promise<boolean> {
   return aboveFloor;
 }
 
-async function upsertCatalogueClubs(sql: Sql): Promise<void> {
+async function upsertCatalogueClubs(sql: Sql, mergeAliases = true): Promise<void> {
   const meta = await sql<{ value: string }>`
     select value from app_meta where key = 'clubs_catalogue_version' limit 1
   `;
   const count = await sql<{ n: number }>`select count(*)::int as n from clubs`;
-  const targetVersion = `${SEED_VERSION}:${CLUB_PROFILE_VERSION}`;
+  const targetVersion = CLUB_CATALOGUE_SEED_VERSION;
   if (meta[0]?.value === targetVersion && (count[0]?.n ?? 0) >= EXPECTED.clubs) {
     return;
   }
@@ -723,7 +724,7 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
       socials_json = excluded.socials_json`,
     80,
   );
-  await mergeCatalogueClubAliases(sql);
+  if (mergeAliases) await mergeCatalogueClubAliases(sql);
   await sql`
     insert into app_meta (key, value) values ('clubs_catalogue_version', ${targetVersion})
     on conflict (key) do update set value = excluded.value
@@ -2622,6 +2623,7 @@ async function catalogueMarkersCurrent(
   sql: Sql,
   {
     includePublicFigures = true,
+    includeClubs = true,
     includeFeaturedRaces = true,
     includeFeaturedHistories = true,
     includeNationalAge = true,
@@ -2629,7 +2631,7 @@ async function catalogueMarkersCurrent(
 ): Promise<boolean> {
   const expected = new Map([
     ["seed_version", SEED_VERSION],
-    ["clubs_catalogue_version", SEED_VERSION],
+    ["clubs_catalogue_version", CLUB_CATALOGUE_SEED_VERSION],
     ["fixtures_catalogue_version", SEED_VERSION],
     ["public_figures_catalogue_version", PUBLIC_FIGURE_SEED_VERSION],
     ["parkrun_through", "2027-12-26"],
@@ -2638,6 +2640,7 @@ async function catalogueMarkersCurrent(
     ["featured_wa_histories_version", FEATURED_WA_HISTORIES_VERSION],
     ["featured_gbr_irl_age_results_version", FEATURED_GBR_IRL_AGE_VERSION],
   ]);
+  if (!includeClubs) expected.delete("clubs_catalogue_version");
   if (!includePublicFigures) expected.delete("public_figures_catalogue_version");
   if (!includeFeaturedRaces) expected.delete("featured_race_results_version");
   if (!includeFeaturedHistories) expected.delete("featured_wa_histories_version");
@@ -2665,6 +2668,12 @@ async function catalogueMarkersCurrent(
 
 async function refreshCatalogue(sql: Sql): Promise<void> {
   if (await catalogueMarkersCurrent(sql)) return;
+  // Club editorial updates must not replay unrelated fixture or athlete imports.
+  if (await catalogueMarkersCurrent(sql, { includeClubs: false })) {
+    await ensureSchema(sql);
+    await upsertCatalogueClubs(sql, false);
+    return;
+  }
   // Profile catalogues have their own versions. Do not rerun fixture imports:
   // a production event may now have a protected redirect.
   if (

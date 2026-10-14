@@ -291,6 +291,29 @@ try {
     9,
   );
 
+  // Reproduce a production database whose fixture marker is current but whose
+  // club editorial version was skipped. Refresh clubs without touching identities.
+  const beforeClubRefresh = await sql`select * from clubs where slug='barnet-and-district-ac'`;
+  const unrelatedBefore = await sql`select
+    (select json_agg(a order by a.id) from athletes a) as athletes,
+    (select json_agg(r order by r.id) from results r) as results,
+    (select json_agg(e order by e.id) from events e) as events`;
+  await sql`update clubs set summary='stale summary', city='stale town', contacts_json='[]'
+    where slug='barnet-and-district-ac'`;
+  await sql`update app_meta set value=(select value from app_meta where key='seed_version')
+    where key='clubs_catalogue_version'`;
+  globalThis.__athrecsFullSeedPromise__ = undefined;
+  await ensureAthrecsSeeded();
+  assert.deepEqual(await sql`select * from clubs where slug='barnet-and-district-ac'`, beforeClubRefresh);
+  assert.deepEqual(await sql`select
+    (select json_agg(a order by a.id) from athletes a) as athletes,
+    (select json_agg(r order by r.id) from results r) as results,
+    (select json_agg(e order by e.id) from events e) as events`, unrelatedBefore);
+  const { CLUB_CATALOGUE_SEED_VERSION } = await server.ssrLoadModule('/src/lib/athrecs/seed.server.ts');
+  assert.equal((await sql`select value from app_meta where key='clubs_catalogue_version'`)[0].value,
+    CLUB_CATALOGUE_SEED_VERSION);
+  console.log('Club-only refresh restores summaries, locations and contacts without changing athletes, results or events.');
+
   // A new fixture catalogue version takes the full refresh path in production.
   // Renamed source events must still count as existing catalogue identities.
   const catalogueMarkers = await sql`
