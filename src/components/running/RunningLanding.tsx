@@ -1,5 +1,15 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Footprints } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  Footprints,
+  Medal,
+  Mountain,
+  Search,
+  Trophy,
+  UserPlus,
+  Users,
+} from "lucide-react";
 import { HALF_MARATHON_COUNTRIES } from "@/data/road-half-marathons/countries";
 import { ROAD_HALF_MARATHONS, roadHalfMarathonsForCountry } from "@/data/road-half-marathons";
 import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
@@ -42,6 +52,8 @@ export function runningGuidesJsonLd(url: string) {
 }
 
 export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
+  const compactCardClassName =
+    "group rounded-xl border p-4 no-underline transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600";
   const tools = (
     <nav aria-label="Running tools" className="grid gap-3 sm:grid-cols-3">
       {[
@@ -79,17 +91,54 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
   const distances = (
     <nav
       aria-label="Race distances"
-      className="flex flex-wrap gap-5 text-base font-semibold text-accent"
+      className={
+        homepage
+          ? "grid gap-3 sm:grid-cols-3"
+          : "flex flex-wrap gap-5 text-base font-semibold text-accent"
+      }
     >
-      <a href="#half-marathons" className="min-h-11 inline-flex items-center">
-        Half marathons · 13.1 miles
-      </a>
-      <a href="#countries-title" className="min-h-11 inline-flex items-center">
-        Marathons · 26.2 miles
-      </a>
-      <a href="#ultras" className="min-h-11 inline-flex items-center">
-        UK road ultras · Beyond the marathon
-      </a>
+      {[
+        {
+          href: "#half-marathons",
+          title: "Half marathons",
+          detail: "13.1 miles",
+          icon: Footprints,
+        },
+        { href: "#countries-title", title: "Marathons", detail: "26.2 miles", icon: Medal },
+        { href: "#ultras", title: "UK road ultras", detail: "Beyond the marathon", icon: Mountain },
+      ].map((item) => (
+        <a
+          key={item.href}
+          href={item.href}
+          className={
+            homepage
+              ? `${compactCardClassName} flex min-h-24 items-center gap-3`
+              : "min-h-11 inline-flex items-center"
+          }
+          style={homepage ? neutralPastelCardStyle : undefined}
+        >
+          {homepage ? (
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/70">
+              <item.icon className="size-5" aria-hidden="true" />
+            </span>
+          ) : null}
+          <span className="min-w-0">
+            <span
+              className={
+                homepage ? "block font-display text-lg font-semibold text-slate-900" : undefined
+              }
+            >
+              {item.title}
+            </span>
+            {homepage ? (
+              <span className="mt-1 block text-sm text-slate-700">{item.detail}</span>
+            ) : (
+              ` · ${item.detail}`
+            )}
+          </span>
+          {homepage ? <ArrowRight className="ml-auto size-4 shrink-0" aria-hidden="true" /> : null}
+        </a>
+      ))}
     </nav>
   );
   const halves = (
@@ -181,7 +230,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
   return (
     <div className="space-y-8 pb-8">
       {homepage ? tools : null}
-      <header className="max-w-4xl">
+      <header className={homepage ? undefined : "max-w-4xl"}>
         {homepage ? (
           <h1 className="sr-only">Running races, results and athlete profiles</h1>
         ) : (
@@ -203,29 +252,39 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
               guide. Then comes the small matter of training for it.
             </p>
             <p className="mt-4 text-sm font-semibold">
-              {ROAD_MARATHONS.length + ROAD_HALF_MARATHONS.length + ROAD_ULTRAS.length} race and event
-              guides · {MARATHON_COUNTRIES.length} countries · Published dates and dates TBC
+              {ROAD_MARATHONS.length + ROAD_HALF_MARATHONS.length + ROAD_ULTRAS.length} race and
+              event guides · {MARATHON_COUNTRIES.length} countries · Published dates and dates TBC
             </p>
           </>
         )}
         {homepage ? (
-          <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold text-accent">
-            <Link to="/races" className="inline-flex min-h-11 items-center">
-              All fixtures
-            </Link>
-            <Link to="/results" className="inline-flex min-h-11 items-center">
-              Race results
-            </Link>
-            <Link to="/athletes" className="inline-flex min-h-11 items-center">
-              Find an athlete
-            </Link>
-            <Link to="/join" className="inline-flex min-h-11 items-center">
-              Build my profile
-            </Link>
-            <Link to="/athlete-account" className="inline-flex min-h-11 items-center">
-              Find my results
-            </Link>
-          </div>
+          <nav
+            aria-label="Race and athlete shortcuts"
+            className="grid grid-cols-2 gap-3 lg:grid-cols-5"
+          >
+            {(
+              [
+                { to: "/races", title: "All fixtures", icon: CalendarDays },
+                { to: "/results", title: "Race results", icon: Trophy },
+                { to: "/athletes", title: "Find an athlete", icon: Users },
+                { to: "/join", title: "Build my profile", icon: UserPlus },
+                { to: "/athlete-account", title: "Find my results", icon: Search },
+              ] as const
+            ).map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`${compactCardClassName} flex min-h-24 flex-col gap-3 last:col-span-2 lg:last:col-span-1`}
+                style={neutralPastelCardStyle}
+              >
+                <item.icon className="size-5" aria-hidden="true" />
+                <span className="flex items-center justify-between gap-2 text-sm font-semibold text-slate-900">
+                  {item.title}
+                  <ArrowRight className="size-4 shrink-0 text-[#334e7d]" aria-hidden="true" />
+                </span>
+              </Link>
+            ))}
+          </nav>
         ) : null}
       </header>
       {homepage ? (
