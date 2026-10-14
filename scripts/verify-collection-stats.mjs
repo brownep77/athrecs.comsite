@@ -386,7 +386,7 @@ try {
       waitUntil: "networkidle",
       timeout: 120000,
     });
-    await page.getByRole("heading", { name: "Data collection stats", exact: true }).waitFor();
+    await page.getByRole("heading", { name: "Stats", exact: true }).waitFor();
     const table = page.getByRole("table", { name: "Race collection breakdown", exact: true });
     await table.getByRole("cell", { name: "Running", exact: true }).waitFor();
     await page.getByLabel("Group races by", { exact: true }).selectOption("detail");
