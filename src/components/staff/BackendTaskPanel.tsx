@@ -46,7 +46,12 @@ export function BackendTaskPanel() {
           <h1 id="backend-tasks-heading" className="font-display text-3xl font-semibold text-slate-950">What would you like to do?</h1>
           <p className="text-sm leading-6 text-slate-600">All existing main backend tools, in one place. Choose a task below; you do not need to remember which staff section contains it.</p>
         </div>
-        <div className="flex flex-wrap gap-3"><a href="/admin/approvals" className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-cyan-800 px-4 py-3 text-sm font-semibold text-white no-underline hover:bg-cyan-900">All approvals<ArrowRight className="size-4 shrink-0" aria-hidden="true" /></a><a href="/admin/athlete-tools" className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-cyan-800 px-4 py-3 text-sm font-semibold text-white no-underline hover:bg-cyan-900">Add or update athletes<ArrowRight className="size-4 shrink-0" aria-hidden="true" /></a></div>
+        <nav aria-label="Backend shortcuts" className="flex flex-wrap gap-3">
+          <a href="/admin/collection-stats" className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-cyan-800 px-4 py-3 text-sm font-semibold text-white no-underline hover:bg-cyan-900">Stats<ArrowRight className="size-4 shrink-0" aria-hidden="true" /></a>
+          <a href="/admin/collection-stats?section=operations" className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-cyan-800 px-4 py-3 text-sm font-semibold text-white no-underline hover:bg-cyan-900">Collection progress<ArrowRight className="size-4 shrink-0" aria-hidden="true" /></a>
+          <a href="/admin/approvals" className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-cyan-800 px-4 py-3 text-sm font-semibold text-white no-underline hover:bg-cyan-900">All approvals<ArrowRight className="size-4 shrink-0" aria-hidden="true" /></a>
+          <a href="/admin/athlete-tools" className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-cyan-800 px-4 py-3 text-sm font-semibold text-white no-underline hover:bg-cyan-900">Add or update athletes<ArrowRight className="size-4 shrink-0" aria-hidden="true" /></a>
+        </nav>
       </div>
       <p className="mt-5 rounded-lg bg-cyan-50 p-3 text-sm leading-6 text-cyan-950"><strong>Adding one person or a whole race?</strong> Open Add or update athletes. Start with Single athlete for a profile link, Results file for an export, or Review results for saved proposals.</p>
     </header>
