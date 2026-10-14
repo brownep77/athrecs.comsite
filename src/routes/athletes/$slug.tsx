@@ -355,7 +355,9 @@ function AthleteContent() {
   const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
     isPublicProfileSource(link.url, link.label),
   );
-  const bio = athleteSearchContent({ athlete, profileResults, sourceHistories }).bio;
+  const bio =
+    (data.kind === "published-history" && data.publishedBiography) ||
+    athleteSearchContent({ athlete, profileResults, sourceHistories }).bio;
   const dob = formatDob(athlete.date_of_birth);
 
   const isPublicFigure = athlete.profile_type === "Public figure";

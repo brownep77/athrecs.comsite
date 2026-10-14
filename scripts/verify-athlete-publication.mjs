@@ -4,6 +4,7 @@ import { PGlite } from "@electric-sql/pglite";
 import {
   publishAthleteProfiles,
   loadPublishedSourceHistories,
+  loadPublishedAthleteBiography,
 } from "../src/lib/athrecs/athlete-publication.server.ts";
 
 // The real publication transaction against an isolated PostgreSQL-compatible database.
@@ -162,6 +163,35 @@ try {
     await loadPublishedSourceHistories(sql, 2),
     [],
     "A profile made private no longer exposes source history",
+  );
+  assert.equal(
+    await loadPublishedAthleteBiography(sql, 3),
+    "",
+    "Result approval does not publish a biography",
+  );
+  const biography = "Synthetic Athlete is an original member of Synthetic Triathlon Club.";
+  await sql`update athletes set bio=${biography} where id=3`;
+  await sql`insert into network_audit_log(action,entity_type,entity_id,after_value)
+    values('athlete.biography_admin_published','athlete','3',${JSON.stringify({ athleteId: 3, biography })}::jsonb)`;
+  assert.equal(await loadPublishedAthleteBiography(sql, 3), biography);
+  await sql`update athletes set bio='Unreviewed replacement' where id=3`;
+  assert.equal(
+    await loadPublishedAthleteBiography(sql, 3),
+    "",
+    "Approval never follows later text changes",
+  );
+  await sql`update athletes set bio=${biography},profile_visibility='private' where id=3`;
+  assert.equal(
+    await loadPublishedAthleteBiography(sql, 3),
+    "",
+    "Private profiles hide approved biographies",
+  );
+  await sql`update athletes set profile_visibility='public' where id=3`;
+  await sql`insert into athlete_account_links values (3,'owner','active')`;
+  assert.equal(
+    await loadPublishedAthleteBiography(sql, 3),
+    "",
+    "Claimed profiles retain owner-managed biography sharing",
   );
   console.log(
     "Athlete bulk publication passed: exact selection, account exclusions, result/history visibility, repeat safety, multiple pages and atomic rollback.",

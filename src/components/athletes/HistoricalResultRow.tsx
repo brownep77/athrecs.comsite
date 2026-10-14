@@ -75,7 +75,8 @@ export function HistoricalResultRow({
         className="whitespace-nowrap px-3 py-2 text-xs"
       >
         <ResultDistance distance={profileDisciplineLabel(discipline)} />
-        {row.providerName !== "DUV Ultra Marathon Statistics" ? (
+        {row.providerName !== "DUV Ultra Marathon Statistics" &&
+        ["Running", "Athletics"].includes(result.sport) ? (
           <span className="block text-[10px] text-subtle">
             {isCrossCountryHistoryResult(row)
               ? "Cross country"
@@ -112,6 +113,25 @@ export function HistoricalResultRow({
           discipline={row.discipline}
           timing={row.timing}
         />
+        {result.sport === "Triathlon" && row.triathlonSplits ? (
+          <dl
+            className="mt-2 space-y-0.5 text-xs font-normal text-muted"
+            aria-label="Triathlon race splits"
+          >
+            <div>
+              <dt className="inline">Swim: </dt>
+              <dd className="inline">{row.triathlonSplits.swim}</dd>
+            </div>
+            <div>
+              <dt className="inline">Bike: </dt>
+              <dd className="inline">{row.triathlonSplits.bike}</dd>
+            </div>
+            <div>
+              <dt className="inline">Run leg: </dt>
+              <dd className="inline">{row.triathlonSplits.run}</dd>
+            </div>
+          </dl>
+        ) : null}
         {row.wind ? (
           <span className="block text-xs font-normal text-subtle">Wind {row.wind} m/s</span>
         ) : null}
@@ -128,6 +148,7 @@ export function HistoricalResultRow({
       </td>
       <td role="cell" data-label="Category" className="px-3 py-2 text-xs">
         {row.ageGroup || "—"}
+        {row.bib ? <span className="block text-subtle">Bib {row.bib}</span> : null}
       </td>
       {showEvidence ? (
         <td role="cell" data-label="Source" className="px-3 py-2 text-xs">
