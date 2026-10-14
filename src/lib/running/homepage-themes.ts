@@ -78,7 +78,7 @@ export const HOMEPAGE_THEMES: Record<HomepageThemeId, Theme> = {
     text: "#17324D",
     muted: "#4D6277",
     border: "#DCE5EC",
-    brand: "#087F8C",
+    brand: "#077885",
     brandText: "#FFFFFF",
     soft: "#FFFFFF",
     country: "#EAF3FF",
