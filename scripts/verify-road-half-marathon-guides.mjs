@@ -115,7 +115,7 @@ for (const race of ROAD_MARATHONS) {
     graph.filter((item) => item["@type"] === "SportsEvent").length,
     upcomingRoadEditions(race, now).length,
   );
-  assert.equal(graph.find((item) => item["@type"] === "FAQPage").mainEntity.length, 4);
+  assert.equal(graph.find((item) => item["@type"] === "FAQPage").mainEntity.length, 6);
   assert(head.links[0].href.endsWith(`/running/races/${race.slug}`));
   assert.equal(upcomingRoadEditions(race, "2028-01-02T12:00:00Z").length, 0);
   assert.equal(currentRoadDateNotes(race, "2028-01-02T12:00:00Z").length, 0);

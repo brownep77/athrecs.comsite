@@ -1619,7 +1619,7 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
     timeZone: "Australia/Adelaide",
     officialUrl: "https://adelaidemarathon.com.au/marathon/",
     description:
-      "The Adelaide Marathon takes runners from the Adelaide Oval precinct through North Adelaide and the city parklands on a flat road course. Organised by the South Australian Road Runners Club, it offers route maps and GPX files for anyone who likes to know where the turns are coming. The 2026 race had a six-hour limit and a minimum age of 18. Entry for the next edition will be through the organiser; check for a confirmed 2027 date before booking travel.",
+      "The Adelaide Marathon takes runners from the Adelaide Oval precinct through North Adelaide and the city parklands on a flat road course. Organised by the South Australian Road Runners Club, it offers route maps and GPX files for anyone who likes to know where the turns are coming. The 2026 race had a six-hour limit and a minimum age of 18. The 2027 marathon is scheduled for 2 May, with the organiser advertising early-access sign-up ahead of registration opening.",
     course: {
       summary:
         "City and parkland circuit from the Adelaide Oval precinct, through North Adelaide and around the city parklands. Consult the published map for turns and lap arrangements.",
@@ -1643,8 +1643,7 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
         url: "https://adelaidemarathon.com.au/marathon/",
       },
     ],
-    editions: [],
-    nextDateNote: "The 2026 race was held on 3 May. A 2027 date has not been verified.",
+    editions: [{ date: "2027-05-02", sourceUrl: "https://adelaidemarathon.com.au/" }],
     practical: [],
     media: [],
     resultsUrl: "https://adelaidemarathon.com.au/results/",
@@ -1659,6 +1658,7 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
       },
     ],
     sources: [
+      { label: "Organiser 2027 date announcement", url: "https://adelaidemarathon.com.au/" },
       {
         label: "Marathon details",
         url: "https://adelaidemarathon.com.au/marathon/",
@@ -1683,7 +1683,7 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
       sourceUrl: "https://ausrunning.net/marathon/adelaide-2026",
       note: "Ausrunning reports 819 full-marathon finishers in 2026.",
     },
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-09",
   },
   {
     slug: "barossa-marathon",

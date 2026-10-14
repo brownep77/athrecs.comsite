@@ -791,21 +791,14 @@ export const SOUTH_AFRICA_WESTERN_MARATHONS: RoadMarathon[] = [
   },
   {
     slug: "cango-marathon",
-    dateNotes: [
-      {
-        text: "Calendar estimate: 27 February 2027 for the marathon. Awaiting confirmation from the organiser.",
-        sourceUrl: "https://runningcalendar.co.za/events/cango-marathon",
-        expiresAfter: "2027-02-27",
-      },
-    ],
     name: "Infantry School Cango Marathon",
     country: "south-africa",
     city: "Oudtshoorn",
     region: "Western Cape",
     timeZone: "Africa/Johannesburg",
-    officialUrl: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2026/",
+    officialUrl: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2027-2/",
     description:
-      "The Cango Marathon is a road marathon from the Cango Caves to the Infantry School sports ground in Oudtshoorn, in the Western Cape. Its established course loses height overall, although downhill running still leaves the legs with plenty to discuss afterwards. Organiser transport takes runners to the start, an important detail for a race with two different venues. The 2026 edition offered a six-hour limit; the 2027 date and arrangements remain unconfirmed.",
+      "The Cango Marathon is a road marathon from the Cango Caves to the Infantry School sports ground in Oudtshoorn, in the Western Cape. Its established course loses height overall, although downhill running still leaves the legs with plenty to discuss afterwards. Organiser transport takes runners to the start, an important detail for a race with two different venues. The 2027 full marathon starts at 06:00 on Saturday 27 February and has a six-hour limit.",
     course: {
       summary:
         "The established 42.195 km course runs from Cango Caves to the Military Base Infantry School sports ground in Oudtshoorn.",
@@ -827,38 +820,39 @@ export const SOUTH_AFRICA_WESTERN_MARATHONS: RoadMarathon[] = [
       {
         name: "Direct online pre-entry",
         description:
-          "The organiser uses Top Events for full-marathon registration. The 2026 pre-entry period is closed; a dated 2027 entry opening has not been announced.",
-        url: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2026/",
+          "Enter the full marathon through the organiser-linked Top Events registration service. The 2027 event page lists an entry closing date of 10 February; confirm current availability before paying.",
+        url: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2027-2/",
       },
       {
         name: "Licensed and unlicensed runners",
         description:
-          "The previous edition accepted both licensed entrants and runners buying a temporary licence. Check the next edition’s rules and registration details when published.",
-        url: "https://www.topevents.co.za/wp-content/uploads/2025/09/Cango-42km-21km_2026.pdf",
+          "The 2027 rules accept licensed and unlicensed runners aged 20 or older for the full marathon. Check the temporary-licence requirements when selecting your entry.",
+        url: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2027-2/",
       },
     ],
-    editions: [],
-    nextDateNote: "The 2027 marathon date is still to be confirmed.",
+    editions: [
+      {
+        date: "2027-02-27",
+        sourceUrl: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2027-2/",
+      },
+    ],
     practical: [
       {
-        label: "Previous start and time limit",
+        label: "2027 start and time limit",
         value:
-          "The 2026 marathon started at 06:00 and had a six-hour limit. The next edition’s timetable is not yet confirmed.",
-        sourceUrl:
-          "https://www.topevents.co.za/wp-content/uploads/2025/09/Cango-42km-21km_2026.pdf",
+          "The full marathon starts at 06:00 from Cango Caves and closes at 12:00, a six-hour limit.",
+        sourceUrl: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2027-2/",
       },
       {
         label: "Transport to the start",
         value:
-          "For 2026, buses left the Infantry School Parade Ground at 04:00. Private vehicles were not permitted to transport runners to the start; check the next edition’s transport instructions.",
-        sourceUrl:
-          "https://www.topevents.co.za/wp-content/uploads/2025/09/Cango-42km-21km_2026.pdf",
+          "For 2027, marathon transport leaves the Infantry School Parade Ground at 04:00. Private vehicles may not take runners to the start. Check collection and boarding instructions before travelling.",
+        sourceUrl: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2027-2/",
       },
       {
-        label: "Minimum age in 2026",
+        label: "Minimum age in 2027",
         value: "20 for the full marathon.",
-        sourceUrl:
-          "https://www.topevents.co.za/wp-content/uploads/2025/09/Cango-42km-21km_2026.pdf",
+        sourceUrl: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2027-2/",
       },
     ],
     media: [
@@ -897,7 +891,7 @@ export const SOUTH_AFRICA_WESTERN_MARATHONS: RoadMarathon[] = [
     sources: [
       {
         label: "Official latest race information",
-        url: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2026/",
+        url: "https://topevents.co.za/event/infantry-school-cango-42-2km-21-1km-2027-2/",
       },
       {
         label: "Official 2026 race brochure",
@@ -928,6 +922,6 @@ export const SOUTH_AFRICA_WESTERN_MARATHONS: RoadMarathon[] = [
         url: "https://www.nedbankrunningclub.co.za/newsletter/Preview.aspx?newsid=41114",
       },
     ],
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-14",
   },
 ];

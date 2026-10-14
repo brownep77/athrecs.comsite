@@ -23,6 +23,10 @@ The upcoming window runs from 26 September 2026 through 31 December 2027. A date
 
 Pages have canonical URLs, original descriptions, breadcrumb and collection/list markup, visible questions matching FAQ markup, and dated SportsEvent markup where a confirmed edition exists. These measures improve accessibility to crawlers and assistants but do not guarantee indexing, rich results or ranking. Each event's official site remains the entry authority.
 
+Country guides also contain regional directories, full course summaries and original country-specific planning advice in `planning.ts`. Keep this advice separate from edition facts: it must not imply that a historical start time, entry route or transport arrangement is confirmed for a new year. Race pages compare up to four other races, preferring the same region; their date refresh must include the comparison races' timezones.
+
+Race titles identify the next confirmed edition year when available. Each SportsEvent URL targets its visible dated edition, and the visible FAQ matches the structured answers, including distance, location and field basis. The template revision date records material editorial changes; source review dates remain distinct and must not be advanced by a styling-only update.
+
 ## Verification and preview
 
 Run `npm run verify:road-marathon-guides`, the TypeScript check, and scoped lint. Use `vite build` directly for local validation: the repository's `npm run build` also runs database migrations and publication hooks.
@@ -30,3 +34,5 @@ Run `npm run verify:road-marathon-guides`, the TypeScript check, and scoped lint
 With a local development server running, `node scripts/preview-road-marathon-guides.mjs <output.html>` checks rendered routes, canonical/indexing metadata, internal links, category sections, sitemap inclusion and missing-page responses, then writes one interactive, self-contained review preview. Set `MARATHON_PREVIEW_BASE` to change the default `http://127.0.0.1:8095`.
 
 The HTML preview is a dated snapshot. Live route code performs automatic date expiry. Publication is separate from preview generation.
+
+`npm run verify:running-guides-ssr` checks all running guide families, unique titles and descriptions, exact visible FAQ parity, regional directory coverage, edition anchors, sitemap membership and missing-page status. Run it with `RUNNING_VERIFY_BASE` pointing to the local server. A passing crawl check establishes that the content is available to crawlers; it does not establish that Google has indexed it.
