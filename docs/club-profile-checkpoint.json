@@ -1,87 +1,73 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch26",
+  "lastEditorialBatch": "2026-10-14-batch27",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch26",
+  "branch": "codex/club-profiles-batch27",
   "pullRequest": null,
-  "publication": "Batch26 adds20 biographies and two historical Sligo Kona associations:506/1737 assembled,222 notable entries. Confirmed live:486 profiles on PR709 merge2e72430ac34c131fa4f15529537150ca6ce8ec9b after both workflows and all14 public-page checks passed. This batch remains staged until exact-commit checks and authorised release; latest PR body records deployment evidence.",
+  "publication": "Batch27 adds14 biographies and five historical athlete associations:520/1737 assembled,227 notable entries. PR710 merged after both exact-head workflows passed as9a124203. Its matching production and public-page evidence are recorded in the latest PR body. Do not equate preview readiness with publication.",
   "completedProfileSlugs": [
-    "corby-ac",
-    "cornwall-athletics-academy",
-    "corsham-running-club",
-    "cotswold-allrunners",
-    "cranbrook-running-club",
-    "crawley-run-crew",
-    "crawley-saints-and-sinners-running-club",
-    "racing-795",
-    "schull-triathlon-club",
-    "setanta-triathlon-club",
-    "sligo-tri-club",
-    "south-coast-tc",
-    "welsh-athletics-run4all-neath",
-    "welsh-athletics-san-domenico-rc",
-    "welsh-athletics-spirit-of-monmouth",
-    "crewe-and-nantwich-ac",
-    "crewkerne-running-club",
-    "croft-ambrey-rc",
-    "crook-and-dist-sports-ac",
-    "crossgates-harriers"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 506,
-    "notableMemberEntries": 222,
-    "clubsWithContacts": 625,
-    "contactEntries": 1099,
-    "clubsWithEmail": 608,
-    "clubsWithPhone": 91,
-    "clubsWithSocials": 998,
-    "socialLinks": 2056,
-    "websiteContactRecords": 892
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 2,
-    "contactOrSocialRecordsChanged": 20,
-    "newWebsiteContactRecords": 16,
-    "directoryRecordsRefreshed": 0,
-    "contactEntriesAdded": 17,
-    "clubsWithEmailAdded": 8,
-    "clubsWithPhoneAdded": 3,
-    "socialLinksAdded": 16,
-    "clubsWithSocialsAdded": 9
-  },
-  "validationBeforeCommit": {
-    "status": "Catalogue/profile and audit checks, exact source/contact assertions, targeted ESLint, TypeScript and application build passed. All20 actual production-build pages returned200 and passed biography, contacts, notable entries, location notes, flags, registration, title, description, canonical and SportsOrganization assertions. Remote exact-head workflows/screenshots/deployment checks are recorded in the PR body."
-  },
-  "nextCandidateSlugs": [
-    "welsh-athletics-tri-potential",
-    "welsh-athletics-welshpool-athletics-club",
-    "welsh-athletics-white-rock-runners",
-    "welsh-athletics-women-running-penarth",
-    "welsh-athletics-ystrad-mynach-running-club",
-    "tinahely-tri-club",
-    "tralee-tri-club",
-    "tri-an-mhi-tc",
-    "tri-lakes-triathlon-club",
-    "tribes-triathlon-club",
-    "tried-and-tested",
     "croydon-harriers",
     "cruisers-rc",
     "crystal-palace-fun-runners",
-    "crystal-palace-triathletes",
-    "crystal-peaks-runners",
     "cumberland-ac",
     "cumberland-fell-runners",
-    "cutacre-running-club"
+    "cutacre-running-club",
+    "tralee-tri-club",
+    "tri-lakes-triathlon-club",
+    "tribes-triathlon-club",
+    "tried-and-tested",
+    "welsh-athletics-ystrad-mynach-running-club",
+    "welsh-athletics-women-running-penarth",
+    "welsh-athletics-tri-potential",
+    "tri-an-mhi-tc"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 520,
+    "notableMemberEntries": 227,
+    "clubsWithContacts": 630,
+    "contactEntries": 1109,
+    "clubsWithEmail": 613,
+    "clubsWithPhone": 95,
+    "clubsWithSocials": 1004,
+    "socialLinks": 2067,
+    "websiteContactRecords": 901
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 14,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 14,
+    "newWebsiteContactRecords": 9,
+    "directoryRecordsRefreshed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Passed catalogue/profile/provenance/social-deduplication checks, targeted ESLint, TypeScript, application build and all14 actual production-build pages (biography, contacts, notable entries, flags, registration and search metadata). Exact-head remote workflows and preview evidence are recorded in the PR body."
+  },
+  "nextCandidateSlugs": [
+    "trilogy-triathlon-club",
+    "tritanium-tc",
+    "tullamore-triathlon-club",
+    "virginia-triathlon-and-cycling-club",
+    "west-cork-triathlon-club",
+    "westport-tc",
+    "dagenham-88-runners",
+    "dallam-running-club",
+    "danum-harriers",
+    "dark-peak-fell-runners",
+    "darlington-h-and-ac",
+    "darlington-triathlon-club",
+    "dartford-harriers-ac",
+    "dartford-road-runners",
+    "dartmouth-aac",
+    "darwen-dashers-rc"
   ],
   "resumeInstructions": [
-    "Read current main, the latest club-profile PR, AGENTS.md, audit, checkpoint and actual merged catalogue before selecting clubs; do not repeat completed slugs.",
-    "Inspect remote head and active work before writing. Keep expected-head guards and preserve unrelated changes. Do not push another editorial batch onto a running release gate.",
-    "Batch26 adds20 profiles and two historical Sligo associations. Prior PR709 merged as2e72430ac34c131fa4f15529537150ca6ce8ec9b after both workflows passed. Standing publication authority remains subject to checks. Continue the current PR if open; if merged branch from fresh main.",
-    "Complete normal profile/catalogue/lint/type/build checks and use the dedicated Club profiles workflow for desktop/mobile screenshots. Verify matching AthRecs project and exact SHA; protected previews must remain protected.",
-    "Record exact-head remote evidence and production confirmation in the PR body without checkpoint-only rebuild loops. Do not create identities, import results, change verification/privacy, or contact clubs/athletes."
+    "Read current main, latest club-profile PR, AGENTS.md, audit, checkpoint and actual assembled catalogue before selecting clubs; do not repeat completed slugs.",
+    "Inspect remote head and active work before writing. Preserve unrelated changes and expected-head guards. Do not push another editorial batch onto a running release gate.",
+    "Batch27 adds14 profiles and five historical associations. PR710 merged as9a124203f80ce252c2be2ba68d32ef90777f4bbc after both workflows passed. Standing publication authority remains subject to checks; exact release evidence is in the PR body. Continue current PR if open; if merged branch from fresh main.",
+    "Complete catalogue/profile/lint/type/build checks and dedicated Club profiles desktop/mobile workflow. Match AthRecs project and exact SHA. Protected previews must remain protected.",
+    "Record remote and production evidence in PR body without checkpoint-only rebuild loops. Do not create identities, import results, change verification/privacy or contact clubs/athletes."
   ],
   "sourceGaps": [
     {
@@ -1803,6 +1789,83 @@
       "status": "limited-primary-detail",
       "note": "Opened source provides insufficient substantive club history, venues and joining detail for a full biography; existing fields retained.",
       "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "crystal-palace-triathletes",
+      "url": "http://www.crystalpalace-tri.co.uk/",
+      "status": "unavailable-source",
+      "note": "Club homepage returned520. No biography added.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "crystal-peaks-runners",
+      "url": "https://www.crystalpeaks-runners.co.uk",
+      "status": "unavailable-source",
+      "note": "Homepage returned502. No biography added.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "tinahely-tri-club",
+      "url": "https://www.tinahelytriclub.ie/",
+      "status": "unavailable-source",
+      "note": "Website returned404/unpublished. No biography added.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "welsh-athletics-white-rock-runners",
+      "url": "https://www.whiterockcardiff.co.uk/",
+      "status": "unavailable-source",
+      "note": "Website returned508 resource limit. No biography added.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "welsh-athletics-welshpool-athletics-club",
+      "url": "https://www.welshathletics.org/en/club/view/welshpool",
+      "status": "limited-primary-detail",
+      "note": "Directory confirms track/field and cross-country with seasonal weekly venues; insufficient historical/club detail for a full biography. Existing fields retained.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "cutacre-running-club",
+      "url": "https://sites.google.com/view/cutacrerunningclub/contact-us",
+      "status": "conflicting-email",
+      "note": "Visible cutacrerunningclub@gmail.com differs from mailto cutacrecountryparkrunners@gmail.com. Neither added. Contact page and official Facebook retained. Free-session funding window is undated; no end date or guaranteed availability claimed.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "croydon-harriers",
+      "url": "https://croydonharriers.co.uk/club-history/",
+      "status": "origin-date-variation",
+      "note": "Homepage says1920; detailed history describes1921 revival and1925 name. Biography uses detailed history; no single founded-year value added.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "tri-lakes-triathlon-club",
+      "url": "https://trilakestriathlonclub.weebly.com/committee-members.html",
+      "status": "older-committee-page",
+      "note": "2024 committee and2025 inaugural race announcement are dated history, not current office-holder or event schedule. Masked emails excluded; current directory provides role email.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "tribes-triathlon-club",
+      "url": "https://www.tribestri.com/",
+      "status": "older-training-notices",
+      "note": "Old seasonal timetable is not asserted current. Junior age range and general programme supported; family should confirm session details.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "welsh-athletics-tri-potential",
+      "url": "https://www.tripotential.com/run",
+      "status": "unconfirmed-session-venue",
+      "note": "No fixed training venue established. West Wales governing-body region preserved. Cycle Specific footer social accounts excluded as unrelated.",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "slug": "tri-an-mhi-tc",
+      "url": "https://www.triathlonireland.com/get-involved/find-a-club/",
+      "status": "limited-current-session-detail",
+      "note": "Governing-body history and directory support biography and contacts; Instagram yields no substantive text. No current timetable or single training address inferred.",
+      "checkedAt": "2026-10-14"
     }
   ],
   "coverageReviewNotes": [
@@ -1827,23 +1890,24 @@
     "Batch23: five English, six Welsh and three Irish biographies;14 contact/social records changed, nine newly covered. Actual assembled totals453/1737 profiles,214notable entries. Preserves registration, metadata, athlete identity, result and privacy behaviour.",
     "Batch24: eight English, six Welsh and five Irish biographies;19 contact/social records changed,13 newly covered. Actual assembled totals472/1737 profiles,218notable entries; net15contact entries,6email-coveredclubs,1phone-coveredclub,8sociallinks.",
     "Batch25: six English, five Welsh and three Irish biographies.14 contact/social records changed,6 newly covered. Total486/1737bios,220notable entries. Net10contacts,4clubs with email,1withphone,5sociallinks and2clubs with socials.",
-    "Batch26:12 English,5 Irish,3 Welsh biographies.20 contact/social records changed,16 newly covered.506/1737 biographies and222 notable entries. Sources read14October; governing-body comparison dates unchanged."
+    "Batch26:12 English,5 Irish,3 Welsh biographies.20 contact/social records changed,16 newly covered.506/1737 biographies and222 notable entries. Sources read14October; governing-body comparison dates unchanged.",
+    "Batch27: six English, five Irish and three Welsh biographies;14 contact/social records changed, nine newly covered.520/1737 biographies and227 notable entries. Sources read14October; other governing-body comparison dates unchanged."
   ],
-  "previousPullRequest": 709,
+  "previousPullRequest": 710,
   "productionAuthorization": {
     "date": "2026-10-14",
     "instruction": "can you publish all and continue please",
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 709,
-    "mergeCommit": "2e72430ac34c131fa4f15529537150ca6ce8ec9b",
-    "productionDeployment": "dpl_A2qzbApARNxgj3ieUn5wWEoNKHxD",
+    "previousPullRequest": 710,
+    "mergeCommit": "9a124203f80ce252c2be2ba68d32ef90777f4bbc",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
-    "status": "READY production; all14 batch25 public pages passed full biography, contacts, flags, registration and search-metadata assertions on14October2026.",
-    "lastConfirmedLiveCommit": "2e72430ac34c131fa4f15529537150ca6ce8ec9b",
-    "lastConfirmedLiveDeployment": "dpl_A2qzbApARNxgj3ieUn5wWEoNKHxD",
-    "lastConfirmedLiveProfiles": 486,
-    "mainProfilesAtStart": 486
+    "status": "READY production for PR710 merge; all20 public pages passed full assertions on14October2026. Confirmed live506 profiles/222 notable entries.",
+    "lastConfirmedLiveCommit": "9a124203f80ce252c2be2ba68d32ef90777f4bbc",
+    "lastConfirmedLiveDeployment": "dpl_3sN7JtXBBeNgwi7NnXfszVtTgQ17",
+    "lastConfirmedLiveProfiles": 506,
+    "mainProfilesAtStart": 506,
+    "productionDeployment": "dpl_3sN7JtXBBeNgwi7NnXfszVtTgQ17"
   }
 }
