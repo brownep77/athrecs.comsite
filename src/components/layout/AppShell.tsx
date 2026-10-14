@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Home, SearchCheck, Users, UserRound, Footprints, Handshake, Trophy } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
+import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 import { cn } from "@/lib/utils";
@@ -161,6 +162,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </ul>
         </nav>
       ) : null}
+      <SiteAnalytics />
       <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">{children}</main>
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>

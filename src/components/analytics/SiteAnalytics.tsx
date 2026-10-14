@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { BarChart3, ShieldCheck, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,6 +38,9 @@ export function SiteAnalytics() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const [choice, setChoice] = useState<ConsentChoice>("unknown");
   const [preferencesOpen, setPreferencesOpen] = useState(false);
+  const preferencesButton = useRef<HTMLButtonElement>(null);
+  const preferencesPanel = useRef<HTMLElement>(null);
+  const moveFocus = useRef(false);
   const analyticsDisabled =
     pathname.startsWith("/admin") ||
     pathname === "/claim-results" ||
@@ -64,6 +67,12 @@ export function SiteAnalytics() {
     }).catch(() => undefined);
   }, [analyticsDisabled, choice, pathname]);
 
+  useEffect(() => {
+    if (!moveFocus.current) return;
+    (preferencesOpen ? preferencesPanel.current : preferencesButton.current)?.focus();
+    moveFocus.current = false;
+  }, [choice, preferencesOpen]);
+
   if (analyticsDisabled || choice === "unknown") return null;
 
   async function saveChoice(next: "granted" | "denied") {
@@ -75,6 +84,7 @@ export function SiteAnalytics() {
         sessionStorage.removeItem(SESSION_KEY);
       }
     }
+    moveFocus.current = true;
     setChoice(next);
     setPreferencesOpen(false);
   }
@@ -82,9 +92,13 @@ export function SiteAnalytics() {
   if (choice !== "undecided" && !preferencesOpen) {
     return (
       <button
+        ref={preferencesButton}
         type="button"
-        onClick={() => setPreferencesOpen(true)}
-        className="fixed bottom-20 right-3 z-[60] inline-flex min-h-9 items-center gap-1.5 rounded-full border border-border bg-surface/95 px-3 text-xs font-medium text-muted shadow-card backdrop-blur hover:text-fg md:bottom-4 md:right-4"
+        onClick={() => {
+          moveFocus.current = true;
+          setPreferencesOpen(true);
+        }}
+        className="mx-4 mt-3 inline-flex min-h-11 items-center gap-1.5 self-end rounded-full border border-border bg-surface px-3 text-xs font-medium text-muted hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:mx-6"
         aria-label="Review analytics privacy choices"
       >
         <ShieldCheck className="size-3.5" aria-hidden="true" />
@@ -94,13 +108,20 @@ export function SiteAnalytics() {
   }
 
   return (
-    <div className="fixed inset-x-3 bottom-20 z-[70] mx-auto max-w-2xl rounded-2xl border border-border bg-surface p-4 shadow-xl md:bottom-5 md:p-5">
+    <section
+      ref={preferencesPanel}
+      tabIndex={-1}
+      aria-labelledby="analytics-choices-title"
+      className="mx-4 mt-4 max-w-2xl self-center rounded-2xl border border-border bg-surface p-4 shadow-card md:mx-6 md:p-5"
+    >
       <div className="flex items-start gap-3">
         <span className="rounded-xl bg-accent-soft p-2.5 text-accent">
           <BarChart3 className="size-5" aria-hidden="true" />
         </span>
         <div className="min-w-0 flex-1 space-y-1">
-          <h2 className="font-display text-base font-semibold text-fg">Help improve ATHRECS</h2>
+          <h2 id="analytics-choices-title" className="font-display text-base font-semibold text-fg">
+            Help improve ATHRECS
+          </h2>
           <p className="text-sm leading-5 text-muted">
             Allow anonymous, first-party analytics so we can see which races and features are
             useful. We do not store your IP address, full referrer, search query or raw browser
@@ -110,8 +131,11 @@ export function SiteAnalytics() {
         {choice !== "undecided" ? (
           <button
             type="button"
-            onClick={() => setPreferencesOpen(false)}
-            className="rounded-md p-1.5 text-subtle hover:bg-elevated hover:text-fg"
+            onClick={() => {
+              moveFocus.current = true;
+              setPreferencesOpen(false);
+            }}
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-subtle hover:bg-elevated hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             aria-label="Close privacy choices"
           >
             <X className="size-4" aria-hidden="true" />
@@ -126,6 +150,6 @@ export function SiteAnalytics() {
           {choice === "granted" ? "Keep analytics on" : "Allow anonymous analytics"}
         </Button>
       </div>
-    </div>
+    </section>
   );
 }
