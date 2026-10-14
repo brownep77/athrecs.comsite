@@ -35,6 +35,15 @@ try {
   assert.match(birchfield.address, /Alexander Stadium/);
   assert.equal(birchfield.address_kind, "training");
   assert.equal(bySlug.get("unattached").country, "");
+  assert.equal(bySlug.get("northumberland-fell-runners").country, "England");
+  assert.equal(bySlug.get("northumberland-fell-runners").postcode, "");
+  assert.equal(bySlug.get("chatteris-running-club").address, "");
+  assert.equal(bySlug.get("cheshire-dragons").postcode, "");
+  assert.ok(!bySlug.get("cheshire-dragons").contacts.some(c => /example|mikado-themes/.test(c.email || "")));
+  assert.equal(clubProfiles["triangle-triathlon-club"].founded_year, undefined);
+  assert.equal(clubProfiles["ballybunion-tc"].founded_year, undefined);
+  assert.equal(bySlug.get("ams-triathlon").county, "Dublin");
+  assert.equal(bySlug.get("welsh-athletics-mynyddwyr-de-cymru").adult_only, true);
   assert.equal(bySlug.get("oswestry-olympians").country, "England");
   assert.equal(bySlug.get("oswestry-olympians").postcode, "");
   assert.equal(bySlug.get("astley-and-tyldesley-road-runners").postcode, "M29 7DW");
