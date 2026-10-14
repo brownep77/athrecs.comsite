@@ -1,3 +1,5 @@
+import { VerifyResultButton } from "./VerifyResultButton";
+import { resultVerification } from "@/lib/athrecs/profile-result-presentation";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -103,14 +105,25 @@ export function ManagedPerformanceHistory({
                     : "Unverified"}
               </p>
               {!staff ? (
-                <button
-                  type="button"
-                  disabled={busy}
-                  className="min-h-11 rounded-lg border px-3 py-2 text-sm disabled:opacity-50"
-                  onClick={() => void change(row.externalId, row.index, !row.profileExcluded)}
-                >
-                  {row.profileExcluded ? "Restore to profile" : "Remove from profile"}
-                </button>
+                <div className="flex flex-wrap items-start gap-2">
+                  <button
+                    type="button"
+                    disabled={busy}
+                    className="min-h-11 rounded-lg border px-3 py-2 text-sm disabled:opacity-50"
+                    onClick={() => void change(row.externalId, row.index, !row.profileExcluded)}
+                  >
+                    {row.profileExcluded ? "Restore to profile" : "Remove from profile"}
+                  </button>
+                  {!row.profileExcluded && !row.syntheticTest ? (
+                    <VerifyResultButton
+                      resultKey={`h:${athleteId}:${row.externalId}:${row.index}`}
+                      expectedVersion={row.verificationVersion}
+                      verified={
+                        resultVerification(row.verificationStatus, "AthRecs additions").verified
+                      }
+                    />
+                  ) : null}
+                </div>
               ) : null}
             </article>
           ))}

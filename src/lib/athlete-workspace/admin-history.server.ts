@@ -1,3 +1,4 @@
+import { verificationVersion } from "../athrecs/result-verification.server.ts";
 import { createHash } from "node:crypto";
 import type { z } from "zod";
 import { adminHistoryInput, historyExclusionInput } from "./admin-history.ts";
@@ -118,7 +119,20 @@ export async function readManagedHistory(sql: Sql, athleteId: number, actor: Act
   await access(sql, athleteId, actor);
   const histories =
     await sql`select provider,external_id as "externalId",source_url as "sourceUrl",captured_at::text as "capturedAt",complete,years_expected as "yearsExpected",years_captured as "yearsCaptured",performances from athlete_source_histories where athlete_id=${athleteId} and provider=${ADMIN_HISTORY_PROVIDER} order by captured_at`;
-  return histories.map((history) => sourceHistorySchema.parse(history));
+  return histories.map((history) => {
+    const parsed = sourceHistorySchema.parse(history);
+    const original = history.performances as unknown[];
+    return {
+      ...parsed,
+      sourceUrl: actor.staff ? parsed.sourceUrl : "",
+      performances: parsed.performances.map((row, index) => ({
+        ...row,
+        sourceUrls: actor.staff ? row.sourceUrls : [],
+        notes: actor.staff ? row.notes : "",
+        verificationVersion: verificationVersion(original[index]),
+      })),
+    };
+  });
 }
 export async function excludeHistoryPerformance(
   sql: Sql,
