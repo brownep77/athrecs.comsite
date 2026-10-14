@@ -2,13 +2,15 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const [seedSource, publisherSource, buildPublisherSource] = await Promise.all([
+const [seedSource, publisherSource, buildPublisherSource, transactionSource] = await Promise.all([
   readFile("src/lib/athrecs/seed.server.ts", "utf8"),
   readFile("scripts/publish-athrecs-catalogue.mjs", "utf8"),
   readFile("scripts/publish-after-build.mjs", "utf8"),
+  readFile("src/lib/athrecs/catalogue-transaction.ts", "utf8"),
 ]);
 
-assert.match(seedSource, /pg_advisory_xact_lock/);
+assert.match(seedSource, /runCatalogueTransaction\(sql, refreshCatalogue\)/);
+assert.match(transactionSource, /pg_advisory_xact_lock/);
 assert.match(seedSource, /catalogueMarkersCurrent/);
 assert.match(seedSource, /dbSource === "neon"/);
 assert.match(publisherSource, /ensureAthrecsSeeded\(\)/);
@@ -21,3 +23,4 @@ assert(
 );
 
 console.log("ATHRECS catalogue publication verification passed.");
+await import("./verify-catalogue-transaction.mjs");
