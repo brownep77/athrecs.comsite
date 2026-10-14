@@ -27,3 +27,30 @@ Reports are read-only, parameterised, limited to 40 displayed rows per page and 
 ## Validation
 
 `npm run verify:collection-stats -- --browser` runs the existing report tests and `verify-collection-operations.mjs` against disposable PGlite data via the actual compiled RPC. It covers all sections, record drill-downs, access control, denominators, source overlaps, queue ages, no-op updates, unknown historical dates, stable pagination, browser interaction, CSV and responsive/error states. No real athlete data is committed as test fixtures.
+
+## Catalogue-scale loading
+
+Athlete statistics use `collection_stats_snapshots` (`profiles-v1`): aggregate
+counts grouped by gender, stored residence, nationality and the complete set of
+recorded sports. Keeping the sport set together preserves unique athlete totals
+and all combined filters. The snapshot contains no athlete identifiers or source
+histories. Reads still pass through the existing staff middleware and remain
+`private, no-store` over HTTP.
+
+The authenticated `/api/collection-stats-worker` refreshes the snapshot every five
+minutes in production. It uses indexed sport membership queries and the existing
+32 MB transaction-local discovery-read budget. Rebuilds have a 55-second statement
+limit and a five-second lock limit. Replacement is atomic; a failed rebuild leaves
+the previous snapshot available. Normal page/filter requests reuse that snapshot;
+a cold database builds it once. Refresh counts explicitly rebuilds it. The page
+and athlete CSV show the athlete snapshot time separately from live race counts,
+and the page warns when athlete counts are over 15 minutes old.
+
+`npm run verify:collection-stats` covers real RPC authorization, all existing
+breakdowns, snapshot reuse without athlete/history scans, explicit refresh and
+preservation after a failed rebuild. CI also runs the desktop/mobile browser checks.
+
+A production-data check on 14 October 2026 found that the original combined query
+exceeded a 45-second limit. The snapshot-backed report query took 1.41 seconds;
+the background snapshot build took about 23 seconds. These are database timings,
+not a measurement of the complete signed-in browser load.
