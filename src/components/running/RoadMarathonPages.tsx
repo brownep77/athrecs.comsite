@@ -9,6 +9,7 @@ import {
   roadRaceLocation,
   roadRaceQuestions,
 } from "@/lib/running/road-marathon-seo";
+import { MARATHON_PLANNING } from "@/data/road-marathons/planning";
 import { roadGuideModifiedAt } from "@/lib/running/guide-modified";
 import { useRaceDateRefresh } from "./use-race-date-refresh";
 
@@ -90,6 +91,7 @@ export function CountryMarathonPage({
       : !upcomingRoadEditions(race, now).length,
   );
   const questions = countryMarathonQuestions(country, races, now);
+  const regions = [...new Set(races.map((race) => race.region ?? "Other locations"))].sort();
   return (
     <article className="space-y-8 pb-8">
       <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-muted">
@@ -115,6 +117,19 @@ export function CountryMarathonPage({
         </p>
       </header>
       <CountryNavigation selected={country.id} half={half} />
+      <nav aria-label="Country guide sections" className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+        {[
+          ["upcoming", "Race dates"],
+          ["choose-a-race", "Choosing a race"],
+          ["by-region", country.regionLabel],
+          ["race-guides", "Courses & entry"],
+          ["country-questions", "Questions"],
+        ].map(([id, label]) => (
+          <a key={id} href={`#${id}`} className={linkClass}>
+            {label}
+          </a>
+        ))}
+      </nav>
       <section aria-labelledby="upcoming" className="space-y-4">
         <h2 id="upcoming" className="scroll-mt-24 font-display text-2xl font-semibold">
           {year ? `${year} road ${distance} dates` : `Upcoming ${distance} dates`}
@@ -232,8 +247,60 @@ export function CountryMarathonPage({
           </details>
         ) : null}
       </section>
+      <section id="choose-a-race" aria-labelledby="choose-title" className="scroll-mt-24">
+        <h2 id="choose-title" className="font-display text-2xl font-semibold">
+          Choosing a road {distance} in {country.name}
+        </h2>
+        {!half ? (
+          <div className="mt-4 grid gap-6 md:grid-cols-2">
+            {MARATHON_PLANNING[country.id].map((item) => (
+              <section key={item.title}>
+                <h3 className="font-semibold">{item.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-muted">{item.text}</p>
+              </section>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">
+            Compare the route, entry requirements and recent field before choosing your 13.1 miles.
+            Use the location directory below to narrow the journey, then open a race guide for the
+            organiser’s course map and race-day instructions.
+          </p>
+        )}
+      </section>
+      <section id="by-region" aria-labelledby="regions-title" className="scroll-mt-24">
+        <h2 id="regions-title" className="font-display text-2xl font-semibold">
+          Browse by {country.regionLabel.toLowerCase()}
+        </h2>
+        <p className="mt-2 text-sm leading-6 text-muted">
+          Find a race in your area, or compare the options for a trip. Routes may cross regional
+          boundaries.
+        </p>
+        <div className="mt-4 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+          {regions.map((region) => (
+            <section key={region}>
+              <h3 className="font-semibold">{region}</h3>
+              <ul className="mt-1 text-sm">
+                {races
+                  .filter((race) => (race.region ?? "Other locations") === region)
+                  .map((race) => (
+                    <li key={race.slug}>
+                      <Link
+                        to="/running/races/$slug"
+                        params={{ slug: race.slug }}
+                        className={linkClass}
+                      >
+                        {race.name}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </section>
       <section aria-labelledby="race-guides">
-        <h2 id="race-guides" className="font-display text-2xl font-semibold">
+        <h2 id="race-guides" className="scroll-mt-24 font-display text-2xl font-semibold">
           Explore the races
         </h2>
         <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -256,12 +323,7 @@ export function CountryMarathonPage({
                   {race.name}
                 </Link>
               </h3>
-              <p className="mt-3 flex-1 text-sm leading-6 text-muted">
-                {race.description
-                  .split(/(?<=[.!?])\s+/)
-                  .slice(0, 2)
-                  .join(" ")}
-              </p>
+              <p className="mt-3 flex-1 text-sm leading-6 text-muted">{race.course.summary}</p>
               <p className="mt-3 text-sm">
                 <span className="font-semibold">Course: </span>
                 {race.course.profile}
@@ -277,7 +339,7 @@ export function CountryMarathonPage({
                 params={{ slug: race.slug }}
                 className={`${linkClass} mt-4 self-start text-sm`}
               >
-                Race guide, entry & results <ArrowRight className="size-4" aria-hidden="true" />
+                {race.name} guide <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </section>
           ))}
@@ -297,13 +359,23 @@ export function CountryMarathonPage({
         </div>
       </section>
       <aside className="rounded-xl bg-elevated/50 p-5 text-sm leading-6 text-muted">
-        <p className="font-semibold text-fg">Before you choose</p>
+        <p className="font-semibold text-fg">About these guides</p>
         <p className="mt-2">
           A road {distance} can include paved paths or a track finish, so check the course map as
           well as the name. Recent runner numbers give a sense of the race’s scale. For entry
           availability, final routes and race-day arrangements, follow the organiser’s latest
-          information.
+          information. AthRecs brings together the linked organiser, federation and results sources;
+          these guides are independent of the race organisers. Estimates are labelled, and dates
+          without confirmation stay TBC.
         </p>
+        <div className="mt-3 flex flex-wrap gap-x-5">
+          <Link to="/running/calendar" className={linkClass}>
+            Running fixtures calendar
+          </Link>
+          <Link to="/running/events" className={linkClass}>
+            Find more running events
+          </Link>
+        </div>
       </aside>
     </article>
   );
@@ -316,9 +388,13 @@ export function RoadMarathonPage({
 }: {
   race: RoadMarathon;
   now: string;
-  related?: Pick<RoadMarathon, "slug" | "name" | "city" | "region">[];
+  related?: (Pick<RoadMarathon, "slug" | "name" | "city" | "region" | "timeZone"> & {
+    profile: string;
+    nextDate?: string;
+    field?: string;
+  })[];
 }) {
-  useRaceDateRefresh([race.timeZone], now);
+  useRaceDateRefresh([race.timeZone, ...related.map((item) => item.timeZone)], now);
   const half = race.distanceKm === 21.0975;
   const country = (half ? halfMarathonCountry(race.country) : countryGuide(race.country))!;
   const upcoming = upcomingRoadEditions(race, now);
@@ -369,6 +445,7 @@ export function RoadMarathonPage({
           ["dates", "Dates"],
           ["entry", "Entry methods"],
           ["course", "Route & course"],
+          ...(race.practical?.length ? [["race-day", "Race-day planning"]] : []),
           ["results", "Past results"],
           ["media", "Media"],
           ["questions", "Questions"],
@@ -390,7 +467,7 @@ export function RoadMarathonPage({
           {upcoming.length ? (
             <ul className="mt-3 space-y-3">
               {upcoming.map((edition) => (
-                <li key={edition.date}>
+                <li key={edition.date} id={`edition-${edition.date}`} className="scroll-mt-24">
                   <a href={edition.sourceUrl} className={linkClass}>
                     <time dateTime={edition.date}>
                       {roadMarathonDate(edition.date, edition.endDate)}
@@ -523,19 +600,32 @@ export function RoadMarathonPage({
           ))}
         </div>
         {race.practical?.length ? (
-          <dl className="mt-5 grid gap-4 rounded-xl bg-elevated/40 p-5 sm:grid-cols-2">
-            {race.practical.map((item) => (
-              <div key={`${item.label}-${item.value}`}>
-                <dt className="text-sm font-semibold">{item.label}</dt>
-                <dd className="mt-1 text-sm leading-6 text-muted">
-                  {item.value}{" "}
-                  <a href={item.sourceUrl} className="text-accent underline underline-offset-4">
-                    Details
-                  </a>
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <section
+            id="race-day"
+            aria-labelledby="race-day-title"
+            className="mt-6 scroll-mt-24 rounded-xl bg-elevated/40 p-5"
+          >
+            <h3 id="race-day-title" className="text-lg font-semibold">
+              Race-day planning
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-muted">
+              Check which edition each detail applies to before making your plans. Follow the linked
+              instructions for the latest arrangements.
+            </p>
+            <dl className="mt-4 grid gap-4 sm:grid-cols-2">
+              {race.practical.map((item) => (
+                <div key={`${item.label}-${item.value}`}>
+                  <dt className="text-sm font-semibold">{item.label}</dt>
+                  <dd className="mt-1 text-sm leading-6 text-muted">
+                    {item.value}{" "}
+                    <a href={item.sourceUrl} className="text-accent underline underline-offset-4">
+                      {item.label} information
+                    </a>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
         ) : null}
       </section>
       <section
@@ -555,6 +645,17 @@ export function RoadMarathonPage({
           festivals with several distances, select the {half ? "half marathon" : "marathon"}{" "}
           results.
         </p>
+        {race.pastEditions.length > 1 ? (
+          <nav aria-label="Results by year" className="mt-3 flex flex-wrap gap-x-5 text-sm">
+            {[...race.pastEditions]
+              .sort((a, b) => b.year - a.year)
+              .map((edition) => (
+                <a key={edition.year} href={`#results-${edition.year}`} className={linkClass}>
+                  {edition.year} results & report
+                </a>
+              ))}
+          </nav>
+        ) : null}
         <div className="mt-5 space-y-5">
           {[...race.pastEditions]
             .sort((a, b) => b.year - a.year)
@@ -567,7 +668,7 @@ export function RoadMarathonPage({
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h3
                     id={`results-${edition.year}`}
-                    className="font-display text-2xl font-semibold"
+                    className="scroll-mt-24 font-display text-2xl font-semibold"
                   >
                     {edition.year} {race.name}
                   </h3>
@@ -651,9 +752,13 @@ export function RoadMarathonPage({
         </div>
       </section>
       <details className="rounded-xl bg-elevated/40 p-5 text-sm">
-        <summary className="cursor-pointer font-semibold">Useful links</summary>
+        <summary className="cursor-pointer font-semibold">Sources and race information</summary>
         <p className="mt-3 text-muted">
-          Race information, results and reports from the organiser and other linked sources.
+          AthRecs is independent of the race organiser. This guide brings together the linked race
+          information, results and reports. Source review:{" "}
+          <time dateTime={race.checkedAt}>{roadMarathonDate(race.checkedAt)}</time>. Historical
+          details are labelled by edition; current entry availability and final instructions remain
+          with the organiser.
         </p>
         <ul className="mt-3 space-y-2">
           {race.sources.map((source) => (
@@ -670,6 +775,10 @@ export function RoadMarathonPage({
           <h2 id="related-races" className="font-display text-2xl font-semibold">
             More {half ? "half marathons" : "marathons"} in {country.name}
           </h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Compare the route and scale of another race. Options in the same region appear first
+            when available.
+          </p>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {related.map((item) => (
               <li key={item.slug} className="rounded-xl border border-border p-4">
@@ -678,6 +787,13 @@ export function RoadMarathonPage({
                 </Link>
                 <p className="text-sm text-muted">
                   {[...new Set([item.city, item.region].filter(Boolean))].join(", ")}
+                </p>
+                <p className="mt-2 text-sm leading-6">{item.profile}</p>
+                <p className="mt-2 text-sm text-muted">
+                  Next date: {item.nextDate ? roadMarathonDate(item.nextDate) : "TBC"}
+                </p>
+                <p className="mt-1 text-sm text-muted">
+                  Approximate field: {item.field ?? "Unknown"}
                 </p>
               </li>
             ))}

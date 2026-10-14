@@ -722,11 +722,13 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
       {
         name: "Official registration",
         description:
-          "The entry page currently covers the completed 2026 event. Await the organiser’s next-edition announcement before booking.",
-        url: "https://longfordmarathon.com/enter/",
+          "The 2027 full marathon is listed for 29 August. Online ticket sales are scheduled to open on 30 October 2026; check Eventmaster for availability.",
+        url: "https://eventmaster.ie/event/3x1jhx4tZW/JrJGTQVSl",
       },
     ],
-    editions: [],
+    editions: [
+      { date: "2027-08-29", sourceUrl: "https://eventmaster.ie/event/3x1jhx4tZW/JrJGTQVSl" },
+    ],
     media: [
       {
         label: "Official photo gallery",
@@ -874,6 +876,10 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
     ],
     sources: [
       {
+        label: "2027 full-marathon registration and date",
+        url: "https://eventmaster.ie/event/3x1jhx4tZW/JrJGTQVSl",
+      },
+      {
         label: "Official race website",
         url: "https://longfordmarathon.com/",
       },
@@ -905,7 +911,7 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
       sourceUrl: "https://longfordmarathon.com/results/",
       note: "Based on 287 finishers in the organiser’s 2026 full-marathon results.",
     },
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-09",
     practical: [
       {
         label: "Published start arrangements",
@@ -914,7 +920,6 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
         sourceUrl: "https://longfordmarathon.com/event/faq/",
       },
     ],
-    nextDateNote: "2027 date has not yet been verified from the organiser.",
   },
   {
     slug: "run-galway-bay-marathon",

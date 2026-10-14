@@ -40,6 +40,8 @@ const paths = [
   ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
   ...ROAD_MARATHONS.map((race) => `/running/races/${race.slug}`),
 ];
+const titles = new Set();
+const descriptions = new Set();
 let cursor = 0;
 async function worker() {
   while (cursor < paths.length) {
@@ -48,6 +50,15 @@ async function worker() {
     assert.equal(response.status, 200, route);
     const $ = cheerio.load(await response.text());
     assert.equal($("h1").length, 1, route);
+    const title = $("title").text();
+    const description = $('meta[name="description"]').attr("content");
+    assert(title && !titles.has(title), `${route}: missing or duplicate title`);
+    assert(
+      description && !descriptions.has(description),
+      `${route}: missing or duplicate description`,
+    );
+    titles.add(title);
+    descriptions.add(description);
     assert.equal($("link[rel=canonical]").attr("href"), `https://www.athrecs.com${route}`, route);
     assert($("meta[name=robots]").attr("content").startsWith("index"), route);
     assert(
@@ -76,10 +87,22 @@ async function worker() {
         .flatMap((element) => JSON.parse($(element).html())["@graph"] ?? []);
       const events = graph.filter((item) => item["@type"] === "SportsEvent");
       for (const event of events) {
+        const fragment = new URL(event.url).hash;
+        assert.equal($(fragment).length, 1, `${route}: event URL must identify a visible edition`);
+        assert($(fragment).text().trim(), `${route}: event target must have readable content`);
         assert.equal(event.eventStatus, "https://schema.org/EventScheduled", route);
         assert(
           race.editions.some((edition) => edition.date === event.startDate),
           route,
+        );
+      }
+      const faq = graph.find((item) => item["@type"] === "FAQPage");
+      for (const question of faq.mainEntity) {
+        const visible = $("#questions").text().replace(/\s+/g, " ");
+        assert(visible.includes(question.name), `${route}: structured question missing from page`);
+        assert(
+          visible.includes(question.acceptedAnswer.text.replace(/\s+/g, " ")),
+          `${route}: structured answer missing from page`,
         );
       }
       if (!race.editions.length)
@@ -100,6 +123,18 @@ async function worker() {
           .some((element) => $(element).attr("href") === race.resultsUrl),
         route,
       );
+    }
+    const country = MARATHON_COUNTRIES.find((item) => route === `/running/${item.guide}`);
+    if (country) {
+      const countryRaces = (
+        country.guide.includes("-half-") ? ROAD_HALF_MARATHONS : FULL_MARATHONS
+      ).filter((item) => item.country === country.id);
+      assert.equal(
+        $("#by-region a").length,
+        countryRaces.length,
+        `${route}: every race must be in the region directory`,
+      );
+      assert($("#choose-a-race").text().length > 200, `${route}: planning advice missing`);
     }
     if (race?.distanceKm === 21.0975) {
       assert($("main").text().includes("21.0975"), route);
