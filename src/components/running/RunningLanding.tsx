@@ -219,7 +219,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
             className={pastelCardClassName}
             style={
               homepage
-                ? homepageCardStyle(theme, countryCardStyle(country.id), "country")
+                ? homepageCardStyle(theme, countryCardStyle(country.id), "country", 0, country.id)
                 : countryCardStyle(country.id)
             }
           >
@@ -246,7 +246,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
       <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {MARATHON_COUNTRIES.map((country) => {
           const style = homepage
-            ? homepageCardStyle(theme, countryCardStyle(country.id), "country")
+            ? homepageCardStyle(theme, countryCardStyle(country.id), "country", 0, country.id)
             : countryCardStyle(country.id);
           const content = (
             <>
@@ -397,7 +397,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
           className={`mt-5 max-w-3xl ${pastelCardClassName}`}
           style={
             homepage
-              ? homepageCardStyle(theme, countryCardStyle("uk"), "country")
+              ? homepageCardStyle(theme, countryCardStyle("uk"), "country", 0, "uk")
               : countryCardStyle("uk")
           }
         >

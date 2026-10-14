@@ -23,12 +23,14 @@ export function useHomepageTheme() {
 
 export function HomepageAppearanceProvider({ children }: { children: ReactNode }) {
   // The server and first client render agree; browser preferences are read after hydration.
-  const [theme, setTheme] = useState<HomepageThemeId>("colourful");
+  const [theme, setTheme] = useState<HomepageThemeId>("coastal");
   const [announcement, setAnnouncement] = useState("");
 
   useEffect(() => {
     try {
-      setTheme(readHomepageTheme(window.localStorage));
+      if (window.localStorage.getItem(HOMEPAGE_THEME_KEY) !== null) {
+        setTheme(readHomepageTheme(window.localStorage));
+      }
     } catch {
       // Some browsers block access to localStorage itself. The picker still works.
     }
@@ -135,7 +137,10 @@ export function HomepageColourPicker() {
         <ChevronDown className="size-3 group-open:rotate-180" aria-hidden="true" />
       </summary>
       <fieldset className="absolute right-0 top-full z-50 mt-2 max-h-[calc(100dvh-12rem)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-border bg-surface p-3 shadow-xl sm:max-h-[calc(100dvh-8rem)] lg:max-h-[calc(100dvh-6rem)]">
-        <legend className="px-2 text-sm font-semibold text-fg">Choose your colour scheme</legend>
+        <legend className="px-2 text-sm font-semibold text-fg">Preview 30 colour schemes</legend>
+        <p className="mb-3 px-2 text-xs leading-5 text-muted">
+          Try each design on the full homepage. Current colours shows the original.
+        </p>
         <div className="grid gap-2">
           {HOMEPAGE_THEME_IDS.map((id) => {
             const option = HOMEPAGE_THEMES[id];
