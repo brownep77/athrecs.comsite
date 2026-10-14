@@ -147,7 +147,7 @@ function CollectionStatsPage() {
           aria-current={section === "operations" ? "page" : undefined}
           onClick={() => void navigate({ search: { section: "operations" } })}
         >
-          Collection operations
+          Collection progress and work to do
         </Button>
       </nav>
       {section === "website" ? (
