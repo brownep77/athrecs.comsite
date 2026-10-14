@@ -44,7 +44,11 @@ export function historyResultSurface(
       [/\bmountain\b/i, "Mountain"],
     ] as const) {
       if (
-        pattern.test(row.discipline) ||
+        (pattern.test(row.discipline) &&
+          !(
+            surface === "Road" &&
+            /\b(?:off[ -]?road|non[ -]?road|not(?: an?)? road)\b/i.test(row.discipline)
+          )) ||
         row.labels.some((label) =>
           new RegExp(`^(?:${pattern.source})(?: running)?$`, "i").test(label.trim()),
         )

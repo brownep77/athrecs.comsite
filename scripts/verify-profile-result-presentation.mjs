@@ -139,6 +139,8 @@ try {
     ["Running", { labels: ["Mountain running"] }, "Mountain"],
     ["Running", { labels: ["Road", "Trail"] }, "Unknown"],
     ["Running", { labels: ["Not a road race"] }, "Unknown"],
+    ["Running", { discipline: "Off-road 10K" }, "Unknown"],
+    ["Running", { discipline: "Trail 10K off-road" }, "Trail"],
     ["Athletics", { discipline: "1500m" }, "Track"],
     ["Athletics", { discipline: "Long Jump" }, "Field"],
     ["Athletics", { discipline: "Decathlon" }, "Combined events"],
