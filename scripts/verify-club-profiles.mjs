@@ -36,6 +36,24 @@ try {
   assert.equal(birchfield.address_kind, "training");
   assert.equal(bySlug.get("unattached").country, "");
   // Later targeted reviews must preserve safe venue and contact distinctions.
+  const rotherham = bySlug.get("rotherham-harriers-and-ac");
+  assert.equal(rotherham.city, "Rotherham");
+  assert.match(rotherham.address, /Herringthorpe Stadium/);
+  assert.equal(rotherham.postcode, "S65 2HR");
+  assert.equal(clubProfiles[rotherham.slug].founded_year, undefined);
+  assert.equal(bySlug.get("holmfirth-harriers-ac").postcode, "HD9 6QE");
+  assert.deepEqual(bySlug.get("kimberworth-striders").sports, ["Running"]);
+  assert.ok(bySlug.get("doncaster-triathlon-club").sports.includes("Cycling"));
+  for (const slug of [
+    "doncaster-triathlon-club",
+    "welsh-athletics-caldicot-running-club",
+    "athletics-ireland-ballincollig-a-c",
+  ]) {
+    assert.equal(bySlug.get(slug).address, "");
+    assert.equal(bySlug.get(slug).postcode, "");
+  }
+  assert.equal(bySlug.get("athletics-ireland-blackrock-louth-a-c").county, "Louth");
+  assert.equal(clubProfiles["athletics-ireland-blayney-rockets-a-c"].founded_year, undefined);
   assert.deepEqual(bySlug.get("allen-valley-striders").sports, ["Running"]);
   assert.equal(bySlug.get("allen-valley-striders").city, "Allendale");
   assert.equal(bySlug.get("allen-valley-striders").adult_only, false);
