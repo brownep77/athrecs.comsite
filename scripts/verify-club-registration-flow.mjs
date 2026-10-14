@@ -188,9 +188,12 @@ try {
     waitUntil: "networkidle",
     timeout: 120000,
   });
-  // A representative must be able to continue without deciding about analytics.
-  // Wait for hydration so a late consent panel cannot escape this regression.
-  await page.getByRole("heading", { name: "Help improve ATHRECS", exact: true }).waitFor();
+  // Registration is a private route: neither tracking nor consent UI belongs here.
+  await page.getByRole("button", { name: "Continue", exact: true }).waitFor();
+  assert.equal(
+    await page.getByRole("heading", { name: "Help improve ATHRECS", exact: true }).count(),
+    0,
+  );
   await mkdir("artifacts", { recursive: true });
   for (const viewport of [
     { width: 320, height: 568 },
@@ -266,6 +269,14 @@ try {
     0,
     "Completing registration without analytics consent sends no analytics",
   );
+  assert.equal(
+    await page.getByRole("heading", { name: "Help improve ATHRECS", exact: true }).count(),
+    0,
+  );
+  assert.equal(await page.locator('script[src*="/_vercel/insights/"]').count(), 0);
+  // Exercise the consent controls on the public directory, where they are shown.
+  await page.goto(`${origin}/clubs`, { waitUntil: "networkidle" });
+  await page.getByRole("heading", { name: "Help improve ATHRECS", exact: true }).waitFor();
   await page.getByRole("button", { name: "No thanks", exact: true }).click();
   const privacyChoices = page.getByRole("button", { name: "Review analytics privacy choices" });
   assert.equal(await privacyChoices.evaluate((el) => el === document.activeElement), true);
@@ -286,6 +297,11 @@ try {
   assert.equal(
     await page.evaluate(() => localStorage.getItem("athrecs:analytics-consent")),
     "denied",
+  );
+  await page.goto(`${origin}/clubs/register?club=${clubs[1].slug}`, { waitUntil: "networkidle" });
+  assert.equal(
+    await page.getByRole("heading", { name: "Help improve ATHRECS", exact: true }).count(),
+    0,
   );
   assert(
     await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
