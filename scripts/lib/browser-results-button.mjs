@@ -5,14 +5,14 @@ export function collectBrowserResults(doc = document) {
     !el.closest('[hidden], [aria-hidden="true"]') &&
     !['hidden', 'collapse'].includes(win.getComputedStyle(el).visibility) &&
     (typeof el.checkVisibility !== 'function' || el.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true }));
-  const text = (el) => {
+  const text = (el, omit = '') => {
     if (!visible(el)) return '';
     // Do not capture inputs, hidden DOM text, scripts or offscreen accessibility labels.
     const walker = doc.createTreeWalker(el, 4);
     const parts = [];
     while (walker.nextNode()) {
       const node = walker.currentNode, parent = node.parentElement;
-      if (!parent || parent.closest('script,style,select,button,textarea,input,[aria-hidden="true"],[hidden],.sr-only,.visually-hidden') || !visible(parent)) continue;
+      if (!parent || (omit && parent.closest(omit)) || parent.closest('script,style,select,button,textarea,input,[aria-hidden="true"],[hidden],.sr-only,.visually-hidden') || !visible(parent)) continue;
       parts.push(node.textContent);
     }
     return parts.join(' ').replace(/\s+/g, ' ').trim();
@@ -33,7 +33,7 @@ export function collectBrowserResults(doc = document) {
       used.add(label); return label;
     });
   };
-  const add = (container, headerCells, rowCells, rowElements, label) => {
+  const add = (container, headerCells, rowCells, rowElements, label, options = {}) => {
     if (!headerCells.length || !rowCells.length) return;
     if (headerCells.length > 80 || rowCells.length > 5000) {
       warnings.push(`${label}: exceeds 80 columns or 5,000 loaded rows; choose a smaller page.`); return;
@@ -44,12 +44,12 @@ export function collectBrowserResults(doc = document) {
     if ([...headerCells, ...rowCells.flat()].some(cell => Number(cell.getAttribute('colspan') || 1) !== 1 || Number(cell.getAttribute('rowspan') || 1) !== 1)) {
       warnings.push(`${label}: merged cells need a separate parser. No rows from this table were exported.`); return;
     }
-    const headers = distinctHeaders(headerCells.map(el => text(el) || (el.getAttribute('data-label') || el.getAttribute('data-title') || '')));
-    const rows = rowCells.map(cells => cells.map(text));
+    const headers = distinctHeaders(headerCells.map(el => text(el, options.omit) || (el.getAttribute('data-label') || el.getAttribute('data-title') || '')));
+    const rows = rowCells.map(cells => cells.map(cell => text(cell, options.omit)));
     if (headers.some(h => h.length > 160) || rows.flat().some(v => v.length > 4000)) {
       warnings.push(`${label}: contains cells too large for a results table.`); return;
     }
-    const rowLinks = rowElements.map(row => [...row.querySelectorAll('a[href]')].filter(visible).map(a => safeUrl(a.href)).filter(Boolean));
+    const rowLinks = rowElements.map(row => [...row.querySelectorAll(options.links || 'a[href]')].filter(visible).map(a => safeUrl(a.href)).filter(Boolean));
     if (rowLinks.some(links => links.join('\n').length > 4000)) {
       warnings.push(`${label}: too many links in a row.`); return;
     }
@@ -67,9 +67,33 @@ export function collectBrowserResults(doc = document) {
     const body = rows.slice(headIndex + 1).filter(row => !row.closest('tfoot'));
     add(container, header, body.map(cells), body, label);
   }
+  // Mika's London layout has a separate heading row and typed fields, not table cells.
+  // Match its complete header structure, checking each row's types and inline labels.
+  for (const container of doc.querySelectorAll('ul.list-group-multicolumn')) {
+    if (!visible(container) || container.closest('[data-athrecs-capture]')) continue;
+    const head = [...container.children].find(row => row.classList.contains('list-group-header'));
+    if (!head) continue;
+    const fields = row => [...row.querySelectorAll('.list-field')].filter(cell => !cell.classList.contains('type-favorite'));
+    const header = fields(head);
+    const rows = [...container.children].filter(row => row !== head && row.classList.contains('list-group-item') && visible(row));
+    if (!header.length || !rows.length) continue;
+    const heading = cell => text(cell, '.list-label');
+    if (header.some(cell => !visible(cell) || !heading(cell))) {
+      warnings.push('London-style results: widen the browser window until all column headings are visible, then try again.'); continue;
+    }
+    const signature = cell => [...cell.classList].filter(c => c.startsWith('type-') || c === 'place-primary' || c === 'place-secondary' || c === 'split').sort().join(' ');
+    const body = rows.map(fields);
+    if (body.some(cells => cells.length !== header.length || cells.some((cell, i) => {
+      const inline = cell.querySelector('.list-label')?.textContent.replace(/\s+/g, ' ').trim();
+      return !visible(cell) || signature(cell) !== signature(header[i]) || (inline && inline !== heading(header[i]));
+    }))) {
+      warnings.push('London-style results: the row fields do not match the column headings; no rows exported.'); continue;
+    }
+    add(container, header, body, rows, 'London-style results', { omit: '.list-label', links: '.type-fullname a[href]' });
+  }
   // Results providers also render labelled responsive lists instead of HTML tables.
   for (const container of doc.querySelectorAll('ul.list-group,ol.list-group,[data-results-list]')) {
-    if (!visible(container) || container.closest(selector)) continue;
+    if (!visible(container) || container.closest(selector) || container.matches('.list-group-multicolumn')) continue;
     const rows = [...container.children].filter(row => visible(row) && row.querySelector('[data-label],[data-title]'));
     if (!rows.length) continue;
     const cells = row => [...row.querySelectorAll('[data-label],[data-title]')].filter(cell => !cell.querySelector('[data-label],[data-title]'));
@@ -100,7 +124,7 @@ export function showBrowserResults(collect) {
   host.style.cssText = 'position:fixed;inset:20px;z-index:2147483647;';
   const root = host.attachShadow({ mode: 'open' });
   const style = document.createElement('style');
-  style.textContent = ':host{all:initial}*{box-sizing:border-box}section{font:15px/1.5 system-ui,sans-serif;color:#122638;background:#fff;max-width:1000px;max-height:calc(100vh - 40px);overflow:auto;margin:auto;padding:24px;border:2px solid #167d8b;border-radius:16px;box-shadow:0 12px 80px #0008}h2{margin:0;font-size:24px}p{margin:12px 0}button,select{font:inherit;padding:10px;border:1px solid #97aeb8;border-radius:8px;background:#f1f7fa;color:#122638;cursor:pointer}button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid #167d8b}button.primary{background:#126571;color:#fff}button.close{float:right}select{max-width:100%;width:100%}table{border-collapse:collapse;white-space:nowrap;font-size:13px}td,th{padding:8px;border:1px solid #dce5eb;text-align:left}.scroll{overflow:auto}.note{padding:12px;background:#fff5df;border-radius:8px}a{color:#126571}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}';
+  style.textContent = ':host{all:initial}*{box-sizing:border-box}section{font:15px/1.5 system-ui,sans-serif;color:#122638;background:#fff;max-width:1000px;max-height:calc(100vh - 40px);overflow:auto;margin:auto;padding:24px;border:2px solid #167d8b;border-radius:16px;box-shadow:0 12px 80px #0008}h2{margin:0;font-size:24px}p{margin:12px 0}button,select{font:inherit;padding:10px;border:1px solid #97aeb8;border-radius:8px;background:#f1f7fa;color:#122638;cursor:pointer}button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid #167d8b}button.primary{background:#126571;color:#fff}button.close{position:sticky;top:0;display:block;margin:0 0 12px auto;background:#122638;color:#fff;border:2px solid #fff;font-weight:700;z-index:1}select{max-width:100%;width:100%}table{border-collapse:collapse;white-space:nowrap;font-size:13px}td,th{padding:8px;border:1px solid #dce5eb;text-align:left}.scroll{overflow:auto}.note{padding:12px;background:#fff5df;border-radius:8px}a{color:#126571}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}';
   root.append(style);
   const make = (tag, value, parent = panel) => { const el = document.createElement(tag); if (value) el.textContent = value; parent.append(el); return el; };
   const panel = document.createElement('section'); panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Save results for AthRecs'); root.append(panel);
@@ -110,7 +134,7 @@ export function showBrowserResults(collect) {
   const source = make('p', capture.page.title + ' · ' + capture.page.url); source.style.overflowWrap = 'anywhere';
   const summary = make('p'); summary.className = 'note'; summary.setAttribute('role', 'status');
   if (!capture.tables.length) {
-    summary.textContent = 'No supported results table was found. Open the actual results listing, rather than a race homepage, and try again. If the results are inside a separate frame, open that results page directly.';
+    summary.textContent = 'No supported results table was found on this page. If runners are visible, this layout may need additional support. Check any message below, or save the page as HTML and send it to AthRecs for checking.';
   } else {
     const label = make('label', 'Choose the results table');
     const select = make('select', '', label); select.setAttribute('aria-label', 'Results table');
