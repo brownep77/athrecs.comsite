@@ -949,7 +949,19 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
   const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
 
-  for (const replacement of editionReplacements) {
+  // Later verified releases can retain a distance/date that an older migration
+  // replaced. Current catalogue identities take precedence over that migration,
+  // including their source-record links and any reviewed results.
+  const currentEditionKeys = new Set(
+    editionSeeds.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
+  );
+  const activeEditionReplacements = editionReplacements.filter(
+    (replacement) =>
+      !currentEditionKeys.has(
+        `${replacement.seriesSlug}|${replacement.fromDate}|${replacement.distance}`,
+      ),
+  );
+  for (const replacement of activeEditionReplacements) {
     const eventId = eventIds.get(replacement.seriesSlug);
     if (!eventId) continue;
     const targetDistance = replacement.toDistance ?? replacement.distance;
@@ -1135,7 +1147,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   // upsert. An older deployment can recreate an imported source row while a
   // newer deployment is seeding; this final pass makes the corrected target
   // authoritative without touching editions that hold results.
-  for (const replacement of editionReplacements) {
+  for (const replacement of activeEditionReplacements) {
     const eventId = eventIds.get(replacement.seriesSlug);
     if (!eventId) continue;
     const targetDistance = replacement.toDistance ?? replacement.distance;

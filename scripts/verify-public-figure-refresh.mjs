@@ -385,12 +385,25 @@ try {
     return event.id;
   }
   const protectedAliasId = await syntheticAlias(protectedAliasSlug, true);
+  // Later verified releases restored this companion 10K. An older migration
+  // from 10K to Half must not delete it or break its private source-record link.
+  const retainedEditions = await sql`select ed.* from editions ed
+    join events e on e.id=ed.event_id
+    where e.slug='monsal-trail-half-marathon-autumn-sunday' order by ed.id`;
+  const retainedTenK = retainedEditions.find((edition) => edition.distance_code === "10K");
+  assert(retainedTenK, "Current catalogue retains the verified companion 10K");
+  await sql`insert into event_register_source_records
+    (record_key,origin,provider,source_url,event_key,event_name,sport,catalogue_event_id,catalogue_edition_id,evidence)
+    values('synthetic-retained-edition','synthetic','synthetic','https://example.test/retained-edition',
+      'synthetic-retained-edition','Synthetic retained edition','Running',${retainedTenK.event_id},${retainedTenK.id},
+      '{"synthetic":true,"review":"source observation only"}'::jsonb)`;
   const evidenceState = async () => ({
     athletes: await sql`select * from athletes order by id`,
     results: await sql`select * from results order by id`,
     references: await sql`select * from result_source_references order by result_id,source_url`,
     history: await sql`select * from result_change_history order by id`,
     redirects: await sql`select * from slug_redirects order by entity_type,old_slug`,
+    registerSources: await sql`select * from event_register_source_records order by record_key`,
   });
   const protectedEvidence = await evidenceState();
   const protectedEvents = await sql`select * from events
@@ -414,6 +427,12 @@ try {
     1,
   );
   assert.deepEqual(await evidenceState(), protectedEvidence);
+  assert.deepEqual(
+    await sql`select ed.* from editions ed join events e on e.id=ed.event_id
+      where e.slug='monsal-trail-half-marathon-autumn-sunday' order by ed.id`,
+    retainedEditions,
+    "A superseded edition migration preserves current verified editions and their identities",
+  );
   assert.deepEqual(
     await sql`select * from events
     where slug in (${protectedAliasSlug},${protectedCanonicalSlug}) order by id`,
