@@ -168,6 +168,7 @@
     "@types/pg": "^8.11.10",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "@vercel/analytics": "2.0.1",
     "@vercel/blob": "^2.8.0",
     "@vitejs/plugin-react": "^5.0.0",
     "better-auth": "^1.4.0",
