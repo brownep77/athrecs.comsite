@@ -283,6 +283,10 @@ try {
   await page.keyboard.press("Enter");
   await page.getByRole("region", { name: "Help improve ATHRECS" }).waitFor();
   await page.keyboard.press("Tab");
+  const privacyNotice = page.getByRole("link", { name: "privacy notice", exact: true });
+  assert.equal(await privacyNotice.evaluate((el) => el === document.activeElement), true);
+  assert.equal(await privacyNotice.getAttribute("href"), "/privacy#website-statistics");
+  await page.keyboard.press("Tab");
   assert.equal(
     await page
       .getByRole("button", { name: "Close privacy choices" })
