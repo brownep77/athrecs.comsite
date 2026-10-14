@@ -28,22 +28,32 @@ const base = `params as (select $1::text[], $2::text, $3::int, $4::text, $5::int
  hcounts as (select h.athlete_id,count(*) n from histories h cross join lateral jsonb_array_elements(h.performances) p
    where coalesce(p->>'profileExcluded','false')<>'true' and coalesce(p->>'syntheticTest','false')<>'true' group by 1)`;
 const inventories = `jsonb_build_array(
- jsonb_build_object('label','Catalogue results','href','/admin/result-archive','value',(select count(*) from r)),
- jsonb_build_object('label','Source-history rows','href','/admin/athlete-directory','value',(select coalesce(sum(jsonb_array_length(performances)),0) from histories),'detail','Raw observations; may overlap catalogue results or one another.'),
- jsonb_build_object('label','Central archive observations','href','/admin/result-archive','value',(select count(*) from result_archive_entries x join result_archive_datasets ds on ds.id=x.dataset_id join d on d.id=ds.edition_id),'detail','Includes linked and unmatched observations; not an extra unique-result total.'),
- jsonb_build_object('label','Latest captured source rows','href','/admin/result-archive','value',(select coalesce(sum(row_count),0) from (select distinct on(provider,source_key) row_count from result_archive_source_captures order by provider,source_key,last_seen_at desc,id desc)x),'detail','Latest version of each source sheet; identity may still be unresolved.'))`;
+ jsonb_build_object('label','Main results saved','href','/admin/result-archive','value',(select count(*) from r),'detail','Results connected to athlete profiles in the main collection. May include unfinished races or hidden results; saving a result does not verify or publish it.'),
+ jsonb_build_object('label','Results in imported histories','href','/admin/athlete-directory','value',(select coalesce(sum(jsonb_array_length(performances)),0) from histories),'detail','Results saved in athlete histories from other websites. The same performance may also be in the main results or another history.'),
+ jsonb_build_object('label','Entries in the results archive','href','/admin/result-archive','value',(select count(*) from result_archive_entries x join result_archive_datasets ds on ds.id=x.dataset_id join d on d.id=ds.edition_id),'detail','Collected results-sheet entries, including entries already matched and entries still waiting for the right athlete. These may also appear in the main results.'),
+ jsonb_build_object('label','Entries in saved results sheets','href','/admin/result-archive','value',(select coalesce(sum(row_count),0) from (select distinct on(provider,source_key) row_count from result_archive_source_captures order by provider,source_key,last_seen_at desc,id desc)x),'detail','Entries in the latest saved copy of each results sheet. They may still need processing and matching to athletes.'))`;
 const col = (key: string, label: string, numeric = false): OperationColumn => ({
   key,
   label,
   numeric,
 });
-const recordCols = [col("label", "Record"), col("detail", "Details"), col("status", "Status")];
+const recordCols = [col("label", "Entry"), col("detail", "Details"), col("status", "Status")];
 const verified = (
   status: string,
   provider: string,
-) => `case when ${status}='unverified' then 'Unverified'
- when ${status}='source_verified' then 'Source checked' when ${status}='verified_by_administrator' then 'Administrator verified'
- when trim(coalesce(${provider},'')) ~* '^world[[:space:]]*athletics$' then 'World Athletics policy' else 'Unverified' end`;
+) => `case when ${status}='unverified' then 'No check recorded'
+ when ${status}='source_verified' then 'Checked against source' when ${status}='verified_by_administrator' then 'Checked by staff'
+ when trim(coalesce(${provider},'')) ~* '^world[[:space:]]*athletics$' then 'Accepted under World Athletics rule' else 'No check recorded' end`;
+
+const stateLabel = (value: string) => `case ${value}
+ when 'pending' then 'Waiting for review' when 'needs_info' then 'More information needed'
+ when 'needs_changes' then 'Changes requested' when 'held' then 'Paused for review'
+ when 'queued' then 'Waiting to start' when 'processing' then 'Collection in progress'
+ when 'completed_with_errors' then 'Finished with some errors' when 'failed' then 'Could not complete'
+ when 'staged' then 'Saved for review' when 'eligible' then 'Passed initial checks'
+ when 'blocked' then 'An issue needs resolving' when 'review' then 'Needs review'
+ when 'proposed' then 'Suggested for review' when 'approved' then 'Approved'
+ when 'rejected' then 'Not approved' else replace(${value},'_',' ') end`;
 
 type QuerySpec = {
   ctes?: string;
@@ -74,22 +84,22 @@ function results(f: OperationInput): QuerySpec {
             col("label", "Group"),
             col("count", "Results", true),
             col("athletes", "Athletes", true),
-            col("editions", "Editions", true),
+            col("editions", "Race dates and distances", true),
           ],
     description:
-      "Individual catalogue results by sport, distance, country or race year. Open a group to inspect its records.",
+      "Each total below counts main result entries. Country means where the event took place. Select See entries to find the athletes and events included.",
     metrics: inventories,
     notes: [
-      "These inventories overlap and must not be added together. Catalogue counts include stored non-finish and excluded results; they do not certify a performance.",
-      "Fictional test profiles/results and retained event aliases are excluded. Source captures remain raw observations.",
+      "Do not add the four boxes together: the same performance can appear in more than one. Main results include unfinished races and results hidden from profiles. This is a count of saved entries, not verified performances.",
+      "Test athletes, test results and known alternative event listings are left out. Saved results sheets still need their own checks.",
     ],
   };
 }
 function coverage(f: OperationInput): QuerySpec {
   const ctes = `rc as (select athlete_id,count(*) n from r where coalesce(result_details->>'profileExcluded','false')<>'true' group by 1),
  coverage as (select a.id,a.display_name,coalesce(rc.n,0) canonical,coalesce(h.n,0) observations,
- case when coalesce(rc.n,0)=0 and coalesce(h.n,0)=0 then 'No recorded results'
- when coalesce(rc.n,0)=0 then 'Source-history only' when rc.n=1 then 'One catalogue result' else 'Several catalogue results' end bucket
+ case when coalesce(rc.n,0)=0 and coalesce(h.n,0)=0 then 'No saved results'
+ when coalesce(rc.n,0)=0 then 'Imported history only' when rc.n=1 then 'One main result' else 'Several main results' end bucket
  from a left join rc on rc.athlete_id=a.id left join hcounts h on h.athlete_id=a.id)`;
   return {
     ctes,
@@ -98,15 +108,15 @@ function coverage(f: OperationInput): QuerySpec {
         ? `select id::text key,display_name label,canonical,observations,${athleteLink("id")} href from coverage where bucket=$2`
         : `select bucket key,bucket label,bucket drill,count(*) count,coalesce(sum(canonical),0) canonical,coalesce(sum(observations),0) observations from coverage group by bucket`,
     columns: [
-      col("label", f.mode === "records" ? "Athlete" : "Coverage"),
+      col("label", f.mode === "records" ? "Athlete" : "Results saved for the athlete"),
       ...(f.mode === "summary" ? [col("count", "Athletes", true)] : []),
-      col("canonical", "Catalogue results", true),
-      col("observations", "Source-history rows", true),
+      col("canonical", "Main results saved", true),
+      col("observations", "Results in imported histories", true),
     ],
     description:
-      "Find empty profiles and see which athletes have one or several catalogue results.",
+      "Each athlete appears in one group below, according to the results we have saved for their profile.",
     notes: [
-      "Excluded and synthetic performance rows do not count towards coverage. Source histories can overlap catalogue results; the two columns are not a deduplicated total.",
+      "Results hidden from profiles and test results are left out here. Imported histories may include the same performances as the main results, so do not add the two result columns together.",
     ],
   };
 }
@@ -123,7 +133,7 @@ function growth(f: OperationInput): QuerySpec {
   let rows: string;
   let columns: OperationColumn[];
   if (f.mode === "records") {
-    rows = `select entity||':'||id::text key,label,case when $2='undated' then 'Collection date unknown' when added>=${start} then 'Added '||to_char(added at time zone 'Europe/London','YYYY-MM-DD HH24:MI') else 'Updated in selected period' end detail,entity status,href from records t where
+    rows = `select entity||':'||id::text key,label,case when $2='undated' then 'Date first saved is unknown' when added>=${start} then 'Added '||to_char(added at time zone 'Europe/London','YYYY-MM-DD HH24:MI') else 'Updated in selected period' end detail,entity status,href from records t where
      ($2='undated' and added is null)
      or ($2 like 'day:%' and (to_char(added at time zone 'Europe/London','YYYY-MM-DD')=substring($2 from 5)
        or exists(select 1 from changes c where c.entity=t.entity and c.record_id=t.id and c.day::text=substring($2 from 5))))
@@ -140,13 +150,13 @@ function growth(f: OperationInput): QuerySpec {
     columns = [
       col("label", "UK date"),
       col("events", "New events", true),
-      col("editions", "New editions", true),
+      col("editions", "New race dates and distances", true),
       col("athletes", "New athletes", true),
       col("results", "New results", true),
-      col("updated", "Records updated", true),
+      col("updated", "Entries edited", true),
     ];
   } else {
-    rows = `select entity key,initcap(entity) label,entity drill,
+    rows = `select entity key,case entity when 'editions' then 'Race dates and distances' when 'athletes' then 'Athlete profiles' else initcap(entity) end label,entity drill,
   count(*) filter(where added>=(${today}::timestamp at time zone 'Europe/London')) as today,
   count(*) filter(where added>=(((${today}-6)::timestamp) at time zone 'Europe/London')) as week,
   count(*) filter(where added>=(((${today}-29)::timestamp) at time zone 'Europe/London')) as month,
@@ -154,24 +164,25 @@ function growth(f: OperationInput): QuerySpec {
   (select count(distinct record_id) from changes c where c.entity=t.entity and c.day>=${today}-($3::int-1)) updated,
   count(*) filter(where added is null) undated from records t group by entity`;
     columns = [
-      col("label", "Record type"),
+      col("label", "Type of entry"),
       col("today", "New today", true),
       col("week", "New in 7 days", true),
       col("month", "New in 30 days", true),
       col("period", "New in selected period", true),
-      col("updated", "Updated in selected period", true),
-      col("undated", "Collection date unknown", true),
+      col("updated", "Edited in selected period", true),
+      col("undated", "Date first saved is unknown", true),
     ];
   }
   return {
     ctes,
     rows,
     columns,
-    description: "New records and changed records, using UK calendar days including today.",
-    metrics: `jsonb_build_array(jsonb_build_object('label','Records with unknown collection date','value',(select count(*) from records where added is null),'drill','undated'))`,
+    description:
+      "Count entries first saved or edited during the chosen period. Days follow UK time and include today.",
+    metrics: `jsonb_build_array(jsonb_build_object('label','Entries with no date first saved','value',(select count(*) from records where added is null),'drill','undated'))`,
     notes: [
-      "Existing event and athlete creation dates are retained. Edition/result creation dates and change tracking begin with this dashboard release; older unknown dates remain blank.",
-      "Updates count distinct retained records in the selected period. Daily update totals can include the same record on several days. New records can also be updated.",
+      "We kept existing dates for when events and profiles were created. Tracking when race dates and results were added or edited started with this report. Older entries may have no saved date.",
+      "An edited entry is counted once for the whole period. In Day by day, it can count on each day it was edited. An entry can be both added and edited in the same period.",
     ],
   };
 }
@@ -179,7 +190,7 @@ function sources(f: OperationInput): QuerySpec {
   if (f.group === "imports")
     return {
       description:
-        "Import activity by provider, including new rows, updates, skipped rows and failed runs.",
+        "Each attempt to collect results from a website, showing entries added, changed, skipped and attempts with errors.",
       rows:
         f.mode === "records"
           ? `select id key,source_name label,concat(rows_imported,' new · ',rows_updated,' updated · ',error_count,' errors') detail,status,'/admin/result-archive' href from result_ingestion_runs where source_name=$2`
@@ -188,44 +199,45 @@ function sources(f: OperationInput): QuerySpec {
         f.mode === "records"
           ? recordCols
           : [
-              col("label", "Provider"),
-              col("runs", "Runs", true),
-              col("imported", "Rows added", true),
-              col("updated", "Rows updated", true),
-              col("skipped", "Rows skipped", true),
-              col("failed", "Runs with errors", true),
-              col("checked", "Last run"),
+              col("label", "Results website"),
+              col("runs", "Collection attempts", true),
+              col("imported", "Entries added", true),
+              col("updated", "Entries changed", true),
+              col("skipped", "Entries skipped", true),
+              col("failed", "Attempts with errors", true),
+              col("checked", "Last attempt"),
             ],
       notes: [
-        "Import counters describe operations, not unique results. Retries and repeat updates can affect more than one run. A skipped row is not necessarily a duplicate.",
+        "These totals count work done across collection attempts. Repeated attempts can count the same entry again. An entry may be skipped for several reasons, not just because it is a duplicate.",
       ],
     };
   if (f.group === "datasets")
     return {
-      description: "Completeness of recorded result datasets where an expected row count is known.",
+      description:
+        "Compare the entries saved from each results sheet with the number we expected to find, when that number is known.",
       ctes: `datasets as (select ds.id,ds.provider,e.name,ds.expected_rows,ds.updated_at,count(x.id) observed,count(x.id) filter(where x.canonical_result_id is not null) linked from result_archive_datasets ds join d on d.id=ds.edition_id join e on e.id=d.event_id left join result_archive_entries x on x.dataset_id=ds.id group by ds.id,e.name)`,
       rows:
         f.mode === "records"
-          ? `select x.id::text key,coalesce(nullif(x.payload->>'name',''),'Source row '||x.source_key) label,ds.provider||' · '||ds.name detail,x.review_state status,'/admin/result-archive' href from result_archive_entries x join datasets ds on ds.id=x.dataset_id where ds.id::text=$2`
+          ? `select x.id::text key,coalesce(nullif(x.payload->>'name',''),'Collected entry '||x.source_key) label,ds.provider||' · '||ds.name detail,x.review_state status,'/admin/result-archive' href from result_archive_entries x join datasets ds on ds.id=x.dataset_id where ds.id::text=$2`
           : `select id::text key,provider||' · '||name label,id::text drill,expected_rows expected,observed,linked,case when expected_rows>0 then round(100.0*observed/expected_rows,1)::float8 end percent,updated_at::text checked from datasets`,
       columns:
         f.mode === "records"
           ? recordCols
           : [
-              col("label", "Dataset"),
-              col("expected", "Expected rows", true),
-              col("observed", "Observed rows", true),
-              col("linked", "Linked rows", true),
-              col("percent", "Observed %", true),
-              col("checked", "Last dataset update"),
+              col("label", "Results sheet"),
+              col("expected", "Entries expected", true),
+              col("observed", "Entries saved", true),
+              col("linked", "Entries matched to main results", true),
+              col("percent", "Expected entries saved (%)", true),
+              col("checked", "Last updated"),
             ],
       notes: [
-        "A blank expected count means completeness is unknown. Over 100% flags a denominator or source-row issue; it is not silently capped. Row coverage does not establish identity or source verification.",
+        "A blank expected total means we cannot tell whether the sheet is complete. More than 100% means the expected total or saved entries need checking. Collecting an entry does not confirm the athlete or verify the result.",
       ],
     };
   return {
     description:
-      "Known source pages and documents, grouped by website. Open a website to inspect its work items.",
+      "Pages and documents we have found on each website. Select See entries to find the individual pages and their progress.",
     ctes: `hosts as (select host from event_register_sources where host<>'' union select source_host from event_register_extraction_items where source_host<>''),
  progress as (select source_host,
  count(*) filter(where kind<>'unclassified' and state<>'excluded') known,
@@ -236,7 +248,7 @@ function sources(f: OperationInput): QuerySpec {
  from event_register_extraction_items group by source_host)`,
     rows:
       f.mode === "records"
-        ? `select item_key key,source_url label,kind||' · '||records||' records · '||result_rows||' result rows' detail,state status,'/admin/event-register' href from event_register_extraction_items where source_host=$2`
+        ? `select item_key key,source_url label,kind||' · '||records||' items · '||result_rows||' result entries' detail,state status,'/admin/event-register' href from event_register_extraction_items where source_host=$2`
         : `select host key,host label,host drill,coalesce(p.known,0) known,coalesce(p.extracted,0) extracted,coalesce(p.outstanding,0) outstanding,
  coalesce(p.failed,0) failed,coalesce(p.held,0) held,coalesce(p.records,0) records,coalesce(p.results,0) results,
  case when p.known>0 then round(100.0*p.extracted/p.known,1)::float8 end percent,
@@ -247,19 +259,19 @@ function sources(f: OperationInput): QuerySpec {
         ? recordCols
         : [
             col("label", "Website"),
-            col("known", "Known pages", true),
-            col("extracted", "Extracted", true),
-            col("outstanding", "Outstanding", true),
-            col("failed", "Failed", true),
-            col("held", "Held", true),
-            col("records", "Recorded items", true),
-            col("results", "Reported result rows", true),
-            col("percent", "Known pages %", true),
+            col("known", "Relevant pages found", true),
+            col("extracted", "Finished collecting", true),
+            col("outstanding", "Still to finish", true),
+            col("failed", "Could not collect", true),
+            col("held", "Paused for review", true),
+            col("records", "Items reported as saved", true),
+            col("results", "Result entries reported", true),
+            col("percent", "Found pages finished (%)", true),
             col("checked", "Last checked"),
           ],
     notes: [
-      "Percentages cover classified, discovered pages/documents only, excluding non-race items. They are not percentages of an entire website or archive.",
-      "Blank percentages mean no denominator is recorded. Raw record counters may overlap other sources. Use Imports and Datasets for their separate progress measures.",
+      "Progress covers relevant pages we have found and identified. It does not measure the whole website: there may be other pages we have not discovered.",
+      "A blank percentage means we do not have a known total to compare against. Saved item and result counts may include entries also collected elsewhere. Paused and failed pages can also be included in Still to finish.",
     ],
   };
 }
@@ -284,11 +296,11 @@ function queueReport(
       f.mode === "records"
         ? [...recordCols, col("since", "Recorded at")]
         : [
-            col("label", "Queue"),
-            col("count", "Records", true),
+            col("label", "Work to review"),
+            col("count", "Entries", true),
             col("older7", "Older than 7 days", true),
             col("older30", "Older than 30 days", true),
-            col("oldest", "Oldest record"),
+            col("oldest", "Oldest entry saved"),
           ],
   };
 }
@@ -296,24 +308,24 @@ function matching(f: OperationInput): QuerySpec {
   return queueReport(
     f,
     `
- select case when x.review_state='held' then 'Archive rows held' else 'Archive rows awaiting matching' end bucket,
- 'archive:'||x.id::text id,coalesce(nullif(x.payload->>'name',''),'Source row '||x.source_key) label,ds.provider detail,x.review_state status,x.created_at created,'/admin/result-archive' href
+ select case when x.review_state='held' then 'Collected results: paused for review' else 'Collected results: athlete still to be matched' end bucket,
+ 'archive:'||x.id::text id,coalesce(nullif(x.payload->>'name',''),'Collected entry '||x.source_key) label,ds.provider detail,x.review_state status,x.created_at created,'/admin/result-archive' href
  from result_archive_entries x join result_archive_datasets ds on ds.id=x.dataset_id join d on d.id=ds.edition_id where x.canonical_result_id is null
- union all select 'Linked source revisions awaiting review','revision:'||x.id::text,coalesce(x.payload->>'name',x.source_key),ds.provider,x.review_state,x.updated_at,'/admin/result-archive'
+ union all select 'Changed source entries: review needed','revision:'||x.id::text,coalesce(x.payload->>'name',x.source_key),ds.provider,x.review_state,x.updated_at,'/admin/result-archive'
  from result_archive_entries x join result_archive_datasets ds on ds.id=x.dataset_id join d on d.id=ds.edition_id where x.revision>x.applied_revision
- union all select 'Club candidates with possible matches','club:'||c.id::text,cl.name,'Candidate '||c.id::text,c.status,c.created_at,'/admin/club-scanner'
+ union all select 'Club findings: possible athlete matches','club:'||c.id::text,cl.name,'Suggested entry '||c.id::text,c.status,c.created_at,'/admin/club-scanner'
  from club_scan_candidates c join clubs cl on cl.id=c.club_id where c.status in ('proposed','held') and jsonb_array_length(c.matches)>0
- union all select 'Claims: '||c.status,'claim:'||c.id::text,a.display_name,'Result ownership request',c.status,c.submitted_at,'/admin/result-claims?claimId='||c.id::text
+ union all select 'Requests to claim results: '||${stateLabel("c.status")},'claim:'||c.id::text,a.display_name,'Request to claim a result',c.status,c.submitted_at,'/admin/result-claims?claimId='||c.id::text
  from result_claims c join a on a.id=c.athlete_id where c.status in ('pending','needs_info')
- union all select 'Conflicting active claims','conflict:'||c.id::text,a.display_name,'Competing ownership claims or recorded conflict',c.status,c.submitted_at,'/admin/result-claims?claimId='||c.id::text
+ union all select 'The same result claimed by different people or flagged as conflicting','conflict:'||c.id::text,a.display_name,'Competing ownership claims or recorded conflict',c.status,c.submitted_at,'/admin/result-claims?claimId='||c.id::text
  from result_claims c join a on a.id=c.athlete_id where c.status in ('pending','needs_info','approved') and
  (nullif(trim(c.conflict_reason),'') is not null or exists(select 1 from result_claims c2 where c2.claim_key=c.claim_key and c2.claimant_user_id<>c.claimant_user_id and c2.status in ('pending','needs_info','approved')))
- union all select 'Archive match requests','request:'||x.entry_id::text||':'||x.user_id,coalesce(en.payload->>'name',en.source_key),'Member match request',en.review_state,x.created_at,'/admin/result-archive'
+ union all select 'Member requests to match a collected result','request:'||x.entry_id::text||':'||x.user_id,coalesce(en.payload->>'name',en.source_key),'Member asking to match a result',en.review_state,x.created_at,'/admin/result-archive'
  from result_archive_match_requests x join result_archive_entries en on en.id=x.entry_id join result_archive_datasets ds on ds.id=en.dataset_id join d on d.id=ds.edition_id where en.canonical_result_id is null and not athrecs_is_test_user(x.user_id)
  `,
-    "Results and requests awaiting identity matching or review.",
+    "Collected results and athlete requests that need the right person identified or another check completed.",
     [
-      "Queue categories can overlap. A suggested match or shared name is not proof of identity. Age is measured from the recorded request or source observation.",
+      "One item may appear in more than one group. A shared name or suggested match does not prove who the athlete is. Dates show when the request or source entry was saved; changed source entries use their update date.",
     ],
   );
 }
@@ -321,22 +333,22 @@ function verification(f: OperationInput): QuerySpec {
   return queueReport(
     f,
     `
- select 'Catalogue: '||${verified("r.result_details->>'verificationStatus'", "r.result_source")} bucket,'r:'||r.id::text id,
+ select 'Main results: '||${verified("r.result_details->>'verificationStatus'", "r.result_source")} bucket,'r:'||r.id::text id,
  r.athlete_name||' — '||r.event_name label,concat_ws(' · ',r.event_date::text,r.sport,r.distance_code) detail,
  ${verified("r.result_details->>'verificationStatus'", "r.result_source")} status,r.stats_created_at created,${athleteLink("r.athlete_id")} href from r
- union all select 'Source history: '||${verified("p->>'verificationStatus'", "h.provider")},
+ union all select 'Imported histories: '||${verified("p->>'verificationStatus'", "h.provider")},
  'h:'||h.athlete_id::text||':'||h.provider||':'||h.external_id||':'||ordinality::text,a.display_name,
- h.provider||' · '||coalesce(p->>'meeting',p->>'event',p->>'discipline','Source performance'),
+ h.provider||' · '||coalesce(p->>'meeting',p->>'event',p->>'discipline','Imported result'),
  ${verified("p->>'verificationStatus'", "h.provider")},h.captured_at,${athleteLink("h.athlete_id")}
  from histories h join a on a.id=h.athlete_id cross join lateral jsonb_array_elements(h.performances) with ordinality x(p,ordinality)
  where coalesce(p->>'profileExcluded','false')<>'true' and coalesce(p->>'syntheticTest','false')<>'true'
- union all select 'Verification requests: '||v.status,'v:'||v.id::text,a.display_name,'Result verification request',v.status,v.created_at,${athleteLink("v.athlete_id")}
+ union all select 'Requests to check results: '||${stateLabel("v.status")},'v:'||v.id::text,a.display_name,'Request to check a result',v.status,v.created_at,${athleteLink("v.athlete_id")}
  from athlete_result_verification_requests v join a on a.id=v.athlete_id
  `,
-    "Recorded performance-verification labels and the athlete verification inbox.",
+    "The checking labels currently saved for results, followed by requests asking staff to check a result.",
     [
-      "Source checks, administrator verification and ownership approval are different measures. World Athletics policy reflects the existing official-record rule; it does not claim a new manual check.",
-      "Catalogue and source-history observations can overlap. Unverified includes absent explicit verification. Request rejection is a review outcome, not proof of an invalid performance. Age columns describe storage/request age, not verification age.",
+      "Checking a result against its source, approving it as staff, and confirming who owns a profile are separate checks. Accepted under World Athletics rule means the existing official-record rule applies; it does not mean someone has just checked it manually.",
+      "Main results and imported histories may contain the same performance. No check recorded includes results with no saved checking label. A rejected checking request does not prove a result is false. Age columns show when entries or requests were saved, not when results were verified.",
     ],
   );
 }
@@ -351,14 +363,19 @@ function gaps(f: OperationInput): QuerySpec {
  left join athlete_private_profiles private on private.user_id=owner.user_id`;
   const rows = `select 'Athletes: missing '||gap bucket,'a:'||p.id::text||':'||gap id,p.display_name label,'Recorded profile detail' detail,'Missing' status,null::timestamptz created,${athleteLink("p.id")} href
  from profile_gaps p cross join lateral (values ('gender',${known("p.gender")}='Unknown'),('nationality',p.nationality='Unknown'),('sport',not p.has_sport),('country',${known("p.country")}='Unknown'),('county',${known("p.county")}='Unknown')) missing(gap,absent) where absent
- union all select 'Events: missing '||gap,'e:'||e.id::text||':'||gap,e.name,'Catalogue event','Missing',e.created_at,'/admin/event-register'
+ union all select 'Events: missing '||gap,'e:'||e.id::text||':'||gap,e.name,'Saved event','Missing',e.created_at,'/admin/event-register'
  from e cross join lateral (values ('official website',trim(e.website)=''),('country',${known("e.country")}='Unknown'),('county',${known("e.county")}='Unknown'),('sport',${known("e.sport")}='Unknown'),
- ('dated edition',not exists(select 1 from d where d.event_id=e.id and d.event_date is not null)),
+ ('confirmed race date',not exists(select 1 from d where d.event_id=e.id and d.event_date is not null)),
  ('distance',not exists(select 1 from event_distances x where x.event_id=e.id and ${known("x.distance_code")}<>'Unknown') and not exists(select 1 from d where d.event_id=e.id and ${known("d.distance_code")}<>'Unknown'))) missing(gap,absent) where absent
- union all select 'Editions: date to be confirmed','d:'||d.id::text,e.name,coalesce(d.event_date::text,'No date')||' · '||d.distance_code,d.status,d.stats_created_at,'/admin/event-register' from d join e on e.id=d.event_id where d.status='TBC'`;
-  const report = queueReport(f, rows, "Missing details that can guide the next collection pass.", [
-    "Each record can appear in several gap categories. Nationality is never inferred from residence, club or race location. Empty fields and explicit Unknown values are treated as missing.",
-  ]);
+ union all select 'Races: date to be confirmed','d:'||d.id::text,e.name,coalesce(d.event_date::text,'No date')||' · '||d.distance_code,d.status,d.stats_created_at,'/admin/event-register' from d join e on e.id=d.event_id where d.status='TBC'`;
+  const report = queueReport(
+    f,
+    rows,
+    "Missing information to research and complete. Select See entries to find the affected athletes or events.",
+    [
+      "An athlete or event can appear in several groups if several details are missing. Nationality is not guessed from where someone lives, their club or race location. Blank and Unknown values both count as missing.",
+    ],
+  );
   report.ctes = `profile_gaps as (${p}),${report.ctes}`;
   return report;
 }
@@ -368,17 +385,17 @@ function duplicates(f: OperationInput): QuerySpec {
   const report = queueReport(
     f,
     `
- select 'Same-name athlete profiles to review' bucket,'a:'||a.id::text id,a.display_name label,concat_ws(' · ',a.gender,a.country,a.source_club_name) detail,'Possible match only' status,a.created_at created,${athleteLink("a.id")} href
+ select 'Athletes sharing a name: check before merging' bucket,'a:'||a.id::text id,a.display_name label,concat_ws(' · ',a.gender,a.country,a.source_club_name) detail,'Possible match only' status,a.created_at created,${athleteLink("a.id")} href
  from a join same_names n on n.name=lower(regexp_replace(trim(a.display_name),'[[:space:]]+',' ','g')) where a.parent_athlete_id is null
- union all select 'Conflicting assignments of a source result','r:'||r.id::text,r.athlete_name||' — '||r.event_name,'Bib '||r.bib,'Review source row',r.stats_created_at,${athleteLink("r.athlete_id")} from r join row_conflicts c on c.edition_id=r.edition_id and c.bib=trim(r.bib) and c.source=split_part(r.source_url,'#',1)
- union all select 'Fixture candidates flagged duplicate','f:'||id,event_name,event_date,status,created_at,'/admin/fixture-review' from fixture_candidates where status='duplicate'
- union all select 'Race collector duplicate findings','c:'||c.id::text,c.event_slug,c.reason,c.status,c.created_at,'/admin/race-collector' from race_collector_candidates c where c.status='duplicate' and not exists(select 1 from race_collector_duplicate_reviews rv where rv.candidate_id=c.id and rv.undone_at is null)
- union all select 'Club candidates flagged duplicate','cl:'||c.id::text,cl.name,'Candidate '||c.id::text,c.status,c.created_at,'/admin/club-scanner' from club_scan_candidates c join clubs cl on cl.id=c.club_id where c.status='duplicate'
+ union all select 'One source result linked to different athletes','r:'||r.id::text,r.athlete_name||' — '||r.event_name,'Bib '||r.bib,'Review source row',r.stats_created_at,${athleteLink("r.athlete_id")} from r join row_conflicts c on c.edition_id=r.edition_id and c.bib=trim(r.bib) and c.source=split_part(r.source_url,'#',1)
+ union all select 'Collected events flagged as duplicates','f:'||id,event_name,event_date,status,created_at,'/admin/fixture-review' from fixture_candidates where status='duplicate'
+ union all select 'Race searches flagged as duplicates','c:'||c.id::text,c.event_slug,c.reason,c.status,c.created_at,'/admin/race-collector' from race_collector_candidates c where c.status='duplicate' and not exists(select 1 from race_collector_duplicate_reviews rv where rv.candidate_id=c.id and rv.undone_at is null)
+ union all select 'Club findings flagged as duplicates','cl:'||c.id::text,cl.name,'Suggested entry '||c.id::text,c.status,c.created_at,'/admin/club-scanner' from club_scan_candidates c join clubs cl on cl.id=c.club_id where c.status='duplicate'
  `,
-    "Potential overlaps and recorded duplicate findings, ready for human review.",
+    "Profiles, results and collected items that may refer to the same thing. Check the evidence before merging or removing anything.",
     [
-      "Same names are review candidates, not confirmed duplicates; these figures never trigger an automatic merge. Already merged child profiles are excluded from the same-name check.",
-      "Result conflicts use the same edition, source URL and non-empty bib assigned to different athletes. Counts are affected records, not unique duplicate pairs. Import findings can describe records that were correctly prevented from publishing.",
+      "Athletes sharing a name may be different people. Nothing is merged automatically from this report. Profiles already merged into another profile are left out of the name check.",
+      "Result conflicts mean the same race date, distance, results-page link and bib number are linked to different athletes. We count affected entries: two profiles to compare count as two. Some duplicate findings were already stopped from being published.",
     ],
   );
   report.ctes = `${ctes},${report.ctes}`;
@@ -386,7 +403,8 @@ function duplicates(f: OperationInput): QuerySpec {
 }
 function clubs(f: OperationInput): QuerySpec {
   return {
-    description: "Current club affiliations, result coverage and representative applications.",
+    description:
+      "Athletes currently linked to each club, their saved results, and applications to manage a club page.",
     ctes: `members as (select club_id, id athlete_id from a where club_id is not null union select second_club_id,id from a where second_club_id is not null),
  rc as (select athlete_id,count(*) n from r group by 1),
  club_stats as (select c.id,c.slug,c.name,c.country,
@@ -399,29 +417,29 @@ function clubs(f: OperationInput): QuerySpec {
     rows:
       f.mode === "records"
         ? `select a.id::text key,a.display_name label,coalesce(rc.n,0) results,coalesce(h.n,0) observations,${athleteLink("a.id")} href from members m join a on a.id=m.athlete_id left join rc on rc.athlete_id=a.id left join hcounts h on h.athlete_id=a.id where m.club_id::text=$2`
-        : `select id::text key,name label,id::text drill,country,athletes,results,observations,empty,applications,case when represented then 'Approved representative' else 'No active representative' end representative,missing from club_stats`,
+        : `select id::text key,name label,id::text drill,country,athletes,results,observations,empty,applications,case when represented then 'Approved club manager' else 'No approved club manager' end representative,missing from club_stats`,
     columns:
       f.mode === "records"
         ? [
             col("label", "Athlete"),
-            col("results", "Catalogue results", true),
-            col("observations", "Source-history rows", true),
+            col("results", "Main results saved", true),
+            col("observations", "Results in imported histories", true),
           ]
         : [
             col("label", "Club"),
             col("country", "Country"),
             col("athletes", "Athletes", true),
-            col("results", "Catalogue results", true),
-            col("observations", "History rows", true),
+            col("results", "Main results saved", true),
+            col("observations", "Results in imported histories", true),
             col("empty", "Athletes without results", true),
-            col("applications", "Open applications", true),
-            col("representative", "Management"),
+            col("applications", "Applications waiting", true),
+            col("representative", "Who can manage the page"),
             col("missing", "Missing information"),
           ],
     metrics: `jsonb_build_array(jsonb_build_object('label','Clubs','href','/admin/club-scanner','value',(select count(*) from club_stats)),jsonb_build_object('label','Clubs missing information','href','/admin/club-scanner','value',(select count(*) from club_stats where missing<>'None')),jsonb_build_object('label','Applications awaiting review','href','/admin/club-registrations','value',(select count(*) from club_registration_applications where status in ('pending','needs_changes'))))`,
     notes: [
-      "Results belong to athletes currently linked through their first or second club; this does not claim that every result was achieved for that club. Members can appear in several clubs. Catalogue and source-history rows can overlap.",
-      "Applications for a new club may not yet have a club ID and are included in the application total. Use Club registrations to review them.",
+      "Results belong to athletes linked through their first or second club. Some results may have been achieved before they joined that club. Athletes can appear under more than one club. Main results and imported histories may include the same performances.",
+      "The application total also includes requests for new clubs that do not have a club page yet. Use Club applications to review them.",
     ],
   };
 }
@@ -429,29 +447,29 @@ function backlog(f: OperationInput): QuerySpec {
   return queueReport(
     f,
     `
- select 'Fixture candidates: '||status bucket,'fixture:'||id id,event_name label,event_date detail,status,created_at created,'/admin/fixture-review' href
+ select 'Events found: '||${stateLabel("status")} bucket,'fixture:'||id id,event_name label,event_date detail,status,created_at created,'/admin/fixture-review' href
  from fixture_candidates where status in ('staged','eligible','blocked','failed') and review_status<>'rejected'
- union all select 'Race collector: '||status,'race:'||id::text,event_slug,reason,status,created_at,'/admin/race-collector' from race_collector_candidates where status in ('review','held')
- union all select 'Club candidates: '||c.status,'club:'||c.id::text,cl.name,'Candidate '||c.id::text,c.status,c.created_at,'/admin/club-scanner' from club_scan_candidates c join clubs cl on cl.id=c.club_id where c.status in ('proposed','held','approved')
- union all select 'Result imports: '||status,'import:'||id,source_name,concat(rows_imported,' rows added; ',error_count,' errors'),status,created_at,'/admin/result-archive' from result_ingestion_runs where status in ('queued','processing','completed_with_errors','failed')
- union all select 'Club registrations: '||app.status,'application:'||app.id::text,coalesce(c.name,'New club application'),'Representative application',app.status,coalesce(app.submitted_at,app.created_at),'/admin/club-registrations' from club_registration_applications app left join clubs c on c.id=app.club_id where app.status in ('pending','needs_changes')
+ union all select 'Race searches: '||${stateLabel("status")},'race:'||id::text,event_slug,reason,status,created_at,'/admin/race-collector' from race_collector_candidates where status in ('review','held')
+ union all select 'Club findings: '||${stateLabel("c.status")},'club:'||c.id::text,cl.name,'Suggested entry '||c.id::text,c.status,c.created_at,'/admin/club-scanner' from club_scan_candidates c join clubs cl on cl.id=c.club_id where c.status in ('proposed','held','approved')
+ union all select 'Result collection: '||${stateLabel("status")},'import:'||id,source_name,concat(rows_imported,' entries added; ',error_count,' errors'),status,created_at,'/admin/result-archive' from result_ingestion_runs where status in ('queued','processing','completed_with_errors','failed')
+ union all select 'Club applications: '||${stateLabel("app.status")},'application:'||app.id::text,coalesce(c.name,'New club application'),'Application to manage a club page',app.status,coalesce(app.submitted_at,app.created_at),'/admin/club-registrations' from club_registration_applications app left join clubs c on c.id=app.club_id where app.status in ('pending','needs_changes')
  `,
-    "Review, held and failed work that needs a decision before collection or publication can progress.",
+    "Events, club findings, result collection attempts and club applications waiting for checking, a fix or a decision.",
     [
-      "Private profiles and unpublished histories are not automatically treated as publication backlog. Visibility changes still require the existing review process.",
-      "Queues can overlap other reports. Age starts at the original record/submission date, not the most recent retry. Rejected fixture candidates are excluded.",
+      "Private profiles and unpublished histories are not automatically included as waiting work. This report does not make anything public.",
+      "The same work can also appear in other reports. Age starts when the item or application was first saved, not when it was last retried. Rejected event suggestions are left out.",
     ],
   );
 }
 function activity(f: OperationInput): QuerySpec {
   return {
     description:
-      "Recorded registrations, profile claims and athletes adding results in the selected UK date window.",
+      "Count accounts that took each action in the chosen period. Each account counts once per action, using UK dates.",
     ctes: `stages as (
  select 'New registrations' bucket,u.id,u.name label,u."createdAt" happened,'Registered account' detail from "user" u where not athrecs_is_test_user(u.id) and u."createdAt">=${start}
- union all select 'Accounts claiming a profile',u.id,u.name,min(l.linked_at),'Currently active ownership link' from athlete_account_links l join a on a.id=l.athlete_id join "user" u on u.id=l.user_id where l.status='active' and l.linked_at>=${start} and not athrecs_is_test_user(u.id) group by u.id
- union all select 'Athletes adding results',u.id,u.name,min(c.created_at),'At least one added result in a profile confirmation' from athlete_profile_result_confirmations c join a on a.id=c.athlete_id join "user" u on u.id=c.user_id where c.added_count>0 and c.created_at>=${start} and not athrecs_is_test_user(u.id) group by u.id
- union all select 'Accounts signing in',u.id,u.name,l.last_sign_in_at,'Includes signup sessions' from athlete_login_activity l join "user" u on u.id=l.user_id where l.last_sign_in_at>=${start} and not athrecs_is_test_user(u.id)
+ union all select 'Accounts claiming a profile',u.id,u.name,min(l.linked_at),'Account currently linked to a profile' from athlete_account_links l join a on a.id=l.athlete_id join "user" u on u.id=l.user_id where l.status='active' and l.linked_at>=${start} and not athrecs_is_test_user(u.id) group by u.id
+ union all select 'Athletes adding results',u.id,u.name,min(c.created_at),'Added at least one result when confirming a profile' from athlete_profile_result_confirmations c join a on a.id=c.athlete_id join "user" u on u.id=c.user_id where c.added_count>0 and c.created_at>=${start} and not athrecs_is_test_user(u.id) group by u.id
+ union all select 'Accounts signing in',u.id,u.name,l.last_sign_in_at,'Includes people who signed in when joining' from athlete_login_activity l join "user" u on u.id=l.user_id where l.last_sign_in_at>=${start} and not athrecs_is_test_user(u.id)
  )`,
     rows:
       f.mode === "records"
@@ -461,10 +479,10 @@ function activity(f: OperationInput): QuerySpec {
     columns:
       f.mode === "records"
         ? recordCols
-        : [col("label", "Activity"), col("count", "Distinct accounts", true)],
+        : [col("label", "Activity"), col("count", "Accounts (each counted once)", true)],
     notes: [
-      "These are activity counts, not a linked visitor-to-registration conversion funnel. Accounts can appear in several stages and may have registered before the selected period. Fictional test accounts are excluded; staff accounts are included.",
-      "Athletes adding results uses saved profile confirmations with added_count greater than zero. Other import and staff-entry routes are not claimed as athlete activity. Visits and search performance are available in Website traffic & Google with their own reporting window.",
+      "One account can appear in several groups. Someone signing in may have registered before this period. Test accounts are left out; staff accounts are included. These totals do not show which visitors became members.",
+      "Athletes adding results counts members who added at least one result through profile confirmation. Results collected automatically or added by staff are not counted as member activity here. Website visit figures use the dates shown above them.",
     ],
   };
 }
@@ -510,7 +528,7 @@ export async function readCollectionOperations(sql: Sql, input: unknown): Promis
       ...(spec.notes ?? []),
       ...(f.section === "growth"
         ? [
-            `Edition/result collection dates and change history are tracked from ${new Date(row.tracking).toLocaleString("en-GB", { timeZone: "Europe/London" })} (UK time).`,
+            `Tracking when race dates and results were added or edited began on ${new Date(row.tracking).toLocaleString("en-GB", { timeZone: "Europe/London" })} (UK time).`,
           ]
         : []),
     ],

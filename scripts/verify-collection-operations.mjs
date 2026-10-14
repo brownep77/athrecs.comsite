@@ -54,17 +54,17 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
     assert(Number.isFinite(report.total));
   }
   const initial = await read({ section: "results" });
-  assert.equal(initial.metrics.find((x) => x.label === "Catalogue results").value, 2);
+  assert.equal(initial.metrics.find((x) => x.label === "Main results saved").value, 2);
   assert.equal(
     initial.rows.reduce((n, x) => n + x.count, 0),
     2,
   );
   assert.equal(
-    (await read({ section: "coverage" })).rows.find((r) => r.key === "No recorded results").count,
+    (await read({ section: "coverage" })).rows.find((r) => r.key === "No saved results").count,
     2,
   );
   assert.equal(
-    (await read({ section: "coverage" })).rows.find((r) => r.key === "Source-history only").count,
+    (await read({ section: "coverage" })).rows.find((r) => r.key === "Imported history only").count,
     1,
   );
   assert.equal((await read({ section: "results", q: "' OR 1=1 --" })).total, 0);
@@ -155,17 +155,34 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
     2,
   );
   const matching = await read({ section: "matching" });
-  assert.equal(matching.rows.find((r) => r.key === "Archive rows awaiting matching").count, 1);
-  assert.equal(matching.rows.find((r) => r.key === "Conflicting active claims").count, 2);
+  assert.equal(
+    matching.rows.find((r) => r.key === "Collected results: athlete still to be matched").count,
+    1,
+  );
+  assert.equal(
+    matching.rows.find(
+      (r) => r.key === "The same result claimed by different people or flagged as conflicting",
+    ).count,
+    2,
+  );
   const verified = await read({ section: "verification" });
-  assert.equal(verified.rows.find((r) => r.key === "Catalogue: Source checked").count, 1);
-  assert.equal(verified.rows.find((r) => r.key === "Verification requests: pending").count, 1);
+  assert.equal(
+    verified.rows.find((r) => r.key === "Main results: Checked against source").count,
+    1,
+  );
+  assert.equal(
+    verified.rows.find((r) => r.key === "Requests to check results: Waiting for review").count,
+    1,
+  );
   const missing = await read({ section: "gaps" });
   assert.equal(missing.rows.find((r) => r.key === "Athletes: missing nationality").count, 1);
   const dup = await read({ section: "duplicates" });
-  assert.equal(dup.rows.find((r) => r.key === "Same-name athlete profiles to review").count, 2);
   assert.equal(
-    dup.rows.find((r) => r.key === "Conflicting assignments of a source result").count,
+    dup.rows.find((r) => r.key === "Athletes sharing a name: check before merging").count,
+    2,
+  );
+  assert.equal(
+    dup.rows.find((r) => r.key === "One source result linked to different athletes").count,
     2,
   );
   const clubs = await read({ section: "clubs" });
@@ -174,9 +191,12 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
   assert.equal(clubs.rows[0].applications, 1);
   assert.equal(clubs.rows[0].missing, "Website and biography");
   const backlog = await read({ section: "backlog" });
-  assert.equal(backlog.rows.find((r) => r.key === "Fixture candidates: eligible").older30, 1);
+  assert.equal(
+    backlog.rows.find((r) => r.key === "Events found: Passed initial checks").older30,
+    1,
+  );
   assert(!backlog.rows.some((r) => r.key.includes("duplicate")));
-  assert.equal(backlog.rows.find((r) => r.key === "Club candidates: approved").count, 1);
+  assert.equal(backlog.rows.find((r) => r.key === "Club findings: Approved").count, 1);
   const active = await read({ section: "activity" });
   assert.equal(active.rows.find((r) => r.key === "Athletes adding results").count, 1);
   assert.equal(active.rows.find((r) => r.key === "Accounts claiming a profile").count, 1);
@@ -200,7 +220,7 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
   );
   const unknownDates = await read({ section: "growth", mode: "records", key: "undated" });
   assert.equal(unknownDates.total, 1);
-  assert.equal(unknownDates.rows[0].detail, "Collection date unknown");
+  assert.equal(unknownDates.rows[0].detail, "Date first saved is unknown");
   const dayRecords = await read({
     section: "growth",
     group: "daily",
@@ -244,18 +264,18 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
     });
     const table = page.getByRole("table", { name: "Operations report table", exact: true });
     await table.getByRole("cell", { name: "Running", exact: true }).waitFor();
-    await page.getByRole("button", { name: "View records: Running", exact: true }).click();
+    await page.getByRole("button", { name: "See entries: Running", exact: true }).click();
     await page.getByRole("button", { name: "Back to report", exact: true }).waitFor();
-    await table.getByRole("link", { name: "Open review" }).first().waitFor();
+    await table.getByRole("link", { name: "Open entry" }).first().waitFor();
     await page.getByRole("button", { name: "Back to report", exact: true }).click();
-    await page.getByLabel("Operations report", { exact: true }).selectOption("sources");
+    await page.getByLabel("What would you like to see?", { exact: true }).selectOption("sources");
     await table.getByRole("cell", { name: "example.test", exact: true }).waitFor();
-    await page.getByLabel("Report breakdown", { exact: true }).selectOption("datasets");
+    await page.getByLabel("Show figures by", { exact: true }).selectOption("datasets");
     await table.getByRole("cell", { name: "100", exact: true }).waitFor();
     const download = page.waitForEvent("download");
-    await page.getByRole("button", { name: "CSV (this page)", exact: true }).click();
-    assert((await readFile(await (await download).path(), "utf8")).includes('"Expected rows"'));
-    await page.getByLabel("Operations report", { exact: true }).selectOption("clubs");
+    await page.getByRole("button", { name: "Download this page for Excel", exact: true }).click();
+    assert((await readFile(await (await download).path(), "utf8")).includes('"Entries expected"'));
+    await page.getByLabel("What would you like to see?", { exact: true }).selectOption("clubs");
     await page.getByRole("button", { name: "Next page", exact: true }).click();
     await page.getByText("Page 2", { exact: true }).waitFor();
     await page.getByLabel("Search this report", { exact: true }).fill("Synthetic Stats Club");
@@ -263,12 +283,14 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
     await table.getByRole("cell", { name: "Synthetic Stats Club", exact: true }).waitFor();
     assert.equal(await table.locator("tbody tr").count(), 1);
     await page.getByRole("button", { name: "Clear search", exact: true }).click();
-    await page.getByLabel("Operations report", { exact: true }).selectOption("backlog");
-    await table.getByRole("cell", { name: "Fixture candidates: eligible", exact: true }).waitFor();
+    await page.getByLabel("What would you like to see?", { exact: true }).selectOption("backlog");
+    await table
+      .getByRole("cell", { name: "Events found: Passed initial checks", exact: true })
+      .waitFor();
     await page.screenshot({ path: "artifacts/collection-operations-desktop.png", fullPage: true });
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.getByLabel("Operations report", { exact: true }).selectOption("growth");
-    await page.getByLabel("Report breakdown", { exact: true }).selectOption("daily");
+    await page.getByLabel("What would you like to see?", { exact: true }).selectOption("growth");
+    await page.getByLabel("Show figures by", { exact: true }).selectOption("daily");
     await page.getByLabel("Reporting period", { exact: true }).selectOption("7");
     await page.getByRole("cell", { name: "1", exact: true }).first().waitFor();
     assert(
@@ -276,9 +298,9 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
       "Operations mobile layout does not overflow",
     );
     await page.screenshot({ path: "artifacts/collection-operations-mobile.png", fullPage: true });
-    await page.getByLabel("Operations report", { exact: true }).selectOption("activity");
+    await page.getByLabel("What would you like to see?", { exact: true }).selectOption("activity");
     await page
-      .getByRole("region", { name: "Collection operations" })
+      .getByRole("region", { name: "Collection progress and work to do" })
       .getByText("Visits and account actions are separate totals.", { exact: false })
       .waitFor();
     await table.getByRole("cell", { name: "Athletes adding results", exact: true }).waitFor();
@@ -289,8 +311,11 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
     await page.route("**/_serverFn/**", (route) =>
       route.fulfill({ status: 503, body: "Unavailable" }),
     );
-    await page.getByLabel("Operations report", { exact: true }).selectOption("matching");
-    await page.getByRole("alert").filter({ hasText: "Unavailable does not mean zero" }).waitFor();
+    await page.getByLabel("What would you like to see?", { exact: true }).selectOption("matching");
+    await page
+      .getByRole("alert")
+      .filter({ hasText: "Figures are unavailable. This does not mean there are no entries" })
+      .waitFor();
     assert.deepEqual(errors, []);
     await page.close();
     console.log(

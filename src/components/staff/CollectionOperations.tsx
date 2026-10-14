@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { getCollectionOperations } from "@/lib/collection-stats/operations-api";
 import {
   operationInput,
+  operationHelp,
   operationPageSize,
   operationSections,
   type OperationInput,
@@ -14,6 +15,43 @@ import { getVercelStats } from "@/lib/web-stats/api";
 import { statsCsv } from "@/lib/collection-stats/core";
 
 const number = (n: number) => n.toLocaleString("en-GB", { maximumFractionDigits: 1 });
+const statusLabels: Record<string, string> = {
+  pending: "Waiting for review",
+  needs_info: "More information needed",
+  needs_changes: "Changes requested",
+  held: "Paused for review",
+  queued: "Waiting to start",
+  processing: "Collection in progress",
+  completed_with_errors: "Finished with some errors",
+  failed: "Could not complete",
+  staged: "Saved for review",
+  eligible: "Passed initial checks",
+  blocked: "An issue needs resolving",
+  review: "Needs review",
+  proposed: "Suggested for review",
+  approved: "Approved",
+  rejected: "Not approved",
+  duplicate: "Flagged as a duplicate",
+  extracted: "Finished collecting",
+  partial: "Partly collected",
+  excluded: "Left out",
+  linked: "Matched to a main result",
+  unlinked: "Not matched yet",
+  unmatched: "Not matched yet",
+  source_verified: "Checked against source",
+  verified_by_administrator: "Checked by staff",
+  unverified: "No check recorded",
+  TBC: "Date to be confirmed",
+  FIN: "Finished",
+  DNF: "Did not finish",
+  DNS: "Did not start",
+  DQ: "Disqualified",
+  DSQ: "Disqualified",
+  events: "Events",
+  editions: "Race dates and distances",
+  athletes: "Athlete profiles",
+  results: "Results",
+};
 function displayCell(value: string | number | null | undefined, key: string): string {
   if (value == null) return "—";
   if (typeof value === "number") return number(value);
@@ -29,18 +67,19 @@ function displayCell(value: string | number | null | undefined, key: string): st
         timeStyle: "short",
       });
   }
-  return ["label", "status"].includes(key) ? value.replaceAll("_", " ") : value;
+  if (key === "status") return statusLabels[value] ?? value.replaceAll("_", " ");
+  return key === "label" ? value.replaceAll("_", " ") : value;
 }
 
 const workflows: Partial<Record<OperationSection, { label: string; href: string }[]>> = {
   results: [{ label: "Collected results", href: "/admin/result-archive" }],
   sources: [
-    { label: "Source register", href: "/admin/event-register" },
-    { label: "Import runs", href: "/admin/result-archive" },
+    { label: "Websites and pages to collect from", href: "/admin/event-register" },
+    { label: "Result collection attempts", href: "/admin/result-archive" },
   ],
   matching: [
-    { label: "Review claims", href: "/admin/result-claims" },
-    { label: "Match archive rows", href: "/admin/result-archive" },
+    { label: "Review requests to claim results", href: "/admin/result-claims" },
+    { label: "Match collected results to athletes", href: "/admin/result-archive" },
   ],
   verification: [{ label: "Athlete review tools", href: "/admin/athlete-tools" }],
   gaps: [
@@ -49,12 +88,12 @@ const workflows: Partial<Record<OperationSection, { label: string; href: string 
   ],
   duplicates: [{ label: "Race collector", href: "/admin/race-collector" }],
   clubs: [
-    { label: "Club registrations", href: "/admin/club-registrations" },
-    { label: "Club scanner", href: "/admin/club-scanner" },
+    { label: "Club applications", href: "/admin/club-registrations" },
+    { label: "Find club athletes and results", href: "/admin/club-scanner" },
   ],
   backlog: [
-    { label: "Fixture review", href: "/admin/fixture-review" },
-    { label: "Club review", href: "/admin/club-registrations" },
+    { label: "Review collected events", href: "/admin/fixture-review" },
+    { label: "Review club applications", href: "/admin/club-registrations" },
   ],
   activity: [
     { label: "Website traffic & Google", href: "/admin/collection-stats?section=website" },
@@ -81,6 +120,7 @@ export function CollectionOperations() {
     retry: false,
   });
   const data = report.data;
+  const help = operationHelp[filters.section];
   function changeSection(section: OperationSection) {
     setSearch("");
     setFilters(
@@ -99,7 +139,11 @@ export function CollectionOperations() {
     if (!data) return;
     const content = statsCsv([
       data.columns.map((c) => c.label),
-      ...data.rows.map((r) => data.columns.map((c) => r[c.key] ?? null)),
+      ...data.rows.map((r) =>
+        data.columns.map((c) =>
+          typeof r[c.key] === "string" ? displayCell(r[c.key], c.key) : (r[c.key] ?? null),
+        ),
+      ),
     ]);
     const url = URL.createObjectURL(new Blob([content], { type: "text/csv;charset=utf-8" }));
     const anchor = document.createElement("a");
@@ -118,25 +162,27 @@ export function CollectionOperations() {
         ]
       : filters.section === "sources"
         ? [
-            ["inventory", "Known source pages"],
-            ["imports", "Import runs"],
-            ["datasets", "Result datasets"],
+            ["inventory", "Pages we have found"],
+            ["imports", "Attempts to collect results"],
+            ["datasets", "Saved results sheets"],
           ]
         : filters.section === "growth"
           ? [
-              ["sport", "Record types"],
-              ["daily", "Daily trend"],
+              ["sport", "Type of entry"],
+              ["daily", "Day by day"],
             ]
           : [];
   return (
-    <section className="space-y-5" aria-label="Collection operations">
+    <section className="space-y-5" aria-label="Collection progress and work to do">
       <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-4">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h2 className="font-display text-2xl font-semibold">Collection operations</h2>
+            <h2 className="font-display text-2xl font-semibold">
+              Collection progress and work to do
+            </h2>
             <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600">
-              See where the catalogue is growing and where work is waiting. Open any table group to
-              inspect its records.
+              See what we have saved, what needs checking and what is still waiting. Choose a
+              question below. Each report explains its figures and where to go next.
             </p>
           </div>
           <Button
@@ -148,15 +194,15 @@ export function CollectionOperations() {
             }}
           >
             <RefreshCw className="size-4" aria-hidden="true" />
-            Refresh report
+            Update figures
           </Button>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <label className="text-sm font-medium">
-            Operations report
+            What would you like to see?
             <select
               className={control}
-              aria-label="Operations report"
+              aria-label="What would you like to see?"
               value={filters.section}
               onChange={(e) => changeSection(e.target.value as OperationSection)}
             >
@@ -169,10 +215,10 @@ export function CollectionOperations() {
           </label>
           {groups.length > 0 ? (
             <label className="text-sm font-medium">
-              Report breakdown
+              Show figures by
               <select
                 className={control}
-                aria-label="Report breakdown"
+                aria-label="Show figures by"
                 value={filters.group}
                 onChange={(e) => {
                   setSearch("");
@@ -215,6 +261,37 @@ export function CollectionOperations() {
               </select>
             </label>
           ) : null}
+        </div>
+        <details className="rounded-lg border border-slate-200 p-3">
+          <summary className="cursor-pointer font-medium text-cyan-900">
+            See all 11 reports and what they mean
+          </summary>
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+            {Object.entries(operationSections).map(([value, label]) => (
+              <li key={value}>
+                <button
+                  type="button"
+                  className="text-left font-medium text-cyan-800 underline underline-offset-4"
+                  onClick={() => changeSection(value as OperationSection)}
+                >
+                  {label}
+                </button>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  {operationHelp[value as OperationSection].summary}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </details>
+        <div
+          className="space-y-2 rounded-lg bg-cyan-50 p-4 text-sm leading-6"
+          aria-label="About this report"
+        >
+          <p className="font-medium text-slate-900">{help.summary}</p>
+          <p className="text-slate-700">{help.example}</p>
+          <p className="text-slate-700">
+            <strong>What you can do:</strong> {help.action}
+          </p>
         </div>
         <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm" aria-label="Related staff tools">
           {(workflows[filters.section] ?? []).map((link) => (
@@ -271,24 +348,26 @@ export function CollectionOperations() {
             Open website reporting and connections
           </a>
           <p className="text-xs text-slate-600">
-            Visits and account actions are separate totals. A visitor-to-registration conversion
-            rate cannot be established from these records.
+            Visits and account actions are separate totals. One person may appear in several groups.
+            These figures do not tell us what percentage of visitors signed up.
           </p>
         </div>
       ) : null}
       {report.isPending ? (
         <p role="status" className="rounded-xl border bg-white p-5">
-          Loading operations report…
+          Loading figures…
         </p>
       ) : null}
       {report.isError ? (
         <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-5 text-red-900">
           <p>
             This report could not be refreshed.{" "}
-            {data ? "The last successful snapshot is shown." : "Unavailable does not mean zero."}
+            {data
+              ? "The last figures we successfully loaded are shown."
+              : "Figures are unavailable. This does not mean there are no entries."}
           </p>
           <Button variant="secondary" className="mt-3" onClick={() => void report.refetch()}>
-            Retry operations report
+            Try loading the figures again
           </Button>
         </div>
       ) : null}
@@ -306,7 +385,7 @@ export function CollectionOperations() {
                     {metric.value == null ? "Not recorded" : number(metric.value)}
                   </p>
                   {metric.detail ? (
-                    <p className="text-xs leading-5 text-slate-600">{metric.detail}</p>
+                    <p className="text-sm leading-6 text-slate-600">{metric.detail}</p>
                   ) : null}
                   {metric.drill ? (
                     <button
@@ -322,14 +401,14 @@ export function CollectionOperations() {
                         }));
                       }}
                     >
-                      View records
+                      See entries
                     </button>
                   ) : metric.href ? (
                     <a
                       className="mt-2 inline-block text-sm text-cyan-800 underline"
                       href={metric.href}
                     >
-                      Open records
+                      Open related entries
                     </a>
                   ) : null}
                 </div>
@@ -340,7 +419,7 @@ export function CollectionOperations() {
             <div>
               <h3 className="font-display text-xl font-semibold">
                 {data.title}
-                {filters.mode === "records" ? " — records" : ""}
+                {filters.mode === "records" ? " — individual entries" : ""}
               </h3>
               <p className="mt-1 text-sm leading-6 text-slate-600">{data.description}</p>
             </div>
@@ -350,7 +429,9 @@ export function CollectionOperations() {
                   <ArrowLeft className="size-4" aria-hidden="true" />
                   Back to report
                 </Button>
-                <p className="break-all text-sm text-slate-600">Selection: {filters.key}</p>
+                <p className="text-sm text-slate-600">
+                  Individual entries in the group you selected.
+                </p>
               </div>
             ) : null}
             <div className="flex flex-wrap items-end justify-between gap-3">
@@ -389,15 +470,15 @@ export function CollectionOperations() {
               </form>
               <Button variant="secondary" disabled={!data.rows.length} onClick={download}>
                 <Download className="size-4" aria-hidden="true" />
-                CSV (this page)
+                Download this page for Excel
               </Button>
             </div>
             <p className="text-xs text-slate-500">
-              {number(data.total)} {filters.mode === "records" ? "records" : "rows"} ·{" "}
+              {number(data.total)} {filters.mode === "records" ? "entries" : "groups"} ·{" "}
               {data.total
                 ? `${number(filters.page * operationPageSize + 1)}–${number(Math.min((filters.page + 1) * operationPageSize, data.total))}`
                 : "0"}{" "}
-              shown · Snapshot{" "}
+              shown · Figures last loaded{" "}
               {new Date(data.generatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" })}{" "}
               (UK time)
             </p>
@@ -440,7 +521,7 @@ export function CollectionOperations() {
                           {row.drill ? (
                             <button
                               className="font-medium text-cyan-800 underline underline-offset-4 whitespace-nowrap"
-                              aria-label={`View records: ${row.label}`}
+                              aria-label={`See entries: ${row.label}`}
                               onClick={() => {
                                 setSearch("");
                                 setFilters((f) => ({
@@ -452,14 +533,14 @@ export function CollectionOperations() {
                                 }));
                               }}
                             >
-                              View records
+                              See entries
                             </button>
                           ) : row.href ? (
                             <a
                               className="font-medium text-cyan-800 underline underline-offset-4 whitespace-nowrap"
                               href={row.href}
                             >
-                              Open review
+                              Open entry
                             </a>
                           ) : (
                             "—"
@@ -470,7 +551,7 @@ export function CollectionOperations() {
                   ) : (
                     <tr>
                       <td colSpan={data.columns.length + 1} className="p-5 text-slate-600">
-                        No records match this report.
+                        No entries match this report or search.
                       </td>
                     </tr>
                   )}
@@ -498,7 +579,8 @@ export function CollectionOperations() {
                 </Button>
               </div>
             ) : null}
-            <div className="space-y-2 border-t pt-3 text-xs leading-5 text-slate-600">
+            <div className="space-y-2 border-t pt-3 text-sm leading-6 text-slate-600">
+              <p className="font-medium text-slate-900">How these figures are counted</p>
               {data.notes.map((note) => (
                 <p key={note}>{note}</p>
               ))}
