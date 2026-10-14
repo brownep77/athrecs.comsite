@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { staffMiddleware } from "../auth/staff-middleware";
 import { scopeSchema, reviewSchema, filterSchema } from "./core";
+import { saveCollectionSchema } from "./collection";
 const ids = z.object({ ids: z.array(z.string().uuid()).min(1).max(10) });
 export const getClubScans = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
@@ -51,3 +52,23 @@ export const getClubReviewHistory = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .validator((v: unknown) => z.object({ id: z.string().uuid() }).parse(v))
   .handler(async ({ data }) => (await import("./service.server")).reviewHistory(data.id));
+export const getClubCollections = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .handler(async () => (await import("./collection.server")).collectionDashboard());
+export const saveClubCollection = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((value: unknown) => saveCollectionSchema.parse(value))
+  .handler(async ({ data, context }) =>
+    (await import("./collection.server")).savePlan(data, context.staffEmail),
+  );
+export const setupClubPilot = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .handler(async ({ context }) =>
+    (await import("./collection.server")).setupPilot(context.staffEmail),
+  );
+export const checkClubCollection = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((value: unknown) => z.object({ clubId: z.number().int().positive() }).parse(value))
+  .handler(async ({ data, context }) =>
+    (await import("./collection.server")).checkNow(data.clubId, context.staffEmail),
+  );

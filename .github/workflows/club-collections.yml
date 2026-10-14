@@ -1,0 +1,39 @@
+name: Club collections
+on:
+  pull_request:
+    paths:
+      - "src/lib/club-scanner/**"
+      - "src/components/admin/club-*"
+      - "src/routes/api/club-scanner-worker.ts"
+      - "migrations/*club_collection*"
+      - "scripts/*club-collection*"
+      - "scripts/preview-club-scanner.mjs"
+      - ".github/workflows/club-collections.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: club-collections-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  collections:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run verify:club-scanner
+      - run: node --experimental-strip-types scripts/preview-club-scanner.mjs --check-render
+      - run: npx playwright install chromium --with-deps
+      - run: node scripts/verify-club-collections-browser.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: club-collection-browser-evidence
+          path: artifacts/club-collection-*.png
+          if-no-files-found: warn
