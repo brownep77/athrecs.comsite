@@ -43,7 +43,7 @@ export async function excludeOwnedPerformance({data}){window.calls.push({kind:'h
 writeFileSync(resolve(root,'router.js'),'export const createFileRoute=()=>options=>({options});');
 writeFileSync(resolve(root,'auth.js'),'export const openAthleteAuth=()=>{};');
 writeFileSync(resolve(root,'user.js'),"export const useCurrentUserState=()=>({user:{id:'synthetic-recipient'},isPending:false});");
-writeFileSync(resolve(root,'scope.js'),'export const IS_ATHRECS_SITE=true;');
+writeFileSync(resolve(root,'scope.js'),'export const IS_ATHRECS_SITE=!location.search.includes("runrecs=1");');
 writeFileSync(resolve(root,'style.css'),`@import "${resolve('src/styles.css')}";\n@source "${resolve('src')}";`);
 writeFileSync(resolve(root,'main.tsx'),`import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{AthleteWorkspace}from'/@fs/${resolve('src/components/athletes/AthleteWorkspace.tsx')}';import{Route}from'/@fs/${resolve('src/routes/review-results.tsx')}';import'./style.css';const Review=Route.options.component;const client=new QueryClient({defaultOptions:{queries:{retry:false}}});createRoot(document.getElementById('root')!).render(<QueryClientProvider client={client}><div style={{maxWidth:1280,margin:'auto',padding:16}}><p>ISOLATED SYNTHETIC TEST — NO LIVE DATA</p>{location.search.includes('review')?<Review/>:<AthleteWorkspace staff={!location.search.includes('member')} initialAthleteId={7}/>}</div></QueryClientProvider>);`);
 writeFileSync(resolve(root,'index.html'),'<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
@@ -126,6 +126,10 @@ try{
   assert.equal(await page.evaluate(()=>window.calls.filter(c=>c.kind==='history-exclude').length),2);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   await page.screenshot({path:'artifacts/workspace-history-mobile.png',fullPage:true});
+  await page.goto('http://127.0.0.1:8102/?member=1&runrecs=1');
+  await page.getByRole('heading',{name:'Edit Synthetic Athlete',exact:true}).waitFor();
+  assert.equal(await page.getByRole('button',{name:'Verify result',exact:true}).count(),0,'AthRecs-only verification controls stay out of RunRecs');
+  assert.equal(await page.evaluate(()=>window.calls.length),0);
   await page.goto(`http://127.0.0.1:8102/?review=1#${'c'.repeat(64)}`);await page.getByRole('heading',{name:'Proposed matches for Synthetic Athlete'}).waitFor();assert.equal(await page.evaluate(()=>window.calls.length),0);
   await page.getByLabel('Not mine',{exact:true}).check();const submit=page.getByRole('button',{name:'Submit my responses'});assert(await submit.isDisabled());await page.getByLabel('I have reviewed these answers.',{exact:false}).check();await page.screenshot({path:'artifacts/workspace-recipient-mobile.png',fullPage:true});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await submit.click();await page.getByRole('heading',{name:'Response recorded'}).waitFor();
   const calls=await page.evaluate(()=>window.calls);assert.deepEqual(calls.map(c=>c.kind),['response']);assert.equal(calls[0].data.responses[0].response,'no');assert.equal(await page.evaluate(()=>sessionStorage.getItem('athrecs:recipient-result-review')),null);assert.deepEqual(errors,[]);

@@ -1,3 +1,4 @@
+import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -24,7 +25,7 @@ export function VerifyResultButton({
   const requests = useQuery({
     queryKey: ["my-result-verification-requests"],
     queryFn: () => getMyResultVerificationRequests(),
-    enabled: !verified,
+    enabled: IS_ATHRECS_SITE && !verified,
     staleTime: 15000,
     refetchInterval: 30000,
   });
@@ -55,7 +56,7 @@ export function VerifyResultButton({
         error instanceof Error ? error.message : "The request was not saved. Please try again.",
       ),
   });
-  if (verified) return null;
+  if (!IS_ATHRECS_SITE || verified) return null;
   return (
     <div className="max-w-sm space-y-2 text-left text-xs">
       <Button
