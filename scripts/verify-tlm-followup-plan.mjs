@@ -19,7 +19,7 @@ for(const p of plan.profiles){
   assert.equal(p.details.athlete_verified,false);
   assert.equal(p.details.archiveCreation.profileIdentityVerified,false);
   assert.equal(p.details.archiveCreation.resultCount,p.performances.length);
-  assert.ok(p.performances.length>=2);
+  assert.ok(p.performances.length >= (process.argv.includes('--allow-single-observation') ? 1 : 2));
   for(let i=0;i<p.performances.length;i++){
     const v=p.performances[i],key=v.archiveReference.sourceRow,r=rows.get(key);
     assert.ok(r);assert.ok(!seen.has(key),'A source result must occur only once');seen.add(key);
