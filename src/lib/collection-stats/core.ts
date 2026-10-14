@@ -8,7 +8,17 @@ export const statsFilters = z
     raceCountry: filter,
     raceCounty: filter,
     year: z.number().int().min(1800).max(2200).nullable().default(null),
-    raceGroup: z.enum(["sport", "distance", "country", "county", "detail"]).default("sport"),
+    raceGroup: z
+      .enum([
+        "sport",
+        "distance",
+        "country",
+        "countryDistance",
+        "sportCountryDistance",
+        "county",
+        "detail",
+      ])
+      .default("sport"),
     gender: filter,
     profileSport: filter,
     nationality: filter,

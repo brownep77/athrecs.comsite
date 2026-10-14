@@ -209,6 +209,84 @@ try {
   );
   assert.equal((await read({ gender: "Unknown" }, "stats-token")).profiles.totals.profiles, 1);
   assert.equal((await read({ year: 2027 }, "stats-token")).races.rows.length, 0);
+  const countryDistances = await read({ raceGroup: "countryDistance" }, "stats-token");
+  const england5K = countryDistances.races.rows.find(
+    (r) => r.country === "England" && r.distance === "5K",
+  );
+  assert.deepEqual(
+    england5K,
+    { country: "England", distance: "5K", sport: null, county: null, events: 1, editions: 2 },
+    "Annual editions count as one event in a country/distance group",
+  );
+  assert.equal(
+    countryDistances.races.rows.find((r) => r.country === "Ireland" && r.distance === "5K").events,
+    1,
+  );
+  assert.equal(
+    countryDistances.races.rows.find((r) => r.distance === "Half marathon").events,
+    1,
+    "Listed distances without dates still count",
+  );
+  assert.equal(countryDistances.races.rows.find((r) => r.country === "Unknown").events, 1);
+  assert.equal(
+    countryDistances.races.totals.events,
+    3,
+    "Multi-distance rows never inflate the overall total",
+  );
+  const secondCountyEvent = await event(
+    "stats-distance-second-county",
+    "Running",
+    "England",
+    "Suffolk",
+  );
+  const secondSportEvent = await event(
+    "stats-distance-second-sport",
+    "Swimming",
+    "England",
+    "Suffolk",
+  );
+  await sql`insert into event_distances(event_id,distance_code) values(${secondCountyEvent},'5K'),(${secondSportEvent},'5K')`;
+  const mergedCountries = await read(
+    { raceGroup: "countryDistance", raceCountry: "England", distance: "5K" },
+    "stats-token",
+  );
+  assert.equal(
+    mergedCountries.races.rows.length,
+    1,
+    "County and sport do not fragment country/distance totals",
+  );
+  assert.equal(mergedCountries.races.rows[0].events, 3);
+  const splitSports = await read(
+    { raceGroup: "sportCountryDistance", raceCountry: "England", distance: "5K" },
+    "stats-token",
+  );
+  assert.deepEqual(
+    splitSports.races.rows.map((r) => [r.country, r.sport, r.distance, r.events]),
+    [
+      ["England", "Running", "5K", 2],
+      ["England", "Swimming", "5K", 1],
+    ],
+  );
+  const filteredCountryDistances = await read(
+    {
+      raceGroup: "countryDistance",
+      sport: "Running",
+      raceCountry: "England",
+      distance: "5K",
+      year: 2026,
+    },
+    "stats-token",
+  );
+  assert.deepEqual(
+    filteredCountryDistances.races.totals,
+    { events: 1, editions: 1 },
+    "Sport, country, distance and year filters combine correctly",
+  );
+  await sql`delete from event_distances where event_id in (${secondCountyEvent},${secondSportEvent})`;
+  await sql`delete from events where id in (${secondCountyEvent},${secondSportEvent})`;
+  console.log(
+    "PASS: country/distance and country/sport/distance counts, repeated years, multiple distances, merged counties, unknowns and combined filters.",
+  );
   const sports = await read({ profileGroup: "sport" }, "stats-token");
   assert.equal(sports.profiles.totals.profiles, 4);
   assert.deepEqual(
@@ -390,6 +468,36 @@ try {
     await page.getByRole("heading", { name: "Stats", exact: true }).waitFor();
     const table = page.getByRole("table", { name: "Race collection breakdown", exact: true });
     await table.getByRole("cell", { name: "Running", exact: true }).waitFor();
+    await page.getByRole("button", { name: "Races by country and distance", exact: true }).click();
+    const countryTable = page.getByRole("table", {
+      name: "Race counts by country and distance",
+      exact: true,
+    });
+    await countryTable.getByRole("columnheader", { name: "Races listed", exact: true }).waitFor();
+    assert.deepEqual(await countryTable.getByRole("columnheader").allTextContents(), [
+      "Country",
+      "Distance",
+      "Races listed",
+    ]);
+    assert.equal(await page.getByLabel("Profile sport", { exact: true }).count(), 0);
+    await page.getByLabel("Race country", { exact: true }).selectOption("England");
+    await page.getByLabel("Race distance", { exact: true }).selectOption("5K");
+    await page.getByLabel("Race sport", { exact: true }).selectOption("Running");
+    await countryTable.getByRole("cell", { name: "England", exact: true }).waitFor();
+    const countryDownload = page.waitForEvent("download");
+    await page.getByRole("button", { name: "Download CSV", exact: true }).click();
+    assert(
+      (await readFile(await (await countryDownload).path(), "utf8")).includes('"England","5K","1"'),
+    );
+    await page.getByLabel("Group races by", { exact: true }).selectOption("sportCountryDistance");
+    await countryTable.getByRole("cell", { name: "Running", exact: true }).waitFor();
+    await page.getByRole("button", { name: "Reset race filters", exact: true }).click();
+    assert.equal(
+      await page.getByLabel("Group races by", { exact: true }).inputValue(),
+      "countryDistance",
+    );
+    await page.getByRole("button", { name: "Data collection stats", exact: true }).click();
+    await table.getByRole("cell", { name: "Running", exact: true }).waitFor();
     await page.getByLabel("Group races by", { exact: true }).selectOption("detail");
     await page.getByLabel("Race sport", { exact: true }).selectOption("Swimming");
     await table.getByRole("cell", { name: "Swimming", exact: true }).waitFor();
@@ -435,6 +543,20 @@ try {
       "No mobile page overflow",
     );
     await page.screenshot({ path: "artifacts/collection-stats-mobile.png", fullPage: true });
+    await page.goto(`${origin}/admin/collection-stats?section=races`, { waitUntil: "networkidle" });
+    await countryTable.getByRole("columnheader", { name: "Races listed", exact: true }).waitFor();
+    assert.equal(
+      await page.getByLabel("Group races by", { exact: true }).inputValue(),
+      "countryDistance",
+    );
+    assert(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      "Country/distance view fits mobile",
+    );
+    await page.screenshot({
+      path: "artifacts/collection-stats-country-distance-mobile.png",
+      fullPage: true,
+    });
     assert.deepEqual(errors, []);
     console.log(
       "PASS: desktop/mobile staff page, filters, group switching, reset, real CSV download and no browser errors.",
