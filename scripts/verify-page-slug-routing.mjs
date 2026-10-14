@@ -10,6 +10,7 @@ import {
   createRouter,
   createMemoryHistory,
   stripSearchParams,
+  notFound,
 } from "@tanstack/react-router";
 
 const root = process.cwd();
@@ -120,6 +121,35 @@ const route = (file, extra = {}) =>
     },
     ...extra,
   }).Route;
+const athleteInput = await import("../src/lib/athrecs/public-athlete-result-pages.ts");
+const athleteRoute = route("src/routes/athletes/$slug.tsx", {
+  "@tanstack/react-router": { createFileRoute: () => (options) => options, notFound },
+  "@/lib/athrecs/public-athlete-result-pages": athleteInput,
+});
+// Exercise the actual router lifecycle: invalid URLs must produce a 404 before
+// the preview API (whose validator deliberately rejects these inputs) is called.
+for (const slug of [" ", "\t", "a".repeat(301), "a".repeat(1800)]) {
+  let loads = 0;
+  const root = createRootRoute();
+  const profile = createRoute({
+    getParentRoute: () => root,
+    path: "/athletes/$slug",
+    beforeLoad: athleteRoute.beforeLoad,
+    loader: () => { loads++; },
+  });
+  const router = createRouter({
+    routeTree: root.addChildren([profile]),
+    history: createMemoryHistory({ initialEntries: [`/athletes/${encodeURIComponent(slug)}`] }),
+  });
+  await router.load();
+  assert.equal(loads, 0, "Invalid athlete URLs must not call a profile loader");
+  assert.equal(router.state.matches.at(-1).status, "notFound");
+  assert.throws(() => athleteInput.parsePublicAthletePreviewInput({ slug }));
+}
+for (const slug of ["example-athlete", "legacy--athlete-", "ATH-000123", "ath-000123", "a".repeat(300)]) {
+  assert.doesNotThrow(() => athleteRoute.beforeLoad({ params: { slug } }));
+  assert.equal(athleteInput.parsePublicAthletePreviewInput({ slug }).slug, slug);
+}
 const directory = route("src/athletics/routes/athletes/index.tsx");
 for (const search of [{}, { letter: "B", page: 2 }, { q: "Example" }]) {
   const head = directory.head({ loaderData: { indexable: !search.q }, matches: [{ search }] });

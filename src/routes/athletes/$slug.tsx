@@ -8,6 +8,7 @@ import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
 import { publicAthleteSearchContent } from "@/lib/athrecs/public-athlete-search-content";
 import {
+  isValidPublicAthleteLookup,
   parsePublicAthleteResultSearch,
   publicAthleteResultPath,
 } from "@/lib/athrecs/public-athlete-result-pages";
@@ -61,6 +62,9 @@ import {
 
 export const Route = createFileRoute("/athletes/$slug")({
   validateSearch: parsePublicAthleteResultSearch,
+  beforeLoad: ({ params }) => {
+    if (!isValidPublicAthleteLookup(params.slug)) throw notFound();
+  },
   loaderDeps: ({ search }) => ({ resultPage: search.resultsPage ?? 1 }),
   loader: async ({ params, deps }) => {
     const preview =
