@@ -43,6 +43,15 @@ try {
   assert.equal(clubProfiles["triangle-triathlon-club"].founded_year, undefined);
   assert.equal(clubProfiles["ballybunion-tc"].founded_year, undefined);
   assert.equal(bySlug.get("ams-triathlon").county, "Dublin");
+  assert.equal(bySlug.get("chessington-unity-running-club").postcode, "");
+  assert.equal(bySlug.get("chiltern-harriers-ac").address, "");
+  assert.equal(bySlug.get("chew-valley-snails").adult_only, true);
+  assert.equal(bySlug.get("welsh-athletics-micky-morris-racing-team").city, "");
+  assert.equal(bySlug.get("welsh-athletics-north-wales-road-runners").city, "Llandudno");
+  assert.equal(bySlug.get("cuilcagh-tc").address_kind, "correspondence");
+  assert.equal(bySlug.get("crosshaven-triathlon-club").socials.find(s => s.url.includes("instagram.com/crosshaventri"))?.platform, "Instagram");
+  assert.match(clubProfiles["chiltern-harriers-ac"].biography.join(" "), /closed indefinitely/);
+  assert.match(clubProfiles["welsh-athletics-north-wales-road-runners"].biography.join(" "), /management passed to Always Aim High Events from 2023/);
   assert.equal(bySlug.get("welsh-athletics-mynyddwyr-de-cymru").adult_only, true);
   assert.equal(bySlug.get("oswestry-olympians").country, "England");
   assert.equal(bySlug.get("oswestry-olympians").postcode, "");

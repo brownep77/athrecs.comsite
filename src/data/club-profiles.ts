@@ -22,6 +22,7 @@ import { regionalContinuationProfiles } from "./club-profiles-s.ts";
 
 import { communityHeritageProfiles } from "./club-profiles-t.ts";
 import { runningAndTriathlonCommunityProfiles } from "./club-profiles-u.ts";
+import { valleysAndCommunityProfiles } from "./club-profiles-v.ts";
 
 export type ClubProfile = {
   summary: string;
@@ -40,6 +41,7 @@ export type ClubProfile = {
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
   ...runningAndTriathlonCommunityProfiles,
+  ...valleysAndCommunityProfiles,
   ...communityHeritageProfiles,
   ...regionalContinuationProfiles,
   ...islandAndRegionalClubProfiles,
@@ -782,4 +784,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-14-v21";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-14-v22";
