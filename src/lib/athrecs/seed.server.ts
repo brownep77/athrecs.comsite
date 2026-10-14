@@ -24,7 +24,7 @@ import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 import { parkrunDates, parkrunDistance } from "./parkrun-dates";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-04-v3";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-14-v1";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
 const FEATURED_RACE_RESULTS_VERSION = "berlin-london-2026-09-27-v1";
@@ -1501,8 +1501,7 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
         then coalesce(excluded.category_place, results.category_place) else null end,
       age_on_day = excluded.age_on_day,
       result_source = excluded.result_source,
-      source_url = excluded.source_url
-      where not (results.result_details ? 'archive')`,
+      source_url = excluded.source_url`,
   );
   await sql`
     insert into app_meta (key, value)
@@ -3097,8 +3096,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
       open_rating = excluded.open_rating,
       age_grade_rating = excluded.age_grade_rating,
       result_source = excluded.result_source,
-      source_url = excluded.source_url
-      where not (results.result_details ? 'archive')`,
+      source_url = excluded.source_url`,
     100,
   );
 
