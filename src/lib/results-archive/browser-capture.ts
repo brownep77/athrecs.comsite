@@ -34,6 +34,7 @@ export function parseBrowserCapture(input: string) {
     "_capture_checked_at",
     "_capture_scope",
     "_capture_row_links",
+    "_capture_notes",
   ];
   const derived = ["_capture_athlete_name", "_capture_country"];
   if (
@@ -70,6 +71,7 @@ export function parseBrowserCapture(input: string) {
           capture.capturedAt,
           capture.scope,
           rowLinks[i].join("\n"),
+          capture.warnings.join("\n").slice(0, 4000),
         ];
         if (london) {
           // London explicitly prints Surname, Given (nation). Keep the exact source in Name.

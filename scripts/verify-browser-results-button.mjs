@@ -4,6 +4,8 @@ import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright';
 import ts from 'typescript';
 import { z } from 'zod';
+import { readLondonCollectionPage } from './lib/london-page-collection.mjs';
+import { londonPaginationFixture, londonFixtureUrl } from './fixtures/london-pagination.mjs';
 import { collectBrowserResults, browserResultsBookmark } from './lib/browser-results-button.mjs';
 
 function load(file, deps) {
@@ -13,7 +15,9 @@ function load(file, deps) {
   return module.exports;
 }
 const core = load('src/lib/results-archive/core.ts', { zod: { z } });
-const { parseBrowserCapture } = load('src/lib/results-archive/browser-capture.ts', { zod: { z }, './core': core });
+const captureParser = load('src/lib/results-archive/browser-capture.ts', { zod: { z }, './core': core });
+const { parseBrowserCapture } = captureParser;
+const collectionParser = load('src/lib/results-archive/browser-collection.ts', { zod: { z }, './core': core, './browser-capture': captureParser });
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage'] });
 try {
   const context = await browser.newContext({ acceptDownloads: true });
@@ -144,6 +148,27 @@ try {
   const narrow = await page.evaluate('(' + collectBrowserResults.toString() + ')(document)');
   assert.equal(narrow.tables.length, 0);
   assert.match(narrow.warnings.join(' '), /widen the browser/);
+
+  // Pagination comes from the site's actual links; filter changes and corrupt lists stop collection.
+  await page.goto(londonFixtureUrl);
+  await page.setContent(londonPaginationFixture(1));
+  const plan = await page.evaluate('(' + readLondonCollectionPage.toString() + ')(document,location.href)');
+  const metadata = { version: 1, firstUrl: plan.capture.page.url, totalPages: plan.totalPages, totalRows: plan.totalRows, pageSize: plan.pageSize, filterLabel: plan.filterLabel };
+  assert.deepEqual(collectionParser.collectionSchema.parse(metadata), metadata);
+  collectionParser.validateCollectionPage(JSON.stringify(plan.capture), metadata, 1);
+  for (const value of [{ ...metadata, totalPages: 4 }, { ...metadata, firstUrl: 'https://other.example.test/2026/?page=1&pid=list' }, { ...metadata, firstUrl: metadata.firstUrl.replace('page=1', 'page=2') }]) assert.throws(() => collectionParser.collectionSchema.parse(value));
+  const wrongFilter = structuredClone(plan.capture); wrongFilter.page.url = wrongFilter.page.url.replace('sex%5D=W', 'sex%5D=M');
+  assert.throws(() => collectionParser.validateCollectionPage(JSON.stringify(wrongFilter), metadata, 1));
+  assert.throws(() => collectionParser.validateCollectionPage(JSON.stringify(plan.capture), metadata, 2));
+  assert.equal(plan.totalPages, 3); assert.equal(plan.totalRows, 5); assert.equal(plan.filterLabel, 'Women');
+  assert.equal(new URL(plan.next).searchParams.get('page'), '2');
+  assert.equal(new URL(plan.next).searchParams.get('search[sex]'), 'W');
+  const firstPage = parseBrowserCapture(JSON.stringify(plan.capture));
+  assert.equal(core.mapArchiveRows(firstPage.table, firstPage.mapping)[0].name, 'Morgan Browser Synthetic');
+  for (const fixture of [londonPaginationFixture(1, { wrongHeader: true }), londonPaginationFixture(1).replace('5 Results', 'Results unavailable'), londonPaginationFixture(1).replaceAll('9002', '9001')]) {
+    await page.setContent(fixture);
+    await assert.rejects(() => page.evaluate('(' + readLondonCollectionPage.toString() + ')(document,location.href)'));
+  }
 
   // Setup page uses the exact tested bookmark, with a usable mobile layout.
   await page.setContent(readFileSync('public/tools/browser-results.html', 'utf8'));

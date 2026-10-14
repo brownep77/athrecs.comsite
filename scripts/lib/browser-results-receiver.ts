@@ -34,11 +34,14 @@ if (!sender || !/^[a-f0-9-]{36}$/i.test(token)) {
       receiving = true;
       clearInterval(timer);
       clearTimeout(timeout);
-      const capture = await queueBrowserCapture(token, event.data.json);
+      const capture = await queueBrowserCapture(token, event.data.json, event.data.collection);
       status.textContent = `${capture.rows.toLocaleString()} rows received from ${capture.title || source.hostname}. Continue to sign in and review this import. Nothing has been added to the results database yet.`;
+      if (capture.collection)
+        status.textContent += ` This starts a ${capture.collection.totalPages}-page collection for ${capture.collection.filterLabel} after you confirm the race. Keep both tabs open.`;
+      next.setAttribute("href", `/admin/result-archive#import=${token}`);
       next.hidden = false;
       sender.postMessage({ type: "athrecs-import-received", token }, event.origin);
-      window.opener = null;
+      if (!capture.collection) window.opener = null;
       history.replaceState(null, "", location.pathname);
     } catch (error) {
       receiving = true;

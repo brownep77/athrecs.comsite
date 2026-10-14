@@ -15,6 +15,8 @@ on:
       - "public/tools/browser-results.html"
       - "public/tools/import-results.*"
       - "scripts/lib/browser-results-receiver.ts"
+      - "scripts/lib/london-page-collection.mjs"
+      - "scripts/fixtures/london-pagination.mjs"
       - "src/routes/admin/result-archive.tsx"
       - "scripts/verify-captured-results.mjs"
       - "scripts/verify-private-archive-profiles.py"

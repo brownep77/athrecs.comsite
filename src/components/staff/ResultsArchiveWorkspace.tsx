@@ -32,7 +32,7 @@ export function ResultsArchiveWorkspace() {
   useEffect(() => {
     let active = true;
     const openImport = () => {
-      if (location.hash === "#import") setTab("upload");
+      if (/^#import(?:=[a-f0-9-]{36})?$/i.test(location.hash)) setTab("upload");
     };
     openImport();
     const openRequestedImport = () => setTab("upload");
@@ -42,9 +42,20 @@ export function ResultsArchiveWorkspace() {
       .then((captures) => {
         if (!active) return;
         setPending(captures);
-        if (captures.length) {
-          setIncoming(captures[0]);
+        const requested = location.hash.match(/^#import=([a-f0-9-]{36})$/i)?.[1];
+        const selected = requested
+          ? captures.find((c) => c.id === requested)
+          : window.opener
+            ? captures.at(-1)
+            : captures[0];
+        if (selected) {
+          setIncoming(selected);
           setTab("upload");
+        } else if (requested) {
+          setTab("upload");
+          setHandoffError(
+            "This pending capture is no longer available. Return to the results page and send it again.",
+          );
         }
       })
       .catch(() => {

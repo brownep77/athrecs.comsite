@@ -1,3 +1,8 @@
+import {
+  collectionSchema,
+  validateCollectionPage,
+  type BrowserCollection,
+} from "./browser-collection";
 import { parseBrowserCapture } from "./browser-capture";
 
 export type PendingBrowserCapture = {
@@ -7,6 +12,7 @@ export type PendingBrowserCapture = {
   title: string;
   sourceUrl: string;
   rows: number;
+  collection?: BrowserCollection;
 };
 const maxAge = 24 * 60 * 60 * 1000;
 async function database() {
@@ -43,13 +49,20 @@ export async function pendingBrowserCaptures(): Promise<PendingBrowserCapture[]>
     db.close();
   }
 }
-export async function queueBrowserCapture(id: string, json: string) {
+export async function queueBrowserCapture(id: string, json: string, incomingCollection?: unknown) {
   if (!/^[a-f0-9-]{36}$/i.test(id)) throw new Error("Invalid import handoff.");
-  const parsed = parseBrowserCapture(json);
+  const collection =
+    incomingCollection === undefined ? undefined : collectionSchema.parse(incomingCollection);
+  const parsed = collection
+    ? validateCollectionPage(json, collection, 1)
+    : parseBrowserCapture(json);
   const pending = await pendingBrowserCaptures();
   const previous = pending.find((item) => item.id === id);
   if (previous) {
-    if (previous.json !== json)
+    if (
+      previous.json !== json ||
+      JSON.stringify(previous.collection) !== JSON.stringify(collection)
+    )
       throw new Error("This handoff already contains a different capture.");
     return previous;
   }
@@ -60,6 +73,7 @@ export async function queueBrowserCapture(id: string, json: string) {
     title: parsed.pageTitle,
     sourceUrl: parsed.sourceUrl,
     rows: parsed.table.rows.length,
+    ...(collection ? { collection } : {}),
   };
   const db = await database();
   try {

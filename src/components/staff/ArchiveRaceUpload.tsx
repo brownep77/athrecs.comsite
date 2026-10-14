@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import {
+  archiveChunks,
+  receiveBrowserCollection,
+  type CollectionProgress,
+} from "@/lib/results-archive/browser-collection";
 import { parseBrowserCapture } from "@/lib/results-archive/browser-capture";
 import {
   discardBrowserCapture,
@@ -72,6 +77,10 @@ export function ArchiveRaceUpload({
   const [captureNote, setCaptureNote] = useState("");
   const [confirmed, setConfirmed] = useState(false);
   const [complete, setComplete] = useState(false);
+  const [collectionProgress, setCollectionProgress] = useState<CollectionProgress | null>(null);
+  const collectionCapture = useRef<PendingBrowserCapture | null>(null);
+  const stopCollection = useRef<(() => void) | null>(null);
+  useEffect(() => () => stopCollection.current?.(), []);
   const loadedCapture = useRef("");
   const fileVersion = useRef(0);
   const captureId = useRef<string | null>(null);
@@ -127,6 +136,7 @@ export function ArchiveRaceUpload({
     try {
       loadContent(initialCapture.json, `${initialCapture.title || "Browser results"}.athrecs.json`);
       captureId.current = initialCapture.id;
+      collectionCapture.current = initialCapture.collection ? initialCapture : null;
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Could not load the received capture");
     }
@@ -142,6 +152,7 @@ export function ArchiveRaceUpload({
     setConfirmed(false);
     setMessage("");
     captureId.current = null;
+    collectionCapture.current = null;
     try {
       if (file.size > 25 * 1024 * 1024)
         throw new Error(
@@ -172,6 +183,12 @@ export function ArchiveRaceUpload({
   }
   async function run() {
     if (!confirmed || !preview.length) return;
+    if (collectionCapture.current && (!window.opener || window.opener.closed)) {
+      setMessage(
+        "The results tab connection was lost. Keep this signed-in AthRecs tab open, then reopen the browser button on page 1 and choose Collect all pages again.",
+      );
+      return;
+    }
     setBusy(true);
     pause.current = false;
     try {
@@ -186,20 +203,7 @@ export function ArchiveRaceUpload({
             expectedRows: expected === "" ? null : Number(expected),
           }),
         });
-        const chunks: { requestId: string; rows: ArchiveRow[] }[] = [];
-        let rows: ArchiveRow[] = [],
-          bytes = 0;
-        for (const row of preview) {
-          const size = new TextEncoder().encode(JSON.stringify(row)).length;
-          if (rows.length && (rows.length >= 500 || bytes + size > 1_000_000)) {
-            chunks.push({ requestId: crypto.randomUUID(), rows });
-            rows = [];
-            bytes = 0;
-          }
-          rows.push(row);
-          bytes += size;
-        }
-        if (rows.length) chunks.push({ requestId: crypto.randomUUID(), rows });
+        const chunks = archiveChunks(preview);
         progress.current = {
           datasetId: dataset.id,
           chunks,
@@ -224,7 +228,36 @@ export function ArchiveRaceUpload({
         `${done ? "Saved" : "Paused"}: ${p.inserted.toLocaleString()} new source rows, ${p.revised.toLocaleString()} changed, ${p.unchanged.toLocaleString()} unchanged. ${p.next}/${p.chunks.length} batches completed.`,
       );
       onSaved();
-      if (done) {
+      if (done && collectionCapture.current?.collection) {
+        const capture = collectionCapture.current;
+        setStep(4);
+        stopCollection.current?.();
+        stopCollection.current = receiveBrowserCollection({
+          source: window.opener,
+          token: capture.id,
+          collection: capture.collection!,
+          firstJson: capture.json,
+          datasetId: p.datasetId,
+          mapping,
+          firstReceipt: { inserted: p.inserted, revised: p.revised, unchanged: p.unchanged },
+          save: (data) => saveArchiveBatch({ data }),
+          report: (status) => {
+            setCollectionProgress(status);
+            setMessage("");
+            if (status.complete || status.paused) onSaved();
+            if (status.complete) {
+              setComplete(true);
+              void discardBrowserCapture(capture.id)
+                .then(() => onCaptureConsumed?.(capture.id))
+                .catch(() =>
+                  setMessage(
+                    "Results saved. The pending browser copy could not be cleared; discard it when ready.",
+                  ),
+                );
+            }
+          },
+        });
+      } else if (done) {
         setComplete(true);
         setStep(4);
         if (captureId.current) {
@@ -294,6 +327,14 @@ export function ArchiveRaceUpload({
             <div className="rounded-lg bg-elevated p-4">
               <strong className="break-words">{fileName}</strong>
               <p className="text-sm">{captureNote}</p>
+              {collectionCapture.current?.collection && (
+                <p className="mt-2 font-medium">
+                  Automatic collection: {collectionCapture.current.collection.totalPages} pages ·{" "}
+                  {collectionCapture.current.collection.totalRows.toLocaleString()} results ·{" "}
+                  {collectionCapture.current.collection.filterLabel}. Confirm the race once, then
+                  keep both tabs open while every page is saved.
+                </p>
+              )}
             </div>
           )}
           <div className="flex flex-wrap items-center gap-3">
@@ -580,8 +621,10 @@ export function ArchiveRaceUpload({
               checked={confirmed}
               onChange={(e) => setConfirmed(e.target.checked)}
             />
-            I checked the race, date, distance and column meanings against this source. Save these
-            rows for athlete matching and claim review.
+            I checked the race, date, distance and column meanings against this source.{" "}
+            {collectionCapture.current
+              ? `Collect and save all ${collectionCapture.current.collection?.totalPages} pages for ${collectionCapture.current.collection?.filterLabel} for athlete matching and claim review.`
+              : "Save these rows for athlete matching and claim review."}
           </label>
           <p className="text-xs text-muted">
             Saving keeps the original evidence privately. It does not approve athlete identity,
@@ -607,7 +650,9 @@ export function ArchiveRaceUpload({
                 ? "Saving…"
                 : progress.current
                   ? "Resume remaining batches"
-                  : "Save results for athlete matching"}
+                  : collectionCapture.current
+                    ? "Save and collect all pages"
+                    : "Save results for athlete matching"}
             </Button>
             {busy && (
               <Button
@@ -620,6 +665,48 @@ export function ArchiveRaceUpload({
               </Button>
             )}
           </div>
+        </div>
+      )}
+      {step === 4 && collectionProgress && (
+        <div className="space-y-3 rounded-xl border border-cyan-300 bg-cyan-50 p-5 text-cyan-950">
+          <h3 className="text-xl font-semibold">
+            {collectionProgress.complete
+              ? "All selected pages saved"
+              : collectionProgress.paused
+                ? "Collection paused — saved pages are kept"
+                : "Collecting and saving every page"}
+          </h3>
+          <p role="status">{collectionProgress.message}</p>
+          <p className="text-sm">
+            {collectionProgress.inserted.toLocaleString()} new ·{" "}
+            {collectionProgress.revised.toLocaleString()} changed ·{" "}
+            {collectionProgress.unchanged.toLocaleString()} unchanged.
+          </p>
+          {!collectionProgress.complete && (
+            <p className="text-sm">
+              Keep this tab and the London results tab open. Pause or resume using the buttons on
+              the results tab. If either tab is closed, restart from page 1; saved rows are checked
+              for duplicates.
+            </p>
+          )}
+          {!collectionProgress.complete && (
+            <Button
+              variant="secondary"
+              onClick={() => {
+                window.opener?.postMessage(
+                  { type: "athrecs-collection-stop", token: collectionCapture.current?.id },
+                  "https://results.tcslondonmarathon.com",
+                );
+              }}
+            >
+              Pause collection
+            </Button>
+          )}
+          <p className="text-xs">
+            This covers the selected source filters. Rows are available for private claim
+            suggestions as batches are saved; no automatic identity approval or public profile
+            creation.
+          </p>
         </div>
       )}
       {step === 4 && complete && (
@@ -642,6 +729,10 @@ export function ArchiveRaceUpload({
             <Button
               variant="secondary"
               onClick={() => {
+                stopCollection.current?.();
+                stopCollection.current = null;
+                collectionCapture.current = null;
+                setCollectionProgress(null);
                 setSavedRace(progress.current!.datasetId);
                 progress.current = null;
                 captureId.current = null;
