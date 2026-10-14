@@ -6,10 +6,10 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 722 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 529 clubs: 516 publish an email address and 66 a telephone number. There are 901 contact entries in total, including named directory contacts with no direct email or telephone.
-- 937 clubs have social links, with 1,902 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 233 clubs have extended, individually written profiles (13.4% of the catalogue). These contain 120 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
+- Website research contributes contact pages or contact/social details for 731 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The merged catalogue has contact entries for 539 clubs: 526 publish an email address and 67 a telephone number. There are 917 contact entries in total, including named directory contacts with no direct email or telephone.
+- 942 clubs have social links, with 1,911 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
+- 253 clubs have extended, individually written profiles (14.6% of the catalogue). These contain 125 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
 The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. That batch did not change contact or social coverage.
 
@@ -77,6 +77,18 @@ Rotherham's 1877/1887 founding conflict remains unresolved, with no exact founde
 
 The checkpoint records all completed slugs and a Midlands, Welsh and Irish regional next-batch queue. Club-only seed version is v10. Local validation covers actual merged-catalogue/profile checks, directory audit, source/contact evidence, targeted lint, TypeScript, slug stability and a build with database publication disabled. The exact-commit Club profiles workflow and Vercel preview results are recorded in the draft PR after deployment; a successful build is not production publication.
 
+## Eleventh editorial batch — 14 October 2026 UTC
+
+Added 20 profiles: Amber Valley & Erewash, Audley Striders, BADGERS, Bakewell, Beeston, Belper Harriers, Biddulph, Black Pear Joggers, Bridgnorth, Cannock & Stafford, Mercia Fell Runners, Stafford Harriers, Newport & District, Telford Harriers, Caerphilly Runners, Cardigan, Cybi Striders, Denbigh Harriers, Ballyfin and Banagher. Five historical member entries cover John Mayock, Jane Finch, Paul Davies-Hale, Spencer Duval and Ann Keenan. All use existing canonical clubs; Beeston race visitors and Bakewell course-record holders are not turned into alumni. Cannock & Stafford and Stafford Harriers remain distinct.
+
+Nineteen website contact/social records changed, including nine new records. Net additions are 16 contact entries, ten clubs with email, one with telephone, nine social links and five clubs with social coverage. Role contacts retain exact source URLs and 14 October check dates. Cybi's supplier Facebook and dummy telephone, Biddulph's placeholder WhatsApp number and Facebook search link, BADGERS' farm-supplier contacts, and Banagher's historical work email and telephone are excluded. Mercia's role emails follow its explicit append-domain instructions. Existing independently sourced fields remain unless evidence supports a correction.
+
+Eleven training-venue labels or addresses are clarified. BADGERS' Atherstone meeting point changes from the older sports-club listing to Woolpack Way car park, CV9 1AD. Caerphilly's combined timetable is replaced with the club-confirmed Creazione Gym address and a separate multi-venue note. Biddulph and Beeston gain accurate town labels; Ballyfin and Banagher gain town names. Belper, Mercia and Ballyfin have unconfirmed single-address fields replaced by explicit venue notes. Audley now describes its actual running/walking programme; Newport's unsupported triathlon tags are removed. Country/home-nation indicators and registration/SEO implementation are unchanged.
+
+The biographies distinguish Amber Valley's 1999 formation, 2006 move and 2011 name change; Caerphilly's 2012 informal beginnings and 2015 affiliation; Stafford's current 1986 club and earlier namesakes; and Bakewell's 1998 race origin from an unknown club founding date. Banagher's 2018 town-directory account is historical, not a current timetable. Denbigh's conflicting junior days remain unresolved. Telford's broad all-ages website wording does not override its existing adult-only directory flag without specific eligibility evidence.
+
+Athlone still yielded only a cookie notice or 502 response, Chesterfield Triathlon timed out, and Bailieboro lacked enough current primary material for a full biography. They were replaced in this batch by Stafford, Newport and Telford. Cannock's readable deep membership/honours pages were recovered despite its empty homepage. Black Pear's contact body remained client-rendered; no email was guessed. These gaps and a South East England/Wales/Ireland next queue are saved in the checkpoint. No governing-body rows were blanket re-dated: 1,682 recent comparisons and 55 older rows remain. Club-only seed version is v11.
+
 The contact counts describe the complete merged catalogue, including retained earlier directory contacts. They are not counts of newly discovered contacts or independent verification of every retained field.
 
 ## Sources and editorial decisions
@@ -97,7 +109,7 @@ Notable-member text does not create athlete accounts, link unclaimed identities,
 
 - `src/data/club-enrichment-a.ts` and `-b.ts`: directory fields and actual source comparison dates.
 - `src/data/club-website-contacts.ts`: accepted public contact/social discoveries and per-field provenance.
-- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-i.ts`: manually reviewed prose, sources and explicit corrections.
+- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-k.ts`: manually reviewed prose, sources and explicit corrections.
 - `docs/club-profile-checkpoint.json`: completed batch slugs, source gaps and next candidates. Check the live branch and profile map before resuming; the queue is not evidence that a club has been researched.
 - `scripts/audit-club-websites.mjs /absolute/scratch/output.json`: resumable read-only screening into a review queue. It never writes the catalogue.
 

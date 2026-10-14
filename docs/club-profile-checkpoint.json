@@ -1,77 +1,69 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch10",
+  "lastEditorialBatch": "2026-10-14-batch11",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "bingley-harriers-and-ac",
-    "city-of-hull-ac",
-    "cleethorpes-ac",
-    "doncaster-athletic-club",
-    "doncaster-triathlon-club",
-    "east-hull-harriers-and-ac",
-    "halifax-harriers-and-ac",
-    "holmfirth-harriers-ac",
-    "kimberworth-striders",
-    "lincoln-wellington-athletic-club",
-    "rotherham-harriers-and-ac",
-    "scunthorpe-harriers-athletic-club",
-    "welsh-athletics-caerleon-rc",
-    "welsh-athletics-caldicot-running-club",
-    "welsh-athletics-chepstow-harriers",
-    "welsh-athletics-cornelly-striders-ac",
-    "athletics-ireland-ballincollig-a-c",
-    "athletics-ireland-ballyroan-abbeyleix-and-district-a-c",
-    "athletics-ireland-blackrock-louth-a-c",
-    "athletics-ireland-blayney-rockets-a-c"
+    "amber-valley-and-erewash-athletic-club",
+    "audley-striders-running-club",
+    "badgers",
+    "bakewell-athletics-club",
+    "beeston-ac",
+    "belper-harriers",
+    "biddulph-rc",
+    "black-pear-joggers",
+    "bridgnorth-running-club",
+    "cannock-and-stafford-ac",
+    "mercia-fell-runners",
+    "stafford-harriers",
+    "newport-and-district-rc",
+    "telford-harriers",
+    "welsh-athletics-caerphilly-runners",
+    "welsh-athletics-cardigan-rc",
+    "welsh-athletics-cybi-striders",
+    "welsh-athletics-denbigh-harriers",
+    "athletics-ireland-ballyfin-a-c",
+    "athletics-ireland-banagher-a-c"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 233,
-    "notableMemberEntries": 120,
-    "clubsWithContacts": 529,
-    "contactEntries": 901,
-    "clubsWithEmail": 516,
-    "clubsWithPhone": 66,
-    "clubsWithSocials": 937,
-    "socialLinks": 1902,
-    "websiteContactRecords": 722
+    "extendedProfiles": 253,
+    "notableMemberEntries": 125,
+    "clubsWithContacts": 539,
+    "contactEntries": 917,
+    "clubsWithEmail": 526,
+    "clubsWithPhone": 67,
+    "clubsWithSocials": 942,
+    "socialLinks": 1911,
+    "websiteContactRecords": 731
   },
   "batchChanges": {
     "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 15,
-    "contactOrSocialRecordsChanged": 17,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 19,
     "directoryRecordsRefreshed": 0,
-    "trainingOrClubhouseVenuesClarified": 13,
+    "trainingOrClubhouseVenuesClarified": 11,
     "combinedOrUnconfirmedAddressesReplacedByNotes": [
-      "doncaster-triathlon-club",
-      "welsh-athletics-caldicot-running-club",
-      "athletics-ireland-ballincollig-a-c"
+      "belper-harriers",
+      "mercia-fell-runners",
+      "athletics-ireland-ballyfin-a-c"
     ],
     "sportsCorrected": [
-      "doncaster-triathlon-club",
-      "holmfirth-harriers-ac",
-      "kimberworth-striders"
-    ],
-    "adultOnlyClarified": [
-      "welsh-athletics-cornelly-striders-ac",
-      "athletics-ireland-blayney-rockets-a-c"
-    ],
-    "websiteRecovered": [
-      "doncaster-athletic-club",
-      "east-hull-harriers-and-ac",
-      "welsh-athletics-cornelly-striders-ac",
-      "athletics-ireland-ballincollig-a-c"
+      "audley-striders-running-club",
+      "newport-and-district-rc"
     ],
     "locationCorrections": [
-      "rotherham-harriers-and-ac",
-      "holmfirth-harriers-ac",
-      "doncaster-athletic-club",
-      "east-hull-harriers-and-ac",
-      "welsh-athletics-caerleon-rc"
+      "audley-striders-running-club",
+      "badgers",
+      "beeston-ac",
+      "biddulph-rc",
+      "welsh-athletics-caerphilly-runners",
+      "welsh-athletics-denbigh-harriers",
+      "athletics-ireland-ballyfin-a-c",
+      "athletics-ireland-banagher-a-c"
     ]
   },
   "validationBeforeCommit": [
@@ -84,31 +76,31 @@
     "production build (publication hooks skipped)"
   ],
   "nextCandidateSlugs": [
-    "amber-valley-and-erewash-athletic-club",
-    "audley-striders-running-club",
-    "badgers",
-    "bakewell-athletics-club",
-    "beeston-ac",
-    "belper-harriers",
-    "biddulph-rc",
-    "black-pear-joggers",
-    "bridgnorth-running-club",
-    "cannock-and-stafford-ac",
-    "chesterfield-tri-club",
-    "mercia-fell-runners",
-    "welsh-athletics-caerphilly-runners",
-    "welsh-athletics-cardigan-rc",
-    "welsh-athletics-cybi-striders",
-    "welsh-athletics-denbigh-harriers",
-    "athletics-ireland-athlone-a-c",
-    "athletics-ireland-bailieboro-a-c",
-    "athletics-ireland-ballyfin-a-c",
-    "athletics-ireland-banagher-a-c"
+    "ashford-and-district-rrc",
+    "ashford-striders-rc",
+    "ashford-triathlon-club",
+    "blackwater-valley-runners",
+    "burgess-hill-runners",
+    "camberley-and-district-ac",
+    "deal-tri-club",
+    "dorking-and-mole-valley-ac",
+    "welsh-athletics-crickhowell-running-club",
+    "welsh-athletics-cwmbran-harriers",
+    "welsh-athletics-deestriders-b-s-rc",
+    "welsh-athletics-emlyn-runners",
+    "welsh-athletics-griffithstown-harriers",
+    "welsh-athletics-islwyn-rc",
+    "athletics-ireland-borrisokane-a-c",
+    "athletics-ireland-boyle-a-c",
+    "athletics-ireland-boyne-a-c",
+    "athletics-ireland-bray-runners-a-c",
+    "athletics-ireland-bree-a-c",
+    "athletics-ireland-bridevale-a-c"
   ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Rotate Midlands running, athletics, fell and triathlon, Wales and Irish regional clubs. Check aliases and actual geography before selecting; queued candidates are not completed research.",
+    "Rotate South East England running/athletics/triathlon, Welsh community clubs and Irish regional athletics. Check actual catalogue slugs and profile map first; queued candidates are not completed research.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -483,6 +475,78 @@
       "url": "https://scunthorpe-harriers.com/",
       "status": "waiting-list-and-contact-route",
       "reason": "Present club dates to 1 October 2021; 1996 describes predecessor amalgamation. Joining uses website form/waiting list; no direct email or telephone established. Keep separate Scunthorpe running listings separate."
+    },
+    {
+      "slug": "athletics-ireland-athlone-a-c",
+      "url": "https://athloneac.clubforce.com/",
+      "status": "still-no-readable-club-body",
+      "reason": "Clubforce response contains only cookie notice; athloneac.ie returned 502. Athletics Ireland contacts and training location readable. Biography remains deferred; no freshly verified history."
+    },
+    {
+      "slug": "athletics-ireland-bailieboro-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Bailieboro_A.C.",
+      "status": "insufficient-primary-history",
+      "reason": "Current senior-only directory readable. Older town-news item does not establish a present programme; biography deferred."
+    },
+    {
+      "slug": "chesterfield-tri-club",
+      "url": "https://clubs.britishtriathlon.org/CHESTERFIELDTRICLUB",
+      "status": "timeout",
+      "reason": "Repeated public page timeouts. No biography, contact refresh or unsupported discipline change made."
+    },
+    {
+      "slug": "bakewell-athletics-club",
+      "url": "https://www.bakewellpuddingrace.co.uk/about",
+      "status": "training-and-origins-unconfirmed",
+      "reason": "Profile uses club-organised race source; 1998 is race origin, not club founding. SUMMAT sponsor and SUMMAT Run Club are not assumed to be the same entity as Bakewell AC. Race venue is not marked weekly training. No alumni inferred from course records."
+    },
+    {
+      "slug": "cannock-and-stafford-ac",
+      "url": "https://www.csathletics.com/Membership.htm",
+      "status": "homepage-empty-deep-pages-readable",
+      "reason": "2026 membership and honours pages recovered. Website points to working membership page. Honours described historically, not as current memberships or records; Rowley Park remains directory-labelled."
+    },
+    {
+      "slug": "welsh-athletics-denbigh-harriers",
+      "url": "https://www.denbighharriers.com/",
+      "status": "junior-timetable-conflict",
+      "reason": "Club says Tuesday/Thursday, Welsh Athletics Monday/Thursday. No exact junior timetable copied. Only shared enquiry contact refreshed; complete governing-body row not redated."
+    },
+    {
+      "slug": "welsh-athletics-cybi-striders",
+      "url": "https://www.cybistriders.co.uk/contact-us/",
+      "status": "supplier-and-placeholder-excluded",
+      "reason": "815.555.5555 and Pentraeth Carpets Facebook are template/supplier content, excluded. Correct CybiStriders Facebook comes from training page. Directory August date retained."
+    },
+    {
+      "slug": "biddulph-rc",
+      "url": "https://www.biddulphrunningclub.co.uk/contact",
+      "status": "placeholder-phone-and-alternative-email",
+      "reason": "555 WhatsApp placeholder and Facebook search URL excluded. Visible Gmail club email added; existing info@ domain mailto retained with old provenance."
+    },
+    {
+      "slug": "black-pear-joggers",
+      "url": "https://bpj.org.uk/contact",
+      "status": "client-rendered-contacts-unreadable",
+      "reason": "Contact body says Loading. Membership and training sources readable; public group retained. No inferred membership-secretary email or newly validated exact cricket-ground address."
+    },
+    {
+      "slug": "athletics-ireland-banagher-a-c",
+      "url": "https://banagher.ie/banagher-athletic-club/",
+      "status": "historical-training-and-contact",
+      "reason": "2017 formation supported by town community account published 2018. Historic work email, telephone, membership count and times are not claimed current; Cuba directory venue and St Rynaghs pitch not assumed equivalent."
+    },
+    {
+      "slug": "telford-harriers",
+      "url": "https://www.telfordharriers.com/",
+      "status": "age-eligibility-needs-reconciliation",
+      "reason": "Website says all ages; existing governing-body adult-only flag preserved pending a specific junior eligibility source. No change to age safeguards."
+    },
+    {
+      "slug": "mercia-fell-runners",
+      "url": "https://merciafr.club/about/",
+      "status": "historical-pdf-not-read",
+      "reason": "Current training and role emails read. Club profile PDF linked but not opened; exact origin and historical notables remain empty. Role emails formed by following the page explicit append-domain instruction."
     }
   ],
   "coverageReviewNotes": [
@@ -491,6 +555,7 @@
     "Some official sites mask public email text. Contact forms and previously sourced directory contacts were retained where no readable new email was available.",
     "Batch08 checked dates use UTC (13 October 2026; early 14 October in London). England Athletics query pages returned a JavaScript shell and Triathlon Ireland app directory an empty body in this run; their prior per-record check dates are preserved, not refreshed. New biographies primarily use opened official club pages plus readable Welsh Athletics, county, museum and Triathlon Ireland programme sources.",
     "Batch09 sources were read on 13–14 October UTC; new editorial/contact review date is 14 October. Buckley is the only refreshed governing-body row. Current directory comparisons total 1,682; 55 older rows retain their dates. No blanket manual review, athlete identity or production publication is claimed.",
-    "Batch10 primary sources read on 14 October UTC. Twenty new biographies and 15 historical/notable associations; no governing-body rows re-dated. Current directory comparisons remain 1,682, with 55 older rows. Public role contacts and exact source links checked; supplier contacts excluded. Seed v10; draft-preview only."
+    "Batch10 primary sources read on 14 October UTC. Twenty new biographies and 15 historical/notable associations; no governing-body rows re-dated. Current directory comparisons remain 1,682, with 55 older rows. Public role contacts and exact source links checked; supplier contacts excluded. Seed v10; draft-preview only.",
+    "Batch11: 20 profiles, five historical member entries and 19 website-contact/social records on 14 October UTC. Actual merged coverage 253/1737. No blanket directory refresh: 1682 recent comparisons, 55 older. Sports and address corrections only where primary evidence supports them; draft-preview only, seed v11."
   ]
 }
