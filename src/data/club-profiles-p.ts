@@ -10,7 +10,7 @@ export const northWestAndCommunityProfiles: Record<string, ClubProfile> = {
       "The club's listed standalone website was unavailable when checked. Triathlon Ireland publishes a club enquiry email, which is the best starting point for questions about joining, coached sessions and suitable events. A current weekly timetable, precise training venue and founding date have not been established, so newcomers should confirm arrangements directly before attending.",
     ],
     notable_members: [{ name: "Adam Ward", connection: "Club athlete in 2023 and 2025 race reports", detail: "Triathlon Ireland names him with Strabane when reporting his 2023 Mourne Sprint win and third place overall at Tri Tyrone in 2025." }],
-    corrections: { city: "Strabane", website: "https://www.triathlonireland.com/Get-Involved/Find-a-Club/" },
+    corrections: { city: "Strabane", website: "" },
     contact_note: "The listed standalone club website was unavailable on 14 October 2026. Use the club email published by Triathlon Ireland.",
     sources: [
       { title: "Triathlon Ireland club directory", url: "https://www.triathlonireland.com/Get-Involved/Find-a-Club/" },
