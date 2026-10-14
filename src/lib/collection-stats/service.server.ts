@@ -50,9 +50,9 @@ export async function readCollectionStats(sql: Sql, input: unknown): Promise<Sta
         and ($6::int is null or year=$6)
     ),
     race_groups as (
-      select case when $7 in ('sport','detail') then sport end as sport,
-        case when $7 in ('distance','detail') then distance end as distance,
-        case when $7 in ('country','county','detail') then country end as country,
+      select case when $7 in ('sport','detail','sportCountryDistance') then sport end as sport,
+        case when $7 in ('distance','detail','countryDistance','sportCountryDistance') then distance end as distance,
+        case when $7 in ('country','county','detail','countryDistance','sportCountryDistance') then country end as country,
         case when $7 in ('county','detail') then county end as county,
         count(distinct event_id) as events, count(distinct edition_id) as editions
       from selected_races group by 1,2,3,4
@@ -126,7 +126,11 @@ export async function readCollectionStats(sql: Sql, input: unknown): Promise<Sta
         'testProfiles',(select count(*) from athletes)-(select count(*) from profile_base)),
       'races',jsonb_build_object(
         'totals',(select jsonb_build_object('events',count(distinct event_id),'editions',count(distinct edition_id)) from selected_races),
-        'rows',coalesce((select jsonb_agg(r order by events desc,sport,distance,country,county) from race_groups r),'[]'::jsonb),
+        'rows',coalesce((select jsonb_agg(r order by
+          case when $7 in ('countryDistance','sportCountryDistance') then country end,
+          case when $7='sportCountryDistance' then sport end,
+          case when $7 in ('countryDistance','sportCountryDistance') then distance end,
+          events desc,sport,distance,country,county) from race_groups r),'[]'::jsonb),
         'gaps',(select jsonb_build_object(
           'sport',count(distinct event_id) filter(where sport='Unknown'),
           'distance',count(distinct event_id) filter(where distance='Unknown'),
