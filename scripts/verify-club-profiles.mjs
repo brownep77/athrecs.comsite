@@ -155,6 +155,20 @@ try {
   assert.equal(bySlug.get("welsh-athletics-parc-bryn-bach-running-club").address, "");
   assert.equal(bySlug.get("welsh-athletics-pegasus-running-club").city, "Cardiff");
   assert.equal(clubProfiles["city-of-preston-triathlon-club-for-juniors"].founded_year, undefined);
+  // Batch36: distinguish predecessor dates, local scope and session-specific venues.
+  assert.equal(clubProfiles["brighton-and-hove-ac"].founded_year, 1966);
+  assert.equal(clubProfiles["brighton-phoenix"].founded_year, 1981);
+  assert.equal(clubProfiles["bedford-and-county-ac"].founded_year, undefined);
+  assert.equal(clubProfiles["welsh-athletics-barry-and-vale-harriers"].founded_year, undefined);
+  assert.equal(clubProfiles["brighton-and-hove-frontrunners"].scope, undefined);
+  assert.equal(bySlug.get("brighton-and-hove-frontrunners").country, "England");
+  assert.equal(bySlug.get("bracknell-road-runners").address, "");
+  assert.equal(bySlug.get("bracknell-forest-runners").adult_only, true);
+  assert.equal(bySlug.get("tullamore-triathlon-club").adult_only, true);
+  assert.equal(bySlug.get("brighton-phoenix").address_kind, "training");
+  assert.ok(bySlug.get("brighton-phoenix").sports.includes("Swimming"));
+  assert.ok(bySlug.get("bridlington-road-runners").contacts.some(c => c.email === "bridlingtonroadrunners@outlook.com"));
+  assert.equal(bySlug.get("bridlington-road-runners").website, "https://www.bridlingtonroadrunners.co.uk/");
   for (const [slug, profile] of Object.entries(clubProfiles)) {
     assert.ok(bySlug.has(slug), `Editorial profile must match a canonical club: ${slug}`);
     assert.equal(bySlug.get(slug).summary, profile.summary);
