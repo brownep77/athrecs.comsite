@@ -1,62 +1,14 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch31",
+  "lastEditorialBatch": "2026-10-14-batch32",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch31",
+  "branch": "codex/club-profiles-batch32",
   "pullRequest": null,
-  "publication": "Batch31 adds21 profiles and eight sourced historical associations:606/1,737 assembled biographies and260 notable entries. Previous PR725 is now confirmed live:585 profiles and252 notable entries after all20 changed public pages passed checks. Batch31 awaits remote workflow and preview checks before publication.",
+  "publication": "Batch32 adds 20 profiles and six historical founder/coaching associations:626/1,737 assembled biographies and266 notable entries. PR731 is confirmed live at606 profiles/260 notable entries. Batch32 awaits exact-head workflow and deployment confirmation; release evidence belongs in its PR body.",
   "completedProfileSlugs": [
-    "eastern-masters-ac",
-    "eastleigh-rc",
-    "eden-runners",
-    "edmonton-rc",
-    "egdon-heath-harriers",
-    "ellesmere-port-rc",
-    "elmbridge-rrc",
-    "ely-runners",
-    "ely-tri-club",
-    "emersons-green-running-club",
-    "enfield-and-haringey-a-c",
-    "enfield-chasers",
-    "epsom-and-ewell-harriers",
-    "epsom-allsorts",
-    "epsom-oddballs-rc",
-    "erewash-valley-rc",
-    "esk-valley-fell-club",
-    "essington-harriers-running-club",
-    "eton-manor-ac",
-    "evenwood-road-runners",
-    "evesham-vale-triathletes"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 606,
-    "notableMemberEntries": 260,
-    "clubsWithContacts": 676,
-    "contactEntries": 1185,
-    "clubsWithEmail": 657,
-    "clubsWithPhone": 101,
-    "clubsWithSocials": 1028,
-    "socialLinks": 2128,
-    "websiteContactRecords": 953
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 21,
-    "notableMemberEntriesAdded": 8,
-    "contactOrSocialRecordsChanged": 21,
-    "newWebsiteContactRecords": 11,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 18,
-    "netSocialLinks": 20
-  },
-  "validationBeforeCommit": {
-    "status": "Primary-source retrieval and contact/social provenance assertions, canonical profile checks, catalogue and club audits, targeted ESLint, TypeScript and application build passed. All21 actual rendered pages passed biography, historical members, contacts/socials, location notes, country indicators, registration links, title/description/canonical and SportsOrganization assertions. Exact-head remote workflows and matching preview/production evidence must be recorded in the PR. Rebased onto main4fa03aba2edd0114a393ab7751660311c224eb60; final build, typecheck and rendered-page assertions passed. Local Chromium download failed with a truncated archive; use the dedicated remote Club profiles desktop/mobile workflow. No access controls or publication checks were bypassed."
-  },
-  "nextCandidateSlugs": [
     "exeter-university-athletic-club",
     "eye-community-runners",
-    "eynsford-running-club",
     "eynsham-road-runners",
     "fairlands-valley-spartans",
     "falmouth-running-club",
@@ -67,16 +19,68 @@
     "farsley-flyers",
     "faversham-running-club",
     "felixstowe-rrc",
-    "fenland-running-club",
-    "fetch-everyone",
     "finch-coasters",
     "fit-2-run",
     "fleckney-and-kibworth-athletics-club",
-    "folkestone-running-and-athletics-club"
+    "folkestone-running-and-athletics-club",
+    "forest-of-dean-ac",
+    "frome-running-club",
+    "ful-on-tri-club",
+    "fulham-running-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 626,
+    "notableMemberEntries": 266,
+    "clubsWithContacts": 689,
+    "contactEntries": 1198,
+    "clubsWithEmail": 669,
+    "clubsWithPhone": 103,
+    "clubsWithSocials": 1035,
+    "socialLinks": 2142,
+    "websiteContactRecords": 963
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 6,
+    "contactOrSocialRecordsChanged": 20,
+    "newWebsiteContactRecords": 10,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 13,
+    "netSocialLinks": 14
+  },
+  "validationBeforeCommit": {
+    "status": "Official-source retrieval and contact/social provenance assertions passed, together with canonical catalogue/profile checks, club audit, targeted ESLint, TypeScript and application build. Actual rendered-page verification and exact-head remote desktop/mobile workflows are recorded in the PR body. Main1776147853ea2af32f1853c206324e836bb5507b incorporated before editing; unrelated homepage colour controls preserved. No access controls or publication gates bypassed."
+  },
+  "nextCandidateSlugs": [
+    "gade-valley-harriers",
+    "gainsborough-and-morton-striders",
+    "garden-city-runners",
+    "garstang-running-club",
+    "gator-athletics-club",
+    "gipsy-hill-run-club",
+    "girls-that-jeff",
+    "glossopdale-harriers",
+    "gloucester-ac",
+    "gnosall-globetrotters-running-club",
+    "goodgym-race-team",
+    "goole-viking-striders",
+    "goole-youth-ac",
+    "gosforth-harriers-and-ac",
+    "goyt-valley-striders",
+    "grange-farm-and-dunmow-runners",
+    "grantham-ac",
+    "grantham-running-club",
+    "gravesend-road-runners",
+    "great-bentley-running-club",
+    "great-milton-athletics-club",
+    "great-western-runners",
+    "greenwich-tritons-triathlon-club",
+    "guernsey-ac"
   ],
   "resumeInstructions": [
-    "Read current main, PR725 and the branch/PR for batch31, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Do not repeat completed clubs.",
-    "Batch31 was rebased onto main4fa03aba2edd0114a393ab7751660311c224eb60, preserving newer route/statistics/research-pilot changes. Check current remote heads and pending deployments before editing. No further automatic redeploy of an older commit over newer production.",
+    "Read current main, PR731 and the batch32 PR, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Do not repeat completed clubs.",
+    "Batch32 includes main1776147853ea2af32f1853c206324e836bb5507b and its homepage appearance changes. Check remote heads and active work before editing; do not redeploy an older commit over newer production.",
     "Standing publication authority applies after exact-head dedicated Club profiles and wider quality gates pass. Verify matching AthRecs production and changed public pages before claiming new coverage live.",
     "Keep deployment/workflow evidence in PR descriptions to avoid checkpoint-only rebuild loops. No identities, result imports, verified status, privacy or outreach changes."
   ],
@@ -2160,6 +2164,102 @@
       "url": "https://eton-manor.com/pages/who-we-are",
       "status": "profile-added-with-qualified-gap",
       "reason": "History page timed out; current homepage, club activities and training pages read. No founding date or alumni inferred; exact clubhouse postcode not reconfirmed."
+    },
+    {
+      "slug": "eynsford-running-club",
+      "url": "https://eynsfordrunningclub.com/",
+      "status": "deferred",
+      "reason": "Earlier primary-page reading found useful history, but this batch encountered timeouts/verification screens. Finish recoverable primary evidence and contacts before authoring; do not bypass the challenge."
+    },
+    {
+      "slug": "fenland-running-club",
+      "url": "",
+      "status": "deferred",
+      "reason": "No website in catalogue; authoritative club identity and current programme still need sources."
+    },
+    {
+      "slug": "fetch-everyone",
+      "url": "https://www.fetcheveryone.com/",
+      "status": "deferred",
+      "reason": "Website describes a training platform; establish whether this canonical record is the affiliated club or wider online community, and its actual geographical scope."
+    },
+    {
+      "slug": "formula-one-circuit-crew",
+      "url": "https://www.formulaonecc.co.uk/",
+      "status": "deferred",
+      "reason": "Official pages failed TLS hostname validation; search text alone was not used for a biography. ClubBuzz alternative also unavailable."
+    },
+    {
+      "slug": "framlingham-flyers",
+      "url": "https://framflyers.org.uk/",
+      "status": "deferred",
+      "reason": "Official host refused connections; search extracts insufficient for source-open requirement."
+    },
+    {
+      "slug": "freck-and-warton-running-club",
+      "url": "https://www.facebook.com/freckandwartonRC",
+      "status": "deferred",
+      "reason": "Facebook yielded no substantive text; obtain club or governing-body evidence."
+    },
+    {
+      "slug": "fry-club-joggers",
+      "url": "http://frysjoggers.btck.co.uk/",
+      "status": "deferred",
+      "reason": "Legacy host returned a403 challenge; current primary site not established."
+    },
+    {
+      "slug": "fylde-coast-runners",
+      "url": "https://www.fyldecoastrunners.com",
+      "status": "deferred",
+      "reason": "Retrieved site contains too little text; distinguish club from race organiser before describing membership."
+    },
+    {
+      "slug": "eye-community-runners",
+      "url": "https://eyerunners.co.uk/index.php/contact-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Enquiry emails masked; retained contact page and existing sourced contacts without decoding or guessing addresses."
+    },
+    {
+      "slug": "far-runners-faringdon",
+      "url": "https://www.farrunners.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Age wording differs across pages; no categorical age limit asserted. Session booking identifies current meeting point."
+    },
+    {
+      "slug": "fairlands-valley-spartans",
+      "url": "https://www.fvspartans.org.uk/contact-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Contact page names Marriotts School while new-member and home pages name Cricket/Hockey Club and Ridlins; retain qualified multi-venue note. No stale half-marathon month repeated."
+    },
+    {
+      "slug": "faversham-running-club",
+      "url": "https://favershamrunningclub.co.uk/our-club/about-frc/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Overview says free running while joining describes paid EA membership; explain distinction and ask visitors to confirm appropriate option, without promising a price."
+    },
+    {
+      "slug": "felixstowe-rrc",
+      "url": "https://frr.org.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Older overview also mentions Martlesham10K; current race navigation corroborates Kirton5 and Coastal10, so Martlesham not asserted as a current club-organised race."
+    },
+    {
+      "slug": "finch-coasters",
+      "url": "https://finchcoasters.org.uk/contact-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Different official pages link FinchCoasters and finch.coasters Instagram accounts. Contact-page account sourced; no current account ownership assertion."
+    },
+    {
+      "slug": "falmouth-running-club",
+      "url": "https://www.falmouthrunningclub.co.uk/contact",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Contact page gives falmouthrunningclub@gmail.com while footer retains falmouthroadrunners@yahoo.co.uk. Prefer labelled enquiry email; do not claim older address invalid."
+    },
+    {
+      "slug": "fordy-runs-network",
+      "url": "https://www.fordyruns.com/",
+      "status": "deferred",
+      "reason": "Local canonical branches need branch-specific evidence; a shared parent homepage does not justify repeating a generic biography for each local group."
     }
   ],
   "coverageReviewNotes": [
@@ -2190,26 +2290,27 @@
     "Batch 29: 24 English regional running/athletics profiles, six historical associations, 24 website contact records updated (13 new), plus one sourced correction of an Instagram domain typo. Assembled 565/1,737 biographies and 240 notable entries; 25 net contact entries and 12 net social links. Primary pages opened 14 October 2026. Other directory comparison dates unchanged.",
     "Remaining non-English website candidates are eight Welsh school-district listings, requiring an entity-type review before describing them as joinable clubs. The next ordinary-club batch therefore rotates English regions and includes fell, university and sprint clubs.",
     "Batch30:20 English profiles rotating Yorkshire, the North East, Midlands, London and South West, spanning road/fell running, track/field, university sport, sprint coaching and triathlon.12 historical/founding/coaching associations,18 contact/social records changed(12 new). Websites recovered for DK and Chambers; addresses and postcodes corrected without renewing unrelated directory dates. Ordinary non-English candidates remain completed or source-blocked; eight Welsh school-district entities need an entity-type review. No athlete identity, result, privacy, verification, registration or metadata implementation changed.",
-    "Batch31 rotates21 English clubs across East Anglia, the North West, North East, London, Surrey, Dorset, Midlands and Bristol: masters, women’s running, fell running, juniors and triathlon.8 historical associations;21 contact/social records changed,11 new;18 net contacts and20 net social links. Other national candidates remain completed/source-blocked or require school-district entity review. Existing directory comparison dates are not renewed."
+    "Batch31 rotates21 English clubs across East Anglia, the North West, North East, London, Surrey, Dorset, Midlands and Bristol: masters, women’s running, fell running, juniors and triathlon.8 historical associations;21 contact/social records changed,11 new;18 net contacts and20 net social links. Other national candidates remain completed/source-blocked or require school-district entity review. Existing directory comparison dates are not renewed.",
+    "Batch32:20 English regional profiles including university, women’s running, juniors, community groups and triathlon. Six historical founder/coach associations;20 contact/social records updated(10new),13 net contacts and14 net social links. Other nations remain completed/source-blocked or school-district entities requiring review; next queue includes Guernsey. Directory comparison dates unchanged."
   ],
-  "previousPullRequest": 725,
+  "previousPullRequest": 731,
   "productionAuthorization": {
     "date": "2026-10-14",
     "instruction": "can you publish all and continue please",
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 725,
-    "mergeCommit": "06f5f6a238a157637ff814c917e9e1b308a9311a",
+    "previousPullRequest": 731,
+    "mergeCommit": "3ca8f42c9642591a73f35facae9182abad62d432",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
     "team": "athrecs-holding-page-set-up",
-    "status": "READY production deployment containing PR725; all20 live pages passed biography, contact, flag, registration and metadata assertions on14October2026.",
-    "lastConfirmedLiveCommit": "4fa03aba2edd0114a393ab7751660311c224eb60",
-    "lastConfirmedLiveDeployment": "dpl_9jVsW4ZUi4NuYaXiwt73eQYMDy9k",
-    "lastConfirmedLiveProfiles": 585,
-    "lastConfirmedLiveNotableEntries": 252,
-    "mainProfilesAtStart": 585,
-    "clubProfilesWorkflow": 38605817592,
-    "qualityGateWorkflow": 38605817681
+    "status": "PR731 exact production deployment READY; all21 changed live pages passed full biography, contacts/socials, flag, registration and metadata checks on14October2026.",
+    "lastConfirmedLiveCommit": "3ca8f42c9642591a73f35facae9182abad62d432",
+    "lastConfirmedLiveDeployment": "dpl_EyEf6sqyyAyfPLcXH4BUAR9saspz",
+    "lastConfirmedLiveProfiles": 606,
+    "lastConfirmedLiveNotableEntries": 260,
+    "mainProfilesAtStart": 606,
+    "clubProfilesWorkflow": 38611655943,
+    "qualityGateWorkflow": 38611655646
   }
 }
