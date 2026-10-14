@@ -14,8 +14,10 @@ const query=async(text,values=[])=>{if(inject&&/insert\s+into\s+results\(/i.test
 const sql=async(strings,...values)=>{let text=strings[0];values.forEach((_,i)=>{text+=`$${i+1}${strings[i+1]}`;});return query(text,values);};sql.query=query;
 sql.transaction=async fn=>{await client.query('begin');try{const r=await fn(sql);await client.query('commit');return r;}catch(e){await client.query('rollback');throw e;}};
 const core=load('src/lib/athlete-workspace/core.ts',{zod});
+const details=load('src/lib/athrecs/result-details.ts',{zod});
+const presentation=load('src/lib/athrecs/profile-result-presentation.ts',{'./result-details.ts':details});
 const scope={IS_RUNRECS_SITE:false},db={getSql:async()=>sql,dbSource:'neon'};
-const service=load('src/lib/athlete-workspace/service.server.ts',{'node:crypto':crypto,'../db':db,'../site-scope':scope,'./core':core});
+const service=load('src/lib/athlete-workspace/service.server.ts',{'node:crypto':crypto,'../db':db,'../site-scope':scope,'./core':core,'../athrecs/profile-result-presentation':presentation});
 const publication=load('src/lib/athlete-workspace/publication.server.ts',{'node:crypto':crypto,'../db':db,'../site-scope':scope,'./core':core});
 const staff={userId:'workspace-staff',staff:true},owner={userId:'workspace-owner',staff:false},stranger={userId:'workspace-stranger',staff:false};
 const source='https://example.test/official-results';
@@ -120,7 +122,7 @@ try{
   const safeBatch=await service.getBatch(ownDraft.id,owner);assert.equal(safeBatch.evidence_for,'');assert.equal(safeBatch.evidence_against,'');assert.equal('responseBy' in safeBatch.entries[0],false);
   assert((await service.workspace(null,staff)).batches.some(b=>b.id===ownDraft.id),'Unassigned member submissions are available for staff review');
   assert.equal((await publication.reviewBatch(request(ownDraft.id,1,other.id,[1]),staff)).added,1,'Staff can link a reviewed unassigned proposal to a selected athlete');
-  const details=load('src/lib/athrecs/result-details.ts',{zod});const records=load('src/lib/athrecs/profile-records.ts',{'./result-details.ts':details,'./road-performance-conditions.ts':{roadPerformanceCondition:()=>null}});
+  const records=load('src/lib/athrecs/profile-records.ts',{'./result-details.ts':details,'./road-performance-conditions.ts':{roadPerformanceCondition:()=>null}});
   const publicDetails=details.readResultDetails(storedResult.result_details);assert.equal('staffApproval' in publicDetails,false,'Public result details strip staff approval metadata');
   assert.equal(JSON.stringify(publicDetails).includes(originalApproval.note),false,'The approval reason is not a public result note');
   const perf={resultId:1,editionId:1,sport:'Running',surface:'Road',distanceCode:'10K',distanceKm:10,status:'finished',finishTimeSeconds:2400,chipTimeSeconds:2400,gunTimeSeconds:null,overallPlace:1,category:null,sourceUrls:[source],details:details.readResultDetails({profileExcluded:true,privateReason:'not exposed'})};
