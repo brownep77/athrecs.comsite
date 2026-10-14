@@ -9,6 +9,10 @@ on:
       - "src/lib/athrecs/results-import.server.ts"
       - "migrations/**"
       - "scripts/verify-results-archive*"
+      - "scripts/verify-browser-results-button.mjs"
+      - "scripts/lib/browser-results-button.mjs"
+      - "scripts/build-browser-results-button.mjs"
+      - "public/tools/browser-results.html"
       - "scripts/verify-captured-results.mjs"
       - "scripts/verify-private-archive-profiles.py"
       - "src/components/staff/CapturedResultsBrowser.tsx"
@@ -50,5 +54,7 @@ jobs:
         env:
           ATHRECS_ARCHIVE_TEST_POSTGRES: "1"
       - run: npx playwright install --with-deps chromium
+      - name: Browser bookmark capture and London list regression
+        run: node scripts/verify-browser-results-button.mjs
       - name: Browser to API to disposable database
         run: npm run verify:results-archive-browser

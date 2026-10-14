@@ -96,6 +96,37 @@ try {
   assert.match(await page.getByRole('status').innerText(), /No supported results table/);
   assert.equal(await page.getByRole('button', { name: 'Save this page' }).count(), 0);
 
+  // London/Mika list structure, reproduced with synthetic values only.
+  const londonHeadings = ['Place <small>(Overall)</small>', 'Place <small>(Gender)</small>', 'Place <small>(Category)</small>', 'Name', 'Club', 'Runner Number', 'Category', 'Event', 'Half', 'Finish'];
+  const londonTypes = ['type-place place-secondary', 'type-place place-primary', 'type-place place-secondary', 'type-fullname', 'type-field', 'type-field', 'type-age_class', 'type-event_name', 'type-time split', 'type-time split'];
+  const londonValues = ['215', '1', '1', '<a href="?idp=synthetic-london">Example, Synthetic (IRL)</a>', 'Test club', '501', '18-39', 'Mass', '01:30:00', '03:04:05'];
+  const fields = (values, body = false) => values.map((value, i) => `<div class="list-field ${londonTypes[i]}">${body && i > 3 ? `<div class="list-label">${londonHeadings[i]}</div>` : ''}${value}</div>`).join('');
+  const londonFixture = `<style>.list-label{display:none}</style><ul class="list-group list-group-multicolumn"><li class="list-group-header"><div class="list-field-wrap">${fields(londonHeadings)}</div></li><li class="list-group-item"><div class="list-field-wrap">${fields(londonValues, true)}<div class="list-field type-favorite"><a href="?favorite_add=synthetic">Favourite</a></div></div></li></ul>`;
+  await page.setContent(londonFixture);
+  const london = await page.evaluate('(' + collectBrowserResults.toString() + ')(document)');
+  assert.equal(london.tables.length, 1);
+  assert.deepEqual(london.tables[0].headers, ['Place (Overall)', 'Place (Gender)', 'Place (Category)', 'Name', 'Club', 'Runner Number', 'Category', 'Event', 'Half', 'Finish']);
+  assert.deepEqual(london.tables[0].rows[0], ['215', '1', '1', 'Example, Synthetic (IRL)', 'Test club', '501', '18-39', 'Mass', '01:30:00', '03:04:05']);
+  assert.equal(london.tables[0].rowLinks[0].length, 1);
+  await page.evaluate(decodeURIComponent(browserResultsBookmark().slice('javascript:'.length)));
+  const londonDownload = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Save this page', exact: true }).click();
+  const londonParsed = parseBrowserCapture(readFileSync(await (await londonDownload).path(), 'utf8'));
+  assert.equal(londonParsed.table.rows[0][9], '03:04:05');
+  assert.ok(await page.getByRole('button', { name: 'Close', exact: true }).isVisible());
+  await page.getByRole('button', { name: 'Close', exact: true }).click();
+  // Visible inline labels must never contaminate cell values.
+  await page.addStyleTag({ content: '.list-label{display:block}' });
+  assert.deepEqual((await page.evaluate('(' + collectBrowserResults.toString() + ')(document)')).tables[0].rows, london.tables[0].rows);
+  await page.locator('.list-group-item .type-age_class').evaluate(el => el.remove());
+  assert.equal((await page.evaluate('(' + collectBrowserResults.toString() + ')(document)')).tables.length, 0);
+  await page.setContent(londonFixture.replace('>Runner Number</div>501', '>Wrong heading</div>501'));
+  assert.equal((await page.evaluate('(' + collectBrowserResults.toString() + ')(document)')).tables.length, 0);
+  await page.setContent(londonFixture + '<style>.list-group-header .type-time{display:none}</style>');
+  const narrow = await page.evaluate('(' + collectBrowserResults.toString() + ')(document)');
+  assert.equal(narrow.tables.length, 0);
+  assert.match(narrow.warnings.join(' '), /widen the browser/);
+
   // Setup page uses the exact tested bookmark, with a usable mobile layout.
   await page.setContent(readFileSync('public/tools/browser-results.html', 'utf8'));
   assert.equal(await page.locator('#bookmark').getAttribute('href'), browserResultsBookmark());

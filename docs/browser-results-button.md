@@ -9,7 +9,9 @@ This is a loaded-page capture, not a whole-race crawler. It makes no network
 requests, follows no pagination, reads no credentials or input values, and does
 not alter verification, publication or athlete matching rules. Unsupported table
 layouts fail visibly. Provider-specific layouts and bookmark-script restrictions
-need checking on the first real capture; London compatibility is not yet proven.
+need checking on the first real capture. Version 2 supports London/Mika lists
+with their own heading row and typed fields. A wide desktop window is required
+so every heading is visible; conflicting structures fail without exporting.
 
 The file preserves the visible column values, row links, source page, title,
 capture time and explicit partial-page scope. JSON avoids spreadsheet formula
@@ -39,4 +41,16 @@ The browser check accepts `CHROMIUM_PATH` for an already installed executable.
 Its network is intercepted with synthetic fixtures. It exercises the encoded
 bookmark URL, preview, download, archive parsing, field mapping, original time
 precision, DNF, hidden values, conflicting IDs and malformed input. It does not
-establish live-provider compatibility or make database writes.
+make database writes. The London regression fixture reproduces the supplied
+2026 markup using synthetic values; it checks heading/value alignment, inline
+label exclusion, malformed rows, hidden headings and downloaded-file validation.
+
+Version 2 was also checked offline against the user-supplied 2026 HTML: all
+1,000 rows and ten original columns matched, with runner-detail links retained.
+The saved page was isolated from scripts and external resources, using desktop
+visibility styles for the responsive labels. This is saved-page verification,
+not a successful live fetch or identity verification. The uploaded HTML is not
+committed to source control.
+
+To update an installed button, delete the old bookmark and drag the new button
+from the setup page. Existing bookmarks embed their code and do not auto-update.
