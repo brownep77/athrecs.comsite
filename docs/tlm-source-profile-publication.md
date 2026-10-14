@@ -155,3 +155,23 @@ validate every history against the application schema, and rehearse the immutabl
 plan on a branch created after the production-directory screen. Recheck stored
 values and replay, publish the authorized batch, then check every new public page
 and sitemap entry. Preserve the previous audit and complete held/public partition.
+## Reviewing incomplete recorded places
+
+`continue-tlm-partial-location-profiles.py` handles complete held exact-name
+groups with at least two independently dated observations recording the same
+complete city/state pair. Other location fields must be blank or exactly match
+that pair. One complete location, contradictory places, placeholder values or a
+different state are insufficient. This creates provisional source profiles;
+it does not infer residence or verify identity.
+
+Private decisions bind the full group, recorded place, supporting source keys
+and incomplete source keys. Exact names, adult reported ages, compatible age
+intervals, gender, separate dates, clubs and source-quality checks still apply.
+The original rows remain unchanged, including every blank. Existing-directory
+matches remain held, and no existing profile or account is merged or overwritten.
+
+Run `python3 scripts/verify-tlm-partial-location-review.py` with the other source
+guards, then compare fresh provider files, screen the production directory,
+validate the schema, rehearse and replay on an isolated branch. Publish only
+the bounded reviewed plan and check all public results, including pagination,
+privacy, sitemap inclusion and crawler access.
