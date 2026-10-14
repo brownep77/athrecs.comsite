@@ -6,10 +6,10 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 781 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 567 clubs: 553 publish an email address and 71 a telephone number. There are 970 contact entries in total, including named directory contacts with no direct email or telephone.
-- 960 clubs have social links, with 1,963 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 334 clubs have extended, individually written profiles (19.2% of the catalogue). These contain 164 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
+- Website research contributes contact pages or contact/social details for 795 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The merged catalogue has contact entries for 574 clubs: 560 publish an email address and 74 a telephone number. There are 987 contact entries in total, including named directory contacts with no direct email or telephone.
+- 967 clubs have social links, with 1,976 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
+- 354 clubs have extended, individually written profiles (20.4% of the catalogue). These contain 173 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
 The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. That batch did not change contact or social coverage.
 
@@ -179,11 +179,31 @@ Six candidates remain deferred: Aurora Harriers (unavailable URL and New Zealand
 
 Main was inspected at 464292e before edits; its newer changes do not overlap this club data. Seed v16. Existing catalogue/profile/audit, source coverage, targeted lint, type, slug and build checks are run with local publication hooks disabled. Exact-commit Club profiles desktop/mobile evidence and the matching AthRecs Vercel preview are recorded in PR #680 after the guarded branch update. Draft previews only; no production publication.
 
+## Seventeenth editorial batch — 14 October 2026 UTC
+
+Adds 20 profiles: Almost Athletes, Angels, Avon Valley Runners, Bere Alston Trekkers, Bitton, Bodmin Running Club, Bourton Roadrunners, Bramhall, Burnden, Ballymore Cobh, Ballymun, Ballyvolane, Betsi Runaways, Blaenau Gwent Athletics, Cardiff Archers, CDF Runners, Peninsula Triathlon, Bridport, Burnham-on-Sea Harriers and Calne. Nine historical, founding or coaching associations cover Inger Baud, Dave Grant, Neil Russell, Sonia O'Sullivan, Nicola Haines Jones, Phil Warwicker, Brian Beale, Arthur Gilbert and Denise Nott. These remain editorial associations, not athlete identity verification or result imports.
+
+Twenty website-contact records changed, fourteen new. Actual merged totals are 354/1,737 extended biographies (20.4%), 173 notable entries, 574 clubs with contacts (987 entries), 560 with email and 74 with phone; 967 clubs have 1,976 distinct social links. Net additions are seventeen contact entries, seven email-covered clubs, three phone-covered clubs and thirteen social links. Source URLs and 14 October review dates accompany accepted fields. Whole-directory dates remain 1,682 recent and 55 older comparisons; this is not a whole-directory manual review.
+
+Recovered Bridport's current non-hyphenated website after the old domain returned 410, and Peninsula's myClubhouse website after its old domain failed. Current club pages confirm two weekly Bridport sessions, overriding an older council three-session listing. Peninsula's 2026 junior-section announcement supersedes the older directory adult-only flag; its March beginner course is described historically. Neither club receives an invented founding year or precise permanent training address.
+
+Bourton's town is corrected from Cheltenham to Bourton-on-the-Water. Bitton's Longwell Green Community Centre address is clarified. Calne, Burnham, Avon Valley, Blaenau Gwent, Cardiff Archers, Bramhall and Burnden receive supported training-venue labels with session-specific notes. Bere Alston, Bodmin, Ballymore Cobh, Ballymun, Betsi and CDF have unhelpful or unconfirmed exact-address text replaced by multi-venue notes. Almost Athletes' track location is supported, but its postcode is left empty because club and adjacent facility-reception pages differ. Its detailed October Wednesday venue takes precedence over older homepage copy. Training facilities and correspondence addresses remain distinct.
+
+Joining details preserve adult-only Almost Athletes and Ballyvolane, separate AVR youth sessions, Bourton's under-eleven parental supervision, Bramhall's seasonal junior age differences, Cardiff Archers' invitation-based competitive progression, CDF's advance booking and distance requirements, and Betsi's suspended Sunday-track notice. Burnden Tri's planned coached swimming/cycling is not promised as already operating. Ballymun's 2022 merger is distinct from its 2023 affiliation, and its proposed Balcurris track is not described as built. Bodmin's 2024 rename does not merge it with the separate women's club. CDF's 2019 affiliation is not converted into a founding year.
+
+Ballymore Cobh history uses Phyllis Kidney's primary account, opened and read as a three-page PDF (printed pages 44–46) through the web reader after direct download was blocked. Its Sonia O'Sullivan coaching connection is supported independently of the clubhouse-opening visit. The archive's erroneous 1968 Munich Olympics wording is not copied. Danny Talbot's AVR track-opening visit is not treated as membership. Cardiff Met's broader university athletes are not claimed as Archers alumni. Neil Russell's supported 2021 fundraiser is distinguished from an undated future-challenge announcement.
+
+Removed ambiguous Angels and Bramhall info@ records previously extracted from mismatched mailto targets, replacing them with consistently published matching addresses. CDF's current website welfare names override older directory names at the same role emails. Ballymun's misspelled contact-page variant is not added over the corroborated header/directory address. Peninsula's conflicting programme email is likewise not added. Masked emails, university/facility contacts, website suppliers, x.com/false, malformed social links and mismatched Burnham X targets are excluded. Existing unrelated sourced fields remain intact.
+
+Three candidates remain deferred: Bodmin Women's RC (502), Ventoux Triathlon (holding page; French namesake excluded), and Ballyskenach (thin primary account and conflicting third-party phone). Detailed current gaps and an island/South West/Welsh/Irish queue are saved in the checkpoint. No queued club is claimed as researched.
+
+Main inspected at 763eb52; newer athlete-publication and club-results route work is preserved. All twelve workflows for preceding commit b0d8d3e now pass. Source/contact evidence, catalogue/profile and directory checks, targeted lint, TypeScript, catalogue/slug checks and build pass locally with database publication hooks skipped. The final postcode clarification is covered by the profile check and exact-commit deployment build. Club-only seed v17. Exact-commit Club profiles desktop/mobile evidence and AthRecs preview results are recorded in draft PR #680 after a guarded update. Not merged or published to production.
+
 ## Maintenance files
 
 - `src/data/club-enrichment-a.ts` and `-b.ts`: directory fields and actual source comparison dates.
 - `src/data/club-website-contacts.ts`: accepted public contact/social discoveries and per-field provenance.
-- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-p.ts`: manually reviewed prose, sources and explicit corrections.
+- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-q.ts`: manually reviewed prose, sources and explicit corrections.
 - `docs/club-profile-checkpoint.json`: completed batch slugs, source gaps and next candidates. Check the live branch and profile map before resuming; the queue is not evidence that a club has been researched.
 - `scripts/audit-club-websites.mjs /absolute/scratch/output.json`: resumable read-only screening into a review queue. It never writes the catalogue.
 
