@@ -125,6 +125,11 @@ try {
       performance: triathlonPerformance,
     },
   ]);
+  assert.equal(historyPerformanceSchema.parse({ ...triathlonPerformance, bib: 123 }).bib, "123");
+  assert.equal(
+    historyPerformanceSchema.parse({ ...triathlonPerformance, bib: null }).bib,
+    undefined,
+  );
   const triathlonHtml = renderToStaticMarkup(
     createElement(CompactResults, {
       results: [],
