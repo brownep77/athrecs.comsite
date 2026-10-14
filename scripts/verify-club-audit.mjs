@@ -47,7 +47,7 @@ assert(
   "Every audit record must retain its actual, non-future check date",
 );
 assert(
-  enriched.filter(([, club]) => club.checked_at === "2026-10-13").length >= 1681,
+  enriched.filter(([, club]) => club.checked_at >= "2026-10-13").length >= 1681,
   "Current directory source comparisons were lost",
 );
 assert.equal(

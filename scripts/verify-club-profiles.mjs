@@ -35,6 +35,18 @@ try {
   assert.match(birchfield.address, /Alexander Stadium/);
   assert.equal(birchfield.address_kind, "training");
   assert.equal(bySlug.get("unattached").country, "");
+  // Later targeted reviews must preserve safe venue and contact distinctions.
+  assert.deepEqual(bySlug.get("allen-valley-striders").sports, ["Running"]);
+  assert.equal(bySlug.get("allen-valley-striders").city, "Allendale");
+  assert.equal(bySlug.get("allen-valley-striders").adult_only, false);
+  assert.equal(clubProfiles["burnley-ac"].founded_year, undefined);
+  assert.match(bySlug.get("burnley-ac").address, /Barden Lane/);
+  assert.equal(bySlug.get("athletics-ireland-cabinteely-a-c").postcode, "");
+  assert.equal(bySlug.get("athletics-ireland-castlebar-a-c").address_kind, "directory");
+  const buckley = bySlug.get("welsh-athletics-buckley-rc");
+  assert.ok(buckley.checked_at >= "2026-10-14");
+  assert.ok(buckley.contacts.some((c) => c.email === "buckley.runners@gmail.com"));
+  assert.ok(!buckley.contacts.some((c) => /pauldodd07/i.test(c.email ?? "")));
   for (const [slug, profile] of Object.entries(clubProfiles)) {
     assert.ok(bySlug.has(slug), `Editorial profile must match a canonical club: ${slug}`);
     assert.equal(bySlug.get(slug).summary, profile.summary);
@@ -132,7 +144,7 @@ try {
         clubsWithPhone: clubs.filter((c) => c.contacts?.some((x) => x.phone)).length,
         clubsWithSocials: clubs.filter((c) => c.socials?.length).length,
         socialLinks: clubs.reduce((n, c) => n + (c.socials?.length ?? 0), 0),
-        currentDirectoryChecks: clubs.filter((c) => c.checked_at === "2026-10-13").length,
+        currentDirectoryChecks: clubs.filter((c) => c.checked_at >= "2026-10-13").length,
         notableMembers: Object.values(clubProfiles).reduce(
           (n, c) => n + (c.notable_members?.length ?? 0),
           0,

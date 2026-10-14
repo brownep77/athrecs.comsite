@@ -1,69 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-13-batch08",
-  "reviewedAt": "2026-10-13",
+  "lastEditorialBatch": "2026-10-14-batch09",
+  "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "alton-runners",
-    "andover-ac",
-    "ashford-ac",
-    "bexhill-runners-and-triathletes",
-    "bognor-regis-tone-zone-runners",
-    "canterbury-harriers",
-    "chichester-runners-and-ac",
-    "crawley-ac",
-    "eastbourne-rovers-ac",
-    "fleet-and-crookham-ac",
-    "gosport-road-runners",
-    "maidstone-harriers-run-and-tri-club",
-    "welsh-athletics-aberdare-valley-aac",
-    "welsh-athletics-amman-valley-harriers",
-    "welsh-athletics-colwyn-bay-ac",
-    "athlone-triathlon-club",
-    "carlow-tc",
-    "cobh-triathlon-club",
-    "drogheda-triathlon-club",
-    "lough-key-triathlon-club"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 193,
-    "notableMemberEntries": 100,
-    "clubsWithContacts": 512,
-    "contactEntries": 874,
-    "clubsWithEmail": 498,
-    "clubsWithPhone": 64,
-    "clubsWithSocials": 923,
-    "socialLinks": 1870,
-    "websiteContactRecords": 696
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 7,
-    "contactOrSocialRecordsChanged": 14,
-    "trainingOrClubhouseVenuesClarified": 10,
-    "combinedOrUnconfirmedAddressesReplacedByNotes": [
-      "bexhill-runners-and-triathletes",
-      "welsh-athletics-amman-valley-harriers"
-    ],
-    "sportsCorrected": ["maidstone-harriers-run-and-tri-club"],
-    "adultOnlyClarified": ["drogheda-triathlon-club"],
-    "websiteRecovered": ["athlone-triathlon-club"],
-    "validationRepair": "Slug stability now checks club JSON-LD generation in the existing shared SEO helper and its route integration; no metadata implementation changed."
-  },
-  "validationBeforeCommit": [
-    "actual-catalogue profile and metadata checks",
-    "directory audit checks",
-    "opened-primary-source coverage and contact evidence",
-    "targeted ESLint",
-    "TypeScript typecheck",
-    "slug stability",
-    "production build (publication hooks skipped)"
-  ],
-  "nextCandidateSlugs": [
     "accrington-road-runners",
     "allen-valley-striders",
     "ashington-hirst-running-club",
@@ -85,10 +28,85 @@
     "athletics-ireland-caltra-and-district-a-c",
     "athletics-ireland-castlebar-a-c"
   ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 213,
+    "notableMemberEntries": 105,
+    "clubsWithContacts": 522,
+    "contactEntries": 889,
+    "clubsWithEmail": 509,
+    "clubsWithPhone": 65,
+    "clubsWithSocials": 931,
+    "socialLinks": 1887,
+    "websiteContactRecords": 709
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 18,
+    "directoryRecordsRefreshed": 1,
+    "trainingOrClubhouseVenuesClarified": 12,
+    "combinedOrUnconfirmedAddressesReplacedByNotes": [
+      "aycliffe-running-club",
+      "bowland-fell-runners",
+      "welsh-athletics-abergele-harriers",
+      "athletics-ireland-caltra-and-district-a-c"
+    ],
+    "addressKindClarified": [
+      "chorley-athletic-and-triathlon-club",
+      "athletics-ireland-castlebar-a-c"
+    ],
+    "sportsCorrected": [
+      "allen-valley-striders",
+      "chorley-athletic-and-triathlon-club",
+      "elswick-harriers"
+    ],
+    "adultOnlyClarified": [
+      "allen-valley-striders",
+      "welsh-athletics-abergele-harriers",
+      "welsh-athletics-buckley-rc"
+    ],
+    "websiteRecovered": [
+      "chorley-athletic-and-triathlon-club",
+      "athletics-ireland-cabinteely-a-c",
+      "athletics-ireland-castlebar-a-c"
+    ]
+  },
+  "validationBeforeCommit": [
+    "actual-catalogue profile and metadata checks",
+    "directory audit checks",
+    "opened-primary-source coverage and contact evidence",
+    "targeted ESLint",
+    "TypeScript typecheck",
+    "slug stability",
+    "production build (publication hooks skipped)"
+  ],
+  "nextCandidateSlugs": [
+    "bingley-harriers-and-ac",
+    "city-of-hull-ac",
+    "cleethorpes-ac",
+    "doncaster-athletic-club",
+    "doncaster-triathlon-club",
+    "east-hull-harriers-and-ac",
+    "halifax-harriers-and-ac",
+    "holmfirth-harriers-ac",
+    "kimberworth-striders",
+    "lincoln-wellington-athletic-club",
+    "rotherham-harriers-and-ac",
+    "scunthorpe-harriers-athletic-club",
+    "welsh-athletics-caerleon-rc",
+    "welsh-athletics-caldicot-running-club",
+    "welsh-athletics-chepstow-harriers",
+    "welsh-athletics-cornelly-striders-ac",
+    "athletics-ireland-ballincollig-a-c",
+    "athletics-ireland-ballyroan-abbeyleix-and-district-a-c",
+    "athletics-ireland-blackrock-louth-a-c",
+    "athletics-ireland-blayney-rockets-a-c"
+  ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Rotate Lancashire/North East England (including fell running and triathlon), Wales and Irish regional athletics. Check possible correspondence locations such as county/town mismatches from primary club sources. Queued candidates are not completed research.",
+    "Rotate Yorkshire/Lincolnshire running, athletics and triathlon, Wales and Irish regional clubs. Check aliases and actual geography before selecting; queued candidates are not completed research.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -331,12 +349,79 @@
       "url": "https://www.triathlonireland.com/news/new2tri-upcoming-programmes/",
       "status": "primary-programme-fallback",
       "reason": "Official Facebook response had no readable body. Opened Triathlon Ireland March 2026 programme and race guide support beginner activity and public email. Treat course and race locations separately, not as a permanent clubhouse. No exact origins or alumni established."
+    },
+    {
+      "slug": "burnley-ac",
+      "url": "https://www.burnleyathleticclub.co.uk/about-us/",
+      "status": "conflicting-foundation-date",
+      "reason": "About says 1924; Membership says since 1970. No founded_year assigned. Barden Lane BB10 1JQ is supported by the club; older New Hall Street directory location replaced."
+    },
+    {
+      "slug": "durham-city-harriers-and-ac",
+      "url": "https://www.durhamcityharriers.org.uk/",
+      "status": "junior-intake-and-unrelated-links",
+      "reason": "Joining page says junior membership full and waiting list closed. Recheck before changing availability. Official homepage/joining footer also contains unrelated gambling, loan and supplement links; excluded from contacts and sources. Their presence does not establish club endorsement or an independently diagnosed compromise."
+    },
+    {
+      "slug": "welsh-athletics-abergele-harriers",
+      "url": "https://www.abergeleharriers.co.uk/Form1.htm",
+      "status": "conflicting-contact-and-stale-timetable",
+      "reason": "Frames were read through their actual linked pages. Membership email label and mailto target disagree; neither added. 2021 pandemic timetable differs from current Welsh Athletics venue listing. Address cleared and current arrangements must be confirmed."
+    },
+    {
+      "slug": "welsh-athletics-brackla-harriers",
+      "url": "https://www.bracklaharriers.co.uk/",
+      "status": "history-document-unread",
+      "reason": "Club history DOCX is linked but was not opened. No exact origin or alumni supplied. Membership page mixes 2025/26 fees and a 2026/27 form; no current price copied."
+    },
+    {
+      "slug": "welsh-athletics-buckley-rc",
+      "url": "https://www.welshathletics.org/en/club/view/buckley-rc",
+      "status": "directory-contact-corrected",
+      "reason": "14 October directory comparison replaces Tracie Dodd / Pauldodd07@aol.com with Caroline Caffery / buckley.runners@gmail.com. David Wootton and Jez Brown retained. Multiple training meeting points remain a location note rather than one precise address."
+    },
+    {
+      "slug": "athletics-ireland-cabinteely-a-c",
+      "url": "https://www.cabinteelyac.ie/",
+      "status": "conflicting-postcode-and-waiting-lists",
+      "reason": "AI postcode A96 PC84 differs from club/local listing A96 X4KO. Postcode left empty; Kilbogget Park on Churchview Road supported. Both adult and juvenile groups have waiting lists. Inconsistent website member/volunteer counts and masked email are not copied."
+    },
+    {
+      "slug": "athletics-ireland-calry-a-c",
+      "url": "https://www.sligosportandrecreation.ie/club_directory/calry-athletics-club/",
+      "status": "current-programme-and-origins-unconfirmed",
+      "reason": "Community Park venue and public role contact supported. Historical sources establish activity by the mid-1960s but no exact foundation date. Current ages and weekly timetable require club confirmation; Glenard/Ballinode contact address is not the training venue."
+    },
+    {
+      "slug": "athletics-ireland-caltra-and-district-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Caltra_and_District_A.C.",
+      "status": "venue-and-old-contact-unconfirmed",
+      "reason": "Current directory combines Caltra address with Ahascragh/Fohenagh GAA astroturf description. Exact address/postcode cleared. 2021 club-written feature supports late-2015 origins and past community activity; its old email/social handles are not newly verified current contacts."
+    },
+    {
+      "slug": "athletics-ireland-castlebar-a-c",
+      "url": "https://castlebarac.ie/",
+      "status": "venue-and-timetable-ambiguity",
+      "reason": "Club pages describe St Marys track and recent ATU sessions but do not establish equivalence with the directory GMIT address. Retain directory label, not a map pin. Timetable has an am/pm typo and inconsistent September day/date; no fixed times copied."
+    },
+    {
+      "slug": "aycliffe-running-club",
+      "url": "http://ayclifferunningclub.org.uk/training-plans/",
+      "status": "seasonal-copy-and-multiple-venues",
+      "reason": "Oakleaf and Shildon sessions described separately. Older news and membership fees are not current commitments. Andy Talbot account contains differing year references, so no exact Masters race date or private health narrative is repeated."
+    },
+    {
+      "slug": "welsh-athletics-builth-and-district-running-club",
+      "url": "https://builthanddistrictrc.com/",
+      "status": "different-social-handles",
+      "reason": "Club-linked Instagram badrunningc differs from retained directory builthrunners. Both have source provenance; present ownership/equivalence unconfirmed, so no account silently removed."
     }
   ],
   "coverageReviewNotes": [
     "The current catalogue has very limited Scottish coverage; check actual club geography before treating a correspondence address as evidence of a Scottish club. A Scottish directory expansion requires its own sourced catalogue review.",
     "Some unreviewed Striders/District listings have Triathlon tags. Check official disciplines when those clubs reach the queue; no blanket classification correction was made in this batch.",
     "Some official sites mask public email text. Contact forms and previously sourced directory contacts were retained where no readable new email was available.",
-    "Batch08 checked dates use UTC (13 October 2026; early 14 October in London). England Athletics query pages returned a JavaScript shell and Triathlon Ireland app directory an empty body in this run; their prior per-record check dates are preserved, not refreshed. New biographies primarily use opened official club pages plus readable Welsh Athletics, county, museum and Triathlon Ireland programme sources."
+    "Batch08 checked dates use UTC (13 October 2026; early 14 October in London). England Athletics query pages returned a JavaScript shell and Triathlon Ireland app directory an empty body in this run; their prior per-record check dates are preserved, not refreshed. New biographies primarily use opened official club pages plus readable Welsh Athletics, county, museum and Triathlon Ireland programme sources.",
+    "Batch09 sources were read on 13–14 October UTC; new editorial/contact review date is 14 October. Buckley is the only refreshed governing-body row. Current directory comparisons total 1,682; 55 older rows retain their dates. No blanket manual review, athlete identity or production publication is claimed."
   ]
 }

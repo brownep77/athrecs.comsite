@@ -1,15 +1,15 @@
-# Club profiles and public contacts — 13 October 2026
+# Club profiles and public contacts — 14 October 2026
 
 The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This update compares current governing-body directory records, reviews public club websites and adds an editorial profile layout. It does not verify the identity of any club representative or athlete.
 
 ## Coverage
 
-- 1,681 canonical directory records were compared with current source content. The remaining 56 retain earlier check dates. Unavailable pages do not receive a new date.
+- 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 696 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 512 clubs: 498 publish an email address and 64 a telephone number. There are 874 contact entries in total, including named directory contacts with no direct email or telephone.
-- 923 clubs have social links, with 1,870 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 193 clubs have extended, individually written profiles (11.1% of the catalogue). These contain 100 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
+- Website research contributes contact pages or contact/social details for 709 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The merged catalogue has contact entries for 522 clubs: 509 publish an email address and 65 a telephone number. There are 889 contact entries in total, including named directory contacts with no direct email or telephone.
+- 931 clubs have social links, with 1,887 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
+- 213 clubs have extended, individually written profiles (12.3% of the catalogue). These contain 105 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
 The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. That batch did not change contact or social coverage.
 
@@ -55,6 +55,16 @@ Ashford's junior waiting-list closure, Chichester's March 2027 enquiry window an
 
 Castlebar Triathlon and Barry & Vale remain deferred where substantive primary history/joining information was insufficient. England Athletics query pages returned a JavaScript shell and the Triathlon Ireland app directory an empty body during this run; their existing directory dates are preserved. The new prose uses opened club pages, readable Welsh Athletics listings, Sussex Athletics, Crawley Museum and Triathlon Ireland programme/race pages. Seed version is v8. A fresh Lancashire/North East, Welsh and Irish regional-athletics queue is saved in the checkpoint.
 
+The ninth editorial batch adds 20 profiles: five Lancashire clubs, seven North East England clubs, four Welsh clubs and four Irish athletics clubs. These are Accrington, Allen Valley, Ashington Hirst, Aycliffe, Barlick, Blyth, Bowland, Burnley, Chester-le-Street, Chorley, Durham City, Elswick, Abergele, Brackla, Buckley, Builth, Cabinteely, Calry, Caltra and Castlebar. It adds five notable-member entries and updates 18 website-contact/social records. Net additions are 15 contact entries, eleven clubs with email, one with telephone, seventeen social links and eight clubs with social coverage. Twelve training venues are clarified; four unconfirmed or combined address fields are replaced by location notes.
+
+Allen Valley is located in Allendale rather than Hexham, and its unsupported multisport tags are replaced by running. Chorley's cycling and Elswick's triathlon activity are supported by their official pages. Allen Valley's over-16 charter is distinguished from the explicit adult-only membership at Abergele and Buckley. Chorley's Carleton Road address is marked correspondence, not training; Castlebar's directory address is not promoted as an exact training venue. Burnley's Barden Lane and Chester-le-Street's Riverside postcode corrections use the clubs' own pages. Cabinteely's conflicting Eircodes are left empty; Caltra's combined area/venue listing does not become a map pin.
+
+The histories distinguish Ashington Hirst's 2014 beginner group from its 2015 formal club, Durham's 1907 origins from its 1972 revival, and Cabinteely's 1970s predecessor from the March 2010 relaunch. Burnley's About and Membership pages disagree between 1924 and 1970, so no founding year is assigned. Blyth's December 1983 affiliation is not assumed to be its founding date. Andy Talbot's firsthand England Masters account and the historical Durham/Elswick associations of George Lee, Mike McLeod, Alex Burns and Norman Woodcock add context without creating athlete identities or claiming present competitive membership.
+
+Buckley's opened Welsh Athletics listing replaces the August contact Tracie Dodd / Pauldodd07@aol.com with Caroline Caffery / buckley.runners@gmail.com; David Wootton and Jez Brown remain supported. Only this directory row receives a fresh 14 October date. Other new contacts preserve their own website provenance. Abergele's displayed membership email and its mailto target disagree and are excluded. Accrington's kit-only phone, Blyth's sports-centre phone, website suppliers and Durham's unrelated gambling/loan links are not club enquiry details.
+
+Durham's closed junior waiting list and Cabinteely's adult and junior waiting lists remain explicit. Old Aycliffe, Abergele and Castlebar timetable copy is not presented as a current appointment. Brackla's linked historical document has not been read; no origin or alumni are inferred. Calry's exact founding year/current timetable, Caltra's present venue and Castlebar's precise track address remain follow-ups. The checkpoint preserves these gaps and a new Yorkshire/Lincolnshire, Welsh and Irish regional queue. Club-only seed version is v9.
+
 The contact counts describe the complete merged catalogue, including retained earlier directory contacts. They are not counts of newly discovered contacts or independent verification of every retained field.
 
 ## Sources and editorial decisions
@@ -75,7 +85,7 @@ Notable-member text does not create athlete accounts, link unclaimed identities,
 
 - `src/data/club-enrichment-a.ts` and `-b.ts`: directory fields and actual source comparison dates.
 - `src/data/club-website-contacts.ts`: accepted public contact/social discoveries and per-field provenance.
-- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-h.ts`: manually reviewed prose, sources and explicit corrections.
+- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-i.ts`: manually reviewed prose, sources and explicit corrections.
 - `docs/club-profile-checkpoint.json`: completed batch slugs, source gaps and next candidates. Check the live branch and profile map before resuming; the queue is not evidence that a club has been researched.
 - `scripts/audit-club-websites.mjs /absolute/scratch/output.json`: resumable read-only screening into a review queue. It never writes the catalogue.
 
@@ -88,3 +98,5 @@ The club-only seed version republishes club fields without forcing an unrelated 
 `verify-club-audit.mjs` checks catalogue coverage and date preservation. `verify-club-profiles.mjs` loads the actual catalogue and checks alias freshness, profile references, address corrections, contact provenance, duplicate social links and JSON-LD safety. The dedicated Club profiles workflow renders the actual route and card with fictional data to check desktop/mobile layout, contact links, maps, country/global indicators and structured data without creating accounts or sending email.
 
 Batch08 also repairs the stale `verify-slug-stability.mjs` expectation that failed the previous broader quality gate (run 38476538840): SportsOrganization is generated in the existing shared SEO helper, not inline in the club route. The test now checks that helper and the route's JSON-LD integration, while retaining redirect checks. No route, registration, flag or metadata implementation changes were made. Local profile/audit, source coverage, targeted lint, type, slug-stability and build checks pass; exact-commit workflow and preview outcomes are recorded in the PR body after publication to the draft branch.
+
+Batch09 keeps those checks and adds regressions for the new venue, discipline and contact distinctions. Directory coverage counts include successful comparisons on or after 13 October, rather than dropping subsequently refreshed records. Local catalogue/profile/audit, source coverage, targeted lint, type, slug-stability and production-build checks pass; database publication hooks skip the local build. Exact-commit preview and desktop/mobile workflow outcomes are recorded in the draft PR body after the guarded branch update.
