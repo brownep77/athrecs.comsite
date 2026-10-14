@@ -837,6 +837,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   const missingSeries = seriesList.filter(
     (series) => Boolean(series?.slug) && !have.has(series.slug),
   );
+  const missingSlugs = new Set(missingSeries.map((series) => series.slug));
 
   if (missingSeries.length === 0) {
     await sql`
@@ -902,6 +903,10 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   );
 
   for (const [aliasSlug, canonicalSlug] of Object.entries(catalogueSeedEventSlugAliases)) {
+    // Only retire aliases for canonical identities introduced by this refresh.
+    // Existing source identities require their own reviewed reconciliation;
+    // unrelated fixture additions must not attempt to delete their results.
+    if (!missingSlugs.has(canonicalSlug)) continue;
     const matches = await sql<{ id: number; slug: string }>`
       select id, slug from events where slug in (${aliasSlug}, ${canonicalSlug})
     `;
@@ -1041,7 +1046,6 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     100,
   );
 
-  const missingSlugs = new Set(missingSeries.map((series) => series.slug));
   const distanceRows = missingSeries.flatMap((series) =>
     [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
   );
