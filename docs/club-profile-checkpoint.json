@@ -1,58 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch50",
+  "lastEditorialBatch": "2026-10-15-batch51",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch50 adds20 biographies and7 historical/founding/honorary associations. PR749 contains273 additional biographies; assembled958/1737 with428 notable entries. Last confirmed live remains685/1737 with289 entries. Draft only; hosted verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
+  "publication": "Batch51 adds 20 biographies and 8 historical/founding/coaching associations. PR749 contains 293 additional biographies; assembled 978/1737 with 436 notable entries. Last confirmed live remains 685/1737 with 289 entries. Draft only; hosted verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
   "completedProfileSlugs": [
-    "newcastle-staffs-tri-club",
-    "newcastle-frontrunners",
-    "mole-valley-runners",
-    "momentum-track-club",
-    "morley-running-club",
-    "mornington-chasers",
-    "mossley-hill-ac",
-    "mossley-running-club",
-    "mote-runners",
-    "nantwich-running-club",
-    "nej-running-club",
-    "nepal-run",
-    "netherhall-ac",
-    "nettleham-trotters-running-group",
-    "new-forest-runners",
-    "new-marske-harriers-club",
-    "newark-ac",
-    "newark-striders-running-club",
-    "newburn-running-club",
-    "newbury-ac"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 958,
-    "notableMemberEntries": 428,
-    "clubsWithContacts": 865,
-    "contactEntries": 1477,
-    "clubsWithEmail": 841,
-    "clubsWithPhone": 121,
-    "clubsWithSocials": 1112,
-    "socialLinks": 2344,
-    "websiteContactRecords": 1144
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 7,
-    "contactOrSocialRecordsChanged": 21,
-    "newWebsiteContactRecords": 11,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 15,
-    "netSocialLinks": 13
-  },
-  "validationBeforeCommit": {
-    "status": "Primary sources opened 15 October 2026. Parent 829b41550dcb42e1d25aa428c4075ed6d246b06d and main 970f5a6866184cb3d61b8f64488dba16f552f329 rechecked. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe build passed. All 20 actual locally rendered build pages passed biography, notable entries, contacts/socials, flags, location notes, registration, title/description/canonical and SportsOrganization JSON-LD checks. Database publication explicitly skipped. Both prior-head workflows passed. Exact-head Club profiles desktop/mobile workflow and Vercel evidence will be recorded in PR749 after commit; hosted access remains a separate gate. No access-protection change."
-  },
-  "nextCandidateSlugs": [
     "newcastle-staffs-ac",
     "newcastle-university-ac",
     "newent-runners",
@@ -74,13 +28,125 @@
     "north-staffs-rr-association",
     "northampton-ac"
   ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 978,
+    "notableMemberEntries": 436,
+    "clubsWithContacts": 883,
+    "contactEntries": 1506,
+    "clubsWithEmail": 859,
+    "clubsWithPhone": 123,
+    "clubsWithSocials": 1121,
+    "socialLinks": 2362,
+    "websiteContactRecords": 1158
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 8,
+    "contactOrSocialRecordsChanged": 21,
+    "newWebsiteContactRecords": 14,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 29,
+    "netSocialLinks": 18
+  },
+  "validationBeforeCommit": {
+    "status": "Primary sources opened 15 October 2026. Parent e82aceafbd70c8d79f2cd88d0eab3638f967849d and main 970f5a6866184cb3d61b8f64488dba16f552f329 rechecked. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe build passed. All 20 actual locally rendered build pages passed biography, notable entries, contacts/socials, flags, location notes, registration, title/description/canonical and SportsOrganization JSON-LD checks. Database publication explicitly skipped. Both prior-head workflows passed. Exact-head Club profiles desktop/mobile and Vercel evidence will be recorded in PR749 after commit; hosted access remains a separate gate. All profile source URLs matched successful opened captures. No access-protection change."
+  },
+  "nextCandidateSlugs": [
+    "northampton-road-runners",
+    "northants-tri",
+    "northbrook-athletic-club",
+    "northenden-runners",
+    "northern-fells-running-club",
+    "northern-masters-ac",
+    "northowram-pumas-running-club",
+    "northumbria-university",
+    "northwich-running-club",
+    "notfast-rc",
+    "notts-women-runners",
+    "nuclear-races-striders",
+    "off-that-couch-fitness",
+    "okehampton-rc",
+    "oldham-and-royton-h-and-ac",
+    "olney-runners-ac",
+    "on-the-run-aylesbury-and-pitstone",
+    "orchard-eagles-running-club",
+    "orion-harriers",
+    "orpington-road-runners"
+  ],
   "resumeInstructions": [
-    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–50 and use expected-head guarded updates.",
-    "Twenty profiles added in club-profiles-ax.ts. New Berkeley and New Levels remain deferred; Island TC contact recovered but narrative unavailable. Do not repeat completed M/N clubs.",
+    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–51 and use expected-head guarded updates.",
+    "Twenty profiles added in club-profiles-ay.ts. TUNA TC directory email reconfirmed but biography remains source-thin. Do not repeat completed Newcastle-to-Northampton clubs.",
     "Standing publication authority does not waive hosted verification. Do not retry a rejected bypass or weaken protection. Exact-head CI/deployment evidence belongs in PR749.",
-    "Rotate regions and Irish primary sources. Preserve athlete identities, results, privacy, verification, registration and search implementation."
+    "Rotate regional and Irish primary sources; remaining Welsh school districts require an entity-type review. Preserve athlete identities, results, privacy, verification, registration and search implementation."
   ],
   "sourceGaps": [
+    {
+      "slug": "tuna-tc",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "deferred-thin-primary-narrative",
+      "reason": "15 October: directory reconfirms Craigavon, Armagh, no junior section and Jjwalker83@hotmail.com. Refreshed contact only; social-group listing alone does not establish a substantive history or training programme."
+    },
+    {
+      "slug": "north-shields-polytechnic-club",
+      "url": "https://nspoly.com/new-members",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior joining page says waiting list closed, while generic track page welcomes newcomers: specific admission restriction retained. Churchill track headquarters confirmed, but exact street/postcode unresolved; retained Shiremoor directory address is explicitly not a training start."
+    },
+    {
+      "slug": "north-cotswold-tri-and-run",
+      "url": "https://www.northcotswoldtriandrun.co.uk/contact",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Template555-555-5555 and mymail@mailservice.com excluded. Actual nctrclub@gmail.com and club socials retained; generic instagram.com excluded."
+    },
+    {
+      "slug": "newmarket-joggers-ac",
+      "url": "https://newmarketjoggers.co.uk/contact-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Chair email label and mailto disagree; both omitted. About/contact secretary names differ, so stable role email used without naming the current holder.1984 club origins distinguished from2019 incorporation."
+    },
+    {
+      "slug": "north-devon-ac",
+      "url": "https://www.northdevonac.org/ndac-club-history.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "1979 is Barnstaple club revival, not demonstrated original foundation.1991 track opening/name change distinguished. Linford Christie supported a meeting but is not established as a member; no athlete association assigned."
+    },
+    {
+      "slug": "north-east-veterans-ac",
+      "url": "https://northeastveteransathleticsclub.weebly.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "First-claim over35 club is distinct from NEMAA after2000 split. Wallsend contact address is correspondence, not a training venue; no exact founding year inferred from early1970s."
+    },
+    {
+      "slug": "north-staffs-rr-association",
+      "url": "https://www.nsrra.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Regional league association, with distinct first-claim membership contact. No weekly training start established."
+    },
+    {
+      "slug": "newton-abbot-ac",
+      "url": "https://www.newtonabbotathleticsclub.co.uk/training/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Seasonal Forches Cross/Teign School training; old2023 fee example not treated as current. Confirm current timetable and charges."
+    },
+    {
+      "slug": "north-somerset-ac",
+      "url": "https://www.nsac.org.uk/contact-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club reports enquiry-form issues and publishes direct email fallback. Junior trial and adult enquiry routes remain distinct."
+    },
+    {
+      "slug": "north-bolton-runners",
+      "url": "https://www.northboltonrunners.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "June2017 informal trail beginnings, April2018 named club and January2019 affiliation distinguished; no single founded_year selected. Old membership-year copy not presented as current price."
+    },
+    {
+      "slug": "newcastle-university-ac",
+      "url": "https://www.societies.ncl.ac.uk/nuaxc/training/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "University-student eligibility and term-time schedule retained.1960s cross-country and1970s athletics origins do not establish a precise founding year."
+    },
     {
       "slug": "new-berkeley-harriers",
       "url": "https://race-nation.co.uk/register/new-berkeley-harriers",

@@ -424,6 +424,19 @@ try {
   assert.notEqual(clubProfiles["nepal-run"].scope, "global");
   assert.equal(clubProfiles["new-levels-run-club"], undefined);
   assert.equal(clubProfiles["new-berkeley-harriers"], undefined);
+  // Batch 51: preserve admission rules, organisational identity and real contact evidence.
+  assert.equal(bySlug.get("newcastle-staffs-ac").postcode, "ST5 2DJ");
+  assert.equal(bySlug.get("newcastle-staffs-ac").city, "Newcastle-under-Lyme");
+  assert.equal(bySlug.get("newent-runners").adult_only, false);
+  assert.equal(bySlug.get("northampton-ac").postcode, "NN3 7QL");
+  assert.match(clubProfiles["north-east-veterans-ac"].biography.join(" "), /not already members/);
+  assert.match(clubProfiles["north-shields-polytechnic-club"].contact_note, /waiting list was advertised as closed/);
+  assert.match(clubProfiles["north-leeds-fell-runners"].biography.join(" "), /over-eighteens/);
+  assert.equal(clubProfiles["north-devon-ac"].founded_year, undefined);
+  assert.ok(!clubProfiles["north-devon-ac"].notable_members.some(x => /Linford/.test(x.name)));
+  assert.ok(bySlug.get("north-east-project").contacts.some(x => x.phone === "07984227042"));
+  assert.ok(!bySlug.get("north-cotswold-tri-and-run").contacts.some(x => /mailservice|555-555/.test((x.email ?? "") + (x.phone ?? ""))));
+  assert.ok(!bySlug.get("newmarket-joggers-ac").contacts.some(x => /james.smith|chair@/.test(x.email ?? "")));
   const unsafe = { name: "</script><script>example</script>" };
   // Batch 47: distinguish changing venues, admission rules and historical associations.
   assert.equal(bySlug.get("london-city-runners").address, "Marquis of Wellington, 21 Druid Street, Bermondsey, London");
