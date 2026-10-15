@@ -45,6 +45,17 @@ publication and personal-best calculations in this repository.
   are an accepted verification source. Mark a matched, source-compared result
   `source_verified`, preserving the original row and provenance. This does not
   verify the athlete's identity or justify accepting a URL without its contents.
+- Owner instruction, 15 October 2026: London's official results website
+  (results.tcslondonmarathon.com) is an accepted primary verification source for
+  this and future imports. Mark a matched result `source_verified` after comparing
+  the actual source row with its recorded fields and retaining the row locator,
+  capture date and identity-match evidence. The listing's "unofficial results"
+  wording does not make the website an unofficial source; preserve that wording
+  as a source qualification without using it alone to reject source verification.
+  A retained browser capture may support comparison; distinguish its original
+  capture date from the review date and never claim a fresh live check.
+  Source verification does not verify account ownership or resolve conflicting
+  identities. Keep unresolved matches held and preserve publication controls.
 - Keep private athlete audits and database exports out of source-control changes
   intended for external publication. Use synthetic examples in regression tests.
 - Always credit the chip-timing/results provider by name when publishing results

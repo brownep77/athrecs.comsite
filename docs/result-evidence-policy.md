@@ -34,8 +34,35 @@ Marathon Majors branding and attribution links. Nationality values and results
 remain visible; original provider names, URLs, row identifiers and notes remain
 in the source records and staff evidence views. Public note wording preserves
 missing-date, timing-basis and identity limitations. This is a display choice,
-not a verification decision. A source-row comparison alone must not promote
-these provisional histories into verified results or personal bests.
+not a verification decision. Verification requires the accepted source, an actual
+row comparison and recorded identity-match evidence, as described below. Profile
+ownership is a separate check.
+
+## Official London Marathon results
+
+On 15 October 2026, Paul confirmed that London's official results website,
+`https://results.tcslondonmarathon.com/`, is an accepted primary verification
+source for this and future imports. Its mass listing's "unofficial results"
+wording is a qualification attached to those published results, not a reason to
+categorise the website as an unofficial source.
+
+Use `source_verified` for a matched performance after comparing the actual
+source row against the race, edition/date, distance, finish status, bib or row ID,
+name and all imported timing/placing fields. Preserve the original headings,
+values, qualification, source URL, capture timestamp and identity-match evidence.
+Do not accept a URL alone. A retained original browser capture is valid comparison
+evidence; record its capture date and the later review date separately, and do
+not describe that review as a fresh live-site check. Later source corrections
+or disqualifications still require review.
+
+A new unclaimed profile can represent the runner identified by that source row.
+For an existing profile, record corroborating identity evidence and hold ambiguous
+or conflicting matches. Source verification is separate from account ownership:
+it does not claim a profile, verify an account or establish a person's identity.
+Keep athlete-supplied nationality and visibility controls intact. Preserve unknown
+chip/gun classifications and comparison rankings without inventing race placings.
+Verified-result eligibility follows the application's existing rules; no medal or
+ranking is established by source authority alone.
 
 ## Run a source comparison
 
