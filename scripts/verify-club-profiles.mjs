@@ -242,6 +242,19 @@ try {
   assert.ok(bySlug.get("brighton-phoenix").sports.includes("Swimming"));
   assert.ok(bySlug.get("bridlington-road-runners").contacts.some(c => c.email === "bridlingtonroadrunners@outlook.com"));
   assert.equal(bySlug.get("bridlington-road-runners").website, "https://www.bridlingtonroadrunners.co.uk/");
+  assert.equal(bySlug.get("ripley-running-club").website, "https://www.ripleyrunningclub.co.uk/");
+  assert.equal(bySlug.get("roberttown-road-runners").website, "https://clubspark.englandathletics.org/RoberttownRoadRunners");
+  assert.match(bySlug.get("roberttown-road-runners").address, /Church Lane/);
+  assert.equal(bySlug.get("rossendale-harriers-and-ac").postcode, "BB4 7SW");
+  assert.equal(bySlug.get("royal-sutton-coldfield-athletics-club").postcode, "B73 6EB");
+  assert.equal(clubProfiles["rochdale-tri-club"].founded_year, undefined);
+  assert.equal(bySlug.get("rochdale-tri-club").address, "");
+  assert.equal(bySlug.get("rother-valley-swallows").city, "Aston");
+  assert.equal(bySlug.get("rotherham-running-club").adult_only, true);
+  assert.equal(bySlug.get("royton-road-runners").adult_only, true);
+  assert.match(clubProfiles["roundhay-runners"].biography.join(" "), /future intention/);
+  assert.match(clubProfiles["rochdale-harriers-and-ac"].biography.join(" "), /interest list/);
+  assert.ok(bySlug.get("rochford-running-club").contacts.some(c => c.email === "runrrc@gmail.com"));
   for (const [slug, profile] of Object.entries(clubProfiles)) {
     assert.ok(bySlug.has(slug), `Editorial profile must match a canonical club: ${slug}`);
     assert.equal(bySlug.get(slug).summary, profile.summary);

@@ -1,71 +1,20 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch57",
+  "lastEditorialBatch": "2026-10-15-batch58",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1076/1737 assembled biographies and506 sourced associations;76 biographies and55 associations above the last confirmed live1000/451 baseline remain draft. No publication performed.",
+  "publication": "1091/1737 assembled biographies and514 sourced associations;91 biographies and63 associations above the last confirmed live1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "rainford-runners-and-multi-sport-rrams",
-    "ramsbottom-running-club",
-    "ramsey-road-runners",
-    "rasen-running-club",
-    "rawmarsh-runners",
-    "reading-roadrunners",
-    "rebel-runners-medway",
-    "red-rochford-endurance-and-distance-runners",
-    "red-kite-runners",
-    "red-rose-road-runners",
-    "redhill-road-runners",
-    "redway-runners",
-    "reigate-priory-ac",
-    "res-run-club",
-    "retford-ac",
-    "ribble-valley-runners",
-    "richmond-and-zetland-harriers",
-    "ripon-runners",
-    "riviera-racers",
-    "roadhoggs-leicester-ac"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1076,
-    "notableMemberEntries": 506,
-    "clubsWithContacts": 953,
-    "contactEntries": 1605,
-    "clubsWithEmail": 928,
-    "clubsWithPhone": 132,
-    "clubsWithSocials": 1151,
-    "socialLinks": 2423,
-    "websiteContactRecords": 1224
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 15,
-    "contactOrSocialRecordsChanged": 19,
-    "newWebsiteContactRecords": 13,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 19,
-    "netSocialLinks": 2
-  },
-  "validationBeforeCommit": {
-    "status": "Official sources opened15 October2026. Parent74e6a136ea12400f72564310efafa35028714b02; mainc83e0e220927fed32f260cbee1c8bc97245a3393. Catalogue/profile/audit, targeted lint, types, safe local build and all20 actual rendered pages passed. Exact-head CI and preview evidence recorded in PR755. Both parent workflows38777209687 and38777209809 passed."
-  },
-  "nextCandidateSlugs": [
     "ripley-running-club",
-    "rising-brook-runners",
     "roberttown-road-runners",
     "rochdale-harriers-and-ac",
     "rochdale-tri-club",
     "rochford-running-club",
-    "rock-salt-runners",
-    "rolls-royce-harriers",
-    "romsey-road-runners",
     "rossendale-harriers-and-ac",
     "rother-valley-swallows",
     "rotherham-running-club",
-    "rothwell-harriers-and-ac",
     "roundhay-runners",
     "royal-manor-of-portland-ac",
     "royal-sutton-coldfield-athletics-club",
@@ -74,13 +23,179 @@
     "royton-road-runners",
     "rugeley-runners"
   ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1091,
+    "notableMemberEntries": 514,
+    "clubsWithContacts": 961,
+    "contactEntries": 1616,
+    "clubsWithEmail": 935,
+    "clubsWithPhone": 133,
+    "clubsWithSocials": 1152,
+    "socialLinks": 2425,
+    "websiteContactRecords": 1233
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 15,
+    "notableMemberEntriesAdded": 8,
+    "contactOrSocialRecordsChanged": 12,
+    "newWebsiteContactRecords": 9,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 11,
+    "netSocialLinks": 2
+  },
+  "validationBeforeCommit": {
+    "status": "Official sources opened15 October2026. Parentf5bd268a61e444fd1d488872d157b682807dfff2; mainc83e0e220927fed32f260cbee1c8bc97245a3393. Catalogue/profile/audit checks, targeted lint, TypeScript, safe local build and all15 actual production-build pages passed; database publication skipped. Dedicated workflow and exact-head CI and preview evidence recorded in PR755. Both parent workflows38784585713 and38784586030 passed."
+  },
+  "nextCandidateSlugs": [
+    "carrick-on-suir-tc",
+    "collins-cycle-centre-triathlon-club",
+    "db-triathlon-club",
+    "east-cork-tribe",
+    "tritanium-tc",
+    "ruislip-rc",
+    "run-and-ride-athletics-club",
+    "run-4-u-and-perform-running-club",
+    "run-academy-worthing",
+    "run-alcester",
+    "run-middlewich",
+    "run-nation-running-club",
+    "run-sandymoor",
+    "run-things-run-club",
+    "runfit-chorley",
+    "runhead-ac",
+    "runna",
+    "runners-next-the-sea",
+    "running-at-40-plus",
+    "running-bear"
+  ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch57 adds20 profiles in club-profiles-be.ts, preserving prior sourced fields. Guard remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–57 remain draft; no publication authorized.",
-    "Non-English source gaps remain; Island TC was revisited but official site unavailable and governing-body directory alone is too thin. Do not pad biographies or turn provisional league results into current membership claims."
+    "Batch58 adds15 profiles in club-profiles-bf.ts. Preserve existing sourced fields and guard remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–58 remain draft; no publication authorized.",
+    "Next queue starts with five non-English candidates to rotate nations. Do not pad thin sources or infer current athlete membership from results."
   ],
   "sourceGaps": [
+    {
+      "slug": "ripley-running-club",
+      "url": "https://www.ripleyrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The current official domain replaces the obsolete Wanadoo listing. No supported founding year or notable-member history was established. Tuesday training normally meets at Ripley Leisure Centre. The retained Henry Street directory address is not confirmed as a training venue; away-run starts vary."
+    },
+    {
+      "slug": "roberttown-road-runners",
+      "url": "https://clubspark.englandathletics.org/RoberttownRoadRunners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The former standalone website was unavailable. ClubSpark provides club-specific information, but no founding date or historical athlete association. The official club location is on Church Lane, correcting the older Church Road listing. Confirm the meeting arrangements through the club form."
+    },
+    {
+      "slug": "rochdale-harriers-and-ac",
+      "url": "https://rochdaleharriers.org.uk/welcome-to-rochdale-harriers-a-c-2/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Contact the club before a trial. Junior places were full on the reviewed joining page. The historical archive could not be opened, so no new historical athlete claims are made. Kingsway Sports Arena, Turf Hill Road, is the principal training venue. Thursday senior and junior arrangements differ."
+    },
+    {
+      "slug": "rochdale-tri-club",
+      "url": "https://www.rochdaletriclub.com/how-it-all-began-",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The founding account says around 1981, so an exact founding-year field is left empty. Conflicting Thursday running times require confirmation. Swimming uses Middleton Arena and Chadderton Wellbeing Centre; other sessions have different starts. The old Wardle residential-style directory address is not presented as a training base."
+    },
+    {
+      "slug": "rochford-running-club",
+      "url": "https://rochfordrunningclub.org.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No sourced notable-member history was established. Course places and the day's meeting location require confirmation. The Rectory Road church location is one winter meeting point, not the start for every run. Consult the current schedule."
+    },
+    {
+      "slug": "rossendale-harriers-and-ac",
+      "url": "https://rossendaleharriers.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Marl Pits is the training base. The current contact page gives BB4 7SW, replacing the older BB4 7SN postcode."
+    },
+    {
+      "slug": "rother-valley-swallows",
+      "url": "https://www.rothervalleyswallows.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Published fee sections refer to different years. No supported notable-member history was established. Training uses Aston Academy and Aston Leisure Centre, with variable Sunday starts. The old Worksop residential-style address is not a confirmed training venue."
+    },
+    {
+      "slug": "rotherham-running-club",
+      "url": "https://www.rotherhamrunningclub.com/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Beginner-course dates and day/time inconsistencies need direct confirmation. No supported notable-member history was established. Sessions use changing Rotherham-area starts, Phoenix in Brinsworth and Herringthorpe Stadium. The older Mexborough pub address is not confirmed as a current training base."
+    },
+    {
+      "slug": "roundhay-runners",
+      "url": "https://roundhayrunners.co.uk/training/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Beginner courses are not currently promised by the FAQ. No supported founding date or notable-member history was established."
+    },
+    {
+      "slug": "royal-manor-of-portland-ac",
+      "url": "https://www.royalmanorac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The contact and joining links did not open during this review. No new email or telephone is inferred. The club history identifies the YMCA in Reforne as its Tuesday meeting point. Confirm the current timetable before travelling."
+    },
+    {
+      "slug": "royal-sutton-coldfield-athletics-club",
+      "url": "https://rscac.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The official website gives the Wyndley Lane clubhouse postcode as B73 6EB, correcting the older directory value."
+    },
+    {
+      "slug": "royal-wootton-bassett-hounds-rc",
+      "url": "https://www.royalwoottonbassetthounds.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year and alumni remain unconfirmed; trial-period descriptions differ. The Sports Association on Brinkworth Road is the base, in Royal Wootton Bassett rather than Swindon."
+    },
+    {
+      "slug": "royston-runners",
+      "url": "https://www.roystonrunners.co.uk/history-of-royston-runners/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The membership email remains masked in the accessible page, so no address is guessed. Use the official joining page. The Heath Sports Centre on Baldock Road is the club base; monthly track sessions use Ridlins instead."
+    },
+    {
+      "slug": "royton-road-runners",
+      "url": "https://www.roytonroadrunners.co.uk/about-our-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history gives founding and affiliation dates separately. No supported notable-member entry was established. Royton Cricket Club, The Paddock, Bransdale Avenue, is the published meeting venue."
+    },
+    {
+      "slug": "rugeley-runners",
+      "url": "https://www.rugeleyrunners.co.uk/Cms/Spaces/PUBLIC/About%2BUs",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported notable-member history or new public email was established. Confirm beginner intake and current race dates."
+    },
+    {
+      "slug": "rising-brook-runners",
+      "url": "https://www.facebook.com/groups/rbrunners/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Only a Facebook-oriented listing and thin indexed references were recovered; substantive primary history/training evidence remains missing."
+    },
+    {
+      "slug": "rock-salt-runners",
+      "url": "https://www.rocksaltrunning.com/club",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official club page timed out; governing-body visit snippet alone was insufficient."
+    },
+    {
+      "slug": "rolls-royce-harriers",
+      "url": "https://www.rollsroyceharriers.com/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official home, about and history pages timed out or returned502. Indexed snippets were not substituted for opened sources."
+    },
+    {
+      "slug": "romsey-road-runners",
+      "url": "https://www.romseyroadrunners.co.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official home, training and membership pages returned403. No biography inferred from snippets."
+    },
+    {
+      "slug": "rothwell-harriers-and-ac",
+      "url": "https://rothwellharriers.org.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official homepage returned403 and substantive alternative primary club evidence was not recovered."
+    },
     {
       "slug": "rainford-runners-and-multi-sport-rrams",
       "url": "https://rrams.co.uk/about-us/",
