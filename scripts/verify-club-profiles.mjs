@@ -295,6 +295,17 @@ try {
       .organization,
     null,
   );
+  // Batch 40: historical associations, geographic scope and eligibility safeguards.
+  assert.equal(clubProfiles["herts-phoenix-ac"].founded_year, undefined);
+  assert.equal(clubProfiles["hazlemere-runners"].founded_year, 2017);
+  assert.equal(clubProfiles["hereford-triathlon-club"].founded_year, 1988);
+  assert.equal(clubProfiles["hereford-triathlon-club"].corrections.adult_only, false);
+  assert.equal(clubProfiles["hercules-running-and-tri-club"].scope, "global");
+  assert.equal(clubProfiles["henfield-joggers"].scope, undefined);
+  assert.equal(clubProfiles["hi-runners"].corrections.postcode, "");
+  assert.equal(clubProfiles["hedge-end-running-club"].corrections.address, "");
+  assert.match(clubProfiles["athletics-ireland-athlone-a-c"].notable_members[0].detail, /subject to ratification/);
+  assert.match(clubProfiles["high-peak-athletic-club"].location_note, /suspended/);
   const unsafe = { name: "</script><script>example</script>" };
   assert.ok(!safeClubJsonLd(unsafe).includes("<"));
   assert.deepEqual(JSON.parse(safeClubJsonLd(unsafe)), unsafe);

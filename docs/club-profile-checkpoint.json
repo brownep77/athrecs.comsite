@@ -1,62 +1,15 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch39",
+  "lastEditorialBatch": "2026-10-15-batch40",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch39 adds 20 biographies and 15 sourced historical/member associations to draft PR749. Assembled coverage is 763/1737 with 336 notable entries. PR749 contains 78 additional biographies across batches36–39, not published. Last confirmed production remains PR748:685 biographies/289 entries. Prior head e8ca388 passed both workflows; new head requires its own checks. Authenticated hosted-preview inspection remains outstanding; no protection bypass retry.",
+  "publication": "Batch40 adds 17 biographies and 12 sourced historical/member associations to draft PR749. Assembled coverage is 780/1737 with 348 notable entries. PR749 contains 95 additional biographies across batches36–40, not published. Last confirmed production remains PR748:685 biographies/289 entries. Previous head4ad0e1d passed both workflows. New-head workflow and exact-preview evidence belongs in PR749. Hosted-preview inspection remains outstanding; no protection bypass retry.",
   "completedProfileSlugs": [
-    "hadleigh-hares-ac",
-    "hailsham-harriers",
-    "halmer-harriers",
-    "hamworthy-harriers",
-    "handsworth-roadhogs",
-    "hartshill-runners",
-    "harvel-hash-house-harriers",
-    "harwell-harriers",
-    "harwich-runners",
-    "hatch-warren-runners",
-    "havant-ac",
-    "haverhill-running-club",
-    "haxby-runners",
-    "eden-tri-club",
-    "lisburn-triathlon-club",
-    "cromane-triathlon-club",
-    "helm-hill-runners",
-    "helsby-running-club",
-    "headington-rr",
-    "heanor-running-club"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 763,
-    "notableMemberEntries": 336,
-    "clubsWithContacts": 757,
-    "contactEntries": 1316,
-    "clubsWithEmail": 735,
-    "clubsWithPhone": 112,
-    "clubsWithSocials": 1063,
-    "socialLinks": 2221,
-    "websiteContactRecords": 1039
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 15,
-    "contactOrSocialRecordsChanged": 20,
-    "newWebsiteContactRecords": 11,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 14,
-    "netSocialLinks": 4
-  },
-  "validationBeforeCommit": {
-    "status": "Official and primary pages opened 15 October 2026; public contact/social values checked against retrieved pages. Main c08123f78f99503db5613d8e7382f911ab49f4c0 and PR head e8ca38820d7b7a4e9d7837153675b904c2fe9c4d checked before edits and rechecked before commit. Catalogue/profile/audit checks, targeted ESLint, TypeScript, build and whitespace checks passed. All20 actual locally rendered production-build pages passed biography, notable entries, contacts/socials, location notes, flags, registration links and title/description/canonical/SportsOrganization checks. Local build skipped database publication. Dedicated desktop/mobile workflow and exact preview evidence for the committed head are recorded in PR749. No production publication or safeguards changes."
-  },
-  "nextCandidateSlugs": [
     "havering-90-joggers",
     "hayle-runners",
     "hazlemere-runners",
-    "heathfield-runners",
     "heaton-harriers-and-athletics-club-limited",
     "hedge-end-running-club",
     "henfield-joggers",
@@ -64,23 +17,199 @@
     "hereford-and-county-ac",
     "hereford-couriers-running-club",
     "hereford-triathlon-club",
-    "hermitage-harriers",
     "herts-phoenix-ac",
     "hi-runners",
     "high-peak-athletic-club",
     "athletics-ireland-athlone-a-c",
     "athletics-ireland-boyne-a-c",
     "athletics-ni-dub-running-club",
-    "castlebar-tri-club",
-    "new-ross-triathlon-club"
+    "castlebar-tri-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 780,
+    "notableMemberEntries": 348,
+    "clubsWithContacts": 765,
+    "contactEntries": 1326,
+    "clubsWithEmail": 743,
+    "clubsWithPhone": 112,
+    "clubsWithSocials": 1067,
+    "socialLinks": 2231,
+    "websiteContactRecords": 1048
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 17,
+    "notableMemberEntriesAdded": 12,
+    "contactOrSocialRecordsChanged": 14,
+    "newWebsiteContactRecords": 9,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 10,
+    "netSocialLinks": 10
+  },
+  "validationBeforeCommit": {
+    "status": "Official and primary sources opened15October2026. Contact/social values asserted against retrieved source text or links. Remote head4ad0e1d34bf239033f5188c0d064c724c0fda998 and mainc08123f78f99503db5613d8e7382f911ab49f4c0 checked before editing. Final catalogue/lint/type/build, actual rendered pages, exact-head desktop/mobile workflow and matching AthRecs preview evidence recorded in PR749. No production publication or safeguard changes."
+  },
+  "nextCandidateSlugs": [
+    "higham-harriers",
+    "highworth-rc",
+    "hillingdon-ac",
+    "hillsborough-and-rivelin-rc",
+    "hinckley-running-club",
+    "hitchin-running-club",
+    "hoad-hill-harriers",
+    "hockley-trail-runners",
+    "hogweed-trotters",
+    "holcombe-harriers",
+    "holgate-harriers",
+    "holland-sports-ac",
+    "holme-pierrepont-rc",
+    "instinctive-sports",
+    "welsh-athletics-trg-runners",
+    "welsh-athletics-welshpool-athletics-club",
+    "athletics-ireland-boyle-a-c",
+    "athletics-ireland-ballon-rathoe-a-c",
+    "tuna-tc",
+    "ventoux-triathlon-club"
   ],
   "resumeInstructions": [
-    "Read current main, PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Batch39 continues the open draft; do not duplicate these 20 profiles.",
-    "Use guarded branch updates and preserve batches36–39. Prior head e8ca388 passed Club profiles38665144990 and quality gate38665144886; these do not validate a subsequent head.",
-    "Standing publication authority does not waive CI or hosted-preview verification. Do not retry a rejected bypass request or weaken deployment protection. Final exact-head validation belongs in PR749.",
-    "Next queue rotates English regional running/athletics with Irish and Northern Irish athletics/triathlon. Thin or inaccessible sources remain leads, not finished biographies. Retain all registration, identity, privacy and verification safeguards."
+    "Read current main, PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting a batch. Preserve batches36–40 and do not duplicate these17 profiles.",
+    "Use guarded branch updates; previous head4ad0e1d passed Club profiles38671000831 and quality gate38671000825. Those do not validate later commits.",
+    "Standing publication authority does not waive required checks or hosted verification. Do not retry a rejected bypass request or weaken protection. Final exact-head evidence belongs in PR749.",
+    "Next queue rotates English running/athletics with remaining Welsh and Irish leads and Northern Irish triathlon. Scotland currently has no unprofiled canonical entries; do not add duplicates to satisfy rotation. Thin/inaccessible sources remain leads, not completed biographies. Preserve registration, identities, results, privacy and verification."
   ],
   "sourceGaps": [
+    {
+      "slug": "havering-90-joggers",
+      "url": "https://www.h90j.org.uk/hall-of-fame",
+      "status": "biography-added-historical-role",
+      "reason": "1990origins and current Upminster rugby-club base supported. RonDobie presidency is explicitly2015–2022, not current."
+    },
+    {
+      "slug": "hayle-runners",
+      "url": "https://haylerunners.com/contact-us/",
+      "status": "biography-added-email-ambiguity",
+      "reason": "Malformed embership mailto excluded. Clear chair role email and enquiry form used; photographer Instagram excluded. Undated thirty-years-ago origin not converted into founding year. Selected walk-run Tuesdays require arrangement; CarnBrea track is separate from Hayle base."
+    },
+    {
+      "slug": "hazlemere-runners",
+      "url": "https://www.hazlemererunners.co.uk/membership-options/",
+      "status": "biography-added-origins-distinction",
+      "reason": "Informal2016runs distinguished from formalJune2017club. Ordinary groups expect5Kability; C25K separate. Meeting-point image not treated as verified precise directions."
+    },
+    {
+      "slug": "heaton-harriers-and-athletics-club-limited",
+      "url": "https://heatonharriers.org.uk/trial-a-session/",
+      "status": "biography-added-entry-threshold",
+      "reason": "1890foundation supported. Adulttrial requires5miles near10min/mile, not complete beginners. Current Longbenton base used over historic CochranePark references. MauriceBenn and AnitaNott associations historical."
+    },
+    {
+      "slug": "hedge-end-running-club",
+      "url": "https://www.hedgeendrunningclub.com/aboutTheClub",
+      "status": "biography-added-variable-venues",
+      "reason": "Role emails used because membership-secretary names differ within page. Fixed BotleyRoad address cleared; sessions have different starts. Mountbatten charity connection dated2025."
+    },
+    {
+      "slug": "henfield-joggers",
+      "url": "https://www.henfieldjoggers.co.uk/history/",
+      "status": "biography-added-event-month-conflict",
+      "reason": "1April1990first run supported. SevenStiles month differs between history and homepage; month omitted. Summerpub starts distinct from leisurecentre; EAaffiliation optional."
+    },
+    {
+      "slug": "hercules-running-and-tri-club",
+      "url": "https://herculesrunningandtri.com/",
+      "status": "biography-added-explicit-global-scope",
+      "reason": "WorldwideZwift community explicitly supported, Harlowlocalbase retained. Exacttrackaddress not established and cleared. Welfareemail labelledwelfare, not general enquiries. PaulSchroder identifiedasfounder/headcoach."
+    },
+    {
+      "slug": "hereford-and-county-ac",
+      "url": "https://www.herefordcountyathletics.co.uk/",
+      "status": "biography-added-footer-exclusion",
+      "reason": "1962foundation, schoolyear4and2bookedtrials supported. GenericFacebook/Instagram/X homepages excluded. Clubemail preferred to facilitycontact."
+    },
+    {
+      "slug": "hereford-couriers-running-club",
+      "url": "https://herefordcouriers.com/membership/",
+      "status": "biography-added-distinct-club",
+      "reason": "1981postal-workerorigins and historicalDerekDavies/MartinDaykin associations. Hereford&CountyAC is a separateclubsharingvenue; noaliasmerge. Weeklyspeedday varies; omitted fixedday."
+    },
+    {
+      "slug": "hereford-triathlon-club",
+      "url": "http://www.herefordtriathlonclub.co.uk/membership",
+      "status": "biography-added-supervised-youth",
+      "reason": "1988formation distinctfrom1987inspiration and1990firstclubrace.16–17yearolds allowedundersupervision, soadult_onlyfalse. LeisurePool andLeisureCentre distinguished;400mfrontcrawlentryability retained."
+    },
+    {
+      "slug": "herts-phoenix-ac",
+      "url": "https://hertsphoenix.com/about-us-3/",
+      "status": "biography-added-founding-conflict",
+      "reason": "Club saysMarch2002merger; NationalAthleticsLeague saysfounded2003. Exactyear leftempty; mergerpredecessorssupported. NALJodieWilliams medal wording not repeated; Olympianassociationonly. WareandWelwynbasesdistinct. Homepagebicycletemplatecopyexcluded."
+    },
+    {
+      "slug": "hi-runners",
+      "url": "https://hi-runners.co.uk/sessions/",
+      "status": "biography-added-contact-ambiguity",
+      "reason": "Possibletypo enquires email not promoted; clear membershiprole and contactformused. MultipleHiston/Northstowe/Willinghamstarts; singleexactaddresscleared. Foundingdateunresolved."
+    },
+    {
+      "slug": "high-peak-athletic-club",
+      "url": "https://highpeakathleticsclub.wordpress.com/info/",
+      "status": "biography-added-suspended-session",
+      "reason": "SaturdayBuxtonCommunitySchool supported. ThursdayFairfieldsessionmarkednotrunning; no activeclaim. April2023feesnotcurrent; formpreferred to undated namedphones."
+    },
+    {
+      "slug": "athletics-ireland-athlone-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Athlone_A.C.",
+      "status": "biography-added-primary-directory",
+      "reason": "Standalone502. Current governing-bodytraininglocation/email/phoneandFitforLifelisting supportprofile. EileenKenny2024relayperformance explicitlysubjecttoratification in source; no laterrecordstatusassumed. Foundingdate/currenttimetableunresolved."
+    },
+    {
+      "slug": "athletics-ireland-boyne-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Boyne_A.C.",
+      "status": "biography-added-missing-contact",
+      "reason": "Standalone502; directorysupportsLourdesStadium. Emptyclubmailtoandnationaladminaddress excluded. AmyMcTeggart2014achievementhistorical;2025leadershipparticipationnotcurrentcourse. Currentclubemail/timetable/foundingyearunknown."
+    },
+    {
+      "slug": "athletics-ni-dub-running-club",
+      "url": "https://www.strava.com/clubs/dub-runners-of-belfast-78294",
+      "status": "biography-added-undated-timetable",
+      "reason": "Standalone200empty. Club-authoredStravadescriptionsupportsUpperMaloneandBoatClubstartsbutundated; confirmbeforeattending. ANIgeneralemailchecked.2024GiantTrailracecharitydetailsnotcurrentregistration."
+    },
+    {
+      "slug": "castlebar-tri-club",
+      "url": "https://www.triathlonireland.com/news/mayo-social-hub/",
+      "status": "biography-added-dated-programmes",
+      "reason": "StandaloneHTTP/HTTPS502. PrimaryTI2019and2025programmes supportcommunitybiographyandBrendanFergusdatedassociation. No currenttrainingornewcontactasserted; LoughLannagheventnotfixedclubhouse. Foundingdateunresolved."
+    },
+    {
+      "slug": "heathfield-runners",
+      "url": "http://heathfieldroadrunners.com/",
+      "status": "deferred-source-unavailable",
+      "reason": "HTTP/HTTPS502SSLalert. Governingdirectoryleadretained; insufficientopenedclubcontentforfullbio."
+    },
+    {
+      "slug": "hermitage-harriers",
+      "url": "https://www.hermitageharriers.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "HTTPandHTTPStimedout; no biographyadded."
+    },
+    {
+      "slug": "new-ross-triathlon-club",
+      "url": "http://murt1981.wixsite.com/",
+      "status": "deferred-source-insufficient",
+      "reason": "ListedWixsite404; thindirectoryandresultsleadsinsufficientforfullbiography."
+    },
+    {
+      "slug": "higham-harriers",
+      "url": "https://www.highamharriers.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "HTTPS502; retainedasnextbatchcandidateforalternativeprimarysources."
+    },
+    {
+      "slug": "highworth-rc",
+      "url": "https://www.highworthrunningclub.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "HTTPStimedout; retainedasnextbatchcandidateforalternativeprimarysources."
+    },
     {
       "slug": "hadleigh-hares-ac",
       "url": "https://www.hadleigh-hares.co.uk/membership",
