@@ -1,65 +1,17 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch61",
+  "lastEditorialBatch": "2026-10-15-batch62",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1151/1737 assembled biographies and 538 sourced associations; 151 biographies and 87 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
+  "publication": "1171/1737 assembled biographies and 559 sourced associations; 171 biographies and 108 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "welsh-athletics-north-east-wales-schools-districts",
-    "welsh-athletics-powys-schools-district",
-    "welsh-athletics-south-east-wales-schools-district",
-    "savvy-park-runrz",
-    "saxmundham-sports-running-and-fitness-club",
-    "scarborough-athletic-club",
-    "scunthorpe-and-district-running-club",
-    "seaford-striders-rc",
-    "sedgefield-harriers",
-    "sedgley-striders",
-    "selby-striders",
-    "settle-harriers",
-    "sevenoaks-ac",
-    "severn-ac",
-    "shadwell-runners",
-    "shaef-shifters-running-club",
-    "shaftesbury-barnet-harriers",
-    "shelton-striders",
-    "shenley-striders",
-    "sherfield-park-runners"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1151,
-    "notableMemberEntries": 538,
-    "clubsWithContacts": 981,
-    "contactEntries": 1649,
-    "clubsWithEmail": 954,
-    "clubsWithPhone": 136,
-    "clubsWithSocials": 1152,
-    "socialLinks": 2425,
-    "websiteContactRecords": 1268
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 8,
-    "contactOrSocialRecordsChanged": 18,
-    "newWebsiteContactRecords": 13,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 12,
-    "netSocialLinks": 0,
-    "unsafeWebsitesSuppressed": 0
-  },
-  "validationBeforeCommit": {
-    "status": "Official sources opened 15 October 2026. Parent 8d35b9f1613c79e51a52e930a13f86808fa5b174; main c83e0e220927fed32f260cbee1c8bc97245a3393. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe local build passed with database publication skipped. All20 actual locally rendered production-build pages passed biography, associations, contacts/socials, location notes, flags, registration links and title/description/canonical/SportsOrganization assertions. Targeted regression checks passed. Exact-head CI and preview evidence recorded in PR755. Both parent workflows 38809123488 and 38809123365 passed."
-  },
-  "nextCandidateSlugs": [
     "shrewsbury-ac",
     "shropshire-shufflers",
     "silson-ac",
     "silverdale-rc",
     "sinfin-running-club",
-    "sip-running-club",
     "sittingbourne-striders",
     "skegness-and-district-running-club",
     "skelmersdale-boundary-harriers",
@@ -69,21 +21,201 @@
     "slaithwaite-striders-rc",
     "sleaford-striders-ac",
     "sleaford-town-runners",
-    "slgr",
     "slough-junior-ac",
     "smalley-road-runners",
     "snaith-and-cowick-running-club",
-    "sneyd-striders"
+    "sneyd-striders",
+    "sole-sisters-north-bristol",
+    "solent-running-sisters"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1171,
+    "notableMemberEntries": 559,
+    "clubsWithContacts": 993,
+    "contactEntries": 1666,
+    "clubsWithEmail": 965,
+    "clubsWithPhone": 137,
+    "clubsWithSocials": 1154,
+    "socialLinks": 2429,
+    "websiteContactRecords": 1277
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 21,
+    "contactOrSocialRecordsChanged": 17,
+    "newWebsiteContactRecords": 9,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 17,
+    "netSocialLinks": 4,
+    "unsafeWebsitesSuppressed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Sources reviewed on 15 October 2026 UTC (16 October locally). Parent 5021477e6d1544e79e24ed13176457c55bf97c45; main c83e0e220927fed32f260cbee1c8bc97245a3393. Both parent workflows 38816488646 and 38816488688 passed. Catalogue/profile checks, targeted ESLint, TypeScript, diff whitespace and safe non-publishing production build passed. All 20 locally rendered production-build pages passed biography, contacts/social links, location notes, home-nation flags, registration links and search/structured-data assertions. Exact-head Club profiles desktop/mobile CI, quality gate and hosted-preview evidence will be recorded in PR755 after commit."
+  },
+  "nextCandidateSlugs": [
+    "solihull-and-small-heath-athletic-club",
+    "somer-ac",
+    "south-birmingham-striders",
+    "south-cambridge-striders",
+    "south-cheshire-harriers",
+    "south-derbyshire-road-runners",
+    "south-devon-ac",
+    "south-london-harriers",
+    "south-molton-strugglers",
+    "south-of-england-track-and-field-ac",
+    "south-ribble-runners",
+    "south-shields-harriers-and-ac",
+    "south-west-athletics-academy",
+    "south-west-road-runners",
+    "south-west-veterans-ac",
+    "southampton-athletic-club",
+    "southampton-triathlon-club",
+    "southampton-university-athletics-and-cross-country-club",
+    "southern-counties-veterans-ac",
+    "southport-strollers-running-club"
   ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch61 adds20 profiles in club-profiles-bi.ts. Preserve sourced fields and use guarded remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–61 remain draft; no publication authorized.",
-    "All eight Welsh school districts now have profiles, but Welsh Schools and Universities still lacks adequate entity-specific evidence; do not conflate it with ordinary clubs or pupil identities.",
-    "Remaining non-English candidates have specific source gaps. Next queue rotates through English regional running; revisit blocked nations when primary evidence is available.",
-    "Shepshed's recovered site includes unrelated pharmaceutical spam. Do not use its body as club evidence or follow those links; legitimate current website remains unresolved."
+    "Batch62 adds20 profiles in club-profiles-bj.ts. Preserve sourced fields and use guarded remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–62 remain draft; no publication authorized.",
+    "Remaining non-English candidates have specific source gaps. Next queue rotates through further regional running and multisport; revisit blocked nations when primary evidence is available.",
+    "SIP Running Club has no readable substantive primary source yet; SLGR's official site returned403. Do not pad either profile.",
+    "Smalley's sessions page was readable but other pages failed/rate-limited. Sole Sisters' contact page was readable despite homepage403. Do not promote search-snippet histories into sourced biography facts."
   ],
   "sourceGaps": [
+    {
+      "slug": "shrewsbury-ac",
+      "url": "https://www.shrewsburyac.org.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved. Confirm current times rather than treating the linked 2024 programme as current."
+    },
+    {
+      "slug": "shropshire-shufflers",
+      "url": "https://www.shropshire-shufflers.org/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The committee page returned 403. No unconfirmed direct email or telephone is added. London Road is the track-training venue; other sessions start at the Quarry or Shirehall."
+    },
+    {
+      "slug": "silson-ac",
+      "url": "https://www.silsonac.org.uk/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. Seasonal training at Silverstone Circuit and Stowe School; the former Banbury street address is not established as a club venue."
+    },
+    {
+      "slug": "silverdale-rc",
+      "url": "https://silverdale.run/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No notable-member history or independently confirmed full postal address is added."
+    },
+    {
+      "slug": "sinfin-running-club",
+      "url": "https://www.sinfinrc.co.uk/about-us-home",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history page contains older future-looking race text; no current event date is inferred from it. The Crossbar is the published training base; the postcode is retained from the directory with its trailing comma removed."
+    },
+    {
+      "slug": "sittingbourne-striders",
+      "url": "https://sittingbournestriders.co.uk/about-the-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Masked emails are not guessed. Junior enquiries have a published telephone; trial wording varies between the general and junior pages. No notable-member entry is inferred from junior results. The directory's King George's Playing Fields address is retained; use the session invitation for the actual meeting point."
+    },
+    {
+      "slug": "skegness-and-district-running-club",
+      "url": "https://www.skegnessanddistrictrc.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Past event listings are not presented as forthcoming races. Unsupported aquatic and multisport tags are removed. The retained Spilsby address is one training location, not the sole base of this four-town club."
+    },
+    {
+      "slug": "skelmersdale-boundary-harriers",
+      "url": "https://www.skelmersdaleboundaryharriers.com/club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history page mislocates the 2014 Commonwealth Games and varies an earlier organiser's surname spelling; neither claim is reproduced. The Miners Peg is a published walk-and-talk start; other sessions use varying locations."
+    },
+    {
+      "slug": "skelmersdale-running-club",
+      "url": "https://www.skemrunningclub.com/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. The Plough and Harrow in Up Holland is the Thursday meeting base, not a claim that all runs start there."
+    },
+    {
+      "slug": "skipton-ac",
+      "url": "https://skiptonac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved. Aireville Park is a training meeting point; the unconfirmed Castle View Terrace address is not presented as a clubhouse."
+    },
+    {
+      "slug": "skyrac-athletic-club",
+      "url": "https://skyrac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No notable-member history is inferred from competition listings."
+    },
+    {
+      "slug": "slaithwaite-striders-rc",
+      "url": "https://www.slaithwaitestriders.com/about-5",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founders are named in the reviewed history. Unsupported aquatic and multisport tags are removed."
+    },
+    {
+      "slug": "sleaford-striders-ac",
+      "url": "https://sleafordstriders.org.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No notable-member history is established. Unsupported aquatic and multisport tags are removed."
+    },
+    {
+      "slug": "sleaford-town-runners",
+      "url": "https://www.sleafordtownrunners.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Training listings lack a clear current year; confirm the next session. Founders and notable-member history remain unresolved."
+    },
+    {
+      "slug": "slough-junior-ac",
+      "url": "https://www.sjac.uk.com/history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The alumni page incorrectly dates the Rio Olympics to 2018; that statement and unneeded medical details are not reproduced. No athlete identity or results are created."
+    },
+    {
+      "slug": "smalley-road-runners",
+      "url": "https://smalleyroadrunners.co.uk/club-sessions/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The sessions page was readable, but home, history, membership and contact requests failed or were rate-limited. Founding date, alumni and direct contacts are held pending a readable source; no history is promoted from search snippets."
+    },
+    {
+      "slug": "snaith-and-cowick-running-club",
+      "url": "https://snaithandcowickrunningclub.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved."
+    },
+    {
+      "slug": "sneyd-striders",
+      "url": "https://www.sneydstriders.run/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Members' Ironman ambitions do not establish organised swim or bike provision. Unsupported aquatic and multisport tags are removed; founding date and notable-member history remain unconfirmed."
+    },
+    {
+      "slug": "sole-sisters-north-bristol",
+      "url": "https://www.solesistersrc.co.uk/contact-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The contact page was readable but the homepage returned 403. Masked email and potentially dated fees are not reproduced; founding date and alumni remain unresolved. Training rotates between North Bristol venues; use the club diary for the current meeting point."
+    },
+    {
+      "slug": "solent-running-sisters",
+      "url": "https://www.solentrunningsisters.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history are unresolved. Training locations vary; no single clubhouse is inferred."
+    },
+    {
+      "slug": "sip-running-club",
+      "url": "https://www.facebook.com/siprunningclub",
+      "status": "deferred-primary-source-gap",
+      "reason": "Search located only third-party directory material; no substantive readable official history, sessions or public role contact established."
+    },
+    {
+      "slug": "slgr",
+      "url": "https://www.teamslgr.com/",
+      "status": "deferred-source-blocked",
+      "reason": "Official website returned403 and targeted search did not recover adequate readable club-specific material."
+    },
     {
       "slug": "welsh-athletics-north-east-wales-schools-districts",
       "url": "https://www.welshathletics.org/en/club/view/north-east-wales-schools-districts",

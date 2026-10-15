@@ -17,6 +17,32 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 62: distinct entities, supported venues and historical-only associations.
+  assert.equal(clubProfiles["skelmersdale-boundary-harriers"].founded_year, 1983);
+  assert.equal(clubProfiles["skelmersdale-running-club"].founded_year, 2023);
+  assert.equal(clubProfiles["silson-ac"].founded_year, 1976);
+  assert.equal(bySlug.get("silson-ac").city, "Silverstone");
+  assert.equal(bySlug.get("silson-ac").postcode, "");
+  assert.equal(bySlug.get("skipton-ac").postcode, "");
+  assert.match(bySlug.get("skipton-ac").address, /Aireville Park/);
+  assert.equal(bySlug.get("slough-junior-ac").postcode, "SL4 6HN");
+  assert.equal(bySlug.get("slough-junior-ac").city, "Eton");
+  assert.equal(bySlug.get("skyrac-athletic-club").address_kind, "clubhouse");
+  assert.equal(bySlug.get("snaith-and-cowick-running-club").city, "Snaith");
+  assert.equal(bySlug.get("sneyd-striders").postcode, "WV12 5PT");
+  assert.equal(bySlug.get("sneyd-striders").city, "Willenhall");
+  assert.equal(bySlug.get("sinfin-running-club").postcode, "DE73 6TQ");
+  for (const slug of ["slaithwaite-striders-rc", "sleaford-striders-ac", "skegness-and-district-running-club", "sneyd-striders"]) {
+    assert.ok(!bySlug.get(slug).sports.includes("Swimming"));
+  }
+  assert.ok(bySlug.get("sittingbourne-striders").sports.includes("Triathlon"));
+  assert.ok(bySlug.get("sittingbourne-striders").contacts.some(c => c.phone === "07496 242166"));
+  assert.equal(bySlug.get("sole-sisters-north-bristol").address, "");
+  assert.equal(bySlug.get("solent-running-sisters").address, "");
+  assert.equal(clubProfiles["smalley-road-runners"].founded_year, undefined);
+  assert.equal(clubProfiles["sip-running-club"], undefined);
+  assert.equal(clubProfiles["slgr"], undefined);
+  assert.match(clubProfiles["slough-junior-ac"].notable_members.find(m => m.name === "Morgan Lake").connection, /Former/);
   // Batch 60: school entities, safe website suppression and sourced training bases.
   for (const district of ["afan-nedd-tawe", "cardiff-and-vale", "dyfed", "eryri", "glamorgan-valleys"]) {
     const slug = `welsh-athletics-${district}-schools-district`;
