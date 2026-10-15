@@ -1,58 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch47",
+  "lastEditorialBatch": "2026-10-15-batch48",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch47 adds20 biographies and7 sourced historical/coaching associations. PR749 contains216 additional biographies; assembled901/1737 with402 notable entries. Last confirmed live remains685/1737 with289 entries. Draft only; hosted preview verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
+  "publication": "Batch48 adds20 biographies and10 historical/founding associations. PR749 contains236 additional biographies; assembled921/1737 with412 notable entries. Last confirmed live remains685/1737 with289 entries. Draft only; hosted verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
   "completedProfileSlugs": [
-    "loftus-and-whitby-ac",
-    "london-city-runners",
-    "london-frontrunners",
-    "lonely-goat-rc",
-    "long-eaton-running-club",
-    "longwood-harriers-ac",
-    "lordshill-road-runners",
-    "lostock-ac",
-    "loughborough-students-ac",
-    "loughton-ac",
-    "louth-ac",
-    "louth-triathlon-club",
-    "low-fell-rc",
-    "lowestoft-road-runners",
-    "ludlow-runners",
-    "luton-athletic-club",
-    "macclesfield-harriers-and-ac",
-    "maidenhead-ac",
-    "malvern-joggers",
-    "manchester-frontrunners"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 901,
-    "notableMemberEntries": 402,
-    "clubsWithContacts": 832,
-    "contactEntries": 1423,
-    "clubsWithEmail": 808,
-    "clubsWithPhone": 119,
-    "clubsWithSocials": 1100,
-    "socialLinks": 2309,
-    "websiteContactRecords": 1117
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 7,
-    "contactOrSocialRecordsChanged": 19,
-    "newWebsiteContactRecords": 13,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 23,
-    "netSocialLinks": 14
-  },
-  "validationBeforeCommit": {
-    "status": "Primary sources opened15October2026. Parent1ab7ed792e5bcfa4269a41a28b892f3b431948f4 and main970f5a6866184cb3d61b8f64488dba16f552f329 rechecked before commit. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace, safe build and all20 actual locally rendered pages passed. Database publication explicitly skipped. Exact-head CI and deployment evidence belongs in PR749; hosted content remains a separate release gate."
-  },
-  "nextCandidateSlugs": [
     "madrunners",
     "maltby-running-club",
     "malvern-buzzards-running-club",
@@ -70,17 +24,153 @@
     "marshall-milton-keynes-ac",
     "massey-ferguson-rc",
     "matlock-athletic-club",
-    "meads-runners",
     "medway-and-maidstone-ac",
-    "medway-tri"
+    "medway-tri",
+    "athletics-ireland-carraig-mhor-a-c"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 921,
+    "notableMemberEntries": 412,
+    "clubsWithContacts": 844,
+    "contactEntries": 1444,
+    "clubsWithEmail": 820,
+    "clubsWithPhone": 120,
+    "clubsWithSocials": 1104,
+    "socialLinks": 2325,
+    "websiteContactRecords": 1126
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 10,
+    "contactOrSocialRecordsChanged": 19,
+    "newWebsiteContactRecords": 9,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 21,
+    "netSocialLinks": 16
+  },
+  "validationBeforeCommit": {
+    "status": "Primary sources opened 15 October 2026. Parent 2007b60fbb903e1e0a60853596509dc752a57e34 and main 970f5a6866184cb3d61b8f64488dba16f552f329 checked before editing. Catalogue, profile, audit, targeted ESLint, TypeScript, whitespace and safe build passed. All 20 actual locally rendered production-build pages passed biography, contacts/socials, location notes, flags, registration, title/description/canonical and SportsOrganization JSON-LD checks. Database publication explicitly skipped. Exact-head hosted preview and desktop/mobile workflow evidence belongs in PR749; no access-protection change."
+  },
+  "nextCandidateSlugs": [
+    "mels-milers-jogging-club",
+    "meltham-ac",
+    "mendip-athletic-club",
+    "mendip-triathlon-and-running-club",
+    "mersey-tri",
+    "methley-striders",
+    "metros-rc",
+    "mickey-bushell-gold-standard-academy",
+    "mickleover-running-club",
+    "mid-essex-casuals",
+    "mid-sussex-triathlon-club",
+    "middlesbrough-and-cleveland-harriers",
+    "middlesbrough-athletic-club-mandale",
+    "middleton-harriers-ac",
+    "midland-masters-ac",
+    "mikkeller-running-club-liverpool",
+    "mile-shy-club",
+    "milocarian-ac",
+    "mk-lakeside-runners",
+    "mojo-run-fit"
   ],
   "resumeInstructions": [
-    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–47 and use expected-head guarded updates.",
-    "Twenty new profiles in club-profiles-at.ts. Artane/Beaumont now has a first-person co-founder account; Ballybunion has club-authored community-event evidence. Do not repeat completed L clubs.",
-    "Standing publication authority does not waive hosted verification. Do not retry a rejected bypass or weaken protection. Exact-head CI and preview evidence belongs in PR749.",
+    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–48 and use expected-head guarded updates.",
+    "Twenty profiles added in club-profiles-av.ts. Carraig Mhor primary training/programme evidence resolved its narrative gap; Meads remains deferred. Do not repeat completed M clubs.",
+    "Standing publication authority does not waive hosted verification. Do not retry a rejected bypass or weaken protection. Exact-head CI/deployment evidence belongs in PR749.",
     "Rotate regions and Irish primary sources. Preserve athlete identities, results, privacy, verification, registration and search implementation."
   ],
   "sourceGaps": [
+    {
+      "slug": "meads-runners",
+      "url": "https://www.meadsrunners.co.uk/",
+      "status": "deferred-unavailable-primary-site",
+      "reason": "Club homepage returned HTTP 502. The league club list confirms the name but supplies insufficient narrative; no founding date, training timetable or contacts invented."
+    },
+    {
+      "slug": "athletics-ireland-carraig-mhor-a-c",
+      "url": "https://www.corkathletics.org/clubs/172-carraig-mhor-a-c.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "County board confirms the community-centre training venue and club email. Cork Sports Partnership's 13 March 2026 announcement supports a course starting 24 April 2026, not an ongoing Friday timetable. Founding date and alumni unknown. Distinct from Carraig na bhFear."
+    },
+    {
+      "slug": "market-drayton-rc",
+      "url": "https://marketdraytonrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Old .com domain redirected to an unrelated site. Recovered .co.uk club pages support founders, base and role contacts. The host sports-club directory still links the old domain. Joining download dates to 2022; exact fees omitted."
+    },
+    {
+      "slug": "manchester-harriers-and-ac",
+      "url": "https://manchesterharriers.co.uk/home/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Ages 7–12 waiting list temporarily closed, with an update due at the end of October 2026. Separate 13–17 form and adult registration. Old ranking not recast as current; Emil Voight spelling and merger lineage need further primary review before adding."
+    },
+    {
+      "slug": "manchester-road-runners",
+      "url": "https://manchesterroadrunners.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "October calendar distinguishes Wharf Wednesdays from House of Social Sundays; the old January panel and track times differ. Annual 2026/27 registration required even for free membership. No sensitive member anecdotes or race-result imports."
+    },
+    {
+      "slug": "mansfield-harriers",
+      "url": "https://www.mansfieldharriers.co.uk/training-schedule/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Home gives starting ages of both eight and nine; training says nine. Trial offer says both four sessions and first session. Both conflicts qualified. 1920 roots and 1995 merger distinguished. Undated current/recent members treated historically. Santon Road explicitly postal."
+    },
+    {
+      "slug": "marlborough-athletics",
+      "url": "https://marlboroughathletics.co.uk/membership-selection/membership-junior",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "U9/U11 enquiry restriction appears alongside newer U8/U10/U12 labels; confirm availability. Winter circuits and outdoor-training descriptions differ. Contact page under maintenance; unreadable email not guessed. Founding year unknown."
+    },
+    {
+      "slug": "march-ac",
+      "url": "https://marchac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership notice still refers to 2025/26. Committee page timed out; membership email confirmed on home/history. Elm Road PE15 0BH replaces unsupported PE15 8LY."
+    },
+    {
+      "slug": "marple-runners",
+      "url": "https://www.marplerunners.com/run-with-us/new-runners-info",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Trial offer says first run free versus a couple free on joining page; exact count qualified. RunTogether booking required for coached members' sessions. Oldknow Road contact address is not the run venue."
+    },
+    {
+      "slug": "marsden-racers",
+      "url": "https://www.marsdenracers.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Winter 2025 timetable not promoted as current. Hemplow base differs from Mechanics run start. Adult-only directory restriction preserved; cycling added from club statement."
+    },
+    {
+      "slug": "marshall-milton-keynes-ac",
+      "url": "https://mkac.org.uk/contact/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club explicitly identifies Soskin Drive MK14 6DT as the track, not a postal address; replaces Purbeck MK14 6BN. Funetics ages 4–7 and ordinary eight-plus pathways distinguished. Historical achievements not imported as results."
+    },
+    {
+      "slug": "massey-ferguson-rc",
+      "url": "https://masseyrunners.org.uk/contact/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "First Image's Bromsgrove address and 0121 445 6491 telephone belong to the website supplier and are excluded. Coventry replaces a Solihull postcode. Formation in 1977, name change in 1981, women's section in 1984 and merger in 1995 distinguished."
+    },
+    {
+      "slug": "medway-and-maidstone-ac",
+      "url": "https://www.mandmac.org/info/looking-to-join/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Advance enquiry required. Junior waiting list and West Kent partner booking remain distinct. Venue page ME7 1HL conflicts with joining page ME7 1HF; retained existing HF without inventing a correction."
+    },
+    {
+      "slug": "medway-tri",
+      "url": "https://www.medwaytri.com/training/junior-training",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior entry is in the year a child turns eight; enquire first. Session fees differ across pages, so no exact price quoted. Launch-day guest Richard Stannard is not inferred to be a member."
+    },
+    {
+      "slug": "madrunners",
+      "url": "https://www.madrunners.co.uk/local-madrunners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Under-eighteens must contact the club before attendance. Local and virtual provision distinguished; no global scope inferred. Founders given only first names, with no surnames invented."
+    },
     {
       "slug": "athletics-ireland-bailieboro-a-c",
       "url": "https://membership.athleticsireland.ie/clubpage/Bailieboro_A.C.",

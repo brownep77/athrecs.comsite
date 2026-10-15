@@ -378,6 +378,22 @@ try {
   assert.match(clubProfiles["impact-athletic-club"].location_note, /junior-age/);
   assert.ok(bySlug.get("athletics-ireland-ballon-rathoe-a-c").contacts.some(c => c.email === "olive.obyrne@gmail.com"));
   assert.ok(!bySlug.get("impact-athletic-club").socials.some(s => s.url.includes("facebook.com/create")));
+  // Batch 48: preserve age-specific access, real training bases and source identity.
+  assert.equal(bySlug.get("march-ac").postcode, "PE15 0BH");
+  assert.equal(bySlug.get("marshall-milton-keynes-ac").postcode, "MK14 6DT");
+  assert.equal(bySlug.get("massey-ferguson-rc").city, "Coventry");
+  assert.equal(bySlug.get("massey-ferguson-rc").address, "");
+  assert.equal(bySlug.get("market-drayton-rc").website, "https://marketdraytonrunningclub.co.uk/");
+  assert.equal(bySlug.get("athletics-ireland-carraig-mhor-a-c").city, "Carrigtwohill");
+  assert.equal(clubProfiles["athletics-ireland-carraig-mhor-a-c"].founded_year, undefined);
+  assert.equal(clubProfiles["malvern-buzzards-running-club"].founded_year, 2017);
+  assert.match(clubProfiles["manchester-harriers-and-ac"].biography.join(" "), /waiting list was temporarily closed/);
+  assert.match(clubProfiles["marlborough-athletics"].biography.join(" "), /confirm places/);
+  assert.match(clubProfiles["medway-and-maidstone-ac"].biography.join(" "), /Contact the club before attending/);
+  assert.ok(bySlug.get("marsden-racers").sports.includes("Cycling"));
+  assert.deepEqual(bySlug.get("marlow-striders").sports, ["Running"]);
+  assert.ok(bySlug.get("athletics-ireland-carraig-mhor-a-c").contacts.some(c => c.email === "carraigmhorac@gmail.com"));
+  assert.ok(!bySlug.get("massey-ferguson-rc").contacts.some(c => c.phone?.replace(/\D/g, "") === "01214456491"));
   const unsafe = { name: "</script><script>example</script>" };
   // Batch 47: distinguish changing venues, admission rules and historical associations.
   assert.equal(bySlug.get("london-city-runners").address, "Marquis of Wellington, 21 Druid Street, Bermondsey, London");
