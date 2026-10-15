@@ -1,58 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch51",
+  "lastEditorialBatch": "2026-10-15-batch52",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch51 adds 20 biographies and 8 historical/founding/coaching associations. PR749 contains 293 additional biographies; assembled 978/1737 with 436 notable entries. Last confirmed live remains 685/1737 with 289 entries. Draft only; hosted verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
+  "publication": "Batch52 adds 20 biographies and 14 historical, founding and coaching associations. PR749 contains 313 additional biographies; assembled 998/1737 with 450 notable entries. Last confirmed live remains 685/1737 with 289 entries. Draft only; hosted verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
   "completedProfileSlugs": [
-    "newcastle-staffs-ac",
-    "newcastle-university-ac",
-    "newent-runners",
-    "newmarket-joggers-ac",
-    "newquay-road-runners",
-    "newton-abbot-ac",
-    "nidd-valley-road-runners",
-    "nidderdale-fell-and-trail",
-    "north-bolton-runners",
-    "north-cotswold-tri-and-run",
-    "north-derbyshire-rc",
-    "north-devon-ac",
-    "north-east-project",
-    "north-east-veterans-ac",
-    "north-herts-road-runners",
-    "north-leeds-fell-runners",
-    "north-shields-polytechnic-club",
-    "north-somerset-ac",
-    "north-staffs-rr-association",
-    "northampton-ac"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 978,
-    "notableMemberEntries": 436,
-    "clubsWithContacts": 883,
-    "contactEntries": 1506,
-    "clubsWithEmail": 859,
-    "clubsWithPhone": 123,
-    "clubsWithSocials": 1121,
-    "socialLinks": 2362,
-    "websiteContactRecords": 1158
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 8,
-    "contactOrSocialRecordsChanged": 21,
-    "newWebsiteContactRecords": 14,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 29,
-    "netSocialLinks": 18
-  },
-  "validationBeforeCommit": {
-    "status": "Primary sources opened 15 October 2026. Parent e82aceafbd70c8d79f2cd88d0eab3638f967849d and main 970f5a6866184cb3d61b8f64488dba16f552f329 rechecked. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe build passed. All 20 actual locally rendered build pages passed biography, notable entries, contacts/socials, flags, location notes, registration, title/description/canonical and SportsOrganization JSON-LD checks. Database publication explicitly skipped. Both prior-head workflows passed. Exact-head Club profiles desktop/mobile and Vercel evidence will be recorded in PR749 after commit; hosted access remains a separate gate. All profile source URLs matched successful opened captures. No access-protection change."
-  },
-  "nextCandidateSlugs": [
     "northampton-road-runners",
     "northants-tri",
     "northbrook-athletic-club",
@@ -61,7 +15,6 @@
     "northern-masters-ac",
     "northowram-pumas-running-club",
     "northumbria-university",
-    "northwich-running-club",
     "notfast-rc",
     "notts-women-runners",
     "nuclear-races-striders",
@@ -72,15 +25,134 @@
     "on-the-run-aylesbury-and-pitstone",
     "orchard-eagles-running-club",
     "orion-harriers",
-    "orpington-road-runners"
+    "orpington-road-runners",
+    "orwell-panthers-ac"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 998,
+    "notableMemberEntries": 450,
+    "clubsWithContacts": 898,
+    "contactEntries": 1527,
+    "clubsWithEmail": 874,
+    "clubsWithPhone": 125,
+    "clubsWithSocials": 1130,
+    "socialLinks": 2379,
+    "websiteContactRecords": 1171
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 14,
+    "contactOrSocialRecordsChanged": 19,
+    "newWebsiteContactRecords": 13,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 21,
+    "netSocialLinks": 17
+  },
+  "validationBeforeCommit": {
+    "status": "Primary sources opened 15 October 2026. Parent 5d303b5d028ca72269445240f9cb772ce4546d0a and main 970f5a6866184cb3d61b8f64488dba16f552f329 rechecked unchanged before commit. Catalogue/profile/audit checks, targeted ESLint, TypeScript, whitespace and safe build passed. All 20 actual locally rendered production-build pages passed biography, notable-entry, contacts/socials, location-note, country-flag, registration-link, title/description/canonical and SportsOrganization JSON-LD checks. All profile source URLs matched opened captures; Northbrook history used the web reader after a direct timeout. Exact-head Club profiles desktop/mobile and wider CI/deployment evidence belongs in PR749. No database publication or protection change."
+  },
+  "nextCandidateSlugs": [
+    "os-runners",
+    "otley-ac",
+    "overton-harriers-and-ac",
+    "owls-ac",
+    "oxford-city-ac",
+    "oxford-tri",
+    "oxford-university-ac",
+    "oxted-runners",
+    "paddock-wood-ac",
+    "pb-racing",
+    "peak-fell-and-trail-crew",
+    "peel-road-runners",
+    "pendle-trail-running-club",
+    "penistone-footpath-runners-and-athletic-club",
+    "pennine-fell-runners",
+    "penny-lane-striders",
+    "pensby-runners",
+    "performance-physique-athletics-club",
+    "pershore-plum-plodders",
+    "peterborough-and-nene-valley-ac"
   ],
   "resumeInstructions": [
-    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–51 and use expected-head guarded updates.",
-    "Twenty profiles added in club-profiles-ay.ts. TUNA TC directory email reconfirmed but biography remains source-thin. Do not repeat completed Newcastle-to-Northampton clubs.",
+    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–52 and use expected-head guarded updates.",
+    "Twenty profiles added in club-profiles-az.ts. Northwich RC deferred; Orwell Panthers is the replacement. Oswestry was already profiled and is not counted again. Ashford Wicklow was revisited but remains source-thin.",
     "Standing publication authority does not waive hosted verification. Do not retry a rejected bypass or weaken protection. Exact-head CI/deployment evidence belongs in PR749.",
     "Rotate regional and Irish primary sources; remaining Welsh school districts require an entity-type review. Preserve athlete identities, results, privacy, verification, registration and search implementation."
   ],
   "sourceGaps": [
+    {
+      "slug": "northwich-running-club",
+      "url": "https://www.entrycentral.com/northwichrunningclubmembership",
+      "status": "deferred-thin-primary-narrative",
+      "reason": "15 October: readable membership material does not yet support a substantive primary-sourced club history or training narrative. No biography or new unsupported contacts added."
+    },
+    {
+      "slug": "athletics-ireland-ashford-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ashford_A.C.",
+      "status": "deferred-thin-primary-narrative",
+      "reason": "15 October: directory reconfirms senior club and Church of the Most Holy Rosary, Ballinahinch, Ashford, Wicklow A67 Y672. No public enquiry email or substantive history/training narrative; existing address retained. This is not Ashford AC in England."
+    },
+    {
+      "slug": "northowram-pumas-running-club",
+      "url": "https://clubspark.englandathletics.org/Northowrampumasmembersonly",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Standalone website returned502. Readable official England Athletics club page supplies origins, group paces and club email. Founder identity was not imported from search snippets."
+    },
+    {
+      "slug": "northenden-runners",
+      "url": "https://clubspark.englandathletics.org/WythenshaweandNorthendenRunners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Fuller public name does not create a duplicate club. Speed work, Couch to5K and Sunday runs described as plans, not established timetable. Exact Thursday start unresolved."
+    },
+    {
+      "slug": "northumbria-university",
+      "url": "https://northumbriasport.com/sport/athletics-xc",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "2026/27 Churchill Playing Fields venue supersedes Gateshead. Expired tasters not advertised as upcoming. Conflicting committee surname spelling omitted; stable sports-office contacts used. Historical record-holders are not current students."
+    },
+    {
+      "slug": "nuclear-races-striders",
+      "url": "https://nuclearessex.com/striders",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Only Striders-specific enquiry email imported. Estate attractions, events and shop contacts excluded. Wild Forest training venue distinguished from the Great Myles address."
+    },
+    {
+      "slug": "olney-runners-ac",
+      "url": "https://www.olneyrunners.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Conflicting four/five pace-group counts omitted. July2026 charity distance conversion inconsistent and excluded. Joe Wicks photograph is not evidence of membership. Adult and junior sections remain distinct."
+    },
+    {
+      "slug": "oldham-and-royton-h-and-ac",
+      "url": "https://www.oldhamroytonharriers.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Useful club history and facilities description, but older copyright and safeguarding terminology mean timetable and joining arrangements require confirmation."
+    },
+    {
+      "slug": "orwell-panthers-ac",
+      "url": "https://www.orwellpanthers.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "2003 beginnings distinguished from formal2004 foundation. Current8+ and three paid trials retained. Unnamed Paralympic participants are not invented notable-member identities."
+    },
+    {
+      "slug": "off-that-couch-fitness",
+      "url": "https://www.offthatcouchfitness.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current coaching site recovered. September2026 Brigg and Scunthorpe sessions are dated examples, not a standing weekly timetable; old Market Rasen directory address is not reconfirmed as training start."
+    },
+    {
+      "slug": "notts-women-runners",
+      "url": "https://nottswr.com/become-a-member/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "2025/26 fee examples omitted as stale. Countywide local groups are not all based at the Calverton directory address."
+    },
+    {
+      "slug": "northants-tri",
+      "url": "https://clubspark.net/northantstriclub/Coaching/Swim",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "New swimmers must contact coaches before booking. Training uses multiple venues; Hawkstone Close is not a confirmed training start."
+    },
     {
       "slug": "tuna-tc",
       "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",

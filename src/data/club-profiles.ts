@@ -1,3 +1,4 @@
+import { regionalClubCommunityProfiles } from "./club-profiles-az.ts";
 import { regionalClubContinuityProfiles } from "./club-profiles-ay.ts";
 import { regionalClubAccessProfiles } from "./club-profiles-ax.ts";
 import { regionalParticipationPathwaysProfiles } from "./club-profiles-aw.ts";
@@ -77,6 +78,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...regionalClubCommunityProfiles,
   ...regionalClubContinuityProfiles,
   ...regionalClubAccessProfiles,
   ...regionalParticipationPathwaysProfiles,
@@ -850,4 +852,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-15-v51";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-15-v52";

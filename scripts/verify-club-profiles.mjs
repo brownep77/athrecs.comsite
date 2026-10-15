@@ -437,6 +437,22 @@ try {
   assert.ok(bySlug.get("north-east-project").contacts.some(x => x.phone === "07984227042"));
   assert.ok(!bySlug.get("north-cotswold-tri-and-run").contacts.some(x => /mailservice|555-555/.test((x.email ?? "") + (x.phone ?? ""))));
   assert.ok(!bySlug.get("newmarket-joggers-ac").contacts.some(x => /james.smith|chair@/.test(x.email ?? "")));
+  // Batch 52: preserve current venues, source identity and eligibility distinctions.
+  assert.equal(bySlug.get("northumbria-university").postcode, "NE26 3NT");
+  assert.equal(bySlug.get("northumbria-university").city, "Monkseaton");
+  assert.equal(bySlug.get("orchard-eagles-running-club").postcode, "TS16 0EH");
+  assert.equal(bySlug.get("orwell-panthers-ac").postcode, "IP4 3DL");
+  assert.equal(clubProfiles["orwell-panthers-ac"].founded_year, 2004);
+  assert.equal(clubProfiles["orion-harriers"].founded_year, 1911);
+  assert.equal(bySlug.get("on-the-run-aylesbury-and-pitstone").postcode, "HP21 9NJ");
+  assert.ok(bySlug.get("on-the-run-aylesbury-and-pitstone").contacts.some(c => c.email === "info@ontherun.me.uk"));
+  assert.ok(bySlug.get("off-that-couch-fitness").sports.includes("Triathlon"));
+  assert.equal(bySlug.get("off-that-couch-fitness").website, "https://www.offthatcouchfitness.com/");
+  assert.ok(bySlug.get("nuclear-races-striders").contacts.some(c => c.email === "striders@nuclearessex.com"));
+  assert.ok(!bySlug.get("nuclear-races-striders").contacts.some(c => /shop|races@|info@nuclearessex/.test(c.email ?? "")));
+  assert.match(clubProfiles["northern-fells-running-club"].contact_note, /Eighteen-plus only/);
+  assert.match(clubProfiles["northenden-runners"].biography.join(" "), /rather than publishing those as an established weekly timetable/);
+  assert.ok(!clubProfiles["olney-runners-ac"].notable_members?.some(c => /Joe Wicks/.test(c.name)));
   const unsafe = { name: "</script><script>example</script>" };
   // Batch 47: distinguish changing venues, admission rules and historical associations.
   assert.equal(bySlug.get("london-city-runners").address, "Marquis of Wellington, 21 Druid Street, Bermondsey, London");
