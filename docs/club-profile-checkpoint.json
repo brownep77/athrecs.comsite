@@ -1,56 +1,13 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch58",
+  "lastEditorialBatch": "2026-10-15-batch59",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1091/1737 assembled biographies and514 sourced associations;91 biographies and63 associations above the last confirmed live1000/451 baseline remain draft. No publication performed.",
+  "publication": "1111/1737 assembled biographies and 521 sourced associations; 111 biographies and 70 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "ripley-running-club",
-    "roberttown-road-runners",
-    "rochdale-harriers-and-ac",
-    "rochdale-tri-club",
-    "rochford-running-club",
-    "rossendale-harriers-and-ac",
-    "rother-valley-swallows",
-    "rotherham-running-club",
-    "roundhay-runners",
-    "royal-manor-of-portland-ac",
-    "royal-sutton-coldfield-athletics-club",
-    "royal-wootton-bassett-hounds-rc",
-    "royston-runners",
-    "royton-road-runners",
-    "rugeley-runners"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1091,
-    "notableMemberEntries": 514,
-    "clubsWithContacts": 961,
-    "contactEntries": 1616,
-    "clubsWithEmail": 935,
-    "clubsWithPhone": 133,
-    "clubsWithSocials": 1152,
-    "socialLinks": 2425,
-    "websiteContactRecords": 1233
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 15,
-    "notableMemberEntriesAdded": 8,
-    "contactOrSocialRecordsChanged": 12,
-    "newWebsiteContactRecords": 9,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 11,
-    "netSocialLinks": 2
-  },
-  "validationBeforeCommit": {
-    "status": "Official sources opened15 October2026. Parentf5bd268a61e444fd1d488872d157b682807dfff2; mainc83e0e220927fed32f260cbee1c8bc97245a3393. Catalogue/profile/audit checks, targeted lint, TypeScript, safe local build and all15 actual production-build pages passed; database publication skipped. Dedicated workflow and exact-head CI and preview evidence recorded in PR755. Both parent workflows38784585713 and38784586030 passed."
-  },
-  "nextCandidateSlugs": [
     "carrick-on-suir-tc",
-    "collins-cycle-centre-triathlon-club",
-    "db-triathlon-club",
     "east-cork-tribe",
     "tritanium-tc",
     "ruislip-rc",
@@ -58,24 +15,216 @@
     "run-4-u-and-perform-running-club",
     "run-academy-worthing",
     "run-alcester",
-    "run-middlewich",
     "run-nation-running-club",
     "run-sandymoor",
     "run-things-run-club",
-    "runfit-chorley",
     "runhead-ac",
     "runna",
     "runners-next-the-sea",
     "running-at-40-plus",
-    "running-bear"
+    "running-bear",
+    "running-colchester",
+    "running-forever-rc",
+    "running-somewhere-else",
+    "runnymede-runners"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1111,
+    "notableMemberEntries": 521,
+    "clubsWithContacts": 971,
+    "contactEntries": 1626,
+    "clubsWithEmail": 944,
+    "clubsWithPhone": 135,
+    "clubsWithSocials": 1152,
+    "socialLinks": 2424,
+    "websiteContactRecords": 1243
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 7,
+    "contactOrSocialRecordsChanged": 16,
+    "newWebsiteContactRecords": 10,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 10,
+    "netSocialLinks": -1
+  },
+  "validationBeforeCommit": {
+    "status": "Official sources opened 15 October 2026. Parent 4ce2961c99d0be9c8366832fc785bbdf55750b15; main c83e0e220927fed32f260cbee1c8bc97245a3393. Catalogue/profile/audit, targeted ESLint, TypeScript and safe local build passed with publication skipped. All20 actual production-build pages passed biography, association, contacts/socials, location, flag, registration and title/description/canonical/SportsOrganization assertions. Exact-head CI and preview evidence recorded in PR755. Both parent workflows 38792675272 and 38792675242 passed."
+  },
+  "nextCandidateSlugs": [
+    "welsh-athletics-afan-nedd-tawe-schools-district",
+    "welsh-athletics-cardiff-and-vale-schools-district",
+    "welsh-athletics-dyfed-schools-district",
+    "welsh-athletics-eryri-schools-district",
+    "welsh-athletics-glamorgan-valleys-schools-district",
+    "runthrough-north",
+    "runthrough-run-club",
+    "runwednesdays",
+    "rushcliffe-ac",
+    "rushmere-community-runners",
+    "rutland-running-and-triathlon-club",
+    "ryde-harriers",
+    "s-factor-athletics-academy",
+    "saddleworth-runners-club",
+    "saffron-athletics-club",
+    "saffron-striders-rc",
+    "saint-edmund-pacers",
+    "salford-harriers-and-ac",
+    "salford-metropolitan-ac",
+    "saltaire-striders"
   ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch58 adds15 profiles in club-profiles-bf.ts. Preserve existing sourced fields and guard remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–58 remain draft; no publication authorized.",
+    "Batch59 adds20 profiles in club-profiles-bg.ts. Preserve existing sourced fields and guard remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–59 remain draft; no publication authorized.",
     "Next queue starts with five non-English candidates to rotate nations. Do not pad thin sources or infer current athlete membership from results."
   ],
   "sourceGaps": [
+    {
+      "slug": "carrick-on-suir-tc",
+      "url": "https://www.triathlonireland.com/news/2016/race-report-23rd-annual-carrick-on-suir-triathlon/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year and current training timetable remain unconfirmed. Historical junior participation is not evidence of a current junior section."
+    },
+    {
+      "slug": "east-cork-tribe",
+      "url": "https://www.triathlonireland.com/news/new2tri-upcoming-programmes/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved; the reviewed beginner course ended in June 2026. Mogeely Greenway car park was the 2026 course meeting point; no permanent clubhouse is confirmed."
+    },
+    {
+      "slug": "tritanium-tc",
+      "url": "https://tritaniumtriathlonclub.com/home/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported notable-member history was established; confirm the typical timetable before attendance. Dublin 15 is the club area, not a street address. Sessions use several venues."
+    },
+    {
+      "slug": "ruislip-rc",
+      "url": "https://ruislip-rc.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding year or notable-member history was established. The Kings College Road directory address was not independently confirmed as the start of every run."
+    },
+    {
+      "slug": "run-and-ride-athletics-club",
+      "url": "https://www.runandride.blog/athletic-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Store enquiries are labelled as such. No founding date or notable-member history was established; old event dates are not treated as upcoming. The Milford store is the advertised run meeting point."
+    },
+    {
+      "slug": "run-4-u-and-perform-running-club",
+      "url": "https://run4uandperform.com/r4u-club-home/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The joining page contains 2024–25 fee text. Current costs and dates need confirmation. Newton Solney Recreational Ground is the principal base; social-run starts vary."
+    },
+    {
+      "slug": "run-academy-worthing",
+      "url": "https://www.runacademy.co.uk/about-us.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Published email links were masked and not guessed. The malformed directory Facebook URL is excluded in favour of the existing sourced official link. Durrington High School is one regular venue; use weekly updates for the actual session start."
+    },
+    {
+      "slug": "run-alcester",
+      "url": "https://www.runalcester.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported notable-member history was established. Bulls Head Yard is the Alcester start; track training uses Stratford-upon-Avon School."
+    },
+    {
+      "slug": "run-nation-running-club",
+      "url": "https://runnation.co.uk/running-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club founding date, regular coached sessions and notable-member history remain unconfirmed. 21 Northfield Road is a postal address and registered office, not a confirmed training venue."
+    },
+    {
+      "slug": "run-sandymoor",
+      "url": "https://runsandymoor.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The contact page intermittently timed out. Founding year and notable-member history are not established. Sandymoor Ormiston Academy is the published usual start; away sessions vary."
+    },
+    {
+      "slug": "run-things-run-club",
+      "url": "https://www.runthings.co.uk/run-club/landing",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The email was masked and not guessed. No founding year or competitive athlete associations were established; global scope is not inferred from the wider business. Virtual participation; no public training base is confirmed at the former directory address."
+    },
+    {
+      "slug": "runhead-ac",
+      "url": "https://runhead.github.io/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The official club page has older fee information; current affiliation costs need confirmation. The Old Nun's Head is the published Tuesday meeting point."
+    },
+    {
+      "slug": "runna",
+      "url": "https://store.runna.com/products/england-athletics-membership-runna",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "App coaches and ambassadors are not assumed to be competitive club members. The club's founding date remains unconfirmed. The retained England club listing offers UK adult affiliation; no public training venue is confirmed."
+    },
+    {
+      "slug": "runners-next-the-sea",
+      "url": "https://www.rnts.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No specific notable-member history was established. Training rotates between Wells, Fakenham and Holkham; confirm the session start."
+    },
+    {
+      "slug": "running-at-40-plus",
+      "url": "https://runningat40plus.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and fixed local training timetable were not established. The official contact page gives Chesterfield, not a public street-level training venue."
+    },
+    {
+      "slug": "running-bear",
+      "url": "https://runningbear.co.uk/pages/running-bear-running-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The club-specific email is preferred to shop sales contacts. Founding date remains unconfirmed. 5 London Road is the Alderley Edge shop; session starts are shown in bookings."
+    },
+    {
+      "slug": "running-colchester",
+      "url": "https://runningcolchester.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "2016 is the community's start; athletics affiliation followed in 2018. No named historical athlete association was established. Runs use different Colchester locations; the directory address is not a universal start."
+    },
+    {
+      "slug": "running-forever-rc",
+      "url": "https://runningforever.club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported founding year or notable-member history was established. RunTogether bookings specify the meeting point; the Belvedere Road directory address is not used for every session."
+    },
+    {
+      "slug": "running-somewhere-else",
+      "url": "https://www.runningsomewhereelse.com/club-info/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The joining page links a 2026–27 form but retains 2023–24 text. No precise meeting address is asserted. Official pages disagree between Old Station Car Park and the Somewhere Else bar. Confirm the current start with the club."
+    },
+    {
+      "slug": "runnymede-runners",
+      "url": "https://www.runnymederunners.com/history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The historical organisers are not presented as current competitive members. Confirm seasonal meeting points before a taster. Savill Garden serves summer activities; winter starts differ around Egham and Staines."
+    },
+    {
+      "slug": "collins-cycle-centre-triathlon-club",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "The opened official directory confirms Thurles and the role email but offers insufficient club-specific history or training detail for a full biography."
+    },
+    {
+      "slug": "db-triathlon-club",
+      "url": "http://dbcyclingclub.com/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "The club website could not be opened. The governing-body directory confirms Drung and the email, but indexed event references alone were not used for a biography."
+    },
+    {
+      "slug": "run-middlewich",
+      "url": "https://www.runmiddlewich.club/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "The official website was inaccessible; listing and event snippets are insufficient to establish a club training and joining profile."
+    },
+    {
+      "slug": "runfit-chorley",
+      "url": "https://groups.runtogether.co.uk/RunFitChorley",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Both the listed news URL and group homepage failed to open. No profile inferred from a thin listing."
+    },
     {
       "slug": "ripley-running-club",
       "url": "https://www.ripleyrunningclub.co.uk/",

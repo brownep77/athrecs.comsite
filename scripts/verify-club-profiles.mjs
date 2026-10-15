@@ -17,6 +17,21 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 59: primary-source locations, historical roles and virtual-club scope.
+  assert.equal(clubProfiles["tritanium-tc"].founded_year, 2017);
+  assert.equal(clubProfiles["carrick-on-suir-tc"].founded_year, undefined);
+  assert.equal(bySlug.get("run-and-ride-athletics-club").postcode, "ST17 0UR");
+  assert.equal(bySlug.get("run-and-ride-athletics-club").city, "Milford");
+  assert.equal(bySlug.get("run-nation-running-club").address_kind, "correspondence");
+  assert.equal(bySlug.get("runners-next-the-sea").city, "Wells-next-the-Sea");
+  assert.equal(bySlug.get("running-somewhere-else").postcode, "");
+  assert.match(clubProfiles["running-somewhere-else"].location_note, /disagree/);
+  assert.equal(clubProfiles.runna.scope, "national");
+  assert.equal(bySlug.get("runna").adult_only, true);
+  assert.equal(bySlug.get("run-things-run-club").address, "");
+  assert.ok(!bySlug.get("run-academy-worthing").socials.some(s => s.url.includes("facebook/com")));
+  assert.equal(bySlug.get("runnymede-runners").county, "Surrey");
+  assert.match(clubProfiles["running-at-40-plus"].notable_members[0].connection, /ambassador/);
   assert.equal(clubProfiles["kidderminster-and-stourport"].founded_year, 2001);
   assert.equal(clubProfiles["keswick-ac"].founded_year, 1974);
   assert.equal(clubProfiles["kirkby-ac"], undefined);
