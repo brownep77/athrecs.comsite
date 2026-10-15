@@ -25,6 +25,7 @@ try {
     assert.match(clubProfiles[slug].biography.join(" "), /school/i);
     assert.notEqual(clubProfiles[slug].scope, "global");
     assert.ok(bySlug.get(slug).contacts.some(c => c.email?.endsWith("@ws-aa.org")));
+    assert.equal(bySlug.get(slug).contacts.find(c => c.email === "andrew.jenkins@welshathletics.org").name, "Andrew Jenkins");
   }
   assert.equal(bySlug.get("saffron-athletics-club").website, "");
   assert.equal(clubProfiles["saffron-athletics-club"], undefined);
