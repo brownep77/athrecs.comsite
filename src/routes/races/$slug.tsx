@@ -76,6 +76,8 @@ type EditionRow = {
   entry_options: EditionEntryOption[];
   spectator_access: EditionSpectatorAccess | null;
   start_time: string | null;
+  end_date?: string | null;
+  end_time?: string | null;
   notes?: string | null;
   result_count: number;
 };
@@ -171,6 +173,8 @@ export const Route = createFileRoute("/races/$slug")({
               country: event.country,
               startDate: next?.event_date,
               startTime: next?.start_time,
+              endDate: next?.end_date,
+              endTime: next?.end_time,
               sport: event.sport,
               website: event.website,
               organiser: event.organiser,
@@ -1340,6 +1344,12 @@ function EditionList({
                       </span>
                     ) : null}
                   </p>
+                  {ed.end_date ? (
+                    <p className="text-xs text-muted">
+                      Ends {formatRaceDateShort(ed.end_date)}
+                      {ed.end_time ? ` at ${ed.end_time} local time` : ""}
+                    </p>
+                  ) : null}
                   {ed.notes ? <p className="text-xs text-subtle">{ed.notes}</p> : null}
                 </div>
                 <div className="flex flex-wrap gap-2">
