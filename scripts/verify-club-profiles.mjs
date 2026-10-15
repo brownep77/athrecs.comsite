@@ -161,6 +161,21 @@ try {
   assert.equal(bySlug.get("welsh-athletics-parc-bryn-bach-running-club").address, "");
   assert.equal(bySlug.get("welsh-athletics-pegasus-running-club").city, "Cardiff");
   assert.equal(clubProfiles["city-of-preston-triathlon-club-for-juniors"].founded_year, undefined);
+  // Batch37: historical associations, age boundaries and real session locations.
+  assert.equal(clubProfiles["biggleswade-ac"].founded_year, undefined);
+  assert.equal(clubProfiles["basingstoke-and-mid-hants-ac"].founded_year, undefined);
+  assert.equal(clubProfiles["barton-and-district-ac"].founded_year, 1952);
+  assert.equal(bySlug.get("barton-and-district-ac").city, "Barton-upon-Humber");
+  assert.equal(bySlug.get("bentham-beagles-running-club").city, "Bentham");
+  assert.equal(bySlug.get("birstall-rc").city, "Birstall");
+  assert.equal(bySlug.get("birmingham-swifts").adult_only, true);
+  assert.equal(bySlug.get("birmingham-swifts").address, "Pagoda Island, Birmingham");
+  assert.equal(bySlug.get("boru-tc").adult_only, true);
+  assert.match(clubProfiles["brj-run-and-tri"].location_note, /retained from the governing-body directory/);
+  assert.equal(bySlug.get("belper-running-club").website, "https://belperrunningclub.weebly.com/");
+  assert.match(clubProfiles["narrows-triathlon-club"].notable_members[0].connection, /2022/);
+  assert.match(clubProfiles["bexley-ac"].notable_members[0].detail, /not a claim of competitive membership/);
+  assert.ok(bySlug.get("biggleswade-ac").contacts.some(c => c.email === "membership@biggleswadeac.org.uk"));
   // Batch36: distinguish predecessor dates, local scope and session-specific venues.
   assert.equal(clubProfiles["brighton-and-hove-ac"].founded_year, 1966);
   assert.equal(clubProfiles["brighton-phoenix"].founded_year, 1981);
