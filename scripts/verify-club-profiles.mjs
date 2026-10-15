@@ -17,6 +17,33 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 60: school entities, safe website suppression and sourced training bases.
+  for (const district of ["afan-nedd-tawe", "cardiff-and-vale", "dyfed", "eryri", "glamorgan-valleys"]) {
+    const slug = `welsh-athletics-${district}-schools-district`;
+    assert.equal(bySlug.get(slug).country, "Wales");
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.match(clubProfiles[slug].biography.join(" "), /school/i);
+    assert.notEqual(clubProfiles[slug].scope, "global");
+    assert.ok(bySlug.get(slug).contacts.some(c => c.email?.endsWith("@ws-aa.org")));
+  }
+  assert.equal(bySlug.get("saffron-athletics-club").website, "");
+  assert.equal(clubProfiles["saffron-athletics-club"], undefined);
+  assert.ok(clubProfiles["saffron-striders-rc"]);
+  assert.equal(bySlug.get("runthrough-north").city, "Salford");
+  assert.equal(bySlug.get("runthrough-north").postcode, "M50 2QH");
+  assert.equal(clubProfiles["runthrough-run-club"].founded_year, undefined);
+  assert.equal(bySlug.get("rushcliffe-ac").postcode, "NG13 8BL");
+  assert.equal(bySlug.get("rutland-running-and-triathlon-club").county, "Rutland");
+  assert.equal(bySlug.get("rutland-running-and-triathlon-club").postcode, "");
+  assert.equal(bySlug.get("s-factor-athletics-academy").postcode, "SE6 4QX");
+  assert.equal(bySlug.get("s-factor-athletics-academy").city, "London");
+  assert.equal(bySlug.get("ryde-harriers").adult_only, false);
+  assert.equal(bySlug.get("saltaire-striders").city, "Saltaire");
+  assert.equal(bySlug.get("saltaire-striders").adult_only, true);
+  assert.equal(bySlug.get("sawtry-running-club").city, "Sawtry");
+  assert.equal(bySlug.get("sandbach-striders").postcode, "");
+  assert.match(clubProfiles["salford-harriers-and-ac"].notable_members.find(m => m.name === "Ben Jones").connection, /1905–1912/);
+  assert.match(clubProfiles["saltwell-harriers"].contact_note, /pandemic/);
   // Batch 59: primary-source locations, historical roles and virtual-club scope.
   assert.equal(clubProfiles["tritanium-tc"].founded_year, 2017);
   assert.equal(clubProfiles["carrick-on-suir-tc"].founded_year, undefined);
