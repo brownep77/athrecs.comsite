@@ -164,6 +164,10 @@ export type ImportEditionInput = {
   distanceKm?: number;
   status?: string;
   startTime?: string;
+  endDate?: string;
+  endTime?: string;
+  endSourceUrl?: string;
+  endCheckedAt?: string;
   entryUrl?: string;
   entryOptions?: ImportEntryOptionInput[];
   source?: string;
@@ -457,6 +461,17 @@ export async function applyImportBundle(
       `;
       const editionId = editionRows[0]?.id;
       if (!editionId) throw new Error(`Could not upsert edition ${slug} ${raw.date}`);
+
+      // Omitted end evidence must survive unrelated imports/reseeds. Only an
+      // explicit, source-backed correction may supply or replace these fields.
+      if (raw.endDate !== undefined) {
+        await sql`
+          update editions set end_date = ${raw.endDate}::date,
+            end_time = ${raw.endTime ?? null}, end_source_url = ${raw.endSourceUrl ?? null},
+            end_checked_at = ${raw.endCheckedAt ?? null}::date
+          where id = ${editionId}
+        `;
+      }
 
       const options = [...(raw.entryOptions ?? [])];
       if (

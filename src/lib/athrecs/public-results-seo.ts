@@ -23,20 +23,14 @@ export function publicResultsHead(
     name: title,
     description,
     inLanguage: "en-GB",
+    // A results archive describes a completed race, not an event people can
+    // attend or buy tickets for. Nested SportsEvent also triggers Google's
+    // Event rich-result parser, even inside a CollectionPage.
     about: {
-      "@type": "SportsEvent",
+      "@type": "Thing",
       "@id": `${baseUrl}#event`,
       name: `${edition.event_name} ${edition.distance_code}`,
-      startDate: edition.event_date.slice(0, 10),
-      sport: edition.sport,
-      ...(edition.city || edition.country
-        ? {
-            location: {
-              "@type": "Place",
-              name: [edition.city, edition.country].filter(Boolean).join(", "),
-            },
-          }
-        : {}),
+      description: `${edition.sport} race held on ${edition.event_date.slice(0, 10)}${edition.city || edition.country ? ` in ${[edition.city, edition.country].filter(Boolean).join(", ")}` : ""}.`,
     },
     mainEntity: {
       "@type": "ItemList",

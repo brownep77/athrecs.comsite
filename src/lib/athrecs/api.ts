@@ -495,6 +495,8 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       start_time: string | null;
       notes: string | null;
       result_count: number;
+      end_date: string | null;
+      end_time: string | null;
       entry_options_json: string | EditionEntryOption[] | null;
       result_links_json: string | EditionResultLink[] | null;
       spectator_access_json: string | EditionSpectatorAccess | null;
@@ -509,6 +511,13 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ed.source_url,
         ed.results_official_url,
         ed.start_time,
+        -- JSON access keeps previews compatible before the additive migration.
+        case when to_jsonb(ed)->>'end_source_url' is not null
+          and to_jsonb(ed)->>'end_checked_at' is not null
+          then to_jsonb(ed)->>'end_date' end as end_date,
+        case when to_jsonb(ed)->>'end_source_url' is not null
+          and to_jsonb(ed)->>'end_checked_at' is not null
+          then to_jsonb(ed)->>'end_time' end as end_time,
         ed.notes,
         (
           select count(*)::int

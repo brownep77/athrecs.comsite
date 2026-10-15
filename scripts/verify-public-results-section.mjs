@@ -208,7 +208,10 @@ try {
   assert.equal(structured2["@type"], "CollectionPage");
   assert.equal(structured2.mainEntity.numberOfItems, 8, "Describe exactly the rendered public page");
   assert.deepEqual(structured2.mainEntity.itemListElement.map((row) => row.item.name), resultPage2.results.map((row) => row.athlete_name));
-  assert.equal(structured1.about.startDate, "2026-09-20");
+  assert.equal(structured1.about["@type"], "Thing");
+  assert.match(structured1.about.description, /2026-09-20/);
+  assert.doesNotMatch(JSON.stringify([structured1, structured2]), /"@type":"(?:SportsEvent|Event)"/,
+    "Results archives must not advertise attendance/ticket Event rich results");
   assert.match(structured1.description, /coverage may be partial/);
   assert.match(structured1.mainEntity.itemListElement[0].description, /source position 7/);
   assert.match(structured1.mainEntity.itemListElement[0].description, /chip time 31:31; gun time 31:41/);

@@ -1,6 +1,19 @@
 /** Official entry pages inspected on 12 October 2026. No inferred opening dates. */
 export const eventOfferCorrections = [
   {
+    key: "newcastle-town-moor-half-marathon-march-2027|2027-03-21|Half",
+    providerCode: "official-runthrough",
+    previousStatus: "open",
+    sourceUrl:
+      "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-march-2027",
+    patch: {
+      priceAmount: 35.7,
+      checkedAt: "2026-10-15",
+      notes:
+        "Official RunThrough page checked 15 October 2026: Half Marathon £34 plus mandatory 5% booking fee, £35.70 total. No sale-opening date is stated; leave opensAt empty. Preserve the original £34 in the publication snapshot.",
+    },
+  },
+  {
     key: "abingdon-marathon|2026-10-18|Marathon",
     providerCode: "official",
     previousStatus: "waitlist",
