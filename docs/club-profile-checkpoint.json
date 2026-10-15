@@ -1,86 +1,210 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch55",
+  "lastEditorialBatch": "2026-10-15-batch56",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1038/1737 assembled biographies and481 sourced associations;38 biographies and30 associations above the last confirmed live1000/451 baseline remain draft. No publication performed.",
+  "publication": "1056/1737 assembled biographies and491 sourced associations;56 biographies and40 associations above the last confirmed live1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "petts-wood-runners",
-    "pewsey-vale-rc",
-    "phoenix-flyers-ac",
-    "phoenix-striders",
-    "pickering-running-club",
-    "pitsea-rc",
-    "plumstead-runners",
-    "plymouth-falconers",
-    "plymouth-harriers",
-    "plymouth-musketeers-running-club",
-    "plymouth-striders",
-    "plymstock-road-runners",
-    "pocklington-runners",
-    "polegate-plodders",
-    "pontefract-ac",
-    "ponteland-runners",
-    "poole-ac",
-    "poplar-running-club",
-    "portishead-r-c",
-    "portslade-hedgehoppers"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1038,
-    "notableMemberEntries": 481,
-    "clubsWithContacts": 928,
-    "contactEntries": 1569,
-    "clubsWithEmail": 903,
-    "clubsWithPhone": 130,
-    "clubsWithSocials": 1145,
-    "socialLinks": 2410,
-    "websiteContactRecords": 1200
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 15,
-    "contactOrSocialRecordsChanged": 20,
-    "newWebsiteContactRecords": 13,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 19,
-    "netSocialLinks": 17
-  },
-  "validationBeforeCommit": {
-    "status": "Official sources opened 15 October 2026. Parent d6a847736761e18e28c91d2b31c794a6b508deae; main c83e0e220927fed32f260cbee1c8bc97245a3393. Catalogue, profile and audit checks, targeted lint, TypeScript, whitespace and safe local build passed. All 20 production-build pages passed biography, notable entries, contacts, socials, locations, flags, registration and metadata assertions. Exact-head CI and preview evidence recorded in PR755. Previous-head Club profiles 38759709275 and Quality gate 38759709289 passed. No publication performed."
-  },
-  "nextCandidateSlugs": [
     "portsmouth-joggers",
     "portsmouth-triathletes",
     "potters-trotters",
-    "pound-hill-pounders",
     "prestwich-ac",
-    "prudhoe-running-club",
-    "pudsey-and-bramley-ac",
     "pudsey-pacers-rc",
-    "pudsey-runners",
-    "purbeck-runners",
-    "qbe-running-club",
-    "quakers-running-club",
     "quantock-harriers",
     "queens-park-harriers",
+    "radcliffe-ac",
+    "raf-athletics",
+    "pound-hill-pounders",
+    "prudhoe-running-club",
+    "purbeck-runners",
+    "quakers-running-club",
     "queensbury-running-club",
     "queer-running-club",
     "race-hub",
-    "radcliffe-ac",
     "radley-athletic-club",
-    "raf-athletics"
+    "tuna-tc"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1056,
+    "notableMemberEntries": 491,
+    "clubsWithContacts": 939,
+    "contactEntries": 1586,
+    "clubsWithEmail": 914,
+    "clubsWithPhone": 130,
+    "clubsWithSocials": 1150,
+    "socialLinks": 2421,
+    "websiteContactRecords": 1211
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 18,
+    "notableMemberEntriesAdded": 10,
+    "contactOrSocialRecordsChanged": 17,
+    "newWebsiteContactRecords": 11,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 17,
+    "netSocialLinks": 11
+  },
+  "validationBeforeCommit": {
+    "status": "Official sources opened 15 October 2026. Parent 6beb1e299530f714b5f9219986e8e7dffdbd7f19; main c83e0e220927fed32f260cbee1c8bc97245a3393. Catalogue/profile/audit checks, targeted lint, TypeScript, whitespace and safe local build passed; database publication skipped. All 18 actual production-build pages passed biography, association, contact/social, location-note, flag, registration and search-metadata/JSON-LD assertions. Exact-head CI and preview evidence recorded in PR755. Previous-head Club profiles38768329660 and Quality gate38768329589 passed."
+  },
+  "nextCandidateSlugs": [
+    "rainford-runners-and-multi-sport-rrams",
+    "ramsbottom-running-club",
+    "ramsey-road-runners",
+    "rasen-running-club",
+    "rawmarsh-runners",
+    "reading-roadrunners",
+    "rebel-runners-medway",
+    "red-rochford-endurance-and-distance-runners",
+    "red-kite-runners",
+    "red-rose-road-runners",
+    "redcar-running-club",
+    "redditch-stars",
+    "redhill-road-runners",
+    "redway-runners",
+    "regis-road-runners",
+    "reigate-priory-ac",
+    "res-run-club",
+    "retford-ac",
+    "ribble-valley-runners",
+    "richmond-and-zetland-harriers"
   ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch55 adds20 profiles in club-profiles-bc.ts, preserving prior fields. Guard all remote writes.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–55 remain draft, no publication authorized.",
-    "Non-English ordinary candidates remain source-blocked; Welsh school-district entities need entity-type review. Deferred source questions below remain unresolved."
+    "Batch56 adds18 profiles in club-profiles-bd.ts, preserving prior fields. Guard all remote writes.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–56 remain draft, no publication authorized.",
+    "TUNA TC now has a profile from fresh Triathlon Ireland evidence; remaining non-English ordinary candidates are source-blocked; Welsh school-district entities need entity-type review. Deferred source questions below remain unresolved."
   ],
   "sourceGaps": [
+    {
+      "slug": "portsmouth-joggers",
+      "url": "https://www.pjc.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club nights meet in the Lakeside atrium; the club specifies car parks B5 or B6."
+    },
+    {
+      "slug": "portsmouth-triathletes",
+      "url": "https://portsmouthtriathletes.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Swimming, cycling and running use different venues. The retained Queen Elizabeth Country Park directory address is not a confirmed start for every session."
+    },
+    {
+      "slug": "potters-trotters",
+      "url": "https://potterstrotters.weebly.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The 2008 date records affiliation, not a separately established original founding date. Older downloadable membership forms should be checked with the club. Thursday evening groups meet at the Catalyst Building on the Leek Road campus. Daytime and weekend starts vary; confirm through the club."
+    },
+    {
+      "slug": "prestwich-ac",
+      "url": "https://www.prestwichac.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Pages differ on 5km versus approximately 8km readiness and show older and newer office-holder names. Use the stable role email and obtain approval before attending. Adult road runs use the tram-stop bridge; Bury track and junior field sessions are separate venues. The Heys directory address is not every group's meeting point."
+    },
+    {
+      "slug": "pudsey-pacers-rc",
+      "url": "https://www.pudseypacers.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The club identifies Pudsey Leisure Centre as its regular meeting point; contact membership before a first session."
+    },
+    {
+      "slug": "quantock-harriers",
+      "url": "https://www.quantockharriers.co.uk",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Tuesday trail and Thursday road starts vary. The Tudor Way directory address is not a confirmed regular training meeting point."
+    },
+    {
+      "slug": "queens-park-harriers",
+      "url": "https://www.queensparkharriers.org.uk/our-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Track training uses Willesden Sports Centre; social and long runs have separate starts."
+    },
+    {
+      "slug": "radcliffe-ac",
+      "url": "https://www.radcliffeac.org.uk/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Dumers Lane is the club base; alternate Wednesday track sessions use Bury Track, Market Street, BL9 9FX. Confirm the current schedule."
+    },
+    {
+      "slug": "raf-athletics",
+      "url": "https://www.rafcf.org.uk/sports/raf-athletics/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Service-wide association, not a single Marlow training group. The retained directory address is not a confirmed session venue; use the discipline enquiry route."
+    },
+    {
+      "slug": "pound-hill-pounders",
+      "url": "https://poundhillpounders.wordpress.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Usually Grattons Park, with occasional sessions elsewhere in Crawley and nearby woodland; confirm the session start."
+    },
+    {
+      "slug": "prudhoe-running-club",
+      "url": "https://prudhoeplodders.co.uk/about-plodders/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Training page retains pandemic-era wording. Confirm session times; Prudhoe Plodders is retained under the existing prudhoe-running-club canonical record. History records Highfield Park and Regents Drive. Neither establishes a current universal session start; confirm via the club or Spond rather than assuming the retained Ovingham address."
+    },
+    {
+      "slug": "purbeck-runners",
+      "url": "https://purbeckrunners.co.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Joining guidance explicitly specifies adult membership and four-mile readiness, despite generic under-18 fields in the form. Beginners should enquire about separate courses. Wednesday groups meet around Swanage; monthly outings and Sunday trails have variable starts. The retained Royal British Legion address is not a universal meeting point."
+    },
+    {
+      "slug": "quakers-running-club",
+      "url": "https://www.quakersrunningclub.org.uk/beginners-group/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Displayed leadcoach@quakersrunningclub.org.uk and some underlying mail links to leadcoach@quakers.run differ; the former also has a matching mail link on the beginner page. No founding year established. Main sessions use Abbey Road Sports Field, DL3 8LR; the October 2026 timetable also lists Eastbourne track and a separate social-run start."
+    },
+    {
+      "slug": "queensbury-running-club",
+      "url": "https://queensburyrc.co.uk/mission-statement-2-3/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Generic homepage junior wording conflicts with an adult age statement. No junior eligibility claim or age correction made; confirm directly. Two different Instagram handles are linked; neither newly selected. Thursday groups use ARCH; Tuesday track coaching is at Horsfall Stadium."
+    },
+    {
+      "slug": "queer-running-club",
+      "url": "https://queerrunningclub.com/new-news",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Book through the current BEND timetable. Seasonal 'returns' notices do not establish active weekly sessions; no individual participant identities inferred. London and Brighton sessions have distinct venues. East London starts include Work in Progress, 1 Birkbeck Street, E2 6JY; the retained Brunswick East directory address is not a confirmed current start."
+    },
+    {
+      "slug": "race-hub",
+      "url": "https://www.racehub.uk/triathlon-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club page contains older fees and affiliations; no current fee or affiliation claim imported. Confirm current operation, eligibility and schedule with the published enquiry contact. Current business site describes Sileby; older club text mentions other training venues. Retained Markfield directory address is not verified as a current club start."
+    },
+    {
+      "slug": "radley-athletic-club",
+      "url": "https://radleyathletic.club/elementor-339/club_history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership is the consistent role contact. The site shows different secretary addresses and membership-holder names; no personal office-holder name selected. The Tilsley Park switchboard is not imported as a club phone."
+    },
+    {
+      "slug": "tuna-tc",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The 15 October 2026 league table is provisional until final review on 23 October. Its membership denominator is fixed at 31 December 2025 and is not a current club-size claim. Joining and training details require club confirmation. Craigavon is the directory area; no street address or regular training venue is established."
+    },
+    {
+      "slug": "qbe-running-club",
+      "url": "https://www.qbe.com/",
+      "status": "deferred-source-too-thin",
+      "reason": "Corporate insurer site does not establish current running-club training, origins or joining. Do not import insurance enquiry contacts."
+    },
+    {
+      "slug": "pudsey-runners",
+      "url": "https://pudseyrunners.co.uk/",
+      "status": "deferred-unavailable",
+      "reason": "Official site returned502 and web reader failed. Distinct canonical club from Pudsey Pacers and Pudsey and Bramley."
+    },
+    {
+      "slug": "pudsey-and-bramley-ac",
+      "url": "https://pudseybramley.com/",
+      "status": "deferred-source-integrity",
+      "reason": "Official homepage includes unrelated steroid promotional material. No unrelated links followed or content used; await clean primary corroboration."
+    },
     {
       "slug": "pewsey-vale-rc",
       "url": "https://www.pewseyvalerunningclub.org/",
