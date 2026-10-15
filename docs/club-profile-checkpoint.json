@@ -1,59 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch48",
+  "lastEditorialBatch": "2026-10-15-batch49",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch48 adds20 biographies and10 historical/founding associations. PR749 contains236 additional biographies; assembled921/1737 with412 notable entries. Last confirmed live remains685/1737 with289 entries. Draft only; hosted verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
+  "publication": "Batch49 adds17 biographies and9 historical/founding/coaching associations. PR749 contains253 additional biographies; assembled938/1737 with421 notable entries. Last confirmed live remains685/1737 with289 entries. Draft only; hosted verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
   "completedProfileSlugs": [
-    "madrunners",
-    "maltby-running-club",
-    "malvern-buzzards-running-club",
-    "manchester-harriers-and-ac",
-    "manchester-road-runners",
-    "manchester-ymca-harriers",
-    "mansfield-harriers",
-    "march-ac",
-    "market-drayton-rc",
-    "marlborough-athletics",
-    "marlborough-running-club",
-    "marlow-striders",
-    "marple-runners",
-    "marsden-racers",
-    "marshall-milton-keynes-ac",
-    "massey-ferguson-rc",
-    "matlock-athletic-club",
-    "medway-and-maidstone-ac",
-    "medway-tri",
-    "athletics-ireland-carraig-mhor-a-c"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 921,
-    "notableMemberEntries": 412,
-    "clubsWithContacts": 844,
-    "contactEntries": 1444,
-    "clubsWithEmail": 820,
-    "clubsWithPhone": 120,
-    "clubsWithSocials": 1104,
-    "socialLinks": 2325,
-    "websiteContactRecords": 1126
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 10,
-    "contactOrSocialRecordsChanged": 19,
-    "newWebsiteContactRecords": 9,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 21,
-    "netSocialLinks": 16
-  },
-  "validationBeforeCommit": {
-    "status": "Primary sources opened 15 October 2026. Parent 2007b60fbb903e1e0a60853596509dc752a57e34 and main 970f5a6866184cb3d61b8f64488dba16f552f329 checked before editing. Catalogue, profile, audit, targeted ESLint, TypeScript, whitespace and safe build passed. All 20 actual locally rendered production-build pages passed biography, contacts/socials, location notes, flags, registration, title/description/canonical and SportsOrganization JSON-LD checks. Database publication explicitly skipped. Exact-head hosted preview and desktop/mobile workflow evidence belongs in PR749; no access-protection change."
-  },
-  "nextCandidateSlugs": [
-    "mels-milers-jogging-club",
     "meltham-ac",
     "mendip-athletic-club",
     "mendip-triathlon-and-running-club",
@@ -70,17 +23,145 @@
     "midland-masters-ac",
     "mikkeller-running-club-liverpool",
     "mile-shy-club",
-    "milocarian-ac",
-    "mk-lakeside-runners",
-    "mojo-run-fit"
+    "mk-lakeside-runners"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 938,
+    "notableMemberEntries": 421,
+    "clubsWithContacts": 857,
+    "contactEntries": 1462,
+    "clubsWithEmail": 833,
+    "clubsWithPhone": 121,
+    "clubsWithSocials": 1107,
+    "socialLinks": 2331,
+    "websiteContactRecords": 1133
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 17,
+    "notableMemberEntriesAdded": 9,
+    "contactOrSocialRecordsChanged": 16,
+    "newWebsiteContactRecords": 7,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 18,
+    "netSocialLinks": 6
+  },
+  "validationBeforeCommit": {
+    "status": "Primary sources opened 15 October 2026. Parent 2f6369a72c6f76f1bbc6e80eebe8ee4c575191f2 and main 970f5a6866184cb3d61b8f64488dba16f552f329 rechecked. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe build passed. All 17 actual locally rendered build pages passed biography, notable entries, contacts/socials, flags, location notes, registration, title/description/canonical and SportsOrganization JSON-LD checks. Database publication explicitly skipped. Exact-head Club profiles desktop/mobile workflow and Vercel evidence will be recorded in PR749 after commit; hosted access remains a separate gate. No access-protection change."
+  },
+  "nextCandidateSlugs": [
+    "mole-valley-runners",
+    "momentum-track-club",
+    "morley-running-club",
+    "mornington-chasers",
+    "mossley-hill-ac",
+    "mossley-running-club",
+    "mote-runners",
+    "nantwich-running-club",
+    "nej-running-club",
+    "nepal-run",
+    "netherhall-ac",
+    "nettleham-trotters-running-group",
+    "new-berkeley-harriers",
+    "new-forest-runners",
+    "new-levels-run-club",
+    "new-marske-harriers-club",
+    "newark-ac",
+    "newark-striders-running-club",
+    "newburn-running-club",
+    "newbury-ac"
   ],
   "resumeInstructions": [
-    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–48 and use expected-head guarded updates.",
-    "Twenty profiles added in club-profiles-av.ts. Carraig Mhor primary training/programme evidence resolved its narrative gap; Meads remains deferred. Do not repeat completed M clubs.",
+    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–49 and use expected-head guarded updates.",
+    "Seventeen profiles added in club-profiles-aw.ts. Three unavailable websites and Annalee/Ashford narrative gaps remain deferred. Do not repeat completed M clubs.",
     "Standing publication authority does not waive hosted verification. Do not retry a rejected bypass or weaken protection. Exact-head CI/deployment evidence belongs in PR749.",
     "Rotate regions and Irish primary sources. Preserve athlete identities, results, privacy, verification, registration and search implementation."
   ],
   "sourceGaps": [
+    {
+      "slug": "mels-milers-jogging-club",
+      "url": "https://www.melsmilers.co.uk/",
+      "status": "deferred-unavailable-primary-site",
+      "reason": "Homepage/membership returned Site Unavailable; web reader502. Search snippets insufficient for biography."
+    },
+    {
+      "slug": "milocarian-ac",
+      "url": "https://www.milocarianac.info",
+      "status": "deferred-unavailable-primary-site",
+      "reason": "Official home with/without www unavailable/TLS502; web reader unavailable. Third-party historical associations insufficient current primary narrative."
+    },
+    {
+      "slug": "mojo-run-fit",
+      "url": "https://www.mojofit.uk/",
+      "status": "deferred-unavailable-primary-site",
+      "reason": "Two direct homepage timeouts and unavailable web reader. No unsupported founding or training details added."
+    },
+    {
+      "slug": "athletics-ireland-annalee-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Annalee_A.C.",
+      "status": "deferred-thin-primary-narrative",
+      "reason": "Revisited15October: directory gives Breifne Park training venue and mixed membership but insufficient club narrative; no generic federation contacts imported."
+    },
+    {
+      "slug": "athletics-ireland-ashford-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ashford_A.C.",
+      "status": "deferred-thin-primary-narrative",
+      "reason": "Revisited15October: Wicklow directory gives Holy Rosary venue and senior membership only. Distinct from Ashford Kent; no narrative invented."
+    },
+    {
+      "slug": "mendip-triathlon-and-running-club",
+      "url": "https://mendiptrc.co.uk/coaching-team/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Direct training/coaching fetch timed out; primary pages read through web reader. Claire Gray1990Commonwealth demonstration is historical. Founding unknown; postcode-only listing cleared."
+    },
+    {
+      "slug": "mersey-tri",
+      "url": "https://merseytri.org.uk/tri-stars-youth-training",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior membership fees disagree5/10, omitted.7–14 junior programme and15–17 by arrangement distinguished. Unsupported Harington Green meeting address cleared."
+    },
+    {
+      "slug": "mickey-bushell-gold-standard-academy",
+      "url": "https://mickeybushell.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Skills programme conceived2021, first course2022; athletics section2023, EAJanuary2024. Stafford directory venue retained: Telford service area is not proof venue is wrong. March2026 skills date not recast upcoming."
+    },
+    {
+      "slug": "middlesbrough-and-cleveland-harriers",
+      "url": "https://mcharriers.connectmyclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Header1888 conflicts with introduction1893; founded_year omitted. Recovered current site; supplier hello@connectmy.club and Kenilworth address excluded, malformed Facebook link not guessed."
+    },
+    {
+      "slug": "middleton-harriers-ac",
+      "url": "https://middletonharriers.uk/contact/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current club1980s Fitness Club is third incarnation, not1900 founding. Contact postcodeM241AQ differs homepageM241AG; existingAG retained pending confirmation."
+    },
+    {
+      "slug": "midland-masters-ac",
+      "url": "https://midlandmasters.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Officer street is correspondence, not training. Joining page confirms correct Graham Lamb email; officer page mismatched mailto excluded. Conflicting fees omitted."
+    },
+    {
+      "slug": "mile-shy-club",
+      "url": "https://www.mileshyclub.com/faq",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official FAQ permits accompanied under16s with separate form, so old directory adult-only flag corrected. Swinton is one of multiple locations, not all sessions."
+    },
+    {
+      "slug": "mk-lakeside-runners",
+      "url": "https://mklr.club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Old domain unavailable. September2026 winter notice confirms Japonica Lane, Willen; Northampton correspondence location replaced. No guessed car-park postcode or live marathon count."
+    },
+    {
+      "slug": "mid-essex-casuals",
+      "url": "https://www.midessexcasuals.org.uk/club_info.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Frames-only homepage rescued via official HTML pages. Braintree retained as directory town, unsupported exact meeting address cleared; events vary across Essex. Founding unknown."
+    },
     {
       "slug": "meads-runners",
       "url": "https://www.meadsrunners.co.uk/",

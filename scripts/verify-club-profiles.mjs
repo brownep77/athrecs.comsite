@@ -394,6 +394,18 @@ try {
   assert.deepEqual(bySlug.get("marlow-striders").sports, ["Running"]);
   assert.ok(bySlug.get("athletics-ireland-carraig-mhor-a-c").contacts.some(c => c.email === "carraigmhorac@gmail.com"));
   assert.ok(!bySlug.get("massey-ferguson-rc").contacts.some(c => c.phone?.replace(/\D/g, "") === "01214456491"));
+  // Batch 49: separate programme origins, correspondence and actual admission rules.
+  assert.equal(clubProfiles["mendip-athletic-club"].founded_year, 2003);
+  assert.equal(clubProfiles["mickey-bushell-gold-standard-academy"].founded_year, 2023);
+  assert.equal(clubProfiles["middlesbrough-and-cleveland-harriers"].founded_year, undefined);
+  assert.equal(clubProfiles["midland-masters-ac"].corrections.address_kind, "correspondence");
+  assert.equal(bySlug.get("meltham-ac").city, "Meltham");
+  assert.equal(bySlug.get("mk-lakeside-runners").city, "Milton Keynes");
+  assert.equal(bySlug.get("metros-rc").address, "");
+  assert.equal(bySlug.get("mile-shy-club").adult_only, false);
+  assert.deepEqual(bySlug.get("methley-striders").sports, ["Running"]);
+  assert.ok(!bySlug.get("middlesbrough-and-cleveland-harriers").contacts.some(c => c.email === "hello@connectmy.club"));
+  assert.notEqual(clubProfiles["mikkeller-running-club-liverpool"].scope, "global");
   const unsafe = { name: "</script><script>example</script>" };
   // Batch 47: distinguish changing venues, admission rules and historical associations.
   assert.equal(bySlug.get("london-city-runners").address, "Marquis of Wellington, 21 Druid Street, Bermondsey, London");
