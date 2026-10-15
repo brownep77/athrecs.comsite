@@ -1,58 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch46",
+  "lastEditorialBatch": "2026-10-15-batch47",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch46 adds20 biographies and11 sourced historical/founding/coaching associations. PR749 contains196 additional biographies; assembled881/1737 with395 notable entries. Last confirmed live remains685/1737 with289 entries. Draft only; hosted preview verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
+  "publication": "Batch47 adds20 biographies and7 sourced historical/coaching associations. PR749 contains216 additional biographies; assembled901/1737 with402 notable entries. Last confirmed live remains685/1737 with289 entries. Draft only; hosted preview verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
   "completedProfileSlugs": [
-    "liverpool-running-club",
-    "leeds-university-ac-and-cc-club",
-    "leicester-triathlon-club",
-    "leigh-on-sea-striders",
-    "leighton-buzzard-athletic-club",
-    "leighton-buzzard-triathlon-club",
-    "leighton-fun-runners",
-    "levenshulme-runners",
-    "lewes-ac",
-    "lichfield-running-club",
-    "lincoln-and-district-runners",
-    "lindley-running-club",
-    "lingfield-rc",
-    "lions-running-community",
-    "liss-runners",
-    "little-baddow-ridge-runners",
-    "athletics-ireland-artane-beaumont-running-club-a-c",
-    "athletics-ireland-ballybunnion-running-club-a-c",
-    "littledown-harriers",
-    "liverpool-running-bugs"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 881,
-    "notableMemberEntries": 395,
-    "clubsWithContacts": 817,
-    "contactEntries": 1400,
-    "clubsWithEmail": 793,
-    "clubsWithPhone": 117,
-    "clubsWithSocials": 1094,
-    "socialLinks": 2295,
-    "websiteContactRecords": 1104
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 11,
-    "contactOrSocialRecordsChanged": 19,
-    "newWebsiteContactRecords": 8,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 13,
-    "netSocialLinks": 6
-  },
-  "validationBeforeCommit": {
-    "status": "Primary sources opened15October2026. Parentfc9c77190d725a9ac8b16a50e7f125e2a702984d and mainc08123f78f99503db5613d8e7382f911ab49f4c0 checked before editing. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace, safe build and all20 actual locally rendered pages passed. Database publication explicitly skipped. Exact-head CI and deployment evidence belongs in PR749; hosted content remains a separate release gate."
-  },
-  "nextCandidateSlugs": [
     "loftus-and-whitby-ac",
     "london-city-runners",
     "london-frontrunners",
@@ -69,18 +23,154 @@
     "lowestoft-road-runners",
     "ludlow-runners",
     "luton-athletic-club",
-    "athletics-ireland-bailieboro-a-c",
-    "athletics-ireland-ballyduff-a-c",
-    "athletics-ni-st-annes-ac",
-    "athletics-ni-west-belfast-coolers"
+    "macclesfield-harriers-and-ac",
+    "maidenhead-ac",
+    "malvern-joggers",
+    "manchester-frontrunners"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 901,
+    "notableMemberEntries": 402,
+    "clubsWithContacts": 832,
+    "contactEntries": 1423,
+    "clubsWithEmail": 808,
+    "clubsWithPhone": 119,
+    "clubsWithSocials": 1100,
+    "socialLinks": 2309,
+    "websiteContactRecords": 1117
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 7,
+    "contactOrSocialRecordsChanged": 19,
+    "newWebsiteContactRecords": 13,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 23,
+    "netSocialLinks": 14
+  },
+  "validationBeforeCommit": {
+    "status": "Primary sources opened15October2026. Parent1ab7ed792e5bcfa4269a41a28b892f3b431948f4 and main970f5a6866184cb3d61b8f64488dba16f552f329 rechecked before commit. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace, safe build and all20 actual locally rendered pages passed. Database publication explicitly skipped. Exact-head CI and deployment evidence belongs in PR749; hosted content remains a separate release gate."
+  },
+  "nextCandidateSlugs": [
+    "madrunners",
+    "maltby-running-club",
+    "malvern-buzzards-running-club",
+    "manchester-harriers-and-ac",
+    "manchester-road-runners",
+    "manchester-ymca-harriers",
+    "mansfield-harriers",
+    "march-ac",
+    "market-drayton-rc",
+    "marlborough-athletics",
+    "marlborough-running-club",
+    "marlow-striders",
+    "marple-runners",
+    "marsden-racers",
+    "marshall-milton-keynes-ac",
+    "massey-ferguson-rc",
+    "matlock-athletic-club",
+    "meads-runners",
+    "medway-and-maidstone-ac",
+    "medway-tri"
   ],
   "resumeInstructions": [
-    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–46 and use expected-head guarded updates.",
+    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–47 and use expected-head guarded updates.",
     "Twenty new profiles in club-profiles-at.ts. Artane/Beaumont now has a first-person co-founder account; Ballybunion has club-authored community-event evidence. Do not repeat completed L clubs.",
     "Standing publication authority does not waive hosted verification. Do not retry a rejected bypass or weaken protection. Exact-head CI and preview evidence belongs in PR749.",
     "Rotate regions and Irish primary sources. Preserve athlete identities, results, privacy, verification, registration and search implementation."
   ],
   "sourceGaps": [
+    {
+      "slug": "athletics-ireland-bailieboro-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Bailieboro_A.C.",
+      "status": "deferred-thin-primary-evidence",
+      "reason": "Official directory confirms Tunnyduff/Bailieborough and contact, but insufficient opened primary narrative for full biography; do not substitute GAA history."
+    },
+    {
+      "slug": "athletics-ireland-ballyduff-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ballyduff_A.C.",
+      "status": "deferred-thin-primary-evidence",
+      "reason": "Waterford directory listing has public contact and Instagram; no supported history/training narrative. Facebook link is a malformed relative URL. Do not conflate Kerry or GAA clubs."
+    },
+    {
+      "slug": "athletics-ni-st-annes-ac",
+      "url": "https://athleticsni.org/About/Find-A-Club",
+      "status": "deferred-thin-primary-evidence",
+      "reason": "Fresh governing-body directory contact found but no sufficient opened primary history/training narrative. No biography padded from a bare listing."
+    },
+    {
+      "slug": "athletics-ni-west-belfast-coolers",
+      "url": "https://athleticsni.org/About/Find-A-Club",
+      "status": "deferred-thin-primary-evidence",
+      "reason": "Current directory publishes westbelfastcoolers@hotmail.com. Facebook retrieval throttled. Older Belfast Marathon pacer association must not be treated as current membership; later NI transfer evidence needs direct review."
+    },
+    {
+      "slug": "loftus-and-whitby-ac",
+      "url": "https://www.loftusandwhitbyac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current notices and older footer disagree on training days/times. No exact timetable or founding year inferred. Public secretary email decoded from official page."
+    },
+    {
+      "slug": "longwood-harriers-ac",
+      "url": "http://www.longwoodhac.org.uk/joiningLHAC.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Advance contact/waiting-list required. Joining page and officials page have different president email addresses; general secretary used. Derek Ibbotson race name alone not used as membership evidence."
+    },
+    {
+      "slug": "loughton-ac",
+      "url": "https://www.loughtonac.org.uk/new-members",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Under12 group and waiting list closed. Older juniors must enquire. Welfare-only address excluded from general contacts; 2025 fees not recast as current."
+    },
+    {
+      "slug": "louth-triathlon-club",
+      "url": "https://www.louthtriclub.co.uk/join-the-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Joining timetable still labelled2025 and lane counts differ. Confirm sessions through Spond; undated tenth anniversary not converted into founding year. Facebook group retained, post URL excluded."
+    },
+    {
+      "slug": "low-fell-rc",
+      "url": "https://www.lowfellrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Variable/seasonal locations distinguished; welfare-only mailbox excluded. Named/numeric Facebook URLs may be aliases so no extra group duplicated."
+    },
+    {
+      "slug": "luton-athletic-club",
+      "url": "https://lutonac.co.uk/contact/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Treasurer mailto differs from text on joining page; neither added. Membership and coaching contacts confirmed. Postal membership address not a training venue."
+    },
+    {
+      "slug": "macclesfield-harriers-and-ac",
+      "url": "https://macclesfield-harriers.co.uk/weekly-training-times/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Direct retrieval timed out but web reader opened official home/joining/training/contact pages. Joining says Saturday trail sessions; timetable says monthly. Frequency qualified. Enquiry-form example phone excluded."
+    },
+    {
+      "slug": "maidenhead-ac",
+      "url": "https://www.maidenheadac.org/club-history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "1869 club proposal explicitly uncertain; no founding-year field. Junior coaching waiting list separate from cross-country-only entry."
+    },
+    {
+      "slug": "lonely-goat-rc",
+      "url": "https://lonelygoat.com/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Online participation verified; former street address removed as training indicator. No unsupported global scope or founding date. Free membership, Member Plus and EA registration distinguished."
+    },
+    {
+      "slug": "lostock-ac",
+      "url": "https://lostock-ac.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Only early1980s origins supported, no exact year. Named memorial race alone not treated as athlete membership evidence."
+    },
+    {
+      "slug": "london-city-runners",
+      "url": "https://www.londoncityrunners.com/river-runs",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current21DruidStreet replaces130. River runs mostly not led/paced; paid booked track separate. Sunday no bagdrop. Founder given only first name in read source, no invented surname."
+    },
     {
       "slug": "leicester-walking-club",
       "url": "http://www.leicesterwalkingclub.org.uk/",

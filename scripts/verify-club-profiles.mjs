@@ -379,6 +379,21 @@ try {
   assert.ok(bySlug.get("athletics-ireland-ballon-rathoe-a-c").contacts.some(c => c.email === "olive.obyrne@gmail.com"));
   assert.ok(!bySlug.get("impact-athletic-club").socials.some(s => s.url.includes("facebook.com/create")));
   const unsafe = { name: "</script><script>example</script>" };
+  // Batch 47: distinguish changing venues, admission rules and historical associations.
+  assert.equal(bySlug.get("london-city-runners").address, "Marquis of Wellington, 21 Druid Street, Bermondsey, London");
+  assert.equal(bySlug.get("long-eaton-running-club").city, "Long Eaton");
+  assert.equal(bySlug.get("long-eaton-running-club").postcode, "NG10 4AA");
+  assert.equal(bySlug.get("lowestoft-road-runners").postcode, "NR33 0QN");
+  assert.equal(bySlug.get("ludlow-runners").county, "Shropshire");
+  assert.equal(bySlug.get("lonely-goat-rc").address, "");
+  assert.notEqual(clubProfiles["lonely-goat-rc"].scope, "global");
+  assert.match(clubProfiles["loughton-ac"].contact_note, /waiting list closed/);
+  assert.match(clubProfiles["longwood-harriers-ac"].biography.join(" "), /must contact the club before attending/);
+  assert.match(clubProfiles["manchester-frontrunners"].biography.join(" "), /comfortably run 5K/);
+  assert.ok(bySlug.get("london-frontrunners").sports.includes("Triathlon"));
+  assert.ok(bySlug.get("macclesfield-harriers-and-ac").contacts.some(c => c.email === "tryarun@macclesfield-harriers.co.uk"));
+  assert.ok(!bySlug.get("loughton-ac").contacts.some(c => /welfare/i.test(c.email ?? "")));
+  assert.equal(clubProfiles["maidenhead-ac"].founded_year, undefined);
   assert.ok(!safeClubJsonLd(unsafe).includes("<"));
   assert.deepEqual(JSON.parse(safeClubJsonLd(unsafe)), unsafe);
   assert.ok(
