@@ -306,6 +306,21 @@ try {
   assert.equal(clubProfiles["hedge-end-running-club"].corrections.address, "");
   assert.match(clubProfiles["athletics-ireland-athlone-a-c"].notable_members[0].detail, /subject to ratification/);
   assert.match(clubProfiles["high-peak-athletic-club"].location_note, /suspended/);
+  // Batch 41: distinct clubs, historic dates, venue updates and mislabelled links.
+  assert.equal(clubProfiles["holland-sports-ac"].founded_year, 1982);
+  assert.equal(clubProfiles["holgate-harriers"].founded_year, undefined);
+  assert.equal(clubProfiles["horley-harriers-running-club"].founded_year, undefined);
+  assert.equal(clubProfiles["horsforth-fellandale-club"].founded_year, 1980);
+  assert.equal(clubProfiles["horsforth-harriers"].founded_year, 1985);
+  assert.match(clubProfiles["horsforth-fellandale-club"].location_note, /no junior training/);
+  assert.match(clubProfiles["welsh-athletics-welshpool-athletics-club"].notable_members[0].detail, /Birchfield Harriers/);
+  assert.equal(bySlug.get("hook-runners").postcode, "RG27 9NN");
+  assert.equal(bySlug.get("horsforth-harriers").postcode, "LS18 4QD");
+  assert.equal(bySlug.get("holcombe-harriers").city, "Holcombe Brook");
+  assert.equal(bySlug.get("hitchin-running-club").address, "");
+  assert.equal(bySlug.get("athletics-ireland-boyle-a-c").socials.length, 0);
+  assert.ok(!bySlug.get("instinctive-sports").socials.some(s => new URL(s.url).hostname === "facebook"));
+  assert.equal(bySlug.get("welsh-athletics-trg-runners").contacts.find(c => c.email?.toLowerCase() === "richard@teamreesgym.com").name, "Richard Rees");
   const unsafe = { name: "</script><script>example</script>" };
   assert.ok(!safeClubJsonLd(unsafe).includes("<"));
   assert.deepEqual(JSON.parse(safeClubJsonLd(unsafe)), unsafe);
