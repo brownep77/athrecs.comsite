@@ -4,6 +4,7 @@ import { bulkFixture } from "./collector-bulk-fixture.mjs";
 import {
   publishEventSchemaCorrections,
   publishEventOrganiserCorrections,
+  publishEventPublicNotes,
 } from "./lib/event-schema-corrections.mjs";
 import { sportsEventJsonLd } from "../src/lib/athrecs/seo.ts";
 const publishing = await import("../src/lib/athrecs/catalogue-publishing.server.ts");
@@ -38,6 +39,7 @@ try {
     website: "https://example.org/",
     sourceUrl: "https://example.org/source",
     note: "Source checked 15 October 2026",
+    publicNote: "Official programme: 9 May 2027, 07:30–10:00 local time.",
     editions: [
       {
         date: "2027-05-09",
@@ -163,6 +165,23 @@ try {
   assert.equal(identityChange.after_json.record.organiser, "Example Club");
   await publishEventOrganiserCorrections(sql, publishing, [correction]);
   assert.equal((await sql.query("select count(*)::int as n from catalogue_revisions"))[0].n, 2);
+  await assert.rejects(
+    publishEventPublicNotes(sql, publishing, [{ ...correction, note: "Different evidence" }]),
+    /evidence changed/,
+  );
+  await publishEventPublicNotes(sql, publishing, [correction]);
+  const publicEdition = (await sql.query("select * from editions where id=901001"))[0];
+  assert.deepEqual(publicEdition, { ...current, notes: `Original evidence\n${correction.publicNote}` });
+  assert.deepEqual((await sql.query("select * from events where id=901001"))[0], namedEvent);
+  assert.deepEqual(
+    await sql.query("select * from edition_entry_options where edition_id=901001"), beforeOptions,
+  );
+  const noteRevision = (await sql.query("select max(id) as id from catalogue_revisions"))[0].id;
+  await publishEventPublicNotes(sql, publishing, [correction]);
+  assert.equal((await sql.query("select count(*)::int as n from catalogue_revisions"))[0].n, 3);
+  await publishing.rollbackCatalogueRevision(noteRevision, "test-reviewer@example.org", sql);
+  await publishEventPublicNotes(sql, publishing, [correction]);
+  assert.deepEqual((await sql.query("select * from editions where id=901001"))[0], current);
   await publishing.rollbackCatalogueRevision(identityRevision, "test-reviewer@example.org", sql);
   assert.deepEqual((await sql.query("select * from events where id=901001"))[0], beforeEvent);
   await publishEventOrganiserCorrections(sql, publishing, [correction]);

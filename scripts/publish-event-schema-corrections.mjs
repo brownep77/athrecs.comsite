@@ -2,6 +2,7 @@ import { createServer } from "vite";
 import {
   publishEventSchemaCorrections,
   publishEventOrganiserCorrections,
+  publishEventPublicNotes,
 } from "./lib/event-schema-corrections.mjs";
 
 if (process.env.VERCEL_ENV !== "production" || process.env.VERCEL_GIT_COMMIT_REF !== "main") {
@@ -22,6 +23,7 @@ try {
   );
   await publishEventSchemaCorrections(await getSql(), publishing, eventSchemaCorrections);
   await publishEventOrganiserCorrections(await getSql(), publishing, eventSchemaCorrections);
+  await publishEventPublicNotes(await getSql(), publishing, eventSchemaCorrections);
 } finally {
   await vite.close();
 }

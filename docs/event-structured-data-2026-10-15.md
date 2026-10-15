@@ -66,6 +66,38 @@ unchanged editions/options, rollback, no replay and changed-evidence rejection.
 
 Passed: focused event schema tests, actual PGlite staging/publication/rollback tests, offer publication tests, public-results metadata/privacy tests, search-discovery tests, TypeScript, focused lint, catalogue validation, fixture duplicate audit and a complete preview-mode production build. CI additionally runs the existing repository quality gate. Live Google tests and deployment outcome are recorded in the pull request after release; this report does not claim Google's indexed report has already refreshed.
 
+## Production validation
+
+PR #753 passed all applicable CI and deployed as `c83e0e22`. Revisions 264 and 265
+published the two named organisers. The database comparison confirms original
+event/edition/option IDs, dates, distances, source URLs and unrelated fields are
+preserved. A second anonymous audit of all 119 URLs returned HTTP 200 throughout,
+with unchanged canonicals and robots directives. There are now 110 attendance
+Events and nine archive pages; 43 Events lack a credible organiser, 13 have offers
+and one has a supported ending. These are live audit counts, not refreshed Google
+index counts.
+
+Google's live tests confirmed a valid Mother's Day Event with its 10:00 ending and
+Florida Running Company; only offers and performer remained optional warnings.
+Newcastle was valid with its £35.70 offer; endDate, performer and validFrom remain
+unknown. The Zugspitz archive no longer exposes an attendance Event. Search Console
+accepted validation requests for organizer.name and the four archive-only warnings
+(location.address, image, eventStatus and description); all showed Started on
+15 October, not Passed.
+
+- [Mother's Day live test](https://search.google.com/test/rich-results/result?id=5poYRhHTg6dBWORMtqh-JQ)
+- [Newcastle live test](https://search.google.com/test/rich-results/result?id=h5QPvil8lVm6lqBN2m3-OA)
+- [Zugspitz archive live test](https://search.google.com/test/rich-results/result?id=sPMsXO8uJK8choFdiXR7AA)
+
+The final visible-page check found that running races use a separate practical
+schedule component. It now displays the same supported ending as the JSON-LD,
+including date-only precision when no time is known. A guarded notes-only revision
+replaces our exact appended technical audit wording with reader-facing official
+details. It retains the earlier notes in revision history and preserves all race
+facts and entry options. A rendered-component regression covers timed, date-only
+and unknown endings; publication regressions cover notes preservation, evidence
+guards, rollback and no replay. Its deployment outcome is recorded in the final PR.
+
 ## All affected URLs and live baseline
 
 Every row below was an example for missing endDate/performer in Google's report. The displayed organiser is the live JSON-LD baseline, not a certification of its accuracy. Blank values remain blank. `Archive` means no current SportsEvent. The full stored public metadata baseline is retained in [event-structured-data-2026-10-15-before.json](event-structured-data-2026-10-15-before.json).
