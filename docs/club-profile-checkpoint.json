@@ -1,69 +1,20 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch60",
+  "lastEditorialBatch": "2026-10-15-batch61",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1131/1737 assembled biographies and 530 sourced associations; 131 biographies and 79 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
+  "publication": "1151/1737 assembled biographies and 538 sourced associations; 151 biographies and 87 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "welsh-athletics-afan-nedd-tawe-schools-district",
-    "welsh-athletics-cardiff-and-vale-schools-district",
-    "welsh-athletics-dyfed-schools-district",
-    "welsh-athletics-eryri-schools-district",
-    "welsh-athletics-glamorgan-valleys-schools-district",
-    "runthrough-north",
-    "runthrough-run-club",
-    "rushcliffe-ac",
-    "rushmere-community-runners",
-    "rutland-running-and-triathlon-club",
-    "ryde-harriers",
-    "s-factor-athletics-academy",
-    "saddleworth-runners-club",
-    "saffron-striders-rc",
-    "saint-edmund-pacers",
-    "salford-harriers-and-ac",
-    "saltaire-striders",
-    "saltwell-harriers",
-    "sandbach-striders",
-    "sawtry-running-club"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1131,
-    "notableMemberEntries": 530,
-    "clubsWithContacts": 973,
-    "contactEntries": 1637,
-    "clubsWithEmail": 946,
-    "clubsWithPhone": 136,
-    "clubsWithSocials": 1152,
-    "socialLinks": 2425,
-    "websiteContactRecords": 1255
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 9,
-    "contactOrSocialRecordsChanged": 17,
-    "newWebsiteContactRecords": 12,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 11,
-    "netSocialLinks": 1,
-    "unsafeWebsitesSuppressed": 1
-  },
-  "validationBeforeCommit": {
-    "status": "Official sources opened 15 October 2026. Parent888aea35bf9523a7e5418485000eb691010cb92b; mainc83e0e220927fed32f260cbee1c8bc97245a3393. Catalogue/profile/audit, targeted ESLint, TypeScript and safe local build passed with database publication skipped. All20 locally rendered production-build pages passed biography, associations, contacts/socials, location notes, flags, registration links and title/description/canonical/SportsOrganization assertions. Exact-head CI and preview evidence recorded in PR755. Both parent workflows38801038123 and38801038140 passed."
-  },
-  "nextCandidateSlugs": [
     "welsh-athletics-north-east-wales-schools-districts",
     "welsh-athletics-powys-schools-district",
     "welsh-athletics-south-east-wales-schools-district",
-    "welsh-athletics-welsh-schools-and-universities",
     "savvy-park-runrz",
     "saxmundham-sports-running-and-fitness-club",
     "scarborough-athletic-club",
     "scunthorpe-and-district-running-club",
     "seaford-striders-rc",
-    "seaton-athletic-club",
     "sedgefield-harriers",
     "sedgley-striders",
     "selby-striders",
@@ -72,16 +23,217 @@
     "severn-ac",
     "shadwell-runners",
     "shaef-shifters-running-club",
-    "shaftesbury-barnet-harriers"
+    "shaftesbury-barnet-harriers",
+    "shelton-striders",
+    "shenley-striders",
+    "sherfield-park-runners"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1151,
+    "notableMemberEntries": 538,
+    "clubsWithContacts": 981,
+    "contactEntries": 1649,
+    "clubsWithEmail": 954,
+    "clubsWithPhone": 136,
+    "clubsWithSocials": 1152,
+    "socialLinks": 2425,
+    "websiteContactRecords": 1268
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 8,
+    "contactOrSocialRecordsChanged": 18,
+    "newWebsiteContactRecords": 13,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 12,
+    "netSocialLinks": 0,
+    "unsafeWebsitesSuppressed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Official sources opened 15 October 2026. Parent 8d35b9f1613c79e51a52e930a13f86808fa5b174; main c83e0e220927fed32f260cbee1c8bc97245a3393. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe local build passed with database publication skipped. All20 actual locally rendered production-build pages passed biography, associations, contacts/socials, location notes, flags, registration links and title/description/canonical/SportsOrganization assertions. Targeted regression checks passed. Exact-head CI and preview evidence recorded in PR755. Both parent workflows 38809123488 and 38809123365 passed."
+  },
+  "nextCandidateSlugs": [
+    "shrewsbury-ac",
+    "shropshire-shufflers",
+    "silson-ac",
+    "silverdale-rc",
+    "sinfin-running-club",
+    "sip-running-club",
+    "sittingbourne-striders",
+    "skegness-and-district-running-club",
+    "skelmersdale-boundary-harriers",
+    "skelmersdale-running-club",
+    "skipton-ac",
+    "skyrac-athletic-club",
+    "slaithwaite-striders-rc",
+    "sleaford-striders-ac",
+    "sleaford-town-runners",
+    "slgr",
+    "slough-junior-ac",
+    "smalley-road-runners",
+    "snaith-and-cowick-running-club",
+    "sneyd-striders"
   ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch60 adds20 profiles in club-profiles-bh.ts. Preserve sourced fields and guard remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–60 remain draft; no publication authorized.",
-    "School districts are representative entities, not ordinary open clubs. No pupil identities or inferred alumni.",
-    "Saffron Athletics Club website was suppressed after an unrelated gambling redirect; do not confuse it with Saffron Striders RC."
+    "Batch61 adds20 profiles in club-profiles-bi.ts. Preserve sourced fields and use guarded remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–61 remain draft; no publication authorized.",
+    "All eight Welsh school districts now have profiles, but Welsh Schools and Universities still lacks adequate entity-specific evidence; do not conflate it with ordinary clubs or pupil identities.",
+    "Remaining non-English candidates have specific source gaps. Next queue rotates through English regional running; revisit blocked nations when primary evidence is available.",
+    "Shepshed's recovered site includes unrelated pharmaceutical spam. Do not use its body as club evidence or follow those links; legitimate current website remains unresolved."
   ],
   "sourceGaps": [
+    {
+      "slug": "welsh-athletics-north-east-wales-schools-districts",
+      "url": "https://www.welshathletics.org/en/club/view/north-east-wales-schools-districts",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The calendar includes a 2025 date among 2026 material, and the Welsh-language area row has an inconsistent district label. Use the individual district's named central contact; founding date and notable-member history remain unresolved. Denbighshire, Flintshire and Wrexham school district; no single training base is confirmed."
+    },
+    {
+      "slug": "welsh-athletics-powys-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/powys-schools-district",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "School participation and selection enquiries, not open club membership. Founding date and notable-member history are unresolved. County-wide schools district; Brecon and Newtown are published competition locations, not confirmed permanent district bases."
+    },
+    {
+      "slug": "welsh-athletics-south-east-wales-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/south-east-wales-schools-district",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding date or notable-member history is inferred from school results. Four-local-authority school district; confirm the venue for each event."
+    },
+    {
+      "slug": "savvy-park-runrz",
+      "url": "https://savvyparkrunrz.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Dorothy Hyman's historical coaching at Savile Park does not establish membership of this club founded in 2020; no notable-member entry is inferred."
+    },
+    {
+      "slug": "saxmundham-sports-running-and-fitness-club",
+      "url": "https://thesaxons.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Use the published membership enquiry route; the masked email address was not guessed."
+    },
+    {
+      "slug": "scarborough-athletic-club",
+      "url": "https://www.scarboroughac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Homepage and membership page give different trial lengths. The linked history page contains template text, so founding date and alumni remain unresolved. The retained rugby-club address comes from the directory; confirm the meeting point for the chosen session."
+    },
+    {
+      "slug": "scunthorpe-and-district-running-club",
+      "url": "https://scunthorperunningclub.wordpress.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved. Unsupported swimming and multisport tags are removed; guest registration is not an athlete identity claim."
+    },
+    {
+      "slug": "seaford-striders-rc",
+      "url": "https://www.seafordstriders.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm current track and junior session arrangements; differing published times are not resolved by guesswork. Seaford is the club's home town. The retained Lewes address identifies its track-training venue, not a Seaford clubhouse."
+    },
+    {
+      "slug": "sedgefield-harriers",
+      "url": "https://sedgefieldharriers.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Trial wording differs within the joining page; confirm the permitted trial with the membership team. Sedgefield Community College is a training venue; the retained postcode is directory-sourced, not a newly checked postal address."
+    },
+    {
+      "slug": "sedgley-striders",
+      "url": "https://sedgleystriders.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history are unresolved. The next beginner course is planned, not confirmed as open for bookings. The published training meeting point is in Lanesfield, Wolverhampton; the club retains its Sedgley identity."
+    },
+    {
+      "slug": "selby-striders",
+      "url": "https://selbystriders.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Selby Rugby Club is a published meeting base; the retained postal detail remains directory-sourced."
+    },
+    {
+      "slug": "settle-harriers",
+      "url": "https://settleharriers.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The joining page required browser verification. No trial limit, masked email or notable-member history is inferred. Training starts vary across North Craven. The unconfirmed Lincoln House directory address is not presented as a clubhouse."
+    },
+    {
+      "slug": "sevenoaks-ac",
+      "url": "https://www.7oaks-ac.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Contact before attending; juniors have a waiting list and no tasters before school Year 5. No supported notable-member entry is added."
+    },
+    {
+      "slug": "severn-ac",
+      "url": "https://severnac.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Published membership prices are labelled 2025–26; confirm current terms. Notable-member history remains unresolved. Barnett Way is the Monday meeting point; Wednesday hill sessions use Kenilworth Avenue. Neither is established as a staffed clubhouse."
+    },
+    {
+      "slug": "shadwell-runners",
+      "url": "https://sites.google.com/view/shadwellrunners/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date, notable-member history and exact junior-admission arrangements remain unconfirmed; broad welcoming language does not establish a junior section. The Red Lion address is retained from the directory; confirm the actual session start with the club."
+    },
+    {
+      "slug": "shaef-shifters-running-club",
+      "url": "https://www.shaefshifters.co.uk/p/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm current sessions. Masked email and notable-member history are not inferred. Bushy Park's Teddington gates are a meeting reference, not a clubhouse. Confirm the next outing before travelling."
+    },
+    {
+      "slug": "shaftesbury-barnet-harriers",
+      "url": "https://shaftesburybarnet.co.uk/about/history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "1890 is the Shaftesbury predecessor's founding year; the present merged identity dates from 1986. Contact before applying; membership is subject to approval."
+    },
+    {
+      "slug": "shelton-striders",
+      "url": "https://sheltonstriders.org.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Book an induction before the first coached session. No unsupported founding-member or athlete association is added. Coached Wednesday training uses Darley Park in summer and Moorways in winter; confirm the seasonal venue and time."
+    },
+    {
+      "slug": "shenley-striders",
+      "url": "https://www.shenleystriders.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The published Wednesday group guidance is around ten-minute miles over ten kilometres; confirm readiness before attending. Founding-person and notable-member history remain unresolved."
+    },
+    {
+      "slug": "sherfield-park-runners",
+      "url": "https://www.sherfieldparkrunners.co.uk/about-spr",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm beginner-course availability and official-session arrangements directly. No supported notable-member entry is added. The community centre is a regular base; Thursday meeting points vary. Hook is part of the postal address, not a claim that all training takes place in Hook village."
+    },
+    {
+      "slug": "welsh-athletics-welsh-schools-and-universities",
+      "url": "https://www.welshathletics.org/en/club/view/welsh-schools-and-universities",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "The listing provides a national entity name and contact but no substantive entity-specific programme/history; all discipline flags are No. Do not conflate the entity with WSAA or individual university clubs."
+    },
+    {
+      "slug": "seaton-athletic-club",
+      "url": "https://seaton-ac.co.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official site unavailable. Canonical club is in Cumbria/Whitehaven, not the similarly named Devon club; no biography is inferred."
+    },
+    {
+      "slug": "shefford-runners",
+      "url": "https://www.sheffordrunners.co.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Opened site provided only generic platform material, without sufficient club history/training evidence. Supplier hello@connectmy.club excluded."
+    },
+    {
+      "slug": "sheffield-rc",
+      "url": "https://www.sheffieldrunningclub.org.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official club page timed out during this bounded review; no snippet-only profile added."
+    },
+    {
+      "slug": "shepshed-running-club",
+      "url": "https://shepshedrc.org.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Recovered homepage and running page contained unrelated pharmaceutical spam. No new biography or contacts taken from those pages; no unrelated link followed. Legitimate current club source requires independent verification."
+    },
     {
       "slug": "welsh-athletics-afan-nedd-tawe-schools-district",
       "url": "https://www.welshathletics.org/en/club/view/afan-nedd-tawe-schools-district",
