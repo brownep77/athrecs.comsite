@@ -1,11 +1,11 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 14 October 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 15 October 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
 - The accumulated follow-up contains 77 source-backed series with 80 editions: 63 half-marathon editions and 17 ten-mile editions across England, Scotland, Wales, Northern Ireland and Ireland. These are cumulative totals, not additions from the latest release check.
-- Added 55 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
+- Added 56 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
 - Burnsall, Kettlewell and Malham now use the live official Due North series checkout.
@@ -20,7 +20,13 @@ Oxford Half Marathon is also retained on its established permanent card. The off
 
 ## Held candidates
 
-The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, RunClare, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs and Ennis races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Dorney Lake January–March, Brixton, Nantwich, Swindon, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
+The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, RunClare, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs and Ennis races, plus the provisional Tom Scott 10; date- or timetable-conflicted Dorking, Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Dorney Lake January–March, Brixton, Nantwich, Swindon, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. Ferriby 10 remains held until the organiser exposes a unique event-specific official page or direct 2027 registration URL. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
+
+## 15 October 2026 scan
+
+Reedham Ten was attached to its established canonical card for 17 January 2027 rather than duplicated. The direct official Total Race Timing page confirms the road 10-mile race, 10:00 start, open registration, race licence 30222 and course-accuracy certificate 22/475; affiliated entry is £28.10 including the registration fee.
+
+England Athletics also lists licensed 2027 editions of Dorking 10 Mile and Ferriby 10 Mile. Dorking remains in research because the organising club's event page still identifies 7 June 2026 as its latest edition, conflicting with the governing-body date of 6 June 2027. Ferriby remains in research because the organiser currently supplies only a generic club homepage and no unique event-specific official page or direct 2027 checkout.
 
 ## 29 August 2026 scan
 

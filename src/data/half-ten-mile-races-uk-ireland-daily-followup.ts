@@ -1549,6 +1549,7 @@ export const dailyHalfTenMileEditions: Edition[] = seeds.flatMap((seed) => {
 type ExistingSeriesEditionSeed = {
   seriesSlug: string;
   date: string;
+  distance?: "Half" | "10mi";
   startTime?: string;
   organiser: string;
   url: string;
@@ -1563,6 +1564,19 @@ type ExistingSeriesEditionSeed = {
 };
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
+  {
+    seriesSlug: "reedham-ten",
+    date: "2027-01-17",
+    distance: "10mi",
+    startTime: "10:00",
+    organiser: "Great Yarmouth & District Athletic Club / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/730",
+    entryUrl: "https://totalracetiming.co.uk/race/730",
+    priceAmount: 28.1,
+    checkedAt: "2026-10-15",
+    notes:
+      "The official event-specific registration page confirms the 17 January 2027 road race, 10:00 start, open entry, race licence 30222 and course-accuracy certificate 22/475; the established Reedham Ten card is enriched instead of duplicated.",
+  },
   {
     seriesSlug: "tonbridge-half-marathon",
     date: "2027-10-03",
@@ -2194,11 +2208,12 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
 export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesEditionSeeds.map(
   (seed) => {
     const hasEntry = seed.hasEntry ?? seed.status !== "TBC";
+    const distance = seed.distance ?? "Half";
     return {
       seriesSlug: seed.seriesSlug,
       date: seed.date,
-      distance: "Half",
-      distanceKm: 21.0975,
+      distance,
+      distanceKm: distance === "Half" ? 21.0975 : 16.09,
       status: seed.status ?? "Open",
       ...(hasEntry ? { entryUrl: seed.entryUrl ?? seed.url } : {}),
       ...(seed.startTime ? { startTime: seed.startTime } : {}),
@@ -2231,6 +2246,22 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
 
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
 export const dailyHalfTenMileResearchQueue = [
+  {
+    slug: "dorking-10-mile-2027",
+    date: "2027-06-06",
+    country: "England",
+    reason:
+      "England Athletics lists a licensed 10-mile race on 6 June 2027, but the organising club's event page still identifies the latest Dorking Tens edition as 7 June 2026. Hold publication until the organiser publishes internally consistent 2027 details.",
+    sourceUrl: "https://www.dmvac.org/dorking-tens/",
+  },
+  {
+    slug: "ferriby-10-mile-road-race-2027",
+    date: "2027-01-31",
+    country: "England",
+    reason:
+      "England Athletics lists a licensed 10-mile race on 31 January 2027, but the organising club currently exposes only its generic homepage and no event-specific official page or direct 2027 registration URL. Hold publication until unique source provenance is available.",
+    sourceUrl: "https://www.cityofhullac.co.uk/",
+  },
   {
     slug: "macclesfield-running-festival-october-2027",
     date: "2027-10-31",
@@ -2600,6 +2631,12 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "reedham-ten": {
+    organiser: "Great Yarmouth & District Athletic Club",
+    website: "https://totalracetiming.co.uk/race/730",
+    source_url: "https://totalracetiming.co.uk/race/730",
+    defaultStartTime: "10:00",
+  },
   "tonbridge-half-marathon": {
     website: "https://www.runthrough.co.uk/event/run-kent-october-2027",
     source_url: "https://www.runthrough.co.uk/event/run-kent-october-2027",

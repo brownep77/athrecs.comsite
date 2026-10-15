@@ -33,10 +33,11 @@ const CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT = "2026-10-10";
 const CURRENT_IRISH_PERMIT_SCAN_CHECKED_AT = "2026-10-11";
 const CURRENT_IRISH_APPROVAL_SCAN_CHECKED_AT = "2026-10-12";
 const CURRENT_ENTRY_STATE_SCAN_CHECKED_AT = "2026-10-14";
+const CURRENT_GOVERNING_REFRESH_CHECKED_AT = "2026-10-15";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 77;
 const NEW_EDITION_COUNT = 80;
-const EXISTING_SERIES_EDITION_COUNT = 55;
+const EXISTING_SERIES_EDITION_COUNT = 56;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -703,8 +704,12 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
     `${key} should enrich an existing series instead of creating a second card`,
   );
   assert(edition.date >= CHECKED_AT && edition.date <= HORIZON, `${key} is outside the horizon`);
-  assert.equal(edition.distance, "Half", `${key} uses the wrong primary distance`);
-  assert.equal(edition.distanceKm, 21.0975, `${key} has the wrong metric distance`);
+  assert(["Half", "10mi"].includes(edition.distance), `${key} uses the wrong primary distance`);
+  assert.equal(
+    edition.distanceKm,
+    edition.distance === "Half" ? 21.0975 : 16.09,
+    `${key} has the wrong metric distance`,
+  );
   const sourceUrl = normalizeUrl(edition.source);
   assert(
     !existingEditionSourceUrls.has(sourceUrl),
@@ -748,6 +753,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
         CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
         CURRENT_ENTRY_STATE_SCAN_CHECKED_AT,
+        CURRENT_GOVERNING_REFRESH_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -780,6 +786,45 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
           .some((url) => normalizeUrl(candidate.source) === normalizeUrl(url)),
     ),
     `${edition.seriesSlug} does not expose a current official organiser source`,
+  );
+}
+
+const reedhamEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) => edition.seriesSlug === "reedham-ten" && edition.date === "2027-01-17",
+);
+assert(reedhamEdition, "Reedham Ten must enrich its established canonical card");
+assert.equal(reedhamEdition.distance, "10mi", "Reedham Ten lost its 10-mile distance");
+assert.equal(reedhamEdition.distanceKm, 16.09, "Reedham Ten has the wrong metric distance");
+assert.equal(reedhamEdition.startTime, "10:00", "Reedham Ten has the wrong start time");
+assert.equal(reedhamEdition.status, "Open", "Reedham Ten registration must remain open");
+assert.equal(
+  reedhamEdition.entryUrl,
+  "https://totalracetiming.co.uk/race/730",
+  "Reedham Ten lost its direct official registration page",
+);
+assert.equal(
+  reedhamEdition.entryOptions?.[0]?.checkedAt,
+  CURRENT_GOVERNING_REFRESH_CHECKED_AT,
+  "Reedham Ten entry provenance is stale",
+);
+assert.match(reedhamEdition.notes, /30222/, "Reedham Ten lost its race licence");
+assert.equal(
+  catalogue.seriesList.filter((series) => series.slug === "reedham-ten").length,
+  1,
+  "Reedham Ten must remain one canonical card",
+);
+
+for (const [slug, date, reasonPattern] of [
+  ["dorking-10-mile-2027", "2027-06-06", /7 June 2026/],
+  ["ferriby-10-mile-road-race-2027", "2027-01-31", /no event-specific official page/],
+]) {
+  const candidate = dailyHalfTenMileResearchQueue.find((item) => item.slug === slug);
+  assert(candidate, `${slug} must remain traceable in research`);
+  assert.equal(candidate.date, date, `${slug} has the wrong research date`);
+  assert.match(candidate.reason, reasonPattern, `${slug} lost its publication hold reason`);
+  assert(
+    !catalogue.seriesList.some((series) => series.slug === slug),
+    `${slug} must not leak into the public catalogue`,
   );
 }
 
