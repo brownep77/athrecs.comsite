@@ -69,7 +69,7 @@ export const localParticipationAndHeritageProfiles: Record<string, ClubProfile> 
     ],
     reviewed_at: "2026-10-15",
     location_note: "Bushfield Leisure Centre is the club-night base. The site uses both PE2 5RQ and PE2 5UW; the exact postcode is left empty pending clarification. Track and Ferry Meadows sessions use separate locations.",
-    corrections: { address: "Bushfield Leisure Centre, Peterborough", postcode: "", address_kind: "training" }
+    corrections: { address: "Bushfield Leisure Centre, Peterborough", postcode: "", address_kind: "training", location_precision: "unverified" }
   },
   "brandon-fern-hoppers": {
     summary: "Brandon Fern Hoppers is a social trail-running club using Thetford Forest, with roots in a 1989 community fundraising race in Brandon.",

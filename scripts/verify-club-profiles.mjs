@@ -198,6 +198,7 @@ try {
     assert.ok(profile.reviewed_at <= new Date().toISOString().slice(0, 10));
   }
   assert.equal(bySlug.get("bushfield-runners").postcode, "");
+  assert.equal(bySlug.get("bushfield-runners").location_precision, "unverified");
   assert.equal(clubProfiles["broxbourne-runners"].founded_year, undefined);
   assert.equal(bySlug.get("broxbourne-runners").adult_only, true);
   assert.equal(bySlug.get("crediton-running-network").postcode, "EX17 2BN");
