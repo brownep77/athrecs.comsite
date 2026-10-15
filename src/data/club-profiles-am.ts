@@ -97,7 +97,7 @@ export const regionalRunningAndMultisportProfiles: Record<string, ClubProfile> =
       { title: "Club contact form and park address", url: "https://clubspark.englandathletics.org/hartshillrunners/Contact" }
     ],
     reviewed_at: "2026-10-15",
-    corrections: { website: "https://clubspark.englandathletics.org/hartshillrunners", postcode: "TF2 6EU", address_kind: "training" }
+    corrections: { website: "https://clubspark.englandathletics.org/hartshillrunners", address: "Hartshill Park, Oakengates, Telford, Shropshire, TF2 6EU", postcode: "TF2 6EU", address_kind: "training" }
   },
   "harvel-hash-house-harriers": {
     summary: "Harvel Hash House Harriers combines sociable hashing with road and off-road running from Harvel village on Kent's North Downs.",

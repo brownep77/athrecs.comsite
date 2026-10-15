@@ -5,7 +5,7 @@
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch53 adds Reading Joggers and Reepham Runners, one founding association and two public contact records; Northampton AC address now matches its sourced postcode. PR749 assembles 1000/1737 biographies and 451 notable entries, 315 more biographies than last confirmed live. Publication pending exact-head release checks; prior production evidence retained.",
+  "publication": "Batch53 adds Reading Joggers and Reepham Runners, one founding association and two public contact records; Northampton AC and Hartshill Runners addresses now match their sourced postcodes. PR749 assembles 1000/1737 biographies and 451 notable entries, 315 more biographies than last confirmed live. Publication pending exact-head release checks; prior production evidence retained.",
   "completedProfileSlugs": [
     "reading-joggers",
     "reepham-runners"
@@ -30,10 +30,10 @@
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 2,
     "netSocialLinks": 0,
-    "addressCorrections": 1
+    "addressCorrections": 2
   },
   "validationBeforeCommit": {
-    "status": "Sources opened 15 October 2026. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe preview build passed; database publication explicitly skipped. All three actual locally rendered production-build pages (Reading Joggers, Reepham Runners, Northampton AC) passed complete biography/contact/social/address/flag/registration/title/description/canonical/SportsOrganization checks. Address string now matches sourced NN3 7QL. Exact new-head CI and hosted-preview checks remain pending and belong in PR749. User authorised publication and built-in-browser fallback; earlier previews inspected without protection or credential changes."
+    "status": "Sources opened 15 October 2026. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe preview build passed; database publication explicitly skipped. All three actual locally rendered production-build pages (Reading Joggers, Reepham Runners, Northampton AC) passed complete biography/contact/social/address/flag/registration/title/description/canonical/SportsOrganization checks. Address string now matches sourced NN3 7QL. Exact new-head CI and hosted-preview checks remain pending and belong in PR749. User authorised publication and built-in-browser fallback; earlier previews inspected without protection or credential changes. A release-wide scan of corrected postcodes found one additional embedded-address mismatch at Hartshill Runners. Official ClubSpark contact page reopened 15 October confirms TF2 6EU; address string corrected. Final follow-up exact-head workflow/preview verification belongs in PR749."
   },
   "nextCandidateSlugs": [
     "os-runners",
