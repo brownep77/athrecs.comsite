@@ -1,86 +1,284 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch37",
+  "lastEditorialBatch": "2026-10-15-batch38",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch37 adds 20 biographies and eight historical associations to open draft PR749. Assembled coverage is 723/1737 with 305 notable entries. PR749 now contains 38 additional profiles across batches36–37, not published. Last confirmed production remains PR748:685 biographies/289 entries. Prior head e41760f passed both workflows; new head needs its own checks. Protected preview inspection still needs an authorised authenticated route.",
+  "publication": "Batch38 adds 20 biographies and 16 sourced historical/member associations to draft PR749. Assembled coverage is 743/1737 with 321 notable entries. PR749 contains 58 additional biographies across batches36–38, not published. Last confirmed production remains PR748:685 biographies/289 entries. Prior head ec293c2 passed both workflows; new head requires its own checks. Authenticated hosted-preview inspection remains outstanding; no protection bypass retry.",
   "completedProfileSlugs": [
-    "barton-and-district-ac",
-    "basildon-ac",
-    "basingstoke-and-mid-hants-ac",
-    "beccles-and-bungay-harriers",
-    "beckenham-running-club",
-    "bedale-and-aiskew-runners",
-    "belper-running-club",
-    "boru-tc",
-    "newry-triathlon-club",
-    "hi-elbow-tc",
-    "narrows-triathlon-club",
-    "bell-and-harp-running-club",
-    "benfleet-rc",
-    "bentham-beagles-running-club",
-    "bexley-ac",
-    "biggleswade-ac",
-    "birmingham-swifts",
-    "birstall-rc",
-    "bournville-harriers",
-    "brj-run-and-tri"
+    "british-airways-ac",
+    "bromsgrove-and-redditch",
+    "broxbourne-runners",
+    "bushfield-runners",
+    "brandon-fern-hoppers",
+    "city-of-southend-on-sea-ac",
+    "cove-joggers",
+    "crystal-palace-triathletes",
+    "crediton-running-network",
+    "athletics-ireland-ballyskenach-a-c",
+    "bromley-veterans-ac",
+    "broseley-joggers",
+    "bury-athletic-club",
+    "buckingham-and-stowe-rc",
+    "brackley-and-district-rc",
+    "burnham-joggers",
+    "buxton-ac",
+    "east-essex-triathlon-club",
+    "t3-triathlon-club",
+    "mako-tc"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 723,
-    "notableMemberEntries": 305,
-    "clubsWithContacts": 738,
-    "contactEntries": 1284,
-    "clubsWithEmail": 717,
-    "clubsWithPhone": 109,
-    "clubsWithSocials": 1054,
-    "socialLinks": 2204,
-    "websiteContactRecords": 1015
+    "extendedProfiles": 743,
+    "notableMemberEntries": 321,
+    "clubsWithContacts": 748,
+    "contactEntries": 1302,
+    "clubsWithEmail": 727,
+    "clubsWithPhone": 111,
+    "clubsWithSocials": 1061,
+    "socialLinks": 2217,
+    "websiteContactRecords": 1028
   },
   "batchChanges": {
     "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 8,
-    "contactOrSocialRecordsChanged": 19,
-    "newWebsiteContactRecords": 11,
+    "notableMemberEntriesAdded": 16,
+    "contactOrSocialRecordsChanged": 20,
+    "newWebsiteContactRecords": 13,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 20,
-    "netSocialLinks": 9
+    "netContactEntries": 18,
+    "netSocialLinks": 13
   },
   "validationBeforeCommit": {
-    "status": "Official sources opened 14–15 October2026; refreshed deep pages compared unchanged. Contact/social source assertions passed. Final catalogue, targeted lint/type/build, actual rendered-page, dedicated browser and deployment outcomes belong in PR749. Main c08123f78f99503db5613d8e7382f911ab49f4c0 and PR head e41760fea4cc856db4823ae4b69bccbd99a47e1b checked before edits."
+    "status": "Official and primary pages opened 15 October 2026; public contact/social values checked against retrieved pages. Main c08123f78f99503db5613d8e7382f911ab49f4c0 and PR head ec293c240ceea5fbcd11a03f852e8f1e8c391d33 checked before edits. Final catalogue/lint/type/build, actual rendered pages, dedicated desktop/mobile workflow and exact preview evidence are recorded in PR749. No production publication or safeguards changes."
   },
   "nextCandidateSlugs": [
-    "carlisle-tri-club",
-    "central-lancs-running-and-triathlon-club-clan",
-    "chesterfield-tri-club",
-    "coalville-triathlon-club",
-    "crystal-palace-triathletes",
-    "city-of-southend-on-sea-ac",
-    "city-of-stoke-ac",
-    "cove-joggers",
-    "crediton-running-network",
-    "crystal-peaks-runners",
-    "compton-harriers-rc",
-    "centurion-rc",
-    "athletics-ireland-ashford-a-c",
-    "athletics-ireland-bailieboro-a-c",
-    "athletics-ireland-ballon-rathoe-a-c",
-    "athletics-ireland-ballyduff-a-c",
-    "athletics-ireland-ballyskenach-a-c",
-    "athletics-ireland-barrow-harriers-a-c",
-    "athletics-ireland-barrow-valley-a-c",
-    "athletics-ireland-boyle-a-c"
+    "hadleigh-hares-ac",
+    "hailsham-harriers",
+    "halmer-harriers",
+    "halton-and-frodsham-harriers",
+    "hamworthy-harriers",
+    "handsworth-roadhogs",
+    "hartlepool-burn-road-harriers",
+    "hartshill-runners",
+    "harvel-hash-house-harriers",
+    "harwell-harriers",
+    "harwich-runners",
+    "hatch-warren-runners",
+    "hatton-darts",
+    "havant-ac",
+    "haverhill-running-club",
+    "haxby-runners",
+    "eden-tri-club",
+    "island-tc",
+    "lisburn-triathlon-club",
+    "cromane-triathlon-club"
   ],
   "resumeInstructions": [
-    "Read current main, PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Batch37 continues the existing draft; no new PR or production release was made.",
-    "Use guarded branch updates and preserve both batches36 and37. The prior head e41760f passed Club profiles38652659287 and quality gate38652659123; these do not validate the new head.",
-    "Standing publication authority does not waive CI or authenticated-preview verification. Do not retry a previously rejected bypass request or weaken protection. Final exact-head release evidence belongs in PR749.",
-    "The next queue rotates English regional triathlon/running clubs with smaller Irish athletics clubs. Thin directory records are leads, not sufficient biographies. Preserve existing sourced fields and all athlete identity, privacy, verification and registration safeguards."
+    "Read current main, PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Batch38 continues the open draft; do not duplicate these 20 profiles.",
+    "Use guarded branch updates and preserve batches36–38. Previous head ec293c2 passed Club profiles38658891687 and quality gate38658891674; these do not validate a subsequent head.",
+    "Standing publication authority does not waive CI or hosted-preview verification. Do not retry a rejected bypass request or weaken deployment protection. Final exact-head validation belongs in PR749.",
+    "Next queue rotates English regional running/athletics with Irish and Northern Irish triathlon clubs. Thin or inaccessible sources remain leads, not finished biographies. Retain all registration, identity, privacy and verification safeguards."
   ],
   "sourceGaps": [
+    {
+      "slug": "british-airways-ac",
+      "url": "https://www.barunner.org.uk/Club_Membership.shtml",
+      "status": "biography-added-name-updated",
+      "reason": "June2026 page confirms independent Concorde Runners AC, formerly British Airways AC. Canonical slug and old source name preserved; no duplicate club created. Harrow street address removed as unconfirmed training base. Airline-event eligibility differs from club membership."
+    },
+    {
+      "slug": "bromsgrove-and-redditch",
+      "url": "https://bromsgroveandredditchac.org.uk/information/club-history/",
+      "status": "biography-added-source-conflicts",
+      "reason": "History contains contradictory all-weather opening chronology and incomplete Edgar Nicholls achievement; neither repeated. Current membership minimum9 overrides older history age10. Coaches confirm session times; two venues remain distinct."
+    },
+    {
+      "slug": "broxbourne-runners",
+      "url": "https://www.broxbournerunners.com/join",
+      "status": "biography-added-price-date-conflicts",
+      "reason": "Home says over40years while about says since2000; no exact founding year. Home and joining page show different annual prices; omitted. Adult eligibility, free Wednesday taster and sports-club base supported."
+    },
+    {
+      "slug": "bushfield-runners",
+      "url": "https://www.bushfield-runners.co.uk/contact-us",
+      "status": "biography-added-postcode-conflict",
+      "reason": "Same contact page gives PE25UW and PE25RQ; postcode cleared, Bushfield Leisure Centre retained. Founding year and named alumni not established; website supplier excluded."
+    },
+    {
+      "slug": "brandon-fern-hoppers",
+      "url": "https://bfh.org.uk/where-we-meet/",
+      "status": "biography-added-seasonal-venues",
+      "reason": "Library car park is winter Tuesday only. SummerTuesdayMayday and SundayCountryPark kept separate; no invented postcode for forest starts.1989 origins precede later Fern Hoppers naming."
+    },
+    {
+      "slug": "crystal-palace-triathletes",
+      "url": "https://crystalpalacetriathletes.com/juniors",
+      "status": "biography-added-junior-date-note",
+      "reason": "Junior page retains2025 transition note; current age groups should be confirmed. Former junior AlexYee supported. The /training/run page contains unrelated gambling text and was not used as evidence. Main training/membership/junior and sports-partnership sources used instead."
+    },
+    {
+      "slug": "crediton-running-network",
+      "url": "https://creditonrunningnetwork.connectmyclub.co.uk/contact",
+      "status": "biography-added-site-recovered",
+      "reason": "Current ConnectMyClub site corroborated by2026organiser entry page. TownSquare replacesCommercialRoad; raceHQ separate. Supplier hello@connectmy.club excluded; no founding year inferred from page header."
+    },
+    {
+      "slug": "cove-joggers",
+      "url": "https://www.covejoggers.co.uk/",
+      "status": "biography-added-home-source-only",
+      "reason": "Home supports adult runs/walking/trials and contacts. Deeper about/runs pages returned500/404; no founding date, alumni or current fixed meeting point inferred."
+    },
+    {
+      "slug": "athletics-ireland-ballyskenach-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ballyskenach_A.C.",
+      "status": "biography-added-training-postal-distinction",
+      "reason": "SouthOffaly service area distinguished from Timeighter/Roscrea training postal address and separate5KraceHQ. No reliable founding year or weekly timetable found."
+    },
+    {
+      "slug": "east-essex-triathlon-club",
+      "url": "https://www.east-essex-tri-club.co.uk/training",
+      "status": "biography-added-junior-restriction",
+      "reason": "Children swimcoaching explicitly notrunning; Monday15+swim separate. UnconfirmedBenfleetstreet removed. Informalopenwater activity is not coachedsessions."
+    },
+    {
+      "slug": "t3-triathlon-club",
+      "url": "https://www.triathlonireland.com/news/dublin-womens-triathlon-programme/",
+      "status": "biography-added-historical-venue",
+      "reason": "2023UCD and beginnerprogramme historical;2022leadership names dated. Clubsite502. ExistingnewerTIapp email preserved; older main-directory email not added as conflicting currentcontact."
+    },
+    {
+      "slug": "mako-tc",
+      "url": "https://www.triathlonireland.com/get-involved/find-a-club/",
+      "status": "biography-added-sites-unavailable",
+      "reason": "makotri.com and directory-linked makotriclub.ie returned502. TIdirectory provides location/enquiry;2022leadership and2025Fingalvolunteer sources support dated associations. Current training venue/timetable notconfirmed."
+    },
+    {
+      "slug": "buxton-ac",
+      "url": "https://buxtonac.org.uk/membership/",
+      "status": "biography-added-venue-gap",
+      "reason": "Junior/senior entry arrangements supported; no exact current single training venue established. Existingemptyaddress remains empty."
+    },
+    {
+      "slug": "carlisle-tri-club",
+      "url": "https://www.carlisle-tri.co.uk",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response 502; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "city-of-stoke-ac",
+      "url": "http://www.stokeac.org.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response 502; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "chesterfield-tri-club",
+      "url": "https://clubs.britishtriathlon.org/CHESTERFIELDTRICLUB",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response 404; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "central-lancs-running-and-triathlon-club-clan",
+      "url": "https://clubs.britishtriathlon.org/CentralLancsRunningTriathlonClubCLAN",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response TimeoutError: The operation was aborted due to timeout; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "centurion-rc",
+      "url": "http://www.centurionrc.org.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response TimeoutError: The operation was aborted due to timeout; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "coalville-triathlon-club",
+      "url": "https://www.coalvilletriathlon.org",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response 502; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "compton-harriers-rc",
+      "url": "http://www.comptonharriers.uk/",
+      "status": "deferred-source-insufficient",
+      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
+    },
+    {
+      "slug": "crystal-peaks-runners",
+      "url": "https://www.crystalpeaks-runners.co.uk",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response 502; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "athletics-ireland-bailieboro-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Bailieboro_A.C.",
+      "status": "deferred-source-insufficient",
+      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
+    },
+    {
+      "slug": "athletics-ireland-ashford-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ashford_A.C.",
+      "status": "deferred-source-insufficient",
+      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
+    },
+    {
+      "slug": "athletics-ireland-ballon-rathoe-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ballon_Rathoe_A.C.",
+      "status": "deferred-source-insufficient",
+      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
+    },
+    {
+      "slug": "athletics-ireland-barrow-harriers-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Barrow_Harriers_A.C.",
+      "status": "deferred-source-insufficient",
+      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
+    },
+    {
+      "slug": "athletics-ireland-barrow-valley-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Barrow_Valley_A.C.",
+      "status": "deferred-source-insufficient",
+      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
+    },
+    {
+      "slug": "athletics-ireland-boyle-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Boyle_A.C.",
+      "status": "deferred-source-insufficient",
+      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
+    },
+    {
+      "slug": "athletics-ireland-ballyduff-a-c",
+      "url": "https://membership.athleticsireland.ie/clubpage/Ballyduff_A.C.",
+      "status": "deferred-source-insufficient",
+      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
+    },
+    {
+      "slug": "brentwood-running-club",
+      "url": "https://www.brentwoodrunningclub.org.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response 502; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "bramley-breezers",
+      "url": "https://www.bramleybreezers.co.uk/",
+      "status": "deferred-source-insufficient",
+      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
+    },
+    {
+      "slug": "evesham-vale-running-club",
+      "url": "https://www.eveshamvalerunningclub.org.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response 502; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "elvet-striders",
+      "url": "https://www.elvet-striders.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response 403; no unavailable source marked freshly verified."
+    },
+    {
+      "slug": "barnt-green-chuggers",
+      "url": "https://www.barntgreenchuggers.com/",
+      "status": "deferred-source-unavailable",
+      "reason": "Research response 502; no unavailable source marked freshly verified."
+    },
     {
       "slug": "biggleswade-ac",
       "url": "https://www.biggleswadeac.org.uk/the-club/history",

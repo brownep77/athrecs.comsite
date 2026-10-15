@@ -197,7 +197,21 @@ try {
     assert.ok(profile.sources.every((s) => /^https?:\/\//.test(s.url)));
     assert.ok(profile.reviewed_at <= new Date().toISOString().slice(0, 10));
   }
+  assert.equal(bySlug.get("bushfield-runners").postcode, "");
+  assert.equal(clubProfiles["broxbourne-runners"].founded_year, undefined);
+  assert.equal(bySlug.get("broxbourne-runners").adult_only, true);
+  assert.equal(bySlug.get("crediton-running-network").postcode, "EX17 2BN");
+  assert.equal(bySlug.get("city-of-southend-on-sea-ac").city, "Southend-on-Sea");
+  assert.equal(bySlug.get("east-essex-triathlon-club").address, "");
+  assert.deepEqual(bySlug.get("brackley-and-district-rc").sports, ["Running"]);
+  assert.ok(!bySlug.get("crediton-running-network").contacts?.some(c => /connectmy\.club/.test(c.email ?? "")));
   for (const club of clubs) {
+    if (club.slug === "british-airways-ac") {
+      assert.match(club.name, /Concorde Runners/);
+      assert.ok(club.source_names.includes("British Airways AC"));
+      assert.equal(club.address, "");
+      assert.equal(club.location_precision, "area-only");
+    }
     const keys = (club.socials ?? []).map((s) => clubSocialKey(s.url));
     assert.equal(keys.length, new Set(keys).size, `Duplicate social profiles: ${club.slug}`);
   }
