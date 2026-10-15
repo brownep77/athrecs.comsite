@@ -17,6 +17,18 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  assert.equal(clubProfiles["kettering-town-harriers"].founded_year, 1894);
+  assert.equal(clubProfiles["kingstone-runners-barnsley"].founded_year, 1996);
+  assert.equal(clubProfiles["jog-on-jaguars"].scope, "global");
+  assert.equal(bySlug.get("jog-on-jaguars").address, "");
+  assert.equal(bySlug.get("isle-of-wight-ac").postcode, "PO36 9JH");
+  assert.equal(bySlug.get("kettering-town-harriers").postcode, "NN15 6PB");
+  assert.equal(bySlug.get("kimberley-and-district-striders").city, "Kimberley");
+  assert.equal(bySlug.get("athletics-ireland-barrow-valley-a-c").city, "Old Leighlin");
+  assert.equal(bySlug.get("jelly-legs-running-club").address, "");
+  assert.equal(bySlug.get("kings-heath-rc-the-lions").adult_only, true);
+  assert.equal(bySlug.get("kimberley-and-district-striders").adult_only, true);
+  assert.match(clubProfiles["ivanhoe-robins-junior-athletics-club"].corrections.website, /ivanhoe-robins\.co\.uk/);
   assert.equal(bySlug.get("handsworth-roadhogs").postcode, "S13 9QY");
   assert.match(bySlug.get("handsworth-roadhogs").address, /Beaver Hill Road/);
   assert.equal(bySlug.get("hartshill-runners").postcode, "TF2 6EU");
