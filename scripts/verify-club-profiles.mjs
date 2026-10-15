@@ -321,6 +321,25 @@ try {
   assert.equal(bySlug.get("athletics-ireland-boyle-a-c").socials.length, 0);
   assert.ok(!bySlug.get("instinctive-sports").socials.some(s => new URL(s.url).hostname === "facebook"));
   assert.equal(bySlug.get("welsh-athletics-trg-runners").contacts.find(c => c.email?.toLowerCase() === "richard@teamreesgym.com").name, "Richard Rees");
+  // Batch 42: island geography, merger chronology, eligibility and venue evidence.
+  assert.equal(clubProfiles["horwich-r-m-i-harriers"].founded_year, 1924);
+  assert.equal(clubProfiles["huncote-harriers"].founded_year, 1982);
+  assert.equal(clubProfiles["huntingdonshire-ac"].founded_year, 1967);
+  assert.equal(clubProfiles["invicta-east-kent-ac"].founded_year, undefined);
+  assert.equal(clubProfiles["ipswich-triathlon-club"].founded_year, undefined);
+  assert.equal(bySlug.get("isle-of-man-veterans-ac").country, "Isle of Man");
+  assert.equal(bySlug.get("isle-of-man-veterans-ac").region, "Isle of Man");
+  assert.equal(bySlug.get("hyde-village-striders").website, "https://hydevillagestriders.co.uk/");
+  assert.equal(bySlug.get("hyde-village-striders").adult_only, true);
+  assert.equal(bySlug.get("hyde-park-harriers").adult_only, true);
+  assert.equal(bySlug.get("hy-athletic-club").postcode, "TN34 2NT");
+  assert.equal(bySlug.get("ilford-ac").postcode, "IG1 1FY");
+  assert.equal(bySlug.get("ilfracombe-running-club").postcode, "EX34 8AB");
+  assert.equal(bySlug.get("human-energy-ac").address, "");
+  assert.match(clubProfiles["athletics-ireland-ballon-rathoe-a-c"].location_note, /2019/);
+  assert.match(clubProfiles["impact-athletic-club"].location_note, /junior-age/);
+  assert.ok(bySlug.get("athletics-ireland-ballon-rathoe-a-c").contacts.some(c => c.email === "olive.obyrne@gmail.com"));
+  assert.ok(!bySlug.get("impact-athletic-club").socials.some(s => s.url.includes("facebook.com/create")));
   const unsafe = { name: "</script><script>example</script>" };
   assert.ok(!safeClubJsonLd(unsafe).includes("<"));
   assert.deepEqual(JSON.parse(safeClubJsonLd(unsafe)), unsafe);
