@@ -236,6 +236,6 @@ export const regionalClubContinuityProfiles: Record<string, ClubProfile> = {
       "Prospective athletes, helpers, coaches and officials can contact the club to discuss joining. The membership form includes six-week taster arrangements, and the website publishes track sessions on Mondays, Wednesdays and Sundays, with extra event-group sessions communicated by coaches. Confirm the appropriate group before attending; the club's published Moulton College postcode is NN3 7QL."
     ],
     sources: [{ title: "Coaching progression and taster sessions", url: "https://northamptonathleticclub.com/about/" }, { title: "Track programme", url: "https://northamptonathleticclub.com/" }, { title: "Enquiries and venue postcode", url: "https://northamptonathleticclub.com/contact-us/" }],
-    reviewed_at: "2026-10-15", corrections: { postcode: "NN3 7QL", address_kind: "training" }
+    reviewed_at: "2026-10-15", corrections: { address: "Moulton College, Moulton, Northampton, NN3 7QL", postcode: "NN3 7QL", address_kind: "training" }
   }
 };
