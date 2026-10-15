@@ -1,86 +1,236 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch38",
+  "lastEditorialBatch": "2026-10-15-batch39",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch38 adds 20 biographies and 16 sourced historical/member associations to draft PR749. Assembled coverage is 743/1737 with 321 notable entries. PR749 contains 58 additional biographies across batches36–38, not published. Last confirmed production remains PR748:685 biographies/289 entries. Prior head ec293c2 passed both workflows; new head requires its own checks. Authenticated hosted-preview inspection remains outstanding; no protection bypass retry.",
+  "publication": "Batch39 adds 20 biographies and 15 sourced historical/member associations to draft PR749. Assembled coverage is 763/1737 with 336 notable entries. PR749 contains 78 additional biographies across batches36–39, not published. Last confirmed production remains PR748:685 biographies/289 entries. Prior head e8ca388 passed both workflows; new head requires its own checks. Authenticated hosted-preview inspection remains outstanding; no protection bypass retry.",
   "completedProfileSlugs": [
-    "british-airways-ac",
-    "bromsgrove-and-redditch",
-    "broxbourne-runners",
-    "bushfield-runners",
-    "brandon-fern-hoppers",
-    "city-of-southend-on-sea-ac",
-    "cove-joggers",
-    "crystal-palace-triathletes",
-    "crediton-running-network",
-    "athletics-ireland-ballyskenach-a-c",
-    "bromley-veterans-ac",
-    "broseley-joggers",
-    "bury-athletic-club",
-    "buckingham-and-stowe-rc",
-    "brackley-and-district-rc",
-    "burnham-joggers",
-    "buxton-ac",
-    "east-essex-triathlon-club",
-    "t3-triathlon-club",
-    "mako-tc"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 743,
-    "notableMemberEntries": 321,
-    "clubsWithContacts": 748,
-    "contactEntries": 1302,
-    "clubsWithEmail": 727,
-    "clubsWithPhone": 111,
-    "clubsWithSocials": 1061,
-    "socialLinks": 2217,
-    "websiteContactRecords": 1028
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 16,
-    "contactOrSocialRecordsChanged": 20,
-    "newWebsiteContactRecords": 13,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 18,
-    "netSocialLinks": 13
-  },
-  "validationBeforeCommit": {
-    "status": "Official and primary pages opened 15 October 2026; public contact/social values checked against retrieved pages. Main c08123f78f99503db5613d8e7382f911ab49f4c0 and PR head ec293c240ceea5fbcd11a03f852e8f1e8c391d33 checked before edits. Final catalogue/lint/type/build, actual rendered pages, dedicated desktop/mobile workflow and exact preview evidence are recorded in PR749. No production publication or safeguards changes."
-  },
-  "nextCandidateSlugs": [
     "hadleigh-hares-ac",
     "hailsham-harriers",
     "halmer-harriers",
-    "halton-and-frodsham-harriers",
     "hamworthy-harriers",
     "handsworth-roadhogs",
-    "hartlepool-burn-road-harriers",
     "hartshill-runners",
     "harvel-hash-house-harriers",
     "harwell-harriers",
     "harwich-runners",
     "hatch-warren-runners",
-    "hatton-darts",
     "havant-ac",
     "haverhill-running-club",
     "haxby-runners",
     "eden-tri-club",
-    "island-tc",
     "lisburn-triathlon-club",
-    "cromane-triathlon-club"
+    "cromane-triathlon-club",
+    "helm-hill-runners",
+    "helsby-running-club",
+    "headington-rr",
+    "heanor-running-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 763,
+    "notableMemberEntries": 336,
+    "clubsWithContacts": 757,
+    "contactEntries": 1316,
+    "clubsWithEmail": 735,
+    "clubsWithPhone": 112,
+    "clubsWithSocials": 1063,
+    "socialLinks": 2221,
+    "websiteContactRecords": 1039
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 15,
+    "contactOrSocialRecordsChanged": 20,
+    "newWebsiteContactRecords": 11,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 14,
+    "netSocialLinks": 4
+  },
+  "validationBeforeCommit": {
+    "status": "Official and primary pages opened 15 October 2026; public contact/social values checked against retrieved pages. Main c08123f78f99503db5613d8e7382f911ab49f4c0 and PR head e8ca38820d7b7a4e9d7837153675b904c2fe9c4d checked before edits and rechecked before commit. Catalogue/profile/audit checks, targeted ESLint, TypeScript, build and whitespace checks passed. All20 actual locally rendered production-build pages passed biography, notable entries, contacts/socials, location notes, flags, registration links and title/description/canonical/SportsOrganization checks. Local build skipped database publication. Dedicated desktop/mobile workflow and exact preview evidence for the committed head are recorded in PR749. No production publication or safeguards changes."
+  },
+  "nextCandidateSlugs": [
+    "havering-90-joggers",
+    "hayle-runners",
+    "hazlemere-runners",
+    "heathfield-runners",
+    "heaton-harriers-and-athletics-club-limited",
+    "hedge-end-running-club",
+    "henfield-joggers",
+    "hercules-running-and-tri-club",
+    "hereford-and-county-ac",
+    "hereford-couriers-running-club",
+    "hereford-triathlon-club",
+    "hermitage-harriers",
+    "herts-phoenix-ac",
+    "hi-runners",
+    "high-peak-athletic-club",
+    "athletics-ireland-athlone-a-c",
+    "athletics-ireland-boyne-a-c",
+    "athletics-ni-dub-running-club",
+    "castlebar-tri-club",
+    "new-ross-triathlon-club"
   ],
   "resumeInstructions": [
-    "Read current main, PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Batch38 continues the open draft; do not duplicate these 20 profiles.",
-    "Use guarded branch updates and preserve batches36–38. Previous head ec293c2 passed Club profiles38658891687 and quality gate38658891674; these do not validate a subsequent head.",
+    "Read current main, PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Batch39 continues the open draft; do not duplicate these 20 profiles.",
+    "Use guarded branch updates and preserve batches36–39. Prior head e8ca388 passed Club profiles38665144990 and quality gate38665144886; these do not validate a subsequent head.",
     "Standing publication authority does not waive CI or hosted-preview verification. Do not retry a rejected bypass request or weaken deployment protection. Final exact-head validation belongs in PR749.",
-    "Next queue rotates English regional running/athletics with Irish and Northern Irish triathlon clubs. Thin or inaccessible sources remain leads, not finished biographies. Retain all registration, identity, privacy and verification safeguards."
+    "Next queue rotates English regional running/athletics with Irish and Northern Irish athletics/triathlon. Thin or inaccessible sources remain leads, not finished biographies. Retain all registration, identity, privacy and verification safeguards."
   ],
   "sourceGaps": [
+    {
+      "slug": "hadleigh-hares-ac",
+      "url": "https://www.hadleigh-hares.co.uk/membership",
+      "status": "biography-added-email-ambiguity",
+      "reason": "Senior membership link misspells secretary as seceretary; only the correctly published junior secretary address added. Castle Lane not established as training venue, so exact address/postcode cleared. Mike Rosbrook is a historical volunteer association."
+    },
+    {
+      "slug": "hailsham-harriers",
+      "url": "https://hailsham-harriers.org.uk/join/",
+      "status": "biography-added-template-excluded",
+      "reason": "Recovered non-www official site. Template example/mikado emails, New York address and generic phone excluded. Cricket pavilion, Eastbourne track and summer Abbots Wood starts remain distinct. Junior winter restriction is over eight."
+    },
+    {
+      "slug": "halmer-harriers",
+      "url": "https://haylincolnshire.co.uk/activities/halmer-harriers-running-club/",
+      "status": "biography-added-dated-training",
+      "reason": "Standalone website502. Club-submitted NHS-backed listing dated15July2024 supports Sir Halley Stewart venue and public email; timetable explicitly dated and requires confirmation. No founding year established."
+    },
+    {
+      "slug": "hamworthy-harriers",
+      "url": "https://www.hamworthyclub.co.uk/copy-of-squash",
+      "status": "biography-added-sport-specific-contact",
+      "reason": "Genuine running page has squash path.1986formation and adult-only group supported.1987EnglandAthletics affiliation wording not repeated. Complex reception/event contacts excluded; Harriers secretary phone used."
+    },
+    {
+      "slug": "handsworth-roadhogs",
+      "url": "https://handsworthroadhogs.uk/club-runs.html",
+      "status": "biography-added-entrance-correction",
+      "reason": "Beaver Hill Road sports-centre entrance S139QY replaces old Retford Road. School postal address S139HJ is not the designated entrance."
+    },
+    {
+      "slug": "hartshill-runners",
+      "url": "https://clubspark.englandathletics.org/hartshillrunners/Contact",
+      "status": "biography-added-footer-exclusion",
+      "reason": "Club-specific contact form retained; England Athletics footer socials are not club socials. Published park postcode TF26EU replaces TF26AJ. Course dates and exact meeting point should be confirmed."
+    },
+    {
+      "slug": "harvel-hash-house-harriers",
+      "url": "https://harvelhashhouseharriers.com/about-us/",
+      "status": "biography-added-local-scope",
+      "reason": "Local Kent club retains England indicator, not global. Hashing movement1938 origin is not Harvel founding date. Monthly hash locations vary."
+    },
+    {
+      "slug": "harwell-harriers",
+      "url": "https://harwellharriers.org/club/club-history",
+      "status": "biography-added-affiliation-conflict",
+      "reason": "History places affiliation in2017 heading but text says27April2027. Exact affiliation date omitted;2016origins supported. BoundaryPark and summerWittenhamClumps distinguished."
+    },
+    {
+      "slug": "harwich-runners",
+      "url": "https://www.harwichrunners.co.uk/1_training/training.php",
+      "status": "biography-added-venue-correction",
+      "reason": "Rugby club LowRoad replaces WickLane. Exact postcode not established and left empty; not marked postcode-verified."
+    },
+    {
+      "slug": "hatch-warren-runners",
+      "url": "https://www.hwrunners.co.uk/about-us/our-history/",
+      "status": "biography-added-historical-count-omitted",
+      "reason": "First6March2013run supported; old membership total not presented as current. PortsmouthArms and BeggarwoodCo-op are alternative starts. Founders first names alone not added as notable identities."
+    },
+    {
+      "slug": "havant-ac",
+      "url": "https://havantac.co.uk/membership/",
+      "status": "biography-added-stale-fees",
+      "reason": "Old incomplete2023/34 fees table not used as current prices. Oaklands school training base and separate training charges supported."
+    },
+    {
+      "slug": "haverhill-running-club",
+      "url": "https://haverhillrunningclub.com/membership/",
+      "status": "biography-added-app-code-conflict",
+      "reason": "Inconsistent app codes655b6935/6935655b not copied; live application and role contacts used. Leisure centre remains directory address, not asserted as all training starts."
+    },
+    {
+      "slug": "haxby-runners",
+      "url": "https://www.haxbyrunners.com/our-runs",
+      "status": "biography-added-training-event-distinction",
+      "reason": "EthelWardCarPark training base distinguished from OakenGrove10Krace start. Thursday training reserved for affiliated members."
+    },
+    {
+      "slug": "eden-tri-club",
+      "url": "https://edenderryswimmingpool.ie/schedule/",
+      "status": "biography-added-historical-session",
+      "reason": "Pool timetable is Jan–June2024, not current. TI confirms Edenderry adult club and email. Clubsite502; current venue/times unknown. EndaBagnall association dated2024."
+    },
+    {
+      "slug": "lisburn-triathlon-club",
+      "url": "https://www.triathlonireland.com/events/lisburn-duathlon-race-report/",
+      "status": "biography-added-historical-association",
+      "reason": "2015JamesEdgar association historical; current TI directory says no junior section.2025DownRoyal duathlon venue is not training base.2026sponsor page returned access-challenge content and was excluded."
+    },
+    {
+      "slug": "cromane-triathlon-club",
+      "url": "https://traleetriclub.ie/south-west-ireland-tri-clubs",
+      "status": "biography-added-dated-partnership",
+      "reason": "2024SouthWestpartnership and2025time-trial activity explicitly historical. TI confirms adultclub/email; founding date/current fixed training venue not established."
+    },
+    {
+      "slug": "helm-hill-runners",
+      "url": "https://www.helmhill.co.uk/index.php/training2",
+      "status": "biography-added-seasonal-starts",
+      "reason": "Leisure centre is winter canal-start landmark, not all-year start. SummerHelm and Mondaylocations differ. International vest associations do not claim current membership."
+    },
+    {
+      "slug": "helsby-running-club",
+      "url": "https://www.helsbyrunningclub.org.uk/contact-us/",
+      "status": "biography-added-town-correction",
+      "reason": "Club is in Helsby; Frodsham is postal town. Contact page has broken form shortcode, so public club email is the reliable route. Founding year not established."
+    },
+    {
+      "slug": "headington-rr",
+      "url": "https://hrr.org.uk/about-hrr/hrr-club-history/",
+      "status": "biography-added-historical-achievements",
+      "reason": "1988formation distinguished from1989OXSRAD opening. MaraYamauchi teenage membership and JethroLennox2008win historical; outdated fastest-ever ranking omitted."
+    },
+    {
+      "slug": "heanor-running-club",
+      "url": "https://www.heanorrunningclub.com/club-history/",
+      "status": "biography-added-seasonal-venues",
+      "reason": "History includes2007accounts; officers and rankings not current claims. Shipley summer, Heanor welfare winter and juniorRutland arrangements distinguished. Chairman phone omitted pending freshness confirmation."
+    },
+    {
+      "slug": "halton-and-frodsham-harriers",
+      "url": "https://www.hfh.org.uk/",
+      "status": "deferred-source-insufficient",
+      "reason": "HTTP and HTTPS responses200 but empty usable text; no biography added."
+    },
+    {
+      "slug": "hartlepool-burn-road-harriers",
+      "url": "https://www.hartlepoolburnroad.co.uk",
+      "status": "deferred-source-unavailable",
+      "reason": "Both hosts and attempted training/membership pages502/certificate mismatch; snippets insufficient."
+    },
+    {
+      "slug": "hatton-darts",
+      "url": "https://www.hattondarts.co.uk",
+      "status": "deferred-source-unavailable",
+      "reason": "403 permission response; no bypass attempt."
+    },
+    {
+      "slug": "island-tc",
+      "url": "http://www.islandtriathlonclub.com/",
+      "status": "deferred-source-unavailable",
+      "reason": "503 hosting-expired response. Thin TI listing alone insufficient; do not merge with IslandWheelers."
+    },
+    {
+      "slug": "helpston-harriers-ac",
+      "url": "https://www.helpstonharriers.com",
+      "status": "deferred-source-unavailable",
+      "reason": "502; no biography added."
+    },
     {
       "slug": "british-airways-ac",
       "url": "https://www.barunner.org.uk/Club_Membership.shtml",

@@ -17,6 +17,20 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  assert.equal(bySlug.get("handsworth-roadhogs").postcode, "S13 9QY");
+  assert.match(bySlug.get("handsworth-roadhogs").address, /Beaver Hill Road/);
+  assert.equal(bySlug.get("hartshill-runners").postcode, "TF2 6EU");
+  assert.equal(bySlug.get("harwich-runners").postcode, "");
+  assert.equal(bySlug.get("hadleigh-hares-ac").address, "");
+  assert.equal(bySlug.get("helsby-running-club").city, "Helsby");
+  assert.equal(bySlug.get("eden-tri-club").city, "Edenderry");
+  assert.equal(bySlug.get("hamworthy-harriers").adult_only, true);
+  assert.equal(bySlug.get("harvel-hash-house-harriers").country, "England");
+  assert.notEqual(clubProfiles["harvel-hash-house-harriers"].scope, "global");
+  assert.equal(clubProfiles["harvel-hash-house-harriers"].founded_year, undefined);
+  assert.match(clubProfiles["eden-tri-club"].biography.join(" "), /2024/);
+  assert.match(clubProfiles["lisburn-triathlon-club"].biography.join(" "), /2015/);
+  assert.ok(!bySlug.get("hailsham-harriers").contacts.some(c => /example|mikado-themes/.test(c.email || "")));
   const checkpoint = JSON.parse(readFileSync("docs/club-profile-checkpoint.json", "utf8"));
   for (const slug of checkpoint.nextCandidateSlugs) {
     assert.ok(bySlug.has(slug), `Next candidate must be canonical: ${slug}`);
