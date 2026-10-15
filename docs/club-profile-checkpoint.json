@@ -1,55 +1,14 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch49",
+  "lastEditorialBatch": "2026-10-15-batch50",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch49 adds17 biographies and9 historical/founding/coaching associations. PR749 contains253 additional biographies; assembled938/1737 with421 notable entries. Last confirmed live remains685/1737 with289 entries. Draft only; hosted verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
+  "publication": "Batch50 adds20 biographies and7 historical/founding/honorary associations. PR749 contains273 additional biographies; assembled958/1737 with428 notable entries. Last confirmed live remains685/1737 with289 entries. Draft only; hosted verification remains outstanding. Exact-head CI/deployment evidence belongs in PR749.",
   "completedProfileSlugs": [
-    "meltham-ac",
-    "mendip-athletic-club",
-    "mendip-triathlon-and-running-club",
-    "mersey-tri",
-    "methley-striders",
-    "metros-rc",
-    "mickey-bushell-gold-standard-academy",
-    "mickleover-running-club",
-    "mid-essex-casuals",
-    "mid-sussex-triathlon-club",
-    "middlesbrough-and-cleveland-harriers",
-    "middlesbrough-athletic-club-mandale",
-    "middleton-harriers-ac",
-    "midland-masters-ac",
-    "mikkeller-running-club-liverpool",
-    "mile-shy-club",
-    "mk-lakeside-runners"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 938,
-    "notableMemberEntries": 421,
-    "clubsWithContacts": 857,
-    "contactEntries": 1462,
-    "clubsWithEmail": 833,
-    "clubsWithPhone": 121,
-    "clubsWithSocials": 1107,
-    "socialLinks": 2331,
-    "websiteContactRecords": 1133
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 17,
-    "notableMemberEntriesAdded": 9,
-    "contactOrSocialRecordsChanged": 16,
-    "newWebsiteContactRecords": 7,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 18,
-    "netSocialLinks": 6
-  },
-  "validationBeforeCommit": {
-    "status": "Primary sources opened 15 October 2026. Parent 2f6369a72c6f76f1bbc6e80eebe8ee4c575191f2 and main 970f5a6866184cb3d61b8f64488dba16f552f329 rechecked. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe build passed. All 17 actual locally rendered build pages passed biography, notable entries, contacts/socials, flags, location notes, registration, title/description/canonical and SportsOrganization JSON-LD checks. Database publication explicitly skipped. Exact-head Club profiles desktop/mobile workflow and Vercel evidence will be recorded in PR749 after commit; hosted access remains a separate gate. No access-protection change."
-  },
-  "nextCandidateSlugs": [
+    "newcastle-staffs-tri-club",
+    "newcastle-frontrunners",
     "mole-valley-runners",
     "momentum-track-club",
     "morley-running-club",
@@ -62,22 +21,138 @@
     "nepal-run",
     "netherhall-ac",
     "nettleham-trotters-running-group",
-    "new-berkeley-harriers",
     "new-forest-runners",
-    "new-levels-run-club",
     "new-marske-harriers-club",
     "newark-ac",
     "newark-striders-running-club",
     "newburn-running-club",
     "newbury-ac"
   ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 958,
+    "notableMemberEntries": 428,
+    "clubsWithContacts": 865,
+    "contactEntries": 1477,
+    "clubsWithEmail": 841,
+    "clubsWithPhone": 121,
+    "clubsWithSocials": 1112,
+    "socialLinks": 2344,
+    "websiteContactRecords": 1144
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 7,
+    "contactOrSocialRecordsChanged": 21,
+    "newWebsiteContactRecords": 11,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 15,
+    "netSocialLinks": 13
+  },
+  "validationBeforeCommit": {
+    "status": "Primary sources opened 15 October 2026. Parent 829b41550dcb42e1d25aa428c4075ed6d246b06d and main 970f5a6866184cb3d61b8f64488dba16f552f329 rechecked. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe build passed. All 20 actual locally rendered build pages passed biography, notable entries, contacts/socials, flags, location notes, registration, title/description/canonical and SportsOrganization JSON-LD checks. Database publication explicitly skipped. Both prior-head workflows passed. Exact-head Club profiles desktop/mobile workflow and Vercel evidence will be recorded in PR749 after commit; hosted access remains a separate gate. No access-protection change."
+  },
+  "nextCandidateSlugs": [
+    "newcastle-staffs-ac",
+    "newcastle-university-ac",
+    "newent-runners",
+    "newmarket-joggers-ac",
+    "newquay-road-runners",
+    "newton-abbot-ac",
+    "nidd-valley-road-runners",
+    "nidderdale-fell-and-trail",
+    "north-bolton-runners",
+    "north-cotswold-tri-and-run",
+    "north-derbyshire-rc",
+    "north-devon-ac",
+    "north-east-project",
+    "north-east-veterans-ac",
+    "north-herts-road-runners",
+    "north-leeds-fell-runners",
+    "north-shields-polytechnic-club",
+    "north-somerset-ac",
+    "north-staffs-rr-association",
+    "northampton-ac"
+  ],
   "resumeInstructions": [
-    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–49 and use expected-head guarded updates.",
-    "Seventeen profiles added in club-profiles-aw.ts. Three unavailable websites and Annalee/Ashford narrative gaps remain deferred. Do not repeat completed M clubs.",
+    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–50 and use expected-head guarded updates.",
+    "Twenty profiles added in club-profiles-ax.ts. New Berkeley and New Levels remain deferred; Island TC contact recovered but narrative unavailable. Do not repeat completed M/N clubs.",
     "Standing publication authority does not waive hosted verification. Do not retry a rejected bypass or weaken protection. Exact-head CI/deployment evidence belongs in PR749.",
     "Rotate regions and Irish primary sources. Preserve athlete identities, results, privacy, verification, registration and search implementation."
   ],
   "sourceGaps": [
+    {
+      "slug": "new-berkeley-harriers",
+      "url": "https://race-nation.co.uk/register/new-berkeley-harriers",
+      "status": "deferred-thin-primary-narrative",
+      "reason": "Facebook login-only. RaceNation organiser page yielded no readable club narrative. Event snippets do not establish founding, current training or joining."
+    },
+    {
+      "slug": "new-levels-run-club",
+      "url": "https://www.runthroughcoach.com/about",
+      "status": "deferred-club-continuity-unresolved",
+      "reason": "New Levels Coaching explicitly rebranded as RunThrough Coach, but continuity/renaming of the affiliated New Levels Run Club is not established. Old domain TLS failure; company history not assigned to club."
+    },
+    {
+      "slug": "island-tc",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "deferred-unavailable-primary-site",
+      "reason": "Official club site503. Triathlon Ireland confirms Coalisland, Tyrone and info@islandtriathlonclub.com, added as a public role contact; biography remains deferred."
+    },
+    {
+      "slug": "athletics-ireland-annalee-a-c",
+      "url": "https://www.athleticsireland.ie/find-a-club/",
+      "status": "deferred-thin-primary-narrative",
+      "reason": "Revisited15October: search found secondary historical reporting only; no unsupported founding date or founder imported."
+    },
+    {
+      "slug": "nantwich-running-club",
+      "url": "https://nantwichrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current site is a rebuild holding page with two role emails. Official2023/24 guide supplies dated history/training; historical session detail is explicitly qualified pending current confirmation."
+    },
+    {
+      "slug": "newark-ac",
+      "url": "https://www.newarkathletics.co.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Old newarkac.co.uk now belongs to an air-conditioning company. Recovered official athletics site; unrelated business email, phone and address excluded."
+    },
+    {
+      "slug": "newcastle-frontrunners",
+      "url": "https://www.newcastlefrontrunners.co.uk/about-3",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Detailed sessions page supersedes homepage shorthand: social outings are volunteer-dependent rather than every Sunday. One-mile newcomer and three-mile development prerequisites differ. No individual identity inferred."
+    },
+    {
+      "slug": "newbury-ac",
+      "url": "https://www.newburyac.org.uk/about/where-we-train",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Track base Crookham Common RG198ET replaces contact address as training location. Contact page still lists Browns Meadow RG146DT, not the old directoryRG146DN. Multiple winter/distance venues remain explicit."
+    },
+    {
+      "slug": "nepal-run",
+      "url": "https://nepalrun.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "UK organisation and community aims supported; precise training base and founding unknown. Mira Rai fundraising support is not evidence of membership. Country/virtual status preserved; no global scope inferred."
+    },
+    {
+      "slug": "nej-running-club",
+      "url": "https://www.nejrunningclub.co.uk/Home/ContactUs",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Only public club narrative/contact text used; embedded administrative templates ignored, no forms or account controls used. Pavilion access is separate from NEJ membership."
+    },
+    {
+      "slug": "new-marske-harriers-club",
+      "url": "https://www.new-marske-harriers.co.uk/club-history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Late1985 informal sessions distinguished from April1986 formation. Olympic associations historical; presidency and volunteer roles not current athlete roster."
+    },
+    {
+      "slug": "newcastle-staffs-tri-club",
+      "url": "https://clubspark.net/NewcastleStaffsTriClub/Aboutus",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current club site redirects to Clubspark. Regional multi-venue programme qualified; Northwood Stadium directory venue retained pending specific session confirmation. Trial eligibility excludes previous trials/membership."
+    },
     {
       "slug": "mels-milers-jogging-club",
       "url": "https://www.melsmilers.co.uk/",

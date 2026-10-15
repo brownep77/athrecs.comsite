@@ -406,6 +406,24 @@ try {
   assert.deepEqual(bySlug.get("methley-striders").sports, ["Running"]);
   assert.ok(!bySlug.get("middlesbrough-and-cleveland-harriers").contacts.some(c => c.email === "hello@connectmy.club"));
   assert.notEqual(clubProfiles["mikkeller-running-club-liverpool"].scope, "global");
+  // Batch 50: recover source identity, preserve venue evidence and qualify access.
+  assert.equal(bySlug.get("newark-ac").website, "https://www.newarkathletics.co.uk/");
+  assert.ok(!bySlug.get("newark-ac").contacts.some(c => c.email?.includes("newarkaircon")));
+  assert.equal(clubProfiles["momentum-track-club"].founded_year, 2025);
+  assert.equal(clubProfiles["new-marske-harriers-club"].founded_year, 1986);
+  assert.equal(bySlug.get("morley-running-club").city, "Morley");
+  assert.equal(bySlug.get("mossley-running-club").city, "Mossley");
+  assert.equal(bySlug.get("mote-runners").postcode, "ME15 7RN");
+  assert.equal(bySlug.get("newbury-ac").postcode, "RG19 8ET");
+  assert.equal(bySlug.get("newcastle-frontrunners").postcode, "NE3 3HD");
+  assert.equal(bySlug.get("newcastle-frontrunners").adult_only, false);
+  assert.match(bySlug.get("newcastle-staffs-tri-club").address, /NORTHWOOD STADIUM/);
+  assert.match(clubProfiles["nantwich-running-club"].biography.join(" "), /2023\/24/);
+  assert.match(clubProfiles["newcastle-frontrunners"].biography.join(" "), /rather than guaranteed every Sunday/);
+  assert.equal(clubProfiles["nepal-run"].notable_members, undefined);
+  assert.notEqual(clubProfiles["nepal-run"].scope, "global");
+  assert.equal(clubProfiles["new-levels-run-club"], undefined);
+  assert.equal(clubProfiles["new-berkeley-harriers"], undefined);
   const unsafe = { name: "</script><script>example</script>" };
   // Batch 47: distinguish changing venues, admission rules and historical associations.
   assert.equal(bySlug.get("london-city-runners").address, "Marquis of Wellington, 21 Druid Street, Bermondsey, London");
