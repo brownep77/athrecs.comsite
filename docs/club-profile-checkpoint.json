@@ -1,86 +1,167 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch42",
+  "lastEditorialBatch": "2026-10-15-batch43",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch36",
   "pullRequest": 749,
-  "publication": "Batch42 adds20 biographies and9 sourced associations to draft PR749. Assembled coverage820/1737 with365 notable entries. PR749 contains135 additional biographies across batches36–42, not published. Last confirmed production remains PR748:685 biographies/289 entries. Previous head08b30e4 passed both workflows. Final exact-head CI and preview evidence belongs in PR749; hosted inspection remains outstanding and no rejected bypass request may be retried.",
+  "publication": "Batch43 adds 11 biographies and 7 sourced associations to draft PR749. Assembled coverage 831/1737 with 372 notable entries. PR749 contains 146 additional biographies across batches36–43, not published. Last confirmed production remains PR748: 685 biographies/289 entries. Previous head1f509e7 passed both workflows. Final exact-head CI and preview evidence belongs in PR749; hosted inspection remains outstanding and no rejected bypass request may be retried.",
   "completedProfileSlugs": [
-    "horwich-r-m-i-harriers",
-    "houghton-harriers-and-ac",
-    "howgill-harriers",
-    "human-energy-ac",
-    "huncote-harriers",
-    "hungerford-hares-rc",
-    "huntingdonshire-ac",
-    "hy-athletic-club",
-    "hyde-park-harriers",
-    "hyde-village-striders",
-    "idle-ac",
-    "ilford-ac",
-    "ilfracombe-running-club",
-    "athletics-ireland-ballon-rathoe-a-c",
-    "ilkeston-running-club",
-    "impact-athletic-club",
-    "inspire-runners-chichester",
-    "invicta-east-kent-ac",
-    "ipswich-triathlon-club",
-    "isle-of-man-veterans-ac"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 820,
-    "notableMemberEntries": 365,
-    "clubsWithContacts": 786,
-    "contactEntries": 1358,
-    "clubsWithEmail": 763,
-    "clubsWithPhone": 115,
-    "clubsWithSocials": 1080,
-    "socialLinks": 2265,
-    "websiteContactRecords": 1069
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 9,
-    "contactOrSocialRecordsChanged": 19,
-    "newWebsiteContactRecords": 10,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 16,
-    "netSocialLinks": 24
-  },
-  "validationBeforeCommit": {
-    "status": "Official club pages and direct club statements opened15 October2026. Contact/social values asserted against retrieved text/links. PR749 head08b30e4104a9b91d1ff33aae2a343e49431b45f2 and mainc08123f78f99503db5613d8e7382f911ab49f4c0 checked before writing. Final catalogue/lint/type/build, all20 locally rendered pages, exact-head desktop/mobile workflow and AthRecs preview evidence recorded in PR749. No production publication or safeguard changes."
-  },
-  "nextCandidateSlugs": [
     "ilkley-harriers-ac",
-    "isle-of-wight-ac",
-    "isle-of-wight-rr-ac",
-    "istead-and-ifield-harriers",
     "itchen-spitfires-running-club",
     "ivanhoe-robins-junior-athletics-club",
     "ivanhoe-runners",
-    "jbr-run-and-tri-club",
-    "jelly-legs-running-club",
     "jesmond-joggers",
     "jh-running-club",
-    "jog-on-jaguars",
-    "jogging-made-easy",
     "kendal-amateur-athletic-club",
     "kenilworth-runners",
     "kent-ac",
+    "jogging-made-easy",
+    "jbr-run-and-tri-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 831,
+    "notableMemberEntries": 372,
+    "clubsWithContacts": 790,
+    "contactEntries": 1364,
+    "clubsWithEmail": 767,
+    "clubsWithPhone": 116,
+    "clubsWithSocials": 1080,
+    "socialLinks": 2265,
+    "websiteContactRecords": 1073
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 11,
+    "notableMemberEntriesAdded": 7,
+    "contactOrSocialRecordsChanged": 7,
+    "newWebsiteContactRecords": 4,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 6,
+    "netSocialLinks": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Opened primary club pages on 15 October 2026. Previous head1f509e7599c52df242e12f069c5e793a0c844ef8 and mainc08123f78f99503db5613d8e7382f911ab49f4c0 rechecked. Source-backed field changes only; final local and remote validation evidence recorded in PR749."
+  },
+  "nextCandidateSlugs": [
+    "isle-of-wight-ac",
+    "isle-of-wight-rr-ac",
+    "istead-and-ifield-harriers",
+    "jelly-legs-running-club",
+    "jog-on-jaguars",
+    "kesgrave-kruisers",
+    "keswick-ac",
+    "kettering-town-harriers",
+    "kidlington-running-club",
+    "kids-run-redditch",
+    "killamarsh-kestrels",
+    "kimberley-and-district-striders",
+    "kingfisher-harriers",
+    "kings-heath-rc-the-lions",
+    "kingston-ac-and-poly-harriers",
+    "kingston-upon-hull-ac",
     "athletics-ireland-barrow-harriers-a-c",
     "athletics-ireland-barrow-valley-a-c",
     "hell-yeah-triathlon-club",
     "island-tc"
   ],
   "resumeInstructions": [
-    "Read current main, PR749, AGENTS.md, audit, checkpoint and actual catalogue. Preserve batches36–42 and do not repeat the20 completed profiles.",
-    "Recheck remote head and concurrent work; use guarded updates. Previous head08b30e4 passed Club profiles38680842052 and quality gate38680841961. Those results do not validate later commits.",
+    "Read current main, PR749, AGENTS.md, audit, checkpoint and actual catalogue. Preserve batches36–43; do not repeat the 11 completed profiles.",
+    "Recheck remote head and concurrent work; use guarded updates. Previous head1f509e7 passed Club profiles38685311813 and quality gate38685311946. Those results do not validate later commits.",
     "Standing publication authority does not waive checks or hosted verification. Do not retry a rejected bypass request or weaken protection. Record final exact-head evidence in PR749.",
-    "Rotate English regions and revisit Irish/Northern Irish primary sources. Scotland has no unprofiled canonical entries. Isle of Wight old website redirects to a third-party tracks directory; find a current official source. Ilkley HTTP homepage was empty. Do not invent history from thin listings. Preserve registration, athlete identities, results, privacy and verification."
+    "Rotate English regions and revisit Irish/Northern Irish primary sources. Scotland has no unprofiled canonical entries. Ilkley source gap is resolved at ilkleyharriers.org.uk with linked historical archive. Do not infer club history from thin listings; preserve athlete identities, results, privacy and verification."
   ],
   "sourceGaps": [
+    {
+      "slug": "ilkley-harriers-ac",
+      "url": "https://ilkleyharriers.org.uk/",
+      "status": "previous-gap-resolved",
+      "reason": "Current .org.uk site and linked archive recovered. Modern foundation1986 distinguished from1900 photograph. Separate junior joining and 5K ability expectation retained."
+    },
+    {
+      "slug": "itchen-spitfires-running-club",
+      "url": "https://www.itchenspitfiresrc.co.uk/",
+      "status": "biography-added-source-caution",
+      "reason": "Club CMS exposes inactive interface boilerplate. Used published homepage and history content only. Older history gives Millennium Garden; exact timetable remains calendar-dependent. No form submitted."
+    },
+    {
+      "slug": "ivanhoe-robins-junior-athletics-club",
+      "url": "https://www.ivanhoe-robins.co.uk/about",
+      "status": "biography-added-venue-and-website",
+      "reason": "Current Wix domain replaces old Weebly. Saturday detail and Thursday footer not assumed identical programmes. No founding year inferred."
+    },
+    {
+      "slug": "jesmond-joggers",
+      "url": "https://jesmondjoggers.co.uk/jesmond-joggers-running-club/",
+      "status": "biography-added-waiting-list",
+      "reason": "Explicit closed-membership/waiting-list notice takes precedence over generic footer invitation. Pool phone is not labelled a club officer contact."
+    },
+    {
+      "slug": "jbr-run-and-tri-club",
+      "url": "https://www.jbrtriclub.com/",
+      "status": "biography-added-eligibility-conflict",
+      "reason": "Website welcomes all ages; EA directory says adult-only. Retained directory restriction and flagged for club confirmation. Founder biography does not establish exact founding year; 2015 member recollection is not a foundation date."
+    },
+    {
+      "slug": "jogging-made-easy",
+      "url": "https://www.joggingmadeeasy.co.uk/training-sessions/",
+      "status": "biography-added-stale-timetable",
+      "reason": "Spring2022 course notice remains. Exact current times and fees not copied; use booking source. Contact subpage returned404; no new email taken from old course notice."
+    },
+    {
+      "slug": "jh-running-club",
+      "url": "https://www.jhrunningclub.com/about/",
+      "status": "biography-added-dated-member-stories",
+      "reason": "2022 foundation supported. Member stories mention2024 future plans; these are not current fixtures or independently verified results. Exact meeting address cleared."
+    },
+    {
+      "slug": "kent-ac",
+      "url": "https://kentac.org.uk/about/",
+      "status": "biography-added-history-access-gap",
+      "reason": "About page supports1898 and Ladywell. Detailed history timed out; no merger detail or historical athlete association added from snippets."
+    },
+    {
+      "slug": "kendal-amateur-athletic-club",
+      "url": "https://kendalaac.uk/2019/02/08/kendal-aac/",
+      "status": "biography-added-location-correction",
+      "reason": "Kendal/Cumbria replaces Lancaster/Lancashire correspondence location. Junior prior-contact rule retained; no old comment timetable promoted."
+    },
+    {
+      "slug": "istead-and-ifield-harriers",
+      "url": "https://www.isteadandifield.org.uk/sample-page/",
+      "status": "deferred-source-unavailable",
+      "reason": "Homepage and about page returned502/timeout. Search snippet not used as biography evidence."
+    },
+    {
+      "slug": "jelly-legs-running-club",
+      "url": "https://www.jelly-legs.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official site unavailable. Same-name East London and Milton Keynes groups excluded."
+    },
+    {
+      "slug": "isle-of-wight-rr-ac",
+      "url": "https://www.isleofwightroadrunners.net/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official homepage timed out; no biography inferred."
+    },
+    {
+      "slug": "jog-on-jaguars",
+      "url": "https://thisisjogon.com/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official homepage unavailable through web reader; virtual/global scope not inferred."
+    },
+    {
+      "slug": "hell-yeah-triathlon-club",
+      "url": "https://www.hellyeahtri.com/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official homepage unavailable; existing source-dated directory contact retained."
+    },
+    {
+      "slug": "island-tc",
+      "url": "https://www.islandtriathlonclub.com/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official homepage unavailable; existing source-dated directory contact retained."
+    },
     {
       "slug": "hillingdon-ac",
       "url": "http://www.hillingdonac.co.uk/",

@@ -6,12 +6,26 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 1,069 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The assembled catalogue has contact entries for 786 clubs: 763 publish an email address and 115 a telephone number. There are 1,358 contact entries in total, including named directory contacts with no direct email or telephone.
+- Website research contributes contact pages or contact/social details for 1,073 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The assembled catalogue has contact entries for 790 clubs: 767 publish an email address and 116 a telephone number. There are 1,364 contact entries in total, including named directory contacts with no direct email or telephone.
 - 1,080 clubs have social links, with 2,265 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 820 clubs have extended, individually written profiles (47.2% of the catalogue). These contain 365 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented. These are draft assembled totals, not a production claim: PR749 contains batches 36–42; the last confirmed live batch is PR748 with 685 biographies and 289 notable entries.
+- 831 clubs have extended, individually written profiles (47.8% of the catalogue). These contain 372 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented. These are draft assembled totals, not a production claim: PR749 contains batches 36–43; the last confirmed live batch is PR748 with 685 biographies and 289 notable entries.
 
-## Latest checkpoint — batch 42, 15 October 2026
+## Latest checkpoint — batch 43, 15 October 2026
+
+Eleven biographies added: Ilkley Harriers, Itchen Spitfires, Ivanhoe Robins, Ivanhoe Runners, Jesmond Joggers, JH Running Club, Kendal AAC, Kenilworth Runners, Kent AC, Jogging Made Easy and JBR Run and Tri Club. The batch spans regional England, from junior athletics to road, fell and triathlon training. It adds seven sourced associations: Tom Adams, Euan Brennan, Georgia Malir, John Grant, Rachel Grant, Jamie Hadwin and Jon Brown. Founder, coaching and historical competitive roles remain distinct.
+
+Seven website-contact records changed, four newly covered. Net assembled increases: six contact entries, four clubs with email/contact coverage and one with telephone coverage. No new social links are claimed; existing source-dated links are preserved. The catalogue now has 831/1,737 biographies (47.8%) and 372 notable entries. PR749 contains 146 additional biographies; the last confirmed live total remains 685.
+
+Ilkley's current .org.uk site and archive resolve its source gap. Its modern 1986 foundation is distinguished from older town athletics. Ivanhoe Robins' current website replaces Weebly, and school and leisure-centre venues are separated. Kendal is corrected from a Lancaster correspondence location to Kendal/Cumbria; its exact training address remains unasserted. JH's unconfirmed exact address is cleared. Itchen's county is corrected to Hampshire and JBR's region to East. Original governing-body check dates are unchanged.
+
+Jesmond's waiting list, Kendal's requirement to contact before junior attendance, Ilkley's separate junior joining and 5K session expectation, and Ivanhoe Runners' sixteen-plus age range are retained. JBR's broad website age language conflicts with adult-only directory eligibility and is flagged without changing that restriction. Jogging Made Easy's old course notice is not advertised as current. Dated member stories are not used as verified race results.
+
+Istead and Ifield, Isle of Wight Road Runners, Jelly Legs, Jog On Jaguars, Hell Yeah and Island TC remain unavailable through the retrieved primary pages. Kent's general club page supports its biography but the detailed history could not be opened; no unverified alumni or merger details were inferred. Twenty canonical unprofiled next candidates are saved.
+
+Seed: `club-address-contact-editorial-2026-10-15-v43`. Previous head `1f509e7599c52df242e12f069c5e793a0c844ef8` passed both Club profiles and the wider quality gate. Main remains `c08123f78f99503db5613d8e7382f911ab49f4c0`. New-head validation and preview evidence belong in PR749. Hosted inspection remains outstanding; no rejected bypass is retried and no access protection is weakened. No production publication is claimed.
+
+## Batch 42 checkpoint, 15 October 2026
 
 Twenty biographies added: Horwich RMI Harriers, Houghton Harriers, Howgill Harriers, Human Energy AC, Huncote Harriers, Hungerford Hares, Huntingdonshire AC, HY Athletic Club, Hyde Park Harriers, Hyde Village Striders, Idle AC, Ilford AC, Ilfracombe Running Club, Ballon Rathoe AC, Ilkeston Running Club, Impact Athletic Club, Inspire Runners Chichester, Invicta East Kent AC, Ipswich Triathlon Club and Isle of Man Veteran Athletes' Club. The batch covers regional England, Ireland and the Isle of Man, including road, fell, cross-country, track and field, junior Sportshall, masters race walking and triathlon.
 
