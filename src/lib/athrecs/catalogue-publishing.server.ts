@@ -536,6 +536,7 @@ export async function publishCatalogueBatch(
   batchId: string,
   publishedBy: string,
   sqlOverride?: Sql,
+  options: { eventIdentityCorrections?: { slug: string; expectedWebsite: string }[] } = {},
 ) {
   if (dbSource !== "neon") {
     throw new Error("Persistent Neon Postgres is required before publishing a catalogue batch");
@@ -639,6 +640,27 @@ export async function publishCatalogueBatch(
       });
       if (result.errors.length) {
         throw new Error(`Catalogue publication failed: ${result.errors.join("; ")}`);
+      }
+
+      // Routine imports continue to preserve existing event metadata. Reviewed
+      // identity corrections opt in to only these two fields, with an exact
+      // before-state guard and the normal before/after revision snapshots.
+      for (const correction of options.eventIdentityCorrections ?? []) {
+        const before = beforeEvents.get(correction.slug)?.record;
+        const proposed = payload.events?.find((event) => eventSlug(event) === correction.slug);
+        if (
+          !before ||
+          before.organiser ||
+          before.website !== correction.expectedWebsite ||
+          !proposed?.organiser?.trim() ||
+          !isHttpUrl(proposed.website)
+        )
+          throw new Error(`Event identity evidence changed: ${correction.slug}`);
+        await tx.query("update events set organiser=$2, website=$3 where id=$1", [
+          Number(before.id),
+          proposed.organiser.trim(),
+          proposed.website,
+        ]);
       }
 
       for (const slug of eventSlugs) {

@@ -1,5 +1,8 @@
 import { createServer } from "vite";
-import { publishEventSchemaCorrections } from "./lib/event-schema-corrections.mjs";
+import {
+  publishEventSchemaCorrections,
+  publishEventOrganiserCorrections,
+} from "./lib/event-schema-corrections.mjs";
 
 if (process.env.VERCEL_ENV !== "production" || process.env.VERCEL_GIT_COMMIT_REF !== "main") {
   console.log("[event-schema] skipping publication outside production/main");
@@ -18,6 +21,7 @@ try {
     "/src/data/event-schema-corrections.ts",
   );
   await publishEventSchemaCorrections(await getSql(), publishing, eventSchemaCorrections);
+  await publishEventOrganiserCorrections(await getSql(), publishing, eventSchemaCorrections);
 } finally {
   await vite.close();
 }

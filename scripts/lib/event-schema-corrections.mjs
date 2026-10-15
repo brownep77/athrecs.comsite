@@ -110,3 +110,54 @@ export async function publishEventSchemaCorrections(sql, publishing, corrections
     });
   }
 }
+
+/** Separate identity revisions also repair deployments whose edition updates
+ * completed while the default publisher correctly preserved event metadata. */
+export async function publishEventOrganiserCorrections(sql, publishing, corrections) {
+  for (const correction of corrections) {
+    await sql.transaction(async (tx) => {
+      await tx.query("select id from catalogue_publish_state where id=1 for update");
+      const sourceKey = `athrecs-code:event-organisers:2026-10-15:${correction.slug}`;
+      const completed = await tx.query(
+        "select id from catalogue_import_batches where source_key=$1 and status in ('published','rolled_back')",
+        [sourceKey],
+      );
+      if (completed.length) return;
+      const rows = await tx.query("select * from events where slug=$1 for update", [
+        correction.slug,
+      ]);
+      if (rows.length !== 1 || rows[0].organiser || rows[0].website !== correction.expectedWebsite)
+        throw new Error(`Organiser evidence changed: ${correction.slug}`);
+      const event = rows[0];
+      const distances = await tx.query(
+        "select distance_code from event_distances where event_id=$1 order by distance_code",
+        [event.id],
+      );
+      const actor = "athrecs-production-deployment@athrecs.com";
+      const staged = await publishing.stageCatalogueBatch(
+        {
+          sourceKey,
+          sourceUrl: correction.sourceUrl,
+          events: [
+            {
+              ...event,
+              distances: distances.map((d) => d.distance_code),
+              organiser: correction.organiser,
+              website: correction.website,
+            },
+          ],
+        },
+        actor,
+        tx,
+      );
+      const validation = await publishing.validateCatalogueBatch(staged.batchId, tx);
+      if (validation.status !== "ready") throw new Error("Organiser correction validation failed");
+      const result = await publishing.publishCatalogueBatch(staged.batchId, actor, tx, {
+        eventIdentityCorrections: [
+          { slug: correction.slug, expectedWebsite: correction.expectedWebsite },
+        ],
+      });
+      console.log(`[event-organisers] ${correction.slug}: revision ${result.revisionId}`);
+    });
+  }
+}

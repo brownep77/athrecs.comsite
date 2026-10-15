@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { bulkFixture } from "./collector-bulk-fixture.mjs";
-import { publishEventSchemaCorrections } from "./lib/event-schema-corrections.mjs";
+import {
+  publishEventSchemaCorrections,
+  publishEventOrganiserCorrections,
+} from "./lib/event-schema-corrections.mjs";
 import { sportsEventJsonLd } from "../src/lib/athrecs/seo.ts";
 const publishing = await import("../src/lib/athrecs/catalogue-publishing.server.ts");
 const { applyImportBundle } = await import("../src/lib/athrecs/import.server.ts");
@@ -124,6 +127,50 @@ try {
   assert.deepEqual(result.errors, []);
   assert.deepEqual((await sql.query("select * from editions where id=901001"))[0], current);
   const revision = (await sql.query("select id from catalogue_revisions"))[0].id;
+  assert.deepEqual(
+    (await sql.query("select * from events where id=901001"))[0],
+    beforeEvent,
+    "Routine publication preserves existing event metadata by default",
+  );
+  await assert.rejects(
+    publishEventOrganiserCorrections(sql, publishing, [
+      { ...correction, expectedWebsite: "https://example.org/changed" },
+    ]),
+    /evidence changed/,
+  );
+  await publishEventOrganiserCorrections(sql, publishing, [correction]);
+  const namedEvent = (await sql.query("select * from events where id=901001"))[0];
+  assert.deepEqual(
+    namedEvent,
+    { ...beforeEvent, organiser: "Example Club", website: "https://example.org/" },
+    "Explicit correction changes only the two approved identity fields",
+  );
+  assert.deepEqual((await sql.query("select * from editions where id=901001"))[0], current);
+  assert.deepEqual(
+    await sql.query("select * from edition_entry_options where edition_id=901001"),
+    beforeOptions,
+  );
+  const identityRevision = (
+    await sql.query("select id from catalogue_revisions order by id desc limit 1")
+  )[0].id;
+  const identityChange = (
+    await sql.query(
+      "select before_json,after_json from catalogue_change_log where revision_id=$1",
+      [identityRevision],
+    )
+  )[0];
+  assert.equal(identityChange.before_json.record.organiser, "");
+  assert.equal(identityChange.after_json.record.organiser, "Example Club");
+  await publishEventOrganiserCorrections(sql, publishing, [correction]);
+  assert.equal((await sql.query("select count(*)::int as n from catalogue_revisions"))[0].n, 2);
+  await publishing.rollbackCatalogueRevision(identityRevision, "test-reviewer@example.org", sql);
+  assert.deepEqual((await sql.query("select * from events where id=901001"))[0], beforeEvent);
+  await publishEventOrganiserCorrections(sql, publishing, [correction]);
+  assert.deepEqual(
+    (await sql.query("select * from events where id=901001"))[0],
+    beforeEvent,
+    "Rolled-back organiser correction never replays",
+  );
   await publishing.rollbackCatalogueRevision(revision, "test-reviewer@example.org", sql);
   assert.deepEqual((await sql.query("select * from events where id=901001"))[0], beforeEvent);
   assert.deepEqual((await sql.query("select * from editions where id=901001"))[0], beforeEdition);

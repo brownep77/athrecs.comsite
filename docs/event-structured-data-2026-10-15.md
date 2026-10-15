@@ -53,6 +53,17 @@ Most ending dates and inclusive entry offers remain unavailable. Obtain current 
 
 ## Validation before release
 
+Production follow-up: PR #752 passed all CI and deployed as `a71c82e4`. Revisions
+261–263 correctly published Newcastle's price and the Beacons/Mother's Day edition
+details. The live database comparison caught that the normal publisher preserves
+existing event metadata, so its organiser/website changes had not applied. The
+follow-up adds a separate, guarded identity-correction revision for each existing
+event. Normal imports still preserve event metadata. The correction checks a blank
+organiser and the exact reviewed website, changes only organiser/website, records
+normal before/after snapshots and leaves the completed edition revisions intact.
+Regression tests now explicitly assert the named organiser, official website,
+unchanged editions/options, rollback, no replay and changed-evidence rejection.
+
 Passed: focused event schema tests, actual PGlite staging/publication/rollback tests, offer publication tests, public-results metadata/privacy tests, search-discovery tests, TypeScript, focused lint, catalogue validation, fixture duplicate audit and a complete preview-mode production build. CI additionally runs the existing repository quality gate. Live Google tests and deployment outcome are recorded in the pull request after release; this report does not claim Google's indexed report has already refreshed.
 
 ## All affected URLs and live baseline
