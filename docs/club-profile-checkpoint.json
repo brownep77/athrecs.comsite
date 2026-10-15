@@ -1,42 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch53",
+  "lastEditorialBatch": "2026-10-15-batch54",
   "reviewedAt": "2026-10-15",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch36",
-  "pullRequest": 749,
-  "publication": "Batch53 adds Reading Joggers and Reepham Runners, one founding association and two public contact records; Northampton AC and Hartshill Runners addresses now match their sourced postcodes. PR749 assembles 1000/1737 biographies and 451 notable entries, 315 more biographies than last confirmed live. Publication pending exact-head release checks; prior production evidence retained.",
+  "branch": "codex/club-profiles-batch54",
+  "pullRequest": null,
+  "publication": "18 researched biographies and 15 sourced associations added to 1000 confirmed live biographies. Assembled totals are 1018/1737 profiles and 466 notable entries. New batch remains draft; exact-head hosted verification pending.",
   "completedProfileSlugs": [
-    "reading-joggers",
-    "reepham-runners"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1000,
-    "notableMemberEntries": 451,
-    "clubsWithContacts": 900,
-    "contactEntries": 1529,
-    "clubsWithEmail": 876,
-    "clubsWithPhone": 125,
-    "clubsWithSocials": 1130,
-    "socialLinks": 2379,
-    "websiteContactRecords": 1172
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 2,
-    "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 1,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 2,
-    "netSocialLinks": 0,
-    "addressCorrections": 2
-  },
-  "validationBeforeCommit": {
-    "status": "Sources opened 15 October 2026. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe preview build passed; database publication explicitly skipped. All three actual locally rendered production-build pages (Reading Joggers, Reepham Runners, Northampton AC) passed complete biography/contact/social/address/flag/registration/title/description/canonical/SportsOrganization checks. Address string now matches sourced NN3 7QL. Exact new-head CI and hosted-preview checks remain pending and belong in PR749. User authorised publication and built-in-browser fallback; earlier previews inspected without protection or credential changes. A release-wide scan of corrected postcodes found one additional embedded-address mismatch at Hartshill Runners. Official ClubSpark contact page reopened 15 October confirms TF2 6EU; address string corrected. Final follow-up exact-head workflow/preview verification belongs in PR749."
-  },
-  "nextCandidateSlugs": [
-    "os-runners",
     "otley-ac",
     "overton-harriers-and-ac",
     "owls-ac",
@@ -48,7 +18,6 @@
     "pb-racing",
     "peak-fell-and-trail-crew",
     "peel-road-runners",
-    "pendle-trail-running-club",
     "penistone-footpath-runners-and-athletic-club",
     "pennine-fell-runners",
     "penny-lane-striders",
@@ -57,13 +26,125 @@
     "pershore-plum-plodders",
     "peterborough-and-nene-valley-ac"
   ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1018,
+    "notableMemberEntries": 466,
+    "clubsWithContacts": 915,
+    "contactEntries": 1550,
+    "clubsWithEmail": 891,
+    "clubsWithPhone": 128,
+    "clubsWithSocials": 1136,
+    "socialLinks": 2393,
+    "websiteContactRecords": 1187
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 18,
+    "notableMemberEntriesAdded": 15,
+    "contactOrSocialRecordsChanged": 18,
+    "newWebsiteContactRecords": 15,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 21,
+    "netSocialLinks": 14
+  },
+  "validationBeforeCommit": {
+    "status": "Primary sources opened 15 October 2026. Main and new branch both c83e0e220927fed32f260cbee1c8bc97245a3393 immediately before edits. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and production build passed with database publication skipped. All18 locally rendered production-build pages passed biography/notable text, contacts/socials, location notes, flags, registration links and title/description/canonical/SportsOrganization assertions. New-head CI and hosted preview evidence will be recorded in the draft PR. No publication performed."
+  },
+  "nextCandidateSlugs": [
+    "petts-wood-runners",
+    "pewsey-vale-rc",
+    "phoenix-flyers-ac",
+    "phoenix-striders",
+    "pickering-running-club",
+    "pitsea-rc",
+    "plumstead-runners",
+    "plymouth-falconers",
+    "plymouth-harriers",
+    "plymouth-musketeers-running-club",
+    "plymouth-striders",
+    "plymstock-road-runners",
+    "pocklington-runners",
+    "polegate-plodders",
+    "pontefract-ac",
+    "ponteland-runners",
+    "poole-ac",
+    "poplar-running-club",
+    "portishead-r-c",
+    "portslade-hedgehoppers"
+  ],
   "resumeInstructions": [
-    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–53 and use expected-head guarded updates.",
-    "Batch53 adds Reading Joggers and Reepham Runners in club-profiles-ba.ts and corrects Northampton AC address in club-profiles-ay.ts. Continue the unchanged OS Runners queue; do not duplicate these two out-of-order completions.",
-    "Standing publication authority does not waive hosted verification. Do not retry a rejected bypass or weaken protection. Exact-head CI/deployment evidence belongs in PR749.",
-    "Rotate regional and Irish primary sources; remaining Welsh school districts require an entity-type review. Preserve athlete identities, results, privacy, verification, registration and search implementation."
+    "Read current main, latest club-profile PR, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Do not overlap another active writer.",
+    "Batch54 adds18 profiles in club-profiles-bb.ts; preserve all earlier sourced fields and use guarded non-force updates.",
+    "PR749 release supersedes old685-live checkpoint:1000 profiles and451 notable entries confirmed live. New batch54 is draft pending full verification.",
+    "OS Runners and Pendle Trail need usable official narrative. Do not substitute snippets or invent alumni. Remaining Welsh school entities require entity-type review."
   ],
   "sourceGaps": [
+    {
+      "slug": "os-runners",
+      "url": "https://osrunners.uk",
+      "status": "deferred-unavailable",
+      "reason": "15 October: homepage returned502; no substantive official club narrative obtained."
+    },
+    {
+      "slug": "pendle-trail-running-club",
+      "url": "https://www.pendletrailrunningclub.co.uk/",
+      "status": "deferred-thin-primary-narrative",
+      "reason": "15 October: HTTP200 response contained no readable content; search did not recover substantive primary club material."
+    },
+    {
+      "slug": "owls-ac",
+      "url": "https://owlsacrunners.org.uk/about-us-2/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official page dates foundation to1982; inconsistent secondary1981 date excluded. School-year session restrictions take precedence over general age-six welcome. School Street is not a confirmed training venue."
+    },
+    {
+      "slug": "oxford-city-ac",
+      "url": "https://oxfordcityac.com/history-of-the-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "1944 women,1946 men and1976 final merger separated; single founded_year left empty. Membership requires enquiry and capacity approval."
+    },
+    {
+      "slug": "oxford-tri",
+      "url": "https://www.oxfordtri.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Working official site recovered, foundation1988 supported. Detailed current timetable and training venues not available; old Wheatley correspondence-style address removed rather than treated as training. Public encoded membership email decoded; webmaster excluded."
+    },
+    {
+      "slug": "oxford-university-ac",
+      "url": "https://ouac.org/home",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Genuine club email visible and linked correctly on homepage; other page footer mailto:example@example.com excluded. Historical Olympic associations do not establish present membership."
+    },
+    {
+      "slug": "paddock-wood-ac",
+      "url": "https://www.paddockwoodac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior waiting list current; pages conflict on Mascalls/Putlands starts and parking. Older2021/22 fees excluded; venue confirmation requested."
+    },
+    {
+      "slug": "peterborough-and-nene-valley-ac",
+      "url": "https://www.pnv.org.uk/training",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Malformed pnv.org.com replaced with official pnv.org.uk. Contact page is a soft404; usable training/membership email page retained instead. Unnamed international alumni not invented."
+    },
+    {
+      "slug": "pennine-fell-runners",
+      "url": "https://www.penninefellrunners.co.uk/training/club_runs_information.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Early1980s origin does not establish exact founding year. Social runs have no designated leader; kit, map and personal responsibility retained."
+    },
+    {
+      "slug": "penistone-footpath-runners-and-athletic-club",
+      "url": "https://pfrac.co.uk/contact",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Main junior section12–17 distinguished from separate under12 Funetics enquiry. Supplier/website-admin contacts excluded."
+    },
+    {
+      "slug": "oxted-runners",
+      "url": "https://oxtedrunners.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "October11,2026 race date already past; not advertised as upcoming. Main club runs require8km/5-mile ability."
+    },
     {
       "slug": "northwich-running-club",
       "url": "https://www.entrycentral.com/northwichrunningclubmembership",
@@ -4284,24 +4365,24 @@
     "Batch34:19 new profiles across16 English clubs, Mallow and Ennis in Ireland, and Ormeau in Northern Ireland. Seven historical connections;17 website-contact records changed(9new),14 net contacts and13 social links. Hastings was already complete and excluded. No full-directory manual review or athlete identity claims.",
     "Batch35:20 profiles across17 English clubs, White Rock and Refail in Wales, and Tinahely in Ireland. Nine historical connections;20 contact/social records changed(12new),18 net contacts and16 social links. Coverage685/1,737(39.4%),289notable entries. This is a bounded editorial batch, not a full-directory manual review."
   ],
-  "previousPullRequest": 748,
+  "previousPullRequest": 749,
   "productionAuthorization": {
     "date": "2026-10-14",
     "instruction": "can you publish all and continue please",
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 748,
-    "mergeCommit": "c08123f78f99503db5613d8e7382f911ab49f4c0",
+    "previousPullRequest": 749,
+    "mergeCommit": "11a0f1362c20fd63846b64f46610d62080469c67",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
     "team": "athrecs-holding-page-set-up",
-    "status": "PR748 exact production READY; all20 changed live pages passed complete biography/contact/location/flag/registration/metadata assertions on14October2026.",
-    "lastConfirmedLiveCommit": "c08123f78f99503db5613d8e7382f911ab49f4c0",
-    "lastConfirmedLiveDeployment": "dpl_8kVdv98Z5Hq7mjMguRc8x587gxSX",
-    "lastConfirmedLiveProfiles": 685,
-    "lastConfirmedLiveNotableEntries": 289,
-    "mainProfilesAtStart": 685,
-    "clubProfilesWorkflow": 38642307498,
-    "qualityGateWorkflow": 38642307514
+    "status": "PR749 merged; exact production READY and all315 new live pages verified before batch54.",
+    "lastConfirmedLiveCommit": "11a0f1362c20fd63846b64f46610d62080469c67",
+    "lastConfirmedLiveDeployment": "dpl_A6aYcLW9jaLKL9kRwao3D8PXRF2C",
+    "lastConfirmedLiveProfiles": 1000,
+    "lastConfirmedLiveNotableEntries": 451,
+    "mainProfilesAtStart": 1000,
+    "clubProfilesWorkflow": 38746589952,
+    "qualityGateWorkflow": 38746589895
   }
 }
