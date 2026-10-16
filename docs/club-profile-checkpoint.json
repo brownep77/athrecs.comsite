@@ -1,70 +1,159 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch75",
+  "lastEditorialBatch": "2026-10-16-batch76",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–75 add115 biographies/53 associations in draft. Assembled totals1406/1737 and692 associations are not live totals. No production publication in batch75.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–76 add125 biographies/57 associations in draft. Assembled totals1416/1737 and696 associations are not live totals. No production publication in batch76.",
   "completedProfileSlugs": [
-    "bishops-stortford-rc",
-    "braintree-and-district-ac",
-    "bubble-works-run-community",
-    "be-fit-today-track-academy",
-    "best-athletics",
-    "blc-on-the-run",
-    "centurion-rc",
-    "army-athletics-association",
-    "athletics-ireland-ashford-a-c",
-    "bournemouth-joggers",
-    "borrowdale-fell-runners"
+    "dewsbury-road-runners",
+    "eynsford-running-club",
+    "lymm-runners",
+    "dengie-100-runners",
+    "lytham-st-annes-rr-club",
+    "sandhurst-joggers",
+    "victoria-park-harriers-and-tower-hamlets-ac",
+    "totley-ac",
+    "thames-hare-and-hounds",
+    "highworth-rc"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1406,
-    "notableMemberEntries": 692,
-    "clubsWithContacts": 1114,
-    "contactEntries": 1877,
-    "clubsWithEmail": 1081,
-    "clubsWithPhone": 164,
-    "clubsWithSocials": 1182,
-    "socialLinks": 2494,
-    "websiteContactRecords": 1396
+    "extendedProfiles": 1416,
+    "notableMemberEntries": 696,
+    "clubsWithContacts": 1121,
+    "contactEntries": 1892,
+    "clubsWithEmail": 1086,
+    "clubsWithPhone": 166,
+    "clubsWithSocials": 1186,
+    "socialLinks": 2501,
+    "websiteContactRecords": 1403
   },
   "batchChanges": {
-    "extendedProfilesAdded": 11,
+    "extendedProfilesAdded": 10,
     "notableMemberEntriesAdded": 4,
-    "contactOrSocialRecordsChanged": 7,
-    "newWebsiteContactRecords": 5,
+    "contactOrSocialRecordsChanged": 11,
+    "newWebsiteContactRecords": 7,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 10,
-    "netSocialLinks": 0,
-    "unsafeWebsitesSuppressed": 0
+    "netContactEntries": 15,
+    "netSocialLinks": 7,
+    "unsafeWebsitesSuppressed": 3
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit/profile checks, targeted ESLint, TypeScript and whitespace passed. Safe build passed with database migration/publication hooks skipped. All11 actual rendered production-build pages passed biography/association, contacts/socials, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head Club profiles desktop/mobile workflow and Vercel evidence follow after commit in PR756."
+    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with database publication/migration hooks skipped. All ten real changed pages rendered HTTP200 and passed biography, association, contact/social, location, flag, registration and title/description/canonical/JSON-LD assertions. Three further real pages passed unsafe-website suppression, registration and metadata assertions. Exact-head remote workflows and Vercel preview evidence follow in PR756; local rendering is not hosted-page or production verification."
   },
   "nextCandidateSlugs": [
-    "7-hills-harriers",
-    "beaumont-rc",
-    "blythe-bridge-running-club",
-    "worcester-students-union-athletic-club",
-    "zoom-tri-club-bournemouth",
-    "athletics-ireland-annalee-a-c",
-    "athletics-ni-west-belfast-coolers",
-    "island-tc"
+    "gillingham-trotters",
+    "boalloy-running-club",
+    "bodmin-womens-rc",
+    "athletics-ni-st-annes-ac",
+    "athletics-ireland-ballyduff-a-c",
+    "ventoux-triathlon-club",
+    "wimbledon-windmilers",
+    "winter-hill-runners"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; check head and active-writer status before edits. Preserve unrelated work and prior source gaps.",
-    "Published baseline remains1291 biographies/639 associations from PR755. PR756 contains115 additional draft biographies/53 associations; no production authority.",
-    "Batch75 uses club-profiles-bw.ts and seedv75:11 biographies,4 founding associations,10 net contacts,7 changed website-contact records (5 new) and unchanged social totals. Actual assembled coverage1406/1737 and692 associations.",
-    "Recovered Be Fit Today, Centurion, Bournemouth Joggers and Borrowdale websites. Ashford Wicklow now has a sourced biography; do not repeat older insufficient-source classifications as current.",
-    "Keep Be Fit Today age/fee and Best Athletics time/fee conflicts qualified. Bishops Stortford contact/join/history routes timed out. Ashford's current session timetable and club contact remain unconfirmed.",
-    "Army Athletics is national military participation, not public drop-in sport; its address is administrative and its existing socials are wider Army Sport accounts. Best Athletics explicitly supports global scope.",
-    "Batch75 revisited early-alphabet gaps: Beaumont403, Boxtedtimeouts, Clanfield502, Compton/CrystalPeaks/BurtonAC/CoalvilleTri unavailable, CityStoke502; do not manufacture profiles from snippets. Rotate remaining regions and non-English candidates when substantive primary sources are available.",
-    "Parent6f64328 Club profiles and Athrecs quality gate both passed. Check exact-head workflow/preview evidence in PR756; retain deployment protection."
+    "Published baseline remains1291 biographies/639 associations from PR755. PR756 now contains125 additional draft biographies/57 associations; no production authority.",
+    "Batch76 uses club-profiles-bx.ts and seedv76:10 biographies,4 historical/coaching associations,15 net contacts,7 net social links and11 changed website-contact records (7 new). Actual assembled coverage1416/1737 and696 associations.",
+    "Recovered Eynsford, Lymm, Highworth, Totley, Sandhurst, Lytham and Thames sources; do not repeat older insufficient-source classifications for completed clubs. Confirm Eynsford2011 informal origin versus2016 formal club, and current membership/trial qualifications.",
+    "Three website buttons suppressed after unrelated injected-looking content: Liverpool Pembroke & Sefton gambling/crypto links, Pudsey & Bramley steroid promotion, Shepshed medical/drug text with unrelated links. Original URLs and observed evidence are preserved below. Do not restore without clean-source review.",
+    "Gillingham founder Graham Bashford has primary town-council evidence; club programme and joining source still needed. Welsh Schools & Universities remains a national associated listing, not automatically identical to the Schools Athletics Association. No biography from generic fixtures.",
+    "Ballyduff, Ventoux, DB Triathlon and St Annes were revisited; no sufficiently detailed current primary club programme established. Do not confuse Ballyduff Waterford with Kerry or Ventoux Camlough with France.",
+    "Parentf519a56 Club profiles and Athrecs quality gate both passed. Check this batch's exact-head workflow/preview evidence in PR756, retaining deployment protection."
   ],
   "sourceGaps": [
+    {
+      "slug": "liverpool-pembroke-and-sefton-h-ac",
+      "status": "unsafe-website-suppressed",
+      "reason": "Opened https://www.lps-athletics.co.uk/our-club/ and observed unrelated casino and crypto promotions above club content. Original directory website http://www.lps-athletics.co.uk/ suppressed; club contact route restored to existing EA directory. Biography deferred pending clean primary sources.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "pudsey-and-bramley-ac",
+      "status": "unsafe-website-suppressed",
+      "reason": "Opened http://www.pudseybramley.com/ (redirect https://pudseybramley.com/) and observed unrelated steroid promotion and external supplement link. Original website suppressed; no biography or fresh contacts derived from the affected page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "shepshed-running-club",
+      "status": "unsafe-website-suppressed",
+      "reason": "Opened https://shepshedrc.org.uk/ and observed unrelated medical/opiate text and external links within club introduction. Original directory website https://www.shepshedrc.org.uk suppressed; biography deferred.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "lymm-runners",
+      "status": "fee-conflict",
+      "reason": "2026–27 membership text gives £20 club plus £23 EA, while form lists combined £40; no fee copied. Track venue is seasonal. Non-www official pages recovered.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "sandhurst-joggers",
+      "status": "intake-and-contact-conflicts",
+      "reason": "Pure Beginners says both nine and ten weeks and no confirmed next intake. Tuesday email aliases differ; general and beginner inboxes preferred. Old directory address replaced by documented Tuesday meeting venue.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "totley-ac",
+      "status": "schedule-and-fee-conflicts",
+      "reason": "2025–26 fee table and inconsistent generic/calendar times and pavilion postcodes remain. Beginner off-road group marked inactive; separate free Millhouses group described. Current calendar should govern.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "victoria-park-harriers-and-tower-hamlets-ac",
+      "status": "joining-conflicts-qualified",
+      "reason": "Current joining page requires application before trial; older about/training text says turn up. Email domains/session times differ. Joining-page contacts used and no throws coaching qualification retained.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "lytham-st-annes-rr-club",
+      "status": "partial-site-access",
+      "reason": "Home supports biography and2024 coaching recognition. History, join and committee routes return verification screens; no bypass or guessed email.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "highworth-rc",
+      "status": "dated-fees-qualified",
+      "reason": "Official non-www website recovered. Older affiliation prices/undated track dates not copied. Highworth activity area replaces unconfirmed Oxfordshire street address; no exact origin established.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "thames-hare-and-hounds",
+      "status": "dated-fees-and-times",
+      "reason": "History and venue pages recovered. Older EA fee and Wednesday start discrepancy not repeated as current fixed details; website administrator excluded.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "gillingham-trotters",
+      "status": "historical-evidence-current-programme-gap",
+      "reason": "Opened https://gillinghamdorset-tc.gov.uk/councillor/graham-bashford/ (updated28May2026): founder/lifetime member confirmed. Opened Dorset Athletics club list; club website unavailable and DRRL page502. Save lead without manufacturing a full biography or copying councillor contacts.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "welsh-athletics-welsh-schools-and-universities",
+      "status": "entity-scope-unresolved",
+      "reason": "Reopened official national listing and schools page. General Welsh Schools Athletics Association activity does not establish this associated entity's programme; prior contact retained.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "athletics-ireland-ballyduff-a-c",
+      "status": "primary-page-unavailable",
+      "reason": "Waterford membership source could not be opened; do not use snippet for a biography or confuse with Ballyduff Kerry.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "ventoux-triathlon-club",
+      "status": "current-programme-gap",
+      "reason": "TI directory opened and Camlough/Armagh club and email reconfirmed; club website unavailable. No full programme/history source.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "db-triathlon-club",
+      "status": "current-programme-gap",
+      "reason": "TI directory opened and Drung/Cavan entry reconfirmed; dbcyclingclub.com unavailable. No full programme/history source.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "be-fit-today-track-academy",
       "status": "age-and-fee-conflicts",

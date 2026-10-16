@@ -17,6 +17,27 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 76: recovered sources, qualified joining requirements and unsafe links.
+  assert.equal(clubProfiles["eynsford-running-club"].founded_year, 2011);
+  assert.match(clubProfiles["eynsford-running-club"].biography.join(" "), /formal club in 2016/);
+  assert.equal(clubProfiles["dewsbury-road-runners"].founded_year, undefined);
+  assert.equal(clubProfiles["lymm-runners"].founded_year, 2010);
+  assert.equal(clubProfiles["dengie-100-runners"].founded_year, 2009);
+  assert.equal(clubProfiles["lytham-st-annes-rr-club"].founded_year, 1998);
+  assert.equal(clubProfiles["thames-hare-and-hounds"].founded_year, 1868);
+  assert.equal(bySlug.get("eynsford-running-club").city, "Eynsford");
+  assert.equal(bySlug.get("dengie-100-runners").city, "Burnham-on-Crouch");
+  assert.equal(bySlug.get("highworth-rc").city, "Highworth");
+  assert.equal(bySlug.get("victoria-park-harriers-and-tower-hamlets-ac").postcode, "E9 5EG");
+  assert.match(clubProfiles["victoria-park-harriers-and-tower-hamlets-ac"].biography.join(" "), /application before attending a trial/);
+  assert.match(clubProfiles["victoria-park-harriers-and-tower-hamlets-ac"].biography.join(" "), /throws coaching is unavailable/);
+  assert.match(clubProfiles["totley-ac"].biography.join(" "), /beginner off-road group marked as not currently running/);
+  for (const slug of ["eynsford-running-club", "dengie-100-runners", "sandhurst-joggers", "highworth-rc"]) assert.equal(bySlug.get(slug).postcode, "");
+  for (const slug of ["liverpool-pembroke-and-sefton-h-ac", "pudsey-and-bramley-ac", "shepshed-running-club"]) assert.equal(bySlug.get(slug).website, "");
+  assert.ok(!bySlug.get("liverpool-pembroke-and-sefton-h-ac").contact_url.includes("lps-athletics"));
+  assert.ok(bySlug.get("dewsbury-road-runners").contacts.some(c => c.phone === "07770 903230"));
+  assert.ok(!bySlug.get("dewsbury-road-runners").contacts.some(c => c.phone?.replace(/\D/g, "") === "07786925426"));
+  assert.ok(bySlug.get("lymm-runners").contacts.some(c => c.email === "membership@lymmrunners.org.uk"));
   // Batch 68: supported venues, national scope and qualified historical dates.
   assert.equal(clubProfiles["thirsk-and-sowerby-harriers"].founded_year, 1977);
   assert.equal(clubProfiles["thurrock-harriers"].founded_year, 1949);
