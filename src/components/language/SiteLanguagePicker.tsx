@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, ExternalLink, Languages } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import {
   TRANSLATION_LANGUAGES,
   publicTranslationUrl,
@@ -51,10 +51,11 @@ export function SiteLanguagePicker({ pathname }: { pathname: string }) {
     >
       <summary
         title="Language / Translate this page"
-        className="flex size-11 cursor-pointer list-none items-center justify-center gap-0.5 rounded-xl border border-border bg-surface text-fg shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden"
+        className="flex h-11 cursor-pointer list-none items-center justify-center gap-1.5 rounded-xl border border-border bg-surface px-2 text-fg shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden"
       >
-        <Languages className="size-5 text-accent" aria-hidden="true" />
-        <span className="sr-only">Language / Translate this page</span>
+        <span className="text-lg leading-none" aria-hidden="true">🇬🇧</span>
+        <span className="text-xs font-semibold" aria-hidden="true">EN</span>
+        <span className="sr-only">English / Choose translation language</span>
         <ChevronDown className="size-3 group-open:rotate-180" aria-hidden="true" />
       </summary>
       <div className="absolute right-0 top-full z-50 mt-2 max-h-[calc(100dvh-12rem)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-border bg-surface p-3 shadow-xl sm:max-h-[calc(100dvh-8rem)] lg:max-h-[calc(100dvh-6rem)]">
@@ -63,7 +64,7 @@ export function SiteLanguagePicker({ pathname }: { pathname: string }) {
           Translations open in a new tab using Google Translate. English opens the original page.
         </p>
         <ul className="mt-2 grid gap-1" aria-label="Page translation languages">
-          {TRANSLATION_LANGUAGES.map(({ code, label, englishLabel }) => (
+          {TRANSLATION_LANGUAGES.map(({ code, flag, label, englishLabel }) => (
             <li key={code}>
               <a
                 href={translatedPageUrl(pathname, code) ?? undefined}
@@ -78,6 +79,10 @@ export function SiteLanguagePicker({ pathname }: { pathname: string }) {
                 }}
                 className="flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-sm text-fg no-underline hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
+                <span className="text-lg leading-none" aria-hidden="true">{flag}</span>
+                <span className="w-5 shrink-0 text-xs font-semibold text-muted" aria-hidden="true">
+                  {code.toUpperCase()}
+                </span>
                 <span lang={code} className="flex-1 font-semibold">
                   {label}
                 </span>
