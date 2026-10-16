@@ -17,6 +17,32 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 64: distinct clubs, qualified dates and session-specific venues.
+  assert.equal(clubProfiles["spenborough-and-dist-ac"].founded_year, 1965);
+  assert.equal(clubProfiles["st-albans-ac"].founded_year, 1989);
+  assert.equal(clubProfiles["st-albans-striders"].founded_year, 1984);
+  assert.equal(clubProfiles["st-helens-striders"].founded_year, 1984);
+  assert.equal(clubProfiles["st-helens-sutton-ac"].founded_year, 1990);
+  assert.equal(clubProfiles["st-neots-riverside-runners"].founded_year, undefined);
+  assert.equal(clubProfiles["sri-chinmoy-marathon-team"].founded_year, undefined);
+  assert.notEqual(clubProfiles["sri-chinmoy-marathon-team"].scope, "global");
+  assert.equal(bySlug.get("sri-chinmoy-marathon-team").country, "England");
+  assert.equal(bySlug.get("squirrels-running-group").city, "Broughton Astley");
+  assert.equal(bySlug.get("springfield-striders-rc").city, "Chelmsford");
+  assert.equal(bySlug.get("st-marys-university-athletics-club").city, "Twickenham");
+  assert.equal(bySlug.get("st-albans-ac").postcode, "AL1 2DJ");
+  assert.equal(bySlug.get("st-austell-running-club").postcode, "PL26 7FH");
+  assert.equal(bySlug.get("stainland-lions-running-club").postcode, "HX4 8LS");
+  assert.equal(bySlug.get("spa-striders").address_kind, "clubhouse");
+  assert.match(clubProfiles["spenborough-and-dist-ac"].contact_note, /waiting list closed/);
+  assert.match(clubProfiles["st-neots-triathlon-club"].biography.join(" "), /independent of the private NiceTri Events/);
+  assert.equal(clubProfiles["st-marys-richmond-ac"], undefined);
+  assert.equal(clubProfiles["st-austell-athletes-running-club"], undefined);
+  assert.equal(clubProfiles["st-marys-university-athletics-club"].notable_members, undefined);
+  assert.ok(bySlug.get("spectrum-striders").contacts.some(c => c.email === "membership@spectrumstriders.org.uk"));
+  assert.ok(bySlug.get("ss-athletics").contacts.some(c => c.phone === "07713 118226"));
+  assert.ok(!bySlug.get("spa-striders").contacts.some(c => c.email?.endsWith("@connectmy.club")));
+  assert.ok(!bySlug.get("spenborough-and-dist-ac").contacts.some(c => c.phone?.replace(/\D/g, "") === "01484766131"));
   // Batch 63: merged-club origins, separate venues and public role contacts.
   assert.equal(clubProfiles["southampton-athletic-club"].founded_year, 2010);
   assert.equal(clubProfiles["south-devon-ac"].founded_year, 1997);
