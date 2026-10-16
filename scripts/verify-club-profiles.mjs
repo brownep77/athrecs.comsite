@@ -17,6 +17,28 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 84: historical foundations, recovered sites and evidence-backed venues.
+  assert.equal(clubProfiles["tavistock-ac"].founded_year, 1985);
+  assert.equal(clubProfiles["stone-master-marathoners"].founded_year, 1978);
+  assert.equal(clubProfiles["wallsend-harriers-and-ac"].founded_year, 1920);
+  assert.match(clubProfiles["wallsend-harriers-and-ac"].biography.join(" "), /revived club/);
+  assert.equal(clubProfiles["watford-joggers"].founded_year, 1976);
+  assert.equal(clubProfiles["wilmslow-running-club"].founded_year, 1989);
+  assert.equal(clubProfiles["higham-harriers"].founded_year, 2014);
+  for (const slug of ["compton-harriers-rc", "northwich-running-club", "lymington-triathlon-club", "stowmarket-striders-rc", "rodillian-runners", "athletics-ireland-barrow-harriers-a-c"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("stone-master-marathoners").website, "https://www.stonemm.co.uk/");
+  assert.equal(bySlug.get("higham-harriers").website, "https://www.highamharriers.com/");
+  assert.equal(bySlug.get("northwich-running-club").city, "Northwich");
+  assert.equal(bySlug.get("athletics-ireland-barrow-harriers-a-c").city, "Graiguenamanagh");
+  assert.equal(bySlug.get("athletics-ireland-barrow-harriers-a-c").country, "Ireland");
+  for (const slug of ["northwich-running-club", "higham-harriers", "athletics-ireland-barrow-harriers-a-c"]) assert.equal(bySlug.get(slug).address, "");
+  assert.equal(bySlug.get("wallsend-harriers-and-ac").postcode, "NE28 7LQ");
+  assert.equal(bySlug.get("rodillian-runners").postcode, "WF3 4EF");
+  assert.match(clubProfiles["lymington-triathlon-club"].biography.join(" "), /March 2022/);
+  assert.match(clubProfiles["stowmarket-striders-rc"].biography.join(" "), /waiting list/);
+  assert.ok(bySlug.get("stowmarket-striders-rc").contacts.some(c => c.email === "juniors@stowmarketstriders.org.uk"));
+  assert.equal(bySlug.get("northwich-running-club").contacts.length, 0);
+  assert.equal(bySlug.get("lymington-triathlon-club").contacts.length, 0);
   // Batch 83: recovered domains, national schools scope and qualified old listings.
   assert.equal(clubProfiles["elvet-striders"].founded_year, 1985);
   assert.equal(clubProfiles["trafford-athletic-club"].founded_year, 1965);
@@ -172,7 +194,7 @@ try {
   assert.match(clubProfiles["teesdale-ac"].contact_note, /No current Couch to 5K/);
   assert.ok(bySlug.get("telford-ac").contacts.some(c => c.email === "training@telfordac.uk"));
   assert.ok(bySlug.get("team-manvers").contacts.some(c => c.email === "tri@mwbc.org.uk"));
-  for (const slug of ["tavistock-ac", "team-devizes-moonrakers-ac", "team-kennet-triathlon-and-ac", "tetbury-dolphins-running-club"]) assert.equal(clubProfiles[slug], undefined);
+  for (const slug of ["team-devizes-moonrakers-ac", "team-kennet-triathlon-and-ac", "tetbury-dolphins-running-club"]) assert.equal(clubProfiles[slug], undefined);
   // Batch 66: supported training bases, distinct clubs and qualified capacity.
   assert.equal(clubProfiles["surrey-walking-club"].founded_year, 1899);
   assert.equal(clubProfiles["swaledale-runners"].founded_year, 1986);
@@ -209,7 +231,7 @@ try {
   assert.match(clubProfiles["stevenage-and-north-herts-ac"].contact_note, /waiting lists were closed/);
   assert.ok(bySlug.get("stevenage-phoenix-running-club").contacts.some(c => c.email === "runners@stevenagephoenix.org.uk"));
   assert.ok(!bySlug.get("stroud-and-district-ac").contacts.some(c => c.email?.endsWith("@connectmy.club")));
-  for (const slug of ["stock-exchange-ac", "stone-master-marathoners", "stowmarket-striders-rc", "striders-of-croydon"]) assert.equal(clubProfiles[slug], undefined);
+  for (const slug of ["stock-exchange-ac", "striders-of-croydon"]) assert.equal(clubProfiles[slug], undefined);
   // Batch 64: distinct clubs, qualified dates and session-specific venues.
   assert.equal(clubProfiles["spenborough-and-dist-ac"].founded_year, 1965);
   assert.equal(clubProfiles["st-albans-ac"].founded_year, 1989);
