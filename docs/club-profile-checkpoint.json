@@ -1,61 +1,59 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch89",
+  "lastEditorialBatch": "2026-10-16-batch90",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–89 add234 biographies/124 associations in draft. Assembled totals1525/1737 and763 associations are not live totals. No production publication in batch89.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–90 add238 biographies/129 associations in draft. Assembled totals1529/1737 and768 associations are not live totals. No production publication in batch90.",
   "completedProfileSlugs": [
-    "vale-of-aylesbury-ac",
-    "burton-ac",
-    "southport-waterloo-ac",
-    "redditch-stars",
-    "hyndburn-ac"
+    "victory-ac",
+    "wimbledon-windmilers",
+    "zoom-tri-club-bournemouth",
+    "chesterfield-tri-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1525,
-    "notableMemberEntries": 763,
+    "extendedProfiles": 1529,
+    "notableMemberEntries": 768,
     "clubsWithContacts": 1171,
     "contactEntries": 1963,
     "clubsWithEmail": 1130,
     "clubsWithPhone": 180,
     "clubsWithSocials": 1202,
     "socialLinks": 2528,
-    "websiteContactRecords": 1481
+    "websiteContactRecords": 1482
   },
   "batchChanges": {
-    "extendedProfilesAdded": 5,
-    "notableMemberEntriesAdded": 8,
-    "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 2,
+    "extendedProfilesAdded": 4,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 1,
+    "newWebsiteContactRecords": 1,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 1,
+    "netContactEntries": 0,
     "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build passed; migration/publication skipped. All five actual production-build pages returned HTTP200 and passed biography, associations, contacts, location/home-nation flags, registration, title/description/canonical and SportsOrganization JSON-LD assertions. Temporary harness corrected to use existing SITE_NAME rather than assumed branding; application metadata unchanged. Exact-head workflow/preview evidence follows in PR756. Local rendering is not hosted verification."
+    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build passed; migration/publication skipped. All four actual production-build pages returned HTTP200 and passed biographies, dated associations, contact/social links, location notes/home-nation flags, registration and title/description/canonical/SportsOrganization JSON-LD checks. Initial regression correctly flagged completed Zoom still in next-candidate checkpoint; queue updated without weakening checks. Exact-commit remote workflow/preview evidence follows in PR756; local rendering is not hosted inspection."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
     "southampton-triathlon-club",
-    "zoom-tri-club-bournemouth",
-    "south-cambridge-striders"
+    "south-cambridge-striders",
+    "carlisle-tri-club"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and active writer before edits.",
-    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–89 add234 biographies/124 associations in draft. Assembled totals1525/1737 and763 associations are not live totals. No production publication in batch89.",
-    "Batch89 moduleck seedv89 adds five biographies, eight dated/historical associations, one secretary entry with email+phone and two website-contact records. Checks use16OctoberUTC. No social additions or governing-directory re-dating.",
-    "Vale of Aylesbury:1893 athletics origin,1939 re-formation, StokeMandeville training replaces Willowbank. August2026 groups full except endurance; no waiting list. Masked email not reconstructed.",
-    "Burton: official website unavailable; EA2024/2025 accounts and venue operator support coaching/community profile. Founding year/current intake/email not taken from snippets. Venue phone is not club phone.",
-    "SouthportWaterloo:1978 merger supported by former athlete's first-person2020 history. Litherland current training base distinguished from historicalChaffers and Southport running starts. CVS secretary contact retained with source. SWAC April notice undated; confirm timetable.",
-    "RedditchStars:March2015 origin recovered; junior-to-adult pathway and2025 award described. AbbeyStadium contact address not assumed universal training start. Supplier email excluded; current training page body empty.",
-    "Hyndburn: council2017 timetable/prices/contact stale; not adopted as current. WilsonPlayingFields training base retained, postcode not changed to newer leisurecentre.2023 planning participation not proof of completion;2023Levitt/2026Mitchell associations dated.",
-    "LiverpoolPembrokeSefton site still contains gambling/crypto injections: existing suppression preserved. Burton repeated502/timeouts; Hyndburn alternate host unavailable. Irish and NI leads remain insufficient. Prior source gaps retained.",
-    "Batch88 dedicated Club profiles38980409496 passed; full gate38980409502 still in_progress on this review. Mainaa82cc37980f808668764513cf74e7fb309e98d8 checked. PRbase111b56a is an older ancestor.",
-    "Prior hosted previews hit Vercel sign-in; use only authorised existing access. No access-control weakening or production publication. Preserve NewRoss/Island provisional standings gap until23October."
+    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–90 add238 biographies/129 associations in draft. Assembled totals1529/1737 and768 associations are not live totals. No production publication in batch90.",
+    "Batch90 modulecl seedv90 adds four biographies and five dated associations; Victory contact form is the only new website-contact record. No new email, phone or social link. Research checked16OctoberUTC.",
+    "Victory: Havant meeting point classified training; August2026 calendar not presented as current. Supplier email excluded. Handicap event names do not establish notable members.",
+    "Wimbledon:1980 origin from Commons conservators. ColinHarris2024 and AnneDavies2025 roles dated. Common Windmill distinct from WimbledonPark track; no-mail directory address not postal. Official site403; preserve existing socials.",
+    "Zoom:2013 MadMarch history and2023 PaulConsani/JudKirk associations from first-person BAC reports;2024 grant project from practitioner account. Joining page hosting-suspended, not proof club closed. Snippet contacts/fees omitted; FentonRoad not training-confirmed.",
+    "Chesterfield:2019 in present form qualified, no unqualified founding year. LorraineMurphy role datedMay2026. Council QueenPark pool timetable effective7September2026; TuptonHall retained separately. ClubSpark404, masked email not reconstructed, venue contacts excluded.",
+    "Southampton bodies empty; SouthCambridge403; Bailieboro historical county results insufficient for current participation, GAA and Ontario names excluded. Carlisle/Wharfedale/Tynedale pages unavailable; no snippet-only facts adopted. Older source gaps retained.",
+    "Basebc7cf1933c95d556d76e9a79db63f84063f4b2aa and mainaa82cc37980f808668764513cf74e7fb309e98d8 inspected. Batch89 dedicated gate38981865919 passed; full38981865909 in progress at start. Recheck exact-head CI in PR756.",
+    "Draft only. Prior protected previews require authenticated access; do not weaken safeguards. Preserve NewRoss/Island provisional standings gap until23October."
   ],
   "sourceGaps": [
     {
@@ -102,9 +100,10 @@
     },
     {
       "slug": "zoom-tri-club-bournemouth",
-      "status": "source-blocked",
-      "reason": "Homepage readable body empty. Coach first-person and PooleRunners newsletter leads found but not sufficiently opened/reviewed.",
-      "checkedAt": "2026-10-16"
+      "url": "https://www.zoomtri.com/index.php/why-how-to-join",
+      "checkedAt": "2026-10-16",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Joining page redirected to hosting account-suspended notice, not proof of club closure. Founding/current fees/timetable/contacts and FentonRoad venue status unconfirmed."
     },
     {
       "slug": "weston-ac",
@@ -224,15 +223,17 @@
     },
     {
       "slug": "carlisle-tri-club",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "About/constitution/join timed out. No snippet biography.",
-      "checkedAt": "2026-10-16"
+      "url": "https://carlisletriclub.co.uk/",
+      "checkedAt": "2026-10-16",
+      "status": "deferred",
+      "reason": "Home/about/join/committee pages unavailable. Search-only origins, fee figures and role emails not adopted."
     },
     {
       "slug": "wharfedale-harriers",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "About/contact timed out; membership502.",
-      "checkedAt": "2026-10-16"
+      "url": "https://www.wharfedaleharriers.co.uk/",
+      "checkedAt": "2026-10-16",
+      "status": "deferred",
+      "reason": "Official about/membership/contact/training pages unavailable; search-only founding date and contacts not adopted."
     },
     {
       "slug": "kingswood-triathlon-club",
@@ -901,9 +902,10 @@
     },
     {
       "slug": "wimbledon-windmilers",
-      "status": "source-unreadable-batch72",
-      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
-      "checkedAt": "2026-10-16"
+      "url": "https://www.windmilers.org.uk/",
+      "checkedAt": "2026-10-16",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Own website403; primary conservator/EA accounts support origins and volunteering. Current trial arrangements and direct contacts unconfirmed."
     },
     {
       "slug": "wells-city-harriers",
@@ -994,8 +996,10 @@
     },
     {
       "slug": "victory-ac",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
+      "url": "https://victoryac.org.uk/",
+      "checkedAt": "2026-10-16",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year and historical athletes unconfirmed. Current session starts need club app; public calendar view August2026. Supplier email excluded."
     },
     {
       "slug": "wakefield-triathlon-club",
@@ -4015,8 +4019,9 @@
     {
       "slug": "chesterfield-tri-club",
       "url": "https://clubs.britishtriathlon.org/CHESTERFIELDTRICLUB",
-      "status": "deferred-source-unavailable",
-      "reason": "Research response 404; no unavailable source marked freshly verified."
+      "checkedAt": "2026-10-16",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "ClubSpark404; feature email masked. Present-form2019 milestone not unqualified foundation. QueenPark pool and TuptonHall distinct; joining and full timetable unconfirmed."
     },
     {
       "slug": "central-lancs-running-and-triathlon-club-clan",

@@ -17,6 +17,17 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 90: dated associations, supplier exclusion and distinct training venues.
+  assert.equal(clubProfiles["wimbledon-windmilers"].founded_year, 1980);
+  for (const slug of ["victory-ac", "zoom-tri-club-bournemouth", "chesterfield-tri-club"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("victory-ac").address_kind, "training");
+  assert.equal(bySlug.get("victory-ac").contact_url, "https://victoryac.org.uk/contact");
+  assert.equal(bySlug.get("victory-ac").contacts.length, 0);
+  assert.equal(bySlug.get("wimbledon-windmilers").city, "Wimbledon");
+  assert.equal(bySlug.get("chesterfield-tri-club").city, "Chesterfield");
+  assert.match(clubProfiles["zoom-tri-club-bournemouth"].contact_note, /closure is not inferred/);
+  assert.match(clubProfiles["chesterfield-tri-club"].biography.join(" "), /7 September 2026/);
+  for (const slug of ["zoom-tri-club-bournemouth", "chesterfield-tri-club"]) assert.equal(bySlug.get(slug).contacts.length, 0);
   // Batch 89: capacity restrictions, dated volunteer associations and supplier exclusion.
   assert.equal(clubProfiles["vale-of-aylesbury-ac"].founded_year, 1893);
   assert.equal(clubProfiles["southport-waterloo-ac"].founded_year, 1978);

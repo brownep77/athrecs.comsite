@@ -3,6 +3,7 @@ import type { ClubSeed } from "./types";
 // Public club contact pages. Each added contact/link retains its source and actual check date.
 // Excludes supplier contacts, governing-body accounts and unconfirmed numeric social IDs.
 export const clubWebsiteContacts: Record<string, Partial<ClubSeed>> = {
+  "victory-ac": {"contact_url":"https://victoryac.org.uk/contact"},
   "southport-waterloo-ac": {"contact_url":"https://www.directory.seftoncvs.org.uk/directory/organisations/997","contacts":[{"role":"Club secretary — Sefton CVS listing","email":"swacsecretary@hotmail.co.uk","phone":"07940 333 040","source_url":"https://www.directory.seftoncvs.org.uk/directory/organisations/997","checked_at":"2026-10-16"}]},
   "redditch-stars": {"contact_url":"https://redditchstars.co.uk/contact"},
   "rothwell-harriers-and-ac": {"contact_url":"https://clubspark.englandathletics.org/RothwellHarriersandAC/Coaching"},
