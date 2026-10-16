@@ -120,6 +120,7 @@ export function sportsEventJsonLd(
     website?: string | null;
     organiser?: string | null;
     endDate?: string | null;
+    endTime?: string | null;
     entryOptions?: {
       is_verified: boolean;
       entry_type: string;
@@ -185,7 +186,13 @@ export function sportsEventJsonLd(
       input.endDate >= date! &&
       !Number.isNaN(Date.parse(input.endDate)) &&
       new Date(input.endDate).toISOString().slice(0, 10) === input.endDate
-        ? input.endDate
+        ? input.endTime &&
+          /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.endTime) &&
+          (input.endDate > date! ||
+            !input.startTime ||
+            input.endTime.padEnd(8, ":00") >= input.startTime.padEnd(8, ":00"))
+          ? `${input.endDate}T${input.endTime}`
+          : input.endDate
         : undefined,
     eventStatus: start ? "https://schema.org/EventScheduled" : undefined,
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
@@ -202,7 +209,9 @@ export function sportsEventJsonLd(
     sport: input.sport || "Athletics",
     organizer:
       input.organiser?.trim() &&
-      !/^(unknown|tbc|n\/a|see official (?:site|website)|not recorded)$/i.test(
+      // Legacy imports sometimes store source instructions or licensing labels
+      // here. These are not organiser identities; retain them in storage only.
+      !/^(unknown|tbc|n\/a|see (?:official (?:race )?(?:site|website)|runabc \/ organiser|event listing)|not recorded|official event organiser|england athletics licensed competition|world athletics \/ national federation|utmb world series \/ local organiser|park west race organiser \/ eventmaster)$/i.test(
         input.organiser.trim(),
       )
         ? { "@type": "Organization", name: input.organiser.trim(), url: input.website || undefined }

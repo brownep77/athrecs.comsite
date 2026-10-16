@@ -34,10 +34,11 @@ const CURRENT_IRISH_PERMIT_SCAN_CHECKED_AT = "2026-10-11";
 const CURRENT_IRISH_APPROVAL_SCAN_CHECKED_AT = "2026-10-12";
 const CURRENT_ENTRY_STATE_SCAN_CHECKED_AT = "2026-10-14";
 const CURRENT_GOVERNING_REFRESH_CHECKED_AT = "2026-10-15";
+const CURRENT_NORFOLK_REFRESH_CHECKED_AT = "2026-10-16";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 77;
-const NEW_EDITION_COUNT = 80;
-const EXISTING_SERIES_EDITION_COUNT = 56;
+const NEW_SERIES_COUNT = 78;
+const NEW_EDITION_COUNT = 81;
+const EXISTING_SERIES_EDITION_COUNT = 59;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -69,7 +70,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  63,
+  64,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -201,6 +202,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_IRISH_PERMIT_SCAN_CHECKED_AT,
         CURRENT_IRISH_APPROVAL_SCAN_CHECKED_AT,
         CURRENT_ENTRY_STATE_SCAN_CHECKED_AT,
+        CURRENT_NORFOLK_REFRESH_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -754,6 +756,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
         CURRENT_ENTRY_STATE_SCAN_CHECKED_AT,
         CURRENT_GOVERNING_REFRESH_CHECKED_AT,
+        CURRENT_NORFOLK_REFRESH_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -812,6 +815,94 @@ assert.equal(
   catalogue.seriesList.filter((series) => series.slug === "reedham-ten").length,
   1,
   "Reedham Ten must remain one canonical card",
+);
+
+const epicNorwichSeries = dailyHalfTenMileSeries.find(
+  (series) => series.slug === "epic-norwich-city-half-marathon",
+);
+assert(epicNorwichSeries, "EPIC Norwich City Half Marathon is missing");
+assert.equal(epicNorwichSeries.city, "Norwich", "EPIC Norwich has the wrong city");
+assert.equal(
+  epicNorwichSeries.source_url,
+  "https://totalracetiming.co.uk/race/729",
+  "EPIC Norwich lost its event-specific official source",
+);
+const epicNorwichEdition = dailyHalfTenMileEditions.find(
+  (edition) =>
+    edition.seriesSlug === "epic-norwich-city-half-marathon" &&
+    edition.date === "2027-05-03",
+);
+assert(epicNorwichEdition, "EPIC Norwich lost its verified 2027 edition");
+assert.equal(epicNorwichEdition.startTime, "09:30", "EPIC Norwich has the wrong start time");
+assert.equal(epicNorwichEdition.status, "Open", "EPIC Norwich charity entry must be open");
+assert.equal(
+  epicNorwichEdition.entryUrl,
+  "https://totalracetiming.co.uk/race/729",
+  "EPIC Norwich does not use its official registration page",
+);
+assert.equal(epicNorwichEdition.entryOptions?.[0]?.priceAmount, 49.5);
+assert.equal(
+  epicNorwichEdition.entryOptions?.[0]?.checkedAt,
+  CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+  "EPIC Norwich entry provenance is stale",
+);
+assert.match(epicNorwichEdition.notes, /charity entries remain open/);
+
+for (const [seriesSlug, date, startTime, source, priceAmount] of [
+  ["great-eastern-run", "2027-10-10", "10:30", "https://totalracetiming.co.uk/race/747", 41],
+  [
+    "southwold-half-marathon",
+    "2027-02-28",
+    "09:00",
+    "https://totalracetiming.co.uk/race/719",
+    42.1,
+  ],
+  [
+    "spring-blickling-half",
+    "2027-03-14",
+    "08:45",
+    "https://totalracetiming.co.uk/race/727",
+    36.5,
+  ],
+]) {
+  const edition = dailyHalfTenMileExistingSeriesEditions.find(
+    (candidate) => candidate.seriesSlug === seriesSlug && candidate.date === date,
+  );
+  assert(edition, `${seriesSlug} must enrich its existing canonical card`);
+  assert.equal(edition.startTime, startTime, `${seriesSlug} has the wrong start time`);
+  assert.equal(edition.status, "Open", `${seriesSlug} must preserve its open entry state`);
+  assert.equal(edition.source, source, `${seriesSlug} lost its event-specific source`);
+  assert.equal(edition.entryUrl, source, `${seriesSlug} lost its official entry destination`);
+  assert.equal(
+    edition.entryOptions?.[0]?.priceAmount,
+    priceAmount,
+    `${seriesSlug} has the wrong official entry price`,
+  );
+  assert.equal(
+    edition.entryOptions?.[0]?.checkedAt,
+    CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+    `${seriesSlug} entry provenance is stale`,
+  );
+  assert.equal(
+    catalogue.seriesList.filter((series) => series.slug === seriesSlug).length,
+    1,
+    `${seriesSlug} must remain one canonical card`,
+  );
+}
+assert.deepEqual(
+  dailyHalfTenMileSeriesOverrides["great-eastern-run"].distances,
+  ["Half", "5K"],
+  "Great Eastern Run must keep its half marathon and 5K on one card",
+);
+assert.equal(
+  dailyHalfTenMileSeriesOverrides["great-eastern-run"].county,
+  "Cambridgeshire",
+  "Great Eastern Run must be located in Cambridgeshire",
+);
+assert.equal(
+  dailyHalfTenMileSeriesOverrides["southwold-half-marathon"].surface,
+  "Mixed",
+  "Southwold must retain its official multi-terrain surface",
 );
 
 for (const [slug, date, reasonPattern] of [
@@ -2176,6 +2267,18 @@ for (const slug of [
     `${slug} lost its current governing-body check date`,
   );
 }
+for (const [slug, sourcePattern] of [
+  ["mullingar-half-marathon-2027", /athleticsireland\.eventmaster\.ie/],
+  ["dooneen-10-mile-michal-rejmar-2027", /athleticsireland\.eventmaster\.ie/],
+  ["wexford-festival-of-running-2027", /eventmaster\.ie\/event\/3x5vUx4tZW/],
+  ["lahinch-half-marathon-6-mile-2027", /eventmaster\.ie\/event\/7BA0CyeFdv/],
+]) {
+  const candidate = dailyHalfTenMileResearchQueue.find((item) => item.slug === slug);
+  assert(candidate, `${slug} must remain held while its Athletics Ireland permit is pending`);
+  assert.match(candidate.reason, /pending approval/, `${slug} lost its permit-pending reason`);
+  assert.match(candidate.reason, /2026-10-16/, `${slug} lost its current governing-body check date`);
+  assert.match(candidate.sourceUrl, sourcePattern, `${slug} lost its official provenance`);
+}
 
 assert.deepEqual(
   dailyHalfTenMileRetiredSeriesSlugs,
@@ -2260,5 +2363,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (63 half-marathon editions and 17 ten-mile editions), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (64 half-marathon editions and 17 ten-mile editions), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
 );

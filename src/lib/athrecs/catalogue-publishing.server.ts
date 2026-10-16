@@ -179,6 +179,23 @@ function editionErrors(edition: ImportEditionInput): string[] {
   const errors: string[] = [];
   if (!editionSlug(edition)) errors.push("Edition needs eventSlug or eventName");
   if (!isIsoDate(edition.date)) errors.push("Edition date must be a real YYYY-MM-DD date");
+  if (edition.endDate !== undefined) {
+    if (!isIsoDate(edition.endDate) || edition.endDate < edition.date)
+      errors.push("End date must be a real date on or after the start date");
+    if (!isHttpUrl(edition.endSourceUrl) || !isIsoDate(edition.endCheckedAt))
+      errors.push("End date needs its source URL and checked date");
+    if (edition.endTime && !/^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(edition.endTime))
+      errors.push("End time must be a valid local HH:MM or HH:MM:SS time");
+    if (
+      edition.endTime &&
+      edition.startTime &&
+      edition.endDate === edition.date &&
+      edition.endTime.padEnd(8, ":00") < edition.startTime.padEnd(8, ":00")
+    )
+      errors.push("End time must not precede the start time");
+  } else if (edition.endTime || edition.endSourceUrl || edition.endCheckedAt) {
+    errors.push("End evidence needs an end date");
+  }
   if (!edition.distance?.trim()) errors.push("Edition distance is required");
   if (edition.status && !EDITION_STATUSES.has(edition.status)) {
     errors.push(`Unsupported edition status: ${edition.status}`);
@@ -519,6 +536,7 @@ export async function publishCatalogueBatch(
   batchId: string,
   publishedBy: string,
   sqlOverride?: Sql,
+  options: { eventIdentityCorrections?: { slug: string; expectedWebsite: string }[] } = {},
 ) {
   if (dbSource !== "neon") {
     throw new Error("Persistent Neon Postgres is required before publishing a catalogue batch");
@@ -622,6 +640,27 @@ export async function publishCatalogueBatch(
       });
       if (result.errors.length) {
         throw new Error(`Catalogue publication failed: ${result.errors.join("; ")}`);
+      }
+
+      // Routine imports continue to preserve existing event metadata. Reviewed
+      // identity corrections opt in to only these two fields, with an exact
+      // before-state guard and the normal before/after revision snapshots.
+      for (const correction of options.eventIdentityCorrections ?? []) {
+        const before = beforeEvents.get(correction.slug)?.record;
+        const proposed = payload.events?.find((event) => eventSlug(event) === correction.slug);
+        if (
+          !before ||
+          before.organiser ||
+          before.website !== correction.expectedWebsite ||
+          !proposed?.organiser?.trim() ||
+          !isHttpUrl(proposed.website)
+        )
+          throw new Error(`Event identity evidence changed: ${correction.slug}`);
+        await tx.query("update events set organiser=$2, website=$3 where id=$1", [
+          Number(before.id),
+          proposed.organiser.trim(),
+          proposed.website,
+        ]);
       }
 
       for (const slug of eventSlugs) {
@@ -789,6 +828,20 @@ async function rollbackEdition(sql: Sql, change: ChangeRow): Promise<void> {
     ],
   );
   await restoreEntryOptions(sql, Number(record.id), before.entryOptions);
+  // Older snapshots predate these optional columns. Never invent end evidence
+  // on rollback; restore only snapshots that actually recorded the fields.
+  if ("end_date" in record) {
+    await sql.query(
+      `update editions set end_date=$2, end_time=$3, end_source_url=$4, end_checked_at=$5 where id=$1`,
+      [
+        Number(record.id),
+        record.end_date,
+        record.end_time,
+        record.end_source_url,
+        record.end_checked_at,
+      ],
+    );
+  }
 }
 
 async function rollbackEvent(sql: Sql, change: ChangeRow): Promise<void> {

@@ -1,3 +1,36 @@
+import { regionalTrailAndMultisportProfiles } from "./club-profiles-bp.ts";
+import { regionalMultisportAndCommunityProfiles } from "./club-profiles-bo.ts";
+import { regionalWalkingAndRunningProfiles } from "./club-profiles-bn.ts";
+import { regionalRunningAndAccessProfiles } from "./club-profiles-bm.ts";
+import { regionalAndUniversityPathwaysProfiles } from "./club-profiles-bl.ts";
+import { regionalAthleticsAndMastersProfiles } from "./club-profiles-bk.ts";
+import { regionalClubPathwaysProfiles } from "./club-profiles-bj.ts";
+import { schoolsAndRegionalRunningProfiles } from "./club-profiles-bi.ts";
+import { schoolDistrictAndRegionalProfiles } from "./club-profiles-bh.ts";
+import { regionalAndIrishParticipationProfiles } from "./club-profiles-bg.ts";
+import { regionalTrainingAndHistoryProfiles } from "./club-profiles-bf.ts";
+import { regionalCommunityRunningProfiles } from "./club-profiles-be.ts";
+import { regionalClubTrainingRoutesProfiles } from "./club-profiles-bd.ts";
+import { regionalClubParticipationProfiles } from "./club-profiles-bc.ts";
+import { regionalClubTrainingProfiles } from "./club-profiles-bb.ts";
+import { readingAndReephamProfiles } from "./club-profiles-ba.ts";
+import { regionalClubCommunityProfiles } from "./club-profiles-az.ts";
+import { regionalClubContinuityProfiles } from "./club-profiles-ay.ts";
+import { regionalClubAccessProfiles } from "./club-profiles-ax.ts";
+import { regionalParticipationPathwaysProfiles } from "./club-profiles-aw.ts";
+import { regionalClubRootsProfiles } from "./club-profiles-av.ts";
+import { regionalTrainingAndAccessProfiles } from "./club-profiles-au.ts";
+import { regionalCommunityAndTrainingProfiles } from "./club-profiles-at.ts";
+import { regionalRoutesAndParticipationProfiles } from "./club-profiles-as.ts";
+import { regionalAccessContinuationProfiles } from "./club-profiles-ar.ts";
+import { regionalClubDevelopmentProfiles } from "./club-profiles-aq.ts";
+import { regionalOriginsAndParticipationProfiles } from "./club-profiles-ap.ts";
+import { localRoutesAndClubOriginsProfiles } from "./club-profiles-ao.ts";
+import { regionalParticipationAndCoachingProfiles } from "./club-profiles-an.ts";
+import { regionalRunningAndMultisportProfiles } from "./club-profiles-am.ts";
+import { localParticipationAndHeritageProfiles } from "./club-profiles-al.ts";
+import { communityContinuityProfiles } from "./club-profiles-ak.ts";
+import { regionalHeritageAndParticipationProfiles } from "./club-profiles-aj.ts";
 import { regionalOriginsAndTrainingProfiles } from "./club-profiles-ai.ts";
 import { regionalTrainingContinuationProfiles } from "./club-profiles-ah.ts";
 import type { ClubSeed } from "./types";
@@ -61,6 +94,39 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...regionalTrailAndMultisportProfiles,
+  ...regionalMultisportAndCommunityProfiles,
+  ...regionalWalkingAndRunningProfiles,
+  ...regionalRunningAndAccessProfiles,
+  ...regionalAndUniversityPathwaysProfiles,
+  ...regionalAthleticsAndMastersProfiles,
+  ...regionalClubPathwaysProfiles,
+  ...schoolsAndRegionalRunningProfiles,
+  ...schoolDistrictAndRegionalProfiles,
+  ...regionalAndIrishParticipationProfiles,
+  ...regionalTrainingAndHistoryProfiles,
+  ...regionalCommunityRunningProfiles,
+  ...regionalClubTrainingRoutesProfiles,
+  ...regionalClubParticipationProfiles,
+  ...regionalClubTrainingProfiles,
+  ...readingAndReephamProfiles,
+  ...regionalClubCommunityProfiles,
+  ...regionalClubContinuityProfiles,
+  ...regionalClubAccessProfiles,
+  ...regionalParticipationPathwaysProfiles,
+  ...regionalClubRootsProfiles,
+  ...regionalTrainingAndAccessProfiles,
+  ...regionalCommunityAndTrainingProfiles,
+  ...regionalRoutesAndParticipationProfiles,
+  ...regionalAccessContinuationProfiles,
+  ...regionalClubDevelopmentProfiles,
+  ...regionalOriginsAndParticipationProfiles,
+  ...localRoutesAndClubOriginsProfiles,
+  ...regionalParticipationAndCoachingProfiles,
+  ...regionalRunningAndMultisportProfiles,
+  ...localParticipationAndHeritageProfiles,
+  ...communityContinuityProfiles,
+  ...regionalHeritageAndParticipationProfiles,
   ...regionalOriginsAndTrainingProfiles,
   ...islandAndCommunityContinuationProfiles,
   ...regionalTrainingContinuationProfiles,
@@ -818,4 +884,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-14-v35";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-16-v68";

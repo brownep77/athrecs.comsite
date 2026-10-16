@@ -18,6 +18,15 @@ assert.equal(
   sportsEventJsonLd({ ...race, startDate: "2027-04-25", organiser: "See official site" }).organizer,
   undefined,
 );
+for (const organiser of [
+  "See runABC / organiser", "See official race site", "See event listing",
+  "Official event organiser", "England Athletics licensed competition",
+  "World Athletics / national federation", "UTMB World Series / local organiser",
+  "Park West race organiser / Eventmaster",
+]) {
+  assert.equal(sportsEventJsonLd({ ...race, startDate: "2027-04-25", organiser }).organizer,
+    undefined, `Do not publish placeholder as an organisation: ${organiser}`);
+}
 
 const now = new Date("2026-10-12T17:00:00Z");
 const option = {
@@ -177,6 +186,55 @@ assert.equal(
   "2026-10-10T09:30:00",
 );
 
+// Only explicitly supplied, real ending dates/times belong in Event markup.
+for (const endDate of [undefined, null, "", "TBC", "2027-02-29", "2027-05-08"]) {
+  assert.equal(serialized({ ...race, startDate: "2027-05-09", endDate }).endDate, undefined);
+}
+assert.equal(
+  serialized({
+    ...race,
+    startDate: "2027-05-09",
+    endDate: "2027-05-09",
+    startTime: "07:30",
+    endTime: "10:00",
+  }).endDate,
+  "2027-05-09T10:00",
+);
+assert.equal(
+  serialized({
+    ...race,
+    startDate: "2027-05-09",
+    endDate: "2027-05-10",
+    startTime: "23:00",
+    endTime: "01:00",
+  }).endDate,
+  "2027-05-10T01:00",
+);
+for (const endTime of ["25:00", "10:99", "07:00", "about 10am"]) {
+  assert.equal(
+    serialized({
+      ...race,
+      startDate: "2027-05-09",
+      endDate: "2027-05-09",
+      startTime: "07:30",
+      endTime,
+    }).endDate,
+    "2027-05-09",
+  );
+}
+const sparse = serialized({ ...race, startDate: "2027-05-09", organiser: "  " });
+assert.equal("organizer" in sparse, false);
+assert.equal("endDate" in sparse, false, "Do not assume every race ends on its starting day");
+assert.equal(
+  "performer" in sparse,
+  false,
+  "Do not turn race participants into invented performers",
+);
+assert.equal(
+  serialized({ ...race, startDate: "2027-05-09", organiser: " Example Club " }).organizer.name,
+  "Example Club",
+);
+
 // The route must use the shared guard and the displayed upcoming edition.
 const route = readFileSync(new URL("../src/routes/races/$slug.tsx", import.meta.url), "utf8");
 assert.match(route, /sportsEventJsonLd\(\{/);
@@ -203,6 +261,8 @@ for (const [, expression] of nextSelectors) {
 assert.match(route, /startDate: next\?\.event_date/);
 assert.match(route, /startTime: next\?\.start_time/);
 assert.match(route, /entryOptions: next\?\.entry_options/);
+assert.match(route, /endDate: next\?\.end_date/);
+assert.match(route, /endTime: next\?\.end_time/);
 assert.equal(
   serialized({ ...race, entryOptions: [option] }).offers,
   undefined,
