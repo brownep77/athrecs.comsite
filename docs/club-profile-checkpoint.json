@@ -1,64 +1,44 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch68",
+  "lastEditorialBatch": "2026-10-16-batch69",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch54",
-  "pullRequest": 755,
-  "publication": "1291/1737 assembled biographies and 639 sourced associations; 291 biographies and 188 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
+  "branch": "codex/club-profiles-batch69",
+  "pullRequest": null,
+  "publication": "PR755 merged as 111b56a6589f3c3d741fb538bd2093a0df1fa535. Production deployment dpl_GQQM5tC4FVBkTb7F7JKTPv1V5HWR is READY with athrecs.com and www.athrecs.com aliases: 1291 biographies and 639 associations published. Batch69 adds 5 biographies and 9 associations in draft, bringing assembled totals to1296/648.",
   "completedProfileSlugs": [
-    "the-students-union-at-uwe",
-    "thetford-ac",
-    "thirsk-and-sowerby-harriers",
-    "thornbury-rc",
-    "thorney-rc",
-    "three-counties-running-club",
-    "thurrock-harriers",
-    "tiptree-road-runners",
-    "todmorden-harriers",
-    "tooting-run-club",
-    "torbay-tri-club",
-    "torrington-aac",
-    "totton-rc",
-    "track-academy",
-    "trail-runners-adventure-running-club",
-    "trail-running-association",
-    "trawden-athletic-club",
-    "trentham-rc",
-    "tri-logic-cornwall",
-    "tri-london"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1291,
-    "notableMemberEntries": 639,
-    "clubsWithContacts": 1052,
-    "contactEntries": 1775,
-    "clubsWithEmail": 1024,
-    "clubsWithPhone": 146,
-    "clubsWithSocials": 1172,
-    "socialLinks": 2465,
-    "websiteContactRecords": 1341
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 17,
-    "contactOrSocialRecordsChanged": 17,
-    "newWebsiteContactRecords": 8,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 21,
-    "netSocialLinks": 9,
-    "unsafeWebsitesSuppressed": 0
-  },
-  "validationBeforeCommit": {
-    "status": "Sources read on 16 October 2026 UTC. Parent f3fae7c8cf90dbff9fc785302562011685353df4 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38849857054 and quality gate38849857191 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head CI and preview evidence will be recorded in PR755 after commit."
-  },
-  "nextCandidateSlugs": [
     "tri-preston",
     "tri-surrey-triathlon-club",
     "tri-tempo-eastbourne",
     "tring-rc",
-    "truro-running-club",
+    "truro-running-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1296,
+    "notableMemberEntries": 648,
+    "clubsWithContacts": 1055,
+    "contactEntries": 1780,
+    "clubsWithEmail": 1027,
+    "clubsWithPhone": 146,
+    "clubsWithSocials": 1172,
+    "socialLinks": 2465,
+    "websiteContactRecords": 1342
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 5,
+    "notableMemberEntriesAdded": 9,
+    "contactOrSocialRecordsChanged": 5,
+    "newWebsiteContactRecords": 1,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 5,
+    "netSocialLinks": 0,
+    "unsafeWebsitesSuppressed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Primary sources opened16 October. Targeted ESLint, TypeScript, catalogue/audit/profile checks, whitespace and safe production build passed; all database publication hooks skipped. All5 actual rendered production-build pages passed biography, founder association, contacts/socials, location notes, flags, registration and title/description/canonical/JSON-LD checks. Hosted preview and exact-head CI follow on the new draft PR."
+  },
+  "nextCandidateSlugs": [
     "trx-wolves-ac",
     "ttt-run-club",
     "tuff-fitty-triathlon-club",
@@ -76,16 +56,14 @@
     "university-of-warwick"
   ],
   "resumeInstructions": [
-    "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch68 adds20 profiles in club-profiles-bp.ts. Preserve sourced fields and use guarded remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–68 remain draft; no publication authorized.",
-    "Recent rotations covered Irish triathlon and Welsh school districts. Revisit non-English source gaps when primary evidence is readable; this batch focuses on regional English running, student athletics and multisport.",
-    "Main queue resumes Tri Preston. Thornton Cleveleys, Tiverton, Torbay AAC, Totley and Trafford remain deferred for unreadable primary narrative.",
-    "Tri London gives1986 on its homepage but around1985 in its history; leave exact founding year empty. Thorney junior venues are dated2024–25; confirm before presenting as current.",
-    "Tooting affiliated in July2026; its common sessions are paused at review and free sessions require booking.",
-    "Thurrock trains at Blackshots, RM16 2QT. Trentham uses Trentham Academy. Regional networks and the Trail Running Association are national, not global.",
-    "UWE's record dates do not establish its founding year. Track Academy founder Connie Henry stepped back in2024; historical associations are not current leadership or athlete-identity claims.",
-    "Masked emails, site suppliers and Trentham template contacts are excluded. Existing sourced fields retain their provenance unless freshly rechecked."
+    "Read current main, the open batch69 PR, AGENTS.md, audit and checkpoint before edits; avoid concurrent writers.",
+    "PR755 is published:1291 biographies/639 associations. Its release record supersedes the historical draft-only notes below.",
+    "Batch69 adds five profiles in club-profiles-bq.ts, nine founder associations and five net public contact entries. The new biographies remain draft until their release checks complete.",
+    "Resume at TRX Wolves AC after checking whether another run has advanced this queue. Preserve all deferred source-gap candidates.",
+    "Tri Preston membership source was inaccessible; no founder or exact founding year inferred. Its homepage includes dated2024 swim announcements; confirm current timetables.",
+    "Tri Surrey uses several training venues; the old street address is not a confirmed public base. The constitutional founding record is historical, not a claim of current leadership.",
+    "Tri Tempo uses the Tempo shop as a contact address; training is session-specific. Truro Tuesday instructions conflict between Skinners Taproom and Boscawen Park; confirm rather than choose one.",
+    "Preserve registration, SEO, source provenance and privacy controls. No outreach or athlete identities/results imported."
   ],
   "sourceGaps": [
     {
@@ -6012,17 +5990,14 @@
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 749,
-    "mergeCommit": "11a0f1362c20fd63846b64f46610d62080469c67",
-    "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
-    "team": "athrecs-holding-page-set-up",
-    "status": "PR749 merged; exact production READY and all315 new live pages verified before batch54.",
-    "lastConfirmedLiveCommit": "11a0f1362c20fd63846b64f46610d62080469c67",
-    "lastConfirmedLiveDeployment": "dpl_A6aYcLW9jaLKL9kRwao3D8PXRF2C",
-    "lastConfirmedLiveProfiles": 1000,
-    "lastConfirmedLiveNotableEntries": 451,
-    "mainProfilesAtStart": 1000,
-    "clubProfilesWorkflow": 38746589952,
-    "qualityGateWorkflow": 38746589895
+    "pullRequest": 755,
+    "mergeCommit": "111b56a6589f3c3d741fb538bd2093a0df1fa535",
+    "deployment": "dpl_GQQM5tC4FVBkTb7F7JKTPv1V5HWR",
+    "status": "READY",
+    "liveBiographies": 1291,
+    "liveAssociations": 639,
+    "reviewedAt": "2026-10-16",
+    "previewQualification": "Protected preview reached Vercel sign-in. Exact-head CI and local page evidence passed; public production inspection follows release.",
+    "verification": "All291 newly published public pages returned200 and passed biography, associations, contacts/socials, address/location, flags, registration and title/description/canonical/JSON-LD assertions after deployment READY. Thurrock public desktop layout inspected."
   }
 }

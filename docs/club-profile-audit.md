@@ -6,10 +6,22 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 1,341 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The assembled catalogue has contact entries for 1,052 clubs: 1,024 publish an email address and 146 a telephone number. There are 1,775 contact entries in total, including named directory contacts with no direct email or telephone.
+- Website research contributes contact pages or contact/social details for 1,342 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The assembled catalogue has contact entries for 1,055 clubs: 1,027 publish an email address and 146 a telephone number. There are 1,780 contact entries in total, including named directory contacts with no direct email or telephone.
 - 1,172 clubs have social links, with 2,465 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 1,291 clubs have extended, individually written profiles (74.3% of the catalogue). These contain 639 sourced notable-member entries. Other clubs retain brief factual introductions; missing histories and alumni are not invented. PR749 merged and its 1,000 biographies/451 notable entries were confirmed live. The additional 291 biographies/188 associations in batches54–68 remain draft in PR755.
+- 1,296 clubs have extended, individually written profiles (74.6% of the catalogue). These contain 648 sourced notable-member entries. Other clubs retain brief factual introductions; missing histories and alumni are not invented. PR755 has now published 1,291 biographies/639 associations in total. Batch69 adds five biographies/nine associations in draft; assembled counts are not live counts.
+
+## Batch 69 — 16 October 2026 UTC
+
+Adds five profiles from the saved queue: Tri Preston, Tri Surrey Triathlon Club, Tri Tempo Eastbourne, Tring RC and Truro Running Club. Official club websites and historical club documents were opened on16 October. Nine founder associations cover Surrey's Jonathan Wilden, Matt Hutchings and Ken Kennison; Tring organiser Ken Laidler; and Truro founders Kev Harding, Adrian Tyas, Chris Duckham, Liz Lusty-Hoye and Bill James. These are historical editorial associations, not present leadership, athlete identity verification or imported race results.
+
+Five public contact records changed, one new, adding five contact entries and three clubs with public email contacts. Existing social provenance is preserved. Surrey's current membership form is preferred to treating an older constitutional email as freshly confirmed. Supplier contacts are excluded.
+
+Locations distinguish Preston's multiple venues, Surrey's Reigate/Sanderstead hubs, Tempo's shop contact address, Tring's cricket-club meeting point and Truro's rugby-club sessions. Unconfirmed Surrey and Tempo street addresses are removed from the public training presentation; Truro's former directory address is replaced by its explicitly published main venue without guessing a postcode. Tring's unsupported multisport tags are corrected to running.
+
+Qualifications: Preston's membership page was inaccessible and its site retains2024 swim notices; no founding year or founder is inferred. Truro's current Tuesday section contains conflicting meeting-point text, retained as a confirmation requirement. Tri Surrey's2012 origins are documented in the November2023 constitution. No historical role is described as present leadership.
+
+PR755 merged as111b56a6589f3c3d741fb538bd2093a0df1fa535 after both exact-head workflows passed. Production deployment dpl_GQQM5tC4FVBkTb7F7JKTPv1V5HWR is READY with public aliases. The preview reached Vercel sign-in; production Thurrock biography, contacts and layout were inspected directly. This release record supersedes older draft-only publication notes below. All291 newly published pages passed public content and metadata assertions after production READY. Batch69 passed local catalogue/audit/profile, targeted lint, TypeScript, safe build and all5 rendered-page checks. Batch69 is a new draft on the published baseline, seedv69; the next queue starts TRX Wolves AC. No outreach, athlete identity/result import or access-control changes.
 
 ## Batch 68 — 16 October 2026 UTC
 
