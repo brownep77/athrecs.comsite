@@ -17,6 +17,20 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 82: recovered venues, age eligibility and dated/future qualifications.
+  assert.equal(clubProfiles["stadium-runners"].founded_year, 2005);
+  assert.equal(clubProfiles["lytchett-manor-striders"].founded_year, 1989);
+  assert.equal(clubProfiles["millom-striders"].founded_year, 2018);
+  for (const slug of ["hillingdon-ac", "tadworth-ac", "greenwich-tritons-triathlon-club", "west-wight-road-runners"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("tadworth-ac").adult_only, false);
+  assert.equal(bySlug.get("tadworth-ac").city, "Tadworth");
+  for (const slug of ["tadworth-ac", "greenwich-tritons-triathlon-club"]) assert.equal(bySlug.get(slug).address, "");
+  for (const slug of ["hillingdon-ac", "stadium-runners", "millom-striders", "lytchett-manor-striders"]) assert.equal(bySlug.get(slug).address_kind, "training");
+  assert.match(clubProfiles["west-wight-road-runners"].biography.join(" "), /future organising partnership/);
+  assert.match(clubProfiles["greenwich-tritons-triathlon-club"].biography.join(" "), /waiting list/);
+  assert.match(clubProfiles["lytchett-manor-striders"].biography.join(" "), /2024–25/);
+  assert.ok(bySlug.get("stadium-runners").contacts.some(c => c.email === "membership@stadiumrunners.co.uk"));
+  assert.ok(bySlug.get("tadworth-ac").contacts.some(c => c.email === "hello@tadworthac.org.uk" && c.checked_at === "2026-10-13"));
   // Batch 81: dated source qualifications and non-training addresses remain explicit.
   assert.equal(clubProfiles["boxted-runners"].founded_year, 2017);
   assert.equal(bySlug.get("parbold-pink-panthers").city, "Parbold");
@@ -162,7 +176,7 @@ try {
   assert.ok(!bySlug.get("tamar-trotters").contacts.some(c => c.email?.endsWith("@pdsprint.co.uk")));
   assert.match(clubProfiles["tamworth-ac"].contact_note, /waiting list/);
   assert.match(clubProfiles["tattenhall-runners"].biography.join(" "), /cancelled for 2026/);
-  assert.equal(clubProfiles["tadworth-ac"], undefined);
+  assert.match(clubProfiles["tadworth-ac"].biography.join(" "), /early 1980s/);
   for (const slug of ["sutton-striders", "swindon-striders", "swanley-and-district-ac"]) assert.ok(!bySlug.get(slug).sports.includes("Triathlon"));
   // Batch 65: current club sites, supported venues and qualified joining capacity.
   assert.equal(clubProfiles["steel-city-striders-rc"].founded_year, 1982);

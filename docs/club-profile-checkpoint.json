@@ -1,62 +1,63 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch81",
+  "lastEditorialBatch": "2026-10-16-batch82",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–81 add176 biographies/77 associations in draft. Assembled totals1467/1737 and716 associations are not live totals. No production publication in batch81.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–82 add183 biographies/77 associations in draft. Assembled totals1474/1737 and716 associations are not live totals. No production publication in batch82.",
   "completedProfileSlugs": [
-    "boxted-runners",
-    "parbold-pink-panthers",
-    "new-forest-junior-ac",
-    "new-ross-triathlon-club",
-    "bramley-breezers"
+    "hillingdon-ac",
+    "greenwich-tritons-triathlon-club",
+    "stadium-runners",
+    "lytchett-manor-striders",
+    "tadworth-ac",
+    "millom-striders",
+    "west-wight-road-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1467,
+    "extendedProfiles": 1474,
     "notableMemberEntries": 716,
-    "clubsWithContacts": 1150,
-    "contactEntries": 1929,
-    "clubsWithEmail": 1112,
+    "clubsWithContacts": 1152,
+    "contactEntries": 1932,
+    "clubsWithEmail": 1114,
     "clubsWithPhone": 171,
     "clubsWithSocials": 1195,
     "socialLinks": 2514,
-    "websiteContactRecords": 1446
+    "websiteContactRecords": 1451
   },
   "batchChanges": {
-    "extendedProfilesAdded": 5,
-    "notableMemberEntriesAdded": 2,
-    "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 2,
+    "extendedProfilesAdded": 7,
+    "notableMemberEntriesAdded": 0,
+    "contactOrSocialRecordsChanged": 6,
+    "newWebsiteContactRecords": 5,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 3,
     "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with database migration/publication skipped. All five changed production-build pages returned HTTP200 and passed biography/association, contact/social, location/flag, registration and title/description/canonical/JSON-LD checks. Exact-head remote workflow and preview evidence will be recorded in PR756; local rendering is not hosted or production verification."
+    "status": "Passed: catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with migration/publication skipped. All eight changed production-build pages returned HTTP200 and passed biography, contact/social, location/flag, registration and title/description/canonical/SportsOrganization JSON-LD checks. Exact-head remote workflow and preview evidence follows in PR756; local rendering is not hosted verification."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
     "quays-running-club",
     "helpston-harriers-ac",
     "uckfield-runners",
-    "hillingdon-ac",
-    "west-wight-road-runners"
+    "romsey-road-runners",
+    "elvet-striders"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and writer status before edits.",
-    "Published baseline1291/639 is unchanged. PR756 contains176 draft biographies/77 associations, assembled1467/1737 and716 associations. No production authority.",
-    "Batch81 uses club-profiles-cc.ts and seedv81:5 profiles,2 associations,3 net contacts and2 new website-contact records. No new social links.",
-    "New Ross and Island TC2026 league places remain provisional until23October final review; do not import individual results.",
-    "New Ross directory email spellings conflict; existing app-directory email and13October provenance preserved. Generic Facebook root is not a club account.",
-    "Parbold email corroborated in two community tables; homepage has apparent typo. Remove Wigan street location, retain Parbold area only. New Forest school is a directory address, not confirmed training.",
-    "Bramley January2023 session times are historical. New Forest current programme/contact unavailable. Boxted membership page unavailable and venues vary.",
-    "Liverpool Harriers co.uk homepage16October contains unrelated pharmaceutical outbound links; no claims/contact updates taken from it. Existing .org robot-check gap is a separate URL.",
-    "Uckfield homepage links to uckfieldrunners.eastsussexcrosscountry.co.uk but destination502. Worcester SU page is navigation/elections only. Other unavailable sources remain deferred, not snippet-derived biographies.",
-    "Parent246ecccc Club profiles38930417680 and quality38930417681 both passed. Check new exact-head evidence in PR756; preserve deployment protection."
+    "Published baseline1291/639 unchanged. Draft183 biographies/77 associations, assembled1474/1737 and716 associations. No production authority.",
+    "Batch82 uses club-profiles-cd.ts and seedv82:7 profiles,0 associations,3 net contacts,5 new website-contact records. Romsey contact-only update uses a community listing dated July2022; current programme/age eligibility unconfirmed.",
+    "Recovered Greenwich .com and Stadium non-www sites; Hillingdon .com joining/locations readable but co.uk history/contact unavailable. Do not infer history or alumni.",
+    "Greenwich junior waiting list and swim prerequisites explicit. Adult joining verification wall and masked email unresolved. Lytchett joining fees still2024–25; Tadworth affiliation text2024–25 despite membership expiryMarch2027.",
+    "West Wight2027 Three Hills role is future partnership, not completed delivery. Its undated first-person directory description is qualified. Sports-centre contacts are not club contacts.",
+    "Millom2018 founding/track base confirmed; July2025 visiting coach is not a member association. Masked email/current timetable unresolved.",
+    "Tadworth supports under18 membership conditional on adult-member parent/guardian. Removed unverified Epsom and Greenwich street locations; registration/SEO implementation unchanged.",
+    "New Ross/Island league positions remain provisional until23October; conflicting New Ross email unresolved. Parent2856d58 passed Club profiles38937413513 and quality38937413506. Exact new-head evidence follows in PR756."
   ],
   "sourceGaps": [
     {
@@ -617,8 +618,8 @@
     },
     {
       "slug": "west-wight-road-runners",
-      "status": "source-unreadable-batch72",
-      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "status": "profile-added-future-partnership-qualified",
+      "reason": "Batch82 read first-person Good Run Guide listing and primary co-organiser's2027 Three Hills plan. Blog unavailable; current timetable/contact unresolved. Centre contact is not the club contact.",
       "checkedAt": "2026-10-16"
     },
     {
@@ -944,8 +945,8 @@
     {
       "slug": "tadworth-ac",
       "url": "https://www.tadworthac.org.uk/history/",
-      "status": "deferred-unreadable-club-source",
-      "reason": "16 October: history page returned403 and alternate host was inaccessible. Existing sourced contacts retained; no biography inferred from snippets."
+      "status": "profile-added-alternate-history-and-membership",
+      "reason": "Batch82 recovered tadworth.org.uk/about-us and club Membermojo. Early1980s origin has no exact year. Under18 option requires adult-member parent/guardian; old2024–25 affiliation text not current fees. Main-site training403 remains unresolved."
     },
     {
       "slug": "tamworth-ac",
@@ -1124,8 +1125,8 @@
     {
       "slug": "stadium-runners",
       "url": "https://www.stadiumrunners.co.uk/",
-      "status": "deferred-unreadable-club-source",
-      "reason": "Homepage was inaccessible during the alternative-candidate check; no biography drafted."
+      "status": "profile-added-non-www-recovery",
+      "reason": "Batch82 read non-www about/membership/contact pages;2005 foundation, leisure-centre meeting base and membership role email confirmed."
     },
     {
       "slug": "spa-striders",
@@ -3298,7 +3299,7 @@
       "slug": "hillingdon-ac",
       "url": "http://www.hillingdonac.co.uk/",
       "status": "deferred-access-blocked",
-      "reason": "403 again; no bypass attempted. Seek alternative primary history."
+      "reason": "Batch82 profile uses readable hillingdonac.com joining/location pages. co.uk history/contact still403; foundation and alumni unset."
     },
     {
       "slug": "hunwick-harriers",
@@ -3478,7 +3479,7 @@
       "slug": "hillingdon-ac",
       "url": "http://www.hillingdonac.co.uk/",
       "status": "deferred-access-blocked",
-      "reason": "Official site403; no bypass attempted. Seek permitted governing-body or primary history."
+      "reason": "Batch82 profile added from .com programme/venue pages. Historical source and direct enquiry details remain unavailable; do not repeat as an unprofiled candidate."
     },
     {
       "slug": "athletics-ireland-ballon-rathoe-a-c",
