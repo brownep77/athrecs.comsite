@@ -1,63 +1,14 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch62",
-  "reviewedAt": "2026-10-15",
+  "lastEditorialBatch": "2026-10-16-batch63",
+  "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1171/1737 assembled biographies and 559 sourced associations; 171 biographies and 108 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
+  "publication": "1191/1737 assembled biographies and 581 sourced associations; 191 biographies and 130 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "shrewsbury-ac",
-    "shropshire-shufflers",
-    "silson-ac",
-    "silverdale-rc",
-    "sinfin-running-club",
-    "sittingbourne-striders",
-    "skegness-and-district-running-club",
-    "skelmersdale-boundary-harriers",
-    "skelmersdale-running-club",
-    "skipton-ac",
-    "skyrac-athletic-club",
-    "slaithwaite-striders-rc",
-    "sleaford-striders-ac",
-    "sleaford-town-runners",
-    "slough-junior-ac",
-    "smalley-road-runners",
-    "snaith-and-cowick-running-club",
-    "sneyd-striders",
-    "sole-sisters-north-bristol",
-    "solent-running-sisters"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1171,
-    "notableMemberEntries": 559,
-    "clubsWithContacts": 993,
-    "contactEntries": 1666,
-    "clubsWithEmail": 965,
-    "clubsWithPhone": 137,
-    "clubsWithSocials": 1154,
-    "socialLinks": 2429,
-    "websiteContactRecords": 1277
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 21,
-    "contactOrSocialRecordsChanged": 17,
-    "newWebsiteContactRecords": 9,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 17,
-    "netSocialLinks": 4,
-    "unsafeWebsitesSuppressed": 0
-  },
-  "validationBeforeCommit": {
-    "status": "Sources reviewed on 15 October 2026 UTC (16 October locally). Parent 5021477e6d1544e79e24ed13176457c55bf97c45; main c83e0e220927fed32f260cbee1c8bc97245a3393. Both parent workflows 38816488646 and 38816488688 passed. Catalogue/profile checks, targeted ESLint, TypeScript, diff whitespace and safe non-publishing production build passed. All 20 locally rendered production-build pages passed biography, contacts/social links, location notes, home-nation flags, registration links and search/structured-data assertions. Exact-head Club profiles desktop/mobile CI, quality gate and hosted-preview evidence will be recorded in PR755 after commit."
-  },
-  "nextCandidateSlugs": [
     "solihull-and-small-heath-athletic-club",
     "somer-ac",
-    "south-birmingham-striders",
-    "south-cambridge-striders",
     "south-cheshire-harriers",
     "south-derbyshire-road-runners",
     "south-devon-ac",
@@ -70,20 +21,227 @@
     "south-west-road-runners",
     "south-west-veterans-ac",
     "southampton-athletic-club",
-    "southampton-triathlon-club",
     "southampton-university-athletics-and-cross-country-club",
-    "southern-counties-veterans-ac",
-    "southport-strollers-running-club"
+    "southville-running-club",
+    "southwark-athletics-club",
+    "southwell-running-club",
+    "sowerby-bridge-snails-running-club",
+    "sparkhill-harriers"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1191,
+    "notableMemberEntries": 581,
+    "clubsWithContacts": 1003,
+    "contactEntries": 1682,
+    "clubsWithEmail": 975,
+    "clubsWithPhone": 138,
+    "clubsWithSocials": 1156,
+    "socialLinks": 2433,
+    "websiteContactRecords": 1288
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 22,
+    "contactOrSocialRecordsChanged": 17,
+    "newWebsiteContactRecords": 11,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 16,
+    "netSocialLinks": 4,
+    "unsafeWebsitesSuppressed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Sources reviewed on 15–16 October 2026 UTC. Parent 519968c5d802a50c0977d59a7299b9bce46aaa6e; main c83e0e220927fed32f260cbee1c8bc97245a3393. Parent Club profiles38822489678 and quality gate38822489560 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All 20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head workflow and preview evidence will be recorded in PR755 after commit."
+  },
+  "nextCandidateSlugs": [
+    "spa-striders",
+    "spectrum-striders",
+    "spenborough-and-dist-ac",
+    "sphinx-ac",
+    "springfield-striders-rc",
+    "squirrels-running-group",
+    "sri-chinmoy-marathon-team",
+    "ss-athletics",
+    "st-albans-ac",
+    "st-albans-striders",
+    "st-austell-athletes-running-club",
+    "st-austell-running-club",
+    "st-bees-triers",
+    "st-helens-striders",
+    "st-helens-sutton-ac",
+    "st-marys-richmond-ac",
+    "st-marys-university-athletics-club",
+    "st-neots-riverside-runners",
+    "st-neots-triathlon-club",
+    "st-theresas-a-c"
   ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch62 adds20 profiles in club-profiles-bj.ts. Preserve sourced fields and use guarded remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–62 remain draft; no publication authorized.",
-    "Remaining non-English candidates have specific source gaps. Next queue rotates through further regional running and multisport; revisit blocked nations when primary evidence is available.",
-    "SIP Running Club has no readable substantive primary source yet; SLGR's official site returned403. Do not pad either profile.",
-    "Smalley's sessions page was readable but other pages failed/rate-limited. Sole Sisters' contact page was readable despite homepage403. Do not promote search-snippet histories into sourced biography facts."
+    "Batch63 adds20 profiles in club-profiles-bk.ts. Preserve sourced fields and use guarded remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–63 remain draft; no publication authorized.",
+    "Remaining non-English candidates retain specific source gaps. Recent batches covered Irish triathlon and Welsh school districts; revisit those gaps when primary evidence is available.",
+    "Six candidates deferred here: South Birmingham Striders, South Cambridge Striders, Southampton Triathlon Club, Southern Counties Veterans AC, Southport Strollers and Southport Waterloo. No snippet-only biographies.",
+    "Spa Striders' www homepage failed; search found the non-www /info/cluboverview page, not yet opened. Begin next queue there, then Spectrum Striders onward.",
+    "South West Academy's Let's Talk page contains template details; only its homepage's real email/phone were retained. South Shields uses .club role contacts from its dedicated contact page, not homepage variants.",
+    "Sowerby Bridge Snails has conflicting postcodes and age wording. Keep the supported cricket-club venue without a postcode until resolved. South Devon's school address is specifically junior training."
   ],
   "sourceGaps": [
+    {
+      "slug": "solihull-and-small-heath-athletic-club",
+      "url": "https://www.solihullac.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The club describes roots reaching back to 1879, but its detailed history file could not be read. A definitive founding year and historical membership list remain unresolved."
+    },
+    {
+      "slug": "somer-ac",
+      "url": "https://www.somerac.org.uk/history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior age-band wording differs across the site; confirm the appropriate section and available places directly."
+    },
+    {
+      "slug": "south-cheshire-harriers",
+      "url": "https://southcheshireharriers.org.uk/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. The Willaston meeting point serves the wider Crewe and Nantwich area; it is not a central Crewe address."
+    },
+    {
+      "slug": "south-derbyshire-road-runners",
+      "url": "https://sdrr.co.uk/?page_id=4474",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history describes the founders by occupation but does not name them; no names are inferred."
+    },
+    {
+      "slug": "south-devon-ac",
+      "url": "https://www.sdac.run/club-history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Masked email addresses are not reconstructed. Confirm current junior capacity through the enquiry form. The listed Churston Ferrers Grammar School address is the junior training venue near Brixham. Senior runners meet at Clennon Valley Leisure Centre in Paignton."
+    },
+    {
+      "slug": "south-london-harriers",
+      "url": "https://www.southlondonharriers.org/Cms/Spaces/ABOUT/SLH+History",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. Coulsdon is the headquarters and road/cross-country base; track sessions also use Crystal Palace. Confirm the venue for the chosen group."
+    },
+    {
+      "slug": "south-molton-strugglers",
+      "url": "https://www.southmoltonstrugglers.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved; beginner-course availability is not assumed."
+    },
+    {
+      "slug": "south-of-england-track-and-field-ac",
+      "url": "https://www.setafa.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No athlete alumni or competitive membership is inferred from the coaching roster. Mountbatten Centre is the principal training facility, with additional winter sessions at Trafalgar School and hill work on Portsdown Hill."
+    },
+    {
+      "slug": "south-ribble-runners",
+      "url": "https://clubspark.englandathletics.org/SouthRibbleRunners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year and notable members are unresolved. Confirm the next beginner intake; the published January notice does not specify a year."
+    },
+    {
+      "slug": "south-shields-harriers-and-ac",
+      "url": "https://southshieldsharriers.co.uk/sshachistory/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The dedicated contact page uses .club email addresses; the homepage shows different .co.uk addresses and unrelated template text. Only the dedicated role contacts are added."
+    },
+    {
+      "slug": "south-west-athletics-academy",
+      "url": "https://www.sw-athletics-academy.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year is not established. Confirm sessions after the autumn 2026 closure notice. The Let's Talk page contains template contacts; use the real academy contacts published on the homepage."
+    },
+    {
+      "slug": "south-west-road-runners",
+      "url": "https://www.swrr.co.uk/club-history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The contact page timed out and homepage emails were masked. No direct address is guessed. The pavilion is a shared meeting venue; South West Road Runners remains distinct from Exeter Harriers."
+    },
+    {
+      "slug": "south-west-veterans-ac",
+      "url": "https://www.southwestvets.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved; no single training schedule is inferred. Regional masters club. The old Barrow Gurney street address is not established as a training venue or public clubhouse."
+    },
+    {
+      "slug": "southampton-athletic-club",
+      "url": "https://southamptonathleticclub.org.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The international-athlete page contains inconsistent event-date/location wording, which is not repeated. Historical predecessor associations are distinct from membership of the club formed in 2010."
+    },
+    {
+      "slug": "southampton-university-athletics-and-cross-country-club",
+      "url": "https://www.susu.org/php/group.php?id=188",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Use the Students' Union's 2026–27 details rather than the club site's older 2025–26 coaching heading. Founding date and alumni are unresolved. University Road is the campus address. Redbrick is a gathering point on Highfield Campus; track and Wide Lane strength sessions use separate facilities."
+    },
+    {
+      "slug": "southville-running-club",
+      "url": "https://www.southvillerunningclub.co.uk/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding individuals, notable alumni or direct club email/telephone are established by the opened pages."
+    },
+    {
+      "slug": "southwark-athletics-club",
+      "url": "https://www.southwarkac.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year is unresolved. Junior waiting-list forms differ between pages; use the junior enquiry email to confirm the current route."
+    },
+    {
+      "slug": "southwell-running-club",
+      "url": "https://www.southwellrunningclub.org/club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. The published session meeting point replaces an unconfirmed Lowdham street address. No leisure-centre postcode is guessed."
+    },
+    {
+      "slug": "sowerby-bridge-snails-running-club",
+      "url": "https://www.sowerbybridgesnails.com/our-story",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding individuals or notable-member history are established. Confirm eligibility directly; the homepage's broad age wording does not resolve the directory's adult-only flag. Walton Street cricket club is the normal meeting point. Conflicting site postcodes are omitted pending confirmation; away runs use other locations."
+    },
+    {
+      "slug": "sparkhill-harriers",
+      "url": "https://www.sparkhillharriers.co.uk/club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources."
+    },
+    {
+      "slug": "south-birmingham-striders",
+      "url": "https://sbsclub.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Opened homepage supplied a contact form but insufficient club narrative, training or history."
+    },
+    {
+      "slug": "south-cambridge-striders",
+      "url": "https://www.southcambridgestriders.org.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official site returned403; no substantive primary page recovered."
+    },
+    {
+      "slug": "southampton-triathlon-club",
+      "url": "https://www.southamptontriclub.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official pages returned no readable content and governing-body listing returned403; founding date from snippets is not used."
+    },
+    {
+      "slug": "southern-counties-veterans-ac",
+      "url": "https://www.scvac.org.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Homepage and membership page failed with timeout/internal errors. Search snippets are not opened-source evidence."
+    },
+    {
+      "slug": "southport-strollers-running-club",
+      "url": "https://southportstrollers.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official home/about attempts were inaccessible or returned401; no access controls bypassed."
+    },
+    {
+      "slug": "southport-waterloo-ac",
+      "url": "https://www.sw-ac.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official homepage unavailable and no suitable primary replacement opened."
+    },
     {
       "slug": "shrewsbury-ac",
       "url": "https://www.shrewsburyac.org.uk/about-us/",

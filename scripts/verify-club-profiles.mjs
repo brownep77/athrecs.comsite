@@ -17,6 +17,29 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 63: merged-club origins, separate venues and public role contacts.
+  assert.equal(clubProfiles["southampton-athletic-club"].founded_year, 2010);
+  assert.equal(clubProfiles["south-devon-ac"].founded_year, 1997);
+  assert.equal(clubProfiles["south-london-harriers"].founded_year, 1871);
+  assert.ok(bySlug.get("south-london-harriers").sports.includes("Triathlon"));
+  assert.equal(bySlug.get("south-ribble-runners").city, "Leyland");
+  assert.equal(bySlug.get("somer-ac").city, "Midsomer Norton");
+  assert.equal(bySlug.get("south-cheshire-harriers").city, "Willaston");
+  assert.equal(bySlug.get("south-west-road-runners").postcode, "EX4 8NN");
+  assert.equal(bySlug.get("southwell-running-club").city, "Southwell");
+  assert.equal(bySlug.get("southwell-running-club").postcode, "");
+  assert.equal(bySlug.get("sowerby-bridge-snails-running-club").postcode, "");
+  assert.equal(bySlug.get("south-west-veterans-ac").address, "");
+  assert.equal(bySlug.get("south-west-veterans-ac").location_precision, "area-only");
+  assert.equal(bySlug.get("sparkhill-harriers").postcode, "B27 7NS");
+  assert.equal(bySlug.get("sparkhill-harriers").address_kind, "training");
+  assert.ok(bySlug.get("south-west-athletics-academy").contacts.some(c => c.phone === "07745 616852"));
+  assert.ok(bySlug.get("south-shields-harriers-and-ac").contacts.some(c => c.email === "juniors@southshieldsharriers.club"));
+  assert.ok(!bySlug.get("south-west-athletics-academy").contacts.some(c => c.email === "info@mysite.com"));
+  assert.match(clubProfiles["south-devon-ac"].location_note, /junior training/);
+  assert.match(clubProfiles["southwell-running-club"].notable_members.find(m => m.name === "Richard Whitehead").connection, /Honorary/);
+  assert.equal(clubProfiles["south-birmingham-striders"], undefined);
+  assert.equal(clubProfiles["southampton-triathlon-club"], undefined);
   // Batch 62: distinct entities, supported venues and historical-only associations.
   assert.equal(clubProfiles["skelmersdale-boundary-harriers"].founded_year, 1983);
   assert.equal(clubProfiles["skelmersdale-running-club"].founded_year, 2023);
