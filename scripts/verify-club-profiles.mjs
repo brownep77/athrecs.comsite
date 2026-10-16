@@ -17,6 +17,23 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 89: capacity restrictions, dated volunteer associations and supplier exclusion.
+  assert.equal(clubProfiles["vale-of-aylesbury-ac"].founded_year, 1893);
+  assert.equal(clubProfiles["southport-waterloo-ac"].founded_year, 1978);
+  assert.equal(clubProfiles["redditch-stars"].founded_year, 2015);
+  for (const slug of ["burton-ac", "hyndburn-ac"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.match(clubProfiles["vale-of-aylesbury-ac"].biography.join(" "), /does not operate a waiting list/);
+  assert.match(clubProfiles["vale-of-aylesbury-ac"].biography.join(" "), /full except endurance/);
+  assert.equal(bySlug.get("vale-of-aylesbury-ac").postcode, "HP21 9PP");
+  assert.equal(bySlug.get("southport-waterloo-ac").city, "Litherland");
+  for (const slug of ["vale-of-aylesbury-ac", "burton-ac", "southport-waterloo-ac", "hyndburn-ac"]) assert.equal(bySlug.get(slug).address_kind, "training");
+  assert.equal(bySlug.get("redditch-stars").address_kind, "directory");
+  assert.equal(bySlug.get("redditch-stars").contacts.length, 0);
+  assert.equal(bySlug.get("hyndburn-ac").contacts.length, 0);
+  assert.equal(bySlug.get("burton-ac").contacts.length, 0);
+  assert.ok(bySlug.get("southport-waterloo-ac").contacts.some(c => c.email === "swacsecretary@hotmail.co.uk" && c.phone === "07940 333 040"));
+  assert.match(clubProfiles["hyndburn-ac"].biography.join(" "), /February 2017 publication date/);
+  assert.match(clubProfiles["southport-waterloo-ac"].biography.join(" "), /April start without a year/);
   // Batch 88: predecessor dates, separate programmes and non-postal venues.
   assert.equal(clubProfiles["striders-of-croydon"].founded_year, 1982);
   assert.equal(clubProfiles["vale-royal-ac"].founded_year, 1994);
