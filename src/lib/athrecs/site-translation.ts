@@ -1,14 +1,14 @@
 import { isPrivateAnalyticsPath } from "./web-analytics.ts";
 
 export const TRANSLATION_LANGUAGES = [
-  { code: "en", label: "English", englishLabel: "English" },
-  { code: "fr", label: "Français", englishLabel: "French" },
-  { code: "de", label: "Deutsch", englishLabel: "German" },
-  { code: "es", label: "Español", englishLabel: "Spanish" },
-  { code: "it", label: "Italiano", englishLabel: "Italian" },
-  { code: "nl", label: "Nederlands", englishLabel: "Dutch" },
-  { code: "pl", label: "Polski", englishLabel: "Polish" },
-  { code: "pt", label: "Português", englishLabel: "Portuguese" },
+  { code: "en", flag: "🇬🇧", label: "English", englishLabel: "English" },
+  { code: "fr", flag: "🇫🇷", label: "Français", englishLabel: "French" },
+  { code: "de", flag: "🇩🇪", label: "Deutsch", englishLabel: "German" },
+  { code: "es", flag: "🇪🇸", label: "Español", englishLabel: "Spanish" },
+  { code: "it", flag: "🇮🇹", label: "Italiano", englishLabel: "Italian" },
+  { code: "nl", flag: "🇳🇱", label: "Nederlands", englishLabel: "Dutch" },
+  { code: "pl", flag: "🇵🇱", label: "Polski", englishLabel: "Polish" },
+  { code: "pt", flag: "🇵🇹", label: "Português", englishLabel: "Portuguese" },
 ] as const;
 
 export type TranslationLanguage = (typeof TRANSLATION_LANGUAGES)[number]["code"];
