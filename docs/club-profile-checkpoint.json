@@ -1,79 +1,191 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch70",
+  "lastEditorialBatch": "2026-10-16-batch71",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "PR755 merged as 111b56a6589f3c3d741fb538bd2093a0df1fa535; production dpl_GQQM5tC4FVBkTb7F7JKTPv1V5HWR published 1291 biographies and 639 associations. PR756 batches69–70 add25 biographies and11 associations in draft. Assembled totals1316/1737 and650 associations are not live totals.",
+  "publication": "PR755 published1291 biographies/639 associations. PR756 batches69–71 add45 biographies/22 associations in draft. Assembled totals1336/1737 and661 associations are not live totals. No production publication in batch71.",
   "completedProfileSlugs": [
-    "trx-wolves-ac",
-    "ttt-run-club",
-    "tuff-fitty-triathlon-club",
-    "tunbridge-wells-harriers",
-    "tyne-bridge-harriers",
-    "ucl-running-athletics-and-cross-country-club",
-    "uffo-athletic-satellite-clubs",
-    "university-of-birmingham-ac-and-cross-country-club",
-    "university-of-manchester-ath-and-xc-club",
-    "university-of-plymouth-athletics-club",
-    "unsanctioned-athletics",
-    "vale-of-york-athletic-community",
-    "valley-hill-runners",
-    "valley-striders-ac",
-    "vegan-runners-uk",
-    "verwood-runners",
-    "veterans-ac",
-    "wadebridge-running-club",
-    "wadhurst-runners",
-    "walsall-arboretum-running-club"
+    "upper-wharfedale-runners",
+    "velorunner",
+    "wallasey-athletic-club",
+    "ware-joggers",
+    "wargrave-and-twyford-runners",
+    "warley-woods-pacers",
+    "warriors-pentathlon-and-athletic-club",
+    "washington-running-club",
+    "washlands-women-runners",
+    "waverley-athletics-club",
+    "waverley-harriers",
+    "weald-tri-club",
+    "wearside-triathlon-club",
+    "weir-archer-academy",
+    "wellingborough-and-district-ac",
+    "wells-city-harriers",
+    "wenlock-olympians",
+    "werrington-joggers",
+    "west-bromwich-harriers",
+    "west-cheshire-athletic-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1316,
-    "notableMemberEntries": 650,
-    "clubsWithContacts": 1063,
-    "contactEntries": 1792,
-    "clubsWithEmail": 1035,
-    "clubsWithPhone": 148,
-    "clubsWithSocials": 1177,
-    "socialLinks": 2480,
-    "websiteContactRecords": 1349
+    "extendedProfiles": 1336,
+    "notableMemberEntries": 661,
+    "clubsWithContacts": 1075,
+    "contactEntries": 1808,
+    "clubsWithEmail": 1044,
+    "clubsWithPhone": 153,
+    "clubsWithSocials": 1179,
+    "socialLinks": 2484,
+    "websiteContactRecords": 1361
   },
   "batchChanges": {
     "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 2,
-    "contactOrSocialRecordsChanged": 15,
-    "newWebsiteContactRecords": 7,
+    "notableMemberEntriesAdded": 11,
+    "contactOrSocialRecordsChanged": 17,
+    "newWebsiteContactRecords": 12,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 12,
-    "netSocialLinks": 15,
+    "netContactEntries": 16,
+    "netSocialLinks": 4,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Targeted ESLint, TypeScript, catalogue/audit/profile checks and whitespace passed. Safe production build passed with every database publication hook skipped. All20 actual rendered production-build pages passed biography/association text, contacts/socials, locations, flags, registration and title/description/canonical/JSON-LD assertions. Dedicated exact-head Club profiles desktop/mobile workflow and hosted Vercel preview follow after commit; evidence recorded in PR756."
+    "status": "Catalogue, club audit/profile checks, targeted ESLint, TypeScript and whitespace passed. Safe production build passed with database migration/publication hooks skipped. All20 actual rendered production-build pages passed biography/association, contacts/socials, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head Club profiles desktop/mobile workflow and Vercel evidence follow after commit in PR756."
   },
   "nextCandidateSlugs": [
-    "upper-wharfedale-runners",
-    "vector-racing",
-    "velorunner",
-    "wallasey-athletic-club",
-    "wallsend-harriers-and-ac",
-    "walton-ac",
-    "ware-joggers",
-    "wargrave-and-twyford-runners"
+    "west-hull-ladies",
+    "west-london-track-and-field",
+    "west-suffolk-ac",
+    "west-wight-road-runners",
+    "west-worthing-runners",
+    "westbourne-r-c",
+    "westbury-harriers",
+    "western-tempo",
+    "weston-athletic-club",
+    "weston-whippets",
+    "wetherby-runners-ac",
+    "weymouth-st-pauls-harriers"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; check current head and writer status before edits.",
-    "Live baseline is1291 biographies/639 associations from merged PR755. PR756 contains25 additional draft biographies/11 associations after batch70.",
-    "Batch70 is club-profiles-br.ts, seedv70:20 biographies,2 associations,12 net contact entries,15 net social links. Canonical count1737 unchanged.",
+    "Last verified published baseline is1291 biographies/639 associations from PR755. PR756 contains45 additional draft biographies/22 associations after batch71.",
+    "Batch71 is club-profiles-bs.ts, seedv71:20 biographies,11 associations,16 net contact entries,4 net social links. Canonical count1737 unchanged. Assembled coverage1336/1737 and661 associations.",
     "Continue remaining queue and rotate through any newly accessible non-English deferred sources; previous eligible non-English candidates remain in saved source gaps.",
-    "Keep Manchester cross-country origins separate from athletics; do not turn TRX membership opening into a founding date. Respect the paused Walsall10+ group.",
-    "Tuff Fitty history/contact challenge, UCL/Valley Striders masked emails and dated UFFO/Manchester timetables remain unresolved. No guessed phone, email, founder or street postcode.",
+    "Keep Waverley AC and Harriers separate. Washington's original1970s club and Wenlock's older Games history do not establish precise founding dates for current clubs.",
+    "Wells Street5K start year, Ware/Werrington arrival-time conflicts, Wearside's limited timetable and Washlands' unconfirmed next course remain qualified. No guessed phone, email, founder or postcode.",
     "Prior batch69 Truro Tuesday venue conflict and Preston dated swim notices remain qualified.",
     "Confirm exact-head CI and the AthRecs project preview. Preserve registration/SEO/privacy; no outreach or athlete identities/results."
   ],
   "sourceGaps": [
+    {
+      "slug": "wells-city-harriers",
+      "status": "conflicting-series-history",
+      "reason": "Who-we-are and history pages disagree on the first Street5K series year; omitted. Founder first name appears as Berni/Bernie in club materials, using Bernie from narrative.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wearside-triathlon-club",
+      "status": "limited-current-programme",
+      "reason": "Rebuilt homepage establishes2017 and broad activities but no complete current timetable or training venue; no unsupported alumni or address added.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "waverley-athletics-club",
+      "status": "seasonal-multiple-venues",
+      "reason": "Woolmer Hill, Charterhouse, Rodborough and Broadwater seasonal sessions read; malformed summer discus end time omitted. Waverley AC and Waverley Harriers remain separate canonical entries.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "ware-joggers",
+      "status": "conflicting-trial-start-times",
+      "reason": "Newmembers page contains a newer Thursday start-time notice beside older text; current diary/contact recommended.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "werrington-joggers",
+      "status": "conflicting-senior-arrival-times",
+      "reason": "Homepage18:45 and about-page19:00 senior arrangements differ; exact time omitted.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wenlock-olympians",
+      "status": "foundation-decade-only",
+      "reason": "Club dates to early1950s; no precise year inferred and older Olympian Games history not used as club formation.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "washington-running-club",
+      "status": "replacement-website-recovered",
+      "reason": "New official Washington England site read; US Washington DC club excluded. Stephen Bottoms association belongs to original1970s club, not an inferred formation year.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "washlands-women-runners",
+      "status": "replacement-website-recovered",
+      "reason": "New.org site and England Athletics2023 award source read. April beginner course has no confirmed2027 start date.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "weir-archer-academy",
+      "status": "replacement-website-recovered",
+      "reason": "New.academy site supplies headquarters, contacts and coaching. No exact foundation date inferred.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "vector-racing",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wallsend-harriers-and-ac",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "walton-ac",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "warminster-running-club",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "watford-harriers",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "watford-joggers",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wesham-road-runners-and-ac",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "west-4-harriers",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "west-end-runners",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "twisted-running",
       "status": "deferred-unreadable-primary-source",
