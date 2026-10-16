@@ -1,69 +1,1790 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-15-batch53",
-  "reviewedAt": "2026-10-15",
+  "lastEditorialBatch": "2026-10-16-batch68",
+  "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch36",
-  "pullRequest": 749,
-  "publication": "Batch53 adds Reading Joggers and Reepham Runners, one founding association and two public contact records; Northampton AC and Hartshill Runners addresses now match their sourced postcodes. PR749 assembles 1000/1737 biographies and 451 notable entries, 315 more biographies than last confirmed live. Publication pending exact-head release checks; prior production evidence retained.",
+  "branch": "codex/club-profiles-batch54",
+  "pullRequest": 755,
+  "publication": "1291/1737 assembled biographies and 639 sourced associations; 291 biographies and 188 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "reading-joggers",
-    "reepham-runners"
+    "the-students-union-at-uwe",
+    "thetford-ac",
+    "thirsk-and-sowerby-harriers",
+    "thornbury-rc",
+    "thorney-rc",
+    "three-counties-running-club",
+    "thurrock-harriers",
+    "tiptree-road-runners",
+    "todmorden-harriers",
+    "tooting-run-club",
+    "torbay-tri-club",
+    "torrington-aac",
+    "totton-rc",
+    "track-academy",
+    "trail-runners-adventure-running-club",
+    "trail-running-association",
+    "trawden-athletic-club",
+    "trentham-rc",
+    "tri-logic-cornwall",
+    "tri-london"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1000,
-    "notableMemberEntries": 451,
-    "clubsWithContacts": 900,
-    "contactEntries": 1529,
-    "clubsWithEmail": 876,
-    "clubsWithPhone": 125,
-    "clubsWithSocials": 1130,
-    "socialLinks": 2379,
-    "websiteContactRecords": 1172
+    "extendedProfiles": 1291,
+    "notableMemberEntries": 639,
+    "clubsWithContacts": 1052,
+    "contactEntries": 1775,
+    "clubsWithEmail": 1024,
+    "clubsWithPhone": 146,
+    "clubsWithSocials": 1172,
+    "socialLinks": 2465,
+    "websiteContactRecords": 1341
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
-    "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 1,
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 17,
+    "contactOrSocialRecordsChanged": 17,
+    "newWebsiteContactRecords": 8,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 2,
-    "netSocialLinks": 0,
-    "addressCorrections": 2
+    "netContactEntries": 21,
+    "netSocialLinks": 9,
+    "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Sources opened 15 October 2026. Catalogue/profile/audit, targeted ESLint, TypeScript, whitespace and safe preview build passed; database publication explicitly skipped. All three actual locally rendered production-build pages (Reading Joggers, Reepham Runners, Northampton AC) passed complete biography/contact/social/address/flag/registration/title/description/canonical/SportsOrganization checks. Address string now matches sourced NN3 7QL. Exact new-head CI and hosted-preview checks remain pending and belong in PR749. User authorised publication and built-in-browser fallback; earlier previews inspected without protection or credential changes. A release-wide scan of corrected postcodes found one additional embedded-address mismatch at Hartshill Runners. Official ClubSpark contact page reopened 15 October confirms TF2 6EU; address string corrected. Final follow-up exact-head workflow/preview verification belongs in PR749."
+    "status": "Sources read on 16 October 2026 UTC. Parent f3fae7c8cf90dbff9fc785302562011685353df4 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38849857054 and quality gate38849857191 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head CI and preview evidence will be recorded in PR755 after commit."
   },
   "nextCandidateSlugs": [
-    "os-runners",
-    "otley-ac",
-    "overton-harriers-and-ac",
-    "owls-ac",
-    "oxford-city-ac",
-    "oxford-tri",
-    "oxford-university-ac",
-    "oxted-runners",
-    "paddock-wood-ac",
-    "pb-racing",
-    "peak-fell-and-trail-crew",
-    "peel-road-runners",
-    "pendle-trail-running-club",
-    "penistone-footpath-runners-and-athletic-club",
-    "pennine-fell-runners",
-    "penny-lane-striders",
-    "pensby-runners",
-    "performance-physique-athletics-club",
-    "pershore-plum-plodders",
-    "peterborough-and-nene-valley-ac"
+    "tri-preston",
+    "tri-surrey-triathlon-club",
+    "tri-tempo-eastbourne",
+    "tring-rc",
+    "truro-running-club",
+    "trx-wolves-ac",
+    "ttt-run-club",
+    "tuff-fitty-triathlon-club",
+    "tunbridge-wells-harriers",
+    "twisted-running",
+    "tyne-bridge-harriers",
+    "tynedale-harriers-and-ac",
+    "uckfield-runners",
+    "ucl-running-athletics-and-cross-country-club",
+    "uffo-athletic-satellite-clubs",
+    "university-of-birmingham-ac-and-cross-country-club",
+    "university-of-manchester-ath-and-xc-club",
+    "university-of-plymouth-athletics-club",
+    "university-of-sheffield-union-of-students",
+    "university-of-warwick"
   ],
   "resumeInstructions": [
-    "Read current main/PR749, AGENTS.md, audit, checkpoint and actual catalogue before selecting work. Preserve batches36–53 and use expected-head guarded updates.",
-    "Batch53 adds Reading Joggers and Reepham Runners in club-profiles-ba.ts and corrects Northampton AC address in club-profiles-ay.ts. Continue the unchanged OS Runners queue; do not duplicate these two out-of-order completions.",
-    "Standing publication authority does not waive hosted verification. Do not retry a rejected bypass or weaken protection. Exact-head CI/deployment evidence belongs in PR749.",
-    "Rotate regional and Irish primary sources; remaining Welsh school districts require an entity-type review. Preserve athlete identities, results, privacy, verification, registration and search implementation."
+    "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
+    "Batch68 adds20 profiles in club-profiles-bp.ts. Preserve sourced fields and use guarded remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–68 remain draft; no publication authorized.",
+    "Recent rotations covered Irish triathlon and Welsh school districts. Revisit non-English source gaps when primary evidence is readable; this batch focuses on regional English running, student athletics and multisport.",
+    "Main queue resumes Tri Preston. Thornton Cleveleys, Tiverton, Torbay AAC, Totley and Trafford remain deferred for unreadable primary narrative.",
+    "Tri London gives1986 on its homepage but around1985 in its history; leave exact founding year empty. Thorney junior venues are dated2024–25; confirm before presenting as current.",
+    "Tooting affiliated in July2026; its common sessions are paused at review and free sessions require booking.",
+    "Thurrock trains at Blackshots, RM16 2QT. Trentham uses Trentham Academy. Regional networks and the Trail Running Association are national, not global.",
+    "UWE's record dates do not establish its founding year. Track Academy founder Connie Henry stepped back in2024; historical associations are not current leadership or athlete-identity claims.",
+    "Masked emails, site suppliers and Trentham template contacts are excluded. Existing sourced fields retain their provenance unless freshly rechecked."
   ],
   "sourceGaps": [
+    {
+      "slug": "thornton-cleveleys-running-club",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Home returned502 and the history page timed out."
+    },
+    {
+      "slug": "tiverton-harriers",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Official home page returned502."
+    },
+    {
+      "slug": "torbay-aac",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Primary club website was inaccessible."
+    },
+    {
+      "slug": "totley-ac",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Home and about pages timed out."
+    },
+    {
+      "slug": "trafford-athletic-club",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Official page returned no readable narrative."
+    },
+    {
+      "slug": "tri-london",
+      "status": "profile-date-conflict",
+      "reason": "16 October 2026: Homepage says1986; history says around1985. Exact founding year remains unset."
+    },
+    {
+      "slug": "thorney-rc",
+      "status": "profile-current-junior-venues-unresolved",
+      "reason": "16 October 2026: Junior training details refer to2024–25; confirm current venues and timetable."
+    },
+    {
+      "slug": "tavistock-ac",
+      "url": "https://www.tavistockathletics.co.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Repeated home, history, contact and joining pages returned502 or timed out. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "team-devizes-moonrakers-ac",
+      "url": "https://www.teamdevizes.org/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Home and history pages timed out. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "team-kennet-triathlon-and-ac",
+      "url": "https://teamkennet.co.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Legacy .com was unreadable; new official .co.uk about, history and contact pages returned403. Access restrictions respected. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "tetbury-dolphins-running-club",
+      "url": "https://groups.runtogether.co.uk/TetburyDolphinsRunningClub",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: RunTogether redirected to an inaccessible ClubSpark page. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "thames-hare-and-hounds",
+      "url": "https://www.thameshareandhounds.org.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Primary homepage timed out. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "thanet-ac",
+      "url": "https://www.thanetac.org.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Primary club pages inaccessible; not conflated with Thanet Roadrunners AC. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "the-outrunners",
+      "url": "https://www.theoutrunners.co.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Primary club pages inaccessible. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "the-running-hub",
+      "url": "https://www.therunninghub.co.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Primary club pages timed out. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "team-caterpillar",
+      "url": "https://team-caterpillar.com/north-yorkshire",
+      "status": "profile-added-source-now-unavailable",
+      "reason": "Page was opened and read on16 October2026 but returned404 on recheck; current venues and sessions must be confirmed. Contact page remains the enquiry source."
+    },
+    {
+      "slug": "tadworth-ac",
+      "url": "https://www.tadworthac.org.uk/history/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October: history page returned403 and alternate host was inaccessible. Existing sourced contacts retained; no biography inferred from snippets."
+    },
+    {
+      "slug": "tamworth-ac",
+      "url": "https://tamworthac.com/academy/",
+      "status": "profile-added-capacity-qualified",
+      "reason": "Academy page says ages8–10 enter a waiting list; confirm taster availability. Footer general-contact link is not a usable enquiry form; academy form linked specifically."
+    },
+    {
+      "slug": "swindon-harriers",
+      "url": "https://www.swindonharriers.com/membership/",
+      "status": "profile-added-entry-age-qualified",
+      "reason": "Membership page says eight; introduction says seven. Confirm eligibility rather than choosing an unqualified universal age."
+    },
+    {
+      "slug": "tattenhall-runners",
+      "url": "https://tattenhallrunners.com/index.php/our-races/",
+      "status": "profile-added-event-date-qualified",
+      "reason": "Tough Team cancelled for2026. 2027 return remains intended; older footer dates and membership figures not promoted as current."
+    },
+    {
+      "slug": "stock-exchange-ac",
+      "url": "https://stockexchangeac.org/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Club website timed out; search snippets and secondary professional-network references are insufficient for a sourced history."
+    },
+    {
+      "slug": "stone-master-marathoners",
+      "url": "https://www.stonemm.com/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Club pages were inaccessible; no biography drafted."
+    },
+    {
+      "slug": "stowmarket-striders-rc",
+      "url": "https://www.stowmarketstriders.org.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Club website could not be read; no biography drafted."
+    },
+    {
+      "slug": "striders-of-croydon",
+      "url": "https://www.stridersofcroydon.org.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Club pages returned errors; search-discovered magazines were not read and are not evidence."
+    },
+    {
+      "slug": "steel-city-striders-rc",
+      "url": "https://www.sientries.co.uk/event.php?event_id=17136",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Detailed history and coaching pages returned only a redirect. The membership email was masked, so no address or named athlete association is inferred."
+    },
+    {
+      "slug": "stevenage-and-north-herts-ac",
+      "url": "https://www.snhac.org.uk/about.php",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Under-18 waiting lists were closed at review. The site's age thresholds differ between pages, so confirm eligibility directly. Direct contacts are geographically restricted; use the public enquiry form."
+    },
+    {
+      "slug": "stevenage-phoenix-running-club",
+      "url": "https://www.stevenagephoenix.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and historical members remain unconfirmed. The previously sourced phone is retained with its original check date; it was not displayed on the contact page read in this review."
+    },
+    {
+      "slug": "steyning-ac",
+      "url": "https://www.steyningac.co.uk/about-steyning-ac/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior attendance requires coach confirmation. The reviewed race-walking overview did not identify its international athletes by name."
+    },
+    {
+      "slug": "stilton-striders",
+      "url": "https://www.stiltonstriders.co.uk/club-history-2/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The retained directory address is not established as a session venue. Ask for the current meeting point."
+    },
+    {
+      "slug": "stockport-tri-club",
+      "url": "https://www.stockporttriclub.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership page still showed April 2025–March 2026. Existing enquiry email and social provenance retained, without claiming a fresh email confirmation."
+    },
+    {
+      "slug": "stocksbridge-running-club",
+      "url": "https://stocksbridgerunningclub.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The weekly page gives differing distance guidance. Discuss suitability with the club; proposed beginner sessions are not treated as an active programme."
+    },
+    {
+      "slug": "stocksfield-striders",
+      "url": "https://stocksfieldstriders.chessck.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No direct role email, telephone or named historical athlete was established from the pages read."
+    },
+    {
+      "slug": "stockton-striders-ac",
+      "url": "https://stocktonstridersac.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The former .org.uk website was replaced after it served unrelated gambling material. No contact or payment details from that page are imported."
+    },
+    {
+      "slug": "stoke-f-i-t",
+      "url": "https://www.stokefit.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and historical athlete associations remain unconfirmed."
+    },
+    {
+      "slug": "stonehenge-striders-running-club",
+      "url": "https://www.stonehengestriders.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The homepage's explicit January 2020 origin is used, not its 2019 footer copyright or the team's approximate personal chronology."
+    },
+    {
+      "slug": "stopsley-striders",
+      "url": "https://www.stopsleystriders.org.uk/how-to-join/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm the current meeting room and arrival time at Inspire; the website contains differing instructions. No new individual performance record is inferred."
+    },
+    {
+      "slug": "storm-plymouth",
+      "url": "https://www.englandathletics.org/news/a-club-committed-to-including-everyone-south-west-club-of-the-year-storm-plymouth/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Team App required JavaScript and did not expose a readable current timetable or role contact. Founding date and named historical athletes remain unset."
+    },
+    {
+      "slug": "stourbridge-rc",
+      "url": "https://srclub.co.uk/about-stourbridge-running-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and named historical athlete associations remain unconfirmed. Check the current calendar for alternate-Friday track sessions."
+    },
+    {
+      "slug": "stratford-upon-avon-ac",
+      "url": "https://stratfordac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No named historical athlete is inferred from general competition claims. The road-running detail page was blocked by a verification screen."
+    },
+    {
+      "slug": "street-striders",
+      "url": "https://streetstriders.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current fees should be checked with the club; no named competitive alumni were established."
+    },
+    {
+      "slug": "stroud-and-district-ac",
+      "url": "https://stroudac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history page had no readable historical narrative beyond its title, so no named alumni are added. ConnectMyClub's Kenilworth address and email belong to the supplier."
+    },
+    {
+      "slug": "stubbington-green-runners",
+      "url": "https://www.stubbingtongreenrunners.net/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership totals differ between pages and are omitted. Some training notices retain older dates; use the current rolling schedule before travelling."
+    },
+    {
+      "slug": "styal-running-club",
+      "url": "https://www.styalrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No named founding members or historical athlete associations were established from the pages read."
+    },
+    {
+      "slug": "sudbury-court-running-club",
+      "url": "https://www.sudburycourt.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Published Tuesday arrival times differ slightly. No precise postcode, current membership total or historical governing-body wording is inferred."
+    },
+    {
+      "slug": "st-austell-athletes-running-club",
+      "url": "https://staustellathletes.wixsite.com/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Club website was inaccessible. Recent press coverage is not sufficient primary material for a biography. Distinct from St Austell Running Club."
+    },
+    {
+      "slug": "st-marys-richmond-ac",
+      "url": "https://www.smrac.org.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Legacy ClubBuzz URL loops; new club site returned timeouts/502. University's track page confirms a facility association but not enough club-specific joining/history detail."
+    },
+    {
+      "slug": "stadium-runners",
+      "url": "https://www.stadiumrunners.co.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Homepage was inaccessible during the alternative-candidate check; no biography drafted."
+    },
+    {
+      "slug": "spa-striders",
+      "url": "https://spastriders.co.uk/info/cluboverview",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and named historical members remain unconfirmed. ConnectMyClub's footer email and Kenilworth address belong to the website provider, not Spa Striders."
+    },
+    {
+      "slug": "spectrum-striders",
+      "url": "https://clubspark.englandathletics.org/SpectrumStriders",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current membership email confirmed from the 2026–27 application. Main-site training and team pages were not consistently readable; no named alumni added."
+    },
+    {
+      "slug": "spenborough-and-dist-ac",
+      "url": "https://www.spenac.co.uk/a/club-history-52037.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior waiting list closed when checked on 16 October 2026. The published Kirklees Active Leisure facilities number is not imported as a club enquiry line."
+    },
+    {
+      "slug": "sphinx-ac",
+      "url": "https://www.sphinx.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current session times, junior capacity and named historical members were not established from the pages read."
+    },
+    {
+      "slug": "springfield-striders-rc",
+      "url": "https://springfieldstriders.org.uk/training_nights/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year and historical members remain unconfirmed. The main About, FAQ and triathlon detail pages timed out, so no new street address or multisport timetable is inferred."
+    },
+    {
+      "slug": "squirrels-running-group",
+      "url": "https://www.squirrels.run/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No named historical member association was established from the source read."
+    },
+    {
+      "slug": "sri-chinmoy-marathon-team",
+      "url": "https://uk.srichinmoyraces.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The international founding date is not treated as an independently established UK club founding year. London telephone enquiries concern races."
+    },
+    {
+      "slug": "ss-athletics",
+      "url": "https://www.ssathletics.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year was not established. Coaching roles are editorial associations, not claims of current competitive membership."
+    },
+    {
+      "slug": "st-albans-ac",
+      "url": "https://www.stalbansac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The public website masks its email address. The taster-booking page is retained without guessing an email; St Albans Striders remains a separate club."
+    },
+    {
+      "slug": "st-albans-striders",
+      "url": "https://stalbansstriders.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Direct email links were masked in the readable pages; use the published contact form. Historical associations do not establish present membership."
+    },
+    {
+      "slug": "st-bees-triers",
+      "url": "https://triers.co.uk/history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The training page retains older material, so its exact timetable is not presented as newly confirmed. No named athlete association is inferred."
+    },
+    {
+      "slug": "st-helens-striders",
+      "url": "https://www.sthelensstriders.com/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The founder's relatives are not assumed to be club members. The current session meeting point should be confirmed with the secretary."
+    },
+    {
+      "slug": "st-helens-sutton-ac",
+      "url": "https://st-helens-sutton.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The predecessor's 1899 origin is not the merged club's founding year. Junior places require confirmation; the venue operator's phone is excluded."
+    },
+    {
+      "slug": "st-marys-university-athletics-club",
+      "url": "https://www.stmarys.ac.uk/student-life/student-sports-clubs",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date, club-specific training timetable and named student-club alumni remain unresolved. University and performance-centre associations are not imported as student-club membership."
+    },
+    {
+      "slug": "st-neots-riverside-runners",
+      "url": "https://riverside-runners.com/about/about-riverside-runners.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history page says established in 1987 but also places a tenth-anniversary celebration in its 1996 section. Founding year is left unset pending clarification rather than resolving the inconsistency by assumption."
+    },
+    {
+      "slug": "st-neots-triathlon-club",
+      "url": "https://www.stneotstriathlonclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and named historical athlete associations remain unconfirmed. NiceTri Events is a separate business, not the club's race-organising arm."
+    },
+    {
+      "slug": "st-theresas-a-c",
+      "url": "https://www.sttheresasac.org.uk/info/our-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The fortieth-anniversary statement is retained as stated; no exact founding date or named historical membership is inferred."
+    },
+    {
+      "slug": "stainland-lions-running-club",
+      "url": "https://www.stainlandlions.co.uk/about-us.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No named historical athlete association was confirmed from the sources read."
+    },
+    {
+      "slug": "stamford-striders",
+      "url": "https://www.stamfordstriders.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year and named historical athletes remain unconfirmed. Sunday runs are informal, not coached club sessions."
+    },
+    {
+      "slug": "solihull-and-small-heath-athletic-club",
+      "url": "https://www.solihullac.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The club describes roots reaching back to 1879, but its detailed history file could not be read. A definitive founding year and historical membership list remain unresolved."
+    },
+    {
+      "slug": "somer-ac",
+      "url": "https://www.somerac.org.uk/history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior age-band wording differs across the site; confirm the appropriate section and available places directly."
+    },
+    {
+      "slug": "south-cheshire-harriers",
+      "url": "https://southcheshireharriers.org.uk/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. The Willaston meeting point serves the wider Crewe and Nantwich area; it is not a central Crewe address."
+    },
+    {
+      "slug": "south-derbyshire-road-runners",
+      "url": "https://sdrr.co.uk/?page_id=4474",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history describes the founders by occupation but does not name them; no names are inferred."
+    },
+    {
+      "slug": "south-devon-ac",
+      "url": "https://www.sdac.run/club-history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Masked email addresses are not reconstructed. Confirm current junior capacity through the enquiry form. The listed Churston Ferrers Grammar School address is the junior training venue near Brixham. Senior runners meet at Clennon Valley Leisure Centre in Paignton."
+    },
+    {
+      "slug": "south-london-harriers",
+      "url": "https://www.southlondonharriers.org/Cms/Spaces/ABOUT/SLH+History",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. Coulsdon is the headquarters and road/cross-country base; track sessions also use Crystal Palace. Confirm the venue for the chosen group."
+    },
+    {
+      "slug": "south-molton-strugglers",
+      "url": "https://www.southmoltonstrugglers.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved; beginner-course availability is not assumed."
+    },
+    {
+      "slug": "south-of-england-track-and-field-ac",
+      "url": "https://www.setafa.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No athlete alumni or competitive membership is inferred from the coaching roster. Mountbatten Centre is the principal training facility, with additional winter sessions at Trafalgar School and hill work on Portsdown Hill."
+    },
+    {
+      "slug": "south-ribble-runners",
+      "url": "https://clubspark.englandathletics.org/SouthRibbleRunners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year and notable members are unresolved. Confirm the next beginner intake; the published January notice does not specify a year."
+    },
+    {
+      "slug": "south-shields-harriers-and-ac",
+      "url": "https://southshieldsharriers.co.uk/sshachistory/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The dedicated contact page uses .club email addresses; the homepage shows different .co.uk addresses and unrelated template text. Only the dedicated role contacts are added."
+    },
+    {
+      "slug": "south-west-athletics-academy",
+      "url": "https://www.sw-athletics-academy.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year is not established. Confirm sessions after the autumn 2026 closure notice. The Let's Talk page contains template contacts; use the real academy contacts published on the homepage."
+    },
+    {
+      "slug": "south-west-road-runners",
+      "url": "https://www.swrr.co.uk/club-history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The contact page timed out and homepage emails were masked. No direct address is guessed. The pavilion is a shared meeting venue; South West Road Runners remains distinct from Exeter Harriers."
+    },
+    {
+      "slug": "south-west-veterans-ac",
+      "url": "https://www.southwestvets.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved; no single training schedule is inferred. Regional masters club. The old Barrow Gurney street address is not established as a training venue or public clubhouse."
+    },
+    {
+      "slug": "southampton-athletic-club",
+      "url": "https://southamptonathleticclub.org.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The international-athlete page contains inconsistent event-date/location wording, which is not repeated. Historical predecessor associations are distinct from membership of the club formed in 2010."
+    },
+    {
+      "slug": "southampton-university-athletics-and-cross-country-club",
+      "url": "https://www.susu.org/php/group.php?id=188",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Use the Students' Union's 2026–27 details rather than the club site's older 2025–26 coaching heading. Founding date and alumni are unresolved. University Road is the campus address. Redbrick is a gathering point on Highfield Campus; track and Wide Lane strength sessions use separate facilities."
+    },
+    {
+      "slug": "southville-running-club",
+      "url": "https://www.southvillerunningclub.co.uk/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding individuals, notable alumni or direct club email/telephone are established by the opened pages."
+    },
+    {
+      "slug": "southwark-athletics-club",
+      "url": "https://www.southwarkac.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year is unresolved. Junior waiting-list forms differ between pages; use the junior enquiry email to confirm the current route."
+    },
+    {
+      "slug": "southwell-running-club",
+      "url": "https://www.southwellrunningclub.org/club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. The published session meeting point replaces an unconfirmed Lowdham street address. No leisure-centre postcode is guessed."
+    },
+    {
+      "slug": "sowerby-bridge-snails-running-club",
+      "url": "https://www.sowerbybridgesnails.com/our-story",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding individuals or notable-member history are established. Confirm eligibility directly; the homepage's broad age wording does not resolve the directory's adult-only flag. Walton Street cricket club is the normal meeting point. Conflicting site postcodes are omitted pending confirmation; away runs use other locations."
+    },
+    {
+      "slug": "sparkhill-harriers",
+      "url": "https://www.sparkhillharriers.co.uk/club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources."
+    },
+    {
+      "slug": "south-birmingham-striders",
+      "url": "https://sbsclub.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Opened homepage supplied a contact form but insufficient club narrative, training or history."
+    },
+    {
+      "slug": "south-cambridge-striders",
+      "url": "https://www.southcambridgestriders.org.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official site returned403; no substantive primary page recovered."
+    },
+    {
+      "slug": "southampton-triathlon-club",
+      "url": "https://www.southamptontriclub.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official pages returned no readable content and governing-body listing returned403; founding date from snippets is not used."
+    },
+    {
+      "slug": "southern-counties-veterans-ac",
+      "url": "https://www.scvac.org.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Homepage and membership page failed with timeout/internal errors. Search snippets are not opened-source evidence."
+    },
+    {
+      "slug": "southport-strollers-running-club",
+      "url": "https://southportstrollers.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official home/about attempts were inaccessible or returned401; no access controls bypassed."
+    },
+    {
+      "slug": "southport-waterloo-ac",
+      "url": "https://www.sw-ac.co.uk/",
+      "status": "deferred-source-unavailable",
+      "reason": "Official homepage unavailable and no suitable primary replacement opened."
+    },
+    {
+      "slug": "shrewsbury-ac",
+      "url": "https://www.shrewsburyac.org.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved. Confirm current times rather than treating the linked 2024 programme as current."
+    },
+    {
+      "slug": "shropshire-shufflers",
+      "url": "https://www.shropshire-shufflers.org/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The committee page returned 403. No unconfirmed direct email or telephone is added. London Road is the track-training venue; other sessions start at the Quarry or Shirehall."
+    },
+    {
+      "slug": "silson-ac",
+      "url": "https://www.silsonac.org.uk/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. Seasonal training at Silverstone Circuit and Stowe School; the former Banbury street address is not established as a club venue."
+    },
+    {
+      "slug": "silverdale-rc",
+      "url": "https://silverdale.run/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No notable-member history or independently confirmed full postal address is added."
+    },
+    {
+      "slug": "sinfin-running-club",
+      "url": "https://www.sinfinrc.co.uk/about-us-home",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history page contains older future-looking race text; no current event date is inferred from it. The Crossbar is the published training base; the postcode is retained from the directory with its trailing comma removed."
+    },
+    {
+      "slug": "sittingbourne-striders",
+      "url": "https://sittingbournestriders.co.uk/about-the-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Masked emails are not guessed. Junior enquiries have a published telephone; trial wording varies between the general and junior pages. No notable-member entry is inferred from junior results. The directory's King George's Playing Fields address is retained; use the session invitation for the actual meeting point."
+    },
+    {
+      "slug": "skegness-and-district-running-club",
+      "url": "https://www.skegnessanddistrictrc.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Past event listings are not presented as forthcoming races. Unsupported aquatic and multisport tags are removed. The retained Spilsby address is one training location, not the sole base of this four-town club."
+    },
+    {
+      "slug": "skelmersdale-boundary-harriers",
+      "url": "https://www.skelmersdaleboundaryharriers.com/club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history page mislocates the 2014 Commonwealth Games and varies an earlier organiser's surname spelling; neither claim is reproduced. The Miners Peg is a published walk-and-talk start; other sessions use varying locations."
+    },
+    {
+      "slug": "skelmersdale-running-club",
+      "url": "https://www.skemrunningclub.com/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No further historical association is inferred beyond the cited sources. The Plough and Harrow in Up Holland is the Thursday meeting base, not a claim that all runs start there."
+    },
+    {
+      "slug": "skipton-ac",
+      "url": "https://skiptonac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved. Aireville Park is a training meeting point; the unconfirmed Castle View Terrace address is not presented as a clubhouse."
+    },
+    {
+      "slug": "skyrac-athletic-club",
+      "url": "https://skyrac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No notable-member history is inferred from competition listings."
+    },
+    {
+      "slug": "slaithwaite-striders-rc",
+      "url": "https://www.slaithwaitestriders.com/about-5",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founders are named in the reviewed history. Unsupported aquatic and multisport tags are removed."
+    },
+    {
+      "slug": "sleaford-striders-ac",
+      "url": "https://sleafordstriders.org.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No notable-member history is established. Unsupported aquatic and multisport tags are removed."
+    },
+    {
+      "slug": "sleaford-town-runners",
+      "url": "https://www.sleafordtownrunners.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Training listings lack a clear current year; confirm the next session. Founders and notable-member history remain unresolved."
+    },
+    {
+      "slug": "slough-junior-ac",
+      "url": "https://www.sjac.uk.com/history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The alumni page incorrectly dates the Rio Olympics to 2018; that statement and unneeded medical details are not reproduced. No athlete identity or results are created."
+    },
+    {
+      "slug": "smalley-road-runners",
+      "url": "https://smalleyroadrunners.co.uk/club-sessions/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The sessions page was readable, but home, history, membership and contact requests failed or were rate-limited. Founding date, alumni and direct contacts are held pending a readable source; no history is promoted from search snippets."
+    },
+    {
+      "slug": "snaith-and-cowick-running-club",
+      "url": "https://snaithandcowickrunningclub.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved."
+    },
+    {
+      "slug": "sneyd-striders",
+      "url": "https://www.sneydstriders.run/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Members' Ironman ambitions do not establish organised swim or bike provision. Unsupported aquatic and multisport tags are removed; founding date and notable-member history remain unconfirmed."
+    },
+    {
+      "slug": "sole-sisters-north-bristol",
+      "url": "https://www.solesistersrc.co.uk/contact-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The contact page was readable but the homepage returned 403. Masked email and potentially dated fees are not reproduced; founding date and alumni remain unresolved. Training rotates between North Bristol venues; use the club diary for the current meeting point."
+    },
+    {
+      "slug": "solent-running-sisters",
+      "url": "https://www.solentrunningsisters.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history are unresolved. Training locations vary; no single clubhouse is inferred."
+    },
+    {
+      "slug": "sip-running-club",
+      "url": "https://www.facebook.com/siprunningclub",
+      "status": "deferred-primary-source-gap",
+      "reason": "Search located only third-party directory material; no substantive readable official history, sessions or public role contact established."
+    },
+    {
+      "slug": "slgr",
+      "url": "https://www.teamslgr.com/",
+      "status": "deferred-source-blocked",
+      "reason": "Official website returned403 and targeted search did not recover adequate readable club-specific material."
+    },
+    {
+      "slug": "welsh-athletics-north-east-wales-schools-districts",
+      "url": "https://www.welshathletics.org/en/club/view/north-east-wales-schools-districts",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The calendar includes a 2025 date among 2026 material, and the Welsh-language area row has an inconsistent district label. Use the individual district's named central contact; founding date and notable-member history remain unresolved. Denbighshire, Flintshire and Wrexham school district; no single training base is confirmed."
+    },
+    {
+      "slug": "welsh-athletics-powys-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/powys-schools-district",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "School participation and selection enquiries, not open club membership. Founding date and notable-member history are unresolved. County-wide schools district; Brecon and Newtown are published competition locations, not confirmed permanent district bases."
+    },
+    {
+      "slug": "welsh-athletics-south-east-wales-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/south-east-wales-schools-district",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding date or notable-member history is inferred from school results. Four-local-authority school district; confirm the venue for each event."
+    },
+    {
+      "slug": "savvy-park-runrz",
+      "url": "https://savvyparkrunrz.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Dorothy Hyman's historical coaching at Savile Park does not establish membership of this club founded in 2020; no notable-member entry is inferred."
+    },
+    {
+      "slug": "saxmundham-sports-running-and-fitness-club",
+      "url": "https://thesaxons.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Use the published membership enquiry route; the masked email address was not guessed."
+    },
+    {
+      "slug": "scarborough-athletic-club",
+      "url": "https://www.scarboroughac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Homepage and membership page give different trial lengths. The linked history page contains template text, so founding date and alumni remain unresolved. The retained rugby-club address comes from the directory; confirm the meeting point for the chosen session."
+    },
+    {
+      "slug": "scunthorpe-and-district-running-club",
+      "url": "https://scunthorperunningclub.wordpress.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved. Unsupported swimming and multisport tags are removed; guest registration is not an athlete identity claim."
+    },
+    {
+      "slug": "seaford-striders-rc",
+      "url": "https://www.seafordstriders.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm current track and junior session arrangements; differing published times are not resolved by guesswork. Seaford is the club's home town. The retained Lewes address identifies its track-training venue, not a Seaford clubhouse."
+    },
+    {
+      "slug": "sedgefield-harriers",
+      "url": "https://sedgefieldharriers.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Trial wording differs within the joining page; confirm the permitted trial with the membership team. Sedgefield Community College is a training venue; the retained postcode is directory-sourced, not a newly checked postal address."
+    },
+    {
+      "slug": "sedgley-striders",
+      "url": "https://sedgleystriders.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history are unresolved. The next beginner course is planned, not confirmed as open for bookings. The published training meeting point is in Lanesfield, Wolverhampton; the club retains its Sedgley identity."
+    },
+    {
+      "slug": "selby-striders",
+      "url": "https://selbystriders.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Selby Rugby Club is a published meeting base; the retained postal detail remains directory-sourced."
+    },
+    {
+      "slug": "settle-harriers",
+      "url": "https://settleharriers.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The joining page required browser verification. No trial limit, masked email or notable-member history is inferred. Training starts vary across North Craven. The unconfirmed Lincoln House directory address is not presented as a clubhouse."
+    },
+    {
+      "slug": "sevenoaks-ac",
+      "url": "https://www.7oaks-ac.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Contact before attending; juniors have a waiting list and no tasters before school Year 5. No supported notable-member entry is added."
+    },
+    {
+      "slug": "severn-ac",
+      "url": "https://severnac.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Published membership prices are labelled 2025–26; confirm current terms. Notable-member history remains unresolved. Barnett Way is the Monday meeting point; Wednesday hill sessions use Kenilworth Avenue. Neither is established as a staffed clubhouse."
+    },
+    {
+      "slug": "shadwell-runners",
+      "url": "https://sites.google.com/view/shadwellrunners/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date, notable-member history and exact junior-admission arrangements remain unconfirmed; broad welcoming language does not establish a junior section. The Red Lion address is retained from the directory; confirm the actual session start with the club."
+    },
+    {
+      "slug": "shaef-shifters-running-club",
+      "url": "https://www.shaefshifters.co.uk/p/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm current sessions. Masked email and notable-member history are not inferred. Bushy Park's Teddington gates are a meeting reference, not a clubhouse. Confirm the next outing before travelling."
+    },
+    {
+      "slug": "shaftesbury-barnet-harriers",
+      "url": "https://shaftesburybarnet.co.uk/about/history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "1890 is the Shaftesbury predecessor's founding year; the present merged identity dates from 1986. Contact before applying; membership is subject to approval."
+    },
+    {
+      "slug": "shelton-striders",
+      "url": "https://sheltonstriders.org.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Book an induction before the first coached session. No unsupported founding-member or athlete association is added. Coached Wednesday training uses Darley Park in summer and Moorways in winter; confirm the seasonal venue and time."
+    },
+    {
+      "slug": "shenley-striders",
+      "url": "https://www.shenleystriders.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The published Wednesday group guidance is around ten-minute miles over ten kilometres; confirm readiness before attending. Founding-person and notable-member history remain unresolved."
+    },
+    {
+      "slug": "sherfield-park-runners",
+      "url": "https://www.sherfieldparkrunners.co.uk/about-spr",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm beginner-course availability and official-session arrangements directly. No supported notable-member entry is added. The community centre is a regular base; Thursday meeting points vary. Hook is part of the postal address, not a claim that all training takes place in Hook village."
+    },
+    {
+      "slug": "welsh-athletics-welsh-schools-and-universities",
+      "url": "https://www.welshathletics.org/en/club/view/welsh-schools-and-universities",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "The listing provides a national entity name and contact but no substantive entity-specific programme/history; all discipline flags are No. Do not conflate the entity with WSAA or individual university clubs."
+    },
+    {
+      "slug": "seaton-athletic-club",
+      "url": "https://seaton-ac.co.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official site unavailable. Canonical club is in Cumbria/Whitehaven, not the similarly named Devon club; no biography is inferred."
+    },
+    {
+      "slug": "shefford-runners",
+      "url": "https://www.sheffordrunners.co.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Opened site provided only generic platform material, without sufficient club history/training evidence. Supplier hello@connectmy.club excluded."
+    },
+    {
+      "slug": "sheffield-rc",
+      "url": "https://www.sheffieldrunningclub.org.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official club page timed out during this bounded review; no snippet-only profile added."
+    },
+    {
+      "slug": "shepshed-running-club",
+      "url": "https://shepshedrc.org.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Recovered homepage and running page contained unrelated pharmaceutical spam. No new biography or contacts taken from those pages; no unrelated link followed. Legitimate current club source requires independent verification."
+    },
+    {
+      "slug": "welsh-athletics-afan-nedd-tawe-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/afan-nedd-tawe-schools-district",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "School-team selection enquiries, not ordinary club membership. Founding date and notable-member history remain unresolved. District covering Swansea and Neath Port Talbot; no single training venue is confirmed."
+    },
+    {
+      "slug": "welsh-athletics-cardiff-and-vale-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/cardiff-and-vale-schools-district",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A school-district entity, not Cardiff Athletics. No supported founding date or notable-member history was established. Cardiff and Vale of Glamorgan school district; confirm the venue for each school event."
+    },
+    {
+      "slug": "welsh-athletics-dyfed-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/dyfed-schools-district",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Ask the school or district contact about selection; founding date and notable-member history are unresolved. A three-county school district, not a single training address."
+    },
+    {
+      "slug": "welsh-athletics-eryri-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/eryri-schools-district",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "School selection enquiries only; no notable-member history is inferred from pupil results. School district spanning Conwy, Gwynedd and Anglesey; event venues vary."
+    },
+    {
+      "slug": "welsh-athletics-glamorgan-valleys-schools-district",
+      "url": "https://www.welshathletics.org/en/club/view/glamorgan-valleys-schools-district",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported founding date or notable-member history was established. Ask about school-team selection rather than ordinary club membership. Four-local-authority school district; Aberdare is an event location, not a confirmed permanent district base."
+    },
+    {
+      "slug": "runthrough-north",
+      "url": "https://club.runthrough.co.uk/north-running-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved. General RunThrough social links are retained, not relabelled as district-specific accounts. MediaCity Plaza is the published group meeting point; confirm the next session before travelling."
+    },
+    {
+      "slug": "runthrough-run-club",
+      "url": "https://club.runthrough.co.uk/runthrough-newsletter-7th-may-2018/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "2018 is an evidenced affiliation milestone, not a confirmed founding year. No notable-member history was established. Gateshead is the retained directory location; current local training there was not established."
+    },
+    {
+      "slug": "rushcliffe-ac",
+      "url": "https://www.rushcliffeac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Induction is required; masked email addresses were not guessed. Founding date and notable-member history remain unresolved."
+    },
+    {
+      "slug": "rushmere-community-runners",
+      "url": "https://www.rushmerecommunityrunners.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Masked role emails were not guessed; use the official contact page to arrange a trial. Ipswich School Sports Centre is the Tuesday base; Thursday and weekend starts vary."
+    },
+    {
+      "slug": "rutland-running-and-triathlon-club",
+      "url": "https://www.rutlandrunandtri.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported notable-member history was established; confirm the next beginner intake. Catmose is a running meeting point, not the base for every session; Wednesday starts vary."
+    },
+    {
+      "slug": "ryde-harriers",
+      "url": "https://www.rydeharriers.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Use the contact form; masked email addresses were not guessed. Historic race entrants are not inferred to be members. Ryde Rowing Club is the stated meeting base; Tuesday track training is separately in Sandown."
+    },
+    {
+      "slug": "s-factor-athletics-academy",
+      "url": "https://sfactoracademy.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The membership page required browser verification, so joining terms remain unconfirmed. Public academy contacts are attributed to the local school; no notable-member history was inferred."
+    },
+    {
+      "slug": "saddleworth-runners-club",
+      "url": "https://www.saddleworth-runners.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Historical venues and archived timetables are not presented as current session instructions. Saddleworth is the club area; confirm the meeting point for the chosen run."
+    },
+    {
+      "slug": "saffron-striders-rc",
+      "url": "https://www.saffronstriders.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved; beginner-course availability needs confirmation. Lord Butler Leisure Centre is the retained directory location; check the chosen session's meeting point."
+    },
+    {
+      "slug": "saint-edmund-pacers",
+      "url": "https://www.pacers.org.uk/membership/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Different junior and adult trial descriptions are not collapsed into one guarantee. Exact founding date and notable-member history remain unresolved. Abbeycroft Leisure Centre is the usual junior base; confirm seasonal arrangements for the chosen group."
+    },
+    {
+      "slug": "salford-harriers-and-ac",
+      "url": "https://www.salfordharriers.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The club warns against treating its example sessions as a fixed timetable. Conflicting junior-section restart dates are omitted. SportCity is one training venue; juniors also use Cleavleys in Eccles. All session arrangements need confirmation."
+    },
+    {
+      "slug": "saltaire-striders",
+      "url": "https://saltairestriders.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved. Beginner courses are occasional, not guaranteed current intakes. The listed Keighley track is one of several training venues; road groups also meet in Saltaire."
+    },
+    {
+      "slug": "saltwell-harriers",
+      "url": "https://saltwellharriers.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership page timed out and training page retains a pandemic-era notice; no fixed current timetable is asserted. Gateshead Leisure Centre is retained from the directory; confirm the current session meeting point."
+    },
+    {
+      "slug": "sandbach-striders",
+      "url": "https://www.sandbachstriders.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Role email is used because named membership officers differ between pages. No supported notable-member history was established; website supplier contact excluded."
+    },
+    {
+      "slug": "sawtry-running-club",
+      "url": "https://sawtrywalktorun.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported notable-member history was established. The linked RunTogether page could not be opened; booking availability is not confirmed."
+    },
+    {
+      "slug": "runwednesdays",
+      "url": "https://www.sussexathletics.net/club-information/find-a-club/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "County directory page timed out twice. Search snippets and historical charity mentions were not used as a substitute for a current full club profile."
+    },
+    {
+      "slug": "saffron-athletics-club",
+      "url": "https://saffronac.co.uk",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Listed website redirected to unrelated gambling content on15 October2026. Website suppressed in enrichment while directory provenance/date retained. Independent club history and current legitimate website unresolved."
+    },
+    {
+      "slug": "salford-metropolitan-ac",
+      "url": "https://www.salfordmetac.co.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Listed official site could not be opened. Thin third-party listings are insufficient for a full biography."
+    },
+    {
+      "slug": "sandhurst-joggers",
+      "url": "https://www.sandhurstjoggers.org.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official home and about pages failed to open; deferred without inferring current training or contact details."
+    },
+    {
+      "slug": "carrick-on-suir-tc",
+      "url": "https://www.triathlonireland.com/news/2016/race-report-23rd-annual-carrick-on-suir-triathlon/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year and current training timetable remain unconfirmed. Historical junior participation is not evidence of a current junior section."
+    },
+    {
+      "slug": "east-cork-tribe",
+      "url": "https://www.triathlonireland.com/news/new2tri-upcoming-programmes/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding date and notable-member history remain unresolved; the reviewed beginner course ended in June 2026. Mogeely Greenway car park was the 2026 course meeting point; no permanent clubhouse is confirmed."
+    },
+    {
+      "slug": "tritanium-tc",
+      "url": "https://tritaniumtriathlonclub.com/home/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported notable-member history was established; confirm the typical timetable before attendance. Dublin 15 is the club area, not a street address. Sessions use several venues."
+    },
+    {
+      "slug": "ruislip-rc",
+      "url": "https://ruislip-rc.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding year or notable-member history was established. The Kings College Road directory address was not independently confirmed as the start of every run."
+    },
+    {
+      "slug": "run-and-ride-athletics-club",
+      "url": "https://www.runandride.blog/athletic-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Store enquiries are labelled as such. No founding date or notable-member history was established; old event dates are not treated as upcoming. The Milford store is the advertised run meeting point."
+    },
+    {
+      "slug": "run-4-u-and-perform-running-club",
+      "url": "https://run4uandperform.com/r4u-club-home/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The joining page contains 2024–25 fee text. Current costs and dates need confirmation. Newton Solney Recreational Ground is the principal base; social-run starts vary."
+    },
+    {
+      "slug": "run-academy-worthing",
+      "url": "https://www.runacademy.co.uk/about-us.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Published email links were masked and not guessed. The malformed directory Facebook URL is excluded in favour of the existing sourced official link. Durrington High School is one regular venue; use weekly updates for the actual session start."
+    },
+    {
+      "slug": "run-alcester",
+      "url": "https://www.runalcester.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported notable-member history was established. Bulls Head Yard is the Alcester start; track training uses Stratford-upon-Avon School."
+    },
+    {
+      "slug": "run-nation-running-club",
+      "url": "https://runnation.co.uk/running-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club founding date, regular coached sessions and notable-member history remain unconfirmed. 21 Northfield Road is a postal address and registered office, not a confirmed training venue."
+    },
+    {
+      "slug": "run-sandymoor",
+      "url": "https://runsandymoor.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The contact page intermittently timed out. Founding year and notable-member history are not established. Sandymoor Ormiston Academy is the published usual start; away sessions vary."
+    },
+    {
+      "slug": "run-things-run-club",
+      "url": "https://www.runthings.co.uk/run-club/landing",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The email was masked and not guessed. No founding year or competitive athlete associations were established; global scope is not inferred from the wider business. Virtual participation; no public training base is confirmed at the former directory address."
+    },
+    {
+      "slug": "runhead-ac",
+      "url": "https://runhead.github.io/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The official club page has older fee information; current affiliation costs need confirmation. The Old Nun's Head is the published Tuesday meeting point."
+    },
+    {
+      "slug": "runna",
+      "url": "https://store.runna.com/products/england-athletics-membership-runna",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "App coaches and ambassadors are not assumed to be competitive club members. The club's founding date remains unconfirmed. The retained England club listing offers UK adult affiliation; no public training venue is confirmed."
+    },
+    {
+      "slug": "runners-next-the-sea",
+      "url": "https://www.rnts.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No specific notable-member history was established. Training rotates between Wells, Fakenham and Holkham; confirm the session start."
+    },
+    {
+      "slug": "running-at-40-plus",
+      "url": "https://runningat40plus.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and fixed local training timetable were not established. The official contact page gives Chesterfield, not a public street-level training venue."
+    },
+    {
+      "slug": "running-bear",
+      "url": "https://runningbear.co.uk/pages/running-bear-running-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The club-specific email is preferred to shop sales contacts. Founding date remains unconfirmed. 5 London Road is the Alderley Edge shop; session starts are shown in bookings."
+    },
+    {
+      "slug": "running-colchester",
+      "url": "https://runningcolchester.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "2016 is the community's start; athletics affiliation followed in 2018. No named historical athlete association was established. Runs use different Colchester locations; the directory address is not a universal start."
+    },
+    {
+      "slug": "running-forever-rc",
+      "url": "https://runningforever.club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported founding year or notable-member history was established. RunTogether bookings specify the meeting point; the Belvedere Road directory address is not used for every session."
+    },
+    {
+      "slug": "running-somewhere-else",
+      "url": "https://www.runningsomewhereelse.com/club-info/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The joining page links a 2026–27 form but retains 2023–24 text. No precise meeting address is asserted. Official pages disagree between Old Station Car Park and the Somewhere Else bar. Confirm the current start with the club."
+    },
+    {
+      "slug": "runnymede-runners",
+      "url": "https://www.runnymederunners.com/history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The historical organisers are not presented as current competitive members. Confirm seasonal meeting points before a taster. Savill Garden serves summer activities; winter starts differ around Egham and Staines."
+    },
+    {
+      "slug": "collins-cycle-centre-triathlon-club",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "The opened official directory confirms Thurles and the role email but offers insufficient club-specific history or training detail for a full biography."
+    },
+    {
+      "slug": "db-triathlon-club",
+      "url": "http://dbcyclingclub.com/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "The club website could not be opened. The governing-body directory confirms Drung and the email, but indexed event references alone were not used for a biography."
+    },
+    {
+      "slug": "run-middlewich",
+      "url": "https://www.runmiddlewich.club/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "The official website was inaccessible; listing and event snippets are insufficient to establish a club training and joining profile."
+    },
+    {
+      "slug": "runfit-chorley",
+      "url": "https://groups.runtogether.co.uk/RunFitChorley",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Both the listed news URL and group homepage failed to open. No profile inferred from a thin listing."
+    },
+    {
+      "slug": "ripley-running-club",
+      "url": "https://www.ripleyrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The current official domain replaces the obsolete Wanadoo listing. No supported founding year or notable-member history was established. Tuesday training normally meets at Ripley Leisure Centre. The retained Henry Street directory address is not confirmed as a training venue; away-run starts vary."
+    },
+    {
+      "slug": "roberttown-road-runners",
+      "url": "https://clubspark.englandathletics.org/RoberttownRoadRunners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The former standalone website was unavailable. ClubSpark provides club-specific information, but no founding date or historical athlete association. The official club location is on Church Lane, correcting the older Church Road listing. Confirm the meeting arrangements through the club form."
+    },
+    {
+      "slug": "rochdale-harriers-and-ac",
+      "url": "https://rochdaleharriers.org.uk/welcome-to-rochdale-harriers-a-c-2/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Contact the club before a trial. Junior places were full on the reviewed joining page. The historical archive could not be opened, so no new historical athlete claims are made. Kingsway Sports Arena, Turf Hill Road, is the principal training venue. Thursday senior and junior arrangements differ."
+    },
+    {
+      "slug": "rochdale-tri-club",
+      "url": "https://www.rochdaletriclub.com/how-it-all-began-",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The founding account says around 1981, so an exact founding-year field is left empty. Conflicting Thursday running times require confirmation. Swimming uses Middleton Arena and Chadderton Wellbeing Centre; other sessions have different starts. The old Wardle residential-style directory address is not presented as a training base."
+    },
+    {
+      "slug": "rochford-running-club",
+      "url": "https://rochfordrunningclub.org.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No sourced notable-member history was established. Course places and the day's meeting location require confirmation. The Rectory Road church location is one winter meeting point, not the start for every run. Consult the current schedule."
+    },
+    {
+      "slug": "rossendale-harriers-and-ac",
+      "url": "https://rossendaleharriers.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Marl Pits is the training base. The current contact page gives BB4 7SW, replacing the older BB4 7SN postcode."
+    },
+    {
+      "slug": "rother-valley-swallows",
+      "url": "https://www.rothervalleyswallows.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Published fee sections refer to different years. No supported notable-member history was established. Training uses Aston Academy and Aston Leisure Centre, with variable Sunday starts. The old Worksop residential-style address is not a confirmed training venue."
+    },
+    {
+      "slug": "rotherham-running-club",
+      "url": "https://www.rotherhamrunningclub.com/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Beginner-course dates and day/time inconsistencies need direct confirmation. No supported notable-member history was established. Sessions use changing Rotherham-area starts, Phoenix in Brinsworth and Herringthorpe Stadium. The older Mexborough pub address is not confirmed as a current training base."
+    },
+    {
+      "slug": "roundhay-runners",
+      "url": "https://roundhayrunners.co.uk/training/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Beginner courses are not currently promised by the FAQ. No supported founding date or notable-member history was established."
+    },
+    {
+      "slug": "royal-manor-of-portland-ac",
+      "url": "https://www.royalmanorac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The contact and joining links did not open during this review. No new email or telephone is inferred. The club history identifies the YMCA in Reforne as its Tuesday meeting point. Confirm the current timetable before travelling."
+    },
+    {
+      "slug": "royal-sutton-coldfield-athletics-club",
+      "url": "https://rscac.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The official website gives the Wyndley Lane clubhouse postcode as B73 6EB, correcting the older directory value."
+    },
+    {
+      "slug": "royal-wootton-bassett-hounds-rc",
+      "url": "https://www.royalwoottonbassetthounds.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Founding year and alumni remain unconfirmed; trial-period descriptions differ. The Sports Association on Brinkworth Road is the base, in Royal Wootton Bassett rather than Swindon."
+    },
+    {
+      "slug": "royston-runners",
+      "url": "https://www.roystonrunners.co.uk/history-of-royston-runners/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The membership email remains masked in the accessible page, so no address is guessed. Use the official joining page. The Heath Sports Centre on Baldock Road is the club base; monthly track sessions use Ridlins instead."
+    },
+    {
+      "slug": "royton-road-runners",
+      "url": "https://www.roytonroadrunners.co.uk/about-our-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history gives founding and affiliation dates separately. No supported notable-member entry was established. Royton Cricket Club, The Paddock, Bransdale Avenue, is the published meeting venue."
+    },
+    {
+      "slug": "rugeley-runners",
+      "url": "https://www.rugeleyrunners.co.uk/Cms/Spaces/PUBLIC/About%2BUs",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported notable-member history or new public email was established. Confirm beginner intake and current race dates."
+    },
+    {
+      "slug": "rising-brook-runners",
+      "url": "https://www.facebook.com/groups/rbrunners/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Only a Facebook-oriented listing and thin indexed references were recovered; substantive primary history/training evidence remains missing."
+    },
+    {
+      "slug": "rock-salt-runners",
+      "url": "https://www.rocksaltrunning.com/club",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official club page timed out; governing-body visit snippet alone was insufficient."
+    },
+    {
+      "slug": "rolls-royce-harriers",
+      "url": "https://www.rollsroyceharriers.com/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official home, about and history pages timed out or returned502. Indexed snippets were not substituted for opened sources."
+    },
+    {
+      "slug": "romsey-road-runners",
+      "url": "https://www.romseyroadrunners.co.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official home, training and membership pages returned403. No biography inferred from snippets."
+    },
+    {
+      "slug": "rothwell-harriers-and-ac",
+      "url": "https://rothwellharriers.org.uk/",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official homepage returned403 and substantive alternative primary club evidence was not recovered."
+    },
+    {
+      "slug": "rainford-runners-and-multi-sport-rrams",
+      "url": "https://rrams.co.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The club describes its beginnings but does not give a founding year in the reviewed pages. Running, pool swimming, seasonal open-water swimming and cycling have different starts. Consult the session listing rather than assuming the retained directory address is a universal meeting point."
+    },
+    {
+      "slug": "ramsbottom-running-club",
+      "url": "https://www.ramsbottomrunningclub.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding year or historical athlete association was established. Check club social updates for breaks and cancellations. The station is the Tuesday meeting point; Monday track sessions are at Market Street in Bury."
+    },
+    {
+      "slug": "ramsey-road-runners",
+      "url": "https://www.ramseyroadrunners.co.uk/copy-of-home",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The joining page still labels its fee information 2024. Younger junior places require an enquiry. Senior and junior groups have different Wednesday start times at One Leisure and the Abbey College grounds."
+    },
+    {
+      "slug": "rasen-running-club",
+      "url": "https://rasenrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No supported founding date or notable-member history was found. The proposed youth section is not presented as current provision. Rase Park is the normal start, but some runs meet elsewhere. Check the club schedule."
+    },
+    {
+      "slug": "rawmarsh-runners",
+      "url": "https://rawmarshrunners.wixsite.com/website/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Rosehill Victoria Park is the published contact location; confirm the start and time for the particular running, walking or children's group."
+    },
+    {
+      "slug": "reading-roadrunners",
+      "url": "https://readingroadrunners.org/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The contact page's malformed championship email and ambiguous Twitter label are not imported. No founding date is inferred from newsletter archive dates. Palmer Park is the track venue; Thursday social runs have varying starts. An induction booking is required before joining members' training."
+    },
+    {
+      "slug": "rebel-runners-medway",
+      "url": "https://rebelrunnersmedway.co.uk/results/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Medway Park is the Wednesday track venue. Team runs and beginner programmes have their own arrangements."
+    },
+    {
+      "slug": "red-rochford-endurance-and-distance-runners",
+      "url": "https://redsrunningclub.co.uk/about-reds/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No founding date or historical athlete association was established. Check current joining and affiliation charges directly with the club. Sessions have changing starts listed in the training calendar. The incomplete old directory street address is removed, not replaced with a private contact address."
+    },
+    {
+      "slug": "red-kite-runners",
+      "url": "https://redkiterunners.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The displayed redkiterunners1@gmail.com is retained as evidence; the mismatched info@demolink.org mailto target is excluded. No founding year is inferred from empty website counters. Swalwell Juniors Football Club is the usual start. Monthly social sessions can meet elsewhere."
+    },
+    {
+      "slug": "red-rose-road-runners",
+      "url": "https://www.redroseroadrunners.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The reviewed pages do not establish a founding year. Older fee and affiliation figures are not repeated as current prices. Training groups have different starts across Preston and South Ribble. The retained Lostock Lane directory address is not a universal meeting point."
+    },
+    {
+      "slug": "redhill-road-runners",
+      "url": "https://www.redhillroadrunners.com/members",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history page is predominantly scanned images; no founding year or historical athlete details were inferred from image captions. Club nights assemble at the Young People's Centre beside Redhill Leisure Centre."
+    },
+    {
+      "slug": "redway-runners",
+      "url": "https://www.redwayrunners.com/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership totals differ between club pages, so no current count is asserted. Runs use multiple locations around Milton Keynes. The retained Thomas Drive directory address is not a confirmed training start."
+    },
+    {
+      "slug": "reigate-priory-ac",
+      "url": "https://www.rpac.org.uk/about-rpac/club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The founding coaching group dates to 1974; affiliation is described as approximately 1976. Historical Holly Run winners are not automatically club members. Training uses Battlebridge, K2 and locations around Reigate and Redhill. The retained Blackstone Hill directory address is not established as a session venue."
+    },
+    {
+      "slug": "res-run-club",
+      "url": "https://runeatsleep.co.uk/ourstory/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm the meeting point for the selected session. The retained Bamburgh Avenue directory address is not a confirmed start for all runs."
+    },
+    {
+      "slug": "retford-ac",
+      "url": "https://www.retfordac.co.uk/history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The role email at the top of the homepage is used for junior enquiries; older named footer contacts and dated recruitment notices are not assumed current. Oaklands Playing Field, Caledonian Road, is the published training base. Confirm the section's arrangements before attending."
+    },
+    {
+      "slug": "ribble-valley-runners",
+      "url": "https://www.ribblevalleyrunners.co.uk/rvr-club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Wednesday and Thursday training uses Clitheroe Cricket Club; other activities have separate starts."
+    },
+    {
+      "slug": "richmond-and-zetland-harriers",
+      "url": "https://richmondzetlandharriers.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A historical video caption alone does not establish full athlete identities or membership periods; no notable-member entries are inferred from it. Training is advertised at Leyburn Road Athletics Stadium, Catterick Garrison. Juniors must enquire before attending."
+    },
+    {
+      "slug": "ripon-runners",
+      "url": "https://www.riponrunners.org.uk/about/welcome-to-ripon-runners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The welcome and membership pages differ about turning up without contact. The stricter advance-contact guidance is retained; inaccessible email links are not guessed. The clubhouse is shared with Ripon Rugby Club at Mallorie Park, HG4 2QD. Confirm first-visit arrangements in advance."
+    },
+    {
+      "slug": "riviera-racers",
+      "url": "https://rivieraracers.com/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership wording still describes twice-weekly training while the about page includes Thursday trails. Confirm the current timetable and application form with the club. Road and trail sessions meet at different Torbay locations. The retained Great Headland Crescent directory address is not a confirmed training start."
+    },
+    {
+      "slug": "roadhoggs-leicester-ac",
+      "url": "https://roadhoggs.org.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Oadby is the winter Wednesday base; Tuesday sessions meet at Victoria Park and summer Wednesday starts can vary."
+    },
+    {
+      "slug": "redcar-running-club",
+      "url": "https://www.redcarrunningclub.co.uk/",
+      "status": "deferred-unavailable",
+      "reason": "Official pages returned502 or failed to open. Search index says the website is no longer regularly monitored. No biography or current contact inferred from snippets."
+    },
+    {
+      "slug": "redditch-stars",
+      "url": "https://redditchstars.co.uk/",
+      "status": "deferred-source-too-thin",
+      "reason": "Opened current homepage supplies only a short invitation and generic supplier terms. Supplier address/email excluded; training and origins need primary evidence."
+    },
+    {
+      "slug": "regis-road-runners",
+      "url": "https://regisroadrunners.co.uk/",
+      "status": "deferred-source-rendering",
+      "reason": "Opened homepage returns a JavaScript shell. Official terms PDF opens but contains2020–21 fees and dated named contacts; useful historical evidence, insufficient current joining corroboration. No new current contacts taken from it."
+    },
+    {
+      "slug": "portsmouth-joggers",
+      "url": "https://www.pjc.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club nights meet in the Lakeside atrium; the club specifies car parks B5 or B6."
+    },
+    {
+      "slug": "portsmouth-triathletes",
+      "url": "https://portsmouthtriathletes.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Swimming, cycling and running use different venues. The retained Queen Elizabeth Country Park directory address is not a confirmed start for every session."
+    },
+    {
+      "slug": "potters-trotters",
+      "url": "https://potterstrotters.weebly.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The 2008 date records affiliation, not a separately established original founding date. Older downloadable membership forms should be checked with the club. Thursday evening groups meet at the Catalyst Building on the Leek Road campus. Daytime and weekend starts vary; confirm through the club."
+    },
+    {
+      "slug": "prestwich-ac",
+      "url": "https://www.prestwichac.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Pages differ on 5km versus approximately 8km readiness and show older and newer office-holder names. Use the stable role email and obtain approval before attending. Adult road runs use the tram-stop bridge; Bury track and junior field sessions are separate venues. The Heys directory address is not every group's meeting point."
+    },
+    {
+      "slug": "pudsey-pacers-rc",
+      "url": "https://www.pudseypacers.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The club identifies Pudsey Leisure Centre as its regular meeting point; contact membership before a first session."
+    },
+    {
+      "slug": "quantock-harriers",
+      "url": "https://www.quantockharriers.co.uk",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Tuesday trail and Thursday road starts vary. The Tudor Way directory address is not a confirmed regular training meeting point."
+    },
+    {
+      "slug": "queens-park-harriers",
+      "url": "https://www.queensparkharriers.org.uk/our-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Track training uses Willesden Sports Centre; social and long runs have separate starts."
+    },
+    {
+      "slug": "radcliffe-ac",
+      "url": "https://www.radcliffeac.org.uk/about-us",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Dumers Lane is the club base; alternate Wednesday track sessions use Bury Track, Market Street, BL9 9FX. Confirm the current schedule."
+    },
+    {
+      "slug": "raf-athletics",
+      "url": "https://www.rafcf.org.uk/sports/raf-athletics/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Service-wide association, not a single Marlow training group. The retained directory address is not a confirmed session venue; use the discipline enquiry route."
+    },
+    {
+      "slug": "pound-hill-pounders",
+      "url": "https://poundhillpounders.wordpress.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Usually Grattons Park, with occasional sessions elsewhere in Crawley and nearby woodland; confirm the session start."
+    },
+    {
+      "slug": "prudhoe-running-club",
+      "url": "https://prudhoeplodders.co.uk/about-plodders/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Training page retains pandemic-era wording. Confirm session times; Prudhoe Plodders is retained under the existing prudhoe-running-club canonical record. History records Highfield Park and Regents Drive. Neither establishes a current universal session start; confirm via the club or Spond rather than assuming the retained Ovingham address."
+    },
+    {
+      "slug": "purbeck-runners",
+      "url": "https://purbeckrunners.co.uk/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Joining guidance explicitly specifies adult membership and four-mile readiness, despite generic under-18 fields in the form. Beginners should enquire about separate courses. Wednesday groups meet around Swanage; monthly outings and Sunday trails have variable starts. The retained Royal British Legion address is not a universal meeting point."
+    },
+    {
+      "slug": "quakers-running-club",
+      "url": "https://www.quakersrunningclub.org.uk/beginners-group/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Displayed leadcoach@quakersrunningclub.org.uk and some underlying mail links to leadcoach@quakers.run differ; the former also has a matching mail link on the beginner page. No founding year established. Main sessions use Abbey Road Sports Field, DL3 8LR; the October 2026 timetable also lists Eastbourne track and a separate social-run start."
+    },
+    {
+      "slug": "queensbury-running-club",
+      "url": "https://queensburyrc.co.uk/mission-statement-2-3/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Generic homepage junior wording conflicts with an adult age statement. No junior eligibility claim or age correction made; confirm directly. Two different Instagram handles are linked; neither newly selected. Thursday groups use ARCH; Tuesday track coaching is at Horsfall Stadium."
+    },
+    {
+      "slug": "queer-running-club",
+      "url": "https://queerrunningclub.com/new-news",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Book through the current BEND timetable. Seasonal 'returns' notices do not establish active weekly sessions; no individual participant identities inferred. London and Brighton sessions have distinct venues. East London starts include Work in Progress, 1 Birkbeck Street, E2 6JY; the retained Brunswick East directory address is not a confirmed current start."
+    },
+    {
+      "slug": "race-hub",
+      "url": "https://www.racehub.uk/triathlon-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club page contains older fees and affiliations; no current fee or affiliation claim imported. Confirm current operation, eligibility and schedule with the published enquiry contact. Current business site describes Sileby; older club text mentions other training venues. Retained Markfield directory address is not verified as a current club start."
+    },
+    {
+      "slug": "radley-athletic-club",
+      "url": "https://radleyathletic.club/elementor-339/club_history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership is the consistent role contact. The site shows different secretary addresses and membership-holder names; no personal office-holder name selected. The Tilsley Park switchboard is not imported as a club phone."
+    },
+    {
+      "slug": "tuna-tc",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The 15 October 2026 league table is provisional until final review on 23 October. Its membership denominator is fixed at 31 December 2025 and is not a current club-size claim. Joining and training details require club confirmation. Craigavon is the directory area; no street address or regular training venue is established."
+    },
+    {
+      "slug": "qbe-running-club",
+      "url": "https://www.qbe.com/",
+      "status": "deferred-source-too-thin",
+      "reason": "Corporate insurer site does not establish current running-club training, origins or joining. Do not import insurance enquiry contacts."
+    },
+    {
+      "slug": "pudsey-runners",
+      "url": "https://pudseyrunners.co.uk/",
+      "status": "deferred-unavailable",
+      "reason": "Official site returned502 and web reader failed. Distinct canonical club from Pudsey Pacers and Pudsey and Bramley."
+    },
+    {
+      "slug": "pudsey-and-bramley-ac",
+      "url": "https://pudseybramley.com/",
+      "status": "deferred-source-integrity",
+      "reason": "Official homepage includes unrelated steroid promotional material. No unrelated links followed or content used; await clean primary corroboration."
+    },
+    {
+      "slug": "pewsey-vale-rc",
+      "url": "https://www.pewseyvalerunningclub.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Tuesday runs meet at the Vale Community Campus; the summer time trial uses a different start at Wilcot. Confirm the date and venue."
+    },
+    {
+      "slug": "phoenix-flyers-ac",
+      "url": "https://www.phoenixflyersac.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The website displays phoenixflyersathletics@gmail.com but its mail link points to info@phoenixflyersac.co.uk. The club also recommends its monitored Facebook group. Usually Framwellgate School Durham, with some New College Durham facilities; check the booked session in Spond."
+    },
+    {
+      "slug": "phoenix-striders",
+      "url": "https://www.phoenixstriders.org.uk/club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Aston Road is the winter meeting area. Summer evenings meet behind Miller & Carter in Langdon Hills; use the club's parking instructions, not the pub car park."
+    },
+    {
+      "slug": "pickering-running-club",
+      "url": "https://pickeringrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Training covers Malton, Pickering and rotating rural starts. Check the weekly run list; the retained Crabtree Drive directory address is not a training venue."
+    },
+    {
+      "slug": "pitsea-rc",
+      "url": "https://www.pitsearunningclub.org.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Wednesday runs meet at the Honey Pot, Festival Leisure Park, Basildon SS14 3TJ. The retained Wickford directory address is not the training start."
+    },
+    {
+      "slug": "plumstead-runners",
+      "url": "https://www.plumsteadrunners.co.uk/history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The listed sports-club telephone is for Wednesday evenings from 7pm; the website enquiry form is available for other questions."
+    },
+    {
+      "slug": "plymouth-falconers",
+      "url": "https://clubspark.englandathletics.org/PlymouthFalconers",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "George Park and Ride is the directory listing; ClubSpark gives a different Derriford contact address. Confirm the actual session start with the group."
+    },
+    {
+      "slug": "plymouth-harriers",
+      "url": "https://plymouthharriers.net/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Wednesday club runs meet at Central Park Community Sports Hub. Interval and track sessions use other venues; Mayflower Drive is not the published training base."
+    },
+    {
+      "slug": "plymouth-musketeers-running-club",
+      "url": "https://plymouthmusketeers.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Thursday club night uses Kings Tamerton Community Centre. The site's Trevithick Road and Newton Avenue directions differ; confirm the entrance before a first visit."
+    },
+    {
+      "slug": "plymouth-striders",
+      "url": "https://www.plymouthstriders.co.uk",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Meet in the Woolwell Community Centre car park, Darklake Lane, PL6 7TR. Monday is regular; enquire first about Thursdays."
+    },
+    {
+      "slug": "plymstock-road-runners",
+      "url": "https://plymstockroadrunners.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Thursday club night is at St Margaret Mary's church hall, Quarry Park Road, PL9 7BB; Monday and weekend venues differ."
+    },
+    {
+      "slug": "pocklington-runners",
+      "url": "https://www.pockrunners.uk/about-2",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The club meets at Pocklington Rugby Club, Feathers Field, Burnby Lane, Pocklington YO42 2QB."
+    },
+    {
+      "slug": "polegate-plodders",
+      "url": "https://www.polegateplodders.co.uk/about-us/club-history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm the Wednesday meeting point with the coaching team; the website does not provide a sufficiently precise fixed venue."
+    },
+    {
+      "slug": "pontefract-ac",
+      "url": "https://www.pontefractathletics.club/copy-of-become-a-member",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Track-and-field and road groups use different venues. Confirm Aspire/Pontefract Park road starts; Mill Hill Close is not a published training venue."
+    },
+    {
+      "slug": "ponteland-runners",
+      "url": "https://www.pontelandrunners.org.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Most sessions meet at Ponteland Leisure Centre; check the booking for the actual start, particularly social and longer runs."
+    },
+    {
+      "slug": "poole-ac",
+      "url": "https://pooleac.co.uk/about/history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Ashdown is the track-and-field headquarters; ask the appropriate section about its own training start."
+    },
+    {
+      "slug": "poplar-running-club",
+      "url": "https://poplar-rc.co.uk/pops/history",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Sessions meet around Loughborough; use the booked run's location rather than the retained Holt Drive directory address."
+    },
+    {
+      "slug": "portishead-r-c",
+      "url": "https://portisheadrunningclub.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The Hutch is the club base opposite the outdoor pool. Women's Wednesday runs meet at Parish Wharf; check each booked session."
+    },
+    {
+      "slug": "portslade-hedgehoppers",
+      "url": "https://portsladehedgehoppers.com/history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Training starts vary between local venues; consult the calendar rather than assuming Portslade Sports Centre for every run."
+    },
+    {
+      "slug": "pewsey-vale-rc",
+      "url": "https://www.pewseyvalerunningclub.org/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official timetable differs on first/second Thursday monthly time trial; exact week omitted."
+    },
+    {
+      "slug": "pickering-running-club",
+      "url": "https://pickeringrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Readiness guidance differs between5km and5miles; confirm appropriate group. Exact founding year not established."
+    },
+    {
+      "slug": "poole-ac",
+      "url": "https://pooleac.co.uk/about/history/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "An1897 original founding date is unsupported. History distinguishes1930s cycling club,1963 reform and post1981 reform. No single founding year added."
+    },
+    {
+      "slug": "os-runners",
+      "url": "https://osrunners.uk",
+      "status": "deferred-unavailable",
+      "reason": "15 October: homepage returned502; no substantive official club narrative obtained."
+    },
+    {
+      "slug": "pendle-trail-running-club",
+      "url": "https://www.pendletrailrunningclub.co.uk/",
+      "status": "deferred-thin-primary-narrative",
+      "reason": "15 October: HTTP200 response contained no readable content; search did not recover substantive primary club material."
+    },
+    {
+      "slug": "owls-ac",
+      "url": "https://owlsacrunners.org.uk/about-us-2/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official page dates foundation to1982; inconsistent secondary1981 date excluded. School-year session restrictions take precedence over general age-six welcome. School Street is not a confirmed training venue."
+    },
+    {
+      "slug": "oxford-city-ac",
+      "url": "https://oxfordcityac.com/history-of-the-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "1944 women,1946 men and1976 final merger separated; single founded_year left empty. Membership requires enquiry and capacity approval."
+    },
+    {
+      "slug": "oxford-tri",
+      "url": "https://www.oxfordtri.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Working official site recovered, foundation1988 supported. Detailed current timetable and training venues not available; old Wheatley correspondence-style address removed rather than treated as training. Public encoded membership email decoded; webmaster excluded."
+    },
+    {
+      "slug": "oxford-university-ac",
+      "url": "https://ouac.org/home",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Genuine club email visible and linked correctly on homepage; other page footer mailto:example@example.com excluded. Historical Olympic associations do not establish present membership."
+    },
+    {
+      "slug": "paddock-wood-ac",
+      "url": "https://www.paddockwoodac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior waiting list current; pages conflict on Mascalls/Putlands starts and parking. Older2021/22 fees excluded; venue confirmation requested."
+    },
+    {
+      "slug": "peterborough-and-nene-valley-ac",
+      "url": "https://www.pnv.org.uk/training",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Malformed pnv.org.com replaced with official pnv.org.uk. Contact page is a soft404; usable training/membership email page retained instead. Unnamed international alumni not invented."
+    },
+    {
+      "slug": "pennine-fell-runners",
+      "url": "https://www.penninefellrunners.co.uk/training/club_runs_information.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Early1980s origin does not establish exact founding year. Social runs have no designated leader; kit, map and personal responsibility retained."
+    },
+    {
+      "slug": "penistone-footpath-runners-and-athletic-club",
+      "url": "https://pfrac.co.uk/contact",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Main junior section12–17 distinguished from separate under12 Funetics enquiry. Supplier/website-admin contacts excluded."
+    },
+    {
+      "slug": "oxted-runners",
+      "url": "https://oxtedrunners.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "October11,2026 race date already past; not advertised as upcoming. Main club runs require8km/5-mile ability."
+    },
     {
       "slug": "northwich-running-club",
       "url": "https://www.entrycentral.com/northwichrunningclubmembership",
@@ -4284,24 +6005,24 @@
     "Batch34:19 new profiles across16 English clubs, Mallow and Ennis in Ireland, and Ormeau in Northern Ireland. Seven historical connections;17 website-contact records changed(9new),14 net contacts and13 social links. Hastings was already complete and excluded. No full-directory manual review or athlete identity claims.",
     "Batch35:20 profiles across17 English clubs, White Rock and Refail in Wales, and Tinahely in Ireland. Nine historical connections;20 contact/social records changed(12new),18 net contacts and16 social links. Coverage685/1,737(39.4%),289notable entries. This is a bounded editorial batch, not a full-directory manual review."
   ],
-  "previousPullRequest": 748,
+  "previousPullRequest": 749,
   "productionAuthorization": {
     "date": "2026-10-14",
     "instruction": "can you publish all and continue please",
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 748,
-    "mergeCommit": "c08123f78f99503db5613d8e7382f911ab49f4c0",
+    "previousPullRequest": 749,
+    "mergeCommit": "11a0f1362c20fd63846b64f46610d62080469c67",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
     "team": "athrecs-holding-page-set-up",
-    "status": "PR748 exact production READY; all20 changed live pages passed complete biography/contact/location/flag/registration/metadata assertions on14October2026.",
-    "lastConfirmedLiveCommit": "c08123f78f99503db5613d8e7382f911ab49f4c0",
-    "lastConfirmedLiveDeployment": "dpl_8kVdv98Z5Hq7mjMguRc8x587gxSX",
-    "lastConfirmedLiveProfiles": 685,
-    "lastConfirmedLiveNotableEntries": 289,
-    "mainProfilesAtStart": 685,
-    "clubProfilesWorkflow": 38642307498,
-    "qualityGateWorkflow": 38642307514
+    "status": "PR749 merged; exact production READY and all315 new live pages verified before batch54.",
+    "lastConfirmedLiveCommit": "11a0f1362c20fd63846b64f46610d62080469c67",
+    "lastConfirmedLiveDeployment": "dpl_A6aYcLW9jaLKL9kRwao3D8PXRF2C",
+    "lastConfirmedLiveProfiles": 1000,
+    "lastConfirmedLiveNotableEntries": 451,
+    "mainProfilesAtStart": 1000,
+    "clubProfilesWorkflow": 38746589952,
+    "qualityGateWorkflow": 38746589895
   }
 }
