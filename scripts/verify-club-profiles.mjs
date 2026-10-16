@@ -17,6 +17,23 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 87: recovered training sources, age eligibility and historical associations.
+  assert.equal(clubProfiles["sheffield-rc"].founded_year, 2006);
+  assert.equal(clubProfiles["kingswood-triathlon-club"].founded_year, 1986);
+  assert.equal(clubProfiles["thanet-ac"].founded_year, 2010);
+  for (const slug of ["uttoxeter-road-runners", "west-4-harriers"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("uttoxeter-road-runners").adult_only, false);
+  assert.equal(bySlug.get("uttoxeter-road-runners").address, "");
+  assert.equal(bySlug.get("kingswood-triathlon-club").city, "Kingswood");
+  assert.equal(bySlug.get("kingswood-triathlon-club").postcode, "");
+  assert.equal(bySlug.get("sheffield-rc").address_kind, "training");
+  assert.equal(bySlug.get("thanet-ac").address_kind, "training");
+  assert.equal(bySlug.get("thanet-ac").postcode, "");
+  assert.equal(bySlug.get("west-4-harriers").city, "Chiswick");
+  assert.ok(bySlug.get("thanet-ac").contacts.some(c => c.email === "thanetathleticsclub@gmail.com"));
+  assert.ok(bySlug.get("uttoxeter-road-runners").contacts.some(c => c.email === "membership@uttoxeterroadrunners.club"));
+  assert.match(clubProfiles["kingswood-triathlon-club"].biography.join(" "), /not a verified October timetable/);
+  assert.match(clubProfiles["west-4-harriers"].biography.join(" "), /exact founding year is left open/);
   // Batch 86: distinguish predecessor events, newer intake rules and stale schedules.
   assert.equal(clubProfiles["stock-exchange-ac"].founded_year, 1910);
   assert.equal(clubProfiles["formula-one-circuit-crew"].founded_year, 1998);

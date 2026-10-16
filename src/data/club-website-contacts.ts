@@ -3,6 +3,9 @@ import type { ClubSeed } from "./types";
 // Public club contact pages. Each added contact/link retains its source and actual check date.
 // Excludes supplier contacts, governing-body accounts and unconfirmed numeric social IDs.
 export const clubWebsiteContacts: Record<string, Partial<ClubSeed>> = {
+  "uttoxeter-road-runners": {"contact_url":"https://www.uttoxeterroadrunners.club/","contacts":[{"role":"Membership secretary","email":"membership@uttoxeterroadrunners.club","source_url":"https://www.uttoxeterroadrunners.club/","checked_at":"2026-10-16"},{"role":"Club chair","email":"chair@uttoxeterroadrunners.club","source_url":"https://www.uttoxeterroadrunners.club/","checked_at":"2026-10-16"}],"socials":[{"platform":"Facebook","url":"https://www.facebook.com/UttoxeterRoadRunners","source_url":"https://www.uttoxeterroadrunners.club/","checked_at":"2026-10-16"}]},
+  "kingswood-triathlon-club": {"contact_url":"https://kingswoodtri.com/join-us/","socials":[{"platform":"Facebook","url":"https://www.facebook.com/groups/kingswoodtriclub/","source_url":"https://kingswoodtri.com/join-us/","checked_at":"2026-10-16"},{"platform":"X","url":"https://twitter.com/KingswoodTri","source_url":"https://kingswoodtri.com/join-us/","checked_at":"2026-10-16"},{"platform":"Instagram","url":"https://www.instagram.com/kingswoodtri/","source_url":"https://kingswoodtri.com/join-us/","checked_at":"2026-10-16"}]},
+  "thanet-ac": {"contact_url":"https://www.thanetac.co.uk/join","contacts":[{"role":"Club and membership enquiries","email":"thanetathleticsclub@gmail.com","source_url":"https://www.thanetac.co.uk/join","checked_at":"2026-10-16"}]},
   "east-grinstead-and-district-ac": {"contact_url":"https://eastgrinsteadac.co.uk/about-us/"},
   "formula-one-circuit-crew": {"contact_url":"https://formulaonecc.clubbuzz.co.uk/join"},
   "blythe-bridge-running-club": {"contact_url":"https://clubspark.englandathletics.org/BlytheBridgeRunningClub/Contact"},
