@@ -54,6 +54,34 @@ function AthletePrivacyPage() {
       </div>
 
       <section className="space-y-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-8">
+        <div id="assistant-chat">
+          <NoticeSection title="AI assistant and chat transcripts">
+            <p>
+              When you send a message to the AthRecs AI assistant, we save the conversation,
+              selected language, timestamps and starting public page so authorised staff can review
+              support enquiries and improve the service. Recent messages are sent to OpenAI to
+              generate a reply. AI answers may be incorrect; the assistant cannot verify your
+              identity, claim results or change your account. This is not a live human chat, and
+              staff monitoring or a reply is not guaranteed.
+            </p>
+            <p className="mt-3">
+              Chats are anonymous unless you identify yourself in your messages. Do not send
+              passwords, sign-in codes, payment details or sensitive documents. A secure browser
+              cookie keeps your conversation available for up to seven days. Chat records expire
+              after 90 days and are removed on the next chat or staff history visit. Staff can
+              download or delete a transcript. We use these records to provide requested support and
+              prevent abuse; sending a message does not sign you up for marketing. A short-lived
+              hashed network identifier may be used for rate limits. Contact paul@athrecs.com to
+              request access or deletion, including the approximate time and topic of your
+              conversation so we can locate it.
+            </p>
+            <p className="mt-3">
+              If an Open WhatsApp link is available, it opens a separate conversation in WhatsApp.
+              Your website chat is not forwarded automatically, and WhatsApp messages are not
+              included in these website transcripts.
+            </p>
+          </NoticeSection>
+        </div>
         <div id="club-registration">
           <NoticeSection title="Club registration and representative verification">
             <p>

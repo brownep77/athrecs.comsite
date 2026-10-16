@@ -48,6 +48,9 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Verify AI chat privacy, transcripts and usage limits
+        run: node --experimental-strip-types scripts/verify-assistant.mjs
+
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
 
@@ -96,6 +99,9 @@ jobs:
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+
+      - name: Verify chat languages, mobile controls and transcript downloads
+        run: node scripts/verify-assistant-browser.mjs
 
       - name: Staff collection stats, access controls and responsive tables
         run: npm run verify:collection-stats -- --browser
