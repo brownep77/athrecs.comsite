@@ -21,7 +21,8 @@ export const regionalParticipationAndVenueProfiles: Record<string, ClubProfile> 
       "The website offers a separate annual cycling-club membership for group rides. People interested in running should ask which sessions and membership arrangements apply to them rather than assuming that cycling membership covers every activity. The shop provides a public telephone contact, but individual outings may start away from Stone."
     ],
     sources: [{ title: "VeloRunner shop and public contact", url: "https://www.velorunner.co.uk/" }, { title: "Published club activities", url: "https://www.velorunner.co.uk/event-list" }, { title: "Cycling club membership", url: "https://www.velorunner.co.uk/cycling/cycle-club" }],
-    location_note: "Emerald Way is the shop base; confirm the meeting point for each run or ride.",
+    corrections: { address_kind: "correspondence" },
+    location_note: "Emerald Way is the shop contact base, not a confirmed start for every activity; check the meeting point for each run or ride.",
     reviewed_at: "2026-10-16"
   },
   "wallasey-athletic-club": {
@@ -140,7 +141,8 @@ export const regionalParticipationAndVenueProfiles: Record<string, ClubProfile> 
       "The membership page provides adult, junior, concession and adult social options and directs applicants to an online joining service. Prospective members should confirm which sessions suit their age and experience, along with the seasonal meeting point and any separate session arrangements. The reference to training since 2014 is not treated as documentary proof of a formal incorporation date."
     ],
     sources: [{ title: "Club introduction", url: "https://www.wealdtriclub.design/" }, { title: "Training venues", url: "https://www.wealdtriclub.design/services-5" }, { title: "Membership options", url: "https://www.wealdtriclub.design/memberships" }],
-    location_note: "Swimming and running use different venues around Cranbrook and the Weald; confirm the current seasonal arrangements before travelling.",
+    corrections: { address: "", postcode: "", location_precision: "area-only" },
+    location_note: "Swimming and running use different venues around Cranbrook and the Weald; the older directory contact address is not established as a training venue. Confirm the current seasonal arrangements before travelling.",
     reviewed_at: "2026-10-16"
   },
   "wearside-triathlon-club": {
@@ -151,6 +153,8 @@ export const regionalParticipationAndVenueProfiles: Record<string, ClubProfile> 
       "The club describes structured training alongside social rides, group runs and open-water swimming. Its website was being rebuilt when checked and did not provide a complete current timetable or a confirmed public training address. Prospective members should obtain the latest session and joining arrangements from the club before travelling; the brief introduction alone does not establish current availability for every age group or discipline."
     ],
     sources: [{ title: "Club introduction and website redevelopment notice", url: "https://wearsidetriathlon.co.uk/" }],
+    corrections: { address: "", postcode: "", location_precision: "area-only" },
+    location_note: "The rebuilt website does not establish a public training venue; the older directory address is not presented as a session location.",
     contact_note: "The club website is being rebuilt; confirm current joining arrangements and session venues directly.",
     reviewed_at: "2026-10-16"
   },
@@ -238,7 +242,7 @@ export const regionalParticipationAndVenueProfiles: Record<string, ClubProfile> 
       "New athletes are encouraged to find the appropriate coaching group and discuss trying sessions before joining. The website's contact form routes enquiries to the relevant club function. Because training is distributed across several facilities, confirm the group and venue in advance rather than assuming every session takes place at the main track."
     ],
     sources: [{ title: "History, activities and training venues", url: "https://www.westcheshireac.co.uk/about/" }, { title: "Club enquiry form", url: "https://www.westcheshireac.co.uk/contact/" }],
-    corrections: { address: "Ellesmere Port Sports Village, Ellesmere Port, CH65 9LB", postcode: "CH65 9LB", address_kind: "training" },
+    corrections: { city: "Ellesmere Port", address: "Ellesmere Port Sports Village, Ellesmere Port, CH65 9LB", postcode: "CH65 9LB", address_kind: "training" },
     location_note: "Ellesmere Port Sports Village is one training venue; additional sessions use Cheshire County Sports Club and Northgate Arena in Chester.",
     reviewed_at: "2026-10-16"
   }
