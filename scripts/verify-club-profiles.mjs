@@ -17,6 +17,25 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 88: predecessor dates, separate programmes and non-postal venues.
+  assert.equal(clubProfiles["striders-of-croydon"].founded_year, 1982);
+  assert.equal(clubProfiles["vale-royal-ac"].founded_year, 1994);
+  assert.equal(clubProfiles["widnes-running-club"].founded_year, 2016);
+  assert.equal(clubProfiles["windsor-slough-eton-and-hounslow-ac"].founded_year, 1948);
+  for (const slug of ["rothwell-harriers-and-ac", "team-kennet-triathlon-and-ac"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("rothwell-harriers-and-ac").city, "Rothwell");
+  assert.equal(bySlug.get("rothwell-harriers-and-ac").address, "");
+  assert.equal(bySlug.get("vale-royal-ac").postcode, "CW7 2PT");
+  assert.equal(bySlug.get("widnes-running-club").postcode, "WA8 7DW");
+  assert.equal(bySlug.get("windsor-slough-eton-and-hounslow-ac").city, "Eton");
+  assert.equal(bySlug.get("striders-of-croydon").address_kind, "clubhouse");
+  assert.deepEqual(bySlug.get("striders-of-croydon").sports, ["Running", "Athletics"]);
+  for (const slug of ["vale-royal-ac", "widnes-running-club", "team-kennet-triathlon-and-ac", "windsor-slough-eton-and-hounslow-ac"]) assert.equal(bySlug.get(slug).address_kind, "training");
+  assert.match(clubProfiles["vale-royal-ac"].location_note, /not a postal address/);
+  assert.match(clubProfiles["team-kennet-triathlon-and-ac"].biography.join(" "), /once a place has been offered/);
+  assert.match(clubProfiles["widnes-running-club"].biography.join(" "), /without giving a date/);
+  assert.ok(bySlug.get("windsor-slough-eton-and-hounslow-ac").contacts.some(c => c.email === "membership-enquiries@wseh.co.uk"));
+  assert.equal(bySlug.get("team-kennet-triathlon-and-ac").contacts.filter(c => c.email).length, 0);
   // Batch 87: recovered training sources, age eligibility and historical associations.
   assert.equal(clubProfiles["sheffield-rc"].founded_year, 2006);
   assert.equal(clubProfiles["kingswood-triathlon-club"].founded_year, 1986);
@@ -252,7 +271,7 @@ try {
   assert.match(clubProfiles["teesdale-ac"].contact_note, /No current Couch to 5K/);
   assert.ok(bySlug.get("telford-ac").contacts.some(c => c.email === "training@telfordac.uk"));
   assert.ok(bySlug.get("team-manvers").contacts.some(c => c.email === "tri@mwbc.org.uk"));
-  for (const slug of ["team-devizes-moonrakers-ac", "team-kennet-triathlon-and-ac", "tetbury-dolphins-running-club"]) assert.equal(clubProfiles[slug], undefined);
+  for (const slug of ["team-devizes-moonrakers-ac", "tetbury-dolphins-running-club"]) assert.equal(clubProfiles[slug], undefined);
   // Batch 66: supported training bases, distinct clubs and qualified capacity.
   assert.equal(clubProfiles["surrey-walking-club"].founded_year, 1899);
   assert.equal(clubProfiles["swaledale-runners"].founded_year, 1986);
@@ -290,7 +309,7 @@ try {
   assert.ok(bySlug.get("stevenage-phoenix-running-club").contacts.some(c => c.email === "runners@stevenagephoenix.org.uk"));
   assert.ok(!bySlug.get("stroud-and-district-ac").contacts.some(c => c.email?.endsWith("@connectmy.club")));
   // Stock Exchange history was recovered in batch 86; Croydon remains deferred.
-  assert.equal(clubProfiles["striders-of-croydon"], undefined);
+  // Striders' primary club pages were recovered in batch 88; see origin checks above.
   // Batch 64: distinct clubs, qualified dates and session-specific venues.
   assert.equal(clubProfiles["spenborough-and-dist-ac"].founded_year, 1965);
   assert.equal(clubProfiles["st-albans-ac"].founded_year, 1989);

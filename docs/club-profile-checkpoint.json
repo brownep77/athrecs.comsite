@@ -1,62 +1,101 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch87",
+  "lastEditorialBatch": "2026-10-16-batch88",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–87 add223 biographies/108 associations in draft. Assembled totals1514/1737 and747 associations are not live totals. No production publication in batch87.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–88 add229 biographies/116 associations in draft. Assembled totals1520/1737 and755 associations are not live totals. No production publication in batch88.",
   "completedProfileSlugs": [
-    "sheffield-rc",
-    "uttoxeter-road-runners",
-    "kingswood-triathlon-club",
-    "thanet-ac",
-    "west-4-harriers"
+    "rothwell-harriers-and-ac",
+    "striders-of-croydon",
+    "vale-royal-ac",
+    "team-kennet-triathlon-and-ac",
+    "widnes-running-club",
+    "windsor-slough-eton-and-hounslow-ac"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1514,
-    "notableMemberEntries": 747,
-    "clubsWithContacts": 1167,
-    "contactEntries": 1958,
-    "clubsWithEmail": 1128,
-    "clubsWithPhone": 177,
+    "extendedProfiles": 1520,
+    "notableMemberEntries": 755,
+    "clubsWithContacts": 1170,
+    "contactEntries": 1962,
+    "clubsWithEmail": 1129,
+    "clubsWithPhone": 179,
     "clubsWithSocials": 1202,
     "socialLinks": 2528,
-    "websiteContactRecords": 1474
+    "websiteContactRecords": 1479
   },
   "batchChanges": {
-    "extendedProfilesAdded": 5,
-    "notableMemberEntriesAdded": 5,
-    "contactOrSocialRecordsChanged": 3,
-    "newWebsiteContactRecords": 3,
+    "extendedProfilesAdded": 6,
+    "notableMemberEntriesAdded": 8,
+    "contactOrSocialRecordsChanged": 5,
+    "newWebsiteContactRecords": 5,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 3,
-    "netSocialLinks": 4,
+    "netContactEntries": 4,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript and safe build passed; migration/publication skipped. Production-build page assertions and exact-head workflow/preview evidence are recorded in the audit and PR756. Local rendering is not hosted verification."
+    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build passed; migration/publication skipped. All six actual production-build pages returnedHTTP200 and passed biography, contact/social, location/flag, registration, title/description/canonical and SportsOrganization JSON-LD assertions. Exact-head workflow/preview evidence follows in PR756. Local rendering is not hosted verification."
   },
   "nextCandidateSlugs": [
-    "pudsey-runners",
-    "billericay-striders",
     "southampton-triathlon-club",
-    "milocarian-ac",
-    "athletics-ni-st-annes-ac"
+    "athletics-ireland-bailieboro-a-c",
+    "ventoux-triathlon-club",
+    "zoom-tri-club-bournemouth",
+    "south-cambridge-striders"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and active writer before edits.",
-    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–87 add223 biographies/108 associations in draft. Assembled totals1514/1737 and747 associations are not live totals. No production publication in batch87.",
-    "Batch87 moduleci seedv87 adds five biographies, five dated editorial associations, three public emails, four club-published social links and three website-contact records.",
-    "Sheffield EIS confirmed training base; time/pace text conflicts. Uttoxeter16+ eligibility confirmed; old Leisure Centre address removed and session starts vary. Festival intended beneficiaries do not establish paid donations.",
-    "Kingswood1986 origins recovered from non-www pages; June2026 calendar is not October confirmation. Family membership paused and contact page429. Social destinations are club-linked, not independently inspected.",
-    "Thanet2010 origins and Royal Harbour Academy training confirmed; campus access/postcode unconfirmed. West4 Chiswick confirmed, but inconsistent2024 founding wording and unavailable current sessions/contact remain.",
-    "Pudsey Bowling Club confirms incorporating Pudsey Runners; bowling club1910 founding must not be assigned to runners, nor venue contacts unqualified. Running-specific narrative remains insufficient.",
-    "Billericay and Southampton return empty bodies; Milocarian chairman2020/21 PDF inaccessible. Meads timeout; Boalloy truck-company material unrelated. Browser Use fallback unavailable for insufficient credits, no retries or paid changes made.",
-    "Batch86 dedicated workflow and full quality gate both confirmed successful. Preserve prior source gaps, including New Ross/Island provisional league standings until23October. No whole-directory manual review."
+    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–88 add229 biographies/116 associations in draft. Assembled totals1520/1737 and755 associations are not live totals. No production publication in batch88.",
+    "Batch88 modulecj seedv88 adds six biographies, eight historical/dated associations, two public role emails, two scoped enquiry phones and five website-contact records. Check dates use16OctoberUTC (17OctoberLondon). No social additions or governing-directory re-dating.",
+    "Rothwell's homepage403 but EA September2026 awards, RunTogether and primary canal-race/charity accounts support profile. Clubhouse street and foundation unresolved; Castleford street removed. GroupB pace is not club-wide eligibility.",
+    "Striders of Croydon co.uk history is readable but older affiliation/time text remains; use contact form to confirm.2026 Switchback is a dated edition, not an open-entry promise. Running/athletics replaces unsupported multisport tags.",
+    "Vale Royal formed1April1994 by merger. Knights Grange explicitly not postal. Under10 waiting list from8; dated2014 Andy Carter association is not a current-coach assertion.",
+    "Team Kennet modern athletics section dates2000, not whole-club foundation. POBox correspondence only; schools telephone specifically scoped. Masked emails not reconstructed; swimming/cycling sessions unresolved.",
+    "Widnes2016 community origin and2026 anniversary confirmed. HighfieldRoad school training replaces oldUptonLane; starts vary. NextC25K date unknown. Earlier council email/source date preserved.",
+    "WSEH1948 Eton predecessor and2000 present-name merger distinguished. Separate TrackStart is not automatic membership. Phone inconsistent across fetches excluded; four associations historical/datestamped.",
+    "Batch87 Club profiles38974681715 and quality38974681676 now confirmed successful. Main aa82cc37980f808668764513cf74e7fb309e98d8 inspected: PR base111b56a is an older ancestor, not newer main (corrects prior PR note).",
+    "Bailieboro Facebook throttled; unrelated GAA history excluded. Ventoux French club is not NI club. Southampton/Zoom bodies empty; SouthCambridge403. Preserve older gaps including NewRoss/Island provisional standings until23October. No whole-directory manual review."
   ],
   "sourceGaps": [
+    {
+      "slug": "rothwell-harriers-and-ac",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Main website403; recovered EA award, club booking and organiser/charity sources. Foundation, current general contact and clubhouse street unresolved; GroupB specifics not all-club entry rules.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "striders-of-croydon",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Recovered co.uk club history/contact and2026 Switchback organiser page. Older membership/affiliation/timetable wording not asserted current; no named alumni confirmed.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "vale-royal-ac",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Recovered official history/training/contact/membership. Knights Grange not postal; seasonal venues and under10 waiting list qualified.2014 coach association historical.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "team-kennet-triathlon-and-ac",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Recovered www.teamkennet.co.uk primary pages.2000 modern athletics section not a whole-club foundation. Masked emails excluded; school-specific phone only; current swim/cycle details unresolved.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "widnes-running-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Recovered club and EA2026 anniversary narrative. School training address corrected; next beginner intake undated. Council-sourced email and original check date preserved.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "windsor-slough-eton-and-hounslow-ac",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Recovered non-www WSEH pages and league history.1948predecessor/2000currentname qualified. SeparateTrackStart distinguished; inconsistent phone not adopted; named athletes historical.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "blythe-bridge-running-club",
       "status": "profile-added-qualified-source",
@@ -532,13 +571,6 @@
       "checkedAt": "2026-10-16"
     },
     {
-      "slug": "widnes-running-club",
-      "status": "contact-only-recovery",
-      "reason": "Active Halton lists widnesrunningclub@gmail.com. No full biography from this thin directory entry.",
-      "url": "https://activehalton.co.uk/club-halton/sports/all-clubs/",
-      "checkedAt": "2026-10-16"
-    },
-    {
       "slug": "widnes-wasps-ladies-r-c",
       "status": "contact-only-recovery",
       "reason": "Active Halton lists enquiries@widneswasps.co.uk; not merged with Widnes Running Club. Programme/history still needed.",
@@ -828,12 +860,6 @@
       "checkedAt": "2026-10-16"
     },
     {
-      "slug": "windsor-slough-eton-and-hounslow-ac",
-      "status": "source-unreadable-batch72",
-      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
-      "checkedAt": "2026-10-16"
-    },
-    {
       "slug": "wells-city-harriers",
       "status": "conflicting-series-history",
       "reason": "Who-we-are and history pages disagree on the first Street5K series year; omitted. Founder first name appears as Berni/Bernie in club materials, using Bernie from narrative.",
@@ -917,11 +943,6 @@
     },
     {
       "slug": "vale-of-aylesbury-ac",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
-    },
-    {
-      "slug": "vale-royal-ac",
       "status": "deferred-unreadable-primary-source",
       "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
     },
@@ -1027,12 +1048,6 @@
       "reason": "16 October 2026: Home and history pages timed out. Existing sourced fields retained; no new biography."
     },
     {
-      "slug": "team-kennet-triathlon-and-ac",
-      "url": "https://teamkennet.co.uk/",
-      "status": "deferred-unreadable-club-source",
-      "reason": "16 October 2026: Legacy .com was unreadable; new official .co.uk about, history and contact pages returned403. Access restrictions respected. Existing sourced fields retained; no new biography."
-    },
-    {
       "slug": "tetbury-dolphins-running-club",
       "url": "https://groups.runtogether.co.uk/TetburyDolphinsRunningClub",
       "status": "deferred-unreadable-club-source",
@@ -1093,12 +1108,6 @@
       "status": "profile-added-qualified-source",
       "reason": "Official history recovered: 1910 club formation differs from the 1903 predecessor walk. Current general contact, admission policy and weekly venue unresolved; Yahoo Groups and archive-admin email excluded.",
       "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "striders-of-croydon",
-      "url": "https://www.stridersofcroydon.org.uk/",
-      "status": "deferred-unreadable-club-source",
-      "reason": "Club pages returned errors; search-discovered magazines were not read and are not evidence."
     },
     {
       "slug": "steel-city-striders-rc",
@@ -2140,12 +2149,6 @@
       "url": "https://www.rocksaltrunning.com/club",
       "status": "deferred-unavailable-or-thin",
       "reason": "Official club page timed out; governing-body visit snippet alone was insufficient."
-    },
-    {
-      "slug": "rothwell-harriers-and-ac",
-      "url": "https://rothwellharriers.org.uk/",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Official homepage returned403 and substantive alternative primary club evidence was not recovered."
     },
     {
       "slug": "rainford-runners-and-multi-sport-rrams",
