@@ -1,92 +1,236 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch64",
+  "lastEditorialBatch": "2026-10-16-batch65",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1211/1737 assembled biographies and 594 sourced associations; 211 biographies and 143 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
+  "publication": "1231/1737 assembled biographies and 602 sourced associations; 231 biographies and 151 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "spa-striders",
-    "spectrum-striders",
-    "spenborough-and-dist-ac",
-    "sphinx-ac",
-    "springfield-striders-rc",
-    "squirrels-running-group",
-    "sri-chinmoy-marathon-team",
-    "ss-athletics",
-    "st-albans-ac",
-    "st-albans-striders",
-    "st-austell-running-club",
-    "st-bees-triers",
-    "st-helens-striders",
-    "st-helens-sutton-ac",
-    "st-marys-university-athletics-club",
-    "st-neots-riverside-runners",
-    "st-neots-triathlon-club",
-    "st-theresas-a-c",
-    "stainland-lions-running-club",
-    "stamford-striders"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1211,
-    "notableMemberEntries": 594,
-    "clubsWithContacts": 1014,
-    "contactEntries": 1699,
-    "clubsWithEmail": 985,
-    "clubsWithPhone": 140,
-    "clubsWithSocials": 1159,
-    "socialLinks": 2436,
-    "websiteContactRecords": 1304
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 13,
-    "contactOrSocialRecordsChanged": 18,
-    "newWebsiteContactRecords": 16,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 17,
-    "netSocialLinks": 3,
-    "unsafeWebsitesSuppressed": 0
-  },
-  "validationBeforeCommit": {
-    "status": "Sources read on 16 October 2026 UTC. Parent 50529be30040f9480cf265082f7ac93f9c176899 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38828709647 and quality gate38828709612 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All 20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head workflow and preview evidence will be recorded in PR755 after commit."
-  },
-  "nextCandidateSlugs": [
     "steel-city-striders-rc",
     "stevenage-and-north-herts-ac",
     "stevenage-phoenix-running-club",
     "steyning-ac",
     "stilton-striders",
-    "stock-exchange-ac",
     "stockport-tri-club",
     "stocksbridge-running-club",
     "stocksfield-striders",
     "stockton-striders-ac",
     "stoke-f-i-t",
-    "stone-master-marathoners",
     "stonehenge-striders-running-club",
     "stopsley-striders",
     "storm-plymouth",
     "stourbridge-rc",
-    "stowmarket-striders-rc",
     "stratford-upon-avon-ac",
     "street-striders",
-    "striders-of-croydon"
+    "stroud-and-district-ac",
+    "stubbington-green-runners",
+    "styal-running-club",
+    "sudbury-court-running-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1231,
+    "notableMemberEntries": 602,
+    "clubsWithContacts": 1026,
+    "contactEntries": 1724,
+    "clubsWithEmail": 998,
+    "clubsWithPhone": 140,
+    "clubsWithSocials": 1164,
+    "socialLinks": 2447,
+    "websiteContactRecords": 1314
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 8,
+    "contactOrSocialRecordsChanged": 15,
+    "newWebsiteContactRecords": 10,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 25,
+    "netSocialLinks": 11,
+    "unsafeWebsitesSuppressed": 1
+  },
+  "validationBeforeCommit": {
+    "status": "Sources read on 16 October 2026 UTC. Parent f1c2c2e32544d6bb9eb08c7eb85355a253154bd9 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38834754003 and quality gate38834754029 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All 20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head CI and preview evidence will be recorded in PR755 after commit."
+  },
+  "nextCandidateSlugs": [
+    "sudbury-joggers",
+    "sunderland-harriers-and-ac",
+    "sunderland-strollers",
+    "surrey-walking-club",
+    "sutton-in-ashfield-harriers-and-ac",
+    "sutton-runners",
+    "sutton-striders",
+    "swale-combined-ac",
+    "swale-tri-club",
+    "swaledale-runners",
+    "swanley-and-district-ac",
+    "swindon-allstars",
+    "swindon-harriers",
+    "swindon-striders",
+    "swinton-running-club",
+    "tadcaster-harriers",
+    "tadley-runners",
+    "tadworth-ac",
+    "tamar-trotters",
+    "tamworth-ac"
   ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch64 adds20 profiles in club-profiles-bl.ts. Preserve sourced fields and use guarded remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–64 remain draft; no publication authorized.",
-    "Remaining non-English candidates retain source gaps. Recent batches covered Irish triathlon and Welsh school districts; revisit those gaps when primary evidence is available.",
-    "St Austell Athletes and St Mary's Richmond remain deferred: neither has sufficient readable club narrative. Keep them distinct from STARC and the university student club.",
-    "Stadium Runners' homepage was inaccessible during a bounded alternative check. Main next queue starts Steel City Striders; retry Stadium separately when source access improves.",
-    "Riverside Runners' history says1987 but its1996 section describes a tenth anniversary. Founding year stays empty. Spenborough's junior waiting list was closed at review.",
-    "St Mary's student club is separate from its Endurance Performance and Coaching Centre and Richmond community club. Do not transfer university alumni into club membership.",
-    "St Neots Triathlon is independent of NiceTri Events. Retain UK scope for the Sri Chinmoy directory entry, with separate race venues and London race-specific phone."
+    "Batch65 adds20 profiles in club-profiles-bm.ts. Preserve sourced fields and use guarded remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–65 remain draft; no publication authorized.",
+    "Recent rotations covered Irish triathlon and Welsh school districts. Revisit non-English source gaps when primary evidence is readable; do not repeat completed batches.",
+    "Stock Exchange AC, Stone Master Marathoners, Stowmarket Striders and Striders of Croydon remain deferred because primary narrative was unreadable. Main queue resumes Sudbury Joggers.",
+    "Stockton Striders' old .org.uk domain serves unrelated gambling content; the club's .com website is used. Stonehenge's malformed website is replaced with its working club domain.",
+    "Stevenage and North Herts under-18 waiting lists were closed at review. Confirm capacity and do not infer membership from coaching or founder associations.",
+    "Sudbury Court now meets in Wembley; its old Ruislip directory address is not a training base. No postcode guessed. Steel City's retained address is also unconfirmed as training.",
+    "Current-contact review does not reconfirm Stevenage Phoenix's older phone. Masked emails, venue operators and ConnectMyClub supplier contacts remain excluded."
   ],
   "sourceGaps": [
+    {
+      "slug": "stock-exchange-ac",
+      "url": "https://stockexchangeac.org/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Club website timed out; search snippets and secondary professional-network references are insufficient for a sourced history."
+    },
+    {
+      "slug": "stone-master-marathoners",
+      "url": "https://www.stonemm.com/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Club pages were inaccessible; no biography drafted."
+    },
+    {
+      "slug": "stowmarket-striders-rc",
+      "url": "https://www.stowmarketstriders.org.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Club website could not be read; no biography drafted."
+    },
+    {
+      "slug": "striders-of-croydon",
+      "url": "https://www.stridersofcroydon.org.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "Club pages returned errors; search-discovered magazines were not read and are not evidence."
+    },
+    {
+      "slug": "steel-city-striders-rc",
+      "url": "https://www.sientries.co.uk/event.php?event_id=17136",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Detailed history and coaching pages returned only a redirect. The membership email was masked, so no address or named athlete association is inferred."
+    },
+    {
+      "slug": "stevenage-and-north-herts-ac",
+      "url": "https://www.snhac.org.uk/about.php",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Under-18 waiting lists were closed at review. The site's age thresholds differ between pages, so confirm eligibility directly. Direct contacts are geographically restricted; use the public enquiry form."
+    },
+    {
+      "slug": "stevenage-phoenix-running-club",
+      "url": "https://www.stevenagephoenix.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and historical members remain unconfirmed. The previously sourced phone is retained with its original check date; it was not displayed on the contact page read in this review."
+    },
+    {
+      "slug": "steyning-ac",
+      "url": "https://www.steyningac.co.uk/about-steyning-ac/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Junior attendance requires coach confirmation. The reviewed race-walking overview did not identify its international athletes by name."
+    },
+    {
+      "slug": "stilton-striders",
+      "url": "https://www.stiltonstriders.co.uk/club-history-2/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The retained directory address is not established as a session venue. Ask for the current meeting point."
+    },
+    {
+      "slug": "stockport-tri-club",
+      "url": "https://www.stockporttriclub.co.uk/about",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership page still showed April 2025–March 2026. Existing enquiry email and social provenance retained, without claiming a fresh email confirmation."
+    },
+    {
+      "slug": "stocksbridge-running-club",
+      "url": "https://stocksbridgerunningclub.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The weekly page gives differing distance guidance. Discuss suitability with the club; proposed beginner sessions are not treated as an active programme."
+    },
+    {
+      "slug": "stocksfield-striders",
+      "url": "https://stocksfieldstriders.chessck.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No direct role email, telephone or named historical athlete was established from the pages read."
+    },
+    {
+      "slug": "stockton-striders-ac",
+      "url": "https://stocktonstridersac.com/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The former .org.uk website was replaced after it served unrelated gambling material. No contact or payment details from that page are imported."
+    },
+    {
+      "slug": "stoke-f-i-t",
+      "url": "https://www.stokefit.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and historical athlete associations remain unconfirmed."
+    },
+    {
+      "slug": "stonehenge-striders-running-club",
+      "url": "https://www.stonehengestriders.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The homepage's explicit January 2020 origin is used, not its 2019 footer copyright or the team's approximate personal chronology."
+    },
+    {
+      "slug": "stopsley-striders",
+      "url": "https://www.stopsleystriders.org.uk/how-to-join/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Confirm the current meeting room and arrival time at Inspire; the website contains differing instructions. No new individual performance record is inferred."
+    },
+    {
+      "slug": "storm-plymouth",
+      "url": "https://www.englandathletics.org/news/a-club-committed-to-including-everyone-south-west-club-of-the-year-storm-plymouth/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Team App required JavaScript and did not expose a readable current timetable or role contact. Founding date and named historical athletes remain unset."
+    },
+    {
+      "slug": "stourbridge-rc",
+      "url": "https://srclub.co.uk/about-stourbridge-running-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "A founding year and named historical athlete associations remain unconfirmed. Check the current calendar for alternate-Friday track sessions."
+    },
+    {
+      "slug": "stratford-upon-avon-ac",
+      "url": "https://stratfordac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No named historical athlete is inferred from general competition claims. The road-running detail page was blocked by a verification screen."
+    },
+    {
+      "slug": "street-striders",
+      "url": "https://streetstriders.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current fees should be checked with the club; no named competitive alumni were established."
+    },
+    {
+      "slug": "stroud-and-district-ac",
+      "url": "https://stroudac.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "The history page had no readable historical narrative beyond its title, so no named alumni are added. ConnectMyClub's Kenilworth address and email belong to the supplier."
+    },
+    {
+      "slug": "stubbington-green-runners",
+      "url": "https://www.stubbingtongreenrunners.net/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Membership totals differ between pages and are omitted. Some training notices retain older dates; use the current rolling schedule before travelling."
+    },
+    {
+      "slug": "styal-running-club",
+      "url": "https://www.styalrunningclub.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "No named founding members or historical athlete associations were established from the pages read."
+    },
+    {
+      "slug": "sudbury-court-running-club",
+      "url": "https://www.sudburycourt.org.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Published Tuesday arrival times differ slightly. No precise postcode, current membership total or historical governing-body wording is inferred."
+    },
     {
       "slug": "st-austell-athletes-running-club",
       "url": "https://staustellathletes.wixsite.com/",

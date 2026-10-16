@@ -17,6 +17,22 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 65: current club sites, supported venues and qualified joining capacity.
+  assert.equal(clubProfiles["steel-city-striders-rc"].founded_year, 1982);
+  assert.equal(clubProfiles["stockport-tri-club"].founded_year, 2014);
+  assert.equal(clubProfiles["stonehenge-striders-running-club"].founded_year, 2020);
+  assert.equal(bySlug.get("stockton-striders-ac").website, "https://stocktonstridersac.com/");
+  assert.equal(bySlug.get("stevenage-and-north-herts-ac").postcode, "SG2 9QZ");
+  assert.equal(bySlug.get("stopsley-striders").postcode, "LU2 8DD");
+  assert.equal(bySlug.get("sudbury-court-running-club").city, "Wembley");
+  assert.equal(bySlug.get("sudbury-court-running-club").postcode, "");
+  assert.equal(bySlug.get("sudbury-court-running-club").location_precision, "area-only");
+  assert.equal(bySlug.get("stonehenge-striders-running-club").city, "Amesbury");
+  assert.equal(bySlug.get("steyning-ac").address_kind, "clubhouse");
+  assert.match(clubProfiles["stevenage-and-north-herts-ac"].contact_note, /waiting lists were closed/);
+  assert.ok(bySlug.get("stevenage-phoenix-running-club").contacts.some(c => c.email === "runners@stevenagephoenix.org.uk"));
+  assert.ok(!bySlug.get("stroud-and-district-ac").contacts.some(c => c.email?.endsWith("@connectmy.club")));
+  for (const slug of ["stock-exchange-ac", "stone-master-marathoners", "stowmarket-striders-rc", "striders-of-croydon"]) assert.equal(clubProfiles[slug], undefined);
   // Batch 64: distinct clubs, qualified dates and session-specific venues.
   assert.equal(clubProfiles["spenborough-and-dist-ac"].founded_year, 1965);
   assert.equal(clubProfiles["st-albans-ac"].founded_year, 1989);
