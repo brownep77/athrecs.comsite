@@ -121,6 +121,30 @@ try {
   console.log('PASS: last public result withdrawal/restoration immediately agrees between sitemap membership and crawler page status, metadata, canonical and public content.');
   await sql`update athletes set profile_visibility='private' where id=${publicId}`;
   assert(!(await readAthleteDirectoryPage(sql, { letter: 'S' })).athletes.some((a)=>a.id===publicId), 'Privacy withdrawal applies without a cache expiry');
+  // Use a controlled, synthetic two-page catalogue to exercise the boundary
+  // between a populated directory and an empty page through actual SSR.
+  await sql`update editions set status='Cancelled' where event_date >= current_date`;
+  await sql`insert into events(slug,name,sport,country,city,surface)
+    select 'test-indexing-directory-'||n,
+      'Synthetic Indexing Fixture '||chr(65+n/26)||chr(65+n%26),
+      'Athletics','United Kingdom','Test City','Track'
+    from generate_series(0,40) n`;
+  await sql`insert into editions(event_id,event_date,distance_code,distance_km,status)
+    select id,current_date+365,'1500m',1.5,'Scheduled' from events
+    where slug like 'test-indexing-directory-%'`;
+  for (const [path, count, indexable, canonical] of [
+    ['/races', 40, true, '/races'],
+    ['/races?page=2', 1, true, '/races?page=2'],
+    ['/races?page=3', 0, false, '/races?page=3'],
+    ['/races?q=Synthetic%20Indexing', 40, false, '/races'],
+    ['/races?q=missing-synthetic-fixture', 0, false, '/races'],
+  ]) {
+    const page = await get(path);
+    assert.equal(page.$('main a[href^="/races/test-indexing-directory-"]').length, count, path);
+    assert.equal(/noindex/.test(page.$('meta[name=robots]').attr('content')), !indexable, path);
+    assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${canonical}`, path);
+  }
+  console.log('PASS: populated race directory pages stay indexable; empty and filtered pages remain noindex with unchanged canonicals.');
   console.log('PASS: data-only collections SSR, bounded homepage and directory, A–Z crawlability, robots headers, factual biography/Person schema, locale consolidation and immediate withdrawal.');
   console.log('PASS: SSR archive distinction, safe result preview, credits, original result links, country running default, explicit sport selection, empty-directory noindex and live sitemap exclusion.');
 } finally {
