@@ -17,6 +17,22 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 83: recovered domains, national schools scope and qualified old listings.
+  assert.equal(clubProfiles["elvet-striders"].founded_year, 1985);
+  assert.equal(clubProfiles["trafford-athletic-club"].founded_year, 1965);
+  assert.equal(clubProfiles["torbay-aac"].founded_year, 1970);
+  for (const slug of ["uckfield-runners", "quays-running-club", "romsey-road-runners", "athletics-ireland-ballyduff-a-c"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("uckfield-runners").website, "https://uckfieldrunners.co.uk/");
+  assert.equal(bySlug.get("harleston-running-club").county, "Norfolk");
+  assert.equal(bySlug.get("westbourne-r-c").city, "Bournemouth");
+  for (const slug of ["quays-running-club", "tiverton-harriers", "westbourne-r-c", "torbay-aac"]) assert.equal(bySlug.get(slug).address, "");
+  assert.equal(clubProfiles["welsh-athletics-welsh-schools-and-universities"].scope, "national");
+  assert.equal(bySlug.get("welsh-athletics-welsh-schools-and-universities").country, "Wales");
+  assert.match(clubProfiles["romsey-road-runners"].biography.join(" "), /dated arrangements, not a confirmed current weekly timetable/);
+  assert.match(clubProfiles["trafford-athletic-club"].biography.join(" "), /waiting list/);
+  assert.ok(bySlug.get("athletics-ireland-ballyduff-a-c").contacts.every(c => c.checked_at === "2026-10-13"));
+  assert.ok(bySlug.get("uckfield-runners").socials.some(c => c.url === "https://www.facebook.com/UckfieldRunners"));
+  assert.ok(bySlug.get("trafford-athletic-club").contacts.every(c => c.email !== "ian.salisbury@traffordac.co.uk"));
   // Batch 82: recovered venues, age eligibility and dated/future qualifications.
   assert.equal(clubProfiles["stadium-runners"].founded_year, 2005);
   assert.equal(clubProfiles["lytchett-manor-striders"].founded_year, 1989);

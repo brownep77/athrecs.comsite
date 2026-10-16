@@ -1,65 +1,132 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch82",
+  "lastEditorialBatch": "2026-10-16-batch83",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–82 add183 biographies/77 associations in draft. Assembled totals1474/1737 and716 associations are not live totals. No production publication in batch82.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–83 add194 biographies/87 associations in draft. Assembled totals1485/1737 and726 associations are not live totals. No production publication in batch83.",
   "completedProfileSlugs": [
-    "hillingdon-ac",
-    "greenwich-tritons-triathlon-club",
-    "stadium-runners",
-    "lytchett-manor-striders",
-    "tadworth-ac",
-    "millom-striders",
-    "west-wight-road-runners"
+    "elvet-striders",
+    "uckfield-runners",
+    "quays-running-club",
+    "welsh-athletics-welsh-schools-and-universities",
+    "romsey-road-runners",
+    "tiverton-harriers",
+    "athletics-ireland-ballyduff-a-c",
+    "harleston-running-club",
+    "westbourne-r-c",
+    "trafford-athletic-club",
+    "torbay-aac"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1474,
-    "notableMemberEntries": 716,
-    "clubsWithContacts": 1152,
-    "contactEntries": 1932,
-    "clubsWithEmail": 1114,
-    "clubsWithPhone": 171,
-    "clubsWithSocials": 1195,
-    "socialLinks": 2514,
-    "websiteContactRecords": 1451
+    "extendedProfiles": 1485,
+    "notableMemberEntries": 726,
+    "clubsWithContacts": 1157,
+    "contactEntries": 1944,
+    "clubsWithEmail": 1118,
+    "clubsWithPhone": 175,
+    "clubsWithSocials": 1196,
+    "socialLinks": 2515,
+    "websiteContactRecords": 1457
   },
   "batchChanges": {
-    "extendedProfilesAdded": 7,
-    "notableMemberEntriesAdded": 0,
-    "contactOrSocialRecordsChanged": 6,
-    "newWebsiteContactRecords": 5,
+    "extendedProfilesAdded": 11,
+    "notableMemberEntriesAdded": 10,
+    "contactOrSocialRecordsChanged": 7,
+    "newWebsiteContactRecords": 6,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 3,
-    "netSocialLinks": 0,
+    "netContactEntries": 12,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Passed: catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with migration/publication skipped. All eight changed production-build pages returned HTTP200 and passed biography, contact/social, location/flag, registration and title/description/canonical/SportsOrganization JSON-LD checks. Exact-head remote workflow and preview evidence follows in PR756; local rendering is not hosted verification."
+    "status": "Passed: catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with migration/publication skipped. All eleven changed production-build pages returned HTTP200 and passed biography, contact/social, location/flag, registration and title/description/canonical/SportsOrganization JSON-LD checks. Exact-head remote workflow and preview evidence follows in PR756; local rendering is not hosted verification."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
-    "quays-running-club",
-    "helpston-harriers-ac",
-    "uckfield-runners",
-    "romsey-road-runners",
-    "elvet-striders"
+    "tavistock-ac",
+    "tynedale-harriers-and-ac",
+    "athletics-ni-st-annes-ac",
+    "southampton-triathlon-club",
+    "bodmin-womens-rc"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and writer status before edits.",
-    "Published baseline1291/639 unchanged. Draft183 biographies/77 associations, assembled1474/1737 and716 associations. No production authority.",
-    "Batch82 uses club-profiles-cd.ts and seedv82:7 profiles,0 associations,3 net contacts,5 new website-contact records. Romsey contact-only update uses a community listing dated July2022; current programme/age eligibility unconfirmed.",
-    "Recovered Greenwich .com and Stadium non-www sites; Hillingdon .com joining/locations readable but co.uk history/contact unavailable. Do not infer history or alumni.",
-    "Greenwich junior waiting list and swim prerequisites explicit. Adult joining verification wall and masked email unresolved. Lytchett joining fees still2024–25; Tadworth affiliation text2024–25 despite membership expiryMarch2027.",
-    "West Wight2027 Three Hills role is future partnership, not completed delivery. Its undated first-person directory description is qualified. Sports-centre contacts are not club contacts.",
-    "Millom2018 founding/track base confirmed; July2025 visiting coach is not a member association. Masked email/current timetable unresolved.",
-    "Tadworth supports under18 membership conditional on adult-member parent/guardian. Removed unverified Epsom and Greenwich street locations; registration/SEO implementation unchanged.",
-    "New Ross/Island league positions remain provisional until23October; conflicting New Ross email unresolved. Parent2856d58 passed Club profiles38937413513 and quality38937413506. Exact new-head evidence follows in PR756."
+    "Last verified published baseline1291/639. Draft194 biographies/87 associations; assembled1485/1737 and726 associations are not live totals. No production authority.",
+    "Batch83 uses club-profiles-ce.ts and seedv83:11 biographies,10 historical/dated associations,12 net contacts and1 official Facebook link;7 contact records changed,6 new.",
+    "Recovered Uckfield .co.uk and Torbay non-www sites; Trafford PHP pages readable. Preserve all earlier directory/contact/social check dates for fields not re-read.",
+    "Romsey PDF opening pages only: later history pages/screenshots unavailable. Its July2022 programme and15+ wording are historical; current eligibility remains unresolved. Do not infer foundation year from anniversary.",
+    "Tiverton community listings are undated; current venue/age/fee arrangements need confirmation. Search-only Elmore venue lead is not adopted. Quays2021 first-person history does not establish today's schedule or exact founding year.",
+    "Welsh combined national listing: schools strand described separately; university participation unresolved. Do not infer global scope, local training or all-No discipline flags.",
+    "Ballyduff is Waterford/Upper, not Kerry or GAA. October2026 host report supports early team milestone; no exact foundation/race date or individual results imported. Retain13October directory contacts.",
+    "Trafford youngest-group times conflict across two official pages; email first. Stadium has Manchester postal address within Trafford. Harleston Norfolk town and hockey training base are distinct.",
+    "Parent66cd9c3 Club profiles38944742314 passed; quality38944742676 still running when checked18:24UTC. Exact new-head remote evidence follows in PR756.",
+    "Next sources: Tavistock about/join502/timeout despite rich search leads; Tynedale502. Bailieboro403. Southampton and Billericay pages empty; Meads, Bodmin Women, Brighton Women, Redcar unavailable. No snippet biographies.",
+    "New Ross/Island 2026 league positions remain provisional until23October. Do not repeat completed batches or claim whole-directory manual review."
   ],
   "sourceGaps": [
+    {
+      "slug": "uckfield-runners",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added from recovered .co.uk website. Email obscured; no guessed address. Official Facebook link added. Seasonal training starts require confirmation.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "welsh-athletics-welsh-schools-and-universities",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added with explicit schools-strand/national scope. University participation and founding history unresolved; no local training venue or organiser identity inferred.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "athletics-ireland-ballyduff-a-c",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added using host West Waterford report dated4October2026. AI directory unavailable16October; preserve13October contacts. Exact foundation date, timetable and ages unresolved.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "westbourne-r-c",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added from readable about/membership/races pages; club email confirmed. Exact foundation and current weekly venues unresolved. Old Poole street address removed.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "tiverton-harriers",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added using first-person community listings, explicitly undated. Official pages502/timeouts; current starts, ages and fees need confirmation. Search-only Elmore venue lead not adopted.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "torbay-aac",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added from official non-www history/join/venue/junior pages. Ambiguous president/membership secretary text excluded; clear joining and junior role contacts used.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "trafford-athletic-club",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added from official PHP history/training/contact pages. Under11 page says6–7pm while general page gives5:30–6:30 for9/10s; no exact time chosen. Waiting list explicit.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "romsey-road-runners",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added from opening pages of2015club newsletter and July2022community entry. Remaining PDF/history pages and screenshot attempts403; no full PDF visual review. Current timetable/15+eligibility conflict unresolved.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "elvet-striders",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added from first-person Club Durham listing and EA2025volunteer awards. Own home/join403; no new direct email/phone. Roles explicitly2025.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "quays-running-club",
+      "status": "profile-added-qualified-source",
+      "reason": "Profile added from2021first-person founding account. Current contact, meeting point and exact foundation date unresolved. Salford is historical base, not newly verified weekly venue.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "new-ross-triathlon-club",
       "status": "profile-added-contact-conflict",
@@ -89,12 +156,6 @@
       "url": "https://www.liverpoolharriers.co.uk/",
       "status": "deferred-unrelated-content",
       "reason": "16October homepage contains unrelated pharmaceutical text and outbound link. Not followed or used to add biography/contact claims; no compromise diagnosis.",
-      "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "uckfield-runners",
-      "status": "deferred-linked-site-502",
-      "reason": "Official homepage links to http://uckfieldrunners.eastsussexcrosscountry.co.uk; linked site returned502.",
       "checkedAt": "2026-10-16"
     },
     {
@@ -389,18 +450,6 @@
       "checkedAt": "2026-10-16"
     },
     {
-      "slug": "welsh-athletics-welsh-schools-and-universities",
-      "status": "entity-scope-unresolved",
-      "reason": "Reopened official national listing and schools page. General Welsh Schools Athletics Association activity does not establish this associated entity's programme; prior contact retained.",
-      "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "athletics-ireland-ballyduff-a-c",
-      "status": "primary-page-unavailable",
-      "reason": "Waterford membership source could not be opened; do not use snippet for a biography or confuse with Ballyduff Kerry.",
-      "checkedAt": "2026-10-16"
-    },
-    {
       "slug": "ventoux-triathlon-club",
       "status": "current-programme-gap",
       "reason": "TI directory opened and Camlough/Armagh club and email reconfirmed; club website unavailable. No full programme/history source.",
@@ -623,12 +672,6 @@
       "checkedAt": "2026-10-16"
     },
     {
-      "slug": "westbourne-r-c",
-      "status": "source-unreadable-batch72",
-      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
-      "checkedAt": "2026-10-16"
-    },
-    {
       "slug": "weston-athletic-club",
       "status": "source-unreadable-batch72",
       "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
@@ -759,11 +802,6 @@
       "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
     },
     {
-      "slug": "uckfield-runners",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
-    },
-    {
       "slug": "uttoxeter-road-runners",
       "status": "deferred-unreadable-primary-source",
       "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
@@ -859,24 +897,9 @@
       "reason": "16 October 2026: Home returned502 and the history page timed out."
     },
     {
-      "slug": "tiverton-harriers",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "16 October 2026: Official home page returned502."
-    },
-    {
-      "slug": "torbay-aac",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "16 October 2026: Primary club website was inaccessible."
-    },
-    {
       "slug": "totley-ac",
       "status": "deferred-unreadable-primary-source",
       "reason": "16 October 2026: Home and about pages timed out."
-    },
-    {
-      "slug": "trafford-athletic-club",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "16 October 2026: Official page returned no readable narrative."
     },
     {
       "slug": "tri-london",
@@ -1639,13 +1662,6 @@
       "reason": "Confirm beginner-course availability and official-session arrangements directly. No supported notable-member entry is added. The community centre is a regular base; Thursday meeting points vary. Hook is part of the postal address, not a claim that all training takes place in Hook village."
     },
     {
-      "slug": "welsh-athletics-welsh-schools-and-universities",
-      "url": "https://www.welshathletics.org/en/club/view/welsh-schools",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Rechecked16October2026: national entity and Jacqueline Brace role contact confirmed. General Welsh school fixtures do not establish this listing as the organiser or explain university provision; full biography remains deferred. No inference from all-No discipline flags.",
-      "checkedAt": "2026-10-16"
-    },
-    {
       "slug": "sheffield-rc",
       "url": "https://www.sheffieldrunningclub.org.uk/",
       "status": "deferred-unavailable-or-thin",
@@ -2046,12 +2062,6 @@
       "url": "https://www.rollsroyceharriers.com/",
       "status": "deferred-unavailable-or-thin",
       "reason": "Official home, about and history pages timed out or returned502. Indexed snippets were not substituted for opened sources."
-    },
-    {
-      "slug": "romsey-road-runners",
-      "url": "https://www.romseyroadrunners.co.uk/",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Official home, training and membership pages returned403. No biography inferred from snippets."
     },
     {
       "slug": "rothwell-harriers-and-ac",
@@ -2892,12 +2902,6 @@
       "url": "https://membership.athleticsireland.ie/clubpage/Bailieboro_A.C.",
       "status": "deferred-thin-primary-evidence",
       "reason": "Official directory confirms Tunnyduff/Bailieborough and contact, but insufficient opened primary narrative for full biography; do not substitute GAA history."
-    },
-    {
-      "slug": "athletics-ireland-ballyduff-a-c",
-      "url": "https://membership.athleticsireland.ie/clubpage/Ballyduff_A.C.",
-      "status": "deferred-thin-primary-evidence",
-      "reason": "Waterford directory listing has public contact and Instagram; no supported history/training narrative. Facebook link is a malformed relative URL. Do not conflate Kerry or GAA clubs."
     },
     {
       "slug": "athletics-ni-west-belfast-coolers",
@@ -4034,12 +4038,6 @@
       "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
     },
     {
-      "slug": "athletics-ireland-ballyduff-a-c",
-      "url": "https://membership.athleticsireland.ie/clubpage/Ballyduff_A.C.",
-      "status": "deferred-source-insufficient",
-      "reason": "Opened page did not provide sufficient primary material for this bounded batch; no biography added."
-    },
-    {
       "slug": "brentwood-running-club",
       "url": "https://www.brentwoodrunningclub.org.uk/",
       "status": "deferred-source-unavailable",
@@ -4056,12 +4054,6 @@
       "url": "https://www.eveshamvalerunningclub.org.uk/",
       "status": "deferred-source-unavailable",
       "reason": "Research response 502; no unavailable source marked freshly verified."
-    },
-    {
-      "slug": "elvet-striders",
-      "url": "https://www.elvet-striders.uk/",
-      "status": "deferred-source-unavailable",
-      "reason": "Research response 403; no unavailable source marked freshly verified."
     },
     {
       "slug": "barnt-green-chuggers",
@@ -4920,12 +4912,6 @@
       "url": "https://www.discoverkerry.com/event/ballybunion-5k-colour-fun-run-2026/71473101/",
       "status": "event-body-unavailable",
       "reason": "Tourism page returned general shell, no event body. Senior-only directory listing insufficient for full biography. Preserve double-n canonical slug."
-    },
-    {
-      "slug": "athletics-ireland-ballyduff-a-c",
-      "url": "https://membership.athleticsireland.ie/clubpage/Ballyduff_A.C.",
-      "status": "insufficient-primary-history",
-      "reason": "Waterford senior club, distinct from Kerry/GAA/soccer namesakes. Existing contacts and Instagram supported, but substantive history and training still unresolved."
     },
     {
       "slug": "barrow-and-furness-striders-ac",
@@ -6213,12 +6199,6 @@
       "url": "http://www.ellenboroughac.com.uk/",
       "status": "deferred",
       "reason": "Listed website returned502; no usable official replacement was established. No biography added."
-    },
-    {
-      "slug": "elvet-striders",
-      "url": "https://www.elvet-striders.uk/joining-elvet-striders/",
-      "status": "deferred",
-      "reason": "Official pages returned403 in both direct and web readers. No new biography or current joining claims."
     },
     {
       "slug": "evesham-vale-running-club",
