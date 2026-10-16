@@ -1,83 +1,168 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch73",
+  "lastEditorialBatch": "2026-10-16-batch74",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "PR755 published 1291 biographies/639 associations. PR756 batches69–73 add85 biographies/36 associations in draft. Assembled totals1376/1737 and675 associations are not live totals. No production publication in batch73.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–74 add104 biographies/49 associations in draft. Assembled totals1395/1737 and688 associations are not live totals. No production publication in batch74.",
   "completedProfileSlugs": [
-    "wigan-phoenix",
-    "wigton-road-runners",
-    "winchester-fit-club-rc",
-    "wirral-ac",
-    "witham-rc",
-    "witham-runners-lincolnshire",
-    "withernsea-harriers",
-    "witney-road-runners",
-    "woking-ac",
-    "women-on-the-run",
-    "woodbridge-shufflers-rc",
-    "woodstock-harriers-ac",
-    "wootton-road-runners",
-    "worcester-ac",
-    "worksop-harriers",
-    "worthing-and-district-harriers",
-    "worthing-gazelles",
-    "worthing-striders",
-    "wreake-and-soar-valley",
-    "wreake-runners"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1376,
-    "notableMemberEntries": 675,
-    "clubsWithContacts": 1097,
-    "contactEntries": 1849,
-    "clubsWithEmail": 1066,
-    "clubsWithPhone": 157,
-    "clubsWithSocials": 1182,
-    "socialLinks": 2494,
-    "websiteContactRecords": 1381
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 9,
-    "contactOrSocialRecordsChanged": 19,
-    "newWebsiteContactRecords": 12,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 26,
-    "netSocialLinks": 5,
-    "unsafeWebsitesSuppressed": 0
-  },
-  "validationBeforeCommit": {
-    "status": "Catalogue, club audit/profile checks, targeted ESLint, TypeScript and whitespace passed. Safe production build passed with database migration/publication hooks skipped. All20 actual rendered production-build pages passed biography/association, contacts/socials, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head Club profiles desktop/mobile workflow and Vercel evidence follow after commit in PR756."
-  },
-  "nextCandidateSlugs": [
     "wolds-veteran-rc",
     "woodthorpe-huffers-and-puffers",
-    "worcester-students-union-athletic-club",
     "wrekin-harriers",
     "wrekin-road-runners",
     "wycombe-phoenix-harriers-and-ac",
     "wye-valley-runners",
+    "wymeswold-rc",
     "yate-and-district-ac",
     "yate-and-sodbury-striders",
     "yaxley-runners-and-joggers",
+    "yeovil-olympiads-ac",
+    "yeovil-town-rrc",
+    "young-athletes-club",
+    "zero-to-hero-runners",
+    "british-wheelchair-athletics-association",
+    "black-girls-do-run-uk",
+    "benson-striders",
+    "barnt-green-chuggers",
+    "brentwood-running-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1395,
+    "notableMemberEntries": 688,
+    "clubsWithContacts": 1108,
+    "contactEntries": 1867,
+    "clubsWithEmail": 1076,
+    "clubsWithPhone": 162,
+    "clubsWithSocials": 1182,
+    "socialLinks": 2494,
+    "websiteContactRecords": 1391
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 19,
+    "notableMemberEntriesAdded": 13,
+    "contactOrSocialRecordsChanged": 13,
+    "newWebsiteContactRecords": 10,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 18,
+    "netSocialLinks": 0,
+    "unsafeWebsitesSuppressed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Catalogue, club audit/profile checks, targeted ESLint, TypeScript and whitespace passed. Safe build passed with database migration/publication hooks skipped. All19 actual rendered production-build pages passed biography/association, contacts/socials, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head Club profiles desktop/mobile workflow and Vercel evidence follow after commit in PR756."
+  },
+  "nextCandidateSlugs": [
+    "7-hills-harriers",
+    "army-athletics-association",
+    "be-fit-today-track-academy",
+    "beaumont-rc",
+    "bishops-stortford-rc",
+    "blythe-bridge-running-club",
+    "braintree-and-district-ac",
+    "worcester-students-union-athletic-club",
+    "zoom-tri-club-bournemouth",
     "athletics-ireland-annalee-a-c",
-    "athletics-ireland-ashford-a-c"
+    "athletics-ireland-ashford-a-c",
+    "athletics-ni-west-belfast-coolers",
+    "island-tc"
   ],
   "resumeInstructions": [
-    "Read current main, PR756, AGENTS.md, audit and checkpoint; check head and active-writer status before edits.",
-    "Published baseline remains1291 biographies/639 associations from PR755. PR756 now contains85 additional draft biographies/36 associations; no fresh production authority.",
-    "Batch73 uses club-profiles-bu.ts and seedv73:20 biographies,9 historical/founding associations,26 net contacts and5 net social links. Actual assembled coverage1376/1737 and675 associations.",
-    "Wreake Runners and Wreake & Soar Valley are separate canonical clubs with different current bases; do not merge them. Woking foundation1947 is supported by its history despite homepage wording.",
-    "Welsh Schools & Universities has a freshly confirmed role contact only. Its full biography remains deferred: general school fixtures do not establish this entity's constitution or university programme.",
-    "Worcester history PDF presented a challenge; not bypassed. Wigan history pages looped. Keep origin/alumni gaps empty. Worthing Striders supplier and unrelated Maidstone email excluded.",
-    "Retain prior source gaps and qualification dates. Woking age12 routing, Gazelles membership email variants and Wreake old Covid/venue pages require current confirmation.",
-    "Both parent49597d3 workflows passed. Check exact-head Club profiles desktop/mobile evidence and AthRecs preview in PR756 after commit; retain deployment protection."
+    "Read current main, PR756, AGENTS.md, audit and checkpoint; check head and active-writer status before edits. Preserve unrelated work and prior source gaps.",
+    "Published baseline remains1291 biographies/639 associations from PR755. PR756 now contains104 additional draft biographies/49 associations; no fresh production authority.",
+    "Batch74 uses club-profiles-bv.ts and seedv74:19 biographies,13 historical/founding/coaching associations,18 net contacts,13 changed website-contact records and no net social additions. Actual assembled coverage1395/1737 and688 associations.",
+    "Completed clubs include Benson Striders, Barnt Green Chuggers and Brentwood Running Club: recovered official pages, do not repeat their earlier blocked-source attempts.",
+    "Wolds Veteran's biography is supported by a historical BMAF club account, not a current timetable. Wymeswold's directory contact needs current confirmation; Zero to Hero's current intake is unconfirmed.",
+    "Wrekin Harriers and Young Athletes age bands differ across pages; confirm group availability. Wycombe distinguishes official1912 foundation from1910 activity. Black Girls Do Run UK weekday details differ; do not promise a fixed session.",
+    "Remove unsupported multisport tags only where supported: Yate & District retains athletics/running; Yate & Sodbury and Benson retain running. Preserve country flags, registration and metadata code.",
+    "Non-English West Belfast Coolers and Island TC were revisited but no substantive programme source was established. Rotate to remaining early-alphabet candidates and retain Irish/Welsh source gaps.",
+    "Parent e8ab63a Club profiles passed; broad quality gate was still running. Check exact-head desktop/mobile workflow and AthRecs preview evidence in PR756 after commit; retain deployment protection."
   ],
   "sourceGaps": [
+    {
+      "slug": "wolds-veteran-rc",
+      "status": "historical-source-only",
+      "reason": "BMAF club account supports history and dated association; official site unavailable. Current joining, sessions and contacts unconfirmed.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wymeswold-rc",
+      "status": "provider-contact-qualification",
+      "reason": "Active Together and parish sources read; club-site redirect404. Provider-listed contact and programme need current confirmation.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "zero-to-hero-runners",
+      "status": "current-course-gap",
+      "reason": "Council and ProActive primary sources read; replacement official site unavailable. Conflicting session times omitted, next course unconfirmed.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wrekin-harriers",
+      "status": "age-bands-conflict",
+      "reason": "Homepage and2026–27 joining page differ on junior and FUNETICS ages; ask club for appropriate group and seasonal venue.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "young-athletes-club",
+      "status": "age-bands-and-waiting-lists",
+      "reason": "Published group age bands overlap; joining capacity and waiting lists require confirmation.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wycombe-phoenix-harriers-and-ac",
+      "status": "origin-qualified",
+      "reason": "Official foundation1912 distinguished from history's1910 activity; training from9 and waiting-list applications from8 qualified.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "black-girls-do-run-uk",
+      "status": "session-day-qualification",
+      "reason": "Club pages differ on weekday details; no fixed weekly timetable promised. In-person London programme supports removing virtual label.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "worcester-students-union-athletic-club",
+      "status": "unreadable-entity-page",
+      "reason": "Official entity page showed generic union navigation without substantive club body; no generic SU contact repurposed.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "yellow-brick-road-running-and-walking-club",
+      "status": "insufficient-primary-narrative",
+      "reason": "Only affiliation evidence recovered; no substantial club programme/history read, biography deferred.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "zoom-tri-club-bournemouth",
+      "status": "unreadable-official-page",
+      "reason": "Official site returned no usable narrative; biography deferred.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "carlisle-tri-club",
+      "status": "official-timeouts",
+      "reason": "Official about/join routes repeatedly timed out or returned502; search snippets not used to manufacture biography.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "billericay-striders",
+      "status": "unreadable-official-page",
+      "reason": "Official render supplied no usable narrative; biography deferred.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "bramley-breezers",
+      "status": "unreadable-official-page",
+      "reason": "Official render supplied no usable narrative; biography deferred.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "bodmin-womens-rc",
+      "status": "unavailable-official-site",
+      "reason": "Official source unavailable; biography deferred.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "wigan-phoenix",
       "status": "partial-source-access",
