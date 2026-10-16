@@ -1,68 +1,101 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch80",
+  "lastEditorialBatch": "2026-10-16-batch81",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–80 add171 biographies/75 associations in draft. Assembled totals1462/1737 and714 associations are not live totals. No production publication in batch80.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–81 add176 biographies/77 associations in draft. Assembled totals1467/1737 and716 associations are not live totals. No production publication in batch81.",
   "completedProfileSlugs": [
-    "west-end-runners",
-    "wheathampstead-warriors",
-    "island-tc",
-    "south-birmingham-striders",
-    "donnington-runners",
-    "seaton-athletic-club",
-    "south-kent-harriers",
-    "leicester-walking-club",
-    "hermitage-harriers",
-    "heathfield-runners"
+    "boxted-runners",
+    "parbold-pink-panthers",
+    "new-forest-junior-ac",
+    "new-ross-triathlon-club",
+    "bramley-breezers"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1462,
-    "notableMemberEntries": 714,
-    "clubsWithContacts": 1148,
-    "contactEntries": 1926,
-    "clubsWithEmail": 1110,
+    "extendedProfiles": 1467,
+    "notableMemberEntries": 716,
+    "clubsWithContacts": 1150,
+    "contactEntries": 1929,
+    "clubsWithEmail": 1112,
     "clubsWithPhone": 171,
     "clubsWithSocials": 1195,
     "socialLinks": 2514,
-    "websiteContactRecords": 1444
+    "websiteContactRecords": 1446
   },
   "batchChanges": {
-    "extendedProfilesAdded": 10,
-    "notableMemberEntriesAdded": 5,
-    "contactOrSocialRecordsChanged": 9,
-    "newWebsiteContactRecords": 7,
+    "extendedProfilesAdded": 5,
+    "notableMemberEntriesAdded": 2,
+    "contactOrSocialRecordsChanged": 2,
+    "newWebsiteContactRecords": 2,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 6,
-    "netSocialLinks": 3,
+    "netContactEntries": 3,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with database migration/publication skipped. All 10 changed production-build pages returned HTTP200 and passed biography/association, contact/social, location/flag, registration and title/description/canonical/JSON-LD checks. Exact-head remote workflow and preview evidence will be recorded in PR756. Local rendering is not hosted-page or production verification."
+    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with database migration/publication skipped. All five changed production-build pages returned HTTP200 and passed biography/association, contact/social, location/flag, registration and title/description/canonical/JSON-LD checks. Exact-head remote workflow and preview evidence will be recorded in PR756; local rendering is not hosted or production verification."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
-    "new-ross-triathlon-club",
-    "parbold-pink-panthers",
     "quays-running-club",
-    "new-forest-junior-ac",
-    "helpston-harriers-ac"
+    "helpston-harriers-ac",
+    "uckfield-runners",
+    "hillingdon-ac",
+    "west-wight-road-runners"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and writer status before edits.",
-    "Published baseline1291/639 is unchanged. PR756 contains171 draft biographies/75 associations, assembled1462/1737 and714 associations. No production authority.",
-    "Batch80 uses club-profiles-cb.ts and seedv80:10 profiles,5 associations,6 net contacts,3 social links and7 new website-contact records.",
-    "Island TC's2026 Community League second place is provisional pending23October review. Never assign TriLimits' TriTyrone organiser role to Island from an entry page.",
-    "Wheathampstead beginner page still gives29April2025; Heathfield13April2026 course has passed. Confirm new intake dates. South Kent form2023 and South Birmingham fees2024–25 remain dated.",
-    "South Birmingham track references conflict (Ryland Centre vs Abbey Stadium). Seaton2013 timetable is historical; 2014charity registration is not foundation. Leicester current timetable/contact unresolved.",
-    "West End five miles under an hour threshold, trial booking requirements and seasonal Heathfield venues are deliberate. Supplier contacts excluded.",
-    "Next: New Ross has fresh2026 league evidence but conflicting directory email spellings and no current programme. Parbold community directory and New Forest university/association pages are leads, not completed biographies.",
-    "Parent e25764d Club profiles38922577401 and quality38922577283 passed. Check new exact-head evidence in PR756; preserve deployment protection."
+    "Published baseline1291/639 is unchanged. PR756 contains176 draft biographies/77 associations, assembled1467/1737 and716 associations. No production authority.",
+    "Batch81 uses club-profiles-cc.ts and seedv81:5 profiles,2 associations,3 net contacts and2 new website-contact records. No new social links.",
+    "New Ross and Island TC2026 league places remain provisional until23October final review; do not import individual results.",
+    "New Ross directory email spellings conflict; existing app-directory email and13October provenance preserved. Generic Facebook root is not a club account.",
+    "Parbold email corroborated in two community tables; homepage has apparent typo. Remove Wigan street location, retain Parbold area only. New Forest school is a directory address, not confirmed training.",
+    "Bramley January2023 session times are historical. New Forest current programme/contact unavailable. Boxted membership page unavailable and venues vary.",
+    "Liverpool Harriers co.uk homepage16October contains unrelated pharmaceutical outbound links; no claims/contact updates taken from it. Existing .org robot-check gap is a separate URL.",
+    "Uckfield homepage links to uckfieldrunners.eastsussexcrosscountry.co.uk but destination502. Worcester SU page is navigation/elections only. Other unavailable sources remain deferred, not snippet-derived biographies.",
+    "Parent246ecccc Club profiles38930417680 and quality38930417681 both passed. Check new exact-head evidence in PR756; preserve deployment protection."
   ],
   "sourceGaps": [
+    {
+      "slug": "new-ross-triathlon-club",
+      "status": "profile-added-contact-conflict",
+      "reason": "Public directory prints newrosstriathalonclub@hotmail.com, existing app source newrosstriathlonclub@hotmail.com retained. No current venues/timetable. 2026 Division Four third place provisional until23October.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "parbold-pink-panthers",
+      "status": "profile-added-current-meeting-point-unresolved",
+      "reason": "Community contact corroborated; no current exact starts/foundation/social destination. Wigan street address not a verified training venue.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "new-forest-junior-ac",
+      "status": "profile-added-current-programme-unavailable",
+      "reason": "Hampshire directory and January2026 University of Winchester profile read. Club website home/news/join timed out. No current age policy or training timetable.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "bramley-breezers",
+      "status": "historical-profile-current-programme-unresolved",
+      "reason": "Primary community report of22January2023 race read. Published meeting times explicitly historical. Standalone site unavailable; RunTogether404; event listings404, no snippet email copied.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "liverpool-harriers-and-ac",
+      "url": "https://www.liverpoolharriers.co.uk/",
+      "status": "deferred-unrelated-content",
+      "reason": "16October homepage contains unrelated pharmaceutical text and outbound link. Not followed or used to add biography/contact claims; no compromise diagnosis.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "uckfield-runners",
+      "status": "deferred-linked-site-502",
+      "reason": "Official homepage links to http://uckfieldrunners.eastsussexcrosscountry.co.uk; linked site returned502.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "island-tc",
       "status": "partial-current-programme",

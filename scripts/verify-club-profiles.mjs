@@ -17,6 +17,19 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 81: dated source qualifications and non-training addresses remain explicit.
+  assert.equal(clubProfiles["boxted-runners"].founded_year, 2017);
+  assert.equal(bySlug.get("parbold-pink-panthers").city, "Parbold");
+  assert.equal(bySlug.get("parbold-pink-panthers").address, "");
+  assert.equal(bySlug.get("parbold-pink-panthers").postcode, "");
+  assert.ok(bySlug.get("parbold-pink-panthers").contacts.some(c => c.email === "jane.warner29@gmail.com"));
+  assert.equal(bySlug.get("new-forest-junior-ac").address_kind, "directory");
+  assert.equal(bySlug.get("new-forest-junior-ac").county, "Hampshire");
+  assert.equal(bySlug.get("new-ross-triathlon-club").country, "Ireland");
+  assert.equal(bySlug.get("new-ross-triathlon-club").adult_only, true);
+  assert.match(clubProfiles["new-ross-triathlon-club"].biography.join(" "), /placing is therefore provisional/);
+  assert.ok(bySlug.get("new-ross-triathlon-club").contacts.some(c => c.email === "newrosstriathlonclub@hotmail.com" && c.checked_at === "2026-10-13"));
+  assert.match(clubProfiles["bramley-breezers"].biography.join(" "), /not presented as a confirmed current timetable/);
   // Batch 80: recovered sources retain dated programmes and venue qualifications.
   assert.equal(clubProfiles["west-end-runners"].founded_year, 1984);
   assert.equal(clubProfiles["wheathampstead-warriors"].founded_year, 2016);

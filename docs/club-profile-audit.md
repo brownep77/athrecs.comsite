@@ -6,10 +6,24 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,682 canonical directory records have source comparisons dated 13–14 October: the initial 1,681 plus a targeted Buckley review. The remaining 55 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 1,444 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The assembled catalogue has contact entries for 1,148 clubs: 1,110 publish an email address and 171 a telephone number. There are 1,926 contact entries in total, including named directory contacts with no direct email or telephone.
+- Website research contributes contact pages or contact/social details for 1,446 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The assembled catalogue has contact entries for 1,150 clubs: 1,112 publish an email address and 171 a telephone number. There are 1,929 contact entries in total, including named directory contacts with no direct email or telephone.
 - 1,195 clubs have social links, with 2,514 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 1,462 clubs have extended, individually written profiles (84.2% of the catalogue). These contain 714 sourced notable-member entries. Other clubs retain brief factual introductions; missing histories and alumni are not invented. Last verified published baseline is 1,291 biographies/639 associations from PR755. PR756 batches69–80 add171 biographies/75 associations in draft; assembled counts are not live counts.
+- 1,467 clubs have extended, individually written profiles (84.5% of the catalogue). These contain 716 sourced notable-member entries. Other clubs retain brief factual introductions; missing histories and alumni are not invented. Last verified published baseline is 1,291 biographies/639 associations from PR755. PR756 batches69–81 add176 biographies/77 associations in draft; assembled counts are not live counts.
+
+## Batch 81 — 16 October 2026 UTC
+
+Adds five biographies: Boxted Runners, Parbold Pink Panthers, New Forest Junior AC, New Ross Triathlon Club and Bramley Breezers. Opened official club/event pages, community directories, Hampshire Athletics, Triathlon Ireland, a University of Winchester profile and first-hand host-club/community accounts. This smaller source-recovery batch covers village and women's running, Hampshire athletics and Irish triathlon. The remaining queue is increasingly source-constrained; unavailable pages were not converted into biographies from snippets to meet the 20–30 target.
+
+Two sourced associations record Vanessa Dolling's founding role and Leah Johnson's club membership as explicitly reported by her university on20January2026. No athlete identities, individual results, verified status or privacy settings change. New Ross's2026 Community League Division Four third place is explicitly provisional until23October final review.
+
+Two new contact records add three public enquiry email entries: Boxted administration, its separate race team and Parbold's published group contact. The Parbold email is corroborated in two community tables, avoiding the homepage's apparent typo. New Ross's existing email and13October provenance are preserved because a newer directory spells it differently. No unverified social links, supplier contacts, university switchboards or governing-body support numbers are added. Existing social links and registration routes remain intact.
+
+Corrected Parbold from an unconfirmed Wigan street address to its village area, Boxted's village identity and official non-www website, and New Forest Juniors' Hampshire/Dibden Purlieu directory location. Noadswood School is not promoted to a confirmed training venue. New Ross gains its supported nearest town and adult status. Boxted's varied session venues and race-school address remain distinct; Bramley's2023 timetable is historical, not current joining advice.
+
+Source gaps: New Forest's club pages time out; New Ross timetable and contact spelling conflict remain unresolved; Bramley standalone/RunTogether/event listings unavailable; Boxted membership page403. Uckfield's homepage links to a second domain that returned502. Liverpool Harriers' co.uk homepage contains unrelated pharmaceutical text/outbound links and was not used for new claims or contacts. Worcester Students' Union page yielded navigation/elections only. Other unsuccessful sources remain deferred, not freshly verified. No whole-directory manual review is claimed.
+
+Continues draft PR756 from246eccccede530354a969f77b01accc51eea7fe3, seedv81. Latest remote head/writer status and main aa82cc37980f808668764513cf74e7fb309e98d8 checked before edits; both parent workflows passed. Validation evidence is maintained in the checkpoint and exact-head PR756 body. Assembled1467/1737(84.5%) and716 associations are not live totals. No merge, production publication, outreach or access-control changes.
 
 ## Batch 80 — 16 October 2026 UTC
 
