@@ -17,6 +17,26 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 85: real venues, qualified historical accounts and unsafe-site exclusion.
+  assert.equal(clubProfiles["grimsby-harriers-and-ac"].founded_year, 1906);
+  assert.equal(clubProfiles["white-cliffs-athletics-and-running-club"].founded_year, 2023);
+  assert.equal(clubProfiles["shildon-running-and-ac"].founded_year, 1986);
+  for (const slug of ["ventura-runners", "the-outrunners", "athletics-ni-west-belfast-coolers"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("liverpool-harriers-and-ac").website, "");
+  assert.equal(bySlug.get("shepshed-running-club").website, "");
+  assert.equal(bySlug.get("ventura-runners").country, "England");
+  assert.equal(bySlug.get("the-outrunners").adult_only, true);
+  assert.equal(bySlug.get("athletics-ni-west-belfast-coolers").country, "Northern Ireland");
+  for (const slug of ["ventura-runners", "grimsby-harriers-and-ac", "shildon-running-and-ac", "the-outrunners"]) assert.equal(bySlug.get(slug).address_kind, "training");
+  assert.ok(bySlug.get("ventura-runners").contacts.some(c => c.email === "venturarunnersuk@gmail.com" && c.phone === "07470435355"));
+  assert.ok(bySlug.get("grimsby-harriers-and-ac").contacts.some(c => c.email === "administration@grimsbyharriers-athletics.org.uk"));
+  assert.ok(bySlug.get("the-outrunners").contacts.some(c => c.email === "info@theoutrunners.co.uk"));
+  assert.equal(bySlug.get("athletics-ni-west-belfast-coolers").contacts.length, 1);
+  assert.ok(bySlug.get("athletics-ni-west-belfast-coolers").contacts.some(c => c.email === "westbelfastcoolers@hotmail.com" && c.checked_at === "2026-10-13"));
+  assert.match(clubProfiles["grimsby-harriers-and-ac"].location_note, /not sent there/);
+  assert.match(clubProfiles["the-outrunners"].location_note, /differs/);
+  assert.match(clubProfiles["white-cliffs-athletics-and-running-club"].biography.join(" "), /not today's/);
+  assert.match(clubProfiles["athletics-ni-west-belfast-coolers"].biography.join(" "), /not a current booking offer/);
   // Batch 84: historical foundations, recovered sites and evidence-backed venues.
   assert.equal(clubProfiles["tavistock-ac"].founded_year, 1985);
   assert.equal(clubProfiles["stone-master-marathoners"].founded_year, 1978);

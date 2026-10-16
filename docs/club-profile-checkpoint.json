@@ -1,121 +1,180 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch84",
+  "lastEditorialBatch": "2026-10-16-batch85",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–84 add206 biographies/96 associations in draft. Assembled totals1497/1737 and735 associations are not live totals. No production publication in batch84.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–85 add212 biographies/98 associations in draft. Assembled totals1503/1737 and737 associations are not live totals. No production publication in batch85.",
   "completedProfileSlugs": [
-    "tavistock-ac",
-    "stone-master-marathoners",
-    "higham-harriers",
-    "wallsend-harriers-and-ac",
-    "watford-joggers",
-    "compton-harriers-rc",
-    "northwich-running-club",
-    "lymington-triathlon-club",
-    "wilmslow-running-club",
-    "stowmarket-striders-rc",
-    "rodillian-runners",
-    "athletics-ireland-barrow-harriers-a-c"
+    "ventura-runners",
+    "grimsby-harriers-and-ac",
+    "white-cliffs-athletics-and-running-club",
+    "shildon-running-and-ac",
+    "the-outrunners",
+    "athletics-ni-west-belfast-coolers"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1497,
-    "notableMemberEntries": 735,
-    "clubsWithContacts": 1161,
-    "contactEntries": 1951,
-    "clubsWithEmail": 1122,
-    "clubsWithPhone": 176,
+    "extendedProfiles": 1503,
+    "notableMemberEntries": 737,
+    "clubsWithContacts": 1164,
+    "contactEntries": 1954,
+    "clubsWithEmail": 1125,
+    "clubsWithPhone": 177,
     "clubsWithSocials": 1200,
     "socialLinks": 2524,
-    "websiteContactRecords": 1466
+    "websiteContactRecords": 1468
   },
   "batchChanges": {
-    "extendedProfilesAdded": 12,
-    "notableMemberEntriesAdded": 9,
-    "contactOrSocialRecordsChanged": 9,
-    "newWebsiteContactRecords": 9,
+    "extendedProfilesAdded": 6,
+    "notableMemberEntriesAdded": 2,
+    "contactOrSocialRecordsChanged": 3,
+    "newWebsiteContactRecords": 2,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 7,
-    "netSocialLinks": 9,
-    "unsafeWebsitesSuppressed": 0
+    "netContactEntries": 3,
+    "netSocialLinks": 0,
+    "unsafeWebsitesSuppressed": 1
   },
   "validationBeforeCommit": {
-    "status": "Passed: catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with migration/publication skipped. All twelve actual changed production-build pages returned HTTP200 and passed biography, contact/social, location/flag, registration and title/description/canonical/SportsOrganization JSON-LD checks. Exact-head remote workflow and preview evidence follows in PR756; local rendering is not hosted verification."
+    "status": "Passed: catalogue/club audits, profile regressions, targeted lint, TypeScript, whitespace and safe production build; migrations/publication skipped. Six new pages plus Liverpool returned HTTP200 and passed biography, contacts/socials, location/flags, registration, title/description/canonical and SportsOrganization JSON-LD assertions; unsafe Liverpool website link absent. Exact-head desktop/mobile workflow and preview evidence follows in PR756. Local rendering is not hosted verification."
   },
   "nextCandidateSlugs": [
-    "rolls-royce-harriers",
-    "carlisle-tri-club",
-    "kingswood-triathlon-club",
-    "wharfedale-harriers",
-    "tynedale-harriers-and-ac",
-    "athletics-ni-st-annes-ac"
+    "east-grinstead-and-district-ac",
+    "fry-club-joggers",
+    "yellow-brick-road-running-and-walking-club",
+    "athletics-ni-st-annes-ac",
+    "collins-cycle-centre-triathlon-club",
+    "db-triathlon-club"
   ],
   "resumeInstructions": [
-    "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and writer status before edits.",
-    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–84 add206 biographies/96 associations in draft. Assembled totals1497/1737 and735 associations are not live totals. No production publication in batch84.",
-    "Batch84 uses club-profiles-cf.ts and seedv84:12 biographies,9 historical/dated associations,7 net contacts and9 official social links;9 newly covered website-contact records. Preserve untouched provenance.",
-    "Recovered Stone stonemm.co.uk, Higham highamharriers.com and Wilmslow.info/aboutUs. Stone current Little Stoke starts differ from older Tennis Club wording; check Spond. Wilmslow Join Us malformed, not adopted.",
-    "Compton first-person independent directory is undated, not governing body: current timetable/contact unresolved. Lymington membership endsMarch2022; training verification screen not bypassed. Northwich fun-run body7December2025 despite newer search snippet; no2026 event inferred.",
-    "Wallsend distinguishes1920original and1975revival. Stowmarket June2026 feature does not confirm planned track opened; junior-specific7–17 vs older general7–14 requires confirmation. Barrow April2026 written interview introduction only, no audio review.",
-    "Tavistock county source supports1985 and8+; direct club pages unavailable. 25October2026 Tavy7 scheduled, not completed or regular training start. Northwich, Higham and Barrow remain area-only.",
-    "Rolls Royce/Wharfedale502; Carlisle timeout/join502; Kingswood/Southampton empty; Tynedale unavailable; St Annes NI directory/booking alone insufficient. Tickhill redirect loop, Windmilers403, Gillingham/Warminster unavailable. No snippet biographies.",
-    "New Ross/Island2026 league positions remain provisional until23October. Do not repeat completed batches or claim whole-directory manual review."
+    "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and active writer before edits.",
+    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–85 add212 biographies/98 associations in draft. Assembled totals1503/1737 and737 associations are not live totals. No production publication in batch85.",
+    "Batch85 modulecg seedv85: six biographies, two founder/organiser-listed associations, three net contact entries and two new website-contact records. Liverpool website suppressed after unrelated pharmaceutical spam; Shepshed remains suppressed. No external spam links followed.",
+    "Ventura initial contact/training pages readable, later retries failed; email also supported by team page. Grimsby legal-theme placeholders excluded and 5.30/6pm start conflict qualified. Stadium explicitly not a postal address.",
+    "White Cliffs March2023 origin/November2023 award account is dated, not current fees/timetable. Shildon independent first-person directory undated; Club Durham confirms Wednesday track listing but mislabeled Twitter link excluded.",
+    "Outrunners recovered www site. Charity2020 is not club foundation; adult club classification retained alongside separate youth programme. DG04 session base conflicts with D.1.04 contact page; confirm entrance.",
+    "West Belfast Coolers secretary Hotmail retained with original provenance; 2026 Feile Gmail is event-only. Mark Carey organiser page is undated, not current-membership proof or a result. No permanent venue inferred from race start.",
+    "Many candidate domains remained inaccessible or thin. Kingswood/Billericay empty; St Annes ANI news index did not expose Clubmark article. Do not use snippets, namesake rugby/GAA clubs, or template content to fill biographies.",
+    "New Ross/Island league positions remain provisional until23October; retain previous unresolved source gaps and no whole-directory manual-review claim."
   ],
-  "coverageReviewNotes": [
-    "The current catalogue has very limited Scottish coverage; check actual club geography before treating a correspondence address as evidence of a Scottish club. A Scottish directory expansion requires its own sourced catalogue review.",
-    "Some unreviewed Striders/District listings have Triathlon tags. Check official disciplines when those clubs reach the queue; no blanket classification correction was made in this batch.",
-    "Some official sites mask public email text. Contact forms and previously sourced directory contacts were retained where no readable new email was available.",
-    "Batch08 checked dates use UTC (13 October 2026; early 14 October in London). England Athletics query pages returned a JavaScript shell and Triathlon Ireland app directory an empty body in this run; their prior per-record check dates are preserved, not refreshed. New biographies primarily use opened official club pages plus readable Welsh Athletics, county, museum and Triathlon Ireland programme sources.",
-    "Batch09 sources were read on 13–14 October UTC; new editorial/contact review date is 14 October. Buckley is the only refreshed governing-body row. Current directory comparisons total 1,682; 55 older rows retain their dates. No blanket manual review, athlete identity or production publication is claimed.",
-    "Batch10 primary sources read on 14 October UTC. Twenty new biographies and 15 historical/notable associations; no governing-body rows re-dated. Current directory comparisons remain 1,682, with 55 older rows. Public role contacts and exact source links checked; supplier contacts excluded. Seed v10; draft-preview only.",
-    "Batch11: 20 profiles, five historical member entries and 19 website-contact/social records on 14 October UTC. Actual merged coverage 253/1737. No blanket directory refresh: 1682 recent comparisons, 55 older. Sports and address corrections only where primary evidence supports them; draft-preview only, seed v11.",
-    "Batch12: 16 profiles and five historical/notable associations; 17 contact/social records updated. Actual merged coverage 269/1737. Four candidates deferred rather than padding sparse sources. Former Griffithstown domain replaced; Bray placeholder phone removed. Directory date coverage unchanged (1682 recent,55 older), seed v12, draft-only. Main bceb3ea inspected: intervening athlete/homepage changes do not overlap these data files.",
-    "Batch13: 18 profiles, ten sourced associations, 17 contact/social records changed (12 new). Actual merged coverage 287/1737; 140 notable entries. Seven more clubs with contacts/email, two with phones, twelve social links. Two candidates deferred. Seed v13, draft-only. Prior 5d39ab1 Club profiles passed; broader quality gate 38505360491 failed mobile registration: Help improve ATHRECS banner / bottom nav intercepted Continue. No safeguard or broad UI changes.",
-    "Batch14: 18 profiles, eight historical/notable associations, 18 website-contact records changed (12 new). Actual merged coverage 305/1737; 148 notable entries. Seven more clubs with email, fourteen contact entries, eighteen social links. Seed v14 draft-only. All 12 workflows for preceding eb01a07 now passed; no UI fix claimed for the earlier intermittent registration obstruction. Directory comparison dates unchanged.",
-    "Batch15: immediate continuation adds nine profiles and five historical/member associations, changes nine website-contact records (six new), seed v15. Oswestry country corrected to England with dual-affiliation context. All twelve workflows for prior b41907d passed. Hourly automation confirmed enabled, not duplicated. Directory dates unchanged.",
-    "Batch16 adds 20 profiles and 11 historical associations, with 19 website-contact records changed (nine new). Main inspected at 464292e: no overlapping club data changes. Corrected Bolton/Bebington/Consett/Irish/NI towns and Border Harriers postcode. Seed v16. No directory date refresh or production publication. Exact-commit workflow and preview evidence belongs in draft PR #680.",
-    "Batch17 adds 20 profiles and nine historical/coaching associations, with 20 website-contact records changed (14 new). Main inspected at 763eb52; unrelated athlete and club-results route work preserved. Recovered Bridport and Peninsula websites, corrected Bourton town, clarified seven multi-venue addresses and Peninsula junior availability. Seed v17. All twelve preceding b0d8d3e workflows passed. No directory-date refresh or production publication. Exact-commit workflow and preview evidence is recorded in draft PR #680.",
-    "Batch18:20 profiles,14 historical/founder associations,20 website-contact records changed(12new), seedv18. Actual374/1737 biographies,187notable entries; directorydates unchanged. Jersey country clarified; CalneSMaRTT multisport and BADRAT running-only corrected. TwoBarrow candidates deferred. Main730712f inspected; no overlapping club-data changes. Draft-only.",
-    "Batch19 adds ten profiles and five sourced notable associations; ten contact records updated (four new). Research read 14 October. The smaller batch accompanies release reconciliation and validation of the previously completed 374 profiles. Publication approval does not alter representative verification, athlete identities or privacy.",
-    "Batch20: four English, seven Irish and five Welsh club profiles; seven historical notable associations; 16 contact records changed, 13 new. Four inaccessible/insufficient candidates deferred. Primary sources opened on 14 October. No athlete accounts, results, registrations or privacy settings changed.",
-    "Batch21: eight English, four Irish, two Northern Irish and six Welsh profiles; 20 contact records changed, 12 newly covered. Northumberland Fell Runners corrected from a Scottish directory address to its regional England location. Current checks use 14 October UTC. No athlete identities, results, registrations or privacy changed.",
-    "Batch22: ten English, six Welsh and three Irish biographies. 19 contact/social records changed, 12 newly covered. Seven notable connections have dated or hall-of-fame attribution. Unknown details remain empty; no athlete identities, results, verification, registrations or privacy changed.",
-    "Batch23: five English, six Welsh and three Irish biographies;14 contact/social records changed, nine newly covered. Actual assembled totals453/1737 profiles,214notable entries. Preserves registration, metadata, athlete identity, result and privacy behaviour.",
-    "Batch24: eight English, six Welsh and five Irish biographies;19 contact/social records changed,13 newly covered. Actual assembled totals472/1737 profiles,218notable entries; net15contact entries,6email-coveredclubs,1phone-coveredclub,8sociallinks.",
-    "Batch25: six English, five Welsh and three Irish biographies.14 contact/social records changed,6 newly covered. Total486/1737bios,220notable entries. Net10contacts,4clubs with email,1withphone,5sociallinks and2clubs with socials.",
-    "Batch26:12 English,5 Irish,3 Welsh biographies.20 contact/social records changed,16 newly covered.506/1737 biographies and222 notable entries. Sources read14October; governing-body comparison dates unchanged.",
-    "Batch27: six English, five Irish and three Welsh biographies;14 contact/social records changed, nine newly covered.520/1737 biographies and227 notable entries. Sources read14October; other governing-body comparison dates unchanged.",
-    "Batch28:15 English and six Irish biographies;21 contact/social records changed,16 newly covered.541/1737 biographies and234 notable entries. Primary pages opened14October2026; other directory comparison dates unchanged.",
-    "Batch 29: 24 English regional running/athletics profiles, six historical associations, 24 website contact records updated (13 new), plus one sourced correction of an Instagram domain typo. Assembled 565/1,737 biographies and 240 notable entries; 25 net contact entries and 12 net social links. Primary pages opened 14 October 2026. Other directory comparison dates unchanged.",
-    "Remaining non-English website candidates are eight Welsh school-district listings, requiring an entity-type review before describing them as joinable clubs. The next ordinary-club batch therefore rotates English regions and includes fell, university and sprint clubs.",
-    "Batch30:20 English profiles rotating Yorkshire, the North East, Midlands, London and South West, spanning road/fell running, track/field, university sport, sprint coaching and triathlon.12 historical/founding/coaching associations,18 contact/social records changed(12 new). Websites recovered for DK and Chambers; addresses and postcodes corrected without renewing unrelated directory dates. Ordinary non-English candidates remain completed or source-blocked; eight Welsh school-district entities need an entity-type review. No athlete identity, result, privacy, verification, registration or metadata implementation changed.",
-    "Batch31 rotates21 English clubs across East Anglia, the North West, North East, London, Surrey, Dorset, Midlands and Bristol: masters, women’s running, fell running, juniors and triathlon.8 historical associations;21 contact/social records changed,11 new;18 net contacts and20 net social links. Other national candidates remain completed/source-blocked or require school-district entity review. Existing directory comparison dates are not renewed.",
-    "Batch32:20 English regional profiles including university, women’s running, juniors, community groups and triathlon. Six historical founder/coach associations;20 contact/social records updated(10new),13 net contacts and14 net social links. Other nations remain completed/source-blocked or school-district entities requiring review; next queue includes Guernsey. Directory comparison dates unchanged.",
-    "Batch33:20 profiles spanning Guernsey, Wales, nationwide GoodGym Race Team, two explicitly global clubs, and English regional running/athletics. Seven historical founder/athlete associations;20 contact/social records updated(8new),23 net contacts and11 net social links. Source dates retained for unchanged directory fields. More NI clubs revisited without padding thin/unavailable evidence.",
-    "Batch34:19 new profiles across16 English clubs, Mallow and Ennis in Ireland, and Ormeau in Northern Ireland. Seven historical connections;17 website-contact records changed(9new),14 net contacts and13 social links. Hastings was already complete and excluded. No full-directory manual review or athlete identity claims.",
-    "Batch35:20 profiles across17 English clubs, White Rock and Refail in Wales, and Tinahely in Ireland. Nine historical connections;20 contact/social records changed(12new),18 net contacts and16 social links. Coverage685/1,737(39.4%),289notable entries. This is a bounded editorial batch, not a full-directory manual review."
-  ],
-  "previousPullRequest": 749,
-  "productionAuthorization": {
-    "date": "2026-10-14",
-    "instruction": "can you publish all and continue please",
-    "releasePullRequest": 680
-  },
-  "release": {
-    "pullRequest": 755,
-    "mergeCommit": "111b56a6589f3c3d741fb538bd2093a0df1fa535",
-    "deployment": "dpl_GQQM5tC4FVBkTb7F7JKTPv1V5HWR",
-    "status": "READY",
-    "liveBiographies": 1291,
-    "liveAssociations": 639,
-    "reviewedAt": "2026-10-16",
-    "previewQualification": "Protected preview reached Vercel sign-in. Exact-head CI and local page evidence passed; public production inspection follows release.",
-    "verification": "All291 newly published public pages returned200 and passed biography, associations, contacts/socials, address/location, flags, registration and title/description/canonical/JSON-LD assertions after deployment READY. Thurrock public desktop layout inspected."
-  },
   "sourceGaps": [
+    {
+      "slug": "ventura-runners",
+      "status": "profile-added-qualified-source",
+      "reason": "Tidworth Oval is a training venue, not the start of every session; Thursday training is listed at Tedworth Park. Contact and training pages were readable on the first retrieval but unavailable on a later retry; confirm arrangements before attending.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "grimsby-harriers-and-ac",
+      "status": "profile-added-qualified-source",
+      "reason": "King George V Stadium is a training base. The club specifically asks that mail is not sent there. The published administration email is retained; generic legal-theme placeholder content is excluded. Confirm group start times.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "white-cliffs-athletics-and-running-club",
+      "status": "profile-added-qualified-source",
+      "reason": "The school address retains directory provenance; current group times and venue access need confirmation. No general enquiry email or telephone was confirmed. Lottery operator contacts are not club contacts.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "shildon-running-and-ac",
+      "status": "profile-added-qualified-source",
+      "reason": "Stadium 2000 is the documented athletics base; group access and times require confirmation. The Club Durham link labelled as a website points to Twitter instead; it is not adopted as an official club URL.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "the-outrunners",
+      "status": "profile-added-qualified-source",
+      "reason": "Hackney Bridge is the session base. Unit DG04 on the training page differs from Unit D.1.04 on the contact page; confirm the entrance. The session page publishes the general enquiries email. The youth charity and adult club have different participation routes.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "athletics-ni-west-belfast-coolers",
+      "status": "profile-added-qualified-source",
+      "reason": "West Belfast area only; the dated Féile race start is not treated as a training venue. The directory-listed Hotmail club address is retained. The separate Gmail race-team address and an older 2018 directory address are not substituted.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "liverpool-harriers-and-ac",
+      "url": "https://www.liverpoolharriers.co.uk/",
+      "status": "unsafe-website-suppressed",
+      "reason": "Homepage still contains unrelated pharmaceutical spam and outbound link on16October. Website now removed; directory source/date retained, no new biography or contacts taken from the affected site.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "shepshed-running-club",
+      "url": "https://shepshedrc.org.uk/joining-src/",
+      "status": "unsafe-website-remains-suppressed",
+      "reason": "Joining page also contains unrelated pharmaceutical text and external links. Existing website suppression retained; no contact or payment details adopted.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "rolls-royce-harriers",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "About/history timed out; homepage502. Do not adopt search-only dates.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "carlisle-tri-club",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "About/constitution/join timed out. No snippet biography.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wharfedale-harriers",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "About/contact timed out; membership502.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "kingswood-triathlon-club",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Homepage empty again despite rich search snippets; no biography.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "billericay-striders",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Recovered .com hostname still returns empty page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "athletics-ni-st-annes-ac",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Directory and track bookings alone insufficient; news index did not expose Clubmark article. No award claim adopted.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "gordonian-runners",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Search led to Scottish rugby/hockey namesakes; do not recategorise Norwich directory location without running-club evidence.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "west-4-harriers",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official homepage403.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "winter-hill-runners",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official homepage timed out.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "os-runners",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "Official website unavailable.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "7-hills-harriers",
+      "status": "deferred-unavailable-or-thin",
+      "reason": "RunTogether page unavailable; search-only social description insufficient.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "tavistock-ac",
       "status": "profile-added-qualified-source",
@@ -270,13 +329,6 @@
       "slug": "bramley-breezers",
       "status": "historical-profile-current-programme-unresolved",
       "reason": "Primary community report of22January2023 race read. Published meeting times explicitly historical. Standalone site unavailable; RunTogether404; event listings404, no snippet email copied.",
-      "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "liverpool-harriers-and-ac",
-      "url": "https://www.liverpoolharriers.co.uk/",
-      "status": "deferred-unrelated-content",
-      "reason": "16October homepage contains unrelated pharmaceutical text and outbound link. Not followed or used to add biography/contact claims; no compromise diagnosis.",
       "checkedAt": "2026-10-16"
     },
     {
@@ -470,13 +522,6 @@
       "checkedAt": "2026-10-16"
     },
     {
-      "slug": "athletics-ni-st-annes-ac",
-      "status": "booking-only",
-      "reason": "Mary Peters Track October2026 bookings identify club usage but not public session eligibility, joining or substantive history. Biography deferred.",
-      "url": "https://www.marypeterstrack.com/booking-info/Non-Exclusive-Track",
-      "checkedAt": "2026-10-16"
-    },
-    {
       "slug": "widnes-running-club",
       "status": "contact-only-recovery",
       "reason": "Active Halton lists widnesrunningclub@gmail.com. No full biography from this thin directory entry.",
@@ -500,12 +545,6 @@
       "slug": "pudsey-and-bramley-ac",
       "status": "unsafe-website-suppressed",
       "reason": "Opened http://www.pudseybramley.com/ (redirect https://pudseybramley.com/) and observed unrelated steroid promotion and external supplement link. Original website suppressed; no biography or fresh contacts derived from the affected page.",
-      "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "shepshed-running-club",
-      "status": "unsafe-website-suppressed",
-      "reason": "Opened https://shepshedrc.org.uk/ and observed unrelated medical/opiate text and external links within club introduction. Original directory website https://www.shepshedrc.org.uk suppressed; biography deferred.",
       "checkedAt": "2026-10-16"
     },
     {
@@ -659,18 +698,6 @@
       "checkedAt": "2026-10-16"
     },
     {
-      "slug": "carlisle-tri-club",
-      "status": "official-timeouts",
-      "reason": "Official about/join routes repeatedly timed out or returned502; search snippets not used to manufacture biography.",
-      "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "billericay-striders",
-      "status": "unreadable-official-page",
-      "reason": "Official render supplied no usable narrative; biography deferred.",
-      "checkedAt": "2026-10-16"
-    },
-    {
       "slug": "bramley-breezers",
       "status": "unreadable-official-page",
       "reason": "Official render supplied no usable narrative; biography deferred.",
@@ -785,12 +812,6 @@
       "checkedAt": "2026-10-16"
     },
     {
-      "slug": "wharfedale-harriers",
-      "status": "source-unreadable-batch72",
-      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
-      "checkedAt": "2026-10-16"
-    },
-    {
       "slug": "wimbledon-windmilers",
       "status": "source-unreadable-batch72",
       "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
@@ -798,12 +819,6 @@
     },
     {
       "slug": "windsor-slough-eton-and-hounslow-ac",
-      "status": "source-unreadable-batch72",
-      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
-      "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "winter-hill-runners",
       "status": "source-unreadable-batch72",
       "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
       "checkedAt": "2026-10-16"
@@ -870,12 +885,6 @@
     },
     {
       "slug": "warminster-running-club",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
-      "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "west-4-harriers",
       "status": "deferred-unreadable-primary-source",
       "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
       "checkedAt": "2026-10-16"
@@ -1029,12 +1038,6 @@
       "url": "https://www.thanetac.org.uk/",
       "status": "deferred-unreadable-club-source",
       "reason": "16 October 2026: Primary club pages inaccessible; not conflated with Thanet Roadrunners AC. Existing sourced fields retained; no new biography."
-    },
-    {
-      "slug": "the-outrunners",
-      "url": "https://www.theoutrunners.co.uk/",
-      "status": "deferred-unreadable-club-source",
-      "reason": "16 October 2026: Primary club pages inaccessible. Existing sourced fields retained; no new biography."
     },
     {
       "slug": "the-running-hub",
@@ -1739,12 +1742,6 @@
       "reason": "Official club page timed out during this bounded review; no snippet-only profile added."
     },
     {
-      "slug": "shepshed-running-club",
-      "url": "https://shepshedrc.org.uk/",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Recovered homepage and running page contained unrelated pharmaceutical spam. No new biography or contacts taken from those pages; no unrelated link followed. Legitimate current club source requires independent verification."
-    },
-    {
       "slug": "welsh-athletics-afan-nedd-tawe-schools-district",
       "url": "https://www.welshathletics.org/en/club/view/afan-nedd-tawe-schools-district",
       "status": "profile-added-with-qualified-gap",
@@ -2127,12 +2124,6 @@
       "url": "https://www.rocksaltrunning.com/club",
       "status": "deferred-unavailable-or-thin",
       "reason": "Official club page timed out; governing-body visit snippet alone was insufficient."
-    },
-    {
-      "slug": "rolls-royce-harriers",
-      "url": "https://www.rollsroyceharriers.com/",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Official home, about and history pages timed out or returned502. Indexed snippets were not substituted for opened sources."
     },
     {
       "slug": "rothwell-harriers-and-ac",
@@ -2535,12 +2526,6 @@
       "url": "https://pooleac.co.uk/about/history/",
       "status": "profile-added-with-qualified-gap",
       "reason": "An1897 original founding date is unsupported. History distinguishes1930s cycling club,1963 reform and post1981 reform. No single founding year added."
-    },
-    {
-      "slug": "os-runners",
-      "url": "https://osrunners.uk",
-      "status": "deferred-unavailable",
-      "reason": "15 October: homepage returned502; no substantive official club narrative obtained."
     },
     {
       "slug": "pendle-trail-running-club",
@@ -2969,12 +2954,6 @@
       "reason": "Official directory confirms Tunnyduff/Bailieborough and contact, but insufficient opened primary narrative for full biography; do not substitute GAA history."
     },
     {
-      "slug": "athletics-ni-west-belfast-coolers",
-      "url": "https://athleticsni.org/About/Find-A-Club",
-      "status": "deferred-thin-primary-evidence",
-      "reason": "Current directory publishes westbelfastcoolers@hotmail.com. Facebook retrieval throttled. Older Belfast Marathon pacer association must not be treated as current membership; later NI transfer evidence needs direct review."
-    },
-    {
       "slug": "loftus-and-whitby-ac",
       "url": "https://www.loftusandwhitbyac.co.uk/",
       "status": "profile-added-with-qualified-gap",
@@ -3041,12 +3020,6 @@
       "reason": "Current21DruidStreet replaces130. River runs mostly not led/paced; paid booked track separate. Sunday no bagdrop. Founder given only first name in read source, no invented surname."
     },
     {
-      "slug": "liverpool-harriers-and-ac",
-      "url": "http://www.liverpoolharriers.org/",
-      "status": "deferred-robot-check",
-      "reason": "Homepage requires robot verification. Not bypassed."
-    },
-    {
       "slug": "liverpool-pembroke-and-sefton-h-ac",
       "url": "http://www.lps-athletics.co.uk/",
       "status": "deferred-unrelated-content",
@@ -3099,12 +3072,6 @@
       "url": "https://www.killamarshkestrels.wordpress.com",
       "status": "deferred-source-unavailable",
       "reason": "HTTP502 certificate hostname mismatch; no TLS safeguard disabled."
-    },
-    {
-      "slug": "kingswood-triathlon-club",
-      "url": "https://www.kingswoodtri.com",
-      "status": "deferred-thin-source",
-      "reason": "Successful response had no readable content."
     },
     {
       "slug": "kirkby-ac",
@@ -4013,12 +3980,6 @@
       "reason": "Junior/senior entry arrangements supported; no exact current single training venue established. Existingemptyaddress remains empty."
     },
     {
-      "slug": "carlisle-tri-club",
-      "url": "https://www.carlisle-tri.co.uk",
-      "status": "deferred-source-unavailable",
-      "reason": "Research response 502; no unavailable source marked freshly verified."
-    },
-    {
       "slug": "city-of-stoke-ac",
       "url": "http://www.stokeac.org.uk/",
       "status": "deferred-source-unavailable",
@@ -4217,12 +4178,6 @@
       "reason": "Club website502. TI directory confirms adult club and enquiry email; 2020 advocate interview supports historical community context only. Current venues and founding date unresolved."
     },
     {
-      "slug": "billericay-striders",
-      "url": "https://www.billericaystriders.co.uk/",
-      "status": "deferred-unreadable",
-      "reason": "Official site returned empty body; first-hand CommunityAd interview returned403. Do not convert search snippets into a biography."
-    },
-    {
       "slug": "brighton-and-hove-womens-running-club",
       "url": "https://bhwrc.org/",
       "status": "deferred-current-source-unavailable",
@@ -4371,12 +4326,6 @@
       "url": "https://www.corkathletics.org/clubs/172-carraig-mhor-a-c.html",
       "status": "social-added-biography-deferred",
       "reason": "Opened county and national pages provide venue and official Facebook link but little substantive club history/programme. Added the source-linked public social page only. No founding date inferred from search snippets; masked email not recovered."
-    },
-    {
-      "slug": "athletics-ni-west-belfast-coolers",
-      "url": "https://athleticsni.org/Clubs/Find-A-Club",
-      "status": "biography-deferred",
-      "reason": "Current directory email retained. Social mirrors and commercial kit pages are not primary evidence for training or origins; no extended biography added."
     },
     {
       "slug": "athletics-ni-st-malachys-ac",
@@ -5279,13 +5228,6 @@
       "url": "",
       "status": "insufficient-primary-history",
       "note": "No club website in catalogue; do not conflate the club with Border Harriers at the same stadium. Leave unprofiled.",
-      "checkedAt": "2026-10-14"
-    },
-    {
-      "slug": "carlisle-tri-club",
-      "url": "https://www.carlisle-tri.co.uk/",
-      "status": "unavailable-source",
-      "note": "TLS hostname failure on club website and failed primary-page retrieval; leave biography and old directory address unchanged.",
       "checkedAt": "2026-10-14"
     },
     {
