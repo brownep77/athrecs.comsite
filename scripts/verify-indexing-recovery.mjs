@@ -27,7 +27,9 @@ try {
       values (${id}, ${editionId}, 'finished', 266, ${visibility}, 'https://example.org/results', 'Example Timing')`;
   }
   const get = async (path) => {
-    const response = await fetch(`${origin}${path}`);
+    // PGlite fixture writes can block the event loop beyond Vite's keep-alive
+    // timeout; do not reuse an idle test-server socket after those writes.
+    const response = await fetch(`${origin}${path}`, { headers: { connection: 'close' } });
     assert.equal(response.status, 200, path);
     const html = await response.text();
     return { html, $: cheerio.load(html), headers: response.headers };
@@ -104,7 +106,7 @@ try {
     assert.equal(resultSitemap.headers.get('cache-control'), 'no-store');
     assert.equal(resultSitemap.html.includes(`https://www.athrecs.com${resultsPath}</loc>`), visibility === 'public');
     const response = await fetch(`${origin}${resultsPath}`, {
-      headers: { 'user-agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)' },
+      headers: { 'user-agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)', connection: 'close' },
     });
     assert.equal(response.status, visibility === 'public' ? 200 : 404);
     const html = await response.text();
