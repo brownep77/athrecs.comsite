@@ -1,83 +1,197 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch71",
+  "lastEditorialBatch": "2026-10-16-batch72",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "PR755 published1291 biographies/639 associations. PR756 batches69–71 add45 biographies/22 associations in draft. Assembled totals1336/1737 and661 associations are not live totals. No production publication in batch71.",
+  "publication": "PR755 published1291 biographies/639 associations. PR756 batches69–72 add65 biographies/27 associations in draft. Assembled totals1356/1737 and666 associations are not live totals. No production publication in batch72.",
   "completedProfileSlugs": [
-    "upper-wharfedale-runners",
-    "velorunner",
-    "wallasey-athletic-club",
-    "ware-joggers",
-    "wargrave-and-twyford-runners",
-    "warley-woods-pacers",
-    "warriors-pentathlon-and-athletic-club",
-    "washington-running-club",
-    "washlands-women-runners",
-    "waverley-athletics-club",
-    "waverley-harriers",
-    "weald-tri-club",
-    "wearside-triathlon-club",
-    "weir-archer-academy",
-    "wellingborough-and-district-ac",
-    "wells-city-harriers",
-    "wenlock-olympians",
-    "werrington-joggers",
-    "west-bromwich-harriers",
-    "west-cheshire-athletic-club"
+    "west-hull-ladies",
+    "west-london-track-and-field",
+    "west-suffolk-ac",
+    "west-worthing-runners",
+    "westbury-harriers",
+    "western-tempo",
+    "weston-whippets",
+    "wetherby-runners-ac",
+    "weymouth-st-pauls-harriers",
+    "white-city-hull-rrc",
+    "white-horse-harriers",
+    "whitstable-road-runners",
+    "wigston-phoenix-rc",
+    "wilmslow-striders",
+    "wimborne-ac",
+    "winchester-running-club",
+    "windle-valley-runners",
+    "windrush-triathlon-club",
+    "winston-runners",
+    "welsh-athletics-team-gje"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1336,
-    "notableMemberEntries": 661,
-    "clubsWithContacts": 1075,
-    "contactEntries": 1808,
-    "clubsWithEmail": 1044,
-    "clubsWithPhone": 153,
-    "clubsWithSocials": 1179,
-    "socialLinks": 2484,
-    "websiteContactRecords": 1361
+    "extendedProfiles": 1356,
+    "notableMemberEntries": 666,
+    "clubsWithContacts": 1086,
+    "contactEntries": 1823,
+    "clubsWithEmail": 1055,
+    "clubsWithPhone": 155,
+    "clubsWithSocials": 1180,
+    "socialLinks": 2489,
+    "websiteContactRecords": 1369
   },
   "batchChanges": {
     "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 11,
-    "contactOrSocialRecordsChanged": 17,
-    "newWebsiteContactRecords": 12,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 18,
+    "newWebsiteContactRecords": 8,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 16,
-    "netSocialLinks": 4,
+    "netContactEntries": 15,
+    "netSocialLinks": 5,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
     "status": "Catalogue, club audit/profile checks, targeted ESLint, TypeScript and whitespace passed. Safe production build passed with database migration/publication hooks skipped. All20 actual rendered production-build pages passed biography/association, contacts/socials, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head Club profiles desktop/mobile workflow and Vercel evidence follow after commit in PR756."
   },
   "nextCandidateSlugs": [
-    "west-hull-ladies",
-    "west-london-track-and-field",
-    "west-suffolk-ac",
-    "west-wight-road-runners",
-    "west-worthing-runners",
-    "westbourne-r-c",
-    "westbury-harriers",
-    "western-tempo",
-    "weston-athletic-club",
-    "weston-whippets",
-    "wetherby-runners-ac",
-    "weymouth-st-pauls-harriers"
+    "wigan-phoenix",
+    "wigton-road-runners",
+    "winchester-fit-club-rc",
+    "wirral-ac",
+    "witham-rc",
+    "witham-runners-lincolnshire",
+    "withernsea-harriers",
+    "witney-road-runners",
+    "woking-ac",
+    "wolds-veteran-rc",
+    "women-on-the-run",
+    "welsh-athletics-welsh-schools-and-universities"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; check current head and writer status before edits.",
-    "Last verified published baseline is1291 biographies/639 associations from PR755. PR756 contains45 additional draft biographies/22 associations after batch71.",
-    "Batch71 is club-profiles-bs.ts, seedv71:20 biographies,11 associations,16 net contact entries,4 net social links. Canonical count1737 unchanged. Assembled coverage1336/1737 and661 associations. Final venue check labels VeloRunner shop as correspondence and suppresses unconfirmed Weald/Wearside directory addresses from public training fields; original directory sources remain preserved.",
-    "Continue remaining queue and rotate through any newly accessible non-English deferred sources; previous eligible non-English candidates remain in saved source gaps.",
-    "Keep Waverley AC and Harriers separate. Washington's original1970s club and Wenlock's older Games history do not establish precise founding dates for current clubs.",
-    "Wells Street5K start year, Ware/Werrington arrival-time conflicts, Wearside's limited timetable and Washlands' unconfirmed next course remain qualified. No guessed phone, email, founder or postcode.",
-    "Prior batch69 Truro Tuesday venue conflict and Preston dated swim notices remain qualified.",
-    "Confirm exact-head CI and the AthRecs project preview. Preserve registration/SEO/privacy; no outreach or athlete identities/results."
+    "Last verified published baseline1291 biographies/639 associations from PR755. PR756 contains65 additional draft biographies/27 associations after batch72; do not publish without fresh authority.",
+    "Batch72 is club-profiles-bt.ts seedv72:20 biographies,5 associations,15 net contact entries,5 net social links. Actual assembled coverage1356/1737 and666 associations.",
+    "Team GJE now has a sourced Swansea-area profile: omit placeholder midnight times. Remaining eligible non-English sources are still in saved gaps; rotate through newly accessible sources.",
+    "West Hull Ladies replacement website recovered. Do not confuse its Club Latus meeting point with White City Hull across the road. Windle Valley postal address is not a training venue.",
+    "Wetherby postcode and fee conflicts, West London junior age conflict, Westbury differing session times, and stale beginner-course notices are qualified. No guessed foundation dates or alumni.",
+    "Keep prior unresolved Wells Street5K year and Ware/Werrington/Truro timetable qualifications. Preserve existing sourced fields, registration, SEO, privacy and athlete identity boundaries.",
+    "Both parent0e69b266 workflows passed before batch72. Confirm new exact-head CI and AthRecs preview after commit; Vercel protection must remain intact."
   ],
   "sourceGaps": [
+    {
+      "slug": "west-london-track-and-field",
+      "status": "conflicting-junior-ages",
+      "reason": "Homepage lists junior coaching from4 and elsewhere7; confirm age directly. Contact page retains undated September-break notice. No founding year inferred.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wetherby-runners-ac",
+      "status": "postcode-and-fee-conflicts",
+      "reason": "2026–27 SiEntries listing givesLS225HA and conflicting fee figures; host Wetherby Sports Association givesLS225FN. Preserve host postcode and qualify discrepancy; obscured email not guessed.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "welsh-athletics-team-gje",
+      "status": "resolved-profile-remaining-history-gap",
+      "reason": "Fresh Welsh Athletics page supplies disciplines, Swansea-area venues and role contact. Added biography; midnight times omitted. Founding year and alumni remain unsupported.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "westbury-harriers",
+      "status": "conflicting-session-times",
+      "reason": "Senior training page and contact table differ on Monday time; booked-session confirmation takes priority. History explicitly distinguishes earlier village pack from1924 formal foundation.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "white-city-hull-rrc",
+      "status": "social-link-needs-review",
+      "reason": "Existing encoded Facebook link preserved without claiming fresh validation; homepage/contact no longer expose clear social target. Supplier hello@connectmy.club excluded.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "west-hull-ladies",
+      "status": "resolved-website-and-venue",
+      "reason": "Recovered westhullladies.co.uk and read OurClub/Training/Contact. Club Latus is across from Hull and East Riding Sports Club, not the same venue. Historic beginner-course advert not current intake.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "west-wight-road-runners",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "westbourne-r-c",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "weston-athletic-club",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wharfedale-harriers",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wheathampstead-warriors",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "whitchurch-whippets",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "widnes-running-club",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "widnes-wasps-ladies-r-c",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wigan-and-district-h-and-ac",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wilmslow-running-club",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wimbledon-windmilers",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "windsor-slough-eton-and-hounslow-ac",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "winter-hill-runners",
+      "status": "source-unreadable-batch72",
+      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "wells-city-harriers",
       "status": "conflicting-series-history",
