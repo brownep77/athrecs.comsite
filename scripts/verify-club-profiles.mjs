@@ -17,6 +17,25 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 67: distinct affiliation dates, virtual scope and supported venues.
+  assert.equal(clubProfiles["tavistock-run-project"].founded_year, 2013);
+  assert.match(clubProfiles["tavistock-run-project"].biography.join(" "), /October 2017/);
+  assert.equal(clubProfiles["teambr"].founded_year, undefined);
+  assert.equal(bySlug.get("teambr").city, "Broughton");
+  assert.equal(bySlug.get("team-bodyworks").postcode, "BN20 7SR");
+  assert.equal(bySlug.get("teignbridge-trotters").postcode, "TQ12 2AR");
+  assert.equal(bySlug.get("thame-runners").postcode, "OX9 3TH");
+  assert.equal(bySlug.get("thanet-roadrunners-ac").postcode, "CT12 6NB");
+  assert.equal(bySlug.get("team-manvers").address_kind, "clubhouse");
+  assert.equal(bySlug.get("team-coco").address_kind, "correspondence");
+  assert.equal(bySlug.get("team-coco").virtual, true);
+  assert.equal(clubProfiles["team-coco"].scope, "global");
+  assert.notEqual(clubProfiles["the-stragglers-running-club"].scope, "global");
+  assert.match(clubProfiles["team-derby-runner"].biography.join(" "), /no fixed club nights/);
+  assert.match(clubProfiles["teesdale-ac"].contact_note, /No current Couch to 5K/);
+  assert.ok(bySlug.get("telford-ac").contacts.some(c => c.email === "training@telfordac.uk"));
+  assert.ok(bySlug.get("team-manvers").contacts.some(c => c.email === "tri@mwbc.org.uk"));
+  for (const slug of ["tavistock-ac", "team-devizes-moonrakers-ac", "team-kennet-triathlon-and-ac", "tetbury-dolphins-running-club"]) assert.equal(clubProfiles[slug], undefined);
   // Batch 66: supported training bases, distinct clubs and qualified capacity.
   assert.equal(clubProfiles["surrey-walking-club"].founded_year, 1899);
   assert.equal(clubProfiles["swaledale-runners"].founded_year, 1986);

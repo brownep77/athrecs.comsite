@@ -1,60 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch66",
+  "lastEditorialBatch": "2026-10-16-batch67",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1251/1737 assembled biographies and 611 sourced associations; 251 biographies and 160 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
+  "publication": "1271/1737 assembled biographies and 622 sourced associations; 271 biographies and 171 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "sudbury-joggers",
-    "sunderland-harriers-and-ac",
-    "sunderland-strollers",
-    "surrey-walking-club",
-    "sutton-in-ashfield-harriers-and-ac",
-    "sutton-runners",
-    "sutton-striders",
-    "swale-combined-ac",
-    "swale-tri-club",
-    "swaledale-runners",
-    "swanley-and-district-ac",
-    "swindon-allstars",
-    "swindon-harriers",
-    "swindon-striders",
-    "swinton-running-club",
-    "tadcaster-harriers",
-    "tadley-runners",
-    "tamar-trotters",
-    "tamworth-ac",
-    "tattenhall-runners"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1251,
-    "notableMemberEntries": 611,
-    "clubsWithContacts": 1034,
-    "contactEntries": 1737,
-    "clubsWithEmail": 1006,
-    "clubsWithPhone": 140,
-    "clubsWithSocials": 1164,
-    "socialLinks": 2449,
-    "websiteContactRecords": 1324
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 9,
-    "contactOrSocialRecordsChanged": 15,
-    "newWebsiteContactRecords": 10,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 13,
-    "netSocialLinks": 2,
-    "unsafeWebsitesSuppressed": 0
-  },
-  "validationBeforeCommit": {
-    "status": "Sources read on 16 October 2026 UTC. Parent f77ec6a5bc091e4c8b4ba98dd10e46102da57541 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38840194967 and quality gate38840195116 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head workflow and preview evidence will be recorded in PR755 after commit."
-  },
-  "nextCandidateSlugs": [
-    "tavistock-ac",
     "tavistock-run-project",
     "team-anstey-amblers-and-runners",
     "team-bath-athletic-club",
@@ -62,32 +14,134 @@
     "team-caterpillar",
     "team-coco",
     "team-derby-runner",
-    "team-devizes-moonrakers-ac",
-    "team-kennet-triathlon-and-ac",
     "team-manvers",
     "teambr",
     "teesdale-ac",
     "teignbridge-trotters",
     "telford-ac",
     "tempest-running-club",
-    "tetbury-dolphins-running-club",
     "tewkesbury-running-club",
     "tfn-tri-club",
-    "thame-runners"
+    "thame-runners",
+    "thames-valley-triathletes",
+    "thamesmead-running-club",
+    "thanet-roadrunners-ac",
+    "the-stragglers-running-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1271,
+    "notableMemberEntries": 622,
+    "clubsWithContacts": 1044,
+    "contactEntries": 1754,
+    "clubsWithEmail": 1015,
+    "clubsWithPhone": 144,
+    "clubsWithSocials": 1167,
+    "socialLinks": 2456,
+    "websiteContactRecords": 1333
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 11,
+    "contactOrSocialRecordsChanged": 18,
+    "newWebsiteContactRecords": 9,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 17,
+    "netSocialLinks": 7,
+    "unsafeWebsitesSuppressed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Sources read on 16 October 2026 UTC. Parent 22ca2d454bdc051b577c4f376d47628e4e68e792 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38845214373 and quality gate38845214307 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head workflow and preview evidence will be recorded in PR755 after commit."
+  },
+  "nextCandidateSlugs": [
+    "the-students-union-at-uwe",
+    "thetford-ac",
+    "thirsk-and-sowerby-harriers",
+    "thornbury-rc",
+    "thorney-rc",
+    "thornton-cleveleys-running-club",
+    "three-counties-running-club",
+    "thurrock-harriers",
+    "tiptree-road-runners",
+    "tiverton-harriers",
+    "todmorden-harriers",
+    "tooting-run-club",
+    "torbay-aac",
+    "torbay-tri-club",
+    "torrington-aac",
+    "totley-ac",
+    "totton-rc",
+    "track-academy",
+    "trafford-athletic-club",
+    "trail-runners-adventure-running-club"
   ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch66 adds20 profiles in club-profiles-bn.ts. Preserve sourced fields and use guarded remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–66 remain draft; no publication authorized.",
+    "Batch67 adds20 profiles in club-profiles-bo.ts. Preserve sourced fields and use guarded remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–67 remain draft; no publication authorized.",
     "Recent rotations covered Irish triathlon and Welsh school districts. Revisit non-English source gaps when primary evidence is readable; do not repeat completed batches.",
-    "Tadworth AC remains deferred: history page returned403 and alternate host was inaccessible. Main queue resumes Tavistock AC.",
-    "Swaledale's supported base is Richmond, not the older Sedgefield directory address. Surrey Walking Club has event-specific locations, not a single St Albans training base.",
-    "Tamworth academy applicants aged8–10 enter a waiting list. Swindon Harriers pages differ between entry ages7 and8; confirm directly.",
-    "Tattenhall Tough Team was cancelled for2026; a2027 return is an intention, not a confirmed date. Footer event dates and membership paperwork can be stale.",
-    "Swindon Allstars canonical name and slug are retained; its linked official site and Wiltshire association use Slinn Allstars. Founders' first names are not expanded.",
+    "Main queue resumes The Students' Union at UWE. Eight unreadable primary-source candidates remain separately deferred.",
+    "Bodyworks' Hillbrow postcode is BN20 7SR; its Hailsham registered office is not training. Manvers' supported base is Wath-upon-Dearne; TeamBR is Broughton.",
+    "Team COCO is explicitly virtual/worldwide; its Newcastle office is correspondence, not training. Team Derby Runner does not require fixed club nights.",
+    "Team Caterpillar's North Yorkshire page was read but returned404 on recheck; confirm current venues. Teesdale says no current Couch to5K; Telford junior applicants must check coach capacity.",
+    "Tewkesbury's training page contains older material; confirm arrangements. Tempest's23 September2026 beginner notice is dated, not a promise of future intake.",
     "Masked emails and website suppliers remain excluded. Social links are attributed to the club page, not a claim of current account ownership."
   ],
   "sourceGaps": [
+    {
+      "slug": "tavistock-ac",
+      "url": "https://www.tavistockathletics.co.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Repeated home, history, contact and joining pages returned502 or timed out. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "team-devizes-moonrakers-ac",
+      "url": "https://www.teamdevizes.org/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Home and history pages timed out. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "team-kennet-triathlon-and-ac",
+      "url": "https://teamkennet.co.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Legacy .com was unreadable; new official .co.uk about, history and contact pages returned403. Access restrictions respected. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "tetbury-dolphins-running-club",
+      "url": "https://groups.runtogether.co.uk/TetburyDolphinsRunningClub",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: RunTogether redirected to an inaccessible ClubSpark page. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "thames-hare-and-hounds",
+      "url": "https://www.thameshareandhounds.org.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Primary homepage timed out. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "thanet-ac",
+      "url": "https://www.thanetac.org.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Primary club pages inaccessible; not conflated with Thanet Roadrunners AC. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "the-outrunners",
+      "url": "https://www.theoutrunners.co.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Primary club pages inaccessible. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "the-running-hub",
+      "url": "https://www.therunninghub.co.uk/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October 2026: Primary club pages timed out. Existing sourced fields retained; no new biography."
+    },
+    {
+      "slug": "team-caterpillar",
+      "url": "https://team-caterpillar.com/north-yorkshire",
+      "status": "profile-added-source-now-unavailable",
+      "reason": "Page was opened and read on16 October2026 but returned404 on recheck; current venues and sessions must be confirmed. Contact page remains the enquiry source."
+    },
     {
       "slug": "tadworth-ac",
       "url": "https://www.tadworthac.org.uk/history/",
