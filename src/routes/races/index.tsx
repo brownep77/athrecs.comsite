@@ -122,13 +122,14 @@ export const Route = createFileRoute("/races/")({
       },
     });
   },
-  head: ({ match }) => {
+  head: ({ loaderData, match }) => {
     if (IS_RUNRECS_SITE) return { links: [{ rel: "canonical", href: `${SITE_URL}/races` }] };
     const page = match.search.page ?? 1;
     const url = `${SITE_URL}/races${page > 1 ? `?page=${page}` : ""}`;
     const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
+    const noindex = filtered || (page > 1 && !loaderData?.length);
     return {
-      meta: siteGraphMeta({ title: `Races and athletics events${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find athletics events, race dates, locations, distances and official entry links. Browse track, field, cross-country and road fixtures on AthRecs.", url }).map((tag) => filtered && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
+      meta: siteGraphMeta({ title: `Races and athletics events${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find athletics events, race dates, locations, distances and official entry links. Browse track, field, cross-country and road fixtures on AthRecs.", url }).map((tag) => noindex && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
       links: [{ rel: "canonical", href: url }],
     };
   },

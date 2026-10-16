@@ -13,7 +13,7 @@ export type ContentSitemapKind = "races" | "clubs" | "results";
 function selection(kind: ContentSitemapKind): { query: string; values: unknown[] } {
   if (kind === "races")
     return {
-      query: `select e.id, e.slug from events e where e.sport in ('Athletics', 'Running', 'Parkrun')
+      query: `select e.id, e.slug from events e where e.sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon')
       and not exists (
         select 1 from jsonb_to_recordset($1::jsonb) aliases(old_slug text, current_slug text)
         join events target on target.slug = coalesce(
@@ -25,10 +25,10 @@ function selection(kind: ContentSitemapKind): { query: string; values: unknown[]
     };
   if (kind === "clubs")
     return {
-      query: `select c.id, c.slug from clubs c where lower(coalesce(c.sports, '')) ~ '(athletics|running|parkrun)'
+      query: `select c.id, c.slug from clubs c where lower(coalesce(c.sports, '')) ~ '(athletics|running|parkrun|triathlon)'
       or exists (select 1 from athletes a join results r on r.athlete_id = a.id
         join editions ed on ed.id = r.edition_id join events e on e.id = ed.event_id
-        where a.club_id = c.id and e.sport in ('Athletics', 'Running', 'Parkrun')
+        where a.club_id = c.id and e.sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon')
           and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'))`,
       values: [],
     };

@@ -27,7 +27,9 @@ try {
       values (${id}, ${editionId}, 'finished', 266, ${visibility}, 'https://example.org/results', 'Example Timing')`;
   }
   const get = async (path) => {
-    const response = await fetch(`${origin}${path}`);
+    // PGlite fixture writes can block the event loop beyond Vite's keep-alive
+    // timeout; do not reuse an idle test-server socket after those writes.
+    const response = await fetch(`${origin}${path}`, { headers: { connection: 'close' } });
     assert.equal(response.status, 200, path);
     const html = await response.text();
     return { html, $: cheerio.load(html), headers: response.headers };
@@ -95,8 +97,75 @@ try {
   const pages = await get('/sitemaps/pages.xml');
   assert(pages.html.includes('https://www.athrecs.com/athletes</loc>'));
   assert(!sitemap.html.includes('https://www.athrecs.com/nl/czechia</loc>'));
+  // Compare the actual result sitemap and rendered page after the final public
+  // row is withdrawn and restored. SQL-only selection tests cannot catch a
+  // stale route cache or a page/sitemap disagreement.
+  for (const visibility of ['public', 'private', 'public']) {
+    await sql`update results set result_visibility=${visibility} where athlete_id=${publicId}`;
+    const resultSitemap = await get('/sitemaps/results-1.xml');
+    assert.equal(resultSitemap.headers.get('cache-control'), 'no-store');
+    assert.equal(resultSitemap.html.includes(`https://www.athrecs.com${resultsPath}</loc>`), visibility === 'public');
+    const response = await fetch(`${origin}${resultsPath}`, {
+      headers: { 'user-agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)', connection: 'close' },
+    });
+    assert.equal(response.status, visibility === 'public' ? 200 : 404);
+    const html = await response.text();
+    const $ = cheerio.load(html);
+    if (visibility === 'public') {
+      assert(!/noindex|none/.test($('meta[name=robots]').attr('content')));
+      assert(!/noindex|none/.test(response.headers.get('x-robots-tag') ?? ''));
+      assert.equal($('link[rel=canonical]').attr('href'), `https://www.athrecs.com${resultsPath}`);
+      assert.match($('main').text(), /Synthetic Public Runner/);
+    } else {
+      assert(!html.includes('Synthetic Public Runner'), 'Withdrawn result must not remain in HTML or serialized data');
+    }
+  }
+  console.log('PASS: last public result withdrawal/restoration immediately agrees between sitemap membership and crawler page status, metadata, canonical and public content.');
   await sql`update athletes set profile_visibility='private' where id=${publicId}`;
   assert(!(await readAthleteDirectoryPage(sql, { letter: 'S' })).athletes.some((a)=>a.id===publicId), 'Privacy withdrawal applies without a cache expiry');
+  const [{ id: triathlonId }] = await sql`insert into events(slug,name,sport,country,city,surface)
+    values ('test-indexing-triathlon','Synthetic Indexing Triathlon','Triathlon','United Kingdom','Test City','Multi') returning id`;
+  await sql`insert into editions(event_id,event_date,distance_code,distance_km,status)
+    values (${triathlonId},current_date+365,'Sprint',25.75,'Scheduled')`;
+  const [{ id: triathlonClubId }] = await sql`insert into clubs(slug,name,city,county,country,sports)
+    values ('test-indexing-triathlon-club','Synthetic Indexing Triathlon Club','Test City','','United Kingdom','Triathlon') returning id`;
+  await sql`update athletes set club_id=${triathlonClubId} where slug='synthetic-private'`;
+  const { contentSitemapPageCount } = await server.ssrLoadModule('/src/lib/athrecs/content-sitemap.server.ts');
+  for (const [kind, slug] of [['races','test-indexing-triathlon'],['clubs','test-indexing-triathlon-club']]) {
+    const path = `/${kind}/${slug}`;
+    const page = await get(path);
+    assert(!/noindex|none/.test(page.$('meta[name=robots]').attr('content')), path);
+    assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${path}`);
+    assert(!page.html.includes('Synthetic Private Runner'), 'Public club sitemap inclusion must not expose private members');
+    const lastShard = await contentSitemapPageCount(sql, kind);
+    const map = await get(`/sitemaps/${kind}-${lastShard}.xml`);
+    assert(map.html.includes(`https://www.athrecs.com${path}</loc>`), path);
+  }
+  console.log('PASS: public triathlon event and club pages match sitemap inclusion while private club members remain hidden.');
+  // Use a controlled, synthetic two-page catalogue to exercise the boundary
+  // between a populated directory and an empty page through actual SSR.
+  await sql`update editions set status='Cancelled' where event_date >= current_date`;
+  await sql`insert into events(slug,name,sport,country,city,surface)
+    select 'test-indexing-directory-'||n,
+      'Synthetic Indexing Fixture '||chr(65+n/26)||chr(65+n%26),
+      'Athletics','United Kingdom','Test City','Track'
+    from generate_series(0,40) n`;
+  await sql`insert into editions(event_id,event_date,distance_code,distance_km,status)
+    select id,current_date+365,'1500m',1.5,'Scheduled' from events
+    where slug like 'test-indexing-directory-%'`;
+  for (const [path, count, indexable, canonical] of [
+    ['/races', 40, true, '/races'],
+    ['/races?page=2', 1, true, '/races?page=2'],
+    ['/races?page=3', 0, false, '/races?page=3'],
+    ['/races?q=Synthetic%20Indexing', 40, false, '/races'],
+    ['/races?q=missing-synthetic-fixture', 0, false, '/races'],
+  ]) {
+    const page = await get(path);
+    assert.equal(page.$('main a[href^="/races/test-indexing-directory-"]').length, count, path);
+    assert.equal(/noindex/.test(page.$('meta[name=robots]').attr('content')), !indexable, path);
+    assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${canonical}`, path);
+  }
+  console.log('PASS: populated race directory pages stay indexable; empty and filtered pages remain noindex with unchanged canonicals.');
   console.log('PASS: data-only collections SSR, bounded homepage and directory, A–Z crawlability, robots headers, factual biography/Person schema, locale consolidation and immediate withdrawal.');
   console.log('PASS: SSR archive distinction, safe result preview, credits, original result links, country running default, explicit sport selection, empty-directory noindex and live sitemap exclusion.');
 } finally {
