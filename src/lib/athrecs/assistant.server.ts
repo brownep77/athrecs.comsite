@@ -9,18 +9,19 @@ import {
   cleanupAssistant,
 } from "./assistant-store.server";
 import { askOpenAI } from "./assistant-provider.server";
+import { assistantProviderConfig } from "./assistant-config.server";
 
 export function assistantConfig() {
-  const apiKey = process.env.OPENAI_API_KEY?.trim() ?? "";
+  const provider = assistantProviderConfig();
   const enabled =
     process.env.ATHRECS_ASSISTANT_ENABLED === "true" &&
-    !!apiKey &&
+    !!provider.apiKey &&
+    !!provider.rateLimitSecret &&
     !!process.env.DATABASE_URL?.trim();
   const phone = process.env.ATHRECS_WHATSAPP_NUMBER?.trim() ?? "";
   return {
     enabled,
-    apiKey,
-    model: process.env.OPENAI_ASSISTANT_MODEL?.trim() || "gpt-6-luna",
+    ...provider,
     monthlyLimit: Math.min(
       10000,
       Math.max(
@@ -78,7 +79,7 @@ export async function assistantSend(input: AssistantInput) {
   // Vercel overwrites this header at its edge. Never trust arbitrary X-Forwarded-For.
   const ip = process.env.VERCEL === "1" ? getRequest().headers.get("x-vercel-forwarded-for") : null;
   const networkHash = ip
-    ? createHmac("sha256", config.apiKey)
+    ? createHmac("sha256", config.rateLimitSecret)
         .update(`${new Date().toISOString().slice(0, 10)}:${ip}`)
         .digest("hex")
     : null;

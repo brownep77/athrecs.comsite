@@ -6,7 +6,25 @@ registration. It does not search individual records or modify accounts. The UI
 supports English, French, German, Spanish, Italian, Dutch, Polish and Portuguese;
 visitors can also request another reply language in their message.
 
-## Enable on the existing AthRecs deployment
+## Enable using the existing Vercel account (no copied OpenAI key)
+
+Set `ATHRECS_ASSISTANT_PROVIDER=vercel`. Vercel injects and refreshes its
+`VERCEL_OIDC_TOKEN`; requests go to the Vercel AI Gateway Responses endpoint with
+the verified model ID `openai/gpt-6-luna`. Usage is charged to the Vercel team's AI
+Gateway credits. A funded/verified Gateway account is still required.
+
+Create a random server-only `ATHRECS_ASSISTANT_RATE_LIMIT_SECRET` as a Sensitive
+environment variable so token rotation does not reset network rate limits. Keep
+the existing persistent `DATABASE_URL` and enable `ATHRECS_ASSISTANT_ENABLED=true`
+only after a successful live provider check. Direct OpenAI remains supported.
+
+For an isolated provider check, set `ATHRECS_ASSISTANT_VERIFY_PROVIDER=true` on
+the feature branch's Preview environment and deploy. The normal build sends two
+synthetic questions (English/French), prints only their replies and fails if the
+provider is unavailable. It needs no database and logs no credentials. Remove
+the verification flag after the check; do not run paid probes on every build.
+
+## Alternative: connect a direct OpenAI project key
 
 1. Apply the normal additive database migrations (the existing build does this).
 2. In the hosting provider's secure environment settings, set `OPENAI_API_KEY`
@@ -16,7 +34,9 @@ visitors can also request another reply language in their message.
 5. Test an English and a non-English message; confirm both appear in the staff
    transcript page. A provider rejection is saved as an unavailable response.
 
-The launcher stays hidden without all three settings. The default model is
+The launcher stays hidden without its enabled flag, provider credential,
+stable rate-limit secret and persistent database. In direct mode the API key
+is the fallback rate-limit secret. The default direct model is
 `gpt-6-luna`; `OPENAI_ASSISTANT_MODEL` may select another Responses-compatible
 model supporting low reasoning effort. Model access and billing must be checked
 with the actual project key before enabling production traffic.
@@ -26,7 +46,7 @@ with the actual project key before enabling production traffic.
 600 output tokens and ten recent messages, each capped at 1,800 characters.
 There are also limits of 12 turns/browser/hour, 30 turns/network/hour on Vercel
 and 100 turns/conversation. Failed provider requests consume quota too. Configure
-the OpenAI project's budget alerts/limits separately; the turn limit is not a
+the active provider account's budget alerts/limits separately; the turn limit is not a
 currency-denominated spending guarantee. Set the enabled flag to false and
 redeploy to turn off new chats.
 

@@ -15,6 +15,7 @@ import {
   AssistantLimit,
 } from "../src/lib/athrecs/assistant-store.server.ts";
 import { askOpenAI } from "../src/lib/athrecs/assistant-provider.server.ts";
+import { assistantProviderConfig } from "../src/lib/athrecs/assistant-config.server.ts";
 
 const db = new PGlite();
 await db.exec(
@@ -51,6 +52,35 @@ const reset = () =>
   );
 
 try {
+  const gateway = assistantProviderConfig({
+    ATHRECS_ASSISTANT_PROVIDER: "vercel",
+    VERCEL_OIDC_TOKEN: "synthetic-token",
+    ATHRECS_ASSISTANT_RATE_LIMIT_SECRET: "synthetic-stable-secret",
+  });
+  assert.equal(gateway.provider, "vercel");
+  assert.equal(gateway.model, "openai/gpt-6-luna");
+  assert.equal(gateway.apiKey, "synthetic-token");
+  assert.equal(
+    assistantProviderConfig({
+      ATHRECS_ASSISTANT_PROVIDER: "vercel",
+      VERCEL_OIDC_TOKEN: "rotated-token",
+      ATHRECS_ASSISTANT_RATE_LIMIT_SECRET: gateway.rateLimitSecret,
+    }).rateLimitSecret,
+    gateway.rateLimitSecret,
+  );
+  assert.equal(assistantProviderConfig({ OPENAI_API_KEY: "direct-key" }).provider, "openai");
+  assert.equal(assistantProviderConfig({}).apiKey, "");
+  await askOpenAI([], "en", gateway, async (url, options) => {
+    assert.equal(url, "https://ai-gateway.vercel.sh/v1/responses");
+    assert.equal(options.headers.Authorization, "Bearer synthetic-token");
+    assert.equal(JSON.parse(options.body).model, "openai/gpt-6-luna");
+    return new Response(
+      JSON.stringify({
+        status: "completed",
+        output: [{ type: "message", content: [{ type: "output_text", text: "Hello" }] }],
+      }),
+    );
+  });
   assert.equal(assistantPage("/athletes"), "/athletes");
   for (const path of [
     "//evil.example",

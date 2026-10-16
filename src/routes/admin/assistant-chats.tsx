@@ -76,9 +76,9 @@ function AssistantChats() {
           role="status"
           className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 text-sm"
         >
-          The AI assistant is not enabled. Configure the server’s OpenAI key, a persistent database
-          and ATHRECS_ASSISTANT_ENABLED=true, then redeploy. No chat launcher is shown to visitors
-          until these are set.
+          The AI assistant is not enabled. Configure its provider connection, stable rate-limit
+          secret, persistent database and ATHRECS_ASSISTANT_ENABLED=true, then redeploy. No chat
+          launcher is shown to visitors until these are set.
         </p>
       ) : null}
       {chats.isError || transcript.isError || remove.isError ? (

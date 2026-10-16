@@ -59,10 +59,10 @@ function AthletePrivacyPage() {
             <p>
               When you send a message to the AthRecs AI assistant, we save the conversation,
               selected language, timestamps and starting public page so authorised staff can review
-              support enquiries and improve the service. Recent messages are sent to OpenAI to
-              generate a reply. AI answers may be incorrect; the assistant cannot verify your
-              identity, claim results or change your account. This is not a live human chat, and
-              staff monitoring or a reply is not guaranteed.
+              support enquiries and improve the service. Recent messages are processed by our
+              hosting provider Vercel and OpenAI to generate a reply. AI answers may be incorrect;
+              the assistant cannot verify your identity, claim results or change your account. This
+              is not a live human chat, and staff monitoring or a reply is not guaranteed.
             </p>
             <p className="mt-3">
               Chats are anonymous unless you identify yourself in your messages. Do not send
