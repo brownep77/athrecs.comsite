@@ -17,6 +17,20 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 79: source-qualified student and community programmes.
+  assert.equal(clubProfiles["kippax-and-district-harriers"].founded_year, 1983);
+  for (const slug of ["amazing-feet-running-club", "kingfisher-harriers", "athletics-ireland-annalee-a-c"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.match(clubProfiles["halton-and-frodsham-harriers"].biography.join(" "), /suspended/);
+  assert.match(clubProfiles["kippax-and-district-harriers"].biography.join(" "), /2026 course are closed/);
+  assert.match(clubProfiles["university-of-portsmouth-athletics-club"].biography.join(" "), /excludes affiliation/);
+  assert.equal(bySlug.get("kingfisher-harriers").city, "Redditch");
+  assert.equal(bySlug.get("halton-and-frodsham-harriers").city, "Frodsham");
+  assert.equal(bySlug.get("university-of-portsmouth-athletics-club").address_kind, "training");
+  assert.equal(bySlug.get("athletics-ireland-annalee-a-c").country, "Ireland");
+  for (const slug of ["amazing-feet-running-club", "kingfisher-harriers", "halton-and-frodsham-harriers"]) assert.equal(bySlug.get(slug).address, "");
+  assert.ok(bySlug.get("amazing-feet-running-club").contacts.some(c => c.email === "info@amazingfeetrc.co.uk"));
+  assert.ok(bySlug.get("university-of-warwick").contacts.some(c => c.email === "info.wuaxc@gmail.com"));
+  assert.ok(!bySlug.get("kingfisher-harriers").contacts.some(c => c.email?.endsWith("@connectmy.club")));
   // Batch 78: recovered local sources, distinct venues and qualified joining.
   assert.equal(clubProfiles["avon-tempo"].founded_year, 2025);
   assert.equal(clubProfiles["allerton-junior-athletics-club"].founded_year, 2014);

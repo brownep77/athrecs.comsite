@@ -1,71 +1,125 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch78",
+  "lastEditorialBatch": "2026-10-16-batch79",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–78 add150 biographies/67 associations in draft. Assembled totals1441/1737 and706 associations are not live totals. No production publication in batch78.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–79 add161 biographies/70 associations in draft. Assembled totals1452/1737 and709 associations are not live totals. No production publication in batch79.",
   "completedProfileSlugs": [
-    "lutterworth-harriers-running-club",
-    "eliot-ladies-at-ambleside",
-    "allerton-junior-athletics-club",
-    "avon-tempo",
-    "mow-cop-runners",
-    "rimrose-runners",
-    "tweed-striders",
-    "south-woodham-runners",
-    "netley-abbey-runners",
-    "boro-runners",
-    "peacehaven-run-club",
-    "lancashire-walking-club",
-    "hornsea-harriers"
+    "athletics-ireland-annalee-a-c",
+    "amazing-feet-running-club",
+    "university-of-warwick",
+    "university-of-sheffield-union-of-students",
+    "university-of-portsmouth-athletics-club",
+    "halton-and-frodsham-harriers",
+    "east-durham-running-club",
+    "run-peterlee",
+    "kingfisher-harriers",
+    "kippax-and-district-harriers",
+    "longstanton-and-northstowe-limpers"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1441,
-    "notableMemberEntries": 706,
-    "clubsWithContacts": 1138,
-    "contactEntries": 1915,
-    "clubsWithEmail": 1101,
+    "extendedProfiles": 1452,
+    "notableMemberEntries": 709,
+    "clubsWithContacts": 1143,
+    "contactEntries": 1920,
+    "clubsWithEmail": 1106,
     "clubsWithPhone": 169,
     "clubsWithSocials": 1193,
     "socialLinks": 2511,
-    "websiteContactRecords": 1427
+    "websiteContactRecords": 1437
   },
   "batchChanges": {
-    "extendedProfilesAdded": 13,
-    "notableMemberEntriesAdded": 6,
-    "contactOrSocialRecordsChanged": 11,
-    "newWebsiteContactRecords": 11,
+    "extendedProfilesAdded": 11,
+    "notableMemberEntriesAdded": 3,
+    "contactOrSocialRecordsChanged": 10,
+    "newWebsiteContactRecords": 10,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 9,
-    "netSocialLinks": 2,
+    "netContactEntries": 5,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build with database migration/publication hooks skipped. All13 real changed pages rendered HTTP200 and passed biography, association, contact/social, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head workflows and Vercel preview evidence follow in PR756. Local rendering is not hosted-page or production verification."
+    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build with database migration/publication hooks skipped. All11 real changed pages rendered HTTP200 and passed biography, association, contacts/socials, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head workflows and Vercel evidence follow in PR756. Local rendering is not hosted-page or production verification."
   },
   "nextCandidateSlugs": [
-    "athletics-ireland-annalee-a-c",
     "athletics-ireland-bailieboro-a-c",
     "island-tc",
-    "lymington-triathlon-club",
-    "gillingham-trotters",
-    "widnes-running-club"
+    "leicester-walking-club",
+    "rolls-royce-harriers",
+    "southampton-triathlon-club",
+    "gipsy-hill-run-club"
   ],
   "resumeInstructions": [
-    "Read current main, PR756, AGENTS.md, audit and checkpoint; verify head and active-writer status before edits. Preserve unrelated work.",
-    "Published baseline remains1291 biographies/639 associations from PR755. PR756 contains150 additional draft biographies/67 associations; no production authority.",
-    "Batch78 uses club-profiles-bz.ts and seedv78:13 biographies,6 associations,9 net contacts,2 net social links and11 new website-contact records. Actual assembled coverage1441/1737 and706 associations.",
-    "Recovered13 local running, junior athletics and race-walking sources. CompletedProfileSlugs lists this batch; do not repeat earlier source-failure classifications.",
-    "Boro joining page advertises waiting lists and12+ eligibility; calendar and joining days differ. Peacehaven's5K-under38-minutes threshold is retained; Friday frequency conflicts. Tweed form still2025–26.",
-    "Lutterworth Thursday times differ; Allerton waiting-list report dates2022. Hornsea history is supported but current programme/contact unresolved. Lancashire1907 reconstitution is distinct from1904 predecessor; event catering emails are not general contacts.",
-    "Lymington Tri homepage recovered with adult/all-ability remit, but member page403 and programme detail insufficient. Many older unavailable sites were retried without new evidence; rotate to governing-body/provider histories rather than repeatedly requesting blocked pages.",
-    "Retain prior unsafe-website suppressions for Liverpool Pembroke & Sefton, Pudsey & Bramley and Shepshed. Boalloy.co.uk is a truck manufacturer.",
-    "Parentee37b7f Club profiles38907551625 and quality38907551438 passed. Check this batch's exact-head evidence in PR756; preserve deployment protection."
+    "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and writer status before edits.",
+    "Published baseline remains1291 biographies/639 associations from PR755. PR756 contains161 draft biographies/70 associations; no production authority.",
+    "Batch79 uses club-profiles-ca.ts and seedv79:11 biographies,3 associations,5 net contacts and10 new website-contact records; no new social links. Assembled1452/1737 and709 associations.",
+    "Annalee's2020 Sportshall age range is historical, not current membership eligibility. Kippax2026 beginner entries closed; Halton and Frodsham Widnes sessions suspended.",
+    "Kingfisher2016 affiliation is not a verified foundation date. Sheffield and Portsmouth masked emails remain unset. General university and platform-support contacts excluded.",
+    "East Durham and Run Peterlee directory addresses differ; current meeting points unresolved. Longstanton programme comes from an undated NHS provider page; standalone site empty.",
+    "Rolls-Royce pages502/robots unavailable, Southampton Tri pages empty, Leicester Walking inaccessible. Gipsy Hill host event is marked past; current programme unresolved. Do not fill from snippets.",
+    "Retain earlier unsafe-website suppressions and source qualifications. No identities/results/privacy/verified-status changes.",
+    "Parent8addfa2 Club profiles38915172572 and quality38915172832 passed. Check exact-head evidence in PR756; preserve deployment protection."
   ],
   "sourceGaps": [
+    {
+      "slug": "athletics-ireland-annalee-a-c",
+      "status": "partial-current-programme",
+      "reason": "2020 Sportshall is historical. Current ages, timetable, foundation and club email remain unresolved.",
+      "url": "https://membership.athleticsireland.ie/clubpage/Annalee_A.C.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "halton-and-frodsham-harriers",
+      "status": "suspended-session",
+      "reason": "Widnes programme marked suspended; confirm places and current Tuesday Frodsham seasonal venue.",
+      "url": "https://handfharriers.wixsite.com/club",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "kippax-and-district-harriers",
+      "status": "closed-intake",
+      "reason": "2026 beginner entries closed; next intake unresolved.",
+      "url": "https://kippaxharriers.org.uk/beginners-group/",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "university-of-sheffield-union-of-students",
+      "status": "contact-and-timetable-gap",
+      "reason": "Union introduction recovered. Standalone website unavailable; email masked, current session timetable unresolved.",
+      "url": "https://su.sheffield.ac.uk/activities/view/athletics-cross-country",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "university-of-portsmouth-athletics-club",
+      "status": "masked-contact",
+      "reason": "2026–27 programme recovered; public email masked. Confirm competition selection requirements.",
+      "url": "https://sport.port.ac.uk/play-sports/clubs/athletics",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "east-durham-running-club",
+      "status": "location-conflict",
+      "reason": "Directories differ between SR8 3PN and SR8 3PL; current meeting point and timetable unresolved.",
+      "url": "https://www.clubdurham.co.uk/clubs/east-durham-running-club/",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "run-peterlee",
+      "status": "location-and-programme-gap",
+      "reason": "Helford Road versus Carrock Close directory addresses; current meeting points/intakes unresolved. Awards dated2024.",
+      "url": "https://www.clubdurham.co.uk/clubs/run-peterlee/",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "longstanton-and-northstowe-limpers",
+      "status": "undated-provider-programme",
+      "reason": "NHS programme recovered; standalone site empty, email masked. Confirm current sessions and fees.",
+      "url": "https://haysouthcambs.co.uk/activities/longstanton-northstowe-limpers-running-club/",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "lutterworth-harriers-running-club",
       "status": "timetable-conflict",
@@ -649,16 +703,6 @@
     },
     {
       "slug": "uckfield-runners",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
-    },
-    {
-      "slug": "university-of-sheffield-union-of-students",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
-    },
-    {
-      "slug": "university-of-warwick",
       "status": "deferred-unreadable-primary-source",
       "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
     },
@@ -2589,12 +2633,6 @@
       "reason": "Official club site503. Triathlon Ireland confirms Coalisland, Tyrone and info@islandtriathlonclub.com, added as a public role contact; biography remains deferred."
     },
     {
-      "slug": "athletics-ireland-annalee-a-c",
-      "url": "https://www.athleticsireland.ie/find-a-club/",
-      "status": "deferred-thin-primary-narrative",
-      "reason": "Revisited15October: search found secondary historical reporting only; no unsupported founding date or founder imported."
-    },
-    {
       "slug": "nantwich-running-club",
       "url": "https://nantwichrunningclub.co.uk/",
       "status": "profile-added-with-qualified-gap",
@@ -2659,12 +2697,6 @@
       "url": "https://www.mojofit.uk/",
       "status": "deferred-unavailable-primary-site",
       "reason": "Two direct homepage timeouts and unavailable web reader. No unsupported founding or training details added."
-    },
-    {
-      "slug": "athletics-ireland-annalee-a-c",
-      "url": "https://membership.athleticsireland.ie/clubpage/Annalee_A.C.",
-      "status": "deferred-thin-primary-narrative",
-      "reason": "Revisited15October: directory gives Breifne Park training venue and mixed membership but insufficient club narrative; no generic federation contacts imported."
     },
     {
       "slug": "athletics-ireland-ashford-a-c",
@@ -2919,12 +2951,6 @@
       "reason": "Homepage contains substantial unrelated crypto/casino text. Not used for a biography; links not followed and no compromise diagnosis made."
     },
     {
-      "slug": "athletics-ireland-annalee-a-c",
-      "url": "https://membership.athleticsireland.ie/clubpage/Annalee_A.C.",
-      "status": "deferred-thin-primary-source",
-      "reason": "AI venue listing is sparse. A local newspaper's April2025 junior-training account does not establish current arrangements or supply enough primary history."
-    },
-    {
       "slug": "leighton-buzzard-athletic-club",
       "url": "https://www.leightonbuzzardac.co.uk/juniors/",
       "status": "biography-added-conflicting-junior-pages",
@@ -2971,18 +2997,6 @@
       "url": "https://www.killamarshkestrels.wordpress.com",
       "status": "deferred-source-unavailable",
       "reason": "HTTP502 certificate hostname mismatch; no TLS safeguard disabled."
-    },
-    {
-      "slug": "kingfisher-harriers",
-      "url": "https://www.kingfisherharriers.com/",
-      "status": "deferred-timeout",
-      "reason": "HTTP and HTTPS attempts timed out."
-    },
-    {
-      "slug": "kippax-and-district-harriers",
-      "url": "https://www.kippaxharriers.org.uk/",
-      "status": "deferred-timeout",
-      "reason": "HTTP and HTTPS attempts timed out."
     },
     {
       "slug": "kingswood-triathlon-club",
@@ -3837,12 +3851,6 @@
       "reason": "History includes2007accounts; officers and rankings not current claims. Shipley summer, Heanor welfare winter and juniorRutland arrangements distinguished. Chairman phone omitted pending freshness confirmation."
     },
     {
-      "slug": "halton-and-frodsham-harriers",
-      "url": "https://www.hfh.org.uk/",
-      "status": "deferred-source-insufficient",
-      "reason": "HTTP and HTTPS responses200 but empty usable text; no biography added."
-    },
-    {
       "slug": "hartlepool-burn-road-harriers",
       "url": "https://www.hartlepoolburnroad.co.uk",
       "status": "deferred-source-unavailable",
@@ -4693,12 +4701,6 @@
       "url": "https://www.ormeaurunners.co.uk",
       "status": "superseded-by-batch34-review",
       "reason": "Club site unavailable. Opened organiser Eventbrite listing supports an August 2026 Fleadh Run but not a full history or current joining programme. Deferred. See batch34 profile and latest qualified source-gap entry; this earlier retrieval failure is not the current biography status."
-    },
-    {
-      "slug": "athletics-ireland-annalee-a-c",
-      "url": "https://www.annaleeac.ie/",
-      "status": "club-site-502",
-      "reason": "Club Flickr corroborates Cavan Town and welcomes members; Athletics Ireland gives Breifne Park. Fuller biography deferred pending substantive primary history and joining detail."
     },
     {
       "slug": "athletics-ireland-ace-a-c",

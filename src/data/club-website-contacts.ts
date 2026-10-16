@@ -3,6 +3,16 @@ import type { ClubSeed } from "./types";
 // Public club contact pages. Each added contact/link retains its source and actual check date.
 // Excludes supplier contacts, governing-body accounts and unconfirmed numeric social IDs.
 export const clubWebsiteContacts: Record<string, Partial<ClubSeed>> = {
+  "amazing-feet-running-club": {"contact_url":"https://amazingfeetrc.co.uk/contact/","contacts":[{"role":"Club enquiries","email":"info@amazingfeetrc.co.uk","source_url":"https://amazingfeetrc.co.uk/contact/","checked_at":"2026-10-16"}]},
+  "university-of-warwick": {"contact_url":"https://www.warwicksu.com/societies-sports/sports-clubs/athleticscrosscount/","contacts":[{"role":"Athletics and cross-country enquiries","email":"info.wuaxc@gmail.com","source_url":"https://www.warwicksu.com/societies-sports/sports-clubs/athleticscrosscount/","checked_at":"2026-10-16"}]},
+  "university-of-sheffield-union-of-students": {"contact_url":"https://su.sheffield.ac.uk/activities/view/athletics-cross-country"},
+  "university-of-portsmouth-athletics-club": {"contact_url":"https://sport.port.ac.uk/play-sports/clubs/athletics"},
+  "halton-and-frodsham-harriers": {"contact_url":"https://handfharriers.wixsite.com/club","contacts":[{"role":"Club enquiries","email":"handfharriers@gmail.com","source_url":"https://handfharriers.wixsite.com/club","checked_at":"2026-10-16"}]},
+  "east-durham-running-club": {"contact_url":"https://www.clubdurham.co.uk/clubs/east-durham-running-club/"},
+  "run-peterlee": {"contact_url":"https://www.clubdurham.co.uk/clubs/run-peterlee/"},
+  "kingfisher-harriers": {"contact_url":"https://kingfisherharriers.com.connectmyclub.co.uk/info/membership","contacts":[{"role":"Secretary and membership enquiries","email":"secretary@kingfisherharriers.com","source_url":"https://kingfisherharriers.com.connectmyclub.co.uk/info/membership","checked_at":"2026-10-16"}]},
+  "kippax-and-district-harriers": {"contact_url":"https://kippaxharriers.org.uk/join-us/","contacts":[{"role":"Club enquiries","email":"info@kippaxharriers.org.uk","source_url":"https://kippaxharriers.org.uk/join-us/","checked_at":"2026-10-16"}]},
+  "longstanton-and-northstowe-limpers": {"contact_url":"https://haysouthcambs.co.uk/activities/longstanton-northstowe-limpers-running-club/"},
   "lutterworth-harriers-running-club": {"contact_url":"https://www.lutterworthharriers.co.uk/contact/"},
   "eliot-ladies-at-ambleside": {"contact_url":"https://www.amblesideclub.co.uk/club-sections","contacts":[{"role":"Eliot Ladies enquiries","phone":"07824 425222","source_url":"https://www.amblesideclub.co.uk/club-sections","checked_at":"2026-10-16"}],"socials":[{"platform":"Facebook","url":"https://www.facebook.com/EliotLadiesAmbleside/","source_url":"https://www.amblesideclub.co.uk/club-sections","checked_at":"2026-10-16"}]},
   "allerton-junior-athletics-club": {"contact_url":"https://www.ajac.club/contact"},
