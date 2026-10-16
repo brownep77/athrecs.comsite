@@ -1,93 +1,128 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch67",
+  "lastEditorialBatch": "2026-10-16-batch68",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1271/1737 assembled biographies and 622 sourced associations; 271 biographies and 171 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
+  "publication": "1291/1737 assembled biographies and 639 sourced associations; 291 biographies and 188 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "tavistock-run-project",
-    "team-anstey-amblers-and-runners",
-    "team-bath-athletic-club",
-    "team-bodyworks",
-    "team-caterpillar",
-    "team-coco",
-    "team-derby-runner",
-    "team-manvers",
-    "teambr",
-    "teesdale-ac",
-    "teignbridge-trotters",
-    "telford-ac",
-    "tempest-running-club",
-    "tewkesbury-running-club",
-    "tfn-tri-club",
-    "thame-runners",
-    "thames-valley-triathletes",
-    "thamesmead-running-club",
-    "thanet-roadrunners-ac",
-    "the-stragglers-running-club"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1271,
-    "notableMemberEntries": 622,
-    "clubsWithContacts": 1044,
-    "contactEntries": 1754,
-    "clubsWithEmail": 1015,
-    "clubsWithPhone": 144,
-    "clubsWithSocials": 1167,
-    "socialLinks": 2456,
-    "websiteContactRecords": 1333
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 11,
-    "contactOrSocialRecordsChanged": 18,
-    "newWebsiteContactRecords": 9,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 17,
-    "netSocialLinks": 7,
-    "unsafeWebsitesSuppressed": 0
-  },
-  "validationBeforeCommit": {
-    "status": "Sources read on 16 October 2026 UTC. Parent 22ca2d454bdc051b577c4f376d47628e4e68e792 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38845214373 and quality gate38845214307 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head workflow and preview evidence will be recorded in PR755 after commit."
-  },
-  "nextCandidateSlugs": [
     "the-students-union-at-uwe",
     "thetford-ac",
     "thirsk-and-sowerby-harriers",
     "thornbury-rc",
     "thorney-rc",
-    "thornton-cleveleys-running-club",
     "three-counties-running-club",
     "thurrock-harriers",
     "tiptree-road-runners",
-    "tiverton-harriers",
     "todmorden-harriers",
     "tooting-run-club",
-    "torbay-aac",
     "torbay-tri-club",
     "torrington-aac",
-    "totley-ac",
     "totton-rc",
     "track-academy",
-    "trafford-athletic-club",
-    "trail-runners-adventure-running-club"
+    "trail-runners-adventure-running-club",
+    "trail-running-association",
+    "trawden-athletic-club",
+    "trentham-rc",
+    "tri-logic-cornwall",
+    "tri-london"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1291,
+    "notableMemberEntries": 639,
+    "clubsWithContacts": 1052,
+    "contactEntries": 1775,
+    "clubsWithEmail": 1024,
+    "clubsWithPhone": 146,
+    "clubsWithSocials": 1172,
+    "socialLinks": 2465,
+    "websiteContactRecords": 1341
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 17,
+    "contactOrSocialRecordsChanged": 17,
+    "newWebsiteContactRecords": 8,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 21,
+    "netSocialLinks": 9,
+    "unsafeWebsitesSuppressed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Sources read on 16 October 2026 UTC. Parent f3fae7c8cf90dbff9fc785302562011685353df4 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38849857054 and quality gate38849857191 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head CI and preview evidence will be recorded in PR755 after commit."
+  },
+  "nextCandidateSlugs": [
+    "tri-preston",
+    "tri-surrey-triathlon-club",
+    "tri-tempo-eastbourne",
+    "tring-rc",
+    "truro-running-club",
+    "trx-wolves-ac",
+    "ttt-run-club",
+    "tuff-fitty-triathlon-club",
+    "tunbridge-wells-harriers",
+    "twisted-running",
+    "tyne-bridge-harriers",
+    "tynedale-harriers-and-ac",
+    "uckfield-runners",
+    "ucl-running-athletics-and-cross-country-club",
+    "uffo-athletic-satellite-clubs",
+    "university-of-birmingham-ac-and-cross-country-club",
+    "university-of-manchester-ath-and-xc-club",
+    "university-of-plymouth-athletics-club",
+    "university-of-sheffield-union-of-students",
+    "university-of-warwick"
   ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch67 adds20 profiles in club-profiles-bo.ts. Preserve sourced fields and use guarded remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–67 remain draft; no publication authorized.",
-    "Recent rotations covered Irish triathlon and Welsh school districts. Revisit non-English source gaps when primary evidence is readable; do not repeat completed batches.",
-    "Main queue resumes The Students' Union at UWE. Eight unreadable primary-source candidates remain separately deferred.",
-    "Bodyworks' Hillbrow postcode is BN20 7SR; its Hailsham registered office is not training. Manvers' supported base is Wath-upon-Dearne; TeamBR is Broughton.",
-    "Team COCO is explicitly virtual/worldwide; its Newcastle office is correspondence, not training. Team Derby Runner does not require fixed club nights.",
-    "Team Caterpillar's North Yorkshire page was read but returned404 on recheck; confirm current venues. Teesdale says no current Couch to5K; Telford junior applicants must check coach capacity.",
-    "Tewkesbury's training page contains older material; confirm arrangements. Tempest's23 September2026 beginner notice is dated, not a promise of future intake.",
-    "Masked emails and website suppliers remain excluded. Social links are attributed to the club page, not a claim of current account ownership."
+    "Batch68 adds20 profiles in club-profiles-bp.ts. Preserve sourced fields and use guarded remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–68 remain draft; no publication authorized.",
+    "Recent rotations covered Irish triathlon and Welsh school districts. Revisit non-English source gaps when primary evidence is readable; this batch focuses on regional English running, student athletics and multisport.",
+    "Main queue resumes Tri Preston. Thornton Cleveleys, Tiverton, Torbay AAC, Totley and Trafford remain deferred for unreadable primary narrative.",
+    "Tri London gives1986 on its homepage but around1985 in its history; leave exact founding year empty. Thorney junior venues are dated2024–25; confirm before presenting as current.",
+    "Tooting affiliated in July2026; its common sessions are paused at review and free sessions require booking.",
+    "Thurrock trains at Blackshots, RM16 2QT. Trentham uses Trentham Academy. Regional networks and the Trail Running Association are national, not global.",
+    "UWE's record dates do not establish its founding year. Track Academy founder Connie Henry stepped back in2024; historical associations are not current leadership or athlete-identity claims.",
+    "Masked emails, site suppliers and Trentham template contacts are excluded. Existing sourced fields retain their provenance unless freshly rechecked."
   ],
   "sourceGaps": [
+    {
+      "slug": "thornton-cleveleys-running-club",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Home returned502 and the history page timed out."
+    },
+    {
+      "slug": "tiverton-harriers",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Official home page returned502."
+    },
+    {
+      "slug": "torbay-aac",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Primary club website was inaccessible."
+    },
+    {
+      "slug": "totley-ac",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Home and about pages timed out."
+    },
+    {
+      "slug": "trafford-athletic-club",
+      "status": "deferred-unreadable-primary-source",
+      "reason": "16 October 2026: Official page returned no readable narrative."
+    },
+    {
+      "slug": "tri-london",
+      "status": "profile-date-conflict",
+      "reason": "16 October 2026: Homepage says1986; history says around1985. Exact founding year remains unset."
+    },
+    {
+      "slug": "thorney-rc",
+      "status": "profile-current-junior-venues-unresolved",
+      "reason": "16 October 2026: Junior training details refer to2024–25; confirm current venues and timetable."
+    },
     {
       "slug": "tavistock-ac",
       "url": "https://www.tavistockathletics.co.uk/",

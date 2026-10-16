@@ -17,6 +17,28 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 68: supported venues, national scope and qualified historical dates.
+  assert.equal(clubProfiles["thirsk-and-sowerby-harriers"].founded_year, 1977);
+  assert.equal(clubProfiles["thurrock-harriers"].founded_year, 1949);
+  assert.equal(clubProfiles["trawden-athletic-club"].founded_year, 1993);
+  assert.equal(clubProfiles["tri-london"].founded_year, undefined);
+  assert.match(clubProfiles["tri-london"].contact_note, /1986.*1985/);
+  assert.match(clubProfiles["tooting-run-club"].biography.join(" "), /July 2026/);
+  assert.match(clubProfiles["tooting-run-club"].contact_note, /common sessions are paused/);
+  assert.equal(bySlug.get("thurrock-harriers").postcode, "RM16 2QT");
+  assert.equal(bySlug.get("thornbury-rc").city, "Thornbury");
+  assert.equal(bySlug.get("thorney-rc").city, "Whittlesey");
+  assert.equal(bySlug.get("thorney-rc").postcode, "");
+  assert.equal(bySlug.get("trentham-rc").address, "Trentham Academy, Allerton Road, Stoke-on-Trent");
+  for (const slug of ["trail-running-association", "trail-runners-adventure-running-club"]) {
+    assert.equal(clubProfiles[slug].scope, "national");
+    assert.equal(bySlug.get(slug).country, "England");
+  }
+  for (const slug of ["trail-running-association", "tri-london", "torbay-tri-club"]) assert.equal(bySlug.get(slug).postcode, "");
+  for (const slug of ["tooting-run-club", "tri-london", "torbay-tri-club", "tri-logic-cornwall"]) assert.equal(bySlug.get(slug).adult_only, true);
+  assert.ok(bySlug.get("track-academy").contacts.some(c => c.email === "admin@trackacademy.co.uk"));
+  assert.ok(bySlug.get("trawden-athletic-club").contacts.some(c => c.email === "juniors@trawdenac.co.uk"));
+  assert.ok(!bySlug.get("trentham-rc").contacts.some(c => c.email === "mymail@mailservice.com" || c.phone === "5555555555"));
   // Batch 67: distinct affiliation dates, virtual scope and supported venues.
   assert.equal(clubProfiles["tavistock-run-project"].founded_year, 2013);
   assert.match(clubProfiles["tavistock-run-project"].biography.join(" "), /October 2017/);
