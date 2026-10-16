@@ -121,6 +121,25 @@ try {
   console.log('PASS: last public result withdrawal/restoration immediately agrees between sitemap membership and crawler page status, metadata, canonical and public content.');
   await sql`update athletes set profile_visibility='private' where id=${publicId}`;
   assert(!(await readAthleteDirectoryPage(sql, { letter: 'S' })).athletes.some((a)=>a.id===publicId), 'Privacy withdrawal applies without a cache expiry');
+  const [{ id: triathlonId }] = await sql`insert into events(slug,name,sport,country,city,surface)
+    values ('test-indexing-triathlon','Synthetic Indexing Triathlon','Triathlon','United Kingdom','Test City','Multi') returning id`;
+  await sql`insert into editions(event_id,event_date,distance_code,distance_km,status)
+    values (${triathlonId},current_date+365,'Sprint',25.75,'Scheduled')`;
+  const [{ id: triathlonClubId }] = await sql`insert into clubs(slug,name,city,county,country,sports)
+    values ('test-indexing-triathlon-club','Synthetic Indexing Triathlon Club','Test City','','United Kingdom','Triathlon') returning id`;
+  await sql`update athletes set club_id=${triathlonClubId} where slug='synthetic-private'`;
+  const { contentSitemapPageCount } = await server.ssrLoadModule('/src/lib/athrecs/content-sitemap.server.ts');
+  for (const [kind, slug] of [['races','test-indexing-triathlon'],['clubs','test-indexing-triathlon-club']]) {
+    const path = `/${kind}/${slug}`;
+    const page = await get(path);
+    assert(!/noindex|none/.test(page.$('meta[name=robots]').attr('content')), path);
+    assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${path}`);
+    assert(!page.html.includes('Synthetic Private Runner'), 'Public club sitemap inclusion must not expose private members');
+    const lastShard = await contentSitemapPageCount(sql, kind);
+    const map = await get(`/sitemaps/${kind}-${lastShard}.xml`);
+    assert(map.html.includes(`https://www.athrecs.com${path}</loc>`), path);
+  }
+  console.log('PASS: public triathlon event and club pages match sitemap inclusion while private club members remain hidden.');
   // Use a controlled, synthetic two-page catalogue to exercise the boundary
   // between a populated directory and an empty page through actual SSR.
   await sql`update editions set status='Cancelled' where event_date >= current_date`;

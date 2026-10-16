@@ -64,22 +64,27 @@ try {
       (4, 'marathon', 'Marathon', 'Running', 'United Kingdom'),
       (5, 'outside-window', 'Outside Window', 'Running', 'Ireland'),
       (6, 'cycling', 'Cycling', 'Cycling', 'United Kingdom'),
-      (7, 'parkrun', 'Parkrun', 'Parkrun', 'Australia');
+      (7, 'parkrun', 'Parkrun', 'Parkrun', 'Australia'),
+      (8, 'triathlon', 'Synthetic Triathlon', 'Triathlon', 'United Kingdom');
     insert into editions values (1,1,'2026-09-20','1500m'), (2,2,'2026-09-20','10K'),
       (3,3,'2026-09-20','5K'), (4,4,'2026-09-20','Marathon'), (5,5,'2028-01-01','5K'),
       (6,6,'2026-09-20','Road race'), (7,1,'9999-01-01','1500m'),
       (8,1,'2026-09-20','800m'), (9,1,'2026-09-20','400m'),
-      (10,1,'2026-09-20','200m'), (11,1,'2026-09-20','100m');
+      (10,1,'2026-09-20','200m'), (11,1,'2026-09-20','100m'),
+      (12,8,'2026-09-20','Sprint');
     insert into catalogue_import_batches values (1,'runrecs:collector:test');
     insert into catalogue_revisions values (1,1);
     insert into catalogue_change_log values (1,'edition','insert','{"record":{"id":3}}');
     insert into clubs values (1,'athletics-club','Athletics'), (2,'running-club','Running'),
-      (3,'private-member-only','Cycling'), (4,'out-of-scope','Cycling');
+      (3,'private-member-only','Cycling'), (4,'out-of-scope','Cycling'),
+      (5,'triathlon-club','Triathlon'), (6,'triathlon-result-club',''),
+      (7,'private-triathlon-only','');
     insert into athletes values (1,2,'public','Athlete'), (2,3,'private','Athlete'),
       (3,4,'public','Athlete'), (4,1,'public','Athlete'), (5,1,'public','Athlete'),
-      (6,1,'public','Athlete');
+      (6,1,'public','Athlete'), (7,6,'public','Athlete'), (8,7,'private','Athlete');
     insert into results values (1,1,1,'public'), (2,8,2,'public'), (3,6,3,'public'),
-      (4,9,4,'public'), (5,10,5,'public'), (6,11,6,'private'), (7,7,1,'public');
+      (4,9,4,'public'), (5,10,5,'public'), (6,11,6,'private'), (7,7,1,'public'),
+      (8,12,7,'public'), (9,12,8,'private');
     insert into athlete_account_links values (4,'disabled','active'), (5,'hidden','active');
     insert into athlete_public_shares values ('disabled',false,true), ('hidden',true,true);
     insert into athlete_profile_hidden_results values ('hidden',5);
@@ -91,14 +96,18 @@ try {
     "/races/marathon",
     "/races/outside-window",
     "/races/parkrun",
+    "/races/triathlon",
   ]);
   assert.deepEqual(await contentSitemapPaths(sql, "clubs", 1), [
     "/clubs/athletics-club",
     "/clubs/running-club",
+    "/clubs/triathlon-club",
+    "/clubs/triathlon-result-club",
   ]);
   assert.deepEqual(await contentSitemapPaths(sql, "results", 1), [
     "/results/track-meeting-2026-09-20-1500m-1",
     "/results/cycling-2026-09-20-road-race-6",
+    "/results/synthetic-triathlon-2026-09-20-sprint-12",
   ]);
   assert.equal(await contentSitemapPageCount(sql, "results"), 1);
   await db.exec("update athlete_public_shares set enabled=true where user_id='disabled'");
@@ -113,8 +122,8 @@ try {
     ...(await contentSitemapPaths(sql, "clubs", 1)),
     ...(await contentSitemapPaths(sql, "clubs", 2)),
   ];
-  assert.equal(clubs.length, 5002);
-  assert.equal(new Set(clubs).size, 5002);
+  assert.equal(clubs.length, 5004);
+  assert.equal(new Set(clubs).size, 5004);
   assert.deepEqual(await contentSitemapPaths(sql, "clubs", 3), []);
   assert.deepEqual(await contentSitemapPaths(sql, "clubs", 0), []);
   // Synthetic records reproduce stale catalogue aliases after a deliberate rename.
@@ -152,7 +161,7 @@ try {
     "Sitemaps must list the canonical page, not its redirect",
   );
   console.log(
-    "PASS: readable collision-safe result URLs; complete sitemap pagination; event scope; published Running and Parkrun inclusion; private, hidden, disabled and future result exclusions; immediate publication changes.",
+    "PASS: readable collision-safe result URLs; complete sitemap pagination; event scope; published Running, Parkrun and Triathlon inclusion; public triathlon clubs; private, hidden, disabled and future result exclusions; immediate publication changes.",
   );
 } finally {
   await db.close();
