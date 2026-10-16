@@ -1,46 +1,45 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch85",
+  "lastEditorialBatch": "2026-10-16-batch86",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–85 add212 biographies/98 associations in draft. Assembled totals1503/1737 and737 associations are not live totals. No production publication in batch85.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–86 add218 biographies/103 associations in draft. Assembled totals1509/1737 and742 associations are not live totals. No production publication in batch86.",
   "completedProfileSlugs": [
-    "ventura-runners",
-    "grimsby-harriers-and-ac",
-    "white-cliffs-athletics-and-running-club",
-    "shildon-running-and-ac",
-    "the-outrunners",
-    "athletics-ni-west-belfast-coolers"
+    "east-grinstead-and-district-ac",
+    "formula-one-circuit-crew",
+    "stock-exchange-ac",
+    "blythe-bridge-running-club",
+    "hunwick-harriers",
+    "harling-athletic-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1503,
-    "notableMemberEntries": 737,
-    "clubsWithContacts": 1164,
-    "contactEntries": 1954,
-    "clubsWithEmail": 1125,
+    "extendedProfiles": 1509,
+    "notableMemberEntries": 742,
+    "clubsWithContacts": 1165,
+    "contactEntries": 1955,
+    "clubsWithEmail": 1126,
     "clubsWithPhone": 177,
     "clubsWithSocials": 1200,
     "socialLinks": 2524,
-    "websiteContactRecords": 1468
+    "websiteContactRecords": 1471
   },
   "batchChanges": {
     "extendedProfilesAdded": 6,
-    "notableMemberEntriesAdded": 2,
-    "contactOrSocialRecordsChanged": 3,
-    "newWebsiteContactRecords": 2,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 3,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 4,
+    "newWebsiteContactRecords": 3,
+    "directoryRecordsRefreshed": 2,
+    "netContactEntries": 1,
     "netSocialLinks": 0,
-    "unsafeWebsitesSuppressed": 1
+    "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Passed: catalogue/club audits, profile regressions, targeted lint, TypeScript, whitespace and safe production build; migrations/publication skipped. Six new pages plus Liverpool returned HTTP200 and passed biography, contacts/socials, location/flags, registration, title/description/canonical and SportsOrganization JSON-LD assertions; unsafe Liverpool website link absent. Exact-head desktop/mobile workflow and preview evidence follows in PR756. Local rendering is not hosted verification."
+    "status": "Passed: catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build; database migration/publication skipped. All six new biographies plus both Irish town-correction pages returned HTTP200 and passed biography, contacts/socials, location/flags, registration and title/description/canonical/SportsOrganization JSON-LD assertions. Exact-head dedicated Club profiles desktop/mobile workflow and Vercel evidence follow in PR756. Local rendering is not hosted verification."
   },
   "nextCandidateSlugs": [
-    "east-grinstead-and-district-ac",
     "fry-club-joggers",
     "yellow-brick-road-running-and-walking-club",
     "athletics-ni-st-annes-ac",
@@ -49,16 +48,28 @@
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and active writer before edits.",
-    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–85 add212 biographies/98 associations in draft. Assembled totals1503/1737 and737 associations are not live totals. No production publication in batch85.",
-    "Batch85 modulecg seedv85: six biographies, two founder/organiser-listed associations, three net contact entries and two new website-contact records. Liverpool website suppressed after unrelated pharmaceutical spam; Shepshed remains suppressed. No external spam links followed.",
-    "Ventura initial contact/training pages readable, later retries failed; email also supported by team page. Grimsby legal-theme placeholders excluded and 5.30/6pm start conflict qualified. Stadium explicitly not a postal address.",
-    "White Cliffs March2023 origin/November2023 award account is dated, not current fees/timetable. Shildon independent first-person directory undated; Club Durham confirms Wednesday track listing but mislabeled Twitter link excluded.",
-    "Outrunners recovered www site. Charity2020 is not club foundation; adult club classification retained alongside separate youth programme. DG04 session base conflicts with D.1.04 contact page; confirm entrance.",
-    "West Belfast Coolers secretary Hotmail retained with original provenance; 2026 Feile Gmail is event-only. Mark Carey organiser page is undated, not current-membership proof or a result. No permanent venue inferred from race start.",
-    "Many candidate domains remained inaccessible or thin. Kingswood/Billericay empty; St Annes ANI news index did not expose Clubmark article. Do not use snippets, namesake rugby/GAA clubs, or template content to fill biographies.",
-    "New Ross/Island league positions remain provisional until23October; retain previous unresolved source gaps and no whole-directory manual-review claim."
+    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–86 add218 biographies/103 associations in draft. Assembled totals1509/1737 and742 associations are not live totals. No production publication in batch86.",
+    "Batch86 modulech seedv86: six biographies, five dated/historical editorial associations, one new public enquiry email and three new contact-page records. Collins Cycle Centre and DB Triathlon nearest towns refreshed to Thurles and Drung; original contact dates preserved.",
+    "East Grinstead academy year5 entry in March2026 update supersedes older year4 text; current timetable and Sackville use unresolved. Formula One official about pages failed; governing-body2014 visit and live ClubBuzz enquiry form recovered. Data-controller email excluded.",
+    "Stock Exchange1910 formation is distinct from predecessor1903 walk. Yahoo Groups and archive-admin contacts excluded. Blythe Bridge2018 first-person account supports historical beginner programme, not current timetable; founding year unset.",
+    "Hunwick2011 refers to predecessor Run Hunwick, not exact club foundation; junior eligibility conflicts between directories. Harling2014 origins and email confirmed; weekend times conflict, 2026 10K cancelled and hoped-for2027 return unconfirmed.",
+    "Pudsey & Bramley homepage contains unrelated steroid links; existing website suppression retained, no newly retrieved contacts adopted and no spam destinations followed.",
+    "Fry Club only old newsletter/race leads; Yellow Brick Road lacks substantive primary content; St Annes Clubmark lead remains unconfirmed. Irish bare directory rows do not justify biographies. Rotate Boalloy school/charity-history, Milocarian services-history and Meads primary leads next.",
+    "Preserve earlier source gaps, including New Ross/Island league standings provisional until23October. Do not claim whole-directory manual review."
   ],
   "sourceGaps": [
+    {
+      "slug": "blythe-bridge-running-club",
+      "status": "profile-added-qualified-source",
+      "reason": "First-person 2018 member account and ClubSpark sections recovered. Historical Couch to 5K is not current enrolment. Feature gives 1983 but no independent club-history confirmation; founding year unset. Main website unavailable and calendar has no readable session rows.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "harling-athletic-club",
+      "status": "profile-added-qualified-source",
+      "reason": "Club origins, email and Church Road training base confirmed. Weekend times, eligibility and Sunday frequency differ between pages. July 2026 notice cancels 2026 10K; hoped-for 2027 return is not confirmed.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "ventura-runners",
       "status": "profile-added-qualified-source",
@@ -603,8 +614,8 @@
     },
     {
       "slug": "db-triathlon-club",
-      "status": "current-programme-gap",
-      "reason": "TI directory opened and Drung/Cavan entry reconfirmed; dbcyclingclub.com unavailable. No full programme/history source.",
+      "status": "location-corrected-biography-deferred",
+      "reason": "Nearest town corrected to Drung from current Triathlon Ireland directory. Existing email retained with original provenance. Club website unavailable; no substantive primary history or programme for a full biography.",
       "checkedAt": "2026-10-16"
     },
     {
@@ -1078,8 +1089,9 @@
     {
       "slug": "stock-exchange-ac",
       "url": "https://stockexchangeac.org/",
-      "status": "deferred-unreadable-club-source",
-      "reason": "Club website timed out; search snippets and secondary professional-network references are insufficient for a sourced history."
+      "status": "profile-added-qualified-source",
+      "reason": "Official history recovered: 1910 club formation differs from the 1903 predecessor walk. Current general contact, admission policy and weekly venue unresolved; Yahoo Groups and archive-admin email excluded.",
+      "checkedAt": "2026-10-16"
     },
     {
       "slug": "striders-of-croydon",
@@ -2002,14 +2014,16 @@
     {
       "slug": "collins-cycle-centre-triathlon-club",
       "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "The opened official directory confirms Thurles and the role email but offers insufficient club-specific history or training detail for a full biography."
+      "status": "location-corrected-biography-deferred",
+      "reason": "Nearest town corrected to Thurles from current Triathlon Ireland directory. Existing enquiry email retained with original provenance. Governing-body homepage is not a standalone club website; no full biography from a bare directory row.",
+      "checkedAt": "2026-10-16"
     },
     {
       "slug": "db-triathlon-club",
       "url": "http://dbcyclingclub.com/",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "The club website could not be opened. The governing-body directory confirms Drung and the email, but indexed event references alone were not used for a biography."
+      "status": "location-corrected-biography-deferred",
+      "reason": "Nearest town corrected to Drung from current Triathlon Ireland directory. Existing email retained with original provenance. Club website unavailable; no substantive primary history or programme for a full biography.",
+      "checkedAt": "2026-10-16"
     },
     {
       "slug": "run-middlewich",
@@ -3340,8 +3354,9 @@
     {
       "slug": "hunwick-harriers",
       "url": "https://www.hunwickharriers.co.uk",
-      "status": "deferred-source-unavailable",
-      "reason": "502 connection refused. Club Durham and club-owned historical statements are alternative leads, not yet enough opened evidence for biography."
+      "status": "profile-added-qualified-source",
+      "reason": "Primary first-person 2012 article documents Run Hunwick from August 2011, not exact later club formation. Club Durham listing conflicts with adult-only classification. Current venues, sessions and junior eligibility unresolved.",
+      "checkedAt": "2026-10-16"
     },
     {
       "slug": "hurricane-striders",
@@ -5401,16 +5416,16 @@
     {
       "slug": "collins-cycle-centre-triathlon-club",
       "url": "https://www.triathlonireland.com/",
-      "status": "insufficient-primary-history",
-      "note": "Directory confirms Thurles and club email but links to the governing body, not a club website. No substantive primary history or programme established; biography deferred.",
-      "checkedAt": "2026-10-14"
+      "status": "location-corrected-biography-deferred",
+      "checkedAt": "2026-10-16",
+      "reason": "Nearest town corrected to Thurles from current Triathlon Ireland directory. Existing enquiry email retained with original provenance. Governing-body homepage is not a standalone club website; no full biography from a bare directory row."
     },
     {
       "slug": "db-triathlon-club",
       "url": "http://dbcyclingclub.com/",
-      "status": "unavailable-source",
-      "note": "Club domain returned 502; Drung directory listing alone is insufficient for a full biography.",
-      "checkedAt": "2026-10-14"
+      "status": "location-corrected-biography-deferred",
+      "checkedAt": "2026-10-16",
+      "reason": "Nearest town corrected to Drung from current Triathlon Ireland directory. Existing email retained with original provenance. Club website unavailable; no substantive primary history or programme for a full biography."
     },
     {
       "slug": "cromane-triathlon-club",
@@ -6107,10 +6122,9 @@
     {
       "slug": "east-grinstead-and-district-ac",
       "url": "http://www.eastgrinsteadac.co.uk/",
-      "reason": "Official website returned a Cloudflare/DNS-prohibited 403. No bypass and no biography added.",
-      "checkedAt": "2026-10-14",
-      "category": "unavailable-source",
-      "status": "deferred"
+      "reason": "Recovered official About and March 2026 academy update. Year 5 entry supersedes older year 4 text. Current seasonal timetable and Sackville facilities remain unconfirmed; no new social destinations adopted.",
+      "checkedAt": "2026-10-16",
+      "status": "profile-added-qualified-source"
     },
     {
       "slug": "drighlington-dynamos-running-club",
@@ -6227,8 +6241,9 @@
     {
       "slug": "formula-one-circuit-crew",
       "url": "https://www.formulaonecc.co.uk/",
-      "status": "deferred",
-      "reason": "Official pages failed TLS hostname validation; search text alone was not used for a biography. ClubBuzz alternative also unavailable."
+      "status": "profile-added-qualified-source",
+      "reason": "Official about pages returned 502, but England Athletics 2014 visit and ClubBuzz membership form recovered. Historical Forest Recreation Ground training is not a current start. Data-controller email excluded.",
+      "checkedAt": "2026-10-16"
     },
     {
       "slug": "framlingham-flyers",

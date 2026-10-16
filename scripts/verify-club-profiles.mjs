@@ -17,6 +17,27 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 86: distinguish predecessor events, newer intake rules and stale schedules.
+  assert.equal(clubProfiles["stock-exchange-ac"].founded_year, 1910);
+  assert.equal(clubProfiles["formula-one-circuit-crew"].founded_year, 1998);
+  assert.equal(clubProfiles["east-grinstead-and-district-ac"].founded_year, 1978);
+  assert.equal(clubProfiles["harling-athletic-club"].founded_year, 2014);
+  for (const slug of ["hunwick-harriers", "blythe-bridge-running-club"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.deepEqual(bySlug.get("east-grinstead-and-district-ac").sports, ["Running", "Athletics"]);
+  assert.match(clubProfiles["east-grinstead-and-district-ac"].biography.join(" "), /school year 5/);
+  assert.match(clubProfiles["harling-athletic-club"].biography.join(" "), /will not take place in 2026/);
+  assert.equal(bySlug.get("harling-athletic-club").postcode, "NR16 2NB");
+  assert.equal(bySlug.get("harling-athletic-club").address_kind, "training");
+  assert.ok(bySlug.get("harling-athletic-club").contacts.some(c => c.email === "harlingathletics@gmail.com"));
+  assert.equal(bySlug.get("blythe-bridge-running-club").county, "Staffordshire");
+  assert.equal(bySlug.get("stock-exchange-ac").city, "London");
+  assert.equal(bySlug.get("hunwick-harriers").city, "Hunwick");
+  assert.equal(bySlug.get("hunwick-harriers").address, "");
+  assert.equal(bySlug.get("hunwick-harriers").adult_only, true);
+  assert.equal(bySlug.get("collins-cycle-centre-triathlon-club").city, "Thurles");
+  assert.equal(bySlug.get("db-triathlon-club").city, "Drung");
+  assert.equal(bySlug.get("formula-one-circuit-crew").contacts.length, 0);
+  assert.equal(bySlug.get("stock-exchange-ac").contacts.length, 0);
   // Batch 85: real venues, qualified historical accounts and unsafe-site exclusion.
   assert.equal(clubProfiles["grimsby-harriers-and-ac"].founded_year, 1906);
   assert.equal(clubProfiles["white-cliffs-athletics-and-running-club"].founded_year, 2023);
@@ -251,7 +272,8 @@ try {
   assert.match(clubProfiles["stevenage-and-north-herts-ac"].contact_note, /waiting lists were closed/);
   assert.ok(bySlug.get("stevenage-phoenix-running-club").contacts.some(c => c.email === "runners@stevenagephoenix.org.uk"));
   assert.ok(!bySlug.get("stroud-and-district-ac").contacts.some(c => c.email?.endsWith("@connectmy.club")));
-  for (const slug of ["stock-exchange-ac", "striders-of-croydon"]) assert.equal(clubProfiles[slug], undefined);
+  // Stock Exchange history was recovered in batch 86; Croydon remains deferred.
+  assert.equal(clubProfiles["striders-of-croydon"], undefined);
   // Batch 64: distinct clubs, qualified dates and session-specific venues.
   assert.equal(clubProfiles["spenborough-and-dist-ac"].founded_year, 1965);
   assert.equal(clubProfiles["st-albans-ac"].founded_year, 1989);
