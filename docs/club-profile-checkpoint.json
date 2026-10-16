@@ -1,84 +1,100 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch74",
+  "lastEditorialBatch": "2026-10-16-batch75",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–74 add104 biographies/49 associations in draft. Assembled totals1395/1737 and688 associations are not live totals. No production publication in batch74.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–75 add115 biographies/53 associations in draft. Assembled totals1406/1737 and692 associations are not live totals. No production publication in batch75.",
   "completedProfileSlugs": [
-    "wolds-veteran-rc",
-    "woodthorpe-huffers-and-puffers",
-    "wrekin-harriers",
-    "wrekin-road-runners",
-    "wycombe-phoenix-harriers-and-ac",
-    "wye-valley-runners",
-    "wymeswold-rc",
-    "yate-and-district-ac",
-    "yate-and-sodbury-striders",
-    "yaxley-runners-and-joggers",
-    "yeovil-olympiads-ac",
-    "yeovil-town-rrc",
-    "young-athletes-club",
-    "zero-to-hero-runners",
-    "british-wheelchair-athletics-association",
-    "black-girls-do-run-uk",
-    "benson-striders",
-    "barnt-green-chuggers",
-    "brentwood-running-club"
+    "bishops-stortford-rc",
+    "braintree-and-district-ac",
+    "bubble-works-run-community",
+    "be-fit-today-track-academy",
+    "best-athletics",
+    "blc-on-the-run",
+    "centurion-rc",
+    "army-athletics-association",
+    "athletics-ireland-ashford-a-c",
+    "bournemouth-joggers",
+    "borrowdale-fell-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1395,
-    "notableMemberEntries": 688,
-    "clubsWithContacts": 1108,
-    "contactEntries": 1867,
-    "clubsWithEmail": 1076,
-    "clubsWithPhone": 162,
+    "extendedProfiles": 1406,
+    "notableMemberEntries": 692,
+    "clubsWithContacts": 1114,
+    "contactEntries": 1877,
+    "clubsWithEmail": 1081,
+    "clubsWithPhone": 164,
     "clubsWithSocials": 1182,
     "socialLinks": 2494,
-    "websiteContactRecords": 1391
+    "websiteContactRecords": 1396
   },
   "batchChanges": {
-    "extendedProfilesAdded": 19,
-    "notableMemberEntriesAdded": 13,
-    "contactOrSocialRecordsChanged": 13,
-    "newWebsiteContactRecords": 10,
+    "extendedProfilesAdded": 11,
+    "notableMemberEntriesAdded": 4,
+    "contactOrSocialRecordsChanged": 7,
+    "newWebsiteContactRecords": 5,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 18,
+    "netContactEntries": 10,
     "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit/profile checks, targeted ESLint, TypeScript and whitespace passed. Safe build passed with database migration/publication hooks skipped. All19 actual rendered production-build pages passed biography/association, contacts/socials, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head Club profiles desktop/mobile workflow and Vercel evidence follow after commit in PR756."
+    "status": "Catalogue, club audit/profile checks, targeted ESLint, TypeScript and whitespace passed. Safe build passed with database migration/publication hooks skipped. All11 actual rendered production-build pages passed biography/association, contacts/socials, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head Club profiles desktop/mobile workflow and Vercel evidence follow after commit in PR756."
   },
   "nextCandidateSlugs": [
     "7-hills-harriers",
-    "army-athletics-association",
-    "be-fit-today-track-academy",
     "beaumont-rc",
-    "bishops-stortford-rc",
     "blythe-bridge-running-club",
-    "braintree-and-district-ac",
     "worcester-students-union-athletic-club",
     "zoom-tri-club-bournemouth",
     "athletics-ireland-annalee-a-c",
-    "athletics-ireland-ashford-a-c",
     "athletics-ni-west-belfast-coolers",
     "island-tc"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; check head and active-writer status before edits. Preserve unrelated work and prior source gaps.",
-    "Published baseline remains1291 biographies/639 associations from PR755. PR756 now contains104 additional draft biographies/49 associations; no fresh production authority.",
-    "Batch74 uses club-profiles-bv.ts and seedv74:19 biographies,13 historical/founding/coaching associations,18 net contacts,13 changed website-contact records and no net social additions. Actual assembled coverage1395/1737 and688 associations.",
-    "Completed clubs include Benson Striders, Barnt Green Chuggers and Brentwood Running Club: recovered official pages, do not repeat their earlier blocked-source attempts.",
-    "Wolds Veteran's biography is supported by a historical BMAF club account, not a current timetable. Wymeswold's directory contact needs current confirmation; Zero to Hero's current intake is unconfirmed.",
-    "Wrekin Harriers and Young Athletes age bands differ across pages; confirm group availability. Wycombe distinguishes official1912 foundation from1910 activity. Black Girls Do Run UK weekday details differ; do not promise a fixed session.",
-    "Remove unsupported multisport tags only where supported: Yate & District retains athletics/running; Yate & Sodbury and Benson retain running. Preserve country flags, registration and metadata code.",
-    "Non-English West Belfast Coolers and Island TC were revisited but no substantive programme source was established. Rotate to remaining early-alphabet candidates and retain Irish/Welsh source gaps.",
-    "Parent e8ab63a Club profiles passed; broad quality gate was still running. Check exact-head desktop/mobile workflow and AthRecs preview evidence in PR756 after commit; retain deployment protection."
+    "Published baseline remains1291 biographies/639 associations from PR755. PR756 contains115 additional draft biographies/53 associations; no production authority.",
+    "Batch75 uses club-profiles-bw.ts and seedv75:11 biographies,4 founding associations,10 net contacts,7 changed website-contact records (5 new) and unchanged social totals. Actual assembled coverage1406/1737 and692 associations.",
+    "Recovered Be Fit Today, Centurion, Bournemouth Joggers and Borrowdale websites. Ashford Wicklow now has a sourced biography; do not repeat older insufficient-source classifications as current.",
+    "Keep Be Fit Today age/fee and Best Athletics time/fee conflicts qualified. Bishops Stortford contact/join/history routes timed out. Ashford's current session timetable and club contact remain unconfirmed.",
+    "Army Athletics is national military participation, not public drop-in sport; its address is administrative and its existing socials are wider Army Sport accounts. Best Athletics explicitly supports global scope.",
+    "Batch75 revisited early-alphabet gaps: Beaumont403, Boxtedtimeouts, Clanfield502, Compton/CrystalPeaks/BurtonAC/CoalvilleTri unavailable, CityStoke502; do not manufacture profiles from snippets. Rotate remaining regions and non-English candidates when substantive primary sources are available.",
+    "Parent6f64328 Club profiles and Athrecs quality gate both passed. Check exact-head workflow/preview evidence in PR756; retain deployment protection."
   ],
   "sourceGaps": [
+    {
+      "slug": "be-fit-today-track-academy",
+      "status": "age-and-fee-conflicts",
+      "reason": "Working academy site recovered. Youngest age bands differ and older fees remain; phone confirmed, masked email not guessed.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "best-athletics",
+      "status": "schedule-and-fee-conflicts",
+      "reason": "Global community and2020 origin established. Session times and dated/current fee notes differ; use app for current arrangements.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "bishops-stortford-rc",
+      "status": "partial-site-access",
+      "reason": "Homepage supports1983 origin, clubhouse and programme; join/contact/history pages timed out. Existing links retain earlier check dates.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "athletics-ireland-ashford-a-c",
+      "status": "biography-recovered-current-programme-gap",
+      "reason": "AI senior listing, Anthony Kelly2025 first-person congress biography and Bray's host-club account read. Exact founding year, current timetable and club-specific contact remain unconfirmed.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "borrowdale-fell-runners",
+      "status": "current-training-gap",
+      "reason": "Official club and race pages support joining contact and race activity; no regular training address/timetable or precise founding year established.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "wolds-veteran-rc",
       "status": "historical-source-only",
