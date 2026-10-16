@@ -871,6 +871,32 @@ try {
     null,
     "Owner withdrawal also blocks the existing-sharing publication path",
   );
+  // Exercise every combination through the real HTTP page and XML routes,
+  // including bot rendering. A permissive flag must never cancel a veto.
+  const googlebot = {
+    "user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+  };
+  for (const enabled of [false, true]) {
+    for (const shareResults of [false, true]) {
+      for (const searchIndexable of [false, true]) {
+        await sql`update athlete_public_shares
+          set enabled=${enabled},share_results=${shareResults},search_indexable=${searchIndexable}
+          where user_id=${user.id}`;
+        const indexable = enabled && shareResults && searchIndexable;
+        const status = enabled && shareResults ? 200 : 404;
+        await expectSearch("published-history-fixture", indexable, {}, status);
+        await expectSearch("published-history-fixture", indexable, googlebot, status);
+        await expectSitemap(indexable);
+      }
+    }
+  }
+  // Check a withdrawal immediately after the final all-enabled response.
+  await sql`update athlete_public_shares set search_indexable=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false, googlebot);
+  await expectSitemap(false);
+  console.log(
+    "PASS: all eight sharing/results/search combinations agree across anonymous HTML, Googlebot HTML, HTTP robots headers and live sitemap membership; immediate search withdrawal stays uncached.",
+  );
   console.log(
     "PASS: approved public profiles opt into search with matching HTML/header robots and sitemap; owner choices, withdrawal, unpublished histories and forged request headers remain protected.",
   );

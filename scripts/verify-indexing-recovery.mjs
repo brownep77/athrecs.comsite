@@ -95,6 +95,30 @@ try {
   const pages = await get('/sitemaps/pages.xml');
   assert(pages.html.includes('https://www.athrecs.com/athletes</loc>'));
   assert(!sitemap.html.includes('https://www.athrecs.com/nl/czechia</loc>'));
+  // Compare the actual result sitemap and rendered page after the final public
+  // row is withdrawn and restored. SQL-only selection tests cannot catch a
+  // stale route cache or a page/sitemap disagreement.
+  for (const visibility of ['public', 'private', 'public']) {
+    await sql`update results set result_visibility=${visibility} where athlete_id=${publicId}`;
+    const resultSitemap = await get('/sitemaps/results-1.xml');
+    assert.equal(resultSitemap.headers.get('cache-control'), 'no-store');
+    assert.equal(resultSitemap.html.includes(`https://www.athrecs.com${resultsPath}</loc>`), visibility === 'public');
+    const response = await fetch(`${origin}${resultsPath}`, {
+      headers: { 'user-agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)' },
+    });
+    assert.equal(response.status, visibility === 'public' ? 200 : 404);
+    const html = await response.text();
+    const $ = cheerio.load(html);
+    if (visibility === 'public') {
+      assert(!/noindex|none/.test($('meta[name=robots]').attr('content')));
+      assert(!/noindex|none/.test(response.headers.get('x-robots-tag') ?? ''));
+      assert.equal($('link[rel=canonical]').attr('href'), `https://www.athrecs.com${resultsPath}`);
+      assert.match($('main').text(), /Synthetic Public Runner/);
+    } else {
+      assert(!html.includes('Synthetic Public Runner'), 'Withdrawn result must not remain in HTML or serialized data');
+    }
+  }
+  console.log('PASS: last public result withdrawal/restoration immediately agrees between sitemap membership and crawler page status, metadata, canonical and public content.');
   await sql`update athletes set profile_visibility='private' where id=${publicId}`;
   assert(!(await readAthleteDirectoryPage(sql, { letter: 'S' })).athletes.some((a)=>a.id===publicId), 'Privacy withdrawal applies without a cache expiry');
   console.log('PASS: data-only collections SSR, bounded homepage and directory, A–Z crawlability, robots headers, factual biography/Person schema, locale consolidation and immediate withdrawal.');
