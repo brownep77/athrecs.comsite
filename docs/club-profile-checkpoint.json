@@ -1,73 +1,127 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch77",
+  "lastEditorialBatch": "2026-10-16-batch78",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–77 add137 biographies/61 associations in draft. Assembled totals1428/1737 and700 associations are not live totals. No production publication in batch77.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–78 add150 biographies/67 associations in draft. Assembled totals1441/1737 and706 associations are not live totals. No production publication in batch78.",
   "completedProfileSlugs": [
-    "fetch-everyone",
-    "shefford-runners",
-    "fordy-runs-running-club-leeds",
-    "wesham-road-runners-and-ac",
-    "whitchurch-whippets",
-    "wigan-and-district-h-and-ac",
-    "walton-ac",
-    "salford-metropolitan-ac",
-    "watford-harriers",
-    "tri-lakeland",
-    "southport-strollers-running-club",
-    "leven-valley-ac"
+    "lutterworth-harriers-running-club",
+    "eliot-ladies-at-ambleside",
+    "allerton-junior-athletics-club",
+    "avon-tempo",
+    "mow-cop-runners",
+    "rimrose-runners",
+    "tweed-striders",
+    "south-woodham-runners",
+    "netley-abbey-runners",
+    "boro-runners",
+    "peacehaven-run-club",
+    "lancashire-walking-club",
+    "hornsea-harriers"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1428,
-    "notableMemberEntries": 700,
-    "clubsWithContacts": 1131,
-    "contactEntries": 1906,
-    "clubsWithEmail": 1096,
-    "clubsWithPhone": 167,
-    "clubsWithSocials": 1191,
-    "socialLinks": 2509,
-    "websiteContactRecords": 1416
+    "extendedProfiles": 1441,
+    "notableMemberEntries": 706,
+    "clubsWithContacts": 1138,
+    "contactEntries": 1915,
+    "clubsWithEmail": 1101,
+    "clubsWithPhone": 169,
+    "clubsWithSocials": 1193,
+    "socialLinks": 2511,
+    "websiteContactRecords": 1427
   },
   "batchChanges": {
-    "extendedProfilesAdded": 12,
-    "notableMemberEntriesAdded": 4,
-    "contactOrSocialRecordsChanged": 13,
-    "newWebsiteContactRecords": 13,
+    "extendedProfilesAdded": 13,
+    "notableMemberEntriesAdded": 6,
+    "contactOrSocialRecordsChanged": 11,
+    "newWebsiteContactRecords": 11,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 14,
-    "netSocialLinks": 8,
+    "netContactEntries": 9,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with database publication/migration hooks skipped. All12 real changed pages rendered HTTP200 and passed biography, association, contact/social, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head remote workflows and Vercel preview evidence follow in PR756; local rendering is not hosted-page or production verification."
+    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build with database migration/publication hooks skipped. All13 real changed pages rendered HTTP200 and passed biography, association, contact/social, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head workflows and Vercel preview evidence follow in PR756. Local rendering is not hosted-page or production verification."
   },
   "nextCandidateSlugs": [
+    "athletics-ireland-annalee-a-c",
+    "athletics-ireland-bailieboro-a-c",
+    "island-tc",
+    "lymington-triathlon-club",
     "gillingham-trotters",
-    "boalloy-running-club",
-    "athletics-ireland-barrow-harriers-a-c",
-    "athletics-ni-st-annes-ac",
-    "ventoux-triathlon-club",
-    "widnes-running-club",
-    "widnes-wasps-ladies-r-c",
-    "wimbledon-windmilers",
-    "winter-hill-runners"
+    "widnes-running-club"
   ],
   "resumeInstructions": [
-    "Read current main, PR756, AGENTS.md, audit and checkpoint; check head and active-writer status before edits. Preserve unrelated work and prior source gaps.",
-    "Published baseline remains1291 biographies/639 associations from PR755. PR756 now contains137 additional draft biographies/61 associations; no production authority.",
-    "Batch77 uses club-profiles-by.ts and seedv77:12 biographies,4 historical/founding associations,14 net contacts,8 net social links and13 new website-contact records. Actual assembled coverage1428/1737 and700 associations.",
-    "Recovered Fetch's separate affiliated club, Shefford's actual club pages, Fordy Leeds' Run with the Rhinos programme, Wesham, Whitchurch, Wigan endurance, Walton, Salford, Watford, Tri Lakeland, Southport and Leven Valley. Do not repeat prior insufficient-source classifications for completed clubs.",
-    "Widnes Running Club and Widnes Wasps Ladies RC received separate Active Halton-listed enquiry emails only. They still need substantive programme/history sources for biographies; canonical slugs are distinct.",
-    "Wesham's1985 foundation conflicts with25th anniversary2009. Salford waiting list is dated2025; Wigan endurance timetable2024; Leven provider timetable undated. Watford specialist-session days conflict. Keep these qualified.",
-    "Boalloy.co.uk is a truck manufacturer, not a running-club source. Congleton council's2021 booklet supports older activity but not current joining. Barrow Harriers'2019 camp and St Annes'2026 track bookings do not establish full current club programmes.",
-    "Retain prior unsafe-website suppressions for Liverpool Pembroke & Sefton, Pudsey & Bramley and Shepshed. Do not restore from snippets.",
-    "Parent7f55fd5 Club profiles and Athrecs quality gate both passed. Check this batch's exact-head workflow/preview evidence in PR756, retaining deployment protection."
+    "Read current main, PR756, AGENTS.md, audit and checkpoint; verify head and active-writer status before edits. Preserve unrelated work.",
+    "Published baseline remains1291 biographies/639 associations from PR755. PR756 contains150 additional draft biographies/67 associations; no production authority.",
+    "Batch78 uses club-profiles-bz.ts and seedv78:13 biographies,6 associations,9 net contacts,2 net social links and11 new website-contact records. Actual assembled coverage1441/1737 and706 associations.",
+    "Recovered13 local running, junior athletics and race-walking sources. CompletedProfileSlugs lists this batch; do not repeat earlier source-failure classifications.",
+    "Boro joining page advertises waiting lists and12+ eligibility; calendar and joining days differ. Peacehaven's5K-under38-minutes threshold is retained; Friday frequency conflicts. Tweed form still2025–26.",
+    "Lutterworth Thursday times differ; Allerton waiting-list report dates2022. Hornsea history is supported but current programme/contact unresolved. Lancashire1907 reconstitution is distinct from1904 predecessor; event catering emails are not general contacts.",
+    "Lymington Tri homepage recovered with adult/all-ability remit, but member page403 and programme detail insufficient. Many older unavailable sites were retried without new evidence; rotate to governing-body/provider histories rather than repeatedly requesting blocked pages.",
+    "Retain prior unsafe-website suppressions for Liverpool Pembroke & Sefton, Pudsey & Bramley and Shepshed. Boalloy.co.uk is a truck manufacturer.",
+    "Parentee37b7f Club profiles38907551625 and quality38907551438 passed. Check this batch's exact-head evidence in PR756; preserve deployment protection."
   ],
   "sourceGaps": [
+    {
+      "slug": "lutterworth-harriers-running-club",
+      "status": "timetable-conflict",
+      "reason": "FAQ Thursday6pm differs from sessions6.30pm; confirm session and fee. No founding date established.",
+      "url": "https://www.lutterworthharriers.co.uk/faq/",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "allerton-junior-athletics-club",
+      "status": "dated-capacity-notice",
+      "reason": "Waiting list reported2022, not asserted current. Age cut-off and places require enquiry.",
+      "url": "https://www.ajac.club/news-archive-",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "tweed-striders",
+      "status": "outdated-membership-form",
+      "reason": "Joining form labelled2025–26; confirm current year and charge.",
+      "url": "https://tweedstriders.co.uk/join/",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "boro-runners",
+      "status": "timetable-and-award-wording",
+      "reason": "Joining Wednesday differs from dated calendar Tuesday; waiting lists retained. EA Community Project of the Year wording preferred over inconsistent club award labels.",
+      "url": "https://bororunners.co.uk/join",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "peacehaven-run-club",
+      "status": "session-frequency-conflict",
+      "reason": "Friday speedwork described weekly and first-Friday-only. Junior limits unresolved; founder only Tommy, no full identity inferred.",
+      "url": "https://www.peacehavenrunclub.com/training",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "hornsea-harriers",
+      "status": "current-programme-unresolved",
+      "reason": "Primary carnival-hosted retrospective supports1986 origins and community event; current weekly training and joining contact remain unresolved. Carnival contacts excluded.",
+      "url": "https://www.hornseacarnival.org.uk/fun-run/",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "lancashire-walking-club",
+      "status": "general-contact-unresolved",
+      "reason": "Current regional calendar/training and1907 reconstitution recovered. Only event-catering email found; not promoted as membership contact.",
+      "url": "https://lancswalkingclub.com/",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "lymington-triathlon-club",
+      "status": "partial-source-recovery",
+      "reason": "Home page confirms adult18+ all-ability club and one-or-more disciplines. Membership page403; insufficient substantive programme/history for full biography.",
+      "url": "https://www.lymingtontriathlonclub.com/",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "wesham-road-runners-and-ac",
       "status": "foundation-conflict",

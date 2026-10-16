@@ -17,6 +17,23 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 78: recovered local sources, distinct venues and qualified joining.
+  assert.equal(clubProfiles["avon-tempo"].founded_year, 2025);
+  assert.equal(clubProfiles["allerton-junior-athletics-club"].founded_year, 2014);
+  assert.equal(clubProfiles["lancashire-walking-club"].founded_year, 1907);
+  assert.match(clubProfiles["lancashire-walking-club"].biography.join(" "), /1904/);
+  assert.equal(clubProfiles["hornsea-harriers"].founded_year, 1986);
+  assert.match(clubProfiles["boro-runners"].biography.join(" "), /waiting list/);
+  assert.equal(bySlug.get("boro-runners").adult_only, false);
+  assert.match(clubProfiles["peacehaven-run-club"].biography.join(" "), /38 minutes/);
+  assert.match(clubProfiles["tweed-striders"].biography.join(" "), /2025–26/);
+  assert.equal(bySlug.get("eliot-ladies-at-ambleside").postcode, "CV11 6AT");
+  assert.equal(bySlug.get("allerton-junior-athletics-club").city, "Northallerton");
+  assert.equal(bySlug.get("netley-abbey-runners").postcode, "SO31 5FA");
+  assert.equal(bySlug.get("rimrose-runners").city, "Waterloo");
+  for (const slug of ["allerton-junior-athletics-club", "boro-runners", "lancashire-walking-club"]) assert.equal(bySlug.get(slug).address, "");
+  assert.ok(bySlug.get("netley-abbey-runners").contacts.some(c => c.email === "runcoordinator@netleyabbeyrunners.com"));
+  assert.ok(bySlug.get("peacehaven-run-club").contacts.some(c => c.email === "memberships.prc.24@gmail.com"));
   // Batch 76: recovered sources, qualified joining requirements and unsafe links.
   assert.equal(clubProfiles["eynsford-running-club"].founded_year, 2011);
   assert.match(clubProfiles["eynsford-running-club"].biography.join(" "), /formal club in 2016/);
