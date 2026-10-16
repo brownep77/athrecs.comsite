@@ -1,59 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch65",
+  "lastEditorialBatch": "2026-10-16-batch66",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch54",
   "pullRequest": 755,
-  "publication": "1231/1737 assembled biographies and 602 sourced associations; 231 biographies and 151 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
+  "publication": "1251/1737 assembled biographies and 611 sourced associations; 251 biographies and 160 associations above the last confirmed live 1000/451 baseline remain draft. No publication performed.",
   "completedProfileSlugs": [
-    "steel-city-striders-rc",
-    "stevenage-and-north-herts-ac",
-    "stevenage-phoenix-running-club",
-    "steyning-ac",
-    "stilton-striders",
-    "stockport-tri-club",
-    "stocksbridge-running-club",
-    "stocksfield-striders",
-    "stockton-striders-ac",
-    "stoke-f-i-t",
-    "stonehenge-striders-running-club",
-    "stopsley-striders",
-    "storm-plymouth",
-    "stourbridge-rc",
-    "stratford-upon-avon-ac",
-    "street-striders",
-    "stroud-and-district-ac",
-    "stubbington-green-runners",
-    "styal-running-club",
-    "sudbury-court-running-club"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 1231,
-    "notableMemberEntries": 602,
-    "clubsWithContacts": 1026,
-    "contactEntries": 1724,
-    "clubsWithEmail": 998,
-    "clubsWithPhone": 140,
-    "clubsWithSocials": 1164,
-    "socialLinks": 2447,
-    "websiteContactRecords": 1314
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 8,
-    "contactOrSocialRecordsChanged": 15,
-    "newWebsiteContactRecords": 10,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 25,
-    "netSocialLinks": 11,
-    "unsafeWebsitesSuppressed": 1
-  },
-  "validationBeforeCommit": {
-    "status": "Sources read on 16 October 2026 UTC. Parent f1c2c2e32544d6bb9eb08c7eb85355a253154bd9 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38834754003 and quality gate38834754029 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All 20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head CI and preview evidence will be recorded in PR755 after commit."
-  },
-  "nextCandidateSlugs": [
     "sudbury-joggers",
     "sunderland-harriers-and-ac",
     "sunderland-strollers",
@@ -71,22 +24,94 @@
     "swinton-running-club",
     "tadcaster-harriers",
     "tadley-runners",
-    "tadworth-ac",
     "tamar-trotters",
-    "tamworth-ac"
+    "tamworth-ac",
+    "tattenhall-runners"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 1251,
+    "notableMemberEntries": 611,
+    "clubsWithContacts": 1034,
+    "contactEntries": 1737,
+    "clubsWithEmail": 1006,
+    "clubsWithPhone": 140,
+    "clubsWithSocials": 1164,
+    "socialLinks": 2449,
+    "websiteContactRecords": 1324
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 9,
+    "contactOrSocialRecordsChanged": 15,
+    "newWebsiteContactRecords": 10,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 13,
+    "netSocialLinks": 2,
+    "unsafeWebsitesSuppressed": 0
+  },
+  "validationBeforeCommit": {
+    "status": "Sources read on 16 October 2026 UTC. Parent f77ec6a5bc091e4c8b4ba98dd10e46102da57541 and main c83e0e220927fed32f260cbee1c8bc97245a3393 rechecked. Parent Club profiles38840194967 and quality gate38840195116 passed. Catalogue, audit, profile checks, targeted ESLint, TypeScript, whitespace and safe local production build passed; database publication skipped. All20 actual production-build pages passed biography, association, contact/social, location, flag, registration and search/JSON-LD assertions. Exact-head workflow and preview evidence will be recorded in PR755 after commit."
+  },
+  "nextCandidateSlugs": [
+    "tavistock-ac",
+    "tavistock-run-project",
+    "team-anstey-amblers-and-runners",
+    "team-bath-athletic-club",
+    "team-bodyworks",
+    "team-caterpillar",
+    "team-coco",
+    "team-derby-runner",
+    "team-devizes-moonrakers-ac",
+    "team-kennet-triathlon-and-ac",
+    "team-manvers",
+    "teambr",
+    "teesdale-ac",
+    "teignbridge-trotters",
+    "telford-ac",
+    "tempest-running-club",
+    "tetbury-dolphins-running-club",
+    "tewkesbury-running-club",
+    "tfn-tri-club",
+    "thame-runners"
   ],
   "resumeInstructions": [
     "Read main, PR755, AGENTS.md, audit, checkpoint and assembled catalogue before edits; do not overlap an active writer.",
-    "Batch65 adds20 profiles in club-profiles-bm.ts. Preserve sourced fields and use guarded remote updates.",
-    "Last confirmed production1000 biographies/451 associations. Batches54–65 remain draft; no publication authorized.",
+    "Batch66 adds20 profiles in club-profiles-bn.ts. Preserve sourced fields and use guarded remote updates.",
+    "Last confirmed production1000 biographies/451 associations. Batches54–66 remain draft; no publication authorized.",
     "Recent rotations covered Irish triathlon and Welsh school districts. Revisit non-English source gaps when primary evidence is readable; do not repeat completed batches.",
-    "Stock Exchange AC, Stone Master Marathoners, Stowmarket Striders and Striders of Croydon remain deferred because primary narrative was unreadable. Main queue resumes Sudbury Joggers.",
-    "Stockton Striders' old .org.uk domain serves unrelated gambling content; the club's .com website is used. Stonehenge's malformed website is replaced with its working club domain.",
-    "Stevenage and North Herts under-18 waiting lists were closed at review. Confirm capacity and do not infer membership from coaching or founder associations.",
-    "Sudbury Court now meets in Wembley; its old Ruislip directory address is not a training base. No postcode guessed. Steel City's retained address is also unconfirmed as training.",
-    "Current-contact review does not reconfirm Stevenage Phoenix's older phone. Masked emails, venue operators and ConnectMyClub supplier contacts remain excluded."
+    "Tadworth AC remains deferred: history page returned403 and alternate host was inaccessible. Main queue resumes Tavistock AC.",
+    "Swaledale's supported base is Richmond, not the older Sedgefield directory address. Surrey Walking Club has event-specific locations, not a single St Albans training base.",
+    "Tamworth academy applicants aged8–10 enter a waiting list. Swindon Harriers pages differ between entry ages7 and8; confirm directly.",
+    "Tattenhall Tough Team was cancelled for2026; a2027 return is an intention, not a confirmed date. Footer event dates and membership paperwork can be stale.",
+    "Swindon Allstars canonical name and slug are retained; its linked official site and Wiltshire association use Slinn Allstars. Founders' first names are not expanded.",
+    "Masked emails and website suppliers remain excluded. Social links are attributed to the club page, not a claim of current account ownership."
   ],
   "sourceGaps": [
+    {
+      "slug": "tadworth-ac",
+      "url": "https://www.tadworthac.org.uk/history/",
+      "status": "deferred-unreadable-club-source",
+      "reason": "16 October: history page returned403 and alternate host was inaccessible. Existing sourced contacts retained; no biography inferred from snippets."
+    },
+    {
+      "slug": "tamworth-ac",
+      "url": "https://tamworthac.com/academy/",
+      "status": "profile-added-capacity-qualified",
+      "reason": "Academy page says ages8–10 enter a waiting list; confirm taster availability. Footer general-contact link is not a usable enquiry form; academy form linked specifically."
+    },
+    {
+      "slug": "swindon-harriers",
+      "url": "https://www.swindonharriers.com/membership/",
+      "status": "profile-added-entry-age-qualified",
+      "reason": "Membership page says eight; introduction says seven. Confirm eligibility rather than choosing an unqualified universal age."
+    },
+    {
+      "slug": "tattenhall-runners",
+      "url": "https://tattenhallrunners.com/index.php/our-races/",
+      "status": "profile-added-event-date-qualified",
+      "reason": "Tough Team cancelled for2026. 2027 return remains intended; older footer dates and membership figures not promoted as current."
+    },
     {
       "slug": "stock-exchange-ac",
       "url": "https://stockexchangeac.org/",

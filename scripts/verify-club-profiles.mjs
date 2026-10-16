@@ -17,6 +17,27 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 66: supported training bases, distinct clubs and qualified capacity.
+  assert.equal(clubProfiles["surrey-walking-club"].founded_year, 1899);
+  assert.equal(clubProfiles["swaledale-runners"].founded_year, 1986);
+  assert.equal(clubProfiles["swindon-harriers"].founded_year, 1996);
+  assert.equal(bySlug.get("swaledale-runners").city, "Richmond");
+  assert.equal(bySlug.get("swaledale-runners").postcode, "DL10 4QS");
+  assert.equal(bySlug.get("surrey-walking-club").address, "");
+  assert.equal(bySlug.get("surrey-walking-club").location_precision, "area-only");
+  assert.equal(bySlug.get("sutton-in-ashfield-harriers-and-ac").city, "Kirkby-in-Ashfield");
+  assert.equal(bySlug.get("swanley-and-district-ac").address_kind, "clubhouse");
+  assert.equal(bySlug.get("swindon-harriers").postcode, "SN1 2FD");
+  assert.equal(bySlug.get("tadley-runners").postcode, "RG26 5NL");
+  assert.equal(bySlug.get("tadcaster-harriers").postcode, "LS24 9HD");
+  assert.equal(bySlug.get("tamworth-ac").website, "https://tamworthac.com/");
+  assert.equal(bySlug.get("swinton-running-club").website, "https://swintonrc.weebly.com/");
+  assert.ok(bySlug.get("sunderland-strollers").contacts.some(c => c.email === "clubsecretary@sunderlandstrollers.co.uk"));
+  assert.ok(!bySlug.get("tamar-trotters").contacts.some(c => c.email?.endsWith("@pdsprint.co.uk")));
+  assert.match(clubProfiles["tamworth-ac"].contact_note, /waiting list/);
+  assert.match(clubProfiles["tattenhall-runners"].biography.join(" "), /cancelled for 2026/);
+  assert.equal(clubProfiles["tadworth-ac"], undefined);
+  for (const slug of ["sutton-striders", "swindon-striders", "swanley-and-district-ac"]) assert.ok(!bySlug.get(slug).sports.includes("Triathlon"));
   // Batch 65: current club sites, supported venues and qualified joining capacity.
   assert.equal(clubProfiles["steel-city-striders-rc"].founded_year, 1982);
   assert.equal(clubProfiles["stockport-tri-club"].founded_year, 2014);
