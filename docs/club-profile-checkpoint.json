@@ -1,69 +1,104 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch79",
+  "lastEditorialBatch": "2026-10-16-batch80",
   "reviewedAt": "2026-10-16",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–79 add161 biographies/70 associations in draft. Assembled totals1452/1737 and709 associations are not live totals. No production publication in batch79.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–80 add171 biographies/75 associations in draft. Assembled totals1462/1737 and714 associations are not live totals. No production publication in batch80.",
   "completedProfileSlugs": [
-    "athletics-ireland-annalee-a-c",
-    "amazing-feet-running-club",
-    "university-of-warwick",
-    "university-of-sheffield-union-of-students",
-    "university-of-portsmouth-athletics-club",
-    "halton-and-frodsham-harriers",
-    "east-durham-running-club",
-    "run-peterlee",
-    "kingfisher-harriers",
-    "kippax-and-district-harriers",
-    "longstanton-and-northstowe-limpers"
+    "west-end-runners",
+    "wheathampstead-warriors",
+    "island-tc",
+    "south-birmingham-striders",
+    "donnington-runners",
+    "seaton-athletic-club",
+    "south-kent-harriers",
+    "leicester-walking-club",
+    "hermitage-harriers",
+    "heathfield-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1452,
-    "notableMemberEntries": 709,
-    "clubsWithContacts": 1143,
-    "contactEntries": 1920,
-    "clubsWithEmail": 1106,
-    "clubsWithPhone": 169,
-    "clubsWithSocials": 1193,
-    "socialLinks": 2511,
-    "websiteContactRecords": 1437
+    "extendedProfiles": 1462,
+    "notableMemberEntries": 714,
+    "clubsWithContacts": 1148,
+    "contactEntries": 1926,
+    "clubsWithEmail": 1110,
+    "clubsWithPhone": 171,
+    "clubsWithSocials": 1195,
+    "socialLinks": 2514,
+    "websiteContactRecords": 1444
   },
   "batchChanges": {
-    "extendedProfilesAdded": 11,
-    "notableMemberEntriesAdded": 3,
-    "contactOrSocialRecordsChanged": 10,
-    "newWebsiteContactRecords": 10,
+    "extendedProfilesAdded": 10,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 9,
+    "newWebsiteContactRecords": 7,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 5,
-    "netSocialLinks": 0,
+    "netContactEntries": 6,
+    "netSocialLinks": 3,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build with database migration/publication hooks skipped. All11 real changed pages rendered HTTP200 and passed biography, association, contacts/socials, location, flag, registration and title/description/canonical/JSON-LD assertions. Exact-head workflows and Vercel evidence follow in PR756. Local rendering is not hosted-page or production verification."
+    "status": "Passed: catalogue and club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe production build with database migration/publication skipped. All 10 changed production-build pages returned HTTP200 and passed biography/association, contact/social, location/flag, registration and title/description/canonical/JSON-LD checks. Exact-head remote workflow and preview evidence will be recorded in PR756. Local rendering is not hosted-page or production verification."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
-    "island-tc",
-    "leicester-walking-club",
-    "rolls-royce-harriers",
-    "southampton-triathlon-club",
-    "gipsy-hill-run-club"
+    "new-ross-triathlon-club",
+    "parbold-pink-panthers",
+    "quays-running-club",
+    "new-forest-junior-ac",
+    "helpston-harriers-ac"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and writer status before edits.",
-    "Published baseline remains1291 biographies/639 associations from PR755. PR756 contains161 draft biographies/70 associations; no production authority.",
-    "Batch79 uses club-profiles-ca.ts and seedv79:11 biographies,3 associations,5 net contacts and10 new website-contact records; no new social links. Assembled1452/1737 and709 associations.",
-    "Annalee's2020 Sportshall age range is historical, not current membership eligibility. Kippax2026 beginner entries closed; Halton and Frodsham Widnes sessions suspended.",
-    "Kingfisher2016 affiliation is not a verified foundation date. Sheffield and Portsmouth masked emails remain unset. General university and platform-support contacts excluded.",
-    "East Durham and Run Peterlee directory addresses differ; current meeting points unresolved. Longstanton programme comes from an undated NHS provider page; standalone site empty.",
-    "Rolls-Royce pages502/robots unavailable, Southampton Tri pages empty, Leicester Walking inaccessible. Gipsy Hill host event is marked past; current programme unresolved. Do not fill from snippets.",
-    "Retain earlier unsafe-website suppressions and source qualifications. No identities/results/privacy/verified-status changes.",
-    "Parent8addfa2 Club profiles38915172572 and quality38915172832 passed. Check exact-head evidence in PR756; preserve deployment protection."
+    "Published baseline1291/639 is unchanged. PR756 contains171 draft biographies/75 associations, assembled1462/1737 and714 associations. No production authority.",
+    "Batch80 uses club-profiles-cb.ts and seedv80:10 profiles,5 associations,6 net contacts,3 social links and7 new website-contact records.",
+    "Island TC's2026 Community League second place is provisional pending23October review. Never assign TriLimits' TriTyrone organiser role to Island from an entry page.",
+    "Wheathampstead beginner page still gives29April2025; Heathfield13April2026 course has passed. Confirm new intake dates. South Kent form2023 and South Birmingham fees2024–25 remain dated.",
+    "South Birmingham track references conflict (Ryland Centre vs Abbey Stadium). Seaton2013 timetable is historical; 2014charity registration is not foundation. Leicester current timetable/contact unresolved.",
+    "West End five miles under an hour threshold, trial booking requirements and seasonal Heathfield venues are deliberate. Supplier contacts excluded.",
+    "Next: New Ross has fresh2026 league evidence but conflicting directory email spellings and no current programme. Parbold community directory and New Forest university/association pages are leads, not completed biographies.",
+    "Parent e25764d Club profiles38922577401 and quality38922577283 passed. Check new exact-head evidence in PR756; preserve deployment protection."
   ],
   "sourceGaps": [
+    {
+      "slug": "island-tc",
+      "status": "partial-current-programme",
+      "reason": "Biography now supported by TI directory and2026league article. Club site remains unavailable; timetable/foundation unresolved. Second place provisional until23October review. Do not assign TriTyrone organiser role from a club entry page.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "leicester-walking-club",
+      "status": "historical-profile-current-contact-unresolved",
+      "reason": "First-person2017anniversary and Centurions1974archive support biography; website unavailable and current timetable/contact not established.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "seaton-athletic-club",
+      "status": "partial-current-programme",
+      "reason": "2026EAaward supports current community profile;2013clubprogramme not a current timetable. Charity2014registration not foundation; correspondence address is not training venue.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "south-birmingham-striders",
+      "status": "conflicting-venue-and-stale-fees",
+      "reason": "Runs page gives Ryland Centre; membership also mentions Abbey Stadium and2024–25fees. Confirm arrangements. Adult18+membership explicit.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "wheathampstead-warriors",
+      "status": "stale-beginner-date",
+      "reason": "Current club site recovered with2016foundation and18+membership; beginner page still labels29April2025nextcourse. New intake unresolved.",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "slug": "heathfield-runners",
+      "status": "next-beginner-intake-unresolved",
+      "reason": "New club domain recovered;1985foundation and seasonal venues supported.13April2026course start is past; no future intake inferred.",
+      "checkedAt": "2026-10-16"
+    },
     {
       "slug": "athletics-ireland-annalee-a-c",
       "status": "partial-current-programme",
@@ -572,12 +607,6 @@
       "checkedAt": "2026-10-16"
     },
     {
-      "slug": "wheathampstead-warriors",
-      "status": "source-unreadable-batch72",
-      "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
-      "checkedAt": "2026-10-16"
-    },
-    {
       "slug": "wilmslow-running-club",
       "status": "source-unreadable-batch72",
       "reason": "Official website open attempts failed or returned no usable club body in this run; no biography added. Recheck through an official alternate page.",
@@ -681,12 +710,6 @@
     },
     {
       "slug": "west-4-harriers",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
-      "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "west-end-runners",
       "status": "deferred-unreadable-primary-source",
       "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
       "checkedAt": "2026-10-16"
@@ -1306,12 +1329,6 @@
       "reason": "No further historical association is inferred beyond the cited sources."
     },
     {
-      "slug": "south-birmingham-striders",
-      "url": "https://sbsclub.co.uk/",
-      "status": "deferred-source-unavailable",
-      "reason": "Opened homepage supplied a contact form but insufficient club narrative, training or history."
-    },
-    {
       "slug": "south-cambridge-striders",
       "url": "https://www.southcambridgestriders.org.uk/",
       "status": "deferred-source-unavailable",
@@ -1593,12 +1610,6 @@
       "status": "deferred-unavailable-or-thin",
       "reason": "Rechecked16October2026: national entity and Jacqueline Brace role contact confirmed. General Welsh school fixtures do not establish this listing as the organiser or explain university provision; full biography remains deferred. No inference from all-No discipline flags.",
       "checkedAt": "2026-10-16"
-    },
-    {
-      "slug": "seaton-athletic-club",
-      "url": "https://seaton-ac.co.uk/",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Official site unavailable. Canonical club is in Cumbria/Whitehaven, not the similarly named Devon club; no biography is inferred."
     },
     {
       "slug": "sheffield-rc",
@@ -2627,12 +2638,6 @@
       "reason": "New Levels Coaching explicitly rebranded as RunThrough Coach, but continuity/renaming of the affiliated New Levels Run Club is not established. Old domain TLS failure; company history not assigned to club."
     },
     {
-      "slug": "island-tc",
-      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
-      "status": "deferred-unavailable-primary-site",
-      "reason": "Official club site503. Triathlon Ireland confirms Coalisland, Tyrone and info@islandtriathlonclub.com, added as a public role contact; biography remains deferred."
-    },
-    {
       "slug": "nantwich-running-club",
       "url": "https://nantwichrunningclub.co.uk/",
       "status": "profile-added-with-qualified-gap",
@@ -2933,12 +2938,6 @@
       "reason": "Current21DruidStreet replaces130. River runs mostly not led/paced; paid booked track separate. Sunday no bagdrop. Founder given only first name in read source, no invented surname."
     },
     {
-      "slug": "leicester-walking-club",
-      "url": "http://www.leicesterwalkingclub.org.uk/",
-      "status": "deferred-no-readable-club-source",
-      "reason": "HTTP returned a directory index; HTTPS returned a certificate-related gateway error. No TLS safeguard disabled or biography inferred."
-    },
-    {
       "slug": "liverpool-harriers-and-ac",
       "url": "http://www.liverpoolharriers.org/",
       "status": "deferred-robot-check",
@@ -3179,12 +3178,6 @@
       "reason": "Homepageempty; existingdirectorycontactretained."
     },
     {
-      "slug": "island-tc",
-      "url": "https://www.islandtriathlonclub.com/",
-      "status": "deferred-source-unavailable",
-      "reason": "Hostingunavailable. TIcourseIslandTriClub–TriTyroneEntriesnotproofcluborganisesrace; TriLimitsorganiserstatementmustnotbeassignedtoIsland."
-    },
-    {
       "slug": "ilkley-harriers-ac",
       "url": "https://ilkleyharriers.org.uk/",
       "status": "previous-gap-resolved",
@@ -3265,12 +3258,6 @@
     {
       "slug": "hell-yeah-triathlon-club",
       "url": "https://www.hellyeahtri.com/",
-      "status": "deferred-source-unavailable",
-      "reason": "Official homepage unavailable; existing source-dated directory contact retained."
-    },
-    {
-      "slug": "island-tc",
-      "url": "https://www.islandtriathlonclub.com/",
       "status": "deferred-source-unavailable",
       "reason": "Official homepage unavailable; existing source-dated directory contact retained."
     },
@@ -3701,18 +3688,6 @@
       "reason": "StandaloneHTTP/HTTPS502. PrimaryTI2019and2025programmes supportcommunitybiographyandBrendanFergusdatedassociation. No currenttrainingornewcontactasserted; LoughLannagheventnotfixedclubhouse. Foundingdateunresolved."
     },
     {
-      "slug": "heathfield-runners",
-      "url": "http://heathfieldroadrunners.com/",
-      "status": "deferred-source-unavailable",
-      "reason": "HTTP/HTTPS502SSLalert. Governingdirectoryleadretained; insufficientopenedclubcontentforfullbio."
-    },
-    {
-      "slug": "hermitage-harriers",
-      "url": "https://www.hermitageharriers.co.uk/",
-      "status": "deferred-source-unavailable",
-      "reason": "HTTPandHTTPStimedout; no biographyadded."
-    },
-    {
       "slug": "new-ross-triathlon-club",
       "url": "http://murt1981.wixsite.com/",
       "status": "deferred-source-insufficient",
@@ -3861,12 +3836,6 @@
       "url": "https://www.hattondarts.co.uk",
       "status": "deferred-source-unavailable",
       "reason": "403 permission response; no bypass attempt."
-    },
-    {
-      "slug": "island-tc",
-      "url": "http://www.islandtriathlonclub.com/",
-      "status": "deferred-source-unavailable",
-      "reason": "503 hosting-expired response. Thin TI listing alone insufficient; do not merge with IslandWheelers."
     },
     {
       "slug": "helpston-harriers-ac",
@@ -4761,12 +4730,6 @@
       "url": "http://www.hielbow.club/",
       "status": "sparse-club-page",
       "reason": "Only a contact form and swim-bike-run heading were readable. Main TI website lists a different email/domain from the retained app directory; no conflicting contact overwritten and no full biography."
-    },
-    {
-      "slug": "island-tc",
-      "url": "http://www.islandtriathlonclub.com/",
-      "status": "expired-hosting",
-      "reason": "HTTP 503 hosting account expired; biography deferred."
     },
     {
       "slug": "lisburn-triathlon-club",
@@ -6390,12 +6353,6 @@
       "url": "https://harc.uk/",
       "status": "source-recovered",
       "reason": "www host fails TLS hostname validation; non-www official host opens normally. No TLS protections bypassed."
-    },
-    {
-      "slug": "island-tc",
-      "url": "",
-      "status": "deferred",
-      "reason": "Revisit found503/expired hosting account; no current programme inferred."
     },
     {
       "slug": "newry-triathlon-club",

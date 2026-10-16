@@ -17,6 +17,26 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 80: recovered sources retain dated programmes and venue qualifications.
+  assert.equal(clubProfiles["west-end-runners"].founded_year, 1984);
+  assert.equal(clubProfiles["wheathampstead-warriors"].founded_year, 2016);
+  assert.equal(clubProfiles["south-birmingham-striders"].founded_year, 2023);
+  assert.equal(clubProfiles["south-kent-harriers"].founded_year, 1987);
+  assert.equal(clubProfiles["heathfield-runners"].founded_year, 1985);
+  for (const slug of ["leicester-walking-club", "seaton-athletic-club", "island-tc"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.match(clubProfiles["island-tc"].biography.join(" "), /not presented here as a final award/);
+  assert.match(clubProfiles["south-birmingham-striders"].biography.join(" "), /2024–25/);
+  assert.match(clubProfiles["wheathampstead-warriors"].biography.join(" "), /29 April 2025/);
+  assert.match(clubProfiles["seaton-athletic-club"].biography.join(" "), /2013/);
+  assert.equal(bySlug.get("island-tc").country, "Northern Ireland");
+  assert.equal(bySlug.get("island-tc").city, "Coalisland");
+  assert.equal(bySlug.get("wheathampstead-warriors").city, "Wheathampstead");
+  assert.equal(bySlug.get("wheathampstead-warriors").adult_only, true);
+  assert.equal(bySlug.get("south-birmingham-striders").adult_only, true);
+  assert.equal(bySlug.get("heathfield-runners").address, "");
+  assert.equal(bySlug.get("hermitage-harriers").address_kind, "training");
+  assert.ok(!bySlug.get("hermitage-harriers").contacts.some(c => c.email?.endsWith("@connectmy.club")));
+  assert.ok(bySlug.get("heathfield-runners").contacts.some(c => c.email === "info@heathfieldrunners.club"));
   // Batch 79: source-qualified student and community programmes.
   assert.equal(clubProfiles["kippax-and-district-harriers"].founded_year, 1983);
   for (const slug of ["amazing-feet-running-club", "kingfisher-harriers", "athletics-ireland-annalee-a-c"]) assert.equal(clubProfiles[slug].founded_year, undefined);
@@ -194,7 +214,7 @@ try {
   assert.ok(!bySlug.get("south-west-athletics-academy").contacts.some(c => c.email === "info@mysite.com"));
   assert.match(clubProfiles["south-devon-ac"].location_note, /junior training/);
   assert.match(clubProfiles["southwell-running-club"].notable_members.find(m => m.name === "Richard Whitehead").connection, /Honorary/);
-  assert.equal(clubProfiles["south-birmingham-striders"], undefined);
+  assert.ok(clubProfiles["south-birmingham-striders"].sources.some(s => s.url === "https://sbsclub.co.uk/about-us-1"));
   assert.equal(clubProfiles["southampton-triathlon-club"], undefined);
   // Batch 62: distinct entities, supported venues and historical-only associations.
   assert.equal(clubProfiles["skelmersdale-boundary-harriers"].founded_year, 1983);
@@ -280,7 +300,7 @@ try {
   assert.match(clubProfiles["knutsford-tri-club"].biography.join(" "), /three.*in total/);
   assert.ok(bySlug.get("athletics-ireland-artane-beaumont-running-club-a-c").socials.some(s => s.url === "https://www.instagram.com/artanebeaumontrunclub/"));
   assert.ok(clubProfiles["athletics-ireland-artane-beaumont-running-club-a-c"].notable_members.some(m => m.name === "David Gilloughley"));
-  assert.equal(clubProfiles["leicester-walking-club"], undefined);
+  assert.ok(clubProfiles["leicester-walking-club"].sources.some(s => s.url === "https://lancswalkingclub.com/2017/10/18/memories-of-leicester-and-lancashire/"));
   assert.equal(clubProfiles["leighton-buzzard-triathlon-club"].founded_year, 2011);
   assert.equal(clubProfiles["lingfield-rc"].founded_year, undefined);
   assert.equal(clubProfiles["little-baddow-ridge-runners"].founded_year, undefined);
