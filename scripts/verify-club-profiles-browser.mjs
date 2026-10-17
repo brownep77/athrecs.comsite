@@ -34,7 +34,9 @@ try {
       if(slug==="wakefield-triathlon-club") {
         await livePage.getByRole("link",{name:"Register this club",exact:true}).click();
         await livePage.waitForURL(/\/clubs\/register\?club=wakefield-triathlon-club/);
-        assert.ok((await livePage.locator("body").innerText()).includes("Wakefield Triathlon Club"));
+        await livePage.getByRole("heading",{name:"Register your club",exact:true}).waitFor();
+        await livePage.getByText("Sign in to register your club",{exact:true}).waitFor();
+        assert.ok(await livePage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),"Registration fits viewport");
         await livePage.screenshot({path:resolve("artifacts/club-profile-live-registration-"+(mobile?"mobile":"desktop")+".png"),fullPage:true});
       }
     }
