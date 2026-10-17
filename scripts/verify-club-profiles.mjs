@@ -332,7 +332,8 @@ try {
   assert.match(clubProfiles["teesdale-ac"].contact_note, /No current Couch to 5K/);
   assert.ok(bySlug.get("telford-ac").contacts.some(c => c.email === "training@telfordac.uk"));
   assert.ok(bySlug.get("team-manvers").contacts.some(c => c.email === "tri@mwbc.org.uk"));
-  for (const slug of ["team-devizes-moonrakers-ac", "tetbury-dolphins-running-club"]) assert.equal(clubProfiles[slug], undefined);
+  assert.equal(clubProfiles["tetbury-dolphins-running-club"], undefined);
+  assert.equal(clubProfiles["team-devizes-moonrakers-ac"].founded_year, 2007);
   // Batch 66: supported training bases, distinct clubs and qualified capacity.
   assert.equal(clubProfiles["surrey-walking-club"].founded_year, 1899);
   assert.equal(clubProfiles["swaledale-runners"].founded_year, 1986);
@@ -457,7 +458,16 @@ try {
     assert.equal(bySlug.get(slug).contacts.find(c => c.email === "andrew.jenkins@welshathletics.org").name, "Andrew Jenkins");
   }
   assert.equal(bySlug.get("saffron-athletics-club").website, "");
-  assert.equal(clubProfiles["saffron-athletics-club"], undefined);
+  assert.ok(clubProfiles["saffron-athletics-club"].contact_note.includes("gambling"));
+  assert.ok(!bySlug.get("saffron-athletics-club").contacts.some((contact) => contact.email?.endsWith("@saffronac.co.uk")));
+  assert.equal(bySlug.get("saffron-athletics-club").address_kind, "training");
+  assert.equal(clubProfiles["bad-boy-running-club"].scope, "global");
+  assert.equal(bySlug.get("bad-boy-running-club").virtual, true);
+  assert.equal(bySlug.get("killamarsh-kestrels").postcode, "S21 1EZ");
+  assert.equal(clubProfiles["great-milton-athletics-club"].founded_year, 2014);
+  assert.ok(clubProfiles["great-milton-athletics-club"].biography.join(" ").includes("2012"));
+  assert.ok(clubProfiles["wakefield-triathlon-club"].biography.join(" ").includes("coach approval"));
+  assert.ok(clubProfiles["framlingham-flyers"].notable_members.every((member) => member.connection.includes("2015")));
   assert.ok(clubProfiles["saffron-striders-rc"]);
   assert.equal(bySlug.get("runthrough-north").city, "Salford");
   assert.equal(bySlug.get("runthrough-north").postcode, "M50 2QH");

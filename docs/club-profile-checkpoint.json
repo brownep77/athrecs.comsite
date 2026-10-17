@@ -1,51 +1,62 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch92",
+  "lastEditorialBatch": "2026-10-17-batch93",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–92 add248 biographies/136 associations in draft. Assembled totals1539/1737 and775 associations are not live totals. No production publication in batch92.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–93 add258 biographies/140 associations in draft. Assembled totals1549/1737 and779 associations are not live totals. No production publication in batch93.",
   "completedProfileSlugs": [
-    "beaumont-rc",
-    "walney-wind-cheetahs",
-    "warminster-running-club",
-    "boalloy-running-club",
-    "southern-counties-veterans-ac"
+    "gravesend-road-runners",
+    "killamarsh-kestrels",
+    "framlingham-flyers",
+    "lancaster-runners",
+    "team-devizes-moonrakers-ac",
+    "wakefield-triathlon-club",
+    "bad-boy-running-club",
+    "great-milton-athletics-club",
+    "trent-park-running-club",
+    "saffron-athletics-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1539,
-    "notableMemberEntries": 775,
-    "clubsWithContacts": 1172,
-    "contactEntries": 1964,
-    "clubsWithEmail": 1131,
-    "clubsWithPhone": 180,
-    "clubsWithSocials": 1203,
-    "socialLinks": 2531,
-    "websiteContactRecords": 1485
+    "extendedProfiles": 1549,
+    "notableMemberEntries": 779,
+    "clubsWithContacts": 1178,
+    "contactEntries": 1973,
+    "clubsWithEmail": 1136,
+    "clubsWithPhone": 182,
+    "clubsWithSocials": 1204,
+    "socialLinks": 2533,
+    "websiteContactRecords": 1493
   },
   "batchChanges": {
-    "extendedProfilesAdded": 5,
-    "notableMemberEntriesAdded": 2,
-    "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 2,
+    "extendedProfilesAdded": 10,
+    "notableMemberEntriesAdded": 4,
+    "contactOrSocialRecordsChanged": 9,
+    "newWebsiteContactRecords": 8,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 0,
-    "netSocialLinks": 0,
+    "netContactEntries": 9,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build passed; migration/publication skipped. All five actual production-build pages returned HTTP200 and passed biography/associations, contacts/socials, joining, location notes/home-nation flags, registration and title/description/canonical/SportsOrganization JSON-LD. Prior-head full quality gate38985281329 passed. Exact-commit remote desktop/mobile and hosted-preview evidence follows in PR756; local rendering is not hosted inspection."
+    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build passed; migration/publication skipped. All ten actual production-build pages returned HTTP200 and passed biography/associations, contacts/socials, joining, location notes/home-nation or explicit-global indicators, registration and title/description/canonical/SportsOrganization JSON-LD. Temporary harness corrected to use the build's fetch export; no application change. Prior-head full quality gate38990244349 passed. Exact-commit remote desktop/mobile and hosted-preview evidence follows in PR756; local rendering is not hosted inspection."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
-    "southampton-triathlon-club",
-    "south-cambridge-striders",
-    "carlisle-tri-club"
+    "tetbury-dolphins-running-club",
+    "arete-run-club",
+    "aspire-athletics",
+    "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and active writer before edits.",
+    "Batch93 moduleco seedv93:10 biographies/4 dated associations;9 contact records changed,8 new;9 net contact entries/2 socials. Coverage1549/1737,779 associations;188 biographies remain. Draft additions258 biographies/140 associations over last published baseline1291/639.",
+    "Saffron domain redirects to gambling: keep website suppressed and omit its domain-based email. Active Together phone is undated; training base Saffron Lane. Tetbury receives council chair email only, biography still missing.",
+    "Killamarsh leisure-centre training postcodeS21 1EZ replaces S43. Bad Boy explicitly worldwide/virtual but directory Haywards Heath retained as non-training. Great Milton2012 activity versus2014 affiliation; cottage not training. Lancaster Holiday Inn start distinct from directory/booking addresses.",
+    "Wakefield transition route needs specific age/coach/parent approval; October2026 calendar not permanent. Killamarsh/Wakefield/Lancaster fees conflict. Devizes/Great Milton fees undated. Framlingham2015 roles not current, own website unavailable. Trent Park joining/contact pages unavailable; no snippet email.",
+    "Batch93 base5539464065a9e687d845e0f9013796c92f5ea4da, main aa82cc37980f808668764513cf74e7fb309e98d8. Guard expected head. Prior full gate38990244349 passed. See current PR756 for exact-commit remote evidence; no production publication. Earlier resume entries below are historical checkpoints, not current totals.",
     "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–92 add248 biographies/136 associations in draft. Assembled totals1539/1737 and775 associations are not live totals. No production publication in batch92.",
     "Batch92 modulecn seedv92: five biographies/two associations; two joining-information records, no new email/phone/social. Walney Park Vale training base replaces North Scale with postcode unset; Warminster Civic Centre classified as training. Beaumont1984 origin supported; Boalloy/SCVAC dates remain unknown.",
     "Walney fees conflict; confirm before joining. Warminster committee2024/undated fees not current claims. Boalloy founding-year and quoted club-age conflict; phone variants omitted. SCVAC Tom Richards1939–2024 is not his Olympic father; event listings do not establish membership or a training base.",
@@ -59,6 +70,17 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {"slug":"saffron-athletics-club","status":"profile-added-with-qualified-gap","reason":"Opened provider listing and grant-maker report. Old domain redirects to gambling; suppression retained and domain-based email excluded. Provider phone undated; founding year/current sessions unresolved.","checkedAt":"2026-10-17"},
+    {"slug":"framlingham-flyers","status":"profile-added-with-qualified-gap","reason":"EA2015 visit plus sports-club/council pages support history. Own website unavailable; current timetable, junior capacity, fees and direct club email unresolved.","checkedAt":"2026-10-17"},
+    {"slug":"tetbury-dolphins-running-club","status":"contact-recovered-biography-pending","reason":"Town council directory publishes chair email. RunTogether/ClubSpark inaccessible; councillor personal contact not substituted; insufficient club history/activity for biography.","checkedAt":"2026-10-17"},
+    {"slug":"team-devizes-moonrakers-ac","status":"profile-added-with-qualified-gap","reason":"Recovered history/coaching/membership/contact pages. Current session location, fee and capacity not verified; school partnership historical and supplier email excluded.","checkedAt":"2026-10-17"},
+    {"slug":"wakefield-triathlon-club","status":"profile-added-with-qualified-gap","reason":"Read club membership and datedOctober2026calendar. Fee text/button conflict; junior transition restricted; founding date unknown. Peter Howard association dated2012.","checkedAt":"2026-10-17"},
+    {"slug":"bad-boy-running-club","status":"profile-added-with-qualified-gap","reason":"Worldwide virtual scope explicit. Founding date unknown; broad age wording does not override adult directory flag. Regional-rep network aspirational. Platform supplier contacts excluded.","checkedAt":"2026-10-17"},
+    {"slug":"great-milton-athletics-club","status":"profile-added-with-qualified-gap","reason":"Council source distinguishes2012activity/2014formal affiliation; fees undated and school-year/age criteria need confirmation. Cottage remains directory not training.","checkedAt":"2026-10-17"},
+    {"slug":"lancaster-runners","status":"profile-added-with-qualified-gap","reason":"Club and linked2026–27booking read. Exact Holiday Inn meeting point needs confirmation; Rosebery/Sibsey addresses not training. Headline/checkout fees differ; founding date/alumni unresolved.","checkedAt":"2026-10-17"},
+    {"slug":"trent-park-running-club","status":"profile-added-with-qualified-gap","reason":"History/training/triathlon recovered. Contact/join pages failed; snippet-only email excluded. QEII repeated postcode not copied. Confirm current sessions.","checkedAt":"2026-10-17"},
+    {"slug":"killamarsh-kestrels","status":"profile-added-with-qualified-gap","reason":"Recovered official about/join/contact. Fee-year figures differ; shorter route needs prior companion arrangement. Malformed X link omitted; no sourced alumni.","checkedAt":"2026-10-17"},
+    {"slug":"gravesend-road-runners","status":"profile-added-with-qualified-gap","reason":"Homepage/about/awards read; separate contact page failed. Seasonal venues distinguished; no member biographies inferred from trophy names.","checkedAt":"2026-10-17"},
     {
       "slug": "beaumont-rc",
       "status": "profile-added-with-qualified-gap",
