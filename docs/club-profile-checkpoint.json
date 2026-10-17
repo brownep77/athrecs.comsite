@@ -1,43 +1,41 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch97",
+  "lastEditorialBatch": "2026-10-17-batch98",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–97 add20 biographies/14 associations; assembled1569/1737 (90.3%),793 associations,168 incomplete. No publication in batch97. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–98 add24 biographies/23 associations; assembled1573/1737 (90.6%),802 associations,164 incomplete. No publication in batch98. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "goole-youth-ac",
-    "kirkby-ac",
-    "start2jog",
-    "hurricane-striders",
-    "hayes-and-harlington-road-runners",
-    "gipsy-hill-run-club"
+    "london-hammer-school",
+    "huub-performance-project",
+    "city-of-stoke-ac",
+    "run-mummy-run-crc"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1569,
-    "notableMemberEntries": 793,
-    "clubsWithContacts": 1189,
-    "contactEntries": 1987,
-    "clubsWithEmail": 1147,
+    "extendedProfiles": 1573,
+    "notableMemberEntries": 802,
+    "clubsWithContacts": 1191,
+    "contactEntries": 1989,
+    "clubsWithEmail": 1149,
     "clubsWithPhone": 184,
-    "clubsWithSocials": 1207,
-    "socialLinks": 2546,
-    "websiteContactRecords": 1507
+    "clubsWithSocials": 1208,
+    "socialLinks": 2548,
+    "websiteContactRecords": 1511
   },
   "batchChanges": {
-    "extendedProfilesAdded": 6,
-    "notableMemberEntriesAdded": 6,
+    "extendedProfilesAdded": 4,
+    "notableMemberEntriesAdded": 9,
     "contactOrSocialRecordsChanged": 4,
     "newWebsiteContactRecords": 4,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 2,
-    "netSocialLinks": 1,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club/profile checks, targeted ESLint, TypeScript, whitespace and safe build passed. All six actual built pages passed full biography, historical associations, public contacts/socials, location/country, registration and search description/canonical/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Temporary harness removed. Exact-head Club profiles desktop/mobile workflow and Vercel preview evidence recorded in PR761 after commit. Previous head8e63197 Club profiles39023976454 and full quality39023976429 passed. No publication or migration."
+    "status": "Catalogue/club/profile checks, targeted ESLint, TypeScript, whitespace and safe build passed. All four actual built pages passed full biographies, associations, public contacts/socials, location/country, registration and search-description/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Canonical metadata covered by profile regression checks. Temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous head97ebe578 Club profiles39028050254 and full quality39028050229 passed. No publication or migration."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
@@ -47,6 +45,10 @@
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "BATCH98 CURRENT: modulect seedv98; four biographies/nine associations, two role-specific emails/two social links/four new website-contact records. Assembled1573/1737 (90.6%),802 associations,164 incomplete. Published1549/779; draftPR761 adds24/23. Parent97ebe578 and main0f8bc3d inspected; check latest head and competing writers. Earlier notes below are historical.",
+    "LondonHammerSchool current form2024, predecessorWestLondon1977; AlanBertram/MickJones are predecessor associations, JamieBath is dated2026session contact. LeeValley spelling corrected and classified training; Willesden separate. No Instagram URL inferred or undated memorial date promised. HUUB membership community differs from elite sponsored team; commercial singlet price not membership fee; support email role explicit, Moorways remains directory context.",
+    "CityStoke recovered from EA2019/2026 and rendered officialClubforce2026junior/senior memberships. Northwood training classification confirmed; direct contacts/founding/timetable remain unknown. Published Facebook/Instagram retained, apparent football Twittercityofstokefc excluded. Incorrect CityStoke source-gap note copied from Coalville corrected: Membermojo/SportMember migration and phone conflict do not belong to CityStoke.",
+    "RunMummyRun2012date belongs to parentcommunity, CRCfounding unset. LeanneDavies/BecsRichardson launch roles and KathrynHarrison2021regional award qualified, no currentoffice promise. Community signup not CRCregistration availability. Hartlepool official history/training/report routes still fail; useful unconfirmed leads CastleEden17HillChallenge and2017StuartPailorMemorialOldMonks. StAnnes mirrorclaims1980JohnMageean/FrankMcConway require actualprimary verification; not adopted. FryClubJoggers2018KeynshamTownCouncil newsletter is a nextlead, unopened. Preserve23October NewRoss/Islandreview.",
     "BATCH97 CURRENT: modulecs seedv97; six biographies/six historical associations, two role emails and one Instagram link. Assembled1569/1737 (90.3%),793 associations,168 incomplete. Published1549/779; draftPR761 adds20/14. Parent8e63197; main0f8bc3d inspected. Check current head/writers before continuing. Earlier notes below are historical.",
     "Goole venue recovered from EA2018/2026 and TownDeal project: use Victoria Pleasure Grounds, no guessed postcode or completed-pavilion claim. Kirkby county link actually leads to TeamIsabella; keep website unset and2014origin excluded. EA2022 selections/2023coaching establish three dated associations, not current membership or results.",
     "Start2Jog official website/email recovered;2018/2022awards support history, not current roles or junior capacity. Hurricane ClubSpark running page/contact replaces unavailable old domain;2018affiliation not founding, per-booking starts differ from directory BoulthamPark/Birchwoodfooter. Hayes official email/community-centre meeting confirmed, undated Wednesday timetable and2022C25k case study qualified.",
@@ -4137,7 +4139,7 @@
       "slug": "city-of-stoke-ac",
       "url": "http://www.stokeac.org.uk/",
       "status": "profile-added-with-qualified-gap",
-      "reason": "Profile recovered from current SportMember platform linked by Membermojo migration notice. Old offers superseded. Official phone differs from undated provider listing, masked email not guessed. Founding year/junior eligibility unresolved.",
+      "reason": "Corrected batch98: prior SportMember/Membermojo migration and phone-conflict wording belonged to Coalville, not City of Stoke. City of Stoke biography now sourced from EA2019/2026 and its rendered Clubforce membership page. Founding year, direct enquiry contacts and current training timetable unresolved; 2026 junior/senior membership plans observed.",
       "checkedAt": "2026-10-17"
     },
     {
@@ -5653,9 +5655,9 @@
     {
       "slug": "city-of-stoke-ac",
       "url": "https://www.stokeac.org.uk/",
-      "status": "unavailable-source",
-      "note": "HTTP and HTTPS returned 502. No founding date or alumni inferred from unrelated search hits.",
-      "checkedAt": "2026-10-14"
+      "status": "profile-added-with-qualified-gap",
+      "note": "Old website still unavailable17October. Biography now supported by dated EA2019/2026 accounts and rendered Clubforce2026membership; founding year, direct contacts and timetable unknown. Earlier Coalville migration note corrected separately.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "clanfield-joggers",

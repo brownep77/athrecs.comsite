@@ -3,6 +3,10 @@ import type { ClubSeed } from "./types";
 // Public club contact pages. Each added contact/link retains its source and actual check date.
 // Excludes supplier contacts, governing-body accounts and unconfirmed numeric social IDs.
 export const clubWebsiteContacts: Record<string, Partial<ClubSeed>> = {
+  "london-hammer-school": {"contact_url":"https://londonhammerschool.co.uk/contact?bias=1","contacts":[{"role":"Throwing-session enquiries — 2026 newsletter","email":"londonhammerschool@gmail.com","source_url":"https://sbharriers.co.uk/england-athletics-community-throws-newsletter-july-august-2026/","checked_at":"2026-10-17"}]},
+  "huub-performance-project": {"contact_url":"https://huubdesign.com/products/huub-performance-project","contacts":[{"role":"Performance Project support and sponsorship enquiries","email":"online@huubdesign.com","source_url":"https://huubdesign.com/products/huub-performance-project","checked_at":"2026-10-17"}]},
+  "city-of-stoke-ac": {"contact_url":"https://stokeac.clubforce.com/products/membership","socials":[{"platform":"Facebook","url":"https://www.facebook.com/stokeac/","source_url":"https://stokeac.clubforce.com/products/membership","checked_at":"2026-10-17"},{"platform":"Instagram","url":"https://www.instagram.com/stokeac/","source_url":"https://stokeac.clubforce.com/products/membership","checked_at":"2026-10-17"}]},
+  "run-mummy-run-crc": {"contact_url":"https://linktr.ee/RunMummyRun"},
   "start2jog": {"contact_url":"https://www.start2jog.co.uk/contact-us/","contacts":[{"role":"Club chair enquiries","email":"chairman@start2jog.co.uk","source_url":"https://www.start2jog.co.uk/contact-us/","checked_at":"2026-10-17"}]},
   "hayes-and-harlington-road-runners": {"contact_url":"https://www.hhroadrunners.run/","contacts":[{"role":"Club enquiries","email":"info@hhroadrunners.run","source_url":"https://www.hhroadrunners.run/","checked_at":"2026-10-17"}]},
   "hurricane-striders": {"contact_url":"https://clubspark.englandathletics.org/HurricaneStriders/Contact"},

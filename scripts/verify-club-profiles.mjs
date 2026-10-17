@@ -17,6 +17,23 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 98: predecessor origins, community versus club, and role-specific contacts.
+  assert.equal(clubProfiles["london-hammer-school"].founded_year, 2024);
+  assert.equal(bySlug.get("london-hammer-school").address_kind, "training");
+  assert.equal(bySlug.get("london-hammer-school").postcode, "N9 0AR");
+  assert.equal(bySlug.get("london-hammer-school").contacts[0].email, "londonhammerschool@gmail.com");
+  for (const slug of ["huub-performance-project", "city-of-stoke-ac", "run-mummy-run-crc"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("huub-performance-project").address_kind, "directory");
+  assert.match(bySlug.get("huub-performance-project").contacts[0].role, /support and sponsorship/);
+  assert.equal(bySlug.get("city-of-stoke-ac").contact_url, "https://stokeac.clubforce.com/products/membership");
+  assert.equal(bySlug.get("city-of-stoke-ac").address_kind, "training");
+  assert.equal(bySlug.get("city-of-stoke-ac").socials.length, 2);
+  assert.ok(!bySlug.get("city-of-stoke-ac").socials.some(s => /cityofstokefc/.test(s.url)));
+  assert.equal(bySlug.get("run-mummy-run-crc").virtual, true);
+  assert.equal(bySlug.get("run-mummy-run-crc").city, "");
+  assert.equal(bySlug.get("run-mummy-run-crc").country, "England");
+  assert.notEqual(clubProfiles["run-mummy-run-crc"].scope, "global");
+  assert.match(clubProfiles["run-mummy-run-crc"].biography.join(" "), /should not be mistaken/);
   // Batch 96: distinguish race participation, membership and dated facility evidence.
   for (const slug of ["pendle-trail-running-club", "regis-road-runners", "fylde-coast-runners", "tynedale-harriers-and-ac"]) assert.equal(clubProfiles[slug].founded_year, undefined);
   assert.equal(bySlug.get("regis-road-runners").city, "Bognor Regis");
