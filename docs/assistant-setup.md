@@ -65,13 +65,33 @@ conversation starts and become unreadable; physical cleanup runs on the next
 accepted chat attempt or staff history visit. Do not promise deletion at an exact
 clock time. Staff downloads have their own handling/retention responsibilities.
 
-## Optional WhatsApp handoff
+## WhatsApp handoff and automatic notifications
 
 Set `ATHRECS_WHATSAPP_NUMBER` to the owner's confirmed business number, in
 international digits only (no plus sign, spaces or punctuation). This shows an
 Open WhatsApp link. It opens a separate conversation and never automatically
-forwards the website transcript. Two-way WhatsApp routing and WhatsApp transcript
-sync require a separately configured WhatsApp Business integration.
+forwards the website transcript. Automatic notifications and two-way replies are separate features; neither is implemented by this PR.
+
+For automatic notifications, connect a WhatsApp Business Platform sender (direct Meta
+Cloud API or a supported provider), with a registered business phone-number ID,
+business account, server-side messaging credential and confirmed recipient number.
+Confirm messaging eligibility, recipient opt-in and any required approved template
+with that provider before sending. Never put a token in a public environment variable.
+
+The preferred notification contains a short alert and a link to the existing staff-only
+transcript page. The link must still require the approved staff login; never make a
+public transcript URL or put the full conversation in a WhatsApp deep link. Full
+transcript forwarding creates another copy outside AthRecs retention controls and
+needs an explicit data-handling decision and updated visitor notice.
+
+Implementation still needed: a transactional notification outbox after a stored chat
+turn, a retry worker with idempotency, delivery/failure tracking and a staff setting to
+pause notifications. Two-way human takeover additionally needs verified incoming
+webhooks, conversation mapping, duplicate-event handling, reply delivery and explicit
+AI-pause/resume controls. Do not advertise live human replies until these exist.
+
+Primary references: [WhatsApp Business Platform](https://whatsappbusiness.com/products/business-platform/)
+and [Meta Cloud API examples](https://github.com/fbsamples/whatsapp-api-examples).
 
 ## Verification
 
@@ -82,3 +102,43 @@ Provider tests use synthetic messages and mocked HTTP responses; they do not
 establish actual OpenAI account access. Run the production build and check the
 public launcher, keyboard/mobile dialog, staff login and a real reply after the
 key is connected. Do not publish test conversations or production secrets.
+
+
+## Release and activation checks (17 October 2026)
+
+The previous preview failed before compilation because the opt-in provider probe
+received HTTP 403. This does not establish whether the cause was billing, account
+verification, model permission or another provider restriction. The branch Preview
+probe flag was subsequently disabled. Do not suppress that rejection or infer that
+a successful application build establishes provider access.
+
+The Vercel project has a production DATABASE_URL, but no production assistant enabled
+flag, provider selection, stable assistant rate-limit secret, OpenAI/Gateway API key
+or WhatsApp number was present at inspection. Preview provider selection is confined
+to feat/athrecs-assistant; it does not configure production.
+
+Preferred activation uses Vercel OIDC, avoiding a long-lived provider key. The team
+owner must check AI Gateway account access, billing/credits and any model/provider
+restrictions in the Vercel dashboard. Once access is resolved, run the opt-in live
+probe in an isolated Preview; then configure the production provider, a newly
+generated Sensitive rate-limit secret and the enabled flag. Do not reuse another
+application's secret. Direct OpenAI is an alternative: the owner configures a funded
+project key securely in Vercel with permission to create Responses and access the
+chosen model. Never paste keys into chat. Official references:
+[Vercel OIDC](https://vercel.com/docs/ai-gateway/authentication-and-byok/oidc),
+[OpenAI permissions](https://developers.openai.com/api/docs/guides/rbac).
+
+Before enabling visitors, verify real answers in all eight languages, the deployed
+host-only cookie and private response headers, two isolated visitor sessions,
+anonymous/non-staff rejection of transcript APIs, a staff transcript download and
+cascading deletion using synthetic chats. The local browser suite checks all eight
+localized interfaces at desktop, 320px phone and short-screen sizes using mocked
+replies; it does not prove generated-language quality or production authentication.
+The local access suite executes the real request handlers and staff guards with
+synthetic sessions and in-memory SQL. The separate persistence suite checks quotas,
+retention, crash recovery and concurrent requests.
+
+The application sends store:false. That disables Responses application-state
+storage; it is not a promise of zero retention across provider abuse-monitoring,
+Gateway observability or database backups. Review those account controls separately
+([OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data)).

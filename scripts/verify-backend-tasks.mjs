@@ -24,9 +24,10 @@ try {
   await page.goto("http://127.0.0.1:8101");
   await page.getByRole("heading", { name: "What would you like to do?" }).waitFor();
   const cards = page.locator('[aria-label="Backend tasks"] article');
-  assert.equal(await cards.count(), 26);
+  assert.equal(await cards.count(), 27);
   assert.equal(await page.getByRole("link", { name: "Open Stats", exact: true }).getAttribute("href"), "/admin/collection-stats");
   assert.equal(await page.getByRole("link", {name:"Open Result verification inbox",exact:true}).getAttribute("href"), "/admin/athlete-workspace#result-verification");
+  assert.equal(await page.getByRole("link", { name: "Open Chat transcripts", exact: true }).getAttribute("href"), "/admin/assistant-chats");
   const paths = await cards.locator("a").evaluateAll(anchors => anchors.map(anchor => anchor.getAttribute("href")));
   assert.equal(new Set(paths).size, paths.length);
   for (const path of paths) {
@@ -56,11 +57,11 @@ try {
   await page.getByLabel("Find a backend task").fill("does-not-exist-xyz");
   assert.equal(await cards.count(), 0);
   await page.getByRole("button", { name: "Show all tasks", exact: true }).click();
-  assert.equal(await cards.count(), 26);
+  assert.equal(await cards.count(), 27);
   await page.getByRole("button", { name: "Maintenance & data", exact: true }).click();
   assert.equal(await cards.count(), 4);
   await page.getByRole("button", { name: "All tasks", exact: true }).click();
-  assert.equal(await cards.count(), 26);
+  assert.equal(await cards.count(), 27);
   assert.equal(await page.getByRole("link", { name: "Add or update athletes", exact: true }).getAttribute("href"), "/admin/athlete-tools");
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
@@ -71,7 +72,7 @@ try {
   assert.match(shell, /id="legacy-admin-tools"/);
   assert.doesNotMatch(readFileSync("src/components/staff/BackendTaskPanel.tsx", "utf8"), /createServerFn|getSql|fetch\(|localStorage/);
   assert.deepEqual(errors, []);
-  console.log("PASS: all top-level staff routes covered, 26 distinct tool links including the running event register, editing/confirmation route, accurate results-link purpose, duplicate searches, preserved authentication/brand gate and desktop/mobile navigation.");
+  console.log("PASS: all top-level staff routes covered, 27 distinct tool links including the running event register, editing/confirmation route, accurate results-link purpose, duplicate searches, preserved authentication/brand gate and desktop/mobile navigation.");
 } catch (error) {
   if (page) await page.screenshot({ path: "artifacts/import-backend-tasks-failure.png", fullPage: true });
   throw error;

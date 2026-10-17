@@ -4,7 +4,10 @@ import { resolve } from "node:path";
 import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwind from "@tailwindcss/vite";
-import { chromium } from "playwright";
+import { createRequire } from "node:module";
+import { assistantCopy } from "../src/lib/athrecs/assistant-copy.ts";
+const require = createRequire(import.meta.url);
+const { chromium } = require(process.env.ATHRECS_BROWSER_MODULE || "playwright");
 
 const root = resolve("artifacts/assistant-fixture");
 mkdirSync(root, { recursive: true });
@@ -16,10 +19,10 @@ const file = (name, content) => {
 const api = file(
   "api.js",
   `
-window.sent=[];let messages=[];
+window.sent=[];let messages=[];const copy=${JSON.stringify(assistantCopy)};
 export async function getAssistantStatus(){return {enabled:!location.search.includes('disabled'),whatsappUrl:null};}
 export async function getAssistantHistory(){return {messages,error:null};}
-export async function sendAssistantMessage({data}){window.sent.push(data);if(window.failOnce){window.failOnce=false;throw Error('Synthetic network failure');}messages.push({role:'user',content:data.message,language:data.language,status:'complete',created_at:new Date().toISOString()},{role:'assistant',content:data.language==='fr'?'Ouvrez votre compte pour commencer.':'Open Athlete Account to get started.',language:data.language,status:'complete',created_at:new Date().toISOString()});return {messages:[...messages],error:null};}
+export async function sendAssistantMessage({data}){window.sent.push(data);if(window.failOnce){window.failOnce=false;throw Error('Synthetic network failure');}messages.push({role:'user',content:data.message,language:data.language,status:'complete',created_at:new Date().toISOString()},{role:'assistant',content:copy[data.language].account,language:data.language,status:'complete',created_at:new Date().toISOString()});return {messages:[...messages],error:null};}
 export async function getStaffAssistantChats(){return {chats:[{id:'00000000-0000-4000-8000-000000000001',language:'fr',page_path:'/athletes',created_at:'2026-10-16T12:00:00Z',updated_at:'2026-10-16T12:01:00Z',message_count:2,preview:'Synthetic visitor question'}],hasMore:false,enabled:true};}
 export async function getStaffAssistantTranscript(){return {chat:{id:'00000000-0000-4000-8000-000000000001',language:'fr',page_path:'/athletes',created_at:'2026-10-16T12:00:00Z'},messages:[{role:'user',content:'Synthetic visitor question',language:'fr',status:'complete',created_at:'2026-10-16T12:00:00Z'},{role:'assistant',content:'Synthetic assistant answer',language:'fr',status:'complete',created_at:'2026-10-16T12:00:01Z'}]};}
 export async function deleteStaffAssistantTranscript(){return {deleted:true};}
@@ -42,7 +45,7 @@ const server = await createServer({
   resolve: {
     alias: [
       { find: "@/lib/athrecs/assistant-api", replacement: api },
-      { find: "@tanstack/react-router", replacement: router },
+      { find: /^@tanstack\/react-router$/, replacement: router },
       { find: "@", replacement: resolve("src") },
     ],
   },
@@ -68,7 +71,7 @@ try {
   await page.getByRole("dialog").waitFor();
   await page.getByLabel("How can we help?").fill("How do I sign up?");
   await page.getByRole("button", { name: "Send", exact: true }).click();
-  await page.getByText("Open Athlete Account to get started.", { exact: true }).waitFor();
+  await page.getByRole("log").getByText(assistantCopy.en.account, { exact: true }).waitFor();
   await page.getByLabel("Chat language").selectOption("fr");
   await page.getByLabel("Comment vous aider ?").fill("Comment créer un compte ?");
   await page.evaluate(() => {
@@ -81,7 +84,7 @@ try {
     "Comment créer un compte ?",
   );
   await page.getByRole("button", { name: "Envoyer", exact: true }).click();
-  await page.getByText("Ouvrez votre compte pour commencer.", { exact: true }).waitFor();
+  await page.getByRole("log").getByText(assistantCopy.fr.account, { exact: true }).waitFor();
   const sent = await page.evaluate(() => window.sent);
   assert.equal(sent[1].requestId, sent[2].requestId, "network retry must reuse its request id");
   assert.equal(sent[2].language, "fr");
@@ -95,6 +98,30 @@ try {
     "no unconfigured WhatsApp number",
   );
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  // Exercise the actual localized controls at desktop, narrow phone and short viewport sizes.
+  for (const viewport of [{ width: 1280, height: 900 }, { width: 320, height: 640 }, { width: 390, height: 500 }]) {
+    await page.setViewportSize(viewport);
+    for (const [language, copy] of Object.entries(assistantCopy)) {
+      await page.locator('#assistant-language').selectOption(language);
+      const dialog = page.getByRole('dialog');
+      assert.equal(await dialog.getAttribute('lang'), language);
+      await dialog.getByRole('heading', { name: copy.title, exact: true }).waitFor();
+      for (const [key, href] of [['account','/athlete-account'], ['athletes','/athletes'], ['results','/results'], ['club','/clubs/register']]) {
+        assert.equal(await dialog.getByRole('link', {name: copy[key], exact: true}).getAttribute('href'), href);
+      }
+      await page.getByLabel(copy.placeholder, {exact: true}).fill(`Synthetic ${language} question`);
+      await dialog.getByRole('button', {name: copy.send, exact: true}).click();
+      await page.waitForFunction(language => window.sent.at(-1)?.language === language && !document.querySelector('[aria-busy="true"]'), language);
+      const log = dialog.getByRole('log');
+      assert.equal(await log.locator(':scope > div').last().innerText(), copy.account);
+      assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      const bounds = await dialog.boundingBox();
+      assert(bounds.y >= -1 && bounds.y + bounds.height <= viewport.height + 1, `Dialog escapes ${viewport.width}x${viewport.height} in ${language}`);
+      const input = await page.getByLabel(copy.placeholder, {exact: true}).boundingBox();
+      assert(input.y >= 0 && input.y + input.height <= viewport.height, `Composer clipped in ${language}`);
+    }
+  }
+  await page.setViewportSize({width:390,height:844});
   await page.screenshot({ path: resolve("artifacts/assistant-mobile.png"), fullPage: true });
   await page.keyboard.press("Escape");
   await page.getByRole("dialog").waitFor({ state: "hidden" });
@@ -115,7 +142,7 @@ try {
   await page.screenshot({ path: resolve("artifacts/assistant-staff.png"), fullPage: true });
   assert.deepEqual(errors, []);
   console.log(
-    "Assistant browser checks passed: mobile layout, multilingual exchange, retry identity, hidden unconfigured features, keyboard close and staff transcript download. APIs used synthetic fixtures.",
+    "Assistant browser checks passed: desktop/320px/short-screen layout, all eight localized interfaces and request languages, retry identity, hidden unconfigured features, keyboard close and staff transcript download. APIs used synthetic fixtures.",
   );
 } finally {
   await browser.close();

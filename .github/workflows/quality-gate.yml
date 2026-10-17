@@ -49,7 +49,9 @@ jobs:
         run: npm ci
 
       - name: Verify AI chat privacy, transcripts and usage limits
-        run: node --experimental-strip-types scripts/verify-assistant.mjs
+        run: |
+          node --experimental-strip-types scripts/verify-assistant.mjs
+          node scripts/verify-assistant-access.mjs
 
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
