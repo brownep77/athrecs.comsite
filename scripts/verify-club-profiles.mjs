@@ -17,6 +17,158 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 103: dated history, current publisher attribution and distinct identities.
+  assert.equal(clubProfiles["ravens-city-of-london-running-club"].founded_year, 1997);
+  assert.equal(bySlug.get("ravens-city-of-london-running-club").city, "London");
+  assert.equal(bySlug.get("ravens-city-of-london-running-club").contacts.length, 0);
+  assert.equal(clubProfiles["ravens-city-of-london-running-club"].notable_members[0].name, "Phil Hernon");
+  assert.notEqual(bySlug.get("ravens-school-runners").slug, bySlug.get("ravens-city-of-london-running-club").slug);
+  assert.equal(clubProfiles["heyford-aardvarks-running-club"].founded_year, undefined);
+  assert.equal(bySlug.get("heyford-aardvarks-running-club").address_kind, "directory");
+  assert.match(clubProfiles["heyford-aardvarks-running-club"].biography.join(" "), /historical account, not a current timetable/);
+  assert.equal(bySlug.get("heyford-aardvarks-running-club").contacts[0].email, "heyfordaardvarks@gmail.com");
+  assert.equal(bySlug.get("dunstable-lions-running-club").address_kind, "training");
+  assert.equal(bySlug.get("dunstable-lions-running-club").website, "https://www.dunstablelionsrc.co.uk/");
+  assert.equal(clubProfiles["dunstable-lions-running-club"].founded_year, undefined);
+  assert.equal(bySlug.get("sunlight-runners").contacts[0].phone, "01824 790749");
+  assert.match(bySlug.get("sunlight-runners").contacts[0].role, /undated listing/);
+  assert.ok(!bySlug.get("sunlight-runners").notable_members?.length);
+  // Batch 101: real enquiry routes, dated origins and no invented training base.
+  assert.equal(clubProfiles["whitby-running-club"].founded_year, 2019);
+  assert.equal(bySlug.get("whitby-running-club").website, "https://www.whitbyrunningclub.co.uk/");
+  assert.equal(bySlug.get("whitby-running-club").contacts[0].email, "whitbyrunningclub@gmail.com");
+  assert.equal(bySlug.get("whitby-running-club").socials.length, 2);
+  assert.ok(!bySlug.get("whitby-running-club").contacts.some(c => /example|merch|northyorks/.test(c.email ?? "")));
+  assert.match(clubProfiles["whitby-running-club"].biography.join(" "), /already under way/);
+  assert.equal(clubProfiles["st-marys-calne-sports-centre-running-and-triathlon"].founded_year, 2007);
+  assert.match(clubProfiles["st-marys-calne-sports-centre-running-and-triathlon"].biography.join(" "), /2015/);
+  assert.equal(clubProfiles["just-run-community"].founded_year, undefined);
+  assert.equal(clubProfiles["littleborough-runners"].founded_year, undefined);
+  assert.equal(bySlug.get("littleborough-runners").address_kind, "training");
+  assert.equal(bySlug.get("just-run-community").address_kind, "directory");
+  assert.ok(bySlug.get("just-run-community").contacts.some(c => c.email === "membership@justruncommunity.co.uk"));
+  assert.equal(bySlug.get("just-run-community").socials.filter(s => s.platform === "Instagram").length, 1);
+  assert.equal(bySlug.get("littleborough-runners").socials.filter(s => s.platform === "Facebook").length, 2);
+  assert.equal(bySlug.get("runfit-chorley").contact_url, "https://clubspark.englandathletics.org/RunFitChorley/Contact");
+  assert.equal(clubProfiles["runfit-chorley"].founded_year, undefined);
+  assert.equal(bySlug.get("runfit-chorley").address_kind, "directory");
+  assert.equal(bySlug.get("whitby-running-club").address_kind, "directory");
+  assert.equal(bySlug.get("collins-cycle-centre-triathlon-club").city, "Thurles");
+  assert.equal(bySlug.get("collins-cycle-centre-triathlon-club").country, "Ireland");
+  assert.equal(bySlug.get("collins-cycle-centre-triathlon-club").contacts.length, 1);
+  assert.equal(bySlug.get("collins-cycle-centre-triathlon-club").contacts[0].checked_at, "2026-10-17");
+  assert.equal(clubProfiles["collins-cycle-centre-triathlon-club"].founded_year, undefined);
+  assert.match(clubProfiles["collins-cycle-centre-triathlon-club"].biography.join(" "), /not a final placing/);
+  // Batch 100: volunteer origins, seasonal venues and distinct club identities.
+  assert.equal(clubProfiles["kids-run-redditch"].founded_year, 2023);
+  assert.equal(bySlug.get("kids-run-redditch").address_kind, "training");
+  assert.equal(bySlug.get("kids-run-redditch").socials.length, 2);
+  assert.ok(!bySlug.get("kids-run-redditch").socials.some(s => s.url.includes("/share/")));
+  assert.equal(clubProfiles["south-cambridge-striders"].founded_year, 2024);
+  assert.equal(bySlug.get("south-cambridge-striders").contacts[0].email, "enquiries@southcambridgestriders.org.uk");
+  assert.match(clubProfiles["south-cambridge-striders"].location_note, /autumn\/winter/);
+  assert.equal(clubProfiles["freck-and-warton-running-club"].founded_year, 2018);
+  assert.equal(bySlug.get("freck-and-warton-running-club").city, "Warton");
+  assert.equal(bySlug.get("freck-and-warton-running-club").address_kind, "training");
+  assert.equal(bySlug.get("freck-and-warton-running-club").website, "https://fwrc.co.uk/");
+  assert.equal(clubProfiles["carlisle-tri-club"].founded_year, 2009);
+  assert.equal(bySlug.get("carlisle-tri-club").address_kind, "directory");
+  assert.ok(bySlug.get("carlisle-tri-club").sports.includes("Triathlon"));
+  assert.ok(!bySlug.get("carlisle-tri-club").contacts.some(c => /wellbeinghub|Hhods/i.test(c.email ?? "")));
+  assert.equal(bySlug.get("ventoux-triathlon-club").country, "Northern Ireland");
+  assert.equal(bySlug.get("ventoux-triathlon-club").city, "Camlough");
+  assert.equal(clubProfiles["ventoux-triathlon-club"].founded_year, undefined);
+  assert.match(clubProfiles["ventoux-triathlon-club"].biography.join(" "), /rather than a final position/);
+  // Batch 99: physical academy, separate swim venue, coaching versus club identity.
+  const bks = bySlug.get("bradford-keighley-and-skipton-disability-athletics-bks");
+  assert.equal(bks.city, "Keighley");
+  assert.equal(bks.address_kind, "training");
+  assert.equal(bks.postcode, "BD20 6EB");
+  assert.deepEqual(bks.sports, ["Athletics", "Swimming"]);
+  assert.equal(bks.contacts[0].email, "bksda@aol.com");
+  assert.equal(bks.socials.length, 2);
+  assert.equal(bySlug.get("aspire-athletics").virtual, false);
+  assert.equal(bySlug.get("aspire-athletics").postcode, "SM5 1SL");
+  assert.equal(bySlug.get("aspire-athletics").address_kind, "training");
+  assert.equal(bySlug.get("aspire-athletics").contacts[0].email, "admin@aspiretogreatness.co.uk");
+  assert.equal(bySlug.get("new-levels-run-club").virtual, true);
+  assert.equal(bySlug.get("new-levels-run-club").address_kind, "directory");
+  assert.match(clubProfiles["new-levels-run-club"].biography.join(" "), /does not establish that the affiliated club itself has changed name/);
+  assert.equal(bySlug.get("hell-yeah-triathlon-club").city, "Carrickfinn");
+  assert.equal(bySlug.get("hell-yeah-triathlon-club").country, "Ireland");
+  assert.equal(bySlug.get("hell-yeah-triathlon-club").contacts[0].checked_at, "2026-10-17");
+  assert.match(clubProfiles["hell-yeah-triathlon-club"].biography.join(" "), /rather than a final placing/);
+  for (const slug of [bks.slug, "aspire-athletics", "new-levels-run-club", "hell-yeah-triathlon-club"]) {
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.notEqual(clubProfiles[slug].scope, "global");
+  }
+  // Batch 98: predecessor origins, community versus club, and role-specific contacts.
+  assert.equal(clubProfiles["london-hammer-school"].founded_year, 2024);
+  assert.equal(bySlug.get("london-hammer-school").address_kind, "training");
+  assert.equal(bySlug.get("london-hammer-school").postcode, "N9 0AR");
+  assert.equal(bySlug.get("london-hammer-school").contacts[0].email, "londonhammerschool@gmail.com");
+  for (const slug of ["huub-performance-project", "city-of-stoke-ac", "run-mummy-run-crc"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("huub-performance-project").address_kind, "directory");
+  assert.match(bySlug.get("huub-performance-project").contacts[0].role, /support and sponsorship/);
+  assert.equal(bySlug.get("city-of-stoke-ac").contact_url, "https://stokeac.clubforce.com/products/membership");
+  assert.equal(bySlug.get("city-of-stoke-ac").address_kind, "training");
+  assert.equal(bySlug.get("city-of-stoke-ac").socials.length, 2);
+  assert.ok(!bySlug.get("city-of-stoke-ac").socials.some(s => /cityofstokefc/.test(s.url)));
+  assert.equal(bySlug.get("run-mummy-run-crc").virtual, true);
+  assert.equal(bySlug.get("run-mummy-run-crc").city, "");
+  assert.equal(bySlug.get("run-mummy-run-crc").country, "England");
+  assert.notEqual(clubProfiles["run-mummy-run-crc"].scope, "global");
+  assert.match(clubProfiles["run-mummy-run-crc"].biography.join(" "), /should not be mistaken/);
+  // Batch 96: distinguish race participation, membership and dated facility evidence.
+  for (const slug of ["pendle-trail-running-club", "regis-road-runners", "fylde-coast-runners", "tynedale-harriers-and-ac"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("regis-road-runners").city, "Bognor Regis");
+  assert.equal(bySlug.get("regis-road-runners").postcode, "");
+  assert.equal(bySlug.get("regis-road-runners").address_kind, "training");
+  assert.equal(bySlug.get("regis-road-runners").socials.find(s => s.platform === "Facebook").checked_at, "2026-10-13");
+  assert.ok(bySlug.get("regis-road-runners").socials.some(s => s.url === "https://www.strava.com/clubs/rotaryroadrunners"));
+  assert.equal(bySlug.get("pendle-trail-running-club").contacts[0].email, "pendletr@gmail.com");
+  assert.equal(bySlug.get("pendle-trail-running-club").socials[0].checked_at, "2026-10-13");
+  assert.equal(bySlug.get("fylde-coast-runners").website, "https://www.fcrentry.com/");
+  assert.equal(bySlug.get("fylde-coast-runners").address_kind, "correspondence");
+  assert.equal(bySlug.get("fylde-coast-runners").adult_only, true);
+  assert.match(clubProfiles["fylde-coast-runners"].biography.join(" "), /not a verified weekly training/);
+  assert.equal(bySlug.get("tynedale-harriers-and-ac").contacts.length, 0);
+  assert.match(clubProfiles["tynedale-harriers-and-ac"].notable_members[0].detail, /Historical association only/);
+  // Batch 95: live capacity, platform migration and dated roles.
+  assert.equal(clubProfiles["billericay-striders"].founded_year, 1986);
+  assert.equal(bySlug.get("billericay-striders").address_kind, "directory");
+  assert.equal(bySlug.get("billericay-striders").socials.find(s => s.platform === "Facebook").checked_at, "2026-10-13");
+  assert.equal(clubProfiles["southampton-triathlon-club"].founded_year, 1987);
+  assert.equal(bySlug.get("southampton-triathlon-club").address_kind, "training");
+  assert.equal(bySlug.get("southampton-triathlon-club").adult_only, false);
+  assert.match(clubProfiles["southampton-triathlon-club"].biography.join(" "), /waiting lists/);
+  assert.match(bySlug.get("coalville-triathlon-club").contact_url, /holdsport/);
+  assert.ok(bySlug.get("coalville-triathlon-club").contacts.some(c => c.phone === "07519 876076"));
+  assert.ok(!bySlug.get("coalville-triathlon-club").contacts.some(c => c.phone === "07971600345" || c.email === "theteam@coalvilletriathlon.org"));
+  for (const slug of ["coalville-triathlon-club", "brighton-and-hove-womens-running-club", "crystal-peaks-runners"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("brighton-and-hove-womens-running-club").contacts.length, 0);
+  assert.match(clubProfiles["brighton-and-hove-womens-running-club"].notable_members[1].detail, /not a current-role claim/);
+  assert.equal(bySlug.get("crystal-peaks-runners").website, "https://www.crystalpeaks-runners.com/");
+  assert.equal(bySlug.get("crystal-peaks-runners").socials.length, 2);
+  assert.ok(bySlug.get("crystal-peaks-runners").socials.every(s => new URL(s.url).hostname === "www.facebook.com"));
+  assert.match(clubProfiles["crystal-peaks-runners"].biography.join(" "), /does not give a year/);
+  // Batch 94: distinguish shared venues, historical roles and online products.
+  for (const slug of ["arete-run-club", "tetbury-dolphins-running-club", "pudsey-runners", "st-marys-richmond-ac", "the-running-hub"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("arete-run-club").website, "https://areterunclub.com/");
+  assert.equal(bySlug.get("arete-run-club").address_kind, "training");
+  assert.equal(bySlug.get("arete-run-club").contacts.length, 0);
+  assert.equal(bySlug.get("pudsey-runners").postcode, "LS28 8JQ");
+  assert.equal(bySlug.get("pudsey-runners").address_kind, "clubhouse");
+  assert.equal(bySlug.get("pudsey-runners").contacts.length, 0);
+  assert.match(clubProfiles["pudsey-runners"].biography.join(" "), /1910 foundation should not/);
+  assert.equal(bySlug.get("tetbury-dolphins-running-club").address_kind, "directory");
+  assert.match(clubProfiles["tetbury-dolphins-running-club"].notable_members[0].detail, /not a current-role claim/);
+  assert.equal(bySlug.get("st-marys-richmond-ac").address_kind, "training");
+  assert.ok(bySlug.get("st-marys-richmond-ac").contacts.some(c => c.email === "secretary@smrac.org.uk"));
+  assert.equal(bySlug.get("the-running-hub").virtual, true);
+  assert.notEqual(clubProfiles["the-running-hub"].scope, "global");
+  assert.equal(bySlug.get("the-running-hub").city, "");
+  assert.equal(bySlug.get("the-running-hub").socials[0].checked_at, "2026-10-13");
   // Batch 92: preserve source conflicts, venue distinctions and historical identities.
   assert.equal(clubProfiles["beaumont-rc"].founded_year, 1984);
   assert.equal(bySlug.get("beaumont-rc").contact_url, "https://www.beaumontrc.co.uk/membership/");
@@ -44,7 +196,8 @@ try {
   assert.equal(bySlug.get("ventoux-triathlon-club").city, "Camlough");
   assert.equal(bySlug.get("ventoux-triathlon-club").country, "Northern Ireland");
   assert.equal(bySlug.get("ventoux-triathlon-club").location_precision, "area-only");
-  assert.equal(bySlug.get("ventoux-triathlon-club").contacts[0].checked_at, "2026-08-16");
+  assert.equal(bySlug.get("ventoux-triathlon-club").contacts[0].checked_at, "2026-10-17");
+  assert.equal(bySlug.get("ventoux-triathlon-club").contacts[0].source_url, "https://www.triathlonireland.com/Get-Involved/Find-a-Club/");
   assert.equal(bySlug.get("db-triathlon-club").contacts[0].checked_at, "2026-10-13");
   assert.match(clubProfiles["db-triathlon-club"].location_note, /2023 event venue/);
   assert.match(clubProfiles["milocarian-ac"].biography.join(" "), /military site/);
@@ -332,7 +485,7 @@ try {
   assert.match(clubProfiles["teesdale-ac"].contact_note, /No current Couch to 5K/);
   assert.ok(bySlug.get("telford-ac").contacts.some(c => c.email === "training@telfordac.uk"));
   assert.ok(bySlug.get("team-manvers").contacts.some(c => c.email === "tri@mwbc.org.uk"));
-  assert.equal(clubProfiles["tetbury-dolphins-running-club"], undefined);
+  assert.equal(clubProfiles["tetbury-dolphins-running-club"].notable_members.length, 2);
   assert.equal(clubProfiles["team-devizes-moonrakers-ac"].founded_year, 2007);
   // Batch 66: supported training bases, distinct clubs and qualified capacity.
   assert.equal(clubProfiles["surrey-walking-club"].founded_year, 1899);
@@ -391,7 +544,7 @@ try {
   assert.equal(bySlug.get("spa-striders").address_kind, "clubhouse");
   assert.match(clubProfiles["spenborough-and-dist-ac"].contact_note, /waiting list closed/);
   assert.match(clubProfiles["st-neots-triathlon-club"].biography.join(" "), /independent of the private NiceTri Events/);
-  assert.equal(clubProfiles["st-marys-richmond-ac"], undefined);
+  assert.equal(clubProfiles["st-marys-richmond-ac"].sources.length, 2);
   assert.equal(clubProfiles["st-austell-athletes-running-club"], undefined);
   assert.equal(clubProfiles["st-marys-university-athletics-club"].notable_members, undefined);
   assert.ok(bySlug.get("spectrum-striders").contacts.some(c => c.email === "membership@spectrumstriders.org.uk"));
@@ -420,7 +573,8 @@ try {
   assert.match(clubProfiles["south-devon-ac"].location_note, /junior training/);
   assert.match(clubProfiles["southwell-running-club"].notable_members.find(m => m.name === "Richard Whitehead").connection, /Honorary/);
   assert.ok(clubProfiles["south-birmingham-striders"].sources.some(s => s.url === "https://sbsclub.co.uk/about-us-1"));
-  assert.equal(clubProfiles["southampton-triathlon-club"], undefined);
+  // Previously blocked; batch95 recovered the rendered official joining page.
+  assert.ok(clubProfiles["southampton-triathlon-club"].sources.some(s => s.url === "https://www.southamptontriclub.co.uk/join-in"));
   // Batch 62: distinct entities, supported venues and historical-only associations.
   assert.equal(clubProfiles["skelmersdale-boundary-harriers"].founded_year, 1983);
   assert.equal(clubProfiles["skelmersdale-running-club"].founded_year, 2023);
@@ -501,7 +655,20 @@ try {
   assert.match(clubProfiles["running-at-40-plus"].notable_members[0].connection, /ambassador/);
   assert.equal(clubProfiles["kidderminster-and-stourport"].founded_year, 2001);
   assert.equal(clubProfiles["keswick-ac"].founded_year, 1974);
-  assert.equal(clubProfiles["kirkby-ac"], undefined);
+  assert.equal(clubProfiles["kirkby-ac"].founded_year, undefined);
+  assert.ok(!bySlug.get("kirkby-ac").website);
+  assert.match(clubProfiles["kirkby-ac"].contact_note, /different club/);
+  assert.equal(clubProfiles["kirkby-ac"].notable_members.length, 3);
+  assert.equal(bySlug.get("goole-youth-ac").address_kind, "training");
+  assert.equal(bySlug.get("goole-youth-ac").postcode, "");
+  assert.equal(bySlug.get("start2jog").website, "https://www.start2jog.co.uk/");
+  assert.ok(bySlug.get("start2jog").contacts.some(c => c.email === "chairman@start2jog.co.uk"));
+  assert.equal(clubProfiles["hurricane-striders"].founded_year, undefined);
+  assert.equal(bySlug.get("hurricane-striders").adult_only, true);
+  assert.match(clubProfiles["gipsy-hill-run-club"].biography.join(" "), /having taken place/);
+  assert.ok(bySlug.get("gipsy-hill-run-club").socials.some(s => s.platform === "Facebook"));
+  assert.ok(bySlug.get("gipsy-hill-run-club").socials.some(s => s.platform === "Instagram"));
+  assert.equal(bySlug.get("hayes-and-harlington-road-runners").postcode, "UB3 4HR");
   assert.equal(clubProfiles["kirkby-milers-ac"].founded_year, 2015);
   assert.equal(bySlug.get("lancaster-and-morecambe-ac").postcode, "LA1 5JS");
   assert.equal(bySlug.get("lancing-eagles-rc").postcode, "BN15 0PH");
@@ -917,7 +1084,7 @@ try {
   assert.match(clubProfiles["newcastle-frontrunners"].biography.join(" "), /rather than guaranteed every Sunday/);
   assert.equal(clubProfiles["nepal-run"].notable_members, undefined);
   assert.notEqual(clubProfiles["nepal-run"].scope, "global");
-  assert.equal(clubProfiles["new-levels-run-club"], undefined);
+  assert.ok(clubProfiles["new-levels-run-club"].sources.some(source => source.url.includes("finalsurge.com/coach/runthroughcoach/")));
   assert.equal(clubProfiles["new-berkeley-harriers"], undefined);
   // Batch 51: preserve admission rules, organisational identity and real contact evidence.
   assert.equal(bySlug.get("newcastle-staffs-ac").postcode, "ST5 2DJ");

@@ -1,3 +1,14 @@
+import { gordonianAndHartlepoolProfiles } from "./club-profiles-cz.ts";
+import { heyfordRavensDunstableProfiles } from "./club-profiles-cy.ts";
+import { calneLincolnLittleboroughProfiles } from "./club-profiles-cx.ts";
+import { recoveredChorleyWhitbyAndThurlesProfiles } from "./club-profiles-cw.ts";
+import { recoveredVolunteerAndBeginnerProfiles } from "./club-profiles-cv.ts";
+import { recoveredInclusiveAndCoachingProfiles } from "./club-profiles-cu.ts";
+import { recoveredThrowsAndCommunityProfiles } from "./club-profiles-ct.ts";
+import { recoveredCoachingAndCommunityProfiles } from "./club-profiles-cs.ts";
+import { recoveredTrailCoastalAndTrackProfiles } from "./club-profiles-cr.ts";
+import { recoveredRegionalAndTriathlonProfiles } from "./club-profiles-cq.ts";
+import { recoveredCommunityAndVirtualProfiles } from "./club-profiles-cp.ts";
 import { recoveredLocalAndMultisportProfiles } from "./club-profiles-co.ts";
 import { recoveredRunningAndMastersProfiles } from "./club-profiles-cn.ts";
 import { servicesWorkplaceAndCavanProfiles } from "./club-profiles-cm.ts";
@@ -119,6 +130,17 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...gordonianAndHartlepoolProfiles,
+  ...heyfordRavensDunstableProfiles,
+  ...calneLincolnLittleboroughProfiles,
+  ...recoveredChorleyWhitbyAndThurlesProfiles,
+  ...recoveredVolunteerAndBeginnerProfiles,
+  ...recoveredInclusiveAndCoachingProfiles,
+  ...recoveredThrowsAndCommunityProfiles,
+  ...recoveredCoachingAndCommunityProfiles,
+  ...recoveredTrailCoastalAndTrackProfiles,
+  ...recoveredRegionalAndTriathlonProfiles,
+  ...recoveredCommunityAndVirtualProfiles,
   ...recoveredLocalAndMultisportProfiles,
   ...recoveredRunningAndMastersProfiles,
   ...servicesWorkplaceAndCavanProfiles,
@@ -934,4 +956,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-17-v93";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-17-v104";
