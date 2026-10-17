@@ -1,39 +1,40 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch104",
+  "lastEditorialBatch": "2026-10-17-batch105",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch94",
-  "pullRequest": 761,
-  "publication": "Published cohort baseline: 1,593 biographies and 821 sourced associations from PR761, verified on 17 October 2026. All 44 biographies and both contact-only updates from batches94–104 are live; 0 unpublished biographies in PR761. 144 of the 1,737-club research cohort remain incomplete. Public directory includes clubs outside this cohort; actual Google indexing is not confirmed.",
+  "branch": "codex/club-profiles-batch105",
+  "pullRequest": null,
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Batch105 adds3 draft biographies on a new branch from main9edeec5860433afbf2930f80aea061a9609ee134; assembled1596/1737 (91.9%),821 associations,141 incomplete. New PR is created after this checkpoint commit; resolve it by branch codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "gordonian-runners",
-    "hartlepool-burn-road-harriers"
+    "warsop-rc",
+    "aston-chasers",
+    "riversway-road-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1593,
+    "extendedProfiles": 1596,
     "notableMemberEntries": 821,
-    "clubsWithContacts": 1204,
-    "contactEntries": 2003,
-    "clubsWithEmail": 1162,
+    "clubsWithContacts": 1206,
+    "contactEntries": 2005,
+    "clubsWithEmail": 1164,
     "clubsWithPhone": 187,
-    "clubsWithSocials": 1214,
-    "socialLinks": 2563,
-    "websiteContactRecords": 1531
+    "clubsWithSocials": 1215,
+    "socialLinks": 2564,
+    "websiteContactRecords": 1533
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
+    "extendedProfilesAdded": 3,
     "notableMemberEntriesAdded": 0,
-    "contactOrSocialRecordsChanged": 3,
-    "newWebsiteContactRecords": 3,
+    "contactOrSocialRecordsChanged": 2,
+    "newWebsiteContactRecords": 2,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 3,
-    "netSocialLinks": 2,
+    "netContactEntries": 2,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Isolated actual built-page assertions passed for Gordonian, Hartlepool and RunMiddlewich: biographies where present, location/England indicator, emails/socials, registration, description, canonical and SportsOrganization data. Temporary harness was corrected to apply the existing club seed schema and test the flag's aria-label, then reran successfully. Local test only: in-memory database, no external fetches, unrelated catalogue seeding skipped. Previous headd131a9ff Club profiles39052709754 and fullquality39052709631 passed. New exact-head workflow and preview evidence belongs in PR761. No external migration/publication."
+    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed isolated checks for complete biography paragraphs, contacts/socials, directory address labels, England indicators, registration, description, canonical and SportsOrganization data. Test used in-memory PGLite with external fetch disabled and unrelated catalogue seeding skipped; no external migrations/publication. Prior PR761 exact-head Club profiles39057219734 and quality39057219732 passed. New exact-head desktop/mobile workflow and hosted-preview evidence will be recorded in the new draft PR."
   },
   "nextCandidateSlugs": [
     "yellow-brick-road-running-and-walking-club",
@@ -42,6 +43,11 @@
     "horsham-run-fit"
   ],
   "resumeInstructions": [
+    "BATCH105 CURRENT: module da seedv105; Warsop,AstonChasers,Riversway biographies; no new associations.1596/1737(91.9%),821 associations,141 incomplete; published1593/821. Two club emails/one Facebook link/two websites. From main9edeec5860433afbf2930f80aea061a9609ee134 after PR761 release. No other open club-profile draft found; branch checked before writing. New draft PR is created after commit, find via codex/club-profiles-batch105. Earlier no-profile notes are superseded only for these three.",
+    "Warsop official warsoprc.co.uk home/about-us/membership-benefits/events-calendar read17Oct; explicit adults-only beats generic all-ages wording. Trial and twice-weekly training, social/competitive first-or-second-claim options. warsoprc@hotmail.com confirmed; form not submitted. Founders unnamed, no year/phone/exact Facebook. FABLearning2023 and sponsor socials excluded. MedenValeColtsFC stays directory; meeting points/times unconfirmed. Earlier same-day opened subpage text retained when repeat fetch intermittently failed.",
+    "Aston official ClubSpark home/contact/session and16July2026 first-person YourMag anniversary account read. City Aston-cum-Aughton supported; DuckhamDrive remains directory. HealthCentre lowercarpark Tuesday venue not combined with contact-page S264WD postcode.8weekbeginner course announced1Sep already underway; confirm nextintake. astonchasers@gmail.com/exactFacebook1588331131464955 attributed, Facebookthrottled no ownership claim.10thanniversary retained as prose, founded_year unset; ordinarymember2021interview not famousmember/identity evidence.",
+    "Riversway biography now supported by MillysSmiles6Sep2022 firsthand14coursecharity challenge, MummysStarJustGiving campaign closed1Apr2020, DarwenDashers2026league source now explicitly records1Sep hosting. No athlete times or results imported. JustGiving roundedheadline/exacttotal disagree, no amount quoted. ExistingdirectoryFacebook retained with13Octdate; unavailable destination not freshlyverified. Charity/Darwen contacts excluded. Founding/currentjoining/directcontacts remain gaps; TotalFitness stays directory. ChewsYard Reddit timetable not primary, do not adopt. League flyer is DOCX and not read; no new contact inferred.",
+    "Other17Oct checks: Twemlow county DorsetAthletics/clubs-1 confirms league participation only; drrl.co.uk/dorset-clubs fails certificate verification, stop without weakening TLS. GinPit searches found distinct AstleyTyldesley; no merge. Bailieborough community-groups403. StJohnsWoking clinicMyCompleteRuns/HorsellDuvetClub not identity proof. Previous separately saved research checkpoint AthRecs-batch105-research-checkpoint.md is superseded for completed three profiles; new source gaps remain here. Prior23OctoberTI follow-ups and release history preserved.",
     "RELEASE761 CURRENT: PR761 source d17229fafe36d2bc41bc7e3242285ea4bceff4fc merged as f2dedb16c823cc96c583231bcf556b8cf5492239; production dpl_9BrwJh7WivDGr7GKe2aZxmUZMubK READY. Published baseline is 1593 biographies/821 associations. All46 changed public pages and sitemap inclusion verified. PR761 has no unpublished biographies. Older batch publication counts below are historical and superseded by this release. Continue from current main on a fresh draft branch/PR after checking active writers; preserve all source gaps, nextCandidateSlugs and 23October TI follow-ups. 144 cohort biographies remain incomplete.",
     "Minor presentation follow-up from production browser review: the shared area-only location caption says the exact town is not published even where a source-supported town is displayed, including Gordonian West End. Retain existing location_precision and source data. Suggested copy: Local area confirmed; check current training venues with the club. This does not block published biographies or warrant claiming a verified street/postcode. Address in a separate appropriate UI change.",
     "BATCH104 CURRENT: modulecz seedv104; two biographies, no notable associations; three contact/social records add three emails and two social links. Assembled1593/1737 (91.7%),821 associations,144 incomplete. Published1549/779; draftPR761 adds44/42. Parentd131a9ff and mainf437487 inspected; draft head unchanged immediately before edits, no competing writer observed. Older no-profile notes are superseded for Gordonian/Hartlepool only.",
