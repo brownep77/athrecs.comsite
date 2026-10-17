@@ -17,6 +17,26 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 100: volunteer origins, seasonal venues and distinct club identities.
+  assert.equal(clubProfiles["kids-run-redditch"].founded_year, 2023);
+  assert.equal(bySlug.get("kids-run-redditch").address_kind, "training");
+  assert.equal(bySlug.get("kids-run-redditch").socials.length, 2);
+  assert.ok(!bySlug.get("kids-run-redditch").socials.some(s => s.url.includes("/share/")));
+  assert.equal(clubProfiles["south-cambridge-striders"].founded_year, 2024);
+  assert.equal(bySlug.get("south-cambridge-striders").contacts[0].email, "enquiries@southcambridgestriders.org.uk");
+  assert.match(clubProfiles["south-cambridge-striders"].location_note, /autumn\/winter/);
+  assert.equal(clubProfiles["freck-and-warton-running-club"].founded_year, 2018);
+  assert.equal(bySlug.get("freck-and-warton-running-club").city, "Warton");
+  assert.equal(bySlug.get("freck-and-warton-running-club").address_kind, "training");
+  assert.equal(bySlug.get("freck-and-warton-running-club").website, "https://fwrc.co.uk/");
+  assert.equal(clubProfiles["carlisle-tri-club"].founded_year, 2009);
+  assert.equal(bySlug.get("carlisle-tri-club").address_kind, "directory");
+  assert.ok(bySlug.get("carlisle-tri-club").sports.includes("Triathlon"));
+  assert.ok(!bySlug.get("carlisle-tri-club").contacts.some(c => /wellbeinghub|Hhods/i.test(c.email ?? "")));
+  assert.equal(bySlug.get("ventoux-triathlon-club").country, "Northern Ireland");
+  assert.equal(bySlug.get("ventoux-triathlon-club").city, "Camlough");
+  assert.equal(clubProfiles["ventoux-triathlon-club"].founded_year, undefined);
+  assert.match(clubProfiles["ventoux-triathlon-club"].biography.join(" "), /rather than a final position/);
   // Batch 99: physical academy, separate swim venue, coaching versus club identity.
   const bks = bySlug.get("bradford-keighley-and-skipton-disability-athletics-bks");
   assert.equal(bks.city, "Keighley");
@@ -134,7 +154,8 @@ try {
   assert.equal(bySlug.get("ventoux-triathlon-club").city, "Camlough");
   assert.equal(bySlug.get("ventoux-triathlon-club").country, "Northern Ireland");
   assert.equal(bySlug.get("ventoux-triathlon-club").location_precision, "area-only");
-  assert.equal(bySlug.get("ventoux-triathlon-club").contacts[0].checked_at, "2026-08-16");
+  assert.equal(bySlug.get("ventoux-triathlon-club").contacts[0].checked_at, "2026-10-17");
+  assert.equal(bySlug.get("ventoux-triathlon-club").contacts[0].source_url, "https://www.triathlonireland.com/Get-Involved/Find-a-Club/");
   assert.equal(bySlug.get("db-triathlon-club").contacts[0].checked_at, "2026-10-13");
   assert.match(clubProfiles["db-triathlon-club"].location_note, /2023 event venue/);
   assert.match(clubProfiles["milocarian-ac"].biography.join(" "), /military site/);

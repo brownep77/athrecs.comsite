@@ -1,41 +1,42 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch99",
+  "lastEditorialBatch": "2026-10-17-batch100",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–99 add28 biographies/29 associations; assembled1577/1737 (90.8%),808 associations,160 incomplete. No publication in batch99. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–100 add33 biographies/33 associations; assembled1582/1737 (91.1%),812 associations,155 incomplete. No publication in batch100. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "bradford-keighley-and-skipton-disability-athletics-bks",
-    "aspire-athletics",
-    "new-levels-run-club",
-    "hell-yeah-triathlon-club"
+    "kids-run-redditch",
+    "south-cambridge-striders",
+    "freck-and-warton-running-club",
+    "carlisle-tri-club",
+    "ventoux-triathlon-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1577,
-    "notableMemberEntries": 808,
-    "clubsWithContacts": 1193,
-    "contactEntries": 1991,
-    "clubsWithEmail": 1151,
+    "extendedProfiles": 1582,
+    "notableMemberEntries": 812,
+    "clubsWithContacts": 1195,
+    "contactEntries": 1993,
+    "clubsWithEmail": 1153,
     "clubsWithPhone": 186,
-    "clubsWithSocials": 1209,
-    "socialLinks": 2550,
-    "websiteContactRecords": 1515
+    "clubsWithSocials": 1211,
+    "socialLinks": 2556,
+    "websiteContactRecords": 1519
   },
   "batchChanges": {
-    "extendedProfilesAdded": 4,
-    "notableMemberEntriesAdded": 6,
+    "extendedProfilesAdded": 5,
+    "notableMemberEntriesAdded": 4,
     "contactOrSocialRecordsChanged": 4,
     "newWebsiteContactRecords": 4,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 2,
-    "netSocialLinks": 2,
+    "netSocialLinks": 6,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club/profile checks, targeted ESLint, TypeScript, whitespace and safe build passed. Updated the completed Aspire queue and superseded NewLevels no-profile regression using newly opened club-eligibility evidence, without weakening identity safeguards. All four actual built pages passed biographies, associations, contacts/socials, location/country, registration and search-description/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Canonical metadata covered by profile regressions. Temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous heade858247 Club profiles39031715393 and full quality39031715366 passed. No publication or migration."
+    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript and safe build passed. Ventoux old contact-date assertion updated against freshly opened TI directory; social platform label corrected to schema X. All five actual built pages passed full biographies, associations, contacts/socials, country/city, registration and description/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Canonical metadata covered by profile regressions. Temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous heade21fb4f Club profiles39035625587 and quality39035625591 passed. No external migration/publication."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
@@ -45,6 +46,11 @@
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "BATCH100 CURRENT: modulecv seedv100; five biographies/four associations. Assembled1582/1737 (91.1%),812 associations,155 incomplete. Published1549/779; draftPR761 adds33/33. Parente21fb4f and main0f8bc3d inspected; remote head rechecked before edits. No competing writer observed. Earlier notes and duplicate source-gap entries below are historical where superseded by this batch.",
+    "KidsRunRedditch recovered from Buddle founder account andEA2024award:2023origin, JasonFurness, AbbeyStadium training. CanonicalFacebookgroup replaces opaque sharelink; YouTube published byBuddle; destinations blocked/throttled, no ownership claim. SouthCambridge recovered ClubSpark/Membermojo:January2024origin, three tasters, role email, seasonal school/college starts. OldApril2026booking unavailable; no guaranteed session or Instagram URL inferred.",
+    "FreckWarton officialfwrc.co.uk recovered:2017C25k predecessor versus2018club/EAaffiliation, ChrisAdams2019chair and RuthGiliRoss undatedfounder/secretary/leader/captain qualified. LightningClub Warton is training, Preston postal context; roleemail and officialRunTogether socials added, oldFacebookpage preserved. 2024–25fees not current. Carlisle2009origin fromfirst-person organiserlisting;2024RaceBest10k not currentevent/trainingbase. JoshWaite volunteerrole fromhis organisation, currentoffice unconfirmed; oldrace andwellbeingbusinesscontacts excluded.",
+    "VentouxCamIough NorthernIreland identity retained, not FrenchCarpentras. TIemail refreshed17October; provisional2026league participation only. AddVentoux to23October NewRoss/Island/HellYeahfollow-up. Founding/timetable/venue/notables remainunknown. Fivecompletedprofile gaps supersede older no-biography entries; inaccessibleownsites remain recorded.",
+    "Remaining leads: Bailieboro2017townpage403; StAnnes no readable primaryhistory, mirror1980claim excluded; CLAN2026Preston10thrace/charity report is secondary research lead, no profile yet. WinterHill2026Curleys5k organiserlisting readable but not sufficient clubhistory; MadBullprovider contacts excluded. Bodmin/Meads/SLGR/Evesham ownsites unavailable. No further source-limited profiles manufactured; nextcandidate queue unchanged.",
     "BATCH99 CURRENT: modulecu seedv99; four biographies/six associations. Assembled1577/1737 (90.8%),808 associations,160 incomplete. Published1549/779; draftPR761 adds28/29. Parente858247 and main0f8bc3d inspected; remote head rechecked before writing. No competing writer observed. Earlier notes below are historical.",
     "BKS: BritishBlindSport directory, councilOct2024 and ActivityAlliance8July2025 support athletics/swimming, Keighley track address, role email/phone and dated athlete/coach associations. Shipley pool is separate; no founding or current timetable inferred. Social links attributed to directory; Facebook blocked and Instagram throttled, no ownership verification. Aspire identity resolved by exact DavidWeir venue and officialAspire introduction: physical2026sessions justify virtual=false and postcodeSM5 1SL; EsherPOBox not training. Founders/coach associations are not athlete identities.",
     "NewLevels continuity recovered from coach-hostedFinalSurge package explicitly naming NewLevelsRunClub eligibility plus company rebrand page. Club name retained, founding unset, virtual/address_kind directory retained. ECCA2024–25p39 lists GemmaHillierMoses secretary; historical office only. Coaching form replaces unusable contact route, not automaticEAregistration or a claim the club was renamed.",
@@ -91,6 +97,11 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {"slug":"kids-run-redditch","status":"profile-added-with-qualified-gap","reason":"Buddle and EA sources recover biography/origin/founder. Ownsite403; no public email/phone/current joining availability. Socials attributed to Buddle; destinations inaccessible.","checkedAt":"2026-10-17"},
+    {"slug":"south-cambridge-striders","status":"profile-added-with-qualified-gap","reason":"ClubSpark/Membermojo recover biography/origin/email/joining. Standalone403. Seasonal venues vary; old April booking not current. No phone, exact Instagram or notable people established.","checkedAt":"2026-10-17"},
+    {"slug":"freck-and-warton-running-club","status":"profile-added-with-qualified-gap","reason":"Official website and RunTogether recover biography/origin/email/socials/venue. No phone; older fees and undated officer accounts not presented as current.","checkedAt":"2026-10-17"},
+    {"slug":"carlisle-tri-club","status":"profile-added-with-qualified-gap","reason":"First-party organiser and coaching accounts recover biography/2009origin/JoshWaite association. Ownabout502. Current joining/timetable/contacts unresolved; racecourse event HQ not training.","checkedAt":"2026-10-17"},
+    {"slug":"ventoux-triathlon-club","status":"profile-added-with-qualified-gap","reason":"TI directory/Octoberleague report recover biography and refresh existing email. Ownsite unavailable. No finalplacing before23Octreview; exactvenue/founding/notables unknown. Older no-profile gaps superseded.","checkedAt":"2026-10-17"},
     {
       "slug": "bradford-keighley-and-skipton-disability-athletics-bks",
       "status": "profile-added-with-qualified-gap",
