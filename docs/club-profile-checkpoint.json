@@ -5,7 +5,7 @@
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–93 add258 biographies/140 associations in draft. Assembled totals1549/1737 and779 associations are not live totals. No production publication in batch93.",
+  "publication": "PR756 merged as 2992966899a9bcf62a0952435b22c909e3f74c44 on 17 October 2026. AthRecs production deployment dpl_8wAMLGvEQHnPFK7Y2KpWEu7c4jhs is READY and assigned to www.athrecs.com and athrecs.com. All 258 newly published public pages passed content/contact/location/flag/registration/search-metadata checks. Published researched-cohort total: 1549 biographies and 779 sourced associations out of 1737 canonical research clubs (89.2%). No unpublished biographies remain from PR756; 188 cohort clubs still lack completed biographies. This cohort is not the whole growing public directory.",
   "completedProfileSlugs": [
     "gravesend-road-runners",
     "killamarsh-kestrels",
@@ -51,6 +51,7 @@
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "RELEASE CHECKPOINT 17 October 2026: PR756 is merged and published, not draft. Live researched cohort1549/1737 biographies and779 associations;0 unpublished in PR756,188 biographies still incomplete. Continue batch94 from current main using a new research branch/PR after checking writers. Preserve all sourceGaps, future reviews (including NewRoss/Island until23October), contacts and uncertainty notes. PR760 is temporary read-only release QA, not further biography research; do not merge its temporary script into production. Older draft/publication notes below are historical.",
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and active writer before edits.",
     "Batch93 moduleco seedv93:10 biographies/4 dated associations;9 contact records changed,8 new;9 net contact entries/2 socials. Coverage1549/1737,779 associations;188 biographies remain. Draft additions258 biographies/140 associations over last published baseline1291/639.",
     "Saffron domain redirects to gambling: keep website suppressed and omit its domain-based email. Active Together phone is undated; training base Saffron Lane. Tetbury receives council chair email only, biography still missing.",
@@ -70,17 +71,72 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
-    {"slug":"saffron-athletics-club","status":"profile-added-with-qualified-gap","reason":"Opened provider listing and grant-maker report. Old domain redirects to gambling; suppression retained and domain-based email excluded. Provider phone undated; founding year/current sessions unresolved.","checkedAt":"2026-10-17"},
-    {"slug":"framlingham-flyers","status":"profile-added-with-qualified-gap","reason":"EA2015 visit plus sports-club/council pages support history. Own website unavailable; current timetable, junior capacity, fees and direct club email unresolved.","checkedAt":"2026-10-17"},
-    {"slug":"tetbury-dolphins-running-club","status":"contact-recovered-biography-pending","reason":"Town council directory publishes chair email. RunTogether/ClubSpark inaccessible; councillor personal contact not substituted; insufficient club history/activity for biography.","checkedAt":"2026-10-17"},
-    {"slug":"team-devizes-moonrakers-ac","status":"profile-added-with-qualified-gap","reason":"Recovered history/coaching/membership/contact pages. Current session location, fee and capacity not verified; school partnership historical and supplier email excluded.","checkedAt":"2026-10-17"},
-    {"slug":"wakefield-triathlon-club","status":"profile-added-with-qualified-gap","reason":"Read club membership and datedOctober2026calendar. Fee text/button conflict; junior transition restricted; founding date unknown. Peter Howard association dated2012.","checkedAt":"2026-10-17"},
-    {"slug":"bad-boy-running-club","status":"profile-added-with-qualified-gap","reason":"Worldwide virtual scope explicit. Founding date unknown; broad age wording does not override adult directory flag. Regional-rep network aspirational. Platform supplier contacts excluded.","checkedAt":"2026-10-17"},
-    {"slug":"great-milton-athletics-club","status":"profile-added-with-qualified-gap","reason":"Council source distinguishes2012activity/2014formal affiliation; fees undated and school-year/age criteria need confirmation. Cottage remains directory not training.","checkedAt":"2026-10-17"},
-    {"slug":"lancaster-runners","status":"profile-added-with-qualified-gap","reason":"Club and linked2026–27booking read. Exact Holiday Inn meeting point needs confirmation; Rosebery/Sibsey addresses not training. Headline/checkout fees differ; founding date/alumni unresolved.","checkedAt":"2026-10-17"},
-    {"slug":"trent-park-running-club","status":"profile-added-with-qualified-gap","reason":"History/training/triathlon recovered. Contact/join pages failed; snippet-only email excluded. QEII repeated postcode not copied. Confirm current sessions.","checkedAt":"2026-10-17"},
-    {"slug":"killamarsh-kestrels","status":"profile-added-with-qualified-gap","reason":"Recovered official about/join/contact. Fee-year figures differ; shorter route needs prior companion arrangement. Malformed X link omitted; no sourced alumni.","checkedAt":"2026-10-17"},
-    {"slug":"gravesend-road-runners","status":"profile-added-with-qualified-gap","reason":"Homepage/about/awards read; separate contact page failed. Seasonal venues distinguished; no member biographies inferred from trophy names.","checkedAt":"2026-10-17"},
+    {
+      "slug": "saffron-athletics-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Opened provider listing and grant-maker report. Old domain redirects to gambling; suppression retained and domain-based email excluded. Provider phone undated; founding year/current sessions unresolved.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "framlingham-flyers",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "EA2015 visit plus sports-club/council pages support history. Own website unavailable; current timetable, junior capacity, fees and direct club email unresolved.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "tetbury-dolphins-running-club",
+      "status": "contact-recovered-biography-pending",
+      "reason": "Town council directory publishes chair email. RunTogether/ClubSpark inaccessible; councillor personal contact not substituted; insufficient club history/activity for biography.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "team-devizes-moonrakers-ac",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Recovered history/coaching/membership/contact pages. Current session location, fee and capacity not verified; school partnership historical and supplier email excluded.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "wakefield-triathlon-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Read club membership and datedOctober2026calendar. Fee text/button conflict; junior transition restricted; founding date unknown. Peter Howard association dated2012.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "bad-boy-running-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Worldwide virtual scope explicit. Founding date unknown; broad age wording does not override adult directory flag. Regional-rep network aspirational. Platform supplier contacts excluded.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "great-milton-athletics-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Council source distinguishes2012activity/2014formal affiliation; fees undated and school-year/age criteria need confirmation. Cottage remains directory not training.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "lancaster-runners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club and linked2026–27booking read. Exact Holiday Inn meeting point needs confirmation; Rosebery/Sibsey addresses not training. Headline/checkout fees differ; founding date/alumni unresolved.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "trent-park-running-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "History/training/triathlon recovered. Contact/join pages failed; snippet-only email excluded. QEII repeated postcode not copied. Confirm current sessions.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "killamarsh-kestrels",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Recovered official about/join/contact. Fee-year figures differ; shorter route needs prior companion arrangement. Malformed X link omitted; no sourced alumni.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "gravesend-road-runners",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Homepage/about/awards read; separate contact page failed. Seasonal venues distinguished; no member biographies inferred from trophy names.",
+      "checkedAt": "2026-10-17"
+    },
     {
       "slug": "beaumont-rc",
       "status": "profile-added-with-qualified-gap",
@@ -6635,14 +6691,43 @@
     "releasePullRequest": 680
   },
   "release": {
-    "pullRequest": 755,
-    "mergeCommit": "111b56a6589f3c3d741fb538bd2093a0df1fa535",
-    "deployment": "dpl_GQQM5tC4FVBkTb7F7JKTPv1V5HWR",
+    "pullRequest": 756,
+    "sourceHead": "154eb2dc473bebee9bbea42b6c7ca9c7174d5f4c",
+    "mergeCommit": "2992966899a9bcf62a0952435b22c909e3f74c44",
+    "deployment": "dpl_8wAMLGvEQHnPFK7Y2KpWEu7c4jhs",
     "status": "READY",
-    "liveBiographies": 1291,
-    "liveAssociations": 639,
-    "reviewedAt": "2026-10-16",
-    "previewQualification": "Protected preview reached Vercel sign-in. Exact-head CI and local page evidence passed; public production inspection follows release.",
-    "verification": "All291 newly published public pages returned200 and passed biography, associations, contacts/socials, address/location, flags, registration and title/description/canonical/JSON-LD assertions after deployment READY. Thurrock public desktop layout inspected."
-  }
+    "liveBiographies": 1549,
+    "liveAssociations": 779,
+    "reviewedAt": "2026-10-17",
+    "unpublishedBiographiesInRelease": 0,
+    "remainingUnresearchedCohortBiographies": 188,
+    "verification": "All 258 new production pages returned HTTP200 and matched full biographies, sourced associations, summary/contact/location notes, available contacts/socials/address, flags, registration href, title/description/canonical/robots and SportsOrganization JSON-LD. All 258 URLs present in the public clubs sitemap. Automated deployment/content verification plus representative source comparison, not a fresh manual source review of every club.",
+    "qualityGateRun": 38994314546,
+    "clubProfilesRun": 38994314566,
+    "hostedBrowserVerification": {
+      "pullRequest": 760,
+      "head": "3ecb4247711324e5e2f2158bf3a3b398eee8e1e2",
+      "run": 39014348572,
+      "status": "success",
+      "artifact": 12093978199,
+      "sha256": "d5730af0b7ee8b5477e7662824f59bed2e106bd901b60a996eeecac4e2b5ceab",
+      "scope": "Actual production Wakefield, Killamarsh, Saffron, Bad Boy and Framlingham pages at 1280x1000 and 390x844; registration navigation waits for the rendered signed-out Register your club gate. Screenshots inspected. No registration submission or sign-in. QA script is isolated on a temporary verification branch, not production."
+    },
+    "searchQualification": "Public pages are indexable, canonical and included in the sitemap; Google indexing or ranking is not confirmed. No Search Console validation or indexing request submitted.",
+    "writerQualification": "PR756 head/body/discussion and open PRs checked. Batch94 lease expired 17 October 03:40 UTC; no newer writer lease/biography PR or head update observed. Release merged with expected-head protection; research branch, source gaps and candidate queue were not edited.",
+    "authorization": "User expressly requested normal merge and production deployment in this task; no further approval or access change required."
+  },
+  "releaseHistory": [
+    {
+      "pullRequest": 755,
+      "mergeCommit": "111b56a6589f3c3d741fb538bd2093a0df1fa535",
+      "deployment": "dpl_GQQM5tC4FVBkTb7F7JKTPv1V5HWR",
+      "status": "READY",
+      "liveBiographies": 1291,
+      "liveAssociations": 639,
+      "reviewedAt": "2026-10-16",
+      "previewQualification": "Protected preview reached Vercel sign-in. Exact-head CI and local page evidence passed; public production inspection follows release.",
+      "verification": "All291 newly published public pages returned200 and passed biography, associations, contacts/socials, address/location, flags, registration and title/description/canonical/JSON-LD assertions after deployment READY. Thurrock public desktop layout inspected."
+    }
+  ]
 }
