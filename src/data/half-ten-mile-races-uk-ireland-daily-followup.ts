@@ -33,6 +33,7 @@ const CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT = "2026-10-10";
 const CURRENT_IRISH_PERMIT_SCAN_CHECKED_AT = "2026-10-11";
 const CURRENT_IRISH_APPROVAL_SCAN_CHECKED_AT = "2026-10-12";
 const CURRENT_ENTRY_STATE_SCAN_CHECKED_AT = "2026-10-14";
+const CURRENT_NORFOLK_REFRESH_CHECKED_AT = "2026-10-16";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1488,6 +1489,25 @@ const seeds: RaceSeed[] = [
     notes:
       "The official organiser page consistently confirms the 2 May 2027 half marathon, 10K, 5K and junior programme, the 10:00 half-marathon start and open direct entry.",
   },
+  {
+    slug: "epic-norwich-city-half-marathon",
+    name: "EPIC Norwich City Half Marathon",
+    date: "2027-05-03",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Norfolk",
+    city: "Norwich",
+    area: "Norwich city centre",
+    surface: "Road",
+    organiser: "EPIC Norfolk / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/729",
+    entryUrl: "https://totalracetiming.co.uk/race/729",
+    priceAmount: 49.5,
+    checkedAt: CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+    notes:
+      "The official organiser and event-specific registration pages consistently confirm this new Norwich city-centre road half marathon on Bank Holiday Monday 3 May 2027 at 09:30. General entries are sold out, but official charity entries remain open at £49.50.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -1549,6 +1569,7 @@ export const dailyHalfTenMileEditions: Edition[] = seeds.flatMap((seed) => {
 type ExistingSeriesEditionSeed = {
   seriesSlug: string;
   date: string;
+  distance?: "Half" | "10mi";
   startTime?: string;
   organiser: string;
   url: string;
@@ -1563,6 +1584,56 @@ type ExistingSeriesEditionSeed = {
 };
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
+  {
+    seriesSlug: "reedham-ten",
+    date: "2027-01-17",
+    distance: "10mi",
+    startTime: "10:00",
+    organiser: "Great Yarmouth & District Athletic Club / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/730",
+    entryUrl: "https://totalracetiming.co.uk/race/730",
+    priceAmount: 28.1,
+    checkedAt: "2026-10-15",
+    notes:
+      "The official event-specific registration page confirms the 17 January 2027 road race, 10:00 start, open entry, race licence 30222 and course-accuracy certificate 22/475; the established Reedham Ten card is enriched instead of duplicated.",
+  },
+  {
+    seriesSlug: "great-eastern-run",
+    date: "2027-10-10",
+    startTime: "10:30",
+    organiser: "Good Running Events / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/747",
+    entryUrl: "https://totalracetiming.co.uk/race/747",
+    publishAllDistances: true,
+    priceAmount: 41,
+    checkedAt: CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+    notes:
+      "The official organiser and event-specific registration pages consistently confirm the 10 October 2027 Peterborough half marathon and Anna's Hope 5K, the 10:30 half start, open entry and course-measurement reference 26-447. The established Great Eastern Run card is enriched instead of duplicated.",
+  },
+  {
+    seriesSlug: "southwold-half-marathon",
+    date: "2027-02-28",
+    startTime: "09:00",
+    organiser: "EPIC Norfolk / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/719",
+    entryUrl: "https://totalracetiming.co.uk/race/719",
+    priceAmount: 42.1,
+    checkedAt: CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+    notes:
+      "The event-specific official registration page confirms the 28 February 2027 multi-terrain half marathon and 09:00 start. General entry is sold out, but official charity entry remains open at £42.10; the established Southwold card is refreshed in place.",
+  },
+  {
+    seriesSlug: "spring-blickling-half",
+    date: "2027-03-14",
+    startTime: "08:45",
+    organiser: "EPIC Norfolk / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/727",
+    entryUrl: "https://totalracetiming.co.uk/race/727",
+    priceAmount: 36.5,
+    checkedAt: CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+    notes:
+      "The event-specific official registration page confirms the 14 March 2027 multi-terrain half marathon, 08:45 start and open £36.50 entry; the established Spring Blickling card is refreshed in place rather than duplicated.",
+  },
   {
     seriesSlug: "tonbridge-half-marathon",
     date: "2027-10-03",
@@ -2194,11 +2265,12 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
 export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesEditionSeeds.map(
   (seed) => {
     const hasEntry = seed.hasEntry ?? seed.status !== "TBC";
+    const distance = seed.distance ?? "Half";
     return {
       seriesSlug: seed.seriesSlug,
       date: seed.date,
-      distance: "Half",
-      distanceKm: 21.0975,
+      distance,
+      distanceKm: distance === "Half" ? 21.0975 : 16.09,
       status: seed.status ?? "Open",
       ...(hasEntry ? { entryUrl: seed.entryUrl ?? seed.url } : {}),
       ...(seed.startTime ? { startTime: seed.startTime } : {}),
@@ -2231,6 +2303,22 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
 
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
 export const dailyHalfTenMileResearchQueue = [
+  {
+    slug: "dorking-10-mile-2027",
+    date: "2027-06-06",
+    country: "England",
+    reason:
+      "England Athletics lists a licensed 10-mile race on 6 June 2027, but the organising club's event page still identifies the latest Dorking Tens edition as 7 June 2026. Hold publication until the organiser publishes internally consistent 2027 details.",
+    sourceUrl: "https://www.dmvac.org/dorking-tens/",
+  },
+  {
+    slug: "ferriby-10-mile-road-race-2027",
+    date: "2027-01-31",
+    country: "England",
+    reason:
+      "England Athletics lists a licensed 10-mile race on 31 January 2027, but the organising club currently exposes only its generic homepage and no event-specific official page or direct 2027 registration URL. Hold publication until unique source provenance is available.",
+    sourceUrl: "https://www.cityofhullac.co.uk/",
+  },
   {
     slug: "macclesfield-running-festival-october-2027",
     date: "2027-10-31",
@@ -2579,6 +2667,38 @@ export const dailyHalfTenMileResearchQueue = [
       "Checked 2026-10-01: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon.",
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
+  {
+    slug: "mullingar-half-marathon-2027",
+    date: "2027-03-17",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-16: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "dooneen-10-mile-michal-rejmar-2027",
+    date: "2027-04-18",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-16: the official Athletics Ireland calendar confirms the 10-mile road-race date but still labels the permit as pending approval and registration as Open Soon.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "wexford-festival-of-running-2027",
+    date: "2027-05-15",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-16: the event-specific official registration page confirms the half marathon and date but still labels its Athletics Ireland permit as pending approval.",
+    sourceUrl: "https://eventmaster.ie/event/3x5vUx4tZW",
+  },
+  {
+    slug: "lahinch-half-marathon-6-mile-2027",
+    date: "2027-09-12",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-16: the event-specific official registration page confirms the half marathon, 6-mile race, date and 09:00 start but still labels its Athletics Ireland permit as pending approval.",
+    sourceUrl: "https://eventmaster.ie/event/7BA0CyeFdv",
+  },
 ] as const;
 
 /** Public seed records retired after current official evidence invalidated the canonical distance. */
@@ -2600,6 +2720,42 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "reedham-ten": {
+    organiser: "Great Yarmouth & District Athletic Club",
+    website: "https://totalracetiming.co.uk/race/730",
+    source_url: "https://totalracetiming.co.uk/race/730",
+    defaultStartTime: "10:00",
+  },
+  "great-eastern-run": {
+    name: "AEPG Great Eastern Run",
+    country: "England",
+    county: "Cambridgeshire",
+    city: "Peterborough",
+    area: "Peterborough Embankment",
+    surface: "Road",
+    distances: ["Half", "5K"],
+    summary:
+      "AEPG Great Eastern Run — a half marathon and Anna's Hope 5K from Peterborough Embankment.",
+    description:
+      "Good Running Events stages the AEPG Great Eastern Run half marathon and Anna's Hope 5K from Peterborough Embankment; the established card carries the verified 2027 edition.",
+    organiser: "Good Running Events",
+    website: "https://www.greateastern.run/",
+    source_url: "https://totalracetiming.co.uk/race/747",
+    defaultStartTime: "10:30",
+  },
+  "southwold-half-marathon": {
+    surface: "Mixed",
+    organiser: "EPIC Norfolk",
+    website: "https://totalracetiming.co.uk/race/719",
+    source_url: "https://totalracetiming.co.uk/race/719",
+    defaultStartTime: "09:00",
+  },
+  "spring-blickling-half": {
+    organiser: "EPIC Norfolk",
+    website: "https://totalracetiming.co.uk/race/727",
+    source_url: "https://totalracetiming.co.uk/race/727",
+    defaultStartTime: "08:45",
+  },
   "tonbridge-half-marathon": {
     website: "https://www.runthrough.co.uk/event/run-kent-october-2027",
     source_url: "https://www.runthrough.co.uk/event/run-kent-october-2027",
