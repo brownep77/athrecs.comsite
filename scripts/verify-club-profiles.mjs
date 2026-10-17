@@ -17,6 +17,28 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 107: current eligibility is distinct from historical activity and event origins.
+  assert.equal(clubProfiles["clanfield-joggers"].founded_year, undefined);
+  assert.equal(bySlug.get("clanfield-joggers").address_kind, "directory");
+  assert.equal(bySlug.get("clanfield-joggers").contacts.length, 0);
+  const bailieboro = bySlug.get("athletics-ireland-bailieboro-a-c");
+  assert.equal(bailieboro.city, "Bailieborough");
+  assert.equal(bailieboro.country, "Ireland");
+  assert.equal(bailieboro.adult_only, true);
+  assert.equal(bailieboro.address_kind, "training");
+  assert.equal(bailieboro.checked_at, "2026-10-17");
+  assert.equal(bailieboro.contacts.length, 1);
+  assert.equal(bailieboro.contacts[0].email, "gmeehan@eircom.net");
+  assert.equal(bailieboro.contacts[0].checked_at, "2026-10-17");
+  assert.equal(clubProfiles[bailieboro.slug].founded_year, undefined);
+  assert.match(clubProfiles[bailieboro.slug].notable_members[0].detail, /2014–2015/);
+  const fordy = bySlug.get("fordy-runs-running-club");
+  assert.equal(fordy.contacts.length, 2);
+  assert.ok(fordy.contacts.some((c) => c.email === "club@fordyruns.com"));
+  assert.ok(fordy.contacts.some((c) => c.email === "hello@fordyruns.com"));
+  assert.equal(fordy.socials.length, 7);
+  assert.equal(clubProfiles[fordy.slug].scope, "national");
+  assert.match(clubProfiles[fordy.slug].biography[0], /affiliation is a separate/);
   // Batch 106: supported disciplines, dated history and unresolved founding years.
   assert.deepEqual(bySlug.get("allstride-collective-running-club").sports, ["Running"]);
   assert.equal(bySlug.get("allstride-collective-running-club").socials.length, 3);

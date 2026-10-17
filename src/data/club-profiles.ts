@@ -1,3 +1,4 @@
+import { clanfieldAndBailieboroProfiles } from "./club-profiles-dc.ts";
 import { sheppeyWiganAndWintertonProfiles } from "./club-profiles-db.ts";
 import { warsopAstonAndRiverswayProfiles } from "./club-profiles-da.ts";
 import { gordonianAndHartlepoolProfiles } from "./club-profiles-cz.ts";
@@ -132,6 +133,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...clanfieldAndBailieboroProfiles,
   ...sheppeyWiganAndWintertonProfiles,
   ...warsopAstonAndRiverswayProfiles,
   ...gordonianAndHartlepoolProfiles,
@@ -495,20 +497,27 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
   "fordy-runs-running-club": {
     summary:
-      "FORDY RUNS combines an online running community with local groups across the UK, offering free club membership and group runs for a range of abilities.",
+      "FORDY RUNS combines an online running community with local groups across the UK, offering free social membership and group runs for a range of abilities.",
     biography: [
-      "FORDY RUNS grew from a community started by Chris Ford into a network of local running groups around the UK. Free club membership and an online community sit alongside in-person runs, race meet-ups and trips.",
+      "FORDY RUNS grew from a community started by Chris Ford into a network of local running groups around the UK. Free social membership and an online community sit alongside in-person runs, race meet-ups and trips. England Athletics affiliation is a separate membership option, not a benefit automatically conferred by joining the free community.",
       "Local groups differ in what they offer: some meet for a social run, while others have structured club nights and weekend sessions. The club website links to its satellite network so runners can find a nearby group and check the meeting point.",
+      "The club asks runners to book local sessions in advance and to bring a light for winter runs; club kit is not compulsory. Its wider community also volunteers at races. The club says this volunteering has helped fund run-leader training, connecting support at events with the development of its local groups. Use the satellite timetable or the club enquiry mailbox to confirm the session that suits you: network-wide opportunities are not a guarantee that every branch offers the same programme.",
     ],
+    notable_members: [{ name: "Chris Ford", connection: "Founder of the community", detail: "The club's own story credits Chris Ford with starting the community that developed into FORDY RUNS Running Club. No founding year or verified athlete identity is inferred." }],
     scope: "national",
     location_note:
       "A network of UK groups. Use the satellite-group information for a local meeting point.",
     sources: [
       { title: "FORDY RUNS running club", url: "https://www.fordyruns.com/running-club" },
       { title: "How the club began", url: "https://www.fordyruns.com/aboutus" },
+      { title: "Satellite groups and session guidance", url: "https://www.fordyruns.com/satellite-groups" },
+      { title: "Free social membership", url: "https://www.fordyruns.com/socialmember" },
+      { title: "Dedicated club and general enquiry contacts", url: "https://www.fordyruns.com/contact" },
+      { title: "Club Strava community and linked Facebook group", url: "https://www.strava.com/clubs/fordyruns" },
     ],
+    contact_note: "The official contact page distinguishes club@fordyruns.com for running-club enquiries from hello@fordyruns.com for general enquiries. The club homepage also directs local-group questions to the general mailbox. Strava and the club-specific Instagram link are published by the official club page; the Facebook community is linked from Strava. Instagram retrieval failed and Facebook was throttled, so these links establish publisher attribution, not verified account ownership. Existing brand social links are preserved. Satellite founding dates, local leaders and venue details are not inferred from the parent network.",
     corrections: { contact_url: "https://www.fordyruns.com/contact" },
-    reviewed_at: "2026-10-13",
+    reviewed_at: "2026-10-17",
   },
   "leeds-city-athletic-club": {
     summary:
@@ -960,4 +969,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-17-v106";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-17-v107";

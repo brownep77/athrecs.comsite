@@ -1,40 +1,41 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch106",
+  "lastEditorialBatch": "2026-10-17-batch107",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
   "pullRequest": 762,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds6 biographies/1 association; assembled1599/1737 (92.1%),822 associations,138 incomplete. Batch106 continues cfec8907e1acba8dae864e73493b70e79bc3d2fb on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds8 biographies/3 associations; assembled1601/1737 (92.2%),824 associations,136 incomplete. Batch107 continues 5e3b4031db7c45b1e4f3b48f19e1d3e48b7fc7ad on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "allstride-collective-running-club",
-    "robin-park-runners",
-    "winterton-running-club"
+    "clanfield-joggers",
+    "athletics-ireland-bailieboro-a-c",
+    "fordy-runs-running-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1599,
-    "notableMemberEntries": 822,
+    "extendedProfiles": 1601,
+    "notableMemberEntries": 824,
     "clubsWithContacts": 1206,
-    "contactEntries": 2005,
+    "contactEntries": 2006,
     "clubsWithEmail": 1164,
     "clubsWithPhone": 187,
     "clubsWithSocials": 1216,
-    "socialLinks": 2566,
-    "websiteContactRecords": 1535
+    "socialLinks": 2569,
+    "websiteContactRecords": 1536
   },
   "batchChanges": {
-    "extendedProfilesAdded": 3,
-    "notableMemberEntriesAdded": 1,
+    "extendedProfilesAdded": 2,
+    "existingProfilesExpanded": 1,
+    "notableMemberEntriesAdded": 2,
     "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 2,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 0,
-    "netSocialLinks": 2,
+    "newWebsiteContactRecords": 1,
+    "directoryRecordsRefreshed": 1,
+    "netContactEntries": 1,
+    "netSocialLinks": 3,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed full biography/source/social/contact-route, directory-address, England-indicator, registration, description, canonical and SportsOrganization assertions. Allstride's unsupported Aquathlon label is absent. Isolated in-memory PGLite; external fetch disabled and unrelated catalogue seeding skipped for the page test. Exact-head desktop/mobile workflow and hosted-preview evidence will be recorded in draft PR762. Previous batch105 Club profiles39065517982 and full quality gate39065517974 both passed. No external migrations or publication."
+    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed complete biography/source/social/contact-route/email, address classification, country indicator, registration, description, canonical and SportsOrganization assertions. Bailieboro's training label and Ireland flag are retained; FORDY RUNS keeps its existing England indicator and national scope, not a globe. The temporary harness's initial UK-indicator expectation was corrected to the existing data model, with no application change. Isolated in-memory PGLite; external fetch disabled and unrelated catalogue seeding skipped. Exact-head desktop/mobile workflow and hosted-preview evidence follow in draft PR762. Previous batch106 Club profiles39069867998 and full quality gate39069867958 passed. No external migrations or publication."
   },
   "nextCandidateSlugs": [
     "yellow-brick-road-running-and-walking-club",
@@ -43,6 +44,11 @@
     "horsham-run-fit"
   ],
   "resumeInstructions": [
+    "BATCH107 CURRENT: module dc seedv107; Clanfield and Bailieboro new biographies, FORDY RUNS parent expanded.1601/1737(92.2%),824 associations,136 incomplete. Published1593/821; draftPR762 adds8/3. Parent5e3b4031 and main9edeec586 inspected before edits, no competing writer observed. Two organisational associations; one net email/three social links. Previous no-profile gaps superseded for the two new profiles only. Prior batch106 Club profiles39069867998 and quality39069867958 passed; hosted3pages passed on exact5e3b preview dpl_B38Ww9qu6XEdtUHejFRncPrsRJhG. Existing23OctoberTI follow-ups preserved.",
+    "Clanfield recovered: council2024–2040strategy https://www.easthants.gov.uk/media/8939/download?inline= page96 downloaded normally (20MB exceeds searchreader), mixedclub/centre/weekdaypattern; TJWasteCSR and AdvanceSRM C25K partner firsthand accounts.2016isChallengeorigin, notclubfounding. No email/phone/notables/currentcourse availability. EndalWay remainsdirectory; counciltrainingpatternqualified, noexactvenue/postcoderewrite. Clubhomepage502/directtimeout; EA requestunavailable,13Octprovenance retained. Sponsor/clinic/supplier contacts excluded.",
+    "Bailieboro recovered: actual AI membershippage publicHTML read17Oct via normaldirectdownload after searchreaderfailure; explicitlyTrainingLocation Tunnyduff/Bailieborough/A82W271 andTypeSenioronly; cityfilled,adult_onlytrue,dateupdated, existingemail/Facebookrefreshednotduplicated. CountyBoard2014handbook/ownofficerelection plus AngloCelt7/20Nov2007clubnotes supportdatedhistory/TurkeyRun. JimmyODowd countytreasurer2014–2015association only; noTPCallaghanmembership inferred, noathleteresults/identities. Currentjunioreligibilitynotinferredfrom2007activities. FacebookDisabledError, phone/foundingunknown; AIadmin/football/communitycontacts excluded.",
+    "FORDY RUNS parent only: running-club/aboutus/satellite-groups/socialmember/contact and Stravafordyruns read17Oct. Dedicatedclub@fordyruns.com added; hello@ keptasgeneral/localgroupenquiry. ClubInstagramfordyrunsrunningclub and Strava added fromofficialsite; Facebookgroups/fordyruns fromStrava. Existingbrandsocialspreserved, destinationsInstagramerror/Facebookthrottled notownershipverification. FreeSOCIALmembership versusoptionalEAaffiliation clarified; ChrisFord communityfounderassociation added, noyear. Publicsatellitelist available, but timetablewidgetempty: do notinventbranchleaders/venues/history orcopy41genericbios. Borehamwood/ChurchCrookham/CrawleyHorsham/Nottingham/Shrewsbury absentfromreadlist isNOTproofclosure. Wrexhamlistedbutlocationmodelneedsdedicatedprimaryreview; canonicalBurnhamOnCroach/Sandbackslugs unchanged.",
+    "Maryport partial: netherhallcsc.com/facilities read17Oct confirmsvenueaddressonly; /sports-clubs isproviderSafeguarding/DBSform, notrunning-clubjoiningpage. Venuecontactsnotclubcontacts. OwnFacebook61575739040892 throttled; do notborrowNetherhallAC2018history. JustGivingmission-demi andmaryport-csc-4 areclosedplannedcharitychallenges, notcompletion/results evidence. Bodmin/WinterHillsites unavailable, no newbiographies. Fordybranch-specific booking/session pages and Maryport primaryjoining remainnextrecoveryleads alongside existingqueue.",
     "BATCH106 CURRENT: module db seedv106; AllstrideCollective,RobinPark,Winterton biographies and one MarkHarrison organisational association.1599/1737(92.1%),822 associations,138 incomplete. Published1593/821; draftPR762 adds6/1. Parentcfec8907 and main9edeec586 checked before edits; no competing writer observed. Two social links, no email/phone additions. Previous no-profile notes superseded for these three only. Existing nextCandidateSlugs and23OctoberTI follow-ups preserved.",
     "Allstride: own Strava allstridecollective and first-person EverydayActiveKent activity listing read17Oct; Stride to5 free10weekcourse, undated17Februaryintake not currentadvertisement. Locations announcedonsocialsweekbefore; LowerRoadbusinessaddress staysdirectory. Runningonly replacesunsupportedmultisporttags. NewStravalink; existingInstagramnotduplicated, EA13Octsocialprovenancepreserved. No founding/notables/email/phone; ActiveKentfootercontacts and Outlooksafelinktrackingexcluded.",
     "RobinPark: RunThroughDavidLawless30June2021 firsthandnewaffiliation, WiganToday26April2024 MarkHarrisoninterview and WhatsHappeningInWigan2026report opened. FounderMarkHarrisonassociation supported but2019/2020foundingconflict leftunset. TrencherfieldMill reports agree, not newpostcodeverification; confirmcurrenttimings. April2024/May2026parkruntakeovers wereannouncements, no completionassertion. Facebookrprwigan attributedtolocalreport; destinationtemporarilyblocked. No clubemail/phone, healthdetails, athleteidentities/results or currentLawlessmembershipclaim.",
@@ -127,6 +133,9 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {"slug":"clanfield-joggers","status":"profile-added-with-qualified-gap","reason":"Council strategy p96 and event partners recover training pattern, Challenge and past C25K; no club founding year, direct email/phone, notable association or current beginner intake. EndalWay directory classification retained; unavailable sources keep old dates.","checkedAt":"2026-10-17"},
+    {"slug":"athletics-ireland-bailieboro-a-c","status":"profile-added-with-qualified-gap","reason":"Current Athletics Ireland page read directly confirms senior-only training listing/email/social. Dated county-board and club reports recover history; phone, founding year and current timetable remain unknown. Historical junior activity not current eligibility; Facebook ownership unverified.","checkedAt":"2026-10-17"},
+    {"slug":"fordy-runs-running-club","status":"profile-expanded-with-qualified-gap","reason":"Parent official sources confirm founder, dedicated club email, free social membership and added community links. Branch histories, leaders and current venues remain unestablished; no 41-branch biography replication or unsupported Wrexham location rewrite.","checkedAt":"2026-10-17"},
     {"slug":"runfit-chorley","status":"profile-added-with-qualified-gap","reason":"ClubSpark introduction/contact and EA2021award recover founder/supportive programme. No founding year/public email/phone/social URL/current timetable. Buckshaw and SavilleStreet addresses are not newly confirmed training starts.","checkedAt":"2026-10-17"},
     {"slug":"whitby-running-club","status":"profile-added-with-qualified-gap","reason":"Official history/joining/FAQ/C25k recover2019origin, two associations, enquiryemail and programme. Council-published social links retained with attribution; destinations blocked. No phone; placeholder/kit/council contacts excluded. Autumn2026course underway; directory and training locations kept distinct.","checkedAt":"2026-10-17"},
     {"slug":"collins-cycle-centre-triathlon-club","status":"profile-added-with-qualified-gap","reason":"TI currentdirectory and2026league recover Thurles biography/email; finalplacing awaits23October. No dedicated website/founding/notables/venue/phone established. Facebookpage blocked; social searchsnippet not adopted.","checkedAt":"2026-10-17"},
