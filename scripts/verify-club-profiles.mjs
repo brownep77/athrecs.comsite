@@ -17,6 +17,22 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 91: primary accounts, dated membership and event-location safeguards.
+  assert.equal(clubProfiles["jcb-lakeside-club"].founded_year, undefined);
+  assert.equal(bySlug.get("jcb-lakeside-club").contacts.length, 0);
+  assert.equal(bySlug.get("worcester-students-union-athletic-club").address_kind, "training");
+  assert.equal(bySlug.get("worcester-students-union-athletic-club").contacts[0].email, "olil1_24@uni.worc.ac.uk");
+  assert.equal(bySlug.get("worcester-students-union-athletic-club").socials.length, 3);
+  for (const slug of ["db-triathlon-club", "milocarian-ac", "os-runners"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("ventoux-triathlon-club").city, "Camlough");
+  assert.equal(bySlug.get("ventoux-triathlon-club").country, "Northern Ireland");
+  assert.equal(bySlug.get("ventoux-triathlon-club").location_precision, "area-only");
+  assert.equal(bySlug.get("ventoux-triathlon-club").contacts[0].checked_at, "2026-08-16");
+  assert.equal(bySlug.get("db-triathlon-club").contacts[0].checked_at, "2026-10-13");
+  assert.match(clubProfiles["db-triathlon-club"].location_note, /2023 event venue/);
+  assert.match(clubProfiles["milocarian-ac"].biography.join(" "), /military site/);
+  assert.match(clubProfiles["os-runners"].notable_members.find(m => m.name === "Gus McKechnie").connection, /guest runner/);
+  for (const slug of ["milocarian-ac", "os-runners"]) assert.equal(bySlug.get(slug).contacts.length, 0);
   // Batch 90: dated associations, supplier exclusion and distinct training venues.
   assert.equal(clubProfiles["wimbledon-windmilers"].founded_year, 1980);
   for (const slug of ["victory-ac", "zoom-tri-club-bournemouth", "chesterfield-tri-club"]) assert.equal(clubProfiles[slug].founded_year, undefined);

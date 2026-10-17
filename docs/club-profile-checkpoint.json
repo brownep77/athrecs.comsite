@@ -1,41 +1,42 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-16-batch90",
-  "reviewedAt": "2026-10-16",
+  "lastEditorialBatch": "2026-10-17-batch91",
+  "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–90 add238 biographies/129 associations in draft. Assembled totals1529/1737 and768 associations are not live totals. No production publication in batch90.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–91 add243 biographies/134 associations in draft. Assembled totals1534/1737 and773 associations are not live totals. No production publication in batch91.",
   "completedProfileSlugs": [
-    "victory-ac",
-    "wimbledon-windmilers",
-    "zoom-tri-club-bournemouth",
-    "chesterfield-tri-club"
+    "db-triathlon-club",
+    "milocarian-ac",
+    "os-runners",
+    "jcb-lakeside-club",
+    "worcester-students-union-athletic-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1529,
-    "notableMemberEntries": 768,
-    "clubsWithContacts": 1171,
-    "contactEntries": 1963,
-    "clubsWithEmail": 1130,
+    "extendedProfiles": 1534,
+    "notableMemberEntries": 773,
+    "clubsWithContacts": 1172,
+    "contactEntries": 1964,
+    "clubsWithEmail": 1131,
     "clubsWithPhone": 180,
-    "clubsWithSocials": 1202,
-    "socialLinks": 2528,
-    "websiteContactRecords": 1482
+    "clubsWithSocials": 1203,
+    "socialLinks": 2531,
+    "websiteContactRecords": 1483
   },
   "batchChanges": {
-    "extendedProfilesAdded": 4,
+    "extendedProfilesAdded": 5,
     "notableMemberEntriesAdded": 5,
     "contactOrSocialRecordsChanged": 1,
     "newWebsiteContactRecords": 1,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 0,
-    "netSocialLinks": 0,
+    "directoryRecordsRefreshed": 1,
+    "netContactEntries": 1,
+    "netSocialLinks": 3,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build passed; migration/publication skipped. All four actual production-build pages returned HTTP200 and passed biographies, dated associations, contact/social links, location notes/home-nation flags, registration and title/description/canonical/SportsOrganization JSON-LD checks. Initial regression correctly flagged completed Zoom still in next-candidate checkpoint; queue updated without weakening checks. Exact-commit remote workflow/preview evidence follows in PR756; local rendering is not hosted inspection."
+    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build passed; migration/publication skipped. All six actual production-build pages returned HTTP200 and passed biography/associations, contacts/socials, location notes/home-nation flags, registration and title/description/canonical/SportsOrganization JSON-LD. Exact-commit remote desktop/mobile and hosted-preview evidence follows in PR756; local rendering is not hosted inspection."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
@@ -45,17 +46,23 @@
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and active writer before edits.",
-    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–90 add238 biographies/129 associations in draft. Assembled totals1529/1737 and768 associations are not live totals. No production publication in batch90.",
-    "Batch90 modulecl seedv90 adds four biographies and five dated associations; Victory contact form is the only new website-contact record. No new email, phone or social link. Research checked16OctoberUTC.",
-    "Victory: Havant meeting point classified training; August2026 calendar not presented as current. Supplier email excluded. Handicap event names do not establish notable members.",
-    "Wimbledon:1980 origin from Commons conservators. ColinHarris2024 and AnneDavies2025 roles dated. Common Windmill distinct from WimbledonPark track; no-mail directory address not postal. Official site403; preserve existing socials.",
-    "Zoom:2013 MadMarch history and2023 PaulConsani/JudKirk associations from first-person BAC reports;2024 grant project from practitioner account. Joining page hosting-suspended, not proof club closed. Snippet contacts/fees omitted; FentonRoad not training-confirmed.",
-    "Chesterfield:2019 in present form qualified, no unqualified founding year. LorraineMurphy role datedMay2026. Council QueenPark pool timetable effective7September2026; TuptonHall retained separately. ClubSpark404, masked email not reconstructed, venue contacts excluded.",
-    "Southampton bodies empty; SouthCambridge403; Bailieboro historical county results insufficient for current participation, GAA and Ontario names excluded. Carlisle/Wharfedale/Tynedale pages unavailable; no snippet-only facts adopted. Older source gaps retained.",
-    "Basebc7cf1933c95d556d76e9a79db63f84063f4b2aa and mainaa82cc37980f808668764513cf74e7fb309e98d8 inspected. Batch89 dedicated gate38981865919 passed; full38981865909 in progress at start. Recheck exact-head CI in PR756.",
-    "Draft only. Prior protected previews require authenticated access; do not weaken safeguards. Preserve NewRoss/Island provisional standings gap until23October."
+    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–91 add243 biographies/134 associations in draft. Assembled totals1534/1737 and773 associations are not live totals. No production publication in batch91.",
+    "Batch91 modulecm seedv91 adds five biographies/five associations. Worcester SU adds chair email and three official-linked socials; one new website-contact record. Ventoux city corrected to Camlough with Northern Ireland/area-only retained; original email provenance preserved.",
+    "DB: Drung nearest-town listing is distinct from 2023 Halton's Shore/Cootehill event. Current swim safety, session and joining arrangements not inferred; no named DB members from other clubs' accounts.",
+    "Milocarian: services history, Rampling and 2012 school trophy; 2023 Sandhurst invitation historical and military access restricted. Cargate Grove remains directory address. Ambiguous Finlay name not adopted; Robertson was an opponent, not a member.",
+    "OS: primary employer 2024/2025 accounts; Matthew Pillinger membership dated2024, Gus McKechnie occasional guest not member. Website unavailable; 1988/lunchtime snippets not used.",
+    "JCB: race began1983, not confirmed club founding. 2025 NSPCC and2026 Queen's Reading Room beneficiaries distinguished. Employer commercial contacts excluded; current club eligibility/timetable unknown.",
+    "Worcester SU: recovered organisation page, separate from Worcester AC. Nunnery Wood training venue; student6.45pm versus partner7pm arrival needs confirmation. Chair email public; socials attributed to Union, destination ownership not reverified. No fee inferred behind login.",
+    "Pudsey & Bramley unsafe promotion remains suppressed. St Mary's Richmond history certificate mismatch: no insecure retry. Milocarian regimental verification walls not bypassed; normal BA newsletter encoding recovery succeeded. Rolls-Royce unavailable. Preserve earlier gaps/NewRoss-Island until23October.",
+    "Base d91940be4dea06c35a23fd04704fc15bf61f379c and main aa82cc37980f808668764513cf74e7fb309e98d8 inspected. Guard remote ref with expected head. Draft only; exact-commit hosted/desktop-mobile evidence in PR756, not production publication."
   ],
   "sourceGaps": [
+    {
+      "slug": "jcb-lakeside-club",
+      "reason": "Profile added from employer2023/2025/2026 accounts. Race1983 origin not club founding. Current joining/weekly venue/direct club contacts unresolved; commercial contacts excluded.",
+      "checkedAt": "2026-10-17",
+      "status": "profile-added-with-qualified-gap"
+    },
     {
       "slug": "vale-of-aylesbury-ac",
       "status": "profile-added-with-qualified-gap",
@@ -273,9 +280,9 @@
     },
     {
       "slug": "os-runners",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Official website unavailable.",
-      "checkedAt": "2026-10-16"
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Profile added from opened Ordnance Survey2024/2025 accounts. Website502; Facebook blocked. Founding/lunchtime snippets excluded; current eligibility/contact/timetable unresolved.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "7-hills-harriers",
@@ -692,15 +699,15 @@
     },
     {
       "slug": "ventoux-triathlon-club",
-      "status": "current-programme-gap",
-      "reason": "TI directory opened and Camlough/Armagh club and email reconfirmed; club website unavailable. No full programme/history source.",
-      "checkedAt": "2026-10-16"
+      "status": "location-corrected-biography-deferred",
+      "reason": "Nearest town corrected to Camlough from opened TI directory17October. Original email provenance retained. Website unavailable; French Ventoux and commercial studio material do not establish this club's biography.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "db-triathlon-club",
-      "status": "location-corrected-biography-deferred",
-      "reason": "Nearest town corrected to Drung from current Triathlon Ireland directory. Existing email retained with original provenance. Club website unavailable; no substantive primary history or programme for a full biography.",
-      "checkedAt": "2026-10-16"
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Profile added from TI directory and organiser's first-person2023 swim-series account. Current founding/timetable/fees unresolved; Halton's Shore event not current training invitation; existing email provenance retained.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "be-fit-today-track-academy",
@@ -776,9 +783,9 @@
     },
     {
       "slug": "worcester-students-union-athletic-club",
-      "status": "unreadable-entity-page",
-      "reason": "Official entity page showed generic union navigation without substantive club body; no generic SU contact repurposed.",
-      "checkedAt": "2026-10-16"
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Profile added from recovered Union organisation page and partner Worcester AC venue guide. Founding/fee unresolved; student arrival differs from partner general start. Social links official-published but destination fetch blocked.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "yellow-brick-road-running-and-walking-club",
@@ -1283,8 +1290,9 @@
     {
       "slug": "st-marys-richmond-ac",
       "url": "https://www.smrac.org.uk/",
-      "status": "deferred-unreadable-club-source",
-      "reason": "Legacy ClubBuzz URL loops; new club site returned timeouts/502. University's track page confirms a facility association but not enough club-specific joining/history detail."
+      "status": "deferred-source-gap",
+      "reason": "Official history/about unavailable; direct normal HTTP retrieval reported certificate hostname mismatch. No insecure retry. University confirms track but no new biography or snippet-derived founding year.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "stadium-runners",
@@ -2065,9 +2073,9 @@
     {
       "slug": "db-triathlon-club",
       "url": "http://dbcyclingclub.com/",
-      "status": "location-corrected-biography-deferred",
-      "reason": "Nearest town corrected to Drung from current Triathlon Ireland directory. Existing email retained with original provenance. Club website unavailable; no substantive primary history or programme for a full biography.",
-      "checkedAt": "2026-10-16"
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Profile added from TI directory and organiser's first-person2023 swim-series account. Current founding/timetable/fees unresolved; Halton's Shore event not current training invitation; existing email provenance retained.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "run-middlewich",
@@ -2835,9 +2843,9 @@
     {
       "slug": "milocarian-ac",
       "url": "https://www.milocarianac.info",
-      "status": "deferred-primary-source-gap",
-      "reason": "Homepage and https://www.milocarianac.info/ChairmansRepoert2020_21.pdf could not be opened in batch87. Indexed snippets not used; historical services-club lead remains.",
-      "checkedAt": "2026-10-16"
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Profile added from Glasgow archive, Achilles trophy history and Milocarian2023 invitation reproduced by BA. Website unavailable; regimental verification walls not bypassed. Founding/current joining/contacts unresolved; ambiguous Finlay name excluded.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "mojo-run-fit",
@@ -3395,8 +3403,9 @@
     {
       "slug": "ventoux-triathlon-club",
       "url": "http://www.ventouxtriathlonclub.com/",
-      "status": "deferred-thin-source",
-      "reason": "Coming-soon page remains insufficient for biography; do not confuse Camlough club with similarly named French organisation."
+      "status": "location-corrected-biography-deferred",
+      "reason": "Nearest town corrected to Camlough from opened TI directory17October. Original email provenance retained. Website unavailable; French Ventoux and commercial studio material do not establish this club's biography.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "ilkley-harriers-ac",
@@ -3557,8 +3566,9 @@
     {
       "slug": "ventoux-triathlon-club",
       "url": "http://www.ventouxtriathlonclub.com/",
-      "status": "deferred-thin-source",
-      "reason": "Official site is coming-soon holding page with email/social links but insufficient biography content. Existing contact retained; alternative primary history needed."
+      "status": "location-corrected-biography-deferred",
+      "reason": "Nearest town corrected to Camlough from opened TI directory17October. Original email provenance retained. Website unavailable; French Ventoux and commercial studio material do not establish this club's biography.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "hillsborough-and-rivelin-rc",
@@ -5022,8 +5032,9 @@
     {
       "slug": "ventoux-triathlon-club",
       "url": "http://www.ventouxtriathlonclub.com/",
-      "status": "deferred",
-      "reason": "Own website only says new website coming soon. Available club-specific primary material insufficient for an extended biography; do not confuse the Irish club with the French Carpentras namesake."
+      "status": "location-corrected-biography-deferred",
+      "reason": "Nearest town corrected to Camlough from opened TI directory17October. Original email provenance retained. Website unavailable; French Ventoux and commercial studio material do not establish this club's biography.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "athletics-ireland-ballyskenach-a-c",
@@ -5428,9 +5439,9 @@
     {
       "slug": "db-triathlon-club",
       "url": "http://dbcyclingclub.com/",
-      "status": "location-corrected-biography-deferred",
-      "checkedAt": "2026-10-16",
-      "reason": "Nearest town corrected to Drung from current Triathlon Ireland directory. Existing email retained with original provenance. Club website unavailable; no substantive primary history or programme for a full biography."
+      "status": "profile-added-with-qualified-gap",
+      "checkedAt": "2026-10-17",
+      "reason": "Profile added from TI directory and organiser's first-person2023 swim-series account. Current founding/timetable/fees unresolved; Halton's Shore event not current training invitation; existing email provenance retained."
     },
     {
       "slug": "cromane-triathlon-club",
