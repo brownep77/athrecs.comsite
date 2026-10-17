@@ -116,7 +116,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
           to={item.to}
           className={pastelCardClassName}
           style={
-            homepage
+            homepage || theme !== "colourful"
               ? homepageCardStyle(theme, item.style, "tone", index as 0 | 1 | 2)
               : neutralPastelCardStyle
           }
@@ -217,11 +217,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
             to="/running/$guide"
             params={{ guide: country.guide }}
             className={pastelCardClassName}
-            style={
-              homepage
-                ? homepageCardStyle(theme, countryCardStyle(country.id), "country")
-                : countryCardStyle(country.id)
-            }
+            style={homepageCardStyle(theme, countryCardStyle(country.id), "country", 0, country.id)}
           >
             <p className="text-sm font-semibold">
               {roadHalfMarathonsForCountry(country.id).length} half marathon guides
@@ -245,9 +241,13 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
       </h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {MARATHON_COUNTRIES.map((country) => {
-          const style = homepage
-            ? homepageCardStyle(theme, countryCardStyle(country.id), "country")
-            : countryCardStyle(country.id);
+          const style = homepageCardStyle(
+            theme,
+            countryCardStyle(country.id),
+            "country",
+            0,
+            country.id,
+          );
           const content = (
             <>
               <div className="flex items-center justify-between" style={{ color: style.color }}>
@@ -395,11 +395,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
         <Link
           to="/running/uk-road-ultramarathons"
           className={`mt-5 max-w-3xl ${pastelCardClassName}`}
-          style={
-            homepage
-              ? homepageCardStyle(theme, countryCardStyle("uk"), "country")
-              : countryCardStyle("uk")
-          }
+          style={homepageCardStyle(theme, countryCardStyle("uk"), "country", 0, "uk")}
         >
           <p className="text-sm font-semibold">{ROAD_ULTRAS.length} events and event series</p>
           <h3 className="mt-3 font-display text-2xl font-semibold text-slate-900">
