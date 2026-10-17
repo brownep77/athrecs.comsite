@@ -17,6 +17,22 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 106: supported disciplines, dated history and unresolved founding years.
+  assert.deepEqual(bySlug.get("allstride-collective-running-club").sports, ["Running"]);
+  assert.equal(bySlug.get("allstride-collective-running-club").socials.length, 3);
+  assert.equal(bySlug.get("allstride-collective-running-club").contacts.length, 0);
+  assert.equal(clubProfiles["allstride-collective-running-club"].founded_year, undefined);
+  assert.equal(bySlug.get("robin-park-runners").socials[0].url, "https://www.facebook.com/rprwigan/");
+  assert.equal(bySlug.get("robin-park-runners").contacts.length, 0);
+  assert.equal(clubProfiles["robin-park-runners"].founded_year, undefined);
+  assert.equal(clubProfiles["robin-park-runners"].notable_members[0].name, "Mark Harrison");
+  assert.match(clubProfiles["winterton-running-club"].biography.join(" "), /historical proposal/);
+  assert.equal(bySlug.get("winterton-running-club").contacts.length, 0);
+  for (const slug of ["allstride-collective-running-club", "robin-park-runners", "winterton-running-club"]) {
+    assert.equal(bySlug.get(slug).address_kind, "directory");
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
   // Batch 103: dated history, current publisher attribution and distinct identities.
   assert.equal(clubProfiles["ravens-city-of-london-running-club"].founded_year, 1997);
   assert.equal(bySlug.get("ravens-city-of-london-running-club").city, "London");

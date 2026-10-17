@@ -1,40 +1,40 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch105",
+  "lastEditorialBatch": "2026-10-17-batch106",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
-  "pullRequest": null,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Batch105 adds3 draft biographies on a new branch from main9edeec5860433afbf2930f80aea061a9609ee134; assembled1596/1737 (91.9%),821 associations,141 incomplete. New PR is created after this checkpoint commit; resolve it by branch codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "pullRequest": 762,
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds6 biographies/1 association; assembled1599/1737 (92.1%),822 associations,138 incomplete. Batch106 continues cfec8907e1acba8dae864e73493b70e79bc3d2fb on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "warsop-rc",
-    "aston-chasers",
-    "riversway-road-runners"
+    "allstride-collective-running-club",
+    "robin-park-runners",
+    "winterton-running-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1596,
-    "notableMemberEntries": 821,
+    "extendedProfiles": 1599,
+    "notableMemberEntries": 822,
     "clubsWithContacts": 1206,
     "contactEntries": 2005,
     "clubsWithEmail": 1164,
     "clubsWithPhone": 187,
-    "clubsWithSocials": 1215,
-    "socialLinks": 2564,
-    "websiteContactRecords": 1533
+    "clubsWithSocials": 1216,
+    "socialLinks": 2566,
+    "websiteContactRecords": 1535
   },
   "batchChanges": {
     "extendedProfilesAdded": 3,
-    "notableMemberEntriesAdded": 0,
+    "notableMemberEntriesAdded": 1,
     "contactOrSocialRecordsChanged": 2,
     "newWebsiteContactRecords": 2,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 2,
-    "netSocialLinks": 1,
+    "netContactEntries": 0,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed isolated checks for complete biography paragraphs, contacts/socials, directory address labels, England indicators, registration, description, canonical and SportsOrganization data. Test used in-memory PGLite with external fetch disabled and unrelated catalogue seeding skipped; no external migrations/publication. Prior PR761 exact-head Club profiles39057219734 and quality39057219732 passed. New exact-head desktop/mobile workflow and hosted-preview evidence will be recorded in the new draft PR."
+    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed full biography/source/social/contact-route, directory-address, England-indicator, registration, description, canonical and SportsOrganization assertions. Allstride's unsupported Aquathlon label is absent. Isolated in-memory PGLite; external fetch disabled and unrelated catalogue seeding skipped for the page test. Exact-head desktop/mobile workflow and hosted-preview evidence will be recorded in draft PR762. Previous batch105 Club profiles39065517982 and full quality gate39065517974 both passed. No external migrations or publication."
   },
   "nextCandidateSlugs": [
     "yellow-brick-road-running-and-walking-club",
@@ -43,6 +43,11 @@
     "horsham-run-fit"
   ],
   "resumeInstructions": [
+    "BATCH106 CURRENT: module db seedv106; AllstrideCollective,RobinPark,Winterton biographies and one MarkHarrison organisational association.1599/1737(92.1%),822 associations,138 incomplete. Published1593/821; draftPR762 adds6/1. Parentcfec8907 and main9edeec586 checked before edits; no competing writer observed. Two social links, no email/phone additions. Previous no-profile notes superseded for these three only. Existing nextCandidateSlugs and23OctoberTI follow-ups preserved.",
+    "Allstride: own Strava allstridecollective and first-person EverydayActiveKent activity listing read17Oct; Stride to5 free10weekcourse, undated17Februaryintake not currentadvertisement. Locations announcedonsocialsweekbefore; LowerRoadbusinessaddress staysdirectory. Runningonly replacesunsupportedmultisporttags. NewStravalink; existingInstagramnotduplicated, EA13Octsocialprovenancepreserved. No founding/notables/email/phone; ActiveKentfootercontacts and Outlooksafelinktrackingexcluded.",
+    "RobinPark: RunThroughDavidLawless30June2021 firsthandnewaffiliation, WiganToday26April2024 MarkHarrisoninterview and WhatsHappeningInWigan2026report opened. FounderMarkHarrisonassociation supported but2019/2020foundingconflict leftunset. TrencherfieldMill reports agree, not newpostcodeverification; confirmcurrenttimings. April2024/May2026parkruntakeovers wereannouncements, no completionassertion. Facebookrprwigan attributedtolocalreport; destinationtemporarilyblocked. No clubemail/phone, healthdetails, athleteidentities/results or currentLawlessmembershipclaim.",
+    "Winterton: Autumn2014OutnAbout p25beneficiarycolumn confirms £1per10mileraceentrant donation; charitytotalnotclubtotal. April2020parishp13namesPoirierFoundationracecharity. PDF503coverJuly2020(notJunemetadata),p12firstpersonclubproposal forfreevirtualrace/optionalcharitydonations; weekday/dateinconsistent, omitexactwindow. No proofeventcompletion,totalraised,founding,currentjoiningortrainingbase. Directorysocials retainedwith13Octdates; Facebookunavailable. Show/charity/parishcontacts excluded.",
+    "New partial leads17Oct: ClanfieldJoggers officialsite timeout; TJWasteCSR firsthand confirms2016Challengeco-organisers, notclubfounding; advancesrm.co.uk/are-your-shins-also-up-for-a-c25k-challenge/ isunopenedpartnerlead. MaryportCSC JustGiving maryport-csc-4 closedcampaign describesplanned1Aug2026TerrexRound; no completionclaim, no borrowingNetherhallAC2018history. netherhallcsc.com/facilities and venueFacebookbirthday20April2026post areunopenedleads, venuecontactsnotclubcontacts. MaximumMileageCoaching ownbusinesssite readbutnotyetmatchedtoEAclub, donottransferNickHancockcontacts. SIPTwistedRunningcollectionopenedonlyproducts, no snippetonlyRoytonoriginsadopted. PriorYellowBrickRoad/Michelin/RavensSchool/Horshamqueue preserved. Redcar/RollsRoyce/Gillingham/7Hills primarysitesstillunavailable; searchsnippetsnotused. EAAllstride/RobinParkfreshrequestsfailed, oldcheckdatespreserved.",
     "BATCH105 CURRENT: module da seedv105; Warsop,AstonChasers,Riversway biographies; no new associations.1596/1737(91.9%),821 associations,141 incomplete; published1593/821. Two club emails/one Facebook link/two websites. From main9edeec5860433afbf2930f80aea061a9609ee134 after PR761 release. No other open club-profile draft found; branch checked before writing. New draft PR is created after commit, find via codex/club-profiles-batch105. Earlier no-profile notes are superseded only for these three.",
     "Warsop official warsoprc.co.uk home/about-us/membership-benefits/events-calendar read17Oct; explicit adults-only beats generic all-ages wording. Trial and twice-weekly training, social/competitive first-or-second-claim options. warsoprc@hotmail.com confirmed; form not submitted. Founders unnamed, no year/phone/exact Facebook. FABLearning2023 and sponsor socials excluded. MedenValeColtsFC stays directory; meeting points/times unconfirmed. Earlier same-day opened subpage text retained when repeat fetch intermittently failed.",
     "Aston official ClubSpark home/contact/session and16July2026 first-person YourMag anniversary account read. City Aston-cum-Aughton supported; DuckhamDrive remains directory. HealthCentre lowercarpark Tuesday venue not combined with contact-page S264WD postcode.8weekbeginner course announced1Sep already underway; confirm nextintake. astonchasers@gmail.com/exactFacebook1588331131464955 attributed, Facebookthrottled no ownership claim.10thanniversary retained as prose, founded_year unset; ordinarymember2021interview not famousmember/identity evidence.",
