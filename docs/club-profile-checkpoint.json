@@ -1,49 +1,56 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch107",
+  "lastEditorialBatch": "2026-10-17-batch108",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
   "pullRequest": 762,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds8 biographies/3 associations; assembled1601/1737 (92.2%),824 associations,136 incomplete. Batch107 continues 5e3b4031db7c45b1e4f3b48f19e1d3e48b7fc7ad on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds13 biographies/7 associations; assembled1606/1737 (92.5%),828 associations,131 incomplete. Batch108 continues 5cc16858e56f349f9136459e3dc41b84071963be on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "clanfield-joggers",
-    "athletics-ireland-bailieboro-a-c",
-    "fordy-runs-running-club"
+    "the-hawcs",
+    "westside-runnas-uk",
+    "heald-green-runners",
+    "lifts-and-sprints-athletics-academy",
+    "ts-harriers"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1601,
-    "notableMemberEntries": 824,
-    "clubsWithContacts": 1206,
-    "contactEntries": 2006,
-    "clubsWithEmail": 1164,
-    "clubsWithPhone": 187,
-    "clubsWithSocials": 1216,
-    "socialLinks": 2569,
-    "websiteContactRecords": 1536
+    "extendedProfiles": 1606,
+    "notableMemberEntries": 828,
+    "clubsWithContacts": 1210,
+    "contactEntries": 2012,
+    "clubsWithEmail": 1168,
+    "clubsWithPhone": 188,
+    "clubsWithSocials": 1219,
+    "socialLinks": 2572,
+    "websiteContactRecords": 1541
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
-    "existingProfilesExpanded": 1,
-    "notableMemberEntriesAdded": 2,
-    "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 1,
-    "directoryRecordsRefreshed": 1,
-    "netContactEntries": 1,
+    "extendedProfilesAdded": 5,
+    "existingProfilesExpanded": 0,
+    "notableMemberEntriesAdded": 4,
+    "contactOrSocialRecordsChanged": 5,
+    "newWebsiteContactRecords": 5,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 6,
     "netSocialLinks": 3,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed complete biography/source/social/contact-route/email, address classification, country indicator, registration, description, canonical and SportsOrganization assertions. Bailieboro's training label and Ireland flag are retained; FORDY RUNS keeps its existing England indicator and national scope, not a globe. The temporary harness's initial UK-indicator expectation was corrected to the existing data model, with no application change. Isolated in-memory PGLite; external fetch disabled and unrelated catalogue seeding skipped. Exact-head desktop/mobile workflow and hosted-preview evidence follow in draft PR762. Previous batch106 Club profiles39069867998 and full quality gate39069867958 passed. No external migrations or publication."
+    "status": "Batch108 catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All five actual built pages passed complete biography/source/social/contact-route/email, dated association, location/contact note, address classification, England indicator, registration, description, canonical and SportsOrganization assertions. Lifts and Sprints displays Training venue; the other four display Directory address. Isolated in-memory PGLite; external fetch disabled and unrelated catalogue seeding skipped. Build confirmed database publication skipped. Exact-head desktop/mobile workflow and hosted-preview evidence follow in draft PR762. Previous batch107 Club profiles39074249480 and full quality gate39074249479 passed. No external migrations or publication."
   },
   "nextCandidateSlugs": [
+    "wellness-warriors-on-the-run",
     "yellow-brick-road-running-and-walking-club",
     "michelin-running-club",
     "ravens-school-runners",
     "horsham-run-fit"
   ],
   "resumeInstructions": [
+    "BATCH108 CURRENT: module dd seedv108; five biographies HAWCS, Westside, HealdGreen, Lifts&Sprints, TSHarriers and four associations. Assembled1606/1737(92.5%),828 associations,131 incomplete. Published1593/821; draftPR762 adds13/7. Parent5cc16858 and main9edeec586 inspected before edits; no competing writer observed. Six role-email entries,onephone,threesocials,five new contact-route records. Lifts venue classification supported by its own full address; other four remain directory. Batch107 Club profiles39074249480 and full quality39074249479 both passed. Exact-head batch108 evidence belongs in PR762. Older no-profile gaps superseded only for these five; no production authority inferred.",
+    "Batch108 recovered sources: HAWCS EnglandAthletics2015visit gives secondbirthday1Oct2015=>2013 and DaveRicefounder; EastHertsLottery clubauthored page gives membership/generalGmail; operatorphone excluded; Wodsonvenueage10 supersedes oldschoolleafletage8/phone/infoemail. Kukri2024TomRutterselfassociation dated, notcurrent. Westside Heylo11May2023programme launch distinct from Reach17Dec2025charitydate; RoyalParks2025guide gives exactInstagram; LondonMarathonEvents2026Gerardcofounder; Calabash publicLinkedIn31May2026launch says Westside/IRYWC programmes withincollective. No inferred legalfoundingyear/currenttimetable/childeligibility.",
+    "Batch108 HealdGreen: Ratepayers societies directory directpublicHTML recovered Gmail/Facebook afterreaderfailure; Vernon5Dec2024award and own2025ManchesterHalfJustGivinghospice appeal supportcommunityhistory, notfinishresults. No founding/currenttraining/notables. Lifts own about-2/athletics-academy and aipff.co.uk/project/lifts-and-sprints/ give2018AliysaCodringtonfounder, current8+ academy/14+gym, consentbeforejoining, Oxfordtrackaddress, twoemails/sharedphone; oldfunding/apprenticeplans notcurrententitlement. TS ownWordPress homepage/training/membership/committee plus NorthernAthletics25-26list; founded2020, variableTeesValleyvenues, visibleGmailonly (mailtoexample.com excluded), undatedfees/currentcommittee uncertain, FBthrottled. All source/checkdates17OctoberUTC; governing-bodydirectory dates retained.",
+    "Next recovery: WellnessWarriors provider https://phoenixlifestylefoundation.org.uk/wellness-warriors/ read weeklysocialmovement account; provider /contact/404. https://www.bucks.ac.uk/about-us/what-we-stand/civic-engagement read programmeindex withLearnMore link291 butclickresolutionfailed; recoverhrefviaordinarypublicHTML thenopen detailedprimaryaccount. Eventbrite1977720275583 rate-limited; no emailfromsecondaryWycombePulseadopted. This is research-only, not a biography. New ECCA2025-26handbook lead https://www.englishcrosscountry.co.uk/wp-content/uploads/2025/09/ECCA_Handbook_2025-26.pdf maycontainWestYorkshirePolicecontact; searchsnippet notopened so no import. RollsRoyceabout/history/contact/training unavailable incldirect502; DSFRS unavailable. Gillingham searches conflate DorsetclubwithKentThursdayTrotters; do not merge. Existing23OctoberTI follow-ups preserved.",
     "BATCH107 CURRENT: module dc seedv107; Clanfield and Bailieboro new biographies, FORDY RUNS parent expanded.1601/1737(92.2%),824 associations,136 incomplete. Published1593/821; draftPR762 adds8/3. Parent5e3b4031 and main9edeec586 inspected before edits, no competing writer observed. Two organisational associations; one net email/three social links. Previous no-profile gaps superseded for the two new profiles only. Prior batch106 Club profiles39069867998 and quality39069867958 passed; hosted3pages passed on exact5e3b preview dpl_B38Ww9qu6XEdtUHejFRncPrsRJhG. Existing23OctoberTI follow-ups preserved.",
     "Clanfield recovered: council2024–2040strategy https://www.easthants.gov.uk/media/8939/download?inline= page96 downloaded normally (20MB exceeds searchreader), mixedclub/centre/weekdaypattern; TJWasteCSR and AdvanceSRM C25K partner firsthand accounts.2016isChallengeorigin, notclubfounding. No email/phone/notables/currentcourse availability. EndalWay remainsdirectory; counciltrainingpatternqualified, noexactvenue/postcoderewrite. Clubhomepage502/directtimeout; EA requestunavailable,13Octprovenance retained. Sponsor/clinic/supplier contacts excluded.",
     "Bailieboro recovered: actual AI membershippage publicHTML read17Oct via normaldirectdownload after searchreaderfailure; explicitlyTrainingLocation Tunnyduff/Bailieborough/A82W271 andTypeSenioronly; cityfilled,adult_onlytrue,dateupdated, existingemail/Facebookrefreshednotduplicated. CountyBoard2014handbook/ownofficerelection plus AngloCelt7/20Nov2007clubnotes supportdatedhistory/TurkeyRun. JimmyODowd countytreasurer2014–2015association only; noTPCallaghanmembership inferred, noathleteresults/identities. Currentjunioreligibilitynotinferredfrom2007activities. FacebookDisabledError, phone/foundingunknown; AIadmin/football/communitycontacts excluded.",

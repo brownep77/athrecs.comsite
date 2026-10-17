@@ -17,6 +17,23 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 108: verified venue classification, dated origins and placeholder exclusion.
+  for (const slug of ["the-hawcs", "westside-runnas-uk", "heald-green-runners", "lifts-and-sprints-athletics-academy", "ts-harriers"]) {
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+    assert.equal(bySlug.get(slug).address_kind, slug === "lifts-and-sprints-athletics-academy" ? "training" : "directory");
+    assert.ok(clubProfiles[slug].biography.length >= 3);
+  }
+  assert.equal(clubProfiles["the-hawcs"].founded_year, 2013);
+  assert.equal(clubProfiles["lifts-and-sprints-athletics-academy"].founded_year, 2018);
+  assert.equal(clubProfiles["ts-harriers"].founded_year, 2020);
+  assert.equal(clubProfiles["westside-runnas-uk"].founded_year, undefined);
+  assert.equal(clubProfiles["heald-green-runners"].founded_year, undefined);
+  assert.equal(bySlug.get("westside-runnas-uk").adult_only, true);
+  assert.equal(bySlug.get("ts-harriers").contacts[0].email, "tsharriers@gmail.com");
+  assert.equal(bySlug.get("the-hawcs").contacts.length, 2);
+  assert.equal(bySlug.get("lifts-and-sprints-athletics-academy").contacts.filter((c) => c.phone).length, 1);
+  assert.ok(!JSON.stringify(bySlug.get("ts-harriers").contacts).includes("example.com"));
   // Batch 107: current eligibility is distinct from historical activity and event origins.
   assert.equal(clubProfiles["clanfield-joggers"].founded_year, undefined);
   assert.equal(bySlug.get("clanfield-joggers").address_kind, "directory");
