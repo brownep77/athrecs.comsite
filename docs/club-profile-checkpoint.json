@@ -1,49 +1,52 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch103",
+  "lastEditorialBatch": "2026-10-17-batch104",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–103 add42 biographies/42 associations; assembled1591/1737 (91.6%),821 associations,146 incomplete. No publication in batch103. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–104 add44 biographies/42 associations; assembled1593/1737 (91.7%),821 associations,144 incomplete. No publication in batch104. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "heyford-aardvarks-running-club",
-    "ravens-city-of-london-running-club",
-    "dunstable-lions-running-club"
+    "gordonian-runners",
+    "hartlepool-burn-road-harriers"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1591,
+    "extendedProfiles": 1593,
     "notableMemberEntries": 821,
-    "clubsWithContacts": 1202,
-    "contactEntries": 2000,
-    "clubsWithEmail": 1160,
+    "clubsWithContacts": 1204,
+    "contactEntries": 2003,
+    "clubsWithEmail": 1162,
     "clubsWithPhone": 187,
-    "clubsWithSocials": 1213,
-    "socialLinks": 2561,
-    "websiteContactRecords": 1528
+    "clubsWithSocials": 1214,
+    "socialLinks": 2563,
+    "websiteContactRecords": 1531
   },
   "batchChanges": {
-    "extendedProfilesAdded": 3,
-    "notableMemberEntriesAdded": 1,
+    "extendedProfilesAdded": 2,
+    "notableMemberEntriesAdded": 0,
     "contactOrSocialRecordsChanged": 3,
     "newWebsiteContactRecords": 3,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 3,
-    "netSocialLinks": 1,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Isolated built-page checks passed for Heyford, Ravens City, Dunstable and Sunlight: biography, association/contact/social content, location, registration, description, canonical and SportsOrganization structured data. Temporary harness cleanup corrected and rerun exited zero. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous head9711ce46 Club profiles39047985873 and quality39047985872 passed. No external migration/publication."
+    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Isolated actual built-page assertions passed for Gordonian, Hartlepool and RunMiddlewich: biographies where present, location/England indicator, emails/socials, registration, description, canonical and SportsOrganization data. Temporary harness was corrected to apply the existing club seed schema and test the flag's aria-label, then reran successfully. Local test only: in-memory database, no external fetches, unrelated catalogue seeding skipped. Previous headd131a9ff Club profiles39052709754 and fullquality39052709631 passed. New exact-head workflow and preview evidence belongs in PR761. No external migration/publication."
   },
   "nextCandidateSlugs": [
-    "gordonian-runners",
     "yellow-brick-road-running-and-walking-club",
     "michelin-running-club",
     "ravens-school-runners",
     "horsham-run-fit"
   ],
   "resumeInstructions": [
+    "BATCH104 CURRENT: modulecz seedv104; two biographies, no notable associations; three contact/social records add three emails and two social links. Assembled1593/1737 (91.7%),821 associations,144 incomplete. Published1549/779; draftPR761 adds44/42. Parentd131a9ff and mainf437487 inspected; draft head unchanged immediately before edits, no competing writer observed. Older no-profile notes are superseded for Gordonian/Hartlepool only.",
+    "Gordonian: Strava131963 club introduction gives WestEnd/school-linked community; EA1October2026PDF p33 identifies Surrey and XC/road/hill-fell/trail. City/county corrected, inherited AngelRoad/Norwich postcode removed from display but preserved in underlying audit provenance. Area-only, no school training address inferred. Strava and its exact Facebook880693328629504 linked; no email/phone/founding/committee tenure/notables. Gordonian alumni body's2019dissolution is NOT running-club closure. Spring2022newsletter remained unavailable; no need to repeat failed PDF fetch without new access evidence.",
+    "HartlepoolBurnRoad: provider-written HartlepoolNow council listing read17October, raw public encoded emails checked: membership@hartlepoolburnroad.co.uk and chair@hartlepoolburnroad.co.uk (junior route). Undated two-taster joining guidance; historic weekday venues and seasonalSummerhill qualified. MowbrayRoad remains directory, not training. Ownsite502/Facebooktemporaryblock; no founding/phone/notables/current fixed timetable. Council/supplier footer contacts excluded. No message/form submitted.",
+    "RunMiddlewich contact-only: organiser's NiftyEntries2026Middlewich5k terms publish runmiddlewich@gmail.com; labelled race enquiries, not proven general membership mailbox. Both www/nonwwwclubsites unavailable. Race route/start/finish and2026entry prices are not training venues, clubhistory or current programme. Existing directoryFacebook, registration and contactURL preserved; biography remains pending readable clubjoining source.",
+    "Other checks17October: StAnnesANI email/phone still match existingrecord; MaryPetersTrack booking list shows21October2026StAnnesbooking, not proof of open training or founding1980. No new profile/date credit. LiverpoolPembrokeSefton our-club/join-us read but injectedgambling links persist: keepwebsite suppressed, no contacts from compromisedsite. NorthernAthletics10Feb2014Pembrokehistory announcement is safe lead, not sufficient currentjoining evidence. Weston/Hatton403 stop; TriAnglia unavailable. Do not repeat these exhausted paths or use snippets/third-party mirrors for biographies.",
     "BATCH103 CURRENT: modulecy seedv103; three biographies/one association, three contact records including Sunlight contact-only. Assembled1591/1737 (91.6%),821 associations,146 incomplete. Published1549/779; draftPR761 adds42/42. Parent9711ce46 and main0f8bc3d inspected; remote head unchanged before edits, no competing writer observed. Earlier no-profile gaps are historical where superseded.",
     "Heyford: opened club-written ValleyNewsAug2022p13 and HeyfordParkcommunity page; roleemail corroborated, exactFacebookgroup1758053511167542 attributed to2022column, destinationDisabledError. Do not treat oldMonday/Thursday/DaceyDrive timings as current or infer childeligibility/founding/notables. CorbettClose remainsdirectory. Dunstable: officialdunstablelionsrc.co.uk recovered,5kmjoining prerequisite, leisurecentretraining, roleemail; confirmundatedfees/sessions, council24Mar2026lottery story notwholefundraisingtotal. No founding/notables/socialURL inferred.",
     "RavensCity: ClubSonar2017p24–25 suppliedbyclubs and PhilHernon13Aug2025firstperson LinkedInpost establish1997origin; EA1May2026p12 road/XC. One historical founderassociation PhilHernon, not TomNichols whose profile reproduced the post. CityLondon filled; MarnockRoad directorynottraining. Officialdomain unavailable, oldworkemails excluded; no secondaryTowerBridge timetable or social attribution adopted. RavensSchoolRunners remains distinct and unprofiled.",

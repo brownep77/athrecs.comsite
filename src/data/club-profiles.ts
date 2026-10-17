@@ -1,3 +1,4 @@
+import { gordonianAndHartlepoolProfiles } from "./club-profiles-cz.ts";
 import { heyfordRavensDunstableProfiles } from "./club-profiles-cy.ts";
 import { calneLincolnLittleboroughProfiles } from "./club-profiles-cx.ts";
 import { recoveredChorleyWhitbyAndThurlesProfiles } from "./club-profiles-cw.ts";
@@ -129,6 +130,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...gordonianAndHartlepoolProfiles,
   ...heyfordRavensDunstableProfiles,
   ...calneLincolnLittleboroughProfiles,
   ...recoveredChorleyWhitbyAndThurlesProfiles,
@@ -954,4 +956,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-17-v103";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-17-v104";
