@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch94",
+  "lastEditorialBatch": "2026-10-17-batch95",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
-  "pullRequest": null,
-  "publication": "PR756 published baseline:1549 biographies/779 associations. Batch94 adds five biographies/four associations in a new draft branch from main f43748739274afb02db6dce7f8f114de1f3436e1; no publication this batch. Assembled research cohort1554/1737 (89.5%),783 associations;183 biographies incomplete. This cohort is not the whole growing public directory. Find the new draft PR by branch codex/club-profiles-batch94; exact-commit preview/CI evidence is recorded there.",
+  "pullRequest": 761,
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–95 add10 biographies/7 associations; assembled1559/1737 (89.8%),786 associations,178 incomplete. No publication in batch95. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "arete-run-club",
-    "tetbury-dolphins-running-club",
-    "pudsey-runners",
-    "st-marys-richmond-ac",
-    "the-running-hub"
+    "billericay-striders",
+    "southampton-triathlon-club",
+    "coalville-triathlon-club",
+    "brighton-and-hove-womens-running-club",
+    "crystal-peaks-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1554,
-    "notableMemberEntries": 783,
-    "clubsWithContacts": 1180,
-    "contactEntries": 1977,
-    "clubsWithEmail": 1138,
-    "clubsWithPhone": 182,
-    "clubsWithSocials": 1206,
-    "socialLinks": 2536,
-    "websiteContactRecords": 1496
+    "extendedProfiles": 1559,
+    "notableMemberEntries": 786,
+    "clubsWithContacts": 1184,
+    "contactEntries": 1982,
+    "clubsWithEmail": 1142,
+    "clubsWithPhone": 183,
+    "clubsWithSocials": 1207,
+    "socialLinks": 2543,
+    "websiteContactRecords": 1500
   },
   "batchChanges": {
     "extendedProfilesAdded": 5,
-    "notableMemberEntriesAdded": 4,
+    "notableMemberEntriesAdded": 3,
     "contactOrSocialRecordsChanged": 4,
-    "newWebsiteContactRecords": 3,
+    "newWebsiteContactRecords": 4,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 4,
-    "netSocialLinks": 3,
+    "netContactEntries": 5,
+    "netSocialLinks": 7,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club/profile audits, targeted ESLint, TypeScript and safe build passed; migration/publication skipped. All five built pages passed biography, associations, contacts/socials, venue/flag, registration and search metadata/structured-data assertions. Exact-commit desktop/mobile workflow and preview evidence belongs in the new draft PR; local rendering is not hosted inspection. Previous head154eb2d full quality and Club profiles workflows passed."
+    "status": "Catalogue/club/profile audits, targeted lint, TypeScript and safe build passed. Isolated built-page assertions and exact-head desktop/mobile/preview evidence recorded in PR761. Earlier head0d91a81 Club profiles39016344261 and full quality39016344329 passed. No publication or migration."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
@@ -46,6 +46,11 @@
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "BATCH95 CURRENT: modulecq seedv95, five profiles/three historical associations; five public contacts, seven net socials, four new website-contact records. Assembled1559/1737,786 associations; published1549/779. Continue open draftPR761 branchcodex/club-profiles-batch94 after checking currenthead and other writers; no merge authorised here.",
+    "Billericay and Southampton recovered through rendered official pages after search supplied empty text. Billericay1986, Southampton1987 origins. Southampton full-swim waiting lists versus morning-only availability checked17Oct; no fixed swim count or adult-only override. TimWilks memorial is former membership.",
+    "Coalville Membermojo fresh page says moved to SportMember; earlier cached2026–27 membership offers not adopted. SportMember phone07519876076 preferred over undated ActiveTogether number; role email from provider listing retained. Masked platform email not guessed. Pool/ClockTower/leisure-centre sessions distinct from postal addresses.",
+    "BrightonWomen history from2014interview andEA2018/2019, withFeb2026marathon organiser listing; CarolKennedy/NaomiSharp roles historical. Club site unavailable, no current timetable or inferred founding year. CrystalPeaks .com homepage initially readable then404; MossValley2012–2019 and2021cancellation historical, foodbank outing year unknown. Incorrect website-as-Facebook corrected in profile override; rawdirectory provenance retained.",
+    "Previous batch94 checks now both passed. Batch95 exact-head workflow and preview status is inPR761; protected hosted inspection is separate from local/fixture checks. Preserve earlier source gaps andNewRoss/Island future review23October. Prior resume notes below are historical.",
     "BATCH94 CURRENT: modulecp seedv94; five biographies/four associations, four role emails/three socials. Assembled1554/1737,783 associations; published baseline1549/779. New draft branch codex/club-profiles-batch94 from mainf437487. Find its open PR before edits; never append to mergedPR756.",
     "Tetbury now has a dated founder-account biography; present training/eligibility and exact founding year remain unresolved. Arete homepage recovered, Sunday and Thursday venues distinct. Pudsey shared clubhouse replaces Swinnow Green, not a guaranteed session start;1910 belongs to parent bowling club.",
     "TRH community/coaching/club affiliation are separate; yoga-instructor pages conflict. St Mary's has county role contacts and OpenTrack training/meeting evidence, own site unavailable. All five founding fields empty. Social links from official publishers, destination access unavailable.",
@@ -84,8 +89,8 @@
     },
     {
       "slug": "tetbury-dolphins-running-club",
-      "status": "contact-recovered-biography-pending",
-      "reason": "Town council directory publishes chair email. RunTogether/ClubSpark inaccessible; councillor personal contact not substituted; insufficient club history/activity for biography.",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Batch94 biography completed from2018co-founder interview; council chair email retained. Exact founding year, current timetable and eligibility remain unresolved.",
       "checkedAt": "2026-10-17"
     },
     {
@@ -186,9 +191,9 @@
     },
     {
       "slug": "southampton-triathlon-club",
-      "status": "source-blocked",
-      "reason": "Homepage readable body empty. Venue and first-person member leads found but not sufficiently opened/reviewed for biography.",
-      "checkedAt": "2026-10-16"
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Rendered official pages recovered.1987 origin, TimWilks memorial and joining capacity supported. Full-swim waiting list, morning-only availability; weekly swim counts conflict and junior eligibility needs confirmation.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "zoom-tri-club-bournemouth",
@@ -335,9 +340,9 @@
     },
     {
       "slug": "billericay-striders",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Recovered .com hostname still returns empty page.",
-      "checkedAt": "2026-10-16"
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Profile recovered from rendered welcome/club-runs pages.1986 origin and role email supported; coach-profile page empty. Confirm weekly venues/junior arrangements.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "athletics-ni-st-annes-ac",
@@ -1188,8 +1193,9 @@
     {
       "slug": "tetbury-dolphins-running-club",
       "url": "https://groups.runtogether.co.uk/TetburyDolphinsRunningClub",
-      "status": "deferred-unreadable-club-source",
-      "reason": "16 October 2026: RunTogether redirected to an inaccessible ClubSpark page. Existing sourced fields retained; no new biography."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Batch94 biography completed from2018co-founder interview; council chair email retained. Exact founding year, current timetable and eligibility remain unresolved.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "thames-hare-and-hounds",
@@ -4110,8 +4116,9 @@
     {
       "slug": "city-of-stoke-ac",
       "url": "http://www.stokeac.org.uk/",
-      "status": "deferred-source-unavailable",
-      "reason": "Research response 502; no unavailable source marked freshly verified."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Profile recovered from current SportMember platform linked by Membermojo migration notice. Old offers superseded. Official phone differs from undated provider listing, masked email not guessed. Founding year/junior eligibility unresolved.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "chesterfield-tri-club",
@@ -4135,8 +4142,9 @@
     {
       "slug": "coalville-triathlon-club",
       "url": "https://www.coalvilletriathlon.org",
-      "status": "deferred-source-unavailable",
-      "reason": "Research response 502; no unavailable source marked freshly verified."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Profile added from initially readable.com homepage, official MossValley history and centre foodbank report. Homepage later404; current sessions/venue unknown. Event cancellation2021historical; foodbank year absent. Corrected website mislabelledFacebook, rawrecord preserved.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "crystal-peaks-runners",
@@ -4303,8 +4311,9 @@
     {
       "slug": "brighton-and-hove-womens-running-club",
       "url": "https://bhwrc.org/",
-      "status": "deferred-current-source-unavailable",
-      "reason": "502/timeouts. EA2018 feature is historical; current training location and joining programme remain unconfirmed."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Profile added from2014first-person interview,EA2018/2019 and2026marathon-organiser listing. Current site unavailable; timetable/fees/beginner intake and founding year unknown; historical chairs qualified.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "welsh-athletics-trg-runners",
@@ -5793,9 +5802,10 @@
     {
       "slug": "coalville-triathlon-club",
       "url": "https://membermojo.co.uk/ctc",
-      "status": "membership-platform-move",
-      "note": "Opened page now redirects readers to SportMember-Coalvilletriclub. Search snippets contain obsolete offers. Both official homepage variants returned502; no biography added.",
-      "checkedAt": "2026-10-14"
+      "status": "profile-added-with-qualified-gap",
+      "note": "Historical gap superseded by batch95 review; see reason.",
+      "checkedAt": "2026-10-17",
+      "reason": "Profile recovered from current SportMember platform linked by Membermojo migration notice. Old offers superseded. Official phone differs from undated provider listing, masked email not guessed. Founding year/junior eligibility unresolved."
     },
     {
       "slug": "mako-tc",
@@ -5984,9 +5994,10 @@
     {
       "slug": "crystal-peaks-runners",
       "url": "https://www.crystalpeaks-runners.co.uk",
-      "status": "unavailable-source",
-      "note": "Homepage returned502. No biography added.",
-      "checkedAt": "2026-10-14"
+      "status": "profile-added-with-qualified-gap",
+      "note": "Historical gap superseded by batch95 review; see reason.",
+      "checkedAt": "2026-10-17",
+      "reason": "Profile added from initially readable.com homepage, official MossValley history and centre foodbank report. Homepage later404; current sessions/venue unknown. Event cancellation2021historical; foodbank year absent. Corrected website mislabelledFacebook, rawrecord preserved."
     },
     {
       "slug": "tinahely-tri-club",
