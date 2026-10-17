@@ -1,51 +1,55 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch95",
+  "lastEditorialBatch": "2026-10-17-batch96",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–95 add10 biographies/7 associations; assembled1559/1737 (89.8%),786 associations,178 incomplete. No publication in batch95. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–96 add14 biographies/8 associations; assembled1563/1737 (90.0%),787 associations,174 incomplete. No publication in batch96. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "billericay-striders",
-    "southampton-triathlon-club",
-    "coalville-triathlon-club",
-    "brighton-and-hove-womens-running-club",
-    "crystal-peaks-runners"
+    "pendle-trail-running-club",
+    "regis-road-runners",
+    "fylde-coast-runners",
+    "tynedale-harriers-and-ac"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1559,
-    "notableMemberEntries": 786,
-    "clubsWithContacts": 1184,
-    "contactEntries": 1982,
-    "clubsWithEmail": 1142,
-    "clubsWithPhone": 183,
+    "extendedProfiles": 1563,
+    "notableMemberEntries": 787,
+    "clubsWithContacts": 1187,
+    "contactEntries": 1985,
+    "clubsWithEmail": 1145,
+    "clubsWithPhone": 184,
     "clubsWithSocials": 1207,
-    "socialLinks": 2543,
-    "websiteContactRecords": 1500
+    "socialLinks": 2545,
+    "websiteContactRecords": 1503
   },
   "batchChanges": {
-    "extendedProfilesAdded": 5,
-    "notableMemberEntriesAdded": 3,
-    "contactOrSocialRecordsChanged": 4,
-    "newWebsiteContactRecords": 4,
+    "extendedProfilesAdded": 4,
+    "notableMemberEntriesAdded": 1,
+    "contactOrSocialRecordsChanged": 3,
+    "newWebsiteContactRecords": 3,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 5,
-    "netSocialLinks": 7,
+    "netContactEntries": 3,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club/profile audits, targeted lint, TypeScript and safe build passed. Isolated built-page assertions and exact-head desktop/mobile/preview evidence recorded in PR761. Earlier head0d91a81 Club profiles39016344261 and full quality39016344329 passed. No publication or migration."
+    "status": "Catalogue/club/profile checks, targeted ESLint, TypeScript, whitespace and safe build passed. All four actual built pages passed biography, historical association, public contacts/socials, location/country, registration and search description/canonical/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Temporary harness removed. Exact-head CI/preview evidence in PR761. Previous head9cc7a47 Club profiles39020510474 and full quality39020510479 passed. No publication or migration."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
     "wharfedale-harriers",
-    "tynedale-harriers-and-ac",
+    "athletics-ni-st-annes-ac",
     "aspire-athletics",
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "BATCH96 CURRENT: modulecr seedv96, four profiles/one historical association. Assembled1563/1737 (90.0%),787 associations,174 incomplete. Published1549/779; draftPR761 adds14/8. Continue only after current head/writer check. Earlier notes below are historical.",
+    "Pendle, Regis and Fylde recovered from rendered official pages after successful search returned JavaScript shells. Pendle contact button opens mailto:pendletr@gmail.com; no email sent. Coldwell text mixes2025/2026, so no event date promised. Existing Facebook provenance retained.",
+    "Regis main start WestParkCafe replaces incomplete10/PO21 address with postcode unset; weekly starts vary. Official-linked Strava resolves to rotaryroadrunners but visibly identifies Regis. Fylde official domain redirects to fcrentry.com; current pages describe event organiser, not verified training/membership. Events office classified correspondence; directory adult-only status not applied to all races.",
+    "Tynedale biography uses organiser listing,EA2025facility report and son's NEMAA tribute to ChrisFenwick. No current timetable, founding year or outcome of Wentworth infield issue inferred. Own site unavailable. StAnnes track booking page read17Oct lists21Oct18:30–20:00, but booking is not public joining permission; ANI Clubmark article body empty, so no accreditation claim/profile added.",
+    "Wharfedale official pages502; EA CallumElson interview remains usable historical lead, not sufficient for complete profile alone. Bailieboro county2014handbook readable, town report403; do not conflate GAA. Meads/Hatton/Evesham/RunMiddlewich/SLGR/Twisted/Vector unavailable. Preserve NewRoss/Island review after23Oct. No unsafe retries or access-control changes.",
     "BATCH95 CURRENT: modulecq seedv95, five profiles/three historical associations; five public contacts, seven net socials, four new website-contact records. Assembled1559/1737,786 associations; published1549/779. Continue open draftPR761 branchcodex/club-profiles-batch94 after checking currenthead and other writers; no merge authorised here.",
     "Billericay and Southampton recovered through rendered official pages after search supplied empty text. Billericay1986, Southampton1987 origins. Southampton full-swim waiting lists versus morning-only availability checked17Oct; no fixed swim count or adult-only override. TimWilks memorial is former membership.",
     "Coalville Membermojo fresh page says moved to SportMember; earlier cached2026–27 membership offers not adopted. SportMember phone07519876076 preferred over undated ActiveTogether number; role email from provider listing retained. Masked platform email not guessed. Pool/ClockTower/leisure-centre sessions distinct from postal addresses.",
@@ -75,6 +79,10 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {"slug":"pendle-trail-running-club","status":"profile-added-with-qualified-gap","reason":"Rendered official pages read17Oct. Founding year and fixed timetable unknown; Coldwell copy says2025 beside2026date. Dressers not confirmed session start.","checkedAt":"2026-10-17"},
+    {"slug":"regis-road-runners","status":"profile-added-with-qualified-gap","reason":"Rendered site and official-linked Strava read. Variable weekly starts; no postcode guessed. Founding/notable history and current fee unresolved.","checkedAt":"2026-10-17"},
+    {"slug":"fylde-coast-runners","status":"profile-added-with-qualified-gap","reason":"Current redirected site describes independent event organiser. Separate club membership/training unresolved; public events office is not training. Founding/notables unknown.","checkedAt":"2026-10-17"},
+    {"slug":"tynedale-harriers-and-ac","status":"profile-added-with-qualified-gap","reason":"Organiser listing,EA2025facility report andNEMAA family tribute opened. Own site unavailable; current timetable, contacts, founding and infield outcome unknown.","checkedAt":"2026-10-17"},
     {
       "slug": "saffron-athletics-club",
       "status": "profile-added-with-qualified-gap",

@@ -17,6 +17,21 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 96: distinguish race participation, membership and dated facility evidence.
+  for (const slug of ["pendle-trail-running-club", "regis-road-runners", "fylde-coast-runners", "tynedale-harriers-and-ac"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  assert.equal(bySlug.get("regis-road-runners").city, "Bognor Regis");
+  assert.equal(bySlug.get("regis-road-runners").postcode, "");
+  assert.equal(bySlug.get("regis-road-runners").address_kind, "training");
+  assert.equal(bySlug.get("regis-road-runners").socials.find(s => s.platform === "Facebook").checked_at, "2026-10-13");
+  assert.ok(bySlug.get("regis-road-runners").socials.some(s => s.url === "https://www.strava.com/clubs/rotaryroadrunners"));
+  assert.equal(bySlug.get("pendle-trail-running-club").contacts[0].email, "pendletr@gmail.com");
+  assert.equal(bySlug.get("pendle-trail-running-club").socials[0].checked_at, "2026-10-13");
+  assert.equal(bySlug.get("fylde-coast-runners").website, "https://www.fcrentry.com/");
+  assert.equal(bySlug.get("fylde-coast-runners").address_kind, "correspondence");
+  assert.equal(bySlug.get("fylde-coast-runners").adult_only, true);
+  assert.match(clubProfiles["fylde-coast-runners"].biography.join(" "), /not a verified weekly training/);
+  assert.equal(bySlug.get("tynedale-harriers-and-ac").contacts.length, 0);
+  assert.match(clubProfiles["tynedale-harriers-and-ac"].notable_members[0].detail, /Historical association only/);
   // Batch 95: live capacity, platform migration and dated roles.
   assert.equal(clubProfiles["billericay-striders"].founded_year, 1986);
   assert.equal(bySlug.get("billericay-striders").address_kind, "directory");
