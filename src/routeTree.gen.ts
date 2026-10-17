@@ -30,6 +30,7 @@ import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
 import { Route as TestAccountRouteImport } from './routes/test-account'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminApprovalsRouteImport } from './routes/admin/approvals'
+import { Route as AdminAssistantChatsRouteImport } from './routes/admin/assistant-chats'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
 import { Route as AdminAthleteDirectoryRouteImport } from './routes/admin/athlete-directory'
 import { Route as AdminAthleteToolsRouteImport } from './routes/admin/athlete-tools'
@@ -202,6 +203,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const AdminApprovalsRoute = AdminApprovalsRouteImport.update({
   id: '/admin/approvals',
   path: '/admin/approvals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAssistantChatsRoute = AdminAssistantChatsRouteImport.update({
+  id: '/admin/assistant-chats',
+  path: '/admin/assistant-chats',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminAthleteAccountsRoute = AdminAthleteAccountsRouteImport.update({
@@ -575,6 +581,7 @@ export interface FileRoutesByFullPath {
   '/sportsrecs': typeof SportsrecsRoute
   '/test-account': typeof TestAccountRoute
   '/admin/approvals': typeof AdminApprovalsRoute
+  '/admin/assistant-chats': typeof AdminAssistantChatsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/athlete-tools': typeof AdminAthleteToolsRoute
@@ -666,6 +673,7 @@ export interface FileRoutesByTo {
   '/sportsrecs': typeof SportsrecsRoute
   '/test-account': typeof TestAccountRoute
   '/admin/approvals': typeof AdminApprovalsRoute
+  '/admin/assistant-chats': typeof AdminAssistantChatsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/athlete-tools': typeof AdminAthleteToolsRoute
@@ -758,6 +766,7 @@ export interface FileRoutesById {
   '/sportsrecs': typeof SportsrecsRoute
   '/test-account': typeof TestAccountRoute
   '/admin/approvals': typeof AdminApprovalsRoute
+  '/admin/assistant-chats': typeof AdminAssistantChatsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/athlete-tools': typeof AdminAthleteToolsRoute
@@ -851,6 +860,7 @@ export interface FileRouteTypes {
     | '/sportsrecs'
     | '/test-account'
     | '/admin/approvals'
+    | '/admin/assistant-chats'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
     | '/admin/athlete-tools'
@@ -942,6 +952,7 @@ export interface FileRouteTypes {
     | '/sportsrecs'
     | '/test-account'
     | '/admin/approvals'
+    | '/admin/assistant-chats'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
     | '/admin/athlete-tools'
@@ -1033,6 +1044,7 @@ export interface FileRouteTypes {
     | '/sportsrecs'
     | '/test-account'
     | '/admin/approvals'
+    | '/admin/assistant-chats'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
     | '/admin/athlete-tools'
@@ -1125,6 +1137,7 @@ export interface RootRouteChildren {
   SportsrecsRoute: typeof SportsrecsRoute
   TestAccountRoute: typeof TestAccountRoute
   AdminApprovalsRoute: typeof AdminApprovalsRoute
+  AdminAssistantChatsRoute: typeof AdminAssistantChatsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
   AdminAthleteDirectoryRoute: typeof AdminAthleteDirectoryRoute
   AdminAthleteToolsRoute: typeof AdminAthleteToolsRoute
@@ -1343,6 +1356,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/approvals'
       fullPath: '/admin/approvals'
       preLoaderRoute: typeof AdminApprovalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/assistant-chats': {
+      id: '/admin/assistant-chats'
+      path: '/admin/assistant-chats'
+      fullPath: '/admin/assistant-chats'
+      preLoaderRoute: typeof AdminAssistantChatsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/athlete-accounts': {
@@ -1845,6 +1865,7 @@ const rootRouteChildren: RootRouteChildren = {
   SportsrecsRoute: SportsrecsRoute,
   TestAccountRoute: TestAccountRoute,
   AdminApprovalsRoute: AdminApprovalsRoute,
+  AdminAssistantChatsRoute: AdminAssistantChatsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
   AdminAthleteDirectoryRoute: AdminAthleteDirectoryRoute,
   AdminAthleteToolsRoute: AdminAthleteToolsRoute,

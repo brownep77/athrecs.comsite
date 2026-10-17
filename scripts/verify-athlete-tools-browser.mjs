@@ -49,7 +49,7 @@ const upcoming = file(
 );
 const clubs = file(
   "clubs-api.js",
-  "export async function getClubScans(){return {runs:[],clubs:[],candidates:[],total:0,jobs:[],problems:[],counts:[],runId:null};}export async function startClubScan(){}export async function stepClubScan(){}export async function controlClubScan(){}export async function reviewClubResults(){}export async function publishClubResults(){}export async function recheckClubResults(){}export async function findClubAthletes(){return [];}export async function getClubReviewHistory(){return [];}",
+  "export async function getClubScans(){return {runs:[],clubs:[],candidates:[],total:0,jobs:[],problems:[],counts:[],runId:null};}export async function startClubScan(){}export async function stepClubScan(){}export async function controlClubScan(){}export async function reviewClubResults(){}export async function publishClubResults(){}export async function recheckClubResults(){}export async function findClubAthletes(){return [];}export async function getClubReviewHistory(){return [];}export async function getClubCollections(){return {plans:[],clubs:[]};}export async function saveClubCollection(){throw Error('No collection writes in this fixture');}export async function setupClubPilot(){throw Error('No collection writes in this fixture');}export async function checkClubCollection(){throw Error('No collection writes in this fixture');}",
 );
 const router = file(
   "router.tsx",
@@ -100,6 +100,10 @@ const aliases = {
   "@/lib/athrecs/claim-invitations-api": invitation,
   "@/lib/athrecs/athlete-contact-api": invitation,
   "@/lib/club-scanner/api": clubs,
+  "@/lib/athrecs/result-verification-api": file(
+    "verification-api.js",
+    "export async function getStaffResultVerificationInbox(){return [];}export async function getMyResultVerificationRequests(){return [];}export async function reviewResultVerification(){throw Error('No verification writes in this fixture');}export async function requestResultVerification(){throw Error('No verification writes in this fixture');}",
+  ),
   "@tanstack/react-router": router,
 };
 const server = await createServer({
@@ -111,7 +115,11 @@ const server = await createServer({
   define: { "import.meta.env.VITE_SITE_BRAND": JSON.stringify("athrecs") },
   resolve: {
     alias: [
-      ...Object.entries(aliases).map(([find, replacement]) => ({ find, replacement })),
+      ...Object.entries(aliases).map(([find, replacement]) => ({
+        // Match the package itself, never its /ssr/server subpaths.
+        find: find === "@tanstack/react-router" ? /^@tanstack\/react-router$/ : find,
+        replacement,
+      })),
       { find: "@", replacement: resolve("src") },
     ],
   },

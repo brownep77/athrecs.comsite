@@ -13,6 +13,7 @@ import {
   LockKeyhole,
   Handshake,
   LogOut,
+  MessageCircle,
   Network,
   RefreshCcw,
   ShieldCheck,
@@ -35,6 +36,12 @@ const staffSiteUrl =
 const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
+  {
+    to: "/admin/assistant-chats",
+    label: "Chat transcripts",
+    icon: MessageCircle,
+    match: (path: string) => path.startsWith("/admin/assistant-chats"),
+  },
   {
     to: "/admin/collection-stats",
     label: "Stats",
