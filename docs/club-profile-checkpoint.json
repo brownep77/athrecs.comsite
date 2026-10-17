@@ -1,41 +1,43 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch96",
+  "lastEditorialBatch": "2026-10-17-batch97",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–96 add14 biographies/8 associations; assembled1563/1737 (90.0%),787 associations,174 incomplete. No publication in batch96. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–97 add20 biographies/14 associations; assembled1569/1737 (90.3%),793 associations,168 incomplete. No publication in batch97. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "pendle-trail-running-club",
-    "regis-road-runners",
-    "fylde-coast-runners",
-    "tynedale-harriers-and-ac"
+    "goole-youth-ac",
+    "kirkby-ac",
+    "start2jog",
+    "hurricane-striders",
+    "hayes-and-harlington-road-runners",
+    "gipsy-hill-run-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1563,
-    "notableMemberEntries": 787,
-    "clubsWithContacts": 1187,
-    "contactEntries": 1985,
-    "clubsWithEmail": 1145,
+    "extendedProfiles": 1569,
+    "notableMemberEntries": 793,
+    "clubsWithContacts": 1189,
+    "contactEntries": 1987,
+    "clubsWithEmail": 1147,
     "clubsWithPhone": 184,
     "clubsWithSocials": 1207,
-    "socialLinks": 2545,
-    "websiteContactRecords": 1503
+    "socialLinks": 2546,
+    "websiteContactRecords": 1507
   },
   "batchChanges": {
-    "extendedProfilesAdded": 4,
-    "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 3,
-    "newWebsiteContactRecords": 3,
+    "extendedProfilesAdded": 6,
+    "notableMemberEntriesAdded": 6,
+    "contactOrSocialRecordsChanged": 4,
+    "newWebsiteContactRecords": 4,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 3,
-    "netSocialLinks": 2,
+    "netContactEntries": 2,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club/profile checks, targeted ESLint, TypeScript, whitespace and safe build passed. All four actual built pages passed biography, historical association, public contacts/socials, location/country, registration and search description/canonical/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Temporary harness removed. Exact-head CI/preview evidence in PR761. Previous head9cc7a47 Club profiles39020510474 and full quality39020510479 passed. No publication or migration."
+    "status": "Catalogue/club/profile checks, targeted ESLint, TypeScript, whitespace and safe build passed. All six actual built pages passed full biography, historical associations, public contacts/socials, location/country, registration and search description/canonical/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Temporary harness removed. Exact-head Club profiles desktop/mobile workflow and Vercel preview evidence recorded in PR761 after commit. Previous head8e63197 Club profiles39023976454 and full quality39023976429 passed. No publication or migration."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
@@ -45,6 +47,10 @@
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "BATCH97 CURRENT: modulecs seedv97; six biographies/six historical associations, two role emails and one Instagram link. Assembled1569/1737 (90.3%),793 associations,168 incomplete. Published1549/779; draftPR761 adds20/14. Parent8e63197; main0f8bc3d inspected. Check current head/writers before continuing. Earlier notes below are historical.",
+    "Goole venue recovered from EA2018/2026 and TownDeal project: use Victoria Pleasure Grounds, no guessed postcode or completed-pavilion claim. Kirkby county link actually leads to TeamIsabella; keep website unset and2014origin excluded. EA2022 selections/2023coaching establish three dated associations, not current membership or results.",
+    "Start2Jog official website/email recovered;2018/2022awards support history, not current roles or junior capacity. Hurricane ClubSpark running page/contact replaces unavailable old domain;2018affiliation not founding, per-booking starts differ from directory BoulthamPark/Birchwoodfooter. Hayes official email/community-centre meeting confirmed, undated Wednesday timetable and2022C25k case study qualified.",
+    "GipsyHill venue listing marked event taken place: retain historical format, not guaranteed current schedule/free refreshments. Instagram link sourced from venue publisher; destination unavailable, existingFacebook provenance retained. Brewery commercial contacts excluded. WestonAC site shows account suspended, not proof club closed. LiverpoolPembrokeSefton crypto/casino contamination persists; existing suppression retained. Other failed pages yielded no snippet-only profiles. Preserve23October NewRoss/Island review and existing next candidates.",
     "BATCH96 CURRENT: modulecr seedv96, four profiles/one historical association. Assembled1563/1737 (90.0%),787 associations,174 incomplete. Published1549/779; draftPR761 adds14/8. Continue only after current head/writer check. Earlier notes below are historical.",
     "Pendle, Regis and Fylde recovered from rendered official pages after successful search returned JavaScript shells. Pendle contact button opens mailto:pendletr@gmail.com; no email sent. Coldwell text mixes2025/2026, so no event date promised. Existing Facebook provenance retained.",
     "Regis main start WestParkCafe replaces incomplete10/PO21 address with postcode unset; weekly starts vary. Official-linked Strava resolves to rotaryroadrunners but visibly identifies Regis. Fylde official domain redirects to fcrentry.com; current pages describe event organiser, not verified training/membership. Events office classified correspondence; directory adult-only status not applied to all races.",
@@ -79,6 +85,10 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {"slug":"goole-youth-ac","status":"profile-added-with-qualified-gap","reason":"EA2018/2026 and TownDeal project read17Oct; own website unavailable. Founding, current joining/timetable and direct club contacts unresolved. Venue staff and2008flyer phone excluded; pavilion completion not assumed.","checkedAt":"2026-10-17"},
+    {"slug":"start2jog","status":"profile-added-with-qualified-gap","reason":"Official site/contact andEA2018/2022award accounts read. Founding/current junior intake unresolved; award roles historical. No phone/social inferred.","checkedAt":"2026-10-17"},
+    {"slug":"hayes-and-harlington-road-runners","status":"profile-added-with-qualified-gap","reason":"Official site andEA funding case study read. Undated meeting time and2022C25k programme qualified; founding/notables unknown. Role email used, historical secretary names not current contacts.","checkedAt":"2026-10-17"},
+    {"slug":"gipsy-hill-run-club","status":"profile-added-with-qualified-gap","reason":"Venue-published listing marked past event, plus official brewery/taproom distinction. Current timetable, founding and direct club contacts unknown. Publisher-linkedInstagram unreadable; no ownership verification.","checkedAt":"2026-10-17"},
     {"slug":"pendle-trail-running-club","status":"profile-added-with-qualified-gap","reason":"Rendered official pages read17Oct. Founding year and fixed timetable unknown; Coldwell copy says2025 beside2026date. Dressers not confirmed session start.","checkedAt":"2026-10-17"},
     {"slug":"regis-road-runners","status":"profile-added-with-qualified-gap","reason":"Rendered site and official-linked Strava read. Variable weekly starts; no postcode guessed. Founding/notable history and current fee unresolved.","checkedAt":"2026-10-17"},
     {"slug":"fylde-coast-runners","status":"profile-added-with-qualified-gap","reason":"Current redirected site describes independent event organiser. Separate club membership/training unresolved; public events office is not training. Founding/notables unknown.","checkedAt":"2026-10-17"},
@@ -3221,8 +3231,9 @@
     {
       "slug": "kirkby-ac",
       "url": "https://merseysidecountyaa.org.uk/member-clubs-associations/",
-      "status": "deferred-thin-source",
-      "reason": "County directory lists track/road but contact tba. Distinct from Kirkby Milers; not merged or assigned Milers contacts."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "EA2022selection and2023coaching accounts now support biography. County contact still tba; its website link leads to different TeamIsabella, not adopted. Founding/current joining unknown. Distinct from KirkbyMilers.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "athletics-ireland-artane-beaumont-running-club-a-c",
@@ -3492,8 +3503,9 @@
     {
       "slug": "hurricane-striders",
       "url": "https://www.hurricanesports.co.uk",
-      "status": "deferred-thin-source",
-      "reason": "Maintenance/password page. No login attempted or history inferred."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club-hostedClubSpark/contact andEA2018RunAndTalk account recovered. Old domain unavailable, no login attempted.2018affiliation not founding; starts vary by booking. Multisport timetable and direct email/phone unresolved.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "tuna-tc",
