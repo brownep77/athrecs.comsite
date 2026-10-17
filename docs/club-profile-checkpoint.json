@@ -5,7 +5,7 @@
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–104 add44 biographies/42 associations; assembled1593/1737 (91.7%),821 associations,144 incomplete. No publication in batch104. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline: 1,593 biographies and 821 sourced associations from PR761, verified on 17 October 2026. All 44 biographies and both contact-only updates from batches94–104 are live; 0 unpublished biographies in PR761. 144 of the 1,737-club research cohort remain incomplete. Public directory includes clubs outside this cohort; actual Google indexing is not confirmed.",
   "completedProfileSlugs": [
     "gordonian-runners",
     "hartlepool-burn-road-harriers"
@@ -42,6 +42,8 @@
     "horsham-run-fit"
   ],
   "resumeInstructions": [
+    "RELEASE761 CURRENT: PR761 source d17229fafe36d2bc41bc7e3242285ea4bceff4fc merged as f2dedb16c823cc96c583231bcf556b8cf5492239; production dpl_9BrwJh7WivDGr7GKe2aZxmUZMubK READY. Published baseline is 1593 biographies/821 associations. All46 changed public pages and sitemap inclusion verified. PR761 has no unpublished biographies. Older batch publication counts below are historical and superseded by this release. Continue from current main on a fresh draft branch/PR after checking active writers; preserve all source gaps, nextCandidateSlugs and 23October TI follow-ups. 144 cohort biographies remain incomplete.",
+    "Minor presentation follow-up from production browser review: the shared area-only location caption says the exact town is not published even where a source-supported town is displayed, including Gordonian West End. Retain existing location_precision and source data. Suggested copy: Local area confirmed; check current training venues with the club. This does not block published biographies or warrant claiming a verified street/postcode. Address in a separate appropriate UI change.",
     "BATCH104 CURRENT: modulecz seedv104; two biographies, no notable associations; three contact/social records add three emails and two social links. Assembled1593/1737 (91.7%),821 associations,144 incomplete. Published1549/779; draftPR761 adds44/42. Parentd131a9ff and mainf437487 inspected; draft head unchanged immediately before edits, no competing writer observed. Older no-profile notes are superseded for Gordonian/Hartlepool only.",
     "Gordonian: Strava131963 club introduction gives WestEnd/school-linked community; EA1October2026PDF p33 identifies Surrey and XC/road/hill-fell/trail. City/county corrected, inherited AngelRoad/Norwich postcode removed from display but preserved in underlying audit provenance. Area-only, no school training address inferred. Strava and its exact Facebook880693328629504 linked; no email/phone/founding/committee tenure/notables. Gordonian alumni body's2019dissolution is NOT running-club closure. Spring2022newsletter remained unavailable; no need to repeat failed PDF fetch without new access evidence.",
     "HartlepoolBurnRoad: provider-written HartlepoolNow council listing read17October, raw public encoded emails checked: membership@hartlepoolburnroad.co.uk and chair@hartlepoolburnroad.co.uk (junior route). Undated two-taster joining guidance; historic weekday venues and seasonalSummerhill qualified. MowbrayRoad remains directory, not training. Ownsite502/Facebooktemporaryblock; no founding/phone/notables/current fixed timetable. Council/supplier footer contacts excluded. No message/form submitted.",
@@ -6773,38 +6775,42 @@
     "Batch34:19 new profiles across16 English clubs, Mallow and Ennis in Ireland, and Ormeau in Northern Ireland. Seven historical connections;17 website-contact records changed(9new),14 net contacts and13 social links. Hastings was already complete and excluded. No full-directory manual review or athlete identity claims.",
     "Batch35:20 profiles across17 English clubs, White Rock and Refail in Wales, and Tinahely in Ireland. Nine historical connections;20 contact/social records changed(12new),18 net contacts and16 social links. Coverage685/1,737(39.4%),289notable entries. This is a bounded editorial batch, not a full-directory manual review."
   ],
-  "previousPullRequest": 749,
+  "previousPullRequest": 756,
   "productionAuthorization": {
-    "date": "2026-10-14",
-    "instruction": "can you publish all and continue please",
-    "releasePullRequest": 680
+    "date": "2026-10-17",
+    "instruction": "Publish all please",
+    "releasePullRequest": 761
   },
   "release": {
-    "pullRequest": 756,
-    "sourceHead": "154eb2dc473bebee9bbea42b6c7ca9c7174d5f4c",
-    "mergeCommit": "2992966899a9bcf62a0952435b22c909e3f74c44",
-    "deployment": "dpl_8wAMLGvEQHnPFK7Y2KpWEu7c4jhs",
+    "pullRequest": 761,
+    "sourceHead": "d17229fafe36d2bc41bc7e3242285ea4bceff4fc",
+    "mergeCommit": "f2dedb16c823cc96c583231bcf556b8cf5492239",
+    "deployment": "dpl_9BrwJh7WivDGr7GKe2aZxmUZMubK",
     "status": "READY",
-    "liveBiographies": 1549,
-    "liveAssociations": 779,
+    "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
+    "aliases": [
+      "www.athrecs.com",
+      "athrecs.com"
+    ],
+    "aliasError": null,
+    "liveBiographies": 1593,
+    "liveAssociations": 821,
     "reviewedAt": "2026-10-17",
+    "verifiedAt": "2026-10-17T19:05:35.283Z",
     "unpublishedBiographiesInRelease": 0,
-    "remainingUnresearchedCohortBiographies": 188,
-    "verification": "All 258 new production pages returned HTTP200 and matched full biographies, sourced associations, summary/contact/location notes, available contacts/socials/address, flags, registration href, title/description/canonical/robots and SportsOrganization JSON-LD. All 258 URLs present in the public clubs sitemap. Automated deployment/content verification plus representative source comparison, not a fresh manual source review of every club.",
-    "qualityGateRun": 38994314546,
-    "clubProfilesRun": 38994314566,
+    "remainingUnresearchedCohortBiographies": 144,
+    "verification": "All46 changed production pages (44 new biographies and Run Middlewich/Sunlight contact-only updates) returned HTTP200 and passed1398 assertions for full visible biographies, associations, summary/contact/location notes, contacts/socials/sources, address/map/location values, country indicators, registration links, title/description/canonical/robots and exact SportsOrganization JSON-LD. All46 URLs are in the public clubs sitemap; robots allows club crawling. This is automated deployment/content verification and independent diff review, not a fresh manual source audit of every club.",
+    "qualityGateRun": 39057219732,
+    "clubProfilesRun": 39057219734,
     "hostedBrowserVerification": {
-      "pullRequest": 760,
-      "head": "3ecb4247711324e5e2f2158bf3a3b398eee8e1e2",
-      "run": 39014348572,
-      "status": "success",
-      "artifact": 12093978199,
-      "sha256": "d5730af0b7ee8b5477e7662824f59bed2e106bd901b60a996eeecac4e2b5ceab",
-      "scope": "Actual production Wakefield, Killamarsh, Saffron, Bad Boy and Framlingham pages at 1280x1000 and 390x844; registration navigation waits for the rendered signed-out Register your club gate. Screenshots inspected. No registration submission or sign-in. QA script is isolated on a temporary verification branch, not production."
+      "scope": "Read-only actual public Gordonian page at desktop size: readable layout, corrected West End/Surrey biography/location, England indicator, source-attributed social links and matching metadata/SportsOrganization. Public club directory search returned one Gordonian result at West End/Surrey. Register this club opened the expected sign-in and authority explanation; no sign-in or registration submitted.",
+      "knownLimitation": "Generic area-only caption says the exact town is not published despite source-supported West End. Minor presentation follow-up; source data precision retained."
     },
-    "searchQualification": "Public pages are indexable, canonical and included in the sitemap; Google indexing or ranking is not confirmed. No Search Console validation or indexing request submitted.",
-    "writerQualification": "PR756 head/body/discussion and open PRs checked. Batch94 lease expired 17 October 03:40 UTC; no newer writer lease/biography PR or head update observed. Release merged with expected-head protection; research branch, source gaps and candidate queue were not edited.",
-    "authorization": "User expressly requested normal merge and production deployment in this task; no further approval or access change required."
+    "searchQualification": "Public pages are indexable, canonical and included in the sitemap; actual Google indexing or ranking is not confirmed. No Search Console validation or indexing request submitted.",
+    "sourceReview": "No new embedded-postcode/address mismatch. Unsafe website suppressions for Liverpool Harriers, Liverpool Pembroke & Sefton, Pudsey & Bramley and Saffron preserved unchanged. Known source gaps, dated schedules and provisional TI standings remain qualified.",
+    "knownFollowUp": "Generic area-only location caption says exact town is not published even for source-supported named towns such as Gordonian West End. Suggested UI wording: Local area confirmed; check current training venues with the club. Do not change Gordonian precision to imply a verified street/postcode.",
+    "writerQualification": "Root agent reserved PR761 for release through19:30UTC and merged with expected-head protection; normal merge preserves unrelated current-main changes.",
+    "authorization": "User explicitly requested Publish all please on17October2026; normal merge/deployment authorised. No authentication bypass or access-control change used."
   },
   "releaseHistory": [
     {
@@ -6817,6 +6823,33 @@
       "reviewedAt": "2026-10-16",
       "previewQualification": "Protected preview reached Vercel sign-in. Exact-head CI and local page evidence passed; public production inspection follows release.",
       "verification": "All291 newly published public pages returned200 and passed biography, associations, contacts/socials, address/location, flags, registration and title/description/canonical/JSON-LD assertions after deployment READY. Thurrock public desktop layout inspected."
+    },
+    {
+      "pullRequest": 756,
+      "sourceHead": "154eb2dc473bebee9bbea42b6c7ca9c7174d5f4c",
+      "mergeCommit": "2992966899a9bcf62a0952435b22c909e3f74c44",
+      "deployment": "dpl_8wAMLGvEQHnPFK7Y2KpWEu7c4jhs",
+      "status": "READY",
+      "liveBiographies": 1549,
+      "liveAssociations": 779,
+      "reviewedAt": "2026-10-17",
+      "unpublishedBiographiesInRelease": 0,
+      "remainingUnresearchedCohortBiographies": 188,
+      "verification": "All 258 new production pages returned HTTP200 and matched full biographies, sourced associations, summary/contact/location notes, available contacts/socials/address, flags, registration href, title/description/canonical/robots and SportsOrganization JSON-LD. All 258 URLs present in the public clubs sitemap. Automated deployment/content verification plus representative source comparison, not a fresh manual source review of every club.",
+      "qualityGateRun": 38994314546,
+      "clubProfilesRun": 38994314566,
+      "hostedBrowserVerification": {
+        "pullRequest": 760,
+        "head": "3ecb4247711324e5e2f2158bf3a3b398eee8e1e2",
+        "run": 39014348572,
+        "status": "success",
+        "artifact": 12093978199,
+        "sha256": "d5730af0b7ee8b5477e7662824f59bed2e106bd901b60a996eeecac4e2b5ceab",
+        "scope": "Actual production Wakefield, Killamarsh, Saffron, Bad Boy and Framlingham pages at 1280x1000 and 390x844; registration navigation waits for the rendered signed-out Register your club gate. Screenshots inspected. No registration submission or sign-in. QA script is isolated on a temporary verification branch, not production."
+      },
+      "searchQualification": "Public pages are indexable, canonical and included in the sitemap; Google indexing or ranking is not confirmed. No Search Console validation or indexing request submitted.",
+      "writerQualification": "PR756 head/body/discussion and open PRs checked. Batch94 lease expired 17 October 03:40 UTC; no newer writer lease/biography PR or head update observed. Release merged with expected-head protection; research branch, source gaps and candidate queue were not edited.",
+      "authorization": "User expressly requested normal merge and production deployment in this task; no further approval or access change required."
     }
   ]
 }

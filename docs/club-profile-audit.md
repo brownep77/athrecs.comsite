@@ -9,7 +9,21 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 - Website research contributes contact pages or contact/social details for 1,531 listings. A retrieved website is not a claim that every field on that site was manually verified.
 - The assembled catalogue has contact entries for 1,204 clubs: 1,162 publish an email address and 187 a telephone number. There are 2,003 contact entries in total, including named directory contacts with no direct email or telephone.
 - 1,214 clubs have social links, with 2,563 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website, venue publisher or governing-body directory; this does not establish the present ownership of a social account.
-- 1,593 clubs have extended, individually written profiles (91.7% of the research cohort), with 821 sourced associations; 144 remain incomplete. Last published cohort baseline is 1,549 biographies/779 associations from PR756. Draft PR761 batches94–104 add forty-four biographies/forty-two associations, not live. The growing public directory also contains clubs outside this 1,737-club cohort.
+- 1,593 clubs have published, individually written profiles (91.7% of the research cohort), with 821 sourced associations; 144 remain incomplete. PR761 batches94–104 published forty-four biographies/forty-two associations and two additional contact-only updates on 17 October 2026. No unpublished biographies remain in PR761. The growing public directory also contains clubs outside this 1,737-club cohort.
+
+## Production release PR761 — 17 October 2026
+
+Source head `d17229fafe36d2bc41bc7e3242285ea4bceff4fc` passed the exact-head Club profiles and full quality-gate workflows. Normal merge `f2dedb16c823cc96c583231bcf556b8cf5492239` preserved current main's unrelated changes. Production `dpl_9BrwJh7WivDGr7GKe2aZxmUZMubK` is READY for the AthRecs project and public domains.
+
+Published cohort totals are **1,593 biographies and 821 sourced associations**: 44 new biographies, 42 new associations, 30 net contacts and 30 net social links since PR756. **0 unpublished biographies from PR761; 144 incomplete biographies** remain in the 1,737-club research cohort. All46 changed pages—44 biographies plus Run Middlewich and Sunlight contact-only updates—returned HTTP200 and passed full content/contact/location/registration/search metadata, indexability and SportsOrganization assertions. All46 URLs were found in the public club sitemap. This verifies technical discoverability, not actual Google indexing or ranking.
+
+Independent catalogue/source-diff review found no postcode/address conflicts or unsafe-domain suppression regressions. Liverpool Harriers, Liverpool Pembroke & Sefton, Pudsey & Bramley and Saffron retain blank unsafe website fields. Gordonian's obsolete Norwich address/postcode is no longer displayed as a club base. Dated histories, current-session uncertainty and provisional Triathlon Ireland standings remain qualified. This is automated deployment/content verification with independent diff review, not a fresh manual review of every source.
+
+Hosted browser verification: Read-only actual public Gordonian page at desktop size: readable layout, corrected West End/Surrey biography/location, England indicator, source-attributed social links and matching metadata/SportsOrganization. Public club directory search returned one Gordonian result at West End/Surrey. Register this club opened the expected sign-in and authority explanation; no sign-in or registration submitted.
+
+Minor presentation follow-up: the shared area-only caption says the exact town is not published even for a source-supported town such as Gordonian's West End. The location data and precision remain unchanged; a separate copy correction should explain that current training venues need confirmation. This does not block the verified biography release.
+
+The user expressly authorised publication with “Publish all please”. No access controls, athlete identities/results, privacy or registration approvals changed. All source gaps, candidate queues and 23October review notes are preserved. Continue future research from current main on a new draft branch/PR; older draft/live counts below are historical.
 
 ## Batch 104 — 17 October 2026 UTC
 
