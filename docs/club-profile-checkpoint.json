@@ -1,42 +1,40 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch100",
+  "lastEditorialBatch": "2026-10-17-batch101",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–100 add33 biographies/33 associations; assembled1582/1737 (91.1%),812 associations,155 incomplete. No publication in batch100. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–101 add36 biographies/36 associations; assembled1585/1737 (91.2%),815 associations,152 incomplete. No publication in batch101. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "kids-run-redditch",
-    "south-cambridge-striders",
-    "freck-and-warton-running-club",
-    "carlisle-tri-club",
-    "ventoux-triathlon-club"
+    "runfit-chorley",
+    "whitby-running-club",
+    "collins-cycle-centre-triathlon-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1582,
-    "notableMemberEntries": 812,
-    "clubsWithContacts": 1195,
-    "contactEntries": 1993,
-    "clubsWithEmail": 1153,
+    "extendedProfiles": 1585,
+    "notableMemberEntries": 815,
+    "clubsWithContacts": 1196,
+    "contactEntries": 1994,
+    "clubsWithEmail": 1154,
     "clubsWithPhone": 186,
-    "clubsWithSocials": 1211,
-    "socialLinks": 2556,
-    "websiteContactRecords": 1519
+    "clubsWithSocials": 1212,
+    "socialLinks": 2558,
+    "websiteContactRecords": 1522
   },
   "batchChanges": {
-    "extendedProfilesAdded": 5,
-    "notableMemberEntriesAdded": 4,
-    "contactOrSocialRecordsChanged": 4,
-    "newWebsiteContactRecords": 4,
+    "extendedProfilesAdded": 3,
+    "notableMemberEntriesAdded": 3,
+    "contactOrSocialRecordsChanged": 3,
+    "newWebsiteContactRecords": 3,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 2,
-    "netSocialLinks": 6,
+    "netContactEntries": 1,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript and safe build passed. Ventoux old contact-date assertion updated against freshly opened TI directory; social platform label corrected to schema X. All five actual built pages passed full biographies, associations, contacts/socials, country/city, registration and description/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Canonical metadata covered by profile regressions. Temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous heade21fb4f Club profiles39035625587 and quality39035625591 passed. No external migration/publication."
+    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed full biographies, associations, contact/social links, city/country, exact registration href and description/SportsOrganization assertions using isolated in-memory PGLite with external fetch disabled. Temporary harness expectation corrected to existing /clubs/register?club= route; application links unchanged. Canonical metadata covered by profile regressions; temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous head332fb004 Club profiles39039793952 and quality39039793915 passed. No external migration/publication."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
@@ -46,6 +44,11 @@
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "BATCH101 CURRENT: modulecw seedv101; three biographies/three associations. Assembled1585/1737 (91.2%),815 associations,152 incomplete. Published1549/779; draftPR761 adds36/36. Parent332fb004 and main0f8bc3d inspected; remote draft head rechecked before edits. No competing writer observed. Earlier notes and source-gap entries are historical where superseded.",
+    "RunFitChorley official ClubSpark recovers NeilSimpson founder and supportive running; EA16Nov2021 NorthWest RunTogether award. Working home/contact form replaces oldnewsURL; no email/phone/social/founding year/current timetable. BuckshawParkway remains directory, SavilleStreet contact postal not training. Empty session list is not closure evidence.",
+    "Whitby official site recovers2019 MattHewison origin, RuthPrice2020qualification/2021leading, groups/Spond and2026C25k started1September. Joining email confirmed, homepage placeholder and conflicting kit emails excluded. Council-published RunWhitbyFacebook/WhitbyRunClubX links added with publisher attribution; destinations blocked. Meadowfields remains directory; LeisureCentre is autumncourse start, WhiteLeysRoad oldercouncil address not adopted. Conflicting office/timetable wording not asserted.",
+    "CollinsCycleCentre Thurles TI directory corroborates collinscyclecentretc@gmail.com and nojunior listing. DivisionFour2026league inclusion is participation only; addto23October NewRoss/Island/HellYeah/Ventoux follow-up. Website field is TIhomepage, not dedicatedclub; no founding/notables/phone/trainingvenue invented. Facebooksearchlead collinscyclecentretc blocked, no primarylinked URL adopted.",
+    "Next recovery leads: Clanfield sponsor https://www.tj-waste.co.uk/corporate-social-responsibility/ read17Oct describes ClanfieldChallenge2016creation with club,SerenityDigital,ClanfieldOnline and local grants;2016notcluborigin. Clubwebsite failed and racehomepage404; require readable training/joining primary. Redcar homepage/about-us/join timedout; MelsMilers homepage timedout/about-2 returned502.7Hills RunTogether/ClubSpark inaccessible. No snippet-only biographies or race-name identity inferences; earlier nextcandidate queue retained.",
     "BATCH100 CURRENT: modulecv seedv100; five biographies/four associations. Assembled1582/1737 (91.1%),812 associations,155 incomplete. Published1549/779; draftPR761 adds33/33. Parente21fb4f and main0f8bc3d inspected; remote head rechecked before edits. No competing writer observed. Earlier notes and duplicate source-gap entries below are historical where superseded by this batch.",
     "KidsRunRedditch recovered from Buddle founder account andEA2024award:2023origin, JasonFurness, AbbeyStadium training. CanonicalFacebookgroup replaces opaque sharelink; YouTube published byBuddle; destinations blocked/throttled, no ownership claim. SouthCambridge recovered ClubSpark/Membermojo:January2024origin, three tasters, role email, seasonal school/college starts. OldApril2026booking unavailable; no guaranteed session or Instagram URL inferred.",
     "FreckWarton officialfwrc.co.uk recovered:2017C25k predecessor versus2018club/EAaffiliation, ChrisAdams2019chair and RuthGiliRoss undatedfounder/secretary/leader/captain qualified. LightningClub Warton is training, Preston postal context; roleemail and officialRunTogether socials added, oldFacebookpage preserved. 2024–25fees not current. Carlisle2009origin fromfirst-person organiserlisting;2024RaceBest10k not currentevent/trainingbase. JoshWaite volunteerrole fromhis organisation, currentoffice unconfirmed; oldrace andwellbeingbusinesscontacts excluded.",
@@ -97,6 +100,13 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {"slug":"runfit-chorley","status":"profile-added-with-qualified-gap","reason":"ClubSpark introduction/contact and EA2021award recover founder/supportive programme. No founding year/public email/phone/social URL/current timetable. Buckshaw and SavilleStreet addresses are not newly confirmed training starts.","checkedAt":"2026-10-17"},
+    {"slug":"whitby-running-club","status":"profile-added-with-qualified-gap","reason":"Official history/joining/FAQ/C25k recover2019origin, two associations, enquiryemail and programme. Council-published social links retained with attribution; destinations blocked. No phone; placeholder/kit/council contacts excluded. Autumn2026course underway; directory and training locations kept distinct.","checkedAt":"2026-10-17"},
+    {"slug":"collins-cycle-centre-triathlon-club","status":"profile-added-with-qualified-gap","reason":"TI currentdirectory and2026league recover Thurles biography/email; finalplacing awaits23October. No dedicated website/founding/notables/venue/phone established. Facebookpage blocked; social searchsnippet not adopted.","checkedAt":"2026-10-17"},
+    {"slug":"clanfield-joggers","status":"primary-event-lead-needs-club-context","reason":"TJWaste first-party CSR page read17Oct confirms collaboration on ClanfieldChallenge since2016 and local communitygrants; that is eventorigin notclubfounding. Ownsite fetch failed; clanfieldchallenge.co.uk404; parishcouncilpersonpage403. Need readable clubtraining/joining history before completebiography; suppliercontacts excluded.","checkedAt":"2026-10-17"},
+    {"slug":"redcar-running-club","status":"source-unavailable","reason":"Ownhomepage, about-us andjoin timedout17Oct. Search1986origin andfees not adopted without readable page.","checkedAt":"2026-10-17"},
+    {"slug":"mels-milers-jogging-club","status":"source-unavailable","reason":"Ownhomepage timedout; about-2 history returned502. Search2000origin/MelanieMarlow lead not adopted as openedprimary evidence.","checkedAt":"2026-10-17"},
+    {"slug":"7-hills-harriers","status":"source-unavailable","reason":"RunTogether and ClubSpark pages unavailable. Facebook and ECCAsecretary searchleads insufficient without openedclub narrative; no race-name results used for identity inference.","checkedAt":"2026-10-17"},
     {"slug":"kids-run-redditch","status":"profile-added-with-qualified-gap","reason":"Buddle and EA sources recover biography/origin/founder. Ownsite403; no public email/phone/current joining availability. Socials attributed to Buddle; destinations inaccessible.","checkedAt":"2026-10-17"},
     {"slug":"south-cambridge-striders","status":"profile-added-with-qualified-gap","reason":"ClubSpark/Membermojo recover biography/origin/email/joining. Standalone403. Seasonal venues vary; old April booking not current. No phone, exact Instagram or notable people established.","checkedAt":"2026-10-17"},
     {"slug":"freck-and-warton-running-club","status":"profile-added-with-qualified-gap","reason":"Official website and RunTogether recover biography/origin/email/socials/venue. No phone; older fees and undated officer accounts not presented as current.","checkedAt":"2026-10-17"},

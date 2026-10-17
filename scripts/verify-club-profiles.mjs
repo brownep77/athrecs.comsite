@@ -17,6 +17,23 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 101: real enquiry routes, dated origins and no invented training base.
+  assert.equal(clubProfiles["whitby-running-club"].founded_year, 2019);
+  assert.equal(bySlug.get("whitby-running-club").website, "https://www.whitbyrunningclub.co.uk/");
+  assert.equal(bySlug.get("whitby-running-club").contacts[0].email, "whitbyrunningclub@gmail.com");
+  assert.equal(bySlug.get("whitby-running-club").socials.length, 2);
+  assert.ok(!bySlug.get("whitby-running-club").contacts.some(c => /example|merch|northyorks/.test(c.email ?? "")));
+  assert.match(clubProfiles["whitby-running-club"].biography.join(" "), /already under way/);
+  assert.equal(bySlug.get("runfit-chorley").contact_url, "https://clubspark.englandathletics.org/RunFitChorley/Contact");
+  assert.equal(clubProfiles["runfit-chorley"].founded_year, undefined);
+  assert.equal(bySlug.get("runfit-chorley").address_kind, "directory");
+  assert.equal(bySlug.get("whitby-running-club").address_kind, "directory");
+  assert.equal(bySlug.get("collins-cycle-centre-triathlon-club").city, "Thurles");
+  assert.equal(bySlug.get("collins-cycle-centre-triathlon-club").country, "Ireland");
+  assert.equal(bySlug.get("collins-cycle-centre-triathlon-club").contacts.length, 1);
+  assert.equal(bySlug.get("collins-cycle-centre-triathlon-club").contacts[0].checked_at, "2026-10-17");
+  assert.equal(clubProfiles["collins-cycle-centre-triathlon-club"].founded_year, undefined);
+  assert.match(clubProfiles["collins-cycle-centre-triathlon-club"].biography.join(" "), /not a final placing/);
   // Batch 100: volunteer origins, seasonal venues and distinct club identities.
   assert.equal(clubProfiles["kids-run-redditch"].founded_year, 2023);
   assert.equal(bySlug.get("kids-run-redditch").address_kind, "training");
