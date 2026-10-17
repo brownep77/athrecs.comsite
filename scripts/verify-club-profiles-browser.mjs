@@ -6,6 +6,43 @@ import react from "@vitejs/plugin-react";
 import tailwind from "@tailwindcss/vite";
 import { chromium } from "playwright";
 
+
+// Read-only production verification for the published PR756 release.
+// This temporary QA branch does not change application or research data.
+mkdirSync(resolve("artifacts"), { recursive: true });
+const liveBrowser = await chromium.launch({ headless: true, args: ["--no-sandbox"] });
+try {
+  for (const viewport of [{width:1280,height:1000},{width:390,height:844}]) {
+    const livePage = await liveBrowser.newPage({viewport});
+    const mobile = viewport.width === 390;
+    for (const slug of ["wakefield-triathlon-club","killamarsh-kestrels","saffron-athletics-club","bad-boy-running-club","framlingham-flyers"]) {
+      const response = await livePage.goto("https://www.athrecs.com/clubs/"+slug, {waitUntil:"networkidle"});
+      assert.equal(response.status(), 200);
+      const decline = livePage.getByRole("button",{name:"No thanks",exact:true});
+      if (await decline.isVisible()) await decline.click();
+      await livePage.getByRole("heading",{name:/^About /}).waitFor();
+      assert.equal(await livePage.getByRole("link",{name:"Register this club",exact:true}).getAttribute("href"),"/clubs/register?club="+slug);
+      const meta = await livePage.locator('meta[name="robots"]').getAttribute("content");
+      assert.ok(meta.includes("index, follow"));
+      assert.equal(await livePage.locator('link[rel="canonical"]').getAttribute("href"),"https://www.athrecs.com/clubs/"+slug);
+      assert.ok(await livePage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),"Production club fits viewport: "+slug);
+      await livePage.getByRole("heading",{name:"Club contact details",exact:true}).waitFor();
+      await livePage.getByRole("heading",{name:"Location and club details",exact:true}).waitFor();
+      if(slug==="bad-boy-running-club") await livePage.getByRole("img",{name:"Global club",exact:true}).waitFor();
+      else await livePage.getByRole("img",{name:"England",exact:true}).waitFor();
+      await livePage.screenshot({path:resolve("artifacts/club-profile-live-"+slug+"-"+(mobile?"mobile":"desktop")+".png"),fullPage:true});
+      if(slug==="wakefield-triathlon-club") {
+        await livePage.getByRole("link",{name:"Register this club",exact:true}).click();
+        await livePage.waitForURL(/\/clubs\/register\?club=wakefield-triathlon-club/);
+        assert.ok((await livePage.locator("body").innerText()).includes("Wakefield Triathlon Club"));
+        await livePage.screenshot({path:resolve("artifacts/club-profile-live-registration-"+(mobile?"mobile":"desktop")+".png"),fullPage:true});
+      }
+    }
+    await livePage.close();
+  }
+  console.log("Published club release: five actual production pages plus registration, desktop and mobile passed.");
+} finally { await liveBrowser.close(); }
+
 const root = resolve("artifacts/club-profiles-fixture");
 mkdirSync(root, { recursive: true });
 const file = (name, contents) => {
