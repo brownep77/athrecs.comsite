@@ -17,6 +17,23 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 92: preserve source conflicts, venue distinctions and historical identities.
+  assert.equal(clubProfiles["beaumont-rc"].founded_year, 1984);
+  assert.equal(bySlug.get("beaumont-rc").contact_url, "https://www.beaumontrc.co.uk/membership/");
+  assert.equal(bySlug.get("beaumont-rc").address_kind, "directory");
+  assert.equal(bySlug.get("walney-wind-cheetahs").address, "Park Vale, Walney Island, Barrow-in-Furness");
+  assert.equal(bySlug.get("walney-wind-cheetahs").postcode, "");
+  assert.equal(bySlug.get("walney-wind-cheetahs").address_kind, "training");
+  assert.equal(bySlug.get("walney-wind-cheetahs").socials[0].checked_at, "2026-10-13");
+  assert.match(clubProfiles["walney-wind-cheetahs"].contact_note, /conflict/);
+  assert.equal(bySlug.get("warminster-running-club").address_kind, "training");
+  for (const slug of ["walney-wind-cheetahs", "warminster-running-club", "boalloy-running-club", "southern-counties-veterans-ac"]) assert.equal(clubProfiles[slug].founded_year, undefined);
+  for (const slug of ["beaumont-rc", "boalloy-running-club", "southern-counties-veterans-ac"]) assert.equal(bySlug.get(slug).contacts.length, 0);
+  assert.match(clubProfiles["boalloy-running-club"].contact_note, /phone variants conflict/);
+  assert.equal(bySlug.get("southern-counties-veterans-ac").city, "");
+  assert.equal(bySlug.get("southern-counties-veterans-ac").country, "England");
+  assert.notEqual(clubProfiles["southern-counties-veterans-ac"].scope, "global");
+  assert.match(clubProfiles["southern-counties-veterans-ac"].notable_members[0].detail, /not his Olympic-medallist father/);
   // Batch 91: primary accounts, dated membership and event-location safeguards.
   assert.equal(clubProfiles["jcb-lakeside-club"].founded_year, undefined);
   assert.equal(bySlug.get("jcb-lakeside-club").contacts.length, 0);

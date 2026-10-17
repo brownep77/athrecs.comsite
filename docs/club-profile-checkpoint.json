@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch91",
+  "lastEditorialBatch": "2026-10-17-batch92",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch69",
   "pullRequest": 756,
-  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–91 add243 biographies/134 associations in draft. Assembled totals1534/1737 and773 associations are not live totals. No production publication in batch91.",
+  "publication": "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–92 add248 biographies/136 associations in draft. Assembled totals1539/1737 and775 associations are not live totals. No production publication in batch92.",
   "completedProfileSlugs": [
-    "db-triathlon-club",
-    "milocarian-ac",
-    "os-runners",
-    "jcb-lakeside-club",
-    "worcester-students-union-athletic-club"
+    "beaumont-rc",
+    "walney-wind-cheetahs",
+    "warminster-running-club",
+    "boalloy-running-club",
+    "southern-counties-veterans-ac"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1534,
-    "notableMemberEntries": 773,
+    "extendedProfiles": 1539,
+    "notableMemberEntries": 775,
     "clubsWithContacts": 1172,
     "contactEntries": 1964,
     "clubsWithEmail": 1131,
     "clubsWithPhone": 180,
     "clubsWithSocials": 1203,
     "socialLinks": 2531,
-    "websiteContactRecords": 1483
+    "websiteContactRecords": 1485
   },
   "batchChanges": {
     "extendedProfilesAdded": 5,
-    "notableMemberEntriesAdded": 5,
-    "contactOrSocialRecordsChanged": 1,
-    "newWebsiteContactRecords": 1,
-    "directoryRecordsRefreshed": 1,
-    "netContactEntries": 1,
-    "netSocialLinks": 3,
+    "notableMemberEntriesAdded": 2,
+    "contactOrSocialRecordsChanged": 2,
+    "newWebsiteContactRecords": 2,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 0,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build passed; migration/publication skipped. All six actual production-build pages returned HTTP200 and passed biography/associations, contacts/socials, location notes/home-nation flags, registration and title/description/canonical/SportsOrganization JSON-LD. Exact-commit remote desktop/mobile and hosted-preview evidence follows in PR756; local rendering is not hosted inspection."
+    "status": "Catalogue/club audits, profile regressions, targeted ESLint, TypeScript, whitespace and safe build passed; migration/publication skipped. All five actual production-build pages returned HTTP200 and passed biography/associations, contacts/socials, joining, location notes/home-nation flags, registration and title/description/canonical/SportsOrganization JSON-LD. Prior-head full quality gate38985281329 passed. Exact-commit remote desktop/mobile and hosted-preview evidence follows in PR756; local rendering is not hosted inspection."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
@@ -46,17 +46,25 @@
   ],
   "resumeInstructions": [
     "Read current main, PR756, AGENTS.md, audit and checkpoint; verify remote head and active writer before edits.",
-    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–91 add243 biographies/134 associations in draft. Assembled totals1534/1737 and773 associations are not live totals. No production publication in batch91.",
-    "Batch91 modulecm seedv91 adds five biographies/five associations. Worcester SU adds chair email and three official-linked socials; one new website-contact record. Ventoux city corrected to Camlough with Northern Ireland/area-only retained; original email provenance preserved.",
+    "Last verified published baseline: PR755, 1291 biographies/639 associations. PR756 batches69–92 add248 biographies/136 associations in draft. Assembled totals1539/1737 and775 associations are not live totals. No production publication in batch92.",
+    "Batch92 modulecn seedv92: five biographies/two associations; two joining-information records, no new email/phone/social. Walney Park Vale training base replaces North Scale with postcode unset; Warminster Civic Centre classified as training. Beaumont1984 origin supported; Boalloy/SCVAC dates remain unknown.",
+    "Walney fees conflict; confirm before joining. Warminster committee2024/undated fees not current claims. Boalloy founding-year and quoted club-age conflict; phone variants omitted. SCVAC Tom Richards1939–2024 is not his Olympic father; event listings do not establish membership or a training base.",
     "DB: Drung nearest-town listing is distinct from 2023 Halton's Shore/Cootehill event. Current swim safety, session and joining arrangements not inferred; no named DB members from other clubs' accounts.",
     "Milocarian: services history, Rampling and 2012 school trophy; 2023 Sandhurst invitation historical and military access restricted. Cargate Grove remains directory address. Ambiguous Finlay name not adopted; Robertson was an opponent, not a member.",
     "OS: primary employer 2024/2025 accounts; Matthew Pillinger membership dated2024, Gus McKechnie occasional guest not member. Website unavailable; 1988/lunchtime snippets not used.",
     "JCB: race began1983, not confirmed club founding. 2025 NSPCC and2026 Queen's Reading Room beneficiaries distinguished. Employer commercial contacts excluded; current club eligibility/timetable unknown.",
     "Worcester SU: recovered organisation page, separate from Worcester AC. Nunnery Wood training venue; student6.45pm versus partner7pm arrival needs confirmation. Chair email public; socials attributed to Union, destination ownership not reverified. No fee inferred behind login.",
     "Pudsey & Bramley unsafe promotion remains suppressed. St Mary's Richmond history certificate mismatch: no insecure retry. Milocarian regimental verification walls not bypassed; normal BA newsletter encoding recovery succeeded. Rolls-Royce unavailable. Preserve earlier gaps/NewRoss-Island until23October.",
-    "Base d91940be4dea06c35a23fd04704fc15bf61f379c and main aa82cc37980f808668764513cf74e7fb309e98d8 inspected. Guard remote ref with expected head. Draft only; exact-commit hosted/desktop-mobile evidence in PR756, not production publication."
+    "Base8f74b1c7f3cf1f2efd81bf0dfe3b1644fad99dd5 and main aa82cc37980f808668764513cf74e7fb309e98d8 inspected. Guard remote ref with expected head. Previous full quality gate38985281329 passed. Draft only; exact-commit hosted/desktop-mobile evidence in PR756, not production publication.",
+    "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "beaumont-rc",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "History/membership and EA2025 grant read.1984 origin supported; seasonal venues distinct from Hamelin Road directory address. Masked email not reconstructed; confirm current sessions/fees.",
+      "checkedAt": "2026-10-17"
+    },
     {
       "slug": "jcb-lakeside-club",
       "reason": "Profile added from employer2023/2025/2026 accounts. Race1983 origin not club founding. Current joining/weekly venue/direct club contacts unresolved; commercial contacts excluded.",
@@ -631,10 +639,10 @@
     },
     {
       "slug": "boalloy-running-club",
-      "status": "historical-source-only",
-      "reason": "Congleton council2021 Get Involved booklet supports older club activity but does not establish current joining. boalloy.co.uk/history concerns a truck manufacturer and must not supply club history or contacts.",
-      "url": "https://www.congleton-tc.gov.uk/wp-content/uploads/2021/06/Get-Involved-Booklet-2021.pdf",
-      "checkedAt": "2026-10-16"
+      "status": "profile-added-with-qualified-gap",
+      "reason": "County AA/school listings and2022 organiser/beneficiary interview read. Founding year/quoted age conflict; school phone variants conflict. Current sessions/joining unresolved. Manufacturer website remains excluded.",
+      "url": "https://congleton.nub.news/news/local-news/congleton-running-club-to-raise-thousands-in-charity-event-131767",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "widnes-wasps-ladies-r-c",
@@ -976,9 +984,9 @@
     },
     {
       "slug": "warminster-running-club",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
-      "checkedAt": "2026-10-16"
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Introduction/membership initially read, subsequent requests502. Adult groups and Civic Centre meeting point supported; committee2024 and undated prices not current claims. Origins/alumni unresolved.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "twisted-running",
@@ -1015,8 +1023,9 @@
     },
     {
       "slug": "walney-wind-cheetahs",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "16 October 2026: Official primary page failed, timed out or returned no usable narrative during this bounded batch. Revisit when accessible; no biography inferred."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Introduction, committee, affiliation and enquiry form recovered. Park Vale training base supported; exact entrance/postcode unknown. Non-affiliated fee text conflicts with2025/26 table. Founding/alumni unresolved; existing social provenance preserved.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "trx-wolves-ac",
@@ -1543,8 +1552,9 @@
     {
       "slug": "southern-counties-veterans-ac",
       "url": "https://www.scvac.org.uk/",
-      "status": "deferred-source-unavailable",
-      "reason": "Homepage and membership page failed with timeout/internal errors. Search snippets are not opened-source evidence."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "BMAF organisation/event page and VAC2024 officer tribute read. Official site unavailable;1975 search-only founding not adopted. Current fees/eligibility/direct email unknown; regional event venues are not training address. Tom Richards1939–2024 distinguished from father.",
+      "checkedAt": "2026-10-17"
     },
     {
       "slug": "shrewsbury-ac",
