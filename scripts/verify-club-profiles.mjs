@@ -17,6 +17,29 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 99: physical academy, separate swim venue, coaching versus club identity.
+  const bks = bySlug.get("bradford-keighley-and-skipton-disability-athletics-bks");
+  assert.equal(bks.city, "Keighley");
+  assert.equal(bks.address_kind, "training");
+  assert.equal(bks.postcode, "BD20 6EB");
+  assert.deepEqual(bks.sports, ["Athletics", "Swimming"]);
+  assert.equal(bks.contacts[0].email, "bksda@aol.com");
+  assert.equal(bks.socials.length, 2);
+  assert.equal(bySlug.get("aspire-athletics").virtual, false);
+  assert.equal(bySlug.get("aspire-athletics").postcode, "SM5 1SL");
+  assert.equal(bySlug.get("aspire-athletics").address_kind, "training");
+  assert.equal(bySlug.get("aspire-athletics").contacts[0].email, "admin@aspiretogreatness.co.uk");
+  assert.equal(bySlug.get("new-levels-run-club").virtual, true);
+  assert.equal(bySlug.get("new-levels-run-club").address_kind, "directory");
+  assert.match(clubProfiles["new-levels-run-club"].biography.join(" "), /does not establish that the affiliated club itself has changed name/);
+  assert.equal(bySlug.get("hell-yeah-triathlon-club").city, "Carrickfinn");
+  assert.equal(bySlug.get("hell-yeah-triathlon-club").country, "Ireland");
+  assert.equal(bySlug.get("hell-yeah-triathlon-club").contacts[0].checked_at, "2026-10-17");
+  assert.match(clubProfiles["hell-yeah-triathlon-club"].biography.join(" "), /rather than a final placing/);
+  for (const slug of [bks.slug, "aspire-athletics", "new-levels-run-club", "hell-yeah-triathlon-club"]) {
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.notEqual(clubProfiles[slug].scope, "global");
+  }
   // Batch 98: predecessor origins, community versus club, and role-specific contacts.
   assert.equal(clubProfiles["london-hammer-school"].founded_year, 2024);
   assert.equal(bySlug.get("london-hammer-school").address_kind, "training");
@@ -998,7 +1021,7 @@ try {
   assert.match(clubProfiles["newcastle-frontrunners"].biography.join(" "), /rather than guaranteed every Sunday/);
   assert.equal(clubProfiles["nepal-run"].notable_members, undefined);
   assert.notEqual(clubProfiles["nepal-run"].scope, "global");
-  assert.equal(clubProfiles["new-levels-run-club"], undefined);
+  assert.ok(clubProfiles["new-levels-run-club"].sources.some(source => source.url.includes("finalsurge.com/coach/runthroughcoach/")));
   assert.equal(clubProfiles["new-berkeley-harriers"], undefined);
   // Batch 51: preserve admission rules, organisational identity and real contact evidence.
   assert.equal(bySlug.get("newcastle-staffs-ac").postcode, "ST5 2DJ");

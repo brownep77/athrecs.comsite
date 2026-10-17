@@ -1,32 +1,32 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch98",
+  "lastEditorialBatch": "2026-10-17-batch99",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–98 add24 biographies/23 associations; assembled1573/1737 (90.6%),802 associations,164 incomplete. No publication in batch98. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–99 add28 biographies/29 associations; assembled1577/1737 (90.8%),808 associations,160 incomplete. No publication in batch99. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "london-hammer-school",
-    "huub-performance-project",
-    "city-of-stoke-ac",
-    "run-mummy-run-crc"
+    "bradford-keighley-and-skipton-disability-athletics-bks",
+    "aspire-athletics",
+    "new-levels-run-club",
+    "hell-yeah-triathlon-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1573,
-    "notableMemberEntries": 802,
-    "clubsWithContacts": 1191,
-    "contactEntries": 1989,
-    "clubsWithEmail": 1149,
-    "clubsWithPhone": 184,
-    "clubsWithSocials": 1208,
-    "socialLinks": 2548,
-    "websiteContactRecords": 1511
+    "extendedProfiles": 1577,
+    "notableMemberEntries": 808,
+    "clubsWithContacts": 1193,
+    "contactEntries": 1991,
+    "clubsWithEmail": 1151,
+    "clubsWithPhone": 186,
+    "clubsWithSocials": 1209,
+    "socialLinks": 2550,
+    "websiteContactRecords": 1515
   },
   "batchChanges": {
     "extendedProfilesAdded": 4,
-    "notableMemberEntriesAdded": 9,
+    "notableMemberEntriesAdded": 6,
     "contactOrSocialRecordsChanged": 4,
     "newWebsiteContactRecords": 4,
     "directoryRecordsRefreshed": 0,
@@ -35,16 +35,20 @@
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue/club/profile checks, targeted ESLint, TypeScript, whitespace and safe build passed. All four actual built pages passed full biographies, associations, public contacts/socials, location/country, registration and search-description/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Canonical metadata covered by profile regression checks. Temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous head97ebe578 Club profiles39028050254 and full quality39028050229 passed. No publication or migration."
+    "status": "Catalogue/club/profile checks, targeted ESLint, TypeScript, whitespace and safe build passed. Updated the completed Aspire queue and superseded NewLevels no-profile regression using newly opened club-eligibility evidence, without weakening identity safeguards. All four actual built pages passed biographies, associations, contacts/socials, location/country, registration and search-description/SportsOrganization checks in isolated in-memory PGLite with external fetch disabled. Canonical metadata covered by profile regressions. Temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous heade858247 Club profiles39031715393 and full quality39031715366 passed. No publication or migration."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
     "wharfedale-harriers",
     "athletics-ni-st-annes-ac",
-    "aspire-athletics",
+    "bodmin-womens-rc",
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "BATCH99 CURRENT: modulecu seedv99; four biographies/six associations. Assembled1577/1737 (90.8%),808 associations,160 incomplete. Published1549/779; draftPR761 adds28/29. Parente858247 and main0f8bc3d inspected; remote head rechecked before writing. No competing writer observed. Earlier notes below are historical.",
+    "BKS: BritishBlindSport directory, councilOct2024 and ActivityAlliance8July2025 support athletics/swimming, Keighley track address, role email/phone and dated athlete/coach associations. Shipley pool is separate; no founding or current timetable inferred. Social links attributed to directory; Facebook blocked and Instagram throttled, no ownership verification. Aspire identity resolved by exact DavidWeir venue and officialAspire introduction: physical2026sessions justify virtual=false and postcodeSM5 1SL; EsherPOBox not training. Founders/coach associations are not athlete identities.",
+    "NewLevels continuity recovered from coach-hostedFinalSurge package explicitly naming NewLevelsRunClub eligibility plus company rebrand page. Club name retained, founding unset, virtual/address_kind directory retained. ECCA2024–25p39 lists GemmaHillierMoses secretary; historical office only. Coaching form replaces unusable contact route, not automaticEAregistration or a claim the club was renamed.",
+    "HellYeah: TI Find-a-Club table confirms Carrickfinn and undotted hellyeahtriclub@gmail.com, existing email refreshed without duplication. Official website inaccessible. 15–16Oct2026 league report supports participation only; tables await23Oct affiliation review. Extend existing NewRoss/Island23Octfollow-up to HellYeah, not finalplacing/currentmembership counts. Founding, training, phone/socials/notables remain unknown. RollsRoyce about/history502/contacttimeout; Wharfedale about/contact502; Fry2018PDFtimeout; Bailieboro town inaccessible; StAnnesOpenTrack403 andFacebookblock. No snippets adopted. Bodmin andCLAN still need readable primary narrative.",
     "BATCH98 CURRENT: modulect seedv98; four biographies/nine associations, two role-specific emails/two social links/four new website-contact records. Assembled1573/1737 (90.6%),802 associations,164 incomplete. Published1549/779; draftPR761 adds24/23. Parent97ebe578 and main0f8bc3d inspected; check latest head and competing writers. Earlier notes below are historical.",
     "LondonHammerSchool current form2024, predecessorWestLondon1977; AlanBertram/MickJones are predecessor associations, JamieBath is dated2026session contact. LeeValley spelling corrected and classified training; Willesden separate. No Instagram URL inferred or undated memorial date promised. HUUB membership community differs from elite sponsored team; commercial singlet price not membership fee; support email role explicit, Moorways remains directory context.",
     "CityStoke recovered from EA2019/2026 and rendered officialClubforce2026junior/senior memberships. Northwood training classification confirmed; direct contacts/founding/timetable remain unknown. Published Facebook/Instagram retained, apparent football Twittercityofstokefc excluded. Incorrect CityStoke source-gap note copied from Coalville corrected: Membermojo/SportMember migration and phone conflict do not belong to CityStoke.",
@@ -87,6 +91,24 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "bradford-keighley-and-skipton-disability-athletics-bks",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "BKS profile/contact/venue recovered17Oct2026. Founding and current timetable unknown; 2024 council sessions not presented as current. Track and swimming locations distinct. Public role email preferred; directory-linked socials blocked/throttled at destination.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "aspire-athletics",
+      "status": "identity-and-physical-venue-resolved",
+      "reason": "Official Aspire/ATG Sutton page confirms DavidWeir Carshalton identity and Autumn2026sessions. Virtual label corrected; postcodeSM5 1SL. Founding year and official socials remain unresolved; age range varies by booking; POBox not training.",
+      "checkedAt": "2026-10-17"
+    },
+    {
+      "slug": "hell-yeah-triathlon-club",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "TI directory and15–16Oct2026league report support locality/contact/participation. Older empty-site notes below superseded only for biography coverage; website remains inaccessible. No final league award/placing before23Oct review; no founding, timetable or notable people invented.",
+      "checkedAt": "2026-10-17"
+    },
     {"slug":"goole-youth-ac","status":"profile-added-with-qualified-gap","reason":"EA2018/2026 and TownDeal project read17Oct; own website unavailable. Founding, current joining/timetable and direct club contacts unresolved. Venue staff and2008flyer phone excluded; pavilion completion not assumed.","checkedAt":"2026-10-17"},
     {"slug":"start2jog","status":"profile-added-with-qualified-gap","reason":"Official site/contact andEA2018/2022award accounts read. Founding/current junior intake unresolved; award roles historical. No phone/social inferred.","checkedAt":"2026-10-17"},
     {"slug":"hayes-and-harlington-road-runners","status":"profile-added-with-qualified-gap","reason":"Official site andEA funding case study read. Undated meeting time and2022C25k programme qualified; founding/notables unknown. Role email used, historical secretary names not current contacts.","checkedAt":"2026-10-17"},
@@ -2896,8 +2918,8 @@
     {
       "slug": "new-levels-run-club",
       "url": "https://www.runthroughcoach.com/about",
-      "status": "deferred-club-continuity-unresolved",
-      "reason": "New Levels Coaching explicitly rebranded as RunThrough Coach, but continuity/renaming of the affiliated New Levels Run Club is not established. Old domain TLS failure; company history not assigned to club."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Batch99: coach-hosted FinalSurge package explicitly names NewLevelsRunClub eligibility, supporting a connection to RunThroughCoach. Rebranding still applies to company, not proven club renaming. ECCA2024–25p39 supports historical secretary; current joining terms/officers/founding unknown."
     },
     {
       "slug": "nantwich-running-club",
