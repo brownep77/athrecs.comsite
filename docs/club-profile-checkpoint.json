@@ -1,40 +1,40 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch101",
+  "lastEditorialBatch": "2026-10-17-batch102",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–101 add36 biographies/36 associations; assembled1585/1737 (91.2%),815 associations,152 incomplete. No publication in batch101. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–102 add39 biographies/41 associations; assembled1588/1737 (91.4%),820 associations,149 incomplete. No publication in batch102. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "runfit-chorley",
-    "whitby-running-club",
-    "collins-cycle-centre-triathlon-club"
+    "st-marys-calne-sports-centre-running-and-triathlon",
+    "just-run-community",
+    "littleborough-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1585,
-    "notableMemberEntries": 815,
-    "clubsWithContacts": 1196,
-    "contactEntries": 1994,
-    "clubsWithEmail": 1154,
+    "extendedProfiles": 1588,
+    "notableMemberEntries": 820,
+    "clubsWithContacts": 1199,
+    "contactEntries": 1997,
+    "clubsWithEmail": 1157,
     "clubsWithPhone": 186,
     "clubsWithSocials": 1212,
-    "socialLinks": 2558,
-    "websiteContactRecords": 1522
+    "socialLinks": 2560,
+    "websiteContactRecords": 1525
   },
   "batchChanges": {
     "extendedProfilesAdded": 3,
-    "notableMemberEntriesAdded": 3,
+    "notableMemberEntriesAdded": 5,
     "contactOrSocialRecordsChanged": 3,
     "newWebsiteContactRecords": 3,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 1,
+    "netContactEntries": 3,
     "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed full biographies, associations, contact/social links, city/country, exact registration href and description/SportsOrganization assertions using isolated in-memory PGLite with external fetch disabled. Temporary harness expectation corrected to existing /clubs/register?club= route; application links unchanged. Canonical metadata covered by profile regressions; temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous head332fb004 Club profiles39039793952 and quality39039793915 passed. No external migration/publication."
+    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed full biography, associations, contact/social links, locality/country, exact registration href and description/SportsOrganization assertions using isolated in-memory PGLite with external fetch disabled. Canonical metadata covered by profile regressions; temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous head7b5b9d63 Club profiles39043738256 and quality39043738312 passed. No external migration/publication."
   },
   "nextCandidateSlugs": [
     "athletics-ireland-bailieboro-a-c",
@@ -44,6 +44,11 @@
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "BATCH102 CURRENT: modulecx seedv102; three biographies/five associations. Assembled1588/1737 (91.4%),820 associations,149 incomplete. Published1549/779; draftPR761 adds39/41. Parent7b5b9d63 and main0f8bc3d inspected; remote draft unchanged before edits, no competing writer observed. Older source-gap entries are historical where superseded.",
+    "Calne recovered runningandtriathlon.co.uk: January2007origin versus2015affiliation, secretaryemail/form, swim/run/cycling programme. NikkiHarris publishedcoach; AmyChalk datedNov2023brochure. Do not republish oldfees, conflicting8/10weekcourse lengths, unconfirmed indoorcycling start or inferred socialURLs. Current junior eligibility needs clarification before changing inherited adult-only directory field; CurzonStreet remains directory.",
+    "JustRunCommunity recovered justruncommunity.co.uk: adult18+,4tasters,social/structured running, WhatsApp/parkruntrips; membership@justruncommunity.co.uk and officiallinked Facebook. ExistingInstagram preserved. Founding/fullname associations/phone unknown; members' ownrunningstart dates not founding. BracebridgeHeath remains directory, not confirmed universalstart.",
+    "Littleborough recovered officialWordPresshistory/membership: June2016boxingclubC25K precursor, later churchmove/name withoutformaldate. BarbaraBayliss/JulieDurrant/JuliaMoore historicalorganisers;2019course/leadercounts not current. VictoriaStreet church explicitheader agreesdirectory, classifytraining. Clubemail and websiteFacebookgroup889505411178584 added, olddirectoryFacebook retained. No LABCidentitymerge, currentoffice/charityscheme/fees/courseavailability inferred; socialdestinations throttled.",
+    "Next source leads: Gillingham https://gillinghamdorset-tc.gov.uk/councillor/graham-bashford/ opened17Oct confirms founder/lifemember, updated24July2026; councilcontacts excluded. Club.org unavailable anddrrl.co.uk/dorset-clubs timeout. RobinPark https://club.runthrough.co.uk/runner-feature-david-lawless/ opened17Oct: first-person30June2021 joining/affiliation account; noresults imported or currentmembership claim. Needprimaryjoining/contactnarrative before biography. Winterton hospiceNews failed; RavensTomNicholsLinkedIn/ECCAhandbook are unopened leads. Do not repeat exhaustedsites withoutnewsource.",
     "BATCH101 CURRENT: modulecw seedv101; three biographies/three associations. Assembled1585/1737 (91.2%),815 associations,152 incomplete. Published1549/779; draftPR761 adds36/36. Parent332fb004 and main0f8bc3d inspected; remote draft head rechecked before edits. No competing writer observed. Earlier notes and source-gap entries are historical where superseded.",
     "RunFitChorley official ClubSpark recovers NeilSimpson founder and supportive running; EA16Nov2021 NorthWest RunTogether award. Working home/contact form replaces oldnewsURL; no email/phone/social/founding year/current timetable. BuckshawParkway remains directory, SavilleStreet contact postal not training. Empty session list is not closure evidence.",
     "Whitby official site recovers2019 MattHewison origin, RuthPrice2020qualification/2021leading, groups/Spond and2026C25k started1September. Joining email confirmed, homepage placeholder and conflicting kit emails excluded. Council-published RunWhitbyFacebook/WhitbyRunClubX links added with publisher attribution; destinations blocked. Meadowfields remains directory; LeisureCentre is autumncourse start, WhiteLeysRoad oldercouncil address not adopted. Conflicting office/timetable wording not asserted.",

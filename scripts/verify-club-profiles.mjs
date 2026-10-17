@@ -24,6 +24,15 @@ try {
   assert.equal(bySlug.get("whitby-running-club").socials.length, 2);
   assert.ok(!bySlug.get("whitby-running-club").contacts.some(c => /example|merch|northyorks/.test(c.email ?? "")));
   assert.match(clubProfiles["whitby-running-club"].biography.join(" "), /already under way/);
+  assert.equal(clubProfiles["st-marys-calne-sports-centre-running-and-triathlon"].founded_year, 2007);
+  assert.match(clubProfiles["st-marys-calne-sports-centre-running-and-triathlon"].biography.join(" "), /2015/);
+  assert.equal(clubProfiles["just-run-community"].founded_year, undefined);
+  assert.equal(clubProfiles["littleborough-runners"].founded_year, undefined);
+  assert.equal(bySlug.get("littleborough-runners").address_kind, "training");
+  assert.equal(bySlug.get("just-run-community").address_kind, "directory");
+  assert.ok(bySlug.get("just-run-community").contacts.some(c => c.email === "membership@justruncommunity.co.uk"));
+  assert.equal(bySlug.get("just-run-community").socials.filter(s => s.platform === "Instagram").length, 1);
+  assert.equal(bySlug.get("littleborough-runners").socials.filter(s => s.platform === "Facebook").length, 2);
   assert.equal(bySlug.get("runfit-chorley").contact_url, "https://clubspark.englandathletics.org/RunFitChorley/Contact");
   assert.equal(clubProfiles["runfit-chorley"].founded_year, undefined);
   assert.equal(bySlug.get("runfit-chorley").address_kind, "directory");
