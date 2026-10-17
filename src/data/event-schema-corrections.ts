@@ -12,6 +12,7 @@ export const eventSchemaCorrections = [
     organiser: "Andali Events",
     website: "https://www.andalievents.com/",
     sourceUrl: beaconsSource,
+    publicNote: "Official details checked 15 October 2026: Andali Events (https://www.andalievents.com/) organises Beacons on 7 November 2026. Official SiEntries entry costs £40 for the Half and £60 for the Marathon, including its booking fee; entries opened 1 December 2025 and close 1 November 2026. The organiser's FAQ gives Half start 09:30 and Marathon start 08:30. A firm finish time has not been confirmed. Entry: https://www.sientries.co.uk/event/beacons-ultra-marathon-and-half-2026-2026. Start times: https://www.andalievents.com/events/beacons/beacons-faq. Fees: https://www.sientries.co.uk/terms.php.",
     note: "Source review 15 October 2026: Andali Events identifies Beacons as its event at https://www.andalievents.com/. Its official SiEntries programme confirms 7 November 2026, Half £40 and Marathon £60, entries open 1 December 2025 and close 1 November 2026. SiEntries terms (https://www.sientries.co.uk/terms.php) identify its booking fee as part of the total entry fee. The FAQ at https://www.andalievents.com/events/beacons/beacons-faq gives Half start 09:30 and Marathon start 08:30. The suggested half-marathon finish is not a firm end time and is not used as endDate.",
     editions: [
       {
@@ -38,6 +39,7 @@ export const eventSchemaCorrections = [
     organiser: "Florida Running Company",
     website: "https://www.floridarunningco.com/",
     sourceUrl: mothersDaySource,
+    publicNote: "Official details checked 15 October 2026: Florida Running Company (https://www.floridarunningco.com/) hosts Mother's Day 5K. Its official RunSignup programme gives 9 May 2027, 07:30–10:00 EDT. The advertised entry price is $35; confirm the total including any mandatory fees before booking. Programme: https://runsignup.com/Race/FL/Clermont/OrlandoMothersDay5K.",
     note: "Source review 15 October 2026: Florida Running Company explicitly lists Mother's Day 5K among the events it hosts at https://www.floridarunningco.com/. Its linked RunSignup programme gives 9 May 2027, 07:30–10:00 EDT for the 5K. Store the local end time without manufacturing a timezone or a sale-opening date. The advertised $35 price has not been established as inclusive of all mandatory fees, so no priced Offer is added.",
     editions: [
       {

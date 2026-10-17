@@ -161,3 +161,51 @@ export async function publishEventOrganiserCorrections(sql, publishing, correcti
     });
   }
 }
+
+/** Replace only our exact appended audit wording with reader-facing source notes.
+ * Original notes and all record fields remain in the normal revision history. */
+export async function publishEventPublicNotes(sql, publishing, corrections) {
+  for (const correction of corrections) {
+    await sql.transaction(async (tx) => {
+      await tx.query("select id from catalogue_publish_state where id=1 for update");
+      const sourceKey = `athrecs-code:event-public-notes:2026-10-15:${correction.slug}`;
+      const completed = await tx.query(
+        "select id from catalogue_import_batches where source_key=$1 and status in ('published','rolled_back')",
+        [sourceKey],
+      );
+      if (completed.length) return;
+      if (!correction.note || !correction.publicNote?.trim())
+        throw new Error(`Public note evidence missing: ${correction.slug}`);
+      const editions = [];
+      for (const patch of correction.editions) {
+        const rows = await tx.query(
+          "select ed.*,ed.event_date::text as date from editions ed join events e on e.id=ed.event_id where e.slug=$1 and ed.event_date=$2::date and ed.distance_code=$3 for update of ed",
+          [correction.slug, patch.date, patch.distance],
+        );
+        if (rows.length !== 1) throw new Error(`Public note edition changed: ${correction.slug}`);
+        const row = rows[0];
+        const original = row.notes ?? "";
+        if (original !== correction.note && !original.endsWith(`\n${correction.note}`))
+          throw new Error(`Public note evidence changed: ${correction.slug}`);
+        editions.push({
+          eventSlug: correction.slug,
+          date: row.date,
+          distance: row.distance_code,
+          distanceKm: Number(row.distance_km),
+          status: row.status,
+          startTime: row.start_time ?? undefined,
+          source: row.source_url ?? undefined,
+          notes: original.slice(0, -correction.note.length) + correction.publicNote,
+        });
+      }
+      const actor = "athrecs-production-deployment@athrecs.com";
+      const staged = await publishing.stageCatalogueBatch(
+        { sourceKey, sourceUrl: correction.sourceUrl, editions }, actor, tx,
+      );
+      const validation = await publishing.validateCatalogueBatch(staged.batchId, tx);
+      if (validation.status !== "ready") throw new Error("Public note validation failed");
+      const result = await publishing.publishCatalogueBatch(staged.batchId, actor, tx);
+      console.log(`[event-public-notes] ${correction.slug}: revision ${result.revisionId}`);
+    });
+  }
+}
