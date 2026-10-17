@@ -17,6 +17,22 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 103: dated history, current publisher attribution and distinct identities.
+  assert.equal(clubProfiles["ravens-city-of-london-running-club"].founded_year, 1997);
+  assert.equal(bySlug.get("ravens-city-of-london-running-club").city, "London");
+  assert.equal(bySlug.get("ravens-city-of-london-running-club").contacts.length, 0);
+  assert.equal(clubProfiles["ravens-city-of-london-running-club"].notable_members[0].name, "Phil Hernon");
+  assert.notEqual(bySlug.get("ravens-school-runners").slug, bySlug.get("ravens-city-of-london-running-club").slug);
+  assert.equal(clubProfiles["heyford-aardvarks-running-club"].founded_year, undefined);
+  assert.equal(bySlug.get("heyford-aardvarks-running-club").address_kind, "directory");
+  assert.match(clubProfiles["heyford-aardvarks-running-club"].biography.join(" "), /historical account, not a current timetable/);
+  assert.equal(bySlug.get("heyford-aardvarks-running-club").contacts[0].email, "heyfordaardvarks@gmail.com");
+  assert.equal(bySlug.get("dunstable-lions-running-club").address_kind, "training");
+  assert.equal(bySlug.get("dunstable-lions-running-club").website, "https://www.dunstablelionsrc.co.uk/");
+  assert.equal(clubProfiles["dunstable-lions-running-club"].founded_year, undefined);
+  assert.equal(bySlug.get("sunlight-runners").contacts[0].phone, "01824 790749");
+  assert.match(bySlug.get("sunlight-runners").contacts[0].role, /undated listing/);
+  assert.ok(!bySlug.get("sunlight-runners").notable_members?.length);
   // Batch 101: real enquiry routes, dated origins and no invented training base.
   assert.equal(clubProfiles["whitby-running-club"].founded_year, 2019);
   assert.equal(bySlug.get("whitby-running-club").website, "https://www.whitbyrunningclub.co.uk/");

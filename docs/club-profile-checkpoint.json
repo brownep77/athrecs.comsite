@@ -1,49 +1,55 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch102",
+  "lastEditorialBatch": "2026-10-17-batch103",
   "reviewedAt": "2026-10-17",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch94",
   "pullRequest": 761,
-  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–102 add39 biographies/41 associations; assembled1588/1737 (91.4%),820 associations,149 incomplete. No publication in batch102. Exact-head CI and preview evidence in PR761.",
+  "publication": "Published cohort baseline:1549 biographies/779 associations from PR756. Draft PR761 batches94–103 add42 biographies/42 associations; assembled1591/1737 (91.6%),821 associations,146 incomplete. No publication in batch103. Exact-head CI and preview evidence in PR761.",
   "completedProfileSlugs": [
-    "st-marys-calne-sports-centre-running-and-triathlon",
-    "just-run-community",
-    "littleborough-runners"
+    "heyford-aardvarks-running-club",
+    "ravens-city-of-london-running-club",
+    "dunstable-lions-running-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1588,
-    "notableMemberEntries": 820,
-    "clubsWithContacts": 1199,
-    "contactEntries": 1997,
-    "clubsWithEmail": 1157,
-    "clubsWithPhone": 186,
-    "clubsWithSocials": 1212,
-    "socialLinks": 2560,
-    "websiteContactRecords": 1525
+    "extendedProfiles": 1591,
+    "notableMemberEntries": 821,
+    "clubsWithContacts": 1202,
+    "contactEntries": 2000,
+    "clubsWithEmail": 1160,
+    "clubsWithPhone": 187,
+    "clubsWithSocials": 1213,
+    "socialLinks": 2561,
+    "websiteContactRecords": 1528
   },
   "batchChanges": {
     "extendedProfilesAdded": 3,
-    "notableMemberEntriesAdded": 5,
+    "notableMemberEntriesAdded": 1,
     "contactOrSocialRecordsChanged": 3,
     "newWebsiteContactRecords": 3,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 3,
-    "netSocialLinks": 2,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All three actual built pages passed full biography, associations, contact/social links, locality/country, exact registration href and description/SportsOrganization assertions using isolated in-memory PGLite with external fetch disabled. Canonical metadata covered by profile regressions; temporary harness removed. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous head7b5b9d63 Club profiles39043738256 and quality39043738312 passed. No external migration/publication."
+    "status": "Catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Isolated built-page checks passed for Heyford, Ravens City, Dunstable and Sunlight: biography, association/contact/social content, location, registration, description, canonical and SportsOrganization structured data. Temporary harness cleanup corrected and rerun exited zero. Exact-head Club profiles desktop/mobile and Vercel preview evidence follows in PR761. Previous head9711ce46 Club profiles39047985873 and quality39047985872 passed. No external migration/publication."
   },
   "nextCandidateSlugs": [
-    "athletics-ireland-bailieboro-a-c",
-    "wharfedale-harriers",
-    "athletics-ni-st-annes-ac",
-    "bodmin-womens-rc",
-    "central-lancs-running-and-triathlon-club-clan"
+    "gordonian-runners",
+    "yellow-brick-road-running-and-walking-club",
+    "michelin-running-club",
+    "ravens-school-runners",
+    "horsham-run-fit"
   ],
   "resumeInstructions": [
+    "BATCH103 CURRENT: modulecy seedv103; three biographies/one association, three contact records including Sunlight contact-only. Assembled1591/1737 (91.6%),821 associations,146 incomplete. Published1549/779; draftPR761 adds42/42. Parent9711ce46 and main0f8bc3d inspected; remote head unchanged before edits, no competing writer observed. Earlier no-profile gaps are historical where superseded.",
+    "Heyford: opened club-written ValleyNewsAug2022p13 and HeyfordParkcommunity page; roleemail corroborated, exactFacebookgroup1758053511167542 attributed to2022column, destinationDisabledError. Do not treat oldMonday/Thursday/DaceyDrive timings as current or infer childeligibility/founding/notables. CorbettClose remainsdirectory. Dunstable: officialdunstablelionsrc.co.uk recovered,5kmjoining prerequisite, leisurecentretraining, roleemail; confirmundatedfees/sessions, council24Mar2026lottery story notwholefundraisingtotal. No founding/notables/socialURL inferred.",
+    "RavensCity: ClubSonar2017p24–25 suppliedbyclubs and PhilHernon13Aug2025firstperson LinkedInpost establish1997origin; EA1May2026p12 road/XC. One historical founderassociation PhilHernon, not TomNichols whose profile reproduced the post. CityLondon filled; MarnockRoad directorynottraining. Officialdomain unavailable, oldworkemails excluded; no secondaryTowerBridge timetable or social attribution adopted. RavensSchoolRunners remains distinct and unprofiled.",
+    "Sunlight contact-only: https://merseysidecountyaa.org.uk/member-clubs-associations/ read17Oct publishes ChrisBoardman christopher.boardman@unilever.com /01824 790749. Rolelabels undatedcountylisting; no famousathleteidentity inferred, no privateaddress imported, no trainingbase change. UTS linked https://utsrunclub.org/ returned502. County site supplier/association contacts excluded.",
+    "Gordonian prioritylocationlead: https://www.strava.com/clubs/gordonian-runners-131963 read17Oct saysWestEnd and school-linked runners; EA1May2026PDFp29 saysSurrey, unlike inheritedNorwich/Norfolk address. https://gordonians.co.uk/ read confirms GordonSchoolalumnicommunity. Spring2022PDF initially onlyearlypages retrieved; laterpage10/screenshot failed500redirect. Search shows clubarticle/joiningemail but not accepted as readpage evidence. Recover fullschoolclubcolumn before biography/correcting geographical model; do not confuse AberdeenGordoniansrugby/cricket or treat Norwich correspondence as training. PDFlead https://gordonians.co.uk/uk/gordons/bulletin/350_1652347896/Gordonian_Spring_2022_web.pdf?height=318&mode=max&width=1128 .",
+    "Other newleads17Oct: Michelin https://stokemac.michelin.co.uk/about.php read supports parentMAC1928origin and1970sTrentVale sportscentre, not runningsectionidentity/fees/contact; no profile. YellowBrickRoad https://www.burnham-on-sea.com/news/photos-new-years-day-walk-held-on-burnham-on-sea-seafront-by-local-community-group/ read supports1Jan2024walk only; PawlettPavilion/council pages no club-specific contact; venue1997date/phone/fees not clubfacts. Horsham CompleteBodyCoachWixplans includeRunFitmembership but coachcommercialcontacts/fees not clubroleproof; officialFacebooklead HorshamRunFit not successfully read. FryWeebly/parkrunchairreport unavailable, Helpston unavailable, Thornton502, Mojo unavailable. Do not repeat exhaustedURLs withoutnewsource; oldpendingIreland/Wharfedale/CLAN and23Octreview retained below.",
     "BATCH102 CURRENT: modulecx seedv102; three biographies/five associations. Assembled1588/1737 (91.4%),820 associations,149 incomplete. Published1549/779; draftPR761 adds39/41. Parent7b5b9d63 and main0f8bc3d inspected; remote draft unchanged before edits, no competing writer observed. Older source-gap entries are historical where superseded.",
     "Calne recovered runningandtriathlon.co.uk: January2007origin versus2015affiliation, secretaryemail/form, swim/run/cycling programme. NikkiHarris publishedcoach; AmyChalk datedNov2023brochure. Do not republish oldfees, conflicting8/10weekcourse lengths, unconfirmed indoorcycling start or inferred socialURLs. Current junior eligibility needs clarification before changing inherited adult-only directory field; CurzonStreet remains directory.",
     "JustRunCommunity recovered justruncommunity.co.uk: adult18+,4tasters,social/structured running, WhatsApp/parkruntrips; membership@justruncommunity.co.uk and officiallinked Facebook. ExistingInstagram preserved. Founding/fullname associations/phone unknown; members' ownrunningstart dates not founding. BracebridgeHeath remains directory, not confirmed universalstart.",
