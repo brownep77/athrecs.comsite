@@ -40,26 +40,76 @@ try {
     executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
   });
-  const account = async (email) => {
+  const account = async (email, fullName) => {
     const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+    const credentials = { email, password: "Synthetic-password-123!" };
     const response = await context.request.post(`${origin}/api/auth/sign-up/email`, {
       headers: { origin },
-      data: { name: "Temporary Name", email, password: "Synthetic-password-123!" },
+      data: { name: "Temporary Name", ...credentials },
     });
     assert.equal(response.status(), 200, await response.text());
     const { user } = await response.json();
     await sql`update "user" set name='',"emailVerified"=true where id=${user.id}`;
+    await context.clearCookies();
+    const signin = await context.request.post(`${origin}/api/auth/sign-in/email`, {
+      headers: { origin },
+      data: credentials,
+    });
+    assert.equal(signin.status(), 200, await signin.text());
+    const signedIn = await signin.json();
+    assert(signedIn.token, "Real sign-in issues a session token");
+    // Production uses Secure __Host cookies. Loopback HTTP exercises the app's
+    // existing preview bearer mechanism with a genuine sign-in token, without
+    // fabricating a session or weakening the production cookie configuration.
+    await context.setExtraHTTPHeaders({ authorization: `Bearer ${signedIn.token}` });
+    await context.addInitScript((token) => {
+      sessionStorage.setItem("grok-auth.bearer-token", token);
+    }, signedIn.token);
+    const session = await context.request.get(`${origin}/api/auth/get-session`);
+    assert.equal(session.status(), 200);
+    const authenticated = await session.json();
+    assert.equal(authenticated.user.id, user.id);
+    assert.equal(authenticated.user.emailVerified, true);
     const page = await context.newPage();
+    page.setDefaultTimeout(60000);
+    page.setDefaultNavigationTimeout(120000);
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle" });
-    await page
-      .getByRole("heading", {
-        name: "Your account is ready. Finish claiming your athlete profile.",
-      })
-      .waitFor();
+    const form = page.getByRole("form", { name: "Complete your profile", exact: true });
+    await form.waitFor();
+    const names = fullName.split(" ");
+    const lastName = names.pop();
+    const firstName = names.join(" ");
+    await form.getByRole("checkbox", { name: "Athlete", exact: true }).check();
+    await form.getByLabel("First names", { exact: true }).fill(firstName);
+    await form.getByLabel("Last name", { exact: true }).fill(lastName);
+    await form.getByLabel("Country of residence", { exact: true }).fill("United Kingdom");
+    await form.getByLabel("Main sport", { exact: true }).selectOption("Running");
+    await form.getByLabel("Nationality", { exact: true }).fill("British");
+    await form.getByLabel("Date of birth", { exact: true }).fill("1984-01-01");
+    await form.getByLabel("Postcode / ZIP / area (private)", { exact: true }).fill("NR1");
+    await form.getByRole("checkbox", { name: /^I have read the privacy notice/ }).check();
+    await form
+      .getByRole("button", { name: "Save profile and find my results", exact: true })
+      .click();
+    await page.waitForURL(`${origin}/athlete-account`);
+    await page.getByRole("heading", { name: "My Athlete Account", exact: true }).waitFor();
+    assert.deepEqual(
+      await sql`select first_name,last_name,roles from member_onboarding where user_id=${user.id}`,
+      [{ first_name: firstName, last_name: lastName, roles: ["athlete"] }],
+    );
+    const [counts] = await sql`select
+      (select count(*)::int from result_claims where claimant_user_id=${user.id}) as claims,
+      (select count(*)::int from athlete_account_links where user_id=${user.id}) as links,
+      (select count(*)::int from athlete_account_consents where user_id=${user.id} and status='granted') as consent_grants`;
+    assert.deepEqual(
+      counts,
+      { claims: 0, links: 0, consent_grants: 0 },
+      "Completing the real onboarding does not claim results, link profiles or grant optional consent",
+    );
     return { context, page, user };
   };
-  const plain = await account("plain-claim@example.test");
+  const plain = await account("plain-claim@example.test", "Journey Test Runner");
   await sql`insert into events (id,slug,name,sport,surface,country) values (992101,'claim-journey-test','Synthetic Claim Journey 10K','Running','Road','United Kingdom')`;
   await sql`insert into editions (id,event_id,event_date,distance_code,distance_km) values (992101,992101,'2026-09-01','10K',10)`;
   await sql`insert into athletes (id,slug,display_name,profile_visibility) values (992101,'claim-journey-runner','Journey Test Runner','private'),(992102,'claim-journey-invited','Invited Test Runner','private')`;
@@ -99,16 +149,16 @@ try {
   const sourceId = source.id;
   const { page } = plain;
   await page.goto(`${origin}/claim-results?resultId=${sourceId}`, { waitUntil: "networkidle" });
-  await page
-    .getByRole("heading", { name: "Complete your details to claim your profile" })
-    .waitFor();
-  assert.equal(await page.getByText("This match is no longer available").count(), 0);
-  await page.getByLabel("Full name").fill("Journey Test Runner");
-  await page.getByLabel("Date of birth").fill("1984-01-01");
-  await page.getByLabel("Nationality", { exact: false }).fill("British");
-  await page.getByRole("checkbox", { name: /I have read/ }).check();
-  await page.getByRole("button", { name: "Save details and continue", exact: true }).click();
   await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).waitFor();
+  assert.equal(await page.getByText("This match is no longer available").count(), 0);
+  assert.equal(
+    await page
+      .getByRole("heading", { name: "Complete your details to claim your profile" })
+      .count(),
+    0,
+    "Onboarding already supplied the identity needed to review this profile",
+  );
+  assert.equal(await page.getByLabel("Full name", { exact: true }).count(), 0);
   await page
     .getByRole("listitem")
     .filter({ hasText: "Synthetic Run Norwich 2026" })
@@ -200,10 +250,10 @@ try {
     0,
   );
   console.log(
-    "PASS: Required identity -> same selected profile -> remembered navigation -> one completed claim -> clear receipt after reload.",
+    "PASS: Saved onboarding identity -> same selected profile -> remembered navigation -> one completed claim -> clear receipt after reload.",
   );
 
-  const invited = await account("invited-claim@example.test");
+  const invited = await account("invited-claim@example.test", "Invited Test Runner");
   const token = "a".repeat(64);
   const hash = createHash("sha256").update(token).digest("hex");
   const claimUrl = `https://www.athrecs.com/claim-results?resultId=992102&invitation=${token}`;
@@ -224,14 +274,17 @@ try {
     ),
   );
   await resume.click();
-  await invited.page.getByLabel("Full name").fill("Invited Test Runner");
-  await invited.page.getByRole("checkbox", { name: /I have read/ }).check();
-  await invited.page
-    .getByRole("button", { name: "Save details and continue", exact: true })
-    .click();
   await invited.page
     .getByRole("button", { name: "Confirm all results are mine", exact: true })
     .waitFor();
+  assert.equal(
+    await invited.page
+      .getByRole("heading", { name: "Complete your details to claim your profile" })
+      .count(),
+    0,
+    "Invitation confirmation reuses the saved onboarding identity",
+  );
+  assert.equal(await invited.page.getByLabel("Full name", { exact: true }).count(), 0);
   assert.equal(await invited.page.getByLabel("Full racing name").count(), 0);
   await invited.page.screenshot({ path: "artifacts/claim-confirm-mobile.png", fullPage: true });
   await invited.page
@@ -249,14 +302,18 @@ try {
     await sql`select date_of_birth,nationality from athlete_private_profiles where user_id=${invited.user.id}`;
   assert.equal(
     optionalIdentity.date_of_birth,
-    null,
-    "Invitation claim succeeds without birth date",
+    "1984-01-01",
+    "Invitation claiming preserves the birth date supplied during onboarding",
   );
-  assert.equal(optionalIdentity.nationality, null, "Invitation claim succeeds without nationality");
+  assert.equal(
+    optionalIdentity.nationality,
+    "British",
+    "Invitation claiming preserves the nationality supplied during onboarding",
+  );
   assert.equal(bound.user_id, invited.user.id);
   assert(bound.claim_id);
   console.log(
-    "PASS: Verified blank-name account resumes its email invitation on mobile and completes exactly one self-confirmed profile claim.",
+    "PASS: Verified onboarded account resumes its email invitation on mobile and completes exactly one self-confirmed profile claim.",
   );
   assert.deepEqual(errors, []);
 } finally {

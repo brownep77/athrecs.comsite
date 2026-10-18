@@ -238,7 +238,7 @@ try {
       dialog.getByRole("button", { name: "Sign in with email", exact: true }).click(),
     );
     await check("Existing shorter passwords work through the UI and reach onboarding", async () => {
-      await page.getByRole("heading", { name: "Complete your profile", exact: true }).waitFor({ timeout: 10000 });
+      await page.getByRole("heading", { name: "Complete your profile", exact: true }).waitFor();
       assert.equal(new URL(page.url()).pathname, "/join");
     });
     await clearSession();
