@@ -1,3 +1,4 @@
+import { recoveredMeadsProfile } from "./club-profiles-dq.ts";
 import { recoveredRunningAndTriathlonProfiles } from "./club-profiles-dp.ts";
 import { recoveredClubCommunityProfiles } from "./club-profiles-do.ts";
 import { communityRecoveryProfiles } from "./club-profiles-dn.ts";
@@ -146,6 +147,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...recoveredMeadsProfile,
   ...recoveredRunningAndTriathlonProfiles,
   ...recoveredClubCommunityProfiles,
   ...communityRecoveryProfiles,
@@ -995,4 +997,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v120";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v121";

@@ -17,6 +17,21 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 121: historical community accounts do not establish a current venue or membership.
+  const meads = bySlug.get("meads-runners");
+  assert.equal(meads.city, "Eastbourne");
+  assert.equal(meads.country, "England");
+  assert.equal(meads.address, "Western Lawns");
+  assert.equal(meads.address_kind, "directory");
+  assert.equal(meads.location_precision, "area-only");
+  assert.equal(meads.checked_at, "2026-10-13");
+  assert.equal(meads.contacts.length, 1);
+  assert.equal(meads.socials.length, 0);
+  assert.equal(clubProfiles[meads.slug].biography.length, 3);
+  assert.equal(clubProfiles[meads.slug].founded_year, undefined);
+  assert.equal(clubProfiles[meads.slug].notable_members[0].name, "Dale Anderton");
+  assert.match(clubProfiles[meads.slug].notable_members[0].detail, /does not establish formal or current membership/);
+  assert.match(clubProfiles[meads.slug].biography.join(" "), /22 November 2014/);
   // Batch 120: current training evidence must not turn a PO box into a venue.
   const batch120Slugs = ["thornton-cleveleys-running-club", "tri-anglia"];
   const thornton = bySlug.get(batch120Slugs[0]);
@@ -336,7 +351,7 @@ try {
     assert.equal(club.address_kind, addressUnknown ? undefined : "directory");
     if (addressUnknown) assert.equal(club.address, "");
     // Evesham and Wharfedale histories were recovered in batches 114 and 116.
-    if (!["evesham-vale-running-club", "wharfedale-harriers"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["evesham-vale-running-club", "wharfedale-harriers", "meads-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   // Batch 108: verified venue classification, dated origins and placeholder exclusion.
   for (const slug of ["the-hawcs", "westside-runnas-uk", "heald-green-runners", "lifts-and-sprints-athletics-academy", "ts-harriers"]) {

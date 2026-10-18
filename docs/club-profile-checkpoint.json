@@ -1,19 +1,18 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch120",
+  "lastEditorialBatch": "2026-10-18-batch121",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch120: 1,629/1,737 biographies (93.8%) and 842 sourced associations assembled; 108 remain incomplete. PR763 contains five unpublished biographies and four associations across batches119–120. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch121: 1,630/1,737 biographies (93.8%) and 843 sourced associations assembled; 107 remain incomplete. PR763 contains six unpublished biographies and five associations across batches119–121. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "thornton-cleveleys-running-club",
-    "tri-anglia"
+    "meads-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1629,
-    "notableMemberEntries": 842,
+    "extendedProfiles": 1630,
+    "notableMemberEntries": 843,
     "clubsWithContacts": 1279,
     "contactEntries": 2085,
     "clubsWithEmail": 1236,
@@ -23,25 +22,27 @@
     "websiteContactRecords": 1609
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
+    "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 2,
+    "contactOrSocialRecordsChanged": 0,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 2,
-    "netSocialLinks": 3,
+    "netContactEntries": 0,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch120 actual-catalogue/profile checks, catalogue verification, club-audit check, targeted ESLint, TypeScript, whitespace checks and safe preview build passed. Actual1629/1737 biographies,842associations;2085contacts across1279clubs;2588sociallinks across1229clubs. Build skipped external migrations and production publishers. Exact-head preview and dedicated desktop/mobile results will be recorded in PR763 after commit. Prior head fbee1c13ed81c68835c6712001831fd681e1a6cf passed Club profiles39122688474 and full quality39122688407; its exact AthRecs preview passed72 assertions across all three batch119 pages. No production publication or access-control changes."
+    "status": "Batch121 actual-catalogue/profile checks, catalogue verification, club-audit check, targeted ESLint, TypeScript, whitespace and safe preview build passed. Actual1630/1737 biographies and843associations; contacts2085 andsocials2588 unchanged. Build skipped external migrations and production publishers. Prior exact head3905dad passed Club profiles39125924734 and full quality39125924775, plus129 actual-preview assertions over five pages and inspected dedicated desktop/mobile artifacts. New-head evidence must be recorded in PR763; earlier results do not certify this batch. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
     "fry-club-joggers",
-    "meads-runners",
     "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "BATCH121 CURRENT: module dq seedv121 adds Meads Runners, Eastbourne town correction and Dale Anderton historical training association. Parent3905dad10a7918e7970e6e2120cc3452f71c14e2/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked; no competing writer. Assembled1630/843, live1624/838, draft6/5,107 incomplete. No contact/social changes. Preserve all older unresolved gaps and23OctoberTI follow-ups. Exact-head workflow/preview verification belongs in PR763.",
+    "18Oct Meads recovered: https://www.justgiving.com/MeadsRunnersFestiveFunRun ordinarypublicHTML read200, storysecondfunrun22Nov2014/previousyear whileheader2013; datedplannedevent only. https://www.justgiving.com/fundraising/lammyandjonny read2022EastbourneseafronttrainingwithMikeOvens; ordinaryparticipantnotnotable. https://www.eastbournetriathlon.co.uk/about/ readDaleAnderton2019trainingassociation, notclubtriathlonownership/currentmembership. Leagueclubs read. ECCAcontact/directoryWesternLawns retained, cityEastbournecorrected. Mainwebsite503, X403, Facebookunreadable respected; no socials/timetable/founding invented. Bothappealsclosed.",
+    "18Oct Fry newprimary: https://www.keynsham-tc.gov.uk/_UserFiles/Files/Publications/Keynsham%20News/KN_Spring%202020%20LR.pdf recoveredordinarydownload; p33rendered/visuallyread Tuesday19:00foyerbriefnotice, no substantialhistory/currenttimetable. Somerdaleofficialhome read butvenuecontacts/feesnotclubfacts; legacyBT403notretried. CLAN https://clubs.britishtriathlon.org/CentralLancsRunningTriathlonClubCLAN ordinaryHTML404; RosemereFacebookthrottled, secondaryvirtualmarathon/racedonationreportsnotadopted. Seek new club/community primary accounts, not repeated blockedURL attempts.",
     "BATCH120 CURRENT: continue open draft PR763/codex/club-profiles-batch119, parentfbee1c13ed81c68835c6712001831fd681e1a6cf, main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed unchanged before edits. Module dp seedv120 adds ThorntonCleveleys and TriAnglia, one historical BobFairclough association, two role emails and three source-attributed socials. Assembled1629/842; live1624/838; draft5/4;108 incomplete. New website/location values use profile corrections; TriAnglia alias city test now respects sourced editorial corrections. No competing writer observed. Preserve older gap history and23OctoberTI follow-ups.",
     "18Oct Thornton recovered: ordinary public HTTP home/club-information/club-history/about returned200 and read. History2009founders and2010Fairclough5; currenthomepage/info corroborateTeeTimeGolfCentreFY51RN Tuesdaytraining, nothistoricPoolfootFarm. Facebooklink attributed. Generalemail conflict run-tcrc@gmail.com versuscommitteeJuly2025 runtcrc@gmail.com left unresolved; neither added, ECCAcontactpreserved. Do not invent phone/currentcourseavailability or postcode/countychanges. This supersedes earlier unreadable-history gap.",
     "18Oct TriAnglia recovered: legacyhomepage announcesClubPalswitch19October; linkedportal/about-us/membership ordinarypublicHTML read200. Currentdated19–22Oct2026Norwichsessions;1992origin/2018CIO; two clubroleemails;Facebook/X; explicitPOBox3412NorwichNR77APcorrespondence. Portalwebsite/contactroute replaceoldsite; noevent-onlyemail/suppliercontact, no membershipcounts/fees/expiry imported dueconflictingold/newwording. No notableassociation established. Existingalias/ECCAcontact preserved; countryEngland unchanged. This supersedes earlier sourceunavailability, not23OctoberTIreview.",
