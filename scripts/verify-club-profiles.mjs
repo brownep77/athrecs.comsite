@@ -17,6 +17,28 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 124: historical primary accounts do not establish current training venues.
+  for (const slug of ["winter-hill-runners", "uts-running-club"]) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).socials.length, 0);
+  }
+  const winterHill = bySlug.get("winter-hill-runners");
+  assert.equal(winterHill.city, "Horwich");
+  assert.equal(winterHill.address, "");
+  assert.equal(winterHill.postcode, "");
+  assert.equal(winterHill.location_precision, "area-only");
+  assert.equal(winterHill.adult_only, true);
+  assert.match(clubProfiles[winterHill.slug].notable_members[0].detail, /dated association/);
+  const uts = bySlug.get("uts-running-club");
+  assert.equal(uts.city, "Wirral");
+  assert.equal(uts.address_kind, "directory");
+  assert.equal(uts.postcode, "CH47 4AA");
+  assert.equal(uts.adult_only, false);
+  assert.equal(uts.contacts.find(c => c.email === "mike.stone@talk21.com").phone, "07711 511608");
+  assert.equal(clubProfiles[uts.slug].notable_members, undefined);
   // Batch 123: historical interviews and an explicitly identified social-run venue.
   for (const slug of ["helpston-harriers-ac", "twisted-running"]) {
     assert.equal(clubProfiles[slug].biography.length, 3);
@@ -337,9 +359,9 @@ try {
     assert.ok(contact, slug);
     assert.equal(contact.checked_at, "2026-10-18");
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
-    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : slug === "run-middlewich" ? 2 : 1);
+    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["run-middlewich", "uts-running-club"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
-    if (!["metropolitan-police-ac", ...batch122Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["metropolitan-police-ac", "uts-running-club", ...batch122Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");
@@ -406,7 +428,7 @@ try {
     assert.equal(club.address_kind, addressUnknown ? undefined : "directory");
     if (addressUnknown) assert.equal(club.address, "");
     // Evesham and Wharfedale histories were recovered in batches 114 and 116.
-    if (!["evesham-vale-running-club", "wharfedale-harriers", "meads-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["evesham-vale-running-club", "wharfedale-harriers", "meads-runners", "winter-hill-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   // Batch 108: verified venue classification, dated origins and placeholder exclusion.
   for (const slug of ["the-hawcs", "westside-runnas-uk", "heald-green-runners", "lifts-and-sprints-athletics-academy", "ts-harriers"]) {

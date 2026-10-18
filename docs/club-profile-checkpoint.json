@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch123",
+  "lastEditorialBatch": "2026-10-18-batch124",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch123: 1,635/1,737 biographies (94.1%) and 845 sourced associations assembled; 102 remain incomplete. PR763 contains eleven unpublished biographies and seven associations across batches119–123. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch124: 1,637/1,737 biographies (94.2%) and 846 sourced associations assembled; 100 remain incomplete. PR763 contains thirteen unpublished biographies and eight associations across batches119–124. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "helpston-harriers-ac",
-    "twisted-running"
+    "winter-hill-runners",
+    "uts-running-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1635,
-    "notableMemberEntries": 845,
+    "extendedProfiles": 1637,
+    "notableMemberEntries": 846,
     "clubsWithContacts": 1280,
-    "contactEntries": 2088,
+    "contactEntries": 2089,
     "clubsWithEmail": 1237,
-    "clubsWithPhone": 191,
+    "clubsWithPhone": 192,
     "clubsWithSocials": 1231,
     "socialLinks": 2592,
     "websiteContactRecords": 1610
@@ -27,21 +27,24 @@
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 1,
     "contactOrSocialRecordsChanged": 1,
-    "newWebsiteContactRecords": 1,
+    "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 1,
-    "netSocialLinks": 2,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch123 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1635/1737 biographies,845 associations,2088 contacts,2592 socials. External migrations and production publishers skipped. Exact-head workflow/preview evidence belongs in PR763. Previous head4cb495e passed Club profiles39134781847 and full quality39134781832; its81 hosted assertions and inspected desktop/mobile artifact do not certify this batch. No production publication or access-control changes."
+    "status": "Batch124 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1637/1737 biographies,846 associations,2089 contacts,2592 socials. External migrations and production publishers skipped. Exact-head workflow/preview evidence belongs in PR763. Previous head4845e4f passed Club profiles39138865139 and full quality39138865193; its54 hosted assertions and inspected desktop/mobile artifact do not certify this batch. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
-    "twemlow-track-club",
-    "athletics-ni-st-annes-ac",
-    "winter-hill-runners"
+    "gator-athletics-club",
+    "bornready-academy",
+    "seven-ten-ac"
   ],
   "resumeInstructions": [
+    "BATCH124 CURRENT: module dt seedv124 adds WinterHill and UTS; AlbertSunter dated2025 association, Horwich town-only correction and one undated county contact email/phone. Parent4845e4fe63574b1fe13fe97c91251a09af981e85/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked, no competing writer. Assembled1637/846, live1624/838, draft13/8,100 incomplete. Previoushead bothworkflows passed. Exactnewhead evidence inPR763; preserveoldergaps and23OctoberTI follow-ups.",
+    "18Oct WinterHill: Horwich7March2024grantPDFpage1 visuallychecked500poundsrecipient; no inferreduse/foundation. MadBullCurleys1Apr2026organiseraccount, JolleyCrofters registrationNOTtraining; publishercontacts excluded. Jura2025officialreport namesAlbertSunter34thappearance, notallforclub/currentmembership. HTTPwebsiteItworksplaceholder andFacebookthrottled respected, ECCAcontactretained. UTS: JustGivingVirtualHoylake10k clubauthored2020closedappeal; WirralJan2021assessmentpages2/88 visuallychecked, mostly2019research, no currenttimetable/67membershipclaim/unnamedGBathlete. AdjacentPensbyaddress nottransferred; FoundationJan2016notclubfounding. MCAAUTSrow MikeStoneemailphone attributedundated; ECCAcontact retained, noWarriors/suppliercontacts. utsrunclub.org andtheuts.co.uk/run-club ordinary503, no newwebsite/socials. Supersedes no-biography gaps only for these2; currenttraining/founding unknown.",
+    "18Oct held: TwemlowDRRLblackmore-vale-1-2-race-report502, no new substantialprimaryhistory; knownTLS/403restrictions not bypassed. StAnnesBelfast founder1980mirror notprimary; RockSalt/YellowBrickRoad newsearch no primarynarrative. Next newprimary Gator/BornReady/SevenTen routes, canonical slugs must be checked before edits. Two supported biographies, not20–30/whole-directory manualreview.",
     "BATCH123 CURRENT: module ds seedv123 adds Helpston Harriers and Twisted Running; Thomas Musson historical chairman association, two town corrections, Twisted training address/working website, one visible email and two publisher-linked socials. Parent4cb495e6f697b9b7865c24820d4ac7cb1f5f047a and main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked; no competing club writer observed. Assembled1635/845, live1624/838, draft11/7,102 incomplete. Previous-head dedicated and full quality workflows now both successful. Preserve older gaps and23OctoberTI follow-ups; new-head evidence in PR763.",
     "18Oct Helpston: opened PeterboroughToday6Sep2018/18Apr2020 first-person ThomasMusson interviews; historical seasonal training and friendship origins, not current timetable/fees/office. Club-labelled Strava page recovered ordinaryHTTP200 confirmsPeterborough; no social ownership claim or new social link. ECCA2026–27page33contact unchanged; website503. Foundingyear/currentvenue unknown, other newspaper athlete lists excluded. Twisted: own club-affiliation/social-runs/get-me-started-running/strava-group/contact pages recovered200. Optionalaffiliation vs socialparticipation, AltrinchamArch15ViaductRoadWA145DU explicitlyrunmeetingpoint, virtualtrue retained. Contact visiblehello@twistedrunning.co.uk used; mailtohello@domain.com placeholder excluded. Instagramtwistedrunning andStrava1174491 linkedbyclub. Price35vs38 conflict and undatedJuly–Septemberbeginnersintake omitted ascurrentoffers; no founder/notables/phone invented.",
     "18Oct held: BodminWomens bwrc.uk andDSFRS clubsite503; Twemlow leaguelead drrl.co.uk/dorset-clubs web502, countylist only confirmsclub nothistory; StAnnesBelfast freshAthleticsNI directory unchanged contact but no substantialprimarynarrative. No new biography credit or refreshed unavailable-source dates. Two supported additions, not20–30 orwhole-directorymanualreview. Next seek newprimaryTwemlow/StAnnes/WinterHill accounts without retrying knownaccessrestrictions.",
