@@ -1,17 +1,18 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch117",
+  "lastEditorialBatch": "2026-10-18-batch118",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
   "pullRequest": 762,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds29 biographies/17 associations; assembled1622/1737 (93.4%),838 associations,115 incomplete. Batch117 continues786947981f77fb2a25b87cdf7ac4a77dd5e1466e on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds31 biographies/17 associations; assembled1624/1737 (93.5%),838 associations,113 incomplete. Batch118 continues52aaf5ae19c468717f6bf2c12bf4eb6b2ae0f89e on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "shepshed-running-club"
+    "team-balancise-rc",
+    "aurora-harriers"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1622,
+    "extendedProfiles": 1624,
     "notableMemberEntries": 838,
     "clubsWithContacts": 1279,
     "contactEntries": 2082,
@@ -22,25 +23,30 @@
     "websiteContactRecords": 1608
   },
   "batchChanges": {
-    "extendedProfilesAdded": 1,
+    "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 0,
-    "contactOrSocialRecordsChanged": 19,
-    "newWebsiteContactRecords": 19,
+    "contactOrSocialRecordsChanged": 0,
+    "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 19,
+    "netContactEntries": 0,
     "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch117 catalogue, profile, club-audit, targeted ESLint, TypeScript, whitespace checks and safe preview build passed before guarded commit. Actual assembled1622/1737 profiles,838 associations,115 incomplete;1279 clubs with2082 contacts/1236 emails; no phone/social changes. External database migrations and every production publisher skipped. Previous batch116 Club profiles39110747507 passed, but full quality39110747540 failed at account-results-panel browser test: scripts/verify-account-panel-ui.mjs:40 expected one RunRecs potential-results heading, found zero (job117626170858). Earlier type-check/lint/verify step passed. This is not the club workflow and no unrelated account code is changed. Exact-head preview and desktop/mobile evidence to be recorded in PR762. No publication or access-control changes."
+    "status": "Batch118 catalogue, profile, club-audit, targeted ESLint, TypeScript, whitespace checks and safe preview build passed before guarded commit. Actual assembled1624/1737 profiles,838 associations,113 incomplete; all contact/social counts unchanged. External database migrations and every production publisher skipped. Previous batch117 Club profiles39114574336 and full quality39114574345 both SUCCESS. Exact-head preview and dedicated desktop/mobile evidence to be recorded in PR762 after commit; neither readiness nor a build constitutes publication. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
-    "gator-athletics-club",
-    "aurora-harriers",
-    "team-balancise-rc"
+    "thornton-cleveleys-running-club",
+    "tickhill-running-and-athletic-club",
+    "vocalink-mastercard-running-club"
   ],
   "resumeInstructions": [
+    "BATCH118 CURRENT: module dn seedv118; Team Balancise and Aurora Harriers biographies. Assembled1624/1737(93.5%),838 associations,113 incomplete; published1593/821, draft adds31/17. Parent52aaf5ae19c468717f6bf2c12bf4eb6b2ae0f89e/main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits, no competing writer. Contacts/socials/addresses/eligibility/directory dates unchanged. Preserve23OctoberTI follow-ups. Exact-head hosted and desktop/mobile verification belongs in PR762.",
+    "18Oct Team Balancise recovery: first-person independent british-athletics.co.uk/clubs/club1181.htm introduction read (not current governing body), historical beginner/improver/speed/tempo programme; undated old phones and Dan Doherty email NOT imported. England Athletics 1Oct2024 local-running-groups-join-forces-to-fundraise-for-charity ordinary HTML read after search-reader timeout: joint Running Buddies/Balancise 28DayHillRepChallenge overGBP6000 for Breast Friends Northamptonshire. Do not transfer Running Buddies40members or personal health history. Existing ECCApage20 email retained without fresh recertification. Linked teambalancise.co.uk unavailable; current timetable/year/phone/socials gaps. Market Square old meeting point not current venue; Wharf Road directory unchanged.",
+    "18Oct Aurora recovery: NorthernAthletics29Nov2018 affiliation list read; BirtleyAC13Dec2021 notice explicitly names Aurora organiser of BoxingDay BeamishWoods socialrun, relaxed5.5miles/walkers/refreshments. Historical occasion only; exclude Birtley training/contacts. Existing ECCApage21 email retained. Washington directory not clubhouse; Eden picnic area not regular base. Catalogue weebley.com unavailable, do not guess weebly replacement. Exclude all NewZealand Aurora1937/1986/Porirua history. Current timetable/year/phone/socials unknown.",
+    "18Oct Gator source gap: public Spond WZHWK ordinary HTML is only a generic JavaScript shell; no club narrative. Facebook GatorAC1 temporarilyblocked and X403 respected, no workaround. Search-only Nov2020 origin and anonymous Reddit training claims not adopted. Existing ECCAemail unchanged. Three candidates yielded two supported profiles, not a20–30 biography batch. Next rotate ThorntonCleveleys/Tickhill/VocaLink if fresh primary narratives; do not repeat completed Aurora/Balancise.",
+    "VALIDATION DELTA: batch117 dedicatedClubprofiles39114574336 and fullquality39114574345 now both SUCCESS. This supersedes117 pending full-gate status, without diagnosing or claiming to fix116 RunRecs account-panel failure. Current118 checks and exacthead preview evidence recorded in PR762; no production publication or safeguards changed.",
     "BATCH117 CURRENT: module dm seedv117; ShepshedRunningClub biography recovered from clean event organiser and chairman's firsthand account. Assembled1622/1737(93.4%),838 associations,115 incomplete; published1593/821, draft adds29/17. Nineteen previouslyempty emails added, twentyclubs improved total. Parent786947981f77fb2a25b87cdf7ac4a77dd5e1466e/main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits, no competing writer. Preserve23OctoberTI follow-ups. Exact-head verification belongs in PR762.",
     "18Oct Shepshed recovery: clean ordinary HTML https://www.openboxpromotions.co.uk/shepshed-running-club-takes-over read31May2019 account quoting chairmanRichardBibb on one-week Dishleyparkrun takeover. EventEntry /shepshed-7 and /events/shepshed-running-club read scheduled1Nov2026 sevenmile singlelap GarendonPark/funrun/IvesheadSchool eventvenue, not currenttraining. ECCAprintedp19 existingemail visually reconfirmed. Own /home/ and /joining-src/ still have pharmaceuticalinjection: website remains suppressed; no timetable/anniversary/contact copied. No notablemembers/year/location corrections. EventEntry ContactOrganiser link resolves unreadable email-protection route; no guessed email or suppliercontact.",
     "18Oct nineteen contact-only recoveries from ECCA2026-27 exactrows, pages visuallychecked: p18 Gator; p20 TeamBalancise/Weston; p21 Aurora; p25 MerseysideFire; p26 Redcar/RockSalt; p27 ThorntonCleveleys/Tickhill; p28 VocaLinkMastercard; p29 AbbeyRunning/AttleboroughAcademy; p32 Fenland/Fry; p35 NorfolkHarriers/NorthNorfolkHarriers; p37 StJohnsWoking; p38 TriAnglia/Twemlow. Named publicclubcontacts, not employer/supplier/regionoffice emails or verifiedcurrentofficers. Canonical NorthNorfolkHarriers alias checked, distinctfrom BeachRunners. Nineteen newcontactrecords, no social/phone/address/eligibility/directorydate changes, no biographycredit for these clubs.",
@@ -172,6 +178,18 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "team-balancise-rc",
+      "status": "profile-recovered-current-programme-unconfirmed",
+      "checkedAt": "2026-10-18",
+      "reason": "Club-submitted legacy programme and England Athletics' 1 October 2024 joint fundraiser support the biography. Current sessions, founding year, phone and official socials remain unknown. Do not import old Dan Doherty contact details, Running Buddies membership count or personal health history. Existing ECCA enquiry email preserved."
+    },
+    {
+      "slug": "gator-athletics-club",
+      "status": "public-shell-and-social-access-limits",
+      "checkedAt": "2026-10-18",
+      "reason": "Spond WZHWK public HTML exposed only a generic JavaScript shell. Facebook temporarily blocked and X 403 respected. No snippet-only founding date or anonymous Reddit training claim adopted. Existing handbook enquiry email remains; full biography deferred."
+    },
     {"slug":"barlestone-st-giles-rc","status":"profile-added-junior-eligibility-conflict","checkedAt":"2026-10-18","reason":"Borough council describes Junior Saints, whereas existing EA row is adult_only. Confirm ages, separate-section relationship and current intake before changing eligibility. Current beginner-course availability and club phone not established."},
     {"slug":"new-berkeley-harriers","status":"profile-recovered-through-primary-partners","checkedAt":"2026-10-18","reason":"Partner/member accounts resolve prior narrative deferral. Founding year/current weekly programme unknown; Full On Sport contact row undated. Facebook temporarily blocked, RaceNation empty; no unreadable content or future race details adopted."},
     {"slug":"gillingham-trotters","status":"founder-lead-confirmed-profile-deferred","checkedAt":"2026-10-18","reason":"Town council Graham Bashford biography updated24July2026 confirms founder/lifetime association; county directory lists club. DRRL narrative unavailable; still need substantial primary club programme/history. Councillor personal phone/address are not club contacts."},
@@ -5181,8 +5199,9 @@
     {
       "slug": "aurora-harriers",
       "url": "http://auroraharriers.weebley.com/",
-      "status": "unavailable-and-name-collision",
-      "reason": "Listed URL returned 502; no confirmed replacement. New Zealand Aurora Harriers is a different club."
+      "status": "profile-recovered-website-and-current-programme-unconfirmed",
+      "checkedAt": "2026-10-18",
+      "reason": "Northern Athletics2018 affiliation and BirtleyAC2021 Aurora-organised social run support the biography. Listed website remains unavailable; no confirmed replacement, current timetable, founding year, phone or social route. New Zealand Aurora Harriers is a different club; Beamish event meeting point is not a current training base."
     },
     {
       "slug": "welsh-athletics-afan-nedd-tawe-schools-district",

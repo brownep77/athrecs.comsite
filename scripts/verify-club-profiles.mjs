@@ -17,6 +17,27 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 118: dated community accounts do not become today's timetable or venue.
+  const batch118Slugs = ["team-balancise-rc", "aurora-harriers"];
+  for (const slug of batch118Slugs) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(clubProfiles[slug].notable_members, undefined);
+    assert.equal(clubProfiles[slug].corrections, undefined);
+    assert.equal(club.country, "England");
+    assert.equal(club.address_kind, "directory");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.contacts.length, 1);
+    assert.equal(club.socials.length, 0);
+  }
+  assert.equal(bySlug.get("aurora-harriers").city, "Washington");
+  assert.equal(bySlug.get("aurora-harriers").adult_only, true);
+  assert.match(clubProfiles["aurora-harriers"].biography.join(" "), /13 December 2021/);
+  assert.doesNotMatch(clubProfiles["aurora-harriers"].biography.join(" "), /Porirua|Petone|1937|1986/);
+  assert.match(clubProfiles["team-balancise-rc"].biography.join(" "), /1 October 2024/);
+  assert.equal(bySlug.get("team-balancise-rc").website, undefined);
+  assert.ok(!bySlug.get("team-balancise-rc").contacts.some(c => c.phone || c.email === "dan@acornlofts.com"));
   // Batch 117: clean Shepshed narrative does not restore its compromised website.
   const shepshed = bySlug.get("shepshed-running-club");
   assert.equal(clubProfiles[shepshed.slug].biography.length, 3);
@@ -33,7 +54,9 @@ try {
     const club = bySlug.get(slug);
     assert.ok(club, slug);
     assert.equal(club.country, "England");
-    assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
+    if (!batch118Slugs.includes(slug)) {
+      assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
+    }
     const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());
     assert.ok(contact, `${slug}: handbook email`);
     assert.equal(contact.checked_at, "2026-10-18");
