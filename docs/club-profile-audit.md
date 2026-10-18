@@ -1,4 +1,4 @@
-# Club profiles and public contacts — 17 October 2026
+# Club profiles and public contacts — 18 October 2026
 
 The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This update compares current governing-body directory records, reviews public club websites and adds an editorial profile layout. It does not verify the identity of any club representative or athlete.
 
@@ -6,10 +6,20 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,683 canonical directory records have source comparisons dated 13–17 October: the initial 1,681 plus targeted Buckley and Ventoux reviews. Two Irish triathlon rows were revisited on 16 October. The remaining 54 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 1,541 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The assembled catalogue has contact entries for 1,210 clubs: 1,168 publish an email address and 188 a telephone number. There are 2,012 contact entries in total, including named directory contacts with no direct email or telephone.
-- 1,219 clubs have social links, with 2,572 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website, venue publisher or governing-body directory; this does not establish the present ownership of a social account.
-- 1,606 clubs have extended, individually written profiles (92.5% of the research cohort), with 828 sourced associations; 131 remain incomplete. Published baseline is 1,593 biographies/821 associations from PR761. Draft PR762 now adds thirteen biographies and seven sourced associations, not live. The growing public directory also contains clubs outside this 1,737-club cohort.
+- Website and primary-source research contributes contact pages or contact/social details for 1,549 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The assembled catalogue has contact entries for 1,218 clubs: 1,176 publish an email address and 188 a telephone number. There are 2,020 contact entries in total, including named directory contacts with no direct email or telephone.
+- 1,220 clubs have social links, with 2,573 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website, venue publisher or governing-body directory; this does not establish the present ownership of a social account.
+- 1,607 clubs have extended, individually written profiles (92.5% of the research cohort), with 830 sourced associations; 130 remain incomplete. Published baseline is 1,593 biographies/821 associations from PR761. Draft PR762 now adds fourteen biographies and nine sourced associations, not live. The growing public directory also contains clubs outside this 1,737-club cohort.
+
+## Batch 109 — 18 October 2026 UTC
+
+Adds Wellness Warriors on the Run's biography and two sourced co-founder associations. The recovered university article establishes early-2024 origins; firsthand provider, professional-body and community-partner accounts explain the group's approach and development. Dated grants are not advertised as current entitlements. The programme-specific university enquiry email and source-attributed Instagram route are added. The campus remains a directory address, and current intake arrangements remain unconfirmed. No individual participant health histories, clinical-outcome claims or athlete results are imported.
+
+The September 2026 ECCA handbook supplies seven missing public club emails: Evesham Vale Running Club, Hatton Darts, Meads Runners, Mel's Milers Jogging Club, West Yorkshire Police Harriers, Wharfedale Harriers and Winter Hill Runners. Each is labelled with the handbook season and page, with an actual 18 October check date. These are contact-only improvements, not seven additional biographies or fresh verification of the entire England Athletics record. Exact canonical names were matched; Evesham Vale Triathletes remains separate. Widnes Wasps' existing role mailbox is preferred to adding a redundant named contact. No publisher or governing-body office contact is imported.
+
+Eight clubs improved in total: one biography, two associations, eight emails, one social link and one programme website. Source quality limits biography expansion this time: Evesham and Mel's history search leads remain unreadable, Meads/Wharfedale/Winter Hill sites time out, and Hatton returns 403. Search-only founding stories are not adopted. The compact checkpoint preserves the new handbook route and unresolved source leads without changing existing locations, registration links, country indicators, SEO implementation, identities, results, privacy or verified status.
+
+Continues draft PR762 from 04385bafd9ff872c855e75ff6ea08a41a645bf4a; main9edeec5860433afbf2930f80aea061a9609ee134 and remote draft head checked before edits, with no competing writer observed. Module de, seed v109. Local validation is recorded in the checkpoint; exact-commit Club profiles desktop/mobile and hosted-preview evidence is recorded in PR762 after commit. Previous batch108 workflows39078257531 and39078257527 passed. No merge, production publication, outreach, external database migration or access-control change.
 
 ## Batch 108 — 17 October 2026 UTC
 

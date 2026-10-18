@@ -17,6 +17,37 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 109: programme origins and source-specific contacts, without venue inference.
+  const wellness = bySlug.get("wellness-warriors-on-the-run");
+  assert.equal(clubProfiles[wellness.slug].founded_year, 2024);
+  assert.equal(clubProfiles[wellness.slug].notable_members.length, 2);
+  assert.equal(wellness.adult_only, true);
+  assert.equal(wellness.address_kind, "directory");
+  assert.equal(wellness.checked_at, "2026-10-13");
+  assert.equal(wellness.country, "England");
+  assert.equal(wellness.contacts[0].email, "charmain.clayton@bnu.ac.uk");
+  assert.equal(wellness.socials[0].url, "https://www.instagram.com/wellnesswarriorsontherun/");
+  assert.ok(!wellness.contacts.some(c => c.phone));
+  for (const [slug, email] of Object.entries({
+    "evesham-vale-running-club": "nawrocka.kk@gmail.com",
+    "hatton-darts": "petestevens00@gmail.com",
+    "meads-runners": "jweller78@googlemail.com",
+    "mels-milers-jogging-club": "williams.ann@btinternet.com",
+    "west-yorkshire-police-harriers": "mheathermitchell@btinternet.com",
+    "wharfedale-harriers": "sam.green492@gmail.com",
+    "winter-hill-runners": "donnakelsall1979@yahoo.co.uk",
+  })) {
+    const club = bySlug.get(slug);
+    assert.equal(club.contacts.length, 1);
+    assert.equal(club.contacts[0].email, email);
+    assert.equal(club.contacts[0].checked_at, "2026-10-18");
+    assert.match(club.contacts[0].role, /ECCA 2026–2027 handbook/);
+    assert.equal(club.checked_at, "2026-10-13");
+    const addressUnknown = ["west-yorkshire-police-harriers", "winter-hill-runners"].includes(slug);
+    assert.equal(club.address_kind, addressUnknown ? undefined : "directory");
+    if (addressUnknown) assert.equal(club.address, "");
+    assert.equal(clubProfiles[slug], undefined);
+  }
   // Batch 108: verified venue classification, dated origins and placeholder exclusion.
   for (const slug of ["the-hawcs", "westside-runnas-uk", "heald-green-runners", "lifts-and-sprints-athletics-academy", "ts-harriers"]) {
     assert.equal(bySlug.get(slug).country, "England");

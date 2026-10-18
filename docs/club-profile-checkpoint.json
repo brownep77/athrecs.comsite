@@ -1,52 +1,51 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-17-batch108",
-  "reviewedAt": "2026-10-17",
+  "lastEditorialBatch": "2026-10-18-batch109",
+  "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
   "pullRequest": 762,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds13 biographies/7 associations; assembled1606/1737 (92.5%),828 associations,131 incomplete. Batch108 continues 5cc16858e56f349f9136459e3dc41b84071963be on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds14 biographies/9 associations; assembled1607/1737 (92.5%),830 associations,130 incomplete. Batch109 continues04385bafd9ff872c855e75ff6ea08a41a645bf4a on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "the-hawcs",
-    "westside-runnas-uk",
-    "heald-green-runners",
-    "lifts-and-sprints-athletics-academy",
-    "ts-harriers"
+    "wellness-warriors-on-the-run"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1606,
-    "notableMemberEntries": 828,
-    "clubsWithContacts": 1210,
-    "contactEntries": 2012,
-    "clubsWithEmail": 1168,
+    "extendedProfiles": 1607,
+    "notableMemberEntries": 830,
+    "clubsWithContacts": 1218,
+    "contactEntries": 2020,
+    "clubsWithEmail": 1176,
     "clubsWithPhone": 188,
-    "clubsWithSocials": 1219,
-    "socialLinks": 2572,
-    "websiteContactRecords": 1541
+    "clubsWithSocials": 1220,
+    "socialLinks": 2573,
+    "websiteContactRecords": 1549
   },
   "batchChanges": {
-    "extendedProfilesAdded": 5,
+    "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 4,
-    "contactOrSocialRecordsChanged": 5,
-    "newWebsiteContactRecords": 5,
+    "notableMemberEntriesAdded": 2,
+    "contactOrSocialRecordsChanged": 8,
+    "newWebsiteContactRecords": 8,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 6,
-    "netSocialLinks": 3,
+    "netContactEntries": 8,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch108 catalogue, club audit and profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All five actual built pages passed complete biography/source/social/contact-route/email, dated association, location/contact note, address classification, England indicator, registration, description, canonical and SportsOrganization assertions. Lifts and Sprints displays Training venue; the other four display Directory address. Isolated in-memory PGLite; external fetch disabled and unrelated catalogue seeding skipped. Build confirmed database publication skipped. Exact-head desktop/mobile workflow and hosted-preview evidence follow in draft PR762. Previous batch107 Club profiles39074249480 and full quality gate39074249479 passed. No external migrations or publication."
+    "status": "Batch109 catalogue, club audit, profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. All eight actual built pages returned200 and passed109 assertions covering biography, associations, contacts, source/social links, location notes/address labels, country text, registration, canonical, description and SportsOrganization. Isolated in-memory PGLite, external fetch disabled and unrelated catalogue seeding skipped. Build explicitly skipped database publication. A test's initial blanket directory-address assumption was corrected to preserve the two genuinely empty addresses; application data was not changed to satisfy it. Exact-head Club profiles desktop/mobile workflow and protected hosted-preview evidence follow in PR762. Previous batch108 Club profiles39078257531 and full quality gate39078257527 passed. No external migration or publication."
   },
   "nextCandidateSlugs": [
-    "wellness-warriors-on-the-run",
     "yellow-brick-road-running-and-walking-club",
     "michelin-running-club",
     "ravens-school-runners",
     "horsham-run-fit"
   ],
   "resumeInstructions": [
+    "BATCH109 CURRENT: module de seedv109. WellnessWarriors biography, two co-founder associations, eight new email contacts and one Instagram link. Assembled1607/1737(92.5%),830 associations,130 incomplete. Published1593/821; draftPR762 adds14/9. Parent04385bafd9ff872c855e75ff6ea08a41a645bf4a and main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits; no competing writer observed. Current nextCandidateSlugs excludes completed WellnessWarriors; old no-profile/contact gaps superseded only where explicitly resolved here. Preserve other gaps and23October follow-ups.",
+    "Wellness recovery18Oct: BNU civic-index href resolved to https://www.bucks.ac.uk/news/wellness-warriors-run-secures-ps65k-funding-sport-england ; ordinary public HTML read successfully after empty search extraction. Written2October2024, programme beganearly2024, datedgrant and enquiryemail explicitlyclub-specific. CIMSPA firsthand interview names LewisBaker/CharmainClayton co-founders and exactInstagram; Phoenix programme page readweeklycommunity account; RedKite7March2024 reports5Marchpresentation. No personal participant health histories, race results, clinical efficacy or guaranteed funding imported. Campus remains directory; adult eligibility and EA13Octdate retained. BNU switchboard excluded. Instagramthrottled/providercontact404; no current intake/phone verified.",
+    "New contact recovery18Oct: ECCA2026-27 handbook issuedSeptember2026 https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf opened/read. Page18 EveshamValeRunningClub and HattonDarts; page34 MeadsRunners and MelsMilers; page28 WestYorkshirePoliceHarriers, WharfedaleHarriers, WinterHillRunners. Seven previouslyempty emails added as dated handbook club contacts, not present committee-role verification. Exact canonicalnames/aliases checked. Existing WidnesWasps role mailbox preferred, no redundant named contact added. ECCA officials, results and unrelated contacts excluded; no location/biography/date rewrites for those seven.",
+    "New blocked-source evidence18Oct: Evesham nonwww history-projects-records searchlead isnotopened evidence (web unavailable/direct502); ColinTether/September2006 notadopted. Melsmembership/10K/constitution/history unavailable; ordinarymembershipresponse saysSiteUnavailable, notusableHTML. MelanieMarlow/2000 remainsunconfirmedforprofile. Meads/Wharfedale/WinterHill homepages timeout; Hatton403, no bypassattempt. Meads Ironbourne2021athleteinfoPDF and BNU-related HeartofBucksMarch2026alcoholreport areunopenedleads, not sourcesadopted. Repeat onlywhennew evidence emerges, not immediately. Seven contact-onlyupdates do not count as biographies.",
     "BATCH108 CURRENT: module dd seedv108; five biographies HAWCS, Westside, HealdGreen, Lifts&Sprints, TSHarriers and four associations. Assembled1606/1737(92.5%),828 associations,131 incomplete. Published1593/821; draftPR762 adds13/7. Parent5cc16858 and main9edeec586 inspected before edits; no competing writer observed. Six role-email entries,onephone,threesocials,five new contact-route records. Lifts venue classification supported by its own full address; other four remain directory. Batch107 Club profiles39074249480 and full quality39074249479 both passed. Exact-head batch108 evidence belongs in PR762. Older no-profile gaps superseded only for these five; no production authority inferred.",
     "Batch108 recovered sources: HAWCS EnglandAthletics2015visit gives secondbirthday1Oct2015=>2013 and DaveRicefounder; EastHertsLottery clubauthored page gives membership/generalGmail; operatorphone excluded; Wodsonvenueage10 supersedes oldschoolleafletage8/phone/infoemail. Kukri2024TomRutterselfassociation dated, notcurrent. Westside Heylo11May2023programme launch distinct from Reach17Dec2025charitydate; RoyalParks2025guide gives exactInstagram; LondonMarathonEvents2026Gerardcofounder; Calabash publicLinkedIn31May2026launch says Westside/IRYWC programmes withincollective. No inferred legalfoundingyear/currenttimetable/childeligibility.",
     "Batch108 HealdGreen: Ratepayers societies directory directpublicHTML recovered Gmail/Facebook afterreaderfailure; Vernon5Dec2024award and own2025ManchesterHalfJustGivinghospice appeal supportcommunityhistory, notfinishresults. No founding/currenttraining/notables. Lifts own about-2/athletics-academy and aipff.co.uk/project/lifts-and-sprints/ give2018AliysaCodringtonfounder, current8+ academy/14+gym, consentbeforejoining, Oxfordtrackaddress, twoemails/sharedphone; oldfunding/apprenticeplans notcurrententitlement. TS ownWordPress homepage/training/membership/committee plus NorthernAthletics25-26list; founded2020, variableTeesValleyvenues, visibleGmailonly (mailtoexample.com excluded), undatedfees/currentcommittee uncertain, FBthrottled. All source/checkdates17OctoberUTC; governing-bodydirectory dates retained.",
