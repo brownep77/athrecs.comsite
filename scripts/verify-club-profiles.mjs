@@ -17,6 +17,34 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 128: historical police events and multisport evidence, not placeholders.
+  for (const slug of ["devon-and-cornwall-police-ac", "vector-racing"]) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).address_kind, "directory");
+  }
+  const police128 = bySlug.get("devon-and-cornwall-police-ac");
+  assert.equal(police128.address, clubEnrichment[police128.slug].address);
+  assert.equal(police128.county, "Cornwall");
+  assert.equal(police128.contacts.length, 0);
+  assert.equal(police128.socials.length, 0);
+  assert.equal(police128.website, undefined);
+  const vector128 = bySlug.get("vector-racing");
+  assert.equal(vector128.county, "Tyne and Wear");
+  assert.equal(clubEnrichment[vector128.slug].county, "County Durham");
+  assert.equal(vector128.postcode, "NE39 1HD");
+  assert.equal(vector128.city, "");
+  assert.deepEqual(vector128.sports, ["Running", "Athletics", "Cycling", "Triathlon"]);
+  assert.equal(vector128.website, "https://www.vectorracing.co.uk");
+  assert.equal(vector128.contacts.length, 1);
+  assert.equal(vector128.contacts[0].email, "glfrost83@gmail.com");
+  assert.equal(vector128.socials.length, 1);
+  assert.equal(vector128.socials[0].url, "https://www.strava.com/clubs/vectorracing");
+  assert.equal(clubProfiles[vector128.slug].notable_members.length, 1);
+  assert.ok(!clubProfiles[vector128.slug].biography.join(" ").includes("Kona"));
+  assert.ok(!vector128.contacts.some((c) => c.email === "alessandro.marvaldi@gmail.com"));
   // Batch 127: recovered club history, source-attributed contact and location conflicts.
   const batch127Slugs = ["ellenborough-ac", "hydrographic-harriers"];
   for (const slug of batch127Slugs) {
@@ -430,7 +458,8 @@ try {
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
     assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["run-middlewich", "uts-running-club"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
-    if (!["metropolitan-police-ac", "uts-running-club", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    // Vector's new primary evidence is asserted in batch128 above.
+    if (!["metropolitan-police-ac", "uts-running-club", "vector-racing", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");

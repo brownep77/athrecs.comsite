@@ -1,47 +1,51 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch127",
+  "lastEditorialBatch": "2026-10-18-batch128",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch127: 1,643/1,737 biographies (94.6%) and 851 sourced associations assembled; 94 remain incomplete. PR763 contains nineteen unpublished biographies and thirteen associations across batches119–127. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch128: 1,645/1,737 biographies (94.7%) and 852 sourced associations assembled; 92 remain incomplete. PR763 contains twenty-one unpublished biographies and fourteen associations across batches119–128. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "ellenborough-ac",
-    "hydrographic-harriers"
+    "devon-and-cornwall-police-ac",
+    "vector-racing"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1643,
-    "notableMemberEntries": 851,
+    "extendedProfiles": 1645,
+    "notableMemberEntries": 852,
     "clubsWithContacts": 1281,
     "contactEntries": 2090,
     "clubsWithEmail": 1238,
     "clubsWithPhone": 193,
-    "clubsWithSocials": 1231,
-    "socialLinks": 2592,
+    "clubsWithSocials": 1232,
+    "socialLinks": 2593,
     "websiteContactRecords": 1611
   },
   "batchChanges": {
     "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 3,
-    "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 1,
+    "notableMemberEntriesAdded": 1,
+    "contactOrSocialRecordsChanged": 1,
+    "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 1,
-    "netSocialLinks": 0,
+    "netContactEntries": 0,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch127 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1643/1737 biographies,851 associations,2090 contacts,2592 socials. External migrations and production publishers skipped. Previous head545e7bf passed Club profiles39153749217 and full quality39153749173; previous preview checks do not certify this batch. Exact-head evidence belongs in PR763. No production publication or access-control changes."
+    "status": "Batch128 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1645/1737 biographies,852 associations,2090 assembled contacts,2593 social links. External migrations/publication skipped. Existing contact-only assertion updated only for Vector's newly sourced biography, with new source-specific regressions. Previous head d4701de passed Club profiles39158268423 and full quality39158268326. Exact-head preview/workflow evidence belongs in PR763 and does not certify production publication."
   },
   "nextCandidateSlugs": [
-    "devon-and-cornwall-police-ac",
-    "vector-racing",
-    "athletics-ni-st-annes-ac"
+    "cheshire-hill-racers",
+    "northants-police-athletic-section",
+    "seafront-shufflers"
   ],
   "resumeInstructions": [
+    "BATCH128 CURRENT: module dx seedv128 adds DevonCornwallPolice and VectorRacing, one LewisTimmins datedorganiserassociation, oneStrava link, VectorcountyTyneandWear andCycling/Triathlontags. Assembled1645/852, live1624/838, draft21/14,92incomplete. No new contacts/directorydate refresh. Parentd4701de/main de1325f5 unchanged before writes; previoushead bothworkflowsSUCCESS. Exactnewhead checksinPR763. Preserveoldergaps and23Octoberfollowups; nextCheshireHillRacers/NorthantsPolice/SeafrontShufflers viaNEWprimarysources.",
+    "18Oct Police recovery: slateman.co.uk/psuk/psuk-xc-11a.htm ordinaryHTML readSallyBroome primaryreport13April2011Beer hosting320plus; /Psuk/psuk-eventsummary-14.htm readupdated23Jan2014planned10Septemberroadchampionship. No currenttimetable, national2014eligibility transfer or result/memberimport. February2026EA PDFp38visuallycheckedDevon/sixdisciplines; NewquayCornwalldirectory preserved notvenue. JunePDF andfreshECCA2026-27notlisted, currentstatusunresolved notclosure. Old2025contactsearchleadnotimported.",
+    "18Oct Vector recovery: publicStrava/clubs/vectorracing readownNorthEasttriathlon/cycling/Newcastle description; EA1Feb2026PDFp19visuallycheckedTyneAndWear anddisciplines. ECCA2026-27printedp28freshdownload/visual confirmsretainedglfrost83email. CTT/events/43513 read14June2026Northumberland25mileM2510/LewisTimminsorganiser; organisationlinkrestrictedSTOP. OriginalCountyDurham/NE39directory preservedunderlying; countycorrectedonly, no street/cityinferred. Newwebsitevectoracing.co.uk home/terms/privacy/logincontains explicitPLACEHOLDERresults; no sufficientidentitybridge, no replacement/email/freefee/FB/Instagramimport, no Ironman/Konaclaim. Oldwebsiteconnectfailure. Currenttimetable/founding/fees/venue unknown.",
+    "18Oct StAnnesnewprimarylead: https://www.irishmasterathletics.com/post/national-awards read23Nov2023 presidentaccount AnnMaguireStAnnesBelfastTadghLynchtrophy; https://www.irishmasterathletics.com/tadgh-lynch-perpetual-trophy readAnneMaguire2023recipient. ANI Clubs/Find-A-Club currentsecretaryemail/phone matchesexisting. Insufficientbroaderhistory/programmeforfullbio; saveawardforfuture, no mirroring1980founders/Clubmark/athletes. https://ani.opentrack.run/en-gb/orgs/STANN/403respected. Parishhistory/groupsreadnotathletics; no parishdates/contacts transferred.",
     "BATCH127 HOSTED FOLLOW-UP: firstcommit45da9b755b0b81469dc5edc215e59d9cfefc3af4 exactAthRecspreviewdpl_Fp1onmcmfXATS5iXZWDhy7WthG8j READY/65realpageassertions; dedicatedClubprofiles39157859788passed, desktop1280/mobile390fixturePNGsvisuallyinspected. Foundexistingarea-onlycaption claimedtownunpublisheddespiteMaryport/Taunton. Follow-up changescaptiononly toTownorareaconfirmed/exactvenueunconfirmed, addsdesktop/mobile/no-townregressions. No sourcedata/count/seed,verificationstatus,registration,privacyorSEOimplementationchanges. Finalheadpreview/workflowevidenceinPR763supersedesfirstcommit; fullquality39157859791stillrunningatfollow-up.",
     "BATCH127 CURRENT: module dw seedv127 adds Ellenborough and Hydrographic;3 historical associations RaymondThompson/MaryThompson founders1958 and RickyLightfoot clubarchive2016. Assembled1643/851,live1624/838,draft19/13,94incomplete. One new email/phone entry,2contactroutes, no socials. Parent545e7bfefc38dddb0ad45d141314423c97b717c0/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed recheckedunchanged, no competing writer. Previoushead bothworkflows passed. Newhead evidence inPR763. Preserveoldergaps/23Octoberfollowups.",
     "18Oct Ellenborough recovered ordinarypublicHTTPS https://ellenboroughac.com/ club-info/ contact-us/ bob-graham-round/ coledale-horseshoe/ afterreader400, no accessrestriction bypass. Ownhistory1958founders,2009seniorfellteam,2017juniorsectionended. Maryport/Cumbria town-only, .com.uk replaced; formreadNOTsubmitted. ECCAemailoriginaldatepreserved. No phone/social found. Clubmark historicalwording notfreshaccreditation; juniorsarchive notcurrentintake; ColedaleMarch2026Braithwaiteevent nottraining. No currenttimetable confirmed.",
@@ -213,6 +217,13 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "devon-and-cornwall-police-ac",
+      "status": "historical-profile-recovered-current-status-unconfirmed",
+      "checkedAt": "2026-10-18",
+      "url": "https://www.slateman.co.uk/psuk/psuk-xc-11a.htm",
+      "reason": "Primary 2011 host report and planned2014 road championship support biography; no current timetable, contact, eligibility or founding year. February2026 affiliation row present but June list/ECCA2026-27 absent; no closure or present-affiliation inference. Newquay directory retained, not training."
+    },
     {
       "slug": "sedbergh-schools-group-running-club",
       "status": "registered-entity-relationship-unconfirmed",
@@ -615,9 +626,9 @@
     },
     {
       "slug": "athletics-ni-st-annes-ac",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Directory and track bookings alone insufficient; news index did not expose Clubmark article. No award claim adopted.",
-      "checkedAt": "2026-10-16"
+      "status": "primary-award-recovered-programme-history-thin",
+      "reason": "IMAA23Nov2023 NationalAwards and TadghLynch recipient page read: Anne/AnnMaguire StAnnesBelfast serviceaward2023. Saved in resumeInstructions, but not enough broader programme/history for full biography. ANI directory contact unchanged; OpenTrack403 respected. Do not import social-mirror founders/Clubmark/athletes or parish founding date.",
+      "checkedAt": "2026-10-18"
     },
     {
       "slug": "gordonian-runners",
@@ -1329,9 +1340,9 @@
     },
     {
       "slug": "vector-racing",
-      "status": "deferred-unreadable-primary-source",
-      "reason": "Primary website attempt returned unavailable, timeout, blocked or empty content. No biography added from search snippets.",
-      "checkedAt": "2026-10-16"
+      "status": "profile-recovered-alternative-website-identity-held",
+      "reason": "Strava team description, FebruaryEA row and CTT14June2026 organising page support biography. vectoracing.co.uk contains placeholder results and lacks sufficient registered-club identity bridge; do not import its email, social links, free-membership claim or achievements. Old website failed. Current training/founding/fees unconfirmed; ECCAcontact preserved, oneStrava added.",
+      "checkedAt": "2026-10-18"
     },
     {
       "slug": "warminster-running-club",
