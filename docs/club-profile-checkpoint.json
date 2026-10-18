@@ -5,7 +5,7 @@
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
   "pullRequest": 762,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds31 biographies/17 associations; assembled1624/1737 (93.5%),838 associations,113 incomplete. Batch118 continues52aaf5ae19c468717f6bf2c12bf4eb6b2ae0f89e on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "publication": "Published cohort baseline: 1,624 biographies and 838 sourced associations from PR762, verified 18 October 2026. All 31 new biographies, the expanded FORDY RUNS biography and 55 contact/social-only pages from batches 105–118 are live; 0 unpublished biographies remain in PR762. 113 of the 1,737-club research cohort remain incomplete. Public directory includes clubs outside this cohort; actual Google indexing is not confirmed.",
   "completedProfileSlugs": [
     "team-balancise-rc",
     "aurora-harriers"
@@ -42,6 +42,7 @@
     "vocalink-mastercard-running-club"
   ],
   "resumeInstructions": [
+    "RELEASE762 CURRENT: PR762 source 98fd89badb6ed90f0f44cf19ee63b601d5b98dff merged as 0bb298ede345b4fceb64e9c00c1fbb305a9c460f; production dpl_2CCJMtpJGsZRXD6nfSXDvMGxaPkP READY. Published baseline: 1,624 biographies and 838 associations. All 87 changed public pages and sitemap inclusion verified; 0 unpublished biographies in PR762. Older batch/live counts below are historical. Continue from current main on a fresh draft branch/PR after checking active writers; preserve all sourceGaps, nextCandidateSlugs, the known area-only caption follow-up and 23 October TI follow-ups. 113 cohort biographies remain incomplete.",
     "BATCH118 CURRENT: module dn seedv118; Team Balancise and Aurora Harriers biographies. Assembled1624/1737(93.5%),838 associations,113 incomplete; published1593/821, draft adds31/17. Parent52aaf5ae19c468717f6bf2c12bf4eb6b2ae0f89e/main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits, no competing writer. Contacts/socials/addresses/eligibility/directory dates unchanged. Preserve23OctoberTI follow-ups. Exact-head hosted and desktop/mobile verification belongs in PR762.",
     "18Oct Team Balancise recovery: first-person independent british-athletics.co.uk/clubs/club1181.htm introduction read (not current governing body), historical beginner/improver/speed/tempo programme; undated old phones and Dan Doherty email NOT imported. England Athletics 1Oct2024 local-running-groups-join-forces-to-fundraise-for-charity ordinary HTML read after search-reader timeout: joint Running Buddies/Balancise 28DayHillRepChallenge overGBP6000 for Breast Friends Northamptonshire. Do not transfer Running Buddies40members or personal health history. Existing ECCApage20 email retained without fresh recertification. Linked teambalancise.co.uk unavailable; current timetable/year/phone/socials gaps. Market Square old meeting point not current venue; Wharf Road directory unchanged.",
     "18Oct Aurora recovery: NorthernAthletics29Nov2018 affiliation list read; BirtleyAC13Dec2021 notice explicitly names Aurora organiser of BoxingDay BeamishWoods socialrun, relaxed5.5miles/walkers/refreshments. Historical occasion only; exclude Birtley training/contacts. Existing ECCApage21 email retained. Washington directory not clubhouse; Eden picnic area not regular base. Catalogue weebley.com unavailable, do not guess weebly replacement. Exclude all NewZealand Aurora1937/1986/Porirua history. Current timetable/year/phone/socials unknown.",
@@ -6880,17 +6881,17 @@
     "Batch34:19 new profiles across16 English clubs, Mallow and Ennis in Ireland, and Ormeau in Northern Ireland. Seven historical connections;17 website-contact records changed(9new),14 net contacts and13 social links. Hastings was already complete and excluded. No full-directory manual review or athlete identity claims.",
     "Batch35:20 profiles across17 English clubs, White Rock and Refail in Wales, and Tinahely in Ireland. Nine historical connections;20 contact/social records changed(12new),18 net contacts and16 social links. Coverage685/1,737(39.4%),289notable entries. This is a bounded editorial batch, not a full-directory manual review."
   ],
-  "previousPullRequest": 756,
+  "previousPullRequest": 761,
   "productionAuthorization": {
-    "date": "2026-10-17",
+    "date": "2026-10-18",
     "instruction": "Publish all please",
-    "releasePullRequest": 761
+    "releasePullRequest": 762
   },
   "release": {
-    "pullRequest": 761,
-    "sourceHead": "d17229fafe36d2bc41bc7e3242285ea4bceff4fc",
-    "mergeCommit": "f2dedb16c823cc96c583231bcf556b8cf5492239",
-    "deployment": "dpl_9BrwJh7WivDGr7GKe2aZxmUZMubK",
+    "pullRequest": 762,
+    "sourceHead": "98fd89badb6ed90f0f44cf19ee63b601d5b98dff",
+    "mergeCommit": "0bb298ede345b4fceb64e9c00c1fbb305a9c460f",
+    "deployment": "dpl_2CCJMtpJGsZRXD6nfSXDvMGxaPkP",
     "status": "READY",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
     "aliases": [
@@ -6898,24 +6899,27 @@
       "athrecs.com"
     ],
     "aliasError": null,
-    "liveBiographies": 1593,
-    "liveAssociations": 821,
-    "reviewedAt": "2026-10-17",
-    "verifiedAt": "2026-10-17T19:05:35.283Z",
+    "liveBiographies": 1624,
+    "liveAssociations": 838,
+    "reviewedAt": "2026-10-18",
+    "verifiedAt": "2026-10-18T10:56:14.525Z",
     "unpublishedBiographiesInRelease": 0,
-    "remainingUnresearchedCohortBiographies": 144,
-    "verification": "All46 changed production pages (44 new biographies and Run Middlewich/Sunlight contact-only updates) returned HTTP200 and passed1398 assertions for full visible biographies, associations, summary/contact/location notes, contacts/socials/sources, address/map/location values, country indicators, registration links, title/description/canonical/robots and exact SportsOrganization JSON-LD. All46 URLs are in the public clubs sitemap; robots allows club crawling. This is automated deployment/content verification and independent diff review, not a fresh manual source audit of every club.",
-    "qualityGateRun": 39057219732,
-    "clubProfilesRun": 39057219734,
-    "hostedBrowserVerification": {
-      "scope": "Read-only actual public Gordonian page at desktop size: readable layout, corrected West End/Surrey biography/location, England indicator, source-attributed social links and matching metadata/SportsOrganization. Public club directory search returned one Gordonian result at West End/Surrey. Register this club opened the expected sign-in and authority explanation; no sign-in or registration submitted.",
-      "knownLimitation": "Generic area-only caption says the exact town is not published despite source-supported West End. Minor presentation follow-up; source data precision retained."
-    },
+    "remainingUnresearchedCohortBiographies": 113,
+    "changedPages": 87,
+    "newBiographies": 31,
+    "existingBiographiesUpdated": 1,
+    "contactSocialOnlyPages": 55,
+    "verification": "All 87 changed production pages (31 new biographies, the expanded FORDY RUNS biography and 55 contact/social-only updates) returned HTTP 200 and passed 1,966 assertions for full visible biographies, associations, summary/contact/location notes, contacts/socials/sources, address/map/location values, country indicators, registration links, title/description/canonical/robots and exact SportsOrganization JSON-LD. All 87 URLs are in the public clubs sitemap; robots allows club crawling. This is automated deployment/content verification and independent diff review, not a fresh manual source audit of every club.",
+    "qualityGateRun": 39118039874,
+    "clubProfilesRun": 39118039927,
     "searchQualification": "Public pages are indexable, canonical and included in the sitemap; actual Google indexing or ranking is not confirmed. No Search Console validation or indexing request submitted.",
-    "sourceReview": "No new embedded-postcode/address mismatch. Unsafe website suppressions for Liverpool Harriers, Liverpool Pembroke & Sefton, Pudsey & Bramley and Saffron preserved unchanged. Known source gaps, dated schedules and provisional TI standings remain qualified.",
+    "sourceReview": "No new embedded-postcode/address mismatch. Unsafe website suppressions for Liverpool Harriers, Liverpool Pembroke & Sefton, Pudsey & Bramley, Saffron and Shepshed remain blank. Existing contact emails, phone numbers and social URLs are preserved. Clean alternative publishers and exact ECCA 2026–2027 handbook rows support new biographies and public contacts. Known source gaps, dated schedules and provisional TI standings remain qualified.",
     "knownFollowUp": "Generic area-only location caption says exact town is not published even for source-supported named towns such as Gordonian West End. Suggested UI wording: Local area confirmed; check current training venues with the club. Do not change Gordonian precision to imply a verified street/postcode.",
-    "writerQualification": "Root agent reserved PR761 for release through19:30UTC and merged with expected-head protection; normal merge preserves unrelated current-main changes.",
-    "authorization": "User explicitly requested Publish all please on17October2026; normal merge/deployment authorised. No authentication bypass or access-control change used."
+    "writerQualification": "Root agent reserved PR762 for release through 11:20 UTC and merged with expected-head protection. Main remained 9edeec5860433afbf2930f80aea061a9609ee134 before the normal merge, which preserved its full tree.",
+    "authorization": "User explicitly requested Publish all please on 18 October 2026; normal merge and deployment authorised. No authentication bypass or access-control change used.",
+    "hostedBrowserVerification": {
+      "scope": "After production READY, the actual public Barlestone St Giles RC desktop page was visually inspected: readable biography/founder layout and England indicator; correct Barlestone/Leicestershire locality, 2015 founding year, Tony Walker association, public email/social links and Barton Road training venue/map. Canonical and SportsOrganization metadata showed the correct locality, region, CV13 0EP postcode, training street, foundingDate 2015 and contactPoint. The registration click reached /clubs/register?club=barlestone-st-giles-rc and rendered sign-in plus the separate role/authority explanation; no form or sign-in submitted. Public directory search returned exactly one Barlestone result with the new summary, location and registration link."
+    }
   },
   "releaseHistory": [
     {
@@ -6955,6 +6959,37 @@
       "searchQualification": "Public pages are indexable, canonical and included in the sitemap; Google indexing or ranking is not confirmed. No Search Console validation or indexing request submitted.",
       "writerQualification": "PR756 head/body/discussion and open PRs checked. Batch94 lease expired 17 October 03:40 UTC; no newer writer lease/biography PR or head update observed. Release merged with expected-head protection; research branch, source gaps and candidate queue were not edited.",
       "authorization": "User expressly requested normal merge and production deployment in this task; no further approval or access change required."
+    },
+    {
+      "pullRequest": 761,
+      "sourceHead": "d17229fafe36d2bc41bc7e3242285ea4bceff4fc",
+      "mergeCommit": "f2dedb16c823cc96c583231bcf556b8cf5492239",
+      "deployment": "dpl_9BrwJh7WivDGr7GKe2aZxmUZMubK",
+      "status": "READY",
+      "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
+      "aliases": [
+        "www.athrecs.com",
+        "athrecs.com"
+      ],
+      "aliasError": null,
+      "liveBiographies": 1593,
+      "liveAssociations": 821,
+      "reviewedAt": "2026-10-17",
+      "verifiedAt": "2026-10-17T19:05:35.283Z",
+      "unpublishedBiographiesInRelease": 0,
+      "remainingUnresearchedCohortBiographies": 144,
+      "verification": "All46 changed production pages (44 new biographies and Run Middlewich/Sunlight contact-only updates) returned HTTP200 and passed1398 assertions for full visible biographies, associations, summary/contact/location notes, contacts/socials/sources, address/map/location values, country indicators, registration links, title/description/canonical/robots and exact SportsOrganization JSON-LD. All46 URLs are in the public clubs sitemap; robots allows club crawling. This is automated deployment/content verification and independent diff review, not a fresh manual source audit of every club.",
+      "qualityGateRun": 39057219732,
+      "clubProfilesRun": 39057219734,
+      "hostedBrowserVerification": {
+        "scope": "Read-only actual public Gordonian page at desktop size: readable layout, corrected West End/Surrey biography/location, England indicator, source-attributed social links and matching metadata/SportsOrganization. Public club directory search returned one Gordonian result at West End/Surrey. Register this club opened the expected sign-in and authority explanation; no sign-in or registration submitted.",
+        "knownLimitation": "Generic area-only caption says the exact town is not published despite source-supported West End. Minor presentation follow-up; source data precision retained."
+      },
+      "searchQualification": "Public pages are indexable, canonical and included in the sitemap; actual Google indexing or ranking is not confirmed. No Search Console validation or indexing request submitted.",
+      "sourceReview": "No new embedded-postcode/address mismatch. Unsafe website suppressions for Liverpool Harriers, Liverpool Pembroke & Sefton, Pudsey & Bramley and Saffron preserved unchanged. Known source gaps, dated schedules and provisional TI standings remain qualified.",
+      "knownFollowUp": "Generic area-only location caption says exact town is not published even for source-supported named towns such as Gordonian West End. Suggested UI wording: Local area confirmed; check current training venues with the club. Do not change Gordonian precision to imply a verified street/postcode.",
+      "writerQualification": "Root agent reserved PR761 for release through19:30UTC and merged with expected-head protection; normal merge preserves unrelated current-main changes.",
+      "authorization": "User explicitly requested Publish all please on17October2026; normal merge/deployment authorised. No authentication bypass or access-control change used."
     }
   ]
 }
