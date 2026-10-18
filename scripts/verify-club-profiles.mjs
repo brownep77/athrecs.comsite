@@ -17,6 +17,19 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 115: historical club roles do not imply current eligibility or a venue.
+  const metPolice = bySlug.get("metropolitan-police-ac");
+  const metProfile = clubProfiles[metPolice.slug];
+  assert.equal(metProfile.biography.length, 3);
+  assert.equal(metProfile.founded_year, undefined);
+  assert.equal(metProfile.corrections, undefined);
+  assert.equal(metProfile.notable_members[0].name, "Gilbert Kelland");
+  assert.match(metProfile.biography.join(" "), /vice-chairman.*1964.*chairman in 1966/);
+  assert.equal(metPolice.country, "England");
+  assert.equal(metPolice.location_precision, "area-only");
+  assert.equal(metPolice.address, "");
+  assert.equal(metPolice.adult_only, true);
+  assert.equal(metPolice.contacts[0].email, "alison.lapper@tiscali.co.uk");
   // Batch 114: dated history, no inferred eligibility or training addresses.
   for (const slug of ["evesham-vale-running-club", "gillingham-trotters", "sunlight-runners"]) {
     assert.equal(clubProfiles[slug].biography.length, 3);
@@ -135,7 +148,7 @@ try {
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
     assert.equal(club.contacts.length, slug === "run-middlewich" ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
-    assert.equal(clubProfiles[slug], undefined);
+    if (slug !== "metropolitan-police-ac") assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");
