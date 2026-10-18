@@ -1,3 +1,4 @@
+import { mojoRunFitProfiles } from "./club-profiles-dg.ts";
 import { michelinAndRunWednesdaysProfiles } from "./club-profiles-df.ts";
 import { wellnessWarriorsProfiles } from "./club-profiles-de.ts";
 import { wareOxfordTeessideAndCommunityProfiles } from "./club-profiles-dd.ts";
@@ -136,6 +137,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...mojoRunFitProfiles,
   ...michelinAndRunWednesdaysProfiles,
   ...wellnessWarriorsProfiles,
   ...wareOxfordTeessideAndCommunityProfiles,
@@ -975,4 +977,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v110";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v111";

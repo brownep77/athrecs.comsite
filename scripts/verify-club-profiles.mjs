@@ -17,6 +17,61 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 111: recovered programme, explicit handbook club contacts and venue spelling.
+  const mojo = bySlug.get("mojo-run-fit");
+  assert.equal(mojo.city, "Beckenham");
+  assert.equal(mojo.address_kind, "training");
+  assert.match(mojo.address, /Lennard Road/);
+  assert.equal(mojo.postcode, "BR3 1QN");
+  assert.equal(mojo.adult_only, true);
+  assert.equal(mojo.checked_at, "2026-10-13");
+  assert.equal(mojo.country, "England");
+  assert.equal(mojo.contacts[0].phone, "07703 101 424");
+  assert.ok(!mojo.contacts.some(c => c.email));
+  assert.equal(mojo.socials.length, 3);
+  assert.equal(clubProfiles[mojo.slug].founded_year, undefined);
+  assert.equal(clubProfiles[mojo.slug].notable_members, undefined);
+  assert.match(clubProfiles[mojo.slug].biography.join(" "), /5km in 40 minutes or less/);
+  const batch111Emails = {
+    "ellenborough-ac": "fellwinner@gmail.com",
+    "ginpit-flyers": "jamesbentall1@gmail.com",
+    "lancashire-constabulary-athletics-section": "steve@fellrunner.com",
+    "lancashire-fire-and-rescue-service-and-aa": "thepenworthamwales19@hotmail.co.uk",
+    "rolls-royce-harriers": "gillianw67@hotmail.com",
+    "run-middlewich": "debbieford70@outlook.com",
+    "south-yorkshire-police-ac": "dixonmaria16@gmail.com",
+    "daws-heath-harriers": "Arynmsmith@gmail.com",
+    "defra-ac": "stroller49@gmail.com",
+    "metropolitan-police-ac": "alison.lapper@tiscali.co.uk",
+    "michelles-running-group": "Clubsecretary@michellesrunninggroup.co.uk",
+    "slgr": "qprchelle@hotmail.com",
+    "carlisle-aspatria-ac": "julievi@btinternet.com",
+    "maryport-csc": "senhousett@gmail.com",
+    "pendle-athletic-club": "christine.chorlton@outlook.com",
+    "running-head-first": "Leon-kearney93trfc@hotmail.co.uk",
+    "stride-running-club": "davidhowlett1987@icloud.com",
+    "tyne-and-wear-fire-running-section": "brendanmcmillan@yahoo.co.uk",
+    "uts-running-club": "richard.latten@hotmail.co.uk",
+    "vector-racing": "glfrost83@gmail.com",
+    "dsfrs-running-club": "jtown@dsfire.gov.uk",
+    "ipswich-phoenix-running-club": "Gavin.Horrex1@hotmail.co.uk",
+    "mile-high": "beads@hotmail.co.uk",
+    "olympia-athletics": "carlamholcombe@hotmail.com",
+    "seafront-shufflers": "debbie.summers143@yahoo.co.uk",
+    "seven-ten-ac": "colettendunne@yahoo.co.uk"
+  };
+  for (const [slug, email] of Object.entries(batch111Emails)) {
+    const club = bySlug.get(slug);
+    const contact = club.contacts.find(c => c.email === email);
+    assert.ok(contact, slug);
+    assert.equal(contact.checked_at, "2026-10-18");
+    assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
+    assert.equal(club.contacts.length, slug === "run-middlewich" ? 2 : 1);
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(clubProfiles[slug], undefined);
+  }
+  assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
+  assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");
   // Batch 110: source-specific contacts and seasonal training, not inferred origins.
   const batch110Emails = {
     "michelin-running-club": "kenny.jay@hotmail.co.uk",

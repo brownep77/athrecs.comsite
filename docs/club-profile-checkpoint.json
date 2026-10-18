@@ -1,48 +1,51 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch110",
+  "lastEditorialBatch": "2026-10-18-batch111",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
   "pullRequest": 762,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds16 biographies/9 associations; assembled1609/1737 (92.6%),830 associations,128 incomplete. Batch110 continues0f4ca456a5dc1a166f2aa0ae0b69e90ce99ea98f on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds17 biographies/9 associations; assembled1610/1737 (92.7%),830 associations,127 incomplete. Batch111 continues6440dcd8db6e39272abafee67983e2f9038c8e6f on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "michelin-running-club",
-    "runwednesdays"
+    "mojo-run-fit"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1609,
+    "extendedProfiles": 1610,
     "notableMemberEntries": 830,
-    "clubsWithContacts": 1228,
-    "contactEntries": 2030,
-    "clubsWithEmail": 1186,
-    "clubsWithPhone": 188,
-    "clubsWithSocials": 1221,
-    "socialLinks": 2575,
-    "websiteContactRecords": 1558
+    "clubsWithContacts": 1254,
+    "contactEntries": 2057,
+    "clubsWithEmail": 1211,
+    "clubsWithPhone": 189,
+    "clubsWithSocials": 1222,
+    "socialLinks": 2578,
+    "websiteContactRecords": 1584
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
+    "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 0,
-    "contactOrSocialRecordsChanged": 10,
-    "newWebsiteContactRecords": 9,
+    "contactOrSocialRecordsChanged": 27,
+    "newWebsiteContactRecords": 26,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 10,
-    "netSocialLinks": 2,
+    "netContactEntries": 27,
+    "netSocialLinks": 3,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch110 catalogue, club audit, profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Ten actual built pages returned200 and passed139 assertions for biographies, source/contact/social links, address classification, GB-ENG indicators, registration, canonical, description and SportsOrganization. Isolated PGLite with external fetch disabled; build explicitly skipped database publication. Initial profile check correctly required removing newlycompleted Michelin from the next-candidate checkpoint; no application data was changed to satisfy it. Exact-head hosted and Club profiles desktop/mobile evidence will be recorded in PR762. Previous batch109 Club profiles39085780752 and full quality gate39085780722 both passed. No external migration or publication."
+    "status": "Batch111 catalogue, club audit, profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Twenty-seven actual built pages returned200 and passed291 assertions for biography text, source/contact/social links, training classification, GB-ENG indicators, registration, canonical and search metadata. Isolated PGLite with external fetch disabled; build explicitly skipped database publication. Actual assembled reconciliation:1610covered/127missing/0orphan profile keys;1584websiteContactRecords. Exact-head hosted and Club profiles desktop/mobile evidence will be recorded in PR762. Previous batch110 Club profiles39088897410 and full quality gate39088897385 both passed; exact6440dcd preview dpl_GU45KZf9DCokytcNgeVd5UQBwZs5 and hosted10pages149assertions are recorded in PR762. No external migration or publication."
   },
   "nextCandidateSlugs": [
-    "yellow-brick-road-running-and-walking-club",
-    "rising-brook-runners",
-    "ravens-school-runners",
-    "horsham-run-fit"
+    "ginpit-flyers",
+    "central-lancs-running-and-triathlon-club-clan",
+    "run-middlewich",
+    "yellow-brick-road-running-and-walking-club"
   ],
   "resumeInstructions": [
+    "BATCH111 CURRENT: module dg seedv111; MojoRunFit biography, no new associations. Assembled1610/1737(92.7%),830 associations,127 incomplete; published1593/821; draftPR762 adds17/9. Parent6440dcd8db6e39272abafee67983e2f9038c8e6f and main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits; no competing writer observed. Twenty-six ECCA club emails plus Mojo phone/form/three socials improve27clubs. Contact-only updates do not count as biographies.",
+    "Mojo18Oct recovered https://mojofit.uk/running/ via ordinarypublicHTML then searchreader, plus /register/mojo-run-fit-beckenham/. Women's social/noncompetitive club, intermediate5km<=40min, separate10weekbeginnercourse; Mondays20h NewBeckenhamStationcarpark LennardRoad; Wednesdays19:45nearForestHillStation. Corrected Lenmard spelling/citytrailingblank and classifiedtraining; originalpostcode retained. September7/9 2026 beginnerstarts arepast, notnewavailability. Holidaylist contains4Jan2026after21Dec2026 and olderjoiningpage differsclinicfrequency: neither copied. Phone07703101424 and form publishedforprovider/runningenquiries; obscuredemailnotguessed; Instagrammojofit_uk fromcurrentfeed, Facebookmamamojofitness/XMamaMojoFit fromfooter. Destinationsunreadable, sourceattributiononly; oldInstagramfooterhandle notadded alongsidecurrentfeed. No founder/year/notables/results/healthclaims. EAfindaclubfailed,13Octdatepreserved; OctoberPDFfind didnotlocateMojo, notproofdisaffiliation.",
+    "ECCA2026-27handbook opened/read18Oct; exactclubrows pages22–28,31,34–36. Twenty-five emptyemailclubs filled plus distinctgeneralRunMiddlewichhandbookcontact alongside existingraceenquiryemail unchanged. Club contacts notcurrentofficer verification or notablemembers. No supplier/emergency-serviceheadquarters details imported; no eligibility/directorydate/location changes forcontact-only clubs.",
+    "New leads18Oct: GinPit sponsor https://greenearthgroup.co.uk/community/ confirms480pounds trainingcontribution, notcluborigin. CharityCommission report objectiveA19303109/charity521337 searchlead mentionsclub, but openfailed/directemptyPDF: no2020origin adopted. Facebookthrottled; easyfundraisingpage read butopenedbodydoesnotshowsearchsnippet40+members. CLAN BritishTriathlonpageunavailable; RosemereFacebook/newspapercharitylinks needreadableprimaryprogramme. SunlightBTR2026racepreview confirmsplanned150team only, notresults/membershipeligibility; existingcountycontactpreserved. RunMiddlewichNifty2027indexread, generalclubprogrammestillunknown. Twistedstorehomepage readproduct/brandstoryonly, notclubhistory. Michelle domain discoveredfromhandbookemail butunavailable. 7Hills/Bodmin/TriAnglia sourcesunavailable; SLGR403 respected. Preserve all23OctoberTIreview instructions.",
     "BATCH110 CURRENT: module df seedv110. Michelin and RunWednesdays biographies; no new associations. Assembled1609/1737(92.6%),830 associations,128 incomplete. Published1593/821; draftPR762 adds16/9. Parent0f4ca456a5dc1a166f2aa0ae0b69e90ce99ea98f and main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits; no competing writer observed. Ten previouslyempty emails and two social links; nine new website-contact records plus existing QBE record extended. RunWednesdays FishermansGreen classifiedtraining oncounty club-supplied evidence; Michelin nametrailingblank removed. All other addresses/eligibility/directorydates unchanged.",
     "Michelin18Oct: https://www.strava.com/clubs/Michelinathleticclub publicHTML recovered by ordinary request after searchreaderfailed; Hanford, smallfriendly allabilities/keepgrouptogether ethos. EA8June2026PDF p40 confirmsroad/crosscountry. ParentMAC https://stokemac.michelin.co.uk/about.php supports1928organisation/1970svenuehistory only, NOT runningclubfounding or joiningrules. No1960s/1979racedate/athletemembership inferred; Dundee andBallymena Michelin associations excluded. X403, no search-onlyWednesdaytimetable adopted. Strava publicjoin route added; currentprogrammephone/notables/yearunknown, sportscentre directoryaddressretained.",
     "RunWednesdays18Oct: https://www.sussexathletics.net/Find-a-Club/ read club-suppliedgroups Little/Female/open-to-all, Wednesday17/18/19h subjectconfirmation; FishermansGreen/WishtowerSlopes/seasonalBeachyHead. ColinBurbage secretaryemail corroboratedECCA2026-27p36. No founding/notables/livebooking/groupagelimit invented. ExistingFacebookDisabledError, provenancepreserved. EA8June2026PDFp33 confirmsroad/crosscountry/trail; latestEAfindaclubrequests unavailable so13Octdate retained.",
