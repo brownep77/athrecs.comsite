@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch128",
+  "lastEditorialBatch": "2026-10-18-batch129",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch128: 1,645/1,737 biographies (94.7%) and 852 sourced associations assembled; 92 remain incomplete. PR763 contains twenty-one unpublished biographies and fourteen associations across batches119–128. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch129: 1,647/1,737 biographies (94.8%) and 855 sourced associations assembled; 90 remain incomplete. PR763 contains twenty-three unpublished biographies and seventeen associations across batches119–129. Published baseline remains 1,624/838 from PR762; current main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "devon-and-cornwall-police-ac",
-    "vector-racing"
+    "seafront-shufflers",
+    "cheshire-hill-racers"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1645,
-    "notableMemberEntries": 852,
+    "extendedProfiles": 1647,
+    "notableMemberEntries": 855,
     "clubsWithContacts": 1281,
     "contactEntries": 2090,
     "clubsWithEmail": 1238,
@@ -25,23 +25,26 @@
   "batchChanges": {
     "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 1,
+    "notableMemberEntriesAdded": 3,
     "contactOrSocialRecordsChanged": 1,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 0,
-    "netSocialLinks": 1,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch128 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1645/1737 biographies,852 associations,2090 assembled contacts,2593 social links. External migrations/publication skipped. Existing contact-only assertion updated only for Vector's newly sourced biography, with new source-specific regressions. Previous head d4701de passed Club profiles39158268423 and full quality39158268326. Exact-head preview/workflow evidence belongs in PR763 and does not certify production publication."
+    "status": "Batch129 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed: 1647/1737 biographies, 855 associations, 2090 contacts, 2593 social links. External migrations/publication skipped. The first check ran before the next-candidate checkpoint was updated and correctly rejected the now-completed Cheshire candidate; the unchanged check passed after advancing the queue. Source-specific regressions preserve directory addresses/dates and exclude national-body contacts. Previous head 0a66849 passed Club profiles39161856557 and full quality39161856615. Exact-head preview/workflow evidence belongs in PR763 and does not certify production publication."
   },
   "nextCandidateSlugs": [
-    "cheshire-hill-racers",
-    "northants-police-athletic-section",
-    "seafront-shufflers"
+    "mels-milers-jogging-club",
+    "rock-salt-runners",
+    "athletics-ni-st-annes-ac"
   ],
   "resumeInstructions": [
+    "BATCH129 CURRENT: dy / seed v129 adds Seafront Shufflers and Cheshire Hill Racers, three dated associations (Pam Hart, Ed Gamble, Andy Watts), two website links and one own contact form. Assembled 1647/1737 biographies, 855 associations; published 1624/838, draft 23/17, 90 incomplete. Contacts/social counts and original directory dates unchanged. Parent 0a668491222e2656c637ba76323b43c8a78d7644 and main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed unchanged before edits. Both previous workflows passed. Exact new-head validation in PR763. Recheck remote state before further edits; no publication authorised.",
+    "18 Oct Seafront: own Clubspark Home/Contact/News pages read, dated 2023 fundraising and 2025 cross-country/Beachy accounts. Existing handbook email reconfirmed in exact ECCA2026-27 printed p36 row; no net contacts. Contact form read, not submitted. Helen Gardens contact location noted, not substituted for Charleston Road as training. Undated £12 fee omitted; coaching/calendar text did not expose sessions, so indexed date-specific entries not adopted. Footer socials are England Athletics and excluded. Parkrun July2026 archive405 not used. Unknown founding year; confirm current meeting place/fees.",
+    "18 Oct Cheshire: own rebuilding notice and county handbook link read; May2014 Bowland first-person Ed Gamble account read. July2021 FRA magazine downloaded and PDF p3 visually checked: Andy Watts treasurer / Ed Gamble welfare officer, both Cheshire Hill Racers. National-body historical roles, not current club offices; no FRA phone/email imported, no athlete identities/results or medical story details. Wilmslow remains directory-only. Unknown founding/current training/contact. Northants Police held: PSUK home and XC archive read; directory/participant search leads alone insufficient. No force/sailing/retirement-club transfer. Next fresh-primary queue Mel's Milers, Rock Salt, St Annes; preserve earlier award lead and 23 October follow-ups.",
     "BATCH128 CURRENT: module dx seedv128 adds DevonCornwallPolice and VectorRacing, one LewisTimmins datedorganiserassociation, oneStrava link, VectorcountyTyneandWear andCycling/Triathlontags. Assembled1645/852, live1624/838, draft21/14,92incomplete. No new contacts/directorydate refresh. Parentd4701de/main de1325f5 unchanged before writes; previoushead bothworkflowsSUCCESS. Exactnewhead checksinPR763. Preserveoldergaps and23Octoberfollowups; nextCheshireHillRacers/NorthantsPolice/SeafrontShufflers viaNEWprimarysources.",
     "18Oct Police recovery: slateman.co.uk/psuk/psuk-xc-11a.htm ordinaryHTML readSallyBroome primaryreport13April2011Beer hosting320plus; /Psuk/psuk-eventsummary-14.htm readupdated23Jan2014planned10Septemberroadchampionship. No currenttimetable, national2014eligibility transfer or result/memberimport. February2026EA PDFp38visuallycheckedDevon/sixdisciplines; NewquayCornwalldirectory preserved notvenue. JunePDF andfreshECCA2026-27notlisted, currentstatusunresolved notclosure. Old2025contactsearchleadnotimported.",
     "18Oct Vector recovery: publicStrava/clubs/vectorracing readownNorthEasttriathlon/cycling/Newcastle description; EA1Feb2026PDFp19visuallycheckedTyneAndWear anddisciplines. ECCA2026-27printedp28freshdownload/visual confirmsretainedglfrost83email. CTT/events/43513 read14June2026Northumberland25mileM2510/LewisTimminsorganiser; organisationlinkrestrictedSTOP. OriginalCountyDurham/NE39directory preservedunderlying; countycorrectedonly, no street/cityinferred. Newwebsitevectoracing.co.uk home/terms/privacy/logincontains explicitPLACEHOLDERresults; no sufficientidentitybridge, no replacement/email/freefee/FB/Instagramimport, no Ironman/Konaclaim. Oldwebsiteconnectfailure. Currenttimetable/founding/fees/venue unknown.",

@@ -17,6 +17,34 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 129: primary club narratives; no supplier contacts or inferred venues.
+  const batch129Slugs = ["seafront-shufflers", "cheshire-hill-racers"];
+  for (const slug of batch129Slugs) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.address_kind, "directory");
+    assert.equal(club.address, clubEnrichment[slug].address);
+    assert.equal(club.postcode, clubEnrichment[slug].postcode);
+    assert.equal(club.socials.length, 0);
+  }
+  const seafront129 = bySlug.get("seafront-shufflers");
+  assert.equal(seafront129.website, "https://clubspark.englandathletics.org/SeafrontShufflers");
+  assert.equal(seafront129.contact_url, `${seafront129.website}/Contact`);
+  assert.equal(seafront129.contacts.length, 1);
+  assert.equal(seafront129.contacts[0].email, "debbie.summers143@yahoo.co.uk");
+  assert.equal(seafront129.postcode, "BN21 1SF");
+  assert.match(clubProfiles[seafront129.slug].location_note, /Helen Gardens/);
+  assert.equal(clubProfiles[seafront129.slug].notable_members[0].name, "Pam Hart");
+  const cheshire129 = bySlug.get("cheshire-hill-racers");
+  assert.equal(cheshire129.website, "https://www.cheshirehillracers.org.uk/");
+  assert.equal(cheshire129.contacts.length, 0);
+  assert.equal(cheshire129.county, "Cheshire East");
+  assert.equal(clubProfiles[cheshire129.slug].notable_members.length, 2);
+  assert.match(clubProfiles[cheshire129.slug].contact_note, /national-association role contacts/);
+  assert.equal(clubProfiles["northants-police-athletic-section"], undefined);
   // Batch 128: historical police events and multisport evidence, not placeholders.
   for (const slug of ["devon-and-cornwall-police-ac", "vector-racing"]) {
     assert.equal(clubProfiles[slug].biography.length, 3);
@@ -458,8 +486,8 @@ try {
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
     assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["run-middlewich", "uts-running-club"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
-    // Vector's new primary evidence is asserted in batch128 above.
-    if (!["metropolitan-police-ac", "uts-running-club", "vector-racing", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    // New primary narratives are asserted in their source-specific batches above.
+    if (!["metropolitan-police-ac", "uts-running-club", "vector-racing", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");
