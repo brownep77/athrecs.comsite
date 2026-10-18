@@ -17,6 +17,35 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 131: dated group/event history, not inferred venues or current membership.
+  for (const slug of ["slgr", "central-lancs-running-and-triathlon-club-clan"]) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(clubProfiles[slug].notable_members.length, 1);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.address_kind, "directory");
+    assert.equal(club.address, clubEnrichment[slug].address);
+    assert.equal(club.postcode, clubEnrichment[slug].postcode);
+  }
+  const slgr131 = bySlug.get("slgr");
+  assert.equal(slgr131.city, "Dartford");
+  assert.equal(slgr131.contacts.length, 2);
+  assert.ok(slgr131.contacts.some(c => c.email === "qprchelle@hotmail.com"));
+  assert.ok(slgr131.contacts.some(c => c.email === "slgr.contact@gmail.com" && c.checked_at === "2026-10-18"));
+  assert.ok(slgr131.contacts.every(c => !c.phone));
+  assert.equal(slgr131.socials.length, 4);
+  assert.equal(slgr131.socials.filter(s => s.platform === "Strava").length, 1);
+  assert.equal(clubProfiles.slgr.notable_members[0].name, "Dawn Annett");
+  assert.match(clubProfiles.slgr.biography.join(" "), /not a separately confirmed date of club affiliation/);
+  const clan131 = bySlug.get("central-lancs-running-and-triathlon-club-clan");
+  assert.equal(clan131.city, "Chorley");
+  assert.equal(clan131.contacts.length, 0);
+  assert.equal(clan131.socials.length, 0);
+  assert.match(clubProfiles[clan131.slug].location_note, /discrepancy remains unresolved/);
+  assert.match(clubProfiles[clan131.slug].notable_members[0].connection, /2026/);
+  assert.equal(clubProfiles["7-hills-harriers"], undefined);
   // Batch 130: primary venue/community evidence; preserve contacts and identity safeguards.
   const batch130Slugs = ["rock-salt-runners", "athletics-ni-st-annes-ac"];
   for (const slug of batch130Slugs) {
@@ -520,10 +549,10 @@ try {
     assert.ok(contact, slug);
     assert.equal(contact.checked_at, "2026-10-18");
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
-    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["run-middlewich", "uts-running-club"].includes(slug) ? 2 : 1);
+    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["run-middlewich", "uts-running-club", "slgr"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
     // New primary narratives are asserted in their source-specific batches above.
-    if (!["metropolitan-police-ac", "uts-running-club", "vector-racing", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");
@@ -1229,7 +1258,8 @@ try {
   assert.equal(bySlug.get("solent-running-sisters").address, "");
   assert.equal(clubProfiles["smalley-road-runners"].founded_year, undefined);
   assert.equal(clubProfiles["sip-running-club"], undefined);
-  assert.equal(clubProfiles["slgr"], undefined);
+  // SLGR's former thin-source hold is superseded by batch 131 primary history.
+  assert.equal(clubProfiles["slgr"].founded_year, undefined);
   assert.match(clubProfiles["slough-junior-ac"].notable_members.find(m => m.name === "Morgan Lake").connection, /Former/);
   // Batch 60: school entities, safe website suppression and sourced training bases.
   for (const district of ["afan-nedd-tawe", "cardiff-and-vale", "dyfed", "eryri", "glamorgan-valleys"]) {

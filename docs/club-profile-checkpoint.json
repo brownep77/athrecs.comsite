@@ -1,47 +1,51 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch130",
+  "lastEditorialBatch": "2026-10-18-batch131",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch130: 1,649/1,737 biographies (94.9%) and 856 sourced associations assembled; 88 remain incomplete. PR763 contains twenty-five unpublished biographies and eighteen associations across batches119–130. Published baseline remains 1,624/838 from PR762; current main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch131: 1,651/1,737 biographies (95.0%) and 858 sourced associations assembled; 86 remain incomplete. PR763 contains twenty-seven unpublished biographies and twenty associations across batches119–131. Published baseline remains 1,624/838 from PR762; main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "rock-salt-runners",
-    "athletics-ni-st-annes-ac"
+    "slgr",
+    "central-lancs-running-and-triathlon-club-clan"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1649,
-    "notableMemberEntries": 856,
+    "extendedProfiles": 1651,
+    "notableMemberEntries": 858,
     "clubsWithContacts": 1281,
-    "contactEntries": 2091,
+    "contactEntries": 2092,
     "clubsWithEmail": 1238,
     "clubsWithPhone": 193,
     "clubsWithSocials": 1232,
-    "socialLinks": 2595,
+    "socialLinks": 2596,
     "websiteContactRecords": 1612
   },
   "batchChanges": {
     "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 1,
+    "notableMemberEntriesAdded": 2,
+    "contactOrSocialRecordsChanged": 1,
+    "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 1,
-    "netSocialLinks": 2,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch130 actual assembled profile checks, catalogue checks, club audit, targeted ESLint, TypeScript, whitespace and safe preview build passed. External migrations and production publishers skipped. Previous head fd2b5b9 passed both Club profiles39166804590 and full quality39166804335. Exact new-head preview/workflow evidence belongs in PR763 and does not certify production publication."
+    "status": "Batch131 actual assembled profile/checkpoint checks (1651 biographies/858 associations), catalogue, club audit, targeted ESLint, TypeScript, whitespace and safe preview build passed. External migrations and production publishers skipped. Previous head 89a20e9 passed Club profiles39171229333 and full quality39171229264. Exact new-head workflow, desktop/mobile and protected-preview evidence belongs in PR763; none certifies production publication."
   },
   "nextCandidateSlugs": [
-    "7-hills-harriers",
-    "slgr",
-    "central-lancs-running-and-triathlon-club-clan"
+    "bodmin-womens-rc",
+    "fry-club-joggers",
+    "rising-brook-runners"
   ],
   "resumeInstructions": [
+    "BATCH131 CURRENT: module ea/seedv131; SLGR and CLAN biographies; Dawn Annett 2013 group-origin association and Michael Brennand 2026 organising association (not current membership). Actual assembled1651/1737(95.0%),858 associations,86 incomplete. PR763 now27 unpublished biographies/20 associations; published baseline1624/838 unchanged. Adds one SLGR enquiry email and one Strava link, preserves ECCA contact and directory dates/addresses. Parent89a20e9/main de1325f checked unchanged before edits; no competing writer observed. Exact final-head validation in PR763 supersedes pre-commit status.",
+    "SLGR earlier biography hold is resolved by EA9Oct2018 first-person origin account plus club-authored Sept2026 Dartford Living p56 and own-labelled Strava103264. May2013 is group origin, NOT independently confirmed affiliation date; founded_year remains empty. Brian's health history and unconfirmed surname excluded. Notice has recycled pre-Covid/spring wording: no current timetable/free-session/next-intake promise. Email slgr.contact@gmail.com is explicitly attributed to that notice. Existing ECCA contact/socials preserved; one Strava link added. Ownsite403 respected; no alternate access. EA exact query failed, so directory13Octdate unchanged.",
+    "CLAN earlier thin-source hold resolved for historical biography, not present programme: opened25Nov2021 SantaDash partnership announcement,12Aug2026 CityPreston report with MichaelBrennand first-person organiser account, and Rosemere own9Aug2026 five/ten-mile listing. Planned2021 event not reported as completed; race anniversary not clubfoundation. WalmerBridge(report) versus Hutton(charity listing) is unresolved event-venue discrepancy; neither becomes training address. No charity/platform/news contacts imported, no current member/office or2019championship claim. Existing Chorley directory address/date retained. Current club training, joining, founding and direct contact remain gaps.",
+    "7Hills remains held: no new substantive primary narrative recovered; no search-only social/AI summary or similarly named race used. Rotate next to new primary sources for Bodmin Women's RC, Fry Club Joggers and Rising Brook Runners. Preserve earlier unavailable-source notes, distinct Bodmin Running Club identity, all Fordy branch safeguards and23October TI follow-ups. Do not claim a whole-directory manual review or20–30 additions from this two-profile source-limited batch.",
     "18Oct additional leads: 7Hills RunTogether route and CLAN BritishTriathlon Clubspark route returned404, no narrative adopted. SLGR ownsite403 respected. Public Strava clubs/so-let-s-go-running-slgr-103264 read Dartford club description; September2026 DartfordLiving issue243 p56 opened HTML at https://embed-rech-01.dialog.cm/dartfordliving/docs/dartford_living_september_26 publishes club notice/email slgr.contact@gmail.com but retained preCovid/spring language makes timetable freshness uncertain. No data imported yet; seek club-current corroboration, do not follow alternative hosts to bypass403. CLAN2026Preston10k newspaper/charity-partner leads remain unconfirmed; no participant imports.",
     "BATCH130 CURRENT: dz / seedv130 adds Rock Salt Runners and St Annes Belfast; 1649/1737 biographies,856 associations,88 incomplete. PR763 draft25/18; published1624/838 unchanged. Rock own HTML recovered after reader failure; Winsford corrects Cuddington, old directory address/postcode preserved in enrichment but cleared from assembled profile, area-only because routes rotate. One general email and two own-linked socials added; existing Facebook/ECCA contact preserved. StAnnes secretary contact freshly reconfirmed without net entry; dated venue bookings and 2019/2020 first-person coaching links now support full profile plus2023 AnneMaguire service association. No unverified1980founders/Clubmark/athlete list, no supplier contacts, no current Youngstars programme transfer. Main de1325f5/parentfd2b5b9 unchanged before writes; prior workflows bothSUCCESS. New head evidence inPR763; no publication.",
     "18Oct source recovery: rocksaltrunning.com homepage/about.html/our-runs.html/membership.html/team.html/couch-to-5k.html ordinary public HTML read. No founding year; nextC25KintakeTBC; undatedGBP35fee omitted. WhatsApp public link read but not joined; indexed phone not imported. EA3June2025 Maydevelopment report read, not proof of grant. StAnnes MaryPetersTrack booking-info read21Oct/November/December2026 datedbookings, not permanent timetable/openintake. IMAAaward and recipient pages reread; ANIexactrow checked, emailphone unchanged/date18Oct. FastTwitch news/onemonthin29Oct2019 and news/fast-twitch-athletics-one-year-in16Sep2020 read, service-provider clients not StAnnesathlete imports. Mel'sMilers home/about-2/contact direct200 bodies saySiteUnavailable; reader502/timeouts. Search-only2000origin/newemail notadopted. Nextnewprimaryqueue7Hills/SLGR/CLAN; preserveoldergaps and23Octoberfollowups.",
@@ -223,6 +227,18 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "slgr",
+      "status": "biography-resolved-current-programme-unconfirmed",
+      "reason": "Batch131 resolves the historical biography with opened EA2018 first-person and club-authored2026 notice/Strava sources. Older website403 remains; present timetable, beginner intake, fees and phone are unconfirmed. Older no-biography holds below are superseded, not evidence of fresh website access.",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "slug": "central-lancs-running-and-triathlon-club-clan",
+      "status": "historical-biography-resolved-current-programme-unconfirmed",
+      "reason": "Batch131 resolves historical event organising via opened2021/2026 reports and charity primary listing. Current programme/direct enquiry contact/founding remain unknown.2026event venues conflict: Hutton versus WalmerBridge. Older no-biography holds are superseded; unavailable club site is not marked verified.",
+      "checkedAt": "2026-10-18"
+    },
     {
       "slug": "devon-and-cornwall-police-ac",
       "status": "historical-profile-recovered-current-status-unconfirmed",
