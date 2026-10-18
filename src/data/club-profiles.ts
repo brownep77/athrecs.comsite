@@ -1007,4 +1007,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v126";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v126-r1";

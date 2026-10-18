@@ -31,6 +31,8 @@ try {
   assert.equal(bySlug.get("carlisle-aspatria-ac").city, "Carlisle");
   assert.equal(bySlug.get("carlisle-aspatria-ac").county, "Cumbria");
   assert.equal(bySlug.get("carlisle-aspatria-ac").region, "North West");
+  assert.deepEqual(bySlug.get("carlisle-aspatria-ac").sports, ["Running", "Athletics"]);
+  assert.deepEqual(bySlug.get("carlisle-aspatria-ac").disciplines, ["cross_country", "track_field"]);
   assert.equal(clubProfiles["carlisle-aspatria-ac"].notable_members, undefined);
   assert.equal(clubProfiles["lancashire-fire-and-rescue-service-and-aa"].notable_members, undefined);
   const lancon = bySlug.get("lancashire-constabulary-athletics-section");
