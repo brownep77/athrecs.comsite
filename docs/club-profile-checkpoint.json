@@ -1,47 +1,53 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch118",
+  "lastEditorialBatch": "2026-10-18-batch119",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch105",
-  "pullRequest": 762,
-  "publication": "Published cohort baseline: 1,624 biographies and 838 sourced associations from PR762, verified 18 October 2026. All 31 new biographies, the expanded FORDY RUNS biography and 55 contact/social-only pages from batches 105–118 are live; 0 unpublished biographies remain in PR762. 113 of the 1,737-club research cohort remain incomplete. Public directory includes clubs outside this cohort; actual Google indexing is not confirmed.",
+  "branch": "codex/club-profiles-batch119",
+  "pullRequest": null,
+  "publication": "Draft batch119: 1,627/1,737 biographies (93.7%) and 841 sourced associations assembled; 110 remain incomplete. Three new biographies and three associations are unpublished. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this fresh draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "team-balancise-rc",
-    "aurora-harriers"
+    "tickhill-running-and-athletic-club",
+    "vocalink-mastercard-running-club",
+    "st-austell-athletes-running-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1624,
-    "notableMemberEntries": 838,
+    "extendedProfiles": 1627,
+    "notableMemberEntries": 841,
     "clubsWithContacts": 1279,
-    "contactEntries": 2082,
+    "contactEntries": 2083,
     "clubsWithEmail": 1236,
-    "clubsWithPhone": 190,
-    "clubsWithSocials": 1224,
-    "socialLinks": 2581,
-    "websiteContactRecords": 1608
+    "clubsWithPhone": 191,
+    "clubsWithSocials": 1227,
+    "socialLinks": 2585,
+    "websiteContactRecords": 1609
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
+    "extendedProfilesAdded": 3,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 0,
-    "contactOrSocialRecordsChanged": 0,
-    "newWebsiteContactRecords": 0,
+    "notableMemberEntriesAdded": 3,
+    "contactOrSocialRecordsChanged": 3,
+    "newWebsiteContactRecords": 1,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 0,
-    "netSocialLinks": 0,
+    "netContactEntries": 1,
+    "netSocialLinks": 4,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch118 catalogue, profile, club-audit, targeted ESLint, TypeScript, whitespace checks and safe preview build passed before guarded commit. Actual assembled1624/1737 profiles,838 associations,113 incomplete; all contact/social counts unchanged. External database migrations and every production publisher skipped. Previous batch117 Club profiles39114574336 and full quality39114574345 both SUCCESS. Exact-head preview and dedicated desktop/mobile evidence to be recorded in PR762 after commit; neither readiness nor a build constitutes publication. No production publication or access-control changes."
+    "status": "Batch119 catalogue, profile, club-audit, targeted ESLint, TypeScript, whitespace checks and safe preview build passed before commit. Actual assembled 1627/1737 profiles, 841 associations, 110 incomplete; contacts 2083 across1279 clubs, phones191, socials2585 across1227 clubs; 1609 website-contact records. Build skipped external migrations and every production publisher. Exact-head hosted preview and dedicated desktop/mobile workflow evidence will be recorded in the fresh draft PR after commit. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
     "thornton-cleveleys-running-club",
-    "tickhill-running-and-athletic-club",
-    "vocalink-mastercard-running-club"
+    "weston-athletic-club",
+    "tri-anglia"
   ],
   "resumeInstructions": [
+    "BATCH119 CURRENT: fresh branch codex/club-profiles-batch119 from main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed after published PR762. No competing writer; main rechecked before source edits. Module do seedv119 adds Tickhill, VocaLink Mastercard and St Austell Athletes biographies, Pete Wass/Paul Maskell/Marc Smerdon associations. Assembled1627/841, live1624/838, draft3/3,110 incomplete. One net role contact, four social links, one new website-contact record. Preserve all prior source gaps and23OctoberTI follow-ups. Resolve draft PR by this branch; pullRequest is null only until creation. Exact-head verification belongs in its body.",
+    "18Oct Tickhill recovery: ordinary http://trac.clubbuzz.co.uk/ and /founder_members returned200/read after HTTPS reader errors. Original Ryan Cudworth account dates foundation15June2005 withPeteWass/PaulBibby; Wassname/logo/secretary. Official /join and /contact_us read email/phone/form/Facebook. CityTickhill,countySouthYorkshire corrected; care-ofCricketClub nottraining/no street inferred. ECCAcontact preserved. Facebookthrottle andGymmart403 respected; no snippet-onlytraining imports.",
+    "18Oct VocaLink recovery: publicStrava46413 confirmsHarrogate and linksWordPress. Ordinary WordPresshomepage/championshipHTML read2019league andJuly2021restart/championship. SourceattributedXvlmcrc andStrava added, malformed/@link excluded. ExistingECCAemail unchanged. No currentemploymenteligibility/timetable/founding/membercount inferred fromhistoricalreports.",
+    "18Oct StAustellAthletes recovery: clubauthoredJustGivingHELi2page read24hrteamchallengeandPaulMaskellGB24hrassociation; EdenProject15Oct2023readMarcSmerdon association. CornwallRoadRunning separateclubrows confirmSTAARC2016social; X403 respected. No organisingpartnership transferred fromStAustellRunningClub. Wix/EAunreadable; contactdetails/year remainunknown. Cricketgroundeventvenuenottraining. Fundraisingpage closed; no donationssent.",
+    "18Oct Thornton gap: ownhistory unavailable, normalHTML503; searchsnippetsnotused. BlackpoolWyreFylde /inter-club/ opened datedseriesfixturecontext only. Wyre /downloads/file/1983/wbc-pposs-assessment-report-final-2024 is an UNOPENED PDF lead (searchsnippet labelsJuly2023report), not biography evidence. Next seekprimaryhistory/programme; rotateWestonAthleticClub andTriAnglia without repeatingcompletedclubs.",
     "RELEASE762 CURRENT: PR762 source 98fd89badb6ed90f0f44cf19ee63b601d5b98dff merged as 0bb298ede345b4fceb64e9c00c1fbb305a9c460f; production dpl_2CCJMtpJGsZRXD6nfSXDvMGxaPkP READY. Published baseline: 1,624 biographies and 838 associations. All 87 changed public pages and sitemap inclusion verified; 0 unpublished biographies in PR762. Older batch/live counts below are historical. Continue from current main on a fresh draft branch/PR after checking active writers; preserve all sourceGaps, nextCandidateSlugs, the known area-only caption follow-up and 23 October TI follow-ups. 113 cohort biographies remain incomplete.",
     "BATCH118 CURRENT: module dn seedv118; Team Balancise and Aurora Harriers biographies. Assembled1624/1737(93.5%),838 associations,113 incomplete; published1593/821, draft adds31/17. Parent52aaf5ae19c468717f6bf2c12bf4eb6b2ae0f89e/main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits, no competing writer. Contacts/socials/addresses/eligibility/directory dates unchanged. Preserve23OctoberTI follow-ups. Exact-head hosted and desktop/mobile verification belongs in PR762.",
     "18Oct Team Balancise recovery: first-person independent british-athletics.co.uk/clubs/club1181.htm introduction read (not current governing body), historical beginner/improver/speed/tempo programme; undated old phones and Dan Doherty email NOT imported. England Athletics 1Oct2024 local-running-groups-join-forces-to-fundraise-for-charity ordinary HTML read after search-reader timeout: joint Running Buddies/Balancise 28DayHillRepChallenge overGBP6000 for Breast Friends Northamptonshire. Do not transfer Running Buddies40members or personal health history. Existing ECCApage20 email retained without fresh recertification. Linked teambalancise.co.uk unavailable; current timetable/year/phone/socials gaps. Market Square old meeting point not current venue; Wharf Road directory unchanged.",
@@ -179,6 +185,30 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "tickhill-running-and-athletic-club",
+      "status": "profile-and-contact-recovered",
+      "checkedAt": "2026-10-18",
+      "reason": "Original founder account and current enquiry routes read. Current session times/course availability still need confirmation. Care-of address not training. New city/county supported by own homepage; no street inferred."
+    },
+    {
+      "slug": "vocalink-mastercard-running-club",
+      "status": "archive-profile-recovered-current-programme-unknown",
+      "checkedAt": "2026-10-18",
+      "reason": "Own 2019–2021 archive and Strava support narrative and website/socials. Employee eligibility, current timetable and founding date unknown. Preserve ECCA enquiry contact."
+    },
+    {
+      "slug": "st-austell-athletes-running-club",
+      "status": "community-profile-recovered-contact-gap",
+      "checkedAt": "2026-10-18",
+      "reason": "Club-authored HELi2 fundraiser, Eden 2023 report and Cornwall Road Running distinguish STAARC. Founding/current training/email/phone/form unknown. Wix unavailable; X403 respected. Cricket ground fundraiser is not a training base."
+    },
+    {
+      "slug": "thornton-cleveleys-running-club",
+      "status": "history-unavailable-unopened-council-lead",
+      "checkedAt": "2026-10-18",
+      "reason": "Own history failed and ordinary HTML503. Neighbour club inter-club series page read but insufficient distinctive narrative. Wyre assessment-report-final-2024 PDF is an unopened lead; do not adopt snippet founders/2009/2016 venue claims."
+    },
     {
       "slug": "team-balancise-rc",
       "status": "profile-recovered-current-programme-unconfirmed",

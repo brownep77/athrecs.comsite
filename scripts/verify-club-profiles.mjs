@@ -17,6 +17,32 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 119: dated associations must not conflate venues or the two St Austell clubs.
+  const batch119Slugs = ["tickhill-running-and-athletic-club", "vocalink-mastercard-running-club", "st-austell-athletes-running-club"];
+  const tickhill = bySlug.get(batch119Slugs[0]);
+  assert.equal(tickhill.city, "Tickhill");
+  assert.equal(tickhill.county, "South Yorkshire");
+  assert.equal(tickhill.address, "");
+  assert.equal(tickhill.location_precision, "area-only");
+  assert.equal(clubProfiles[tickhill.slug].founded_year, 2005);
+  assert.equal(tickhill.contacts.find(c => c.email === "TickhillRunners@gmail.com").phone, "07411630845");
+  const vocalink = bySlug.get(batch119Slugs[1]);
+  assert.equal(vocalink.address_kind, "directory");
+  assert.equal(clubProfiles[vocalink.slug].founded_year, undefined);
+  assert.match(clubProfiles[vocalink.slug].biography.join(" "), /22 July 2021/);
+  assert.ok(!vocalink.socials.some(s => s.url.includes("/@")));
+  const staarc = bySlug.get(batch119Slugs[2]);
+  assert.equal(staarc.address_kind, "directory");
+  assert.equal(staarc.contacts.length, 0);
+  assert.equal(clubProfiles[staarc.slug].founded_year, undefined);
+  assert.deepEqual(clubProfiles[staarc.slug].notable_members.map(m => m.name), ["Paul Maskell", "Marc Smerdon"]);
+  assert.ok(staarc.socials.some(s => s.url === "https://twitter.com/STAARC2016"));
+  assert.ok(!bySlug.get("st-austell-running-club").socials.some(s => s.url === "https://twitter.com/STAARC2016"));
+  for (const slug of batch119Slugs) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
   // Batch 118: dated community accounts do not become today's timetable or venue.
   const batch118Slugs = ["team-balancise-rc", "aurora-harriers"];
   for (const slug of batch118Slugs) {
@@ -54,7 +80,7 @@ try {
     const club = bySlug.get(slug);
     assert.ok(club, slug);
     assert.equal(club.country, "England");
-    if (!batch118Slugs.includes(slug)) {
+    if (![...batch118Slugs, ...batch119Slugs].includes(slug)) {
       assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
     }
     const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());
@@ -867,7 +893,7 @@ try {
   assert.match(clubProfiles["spenborough-and-dist-ac"].contact_note, /waiting list closed/);
   assert.match(clubProfiles["st-neots-triathlon-club"].biography.join(" "), /independent of the private NiceTri Events/);
   assert.equal(clubProfiles["st-marys-richmond-ac"].sources.length, 2);
-  assert.equal(clubProfiles["st-austell-athletes-running-club"], undefined);
+  assert.notEqual(clubProfiles["st-austell-athletes-running-club"], clubProfiles["st-austell-running-club"]);
   assert.equal(clubProfiles["st-marys-university-athletics-club"].notable_members, undefined);
   assert.ok(bySlug.get("spectrum-striders").contacts.some(c => c.email === "membership@spectrumstriders.org.uk"));
   assert.ok(bySlug.get("ss-athletics").contacts.some(c => c.phone === "07713 118226"));
