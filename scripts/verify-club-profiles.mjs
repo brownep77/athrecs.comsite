@@ -17,6 +17,22 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 114: dated history, no inferred eligibility or training addresses.
+  for (const slug of ["evesham-vale-running-club", "gillingham-trotters", "sunlight-runners"]) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).address_kind, "directory");
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
+  assert.equal(clubProfiles["gillingham-trotters"].notable_members[0].name, "Graham Bashford");
+  assert.match(clubProfiles["gillingham-trotters"].biography.join(" "), /22 May 2005/);
+  assert.equal(clubProfiles["sunlight-runners"].notable_members, undefined);
+  assert.match(clubProfiles["sunlight-runners"].biography.join(" "), /do not establish whether membership is restricted/);
+  assert.equal(bySlug.get("sunlight-runners").contacts[0].checked_at, "2026-10-18");
+  assert.equal(bySlug.get("evesham-vale-running-club").city, "Evesham");
+  assert.ok(bySlug.get("evesham-vale-running-club").socials.some(s => s.platform === "Facebook"));
+  assert.ok(bySlug.get("evesham-vale-running-club").socials.some(s => s.url === "https://www.strava.com/clubs/evesham-vale-running-club-177037"));
   // Batch 113: council-supported venue correction; event venue is not a training base.
   const barlestone = bySlug.get("barlestone-st-giles-rc");
   assert.equal(barlestone.city, "Barlestone");
@@ -185,7 +201,8 @@ try {
     const addressUnknown = ["west-yorkshire-police-harriers", "winter-hill-runners"].includes(slug);
     assert.equal(club.address_kind, addressUnknown ? undefined : "directory");
     if (addressUnknown) assert.equal(club.address, "");
-    assert.equal(clubProfiles[slug], undefined);
+    // Evesham's archive and club description were recovered in batch 114.
+    if (slug !== "evesham-vale-running-club") assert.equal(clubProfiles[slug], undefined);
   }
   // Batch 108: verified venue classification, dated origins and placeholder exclusion.
   for (const slug of ["the-hawcs", "westside-runnas-uk", "heald-green-runners", "lifts-and-sprints-athletics-academy", "ts-harriers"]) {

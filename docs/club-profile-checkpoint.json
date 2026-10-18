@@ -1,48 +1,54 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch113",
+  "lastEditorialBatch": "2026-10-18-batch114",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
   "pullRequest": 762,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds22 biographies/15 associations; assembled1615/1737 (93.0%),836 associations,122 incomplete. Batch113 continues4da65b64bf947c02ba44c20b349c057e38d27459 on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds25 biographies/16 associations; assembled1618/1737 (93.1%),837 associations,119 incomplete. Batch114 continues90eaa9bbe10e376f9e8dd01a4bdf2e176ab09531 on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "barlestone-st-giles-rc",
-    "new-berkeley-harriers"
+    "evesham-vale-running-club",
+    "gillingham-trotters",
+    "sunlight-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1615,
-    "notableMemberEntries": 836,
+    "extendedProfiles": 1618,
+    "notableMemberEntries": 837,
     "clubsWithContacts": 1260,
     "contactEntries": 2063,
     "clubsWithEmail": 1217,
     "clubsWithPhone": 190,
     "clubsWithSocials": 1224,
-    "socialLinks": 2580,
+    "socialLinks": 2581,
     "websiteContactRecords": 1589
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
+    "extendedProfilesAdded": 3,
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 1,
     "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 2,
+    "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 2,
+    "netContactEntries": 0,
     "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch113 profile checks, targeted ESLint, TypeScript and safe preview build passed. Build explicitly skipped external database migrations/publication. Catalogue, club audit and whitespace checks run before guarded commit. Assembled1615/1737 profiles,836 associations,122 incomplete. Exact-head hosted page checks and dedicated Club profiles desktop/mobile workflow evidence will be recorded in PR762 after commit. Previous batch112 Club profiles39096184294 and full quality gate39096184277 both passed. No production publication or access-control changes."
+    "status": "Batch114 safe preview build, catalogue, club audit, profile checks, targeted ESLint, TypeScript and whitespace checks all passed before guarded commit. Build explicitly skipped external database migrations/publication. Assembled1618/1737 profiles,837 associations,119 incomplete. Exact-head hosted pages and dedicated Club profiles desktop/mobile evidence will be recorded in PR762 after commit. Previous batch113 Club profiles39099979959 and full quality gate39099979900 both passed. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
-    "gillingham-trotters",
-    "evesham-vale-running-club",
-    "fry-club-joggers",
-    "sunlight-runners"
+    "7-hills-harriers",
+    "bodmin-womens-rc",
+    "metropolitan-police-ac",
+    "athletics-ni-st-annes-ac"
   ],
   "resumeInstructions": [
+    "BATCH114 CURRENT: module dj seedv114. EveshamValeRunningClub, GillinghamTrotters and SunlightRunners biographies; GrahamBashford founder/lifetime association. Assembled1618/1737(93.1%),837 associations,119 incomplete; published1593/821; draftPR762 adds25/16. Parent90eaa9bbe10e376f9e8dd01a4bdf2e176ab09531, main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits. One Strava link, Sunlight contact recheck, no new contact entries/location changes. Previous batch113 dedicated39099979959 and fullquality39099979900 both success. Inspect PR762 state and remote head before writes; exact-head validation in PR body.",
+    "18Oct Evesham recovery: opened and visually read own July2011 newsletter pages1–2 https://archive.welshfellrunnersassociation.org.uk/891.pdf ; dated volunteer10K/training/social history only, no results or newsletter email adopted. Public Strava https://www.strava.com/clubs/evesham-vale-running-club-177037 read, links known clubsite; over18/Evesham description with undated venue schedule, not Broadway header relocation. Existing Facebook and ECCA email preserved; MerstowGreen remains directory. Race-page route https://eveshamvalerunningclub.org.uk/evesham-town-10k/ unavailable; founding/currentfees/phone remainunknown. Separate EveshamValeTriathletes not conflated.",
+    "18Oct Gillingham: council GrahamBashford biography updated24July2026 plus firsthand WellsCityHarriers22May2005 relay report https://www.wellscityharriers.org.uk/result/oldresults/2005/wessexrelay2005.htm and DorsetAthletics /clubs-1 establish founder/history/roadleague. Relay organising explicitly2005, no current organiser assumption. No councillor mobile/email/address used for club; Riversmeet remains directory; current training/enquiries/yearunknown. Prior insufficient-biography gap resolved, contact gap remains.",
+    "18Oct Sunlight: MerseysideCountyAA exact Sunlight row C/F/R/Tr colours/email/phone read; existing named contact rechecked18Oct with undated warning. BTR1June2026 primary preview and EricaDillonPR postevent release on LiverpoolChamber9June confirm Unilever team150 at7June5K/10K. Not membership count, not clubfounding2012, not Sunlight raceorganisation; BTR/PSVT organise. Membership eligibility/training/founding unknown. ChrisBoardman contact not an athlete identity or notable association. Unilever directoryaddress retained, county correspondenceaddress excluded.",
+    "FryClubJoggers remains deferred: opened KeynshamTownCouncil Winter2018 Issue27 PDF https://www.keynsham-tc.gov.uk/_UserFiles/Files/Publications/Keynsham%20News/KN_1804_WINTER18_WEB.pdf page33 lists Tuesday7pm 10K routes aroundKeynsham and Facebook nameFrysJoggers, but no verified destination or current programme; too thin for fullprofile, no change. Supplier kitshop and results-only hits excluded. Next queue rotates Yorkshire/Cornwall/London/NI via new primary source routes; do not repeat unchanged blocked homepages. Preserve earlier23OctTriathlonIreland recheck and all prior source gaps.",
     "BATCH113 CURRENT: module di seedv113. BarlestoneStGiles and NewBerkeleyHarriers biographies; TonyWalker founder association. Assembled1615/1737(93.0%),836 associations,122 incomplete; published1593/821; draftPR762 adds22/15. Parent4da65b64bf947c02ba44c20b349c057e38d27459, main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits. Two emails, one phone, one Facebook route; Barlestone city/address/training classification corrected. Previous batch112 workflows39096184294/39096184277 both success. Inspect PR762 state/remote head before further writes; exact-head validation in PR body.",
     "Barlestone18Oct: founder https://www.tonywalkercoaching.co.uk/about-4 explicitly2015 and coaching development; exclude business phone/email. Parish /findmynearest/858225 fresh page displays19August2026 update (earlier cached2024 superseded), Monday18:45 footballclub, clubemail. Borough /info/200313/running/786/more_about_running/2 updated5May2026 names JuniorSaints and Walk2Run21 but no current intake guarantee; adult_only remains existingEAtrue until junior relationship/ages resolved. LRRL member-clubs establishes BartonRoadCV130EP/silver-orange. Borough HTML exact Facebook/barlestoneruns attributed only, destination unreadable. Nuneaton replacedBarlestone; no directory checked_at refresh.",
     "NewBerkeley18Oct: GreatRun20March2025 firsthand account supports green/gold and Bristol10K/half group trip, without participant health details. Museumdirector JamesRodliff publicLinkedIn full post confirms inauguralJennerJog partnership; no inferred inauguralyear. BourtonRoadrunners1March2026 firsthand report confirms countyseries hosting; no results imported. FullOnSport /organiser/search/request/ exact NBH row email enquiries@newberkeleyharriers.com phone07971040141; no visible sourceupdate date. /organiser/NBH/profile opens but contains only club shell and platform support (excluded). CanonPark address retaineddirectory; GL139BG organiserpostcode/museumvenue not substituted. Facebook temporarilyblocked; RaceNation emptybody; no inferredfounding/timetable/currentmembership fees/new social account.",
