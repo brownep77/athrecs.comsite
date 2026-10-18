@@ -255,6 +255,7 @@ try {
       .getByRole("button", { name: "Claim profile & review all results", exact: true })
       .waitFor();
     await page.screenshot({ path: "artifacts/athlete-registration-matches-mobile.png" });
+    await page.setViewportSize({ width: 1280, height: 900 });
     const userId = (
       await database.query('select id from "user" where email = $1', ["quick-runner@example.test"])
     ).rows[0].id;
