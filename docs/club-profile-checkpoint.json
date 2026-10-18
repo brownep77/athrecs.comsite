@@ -1,47 +1,50 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch129",
+  "lastEditorialBatch": "2026-10-18-batch130",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch129: 1,647/1,737 biographies (94.8%) and 855 sourced associations assembled; 90 remain incomplete. PR763 contains twenty-three unpublished biographies and seventeen associations across batches119–129. Published baseline remains 1,624/838 from PR762; current main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch130: 1,649/1,737 biographies (94.9%) and 856 sourced associations assembled; 88 remain incomplete. PR763 contains twenty-five unpublished biographies and eighteen associations across batches119–130. Published baseline remains 1,624/838 from PR762; current main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "seafront-shufflers",
-    "cheshire-hill-racers"
+    "rock-salt-runners",
+    "athletics-ni-st-annes-ac"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1647,
-    "notableMemberEntries": 855,
+    "extendedProfiles": 1649,
+    "notableMemberEntries": 856,
     "clubsWithContacts": 1281,
-    "contactEntries": 2090,
+    "contactEntries": 2091,
     "clubsWithEmail": 1238,
     "clubsWithPhone": 193,
     "clubsWithSocials": 1232,
-    "socialLinks": 2593,
-    "websiteContactRecords": 1611
+    "socialLinks": 2595,
+    "websiteContactRecords": 1612
   },
   "batchChanges": {
     "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 3,
-    "contactOrSocialRecordsChanged": 1,
-    "newWebsiteContactRecords": 0,
+    "notableMemberEntriesAdded": 1,
+    "contactOrSocialRecordsChanged": 2,
+    "newWebsiteContactRecords": 1,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 0,
-    "netSocialLinks": 0,
+    "netContactEntries": 1,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch129 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed: 1647/1737 biographies, 855 associations, 2090 contacts, 2593 social links. External migrations/publication skipped. The first check ran before the next-candidate checkpoint was updated and correctly rejected the now-completed Cheshire candidate; the unchanged check passed after advancing the queue. Source-specific regressions preserve directory addresses/dates and exclude national-body contacts. Previous head 0a66849 passed Club profiles39161856557 and full quality39161856615. Exact-head preview/workflow evidence belongs in PR763 and does not certify production publication."
+    "status": "Batch130 actual assembled profile checks, catalogue checks, club audit, targeted ESLint, TypeScript, whitespace and safe preview build passed. External migrations and production publishers skipped. Previous head fd2b5b9 passed both Club profiles39166804590 and full quality39166804335. Exact new-head preview/workflow evidence belongs in PR763 and does not certify production publication."
   },
   "nextCandidateSlugs": [
-    "mels-milers-jogging-club",
-    "rock-salt-runners",
-    "athletics-ni-st-annes-ac"
+    "7-hills-harriers",
+    "slgr",
+    "central-lancs-running-and-triathlon-club-clan"
   ],
   "resumeInstructions": [
+    "18Oct additional leads: 7Hills RunTogether route and CLAN BritishTriathlon Clubspark route returned404, no narrative adopted. SLGR ownsite403 respected. Public Strava clubs/so-let-s-go-running-slgr-103264 read Dartford club description; September2026 DartfordLiving issue243 p56 opened HTML at https://embed-rech-01.dialog.cm/dartfordliving/docs/dartford_living_september_26 publishes club notice/email slgr.contact@gmail.com but retained preCovid/spring language makes timetable freshness uncertain. No data imported yet; seek club-current corroboration, do not follow alternative hosts to bypass403. CLAN2026Preston10k newspaper/charity-partner leads remain unconfirmed; no participant imports.",
+    "BATCH130 CURRENT: dz / seedv130 adds Rock Salt Runners and St Annes Belfast; 1649/1737 biographies,856 associations,88 incomplete. PR763 draft25/18; published1624/838 unchanged. Rock own HTML recovered after reader failure; Winsford corrects Cuddington, old directory address/postcode preserved in enrichment but cleared from assembled profile, area-only because routes rotate. One general email and two own-linked socials added; existing Facebook/ECCA contact preserved. StAnnes secretary contact freshly reconfirmed without net entry; dated venue bookings and 2019/2020 first-person coaching links now support full profile plus2023 AnneMaguire service association. No unverified1980founders/Clubmark/athlete list, no supplier contacts, no current Youngstars programme transfer. Main de1325f5/parentfd2b5b9 unchanged before writes; prior workflows bothSUCCESS. New head evidence inPR763; no publication.",
+    "18Oct source recovery: rocksaltrunning.com homepage/about.html/our-runs.html/membership.html/team.html/couch-to-5k.html ordinary public HTML read. No founding year; nextC25KintakeTBC; undatedGBP35fee omitted. WhatsApp public link read but not joined; indexed phone not imported. EA3June2025 Maydevelopment report read, not proof of grant. StAnnes MaryPetersTrack booking-info read21Oct/November/December2026 datedbookings, not permanent timetable/openintake. IMAAaward and recipient pages reread; ANIexactrow checked, emailphone unchanged/date18Oct. FastTwitch news/onemonthin29Oct2019 and news/fast-twitch-athletics-one-year-in16Sep2020 read, service-provider clients not StAnnesathlete imports. Mel'sMilers home/about-2/contact direct200 bodies saySiteUnavailable; reader502/timeouts. Search-only2000origin/newemail notadopted. Nextnewprimaryqueue7Hills/SLGR/CLAN; preserveoldergaps and23Octoberfollowups.",
     "BATCH129 CURRENT: dy / seed v129 adds Seafront Shufflers and Cheshire Hill Racers, three dated associations (Pam Hart, Ed Gamble, Andy Watts), two website links and one own contact form. Assembled 1647/1737 biographies, 855 associations; published 1624/838, draft 23/17, 90 incomplete. Contacts/social counts and original directory dates unchanged. Parent 0a668491222e2656c637ba76323b43c8a78d7644 and main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed unchanged before edits. Both previous workflows passed. Exact new-head validation in PR763. Recheck remote state before further edits; no publication authorised.",
     "18 Oct Seafront: own Clubspark Home/Contact/News pages read, dated 2023 fundraising and 2025 cross-country/Beachy accounts. Existing handbook email reconfirmed in exact ECCA2026-27 printed p36 row; no net contacts. Contact form read, not submitted. Helen Gardens contact location noted, not substituted for Charleston Road as training. Undated £12 fee omitted; coaching/calendar text did not expose sessions, so indexed date-specific entries not adopted. Footer socials are England Athletics and excluded. Parkrun July2026 archive405 not used. Unknown founding year; confirm current meeting place/fees.",
     "18 Oct Cheshire: own rebuilding notice and county handbook link read; May2014 Bowland first-person Ed Gamble account read. July2021 FRA magazine downloaded and PDF p3 visually checked: Andy Watts treasurer / Ed Gamble welfare officer, both Cheshire Hill Racers. National-body historical roles, not current club offices; no FRA phone/email imported, no athlete identities/results or medical story details. Wilmslow remains directory-only. Unknown founding/current training/contact. Northants Police held: PSUK home and XC archive read; directory/participant search leads alone insufficient. No force/sailing/retirement-club transfer. Next fresh-primary queue Mel's Milers, Rock Salt, St Annes; preserve earlier award lead and 23 October follow-ups.",
@@ -629,8 +632,8 @@
     },
     {
       "slug": "athletics-ni-st-annes-ac",
-      "status": "primary-award-recovered-programme-history-thin",
-      "reason": "IMAA23Nov2023 NationalAwards and TadghLynch recipient page read: Anne/AnnMaguire StAnnesBelfast serviceaward2023. Saved in resumeInstructions, but not enough broader programme/history for full biography. ANI directory contact unchanged; OpenTrack403 respected. Do not import social-mirror founders/Clubmark/athletes or parish founding date.",
+      "status": "profile-added-qualified-source",
+      "reason": "Batch130: primary MaryPetersTrack dated autumn2026 bookings and first-person FastTwitch2019/2020 referral accounts now complement IMAA2023serviceaward and ANIsecretary listing. Full biography added; founding/earlyhistory/currentintake remain unknown. No social-mirror founders/Clubmark/athletes or parish dates imported. Earlier OpenTrack403 not retried.",
       "checkedAt": "2026-10-18"
     },
     {
@@ -2564,8 +2567,9 @@
     {
       "slug": "rock-salt-runners",
       "url": "https://www.rocksaltrunning.com/club",
-      "status": "deferred-unavailable-or-thin",
-      "reason": "Official club page timed out; governing-body visit snippet alone was insufficient."
+      "status": "profile-added-qualified-source",
+      "reason": "Batch130 recovered own site's public HTML at new homepage/about/our-runs/membership/C25K routes. Winsford/rotating venues, beginner programme, own email/social links read; founding and next intake unknown. Original Cuddington address remains source provenance, not training.",
+      "checkedAt": "2026-10-18"
     },
     {
       "slug": "rainford-runners-and-multi-sport-rrams",

@@ -1,3 +1,4 @@
+import { recoveredWinsfordAndBelfastProfiles } from "./club-profiles-dz.ts";
 import { recoveredCoastalAndFellProfiles } from "./club-profiles-dy.ts";
 import { recoveredPoliceAndVectorProfiles } from "./club-profiles-dx.ts";
 import { recoveredEllenboroughAndHydrographicProfiles } from "./club-profiles-dw.ts";
@@ -155,6 +156,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...recoveredWinsfordAndBelfastProfiles,
   ...recoveredCoastalAndFellProfiles,
   ...recoveredPoliceAndVectorProfiles,
   ...recoveredEllenboroughAndHydrographicProfiles,
@@ -1013,4 +1015,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v129";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v130";

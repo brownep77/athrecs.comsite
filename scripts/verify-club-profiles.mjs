@@ -17,6 +17,42 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 130: primary venue/community evidence; preserve contacts and identity safeguards.
+  const batch130Slugs = ["rock-salt-runners", "athletics-ni-st-annes-ac"];
+  for (const slug of batch130Slugs) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
+  const rock130 = bySlug.get("rock-salt-runners");
+  assert.equal(rock130.country, "England");
+  assert.equal(rock130.city, "Winsford");
+  assert.equal(rock130.county, "Cheshire West and Chester");
+  assert.equal(rock130.address, "");
+  assert.equal(rock130.postcode, "");
+  assert.equal(rock130.location_precision, "area-only");
+  assert.equal(clubEnrichment[rock130.slug].city, "Cuddington");
+  assert.equal(clubEnrichment[rock130.slug].postcode, "CW8 2LG");
+  assert.equal(rock130.contacts.length, 2);
+  assert.ok(rock130.contacts.some(c => c.email === "info@rocksaltrunning.com"));
+  assert.ok(rock130.contacts.every(c => !c.phone));
+  assert.equal(rock130.socials.length, 3);
+  assert.equal(rock130.socials.filter(s => s.platform === "Facebook").length, 1);
+  assert.equal(rock130.website, "https://www.rocksaltrunning.com/");
+  assert.match(clubProfiles[rock130.slug].biography.join(" "), /next intake is still to be confirmed/);
+  const stAnnes130 = bySlug.get("athletics-ni-st-annes-ac");
+  assert.equal(stAnnes130.country, "Northern Ireland");
+  assert.equal(stAnnes130.city, "Belfast");
+  assert.ok(!stAnnes130.address && !stAnnes130.postcode);
+  assert.equal(stAnnes130.contacts.length, 1);
+  assert.equal(stAnnes130.contacts[0].email, "annemaguire28@gmail.com");
+  assert.equal(stAnnes130.contacts[0].phone, "028 9061 2396");
+  assert.equal(stAnnes130.contacts[0].checked_at, "2026-10-18");
+  assert.equal(stAnnes130.socials.length, 0);
+  assert.equal(clubProfiles[stAnnes130.slug].notable_members.length, 1);
+  assert.match(clubProfiles[stAnnes130.slug].notable_members[0].connection, /2023/);
+  assert.ok(!clubProfiles[stAnnes130.slug].sources.some(s => /localgyms|opentrack|facebook/.test(s.url)));
+  assert.ok(!clubProfiles[stAnnes130.slug].biography.join(" ").includes("1980"));
   // Batch 129: primary club narratives; no supplier contacts or inferred venues.
   const batch129Slugs = ["seafront-shufflers", "cheshire-hill-racers"];
   for (const slug of batch129Slugs) {
@@ -325,7 +361,7 @@ try {
     const club = bySlug.get(slug);
     assert.ok(club, slug);
     assert.equal(club.country, "England");
-    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs].includes(slug)) {
+    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs, ...batch130Slugs].includes(slug)) {
       assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
     }
     const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());
