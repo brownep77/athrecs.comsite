@@ -3,6 +3,9 @@ import type { ClubSeed } from "./types";
 // Public club contact pages. Each added contact/link retains its source and actual check date.
 // Excludes supplier contacts, governing-body accounts and unconfirmed numeric social IDs.
 export const clubWebsiteContacts: Record<string, Partial<ClubSeed>> = {
+  // Batch 113: exact club entries, excluding council and platform support contacts.
+  "barlestone-st-giles-rc": {"contact_url":"https://www.barlestoneparishcouncil.gov.uk/findmynearest/858225","contacts":[{"role":"Club enquiries","email":"barlestonerunningclub@gmail.com","source_url":"https://www.hinckley-bosworth.gov.uk/info/200313/running/786/more_about_running/2","checked_at":"2026-10-18"}],"socials":[{"platform":"Facebook","url":"https://www.facebook.com/barlestoneruns","source_url":"https://www.hinckley-bosworth.gov.uk/info/200313/running/786/more_about_running/2","checked_at":"2026-10-18"}]},
+  "new-berkeley-harriers": {"contact_url":"https://www.fullonsport.com/organiser/NBH/profile","contacts":[{"role":"Club organiser contact — Full On Sport listing","email":"enquiries@newberkeleyharriers.com","phone":"07971 040141","source_url":"https://www.fullonsport.com/organiser/search/request/","checked_at":"2026-10-18"}]},
   // Batch 112: clean seasonal handbook contacts; unsafe club domains stay suppressed.
   "liverpool-harriers-and-ac": {"contacts":[{"role":"Club contact — ECCA 2026–2027 handbook, page 24","email":"williamsarwel9@gmail.com","source_url":"https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf","checked_at":"2026-10-18"}]},
   "pudsey-and-bramley-ac": {"contacts":[{"role":"Club contact — ECCA 2026–2027 handbook, page 26","email":"oakie47@hotmail.com","source_url":"https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf","checked_at":"2026-10-18"}]},

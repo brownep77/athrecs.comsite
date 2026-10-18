@@ -17,6 +17,30 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 113: council-supported venue correction; event venue is not a training base.
+  const barlestone = bySlug.get("barlestone-st-giles-rc");
+  assert.equal(barlestone.city, "Barlestone");
+  assert.equal(barlestone.address_kind, "training");
+  assert.equal(barlestone.postcode, "CV13 0EP");
+  assert.equal(barlestone.adult_only, true);
+  assert.equal(clubProfiles[barlestone.slug].founded_year, 2015);
+  assert.equal(clubProfiles[barlestone.slug].notable_members[0].name, "Tony Walker");
+  assert.equal(barlestone.contacts[0].email, "barlestonerunningclub@gmail.com");
+  assert.ok(barlestone.socials.some(s => s.url === "https://www.facebook.com/barlestoneruns"));
+  const berkeley = bySlug.get("new-berkeley-harriers");
+  assert.equal(berkeley.address_kind, "directory");
+  assert.equal(berkeley.postcode, "GL13 9DF");
+  assert.equal(berkeley.contacts[0].email, "enquiries@newberkeleyharriers.com");
+  assert.equal(berkeley.contacts[0].phone, "07971 040141");
+  assert.match(berkeley.website, /facebook\.com\/share\//);
+  assert.equal(clubProfiles[berkeley.slug].founded_year, undefined);
+  assert.equal(clubProfiles[berkeley.slug].notable_members, undefined);
+  for (const club of [barlestone, berkeley]) {
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.contacts[0].checked_at, "2026-10-18");
+    assert.equal(clubProfiles[club.slug].biography.length, 3);
+  }
   // Batch 112: recovered primary histories must not restore flagged club domains.
   const batch112Emails = {
     "liverpool-harriers-and-ac": "williamsarwel9@gmail.com",
@@ -1286,7 +1310,8 @@ try {
   assert.equal(clubProfiles["nepal-run"].notable_members, undefined);
   assert.notEqual(clubProfiles["nepal-run"].scope, "global");
   assert.ok(clubProfiles["new-levels-run-club"].sources.some(source => source.url.includes("finalsurge.com/coach/runthroughcoach/")));
-  assert.equal(clubProfiles["new-berkeley-harriers"], undefined);
+  // New Berkeley's narrative was subsequently recovered from primary event partners in batch 113.
+  assert.ok(clubProfiles["new-berkeley-harriers"].sources.some(source => source.url.includes("greatrun.org/news/")));
   // Batch 51: preserve admission rules, organisational identity and real contact evidence.
   assert.equal(bySlug.get("newcastle-staffs-ac").postcode, "ST5 2DJ");
   assert.equal(bySlug.get("newcastle-staffs-ac").city, "Newcastle-under-Lyme");
