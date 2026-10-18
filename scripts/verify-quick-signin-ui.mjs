@@ -67,6 +67,7 @@ async function check(label, action) {
 try {
   await server.listen();
   database = await (await server.ssrLoadModule("/src/lib/db.ts")).getPglite();
+  await (await server.ssrLoadModule("/src/lib/athrecs/seed.server.ts")).ensureAthrecsSeeded();
   await mkdir("artifacts", { recursive: true });
   // Optional visual review using the installed browser skill's CLI.
   if (process.env.AUTH_UI_AGENT_BROWSER) {
@@ -213,7 +214,7 @@ try {
     await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
     await dialog.getByRole("button", { name: "Verify code and continue" }).click();
     await page.waitForURL(`${origin}/athlete-account?section=potential`);
-    await page.getByLabel("Full racing name", { exact: false }).waitFor();
+    await page.getByLabel("First name(s)", { exact: false }).waitFor();
     await page.setViewportSize({ width: 1280, height: 900 });
     // A draft consent choice must not be committed by the separate name form.
     await page.locator('a[href="/athlete-account?section=privacy"]').first().click();
@@ -225,14 +226,35 @@ try {
       insert into athletes (id, slug, display_name, profile_visibility) values (990021, 'quick-signin-runner', 'Quick Signup Runner', 'private');
       insert into results (id, edition_id, athlete_id, finish_time_seconds) values (990021, 990021, 990021, 2400);
     `);
-    await page.getByLabel("Full racing name", { exact: false }).fill("Quick Signup Runner");
-    await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
+    await page.getByLabel("First name(s)", { exact: false }).fill("Quick Signup");
+    await page.getByLabel("Surname / family name", { exact: false }).fill("Runner");
+    await page.getByLabel("Date of birth", { exact: false }).fill("1990-02-28");
+    await page.getByLabel("Nationality", { exact: false }).fill("British");
+    await page.getByLabel("Country of residence", { exact: false }).fill("United Kingdom");
+    await page.getByLabel("Broader area / region", { exact: false }).fill("Norfolk");
+    await page.getByRole("checkbox", { name: /I acknowledge the privacy notice/ }).check();
+    // Inspect the actual registration form before submission on both layouts.
+    await page.screenshot({ path: "artifacts/athlete-registration-desktop.png" });
+    await page.setViewportSize({ width: 390, height: 844 });
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({ path: "artifacts/athlete-registration-mobile.png" });
+    await page
+      .getByRole("button", { name: "Save details and find my results", exact: true })
+      .click();
     await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
     await page
       .getByRole("article")
       .filter({ hasText: "Quick Signin Test 10K" })
       .getByRole("button", { name: "Claim profile & review all results", exact: true })
       .waitFor();
+    const suggested = page.getByRole("article").filter({ hasText: "Quick Signin Test 10K" });
+    await suggested.getByRole("button", { name: "Not me", exact: true }).click();
+    await page.getByText("Dismissed athletes (1)", { exact: true }).click();
+    await page.getByRole("button", { name: "Restore matches", exact: true }).click();
+    await suggested
+      .getByRole("button", { name: "Claim profile & review all results", exact: true })
+      .waitFor();
+    await page.screenshot({ path: "artifacts/athlete-registration-matches-mobile.png" });
     const userId = (
       await database.query('select id from "user" where email = $1', ["quick-runner@example.test"])
     ).rows[0].id;
@@ -244,7 +266,7 @@ try {
     ).rows[0];
     assert.deepEqual(profile, {
       full_name: "Quick Signup Runner",
-      date_of_birth: null,
+      date_of_birth: "1990-02-28",
       postcode: null,
     });
     await check("Saving a racing name does not grant draft consent", async () =>
@@ -295,7 +317,7 @@ try {
     await dialog.getByRole("button", { name: "Verify code and continue" }).click();
     await page.waitForURL(`${origin}/athlete-account`);
     await page.getByRole("heading", { name: "My races", exact: true }).waitFor();
-    assert.equal(await page.getByLabel("Full racing name", { exact: false }).count(), 1);
+    assert.equal(await page.getByLabel("First name(s)", { exact: false }).count(), 1);
     console.log(
       "PASS: email-only signup, wrong/correct codes, mobile layout, optional result discovery, name capture, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
     );

@@ -404,6 +404,12 @@ function SignedInAccount() {
                 current && {
                   ...current,
                   fullName: updated.fullName,
+                  dateOfBirth: updated.dateOfBirth,
+                  nationality: updated.nationality,
+                  country: updated.country,
+                  postcode: updated.postcode,
+                  region: updated.region,
+                  clubOrTeam: updated.clubOrTeam,
                   privacyAcknowledged: updated.privacyAcknowledged,
                 },
             );
@@ -482,7 +488,7 @@ function SignedInAccount() {
           ) : null}
 
           {show("potential") ? (
-            IS_ATHRECS_SITE && !account.data.fullName.trim() ? null : (
+            IS_ATHRECS_SITE && (!account.data.exists || !account.data.fullName.trim()) ? null : (
               <PotentialResultMatchesPanel />
             )
           ) : null}
