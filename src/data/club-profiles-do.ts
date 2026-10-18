@@ -20,7 +20,7 @@ export const recoveredClubCommunityProfiles: Record<string, ClubProfile> = {
       { title: "TRAC: public club email, telephone and enquiry form", url: "https://trac.clubbuzz.co.uk/contact_us" }
     ],
     reviewed_at: "2026-10-18",
-    corrections: { city: "Tickhill", county: "South Yorkshire" }
+    corrections: { city: "Tickhill", county: "South Yorkshire", website: "http://trac.clubbuzz.co.uk/" }
   },
   "vocalink-mastercard-running-club": {
     summary: "VocaLink Mastercard Running Club is a Harrogate running club whose own archive records summer-league outings, a club championship and a friendly shared approach to racing.",
@@ -37,7 +37,8 @@ export const recoveredClubCommunityProfiles: Record<string, ClubProfile> = {
       { title: "VocaLink Running Club: championship page dated 21 July 2021", url: "https://vocalinkrunningclub.wordpress.com/club-championship/" },
       { title: "ECCA 2026–2027 handbook: existing enquiry contact, printed page 28", url: "https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf" }
     ],
-    reviewed_at: "2026-10-18"
+    reviewed_at: "2026-10-18",
+    corrections: { website: "https://vocalinkrunningclub.wordpress.com/" }
   },
   "st-austell-athletes-running-club": {
     summary: "St Austell Athletes Running Club is a road and trail club in Cornwall, with documented endurance-running achievements and a team fundraising challenge for Cornwall Air Ambulance.",

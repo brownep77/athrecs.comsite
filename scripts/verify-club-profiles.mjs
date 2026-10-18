@@ -21,12 +21,14 @@ try {
   const batch119Slugs = ["tickhill-running-and-athletic-club", "vocalink-mastercard-running-club", "st-austell-athletes-running-club"];
   const tickhill = bySlug.get(batch119Slugs[0]);
   assert.equal(tickhill.city, "Tickhill");
+  assert.equal(tickhill.website, "http://trac.clubbuzz.co.uk/");
   assert.equal(tickhill.county, "South Yorkshire");
   assert.equal(tickhill.address, "");
   assert.equal(tickhill.location_precision, "area-only");
   assert.equal(clubProfiles[tickhill.slug].founded_year, 2005);
   assert.equal(tickhill.contacts.find(c => c.email === "TickhillRunners@gmail.com").phone, "07411630845");
   const vocalink = bySlug.get(batch119Slugs[1]);
+  assert.equal(vocalink.website, "https://vocalinkrunningclub.wordpress.com/");
   assert.equal(vocalink.address_kind, "directory");
   assert.equal(clubProfiles[vocalink.slug].founded_year, undefined);
   assert.match(clubProfiles[vocalink.slug].biography.join(" "), /22 July 2021/);

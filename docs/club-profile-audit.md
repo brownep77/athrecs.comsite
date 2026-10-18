@@ -21,6 +21,8 @@ Four candidates investigated, three biographies supported; this bounded recovery
 
 Fresh branch codex/club-profiles-batch119 starts from main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed after merged PR762; no competing writer observed and main rechecked before edits. Module do, seed v119. Actual assembled totals, local checks and remaining source queue are in the checkpoint; exact-head preview and dedicated desktop/mobile evidence belong in the new draft PR. Prior production authorization applies to PR762 only. No merge, production publication, external migration, outreach, registration/search implementation, athlete identity/result, verification or privacy change.
 
+Preview follow-up: draft PR763's first head passed Club profiles39122368963, with desktop/mobile artifacts inspected. Hosted page checks exposed that website fields in the contact layer do not reach the assembled catalogue. The two URLs were moved into the existing profile-correction structure, website assertions added and the seed advanced to v119.1. New-head preview/workflow results are recorded in PR763; the first head's checks do not certify this follow-up.
+
 ## Production release PR762 — 18 October 2026
 
 Source head `98fd89badb6ed90f0f44cf19ee63b601d5b98dff` passed exact-head Club profiles workflow 39118039927 and full quality gate 39118039874. Normal merge `0bb298ede345b4fceb64e9c00c1fbb305a9c460f` preserved current main. Production `dpl_2CCJMtpJGsZRXD6nfSXDvMGxaPkP` is READY for the AthRecs project and the public www.athrecs.com/athrecs.com aliases.

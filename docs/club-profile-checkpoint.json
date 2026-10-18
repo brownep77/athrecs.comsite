@@ -4,7 +4,7 @@
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
-  "pullRequest": null,
+  "pullRequest": 763,
   "publication": "Draft batch119: 1,627/1,737 biographies (93.7%) and 841 sourced associations assembled; 110 remain incomplete. Three new biographies and three associations are unpublished. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this fresh draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
     "tickhill-running-and-athletic-club",
@@ -43,6 +43,7 @@
     "tri-anglia"
   ],
   "resumeInstructions": [
+    "BATCH119 PREVIEW FOLLOW-UP: draft PR763 created at f32c4e9372df9e93c2e77f04adf27be70e8052a5. Its Club profiles39122368963 passed and desktop/mobile artifacts were inspected. Hosted HTML revealed website values placed in the contact layer do not reach the catalogue; moved Tickhill/VocaLink URLs into existing profile corrections and added actual-catalogue website assertions. This follow-up commit requires fresh exact-head preview/workflow evidence, recorded in PR763. No production publication.",
     "BATCH119 CURRENT: fresh branch codex/club-profiles-batch119 from main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed after published PR762. No competing writer; main rechecked before source edits. Module do seedv119 adds Tickhill, VocaLink Mastercard and St Austell Athletes biographies, Pete Wass/Paul Maskell/Marc Smerdon associations. Assembled1627/841, live1624/838, draft3/3,110 incomplete. One net role contact, four social links, one new website-contact record. Preserve all prior source gaps and23OctoberTI follow-ups. Resolve draft PR by this branch; pullRequest is null only until creation. Exact-head verification belongs in its body.",
     "18Oct Tickhill recovery: ordinary http://trac.clubbuzz.co.uk/ and /founder_members returned200/read after HTTPS reader errors. Original Ryan Cudworth account dates foundation15June2005 withPeteWass/PaulBibby; Wassname/logo/secretary. Official /join and /contact_us read email/phone/form/Facebook. CityTickhill,countySouthYorkshire corrected; care-ofCricketClub nottraining/no street inferred. ECCAcontact preserved. Facebookthrottle andGymmart403 respected; no snippet-onlytraining imports.",
     "18Oct VocaLink recovery: publicStrava46413 confirmsHarrogate and linksWordPress. Ordinary WordPresshomepage/championshipHTML read2019league andJuly2021restart/championship. SourceattributedXvlmcrc andStrava added, malformed/@link excluded. ExistingECCAemail unchanged. No currentemploymenteligibility/timetable/founding/membercount inferred fromhistoricalreports.",
