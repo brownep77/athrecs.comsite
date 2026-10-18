@@ -1,48 +1,51 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch126",
+  "lastEditorialBatch": "2026-10-18-batch127",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch126: 1,641/1,737 biographies (94.5%) and 848 sourced associations assembled; 96 remain incomplete. PR763 contains seventeen unpublished biographies and ten associations across batches119–126. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch127: 1,643/1,737 biographies (94.6%) and 851 sourced associations assembled; 94 remain incomplete. PR763 contains nineteen unpublished biographies and thirteen associations across batches119–127. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "carlisle-aspatria-ac",
-    "lancashire-fire-and-rescue-service-and-aa",
-    "lancashire-constabulary-athletics-section"
+    "ellenborough-ac",
+    "hydrographic-harriers"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1641,
-    "notableMemberEntries": 848,
-    "clubsWithContacts": 1280,
-    "contactEntries": 2089,
-    "clubsWithEmail": 1237,
-    "clubsWithPhone": 192,
+    "extendedProfiles": 1643,
+    "notableMemberEntries": 851,
+    "clubsWithContacts": 1281,
+    "contactEntries": 2090,
+    "clubsWithEmail": 1238,
+    "clubsWithPhone": 193,
     "clubsWithSocials": 1231,
     "socialLinks": 2592,
-    "websiteContactRecords": 1610
+    "websiteContactRecords": 1611
   },
   "batchChanges": {
-    "extendedProfilesAdded": 3,
+    "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 0,
-    "newWebsiteContactRecords": 0,
+    "notableMemberEntriesAdded": 3,
+    "contactOrSocialRecordsChanged": 2,
+    "newWebsiteContactRecords": 1,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 0,
+    "netContactEntries": 1,
     "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch126 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1641/1737 biographies,848 associations,2089 contacts,2592 socials. External migrations and production publishers skipped. Previous head2f6231f passed Club profiles39148569044 and full quality39148569032; previous preview checks do not certify this batch. Exact-head evidence belongs in PR763. No production publication or access-control changes."
+    "status": "Batch127 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1643/1737 biographies,851 associations,2090 contacts,2592 socials. External migrations and production publishers skipped. Previous head545e7bf passed Club profiles39153749217 and full quality39153749173; previous preview checks do not certify this batch. Exact-head evidence belongs in PR763. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
-    "ellenborough-ac",
-    "hydrographic-harriers",
-    "horsham-run-fit"
+    "devon-and-cornwall-police-ac",
+    "vector-racing",
+    "athletics-ni-st-annes-ac"
   ],
   "resumeInstructions": [
+    "BATCH127 CURRENT: module dw seedv127 adds Ellenborough and Hydrographic;3 historical associations RaymondThompson/MaryThompson founders1958 and RickyLightfoot clubarchive2016. Assembled1643/851,live1624/838,draft19/13,94incomplete. One new email/phone entry,2contactroutes, no socials. Parent545e7bfefc38dddb0ad45d141314423c97b717c0/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed recheckedunchanged, no competing writer. Previoushead bothworkflows passed. Newhead evidence inPR763. Preserveoldergaps/23Octoberfollowups.",
+    "18Oct Ellenborough recovered ordinarypublicHTTPS https://ellenboroughac.com/ club-info/ contact-us/ bob-graham-round/ coledale-horseshoe/ afterreader400, no accessrestriction bypass. Ownhistory1958founders,2009seniorfellteam,2017juniorsectionended. Maryport/Cumbria town-only, .com.uk replaced; formreadNOTsubmitted. ECCAemailoriginaldatepreserved. No phone/social found. Clubmark historicalwording notfreshaccreditation; juniorsarchive notcurrentintake; ColedaleMarch2026Braithwaiteevent nottraining. No currenttimetable confirmed.",
+    "18Oct Hydrographic https://fullonsport.com/organiser/6923/profile undatedownprofileexplicitTauntonUKHO; ThomasMelloremailphoneattributed, no currentofficeclaim. EA8June2026PDFpage38freshlydownloaded/visuallycheckedSomersetroadtrail. OriginalEA13Oct directory TORQUAY/Torbay/address21,BanburyPark,TORQUAY,TQ27HN retainedunderlyingenrichment; assembledaddress/postcodecleared toavoidwrongbase, townTauntoncountySomerset area-only. AdmiraltyWayTA12DN notsubstituted/currenttraining. RunningForever10June2019ownreport ofHydroHarriersPiddleWoodPlod read, Thurlbearhistoricaleventonly. RunABCsearch2026cancelled/open2025conflict notused; platformeventsnone notclosure. Unknownfoundation/eligibility/timetable, no athlete/participanttransfer.",
+    "18Oct Horsham held: https://www.streetlight.uk.com/wp-content/uploads/2019/04/Streetlight-UK-Annual-Report-2018-small-compressed.pdf page10visuallychecked exactHorshamRunFitlogosponsorship, willingcharitysupport. https://completebodycoach.wixsite.com/completebodycoach/plans-pricing readundatedmembershipbundle butnotcurrentclubprogramme/fees. No coachsuppliercontact/importedparticipants/companyincorporationyear. Savepartialprimaryhistory forfuturejoining/programme evidence. Nextnewprimaryqueue DevonCornwallPolice/VectorRacing/StAnnesBelfast;2biosnot20–30.",
     "BATCH126 HOSTED CORRECTION: firstcommit8f6bb2522da2595f1879cb8716c2412400f6a033 hostedreview found inherited Carlisle triathlon/duathlon/aquathlon/swimming tags despite source XC/trackfield. Follow-up restrictssports Running/Athletics, preservesdisciplines and advancesseedv126-r1. Countsunchanged. Firstcommit Clubprofiles39153343358 passed and81hostedstructural assertions matched, butwrongsource sporttags requiredcorrection. Finalhead checks/preview inPR763 supersedeinitialpreview. No metadataimplementation change.",
     "BATCH126 CURRENT: module dv seedv126 adds CarlisleAspatria, LancashireFire and LancashireConstabulary; StevenBroadbent historical secretary association1990–2023. Carlisle county correctedCumbria/citytrimmed; Lancon readablewebsite linked. No contact/social/count changes, no directorydate refresh. Parent2f6231f1804f3beb8f6d20e83de4d7151113d657/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked unchanged, no competing writer. Assembled1641/848, live1624/838, draft17/10,96 incomplete. Previoushead bothworkflows passed; newhead evidence inPR763. Preserveoldergaps and23OctoberTI follow-ups.",
     "18Oct sources: Carlisle EA8June2026PDFpage19 visuallychecked countyCumbria; NorthernAthletics14Oct2026affiliation; Keswick15Oct2014TNC2 composite notmerger/trackteam; AW15–16Dec2015Sheepmount first-personlocalofficialaccounts notcurrentclosure. No BorderHarriers/stadiumathlete transfer. LancashireFire original2008entryform TorrierJanuaryPDFpage15 visuallychecked, StAnnesjointpromotionWesham; Lytham16June2014BlueLight organiser and5August2014relays. Eventvenues nottraining,18yearoldphones/address excluded. June2026affiliationlist omission notclosure; existingEA/ECCAentriespreserved, status unresolved. ExistingECCAemails retainprevious18Octchecks, notfreshPDFclaim.",
@@ -6575,8 +6578,8 @@
     {
       "slug": "ellenborough-ac",
       "url": "http://www.ellenboroughac.com.uk/",
-      "status": "deferred",
-      "reason": "Listed website returned502; no usable official replacement was established. No biography added."
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Batch127 recovered ownreplacement ellenboroughac.com via ordinarypublicHTTPS. History/contactform read18Oct2026, biography added. Currenttrainingvenue/timetable unconfirmed;2017juniorsectionclosure and olderClubmarkwording notcurrentprovision/accreditation. OriginalECCAcontact preserved."
     },
     {
       "slug": "evesham-vale-running-club",

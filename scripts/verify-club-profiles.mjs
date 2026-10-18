@@ -17,6 +17,40 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 127: recovered club history, source-attributed contact and location conflicts.
+  const batch127Slugs = ["ellenborough-ac", "hydrographic-harriers"];
+  for (const slug of batch127Slugs) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.adult_only, true);
+    assert.equal(club.address, "");
+    assert.equal(club.postcode, "");
+    assert.equal(club.location_precision, "area-only");
+    assert.equal(club.contacts.length, 1);
+    assert.equal(club.socials.length, 0);
+  }
+  const ellenborough = bySlug.get("ellenborough-ac");
+  assert.equal(ellenborough.city, "Maryport");
+  assert.equal(ellenborough.county, "Cumbria");
+  assert.equal(ellenborough.website, "https://ellenboroughac.com/");
+  assert.equal(ellenborough.contact_url, "https://ellenboroughac.com/contact-us/");
+  assert.equal(clubProfiles[ellenborough.slug].founded_year, 1958);
+  assert.equal(clubProfiles[ellenborough.slug].notable_members.length, 3);
+  assert.match(clubProfiles[ellenborough.slug].biography.join(" "), /junior section ending in 2017/);
+  const hydrographic = bySlug.get("hydrographic-harriers");
+  assert.equal(hydrographic.city, "Taunton");
+  assert.equal(hydrographic.county, "Somerset");
+  assert.deepEqual(hydrographic.disciplines, ["road_running", "trail_running"]);
+  assert.equal(hydrographic.contact_url, "https://fullonsport.com/organiser/6923/profile");
+  assert.equal(hydrographic.contacts[0].email, "Thomas.Mellor@ukho.gov.uk");
+  assert.equal(hydrographic.contacts[0].phone, "01823 483635");
+  assert.match(hydrographic.contacts[0].role, /undated/);
+  assert.equal(clubProfiles[hydrographic.slug].founded_year, undefined);
+  assert.equal(clubProfiles[hydrographic.slug].notable_members, undefined);
+  assert.equal(clubEnrichment[hydrographic.slug].postcode, "TQ2 7HN");
+  assert.equal(clubProfiles["horsham-run-fit"], undefined);
   // Batch 126: distinct clubs, dated archives and unchanged enquiry provenance.
   const batch126Slugs = ["carlisle-aspatria-ac", "lancashire-fire-and-rescue-service-and-aa", "lancashire-constabulary-athletics-section"];
   for (const slug of batch126Slugs) {
@@ -396,7 +430,7 @@ try {
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
     assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["run-middlewich", "uts-running-club"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
-    if (!["metropolitan-police-ac", "uts-running-club", ...batch122Slugs, ...batch126Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["metropolitan-police-ac", "uts-running-club", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");

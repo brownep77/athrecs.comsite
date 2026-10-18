@@ -1,3 +1,4 @@
+import { recoveredEllenboroughAndHydrographicProfiles } from "./club-profiles-dw.ts";
 import { recoveredCumbriaAndServicesProfiles } from "./club-profiles-dv.ts";
 import { recoveredHattonDartsProfile } from "./club-profiles-du.ts";
 import { recoveredWinterHillAndUtsProfiles } from "./club-profiles-dt.ts";
@@ -152,6 +153,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...recoveredEllenboroughAndHydrographicProfiles,
   ...recoveredCumbriaAndServicesProfiles,
   ...recoveredHattonDartsProfile,
   ...recoveredWinterHillAndUtsProfiles,
@@ -1007,4 +1009,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v126-r1";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v127";
