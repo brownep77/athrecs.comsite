@@ -17,6 +17,32 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 120: current training evidence must not turn a PO box into a venue.
+  const batch120Slugs = ["thornton-cleveleys-running-club", "tri-anglia"];
+  const thornton = bySlug.get(batch120Slugs[0]);
+  assert.equal(thornton.website, "http://www.run-tcrc.co.uk/");
+  assert.equal(thornton.address_kind, "training");
+  assert.equal(thornton.postcode, "FY5 1RN");
+  assert.equal(clubProfiles[thornton.slug].founded_year, 2009);
+  assert.equal(clubProfiles[thornton.slug].notable_members[0].name, "Bob Fairclough");
+  assert.ok(!thornton.contacts.some(c => /run-?tcrc@gmail.com/i.test(c.email ?? "")));
+  const triAnglia = bySlug.get(batch120Slugs[1]);
+  assert.equal(triAnglia.website, "https://tri-anglia.clubpal.app/");
+  assert.equal(triAnglia.city, "Norwich");
+  assert.equal(triAnglia.address, "PO Box 3412, Norwich, NR7 7AP");
+  assert.equal(triAnglia.postcode, "NR7 7AP");
+  assert.equal(triAnglia.address_kind, "correspondence");
+  assert.equal(triAnglia.contact_url, "https://tri-anglia.clubpal.app/about-us");
+  assert.equal(clubProfiles[triAnglia.slug].founded_year, 1992);
+  assert.equal(clubProfiles[triAnglia.slug].notable_members, undefined);
+  assert.ok(triAnglia.contacts.some(c => c.email === "membership@tri-anglia.co.uk"));
+  assert.ok(triAnglia.contacts.some(c => c.email === "committee@tri-anglia.co.uk"));
+  assert.ok(!triAnglia.contacts.some(c => c.email === "info@norwichtriathlon.co.uk"));
+  for (const slug of batch120Slugs) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
   // Batch 119: dated associations must not conflate venues or the two St Austell clubs.
   const batch119Slugs = ["tickhill-running-and-athletic-club", "vocalink-mastercard-running-club", "st-austell-athletes-running-club"];
   const tickhill = bySlug.get(batch119Slugs[0]);
@@ -82,7 +108,7 @@ try {
     const club = bySlug.get(slug);
     assert.ok(club, slug);
     assert.equal(club.country, "England");
-    if (![...batch118Slugs, ...batch119Slugs].includes(slug)) {
+    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs].includes(slug)) {
       assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
     }
     const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());
@@ -1084,7 +1110,7 @@ try {
     );
     assert.equal(
       bySlug.get(canonical).city,
-      newest.city,
+      clubProfiles[canonical]?.corrections?.city ?? newest.city,
       `Alias must not restore old location: ${canonical}`,
     );
   }
