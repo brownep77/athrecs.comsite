@@ -1,18 +1,20 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch125",
+  "lastEditorialBatch": "2026-10-18-batch126",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch125: 1,638/1,737 biographies (94.3%) and 847 sourced associations assembled; 99 remain incomplete. PR763 contains fourteen unpublished biographies and nine associations across batches119–125. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch126: 1,641/1,737 biographies (94.5%) and 848 sourced associations assembled; 96 remain incomplete. PR763 contains seventeen unpublished biographies and ten associations across batches119–126. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "hatton-darts"
+    "carlisle-aspatria-ac",
+    "lancashire-fire-and-rescue-service-and-aa",
+    "lancashire-constabulary-athletics-section"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1638,
-    "notableMemberEntries": 847,
+    "extendedProfiles": 1641,
+    "notableMemberEntries": 848,
     "clubsWithContacts": 1280,
     "contactEntries": 2089,
     "clubsWithEmail": 1237,
@@ -22,7 +24,7 @@
     "websiteContactRecords": 1610
   },
   "batchChanges": {
-    "extendedProfilesAdded": 1,
+    "extendedProfilesAdded": 3,
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 1,
     "contactOrSocialRecordsChanged": 0,
@@ -33,14 +35,17 @@
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch125 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1638/1737 biographies,847 associations,2089 contacts,2592 socials. External migrations and production publishers skipped. Previous head1390f4e passed Club profiles39143642970 and full quality39143642944; its54 hosted assertions and inspected desktop/mobile artifact do not certify this batch. Exact-head evidence belongs in PR763. No production publication or access-control changes."
+    "status": "Batch126 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1641/1737 biographies,848 associations,2089 contacts,2592 socials. External migrations and production publishers skipped. Previous head2f6231f passed Club profiles39148569044 and full quality39148569032; previous preview checks do not certify this batch. Exact-head evidence belongs in PR763. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
-    "carlisle-aspatria-ac",
-    "lancashire-fire-and-rescue-service-and-aa",
-    "sedbergh-schools-group-running-club"
+    "ellenborough-ac",
+    "hydrographic-harriers",
+    "horsham-run-fit"
   ],
   "resumeInstructions": [
+    "BATCH126 CURRENT: module dv seedv126 adds CarlisleAspatria, LancashireFire and LancashireConstabulary; StevenBroadbent historical secretary association1990–2023. Carlisle county correctedCumbria/citytrimmed; Lancon readablewebsite linked. No contact/social/count changes, no directorydate refresh. Parent2f6231f1804f3beb8f6d20e83de4d7151113d657/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked unchanged, no competing writer. Assembled1641/848, live1624/838, draft17/10,96 incomplete. Previoushead bothworkflows passed; newhead evidence inPR763. Preserveoldergaps and23OctoberTI follow-ups.",
+    "18Oct sources: Carlisle EA8June2026PDFpage19 visuallychecked countyCumbria; NorthernAthletics14Oct2026affiliation; Keswick15Oct2014TNC2 composite notmerger/trackteam; AW15–16Dec2015Sheepmount first-personlocalofficialaccounts notcurrentclosure. No BorderHarriers/stadiumathlete transfer. LancashireFire original2008entryform TorrierJanuaryPDFpage15 visuallychecked, StAnnesjointpromotionWesham; Lytham16June2014BlueLight organiser and5August2014relays. Eventvenues nottraining,18yearoldphones/address excluded. June2026affiliationlist omission notclosure; existingEA/ECCAentriespreserved, status unresolved. ExistingECCAemails retainprevious18Octchecks, notfreshPDFclaim.",
+    "18Oct Lancon https://www.slateman.co.uk/athletics/index.htm lastupdated14August2024, membership/traininghistorical; /athletics/athletics-roy.htm Cup1994 notclubfoundation; https://bookitzone.com/steve_broadbent/bPjFFX updated2Oct2026 creditssecretary1990–2023 conflictingoldcurrentofficewording, no currentofficeclaim. LinkedFacebooksameexistinggroup,throttled; no duplicate. Oldclubphone/email,parentpaymentemail andcurrentleagueeventphone notadopted. No medicalarchive details. Sedbergh ownschool sports,athletics,WilsonRun andOSclubs pages read butexactregisteredSchoolsGroup relationshipunclear; no pupil/alumni/contact transfer,1881race notclubfounding. Threebios not20–30. Nextnewprimaryqueue Ellenborough/Hydrographic/Horsham; avoidrepeatblockedhomepages withoutnewlead.",
     "BATCH125 CURRENT: module du seedv125 adds HattonDarts and AndyWoolley organising association; no contact/social/address edits. Parent1390f4e7d194a0597b3addd77ed9c392c0a4eb6f/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked, no competing writer. Assembled1638/847, live1624/838, draft14/9,99 incomplete. Previoushead bothworkflows passed; newhead evidence inPR763. Preserveoldergaps and23OctoberTI follow-ups.",
     "18Oct Hatton: opened https://jcracetiming.uk/events/burton-10k/ namedorganiser9Aug2026, Shobnall eventNOTtraining; https://lichfield-running-club.co.uk/competitions/burton-district-league/ 2026membership,2005leagueNOTcluborigin; https://www.burtonalbionfab.co.uk/home/who-we-are AndyWoolley ownintro committeeconnection, undated notcurrentmembership/athleteresult. ECCApage18email retained fromprior18Octcheck, notnewPDFcheck. No timer/neighbour/footballcontacts. Ownsite known403 notbypassed, parkrunRosliston15Aug2026lead405 unusable. Founding/currentprogramme unknown.",
     "18Oct held: Gator Clayton10k https://www.entryhub.co.uk/clayton-10k-2026 actuallynamesBlytheBridgeRunningClub host, conflictingFBsnippet excluded. BornReady ownHTTP401, charitycommission403 stop; CompaniesHouse15933371 readincorporation3Sep2024notclubfounding, registeredofficeNOTtraining; charitymirror1216703notprimary. SevenTen ownhome/membership/coaching andseven-ten.co.uk/run-coaching403 stop; https://chilternccl.co.uk/members/ explicitly2026/27DivisionTwo only, insufficientfullbio. Westonhomepage403 noalternateaccess. Hatton/SLGRknown403respect. Newqueue CarlisleAspatria/LancashireFire/SedberghSchools notyetresearchedthisbatch; one supportedbio not20–30.",
@@ -203,6 +208,27 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "sedbergh-schools-group-running-club",
+      "status": "registered-entity-relationship-unconfirmed",
+      "checkedAt": "2026-10-18",
+      "url": "https://sedberghschool.org/senior/extra-curricular/sport/",
+      "reason": "School sport/athletics/Wilson Run and association.sedberghschool.org/os-club/clubs-and-societies/ opened. Pupil programme and Old Sedberghian alumni club are not yet tied unambiguously to the registered Schools Group Running Club. Do not transfer school/alumni contacts, athletes, eligibility or the Wilson Run's1881 origin. Retain without a full biography."
+    },
+    {
+      "slug": "lancashire-fire-and-rescue-service-and-aa",
+      "status": "history-recovered-current-programme-unconfirmed",
+      "checkedAt": "2026-10-18",
+      "url": "https://www.todharriers.co.uk/torrier/2008jan/torrierJan08.pdf",
+      "reason": "Original2008 LancashireFire/Wesham eventnotice page15 visuallychecked; Lytham2014 first-hand BlueLight/relays reports support biography. No founding/currenttraining/membershipeligibility established. June2026EA list omitsclub although earlierlists/retainedOctdirectory/ECCA nameit; no inferredclosure/currentaffiliation assertion. Old eventcontacts/venues not currentclubdetails."
+    },
+    {
+      "slug": "lancashire-constabulary-athletics-section",
+      "status": "historical-profile-recovered-current-officer-unconfirmed",
+      "checkedAt": "2026-10-18",
+      "url": "https://www.slateman.co.uk/athletics/index.htm",
+      "reason": "Own clubpage lastupdated14August2024; present fees, beginnergroup schedule and membership criteria need confirmation. StevenBroadbent2026organiser biography dates secretary1990–2023 despite oldsitewording. Historical association only. ECCAcontact retained, stalephone/email andparentpaymentmailbox notadded. ExistingFacebookgroup destinationthrottled, no duplicate."
+    },
     {
       "slug": "tickhill-running-and-athletic-club",
       "status": "profile-and-contact-recovered",
@@ -5594,9 +5620,9 @@
     {
       "slug": "carlisle-aspatria-ac",
       "url": "",
-      "status": "insufficient-primary-history",
-      "note": "No club website in catalogue; do not conflate the club with Border Harriers at the same stadium. Leave unprofiled.",
-      "checkedAt": "2026-10-14"
+      "status": "profile-recovered-training-unconfirmed",
+      "note": "18Oct batch126 recovers biography through Keswick's 2014 composite account, EA/Northern Athletics and contemporary Sheepmount reporting; Cumbria county corrected. No own readable website/current timetable or founding date. Facebook about-page inaccessible. Border Harriers remains separate; no shared-stadium athlete attribution.",
+      "checkedAt": "2026-10-18"
     },
     {
       "slug": "central-lancs-running-and-triathlon-club-clan",

@@ -17,6 +17,28 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 126: distinct clubs, dated archives and unchanged enquiry provenance.
+  const batch126Slugs = ["carlisle-aspatria-ac", "lancashire-fire-and-rescue-service-and-aa", "lancashire-constabulary-athletics-section"];
+  for (const slug of batch126Slugs) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.address_kind, "directory");
+    assert.equal(club.contacts.length, 1);
+  }
+  assert.equal(bySlug.get("carlisle-aspatria-ac").city, "Carlisle");
+  assert.equal(bySlug.get("carlisle-aspatria-ac").county, "Cumbria");
+  assert.equal(bySlug.get("carlisle-aspatria-ac").region, "North West");
+  assert.equal(clubProfiles["carlisle-aspatria-ac"].notable_members, undefined);
+  assert.equal(clubProfiles["lancashire-fire-and-rescue-service-and-aa"].notable_members, undefined);
+  const lancon = bySlug.get("lancashire-constabulary-athletics-section");
+  assert.equal(lancon.website, "https://www.slateman.co.uk/athletics/index.htm");
+  assert.equal(lancon.socials.length, 1);
+  assert.equal(lancon.postcode, "PR4 5SA");
+  assert.match(clubProfiles[lancon.slug].notable_members[0].detail, /1990–2023/);
+  assert.equal(clubProfiles["sedbergh-schools-group-running-club"], undefined);
   // Batch 125: event venue and league origins are not club training/founding facts.
   const hatton = bySlug.get("hatton-darts");
   assert.equal(clubProfiles[hatton.slug].biography.length, 3);
@@ -372,7 +394,7 @@ try {
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
     assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["run-middlewich", "uts-running-club"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
-    if (!["metropolitan-police-ac", "uts-running-club", ...batch122Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["metropolitan-police-ac", "uts-running-club", ...batch122Slugs, ...batch126Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");
