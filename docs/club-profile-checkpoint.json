@@ -1,48 +1,50 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch122",
+  "lastEditorialBatch": "2026-10-18-batch123",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch122: 1,633/1,737 biographies (94.0%) and 844 sourced associations assembled; 104 remain incomplete. PR763 contains nine unpublished biographies and six associations across batches119–122. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch123: 1,635/1,737 biographies (94.1%) and 845 sourced associations assembled; 102 remain incomplete. PR763 contains eleven unpublished biographies and seven associations across batches119–123. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "rolls-royce-harriers",
-    "run-middlewich",
-    "redcar-running-club"
+    "helpston-harriers-ac",
+    "twisted-running"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1633,
-    "notableMemberEntries": 844,
-    "clubsWithContacts": 1279,
-    "contactEntries": 2087,
-    "clubsWithEmail": 1236,
+    "extendedProfiles": 1635,
+    "notableMemberEntries": 845,
+    "clubsWithContacts": 1280,
+    "contactEntries": 2088,
+    "clubsWithEmail": 1237,
     "clubsWithPhone": 191,
-    "clubsWithSocials": 1230,
-    "socialLinks": 2590,
-    "websiteContactRecords": 1609
+    "clubsWithSocials": 1231,
+    "socialLinks": 2592,
+    "websiteContactRecords": 1610
   },
   "batchChanges": {
-    "extendedProfilesAdded": 3,
+    "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 2,
-    "newWebsiteContactRecords": 0,
+    "contactOrSocialRecordsChanged": 1,
+    "newWebsiteContactRecords": 1,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 2,
+    "netContactEntries": 1,
     "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch122 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1633/1737 biographies,844 associations,2087 contacts,2590 socials. Build skipped external migrations and production publishers. Exact-head workflow/preview evidence is recorded in PR763. Previous head4c782e0 passed Club profiles39130517319 and full quality39130517432, with28 hosted assertions and inspected desktop/mobile artifacts. Earlier results do not certify this batch. No production publication or access-control changes."
+    "status": "Batch123 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1635/1737 biographies,845 associations,2088 contacts,2592 socials. External migrations and production publishers skipped. Exact-head workflow/preview evidence belongs in PR763. Previous head4cb495e passed Club profiles39134781847 and full quality39134781832; its81 hosted assertions and inspected desktop/mobile artifact do not certify this batch. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
-    "helpston-harriers-ac",
+    "twemlow-track-club",
     "athletics-ni-st-annes-ac",
     "winter-hill-runners"
   ],
   "resumeInstructions": [
+    "BATCH123 CURRENT: module ds seedv123 adds Helpston Harriers and Twisted Running; Thomas Musson historical chairman association, two town corrections, Twisted training address/working website, one visible email and two publisher-linked socials. Parent4cb495e6f697b9b7865c24820d4ac7cb1f5f047a and main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked; no competing club writer observed. Assembled1635/845, live1624/838, draft11/7,102 incomplete. Previous-head dedicated and full quality workflows now both successful. Preserve older gaps and23OctoberTI follow-ups; new-head evidence in PR763.",
+    "18Oct Helpston: opened PeterboroughToday6Sep2018/18Apr2020 first-person ThomasMusson interviews; historical seasonal training and friendship origins, not current timetable/fees/office. Club-labelled Strava page recovered ordinaryHTTP200 confirmsPeterborough; no social ownership claim or new social link. ECCA2026–27page33contact unchanged; website503. Foundingyear/currentvenue unknown, other newspaper athlete lists excluded. Twisted: own club-affiliation/social-runs/get-me-started-running/strava-group/contact pages recovered200. Optionalaffiliation vs socialparticipation, AltrinchamArch15ViaductRoadWA145DU explicitlyrunmeetingpoint, virtualtrue retained. Contact visiblehello@twistedrunning.co.uk used; mailtohello@domain.com placeholder excluded. Instagramtwistedrunning andStrava1174491 linkedbyclub. Price35vs38 conflict and undatedJuly–Septemberbeginnersintake omitted ascurrentoffers; no founder/notables/phone invented.",
+    "18Oct held: BodminWomens bwrc.uk andDSFRS clubsite503; Twemlow leaguelead drrl.co.uk/dorset-clubs web502, countylist only confirmsclub nothistory; StAnnesBelfast freshAthleticsNI directory unchanged contact but no substantialprimarynarrative. No new biography credit or refreshed unavailable-source dates. Two supported additions, not20–30 orwhole-directorymanualreview. Next seek newprimaryTwemlow/StAnnes/WinterHill accounts without retrying knownaccessrestrictions.",
     "BATCH122 CURRENT: module dr seedv122 adds Rolls-Royce Harriers, Run Middlewich and Redcar Running Club; one historical JohnThornhill association, two roleemails, two source-attributed socials, Middlewich training classification and workingwebsite. Parent4c782e00118e77439b297c2aa4bdf0a199179c61/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed checked; no competing writer. Assembled1633/844,live1624/838,draft9/6,104 incomplete. Priorhead both dedicated/fullquality workflows nowpassed. Exactnewhead preview andCI inPR763; preserveoldergaps and23OctoberTI follow-ups.",
     "18Oct recovery: ordinary HTTP RollsRoyce history/about-us/training/harriers-epics/join-the-harriers/contact-us allread200. Earliest1912photo NOTfoundation;2026committee roleemails, oldtreasurermailto mismatch andsupplierexcluded. RunMiddlewich home/middlewich-5k read200; KingsLockCW100JJtraining vs2026raceBigLock/cricketground; copyright2019NOTfoundation. Redcar home/about-us/join/train read200; explicitunmaintainedsitewarning,1986origin,dated2018coaching/2018–19festival, Facebook/X publisherlinks. Nooldfee/timetable/currentcommittee/currentvenue claim; ECCAemails retained unchanged. These supersede earlier unreadable-source gaps only for these three clubs.",
     "18Oct held: WinterHill HTTP200placeholder Itworks, nohistory; MelsMilers SiteUnavailable. StAnnesBelfast searches yielded directory/results but no substantialprimarynarrative. KnownHatton/SLGR403 not retried. Seek fresh primary accounts, do not replicate generic Fordyparent biography across branches. Threeprofiles supported, not20–30/whole-directorymanualreview.",

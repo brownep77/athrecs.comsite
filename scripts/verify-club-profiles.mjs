@@ -17,6 +17,32 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 123: historical interviews and an explicitly identified social-run venue.
+  for (const slug of ["helpston-harriers-ac", "twisted-running"]) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).adult_only, true);
+  }
+  const helpston = bySlug.get("helpston-harriers-ac");
+  assert.equal(helpston.city, "Peterborough");
+  assert.equal(helpston.address, "");
+  assert.equal(helpston.location_precision, "area-only");
+  assert.equal(helpston.socials.length, 0);
+  assert.match(clubProfiles[helpston.slug].notable_members[0].detail, /historical role/);
+  const twisted = bySlug.get("twisted-running");
+  assert.equal(twisted.city, "Altrincham");
+  assert.equal(twisted.virtual, true);
+  assert.equal(twisted.address_kind, "training");
+  assert.equal(twisted.postcode, "WA14 5DU");
+  assert.equal(twisted.website, "https://twistedrunning.co.uk/");
+  assert.equal(twisted.contacts.length, 1);
+  assert.equal(twisted.contacts[0].email, "hello@twistedrunning.co.uk");
+  assert.equal(twisted.contacts[0].checked_at, "2026-10-18");
+  assert.equal(twisted.socials.length, 2);
+  assert.ok(!twisted.contacts.some(c => c.phone || c.email === "hello@domain.com"));
+  assert.equal(clubProfiles[twisted.slug].notable_members, undefined);
   // Batch 122: recovered public pages retain historical/current distinctions.
   const batch122Slugs = ["rolls-royce-harriers", "run-middlewich", "redcar-running-club"];
   for (const slug of batch122Slugs) {
@@ -338,7 +364,7 @@ try {
     assert.equal(club.checked_at, "2026-10-13");
     assert.equal(club.country, "England");
     assert.ok(!club.contacts.some(c => c.phone));
-    if (!["michelin-running-club", "runwednesdays"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["michelin-running-club", "runwednesdays", "helpston-harriers-ac"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("michelin-running-club").name, "Michelin Running Club");
   assert.equal(bySlug.get("michelin-running-club").address_kind, "directory");

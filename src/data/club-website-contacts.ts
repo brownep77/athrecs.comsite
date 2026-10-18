@@ -3,6 +3,7 @@ import type { ClubSeed } from "./types";
 // Public club contact pages. Each added contact/link retains its source and actual check date.
 // Excludes supplier contacts, governing-body accounts and unconfirmed numeric social IDs.
 export const clubWebsiteContacts: Record<string, Partial<ClubSeed>> = {
+  "twisted-running": {"contact_url":"https://twistedrunning.co.uk/pages/contact","contacts":[{"role":"General enquiries","email":"hello@twistedrunning.co.uk","source_url":"https://twistedrunning.co.uk/pages/contact","checked_at":"2026-10-18"}],"socials":[{"platform":"Instagram","url":"https://www.instagram.com/twistedrunning/","source_url":"https://twistedrunning.co.uk/pages/social-runs","checked_at":"2026-10-18"},{"platform":"Strava","url":"https://www.strava.com/clubs/1174491","source_url":"https://twistedrunning.co.uk/pages/strava-group","checked_at":"2026-10-18"}]},
   "st-austell-athletes-running-club": {"socials":[{"platform":"X","url":"https://twitter.com/STAARC2016","source_url":"https://cornwallrunning.co.uk/running-clubs/","checked_at":"2026-10-18"}]},
   // Batch 117: exact seasonal handbook club rows; no employer or supplier contacts.
   "gator-athletics-club": {"contacts":[{"role":"Club contact — ECCA 2026–2027 handbook, page 18","email":"scott_dundas_11@hotmail.com","source_url":"https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf","checked_at":"2026-10-18"}]},
