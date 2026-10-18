@@ -71,7 +71,7 @@ function JoinPage() {
   });
   const ready = Boolean(account.data?.exists && onboarding.data && step !== "edit");
   const stage = ready ? 3 : user ? 2 : 1;
-  const callbackURL = `/join?step=profile${from ? `&from=${from}` : ""}`;
+  const callbackURL = `/join?step=profile${from ? `&from=${from}` : ""}${returnTo ? `&returnTo=${encodeURIComponent(returnTo)}` : ""}`;
 
   return (
     <div className="mx-auto max-w-5xl space-y-6 py-2 sm:py-5">

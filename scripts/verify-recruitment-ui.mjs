@@ -15,6 +15,8 @@ process.env.BETTER_AUTH_SECRET = "recruitment-test-only-secret-at-least-32-chara
 const origin = "http://127.0.0.1:18228";
 const signupOnly = process.argv.includes("--signup-only");
 const source = process.argv.includes("--linkedin") ? "linkedin" : "instagram";
+const returnTo =
+  signupOnly && source === "linkedin" ? "/athlete-account?section=potential" : undefined;
 process.env.BETTER_AUTH_URL = origin;
 const sent = [];
 const realFetch = globalThis.fetch;
@@ -44,9 +46,16 @@ try {
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
   });
   page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  // Full cold-profile seeding and Vite compilation can exceed Playwright's 30s
+  // default on shared CI runners; keep meaningful UI waits bounded at one minute.
+  page.setDefaultTimeout(60000);
+  page.setDefaultNavigationTimeout(120000);
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto(`${origin}/join?from=${source}`, { waitUntil: "networkidle", timeout: 60000 });
+  await page.goto(
+    `${origin}/join?from=${source}${returnTo ? `&returnTo=${encodeURIComponent(returnTo)}` : ""}`,
+    { waitUntil: "networkidle", timeout: 120000 },
+  );
   await page.getByRole("button", { name: "No thanks", exact: true }).click();
   assert.equal(await page.getByText("Follow along", { exact: false }).count(), 0);
   await page.getByRole("button", { name: "Create my account with email", exact: true }).click();
@@ -57,15 +66,98 @@ try {
   const code = sent.at(-1)?.text.match(/\b([0-9]{6})\b/)?.[1];
   assert(code, "The actual email adapter receives the sign-in code");
   await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
+  let verification;
+  // Observe the genuine UI-issued OTP request through a pass-through. Read the
+  // real response before forwarding it unchanged: immediate callback navigation
+  // can make Chromium discard a response body before Playwright reads it.
+  await page.route(`${origin}/api/auth/sign-in/email-otp`, async (route) => {
+    const response = await route.fetch();
+    const signedIn = await response.json();
+    verification = { status: response.status(), signedIn };
+    if (response.ok() && signedIn.token) {
+      // Production uses Secure __Host cookies. Loopback HTTP cannot exercise
+      // HTTPS cookie transport; use the app's existing preview bearer mechanism
+      // with this genuinely issued token, without fabricating a session.
+      await page.context().setExtraHTTPHeaders({ authorization: `Bearer ${signedIn.token}` });
+      await page.context().addInitScript((token) => {
+        sessionStorage.setItem("grok-auth.bearer-token", token);
+      }, signedIn.token);
+    }
+    await route.fulfill({ response });
+  });
   await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
-  await page.getByRole("heading", { name: "Let’s start your profile", exact: true }).waitFor();
+  await page.waitForURL(
+    (url) => url.pathname === "/join" && url.searchParams.get("step") === "profile",
+    { waitUntil: "networkidle" },
+  );
+  assert(verification, "The browser submitted the real email OTP request");
+  const { status, signedIn } = verification;
+  assert.equal(status, 200, "The actual emailed OTP verifies successfully");
+  assert(signedIn.token, "Real OTP sign-in issued a session token");
+  assert.equal(signedIn.user.emailVerified, true);
+  assert.equal(signedIn.user.email, "onboarding-runner@example.test");
+  const session = await page.context().request.get(`${origin}/api/auth/get-session`);
+  assert.equal(session.status(), 200);
+  assert.equal((await session.json()).user.id, signedIn.user.id);
+  await page.getByRole("heading", { name: "Complete your profile", exact: true }).waitFor();
   assert.equal(new URL(page.url()).searchParams.get("from"), source);
-  await page.getByLabel("Your name", { exact: true }).fill("Fictional Recruitment Runner");
-  await page.getByLabel("Your main sport", { exact: true }).selectOption("Running");
-  const save = page.getByRole("button", { name: "Create my private profile", exact: true });
-  assert.equal(await save.isDisabled(), true, "Privacy acknowledgement is explicit");
-  await page.getByRole("checkbox").check();
+  if (returnTo) {
+    assert.equal(
+      new URL(page.url()).searchParams.get("returnTo"),
+      returnTo,
+      "The intended destination survives the real email OTP callback",
+    );
+  }
+  await page.getByRole("checkbox", { name: "Athlete", exact: true }).check();
+  await page.getByLabel("First names", { exact: true }).fill("Fictional Recruitment");
+  await page.getByLabel("Last name", { exact: true }).fill("Runner");
+  await page.getByLabel("Country of residence", { exact: true }).fill("United Kingdom");
+  await page.getByLabel("Main sport", { exact: true }).selectOption("Running");
+  await page.getByLabel("Nationality", { exact: true }).fill("British");
+  await page.getByLabel("Date of birth", { exact: true }).fill("1990-01-01");
+  await page.getByLabel("Postcode / ZIP / area (private)", { exact: true }).fill("NR1");
+  const save = page.getByRole("button", { name: "Save profile and find my results", exact: true });
+  const privacy = page.getByRole("checkbox", { name: /^I have read the privacy notice/ });
+  assert.equal(await privacy.isChecked(), false, "Privacy acknowledgement is explicit");
+  assert.equal(
+    await privacy.evaluate((input) => input.required && !input.checkValidity()),
+    true,
+    "The browser requires explicit privacy acknowledgement before submission",
+  );
   await save.click();
+  assert.equal(
+    await page.getByRole("heading", { name: "Complete your profile", exact: true }).count(),
+    1,
+    "An unacknowledged profile remains unfinished",
+  );
+  assert.equal(
+    (
+      await sql`select p.user_id from athlete_private_profiles p join "user" u on u.id=p.user_id
+      where u.email='onboarding-runner@example.test'`
+    ).length,
+    0,
+    "A profile is not saved before privacy acknowledgement",
+  );
+  assert.equal(
+    (
+      await sql`select m.user_id from member_onboarding m join "user" u on u.id=m.user_id
+      where u.email='onboarding-runner@example.test'`
+    ).length,
+    0,
+    "Onboarding is not completed before privacy acknowledgement",
+  );
+  await privacy.check();
+  await save.click();
+  if (returnTo) {
+    await page.waitForURL(`${origin}${returnTo}`);
+    await page.getByRole("heading", { name: "My Athlete Account", exact: true }).waitFor();
+    assert.equal(
+      `${new URL(page.url()).pathname}${new URL(page.url()).search}`,
+      returnTo,
+      "Saving the profile restores the intended account destination",
+    );
+    await page.goto(`${origin}/join?from=${source}`, { waitUntil: "networkidle" });
+  }
   await page
     .getByRole("heading", {
       name: "Your account is ready. Finish claiming your athlete profile.",
@@ -77,6 +169,12 @@ try {
   assert.equal(rows.length, 1);
   assert.equal(rows[0].emailVerified, true);
   assert.equal(rows[0].full_name, "Fictional Recruitment Runner");
+  const onboarding = await sql`
+    select first_name, last_name, roles from member_onboarding where user_id=${rows[0].id}
+  `;
+  assert.deepEqual(onboarding, [
+    { first_name: "Fictional Recruitment", last_name: "Runner", roles: ["athlete"] },
+  ]);
   const sports =
     await sql`select sport_code, is_primary from athlete_sport_profiles where user_id=${rows[0].id}`;
   assert.deepEqual(sports, [{ sport_code: "Running", is_primary: true }]);
@@ -102,7 +200,7 @@ try {
     })
     .waitFor();
   assert.equal(
-    await page.getByLabel("Your name", { exact: true }).count(),
+    await page.getByLabel("First names", { exact: true }).count(),
     0,
     "Existing profiles are not overwritten by onboarding",
   );

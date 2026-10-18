@@ -22,7 +22,7 @@ export type MemberOnboardingInput = {
 };
 
 const FORBIDDEN_TEXT = /[\p{C}<>]/u;
-const NAME_CHARACTERS = /^[\p{L}\p{M}][\p{L}\p{M} '\u2019.\-]*$/u;
+const NAME_CHARACTERS = /^[\p{L}\p{M}][\p{L}\p{M} '\u2019.-]*$/u;
 
 function name(value: unknown, label: string): string {
   if (typeof value !== "string" || FORBIDDEN_TEXT.test(value)) {

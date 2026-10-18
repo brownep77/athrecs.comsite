@@ -168,7 +168,7 @@ try {
     await page.getByRole("checkbox", { name: "Athlete", exact: true }).uncheck();
     assert.equal(await page.getByRole("button", { name: "Save profile and continue", exact: true }).isDisabled(), true, "No roles cannot submit");
     await page.getByRole("checkbox", { name: "Athlete", exact: true }).check();
-    for (const role of ["Coach", "Running or sports club representative", "Race director or organiser", "Timing or results provider", "Supporter or spectator", "AthRecs staff access request"]) {
+    for (const role of ["Coach", "Running / sports club representative", "Race director / organiser", "Timing / results provider", "Supporter / spectator", "AthRecs staff — request access"]) {
       await page.getByRole("checkbox", { name: role, exact: true }).check();
       assert.equal(await page.getByRole("checkbox", { name: role, exact: true }).isChecked(), true);
     }
@@ -219,7 +219,7 @@ try {
 
   const supporter = await newPage(390);
   await supporter.getByRole("checkbox", { name: "Athlete", exact: true }).uncheck();
-  await supporter.getByRole("checkbox", { name: "Supporter or spectator", exact: true }).check();
+  await supporter.getByRole("checkbox", { name: "Supporter / spectator", exact: true }).check();
   assert.equal(await supporter.getByLabel("Date of birth", { exact: true }).count(), 0, "Supporters do not have to supply athlete DOB");
   assert.equal(await supporter.getByLabel("Nationality", { exact: true }).count(), 0);
   assert.equal(await supporter.getByLabel("Main sport", { exact: true }).count(), 0);

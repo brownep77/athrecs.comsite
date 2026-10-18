@@ -1,4 +1,4 @@
-// Actual app -> issued authentication cookie -> onboarding RPC -> disposable PGlite.
+// Actual app -> issued authentication session -> onboarding RPC -> disposable PGlite.
 // All accounts and details below are fictional. No real delivery, app-route mocks,
 // production database, or athlete identity/ownership changes are permitted.
 import assert from "node:assert/strict";
@@ -116,11 +116,22 @@ async function signUp(sql, scenario) {
     data: credentials,
   });
   assert.equal(signin.status(), 200, await signin.text());
+  const signedIn = await signin.json();
+  assert(signedIn.token, "Real sign-in issued a session token");
   assert(
     (await context.cookies()).some((cookie) => /session_token/.test(cookie.name)),
     "Authentication issued the browser a real session cookie",
   );
-  const session = await context.request.get(`${origin}/api/auth/get-session`);
+  // Production uses Secure __Host cookies. Loopback HTTP cannot exercise their
+  // HTTPS transport, so use this app's existing real preview bearer-session
+  // mechanism with the token actually issued by sign-in (no fabricated session).
+  await context.setExtraHTTPHeaders({ authorization: `Bearer ${signedIn.token}` });
+  await context.addInitScript((token) => {
+    sessionStorage.setItem("grok-auth.bearer-token", token);
+  }, signedIn.token);
+  const session = await context.request.get(`${origin}/api/auth/get-session`, {
+    headers: { authorization: `Bearer ${signedIn.token}` },
+  });
   assert.equal(session.status(), 200);
   const authenticated = await session.json();
   assert.equal(authenticated.user.id, user.id);
