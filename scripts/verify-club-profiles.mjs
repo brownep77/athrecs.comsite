@@ -17,6 +17,39 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 110: source-specific contacts and seasonal training, not inferred origins.
+  const batch110Emails = {
+    "michelin-running-club": "kenny.jay@hotmail.co.uk",
+    "runwednesdays": "cburbage@btinternet.com",
+    "horsham-run-fit": "simonh@tkb.co.uk",
+    "ravens-school-runners": "robert_the_bruce77@yahoo.co.uk",
+    "rising-brook-runners": "louisehobson755@gmail.com",
+    "northants-police-athletic-section": "madeleine.moutrie@btinternet.com",
+    "helpston-harriers-ac": "paul@lunnfamily.com",
+    "independent-intelligent-fitness": "memmett57@btinternet.com",
+    "riverside-harriers": "davee.oughton@gmail.com",
+    "qbe-running-club": "julia.semple@uk.qbe.com",
+  };
+  for (const [slug, email] of Object.entries(batch110Emails)) {
+    const club = bySlug.get(slug);
+    assert.equal(club.contacts.length, 1);
+    assert.equal(club.contacts[0].email, email);
+    assert.equal(club.contacts[0].checked_at, "2026-10-18");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.country, "England");
+    assert.ok(!club.contacts.some(c => c.phone));
+    if (!["michelin-running-club", "runwednesdays"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+  }
+  assert.equal(bySlug.get("michelin-running-club").name, "Michelin Running Club");
+  assert.equal(bySlug.get("michelin-running-club").address_kind, "directory");
+  assert.equal(bySlug.get("michelin-running-club").socials.length, 2);
+  assert.equal(clubProfiles["michelin-running-club"].founded_year, undefined);
+  assert.equal(clubProfiles["runwednesdays"].founded_year, undefined);
+  assert.equal(bySlug.get("runwednesdays").address_kind, "training");
+  assert.equal(bySlug.get("runwednesdays").adult_only, false);
+  assert.equal(bySlug.get("helpston-harriers-ac").address, "");
+  assert.equal(bySlug.get("rising-brook-runners").socials[0].url, "https://www.facebook.com/groups/rbrunners");
+  assert.notEqual(bySlug.get("ravens-school-runners").contacts[0].email, "alexandra.anderson1972@gmail.com");
   // Batch 109: programme origins and source-specific contacts, without venue inference.
   const wellness = bySlug.get("wellness-warriors-on-the-run");
   assert.equal(clubProfiles[wellness.slug].founded_year, 2024);
