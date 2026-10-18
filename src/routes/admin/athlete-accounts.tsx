@@ -1,3 +1,5 @@
+import { listStaffMemberRoles } from "@/lib/athrecs/member-onboarding-api";
+import { MEMBER_ROLES } from "@/lib/athrecs/member-onboarding";
 import { useState } from "react";
 import { RegisteredAthletes } from "@/components/staff/RegisteredAthletes";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -48,7 +50,14 @@ function AdminAthleteAccountsPage() {
           Saved account details
         </Button>
       </div>
-      {details ? <SavedAthleteAccounts /> : <RegisteredAthletes />}
+      {details ? (
+        <>
+          <MemberRoles />
+          <SavedAthleteAccounts />
+        </>
+      ) : (
+        <RegisteredAthletes />
+      )}
     </div>
   );
 }
@@ -280,4 +289,47 @@ function formatDate(value: string | null): string {
   if (!value) return "unknown";
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString("en-GB");
+}
+
+function MemberRoles() {
+  const records = useQuery({
+    queryKey: ["staff-member-roles"],
+    queryFn: () => listStaffMemberRoles(),
+  });
+  return (
+    <section className="space-y-3 rounded-xl border border-border p-4">
+      <h2 className="text-xl font-semibold">Member roles and access requests</h2>
+      <p className="text-sm text-muted">
+        Latest 200 completed profiles. These are self-declared roles, not approved permissions.
+        Staff access requests require your normal administrator approval process.
+      </p>
+      {records.isError ? (
+        <p role="alert">
+          Could not load roles.{" "}
+          <button onClick={() => void records.refetch()} className="underline">
+            Try again
+          </button>
+        </p>
+      ) : records.isLoading ? (
+        <p>Loading roles…</p>
+      ) : records.data?.length ? (
+        records.data.map((member) => (
+          <div key={member.user_id} className="border-t border-border py-3 text-sm">
+            <strong>
+              {member.first_name} {member.last_name}
+            </strong>
+            <p>{member.email}</p>
+            <p>
+              {member.roles
+                .map((role) => MEMBER_ROLES[role as keyof typeof MEMBER_ROLES] ?? role)
+                .join(" · ")}
+            </p>
+            {member.organisation ? <p>{member.organisation}</p> : null}
+          </div>
+        ))
+      ) : (
+        <p>No completed role forms yet.</p>
+      )}
+    </section>
+  );
 }

@@ -1,0 +1,37 @@
+name: Member onboarding
+on:
+  pull_request:
+    paths:
+      - "src/components/auth/**"
+      - "src/lib/athrecs/*onboarding*"
+      - "src/lib/athrecs/athlete-account-api.ts"
+      - "src/routes/join.tsx"
+      - "src/routes/__root.tsx"
+      - "src/routes/admin/athlete-accounts.tsx"
+      - "migrations/**"
+      - "scripts/verify-member-onboarding*.mjs"
+      - ".github/workflows/member-onboarding.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  onboarding:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run typecheck
+      - run: node scripts/verify-member-onboarding.mjs
+      - name: Install pinned browser for reproducible UI tests
+        run: |
+          npx --yes --package=playwright@1.52.0 playwright install --with-deps chromium --only-shell
+          browser_path="$(rg --files "$HOME/.cache/ms-playwright" | rg '/headless_shell$' | head -1)"
+          test -n "$browser_path"
+          echo "ATHRECS_BROWSER_EXECUTABLE=$browser_path" >> "$GITHUB_ENV"
+      - run: node scripts/verify-member-onboarding-browser.mjs
+      - run: node scripts/verify-member-onboarding-live-browser.mjs
