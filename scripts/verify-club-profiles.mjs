@@ -17,6 +17,17 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 125: event venue and league origins are not club training/founding facts.
+  const hatton = bySlug.get("hatton-darts");
+  assert.equal(clubProfiles[hatton.slug].biography.length, 3);
+  assert.equal(clubProfiles[hatton.slug].founded_year, undefined);
+  assert.equal(hatton.address_kind, "directory");
+  assert.equal(hatton.country, "England");
+  assert.equal(hatton.checked_at, "2026-10-13");
+  assert.equal(hatton.contacts.length, 1);
+  assert.equal(hatton.contacts[0].email, "petestevens00@gmail.com");
+  assert.match(clubProfiles[hatton.slug].notable_members[0].detail, /undated biography/);
+  assert.ok(!hatton.contacts.some(c => c.email === "admin@jcracetiming.uk"));
   // Batch 124: historical primary accounts do not establish current training venues.
   for (const slug of ["winter-hill-runners", "uts-running-club"]) {
     assert.equal(clubProfiles[slug].biography.length, 3);
@@ -428,7 +439,7 @@ try {
     assert.equal(club.address_kind, addressUnknown ? undefined : "directory");
     if (addressUnknown) assert.equal(club.address, "");
     // Evesham and Wharfedale histories were recovered in batches 114 and 116.
-    if (!["evesham-vale-running-club", "wharfedale-harriers", "meads-runners", "winter-hill-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["evesham-vale-running-club", "wharfedale-harriers", "meads-runners", "winter-hill-runners", "hatton-darts"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   // Batch 108: verified venue classification, dated origins and placeholder exclusion.
   for (const slug of ["the-hawcs", "westside-runnas-uk", "heald-green-runners", "lifts-and-sprints-athletics-academy", "ts-harriers"]) {

@@ -1,19 +1,18 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch124",
+  "lastEditorialBatch": "2026-10-18-batch125",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch124: 1,637/1,737 biographies (94.2%) and 846 sourced associations assembled; 100 remain incomplete. PR763 contains thirteen unpublished biographies and eight associations across batches119–124. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch125: 1,638/1,737 biographies (94.3%) and 847 sourced associations assembled; 99 remain incomplete. PR763 contains fourteen unpublished biographies and nine associations across batches119–125. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "winter-hill-runners",
-    "uts-running-club"
+    "hatton-darts"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1637,
-    "notableMemberEntries": 846,
+    "extendedProfiles": 1638,
+    "notableMemberEntries": 847,
     "clubsWithContacts": 1280,
     "contactEntries": 2089,
     "clubsWithEmail": 1237,
@@ -23,25 +22,28 @@
     "websiteContactRecords": 1610
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
+    "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 1,
+    "contactOrSocialRecordsChanged": 0,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 1,
+    "netContactEntries": 0,
     "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch124 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1637/1737 biographies,846 associations,2089 contacts,2592 socials. External migrations and production publishers skipped. Exact-head workflow/preview evidence belongs in PR763. Previous head4845e4f passed Club profiles39138865139 and full quality39138865193; its54 hosted assertions and inspected desktop/mobile artifact do not certify this batch. No production publication or access-control changes."
+    "status": "Batch125 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1638/1737 biographies,847 associations,2089 contacts,2592 socials. External migrations and production publishers skipped. Previous head1390f4e passed Club profiles39143642970 and full quality39143642944; its54 hosted assertions and inspected desktop/mobile artifact do not certify this batch. Exact-head evidence belongs in PR763. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
-    "gator-athletics-club",
-    "bornready-academy",
-    "seven-ten-ac"
+    "carlisle-aspatria-ac",
+    "lancashire-fire-and-rescue-service-and-aa",
+    "sedbergh-schools-group-running-club"
   ],
   "resumeInstructions": [
+    "BATCH125 CURRENT: module du seedv125 adds HattonDarts and AndyWoolley organising association; no contact/social/address edits. Parent1390f4e7d194a0597b3addd77ed9c392c0a4eb6f/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked, no competing writer. Assembled1638/847, live1624/838, draft14/9,99 incomplete. Previoushead bothworkflows passed; newhead evidence inPR763. Preserveoldergaps and23OctoberTI follow-ups.",
+    "18Oct Hatton: opened https://jcracetiming.uk/events/burton-10k/ namedorganiser9Aug2026, Shobnall eventNOTtraining; https://lichfield-running-club.co.uk/competitions/burton-district-league/ 2026membership,2005leagueNOTcluborigin; https://www.burtonalbionfab.co.uk/home/who-we-are AndyWoolley ownintro committeeconnection, undated notcurrentmembership/athleteresult. ECCApage18email retained fromprior18Octcheck, notnewPDFcheck. No timer/neighbour/footballcontacts. Ownsite known403 notbypassed, parkrunRosliston15Aug2026lead405 unusable. Founding/currentprogramme unknown.",
+    "18Oct held: Gator Clayton10k https://www.entryhub.co.uk/clayton-10k-2026 actuallynamesBlytheBridgeRunningClub host, conflictingFBsnippet excluded. BornReady ownHTTP401, charitycommission403 stop; CompaniesHouse15933371 readincorporation3Sep2024notclubfounding, registeredofficeNOTtraining; charitymirror1216703notprimary. SevenTen ownhome/membership/coaching andseven-ten.co.uk/run-coaching403 stop; https://chilternccl.co.uk/members/ explicitly2026/27DivisionTwo only, insufficientfullbio. Westonhomepage403 noalternateaccess. Hatton/SLGRknown403respect. Newqueue CarlisleAspatria/LancashireFire/SedberghSchools notyetresearchedthisbatch; one supportedbio not20–30.",
     "BATCH124 CURRENT: module dt seedv124 adds WinterHill and UTS; AlbertSunter dated2025 association, Horwich town-only correction and one undated county contact email/phone. Parent4845e4fe63574b1fe13fe97c91251a09af981e85/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked, no competing writer. Assembled1637/846, live1624/838, draft13/8,100 incomplete. Previoushead bothworkflows passed. Exactnewhead evidence inPR763; preserveoldergaps and23OctoberTI follow-ups.",
     "18Oct WinterHill: Horwich7March2024grantPDFpage1 visuallychecked500poundsrecipient; no inferreduse/foundation. MadBullCurleys1Apr2026organiseraccount, JolleyCrofters registrationNOTtraining; publishercontacts excluded. Jura2025officialreport namesAlbertSunter34thappearance, notallforclub/currentmembership. HTTPwebsiteItworksplaceholder andFacebookthrottled respected, ECCAcontactretained. UTS: JustGivingVirtualHoylake10k clubauthored2020closedappeal; WirralJan2021assessmentpages2/88 visuallychecked, mostly2019research, no currenttimetable/67membershipclaim/unnamedGBathlete. AdjacentPensbyaddress nottransferred; FoundationJan2016notclubfounding. MCAAUTSrow MikeStoneemailphone attributedundated; ECCAcontact retained, noWarriors/suppliercontacts. utsrunclub.org andtheuts.co.uk/run-club ordinary503, no newwebsite/socials. Supersedes no-biography gaps only for these2; currenttraining/founding unknown.",
     "18Oct held: TwemlowDRRLblackmore-vale-1-2-race-report502, no new substantialprimaryhistory; knownTLS/403restrictions not bypassed. StAnnesBelfast founder1980mirror notprimary; RockSalt/YellowBrickRoad newsearch no primarynarrative. Next newprimary Gator/BornReady/SevenTen routes, canonical slugs must be checked before edits. Two supported biographies, not20–30/whole-directory manualreview.",
