@@ -17,6 +17,35 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 122: recovered public pages retain historical/current distinctions.
+  const batch122Slugs = ["rolls-royce-harriers", "run-middlewich", "redcar-running-club"];
+  for (const slug of batch122Slugs) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
+  const rolls = bySlug.get("rolls-royce-harriers");
+  assert.equal(rolls.address_kind, "directory");
+  assert.equal(rolls.contacts.length, 3);
+  assert.ok(rolls.contacts.some(c => c.email === "billsouthgate337@btinternet.com"));
+  assert.ok(rolls.contacts.some(c => c.email === "James.Ward@Rolls-Royce.com"));
+  assert.equal(clubProfiles[rolls.slug].founded_year, undefined);
+  assert.deepEqual(clubProfiles[rolls.slug].notable_members.map(m => m.name), ["John Thornhill"]);
+  const middlewich = bySlug.get("run-middlewich");
+  assert.equal(middlewich.website, "http://runmiddlewich.club/");
+  assert.equal(middlewich.address_kind, "training");
+  assert.equal(middlewich.postcode, "CW10 0JJ");
+  assert.equal(middlewich.contacts.length, 2);
+  assert.equal(clubProfiles[middlewich.slug].founded_year, undefined);
+  assert.equal(clubProfiles[middlewich.slug].notable_members, undefined);
+  const redcar = bySlug.get("redcar-running-club");
+  assert.equal(redcar.address_kind, "directory");
+  assert.equal(redcar.postcode, "TS10 2DH");
+  assert.equal(redcar.contacts.length, 1);
+  assert.equal(redcar.socials.length, 2);
+  assert.equal(clubProfiles[redcar.slug].founded_year, 1986);
+  assert.equal(clubProfiles[redcar.slug].notable_members, undefined);
+  assert.match(clubProfiles[redcar.slug].biography.join(" "), /no longer regularly monitored/);
   // Batch 121: historical community accounts do not establish a current venue or membership.
   const meads = bySlug.get("meads-runners");
   assert.equal(meads.city, "Eastbourne");
@@ -123,7 +152,7 @@ try {
     const club = bySlug.get(slug);
     assert.ok(club, slug);
     assert.equal(club.country, "England");
-    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs].includes(slug)) {
+    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs].includes(slug)) {
       assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
     }
     const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());
@@ -282,9 +311,9 @@ try {
     assert.ok(contact, slug);
     assert.equal(contact.checked_at, "2026-10-18");
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
-    assert.equal(club.contacts.length, slug === "run-middlewich" ? 2 : 1);
+    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : slug === "run-middlewich" ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
-    if (slug !== "metropolitan-police-ac") assert.equal(clubProfiles[slug], undefined);
+    if (!["metropolitan-police-ac", ...batch122Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");

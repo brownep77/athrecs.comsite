@@ -1,45 +1,51 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch121",
+  "lastEditorialBatch": "2026-10-18-batch122",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch121: 1,630/1,737 biographies (93.8%) and 843 sourced associations assembled; 107 remain incomplete. PR763 contains six unpublished biographies and five associations across batches119–121. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch122: 1,633/1,737 biographies (94.0%) and 844 sourced associations assembled; 104 remain incomplete. PR763 contains nine unpublished biographies and six associations across batches119–122. Live baseline remains 1,624/838 from PR762, verified 18 October 2026. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "meads-runners"
+    "rolls-royce-harriers",
+    "run-middlewich",
+    "redcar-running-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1630,
-    "notableMemberEntries": 843,
+    "extendedProfiles": 1633,
+    "notableMemberEntries": 844,
     "clubsWithContacts": 1279,
-    "contactEntries": 2085,
+    "contactEntries": 2087,
     "clubsWithEmail": 1236,
     "clubsWithPhone": 191,
-    "clubsWithSocials": 1229,
-    "socialLinks": 2588,
+    "clubsWithSocials": 1230,
+    "socialLinks": 2590,
     "websiteContactRecords": 1609
   },
   "batchChanges": {
-    "extendedProfilesAdded": 1,
+    "extendedProfilesAdded": 3,
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 0,
+    "contactOrSocialRecordsChanged": 2,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 0,
-    "netSocialLinks": 0,
+    "netContactEntries": 2,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch121 actual-catalogue/profile checks, catalogue verification, club-audit check, targeted ESLint, TypeScript, whitespace and safe preview build passed. Actual1630/1737 biographies and843associations; contacts2085 andsocials2588 unchanged. Build skipped external migrations and production publishers. Prior exact head3905dad passed Club profiles39125924734 and full quality39125924775, plus129 actual-preview assertions over five pages and inspected dedicated desktop/mobile artifacts. New-head evidence must be recorded in PR763; earlier results do not certify this batch. No production publication or access-control changes."
+    "status": "Batch122 actual-catalogue/profile, catalogue and club-audit checks, targeted ESLint, TypeScript, whitespace and safe preview build passed:1633/1737 biographies,844 associations,2087 contacts,2590 socials. Build skipped external migrations and production publishers. Exact-head workflow/preview evidence is recorded in PR763. Previous head4c782e0 passed Club profiles39130517319 and full quality39130517432, with28 hosted assertions and inspected desktop/mobile artifacts. Earlier results do not certify this batch. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
-    "fry-club-joggers",
-    "central-lancs-running-and-triathlon-club-clan"
+    "helpston-harriers-ac",
+    "athletics-ni-st-annes-ac",
+    "winter-hill-runners"
   ],
   "resumeInstructions": [
+    "BATCH122 CURRENT: module dr seedv122 adds Rolls-Royce Harriers, Run Middlewich and Redcar Running Club; one historical JohnThornhill association, two roleemails, two source-attributed socials, Middlewich training classification and workingwebsite. Parent4c782e00118e77439b297c2aa4bdf0a199179c61/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed checked; no competing writer. Assembled1633/844,live1624/838,draft9/6,104 incomplete. Priorhead both dedicated/fullquality workflows nowpassed. Exactnewhead preview andCI inPR763; preserveoldergaps and23OctoberTI follow-ups.",
+    "18Oct recovery: ordinary HTTP RollsRoyce history/about-us/training/harriers-epics/join-the-harriers/contact-us allread200. Earliest1912photo NOTfoundation;2026committee roleemails, oldtreasurermailto mismatch andsupplierexcluded. RunMiddlewich home/middlewich-5k read200; KingsLockCW100JJtraining vs2026raceBigLock/cricketground; copyright2019NOTfoundation. Redcar home/about-us/join/train read200; explicitunmaintainedsitewarning,1986origin,dated2018coaching/2018–19festival, Facebook/X publisherlinks. Nooldfee/timetable/currentcommittee/currentvenue claim; ECCAemails retained unchanged. These supersede earlier unreadable-source gaps only for these three clubs.",
+    "18Oct held: WinterHill HTTP200placeholder Itworks, nohistory; MelsMilers SiteUnavailable. StAnnesBelfast searches yielded directory/results but no substantialprimarynarrative. KnownHatton/SLGR403 not retried. Seek fresh primary accounts, do not replicate generic Fordyparent biography across branches. Threeprofiles supported, not20–30/whole-directorymanualreview.",
     "BATCH121 CURRENT: module dq seedv121 adds Meads Runners, Eastbourne town correction and Dale Anderton historical training association. Parent3905dad10a7918e7970e6e2120cc3452f71c14e2/main de1325f5b78d1a4ad9d1e582c8ee9ff5f4c0beed rechecked; no competing writer. Assembled1630/843, live1624/838, draft6/5,107 incomplete. No contact/social changes. Preserve all older unresolved gaps and23OctoberTI follow-ups. Exact-head workflow/preview verification belongs in PR763.",
     "18Oct Meads recovered: https://www.justgiving.com/MeadsRunnersFestiveFunRun ordinarypublicHTML read200, storysecondfunrun22Nov2014/previousyear whileheader2013; datedplannedevent only. https://www.justgiving.com/fundraising/lammyandjonny read2022EastbourneseafronttrainingwithMikeOvens; ordinaryparticipantnotnotable. https://www.eastbournetriathlon.co.uk/about/ readDaleAnderton2019trainingassociation, notclubtriathlonownership/currentmembership. Leagueclubs read. ECCAcontact/directoryWesternLawns retained, cityEastbournecorrected. Mainwebsite503, X403, Facebookunreadable respected; no socials/timetable/founding invented. Bothappealsclosed.",
     "18Oct Fry newprimary: https://www.keynsham-tc.gov.uk/_UserFiles/Files/Publications/Keynsham%20News/KN_Spring%202020%20LR.pdf recoveredordinarydownload; p33rendered/visuallyread Tuesday19:00foyerbriefnotice, no substantialhistory/currenttimetable. Somerdaleofficialhome read butvenuecontacts/feesnotclubfacts; legacyBT403notretried. CLAN https://clubs.britishtriathlon.org/CentralLancsRunningTriathlonClubCLAN ordinaryHTML404; RosemereFacebookthrottled, secondaryvirtualmarathon/racedonationreportsnotadopted. Seek new club/community primary accounts, not repeated blockedURL attempts.",
