@@ -17,6 +17,33 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 112: recovered primary histories must not restore flagged club domains.
+  const batch112Emails = {
+    "liverpool-harriers-and-ac": "williamsarwel9@gmail.com",
+    "liverpool-pembroke-and-sefton-h-ac": "karenprobert@yahoo.co.uk",
+    "pudsey-and-bramley-ac": "oakie47@hotmail.com",
+    "shepshed-running-club": "david.hattersley@hotmail.co.uk",
+  };
+  for (const [slug, email] of Object.entries(batch112Emails)) {
+    const club = bySlug.get(slug);
+    assert.equal(club.website, "");
+    assert.equal(club.country, "England");
+    const contact = club.contacts.find(c => c.email === email);
+    assert.ok(contact, `${slug}: new handbook contact`);
+    assert.equal(contact.checked_at, "2026-10-18");
+    assert.match(contact.source_url, /ECCA_Handbook_2026-27\.pdf$/);
+    assert.equal(club.checked_at, "2026-10-13");
+  }
+  assert.equal(bySlug.get("liverpool-harriers-and-ac").address_kind, "training");
+  assert.equal(bySlug.get("liverpool-pembroke-and-sefton-h-ac").address_kind, "directory");
+  assert.equal(bySlug.get("pudsey-and-bramley-ac").address_kind, "directory");
+  assert.equal(clubProfiles["liverpool-harriers-and-ac"].founded_year, 1882);
+  assert.equal(clubProfiles["liverpool-pembroke-and-sefton-h-ac"].founded_year, 1995);
+  assert.equal(clubProfiles["pudsey-and-bramley-ac"].founded_year, undefined);
+  assert.equal(clubProfiles["pudsey-and-bramley-ac"].notable_members.length, 3);
+  assert.match(clubProfiles["pudsey-and-bramley-ac"].biography.join(" "), /January 1990/);
+  assert.ok(bySlug.get("liverpool-pembroke-and-sefton-h-ac").socials.some(s => s.url === "https://www.facebook.com/LPSATHLETICCLUB/"));
+  assert.equal(clubProfiles["shepshed-running-club"], undefined);
   // Batch 111: recovered programme, explicit handbook club contacts and venue spelling.
   const mojo = bySlug.get("mojo-run-fit");
   assert.equal(mojo.city, "Beckenham");

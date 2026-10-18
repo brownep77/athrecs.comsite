@@ -1,39 +1,41 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch111",
+  "lastEditorialBatch": "2026-10-18-batch112",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
   "pullRequest": 762,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds17 biographies/9 associations; assembled1610/1737 (92.7%),830 associations,127 incomplete. Batch111 continues6440dcd8db6e39272abafee67983e2f9038c8e6f on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds20 biographies/14 associations; assembled1613/1737 (92.9%),835 associations,124 incomplete. Batch112 continues3babc687f1d639b186576fe7a31fd9a81dc89005 on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "mojo-run-fit"
+    "liverpool-harriers-and-ac",
+    "liverpool-pembroke-and-sefton-h-ac",
+    "pudsey-and-bramley-ac"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1610,
-    "notableMemberEntries": 830,
-    "clubsWithContacts": 1254,
-    "contactEntries": 2057,
-    "clubsWithEmail": 1211,
+    "extendedProfiles": 1613,
+    "notableMemberEntries": 835,
+    "clubsWithContacts": 1258,
+    "contactEntries": 2061,
+    "clubsWithEmail": 1215,
     "clubsWithPhone": 189,
-    "clubsWithSocials": 1222,
-    "socialLinks": 2578,
-    "websiteContactRecords": 1584
+    "clubsWithSocials": 1223,
+    "socialLinks": 2579,
+    "websiteContactRecords": 1587
   },
   "batchChanges": {
-    "extendedProfilesAdded": 1,
+    "extendedProfilesAdded": 3,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 0,
-    "contactOrSocialRecordsChanged": 27,
-    "newWebsiteContactRecords": 26,
+    "notableMemberEntriesAdded": 5,
+    "contactOrSocialRecordsChanged": 4,
+    "newWebsiteContactRecords": 3,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 27,
-    "netSocialLinks": 3,
+    "netContactEntries": 4,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch111 catalogue, club audit, profile checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Twenty-seven actual built pages returned200 and passed291 assertions for biography text, source/contact/social links, training classification, GB-ENG indicators, registration, canonical and search metadata. Isolated PGLite with external fetch disabled; build explicitly skipped database publication. Actual assembled reconciliation:1610covered/127missing/0orphan profile keys;1584websiteContactRecords. Exact-head hosted and Club profiles desktop/mobile evidence will be recorded in PR762. Previous batch110 Club profiles39088897410 and full quality gate39088897385 both passed; exact6440dcd preview dpl_GU45KZf9DCokytcNgeVd5UQBwZs5 and hosted10pages149assertions are recorded in PR762. No external migration or publication."
+    "status": "Batch112 catalogue, profile checks, targeted ESLint, TypeScript and safe preview build passed. Build explicitly skipped external database migrations/publication. Current club audit and whitespace checks run before guarded commit. Assembled1613/1737 profiles,835 associations,124 incomplete. Exact-head hosted page checks and dedicated Club profiles desktop/mobile workflow evidence will be recorded in PR762 after commit. Previous batch111 Club profiles39092888670 and full quality gate39092888672 both passed. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
     "ginpit-flyers",
@@ -42,6 +44,10 @@
     "yellow-brick-road-running-and-walking-club"
   ],
   "resumeInstructions": [
+    "BATCH112 CURRENT: module dh seedv112. LiverpoolHarriers, LiverpoolPembrokeSefton and PudseyBramley biographies added via clean independent primary sources; five dated associations. Assembled1613/1737(92.9%),835 associations,124 incomplete. Published1593/821; draftPR762 adds20/14. Parent3babc687f1d639b186576fe7a31fd9a81dc89005, main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits. Four ECCA contacts including contact-only Shepshed and one LPS Facebook; no unsafe website restored.",
+    "18Oct clean source recovery supersedes biography deferrals, not website safety flags: LiverpoolHarriers NAL history (City of Liverpool heading explicitly identifies Harriers), council outdoor-track page, BritishAthletics August2026 team list; Pembroke official pembrokian.co.uk archive and club-supplied SeftonCVS history; Pudsey firsthand PaulStevenson history in FRA January1990 and EA2022 team list. Liverpool1882, mergedPembroke1995, predecessorSefton1889/Pembroke1890; Pudsey founding1908 versus other1910 accounts unresolved, omitted. PeterWatson/JackMaitland dated1990, AlexBell dated2022, KJT/JonnyMellor datedAugust2026; no results or athlete identities imported.",
+    "ECCA2026-27 exact rows read18Oct: LiverpoolHarriers WilliamsArwel9@gmail.com page24, Pembroke karenprobert@yahoo.co.uk page24, Pudsey oakie47@hotmail.com page26, Shepshed david.hattersley@hotmail.co.uk page19 (stored email case follows PDF). Clubcontacts not verified currentofficers. SeftonCVS old phone/email notadopted; archivecorrectionmailbox notmembership. LPS Facebook sourceattributed only, destinationunreadable. Wavertree classifiedtraining; Serpentine and AsquithAvenue remain directory. Current training/junior intake unresolved for LPS/Pudsey. Existing directorydates13Oct unchanged.",
+    "Continue rotating remaining English regions/disciplines using alternate primary sources, not repetitive failed homepages. 124remaining includes41Fordy branches, StAnnesNI and Unattached; no invented club biography for Unattached or new geography. Fresh CLAN/GinPit/YellowBrick searches thisrun did not establish a clean narrative. RunLeeds Pudsey interview403 respected; heyzine interviewPDF readerfailed, notused. Preserve earlier23OctTriathlonIreland recheck checkpoint. Inspect PR762 state and remote head before next edits.",
     "BATCH111 CURRENT: module dg seedv111; MojoRunFit biography, no new associations. Assembled1610/1737(92.7%),830 associations,127 incomplete; published1593/821; draftPR762 adds17/9. Parent6440dcd8db6e39272abafee67983e2f9038c8e6f and main9edeec5860433afbf2930f80aea061a9609ee134 unchanged before edits; no competing writer observed. Twenty-six ECCA club emails plus Mojo phone/form/three socials improve27clubs. Contact-only updates do not count as biographies.",
     "Mojo18Oct recovered https://mojofit.uk/running/ via ordinarypublicHTML then searchreader, plus /register/mojo-run-fit-beckenham/. Women's social/noncompetitive club, intermediate5km<=40min, separate10weekbeginnercourse; Mondays20h NewBeckenhamStationcarpark LennardRoad; Wednesdays19:45nearForestHillStation. Corrected Lenmard spelling/citytrailingblank and classifiedtraining; originalpostcode retained. September7/9 2026 beginnerstarts arepast, notnewavailability. Holidaylist contains4Jan2026after21Dec2026 and olderjoiningpage differsclinicfrequency: neither copied. Phone07703101424 and form publishedforprovider/runningenquiries; obscuredemailnotguessed; Instagrammojofit_uk fromcurrentfeed, Facebookmamamojofitness/XMamaMojoFit fromfooter. Destinationsunreadable, sourceattributiononly; oldInstagramfooterhandle notadded alongsidecurrentfeed. No founder/year/notables/results/healthclaims. EAfindaclubfailed,13Octdatepreserved; OctoberPDFfind didnotlocateMojo, notproofdisaffiliation.",
     "ECCA2026-27handbook opened/read18Oct; exactclubrows pages22–28,31,34–36. Twenty-five emptyemailclubs filled plus distinctgeneralRunMiddlewichhandbookcontact alongside existingraceenquiryemail unchanged. Club contacts notcurrentofficer verification or notablemembers. No supplier/emergency-serviceheadquarters details imported; no eligibility/directorydate/location changes forcontact-only clubs.",
@@ -148,6 +154,30 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "liverpool-harriers-and-ac",
+      "status": "profile-recovered-unsafe-domain-still-suppressed",
+      "checkedAt": "2026-10-18",
+      "reason": "Clean NAL/council/GB team sources now support history, venue and dated associations. Suppression based on16Oct affected homepage is retained, not represented as a fresh homepage check. Confirm club-specific joining groups; council bookings are not club admission."
+    },
+    {
+      "slug": "liverpool-pembroke-and-sefton-h-ac",
+      "status": "profile-recovered-unsafe-domain-still-suppressed",
+      "checkedAt": "2026-10-18",
+      "reason": "Official archive and club-supplied community listing support predecessor origins,1995merger and1997trackmove. Current timetable/intake unconfirmed; undated older phone/email omitted. Facebook destination blocked; source-attribution only. Previously unsafe main domain stays suppressed."
+    },
+    {
+      "slug": "pudsey-and-bramley-ac",
+      "status": "profile-recovered-foundation-and-training-gaps",
+      "checkedAt": "2026-10-18",
+      "reason": "FRAJanuary1990 first-person history and EA2022 team list now support biography and three historical associations. Founding1908 versus1910 unresolved: no founded_year. Current timetable/junior intake notestablished; RunLeeds403 respected; unreadable heyzinePDF notused. Previously unsafe main domain stays suppressed."
+    },
+    {
+      "slug": "shepshed-running-club",
+      "status": "contact-added-biography-still-incomplete",
+      "checkedAt": "2026-10-18",
+      "reason": "Exact clean ECCA2026-27 page19 row supplies public club email. No sufficient independent primary narrative; affected own website remains suppressed. Contact-only addition notcounted as biography."
+    },
     {"slug":"clanfield-joggers","status":"profile-added-with-qualified-gap","reason":"Council strategy p96 and event partners recover training pattern, Challenge and past C25K; no club founding year, direct email/phone, notable association or current beginner intake. EndalWay directory classification retained; unavailable sources keep old dates.","checkedAt":"2026-10-17"},
     {"slug":"athletics-ireland-bailieboro-a-c","status":"profile-added-with-qualified-gap","reason":"Current Athletics Ireland page read directly confirms senior-only training listing/email/social. Dated county-board and club reports recover history; phone, founding year and current timetable remain unknown. Historical junior activity not current eligibility; Facebook ownership unverified.","checkedAt":"2026-10-17"},
     {"slug":"fordy-runs-running-club","status":"profile-expanded-with-qualified-gap","reason":"Parent official sources confirm founder, dedicated club email, free social membership and added community links. Branch histories, leaders and current venues remain unestablished; no 41-branch biography replication or unsupported Wrexham location rewrite.","checkedAt":"2026-10-17"},
