@@ -1,3 +1,4 @@
+import { recoveredShepshedProfile } from "./club-profiles-dm.ts";
 import { wharfedaleAndWidnesProfiles } from "./club-profiles-dl.ts";
 import { recoveredMetropolitanPoliceProfile } from "./club-profiles-dk.ts";
 import { recoveredValeDorsetAndSunlightProfiles } from "./club-profiles-dj.ts";
@@ -142,6 +143,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...recoveredShepshedProfile,
   ...wharfedaleAndWidnesProfiles,
   ...recoveredMetropolitanPoliceProfile,
   ...recoveredValeDorsetAndSunlightProfiles,
@@ -987,4 +989,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v116";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v117";

@@ -17,6 +17,30 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 117: clean Shepshed narrative does not restore its compromised website.
+  const shepshed = bySlug.get("shepshed-running-club");
+  assert.equal(clubProfiles[shepshed.slug].biography.length, 3);
+  assert.equal(clubProfiles[shepshed.slug].founded_year, undefined);
+  assert.equal(clubProfiles[shepshed.slug].notable_members, undefined);
+  assert.equal(clubProfiles[shepshed.slug].corrections, undefined);
+  assert.equal(shepshed.website, "");
+  assert.equal(shepshed.address_kind, "directory");
+  assert.equal(shepshed.checked_at, "2026-10-13");
+  assert.match(clubProfiles[shepshed.slug].biography.join(" "), /scheduled event/);
+  assert.ok(clubProfiles[shepshed.slug].sources.every(s => !s.url.includes("shepshedrc.org.uk")));
+  const batch117Emails = {"gator-athletics-club":"scott_dundas_11@hotmail.com","team-balancise-rc":"sam.devereaux@hsc-ltd.co.uk","weston-athletic-club":"helen.diamond@talk21.com","aurora-harriers":"lesleygarnham@aol.com","merseyside-fire-and-rescue-service-running-club":"geds@merseyfire.gov.uk","thornton-cleveleys-running-club":"fletchercatherine1@yahoo.co.uk","tickhill-running-and-athletic-club":"hannahday1@live.co.uk","vocalink-mastercard-running-club":"steve@steve-peters.co.uk","abbey-running-club":"Abbeyrunningclub@gmail.com","attleborough-athletics-academy":"ssheeran16@sky.com","norfolk-harriers-rc":"felicity_ward85@hotmail.com","north-norfolk-harriers":"rachelcubitt1981@gmail.com","st-johns-running-club":"vickipoole1@hotmail.co.uk","tri-anglia":"julia.kennelly@btinternet.com","twemlow-track-club":"pchapman79@icloud.com","fry-club-joggers":"Rozalyn@interworx.co.uk","redcar-running-club":"johnbwalshaw@gmx.com","fenland-running-club":"secretary@fenlandrunningclub.co.uk","rock-salt-runners":"iain_borsbey@me.com"};
+  for (const [slug, email] of Object.entries(batch117Emails)) {
+    const club = bySlug.get(slug);
+    assert.ok(club, slug);
+    assert.equal(club.country, "England");
+    assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
+    const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());
+    assert.ok(contact, `${slug}: handbook email`);
+    assert.equal(contact.checked_at, "2026-10-18");
+    assert.match(contact.source_url, /ECCA_Handbook_2026-27\.pdf$/);
+  }
+  assert.equal(clubSlugAliases["north-norfolk-harriers-athletics-club"], "north-norfolk-harriers");
+  assert.ok(!bySlug.get("north-norfolk-beach-runners").contacts.some(c => c.email === batch117Emails["north-norfolk-harriers"]));
   // Batch 116: dated programme/hosting evidence is not a current timetable or venue.
   for (const slug of ["wharfedale-harriers", "widnes-wasps-ladies-r-c"]) {
     const club = bySlug.get(slug);
@@ -116,7 +140,7 @@ try {
   assert.equal(clubProfiles["pudsey-and-bramley-ac"].notable_members.length, 3);
   assert.match(clubProfiles["pudsey-and-bramley-ac"].biography.join(" "), /January 1990/);
   assert.ok(bySlug.get("liverpool-pembroke-and-sefton-h-ac").socials.some(s => s.url === "https://www.facebook.com/LPSATHLETICCLUB/"));
-  assert.equal(clubProfiles["shepshed-running-club"], undefined);
+  // Shepshed's biography was recovered from clean alternative sources in batch 117.
   // Batch 111: recovered programme, explicit handbook club contacts and venue spelling.
   const mojo = bySlug.get("mojo-run-fit");
   assert.equal(mojo.city, "Beckenham");
