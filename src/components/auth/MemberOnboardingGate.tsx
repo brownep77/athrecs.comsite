@@ -10,7 +10,8 @@ export function MemberOnboardingGate() {
   const { user, isPending } = useCurrentUserState();
   const location = useRouterState({ select: (state) => state.location });
   const navigate = useNavigate();
-  const eligible = shouldRequestOnboarding(location.pathname);
+  const eligible =
+    Boolean(user && !user.isDevFallback) && shouldRequestOnboarding(location.pathname);
   const returnTo = safeOnboardingReturnTo(location.href);
   const onboarding = useQuery({
     queryKey: ["member-onboarding", user?.id],

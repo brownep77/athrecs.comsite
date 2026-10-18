@@ -6,7 +6,7 @@ import react from "@vitejs/plugin-react";
 import tailwind from "@tailwindcss/vite";
 import { chromium } from "playwright";
 
-// Component integration coverage: use the real form, schema, QueryClient and CSS.
+// Component integration coverage: use the real form, gate, schema, QueryClient and CSS.
 // The fixture replaces server/router boundaries only and never uses live users,
 // credentials, email providers, databases, or result ownership.
 const project = process.cwd();
@@ -21,7 +21,15 @@ function file(name, content) {
 }
 const router = file("router.tsx", `import React from 'react';
 export function Link({to,children,...props}) { return <a href={to} {...props}>{children}</a>; }
-export function useNavigate() { return async (destination) => { window.fixture.navigations.push(destination); }; }
+const navigate=async (destination) => { window.fixture.navigations.push(destination); };
+export function useNavigate() { return navigate; }
+export function useRouterState({select}) { return select({location:window.fixture.location}); }
+`);
+const auth = file("auth.js", `
+export function useCurrentUserState() {
+  window.fixture.authRenders++;
+  return {user:window.fixture.gateUser,isPending:false};
+}
 `);
 const accountApi = file("account-api.js", `
 export const ATHLETE_SPORTS=['Running','Athletics','Trail running','Ultra running','Parkrun','Triathlon','Duathlon','Aquathlon','Cycling','Swimming','Rowing','OCR','Gym and fitness','Walking and hiking','Yoga and mobility','Other'];
@@ -37,6 +45,10 @@ export async function saveMyAthleteAccount({data}) {
 }
 `);
 const onboardingApi = file("onboarding-api.js", `
+export async function getMyOnboarding() {
+  window.fixture.metadataRequests++;
+  return null;
+}
 export async function completeMyOnboarding({data}) {
   const state=window.fixture;
   state.completions.push(structuredClone(data));
@@ -71,14 +83,18 @@ import React from 'react';
 import {createRoot} from 'react-dom/client';
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query';
 import {MemberOnboardingForm} from '/@fs/${resolve("src/components/auth/MemberOnboardingForm.tsx")}';
+import {MemberOnboardingGate} from '/@fs/${resolve("src/components/auth/MemberOnboardingGate.tsx")}';
 import './style.css';
 const account=${JSON.stringify(initialAccount)};
+const gate=new URLSearchParams(location.search).get('gate');
 const mismatch=location.search.includes('mismatch');
 if(mismatch) { account.exists=true; account.fullName='Current Synthetic Name'; account.updatedAt='original'; }
 const initial=mismatch?{firstName:'Old',lastName:'Synthetic',roles:['athlete'],organisation:''}:null;
-window.fixture={account,revision:account.updatedAt,saves:[],completions:[],navigations:[],failProfile:0,failCompletion:0};
+window.fixture={account,revision:account.updatedAt,saves:[],completions:[],navigations:[],failProfile:0,failCompletion:0,metadataRequests:0,authRenders:0,
+  gateUser:{id:gate==='dev'?'dev-user':'synthetic-gate-user',displayName:'Synthetic Member',primaryEmail:'member@example.test',profileImageUrl:null,isDevFallback:gate==='dev'},
+  location:gate==='claim'?{pathname:'/claim-results',href:'/claim-results?resultId=990021'}:{pathname:'/athlete-account',href:'/athlete-account?section=potential&year=2026'}};
 const client=new QueryClient({defaultOptions:{queries:{retry:false},mutations:{retry:false}}});
-createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main className="mx-auto max-w-3xl px-4 py-8 sm:px-8"><p className="mb-6 text-xs text-muted">FICTIONAL TEST DATA · NO LIVE ACCOUNTS OR EMAILS</p><div className="rounded-3xl border border-border bg-surface p-5 shadow-card sm:p-8"><MemberOnboardingForm account={account} initial={initial} returnTo="/athletes?from=onboarding"/></div></main></QueryClientProvider>);
+createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main className="mx-auto max-w-3xl px-4 py-8 sm:px-8"><p className="mb-6 text-xs text-muted">FICTIONAL TEST DATA · NO LIVE ACCOUNTS OR EMAILS</p><div className="rounded-3xl border border-border bg-surface p-5 shadow-card sm:p-8">{gate?<><MemberOnboardingGate/><p>Gate fixture ready</p></>:<MemberOnboardingForm account={account} initial={initial} returnTo="/athletes?from=onboarding"/>}</div></main></QueryClientProvider>);
 `);
 
 let server;
@@ -92,6 +108,7 @@ try {
     plugins: [react(), tailwind()],
     resolve: { alias: [
       { find: "@tanstack/react-router", replacement: router },
+      { find: "@/lib/auth/use-current-user", replacement: auth },
       { find: "@/lib/athrecs/athlete-account-api", replacement: accountApi },
       { find: "@/lib/athrecs/member-onboarding-api", replacement: onboardingApi },
       { find: "@", replacement: resolve("src") },
@@ -110,7 +127,8 @@ try {
     const page = await browser.newPage({ viewport: { width, height: width < 640 ? 844 : 1000 } });
     page.on("pageerror", (error) => pageErrors.push(error.message));
     await page.goto(`${origin}/${query}`);
-    await page.getByRole("heading", { name: "Complete your profile", exact: true }).waitFor();
+    if (query.includes("gate=")) await page.getByText("Gate fixture ready", { exact: true }).waitFor();
+    else await page.getByRole("heading", { name: "Complete your profile", exact: true }).waitFor();
     return page;
   }
   async function waitFor(page, predicate, message) {
@@ -254,8 +272,32 @@ try {
   assert.equal(mismatchState.completions[0].firstName, "Current Synthetic");
   completed.push("existing account: stale onboarding names require explicit first/last-name confirmation and preserve the saved name");
   await mismatch.close();
+
+  for (const mode of ["dev", "claim"]) {
+    const gate = await newPage(1280, `?gate=${mode}`);
+    await gate.waitForFunction(() => window.fixture.authRenders > 0);
+    // Allow the real Gate's mount effects and QueryClient scheduling to settle.
+    await gate.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))));
+    const state = await gate.evaluate(() => window.fixture);
+    assert.equal(state.metadataRequests, 0,
+      mode === "dev" ? "Disabled-auth dev fallback does not load private onboarding metadata" : "Existing claim journeys do not load onboarding metadata");
+    assert.deepEqual(state.navigations, [],
+      mode === "dev" ? "Disabled-auth dev preview is not interrupted by registration guidance" : "Existing claim journeys are not interrupted by onboarding");
+    completed.push(mode === "dev" ? "real Gate: synthetic disabled-auth fallback neither fetches metadata nor redirects" : "real Gate: existing claim route remains exempt from onboarding");
+    await gate.close();
+  }
+  const signedInGate = await newPage(1280, "?gate=member");
+  await waitFor(signedInGate, () => window.fixture.navigations.length === 1,
+    "Real incomplete members are guided to finish onboarding");
+  const gateState = await signedInGate.evaluate(() => window.fixture);
+  assert.equal(gateState.metadataRequests, 1, "Real incomplete members load their onboarding state");
+  assert.deepEqual(gateState.navigations, [{
+    to: "/join", search: { step: "profile", returnTo: "/athlete-account?section=potential&year=2026" }, replace: true,
+  }], "Real member onboarding preserves the safe intended destination");
+  completed.push("real Gate: incomplete signed-in member fetches metadata and navigates to /join with the original safe destination");
+  await signedInGate.close();
   assert.deepEqual(pageErrors, [], "No uncaught browser exceptions");
-  const report = { passed: true, fixture: "real form, schema, React Query and styles; mocked server/router boundaries", scenarios: completed };
+  const report = { passed: true, fixture: "real form, gate, schema, React Query and styles; mocked server/router/auth boundaries", scenarios: completed };
   writeFileSync(resolve(artifacts, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
   console.log(JSON.stringify(report, null, 2));
 } finally {
