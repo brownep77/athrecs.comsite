@@ -1,17 +1,18 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch115",
+  "lastEditorialBatch": "2026-10-18-batch116",
   "reviewedAt": "2026-10-18",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch105",
   "pullRequest": 762,
-  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds26 biographies/17 associations; assembled1619/1737 (93.2%),838 associations,118 incomplete. Batch115 continues7b212d706c70ac14ead42c7c68e9076ba1195e45 on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
+  "publication": "Published baseline:1593 biographies/821 associations from PR761, verified17October2026. Draft PR762 now adds28 biographies/17 associations; assembled1621/1737 (93.3%),838 associations,116 incomplete. Batch116 continues60fb35a6a1dd0f865ab0042cd779fa4b329e23b3 on codex/club-profiles-batch105. No publication in this batch. Wider public directory exceeds this research cohort.",
   "completedProfileSlugs": [
-    "metropolitan-police-ac"
+    "wharfedale-harriers",
+    "widnes-wasps-ladies-r-c"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1619,
+    "extendedProfiles": 1621,
     "notableMemberEntries": 838,
     "clubsWithContacts": 1260,
     "contactEntries": 2063,
@@ -22,10 +23,10 @@
     "websiteContactRecords": 1589
   },
   "batchChanges": {
-    "extendedProfilesAdded": 1,
+    "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 0,
+    "notableMemberEntriesAdded": 0,
+    "contactOrSocialRecordsChanged": 1,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 0,
@@ -33,14 +34,18 @@
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch115 catalogue, profile, club-audit, targeted ESLint, TypeScript, whitespace checks and safe preview build passed before guarded commit. Actual assembled1619/1737 profiles,838 associations,118 incomplete; contact/social counts unchanged. External database migrations/publication skipped. Exact-head hosted page and dedicated Club profiles desktop/mobile evidence to be recorded in PR762. Previous batch114 Club profiles39103063999 and full quality39103063952 both passed. No production publication or access-control changes."
+    "status": "Batch116 catalogue, profile, club-audit, targeted ESLint, TypeScript, whitespace checks and safe preview build passed before guarded commit. Actual assembled1621/1737 profiles,838 associations,116 incomplete; contact/social counts unchanged. External database migrations/publication skipped. Exact-head hosted pages and dedicated Club profiles desktop/mobile evidence to be recorded in PR762. Previous batch115 Club profiles39106450769 and full quality39106450774 both passed. No production publication or access-control changes."
   },
   "nextCandidateSlugs": [
-    "7-hills-harriers",
-    "bodmin-womens-rc",
-    "athletics-ni-st-annes-ac"
+    "fry-club-joggers",
+    "redcar-running-club",
+    "shepshed-running-club"
   ],
   "resumeInstructions": [
+    "BATCH116 CURRENT: dl seedv116; WharfedaleHarriers and WidnesWasps biographies, no new associations. Assembled1621/1737(93.3%),838 associations,116 incomplete; published1593/821, draft adds28/17. Parent60fb35a6a1dd0f865ab0042cd779fa4b329e23b3/main9edeec586 unchanged before writes, no competing writer. Wasps existingemail rechecked and precisecontactURL replaces broadcouncildirectory; no net contacts/socials, location or directory-date changes. Previous115 dedicated39106450769/full39106450774 both success. Exact-head evidence in PR762; retain23OctoberTI follow-ups.",
+    "18Oct Wharfedale: kcac.co.uk/our-history read merger1998context; no predecessor athletes/achievements or exactfoundingyear transferred. FRA19June2024 news names planned19October relayhost; FRA2026DickHudsons linksclub, racecontact/start NOTgeneralclubcontact/training. ExistingECCApage28email and Facebook retained. Own about, junior, training/contact c0ntact-us and team-events unavailable; relay subdomain ordinarydownload503 and2026JuniorCalendarPDF502. Searchsnippet roleemails/phones/timetable NOTadopted. JuniorcalendarURL remains potentialnewreadable route, no need repeatwithoutaccesschange.",
+    "18Oct WidnesWasps: ActiveHalton individual244901 listing rawpublicemaildecoded and confirmed enquiries@widneswasps.co.uk; Facebooksameexistingroute, no duplicate. RunLiverpoolClub_Call published26Sep2006 historicalbeginners/ICIonly. Halton23June2014pack actualPDFdownload/read/printedp33rendered:2013-14bursariesthreeRunLeaderqualifications, NOT2026grant. Newssearchdates misleading; no newfundingclaim. Wasps distinctfromWidnesRC2016. Parklandsdirectoryaddress retained. Currentprogramme/year/phone/notables gaps. Priorno-biography notes supersededonlyforthese2clubs.",
+    "18Oct otherfreshroutes: TwemlowDorsetAthletics clubs-1 read leaguecontextonly; DRRLdirectorytimeout/normal503, Facebookthrottled; no snippetsaboutnewclub/JezBragg adopted. Westonofficial403stop, noalternateaccessworkaround. Fourcandidateinvestigation yielded2profiles, notwhole-directorymanualreview. Rotate nexttoward previouslyunprofiled Fry/Redcar/Shepshed ifnewprimaryarchive or communitypartner evidence available, ratherthanrepeatblockedhomepages. Existing23OctoberTI sourcefollowups retained below.",
     "BATCH115 CURRENT: dk seedv115; MetropolitanPoliceAC biography and historical GilbertKelland vice-chairman1964/chairman1966 association. Assembled1619/1737(93.2%),838 associations,118 incomplete; published1593/821, draft adds26/17. Parent7b212d706c70ac14ead42c7c68e9076ba1195e45/main9edeec586 unchanged before writes; no competing writer. No contact/social/location/directory-date changes. Prior batch114 dedicated39103063999/full39103063952 both success. Exact-head evidence in PR762; retain23OctoberTI follow-ups.",
     "18Oct MetropolitanPolice recovery: https://teampolice.uk/about/ lines372-380 firsthand DerekAlldridge account read; distinguish athleticsclub from MPAA/nationalPAA. ECCA2026-27 printedp35 visually checked in existing18Oct download: AlisonLapper email preserved, no identity inference. Current venue/eligibility/timetable/website/socials/year unconfirmed. BMC1974spring.pdf opened but no text, screenshots placeholders and normaldownload503: AndrewNorman searchlead NOTadopted. metleague.run/member-clubs/ ordinaryHTML read but no Police row; no league membership assertion. Prior no-biography gap resolved only for MetropolitanPoliceAC.",
     "18Oct fresh gap routes: 7Hills RunTogether/AboutUs unavailable; Facebook100063554832130 throttled and X7harriers empty, no women-only/timetable adopted from snippets. Bodmin cornwalls.co.uk/sports-and-activities/clubs/bodmin-womens-running-club firstperson undated listing read (July2011/07722354877 leads); linked bodminwomensrunningclub.co.uk502. Do not conflate BodminRoadRunners. StAnnesBelfast mirror1980/founders notprimary; MaryPeters booking results noteligibility/history. Parish/parkrun searches returned no new usableprimary narrative. Seek new club-specific sources, not repeated blockedURL retries; no new contacts imported.",

@@ -17,6 +17,26 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 116: dated programme/hosting evidence is not a current timetable or venue.
+  for (const slug of ["wharfedale-harriers", "widnes-wasps-ladies-r-c"]) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(clubProfiles[slug].notable_members, undefined);
+    assert.equal(clubProfiles[slug].corrections, undefined);
+    assert.equal(club.country, "England");
+    assert.equal(club.address_kind, "directory");
+    assert.equal(club.checked_at, "2026-10-13");
+  }
+  const wasps = bySlug.get("widnes-wasps-ladies-r-c");
+  assert.equal(wasps.contacts.length, 1);
+  assert.equal(wasps.contacts[0].email, "enquiries@widneswasps.co.uk");
+  assert.equal(wasps.contacts[0].checked_at, "2026-10-18");
+  assert.match(wasps.contact_url, /244901\/widnes-wasps-ladies-running-club\/$/);
+  assert.equal(wasps.socials.length, 3);
+  assert.match(clubProfiles[wasps.slug].biography.join(" "), /2013–14/);
+  assert.match(clubProfiles[wasps.slug].biography.join(" "), /separate club from Widnes Running Club/);
+  assert.match(clubProfiles["wharfedale-harriers"].biography.join(" "), /scheduled for 19 October/);
   // Batch 115: historical club roles do not imply current eligibility or a venue.
   const metPolice = bySlug.get("metropolitan-police-ac");
   const metProfile = clubProfiles[metPolice.slug];
@@ -214,8 +234,8 @@ try {
     const addressUnknown = ["west-yorkshire-police-harriers", "winter-hill-runners"].includes(slug);
     assert.equal(club.address_kind, addressUnknown ? undefined : "directory");
     if (addressUnknown) assert.equal(club.address, "");
-    // Evesham's archive and club description were recovered in batch 114.
-    if (slug !== "evesham-vale-running-club") assert.equal(clubProfiles[slug], undefined);
+    // Evesham and Wharfedale histories were recovered in batches 114 and 116.
+    if (!["evesham-vale-running-club", "wharfedale-harriers"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   // Batch 108: verified venue classification, dated origins and placeholder exclusion.
   for (const slug of ["the-hawcs", "westside-runnas-uk", "heald-green-runners", "lifts-and-sprints-athletics-academy", "ts-harriers"]) {
