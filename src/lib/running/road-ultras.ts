@@ -1,3 +1,5 @@
+import { calendarDate } from "../event-date.ts";
+
 export type UltraFormat = "distance" | "timed" | "journey";
 export type UltraEdition = {
   date: string;
@@ -527,7 +529,9 @@ export function ukToday(now = new Date()): string {
 
 export function upcomingEditions(race: RoadUltra, today: string) {
   // A multi-day race remains current through its final day; never invent its next edition.
-  return race.editions.filter((edition) => (edition.endDate ?? edition.date) >= today);
+  return race.editions.filter(
+    (edition) => Boolean(calendarDate(edition.date)) && (edition.endDate ?? edition.date) >= today,
+  );
 }
 
 export function formatUltraDate(date: string) {

@@ -1,0 +1,2750 @@
+[
+  {
+    "url": "https://www.athrecs.com/races/utmb-world-series-desertrats",
+    "checkedAt": "2026-10-19T10:16:03.249136+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/utmb-world-series-desertrats",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Desert RATS Trail Running Festival by UTMB",
+        "startDate": "2027-04-10",
+        "location": {
+          "@type": "Place",
+          "name": "Fruita, Colorado, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Fruita, Colorado",
+            "addressRegion": "Fruita, Colorado",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/bromley-10k",
+    "checkedAt": "2026-10-19T10:16:03.249911+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/bromley-10k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Bromley 10K",
+        "startDate": "2027-01-31T10:00",
+        "location": {
+          "@type": "Place",
+          "name": "Kent, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kent",
+            "addressRegion": "South of England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/dsw-bruggenloop-rotterdam",
+    "checkedAt": "2026-10-19T10:16:03.250505+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dsw-bruggenloop-rotterdam",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "DSW Bruggenloop Rotterdam",
+        "startDate": "2026-12-13",
+        "location": {
+          "@type": "Place",
+          "name": "Rotterdam, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Rotterdam",
+            "addressRegion": "South Holland",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/newcastle-town-moor-half-marathon-march-2027",
+    "checkedAt": "2026-10-19T10:16:03.251039+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/newcastle-town-moor-half-marathon-march-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Newcastle Town Moor Half Marathon, 10K & 5K \u2014 March 2027",
+        "startDate": "2027-03-21T09:35",
+        "location": {
+          "@type": "Place",
+          "name": "Newcastle upon Tyne, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Newcastle upon Tyne",
+            "addressRegion": "Tyne and Wear",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/new-york-city-marathon",
+    "checkedAt": "2026-10-19T10:16:09.907883+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/new-york-city-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "New York City Marathon",
+        "startDate": "2026-11-01",
+        "location": {
+          "@type": "Place",
+          "name": "New York, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "New York",
+            "addressRegion": "New York",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/wimbledon-parkrun",
+    "checkedAt": "2026-10-19T10:16:11.164138+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wimbledon-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Wimbledon Common parkrun",
+        "startDate": "2026-10-24T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Wimbledon Common, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Wimbledon Common",
+            "addressRegion": "Greater London",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/battersea-park-10k-half-marathon-august",
+    "checkedAt": "2026-10-19T10:16:11.174908+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/battersea-park-10k-half-marathon-august",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Battersea Park 10K & Half Marathon",
+        "startDate": "2026-11-21T11:11",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "South of England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/horspath-parkrun",
+    "checkedAt": "2026-10-19T10:16:11.406707+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/horspath-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Horspath parkrun",
+        "startDate": "2026-10-31T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Horspath, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Horspath",
+            "addressRegion": "Oxfordshire",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/cheadlehulme-parkrun",
+    "checkedAt": "2026-10-19T10:16:16.229992+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/cheadlehulme-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Cheadle Hulme parkrun",
+        "startDate": "2026-10-24T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Cheadle, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cheadle",
+            "addressRegion": "Greater Manchester",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/wisbech-juniors-parkrun",
+    "checkedAt": "2026-10-19T10:16:16.548097+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wisbech-juniors-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Wisbech junior parkrun",
+        "startDate": "2026-10-25T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Wisbech juniors, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Wisbech juniors",
+            "addressRegion": "Cambridgeshire",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/jordanstown-juniors-parkrun",
+    "checkedAt": "2026-10-19T10:16:16.571782+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/jordanstown-juniors-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Jordanstown junior parkrun",
+        "startDate": "2026-10-25T09:30",
+        "location": {
+          "@type": "Place",
+          "name": "Jordanstown Campus, Northern Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Jordanstown Campus",
+            "addressRegion": "Belfast",
+            "addressCountry": "Northern Ireland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/philipspark-parkrun",
+    "checkedAt": "2026-10-19T10:16:16.898221+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/philipspark-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Philips Park parkrun",
+        "startDate": "2026-10-24T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Philips Park, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Philips Park",
+            "addressRegion": "Greater Manchester",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/results/zugspitz-ultra-trail-by-utmb-2026-06-18-107k-109238558",
+    "checkedAt": "2026-10-19T10:16:22.580914+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/results/zugspitz-ultra-trail-by-utmb-2026-06-18-107k-109238558",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac",
+    "checkedAt": "2026-10-19T10:16:22.881270+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Wirral Primary Schools Cross Country Series Supported by Wirral AC",
+        "startDate": "2027-03-08",
+        "location": {
+          "@type": "Place",
+          "name": "Arrowe Park, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Arrowe Park",
+            "addressRegion": "England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/adidas-10k-paris",
+    "checkedAt": "2026-10-19T10:16:22.894587+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/adidas-10k-paris",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "adidas 10K Paris",
+        "startDate": "2027-05-23",
+        "location": {
+          "@type": "Place",
+          "name": "Paris, France",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Paris",
+            "addressRegion": "\u00cele-de-France",
+            "addressCountry": "France"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/boston-marathon",
+    "checkedAt": "2026-10-19T10:16:22.931170+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/boston-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Boston Marathon",
+        "startDate": "2027-04-19T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Boston, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Boston",
+            "addressRegion": "Massachusetts",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/dream-finders-homes-mother-s-day-5k",
+    "checkedAt": "2026-10-19T10:16:28.472871+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dream-finders-homes-mother-s-day-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Dream Finders Homes Mother's Day 5K",
+        "startDate": "2027-05-09T07:30",
+        "location": {
+          "@type": "Place",
+          "name": "Clermont, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Clermont",
+            "addressRegion": "Florida",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/cures-for-the-colors-glow-run",
+    "checkedAt": "2026-10-19T10:16:28.747123+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/cures-for-the-colors-glow-run",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Cures for the Colors Glow Run",
+        "startDate": "2026-11-07T18:15",
+        "location": {
+          "@type": "Place",
+          "name": "Goldsboro, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Goldsboro",
+            "addressRegion": "North Carolina",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/south-west-coast-50-ultra-challenge",
+    "checkedAt": "2026-10-19T10:16:28.899718+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/south-west-coast-50-ultra-challenge",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "South West Coast 50 Ultra Challenge",
+        "startDate": "2027-07-24",
+        "location": {
+          "@type": "Place",
+          "name": "Dunster, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dunster",
+            "addressRegion": "Somerset",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/utmb-world-series-saint-jacques",
+    "checkedAt": "2026-10-19T10:16:29.359335+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/utmb-world-series-saint-jacques",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Trail du Saint Jacques by UTMB",
+        "startDate": "2027-06-18",
+        "location": {
+          "@type": "Place",
+          "name": "Le Puy en Velay, France",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Le Puy en Velay",
+            "addressRegion": "Le Puy en Velay",
+            "addressCountry": "France"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/aldermankneeshaw-juniors-parkrun",
+    "checkedAt": "2026-10-19T10:16:34.784572+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/aldermankneeshaw-juniors-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Alderman Kneeshaw junior parkrun",
+        "startDate": "2026-10-25T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Alderman Kneeshaw juniors, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Alderman Kneeshaw juniors",
+            "addressRegion": "East Riding of Yorkshire",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/corre-por-los-bomberos-5k",
+    "checkedAt": "2026-10-19T10:16:34.807518+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/corre-por-los-bomberos-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Corr\u00e9 por los Bomberos 5K",
+        "startDate": "2026-11-15T07:00",
+        "location": {
+          "@type": "Place",
+          "name": "Capiat\u00e1, Paraguay",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Capiat\u00e1",
+            "addressRegion": "Central",
+            "addressCountry": "Paraguay"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/wa-bilbao-night-half-marathon-7236025",
+    "checkedAt": "2026-10-19T10:16:34.903440+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wa-bilbao-night-half-marathon-7236025",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/beacons-trail-marathon-half-marathon-ultra",
+    "checkedAt": "2026-10-19T10:16:35.335303+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/beacons-trail-marathon-half-marathon-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Beacons Trail Marathon, Half Marathon & Ultra",
+        "startDate": "2026-11-07T09:30",
+        "location": {
+          "@type": "Place",
+          "name": "Talybont-on-Usk, Wales",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Talybont-on-Usk",
+            "addressRegion": "South Wales",
+            "addressCountry": "Wales"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/chiang-mai-marathon",
+    "checkedAt": "2026-10-19T10:16:40.874443+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/chiang-mai-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Chiang Mai Marathon",
+        "startDate": "2026-12-20",
+        "location": {
+          "@type": "Place",
+          "name": "Chiang Mai, Thailand",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Chiang Mai",
+            "addressRegion": "Chiang Mai",
+            "addressCountry": "Thailand"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/ncfc-ecnl-girls-glow-run-chasing-goals-changing-lives",
+    "checkedAt": "2026-10-19T10:16:40.883504+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ncfc-ecnl-girls-glow-run-chasing-goals-changing-lives",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "NCFC ECNL Girls Glow Run Chasing Goals, Changing Lives",
+        "startDate": "2026-11-22T18:00",
+        "location": {
+          "@type": "Place",
+          "name": "Raleigh, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Raleigh",
+            "addressRegion": "North Carolina",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/cork-half-marathon",
+    "checkedAt": "2026-10-19T10:16:40.892430+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/cork-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Cork Half Marathon",
+        "startDate": "2027-02-07T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Cork, Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cork",
+            "addressRegion": "Cork",
+            "addressCountry": "Ireland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-bierrun-eindhoven-c78bb9",
+    "checkedAt": "2026-10-19T10:16:41.087876+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-bierrun-eindhoven-c78bb9",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Bierrun Eindhoven",
+        "startDate": "2026-10-31T13:00",
+        "location": {
+          "@type": "Place",
+          "name": "Eindhoven, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Eindhoven",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/fredericiavold-parkrun",
+    "checkedAt": "2026-10-19T10:16:47.104849+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/fredericiavold-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Fredericia Vold parkrun",
+        "startDate": "2026-10-24T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Fredericia Vold, Denmark",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Fredericia Vold",
+            "addressRegion": "Central Jutland",
+            "addressCountry": "Denmark"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/santa-dash-5k-1-mile-walk-presented-by-fleet-feet",
+    "checkedAt": "2026-10-19T10:16:47.171554+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/santa-dash-5k-1-mile-walk-presented-by-fleet-feet",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Santa Dash 5K & 1 Mile Walk Presented By Fleet Feet",
+        "startDate": "2026-12-12T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Greenville, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Greenville",
+            "addressRegion": "North Carolina",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/ea-uk-fixtures-lancashire-cross-country-championships",
+    "checkedAt": "2026-10-19T10:16:47.622715+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ea-uk-fixtures-lancashire-cross-country-championships",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Lancashire Cross Country Championships",
+        "startDate": "2026-12-12",
+        "location": {
+          "@type": "Place",
+          "name": "Towneley Park, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Towneley Park",
+            "addressRegion": "England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/beer-city-half-fort-worth",
+    "checkedAt": "2026-10-19T10:16:47.641647+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/beer-city-half-fort-worth",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/runthrough-richmond-park-half-marathon",
+    "checkedAt": "2026-10-19T10:16:53.374900+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/runthrough-richmond-park-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Richmond Park Half Marathon",
+        "startDate": "2027-02-14T09:30",
+        "location": {
+          "@type": "Place",
+          "name": "Richmond Park, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Richmond Park",
+            "addressRegion": "South of England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-springendalloop-olc-93-ootmarsum-384586",
+    "checkedAt": "2026-10-19T10:16:53.405239+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-springendalloop-olc-93-ootmarsum-384586",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Springendalloop OLC'93 Ootmarsum",
+        "startDate": "2026-11-14T13:40",
+        "location": {
+          "@type": "Place",
+          "name": "Hezingen, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hezingen",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/legendarios-trail-pozos-azules",
+    "checkedAt": "2026-10-19T10:16:53.450362+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/legendarios-trail-pozos-azules",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Legendarios Trail Pozos Azules",
+        "startDate": "2026-12-12T18:00",
+        "location": {
+          "@type": "Place",
+          "name": "Uruguay",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "Uruguay"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/wa-marathon-m-nchen-by-brooks-7236403",
+    "checkedAt": "2026-10-19T10:16:53.625314+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wa-marathon-m-nchen-by-brooks-7236403",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/runuk-windsor-dorney-lakeside-half-marathon",
+    "checkedAt": "2026-10-19T10:17:00.185953+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/runuk-windsor-dorney-lakeside-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/royal-parks-foundation-half-marathon",
+    "checkedAt": "2026-10-19T10:17:00.396426+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/royal-parks-foundation-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/mountain-range-trail-series-tai-po",
+    "checkedAt": "2026-10-19T10:17:00.844351+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/mountain-range-trail-series-tai-po",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Mountain Range Trail Series Tai Po",
+        "startDate": "2026-11-07T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Hong Kong, Hong Kong",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hong Kong",
+            "addressCountry": "Hong Kong"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/bank-jateng-borobudur-marathon",
+    "checkedAt": "2026-10-19T10:17:01.141474+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/bank-jateng-borobudur-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Bank Jateng Borobudur Marathon",
+        "startDate": "2026-11-15",
+        "location": {
+          "@type": "Place",
+          "name": "Magelang, Indonesia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Magelang",
+            "addressRegion": "Central Java",
+            "addressCountry": "Indonesia"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nationwide-columbus-marathon",
+    "checkedAt": "2026-10-19T10:17:06.359346+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nationwide-columbus-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/battersea-park-half-marathon-10k-5k-may-2027",
+    "checkedAt": "2026-10-19T10:17:06.397457+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/battersea-park-half-marathon-10k-5k-may-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Battersea Park Half Marathon, 10K & 5K \u2014 May 2027",
+        "startDate": "2027-05-08T10:30",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "Greater London",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-bosloopcompetitie-25-oktober-ccd82b",
+    "checkedAt": "2026-10-19T10:17:06.409401+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-bosloopcompetitie-25-oktober-ccd82b",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Bosloopcompetitie - 25 Oktober",
+        "startDate": "2026-10-25T10:30",
+        "location": {
+          "@type": "Place",
+          "name": "Harderwijk, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Harderwijk",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/crescent-city-classic",
+    "checkedAt": "2026-10-19T10:17:06.510323+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/crescent-city-classic",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Crescent City Classic",
+        "startDate": "2027-03-27",
+        "location": {
+          "@type": "Place",
+          "name": "New Orleans, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "New Orleans",
+            "addressRegion": "Louisiana",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/loaves-and-fishes-and-veterans-services-of-the-carolinas-run-for-recovery",
+    "checkedAt": "2026-10-19T10:17:12.588464+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/loaves-and-fishes-and-veterans-services-of-the-carolinas-run-for-recovery",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Loaves and Fishes and Veterans Services of the Carolinas Run for Recovery",
+        "startDate": "2026-11-14T08:00",
+        "location": {
+          "@type": "Place",
+          "name": "Beaufort, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Beaufort",
+            "addressRegion": "North Carolina",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/goldsboro-family-ymca-turkey-trot-5k-and-1-mile-fun-run-walk",
+    "checkedAt": "2026-10-19T10:17:12.628642+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/goldsboro-family-ymca-turkey-trot-5k-and-1-mile-fun-run-walk",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Goldsboro Family YMCA Turkey Trot 5K and 1 Mile Fun Run/Walk",
+        "startDate": "2026-11-26T08:00",
+        "location": {
+          "@type": "Place",
+          "name": "Goldsboro, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Goldsboro",
+            "addressRegion": "North Carolina",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/monsal-trail-half-marathon-autumn-saturday",
+    "checkedAt": "2026-10-19T10:17:13.080865+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/monsal-trail-half-marathon-autumn-saturday",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Monsal Trail October Half Marathon & 10K \u2014 Saturday",
+        "startDate": "2026-10-24T10:00",
+        "location": {
+          "@type": "Place",
+          "name": "Bakewell, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bakewell",
+            "addressRegion": "Derbyshire",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-winterbosloop-beek-montferland-run-2-4eae8a",
+    "checkedAt": "2026-10-19T10:17:13.191264+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-winterbosloop-beek-montferland-run-2-4eae8a",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Winterbosloop Beek Montferland run 2",
+        "startDate": "2027-02-07T10:30",
+        "location": {
+          "@type": "Place",
+          "name": "Beek Montferland, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Beek Montferland",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/excalibur-winter-trail-races-10km-and-17km",
+    "checkedAt": "2026-10-19T10:17:18.811879+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/excalibur-winter-trail-races-10km-and-17km",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Excalibur Winter Trail Races",
+        "startDate": "2026-11-01T10:00",
+        "location": {
+          "@type": "Place",
+          "name": "North Wales, Wales",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "North Wales",
+            "addressRegion": "Wales",
+            "addressCountry": "Wales"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/dream-finders-homes-great-turkey-trot-5k",
+    "checkedAt": "2026-10-19T10:17:18.891123+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dream-finders-homes-great-turkey-trot-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Dream Finders Homes Great Turkey Trot 5K",
+        "startDate": "2026-11-22T08:00",
+        "location": {
+          "@type": "Place",
+          "name": "Clermont, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Clermont",
+            "addressRegion": "Florida",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/clearstream-celebration-of-life-5k-2026",
+    "checkedAt": "2026-10-19T10:17:19.050543+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/clearstream-celebration-of-life-5k-2026",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Clearstream/Deutsche B\u00f6rse Celebration of Life 5K 2026",
+        "startDate": "2026-11-15",
+        "location": {
+          "@type": "Place",
+          "name": "Cork, Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cork",
+            "addressRegion": "County Cork",
+            "addressCountry": "Ireland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/a2z-dynamic-annual-marathon-2026",
+    "checkedAt": "2026-10-19T10:17:19.413443+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/a2z-dynamic-annual-marathon-2026",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "A2Z Dynamic Annual Marathon 2026",
+        "startDate": "2026-11-15T05:30",
+        "location": {
+          "@type": "Place",
+          "name": "Polokwane, South Africa",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Polokwane",
+            "addressRegion": "Limpopo",
+            "addressCountry": "South Africa"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/the-meadows-5k-10-october",
+    "checkedAt": "2026-10-19T10:17:24.869661+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/the-meadows-5k-10-october",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-posbank-trail-walk-bf31d7",
+    "checkedAt": "2026-10-19T10:17:24.925359+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-posbank-trail-walk-bf31d7",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Posbank Trail & Walk",
+        "startDate": "2026-10-24T11:15",
+        "location": {
+          "@type": "Place",
+          "name": "Velp, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Velp",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/dinotaeng-run-taichung",
+    "checkedAt": "2026-10-19T10:17:24.938095+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dinotaeng-run-taichung",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "DINOTAENG Run Taichung",
+        "startDate": "2027-01-10T07:30",
+        "location": {
+          "@type": "Place",
+          "name": "Taichung, Taiwan",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Taichung",
+            "addressCountry": "Taiwan"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-gouda-rent-wandelt-bij-kaarslicht-bdab8b",
+    "checkedAt": "2026-10-19T10:17:25.451118+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-gouda-rent-wandelt-bij-kaarslicht-bdab8b",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Gouda Rent & Wandelt bij KaarsLicht",
+        "startDate": "2026-12-18T19:15",
+        "location": {
+          "@type": "Place",
+          "name": "Gouda, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Gouda",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/faster-than-pastor-5k",
+    "checkedAt": "2026-10-19T10:17:30.999655+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/faster-than-pastor-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Faster Than Pastor 5k",
+        "startDate": "2026-10-31T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Clayton, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Clayton",
+            "addressRegion": "North Carolina",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/north-carolina-springs-classic-the-fest",
+    "checkedAt": "2026-10-19T10:17:31.159179+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/north-carolina-springs-classic-the-fest",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "North Carolina Springs Classic & The Fest",
+        "startDate": "2027-04-10T07:35",
+        "location": {
+          "@type": "Place",
+          "name": "Holly Springs, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Holly Springs",
+            "addressRegion": "North Carolina",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/crystal-coast-cancer-rehab-center-5k-run-1-mile-cancer-survivor-walk",
+    "checkedAt": "2026-10-19T10:17:31.163034+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/crystal-coast-cancer-rehab-center-5k-run-1-mile-cancer-survivor-walk",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Crystal Coast Cancer Rehab Center 5K Run & 1 Mile Cancer Survivor Walk",
+        "startDate": "2027-03-27T08:00",
+        "location": {
+          "@type": "Place",
+          "name": "Beaufort, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Beaufort",
+            "addressRegion": "North Carolina",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/carrera-canacine",
+    "checkedAt": "2026-10-19T10:17:31.523418+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/carrera-canacine",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Carrera CANACINE",
+        "startDate": "2026-10-31T19:00",
+        "location": {
+          "@type": "Place",
+          "name": "Puebla, Mexico",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Puebla",
+            "addressCountry": "Mexico"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/strathcarron-hospice-10k-road-race-fun-run",
+    "checkedAt": "2026-10-19T10:17:37.160553+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/strathcarron-hospice-10k-road-race-fun-run",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/cork-bhaa-defence-forces-5k-2026",
+    "checkedAt": "2026-10-19T10:17:37.200512+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/cork-bhaa-defence-forces-5k-2026",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/race-for-life-york-5k-2027",
+    "checkedAt": "2026-10-19T10:17:37.222456+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/race-for-life-york-5k-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Race for Life York 5K 2027",
+        "startDate": "2027-05-02T11:00",
+        "location": {
+          "@type": "Place",
+          "name": "York, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "York",
+            "addressRegion": "North Yorkshire",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/new-year-s-eve-10k-road-race",
+    "checkedAt": "2026-10-19T10:17:37.232280+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/new-year-s-eve-10k-road-race",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "New Year's Eve 10K Road Race",
+        "startDate": "2026-12-31",
+        "location": {
+          "@type": "Place",
+          "name": "Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Cork",
+            "addressCountry": "Ireland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/rb-virtual-cattle-creep-series",
+    "checkedAt": "2026-10-19T10:17:43.297668+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/rb-virtual-cattle-creep-series",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Virtual Cattle Creep Series 2026",
+        "startDate": "2026-11-29",
+        "location": {
+          "@type": "Place",
+          "name": "United Kingdom, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "United Kingdom",
+            "addressRegion": "England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/blickling-half-marathon-autumn",
+    "checkedAt": "2026-10-19T10:17:43.309047+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/blickling-half-marathon-autumn",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/ultra-trail-du-fjord-du-saguenay",
+    "checkedAt": "2026-10-19T10:17:43.405245+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ultra-trail-du-fjord-du-saguenay",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Ultra-Trail du Fjord-du-Saguenay",
+        "startDate": "2027-08-07",
+        "location": {
+          "@type": "Place",
+          "name": "Canada",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Qu\u00e9bec",
+            "addressCountry": "Canada"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/blair-castle-trail-weekender-sunday",
+    "checkedAt": "2026-10-19T10:17:43.823178+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/blair-castle-trail-weekender-sunday",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Atholl Trail Half Marathon",
+        "startDate": "2027-06-06T10:00",
+        "location": {
+          "@type": "Place",
+          "name": "Blair Atholl, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Blair Atholl",
+            "addressRegion": "Perth and Kinross",
+            "addressCountry": "Scotland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/edinburgh-marathon-festival-5k",
+    "checkedAt": "2026-10-19T10:17:49.537605+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/edinburgh-marathon-festival-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Edinburgh Marathon Festival 5K",
+        "startDate": "2027-05-29T10:00",
+        "location": {
+          "@type": "Place",
+          "name": "Edinburgh, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Edinburgh",
+            "addressRegion": "Scotland",
+            "addressCountry": "Scotland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-wisent-winter-trail-ed8259",
+    "checkedAt": "2026-10-19T10:17:49.564650+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-wisent-winter-trail-ed8259",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Wisent Winter Trail",
+        "startDate": "2026-12-31T12:00",
+        "location": {
+          "@type": "Place",
+          "name": "Apeldoorn, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Apeldoorn",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-graef-castricum-trail-walk-47d605",
+    "checkedAt": "2026-10-19T10:17:49.603542+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-graef-castricum-trail-walk-47d605",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Graef Castricum Trail & WALK",
+        "startDate": "2026-11-22T08:15",
+        "location": {
+          "@type": "Place",
+          "name": "Castricum, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Castricum",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/ea-runevents-chocks-away-5km-exeter",
+    "checkedAt": "2026-10-19T10:17:49.620782+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ea-runevents-chocks-away-5km-exeter",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Chocks Away 5km",
+        "startDate": "2026-11-07T14:30",
+        "location": {
+          "@type": "Place",
+          "name": "Exeter, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Exeter",
+            "addressRegion": "Devon",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-pierewaai-ultra-trail-70km-en-100km-380af5",
+    "checkedAt": "2026-10-19T10:17:54.561862+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-pierewaai-ultra-trail-70km-en-100km-380af5",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Pierewaai ULTRA Trail 70km en 100km",
+        "startDate": "2027-01-22T22:00",
+        "location": {
+          "@type": "Place",
+          "name": "Hoek van Holland, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hoek van Holland",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/beirut-international-marathon",
+    "checkedAt": "2026-10-19T10:17:54.570096+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/beirut-international-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Beirut International Marathon",
+        "startDate": "2026-11-29",
+        "location": {
+          "@type": "Place",
+          "name": "Beirut, Lebanon",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Beirut",
+            "addressCountry": "Lebanon"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-amersfoort-night-run-934c10",
+    "checkedAt": "2026-10-19T10:17:54.585084+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-amersfoort-night-run-934c10",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Amersfoort Night Run",
+        "startDate": "2026-11-13T20:15",
+        "location": {
+          "@type": "Place",
+          "name": "Amersfoort, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Amersfoort",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/rb-halloween-twilight-run-scorrier-house",
+    "checkedAt": "2026-10-19T10:17:54.608182+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/rb-halloween-twilight-run-scorrier-house",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Halloween Twilight Run - Scorrier House 2026",
+        "startDate": "2026-11-01",
+        "location": {
+          "@type": "Place",
+          "name": "Scorrier, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Scorrier",
+            "addressRegion": "England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-taxandria-marathon-oisterwijk-48a52c",
+    "checkedAt": "2026-10-19T10:18:00.830701+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-taxandria-marathon-oisterwijk-48a52c",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Taxandria Marathon Oisterwijk",
+        "startDate": "2027-05-23T10:30",
+        "location": {
+          "@type": "Place",
+          "name": "Oisterwijk, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Oisterwijk",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-podorun-sonderkamp-wijnands-83f15f",
+    "checkedAt": "2026-10-19T10:18:00.843559+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-podorun-sonderkamp-wijnands-83f15f",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-halve-marathon-gouda-287791",
+    "checkedAt": "2026-10-19T10:18:00.858341+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-halve-marathon-gouda-287791",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Halve Marathon Gouda",
+        "startDate": "2026-11-08T12:30",
+        "location": {
+          "@type": "Place",
+          "name": "Gouda, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Gouda",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/mandiri-jogja-marathon",
+    "checkedAt": "2026-10-19T10:18:00.867952+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/mandiri-jogja-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Mandiri Jogja Marathon",
+        "startDate": "2027-06-20",
+        "location": {
+          "@type": "Place",
+          "name": "Yogyakarta, Indonesia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Yogyakarta",
+            "addressRegion": "Yogyakarta",
+            "addressCountry": "Indonesia"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/nl-tt-marathon-3703c6",
+    "checkedAt": "2026-10-19T10:18:07.043242+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-tt-marathon-3703c6",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "TT Marathon",
+        "startDate": "2026-11-01T10:45",
+        "location": {
+          "@type": "Place",
+          "name": "Assen, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Assen",
+            "addressRegion": "Netherlands",
+            "addressCountry": "Netherlands"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/ce-trcame-prilep",
+    "checkedAt": "2026-10-19T10:18:07.090069+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ce-trcame-prilep",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/outrun-the-night-ultra",
+    "checkedAt": "2026-10-19T10:18:07.137025+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/outrun-the-night-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Outrun The Night",
+        "startDate": "2026-10-31T19:00",
+        "location": {
+          "@type": "Place",
+          "name": "Dalkeith, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dalkeith",
+            "addressRegion": "Scotland",
+            "addressCountry": "Scotland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/full-moon-desert-marathon",
+    "checkedAt": "2026-10-19T10:18:07.179534+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/full-moon-desert-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Full Moon Desert Marathon",
+        "startDate": "2027-05-21",
+        "location": {
+          "@type": "Place",
+          "name": "Wadi Rum, Jordan",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Wadi Rum",
+            "addressCountry": "Jordan"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/way-of-the-dead-dartmoor-traverse",
+    "checkedAt": "2026-10-19T10:18:13.018433+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/way-of-the-dead-dartmoor-traverse",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Way Of The Dead Dartmoor Traverse",
+        "startDate": "2027-03-20T08:00",
+        "location": {
+          "@type": "Place",
+          "name": "Tavistock, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Tavistock",
+            "addressRegion": "South of England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/dream-finders-homes-12ks-of-christmas-christmas-5k-kids-races",
+    "checkedAt": "2026-10-19T10:18:13.101691+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dream-finders-homes-12ks-of-christmas-christmas-5k-kids-races",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Dream Finders Homes 12Ks of Christmas, Christmas 5k & Kids Races",
+        "startDate": "2026-12-19T07:30",
+        "location": {
+          "@type": "Place",
+          "name": "Winter Garden, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Winter Garden",
+            "addressRegion": "Florida",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/rtt-afan-forest-trail-10k-5k",
+    "checkedAt": "2026-10-19T10:18:13.130579+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/rtt-afan-forest-trail-10k-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "RTT Afan Forest Trail 10K & 5K",
+        "startDate": "2026-11-29T11:00",
+        "location": {
+          "@type": "Place",
+          "name": "Port Talbot, Wales",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Port Talbot",
+            "addressRegion": "Wales",
+            "addressCountry": "Wales"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/mugdock-country-park-running-festival-2026",
+    "checkedAt": "2026-10-19T10:18:13.691205+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/mugdock-country-park-running-festival-2026",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Mugdock Country Park Running Festival 2026",
+        "startDate": "2026-10-31T09:30",
+        "location": {
+          "@type": "Place",
+          "name": "Milngavie, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Milngavie",
+            "addressRegion": "East Dunbartonshire",
+            "addressCountry": "Scotland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/kent-downs-50-ultra-challenge",
+    "checkedAt": "2026-10-19T10:18:19.118264+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/kent-downs-50-ultra-challenge",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Kent Downs 50 Ultra Challenge",
+        "startDate": "2027-10-09",
+        "location": {
+          "@type": "Place",
+          "name": "Maidstone, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Maidstone",
+            "addressRegion": "Kent",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/ott-trail-marathon-10-mile-2027",
+    "checkedAt": "2026-10-19T10:18:19.126457+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ott-trail-marathon-10-mile-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "OTT Trail Marathon & 10 Mile Trail Race 2027",
+        "startDate": "2027-05-15T10:00",
+        "location": {
+          "@type": "Place",
+          "name": "Merthyr Tydfil, Wales",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Merthyr Tydfil",
+            "addressRegion": "Merthyr Tydfil",
+            "addressCountry": "Wales"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/wa-35th-chugoku-high-school-rookie-s-athletics-championships-7245135",
+    "checkedAt": "2026-10-19T10:18:19.134596+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wa-35th-chugoku-high-school-rookie-s-athletics-championships-7245135",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/silverbacktrails-goarhland-v-trigs-challenge-ultra",
+    "checkedAt": "2026-10-19T10:18:19.185690+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/silverbacktrails-goarhland-v-trigs-challenge-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Goathland V Trigs Challenge Ultra",
+        "startDate": "2027-04-17T07:30",
+        "location": {
+          "@type": "Place",
+          "name": "Goathland, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Goathland",
+            "addressRegion": "North of England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/invesco-qqq-thanksgiving-day-half-marathon",
+    "checkedAt": "2026-10-19T10:18:25.151258+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/invesco-qqq-thanksgiving-day-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Invesco QQQ Thanksgiving Day Half Marathon, 5K, Mile & Dash",
+        "startDate": "2026-11-26T07:45",
+        "location": {
+          "@type": "Place",
+          "name": "Atlanta, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Atlanta",
+            "addressRegion": "Georgia",
+            "addressCountry": "United States"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/monsal-trail-half-marathon-autumn-sunday",
+    "checkedAt": "2026-10-19T10:18:25.172523+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/monsal-trail-half-marathon-autumn-sunday",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Monsal Trail October Half Marathon & 10K \u2014 Sunday",
+        "startDate": "2026-10-25T10:00",
+        "location": {
+          "@type": "Place",
+          "name": "Bakewell, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bakewell",
+            "addressRegion": "Derbyshire",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/ea-uk-fixtures-british-masters-af-cross-country-relays",
+    "checkedAt": "2026-10-19T10:18:25.184116+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ea-uk-fixtures-british-masters-af-cross-country-relays",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "British Masters AF Cross Country Relays",
+        "startDate": "2026-10-24",
+        "location": {
+          "@type": "Place",
+          "name": "Shotover Country Park, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Shotover Country Park",
+            "addressRegion": "England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/invereskprecinct-parkrun",
+    "checkedAt": "2026-10-19T10:18:25.688238+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/invereskprecinct-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Inveresk Precinct parkrun",
+        "startDate": "2026-10-24T08:00",
+        "location": {
+          "@type": "Place",
+          "name": "Tasmania, Australia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Tasmania",
+            "addressRegion": "Tasmania",
+            "addressCountry": "Australia"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/race-across-scotland",
+    "checkedAt": "2026-10-19T10:18:31.227673+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/race-across-scotland",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Race Across Scotland",
+        "startDate": "2027-08-07T06:00",
+        "location": {
+          "@type": "Place",
+          "name": "Dumfries & Galloway, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dumfries & Galloway",
+            "addressRegion": "Scotland",
+            "addressCountry": "Scotland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/monsal-trail-half-marathon-satuday",
+    "checkedAt": "2026-10-19T10:18:31.296456+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/monsal-trail-half-marathon-satuday",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Monsal Trail April Half Marathon & 10K \u2014 Saturday",
+        "startDate": "2027-04-10T10:00",
+        "location": {
+          "@type": "Place",
+          "name": "Bakewell, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bakewell",
+            "addressRegion": "Derbyshire",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/windsor-trail-run-half-marathon-10k-august",
+    "checkedAt": "2026-10-19T10:18:31.352169+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/windsor-trail-run-half-marathon-10k-august",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Windsor Trail Run Half Marathon & 10K",
+        "startDate": "2027-08-29T09:20",
+        "location": {
+          "@type": "Place",
+          "name": "Windsor, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Windsor",
+            "addressRegion": "Midlands",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/runthrough-chase-the-moon-battersea-february-2027",
+    "checkedAt": "2026-10-19T10:18:32.210199+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/runthrough-chase-the-moon-battersea-february-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Chase the Moon Battersea Park 5K & 10K \u2014 February 2027",
+        "startDate": "2027-02-24",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "Greater London",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/the-one-in-the-park-victoria-park-half-marathon",
+    "checkedAt": "2026-10-19T10:18:37.366864+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/the-one-in-the-park-victoria-park-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "One in the Park \u2014 Victoria Park",
+        "startDate": "2026-11-15T09:30",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "Greater London",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/utmb-world-series-istria",
+    "checkedAt": "2026-10-19T10:18:37.396259+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/utmb-world-series-istria",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Istria 100 by UTMB",
+        "startDate": "2027-04-02",
+        "location": {
+          "@type": "Place",
+          "name": "Umag, Istria, Croatia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Umag, Istria",
+            "addressRegion": "Umag, Istria",
+            "addressCountry": "Croatia"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/rb-milton-keynes-winter-half-marathon",
+    "checkedAt": "2026-10-19T10:18:37.421185+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/rb-milton-keynes-winter-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Milton Keynes Winter Half Marathon 2026",
+        "startDate": "2026-12-06",
+        "location": {
+          "@type": "Place",
+          "name": "Milton Keynes, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Milton Keynes",
+            "addressRegion": "England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/marshfield-mudlark",
+    "checkedAt": "2026-10-19T10:18:37.959779+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/marshfield-mudlark",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/amsterdam-half-marathon",
+    "checkedAt": "2026-10-19T10:18:43.572285+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/amsterdam-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/kingdom-of-northumbria-coastal-ultra",
+    "checkedAt": "2026-10-19T10:18:43.590895+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/kingdom-of-northumbria-coastal-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Kingdom of Northumbria Coastal Ultra",
+        "startDate": "2027-03-14T08:00",
+        "location": {
+          "@type": "Place",
+          "name": "Bamburgh, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bamburgh",
+            "addressRegion": "Northumberland",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/utmb-world-series-oman",
+    "checkedAt": "2026-10-19T10:18:43.672630+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/utmb-world-series-oman",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Oman by UTMB\u00ae",
+        "startDate": "2026-12-10",
+        "location": {
+          "@type": "Place",
+          "name": "Oman, Oman",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Oman",
+            "addressRegion": "Oman",
+            "addressCountry": "Oman"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/fife-pilgrim-way-ultra",
+    "checkedAt": "2026-10-19T10:18:44.210662+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/fife-pilgrim-way-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Fife Pilgrim Way Ultra",
+        "startDate": "2027-05-01T05:00",
+        "location": {
+          "@type": "Place",
+          "name": "Fife, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Fife",
+            "addressRegion": "Scotland",
+            "addressCountry": "Scotland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/berat-green-half-marathon",
+    "checkedAt": "2026-10-19T10:18:49.573112+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/berat-green-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Berat Green Half Marathon",
+        "startDate": "2027-04-04T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Berat, Albania",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Berat",
+            "addressRegion": "Berat County",
+            "addressCountry": "Albania"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/finsbury-park-half-marathon-5k-10k-half-marathon-april",
+    "checkedAt": "2026-10-19T10:18:49.594038+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/finsbury-park-half-marathon-5k-10k-half-marathon-april",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Finsbury Park 5K, 10K & Half Marathon",
+        "startDate": "2027-04-04T08:30",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "South of England",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/edinburgh-marathon-festival-team-relay",
+    "checkedAt": "2026-10-19T10:18:49.642373+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/edinburgh-marathon-festival-team-relay",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Edinburgh Marathon Festival Team Relay",
+        "startDate": "2027-05-30T09:00",
+        "location": {
+          "@type": "Place",
+          "name": "Edinburgh, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Edinburgh",
+            "addressRegion": "Scotland",
+            "addressCountry": "Scotland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/craig-o-barns",
+    "checkedAt": "2026-10-19T10:18:50.162758+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/craig-o-barns",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/exeter-half-marathon-2027",
+    "checkedAt": "2026-10-19T10:18:55.645360+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/exeter-half-marathon-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Exeter Half Marathon & Riverside 5 \u2014 2027",
+        "startDate": "2027-02-06T10:00",
+        "location": {
+          "@type": "Place",
+          "name": "Exeter, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Exeter",
+            "addressRegion": "Devon",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/liverpool-half-marathon-10-miler",
+    "checkedAt": "2026-10-19T10:18:55.676894+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/liverpool-half-marathon-10-miler",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Liverpool Half Marathon & 10 Miler",
+        "startDate": "2027-03-14T09:30",
+        "location": {
+          "@type": "Place",
+          "name": "Liverpool, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Liverpool",
+            "addressRegion": "Merseyside",
+            "addressCountry": "England"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/park-west-5k-2027",
+    "checkedAt": "2026-10-19T10:18:55.687969+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/park-west-5k-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Life Style Sports Park West 5K & 10K",
+        "startDate": "2027-07-20",
+        "location": {
+          "@type": "Place",
+          "name": "Dublin, Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dublin",
+            "addressRegion": "County Dublin",
+            "addressCountry": "Ireland"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/run-jersey-half-marathon-and-road-race-festival",
+    "checkedAt": "2026-10-19T10:18:55.745867+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/run-jersey-half-marathon-and-road-race-festival",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Jersey Half Marathon",
+        "startDate": "2027-06-13T08:00",
+        "location": {
+          "@type": "Place",
+          "name": "St Brelade, Jersey",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "St Brelade",
+            "addressRegion": "Jersey",
+            "addressCountry": "Jersey"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/two-oceans-marathon",
+    "checkedAt": "2026-10-19T10:19:01.709136+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/two-oceans-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Two Oceans Marathon",
+        "startDate": "2027-04-03",
+        "location": {
+          "@type": "Place",
+          "name": "Cape Town, South Africa",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cape Town",
+            "addressRegion": "Western Cape",
+            "addressCountry": "South Africa"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/wa-active-oman-half-marthon-7244878",
+    "checkedAt": "2026-10-19T10:19:01.727154+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wa-active-oman-half-marthon-7244878",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "active oman half marthon",
+        "startDate": "2026-11-14",
+        "location": {
+          "@type": "Place",
+          "name": "Muscat, Oman",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Muscat",
+            "addressRegion": "Muscat",
+            "addressCountry": "Oman"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/altonabeach-parkrun",
+    "checkedAt": "2026-10-19T10:19:02.295128+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/altonabeach-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Altona Beach parkrun",
+        "startDate": "2026-10-24T08:00",
+        "location": {
+          "@type": "Place",
+          "name": "Altona Beach, Australia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Altona Beach",
+            "addressRegion": "Victoria",
+            "addressCountry": "Australia"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/races/wa-futuras-promesas-en-accion-pradelia-delgado-ojeda-7244673",
+    "checkedAt": "2026-10-19T10:19:02.296775+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wa-futuras-promesas-en-accion-pradelia-delgado-ojeda-7244673",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/running/races/london-marathon",
+    "checkedAt": "2026-10-19T10:19:07.930603+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/running/races/london-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "London Marathon 2027",
+        "startDate": "2027-04-24",
+        "location": {
+          "@type": "Place",
+          "name": "London, Greater London & City of London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "Greater London & City of London",
+            "addressCountry": "GB"
+          }
+        }
+      }
+    ],
+    "invalid": []
+  },
+  {
+    "url": "https://www.athrecs.com/running/ultramarathons/dartmoor-discovery",
+    "checkedAt": "2026-10-19T10:19:07.997586+00:00",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/running/ultramarathons/dartmoor-discovery",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "type": "SportsEvent",
+        "name": "Dartmoor Discovery",
+        "startDate": "2027-06-05",
+        "location": {
+          "@type": "Place",
+          "name": "Princetown, Devon \u00b7 England",
+          "address": "Princetown, Devon \u00b7 England"
+        }
+      }
+    ],
+    "invalid": []
+  }
+]

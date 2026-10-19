@@ -1,4 +1,5 @@
 /** RunRecs SEO helpers. The public catalogue is running and parkrun only. */
+import { calendarDate, localEventTime } from "../lib/event-date.ts";
 
 export const SITE_URL = "https://www.runrecs.com";
 export const SITE_NAME = "RunRecs.com";
@@ -79,18 +80,30 @@ export function sportsEventJsonLd(input: {
   website?: string | null;
 }) {
   const url = absoluteUrl(`/races/${input.slug}`);
-  const start =
-    input.startDate && input.startTime
-      ? `${input.startDate}T${input.startTime}`
-      : input.startDate ?? undefined;
+  const description =
+    input.description ??
+    `${input.name} running-event details on RunRecs — date, local start, venue and distances. Confirm entry on the official site.`;
+  const date = calendarDate(input.startDate);
+  // This module replaces the AthRecs helper in specialist builds. Preserve the
+  // same undated-archive fallback without borrowing another edition's date.
+  if (!date) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: input.name,
+      description,
+      url,
+      inLanguage: "en-GB",
+    };
+  }
+  const startTime = localEventTime(input.startTime);
+  const start = startTime ? `${date}T${startTime}` : date;
 
   return {
     "@context": "https://schema.org",
     "@type": "SportsEvent",
     name: input.name,
-    description:
-      input.description ??
-      `${input.name} running-event details on RunRecs — date, local start, venue and distances. Confirm entry on the official site.`,
+    description,
     url,
     image: DEFAULT_OG_IMAGE,
     startDate: start,
@@ -106,9 +119,7 @@ export function sportsEventJsonLd(input: {
       },
     },
     sport: input.sport || "Running",
-    organizer: input.website
-      ? { "@type": "Organization", url: input.website }
-      : undefined,
+    organizer: input.website ? { "@type": "Organization", url: input.website } : undefined,
   };
 }
 

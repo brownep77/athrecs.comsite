@@ -1,4 +1,5 @@
 /** Shared SEO helpers — titles, Open Graph, JSON-LD for traditional + voice search. */
+import { calendarDate, localEventTime } from "../event-date.ts";
 
 export const SITE_URL = "https://www.athrecs.com";
 export const SITE_NAME = "ATHRECS.com";
@@ -73,14 +74,6 @@ export function organizationJsonLd() {
   };
 }
 
-function calendarDate(value: string | null | undefined): string | undefined {
-  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return undefined;
-  const date = new Date(value);
-  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value
-    ? value
-    : undefined;
-}
-
 function httpsUrl(value: string): boolean {
   try {
     const url = new URL(value);
@@ -139,16 +132,11 @@ export function sportsEventJsonLd(
   const description =
     input.description ??
     `${input.name} race details on ATHRECS — date, local start, venue and distances. Confirm entry on the official site.`;
-  const date = input.startDate;
-  const parsedDate = date && /^\d{4}-\d{2}-\d{2}$/.test(date) ? new Date(date) : null;
-  const hasDate =
-    parsedDate &&
-    Number.isFinite(parsedDate.getTime()) &&
-    parsedDate.toISOString().slice(0, 10) === date;
+  const date = calendarDate(input.startDate);
 
   // Google requires startDate for every SportsEvent. Do not invent a date or
   // reuse a past edition when the page has no dated upcoming edition.
-  if (!hasDate) {
+  if (!date) {
     return {
       "@context": "https://schema.org",
       "@type": "WebPage",
@@ -159,10 +147,8 @@ export function sportsEventJsonLd(
     };
   }
 
-  const start =
-    input.startDate && input.startTime
-      ? `${input.startDate}T${input.startTime}`
-      : (input.startDate ?? undefined);
+  const startTime = localEventTime(input.startTime);
+  const start = startTime ? `${date}T${startTime}` : date;
   // Match todayIso() and visible entry deadlines: the site's calendar day is
   // Europe/London, including daylight saving, rather than the server's UTC day.
   const today = new Intl.DateTimeFormat("en-CA", {
@@ -189,8 +175,8 @@ export function sportsEventJsonLd(
         ? input.endTime &&
           /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.endTime) &&
           (input.endDate > date! ||
-            !input.startTime ||
-            input.endTime.padEnd(8, ":00") >= input.startTime.padEnd(8, ":00"))
+            !startTime ||
+            input.endTime.padEnd(8, ":00") >= startTime.padEnd(8, ":00"))
           ? `${input.endDate}T${input.endTime}`
           : input.endDate
         : undefined,
