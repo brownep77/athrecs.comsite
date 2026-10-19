@@ -252,7 +252,7 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
   );
 
   const { verifySourceCoverage } = await import("./verify-source-coverage.mjs");
-  await verifySourceCoverage({ sql, read });
+  if (!browser) await verifySourceCoverage({ sql, read });
 
   if (browser) {
     const page = await browser.newPage({
@@ -310,6 +310,9 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
     await page
       .getByRole("link", { name: "Open website reporting and connections", exact: true })
       .waitFor();
+    // Source fixtures mutate provenance, which is itself tracked as an edit.
+    // Add them only after the existing growth checks have used their own fixture.
+    await verifySourceCoverage({ sql, read });
     await page.getByRole("button", { name: "Sources & coverage", exact: true }).click();
     await page.getByRole("heading", { name: "Sources & coverage", exact: true }).waitFor();
     await table.getByRole("cell", { name: "fixtures.test · Running", exact: true }).waitFor();
