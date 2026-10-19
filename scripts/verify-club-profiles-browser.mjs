@@ -70,7 +70,7 @@ file(
 file("style.css", `@import "${resolve("src/styles.css")}";\n@source "${resolve("src")}";`);
 file(
   "main.tsx",
-  `import React from'react';import{createRoot}from'react-dom/client';import{Route}from'/@fs/${resolve("src/routes/clubs/$slug.tsx")}';import{ClubCard}from'/@fs/${resolve("src/components/clubs/ClubCard.tsx")}';import'./style.css';window.fixture=${JSON.stringify(data)};if(location.search.includes('postal'))window.fixture.club.address_kind='correspondence';if(location.search.includes('global'))window.fixture.club.profile.scope='global';if(location.search.includes('unknown')){window.fixture.club.country='';window.fixture.club.city='';window.fixture.club.county=''}if(location.search.includes('nohistory'))window.fixture.club.profile=null;window.head=Route.head({loaderData:window.fixture});const Page=Route.component;createRoot(document.getElementById('root')).render(<main style={{maxWidth:1100,margin:'auto',padding:20}}><p className="mb-4 text-xs">FICTIONAL TEST DATA</p>{location.pathname==='/card'?<ClubCard club={{...window.fixture.club,member_count:0,scope:window.fixture.club.profile?.scope}}/>:<Page/>}</main>);`,
+  `import React from'react';import{createRoot}from'react-dom/client';import{Route}from'/@fs/${resolve("src/routes/clubs/$slug.tsx")}';import{ClubCard}from'/@fs/${resolve("src/components/clubs/ClubCard.tsx")}';import'./style.css';window.fixture=${JSON.stringify(data)};if(location.search.includes('postal'))window.fixture.club.address_kind='correspondence';if(location.search.includes('global'))window.fixture.club.profile.scope='global';if(location.search.includes('unknown')){window.fixture.club.country='';window.fixture.club.city='';window.fixture.club.county=''}if(location.search.includes('nohistory'))window.fixture.club.profile=null;if(location.search.includes('areaonly')){window.fixture.club.location_precision='area-only';window.fixture.club.address='';window.fixture.club.postcode='';if(location.search.includes('notown'))window.fixture.club.city='';}window.head=Route.head({loaderData:window.fixture});const Page=Route.component;createRoot(document.getElementById('root')).render(<main style={{maxWidth:1100,margin:'auto',padding:20}}><p className="mb-4 text-xs">FICTIONAL TEST DATA</p>{location.pathname==='/card'?<ClubCard club={{...window.fixture.club,member_count:0,scope:window.fixture.club.profile?.scope}}/>:<Page/>}</main>);`,
 );
 const server = await createServer({
   configFile: false,
@@ -128,6 +128,23 @@ try {
     "Profile fits mobile viewport",
   );
   await page.screenshot({ path: resolve("artifacts/club-profile-mobile.png"), fullPage: true });
+  // A known town without a confirmed venue must not be described as an unknown town.
+  for (const width of [1280, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto(`${origin}/?areaonly`);
+    await page.getByText("Town or area confirmed; exact venue is not confirmed", { exact: true }).waitFor();
+    assert.equal(await page.getByText("County or region confirmed; exact town is not published", { exact: true }).count(), 0);
+    assert.equal(await page.getByRole("link", { name: "View on map" }).count(), 0);
+    const areaSchema = await page.evaluate(() => JSON.parse(window.head.scripts[0].children)[0]);
+    assert.equal(areaSchema.address.addressLocality, "Cardiff");
+    assert.equal(areaSchema.address.streetAddress, undefined);
+    assert.equal(areaSchema.address.postalCode, undefined);
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({ path: resolve(`artifacts/club-profile-area-${width}.png`), fullPage: true });
+  }
+  await page.goto(`${origin}/?areaonly&notown`);
+  await page.getByText("Town or area confirmed; exact venue is not confirmed", { exact: true }).waitFor();
+  assert.equal(await page.evaluate(() => JSON.parse(window.head.scripts[0].children)[0].address.addressLocality), undefined);
   await page.goto(`${origin}/?postal`);
   await page.getByText("Correspondence address", { exact: true }).waitFor();
   assert.equal(await page.getByRole("link", { name: "View on map" }).count(), 0);

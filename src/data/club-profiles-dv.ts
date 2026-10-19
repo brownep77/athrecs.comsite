@@ -1,0 +1,60 @@
+import type { ClubProfile } from "./club-profiles";
+
+// Primary club archives and dated governing-body evidence, read 18 October 2026.
+export const recoveredCumbriaAndServicesProfiles: Record<string, ClubProfile> = {
+  "carlisle-aspatria-ac": {
+    summary: "Carlisle Aspatria AC is a track-and-field and cross-country club in Carlisle, Cumbria, England, with a history of cooperation with other north Cumbrian running clubs.",
+    biography: [
+      "Carlisle Aspatria AC belongs to the athletics community of Carlisle in Cumbria, England. England Athletics' June 2026 affiliation list records its track-and-field and cross-country disciplines, and Northern Athletics includes it in the 2026–27 affiliated-club list updated on 14 October 2026. Its directory address is Sheepmount Stadium. The club is separate from Border Harriers, another club associated with the same venue; sharing a track does not make their histories or members interchangeable.",
+      "A useful glimpse of its collaborative role comes from Keswick AC's October 2014 account of Team North Cumbria. Carlisle Aspatria was one of five constituent clubs in the TNC2 cross-country composite, alongside Cumberland Fell Runners, Derwent, Keswick and Eden Runners. The arrangement gave members access to the Mid Lancs League while aiming to improve distance-running opportunities in Cumbria. Carlisle Aspatria also supplied the composite team's vests. This was a particular cross-country partnership, not a merger: the account explicitly distinguishes a separate summer track-and-field combination.",
+      "The Sheepmount connection also places the club within Carlisle's experience of the December 2015 floods. Athletics Weekly's contemporary report named Carlisle Aspatria among the stadium's clubs and recorded local officials' concern about lost training opportunities after Storm Desmond. That is historical context, not a present closure notice. Anyone interested in joining should use the retained public club enquiry contact to confirm age groups, coaching availability and meeting arrangements. A current timetable and the club's founding year have not been established, so neither is inferred from the stadium or the composite team's history."
+    ],
+    corrections: { city: "Carlisle", county: "Cumbria", sports: ["Running", "Athletics"] },
+    location_note: "The June 2026 England Athletics list, page 19, identifies Cumbria as the county; North West remains the region. Carlisle's trailing whitespace is removed. Sheepmount's existing directory address and postcode are retained, without asserting a newly checked training timetable.",
+    contact_note: "Reviewed 18 October 2026. The existing ECCA 2026–2027 handbook email is retained with its earlier provenance. A Facebook about-page lead was inaccessible and is not added. No new phone, form or social account is established. Keswick's contacts and the stadium's other clubs are not Carlisle Aspatria enquiries; stadium users are not assumed to be club members.",
+    sources: [
+      { title: "England Athletics: affiliated clubs at 8 June 2026, page 19", url: "https://d1laub10p5ibfa.cloudfront.net/2026/06/Affiliated-Clubs-and-Organisations-at-8-June-2026.pdf" },
+      { title: "Northern Athletics: 2026–27 affiliation list, updated 14 October 2026", url: "https://www.northernathletics.co.uk/affiliation-list-26-27/" },
+      { title: "Keswick AC: Team North Cumbria cross-country partnership, 15 October 2014", url: "https://keswickac.blogspot.com/2014/10/team-north-cumbria-mid-lancs-league-xc.html" },
+      { title: "Athletics Weekly: Sheepmount flood report and local officials' accounts, 15–16 December 2015", url: "https://athleticsweekly.com/news/sheepmount-stadium-storm-desmond-37071/" },
+      { title: "ECCA 2026–2027 handbook: Carlisle Aspatria contact, page 22 (previously checked 18 October)", url: "https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf" }
+    ],
+    reviewed_at: "2026-10-18"
+  },
+  "lancashire-fire-and-rescue-service-and-aa": {
+    summary: "Lancashire Fire & Rescue Service & AA is listed in Preston, Lancashire, England, for road, cross-country and fell running; its history includes organising races for the wider local running community.",
+    biography: [
+      "Lancashire Fire & Rescue Service & AA is listed in Preston, Lancashire, England, with road running, cross-country and hill-and-fell disciplines. Historical race notices use the shorter Lancashire Fire AC name. An original entry form preserved in Todmorden Harriers' January 2008 newsletter names Lancashire Fire AC and Wesham Road Runners together as promoters of the 17th Ultrafit St Annes 10 Mile, scheduled for 16 March 2008. The measured, single-lap race included fire-service championships but also accepted entries from affiliated and unaffiliated runners. St Annes Fire Station provided race-day number collection and changing facilities.",
+      "The club's organising contribution extended beyond that ten-mile event. Lytham St Annes Road Runners' first-hand report of 16 June 2014 identifies Lancashire Fire AC as organiser of the Blue Light five-mile race on the Bispham promenade. Another Lytham report, published in August 2014, describes the Lancashire Fire three-person relays near Blackpool Zoo, with each runner completing an approximately 2.67-mile lap of Herons Reach Bridle Path. Together these accounts document road and relay events bringing neighbouring clubs together, rather than implying that the fire-service club catered only for its own workforce at every event.",
+      "Those race archives are a record of past activity, not a current event calendar or an invitation to train at a fire station. Prospective members can use the club contact retained from the 2026–2027 English Cross Country Association handbook to ask about eligibility, training and participation. A present training schedule, founding date and the relationship between employment status and club membership remain unconfirmed. The Preston directory address is therefore kept separate from the historical Fylde race venues, and old entry forms are not presented as registration links for today."
+    ],
+    location_note: "Preston, Lancashire and the existing directory address are retained. St Annes Fire Station, Bispham promenade and Herons Reach are historical event locations, not newly established regular training venues.",
+    contact_note: "Reviewed 18 October 2026. The existing ECCA 2026–2027 club email retains its original source and check date. The 2008 race organiser's phone and correspondence address are not promoted as current club contacts. No own website, current phone, form or official social destination was established. Current membership eligibility and training remain unresolved; absence from a later affiliation list is not treated as proof of closure.",
+    sources: [
+      { title: "Todmorden Harriers, January 2008 newsletter: original Lancashire Fire AC/Wesham St Annes 10 Mile entry form, PDF page 15", url: "https://www.todharriers.co.uk/torrier/2008jan/torrierJan08.pdf" },
+      { title: "Lytham St Annes Road Runners: Blue Light five-mile race report, 16 June 2014", url: "https://lsarrc.blogspot.com/2014/06/lsarrc-news-16th-june-2014.html" },
+      { title: "Lytham St Annes Road Runners: Lancashire Fire relays, news published 5 August 2014", url: "https://lsarrc.blogspot.com/2014/08/lsarrc-news-6th-august-2014.html" },
+      { title: "ECCA 2026–2027 handbook: Lancashire Fire contact, page 24 (previously checked 18 October)", url: "https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf" }
+    ],
+    reviewed_at: "2026-10-18"
+  },
+  "lancashire-constabulary-athletics-section": {
+    summary: "Lancashire Constabulary Athletics Section, also known as Lancon AC, connects police staff, retired staff and their families through running and athletics in Preston and across Lancashire, England.",
+    biography: [
+      "Lancashire Constabulary Athletics Section is a Preston-based athletics community serving Lancashire, England. Its own website uses both Athletics Section and Lancon AC, describing running alongside field athletics and race walking for constabulary staff, retired staff and their families. The page, last updated in August 2024, places the section within the Lancashire Constabulary Sports & Wellbeing Club. It explains a membership route through that parent club, with England Athletics affiliation considered separately. These are the published arrangements at that date, not confirmation of today's fees or eligibility rules.",
+      "The section's Runner of the Year archive reaches back to 1994, when its committee introduced the Slateman Cup. The award recognised not only strong performances but regular participation, improvement and support for the club. Its name recalled the Lakeland Slateman triathlon events organised by Steve Broadbent. His organiser biography on the Northern Police Cross Country League's 2026–27 entry page describes him as Lancashire Constabulary Athletics Club secretary from 1990 to 2023. That supplies a dated organising association without settling the differing office-holder wording on the older club website, or establishing the section's founding year.",
+      "The 2024 club account describes members training independently or in small groups across Lancashire, as well as a beginner-inclusive headquarters group called The Plods Run Club. Check with the club before relying on that group's old meeting information. Northern Police Cross Country League participation forms part of the section's documented sporting background; the league's 2026–27 organiser page describes regional races and a separate national championship entry. League entry is not the same as joining Lancon. For current membership and session enquiries, use the retained handbook contact; the directory's Hutton address is not treated as an unrestricted public training venue."
+    ],
+    notable_members: [{ name: "Steven Broadbent", connection: "Historical athletics-section secretary and organiser", detail: "His organiser biography on the Northern Police Cross Country League 2026–27 entry page describes his Lancashire Constabulary Athletics Club secretary role as 1990–2023. The club's Slateman Cup history also credits Steve Broadbent with organising the namesake triathlon. This is a historical association, not confirmation of his current club office or membership." }],
+    corrections: { website: "https://www.slateman.co.uk/athletics/index.htm" },
+    location_note: "The existing Preston/Hutton directory address and postcode are retained. Headquarters training is described only in the dated 2024 club account; no access permission, replacement postcode or current meeting point is inferred.",
+    contact_note: "Reviewed 18 October 2026. The readable club website is linked, but its 14 August 2024 update and older office-holder wording remain explicit. Its legacy email/phone and parent-club payment mailbox are not added as current enquiries. The existing ECCA contact and Facebook link remain unchanged; the same group is linked by the club site but its destination was throttled. The 2026 league phone is an event contact, not a new club-role verification.",
+    sources: [
+      { title: "Lancashire Constabulary Athletics Section: club account, membership and training, last updated 14 August 2024", url: "https://www.slateman.co.uk/athletics/index.htm" },
+      { title: "Lancashire Constabulary Athletics Club: Slateman Cup origins and Runner of the Year archive", url: "https://www.slateman.co.uk/athletics/athletics-roy.htm" },
+      { title: "Northern Police Cross Country League: organiser-authored 2026–27 entry page and Steven Broadbent biography, updated 2 October 2026", url: "https://bookitzone.com/steve_broadbent/bPjFFX" },
+      { title: "ECCA 2026–2027 handbook: Lancashire Constabulary contact, page 24 (previously checked 18 October)", url: "https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf" }
+    ],
+    reviewed_at: "2026-10-18"
+  }
+};
