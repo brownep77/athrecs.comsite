@@ -1,46 +1,52 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-19-batch132",
+  "lastEditorialBatch": "2026-10-19-batch133",
   "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch132: 1,652/1,737 biographies (95.1%) and 859 sourced associations assembled; 85 remain incomplete. PR763 contains twenty-eight unpublished biographies and twenty-one associations across batches119–132. Published baseline remains 1,624/838 from PR762; main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch133: 1,654/1,737 biographies (95.2%) and 861 sourced associations assembled; 83 remain incomplete. PR763 contains thirty unpublished biographies and twenty-three associations across batches119–133. Published baseline remains 1,624/838 from PR762; main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "rising-brook-runners"
+    "pendle-athletic-club",
+    "ipswich-phoenix-running-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1652,
-    "notableMemberEntries": 859,
+    "extendedProfiles": 1654,
+    "notableMemberEntries": 861,
     "clubsWithContacts": 1281,
-    "contactEntries": 2092,
+    "contactEntries": 2093,
     "clubsWithEmail": 1238,
     "clubsWithPhone": 193,
     "clubsWithSocials": 1232,
-    "socialLinks": 2596,
+    "socialLinks": 2597,
     "websiteContactRecords": 1612
   },
   "batchChanges": {
-    "extendedProfilesAdded": 1,
+    "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 1,
-    "contactOrSocialRecordsChanged": 0,
+    "notableMemberEntriesAdded": 2,
+    "contactOrSocialRecordsChanged": 2,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 0,
-    "netSocialLinks": 0,
+    "netContactEntries": 1,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch132 actual assembled profiles (1652 biographies/859 associations), catalogue, club audit, targeted ESLint, TypeScript, whitespace and safe preview build passed. External migrations and production publishers skipped. Superseded contact-only expectation for Rising Brook replaced with biography and preservation assertions. Previous head f9e1892 passed Club profiles39175164407 and full quality39175164401. Exact new-head workflow, desktop/mobile and protected-preview evidence belongs in PR763; none certifies production publication."
+    "status": "Batch133 actual assembled profile checks passed:1654 biographies/861 associations,2093 contacts/2597socials. Catalogue and club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed; external migrations and all production publishers skipped. Superseded contact-only expectations reconciled, next-candidate checkpoint updated. Previous head9449a01 passed Club profiles39179797953 and full quality39179797947. New exact-head workflow, desktop/mobile and protected-preview evidence belongs in PR763; none certifies production publication."
   },
   "nextCandidateSlugs": [
-    "daws-heath-harriers",
-    "pendle-athletic-club",
-    "yellow-brick-road-running-and-walking-club"
+    "stride-running-club",
+    "ginpit-flyers",
+    "ravens-school-runners"
   ],
   "resumeInstructions": [
+    "BATCH133 CURRENT: ec/seedv133 adds Pendle and IpswichPhoenix, MarnieNelson historical2024-25 association and GavinHorrex source-attributed co-founder association. Assembled1654/1737(95.2%),861 associations,83 incomplete; draft30/23, published1624/838 unchanged. Pendlepostcode correctedBB9 7TY/training; originalBB7 9TY retainedinprovenance. Ipswichnewwebsite/email/Instagram, existingcontacts/Facebookpreserved. Parent9449a01/main de1325f recheckedbeforewrites; no competingwriter. Prior bothworkflows passed. Exactheadfinalverification inPR763. NextStride/Ginpit/Ravens, preserve23Octoberfollowups. Remaining cohort is England listings plus Unattached; do not invent other-nation additions or pad FORDY branches with repeated parent copy.",
+    "19Oct Pendle: opened PendleLeisurePlus/local-sport-club-directory, /seedhill-athletics-fitness-centre and /talented-athletes; NA/affiliation-list-26-27 updated14Oct confirms affiliation. Ownlistedsecretary publicHTMLencoding decodesexistingchristine.chorlton@outlook.com; preserveECCA18Octdate. Clubprogrammefromage7/MonWed7-8 qualified because directorypagehas2024timestamp; venuegeneraladmissionrulesnotclubeligibility. Oldpendleac.org.uk ordinarypublic200serves gambling: excluded, no new website. LancsAA/clubs.html503notfreshverified. No venue/neighbourphone/socials, foundingunknown; Marnie2024-25 associationnotcurrentmembership or resultimport.",
+    "19Oct Ipswich: ownhome/about-us/membership/running-calendar opened; SCAA/clubs current2026listlinks exactnewdomain. FoundedNov2019supported, founderheadcountconflict homepage6 versusGavinplus6 omitted. Membershipemailadded, InstagramfromownHTMLnormalised, existingFBdeduped; photographerFacebookexcluded. Jotform220204636252344 readnotfilled explicitlyMembershipRenewal2026-27 despitejoinlink; first-timeapplicantsdirectedtoemail. No health/familydetails, bankdata, exactfees, performanceimports or claimedlicenceverification. Coplestonvenueconfirmed, retainedaddress/directorydatesunchanged.",
+    "19Oct newStridelead: sportsworkforce.manchester.ac.uk/volunteers/opportunity/10306417 publicclub-labelledongoingOct2026coaching/mentoring/youngathletes atWythenshaweParkTrack. Provider /volunteers/provider-profile/StrideRunningClub/290055 links /10260156 communityrunning/2025start/Monday7pm and /10260154 ages8-14MonWed6pm; bothOLDopportunitiesmarkedCLOSED. PhoneDave07583333503 appearsoldclosednotice: notimportedyet. Needresolve currentadult_only=true and inheritedtriathlon/swimmingtags against sourceprogramme beforefullbio. Volunteer13+notmemberage. No Connecticut/RussianStrideentitytransfer, no login/register/follow/send. OlympiaSouthEastremainsheld; AustralianOlympiawebsiteisnotestablishedidentitymatch.",
+    "19Oct DawsHeath: essexxcleague.org/affiliated-clubs opened, only2025/26list with2026/27due later, no clubURL; no currentaffiliationclaim or leaguewebmastercontacttransfer. YellowBrickRoad stillno substantialprimarynarrative, Pawlettvenuealoneinsufficient. Bothbiosheld; originaldataunchanged.",
     "BATCH132 CURRENT: eb/seedv132 adds Rising Brook Runners biography, Stafford city and one Grace Marshall association attributed to an undated public trustee biography, not current membership. Assembled1652/1737(95.1%),859 associations,85 incomplete; PR763 draft28/21, published1624/838 unchanged. Contacts/socials/address/directory dates unchanged. Parent f9e1892/main de1325f5 checked before edits; no competing writer. Prior dedicated/full workflows both passed. New-head verification in PR763 supersedes precommit status. Next new-primary recovery Daws Heath, Pendle, Yellow Brick Road; preserve older gaps and23OctoberTI follow-ups.",
     "19Oct Rising Brook: churchrunner/clubs read Stafford/Cannock Chase, organiser /2020/02/3502 and /2023/03/churchrunner-international-virtual-mob-match-returns read dated participation, four in2023 not clubsize. Signposts/governance read explicit author Grace Marshall running link; no family/religion/athlete identity inferred. Midland directory confirms existing FB; direct FB throttled STOP. Church home/groups/ministries read no current programme; MyChurchSuite not accessed. No church address/phone transferred. Founder/year/fees/current sessions/eligibility remain unknown. February2026 report HTML and both original table images downloaded via ordinary public URLs after reader image failure; club table visually confirms three runners/volunteers, not membership size.",
     "19Oct Fry new evidence: https://www.keynsham-tc.gov.uk/_UserFiles/Files/Publications/Keynsham%20News/KN_1804_WINTER18_WEB.pdf downloaded/read/rendered printedp33, historical Tues7pm10KKeynsham routes only. Spring2018phone overlaps adjacentdanceclub: omit. Autumn2019 council PDF is still a lead, not fully read. July2024Southwick parkrun RozalynPerkins report normal response403 explicitly refuses scraping; STOP no mirrors/alternatepaths, no snippet Somerdale/party-size claims. No biography yet; preserve ECCA contact. BodminWomen's website unavailable; Po10statuslead loginwall so no closure/currentaffiliation inference. BodminWay2023/2026marathonstories opened but women's club unnamed; no organisinghistory/association transfer. DistinctBodminRunningClub remains separate.",
@@ -229,6 +235,11 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    { "slug": "pendle-athletic-club", "status": "biography-resolved-obsolete-domain-excluded", "checkedAt": "2026-10-19", "reason": "Primary venue/operator and Northern Athletics sources resolve programme, training postcode and historical Marnie association. Old pendleac.org.uk is gambling content, not adopted. Foundation, current session-specific confirmation, direct phone/form/socials unknown; original directory postcode retained in provenance." },
+    { "slug": "ipswich-phoenix-running-club", "status": "biography-resolved-founders-count-and-joining-form-qualified", "checkedAt": "2026-10-19", "reason": "Own site and 2026 SCAA website link recover biography, Nov2019 founding, email/social. Six versus seven founders unresolved, number omitted. Join link opens renewal-only form; newcomers directed to email. No health/family or payment data imported." },
+    { "slug": "stride-running-club", "status": "new-primary-programme-lead-needs-eligibility-reconciliation", "checkedAt": "2026-10-19", "url": "https://sportsworkforce.manchester.ac.uk/volunteers/opportunity/10306417", "reason": "Opened provider and three notices establish Wythenshawe coaching/community volunteering. Older community and ages8-14 notices are closed; current notice mentions young athletes. Resolve adult_only and unsupported inherited multisport tags, founding/currentjoining before profile. Old notice phone held; volunteer13+ is not member-age policy. See resumeInstructions for exact older URLs." },
+    { "slug": "daws-heath-harriers", "status": "league-history-only", "checkedAt": "2026-10-19", "url": "https://essexxcleague.org/affiliated-clubs/", "reason": "Opened list explicitly2025/26;2026/27notyetlisted. No own URL/programme/history sufficient for biography; no league contact adopted. No location correction from social mirrors." },
+    { "slug": "yellow-brick-road-running-and-walking-club", "status": "primary-narrative-still-unresolved", "checkedAt": "2026-10-19", "reason": "Fresh searches found no substantive primary history/programme/contact beyond existing affiliation/venue data; no biography or borrowed neighbouring-club narrative." },
     { "slug": "rising-brook-runners", "status": "historical-biography-resolved-current-programme-unconfirmed", "checkedAt": "2026-10-19", "reason": "Batch132 uses opened network, organiser2020/2023, governing-body and public trustee sources. Current sessions, fees, eligibility, founding date and direct phone/form remain unconfirmed; Facebook throttled. Older no-biography holds are superseded, not proof of fresh club-site access." },
     { "slug": "fry-club-joggers", "status": "historical-programme-only", "checkedAt": "2026-10-19", "url": "https://www.keynsham-tc.gov.uk/_UserFiles/Files/Publications/Keynsham%20News/KN_1804_WINTER18_WEB.pdf", "reason": "Council PDF printedp33 read/visually checked, confirms historical Keynsham10KTuesdayruns only. No current timetable or exact FBURL; Spring phone ambiguity excluded. Parkrun report403 explicitly refuses scraping: no alternate access or snippet imports. Full biography still held." },
     { "slug": "bodmin-womens-rc", "status": "identity-and-current-status-unresolved", "checkedAt": "2026-10-19", "reason": "Website unavailable; Po10statuslead redirectslogin and cannot support closure/nonaffiliation. Opened BodminWay2023/2026marathon accounts do not name women's club, so no history/organiser transfer. Not the distinct BodminRunningClub; preserve original data." },

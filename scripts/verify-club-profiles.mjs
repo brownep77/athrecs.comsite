@@ -17,6 +17,46 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 133: correct the evidenced training postcode without re-dating directory provenance.
+  const pendle133 = bySlug.get("pendle-athletic-club");
+  const pendleProfile133 = clubProfiles[pendle133.slug];
+  assert.equal(pendle133.city, "Nelson");
+  assert.equal(pendle133.country, "England");
+  assert.equal(pendle133.postcode, "BB9 7TY");
+  assert.equal(pendle133.address_kind, "training");
+  assert.equal(pendle133.address, "Seedhill Athletics and Fitness Centre, Surrey Road, Nelson, BB9 7TY");
+  assert.equal(clubEnrichment[pendle133.slug].postcode, "BB7 9TY");
+  assert.equal(pendle133.checked_at, "2026-10-13");
+  assert.equal(pendle133.website, undefined);
+  assert.equal(pendle133.contact_url, "https://pendleleisureplus.co.uk/local-sport-club-directory");
+  assert.equal(pendle133.contacts.length, 1);
+  assert.equal(pendle133.contacts[0].email, "christine.chorlton@outlook.com");
+  assert.equal(pendle133.contacts[0].checked_at, "2026-10-18");
+  assert.ok(pendle133.contacts.every(c => !c.phone));
+  assert.equal(pendle133.socials.length, 0);
+  assert.equal(pendleProfile133.biography.length, 3);
+  assert.equal(pendleProfile133.founded_year, undefined);
+  assert.equal(pendleProfile133.notable_members[0].name, "Marnie Nelson");
+  assert.match(pendleProfile133.notable_members[0].connection, /2024–25/);
+  assert.match(pendleProfile133.biography.join(" "), /Confirm those arrangements with the club secretary/);
+  assert.equal(clubProfiles["daws-heath-harriers"], undefined);
+  assert.equal(clubProfiles["yellow-brick-road-running-and-walking-club"], undefined);
+  const ipswich133 = bySlug.get("ipswich-phoenix-running-club");
+  const ipswichProfile133 = clubProfiles[ipswich133.slug];
+  assert.equal(ipswich133.website, "https://ipswichphoenixrunningclub.co.uk/");
+  assert.equal(ipswich133.address, clubEnrichment[ipswich133.slug].address);
+  assert.equal(ipswich133.address_kind, "directory");
+  assert.equal(ipswich133.country, "England");
+  assert.equal(ipswich133.contacts.length, 2);
+  assert.ok(ipswich133.contacts.some(c => c.email === "ipswichphoenix.running@gmail.com" && c.checked_at === "2026-10-19"));
+  assert.ok(ipswich133.contacts.every(c => !c.phone));
+  assert.equal(ipswich133.socials.length, 2);
+  assert.ok(ipswich133.socials.some(s => s.url === "https://www.facebook.com/groups/520337701882554"));
+  assert.ok(ipswich133.socials.some(s => s.url === "https://www.instagram.com/ipswichphoenixrunclub"));
+  assert.equal(ipswichProfile133.founded_year, 2019);
+  assert.equal(ipswichProfile133.biography.length, 3);
+  assert.equal(ipswichProfile133.notable_members[0].name, "Gavin Horrex");
+  assert.match(ipswichProfile133.biography.join(" "), /headed Membership Renewal/);
   // Batch 132: dated network history, not inferred founding, faith or training venues.
   const rising132 = bySlug.get("rising-brook-runners");
   const risingProfile132 = clubProfiles[rising132.slug];
@@ -571,10 +611,10 @@ try {
     assert.ok(contact, slug);
     assert.equal(contact.checked_at, "2026-10-18");
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
-    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["run-middlewich", "uts-running-club", "slgr"].includes(slug) ? 2 : 1);
+    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["ipswich-phoenix-running-club", "run-middlewich", "uts-running-club", "slgr"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
     // New primary narratives are asserted in their source-specific batches above.
-    if (!["metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["ipswich-phoenix-running-club", "pendle-athletic-club", "metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");

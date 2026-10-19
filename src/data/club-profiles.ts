@@ -1,3 +1,4 @@
+import { recoveredPendleAndIpswichProfiles } from "./club-profiles-ec.ts";
 import { recoveredStaffordCommunityProfiles } from "./club-profiles-eb.ts";
 import { dartfordAndCentralLancsProfiles } from "./club-profiles-ea.ts";
 import { recoveredWinsfordAndBelfastProfiles } from "./club-profiles-dz.ts";
@@ -158,6 +159,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...recoveredPendleAndIpswichProfiles,
   ...recoveredStaffordCommunityProfiles,
   ...dartfordAndCentralLancsProfiles,
   ...recoveredWinsfordAndBelfastProfiles,
@@ -1019,4 +1021,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-19-v132";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-19-v133";
