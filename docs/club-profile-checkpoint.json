@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-19-batch134",
+  "lastEditorialBatch": "2026-10-19-batch135",
   "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch134: 1,655/1,737 biographies (95.3%) and 861 sourced associations assembled; 82 incomplete. PR763 contains31 unpublished biographies and23 associations across batches119–134. Published baseline remains1624/838 from PR762. No new production authorization or publication; wider public directory and Google indexing are separate.",
+  "publication": "Draft batch135: 1,656/1,737 biographies (95.3%) and 862 sourced associations assembled; 81 incomplete. PR763 contains32 unpublished biographies and24 associations across batches119–135. Published baseline remains1624/838 from PR762. No new production authorization or publication; wider public directory and Google indexing are separate.",
   "completedProfileSlugs": [
-    "stride-running-club"
+    "mels-milers-jogging-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1655,
-    "notableMemberEntries": 861,
+    "extendedProfiles": 1656,
+    "notableMemberEntries": 862,
     "clubsWithContacts": 1281,
     "contactEntries": 2093,
     "clubsWithEmail": 1238,
@@ -24,23 +24,25 @@
   "batchChanges": {
     "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 0,
-    "contactOrSocialRecordsChanged": 1,
+    "notableMemberEntriesAdded": 1,
+    "contactOrSocialRecordsChanged": 0,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 0,
-    "netSocialLinks": 1,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch134 actual assembled profile checks passed:1655 biographies/861 associations,2093 contacts/2598socials. Catalogue and club checks, targeted ESLint, TypeScript, whitespace and final safe preview build passed; external migrations and production publishers skipped. Exact-head desktop/mobile workflow and AthRecs preview evidence will be recorded in PR763. Prior cbc9b3b dedicated39184318604 and broader39184318616 both passed. No production publication."
+    "status": "Batch135 actual assembled profile checks passed:1656 biographies/862 associations,2093 contacts/2598socials. Catalogue and club checks, targeted ESLint, TypeScript, whitespace and final safe preview build passed; external migrations and production publishers skipped. Exact-head desktop/mobile workflow and AthRecs preview evidence will be recorded in PR763. Prior e4c43f5 dedicated39188583085 and broader39188582921 both passed. No production publication."
   },
   "nextCandidateSlugs": [
-    "maryport-csc",
-    "sip-running-club",
-    "mile-high"
+    "maximum-mileage-running-club",
+    "hoylake-road-runners",
+    "independent-intelligent-fitness"
   ],
   "resumeInstructions": [
+    "BATCH135 CURRENT: ee/seedv135 adds Mel's Milers historical biography and Melanie Marlow organising association from opened Bluecoat Sports2020history,2015racearticle and2023MembersDay report. Assembled1656/1737(95.3%),862 associations,81 incomplete; draft32/24, published1624/838 unchanged. All contacts/socials/address/directory dates preserved. Parent e4c43f5/main de1325f inspected unchanged; prior bothworkflows passed. New-head final verification in PR763. Next MaximumMileage/Hoylake/IndependentIntelligentFitness; preserve23Octoberfollowups. Older CURRENT notes are historical.",
+    "19Oct new source qualifications: Sip Cabinet24Mar2025PDF reader timeout then ordinary403 STOP, no bypass/snippet clubhouse. TwistedRunning Sip collection read only kit, supplier email excluded. Maryport closed fundraiser planned not completed; Netherhall AC separate no history transfer. SevenTen ownclub/trainingpartner403STOP, no snippet programme adopted. Mels ownsite502 and SiteUnavailable, search2000founding/membershipemail/2026racecancellation not adopted; Bluecoat2020historicorigin resolves oldhold only, currentprogramme stillunknown.",
     "BATCH134 CURRENT: ed/seedv134 adds Stride biography, adult_only=false and Running-only sports from club-authored Manchester university-platform notices. Original directory/address/contact dates retained. Added MileHigh Strava169363 from opened CornwallRoadRunning directory; destination unreadable, ownership not reverified. Assembled1655/1737(95.3%),861 associations,82 incomplete; draft31/23, published1624/838 unchanged. Parentcbc9b3b/main de1325f inspected; prior bothworkflows passed. NextMaryport/Sip/MileHigh; preserve23Octoberfollowups. Older CURRENT entries are historical.",
     "19Oct Stride: current /10306417 and provider290055 read; older /10260154 and /10260156 recovered by ordinary public fetch after reader errors, explicitly CLOSED. Current notice supports young athletes, not exact memberage or guaranteed training timetable. Litterpick /10264955 text Feb/Mar2026 conflicts later2027-31 calendar: no future event promise. Postcode0PB versus retained0AB unresolved, no venue reclassification. Closednotice phone excluded. No platformcontact/social transfer, no login/register/send.",
     "19Oct Maryport: opened https://www.justgiving.com/page/maryport-csc-4 closed fundraiser, planned1Aug2026TerrexRound/GNAAS. Dated community lead, not enough full programme/history; do not infer completion from pre-event prose or import donors/memorial details. Sip third-party OldhamReporter2020articles point to SecretSip/ChrisAshley councilplanning statement, primary document not opened. Ginpit/Ravens searches mostly race tables/directory; no narrative adopted. MileHigh Strava169363 from https://cornwallrunning.co.uk/running-clubs/; destination reader failed, no bypass.",
@@ -237,6 +239,27 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "mels-milers-jogging-club",
+      "status": "historical-biography-resolved-current-programme-held",
+      "checkedAt": "2026-10-19",
+      "url": "https://www.bluecoatsports.co.uk/blog/bluecoat-sports-celebrates-30-years/",
+      "reason": "Venue primary history credits Melanie Marlow and daytime group;2015race and2023community reports read. Ownsite unavailable; no founding year, new email, current fees/times/race status from snippets. Preserve ECCA contact and directory provenance. Supersedes older biography hold, not current programme gaps."
+    },
+    {
+      "slug": "sip-running-club",
+      "status": "new-council-lead-access-denied",
+      "checkedAt": "2026-10-19",
+      "url": "https://committees.oldham.gov.uk/documents/g9209/Public%2Breports%2Bpack%2B24th-Mar-2025%2B18.00%2BCabinet.pdf%3FT%3D10",
+      "reason": "Reader timeout; ordinary request403, stopped without bypass. Search clubhouse text not adopted. Supplier collection read lacks search narrative; no supplier contacts imported."
+    },
+    {
+      "slug": "seven-ten-ac",
+      "status": "own-club-and-training-partner-access-denied",
+      "checkedAt": "2026-10-19",
+      "url": "https://www.seventenac.co.uk/",
+      "reason": "Club home/membership and seven-ten.co.uk/speed returned403. No alternate access or search-only programme/founding/contacts adopted."
+    },
     {
       "slug": "stride-running-club",
       "status": "biography-resolved-current-eligibility-postcode-and-timetable-qualified",

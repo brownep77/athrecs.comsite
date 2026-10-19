@@ -17,6 +17,20 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 135: venue history resolves origins, not the founding year or current timetable.
+  const mels135 = bySlug.get("mels-milers-jogging-club");
+  const melsProfile135 = clubProfiles[mels135.slug];
+  assert.equal(melsProfile135.biography.length, 3);
+  assert.equal(melsProfile135.founded_year, undefined);
+  assert.equal(melsProfile135.notable_members[0].name, "Melanie Marlow");
+  assert.match(melsProfile135.notable_members[0].connection, /2020 history/);
+  assert.match(melsProfile135.biography.join(" "), /do not establish a forthcoming race date/);
+  assert.equal(mels135.address, clubEnrichment[mels135.slug].address);
+  assert.equal(mels135.postcode, "RH13 0YB");
+  assert.equal(mels135.country, "England");
+  assert.equal(mels135.socials.length, 0);
+  assert.ok(mels135.contacts.every(c => !c.phone));
+  assert.ok(!mels135.contacts.some(c => c.email === "melsmilers@outlook.com"));
   // Batch 134: junior support is evidenced; volunteer ages and old schedules are not membership rules.
   const stride134 = bySlug.get("stride-running-club");
   const strideProfile134 = clubProfiles[stride134.slug];
@@ -706,7 +720,7 @@ try {
     assert.equal(club.address_kind, addressUnknown ? undefined : "directory");
     if (addressUnknown) assert.equal(club.address, "");
     // Evesham and Wharfedale histories were recovered in batches 114 and 116.
-    if (!["evesham-vale-running-club", "wharfedale-harriers", "meads-runners", "winter-hill-runners", "hatton-darts"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["mels-milers-jogging-club", "evesham-vale-running-club", "wharfedale-harriers", "meads-runners", "winter-hill-runners", "hatton-darts"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   // Batch 108: verified venue classification, dated origins and placeholder exclusion.
   for (const slug of ["the-hawcs", "westside-runnas-uk", "heald-green-runners", "lifts-and-sprints-athletics-academy", "ts-harriers"]) {
