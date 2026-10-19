@@ -47,8 +47,12 @@ assert(
   "Refreshed track meetings must retain Athletics taxonomy and official provenance",
 );
 
-const diamondLeague2027 = refreshedTrackSeries.filter((series) =>
-  /diamond league/i.test(`${series?.summary} ${series?.description}`),
+const diamondLeague2027 = refreshedTrackSeries.filter(
+  (series) =>
+    /diamond league/i.test(`${series?.summary} ${series?.description}`) &&
+    refreshedTrackEditions.some(
+      (edition) => edition.seriesSlug === series?.slug && edition.date.startsWith("2027-"),
+    ),
 );
 const diamondNames = new Set(diamondLeague2027.map((series) => series?.name));
 for (const expected of [

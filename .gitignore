@@ -28,3 +28,6 @@ athrecs-github-ready.tar.gz
 .node_modules.lock
 .project_id
 attachments
+
+# Raw official calendar evidence is retained as a workflow artifact.
+/world-athletics-source-capture.json

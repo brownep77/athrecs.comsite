@@ -2,12 +2,16 @@ name: Refresh World Athletics track and field
 
 on:
   workflow_dispatch:
+    inputs:
+      submit_existing:
+        description: Validate and submit the saved branch without collecting again
+        type: boolean
+        default: false
   schedule:
     - cron: "23 4 * * 1"
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: world-athletics-track-field-refresh
@@ -15,41 +19,141 @@ concurrency:
 
 jobs:
   refresh:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.save.outputs.changed }}
+      sha: ${{ steps.save.outputs.sha }}
     steps:
+      - name: Optional repository-scoped App token
+        if: vars.WA_REFRESH_APP_CLIENT_ID != ''
+        id: app
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.WA_REFRESH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.WA_REFRESH_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ steps.app.outputs.token || github.token }}
+
+      - name: Preserve the pending branch and bring in main
+        env:
+          SUBMIT_EXISTING: ${{ inputs.submit_existing || false }}
+        run: |
+          set -euo pipefail
+          branch="automation/world-athletics-track-field"
+          git config user.name "athrecs-calendar-bot"
+          git config user.email "athrecs-calendar-bot@users.noreply.github.com"
+          if git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+            git switch --track -c "$branch" "origin/$branch"
+            git merge --no-edit origin/main
+          elif [ "$SUBMIT_EXISTING" = "true" ]; then
+            echo "Saved refresh branch is missing; refusing to recollect."
+            exit 1
+          else
+            git switch -c "$branch"
+          fi
 
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: npm
+      - run: npm ci
 
       - name: Refresh official World Athletics meetings
+        if: inputs.submit_existing != true
         run: node scripts/refresh-world-athletics-track-field.mjs
 
-      - name: Verify global track and field coverage
-        run: node --experimental-strip-types scripts/verify-global-track-field-calendar.mjs
-
-      - name: Open or update the guarded refresh pull request
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Verify preservation, provenance, duplicates and coverage
         run: |
-          if git diff --quiet; then
-            echo "World Athletics calendar is already current."
+          node scripts/verify-world-athletics-refresh.mjs
+          node --experimental-strip-types scripts/verify-global-track-field-calendar.mjs
+          node --experimental-strip-types scripts/verify-fixture-duplicates.mjs
+
+      - name: Retain the source capture and review manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: world-athletics-refresh-evidence
+          path: |
+            world-athletics-source-capture.json
+            src/data/world-athletics-refresh-review.json
+          if-no-files-found: warn
+
+      - name: Save validated updates without overwriting branch history
+        id: save
+        run: |
+          set -euo pipefail
+          git add src/data/world-athletics.ts src/lib/athrecs/seed.server.ts src/data/world-athletics-refresh-review.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh World Athletics track and field calendar"
+          fi
+          if git diff --quiet origin/main HEAD; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          git push origin HEAD:refs/heads/automation/world-athletics-track-field
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
+  submit:
+    needs: refresh
+    if: needs.refresh.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Optional repository-scoped App token
+        if: vars.WA_REFRESH_APP_CLIENT_ID != ''
+        id: app
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.WA_REFRESH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.WA_REFRESH_APP_PRIVATE_KEY }}
+          permission-contents: read
+          permission-pull-requests: write
+
+      - name: Open the missing pull request or retain the existing one
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token || github.token }}
+          GH_REPO: ${{ github.repository }}
+          VALIDATED_SHA: ${{ needs.refresh.outputs.sha }}
+        run: |
+          set -euo pipefail
           branch="automation/world-athletics-track-field"
-          git config user.name "athrecs-calendar-bot"
-          git config user.email "athrecs-calendar-bot@users.noreply.github.com"
-          git fetch origin "$branch:refs/remotes/origin/$branch" || true
-          git switch -C "$branch"
-          git add src/data/world-athletics.ts src/lib/athrecs/seed.server.ts
-          git commit -m "Refresh World Athletics track and field calendar"
-          git push --force-with-lease origin "$branch"
+          current=$(gh api "repos/$GH_REPO/git/ref/heads/$branch" --jq '.object.sha')
+          if [ "$current" != "$VALIDATED_SHA" ]; then
+            echo "Branch changed since validation; refusing to submit a different revision."
+            exit 1
+          fi
+          existing=$(gh pr list --state open --base main --head "$branch" --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            echo "Validated update is in existing PR #$existing." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          cat > "$RUNNER_TEMP/world-athletics-pr.md" <<'BODY'
+          Official-calendar refresh. New source identities are added; existing records and URLs are preserved. Proposed corrections are retained in src/data/world-athletics-refresh-review.json for source and live-record reconciliation.
 
-          gh pr view "$branch" >/dev/null 2>&1 || gh pr create \
-            --base main \
-            --head "$branch" \
+          Preservation, official-provenance and duplicate checks passed before this branch was pushed. The normal AthRecs quality gate and review must pass before merge. No automatic approval or merge is performed.
+          BODY
+          if ! gh pr create --base main --head "$branch" \
             --title "Refresh World Athletics track and field calendar" \
-            --body "Automated official-calendar refresh. The normal Athrecs quality gate and duplicate checks must pass before merge."
+            --body-file "$RUNNER_TEMP/world-athletics-pr.md"; then
+            {
+              echo "PR submission failed. The validated commit $VALIDATED_SHA is preserved."
+              echo "For GITHUB_TOKEN, enable Settings → Actions → General → Allow GitHub Actions to create and approve pull requests."
+              echo "Alternatively configure the repository-scoped App documented in docs/world-athletics-refresh-2026-10-19/README.md."
+              echo "Retry only this submit job, or dispatch with submit_existing=true; do not rerun collection."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
