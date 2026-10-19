@@ -612,7 +612,7 @@ try {
     const club = bySlug.get(slug);
     assert.ok(club, slug);
     assert.equal(club.country, "England");
-    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs, ...batch130Slugs, "twemlow-track-club", "abbey-running-club"].includes(slug)) {
+    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs, ...batch130Slugs, "twemlow-track-club", "abbey-running-club", "fenland-running-club"].includes(slug)) {
       assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
     }
     const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());

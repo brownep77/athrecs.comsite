@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-19-batch141",
+  "lastEditorialBatch": "2026-10-19-batch142",
   "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch141: Abbey Running Club added with Abingdon training-meeting-point correction, official website/contact form and Instagram; 1,662/1,737 biographies (95.7%) and865 sourced associations assembled;75 incomplete. PR763 retains38 unpublished biographies and27 associations. Published baseline remains1624/838 from PR762, not freshly checked live. No production publication; wider public directory and Google indexing are separate.",
-  "completedProfileSlugs": ["abbey-running-club"],
+  "publication": "Unpublished batch142: Fenland Running Club biography and official website/joining route added. Assembled 1663/1737 biographies (95.7%),865 associations,74 incomplete. PR763 contains39 unpublished biographies and27 associations beyond the last recorded published baseline1624/838 from PR762; no fresh live check or production publication.",
+  "completedProfileSlugs": [
+    "fenland-running-club"
+  ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1662,
+    "extendedProfiles": 1663,
     "notableMemberEntries": 865,
     "clubsWithContacts": 1281,
     "contactEntries": 2096,
@@ -22,22 +24,23 @@
   "batchChanges": {
     "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 1,
+    "notableMemberEntriesAdded": 0,
     "contactOrSocialRecordsChanged": 1,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 0,
-    "netSocialLinks": 1,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch141 local profile/catalogue/club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. External database migration and all production publishers skipped. Exact new-head workflow/preview evidence recorded in PR763 after commit. Actual assembled catalogue1662/1737 biographies,865 associations,75 incomplete;2096 contacts and2601socials. Parent92004d0 dedicated39228241229 and full quality39228241054 both passed. Main e9017dc62c7c7b62c6b13922dd44e8133d8d2cec separately inspected; unrelated changes untouched. No production publication."
+    "status": "Batch142 local club profile, catalogue and audit checks, TypeScript, targeted ESLint, whitespace and safe Vite preview build passed. No external database migration or production publisher ran. Actual assembled1663/1737 biographies,865 associations,2096 contacts,2601socials;74 incomplete. Exact new-head CI/preview results recorded separately in PR763. Parent dedicated passed; parent full quality still running when checked. Main e9017dc inspected. No production publication."
   },
   "nextCandidateSlugs": [
-    "fenland-running-club",
-    "st-johns-running-club"
+    "horsham-run-fit",
+    "michelles-running-group"
   ],
   "resumeInstructions": [
+    "BATCH142 CURRENT: moduleek/seedv142 adds Fenland biography,1992founding from Frostbite league directory, club-owned programme/membership and dated12May2026C25Kcourse. Officialwebsite/joiningroute added; directoryaddress/postcode/dates and ECCA18Octemail retained.1663/1737,865associations,74incomplete;unpublished39/27. Parentb32083f/main e9017dc inspected. ExactheadCI/preview to be recorded inPR763. NextHorshamRunFit/MichellesRunningGroup via newprimarysources; preserve23Octoberfollowups and allolderholds.",
     "BATCH141 CURRENT: moduleej/seedv141 adds AbbeyRunningClub Abingdon biography,2019origin and LucyBrandon dated2026OxBeltorganisingassociation. County-directory-linked clubwebsite opened, about/team/meeting/join/trial/member/C25K/contact pages read. Monday7pm5-10k/Thursday6:30coached supported; intake/fees not promised. CityValeWhiteHorse correctedAbingdon, outsideAbbeyCinema meetingpoint training, originalpostcodeOX143JD retainednotnewlyverified. Officialwebsite/contactform/Instagram added; existingFB/ECCAemail/dates retained. Actual1662/1737(95.7%),865associations,75incomplete;draft38/27. Parent92004d0/main e9017dc inspected, bothparentCIpassed. FinalnewheadCI/preview inPR763. NextFenland/StJohns via newprimarysources; preserve23Octfollowups; older CURRENT entries historical.",
     "19Oct Abbey constitution https://abbeyrunningclub.co.uk/wp-content/uploads/2026/07/ARC-Consitution-April-2026-v2.pdf admissionp5 read/rendered: no age limit; unchangedadult_onlyfalse is not a claim of juniorprogramme. WebsiteInstagramlink present butdestinationunreadable; ownershipnotindependent. LiveWell10840 returned403STOP. 7Hills Facebook100063554832130 throttled; no snippetwomenonly/Oughtibridgeclaim. Sedbergh https://sedberghschool.org/senior-news/sedbergh-schools-group-launches/ dated15April2026 concerns schoolfamily, not runningclubfoundation; no school/alumni/results transfer. No outreach/formsubmission or accesschange.",
     "BATCH140 CURRENT: moduleei/seedv140 adds OlympiaAthletics biography and countyHampshire from opened/visuallychecked OctoberEAregisterp30. AGM21June2024p1 acceptance into HampshireXCLeague is not foundingdate; HavantACMay/June2026Lakeside5k source establishes dated participation only. No individualnames/results/notables imported; OlympiaRunningAcademy notmerged. Australia namesake excluded. Town/venue/fees/timetable/foundingunknown; ECCA18Oct email and13Octdirectory provenance retained. Actual1661/1737(95.6%),864associations,76incomplete;draft37/26. Contacts/socials unchanged. Parentdd41290/main e9017dc inspected; bothparentCIpassed. FinalnewheadCI/previewinPR763. Next7Hills/Abbey/Sedbergh via newprimarysources; older CURRENT notes historical, preserve23Octfollowups.",
@@ -249,6 +252,8 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {"slug": "st-johns-running-club", "url": "https://www.facebook.com/groups/733284473449562/", "status": "source-limited", "checkedAt": "2026-10-19", "reason": "Club-labelled Facebook group returned fetchthrottled; stopped. Monday7pm/StJohnsLye/beginnerprogramme remain search-only and not adopted. MyCompleteRuns coachinggroup not established as sameEAclub; no contacts or history transferred. Existing ECCAemail18Oct and directorydate13Oct preserved. No fullbiography added."},
+    {"slug": "fenland-running-club", "url": "https://fenlandrunningclub.co.uk/", "status": "resolved-biography-with-venue-qualification", "checkedAt": "2026-10-19", "reason": "Opened home, membership and dated C25K page, plus Frostbite league directory confirming1992foundation/2009leagueentry and officialsite. Existing ChapelRoad/PE131RG directoryaddress not asserted as RugbyClub venue. Contactform returned500; use readable membershipinstructions. Historical1986event origin not used as clubfoundation. No currentcourseintake/fees promised."},
     { "slug": "qbe-running-club", "checkedAt": "2026-10-19", "status": "contact-route-corrected-biography-held", "url": "https://www.qbe.com/contact-us", "reason": "Opened corporate contacts page is not running-club enquiries. Replaced contact_url with ECCA handbook exact page; retained original email/date, employer website and directory address. City vs Wharf mixed-team PDF opened but participation alone is insufficient history/programme. EA individual club page reader failed; no new directory date. No insurer contacts imported." },
     { "slug": "defra-ac", "checkedAt": "2026-10-19", "status": "parent-association-not-club-evidence", "url": "https://store.cssc.co.uk/workplace-association", "reason": "Opened CSSC page describes DEFRA Sports & Social, not specifically Defra AC. Do not infer club eligibility, training, origins or contact from umbrella association. ECCA printed31 existing club email re-read; no change." },
     { "slug": "northants-police-athletic-section", "checkedAt": "2026-10-19", "status": "primary-participation-only", "url": "https://mkac.org.uk/static/26emgpblisworth.htm", "reason": "Opened15May2026 Blisworth5 table includes exact club. No athlete results imported; insufficient origins/current training/eligibility. ECCA printed19 existing contact re-read unchanged; police recruitment information is not club membership." },
