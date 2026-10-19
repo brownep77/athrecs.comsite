@@ -62,6 +62,17 @@ for (const mark of ["", "NT", "DNF", "DNS", "DQ", "Unverified", "0", "00:00", "1
   assert.equal(candidateMark(mark), null, mark);
 for (const mark of ["40:00", "40:00c", "40:00\n(40:03)", "17.54.1", "10.14.48", "6.52", "1000"])
   assert(candidateMark(mark), mark);
+assert(
+  !sameResultCandidate(
+    { ...a, athleteId: undefined, name: "山田" },
+    { ...a, athleteId: undefined, name: "田中" },
+  ),
+  "Non-Latin names must not collapse into an empty key",
+);
+assert(
+  !sameResultCandidate({ ...a, event: "東京", sources: [] }, { ...a, event: "大阪", sources: [] }),
+  "Non-Latin event names stay distinct",
+);
 assert.equal(candidateMark("", 2400), "time:2400");
 assert.equal(candidateMark("", 0), null);
 console.log(

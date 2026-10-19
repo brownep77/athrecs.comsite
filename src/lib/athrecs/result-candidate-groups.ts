@@ -19,7 +19,7 @@ const text = (value: string) =>
     .normalize("NFKD")
     .toLowerCase()
     .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
 export const resultDistanceKey = (value: string) =>
   text(value)
