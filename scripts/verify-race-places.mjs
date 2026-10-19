@@ -26,6 +26,8 @@ registerHooks({
 const { buildRacePlaces, nextPlaceEdition, racePlacePage } =
   await import("../src/lib/athrecs/race-places.ts");
 const { racePlaceHead } = await import("../src/lib/athrecs/race-places-seo.ts");
+const { racePlaceCopy, runningDistanceNames } =
+  await import("../src/lib/athrecs/race-places-copy.ts");
 const { queryRacePlaceRows, racePlaceSitemapPaths } =
   await import("../src/lib/athrecs/race-places.server.ts");
 const { PGlite } = await import("@electric-sql/pglite");
@@ -157,6 +159,68 @@ const multi = Array.from({ length: 35 }, (_, i) =>
 assert.equal(racePlacePage(multi, key, now).races.length, 30);
 assert.equal(racePlacePage(multi, key, now, 2).races.length, 5);
 assert(racePlaceHead(racePlacePage(multi, key, now, 2)).links[0].href.endsWith("?page=2"));
+const prose = (paragraph) =>
+  paragraph.map((part) => (typeof part === "string" ? part : part.text)).join("");
+const distancesPage = racePlacePage(
+  [
+    race(201, {
+      editions: [
+        edition("2027-01-01"),
+        edition("2028-01-01"),
+        { ...edition("2027-01-01"), distance: "Half" },
+      ],
+    }),
+    race(202, { sport: "Triathlon", editions: [{ ...edition("2027-01-01"), distance: "5K" }] }),
+    race(203, { editions: [{ ...edition("2027-01-01", "Cancelled"), distance: "Marathon" }] }),
+  ],
+  key,
+  now,
+);
+assert.deepEqual(new Set(runningDistanceNames(distancesPage)), new Set(["10K", "half marathon"]));
+assert.equal(
+  distancesPage.overview.distances.find((x) => x.code === "10K").count,
+  1,
+  "do not count two editions as two events",
+);
+assert(
+  !runningDistanceNames(distancesPage).includes("5K"),
+  "triathlon legs are not standalone running races",
+);
+assert(
+  !runningDistanceNames(distancesPage).includes("marathon"),
+  "cancelled distance cannot be promoted",
+);
+assert(!prose(racePlaceCopy(after).intro[0]).includes("event with an upcoming date"));
+assert.equal(
+  racePlaceCopy(empty).questions.length,
+  0,
+  "do not pad an empty page with generic FAQs",
+);
+const chronological = racePlacePage(
+  [
+    race(210, { name: "Later featured race", featured: true, editions: [edition("2028-01-01")] }),
+    race(211, { name: "Earlier local race", editions: [edition("2027-01-01", "Closed")] }),
+  ],
+  key,
+  now,
+);
+const nextAnswer = prose(racePlaceCopy(chronological).questions[0].answer);
+assert(
+  nextAnswer.indexOf("Earlier local race") < nextAnswer.indexOf("Later featured race"),
+  "next-date answer must be chronological, independently of featured order",
+);
+assert(nextAnswer.includes("entry closed"), "dated race is not a promise of entry availability");
+const abstract = graph.find((x) => x["@type"] === "CollectionPage");
+assert.equal(
+  abstract.abstract,
+  racePlaceCopy(page).intro.map(prose).join(" "),
+  "structured summary must match visible introduction",
+);
+assert.equal(abstract.about.containedInPlace.name, "England");
+assert(
+  !graph.some((x) => ["FAQPage", "SportsEvent"].includes(x["@type"])),
+  "no inapplicable rich-result markup",
+);
 const db = new PGlite();
 await db.exec(`create table events(id int, slug text, name text, sport text, country text, county text, region text, city text, summary text, featured boolean);
  create table editions(event_id int, event_date date, distance_code text, status text, end_date date, end_source_url text, end_checked_at date);
@@ -177,6 +241,67 @@ assert.equal(
   "closed entry remains a scheduled race",
 );
 await db.close();
+if (process.argv.includes("--catalogue")) {
+  const { seriesList, editions } = await import("../src/data/catalogue.ts");
+  const bySlug = new Map();
+  for (const item of editions) {
+    const entries = bySlug.get(item.seriesSlug) ?? [];
+    entries.push({ date: item.date, distance: item.distance, status: item.status, endDate: null });
+    bySlug.set(item.seriesSlug, entries);
+  }
+  const sourceRows = seriesList
+    .filter((item) => ["Running", "Athletics", "Triathlon"].includes(item.sport))
+    .map((item, index) => ({
+      ...item,
+      id: index + 1,
+      region: null,
+      timeZone: null,
+      lastDate: null,
+      editions: bySlug.get(item.slug) ?? [],
+    }));
+  const locations = buildRacePlaces(sourceRows);
+  const validPaths = new Set(
+    [...locations.keys()].map((item) => (item ? `/races/places/${item}` : "/races/places")),
+  );
+  validPaths.add("/races/places");
+  for (const item of sourceRows) validPaths.add(`/races/${encodeURIComponent(item.slug)}`);
+  const audit = [];
+  for (const location of [...locations.values()].filter((item) => item.raceIds.length)) {
+    const ids = new Set(location.raceIds);
+    const data = racePlacePage(
+      sourceRows.filter((item) => ids.has(item.id)),
+      location.key,
+      now,
+    );
+    const copy = racePlaceCopy(data);
+    const paragraphs = [...copy.intro, ...copy.questions.map((item) => item.answer)];
+    const text = paragraphs.map(prose).join("\n");
+    assert(!/\b(?:undefined|NaN|Invalid Date)\b/.test(text), location.key);
+    assert(copy.heading.includes(location.name) || location.kind === "world", location.key);
+    for (const part of paragraphs.flat().filter((item) => typeof item !== "string"))
+      assert(validPaths.has(part.href), `${location.key}: ${part.href}`);
+    audit.push({
+      key: location.key,
+      kind: location.kind,
+      upcoming: data.upcomingCount,
+      title: copy.title,
+      description: copy.description,
+      intro: copy.intro.map(prose),
+      questions: copy.questions.map(({ question, answer }) => ({
+        question,
+        answer: prose(answer),
+      })),
+    });
+  }
+  fs.mkdirSync(path.join(root, "artifacts"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "artifacts/race-place-copy-audit.json"),
+    JSON.stringify(audit, null, 2),
+  );
+  console.log(
+    `Content and links checked across ${audit.length} populated seed locations (${new Set(audit.map((item) => item.kind)).size} location levels). Seed coverage is not a live count or a new source verification.`,
+  );
+}
 console.log(
   "Race-place checks passed: location hierarchy, state/county matching, date rollover, cancellation, new editions, archive preservation, pagination, SEO and public SQL.",
 );

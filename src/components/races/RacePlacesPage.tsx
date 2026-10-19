@@ -5,8 +5,19 @@ import { formatRaceDateShort as formatDate } from "@/lib/athrecs/format";
 import { fixtureSummary } from "@/lib/athrecs/fixture-presentation";
 import type { RacePlacePageData } from "@/lib/athrecs/race-places";
 import { racePlaceUrl } from "@/lib/athrecs/race-places-seo";
+import { racePlaceCopy, type RaceCopyParagraph } from "@/lib/athrecs/race-places-copy";
 
 const link = "text-accent underline underline-offset-4 hover:text-fg";
+const copyParagraph = (parts: RaceCopyParagraph) =>
+  parts.map((part, index) =>
+    typeof part === "string" ? (
+      part
+    ) : (
+      <a key={`${part.href}-${index}`} href={part.href} className={link}>
+        {part.text}
+      </a>
+    ),
+  );
 
 export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
   const router = useRouter();
@@ -24,7 +35,7 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
     };
   }, [router]);
   const { place } = data;
-  const location = place.kind === "world" ? "the world" : place.name;
+  const copy = racePlaceCopy(data);
   const renderRaces = (races: RacePlacePageData["races"]) => (
     <div className="grid gap-4 md:grid-cols-2">
       {races.map((race) => (
@@ -111,12 +122,13 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
           <p className="text-sm font-semibold text-accent">Explore by location</p>
         )}
         <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
-          {data.featuredCount ? "Major races and events" : "Races and events"} in {location}
+          {copy.heading}
         </h1>
-        <p className="mt-4 max-w-3xl leading-7 text-muted">
-          Find running, athletics and triathlon events in {location}. Compare upcoming dates and
-          locations, then open a race guide for entry information and recorded editions.
-        </p>
+        <div className="mt-4 max-w-3xl space-y-3 leading-7 text-muted">
+          {copy.intro.map((paragraph, index) => (
+            <p key={index}>{copyParagraph(paragraph)}</p>
+          ))}
+        </div>
         <p className="mt-3 text-sm text-muted">
           {data.total.toLocaleString("en-GB")} listed events ·{" "}
           {data.upcomingCount.toLocaleString("en-GB")} with upcoming dates
@@ -215,16 +227,27 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
           </nav>
         ) : null}
       </section>
+      {data.page === 1 && copy.questions.length ? (
+        <section aria-labelledby="race-questions-heading" className="max-w-3xl space-y-5">
+          <h2 id="race-questions-heading" className="font-display text-2xl font-semibold">
+            Planning your next race
+          </h2>
+          {copy.questions.map(({ question, answer }) => (
+            <div key={question}>
+              <h3 className="text-lg font-semibold">{question}</h3>
+              <p className="mt-2 leading-7 text-muted">{copyParagraph(answer)}</p>
+            </div>
+          ))}
+        </section>
+      ) : null}
       <aside className="rounded-xl bg-elevated p-5 text-sm leading-6 text-muted">
         <p>
-          Upcoming listings update as race days pass and new editions are added to AthRecs. Race
-          guides and recorded editions stay available throughout the year. A missing future date
-          does not confirm that a race will return; check the organiser’s announcement.
+          This guide is put together from the events recorded on AthRecs and updates as dates pass
+          or new editions are added. Coverage is growing; it is not a complete list of every race.
         </p>
         <p className="mt-2">
-          Dates are shown as listed in the catalogue. Check the organiser for entry availability,
-          cancellations and final arrangements. Coverage is growing and is not a complete list of
-          every race.
+          Check the organiser’s latest information for entry availability, cancellations and final
+          arrangements. A past edition does not confirm that a race will return.
         </p>
       </aside>
     </article>
