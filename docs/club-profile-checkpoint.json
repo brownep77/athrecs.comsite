@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-19-batch135",
+  "lastEditorialBatch": "2026-10-19-batch136",
   "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch135: 1,656/1,737 biographies (95.3%) and 862 sourced associations assembled; 81 incomplete. PR763 contains32 unpublished biographies and24 associations across batches119–135. Published baseline remains1624/838 from PR762. No new production authorization or publication; wider public directory and Google indexing are separate.",
+  "publication": "Draft batch136: 1,657/1,737 biographies (95.4%) and 862 sourced associations assembled; 80 incomplete. PR763 contains33 unpublished biographies and24 associations across batches119–136. Published baseline remains1624/838 from PR762. No new production authorization or publication; wider public directory and Google indexing are separate.",
   "completedProfileSlugs": [
-    "mels-milers-jogging-club"
+    "hoylake-road-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1656,
+    "extendedProfiles": 1657,
     "notableMemberEntries": 862,
     "clubsWithContacts": 1281,
     "contactEntries": 2093,
@@ -24,23 +24,26 @@
   "batchChanges": {
     "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 1,
+    "notableMemberEntriesAdded": 0,
     "contactOrSocialRecordsChanged": 0,
     "newWebsiteContactRecords": 0,
-    "directoryRecordsRefreshed": 0,
+    "directoryRecordsRefreshed": 1,
     "netContactEntries": 0,
     "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch135 actual assembled profile checks passed:1656 biographies/862 associations,2093 contacts/2598socials. Catalogue and club checks, targeted ESLint, TypeScript, whitespace and final safe preview build passed; external migrations and production publishers skipped. Exact-head desktop/mobile workflow and AthRecs preview evidence will be recorded in PR763. Prior e4c43f5 dedicated39188583085 and broader39188582921 both passed. No production publication."
+    "status": "Batch136 local checks passed: actual assembled1657 biographies/862 associations,2093 contacts/2598socials and1684 current directory checks; catalogue, club audit, targeted ESLint, TypeScript, whitespace and safe preview build. External migrations and all production publishers skipped. Exact-head desktop/mobile and AthRecs preview evidence will be recorded in PR763. Prior bc32f99 Club profiles39193278727 passed; broader39193278705 failed scripts/verify-account-panel-ui.mjs:40, RunRecs matching-panel count0 versus1. This is not a club-profile assertion; no unrelated fix or safeguard change made. No production publication."
   },
   "nextCandidateSlugs": [
-    "maximum-mileage-running-club",
-    "hoylake-road-runners",
-    "independent-intelligent-fitness"
+    "defra-ac",
+    "northants-police-athletic-section",
+    "qbe-running-club"
   ],
   "resumeInstructions": [
+    "BATCH136 CURRENT: ef/seedv136 adds Hoylake's Merseyside/local-racing biography, county correction, no association/contact additions. Maximum Mileage directory-only correction: Wiltshire/virtual/four running disciplines from opened and visually checked EA October2026 register p42. Assembled1657/1737(95.4%),862 associations,80 incomplete; draft33/24, published1624/838 unchanged. Parentbc32f99/main de1325f inspected unchanged. Prior dedicated passed, broader failed RunRecs account-panel assertion; new-head evidence in PR763. Next new-primary recovery DEFRA/NorthantsPolice/QBE, preserve23Octoberfollowups. Older CURRENT notes are historical.",
+    "19Oct Hoylake: EA register p25 road-only versus MCAA CR (cross-country/road) distinction explicit, no invented expanded training. BTR12April2026Tunnel post-race and1JunePortSunlight preview plus EricaDillonPR9JuneChamber post-race establish group participation; Wallasey22September2026ArrowePark table establishes club participation only, no named athlete/result import. FB829332125612519 returned block STOP; search-only ShipInn/fee/BTRalias/origin not adopted. NiftyEntries2026 page retains2023terms, not a current programme. No direct club contacts from MCAA placeholders or neighbours; no town/street/postcode inferred.",
+    "19Oct MaximumMileage: own coaching homepage/team/enquiry-related routes found, home/team opened, but no explicit bridge establishing coaching/app subscription as registered club membership. Coach contacts, phone and names withheld. EA directory request unavailable, October2026PDF p42 read/rendered; changed summary removes unsourced accredited label, virtual=true and countyWiltshire; England flag retained, no global scope. Original countySouthWest/checked2026-08-16/source https://www.englandathletics.org/find-a-club/?keyword=Maximum%20Mileage%20Running%20Club&page=1 retained here. Original summary: England Athletics affiliated club based in South West. Membership details: accredited, virtual club. Activities: road running, trail, cross-country, hill/fell. No full biography yet. IndependentIntelligentFitness p42 confirmsWiltshire/track/XC/road only; existingECCAcontact/date and Salisbury directory address preserved. No founding/coaching history recovered, no athlete transfer from results.",
     "BATCH135 CURRENT: ee/seedv135 adds Mel's Milers historical biography and Melanie Marlow organising association from opened Bluecoat Sports2020history,2015racearticle and2023MembersDay report. Assembled1656/1737(95.3%),862 associations,81 incomplete; draft32/24, published1624/838 unchanged. All contacts/socials/address/directory dates preserved. Parent e4c43f5/main de1325f inspected unchanged; prior bothworkflows passed. New-head final verification in PR763. Next MaximumMileage/Hoylake/IndependentIntelligentFitness; preserve23Octoberfollowups. Older CURRENT notes are historical.",
     "19Oct new source qualifications: Sip Cabinet24Mar2025PDF reader timeout then ordinary403 STOP, no bypass/snippet clubhouse. TwistedRunning Sip collection read only kit, supplier email excluded. Maryport closed fundraiser planned not completed; Netherhall AC separate no history transfer. SevenTen ownclub/trainingpartner403STOP, no snippet programme adopted. Mels ownsite502 and SiteUnavailable, search2000founding/membershipemail/2026racecancellation not adopted; Bluecoat2020historicorigin resolves oldhold only, currentprogramme stillunknown.",
     "BATCH134 CURRENT: ed/seedv134 adds Stride biography, adult_only=false and Running-only sports from club-authored Manchester university-platform notices. Original directory/address/contact dates retained. Added MileHigh Strava169363 from opened CornwallRoadRunning directory; destination unreadable, ownership not reverified. Assembled1655/1737(95.3%),861 associations,82 incomplete; draft31/23, published1624/838 unchanged. Parentcbc9b3b/main de1325f inspected; prior bothworkflows passed. NextMaryport/Sip/MileHigh; preserve23Octoberfollowups. Older CURRENT entries are historical.",
@@ -239,6 +242,9 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    { "club": "hoylake-road-runners", "reviewedAt": "2026-10-19", "gap": "Biography added from primary local-race participation and governing-body evidence. Founding date, historical names, meeting venue, timetable, fees and direct club contacts unresolved; own Facebook blocked. No search-only address or contact imported." },
+    { "club": "maximum-mileage-running-club", "reviewedAt": "2026-10-19", "gap": "EA October2026 p42 supports Wiltshire/virtual and disciplines. Maximum Mileage Coaching homepage/team read, but club-versus-coaching membership identity/route not established; contacts and full biography withheld." },
+    { "club": "independent-intelligent-fitness", "reviewedAt": "2026-10-19", "gap": "EA October2026 p42 reconfirms Wiltshire/track/XC/road. No primary club narrative found beyond directories/results; existing ECCA email and original dates preserved. Founding, training programme and joining criteria unresolved." },
     {
       "slug": "mels-milers-jogging-club",
       "status": "historical-biography-resolved-current-programme-held",

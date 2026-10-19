@@ -17,6 +17,34 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 136: dated club participation is not a founding date, joining route or athlete result import.
+  const hoylake136 = bySlug.get("hoylake-road-runners");
+  const hoylakeProfile136 = clubProfiles[hoylake136.slug];
+  assert.equal(hoylakeProfile136.biography.length, 3);
+  assert.equal(hoylakeProfile136.founded_year, undefined);
+  assert.equal(hoylakeProfile136.notable_members, undefined);
+  assert.equal(hoylake136.county, "Merseyside");
+  assert.equal(hoylake136.region, "North West");
+  assert.equal(hoylake136.city, "");
+  assert.equal(hoylake136.address, "");
+  assert.equal(hoylake136.postcode, "");
+  assert.equal(hoylake136.contacts.length, 0);
+  assert.equal(hoylake136.socials.length, 0);
+  assert.deepEqual(hoylake136.disciplines, ["road_running"]);
+  assert.equal(hoylake136.checked_at, "2026-10-13");
+  assert.match(hoylakeProfile136.biography.join(" "), /not claims that Hoylake organised/);
+  const maximum136 = bySlug.get("maximum-mileage-running-club");
+  assert.equal(clubProfiles[maximum136.slug], undefined);
+  assert.equal(maximum136.county, "Wiltshire");
+  assert.equal(maximum136.virtual, true);
+  assert.equal(maximum136.country, "England");
+  assert.equal(maximum136.city, "");
+  assert.equal(maximum136.checked_at, "2026-10-19");
+  assert.match(maximum136.source_url, /media-alias=766c234f3796559a82e8/);
+  assert.deepEqual(maximum136.disciplines, ["road_running", "trail_running", "cross_country", "hill_fell"]);
+  assert.equal(maximum136.website, undefined);
+  assert.equal(maximum136.contacts.length, 0);
+  assert.equal(maximum136.socials.length, 0);
   // Batch 135: venue history resolves origins, not the founding year or current timetable.
   const mels135 = bySlug.get("mels-milers-jogging-club");
   const melsProfile135 = clubProfiles[mels135.slug];
