@@ -1,3 +1,4 @@
+import { recoveredAbbeyProfile } from "./club-profiles-ej.ts";
 import { olympiaHampshireProfile } from "./club-profiles-ei.ts";
 import { recoveredRiversideAndHeadFirstProfiles } from "./club-profiles-eh.ts";
 import { recoveredTwemlowProfile } from "./club-profiles-eg.ts";
@@ -165,6 +166,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...recoveredAbbeyProfile,
   ...olympiaHampshireProfile,
   ...recoveredRiversideAndHeadFirstProfiles,
   ...recoveredTwemlowProfile,
@@ -1033,4 +1035,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-19-v140";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-19-v141";

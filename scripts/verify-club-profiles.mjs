@@ -17,6 +17,25 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 141: Abingdon club identity, meeting point and unchanged email provenance.
+  const abbey141 = bySlug.get("abbey-running-club");
+  assert.equal(clubProfiles[abbey141.slug].biography.length, 3);
+  assert.equal(clubProfiles[abbey141.slug].founded_year, 2019);
+  assert.equal(clubProfiles[abbey141.slug].notable_members.length, 1);
+  assert.equal(abbey141.city, "Abingdon");
+  assert.equal(abbey141.country, "England");
+  assert.equal(abbey141.postcode, "OX14 3JD");
+  assert.equal(abbey141.address_kind, "training");
+  assert.equal(abbey141.adult_only, false);
+  assert.equal(abbey141.checked_at, "2026-10-13");
+  assert.equal(abbey141.contacts.length, 1);
+  assert.equal(abbey141.contacts[0].checked_at, "2026-10-18");
+  assert.equal(abbey141.website, "https://abbeyrunningclub.co.uk/");
+  assert.equal(abbey141.contact_url, "https://abbeyrunningclub.co.uk/contact-us/");
+  assert.equal(abbey141.socials.length, 2);
+  assert.equal(abbey141.socials.find(s => s.platform === "Instagram").checked_at, "2026-10-19");
+  assert.equal(abbey141.socials.find(s => s.platform === "Facebook").checked_at, "2026-10-13");
+  assert.ok(!clubSlugAliases[abbey141.slug]);
   // Batch 140: county and dated participation are not a founding date or training venue.
   const olympia140 = bySlug.get("olympia-athletics");
   const olympiaProfile140 = clubProfiles[olympia140.slug];
@@ -593,7 +612,7 @@ try {
     const club = bySlug.get(slug);
     assert.ok(club, slug);
     assert.equal(club.country, "England");
-    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs, ...batch130Slugs, "twemlow-track-club"].includes(slug)) {
+    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs, ...batch130Slugs, "twemlow-track-club", "abbey-running-club"].includes(slug)) {
       assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
     }
     const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());
