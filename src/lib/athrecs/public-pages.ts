@@ -15,6 +15,7 @@ export const PUBLIC_PAGES = [
   { path: "/results/berlin-marathon-2026", name: "Berlin Marathon 2026 results" },
   { path: "/results/bure-valley-10-2026", name: "Bure Valley 10 2026 winners summary" },
   { path: "/races", name: "Races and events" },
+  { path: "/races/places", name: "Major races by continent, country and county" },
   { path: "/running/events", name: "Running race search" },
   { path: "/running/calendar", name: "Running calendar" },
   { path: "/running/race-series", name: "Running race series" },

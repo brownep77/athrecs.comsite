@@ -378,6 +378,10 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
           </nav>
         ) : null}
       </header>
+      <a href="/races/places" className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface p-5 hover:border-accent">
+        <span><span className="block font-semibold">Major races by location</span><span className="mt-1 block text-sm text-muted">Explore continents, countries, states and counties, with upcoming dates and past editions.</span></span>
+        <ArrowRight className="size-5" aria-hidden="true" />
+      </a>
       {homepage ? (
         <>
           {distances}
