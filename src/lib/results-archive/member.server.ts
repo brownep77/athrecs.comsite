@@ -19,6 +19,7 @@ export type MemberArchiveMatch = {
   event: string;
   date: string;
   distance: string;
+  sport?: string;
   status: string;
   seconds: number | null;
   club: string | null;
@@ -60,7 +61,7 @@ export async function memberArchiveMatches(
   const { rawPatterns, normalizedPatterns } = buildPotentialMatchSearchPatterns(names);
   const distances = distanceSearchAliases(filters?.distance ?? "");
   const rows = await sql<MemberArchiveMatch & { nationality: string; age: string }>`
-    select a.id,a.revision,a.payload->>'name' as name,e.name as event,ed.event_date::text as date,ed.distance_code as distance,
+    select a.id,a.revision,a.payload->>'name' as name,e.name as event,ed.event_date::text as date,ed.distance_code as distance,e.sport,
       a.payload->>'status' as status,(a.payload->>'finishSeconds')::double precision as seconds,
       a.payload->>'club' as club,a.payload->>'bib' as bib,a.payload->>'category' as category,
       coalesce(nullif(a.payload->>'country',''),a.payload->>'nationality') as nationality,a.payload->>'age' as age,

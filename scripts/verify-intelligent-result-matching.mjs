@@ -277,6 +277,92 @@ try {
       ),
     /Save this racing name/,
   );
+  // One authenticated list spans profile results, published history and saved archive rows.
+  const sourceUrl = "https://example.test/private-result-evidence";
+  await sql`update results set source_url=${sourceUrl} where id=992491`;
+  const histories = Array.from({ length: 305 }, (_, index) => ({
+    year: 2024,
+    date: new Date(Date.UTC(2024, 0, 1 + index)).toISOString().slice(0, 10),
+    sourceDate: "",
+    ageGroup: "",
+    wind: "",
+    place: "",
+    venue: "",
+    discipline: "5K",
+    performance: "20:00",
+    meeting: `Synthetic History ${index}`,
+    labels: [],
+    sourceUrls: [sourceUrl],
+    verificationStatus: "unverified",
+  }));
+  histories.push({
+    ...histories[0],
+    year: 2026,
+    date: "2026-09-01",
+    discipline: "10K",
+    performance: "40:00(40:03)",
+    meeting: "Synthetic Matching 10K",
+  });
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    values(992491,'Synthetic timing','combined-history',${sourceUrl},now(),false,array[2024,2026],array[2024,2026],${JSON.stringify(histories)}::jsonb,now()),
+    (992491,'Synthetic timing','unpublished-history',${sourceUrl},now(),false,array[2024],array[2024],${JSON.stringify([{ ...histories[0], meeting: "Unpublished secret" }])}::jsonb,null)`;
+  const datasetId = crypto.randomUUID();
+  await sql`insert into result_archive_datasets(id,edition_id,provider,source_race_key,source_url,permission_note)
+    values(${datasetId}::uuid,992491,'Synthetic timer','combined',${sourceUrl},'Synthetic disposable test data')`;
+  await sql`insert into result_archive_entries(dataset_id,source_key,payload,payload_hash)
+    values(${datasetId}::uuid,'duplicate',${JSON.stringify({ name: "Synthetic Former", status: "finished", finishSeconds: 2400 })}::jsonb,repeat('a',64)),
+      (${datasetId}::uuid,'different-mark',${JSON.stringify({ name: "Synthetic Former", status: "finished", finishSeconds: 2500 })}::jsonb,repeat('b',64))`;
+  const combined = (filters = {}, token = a.token) =>
+    rpc("athrecs/combined-result-matches-api", "listMyCombinedResultMatches", filters, token);
+  const allCombined = await combined({ name: "Synthetic Former" });
+  assert.equal(
+    allCombined.totalMatches,
+    308,
+    "305 history results, two profile results and one distinct archive row",
+  );
+  assert.equal(allCombined.truncated, false);
+  assert.equal(
+    allCombined.duplicatesCombined,
+    2,
+    "History annotation and archive overlap share one displayed result",
+  );
+  assert(
+    allCombined.rows.some(
+      (row) => row.kind === "profile" && row.match.alternatePerformances?.includes("40:00(40:03)"),
+    ),
+  );
+  for (const secret of [sourceUrl, "Unpublished secret", "1984-09-02", "Synthetic private street"])
+    assert(!JSON.stringify(allCombined).includes(secret), `Combined response leaked ${secret}`);
+  assert.equal(
+    (await combined({ name: "Synthetic Former", year: "2024", distance: "5K" })).totalMatches,
+    305,
+  );
+  assert.equal(
+    (await combined({ name: "Synthetic Former", year: "2026", distance: "10K" })).totalMatches,
+    2,
+  );
+  assert.equal(
+    (await combined({}, b.token)).rows.length,
+    0,
+    "Other account cannot borrow saved aliases",
+  );
+  await assert.rejects(() => combined({}, ""), /[Uu]nauth|[Ss]ign|[Ll]og|[Ss]ession/);
+  await rpc(
+    "athrecs/profile-connections-api",
+    "dismissMyAthleteMatch",
+    { athleteId: 992491, dismissed: true },
+    a.token,
+  );
+  assert(
+    (await combined({ name: "Synthetic Former" })).rows.every((row) => row.kind === "archive"),
+    "Dismissal applies to every published history row",
+  );
+  await rpc(
+    "athrecs/profile-connections-api",
+    "dismissMyAthleteMatch",
+    { athleteId: 992491, dismissed: false },
+    a.token,
+  );
   await sql`update athlete_private_profiles set full_name='123' where user_id=${a.user.id}`;
   await assert.rejects(claim, /Before claiming/);
   await sql`update athlete_private_profiles set full_name=${identity.fullName} where user_id=${a.user.id}`;

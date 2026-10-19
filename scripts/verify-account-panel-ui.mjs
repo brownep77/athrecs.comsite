@@ -106,14 +106,89 @@ try {
       insert into athletes (id, slug, display_name, profile_visibility) values (990001, 'sidebar-synthetic-runner', 'Sidebar Test Runner', 'private');
       insert into results (id, edition_id, athlete_id, finish_time_seconds) values (990001, 990001, 990001, 2400);
     `);
+    const sql = await (await server.ssrLoadModule("/src/lib/db.ts")).getSql();
+    const sourceUrl = "https://example.test/private-combined-evidence";
+    await sql`update results set source_url=${sourceUrl} where id=990001`;
+    const history = [
+      {
+        year: 2026,
+        date: "2026-09-01",
+        discipline: "10K",
+        performance: "40:00",
+        meeting: "Sidebar Synthetic 10K",
+        sourceUrls: [sourceUrl],
+        labels: [],
+      },
+      {
+        year: 2025,
+        date: "2025-09-01",
+        discipline: "5K",
+        performance: "20:00",
+        meeting: "History Synthetic 5K",
+        sourceUrls: [sourceUrl],
+        labels: [],
+      },
+    ].map((row) => ({
+      sourceDate: row.date,
+      ageGroup: "",
+      wind: "",
+      place: "",
+      venue: "",
+      ...row,
+    }));
+    await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+      values(990001,'Synthetic timing','sidebar-history',${sourceUrl},now(),false,array[2025,2026],array[2025,2026],${JSON.stringify(history)}::jsonb,now())`;
+    const datasetId = crypto.randomUUID();
+    await sql`insert into result_archive_datasets(id,edition_id,provider,source_race_key,source_url,permission_note)
+      values(${datasetId}::uuid,990001,'Synthetic timer','sidebar',${sourceUrl},'Synthetic disposable test data')`;
+    await sql`insert into result_archive_entries(dataset_id,source_key,payload,payload_hash)
+      values(${datasetId}::uuid,'overlap',${JSON.stringify({ name: "Sidebar Test Runner", status: "finished", finishSeconds: 2400 })}::jsonb,repeat('a',64)),
+        (${datasetId}::uuid,'unique',${JSON.stringify({ name: "Sidebar Test Runner", status: "finished", finishSeconds: 2500 })}::jsonb,repeat('b',64))`;
     // Leave an unsaved account edit while a result claim refreshes the account query.
     await page.getByLabel("Display name", { exact: false }).fill("Unsaved sidebar draft");
     await go("Find and claim results");
+    await page.getByText("3 potential results", { exact: true }).waitFor();
+    assert.equal(
+      await page.getByRole("article").count(),
+      3,
+      "One combined list with overlaps removed",
+    );
+    assert.equal(
+      await page.getByText("Other saved race results matching your name", { exact: true }).count(),
+      0,
+    );
+    assert.equal(await page.getByText(sourceUrl, { exact: false }).count(), 0);
+    await page
+      .getByRole("checkbox", {
+        name: "Select saved result Sidebar Synthetic 10K 2026-09-01",
+        exact: true,
+      })
+      .check();
+    await page
+      .getByLabel("What helps us confirm these results are yours?")
+      .fill("Synthetic bib and club details for this test.");
+    await page.getByRole("button", { name: "Request review of 1 result", exact: true }).click();
+    await page.getByText("1 saved result submitted for a match check.", { exact: true }).waitFor();
+    assert.equal(
+      (
+        await sql`select count(*)::int as n from result_archive_match_requests where user_id='dev-user'`
+      )[0].n,
+      1,
+    );
+    await page.screenshot({ path: "artifacts/combined-matches-desktop.png", fullPage: true });
+    await page.setViewportSize({ width: 390, height: 844 });
+    assert.equal(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+      true,
+    );
+    await page.screenshot({ path: "artifacts/combined-matches-mobile.png", fullPage: true });
+    await page.setViewportSize({ width: 1440, height: 1000 });
     const match = page.getByRole("article").filter({ hasText: "Sidebar Synthetic 10K" });
     await match
       .getByRole("button", { name: "Claim profile & review all results", exact: true })
       .click();
     const dialog = page.getByRole("dialog");
+    await dialog.getByText("History Synthetic 5K", { exact: true }).waitFor();
     await dialog.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
     await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
     assert.deepEqual(

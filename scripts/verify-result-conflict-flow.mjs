@@ -6,6 +6,7 @@ import { createRequire } from "node:module";
 import crypto from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
 import { Pool, types } from "pg";
+import * as resultCandidateGroups from "../src/lib/athrecs/result-candidate-groups.ts";
 import * as resultMatch from "../src/lib/athrecs/result-match.ts";
 import * as matchingSettings from "../src/lib/athrecs/result-matching-settings.ts";
 const require = createRequire(import.meta.url);
@@ -203,6 +204,7 @@ const invitations = load("src/lib/athrecs/claim-invitations.server.ts", {
 });
 const reviewCore = load("src/lib/athlete-workspace/core.ts", { zod: require("zod") });
 const resultReview = load("src/lib/athrecs/profile-result-review.server.ts", {
+  "./result-candidate-groups": resultCandidateGroups,
   "node:crypto": crypto,
   "../athlete-workspace/core": reviewCore,
 });
@@ -1147,8 +1149,20 @@ try {
     labels: [],
     verificationStatus: "source_verified",
   };
+  await sql`update results set source_url='https://example.test/history' where id=8202`;
+  const [duplicateSource] =
+    await sql`select event_name,event_date,distance_code,finish_time_seconds from athlete_claimable_results where id=8202`;
+  const duplicateHistory = {
+    ...historyRow,
+    date: duplicateSource.event_date,
+    meeting: duplicateSource.event_name,
+    discipline: duplicateSource.distance_code,
+    performance: `${Math.floor(duplicateSource.finish_time_seconds / 60)}:${String(duplicateSource.finish_time_seconds % 60).padStart(2, "0")}`,
+  };
+  await sql`insert into editions(id,event_id,event_date,distance_code) values(8204,1,'2024-05-05','10K')`;
+  await sql`insert into results(id,edition_id,athlete_id,status) values(8204,8204,8200,'Unverified')`;
   await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
-    values(8200,'Synthetic timing','batch-history','https://example.test/history',now(),true,array[2025],array[2025],${JSON.stringify([historyRow])}::jsonb,now())`;
+    values(8200,'Synthetic timing','batch-history','https://example.test/history',now(),true,array[2025],array[2025],${JSON.stringify([historyRow, duplicateHistory])}::jsonb,now())`;
   const originalBatchResults = JSON.stringify(
     await sql`select * from results where athlete_id=8200 order by id`,
   );
@@ -1163,6 +1177,14 @@ try {
     detail.review.rows.length,
     4,
     "Finished, non-finish and source-history rows are all reviewable",
+  );
+  assert(
+    detail.review.rows.some((row) => row.key === "r:8202"),
+    "Canonical key represents grouped duplicates",
+  );
+  assert(
+    !detail.review.rows.some((row) => row.key === "r:8204"),
+    "Empty unverified placeholder does not inflate review count",
   );
   assert.equal(detail.sourceUrl, null, "Stored evidence is not sent to the claim UI");
   assert(
@@ -1247,6 +1269,17 @@ try {
       await sql`select entries from athlete_result_proposals where id=${batchInput.review.requestId}::uuid`
     )[0].entries[0].timingBasis,
     "gun",
+  );
+  const historyChoices =
+    await sql`select excluded from athlete_profile_history_choices where user_id='batch-user' and athlete_id=8200`;
+  assert.equal(
+    historyChoices.length,
+    2,
+    "Both the standalone history and grouped history receive the choice",
+  );
+  assert(
+    historyChoices.every((row) => row.excluded),
+    "Excluding one displayed result hides all its representations",
   );
   const replay = await submitWithIdentity(batchInput, user("batch-user"));
   assert.equal(replay.confirmation.reused, true);

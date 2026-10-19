@@ -441,6 +441,11 @@ function ProfileResultConfirmationBody({
                   date={row.date}
                   performance={row.performance || row.status}
                 />
+                {row.alternatePerformances?.length ? (
+                  <p className="text-xs text-muted">
+                    Also recorded as: {row.alternatePerformances.join(" · ")}
+                  </p>
+                ) : null}
                 <p className="text-xs text-muted">
                   {row.chip !== null ? `Chip ${formatDuration(row.chip)} · ` : ""}
                   {row.gun !== null

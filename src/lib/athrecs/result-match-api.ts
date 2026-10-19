@@ -37,6 +37,8 @@ export type PotentialResultMatch = {
   eventDate: string;
   distanceCode: string;
   finishTimeSeconds: number | null;
+  performanceText?: string;
+  alternatePerformances?: string[];
   overallPlace: number | null;
   bib: string | null;
   category: string | null;
@@ -99,8 +101,8 @@ type CandidateRow = {
   source_identifier_matches: boolean;
 };
 
-const MAX_CANDIDATE_ROWS = 1000;
-const MAX_RETURNED_MATCHES = 200;
+const MAX_CANDIDATE_ROWS = 5000;
+const MAX_RETURNED_MATCHES = 5000;
 
 async function ready() {
   await ensureAthrecsSeeded();

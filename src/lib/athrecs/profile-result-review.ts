@@ -27,6 +27,7 @@ export type ProfileReviewRow = {
   date: string;
   distance: string;
   performance: string;
+  alternatePerformances?: string[];
   chip: number | null;
   gun: number | null;
   status: string;
