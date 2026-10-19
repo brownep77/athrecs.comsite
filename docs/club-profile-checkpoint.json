@@ -1,44 +1,46 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-19-batch138",
+  "lastEditorialBatch": "2026-10-19-batch139",
   "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch138: Twemlow biography added; 1,658/1,737 biographies (95.5%) and 862 sourced associations assembled; 79 incomplete. PR763 retains34 unpublished biographies and24 associations. Published baseline remains1624/838 from PR762, not freshly checked live. No production publication; wider public directory and Google indexing are separate.",
-  "completedProfileSlugs": ["twemlow-track-club"],
+  "publication": "Draft batch139: Riverside Harriers and Running Head First added; 1,660/1,737 biographies (95.6%) and 864 sourced associations assembled; 77 incomplete. PR763 retains36 unpublished biographies and26 associations. Published baseline remains1624/838 from PR762, not freshly checked live. No production publication; wider public directory and Google indexing are separate.",
+  "completedProfileSlugs": ["riverside-harriers", "running-head-first"],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1658,
-    "notableMemberEntries": 862,
+    "extendedProfiles": 1660,
+    "notableMemberEntries": 864,
     "clubsWithContacts": 1281,
-    "contactEntries": 2093,
+    "contactEntries": 2096,
     "clubsWithEmail": 1238,
-    "clubsWithPhone": 193,
-    "clubsWithSocials": 1233,
-    "socialLinks": 2598,
+    "clubsWithPhone": 195,
+    "clubsWithSocials": 1234,
+    "socialLinks": 2600,
     "websiteContactRecords": 1612
   },
   "batchChanges": {
-    "extendedProfilesAdded": 1,
+    "extendedProfilesAdded": 2,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 0,
-    "contactOrSocialRecordsChanged": 0,
+    "notableMemberEntriesAdded": 2,
+    "contactOrSocialRecordsChanged": 2,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 0,
-    "netSocialLinks": 0,
+    "netContactEntries": 3,
+    "netSocialLinks": 2,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch138 local profile/catalogue/club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Actual catalogue1658/1737 biographies,862 associations,79 incomplete;2093 assembled contacts and2598socials unchanged. External migrations and all production publishers skipped. Parent62a85b6 dedicated39203158962 and broader quality39203158803 both passed. New exact-head workflow and preview evidence to be recorded in PR763. Main freshly resolved e9017dc62c7c7b62c6b13922dd44e8133d8d2cec; unrelated changes untouched. No production publication."
+    "status": "Batch139 local profile/catalogue/club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. External migrations and all production publishers skipped. Actual assembled catalogue1660/1737 biographies,864 associations,77 incomplete;2096 contacts and2600socials. Parentbbb43d3 dedicated39208417233 and broader quality39208417275 both passed. Exact new-head workflow and preview evidence to be recorded in PR763. Current main e9017dc62c7c7b62c6b13922dd44e8133d8d2cec; unrelated changes untouched. No production publication."
   },
   "nextCandidateSlugs": [
-    "riverside-harriers",
-    "running-head-first",
-    "olympia-athletics"
+    "olympia-athletics",
+    "gator-athletics-club",
+    "seven-ten-ac"
   ],
   "resumeInstructions": [
+    "BATCH139 CURRENT: moduleeh/seedv139 adds RiversideHarriers and RunningHeadFirst, JohnHerbert/ChrisRedmond founding associations,3 rolecontacts,2 RHFirst publisher-linked socials,2 websites/contactroutes. Riverside NewRiver postcode N225QJ correctedN225QW and address_kindtraining via club public timetable plus opened Haringey29June2026agenda. No directory check-date/discipline/eligibility changes. Actual1660/1737(95.6%),864 associations,77 incomplete;draft36/26. Parentbbb43d3/main e9017dc inspected, no competing writer. Both parent workflows passed. Final new-head CI/preview inPR763. Next Olympia/Gator/SevenTen via new primary leads, preserve23Octoberfollowups. Older CURRENT notes historical.",
+    "19Oct Riverside: publichome and linked /static/js/main.eaca5190.js read ordinarypublicHTML/JS; team/timetable/FAQ/contact content, no private API/form. JohnHerbert founder/headcoach, DenisAttille generalenquiries, separatecoachingcontact. Unfilled2026term dates; no foundingyear, Olympiccount, accreditation, genericnews/testimonial claims or Haringeyalumni transfer. ConflictingJSONLD/footer socialhandles withheld; same-nameSouthAfricannotmerged. NewRiver address independently supported https://www.minutes.haringey.gov.uk/mgAi.aspx?ID=85825,29June2026. ExistingECCAemail/date18Oct retained. RHFirst home/about/runningclub/contact opened; founderPTsite expresslydatesCIC2019, not registeredclubfoundation; roleassociationonly, no privatehealthstory. Thursday5.30page attributed, confirmmeetingpoint; Liscardoffice not substituted for WallaseyVillage directory. Organisationemail/phone added, coach/supplier contacts excluded; FB/IGpublisherlinks notaccountownershipverification. TeamchallengeSTOP. OlympiaMarch2026HampshirePDFsearchlead notopened, no correction; Australianidentity excluded.",
     "BATCH138 CURRENT: moduleeg/seedv138 adds Twemlow's dated endurance/league biography; no new association, contact, location or directory-date changes. Assembled1658/1737(95.5%),862 associations,79 incomplete; draft34/24, historical published1624/838. Freshparent62a85b6/main e9017dc inspected, no competing writer. Parent dedicated39203158962 and full quality39203158803 both passed; exactparent AthRecs preview dpl_FjJ5J4KTXU3CUpBTousu4qwGEAeE previously verified with QBE/Hoylake/Maximum HTTP200 and45 assertions. New-head final evidence belongs in PR763. Next RiversideHarriers/RunningHeadFirst/Olympia new-primary leads; preserve23October followups. Older CURRENT entries historical.",
     "19Oct Twemlow: DorsetAthletics clubs-1 opened; SteveCook first-hand TheRunningNose31Dec2021 marathon review opened (own Dorney/London participation, group travel); RichardBrawn BournemouthAC12Apr2026BayHalf report opened (Twemlow men's team second at fixture, not season). No individual results/identity imports or notable-member claims. ECCA2026–27printed38 existingemail confirmed and18Oct provenance retained. DRRLclubdirectory/report unavailable viareader and ordinarypublicfetch, so search-only2020newteam/JezBragg/Anchors wording not adopted; EAfindclubunavailable, original13Octcheckdate unchanged. No trainingvenue/fees/foundingyear inferred.",
     "19Oct held: BornReady ownsite displaysPrivateSite STOP, CharityCommissionrequest403 STOP. CompaniesHouse15933371 overview/filinghistory opened:3Sep2024incorporation andErithregisteredoffice not clubfounding/trainingvenue. ObjectsPDFredirectfailed; secondarycharity1216703purpose/phone/date notadopted withoutprimarybridge. FitnessCoach EA11Aug2025July-supportarticle opened confirms ClubStandardsassistance, not currentverifiedstatus/fullprogramme. ECCA2025searchcontact notadopted ascurrent;2026PDF noexactFitnessCoachmatch. No newbio/contact for either; do not repeat blockedaccessroutes or transfer neighbours' contacts.",

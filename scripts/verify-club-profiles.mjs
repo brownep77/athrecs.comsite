@@ -17,6 +17,35 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 139: club-owned programmes, separate enquiry roles and evidenced venue correction.
+  for (const slug of ["riverside-harriers", "running-head-first"]) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(clubProfiles[slug].notable_members.length, 1);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.contacts[0].checked_at, "2026-10-18");
+    assert.ok(club.contacts.slice(1).every(c => c.checked_at === "2026-10-19"));
+  }
+  const riverside139 = bySlug.get("riverside-harriers");
+  assert.equal(riverside139.postcode, "N22 5QW");
+  assert.equal(riverside139.address_kind, "training");
+  assert.equal(riverside139.contacts.length, 3);
+  assert.equal(riverside139.contacts[1].email, "enquiries@riversideharriers.uk");
+  assert.equal(riverside139.contacts[2].phone, "07737 037694");
+  assert.equal(riverside139.socials.length, 0);
+  assert.match(riverside139.website, /riversideharriers\.uk/);
+  const headFirst139 = bySlug.get("running-head-first");
+  assert.equal(headFirst139.adult_only, true);
+  assert.equal(headFirst139.address_kind, "directory");
+  assert.equal(headFirst139.postcode, "CH45 3LF");
+  assert.equal(headFirst139.contacts.length, 2);
+  assert.equal(headFirst139.contacts[1].email, "chris@runningheadfirst.org");
+  assert.equal(headFirst139.contacts[1].phone, "0151 315 1092");
+  assert.equal(headFirst139.socials.length, 2);
+  assert.match(clubProfiles[headFirst139.slug].biography.join(" "), /not separately established/);
+  assert.equal(clubProfiles["olympia-athletics"], undefined);
   // Batch 138: dated participation is neither a current roster nor a training venue.
   const twemlow138 = bySlug.get("twemlow-track-club");
   const twemlowProfile138 = clubProfiles[twemlow138.slug];
@@ -703,10 +732,10 @@ try {
     assert.ok(contact, slug);
     assert.equal(contact.checked_at, "2026-10-18");
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
-    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["ipswich-phoenix-running-club", "run-middlewich", "uts-running-club", "slgr"].includes(slug) ? 2 : 1);
+    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["running-head-first", "ipswich-phoenix-running-club", "run-middlewich", "uts-running-club", "slgr"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
     // New primary narratives are asserted in their source-specific batches above.
-    if (!["stride-running-club", "ipswich-phoenix-running-club", "pendle-athletic-club", "metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["running-head-first", "stride-running-club", "ipswich-phoenix-running-club", "pendle-athletic-club", "metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");
@@ -725,13 +754,13 @@ try {
   };
   for (const [slug, email] of Object.entries(batch110Emails)) {
     const club = bySlug.get(slug);
-    assert.equal(club.contacts.length, 1);
+    assert.equal(club.contacts.length, slug === "riverside-harriers" ? 3 : 1);
     assert.equal(club.contacts[0].email, email);
     assert.equal(club.contacts[0].checked_at, "2026-10-18");
     assert.equal(club.checked_at, "2026-10-13");
     assert.equal(club.country, "England");
-    assert.ok(!club.contacts.some(c => c.phone));
-    if (!["michelin-running-club", "runwednesdays", "helpston-harriers-ac", "rising-brook-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (slug !== "riverside-harriers") assert.ok(!club.contacts.some(c => c.phone));
+    if (!["riverside-harriers", "michelin-running-club", "runwednesdays", "helpston-harriers-ac", "rising-brook-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("michelin-running-club").name, "Michelin Running Club");
   assert.equal(bySlug.get("michelin-running-club").address_kind, "directory");
