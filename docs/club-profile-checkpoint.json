@@ -1,47 +1,49 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-19-batch133",
+  "lastEditorialBatch": "2026-10-19-batch134",
   "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch133: 1,654/1,737 biographies (95.2%) and 861 sourced associations assembled; 83 remain incomplete. PR763 contains thirty unpublished biographies and twenty-three associations across batches119–133. Published baseline remains 1,624/838 from PR762; main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch134: 1,655/1,737 biographies (95.3%) and 861 sourced associations assembled; 82 incomplete. PR763 contains31 unpublished biographies and23 associations across batches119–134. Published baseline remains1624/838 from PR762. No new production authorization or publication; wider public directory and Google indexing are separate.",
   "completedProfileSlugs": [
-    "pendle-athletic-club",
-    "ipswich-phoenix-running-club"
+    "stride-running-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1654,
+    "extendedProfiles": 1655,
     "notableMemberEntries": 861,
     "clubsWithContacts": 1281,
     "contactEntries": 2093,
     "clubsWithEmail": 1238,
     "clubsWithPhone": 193,
-    "clubsWithSocials": 1232,
-    "socialLinks": 2597,
+    "clubsWithSocials": 1233,
+    "socialLinks": 2598,
     "websiteContactRecords": 1612
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
+    "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 2,
-    "contactOrSocialRecordsChanged": 2,
+    "notableMemberEntriesAdded": 0,
+    "contactOrSocialRecordsChanged": 1,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 1,
+    "netContactEntries": 0,
     "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch133 actual assembled profile checks passed:1654 biographies/861 associations,2093 contacts/2597socials. Catalogue and club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed; external migrations and all production publishers skipped. Superseded contact-only expectations reconciled, next-candidate checkpoint updated. Previous head9449a01 passed Club profiles39179797953 and full quality39179797947. New exact-head workflow, desktop/mobile and protected-preview evidence belongs in PR763; none certifies production publication."
+    "status": "Batch134 actual assembled profile checks passed:1655 biographies/861 associations,2093 contacts/2598socials. Catalogue and club checks, targeted ESLint, TypeScript, whitespace and final safe preview build passed; external migrations and production publishers skipped. Exact-head desktop/mobile workflow and AthRecs preview evidence will be recorded in PR763. Prior cbc9b3b dedicated39184318604 and broader39184318616 both passed. No production publication."
   },
   "nextCandidateSlugs": [
-    "stride-running-club",
-    "ginpit-flyers",
-    "ravens-school-runners"
+    "maryport-csc",
+    "sip-running-club",
+    "mile-high"
   ],
   "resumeInstructions": [
+    "BATCH134 CURRENT: ed/seedv134 adds Stride biography, adult_only=false and Running-only sports from club-authored Manchester university-platform notices. Original directory/address/contact dates retained. Added MileHigh Strava169363 from opened CornwallRoadRunning directory; destination unreadable, ownership not reverified. Assembled1655/1737(95.3%),861 associations,82 incomplete; draft31/23, published1624/838 unchanged. Parentcbc9b3b/main de1325f inspected; prior bothworkflows passed. NextMaryport/Sip/MileHigh; preserve23Octoberfollowups. Older CURRENT entries are historical.",
+    "19Oct Stride: current /10306417 and provider290055 read; older /10260154 and /10260156 recovered by ordinary public fetch after reader errors, explicitly CLOSED. Current notice supports young athletes, not exact memberage or guaranteed training timetable. Litterpick /10264955 text Feb/Mar2026 conflicts later2027-31 calendar: no future event promise. Postcode0PB versus retained0AB unresolved, no venue reclassification. Closednotice phone excluded. No platformcontact/social transfer, no login/register/send.",
+    "19Oct Maryport: opened https://www.justgiving.com/page/maryport-csc-4 closed fundraiser, planned1Aug2026TerrexRound/GNAAS. Dated community lead, not enough full programme/history; do not infer completion from pre-event prose or import donors/memorial details. Sip third-party OldhamReporter2020articles point to SecretSip/ChrisAshley councilplanning statement, primary document not opened. Ginpit/Ravens searches mostly race tables/directory; no narrative adopted. MileHigh Strava169363 from https://cornwallrunning.co.uk/running-clubs/; destination reader failed, no bypass.",
     "BATCH133 CURRENT: ec/seedv133 adds Pendle and IpswichPhoenix, MarnieNelson historical2024-25 association and GavinHorrex source-attributed co-founder association. Assembled1654/1737(95.2%),861 associations,83 incomplete; draft30/23, published1624/838 unchanged. Pendlepostcode correctedBB9 7TY/training; originalBB7 9TY retainedinprovenance. Ipswichnewwebsite/email/Instagram, existingcontacts/Facebookpreserved. Parent9449a01/main de1325f recheckedbeforewrites; no competingwriter. Prior bothworkflows passed. Exactheadfinalverification inPR763. NextStride/Ginpit/Ravens, preserve23Octoberfollowups. Remaining cohort is England listings plus Unattached; do not invent other-nation additions or pad FORDY branches with repeated parent copy.",
     "19Oct Pendle: opened PendleLeisurePlus/local-sport-club-directory, /seedhill-athletics-fitness-centre and /talented-athletes; NA/affiliation-list-26-27 updated14Oct confirms affiliation. Ownlistedsecretary publicHTMLencoding decodesexistingchristine.chorlton@outlook.com; preserveECCA18Octdate. Clubprogrammefromage7/MonWed7-8 qualified because directorypagehas2024timestamp; venuegeneraladmissionrulesnotclubeligibility. Oldpendleac.org.uk ordinarypublic200serves gambling: excluded, no new website. LancsAA/clubs.html503notfreshverified. No venue/neighbourphone/socials, foundingunknown; Marnie2024-25 associationnotcurrentmembership or resultimport.",
     "19Oct Ipswich: ownhome/about-us/membership/running-calendar opened; SCAA/clubs current2026listlinks exactnewdomain. FoundedNov2019supported, founderheadcountconflict homepage6 versusGavinplus6 omitted. Membershipemailadded, InstagramfromownHTMLnormalised, existingFBdeduped; photographerFacebookexcluded. Jotform220204636252344 readnotfilled explicitlyMembershipRenewal2026-27 despitejoinlink; first-timeapplicantsdirectedtoemail. No health/familydetails, bankdata, exactfees, performanceimports or claimedlicenceverification. Coplestonvenueconfirmed, retainedaddress/directorydatesunchanged.",
@@ -235,6 +237,27 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    {
+      "slug": "stride-running-club",
+      "status": "biography-resolved-current-eligibility-postcode-and-timetable-qualified",
+      "checkedAt": "2026-10-19",
+      "url": "https://sportsworkforce.manchester.ac.uk/volunteers/opportunity/10306417",
+      "reason": "Supersedes older Stride hold below: current young-athlete notice corrects adults-only; programme supports running-only. Closed notices not current joining rules; litterpick text/calendar conflict and0AB/0PB postcode unresolved. Founding, alumni, fees, admission ages and phone/socials unknown."
+    },
+    {
+      "slug": "maryport-csc",
+      "status": "new-community-source-needs-fuller-programme",
+      "checkedAt": "2026-10-19",
+      "url": "https://www.justgiving.com/page/maryport-csc-4",
+      "reason": "Opened closed fundraiser describes planned2026GNAASchallenge, not confirmed completion/founding/currentjoining. No donor or memorial personal details imported."
+    },
+    {
+      "slug": "mile-high",
+      "status": "directory-social-recovered-biography-held",
+      "checkedAt": "2026-10-19",
+      "url": "https://cornwallrunning.co.uk/running-clubs/",
+      "reason": "Regional directory links Penryn club to Strava169363. Source-attributed link added; destination unreadable, no current ownership or full biography claim."
+    },
     { "slug": "pendle-athletic-club", "status": "biography-resolved-obsolete-domain-excluded", "checkedAt": "2026-10-19", "reason": "Primary venue/operator and Northern Athletics sources resolve programme, training postcode and historical Marnie association. Old pendleac.org.uk is gambling content, not adopted. Foundation, current session-specific confirmation, direct phone/form/socials unknown; original directory postcode retained in provenance." },
     { "slug": "ipswich-phoenix-running-club", "status": "biography-resolved-founders-count-and-joining-form-qualified", "checkedAt": "2026-10-19", "reason": "Own site and 2026 SCAA website link recover biography, Nov2019 founding, email/social. Six versus seven founders unresolved, number omitted. Join link opens renewal-only form; newcomers directed to email. No health/family or payment data imported." },
     { "slug": "stride-running-club", "status": "new-primary-programme-lead-needs-eligibility-reconciliation", "checkedAt": "2026-10-19", "url": "https://sportsworkforce.manchester.ac.uk/volunteers/opportunity/10306417", "reason": "Opened provider and three notices establish Wythenshawe coaching/community volunteering. Older community and ages8-14 notices are closed; current notice mentions young athletes. Resolve adult_only and unsupported inherited multisport tags, founding/currentjoining before profile. Old notice phone held; volunteer13+ is not member-age policy. See resumeInstructions for exact older URLs." },

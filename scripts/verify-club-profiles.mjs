@@ -17,6 +17,31 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 134: junior support is evidenced; volunteer ages and old schedules are not membership rules.
+  const stride134 = bySlug.get("stride-running-club");
+  const strideProfile134 = clubProfiles[stride134.slug];
+  assert.equal(stride134.adult_only, false);
+  assert.deepEqual(stride134.sports, ["Running"]);
+  assert.equal(stride134.country, "England");
+  assert.equal(stride134.address, clubEnrichment[stride134.slug].address);
+  assert.equal(stride134.postcode, "M23 0AB");
+  assert.equal(stride134.address_kind, "directory");
+  assert.equal(stride134.checked_at, "2026-10-13");
+  assert.equal(stride134.contacts.length, 1);
+  assert.equal(stride134.contacts[0].email, "davidhowlett1987@icloud.com");
+  assert.equal(stride134.contacts[0].checked_at, "2026-10-18");
+  assert.ok(!stride134.contacts[0].phone);
+  assert.equal(stride134.socials.length, 0);
+  assert.equal(stride134.website, undefined);
+  assert.equal(strideProfile134.biography.length, 3);
+  assert.equal(strideProfile134.founded_year, undefined);
+  assert.equal(strideProfile134.notable_members, undefined);
+  assert.match(strideProfile134.biography.join(" "), /not a guaranteed public training timetable/);
+  assert.match(strideProfile134.location_note, /M23 0PB/);
+  assert.equal(bySlug.get("mile-high").socials.length, 1);
+  assert.equal(bySlug.get("mile-high").socials[0].url, "https://www.strava.com/clubs/169363");
+  assert.equal(bySlug.get("mile-high").socials[0].source_url, "https://cornwallrunning.co.uk/running-clubs/");
+  assert.equal(clubProfiles["mile-high"], undefined);
   // Batch 133: correct the evidenced training postcode without re-dating directory provenance.
   const pendle133 = bySlug.get("pendle-athletic-club");
   const pendleProfile133 = clubProfiles[pendle133.slug];
@@ -614,7 +639,7 @@ try {
     assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["ipswich-phoenix-running-club", "run-middlewich", "uts-running-club", "slgr"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
     // New primary narratives are asserted in their source-specific batches above.
-    if (!["ipswich-phoenix-running-club", "pendle-athletic-club", "metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["stride-running-club", "ipswich-phoenix-running-club", "pendle-athletic-club", "metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");
