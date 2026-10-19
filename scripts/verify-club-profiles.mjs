@@ -17,6 +17,564 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 141: Abingdon club identity, meeting point and unchanged email provenance.
+  const abbey141 = bySlug.get("abbey-running-club");
+  assert.equal(clubProfiles[abbey141.slug].biography.length, 3);
+  assert.equal(clubProfiles[abbey141.slug].founded_year, 2019);
+  assert.equal(clubProfiles[abbey141.slug].notable_members.length, 1);
+  assert.equal(abbey141.city, "Abingdon");
+  assert.equal(abbey141.country, "England");
+  assert.equal(abbey141.postcode, "OX14 3JD");
+  assert.equal(abbey141.address_kind, "training");
+  assert.equal(abbey141.adult_only, false);
+  assert.equal(abbey141.checked_at, "2026-10-13");
+  assert.equal(abbey141.contacts.length, 1);
+  assert.equal(abbey141.contacts[0].checked_at, "2026-10-18");
+  assert.equal(abbey141.website, "https://abbeyrunningclub.co.uk/");
+  assert.equal(abbey141.contact_url, "https://abbeyrunningclub.co.uk/contact-us/");
+  assert.equal(abbey141.socials.length, 2);
+  assert.equal(abbey141.socials.find(s => s.platform === "Instagram").checked_at, "2026-10-19");
+  assert.equal(abbey141.socials.find(s => s.platform === "Facebook").checked_at, "2026-10-13");
+  assert.ok(!clubSlugAliases[abbey141.slug]);
+  // Batch 140: county and dated participation are not a founding date or training venue.
+  const olympia140 = bySlug.get("olympia-athletics");
+  const olympiaProfile140 = clubProfiles[olympia140.slug];
+  assert.equal(olympiaProfile140.biography.length, 3);
+  assert.equal(olympiaProfile140.founded_year, undefined);
+  assert.equal(olympiaProfile140.notable_members, undefined);
+  assert.deepEqual(olympiaProfile140.corrections, { county: "Hampshire" });
+  assert.equal(olympia140.county, "Hampshire");
+  assert.equal(olympia140.region, "South East");
+  assert.equal(olympia140.country, "England");
+  for (const field of ["city", "address", "postcode"]) assert.equal(olympia140[field], "");
+  assert.equal(olympia140.location_precision, "area-only");
+  assert.equal(olympia140.checked_at, "2026-10-13");
+  assert.equal(olympia140.contacts.length, 1);
+  assert.equal(olympia140.contacts[0].email, "carlamholcombe@hotmail.com");
+  assert.equal(olympia140.contacts[0].checked_at, "2026-10-18");
+  assert.equal(olympia140.socials.length, 0);
+  assert.ok(!olympia140.website);
+  assert.match(olympiaProfile140.biography.join(" "), /not the year Olympia was founded/);
+  assert.equal(clubProfiles["gator-athletics-club"], undefined);
+  assert.equal(clubProfiles["seven-ten-ac"], undefined);
+  // Batch 139: club-owned programmes, separate enquiry roles and evidenced venue correction.
+  for (const slug of ["riverside-harriers", "running-head-first"]) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(clubProfiles[slug].notable_members.length, 1);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.contacts[0].checked_at, "2026-10-18");
+    assert.ok(club.contacts.slice(1).every(c => c.checked_at === "2026-10-19"));
+  }
+  const riverside139 = bySlug.get("riverside-harriers");
+  assert.equal(riverside139.postcode, "N22 5QW");
+  assert.equal(riverside139.address_kind, "training");
+  assert.equal(riverside139.contacts.length, 3);
+  assert.equal(riverside139.contacts[1].email, "enquiries@riversideharriers.uk");
+  assert.equal(riverside139.contacts[2].phone, "07737 037694");
+  assert.equal(riverside139.socials.length, 0);
+  assert.match(riverside139.website, /riversideharriers\.uk/);
+  const headFirst139 = bySlug.get("running-head-first");
+  assert.equal(headFirst139.adult_only, true);
+  assert.equal(headFirst139.address_kind, "directory");
+  assert.equal(headFirst139.postcode, "CH45 3LF");
+  assert.equal(headFirst139.contacts.length, 2);
+  assert.equal(headFirst139.contacts[1].email, "chris@runningheadfirst.org");
+  assert.equal(headFirst139.contacts[1].phone, "0151 315 1092");
+  assert.equal(headFirst139.socials.length, 2);
+  assert.match(clubProfiles[headFirst139.slug].biography.join(" "), /not separately established/);
+  // Batch 138: dated participation is neither a current roster nor a training venue.
+  const twemlow138 = bySlug.get("twemlow-track-club");
+  const twemlowProfile138 = clubProfiles[twemlow138.slug];
+  assert.equal(twemlowProfile138.biography.length, 3);
+  assert.equal(twemlowProfile138.founded_year, undefined);
+  assert.equal(twemlowProfile138.notable_members, undefined);
+  assert.equal(twemlowProfile138.corrections, undefined);
+  assert.equal(twemlow138.city, "Wimborne");
+  assert.equal(twemlow138.country, "England");
+  assert.equal(twemlow138.adult_only, true);
+  assert.equal(twemlow138.address_kind, "directory");
+  assert.equal(twemlow138.checked_at, "2026-10-13");
+  assert.equal(twemlow138.contacts[0].checked_at, "2026-10-18");
+  assert.match(twemlowProfile138.biography.join(" "), /not the final season standings/);
+  assert.equal(clubProfiles["bornready-academy"], undefined);
+  assert.equal(clubProfiles["the-fitness-coach-ac"], undefined);
+  // Batch 137: a corporate insurer enquiry page must not masquerade as club contact.
+  const qbe137 = bySlug.get("qbe-running-club");
+  assert.equal(qbe137.contact_url, "https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf#page=37");
+  assert.equal(qbe137.contacts.length, 1);
+  assert.equal(qbe137.contacts[0].email, "julia.semple@uk.qbe.com");
+  assert.equal(qbe137.contacts[0].checked_at, "2026-10-18");
+  assert.equal(qbe137.address_kind, "directory");
+  assert.equal(qbe137.country, "England");
+  assert.equal(clubProfiles[qbe137.slug], undefined);
+  // Batch 136: dated club participation is not a founding date, joining route or athlete result import.
+  const hoylake136 = bySlug.get("hoylake-road-runners");
+  const hoylakeProfile136 = clubProfiles[hoylake136.slug];
+  assert.equal(hoylakeProfile136.biography.length, 3);
+  assert.equal(hoylakeProfile136.founded_year, undefined);
+  assert.equal(hoylakeProfile136.notable_members, undefined);
+  assert.equal(hoylake136.county, "Merseyside");
+  assert.equal(hoylake136.region, "North West");
+  assert.equal(hoylake136.city, "");
+  assert.equal(hoylake136.address, "");
+  assert.equal(hoylake136.postcode, "");
+  assert.equal(hoylake136.contacts.length, 0);
+  assert.equal(hoylake136.socials.length, 0);
+  assert.deepEqual(hoylake136.disciplines, ["road_running"]);
+  assert.equal(hoylake136.checked_at, "2026-10-13");
+  assert.match(hoylakeProfile136.biography.join(" "), /not claims that Hoylake organised/);
+  const maximum136 = bySlug.get("maximum-mileage-running-club");
+  assert.equal(clubProfiles[maximum136.slug], undefined);
+  assert.equal(maximum136.county, "Wiltshire");
+  assert.equal(maximum136.virtual, true);
+  assert.equal(maximum136.country, "England");
+  assert.equal(maximum136.city, "");
+  assert.equal(maximum136.checked_at, "2026-10-19");
+  assert.match(maximum136.source_url, /media-alias=766c234f3796559a82e8/);
+  assert.deepEqual(maximum136.disciplines, ["road_running", "trail_running", "cross_country", "hill_fell"]);
+  assert.equal(maximum136.website, undefined);
+  assert.equal(maximum136.contacts.length, 0);
+  assert.equal(maximum136.socials.length, 0);
+  // Batch 135: venue history resolves origins, not the founding year or current timetable.
+  const mels135 = bySlug.get("mels-milers-jogging-club");
+  const melsProfile135 = clubProfiles[mels135.slug];
+  assert.equal(melsProfile135.biography.length, 3);
+  assert.equal(melsProfile135.founded_year, undefined);
+  assert.equal(melsProfile135.notable_members[0].name, "Melanie Marlow");
+  assert.match(melsProfile135.notable_members[0].connection, /2020 history/);
+  assert.match(melsProfile135.biography.join(" "), /do not establish a forthcoming race date/);
+  assert.equal(mels135.address, clubEnrichment[mels135.slug].address);
+  assert.equal(mels135.postcode, "RH13 0YB");
+  assert.equal(mels135.country, "England");
+  assert.equal(mels135.socials.length, 0);
+  assert.ok(mels135.contacts.every(c => !c.phone));
+  assert.ok(!mels135.contacts.some(c => c.email === "melsmilers@outlook.com"));
+  // Batch 134: junior support is evidenced; volunteer ages and old schedules are not membership rules.
+  const stride134 = bySlug.get("stride-running-club");
+  const strideProfile134 = clubProfiles[stride134.slug];
+  assert.equal(stride134.adult_only, false);
+  assert.deepEqual(stride134.sports, ["Running"]);
+  assert.equal(stride134.country, "England");
+  assert.equal(stride134.address, clubEnrichment[stride134.slug].address);
+  assert.equal(stride134.postcode, "M23 0AB");
+  assert.equal(stride134.address_kind, "directory");
+  assert.equal(stride134.checked_at, "2026-10-13");
+  assert.equal(stride134.contacts.length, 1);
+  assert.equal(stride134.contacts[0].email, "davidhowlett1987@icloud.com");
+  assert.equal(stride134.contacts[0].checked_at, "2026-10-18");
+  assert.ok(!stride134.contacts[0].phone);
+  assert.equal(stride134.socials.length, 0);
+  assert.equal(stride134.website, undefined);
+  assert.equal(strideProfile134.biography.length, 3);
+  assert.equal(strideProfile134.founded_year, undefined);
+  assert.equal(strideProfile134.notable_members, undefined);
+  assert.match(strideProfile134.biography.join(" "), /not a guaranteed public training timetable/);
+  assert.match(strideProfile134.location_note, /M23 0PB/);
+  assert.equal(bySlug.get("mile-high").socials.length, 1);
+  assert.equal(bySlug.get("mile-high").socials[0].url, "https://www.strava.com/clubs/169363");
+  assert.equal(bySlug.get("mile-high").socials[0].source_url, "https://cornwallrunning.co.uk/running-clubs/");
+  assert.equal(clubProfiles["mile-high"], undefined);
+  // Batch 133: correct the evidenced training postcode without re-dating directory provenance.
+  const pendle133 = bySlug.get("pendle-athletic-club");
+  const pendleProfile133 = clubProfiles[pendle133.slug];
+  assert.equal(pendle133.city, "Nelson");
+  assert.equal(pendle133.country, "England");
+  assert.equal(pendle133.postcode, "BB9 7TY");
+  assert.equal(pendle133.address_kind, "training");
+  assert.equal(pendle133.address, "Seedhill Athletics and Fitness Centre, Surrey Road, Nelson, BB9 7TY");
+  assert.equal(clubEnrichment[pendle133.slug].postcode, "BB7 9TY");
+  assert.equal(pendle133.checked_at, "2026-10-13");
+  assert.equal(pendle133.website, undefined);
+  assert.equal(pendle133.contact_url, "https://pendleleisureplus.co.uk/local-sport-club-directory");
+  assert.equal(pendle133.contacts.length, 1);
+  assert.equal(pendle133.contacts[0].email, "christine.chorlton@outlook.com");
+  assert.equal(pendle133.contacts[0].checked_at, "2026-10-18");
+  assert.ok(pendle133.contacts.every(c => !c.phone));
+  assert.equal(pendle133.socials.length, 0);
+  assert.equal(pendleProfile133.biography.length, 3);
+  assert.equal(pendleProfile133.founded_year, undefined);
+  assert.equal(pendleProfile133.notable_members[0].name, "Marnie Nelson");
+  assert.match(pendleProfile133.notable_members[0].connection, /2024–25/);
+  assert.match(pendleProfile133.biography.join(" "), /Confirm those arrangements with the club secretary/);
+  assert.equal(clubProfiles["daws-heath-harriers"], undefined);
+  assert.equal(clubProfiles["yellow-brick-road-running-and-walking-club"], undefined);
+  const ipswich133 = bySlug.get("ipswich-phoenix-running-club");
+  const ipswichProfile133 = clubProfiles[ipswich133.slug];
+  assert.equal(ipswich133.website, "https://ipswichphoenixrunningclub.co.uk/");
+  assert.equal(ipswich133.address, clubEnrichment[ipswich133.slug].address);
+  assert.equal(ipswich133.address_kind, "directory");
+  assert.equal(ipswich133.country, "England");
+  assert.equal(ipswich133.contacts.length, 2);
+  assert.ok(ipswich133.contacts.some(c => c.email === "ipswichphoenix.running@gmail.com" && c.checked_at === "2026-10-19"));
+  assert.ok(ipswich133.contacts.every(c => !c.phone));
+  assert.equal(ipswich133.socials.length, 2);
+  assert.ok(ipswich133.socials.some(s => s.url === "https://www.facebook.com/groups/520337701882554"));
+  assert.ok(ipswich133.socials.some(s => s.url === "https://www.instagram.com/ipswichphoenixrunclub"));
+  assert.equal(ipswichProfile133.founded_year, 2019);
+  assert.equal(ipswichProfile133.biography.length, 3);
+  assert.equal(ipswichProfile133.notable_members[0].name, "Gavin Horrex");
+  assert.match(ipswichProfile133.biography.join(" "), /headed Membership Renewal/);
+  // Batch 132: dated network history, not inferred founding, faith or training venues.
+  const rising132 = bySlug.get("rising-brook-runners");
+  const risingProfile132 = clubProfiles[rising132.slug];
+  assert.equal(rising132.city, "Stafford");
+  assert.equal(rising132.country, "England");
+  assert.equal(rising132.address, clubEnrichment[rising132.slug].address);
+  assert.equal(rising132.postcode, "ST17 4QP");
+  assert.equal(rising132.address_kind, "directory");
+  assert.equal(rising132.checked_at, "2026-10-13");
+  assert.equal(rising132.contacts.length, 1);
+  assert.equal(rising132.contacts[0].email, "louisehobson755@gmail.com");
+  assert.equal(rising132.contacts[0].checked_at, "2026-10-18");
+  assert.equal(rising132.socials.length, 1);
+  assert.equal(rising132.socials[0].url, "https://www.facebook.com/groups/rbrunners");
+  assert.equal(risingProfile132.biography.length, 3);
+  assert.equal(risingProfile132.founded_year, undefined);
+  assert.equal(risingProfile132.notable_members[0].name, "Grace Marshall");
+  assert.match(risingProfile132.notable_members[0].connection, /undated/);
+  assert.match(risingProfile132.biography.join(" "), /not the club's founding year/);
+  assert.match(risingProfile132.biography.join(" "), /February 2026 report's club table records three runners and volunteers/);
+  assert.equal(clubProfiles["fry-club-joggers"], undefined);
+  assert.equal(clubProfiles["bodmin-womens-rc"], undefined);
+  // Batch 131: dated group/event history, not inferred venues or current membership.
+  for (const slug of ["slgr", "central-lancs-running-and-triathlon-club-clan"]) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(clubProfiles[slug].notable_members.length, 1);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.address_kind, "directory");
+    assert.equal(club.address, clubEnrichment[slug].address);
+    assert.equal(club.postcode, clubEnrichment[slug].postcode);
+  }
+  const slgr131 = bySlug.get("slgr");
+  assert.equal(slgr131.city, "Dartford");
+  assert.equal(slgr131.contacts.length, 2);
+  assert.ok(slgr131.contacts.some(c => c.email === "qprchelle@hotmail.com"));
+  assert.ok(slgr131.contacts.some(c => c.email === "slgr.contact@gmail.com" && c.checked_at === "2026-10-18"));
+  assert.ok(slgr131.contacts.every(c => !c.phone));
+  assert.equal(slgr131.socials.length, 4);
+  assert.equal(slgr131.socials.filter(s => s.platform === "Strava").length, 1);
+  assert.equal(clubProfiles.slgr.notable_members[0].name, "Dawn Annett");
+  assert.match(clubProfiles.slgr.biography.join(" "), /not a separately confirmed date of club affiliation/);
+  const clan131 = bySlug.get("central-lancs-running-and-triathlon-club-clan");
+  assert.equal(clan131.city, "Chorley");
+  assert.equal(clan131.contacts.length, 0);
+  assert.equal(clan131.socials.length, 0);
+  assert.match(clubProfiles[clan131.slug].location_note, /discrepancy remains unresolved/);
+  assert.match(clubProfiles[clan131.slug].notable_members[0].connection, /2026/);
+  assert.equal(clubProfiles["7-hills-harriers"], undefined);
+  // Batch 130: primary venue/community evidence; preserve contacts and identity safeguards.
+  const batch130Slugs = ["rock-salt-runners", "athletics-ni-st-annes-ac"];
+  for (const slug of batch130Slugs) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
+  const rock130 = bySlug.get("rock-salt-runners");
+  assert.equal(rock130.country, "England");
+  assert.equal(rock130.city, "Winsford");
+  assert.equal(rock130.county, "Cheshire West and Chester");
+  assert.equal(rock130.address, "");
+  assert.equal(rock130.postcode, "");
+  assert.equal(rock130.location_precision, "area-only");
+  assert.equal(clubEnrichment[rock130.slug].city, "Cuddington");
+  assert.equal(clubEnrichment[rock130.slug].postcode, "CW8 2LG");
+  assert.equal(rock130.contacts.length, 2);
+  assert.ok(rock130.contacts.some(c => c.email === "info@rocksaltrunning.com"));
+  assert.ok(rock130.contacts.every(c => !c.phone));
+  assert.equal(rock130.socials.length, 3);
+  assert.equal(rock130.socials.filter(s => s.platform === "Facebook").length, 1);
+  assert.equal(rock130.website, "https://www.rocksaltrunning.com/");
+  assert.match(clubProfiles[rock130.slug].biography.join(" "), /next intake is still to be confirmed/);
+  const stAnnes130 = bySlug.get("athletics-ni-st-annes-ac");
+  assert.equal(stAnnes130.country, "Northern Ireland");
+  assert.equal(stAnnes130.city, "Belfast");
+  assert.ok(!stAnnes130.address && !stAnnes130.postcode);
+  assert.equal(stAnnes130.contacts.length, 1);
+  assert.equal(stAnnes130.contacts[0].email, "annemaguire28@gmail.com");
+  assert.equal(stAnnes130.contacts[0].phone, "028 9061 2396");
+  assert.equal(stAnnes130.contacts[0].checked_at, "2026-10-18");
+  assert.equal(stAnnes130.socials.length, 0);
+  assert.equal(clubProfiles[stAnnes130.slug].notable_members.length, 1);
+  assert.match(clubProfiles[stAnnes130.slug].notable_members[0].connection, /2023/);
+  assert.ok(!clubProfiles[stAnnes130.slug].sources.some(s => /localgyms|opentrack|facebook/.test(s.url)));
+  assert.ok(!clubProfiles[stAnnes130.slug].biography.join(" ").includes("1980"));
+  // Batch 129: primary club narratives; no supplier contacts or inferred venues.
+  const batch129Slugs = ["seafront-shufflers", "cheshire-hill-racers"];
+  for (const slug of batch129Slugs) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.address_kind, "directory");
+    assert.equal(club.address, clubEnrichment[slug].address);
+    assert.equal(club.postcode, clubEnrichment[slug].postcode);
+    assert.equal(club.socials.length, 0);
+  }
+  const seafront129 = bySlug.get("seafront-shufflers");
+  assert.equal(seafront129.website, "https://clubspark.englandathletics.org/SeafrontShufflers");
+  assert.equal(seafront129.contact_url, `${seafront129.website}/Contact`);
+  assert.equal(seafront129.contacts.length, 1);
+  assert.equal(seafront129.contacts[0].email, "debbie.summers143@yahoo.co.uk");
+  assert.equal(seafront129.postcode, "BN21 1SF");
+  assert.match(clubProfiles[seafront129.slug].location_note, /Helen Gardens/);
+  assert.equal(clubProfiles[seafront129.slug].notable_members[0].name, "Pam Hart");
+  const cheshire129 = bySlug.get("cheshire-hill-racers");
+  assert.equal(cheshire129.website, "https://www.cheshirehillracers.org.uk/");
+  assert.equal(cheshire129.contacts.length, 0);
+  assert.equal(cheshire129.county, "Cheshire East");
+  assert.equal(clubProfiles[cheshire129.slug].notable_members.length, 2);
+  assert.match(clubProfiles[cheshire129.slug].contact_note, /national-association role contacts/);
+  assert.equal(clubProfiles["northants-police-athletic-section"], undefined);
+  // Batch 128: historical police events and multisport evidence, not placeholders.
+  for (const slug of ["devon-and-cornwall-police-ac", "vector-racing"]) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).address_kind, "directory");
+  }
+  const police128 = bySlug.get("devon-and-cornwall-police-ac");
+  assert.equal(police128.address, clubEnrichment[police128.slug].address);
+  assert.equal(police128.county, "Cornwall");
+  assert.equal(police128.contacts.length, 0);
+  assert.equal(police128.socials.length, 0);
+  assert.equal(police128.website, undefined);
+  const vector128 = bySlug.get("vector-racing");
+  assert.equal(vector128.county, "Tyne and Wear");
+  assert.equal(clubEnrichment[vector128.slug].county, "County Durham");
+  assert.equal(vector128.postcode, "NE39 1HD");
+  assert.equal(vector128.city, "");
+  assert.deepEqual(vector128.sports, ["Running", "Athletics", "Cycling", "Triathlon"]);
+  assert.equal(vector128.website, "https://www.vectorracing.co.uk");
+  assert.equal(vector128.contacts.length, 1);
+  assert.equal(vector128.contacts[0].email, "glfrost83@gmail.com");
+  assert.equal(vector128.socials.length, 1);
+  assert.equal(vector128.socials[0].url, "https://www.strava.com/clubs/vectorracing");
+  assert.equal(clubProfiles[vector128.slug].notable_members.length, 1);
+  assert.ok(!clubProfiles[vector128.slug].biography.join(" ").includes("Kona"));
+  assert.ok(!vector128.contacts.some((c) => c.email === "alessandro.marvaldi@gmail.com"));
+  // Batch 127: recovered club history, source-attributed contact and location conflicts.
+  const batch127Slugs = ["ellenborough-ac", "hydrographic-harriers"];
+  for (const slug of batch127Slugs) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.adult_only, true);
+    assert.equal(club.address, "");
+    assert.equal(club.postcode, "");
+    assert.equal(club.location_precision, "area-only");
+    assert.equal(club.contacts.length, 1);
+    assert.equal(club.socials.length, 0);
+  }
+  const ellenborough = bySlug.get("ellenborough-ac");
+  assert.equal(ellenborough.city, "Maryport");
+  assert.equal(ellenborough.county, "Cumbria");
+  assert.equal(ellenborough.website, "https://ellenboroughac.com/");
+  assert.equal(ellenborough.contact_url, "https://ellenboroughac.com/contact-us/");
+  assert.equal(clubProfiles[ellenborough.slug].founded_year, 1958);
+  assert.equal(clubProfiles[ellenborough.slug].notable_members.length, 3);
+  assert.match(clubProfiles[ellenborough.slug].biography.join(" "), /junior section ending in 2017/);
+  const hydrographic = bySlug.get("hydrographic-harriers");
+  assert.equal(hydrographic.city, "Taunton");
+  assert.equal(hydrographic.county, "Somerset");
+  assert.deepEqual(hydrographic.disciplines, ["road_running", "trail_running"]);
+  assert.equal(hydrographic.contact_url, "https://fullonsport.com/organiser/6923/profile");
+  assert.equal(hydrographic.contacts[0].email, "Thomas.Mellor@ukho.gov.uk");
+  assert.equal(hydrographic.contacts[0].phone, "01823 483635");
+  assert.match(hydrographic.contacts[0].role, /undated/);
+  assert.equal(clubProfiles[hydrographic.slug].founded_year, undefined);
+  assert.equal(clubProfiles[hydrographic.slug].notable_members, undefined);
+  assert.equal(clubEnrichment[hydrographic.slug].postcode, "TQ2 7HN");
+  assert.equal(clubProfiles["horsham-run-fit"], undefined);
+  // Batch 126: distinct clubs, dated archives and unchanged enquiry provenance.
+  const batch126Slugs = ["carlisle-aspatria-ac", "lancashire-fire-and-rescue-service-and-aa", "lancashire-constabulary-athletics-section"];
+  for (const slug of batch126Slugs) {
+    const club = bySlug.get(slug);
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(club.country, "England");
+    assert.equal(club.checked_at, "2026-10-13");
+    assert.equal(club.address_kind, "directory");
+    assert.equal(club.contacts.length, 1);
+  }
+  assert.equal(bySlug.get("carlisle-aspatria-ac").city, "Carlisle");
+  assert.equal(bySlug.get("carlisle-aspatria-ac").county, "Cumbria");
+  assert.equal(bySlug.get("carlisle-aspatria-ac").region, "North West");
+  assert.deepEqual(bySlug.get("carlisle-aspatria-ac").sports, ["Running", "Athletics"]);
+  assert.deepEqual(bySlug.get("carlisle-aspatria-ac").disciplines, ["cross_country", "track_field"]);
+  assert.equal(clubProfiles["carlisle-aspatria-ac"].notable_members, undefined);
+  assert.equal(clubProfiles["lancashire-fire-and-rescue-service-and-aa"].notable_members, undefined);
+  const lancon = bySlug.get("lancashire-constabulary-athletics-section");
+  assert.equal(lancon.website, "https://www.slateman.co.uk/athletics/index.htm");
+  assert.equal(lancon.socials.length, 1);
+  assert.equal(lancon.postcode, "PR4 5SA");
+  assert.match(clubProfiles[lancon.slug].notable_members[0].detail, /1990–2023/);
+  assert.equal(clubProfiles["sedbergh-schools-group-running-club"], undefined);
+  // Batch 125: event venue and league origins are not club training/founding facts.
+  const hatton = bySlug.get("hatton-darts");
+  assert.equal(clubProfiles[hatton.slug].biography.length, 3);
+  assert.equal(clubProfiles[hatton.slug].founded_year, undefined);
+  assert.equal(hatton.address_kind, "directory");
+  assert.equal(hatton.country, "England");
+  assert.equal(hatton.checked_at, "2026-10-13");
+  assert.equal(hatton.contacts.length, 1);
+  assert.equal(hatton.contacts[0].email, "petestevens00@gmail.com");
+  assert.match(clubProfiles[hatton.slug].notable_members[0].detail, /undated biography/);
+  assert.ok(!hatton.contacts.some(c => c.email === "admin@jcracetiming.uk"));
+  // Batch 124: historical primary accounts do not establish current training venues.
+  for (const slug of ["winter-hill-runners", "uts-running-club"]) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).socials.length, 0);
+  }
+  const winterHill = bySlug.get("winter-hill-runners");
+  assert.equal(winterHill.city, "Horwich");
+  assert.equal(winterHill.address, "");
+  assert.equal(winterHill.postcode, "");
+  assert.equal(winterHill.location_precision, "area-only");
+  assert.equal(winterHill.adult_only, true);
+  assert.match(clubProfiles[winterHill.slug].notable_members[0].detail, /dated association/);
+  const uts = bySlug.get("uts-running-club");
+  assert.equal(uts.city, "Wirral");
+  assert.equal(uts.address_kind, "directory");
+  assert.equal(uts.postcode, "CH47 4AA");
+  assert.equal(uts.adult_only, false);
+  assert.equal(uts.contacts.find(c => c.email === "mike.stone@talk21.com").phone, "07711 511608");
+  assert.equal(clubProfiles[uts.slug].notable_members, undefined);
+  // Batch 123: historical interviews and an explicitly identified social-run venue.
+  for (const slug of ["helpston-harriers-ac", "twisted-running"]) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(clubProfiles[slug].founded_year, undefined);
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).adult_only, true);
+  }
+  const helpston = bySlug.get("helpston-harriers-ac");
+  assert.equal(helpston.city, "Peterborough");
+  assert.equal(helpston.address, "");
+  assert.equal(helpston.location_precision, "area-only");
+  assert.equal(helpston.socials.length, 0);
+  assert.match(clubProfiles[helpston.slug].notable_members[0].detail, /historical role/);
+  const twisted = bySlug.get("twisted-running");
+  assert.equal(twisted.city, "Altrincham");
+  assert.equal(twisted.virtual, true);
+  assert.equal(twisted.address_kind, "training");
+  assert.equal(twisted.postcode, "WA14 5DU");
+  assert.equal(twisted.website, "https://twistedrunning.co.uk/");
+  assert.equal(twisted.contacts.length, 1);
+  assert.equal(twisted.contacts[0].email, "hello@twistedrunning.co.uk");
+  assert.equal(twisted.contacts[0].checked_at, "2026-10-18");
+  assert.equal(twisted.socials.length, 2);
+  assert.ok(!twisted.contacts.some(c => c.phone || c.email === "hello@domain.com"));
+  assert.equal(clubProfiles[twisted.slug].notable_members, undefined);
+  // Batch 122: recovered public pages retain historical/current distinctions.
+  const batch122Slugs = ["rolls-royce-harriers", "run-middlewich", "redcar-running-club"];
+  for (const slug of batch122Slugs) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
+  const rolls = bySlug.get("rolls-royce-harriers");
+  assert.equal(rolls.address_kind, "directory");
+  assert.equal(rolls.contacts.length, 3);
+  assert.ok(rolls.contacts.some(c => c.email === "billsouthgate337@btinternet.com"));
+  assert.ok(rolls.contacts.some(c => c.email === "James.Ward@Rolls-Royce.com"));
+  assert.equal(clubProfiles[rolls.slug].founded_year, undefined);
+  assert.deepEqual(clubProfiles[rolls.slug].notable_members.map(m => m.name), ["John Thornhill"]);
+  const middlewich = bySlug.get("run-middlewich");
+  assert.equal(middlewich.website, "http://runmiddlewich.club/");
+  assert.equal(middlewich.address_kind, "training");
+  assert.equal(middlewich.postcode, "CW10 0JJ");
+  assert.equal(middlewich.contacts.length, 2);
+  assert.equal(clubProfiles[middlewich.slug].founded_year, undefined);
+  assert.equal(clubProfiles[middlewich.slug].notable_members, undefined);
+  const redcar = bySlug.get("redcar-running-club");
+  assert.equal(redcar.address_kind, "directory");
+  assert.equal(redcar.postcode, "TS10 2DH");
+  assert.equal(redcar.contacts.length, 1);
+  assert.equal(redcar.socials.length, 2);
+  assert.equal(clubProfiles[redcar.slug].founded_year, 1986);
+  assert.equal(clubProfiles[redcar.slug].notable_members, undefined);
+  assert.match(clubProfiles[redcar.slug].biography.join(" "), /no longer regularly monitored/);
+  // Batch 121: historical community accounts do not establish a current venue or membership.
+  const meads = bySlug.get("meads-runners");
+  assert.equal(meads.city, "Eastbourne");
+  assert.equal(meads.country, "England");
+  assert.equal(meads.address, "Western Lawns");
+  assert.equal(meads.address_kind, "directory");
+  assert.equal(meads.location_precision, "area-only");
+  assert.equal(meads.checked_at, "2026-10-13");
+  assert.equal(meads.contacts.length, 1);
+  assert.equal(meads.socials.length, 0);
+  assert.equal(clubProfiles[meads.slug].biography.length, 3);
+  assert.equal(clubProfiles[meads.slug].founded_year, undefined);
+  assert.equal(clubProfiles[meads.slug].notable_members[0].name, "Dale Anderton");
+  assert.match(clubProfiles[meads.slug].notable_members[0].detail, /does not establish formal or current membership/);
+  assert.match(clubProfiles[meads.slug].biography.join(" "), /22 November 2014/);
+  // Batch 120: current training evidence must not turn a PO box into a venue.
+  const batch120Slugs = ["thornton-cleveleys-running-club", "tri-anglia"];
+  const thornton = bySlug.get(batch120Slugs[0]);
+  assert.equal(thornton.website, "http://www.run-tcrc.co.uk/");
+  assert.equal(thornton.address_kind, "training");
+  assert.equal(thornton.postcode, "FY5 1RN");
+  assert.equal(clubProfiles[thornton.slug].founded_year, 2009);
+  assert.equal(clubProfiles[thornton.slug].notable_members[0].name, "Bob Fairclough");
+  assert.ok(!thornton.contacts.some(c => /run-?tcrc@gmail.com/i.test(c.email ?? "")));
+  const triAnglia = bySlug.get(batch120Slugs[1]);
+  assert.equal(triAnglia.website, "https://tri-anglia.clubpal.app/");
+  assert.equal(triAnglia.city, "Norwich");
+  assert.equal(triAnglia.address, "PO Box 3412, Norwich, NR7 7AP");
+  assert.equal(triAnglia.postcode, "NR7 7AP");
+  assert.equal(triAnglia.address_kind, "correspondence");
+  assert.equal(triAnglia.contact_url, "https://tri-anglia.clubpal.app/about-us");
+  assert.equal(clubProfiles[triAnglia.slug].founded_year, 1992);
+  assert.equal(clubProfiles[triAnglia.slug].notable_members, undefined);
+  assert.ok(triAnglia.contacts.some(c => c.email === "membership@tri-anglia.co.uk"));
+  assert.ok(triAnglia.contacts.some(c => c.email === "committee@tri-anglia.co.uk"));
+  assert.ok(!triAnglia.contacts.some(c => c.email === "info@norwichtriathlon.co.uk"));
+  for (const slug of batch120Slugs) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
+  // Batch 119: dated associations must not conflate venues or the two St Austell clubs.
+  const batch119Slugs = ["tickhill-running-and-athletic-club", "vocalink-mastercard-running-club", "st-austell-athletes-running-club"];
+  const tickhill = bySlug.get(batch119Slugs[0]);
+  assert.equal(tickhill.city, "Tickhill");
+  assert.equal(tickhill.website, "http://trac.clubbuzz.co.uk/");
+  assert.equal(tickhill.county, "South Yorkshire");
+  assert.equal(tickhill.address, "");
+  assert.equal(tickhill.location_precision, "area-only");
+  assert.equal(clubProfiles[tickhill.slug].founded_year, 2005);
+  assert.equal(tickhill.contacts.find(c => c.email === "TickhillRunners@gmail.com").phone, "07411630845");
+  const vocalink = bySlug.get(batch119Slugs[1]);
+  assert.equal(vocalink.website, "https://vocalinkrunningclub.wordpress.com/");
+  assert.equal(vocalink.address_kind, "directory");
+  assert.equal(clubProfiles[vocalink.slug].founded_year, undefined);
+  assert.match(clubProfiles[vocalink.slug].biography.join(" "), /22 July 2021/);
+  assert.ok(!vocalink.socials.some(s => s.url.includes("/@")));
+  const staarc = bySlug.get(batch119Slugs[2]);
+  assert.equal(staarc.address_kind, "directory");
+  assert.equal(staarc.contacts.length, 0);
+  assert.equal(clubProfiles[staarc.slug].founded_year, undefined);
+  assert.deepEqual(clubProfiles[staarc.slug].notable_members.map(m => m.name), ["Paul Maskell", "Marc Smerdon"]);
+  assert.ok(staarc.socials.some(s => s.url === "https://twitter.com/STAARC2016"));
+  assert.ok(!bySlug.get("st-austell-running-club").socials.some(s => s.url === "https://twitter.com/STAARC2016"));
+  for (const slug of batch119Slugs) {
+    assert.equal(clubProfiles[slug].biography.length, 3);
+    assert.equal(bySlug.get(slug).country, "England");
+    assert.equal(bySlug.get(slug).checked_at, "2026-10-13");
+  }
   // Batch 118: dated community accounts do not become today's timetable or venue.
   const batch118Slugs = ["team-balancise-rc", "aurora-harriers"];
   for (const slug of batch118Slugs) {
@@ -54,7 +612,7 @@ try {
     const club = bySlug.get(slug);
     assert.ok(club, slug);
     assert.equal(club.country, "England");
-    if (!batch118Slugs.includes(slug)) {
+    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs, ...batch130Slugs, "twemlow-track-club", "abbey-running-club", "fenland-running-club"].includes(slug)) {
       assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
     }
     const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());
@@ -213,9 +771,10 @@ try {
     assert.ok(contact, slug);
     assert.equal(contact.checked_at, "2026-10-18");
     assert.match(contact.role, /ECCA 2026–2027 handbook, page/);
-    assert.equal(club.contacts.length, slug === "run-middlewich" ? 2 : 1);
+    assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["running-head-first", "ipswich-phoenix-running-club", "run-middlewich", "uts-running-club", "slgr"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
-    if (slug !== "metropolitan-police-ac") assert.equal(clubProfiles[slug], undefined);
+    // New primary narratives are asserted in their source-specific batches above.
+    if (!["olympia-athletics", "running-head-first", "stride-running-club", "ipswich-phoenix-running-club", "pendle-athletic-club", "metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");
@@ -234,13 +793,13 @@ try {
   };
   for (const [slug, email] of Object.entries(batch110Emails)) {
     const club = bySlug.get(slug);
-    assert.equal(club.contacts.length, 1);
+    assert.equal(club.contacts.length, slug === "riverside-harriers" ? 3 : 1);
     assert.equal(club.contacts[0].email, email);
     assert.equal(club.contacts[0].checked_at, "2026-10-18");
     assert.equal(club.checked_at, "2026-10-13");
     assert.equal(club.country, "England");
-    assert.ok(!club.contacts.some(c => c.phone));
-    if (!["michelin-running-club", "runwednesdays"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (slug !== "riverside-harriers") assert.ok(!club.contacts.some(c => c.phone));
+    if (!["riverside-harriers", "michelin-running-club", "runwednesdays", "helpston-harriers-ac", "rising-brook-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("michelin-running-club").name, "Michelin Running Club");
   assert.equal(bySlug.get("michelin-running-club").address_kind, "directory");
@@ -282,7 +841,7 @@ try {
     assert.equal(club.address_kind, addressUnknown ? undefined : "directory");
     if (addressUnknown) assert.equal(club.address, "");
     // Evesham and Wharfedale histories were recovered in batches 114 and 116.
-    if (!["evesham-vale-running-club", "wharfedale-harriers"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["mels-milers-jogging-club", "evesham-vale-running-club", "wharfedale-harriers", "meads-runners", "winter-hill-runners", "hatton-darts"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   // Batch 108: verified venue classification, dated origins and placeholder exclusion.
   for (const slug of ["the-hawcs", "westside-runnas-uk", "heald-green-runners", "lifts-and-sprints-athletics-academy", "ts-harriers"]) {
@@ -867,7 +1426,7 @@ try {
   assert.match(clubProfiles["spenborough-and-dist-ac"].contact_note, /waiting list closed/);
   assert.match(clubProfiles["st-neots-triathlon-club"].biography.join(" "), /independent of the private NiceTri Events/);
   assert.equal(clubProfiles["st-marys-richmond-ac"].sources.length, 2);
-  assert.equal(clubProfiles["st-austell-athletes-running-club"], undefined);
+  assert.notEqual(clubProfiles["st-austell-athletes-running-club"], clubProfiles["st-austell-running-club"]);
   assert.equal(clubProfiles["st-marys-university-athletics-club"].notable_members, undefined);
   assert.ok(bySlug.get("spectrum-striders").contacts.some(c => c.email === "membership@spectrumstriders.org.uk"));
   assert.ok(bySlug.get("ss-athletics").contacts.some(c => c.phone === "07713 118226"));
@@ -921,7 +1480,8 @@ try {
   assert.equal(bySlug.get("solent-running-sisters").address, "");
   assert.equal(clubProfiles["smalley-road-runners"].founded_year, undefined);
   assert.equal(clubProfiles["sip-running-club"], undefined);
-  assert.equal(clubProfiles["slgr"], undefined);
+  // SLGR's former thin-source hold is superseded by batch 131 primary history.
+  assert.equal(clubProfiles["slgr"].founded_year, undefined);
   assert.match(clubProfiles["slough-junior-ac"].notable_members.find(m => m.name === "Morgan Lake").connection, /Former/);
   // Batch 60: school entities, safe website suppression and sourced training bases.
   for (const district of ["afan-nedd-tawe", "cardiff-and-vale", "dyfed", "eryri", "glamorgan-valleys"]) {
@@ -1056,7 +1616,7 @@ try {
     );
     assert.equal(
       bySlug.get(canonical).city,
-      newest.city,
+      clubProfiles[canonical]?.corrections?.city ?? newest.city,
       `Alias must not restore old location: ${canonical}`,
     );
   }

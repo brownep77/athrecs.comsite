@@ -53,6 +53,9 @@ jobs:
           node --experimental-strip-types scripts/verify-assistant.mjs
           node scripts/verify-assistant-access.mjs
 
+      - name: Verify World Athletics refresh preservation
+        run: node scripts/verify-world-athletics-refresh.mjs
+
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
 

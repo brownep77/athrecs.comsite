@@ -88,7 +88,7 @@ function ClubPage() {
       : club.location_precision === "official-directory"
         ? "Location checked in the official directory"
         : club.location_precision === "area-only"
-          ? "County or region confirmed; exact town is not published"
+          ? "Town or area confirmed; exact venue is not confirmed"
           : "Location has not yet been independently verified";
 
   return (

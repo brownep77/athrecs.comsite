@@ -1,0 +1,4619 @@
+{
+  "checkedAt": "2026-10-19",
+  "startDate": "2026-10-19",
+  "endDate": "2027-12-31",
+  "recoveredCommit": "0c92442547aae36251e8bf38743acecb7fd03417",
+  "workflowRun": "39234684807",
+  "officialTrackMeetings": 783,
+  "added": [
+    {
+      "sourceId": "7247675",
+      "slug": "wa-salalah-athletics-challenger-7247675",
+      "days": 1
+    },
+    {
+      "sourceId": "7247545",
+      "slug": "wa-irish-championships-7247545",
+      "days": 2
+    },
+    {
+      "sourceId": "7247544",
+      "slug": "wa-polish-championships-7247544",
+      "days": 3
+    },
+    {
+      "sourceId": "7246798",
+      "slug": "wa-national-aai-games-7246798",
+      "days": 2
+    },
+    {
+      "sourceId": "7247450",
+      "slug": "wa-national-juvenile-championships-u18-7247450",
+      "days": 1
+    },
+    {
+      "sourceId": "7247543",
+      "slug": "wa-national-juvenile-championships-u20-7247543",
+      "days": 1
+    },
+    {
+      "sourceId": "7246830",
+      "slug": "wa-national-league-preliminary-round-7246830",
+      "days": 1
+    },
+    {
+      "sourceId": "7247511",
+      "slug": "wa-saudi-athletics-grand-prix-7247511",
+      "days": 1
+    },
+    {
+      "sourceId": "7247455",
+      "slug": "wa-polish-u23-championships-7247455",
+      "days": 2
+    },
+    {
+      "sourceId": "7246794",
+      "slug": "wa-irish-u20-championships-7246794",
+      "days": 2
+    },
+    {
+      "sourceId": "7246795",
+      "slug": "wa-irish-u23-championships-7246795",
+      "days": 2
+    },
+    {
+      "sourceId": "7247646",
+      "slug": "wa-polish-u20-championships-7247646",
+      "days": 3
+    },
+    {
+      "sourceId": "7247644",
+      "slug": "wa-czech-u18-championships-7247644",
+      "days": 2
+    },
+    {
+      "sourceId": "7247643",
+      "slug": "wa-czech-u20-championships-7247643",
+      "days": 2
+    },
+    {
+      "sourceId": "7246793",
+      "slug": "wa-national-juvenile-championships-7246793",
+      "days": 1
+    },
+    {
+      "sourceId": "7247193",
+      "slug": "wa-national-juvenile-championships-day-1-u18-7247193",
+      "days": 1
+    },
+    {
+      "sourceId": "7246842",
+      "slug": "wa-55-internationales-laz-meeting-rhede-7246842",
+      "days": 1
+    },
+    {
+      "sourceId": "7246634",
+      "slug": "wa-bermuda-championships-7246634",
+      "days": 2
+    },
+    {
+      "sourceId": "7247650",
+      "slug": "wa-czech-mix-relay-championships-7247650",
+      "days": 2
+    },
+    {
+      "sourceId": "7247649",
+      "slug": "wa-czech-u18-combined-events-championships-7247649",
+      "days": 2
+    },
+    {
+      "sourceId": "7247648",
+      "slug": "wa-czech-u20-combined-events-championships-7247648",
+      "days": 2
+    },
+    {
+      "sourceId": "7247746",
+      "slug": "wa-vilnius-5000-m-7247746",
+      "days": 1
+    },
+    {
+      "sourceId": "7247192",
+      "slug": "wa-yqr-twilight-1-7247192",
+      "days": 1
+    },
+    {
+      "sourceId": "7246828",
+      "slug": "wa-championnats-de-france-ffsu-7246828",
+      "days": 2
+    },
+    {
+      "sourceId": "7247189",
+      "slug": "wa-yxe-twilight-meet-4-7247189",
+      "days": 1
+    },
+    {
+      "sourceId": "7247188",
+      "slug": "wa-yxe-twilight-meet-3-7247188",
+      "days": 1
+    },
+    {
+      "sourceId": "7246786",
+      "slug": "wa-wt-last-chance-meet-7246786",
+      "days": 1
+    },
+    {
+      "sourceId": "7247552",
+      "slug": "wa-mid-american-conference-outdoor-track-field-championships-7247552",
+      "days": 3
+    },
+    {
+      "sourceId": "7246801",
+      "slug": "wa-per-halle-invitational-7246801",
+      "days": 1
+    },
+    {
+      "sourceId": "7247187",
+      "slug": "wa-yxe-twilight-meet-2-7247187",
+      "days": 1
+    },
+    {
+      "sourceId": "7246199",
+      "slug": "wa-horizon-league-outdoor-track-field-championships-7246199",
+      "days": 3
+    },
+    {
+      "sourceId": "7246392",
+      "slug": "wa-metro-outdoor-track-field-championships-7246392",
+      "days": 2
+    },
+    {
+      "sourceId": "7247454",
+      "slug": "wa-big-east-outdoor-track-and-field-championships-7247454",
+      "days": 3
+    },
+    {
+      "sourceId": "7247456",
+      "slug": "wa-gary-wieneke-memorial-7247456",
+      "days": 2
+    },
+    {
+      "sourceId": "7246784",
+      "slug": "wa-northeast-10-conference-outdoor-track-field-championships-7246784",
+      "days": 2
+    },
+    {
+      "sourceId": "7246593",
+      "slug": "wa-occidental-invitational-7246593",
+      "days": 1
+    },
+    {
+      "sourceId": "7247575",
+      "slug": "wa-southland-conference-outdoor-track-championships-7247575",
+      "days": 3
+    },
+    {
+      "sourceId": "7246785",
+      "slug": "wa-billy-hayes-invitational-7246785",
+      "days": 1
+    },
+    {
+      "sourceId": "7247186",
+      "slug": "wa-yxe-twilight-meet-1-7247186",
+      "days": 1
+    },
+    {
+      "sourceId": "7247679",
+      "slug": "wa-jesse-owens-track-field-classic-7247679",
+      "days": 2
+    },
+    {
+      "sourceId": "7246192",
+      "slug": "wa-rock-chalk-classic-7246192",
+      "days": 2
+    },
+    {
+      "sourceId": "7246552",
+      "slug": "wa-templemore-throws-weekend-7246552",
+      "days": 2
+    },
+    {
+      "sourceId": "7246431",
+      "slug": "wa-charlotte-invitational-7246431",
+      "days": 2
+    },
+    {
+      "sourceId": "7247651",
+      "slug": "wa-czech-winter-throwing-championships-7247651",
+      "days": 1
+    },
+    {
+      "sourceId": "7246200",
+      "slug": "wa-ucsb-invite-7246200",
+      "days": 2
+    },
+    {
+      "sourceId": "7247560",
+      "slug": "wa-australian-u15-championships-7247560",
+      "days": 6
+    },
+    {
+      "sourceId": "7247445",
+      "slug": "wa-australian-u16-championships-7247445",
+      "days": 6
+    },
+    {
+      "sourceId": "7247561",
+      "slug": "wa-australian-u17-championships-7247561",
+      "days": 6
+    },
+    {
+      "sourceId": "7247449",
+      "slug": "wa-australian-u18-championships-7247449",
+      "days": 6
+    },
+    {
+      "sourceId": "7247446",
+      "slug": "wa-australian-u20-championships-7247446",
+      "days": 6
+    },
+    {
+      "sourceId": "7246389",
+      "slug": "wa-unf-invite-7246389",
+      "days": 4
+    },
+    {
+      "sourceId": "7247285",
+      "slug": "wa-commodore-grand-prix-7247285",
+      "days": 1
+    },
+    {
+      "sourceId": "7246633",
+      "slug": "wa-trofeu-adhemar-ferreira-da-silva-loterias-caixa-de-atletismo-7246633",
+      "days": 3
+    },
+    {
+      "sourceId": "7246821",
+      "slug": "wa-joe-walker-invitational-7246821",
+      "days": 2
+    },
+    {
+      "sourceId": "7246770",
+      "slug": "wa-nordrhein-meisterschaften-langstrecke-x400m-mixed-7246770",
+      "days": 1
+    },
+    {
+      "sourceId": "7246198",
+      "slug": "wa-south-florida-invitational-7246198",
+      "days": 2
+    },
+    {
+      "sourceId": "7246820",
+      "slug": "wa-wt-jo-meaker-classic-multi-7246820",
+      "days": 3
+    },
+    {
+      "sourceId": "7246366",
+      "slug": "wa-australian-championships-7246366",
+      "days": 4
+    },
+    {
+      "sourceId": "7246434",
+      "slug": "wa-victor-lopez-classic-7246434",
+      "days": 3
+    },
+    {
+      "sourceId": "7246655",
+      "slug": "wa-vmc-meet-5-7246655",
+      "days": 1
+    },
+    {
+      "sourceId": "7247574",
+      "slug": "wa-atledo-werpwedstrijd-7247574",
+      "days": 1
+    },
+    {
+      "sourceId": "7246799",
+      "slug": "wa-national-juvenile-championships-day-3-u16-7246799",
+      "days": 1
+    },
+    {
+      "sourceId": "7246797",
+      "slug": "wa-national-juvenile-indoor-championships-day-3-u18-7246797",
+      "days": 1
+    },
+    {
+      "sourceId": "7246796",
+      "slug": "wa-national-juvenile-indoor-championships-day-3-u20-7246796",
+      "days": 1
+    },
+    {
+      "sourceId": "7246207",
+      "slug": "wa-ogif-inne-7246207",
+      "days": 2
+    },
+    {
+      "sourceId": "7246834",
+      "slug": "wa-ontario-indoor-u16-u20-track-field-championships-7246834",
+      "days": 2
+    },
+    {
+      "sourceId": "7246433",
+      "slug": "wa-charlotte-49er-classic-7246433",
+      "days": 3
+    },
+    {
+      "sourceId": "7247347",
+      "slug": "wa-irish-winter-throwing-championships-7247347",
+      "days": 1
+    },
+    {
+      "sourceId": "7246161",
+      "slug": "wa-jayhawk-spring-fling-7246161",
+      "days": 1
+    },
+    {
+      "sourceId": "7246819",
+      "slug": "wa-ole-miss-classic-7246819",
+      "days": 2
+    },
+    {
+      "sourceId": "7246197",
+      "slug": "wa-usf-alumni-invitational-7246197",
+      "days": 2
+    },
+    {
+      "sourceId": "7246818",
+      "slug": "wa-west-texas-relays-7246818",
+      "days": 2
+    },
+    {
+      "sourceId": "7246698",
+      "slug": "wa-national-juvenile-championships-day-1-2-u16-7246698",
+      "days": 2
+    },
+    {
+      "sourceId": "7246692",
+      "slug": "wa-national-juvenile-championships-day-1-2-u18-7246692",
+      "days": 2
+    },
+    {
+      "sourceId": "7246792",
+      "slug": "wa-national-juveniles-day-1-2-u20-7246792",
+      "days": 2
+    },
+    {
+      "sourceId": "7247400",
+      "slug": "wa-swedish-u20-indoor-championships-7247400",
+      "days": 2
+    },
+    {
+      "sourceId": "7247410",
+      "slug": "wa-swedish-u23-indoor-championships-7247410",
+      "days": 2
+    },
+    {
+      "sourceId": "7247581",
+      "slug": "wa-tasmanian-track-and-field-championships-7247581",
+      "days": 9
+    },
+    {
+      "sourceId": "7247742",
+      "slug": "wa-national-indoor-athletics-grand-prix-3-7247742",
+      "days": 2
+    },
+    {
+      "sourceId": "7246631",
+      "slug": "wa-occidental-distance-carnival-spring-break-classic-7246631",
+      "days": 1
+    },
+    {
+      "sourceId": "7247185",
+      "slug": "wa-track-tumble-twilight-meet-7247185",
+      "days": 1
+    },
+    {
+      "sourceId": "7247755",
+      "slug": "wa-twin-towers-classic-meet-7247755",
+      "days": 1
+    },
+    {
+      "sourceId": "7247741",
+      "slug": "wa-national-indoor-athletics-grand-prix-2-7247741",
+      "days": 2
+    },
+    {
+      "sourceId": "7247399",
+      "slug": "wa-swedish-u17-indoor-championships-7247399",
+      "days": 2
+    },
+    {
+      "sourceId": "7247389",
+      "slug": "wa-aut-pole-vault-7247389",
+      "days": 1
+    },
+    {
+      "sourceId": "7246196",
+      "slug": "wa-gaucho-relays-7246196",
+      "days": 1
+    },
+    {
+      "sourceId": "7247078",
+      "slug": "wa-valencia-u20-short-track-championships-7247078",
+      "days": 1
+    },
+    {
+      "sourceId": "7247740",
+      "slug": "wa-national-indoor-athletics-grand-prix-1-7247740",
+      "days": 2
+    },
+    {
+      "sourceId": "7246761",
+      "slug": "wa-mid-week-5-7246761",
+      "days": 1
+    },
+    {
+      "sourceId": "7247614",
+      "slug": "wa-czech-u18-indoor-championships-7247614",
+      "days": 2
+    },
+    {
+      "sourceId": "7247613",
+      "slug": "wa-czech-u20-indoor-championships-7247613",
+      "days": 2
+    },
+    {
+      "sourceId": "7246194",
+      "slug": "wa-horizon-league-indoor-track-field-championships-7246194",
+      "days": 2
+    },
+    {
+      "sourceId": "7247559",
+      "slug": "wa-landmark-indoor-track-field-championships-7247559",
+      "days": 2
+    },
+    {
+      "sourceId": "7247377",
+      "slug": "wa-air-loughborough-7247377",
+      "days": 1
+    },
+    {
+      "sourceId": "7247345",
+      "slug": "wa-big-east-indoor-track-and-field-championships-7247345",
+      "days": 2
+    },
+    {
+      "sourceId": "7247215",
+      "slug": "wa-campeonato-euskadi-u20-u18-short-track-7247215",
+      "days": 1
+    },
+    {
+      "sourceId": "7247330",
+      "slug": "wa-ii-jornada-de-lancamentos-epoca-7247330",
+      "days": 1
+    },
+    {
+      "sourceId": "7247573",
+      "slug": "wa-lone-star-conference-indoor-championships-7247573",
+      "days": 2
+    },
+    {
+      "sourceId": "7247572",
+      "slug": "wa-mid-american-conference-indoor-track-field-championships-7247572",
+      "days": 2
+    },
+    {
+      "sourceId": "7247576",
+      "slug": "wa-southland-conference-indoor-championships-7247576",
+      "days": 2
+    },
+    {
+      "sourceId": "7247077",
+      "slug": "wa-valencia-short-track-u18-championships-7247077",
+      "days": 1
+    },
+    {
+      "sourceId": "7247378",
+      "slug": "wa-vault-manchester-7247378",
+      "days": 1
+    },
+    {
+      "sourceId": "7246760",
+      "slug": "wa-mid-week-4-7246760",
+      "days": 1
+    },
+    {
+      "sourceId": "7246783",
+      "slug": "wa-northeast-10-conference-indoor-track-field-championship-7246783",
+      "days": 2
+    },
+    {
+      "sourceId": "7247678",
+      "slug": "wa-czech-indoor-combined-events-championships-7247678",
+      "days": 2
+    },
+    {
+      "sourceId": "7247409",
+      "slug": "wa-irish-senior-indoor-championships-7247409",
+      "days": 2
+    },
+    {
+      "sourceId": "7247451",
+      "slug": "wa-swedish-indoor-championships-7247451",
+      "days": 3
+    },
+    {
+      "sourceId": "7247398",
+      "slug": "wa-swedish-u18-indoor-championships-7247398",
+      "days": 2
+    },
+    {
+      "sourceId": "7246430",
+      "slug": "wa-asics-last-chance-invitational-7246430",
+      "days": 1
+    },
+    {
+      "sourceId": "7247062",
+      "slug": "wa-winter-championships-seniors-7247062",
+      "days": 1
+    },
+    {
+      "sourceId": "7247064",
+      "slug": "wa-winter-championships-u16-7247064",
+      "days": 1
+    },
+    {
+      "sourceId": "7247063",
+      "slug": "wa-winter-championships-u18-7247063",
+      "days": 1
+    },
+    {
+      "sourceId": "7247061",
+      "slug": "wa-winter-championships-u20-7247061",
+      "days": 1
+    },
+    {
+      "sourceId": "7247060",
+      "slug": "wa-winter-championships-u23-7247060",
+      "days": 1
+    },
+    {
+      "sourceId": "7246360",
+      "slug": "wa-colorado-last-chance-7246360",
+      "days": 1
+    },
+    {
+      "sourceId": "7246654",
+      "slug": "wa-vmc-meet-4-7246654",
+      "days": 1
+    },
+    {
+      "sourceId": "7247155",
+      "slug": "wa-tuesday-indoor-track-7247155",
+      "days": 1
+    },
+    {
+      "sourceId": "7246363",
+      "slug": "wa-tyrvinglekene-inne-7246363",
+      "days": 2
+    },
+    {
+      "sourceId": "7247353",
+      "slug": "wa-cochrane-elite-invitational-7247353",
+      "days": 1
+    },
+    {
+      "sourceId": "7246127",
+      "slug": "wa-darren-young-classic-7246127",
+      "days": 2
+    },
+    {
+      "sourceId": "7246791",
+      "slug": "wa-national-indoor-league-final-7246791",
+      "days": 1
+    },
+    {
+      "sourceId": "7247066",
+      "slug": "wa-pre-season-3-u16-seniors-7247066",
+      "days": 1
+    },
+    {
+      "sourceId": "7246753",
+      "slug": "wa-run-fly-meeting-7246753",
+      "days": 1
+    },
+    {
+      "sourceId": "7247745",
+      "slug": "wa-clemson-tiger-paw-invitational-7247745",
+      "days": 1
+    },
+    {
+      "sourceId": "7246824",
+      "slug": "wa-hal-brown-last-chance-7246824",
+      "days": 1
+    },
+    {
+      "sourceId": "7246759",
+      "slug": "wa-mid-week-3-7246759",
+      "days": 1
+    },
+    {
+      "sourceId": "7246367",
+      "slug": "wa-track-field-live-5-7246367",
+      "days": 1
+    },
+    {
+      "sourceId": "7246212",
+      "slug": "wa-mondo-indoor-games-7246212",
+      "days": 3
+    },
+    {
+      "sourceId": "7246432",
+      "slug": "wa-asics-camel-city-distance-7246432",
+      "days": 1
+    },
+    {
+      "sourceId": "7247325",
+      "slug": "wa-big-apple-invitational-7247325",
+      "days": 1
+    },
+    {
+      "sourceId": "7246359",
+      "slug": "wa-colorado-classic-7246359",
+      "days": 2
+    },
+    {
+      "sourceId": "7247447",
+      "slug": "wa-high-jump-meeting-ljubljana-7247447",
+      "days": 1
+    },
+    {
+      "sourceId": "7246789",
+      "slug": "wa-irish-u20-indoor-championships-7246789",
+      "days": 1
+    },
+    {
+      "sourceId": "7246790",
+      "slug": "wa-irish-u23-indoor-championships-7246790",
+      "days": 1
+    },
+    {
+      "sourceId": "7247354",
+      "slug": "wa-penn-classic-7247354",
+      "days": 2
+    },
+    {
+      "sourceId": "7247065",
+      "slug": "wa-pre-season-2-u16-seniors-7247065",
+      "days": 1
+    },
+    {
+      "sourceId": "7247647",
+      "slug": "wa-sparnord-arena-indoor-3-7247647",
+      "days": 1
+    },
+    {
+      "sourceId": "7247076",
+      "slug": "wa-valencia-short-track-championships-7247076",
+      "days": 1
+    },
+    {
+      "sourceId": "7246435",
+      "slug": "wa-asics-camel-city-sprints-7246435",
+      "days": 1
+    },
+    {
+      "sourceId": "7246832",
+      "slug": "wa-25-o-triatlo-tecnico-final-nacional-7246832",
+      "days": 1
+    },
+    {
+      "sourceId": "7247196",
+      "slug": "wa-campeonato-euskadi-absoluto-short-track-3000m-7247196",
+      "days": 1
+    },
+    {
+      "sourceId": "7247408",
+      "slug": "wa-loughborough-indoor-open-7247408",
+      "days": 2
+    },
+    {
+      "sourceId": "7246769",
+      "slug": "wa-nordrhein-meisterschaften-halle-winterwurf-u18-u20-manner-frau-7246769",
+      "days": 2
+    },
+    {
+      "sourceId": "7247617",
+      "slug": "wa-prebor-prahy-v-hale-m-z-j-jky-dci-dky-7247617",
+      "days": 2
+    },
+    {
+      "sourceId": "7247085",
+      "slug": "wa-sound-invite-7247085",
+      "days": 1
+    },
+    {
+      "sourceId": "7247059",
+      "slug": "wa-zsaz-regional-championships-7247059",
+      "days": 1
+    },
+    {
+      "sourceId": "7247084",
+      "slug": "wa-deloss-dodds-invitational-7247084",
+      "days": 2
+    },
+    {
+      "sourceId": "7247390",
+      "slug": "wa-dr-rick-mcguire-invitational-7247390",
+      "days": 2
+    },
+    {
+      "sourceId": "7247083",
+      "slug": "wa-pnc-lenny-lyles-invitational-7247083",
+      "days": 2
+    },
+    {
+      "sourceId": "7246653",
+      "slug": "wa-vmc-meet-3-7246653",
+      "days": 1
+    },
+    {
+      "sourceId": "7247551",
+      "slug": "wa-wichita-state-coach-wilson-invitational-7247551",
+      "days": 2
+    },
+    {
+      "sourceId": "7247404",
+      "slug": "wa-york-open-7247404",
+      "days": 2
+    },
+    {
+      "sourceId": "7247744",
+      "slug": "wa-bob-pollock-invitational-7247744",
+      "days": 1
+    },
+    {
+      "sourceId": "7246831",
+      "slug": "wa-championnats-de-france-universitaire-d-athletisme-indoor-7246831",
+      "days": 1
+    },
+    {
+      "sourceId": "7247622",
+      "slug": "wa-championnats-de-france-universitaire-de-lancers-longs-7247622",
+      "days": 1
+    },
+    {
+      "sourceId": "7246428",
+      "slug": "wa-asics-college-classic-7246428",
+      "days": 1
+    },
+    {
+      "sourceId": "7247327",
+      "slug": "wa-kampioenschap-van-vlaanderen-alle-categorieen-7247327",
+      "days": 1
+    },
+    {
+      "sourceId": "7247571",
+      "slug": "wa-westinghouse-inlagda-gurkspel-7247571",
+      "days": 2
+    },
+    {
+      "sourceId": "7247245",
+      "slug": "wa-antequera-indoor-match-7247245",
+      "days": 1
+    },
+    {
+      "sourceId": "7247344",
+      "slug": "wa-bob-teel-invitational-7247344",
+      "days": 1
+    },
+    {
+      "sourceId": "7247184",
+      "slug": "wa-knights-of-columbus-games-7247184",
+      "days": 3
+    },
+    {
+      "sourceId": "7247397",
+      "slug": "wa-kraftmatningen-17-ar-7247397",
+      "days": 1
+    },
+    {
+      "sourceId": "7246788",
+      "slug": "wa-national-indoor-league-rd-2-7246788",
+      "days": 1
+    },
+    {
+      "sourceId": "7247086",
+      "slug": "wa-nyc-indoor-grand-prix-7247086",
+      "days": 2
+    },
+    {
+      "sourceId": "7246827",
+      "slug": "wa-sharon-anderson-memorial-7246827",
+      "days": 1
+    },
+    {
+      "sourceId": "7247580",
+      "slug": "wa-sparnord-arena-indoor-2-7247580",
+      "days": 1
+    },
+    {
+      "sourceId": "7247075",
+      "slug": "wa-valencia-short-track-u23-championships-7247075",
+      "days": 1
+    },
+    {
+      "sourceId": "7246429",
+      "slug": "wa-mondo-fast-friday-invitational-7246429",
+      "days": 1
+    },
+    {
+      "sourceId": "7247412",
+      "slug": "wa-new-york-international-showcase-7247412",
+      "days": 1
+    },
+    {
+      "sourceId": "7247558",
+      "slug": "wa-talvine-heitjate-seeriavoistlus-iii-etapp-7247558",
+      "days": 1
+    },
+    {
+      "sourceId": "7247358",
+      "slug": "wa-nike-meeting-7247358",
+      "days": 1
+    },
+    {
+      "sourceId": "7246427",
+      "slug": "wa-asics-college-sunday-showdown-7246427",
+      "days": 1
+    },
+    {
+      "sourceId": "7247214",
+      "slug": "wa-campeonato-euskadi-absoluto-short-track-7247214",
+      "days": 2
+    },
+    {
+      "sourceId": "7247452",
+      "slug": "wa-ceska-tycka-7247452",
+      "days": 1
+    },
+    {
+      "sourceId": "7247324",
+      "slug": "wa-kampioenschap-van-vlaanderen-u18-u16-7247324",
+      "days": 1
+    },
+    {
+      "sourceId": "7247570",
+      "slug": "wa-orebro-indoor-games-7247570",
+      "days": 2
+    },
+    {
+      "sourceId": "7247608",
+      "slug": "wa-tagi-meeting-7247608",
+      "days": 1
+    },
+    {
+      "sourceId": "7246659",
+      "slug": "wa-u18-t-m-master-horden-sprint-ver-kogel-7246659",
+      "days": 1
+    },
+    {
+      "sourceId": "7247058",
+      "slug": "wa-3e-stimulus-trio-indoor-7247058",
+      "days": 1
+    },
+    {
+      "sourceId": "7246787",
+      "slug": "wa-aai-games-7246787",
+      "days": 1
+    },
+    {
+      "sourceId": "7247510",
+      "slug": "wa-alana-boyd-shield-7247510",
+      "days": 1
+    },
+    {
+      "sourceId": "7246358",
+      "slug": "wa-colorado-invite-7246358",
+      "days": 2
+    },
+    {
+      "sourceId": "7246823",
+      "slug": "wa-fred-foot-classic-7246823",
+      "days": 2
+    },
+    {
+      "sourceId": "7246817",
+      "slug": "wa-indiana-invitational-7246817",
+      "days": 2
+    },
+    {
+      "sourceId": "7246764",
+      "slug": "wa-indoor-jump-n-run-7246764",
+      "days": 1
+    },
+    {
+      "sourceId": "7247392",
+      "slug": "wa-mckinnon-shield-8-7247392",
+      "days": 1
+    },
+    {
+      "sourceId": "7246426",
+      "slug": "wa-mondo-college-invitational-7246426",
+      "days": 1
+    },
+    {
+      "sourceId": "7246882",
+      "slug": "wa-pre-season-1-u16-seniors-7246882",
+      "days": 1
+    },
+    {
+      "sourceId": "7247618",
+      "slug": "wa-prebor-prahy-zactva-mladeze-a-dospelych-v-halovych-vicebojich-7247618",
+      "days": 2
+    },
+    {
+      "sourceId": "7247391",
+      "slug": "wa-show-me-showdown-7247391",
+      "days": 1
+    },
+    {
+      "sourceId": "7247393",
+      "slug": "wa-fighting-illini-open-7247393",
+      "days": 1
+    },
+    {
+      "sourceId": "7247213",
+      "slug": "wa-jimmy-carnes-7247213",
+      "days": 2
+    },
+    {
+      "sourceId": "7246763",
+      "slug": "wa-mid-week-2-7246763",
+      "days": 1
+    },
+    {
+      "sourceId": "7246327",
+      "slug": "wa-track-field-live-3-7246327",
+      "days": 1
+    },
+    {
+      "sourceId": "7247748",
+      "slug": "wa-22-sparkassen-hallen-hochsprungmeeting-der-lg-kreis-gutersloh-7247748",
+      "days": 1
+    },
+    {
+      "sourceId": "7247747",
+      "slug": "wa-7-frankfurter-wintercup-7247747",
+      "days": 2
+    },
+    {
+      "sourceId": "7246762",
+      "slug": "wa-glynis-nunn-shield-7246762",
+      "days": 3
+    },
+    {
+      "sourceId": "7246702",
+      "slug": "wa-ka-2-spelen-7246702",
+      "days": 2
+    },
+    {
+      "sourceId": "7247394",
+      "slug": "wa-alexis-jarrett-invitational-7247394",
+      "days": 1
+    },
+    {
+      "sourceId": "7247221",
+      "slug": "wa-campeonato-euskadi-u20-u18-short-track-3-000m-7247221",
+      "days": 1
+    },
+    {
+      "sourceId": "7246632",
+      "slug": "wa-championnats-provinciaux-indoor-hainaut-liege-luxembourg-7246632",
+      "days": 1
+    },
+    {
+      "sourceId": "7246364",
+      "slug": "wa-distriktskampen-7246364",
+      "days": 1
+    },
+    {
+      "sourceId": "7246757",
+      "slug": "wa-national-indoor-league-r1-7246757",
+      "days": 1
+    },
+    {
+      "sourceId": "7247073",
+      "slug": "wa-nta-nw-interclub-round-7a-7247073",
+      "days": 1
+    },
+    {
+      "sourceId": "7246357",
+      "slug": "wa-potts-invitational-7246357",
+      "days": 2
+    },
+    {
+      "sourceId": "7246421",
+      "slug": "wa-rush-athletic-club-track-and-field-meeting-7246421",
+      "days": 1
+    },
+    {
+      "sourceId": "7246213",
+      "slug": "wa-sprintertraffen-7246213",
+      "days": 1
+    },
+    {
+      "sourceId": "7247677",
+      "slug": "wa-eric-heins-season-opener-7247677",
+      "days": 1
+    },
+    {
+      "sourceId": "7247322",
+      "slug": "wa-pk-indoor-wvl-ovl-lim-7247322",
+      "days": 1
+    },
+    {
+      "sourceId": "7247379",
+      "slug": "wa-pole-vault-gp-tallinn-7247379",
+      "days": 1
+    },
+    {
+      "sourceId": "7247346",
+      "slug": "wa-aleksander-tsikini-auhinnavoistlus-7247346",
+      "days": 1
+    },
+    {
+      "sourceId": "7247326",
+      "slug": "wa-pk-antwerpen-en-vlaams-brabant-7247326",
+      "days": 1
+    },
+    {
+      "sourceId": "7247321",
+      "slug": "wa-pk-indoor-limburg-sprint-en-kampnrs-7247321",
+      "days": 1
+    },
+    {
+      "sourceId": "7246356",
+      "slug": "wa-new-year-s-shot-put-and-throws-7246356",
+      "days": 1
+    },
+    {
+      "sourceId": "7247569",
+      "slug": "wa-nyarskastet-7247569",
+      "days": 1
+    },
+    {
+      "sourceId": "7247313",
+      "slug": "wa-stax-eindejaarsmeeting-7247313",
+      "days": 1
+    },
+    {
+      "sourceId": "7247388",
+      "slug": "wa-provas-de-preparacao-7247388",
+      "days": 1
+    },
+    {
+      "sourceId": "7247195",
+      "slug": "wa-tresmiles-anoeta-7247195",
+      "days": 1
+    },
+    {
+      "sourceId": "7246454",
+      "slug": "wa-invite-pole-vault-rishon-le-zion-7246454",
+      "days": 1
+    },
+    {
+      "sourceId": "7247017",
+      "slug": "wa-try-out-games-7247017",
+      "days": 1
+    },
+    {
+      "sourceId": "7246594",
+      "slug": "wa-criterium-lbfa-de-pentathlon-de-marche-open-7246594",
+      "days": 1
+    },
+    {
+      "sourceId": "7247082",
+      "slug": "wa-encuentro-atletissimo-christmas-7247082",
+      "days": 1
+    },
+    {
+      "sourceId": "7247191",
+      "slug": "wa-indoor-track-run-swiateczna-paczka-7247191",
+      "days": 1
+    },
+    {
+      "sourceId": "7246840",
+      "slug": "wa-v-trofeu-nadal-7246840",
+      "days": 1
+    },
+    {
+      "sourceId": "7246752",
+      "slug": "wa-xmas-cup-7246752",
+      "days": 1
+    },
+    {
+      "sourceId": "7246826",
+      "slug": "wa-crepuscule-hivernale-7246826",
+      "days": 1
+    },
+    {
+      "sourceId": "7247220",
+      "slug": "wa-meeting-sprint-acl44-7247220",
+      "days": 1
+    },
+    {
+      "sourceId": "7247557",
+      "slug": "wa-talvine-heitjate-seeriavoistlus-i-etapp-7247557",
+      "days": 1
+    },
+    {
+      "sourceId": "7247401",
+      "slug": "wa-bannister-600m-7247401",
+      "days": 1
+    },
+    {
+      "sourceId": "7246652",
+      "slug": "wa-vmc-meet-2-7246652",
+      "days": 1
+    },
+    {
+      "sourceId": "7247403",
+      "slug": "wa-dsa-elit-2-7247403",
+      "days": 1
+    },
+    {
+      "sourceId": "7246754",
+      "slug": "wa-adventscup-7246754",
+      "days": 1
+    },
+    {
+      "sourceId": "7246589",
+      "slug": "wa-competition-indoor-du-moha-tc-7246589",
+      "days": 1
+    },
+    {
+      "sourceId": "7247652",
+      "slug": "wa-iv-evodemx-athletics-meet-7247652",
+      "days": 1
+    },
+    {
+      "sourceId": "7247079",
+      "slug": "wa-meeting-regional-indoor-rcn-7247079",
+      "days": 1
+    },
+    {
+      "sourceId": "7247444",
+      "slug": "wa-regio-1-7247444",
+      "days": 1
+    },
+    {
+      "sourceId": "7247114",
+      "slug": "wa-skn-athletics-development-meet-5-7247114",
+      "days": 1
+    },
+    {
+      "sourceId": "7246658",
+      "slug": "wa-u18-t-m-master-hoog-hinkstap-polshoog-7246658",
+      "days": 1
+    },
+    {
+      "sourceId": "7247754",
+      "slug": "wa-18-run-jump-7247754",
+      "days": 1
+    },
+    {
+      "sourceId": "7247182",
+      "slug": "wa-december-field-fest-7247182",
+      "days": 1
+    },
+    {
+      "sourceId": "7247190",
+      "slug": "wa-indoor-track-run-lekkie-miko-ajki-atletyczne-7247190",
+      "days": 1
+    },
+    {
+      "sourceId": "7246751",
+      "slug": "wa-jahresabschlusssportfest-dresdner-sc-1898-7246751",
+      "days": 1
+    },
+    {
+      "sourceId": "7247054",
+      "slug": "wa-nta-nw-interclub-round-5b-7247054",
+      "days": 1
+    },
+    {
+      "sourceId": "7246555",
+      "slug": "wa-sk-fortis-jouluvoistlus-7246555",
+      "days": 1
+    },
+    {
+      "sourceId": "7247579",
+      "slug": "wa-sparnord-arena-indoor-1-7247579",
+      "days": 1
+    },
+    {
+      "sourceId": "7247578",
+      "slug": "wa-sparnord-arena-outdoor-7247578",
+      "days": 1
+    },
+    {
+      "sourceId": "7247396",
+      "slug": "wa-treloar-shield-final-7247396",
+      "days": 1
+    },
+    {
+      "sourceId": "7246425",
+      "slug": "wa-twas-the-meet-before-christmas-7246425",
+      "days": 1
+    },
+    {
+      "sourceId": "7247712",
+      "slug": "wa-23rd-national-sports-festival-7247712",
+      "days": 8
+    },
+    {
+      "sourceId": "7246816",
+      "slug": "wa-indiana-early-bird-7246816",
+      "days": 1
+    },
+    {
+      "sourceId": "7247385",
+      "slug": "wa-momentum-sports-friday-night-sprints-7247385",
+      "days": 1
+    },
+    {
+      "sourceId": "7246588",
+      "slug": "wa-zatopek-10-7246588",
+      "days": 1
+    },
+    {
+      "sourceId": "7247411",
+      "slug": "wa-bobcat-preview-7247411",
+      "days": 1
+    },
+    {
+      "sourceId": "7247217",
+      "slug": "wa-nsw-10-000m-walk-championships-7247217",
+      "days": 1
+    },
+    {
+      "sourceId": "7247402",
+      "slug": "wa-dsa-elit-1-7247402",
+      "days": 1
+    },
+    {
+      "sourceId": "7246424",
+      "slug": "wa-asics-early-bird-invitational-7246424",
+      "days": 1
+    },
+    {
+      "sourceId": "7246590",
+      "slug": "wa-challenge-provincial-bpm-indoor-tc-7246590",
+      "days": 1
+    },
+    {
+      "sourceId": "7247395",
+      "slug": "wa-greg-page-relays-multi-7247395",
+      "days": 2
+    },
+    {
+      "sourceId": "7247224",
+      "slug": "wa-i-jornada-de-lancamentos-epoca-7247224",
+      "days": 1
+    },
+    {
+      "sourceId": "7247684",
+      "slug": "wa-international-youth-meet-of-champions-7247684",
+      "days": 2
+    },
+    {
+      "sourceId": "7246620",
+      "slug": "wa-julruschen-7246620",
+      "days": 2
+    },
+    {
+      "sourceId": "7247407",
+      "slug": "wa-klaipeda-international-competition-arena-cup-7247407",
+      "days": 2
+    },
+    {
+      "sourceId": "7246636",
+      "slug": "wa-lviii-juegos-interpolitecnicos-de-atletismo-7246636",
+      "days": 2
+    },
+    {
+      "sourceId": "7247621",
+      "slug": "wa-sibir-and-ural-cities-match-7247621",
+      "days": 3
+    },
+    {
+      "sourceId": "7246453",
+      "slug": "wa-valery-kogan-memorial-meeting-7246453",
+      "days": 1
+    },
+    {
+      "sourceId": "7247383",
+      "slug": "wa-northern-athletics-december-indoor-open-7247383",
+      "days": 1
+    },
+    {
+      "sourceId": "7247181",
+      "slug": "wa-pr-first-chance-meet-7247181",
+      "days": 1
+    },
+    {
+      "sourceId": "7247180",
+      "slug": "wa-regina-friendship-games-7247180",
+      "days": 1
+    },
+    {
+      "sourceId": "7246825",
+      "slug": "wa-rouge-et-or-invitation-7246825",
+      "days": 1
+    },
+    {
+      "sourceId": "7246621",
+      "slug": "wa-tomtespelen-7246621",
+      "days": 1
+    },
+    {
+      "sourceId": "7247355",
+      "slug": "wa-visit-winston-salem-college-kickoff-7247355",
+      "days": 1
+    },
+    {
+      "sourceId": "7247577",
+      "slug": "wa-zatopek-track-challenge-7247577",
+      "days": 1
+    },
+    {
+      "sourceId": "7247550",
+      "slug": "wa-clemson-opener-7247550",
+      "days": 1
+    },
+    {
+      "sourceId": "7247323",
+      "slug": "wa-fastrack-season-opener-7247323",
+      "days": 1
+    },
+    {
+      "sourceId": "7246697",
+      "slug": "wa-international-1500m-toa-baja-race-7246697",
+      "days": 1
+    },
+    {
+      "sourceId": "7247555",
+      "slug": "wa-iranian-club-championships-third-leg-men-7247555",
+      "days": 3
+    },
+    {
+      "sourceId": "7247554",
+      "slug": "wa-iranian-club-championships-third-leg-women-7247554",
+      "days": 3
+    },
+    {
+      "sourceId": "7246618",
+      "slug": "wa-maraton-la-monumental-7246618",
+      "days": 1
+    },
+    {
+      "sourceId": "7247620",
+      "slug": "wa-sports-school-match-7247620",
+      "days": 1
+    },
+    {
+      "sourceId": "7246691",
+      "slug": "wa-benita-willis-shield-7246691",
+      "days": 1
+    },
+    {
+      "sourceId": "7247682",
+      "slug": "wa-bob-vigars-season-opener-7247682",
+      "days": 1
+    },
+    {
+      "sourceId": "7247071",
+      "slug": "wa-festival-atletico-tec-ciudad-de-mexico-7247071",
+      "days": 1
+    },
+    {
+      "sourceId": "7246458",
+      "slug": "wa-iv-encuentro-tune-up-atletissimo-7246458",
+      "days": 1
+    },
+    {
+      "sourceId": "7247147",
+      "slug": "wa-meeting-jovem-lancamentos-adal-7247147",
+      "days": 1
+    },
+    {
+      "sourceId": "7247070",
+      "slug": "wa-nta-nw-interclub-round-4a-7247070",
+      "days": 1
+    },
+    {
+      "sourceId": "7247674",
+      "slug": "wa-tenke-classic-7247674",
+      "days": 2
+    },
+    {
+      "sourceId": "7247568",
+      "slug": "wa-uj-summer-challenge-7247568",
+      "days": 1
+    },
+    {
+      "sourceId": "7247405",
+      "slug": "wa-york-holiday-open-7247405",
+      "days": 1
+    },
+    {
+      "sourceId": "7247623",
+      "slug": "wa-a-a-streltsova-athletics-festival-7247623",
+      "days": 2
+    },
+    {
+      "sourceId": "7247619",
+      "slug": "wa-memorial-of-outstanding-athletes-of-orel-7247619",
+      "days": 2
+    },
+    {
+      "sourceId": "7247151",
+      "slug": "wa-twilight-ii-7247151",
+      "days": 1
+    },
+    {
+      "sourceId": "7247549",
+      "slug": "wa-penn-relays-mile-showcase-7247549",
+      "days": 1
+    },
+    {
+      "sourceId": "7246641",
+      "slug": "wa-13th-club-zoom-kindred-spirit-series-7246641",
+      "days": 2
+    },
+    {
+      "sourceId": "7246626",
+      "slug": "wa-3rd-club-zoom-peers-prime-invitational-7246626",
+      "days": 2
+    },
+    {
+      "sourceId": "7246553",
+      "slug": "wa-adventsspelen-7246553",
+      "days": 2
+    },
+    {
+      "sourceId": "7246822",
+      "slug": "wa-classique-heloise-7246822",
+      "days": 1
+    },
+    {
+      "sourceId": "7247053",
+      "slug": "wa-northern-tasmanian-combined-events-championships-7247053",
+      "days": 2
+    },
+    {
+      "sourceId": "7247080",
+      "slug": "wa-skn-athletics-development-meet-4-7247080",
+      "days": 1
+    },
+    {
+      "sourceId": "7246630",
+      "slug": "wa-aajipr-mile-championships-7246630",
+      "days": 1
+    },
+    {
+      "sourceId": "7247051",
+      "slug": "wa-central-league-teams-competition-3-7247051",
+      "days": 1
+    },
+    {
+      "sourceId": "7247025",
+      "slug": "wa-copa-minas-de-arremesos-e-lancamentos-7247025",
+      "days": 1
+    },
+    {
+      "sourceId": "7246690",
+      "slug": "wa-denise-boyd-shield-7246690",
+      "days": 1
+    },
+    {
+      "sourceId": "7247625",
+      "slug": "wa-national-competitions-7247625",
+      "days": 2
+    },
+    {
+      "sourceId": "7247609",
+      "slug": "wa-national-competitions-among-sport-schools-pamyati-yu-m-krasiln-7247609",
+      "days": 3
+    },
+    {
+      "sourceId": "7247382",
+      "slug": "wa-northern-athletics-november-indoor-open-7247382",
+      "days": 1
+    },
+    {
+      "sourceId": "7247509",
+      "slug": "wa-peruvian-u16-championships-7247509",
+      "days": 2
+    },
+    {
+      "sourceId": "7246629",
+      "slug": "wa-vilnius-city-athletics-cup-7246629",
+      "days": 1
+    },
+    {
+      "sourceId": "7246766",
+      "slug": "wa-indonesian-championships-7246766",
+      "days": 1
+    },
+    {
+      "sourceId": "7247546",
+      "slug": "wa-iranian-club-championships-second-leg-men-7247546",
+      "days": 3
+    },
+    {
+      "sourceId": "7247547",
+      "slug": "wa-iranian-club-championships-second-leg-women-7247547",
+      "days": 3
+    },
+    {
+      "sourceId": "7247149",
+      "slug": "wa-onsdagsstang-i-aarhus-1-7247149",
+      "days": 1
+    },
+    {
+      "sourceId": "7247148",
+      "slug": "wa-1o-torneio-jovem-lancamentos-adal-7247148",
+      "days": 1
+    },
+    {
+      "sourceId": "7247081",
+      "slug": "wa-meeting-regional-open-anneau-7247081",
+      "days": 2
+    },
+    {
+      "sourceId": "7247641",
+      "slug": "wa-sri-lanka-inter-university-track-and-field-championships-7247641",
+      "days": 2
+    },
+    {
+      "sourceId": "7246265",
+      "slug": "wa-1st-kyushu-kyoritsu-university-throwing-tournament-7246265",
+      "days": 1
+    },
+    {
+      "sourceId": "7247610",
+      "slug": "wa-capital-athletics-3000m-championships-7247610",
+      "days": 1
+    },
+    {
+      "sourceId": "7247583",
+      "slug": "wa-national-competitions-pamyati-t-f-bykovoy-7247583",
+      "days": 3
+    },
+    {
+      "sourceId": "7247052",
+      "slug": "wa-nta-interclub-round-3c-7247052",
+      "days": 1
+    },
+    {
+      "sourceId": "7247056",
+      "slug": "wa-skn-athletics-development-meet-3-7247056",
+      "days": 1
+    },
+    {
+      "sourceId": "7247380",
+      "slug": "wa-torneio-de-abertura-7247380",
+      "days": 1
+    },
+    {
+      "sourceId": "7247020",
+      "slug": "wa-torneio-de-abertura-de-pista-7247020",
+      "days": 1
+    },
+    {
+      "sourceId": "7247316",
+      "slug": "wa-torneio-de-velocidade-e-barreiras-7247316",
+      "days": 1
+    },
+    {
+      "sourceId": "7247566",
+      "slug": "wa-vi-copa-club-hely-ollarves-7247566",
+      "days": 1
+    },
+    {
+      "sourceId": "7247381",
+      "slug": "wa-wellington-10-000-metres-festival-7247381",
+      "days": 1
+    },
+    {
+      "sourceId": "7247481",
+      "slug": "wa-x-control-preparatorio-7247481",
+      "days": 1
+    },
+    {
+      "sourceId": "7247222",
+      "slug": "wa-chilean-university-championships-7247222",
+      "days": 2
+    },
+    {
+      "sourceId": "7246949",
+      "slug": "wa-festival-4f-fernando-oliveira-sub-18-7246949",
+      "days": 2
+    },
+    {
+      "sourceId": "7246628",
+      "slug": "wa-mea-the-18th-sea-u18-and-u20-athletics-championships-7246628",
+      "days": 3
+    },
+    {
+      "sourceId": "7247348",
+      "slug": "wa-men-national-clubs-championships-first-leg-7247348",
+      "days": 3
+    },
+    {
+      "sourceId": "7246700",
+      "slug": "wa-patafa-weekly-relay-series-final-field-events-7246700",
+      "days": 2
+    },
+    {
+      "sourceId": "7247055",
+      "slug": "wa-skn-athletics-development-meet-2-7247055",
+      "days": 1
+    },
+    {
+      "sourceId": "7247683",
+      "slug": "wa-venezuelan-u16-championships-7247683",
+      "days": 4
+    },
+    {
+      "sourceId": "7247349",
+      "slug": "wa-women-national-clubs-championships-first-leg-7247349",
+      "days": 3
+    },
+    {
+      "sourceId": "7246223",
+      "slug": "wa-athletic-heat-10th-year-anniversery-pre-national-sport-festiva-7246223",
+      "days": 1
+    },
+    {
+      "sourceId": "7246163",
+      "slug": "wa-autumn-record-meet-7246163",
+      "days": 1
+    },
+    {
+      "sourceId": "7247050",
+      "slug": "wa-central-league-teams-competition-2-7247050",
+      "days": 1
+    },
+    {
+      "sourceId": "7247069",
+      "slug": "wa-meeting-marche-perche-hauteur-en-salle-7247069",
+      "days": 1
+    },
+    {
+      "sourceId": "7247023",
+      "slug": "wa-nta-nw-interclub-round-2b-7247023",
+      "days": 1
+    },
+    {
+      "sourceId": "7247314",
+      "slug": "wa-kuwait-preliminary-championships-senior-7247314",
+      "days": 4
+    },
+    {
+      "sourceId": "7247157",
+      "slug": "wa-preliminary-athletics-competition-u18-7247157",
+      "days": 4
+    },
+    {
+      "sourceId": "7247154",
+      "slug": "wa-interregional-competitions-birsky-kuznechik-7247154",
+      "days": 1
+    },
+    {
+      "sourceId": "7246257",
+      "slug": "wa-copa-nacional-de-clubes-7246257",
+      "days": 2
+    },
+    {
+      "sourceId": "7247150",
+      "slug": "wa-hammer-throw-interregional-competitions-7247150",
+      "days": 2
+    },
+    {
+      "sourceId": "7247197",
+      "slug": "wa-sa-all-comers-meet-5-7247197",
+      "days": 3
+    },
+    {
+      "sourceId": "7247049",
+      "slug": "wa-skn-athletics-development-meet-1-7247049",
+      "days": 1
+    },
+    {
+      "sourceId": "7247021",
+      "slug": "wa-tasmanian-all-schools-championships-7247021",
+      "days": 2
+    },
+    {
+      "sourceId": "7246622",
+      "slug": "wa-women-s-4-1500m-relay-record-challenge-7246622",
+      "days": 1
+    },
+    {
+      "sourceId": "7246694",
+      "slug": "wa-capital-athletics-10-000m-championships-7246694",
+      "days": 1
+    },
+    {
+      "sourceId": "7247048",
+      "slug": "wa-central-league-teams-competition-1-7247048",
+      "days": 1
+    },
+    {
+      "sourceId": "7246689",
+      "slug": "wa-hong-kong-relay-carnival-7246689",
+      "days": 1
+    },
+    {
+      "sourceId": "7246916",
+      "slug": "wa-juegos-binacionales-de-la-araucania-7246916",
+      "days": 6
+    },
+    {
+      "sourceId": "7247019",
+      "slug": "wa-nta-nw-interclub-round-1a-7247019",
+      "days": 1
+    },
+    {
+      "sourceId": "7247047",
+      "slug": "wa-season-closing-7247047",
+      "days": 1
+    },
+    {
+      "sourceId": "7246639",
+      "slug": "wa-tercera-milla-circuito-aajipr-7246639",
+      "days": 1
+    },
+    {
+      "sourceId": "7247387",
+      "slug": "wa-bislett-3000m-7247387",
+      "days": 1
+    },
+    {
+      "sourceId": "7247018",
+      "slug": "wa-61st-army-athletics-championships-7247018",
+      "days": 3
+    },
+    {
+      "sourceId": "7247113",
+      "slug": "wa-bangladesh-championships-7247113",
+      "days": 3
+    },
+    {
+      "sourceId": "7246948",
+      "slug": "wa-festival-piauiense-caixa-de-atletismo-sub-23-7246948",
+      "days": 2
+    },
+    {
+      "sourceId": "7246387",
+      "slug": "wa-hong-kong-junior-age-group-athletics-competition-7-7246387",
+      "days": 2
+    },
+    {
+      "sourceId": "7246844",
+      "slug": "wa-meeting-mixto-final-u18-u20-7246844",
+      "days": 3
+    },
+    {
+      "sourceId": "7246688",
+      "slug": "wa-patafa-weekly-relay-series-final-track-events-7246688",
+      "days": 2
+    },
+    {
+      "sourceId": "7246263",
+      "slug": "wa-the-31st-hokushin-etsu-high-school-rookies-meeting-7246263",
+      "days": 3
+    },
+    {
+      "sourceId": "7246362",
+      "slug": "wa-40-let-na-scene-jardy-tomase-a-libora-40-years-on-stage-for-ja-7246362",
+      "days": 1
+    },
+    {
+      "sourceId": "7246269",
+      "slug": "wa-prazska-hodinovka-7246269",
+      "days": 1
+    },
+    {
+      "sourceId": "7247406",
+      "slug": "wa-thursday-night-lights-2-7247406",
+      "days": 1
+    },
+    {
+      "sourceId": "7246693",
+      "slug": "wa-all-island-schools-games-7246693",
+      "days": 5
+    }
+  ],
+  "review": [
+    {
+      "sourceId": "7216591",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "name": "World Athletics Championships, Beijing 2027",
+            "sport": "Athletics",
+            "country": "China",
+            "county": "National Stadium, Beijing",
+            "city": "National Stadium, Beijing",
+            "area": "National Stadium, Beijing (CHN)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "World Athletics Championships, Beijing 2027 — National Stadium, Beijing, China. World Athletics calendar (World Athletics Championships, World Athletics Series).",
+            "description": "World Athletics Championships, Beijing 2027 at National Stadium, Beijing (CHN). Combined Events, Road Running, Race Walking, Track and Field. 11–19 SEP 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "featured": true,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7216591"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-19",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 9 · 11–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-18",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 8 · 11–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-17",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 7 · 11–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-16",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 6 · 11–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-15",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 5 · 11–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-14",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 4 · 11–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-13",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 3 · 11–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-12",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 2 · 11–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-11",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "11–19 SEP 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-world-athletics-championships-beijing-2027-7216591",
+          "name": "World Athletics Championships, Beijing 2027",
+          "sport": "Athletics",
+          "country": "China",
+          "county": "National Stadium, Beijing",
+          "city": "National Stadium, Beijing",
+          "area": "National Stadium, Beijing (CHN)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "World Athletics Championships, Beijing 2027 — National Stadium, Beijing, China. World Athletics calendar (World Athletics Championships, World Athletics Series).",
+          "description": "World Athletics Championships, Beijing 2027 at National Stadium, Beijing (CHN). Combined Events, Road Running, Race Walking, Track and Field. 10–19 SEP 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7216591",
+          "featured": true,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7216591"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-19",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 10 · 10–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-18",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 9 · 10–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-17",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 8 · 10–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-16",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 7 · 10–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-15",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 6 · 10–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-14",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 5 · 10–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-13",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 4 · 10–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-12",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 3 · 10–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-11",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "Competition day 2 · 10–19 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-world-athletics-championships-beijing-2027-7216591",
+            "date": "2027-09-10",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7216591",
+            "notes": "10–19 SEP 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7226456",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-pacific-games-7226456",
+            "name": "Pacific Games",
+            "sport": "Athletics",
+            "country": "PYF",
+            "county": "HITIA’A, Papeete",
+            "city": "HITIA’A, Papeete",
+            "area": "HITIA’A, Papeete (PYF)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Pacific Games — HITIA’A, Papeete, PYF. World Athletics calendar (Area Regional Senior Championships).",
+            "description": "Pacific Games at HITIA’A, Papeete (PYF). Combined Events, Road Running, Race Walking, Track and Field. 31 JUL–07 AUG 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7226456"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-07",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 8 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-06",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 7 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-05",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 6 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-04",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 5 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-03",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 4 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-02",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 3 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-01",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 2 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-07-31",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "31 JUL–07 AUG 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-pacific-games-7226456",
+          "name": "Pacific Games",
+          "sport": "Athletics",
+          "country": "French Polynesia",
+          "county": "HITIA’A, Papeete",
+          "city": "HITIA’A, Papeete",
+          "area": "HITIA’A, Papeete (PYF)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Pacific Games — HITIA’A, Papeete, French Polynesia. World Athletics calendar (Area Regional Senior Championships).",
+          "description": "Pacific Games at HITIA’A, Papeete (PYF). Combined Events, Road Running, Race Walking, Track and Field. 31 JUL–07 AUG 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7226456",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7226456"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-07",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 8 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-06",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 7 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-05",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 6 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-04",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 5 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-03",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 4 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-02",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 3 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-08-01",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "Competition day 2 · 31 JUL–07 AUG 2027"
+          },
+          {
+            "seriesSlug": "wa-pacific-games-7226456",
+            "date": "2027-07-31",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7226456",
+            "notes": "31 JUL–07 AUG 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7244676",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-66th-ostrava-golden-spike-7244676",
+            "name": "66th Ostrava Golden Spike",
+            "sport": "Athletics",
+            "country": "Czechia",
+            "county": "Mestský Stadion, Ostrava",
+            "city": "Mestský Stadion, Ostrava",
+            "area": "Mestský Stadion, Ostrava (CZE)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "66th Ostrava Golden Spike — Mestský Stadion, Ostrava, Czechia. World Athletics calendar (World Athletics Continental Tour – Gold).",
+            "description": "66th Ostrava Golden Spike at Mestský Stadion, Ostrava (CZE). Track and Field. 22 JUN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7244676",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7244676"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-66th-ostrava-golden-spike-7244676",
+            "date": "2027-06-22",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244676",
+            "notes": "22 JUN 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-66th-ostrava-golden-spike-7244676",
+          "name": "66th Ostrava Golden Spike",
+          "sport": "Athletics",
+          "country": "Czechia",
+          "county": "Mestský Stadion, Ostrava",
+          "city": "Mestský Stadion, Ostrava",
+          "area": "Mestský Stadion, Ostrava (CZE)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "66th Ostrava Golden Spike — Mestský Stadion, Ostrava, Czechia. World Athletics calendar (World Athletics Continental Tour – Gold).",
+          "description": "66th Ostrava Golden Spike at Mestský Stadion, Ostrava (CZE). Track and Field. 29 JUN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7244676",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7244676"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-66th-ostrava-golden-spike-7244676",
+            "date": "2027-06-29",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244676",
+            "notes": "29 JUN 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7220881",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-meeting-de-paris-7220881",
+            "name": "Meeting de Paris",
+            "sport": "Athletics",
+            "country": "France",
+            "county": "Stade Charléty, Paris",
+            "city": "Stade Charléty, Paris",
+            "area": "Stade Charléty, Paris (FRA)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Meeting de Paris — Stade Charléty, Paris, France. World Athletics calendar (Wanda Diamond League Meeting).",
+            "description": "Meeting de Paris at Stade Charléty, Paris (FRA). Track and Field. 18 JUN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7220881",
+            "featured": true,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7220881"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-meeting-de-paris-7220881",
+            "date": "2027-06-18",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7220881",
+            "notes": "18 JUN 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-meeting-de-paris-7220881",
+          "name": "Meeting de Paris",
+          "sport": "Athletics",
+          "country": "France",
+          "county": "Stade Charléty, Paris",
+          "city": "Stade Charléty, Paris",
+          "area": "Stade Charléty, Paris (FRA)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Meeting de Paris — Stade Charléty, Paris, France. World Athletics calendar (Wanda Diamond League Meeting).",
+          "description": "Meeting de Paris at Stade Charléty, Paris (FRA). Track and Field. 25 JUN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7220881",
+          "featured": true,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7220881"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-meeting-de-paris-7220881",
+            "date": "2027-06-25",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7220881",
+            "notes": "25 JUN 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7244281",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-9th-irena-szewinska-memorial-7244281",
+            "name": "9th Irena Szewińska Memorial",
+            "sport": "Athletics",
+            "country": "Poland",
+            "county": "Zdzisław Krzyszkowiak Stadium, Bydgoszcz",
+            "city": "Zdzisław Krzyszkowiak Stadium, Bydgoszcz",
+            "area": "Zdzisław Krzyszkowiak Stadium, Bydgoszcz (POL)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "9th Irena Szewińska Memorial — Zdzisław Krzyszkowiak Stadium, Bydgoszcz, Poland. World Athletics calendar (World Athletics Continental Tour – Gold).",
+            "description": "9th Irena Szewińska Memorial at Zdzisław Krzyszkowiak Stadium, Bydgoszcz (POL). Track and Field. 05 JUN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7244281",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7244281"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-9th-irena-szewinska-memorial-7244281",
+            "date": "2027-06-05",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244281",
+            "notes": "05 JUN 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-9th-irena-szewinska-memorial-7244281",
+          "name": "9th Irena Szewińska Memorial",
+          "sport": "Athletics",
+          "country": "Poland",
+          "county": "Zdzisław Krzyszkowiak Stadium, Bydgoszcz",
+          "city": "Zdzisław Krzyszkowiak Stadium, Bydgoszcz",
+          "area": "Zdzisław Krzyszkowiak Stadium, Bydgoszcz (POL)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "9th Irena Szewińska Memorial — Zdzisław Krzyszkowiak Stadium, Bydgoszcz, Poland. World Athletics calendar (World Athletics Continental Tour – Gold).",
+          "description": "9th Irena Szewińska Memorial at Zdzisław Krzyszkowiak Stadium, Bydgoszcz (POL). Track and Field. 04 JUN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7244281",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7244281"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-9th-irena-szewinska-memorial-7244281",
+            "date": "2027-06-04",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244281",
+            "notes": "04 JUN 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7241949",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-zambian-championships-7241949",
+            "name": "Zambian Championships",
+            "sport": "Athletics",
+            "country": "Zambia",
+            "county": "Levy Mwanawasa Stadion, Ndola",
+            "city": "Levy Mwanawasa Stadion, Ndola",
+            "area": "Levy Mwanawasa Stadion, Ndola (ZAM)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Zambian Championships — Levy Mwanawasa Stadion, Ndola, Zambia. World Athletics calendar (National Senior Outdoor Championships).",
+            "description": "Zambian Championships at Levy Mwanawasa Stadion, Ndola (ZAM). Track and Field. 15–17 MAY 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7241949",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7241949"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-zambian-championships-7241949",
+            "date": "2027-05-17",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7241949",
+            "notes": "Competition day 3 · 15–17 MAY 2027"
+          },
+          {
+            "seriesSlug": "wa-zambian-championships-7241949",
+            "date": "2027-05-16",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7241949",
+            "notes": "Competition day 2 · 15–17 MAY 2027"
+          },
+          {
+            "seriesSlug": "wa-zambian-championships-7241949",
+            "date": "2027-05-15",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7241949",
+            "notes": "15–17 MAY 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-zambian-championships-7241949",
+          "name": "Zambian Championships",
+          "sport": "Athletics",
+          "country": "Zambia",
+          "county": "Levy Mwanawasa Stadion, Ndola",
+          "city": "Levy Mwanawasa Stadion, Ndola",
+          "area": "Levy Mwanawasa Stadion, Ndola (ZAM)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Zambian Championships — Levy Mwanawasa Stadion, Ndola, Zambia. World Athletics calendar (National Senior Outdoor Championships).",
+          "description": "Zambian Championships at Levy Mwanawasa Stadion, Ndola (ZAM). Track and Field. 05–07 MAY 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7241949",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7241949"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-zambian-championships-7241949",
+            "date": "2027-05-07",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7241949",
+            "notes": "Competition day 3 · 05–07 MAY 2027"
+          },
+          {
+            "seriesSlug": "wa-zambian-championships-7241949",
+            "date": "2027-05-06",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7241949",
+            "notes": "Competition day 2 · 05–07 MAY 2027"
+          },
+          {
+            "seriesSlug": "wa-zambian-championships-7241949",
+            "date": "2027-05-05",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7241949",
+            "notes": "05–07 MAY 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7244596",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-botswana-golden-grand-prix-7244596",
+            "name": "Botswana Golden Grand Prix",
+            "sport": "Athletics",
+            "country": "Botswana",
+            "county": "National Stadium, Gaborone",
+            "city": "National Stadium, Gaborone",
+            "area": "National Stadium, Gaborone (BOT)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Botswana Golden Grand Prix — National Stadium, Gaborone, Botswana. World Athletics calendar (World Athletics Continental Tour – Silver).",
+            "description": "Botswana Golden Grand Prix at National Stadium, Gaborone (BOT). Track and Field. 24 APR 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7244596",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7244596"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-botswana-golden-grand-prix-7244596",
+            "date": "2027-04-24",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244596",
+            "notes": "24 APR 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-botswana-golden-grand-prix-7244596",
+          "name": "Botswana Golden Grand Prix",
+          "sport": "Athletics",
+          "country": "Botswana",
+          "county": "National Stadium, Gaborone",
+          "city": "National Stadium, Gaborone",
+          "area": "National Stadium, Gaborone (BOT)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Botswana Golden Grand Prix — National Stadium, Gaborone, Botswana. World Athletics calendar (World Athletics Continental Tour – Gold).",
+          "description": "Botswana Golden Grand Prix at National Stadium, Gaborone (BOT). Track and Field. 24 APR 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7244596",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7244596"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-botswana-golden-grand-prix-7244596",
+            "date": "2027-04-24",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244596",
+            "notes": "24 APR 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7242000",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-the-copper-spike-the-final-series-v-7242000",
+            "name": "The Copper Spike - The Final | Series V",
+            "sport": "Athletics",
+            "country": "Zambia",
+            "county": "Levy Mwanawasa Stadion, Ndola",
+            "city": "Levy Mwanawasa Stadion, Ndola",
+            "area": "Levy Mwanawasa Stadion, Ndola (ZAM)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "The Copper Spike - The Final | Series V — Levy Mwanawasa Stadion, Ndola, Zambia. World Athletics calendar (World Athletics Continental Tour – Silver).",
+            "description": "The Copper Spike - The Final | Series V at Levy Mwanawasa Stadion, Ndola (ZAM). Track and Field. 11 APR 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7242000",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7242000"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-the-copper-spike-the-final-series-v-7242000",
+            "date": "2027-04-11",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7242000",
+            "notes": "11 APR 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-the-copper-spike-the-final-series-v-7242000",
+          "name": "The Copper Spike - The Final | Series V",
+          "sport": "Athletics",
+          "country": "Zambia",
+          "county": "Levy Mwanawasa Stadion, Ndola",
+          "city": "Levy Mwanawasa Stadion, Ndola",
+          "area": "Levy Mwanawasa Stadion, Ndola (ZAM)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "The Copper Spike - The Final | Series V — Levy Mwanawasa Stadion, Ndola, Zambia. World Athletics calendar (World Athletics Continental Tour – Silver).",
+          "description": "The Copper Spike - The Final | Series V at Levy Mwanawasa Stadion, Ndola (ZAM). Track and Field. 04 APR 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7242000",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7242000"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-the-copper-spike-the-final-series-v-7242000",
+            "date": "2027-04-04",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7242000",
+            "notes": "04 APR 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7242001",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-copper-spike-challenge-the-strike-series-iv-7242001",
+            "name": "Copper Spike Challenge - The Strike | Series IV",
+            "sport": "Athletics",
+            "country": "Zambia",
+            "county": "Levy Mwanawasa Stadion, Ndola",
+            "city": "Levy Mwanawasa Stadion, Ndola",
+            "area": "Levy Mwanawasa Stadion, Ndola (ZAM)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Copper Spike Challenge - The Strike | Series IV — Levy Mwanawasa Stadion, Ndola, Zambia. World Athletics calendar (World Athletics Continental Tour – Bronze).",
+            "description": "Copper Spike Challenge - The Strike | Series IV at Levy Mwanawasa Stadion, Ndola (ZAM). Track and Field. 10 APR 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7242001",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7242001"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-copper-spike-challenge-the-strike-series-iv-7242001",
+            "date": "2027-04-10",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7242001",
+            "notes": "10 APR 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-copper-spike-challenge-the-strike-series-iv-7242001",
+          "name": "Copper Spike Challenge - The Strike | Series IV",
+          "sport": "Athletics",
+          "country": "Zambia",
+          "county": "Levy Mwanawasa Stadion, Ndola",
+          "city": "Levy Mwanawasa Stadion, Ndola",
+          "area": "Levy Mwanawasa Stadion, Ndola (ZAM)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Copper Spike Challenge - The Strike | Series IV — Levy Mwanawasa Stadion, Ndola, Zambia. World Athletics calendar (World Athletics Continental Tour – Challenger).",
+          "description": "Copper Spike Challenge - The Strike | Series IV at Levy Mwanawasa Stadion, Ndola (ZAM). Track and Field. 27 MAR 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7242001",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7242001"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-copper-spike-challenge-the-strike-series-iv-7242001",
+            "date": "2027-03-27",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7242001",
+            "notes": "27 MAR 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7242002",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-the-copper-spike-challenge-the-charge-series-iii-7242002",
+            "name": "The Copper Spike Challenge - The Charge | Series III",
+            "sport": "Athletics",
+            "country": "Zambia",
+            "county": "Levy Mwanawasa Stadion, Ndola",
+            "city": "Levy Mwanawasa Stadion, Ndola",
+            "area": "Levy Mwanawasa Stadion, Ndola (ZAM)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "The Copper Spike Challenge - The Charge | Series III — Levy Mwanawasa Stadion, Ndola, Zambia. World Athletics calendar (World Athletics Continental Tour – Bronze).",
+            "description": "The Copper Spike Challenge - The Charge | Series III at Levy Mwanawasa Stadion, Ndola (ZAM). Track and Field. 27 MAR 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7242002",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7242002"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-the-copper-spike-challenge-the-charge-series-iii-7242002",
+            "date": "2027-03-27",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7242002",
+            "notes": "27 MAR 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-the-copper-spike-challenge-the-charge-series-iii-7242002",
+          "name": "The Copper Spike Challenge - The Charge | Series III",
+          "sport": "Athletics",
+          "country": "Zambia",
+          "county": "Levy Mwanawasa Stadion, Ndola",
+          "city": "Levy Mwanawasa Stadion, Ndola",
+          "area": "Levy Mwanawasa Stadion, Ndola (ZAM)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "The Copper Spike Challenge - The Charge | Series III — Levy Mwanawasa Stadion, Ndola, Zambia. World Athletics calendar (World Athletics Continental Tour – Challenger).",
+          "description": "The Copper Spike Challenge - The Charge | Series III at Levy Mwanawasa Stadion, Ndola (ZAM). Track and Field. 28 FEB 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7242002",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7242002"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-the-copper-spike-challenge-the-charge-series-iii-7242002",
+            "date": "2027-02-28",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7242002",
+            "notes": "28 FEB 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7244461",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-indoor-meeting-apeldoorn-7244461",
+            "name": "Indoor Meeting Apeldoorn",
+            "sport": "Athletics",
+            "country": "Netherlands",
+            "county": "Omnisport, Apeldoorn",
+            "city": "Omnisport, Apeldoorn",
+            "area": "Omnisport, Apeldoorn (NED)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Indoor Meeting Apeldoorn — Omnisport, Apeldoorn, Netherlands. World Athletics calendar (World Athletics Indoor Tour – Bronze).",
+            "description": "Indoor Meeting Apeldoorn at Omnisport, Apeldoorn (NED). Track and Field. 16 FEB 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7244461",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7244461"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-indoor-meeting-apeldoorn-7244461",
+            "date": "2027-02-16",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244461",
+            "notes": "16 FEB 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-indoor-meeting-apeldoorn-7244461",
+          "name": "The Dutch Indoor",
+          "sport": "Athletics",
+          "country": "Netherlands",
+          "county": "Omnisport, Apeldoorn",
+          "city": "Omnisport, Apeldoorn",
+          "area": "Omnisport, Apeldoorn (NED)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "The Dutch Indoor — Omnisport, Apeldoorn, Netherlands. World Athletics calendar (World Athletics Indoor Tour – Bronze).",
+          "description": "The Dutch Indoor at Omnisport, Apeldoorn (NED). Track and Field. 16 FEB 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7244461",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7244461"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-indoor-meeting-apeldoorn-7244461",
+            "date": "2027-02-16",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244461",
+            "notes": "16 FEB 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7240481",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-meeting-hauts-de-france-pas-de-calais-trophee-edf-7240481",
+            "name": "Meeting Hauts-de-France Pas-de-Calais Trophée EDF",
+            "sport": "Athletics",
+            "country": "France",
+            "county": "Arena Stade Couvert, Liévin",
+            "city": "Arena Stade Couvert, Liévin",
+            "area": "Arena Stade Couvert, Liévin (FRA)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Meeting Hauts-de-France Pas-de-Calais Trophée EDF — Arena Stade Couvert, Liévin, France. World Athletics calendar (World Athletics Indoor Tour – Gold).",
+            "description": "Meeting Hauts-de-France Pas-de-Calais Trophée EDF at Arena Stade Couvert, Liévin (FRA). Track and Field. 11 FEB 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7240481",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7240481"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-meeting-hauts-de-france-pas-de-calais-trophee-edf-7240481",
+            "date": "2027-02-11",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7240481",
+            "notes": "11 FEB 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-meeting-hauts-de-france-pas-de-calais-trophee-edf-7240481",
+          "name": "Meeting Hauts-de-France Pas-de-Calais Trophée EDF",
+          "sport": "Athletics",
+          "country": "France",
+          "county": "Arena Stade Couvert, Liévin",
+          "city": "Arena Stade Couvert, Liévin",
+          "area": "Arena Stade Couvert, Liévin (FRA)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Meeting Hauts-de-France Pas-de-Calais Trophée EDF — Arena Stade Couvert, Liévin, France. World Athletics calendar (World Athletics Indoor Tour – Gold).",
+          "description": "Meeting Hauts-de-France Pas-de-Calais Trophée EDF at Arena Stade Couvert, Liévin (FRA). Track and Field. 10 FEB 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7240481",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7240481"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-meeting-hauts-de-france-pas-de-calais-trophee-edf-7240481",
+            "date": "2027-02-10",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7240481",
+            "notes": "10 FEB 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7245057",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-gran-premio-ciudad-de-valencia-7245057",
+            "name": "Gran Premio Ciudad de Valencia",
+            "sport": "Athletics",
+            "country": "Spain",
+            "county": "Velódromo Luis Puig, Valencia",
+            "city": "Velódromo Luis Puig, Valencia",
+            "area": "Velódromo Luis Puig, Valencia (ESP)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Gran Premio Ciudad de Valencia — Velódromo Luis Puig, Valencia, Spain. World Athletics calendar (World Athletics Indoor Tour – Silver).",
+            "description": "Gran Premio Ciudad de Valencia at Velódromo Luis Puig, Valencia (ESP). Track and Field. 28 JAN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7245057",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7245057"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-gran-premio-ciudad-de-valencia-7245057",
+            "date": "2027-01-28",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245057",
+            "notes": "28 JAN 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-gran-premio-ciudad-de-valencia-7245057",
+          "name": "Meeting Maratón Valencia",
+          "sport": "Athletics",
+          "country": "Spain",
+          "county": "Velódromo Luis Puig, Valencia",
+          "city": "Velódromo Luis Puig, Valencia",
+          "area": "Velódromo Luis Puig, Valencia (ESP)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Meeting Maratón Valencia — Velódromo Luis Puig, Valencia, Spain. World Athletics calendar (World Athletics Indoor Tour – Silver).",
+          "description": "Meeting Maratón Valencia at Velódromo Luis Puig, Valencia (ESP). Track and Field. 28 JAN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7245057",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7245057"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-gran-premio-ciudad-de-valencia-7245057",
+            "date": "2027-01-28",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245057",
+            "notes": "28 JAN 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7240857",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-campeonato-sergipano-loterias-caixa-de-atletismo-sub-23-7240857",
+            "name": "Campeonato Sergipano Loterias Caixa de Atletismo Sub 23",
+            "sport": "Athletics",
+            "country": "Brazil",
+            "county": "Vila Olímpica da Universidade Tiradentes, Aracaju",
+            "city": "Vila Olímpica da Universidade Tiradentes, Aracaju",
+            "area": "Vila Olímpica da Universidade Tiradentes, Aracaju (BRA)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Campeonato Sergipano Loterias Caixa de Atletismo Sub 23 — Vila Olímpica da Universidade Tiradentes, Aracaju, Brazil. World Athletics calendar (F).",
+            "description": "Campeonato Sergipano Loterias Caixa de Atletismo Sub 23 at Vila Olímpica da Universidade Tiradentes, Aracaju (BRA). Track and Field. 12–13 DEC 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7240857",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7240857"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-campeonato-sergipano-loterias-caixa-de-atletismo-sub-23-7240857",
+            "date": "2026-12-13",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7240857",
+            "notes": "Competition day 2 · 12–13 DEC 2026"
+          },
+          {
+            "seriesSlug": "wa-campeonato-sergipano-loterias-caixa-de-atletismo-sub-23-7240857",
+            "date": "2026-12-12",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7240857",
+            "notes": "12–13 DEC 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-campeonato-sergipano-loterias-caixa-de-atletismo-sub-23-7240857",
+          "name": "Campeonato Sergipano Loterias Caixa de Atletismo Sub 23",
+          "sport": "Athletics",
+          "country": "Brazil",
+          "county": "Vila Olímpica da Universidade Tiradentes, Aracaju",
+          "city": "Vila Olímpica da Universidade Tiradentes, Aracaju",
+          "area": "Vila Olímpica da Universidade Tiradentes, Aracaju (BRA)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Campeonato Sergipano Loterias Caixa de Atletismo Sub 23 — Vila Olímpica da Universidade Tiradentes, Aracaju, Brazil. World Athletics calendar (F).",
+          "description": "Campeonato Sergipano Loterias Caixa de Atletismo Sub 23 at Vila Olímpica da Universidade Tiradentes, Aracaju (BRA). Track and Field. 19–20 DEC 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7240857",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7240857"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-campeonato-sergipano-loterias-caixa-de-atletismo-sub-23-7240857",
+            "date": "2026-12-20",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7240857",
+            "notes": "Competition day 2 · 19–20 DEC 2026"
+          },
+          {
+            "seriesSlug": "wa-campeonato-sergipano-loterias-caixa-de-atletismo-sub-23-7240857",
+            "date": "2026-12-19",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7240857",
+            "notes": "19–20 DEC 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7244708",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-cuarto-tif-universidad-de-chile-7244708",
+            "name": "Cuarto TIF Universidad de Chile",
+            "sport": "Athletics",
+            "country": "Chile",
+            "county": "Pista Atlética Mario Recordón, Santiago de Chile",
+            "city": "Pista Atlética Mario Recordón, Santiago de Chile",
+            "area": "Pista Atlética Mario Recordón, Santiago de Chile (CHI)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Cuarto TIF Universidad de Chile — Pista Atlética Mario Recordón, Santiago de Chile, Chile. World Athletics calendar (F).",
+            "description": "Cuarto TIF Universidad de Chile at Pista Atlética Mario Recordón, Santiago de Chile (CHI). Track and Field. 20 OCT 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7244708",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7244708"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-cuarto-tif-universidad-de-chile-7244708",
+            "date": "2026-10-20",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244708",
+            "notes": "20 OCT 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-cuarto-tif-universidad-de-chile-7244708",
+          "name": "Cuarto TIF Universidad de Chile",
+          "sport": "Athletics",
+          "country": "Chile",
+          "county": "Pista Atlética Mario Recordón, Santiago de Chile",
+          "city": "Pista Atlética Mario Recordón, Santiago de Chile",
+          "area": "Pista Atlética Mario Recordón, Santiago de Chile (CHI)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Cuarto TIF Universidad de Chile — Pista Atlética Mario Recordón, Santiago de Chile, Chile. World Athletics calendar (F).",
+          "description": "Cuarto TIF Universidad de Chile at Pista Atlética Mario Recordón, Santiago de Chile (CHI). Track and Field. 09 DEC 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7244708",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7244708"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-cuarto-tif-universidad-de-chile-7244708",
+            "date": "2026-12-09",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244708",
+            "notes": "09 DEC 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7245695",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-athletics-auckland-pole-vault-championships-7245695",
+            "name": "Athletics Auckland Pole Vault Championships",
+            "sport": "Athletics",
+            "country": "New Zealand",
+            "county": "Mt Smart Stadium, Auckland",
+            "city": "Mt Smart Stadium, Auckland",
+            "area": "Mt Smart Stadium, Auckland (NZL)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Athletics Auckland Pole Vault Championships — Mt Smart Stadium, Auckland, New Zealand. World Athletics calendar (F).",
+            "description": "Athletics Auckland Pole Vault Championships at Mt Smart Stadium, Auckland (NZL). Track and Field. 09 JAN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7245695",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7245695"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-athletics-auckland-pole-vault-championships-7245695",
+            "date": "2027-01-09",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245695",
+            "notes": "09 JAN 2027"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-athletics-auckland-pole-vault-championships-7245695",
+          "name": "Athletics Auckland Pole Vault Championships",
+          "sport": "Athletics",
+          "country": "New Zealand",
+          "county": "Mt Smart Stadium, Auckland",
+          "city": "Mt Smart Stadium, Auckland",
+          "area": "Mt Smart Stadium, Auckland (NZL)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Athletics Auckland Pole Vault Championships — Mt Smart Stadium, Auckland, New Zealand. World Athletics calendar (F).",
+          "description": "Athletics Auckland Pole Vault Championships at Mt Smart Stadium, Auckland (NZL). Track and Field. 05 DEC 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7245695",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7245695"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-athletics-auckland-pole-vault-championships-7245695",
+            "date": "2026-12-05",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245695",
+            "notes": "05 DEC 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7245727",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-hbcu-new-england-challenge-7245727",
+            "name": "HBCU & New England Challenge",
+            "sport": "Athletics",
+            "country": "United States",
+            "county": "Harvard-Gordon Track and Tennis Center, Cambridge, MA",
+            "city": "Harvard-Gordon Track and Tennis Center, Cambridge, MA",
+            "area": "Harvard-Gordon Track and Tennis Center, Cambridge, MA (USA)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "HBCU & New England Challenge — Harvard-Gordon Track and Tennis Center, Cambridge, MA, United States. World Athletics calendar (F).",
+            "description": "HBCU & New England Challenge at Harvard-Gordon Track and Tennis Center, Cambridge, MA (USA). Track and Field. 04 DEC 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7245727",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7245727"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-hbcu-new-england-challenge-7245727",
+            "date": "2026-12-04",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245727",
+            "notes": "04 DEC 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-hbcu-new-england-challenge-7245727",
+          "name": "HBCU & New England Challenge",
+          "sport": "Athletics",
+          "country": "United States",
+          "county": "Harvard-Gordon Track and Tennis Center, Cambridge, MA",
+          "city": "Harvard-Gordon Track and Tennis Center, Cambridge, MA",
+          "area": "Harvard-Gordon Track and Tennis Center, Cambridge, MA (USA)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "HBCU & New England Challenge — Harvard-Gordon Track and Tennis Center, Cambridge, MA, United States. World Athletics calendar (F).",
+          "description": "HBCU & New England Challenge at Harvard-Gordon Track and Tennis Center, Cambridge, MA (USA). Track and Field. 05 DEC 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7245727",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7245727"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-hbcu-new-england-challenge-7245727",
+            "date": "2026-12-05",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245727",
+            "notes": "05 DEC 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7245016",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-trofeu-ivoti-de-atletismo-7245016",
+            "name": "Trófeu Ivoti de Atletismo",
+            "sport": "Athletics",
+            "country": "Brazil",
+            "county": "Pista do Instituto Ivoti, Ivoti",
+            "city": "Pista do Instituto Ivoti, Ivoti",
+            "area": "Pista do Instituto Ivoti, Ivoti (BRA)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Trófeu Ivoti de Atletismo — Pista do Instituto Ivoti, Ivoti, Brazil. World Athletics calendar (F).",
+            "description": "Trófeu Ivoti de Atletismo at Pista do Instituto Ivoti, Ivoti (BRA). Track and Field. 28 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7245016",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7245016"
+          },
+          {
+            "slug": "wa-tr-feu-ivoti-de-atletismo-7245016",
+            "name": "Trófeu Ivoti de Atletismo",
+            "sport": "Athletics",
+            "country": "Brazil",
+            "county": "Pista do Instituto Ivoti, Ivoti",
+            "city": "Pista do Instituto Ivoti, Ivoti",
+            "area": "Pista do Instituto Ivoti, Ivoti (BRA)",
+            "surface": "Track",
+            "distances": [
+              "Other"
+            ],
+            "summary": "Trófeu Ivoti de Atletismo — Pista do Instituto Ivoti, Ivoti, Brazil. World Athletics calendar (F).",
+            "description": "Trófeu Ivoti de Atletismo at Pista do Instituto Ivoti, Ivoti (BRA). Track and Field. 29 AUG 2026. Listed on the World Athletics calendar. Confirm timetable on the World Athletics page.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7245016",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7245016"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-trofeu-ivoti-de-atletismo-7245016",
+            "date": "2026-11-28",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245016",
+            "notes": "28 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-tr-feu-ivoti-de-atletismo-7245016",
+            "date": "2026-08-29",
+            "distance": "Other",
+            "distanceKm": 0,
+            "status": "Open",
+            "entryUrl": "https://worldathletics.org/competition/calendar-results/results/7245016",
+            "startTime": "",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245016",
+            "notes": "29 AUG 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-trofeu-ivoti-de-atletismo-7245016",
+          "name": "Trófeu Ivoti de Atletismo",
+          "sport": "Athletics",
+          "country": "Brazil",
+          "county": "Pista do Instituto Ivoti, Ivoti",
+          "city": "Pista do Instituto Ivoti, Ivoti",
+          "area": "Pista do Instituto Ivoti, Ivoti (BRA)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Trófeu Ivoti de Atletismo — Pista do Instituto Ivoti, Ivoti, Brazil. World Athletics calendar (F).",
+          "description": "Trófeu Ivoti de Atletismo at Pista do Instituto Ivoti, Ivoti (BRA). Track and Field. 28 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7245016",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7245016"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-trofeu-ivoti-de-atletismo-7245016",
+            "date": "2026-11-28",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245016",
+            "notes": "28 NOV 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7245694",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-27th-nittaidai-challenge-games-7245694",
+            "name": "27th NITTAIDAI Challenge Games",
+            "sport": "Athletics",
+            "country": "Japan",
+            "county": "NITTAIDAI Athletic Stadium, Yokohama",
+            "city": "NITTAIDAI Athletic Stadium, Yokohama",
+            "area": "NITTAIDAI Athletic Stadium, Yokohama (JPN)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "27th NITTAIDAI Challenge Games — NITTAIDAI Athletic Stadium, Yokohama, Japan. World Athletics calendar (F).",
+            "description": "27th NITTAIDAI Challenge Games at NITTAIDAI Athletic Stadium, Yokohama (JPN). Track and Field. 21–22 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7245694",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7245694"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-27th-nittaidai-challenge-games-7245694",
+            "date": "2026-11-22",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245694",
+            "notes": "Competition day 2 · 21–22 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-27th-nittaidai-challenge-games-7245694",
+            "date": "2026-11-21",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245694",
+            "notes": "21–22 NOV 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-27th-nittaidai-challenge-games-7245694",
+          "name": "27th NITTAIDAI Challenge Games",
+          "sport": "Athletics",
+          "country": "Japan",
+          "county": "NITTAIDAI Athletic Stadium, Yokohama",
+          "city": "NITTAIDAI Athletic Stadium, Yokohama",
+          "area": "NITTAIDAI Athletic Stadium, Yokohama (JPN)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "27th NITTAIDAI Challenge Games — NITTAIDAI Athletic Stadium, Yokohama, Japan. World Athletics calendar (F).",
+          "description": "27th NITTAIDAI Challenge Games at NITTAIDAI Athletic Stadium, Yokohama (JPN). Track and Field. 21 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7245694",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7245694"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-27th-nittaidai-challenge-games-7245694",
+            "date": "2026-11-21",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245694",
+            "notes": "21 NOV 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7245922",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-juegos-deportivos-nacionales-7245922",
+            "name": "Juegos Deportivos Nacionales",
+            "sport": "Athletics",
+            "country": "Guatemala",
+            "county": "Complejo Deportivo de Quetzaltenango, Quetzaltenango",
+            "city": "Complejo Deportivo de Quetzaltenango, Quetzaltenango",
+            "area": "Complejo Deportivo de Quetzaltenango, Quetzaltenango (GUA)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Juegos Deportivos Nacionales — Complejo Deportivo de Quetzaltenango, Quetzaltenango, Guatemala. World Athletics calendar (F).",
+            "description": "Juegos Deportivos Nacionales at Complejo Deportivo de Quetzaltenango, Quetzaltenango (GUA). Combined Events, Race Walking, Track and Field. 06–08 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7245922",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7245922"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-juegos-deportivos-nacionales-7245922",
+            "date": "2026-11-08",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245922",
+            "notes": "Competition day 3 · 06–08 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-juegos-deportivos-nacionales-7245922",
+            "date": "2026-11-07",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245922",
+            "notes": "Competition day 2 · 06–08 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-juegos-deportivos-nacionales-7245922",
+            "date": "2026-11-06",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245922",
+            "notes": "06–08 NOV 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-juegos-deportivos-nacionales-7245922",
+          "name": "Juegos Deportivos Nacionales",
+          "sport": "Athletics",
+          "country": "Guatemala",
+          "county": "Parque Deportivo Erick Barrondo, Ciudad de Guatemala",
+          "city": "Parque Deportivo Erick Barrondo, Ciudad de Guatemala",
+          "area": "Parque Deportivo Erick Barrondo, Ciudad de Guatemala (GUA)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Juegos Deportivos Nacionales — Parque Deportivo Erick Barrondo, Ciudad de Guatemala, Guatemala. World Athletics calendar (F).",
+          "description": "Juegos Deportivos Nacionales at Parque Deportivo Erick Barrondo, Ciudad de Guatemala (GUA). Combined Events, Race Walking, Track and Field. 06–08 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7245922",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7245922"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-juegos-deportivos-nacionales-7245922",
+            "date": "2026-11-08",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245922",
+            "notes": "Competition day 3 · 06–08 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-juegos-deportivos-nacionales-7245922",
+            "date": "2026-11-07",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245922",
+            "notes": "Competition day 2 · 06–08 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-juegos-deportivos-nacionales-7245922",
+            "date": "2026-11-06",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245922",
+            "notes": "06–08 NOV 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7244697",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-vi-taca-brasil-master-loterias-caixa-de-atletismo-7244697",
+            "name": "VI Taça Brasil Master Loterias Caixa de Atletismo",
+            "sport": "Athletics",
+            "country": "Brazil",
+            "county": "CNDA, Bragança Paulista",
+            "city": "CNDA, Bragança Paulista",
+            "area": "CNDA, Bragança Paulista (BRA)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "VI Taça Brasil Master Loterias Caixa de Atletismo — CNDA, Bragança Paulista, Brazil. World Athletics calendar (F).",
+            "description": "VI Taça Brasil Master Loterias Caixa de Atletismo at CNDA, Bragança Paulista (BRA). Combined Events, Race Walking, Track and Field. 06–08 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7244697",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7244697"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-vi-taca-brasil-master-loterias-caixa-de-atletismo-7244697",
+            "date": "2026-11-08",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244697",
+            "notes": "Competition day 3 · 06–08 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-vi-taca-brasil-master-loterias-caixa-de-atletismo-7244697",
+            "date": "2026-11-07",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244697",
+            "notes": "Competition day 2 · 06–08 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-vi-taca-brasil-master-loterias-caixa-de-atletismo-7244697",
+            "date": "2026-11-06",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244697",
+            "notes": "06–08 NOV 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-vi-taca-brasil-master-loterias-caixa-de-atletismo-7244697",
+          "name": "VI Taça Brasil Master Loterias Caixa de Atletismo",
+          "sport": "Athletics",
+          "country": "Brazil",
+          "county": "Estádio Olímpico do Ibirapuera - Ícaro de Castro Melo, São Paulo",
+          "city": "Estádio Olímpico do Ibirapuera - Ícaro de Castro Melo, São Paulo",
+          "area": "Estádio Olímpico do Ibirapuera - Ícaro de Castro Melo, São Paulo (BRA)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "VI Taça Brasil Master Loterias Caixa de Atletismo — Estádio Olímpico do Ibirapuera - Ícaro de Castro Melo, São Paulo, Brazil. World Athletics calendar (F).",
+          "description": "VI Taça Brasil Master Loterias Caixa de Atletismo at Estádio Olímpico do Ibirapuera - Ícaro de Castro Melo, São Paulo (BRA). Combined Events, Race Walking, Track and Field. 06–08 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7244697",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7244697"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-vi-taca-brasil-master-loterias-caixa-de-atletismo-7244697",
+            "date": "2026-11-08",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244697",
+            "notes": "Competition day 3 · 06–08 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-vi-taca-brasil-master-loterias-caixa-de-atletismo-7244697",
+            "date": "2026-11-07",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244697",
+            "notes": "Competition day 2 · 06–08 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-vi-taca-brasil-master-loterias-caixa-de-atletismo-7244697",
+            "date": "2026-11-06",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244697",
+            "notes": "06–08 NOV 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7245421",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-liga-sesi-7245421",
+            "name": "LIGA SESI",
+            "sport": "Athletics",
+            "country": "Brazil",
+            "county": "Piracicaba",
+            "city": "Piracicaba",
+            "area": "Piracicaba (BRA)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "LIGA SESI — Piracicaba, Brazil. World Athletics calendar (F).",
+            "description": "LIGA SESI at Piracicaba (BRA). Track and Field. 03 OCT 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7245421",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7245421"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-liga-sesi-7245421",
+            "date": "2026-10-03",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245421",
+            "notes": "03 OCT 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-liga-sesi-7245421",
+          "name": "Liga Sesi",
+          "sport": "Athletics",
+          "country": "Brazil",
+          "county": "Sesi, Santo André",
+          "city": "Sesi, Santo André",
+          "area": "Sesi, Santo André (BRA)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Liga Sesi — Sesi, Santo André, Brazil. World Athletics calendar (F).",
+          "description": "Liga Sesi at Sesi, Santo André (BRA). Track and Field. 31 OCT 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7245421",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7245421"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-liga-sesi-7245421",
+            "date": "2026-10-31",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245421",
+            "notes": "31 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-liga-sesi-7245421",
+            "date": "2026-10-03",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7245421",
+            "notes": "03 OCT 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7237752",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-107th-national-sports-festival-7237752",
+            "name": "107th National Sports Festival",
+            "sport": "Athletics",
+            "country": "South Korea",
+            "county": "Jeju Seogwipo Kangchanghak Stadium, Jeju",
+            "city": "Jeju Seogwipo Kangchanghak Stadium, Jeju",
+            "area": "Jeju Seogwipo Kangchanghak Stadium, Jeju (KOR)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "107th National Sports Festival — Jeju Seogwipo Kangchanghak Stadium, Jeju, South Korea. World Athletics calendar (F).",
+            "description": "107th National Sports Festival at Jeju Seogwipo Kangchanghak Stadium, Jeju (KOR). Combined Events, Road Running, Race Walking, Track and Field. 18–21 OCT 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7237752",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7237752"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-107th-national-sports-festival-7237752",
+            "date": "2026-10-21",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7237752",
+            "notes": "Competition day 4 · 18–21 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-107th-national-sports-festival-7237752",
+            "date": "2026-10-20",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7237752",
+            "notes": "Competition day 3 · 18–21 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-107th-national-sports-festival-7237752",
+            "date": "2026-10-19",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7237752",
+            "notes": "Competition day 2 · 18–21 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-107th-national-sports-festival-7237752",
+            "date": "2026-10-18",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7237752",
+            "notes": "18–21 OCT 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-107th-national-sports-festival-7237752",
+          "name": "107th National Sports Festival",
+          "sport": "Athletics",
+          "country": "South Korea",
+          "county": "Jeju Seogwipo Kangchanghak Stadium, Jeju",
+          "city": "Jeju Seogwipo Kangchanghak Stadium, Jeju",
+          "area": "Jeju Seogwipo Kangchanghak Stadium, Jeju (KOR)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "107th National Sports Festival — Jeju Seogwipo Kangchanghak Stadium, Jeju, South Korea. World Athletics calendar (F).",
+          "description": "107th National Sports Festival at Jeju Seogwipo Kangchanghak Stadium, Jeju (KOR). Combined Events, Road Running, Race Walking, Track and Field. 18–21 OCT 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7237752",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7237752"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-107th-national-sports-festival-7237752",
+            "date": "2026-10-21",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7237752",
+            "notes": "Competition day 4 · 18–21 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-107th-national-sports-festival-7237752",
+            "date": "2026-10-20",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7237752",
+            "notes": "Competition day 3 · 18–21 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-107th-national-sports-festival-7237752",
+            "date": "2026-10-19",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7237752",
+            "notes": "Competition day 2 · 18–21 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-107th-national-sports-festival-7237752",
+            "date": "2026-10-18",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "Finished",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7237752",
+            "notes": "18–21 OCT 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7244991",
+      "before": {
+        "series": [
+          {
+            "slug": "wa-japan-games-aomori-7244991",
+            "name": "Japan Games Aomori",
+            "sport": "Athletics",
+            "country": "Japan",
+            "county": "New Aomori Sports Park, Aomori",
+            "city": "New Aomori Sports Park, Aomori",
+            "area": "New Aomori Sports Park, Aomori (JPN)",
+            "surface": "Track",
+            "distances": [
+              "Track & field"
+            ],
+            "summary": "Japan Games Aomori — New Aomori Sports Park, Aomori, Japan. World Athletics calendar (E).",
+            "description": "Japan Games Aomori at New Aomori Sports Park, Aomori (JPN). Race Walking, Track and Field. 15–19 OCT 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+            "organiser": "World Athletics / national federation",
+            "website": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "featured": false,
+            "source_url": "https://worldathletics.org/competition/calendar-results/results/7244991"
+          }
+        ],
+        "editions": [
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-19",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "Competition day 5 · 15–19 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-18",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "Competition day 4 · 15–19 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-17",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "Competition day 3 · 15–19 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-16",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "Competition day 2 · 15–19 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-15",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "15–19 OCT 2026"
+          }
+        ]
+      },
+      "proposed": {
+        "series": {
+          "slug": "wa-japan-games-aomori-7244991",
+          "name": "Japan Games Aomori",
+          "sport": "Athletics",
+          "country": "Japan",
+          "county": "New Aomori Sports Park, Aomori",
+          "city": "New Aomori Sports Park, Aomori",
+          "area": "New Aomori Sports Park, Aomori (JPN)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Japan Games Aomori — New Aomori Sports Park, Aomori, Japan. World Athletics calendar (E).",
+          "description": "Japan Games Aomori at New Aomori Sports Park, Aomori (JPN). Race Walking, Track and Field. 15–19 OCT 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7244991",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7244991"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-19",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "Competition day 5 · 15–19 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-18",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "Finished",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "Competition day 4 · 15–19 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-17",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "Finished",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "Competition day 3 · 15–19 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-16",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "Finished",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "Competition day 2 · 15–19 OCT 2026"
+          },
+          {
+            "seriesSlug": "wa-japan-games-aomori-7244991",
+            "date": "2026-10-15",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "Finished",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7244991",
+            "notes": "15–19 OCT 2026"
+          }
+        ]
+      }
+    }
+  ],
+  "nameReview": [
+    {
+      "sourceId": "7247642",
+      "conflicts": [
+        "wa-polish-u16-championships-7233310"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-polish-u16-championships-7247642",
+          "name": "Polish U16 Championships",
+          "sport": "Athletics",
+          "country": "Poland",
+          "county": "Stadion SOSiR, Slubice",
+          "city": "Stadion SOSiR, Slubice",
+          "area": "Stadion SOSiR, Slubice (POL)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Polish U16 Championships — Stadion SOSiR, Slubice, Poland. World Athletics calendar (F).",
+          "description": "Polish U16 Championships at Stadion SOSiR, Slubice (POL). Race Walking, Track and Field. 25–26 SEP 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247642",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247642"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-polish-u16-championships-7247642",
+            "date": "2027-09-26",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247642",
+            "notes": "Competition day 2 · 25–26 SEP 2027"
+          },
+          {
+            "seriesSlug": "wa-polish-u16-championships-7247642",
+            "date": "2027-09-25",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247642",
+            "notes": "25–26 SEP 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7246829",
+      "conflicts": [
+        "wa-national-juvenile-championships-u18-7247450"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-national-juvenile-championships-u18-7246829",
+          "name": "National Juvenile Championships - U18",
+          "sport": "Athletics",
+          "country": "Ireland",
+          "county": "Tullamore Harriers AC Stadium, Tullamore",
+          "city": "Tullamore Harriers AC Stadium, Tullamore",
+          "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "National Juvenile Championships - U18 — Tullamore Harriers AC Stadium, Tullamore, Ireland. World Athletics calendar (F).",
+          "description": "National Juvenile Championships - U18 at Tullamore Harriers AC Stadium, Tullamore (IRL). Track and Field. 10–11 JUL 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7246829",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7246829"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-national-juvenile-championships-u18-7246829",
+            "date": "2027-07-11",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7246829",
+            "notes": "Competition day 2 · 10–11 JUL 2027"
+          },
+          {
+            "seriesSlug": "wa-national-juvenile-championships-u18-7246829",
+            "date": "2027-07-10",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7246829",
+            "notes": "10–11 JUL 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247542",
+      "conflicts": [
+        "wa-national-juvenile-championships-u20-7247543"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-national-juvenile-championships-u20-7247542",
+          "name": "National Juvenile Championships - U20",
+          "sport": "Athletics",
+          "country": "Ireland",
+          "county": "Tullamore Harriers AC Stadium, Tullamore",
+          "city": "Tullamore Harriers AC Stadium, Tullamore",
+          "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "National Juvenile Championships - U20 — Tullamore Harriers AC Stadium, Tullamore, Ireland. World Athletics calendar (F).",
+          "description": "National Juvenile Championships - U20 at Tullamore Harriers AC Stadium, Tullamore (IRL). Race Walking, Track and Field. 10–11 JUL 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247542",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247542"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-national-juvenile-championships-u20-7247542",
+            "date": "2027-07-11",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247542",
+            "notes": "Competition day 2 · 10–11 JUL 2027"
+          },
+          {
+            "seriesSlug": "wa-national-juvenile-championships-u20-7247542",
+            "date": "2027-07-10",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247542",
+            "notes": "10–11 JUL 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247655",
+      "conflicts": [
+        "wa-oman-athletics-grand-prix-7234124"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-oman-athletics-grand-prix-7247655",
+          "name": "Oman Athletics Grand Prix",
+          "sport": "Athletics",
+          "country": "Oman",
+          "county": "Sultan Qaboos Sports Complex, Muscat",
+          "city": "Sultan Qaboos Sports Complex, Muscat",
+          "area": "Sultan Qaboos Sports Complex, Muscat (OMA)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Oman Athletics Grand Prix — Sultan Qaboos Sports Complex, Muscat, Oman. World Athletics calendar (World Athletics Continental Tour – Silver).",
+          "description": "Oman Athletics Grand Prix at Sultan Qaboos Sports Complex, Muscat (OMA). Track and Field. 05 MAY 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247655",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247655"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-oman-athletics-grand-prix-7247655",
+            "date": "2027-05-05",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247655",
+            "notes": "05 MAY 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247386",
+      "conflicts": [
+        "wa-loughborough-indoor-open-7247408"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-loughborough-indoor-open-7247386",
+          "name": "Loughborough Indoor Open",
+          "sport": "Athletics",
+          "country": "United Kingdom",
+          "county": "Loughborough University Indoor Track, Loughborough",
+          "city": "Loughborough University Indoor Track, Loughborough",
+          "area": "Loughborough University Indoor Track, Loughborough (GBR)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Loughborough Indoor Open — Loughborough University Indoor Track, Loughborough, United Kingdom. World Athletics calendar (F).",
+          "description": "Loughborough Indoor Open at Loughborough University Indoor Track, Loughborough (GBR). Track and Field. 09–10 JAN 2027. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247386",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247386"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-loughborough-indoor-open-7247386",
+            "date": "2027-01-10",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247386",
+            "notes": "Competition day 2 · 09–10 JAN 2027"
+          },
+          {
+            "seriesSlug": "wa-loughborough-indoor-open-7247386",
+            "date": "2027-01-09",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247386",
+            "notes": "09–10 JAN 2027"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247711",
+      "conflicts": [
+        "wa-nsw-milers-series-7245991"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-nsw-milers-series-7247711",
+          "name": "NSW Milers Series",
+          "sport": "Athletics",
+          "country": "Australia",
+          "county": "The Crest Athletics Centre, Bankstown, Sydney",
+          "city": "The Crest Athletics Centre, Bankstown, Sydney",
+          "area": "The Crest Athletics Centre, Bankstown, Sydney (AUS)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "NSW Milers Series — The Crest Athletics Centre, Bankstown, Sydney, Australia. World Athletics calendar (F).",
+          "description": "NSW Milers Series at The Crest Athletics Centre, Bankstown, Sydney (AUS). Track and Field. 19 DEC 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247711",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247711"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-nsw-milers-series-7247711",
+            "date": "2026-12-19",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247711",
+            "notes": "19 DEC 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247384",
+      "conflicts": [
+        "wa-loughborough-indoor-open-7247408"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-loughborough-indoor-open-7247384",
+          "name": "Loughborough Indoor Open",
+          "sport": "Athletics",
+          "country": "United Kingdom",
+          "county": "Loughborough University Indoor Track, Loughborough",
+          "city": "Loughborough University Indoor Track, Loughborough",
+          "area": "Loughborough University Indoor Track, Loughborough (GBR)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Loughborough Indoor Open — Loughborough University Indoor Track, Loughborough, United Kingdom. World Athletics calendar (F).",
+          "description": "Loughborough Indoor Open at Loughborough University Indoor Track, Loughborough (GBR). Track and Field. 05–06 DEC 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247384",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247384"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-loughborough-indoor-open-7247384",
+            "date": "2026-12-06",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247384",
+            "notes": "Competition day 2 · 05–06 DEC 2026"
+          },
+          {
+            "seriesSlug": "wa-loughborough-indoor-open-7247384",
+            "date": "2026-12-05",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247384",
+            "notes": "05–06 DEC 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247681",
+      "conflicts": [
+        "wa-interregional-competitions-7245269",
+        "wa-interregional-competitions-7245300"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-interregional-competitions-7247681",
+          "name": "Interregional Competitions",
+          "sport": "Athletics",
+          "country": "Russia",
+          "county": "Ural GUFK, Chelyabinsk",
+          "city": "Ural GUFK, Chelyabinsk",
+          "area": "Ural GUFK, Chelyabinsk (RUS)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Interregional Competitions — Ural GUFK, Chelyabinsk, Russia. World Athletics calendar (F).",
+          "description": "Interregional Competitions at Ural GUFK, Chelyabinsk (RUS). Track and Field. 28 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247681",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247681"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-interregional-competitions-7247681",
+            "date": "2026-11-28",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247681",
+            "notes": "28 NOV 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247156",
+      "conflicts": [
+        "wa-nsw-milers-series-7245991"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-nsw-milers-series-7247156",
+          "name": "NSW Milers Series",
+          "sport": "Athletics",
+          "country": "Australia",
+          "county": "The Crest Athletics Centre, Bankstown, Sydney",
+          "city": "The Crest Athletics Centre, Bankstown, Sydney",
+          "area": "The Crest Athletics Centre, Bankstown, Sydney (AUS)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "NSW Milers Series — The Crest Athletics Centre, Bankstown, Sydney, Australia. World Athletics calendar (F).",
+          "description": "NSW Milers Series at The Crest Athletics Centre, Bankstown, Sydney (AUS). Track and Field. 19 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247156",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247156"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-nsw-milers-series-7247156",
+            "date": "2026-11-19",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247156",
+            "notes": "19 NOV 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247624",
+      "conflicts": [
+        "wa-interregional-competitions-7245269",
+        "wa-interregional-competitions-7245300"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-interregional-competitions-7247624",
+          "name": "Interregional Competitions",
+          "sport": "Athletics",
+          "country": "Russia",
+          "county": "Ryazan Arena, Ryazan",
+          "city": "Ryazan Arena, Ryazan",
+          "area": "Ryazan Arena, Ryazan (RUS)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Interregional Competitions — Ryazan Arena, Ryazan, Russia. World Athletics calendar (F).",
+          "description": "Interregional Competitions at Ryazan Arena, Ryazan (RUS). Track and Field. 14–15 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247624",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247624"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-interregional-competitions-7247624",
+            "date": "2026-11-15",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247624",
+            "notes": "Competition day 2 · 14–15 NOV 2026"
+          },
+          {
+            "seriesSlug": "wa-interregional-competitions-7247624",
+            "date": "2026-11-14",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247624",
+            "notes": "14–15 NOV 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247480",
+      "conflicts": [
+        "wa-ix-control-preparatorio-7244248"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-ix-control-preparatorio-7247480",
+          "name": "IX Control Preparatorio",
+          "sport": "Athletics",
+          "country": "Peru",
+          "county": "Estadio Atlético de la VIDENA, Lima",
+          "city": "Estadio Atlético de la VIDENA, Lima",
+          "area": "Estadio Atlético de la VIDENA, Lima (PER)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "IX Control Preparatorio — Estadio Atlético de la VIDENA, Lima, Peru. World Athletics calendar (F).",
+          "description": "IX Control Preparatorio at Estadio Atlético de la VIDENA, Lima (PER). Track and Field. 08 NOV 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247480",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247480"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-ix-control-preparatorio-7247480",
+            "date": "2026-11-08",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247480",
+            "notes": "08 NOV 2026"
+          }
+        ]
+      }
+    },
+    {
+      "sourceId": "7247153",
+      "conflicts": [
+        "wa-interregional-competitions-7245269",
+        "wa-interregional-competitions-7245300"
+      ],
+      "proposed": {
+        "series": {
+          "slug": "wa-interregional-competitions-7247153",
+          "name": "Interregional Competitions",
+          "sport": "Athletics",
+          "country": "Russia",
+          "county": "Indoor Arena, Murmansk",
+          "city": "Indoor Arena, Murmansk",
+          "area": "Indoor Arena, Murmansk (RUS)",
+          "surface": "Track",
+          "distances": [
+            "Track & field"
+          ],
+          "summary": "Interregional Competitions — Indoor Arena, Murmansk, Russia. World Athletics calendar (F).",
+          "description": "Interregional Competitions at Indoor Arena, Murmansk (RUS). Track and Field. 31 OCT 2026. Listed on the World Athletics global calendar; check the official page for the meeting timetable and entry arrangements.",
+          "organiser": "World Athletics / national federation",
+          "website": "https://worldathletics.org/competition/calendar-results/results/7247153",
+          "featured": false,
+          "source_url": "https://worldathletics.org/competition/calendar-results/results/7247153"
+        },
+        "editions": [
+          {
+            "seriesSlug": "wa-interregional-competitions-7247153",
+            "date": "2026-10-31",
+            "distance": "Track & field",
+            "distanceKm": 0,
+            "status": "TBC",
+            "source": "https://worldathletics.org/competition/calendar-results/results/7247153",
+            "notes": "31 OCT 2026"
+          }
+        ]
+      }
+    }
+  ],
+  "existingDuplicateIdentities": [
+    {
+      "sourceId": "7245016",
+      "slugs": [
+        "wa-trofeu-ivoti-de-atletismo-7245016",
+        "wa-tr-feu-ivoti-de-atletismo-7245016"
+      ]
+    },
+    {
+      "sourceId": "7239525",
+      "slugs": [
+        "wa-jogos-universitarios-brasileiros-jubs-7239525",
+        "wa-jogos-universit-rios-brasileiros-jubs-7239525"
+      ]
+    },
+    {
+      "sourceId": "7245137",
+      "slugs": [
+        "wa-miting-ak-slavonija-zito-7245137",
+        "wa-miting-ak-slavonija-ito-7245137"
+      ]
+    }
+  ],
+  "omittedSourceIds": [
+    "7246024",
+    "7244476"
+  ]
+}

@@ -1,3 +1,26 @@
+import { recoveredFenlandProfile } from "./club-profiles-ek.ts";
+import { recoveredAbbeyProfile } from "./club-profiles-ej.ts";
+import { olympiaHampshireProfile } from "./club-profiles-ei.ts";
+import { recoveredRiversideAndHeadFirstProfiles } from "./club-profiles-eh.ts";
+import { recoveredTwemlowProfile } from "./club-profiles-eg.ts";
+import { recoveredHoylakeProfile } from "./club-profiles-ef.ts";
+import { recoveredMelsMilersProfile } from "./club-profiles-ee.ts";
+import { recoveredStrideProfile } from "./club-profiles-ed.ts";
+import { recoveredPendleAndIpswichProfiles } from "./club-profiles-ec.ts";
+import { recoveredStaffordCommunityProfiles } from "./club-profiles-eb.ts";
+import { dartfordAndCentralLancsProfiles } from "./club-profiles-ea.ts";
+import { recoveredWinsfordAndBelfastProfiles } from "./club-profiles-dz.ts";
+import { recoveredCoastalAndFellProfiles } from "./club-profiles-dy.ts";
+import { recoveredPoliceAndVectorProfiles } from "./club-profiles-dx.ts";
+import { recoveredEllenboroughAndHydrographicProfiles } from "./club-profiles-dw.ts";
+import { recoveredCumbriaAndServicesProfiles } from "./club-profiles-dv.ts";
+import { recoveredHattonDartsProfile } from "./club-profiles-du.ts";
+import { recoveredWinterHillAndUtsProfiles } from "./club-profiles-dt.ts";
+import { recoveredHelpstonAndTwistedProfiles } from "./club-profiles-ds.ts";
+import { recoveredDerbyAndMiddlewichProfiles } from "./club-profiles-dr.ts";
+import { recoveredMeadsProfile } from "./club-profiles-dq.ts";
+import { recoveredRunningAndTriathlonProfiles } from "./club-profiles-dp.ts";
+import { recoveredClubCommunityProfiles } from "./club-profiles-do.ts";
 import { communityRecoveryProfiles } from "./club-profiles-dn.ts";
 import { recoveredShepshedProfile } from "./club-profiles-dm.ts";
 import { wharfedaleAndWidnesProfiles } from "./club-profiles-dl.ts";
@@ -144,6 +167,29 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...recoveredFenlandProfile,
+  ...recoveredAbbeyProfile,
+  ...olympiaHampshireProfile,
+  ...recoveredRiversideAndHeadFirstProfiles,
+  ...recoveredTwemlowProfile,
+  ...recoveredHoylakeProfile,
+  ...recoveredMelsMilersProfile,
+  ...recoveredStrideProfile,
+  ...recoveredPendleAndIpswichProfiles,
+  ...recoveredStaffordCommunityProfiles,
+  ...dartfordAndCentralLancsProfiles,
+  ...recoveredWinsfordAndBelfastProfiles,
+  ...recoveredCoastalAndFellProfiles,
+  ...recoveredPoliceAndVectorProfiles,
+  ...recoveredEllenboroughAndHydrographicProfiles,
+  ...recoveredCumbriaAndServicesProfiles,
+  ...recoveredHattonDartsProfile,
+  ...recoveredWinterHillAndUtsProfiles,
+  ...recoveredHelpstonAndTwistedProfiles,
+  ...recoveredDerbyAndMiddlewichProfiles,
+  ...recoveredMeadsProfile,
+  ...recoveredRunningAndTriathlonProfiles,
+  ...recoveredClubCommunityProfiles,
   ...communityRecoveryProfiles,
   ...recoveredShepshedProfile,
   ...wharfedaleAndWidnesProfiles,
@@ -991,4 +1037,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-18-v118";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-19-v142";
