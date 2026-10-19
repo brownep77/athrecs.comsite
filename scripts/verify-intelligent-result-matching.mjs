@@ -482,6 +482,22 @@ try {
     )[0].n,
     1,
   );
+  const afterClaim = await combined({ name: "Synthetic Former" });
+  assert.equal(
+    afterClaim.rows.length,
+    1,
+    "Already-owned profile/history duplicates do not reappear as archive suggestions",
+  );
+  assert.equal(afterClaim.rows[0].kind, "archive");
+  assert.equal(
+    afterClaim.rows[0].match.seconds,
+    2500,
+    "A genuinely different saved result stays reviewable",
+  );
+  assert(
+    !JSON.stringify(afterClaim).includes(sourceUrl),
+    "Owned comparison evidence stays private",
+  );
   console.log(
     "PASS: name and verified email enforced; claims and stored suggestions work without birth date or nationality; alias/distance/year matches; age conflict review; private settings isolation; consent, adult and ZDR gates; external payload minimisation; withdrawal clears contact and cache.",
   );

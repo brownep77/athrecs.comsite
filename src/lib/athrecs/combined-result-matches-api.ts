@@ -20,7 +20,20 @@ export type CombinedResultMatch =
   | { kind: "profile"; key: string; match: PotentialResultMatch }
   | { kind: "archive"; key: string; match: MemberArchiveMatch };
 
-type Candidate = { row: CombinedResultMatch; identity: ResultCandidateIdentity };
+type Candidate = { row: CombinedResultMatch | null; identity: ResultCandidateIdentity };
+type OwnedRow = {
+  athlete_id: number;
+  name: string;
+  date: string;
+  event: string;
+  event_slug: string;
+  distance: string;
+  performance: string;
+  seconds: number | null;
+  bib: string | null;
+  sources: string[];
+  detail: Record<string, unknown>;
+};
 type HistoryRow = {
   athlete_id: number;
   key: string;
@@ -97,14 +110,42 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
         from athlete_private_profiles where user_id=${context.userId}`,
     ]);
     // Evidence is used only on the server for comparison, never returned to members.
-    const archiveEvidence = archive.length
-      ? await sql<{ id: number; source_url: string; event_slug: string }>`
-      select a.id,d.source_url,e.slug as event_slug from result_archive_entries a
-      join result_archive_datasets d on d.id=a.dataset_id join editions ed on ed.id=d.edition_id
-      join events e on e.id=ed.event_id
-      where a.id=any(${archive.map((row) => row.id)}::bigint[])
-        and a.canonical_result_id is null and a.review_state='unmatched'`
-      : [];
+    const archiveDates = [...new Set(archive.map((row) => row.date))];
+    const [archiveEvidence, ownedRows] = await Promise.all([
+      archive.length
+        ? sql<{ id: number; source_url: string; event_slug: string }>`
+        select a.id,d.source_url,e.slug as event_slug from result_archive_entries a
+        join result_archive_datasets d on d.id=a.dataset_id join editions ed on ed.id=d.edition_id
+        join events e on e.id=ed.event_id
+        where a.id=any(${archive.map((row) => row.id)}::bigint[])
+          and a.canonical_result_id is null and a.review_state='unmatched'`
+        : Promise.resolve([]),
+      // Only the caller's active profiles, and only dates present in archive suggestions.
+      // These comparison rows never become new suggestions or leave the server.
+      archive.length
+        ? sql<OwnedRow>`
+        select a.id as athlete_id,a.display_name as name,r.event_date as date,r.event_name as event,
+          r.event_slug,r.distance_code as distance,
+          coalesce(r.result_details#>>'{timing,finishText}',r.result_details->>'performance','') as performance,
+          r.finish_time_seconds::double precision as seconds,r.bib,
+          array_remove(array[r.source_url],null) as sources,r.result_details as detail
+        from athlete_account_links l join athletes a on a.id=l.athlete_id
+        join athlete_claimable_results r on r.athlete_id=a.id
+        where l.user_id=${context.userId} and l.status='active' and r.available
+          and athrecs_test_access(${context.userId},a.id) and r.event_date=any(${archiveDates}::text[])
+        union all
+        select a.id,a.display_name,p->>'date',coalesce(p->>'meeting',''),coalesce(p->>'eventSlug',''),
+          coalesce(p->>'discipline',''),coalesce(p->>'performance',''),null::double precision,
+          coalesce(p->>'bib',p#>>'{archiveReference,original,Bib}'),
+          array(select jsonb_array_elements_text(coalesce(p->'sourceUrls','[]'::jsonb))),p
+        from athlete_account_links l join athletes a on a.id=l.athlete_id
+        join athlete_source_histories h on h.athlete_id=a.id cross join lateral jsonb_array_elements(h.performances)p
+        where l.user_id=${context.userId} and l.status='active' and h.published_at is not null
+          and athrecs_test_access(${context.userId},a.id) and a.parent_athlete_id is null
+          and coalesce(p->>'profileExcluded','false')<>'true' and p->>'date'=any(${archiveDates}::text[])
+        order by athlete_id,date limit ${MAX_HISTORY_ROWS + 1}`
+        : Promise.resolve([]),
+    ]);
     const archiveMeta = new Map(archiveEvidence.map((row) => [row.id, row]));
     const account = identities[0];
     const accountContext = {
@@ -223,6 +264,27 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
         },
       });
     }
+    for (const row of ownedRows.slice(0, MAX_HISTORY_ROWS)) {
+      if (!candidateMark(row.performance, row.seconds)) continue;
+      const detail = row.detail ?? {};
+      candidates.push({
+        row: null,
+        identity: {
+          athleteId: row.athlete_id,
+          name: row.name,
+          date: row.date,
+          event: row.event,
+          eventSlug: row.event_slug,
+          distance: row.distance,
+          performance: row.performance,
+          seconds: row.seconds,
+          bib: row.bib,
+          sources: row.sources,
+          round: round(detail.labels),
+          qualification: qualification(detail),
+        },
+      });
+    }
     for (const match of archive) {
       const evidence = archiveMeta.get(match.id);
       if (!evidence) continue;
@@ -245,8 +307,9 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
     }
     const groups = groupResultCandidates(candidates, (candidate) => candidate.identity);
     const rows = groups
-      .map((group) => {
+      .flatMap<CombinedResultMatch>((group) => {
         const row = group[0].row;
+        if (!row || group.some((item) => item.row === null)) return [];
         if (row.kind === "profile") {
           const alternatePerformances = [
             ...new Set(
@@ -261,9 +324,9 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
                 ),
             ),
           ];
-          return { ...row, match: { ...row.match, alternatePerformances } };
+          return [{ ...row, match: { ...row.match, alternatePerformances } }];
         }
-        return row;
+        return [row];
       })
       .sort((a, b) => {
         const dateA = a.kind === "profile" ? a.match.eventDate : a.match.date;
@@ -274,7 +337,12 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
       searchedNames: primary.searchedNames,
       rows,
       totalMatches: rows.length,
-      duplicatesCombined: candidates.length - rows.length,
-      truncated: primary.truncated || histories.length > MAX_HISTORY_ROWS || archive.length === 50,
+      duplicatesCombined:
+        candidates.filter((candidate) => candidate.row !== null).length - rows.length,
+      truncated:
+        primary.truncated ||
+        histories.length > MAX_HISTORY_ROWS ||
+        ownedRows.length > MAX_HISTORY_ROWS ||
+        archive.length === 50,
     };
   });
