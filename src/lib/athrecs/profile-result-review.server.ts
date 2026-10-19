@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import type { Sql } from "../db";
+import { candidateMark, groupResultCandidates } from "./result-candidate-groups";
 import { resultIssues } from "../athlete-workspace/core";
 import type { ProfileResultReviewInput, ProfileReviewRow } from "./profile-result-review";
 
@@ -9,17 +10,23 @@ type StoredRow = ProfileReviewRow & {
   provider: string | null;
   externalId: string | null;
   performanceHash: string | null;
+  sourceUrls: string[];
+  detail: Record<string, unknown>;
+};
+type ReviewGroup = StoredRow & {
+  members: StoredRow[];
 };
 export async function loadProfileResultReview(sql: Sql, userId: string, athleteId: number) {
   const rows = await sql<StoredRow>`
     select 'r:'||r.id as key,r.event_name as race,r.event_date as date,r.distance_code as distance,
-      coalesce(r.result_details->'timing'->>'finishText',case when r.finish_time_seconds is not null then
+      coalesce(r.result_details->'timing'->>'finishText',r.result_details->>'performance',case when r.finish_time_seconds is not null then
         (r.finish_time_seconds/3600)::text||':'||lpad(((r.finish_time_seconds%3600)/60)::text,2,'0')||':'||lpad((r.finish_time_seconds%60)::text,2,'0') end,'') as performance,
       r.chip_time_seconds as chip,r.gun_time_seconds as gun,r.status,
       r.bib,r.club_name as club,r.category,r.age_at_race as age,r.overall_place as place,
       (exists(select 1 from athlete_profile_hidden_results h where h.user_id=${userId} and h.result_id=r.id)
         or exists(select 1 from athlete_profile_hidden_source_results h where h.user_id=${userId} and h.source_result_id=-r.id)) as excluded,
-      r.id as "resultId",null::text as provider,null::text as "externalId",null::text as "performanceHash"
+      r.id as "resultId",null::text as provider,null::text as "externalId",null::text as "performanceHash",
+      array_remove(array[r.source_url],null) as "sourceUrls",r.result_details as detail
     from athlete_claimable_results r where r.athlete_id=${athleteId}
       and ((r.id>0 and coalesce(r.result_details->>'profileExcluded','false')<>'true') or (r.id<0 and r.available))
     union all
@@ -31,7 +38,8 @@ export async function loadProfileResultReview(sql: Sql, userId: string, athleteI
       exists(select 1 from athlete_profile_history_choices c where c.user_id=${userId}
         and c.athlete_id=h.athlete_id and c.provider=h.provider and c.external_id=h.external_id
         and c.performance_hash=md5(p::text) and c.excluded),
-      null::integer,h.provider,h.external_id,md5(p::text)
+      null::integer,h.provider,h.external_id,md5(p::text),
+      array(select jsonb_array_elements_text(coalesce(p->'sourceUrls','[]'::jsonb))),p
     from athlete_source_histories h cross join lateral jsonb_array_elements(h.performances)p
     where h.athlete_id=${athleteId} and h.published_at is not null
       and coalesce(p->>'profileExcluded','false')<>'true'
@@ -41,7 +49,42 @@ export async function loadProfileResultReview(sql: Sql, userId: string, athleteI
     limit 20001`;
   if (rows.length > 20000)
     throw new Error("This profile needs a larger review. Please contact support@athrecs.com.");
-  const unique = [...new Map(rows.map((row) => [row.key, row])).values()];
+  // Non-finishes remain reviewable. Empty unverified placeholders are not performances.
+  const eligible = [...new Map(rows.map((row) => [row.key, row])).values()].filter(
+    (row) => row.performance.trim() || !["", "unverified"].includes(row.status.toLowerCase()),
+  );
+  eligible.sort((a, b) => Number(b.resultId !== null) - Number(a.resultId !== null));
+  const unique: ReviewGroup[] = groupResultCandidates(eligible, (row) => ({
+    athleteId,
+    name: `profile ${athleteId}`,
+    date: row.date,
+    distance: row.distance,
+    event: row.race,
+    performance: row.performance,
+    bib: row.bib,
+    sources: row.sourceUrls,
+    round: Array.isArray(row.detail?.labels)
+      ? row.detail.labels
+          .filter((label) => typeof label === "string" && /^(?:round|heat|stage|leg):/i.test(label))
+          .map((label: string) => label.trim().toLowerCase())
+          .sort()
+          .join("|")
+      : "",
+    qualification: JSON.stringify([row.detail?.disqualification ?? null, row.detail?.wind || ""]),
+  })).map((members) => ({
+    ...members[0],
+    members,
+    excluded: members.some((row) => row.excluded),
+    alternatePerformances: [
+      ...new Set(
+        members
+          .slice(1)
+          .map((row) => row.performance)
+          .filter((mark) => mark && candidateMark(mark) !== candidateMark(members[0].performance)),
+      ),
+    ],
+  }));
+  unique.sort((a, b) => b.date.localeCompare(a.date) || a.key.localeCompare(b.key));
   const [last] = await sql<{
     created_at: string;
   }>`select created_at::text from athlete_profile_result_confirmations
@@ -59,6 +102,7 @@ export function publicReview(review: Awaited<ReturnType<typeof loadProfileResult
         date,
         distance,
         performance,
+        alternatePerformances,
         chip,
         gun,
         status,
@@ -74,6 +118,7 @@ export function publicReview(review: Awaited<ReturnType<typeof loadProfileResult
         date,
         distance,
         performance,
+        alternatePerformances,
         chip,
         gun,
         status,
@@ -159,16 +204,22 @@ export async function saveProfileResultReview(
   // Freeze a single summary in the same transaction as the declaration.
   await sql`update athlete_profile_result_confirmations set email_payload=${JSON.stringify({ id: input.requestId, resultId: 0, claimantEmail: recipient.email, athleteName: recipient.name, included: included.length, excluded: excluded.length, added: input.additions.length, status: recipient.owned ? "approved" : "pending" })}::jsonb where id=${input.requestId}::uuid`;
   // Account choices are inert until ownership is active. They never change source records.
-  const canonical = review.rows
+  // A choice applies to every stored representation of the displayed result.
+  const allRows = review.rows.flatMap((row) => row.members);
+  const excludedRows = excluded.flatMap((row) => row.members);
+  const selectedMemberKeys = new Set(
+    included.flatMap((row) => row.members.map((member) => member.key)),
+  );
+  const canonical = allRows
     .filter((r) => r.resultId !== null && r.resultId > 0)
     .map((r) => r.resultId as number);
-  const source = review.rows
+  const source = allRows
     .filter((r) => r.resultId !== null && r.resultId < 0)
     .map((r) => -(r.resultId as number));
-  const hiddenCanonical = excluded
+  const hiddenCanonical = excludedRows
     .filter((r) => r.resultId !== null && r.resultId > 0)
     .map((r) => r.resultId as number);
-  const hiddenSource = excluded
+  const hiddenSource = excludedRows
     .filter((r) => r.resultId !== null && r.resultId < 0)
     .map((r) => -(r.resultId as number));
   await sql`delete from athlete_profile_hidden_results where user_id=${userId} and result_id=any(${canonical}::int[])`;
@@ -177,13 +228,13 @@ export async function saveProfileResultReview(
   await sql`delete from athlete_profile_hidden_source_results where user_id=${userId} and source_result_id=any(${source}::int[])`;
   await sql`insert into athlete_profile_hidden_source_results(user_id,source_result_id)
     select ${userId},unnest(${hiddenSource}::int[]) on conflict do nothing`;
-  const histories = review.rows
+  const histories = allRows
     .filter((r) => r.resultId === null)
     .map((row) => ({
       provider: row.provider,
       external_id: row.externalId,
       performance_hash: row.performanceHash,
-      excluded: !selected.has(row.key),
+      excluded: !selectedMemberKeys.has(row.key),
     }));
   await sql`insert into athlete_profile_history_choices(user_id,athlete_id,provider,external_id,performance_hash,excluded)
     select ${userId},${athleteId},r.provider,r.external_id,r.performance_hash,r.excluded

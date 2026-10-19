@@ -5,7 +5,8 @@ import {
 import { ProfileResultConfirmation } from "./ProfileResultConfirmation";
 import { getClaimableResult } from "@/lib/athrecs/result-claims-api";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArchivedResultSuggestions } from "./ArchivedResultSuggestions";
+import { requestMyArchiveMatches } from "@/lib/results-archive/member-api";
+import { listMyCombinedResultMatches } from "@/lib/athrecs/combined-result-matches-api";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
@@ -26,7 +27,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import {
-  listMyPotentialResultMatches,
   type PotentialResultClaimStatus,
   type PotentialResultMatch,
 } from "@/lib/athrecs/result-match-api";
@@ -43,6 +43,10 @@ import {
 } from "@/lib/athrecs/profile-connections-api";
 
 const INITIAL_MATCH_COUNT = 8;
+const preciseDuration = (seconds: number | null) => {
+  const fraction = seconds == null ? "" : String(seconds).split(".")[1];
+  return `${formatDuration(seconds)}${fraction ? `.${fraction}` : ""}`;
+};
 
 const CLAIM_STATUS_LABELS: Record<PotentialResultClaimStatus, string> = {
   pending: "Claim pending",
@@ -229,7 +233,27 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
     },
     onError: (error) => setFeedback(error.message),
   });
-  const [expanded, setExpanded] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_MATCH_COUNT);
+  // Revisions stay fixed across background refreshes; the server checks them on submission.
+  const [selectedArchive, setSelectedArchive] = useState<Map<number, number>>(() => new Map());
+  const [archiveNote, setArchiveNote] = useState("");
+  const requestArchive = useMutation({
+    mutationFn: () =>
+      requestMyArchiveMatches({
+        data: {
+          entries: [...selectedArchive].map(([entryId, revision]) => ({ entryId, revision })),
+          note: archiveNote,
+        },
+      }),
+    onSuccess: async (result) => {
+      setSelectedArchive(new Map());
+      setArchiveNote("");
+      setFeedback(
+        `${result.requested} saved ${result.requested === 1 ? "result" : "results"} submitted for a match check.`,
+      );
+      await refresh();
+    },
+  });
   const [searchPublic, setSearchPublic] = useState(false);
   const { user, isPending: sessionPending } = useCurrentUserState();
   const dismissed = useQuery({
@@ -240,7 +264,7 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
   });
   const matches = useQuery({
     queryKey: ["my-potential-result-matches", user?.id, filters],
-    queryFn: () => listMyPotentialResultMatches({ data: filters }),
+    queryFn: () => listMyCombinedResultMatches({ data: filters }),
     enabled: Boolean(user),
     retry: false,
     staleTime: 60_000,
@@ -280,19 +304,20 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
     );
   }
 
-  const scopedMatches = matches.data.matches.filter((match) =>
-    sportIsInAthleteProfileScope(match.sport),
+  const scopedMatches = matches.data.rows.filter((row) =>
+    sportIsInAthleteProfileScope(
+      row.kind === "profile" ? row.match.sport : (row.match.sport ?? "Running"),
+    ),
   );
   const data = {
     ...matches.data,
     matches: scopedMatches,
     totalMatches: scopedMatches.length,
   };
-  const visibleMatches = expanded ? data.matches : data.matches.slice(0, INITIAL_MATCH_COUNT);
+  const visibleMatches = data.matches.slice(0, visibleCount);
 
   return (
     <section className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
-      <ArchivedResultSuggestions userId={user.id} filters={filters} />
       {feedback ? (
         <p role="status" className="border-b border-border bg-accent-soft p-4 text-sm text-fg">
           {feedback}
@@ -338,16 +363,18 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
             </h2>
           </div>
           <p className="mt-2 text-sm leading-6 text-muted">
-            These are suggestions, not confirmed ownership. Confirm your result, or choose Not me to
-            dismiss that athlete. Straightforward claims complete immediately; claims needing
-            clarification go to staff.
+            Review your stored results and published histories together. Clear duplicates are shown
+            once; entries without a recorded performance are left out of this count. These are
+            suggestions, not confirmed ownership. Claim a profile once to review its results, or
+            select saved results that need a staff match check.
           </p>
           {data.searchedNames.length ? (
             <p className="mt-2 text-xs text-subtle">Checked: {data.searchedNames.join(" · ")}</p>
           ) : null}
         </div>
         <Badge className="border-accent/30 bg-accent-soft text-accent">
-          {data.totalMatches} potential match{data.totalMatches === 1 ? "" : "es"}
+          {data.truncated ? "At least " : ""}
+          {data.totalMatches} potential result{data.totalMatches === 1 ? "" : "s"}
         </Badge>
       </div>
 
@@ -379,120 +406,247 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
         </div>
       ) : (
         <div className="divide-y divide-border">
-          {visibleMatches.map((match) => (
-            <article key={match.resultId} className="space-y-4 p-5">
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge className={confidenceClass(match)}>{confidenceLabel(match)}</Badge>
-                    {match.claimStatus ? (
-                      <Badge className={claimStatusClass(match.claimStatus)}>
-                        {CLAIM_STATUS_LABELS[match.claimStatus]}
-                      </Badge>
+          {visibleMatches.map((row) => {
+            if (row.kind === "archive") {
+              const match = row.match;
+              return (
+                <article key={row.key} className="space-y-3 p-5">
+                  <Badge className="border-amber-500/30 bg-amber-50 text-amber-950">
+                    Match check needed
+                  </Badge>
+                  <label className="flex items-start gap-3">
+                    <input
+                      type="checkbox"
+                      className="mt-1 size-5 shrink-0 accent-primary"
+                      checked={selectedArchive.has(match.id)}
+                      disabled={
+                        requestArchive.isPending ||
+                        match.requested ||
+                        (!selectedArchive.has(match.id) && selectedArchive.size >= 30)
+                      }
+                      aria-label={`Select saved result ${match.event} ${match.date}`}
+                      onChange={() =>
+                        setSelectedArchive((previous) => {
+                          const next = new Map(previous);
+                          if (next.has(match.id)) next.delete(match.id);
+                          else if (next.size < 30) next.set(match.id, match.revision);
+                          return next;
+                        })
+                      }
+                    />
+                    <span>
+                      <strong className="font-display text-lg">{match.event}</strong>
+                      <span className="block text-sm">
+                        {match.name} · {formatRaceDateShort(match.date)} · {match.distance}
+                      </span>
+                      <span className="block font-semibold tabular-nums">
+                        {preciseDuration(match.seconds)}
+                      </span>
+                      <span className="block text-xs text-muted">
+                        {[match.club, match.bib ? `Bib ${match.bib}` : "", match.category]
+                          .filter(Boolean)
+                          .join(" · ")}
+                      </span>
+                      <span className="block text-xs text-muted">{match.reasons?.join(" · ")}</span>
+                      {match.requested ? (
+                        <span className="block text-sm">Requested — awaiting staff review.</span>
+                      ) : null}
+                    </span>
+                  </label>
+                </article>
+              );
+            }
+            const match = row.match;
+            return (
+              <article key={row.key} className="space-y-4 p-5">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge className={confidenceClass(match)}>{confidenceLabel(match)}</Badge>
+                      {match.claimStatus ? (
+                        <Badge className={claimStatusClass(match.claimStatus)}>
+                          {CLAIM_STATUS_LABELS[match.claimStatus]}
+                        </Badge>
+                      ) : null}
+                    </div>
+                    <h3 className="mt-3 font-display text-lg font-semibold text-fg">
+                      {match.eventName}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted">
+                      <strong className="font-semibold text-fg">{match.athleteName}</strong> ·{" "}
+                      {formatRaceDateShort(match.eventDate)} · {match.distanceCode}
+                    </p>
+                    {match.clubName || locationText(match) ? (
+                      <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-subtle">
+                        {match.clubName ? <span>{match.clubName}</span> : null}
+                        {locationText(match) ? (
+                          <span className="inline-flex items-center gap-1">
+                            <MapPin className="size-3.5" aria-hidden="true" />
+                            {locationText(match)}
+                          </span>
+                        ) : null}
+                      </p>
                     ) : null}
                   </div>
-                  <h3 className="mt-3 font-display text-lg font-semibold text-fg">
-                    {match.eventName}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted">
-                    <strong className="font-semibold text-fg">{match.athleteName}</strong> ·{" "}
-                    {formatRaceDateShort(match.eventDate)} · {match.distanceCode}
-                  </p>
-                  {match.clubName || locationText(match) ? (
-                    <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-subtle">
-                      {match.clubName ? <span>{match.clubName}</span> : null}
-                      {locationText(match) ? (
-                        <span className="inline-flex items-center gap-1">
-                          <MapPin className="size-3.5" aria-hidden="true" />
-                          {locationText(match)}
-                        </span>
-                      ) : null}
+
+                  <div className="min-w-28 text-right">
+                    <p className="font-display text-xl font-semibold tabular-nums text-fg">
+                      {match.performanceText ||
+                        (match.finishTimeSeconds == null
+                          ? "Performance unavailable"
+                          : formatDuration(match.finishTimeSeconds))}
                     </p>
-                  ) : null}
+                    {match.alternatePerformances?.length ? (
+                      <p className="mt-1 text-xs text-subtle">
+                        Also recorded as: {match.alternatePerformances.join(" · ")}
+                      </p>
+                    ) : null}
+                    <p className="mt-1 text-xs text-subtle">
+                      {[
+                        placeText(match.overallPlace),
+                        match.category,
+                        match.ageAtRace ? `Age at race ${match.ageAtRace}` : "",
+                        match.bib ? `Bib ${match.bib}` : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="min-w-28 text-right">
-                  <p className="font-display text-xl font-semibold tabular-nums text-fg">
-                    {match.finishTimeSeconds == null
-                      ? "Time unavailable"
-                      : formatDuration(match.finishTimeSeconds)}
-                  </p>
-                  <p className="mt-1 text-xs text-subtle">
-                    {[
-                      placeText(match.overallPlace),
-                      match.category,
-                      match.ageAtRace ? `Age at race ${match.ageAtRace}` : "",
-                      match.bib ? `Bib ${match.bib}` : "",
-                    ]
-                      .filter(Boolean)
-                      .join(" · ")}
-                  </p>
+                <div className="rounded-lg bg-elevated px-3 py-2 text-xs leading-5 text-muted">
+                  <strong className="text-fg">Why this was suggested:</strong>{" "}
+                  {match.reasons.join("; ")}. Matched against “{match.matchedAccountName}”.
                 </div>
-              </div>
 
-              <div className="rounded-lg bg-elevated px-3 py-2 text-xs leading-5 text-muted">
-                <strong className="text-fg">Why this was suggested:</strong>{" "}
-                {match.reasons.join("; ")}. Matched against “{match.matchedAccountName}”.
-              </div>
+                {match.ownedByAnotherAccount ? (
+                  <p className="flex items-start gap-2 rounded-lg border border-amber-500/30 bg-amber-50 px-3 py-2 text-xs text-amber-950">
+                    <AlertTriangle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                    This athlete profile is already linked to another account. You may still submit
+                    a claim, but staff will require stronger evidence before changing ownership.
+                  </p>
+                ) : null}
 
-              {match.ownedByAnotherAccount ? (
-                <p className="flex items-start gap-2 rounded-lg border border-amber-500/30 bg-amber-50 px-3 py-2 text-xs text-amber-950">
-                  <AlertTriangle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-                  This athlete profile is already linked to another account. You may still submit a
-                  claim, but staff will require stronger evidence before changing ownership.
-                </p>
-              ) : null}
-
-              <div className="flex flex-wrap items-center gap-2">
-                {match.claimStatus === "approved" ? (
-                  <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
-                    Linked to your private Athlete Account
-                  </Badge>
-                ) : match.claimStatus === "pending" ||
-                  match.claimStatus === "needs_info" ||
-                  match.ownedByAnotherAccount ? (
-                  <Button asChild>
-                    <Link to="/claim-results" search={{ resultId: match.resultId }}>
-                      {actionLabel(match)}
-                    </Link>
-                  </Button>
-                ) : (
+                <div className="flex flex-wrap items-center gap-2">
+                  {match.claimStatus === "approved" ? (
+                    <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
+                      Linked to your private Athlete Account
+                    </Badge>
+                  ) : match.claimStatus === "pending" ||
+                    match.claimStatus === "needs_info" ||
+                    match.ownedByAnotherAccount ? (
+                    <Button asChild>
+                      <Link to="/claim-results" search={{ resultId: match.resultId }}>
+                        {actionLabel(match)}
+                      </Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => {
+                        setFeedback("");
+                        setConfirmMatch(match);
+                      }}
+                    >
+                      <Trophy className="size-4" aria-hidden="true" />
+                      Claim profile &amp; review all results
+                    </Button>
+                  )}
                   <Button
-                    onClick={() => {
-                      setFeedback("");
-                      setConfirmMatch(match);
-                    }}
+                    variant="secondary"
+                    disabled={dismiss.isPending}
+                    onClick={() => dismiss.mutate({ athleteId: match.athleteId, dismissed: true })}
                   >
-                    <Trophy className="size-4" aria-hidden="true" />
-                    Claim profile &amp; review all results
+                    Not me
                   </Button>
-                )}
-                <Button
-                  variant="secondary"
-                  disabled={dismiss.isPending}
-                  onClick={() => dismiss.mutate({ athleteId: match.athleteId, dismissed: true })}
-                >
-                  Not me
-                </Button>
-                <Button asChild variant="ghost">
-                  <ProfileEventLink result={match}>View event</ProfileEventLink>
-                </Button>
-              </div>
-            </article>
-          ))}
+                  <Button asChild variant="ghost">
+                    <ProfileEventLink result={match}>View event</ProfileEventLink>
+                  </Button>
+                </div>
+              </article>
+            );
+          })}
         </div>
       )}
 
+      {selectedArchive.size ? (
+        <fieldset
+          disabled={requestArchive.isPending}
+          className="space-y-3 border-t border-border bg-accent-soft p-5"
+        >
+          <legend className="sr-only">Request a match check for selected saved results</legend>
+          <p role="status" className="font-semibold">
+            {selectedArchive.size} saved {selectedArchive.size === 1 ? "result" : "results"}{" "}
+            selected
+          </p>
+          <label className="block text-sm">
+            What helps us confirm these results are yours?
+            <textarea
+              className="mt-2 w-full rounded-lg border border-border bg-bg p-3"
+              maxLength={2000}
+              value={archiveNote}
+              onChange={(event) => setArchiveNote(event.target.value)}
+              placeholder="Your club at the time, bib numbers or other identifying details"
+            />
+          </label>
+          <p className="text-xs text-muted">
+            One note covers your selection. Up to 30 result reviews per day.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              disabled={archiveNote.trim().length < 12}
+              onClick={() => requestArchive.mutate()}
+            >
+              {requestArchive.isPending
+                ? "Submitting…"
+                : `Request review of ${selectedArchive.size} ${selectedArchive.size === 1 ? "result" : "results"}`}
+            </Button>
+            <Button variant="secondary" onClick={() => setSelectedArchive(new Map())}>
+              Clear selection
+            </Button>
+          </div>
+        </fieldset>
+      ) : null}
+      {requestArchive.isError ? (
+        <div role="alert" className="space-y-2 p-5 text-sm">
+          <p>{requestArchive.error.message}</p>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setSelectedArchive(new Map());
+              requestArchive.reset();
+              void matches.refetch();
+            }}
+          >
+            Reload suggestions
+          </Button>
+        </div>
+      ) : null}
+
       {data.matches.length > INITIAL_MATCH_COUNT ? (
         <div className="border-t border-border p-4 text-center">
-          <Button type="button" variant="secondary" onClick={() => setExpanded((value) => !value)}>
-            {expanded ? (
-              <ChevronUp className="size-4" aria-hidden="true" />
-            ) : (
+          {visibleCount < data.matches.length ? (
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setVisibleCount((value) => value + 50)}
+            >
               <ChevronDown className="size-4" aria-hidden="true" />
-            )}
-            {expanded ? "Show fewer matches" : `Show all ${data.matches.length} returned matches`}
-          </Button>
+              Show {Math.min(50, data.matches.length - visibleCount)} more results
+            </Button>
+          ) : null}
+          {visibleCount > INITIAL_MATCH_COUNT ? (
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => setVisibleCount(INITIAL_MATCH_COUNT)}
+            >
+              <ChevronUp className="size-4" aria-hidden="true" />
+              Show fewer results
+            </Button>
+          ) : null}
+          <p className="mt-2 text-xs text-subtle">
+            Showing {visibleMatches.length} of {data.matches.length} returned results.
+          </p>
           {data.truncated ? (
             <p className="mt-2 text-xs text-subtle">
               The list is capped for safety and performance. Add club or location details to improve

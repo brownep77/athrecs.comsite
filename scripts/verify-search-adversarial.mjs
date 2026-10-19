@@ -321,8 +321,9 @@ try {
   });
   await saveIdentity();
   await check("newer weak candidates cannot crowd out an older exact name", async () => {
-    await sql`insert into athletes(id,slug,display_name,profile_visibility) select n,'synthetic-scenic-runner-'||n,'Scenic Runner','private' from generate_series(993700,994700) n`;
-    await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,status) select n,992600,n,2400,'finished' from generate_series(993700,994700) n`;
+    // Exceed the larger 5,000-row discovery cap while retaining the old date-first control.
+    await sql`insert into athletes(id,slug,display_name,profile_visibility) select n,'synthetic-scenic-runner-'||n,'Scenic Runner','private' from generate_series(993700,998700) n`;
+    await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,status) select n,992600,n,2400,'finished' from generate_series(993700,998700) n`;
     const oldWindow =
       await sql`select r.id from results r join athletes a on a.id=r.athlete_id join editions ed on ed.id=r.edition_id where lower(a.display_name) like '%s%runner%' and ed.event_date::text like '2026%' and ed.distance_code='10K' order by ed.event_date desc,r.id desc limit 1000`;
     assert.equal(oldWindow.length, 1000);

@@ -138,6 +138,11 @@ jobs:
       - name: Social recruitment and sourced athlete profile
         run: node scripts/verify-recruitment-ui.mjs
 
+      - name: Combined result discovery and confirmation safeguards
+        run: |
+          node scripts/verify-combined-result-groups.mjs
+          node scripts/verify-result-conflict-flow.mjs
+
       - name: Type-check, lint and verify
         run: npm run ci:verify
 
