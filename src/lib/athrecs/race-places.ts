@@ -148,20 +148,23 @@ export function buildRacePlaces(races: readonly PlaceRace[]) {
   return places;
 }
 
+function isUpcomingEdition(edition: PlaceEdition, today: string) {
+  return (
+    /^\d{4}-\d{2}-\d{2}$/.test(edition.date) &&
+    Number.isFinite(Date.parse(edition.date)) &&
+    new Date(edition.date).toISOString().slice(0, 10) === edition.date &&
+    !["Cancelled", "Finished"].includes(edition.status) &&
+    (edition.endDate ?? edition.date) >= today
+  );
+}
+
 export function nextPlaceEdition(race: PlaceRace, now: string, localDate?: string) {
   // With no checked venue zone, retain the race until its date has ended
   // worldwide rather than expiring a US/Australian race on London's clock.
   const today = localDate ?? raceLocalDate(race.timeZone ?? "Etc/GMT+12", now);
   return (
     race.editions
-      .filter(
-        (edition) =>
-          /^\d{4}-\d{2}-\d{2}$/.test(edition.date) &&
-          Number.isFinite(Date.parse(edition.date)) &&
-          new Date(edition.date).toISOString().slice(0, 10) === edition.date &&
-          !["Cancelled", "Finished"].includes(edition.status) &&
-          (edition.endDate ?? edition.date) >= today,
-      )
+      .filter((edition) => isUpcomingEdition(edition, today))
       .sort((a, b) => a.date.localeCompare(b.date) || a.distance.localeCompare(b.distance))[0] ??
     null
   );
@@ -215,6 +218,19 @@ export function racePlacePage(
     ancestor = ancestor.parent === null ? undefined : places.get(ancestor.parent);
   }
   const card = ({ editions: _editions, ...race }: (typeof scoped)[number]) => race;
+  // Count each event once per advertised running distance. A triathlon's run
+  // leg must not turn into a claim that a standalone running race is available.
+  const distanceCounts = new Map<string, number>();
+  for (const race of upcoming.filter((item) => item.sport !== "Triathlon")) {
+    const distances = new Set(
+      race.editions
+        .filter((edition) => isUpcomingEdition(edition, localDate(race)))
+        .map((edition) => edition.distance.trim())
+        .filter(Boolean),
+    );
+    for (const distance of distances)
+      distanceCounts.set(distance, (distanceCounts.get(distance) ?? 0) + 1);
+  }
   return {
     place: summary(place),
     ancestors,
@@ -228,6 +244,14 @@ export function racePlacePage(
     archiveCount: past.length,
     featuredCount: scoped.filter((race) => race.featured).length,
     total: scoped.length,
+    overview: {
+      sports: [...new Set(scoped.map((race) => race.sport))].sort(),
+      distances: [...distanceCounts].map(([code, count]) => ({ code, count })),
+      nextRaces: [...upcoming]
+        .sort((a, b) => a.next!.date.localeCompare(b.next!.date) || a.name.localeCompare(b.name))
+        .slice(0, 3)
+        .map(({ name, slug, next }) => ({ name, slug, next: next! })),
+    },
     page,
     pageCount,
     archive,

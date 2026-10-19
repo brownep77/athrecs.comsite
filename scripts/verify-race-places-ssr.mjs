@@ -40,6 +40,18 @@ for (const path of [
   if (path.includes("antarctica"))
     assert($("meta[name=robots]").attr("content").startsWith("noindex"));
   else if (!path.includes("archive")) assert($("main").text().includes("Synthetic Norfolk 10K"));
+  if (path.includes("norfolk") && !path.includes("archive")) {
+    assert(
+      $("#race-questions-heading").length,
+      "runner questions must be present in server-rendered HTML",
+    );
+    assert(
+      $("main").text().includes("1 May 2040"),
+      "date answer must be readable without client JavaScript",
+    );
+    assert($("main").text().includes("Upcoming running events include 10K races."));
+    assert($("main h1").text().includes("Norfolk, England"));
+  }
   for (const script of $('script[type="application/ld+json"]').toArray())
     JSON.parse($(script).html());
   fs.writeFileSync(

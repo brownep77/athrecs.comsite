@@ -56,6 +56,40 @@ country. Venue-looking legacy county values are excluded from area-page creation
 their events remain available on their country pages. Existing catalogue location
 accuracy is not independently reverified by this feature.
 
+## Location-specific writing
+
+Every location uses `race-places-copy.ts` for its introduction, title, description
+and short runner questions. The text draws on the complete location's current
+catalogue: named events, upcoming dates, explicitly listed running distances and
+populated child areas. Each named event and area links to its existing page.
+County/state headings include their parent area to distinguish shared names.
+
+The next-race answer uses chronological order, separately from the featured-first
+cards. Closed and TBC statuses remain visible. Distances come only from eligible
+running/athletics editions, never a triathlon run leg or a cancelled edition.
+One event with several editions is counted once per distance. No course quality,
+popularity, suitability, entry availability or annual recurrence is invented.
+
+Introductions, questions and answers are present in server-rendered HTML. The
+CollectionPage summary matches the visible introduction and identifies its place,
+parent place and AthRecs publisher. There is no special AI/voice schema, FAQ
+rich-result promise, fabricated author or artificial last-updated date. Archive
+views get archive-specific copy; empty locations remain honest and noindex.
+
+The approach follows Google's guidance on useful people-first content and AI
+features, read on 19 October 2026:
+
+- https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- https://developers.google.com/search/docs/appearance/ai-features
+
+This improves page information and crawlability; it does not guarantee indexing,
+rankings, voice answers or AI citations. The same writing rules apply to newly
+populated locations as the catalogue grows.
+
+Run `node scripts/verify-race-places.mjs --catalogue` for the optional full seed
+content/link audit. Its output is an ignored local inspection artifact, not new
+race evidence. The built SSR check also verifies the visible date answers.
+
 ## Validation on 19 October 2026
 
 - `node scripts/verify-race-places.mjs`: local synthetic SQL and independent cases

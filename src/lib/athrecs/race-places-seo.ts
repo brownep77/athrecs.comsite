@@ -1,5 +1,6 @@
 import { SITE_URL, siteGraphMeta } from "./seo";
 import type { RacePlacePageData } from "./race-places";
+import { racePlaceCopy } from "./race-places-copy";
 
 export function racePlaceUrl(data: RacePlacePageData, page = data.page, archive = data.archive) {
   const query = new URLSearchParams();
@@ -9,15 +10,8 @@ export function racePlaceUrl(data: RacePlacePageData, page = data.page, archive 
 }
 
 export function racePlaceHead(data: RacePlacePageData) {
-  const location =
-    data.ancestors
-      .slice(1)
-      .filter((place) => place.kind !== "continent" || data.place.kind === "continent")
-      .reverse()
-      .map((place) => place.name)
-      .join(", ") || "the world";
-  const title = `${data.featuredCount ? "Major races & race calendar" : "Races & race calendar"} in ${location}${data.archive ? " — past editions & dates TBC" : ""}${data.page > 1 ? ` — page ${data.page}` : ""} | ATHRECS`;
-  const description = `${data.page > 1 ? `Page ${data.page}. ` : ""}Explore ${data.total} listed events in ${location}: ${data.upcomingCount} with upcoming dates. Compare race highlights, locations and disciplines, with links to entry details and past editions.`;
+  const { title, description, intro } = racePlaceCopy(data);
+  const parent = data.ancestors.at(-2);
   const url = `${SITE_URL}${racePlaceUrl(data)}`;
   const items = data.races.length ? data.races : data.archivePreview;
   return {
@@ -40,6 +34,32 @@ export function racePlaceHead(data: RacePlacePageData) {
               name: title,
               description,
               inLanguage: "en-GB",
+              abstract: intro
+                .map((paragraph) =>
+                  paragraph.map((part) => (typeof part === "string" ? part : part.text)).join(""),
+                )
+                .join(" "),
+              isPartOf: { "@id": `${SITE_URL}/#website` },
+              publisher: {
+                "@type": "Organization",
+                "@id": `${SITE_URL}/#organization`,
+                name: "AthRecs",
+                url: SITE_URL,
+              },
+              about: {
+                "@type": "Place",
+                name: data.place.name,
+                url: `${SITE_URL}${data.place.path}`,
+                ...(parent
+                  ? {
+                      containedInPlace: {
+                        "@type": "Place",
+                        name: parent.name,
+                        url: `${SITE_URL}${parent.path}`,
+                      },
+                    }
+                  : {}),
+              },
               mainEntity: { "@id": `${url}#races` },
             },
             {
