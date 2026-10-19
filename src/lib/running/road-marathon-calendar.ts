@@ -1,3 +1,4 @@
+import { calendarDate } from "../event-date.ts";
 import type { RoadMarathon } from "../../data/road-marathons/types";
 
 export const ROAD_MARATHON_WINDOW_START = "2026-09-26";
@@ -23,6 +24,7 @@ export function upcomingRoadEditions(
   return race.editions
     .filter(
       (edition) =>
+        Boolean(calendarDate(edition.date)) &&
         edition.date >= ROAD_MARATHON_WINDOW_START &&
         edition.date <= ROAD_MARATHON_WINDOW_END &&
         (year === undefined || edition.date.startsWith(`${year}-`)) &&

@@ -31,7 +31,9 @@ const format = loadTypeScript("src/lib/athrecs/format.ts", { "./timezone": {} })
 const { publicResultsHead } = loadTypeScript("src/lib/athrecs/public-results-seo.ts", {
   "./format": format,
   "./result-slug": loadTypeScript("src/lib/athrecs/result-slug.ts"),
-  "./seo": loadTypeScript("src/lib/athrecs/seo.ts"),
+  "./seo": loadTypeScript("src/lib/athrecs/seo.ts", {
+    "../event-date.ts": loadTypeScript("src/lib/event-date.ts"),
+  }),
 });
 assert.equal(search.normalizeResultsSearch({ category: "trail-running" }).category, "trail-running");
 assert.equal(search.normalizeResultsSearch({ category: "unknown" }).category, "");
