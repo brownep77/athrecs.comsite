@@ -188,7 +188,7 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
         ) : (
           <p className="rounded-xl border border-dashed border-border p-6 text-muted">
             {data.total
-              ? "No upcoming race dates are currently listed here. Explore the race guides below or check the recorded editions."
+              ? "No races are currently listed in this view. Use the tabs above to browse upcoming races or recorded editions."
               : "We do not yet have race listings for this location. Explore the surrounding area using the links above."}
           </p>
         )}
