@@ -22,11 +22,13 @@ const text = (value: string) =>
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
 export const resultDistanceKey = (value: string) =>
-  text(value)
-    .replace(/^half(?: marathon)?$/, "half")
-    .replace(/^marathon$/, "marathon")
-    .replace(/(\d)\s*(?:kilometres|kilometers|km|k)(?: road)?$/, "$1k")
-    .replace(/(\d)\s*(?:miles|mile|mi)(?: road)?$/, "$1mi");
+  /^(?:mile|2 miles)$/i.test(value.trim())
+    ? `track:${text(value)}`
+    : text(value)
+        .replace(/^half(?: marathon)?$/, "half")
+        .replace(/^marathon$/, "marathon")
+        .replace(/(\d)\s*(?:kilometres|kilometers|km|k)(?: road)?$/, "$1k")
+        .replace(/(\d)\s*(?:miles|mile|mi)(?: road)?$/, "$1mi");
 
 /** Retain original marks in the UI; this is only an exact comparison value. */
 export function candidateMark(value: string, seconds?: number | null): string | null {

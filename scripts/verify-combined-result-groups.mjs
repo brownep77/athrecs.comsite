@@ -73,6 +73,10 @@ assert(
   !sameResultCandidate({ ...a, event: "東京", sources: [] }, { ...a, event: "大阪", sources: [] }),
   "Non-Latin event names stay distinct",
 );
+assert(
+  !sameResultCandidate({ ...a, distance: "2 miles" }, { ...a, distance: "2mi" }),
+  "Track two miles stays separate from the road discipline",
+);
 assert.equal(candidateMark("", 2400), "time:2400");
 assert.equal(candidateMark("", 0), null);
 console.log(
