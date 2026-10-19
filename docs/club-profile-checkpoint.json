@@ -1,19 +1,18 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-18-batch131",
-  "reviewedAt": "2026-10-18",
+  "lastEditorialBatch": "2026-10-19-batch132",
+  "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch131: 1,651/1,737 biographies (95.0%) and 858 sourced associations assembled; 86 remain incomplete. PR763 contains twenty-seven unpublished biographies and twenty associations across batches119–131. Published baseline remains 1,624/838 from PR762; main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
+  "publication": "Draft batch132: 1,652/1,737 biographies (95.1%) and 859 sourced associations assembled; 85 remain incomplete. PR763 contains twenty-eight unpublished biographies and twenty-one associations across batches119–132. Published baseline remains 1,624/838 from PR762; main is unchanged. Its production authorization does not extend to this draft. Wider public directory counts and Google indexing are separate.",
   "completedProfileSlugs": [
-    "slgr",
-    "central-lancs-running-and-triathlon-club-clan"
+    "rising-brook-runners"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1651,
-    "notableMemberEntries": 858,
+    "extendedProfiles": 1652,
+    "notableMemberEntries": 859,
     "clubsWithContacts": 1281,
     "contactEntries": 2092,
     "clubsWithEmail": 1238,
@@ -23,25 +22,28 @@
     "websiteContactRecords": 1612
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
+    "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 2,
-    "contactOrSocialRecordsChanged": 1,
+    "notableMemberEntriesAdded": 1,
+    "contactOrSocialRecordsChanged": 0,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 1,
-    "netSocialLinks": 1,
+    "netContactEntries": 0,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch131 actual assembled profile/checkpoint checks (1651 biographies/858 associations), catalogue, club audit, targeted ESLint, TypeScript, whitespace and safe preview build passed. External migrations and production publishers skipped. Previous head 89a20e9 passed Club profiles39171229333 and full quality39171229264. Exact new-head workflow, desktop/mobile and protected-preview evidence belongs in PR763; none certifies production publication."
+    "status": "Batch132 actual assembled profiles (1652 biographies/859 associations), catalogue, club audit, targeted ESLint, TypeScript, whitespace and safe preview build passed. External migrations and production publishers skipped. Superseded contact-only expectation for Rising Brook replaced with biography and preservation assertions. Previous head f9e1892 passed Club profiles39175164407 and full quality39175164401. Exact new-head workflow, desktop/mobile and protected-preview evidence belongs in PR763; none certifies production publication."
   },
   "nextCandidateSlugs": [
-    "bodmin-womens-rc",
-    "fry-club-joggers",
-    "rising-brook-runners"
+    "daws-heath-harriers",
+    "pendle-athletic-club",
+    "yellow-brick-road-running-and-walking-club"
   ],
   "resumeInstructions": [
+    "BATCH132 CURRENT: eb/seedv132 adds Rising Brook Runners biography, Stafford city and one Grace Marshall association attributed to an undated public trustee biography, not current membership. Assembled1652/1737(95.1%),859 associations,85 incomplete; PR763 draft28/21, published1624/838 unchanged. Contacts/socials/address/directory dates unchanged. Parent f9e1892/main de1325f5 checked before edits; no competing writer. Prior dedicated/full workflows both passed. New-head verification in PR763 supersedes precommit status. Next new-primary recovery Daws Heath, Pendle, Yellow Brick Road; preserve older gaps and23OctoberTI follow-ups.",
+    "19Oct Rising Brook: churchrunner/clubs read Stafford/Cannock Chase, organiser /2020/02/3502 and /2023/03/churchrunner-international-virtual-mob-match-returns read dated participation, four in2023 not clubsize. Signposts/governance read explicit author Grace Marshall running link; no family/religion/athlete identity inferred. Midland directory confirms existing FB; direct FB throttled STOP. Church home/groups/ministries read no current programme; MyChurchSuite not accessed. No church address/phone transferred. Founder/year/fees/current sessions/eligibility remain unknown. February2026 report HTML and both original table images downloaded via ordinary public URLs after reader image failure; club table visually confirms three runners/volunteers, not membership size.",
+    "19Oct Fry new evidence: https://www.keynsham-tc.gov.uk/_UserFiles/Files/Publications/Keynsham%20News/KN_1804_WINTER18_WEB.pdf downloaded/read/rendered printedp33, historical Tues7pm10KKeynsham routes only. Spring2018phone overlaps adjacentdanceclub: omit. Autumn2019 council PDF is still a lead, not fully read. July2024Southwick parkrun RozalynPerkins report normal response403 explicitly refuses scraping; STOP no mirrors/alternatepaths, no snippet Somerdale/party-size claims. No biography yet; preserve ECCA contact. BodminWomen's website unavailable; Po10statuslead loginwall so no closure/currentaffiliation inference. BodminWay2023/2026marathonstories opened but women's club unnamed; no organisinghistory/association transfer. DistinctBodminRunningClub remains separate.",
     "BATCH131 CURRENT: module ea/seedv131; SLGR and CLAN biographies; Dawn Annett 2013 group-origin association and Michael Brennand 2026 organising association (not current membership). Actual assembled1651/1737(95.0%),858 associations,86 incomplete. PR763 now27 unpublished biographies/20 associations; published baseline1624/838 unchanged. Adds one SLGR enquiry email and one Strava link, preserves ECCA contact and directory dates/addresses. Parent89a20e9/main de1325f checked unchanged before edits; no competing writer observed. Exact final-head validation in PR763 supersedes pre-commit status.",
     "SLGR earlier biography hold is resolved by EA9Oct2018 first-person origin account plus club-authored Sept2026 Dartford Living p56 and own-labelled Strava103264. May2013 is group origin, NOT independently confirmed affiliation date; founded_year remains empty. Brian's health history and unconfirmed surname excluded. Notice has recycled pre-Covid/spring wording: no current timetable/free-session/next-intake promise. Email slgr.contact@gmail.com is explicitly attributed to that notice. Existing ECCA contact/socials preserved; one Strava link added. Ownsite403 respected; no alternate access. EA exact query failed, so directory13Octdate unchanged.",
     "CLAN earlier thin-source hold resolved for historical biography, not present programme: opened25Nov2021 SantaDash partnership announcement,12Aug2026 CityPreston report with MichaelBrennand first-person organiser account, and Rosemere own9Aug2026 five/ten-mile listing. Planned2021 event not reported as completed; race anniversary not clubfoundation. WalmerBridge(report) versus Hutton(charity listing) is unresolved event-venue discrepancy; neither becomes training address. No charity/platform/news contacts imported, no current member/office or2019championship claim. Existing Chorley directory address/date retained. Current club training, joining, founding and direct contact remain gaps.",
@@ -227,6 +229,9 @@
     "Batch92 recovery: Shepshed unrelated pharmaceutical text remains suppressed; Carlisle junior council material not conflated with adult club. Brighton/Bodmin/Evesham/Pudsey and Irish remaining leads insufficient; no snippet-derived additions. Existing NewRoss/Island provisional gap until23October retained."
   ],
   "sourceGaps": [
+    { "slug": "rising-brook-runners", "status": "historical-biography-resolved-current-programme-unconfirmed", "checkedAt": "2026-10-19", "reason": "Batch132 uses opened network, organiser2020/2023, governing-body and public trustee sources. Current sessions, fees, eligibility, founding date and direct phone/form remain unconfirmed; Facebook throttled. Older no-biography holds are superseded, not proof of fresh club-site access." },
+    { "slug": "fry-club-joggers", "status": "historical-programme-only", "checkedAt": "2026-10-19", "url": "https://www.keynsham-tc.gov.uk/_UserFiles/Files/Publications/Keynsham%20News/KN_1804_WINTER18_WEB.pdf", "reason": "Council PDF printedp33 read/visually checked, confirms historical Keynsham10KTuesdayruns only. No current timetable or exact FBURL; Spring phone ambiguity excluded. Parkrun report403 explicitly refuses scraping: no alternate access or snippet imports. Full biography still held." },
+    { "slug": "bodmin-womens-rc", "status": "identity-and-current-status-unresolved", "checkedAt": "2026-10-19", "reason": "Website unavailable; Po10statuslead redirectslogin and cannot support closure/nonaffiliation. Opened BodminWay2023/2026marathon accounts do not name women's club, so no history/organiser transfer. Not the distinct BodminRunningClub; preserve original data." },
     {
       "slug": "slgr",
       "status": "biography-resolved-current-programme-unconfirmed",

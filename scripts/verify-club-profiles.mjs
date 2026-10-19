@@ -17,6 +17,28 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 132: dated network history, not inferred founding, faith or training venues.
+  const rising132 = bySlug.get("rising-brook-runners");
+  const risingProfile132 = clubProfiles[rising132.slug];
+  assert.equal(rising132.city, "Stafford");
+  assert.equal(rising132.country, "England");
+  assert.equal(rising132.address, clubEnrichment[rising132.slug].address);
+  assert.equal(rising132.postcode, "ST17 4QP");
+  assert.equal(rising132.address_kind, "directory");
+  assert.equal(rising132.checked_at, "2026-10-13");
+  assert.equal(rising132.contacts.length, 1);
+  assert.equal(rising132.contacts[0].email, "louisehobson755@gmail.com");
+  assert.equal(rising132.contacts[0].checked_at, "2026-10-18");
+  assert.equal(rising132.socials.length, 1);
+  assert.equal(rising132.socials[0].url, "https://www.facebook.com/groups/rbrunners");
+  assert.equal(risingProfile132.biography.length, 3);
+  assert.equal(risingProfile132.founded_year, undefined);
+  assert.equal(risingProfile132.notable_members[0].name, "Grace Marshall");
+  assert.match(risingProfile132.notable_members[0].connection, /undated/);
+  assert.match(risingProfile132.biography.join(" "), /not the club's founding year/);
+  assert.match(risingProfile132.biography.join(" "), /February 2026 report's club table records three runners and volunteers/);
+  assert.equal(clubProfiles["fry-club-joggers"], undefined);
+  assert.equal(clubProfiles["bodmin-womens-rc"], undefined);
   // Batch 131: dated group/event history, not inferred venues or current membership.
   for (const slug of ["slgr", "central-lancs-running-and-triathlon-club-clan"]) {
     const club = bySlug.get(slug);
@@ -577,7 +599,7 @@ try {
     assert.equal(club.checked_at, "2026-10-13");
     assert.equal(club.country, "England");
     assert.ok(!club.contacts.some(c => c.phone));
-    if (!["michelin-running-club", "runwednesdays", "helpston-harriers-ac"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["michelin-running-club", "runwednesdays", "helpston-harriers-ac", "rising-brook-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("michelin-running-club").name, "Michelin Running Club");
   assert.equal(bySlug.get("michelin-running-club").address_kind, "directory");
