@@ -14,7 +14,7 @@ Two apparent new slugs were renamed meetings with existing World Athletics IDs
 Two other omitted IDs (7246024 and 7244476) have no demonstrated cancellation;
 their existing records are preserved.
 
-This release contains **366 new meetings and 585 competition-day editions**.
+This release contains **151 new meetings and 277 competition-day editions**.
 Every pre-existing World Athletics series and edition is preserved byte-for-byte
 at the object level. The ordinary production seed publishes missing identities.
 No existing event, date, result, athlete, visibility or entry record is overwritten.
@@ -23,26 +23,39 @@ The machine-readable manifest is
 `src/data/world-athletics-refresh-review.json`. Its `added` array enumerates every
 included source ID, slug and day count. It also retains, without publishing:
 
-- 24 proposed changes to existing source identities, including two renames,
-  date/venue/category changes, status changes and an existing ambiguous identity.
+- 24 proposed changes to existing repository source identities, including two
+  renames, date/venue/category changes, status changes and an ambiguous identity.
 - 12 new source identities (18 days) whose names collide with the combined
-  catalogue's existing name grouping. Their proposed records and dates are in
-  `nameReview`; they require explicit canonical mapping, not name-only merging.
+  catalogue's existing name grouping. They require explicit canonical mapping.
+- 215 candidate identities matched to live records. Of these, 204 have the
+  exact official source URL on live editions: 187 already have every expected
+  date/distance; 16 have taxonomy/distance differences; one (Commodore Grand Prix,
+  7247285) has a conflicting date (17 April live, 11 April in the saved refresh).
+  The remaining 11 have same-name live records and require identity review.
 - Three pre-existing duplicate source-ID groups (7245016, 7239525 and 7245137).
   They are not new duplicates from this refresh.
 
-Production was inspected read-only before publication. None of the original
-378 genuinely new source IDs was already present as an event website. The Paris
-meeting already had both 18 and 25 June 2027 editions. This is why applying date
-changes as ordinary inserts is unsafe; the existing-edition corrections need a
-separate, guarded reconciliation against live IDs and dependencies.
+`src/data/world-athletics-live-review.json` records the 227 held source IDs
+(215 live matches plus 12 static name collisions), their canonical slug candidates
+and observed official source evidence. Future refreshes consult this registry so
+these records cannot quietly return as new inserts. It does not establish
+identity merely from a matching name. Proposed source values remain in the main
+review manifest for later guarded reconciliation.
+
+Production was inspected read-only before publication. An initial website-only
+check was insufficient: many imported events have an empty website field while
+their editions retain the official source URL. The final preflight checked event
+slugs, normalized names, and official edition source URLs. The 151 included
+identities have no matches in those checks. The Paris meeting also already has
+both 18 and 25 June 2027 editions, demonstrating why date changes need guarded
+reconciliation against live IDs and dependencies rather than blind insertion.
 
 ## Provenance and validation
 
 `source-checks.json` retains targeted reads of the actual World Athletics calendar
 payload on 19 October. All 19 changed existing series and the two renamed IDs
-matched their source IDs and revised dates/metadata. Four new meetings were also
-sampled. The two omitted IDs were not found in their named calendar searches;
+matched their source IDs and revised dates/metadata. Four candidate additions were also
+sampled (some were subsequently matched to live records). The two omitted IDs were not found in their named calendar searches;
 absence alone is not cancellation evidence. These targeted checks did not repeat
 the 783-meeting extraction and are not a claim of independent manual verification
 of every new meeting.

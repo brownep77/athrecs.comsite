@@ -15,7 +15,12 @@ const ordered = (rows) => [...rows].sort((a, b) => editionKey(a).localeCompare(e
  * Stage corrections separately: applying them as new slugs/dates would duplicate
  * live meetings, while deleting absent source rows could lose retained history.
  */
-export function mergeWorldAthleticsRefresh(existingSeries, existingEditions, refreshed) {
+export function mergeWorldAthleticsRefresh(
+  existingSeries,
+  existingEditions,
+  refreshed,
+  liveReview = [],
+) {
   const byId = new Map();
   for (const series of existingSeries) {
     const id = meetingId(series);
@@ -26,6 +31,7 @@ export function mergeWorldAthleticsRefresh(existingSeries, existingEditions, ref
   const added = [],
     review = [],
     nameReview = [],
+    liveRecordReview = [],
     seen = new Set();
   const nameKey = (row) => row.name.toLowerCase().replace(/[^a-z0-9]+/g, "");
   for (const item of refreshed) {
@@ -34,6 +40,11 @@ export function mergeWorldAthleticsRefresh(existingSeries, existingEditions, ref
     seen.add(id);
     const existing = byId.get(id);
     if (!existing) {
+      const live = liveReview.find((row) => row.sourceId === id);
+      if (live) {
+        liveRecordReview.push({ ...live, proposed: item });
+        continue;
+      }
       if (series.some((row) => row.slug === item.series.slug))
         throw new Error(`Slug collision: ${item.series.slug}`);
       const conflicts = series.filter((row) => nameKey(row) === nameKey(item.series));
@@ -74,5 +85,5 @@ export function mergeWorldAthleticsRefresh(existingSeries, existingEditions, ref
   const duplicates = [...byId]
     .filter(([, rows]) => rows.length > 1)
     .map(([sourceId, rows]) => ({ sourceId, slugs: rows.map((row) => row.slug) }));
-  return { series, editions, added, review, nameReview, duplicates };
+  return { series, editions, added, review, nameReview, liveRecordReview, duplicates };
 }

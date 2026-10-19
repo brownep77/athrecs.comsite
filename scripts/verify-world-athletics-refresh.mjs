@@ -49,6 +49,25 @@ const nameCollision = mergeWorldAthleticsRefresh(original, dates, [
 assert.equal(nameCollision.added.length, 0);
 assert.equal(nameCollision.nameReview.length, 1);
 assert.equal(nameCollision.nameReview[0].proposed.editions[0].date, "2027-09-01");
+const liveCollision = mergeWorldAthleticsRefresh(
+  original,
+  dates,
+  [refresh[1]],
+  [
+    {
+      sourceId: "3",
+      canonicalSlugs: ["live-historical-url"],
+      reason: "official_source_already_in_live_editions",
+    },
+  ],
+);
+assert.equal(liveCollision.added.length, 0);
+assert.equal(liveCollision.liveRecordReview[0].proposed.series.slug, "new");
+assert.deepEqual(
+  liveCollision.series,
+  original,
+  "Live-only source identities must not be duplicated",
+);
 console.log(
   "PASS: stable source identities, missing-record preservation, reviewed corrections, duplicate rejection and repeat safety",
 );

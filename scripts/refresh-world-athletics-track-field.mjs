@@ -269,7 +269,15 @@ async function main() {
   const raw = await fetchCalendar(startDate, endDate);
   const countries = countryMapFromExisting();
   const refreshed = raw.map((event) => normalizeEvent(event, countries));
-  const calendar = mergeWorldAthleticsRefresh(existingSeries, existingEditions, refreshed);
+  const liveReview = JSON.parse(
+    await readFile(join(ROOT, "src/data/world-athletics-live-review.json"), "utf8"),
+  );
+  const calendar = mergeWorldAthleticsRefresh(
+    existingSeries,
+    existingEditions,
+    refreshed,
+    liveReview,
+  );
   const output = sourceText(calendar, startDate, endDate);
   const changed =
     JSON.stringify(calendar.series) !== JSON.stringify(existingSeries) ||
@@ -307,6 +315,7 @@ async function main() {
         added: calendar.added,
         review: calendar.review,
         nameReview: calendar.nameReview,
+        liveRecordReview: calendar.liveRecordReview,
         existingDuplicateIdentities: calendar.duplicates,
       },
       null,

@@ -26,7 +26,7 @@ import { parkrunDates, parkrunDistance } from "./parkrun-dates";
 import { runCatalogueTransaction } from "./catalogue-transaction";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-14-v2-world-athletics-track-field-2026-10-19-55a830b3f6";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-14-v2-world-athletics-track-field-2026-10-19-79064b5939";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 export const CLUB_CATALOGUE_SEED_VERSION = `${SEED_VERSION}:${CLUB_PROFILE_VERSION}`;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
