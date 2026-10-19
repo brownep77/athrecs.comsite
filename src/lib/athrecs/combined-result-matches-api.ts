@@ -253,7 +253,12 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
               group
                 .slice(1)
                 .map((item) => item.identity.performance)
-                .filter((mark) => mark && mark !== row.match.performanceText),
+                .filter(
+                  (mark) =>
+                    mark &&
+                    candidateMark(mark) !==
+                      candidateMark(row.match.performanceText ?? "", row.match.finishTimeSeconds),
+                ),
             ),
           ];
           return { ...row, match: { ...row.match, alternatePerformances } };

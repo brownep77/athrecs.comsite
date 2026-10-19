@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import type { Sql } from "../db";
-import { groupResultCandidates } from "./result-candidate-groups";
+import { candidateMark, groupResultCandidates } from "./result-candidate-groups";
 import { resultIssues } from "../athlete-workspace/core";
 import type { ProfileResultReviewInput, ProfileReviewRow } from "./profile-result-review";
 
@@ -80,7 +80,7 @@ export async function loadProfileResultReview(sql: Sql, userId: string, athleteI
         members
           .slice(1)
           .map((row) => row.performance)
-          .filter((mark) => mark && mark !== members[0].performance),
+          .filter((mark) => mark && candidateMark(mark) !== candidateMark(members[0].performance)),
       ),
     ],
   }));

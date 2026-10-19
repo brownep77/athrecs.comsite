@@ -168,20 +168,32 @@ try {
       .getByLabel("What helps us confirm these results are yours?")
       .fill("Synthetic bib and club details for this test.");
     await page.getByRole("button", { name: "Request review of 1 result", exact: true }).click();
-    await page.getByText("1 saved result submitted for a match check.", { exact: true }).waitFor();
+    // This complete page uses temporary PGlite, so the production persistence guard must hold.
+    // The archive's separate browser/SQL suite covers successful persistent submissions.
+    await page
+      .getByText("Persistent storage is required before requesting a review", { exact: true })
+      .waitFor();
     assert.equal(
       (
         await sql`select count(*)::int as n from result_archive_match_requests where user_id='dev-user'`
       )[0].n,
-      1,
+      0,
     );
-    await page.screenshot({ path: "artifacts/combined-matches-desktop.png", fullPage: true });
+    await page.getByRole("button", { name: "Reload suggestions", exact: true }).click();
+    await page.getByText("3 potential results", { exact: true }).waitFor();
+    await page.screenshot({
+      path: "artifacts/account-combined-matches-desktop.png",
+      fullPage: true,
+    });
     await page.setViewportSize({ width: 390, height: 844 });
     assert.equal(
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
       true,
     );
-    await page.screenshot({ path: "artifacts/combined-matches-mobile.png", fullPage: true });
+    await page.screenshot({
+      path: "artifacts/account-combined-matches-mobile.png",
+      fullPage: true,
+    });
     await page.setViewportSize({ width: 1440, height: 1000 });
     const match = page.getByRole("article").filter({ hasText: "Sidebar Synthetic 10K" });
     await match

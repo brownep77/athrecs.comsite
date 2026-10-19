@@ -575,7 +575,8 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
         >
           <legend className="sr-only">Request a match check for selected saved results</legend>
           <p role="status" className="font-semibold">
-            {selectedArchive.size} saved results selected
+            {selectedArchive.size} saved {selectedArchive.size === 1 ? "result" : "results"}{" "}
+            selected
           </p>
           <label className="block text-sm">
             What helps us confirm these results are yours?
