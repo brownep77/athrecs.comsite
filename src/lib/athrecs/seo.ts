@@ -159,10 +159,11 @@ export function sportsEventJsonLd(
     };
   }
 
+  // An unknown or invalid local time must not corrupt an otherwise known date.
   const start =
-    input.startDate && input.startTime
-      ? `${input.startDate}T${input.startTime}`
-      : (input.startDate ?? undefined);
+    input.startTime && /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.startTime)
+      ? `${date}T${input.startTime}`
+      : date;
   // Match todayIso() and visible entry deadlines: the site's calendar day is
   // Europe/London, including daylight saving, rather than the server's UTC day.
   const today = new Intl.DateTimeFormat("en-CA", {

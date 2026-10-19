@@ -79,18 +79,40 @@ export function sportsEventJsonLd(input: {
   website?: string | null;
 }) {
   const url = absoluteUrl(`/races/${input.slug}`);
+  const description =
+    input.description ??
+    `${input.name} running-event details on RunRecs — date, local start, venue and distances. Confirm entry on the official site.`;
+  const date = input.startDate;
+  const parsedDate = date && /^\d{4}-\d{2}-\d{2}$/.test(date) ? new Date(date) : null;
+  const hasDate =
+    parsedDate &&
+    Number.isFinite(parsedDate.getTime()) &&
+    parsedDate.toISOString().slice(0, 10) === date;
+
+  // This module replaces the AthRecs helper in specialist builds. Preserve the
+  // same archive fallback: Google requires a real startDate on every event.
+  if (!hasDate) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: input.name,
+      description,
+      url,
+      inLanguage: "en-GB",
+    };
+  }
+
+  // Keep the known date when a legacy local-time value is unknown or invalid.
   const start =
-    input.startDate && input.startTime
-      ? `${input.startDate}T${input.startTime}`
-      : input.startDate ?? undefined;
+    input.startTime && /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.startTime)
+      ? `${date}T${input.startTime}`
+      : date;
 
   return {
     "@context": "https://schema.org",
     "@type": "SportsEvent",
     name: input.name,
-    description:
-      input.description ??
-      `${input.name} running-event details on RunRecs — date, local start, venue and distances. Confirm entry on the official site.`,
+    description,
     url,
     image: DEFAULT_OG_IMAGE,
     startDate: start,
