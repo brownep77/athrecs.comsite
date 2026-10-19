@@ -186,6 +186,44 @@ assert.equal(
   "2026-10-10T09:30:00",
 );
 
+// Exercise serialized output from both actual build variants. The previous
+// export-only compatibility test did not catch RunRecs emitting undated events.
+for (const [brand, generate] of [
+  ["athrecs", sportsEventJsonLd],
+  ["runrecs", runrecsSeo.sportsEventJsonLd],
+]) {
+  const schema = (fields) => JSON.parse(JSON.stringify(generate({ ...race, ...fields })));
+  for (const startDate of [
+    undefined, null, "", "TBC", "2027", "2027-04", "2027-2-3",
+    "2027-02-29", "2027-04-31", "2027-00-01", "2027-13-01",
+    "2027-04-25T09:30:00Z", " 2027-04-25 ",
+  ]) {
+    const item = schema({ startDate, startTime: "09:30" });
+    assert.equal(item["@type"], "WebPage", `${brand}: ${String(startDate)}`);
+    assert.equal(item.name, race.name);
+    assert.equal(item.description, race.description);
+    assert.equal(item.url, `https://www.${brand}.com/races/${race.slug}`);
+    for (const field of ["startDate", "offers", "eventStatus", "location", "organizer"])
+      assert.equal(field in item, false, `${brand}: undated ${field}`);
+  }
+  for (const startTime of [
+    undefined, null, "", "TBC", "09:30", "09:30:00", "00:00", "23:59:59",
+    "9:30", "24:00", "09:60", "09:30:60", "09:30Z", "09:30+01:00", " 09:30 ",
+  ]) {
+    const item = schema({ startDate: "2027-04-25", startTime });
+    const validTimes = ["09:30", "09:30:00", "00:00", "23:59:59"];
+    assert.equal(item["@type"], "SportsEvent");
+    assert.equal(
+      item.startDate,
+      validTimes.includes(startTime) ? `2027-04-25T${startTime}` : "2027-04-25",
+      `${brand}: preserve date precision for ${String(startTime)}`,
+    );
+  }
+  assert.equal(schema({ startDate: "2028-02-29" }).startDate, "2028-02-29");
+  assert.equal(schema({ startDate: "2000-02-29" }).startDate, "2000-02-29");
+  assert.equal(schema({ startDate: "1900-02-29" })["@type"], "WebPage");
+}
+
 // Only explicitly supplied, real ending dates/times belong in Event markup.
 for (const endDate of [undefined, null, "", "TBC", "2027-02-29", "2027-05-08"]) {
   assert.equal(serialized({ ...race, startDate: "2027-05-09", endDate }).endDate, undefined);
