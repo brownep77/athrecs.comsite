@@ -17,6 +17,22 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 138: dated participation is neither a current roster nor a training venue.
+  const twemlow138 = bySlug.get("twemlow-track-club");
+  const twemlowProfile138 = clubProfiles[twemlow138.slug];
+  assert.equal(twemlowProfile138.biography.length, 3);
+  assert.equal(twemlowProfile138.founded_year, undefined);
+  assert.equal(twemlowProfile138.notable_members, undefined);
+  assert.equal(twemlowProfile138.corrections, undefined);
+  assert.equal(twemlow138.city, "Wimborne");
+  assert.equal(twemlow138.country, "England");
+  assert.equal(twemlow138.adult_only, true);
+  assert.equal(twemlow138.address_kind, "directory");
+  assert.equal(twemlow138.checked_at, "2026-10-13");
+  assert.equal(twemlow138.contacts[0].checked_at, "2026-10-18");
+  assert.match(twemlowProfile138.biography.join(" "), /not the final season standings/);
+  assert.equal(clubProfiles["bornready-academy"], undefined);
+  assert.equal(clubProfiles["the-fitness-coach-ac"], undefined);
   // Batch 137: a corporate insurer enquiry page must not masquerade as club contact.
   const qbe137 = bySlug.get("qbe-running-club");
   assert.equal(qbe137.contact_url, "https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf#page=37");
@@ -528,7 +544,7 @@ try {
     const club = bySlug.get(slug);
     assert.ok(club, slug);
     assert.equal(club.country, "England");
-    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs, ...batch130Slugs].includes(slug)) {
+    if (![...batch118Slugs, ...batch119Slugs, ...batch120Slugs, ...batch122Slugs, ...batch130Slugs, "twemlow-track-club"].includes(slug)) {
       assert.equal(clubProfiles[slug], undefined, `${slug}: contact-only, not a biography`);
     }
     const contact = club.contacts.find(c => c.email.toLowerCase() === email.toLowerCase());

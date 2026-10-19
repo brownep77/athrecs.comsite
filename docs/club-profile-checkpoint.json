@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-19-batch137",
+  "lastEditorialBatch": "2026-10-19-batch138",
   "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch137: contact-route correction only; 1,657/1,737 biographies (95.4%) and 862 sourced associations assembled; 80 incomplete. PR763 retains33 unpublished biographies and24 associations. Published baseline remains1624/838 from PR762. No production publication; wider public directory and Google indexing are separate.",
-  "completedProfileSlugs": [],
+  "publication": "Draft batch138: Twemlow biography added; 1,658/1,737 biographies (95.5%) and 862 sourced associations assembled; 79 incomplete. PR763 retains34 unpublished biographies and24 associations. Published baseline remains1624/838 from PR762, not freshly checked live. No production publication; wider public directory and Google indexing are separate.",
+  "completedProfileSlugs": ["twemlow-track-club"],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1657,
+    "extendedProfiles": 1658,
     "notableMemberEntries": 862,
     "clubsWithContacts": 1281,
     "contactEntries": 2093,
@@ -20,10 +20,10 @@
     "websiteContactRecords": 1612
   },
   "batchChanges": {
-    "extendedProfilesAdded": 0,
+    "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
     "notableMemberEntriesAdded": 0,
-    "contactOrSocialRecordsChanged": 1,
+    "contactOrSocialRecordsChanged": 0,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 0,
@@ -31,14 +31,17 @@
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch137 local profile/catalogue/club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Actual assembled1657/1737 biographies,862 associations,2093 contacts,2598socials unchanged; QBE contact-route regression passed. External migrations and all production publishers skipped. Parentde9d0dd dedicated39197768657 and full quality39197768676 both passed. New exact-head desktop/mobile and preview evidence in PR763. Main freshly resolved to e9017dc62c7c7b62c6b13922dd44e8133d8d2cec (PR766 running-country card flags), not stale PR base de1325f; unrelated work untouched. No production publication."
+    "status": "Batch138 local profile/catalogue/club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. Actual catalogue1658/1737 biographies,862 associations,79 incomplete;2093 assembled contacts and2598socials unchanged. External migrations and all production publishers skipped. Parent62a85b6 dedicated39203158962 and broader quality39203158803 both passed. New exact-head workflow and preview evidence to be recorded in PR763. Main freshly resolved e9017dc62c7c7b62c6b13922dd44e8133d8d2cec; unrelated changes untouched. No production publication."
   },
   "nextCandidateSlugs": [
-    "bornready-academy",
-    "the-fitness-coach-ac",
-    "twemlow-track-club"
+    "riverside-harriers",
+    "running-head-first",
+    "olympia-athletics"
   ],
   "resumeInstructions": [
+    "BATCH138 CURRENT: moduleeg/seedv138 adds Twemlow's dated endurance/league biography; no new association, contact, location or directory-date changes. Assembled1658/1737(95.5%),862 associations,79 incomplete; draft34/24, historical published1624/838. Freshparent62a85b6/main e9017dc inspected, no competing writer. Parent dedicated39203158962 and full quality39203158803 both passed; exactparent AthRecs preview dpl_FjJ5J4KTXU3CUpBTousu4qwGEAeE previously verified with QBE/Hoylake/Maximum HTTP200 and45 assertions. New-head final evidence belongs in PR763. Next RiversideHarriers/RunningHeadFirst/Olympia new-primary leads; preserve23October followups. Older CURRENT entries historical.",
+    "19Oct Twemlow: DorsetAthletics clubs-1 opened; SteveCook first-hand TheRunningNose31Dec2021 marathon review opened (own Dorney/London participation, group travel); RichardBrawn BournemouthAC12Apr2026BayHalf report opened (Twemlow men's team second at fixture, not season). No individual results/identity imports or notable-member claims. ECCA2026–27printed38 existingemail confirmed and18Oct provenance retained. DRRLclubdirectory/report unavailable viareader and ordinarypublicfetch, so search-only2020newteam/JezBragg/Anchors wording not adopted; EAfindclubunavailable, original13Octcheckdate unchanged. No trainingvenue/fees/foundingyear inferred.",
+    "19Oct held: BornReady ownsite displaysPrivateSite STOP, CharityCommissionrequest403 STOP. CompaniesHouse15933371 overview/filinghistory opened:3Sep2024incorporation andErithregisteredoffice not clubfounding/trainingvenue. ObjectsPDFredirectfailed; secondarycharity1216703purpose/phone/date notadopted withoutprimarybridge. FitnessCoach EA11Aug2025July-supportarticle opened confirms ClubStandardsassistance, not currentverifiedstatus/fullprogramme. ECCA2025searchcontact notadopted ascurrent;2026PDF noexactFitnessCoachmatch. No newbio/contact for either; do not repeat blockedaccessroutes or transfer neighbours' contacts.",
     "BATCH137 CURRENT: seedv137, no new biography/module. QBE insurer enquiry URL replaced with opened ECCA handbook#page=37 (printed36); existing club email and18October provenance retained. Original URL https://www.qbe.com/contact-us is corporate insurance/investor/media, not club contact. Counts1657/1737,862 associations,80 incomplete unchanged. Parentde9d0dd dedicated39197768657 and broader39197768676 both passed. Parent exact AthRecs preview READY but Hoylake/Maximum fetches not executed due transient approval capacity/timeout; no bypass. New-head validation in PR763. Next BornReady/FitnessCoach/Twemlow, retain older gaps and23October follow-ups. Older CURRENT entries are historical.",
     "BATCH136 CURRENT: ef/seedv136 adds Hoylake's Merseyside/local-racing biography, county correction, no association/contact additions. Maximum Mileage directory-only correction: Wiltshire/virtual/four running disciplines from opened and visually checked EA October2026 register p42. Assembled1657/1737(95.4%),862 associations,80 incomplete; draft33/24, published1624/838 unchanged. Parentbc32f99/main de1325f inspected unchanged. Prior dedicated passed, broader failed RunRecs account-panel assertion; new-head evidence in PR763. Next new-primary recovery DEFRA/NorthantsPolice/QBE, preserve23Octoberfollowups. Older CURRENT notes are historical.",
     "19Oct Hoylake: EA register p25 road-only versus MCAA CR (cross-country/road) distinction explicit, no invented expanded training. BTR12April2026Tunnel post-race and1JunePortSunlight preview plus EricaDillonPR9JuneChamber post-race establish group participation; Wallasey22September2026ArrowePark table establishes club participation only, no named athlete/result import. FB829332125612519 returned block STOP; search-only ShipInn/fee/BTRalias/origin not adopted. NiftyEntries2026 page retains2023terms, not a current programme. No direct club contacts from MCAA placeholders or neighbours; no town/street/postcode inferred.",
