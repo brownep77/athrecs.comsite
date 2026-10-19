@@ -215,8 +215,10 @@ const accountRoute = await readFile("src/routes/athlete-account.tsx", "utf8");
 const claimRoute = await readFile("src/routes/claim-results.tsx", "utf8");
 const privateProfileRoute = await readFile("src/routes/my-athlete-profile.tsx", "utf8");
 assert(
-  potentialMatches.includes("sportIsInAthleteProfileScope(match.sport)"),
-  "Athlete suggestions must use the unified profile scope",
+  /matches\.data\.rows\.filter\(\(row\)\s*=>\s*sportIsInAthleteProfileScope\(\s*row\.kind === "profile" \? row\.match\.sport : \(row\.match\.sport \?\? "Running"\)/.test(
+    potentialMatches,
+  ),
+  "Combined profile and archive suggestions must use the unified profile scope, with a Running fallback only for archives without a sport",
 );
 assert(
   accountRoute.includes("ACCOUNT_SPORTS") &&
