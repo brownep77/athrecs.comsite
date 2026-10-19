@@ -251,6 +251,9 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
     "PASS: all 11 operations reports, real RPC access controls, counts, drill-downs, source denominators, overlap boundaries, aging, change tracking and pagination.",
   );
 
+  const { verifySourceCoverage } = await import("./verify-source-coverage.mjs");
+  await verifySourceCoverage({ sql, read });
+
   if (browser) {
     const page = await browser.newPage({
       viewport: { width: 1440, height: 1000 },
@@ -307,6 +310,29 @@ export async function verifyCollectionOperations({ server, sql, browser, origin 
     await page
       .getByRole("link", { name: "Open website reporting and connections", exact: true })
       .waitFor();
+    await page.getByRole("button", { name: "Sources & coverage", exact: true }).click();
+    await page.getByRole("heading", { name: "Sources & coverage", exact: true }).waitFor();
+    await table.getByRole("cell", { name: "fixtures.test · Running", exact: true }).waitFor();
+    const refresh = page.getByLabel("Refresh stored figures every minute while this tab is open");
+    assert.equal(await refresh.isChecked(), false);
+    await refresh.check();
+    await refresh.uncheck();
+    await page.getByLabel("Show figures by", { exact: true }).selectOption("athleteSources");
+    await table.getByRole("columnheader", { name: "Share of athletes (%)", exact: true }).waitFor();
+    await page.getByRole("button", { name: "See entries: example.test", exact: true }).click();
+    await page.getByRole("button", { name: "Back to report", exact: true }).click();
+    await page.getByLabel("Show figures by", { exact: true }).selectOption("profileResults");
+    await table.getByRole("columnheader", { name: "Source captured at", exact: true }).waitFor();
+    await table.getByRole("cell", { name: "Unknown", exact: true }).first().waitFor();
+    assert(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      "Source coverage fits mobile",
+    );
+    await page.screenshot({ path: "artifacts/source-coverage-mobile.png", fullPage: true });
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.getByLabel("Show figures by", { exact: true }).selectOption("fixtures");
+    await table.getByRole("cell", { name: "66.7", exact: true }).waitFor();
+    await page.screenshot({ path: "artifacts/source-coverage-desktop.png", fullPage: true });
     // A failing endpoint shows an error, not an empty successful report.
     await page.route("**/_serverFn/**", (route) =>
       route.fulfill({ status: 503, body: "Unavailable" }),

@@ -53,7 +53,8 @@ const statusLabels: Record<string, string> = {
   results: "Results",
 };
 function displayCell(value: string | number | null | undefined, key: string): string {
-  if (value == null) return "—";
+  if (value == null)
+    return ["percent", "share", "matched", "expected"].includes(key) ? "Unknown" : "—";
   if (typeof value === "number") return number(value);
   if (
     ["oldest", "since", "checked", "status"].includes(key) &&
@@ -74,6 +75,7 @@ function displayCell(value: string | number | null | undefined, key: string): st
 const workflows: Partial<Record<OperationSection, { label: string; href: string }[]>> = {
   results: [{ label: "Collected results", href: "/admin/result-archive" }],
   sources: [
+    { label: "Source registry and collection status", href: "/admin/sources" },
     { label: "Websites and pages to collect from", href: "/admin/event-register" },
     { label: "Result collection attempts", href: "/admin/result-archive" },
   ],
@@ -102,13 +104,25 @@ const workflows: Partial<Record<OperationSection, { label: string; href: string 
 };
 const control = "mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm";
 
-export function CollectionOperations() {
-  const [filters, setFilters] = useState<OperationInput>(() => operationInput.parse({}));
+export function CollectionOperations({
+  initialSection = "results",
+}: {
+  initialSection?: OperationSection;
+}) {
+  const [filters, setFilters] = useState<OperationInput>(() =>
+    operationInput.parse({
+      section: initialSection,
+      group: initialSection === "sources" ? "fixtures" : "sport",
+    }),
+  );
+  const [autoRefresh, setAutoRefresh] = useState(false);
   const [search, setSearch] = useState("");
   const report = useQuery({
     queryKey: ["collection-operations", filters],
     queryFn: () => getCollectionOperations({ data: filters }),
     staleTime: 60_000,
+    refetchInterval: autoRefresh && filters.section === "sources" ? 60_000 : false,
+    refetchIntervalInBackground: false,
     retry: false,
   });
   const trafficDays = filters.days === 30 ? 28 : filters.days;
@@ -138,6 +152,9 @@ export function CollectionOperations() {
   function download() {
     if (!data) return;
     const content = statsCsv([
+      ["Figures loaded at (UTC)", new Date(data.generatedAt).toISOString()],
+      ["Report", data.title, filters.group],
+      ...data.notes.map((note) => ["Note", note]),
       data.columns.map((c) => c.label),
       ...data.rows.map((r) =>
         data.columns.map((c) =>
@@ -162,6 +179,10 @@ export function CollectionOperations() {
         ]
       : filters.section === "sources"
         ? [
+            ["fixtures", "Fixture sources by sport"],
+            ["athleteSources", "Athlete sources and share"],
+            ["resultSources", "Main result sources and share"],
+            ["profileResults", "Results for each athlete and source"],
             ["inventory", "Pages we have found"],
             ["imports", "Attempts to collect results"],
             ["datasets", "Saved results sheets"],
@@ -178,7 +199,9 @@ export function CollectionOperations() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 className="font-display text-2xl font-semibold">
-              Collection progress and work to do
+              {initialSection === "sources"
+                ? "Sources & coverage"
+                : "Collection progress and work to do"}
             </h2>
             <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600">
               See what we have saved, what needs checking and what is still waiting. Choose a
@@ -262,6 +285,22 @@ export function CollectionOperations() {
             </label>
           ) : null}
         </div>
+        {filters.section === "sources" ? (
+          <div className="space-y-2 text-sm text-slate-600">
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={autoRefresh}
+                onChange={(event) => setAutoRefresh(event.target.checked)}
+              />
+              Refresh stored figures every minute while this tab is open
+            </label>
+            <p>
+              Figures reflect saved data at the time shown. Refreshing does not scan external
+              websites. Source capture and last-attempt dates are shown separately where recorded.
+            </p>
+          </div>
+        ) : null}
         <details className="rounded-lg border border-slate-200 p-3">
           <summary className="cursor-pointer font-medium text-cyan-900">
             See all 11 reports and what they mean

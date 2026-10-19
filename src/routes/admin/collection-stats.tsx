@@ -11,15 +11,17 @@ import { defaultStatsFilters, statsCsv, type StatsFilters } from "@/lib/collecti
 export const Route = createFileRoute("/admin/collection-stats")({
   validateSearch: (
     search: Record<string, unknown>,
-  ): { section: "collection" | "website" | "operations" | "races" } => ({
+  ): { section: "collection" | "website" | "operations" | "races" | "sources" } => ({
     section:
-      search.section === "website"
-        ? "website"
-        : search.section === "operations"
-          ? "operations"
-          : search.section === "races"
-            ? "races"
-            : "collection",
+      search.section === "sources"
+        ? "sources"
+        : search.section === "website"
+          ? "website"
+          : search.section === "operations"
+            ? "operations"
+            : search.section === "races"
+              ? "races"
+              : "collection",
   }),
   head: () => ({
     meta: [
@@ -180,11 +182,21 @@ function CollectionStatsPage() {
         >
           Collection progress and work to do
         </Button>
+        <Button
+          variant={section === "sources" ? "default" : "secondary"}
+          aria-current={section === "sources" ? "page" : undefined}
+          onClick={() => void navigate({ search: { section: "sources" } })}
+        >
+          Sources & coverage
+        </Button>
       </nav>
       {section === "website" ? (
         <WebsiteStats />
-      ) : section === "operations" ? (
-        <CollectionOperations />
+      ) : section === "operations" || section === "sources" ? (
+        <CollectionOperations
+          key={section}
+          initialSection={section === "sources" ? "sources" : "results"}
+        />
       ) : (
         <>
           {report.isPending ? (

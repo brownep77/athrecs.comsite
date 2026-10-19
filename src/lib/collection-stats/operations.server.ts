@@ -1,4 +1,5 @@
 import { withDiscoveryRead } from "../athrecs/discovery-read.server";
+import { sourceCoverage } from "./source-coverage.server";
 import type { Sql } from "../db";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication";
 import {
@@ -18,10 +19,10 @@ const start = `((now() at time zone 'Europe/London')::date-($3::int-1))::timesta
 const today = `(now() at time zone 'Europe/London')::date`;
 const athleteLink = (v: string) => `'/admin/athletes/'||${v}::text`;
 const base = `params as (select $1::text[], $2::text, $3::int, $4::text, $5::int),
- a as not materialized (select a.id,a.display_name,a.gender,a.country,a.county,a.club_id,a.second_club_id,a.parent_athlete_id,a.profile_details,a.nation,a.created_at,a.source_club_name from athletes a where not exists(select 1 from athrecs_test_athletes t where t.athlete_id=a.id)
+ a as not materialized (select a.id,a.source_url,a.display_name,a.gender,a.country,a.county,a.club_id,a.second_club_id,a.parent_athlete_id,a.profile_details,a.nation,a.created_at,a.source_club_name from athletes a where not exists(select 1 from athrecs_test_athletes t where t.athlete_id=a.id)
    and coalesce(a.profile_details->>'syntheticTest','false')<>'true'),
- e as (select id,slug,name,sport,country,county,website,created_at from events where not(slug=any($1::text[]))),
- d as (select d.id,d.event_id,d.event_date,d.distance_code,d.status,d.stats_created_at from editions d join e on e.id=d.event_id),
+ e as (select id,slug,name,sport,country,county,website,source_url,created_at from events where not(slug=any($1::text[]))),
+ d as (select d.id,d.source_url,d.event_id,d.event_date,d.distance_code,d.status,d.stats_created_at from editions d join e on e.id=d.event_id),
  r as (select r.id,r.athlete_id,r.edition_id,r.status,r.result_details,r.stats_created_at,r.result_source,r.source_url,r.bib, a.display_name athlete_name,e.name event_name,e.sport,e.country,d.distance_code,d.event_date
    from results r join a on a.id=r.athlete_id join d on d.id=r.edition_id join e on e.id=d.event_id
    where coalesce(r.result_details->>'syntheticTest','false')<>'true'),
@@ -56,7 +57,7 @@ const stateLabel = (value: string) => `case ${value}
  when 'proposed' then 'Suggested for review' when 'approved' then 'Approved'
  when 'rejected' then 'Not approved' else replace(${value},'_',' ') end`;
 
-type QuerySpec = {
+export type QuerySpec = {
   ctes?: string;
   rows: string;
   columns: OperationColumn[];
@@ -188,6 +189,8 @@ function growth(f: OperationInput): QuerySpec {
   };
 }
 function sources(f: OperationInput): QuerySpec {
+  const coverage = sourceCoverage(f);
+  if (coverage) return coverage;
   if (f.group === "imports")
     return {
       description:
@@ -216,11 +219,11 @@ function sources(f: OperationInput): QuerySpec {
     return {
       description:
         "Compare the entries saved from each results sheet with the number we expected to find, when that number is known.",
-      ctes: `datasets as (select ds.id,ds.provider,e.name,ds.expected_rows,ds.updated_at,count(x.id) observed,count(x.id) filter(where x.canonical_result_id is not null) linked from result_archive_datasets ds join d on d.id=ds.edition_id join e on e.id=d.event_id left join result_archive_entries x on x.dataset_id=ds.id group by ds.id,e.name)`,
+      ctes: `datasets as (select ds.id,ds.provider,e.name,d.event_date,d.distance_code,e.sport,ds.expected_rows,ds.updated_at,count(x.id) observed,count(x.id) filter(where x.canonical_result_id is not null) linked from result_archive_datasets ds join d on d.id=ds.edition_id join e on e.id=d.event_id left join result_archive_entries x on x.dataset_id=ds.id group by ds.id,e.name,d.event_date,d.distance_code,e.sport)`,
       rows:
         f.mode === "records"
           ? `select x.id::text key,coalesce(nullif(x.payload->>'name',''),'Collected entry '||x.source_key) label,ds.provider||' · '||ds.name detail,x.review_state status,'/admin/result-archive' href from result_archive_entries x join datasets ds on ds.id=x.dataset_id where ds.id::text=$2`
-          : `select id::text key,provider||' · '||name label,id::text drill,expected_rows expected,observed,linked,case when expected_rows>0 then round(100.0*observed/expected_rows,1)::float8 end percent,updated_at::text checked from datasets`,
+          : `select id::text key,concat_ws(' · ',provider,name,event_date::text,distance_code,sport) label,id::text drill,expected_rows expected,observed,linked,round(100.0*linked/nullif(observed,0),1)::float8 matched,case when expected_rows>0 then round(100.0*observed/expected_rows,1)::float8 end percent,updated_at::text checked from datasets`,
       columns:
         f.mode === "records"
           ? recordCols
@@ -230,10 +233,11 @@ function sources(f: OperationInput): QuerySpec {
               col("observed", "Entries saved", true),
               col("linked", "Entries matched to main results", true),
               col("percent", "Expected entries saved (%)", true),
+              col("matched", "Saved entries matched (%)", true),
               col("checked", "Last updated"),
             ],
       notes: [
-        "A blank expected total means we cannot tell whether the sheet is complete. More than 100% means the expected total or saved entries need checking. Collecting an entry does not confirm the athlete or verify the result.",
+        "A blank expected total means we cannot tell whether the sheet is complete. More than 100% means the expected total or saved entries need checking. Collecting an entry does not confirm the athlete or verify the result. Matched percentage is entries linked to main results divided by saved entries; zero saved entries gives an unknown percentage. Last updated is the saved dataset timestamp, not a fresh source check.",
       ],
     };
   return {

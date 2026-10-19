@@ -42,11 +42,11 @@ export const operationHelp: Record<
   },
   sources: {
     summary:
-      "See which websites and results sheets we have worked through and what remains to collect.",
+      "See fixture, athlete and result sources, their shares of AthRecs, and collection coverage where a total is known.",
     action:
-      "Use Pages we have found for website progress, Attempts to collect results for errors, or Saved results sheets for the number of entries collected.",
+      "Choose a source report below. Open individual entries to inspect the supporting athletes, fixtures or performances.",
     example:
-      "If we have found 10 pages and processed 6, progress is 60%. There may be other pages we have not found yet. A blank percentage means we do not know the total to compare against.",
+      "600 saved results out of 1,000 expected is 60% coverage. A source supplying 600 of our 3,000 results has a 20% share of AthRecs. These measure different things. Unknown totals stay unknown.",
   },
   matching: {
     summary:
@@ -108,7 +108,20 @@ export const operationInput = z
       .enum(Object.keys(operationSections) as [OperationSection, ...OperationSection[]])
       .default("results"),
     group: z
-      .enum(["sport", "distance", "country", "year", "inventory", "imports", "datasets", "daily"])
+      .enum([
+        "sport",
+        "distance",
+        "country",
+        "year",
+        "inventory",
+        "imports",
+        "datasets",
+        "daily",
+        "fixtures",
+        "athleteSources",
+        "resultSources",
+        "profileResults",
+      ])
       .default("sport"),
     days: z.union([z.literal(7), z.literal(30), z.literal(90)]).default(30),
     key: z.string().max(500).default(""),
