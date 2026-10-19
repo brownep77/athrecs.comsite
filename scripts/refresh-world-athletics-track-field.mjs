@@ -271,8 +271,9 @@ async function main() {
   const refreshed = raw.map((event) => normalizeEvent(event, countries));
   const calendar = mergeWorldAthleticsRefresh(existingSeries, existingEditions, refreshed);
   const output = sourceText(calendar, startDate, endDate);
-  const current = await readFile(OUTPUT_PATH, "utf8");
-  const changed = current !== output;
+  const changed =
+    JSON.stringify(calendar.series) !== JSON.stringify(existingSeries) ||
+    JSON.stringify(calendar.editions) !== JSON.stringify(existingEditions);
   const hash = createHash("sha256").update(output).digest("hex");
 
   if (checkOnly) {
