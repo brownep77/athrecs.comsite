@@ -17,6 +17,27 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 140: county and dated participation are not a founding date or training venue.
+  const olympia140 = bySlug.get("olympia-athletics");
+  const olympiaProfile140 = clubProfiles[olympia140.slug];
+  assert.equal(olympiaProfile140.biography.length, 3);
+  assert.equal(olympiaProfile140.founded_year, undefined);
+  assert.equal(olympiaProfile140.notable_members, undefined);
+  assert.deepEqual(olympiaProfile140.corrections, { county: "Hampshire" });
+  assert.equal(olympia140.county, "Hampshire");
+  assert.equal(olympia140.region, "South East");
+  assert.equal(olympia140.country, "England");
+  for (const field of ["city", "address", "postcode"]) assert.equal(olympia140[field], "");
+  assert.equal(olympia140.location_precision, "area-only");
+  assert.equal(olympia140.checked_at, "2026-10-13");
+  assert.equal(olympia140.contacts.length, 1);
+  assert.equal(olympia140.contacts[0].email, "carlamholcombe@hotmail.com");
+  assert.equal(olympia140.contacts[0].checked_at, "2026-10-18");
+  assert.equal(olympia140.socials.length, 0);
+  assert.ok(!olympia140.website);
+  assert.match(olympiaProfile140.biography.join(" "), /not the year Olympia was founded/);
+  assert.equal(clubProfiles["gator-athletics-club"], undefined);
+  assert.equal(clubProfiles["seven-ten-ac"], undefined);
   // Batch 139: club-owned programmes, separate enquiry roles and evidenced venue correction.
   for (const slug of ["riverside-harriers", "running-head-first"]) {
     const club = bySlug.get(slug);
@@ -45,7 +66,6 @@ try {
   assert.equal(headFirst139.contacts[1].phone, "0151 315 1092");
   assert.equal(headFirst139.socials.length, 2);
   assert.match(clubProfiles[headFirst139.slug].biography.join(" "), /not separately established/);
-  assert.equal(clubProfiles["olympia-athletics"], undefined);
   // Batch 138: dated participation is neither a current roster nor a training venue.
   const twemlow138 = bySlug.get("twemlow-track-club");
   const twemlowProfile138 = clubProfiles[twemlow138.slug];
@@ -735,7 +755,7 @@ try {
     assert.equal(club.contacts.length, slug === "rolls-royce-harriers" ? 3 : ["running-head-first", "ipswich-phoenix-running-club", "run-middlewich", "uts-running-club", "slgr"].includes(slug) ? 2 : 1);
     assert.equal(club.checked_at, "2026-10-13");
     // New primary narratives are asserted in their source-specific batches above.
-    if (!["running-head-first", "stride-running-club", "ipswich-phoenix-running-club", "pendle-athletic-club", "metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["olympia-athletics", "running-head-first", "stride-running-club", "ipswich-phoenix-running-club", "pendle-athletic-club", "metropolitan-police-ac", "uts-running-club", "vector-racing", "slgr", ...batch122Slugs, ...batch126Slugs, ...batch127Slugs, ...batch129Slugs].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("run-middlewich").contacts[0].email, "runmiddlewich@gmail.com");
   assert.equal(bySlug.get("run-middlewich").contacts[0].checked_at, "2026-10-17");

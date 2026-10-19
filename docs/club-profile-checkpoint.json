@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-19-batch139",
+  "lastEditorialBatch": "2026-10-19-batch140",
   "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-batch119",
   "pullRequest": 763,
-  "publication": "Draft batch139: Riverside Harriers and Running Head First added; 1,660/1,737 biographies (95.6%) and 864 sourced associations assembled; 77 incomplete. PR763 retains36 unpublished biographies and26 associations. Published baseline remains1624/838 from PR762, not freshly checked live. No production publication; wider public directory and Google indexing are separate.",
-  "completedProfileSlugs": ["riverside-harriers", "running-head-first"],
+  "publication": "Draft batch140: Olympia Athletics added with Hampshire county correction; 1,661/1,737 biographies (95.6%) and864 sourced associations assembled;76 incomplete. PR763 retains37 unpublished biographies and26 associations. Published baseline remains1624/838 from PR762, not freshly checked live. No production publication; wider public directory and Google indexing are separate.",
+  "completedProfileSlugs": ["olympia-athletics"],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1660,
+    "extendedProfiles": 1661,
     "notableMemberEntries": 864,
     "clubsWithContacts": 1281,
     "contactEntries": 2096,
@@ -20,25 +20,27 @@
     "websiteContactRecords": 1612
   },
   "batchChanges": {
-    "extendedProfilesAdded": 2,
+    "extendedProfilesAdded": 1,
     "existingProfilesExpanded": 0,
-    "notableMemberEntriesAdded": 2,
-    "contactOrSocialRecordsChanged": 2,
+    "notableMemberEntriesAdded": 0,
+    "contactOrSocialRecordsChanged": 0,
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 3,
-    "netSocialLinks": 2,
+    "netContactEntries": 0,
+    "netSocialLinks": 0,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch139 local profile/catalogue/club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. External migrations and all production publishers skipped. Actual assembled catalogue1660/1737 biographies,864 associations,77 incomplete;2096 contacts and2600socials. Parentbbb43d3 dedicated39208417233 and broader quality39208417275 both passed. Exact new-head workflow and preview evidence to be recorded in PR763. Current main e9017dc62c7c7b62c6b13922dd44e8133d8d2cec; unrelated changes untouched. No production publication."
+    "status": "Batch140 local profile/catalogue/club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. External migrations and all production publishers skipped. Actual assembled catalogue1661/1737 biographies,864 associations,76 incomplete;2096 contacts and2600socials unchanged. Parentdd41290 dedicated39221181181 and full quality39221181212 both passed. Exact new-head workflow and preview evidence to be recorded in PR763. Current main e9017dc62c7c7b62c6b13922dd44e8133d8d2cec; unrelated changes untouched. No production publication."
   },
   "nextCandidateSlugs": [
-    "olympia-athletics",
-    "gator-athletics-club",
-    "seven-ten-ac"
+    "7-hills-harriers",
+    "abbey-running-club",
+    "sedbergh-schools-group-running-club"
   ],
   "resumeInstructions": [
+    "BATCH140 CURRENT: moduleei/seedv140 adds OlympiaAthletics biography and countyHampshire from opened/visuallychecked OctoberEAregisterp30. AGM21June2024p1 acceptance into HampshireXCLeague is not foundingdate; HavantACMay/June2026Lakeside5k source establishes dated participation only. No individualnames/results/notables imported; OlympiaRunningAcademy notmerged. Australia namesake excluded. Town/venue/fees/timetable/foundingunknown; ECCA18Oct email and13Octdirectory provenance retained. Actual1661/1737(95.6%),864associations,76incomplete;draft37/26. Contacts/socials unchanged. Parentdd41290/main e9017dc inspected; bothparentCIpassed. FinalnewheadCI/previewinPR763. Next7Hills/Abbey/Sedbergh via newprimarysources; older CURRENT notes historical, preserve23Octfollowups.",
+    "19Oct GatorPowerof10 https://www.powerof10.uk/Home/Club/f1f431fb-a228-416e-ac14-f5bc62e98289 redirectedAuth/Login:STOP. EAOctoberp43 supports existingStaffordshire/disciplines only. No search-onlyNov2020origin, Redditprogramme or conflictingClayton10Korganiserclaim. SevenTen knownownsite/partner403 notbypassed/retriedalternatepaths; search-onlyprogramme notadopted. Olympia countycorrection resolvespreviousHampshirelead, not currentvenue/contact gaps.",
     "BATCH139 CURRENT: moduleeh/seedv139 adds RiversideHarriers and RunningHeadFirst, JohnHerbert/ChrisRedmond founding associations,3 rolecontacts,2 RHFirst publisher-linked socials,2 websites/contactroutes. Riverside NewRiver postcode N225QJ correctedN225QW and address_kindtraining via club public timetable plus opened Haringey29June2026agenda. No directory check-date/discipline/eligibility changes. Actual1660/1737(95.6%),864 associations,77 incomplete;draft36/26. Parentbbb43d3/main e9017dc inspected, no competing writer. Both parent workflows passed. Final new-head CI/preview inPR763. Next Olympia/Gator/SevenTen via new primary leads, preserve23Octoberfollowups. Older CURRENT notes historical.",
     "19Oct Riverside: publichome and linked /static/js/main.eaca5190.js read ordinarypublicHTML/JS; team/timetable/FAQ/contact content, no private API/form. JohnHerbert founder/headcoach, DenisAttille generalenquiries, separatecoachingcontact. Unfilled2026term dates; no foundingyear, Olympiccount, accreditation, genericnews/testimonial claims or Haringeyalumni transfer. ConflictingJSONLD/footer socialhandles withheld; same-nameSouthAfricannotmerged. NewRiver address independently supported https://www.minutes.haringey.gov.uk/mgAi.aspx?ID=85825,29June2026. ExistingECCAemail/date18Oct retained. RHFirst home/about/runningclub/contact opened; founderPTsite expresslydatesCIC2019, not registeredclubfoundation; roleassociationonly, no privatehealthstory. Thursday5.30page attributed, confirmmeetingpoint; Liscardoffice not substituted for WallaseyVillage directory. Organisationemail/phone added, coach/supplier contacts excluded; FB/IGpublisherlinks notaccountownershipverification. TeamchallengeSTOP. OlympiaMarch2026HampshirePDFsearchlead notopened, no correction; Australianidentity excluded.",
     "BATCH138 CURRENT: moduleeg/seedv138 adds Twemlow's dated endurance/league biography; no new association, contact, location or directory-date changes. Assembled1658/1737(95.5%),862 associations,79 incomplete; draft34/24, historical published1624/838. Freshparent62a85b6/main e9017dc inspected, no competing writer. Parent dedicated39203158962 and full quality39203158803 both passed; exactparent AthRecs preview dpl_FjJ5J4KTXU3CUpBTousu4qwGEAeE previously verified with QBE/Hoylake/Maximum HTTP200 and45 assertions. New-head final evidence belongs in PR763. Next RiversideHarriers/RunningHeadFirst/Olympia new-primary leads; preserve23October followups. Older CURRENT entries historical.",
