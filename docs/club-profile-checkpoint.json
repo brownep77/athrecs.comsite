@@ -1,24 +1,24 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-19-batch142",
+  "lastEditorialBatch": "2026-10-19-batch143",
   "reviewedAt": "2026-10-19",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch119",
-  "pullRequest": 763,
-  "publication": "Unpublished batch142: Fenland Running Club biography and official website/joining route added. Assembled 1663/1737 biographies (95.7%),865 associations,74 incomplete. PR763 contains39 unpublished biographies and27 associations beyond the last recorded published baseline1624/838 from PR762; no fresh live check or production publication.",
+  "branch": "codex/club-profiles-batch143",
+  "pullRequest": null,
+  "publication": "Draft batch143: Horsham Run Fit biography and Strava added;1664/1737 biographies(95.8%),865 associations,73 incomplete. PR763 merged19October10:56UTC at55023a4 with1663/865; live publication handled separately, not freshly inspected here. New draft PR is discoverable by branch codex/club-profiles-batch143; number assigned after this commit. One unpublished biography, no new association; no production write this batch.",
   "completedProfileSlugs": [
-    "fenland-running-club"
+    "horsham-run-fit"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 1663,
+    "extendedProfiles": 1664,
     "notableMemberEntries": 865,
     "clubsWithContacts": 1281,
     "contactEntries": 2096,
     "clubsWithEmail": 1238,
     "clubsWithPhone": 195,
-    "clubsWithSocials": 1234,
-    "socialLinks": 2601,
+    "clubsWithSocials": 1235,
+    "socialLinks": 2602,
     "websiteContactRecords": 1612
   },
   "batchChanges": {
@@ -29,17 +29,19 @@
     "newWebsiteContactRecords": 0,
     "directoryRecordsRefreshed": 0,
     "netContactEntries": 0,
-    "netSocialLinks": 0,
+    "netSocialLinks": 1,
     "unsafeWebsitesSuppressed": 0
   },
   "validationBeforeCommit": {
-    "status": "Batch142 local club profile, catalogue and audit checks, TypeScript, targeted ESLint, whitespace and safe Vite preview build passed. No external database migration or production publisher ran. Actual assembled1663/1737 biographies,865 associations,2096 contacts,2601socials;74 incomplete. Exact new-head CI/preview results recorded separately in PR763. Parent dedicated passed; parent full quality still running when checked. Main e9017dc inspected. No production publication."
+    "status": "Batch143 local profile/catalogue/club checks, targeted ESLint, TypeScript, whitespace and safe preview build passed. External database migration and production publishers skipped. Actual assembled1664/1737 biographies,865 associations,2096 contacts,2602socials;73 incomplete. Exact new-head CI/preview evidence will be recorded in the new draft PR. Final PR763 dedicated39237451784 and full quality39237451736 both passed before merge55023a4. No production publication by this batch."
   },
   "nextCandidateSlugs": [
-    "horsham-run-fit",
-    "michelles-running-group"
+    "daws-heath-harriers",
+    "fry-club-joggers"
   ],
   "resumeInstructions": [
+    "BATCH143 CURRENT: moduleel/seedv143 resolves Horsham narrative hold with opened publicStrava475796, EAOctoberregisterp36 and reread/rendered Streetlight2018reportp10. Adds1bio/1Strava, no newpersonalassociation/contact. Adult-only/directoryBandstandaddress/13Octdate/ECCA18Octemail retained; all-agesStravawording notproof of juniorprogramme. Founder/year/fees/timetableunknown; horshamrunfit.com503 notadded. Assembled1664/1737(95.8%),865associations,73incomplete. PR763 merged55023a4, bothfinalCIpassed; baseline1663/865 merged, livehandledseparately. Newdraftbranch codex/club-profiles-batch143; findPRbybranch aftercommit. FinalCI/preview evidence innewPR. NextDawsHeath/Fry via newprimarysources; preserve23Octfollowups andolderholds.",
+    "19Oct Michelle publicFacebook https://www.facebook.com/Michellecaulfieldrunning/ temporarilyblockedSTOP; https://www.greatnotleyparishcouncil.gov.uk/our-community/sport-groups/403STOP; https://www.parkrun.org.uk/greatnotley/links/reader405. No snippet-only5yearanniversary foundingcalculation, timetable, coachingcontacts or raceparticipant data adopted. Do not repeat blockedroutes; recover newprimarynarrative. Horsham Strava ordinarypublicGET200, site503, no privateactivity/login. Existingpooled fields preserved.",
     "BATCH142 CURRENT: moduleek/seedv142 adds Fenland biography,1992founding from Frostbite league directory, club-owned programme/membership and dated12May2026C25Kcourse. Officialwebsite/joiningroute added; directoryaddress/postcode/dates and ECCA18Octemail retained.1663/1737,865associations,74incomplete;unpublished39/27. Parentb32083f/main e9017dc inspected. ExactheadCI/preview to be recorded inPR763. NextHorshamRunFit/MichellesRunningGroup via newprimarysources; preserve23Octoberfollowups and allolderholds.",
     "BATCH141 CURRENT: moduleej/seedv141 adds AbbeyRunningClub Abingdon biography,2019origin and LucyBrandon dated2026OxBeltorganisingassociation. County-directory-linked clubwebsite opened, about/team/meeting/join/trial/member/C25K/contact pages read. Monday7pm5-10k/Thursday6:30coached supported; intake/fees not promised. CityValeWhiteHorse correctedAbingdon, outsideAbbeyCinema meetingpoint training, originalpostcodeOX143JD retainednotnewlyverified. Officialwebsite/contactform/Instagram added; existingFB/ECCAemail/dates retained. Actual1662/1737(95.7%),865associations,75incomplete;draft38/27. Parent92004d0/main e9017dc inspected, bothparentCIpassed. FinalnewheadCI/preview inPR763. NextFenland/StJohns via newprimarysources; preserve23Octfollowups; older CURRENT entries historical.",
     "19Oct Abbey constitution https://abbeyrunningclub.co.uk/wp-content/uploads/2026/07/ARC-Consitution-April-2026-v2.pdf admissionp5 read/rendered: no age limit; unchangedadult_onlyfalse is not a claim of juniorprogramme. WebsiteInstagramlink present butdestinationunreadable; ownershipnotindependent. LiveWell10840 returned403STOP. 7Hills Facebook100063554832130 throttled; no snippetwomenonly/Oughtibridgeclaim. Sedbergh https://sedberghschool.org/senior-news/sedbergh-schools-group-launches/ dated15April2026 concerns schoolfamily, not runningclubfoundation; no school/alumni/results transfer. No outreach/formsubmission or accesschange.",
