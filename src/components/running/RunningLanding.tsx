@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
 import {
   ArrowRight,
   CalendarDays,
@@ -223,9 +224,12 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
                 : countryCardStyle(country.id)
             }
           >
-            <p className="text-sm font-semibold">
-              {roadHalfMarathonsForCountry(country.id).length} half marathon guides
-            </p>
+            <div className="flex items-center justify-between gap-3">
+              <CountryFlag country={country.countryCode} />
+              <p className="text-sm font-semibold">
+                {roadHalfMarathonsForCountry(country.id).length} half marathon guides
+              </p>
+            </div>
             <h3 className="mt-3 font-display text-2xl font-semibold text-slate-900">
               {country.name}
             </h3>
@@ -250,8 +254,8 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
             : countryCardStyle(country.id);
           const content = (
             <>
-              <div className="flex items-center justify-between" style={{ color: style.color }}>
-                <Footprints className="size-6" aria-hidden="true" />
+              <div className="flex items-center justify-between gap-3" style={{ color: style.color }}>
+                <CountryFlag country={country.countryCode} />
                 <span className="text-xs font-semibold">
                   {roadMarathonsForCountry(country.id).length} race guides
                 </span>
@@ -401,7 +405,10 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
               : countryCardStyle("uk")
           }
         >
-          <p className="text-sm font-semibold">{ROAD_ULTRAS.length} events and event series</p>
+          <div className="flex items-center justify-between gap-3">
+            <CountryFlag country="GB" />
+            <p className="text-sm font-semibold">{ROAD_ULTRAS.length} events and event series</p>
+          </div>
           <h3 className="mt-3 font-display text-2xl font-semibold text-slate-900">
             Go beyond 26.2 miles
           </h3>
