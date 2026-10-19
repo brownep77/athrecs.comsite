@@ -17,6 +17,15 @@ try {
   const { clubs } = await server.ssrLoadModule("/src/data/catalogue.ts");
   assert.equal(clubs.length, 1737);
   const bySlug = new Map(clubs.map((c) => [c.slug, c]));
+  // Batch 137: a corporate insurer enquiry page must not masquerade as club contact.
+  const qbe137 = bySlug.get("qbe-running-club");
+  assert.equal(qbe137.contact_url, "https://www.englishcrosscountry.co.uk/wp-content/uploads/2026/09/ECCA_Handbook_2026-27.pdf#page=37");
+  assert.equal(qbe137.contacts.length, 1);
+  assert.equal(qbe137.contacts[0].email, "julia.semple@uk.qbe.com");
+  assert.equal(qbe137.contacts[0].checked_at, "2026-10-18");
+  assert.equal(qbe137.address_kind, "directory");
+  assert.equal(qbe137.country, "England");
+  assert.equal(clubProfiles[qbe137.slug], undefined);
   // Batch 136: dated club participation is not a founding date, joining route or athlete result import.
   const hoylake136 = bySlug.get("hoylake-road-runners");
   const hoylakeProfile136 = clubProfiles[hoylake136.slug];
