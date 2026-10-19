@@ -64,6 +64,10 @@ export const Route = createFileRoute("/sitemaps/$file")({
             ),
           );
         }
+        if (!IS_RUNRECS_SITE && params.file === "race-places.xml") {
+          const { readRacePlaceRows, racePlaceSitemapPaths } = await import("@/lib/athrecs/race-places.server");
+          return sitemapResponse(sitemapXml(racePlaceSitemapPaths(await readRacePlaceRows()).map((path) => `${SITE_URL}${path}`)));
+        }
         if (!IS_RUNRECS_SITE && params.file === "countries.xml") {
           const { getSql } = await import("@/lib/db");
           const { ensureAthrecsSeeded } = await import("@/lib/athrecs/seed.server");

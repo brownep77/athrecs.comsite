@@ -182,6 +182,7 @@ function EventsPage() {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
+          {!IS_RUNRECS_SITE ? <a href="/races/places" className="inline-flex min-h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg hover:border-border-strong">Browse by location</a> : null}
           {filters.sport === "Running" ? (
             <Link
               to={IS_RUNRECS_SITE ? "/race-series" : "/running/race-series"}
