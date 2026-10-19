@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-route
 import { ArrowLeft, SearchCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
 import { normalizeResultsSearch, parseResultsEditionId } from "@/lib/athrecs/public-results-search";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
@@ -70,6 +71,7 @@ function RaceResultsPage() {
           {edition.city ? ` in ${edition.city}` : ""}{edition.country ? `, ${edition.country}` : ""}.
           It contains the public records currently held by AthRecs, which may cover only part of the field.
           Follow the credited provider links for the original results. Placings are retained from the source.
+          Nationalities, where available, are as recorded for the race.
         </p>
         {credits.length ? <div className="space-y-1 text-sm text-muted" aria-label="Results provider credits">
           <p>Results credited to:</p>
@@ -90,7 +92,7 @@ function RaceResultsPage() {
           <table className="w-full min-w-[58rem] text-left text-sm">
             <caption className="sr-only">Recorded results for {edition.event_name}. Placings are as recorded, not recalculated for this list.</caption>
             <thead className="border-b border-border bg-accent-soft/40 text-[11px] uppercase tracking-wide text-muted">
-              <tr>{["Pos", "Athlete", "Profile club", "Category", "Time", "Chip", "Gun", ""].map((label, index) => <th key={index} scope="col" className="px-3 py-3">{label || <span className="sr-only">Claim result</span>}</th>)}</tr>
+              <tr>{["Pos", "Athlete", "Nationality", "Profile club", "Category", "Time", "Chip", "Gun", ""].map((label, index) => <th key={index} scope="col" className="px-3 py-3">{label || <span className="sr-only">Claim result</span>}</th>)}</tr>
             </thead>
             <tbody>
               {results.map((result) => {
@@ -105,6 +107,7 @@ function RaceResultsPage() {
                       {finished && result.gender_place !== null ? <p className="mt-1 text-xs text-muted">Gender position {result.gender_place}</p> : null}
                       {credit ? <a href={credit.url} target="_blank" rel="noreferrer" className="mt-1 block text-xs text-accent underline">Results: {credit.name}</a> : null}
                     </td>
+                    <td className="whitespace-nowrap px-3 py-4 align-top text-muted">{result.nationality ? <CountryFlag country={result.nationality} showCode /> : "—"}</td>
                     <td className="max-w-44 px-3 py-4 align-top text-muted">{result.profile_club || "—"}</td>
                     <td className="px-3 py-4 align-top text-muted">{result.category || "—"}{finished && result.category_place !== null ? <p className="mt-1 text-xs">Position {result.category_place}</p> : null}</td>
                     <td className="whitespace-nowrap px-3 py-4 align-top font-semibold tabular-nums">{finished ? formatDuration(result.finish_time_seconds) : "—"}</td>
@@ -114,7 +117,7 @@ function RaceResultsPage() {
                   </tr>
                 );
               })}
-              {!results.length ? <tr><td colSpan={8} className="p-8 text-center text-muted">No recorded results match this search.</td></tr> : null}
+              {!results.length ? <tr><td colSpan={9} className="p-8 text-center text-muted">No recorded results match this search.</td></tr> : null}
             </tbody>
           </table>
         </div>

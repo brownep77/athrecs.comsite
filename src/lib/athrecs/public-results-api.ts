@@ -21,6 +21,7 @@ export type PublicRaceResult = {
   id: number;
   athlete_name: string;
   athlete_slug: string;
+  nationality: string | null;
   profile_club: string | null;
   source_url: string | null;
   result_source: string | null;
@@ -136,6 +137,15 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
     const offset = (data.page - 1) * RESULT_PAGE_SIZE;
     const rows = await sql<PublicRaceResult>`
       select r.id, a.display_name as athlete_name, a.slug as athlete_slug,
+        case when r.result_details->>'verificationStatus' = 'source_verified'
+          and jsonb_typeof(r.result_details->'sourceNationality') = 'string'
+          and length(trim(r.result_details->>'sourceNationality')) between 1 and 100
+          and trim(r.result_details->>'sourceNationality') !~* '^(unknown|unspecified|n/?a|none|null|[-?]+)$'
+          and not exists (
+            select 1 from athlete_account_links l
+            where l.athlete_id = a.id and l.status = 'active'
+          )
+          then trim(r.result_details->>'sourceNationality') else null end as nationality,
         c.name as profile_club, r.source_url, r.result_source,
         r.overall_place, r.gender_place, r.category_place,
         r.category, r.status, r.finish_time_seconds, r.chip_time_seconds, r.gun_time_seconds,

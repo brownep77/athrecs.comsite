@@ -107,6 +107,7 @@ try {
         id + 6, id, id, 'V40', 1900 + id, 1890 + id, 1900 + id from athletes;
     update results set result_details = '{"disqualification":{"reason":"other"}}' where id = 7;
     update results set source_url = 'https://totalracetiming.co.uk/raceresults/123', result_source = 'Total Race Timing' where id = 1;
+    update results set result_details = '{"verificationStatus":"source_verified","sourceNationality":"KEN"}' where id = 1;
     insert into results (id, athlete_id, edition_id, status, result_visibility) values
       (90, 1, 11, 'Finished', 'public');
     insert into athlete_account_links values ('u3', 3, 'active'), ('u4', 4, 'active'),
@@ -129,6 +130,8 @@ try {
   assert.equal(detail.results[0].source_url, "https://totalracetiming.co.uk/raceresults/123");
   assert.equal(detail.results[0].result_source, "Total Race Timing");
   assert.equal(detail.results[0].gun_time_seconds, 1901);
+  assert.equal(detail.results[0].nationality, "KEN", "Use the explicitly recorded result nationality, not the UK event location");
+  assert.equal(detail.results[1].nationality, null, "Absent nationality must stay unknown");
   assert.notEqual(detail.results[0].athlete_slug, detail.results[1].athlete_slug,
     "Same-name identities must remain distinct");
   assert.equal(detail.results[0].athlete_name, detail.results[1].athlete_name);
@@ -141,6 +144,19 @@ try {
   assert.equal((await api.listPublicResultEditions({ data: { sport: "Cycling" } })).editions.length, 0);
   assert.equal((await api.getPublicRaceResults({ data: { editionId: 10, q: "Alex Example" } })).results.length, 2);
   assert.equal(await snapshot(), before, "Reading must not mutate canonical results");
+
+  // Source nationality must not override claimed-profile controls or expose raw evidence.
+  await db.exec("insert into athlete_account_links values ('u1', 1, 'active')");
+  assert.equal((await api.getPublicRaceResults({ data: { editionId: 10 } })).results[0].nationality, null);
+  await db.exec("delete from athlete_account_links where user_id = 'u1'");
+  for (const sourceNationality of [null, {}, 42, "", "unknown", "N/A", "?", "x".repeat(101)]) {
+    await db.query("update results set result_details = $1 where id = 1", [JSON.stringify({ verificationStatus: "source_verified", sourceNationality })]);
+    assert.equal((await api.getPublicRaceResults({ data: { editionId: 10 } })).results[0].nationality, null);
+  }
+  await db.query("update results set result_details = $1 where id = 1", [JSON.stringify({ sourceNationality: "RUS" })]);
+  assert.equal((await api.getPublicRaceResults({ data: { editionId: 10 } })).results[0].nationality, null, "Unverified source rows are not published as nationality evidence");
+  await db.query("update results set result_details = $1 where id = 1", [JSON.stringify({ verificationStatus: "source_verified", sourceNationality: "KEN", privateEvidence: "staff-only" })]);
+  assert(!JSON.stringify(await api.getPublicRaceResults({ data: { editionId: 10 } })).includes("staff-only"));
 
   await db.exec(`
     insert into events (id, name, sport, surface) values
@@ -231,6 +247,7 @@ try {
     "react/jsx-runtime": {},
     "@tanstack/react-router": { createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: (options) => Object.assign(new Error("redirect"), options) },
     "lucide-react": {}, "@/components/ui/badge": {}, "@/components/ui/button": {},
+    "@/components/athletes/CountryFlag": {},
     "@/lib/athrecs/public-results-api": api,
     "@/lib/athrecs/public-results-search": search,
     "@/lib/athrecs/format": format,
