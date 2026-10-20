@@ -21,7 +21,9 @@ import { publicTranslationUrl } from "@/lib/athrecs/site-translation";
 import {
   HomepageAppearanceProvider,
   HomepageColourPicker,
+  useHomepageTheme,
 } from "@/components/running/HomepageAppearance";
+import { siteMenuThemeStyle } from "@/lib/running/homepage-themes";
 
 const nav = [
   { to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
@@ -100,19 +102,21 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   if (pathname === "/sportsrecs" || pathname.startsWith("/sportsrecs/")) return <>{children}</>;
   if (pathname.startsWith("/admin")) return <StaffMicrositeShell>{children}</StaffMicrositeShell>;
 
-  return (
-    <HomepageAppearanceProvider>
-      <PublicAppShell pathname={pathname}>{children}</PublicAppShell>
-    </HomepageAppearanceProvider>
-  );
+  const shell = <PublicAppShell pathname={pathname}>{children}</PublicAppShell>;
+  return IS_ATHRECS_SITE ? <HomepageAppearanceProvider>{shell}</HomepageAppearanceProvider> : shell;
 }
 
 function PublicAppShell({ children, pathname }: { children: React.ReactNode; pathname: string }) {
-  const showHomepageColours = IS_ATHRECS_SITE && pathname === "/";
+  const theme = useHomepageTheme();
+  const menuStyle = siteMenuThemeStyle(theme);
+  const showHomepageColours = IS_ATHRECS_SITE;
   const showLanguagePicker = IS_ATHRECS_SITE && publicTranslationUrl(pathname) !== null;
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col overflow-x-hidden bg-bg">
-      <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block">
+      <header
+        style={menuStyle}
+        className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block"
+      >
         <div className="flex h-16 items-center justify-between gap-3 px-6">
           <BrandLink desktop />
           <nav className="flex items-center gap-0.5" aria-label="Primary">
@@ -139,7 +143,10 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
           </nav>
         </div>
       </header>
-      <header className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md lg:hidden">
+      <header
+        style={menuStyle}
+        className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md lg:hidden"
+      >
         <div className="flex h-14 items-center justify-between gap-2 px-4">
           <BrandLink />
           <div className="relative flex shrink-0 items-center gap-2">
@@ -155,7 +162,11 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
       pathname.startsWith("/news") ? (
         <nav
           aria-label="Browse by sport"
-          className="border-b border-accent/20 bg-accent-soft px-4 md:px-6"
+          style={menuStyle}
+          className={cn(
+            "border-b border-accent/20 px-4 md:px-6",
+            theme === "colourful" ? "bg-accent-soft" : "bg-bg",
+          )}
         >
           <ul className="flex flex-wrap items-center gap-x-1 py-1">
             {SPORT_PAGES.map((item) => (
@@ -205,7 +216,10 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
       ) : null}
       <SiteAnalytics />
       <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">{children}</main>
-      <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-40 text-xs text-muted sm:pb-24 md:mx-6 lg:pb-5">
+      <footer
+        style={menuStyle}
+        className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border bg-bg py-5 pb-40 text-xs text-muted sm:pb-24 md:mx-6 lg:pb-5"
+      >
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
           <Link to="/running" className="hover:text-accent">
@@ -248,7 +262,8 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
       </footer>
       {IS_ATHRECS_SITE ? <AssistantLauncher pathname={pathname} /> : null}
       <nav
-        className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md lg:hidden"
+        style={menuStyle}
+        className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-bg/95 backdrop-blur-md lg:hidden"
         aria-label="Primary"
       >
         <ul className="mx-auto grid max-w-xl grid-cols-4 px-1 pt-1 sm:grid-cols-8">

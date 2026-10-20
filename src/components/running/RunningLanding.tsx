@@ -117,7 +117,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
           to={item.to}
           className={pastelCardClassName}
           style={
-            homepage
+            homepage || theme !== "colourful"
               ? homepageCardStyle(theme, item.style, "tone", index as 0 | 1 | 2)
               : neutralPastelCardStyle
           }
@@ -218,11 +218,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
             to="/running/$guide"
             params={{ guide: country.guide }}
             className={pastelCardClassName}
-            style={
-              homepage
-                ? homepageCardStyle(theme, countryCardStyle(country.id), "country")
-                : countryCardStyle(country.id)
-            }
+            style={homepageCardStyle(theme, countryCardStyle(country.id), "country", 0, country.id)}
           >
             <div className="flex items-center justify-between gap-3">
               <CountryFlag country={country.countryCode} />
@@ -249,9 +245,13 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
       </h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {MARATHON_COUNTRIES.map((country) => {
-          const style = homepage
-            ? homepageCardStyle(theme, countryCardStyle(country.id), "country")
-            : countryCardStyle(country.id);
+          const style = homepageCardStyle(
+            theme,
+            countryCardStyle(country.id),
+            "country",
+            0,
+            country.id,
+          );
           const content = (
             <>
               <div className="flex items-center justify-between gap-3" style={{ color: style.color }}>
@@ -403,11 +403,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
         <Link
           to="/running/uk-road-ultramarathons"
           className={`mt-5 max-w-3xl ${pastelCardClassName}`}
-          style={
-            homepage
-              ? homepageCardStyle(theme, countryCardStyle("uk"), "country")
-              : countryCardStyle("uk")
-          }
+          style={homepageCardStyle(theme, countryCardStyle("uk"), "country", 0, "uk")}
         >
           <div className="flex items-center justify-between gap-3">
             <CountryFlag country="GB" />
