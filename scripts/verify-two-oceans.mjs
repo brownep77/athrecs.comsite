@@ -3,6 +3,43 @@ import { readFileSync } from "node:fs";
 
 const { TWO_OCEANS_CHECKED_AT, TWO_OCEANS_RESULTS, twoOceansEditions, twoOceansSeries } =
   await import("../src/data/two-oceans.ts");
+const { twoOceansCalendarPresentation, twoOceansRacePresentation, twoOceansSourceSlug } =
+  await import("../src/lib/athrecs/two-oceans-presentation.ts");
+
+const calendarRows = twoOceansEditions.map((edition, id) => ({
+  id,
+  event_slug: edition.seriesSlug,
+  event_name: twoOceansSeries[0].name,
+  event_date: edition.date,
+  distance_code: edition.distance,
+}));
+for (const row of calendarRows) {
+  const presented = twoOceansCalendarPresentation(row);
+  assert.equal(presented.id, row.id);
+  assert.equal(presented.event_date, row.event_date);
+  assert.equal(
+    presented.event_name,
+    row.distance_code === "Half" ? "Two Oceans Half Marathon" : "Two Oceans Marathon",
+  );
+  assert.equal(twoOceansSourceSlug(presented.event_slug), row.event_slug);
+}
+const race = {
+  event: twoOceansSeries[0],
+  distances: twoOceansSeries[0].distances,
+  upcoming: calendarRows.filter((row) => row.event_date.startsWith("2027")),
+  past: calendarRows.filter((row) => !row.event_date.startsWith("2027")),
+};
+const half = twoOceansRacePresentation(race, "two-oceans-half-marathon");
+assert.equal(half.event.name, "Two Oceans Half Marathon");
+assert.equal(half.event.slug, "two-oceans-half-marathon");
+assert.deepEqual(half.distances, ["Half"]);
+assert.equal(half.upcoming.length, 1);
+assert.equal(half.past.length, 5);
+assert([...half.upcoming, ...half.past].every((row) => row.distance_code === "Half"));
+assert.strictEqual(twoOceansRacePresentation(race, "two-oceans-marathon"), race);
+assert.equal(race.upcoming.length, 2, "The shared series must remain intact");
+const other = { event_slug: "other-half", event_name: "Other Half", distance_code: "Half" };
+assert.strictEqual(twoOceansCalendarPresentation(other), other);
 
 assert.equal(TWO_OCEANS_CHECKED_AT, "2026-08-20");
 assert.equal(twoOceansSeries.length, 1);

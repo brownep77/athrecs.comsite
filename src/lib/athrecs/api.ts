@@ -20,6 +20,11 @@ import {
 import { getSql, dbSource, type Sql } from "@/lib/db";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { eventByPublicSlug } from "./event-slug.server";
+import {
+  twoOceansCalendarPresentation,
+  twoOceansRacePresentation,
+  twoOceansSourceSlug,
+} from "./two-oceans-presentation";
 import { retainedFixtureAliasSlugs } from "@/data/fixture-deduplication";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
@@ -446,7 +451,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data: slug }) => {
     const sql = await ready();
     const today = todayIso();
-    const events = await eventByPublicSlug(sql, slug);
+    const events = await eventByPublicSlug(sql, twoOceansSourceSlug(slug));
     const event = events[0] as
       | {
           id: number;
@@ -714,14 +719,17 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       };
     });
 
-    return {
-      event,
-      groups,
-      distances: distances.map((d) => d.distance_code),
-      upcoming,
-      past: editions.filter((e) => e.event_date < today),
-      related,
-    };
+    return twoOceansRacePresentation(
+      {
+        event,
+        groups,
+        distances: distances.map((d) => d.distance_code),
+        upcoming,
+        past: editions.filter((e) => e.event_date < today),
+        related,
+      },
+      slug,
+    );
   });
 
 export const getEditionResults = createServerFn({ method: "GET" })
@@ -1902,7 +1910,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         (a, b) =>
           a.event_date.localeCompare(b.event_date) || a.event_name.localeCompare(b.event_name),
       );
-    return filtered.slice(0, limit);
+    return filtered.slice(0, limit).map(twoOceansCalendarPresentation);
   });
 
 // -- Admin / catalogue imports --
