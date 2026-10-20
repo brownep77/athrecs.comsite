@@ -13,7 +13,12 @@ export const Route = createFileRoute("/races/places/")({
   loaderDeps: ({ search }) => search,
   loader: async ({ deps }) => {
     const data = await getRacePlacePage({
-      data: { page: deps.page, archive: deps.view === "archive" },
+      data: {
+        page: deps.page,
+        archive: deps.view === "archive",
+        month: deps.month,
+        city: deps.city,
+      },
     });
     if (!data) throw notFound();
     return data;

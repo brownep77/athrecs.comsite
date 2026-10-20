@@ -79,6 +79,8 @@ export function runningDistanceNames(data: RacePlacePageData) {
 }
 
 function raceFocus(data: RacePlacePageData) {
+  if (data.facet.distance) return data.facet.distance.heading;
+  if (data.facet.sport) return data.facet.sport.heading;
   const sports = data.overview.sports;
   if (sports.length === 1) {
     if (sports[0] === "Running") return "Running races";
@@ -109,7 +111,9 @@ export function racePlaceCopy(data: RacePlacePageData) {
   const heading = data.archive
     ? `Past races and dates to be announced in ${location}`
     : data.place.kind === "world"
-      ? "Find races around the world"
+      ? data.facet.sport
+        ? `${focus} around the world`
+        : "Find races around the world"
       : `${focus} in ${location}`;
   const intro: RaceCopyParagraph[] = [];
   const questions: { question: string; answer: RaceCopyParagraph }[] = [];
@@ -128,7 +132,7 @@ export function racePlaceCopy(data: RacePlacePageData) {
     ]);
     intro.push([
       "A previous edition does not mean a race will return. For events with a future date, use the ",
-      { text: "upcoming race calendar", href: data.place.path },
+      { text: "upcoming race calendar", href: data.path },
       ".",
     ]);
   } else {
@@ -137,15 +141,18 @@ export function racePlaceCopy(data: RacePlacePageData) {
         data.place.kind === "world"
           ? "Build your racing calendar, close to home or further afield."
           : data.place.kind === "continent"
-            ? `Compare race dates across ${location} and choose where to run next.`
-            : `Find your next ${focus === "Triathlons" ? "triathlon" : focus === "Athletics events" ? "athletics event" : "race"} in ${location}.`;
+            ? `Compare ${focus.toLowerCase()} across ${location} and choose where to compete next.`
+            : `Find ${focus.toLowerCase()} in ${location}.`;
       intro.push([
-        `${first} AthRecs lists ${number(data.upcomingCount)} ${data.upcomingCount === 1 ? "event with an upcoming date" : "events with upcoming dates"} here. Open a race guide for the location, listed distances and entry information where available.`,
+        `${first} Compare ${number(data.upcomingCount)} upcoming ${eventWord} by date and location. Open a race guide for the course, recorded editions and official entry information where available.`,
       ]);
-      if (raceTypes.length) intro.push([`Upcoming running events include ${list(raceTypes)}.`]);
+      if (raceTypes.length && !data.facet.distance)
+        intro.push([`Upcoming running events include ${list(raceTypes)}.`]);
     } else {
       intro.push([
-        `Explore ${number(data.total)} recorded ${data.total === 1 ? "event" : "events"} in ${location}. No upcoming dates are currently listed, but you can still browse the race guides and previous editions.`,
+        data.filters.month || data.filters.city
+          ? `No upcoming races match these filters in ${location}. Clear the filters to see other dates and locations.`
+          : `Explore ${number(data.total)} recorded ${data.total === 1 ? "event" : "events"} in ${location}. No upcoming dates are currently listed, but you can still browse the race guides and previous editions.`,
       ]);
     }
     const examples = (data.races.length ? data.races : data.archivePreview).slice(0, 3);
@@ -188,14 +195,16 @@ export function racePlaceCopy(data: RacePlacePageData) {
       );
     } else {
       nextAnswer.push(
-        `There are no upcoming dates listed for ${location} at present. The recorded race guides remain available, and a new edition will appear in the calendar when it is added to AthRecs.`,
+        data.filters.month || data.filters.city
+          ? `No upcoming races match the selected filters. Clear the filters to browse the full ${location} calendar.`
+          : `There are no upcoming dates listed for ${location} at present. The recorded race guides remain available, and a new edition will appear in the calendar when it is added to AthRecs.`,
       );
     }
     questions.push({
       question: `Which ${focus.toLowerCase()} are coming up in ${location}?`,
       answer: nextAnswer,
     });
-    if (distances.length)
+    if (distances.length && !data.facet.distance)
       questions.push({
         question: `What running distances are listed in ${location}?`,
         answer: [
@@ -217,14 +226,23 @@ export function racePlaceCopy(data: RacePlacePageData) {
   }
 
   const shortLocation = data.place.kind === "world" ? "Worldwide" : data.place.name;
-  const title = `${shortLocation} ${focus === "Triathlons" ? "triathlon" : focus === "Athletics events" ? "athletics" : "race"} calendar${data.archive ? " — past editions" : ""}${data.page > 1 ? ` — page ${data.page}` : ""}${data.place.kind === "region" && parent && parent.name !== data.place.name ? ` | ${parent.name}` : ""} | AthRecs`;
+  const titleFocus = data.facet.distance
+    ? data.facet.distance.heading
+    : data.facet.sport
+      ? data.facet.sport.heading.toLowerCase()
+      : `${focus === "Triathlons" ? "triathlon" : focus === "Athletics events" ? "athletics" : "race"} calendar`;
+  const title = `${shortLocation} ${titleFocus}${data.archive ? " — past editions" : ""}${data.page > 1 ? ` — page ${data.page}` : ""}${data.place.kind === "region" && parent && parent.name !== data.place.name ? ` | ${parent.name}` : ""} | AthRecs`;
   const description = data.archive
     ? `Browse ${number(data.archiveCount)} race guides in ${location} awaiting a new date or with past editions. Find recorded events and links to the upcoming calendar.`
     : !data.total
       ? `Race listings for ${location} are not available yet. Browse the surrounding locations on AthRecs to plan your next event.`
       : !hasUpcoming
         ? `Explore ${number(data.total)} recorded events in ${location}. Browse race guides and past editions, and check back for new dates on AthRecs.`
-        : `Find ${number(data.upcomingCount)} upcoming ${focus === "Triathlons" ? (data.upcomingCount === 1 ? "triathlon" : "triathlons") : eventWord} in ${location}.${raceTypes.length ? ` Includes ${list(raceTypes.slice(0, 3))}.` : ""} Compare dates and entry details on AthRecs.`;
+        : `Find ${number(data.upcomingCount)} upcoming ${data.facet.sport ? (data.upcomingCount === 1 ? focus.toLowerCase().replace(/s$/, "") : focus.toLowerCase()) : eventWord} in ${location}.${raceTypes.length && !data.facet.distance ? ` Includes ${list(raceTypes.slice(0, 3))}.` : ""} Compare dates and entry details on AthRecs.`;
+  if (data.filters.month || data.filters.city)
+    intro.unshift([
+      `Showing ${data.filters.city ? `events in ${data.filters.city}` : "events"}${data.filters.month ? ` during ${new Date(`${data.filters.month}-01T12:00:00Z`).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" })}` : ""}.`,
+    ]);
   return {
     heading,
     intro,

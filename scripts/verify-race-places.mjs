@@ -109,6 +109,87 @@ assert(
   "unknown time zone must not expire early",
 );
 const key = "europe/united-kingdom/england/norfolk";
+const { placeEntryUrl } = await import("../src/lib/athrecs/race-place-facets.ts");
+const { racePlaceUrl } = await import("../src/lib/athrecs/race-places-seo.ts");
+const facetRows = [
+  race(301, {
+    editions: [edition("2027-02-01"), { ...edition("2027-01-01"), distance: "Half" }],
+    city: "Wymondham",
+  }),
+  race(302, { editions: [edition("2027-01-20"), edition("2027-02-20", "Closed")] }),
+  race(303, { editions: [edition("2027-01-31", "Open", "2027-02-02")] }),
+  race(304, { sport: "Triathlon", editions: [edition("2027-02-01")] }),
+  race(305, { sport: "Athletics", editions: [edition("2027-02-01")] }),
+  race(306, { editions: [edition("2027-02-01", "Cancelled")] }),
+  race(307, { distanceCodes: ["10K"], editions: [], lastDate: "2025-01-01" }),
+];
+const tenK = racePlacePage(facetRows, `${key}/running/10k`, now);
+assert.deepEqual(
+  tenK.races.map((r) => r.id),
+  [302, 303, 301],
+  "distance dates, not other-distance dates, control chronological order",
+);
+assert.equal(
+  tenK.total,
+  4,
+  "triathlon, athletics and cancelled-only distances do not become running races",
+);
+assert(tenK.indexable);
+assert.equal(tenK.archiveCount, 1, "old distance membership survives a rolling SQL date window");
+const february = racePlacePage(facetRows, `${key}/running/10k`, now, 1, false, {
+  month: "2027-02",
+});
+assert.deepEqual(
+  february.races.map((r) => r.id),
+  [303, 301, 302],
+  "month filter includes overlapping multi-day events and later editions",
+);
+assert.equal(february.races.find((r) => r.id === 302).next.date, "2027-02-20");
+assert(!february.indexable);
+assert(racePlaceUrl(february, 2).endsWith("?page=2&month=2027-02"));
+assert(!racePlaceUrl(february, 1, true).includes("month"), "archive navigation clears month");
+const town = racePlacePage(facetRows, `${key}/running/10k`, now, 1, false, {
+  month: "2027-02",
+  city: "wymondham",
+});
+assert.deepEqual(
+  town.races.map((r) => r.id),
+  [301],
+  "city and month combine without case sensitivity",
+);
+assert(!town.indexable);
+assert.equal(racePlacePage(facetRows, `${key}/triathlon/10k`, now), null);
+assert.equal(racePlacePage(facetRows, `${key}/running/not-a-distance`, now), null);
+assert(
+  !racePlacePage([facetRows[0]], `${key}/running/10k`, now).indexable,
+  "small focused pages remain useful but noindex",
+);
+const paths = racePlaceSitemapPaths(facetRows);
+assert(paths.includes(`/races/places/${key}/running/10k`));
+assert(!paths.includes(`/races/places/${key}/triathlon`));
+assert(
+  paths.every((p) => !p.includes("?")),
+  "no arbitrary filter combinations in sitemap",
+);
+assert(
+  racePlacePage(facetRows, `${key}/running/10k`, "2029-01-01T12:00:00Z").indexable,
+  "established distance page survives the off-season",
+);
+assert.equal(placeEntryUrl("javascript:alert(1)"), null);
+assert.equal(placeEntryUrl("https://user:secret@example.org"), null);
+assert.equal(placeEntryUrl("https://example.org/entry"), "https://example.org/entry");
+const facetGraph = JSON.parse(racePlaceHead(tenK).scripts[0].children)["@graph"];
+assert(
+  facetGraph
+    .find((item) => item["@type"] === "BreadcrumbList")
+    .itemListElement.at(-1)
+    .item.endsWith("/running/10k"),
+);
+assert.equal(
+  facetGraph.find((item) => item["@type"] === "CollectionPage").about.name,
+  "Norfolk",
+  "sport is not a geographical place",
+);
 const before = racePlacePage([race(1)], key, "2026-10-19T10:00:00Z");
 const after = racePlacePage([race(1)], key, now);
 assert.equal(before.upcomingCount, 1);
@@ -121,7 +202,8 @@ assert.equal(
   "new edition reappears",
 );
 const page = racePlacePage(races, key, now);
-assert.equal(page.races[0].id, 2, "featured events lead the list");
+assert.equal(page.races[0].id, 5, "earliest date leads the calendar, including ongoing events");
+assert.equal(page.featuredRaces[0].id, 2, "featured events have a separate section");
 assert.equal(page.upcomingCount, 2);
 assert.equal(
   racePlacePage(races, key, now, 1, true).races.find((r) => r.id === 3).cancelledDate,
@@ -229,12 +311,14 @@ await db.exec(`create table events(id int, slug text, name text, sport text, cou
  insert into events values (1,'synthetic-uk','UK fixture','Running','England','Norfolk',null,'Norwich','Test',true),
  (2,'synthetic-private-sport','Unsupported sport','Cycling','England','Norfolk',null,'Norwich','Test',true);
  insert into editions values (1,'2026-10-19','10K','Open','2026-10-23',null,null),
- (1,'2027-05-01','Half','Closed',null,null,null);`);
+ (1,'2027-05-01','Half','Closed',null,null,null);
+ alter table editions add column entry_url text;`);
 const sql = { query: async (text, values) => (await db.query(text, values)).rows };
 const loaded = await queryRacePlaceRows(sql, now);
 assert.equal(loaded.length, 1, "public sport boundary");
 assert.equal(loaded[0].editions[0].endDate, null, "unsupported end date cannot prolong an event");
 assert.equal(loaded[0].timeZone, "Europe/London");
+assert.deepEqual(new Set(loaded[0].distanceCodes), new Set(["10K", "Half"]));
 assert.equal(
   nextPlaceEdition(loaded[0], now).date,
   "2027-05-01",

@@ -13,10 +13,10 @@ These groupings do not assert sovereignty. State matching reuses the collector's
 existing ISO subdivision registry. Explicit counties within supplied states are
 supported when the county label identifies a county, parish or borough.
 
-Pages read the public Running, Athletics and Triathlon event catalogue. Featured
-events and existing major/final series classifications lead the list. They are
-labelled as editorial/series selections, not a new claim that every local race
-has international prestige. Other public catalogue races follow. No athlete or
+Pages read the public Running, Athletics and Triathlon event catalogue. The main
+calendar is chronological. Featured events and existing major/final series
+classifications appear in a separate section, labelled as editorial/series
+selections rather than a claim that every local race has international prestige. No athlete or
 account records are queried. RunRecs routes and the server function reject this
 AthRecs-only directory.
 
@@ -64,9 +64,9 @@ catalogue: named events, upcoming dates, explicitly listed running distances and
 populated child areas. Each named event and area links to its existing page.
 County/state headings include their parent area to distinguish shared names.
 
-The next-race answer uses chronological order, separately from the featured-first
-cards. Closed and TBC statuses remain visible. Distances come only from eligible
-running/athletics editions, never a triathlon run leg or a cancelled edition.
+The next-race answer and calendar use chronological order. Closed and TBC statuses
+remain visible. Running distances come only from eligible Running editions,
+never a triathlon run leg, athletics meeting or a cancelled edition.
 One event with several editions is counted once per distance. No course quality,
 popularity, suitability, entry availability or annual recurrence is invented.
 
@@ -107,3 +107,49 @@ race evidence. The built SSR check also verifies the visible date answers.
   geography. Live catalogue counts may differ.
 
 No race records, athlete data, account controls or access permissions are changed.
+
+## Sport and distance discovery — 20 October 2026
+
+Existing geographical URLs are unchanged. A finite set of sport and distance
+paths is supported under each place, for example:
+
+- `/races/places/europe/united-kingdom/england/norfolk/running`
+- `/races/places/europe/united-kingdom/england/norfolk/running/10k`
+- `/races/places/north-america/united-states/california/running/half-marathon`
+
+Sports follow exact stored Running/Athletics/Triathlon classifications. Distance
+pages use explicit edition codes; no distances are inferred from event names.
+Historical distance codes preserve pages outside the season even when the SQL
+window no longer includes those editions. Cancelled-only distances do not qualify.
+
+Focused pages need at least three recorded matching events to be indexable and
+included in the sitemap. This is an editorial product threshold, not a Google
+requirement or ranking guarantee. Smaller pages remain accessible with noindex.
+Month/town combinations and archives are noindex with normalized self-canonicals;
+they are not sitemap entries. Filters use a GET form, not a linked cross-product
+of every month and town. Invalid path combinations and out-of-range pagination
+return 404. Geographic ancestors remain places in structured data; sport and
+distance are added only as navigation breadcrumbs.
+
+The month filter matches the actual relevant distance edition, includes evidenced
+multi-day overlap, and can select a later edition of a recurring race. It does
+not match a different distance in the same event. Pagination keeps filters;
+switching to archive clears the month. Entry information links use existing
+edition URLs, accept HTTP(S) only, and appear only for an Open edition. Closed
+entry and TBC statuses stay explicit; entry availability is not newly verified.
+
+Continent navigation remains prominent. Large country/state child directories
+are collapsible but remain in rendered HTML. Related areas use siblings within
+the recorded parent, without claiming that they are geographically adjacent.
+
+Reviewed Norfolk guidance lives in `race-place-guides.ts`. Its organiser sources
+were opened on 20 October 2026: Wymondham AC's NYD10K page and Norwich Half
+Marathon's event page. Time-sensitive notes have edition end dates and disappear
+after that edition. They only appear for matching places, sports and distances.
+Other places use catalogue-based descriptions and local town counts. This is not
+an assertion that every location has an individually researched travel guide.
+
+The `Race location discovery` workflow builds the actual application and verifies
+SSR plus desktop/mobile browser navigation, filters, reset, pagination, runtime
+errors and horizontal overflow using isolated synthetic SQL. Its browser option
+is `node scripts/verify-race-places-ssr.mjs --browser` after a direct Vite build.
