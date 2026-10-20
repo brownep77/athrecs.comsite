@@ -3,6 +3,16 @@ import { countrySlug } from "./country-sites";
 import { collectionRegions } from "../race-collector/regions";
 import { COUNTRY_CONTINENTS } from "../../data/country-continents";
 import { raceLocalDate } from "../running/road-marathon-calendar";
+import {
+  PLACE_SPORTS,
+  PLACE_DISTANCES,
+  MIN_PLACE_FACET_RACES,
+  matchesPlaceDistance,
+  placeFacetSuffix,
+  placeRaceDistanceCodes,
+  resolvePlaceFacet,
+} from "./race-place-facets";
+import { PLACE_RACE_GUIDANCE } from "./race-place-guides";
 
 export const PLACE_ROOT = "/races/places";
 export const PLACE_PAGE_SIZE = 30;
@@ -20,6 +30,7 @@ export type PlaceEdition = {
   endDate: string | null;
   status: string;
   distance: string;
+  entryUrl?: string | null;
 };
 export type PlaceRace = {
   id: number;
@@ -34,6 +45,7 @@ export type PlaceRace = {
   featured: boolean;
   timeZone: string | null;
   editions: PlaceEdition[];
+  distanceCodes?: string[];
   lastDate: string | null;
 };
 export type RacePlace = {
@@ -176,10 +188,17 @@ export function racePlacePage(
   now: string,
   page = 1,
   archive = false,
+  filters: { month?: string; city?: string } = {},
 ) {
   const places = buildRacePlaces(races);
-  const place = places.get(key);
-  if (!place || !Number.isSafeInteger(page) || page < 1) return null;
+  const facet = resolvePlaceFacet(key, new Set(places.keys()));
+  const place = facet ? places.get(facet.key) : null;
+  if (!place || !facet || !Number.isSafeInteger(page) || page < 1) return null;
+  const { sport, distance } = facet;
+  const path = placePath(place.key) + placeFacetSuffix(sport, distance);
+  const month =
+    !archive && /^\d{4}-(0[1-9]|1[0-2])$/.test(filters.month ?? "") ? filters.month : undefined;
+  const city = filters.city?.trim().slice(0, 100) || undefined;
   const ids = new Set(place.raceIds);
   const dates = new Map<string, string>();
   const localDate = (race: PlaceRace) => {
@@ -187,67 +206,204 @@ export function racePlacePage(
     if (!dates.has(zone)) dates.set(zone, raceLocalDate(zone, now));
     return dates.get(zone)!;
   };
-  const scoped = races
-    .filter((race) => ids.has(race.id))
-    .map((race) => ({
+  const located = races.filter((race) => ids.has(race.id));
+  const matches = (race: PlaceRace) =>
+    (!sport || race.sport === sport.sport) &&
+    (!distance ||
+      placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, distance)));
+  const scoped = located.filter(matches).map((race) => {
+    const editions = race.editions.filter((edition) =>
+      matchesPlaceDistance(edition.distance, distance),
+    );
+    const eligible = editions.filter((edition) => isUpcomingEdition(edition, localDate(race)));
+    const nextInView =
+      eligible
+        .filter(
+          (edition) =>
+            !month ||
+            (edition.date.slice(0, 7) <= month &&
+              (edition.endDate ?? edition.date).slice(0, 7) >= month),
+        )
+        .sort((a, b) => a.date.localeCompare(b.date) || a.distance.localeCompare(b.distance))[0] ??
+      null;
+    return {
       ...race,
-      next: nextPlaceEdition(race, now, localDate(race)),
+      editions,
+      next: nextPlaceEdition({ ...race, editions }, now, localDate(race)),
+      nextInView,
+      listedDistances: [
+        ...new Set(
+          eligible
+            .filter((edition) => nextInView && edition.date === nextInView.date)
+            .map((edition) => edition.distance),
+        ),
+      ],
       cancelledDate:
         race.editions
           .filter((edition) => edition.status === "Cancelled")
           .sort((a, b) => b.date.localeCompare(a.date))[0]?.date ?? null,
-    }));
+    };
+  });
   const upcoming = scoped.filter((race) => race.next);
   const past = scoped.filter((race) => !race.next);
   const order = (a: (typeof scoped)[number], b: (typeof scoped)[number]) =>
-    Number(b.featured) - Number(a.featured) ||
-    (a.next?.date ?? "9999").localeCompare(b.next?.date ?? "9999") ||
-    a.name.localeCompare(b.name);
-  const selected = (archive ? past : upcoming).sort(order);
+    (a.next?.date ?? "9999").localeCompare(b.next?.date ?? "9999") || a.name.localeCompare(b.name);
+  const inCity = (race: PlaceRace) =>
+    !city || race.city.trim().toLocaleLowerCase("en-GB") === city.toLocaleLowerCase("en-GB");
+  const visibleUpcoming = upcoming
+    .filter((race) => race.nextInView && inCity(race))
+    .map((race) => ({ ...race, next: race.nextInView }));
+  const visiblePast = past.filter(inCity);
+  const selected = (archive ? visiblePast : visibleUpcoming).sort(order);
   const pageCount = Math.max(1, Math.ceil(selected.length / PLACE_PAGE_SIZE));
   if (page > pageCount) return null;
   const summary = ({ raceIds, ...item }: RacePlace) => ({
     ...item,
-    count: raceIds.length,
-    path: placePath(item.key),
+    count: raceIds.filter((id) => scopedIds.has(id)).length,
+    path: placePath(item.key) + placeFacetSuffix(sport, distance),
   });
+  const scopedIds = new Set(scoped.map((race) => race.id));
   const ancestors: ReturnType<typeof summary>[] = [];
   let ancestor: RacePlace | undefined = place;
   while (ancestor) {
-    ancestors.unshift(summary(ancestor));
+    ancestors.unshift({ ...summary(ancestor), path: placePath(ancestor.key) });
     ancestor = ancestor.parent === null ? undefined : places.get(ancestor.parent);
   }
-  const card = ({ editions: _editions, ...race }: (typeof scoped)[number]) => race;
+  const card = ({
+    editions: _editions,
+    distanceCodes: _codes,
+    nextInView: _next,
+    ...race
+  }: (typeof scoped)[number]) => race;
   // Count each event once per advertised running distance. A triathlon's run
   // leg must not turn into a claim that a standalone running race is available.
   const distanceCounts = new Map<string, number>();
-  for (const race of upcoming.filter((item) => item.sport !== "Triathlon")) {
+  for (const race of visibleUpcoming.filter((item) => item.sport === "Running")) {
     const distances = new Set(
       race.editions
         .filter((edition) => isUpcomingEdition(edition, localDate(race)))
+        .filter(
+          (edition) =>
+            !month ||
+            (edition.date.slice(0, 7) <= month &&
+              (edition.endDate ?? edition.date).slice(0, 7) >= month),
+        )
         .map((edition) => edition.distance.trim())
         .filter(Boolean),
     );
     for (const distance of distances)
       distanceCounts.set(distance, (distanceCounts.get(distance) ?? 0) + 1);
   }
+  const sportLinks = PLACE_SPORTS.map((item) => ({
+    ...item,
+    count: located.filter((race) => race.sport === item.sport).length,
+    path: placePath(place.key) + placeFacetSuffix(item, null),
+  })).filter((item) => item.count > 0);
+  const distanceLinks = PLACE_DISTANCES.map((item) => ({
+    ...item,
+    count: located.filter(
+      (race) =>
+        race.sport === "Running" &&
+        placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, item)),
+    ).length,
+    path: placePath(place.key) + placeFacetSuffix(PLACE_SPORTS[0], item),
+  })).filter((item) => item.count > 0);
+  const monthCounts = new Map<string, number>();
+  for (const race of upcoming) {
+    const months = new Set<string>();
+    for (const edition of race.editions.filter((item) =>
+      isUpcomingEdition(item, localDate(race)),
+    )) {
+      const start = new Date(`${edition.date.slice(0, 7)}-01T00:00:00Z`);
+      const end = (edition.endDate ?? edition.date).slice(0, 7);
+      // Defensive bound for corrupt multi-day records; no unbounded UI options.
+      for (let i = 0; i < 24 && start.toISOString().slice(0, 7) <= end; i++) {
+        months.add(start.toISOString().slice(0, 7));
+        start.setUTCMonth(start.getUTCMonth() + 1);
+      }
+    }
+    for (const value of months) monthCounts.set(value, (monthCounts.get(value) ?? 0) + 1);
+  }
+  const cityCounts = new Map<string, number>();
+  for (const race of archive ? past : upcoming) {
+    const name = clean(race.city);
+    if (name) cityCounts.set(name, (cityCounts.get(name) ?? 0) + 1);
+  }
+  const raceById = new Map(races.map((race) => [race.id, race]));
+  const siblings =
+    place.parent === null
+      ? []
+      : [...places.values()]
+          .filter((item) => item.parent === place.parent && item.key !== place.key)
+          .map((item) => ({
+            ...item,
+            count: item.raceIds.filter((id) => {
+              const race = raceById.get(id);
+              return race && matches(race);
+            }).length,
+            path: placePath(item.key) + placeFacetSuffix(sport, distance),
+          }))
+          .filter((item) => item.count > 0)
+          .sort((a, b) => a.name.localeCompare(b.name));
+  const breadcrumbs = ancestors.map(({ name, path }) => ({ name, path }));
+  if (sport)
+    breadcrumbs.push({
+      name: sport.label,
+      path: placePath(place.key) + placeFacetSuffix(sport, null),
+    });
+  if (distance) breadcrumbs.push({ name: distance.label, path });
+  const scopedSlugs = new Set(scoped.map((race) => race.slug));
   return {
-    place: summary(place),
+    place: { ...summary(place), path: placePath(place.key) },
+    path,
+    facet: { sport, distance },
+    indexable: scoped.length >= (sport ? MIN_PLACE_FACET_RACES : 1) && !archive && !month && !city,
+    filters: { month, city },
+    sportLinks,
+    distanceLinks,
+    breadcrumbs,
+    guidance: !archive
+      ? PLACE_RACE_GUIDANCE.filter(
+          (item) =>
+            item.place === place.key &&
+            scopedSlugs.has(item.slug) &&
+            item.validUntil >= now.slice(0, 10) &&
+            (!sport || sport.slug === "running") &&
+            matchesPlaceDistance(item.distance, distance),
+        )
+      : [],
+    siblings: siblings.map(({ name, path, count }) => ({ name, path, count })),
+    months: [...monthCounts]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([value, count]) => ({ value, count })),
+    cities: [...cityCounts]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([value, count]) => ({ value, count })),
     ancestors,
     children: [...places.values()]
-      .filter((child) => child.parent === key)
+      .filter((child) => child.parent === place.key)
       .map(summary)
+      .filter((child) => !sport || child.count > 0)
       .sort((a, b) => Number(b.count > 0) - Number(a.count > 0) || a.name.localeCompare(b.name)),
     races: selected.slice((page - 1) * PLACE_PAGE_SIZE, page * PLACE_PAGE_SIZE).map(card),
-    archivePreview: !archive && !upcoming.length ? past.sort(order).slice(0, 6).map(card) : [],
-    upcomingCount: upcoming.length,
-    archiveCount: past.length,
-    featuredCount: scoped.filter((race) => race.featured).length,
+    archivePreview:
+      !archive && !upcoming.length && !month && !city ? past.sort(order).slice(0, 6).map(card) : [],
+    featuredRaces:
+      !archive && page === 1
+        ? [...visibleUpcoming]
+            .filter((race) => race.featured)
+            .sort(order)
+            .slice(0, 4)
+            .map(card)
+        : [],
+    upcomingCount: visibleUpcoming.length,
+    archiveCount: visiblePast.length,
+    featuredCount: visibleUpcoming.filter((race) => race.featured).length,
     total: scoped.length,
     overview: {
       sports: [...new Set(scoped.map((race) => race.sport))].sort(),
       distances: [...distanceCounts].map(([code, count]) => ({ code, count })),
-      nextRaces: [...upcoming]
+      nextRaces: [...visibleUpcoming]
         .sort((a, b) => a.next!.date.localeCompare(b.next!.date) || a.name.localeCompare(b.name))
         .slice(0, 3)
         .map(({ name, slug, next }) => ({ name, slug, next: next! })),

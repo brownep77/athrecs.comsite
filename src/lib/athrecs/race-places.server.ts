@@ -6,6 +6,14 @@ import { eventSlugAliases } from "../../data/entry-options";
 import { ROAD_MARATHONS } from "../../data/road-marathons";
 import { ROAD_HALF_MARATHONS } from "../../data/road-half-marathons";
 import { buildRacePlaces, placePath, type PlaceRace } from "./race-places";
+import {
+  PLACE_SPORTS,
+  PLACE_DISTANCES,
+  MIN_PLACE_FACET_RACES,
+  matchesPlaceDistance,
+  placeFacetSuffix,
+  placeRaceDistanceCodes,
+} from "./race-place-facets";
 
 const checkedZones = new Map(
   [...ROAD_MARATHONS, ...ROAD_HALF_MARATHONS].map((race) => [race.slug, race.timeZone]),
@@ -24,10 +32,12 @@ export async function queryRacePlaceRows(
     select e.id, e.slug, e.name, e.sport, e.country, e.county, e.region, e.city,
       e.summary, (e.featured or exists (select 1 from event_groups g where g.event_id=e.id
         and g.level in ('major','final'))) as featured,
+      array(select distinct ed.distance_code from editions ed where ed.event_id=e.id
+        and ed.status <> 'Cancelled' and ed.distance_code is not null) as "distanceCodes",
       (select max(ed.event_date)::text from editions ed where ed.event_id=e.id
         and ed.event_date < $1::date and ed.status <> 'Cancelled') as "lastDate",
       coalesce((select json_agg(json_build_object(
-        'date', ed.event_date::text, 'distance', ed.distance_code, 'status', ed.status,
+        'date', ed.event_date::text, 'distance', ed.distance_code, 'status', ed.status, 'entryUrl', ed.entry_url,
         'endDate', case when ed.end_source_url is not null and ed.end_checked_at is not null
           and ed.end_date >= ed.event_date then ed.end_date::text end
       ) order by ed.event_date, ed.distance_code) from editions ed
@@ -70,7 +80,26 @@ export async function readRacePlaceRows() {
 }
 
 export function racePlaceSitemapPaths(rows: readonly PlaceRace[]) {
-  return [...buildRacePlaces(rows).values()]
-    .filter((place) => place.raceIds.length > 0)
-    .map((place) => placePath(place.key));
+  const byId = new Map(rows.map((race) => [race.id, race]));
+  return [...buildRacePlaces(rows).values()].flatMap((place) => {
+    if (!place.raceIds.length) return [];
+    const path = placePath(place.key);
+    const local = place.raceIds.map((id) => byId.get(id)!);
+    const paths = [path];
+    for (const sport of PLACE_SPORTS) {
+      const scoped = local.filter((race) => race.sport === sport.sport);
+      if (scoped.length < MIN_PLACE_FACET_RACES) continue;
+      paths.push(path + placeFacetSuffix(sport, null));
+      if (sport.slug === "running")
+        for (const distance of PLACE_DISTANCES) {
+          if (
+            scoped.filter((race) =>
+              placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, distance)),
+            ).length >= MIN_PLACE_FACET_RACES
+          )
+            paths.push(path + placeFacetSuffix(sport, distance));
+        }
+    }
+    return paths;
+  });
 }

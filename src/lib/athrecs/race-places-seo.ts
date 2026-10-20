@@ -6,7 +6,9 @@ export function racePlaceUrl(data: RacePlacePageData, page = data.page, archive 
   const query = new URLSearchParams();
   if (archive) query.set("view", "archive");
   if (page > 1) query.set("page", String(page));
-  return `${data.place.path}${query.size ? `?${query}` : ""}`;
+  if (data.filters.month && !archive) query.set("month", data.filters.month);
+  if (data.filters.city) query.set("city", data.filters.city);
+  return `${data.path}${query.size ? `?${query}` : ""}`;
 }
 
 export function racePlaceHead(data: RacePlacePageData) {
@@ -16,7 +18,7 @@ export function racePlaceHead(data: RacePlacePageData) {
   const items = data.races.length ? data.races : data.archivePreview;
   return {
     meta: siteGraphMeta({ title, description, url }).map((tag) =>
-      (!data.total || data.archive) && "name" in tag && tag.name === "robots"
+      !data.indexable && "name" in tag && tag.name === "robots"
         ? { name: "robots", content: "noindex, follow" }
         : tag,
     ),
@@ -68,22 +70,21 @@ export function racePlaceHead(data: RacePlacePageData) {
               numberOfItems: items.length,
               itemListElement: items.map((race, index) => ({
                 "@type": "ListItem",
-                position: index + 1,
+                position: (data.page - 1) * 30 + index + 1,
                 name: race.name,
                 url: `${SITE_URL}/races/${encodeURIComponent(race.slug)}`,
               })),
             },
             {
               "@type": "BreadcrumbList",
-              itemListElement: [
-                { name: "AthRecs", path: "/" },
-                ...data.ancestors.map((place) => ({ name: place.name, path: place.path })),
-              ].map((item, index) => ({
-                "@type": "ListItem",
-                position: index + 1,
-                name: item.name,
-                item: `${SITE_URL}${item.path}`,
-              })),
+              itemListElement: [{ name: "AthRecs", path: "/" }, ...data.breadcrumbs].map(
+                (item, index) => ({
+                  "@type": "ListItem",
+                  position: index + 1,
+                  name: item.name,
+                  item: `${SITE_URL}${item.path}`,
+                }),
+              ),
             },
           ],
         }).replace(/</g, "\\u003c"),
