@@ -22,6 +22,8 @@ const viewportWidth = Number(process.env.BROWSER_SMOKE_VIEWPORT_WIDTH || 1280);
 const viewportHeight = Number(process.env.BROWSER_SMOKE_VIEWPORT_HEIGHT || 800);
 const expectedTexts = splitAssertions(process.env.BROWSER_SMOKE_EXPECT_TEXT);
 const rejectedTexts = splitAssertions(process.env.BROWSER_SMOKE_REJECT_TEXT);
+// Retired section titles must not reject useful links or descriptive copy.
+const rejectedHeadings = splitAssertions(process.env.BROWSER_SMOKE_REJECT_HEADING);
 
 mkdirSync(dirname(outPng), { recursive: true });
 
@@ -124,6 +126,12 @@ try {
   const presentRejectedTexts = rejectedTexts.filter((text) =>
     normalizedBodyText.includes(text.toLocaleLowerCase("en-GB")),
   );
+  const presentRejectedHeadings = [];
+  for (const heading of rejectedHeadings) {
+    if (await page.getByRole("heading", { name: heading, exact: true }).count()) {
+      presentRejectedHeadings.push(heading);
+    }
+  }
 
   await page.screenshot({ path: outPng, fullPage });
 
@@ -142,6 +150,8 @@ try {
         missingTexts,
         rejectedTexts,
         presentRejectedTexts,
+        rejectedHeadings,
+        presentRejectedHeadings,
         fullPage,
         viewport: { width: viewportWidth, height: viewportHeight },
         screenshot: outPng,
@@ -154,7 +164,7 @@ try {
   if (status >= 400 || status === 0) process.exit(1);
   if (pageErrors.length || consoleErrors.length) process.exit(2);
   if (missingTexts.length) process.exit(3);
-  if (presentRejectedTexts.length) process.exit(4);
+  if (presentRejectedTexts.length || presentRejectedHeadings.length) process.exit(4);
   process.exit(0);
 } catch (error) {
   console.error(
