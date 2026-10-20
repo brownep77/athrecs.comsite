@@ -13,7 +13,7 @@ create table slug_redirects(entity_type text, old_slug text, current_slug text);
 insert into events values (1,'synthetic-race','Synthetic Norfolk 10K','Running','England','Norfolk',null,'Norwich','Fictional test race, with no live entries.',true),
 (2,'synthetic-past','Synthetic Past Race','Running','England','Norfolk',null,'Norwich','Fictional archived event.',false);
 insert into editions values (1,'2040-05-01','10K','Open',null,null,null),(2,'2025-01-01','Half','Finished',null,null,null);
-alter table editions add column entry_url text;
+alter table editions add column entry_url text; alter table editions add column start_time text; alter table editions add column source_url text;
 update editions set entry_url='https://example.org/synthetic-entry' where event_id=1;`);
 await db.exec(`insert into events values
   (3,'synthetic-wymondham','Synthetic Wymondham 10K','Running','England','Norfolk',null,'Wymondham','Fictional test event.',false),
@@ -92,7 +92,7 @@ for (const path of [
     );
     if (!path.endsWith("/10k"))
       assert($("main").text().includes("Upcoming running events include 10K races."));
-    assert($("main h1").text().includes("Norfolk, England"));
+    assert($("main h1").text().includes(path.endsWith("/norfolk") ? "Norfolk sports and events" : "Norfolk, England"));
   }
   if (path.includes("/running")) {
     assert(!$("main article h3").text().includes("Synthetic Triathlon"));

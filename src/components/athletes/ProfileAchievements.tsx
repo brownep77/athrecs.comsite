@@ -43,14 +43,16 @@ export function PersonalBestStrip({
   results,
   reportedBests = NO_REPORTED_BESTS,
   showEvidence = false,
+  sourceHistories = NO_SOURCE_HISTORIES,
 }: {
   results: ProfileResult[];
   reportedBests?: readonly ReportedPersonalBest[];
   showEvidence?: boolean;
+  sourceHistories?: readonly SourceHistory[];
 }) {
   const bests = useMemo(
-    () => selectProfilePersonalBests(results, reportedBests),
-    [results, reportedBests],
+    () => selectProfilePersonalBests(results, reportedBests, sourceHistories),
+    [results, reportedBests, sourceHistories],
   );
   const bestColours = achievementPalette(
     bests.map(
@@ -87,10 +89,17 @@ export function PersonalBestStrip({
                   {best.sport} · {best.distanceCode}
                 </span>
                 <strong className="text-lg tabular-nums text-fg">
-                  {formatDuration(best.finishTimeSeconds)}
+                  {best.displayMark ?? formatDuration(best.finishTimeSeconds)}
                 </strong>
-                <span className="ml-2 text-xs font-semibold text-accent">PB*</span>
+                <span className="ml-2 text-xs font-semibold text-accent">
+                  {best.qualification ? "Best*" : "PB*"}
+                </span>
                 <span className="block text-xs text-muted">{best.surface} · Reported time</span>
+                {best.qualification ? (
+                  <span className="block text-xs text-muted">
+                    {best.qualification} · separate from standard PBs
+                  </span>
+                ) : null}
                 <span className="block text-xs text-muted">
                   {showEvidence ? CHIP_TIME_CAVEAT : "Reported"}
                 </span>
@@ -112,10 +121,15 @@ export function PersonalBestStrip({
                 {best.sport} · {best.distanceCode}
               </span>
               <strong className="text-lg tabular-nums text-fg">
-                {formatDuration(best.finishTimeSeconds)}
+                {best.history?.performance.performance ?? formatDuration(best.finishTimeSeconds)}
               </strong>
               <span className="ml-2 text-xs font-semibold text-accent">PB</span>
               <span className="block text-xs text-muted">{best.surface}</span>
+              {best.history ? (
+                <span className="block text-xs text-muted">
+                  {best.eventName} · {best.eventDate}
+                </span>
+              ) : null}
               {showEvidence || resultEvidenceLabel(best) === "Athlete-submitted" ? (
                 <span className="block text-xs text-muted">
                   {showEvidence ? resultEvidenceLabel(best) : "Reported"}
@@ -463,6 +477,7 @@ export function ProfileRecordHighlights({
         results={results}
         reportedBests={reportedBests}
         showEvidence={showEvidence}
+        sourceHistories={sourceHistories}
       />
       {results.length > 0 || sourceHistories.length > 0 || !reportedBests.length ? (
         compact ? (

@@ -1,4 +1,5 @@
 import { ArrowRight, Bike, Footprints, Medal, Search, Timer, Waves } from "lucide-react";
+import { sportColourClass } from "@/lib/athrecs/event-colours";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { COUNTRY_SITES, type CountrySite } from "@/lib/athrecs/country-sites";
 import {
@@ -34,6 +35,12 @@ export function SportChoices({ site }: { site?: CountrySite }) {
       icon: Medal,
     },
     {
+      label: "Duathlon",
+      text: "Run, bike and run. Find duathlon fixtures, distances and event details.",
+      href: sportPath("duathlon"),
+      icon: Timer,
+    },
+    {
       label: "Swimming",
       text: "Browse swimming fixtures and event information.",
       href: sportPath("swimming"),
@@ -64,7 +71,11 @@ export function SportChoices({ site }: { site?: CountrySite }) {
               (index % 3) as 0 | 1 | 2,
             )}
           >
-            <card.icon className="size-6" aria-hidden="true" />
+            <span
+              className={`inline-flex size-10 items-center justify-center rounded-lg border ${sportColourClass(card.label)}`}
+            >
+              <card.icon className="size-6" aria-hidden="true" />
+            </span>
             <h3
               className={`mt-4 font-display font-semibold text-slate-900 ${index === 0 ? "text-3xl" : "text-xl"}`}
             >
@@ -78,7 +89,11 @@ export function SportChoices({ site }: { site?: CountrySite }) {
           </a>
         ))}
         <div className="rounded-xl border border-border bg-surface p-5 sm:col-span-2 lg:col-span-3">
-          <Bike className="size-6 text-accent" aria-hidden="true" />
+          <span
+            className={`inline-flex size-10 items-center justify-center rounded-lg border ${sportColourClass("Cycling")}`}
+          >
+            <Bike className="size-6" aria-hidden="true" />
+          </span>
           <h3 className="mt-4 font-display text-xl font-semibold">Cycling</h3>
           <div className="mt-3 flex flex-wrap gap-x-5">
             {[

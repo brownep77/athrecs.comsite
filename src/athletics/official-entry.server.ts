@@ -12,7 +12,7 @@ export async function getVerifiedOfficialEntryUrl(eventSlug: string): Promise<st
     select sport
     from events
     where slug = ${canonicalSlug}
-      and sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon', 'Cycling')
+      and sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon', 'Cycling', 'Swimming', 'Duathlon')
     limit 1
   `;
   if (!allowed.length) return null;

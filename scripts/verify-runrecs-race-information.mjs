@@ -17,6 +17,7 @@ const { editionEntry, entryDeadlinePassed, raceLink, raceLocation } = await modu
 );
 const { supplementedStart } = await moduleFrom("src/data/runrecs-race-guides.ts");
 const { effectiveStatus, statusLabel } = await moduleFrom("src/lib/athrecs/format.ts");
+const { withheldFixtureDateKeys } = await moduleFrom("src/data/fixture-date-reviews.ts");
 const { retainedFixtureAliasSlugs } = await moduleFrom("src/data/fixture-deduplication.ts");
 const today = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/London",
@@ -115,6 +116,7 @@ try {
   assert(query, "Production listing query must be exercised");
   const defaults = {
     retainedFixtureAliasSlugs,
+    withheldFixtureDateKeys,
     today,
     requestedSport: null,
     q: null,

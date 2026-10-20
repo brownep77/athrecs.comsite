@@ -1,3 +1,4 @@
+import { SportBadge } from "@/components/races/EventBadges";
 import { Link } from "@tanstack/react-router";
 import type { PublicAthletePreview as Preview } from "@/lib/athrecs/public-athlete-preview";
 import { CompactResultsTable } from "./CompactResultsTable";
@@ -53,9 +54,7 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             {profile.sports.length > 1 ? "Sports:" : "Sport:"}
           </span>
           {profile.sports.map((sport) => (
-            <Badge key={sport} variant="outline">
-              {sport}
-            </Badge>
+            <SportBadge key={sport} sport={sport} />
           ))}
         </div>
         {biography.length ? (
@@ -78,6 +77,28 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
       <div id="profile-achievements" className="scroll-mt-24">
         <AchievementSummary summary={profile.achievements ?? buildProfileAchievementSummary([])} />
       </div>
+      {profile.personalBests?.length ? (
+        <section aria-label="PBs" className="space-y-3">
+          <h2 className="font-display text-lg font-semibold">PBs & best performances</h2>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {profile.personalBests.map((best) => (
+              <div
+                key={best.id}
+                className="space-y-1 rounded-lg border border-border bg-surface p-3"
+              >
+                <p className="text-xs text-muted">
+                  {best.sport} · {best.distance} · {best.surface}
+                </p>
+                <strong className="text-lg tabular-nums">{best.mark}</strong>
+                <p className="text-xs font-semibold text-accent">{best.label}</p>
+                <p className="text-xs text-muted">
+                  {best.event} · {best.date}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
       {profile.careerSummary ? (
         <section
           id="career-summary"

@@ -1,5 +1,6 @@
+import { FIXTURE_DETAILS } from "./fixture-details.ts";
 /** Edition-specific practical facts checked against the linked organisers on 22 September 2026.
- * These supplement missing catalogue fields; they never replace a conflicting stored value.
+ * Later edition checks take precedence; explicit conflicts stay unconfirmed.
  */
 export type RaceGuide = {
   slugs?: string[];
@@ -224,6 +225,9 @@ export function supplementedStart(
   distance: string | null,
   stored: string | null,
 ) {
+  const checked =
+    distance && date ? FIXTURE_DETAILS[`${event.slug}|${date}`]?.starts[distance] : undefined;
+  if (checked) return checked.time;
   if (stored?.trim()) return stored;
   return (distance && raceGuideFor(event, date)?.starts[distance]) || null;
 }

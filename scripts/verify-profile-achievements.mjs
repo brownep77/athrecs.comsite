@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import "./verify-race-win-achievements.mjs";
 import "./verify-history-achievements.mjs";
+import "./verify-historical-personal-bests.mjs";
 import {
   buildProfileAchievements,
   runningDistanceKind,

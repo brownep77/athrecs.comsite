@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
+const compactSource = (value) => value.replace(/\s+/g, "").replace(/,([\]\)])/g, "$1");
 import { readFile } from "node:fs/promises";
 
 const migration = await readFile("migrations/0027_sportsrecs_network_foundation.sql", "utf8");
@@ -80,7 +81,9 @@ assert(route.includes("Read-only foundation"), "Network route must show its read
 const shell = await readFile("src/components/staff/StaffMicrositeShell.tsx", "utf8");
 assert(shell.includes('to: "/admin/network"'), "Staff navigation must expose the network view");
 
-const runRecsApi = await readFile("src/runrecs/api.ts", "utf8") + await readFile("src/lib/running/catalogue.server.ts", "utf8");
+const runRecsApi =
+  (await readFile("src/runrecs/api.ts", "utf8")) +
+  (await readFile("src/lib/running/catalogue.server.ts", "utf8"));
 assert(
   runRecsApi.includes("e.sport in ('Running', 'Parkrun')") &&
     runRecsApi.includes("event.sport in ('Running', 'Parkrun')"),
@@ -95,7 +98,11 @@ assert(
   "ATHRECS public reads must default to Athletics",
 );
 assert(
-  athleticsApi.includes('["Athletics", "Running", "Parkrun", "Triathlon", "Cycling"].includes(result.event.sport)') &&
+  compactSource(athleticsApi).includes(
+    compactSource(
+      '["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(result.event.sport)',
+    ),
+  ) &&
     athleticsApi.includes("queryRunningEvents") &&
     !athleticsApi.includes("isTemporaryRunningEdition"),
   "AthRecs direct URLs must include published Athletics, Running, Parkrun, Triathlon and Cycling events",
@@ -107,8 +114,11 @@ assert(
 
 const athleticsFilters = await readFile("src/athletics/filters.ts", "utf8");
 assert(
-  athleticsFilters.includes('export const SPORTS = ["Athletics", "Running", "Parkrun", "Triathlon", "Cycling"] as const') &&
-    athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
+  compactSource(athleticsFilters).includes(
+    compactSource(
+      'export const SPORTS = ["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"] as const',
+    ),
+  ) && athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
   "ATHRECS must default to Athletics while offering Running, Parkrun, Triathlon and Cycling",
 );
 
@@ -133,8 +143,9 @@ for (const routeSource of athleticsRoutes) {
 const athleticsOfficialEntry = await readFile("src/athletics/official-entry.server.ts", "utf8");
 const runRecsOfficialEntry = await readFile("src/runrecs/official-entry.server.ts", "utf8");
 assert(
-  athleticsOfficialEntry.includes("sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon', 'Cycling')") &&
-    athleticsOfficialEntry.includes("if (!allowed.length) return null"),
+  athleticsOfficialEntry.includes(
+    "sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon', 'Cycling', 'Swimming', 'Duathlon')",
+  ) && athleticsOfficialEntry.includes("if (!allowed.length) return null"),
   "ATHRECS official-entry redirects must fail closed outside Athletics, Running, Parkrun, Triathlon and Cycling",
 );
 assert(
@@ -180,7 +191,11 @@ assert(
 const siteScope = await readFile("src/lib/site-scope.ts", "utf8");
 assert(
   siteScope.includes('sport === "Running" || sport === "Parkrun"') &&
-    siteScope.includes('["Athletics", "Running", "Parkrun", "Triathlon", "Cycling"].includes(sport)'),
+    compactSource(siteScope).includes(
+      compactSource(
+        '["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(sport)',
+      ),
+    ),
   "Signed-in specialist pages need one shared sport-scope predicate",
 );
 
@@ -189,8 +204,10 @@ const [accountApi, resultMatchApi, resultClaimsApi] = await Promise.all([
   readFile("src/lib/athrecs/result-match-api.ts", "utf8"),
   readFile("src/lib/athrecs/result-claims-api.ts", "utf8"),
 ]);
-assert(accountApi.includes("loadLinkedProfileResults(sql, userId)"),
-  "Signed-in accounts must use the shared linked-result loader");
+assert(
+  accountApi.includes("loadLinkedProfileResults(sql, userId)"),
+  "Signed-in accounts must use the shared linked-result loader",
+);
 const linkedResults = await readFile("src/lib/athrecs/linked-profile-results.server.ts", "utf8");
 for (const source of [linkedResults, resultMatchApi, resultClaimsApi]) {
   assert(
@@ -200,7 +217,10 @@ for (const source of [linkedResults, resultMatchApi, resultClaimsApi]) {
     "Signed-in result payloads must carry sport for specialist-site filtering",
   );
 }
-const claimableResultsView = await readFile("migrations/20261011_source_history_claims.sql", "utf8");
+const claimableResultsView = await readFile(
+  "migrations/20261011_source_history_claims.sql",
+  "utf8",
+);
 assert(
   claimableResultsView.includes("e.sport event_sport") &&
     claimableResultsView.includes("coalesce(s.performance->>'eventSlug',''),'Running'"),

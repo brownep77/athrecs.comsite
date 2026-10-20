@@ -1,3 +1,4 @@
+import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews";
 import { getSql } from "../db";
 import { ensureAthrecsSeeded } from "../athrecs/seed.server";
 import { todayIso } from "../athrecs/format";
@@ -168,7 +169,8 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
   const rows = await sql<RawEventRow>`
       with display_editions as not materialized (
         select ed.* from editions ed
-        where ed.status <> 'Cancelled' and (${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date)
+        where not exists (select 1 from events reviewed where reviewed.id=ed.event_id and (reviewed.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
+          and ed.status <> 'Cancelled' and (${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date)
           and (${dateTo}::date is null or ed.event_date <= ${dateTo}::date)
           and ((${dateFrom}::date is not null or ${dateTo}::date is not null) or ed.event_date >= ${today}::date)
           and (${upcomingOnly}::boolean is false or ed.event_date >= ${today}::date)

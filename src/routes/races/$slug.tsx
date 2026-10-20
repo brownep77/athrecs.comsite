@@ -1,3 +1,5 @@
+import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
+import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { ResultDisqualification } from "@/components/athletes/ResultDisqualification";
 import { isDisqualified } from "@/lib/athrecs/result-details";
 import { useMemo, useState, type ReactNode } from "react";
@@ -371,15 +373,27 @@ export function RacePageContent({
         <div className="space-y-5 p-5 md:p-8">
           <div className="flex flex-wrap items-center gap-2">
             <CountryFlag country={filterCountryName(country)} showCode />
-            <Badge variant="accent">{sportLabel(event.sport)}</Badge>
+            <SportBadge sport={event.sport} />
             {event.surface && event.surface !== "Other" && (
               <Badge variant="outline">{event.surface}</Badge>
             )}
             {shownDistances.map((d) => (
-              <Badge key={d} variant="outline">
-                {formatDistanceWithUnits(d)}
-              </Badge>
+              <DistanceBadge key={d} distance={d} />
             ))}
+            {Object.entries(FIXTURE_DATE_REVIEWS)
+              .filter(([key]) => key.startsWith(`${event.slug}|`))
+              .map(([key, review]) => (
+                <p
+                  key={key}
+                  className="w-full rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950"
+                >
+                  {review.note}{" "}
+                  <a href={review.sourceUrl} className="underline">
+                    Organiser information
+                  </a>{" "}
+                  · Checked {review.checkedAt}
+                </p>
+              ))}
             <RaceGroupBadges groups={groups} />
             {spectatorLabel ? <Badge variant="accent">{spectatorLabel}</Badge> : null}
           </div>
@@ -861,17 +875,21 @@ export function RacePageContent({
                 Public-figure and athlete-approved results only. Other archived participant rows
                 remain private and are available through the signed-in claim flow.
               </p>
-              {!IS_RUNRECS_SITE && selectedResultsEdition && results.length >= PUBLIC_EDITION_PREVIEW_LIMIT ? (
+              {!IS_RUNRECS_SITE &&
+              selectedResultsEdition &&
+              results.length >= PUBLIC_EDITION_PREVIEW_LIMIT ? (
                 <p className="text-sm text-muted">
                   Showing the first {PUBLIC_EDITION_PREVIEW_LIMIT} results.{" "}
                   <Link
                     to="/results/$editionId"
-                    params={{ editionId: resultSlug({
-                      edition_id: selectedResultsEdition.id,
-                      event_name: event.name,
-                      event_date: selectedResultsEdition.event_date,
-                      distance_code: selectedResultsEdition.distance_code,
-                    }) }}
+                    params={{
+                      editionId: resultSlug({
+                        edition_id: selectedResultsEdition.id,
+                        event_name: event.name,
+                        event_date: selectedResultsEdition.event_date,
+                        distance_code: selectedResultsEdition.distance_code,
+                      }),
+                    }}
                     search={{ q: "", page: 1 }}
                     className="font-medium text-accent underline"
                   >
@@ -1228,9 +1246,11 @@ function EditionResultsLinks({
                   <p className="text-sm font-semibold text-fg">{formatRaceDateShort(date)}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {editions.map((edition) => (
-                      <Badge key={edition.id} variant="accent">
-                        {formatDistanceWithUnits(edition.distance_code, edition.distance_km)}
-                      </Badge>
+                      <DistanceBadge
+                        key={edition.id}
+                        distance={edition.distance_code}
+                        distanceKm={edition.distance_km}
+                      />
                     ))}
                   </div>
                 </div>
@@ -1324,9 +1344,7 @@ function EditionList({
               >
                 <div className="space-y-1">
                   <div className="flex flex-wrap gap-1.5">
-                    <Badge variant="accent">
-                      {formatDistanceWithUnits(ed.distance_code, ed.distance_km)}
-                    </Badge>
+                    <DistanceBadge distance={ed.distance_code} distanceKm={ed.distance_km} />
                     <Badge variant={st === "Finished" ? "default" : "solid"}>
                       {statusLabel(st)}
                     </Badge>

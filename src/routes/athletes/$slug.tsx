@@ -1,3 +1,4 @@
+import { SportBadge } from "@/components/races/EventBadges";
 import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOverview";
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
@@ -421,9 +422,7 @@ function AthleteContent() {
               : "Sport not recorded"}
           </span>
           {profileSports.map((sport) => (
-            <Badge key={sport} variant="outline">
-              {sport}
-            </Badge>
+            <SportBadge key={sport} sport={sport} />
           ))}
         </div>
         {athlete.club && athlete.club_slug ? (

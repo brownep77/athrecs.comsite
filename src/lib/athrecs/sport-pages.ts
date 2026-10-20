@@ -67,6 +67,7 @@ export const SPORT_PAGES = [
     surfaces: ["BMX Track", "BMX", "BMX Freestyle"],
   },
   { slug: "swimming", label: "Swimming", sport: "Swimming", sports: ["Swimming"], surfaces: null },
+  { slug: "duathlon", label: "Duathlon", sport: "Duathlon", sports: ["Duathlon"], surfaces: null },
 ] as const satisfies readonly {
   slug: string;
   label: string;

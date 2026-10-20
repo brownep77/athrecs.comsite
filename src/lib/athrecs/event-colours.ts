@@ -6,9 +6,9 @@ const sportTones: Record<string, ProfileTone> = {
   Running: "blue",
   Parkrun: "green",
   Cycling: "peach",
-  Swimming: "cyan",
-  Triathlon: "orchid",
-  Duathlon: "rose",
+  Swimming: "teal",
+  Triathlon: "pink",
+  Duathlon: "gold",
   Aquathlon: "teal",
   Aquabike: "sky",
   Rowing: "periwinkle",
@@ -19,7 +19,12 @@ const sportTones: Record<string, ProfileTone> = {
 };
 
 export function sportColourClass(sport: string): string {
-  return profileToneClass(sportTones[sport] ?? "slate");
+  if (/^(?:road|trail|ultra|cross[ -]country) running$/i.test(sport.trim())) return profileToneClass("blue");
+  if (/^track (?:&|and) field$/i.test(sport.trim())) return profileToneClass("lilac");
+  const key = Object.keys(sportTones).find(
+    (item) => item.toLowerCase() === sport.trim().toLowerCase(),
+  );
+  return profileToneClass(key ? sportTones[key] : "slate");
 }
 
 export function sportDisplayLabel(sport: string): string {

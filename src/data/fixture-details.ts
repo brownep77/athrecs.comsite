@@ -5,10 +5,150 @@ export type FixtureDetail = {
   timeZone: string;
   sourceUrl: string;
   checkedAt: string;
-  starts: Record<string, { time: string; note?: string }>;
+  starts: Record<string, { time: string | null; note?: string }>;
 };
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
+  "chase-the-train|2026-11-01": {
+    summary: "A point-to-point trail run beside the Bure Valley Railway from Aylsham to Wroxham.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://entries.sublimetiming.com/race/59",
+    checkedAt: "2026-10-20",
+    starts: {
+      "9mi": { time: "10:30", note: "Organiser describes the route as approximately 8.9 miles." },
+    },
+  },
+  "east-coast-10k|2026-11-01": {
+    summary: "A road 10K on Great Yarmouth’s seafront, starting and finishing at Anchor Gardens.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/721",
+    checkedAt: "2026-10-20",
+    starts: { "10K": { time: "10:00" } },
+  },
+  "eama-10k|2026-11-22": {
+    summary: "A 10K from Lady’s Lane in Wymondham through the countryside near Morley.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/711",
+    checkedAt: "2026-10-20",
+    starts: {
+      "10K": { time: "10:00", note: "Waves at 10:00 and 10:10; follow your assigned wave." },
+    },
+  },
+  "run-luminate-5k|2026-11-25": {
+    place: { city: "Sandringham" },
+    summary: "An evening 5K through the Luminate attraction at Sandringham Estate.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/691",
+    checkedAt: "2026-10-20",
+    starts: {
+      "5K": {
+        time: "19:00",
+        note: "Separate 19:00 and 20:00 waves; check the wave on your booking.",
+      },
+    },
+  },
+  "santa-dash-lingwood|2026-12-13": {
+    summary:
+      "A festive 5K and 2K fun run from Lingwood Village Hall supporting Miniature Donkeys for Wellbeing.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/701",
+    checkedAt: "2026-10-20",
+    starts: { "5K": { time: "11:00" }, "2K": { time: "11:00" } },
+  },
+  "lingwood-santa-dash|2026-12-13": {
+    summary: "A festive 5K from Lingwood Village Hall supporting Miniature Donkeys for Wellbeing.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/701",
+    checkedAt: "2026-10-20",
+    starts: { "5K": { time: "11:00" } },
+  },
+  "marham-flyers-nye-10k|2026-12-31": {
+    summary: "A New Year’s Eve 10K around the Marham airfield.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/710",
+    checkedAt: "2026-10-20",
+    starts: {
+      "10K": {
+        time: "11:00",
+        note: "Main start 11:00; 10:30 start for runners expecting to take over one hour.",
+      },
+    },
+  },
+  "wymondham-nyd-10k|2027-01-01": {
+    summary: "An undulating rural-road 10K from Lady’s Lane in Wymondham on New Year’s Day.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/713",
+    checkedAt: "2026-10-20",
+    starts: { "10K": { time: "10:00" } },
+  },
+  "reepham-cross-country|2027-01-31": {
+    summary: "One- and two-lap cross-country races from Whitwell Station near Reepham.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/746",
+    checkedAt: "2026-10-20",
+    starts: {
+      "5K": {
+        time: null,
+        note: "Junior start 10:00. Adult times conflict: 10:15 in the programme and 10:30 in the entry table; confirm with the organiser.",
+      },
+      "10K": {
+        time: null,
+        note: "Adult times conflict: 10:15 in the programme and 10:30 in the entry table; confirm with the organiser.",
+      },
+    },
+  },
+  "marriotts-way-races|2027-02-21": {
+    summary:
+      "Point-to-point marathon and half-marathon trail routes along Marriott’s Way, finishing in Aylsham.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/693",
+    checkedAt: "2026-10-20",
+    starts: {
+      Marathon: {
+        time: null,
+        note: "Programme says 08:30; entry table says 09:00. Start time awaits organiser clarification.",
+      },
+      Half: {
+        time: null,
+        note: "Programme says 10:00; entry table says 10:30. Start time awaits organiser clarification.",
+      },
+    },
+  },
+  "larking-gowen-norwich-half|2027-04-04": {
+    summary:
+      "A closed-road half marathon from Norfolk Showground through the surrounding villages.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://totalracetiming.co.uk/race/704",
+    checkedAt: "2026-10-20",
+    starts: { Half: { time: "10:00" } },
+  },
+  "gear-10k-kings-lynn|2027-05-02": {
+    summary: "A 10K through King’s Lynn, starting in Tuesday Market Place.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://www.runforall.com/events/10k/gear-10k/",
+    checkedAt: "2026-10-20",
+    starts: { "10K": { time: "09:30" } },
+  },
+  "round-norfolk-epic|2027-06-13": {
+    place: { city: "Great Yarmouth" },
+    summary: "A 250 km / 155 mile road ride starting and finishing at Great Yarmouth Racecourse.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://www.norfolkcyclingevents.co.uk/round-norfolk-epic",
+    checkedAt: "2026-10-20",
+    starts: { "155mi": { time: "06:00" } },
+  },
+  "marriotts-way-10k|2027-09-19": {
+    summary: "A trail 10K along Marriott’s Way from Aylsham to Reepham.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://www.southnorfolkandbroadland.gov.uk/leisure/marriotts-way-10k",
+    checkedAt: "2026-10-20",
+    starts: {
+      "10K": {
+        time: "10:00",
+        note: "Five waves: 10:00, 10:10, 10:20, 10:30 and 10:40; check your allocated wave.",
+      },
+    },
+  },
   "gothenburg-marathon|2026-10-10": {
     place: { city: "Gothenburg" },
     summary: "A flat coastal marathon from Slottsskogsvallen in Gothenburg, Sweden.",
@@ -131,3 +271,20 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
     },
   },
 };
+
+/** Never carry checked starts across dates; an explicit conflict also hides stored times. */
+export function checkedFixtureStart(
+  slug: string,
+  date: string,
+  distanceCodes: string,
+  fallback: string | null,
+): string | null {
+  const detail = FIXTURE_DETAILS[`${slug}|${date}`];
+  if (!detail) return fallback;
+  const starts = distanceCodes.split(" · ").map((distance) => detail.starts[distance.trim()]);
+  if (starts.some((start) => start?.time === null)) return null;
+  if (starts.every((start) => start?.time)) {
+    return starts.map((start) => start.time!).sort()[0] ?? fallback;
+  }
+  return fallback;
+}

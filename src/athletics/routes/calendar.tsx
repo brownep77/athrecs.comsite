@@ -83,7 +83,7 @@ function AthleticsCalendarPage() {
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-            Athletics, running, parkrun, triathlon and cycling
+            Athletics, running, parkrun, cycling, swimming, triathlon and duathlon
           </p>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-fg">
             {sportLabel} calendar

@@ -1,5 +1,5 @@
 import type { EntryStatus } from "./types";
-import { formatLocalClock, type PlaceTime } from "./timezone";
+import { formatLocalClock, type PlaceTime } from "./timezone.ts";
 
 export function formatRaceDateShort(iso: string): string {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return iso || "Date not supplied";

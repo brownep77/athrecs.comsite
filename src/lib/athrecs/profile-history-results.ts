@@ -3,6 +3,12 @@ import type { SourceHistory, SourcePerformance } from "./source-performance-hist
 import { countryFlag } from "./country-flags.ts";
 import { sourceHistorySport } from "./source-history-sport.ts";
 import type { Sport } from "./types";
+import {
+  historicalDistance,
+  historicalMark,
+  historicalPbEligible,
+  historicalTime,
+} from "./history-performance.ts";
 
 export type HistoryResult = {
   key: string;
@@ -114,7 +120,7 @@ export function isCompletedHistoryResult(row: SourcePerformance, today = new Dat
     return false;
   const mark = row.performance.trim();
   const positiveMark =
-    /^(?:\d+:)*\d+(?:\.\d+)?(?:\((?:\d+:)*\d+(?:\.\d+)?\))?[iwc]*$/i.test(mark) &&
+    /^(?:\d+:)*\d+(?:\.\d+)?a?(?:\((?:\d+:)*\d+(?:\.\d+)?\))?[aiwc]*$/i.test(mark) &&
     /[1-9]/.test(mark);
   // Some accepted relay reports establish a finish/place but omit the team time.
   if (!positiveMark && !(mark === "" && /^[1-9]\d*$/.test(row.place))) return false;
@@ -152,17 +158,31 @@ export function profileAchievementResults(
             )),
       ),
   );
+  const conflictKey = ({ performance: row, sport }: HistoryResult) =>
+    JSON.stringify([
+      row.date,
+      sport,
+      historicalDistance(row.discipline, sport).code,
+      normal(row.meeting),
+      normal(row.labels.find((label) => /^round:/i.test(label)) ?? ""),
+    ]);
+  const marks = new Map<string, Set<string>>();
+  for (const entry of history) {
+    const key = conflictKey(entry);
+    const values = marks.get(key) ?? new Set<string>();
+    const mark = historicalMark(entry.performance);
+    values.add(mark ? JSON.stringify([mark.seconds, mark.aided]) : entry.performance.performance);
+    marks.set(key, values);
+  }
   return [
     ...results,
     ...history.map((entry, index): AchievementResult => {
       const row = entry.performance;
-      const code = row.discipline.trim();
-      const km = /^marathon$/i.test(code)
-        ? 42.195
-        : /^half(?: marathon)?$/i.test(code)
-          ? 21.0975
-          : /^(\d+(?:\.\d+)?)\s*k(?:m)?$/i.exec(code);
-      const distanceKm = typeof km === "number" ? km : km ? Number(km[1]) : 0;
+      const distance = historicalDistance(row.discipline, entry.sport);
+      const mark = historicalMark(row);
+      const conflicting = Boolean(row.date) && (marks.get(conflictKey(entry))?.size ?? 0) > 1;
+      const timed =
+        !conflicting && isCompletedHistoryResult(row) && historicalPbEligible(row) && !mark?.aided;
       // Unknown/ambiguous years remain unknown for calendar-year and date-window milestones.
       const year = row.yearLabel || String(row.year);
       return {
@@ -172,20 +192,25 @@ export function profileAchievementResults(
         eventName: row.meeting,
         eventSlug: row.eventSlug ?? "",
         sport: entry.sport,
-        surface: historyResultSurface(row, entry.sport),
+        surface: entry.sport === "Parkrun" ? "Parkrun" : historyResultSurface(row, entry.sport),
         country: historyResultCountry(row),
         eventDate: row.date || (/^\d{4}$/.test(year) ? year : ""),
-        distanceCode: code,
-        distanceKm,
+        distanceCode: distance.code,
+        distanceKm: distance.km,
         status: "finished",
-        finishTimeSeconds: null,
-        chipTimeSeconds: null,
-        gunTimeSeconds: null,
+        conflicting,
+        finishTimeSeconds: timed ? (mark?.seconds ?? null) : null,
+        chipTimeSeconds: timed && row.timing?.chip ? historicalTime(row.timing.chip) : null,
+        gunTimeSeconds: timed && row.timing?.gun ? historicalTime(row.timing.gun) : null,
         overallPlace: null,
         category: row.ageGroup || null,
         sourceUrls: row.sourceUrls,
         resultSource: row.verificationStatus,
-        details: { disqualification: row.disqualification },
+        details: {
+          disqualification: row.disqualification,
+          verificationStatus: row.verificationStatus,
+          note: row.notes,
+        },
       };
     }),
   ];

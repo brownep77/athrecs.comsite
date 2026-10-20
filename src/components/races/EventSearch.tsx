@@ -421,7 +421,9 @@ function DisciplineFilter({
         options={filter.options}
         value={value}
         onChange={onChange}
-        optionClassName={filter.key === "distance" ? distanceFilterClass : undefined}
+        optionClassName={
+          ["distance", "format"].includes(filter.key) ? distanceFilterClass : undefined
+        }
         wrap
       />
     );
@@ -445,7 +447,10 @@ function DisciplineFilter({
         <select
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className={cn(fieldClass, filter.key === "distance" && distanceFilterClass(value))}
+          className={cn(
+            fieldClass,
+            ["distance", "format"].includes(filter.key) && distanceFilterClass(value),
+          )}
         >
           {filter.options.map((option) => (
             <option key={option} value={option}>

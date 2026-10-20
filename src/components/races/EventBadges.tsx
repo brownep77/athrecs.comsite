@@ -7,10 +7,18 @@ export function SportBadge({ sport }: { sport: string }) {
   return <Badge className={sportColourClass(sport)}>{sportDisplayLabel(sport)}</Badge>;
 }
 
-export function DistanceBadge({ distance, label }: { distance: string; label?: string }) {
+export function DistanceBadge({
+  distance,
+  label,
+  distanceKm,
+}: {
+  distance: string;
+  label?: string;
+  distanceKm?: number | null;
+}) {
   return (
-    <Badge className={distanceColourClass(distance)}>
-      {label ?? formatDistanceWithUnits(distance)}
+    <Badge className={distanceColourClass(distance, distanceKm ?? 0)}>
+      {label ?? formatDistanceWithUnits(distance, distanceKm)}
     </Badge>
   );
 }
