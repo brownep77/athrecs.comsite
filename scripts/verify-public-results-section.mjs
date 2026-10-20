@@ -27,7 +27,9 @@ assert.equal(resultCredit("javascript:alert(1)", "Unsafe"), null);
 assert.equal(resultCredit(null, "No source"), null);
 assert.equal(resultCredit("https://totalracetiming.co.uk.example.org/results", "import").name, "totalracetiming.co.uk.example.org");
 const search = loadTypeScript("src/lib/athrecs/public-results-search.ts", { "./sport-pages": sportPages, "./result-slug.ts": loadTypeScript("src/lib/athrecs/result-slug.ts") });
-const format = loadTypeScript("src/lib/athrecs/format.ts", { "./timezone": {} });
+const format = loadTypeScript("src/lib/athrecs/format.ts", {
+  "./timezone.ts": loadTypeScript("src/lib/athrecs/timezone.ts"),
+});
 const { publicResultsHead } = loadTypeScript("src/lib/athrecs/public-results-seo.ts", {
   "./format": format,
   "./result-slug": loadTypeScript("src/lib/athrecs/result-slug.ts"),
