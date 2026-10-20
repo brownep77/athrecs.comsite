@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Search } from "lucide-react";
-import { RunningLanding, runningGuidesJsonLd } from "@/components/running/RunningLanding";
+import { SportsDiscovery } from "@/components/running/SportsDiscovery";
+import { discoveryCountry, discoveryJsonLd, FEATURED_SPORT_COUNTRIES } from "@/lib/running/discovery";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { countryCardStyle, neutralPastelCardStyle } from "@/lib/running/country-card-palette";
 import { HomepageAppearance, useHomepageTheme } from "@/components/running/HomepageAppearance";
@@ -10,14 +11,25 @@ import { homepageCardStyle } from "@/lib/running/homepage-themes";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: siteGraphMeta({
-      title: "ATHRECS | Running races, results & athlete profiles",
+      title: "ATHRECS | Running, sports, race results & athlete profiles",
       description:
-        "Find your next running event. Explore marathons and half marathons by country, browse race results, and bring your results and PBs into one athlete profile.",
+        "Find running races and explore sports by country. Choose road, trail, triathlon, cycling or swimming, browse results and build your athlete profile.",
       url: SITE_URL,
     }),
     links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [
-      { type: "application/ld+json", children: JSON.stringify(runningGuidesJsonLd(SITE_URL)) },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          discoveryJsonLd(SITE_URL, "Sports and running by country", [
+            { name: "Running", path: "/running" },
+            ...FEATURED_SPORT_COUNTRIES.map((slug) => ({
+              name: discoveryCountry(slug)?.country ?? slug,
+              path: `/en/${slug}`,
+            })),
+          ]),
+        ),
+      },
     ],
   }),
   component: AthleteHomePage,
@@ -41,7 +53,7 @@ function AthleteHomeContent() {
   }
   return (
     <div className="space-y-7 pb-2">
-      <RunningLanding homepage />
+      <SportsDiscovery />
       <section className="space-y-4" aria-labelledby="discover-athletes">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>

@@ -5,6 +5,7 @@ import { COUNTRY_CONTINENTS } from "../../data/country-continents";
 import { raceLocalDate } from "../running/road-marathon-calendar";
 import {
   PLACE_SPORTS,
+  PLACE_TERRAINS,
   PLACE_DISTANCES,
   MIN_PLACE_FACET_RACES,
   matchesPlaceDistance,
@@ -37,6 +38,7 @@ export type PlaceRace = {
   slug: string;
   name: string;
   sport: string;
+  surface?: string;
   country: string;
   county: string;
   region: string | null;
@@ -194,8 +196,8 @@ export function racePlacePage(
   const facet = resolvePlaceFacet(key, new Set(places.keys()));
   const place = facet ? places.get(facet.key) : null;
   if (!place || !facet || !Number.isSafeInteger(page) || page < 1) return null;
-  const { sport, distance } = facet;
-  const path = placePath(place.key) + placeFacetSuffix(sport, distance);
+  const { sport, distance, terrain } = facet;
+  const path = placePath(place.key) + placeFacetSuffix(sport, distance, terrain);
   const month =
     !archive && /^\d{4}-(0[1-9]|1[0-2])$/.test(filters.month ?? "") ? filters.month : undefined;
   const city = filters.city?.trim().slice(0, 100) || undefined;
@@ -209,6 +211,7 @@ export function racePlacePage(
   const located = races.filter((race) => ids.has(race.id));
   const matches = (race: PlaceRace) =>
     (!sport || race.sport === sport.sport) &&
+    (!terrain || race.surface === terrain.surface) &&
     (!distance ||
       placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, distance)));
   const scoped = located.filter(matches).map((race) => {
@@ -260,7 +263,7 @@ export function racePlacePage(
   const summary = ({ raceIds, ...item }: RacePlace) => ({
     ...item,
     count: raceIds.filter((id) => scopedIds.has(id)).length,
-    path: placePath(item.key) + placeFacetSuffix(sport, distance),
+    path: placePath(item.key) + placeFacetSuffix(sport, distance, terrain),
   });
   const scopedIds = new Set(scoped.map((race) => race.id));
   const ancestors: ReturnType<typeof summary>[] = [];
@@ -304,9 +307,10 @@ export function racePlacePage(
     count: located.filter(
       (race) =>
         race.sport === "Running" &&
+        (!terrain || race.surface === terrain.surface) &&
         placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, item)),
     ).length,
-    path: placePath(place.key) + placeFacetSuffix(PLACE_SPORTS[0], item),
+    path: placePath(place.key) + placeFacetSuffix(PLACE_SPORTS[0], item, terrain),
   })).filter((item) => item.count > 0);
   const monthCounts = new Map<string, number>();
   for (const race of upcoming) {
@@ -341,12 +345,21 @@ export function racePlacePage(
               const race = raceById.get(id);
               return race && matches(race);
             }).length,
-            path: placePath(item.key) + placeFacetSuffix(sport, distance),
+            path: placePath(item.key) + placeFacetSuffix(sport, distance, terrain),
           }))
           .filter((item) => item.count > 0)
           .sort((a, b) => a.name.localeCompare(b.name));
-  const breadcrumbs = ancestors.map(({ name, path }) => ({ name, path }));
-  if (sport)
+  const breadcrumbs = terrain
+    ? [
+        { name: "Running", path: "/running" },
+        { name: terrain.label, path: `/running/${terrain.slug}` },
+        ...ancestors.map(({ name, path }) => ({
+          name,
+          path: path + placeFacetSuffix(sport, null, terrain),
+        })),
+      ]
+    : ancestors.map(({ name, path }) => ({ name, path }));
+  if (sport && !terrain)
     breadcrumbs.push({
       name: sport.label,
       path: placePath(place.key) + placeFacetSuffix(sport, null),
@@ -356,7 +369,11 @@ export function racePlacePage(
   return {
     place: { ...summary(place), path: placePath(place.key) },
     path,
-    facet: { sport, distance },
+    facet: { sport, distance, terrain },
+    terrainLinks: PLACE_TERRAINS.map((item) => ({
+      ...item,
+      path: placePath(place.key) + placeFacetSuffix(PLACE_SPORTS[0], distance, item),
+    })),
     indexable: scoped.length >= (sport ? MIN_PLACE_FACET_RACES : 1) && !archive && !month && !city,
     filters: { month, city },
     sportLinks,

@@ -8,6 +8,7 @@ import { ROAD_HALF_MARATHONS } from "../../data/road-half-marathons";
 import { buildRacePlaces, placePath, type PlaceRace } from "./race-places";
 import {
   PLACE_SPORTS,
+  PLACE_TERRAINS,
   PLACE_DISTANCES,
   MIN_PLACE_FACET_RACES,
   matchesPlaceDistance,
@@ -30,7 +31,7 @@ export async function queryRacePlaceRows(
   const rows = await sql.query<Omit<PlaceRace, "timeZone">>(
     `
     select e.id, e.slug, e.name, e.sport, e.country, e.county, e.region, e.city,
-      e.summary, (e.featured or exists (select 1 from event_groups g where g.event_id=e.id
+      e.summary, e.surface, (e.featured or exists (select 1 from event_groups g where g.event_id=e.id
         and g.level in ('major','final'))) as featured,
       array(select distinct ed.distance_code from editions ed where ed.event_id=e.id
         and ed.status <> 'Cancelled' and ed.distance_code is not null) as "distanceCodes",
@@ -90,7 +91,19 @@ export function racePlaceSitemapPaths(rows: readonly PlaceRace[]) {
       const scoped = local.filter((race) => race.sport === sport.sport);
       if (scoped.length < MIN_PLACE_FACET_RACES) continue;
       paths.push(path + placeFacetSuffix(sport, null));
-      if (sport.slug === "running")
+      if (sport.slug === "running") {
+        for (const terrain of PLACE_TERRAINS) {
+          const matching = scoped.filter((race) => race.surface === terrain.surface);
+          if (matching.length < MIN_PLACE_FACET_RACES) continue;
+          paths.push(path + placeFacetSuffix(sport, null, terrain));
+          for (const distance of PLACE_DISTANCES)
+            if (
+              matching.filter((race) =>
+                placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, distance)),
+              ).length >= MIN_PLACE_FACET_RACES
+            )
+              paths.push(path + placeFacetSuffix(sport, distance, terrain));
+        }
         for (const distance of PLACE_DISTANCES) {
           if (
             scoped.filter((race) =>
@@ -99,6 +112,7 @@ export function racePlaceSitemapPaths(rows: readonly PlaceRace[]) {
           )
             paths.push(path + placeFacetSuffix(sport, distance));
         }
+      }
     }
     return paths;
   });

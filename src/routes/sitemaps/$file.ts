@@ -42,6 +42,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
             for (const race of ROAD_ULTRAS) modified.set(ultraPath(race.slug), ULTRA_CHECKED);
             runningPaths.push(
               "/running",
+              "/running/road", "/running/trail", "/running/fell", "/running/cross-country",
               ...HALF_MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
               ...ROAD_HALF_MARATHONS.map((race) => `/running/races/${race.slug}`),
               ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),

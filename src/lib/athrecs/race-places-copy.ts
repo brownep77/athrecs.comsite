@@ -79,6 +79,9 @@ export function runningDistanceNames(data: RacePlacePageData) {
 }
 
 function raceFocus(data: RacePlacePageData) {
+  if (data.facet.terrain && data.facet.distance)
+    return `${data.facet.terrain.label.replace(/ running$/i, "")} ${data.facet.distance.heading.toLowerCase()}`;
+  if (data.facet.terrain) return data.facet.terrain.heading;
   if (data.facet.distance) return data.facet.distance.heading;
   if (data.facet.sport) return data.facet.sport.heading;
   const sports = data.overview.sports;
@@ -226,11 +229,13 @@ export function racePlaceCopy(data: RacePlacePageData) {
   }
 
   const shortLocation = data.place.kind === "world" ? "Worldwide" : data.place.name;
-  const titleFocus = data.facet.distance
-    ? data.facet.distance.heading
-    : data.facet.sport
-      ? data.facet.sport.heading.toLowerCase()
-      : `${focus === "Triathlons" ? "triathlon" : focus === "Athletics events" ? "athletics" : "race"} calendar`;
+  const titleFocus = data.facet.terrain
+    ? focus
+    : data.facet.distance
+      ? data.facet.distance.heading
+      : data.facet.sport
+        ? data.facet.sport.heading.toLowerCase()
+        : `${focus === "Triathlons" ? "triathlon" : focus === "Athletics events" ? "athletics" : "race"} calendar`;
   const title = `${shortLocation} ${titleFocus}${data.archive ? " — past editions" : ""}${data.page > 1 ? ` — page ${data.page}` : ""}${data.place.kind === "region" && parent && parent.name !== data.place.name ? ` | ${parent.name}` : ""} | AthRecs`;
   const description = data.archive
     ? `Browse ${number(data.archiveCount)} race guides in ${location} awaiting a new date or with past editions. Find recorded events and links to the upcoming calendar.`

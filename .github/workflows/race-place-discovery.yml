@@ -3,6 +3,12 @@ on:
   pull_request:
     paths:
       - "src/lib/athrecs/race-place*"
+      - "src/components/running/*Discovery.tsx"
+      - "src/lib/running/discovery.ts"
+      - "src/athletics/routes/index.tsx"
+      - "src/athletics/routes/$language/$country/index.tsx"
+      - "src/routes/running/index.tsx"
+      - "src/routes/running/$guide.tsx"
       - "src/components/races/RacePlacesPage.tsx"
       - "src/routes/races/places/**"
       - "scripts/verify-race-places*"

@@ -116,6 +116,43 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
       ))}
     </div>
   );
+  const browseFirst =
+    !!data.facet.terrain && (place.kind === "world" || place.kind === "continent");
+  const placeNavigation = data.children.length ? (
+    <section aria-labelledby="places-heading">
+      <details open={place.kind === "world" || place.kind === "continent" ? true : undefined}>
+        <summary className="cursor-pointer py-2">
+          <h2 id="places-heading" className="font-display text-2xl font-semibold">
+            Browse{" "}
+            {place.kind === "world"
+              ? "continents"
+              : place.kind === "continent"
+                ? "countries and territories"
+                : place.kind === "nation"
+                  ? "counties and areas"
+                  : "states, counties and areas"}
+          </h2>
+        </summary>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {data.children.map((child) => (
+            <a
+              key={child.key}
+              href={child.path}
+              className="flex min-h-16 items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4 hover:border-accent"
+            >
+              <span className="flex items-center gap-2 font-medium">
+                {child.country ? <CountryFlag country={child.country} /> : null}
+                {child.name}
+              </span>
+              <span className="shrink-0 text-xs text-muted">
+                {child.count ? `${child.count} recorded events` : "Listings coming soon"}
+              </span>
+            </a>
+          ))}
+        </div>
+      </details>
+    </section>
+  ) : null;
   return (
     <article className="space-y-8 pb-10">
       <nav aria-label="Breadcrumb" className="flex flex-wrap gap-2 text-sm text-muted">
@@ -189,7 +226,9 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
               key={item.slug}
               href={item.path}
               aria-current={
-                data.facet.sport?.slug === item.slug && !data.facet.distance ? "page" : undefined
+                data.facet.sport?.slug === item.slug && !data.facet.distance && !data.facet.terrain
+                  ? "page"
+                  : undefined
               }
               className="rounded-lg border border-border px-4 py-3 text-sm hover:border-accent aria-[current=page]:bg-elevated"
             >
@@ -197,6 +236,23 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
             </a>
           ))}
         </div>
+        {data.facet.sport?.slug === "running" ? (
+          <div>
+            <p className="mb-2 text-sm font-semibold">Running disciplines</p>
+            <div className="flex flex-wrap gap-2">
+              {data.terrainLinks.map((item) => (
+                <a
+                  key={item.slug}
+                  href={item.path}
+                  aria-current={data.facet.terrain?.slug === item.slug ? "page" : undefined}
+                  className="rounded-lg border border-border px-4 py-3 text-sm hover:border-accent aria-[current=page]:bg-elevated"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : null}
         {(!data.facet.sport || data.facet.sport.slug === "running") && data.distanceLinks.length ? (
           <div>
             <p className="mb-2 text-sm font-semibold">Browse running distances</p>
@@ -215,6 +271,16 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
           </div>
         ) : null}
       </nav>
+      {browseFirst ? (
+        placeNavigation
+      ) : data.children.length ? (
+        <a
+          href="#places-heading"
+          className={`${link} inline-flex min-h-11 items-center font-semibold`}
+        >
+          Browse locations in {place.name} ↓
+        </a>
+      ) : null}
       <section
         id={data.archive ? "past-races" : "upcoming-races"}
         aria-labelledby="races-heading"
@@ -223,7 +289,7 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
         <h2 id="races-heading" className="font-display text-2xl font-semibold">
           {data.archive
             ? "Past races and previous editions"
-            : `Upcoming ${data.facet.distance?.heading.toLowerCase() ?? data.facet.sport?.heading.toLowerCase() ?? "races"}`}
+            : `Upcoming ${data.facet.distance?.heading.toLowerCase() ?? data.facet.terrain?.heading.toLowerCase() ?? data.facet.sport?.heading.toLowerCase() ?? "races"}`}
         </h2>
         {data.archive ? (
           <p className="max-w-3xl leading-7 text-muted">
@@ -412,41 +478,7 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
           Back to upcoming races →
         </a>
       )}
-      {data.children.length ? (
-        <section aria-labelledby="places-heading">
-          <details open={place.kind === "world" || place.kind === "continent" ? true : undefined}>
-            <summary className="cursor-pointer py-2">
-              <h2 id="places-heading" className="font-display text-2xl font-semibold">
-                Browse{" "}
-                {place.kind === "world"
-                  ? "continents"
-                  : place.kind === "continent"
-                    ? "countries and territories"
-                    : place.kind === "nation"
-                      ? "counties and areas"
-                      : "states, counties and areas"}
-              </h2>
-            </summary>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {data.children.map((child) => (
-                <a
-                  key={child.key}
-                  href={child.path}
-                  className="flex min-h-16 items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4 hover:border-accent"
-                >
-                  <span className="flex items-center gap-2 font-medium">
-                    {child.country ? <CountryFlag country={child.country} /> : null}
-                    {child.name}
-                  </span>
-                  <span className="shrink-0 text-xs text-muted">
-                    {child.count ? `${child.count} recorded events` : "Listings coming soon"}
-                  </span>
-                </a>
-              ))}
-            </div>
-          </details>
-        </section>
-      ) : null}
+      {!browseFirst ? placeNavigation : null}
       {data.page === 1 && !data.archive && (data.guidance.length || data.cities.length > 1) ? (
         <section aria-labelledby="choosing-race-heading" className="max-w-3xl space-y-5">
           <h2 id="choosing-race-heading" className="font-display text-2xl font-semibold">
@@ -488,6 +520,7 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
           <h2 id="race-questions-heading" className="font-display text-2xl font-semibold">
             Questions about{" "}
             {data.facet.distance?.heading.toLowerCase() ??
+              data.facet.terrain?.heading.toLowerCase() ??
               data.facet.sport?.heading.toLowerCase() ??
               "races"}{" "}
             {place.kind === "world" ? "worldwide" : `in ${place.name}`}

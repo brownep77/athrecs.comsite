@@ -322,6 +322,46 @@ assert(
   !graph.some((x) => ["FAQPage", "SportsEvent"].includes(x["@type"])),
   "no inapplicable rich-result markup",
 );
+// Explicit surface taxonomy and navigation must remain scoped through geography.
+const terrainRows = [
+  ...[401, 402, 403].map((id) => race(id, { surface: "Road", editions: [edition("2027-05-01")] })),
+  ...[411, 412, 413].map((id) => race(id, { surface: "Trail", editions: [edition("2027-06-01")] })),
+  race(420, {
+    surface: "",
+    name: "Road Trail Race is not surface evidence",
+    editions: [edition("2027-07-01")],
+  }),
+];
+const roadPage = racePlacePage(terrainRows, `${key}/running/road/10k`, now);
+const trailPage = racePlacePage(terrainRows, `${key}/running/trail`, now);
+assert.deepEqual(
+  roadPage.races.map((r) => r.id),
+  [401, 402, 403],
+);
+assert.deepEqual(
+  trailPage.races.map((r) => r.id),
+  [411, 412, 413],
+);
+assert(
+  racePlaceCopy(roadPage).heading.includes("Road 10k races") ||
+    racePlaceCopy(roadPage).heading.includes("Road 10K races"),
+);
+assert(roadPage.distanceLinks.every((item) => item.path.includes("/running/road/")));
+assert.equal(roadPage.breadcrumbs[1].path, "/running/road");
+assert(
+  roadPage.breadcrumbs.some(
+    (item) => item.name === "England" && item.path.endsWith("/running/road"),
+  ),
+);
+const roadCountry = racePlacePage(terrainRows, "europe/united-kingdom/running/road", now);
+assert(roadCountry.children.every((item) => item.path.endsWith("/running/road")));
+assert.equal(racePlacePage(terrainRows, `${key}/triathlon/road`, now), null);
+assert.equal(racePlacePage(terrainRows, `${key}/running/not-a-surface`, now), null);
+const terrainSitemap = racePlaceSitemapPaths(terrainRows);
+assert(terrainSitemap.includes(`${roadPage.path}`));
+assert(terrainSitemap.includes(`${trailPage.path}`));
+assert(!terrainSitemap.some((item) => item.endsWith("/running/fell")));
+
 const db = new PGlite();
 await db.exec(`create table events(id int, slug text, name text, sport text, country text, county text, region text, city text, summary text, featured boolean);
  create table editions(event_id int, event_date date, distance_code text, status text, end_date date, end_source_url text, end_checked_at date);
@@ -332,6 +372,9 @@ await db.exec(`create table events(id int, slug text, name text, sport text, cou
  insert into editions values (1,'2026-10-19','10K','Open','2026-10-23',null,null),
  (1,'2027-05-01','Half','Closed',null,null,null);
  alter table editions add column entry_url text;`);
+await db.exec(
+  "alter table events add column surface text; update events set surface='Road' where sport='Running'",
+);
 const sql = { query: async (text, values) => (await db.query(text, values)).rows };
 const loaded = await queryRacePlaceRows(sql, now);
 assert.equal(loaded.length, 1, "public sport boundary");
