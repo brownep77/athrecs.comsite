@@ -1,3 +1,4 @@
+import { MemberOnboardingGate } from "@/components/auth/MemberOnboardingGate";
 import {
   HeadContent,
   Outlet,
@@ -73,6 +74,7 @@ function RootComponent() {
       </head>
       <body className="bg-bg text-fg antialiased">
         <QueryClientProvider client={queryClient}>
+          <MemberOnboardingGate />
           <AppShell>
             <Outlet />
           </AppShell>

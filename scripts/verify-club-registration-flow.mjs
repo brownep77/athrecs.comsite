@@ -184,10 +184,57 @@ try {
     extraHTTPHeaders: { authorization: `Bearer ${officer.token}` },
   });
   observe(page);
-  await page.goto(`${origin}/clubs/register?club=${clubs[1].slug}`, {
+  const registrationDestination = `/clubs/register?club=${clubs[1].slug}`;
+  await page.goto(`${origin}${registrationDestination}`, {
     waitUntil: "networkidle",
     timeout: 120000,
   });
+  // A fresh member completes the shared onboarding flow before returning to
+  // the exact club application they originally requested.
+  const onboarding = page.getByRole("form", { name: "Complete your profile", exact: true });
+  await onboarding.waitFor();
+  await page.waitForURL((url) => url.pathname === "/join");
+  assert.equal(
+    new URL(page.url()).searchParams.get("returnTo"),
+    registrationDestination,
+    "The onboarding gate preserves the club and full registration destination",
+  );
+  await onboarding.getByRole("checkbox", { name: "Athlete", exact: true }).uncheck();
+  await onboarding
+    .getByRole("checkbox", { name: "Running / sports club representative", exact: true })
+    .check();
+  await onboarding.getByLabel("First names", { exact: true }).fill("Synthetic Club");
+  await onboarding.getByLabel("Last name", { exact: true }).fill("Officer");
+  await onboarding
+    .getByLabel("Country of residence", { exact: true })
+    .fill("United Kingdom");
+  await onboarding.getByRole("checkbox", { name: /I have read the privacy notice/ }).check();
+  await onboarding
+    .getByRole("button", { name: "Save profile and continue", exact: true })
+    .click();
+  await page.waitForURL(`${origin}${registrationDestination}`);
+  const [onboarded] = await sql`select first_name,last_name,roles from member_onboarding
+    where user_id=${officer.user.id}`;
+  assert.deepEqual(onboarded, {
+    first_name: "Synthetic Club",
+    last_name: "Officer",
+    roles: ["club"],
+  });
+  assert.equal(
+    (await sql`select count(*)::int n from athlete_account_consents
+      where user_id=${officer.user.id} and status='granted'`)[0].n,
+    0,
+    "Club onboarding does not grant marketing or other optional consent",
+  );
+  assert.deepEqual(
+    await sql`select
+      (select count(*)::int from athletes) as athletes,
+      (select count(*)::int from results) as results,
+      (select count(*)::int from athlete_account_links) as ownership,
+      (select count(*)::int from result_claims) as claims`,
+    before,
+    "Choosing a club role creates no athlete records, result ownership or claims",
+  );
   // Registration is a private route: neither tracking nor consent UI belongs here.
   await page.getByRole("button", { name: "Continue", exact: true }).waitFor();
   assert.equal(

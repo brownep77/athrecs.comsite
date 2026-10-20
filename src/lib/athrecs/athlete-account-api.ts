@@ -123,6 +123,8 @@ export type AthleteAccountData = {
 };
 
 export type AthleteAccountInput = {
+  /** The unmodified updatedAt returned by the last account load; null for a new profile. */
+  expectedUpdatedAt?: string | null;
   fullName: string;
   displayName?: string;
   dateOfBirth?: string;
@@ -408,6 +410,17 @@ function validatePreferences(value: AthleteProductPreferences): AthleteProductPr
 }
 
 function validateAccountInput(value: AthleteAccountInput): AthleteAccountInput {
+  if (
+    value?.expectedUpdatedAt !== undefined &&
+    value.expectedUpdatedAt !== null &&
+    (typeof value.expectedUpdatedAt !== "string" ||
+      value.expectedUpdatedAt.length > 80 ||
+      !/^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}(?::?\d{2})?)$/.test(
+        value.expectedUpdatedAt,
+      ))
+  ) {
+    throw new Error("The profile version is invalid. Reload your account and try again");
+  }
   const sports = (Array.isArray(value?.sports) ? value.sports : []).map(validateSport);
   if (sports.length > ATHLETE_SPORTS.length) throw new Error("Too many sports selected");
   if (new Set(sports.map((sport) => sport.sportCode)).size !== sports.length) {
@@ -420,6 +433,7 @@ function validateAccountInput(value: AthleteAccountInput): AthleteAccountInput {
     throw new Error("Read and acknowledge the Athlete Account privacy notice");
   }
   return {
+    expectedUpdatedAt: value?.expectedUpdatedAt,
     profileDetails: readProfileDetails(value?.profileDetails),
     fullName: text(value?.fullName, 120, "Full name", true),
     displayName: text(value?.displayName, 120, "Display name"),
@@ -763,19 +777,22 @@ export const saveMyAthleteRacingName = createServerFn({ method: "POST" })
     if (!user?.email) throw new Error("Your signed-in account has no email address");
     if (!user.email_verified)
       throw new Error("Verify your email before saving your athlete profile");
-    await sql`
-      insert into athlete_private_profiles (
-        user_id, verified_email, full_name, privacy_notice_version, privacy_acknowledged_at
-      ) values (
-        ${context.userId}, ${user.email}, ${data.fullName}, ${ATHLETE_PRIVACY_VERSION}, now()
-      )
-      on conflict (user_id) do update set
-        verified_email = excluded.verified_email,
-        full_name = excluded.full_name,
-        privacy_notice_version = excluded.privacy_notice_version,
-        privacy_acknowledged_at = now(),
-        updated_at = now()
-    `;
+    await sql.transaction(async (tx) => {
+      await tx`select id from "user" where id = ${context.userId} for update`;
+      await tx`
+        insert into athlete_private_profiles (
+          user_id, verified_email, full_name, privacy_notice_version, privacy_acknowledged_at
+        ) values (
+          ${context.userId}, ${user.email}, ${data.fullName}, ${ATHLETE_PRIVACY_VERSION}, now()
+        )
+        on conflict (user_id) do update set
+          verified_email = excluded.verified_email,
+          full_name = excluded.full_name,
+          privacy_notice_version = excluded.privacy_notice_version,
+          privacy_acknowledged_at = now(),
+          updated_at = clock_timestamp()
+      `;
+    });
     return loadAccount(sql, context.userId);
   });
 
@@ -798,6 +815,20 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
       throw new Error("Verify your email before saving your athlete profile");
 
     await sql.transaction(async (tx) => {
+      // Serialize saves even when the private profile does not exist yet. A
+      // profile-row lock alone cannot protect two simultaneous first saves.
+      await tx`select id from "user" where id = ${context.userId} for update`;
+      if (data.expectedUpdatedAt !== undefined) {
+        const current = await tx<{ matches: boolean | null }>`
+          select updated_at = ${data.expectedUpdatedAt}::timestamptz as matches
+          from athlete_private_profiles where user_id = ${context.userId} limit 1
+        `;
+        if (current.length ? current[0].matches !== true : data.expectedUpdatedAt !== null) {
+          throw new Error(
+            "Your profile changed in another tab. Reload your account before saving again",
+          );
+        }
+      }
       await tx`
         insert into athlete_private_profiles (
           user_id, verified_email, full_name, display_name, date_of_birth,
@@ -842,7 +873,7 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
           fingerprint_time = excluded.fingerprint_time,
           privacy_notice_version = excluded.privacy_notice_version,
           privacy_acknowledged_at = now(),
-          updated_at = now()
+          updated_at = clock_timestamp()
       `;
 
       await tx`delete from athlete_sport_profiles where user_id = ${context.userId}`;

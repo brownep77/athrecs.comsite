@@ -1,11 +1,12 @@
+import { MemberOnboardingForm } from "@/components/auth/MemberOnboardingForm";
+import { getMyOnboarding } from "@/lib/athrecs/member-onboarding-api";
+import { safeOnboardingReturnTo } from "@/lib/athrecs/member-onboarding";
 import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
-import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowRight,
-  Check,
   CheckCircle2,
   Loader2,
   LockKeyhole,
@@ -16,13 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
-import {
-  ATHLETE_SPORTS,
-  getMyAthleteAccount,
-  saveMyAthleteAccount,
-  type AthleteAccountData,
-  type AthleteSportCode,
-} from "@/lib/athrecs/athlete-account-api";
+import { getMyAthleteAccount, type AthleteAccountData } from "@/lib/athrecs/athlete-account-api";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 
 const platforms = {
@@ -37,12 +32,15 @@ const platforms = {
 type Platform = keyof typeof platforms;
 
 export const Route = createFileRoute("/join")({
-  validateSearch: (search: Record<string, unknown>): { from?: Platform; step?: "profile" } => ({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { from?: Platform; step?: "profile" | "edit"; returnTo?: string } => ({
     from:
       typeof search.from === "string" && Object.hasOwn(platforms, search.from)
         ? (search.from as Platform)
         : undefined,
-    step: search.step === "profile" ? "profile" : undefined,
+    step: search.step === "profile" || search.step === "edit" ? search.step : undefined,
+    returnTo: safeOnboardingReturnTo(search.returnTo),
   }),
   head: () => ({
     meta: siteGraphMeta({
@@ -57,7 +55,7 @@ export const Route = createFileRoute("/join")({
 });
 
 function JoinPage() {
-  const { from } = Route.useSearch();
+  const { from, step, returnTo } = Route.useSearch();
   const { user, isPending } = useCurrentUserState();
   const account = useQuery({
     queryKey: ["my-athlete-account", user?.id],
@@ -65,27 +63,33 @@ function JoinPage() {
     enabled: Boolean(user),
     retry: false,
   });
-  const ready = Boolean(account.data?.exists);
-  const stage = account.data?.claimedProfiles.length ? 3 : user ? 2 : 1;
-  const callbackURL = `/join?step=profile${from ? `&from=${from}` : ""}`;
+  const onboarding = useQuery({
+    queryKey: ["member-onboarding", user?.id],
+    queryFn: () => getMyOnboarding(),
+    enabled: Boolean(user),
+    retry: false,
+  });
+  const ready = Boolean(account.data?.exists && onboarding.data && step !== "edit");
+  const stage = ready ? 3 : user ? 2 : 1;
+  const callbackURL = `/join?step=profile${from ? `&from=${from}` : ""}${returnTo ? `&returnTo=${encodeURIComponent(returnTo)}` : ""}`;
 
   return (
     <div className="mx-auto max-w-5xl space-y-6 py-2 sm:py-5">
       <section className="rounded-3xl border border-border bg-elevated/50 p-5 sm:p-8">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-accent">
-          For the athlete in you
+          Your place in sport
         </p>
         <h1 className="mt-3 max-w-2xl font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-          Every athlete has a story.
+          Every sporting story belongs here.
           <br />
           <span className="text-accent">Start yours here.</span>
         </h1>
         <p className="mt-4 max-w-xl text-sm leading-6 text-muted sm:text-base">
-          Your first 5K, your fastest marathon, your next sport. Bring your results, PBs and
-          achievements together in one athlete profile.
+          Whether you compete, coach, run a club or bring race day to life, there’s a place for you
+          here. Start with a few details and make AthRecs your own.
         </p>
         <ol aria-label="Your next steps" className="mt-6 grid gap-2 sm:grid-cols-3">
-          {["Create your account", "Find and claim results", "View your profile"].map(
+          {["Create your account", "Choose your roles & details", "Make AthRecs yours"].map(
             (label, index) => (
               <li
                 key={label}
@@ -102,28 +106,57 @@ function JoinPage() {
         </ol>
       </section>
 
+      {onboarding.data ? (
+        <Link to="/join" search={{ step: "edit" }} className="underline">
+          Edit your details and roles
+        </Link>
+      ) : null}
       <div className="grid gap-5 lg:grid-cols-[1.4fr_0.8fr] lg:items-start">
         <section
           className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-7"
           aria-live="polite"
         >
-          {isPending || (user && account.isLoading) ? (
+          {isPending || (user && (account.isLoading || onboarding.isLoading)) ? (
             <p className="flex items-center gap-2 text-sm text-muted">
               <Loader2 className="size-4 animate-spin" aria-hidden="true" />
               Checking your account…
             </p>
-          ) : user && account.isError ? (
+          ) : user && (account.isError || onboarding.isError) ? (
             <div role="alert">
               <p>We couldn’t load your profile. Please try again.</p>
-              <Button className="mt-4" onClick={() => void account.refetch()}>
+              <Button
+                className="mt-4"
+                onClick={() => void Promise.all([account.refetch(), onboarding.refetch()])}
+              >
                 Try again
               </Button>
             </div>
           ) : ready && account.data?.emailVerified ? (
-            <ProfileReady account={account.data} />
+            onboarding.data?.roles.includes("athlete") ? (
+              <ProfileReady account={account.data} />
+            ) : (
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold">Your details are saved</h2>
+                <p>Organisation and staff permissions require separate approval.</p>
+                <Link to="/clubs/register" className="block underline">
+                  Register a club
+                </Link>
+                <Link to="/athlete-account" className="block underline">
+                  Manage your account
+                </Link>
+                <Link to="/" className="block underline">
+                  Continue to AthRecs
+                </Link>
+              </div>
+            )
           ) : user && account.data ? (
             account.data.emailVerified ? (
-              <QuickProfileForm key={user.id} account={account.data} />
+              <MemberOnboardingForm
+                key={user.id}
+                account={account.data}
+                initial={onboarding.data ?? null}
+                returnTo={returnTo}
+              />
             ) : (
               <div>
                 <h2 className="font-display text-2xl font-semibold">
@@ -147,8 +180,8 @@ function JoinPage() {
                 One email. Your sporting story.
               </h2>
               <p className="mt-3 text-sm leading-6 text-muted">
-                We’ll email you a six-digit sign-in code. Then add your name and sport to start your
-                private profile. No password needed.
+                We’ll email you a six-digit sign-in code. Then choose how you use AthRecs and
+                complete your profile. No password needed.
               </p>
               <Button
                 className="mt-5 w-full sm:w-auto"
@@ -199,138 +232,6 @@ function JoinPage() {
         </aside>
       </div>
     </div>
-  );
-}
-
-function QuickProfileForm({ account }: { account: AthleteAccountData }) {
-  const queryClient = useQueryClient();
-  const [fullName, setFullName] = useState(account.fullName || "");
-  const [sport, setSport] = useState<AthleteSportCode>("Running");
-  const [privacy, setPrivacy] = useState(false);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
-  async function save(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (busy || !privacy || fullName.trim().length < 2) return;
-    setBusy(true);
-    setError("");
-    try {
-      const saved = await saveMyAthleteAccount({
-        data: {
-          preferences: account.preferences,
-          consents: account.consents,
-          fullName: fullName.trim(),
-          displayName: fullName.trim(),
-          privacyAcknowledged: true,
-          sports: [
-            {
-              sportCode: sport,
-              isPrimary: true,
-              experienceLevel: null,
-              disciplines: [],
-              preferredDistances: [],
-              preferredSurfaces: [],
-              trainingSessionsPerWeek: null,
-              trainingHoursPerWeek: null,
-              weeklyDistanceKm: null,
-              eventsPerYear: null,
-              goals: "",
-              coachName: "",
-            },
-          ],
-        },
-      });
-      queryClient.setQueryData(["my-athlete-account", account.userId], saved);
-      await queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
-    } catch (cause) {
-      setError(
-        cause instanceof Error ? cause.message : "We couldn’t save your profile. Please try again.",
-      );
-    } finally {
-      setBusy(false);
-    }
-  }
-  const field =
-    "mt-2 h-12 w-full rounded-xl border border-border bg-bg px-3 text-sm outline-none focus:ring-2 focus:ring-accent/30";
-  return (
-    <form onSubmit={(event) => void save(event)} className="space-y-5">
-      <div>
-        <p className="flex items-center gap-1.5 text-xs font-semibold text-accent">
-          <Check className="size-4" aria-hidden="true" />
-          Email verified
-        </p>
-        <h2 className="mt-2 font-display text-2xl font-semibold">Let’s start your profile</h2>
-        <p className="mt-2 text-sm text-muted">
-          Just your name and first sport. Add everything else when you’re ready.
-        </p>
-      </div>
-      <label className="block text-sm font-semibold">
-        Your name
-        <input
-          autoComplete="name"
-          value={fullName}
-          onChange={(event) => setFullName(event.target.value)}
-          minLength={2}
-          maxLength={120}
-          required
-          disabled={busy}
-          className={field}
-        />
-      </label>
-      <div className="text-sm font-semibold">
-        <label htmlFor="recruitment-main-sport" className="block">
-          Your main sport
-        </label>
-        <select
-          id="recruitment-main-sport"
-          value={sport}
-          onChange={(event) => setSport(event.target.value as AthleteSportCode)}
-          disabled={busy}
-          className={field}
-        >
-          {ATHLETE_SPORTS.map((value) => (
-            <option key={value}>{value}</option>
-          ))}
-        </select>
-      </div>
-      <label className="flex items-start gap-3 text-sm leading-6">
-        <input
-          type="checkbox"
-          checked={privacy}
-          onChange={(event) => setPrivacy(event.target.checked)}
-          disabled={busy}
-          className="mt-1 size-4 shrink-0 accent-primary"
-          required
-        />
-        <span>
-          I’ve read the{" "}
-          <Link to="/privacy" target="_blank" className="text-accent underline">
-            privacy notice
-          </Link>{" "}
-          and understand my profile starts private.
-        </span>
-      </label>
-      {error ? (
-        <p role="alert" className="text-sm text-red-700">
-          {error}
-        </p>
-      ) : null}
-      <Button
-        className="w-full sm:w-auto"
-        disabled={busy || !privacy || fullName.trim().length < 2}
-        type="submit"
-      >
-        {busy ? (
-          <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-        ) : (
-          <ArrowRight className="size-4" aria-hidden="true" />
-        )}
-        Create my private profile
-      </Button>
-      <p className="text-xs text-muted">
-        This does not sign you up for marketing emails or make your profile public.
-      </p>
-    </form>
   );
 }
 
