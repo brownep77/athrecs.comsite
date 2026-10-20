@@ -37,7 +37,7 @@ const nonFinish =
 export function hasFinishMark(mark: string, place = ""): boolean {
   if (nonFinish.test(mark) || /\+/.test(mark)) return false;
   const time = mark.trim().replace(/\s*\(SC\)$/i, "");
-  if (/^(?:\d+:)*\d+(?:\.\d+)?(?:\((?:\d+:)*\d+(?:\.\d+)?\))?[aiwch]*$/i.test(time))
+  if (/^(?:\d+:)*\d+(?:\.\d+)?a?(?:\((?:\d+:)*\d+(?:\.\d+)?\))?[aiwch]*$/i.test(time))
     return /[1-9]/.test(time);
   if (/^(?:finished|completed|fin)$/i.test(time)) return true;
   return (!time || /^NT$/i.test(time)) && /^[1-9]\d*(?:=|[AB])?$/.test(place);

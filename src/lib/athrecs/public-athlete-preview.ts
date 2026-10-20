@@ -17,6 +17,10 @@ import type { ReportedRaceRecord } from "./reported-race-history";
 import type { SourceNationality } from "./source-nationality";
 import { publicAthleteCareer, type PublicCareerSummary } from "./public-athlete-career";
 import {
+  profilePersonalBestSummary,
+  type PersonalBestSummary,
+} from "./profile-personal-best-summary";
+import {
   publicAthleteResultPage,
   PUBLIC_PROFILE_RESULT_LIMIT,
 } from "./public-athlete-result-pages";
@@ -35,6 +39,7 @@ export type PublicAthletePreview = {
   biographySources: { label: string; url: string }[];
   careerSummary: PublicCareerSummary | null;
   achievements?: ProfileAchievementSummary;
+  personalBests?: PersonalBestSummary;
   entries: ResultsHistoryEntry[];
   reportedRecords: ReportedRaceRecord[];
   totalResults: number;
@@ -101,6 +106,7 @@ export function buildPublicAthletePreview(input: {
     nationalitySource: null,
     sports,
     achievements: buildProfileAchievementSummary(timeline.results, input.histories),
+    personalBests: profilePersonalBestSummary(timeline.results, input.histories),
     biography: input.biography
       ? [...input.biography]
       : [
