@@ -5,6 +5,7 @@ import {
   type MessageTarget,
   type messageInput,
   type messageFilters,
+  type staffEmailInput,
 } from "./athlete-messages";
 import type { z } from "zod";
 
@@ -90,6 +91,7 @@ export async function loadAthleteMessages(sql: Sql, input: z.infer<typeof messag
       p.occurred_at::text as "occurredAt",t.sent,t.received,(select count(*)::int from filtered) as total
     from totals t left join page p on true order by p.occurred_at desc,p.id desc`;
   return {
+    recipientEmail: target.verifiedEmail,
     messages: rows
       .filter((row) => row.id)
       .map(({ total: _total, sent: _sent, received: _received, ...message }) => message),
@@ -99,6 +101,96 @@ export async function loadAthleteMessages(sql: Sql, input: z.infer<typeof messag
     page: input.page,
     pageSize: 20,
   };
+}
+
+/** Staff-only correspondence, bound to the account's verified mailbox. */
+export async function sendAthleteCorrespondence(
+  sql: Sql,
+  input: z.infer<typeof staffEmailInput>,
+  staffId: string,
+) {
+  const target = await resolveTarget(sql, input.target);
+  if (!target.verifiedEmail || target.verifiedEmail !== input.recipient)
+    throw new Error("The verified recipient has changed or is unavailable. Refresh the account.");
+  const apiKey =
+    process.env.ATHRECS_INVITATION_RESEND_API_KEY?.trim() || process.env.RESEND_API_KEY?.trim();
+  if (!apiKey) throw new Error("AthRecs email delivery is not configured.");
+  const [synthetic] = await sql<{ test: boolean }>`select exists(
+    select 1 from athrecs_test_athletes where athlete_id=any(${target.athleteIds}::int[])
+  ) as test`;
+  if (synthetic?.test && target.verifiedEmail !== "paul@athrecs.com")
+    throw new Error("Test emails are restricted to the approved test address.");
+  const sourceKey = `staff-correspondence/${input.entryId}`;
+  const [reserved] = await sql<{ id: string }>`insert into athlete_messages
+    (id,user_id,athlete_id,direction,channel,subject,body,contact,sender,status,source,source_key,recorded_by)
+    values (${input.entryId},${target.userId},${target.athleteId},'sent','email',${input.subject},
+      ${input.body},${target.verifiedEmail},'paul@athrecs.com','unknown','site',${sourceKey},${staffId})
+    on conflict do nothing returning id`;
+  if (!reserved) {
+    const [previous] = await sql<{
+      status: string;
+      user_id: string;
+      contact: string;
+      subject: string;
+      body: string;
+    }>`
+      select status,user_id,contact,subject,body from athlete_messages where source_key=${sourceKey}`;
+    if (
+      previous?.status === "accepted" &&
+      previous.user_id === target.userId &&
+      previous.contact === input.recipient &&
+      previous.subject === input.subject &&
+      previous.body === input.body
+    )
+      return { sent: true };
+    throw new Error(
+      "This send attempt is already recorded. Check its status before creating another email.",
+    );
+  }
+  const escape = (value: string) =>
+    value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  const html = input.body
+    .split(/(https:\/\/[^\s<>]+)/g)
+    .map((part, index) =>
+      index % 2 ? `<a href="${escape(part)}">${escape(part)}</a>` : escape(part),
+    )
+    .join("")
+    .replaceAll("\n", "<br>");
+  let response: Response;
+  try {
+    response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "Idempotency-Key": sourceKey,
+      },
+      signal: AbortSignal.timeout(8000),
+      body: JSON.stringify({
+        from: "Paul Browne <paul@athrecs.com>",
+        reply_to: "paul@athrecs.com",
+        to: [target.verifiedEmail],
+        subject: input.subject,
+        text: input.body,
+        html: `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6">${html}</div>`,
+      }),
+    });
+  } catch {
+    throw new Error(
+      "Email acceptance could not be confirmed. The attempt is recorded; check delivery before resending.",
+    );
+  }
+  if (!response.ok) {
+    await sql`update athlete_messages set status='failed' where id=${input.entryId}`;
+    throw new Error("The email provider rejected this message. The failed attempt is recorded.");
+  }
+  const receipt = await response.json().catch(() => null);
+  await sql`update athlete_messages set status='accepted',provider_id=${typeof receipt?.id === "string" ? receipt.id : null},occurred_at=now() where id=${input.entryId}`;
+  return { sent: true };
 }
 
 export async function recordAthleteMessage(

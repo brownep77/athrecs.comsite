@@ -1,6 +1,15 @@
 import { createServerFn } from "@tanstack/react-start";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
-import { messageFilters, messageInput } from "./athlete-messages";
+import { messageFilters, messageInput, staffEmailInput } from "./athlete-messages";
+
+export const sendStaffAthleteEmail = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((input: unknown) => staffEmailInput.parse(input))
+  .handler(async ({ data, context }) => {
+    const { getSql } = await import("@/lib/db");
+    const { sendAthleteCorrespondence } = await import("./athlete-messages.server");
+    return sendAthleteCorrespondence(await getSql(), data, context.userId);
+  });
 
 export const getStaffAthleteMessages = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])

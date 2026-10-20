@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   getStaffAthleteMessages,
   saveStaffAthleteMessage,
+  sendStaffAthleteEmail,
 } from "@/lib/athrecs/athlete-messages-api";
 import {
   messageChannelLabels,
@@ -59,6 +60,7 @@ function MessageHistory({ target }: { target: MessageTarget }) {
   const [direction, setDirection] = useState<"all" | "sent" | "received">("all");
   const [page, setPage] = useState(1);
   const [adding, setAdding] = useState(false);
+  const [composing, setComposing] = useState(false);
   const [notice, setNotice] = useState("");
   const query = useQuery({
     queryKey: ["staff-athlete-messages", target, direction, page],
@@ -113,7 +115,31 @@ function MessageHistory({ target }: { target: MessageTarget }) {
         >
           {adding ? "Cancel" : "Record a message"}
         </Button>
+        <Button
+          size="sm"
+          disabled={!data?.recipientEmail}
+          onClick={() => {
+            setComposing(!composing);
+            setNotice("");
+          }}
+          aria-expanded={composing}
+        >
+          {composing ? "Close email" : "Compose email"}
+        </Button>
       </div>
+      {composing && data?.recipientEmail ? (
+        <SendEmailForm
+          target={target}
+          recipient={data.recipientEmail}
+          onSaved={() => {
+            setComposing(false);
+            setDirection("sent");
+            setPage(1);
+            setNotice("Email sent to the provider and saved to this athlete’s record.");
+            void query.refetch();
+          }}
+        />
+      ) : null}
       {adding ? (
         <MessageForm
           target={target}
@@ -214,6 +240,77 @@ function MessageHistory({ target }: { target: MessageTarget }) {
         or reading. Athlete replies sync after you connect paul@athrecs.com.
       </p>
     </div>
+  );
+}
+
+function SendEmailForm({
+  target,
+  recipient,
+  onSaved,
+}: {
+  target: MessageTarget;
+  recipient: string;
+  onSaved: () => void;
+}) {
+  const [entryId] = useState(() => crypto.randomUUID());
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const mutation = useMutation({
+    mutationFn: () =>
+      sendStaffAthleteEmail({ data: { target, entryId, recipient, subject, body } }),
+    onSuccess: onSaved,
+    retry: false,
+  });
+  return (
+    <form
+      className="space-y-3 rounded-lg border border-border bg-elevated p-4"
+      onSubmit={(event) => {
+        event.preventDefault();
+        mutation.mutate();
+      }}
+    >
+      <h3 className="font-semibold">Compose email</h3>
+      <p className="text-sm">
+        From: paul@athrecs.com
+        <br />
+        To: {recipient}
+      </p>
+      <fieldset disabled={mutation.isPending} className="space-y-3">
+        <label className="block text-sm">
+          Email subject
+          <input
+            aria-label="Email subject"
+            className={fieldClass}
+            required
+            maxLength={200}
+            value={subject}
+            onChange={(event) => setSubject(event.target.value)}
+          />
+        </label>
+        <label className="block text-sm">
+          Email message
+          <textarea
+            aria-label="Email message"
+            className={fieldClass}
+            required
+            rows={12}
+            maxLength={20000}
+            value={body}
+            onChange={(event) => setBody(event.target.value)}
+          />
+        </label>
+      </fieldset>
+      {mutation.isError ? (
+        <p role="alert" className="text-sm text-red-600">
+          {mutation.error instanceof Error
+            ? mutation.error.message
+            : "Sending could not be confirmed. Check the message history before trying again."}
+        </p>
+      ) : null}
+      <Button type="submit" disabled={mutation.isPending}>
+        {mutation.isPending ? "Sending…" : "Send email"}
+      </Button>
+    </form>
   );
 }
 

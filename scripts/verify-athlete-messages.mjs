@@ -15,6 +15,7 @@ for (const key of [
 process.env.VITE_AUTH_ENABLED = "true";
 process.env.VITE_SITE_BRAND = "athrecs";
 process.env.RESEND_API_KEY = "synthetic-intercepted-email-key";
+process.env.ATHRECS_INVITATION_RESEND_API_KEY = "synthetic-intercepted-invitation-key";
 process.env.ATHRECS_STAFF_EMAILS = "staff@example.test";
 process.env.BETTER_AUTH_SECRET = "athlete-messages-test-secret-at-least-32-chars";
 const origin = "http://127.0.0.1:18249";
@@ -316,8 +317,82 @@ try {
     (await call("getStaffAthleteMessages", { ...filters, page: 999 })).messages.length,
     0,
   );
+  const outgoing = {
+    target,
+    entryId: randomUUID(),
+    recipient: athlete.email,
+    subject: "Your profile is ready",
+    body: "Hi athlete,\n\n<script>not executable</script>\nhttps://www.athrecs.com/athletes/synthetic\n\nPaul",
+  };
+  for (const token of ["", athlete.token])
+    await assert.rejects(
+      () => call("sendStaffAthleteEmail", outgoing, token),
+      /Unauthorized|Forbidden/,
+    );
+  await assert.rejects(
+    () =>
+      call("sendStaffAthleteEmail", outgoing, staff.token, {
+        origin: "https://untrusted.example",
+        "sec-fetch-site": "cross-site",
+      }),
+    /Forbidden|Cross/,
+  );
+  await assert.rejects(
+    () => call("sendStaffAthleteEmail", { ...outgoing, recipient: other.email }),
+    /recipient/,
+  );
+  await assert.rejects(() =>
+    call("sendStaffAthleteEmail", { ...outgoing, subject: "Header\r\nInjected: test" }),
+  );
+  const beforeSend = deliveries.length;
+  await call("sendStaffAthleteEmail", outgoing);
+  await call("sendStaffAthleteEmail", outgoing);
+  assert.equal(deliveries.length, beforeSend + 1, "Repeated submit sends only once");
+  assert.equal(deliveries.at(-1).from, "Paul Browne <paul@athrecs.com>");
+  assert.equal(deliveries.at(-1).reply_to, "paul@athrecs.com");
+  assert.equal(deliveries.at(-1).text, outgoing.body, "Exact reviewed body reaches provider");
+  assert(deliveries.at(-1).html.includes("&lt;script&gt;"));
+  assert(deliveries.at(-1).html.includes('<a href="https://www.athrecs.com/athletes/synthetic">'));
+  const [record] = await sql`select * from athlete_messages where id=${outgoing.entryId}`;
+  assert.equal(record.status, "accepted");
+  assert.equal(record.body, outgoing.body);
+  assert.equal(record.recorded_by, staff.id);
+  assert.equal(record.contact, athlete.email);
+  assert(record.provider_id);
+  await assert.rejects(
+    () => call("sendStaffAthleteEmail", { ...outgoing, body: "Changed body" }),
+    /already recorded/,
+  );
+  const failedSend = { ...outgoing, entryId: randomUUID() };
+  emailStatus = 403;
+  await assert.rejects(() => call("sendStaffAthleteEmail", failedSend), /rejected/);
+  emailStatus = 200;
+  const [failedRecord] =
+    await sql`select status from athlete_messages where id=${failedSend.entryId}`;
+  assert.equal(failedRecord.status, "failed");
+  const uncertainSend = { ...outgoing, entryId: randomUUID() };
+  networkFailure = true;
+  await assert.rejects(
+    () => call("sendStaffAthleteEmail", uncertainSend),
+    /could not be confirmed/,
+  );
+  networkFailure = false;
+  const afterUncertain = deliveries.length;
+  await assert.rejects(() => call("sendStaffAthleteEmail", uncertainSend), /already recorded/);
+  assert.equal(deliveries.length, afterUncertain, "Uncertain delivery is not automatically resent");
+  await sql`update "user" set "emailVerified"=false where id=${other.id}`;
+  await assert.rejects(
+    () =>
+      call("sendStaffAthleteEmail", {
+        ...outgoing,
+        entryId: randomUUID(),
+        target: { userId: other.id },
+        recipient: other.email,
+      }),
+    /recipient/,
+  );
   console.log(
-    "PASS: private staff RPC, correct athlete binding, sent/received history, legacy invitations, recorded replies, no sends from recording, pagination, idempotency, send failure/recovery and code/link redaction. Synthetic recipients only.",
+    "PASS: private staff RPC, athlete binding, correspondence send and exact-body log, recipient verification, duplicate/uncertain-send protection, history, pagination, legacy invitations and code/link redaction. Synthetic recipients only.",
   );
 } finally {
   await server.close();
