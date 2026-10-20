@@ -169,3 +169,32 @@ announcement; it does not claim every archived guide is a completed race. Past
 editions of races with a future edition remain accessible through their race
 guides. Town filtering applies to both sections; month filtering applies only to
 upcoming races. Existing URLs, archive noindex and date-rollover rules remain.
+
+## Sport-first discovery — 20 October 2026
+
+The homepage leads with sports, giving Running the largest card, and provides
+country homepages for multiple sports. Country pages link to
+`/running?country=<country-slug>`; this navigation state is noindex and keeps the
+chosen country when following a running discipline. Other sports preserve the
+country in their existing fixture-page filters. The direct running-race search,
+results, athletes and profile shortcuts remain accessible without signing in.
+
+The unfiltered journey is Home → Running → Road / Trail / Fell / Cross country
+→ Continent → Country → State / county / area → Race. The four new discovery
+pages live at `/running/road`, `/running/trail`, `/running/fell` and
+`/running/cross-country`. Existing marathon, half-marathon, ultra and individual
+race URLs remain unchanged; road guides are linked from the road-running hub.
+
+Location discipline URLs append a stored surface after Running, for example
+`/races/places/europe/united-kingdom/england/norfolk/running/road/10k`.
+Only explicit Running event surfaces Road, Trail, Fell or XC qualify; names and
+summaries do not establish terrain. Geography, distance links, breadcrumbs,
+pagination and the archive preserve the discipline. Continent discipline pages
+show their country navigation before the race lists; other calendars retain
+upcoming races above the separate archive. Empty/limited coverage remains
+honest and noindex using the existing three-event focused-page threshold.
+
+Rollback baseline: main 1fa3db4148998117dde679e0cbf5c29943ad4fb6,
+production deployment dpl_6r4jyL6umejFZgpWHZZdwwTPf4Jh. Revert this isolated
+navigation release on the latest main to preserve unrelated later changes.
+No race data, athlete records, source evidence or database schema is changed.

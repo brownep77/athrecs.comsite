@@ -115,10 +115,20 @@ function SportPage() {
         </Link>
         {sport.slug === "road-running" && (
           <>
-            <Link to="/running" hash="countries-title" className={textLink}>
+            <Link
+              to="/running/$guide"
+              params={{ guide: "road" }}
+              hash="countries-title"
+              className={textLink}
+            >
               Marathons <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
-            <Link to="/running" hash="half-marathons" className={textLink}>
+            <Link
+              to="/running/$guide"
+              params={{ guide: "road" }}
+              hash="half-marathons"
+              className={textLink}
+            >
               Half marathons <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
             <Link to="/running/uk-road-ultramarathons" className={textLink}>

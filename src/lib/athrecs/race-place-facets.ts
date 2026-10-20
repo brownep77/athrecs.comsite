@@ -14,6 +14,37 @@ export const PLACE_DISTANCES = [
   { slug: "10-mile", label: "10 mile", heading: "10 mile races", codes: ["10mi"] },
   { slug: "20-mile", label: "20 mile", heading: "20 mile races", codes: ["20mi"] },
 ] as const;
+export const PLACE_TERRAINS = [
+  {
+    slug: "road",
+    surface: "Road",
+    label: "Road running",
+    heading: "Road running races",
+    description: "Find road races from short distances to marathons and ultras.",
+  },
+  {
+    slug: "trail",
+    surface: "Trail",
+    label: "Trail running",
+    heading: "Trail running races",
+    description: "Explore races recorded as trail events, then compare distance and location.",
+  },
+  {
+    slug: "fell",
+    surface: "Fell",
+    label: "Fell running",
+    heading: "Fell running races",
+    description: "Browse fell races and check each organiser’s route and equipment requirements.",
+  },
+  {
+    slug: "cross-country",
+    surface: "XC",
+    label: "Cross country",
+    heading: "Cross-country races",
+    description: "Find cross-country races and check the event’s entry and club requirements.",
+  },
+] as const;
+export type PlaceTerrain = (typeof PLACE_TERRAINS)[number];
 export type PlaceSport = (typeof PLACE_SPORTS)[number];
 export type PlaceDistance = (typeof PLACE_DISTANCES)[number];
 // Product threshold, not a claim about Google's ranking requirements.
@@ -45,18 +76,26 @@ export function placeRaceDistanceCodes(race: {
 }
 export const matchesPlaceDistance = (code: string, distance: PlaceDistance | null) =>
   !distance || (distance.codes as readonly string[]).includes(code);
-export function placeFacetSuffix(sport: PlaceSport | null, distance: PlaceDistance | null) {
-  return sport ? `/${sport.slug}${distance ? `/${distance.slug}` : ""}` : "";
+export function placeFacetSuffix(
+  sport: PlaceSport | null,
+  distance: PlaceDistance | null,
+  terrain: PlaceTerrain | null = null,
+) {
+  return sport
+    ? `/${sport.slug}${terrain ? `/${terrain.slug}` : ""}${distance ? `/${distance.slug}` : ""}`
+    : "";
 }
 
 export function resolvePlaceFacet(key: string, placeKeys: ReadonlySet<string>) {
-  if (placeKeys.has(key)) return { key, sport: null, distance: null };
+  if (placeKeys.has(key)) return { key, sport: null, distance: null, terrain: null };
   const parts = key.split("/");
   const distance = PLACE_DISTANCES.find((item) => item.slug === parts.at(-1)) ?? null;
   if (distance) parts.pop();
+  const terrain = PLACE_TERRAINS.find((item) => item.slug === parts.at(-1)) ?? null;
+  if (terrain) parts.pop();
   const sport = PLACE_SPORTS.find((item) => item.slug === parts.at(-1)) ?? null;
-  if (!sport || (distance && sport.slug !== "running")) return null;
+  if (!sport || ((distance || terrain) && sport.slug !== "running")) return null;
   parts.pop();
   const placeKey = parts.join("/");
-  return placeKeys.has(placeKey) ? { key: placeKey, sport, distance } : null;
+  return placeKeys.has(placeKey) ? { key: placeKey, sport, distance, terrain } : null;
 }

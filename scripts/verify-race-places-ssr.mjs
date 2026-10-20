@@ -22,6 +22,9 @@ await db.exec(`insert into events values
   (3,'2040-06-01','10K','Open'),(4,'2040-05-01','10K','Open');
   insert into events select id,'synthetic-extra-'||id,'Synthetic Extra '||id,'Running','England','Norfolk',null,'Norwich','Fictional pagination event.',false from generate_series(10,40) id;
   insert into editions(event_id,event_date,distance_code,status) select id,'2040-07-01','10K','Closed' from generate_series(10,40) id;`);
+await db.exec(
+  "alter table events add column surface text; update events set surface='Road' where sport='Running'",
+);
 const sql = async (strings, ...values) => {
   let query = strings[0];
   for (let i = 0; i < values.length; i++) query += `$${i + 1}` + strings[i + 1];
@@ -41,6 +44,7 @@ for (const path of [
   `${root}/europe/united-kingdom/england/norfolk?view=archive`,
   `${root}/europe/united-kingdom/england/norfolk/running`,
   `${root}/europe/united-kingdom/england/norfolk/running/10k`,
+  `${root}/europe/united-kingdom/england/norfolk/running/road/10k`,
   `${root}/europe/united-kingdom/england/norfolk/running/10k?month=2040-06&city=Wymondham`,
   `${root}/europe/united-kingdom/england/norfolk/running/10k?page=2`,
 ]) {
@@ -129,6 +133,41 @@ assert(!xml.includes("/antarctica"));
 assert(xml.includes("/norfolk/running/10k"));
 assert(!xml.includes("/norfolk/triathlon</loc>"), "small sport pages stay outside sitemap");
 console.log("Built SSR route → server function → local SQL → HTML/metadata/sitemap checks passed.");
+for (const path of [
+  "/",
+  "/en/united-kingdom",
+  "/en/ireland",
+  "/running",
+  "/running?country=united-kingdom",
+  "/running/road",
+  "/running/trail",
+  "/running/fell",
+  "/running/cross-country",
+]) {
+  const response = await app.fetch(new Request(`https://www.athrecs.com${path}`));
+  assert.equal(response.status, 200, path);
+  const html = await response.text();
+  const $ = cheerio.load(html);
+  assert.equal($("main h1").length, 1, path);
+  if (path === "/") {
+    assert($("#choose-sport").length && $("#sport-countries").length);
+    assert(!$("main").text().includes("Road marathons by country"));
+    assert($('main a[href="/en/united-kingdom"]').length);
+  }
+  if (path.startsWith("/en/")) {
+    assert($('main a[href="/running?country=' + path.split("/").at(-1) + '"]').length);
+    assert(!$("main h1").text().includes("athletics"));
+  }
+  if (path.includes("?country=")) {
+    assert($('main a[href="/races/places/europe/united-kingdom/running/road"]').length);
+    assert($("meta[name=robots]").attr("content").startsWith("noindex"));
+  }
+  if (["/running/road", "/running/trail", "/running/fell", "/running/cross-country"].includes(path))
+    assert.equal($("#running-continents").parent().find("a").length, 7);
+  for (const script of $('script[type="application/ld+json"]').toArray())
+    JSON.parse($(script).html());
+  console.log("Discovery SSR", response.status, path);
+}
 if (process.argv.includes("--browser")) {
   const { createServer } = await import("node:http");
   const { resolve, extname } = await import("node:path");
@@ -178,6 +217,41 @@ if (process.argv.includes("--browser")) {
         new URL(route.request().url()).origin === origin ? route.continue() : route.abort(),
       );
       const base = `${origin}${root}/europe/united-kingdom/england/norfolk`;
+      await page.goto(origin);
+      await page.screenshot({ path: `artifacts/sport-home-${width}.png`, fullPage: false });
+      await page.locator('main a[href="/en/united-kingdom"]').first().click();
+      await page.waitForURL("**/en/united-kingdom");
+      await page.locator('main a[href="/running?country=united-kingdom"]').click();
+      await page.waitForURL("**/running?country=united-kingdom");
+      await page.locator('main a[href="/races/places/europe/united-kingdom/running/road"]').click();
+      await page.waitForURL("**/united-kingdom/running/road");
+      assert((await page.locator("main h1").textContent()).includes("United Kingdom"));
+      assert.equal(
+        await page
+          .locator("#upcoming-races article h3")
+          .filter({ hasText: "Synthetic Triathlon" })
+          .count(),
+        0,
+      );
+      await page.goto(`${origin}/running`);
+      await page.getByRole("link", { name: /^Road running/ }).click();
+      await page.waitForURL("**/running/road");
+      await page.locator('main a[href="/races/places/europe/running/road"]').click();
+      await page.waitForURL("**/europe/running/road");
+      await page
+        .locator(
+          'section[aria-labelledby="places-heading"] a[href="/races/places/europe/united-kingdom/running/road"]',
+        )
+        .click();
+      await page.waitForURL("**/united-kingdom/running/road");
+      await page.goto(`${origin}/running/trail`);
+      await page.locator('main a[href="/races/places/europe/running/trail"]').click();
+      await page.waitForURL("**/europe/running/trail");
+      assert.equal(
+        await page.locator("#upcoming-races article h3").count(),
+        0,
+        "road fixtures must not appear in trail calendar",
+      );
       await page.goto(base);
       await page
         .getByRole("navigation", { name: "Race dates", exact: true })

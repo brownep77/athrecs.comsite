@@ -34,7 +34,7 @@ const { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } =
 const base = process.env.RUNNING_VERIFY_BASE ?? "http://127.0.0.1:8097";
 const toolPaths = ["/running/events", "/running/calendar", "/running/race-series"];
 const paths = [
-  "/running",
+  "/running", "/running/road", "/running/trail", "/running/fell", "/running/cross-country",
   ULTRA_GUIDE_PATH,
   ...ROAD_ULTRAS.map((race) => ultraPath(race.slug)),
   ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
