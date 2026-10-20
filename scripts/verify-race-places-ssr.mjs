@@ -291,7 +291,9 @@ if (process.argv.includes("--browser")) {
       await page.waitForURL("**/suffolk/running/10k");
       assert((await page.locator("main h1").textContent()).includes("Suffolk"));
       await page.goto(`${base}/running/10k`);
-      const asideBox = await page.locator("aside").boundingBox();
+      const asideBox = await page
+        .locator('aside:has(nav[aria-label="Nearby counties"])')
+        .boundingBox();
       const filtersBox = await page
         .getByRole("navigation", { name: "Sports and distances" })
         .boundingBox();
