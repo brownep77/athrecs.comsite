@@ -39,6 +39,8 @@ export const sourcePerformanceSchema = z.object({
     .enum(["unverified", "verified_by_administrator", "source_verified"])
     .optional(),
   profileExcluded: z.boolean().optional(),
+  // Explicitly opt a supplied mark into reported PB display; never verifies it.
+  reportedPersonalBest: z.boolean().optional(),
   sourceDate: z.string(),
   ageGroup: z.string(),
   // Older imports also used numbers or null for bibs. Keep those readable.
