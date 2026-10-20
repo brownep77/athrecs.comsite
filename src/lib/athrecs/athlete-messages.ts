@@ -5,6 +5,18 @@ export const messageTarget = z.union([
   z.object({ athleteNumber: z.string().regex(/^[1-9]\d{0,17}$/) }).strict(),
 ]);
 export type MessageTarget = z.infer<typeof messageTarget>;
+export const staffEmailInput = z.object({
+  target: messageTarget,
+  entryId: z.string().uuid(),
+  recipient: z.email().trim().toLowerCase().max(254),
+  subject: z
+    .string()
+    .trim()
+    .min(1)
+    .max(200)
+    .refine((value) => !/[\r\n]/.test(value)),
+  body: z.string().trim().min(1).max(20000),
+});
 export const messageFilters = z.object({
   target: messageTarget,
   direction: z.enum(["all", "sent", "received"]).default("all"),
