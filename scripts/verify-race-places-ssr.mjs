@@ -49,6 +49,29 @@ for (const path of [
   assert.equal(response.status, 200, `${path}: ${html.slice(0, 200)}`);
   const $ = cheerio.load(html);
   assert.equal($("main h1").length, 1, path);
+  assert.equal($('nav[aria-label="Race dates"] a').length, 2, "both sections have prominent links");
+  assert.equal($("#past-races").length, 1, "separate archive section is always reachable");
+  if (!path.includes("view=archive")) {
+    assert.equal($("#upcoming-races").length, 1);
+    assert(
+      html.indexOf('id="upcoming-races"') < html.indexOf('id="past-races"'),
+      "upcoming races precede archive",
+    );
+    assert(
+      !$("#upcoming-races article h3").text().includes("Synthetic Past Race"),
+      "historical race cannot leak into upcoming section",
+    );
+    assert(
+      !$("#past-races article h3").text().includes("Synthetic Norfolk 10K"),
+      "upcoming race cannot leak into archive section",
+    );
+    if (path.endsWith("/norfolk"))
+      assert(
+        $("#past-races article h3").text().includes("Synthetic Past Race"),
+        "archive sample remains visible alongside upcoming races",
+      );
+  }
+
   assert($("link[rel=canonical]").attr("href").includes(path), path);
   if (path.includes("antarctica"))
     assert($("meta[name=robots]").attr("content").startsWith("noindex"));
@@ -157,6 +180,24 @@ if (process.argv.includes("--browser")) {
       const base = `${origin}${root}/europe/united-kingdom/england/norfolk`;
       await page.goto(base);
       await page
+        .getByRole("navigation", { name: "Race dates", exact: true })
+        .getByRole("link", { name: /^Past races/ })
+        .click();
+      await page.waitForURL("**#past-races");
+      await page
+        .locator("#past-races")
+        .screenshot({ path: `artifacts/race-place-archive-section-${width}.png` });
+      await page.getByRole("link", { name: /^View full race archive/ }).click();
+      await page.waitForURL("**/*view=archive#past-races");
+      assert.equal(
+        await page.locator("#past-races article h3").textContent(),
+        "Synthetic Past Race",
+      );
+      await page.getByRole("link", { name: "Back to upcoming races →", exact: true }).click();
+      await page.waitForURL("**/norfolk#upcoming-races");
+      assert.equal(await page.locator("#upcoming-races").count(), 1);
+
+      await page
         .getByRole("navigation", { name: "Sports and running distances" })
         .getByRole("link", { name: "Running", exact: true })
         .click();
@@ -171,14 +212,12 @@ if (process.argv.includes("--browser")) {
         width,
         page.url(),
         await page.locator("main h1").textContent(),
-        await page
-          .locator("select")
-          .evaluateAll((items) =>
-            items.map((item) => ({
-              name: item.name,
-              labels: [...item.labels].map((label) => label.textContent),
-            })),
-          ),
+        await page.locator("select").evaluateAll((items) =>
+          items.map((item) => ({
+            name: item.name,
+            labels: [...item.labels].map((label) => label.textContent),
+          })),
+        ),
       );
       await page.screenshot({
         path: `artifacts/race-place-before-filters-${width}.png`,
