@@ -17,9 +17,10 @@ alter table editions add column entry_url text; alter table editions add column 
 update editions set entry_url='https://example.org/synthetic-entry' where event_id=1;`);
 await db.exec(`insert into events values
   (3,'synthetic-wymondham','Synthetic Wymondham 10K','Running','England','Norfolk',null,'Wymondham','Fictional test event.',false),
-  (4,'synthetic-triathlon','Synthetic Triathlon','Triathlon','England','Norfolk',null,'Norwich','Fictional multisport event.',false);
+  (4,'synthetic-triathlon','Synthetic Triathlon','Triathlon','England','Norfolk',null,'Norwich','Fictional multisport event.',false),
+  (5,'synthetic-suffolk','Synthetic Suffolk 10K','Running','England','Suffolk',null,'Bury St Edmunds','Fictional nearby event.',false);
   insert into editions(event_id,event_date,distance_code,status) values
-  (3,'2040-06-01','10K','Open'),(4,'2040-05-01','10K','Open');
+  (3,'2040-06-01','10K','Open'),(4,'2040-05-01','10K','Open'),(5,'2040-06-01','10K','Open');
   insert into events select id,'synthetic-extra-'||id,'Synthetic Extra '||id,'Running','England','Norfolk',null,'Norwich','Fictional pagination event.',false from generate_series(10,40) id;
   insert into editions(event_id,event_date,distance_code,status) select id,'2040-07-01','10K','Closed' from generate_series(10,40) id;`);
 await db.exec(
