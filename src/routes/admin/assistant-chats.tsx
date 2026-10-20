@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { assistantConversationId } from "@/lib/athrecs/assistant-link";
 import {
   getStaffAssistantChats,
   getStaffAssistantTranscript,
@@ -8,6 +9,9 @@ import {
 } from "@/lib/athrecs/assistant-api";
 
 export const Route = createFileRoute("/admin/assistant-chats")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    chat: assistantConversationId(search.chat),
+  }),
   head: () => ({
     meta: [
       { title: "Chat transcripts — ATHRECS Staff" },
@@ -18,8 +22,12 @@ export const Route = createFileRoute("/admin/assistant-chats")({
 });
 
 function AssistantChats() {
+  const { chat: linkedChat } = Route.useSearch();
   const [page, setPage] = useState(0);
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null>(linkedChat ?? null);
+  useEffect(() => {
+    if (linkedChat) setSelected(linkedChat);
+  }, [linkedChat]);
   const queryClient = useQueryClient();
   const chats = useQuery({
     queryKey: ["staff-assistant-chats", page],
@@ -80,6 +88,38 @@ function AssistantChats() {
           secret, persistent database and ATHRECS_ASSISTANT_ENABLED=true, then redeploy. No chat
           launcher is shown to visitors until these are set.
         </p>
+      ) : null}
+      {chats.data?.alerts ? (
+        <section
+          className="rounded-xl border border-border bg-surface p-4 text-sm"
+          aria-label="WhatsApp notification status"
+        >
+          <h2 className="font-semibold">
+            WhatsApp alerts {chats.data.alerts.enabled ? "enabled" : "off"}
+          </h2>
+          <p className="mt-1 text-muted">
+            {chats.data.alerts.enabled
+              ? `New visitor messages trigger an immediate alert attempt to the number ending ${chats.data.alerts.recipientEnding}. Tap the notification to open the conversation here.`
+              : "Phone notifications are not active. Connect and verify the receiving number and WhatsApp account before enabling alerts."}
+          </p>
+          {chats.data.alerts.missing.length ? (
+            <p className="mt-2 text-muted">Setup needed: {chats.data.alerts.missing.join(", ")}.</p>
+          ) : null}
+          <p className="mt-2 text-xs text-muted">
+            Monthly limit: {chats.data.alerts.monthlyLimit} delivery attempts. Provider acceptance
+            does not confirm arrival on your phone. This inbox supports transcript review; personal
+            replies are not yet available.
+          </p>
+          {chats.data.alerts.states.length ? (
+            <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+              {chats.data.alerts.states.map((item) => (
+                <li key={item.status}>
+                  {item.status === "accepted" ? "Accepted by WhatsApp" : item.status}: {item.count}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
       ) : null}
       {chats.isError || transcript.isError || remove.isError ? (
         <p role="alert" className="text-sm text-red-600">

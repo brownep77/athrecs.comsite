@@ -54,6 +54,7 @@ import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-cla
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
 import { Route as AdminSponsorshipRouteImport } from './routes/admin/sponsorship'
+import { Route as ApiAssistantChatAlertsRouteImport } from './routes/api/assistant-chat-alerts'
 import { Route as ApiAthleteInboxSyncRouteImport } from './routes/api/athlete-inbox-sync'
 import { Route as ApiAthletePhotosRouteImport } from './routes/api/athlete-photos'
 import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
@@ -327,6 +328,11 @@ const AdminSourcesRoute = AdminSourcesRouteImport.update({
 const AdminSponsorshipRoute = AdminSponsorshipRouteImport.update({
   id: '/admin/sponsorship',
   path: '/admin/sponsorship',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAssistantChatAlertsRoute = ApiAssistantChatAlertsRouteImport.update({
+  id: '/api/assistant-chat-alerts',
+  path: '/api/assistant-chat-alerts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAthleteInboxSyncRoute = ApiAthleteInboxSyncRouteImport.update({
@@ -617,6 +623,7 @@ export interface FileRoutesByFullPath {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/assistant-chat-alerts': typeof ApiAssistantChatAlertsRoute
   '/api/athlete-inbox-sync': typeof ApiAthleteInboxSyncRoute
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
@@ -711,6 +718,7 @@ export interface FileRoutesByTo {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/assistant-chat-alerts': typeof ApiAssistantChatAlertsRoute
   '/api/athlete-inbox-sync': typeof ApiAthleteInboxSyncRoute
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
@@ -806,6 +814,7 @@ export interface FileRoutesById {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/assistant-chat-alerts': typeof ApiAssistantChatAlertsRoute
   '/api/athlete-inbox-sync': typeof ApiAthleteInboxSyncRoute
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
@@ -902,6 +911,7 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/assistant-chat-alerts'
     | '/api/athlete-inbox-sync'
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
@@ -996,6 +1006,7 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/assistant-chat-alerts'
     | '/api/athlete-inbox-sync'
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
@@ -1090,6 +1101,7 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/assistant-chat-alerts'
     | '/api/athlete-inbox-sync'
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
@@ -1185,6 +1197,7 @@ export interface RootRouteChildren {
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
   AdminSponsorshipRoute: typeof AdminSponsorshipRoute
+  ApiAssistantChatAlertsRoute: typeof ApiAssistantChatAlertsRoute
   ApiAthleteInboxSyncRoute: typeof ApiAthleteInboxSyncRoute
   ApiAthletePhotosRoute: typeof ApiAthletePhotosRoute
   ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
@@ -1550,6 +1563,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/sponsorship'
       fullPath: '/admin/sponsorship'
       preLoaderRoute: typeof AdminSponsorshipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/assistant-chat-alerts': {
+      id: '/api/assistant-chat-alerts'
+      path: '/api/assistant-chat-alerts'
+      fullPath: '/api/assistant-chat-alerts'
+      preLoaderRoute: typeof ApiAssistantChatAlertsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/athlete-inbox-sync': {
@@ -1929,6 +1949,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
   AdminSponsorshipRoute: AdminSponsorshipRoute,
+  ApiAssistantChatAlertsRoute: ApiAssistantChatAlertsRoute,
   ApiAthleteInboxSyncRoute: ApiAthleteInboxSyncRoute,
   ApiAthletePhotosRoute: ApiAthletePhotosRoute,
   ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,

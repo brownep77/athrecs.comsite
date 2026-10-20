@@ -51,6 +51,7 @@ jobs:
       - name: Verify AI chat privacy, transcripts and usage limits
         run: |
           node --experimental-strip-types scripts/verify-assistant.mjs
+          node --experimental-strip-types scripts/verify-assistant-alerts.mjs
           node scripts/verify-assistant-access.mjs
 
       - name: Verify World Athletics refresh preservation

@@ -42,8 +42,10 @@ export async function runAssistantTurn(
     networkHash: string | null;
     input: AssistantInput;
     monthlyLimit: number;
+    alertDestinationKey?: string;
   },
   reply: (messages: ChatMessage[]) => Promise<string>,
+  afterAccepted?: (conversationId: string) => Promise<unknown>,
 ): Promise<ChatMessage[]> {
   const { tokenHash, networkHash, input, monthlyLimit } = context;
   await cleanupAssistant(sql);
@@ -83,14 +85,25 @@ export async function runAssistantTurn(
     if (networkHash)
       await consume(tx, `network:${hour}:${networkHash}`, 30, new Date(now.getTime() + 7200000));
     await consume(tx, `session:${hour}:${tokenHash}`, 12, new Date(now.getTime() + 7200000));
-    await tx`INSERT INTO assistant_messages (conversation_id, request_id, role, content, language)
-      VALUES (${conversation.id}, ${input.requestId}, 'user', ${input.message}, ${input.language})`;
+    const [message] = await tx<{
+      id: string;
+    }>`INSERT INTO assistant_messages (conversation_id, request_id, role, content, language)
+      VALUES (${conversation.id}, ${input.requestId}, 'user', ${input.message}, ${input.language}) RETURNING id::text`;
+    if (context.alertDestinationKey)
+      await tx`INSERT INTO assistant_chat_alerts(message_id, conversation_id, destination_key)
+        VALUES (${message.id}::bigint, ${conversation.id}, ${context.alertDestinationKey})
+        ON CONFLICT (message_id) DO NOTHING`;
     await tx`UPDATE assistant_conversations SET language = ${input.language}, updated_at = now(),
       active_request = ${input.requestId}, processing_until = now() + interval '60 seconds'
       WHERE id = ${conversation.id}`;
     return conversation.id;
   });
   if (!reservation) return readAssistantHistory(sql, tokenHash);
+  // Start immediately after the visitor message commits, alongside AI generation.
+  // Await before returning so serverless shutdown cannot silently discard delivery.
+  const alertAttempt = Promise.resolve()
+    .then(() => afterAccepted?.(reservation))
+    .catch(() => undefined);
   let content: string;
   let status: "complete" | "unavailable" = "complete";
   try {
@@ -102,6 +115,7 @@ export async function runAssistantTurn(
     content = assistantCopy[input.language].unavailable;
     status = "unavailable";
   }
+  await alertAttempt;
   await sql.transaction(async (tx) => {
     const lease = await tx`SELECT id FROM assistant_conversations WHERE id = ${reservation}
       AND active_request = ${input.requestId} FOR UPDATE`;

@@ -142,3 +142,8 @@ The application sends store:false. That disables Responses application-state
 storage; it is not a promise of zero retention across provider abuse-monitoring,
 Gateway observability or database backups. Review those account controls separately
 ([OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data)).
+
+
+## WhatsApp message-alert implementation
+
+See [assistant-whatsapp-alerts.md](assistant-whatsapp-alerts.md) for the new opt-in notification outbox, immediate delivery attempt, authenticated retry worker, staff status and activation requirements. This supersedes the earlier statement that all notification implementation is outstanding; account setup and a real phone-delivery check remain outstanding. Human takeover and two-way replies remain separate work.
