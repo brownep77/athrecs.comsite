@@ -266,9 +266,10 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
         >
           {data.archive ? <input type="hidden" name="view" value="archive" /> : null}
           {!data.archive ? (
-            <label className="min-w-40 flex-1 text-sm font-semibold">
-              Month
+            <div className="min-w-40 flex-1 text-sm font-semibold">
+              <label htmlFor="race-place-month">Month</label>
               <select
+                id="race-place-month"
                 name="month"
                 defaultValue={data.filters.month ?? ""}
                 className="mt-2 block min-h-11 w-full rounded-lg border border-border bg-surface p-2 font-normal"
@@ -284,12 +285,13 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
                   </option>
                 ))}
               </select>
-            </label>
+            </div>
           ) : null}
-          <label className="min-w-40 flex-1 text-sm font-semibold">
-            Town or city
+          <div className="min-w-40 flex-1 text-sm font-semibold">
+            <label htmlFor="race-place-city">Town or city</label>
             {data.cities.length <= 100 ? (
               <select
+                id="race-place-city"
                 name="city"
                 defaultValue={data.filters.city ?? ""}
                 className="mt-2 block min-h-11 w-full rounded-lg border border-border bg-surface p-2 font-normal"
@@ -307,13 +309,14 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
               </select>
             ) : (
               <input
+                id="race-place-city"
                 name="city"
                 defaultValue={data.filters.city ?? ""}
                 placeholder="Enter a town or city"
                 className="mt-2 block min-h-11 w-full rounded-lg border border-border bg-surface p-2 font-normal"
               />
             )}
-          </label>
+          </div>
           <button
             type="submit"
             className="min-h-11 rounded-lg border border-accent bg-surface px-5 py-2 font-semibold"

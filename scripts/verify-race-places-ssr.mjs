@@ -166,6 +166,24 @@ if (process.argv.includes("--browser")) {
         .getByRole("link", { name: "10K", exact: true })
         .click();
       await page.waitForURL("**/running/10k");
+      console.log(
+        "Browser distance page",
+        width,
+        page.url(),
+        await page.locator("main h1").textContent(),
+        await page
+          .locator("select")
+          .evaluateAll((items) =>
+            items.map((item) => ({
+              name: item.name,
+              labels: [...item.labels].map((label) => label.textContent),
+            })),
+          ),
+      );
+      await page.screenshot({
+        path: `artifacts/race-place-before-filters-${width}.png`,
+        fullPage: true,
+      });
       assert.equal(
         await page.getByRole("heading", { name: "Synthetic Triathlon", exact: true }).count(),
         0,
