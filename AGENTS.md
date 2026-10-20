@@ -76,3 +76,5 @@ publication and personal-best calculations in this repository.
   This profile presentation exception supersedes the general public provider-credit
   rule above; it does not establish reuse permission or override required licence
   attribution (including photo credits).
+
+- Owner instruction, 20 October 2026: when researching race results, add any newly found results websites missing from Sources. Check the existing registry and wider event inventory for duplicates; retain the actual URL, provider credit, checked date and coverage evidence. Registration alone does not enable automated collection or verify participant results.

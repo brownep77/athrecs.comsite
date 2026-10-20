@@ -20,9 +20,9 @@ assert.equal(
   manifest.length,
   "Bulk-run manifest contains duplicate source jobs",
 );
-assert.equal(summary.sources, 288, "Bulk run no longer contains all 288 registered sources");
+assert.equal(summary.sources, 299, "Bulk run no longer contains all 299 registered sources");
 assert.equal(summary.runnable, 36, "Runnable source count changed without registry review");
-assert.equal(summary.blocked, 252, "Blocked source count changed without registry review");
+assert.equal(summary.blocked, 263, "Blocked source count changed without registry review");
 
 for (const source of manifest) {
   if (source.queue_status === "queued") {
