@@ -6,7 +6,6 @@ import { raceLocalDate } from "../running/road-marathon-calendar";
 import {
   PLACE_SPORTS,
   PLACE_TERRAINS,
-  PLACE_DISTANCES,
   MIN_PLACE_FACET_RACES,
   matchesPlaceDistance,
   placeFacetSuffix,

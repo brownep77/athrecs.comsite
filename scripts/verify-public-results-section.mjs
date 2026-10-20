@@ -250,6 +250,7 @@ try {
     "@tanstack/react-router": { createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: (options) => Object.assign(new Error("redirect"), options) },
     "lucide-react": {}, "@/components/ui/badge": {}, "@/components/ui/button": {},
     "@/components/athletes/CountryFlag": {},
+    "@/components/races/EventBadges": {},
     "@/lib/athrecs/public-results-api": api,
     "@/lib/athrecs/public-results-search": search,
     "@/lib/athrecs/format": format,

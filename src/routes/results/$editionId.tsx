@@ -1,7 +1,6 @@
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, SearchCheck } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";

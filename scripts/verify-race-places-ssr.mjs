@@ -92,7 +92,11 @@ for (const path of [
     );
     if (!path.endsWith("/10k"))
       assert($("main").text().includes("Upcoming running events include 10K races."));
-    assert($("main h1").text().includes(path.endsWith("/norfolk") ? "Norfolk sports and events" : "Norfolk, England"));
+    assert(
+      $("main h1")
+        .text()
+        .includes(path.endsWith("/norfolk") ? "Norfolk sports and events" : "Norfolk, England"),
+    );
   }
   if (path.includes("/running")) {
     assert(!$("main article h3").text().includes("Synthetic Triathlon"));
@@ -272,15 +276,29 @@ if (process.argv.includes("--browser")) {
       assert.equal(await page.locator("#upcoming-races").count(), 1);
 
       await page
-        .getByRole("navigation", { name: "Sports and running distances" })
+        .getByRole("navigation", { name: "Sports and distances" })
         .getByRole("link", { name: "Running", exact: true })
         .click();
       await page.waitForURL("**/norfolk/running");
       await page
-        .getByRole("navigation", { name: "Sports and running distances" })
+        .getByRole("navigation", { name: "Sports and distances" })
         .getByRole("link", { name: "10K", exact: true })
         .click();
       await page.waitForURL("**/running/10k");
+      const nearby = page.getByRole("navigation", { name: "Nearby counties", exact: true });
+      await nearby.getByRole("link", { name: /^Suffolk/ }).click();
+      await page.waitForURL("**/suffolk/running/10k");
+      assert((await page.locator("main h1").textContent()).includes("Suffolk"));
+      await page.goto(`${base}/running/10k`);
+      const asideBox = await page.locator("aside").boundingBox();
+      const filtersBox = await page
+        .getByRole("navigation", { name: "Sports and distances" })
+        .boundingBox();
+      assert(asideBox && filtersBox);
+      assert(
+        width >= 1024 ? asideBox.x > filtersBox.x : asideBox.y < filtersBox.y,
+        `${width}px: nearby counties use the right sidebar on desktop and appear above filters on mobile`,
+      );
       console.log(
         "Browser distance page",
         width,

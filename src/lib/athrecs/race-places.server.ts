@@ -11,7 +11,6 @@ import { buildRacePlaces, placePath, type PlaceRace } from "./race-places";
 import {
   PLACE_SPORTS,
   PLACE_TERRAINS,
-  PLACE_DISTANCES,
   MIN_PLACE_FACET_RACES,
   matchesPlaceDistance,
   placeFacetSuffix,

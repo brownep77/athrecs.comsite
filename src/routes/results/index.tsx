@@ -2,7 +2,6 @@ import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Search, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { listPublicResultEditions } from "@/lib/athrecs/public-results-api";
 import { normalizeResultsSearch } from "@/lib/athrecs/public-results-search";
 import { formatRaceDateShort } from "@/lib/athrecs/format";

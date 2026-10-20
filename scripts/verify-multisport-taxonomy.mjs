@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
-const compactSource = (value) => value.replace(/\s+/g, "").replace(/,([\]\)])/g, "$1");
+const compactSource = (value) => value.replace(/\s+/g, "").replace(/,([\])])/g, "$1");
 import { readFile } from "node:fs/promises";
 import {
   isTemporaryRunningEdition,

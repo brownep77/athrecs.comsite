@@ -10,7 +10,6 @@ import { getSportFixtures } from "@/lib/athrecs/sport-fixtures-api";
 import type { SportFixture } from "@/lib/athrecs/sport-fixtures.server";
 import { getSportPage, parseSportFixtureSearch } from "@/lib/athrecs/sport-pages";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
-import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
