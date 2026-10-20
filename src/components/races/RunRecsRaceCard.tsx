@@ -14,6 +14,7 @@ import { raceLink } from "@/lib/athrecs/race-information";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { RaceGroupBadges } from "./RaceGroupBadges";
+import { DistanceBadge, SportBadge } from "./EventBadges";
 
 export function RunRecsRaceCard({
   race,
@@ -85,11 +86,15 @@ export function RunRecsRaceCard({
             <p className="text-sm text-subtle">{race.area}</p>
           ) : null}
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-            <span className="font-semibold text-fg">{distances.join(" / ") || "Distance TBC"}</span>
+            <SportBadge sport={race.sport} />
+            {distances.length ? (
+              distances.map((distance) => <DistanceBadge key={distance} distance={distance} />)
+            ) : (
+              <span className="text-muted">Distance TBC</span>
+            )}
             {race.surface && race.surface !== "Other" ? (
               <span className="text-muted">· {race.surface}</span>
             ) : null}
-            {race.sport === "Parkrun" ? <span className="text-muted">· parkrun</span> : null}
           </div>
           {race.summary && race.summary.trim() !== race.name.trim() ? (
             <p className="line-clamp-2 text-sm leading-relaxed text-muted">{race.summary}</p>

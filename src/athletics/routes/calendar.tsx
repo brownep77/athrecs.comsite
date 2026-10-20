@@ -14,7 +14,9 @@ import {
   formatStartTime,
   statusLabel,
 } from "@/lib/athrecs/format";
-import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
+import { DistanceBadge, SportBadge } from "@/components/races/EventBadges";
+import { splitDistanceLabels } from "@/lib/athrecs/filters";
+import { sportDisplayLabel } from "@/lib/athrecs/event-colours";
 import type { EntryStatus } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -31,7 +33,12 @@ export const Route = createFileRoute("/calendar")({
       data: { upcomingOnly: true, limit: 40, offset: 0 },
     }),
   head: () => ({
-    meta: siteGraphMeta({ title: "Athletics calendar | Track, field and cross-country fixtures", description: "Browse athletics fixtures by date, location and discipline. Find track and field meetings, cross-country championships and road athletics events.", url: `${SITE_URL}/calendar` }),
+    meta: siteGraphMeta({
+      title: "Athletics calendar | Track, field and cross-country fixtures",
+      description:
+        "Browse athletics fixtures by date, location and discipline. Find track and field meetings, cross-country championships and road athletics events.",
+      url: `${SITE_URL}/calendar`,
+    }),
     links: [{ rel: "canonical", href: `${SITE_URL}/calendar` }],
   }),
   component: AthleticsCalendarPage,
@@ -45,7 +52,7 @@ function AthleticsCalendarPage() {
   const [page, setPage] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const empty = isEmptySearch(filters);
-  const sportLabel = filters.sport === "Triathlon" ? "Triathlon" : filters.sport === "Running" || filters.sport === "Parkrun" ? filters.sport : "Athletics";
+  const sportLabel = sportDisplayLabel(filters.sport);
   const { data = initial, isFetching } = useQuery<AthleticsCalendarPage>({
     queryKey: ["athletics-calendar", filters, page],
     queryFn: async () =>
@@ -76,15 +83,15 @@ function AthleticsCalendarPage() {
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-            Athletics, running and triathlon
+            Athletics, running, parkrun, triathlon and cycling
           </p>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-fg">
             {sportLabel} calendar
           </h1>
           <p className="max-w-2xl text-sm text-muted">
             Search track and field meetings, cross-country fixtures, road athletics and
-            championships by place, date, surface or distance. Select Running, Parkrun or Triathlon
-            to explore those fixtures.
+            championships by place, date, surface or distance. Select Running, parkrun, Triathlon or
+            Cycling to explore those fixtures.
           </p>
         </div>
         <button
@@ -143,7 +150,9 @@ function AthleticsCalendarPage() {
             ) : (
               <div className="rounded-xl border border-dashed border-border bg-surface px-5 py-12 text-center">
                 <CalendarDays className="mx-auto h-7 w-7 text-subtle" aria-hidden="true" />
-                <p className="mt-3 text-sm font-medium text-fg">No {sportLabel.toLowerCase()} events match.</p>
+                <p className="mt-3 text-sm font-medium text-fg">
+                  No {sportLabel.toLowerCase()} events match.
+                </p>
                 <p className="mt-1 text-xs text-muted">
                   Widen the date or location filters to see more fixtures.
                 </p>
@@ -191,10 +200,7 @@ function AthleticsCalendarCard({ edition }: { edition: AthleticsCalendarItem }) 
   const location = [
     ...new Set([edition.city, edition.county, edition.country].filter(Boolean)),
   ].join(", ");
-  const distanceLabel =
-    edition.surface === "Track" && /^(?:Other|Track & field)$/i.test(edition.distance_code)
-      ? "Track & field"
-      : formatDistanceWithUnits(edition.distance_code);
+  const distances = splitDistanceLabels(edition.distance_code);
   const spectatorLabel = spectatorAccessLabel(edition.spectator_access_type);
 
   return (
@@ -231,7 +237,18 @@ function AthleticsCalendarCard({ edition }: { edition: AthleticsCalendarItem }) 
           ) : edition.featured ? (
             <Badge variant="default">Major meeting</Badge>
           ) : null}
-          <Badge variant="outline">{distanceLabel}</Badge>
+          <SportBadge sport={edition.sport} />
+          {distances.map((distance) => (
+            <DistanceBadge
+              key={distance}
+              distance={distance}
+              label={
+                edition.surface === "Track" && /^(?:Other|Track & field)$/i.test(distance)
+                  ? "Track & field"
+                  : undefined
+              }
+            />
+          ))}
           {edition.surface ? <Badge variant="secondary">{edition.surface}</Badge> : null}
           {spectatorLabel ? (
             <Badge variant={edition.spectator_access_type === "free" ? "accent" : "outline"}>

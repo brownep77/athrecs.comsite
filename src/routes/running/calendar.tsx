@@ -17,7 +17,7 @@ import { TravelFacts } from "@/components/races/TravelFacts";
 const IS_RUNRECS_SITE = true;
 import { raceLocation } from "@/lib/athrecs/race-information";
 import { sanitizeDistances, splitDistanceLabels } from "@/lib/athrecs/filters";
-import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
+import { DistanceBadge, SportBadge } from "@/components/races/EventBadges";
 import type { VenueDetails } from "@/data/venue-details";
 import {
   EMPTY_SEARCH as BASE_SEARCH,
@@ -235,12 +235,10 @@ function EventCard({ ed }: { ed: CardModel }) {
         ) : null}
         <div className="flex flex-wrap items-center gap-1.5">
           <NationBadge nation={nation} />
-          <Badge variant="accent">{ed.sport}</Badge>
+          <SportBadge sport={ed.sport} />
           {ed.surface ? <Badge variant="outline">{ed.surface}</Badge> : null}
           {distances.map((code) => (
-            <Badge key={code} variant="outline">
-              {formatDistanceWithUnits(code)}
-            </Badge>
+            <DistanceBadge key={code} distance={code} />
           ))}
           <RaceGroupBadges groups={ed.groups ?? []} />
           <Badge variant={st === "Finished" ? "default" : "solid"}>{statusLabel(st)}</Badge>

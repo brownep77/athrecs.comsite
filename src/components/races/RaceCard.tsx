@@ -21,7 +21,8 @@ import {
 } from "@/lib/athrecs/format";
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
-import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
+import { sportColourClass, sportDisplayLabel } from "@/lib/athrecs/event-colours";
+import { DistanceBadge } from "./EventBadges";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
@@ -107,15 +108,13 @@ export function RaceCard({
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex flex-wrap items-center gap-1">
             <CountryFlag country={venue.nation} showCode />
-            <Badge variant="accent" className="gap-1">
+            <Badge className={`gap-1 ${sportColourClass(race.sport)}`}>
               <SportIcon sport={race.sport} />
-              {race.sport}
+              {sportDisplayLabel(race.sport)}
             </Badge>
             <Badge variant="outline">{race.surface}</Badge>
             {distances.slice(0, 4).map((d) => (
-              <Badge key={d} variant="outline">
-                {formatDistanceWithUnits(d)}
-              </Badge>
+              <DistanceBadge key={d} distance={d} />
             ))}
             {visibleStatus && (
               <Badge

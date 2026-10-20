@@ -16,6 +16,10 @@ import {
   type SubfilterKey,
 } from "@/lib/athrecs/filters";
 import { flagForCountryFilter } from "@/lib/athrecs/countries";
+import { cn } from "@/lib/utils";
+import { distanceColourClass } from "@/lib/athrecs/profile-colours";
+import { sportColourClass, sportDisplayLabel } from "@/lib/athrecs/event-colours";
+import { SportBadge } from "./EventBadges";
 
 export type EventSearchValues = {
   q: string;
@@ -148,24 +152,34 @@ export function EventSearch({
       </div>
 
       <section className={sectionClass} aria-labelledby="discipline-filter-heading">
-        <SectionHeading id="discipline-filter-heading" eyebrow="1" title="Discipline" />
+        <SectionHeading id="discipline-filter-heading" eyebrow="1" title="Sports & activities" />
         {lockedSport ? (
           <div className="rounded-lg border border-border bg-elevated px-3 py-2.5">
             <p className="text-[11px] font-medium uppercase tracking-wider text-subtle">
               Discipline
             </p>
-            <p className="mt-1 text-sm font-semibold text-fg">{lockedSport}</p>
+            <SportBadge sport={lockedSport} />
           </div>
+        ) : !PREFER_DROPDOWN_FILTERS && publicSports.length <= 7 ? (
+          <FilterChips
+            label="Choose a sport or activity"
+            options={publicSports}
+            value={value.sport}
+            onChange={(sport) => set("sport", sport)}
+            optionClassName={sportColourClass}
+            optionLabel={sportDisplayLabel}
+            wrap
+          />
         ) : (
           <Field label="Choose a discipline">
             <select
               value={value.sport}
               onChange={(event) => set("sport", event.target.value)}
-              className={fieldClass}
+              className={cn(fieldClass, sportColourClass(value.sport))}
             >
               {publicSports.map((sport) => (
                 <option key={sport} value={sport}>
-                  {sport === "All" ? "All disciplines" : sport}
+                  {sport === "All" ? "All disciplines" : sportDisplayLabel(sport)}
                 </option>
               ))}
             </select>
@@ -407,26 +421,45 @@ function DisciplineFilter({
         options={filter.options}
         value={value}
         onChange={onChange}
+        optionClassName={filter.key === "distance" ? distanceFilterClass : undefined}
         wrap
       />
     );
   }
 
   return (
-    <Field label={filter.label}>
-      <select
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className={fieldClass}
-      >
-        {filter.options.map((option) => (
-          <option key={option} value={option}>
-            {option === "All" ? `Any ${filter.label.toLowerCase()}` : option}
-          </option>
-        ))}
-      </select>
-    </Field>
+    <div className="space-y-2">
+      {filter.key === "distance" && !preferSelect ? (
+        <FilterChips
+          label="Popular distances"
+          options={filter.options.filter((option) =>
+            ["5K", "10K", "Half", "Marathon", "Ultra"].includes(option),
+          )}
+          value={value}
+          onChange={onChange}
+          optionClassName={distanceFilterClass}
+          wrap
+        />
+      ) : null}
+      <Field label={filter.label}>
+        <select
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className={cn(fieldClass, filter.key === "distance" && distanceFilterClass(value))}
+        >
+          {filter.options.map((option) => (
+            <option key={option} value={option}>
+              {option === "All" ? `Any ${filter.label.toLowerCase()}` : option}
+            </option>
+          ))}
+        </select>
+      </Field>
+    </div>
   );
+}
+
+function distanceFilterClass(distance: string): string {
+  return distance === "All" ? "border-border bg-surface text-fg" : distanceColourClass(distance);
 }
 
 function Field({ label, children }: { label: string; children: ReactNode }) {
