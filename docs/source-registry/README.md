@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 288 unique sources. Only 36 are enabled; the other 252 remain
+The registry contains 299 unique sources. Only 36 are enabled; the other 263 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 288 sources create exactly one source job;
+- all 299 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 252 sources are retained as blocked jobs with their reason;
+- the other 263 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -100,3 +100,9 @@ Run `npm run verify:sources`, `npm run verify:bulk-source-run` and
 domain allow-lists, limits, coverage years, regular expressions, rights status and the
 participant-level exclusion rule, complete one-job-per-source bulk-run coverage, and the
 audit metadata for every event-level enrichment.
+
+## Historical-result research additions, 20 October 2026
+
+Registered UK Results, SportSoft / Race Results, Joe Lee Computing and Sunderland Harriers results after opening their indexes and sample result pages. All four are disabled for automated collection. Website registration does not verify an athlete result or approve bulk participant reuse. UK Results and SportSoft already had wider event-register entries; those are retained without duplicate websites. Joe Lee and Sunderland Harriers are new to that inventory.
+
+When researching results, check the source inventory and register any missing result website with its actual URL, provider credit and checked evidence. Preserve existing review and collection settings.
