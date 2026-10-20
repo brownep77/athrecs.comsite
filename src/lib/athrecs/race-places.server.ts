@@ -3,17 +3,19 @@ import { fixtureTimeZone } from "./fixture-presentation";
 import { resolveCountry } from "./countries";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication";
 import { eventSlugAliases } from "../../data/entry-options";
+import { FIXTURE_DETAILS } from "../../data/fixture-details";
+import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews";
 import { ROAD_MARATHONS } from "../../data/road-marathons";
 import { ROAD_HALF_MARATHONS } from "../../data/road-half-marathons";
 import { buildRacePlaces, placePath, type PlaceRace } from "./race-places";
 import {
   PLACE_SPORTS,
   PLACE_TERRAINS,
-  PLACE_DISTANCES,
   MIN_PLACE_FACET_RACES,
   matchesPlaceDistance,
   placeFacetSuffix,
   placeRaceDistanceCodes,
+  distancesForPlaceSport,
 } from "./race-place-facets";
 
 const checkedZones = new Map(
@@ -39,21 +41,39 @@ export async function queryRacePlaceRows(
         and ed.event_date < $1::date and ed.status <> 'Cancelled') as "lastDate",
       coalesce((select json_agg(json_build_object(
         'date', ed.event_date::text, 'distance', ed.distance_code, 'status', ed.status, 'entryUrl', ed.entry_url,
+        'startTime', ed.start_time, 'sourceUrl', ed.source_url,
         'endDate', case when ed.end_source_url is not null and ed.end_checked_at is not null
           and ed.end_date >= ed.event_date then ed.end_date::text end
       ) order by ed.event_date, ed.distance_code) from editions ed
-      where ed.event_id=e.id and coalesce(ed.end_date, ed.event_date) >= $1::date - interval '2 days'), '[]') as editions
-    from events e where e.sport in ('Running','Athletics','Triathlon')
+      where ed.event_id=e.id and coalesce(ed.end_date, ed.event_date) >= $1::date - interval '2 days'
+        and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($4::text[]))), '[]') as editions
+    from events e where e.sport in ('Running','Athletics','Triathlon','Parkrun','Cycling','Swimming','Duathlon')
       and not (e.slug = any($2::text[]))
       and not exists (select 1 from jsonb_to_recordset($3::jsonb) a(old_slug text, current_slug text)
         join events target on target.slug = coalesce((select current_slug from slug_redirects
           where entity_type='event' and old_slug=a.current_slug), a.current_slug)
         where a.old_slug=e.slug and target.id<>e.id)
     order by e.id`,
-    [now.slice(0, 10), retainedFixtureAliasSlugs, aliases],
+    [now.slice(0, 10), retainedFixtureAliasSlugs, aliases, withheldFixtureDateKeys],
   );
   return rows.map((race) => ({
     ...race,
+    editions: race.editions.map((edition) => {
+      const detail = FIXTURE_DETAILS[`${race.slug}|${edition.date}`];
+      const checked = detail?.starts[edition.distance];
+      return {
+        ...edition,
+        startTime: checked
+          ? checked.time
+          : edition.sourceUrl && !/runabc\.co\.uk/i.test(edition.sourceUrl)
+            ? edition.startTime
+            : null,
+        startNote: checked?.note ?? null,
+        sourceUrl: detail?.sourceUrl ?? edition.sourceUrl,
+        checkedAt: detail?.checkedAt ?? null,
+        checkedCity: detail?.place?.city ?? detail?.place?.town ?? null,
+      };
+    }),
     timeZone:
       checkedZones.get(race.slug) ??
       fixtureTimeZone(resolveCountry({ country: race.country }).name),
@@ -96,7 +116,7 @@ export function racePlaceSitemapPaths(rows: readonly PlaceRace[]) {
           const matching = scoped.filter((race) => race.surface === terrain.surface);
           if (matching.length < MIN_PLACE_FACET_RACES) continue;
           paths.push(path + placeFacetSuffix(sport, null, terrain));
-          for (const distance of PLACE_DISTANCES)
+          for (const distance of distancesForPlaceSport(sport))
             if (
               matching.filter((race) =>
                 placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, distance)),
@@ -104,14 +124,14 @@ export function racePlaceSitemapPaths(rows: readonly PlaceRace[]) {
             )
               paths.push(path + placeFacetSuffix(sport, distance, terrain));
         }
-        for (const distance of PLACE_DISTANCES) {
-          if (
-            scoped.filter((race) =>
-              placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, distance)),
-            ).length >= MIN_PLACE_FACET_RACES
-          )
-            paths.push(path + placeFacetSuffix(sport, distance));
-        }
+      }
+      for (const distance of distancesForPlaceSport(sport)) {
+        if (
+          scoped.filter((race) =>
+            placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, distance)),
+          ).length >= MIN_PLACE_FACET_RACES
+        )
+          paths.push(path + placeFacetSuffix(sport, distance));
       }
     }
     return paths;

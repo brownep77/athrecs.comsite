@@ -368,10 +368,10 @@ await db.exec(`create table events(id int, slug text, name text, sport text, cou
  create table event_groups(event_id int,level text);
  create table slug_redirects(entity_type text, old_slug text, current_slug text);
  insert into events values (1,'synthetic-uk','UK fixture','Running','England','Norfolk',null,'Norwich','Test',true),
- (2,'synthetic-private-sport','Unsupported sport','Cycling','England','Norfolk',null,'Norwich','Test',true);
+ (2,'synthetic-private-sport','Unsupported sport','Rowing','England','Norfolk',null,'Norwich','Test',true);
  insert into editions values (1,'2026-10-19','10K','Open','2026-10-23',null,null),
  (1,'2027-05-01','Half','Closed',null,null,null);
- alter table editions add column entry_url text;`);
+ alter table editions add column entry_url text; alter table editions add column start_time text; alter table editions add column source_url text;`);
 await db.exec(
   "alter table events add column surface text; update events set surface='Road' where sport='Running'",
 );
@@ -385,6 +385,16 @@ assert.equal(
   nextPlaceEdition(loaded[0], now).date,
   "2027-05-01",
   "closed entry remains a scheduled race",
+);
+// A reviewed date hold hides only that exact edition and retains the original database record.
+await db.exec(`update events set slug='gear-10k-kings-lynn' where id=1;
+  insert into editions(event_id,event_date,distance_code,status) values(1,'2026-11-08','10K','Open');`);
+const held = await queryRacePlaceRows(sql, now);
+assert(!held[0].editions.some((edition) => edition.date === "2026-11-08"));
+assert(held[0].editions.some((edition) => edition.date === "2027-05-01"));
+assert.equal(
+  (await db.query("select count(*)::int n from editions where event_date='2026-11-08'")).rows[0].n,
+  1,
 );
 await db.close();
 if (process.argv.includes("--catalogue")) {

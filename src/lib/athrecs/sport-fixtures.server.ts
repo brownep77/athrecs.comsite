@@ -6,6 +6,7 @@ import { FIXTURE_DETAILS } from "../../data/fixture-details.ts";
 import { fixtureSummary, fixtureTimeZone } from "./fixture-presentation.ts";
 import { filterCountryName, resolveCountry } from "./countries.ts";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication.ts";
+import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews.ts";
 
 export const SPORT_FIXTURE_PAGE_SIZE = 24;
 
@@ -54,6 +55,7 @@ export async function readSportFixtures(
     `select distinct btrim(e.country) as country, btrim(ed.distance_code) as distance
      from events e join editions ed on ed.event_id = e.id
      where e.sport = any($1::text[]) and ed.event_date >= $2::date
+       and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($5::text[]))
        and not (coalesce(e.slug, '') = any($4::text[]))
        and ($3::text[] is null or e.surface = any($3::text[]))`,
     [
@@ -61,6 +63,7 @@ export async function readSportFixtures(
       today,
       input.surfaces ? [...input.surfaces] : null,
       retainedFixtureAliasSlugs,
+      withheldFixtureDateKeys,
     ],
   );
   const distanceCodes = [
@@ -99,6 +102,7 @@ export async function readSportFixtures(
         order by ed.start_time nulls last, ed.distance_code, ed.id)::text as starts_json
     from events e join editions ed on ed.event_id = e.id
     where e.sport = any($1::text[]) and ed.event_date >= $2::date
+      and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($10::text[]))
       and not (coalesce(e.slug, '') = any($9::text[]))
       and ($3::text is null or e.name ilike $3 or e.city ilike $3 or e.county ilike $3 or e.country ilike $3)
       and ($6::text[] is null or e.surface = any($6::text[]))
@@ -118,6 +122,7 @@ export async function readSportFixtures(
       country,
       distance,
       retainedFixtureAliasSlugs,
+      withheldFixtureDateKeys,
     ],
   );
   // Options cover the whole upcoming sport catalogue, not just the current page
@@ -164,7 +169,7 @@ export async function readSportFixtures(
               sourceUrl && /(^|\.)runabc\.co\.uk$/i.test(new URL(sourceUrl).hostname);
             return {
               distance: start.distance,
-              time: checked?.time ?? (sourceUrl && !legacyImport ? start.time : null),
+              time: checked ? checked.time : sourceUrl && !legacyImport ? start.time : null,
               sourceUrl,
               checkedAt: checked ? detail.checkedAt : null,
               note: checked?.note ?? null,

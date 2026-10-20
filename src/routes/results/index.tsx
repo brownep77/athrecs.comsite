@@ -1,7 +1,7 @@
+import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Search, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { listPublicResultEditions } from "@/lib/athrecs/public-results-api";
 import { normalizeResultsSearch } from "@/lib/athrecs/public-results-search";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
@@ -218,8 +218,8 @@ function ResultsPage() {
               >
                 <div className="min-w-0 space-y-2">
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">{edition.sport}</Badge>
-                    <Badge variant="outline">{edition.distance_code}</Badge>
+                    <SportBadge sport={edition.sport} />
+                    <DistanceBadge distance={edition.distance_code} />
                   </div>
                   <h3 className="font-semibold leading-snug text-fg group-hover:text-accent">
                     {edition.event_name}

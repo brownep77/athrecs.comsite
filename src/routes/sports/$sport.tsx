@@ -1,3 +1,5 @@
+import { DistanceBadge, SportBadge } from "@/components/races/EventBadges";
+import { sportGuideText, disciplineIntros } from "@/lib/athrecs/sport-guide-text";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, CalendarDays, Search, Trophy, Tv } from "lucide-react";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
@@ -8,7 +10,6 @@ import { getSportFixtures } from "@/lib/athrecs/sport-fixtures-api";
 import type { SportFixture } from "@/lib/athrecs/sport-fixtures.server";
 import { getSportPage, parseSportFixtureSearch } from "@/lib/athrecs/sport-pages";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
-import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
@@ -41,8 +42,8 @@ export const Route = createFileRoute("/sports/$sport")({
     return {
       meta: [
         ...siteGraphMeta({
-          title: `${sport.label} on TV, fixtures & results | ATHRECS.com`,
-          description: `Find ${sport.label.toLowerCase()} on TV and live streams, browse upcoming fixtures and explore results on AthRecs.`,
+          title: `${sport.label} events, dates & results | AthRecs`,
+          description: disciplineIntros[sport.slug] ?? sportGuideText(sport.sport).intro,
           url,
         }),
         ...(match.search.q || match.search.country || match.search.distance || match.search.page
@@ -80,11 +81,15 @@ function SportPage() {
     <div className="space-y-7 pb-6">
       <header className="flex flex-wrap items-end justify-between gap-4 border-b border-border pb-5">
         <div>
+          <SportBadge sport={sport.sport} />
           <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {sport.label}
           </h1>
-          <p className="mt-2 text-sm text-muted">
-            TV & live streams, upcoming fixtures, results, race reports and news.
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
+            {disciplineIntros[sport.slug] ?? sportGuideText(sport.sport).intro}
+          </p>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
+            {sportGuideText(sport.sport).planning}
           </p>
         </div>
         <Button asChild>
@@ -450,9 +455,7 @@ function FixtureRow({ fixture, category }: { fixture: SportFixture; category: st
         >
           {starts.map((start, index) => (
             <li key={`${start.distance}-${index}`} className="text-muted">
-              <span className="font-medium text-fg">
-                {formatDistanceWithUnits(start.distance).replace(/^\d+(?:\.\d+)?K · /i, "")}
-              </span>
+              <DistanceBadge distance={start.distance} />
               {" · "}
               <span className="whitespace-nowrap">
                 {sharedZone ? start.label.replace(` ${sharedZone}`, "") : start.label}

@@ -17,7 +17,7 @@ import { TravelFacts } from "@/components/races/TravelFacts";
 const IS_RUNRECS_SITE = true;
 import { raceLocation } from "@/lib/athrecs/race-information";
 import { sanitizeDistances, splitDistanceLabels } from "@/lib/athrecs/filters";
-import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
+import { DistanceBadge, SportBadge } from "@/components/races/EventBadges";
 import type { VenueDetails } from "@/data/venue-details";
 import {
   EMPTY_SEARCH as BASE_SEARCH,
@@ -68,7 +68,12 @@ export const Route = createFileRoute("/running/calendar")({
     return { initial, highlighted };
   },
   head: () => ({
-    meta: siteGraphMeta({ title: "Running calendar | ATHRECS", description: "Find running race dates, distances, locations and official race information on AthRecs.", url: `${SITE_URL}/running/calendar` }),
+    meta: siteGraphMeta({
+      title: "Running calendar | ATHRECS",
+      description:
+        "Find running race dates, distances, locations and official race information on AthRecs.",
+      url: `${SITE_URL}/running/calendar`,
+    }),
     links: [{ rel: "canonical", href: `${SITE_URL}/running/calendar` }],
   }),
   component: CalendarPage,
@@ -78,7 +83,9 @@ function CalendarPage() {
   const { initial, highlighted } = Route.useLoaderData();
   const [filters, setFilters] = useState<EventSearchValues>(EMPTY_SEARCH);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const empty = Object.entries(EMPTY_SEARCH).every(([key, value]) => filters[key as keyof EventSearchValues] === value);
+  const empty = Object.entries(EMPTY_SEARCH).every(
+    ([key, value]) => filters[key as keyof EventSearchValues] === value,
+  );
   const { data = initial, isFetching } = useQuery({
     queryKey: ["running-calendar", filters],
     queryFn: () =>
@@ -98,7 +105,9 @@ function CalendarPage() {
     <div className="space-y-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Running calendar</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">
+            Running calendar
+          </h1>
           <p className="max-w-2xl text-sm text-muted">
             Use the country, area or region, distance and surface dropdowns, then narrow by city,
             postcode or date.
@@ -168,7 +177,13 @@ function CalendarPage() {
               : "hidden lg:block lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto"
           }
         >
-          <EventSearch sports={["All", "Running", "Parkrun"]} defaultSport="All" value={filters} onChange={setFilters} variant="sidebar" />
+          <EventSearch
+            sports={["All", "Running", "Parkrun"]}
+            defaultSport="All"
+            value={filters}
+            onChange={setFilters}
+            variant="sidebar"
+          />
         </div>
 
         <div className="min-w-0 space-y-3">
@@ -235,12 +250,10 @@ function EventCard({ ed }: { ed: CardModel }) {
         ) : null}
         <div className="flex flex-wrap items-center gap-1.5">
           <NationBadge nation={nation} />
-          <Badge variant="accent">{ed.sport}</Badge>
+          <SportBadge sport={ed.sport} />
           {ed.surface ? <Badge variant="outline">{ed.surface}</Badge> : null}
           {distances.map((code) => (
-            <Badge key={code} variant="outline">
-              {formatDistanceWithUnits(code)}
-            </Badge>
+            <DistanceBadge key={code} distance={code} />
           ))}
           <RaceGroupBadges groups={ed.groups ?? []} />
           <Badge variant={st === "Finished" ? "default" : "solid"}>{statusLabel(st)}</Badge>

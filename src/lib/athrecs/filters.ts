@@ -34,7 +34,15 @@ export const DISTANCE_FILTERS = [
   "12.5mi",
   "21K",
   "Half",
+  "15mi",
+  "20mi",
   "Marathon",
+  "50K",
+  "75K",
+  "50mi",
+  "100K",
+  "100mi",
+  "200K",
   "Ultra",
   "Other",
 ] as const;
@@ -43,7 +51,55 @@ export const TERRAIN_FILTERS = ["All", "Road", "Trail", "Mixed", "Fell", "Track"
 
 export { COUNTRY_FILTERS, COUNTRY_GROUPS, PARKRUN_COUNTRY_SHORTCUTS } from "./countries";
 
-export const SWIM_DISTANCE_FILTERS = ["All", "1K", "5K", "10K", "Other"] as const;
+export const TRACK_DISTANCE_FILTERS = [
+  "60m",
+  "100m",
+  "200m",
+  "300m",
+  "400m",
+  "600m",
+  "800m",
+  "1000m",
+  "1500m",
+] as const;
+export const SWIM_DISTANCE_FILTERS = [
+  "All",
+  "25m",
+  "50m",
+  "100m",
+  "200m",
+  "400m",
+  "800m",
+  "1500m",
+  "1K",
+  "2K",
+  "2.5K",
+  "3K",
+  "5K",
+  "10K",
+  "25K",
+  "Other",
+] as const;
+export const CYCLING_DISTANCE_FILTERS = [
+  "All",
+  "10K",
+  "20K",
+  "25K",
+  "40K",
+  "50K",
+  "60K",
+  "75K",
+  "90K",
+  "100K",
+  "120K",
+  "150K",
+  "180K",
+  "200K",
+  "300K",
+  "400K",
+  "600K",
+  "Other",
+] as const;
 
 export const FORMAT_FILTERS = [
   "All",
@@ -99,7 +155,13 @@ const ATHLETICS_SUBFILTERS: SubfilterDef[] = [
   {
     key: "distance",
     label: "Event type / distance",
-    options: [...DISTANCE_FILTERS.slice(0, -1), "Track & field", "Other"],
+    options: [
+      "All",
+      ...TRACK_DISTANCE_FILTERS,
+      ...DISTANCE_FILTERS.slice(1, -1),
+      "Track & field",
+      "Other",
+    ],
   },
 ];
 
@@ -109,6 +171,7 @@ const PARKRUN_SUBFILTERS: SubfilterDef[] = [
 ];
 
 const CYCLING_SUBFILTERS: SubfilterDef[] = [
+  { key: "distance", label: "Distance", options: CYCLING_DISTANCE_FILTERS },
   {
     key: "surface",
     label: "Cycling surface",

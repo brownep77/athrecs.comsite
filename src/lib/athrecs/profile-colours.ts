@@ -27,26 +27,49 @@ export type ProfileTone = keyof typeof tones;
 export const profileToneClass = (tone: ProfileTone) => tones[tone];
 
 const standardDistances: readonly (readonly [number, ProfileTone])[] = [
+  [0.025, "mint"],
+  [0.05, "sky"],
+  [0.06, "lilac"],
   [0.1, "coral"],
   [0.2, "gold"],
+  [0.3, "peach"],
   [0.4, "lime"],
+  [0.6, "cyan"],
   [0.8, "green"],
   [1, "gold"],
   [1.5, "teal"],
   [1.609344, "cyan"],
+  [2, "teal"],
+  [2.5, "green"],
   [3, "blue"],
   [5, "mint"],
+  [6.437376, "gold"],
   [8.04672, "peach"],
   [10, "sky"],
+  [12, "cyan"],
+  [15, "orchid"],
   [16.09344, "lilac"],
+  [20, "peach"],
+  [25, "teal"],
   [24.14016, "orchid"],
   [21.0975, "rose"],
   [32.18688, "lemon"],
   [42.195, "periwinkle"],
+  [40, "blue"],
   [50, "lavender"],
+  [60, "green"],
+  [75, "rose"],
   [80.4672, "sand"],
+  [90, "orchid"],
   [100, "slate"],
+  [120, "cyan"],
+  [150, "lilac"],
   [160.9344, "pink"],
+  [180, "periwinkle"],
+  [200, "lavender"],
+  [300, "rose"],
+  [400, "slate"],
+  [600, "sand"],
 ];
 const fallbackTones = Object.keys(tones) as ProfileTone[];
 
@@ -55,6 +78,11 @@ export function distanceTone(code: string, distanceKm = 0): ProfileTone {
   const label = code.trim().toLowerCase().replaceAll(",", "").replace(/\s+/g, " ");
   if (/^(?:half|half marathon|hm)$/.test(label)) return "rose";
   if (/^(?:full )?marathon$/.test(label)) return "periwinkle";
+  if (/^super[ -]?sprint$/.test(label)) return "mint";
+  if (label === "sprint") return "sky";
+  if (/^(standard|olympic)$/.test(label)) return "gold";
+  if (/^(middle(?: distance)?|70\.3|half[ -]?iron(?:man)?)$/.test(label)) return "rose";
+  if (/^(iron(?:man)?|full|long)(?:[ -]distance)?$/.test(label)) return "lavender";
   // Road result codes use uppercase M for miles; lowercase m remains metres.
   const miles = code.trim().match(/^(\d+(?:\.\d+)?)\s*M$/);
   let km =
@@ -77,8 +105,8 @@ export function distanceTone(code: string, distanceKm = 0): ProfileTone {
     }
   }
   for (const [standard, tone] of standardDistances) {
-    if ([standard, +standard.toFixed(1), +standard.toFixed(2), +standard.toFixed(3)].includes(km))
-      return tone;
+    // Metre precision accommodates stored race lengths without equating 5 miles and 8 km.
+    if (Math.abs(standard - km) < 0.00051) return tone;
   }
   if (/^ultra(?: marathon)?$/.test(label)) return "lavender";
   // Uncommon distances still receive a stable colour on every profile and every render.

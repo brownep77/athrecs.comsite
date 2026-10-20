@@ -1,3 +1,4 @@
+import { SportBadge } from "@/components/races/EventBadges";
 import { Link } from "@tanstack/react-router";
 import type { PublicAthletePreview as Preview } from "@/lib/athrecs/public-athlete-preview";
 import { CompactResultsTable } from "./CompactResultsTable";
@@ -53,9 +54,7 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             {profile.sports.length > 1 ? "Sports:" : "Sport:"}
           </span>
           {profile.sports.map((sport) => (
-            <Badge key={sport} variant="outline">
-              {sport}
-            </Badge>
+            <SportBadge key={sport} sport={sport} />
           ))}
         </div>
         {biography.length ? (

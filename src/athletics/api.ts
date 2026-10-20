@@ -1,3 +1,4 @@
+import { withheldFixtureDateKeys } from "../data/fixture-date-reviews";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "../lib/athrecs/seed.server";
@@ -5,11 +6,12 @@ import { todayIso } from "../lib/athrecs/format";
 import type { SpectatorAccessType, Sport } from "../lib/athrecs/types";
 import { queryRunningEvents, queryRunningRegions } from "../lib/running/catalogue.server";
 import { supplementedStart } from "../data/runrecs-race-guides";
+import { FIXTURE_DETAILS, checkedFixtureStart } from "../data/fixture-details";
 import * as base from "../lib/athrecs/api";
 
 // Keep staff, import and shared-network functions available. The explicit
 // exports below replace only public catalogue functions that require the
-// Athletics, Running, Parkrun and Triathlon catalogue boundary.
+// Athletics, Running, Parkrun, Triathlon and Cycling catalogue boundary.
 export * from "../lib/athrecs/api";
 
 const ATHLETICS_SPORT = "Athletics" as const;
@@ -35,7 +37,13 @@ export const listEventRegions = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     if (data.sport === "Running" || data.sport === "Parkrun" || data.sport === "All")
       return queryRunningRegions(data);
-    if (data.sport === "Triathlon") return base.listEventRegions({ data });
+    if (
+      data.sport === "Triathlon" ||
+      data.sport === "Cycling" ||
+      data.sport === "Swimming" ||
+      data.sport === "Duathlon"
+    )
+      return base.listEventRegions({ data });
     if (data.sport && !isAthleticsSport(data.sport)) return [];
     return base.listEventRegions({ data: { ...data, sport: ATHLETICS_SPORT } });
   });
@@ -70,7 +78,13 @@ export const listEvents = createServerFn({ method: "GET" })
         distance: data.distance === "All" ? undefined : data.distance,
       });
     }
-    if (data.sport === "Triathlon") return base.listEvents({ data });
+    if (
+      data.sport === "Triathlon" ||
+      data.sport === "Cycling" ||
+      data.sport === "Swimming" ||
+      data.sport === "Duathlon"
+    )
+      return base.listEvents({ data });
     if (data.sport && !isAthleticsSport(data.sport)) return [];
     return base.listEvents({
       data: {
@@ -85,22 +99,47 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const result = await base.getEventBySlug({ data });
     if (!result) return null;
-    if (!["Athletics", "Running", "Parkrun", "Triathlon"].includes(result.event.sport)) return null;
+    if (
+      !["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(
+        result.event.sport,
+      )
+    )
+      return null;
     return {
       ...result,
-      upcoming: result.upcoming.map((edition) => ({
-        ...edition,
-        start_time: ["Athletics", "Triathlon"].includes(result.event.sport)
-          ? edition.start_time
-          : supplementedStart(
-              result.event,
-              edition.event_date,
-              edition.distance_code,
-              edition.start_time,
-            ),
-      })),
+      upcoming: result.upcoming.map((edition) => {
+        const detail = FIXTURE_DETAILS[`${result.event.slug}|${edition.event_date}`];
+        const checked = detail?.starts[edition.distance_code];
+        return {
+          ...edition,
+          start_time: checked
+            ? checked.time
+            : ["Athletics", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(
+                  result.event.sport,
+                )
+              ? edition.start_time
+              : supplementedStart(
+                  result.event,
+                  edition.event_date,
+                  edition.distance_code,
+                  edition.start_time,
+                ),
+          notes:
+            [edition.notes, checked?.note, detail ? `Date checked ${detail.checkedAt}.` : null]
+              .filter(Boolean)
+              .join(" ") || null,
+        };
+      }),
       related: result.related.filter((event) =>
-        ["Athletics", "Running", "Parkrun", "Triathlon"].includes(event.sport),
+        [
+          "Athletics",
+          "Running",
+          "Parkrun",
+          "Triathlon",
+          "Cycling",
+          "Swimming",
+          "Duathlon",
+        ].includes(event.sport),
       ),
     };
   });
@@ -114,7 +153,7 @@ export const getEditionResults = createServerFn({ method: "GET" })
       from editions edition
       join events event on event.id = edition.event_id
       where edition.id = ${data}
-        and event.sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon')
+        and event.sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon', 'Cycling', 'Swimming', 'Duathlon')
       limit 1
     `;
     if (!allowed.length) return [];
@@ -305,7 +344,12 @@ async function queryAthleticsCalendarPage(
 ): Promise<AthleticsCalendarPage> {
   const sql = await ready();
   const calendarSport =
-    data.sport === "Running" || data.sport === "Parkrun" || data.sport === "Triathlon"
+    data.sport === "Running" ||
+    data.sport === "Parkrun" ||
+    data.sport === "Triathlon" ||
+    data.sport === "Cycling" ||
+    data.sport === "Swimming" ||
+    data.sport === "Duathlon"
       ? data.sport
       : ATHLETICS_SPORT;
   const rawQ = data.q?.trim() ?? "";
@@ -367,6 +411,7 @@ async function queryAthleticsCalendarPage(
         join events event on event.id = edition.event_id
         left join edition_spectator_access spectator on spectator.edition_id = edition.id
         where event.sport = ${calendarSport}
+          and not ((coalesce(event.slug, '') || '|' || edition.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           and (${trackAndFieldOnly}::boolean is false or event.surface = 'Track')
           and (${upcomingOnly}::boolean is false or edition.event_date >= ${today}::date)
           and (${dateFrom}::date is null or edition.event_date >= ${dateFrom}::date)
@@ -436,6 +481,12 @@ async function queryAthleticsCalendarPage(
   return {
     items: rows.map(({ total_count: _totalCount, summary, description, ...row }) => ({
       ...row,
+      start_time: checkedFixtureStart(
+        row.event_slug,
+        row.event_date,
+        row.distance_code,
+        row.start_time,
+      ),
       competition_label: athleticsCompetitionLabel({
         name: row.event_name,
         summary,
@@ -455,7 +506,13 @@ export const listAthleticsCalendarPage = createServerFn({ method: "GET" })
 export const listCalendarEditions = createServerFn({ method: "GET" })
   .validator((input: CalendarInput) => input ?? {})
   .handler(async ({ data }) => {
-    if (data.sport === "Triathlon") return base.listCalendarEditions({ data });
+    if (
+      data.sport === "Triathlon" ||
+      data.sport === "Cycling" ||
+      data.sport === "Swimming" ||
+      data.sport === "Duathlon"
+    )
+      return base.listCalendarEditions({ data });
     if (data.sport && data.sport !== "All" && !isAthleticsSport(data.sport)) return [];
     return base.listCalendarEditions({
       data: {

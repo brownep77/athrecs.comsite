@@ -1,3 +1,4 @@
+import { SportBadge } from "@/components/races/EventBadges";
 import { buildProfileTimeline } from "@/lib/athrecs/profile-timeline";
 import { sourceHistorySports } from "@/lib/athrecs/profile-history-results";
 import { CountryFlag } from "./CountryFlag";
@@ -73,9 +74,7 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
         <div className="flex flex-wrap gap-2">
           <Badge variant="accent">Shared by athlete</Badge>
           {sports.map((sport) => (
-            <Badge key={sport} variant="outline">
-              {sport}
-            </Badge>
+            <SportBadge key={sport} sport={sport} />
           ))}
           <Badge variant="outline">{timeline.count} recorded performances</Badge>
         </div>

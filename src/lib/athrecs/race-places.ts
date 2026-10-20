@@ -6,12 +6,12 @@ import { raceLocalDate } from "../running/road-marathon-calendar";
 import {
   PLACE_SPORTS,
   PLACE_TERRAINS,
-  PLACE_DISTANCES,
   MIN_PLACE_FACET_RACES,
   matchesPlaceDistance,
   placeFacetSuffix,
   placeRaceDistanceCodes,
   resolvePlaceFacet,
+  distancesForPlaceSport,
 } from "./race-place-facets";
 import { PLACE_RACE_GUIDANCE } from "./race-place-guides";
 
@@ -32,6 +32,11 @@ export type PlaceEdition = {
   status: string;
   distance: string;
   entryUrl?: string | null;
+  startTime?: string | null;
+  startNote?: string | null;
+  sourceUrl?: string | null;
+  checkedAt?: string | null;
+  checkedCity?: string | null;
 };
 export type PlaceRace = {
   id: number;
@@ -231,9 +236,11 @@ export function racePlacePage(
       null;
     return {
       ...race,
+      city: nextInView?.checkedCity ?? race.city,
       editions,
       next: nextPlaceEdition({ ...race, editions }, now, localDate(race)),
       nextInView,
+      listedStarts: eligible.filter((edition) => nextInView && edition.date === nextInView.date),
       listedDistances: [
         ...new Set(
           eligible
@@ -302,16 +309,18 @@ export function racePlacePage(
     count: located.filter((race) => race.sport === item.sport).length,
     path: placePath(place.key) + placeFacetSuffix(item, null),
   })).filter((item) => item.count > 0);
-  const distanceLinks = PLACE_DISTANCES.map((item) => ({
-    ...item,
-    count: located.filter(
-      (race) =>
-        race.sport === "Running" &&
-        (!terrain || race.surface === terrain.surface) &&
-        placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, item)),
-    ).length,
-    path: placePath(place.key) + placeFacetSuffix(PLACE_SPORTS[0], item, terrain),
-  })).filter((item) => item.count > 0);
+  const distanceLinks = distancesForPlaceSport(sport)
+    .map((item) => ({
+      ...item,
+      count: located.filter(
+        (race) =>
+          race.sport === (sport?.sport ?? "Running") &&
+          (!terrain || race.surface === terrain.surface) &&
+          placeRaceDistanceCodes(race).some((code) => matchesPlaceDistance(code, item)),
+      ).length,
+      path: placePath(place.key) + placeFacetSuffix(sport ?? PLACE_SPORTS[0], item, terrain),
+    }))
+    .filter((item) => item.count > 0);
   const monthCounts = new Map<string, number>();
   for (const race of upcoming) {
     const months = new Set<string>();
@@ -366,6 +375,54 @@ export function racePlacePage(
     });
   if (distance) breadcrumbs.push({ name: distance.label, path });
   const scopedSlugs = new Set(scoped.map((race) => race.slug));
+  const nearbyCounties: Record<string, string[]> = {
+    Norfolk: ["Suffolk", "Cambridgeshire", "Lincolnshire", "Essex"],
+    Suffolk: ["Norfolk", "Essex", "Cambridgeshire"],
+    Cambridgeshire: [
+      "Norfolk",
+      "Suffolk",
+      "Lincolnshire",
+      "Essex",
+      "Bedfordshire",
+      "Hertfordshire",
+      "Northamptonshire",
+    ],
+    Essex: ["Suffolk", "Cambridgeshire", "Hertfordshire", "Norfolk"],
+    Lincolnshire: [
+      "Norfolk",
+      "Cambridgeshire",
+      "Nottinghamshire",
+      "Leicestershire",
+      "Rutland",
+      "Northamptonshire",
+    ],
+  };
+  // Curated nearby areas; other regional pages retain their more-areas navigation.
+  const nearby = place.key.startsWith("europe/united-kingdom/england/")
+    ? (nearbyCounties[place.name] ?? []).flatMap((name) => {
+        const target = [...places.values()].find(
+          (item) => item.parent === place.parent && item.name === name,
+        );
+        if (!target) return [];
+        const count = target.raceIds.filter((id) => {
+          const race = raceById.get(id);
+          return race && matches(race);
+        }).length;
+        const query = new URLSearchParams();
+        if (month) query.set("month", month);
+        if (archive) query.set("view", "archive");
+        return [
+          {
+            name,
+            count,
+            path:
+              placePath(target.key) +
+              placeFacetSuffix(sport, distance, terrain) +
+              (query.size ? `?${query}` : ""),
+          },
+        ];
+      })
+    : [];
   return {
     place: { ...summary(place), path: placePath(place.key) },
     path,
@@ -378,6 +435,7 @@ export function racePlacePage(
     filters: { month, city },
     sportLinks,
     distanceLinks,
+    nearby,
     breadcrumbs,
     guidance: !archive
       ? PLACE_RACE_GUIDANCE.filter(

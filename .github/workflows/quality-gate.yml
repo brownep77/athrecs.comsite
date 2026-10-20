@@ -63,7 +63,7 @@ jobs:
         run: npm run verify:search-discovery
 
       - name: Verify location race pages and automatic date rollover
-        run: node scripts/verify-race-places.mjs
+        run: node scripts/verify-event-colours.mjs
 
       - name: Verify athlete search metadata and crawlable directory pages
         run: |

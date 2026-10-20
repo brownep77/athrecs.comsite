@@ -20,7 +20,6 @@ const CODE_KM: Record<string, number> = {
   Quarter: 10.54875,
   Half: 21.0975,
   Marathon: 42.195,
-  Ultra: 50,
 };
 
 export function kmFromDistanceCode(code: string, knownKm?: number | null): number | null {
@@ -31,6 +30,8 @@ export function kmFromDistanceCode(code: string, knownKm?: number | null): numbe
   if (kmMatch) return Number(kmMatch[1]);
   const mileMatch = key.match(/^(\d+(?:\.\d+)?)\s*mi(?:le)?s?$/i);
   if (mileMatch) return Number(mileMatch[1]) * KM_PER_MILE;
+  const metreMatch = key.match(/^(\d+(?:\.\d+)?)\s*m$/);
+  if (metreMatch) return Number(metreMatch[1]) / 1000;
   return null;
 }
 
@@ -43,15 +44,12 @@ export function formatKmMiles(km: number, approx = false): string {
   return `${kmLabel} / ${miLabel}`;
 }
 
-export function formatDistanceWithUnits(
-  code: string,
-  knownKm?: number | null,
-): string {
+export function formatDistanceWithUnits(code: string, knownKm?: number | null): string {
   const label = code.trim();
   if (!label) return "";
   if (label === "Other") return "Other";
   const known = knownKm && knownKm > 0 ? knownKm : null;
-  if (label === "Ultra" && !known) return `Ultra · ${formatKmMiles(50, true)}`;
+  if (label === "Ultra" && !known) return "Ultra";
   const km = kmFromDistanceCode(label, known);
   if (!km) return label;
   return `${label} · ${formatKmMiles(km)}`;

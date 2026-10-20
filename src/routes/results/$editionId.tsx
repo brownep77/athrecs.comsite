@@ -1,6 +1,6 @@
+import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, SearchCheck } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
@@ -62,7 +62,7 @@ function RaceResultsPage() {
     <div className="space-y-5">
       <Link to="/results" className="inline-flex items-center gap-1.5 text-sm text-accent no-underline hover:underline"><ArrowLeft className="size-4" aria-hidden="true" />All results</Link>
       <header className="space-y-3">
-        <div className="flex flex-wrap gap-2"><Badge variant="outline">{edition.sport}</Badge><Badge variant="outline">{edition.distance_code}</Badge></div>
+        <div className="flex flex-wrap gap-2"><SportBadge sport={edition.sport} /><DistanceBadge distance={edition.distance_code} /></div>
         <h1 className="font-display text-3xl font-semibold leading-tight">{edition.event_name}</h1>
         <p className="text-sm text-muted">{formatRaceDateShort(edition.event_date)}{edition.city ? ` · ${edition.city}` : ""}{edition.country ? ` · ${edition.country}` : ""}</p>
         <p className="text-sm font-medium text-accent">{edition.result_count.toLocaleString("en-GB")} {edition.result_count === 1 ? "performance" : "performances"} recorded on AthRecs</p>

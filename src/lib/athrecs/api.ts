@@ -1,3 +1,4 @@
+import { withheldFixtureDateKeys } from "@/data/fixture-date-reviews";
 import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
 import { profileReadMiddleware } from "@/lib/auth/profile-access";
 import { getReportedRaceHistory } from "./reported-race-history";
@@ -247,7 +248,8 @@ export const listEvents = createServerFn({ method: "GET" })
     >`
       with scoped_editions as not materialized (
         select * from editions
-        where (${shortRaces}::boolean is false or (
+        where not exists (select 1 from events reviewed where reviewed.id=editions.event_id and (reviewed.slug || '|' || editions.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
+          and (${shortRaces}::boolean is false or (
           event_date between '2026-09-10'::date and '2027-01-31'::date
           and distance_code in ('5K', '10K')
           and not (id = any(${excludedEditionIds}::int[]))
@@ -598,6 +600,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ) as spectator_access_json
       from editions ed
       where ed.event_id = ${event.id}
+        and not ((${event.slug} || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
       order by
         ed.event_date desc,
         exists (
@@ -1319,7 +1322,8 @@ export const getClubBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data: slug }) => {
     const sql = await ready();
     const [{ clubProfiles }, { clubEnrichment }] = await Promise.all([
-      import("@/data/club-profiles"), import("@/data/club-enrichment"),
+      import("@/data/club-profiles"),
+      import("@/data/club-enrichment"),
     ]);
     const rows = await sql<{
       id: number;
@@ -1347,11 +1351,18 @@ export const getClubBySlug = createServerFn({ method: "GET" })
     const club = rows[0];
     if (!club) return null;
     const editorial = clubProfiles[club.slug];
-    const profile = editorial ? {
-      biography: editorial.biography, founded_year: editorial.founded_year, scope: editorial.scope,
-      location_note: editorial.location_note, contact_note: editorial.contact_note,
-      notable_members: editorial.notable_members ?? [], sources: editorial.sources, reviewed_at: editorial.reviewed_at,
-    } : null;
+    const profile = editorial
+      ? {
+          biography: editorial.biography,
+          founded_year: editorial.founded_year,
+          scope: editorial.scope,
+          location_note: editorial.location_note,
+          contact_note: editorial.contact_note,
+          notable_members: editorial.notable_members ?? [],
+          sources: editorial.sources,
+          reviewed_at: editorial.reviewed_at,
+        }
+      : null;
     const { indexableApprovedAthleteSql } = await import("./athlete-search-policy.server");
     const members = await sql.query<{
       id: number;
@@ -1385,7 +1396,10 @@ export const getClubBySlug = createServerFn({ method: "GET" })
       club: {
         ...club,
         profile,
-        address_kind: editorial?.corrections?.address_kind ?? clubEnrichment[club.slug]?.address_kind ?? "directory",
+        address_kind:
+          editorial?.corrections?.address_kind ??
+          clubEnrichment[club.slug]?.address_kind ??
+          "directory",
         sports: club.sports ? club.sports.split(",").filter(Boolean) : [],
         contacts: JSON.parse(club.contacts_json || "[]") as ClubContactInfo[],
         socials: JSON.parse(club.socials_json || "[]") as ClubSocialInfo[],
@@ -1793,6 +1807,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       where
         (${upcomingOnly}::boolean is false or ed.event_date >= ${today}::date)
         and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
+        and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         and (
           ${q}::text is null
           or lower(e.name) like ${q}
@@ -1857,12 +1872,19 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
+    const { checkedFixtureStart } = await import("../../data/fixture-details");
     const cleaned = rows.map((row) => {
       const { groups_json, ...edition } = row;
       const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
       const distanceCode = labels[0] ?? row.distance_code;
       return {
         ...edition,
+        start_time: checkedFixtureStart(
+          row.event_slug,
+          row.event_date,
+          row.distance_code,
+          row.start_time,
+        ),
         distance_code: labels.join(" · ") || distanceCode,
         groups: parseRaceGroups(groups_json),
       };

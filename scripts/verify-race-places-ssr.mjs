@@ -13,13 +13,14 @@ create table slug_redirects(entity_type text, old_slug text, current_slug text);
 insert into events values (1,'synthetic-race','Synthetic Norfolk 10K','Running','England','Norfolk',null,'Norwich','Fictional test race, with no live entries.',true),
 (2,'synthetic-past','Synthetic Past Race','Running','England','Norfolk',null,'Norwich','Fictional archived event.',false);
 insert into editions values (1,'2040-05-01','10K','Open',null,null,null),(2,'2025-01-01','Half','Finished',null,null,null);
-alter table editions add column entry_url text;
+alter table editions add column entry_url text; alter table editions add column start_time text; alter table editions add column source_url text;
 update editions set entry_url='https://example.org/synthetic-entry' where event_id=1;`);
 await db.exec(`insert into events values
   (3,'synthetic-wymondham','Synthetic Wymondham 10K','Running','England','Norfolk',null,'Wymondham','Fictional test event.',false),
-  (4,'synthetic-triathlon','Synthetic Triathlon','Triathlon','England','Norfolk',null,'Norwich','Fictional multisport event.',false);
+  (4,'synthetic-triathlon','Synthetic Triathlon','Triathlon','England','Norfolk',null,'Norwich','Fictional multisport event.',false),
+  (5,'synthetic-suffolk','Synthetic Suffolk 10K','Running','England','Suffolk',null,'Bury St Edmunds','Fictional nearby event.',false);
   insert into editions(event_id,event_date,distance_code,status) values
-  (3,'2040-06-01','10K','Open'),(4,'2040-05-01','10K','Open');
+  (3,'2040-06-01','10K','Open'),(4,'2040-05-01','10K','Open'),(5,'2040-06-01','10K','Open');
   insert into events select id,'synthetic-extra-'||id,'Synthetic Extra '||id,'Running','England','Norfolk',null,'Norwich','Fictional pagination event.',false from generate_series(10,40) id;
   insert into editions(event_id,event_date,distance_code,status) select id,'2040-07-01','10K','Closed' from generate_series(10,40) id;`);
 await db.exec(
@@ -92,7 +93,11 @@ for (const path of [
     );
     if (!path.endsWith("/10k"))
       assert($("main").text().includes("Upcoming running events include 10K races."));
-    assert($("main h1").text().includes("Norfolk, England"));
+    assert(
+      $("main h1")
+        .text()
+        .includes(path.endsWith("/norfolk") ? "Norfolk sports and events" : "Norfolk, England"),
+    );
   }
   if (path.includes("/running")) {
     assert(!$("main article h3").text().includes("Synthetic Triathlon"));
@@ -272,15 +277,31 @@ if (process.argv.includes("--browser")) {
       assert.equal(await page.locator("#upcoming-races").count(), 1);
 
       await page
-        .getByRole("navigation", { name: "Sports and running distances" })
+        .getByRole("navigation", { name: "Sports and distances" })
         .getByRole("link", { name: "Running", exact: true })
         .click();
       await page.waitForURL("**/norfolk/running");
       await page
-        .getByRole("navigation", { name: "Sports and running distances" })
+        .getByRole("navigation", { name: "Sports and distances" })
         .getByRole("link", { name: "10K", exact: true })
         .click();
       await page.waitForURL("**/running/10k");
+      const nearby = page.getByRole("navigation", { name: "Nearby counties", exact: true });
+      await nearby.getByRole("link", { name: /^Suffolk/ }).click();
+      await page.waitForURL("**/suffolk/running/10k");
+      assert((await page.locator("main h1").textContent()).includes("Suffolk"));
+      await page.goto(`${base}/running/10k`);
+      const asideBox = await page
+        .locator('aside:has(nav[aria-label="Nearby counties"])')
+        .boundingBox();
+      const filtersBox = await page
+        .getByRole("navigation", { name: "Sports and distances" })
+        .boundingBox();
+      assert(asideBox && filtersBox);
+      assert(
+        width >= 1024 ? asideBox.x > filtersBox.x : asideBox.y < filtersBox.y,
+        `${width}px: nearby counties use the right sidebar on desktop and appear above filters on mobile`,
+      );
       console.log(
         "Browser distance page",
         width,

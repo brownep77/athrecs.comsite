@@ -1,4 +1,5 @@
 import type { RacePlacePageData } from "./race-places";
+import { sportGuideText } from "./sport-guide-text";
 
 export type RaceCopyPart = string | { text: string; href: string };
 export type RaceCopyParagraph = RaceCopyPart[];
@@ -117,7 +118,9 @@ export function racePlaceCopy(data: RacePlacePageData) {
       ? data.facet.sport
         ? `${focus} around the world`
         : "Find races around the world"
-      : `${focus} in ${location}`;
+      : !data.facet.sport && data.place.kind === "region"
+        ? `${data.place.name} sports and events`
+        : `${focus} in ${location}`;
   const intro: RaceCopyParagraph[] = [];
   const questions: { question: string; answer: RaceCopyParagraph }[] = [];
   const parent = data.ancestors.at(-2);
@@ -182,6 +185,24 @@ export function racePlaceCopy(data: RacePlacePageData) {
   }
 
   if (data.total && !data.archive) {
+    if (data.facet.sport) {
+      const guide = sportGuideText(data.facet.sport.sport);
+      intro.push([guide.intro]);
+      questions.push({
+        question: `What should I check before a ${data.facet.sport.label.toLowerCase()} event in ${data.place.name}?`,
+        answer: [guide.planning],
+      });
+    } else if (data.place.kind === "region") {
+      const towns = data.cities
+        .slice()
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 4)
+        .map((item) => item.value);
+      if (towns.length)
+        intro.push([
+          `Use this ${data.place.name} sports homepage to explore recorded events in ${list(towns)}. Choose a sport below or compare dates across the county.`,
+        ]);
+    }
     const nextAnswer: RaceCopyParagraph = [];
     if (hasUpcoming) {
       data.overview.nextRaces.forEach((race, index) => {
@@ -235,7 +256,9 @@ export function racePlaceCopy(data: RacePlacePageData) {
       ? data.facet.distance.heading
       : data.facet.sport
         ? data.facet.sport.heading.toLowerCase()
-        : `${focus === "Triathlons" ? "triathlon" : focus === "Athletics events" ? "athletics" : "race"} calendar`;
+        : data.place.kind === "region"
+          ? "sports & events calendar"
+          : `${focus === "Triathlons" ? "triathlon" : focus === "Athletics events" ? "athletics" : "race"} calendar`;
   const title = `${shortLocation} ${titleFocus}${data.archive ? " — past editions" : ""}${data.page > 1 ? ` — page ${data.page}` : ""}${data.place.kind === "region" && parent && parent.name !== data.place.name ? ` | ${parent.name}` : ""} | AthRecs`;
   const description = data.archive
     ? `Browse ${number(data.archiveCount)} race guides in ${location} awaiting a new date or with past editions. Find recorded events and links to the upcoming calendar.`

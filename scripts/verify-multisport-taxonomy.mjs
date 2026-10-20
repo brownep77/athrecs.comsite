@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
+const compactSource = (value) => value.replace(/\s+/g, "").replace(/,([\])])/g, "$1");
 import { readFile } from "node:fs/promises";
 import {
   isTemporaryRunningEdition,
@@ -53,9 +54,12 @@ for (const routeSource of [raceRoute, countryRaceRoute]) {
 }
 
 assert(
-  athleticsFilters.includes('export const SPORTS = ["Athletics", "Running", "Parkrun", "Triathlon"] as const') &&
-    athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
-  "ATHRECS must expose Athletics, Running, Parkrun and Triathlon, defaulting to Athletics",
+  compactSource(athleticsFilters).includes(
+    compactSource(
+      'export const SPORTS = ["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"] as const',
+    ),
+  ) && athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
+  "ATHRECS must expose Athletics, Running, Parkrun, Triathlon and Cycling, defaulting to Athletics",
 );
 assert(
   runRecsFilters.includes('export const SPORTS = ["All", "Running", "Parkrun"] as const') &&
