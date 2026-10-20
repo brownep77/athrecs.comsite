@@ -206,6 +206,25 @@ assert.equal(page.races[0].id, 5, "earliest date leads the calendar, including o
 assert.equal(page.featuredRaces[0].id, 2, "featured events have a separate section");
 assert.equal(page.upcomingCount, 2);
 assert.equal(
+  page.archivePreview.length,
+  4,
+  "archive remains visible below an active upcoming calendar",
+);
+assert(
+  page.archivePreview.every((race) => !race.next),
+  "archived guides never contain upcoming entries",
+);
+assert(
+  page.races.every((race) => race.next),
+  "upcoming calendar never contains archived guides",
+);
+assert.equal(
+  racePlacePage(races, key, now, 1, false, { city: "Wymondham" }).archivePreview.length,
+  0,
+  "archive preview respects town selection",
+);
+
+assert.equal(
   racePlacePage(races, key, now, 1, true).races.find((r) => r.id === 3).cancelledDate,
   "2026-10-20",
 );

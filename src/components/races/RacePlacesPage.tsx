@@ -49,7 +49,7 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
         <article key={race.id} className="rounded-xl border border-border bg-surface p-5">
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
             <span>{race.sport}</span>
-            {race.featured ? (
+            {race.featured && race.next ? (
               <span className="rounded-full bg-elevated px-3 py-1 font-semibold text-fg">
                 Featured race
               </span>
@@ -157,6 +157,24 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
             : ""}
         </p>
       </header>
+      <nav aria-label="Race dates" className="grid grid-cols-2 gap-3">
+        <a
+          href={data.archive ? `${racePlaceUrl(data, 1, false)}#upcoming-races` : "#upcoming-races"}
+          className="rounded-xl border-2 border-accent bg-surface p-4 hover:bg-elevated md:p-5"
+        >
+          <span className="block font-display text-lg font-semibold">Upcoming races ↓</span>
+          <span className="mt-1 block text-sm text-muted">
+            {data.upcomingCount.toLocaleString("en-GB")} with upcoming dates
+          </span>
+        </a>
+        <a
+          href="#past-races"
+          className="rounded-xl border border-border bg-elevated p-4 hover:border-accent md:p-5"
+        >
+          <span className="block font-display text-lg font-semibold">Past races ↓</span>
+          <span className="mt-1 block text-sm text-muted">Previous editions and race archive</span>
+        </a>
+      </nav>
       <nav aria-label="Sports and running distances" className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           <a
@@ -197,66 +215,23 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
           </div>
         ) : null}
       </nav>
-      {data.children.length ? (
-        <section aria-labelledby="places-heading">
-          <details open={place.kind === "world" || place.kind === "continent" ? true : undefined}>
-            <summary className="cursor-pointer py-2">
-              <h2 id="places-heading" className="font-display text-2xl font-semibold">
-                Browse{" "}
-                {place.kind === "world"
-                  ? "continents"
-                  : place.kind === "continent"
-                    ? "countries and territories"
-                    : place.kind === "nation"
-                      ? "counties and areas"
-                      : "states, counties and areas"}
-              </h2>
-            </summary>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {data.children.map((child) => (
-                <a
-                  key={child.key}
-                  href={child.path}
-                  className="flex min-h-16 items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4 hover:border-accent"
-                >
-                  <span className="flex items-center gap-2 font-medium">
-                    {child.country ? <CountryFlag country={child.country} /> : null}
-                    {child.name}
-                  </span>
-                  <span className="shrink-0 text-xs text-muted">
-                    {child.count ? `${child.count} recorded events` : "Listings coming soon"}
-                  </span>
-                </a>
-              ))}
-            </div>
-          </details>
-        </section>
-      ) : null}
-      <section aria-labelledby="races-heading" className="space-y-4">
-        <nav
-          aria-label="Race dates"
-          className="flex flex-wrap gap-4 border-b border-border pb-3 text-sm"
-        >
-          <a
-            href={racePlaceUrl(data, 1, false)}
-            aria-current={!data.archive ? "page" : undefined}
-            className={link}
-          >
-            Upcoming ({data.upcomingCount})
-          </a>
-          <a
-            href={racePlaceUrl(data, 1, true)}
-            aria-current={data.archive ? "page" : undefined}
-            className={link}
-          >
-            Awaiting dates and past editions ({data.archiveCount})
-          </a>
-        </nav>
+      <section
+        id={data.archive ? "past-races" : "upcoming-races"}
+        aria-labelledby="races-heading"
+        className={`scroll-mt-24 space-y-4 ${data.archive ? "rounded-2xl border border-border bg-elevated p-4 md:p-6" : ""}`}
+      >
         <h2 id="races-heading" className="font-display text-2xl font-semibold">
           {data.archive
-            ? "Awaiting dates and past editions"
+            ? "Past races and previous editions"
             : `Upcoming ${data.facet.distance?.heading.toLowerCase() ?? data.facet.sport?.heading.toLowerCase() ?? "races"}`}
         </h2>
+        {data.archive ? (
+          <p className="max-w-3xl leading-7 text-muted">
+            Race guides without an upcoming date are kept here. Some events have finished; others
+            are awaiting a new date or have a cancelled edition. Open a guide to see its recorded
+            editions.
+          </p>
+        ) : null}
         <form
           method="get"
           action={data.path}
@@ -344,10 +319,9 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
           <p className="rounded-xl border border-dashed border-border p-6 text-muted">
             {data.total
               ? "No races match this view. Try another month or town, clear the filters, or browse the recorded editions."
-              : "We do not yet have race listings for this location. Explore the surrounding area using the links above."}
+              : "We do not yet have race listings for this location. Explore the surrounding area using the links below."}
           </p>
         )}
-        {data.archivePreview.length ? renderRaces(data.archivePreview) : null}
         {data.pageCount > 1 ? (
           <nav aria-label="Race pages" className="flex items-center justify-between gap-4 py-4">
             {data.page > 1 ? (
@@ -380,6 +354,97 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
             also included by date in the calendar above.
           </p>
           {renderRaces(data.featuredRaces)}
+        </section>
+      ) : null}
+      {!data.archive ? (
+        <section
+          id="past-races"
+          aria-labelledby="past-races-heading"
+          className="scroll-mt-24 space-y-5 rounded-2xl border border-border bg-elevated p-4 md:p-6"
+        >
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="max-w-3xl">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+                Race archive
+              </p>
+              <h2 id="past-races-heading" className="mt-2 font-display text-2xl font-semibold">
+                Past races and previous editions
+              </h2>
+              <p className="mt-3 leading-7 text-muted">
+                Looking back at a race? Browse the guides below for recorded editions. This section
+                also includes events awaiting a new date and cancelled editions. Previous editions
+                of races in the upcoming calendar are available through their race guides above.
+              </p>
+              {data.filters.month ? (
+                <p className="mt-2 text-sm text-muted">
+                  The month filter applies to upcoming races. The archive covers all recorded dates.
+                </p>
+              ) : null}
+            </div>
+            <a
+              href="#upcoming-races"
+              className={`${link} inline-flex min-h-11 items-center text-sm`}
+            >
+              Back to upcoming races ↑
+            </a>
+          </div>
+          {data.archivePreview.length ? (
+            renderRaces(data.archivePreview)
+          ) : (
+            <p className="text-sm text-muted">
+              {data.archiveCount
+                ? "Open the race archive to browse past events and races awaiting a new date."
+                : "No separate archived race guides are listed for this selection yet."}
+            </p>
+          )}
+          <a
+            href={`${racePlaceUrl(data, 1, true)}#past-races`}
+            className="inline-flex min-h-11 items-center rounded-lg border border-border bg-surface px-5 py-3 font-semibold hover:border-accent"
+          >
+            View full race archive ({data.archiveCount.toLocaleString("en-GB")}) →
+          </a>
+        </section>
+      ) : (
+        <a
+          href={`${racePlaceUrl(data, 1, false)}#upcoming-races`}
+          className={`${link} inline-flex min-h-11 items-center font-semibold`}
+        >
+          Back to upcoming races →
+        </a>
+      )}
+      {data.children.length ? (
+        <section aria-labelledby="places-heading">
+          <details open={place.kind === "world" || place.kind === "continent" ? true : undefined}>
+            <summary className="cursor-pointer py-2">
+              <h2 id="places-heading" className="font-display text-2xl font-semibold">
+                Browse{" "}
+                {place.kind === "world"
+                  ? "continents"
+                  : place.kind === "continent"
+                    ? "countries and territories"
+                    : place.kind === "nation"
+                      ? "counties and areas"
+                      : "states, counties and areas"}
+              </h2>
+            </summary>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {data.children.map((child) => (
+                <a
+                  key={child.key}
+                  href={child.path}
+                  className="flex min-h-16 items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4 hover:border-accent"
+                >
+                  <span className="flex items-center gap-2 font-medium">
+                    {child.country ? <CountryFlag country={child.country} /> : null}
+                    {child.name}
+                  </span>
+                  <span className="shrink-0 text-xs text-muted">
+                    {child.count ? `${child.count} recorded events` : "Listings coming soon"}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </details>
         </section>
       ) : null}
       {data.page === 1 && !data.archive && (data.guidance.length || data.cities.length > 1) ? (

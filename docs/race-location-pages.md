@@ -48,8 +48,8 @@ event metadata.
 
 `/sitemaps/race-places.xml` includes populated location pages. Empty locations are
 `noindex, follow` and excluded from that sitemap. Archive-filter URLs are also
-noindex; the permanent parent retains a sample of historical race guides when no
-future dates exist. Unknown paths and out-of-range pagination return HTTP 404.
+noindex; the permanent parent retains a separate archive section below the upcoming
+calendar, including a sample of up to six guides on its first page. Unknown paths and out-of-range pagination return HTTP 404.
 
 Unknown countries are not guessed. State codes are matched only within their
 country. Venue-looking legacy county values are excluded from area-page creation;
@@ -153,3 +153,19 @@ The `Race location discovery` workflow builds the actual application and verifie
 SSR plus desktop/mobile browser navigation, filters, reset, pagination, runtime
 errors and horizontal overflow using isolated synthetic SQL. Its browser option
 is `node scripts/verify-race-places-ssr.mjs --browser` after a direct Vite build.
+
+## Upcoming first and separate archive — 20 October 2026
+
+Two prominent, ordinary anchor links lead to Upcoming races and Past races.
+The chronological upcoming calendar and featured upcoming races appear before a
+visually separate, shaded archive section. Location browsing follows these race
+sections. The first page shows up to six archive guides, with a link to the full
+paginated archive and a return link to upcoming races. Later calendar pages keep
+the archive link without repeating its sample.
+
+An archive guide means the race has no upcoming edition currently recorded. The
+copy explicitly distinguishes past events, cancellations and dates awaiting
+announcement; it does not claim every archived guide is a completed race. Past
+editions of races with a future edition remain accessible through their race
+guides. Town filtering applies to both sections; month filtering applies only to
+upcoming races. Existing URLs, archive noindex and date-rollover rules remain.

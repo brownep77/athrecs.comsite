@@ -387,7 +387,7 @@ export function racePlacePage(
       .sort((a, b) => Number(b.count > 0) - Number(a.count > 0) || a.name.localeCompare(b.name)),
     races: selected.slice((page - 1) * PLACE_PAGE_SIZE, page * PLACE_PAGE_SIZE).map(card),
     archivePreview:
-      !archive && !upcoming.length && !month && !city ? past.sort(order).slice(0, 6).map(card) : [],
+      !archive && page === 1 ? [...visiblePast].sort(order).slice(0, 6).map(card) : [],
     featuredRaces:
       !archive && page === 1
         ? [...visibleUpcoming]
