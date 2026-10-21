@@ -119,7 +119,7 @@ def apply(args):
         if cfg['branchId']!=w.PROD or review['planHash']!=fingerprint or not review['verified']:raise ValueError('Production requires verified unchanged rehearsal')
     elif cfg['branchId']==w.PROD:raise ValueError('Rehearsal cannot write production')
     # Idempotent exact-batch replay is read-only; never overwrite later edits.
-    existing=q([("SELECT count(*)::int n FROM athletes WHERE profile_details #>> '{archiveCreation,batchId}'=$1",[BATCH])],True)[0][0]['n']
+    existing=q([("SELECT count(*)::int n FROM athletes WHERE slug=ANY($1::text[])",[[p['slug'] for p in plan['profiles']]])],True)[0][0]['n']
     if existing:raise ValueError('Batch already exists; inspect readback instead of overwriting')
     payload=json.dumps(plan,ensure_ascii=False,separators=(',',':'))
     statements=[("SET LOCAL lock_timeout='8s'",[]),("SET LOCAL statement_timeout='150s'",[]),('LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,results,editions,events,clubs,athlete_clubs IN SHARE ROW EXCLUSIVE MODE',[]),('CREATE TEMP TABLE trackie_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),('INSERT INTO trackie_guard SELECT fingerprint=$2 FROM ('+w.FP+') f',[0,plan['directoryFingerprint']]),('CREATE TEMP TABLE trackie_plan(p jsonb) ON COMMIT DROP',[]),('INSERT INTO trackie_plan VALUES($1::jsonb)',[payload])]
@@ -129,11 +129,11 @@ def apply(args):
     statements.append((sql,[json.dumps(plan['profiles'],ensure_ascii=False),PROVIDER,BATCH,None]))
     statements += [(sql,[]) for sql in RESULT_SQL]
     statements.append(("INSERT INTO network_audit_log(actor_email,action,entity_type,entity_id,after_value,note) VALUES('paul@athrecs.com','trackie.graph_published','import_batch',$1,$2::jsonb,$3)",[BATCH,json.dumps({'planHash':fingerprint,'summary':plan['summary'],'instruction':INSTRUCTION,'held':plan['held'],'heldClubs':plan['heldClubs'],'providerLicenceClaimed':False}),INSTRUCTION]))
-    statements.append((VERIFY,[BATCH]))
+    statements.append((VERIFY,[BATCH,[p['slug'] for p in plan['profiles']]]))
     result=q(statements); counts=result[-1][0]
     expected={'profiles':plan['summary']['profiles'],'histories':plan['summary']['profiles'],'results':plan['summary']['results']}
     if any(int(counts[k])!=v for k,v in expected.items()):raise ValueError('Readback mismatch: '+json.dumps(counts))
-    examples=q([("SELECT a.id,a.slug,a.display_name FROM athletes a WHERE a.profile_details #>> '{archiveCreation,batchId}'=$1 ORDER BY a.id LIMIT 8",[BATCH])],True)[0]
+    examples=q([("SELECT a.id,a.slug,a.display_name FROM athletes a WHERE a.slug=ANY($1::text[]) ORDER BY a.id LIMIT 8",[[p['slug'] for p in plan['profiles']]])],True)[0]
     receipt={'branchId':cfg['branchId'],'planHash':fingerprint,'verified':True,'counts':counts,'examples':examples}
     dump(args.work/('production-receipt.private.json' if args.publish else 'review-receipt.private.json'),receipt);print(json.dumps(receipt))
 
@@ -161,13 +161,13 @@ SELECT e.id,b.id,e.slug,'/races/'||e.slug,'legacy_live',true,'https://www.athrec
 
 RESULT_SQL = [
 """UPDATE athletes a SET club_id=c.id,source_club_name=x->>'sourceClub' FROM trackie_plan CROSS JOIN LATERAL jsonb_array_elements(p->'profiles') x JOIN clubs c ON c.slug=x->>'clubSlug' WHERE a.slug=x->>'slug' AND a.profile_details #>> '{archiveCreation,batchId}'='trackie-public-20261021'""",
-"""INSERT INTO athlete_clubs(athlete_id,club_id,relationship,source_name) SELECT a.id,a.club_id,'primary',a.source_club_name FROM athletes a WHERE a.profile_details #>> '{archiveCreation,batchId}'='trackie-public-20261021' AND a.club_id IS NOT NULL ON CONFLICT DO NOTHING""",
+"""INSERT INTO athlete_clubs(athlete_id,club_id,relationship,source_name) SELECT a.id,a.club_id,'primary',a.source_club_name FROM athletes a WHERE a.slug IN (SELECT x->>'slug' FROM trackie_plan CROSS JOIN LATERAL jsonb_array_elements(p->'profiles') x) AND a.profile_details #>> '{archiveCreation,batchId}'='trackie-public-20261021' AND a.club_id IS NOT NULL ON CONFLICT DO NOTHING""",
 """INSERT INTO results(edition_id,athlete_id,status,finish_time_seconds,overall_place,category,bib,result_source,source_url,result_visibility,result_details)
 SELECT d.id,a.id,CASE WHEN h->>'performance' ~ '^([0-9]+:)*[0-9]+([.][0-9]+)?m?$' THEN 'finished' ELSE h->>'performance' END,NULL,NULL,nullif(h->>'ageGroup',''),nullif(h->>'bib',''),'Trackie',h->'sourceUrls'->>0,'public',jsonb_build_object('verificationStatus','unverified','profileExcluded',true,'reportedPerformance',h->>'performance','reportedPlace',h->>'place','sourceClub',h->>'sourceClub','qualification',h->>'notes','archiveReference',h->'archiveReference','batchId','trackie-public-20261021','profileDisplay','athlete_source_histories')
 FROM trackie_plan CROSS JOIN LATERAL jsonb_array_elements(p->'profiles') x CROSS JOIN LATERAL jsonb_array_elements(x->'performances') h JOIN athletes a ON a.slug=x->>'slug' JOIN events e ON e.slug=h->>'eventSlug' JOIN editions d ON d.event_id=e.id AND d.event_date=(h->>'date')::date AND d.distance_code=h->>'competitionName' ON CONFLICT(edition_id,athlete_id) DO NOTHING""",
-"""INSERT INTO trackie_guard SELECT (SELECT count(*) FROM results WHERE result_details->>'batchId'=p->>'batchId')=(p->'summary'->>'results')::int AND (SELECT count(*) FROM athletes WHERE profile_details #>> '{archiveCreation,batchId}'=p->>'batchId')=(p->'summary'->>'profiles')::int FROM trackie_plan""",
+"""INSERT INTO trackie_guard SELECT (SELECT count(*) FROM jsonb_array_elements(p->'profiles') x JOIN athletes a ON a.slug=x->>'slug' JOIN results r ON r.athlete_id=a.id WHERE r.result_details->>'batchId'=p->>'batchId')=(p->'summary'->>'results')::int AND (SELECT count(*) FROM jsonb_array_elements(p->'profiles') x JOIN athletes a ON a.slug=x->>'slug' WHERE a.profile_details #>> '{archiveCreation,batchId}'=p->>'batchId')=(p->'summary'->>'profiles')::int FROM trackie_plan""",
 ]
-VERIFY = """SELECT (SELECT count(*)::int FROM athletes WHERE profile_details #>> '{archiveCreation,batchId}'=$1 AND profile_visibility='public' AND date_of_birth IS NULL AND country='' AND county='' AND NOT EXISTS(SELECT 1 FROM athlete_account_links l WHERE l.athlete_id=athletes.id)) profiles,(SELECT count(*)::int FROM athlete_source_histories h JOIN athletes a ON a.id=h.athlete_id WHERE a.profile_details #>> '{archiveCreation,batchId}'=$1 AND h.provider='Trackie' AND h.published_at IS NOT NULL) histories,(SELECT count(*)::int FROM results WHERE result_details->>'batchId'=$1 AND result_visibility='public' AND result_details->>'verificationStatus'='unverified' AND finish_time_seconds IS NULL) results"""
+VERIFY = """SELECT (SELECT count(*)::int FROM athletes WHERE slug=ANY($2::text[]) AND profile_details #>> '{archiveCreation,batchId}'=$1 AND profile_visibility='public' AND date_of_birth IS NULL AND country='' AND county='' AND NOT EXISTS(SELECT 1 FROM athlete_account_links l WHERE l.athlete_id=athletes.id)) profiles,(SELECT count(*)::int FROM athlete_source_histories h JOIN athletes a ON a.id=h.athlete_id WHERE a.slug=ANY($2::text[]) AND a.profile_details #>> '{archiveCreation,batchId}'=$1 AND h.provider='Trackie' AND h.published_at IS NOT NULL) histories,(SELECT count(*)::int FROM athletes a JOIN results ON results.athlete_id=a.id WHERE a.slug=ANY($2::text[]) AND result_details->>'batchId'=$1 AND result_visibility='public' AND result_details->>'verificationStatus'='unverified' AND finish_time_seconds IS NULL) results"""
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['prepare','apply']);p.add_argument('--work',type=pathlib.Path,required=True);p.add_argument('--captures',type=pathlib.Path);p.add_argument('--config',type=pathlib.Path);p.add_argument('--connection',type=pathlib.Path);p.add_argument('--confirm-branch');p.add_argument('--publish',action='store_true')
