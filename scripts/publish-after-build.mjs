@@ -24,6 +24,7 @@ const publishers = [
   "scripts/publish-event-schema-corrections.mjs",
   "scripts/publish-checked-fixtures.mjs",
   "scripts/publish-county-expansion.mjs",
+  "scripts/publish-county-expansion-more.mjs",
 ];
 
 for (const publisher of publishers) {

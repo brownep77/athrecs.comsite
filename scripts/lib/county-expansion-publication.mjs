@@ -18,13 +18,13 @@ const fields = [
 ];
 const project = (row) => Object.fromEntries(fields.map((field) => [field, row[field] ?? null]));
 const hash = (payload) => createHash("sha256").update(JSON.stringify(payload)).digest("hex");
-export function countyBatches(data) {
+export function countyBatches(data, sourcePrefix = "athrecs:county-expansion:2026-10-21") {
   const batches = [];
   for (let index = 0; index < data.events.length; index += 60) {
     const events = data.events.slice(index, index + 60);
     const slugs = new Set(events.map((event) => event.slug));
     batches.push({
-      sourceKey: `athrecs:county-expansion:2026-10-21:${batches.length + 1}`,
+      sourceKey: `${sourcePrefix}:${batches.length + 1}`,
       sourceUrl: "https://www.athrecs.com/races/places/europe/united-kingdom",
       events,
       editions: data.editions.filter((edition) => slugs.has(edition.eventSlug)),
@@ -34,11 +34,19 @@ export function countyBatches(data) {
 }
 
 /** Reviewed public fixtures only. No athlete or result records are changed. */
-export async function publishCountyExpansion(sql, publishing, data, baseline) {
-  assert.equal(data.events.length, 76);
-  assert.equal(data.editions.length, 167);
+export async function publishCountyExpansion(sql, publishing, data, baseline, options = {}) {
+  assert.equal(data.events.length, options.expectedEvents ?? 76);
+  assert.equal(data.editions.length, options.expectedEditions ?? 167);
+  assert.equal(new Set(data.events.map((event) => event.slug)).size, data.events.length);
+  assert.equal(
+    new Set(
+      data.editions.map((edition) => `${edition.eventSlug}|${edition.date}|${edition.distance}`),
+    ).size,
+    data.editions.length,
+    "Repeated edition inside reviewed manifest",
+  );
   const results = [];
-  for (const batch of countyBatches(data)) {
+  for (const batch of countyBatches(data, options.sourcePrefix)) {
     assert(batch.events.length <= 60 && batch.editions.length <= 200);
     results.push(
       await sql.transaction(async (tx) => {
@@ -91,8 +99,9 @@ export async function publishCountyExpansion(sql, publishing, data, baseline) {
         assert.equal(pending.length, 0, "Overlapping pending batch needs review");
         const overlaps = await tx.query(
           `select e.slug,d.event_date,d.distance_code from editions d join events e on e.id=d.event_id
-        join jsonb_to_recordset($1::jsonb) r("eventSlug" text,date text,distance text)
-        on e.slug=r."eventSlug" and d.event_date=r.date::date and d.distance_code=r.distance`,
+        join jsonb_to_recordset($1::jsonb) r("eventSlug" text,date text,distance text,"distanceKm" numeric)
+        on e.slug=r."eventSlug" and d.event_date=r.date::date
+        and (d.distance_code=r.distance or abs(d.distance_km-r."distanceKm")<=0.025)`,
           [JSON.stringify(batch.editions)],
         );
         assert.equal(overlaps.length, 0, "An intended new edition already exists");
