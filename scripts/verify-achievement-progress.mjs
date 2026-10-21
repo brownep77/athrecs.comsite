@@ -3,6 +3,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 import { buildProfileAchievementSummary } from "../src/lib/athrecs/profile-achievement-summary.ts";
+import "./verify-calendar-year-achievements.mjs";
 
 const today = new Date("2026-10-13T12:00:00Z");
 const race = (id, overrides = {}) => ({
@@ -94,7 +95,15 @@ const history = {
     },
   ],
 };
-assert.deepEqual(buildProfileAchievementSummary([], [history], today), empty);
+const reportedYear = buildProfileAchievementSummary([], [history], today);
+assert.deepEqual(reportedYear.earned.find(({ id }) => id === "years").calendarYears, [
+  { year: 2026, verified: false },
+]);
+assert.equal(
+  reportedYear.progress.find(({ id }) => id === "finishes").completed,
+  0,
+  "Counting a recorded year does not verify the underlying performance",
+);
 history.performances[0].verificationStatus = "source_verified";
 assert.equal(buildProfileAchievementSummary([], [history], today).progress[0].completed, 1);
 
@@ -124,6 +133,19 @@ try {
   );
   assert(countriesMarkup.includes("3 countries raced"));
   assert(!countriesMarkup.includes("2 countries raced"));
+  const yearMarkup = renderToStaticMarkup(
+    createElement(AchievementSummary, { summary: reportedYear }),
+  );
+  assert(yearMarkup.includes("Raced in 1 calendar year"));
+  assert(yearMarkup.includes('aria-label="Recorded racing years"'));
+  assert(yearMarkup.includes('aria-label="2026: awaiting verification"'));
+  assert(yearMarkup.includes("Each year counts once"));
+  const verifiedYearMarkup = renderToStaticMarkup(
+    createElement(AchievementSummary, {
+      summary: buildProfileAchievementSummary([], [history], today),
+    }),
+  );
+  assert(verifiedYearMarkup.includes('aria-label="2026: verified result recorded"'));
   const input = {
     slug: "example",
     displayName: "Example Athlete",
@@ -140,6 +162,30 @@ try {
     firstPage.achievements,
     secondPage.achievements,
     "Achievements count the complete record on every page",
+  );
+  const yearsInput = {
+    ...input,
+    histories: [
+      {
+        ...history,
+        performances: [2010, 2012, 2018, 2020].map((year) => ({
+          ...history.performances[0],
+          year,
+          date: "",
+          verificationStatus: "unverified",
+        })),
+      },
+    ],
+  };
+  const yearsPage = buildPublicAthletePreview(yearsInput);
+  assert.deepEqual(
+    yearsPage.achievements,
+    buildPublicAthletePreview({ ...yearsInput, resultPage: 2 }).achievements,
+    "All recorded years count before pagination",
+  );
+  assert.equal(
+    yearsPage.achievements.earned.find(({ id }) => id === "years").title,
+    "Raced in 5 calendar years",
   );
   const finish = firstPage.achievements.progress.find((goal) => goal.id === "finishes");
   assert.equal(finish.completed, 40);

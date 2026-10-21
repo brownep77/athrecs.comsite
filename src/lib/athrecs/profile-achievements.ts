@@ -2,6 +2,7 @@ import { isCompletedHistoryResult, type AchievementResult } from "./profile-hist
 import { countryFlag } from "./country-flags.ts";
 import { eligiblePerformance, performanceGroup } from "./profile-records.ts";
 import { isDisqualified } from "./result-details.ts";
+import { hasFinishMark, resultVerification } from "./profile-result-presentation.ts";
 
 const DAY = 86_400_000;
 const RUNNING_SPORTS = new Set(["running", "athletics", "parkrun"]);
@@ -78,7 +79,50 @@ export type ProfileAchievement = {
   title: string;
   rule: string;
   results: AchievementResult[];
+  calendarYears?: { year: number; verified: boolean }[];
 };
+
+/** A known racing year does not require a verification decision or an exact day. */
+function recordedCalendarYear(result: AchievementResult, today: Date): number | null {
+  const row = result.history?.performance;
+  if (
+    result.conflicting ||
+    result.details?.syntheticTest ||
+    result.details?.profileExcluded ||
+    isDisqualified(result)
+  )
+    return null;
+  if (
+    row &&
+    (row.syntheticTest ||
+      row.profileExcluded ||
+      !hasFinishMark(row.performance, row.place) ||
+      /conflicting (?:source|details|result)/i.test(row.notes ?? "") ||
+      row.labels.some((label) => /^(?:split|intermediate)(?:\b|:)/i.test(label)))
+  )
+    return null;
+  if (!row && !isCompletedResult(result, today)) return null;
+  const date = row?.date ?? result.eventDate;
+  if (row?.endDate && (resultDay(row.endDate) == null || resultDay(row.endDate)! > today.getTime()))
+    return null;
+  if (date && !/^\d{4}$/.test(date)) {
+    const day = resultDay(date);
+    return day != null && day <= today.getTime() ? Number(date.slice(0, 4)) : null;
+  }
+  let year = date || row?.yearLabel?.trim() || String(row?.year ?? "");
+  if (row?.dateLabel && !date) {
+    const labelledYears = [...new Set(row.dateLabel.match(/\b\d{4}\b/g) ?? [])];
+    if (labelledYears.length > 1 || /\b\d{4}\s*[/–-]\s*\d{2}\b/.test(row.dateLabel)) return null;
+    if (labelledYears.length === 1) {
+      if (year && year !== labelledYears[0]) return null;
+      year = labelledYears[0];
+    }
+  }
+  // A season such as 2018/2019 cannot establish either individual year.
+  if (!/^\d{4}$/.test(year) || Number(year) > today.getUTCFullYear()) return null;
+  if (!date && row?.endDate && row.endDate.slice(0, 4) !== year) return null;
+  return Number(year);
+}
 
 export function resultEvidenceLabel(result: AchievementResult): string {
   if (/athlete|self|manual|user/i.test(result.resultSource ?? "")) return "Athlete-submitted";
@@ -105,7 +149,11 @@ export function runningDistanceKind(result: AchievementResult): "marathon" | "ul
   return null;
 }
 
-export function buildProfileAchievements(results: AchievementResult[], today = new Date()) {
+export function buildProfileAchievements(
+  results: AchievementResult[],
+  today = new Date(),
+  options: { includeRecordedYears?: boolean } = {},
+) {
   const editions = new Map<string, AchievementResult[]>();
   for (const result of results) {
     const row = result.history?.performance;
@@ -281,16 +329,43 @@ export function buildProfileAchievements(results: AchievementResult[], today = n
       "At least one completed result in each sport; track and field count as Athletics, while road running and parkrun count as Running.",
       sports.map((sport) => byDate(finishes).find((result) => recordedSport(result) === sport)!),
     );
-  const years = [
-    ...new Set(finishes.map((r) => r.eventDate.slice(0, 4)).filter((year) => /^\d{4}$/.test(year))),
-  ].sort();
-  if (years.length >= 3)
+  const yearResults = options.includeRecordedYears
+    ? [
+        ...finishes.filter((result) => !result.history),
+        ...results.filter((result) => result.history),
+      ]
+    : finishes;
+  const byYear = new Map<number, AchievementResult[]>();
+  for (const result of yearResults) {
+    const year = recordedCalendarYear(result, today);
+    if (year === null) continue;
+    const entries = byYear.get(year) ?? [];
+    entries.push(result);
+    byYear.set(year, entries);
+  }
+  const verifiedYearResult = (result: AchievementResult) =>
+    resultVerification(
+      result.history?.performance.verificationStatus ?? result.details?.verificationStatus,
+      result.history?.performance.providerName || result.resultSource,
+      result.conflicting,
+    ).verified;
+  const calendarYears = [...byYear]
+    .sort(([a], [b]) => a - b)
+    .map(([year, entries]) => ({
+      year,
+      verified: entries.some(verifiedYearResult),
+    }));
+  if (calendarYears.length >= (options.includeRecordedYears ? 1 : 3)) {
     add(
       "years",
-      `Raced in ${years.length} calendar years`,
+      `Raced in ${calendarYears.length} calendar ${calendarYears.length === 1 ? "year" : "years"}`,
       "At least one recorded finish in each year; this does not imply an uninterrupted streak.",
-      years.map((year) => byDate(finishes).find((r) => r.eventDate.startsWith(year))!),
+      calendarYears.map(
+        ({ year }) => byYear.get(year)!.find(verifiedYearResult) ?? byYear.get(year)![0],
+      ),
     );
+    milestones[milestones.length - 1].calendarYears = calendarYears;
+  }
   const priorBests = new Map<string, AchievementResult>();
   const improvements: AchievementResult[] = [];
   for (const result of byDate(finishes).filter(
@@ -325,6 +400,7 @@ export function buildProfileAchievements(results: AchievementResult[], today = n
     majors,
     completedMajors,
     milestones,
+    calendarYears,
     nextFinishTarget,
   };
 }

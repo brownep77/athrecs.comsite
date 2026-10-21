@@ -2,6 +2,7 @@ import type { ProfileAchievementSummary } from "@/lib/athrecs/profile-achievemen
 import { achievementPalette } from "@/lib/athrecs/achievement-colours";
 import { ProfileAward } from "./ProfileAward";
 import { Check } from "lucide-react";
+import { CalendarYearList } from "./CalendarYearList";
 
 export function AchievementSummary({ summary }: { summary: ProfileAchievementSummary }) {
   const raceWins = summary.raceWins ?? [];
@@ -35,6 +36,9 @@ export function AchievementSummary({ summary }: { summary: ProfileAchievementSum
                   {achievement.title}
                 </p>
                 <p className="mt-1 text-xs">{achievement.rule}</p>
+                {achievement.calendarYears ? (
+                  <CalendarYearList years={achievement.calendarYears} />
+                ) : null}
               </li>
             ))}
           </ul>

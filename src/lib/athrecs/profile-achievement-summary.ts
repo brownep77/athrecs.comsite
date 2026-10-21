@@ -1,4 +1,4 @@
-import { buildProfileAchievements } from "./profile-achievements.ts";
+import { buildProfileAchievements, type ProfileAchievement } from "./profile-achievements.ts";
 import { profileAchievementResults } from "./profile-history-results.ts";
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory } from "./source-performance-history";
@@ -22,7 +22,7 @@ export type AchievementProgress = {
 };
 
 export type ProfileAchievementSummary = {
-  earned: { id: string; title: string; rule: string }[];
+  earned: Pick<ProfileAchievement, "id" | "title" | "rule" | "calendarYears">[];
   progress: AchievementProgress[];
   raceWins: RaceWinSummary[];
 };
@@ -38,8 +38,10 @@ export function buildProfileAchievementSummary(
     profileAchievementResults(
       results.filter((result) => !result.details?.profileExcluded),
       histories,
+      { includeUnreviewedHistory: true },
     ),
     today,
+    { includeRecordedYears: true },
   );
   const progress: AchievementProgress[] = [];
   const add = (
@@ -75,15 +77,21 @@ export function buildProfileAchievementSummary(
       "different countries",
     );
   if (record.sports.length === 1) add("sports", 1, [2], "different sport", "different sports");
-  const years = new Set(
-    record.finishes
-      .map((result) => result.eventDate.slice(0, 4))
-      .filter((year) => /^\d{4}$/.test(year)),
-  );
-  if (years.size > 0 && years.size < 3)
-    add("years", years.size, [3], "calendar year with a finish", "calendar years with a finish");
+  if (record.calendarYears.length)
+    add(
+      "years",
+      record.calendarYears.length,
+      [2, 3, 5, 10, 15, 20, 25, 30, 40, 50],
+      "calendar year with a finish",
+      "calendar years with a finish",
+    );
   return {
-    earned: record.milestones.map(({ id, title, rule }) => ({ id, title, rule })),
+    earned: record.milestones.map(({ id, title, rule, calendarYears }) => ({
+      id,
+      title,
+      rule,
+      ...(calendarYears ? { calendarYears } : {}),
+    })),
     progress,
     // Counts only: full histories, source URLs and research notes stay out of the public summary.
     raceWins: buildRaceWinAchievements(
