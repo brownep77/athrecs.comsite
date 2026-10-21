@@ -424,7 +424,8 @@ export function RacePageContent({
                 <p className="text-sm font-medium text-muted">
                   {isRunningEvent && nextDayEditions.length > 1
                     ? `${nextDayEditions.length} distances · see start times below`
-                    : (nextStart ?? (zoneAbbr ? `Time TBC · ${zoneAbbr}` : "Time TBC"))}
+                    : (nextStart ??
+                      (zoneAbbr ? `Time not yet verified · ${zoneAbbr}` : "Time not yet verified"))}
                 </p>
               </div>
             ) : (
