@@ -14,6 +14,7 @@ import { venueForEvent } from "@/lib/athrecs/venue";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { raceGuideFor, supplementedStart } from "@/data/runrecs-race-guides";
+import { FIXTURE_DETAILS } from "@/data/fixture-details";
 
 export function RacePracticalInformation({
   data,
@@ -77,6 +78,10 @@ export function RacePracticalInformation({
               const entry = editionEntry(edition);
               const source = raceLink(edition.source_url);
               const editionGuide = raceGuideFor(event, edition.event_date);
+              const notes =
+                FIXTURE_DETAILS[`${event.slug}|${edition.event_date}`]?.starts[
+                  edition.distance_code
+                ]?.publicNote ?? edition.notes;
               return (
                 <li key={`${edition.id}-${edition.event_date}`} className="space-y-2 p-4 sm:p-5">
                   <div className="flex flex-wrap items-start justify-between gap-3">
@@ -121,9 +126,7 @@ export function RacePracticalInformation({
                       <p className="text-sm text-muted">Entry link not yet listed</p>
                     )}
                   </div>
-                  {edition.notes ? (
-                    <p className="text-sm leading-relaxed text-muted">{edition.notes}</p>
-                  ) : null}
+                  {notes ? <p className="text-sm leading-relaxed text-muted">{notes}</p> : null}
                   {editionGuide || source ? (
                     <a
                       href={editionGuide?.website || source!}
