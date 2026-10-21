@@ -1,5 +1,11 @@
 # Official start-time priority — 21 October 2026
 
+**Superseded for Reepham adults:** the [subsequent clarification check](norfolk-clarification-2026-10-21.md)
+restores TBC while awaiting the organiser. The Marriott's Way selected starts
+remain supported by the organiser timetable and its FAQ. The account below is
+retained as the evidence and decision history for PR #790, not the current
+Reepham start-time decision.
+
 The owner requested organiser or governing-body precedence when starts conflict.
 This follow-up supersedes the TBC decisions for these two events in the
 20 October audit. It does not claim direct contact with either organiser or
