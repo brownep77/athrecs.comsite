@@ -29,7 +29,7 @@ export function profilePersonalBestSummary(
       mark:
         candidate.kind === "reported"
           ? (candidate.value.displayMark ?? formatDuration(row.finishTimeSeconds))
-          : (candidate.value.history?.performance.performance ?? recordedMark(row)),
+          : (candidate.value.history?.performance.performance ?? recordedMark(candidate.value)),
       event: candidate.kind === "reported" ? candidate.value.event : candidate.value.eventName,
       date: candidate.kind === "reported" ? candidate.value.date : candidate.value.eventDate,
       label:
