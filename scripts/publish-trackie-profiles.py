@@ -58,7 +58,7 @@ def prepare(args):
     for path in sorted(args.captures.glob('*.capture.json')):
         cap=json.loads(path.read_text()); p=cap['payload']; key=p['sourceKey']
         if not p['rows'] or cap['state']!='compared': continue
-        if p['schemaVersion'] not in (4,5) or cap['issues']: raise ValueError('Unreviewed parser version')
+        if p['schemaVersion'] not in (4,5,6) or cap['issues']: raise ValueError('Unreviewed parser version')
         if hashlib.sha256(pathlib.Path(cap['sourcePath']).read_bytes()).hexdigest()!=cap['sourceSha256']: raise ValueError('Original PDF changed')
         m={**config['meetings'][key], 'key':key, 'date':p['index']['date'], 'sourceUrl':p['sourceUrl'], 'attachmentUrl':p['attachmentUrl'], 'competitions':[]}
         for heading, rs in __import__('itertools').groupby(sorted(p['rows'],key=lambda r:r['tableKey']),lambda r:r['tableKey']):
@@ -71,6 +71,11 @@ def prepare(args):
             if not r['independentTextCompared']: raise ValueError('Uncompared row')
             name=display_name(r['name']); reasons=[]
             if len(name.split())<2 or re.search(r'[%#]|\b[TF]\d{2}\b',name): reasons.append('source name needs review')
+            if re.search(r'\ufffd|Ã.|Â.',name): reasons.append('source name encoding needs review')
+            source_age=re.fullmatch(r'[MWF]?(\d+)',r['original'].get('Age') or '')
+            age_band=re.fullmatch(r'(\d+)-(\d+)',r['category'])
+            if source_age and age_band and not int(age_band[1])-1 <= int(source_age[1]) <= int(age_band[2])+1:
+                reasons.append('explicit source age conflicts with category')
             if key=='10363' and r['performance']=='2:22.58': reasons.append('implausible one-mile source mark')
             if r['original'].get('Annotation')=='Ran 1 km': reasons.append('source distance differs from event heading')
             if key=='10364' and '95-99' in r['tableKey']: reasons.append('source age conflicts with other entries')
