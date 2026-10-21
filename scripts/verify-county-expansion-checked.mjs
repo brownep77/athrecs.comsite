@@ -95,6 +95,7 @@ try {
     assert.equal(live.startTime, ed.startTime ?? null);
     assert.equal(live.sourceUrl, ed.source);
     assert.equal(live.checkedAt, "2026-10-21");
+    if (ed.entryUrl) assert.equal(live.entryUrl, ed.entryUrl);
   }
   assert.equal(rows.find((row) => row.slug === "race-for-life-ipswich").county, "Suffolk");
   assert.equal(
