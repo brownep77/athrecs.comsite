@@ -13,6 +13,8 @@ export default tseslint.config(
       ".output/**",
       ".vercel/**",
       ".nitro/**",
+      // Browser privacy checks generate bundled third-party dependencies here.
+      ".client-data-vite/**",
       "node_modules/**",
       "src/routeTree.gen.ts",
     ],
