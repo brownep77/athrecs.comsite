@@ -1,0 +1,1002 @@
+{
+  "events": [
+    {
+      "slug": "race-for-life-southend",
+      "name": "Race for Life Southend-on-Sea",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Southend-on-Sea",
+      "area": "Garon Park",
+      "surface": "Mixed",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/garon-park-5k-2027-05-16-1100",
+      "summary": "Race for Life Southend-on-Sea at Garon Park in Southend-on-Sea, Essex. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life Southend-on-Sea at Garon Park in Southend-on-Sea, Essex. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "distances": ["5K"]
+    },
+    {
+      "slug": "race-for-life-bury-st-edmunds",
+      "name": "Race for Life Bury St Edmunds",
+      "sport": "Running",
+      "country": "England",
+      "county": "Suffolk",
+      "city": "Bury St Edmunds",
+      "area": "Nowton Park",
+      "surface": "Mixed",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-3k-2027-06-06-1100",
+      "summary": "Race for Life Bury St Edmunds at Nowton Park in Bury St Edmunds, Suffolk. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life Bury St Edmunds at Nowton Park in Bury St Edmunds, Suffolk. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "distances": ["3K", "5K", "10K"]
+    },
+    {
+      "slug": "race-for-life-brentwood",
+      "name": "Race for Life Brentwood",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Brentwood",
+      "area": "Weald Country Park",
+      "surface": "Mixed",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-10k-2027-05-22-1000",
+      "summary": "Race for Life Brentwood at Weald Country Park in Brentwood, Essex. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life Brentwood at Weald Country Park in Brentwood, Essex. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "distances": ["10K", "3K", "5K"]
+    },
+    {
+      "slug": "race-for-life-beckenham-place-park",
+      "name": "Race for Life Beckenham Place Park",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "Beckenham",
+      "area": "Beckenham Place Park",
+      "surface": "Mixed",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/beckenham-place-park-10k-2027-07-17-1000",
+      "summary": "Race for Life Beckenham Place Park at Beckenham Place Park in Beckenham, Greater London. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life Beckenham Place Park at Beckenham Place Park in Beckenham, Greater London. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "distances": ["10K"]
+    },
+    {
+      "slug": "race-for-life-glasgow-5k-2027",
+      "name": "Race for Life Glasgow",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Glasgow City",
+      "city": "Glasgow",
+      "area": "Glasgow Green",
+      "surface": "Mixed",
+      "summary": "Race for Life Glasgow at Glasgow Green in Glasgow, Glasgow City. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life Glasgow at Glasgow Green in Glasgow, Glasgow City. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-3k-2027-05-16-1000",
+      "distances": ["5K", "3K", "10K"]
+    },
+    {
+      "slug": "race-for-life-york-5k-2027",
+      "name": "Race for Life York",
+      "sport": "Running",
+      "country": "England",
+      "county": "North Yorkshire",
+      "city": "York",
+      "area": "The Knavesmire",
+      "surface": "Mixed",
+      "summary": "Race for Life York at The Knavesmire in York, North Yorkshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life York at The Knavesmire in York, North Yorkshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/the-knavesmire-10k-2027-05-02-1000",
+      "distances": ["5K", "10K"]
+    },
+    {
+      "slug": "race-for-life-winchester-5k-2027",
+      "name": "Race for Life Winchester",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Winchester",
+      "area": "North Walls Recreation Ground",
+      "surface": "Mixed",
+      "summary": "Race for Life Winchester at North Walls Recreation Ground in Winchester, Hampshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life Winchester at North Walls Recreation Ground in Winchester, Hampshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/north-walls-recreation-ground-3k-2027-05-16-1100",
+      "distances": ["5K", "3K"]
+    },
+    {
+      "slug": "race-for-life-edinburgh-holyrood-5k-2027",
+      "name": "Race for Life Edinburgh - Holyrood",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "City of Edinburgh",
+      "city": "Edinburgh",
+      "area": "Holyrood Park",
+      "surface": "Mixed",
+      "summary": "Race for Life Edinburgh - Holyrood at Holyrood Park in Edinburgh, City of Edinburgh. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life Edinburgh - Holyrood at Holyrood Park in Edinburgh, City of Edinburgh. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/holyrood-park-10k-2027-06-06-1015",
+      "distances": ["5K", "10K"]
+    },
+    {
+      "slug": "race-for-life-swindon-5k-2027",
+      "name": "Race for Life Swindon",
+      "sport": "Running",
+      "country": "England",
+      "county": "Wiltshire",
+      "city": "Swindon",
+      "area": "Lydiard Park",
+      "surface": "Mixed",
+      "summary": "Race for Life Swindon at Lydiard Park in Swindon, Wiltshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life Swindon at Lydiard Park in Swindon, Wiltshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/lydiard-park-3k-2027-05-01-1100",
+      "distances": ["5K", "3K"]
+    },
+    {
+      "slug": "race-for-life-coventry-warwickshire-5k-2027",
+      "name": "Race for Life Coventry & Warwickshire",
+      "sport": "Running",
+      "country": "England",
+      "county": "Warwickshire",
+      "city": "Kenilworth",
+      "area": "Stoneleigh Park",
+      "surface": "Mixed",
+      "summary": "Race for Life Coventry & Warwickshire at Stoneleigh Park in Kenilworth, Warwickshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "description": "Race for Life Coventry & Warwickshire at Stoneleigh Park in Kenilworth, Warwickshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/stoneleigh-park-10k-2027-05-08-1000",
+      "distances": ["5K", "10K"]
+    },
+    {
+      "slug": "dave-wrights-colchester-15-and-75-mile",
+      "name": "Dave Wrights Colchester 15 and 7.5 Mile",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Langham",
+      "area": "Langham Community Centre, School Road, CO4 5PA",
+      "surface": "Road",
+      "organiser": "Craig’s Events",
+      "website": "https://www.entrycentral.com/event/130400",
+      "summary": "One- and two-lap road races from Langham Community Centre near Colchester, through the Essex countryside around Langham and Boxted. Both distances share the published 09:15 start.",
+      "description": "One- and two-lap road races from Langham Community Centre near Colchester, through the Essex countryside around Langham and Boxted. Both distances share the published 09:15 start.",
+      "distances": ["7.5mi", "15mi"]
+    },
+    {
+      "slug": "windmill-way-wander",
+      "name": "Windmill Way Wander",
+      "sport": "Running",
+      "country": "England",
+      "county": "Suffolk",
+      "city": "Bury St Edmunds",
+      "area": "Suffolk Running Centre, Church Road, IP29 5AX",
+      "surface": "Road",
+      "summary": "A choice of running distances from Suffolk Running Centre near Bury St Edmunds, using the rolling Windmill Way road route. The organiser gives a 09:00 mass start and a seven-hour cut-off.",
+      "description": "A choice of running distances from Suffolk Running Centre near Bury St Edmunds, using the rolling Windmill Way road route. The organiser gives a 09:00 mass start and a seven-hour cut-off.",
+      "organiser": "Zig Zag Running",
+      "website": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "distances": ["Half", "5K", "10K", "Marathon"]
+    },
+    {
+      "slug": "suffolk-go-wild",
+      "name": "Suffolk Go Wild",
+      "sport": "Cycling",
+      "country": "England",
+      "county": "Suffolk",
+      "city": "Saxmundham",
+      "area": "RSPB Minsmere",
+      "surface": "Gravel",
+      "summary": "Suffolk Go Wild at RSPB Minsmere in Saxmundham, Suffolk. Choose from 25mi, 50mi.",
+      "description": "Suffolk Go Wild at RSPB Minsmere in Saxmundham, Suffolk. Choose from 25mi, 50mi. Mixed terrain with about 45% off-road. Village opening hours are not start times. The family ride distance has not been confirmed.",
+      "organiser": "TPR Events",
+      "website": "https://tprevents.co.uk/product/go-wild/",
+      "distances": ["5mi", "25mi", "50mi"]
+    }
+  ],
+  "editions": [
+    {
+      "eventSlug": "race-for-life-southend",
+      "date": "2027-05-16",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/garon-park-5k-2027-05-16-1100",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/garon-park-5k-2027-05-16-1100",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/garon-park-5k-2027-05-16-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/garon-park-5k-2027-05-16-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/garon-park-5k-2027-05-16-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-bury-st-edmunds",
+      "date": "2027-06-06",
+      "distance": "3K",
+      "distanceKm": 3,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-3k-2027-06-06-1100",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-3k-2027-06-06-1100",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-3k-2027-06-06-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-3k-2027-06-06-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-3k-2027-06-06-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-brentwood",
+      "date": "2027-05-22",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-10k-2027-05-22-1000",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-10k-2027-05-22-1000",
+      "startTime": "10:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-10k-2027-05-22-1000",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-10k-2027-05-22-1000",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-10k-2027-05-22-1000",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-bury-st-edmunds",
+      "date": "2027-06-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-5k-2027-06-06-1100",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-5k-2027-06-06-1100",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-5k-2027-06-06-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-5k-2027-06-06-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-5k-2027-06-06-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-brentwood",
+      "date": "2027-05-22",
+      "distance": "3K",
+      "distanceKm": 3,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-3k-2027-05-22-1100",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-3k-2027-05-22-1100",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-3k-2027-05-22-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-3k-2027-05-22-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-3k-2027-05-22-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-bury-st-edmunds",
+      "date": "2027-06-06",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-10k-2027-06-06-1100",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-10k-2027-06-06-1100",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-10k-2027-06-06-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-10k-2027-06-06-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-10k-2027-06-06-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-brentwood",
+      "date": "2027-05-22",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-5k-2027-05-22-1100",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-5k-2027-05-22-1100",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-5k-2027-05-22-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-5k-2027-05-22-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-5k-2027-05-22-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-beckenham-place-park",
+      "date": "2027-07-17",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/beckenham-place-park-10k-2027-07-17-1000",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/beckenham-place-park-10k-2027-07-17-1000",
+      "startTime": "10:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/beckenham-place-park-10k-2027-07-17-1000",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/beckenham-place-park-10k-2027-07-17-1000",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/beckenham-place-park-10k-2027-07-17-1000",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-glasgow-5k-2027",
+      "date": "2027-05-16",
+      "distance": "3K",
+      "distanceKm": 3,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-3k-2027-05-16-1000",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-3k-2027-05-16-1000",
+      "startTime": "10:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-3k-2027-05-16-1000",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-3k-2027-05-16-1000",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-3k-2027-05-16-1000",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-york-5k-2027",
+      "date": "2027-05-02",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/the-knavesmire-10k-2027-05-02-1000",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/the-knavesmire-10k-2027-05-02-1000",
+      "startTime": "10:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/the-knavesmire-10k-2027-05-02-1000",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/the-knavesmire-10k-2027-05-02-1000",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/the-knavesmire-10k-2027-05-02-1000",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-winchester-5k-2027",
+      "date": "2027-05-16",
+      "distance": "3K",
+      "distanceKm": 3,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/north-walls-recreation-ground-3k-2027-05-16-1100",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/north-walls-recreation-ground-3k-2027-05-16-1100",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/north-walls-recreation-ground-3k-2027-05-16-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/north-walls-recreation-ground-3k-2027-05-16-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/north-walls-recreation-ground-3k-2027-05-16-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-glasgow-5k-2027",
+      "date": "2027-05-16",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-10k-2027-05-16-0900",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-10k-2027-05-16-0900",
+      "startTime": "09:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-10k-2027-05-16-0900",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-10k-2027-05-16-0900",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-10k-2027-05-16-0900",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-edinburgh-holyrood-5k-2027",
+      "date": "2027-06-06",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/holyrood-park-10k-2027-06-06-1015",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/holyrood-park-10k-2027-06-06-1015",
+      "startTime": "10:15",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/holyrood-park-10k-2027-06-06-1015",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/holyrood-park-10k-2027-06-06-1015",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/holyrood-park-10k-2027-06-06-1015",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-swindon-5k-2027",
+      "date": "2027-05-01",
+      "distance": "3K",
+      "distanceKm": 3,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/lydiard-park-3k-2027-05-01-1100",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/lydiard-park-3k-2027-05-01-1100",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lydiard-park-3k-2027-05-01-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lydiard-park-3k-2027-05-01-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lydiard-park-3k-2027-05-01-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-coventry-warwickshire-5k-2027",
+      "date": "2027-05-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/stoneleigh-park-10k-2027-05-08-1000",
+      "notes": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change. Source checked 2026-10-21: https://raceforlife.cancerresearchuk.org/find-an-event/stoneleigh-park-10k-2027-05-08-1000",
+      "startTime": "10:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/stoneleigh-park-10k-2027-05-08-1000",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/stoneleigh-park-10k-2027-05-08-1000",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/stoneleigh-park-10k-2027-05-08-1000",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "dave-wrights-colchester-15-and-75-mile",
+      "date": "2027-03-21",
+      "distance": "7.5mi",
+      "distanceKm": 12.07008,
+      "status": "Open",
+      "source": "https://www.entrycentral.com/event/130400",
+      "notes": "The organiser’s description and dated entry listing agree on 21 March 2027, 09:15. Registration opens 08:00 and closes 08:45. An outdated entry-closing sentence still says March 2026; no entry deadline has been copied. Source checked 2026-10-21: https://www.entrycentral.com/event/130400",
+      "startTime": "09:15",
+      "entryUrl": "https://www.entrycentral.com/event/130400",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Craig’s Events",
+          "entryUrl": "https://www.entrycentral.com/event/130400",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://www.entrycentral.com/event/130400",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "dave-wrights-colchester-15-and-75-mile",
+      "date": "2027-03-21",
+      "distance": "15mi",
+      "distanceKm": 24.14016,
+      "status": "Open",
+      "source": "https://www.entrycentral.com/event/130400",
+      "notes": "The organiser’s description and dated entry listing agree on 21 March 2027, 09:15. Registration opens 08:00 and closes 08:45. An outdated entry-closing sentence still says March 2026; no entry deadline has been copied. Source checked 2026-10-21: https://www.entrycentral.com/event/130400",
+      "startTime": "09:15",
+      "entryUrl": "https://www.entrycentral.com/event/130400",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Craig’s Events",
+          "entryUrl": "https://www.entrycentral.com/event/130400",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://www.entrycentral.com/event/130400",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "windmill-way-wander",
+      "date": "2027-01-16",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "Open",
+      "source": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "notes": "The organiser lists fixed 5K, 10K, half-marathon and marathon entries with a 09:00 mass start. The organiser-written route description says all road; the entry site’s generic Trail tag differs. An unspecified ultra total has not been inferred. Source checked 2026-10-21: https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "startTime": "09:00",
+      "entryUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Zig Zag Running",
+          "entryUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "windmill-way-wander",
+      "date": "2027-01-16",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "notes": "The organiser lists fixed 5K, 10K, half-marathon and marathon entries with a 09:00 mass start. The organiser-written route description says all road; the entry site’s generic Trail tag differs. An unspecified ultra total has not been inferred. Source checked 2026-10-21: https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "startTime": "09:00",
+      "entryUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Zig Zag Running",
+          "entryUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "windmill-way-wander",
+      "date": "2027-01-16",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "Open",
+      "source": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "notes": "The organiser lists fixed 5K, 10K, half-marathon and marathon entries with a 09:00 mass start. The organiser-written route description says all road; the entry site’s generic Trail tag differs. An unspecified ultra total has not been inferred. Source checked 2026-10-21: https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "startTime": "09:00",
+      "entryUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Zig Zag Running",
+          "entryUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "suffolk-go-wild",
+      "date": "2026-11-01",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://www.cyclinguk.org/event/rspb-suffolk-go-wild-gravel",
+      "notes": "Cycling UK’s dated 2026 listing confirms the five-mile Family Adventure route within RSPB Minsmere. A rider start was not located; village opening hours are not a start time. Check the organiser’s final rider instructions. Source checked 2026-10-21: https://www.cyclinguk.org/event/rspb-suffolk-go-wild-gravel"
+    }
+  ],
+  "details": {
+    "race-for-life-southend|2027-05-16": {
+      "place": {
+        "city": "Southend-on-Sea",
+        "county": "Essex"
+      },
+      "summary": "Race for Life Southend-on-Sea at Garon Park in Southend-on-Sea, Essex. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/garon-park-5k-2027-05-16-1100",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "5K": {
+          "time": "11:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/garon-park-5k-2027-05-16-1100"
+        }
+      }
+    },
+    "race-for-life-bury-st-edmunds|2027-06-06": {
+      "place": {
+        "city": "Bury St Edmunds",
+        "county": "Suffolk"
+      },
+      "summary": "Race for Life Bury St Edmunds at Nowton Park in Bury St Edmunds, Suffolk. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-3k-2027-06-06-1100",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "3K": {
+          "time": "11:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-3k-2027-06-06-1100"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-5k-2027-06-06-1100"
+        },
+        "10K": {
+          "time": "11:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/nowton-park-10k-2027-06-06-1100"
+        }
+      }
+    },
+    "race-for-life-brentwood|2027-05-22": {
+      "place": {
+        "city": "Brentwood",
+        "county": "Essex"
+      },
+      "summary": "Race for Life Brentwood at Weald Country Park in Brentwood, Essex. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-10k-2027-05-22-1000",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "10K": {
+          "time": "10:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-10k-2027-05-22-1000"
+        },
+        "3K": {
+          "time": "11:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-3k-2027-05-22-1100"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/weald-country-park-5k-2027-05-22-1100"
+        }
+      }
+    },
+    "race-for-life-beckenham-place-park|2027-07-17": {
+      "place": {
+        "city": "Beckenham",
+        "county": "Greater London"
+      },
+      "summary": "Race for Life Beckenham Place Park at Beckenham Place Park in Beckenham, Greater London. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/beckenham-place-park-10k-2027-07-17-1000",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "10K": {
+          "time": "10:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/beckenham-place-park-10k-2027-07-17-1000"
+        }
+      }
+    },
+    "race-for-life-glasgow-5k-2027|2027-05-16": {
+      "place": {
+        "city": "Glasgow",
+        "county": "Glasgow City"
+      },
+      "summary": "Race for Life Glasgow at Glasgow Green in Glasgow, Glasgow City. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-3k-2027-05-16-1000",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "3K": {
+          "time": "10:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-3k-2027-05-16-1000"
+        },
+        "10K": {
+          "time": "09:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-10k-2027-05-16-0900"
+        },
+        "5K": {
+          "time": "10:00",
+          "note": "Current organiser distance page rechecked.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/glasgow-green-5k-2027-05-16-1000"
+        }
+      }
+    },
+    "race-for-life-york-5k-2027|2027-05-02": {
+      "place": {
+        "city": "York",
+        "county": "North Yorkshire"
+      },
+      "summary": "Race for Life York at The Knavesmire in York, North Yorkshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/the-knavesmire-10k-2027-05-02-1000",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "10K": {
+          "time": "10:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/the-knavesmire-10k-2027-05-02-1000"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "Current organiser distance page rechecked.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/the-knavesmire-5k-2027-05-02-1100"
+        }
+      }
+    },
+    "race-for-life-winchester-5k-2027|2027-05-16": {
+      "place": {
+        "city": "Winchester",
+        "county": "Hampshire"
+      },
+      "summary": "Race for Life Winchester at North Walls Recreation Ground in Winchester, Hampshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/north-walls-recreation-ground-3k-2027-05-16-1100",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "3K": {
+          "time": "11:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/north-walls-recreation-ground-3k-2027-05-16-1100"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "Current organiser distance page rechecked.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/north-walls-recreation-ground-5k-2027-05-16-1100"
+        }
+      }
+    },
+    "race-for-life-edinburgh-holyrood-5k-2027|2027-06-06": {
+      "place": {
+        "city": "Edinburgh",
+        "county": "City of Edinburgh"
+      },
+      "summary": "Race for Life Edinburgh - Holyrood at Holyrood Park in Edinburgh, City of Edinburgh. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/holyrood-park-10k-2027-06-06-1015",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "10K": {
+          "time": "10:15",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/holyrood-park-10k-2027-06-06-1015"
+        }
+      }
+    },
+    "race-for-life-swindon-5k-2027|2027-05-01": {
+      "place": {
+        "city": "Swindon",
+        "county": "Wiltshire"
+      },
+      "summary": "Race for Life Swindon at Lydiard Park in Swindon, Wiltshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lydiard-park-3k-2027-05-01-1100",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "3K": {
+          "time": "11:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lydiard-park-3k-2027-05-01-1100"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "Current organiser distance page rechecked.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lydiard-park-5k-2027-05-01-1100"
+        }
+      }
+    },
+    "race-for-life-coventry-warwickshire-5k-2027|2027-05-08": {
+      "place": {
+        "city": "Kenilworth",
+        "county": "Warwickshire"
+      },
+      "summary": "Race for Life Coventry & Warwickshire at Stoneleigh Park in Kenilworth, Warwickshire. Walk, jog or run a charity route supporting Cancer Research UK; compare the published distance-specific starts and check the organiser’s course information before entering.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/stoneleigh-park-10k-2027-05-08-1000",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "10K": {
+          "time": "10:00",
+          "note": "The organiser’s dated distance page confirms the date, distance and start time. Course layouts remain subject to change.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/stoneleigh-park-10k-2027-05-08-1000"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "Current organiser distance page rechecked.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/stoneleigh-park-5k-2027-05-08-1100"
+        }
+      }
+    },
+    "dave-wrights-colchester-15-and-75-mile|2027-03-21": {
+      "place": {
+        "city": "Langham",
+        "county": "Essex"
+      },
+      "summary": "One- and two-lap road races from Langham Community Centre near Colchester, through the Essex countryside around Langham and Boxted. Both distances share the published 09:15 start.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.entrycentral.com/event/130400",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "7.5mi": {
+          "time": "09:15",
+          "note": "The organiser’s description and dated entry listing agree on 21 March 2027, 09:15. Registration opens 08:00 and closes 08:45. An outdated entry-closing sentence still says March 2026; no entry deadline has been copied.",
+          "sourceUrl": "https://www.entrycentral.com/event/130400"
+        },
+        "15mi": {
+          "time": "09:15",
+          "note": "The organiser’s description and dated entry listing agree on 21 March 2027, 09:15. Registration opens 08:00 and closes 08:45. An outdated entry-closing sentence still says March 2026; no entry deadline has been copied.",
+          "sourceUrl": "https://www.entrycentral.com/event/130400"
+        }
+      }
+    },
+    "windmill-way-wander|2027-01-16": {
+      "place": {
+        "city": "Bury St Edmunds",
+        "county": "Suffolk"
+      },
+      "summary": "A choice of running distances from Suffolk Running Centre near Bury St Edmunds, using the rolling Windmill Way road route. The organiser gives a 09:00 mass start and a seven-hour cut-off.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "5K": {
+          "time": "09:00",
+          "note": "The organiser lists fixed 5K, 10K, half-marathon and marathon entries with a 09:00 mass start. The organiser-written route description says all road; the entry site’s generic Trail tag differs. An unspecified ultra total has not been inferred.",
+          "sourceUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander"
+        },
+        "10K": {
+          "time": "09:00",
+          "note": "The organiser lists fixed 5K, 10K, half-marathon and marathon entries with a 09:00 mass start. The organiser-written route description says all road; the entry site’s generic Trail tag differs. An unspecified ultra total has not been inferred.",
+          "sourceUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander"
+        },
+        "Marathon": {
+          "time": "09:00",
+          "note": "The organiser lists fixed 5K, 10K, half-marathon and marathon entries with a 09:00 mass start. The organiser-written route description says all road; the entry site’s generic Trail tag differs. An unspecified ultra total has not been inferred.",
+          "sourceUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander"
+        },
+        "Half": {
+          "time": "09:00",
+          "note": "Organiser confirms a 09:00 mass start.",
+          "sourceUrl": "https://www.evententry.co.uk/zigzag-2027-windmill-way-wander"
+        }
+      }
+    },
+    "suffolk-go-wild|2026-11-01": {
+      "place": {
+        "city": "Saxmundham",
+        "county": "Suffolk"
+      },
+      "summary": "Suffolk Go Wild at RSPB Minsmere in Saxmundham, Suffolk. Choose from 25mi, 50mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.cyclinguk.org/event/rspb-suffolk-go-wild-gravel",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "The organiser page and Cycling UK listing confirm 1 November 2026. Village hours are 07:00–16:00; a rider start was not located. The FAQ says welcome information is emailed three weeks before and final instructions one week before. The five-mile family option is separately confirmed by Cycling UK.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The organiser page and Cycling UK listing confirm 1 November 2026. Village hours are 07:00–16:00; a rider start was not located. The FAQ says welcome information is emailed three weeks before and final instructions one week before. The five-mile family option is separately confirmed by Cycling UK. Source checked 2026-10-21: https://tprevents.co.uk/product/go-wild/",
+          "sourceUrl": "https://tprevents.co.uk/product/go-wild/"
+        },
+        "50mi": {
+          "time": null,
+          "note": "The organiser page and Cycling UK listing confirm 1 November 2026. Village hours are 07:00–16:00; a rider start was not located. The FAQ says welcome information is emailed three weeks before and final instructions one week before. The five-mile family option is separately confirmed by Cycling UK.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The organiser page and Cycling UK listing confirm 1 November 2026. Village hours are 07:00–16:00; a rider start was not located. The FAQ says welcome information is emailed three weeks before and final instructions one week before. The five-mile family option is separately confirmed by Cycling UK. Source checked 2026-10-21: https://tprevents.co.uk/product/go-wild/",
+          "sourceUrl": "https://tprevents.co.uk/product/go-wild/"
+        },
+        "5mi": {
+          "time": null,
+          "note": "Cycling UK’s dated 2026 listing confirms the five-mile Family Adventure route within RSPB Minsmere. A rider start was not located; village opening hours are not a start time. Check the organiser’s final rider instructions.",
+          "sourceUrl": "https://www.cyclinguk.org/event/rspb-suffolk-go-wild-gravel",
+          "label": "Family ride start not yet verified"
+        }
+      }
+    }
+  }
+}

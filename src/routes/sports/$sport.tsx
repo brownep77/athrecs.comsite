@@ -411,7 +411,7 @@ function FixtureRow({ fixture, category }: { fixture: SportFixture; category: st
   const location = compactFixtureLocation(fixture);
   const starts = fixture.starts.map((start) => ({
     ...start,
-    label: formatFixtureStart(start.time, fixture.eventDate, fixture.timeZone),
+    label: start.label ?? formatFixtureStart(start.time, fixture.eventDate, fixture.timeZone),
   }));
   const zones = new Set(
     starts
@@ -460,9 +460,7 @@ function FixtureRow({ fixture, category }: { fixture: SportFixture; category: st
             <li key={`${start.distance}-${index}`} className="text-muted">
               <DistanceBadge distance={start.distance} />
               {" · "}
-              <span className="whitespace-nowrap">
-                {sharedZone ? start.label.replace(` ${sharedZone}`, "") : start.label}
-              </span>
+              <span>{sharedZone ? start.label.replace(` ${sharedZone}`, "") : start.label}</span>
             </li>
           ))}
         </ul>

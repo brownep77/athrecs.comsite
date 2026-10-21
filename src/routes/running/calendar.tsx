@@ -34,6 +34,7 @@ type CardModel = {
   distance_code: string;
   status: EntryStatus;
   start_time: string | null;
+  start_label?: string | null;
   sport: string;
   surface?: string;
   venue: VenueDetails;
@@ -156,6 +157,7 @@ function CalendarPage() {
                   distance_code: ed.distance_code,
                   status: ed.status as EntryStatus,
                   start_time: ed.start_time,
+                  start_label: ed.start_label,
                   sport: ed.sport,
                   surface: ed.surface,
                   venue: ed.venue,
@@ -203,6 +205,7 @@ function CalendarPage() {
                   distance_code: ed.distance_code,
                   status: ed.status as EntryStatus,
                   start_time: ed.start_time,
+                  start_label: ed.start_label,
                   sport: ed.sport,
                   surface: ed.surface,
                   venue: ed.venue,
@@ -221,12 +224,14 @@ function CalendarPage() {
 
 function EventCard({ ed }: { ed: CardModel }) {
   const st = effectiveStatus(ed.event_date, ed.status);
-  const start = formatStartTime(ed.start_time, {
-    country: ed.country,
-    county: ed.county,
-    nation: ed.venue.nation,
-    date: ed.event_date,
-  });
+  const start =
+    ed.start_label ??
+    formatStartTime(ed.start_time, {
+      country: ed.country,
+      county: ed.county,
+      nation: ed.venue.nation,
+      date: ed.event_date,
+    });
   const venue = ed.venue;
   const nation = venue.nation;
   const distances = sanitizeDistances(ed.event_name, splitDistanceLabels(ed.distance_code));
@@ -266,9 +271,9 @@ function EventCard({ ed }: { ed: CardModel }) {
         <p className="text-sm font-medium text-fg">
           {formatRaceDateShort(ed.event_date)}
           {start ? (
-            <span className="text-accent"> · Starts {start}</span>
+            <span className="text-accent"> · {ed.start_label ? start : `Starts ${start}`}</span>
           ) : (
-            <span className="text-subtle"> · Start time TBC</span>
+            <span className="text-subtle"> · Start time not yet verified</span>
           )}
         </p>
         {!IS_RUNRECS_SITE && <TravelFacts venue={venue} startTime={start} />}

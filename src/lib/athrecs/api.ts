@@ -402,6 +402,7 @@ export const listEvents = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
+    const { checkedFixtureStartLabel } = await import("../../data/fixture-details");
     const mapped = rows
       .map((rawRow) => {
         const { groups_json, ...r } = rawRow;
@@ -411,6 +412,7 @@ export const listEvents = createServerFn({ method: "GET" })
         );
         return {
           ...r,
+          next_start_label: checkedFixtureStartLabel(r.slug, r.next_date, r.next_distance),
           distances: shortRaces ? distances.filter((d) => d === "5K" || d === "10K") : distances,
           groups: parseRaceGroups(groups_json),
           next_status: r.next_status as EntryStatus | null,
@@ -621,9 +623,11 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         end,
         ed.id desc
     `;
+    const { checkedFixtureStartLabel } = await import("../../data/fixture-details");
     const editions = editionRows.map(
       ({ entry_options_json, result_links_json, spectator_access_json, ...edition }) => ({
         ...edition,
+        start_label: checkedFixtureStartLabel(slug, edition.event_date, edition.distance_code),
         entry_options: parseEntryOptions(entry_options_json),
         result_links: parseResultLinks(result_links_json),
         spectator_access: parseSpectatorAccess(spectator_access_json),
@@ -1885,7 +1889,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const { checkedFixtureStart, isReviewedFixturePlaceholder } =
+    const { checkedFixtureStart, checkedFixtureStartLabel, isReviewedFixturePlaceholder } =
       await import("../../data/fixture-details");
     const cleaned = rows
       .filter(
@@ -1897,6 +1901,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         const distanceCode = labels[0] ?? row.distance_code;
         return {
           ...edition,
+          start_label: checkedFixtureStartLabel(row.event_slug, row.event_date, row.distance_code),
           start_time: checkedFixtureStart(
             row.event_slug,
             row.event_date,

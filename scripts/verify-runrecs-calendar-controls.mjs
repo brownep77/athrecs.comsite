@@ -33,12 +33,12 @@ assert.match(runningCatalogue, /e\.sport in \('Running', 'Parkrun'\)/);
 assert.doesNotMatch(runRecsApi, /base\.listEventRegions/);
 assert.match(runningCatalogue, /lower\(coalesce\(e\.region, ''\)\) like/);
 
-assert.match(card, /Start time TBC/);
+assert.match(card, /Start time not yet verified/);
 assert.match(card, /`Starts \$\{startLabel\}`/);
 assert.match(card, /RaceGroupBadges groups=\{race\.groups\}/);
 
 assert.match(calendar, /RaceGroupBadges groups=\{ed\.groups \?\? \[\]\}/);
 assert.match(calendar, /groups: ed\.groups/);
-assert.match(calendar, /Start time TBC/);
+assert.match(calendar, /Start time not yet verified/);
 
 console.log("RunRecs calendar controls, start times and competition badges verified");

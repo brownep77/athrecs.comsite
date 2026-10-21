@@ -3,6 +3,7 @@ import { getSql } from "../db";
 import { ensureAthrecsSeeded } from "../athrecs/seed.server";
 import { todayIso } from "../athrecs/format";
 import type { EntryStatus, EventListItem, RaceGroupInfo, Sport } from "../athrecs/types";
+import { checkedFixtureStartLabel } from "../../data/fixture-details";
 import { supplementedStart } from "../../data/runrecs-race-guides";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication";
 
@@ -351,12 +352,14 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
         ...row,
         distances,
         groups: parseRaceGroups(groups_json),
+        next_start_label: checkedFixtureStartLabel(row.slug, row.next_date, row.next_distance),
         next_start_time:
           row.sport === "Parkrun"
             ? row.next_start_time
             : supplementedStart(row, row.next_date, row.next_distance, row.next_start_time),
         next_starts: nextStarts.map((start) => ({
           distance: start.distance,
+          label: checkedFixtureStartLabel(row.slug, row.next_date, start.distance),
           time:
             row.sport === "Parkrun"
               ? start.time
