@@ -1,5 +1,5 @@
 // A disposable database with the real collector and publication schemas.
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { registerHooks } from "node:module";
 import { resolve } from "node:path";
@@ -15,7 +15,8 @@ registerHooks({
     if (base)
       for (const ext of ["", ".ts", "/index.ts"]) {
         const url = new URL(base.href + ext);
-        if (existsSync(fileURLToPath(url))) return { url: url.href, shortCircuit: true };
+        if (existsSync(fileURLToPath(url)) && statSync(fileURLToPath(url)).isFile())
+          return { url: url.href, shortCircuit: true };
       }
     return next(specifier, context);
   },

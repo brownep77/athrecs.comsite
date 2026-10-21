@@ -3,7 +3,7 @@ import { fixtureTimeZone } from "./fixture-presentation";
 import { resolveCountry } from "./countries";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication";
 import { eventSlugAliases } from "../../data/entry-options";
-import { FIXTURE_DETAILS } from "../../data/fixture-details";
+import { FIXTURE_DETAILS, isReviewedFixturePlaceholder } from "../../data/fixture-details";
 import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews";
 import { ROAD_MARATHONS } from "../../data/road-marathons";
 import { ROAD_HALF_MARATHONS } from "../../data/road-half-marathons";
@@ -35,8 +35,9 @@ export async function queryRacePlaceRows(
     select e.id, e.slug, e.name, e.sport, e.country, e.county, e.region, e.city,
       e.summary, e.surface, (e.featured or exists (select 1 from event_groups g where g.event_id=e.id
         and g.level in ('major','final'))) as featured,
-      array(select distinct ed.distance_code from editions ed where ed.event_id=e.id
-        and ed.status <> 'Cancelled' and ed.distance_code is not null) as "distanceCodes",
+      array(select ed.distance_code from editions ed where ed.event_id=e.id
+        and ed.status <> 'Cancelled' and ed.distance_code is not null
+        union select distance_code from event_distances where event_id=e.id) as "distanceCodes",
       (select max(ed.event_date)::text from editions ed where ed.event_id=e.id
         and ed.event_date < $1::date and ed.status <> 'Cancelled') as "lastDate",
       coalesce((select json_agg(json_build_object(
@@ -58,22 +59,24 @@ export async function queryRacePlaceRows(
   );
   return rows.map((race) => ({
     ...race,
-    editions: race.editions.map((edition) => {
-      const detail = FIXTURE_DETAILS[`${race.slug}|${edition.date}`];
-      const checked = detail?.starts[edition.distance];
-      return {
-        ...edition,
-        startTime: checked
-          ? checked.time
-          : edition.sourceUrl && !/runabc\.co\.uk/i.test(edition.sourceUrl)
-            ? edition.startTime
-            : null,
-        startNote: checked?.note ?? null,
-        sourceUrl: detail?.sourceUrl ?? edition.sourceUrl,
-        checkedAt: detail?.checkedAt ?? null,
-        checkedCity: detail?.place?.city ?? detail?.place?.town ?? null,
-      };
-    }),
+    editions: race.editions
+      .filter((edition) => !isReviewedFixturePlaceholder(race.slug, edition.date, edition.distance))
+      .map((edition) => {
+        const detail = FIXTURE_DETAILS[`${race.slug}|${edition.date}`];
+        const checked = detail?.starts[edition.distance];
+        return {
+          ...edition,
+          startTime: checked
+            ? checked.time
+            : edition.sourceUrl && !/runabc\.co\.uk/i.test(edition.sourceUrl)
+              ? edition.startTime
+              : null,
+          startNote: checked?.note ?? null,
+          sourceUrl: detail?.sourceUrl ?? edition.sourceUrl,
+          checkedAt: detail?.checkedAt ?? null,
+          checkedCity: detail?.place?.city ?? detail?.place?.town ?? null,
+        };
+      }),
     timeZone:
       checkedZones.get(race.slug) ??
       fixtureTimeZone(resolveCountry({ country: race.country }).name),

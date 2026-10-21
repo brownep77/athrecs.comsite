@@ -2,7 +2,7 @@ import type { Sql } from "../db";
 import type { SportFixtureSearch, SportPage } from "./sport-pages";
 import { fixtureDistanceCode, publicHttpUrl, UK_FIXTURE_COUNTRIES } from "./sport-pages.ts";
 import { kmFromDistanceCode } from "./distance.ts";
-import { FIXTURE_DETAILS } from "../../data/fixture-details.ts";
+import { FIXTURE_DETAILS, isReviewedFixturePlaceholder } from "../../data/fixture-details.ts";
 import { fixtureSummary, fixtureTimeZone } from "./fixture-presentation.ts";
 import { filterCountryName, resolveCountry } from "./countries.ts";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication.ts";
@@ -160,6 +160,9 @@ export async function readSportFixtures(
         summary: fixtureSummary(detail?.summary ?? row.summary, row.sport, row.city),
         timeZone: detail?.timeZone ?? fixtureTimeZone(row.country),
         starts: starts
+          .filter(
+            (start) => !isReviewedFixturePlaceholder(row.slug, row.event_date, start.distance),
+          )
           .map((start) => {
             const checked = detail?.starts[start.distance];
             const sourceUrl = publicHttpUrl(checked ? detail.sourceUrl : start.sourceUrl);
