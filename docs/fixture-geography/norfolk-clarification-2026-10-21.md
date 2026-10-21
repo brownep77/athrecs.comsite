@@ -1,5 +1,9 @@
 # Norfolk start-time clarification — 21 October 2026
 
+Reepham adult TBC values below were subsequently superseded by the
+[owner clarification of one- and two-lap starts](reepham-lap-starts-2026-10-21.md).
+This document retains the evidence and decision published in PR #793.
+
 PR #790 merged after #782. A fresh read of production race pages showed adult
 Reepham 5K/10K at 10:15 and Marriott's Way marathon/half at 09:00/10:30 GMT.
 Those were source-precedence decisions, not replies from organisers.

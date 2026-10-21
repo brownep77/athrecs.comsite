@@ -5,7 +5,7 @@ export type FixtureDetail = {
   timeZone: string;
   sourceUrl: string;
   checkedAt: string;
-  starts: Record<string, { time: string | null; note?: string }>;
+  starts: Record<string, { time: string | null; note?: string; publicNote?: string }>;
 };
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
@@ -88,12 +88,14 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
     checkedAt: "2026-10-21",
     starts: {
       "5K": {
-        time: null,
-        note: "Adult one-lap start TBC; juniors start 10:00. The programme gives adults 10:15 but both senior entry options give 10:30. Organiser clarification requested; separate adult waves have not been confirmed.",
+        time: "10:15",
+        note: "Adult one-lap 5K starts 10:15; juniors start 10:00. Owner clarification on 21 October 2026 distinguishes the adult 5K from the two-lap 10K at 10:30. The provider wording remains inconsistent; this correction records the owner's clarification, not a new organiser reply.",
+        publicNote: "Adult one lap (approximately 5K): 10:15. Juniors start 10:00.",
       },
       "10K": {
-        time: null,
-        note: "Adult two-lap start TBC. The programme gives 10:15 but the senior entry option gives 10:30. Organiser clarification requested; do not treat the conflicting times as separate waves.",
+        time: "10:30",
+        note: "Adult two-lap 10K starts 10:30. Owner clarification on 21 October 2026 distinguishes this from the adult one-lap 5K at 10:15. The provider wording remains inconsistent; this correction records the owner's clarification, not a new organiser reply.",
+        publicNote: "Adult two laps (approximately 10K): 10:30.",
       },
     },
   },
