@@ -98,6 +98,19 @@ assert.deepEqual(buildProfileAchievementSummary([], [history], today), empty);
 history.performances[0].verificationStatus = "source_verified";
 assert.equal(buildProfileAchievementSummary([], [history], today).progress[0].completed, 1);
 
+const threeCountries = buildProfileAchievementSummary(
+  [race(1, { country: "Bermuda" }), race(2, { country: "Canada" }), race(3, { country: "Canada" })],
+  [{ ...history, performances: [{ ...history.performances[0], country: "Grenada" }] }],
+  today,
+);
+assert.equal(
+  threeCountries.earned.find((achievement) => achievement.id === "countries").title,
+  "3 countries raced",
+  "Show the actual country total, not the previous two-country milestone",
+);
+assert.equal(threeCountries.progress.find((goal) => goal.id === "countries").completed, 3);
+assert.equal(threeCountries.progress.find((goal) => goal.id === "countries").remaining, 2);
+
 const server = await createServer({ server: { middlewareMode: true } });
 try {
   const { buildPublicAthletePreview } = await server.ssrLoadModule(
@@ -106,6 +119,11 @@ try {
   const { AchievementSummary } = await server.ssrLoadModule(
     "/src/components/athletes/AchievementSummary.tsx",
   );
+  const countriesMarkup = renderToStaticMarkup(
+    createElement(AchievementSummary, { summary: threeCountries }),
+  );
+  assert(countriesMarkup.includes("3 countries raced"));
+  assert(!countriesMarkup.includes("2 countries raced"));
   const input = {
     slug: "example",
     displayName: "Example Athlete",
