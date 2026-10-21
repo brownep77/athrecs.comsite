@@ -130,6 +130,12 @@ try {
   assert.equal(helpers.describeClientDevice(null).deviceType, "Unknown");
   assert.equal(helpers.clientSignInMethod("/callback/google"), "Google");
   assert.equal(helpers.clientSignInMethod("/oauth2/callback/grok-google"), "Google");
+  assert.equal(helpers.clientSignInMethod("/callback/:id", { id: "google" }), "Google");
+  assert.equal(
+    helpers.clientSignInMethod("/oauth2/callback/:providerId", { providerId: "grok-google" }),
+    "Google",
+  );
+  assert.equal(helpers.clientSignInMethod("/sign-in/social", {}, { provider: "apple" }), "Apple");
   assert.equal(helpers.clientSignInMethod("/sign-in/email-otp"), "Email code");
   assert.equal(helpers.clientSignInMethod("/get-session"), null);
 
@@ -273,6 +279,10 @@ try {
   );
 
   if (process.argv.includes("--browser")) {
+    // A fresh captured login makes the browser assertions exercise populated fields.
+    process.env.VERCEL = "1";
+    await post("sign-in/email", { email: "client@example.test", password }, forgedGeo);
+    process.env.VERCEL = "";
     browser = await chromium.launch({
       executablePath: process.env.ATHRECS_BROWSER_EXECUTABLE || undefined,
       headless: true,
@@ -296,6 +306,8 @@ try {
     await page.getByLabel("Find a client").fill("client@example.test");
     await page.getByRole("button", { name: "Search", exact: true }).click();
     await page.getByRole("heading", { name: "Synthetic Client", exact: true }).waitFor();
+    await page.getByText("Hamilton, Bermuda", { exact: true }).waitFor();
+    await page.getByText("Mobile phone · Android · Chrome", { exact: true }).waitFor();
     await page.getByRole("button", { name: "View login history", exact: true }).click();
     await page
       .getByRole("heading", { name: "Login history — last 90 days", exact: true })

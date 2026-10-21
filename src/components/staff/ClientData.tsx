@@ -199,7 +199,7 @@ function ClientLoginHistory({ userId }: { userId: string }) {
       <h3 className="font-semibold">Login history — last 90 days</h3>
       {data.logins.length ? (
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full min-w-[720px] text-left text-sm">
             <thead>
               <tr>
                 {[

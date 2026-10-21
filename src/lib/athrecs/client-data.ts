@@ -60,10 +60,24 @@ export function providerLabel(value: string): string {
 }
 
 /** Use the successful auth endpoint, not a guess from linked account providers. */
-export function clientSignInMethod(path: string | undefined): string | null {
+export function clientSignInMethod(
+  path: string | undefined,
+  params?: Record<string, unknown>,
+  body?: Record<string, unknown>,
+): string | null {
   if (path === "/sign-in/email-otp") return "Email code";
   if (path === "/sign-in/email" || path === "/sign-up/email") return "Email and password";
   if (path === "/verify-email") return "Email verification";
+  // Better Auth's hook context uses the route template for OAuth callbacks.
+  const provider =
+    path === "/callback/:id"
+      ? params?.id
+      : path === "/oauth2/callback/:providerId"
+        ? params?.providerId
+        : path === "/sign-in/social"
+          ? body?.provider
+          : null;
+  if (typeof provider === "string") return providers[provider] ?? null;
   const match = path?.match(/^\/(?:oauth2\/)?callback\/([^/]+)$/);
   return match ? (providers[match[1]] ?? null) : null;
 }

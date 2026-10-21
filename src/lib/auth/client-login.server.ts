@@ -64,7 +64,7 @@ export async function recordClientLogin(
         last_seen_at=greatest(athlete_client_devices.last_seen_at,excluded.last_seen_at)
       returning id::text`;
     await tx`update athlete_client_logins set device_id=${device.id}::bigint,
-      sign_in_method=${clientSignInMethod(ctx.path)},country_code=${geo.country},region=${geo.region},city=${geo.city}
+      sign_in_method=${clientSignInMethod(ctx.path, ctx.params, ctx.body)},country_code=${geo.country},region=${geo.region},city=${geo.city}
       where session_id=${session.id} and user_id=${session.userId}`;
   });
   // Host-only, httpOnly, signed, scoped to account in storage. No fingerprinting.
