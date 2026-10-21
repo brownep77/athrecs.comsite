@@ -257,3 +257,60 @@ Canada sources are reused with the newly observed result URLs. Club expansions
 use the Trackie team directory, Flying Angels' official membership page and the
 Project Athletics and Brampton Racers club websites. No recurring scan is enabled.
 The next unscanned 2026 archive page is page 5.
+
+## Fifth supervised batch
+
+The owner's further request covers the live fifth archive page checked on
+21 October 2026, with 15 listings dated 29 March–16 May. Batch ID:
+`trackie-public-20261021-batch5`; private approval:
+`trackie-owner-private-20261021-batch5`; capture run:
+`2b07f043-672c-5367-a267-9dadd695d949`.
+
+| Source listing | Compared individual finals |
+| --- | ---: |
+| BNAA meet hosted by Pacers, 10291 | 81 |
+| Vernon All Comers, 10293 | 141 |
+| OAC Twilight Meet #1, 10296 | 301 |
+| Delta Open, 10306 | 730 |
+| **Total** | **1,253** |
+
+The reviewed plan contains 397 new unclaimed athlete profiles, 839 exact
+unverified results, four new meetings and 398 event/category competitions.
+It creates 21 clubs/teams and links 12 existing clubs. Another 414 compared
+rows are held for existing identity candidates, inconsistent source details,
+clipped names or damaged text. All 1,253 retained rows passed the independent
+PDF text comparison; there are no additional overlapping-text rows this time.
+
+Parser v8 recognises `Sprint` as timed and retains suffix categories such as
+`U10`. Synthetic regressions cover both cases, including preliminary/final
+separation. Original decimal marks, winds, jump tie markers and field units
+remain unchanged. Original report years and ages are retained as evidence,
+never converted to invented birthdays or nationalities.
+
+The full athlete/account alias directory was checked before publication. The
+Delta report visibly clips long names; 23 boundary-length observations are
+held rather than silently expanded. Two further rows with a shortened surname
+are held after comparison with another original Trackie report. Supplementary
+profile facts are retained privately for identity review; a year-only birthdate,
+a nationality-like value labelled birthplace, and provincial affiliation do
+not establish an exact birthday, nationality or residence.
+
+Seven original PDFs are retained privately. SSNS Capital CITY and Carifta
+require event-specific dates, and the Pacers school report consists of relays.
+Five HTML listings remain outside the supported PDF publication, including
+Codiac, Forest City, Peace Hills and both Bolton meets. Three redirect listings
+remain outside publication: Sir Reginald Samuel goes to AthleticNET and both
+Ice Breaker listings go to the same VIAA results archive. Those destinations
+reuse existing source registrations.
+
+Club-name expansions use the retained Trackie team directory, explicit team
+codes and prior reviewed sources. Ambiguous school/campus and Special Olympics
+labels remain unlinked. A historical result affiliation is not current
+membership. Three newly found club-hosted results sources—Ocean Athletics,
+Kamloops and Okanagan—are registered disabled after registry and event-inventory
+duplicate checks. No recurring collection is enabled.
+
+Validation includes the source comparisons, PDF regression, all final public
+history schemas, source-registry and bulk-run checks, production-copy rehearsal,
+exact production readback and live profile/club/meeting/result pages. Existing
+profiles, accounts and claims are not modified.

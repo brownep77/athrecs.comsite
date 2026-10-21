@@ -1,0 +1,314 @@
+{
+  "batchId": "trackie-public-20261021-batch5",
+  "instruction": "Continue adding Trackie results, athlete profiles, clubs, meetings and events to AthRecs. Owner continuation: can you add more please.",
+  "clubs": [
+    {
+      "name": "Okanagan Athletics Club",
+      "aliases": [
+        "Oacs - Okana",
+        "Okanagan Ath",
+        "Okanagan Athletics"
+      ],
+      "website": "https://okac.ca/",
+      "sourceUrl": "https://okac.ca/",
+      "country": "Canada",
+      "city": "Kelowna"
+    },
+    {
+      "name": "Bermuda Pacers Track Club",
+      "aliases": [
+        "BERMUDA PACE",
+        "BPTC",
+        "Bermuda Pace",
+        "Pacers Track Club"
+      ],
+      "website": "https://www.pacersbda.com/aboutpacers/",
+      "sourceUrl": "https://www.pacersbda.com/aboutpacers/",
+      "country": "Bermuda",
+      "city": ""
+    },
+    {
+      "name": "Greyhounds Masters Track and Field Club",
+      "aliases": [
+        "Greyhounds M"
+      ],
+      "website": "https://www.greyhoundstrack.com/About/Governance",
+      "sourceUrl": "https://www.greyhoundstrack.com/About/Governance",
+      "country": "Canada",
+      "city": ""
+    },
+    {
+      "name": "Kajaks Track and Field Club",
+      "aliases": [
+        "Kajaks Track",
+        "Kajaks Track & Field Club"
+      ],
+      "website": "https://www.kajaks.ca/about/",
+      "sourceUrl": "https://www.kajaks.ca/about/",
+      "country": "Canada",
+      "city": "Richmond"
+    },
+    {
+      "name": "Langley Mustangs",
+      "aliases": [
+        "Langley Mustangs"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/oac-twilight-meet-3/10364/"
+    },
+    {
+      "name": "Royal City Track & Field Club",
+      "aliases": [
+        "Royal City T"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Kamloops Track & Field Club",
+      "aliases": [
+        "Kaml - Kamlo",
+        "Kamloops Tra"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "NorWesters Track & Field Club",
+      "aliases": [
+        "NorWesters",
+        "NorWesters T"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Penticton Track & Field Club",
+      "aliases": [
+        "Penticton Tr",
+        "Petf - Penti"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Pleasant Valley",
+      "aliases": [
+        "Pleasant Val"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Vernon Amateur Athletics Association",
+      "aliases": [
+        "Vaaa - Verno",
+        "Vernon Amate"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "A L Fortune",
+      "aliases": [
+        "A L Fortune"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Coquitlam Cheetahs",
+      "aliases": [
+        "Coquitlam Cheetahs"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Developing National Athletes - BNAA",
+      "aliases": [
+        "DEVELOPING N"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Discipline Application of Speed through Hard Work - BNAA",
+      "aliases": [
+        "DISCIPLINE A"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Elite Track & Field Academy",
+      "aliases": [
+        "Elite Track"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Golden Ears Athletics",
+      "aliases": [
+        "Golden Ears"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Kalamalka Secondary School",
+      "aliases": [
+        "Kalamalka Se"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Nanaimo & District Track & Field Club",
+      "aliases": [
+        "Nanaimo & Di"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "New West Spartans Track & Field Club",
+      "aliases": [
+        "New West Spa"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Ocean Athletics Track & Field Club",
+      "aliases": [
+        "Ocean Athlet"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Oceanside Track & Field Club",
+      "aliases": [
+        "Oceanside Tr"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Peninsula Track & Field Club",
+      "aliases": [
+        "Peninsula Tr"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Prairie Inn Harriers Racing Team",
+      "aliases": [
+        "Prairie Inn"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Technique Track Club - BNAA",
+      "aliases": [
+        "TECHNIQUE TR"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "UBC Okanagan Heat",
+      "aliases": [
+        "Ubco Heat"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Ultra Throw",
+      "aliases": [
+        "Ultra Throw"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Universal Athletics Club",
+      "aliases": [
+        "Universal At"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Valley Royals Track & Field Club",
+      "aliases": [
+        "Valley Royal",
+        "Vrtc - Valle"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Vancouver Olympic Club",
+      "aliases": [
+        "Vancouver Ol"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Vancouver Thunderbirds",
+      "aliases": [
+        "Vancouver Th"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "West Vancouver Track & Field Club",
+      "aliases": [
+        "West Vancouv"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "WL Seaton Secondary School",
+      "aliases": [
+        "Wl Seaton Se"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    }
+  ],
+  "meetings": {
+    "10306": {
+      "name": "Delta Open T&F Meet",
+      "slug": "trackie-delta-open-10306",
+      "city": "Delta",
+      "region": "British Columbia",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "North Delta Secondary School",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10296": {
+      "name": "OAC Twilight Meet #1",
+      "slug": "trackie-oac-twilight-1-10296",
+      "city": "Kelowna",
+      "region": "British Columbia",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Apple Bowl Stadium",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10293": {
+      "name": "Vernon All Comers Meet 2026",
+      "slug": "trackie-vernon-all-comers-10293",
+      "city": "Vernon",
+      "region": "British Columbia",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Greater Vernon Athletics Park",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10291": {
+      "name": "2026 BNAA Track & Field Meet Hosted by Pacers",
+      "slug": "trackie-bnaa-pacers-march29-10291",
+      "city": "",
+      "region": "",
+      "country": "Bermuda",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "National Sports Centre",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    }
+  }
+}
