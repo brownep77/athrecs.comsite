@@ -23,6 +23,7 @@ import type { CompetitionTier } from "@/lib/athrecs/competition-awards";
 import { ProfileAward } from "./ProfileAward";
 import { AchievementSummary } from "./AchievementSummary";
 import { buildProfileAchievementSummary } from "@/lib/athrecs/profile-achievement-summary";
+import { CalendarYearList } from "./CalendarYearList";
 
 type BoardHighlight = {
   id: string;
@@ -204,10 +205,13 @@ export function AchievementsBoard({
   sourceGender?: string;
 }) {
   const achievementResults = useMemo(
-    () => profileAchievementResults(results, sourceHistories),
+    () => profileAchievementResults(results, sourceHistories, { includeUnreviewedHistory: true }),
     [results, sourceHistories],
   );
-  const record = useMemo(() => buildProfileAchievements(achievementResults), [achievementResults]);
+  const record = useMemo(
+    () => buildProfileAchievements(achievementResults, new Date(), { includeRecordedYears: true }),
+    [achievementResults],
+  );
   const honours = useMemo(
     () => buildCompetitionHonours(results, sourceHistories, sourceGender),
     [results, sourceHistories, sourceGender],
@@ -386,7 +390,9 @@ export function AchievementsBoard({
                       <span className="text-xs">View supporting results</span>
                     </span>
                   </summary>
-
+                  {achievement.calendarYears ? (
+                    <CalendarYearList years={achievement.calendarYears} />
+                  ) : null}
                   <AchievementEvidence results={achievement.results} showEvidence={showEvidence} />
                 </details>
               ))}

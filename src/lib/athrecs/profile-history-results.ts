@@ -142,10 +142,11 @@ export type AchievementResult = ProfileResult & { history?: HistoryResult };
 export function profileAchievementResults(
   results: readonly ProfileResult[],
   histories: readonly SourceHistory[],
+  options: { includeUnreviewedHistory?: boolean } = {},
 ): AchievementResult[] {
   const normal = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
   const distance = (s: string) => normal(s).replace(/^half marathon$/, "half");
-  const history = additionalHistoryResults(histories).filter(
+  const history = additionalHistoryResults(histories, options.includeUnreviewedHistory).filter(
     ({ performance: row }) =>
       !results.some(
         (r) =>
@@ -220,15 +221,22 @@ export type ResultsHistoryEntry =
   { kind: "recorded"; result: ProfileResult } | { kind: "history"; result: HistoryResult };
 
 /** Additional marks retain their original precision and layout after verification. */
-export function additionalHistoryResults(histories: readonly SourceHistory[]): HistoryResult[] {
+export function additionalHistoryResults(
+  histories: readonly SourceHistory[],
+  includeUnreviewed = false,
+): HistoryResult[] {
   return histories.flatMap((history) =>
     history.performances.flatMap((performance, index) =>
-      performance.verificationStatus !== undefined && !performance.profileExcluded
+      (includeUnreviewed || performance.verificationStatus !== undefined) &&
+      !performance.profileExcluded
         ? [
             {
               key: `${history.provider}:${history.externalId}:${index}`,
               sport: historySport(performance.discipline, history.provider, performance.meeting),
-              performance,
+              performance: {
+                ...performance,
+                providerName: performance.providerName || history.provider,
+              },
             },
           ]
         : [],
