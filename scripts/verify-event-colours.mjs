@@ -5,7 +5,7 @@ const { sportColourClass } = await import("../src/lib/athrecs/event-colours.ts")
 const { racePlacePage } = await import("../src/lib/athrecs/race-places.ts");
 const { racePlaceCopy } = await import("../src/lib/athrecs/race-places-copy.ts");
 const { supplementedStart } = await import("../src/data/runrecs-race-guides.ts");
-const { checkedFixtureStart } = await import("../src/data/fixture-details.ts");
+const { checkedFixtureStart, FIXTURE_DETAILS } = await import("../src/data/fixture-details.ts");
 const { fixtureDateIsWithheld } = await import("../src/data/fixture-date-reviews.ts");
 const { publishCheckedFixtures } = await import("./lib/checked-fixture-publication.mjs");
 const { bulkFixture } = await import("./collector-bulk-fixture.mjs");
@@ -36,8 +36,18 @@ for (const [a, b] of [
   assert.equal(distanceTone(a), distanceTone(b), `${a}/${b}`);
 assert.equal(
   checkedFixtureStart("marriotts-way-races", "2027-02-21", "Half · Marathon", "10:30"),
-  null,
+  "09:00",
 );
+assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "5K", null), "10:15");
+assert.match(
+  FIXTURE_DETAILS["reepham-cross-country|2027-01-31"].starts["5K"].note,
+  /juniors 10:00/,
+);
+FIXTURE_DETAILS["synthetic-unresolved|2027-01-01"] = {
+  starts: { "5K": { time: null } },
+};
+assert.equal(checkedFixtureStart("synthetic-unresolved", "2027-01-01", "5K", "10:30"), null);
+delete FIXTURE_DETAILS["synthetic-unresolved|2027-01-01"];
 assert.equal(checkedFixtureStart("east-coast-10k", "2026-11-01", "10K", null), "10:00");
 assert.equal(checkedFixtureStart("east-coast-10k", "2027-11-01", "10K", null), null);
 assert.notEqual(distanceTone("5mi"), distanceTone("8K"));
@@ -98,8 +108,8 @@ assert.match(
 );
 assert.equal(
   supplementedStart({ slug: "marriotts-way-races" }, "2027-02-21", "Half", "10:30"),
-  null,
-  "conflicting starts stay TBC",
+  "10:30",
+  "organiser timetable takes precedence over stored fallback",
 );
 assert.equal(
   supplementedStart({ slug: "east-coast-10k" }, "2027-11-01", "10K", null),
@@ -154,3 +164,4 @@ try {
 console.log(
   "Colour aliases, county navigation, sport copy, date holds and audited fixture publication passed.",
 );
+await import("./verify-official-start-times.mjs");

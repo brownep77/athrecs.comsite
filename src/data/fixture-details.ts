@@ -85,15 +85,15 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
     summary: "One- and two-lap cross-country races from Whitwell Station near Reepham.",
     timeZone: "Europe/London",
     sourceUrl: "https://totalracetiming.co.uk/race/746",
-    checkedAt: "2026-10-20",
+    checkedAt: "2026-10-21",
     starts: {
       "5K": {
-        time: null,
-        note: "Junior start 10:00. Adult times conflict: 10:15 in the programme and 10:30 in the entry table; confirm with the organiser.",
+        time: "10:15",
+        note: "Adults 10:15; juniors 10:00. Using Reepham Runners’ race programme; the entry table still lists adults at 10:30. Check your final race instructions.",
       },
       "10K": {
-        time: null,
-        note: "Adult times conflict: 10:15 in the programme and 10:30 in the entry table; confirm with the organiser.",
+        time: "10:15",
+        note: "Adult start from Reepham Runners’ race programme. The entry table still lists 10:30; check your final race instructions.",
       },
     },
   },
@@ -101,16 +101,16 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
     summary:
       "Point-to-point marathon and half-marathon trail routes along Marriott’s Way, finishing in Aylsham.",
     timeZone: "Europe/London",
-    sourceUrl: "https://totalracetiming.co.uk/race/693",
-    checkedAt: "2026-10-20",
+    sourceUrl: "https://boghopperraces.co.uk/2027-marriotts-way-races-1",
+    checkedAt: "2026-10-21",
     starts: {
       Marathon: {
-        time: null,
-        note: "Programme says 08:30; entry table says 09:00. Start time awaits organiser clarification.",
+        time: "09:00",
+        note: "Using Boghopper Races’ 2027 race-day timetable: registration 07:30–08:30, race start 09:00. The entry-page description still gives 08:30.",
       },
       Half: {
-        time: null,
-        note: "Programme says 10:00; entry table says 10:30. Start time awaits organiser clarification.",
+        time: "10:30",
+        note: "Using Boghopper Races’ 2027 race-day timetable: registration 08:30–10:00, race start 10:30. A summary bullet still gives 10:00; check your final race instructions.",
       },
     },
   },
