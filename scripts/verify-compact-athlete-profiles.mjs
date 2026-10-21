@@ -538,11 +538,13 @@ try {
     publishedSource.sourceHistories,
     privateProfile.sourceHistories.map((history) => ({
       ...history,
+      provider: "Recorded results",
       externalId: publishedHistory.externalId,
       sourceUrl: "",
       capturedAt: "",
       performances: history.performances.map((row, index) => ({
         ...row,
+        displaySport: "Athletics",
         sourceDate: "",
         sourceUrls: [],
         sourceKeys: publishedHistory.performances[index].sourceKeys,

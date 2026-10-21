@@ -22,8 +22,8 @@ export function resultVerification(
   if (status === "verified_by_administrator")
     return { verified: true, explanation: "Confirmed by an AthRecs administrator." };
   // The owner accepts the existing World Athletics imports as the official record.
-  if (/^world\s*athletics$/i.test(provider?.trim() ?? ""))
-    return { verified: true, explanation: "Official World Athletics record." };
+  if (/^(?:world\s*athletics|Verified record)$/i.test(provider?.trim() ?? ""))
+    return { verified: true, explanation: "Verified result record." };
   return {
     verified: false,
     explanation: "A verification check has not been recorded for this result.",

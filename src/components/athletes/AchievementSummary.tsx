@@ -3,6 +3,7 @@ import { achievementPalette } from "@/lib/athrecs/achievement-colours";
 import { ProfileAward } from "./ProfileAward";
 import { Check } from "lucide-react";
 import { CalendarYearList } from "./CalendarYearList";
+import { AchievementVerification } from "./AchievementVerification";
 
 export function AchievementSummary({ summary }: { summary: ProfileAchievementSummary }) {
   const raceWins = summary.raceWins ?? [];
@@ -18,7 +19,7 @@ export function AchievementSummary({ summary }: { summary: ProfileAchievementSum
     >
       <h2 className="font-display text-lg font-semibold">Achievements & next milestones</h2>
       <p className="text-xs text-muted">
-        Based on eligible results linked to this profile. Missing results can change these totals.
+        Achievements update from recorded results. A tick means the supporting results are verified.
       </p>
       {summary.earned.length ? (
         <div className="space-y-2">
@@ -39,6 +40,7 @@ export function AchievementSummary({ summary }: { summary: ProfileAchievementSum
                 {achievement.calendarYears ? (
                   <CalendarYearList years={achievement.calendarYears} />
                 ) : null}
+                <AchievementVerification verified={achievement.verified} />
               </li>
             ))}
           </ul>

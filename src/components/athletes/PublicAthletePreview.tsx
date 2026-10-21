@@ -11,6 +11,7 @@ import { ShareProfileButton } from "./ShareProfileButton";
 import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
 import { AthleteBusinessLink } from "./AthleteBusinessLink";
 import { AchievementSummary } from "./AchievementSummary";
+import { AchievementVerification } from "./AchievementVerification";
 import { buildProfileAchievementSummary } from "@/lib/athrecs/profile-achievement-summary";
 import {
   publicAthleteResultPath,
@@ -98,6 +99,7 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
                 </p>
                 <strong className="text-lg tabular-nums">{best.mark}</strong>
                 <p className="text-xs font-semibold text-accent">{best.label}</p>
+                <AchievementVerification verified={best.verified} />
                 <p className="text-xs text-muted">
                   {best.event} · {best.date}
                 </p>

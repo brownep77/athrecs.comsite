@@ -1,3 +1,5 @@
+import { sourceHistorySport } from "./source-history-sport.ts";
+
 /** A browser projection only. Stored records and staff reads retain original evidence.
  * Opaque, response-local keys preserve source-based duplicate matching without URLs.
  * Provider classifications and public eligibility flags remain available to calculations.
@@ -22,16 +24,47 @@ export function withoutProfileEvidence<T>(value: T): T {
       .filter(Boolean)
       .join(" ");
   };
-  const visit = (input: unknown): unknown => {
-    if (Array.isArray(input)) return input.map(visit);
+  const visit = (input: unknown, inheritedProvider = ""): unknown => {
+    if (Array.isArray(input)) return input.map((item) => visit(item, inheritedProvider));
     if (!input || typeof input !== "object") return input;
     const row = input as Record<string, unknown>;
     const output: Record<string, unknown> = {};
+    const provider = String(row.providerName || row.provider || inheritedProvider || "");
+    if (typeof row.discipline === "string" && "performance" in row)
+      output.displaySport =
+        row.displaySport ??
+        sourceHistorySport(row.discipline, provider, String(row.meeting ?? "")) ??
+        "Unclassified";
+    if (
+      Array.isArray(row.performances) &&
+      provider === "Athletics New Zealand Rankings and Records"
+    )
+      output.rankingHistory = true;
     // Distinct decisions must remain distinct during exact duplicate matching.
     if ("reason" in row && "decisionDate" in row && "sourceUrl" in row)
       output.decisionKey = row.decisionKey ?? sourceKey(`decision:${JSON.stringify(row)}`);
     for (const [key, item] of Object.entries(row)) {
-      if (key === "sourceUrls") {
+      if (["provider", "providerName", "resultSource", "result_source"].includes(key)) {
+        output[key] = /^(?:world\s*athletics|Verified record)$/i.test(String(item ?? ""))
+          ? "Verified record"
+          : /^(?:athlete|Athlete-submitted)$/i.test(String(item ?? ""))
+            ? "Athlete-submitted"
+            : "Recorded results";
+      } else if (key === "performances" && Array.isArray(item)) {
+        output[key] = item.map((performance) => visit(performance, provider));
+      } else if (key === "key" && "performance" in row && "sport" in row) {
+        output[key] = sourceKey(`history-key:${item}`);
+      } else if (
+        [
+          "staffVerification",
+          "staffApproval",
+          "sourceIdentities",
+          "identityEvidence",
+          "reviewedBy",
+        ].includes(key)
+      ) {
+        output[key] = null;
+      } else if (key === "sourceUrls") {
         output.sourceUrls = [];
         output.sourceKeys =
           Array.isArray(item) && item.length
@@ -66,7 +99,7 @@ export function withoutProfileEvidence<T>(value: T): T {
                 String(link.url),
               ) && !/records|results|statistics|source|evidence/i.test(String(link.label)),
           )
-          .map(visit);
+          .map((item) => visit(item));
       else output[key] = visit(item);
     }
     return output;

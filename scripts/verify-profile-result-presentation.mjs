@@ -515,6 +515,7 @@ try {
     "Private disagreement sentinel",
     "private-athlete-id",
     "worldathletics.org",
+    "World Athletics",
     "paulevanscoaching.com",
   ])
     assert(!JSON.stringify(safe).includes(secret), `Do not serialize ${secret}`);

@@ -85,7 +85,7 @@ assert.equal(
   }).tier,
   "race",
 );
-assert.equal(competitionContext({ event: "Olympic Games", verified: false }).tier, "race");
+assert.equal(competitionContext({ event: "Olympic Games", verified: false }).tier, "olympic");
 assert.equal(historyAwards(row())[0].kind, "gold");
 assert.equal(historyAwards(row({ place: "2" }))[0].kind, "silver");
 assert.equal(historyAwards(row({ place: "3" }))[0].kind, "bronze");
@@ -97,7 +97,12 @@ assert.equal(historyAwards(row({ labels: ["Round: F", "Round: Final"] }))[0].kin
 for (const performance of ["DNF", "DNS", "DQ", "DSQ", "28:00+"])
   assert.deepEqual(historyAwards(row({ performance })), []);
 assert.deepEqual(historyAwards(row({ date: "2199-08-01" })), []);
-assert.deepEqual(honours([row({ verificationStatus: "unverified" })]), []);
+const pendingHonours = honours([row({ verificationStatus: "unverified" })]);
+assert(pendingHonours.some((award) => award.kind === "gold"));
+assert(pendingHonours.every((award) => award.evidence.every((e) => !e.verified)));
+assert.equal(historyAwards(row({ verificationStatus: "unverified" }))[0].verified, false);
+assert.equal(historyAwards(row())[0].verified, true);
+assert(honours([row()]).every((award) => award.evidence.every((e) => e.verified)));
 assert.equal(honours([row({ performance: "DNF" })])[0].kind, "participation");
 assert.deepEqual(honours([row({ performance: "DNS" })]), []);
 assert.deepEqual(honours([row({ performance: "DQ" })]), []);
@@ -214,3 +219,12 @@ assert(
 console.log(
   "Competition tiers, final medals, category scope, verified honours and edition deduplication passed.",
 );
+
+const pendingMerged = buildCompetitionHonours(
+  [recorded],
+  histories([row({ verificationStatus: "unverified" })]),
+);
+assert.equal(pendingMerged.find((award) => award.kind === "gold").evidence.length, 1);
+assert.equal(pendingMerged.find((award) => award.kind === "gold").evidence[0].verified, false);
+const duplicateEvidence = honours([row({ verificationStatus: "unverified" }), row()]);
+assert(duplicateEvidence.find((award) => award.kind === "gold").evidence[0].verified);

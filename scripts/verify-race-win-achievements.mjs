@@ -272,6 +272,38 @@ const totals = (record) =>
     verified: results.filter((r) => r.verified).length,
   }));
 assert.deepEqual(totals(safe), totals(raw), "Privacy-safe source keys preserve win totals");
+assert.equal(
+  wins([race(1, { resultSource: "World Athletics", displayAwardVerified: false })])[0].results[0]
+    .verified,
+  false,
+  "An unverified supplemental placing does not inherit a result verification tick",
+);
+const providerWins = {
+  results: [],
+  histories: [
+    { ...history([source({ labels: ["Overall Pos: 1"] })]), provider: "parkrun" },
+    {
+      ...history([
+        {
+          ...track,
+          meeting: "Track event A",
+          sourceUrls: ["https://worldathletics.org/athletes/bermuda/example-123"],
+        },
+        {
+          ...track,
+          meeting: "Track event B",
+          sourceUrls: ["https://worldathletics.org/athletes/bermuda/example-123"],
+        },
+      ]),
+      provider: "World Athletics",
+    },
+  ],
+};
+assert.deepEqual(
+  totals(withoutProfileEvidence(providerWins)),
+  totals(providerWins),
+  "Hiding provider names preserves sport exclusions and distinct wins from an athlete index",
+);
 const sports = [
   "Swimming 200m",
   "Cycling 10K",

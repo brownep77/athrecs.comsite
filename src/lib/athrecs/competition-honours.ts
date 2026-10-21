@@ -25,6 +25,7 @@ export type CompetitionHonour = {
   title: string;
   scope: string;
   evidence: {
+    verified: boolean;
     key: string;
     event: string;
     date: string;
@@ -33,7 +34,7 @@ export type CompetitionHonour = {
   }[];
 };
 
-/** One collection from the already-deduplicated profile; unsupported rows cannot earn titles. */
+/** Recorded honours update immediately; supporting evidence carries verification separately. */
 export function buildCompetitionHonours(
   results: readonly ProfileResult[],
   histories: readonly SourceHistory[],
@@ -64,7 +65,9 @@ export function buildCompetitionHonours(
       key = evidence.key,
     ) => {
       const group = groups.get(id) ?? { id, title, kind, tier: context.tier, scope, evidence: [] };
-      if (!group.evidence.some((row) => row.key === key)) group.evidence.push({ ...evidence, key });
+      const existing = group.evidence.find((row) => row.key === key);
+      if (existing) existing.verified ||= evidence.verified;
+      else group.evidence.push({ ...evidence, key });
       groups.set(id, group);
     };
     if (
@@ -120,14 +123,7 @@ export function buildCompetitionHonours(
     }
   };
   for (const result of timeline.results) {
-    if (
-      !resultVerification(
-        result.details?.verificationStatus,
-        result.resultSource,
-        result.conflicting,
-      ).verified
-    )
-      continue;
+    if (result.conflicting) continue;
     const started =
       hasRecordedFinish(result) ||
       (/^dnf$/i.test(result.status) && hasRecordedFinish({ ...result, status: "finished" }));
@@ -137,6 +133,12 @@ export function buildCompetitionHonours(
       started,
       mark: String(result.finishTimeSeconds ?? result.status),
       evidence: {
+        verified:
+          resultVerification(
+            result.details?.verificationStatus,
+            result.resultSource,
+            result.conflicting,
+          ).verified && result.displayAwardVerified !== false,
         key: `result:${result.resultId}`,
         event: result.eventName,
         date: result.eventDate,
@@ -149,11 +151,7 @@ export function buildCompetitionHonours(
     });
   }
   for (const { key, performance: row } of timeline.history) {
-    if (
-      !resultVerification(row.verificationStatus, row.providerName).verified ||
-      /conflicting (?:source|details|result)|disputed placing/i.test(row.notes ?? "")
-    )
-      continue;
+    if (/conflicting (?:source|details|result)|disputed placing/i.test(row.notes ?? "")) continue;
     const started =
       hasHistoryFinish(row) ||
       (/^dnf$/i.test(row.performance) && hasHistoryFinish({ ...row, performance: "FIN" }));
@@ -166,6 +164,7 @@ export function buildCompetitionHonours(
       started,
       mark: String(numericTime ?? row.performance),
       evidence: {
+        verified: resultVerification(row.verificationStatus, row.providerName).verified,
         key,
         event: row.meeting,
         date: row.date || row.yearLabel || String(row.year),
@@ -204,6 +203,7 @@ export function buildCompetitionHonours(
     const row = copies[0];
     add(row.context, row.awards, row.started, {
       ...row.evidence,
+      verified: copies.some((copy) => copy.evidence.verified),
       sources: [
         ...new Map(
           copies.flatMap((copy) => copy.evidence.sources).map((source) => [source.url, source]),

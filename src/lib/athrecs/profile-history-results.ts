@@ -13,7 +13,7 @@ import {
 export type HistoryResult = {
   key: string;
   sport: Sport | "Unclassified";
-  performance: SourcePerformance;
+  performance: SourcePerformance & { displaySport?: Sport | "Unclassified" };
 };
 
 /** Preserve an explicit source trail label instead of treating every distance as road. */
@@ -89,7 +89,10 @@ export function sourceHistorySports(histories: readonly SourceHistory[]): Sport[
         history.performances
           .filter((performance) => !performance.profileExcluded)
           .map((performance) =>
-            sourceHistorySport(performance.discipline, history.provider, performance.meeting),
+            performance.displaySport === "Unclassified"
+              ? null
+              : (performance.displaySport ??
+                sourceHistorySport(performance.discipline, history.provider, performance.meeting)),
           )
           .filter((sport): sport is Sport => sport !== null),
       ),
@@ -114,7 +117,6 @@ export function historyResultCountry(row: SourcePerformance): string {
 /** A completion icon records an accepted finish, not a podium medal or source-verification. */
 export function isCompletedHistoryResult(row: SourcePerformance, today = new Date()): boolean {
   if (
-    !["source_verified", "verified_by_administrator"].includes(row.verificationStatus ?? "") ||
     row.syntheticTest ||
     row.profileExcluded ||
     row.disqualification ||
@@ -224,7 +226,7 @@ export function profileAchievementResults(
 export type ResultsHistoryEntry =
   { kind: "recorded"; result: ProfileResult } | { kind: "history"; result: HistoryResult };
 
-/** Additional marks retain their original precision and layout after verification. */
+/** Published additional marks retain their precision while verification is pending. */
 export function additionalHistoryResults(
   histories: readonly SourceHistory[],
   includeUnreviewed = false,
@@ -236,7 +238,9 @@ export function additionalHistoryResults(
         ? [
             {
               key: `${history.provider}:${history.externalId}:${index}`,
-              sport: historySport(performance.discipline, history.provider, performance.meeting),
+              sport:
+                performance.displaySport ??
+                historySport(performance.discipline, history.provider, performance.meeting),
               performance: {
                 ...performance,
                 providerName: performance.providerName || history.provider,

@@ -24,12 +24,23 @@ const row = (extra = {}) => ({
 const histories = (rows) => [{ provider: "Synthetic", externalId: "test", performances: rows }];
 const bests = (rows) => selectProfilePersonalBests([], [], histories(rows));
 assert.equal(bests([row()])[0].value.finishTimeSeconds, 1082);
-assert.equal(bests([row({ verificationStatus: "unverified" })]).length, 0);
+assert.equal(bests([row({ verificationStatus: "unverified" })]).length, 1);
+assert.equal(bests([row({ verificationStatus: "unverified" })])[0].verified, false);
+assert.equal(bests([row()])[0].verified, true);
+const fasterPending = [
+  row(),
+  row({ date: "2021-05-10", performance: "17:59", verificationStatus: "unverified" }),
+];
+assert.equal(bests(fasterPending)[0].value.finishTimeSeconds, 1079);
+assert.equal(bests(fasterPending)[0].verified, false);
+fasterPending[1].verificationStatus = "source_verified";
+assert.equal(bests(fasterPending)[0].verified, true);
 const reported = row({ verificationStatus: "unverified", reportedPersonalBest: true });
-assert.equal(bests([reported])[0].kind, "reported");
+assert.equal(bests([reported])[0].kind, "recorded");
+assert.equal(bests([reported])[0].verified, false);
 assert.equal(
   buildProfileAchievements(profileAchievementResults([], histories([reported]))).finishes.length,
-  0,
+  1,
 );
 const track = row({ discipline: "5000", performance: "16:12.55", labels: [] });
 assert.equal(bests([track])[0].value.finishTimeSeconds, 972.55);
@@ -105,7 +116,9 @@ assert.equal(bests([walk])[0].value.sport, "Walking");
 assert.equal(bests([walk])[0].value.distanceKm, 5);
 assert.equal(profilePersonalBestSummary([], histories([walk]))[0].mark, "28:12.45");
 assert.equal(bests([{ ...walk, labels: [] }]).length, 0);
-assert.equal(bests([{ ...walk, verificationStatus: "unverified" }]).length, 0);
+const pendingWalk = bests([{ ...walk, verificationStatus: "unverified" }]);
+assert.equal(pendingWalk.length, 1, "A recorded walking PB counts before verification");
+assert.equal(pendingWalk[0].verified, false);
 assert.equal(bests([track, walk]).length, 2, "Running and walking PBs remain separate");
 const precise = { ...profileAchievementResults([], histories([track]))[0], history: undefined,
   finishTimeSeconds: 973, details: { reportedPerformance: "16:12.55", verificationStatus: "source_verified" } };

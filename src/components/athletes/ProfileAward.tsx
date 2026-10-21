@@ -220,7 +220,7 @@ export function ResultMedalKey() {
             <span>
               Olympic / Paralympic medals
               <br />
-              Verified final podiums
+              Recorded final podiums
             </span>
           </div>
           <div className="flex items-center gap-2">

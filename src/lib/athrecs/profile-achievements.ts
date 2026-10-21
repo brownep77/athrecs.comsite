@@ -2,7 +2,11 @@ import { isCompletedHistoryResult, type AchievementResult } from "./profile-hist
 import { countryFlag } from "./country-flags.ts";
 import { eligiblePerformance, performanceGroup } from "./profile-records.ts";
 import { isDisqualified } from "./result-details.ts";
-import { hasFinishMark, resultVerification } from "./profile-result-presentation.ts";
+import { hasFinishMark } from "./profile-result-presentation.ts";
+import {
+  achievementEvidenceVerified,
+  achievementResultVerified,
+} from "./achievement-verification.ts";
 
 const DAY = 86_400_000;
 const RUNNING_SPORTS = new Set(["running", "athletics", "parkrun"]);
@@ -15,7 +19,7 @@ export function resultDay(value: string): number | null {
 }
 
 export function isCompletedResult(result: AchievementResult, today = new Date()): boolean {
-  if (result.details?.syntheticTest) return false;
+  if (result.details?.syntheticTest || result.details?.profileExcluded) return false;
   if (result.history)
     return (
       !result.conflicting &&
@@ -80,6 +84,7 @@ export type ProfileAchievement = {
   rule: string;
   results: AchievementResult[];
   calendarYears?: { year: number; verified: boolean }[];
+  verified: boolean;
 };
 
 /** A known racing year does not require a verification decision or an exact day. */
@@ -189,7 +194,8 @@ export function buildProfileAchievements(
       ),
     );
     if (outcomes.size > 1) continue;
-    if (isCompletedResult(group[0], today)) finishes.push(group[0]);
+    const representative = group.find(achievementResultVerified) ?? group[0];
+    if (isCompletedResult(representative, today)) finishes.push(representative);
   }
   const marathons = finishes.filter((r) => runningDistanceKind(r) === "marathon");
   const ultras = finishes.filter((r) => runningDistanceKind(r) === "ultra");
@@ -239,10 +245,22 @@ export function buildProfileAchievements(
   const completedMajors = majors.filter((major) => major.results.length);
   const milestones: ProfileAchievement[] = [];
   const add = (id: string, title: string, rule: string, evidence: AchievementResult[]) => {
-    if (evidence.length) milestones.push({ id, title, rule, results: evidence });
+    if (evidence.length)
+      milestones.push({
+        id,
+        title,
+        rule,
+        results: evidence,
+        verified: achievementEvidenceVerified(evidence),
+      });
   };
   const byDate = (list: AchievementResult[]) =>
     [...list].sort((a, b) => a.eventDate.localeCompare(b.eventDate) || a.resultId - b.resultId);
+  // Any qualifying confirmed witness can verify a threshold, country, sport or year.
+  const confirmedFirst = (list: AchievementResult[]) =>
+    byDate(list).sort(
+      (a, b) => Number(achievementResultVerified(b)) - Number(achievementResultVerified(a)),
+    );
   const milestone = (id: string, list: AchievementResult[], label: string, levels: number[]) => {
     const target = levels.find((count) => list.length >= count);
     if (target)
@@ -252,7 +270,7 @@ export function buildProfileAchievements(
           ? `First recorded ${label}`
           : `${target} ${label}${label === "finish" ? "es" : "s"} completed`,
         `Based on ${target} distinct completed events in your linked record.`,
-        byDate(list).slice(0, target),
+        confirmedFirst(list).slice(0, target),
       );
   };
   milestone("finishes", finishes, "finish", [500, 250, 100, 50, 25, 10, 5, 1]);
@@ -285,7 +303,7 @@ export function buildProfileAchievements(
       "countries",
       `${countries.size} countries raced`,
       "One completed event in each different country; UK home nations count together.",
-      [...countries.values()].map((country) => byDate(country.results)[0]),
+      [...countries.values()].map((country) => confirmedFirst(country.results)[0]),
     );
   if (completedMajors.length)
     add(
@@ -294,7 +312,7 @@ export function buildProfileAchievements(
         ? "First marathon major"
         : `${completedMajors.length} marathon majors completed`,
       "Different qualifying major marathons. Repeated finishes of one major count once here.",
-      completedMajors.map((major) => byDate(major.results)[0]),
+      completedMajors.map((major) => confirmedFirst(major.results)[0]),
     );
   const originalSix = majors.filter((major) => major.original);
   if (originalSix.every((major) => major.results.length))
@@ -302,7 +320,7 @@ export function buildProfileAchievements(
       "original-six",
       "Original six majors completed",
       "Tokyo, Boston, London, Berlin, Chicago and New York City. This AthRecs achievement does not confirm an official Six Star medal.",
-      originalSix.map((major) => byDate(major.results)[0]),
+      originalSix.map((major) => confirmedFirst(major.results)[0]),
     );
   if (marathonWeek.length >= 2)
     add(
@@ -327,7 +345,9 @@ export function buildProfileAchievements(
       "sports",
       `${sports.length} sports completed`,
       "At least one completed result in each sport; track and field count as Athletics, while road running and parkrun count as Running.",
-      sports.map((sport) => byDate(finishes).find((result) => recordedSport(result) === sport)!),
+      sports.map((sport) =>
+        confirmedFirst(finishes).find((result) => recordedSport(result) === sport)!,
+      ),
     );
   const yearResults = options.includeRecordedYears
     ? [
@@ -343,12 +363,7 @@ export function buildProfileAchievements(
     entries.push(result);
     byYear.set(year, entries);
   }
-  const verifiedYearResult = (result: AchievementResult) =>
-    resultVerification(
-      result.history?.performance.verificationStatus ?? result.details?.verificationStatus,
-      result.history?.performance.providerName || result.resultSource,
-      result.conflicting,
-    ).verified;
+  const verifiedYearResult = achievementResultVerified;
   const calendarYears = [...byYear]
     .sort(([a], [b]) => a - b)
     .map(([year, entries]) => ({

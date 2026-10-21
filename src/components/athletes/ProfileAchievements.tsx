@@ -22,6 +22,11 @@ import { careerAward, careerTier, type ProfileAwardKind } from "@/lib/athrecs/pr
 import type { CompetitionTier } from "@/lib/athrecs/competition-awards";
 import { ProfileAward } from "./ProfileAward";
 import { AchievementSummary } from "./AchievementSummary";
+import { AchievementVerification } from "./AchievementVerification";
+import {
+  achievementEvidenceVerified,
+  achievementResultVerified,
+} from "@/lib/athrecs/achievement-verification";
 import { buildProfileAchievementSummary } from "@/lib/athrecs/profile-achievement-summary";
 import { CalendarYearList } from "./CalendarYearList";
 
@@ -95,6 +100,7 @@ export function PersonalBestStrip({
                 <span className="ml-2 text-xs font-semibold text-accent">
                   {best.qualification ? "Best*" : "PB*"}
                 </span>
+                <AchievementVerification verified={candidate.verified} />
                 <span className="block text-xs text-muted">{best.surface} · Reported time</span>
                 {best.qualification ? (
                   <span className="block text-xs text-muted">
@@ -125,6 +131,7 @@ export function PersonalBestStrip({
                 {best.history?.performance.performance ?? formatDuration(best.finishTimeSeconds)}
               </strong>
               <span className="ml-2 text-xs font-semibold text-accent">PB</span>
+              <AchievementVerification verified={candidate.verified} />
               <span className="block text-xs text-muted">{best.surface}</span>
               {best.history ? (
                 <span className="block text-xs text-muted">
@@ -175,6 +182,7 @@ function AchievementEvidence({
             </span>
           ) : null}
 
+          <AchievementVerification verified={achievementResultVerified(result)} />
           {showEvidence && result.sourceUrls[0] ? (
             <a
               href={result.sourceUrls[0]}
@@ -229,6 +237,7 @@ export function AchievementsBoard({
       value: record.finishes.length,
       icon: Medal,
       results: record.finishes,
+      verified: achievementEvidenceVerified(record.finishes),
     },
     ...(hasRunning
       ? [
@@ -238,6 +247,7 @@ export function AchievementsBoard({
             value: record.marathons.length,
             icon: Flag,
             results: record.marathons,
+            verified: achievementEvidenceVerified(record.marathons),
           },
           {
             id: "ultras",
@@ -245,6 +255,7 @@ export function AchievementsBoard({
             value: record.ultras.length,
             icon: Mountain,
             results: record.ultras,
+            verified: achievementEvidenceVerified(record.ultras),
           },
           {
             id: "majors",
@@ -252,6 +263,11 @@ export function AchievementsBoard({
             value: record.completedMajors.length,
             icon: Globe2,
             results: record.completedMajors.flatMap((major) => major.results),
+            verified:
+              record.completedMajors.length > 0 &&
+              record.completedMajors.every((major) =>
+                major.results.some(achievementResultVerified),
+              ),
           },
         ]
       : []),
@@ -261,6 +277,10 @@ export function AchievementsBoard({
       value: record.sports.length,
       icon: Layers,
       results: record.finishes,
+      verified:
+        record.sports.length === 1
+          ? record.finishes.some(achievementResultVerified)
+          : (record.milestones.find((milestone) => milestone.id === "sports")?.verified ?? false),
     },
   ];
   const colours = achievementPalette([
@@ -329,7 +349,7 @@ export function AchievementsBoard({
       <CompetitionHonours honours={honours} showEvidence={showEvidence} />
       {showCompletionProgress ? (
         <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-3 lg:grid-cols-6">
-          {metrics.map(({ id, label, value, icon: Icon, results: evidence }) => (
+          {metrics.map(({ id, label, value, verified, icon: Icon, results: evidence }) => (
             <details
               key={id}
               className="achievement-label min-w-0 rounded-lg border p-2"
@@ -339,6 +359,7 @@ export function AchievementsBoard({
                 <Icon className="mr-1 inline size-4" aria-hidden="true" />
                 <strong className="mr-1 text-lg tabular-nums">{value}</strong>
                 <span className="text-xs">{label}</span>
+                {value > 0 ? <AchievementVerification verified={verified} /> : null}
                 <span className="sr-only"> · Show supporting results</span>
               </summary>
               {evidence.length ? (
@@ -356,12 +377,22 @@ export function AchievementsBoard({
               <Globe2 className="mr-1 inline size-4" aria-hidden="true" />
               <strong className="mr-1 text-lg tabular-nums">{record.countries.length}</strong>
               <span className="text-xs">Countries raced in</span>
+              {record.countries.length > 0 ? (
+                <AchievementVerification
+                  verified={record.countries.every((country) =>
+                    country.results.some(achievementResultVerified),
+                  )}
+                />
+              ) : null}
               <span className="sr-only"> · Show countries</span>
             </summary>
             <div className="mt-3 space-y-2 border-t border-border pt-3 text-xs">
               {record.countries.map((country) => (
                 <div key={country.code} className="flex items-center gap-2">
                   <CountryFlag country={country.name} showName />
+                  <AchievementVerification
+                    verified={country.results.some(achievementResultVerified)}
+                  />
                 </div>
               ))}
               {!record.countries.length ? "No race countries recorded yet." : null}
@@ -387,6 +418,7 @@ export function AchievementsBoard({
                     <ProfileAward kind="milestone" />
                     <span>
                       <strong className="block text-sm font-medium">{achievement.title}</strong>
+                      <AchievementVerification verified={achievement.verified} />
                       <span className="text-xs">View supporting results</span>
                     </span>
                   </summary>
@@ -439,6 +471,11 @@ export function AchievementsBoard({
                     style={major.results.length ? colours.get(`major:${major.id}`) : undefined}
                   >
                     <strong className="font-medium">{major.name}</strong>
+                    {major.results.length > 0 ? (
+                      <AchievementVerification
+                        verified={major.results.some(achievementResultVerified)}
+                      />
+                    ) : null}
                     <p className="mt-1 text-xs text-muted">
                       {major.results.length
                         ? "Completed in this record"

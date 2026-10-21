@@ -72,8 +72,12 @@ for (const bad of [
   assert.throws(() => anzSource(bad));
 const capture = assembleAnzCapture(profile, [rows], "2026-10-11T07:00:00Z");
 assert.equal(anzProgress([capture.history])[0].best.performance, "10:01.23");
+assert.equal(
+  anzTime({ ...rows[0], verificationStatus: "unverified" }),
+  601.23,
+  "Recorded performances contribute to PBs before verification",
+);
 for (const patch of [
-  { verificationStatus: "unverified" },
   { profileExcluded: true },
   { performance: "DNF" },
   { performance: "10:01.23i" },

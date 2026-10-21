@@ -74,52 +74,50 @@ export function competitionContext(input: CompetitionInput): CompetitionContext 
   const roundLabels = (input.labels ?? []).filter((label) => /^round:/i.test(label));
   const round = competitionRound(roundLabels);
   let tier: CompetitionTier = "race";
-  if (input.verified) {
-    if (/^(?:[IVXLCDM]+\s+)?Olympic Games(?:\s*[,–—-]|$)/i.test(event)) tier = "olympic";
-    else if (/^(?:[IVXLCDM]+\s+)?Paralympic Games(?:\s*[,–—-]|$)/i.test(event)) tier = "paralympic";
-    else if (
-      /^(?:(?:IAAF|World Athletics)\s+)?World\s+(?:(?:Indoor|Outdoor|Road Running|Cross Country|Half Marathon|Marathon|Mountain and Trail Running|Masters|U20|U23|Junior|Para Athletics|Athletics|Triathlon|Cycling)\s+)*Championships\b/i.test(
-        event,
-      ) ||
-      /^(?:IAAF World|World Athletics|World Para Athletics|World Masters Athletics|World Triathlon|UCI World)\s+(?:(?:Indoor|Outdoor|Road Running|Cross Country|Half Marathon|Marathon|Mountain and Trail Running|Masters|U20|U23|Junior|Athletics|Road)\s+)*Championships\b/i.test(
-        event,
-      )
+  if (/^(?:[IVXLCDM]+\s+)?Olympic Games(?:\s*[,–—-]|$)/i.test(event)) tier = "olympic";
+  else if (/^(?:[IVXLCDM]+\s+)?Paralympic Games(?:\s*[,–—-]|$)/i.test(event)) tier = "paralympic";
+  else if (
+    /^(?:(?:IAAF|World Athletics)\s+)?World\s+(?:(?:Indoor|Outdoor|Road Running|Cross Country|Half Marathon|Marathon|Mountain and Trail Running|Masters|U20|U23|Junior|Para Athletics|Athletics|Triathlon|Cycling)\s+)*Championships\b/i.test(
+      event,
+    ) ||
+    /^(?:IAAF World|World Athletics|World Para Athletics|World Masters Athletics|World Triathlon|UCI World)\s+(?:(?:Indoor|Outdoor|Road Running|Cross Country|Half Marathon|Marathon|Mountain and Trail Running|Masters|U20|U23|Junior|Athletics|Road)\s+)*Championships\b/i.test(
+      event,
     )
-      tier = "world";
-    else if (
-      /^(?:(?:European|African|Asian|Oceania|Pan American)\s+(?:(?:Athletics|Indoor|Outdoor|Cross Country|Masters|U20|U23)\s+)*Championships|(?:Commonwealth|Pan American|Asian|African|European) Games)\b/i.test(
-        event,
-      )
+  )
+    tier = "world";
+  else if (
+    /^(?:(?:European|African|Asian|Oceania|Pan American)\s+(?:(?:Athletics|Indoor|Outdoor|Cross Country|Masters|U20|U23)\s+)*Championships|(?:Commonwealth|Pan American|Asian|African|European) Games)\b/i.test(
+      event,
     )
-      tier = "continental";
-    else if (
-      /^(?:(?:British|UK|English|Scottish|Welsh|Irish|US|USA|Canadian|Australian|New Zealand|South African|National)\s+(?:(?:Athletics|Indoor|Outdoor|Masters|Half Marathon|Marathon|Cross Country|10,?000m|5,?000m)\s+)*Championships|AAA Championships)\b/i.test(
-        event,
-      )
+  )
+    tier = "continental";
+  else if (
+    /^(?:(?:British|UK|English|Scottish|Welsh|Irish|US|USA|Canadian|Australian|New Zealand|South African|National)\s+(?:(?:Athletics|Indoor|Outdoor|Masters|Half Marathon|Marathon|Cross Country|10,?000m|5,?000m)\s+)*Championships|AAA Championships)\b/i.test(
+      event,
     )
-      tier = "national";
-    else if (/^[A-Za-z &'’-]+\s+(?:County|Regional|District)\s+Championships\b/i.test(event))
-      tier = "regional";
-    else if (/^[A-Za-z &'’-]+\s+Club\s+Championships\b/i.test(event)) tier = "local";
-    else if (/\bparkrun\b/i.test(event)) tier = "community";
-    else if (/^(?:Wanda )?Diamond League(?: Final)?(?:\s*[,–—-]|$)/i.test(event))
-      tier = "international";
-    else if (
-      /^(?:full )?marathon$/i.test(input.discipline ?? "") &&
-      majorMarathons.some((race) => {
-        const year = Number(input.date?.match(/\b\d{4}\b/)?.[0]);
-        return (
-          year >= race.since &&
-          (race.slugs.some((slug) => slug === input.eventSlug) ||
-            new RegExp(
-              `^(?:(?:BMW|TCS|Bank of America|LaSalle Bank|Flora|Virgin Money) )?${race.name} Marathon(?:,|$)`,
-              "i",
-            ).test(event))
-        );
-      })
-    )
-      tier = "major";
-  }
+  )
+    tier = "national";
+  else if (/^[A-Za-z &'’-]+\s+(?:County|Regional|District)\s+Championships\b/i.test(event))
+    tier = "regional";
+  else if (/^[A-Za-z &'’-]+\s+Club\s+Championships\b/i.test(event)) tier = "local";
+  else if (/\bparkrun\b/i.test(event)) tier = "community";
+  else if (/^(?:Wanda )?Diamond League(?: Final)?(?:\s*[,–—-]|$)/i.test(event))
+    tier = "international";
+  else if (
+    /^(?:full )?marathon$/i.test(input.discipline ?? "") &&
+    majorMarathons.some((race) => {
+      const year = Number(input.date?.match(/\b\d{4}\b/)?.[0]);
+      return (
+        year >= race.since &&
+        (race.slugs.some((slug) => slug === input.eventSlug) ||
+          new RegExp(
+            `^(?:(?:BMW|TCS|Bank of America|LaSalle Bank|Flora|Virgin Money) )?${race.name} Marathon(?:,|$)`,
+            "i",
+          ).test(event))
+      );
+    })
+  )
+    tier = "major";
   const division = /\bmasters\b/i.test(event)
     ? "Masters"
     : (event.match(/\bU(?:18|20|23)\b/i)?.[0].toUpperCase() ??
@@ -139,6 +137,7 @@ export type PerformanceAward = {
   category: string;
   label: string;
   podium: boolean;
+  verified: boolean;
 };
 export function performanceAwards(input: {
   context: CompetitionContext;
@@ -173,9 +172,8 @@ export function performanceAwards(input: {
     const placing = placingAward(place);
     const podium =
       placing !== "finisher" &&
-      (scope === "overall" || input.verified) &&
       !["heat", "semi-final", "qualifying"].includes(context.round) &&
-      (!championship || (input.verified && final));
+      (!championship || final);
     const kind = podium ? placing : "finisher";
     const scopeLabel =
       scope === "category"
@@ -205,18 +203,14 @@ export function performanceAwards(input: {
       scope,
       category,
       podium,
+      verified: input.verified,
       label: `${base}${medal}${podium ? ` · ${scopeLabel}` : ""}${round}`,
     };
   };
   const awards = [make(input.overall, "overall")];
-  if (input.verified && input.genderPlace != null && input.genderPlace <= 3)
+  if (input.genderPlace != null && input.genderPlace <= 3)
     awards.push(make(input.genderPlace, "gender"));
-  if (
-    input.verified &&
-    input.categoryPlace != null &&
-    input.categoryPlace <= 3 &&
-    input.category?.trim()
-  )
+  if (input.categoryPlace != null && input.categoryPlace <= 3 && input.category?.trim())
     awards.push(make(input.categoryPlace, "category", input.category.trim()));
   // Category and gender awards always name their classification; never substitute it for overall.
   return awards.filter((award, index) => index === 0 || award.podium);
@@ -250,14 +244,15 @@ export function recordedAwards(result: ProfileResult): PerformanceAward[] {
   return performanceAwards({
     context: recordedCompetition(result),
     finished: hasRecordedFinish(result),
-    verified: resultVerification(
-      result.details?.verificationStatus,
-      result.resultSource,
-      result.conflicting,
-    ).verified,
+    verified:
+      resultVerification(
+        result.details?.verificationStatus,
+        result.resultSource,
+        result.conflicting,
+      ).verified && result.displayAwardVerified !== false,
     overall: result.conflicting ? null : (result.overallPlace ?? result.displayOverallPlace),
-    genderPlace: result.genderPlace,
-    categoryPlace: result.categoryPlace,
+    genderPlace: result.conflicting ? null : result.genderPlace,
+    categoryPlace: result.conflicting ? null : result.categoryPlace,
     category: result.category,
     gender: result.resultGender,
   });
@@ -283,7 +278,9 @@ export function historyAwards(row: SourcePerformance, gender = ""): PerformanceA
   const context = historyCompetition(row);
   return performanceAwards({
     context,
-    finished: hasHistoryFinish(row),
+    finished:
+      !/conflicting (?:source|details|result)|disputed placing/i.test(row.notes ?? "") &&
+      hasHistoryFinish(row),
     verified: resultVerification(row.verificationStatus, row.providerName).verified,
     overall:
       row.places || row.labels.some((label) => /^Overall (?:Pos|Position):/i.test(label))
