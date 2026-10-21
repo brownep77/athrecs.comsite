@@ -6,7 +6,11 @@ import { todayIso } from "../lib/athrecs/format";
 import type { SpectatorAccessType, Sport } from "../lib/athrecs/types";
 import { queryRunningEvents, queryRunningRegions } from "../lib/running/catalogue.server";
 import { supplementedStart } from "../data/runrecs-race-guides";
-import { FIXTURE_DETAILS, checkedFixtureStart } from "../data/fixture-details";
+import {
+  FIXTURE_DETAILS,
+  checkedFixtureStart,
+  isReviewedFixturePlaceholder,
+} from "../data/fixture-details";
 import * as base from "../lib/athrecs/api";
 
 // Keep staff, import and shared-network functions available. The explicit
@@ -107,29 +111,38 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       return null;
     return {
       ...result,
-      upcoming: result.upcoming.map((edition) => {
-        const detail = FIXTURE_DETAILS[`${result.event.slug}|${edition.event_date}`];
-        const checked = detail?.starts[edition.distance_code];
-        return {
-          ...edition,
-          start_time: checked
-            ? checked.time
-            : ["Athletics", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(
-                  result.event.sport,
-                )
-              ? edition.start_time
-              : supplementedStart(
-                  result.event,
-                  edition.event_date,
-                  edition.distance_code,
-                  edition.start_time,
-                ),
-          notes:
-            [edition.notes, checked?.note, detail ? `Date checked ${detail.checkedAt}.` : null]
-              .filter(Boolean)
-              .join(" ") || null,
-        };
-      }),
+      upcoming: result.upcoming
+        .filter(
+          (edition) =>
+            !isReviewedFixturePlaceholder(
+              result.event.slug,
+              edition.event_date,
+              edition.distance_code,
+            ),
+        )
+        .map((edition) => {
+          const detail = FIXTURE_DETAILS[`${result.event.slug}|${edition.event_date}`];
+          const checked = detail?.starts[edition.distance_code];
+          return {
+            ...edition,
+            start_time: checked
+              ? checked.time
+              : ["Athletics", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(
+                    result.event.sport,
+                  )
+                ? edition.start_time
+                : supplementedStart(
+                    result.event,
+                    edition.event_date,
+                    edition.distance_code,
+                    edition.start_time,
+                  ),
+            notes:
+              [edition.notes, checked?.note, detail ? `Date checked ${detail.checkedAt}.` : null]
+                .filter(Boolean)
+                .join(" ") || null,
+          };
+        }),
       related: result.related.filter((event) =>
         [
           "Athletics",

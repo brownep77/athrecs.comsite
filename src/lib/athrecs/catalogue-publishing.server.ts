@@ -536,7 +536,10 @@ export async function publishCatalogueBatch(
   batchId: string,
   publishedBy: string,
   sqlOverride?: Sql,
-  options: { eventIdentityCorrections?: { slug: string; expectedWebsite: string }[] } = {},
+  options: {
+    eventIdentityCorrections?: { slug: string; expectedWebsite: string }[];
+    reviewedEventMetadata?: { slug: string; expected: Record<string, unknown> }[];
+  } = {},
 ) {
   if (dbSource !== "neon") {
     throw new Error("Persistent Neon Postgres is required before publishing a catalogue batch");
@@ -640,6 +643,43 @@ export async function publishCatalogueBatch(
       });
       if (result.errors.length) {
         throw new Error(`Catalogue publication failed: ${result.errors.join("; ")}`);
+      }
+
+      // Explicitly reviewed geography/editorial corrections share the same
+      // before/after ledger as distance additions. Ordinary imports still preserve metadata.
+      for (const correction of options.reviewedEventMetadata ?? []) {
+        const before = beforeEvents.get(correction.slug)?.record;
+        const proposed = payload.events?.find((event) => eventSlug(event) === correction.slug);
+        const metadataFields = [
+          "name",
+          "country",
+          "county",
+          "city",
+          "area",
+          "surface",
+          "summary",
+          "description",
+          "organiser",
+          "website",
+        ] as const;
+        const guardedFields = ["id", "slug", "sport", ...metadataFields];
+        if (
+          !before ||
+          !proposed ||
+          proposed.sport !== before.sport ||
+          guardedFields.some(
+            (field) =>
+              !Object.hasOwn(correction.expected, field) ||
+              (before[field] ?? null) !== correction.expected[field],
+          ) ||
+          metadataFields.some((field) => typeof proposed[field] !== "string")
+        ) {
+          throw new Error(`Reviewed event metadata changed: ${correction.slug}`);
+        }
+        await tx.query(
+          `update events set ${metadataFields.map((field, index) => `${field}=$${index + 2}`).join(",")} where id=$1`,
+          [Number(before.id), ...metadataFields.map((field) => proposed[field])],
+        );
       }
 
       // Routine imports continue to preserve existing event metadata. Reviewed

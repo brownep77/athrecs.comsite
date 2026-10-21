@@ -1872,23 +1872,28 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const { checkedFixtureStart } = await import("../../data/fixture-details");
-    const cleaned = rows.map((row) => {
-      const { groups_json, ...edition } = row;
-      const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
-      const distanceCode = labels[0] ?? row.distance_code;
-      return {
-        ...edition,
-        start_time: checkedFixtureStart(
-          row.event_slug,
-          row.event_date,
-          row.distance_code,
-          row.start_time,
-        ),
-        distance_code: labels.join(" · ") || distanceCode,
-        groups: parseRaceGroups(groups_json),
-      };
-    });
+    const { checkedFixtureStart, isReviewedFixturePlaceholder } =
+      await import("../../data/fixture-details");
+    const cleaned = rows
+      .filter(
+        (row) => !isReviewedFixturePlaceholder(row.event_slug, row.event_date, row.distance_code),
+      )
+      .map((row) => {
+        const { groups_json, ...edition } = row;
+        const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
+        const distanceCode = labels[0] ?? row.distance_code;
+        return {
+          ...edition,
+          start_time: checkedFixtureStart(
+            row.event_slug,
+            row.event_date,
+            row.distance_code,
+            row.start_time,
+          ),
+          distance_code: labels.join(" · ") || distanceCode,
+          groups: parseRaceGroups(groups_json),
+        };
+      });
     const mapped = collapseSameEventDate(cleaned).map((row) => {
       const venue = venueForEvent({
         slug: row.event_slug,

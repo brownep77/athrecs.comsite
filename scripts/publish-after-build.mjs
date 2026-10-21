@@ -23,6 +23,7 @@ const publishers = [
   "scripts/publish-event-offer-corrections.mjs",
   "scripts/publish-event-schema-corrections.mjs",
   "scripts/publish-checked-fixtures.mjs",
+  "scripts/publish-county-expansion.mjs",
 ];
 
 for (const publisher of publishers) {

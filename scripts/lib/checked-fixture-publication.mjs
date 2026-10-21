@@ -10,13 +10,17 @@ export async function publishCheckedFixtures(sql, publishing, details, review = 
     );
     if (completed.length) return { alreadyPublished: true };
     const editions = [];
+    const reviewedDates = review.baseline
+      ? new Set(Object.keys(review.baseline).map((key) => key.split("|").slice(0, 2).join("|")))
+      : null;
     for (const [key, detail] of Object.entries(details).filter(
-      ([, value]) => value.checkedAt === checkedAt,
+      ([key, value]) => value.checkedAt === checkedAt && (!reviewedDates || reviewedDates.has(key)),
     )) {
       const [slug, date] = key.split("|");
       const events = await tx.query("select id,slug from events where slug=$1 for update", [slug]);
       if (events.length !== 1) throw new Error(`Reviewed event missing or ambiguous: ${slug}`);
       for (const [distance, start] of Object.entries(detail.starts)) {
+        if (review.baseline && !Object.hasOwn(review.baseline, `${key}|${distance}`)) continue;
         const rows = await tx.query(
           "select *,event_date::text as date from editions where event_id=$1 and event_date=$2::date and distance_code=$3 for update",
           [events[0].id, date, distance],
