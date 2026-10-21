@@ -39,6 +39,13 @@ def prepare(args):
     directory = json.loads((args.work/'directory.json').read_text())
     clubs = json.loads((args.work/'clubs.json').read_text())
     config = json.loads(args.config.read_text())
+    supplemental_path = args.work/'supplementary-review.private.json'
+    supplemental = json.loads(supplemental_path.read_text()) if supplemental_path.exists() else {'sources':[], 'rows':[]}
+    for source in supplemental['sources']:
+        if hashlib.sha256(pathlib.Path(source['path']).read_bytes()).hexdigest()!=source['sha256']:
+            raise ValueError('Supplementary source changed')
+    reviewed_rows = {(r['sourceKey'],r['sourceRow']):r for r in supplemental['rows']}
+    if len(reviewed_rows)!=len(supplemental['rows']):raise ValueError('Duplicate supplementary review row')
     BATCH = config.get('batchId', BATCH)
     INSTRUCTION = config.get('instruction', INSTRUCTION)
     if not re.fullmatch(r'trackie-public-[a-z0-9-]+', BATCH):
@@ -54,11 +61,13 @@ def prepare(args):
              'country':org.get('country',''), 'city':org.get('city',''), 'website':org.get('website','')}
         club_plan.append(c)
         for alias in org['aliases']: club_by_alias[alias]=c
+    if len({c['slug'] for c in club_plan})!=len(club_plan):
+        raise ValueError('Duplicate canonical clubs; consolidate configuration aliases')
     meetings, groups, holds, captures = [], collections.defaultdict(list), [], []
     for path in sorted(args.captures.glob('*.capture.json')):
         cap=json.loads(path.read_text()); p=cap['payload']; key=p['sourceKey']
         if not p['rows'] or cap['state']!='compared': continue
-        if p['schemaVersion'] not in (4,5,6) or cap['issues']: raise ValueError('Unreviewed parser version')
+        if p['schemaVersion'] not in (4,5,6,7) or cap['issues']: raise ValueError('Unreviewed parser version')
         if hashlib.sha256(pathlib.Path(cap['sourcePath']).read_bytes()).hexdigest()!=cap['sourceSha256']: raise ValueError('Original PDF changed')
         m={**config['meetings'][key], 'key':key, 'date':p['index']['date'], 'sourceUrl':p['sourceUrl'], 'attachmentUrl':p['attachmentUrl'], 'competitions':[]}
         for heading, rs in __import__('itertools').groupby(sorted(p['rows'],key=lambda r:r['tableKey']),lambda r:r['tableKey']):
@@ -70,6 +79,12 @@ def prepare(args):
         for r in p['rows']:
             if not r['independentTextCompared']: raise ValueError('Uncompared row')
             name=display_name(r['name']); reasons=[]
+            review=reviewed_rows.get((key,r['sourceRow']),{})
+            if review:
+                if (review['name'],review['performance'],review['date'],review['gender']) != (name,r['performance'],r['date'],r['gender']):
+                    raise ValueError('Supplementary review differs from source row')
+                if review.get('nationality') and not re.fullmatch(r'[A-Z]{3}',review['nationality']):raise ValueError('Invalid source nationality')
+                reasons.extend(review.get('holdReasons',[]))
             if len(name.split())<2 or re.search(r'[%#]|\b[TF]\d{2}\b',name): reasons.append('source name needs review')
             if re.search(r'\ufffd|Ã.|Â.',name): reasons.append('source name encoding needs review')
             source_age=re.fullmatch(r'[MWF]?(\d+)',r['original'].get('Age') or '')
@@ -81,7 +96,7 @@ def prepare(args):
             if key=='10364' and '95-99' in r['tableKey']: reasons.append('source age conflicts with other entries')
             if reasons:
                 holds.append({'sourceKey':key,'sourceRow':r['sourceRow'],'name':name,'reasons':reasons});continue
-            groups[w.prep.norm(name)].append({'row':r,'meeting':m,'capture':cap,'name':name})
+            groups[w.prep.norm(name)].append({'row':r,'meeting':m,'capture':cap,'name':name,'review':review})
     profiles=[]
     # A similar source name is a review candidate, not evidence of two identities.
     within=collections.defaultdict(set)
@@ -91,6 +106,8 @@ def prepare(args):
         matches=w.prep.matching(directory['index'],[rs[0]['name']])
         nearby=w.prep.matching(within,[rs[0]['name']],n)
         reasons=[]
+        nations={x['review']['nationality'] for x in rs if x['review'].get('nationality')}
+        if len(nations)>1:reasons.append('conflicting explicitly sourced nationalities')
         if matches: reasons.append('existing athlete/account identity candidate')
         if nearby: reasons.append('similar source athlete names')
         genders={x['row']['gender'] for x in rs}
@@ -115,7 +132,13 @@ def prepare(args):
             perf={'year':2026,'date':r['date'],'sourceDate':r['date'],'ageGroup':r['category'],'discipline':discipline,'performance':r['performance'], 'timing':{'basis':'unknown'},'wind':r['original'].get('Wind',''),'place':r['sourcePlace'],'places':{'overall':None,'gender':None,'category':None},'venue':m['venue'],'meeting':m['name'],'eventSlug':m['slug'],'country':m['country'],'providerName':PROVIDER,'sourceUrls':[m['sourceUrl'],m['attachmentUrl']],'sourceKeys':['trackie:'+m['key']+':'+r['sourceRow']], 'labels':labels,'verificationStatus':'unverified','notes':m.get('qualification',''), 'archiveReference':{'sourceKey':m['key'],'sourceRow':r['sourceRow'],'sourceSha256':cap['sourceSha256'],'sourcePayloadHash':digest(cap['payload']),'original':r['original'],'identityVerified':False}, 'competitionName':r['tableKey'],'finishSeconds':r['finishSeconds'],'sourceClub':r['club'],'sourceStatus':r['status'],'bib':r['bib']}
             performances.append(perf)
         profiles.append({'externalId':ident,'slug':slug(name)[:85]+'-trackie-'+ident[7:],'displayName':name,'givenName':given.strip(),'familyName':family.strip(),'gender':'F' if first['row']['gender']=='Female' else 'M','nation':'','sourceUrl':first['meeting']['sourceUrl'],'capturedAt':first['capture']['capturedAt'],'years':[2026],'clubSlug':club['slug'] if club else None,'sourceClub':first['row']['club'],'details':{'aliases':aliases,'athlete_verified':False,'identity_review_status':'provisional_source_profile','currentClubAssociationConfirmed':False,'archiveCreation':{'batchId':BATCH,'approvedBy':'Paul Browne','approvedAt':'2026-10-21','instruction':INSTRUCTION,'profileIdentityVerified':False,'sourceRowsCompared':True,'resultCount':len(performances),'providerLicenceClaimed':False}},'performances':performances})
+        if nations:
+            profiles[-1]['nation']=next(iter(nations))
+            evidence=[x['review'] for x in rs if x['review'].get('nationality')]
+            profiles[-1]['details']['archiveCreation']['nationalityEvidence']=evidence
+            profiles[-1]['details']['sourceNationalityObservation']={'value':profiles[-1]['nation'],'provider':evidence[0]['provider'],'sourceUrl':evidence[0]['sourceUrl']}
     plan={'batchId':BATCH,'instruction':INSTRUCTION,'directoryFingerprint':directory['fingerprint'],'clubs':club_plan,'heldClubs':held_clubs,'meetings':meetings,'profiles':profiles,'held':holds,'captures':captures}
+    if supplemental['sources']:plan['supplementarySources']=supplemental['sources']
     plan['summary']={'profiles':len(profiles),'results':sum(len(p['performances']) for p in profiles),'meetings':len(meetings),'newMeetings':sum(not m.get('existingId') for m in meetings),'competitions':sum(len(m['competitions']) for m in meetings),'newClubs':sum(not c['existingId'] for c in club_plan),'linkedClubs':sum(bool(c['existingId']) for c in club_plan),'heldRows':sum(h.get('rows',1) for h in holds),'heldGroups':len(holds),'unresolvedClubLabels':sorted({x['row']['club'] for rs in groups.values() for x in rs if x['row']['club'] not in club_by_alias and not re.match(r'^(?:Unattached|UNA)',x['row']['club'],re.I)})}
     dump(args.work/'plan.private.json',plan); print(json.dumps(plan['summary']))
 

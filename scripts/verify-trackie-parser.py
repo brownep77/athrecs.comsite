@@ -1,5 +1,5 @@
 """Synthetic PDF regression: seed/final/points must never become team names."""
-import importlib.util, pathlib, tempfile
+import importlib.util, pathlib, tempfile, json, subprocess, sys
 from reportlab.pdfgen import canvas
 
 root=pathlib.Path(__file__).resolve().parent
@@ -48,4 +48,25 @@ with tempfile.TemporaryDirectory() as folder:
     assert not issues,issues
     assert [(r['name'],r['performance'],r['gender']) for r in rows]==[('Left, Runner','12.34','Female'),('Right, Runner','24.56','Male')]
     assert len({r['sourceRow'] for r in rows})==2
+    shifted=pathlib.Path(folder)/'shifted.pdf'
+    pdf=canvas.Canvas(str(shifted));pdf.setFont('Courier',10)
+    pdf.drawString(18,740,'Women 100 Meter Dash')
+    for x,text in [(42,'Name'),(216,'Team'),(320,'Prelims'),(410,'Finals')]:pdf.drawString(x,720,text)
+    pdf.drawString(30,700,'1');pdf.drawString(42,700,'Example, Runner');pdf.drawString(214.9,700,'Example Club')
+    pdf.drawRightString(362,700,'12.12');pdf.drawRightString(446,700,'12.34');pdf.save()
+    rows,issues=parser.parse_pdf(shifted,{'date':'2026-06-09','files':[{'url':'https://example.org/shifted.pdf'}]})
+    assert not issues and len(rows)==1,issues
+    assert rows[0]['name']=='Example, Runner' and rows[0]['club']=='Example Club'
+    assert rows[0]['original']['Prelims']=='12.12' and rows[0]['performance']=='12.34'
+    ambiguous=pathlib.Path(folder)/'ambiguous.pdf'
+    pdf=canvas.Canvas(str(ambiguous));pdf.setFont('Courier',10)
+    pdf.drawString(18,780,'Example Twilight - 6/2/2026 to 5/19/2026')
+    pdf.drawString(18,740,'Women 100 Meter Dash')
+    for x,text in [(42,'Name'),(180,'Year'),(216,'Team'),(360,'Finals')]:pdf.drawString(x,720,text)
+    pdf.drawString(30,700,'1');pdf.drawString(42,700,'Example, Runner');pdf.drawString(216,700,'Example Club');pdf.drawRightString(396,700,'12.34');pdf.save()
+    (pathlib.Path(folder)/'inventory.json').write_text(json.dumps([{'key':'synthetic','url':'https://example.org/result','name':'Example Twilight','dateLabel':'Jun 2','location':'Example','files':[{'url':'https://example.org/ambiguous.pdf','path':str(ambiguous),'format':'pdf'}]}]))
+    subprocess.run([sys.executable,str(root/'prepare-trackie-captures.py'),folder],check=True,capture_output=True)
+    capture=json.loads((pathlib.Path(folder)/'synthetic.capture.json').read_text())
+    assert capture['state']=='held' and capture['rows']==0
+    assert 'event-specific dates' in capture['issues'][0]
 print('Trackie synthetic PDF: headings, columns, titles, exact marks and record suffix checks passed.')
