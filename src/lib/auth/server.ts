@@ -332,6 +332,21 @@ export const auth = betterAuth({
   secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
   database,
   databaseHooks: {
+    session: {
+      create: {
+        after: async (session, context) => {
+          try {
+            const { getSql } = await import("../db");
+            const { recordClientLogin } = await import("./client-login.server");
+            await recordClientLogin(await getSql(), session, context);
+          } catch {
+            // Extra staff metadata must never prevent a successful login. The
+            // database trigger still preserves the basic event and total count.
+            console.warn("[auth] Client login metadata could not be recorded");
+          }
+        },
+      },
+    },
     user: {
       create: {
         after: async (user) => {

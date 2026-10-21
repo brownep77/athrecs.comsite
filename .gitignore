@@ -9,6 +9,7 @@ dist
 .nitro
 .vinxi
 .tanstack
+.client-data-vite
 *.local
 .env
 .env.*

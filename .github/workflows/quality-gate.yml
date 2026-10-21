@@ -129,6 +129,9 @@ jobs:
       - name: Registered athletes staff dashboard
         run: node scripts/verify-registrations.mjs --browser
 
+      - name: Private client data, device recognition and login history
+        run: node scripts/verify-client-data.mjs --browser
+
       - name: Email-only sign-in form
         run: node scripts/verify-email-code-ui.mjs
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ClientData } from "@/components/staff/ClientData";
 import { RegisteredAthletes } from "@/components/staff/RegisteredAthletes";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -19,6 +19,12 @@ import {
 } from "@/lib/athrecs/athlete-account-api";
 
 export const Route = createFileRoute("/admin/athlete-accounts")({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { view?: "client-data" | "saved-details" } => ({
+    view:
+      search.view === "client-data" || search.view === "saved-details" ? search.view : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Athlete accounts — ATHRECS Staff" },
@@ -29,26 +35,41 @@ export const Route = createFileRoute("/admin/athlete-accounts")({
 });
 
 function AdminAthleteAccountsPage() {
-  const [details, setDetails] = useState(false);
+  const { view } = Route.useSearch();
+  const navigate = Route.useNavigate();
+  const details = view === "saved-details";
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap gap-2" aria-label="Account views">
         <Button
-          variant={details ? "secondary" : "default"}
-          aria-pressed={!details}
-          onClick={() => setDetails(false)}
+          variant={!view ? "default" : "secondary"}
+          aria-pressed={!view}
+          onClick={() => void navigate({ search: {} })}
         >
           All signups and activity
         </Button>
         <Button
           variant={details ? "default" : "secondary"}
           aria-pressed={details}
-          onClick={() => setDetails(true)}
+          onClick={() => void navigate({ search: { view: "saved-details" } })}
         >
           Saved account details
         </Button>
+        <Button
+          variant={view === "client-data" ? "default" : "secondary"}
+          aria-pressed={view === "client-data"}
+          onClick={() => void navigate({ search: { view: "client-data" } })}
+        >
+          Client data
+        </Button>
       </div>
-      {details ? <SavedAthleteAccounts /> : <RegisteredAthletes />}
+      {view === "client-data" ? (
+        <ClientData />
+      ) : details ? (
+        <SavedAthleteAccounts />
+      ) : (
+        <RegisteredAthletes />
+      )}
     </div>
   );
 }
