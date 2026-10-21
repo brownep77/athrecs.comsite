@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { Analytics } from "@vercel/analytics/react";
+import { FlagValues } from "flags/react";
+import type { PublicFeatureFlags } from "@/lib/athrecs/public-feature-flags";
 import { BarChart3, ShieldCheck, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -43,7 +45,7 @@ function isSportsRecsHostname(): boolean {
   return hostname === "sportsrecs.org" || hostname === "www.sportsrecs.org";
 }
 
-export function SiteAnalytics() {
+export function SiteAnalytics({ featureFlags = {} }: { featureFlags?: PublicFeatureFlags }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const [choice, setChoice] = useState<ConsentChoice>("unknown");
   const [preferencesOpen, setPreferencesOpen] = useState(false);
@@ -117,12 +119,16 @@ export function SiteAnalytics() {
     choice === "granted" &&
     import.meta.env.PROD &&
     ["athrecs.com", "www.athrecs.com"].includes(window.location.hostname) ? (
-      <Analytics
-        route={pathname}
-        path={pathname}
-        beforeSend={beforeSendWebAnalytics}
-        mode="production"
-      />
+      <>
+        {/* Commit the evaluated values before Analytics sends this route's page view. */}
+        <FlagValues values={featureFlags} />
+        <Analytics
+          route={pathname}
+          path={pathname}
+          beforeSend={beforeSendWebAnalytics}
+          mode="production"
+        />
+      </>
     ) : null;
 
   if (choice !== "undecided" && !preferencesOpen) {
@@ -168,8 +174,9 @@ export function SiteAnalytics() {
             </h2>
             <p className="text-sm leading-5 text-muted">
               Allow visitor statistics from AthRecs and Vercel Web Analytics so we can see which
-              pages are useful and where visits come from. We exclude account and staff pages,
-              search terms and form contents. You can turn this off at any time. Read our{" "}
+              pages and enabled site features are useful and where visits come from. We exclude
+              account and staff pages, search terms and form contents. You can turn this off at any
+              time. Read our{" "}
               <a href="/privacy#website-statistics" className="underline">
                 privacy notice
               </a>

@@ -108,6 +108,9 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Verify consented feature flags in Web Analytics
+        run: npm run verify:analytics-flags
+
       - name: Verify browser smoke heading assertions
         run: node scripts/verify-browser-smoke-assertions.mjs
 
