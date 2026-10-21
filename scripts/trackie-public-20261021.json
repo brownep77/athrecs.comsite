@@ -1,0 +1,537 @@
+{
+  "clubs": [
+    {
+      "name": "CALTAF Track and Field Club",
+      "aliases": [
+        "Caltaf Athle",
+        "CALTAF"
+      ],
+      "website": "https://caltaf.com/",
+      "sourceUrl": "https://caltaf.com/",
+      "country": "Canada",
+      "city": "Calgary"
+    },
+    {
+      "name": "University of Calgary Athletic Club",
+      "aliases": [
+        "Ucac Track A",
+        "UCAC"
+      ],
+      "website": "",
+      "sourceUrl": "https://athleticsalberta.com/ucac-development-coach-speedpower/",
+      "country": "Canada",
+      "city": "Calgary"
+    },
+    {
+      "name": "Okanagan Athletics Club",
+      "aliases": [
+        "Okanagan Ath"
+      ],
+      "website": "https://okac.ca/",
+      "sourceUrl": "https://okac.ca/",
+      "country": "Canada",
+      "city": "Kelowna"
+    },
+    {
+      "name": "Thorold Elite Track Club",
+      "aliases": [
+        "Thorold Elit"
+      ],
+      "website": "https://www.thoroldelitetc.ca/",
+      "sourceUrl": "https://www.thoroldelitetc.ca/",
+      "country": "Canada",
+      "city": "Thorold"
+    },
+    {
+      "name": "Burlington Track and Field Club",
+      "aliases": [
+        "Burlington Tfc"
+      ],
+      "website": "https://www.burlingtontrackandfield.org/",
+      "sourceUrl": "https://www.burlingtontrackandfield.org/",
+      "country": "Canada",
+      "city": "Burlington"
+    },
+    {
+      "name": "The Gazelles Track and Field Club",
+      "aliases": [
+        "The Gazelles"
+      ],
+      "website": "https://thegazelles.ca/",
+      "sourceUrl": "https://thegazelles.ca/",
+      "country": "Canada",
+      "city": ""
+    },
+    {
+      "name": "Etobicoke Track",
+      "aliases": [
+        "Etobicoke Track"
+      ],
+      "website": "https://etobicoketrack.ca/",
+      "sourceUrl": "https://etobicoketrack.ca/",
+      "country": "Canada",
+      "city": "Toronto"
+    },
+    {
+      "name": "Bermuda Pacers Track Club",
+      "aliases": [
+        "BPTC",
+        "Bermuda Pace",
+        "Pacers Track Club"
+      ],
+      "website": "https://www.pacersbda.com/aboutpacers/",
+      "sourceUrl": "https://www.pacersbda.com/aboutpacers/",
+      "country": "Bermuda",
+      "city": ""
+    },
+    {
+      "name": "Mid Atlantic Athletic Club",
+      "aliases": [
+        "MAAC",
+        "Mid-Atlantic"
+      ],
+      "website": "https://www.maac.bm/about-maac/overview.html",
+      "sourceUrl": "https://www.maac.bm/about-maac/overview.html",
+      "country": "Bermuda",
+      "city": ""
+    },
+    {
+      "name": "Greyhounds Masters Track and Field Club",
+      "aliases": [
+        "Greyhounds M"
+      ],
+      "website": "https://www.greyhoundstrack.com/About/Governance",
+      "sourceUrl": "https://www.greyhoundstrack.com/About/Governance",
+      "country": "Canada",
+      "city": ""
+    },
+    {
+      "name": "Kajaks Track and Field Club",
+      "aliases": [
+        "Kajaks Track"
+      ],
+      "website": "https://www.kajaks.ca/about/",
+      "sourceUrl": "https://www.kajaks.ca/about/",
+      "country": "Canada",
+      "city": "Richmond"
+    },
+    {
+      "name": "Calgary Spartans Track and Field Club",
+      "aliases": [
+        "Calgary Spartans"
+      ],
+      "website": "https://www.calgaryspartans.com/",
+      "sourceUrl": "https://www.calgaryspartans.com/",
+      "country": "Canada",
+      "city": "Calgary"
+    },
+    {
+      "name": "Red Deer Titans Track and Field Club",
+      "aliases": [
+        "Red Deer Titans"
+      ],
+      "website": "https://titanstrack.com/",
+      "sourceUrl": "https://titanstrack.com/",
+      "country": "Canada",
+      "city": "Red Deer"
+    },
+    {
+      "name": "Chinook Track and Field Club",
+      "aliases": [
+        "Chinook Track an"
+      ],
+      "website": "https://www.chinooktf.com/",
+      "sourceUrl": "https://www.chinooktf.com/",
+      "country": "Canada",
+      "city": ""
+    },
+    {
+      "name": "Nipissing Lakers",
+      "aliases": [
+        "Nipissing Lakers"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/2026-laurentian-xc-open-5km/10351/"
+    },
+    {
+      "name": "Cambrian College",
+      "aliases": [
+        "Cambrian College"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/2026-laurentian-xc-open-5km/10351/"
+    },
+    {
+      "name": "Roots Athletic Club",
+      "aliases": [
+        "Roots Athletic Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/abba-road-race-series-26-27-1-mile-run/10359/"
+    },
+    {
+      "name": "Kreative Fitness",
+      "aliases": [
+        "Kreative Fitness"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/abba-road-race-series-26-27-1-mile-run/10359/"
+    },
+    {
+      "name": "SuperNova Athletics",
+      "aliases": [
+        "SuperNova Athletics"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/abba-road-race-series-26-27-1-mile-run/10359/"
+    },
+    {
+      "name": "A. L. Fortune",
+      "aliases": [
+        "A. L. Fortune"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/oac-twilight-meet-3/10364/"
+    },
+    {
+      "name": "Langley Mustangs",
+      "aliases": [
+        "Langley Mustangs"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/oac-twilight-meet-3/10364/"
+    },
+    {
+      "name": "Ball State",
+      "aliases": [
+        "Ball State"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Central Michigan",
+      "aliases": [
+        "Central Michigan"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Chicago State",
+      "aliases": [
+        "Chicago State"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Cleveland St.",
+      "aliases": [
+        "Cleveland St."
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Dayton",
+      "aliases": [
+        "Dayton"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Eastern Michigan",
+      "aliases": [
+        "Eastern Michigan"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Goshen",
+      "aliases": [
+        "Goshen"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Illinois-Chicago",
+      "aliases": [
+        "Illinois-Chicago"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Kent State",
+      "aliases": [
+        "Kent State"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Loyola Marymount",
+      "aliases": [
+        "Loyola Marymount"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Marquette",
+      "aliases": [
+        "Marquette"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Milwaukee",
+      "aliases": [
+        "Milwaukee"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Northern Illinois",
+      "aliases": [
+        "Northern Illinois"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Nova Southeastern",
+      "aliases": [
+        "Nova Southeastern"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Oakland",
+      "aliases": [
+        "Oakland"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Omaha",
+      "aliases": [
+        "Omaha"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Purdue Fort Wayne",
+      "aliases": [
+        "Purdue Fort Wayne"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Rio Grande",
+      "aliases": [
+        "Rio Grande"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Saint Louis",
+      "aliases": [
+        "Saint Louis"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Southern Illinois",
+      "aliases": [
+        "Southern Illinois"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Texas State",
+      "aliases": [
+        "Texas State"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Tiffin",
+      "aliases": [
+        "Tiffin"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Toledo",
+      "aliases": [
+        "Toledo"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "U. of Chicago",
+      "aliases": [
+        "U. of Chicago"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "UAB",
+      "aliases": [
+        "UAB"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "UTSA",
+      "aliases": [
+        "UTSA"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Valparaiso",
+      "aliases": [
+        "Valparaiso"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Western Illinois",
+      "aliases": [
+        "Western Illinois"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Western Ontario",
+      "aliases": [
+        "Western Ontario"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Windsor",
+      "aliases": [
+        "Windsor"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Wis.-Green Bay",
+      "aliases": [
+        "Wis.-Green Bay"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/joe-piane-notr-e-dame-invitational/10362/"
+    },
+    {
+      "name": "Laurentian University",
+      "aliases": [
+        "Laurentian Unive"
+      ],
+      "country": "Canada",
+      "city": "Sudbury",
+      "sourceUrl": "https://files.trackie.com/uploads/results/2026-09-13-23-35-38-368461014-472286.pdf"
+    }
+  ],
+  "meetings": {
+    "10351": {
+      "name": "Laurentian XC Open",
+      "slug": "trackie-laurentian-xc-open-10351",
+      "city": "Sudbury",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Cross Country",
+      "sport": "Running",
+      "venue": "Sudbury, Ontario",
+      "disciplineId": 2,
+      "existingId": null
+    },
+    "10353": {
+      "name": "CALTAF Throws Fest #2",
+      "slug": "wa-caltaf-throws-fest-2-7242404",
+      "city": "Calgary",
+      "region": "Alberta",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "New Glenmore Athletic Park",
+      "disciplineId": 9,
+      "existingId": 3065679
+    },
+    "10355": {
+      "name": "BNAA National X-Country Series — Arboretum Meet #1",
+      "slug": "trackie-bnaa-arboretum-10355",
+      "city": "",
+      "region": "",
+      "country": "Bermuda",
+      "surface": "Cross Country",
+      "sport": "Running",
+      "venue": "Arboretum",
+      "disciplineId": 2,
+      "existingId": null
+    },
+    "10357": {
+      "name": "Thorold Elite XC Prep Meet",
+      "slug": "trackie-thorold-elite-xc-prep-10357",
+      "city": "Niagara Falls",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Cross Country",
+      "sport": "Running",
+      "venue": "Firemen's Park",
+      "disciplineId": 2,
+      "existingId": null
+    },
+    "10358": {
+      "name": "CALTAF Throws Fest #3",
+      "slug": "wa-caltaf-throws-fest-3-7245387",
+      "city": "Calgary",
+      "region": "Alberta",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "New Glenmore Athletic Park",
+      "disciplineId": 9,
+      "existingId": 3065489
+    },
+    "10359": {
+      "name": "ABAA 1 Mile Run",
+      "slug": "abaa-one-mile-run",
+      "city": "Saint John",
+      "region": "",
+      "country": "Antigua and Barbuda",
+      "surface": "Road",
+      "sport": "Running",
+      "venue": "YASCO Sports Complex",
+      "disciplineId": 6,
+      "existingId": 4375674
+    },
+    "10362": {
+      "name": "Joe Piane Notre Dame Invitational",
+      "slug": "trackie-joe-piane-notre-dame-10362",
+      "city": "Notre Dame",
+      "region": "",
+      "country": "United States",
+      "surface": "Cross Country",
+      "sport": "Running",
+      "venue": "Notre Dame",
+      "disciplineId": 2,
+      "existingId": null,
+      "qualification": "Coverage is limited to the supplied Women’s Gold 5k and Men’s Gold 8k report."
+    },
+    "10363": {
+      "name": "BNAA National X-Country Series — Fort Scaur Meet #2",
+      "slug": "trackie-bnaa-fort-scaur-10363",
+      "city": "",
+      "region": "",
+      "country": "Bermuda",
+      "surface": "Cross Country",
+      "sport": "Running",
+      "venue": "Fort Scaur",
+      "disciplineId": 2,
+      "existingId": null,
+      "qualification": "The report title says 2025; its event date, report timestamp and Trackie listing identify 10 October 2026."
+    },
+    "10364": {
+      "name": "OAC Twilight Meet #4",
+      "slug": "trackie-oac-twilight-10364",
+      "city": "Kelowna",
+      "region": "British Columbia",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Apple Bowl Stadium",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "The result report titles this Meet #4; the Trackie index calls it Meet #3. Both give 15 October 2026."
+    }
+  }
+}

@@ -1,5 +1,21 @@
 # Athlete result evidence
 
+## Fixture dates and start times
+
+- Owner instruction, 21 October 2026: resolve conflicting fixture start times
+  using the event organiser or the relevant governing body. Prefer the latest
+  edition-specific organiser race-day timetable, then a governing-body fixture.
+  An organiser's programme on its authorised entry page is acceptable evidence;
+  a timing provider is not automatically the organiser.
+- Match the year, distance and junior/adult or wave category. A specific race-day
+  timetable takes precedence over a generic summary or entry-options table;
+  record any remaining discrepancy and the reason for the choice. If equally
+  authoritative schedules still disagree with no clear supersession, retain TBC.
+- Record the opened source, checked date and previous values. Keep checked starts
+  scoped to that edition; never copy them to another year or infer recurrence.
+
+## Athlete results
+
 These rules apply to athlete profiles, race histories, imports, catalogue seeds,
 publication and personal-best calculations in this repository.
 

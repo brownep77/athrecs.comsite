@@ -34,11 +34,14 @@ export type PublicRaceResult = {
   chip_time_seconds: number | null;
   gun_time_seconds: number | null;
   disqualified: boolean;
+  reported_performance: string | null;
+  reported_place: string | null;
+  verification_status: string | null;
 };
 
 const EDITION_PAGE_SIZE = 24;
 const RESULT_PAGE_SIZE = 100;
-const like = (value: string) => value ? `%${value.replace(/[\\%_]/g, "\\$&")}%` : null;
+const like = (value: string) => (value ? `%${value.replace(/[\\%_]/g, "\\$&")}%` : null);
 
 /**
  * Public READ-ONLY projection of canonical results. This never imports, creates,
@@ -149,6 +152,9 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
         c.name as profile_club, r.source_url, r.result_source,
         r.overall_place, r.gender_place, r.category_place,
         r.category, r.status, r.finish_time_seconds, r.chip_time_seconds, r.gun_time_seconds,
+        left(r.result_details->>'reportedPerformance',100) as reported_performance,
+        left(r.result_details->>'reportedPlace',40) as reported_place,
+        r.result_details->>'verificationStatus' as verification_status,
         (lower(trim(r.status)) in ('dq', 'dsq', 'disqualified')
           or coalesce(r.result_details->'disqualification', 'null'::jsonb) <> 'null'::jsonb) as disqualified
       from results r
@@ -172,8 +178,14 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
       order by disqualified asc,
         (lower(trim(r.status)) in ('finished', 'fin')) desc,
         r.overall_place asc nulls last, r.gun_time_seconds asc nulls last,
+        case when r.result_details->>'reportedPlace' ~ '^[0-9]{1,8}$'
+          then (r.result_details->>'reportedPlace')::integer end asc nulls last,
         r.finish_time_seconds asc nulls last, r.id asc
       limit ${RESULT_PAGE_SIZE + 1} offset ${offset}
     `;
-    return { edition, results: rows.slice(0, RESULT_PAGE_SIZE), hasMore: rows.length > RESULT_PAGE_SIZE };
+    return {
+      edition,
+      results: rows.slice(0, RESULT_PAGE_SIZE),
+      hasMore: rows.length > RESULT_PAGE_SIZE,
+    };
   });

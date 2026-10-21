@@ -83,15 +83,23 @@ def parse_pdf(path, item):
                         if key not in headings:
                             continue
                         cells = [(i, w) for i, w in enumerate(line)
-                                 if abs(w["x1"] - headings[key]["x1"]) < 2]
+                                 if abs(w["x1"] - headings[key]["x1"]) < 2
+                                 or (key == "Points" and re.fullmatch(r"\d+(?:\.\d+)?", w["text"])
+                                     and headings[key]["x0"] - 2 <= (w["x0"] + w["x1"]) / 2 <= headings[key]["x1"] + 2)]
                         values[key] = " ".join(w["text"] for _, w in cells)
                         used.update(i for i, _ in cells)
                     age_head = headings.get("Age", headings.get("Year", headings["Team"]))
                     name_words = [w["text"] for w in line
                                   if name_head["x0"] - 1 <= w["x0"] < age_head["x0"] - 1]
                     values["Name"] = " ".join(name_words)
+                    team_end = min(w["x0"] for key, w in headings.items()
+                                   if w["x0"] > headings["Team"]["x0"] and key in ("Seed", "Finals"))
                     values["Team"] = " ".join(w["text"] for i, w in enumerate(line)
-                                                if i not in used and w["x0"] >= headings["Team"]["x0"] - 1)
+                                                if i not in used and headings["Team"]["x0"] - 1 <= w["x0"] < team_end)
+                    annotations = [w["text"] for i, w in enumerate(line)
+                                   if i not in used and w["x0"] >= team_end]
+                    if annotations:
+                        values["Annotation"] = " ".join(annotations)
                     performance = values.get("Finals", "")
                 else:
                     yr = headings["YR"]
@@ -165,7 +173,7 @@ def main():
             continue
         path = Path(attachments[0]["path"])
         rows, issues = parse_pdf(path, item)
-        payload = dict(schemaVersion=3, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
+        payload = dict(schemaVersion=4, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
                        sourceMimeType="application/pdf", attachmentUrl=attachments[0]["url"],
                        index=dict(name=item["name"], date=item["date"], location=item["location"]),
                        publication="staff_only", identity="unreviewed", rows=rows,

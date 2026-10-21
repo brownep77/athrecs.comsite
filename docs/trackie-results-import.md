@@ -66,3 +66,31 @@ Source registry and bulk-run checks, TypeScript, focused component lint,
 catalogue verification and a local production build passed. Local build
 database publication was disabled. Production capture receipts and a read-back
 query verify the private import separately from the application deployment.
+# Public profiles, clubs, meetings and events
+
+The owner subsequently requested public athlete profiles, clubs, meetings and
+individual events. `publish-trackie-profiles.py` prepares a private, reviewable
+plan and applies it first to a copied production branch. The reviewed plan hash,
+live athlete/account directory fingerprint and original capture hashes guard the
+production transaction. This is separate publication authority; the original
+private-capture approval remains unchanged.
+
+The first plan contains 633 new unclaimed profiles and 815 source performances,
+nine meetings (three already catalogued), 272 event/category competitions, and
+52 new clubs/teams plus one existing club. Another 201 observations are held for
+identity or source-detail review. Shortened clubs remain unresolved unless the
+source report or a club/governing-body source establishes the full name.
+
+Parser version 4 separates centred team-score points from club names. Earlier
+captures are preserved and new versions retain the same original PDF hashes.
+The synthetic PDF regression covers centred points, seed/final separation and
+field marks. Source histories preserve decimal times, marks, points and event
+placing scope. Canonical results link the meeting graph and use the same exact
+display text; integer timing columns remain empty. Those canonical rows are
+excluded from duplicate profile display. All new identities and performances
+remain unverified and cannot earn verified PBs or medals. No accounts or claims
+are created, and existing athlete profiles are unchanged.
+
+The public result-page projection exposes only the mark, placing and verification
+label, never the stored capture locators or identity-review notes. Provider links
+remain on meeting/results pages; profile evidence stays in the staff backend.

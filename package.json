@@ -133,7 +133,8 @@
     "verify:signup-welcome": "node scripts/verify-signup-welcome.mjs",
     "verify:search-adversarial": "node --experimental-strip-types scripts/verify-search-adversarial.mjs",
     "verify:intelligent-result-matching": "node --experimental-strip-types scripts/verify-intelligent-result-matching.mjs",
-    "verify:test-account": "node scripts/verify-test-account.mjs"
+    "verify:test-account": "node scripts/verify-test-account.mjs",
+    "verify:analytics-flags": "node scripts/verify-analytics-flags.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",
@@ -179,6 +180,7 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.0.0",
     "exceljs": "^4.4.0",
+    "flags": "4.3.1",
     "imapflow": "^2.4.0",
     "kysely": "^0.28.5",
     "lightningcss": "^1.28.0",

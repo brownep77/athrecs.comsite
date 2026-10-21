@@ -1,6 +1,7 @@
 /** Publish only reviewed edition metadata; preserve event identity and entry options. */
-export async function publishCheckedFixtures(sql, publishing, details) {
-  const sourceKey = "athrecs:fixture-checks:norfolk:2026-10-20";
+export async function publishCheckedFixtures(sql, publishing, details, review = {}) {
+  const sourceKey = review.sourceKey ?? "athrecs:fixture-checks:norfolk:2026-10-20";
+  const checkedAt = review.checkedAt ?? "2026-10-20";
   return sql.transaction(async (tx) => {
     await tx.query("select id from catalogue_publish_state where id=1 for update");
     const completed = await tx.query(
@@ -10,7 +11,7 @@ export async function publishCheckedFixtures(sql, publishing, details) {
     if (completed.length) return { alreadyPublished: true };
     const editions = [];
     for (const [key, detail] of Object.entries(details).filter(
-      ([, value]) => value.checkedAt === "2026-10-20",
+      ([, value]) => value.checkedAt === checkedAt,
     )) {
       const [slug, date] = key.split("|");
       const events = await tx.query("select id,slug from events where slug=$1 for update", [slug]);
@@ -22,6 +23,15 @@ export async function publishCheckedFixtures(sql, publishing, details) {
         );
         if (rows.length > 1) throw new Error(`Duplicate reviewed edition: ${key} ${distance}`);
         const row = rows[0];
+        if (review.baseline) {
+          const expected = review.baseline[`${key}|${distance}`];
+          if (
+            !row ||
+            !expected ||
+            Object.entries(expected).some(([field, value]) => row[field] !== value)
+          )
+            throw new Error(`Reviewed baseline changed: ${key} ${distance}`);
+        }
         // Only this newly announced date is an authorised addition. Do not invent missing races.
         if (
           !row &&
@@ -48,6 +58,8 @@ export async function publishCheckedFixtures(sql, publishing, details) {
       }
     }
     if (!editions.length || editions.length > 30) throw new Error("Unexpected reviewed batch size");
+    if (review.baseline && editions.length !== Object.keys(review.baseline).length)
+      throw new Error("Reviewed batch is incomplete");
     const actor = "athrecs-production-deployment@athrecs.com";
     const staged = await publishing.stageCatalogueBatch(
       {

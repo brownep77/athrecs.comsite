@@ -1,5 +1,10 @@
 # Norfolk dates and starts — 20 October 2026
 
+Follow-up: [21 October clarification check](norfolk-clarification-2026-10-21.md)
+records PR #790's intervening publication, the organiser FAQ, enquiries sent,
+and the restored hold on unresolved Reepham adult starts. This file remains
+the historical 20 October evidence record.
+
 Scope: selected upcoming Norfolk events, including the next road races and the requested cycling addition. This is not verification of the entire catalogue. Each linked page was opened and its edition date and programme compared. A generic results index was not accepted as date evidence.
 
 | Event / edition | Date | Local start | Evidence |
