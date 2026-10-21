@@ -103,7 +103,7 @@ def parse_pdf(path, item):
                 # Numeric Hy-Tek columns are right aligned to their headings.
                 # Resolve these first so a seed time never becomes a final time.
                 if name_key == "Name":
-                    for key in ("Age", "Year", "Seed", "Finals", "Wind", "H#", "Points"):
+                    for key in ("Age", "Year", "Seed", "Prelims", "Finals", "Wind", "H#", "Points"):
                         if key not in headings:
                             continue
                         cells = [(i, w) for i, w in enumerate(line)
@@ -114,14 +114,16 @@ def parse_pdf(path, item):
                                      and headings[key]["x0"] - 2 <= (w["x0"] + w["x1"]) / 2 <= headings[key]["x1"] + 2)]
                         values[key] = " ".join(w["text"] for _, w in cells)
                         used.update(i for i, _ in cells)
-                    age_head = headings.get("Age", headings.get("Year", headings["Team"]))
+                    team_start = headings["Team"]["x0"] - 2
+                    age_head = headings.get("Age", headings.get("Year"))
+                    name_end = age_head["x0"] - 1 if age_head else team_start
                     name_words = [w["text"] for w in line
-                                  if name_head["x0"] - 1 <= w["x0"] < age_head["x0"] - 1]
+                                  if name_head["x0"] - 1 <= w["x0"] < name_end]
                     values["Name"] = " ".join(name_words)
                     team_end = min(w["x0"] for key, w in headings.items()
-                                   if w["x0"] > headings["Team"]["x0"] and key in ("Seed", "Finals"))
+                                   if w["x0"] > headings["Team"]["x0"] and key in ("Seed", "Prelims", "Finals"))
                     values["Team"] = " ".join(w["text"] for i, w in enumerate(line)
-                                                if i not in used and headings["Team"]["x0"] - 1 <= w["x0"] < team_end)
+                                                if i not in used and team_start <= w["x0"] < team_end)
                     annotations = [w["text"] for i, w in enumerate(line)
                                    if i not in used and w["x0"] >= team_end]
                     if annotations:
@@ -202,7 +204,10 @@ def main():
         path = Path(attachments[0]["path"])
         with fitz.open(path) as source_doc:
             title_text = source_doc[0].get_text()
-        report_range = re.search(r"\b(20\d{2}-\d{2}-\d{2})\s+(?:to|-)\s+(20\d{2}-\d{2}-\d{2})\b", title_text)
+        # Hy-Tek titles use ISO, month/day/year and day/month/year ranges.
+        # Any differing endpoints require event-date review, including reversed
+        # ranges left in a report template. Do not guess the numeric date order.
+        report_range = re.search(r"\b(\d{1,4}[-/]\d{1,2}[-/]\d{2,4})\s+(?:to|-)\s+(\d{1,4}[-/]\d{1,2}[-/]\d{2,4})\b", title_text)
         single_day = single_day and not (report_range and report_range[1] != report_range[2])
         rows, issues = parse_pdf(path, item) if single_day else ([], ["Multi-day meeting requires event-specific dates before publication"])
         held_rows = [r for r in rows if not r['independentTextCompared']]
@@ -211,7 +216,7 @@ def main():
         issues = [issue for issue in issues if issue not in comparison_issues]
         if not rows and not issues:
             issues.append('No independently compared result rows')
-        payload = dict(schemaVersion=6, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
+        payload = dict(schemaVersion=7, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
                        sourceMimeType="application/pdf", attachmentUrl=attachments[0]["url"],
                        index=dict(name=item["name"], date=item["date"], dateLabel=item["dateLabel"], location=item["location"]),
                        publication="staff_only", identity="unreviewed", rows=rows,
