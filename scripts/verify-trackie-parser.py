@@ -15,7 +15,15 @@ with tempfile.TemporaryDirectory() as folder:
     pdf.drawString(18,660,'Women 35-39 Shot Put MASTER')
     for x,text in [(42,'Name'),(180,'Year'),(216,'Team'),(360,'Finals'),(425,'Points')]:pdf.drawString(x,640,text)
     pdf.drawString(30,620,'1');pdf.drawString(42,620,'Sample, Athlete');pdf.drawString(216,620,'Example Club')
-    pdf.drawRightString(396,620,'8.63m');pdf.drawRightString(461,620,'639');pdf.save()
+    pdf.drawRightString(396,620,'8.63m');pdf.drawRightString(461,620,'639')
+    pdf.drawString(18,580,'Event 2 Men 100 Meter Dash OPEN')
+    for x,text in [(42,'Name'),(180,'Year'),(216,'Team'),(360,'Prelims')]:pdf.drawString(x,560,text)
+    pdf.drawString(30,540,'1');pdf.drawString(42,540,'Heat, Runner');pdf.drawString(216,540,'Example Club')
+    pdf.drawRightString(396,540,'11.31q')
+    pdf.drawString(18,500,'Event 3 Men 4x100 Meter Relay OPEN')
+    for x,text in [(42,'Team'),(180,'Relay'),(360,'Finals')]:pdf.drawString(x,480,text)
+    pdf.drawString(30,460,'1');pdf.drawString(42,460,'Example Club');pdf.drawString(180,460,'A')
+    pdf.drawRightString(396,460,'44.00');pdf.save()
     rows,issues=parser.parse_pdf(path,{'date':'2026-09-27','files':[{'url':'https://example.org/synthetic.pdf'}]})
     assert not issues,issues
     assert len(rows)==2
@@ -24,4 +32,16 @@ with tempfile.TemporaryDirectory() as folder:
     assert rows[0]['original']['Points']=='3' and rows[0]['finishSeconds']==350.4
     assert rows[1]['performance']=='8.63m' and rows[1]['finishSeconds'] is None
     assert all(r['independentTextCompared'] for r in rows)
+    columns=pathlib.Path(folder)/'columns.pdf'
+    pdf=canvas.Canvas(str(columns),pagesize=(612,792));pdf.setFont('Courier',8)
+    for offset,heading,name,time in [(0,'Women 100 Meter Run Open','Left, Runner','12.34'),(291.6,'Men 200 Meter Run Open','Right, Runner','24.56')]:
+        pdf.drawString(18+offset,740,heading)
+        for x,text in [(42,'Name'),(140,'Age'),(168,'Team'),(235,'Finals')]:pdf.drawString(x+offset,720,text)
+        pdf.drawString(30+offset,700,'1');pdf.drawString(42+offset,700,name);pdf.drawString(168+offset,700,'Example Club')
+        pdf.drawRightString(263.8+offset,700,time)
+    pdf.save()
+    rows,issues=parser.parse_pdf(columns,{'date':'2026-07-22','files':[{'url':'https://example.org/columns.pdf'}]})
+    assert not issues,issues
+    assert [(r['name'],r['performance'],r['gender']) for r in rows]==[('Left, Runner','12.34','Female'),('Right, Runner','24.56','Male')]
+    assert len({r['sourceRow'] for r in rows})==2
 print('Trackie synthetic PDF: club, seed, final, decimal precision and field mark checks passed.')

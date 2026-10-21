@@ -35,9 +35,14 @@ def km(label):
     return float(m[1]) * (1.609344 if m[2]=='Mile' else .001 if m[2]=='Meter' else 1)
 
 def prepare(args):
+    global BATCH, INSTRUCTION
     directory = json.loads((args.work/'directory.json').read_text())
     clubs = json.loads((args.work/'clubs.json').read_text())
     config = json.loads(args.config.read_text())
+    BATCH = config.get('batchId', BATCH)
+    INSTRUCTION = config.get('instruction', INSTRUCTION)
+    if not re.fullmatch(r'trackie-public-[a-z0-9-]+', BATCH):
+        raise ValueError('Invalid Trackie batch identifier')
     club_plan, club_by_alias, held_clubs = [], {}, []
     for org in config['clubs']:
         keys = {w.prep.norm(x) for x in [org['name'], *org['aliases']]}
@@ -53,7 +58,7 @@ def prepare(args):
     for path in sorted(args.captures.glob('*.capture.json')):
         cap=json.loads(path.read_text()); p=cap['payload']; key=p['sourceKey']
         if not p['rows'] or cap['state']!='compared': continue
-        if p['schemaVersion']!=4 or cap['issues']: raise ValueError('Unreviewed parser version')
+        if p['schemaVersion'] not in (4,5) or cap['issues']: raise ValueError('Unreviewed parser version')
         if hashlib.sha256(pathlib.Path(cap['sourcePath']).read_bytes()).hexdigest()!=cap['sourceSha256']: raise ValueError('Original PDF changed')
         m={**config['meetings'][key], 'key':key, 'date':p['index']['date'], 'sourceUrl':p['sourceUrl'], 'attachmentUrl':p['attachmentUrl'], 'competitions':[]}
         for heading, rs in __import__('itertools').groupby(sorted(p['rows'],key=lambda r:r['tableKey']),lambda r:r['tableKey']):
@@ -65,7 +70,7 @@ def prepare(args):
         for r in p['rows']:
             if not r['independentTextCompared']: raise ValueError('Uncompared row')
             name=display_name(r['name']); reasons=[]
-            if len(name.split())<2 or re.search(r'[%#]|\bT\d{2}\b',name): reasons.append('source name needs review')
+            if len(name.split())<2 or re.search(r'[%#]|\b[TF]\d{2}\b',name): reasons.append('source name needs review')
             if key=='10363' and r['performance']=='2:22.58': reasons.append('implausible one-mile source mark')
             if r['original'].get('Annotation')=='Ran 1 km': reasons.append('source distance differs from event heading')
             if key=='10364' and '95-99' in r['tableKey']: reasons.append('source age conflicts with other entries')
@@ -87,7 +92,7 @@ def prepare(args):
         if len(genders)!=1 or '' in genders: reasons.append('unspecified or inconsistent gender')
         orgs={club_by_alias[r['row']['club']]['slug'] if r['row']['club'] in club_by_alias else w.prep.norm(r['row']['club']) for r in rs}
         if len(orgs)>1: reasons.append('different source clubs require identity review')
-        ages=[int(x['row']['original']['Age']) for x in rs if (x['row']['original'].get('Age') or '').isdigit()]
+        ages=[int(match[1]) for x in rs if (match:=re.fullmatch(r'[MWF]?(\d+)', x['row']['original'].get('Age') or ''))]
         if ages and max(ages)-min(ages)>1: reasons.append('inconsistent explicit source ages')
         event_rows=[(x['meeting']['key'],x['row']['tableKey']) for x in rs]
         if len(event_rows)!=len(set(event_rows)): reasons.append('multiple rows in same competition')
@@ -110,8 +115,10 @@ def prepare(args):
     dump(args.work/'plan.private.json',plan); print(json.dumps(plan['summary']))
 
 def apply(args):
+    global BATCH, INSTRUCTION
     plan=json.loads((args.work/'plan.private.json').read_text()); fingerprint=digest(plan)
-    if plan['batchId']!=BATCH:raise ValueError('Wrong batch')
+    BATCH=plan['batchId']; INSTRUCTION=plan['instruction']
+    if not re.fullmatch(r'trackie-public-[a-z0-9-]+', BATCH):raise ValueError('Invalid Trackie batch identifier')
     cfg,q=w.base.connection(args.connection,args.confirm_branch,180)
     if cfg['projectId']!=w.PROJECT:raise ValueError('Wrong project')
     if args.publish:
@@ -127,7 +134,7 @@ def apply(args):
     # Reuse the audited, privacy-aware source-profile publication path.
     sql=w.INSERT.replace('Owner requested WMM athlete profiles and source results with duplicate checks; retained source year only; unclaimed provisional identity; existing profiles unchanged.','Owner requested Trackie athletes, clubs, meetings and events; exact source marks retained; identities provisional; existing profiles unchanged.')
     statements.append((sql,[json.dumps(plan['profiles'],ensure_ascii=False),PROVIDER,BATCH,None]))
-    statements += [(sql,[]) for sql in RESULT_SQL]
+    statements += [(sql.replace("'trackie-public-20261021'", "'"+BATCH+"'"),[]) for sql in RESULT_SQL]
     statements.append(("INSERT INTO network_audit_log(actor_email,action,entity_type,entity_id,after_value,note) VALUES('paul@athrecs.com','trackie.graph_published','import_batch',$1,$2::jsonb,$3)",[BATCH,json.dumps({'planHash':fingerprint,'summary':plan['summary'],'instruction':INSTRUCTION,'held':plan['held'],'heldClubs':plan['heldClubs'],'providerLicenceClaimed':False}),INSTRUCTION]))
     statements.append((VERIFY,[BATCH,[p['slug'] for p in plan['profiles']]]))
     result=q(statements); counts=result[-1][0]

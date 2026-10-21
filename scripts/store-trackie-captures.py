@@ -63,7 +63,7 @@ def main():
         digest = hashlib.sha256(encoded.encode()).hexdigest()
         audit = dict(sourceRowsCompared=capture["rows"] if capture["state"]=="compared" else 0,
                      athleteIdentityVerified=False, publication="staff_only", parserIssues=capture["issues"],
-                     parser="prepare-trackie-captures-v4", comparison="pdfplumber row text versus PyMuPDF row text",
+                     parser="prepare-trackie-captures-v"+str(payload['schemaVersion']), comparison="pdfplumber row text versus PyMuPDF row text",
                      sourceMimeType="application/pdf", canonicalResultsWritten=0)
         result = query([("""INSERT INTO result_archive_source_captures
           (run_id,approval_id,provider,source_key,source_url,payload_hash,html_sha256,source_html_gzip,payload,row_count,source_check,audit,captured_at)

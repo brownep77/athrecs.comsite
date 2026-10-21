@@ -94,3 +94,55 @@ are created, and existing athlete profiles are unchanged.
 The public result-page projection exposes only the mark, placing and verification
 label, never the stored capture locators or identity-review notes. Provider links
 remain on meeting/results pages; profile evidence stays in the staff backend.
+
+
+## Second supervised batch
+
+The owner's continuation request authorizes another bounded publication. The
+live second results page on 21 October listed 15 meetings dated 5 July–29 August
+2026 (the search engine's older copy had a different page boundary). Batch ID:
+`trackie-public-20261021-batch2`. Private capture approval:
+`trackie-owner-private-20261021-batch2`; run:
+`57fabbf7-a431-5efd-87f5-e6fdf559333b`.
+
+| Source listing | Compared individual finals |
+| --- | ---: |
+| CALTAF Throws Fest #1, 10350 | 132 |
+| YUTC Twilight #5, 10342 | 164 |
+| YUTC Twilight #4, 10343 | 177 |
+| Track North Sudbury Twilight #5, 10346 | 106 |
+| Track North Sudbury Twilight #4, 10347 | 52 |
+| Track North Sudbury Twilight #3, 10348 | 119 |
+| **Total** | **750** |
+
+The reviewed plan creates 367 unclaimed profiles and 542 linked unverified
+performances, reuses three meetings, creates three meetings, links 199 exact
+competition headings, and creates 47 clubs while reusing seven. Another 208
+compared observations are held for existing identity candidates, name details or
+conflicting club identities. Two additional rows with overlapping PDF text are
+retained in `payload.heldRows`, with their comparison issues, and excluded from
+the 750 compared rows. Shortened ambiguous clubs remain unlinked.
+
+Parser v5 reads two-column Hy-Tek reports in column order, retains distinct
+column-aware row locators, and resets column mappings between finals, heats and
+relays. Explicit M/W/F prefixes in an Age column supply gender for mixed races;
+no birthday or nationality is inferred. The synthetic regression covers column
+separation and suppression of unsupported rounds/relay tables as well as exact
+marks and seed/final separation. Batch identifiers and instructions now come
+from the reviewed configuration and are retained in publication audits.
+
+Twelve original PDF attachments are retained privately. The two multi-day
+championships require event-specific dates: Alberta's index lists 24 July, but
+the report explicitly spans 24–26 July. Four other PDFs remain unsupported
+(Crimson Lake, both Hamilton meetings, Royal City Nitro). Three HTML-only
+meetings (Bolton and both Lynx pole-vault meetings) remain outside this batch.
+Their source pages are reachable; an absent PDF does not mean absent results.
+Heats and relays are outside the supported individual-finals scope.
+
+Full club names were compared with the opened Trackie team directory at
+<https://www.trackie.com/ajax/get-custom-team-list.php> and the retained prior
+club sources. A source affiliation is historical, not confirmed membership.
+The production transaction retains the original PDFs, private evidence and
+holds; public profile data does not expose that evidence. No recurring scan is
+enabled. The next unscanned archive page is page 3; unsupported page-2 formats
+remain separate follow-up work.

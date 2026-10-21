@@ -46,19 +46,39 @@ def parse_pdf(path, item):
     headings = None
     independent = fitz.open(path)
     with pdfplumber.open(path) as doc:
+        # Two-column Hy-Tek reports flow down the left column, then the right.
+        # Detect that layout from repeated Name headings, retaining a source x
+        # coordinate so rows at the same height remain distinct observations.
+        first_words = doc.pages[0].extract_words(x_tolerance=1, y_tolerance=2)
+        name_x = sorted({round(w["x0"], 2) for w in first_words if w["text"] == "Name"})
+        column_shift = name_x[1] - name_x[0] if len(name_x) == 2 and name_x[0] < doc.pages[0].width / 2 < name_x[1] else None
         for page_no, page in enumerate(doc.pages, 1):
-            other_words = independent[page_no - 1].get_text("words")
-            for line in lines(page.extract_words(x_tolerance=1, y_tolerance=2)):
+            words = page.extract_words(x_tolerance=1, y_tolerance=2)
+            raw_other = independent[page_no - 1].get_text("words")
+            regions = [(0, page.width, 0)] if column_shift is None else [(0, page.width/2, 0), (page.width/2, page.width, column_shift)]
+            reading_lines = []
+            for left, right, offset in regions:
+                region_words = [{**w, "x0":w["x0"]-offset, "x1":w["x1"]-offset} for w in words if left <= w["x0"] < right]
+                other = [(w[0]-offset,w[1],w[2]-offset,*w[3:]) for w in raw_other if left <= w[0] < right]
+                reading_lines.extend((line,other,offset) for line in lines(region_words))
+            for line, other_words, column_offset in reading_lines:
                 text = " ".join(w["text"] for w in line)
                 heading_text = re.sub(r"^\.+", "", text).strip()
                 if re.match(r"^(?:(?:Event \d+|Throws Pentathlon: #\d+)\s+)?(?:Boys|Girls|Men|Women|Mixed)\b", heading_text):
                     section = heading_text
+                    headings = None
                 if text.startswith("#") and re.search(r"\b(?:Women|Men)", text):
                     section = text
+                    headings = None
                 if text == "Team Scores" or ("RNK" in text and "TOTAL TIME" in text):
                     headings = None
                     continue
                 names = [w["text"] for w in line]
+                # A different round or relay table must not reuse the preceding
+                # individual-finals columns. Only supported tables are mapped.
+                if ("Name" in names and "Team" in names and "Finals" not in names) or ("Team" in names and "Relay" in names):
+                    headings = None
+                    continue
                 if "Name" in names and "Team" in names and "Finals" in names:
                     headings = {w["text"]: w for w in line}
                     continue
@@ -139,14 +159,15 @@ def parse_pdf(path, item):
                 values.update({"Source Place": prefix[0]["text"], "Event": section,
                                "PDF Page": str(page_no), "Source row": text,
                                "Source URL": item["files"][0]["url"]})
+                explicit_gender = re.fullmatch(r"([MWF])\d+", values.get("Age", ""))
                 row = dict(name=name, bib=bib, club=values.get("Team", values.get("TEAM", "")),
-                           gender="Female" if re.search(r"Girls|Women",section) else "Male" if re.search(r"Boys|Men",section) else "",
+                           gender="Female" if re.search(r"Girls|Women",section) else "Male" if re.search(r"Boys|Men",section) else ("Male" if explicit_gender[1]=="M" else "Female") if explicit_gender else "",
                            category=category[1] if category else "", distanceLabel=distance_label,
                            date=item["date"], status=status, performance=performance,
                            finishSeconds=seconds(performance) if timed else None,
                            chipSeconds=None, gunSeconds=None, overallPlace=None, genderPlace=None, categoryPlace=None,
                            sourcePlace=prefix[0]["text"], placingScope=section,
-                           sourceRow=f"page:{page_no}/y:{round(top,2)}", tableKey=section,
+                           sourceRow=f"page:{page_no}/x:{round(column_offset,2)}/y:{round(top,2)}", tableKey=section,
                            original=values, independentTextCompared=comparison,
                            identity="unreviewed", publication="staff_only")
                 rows.append(row)
@@ -164,7 +185,8 @@ def main():
     inventory = json.loads((args.directory / "inventory.json").read_text())
     summary = []
     for item in inventory:
-        item["date"] = dt.datetime.strptime("2026 " + item["dateLabel"], "%Y %b %d").date().isoformat()
+        single_day = bool(re.fullmatch(r"[A-Za-z]{3} \d{1,2}", item["dateLabel"]))
+        item["date"] = dt.datetime.strptime("2026 " + item["dateLabel"], "%Y %b %d").date().isoformat() if single_day else None
         attachments = item.get("files", [])
         if not attachments or attachments[0]["format"] != "pdf":
             summary.append(dict(key=item["key"], name=item["name"], rows=0,
@@ -172,11 +194,22 @@ def main():
                                 url=item.get("externalRedirect", item["url"])))
             continue
         path = Path(attachments[0]["path"])
-        rows, issues = parse_pdf(path, item)
-        payload = dict(schemaVersion=4, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
+        with fitz.open(path) as source_doc:
+            title_text = source_doc[0].get_text()
+        report_range = re.search(r"\b(20\d{2}-\d{2}-\d{2})\s+(?:to|-)\s+(20\d{2}-\d{2}-\d{2})\b", title_text)
+        single_day = single_day and not (report_range and report_range[1] != report_range[2])
+        rows, issues = parse_pdf(path, item) if single_day else ([], ["Multi-day meeting requires event-specific dates before publication"])
+        held_rows = [r for r in rows if not r['independentTextCompared']]
+        comparison_issues = [issue for issue in issues if 'independent text comparison differs:' in issue]
+        rows = [r for r in rows if r['independentTextCompared']]
+        issues = [issue for issue in issues if issue not in comparison_issues]
+        if not rows and not issues:
+            issues.append('No independently compared result rows')
+        payload = dict(schemaVersion=5, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
                        sourceMimeType="application/pdf", attachmentUrl=attachments[0]["url"],
-                       index=dict(name=item["name"], date=item["date"], location=item["location"]),
+                       index=dict(name=item["name"], date=item["date"], dateLabel=item["dateLabel"], location=item["location"]),
                        publication="staff_only", identity="unreviewed", rows=rows,
+                       heldRows=held_rows, heldRowIssues=comparison_issues,
                        qualifications=["Source observations only; no athlete identity or account ownership verified.",
                                        "Placing is scoped to the original event heading; nationality is not inferred."])
         capture = dict(payload=payload, rows=len(rows), sourcePath=str(path),
