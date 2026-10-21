@@ -211,6 +211,26 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
+        <NoticeSection title="Sign-in and recognised browser records">
+          <p>
+            To support your account and investigate access problems, authorised staff can see your
+            email verification status, successful sign-in counts, sign-in times and methods,
+            browser-reported device types, and approximate country, region and city supplied by our
+            hosting platform. Network locations can be inaccurate and do not establish your address
+            or nationality. We do not collect a phone serial number or IMEI.
+          </p>
+          <p className="mt-3">
+            A signed, secure browser cookie recognises repeat sign-ins on this website for up to 90
+            days after a sign-in. Its stored reference is separate for each account and site.
+            Clearing cookies, private browsing or using another browser can create a new device
+            number. We do not use browser fingerprinting. Detailed login history and inactive
+            recognised browser records expire after 90 days and are removed on the next sign-in or
+            staff client-data visit. Overall counts remain while the account exists. Deleting the
+            account also deletes its login history and recognised browser records. These records are
+            private and are not used for marketing.
+          </p>
+        </NoticeSection>
+
         <NoticeSection title="Optional Entry Passport information">
           <p>
             You can add location, club, sports, disciplines, training patterns, goals and coach
