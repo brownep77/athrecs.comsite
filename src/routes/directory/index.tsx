@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ORGANISATION_TYPES, SPORTS_ORGANISATIONS } from "@/data/sports-organisations";
 import {
   DIRECTORY_COUNTRIES,
+  DIRECTORY_NATIONAL_COUNTRIES,
   DIRECTORY_QUESTIONS,
   filterSportsOrganisations,
   parseDirectorySearch,
@@ -314,9 +315,10 @@ function DirectoryPage() {
           </details>
         ))}
         <p className="text-xs leading-5 text-muted">
-          Initial coverage: UK and home nations, Ireland, USA, Canada, Australia, New Zealand and
-          South Africa, plus international bodies. This directory is not exhaustive. Official
-          references and review dates appear on each organisation’s page.
+          National federations in {DIRECTORY_NATIONAL_COUNTRIES.length} countries, alongside
+          home-nation, regional, specialist and international organisations. Coverage is growing and
+          is not exhaustive. Official references and review dates appear on each organisation’s
+          page.
         </p>
       </section>
     </div>
