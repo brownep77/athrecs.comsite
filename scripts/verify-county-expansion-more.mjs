@@ -126,6 +126,21 @@ try {
   assert.equal(checkedFixtureStart("great-north-swim", "2028-06-12", "0.5mi", null), null);
   assert(isReviewedFixturePlaceholder("far-atw-grafham-triathlon", "2027-09-25", "Other"));
   assert(!isReviewedFixturePlaceholder("far-atw-grafham-triathlon", "2028-09-25", "Other"));
+  for (const [slug, date, expectedDistances] of [
+    ["beyond-ncl", "2027-04-24", ["25K", "55K"]],
+    ["the-priory-100k", "2027-05-29", ["100K"]],
+  ]) {
+    assert.deepEqual(
+      rows
+        .find((row) => row.slug === slug)
+        .editions.filter((edition) => edition.date === date)
+        .map((edition) => edition.distance)
+        .sort(),
+      expectedDistances,
+      "Reviewed programme replaces generic Ultra placeholder in public listings",
+    );
+    assert(!isReviewedFixturePlaceholder(slug, date.replace("2027", "2028"), "Ultra"));
+  }
   assert(
     (await publish(sql, publishing, data, baseline)).every((result) => result.alreadyPublished),
   );

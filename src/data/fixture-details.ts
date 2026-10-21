@@ -281,6 +281,14 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
+  // These imported 50km Ultra placeholders are superseded by the opened
+  // organiser programmes: Beyond NCL 25/55km and The Priory 100km.
+  if (
+    distance === "Ultra" &&
+    ((slug === "beyond-ncl" && date === "2027-04-24") ||
+      (slug === "the-priory-100k" && date === "2027-05-29"))
+  )
+    return true;
   return (
     distance === "Other" &&
     (Object.hasOwn(countyExpansion.details, `${slug}|${date}`) ||
