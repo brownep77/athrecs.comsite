@@ -1,4 +1,5 @@
 import countyExpansion from "./county-expansion-2026-10-21.json" with { type: "json" };
+import countyExpansionMore from "./county-expansion-more-2026-10-21.json" with { type: "json" };
 
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
@@ -12,6 +13,7 @@ export type FixtureDetail = {
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   ...countyExpansion.details,
+  ...countyExpansionMore.details,
   "chase-the-train|2026-11-01": {
     summary: "A point-to-point trail run beside the Bure Valley Railway from Aylsham to Wroxham.",
     timeZone: "Europe/London",
@@ -279,7 +281,11 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
-  return distance === "Other" && Object.hasOwn(countyExpansion.details, `${slug}|${date}`);
+  return (
+    distance === "Other" &&
+    (Object.hasOwn(countyExpansion.details, `${slug}|${date}`) ||
+      Object.hasOwn(countyExpansionMore.details, `${slug}|${date}`))
+  );
 }
 
 /** Never carry checked starts across dates; an explicit conflict also hides stored times. */
