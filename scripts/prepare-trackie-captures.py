@@ -63,6 +63,10 @@ def parse_pdf(path, item):
                 reading_lines.extend((line,other,offset) for line in lines(region_words))
             for line, other_words, column_offset in reading_lines:
                 text = " ".join(w["text"] for w in line)
+                # A centred report title may spill into the second column.
+                # Its year/date fragment is not an athlete's placing and name.
+                if re.fullmatch(r'20\d{2}\s+-\s+20\d{2}-\d{2}-\d{2}', text):
+                    continue
                 heading_text = re.sub(r"^\.+", "", text).strip()
                 if re.match(r"^(?:(?:Event \d+|Throws Pentathlon: #\d+)\s+)?(?:Boys|Girls|Men|Women|Mixed)\b", heading_text):
                     section = heading_text
@@ -104,6 +108,8 @@ def parse_pdf(path, item):
                             continue
                         cells = [(i, w) for i, w in enumerate(line)
                                  if abs(w["x1"] - headings[key]["x1"]) < 2
+                                 or (key == "Finals" and re.fullmatch(r'[JX]?(?:\d+:)*\d+(?:\.\d+)?m?[R#]', w['text'])
+                                     and w['x0'] < headings[key]['x1'] < w['x1'] <= headings[key]['x1'] + 8)
                                  or (key == "Points" and re.fullmatch(r"\d+(?:\.\d+)?", w["text"])
                                      and headings[key]["x0"] - 2 <= (w["x0"] + w["x1"]) / 2 <= headings[key]["x1"] + 2)]
                         values[key] = " ".join(w["text"] for _, w in cells)
@@ -205,7 +211,7 @@ def main():
         issues = [issue for issue in issues if issue not in comparison_issues]
         if not rows and not issues:
             issues.append('No independently compared result rows')
-        payload = dict(schemaVersion=5, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
+        payload = dict(schemaVersion=6, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
                        sourceMimeType="application/pdf", attachmentUrl=attachments[0]["url"],
                        index=dict(name=item["name"], date=item["date"], dateLabel=item["dateLabel"], location=item["location"]),
                        publication="staff_only", identity="unreviewed", rows=rows,

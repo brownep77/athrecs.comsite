@@ -16,6 +16,8 @@ with tempfile.TemporaryDirectory() as folder:
     for x,text in [(42,'Name'),(180,'Year'),(216,'Team'),(360,'Finals'),(425,'Points')]:pdf.drawString(x,640,text)
     pdf.drawString(30,620,'1');pdf.drawString(42,620,'Sample, Athlete');pdf.drawString(216,620,'Example Club')
     pdf.drawRightString(396,620,'8.63m');pdf.drawRightString(461,620,'639')
+    pdf.drawString(30,600,'2');pdf.drawString(42,600,'Record, Athlete');pdf.drawString(216,600,'Example Club')
+    pdf.drawRightString(402,600,'8.50mR')
     pdf.drawString(18,580,'Event 2 Men 100 Meter Dash OPEN')
     for x,text in [(42,'Name'),(180,'Year'),(216,'Team'),(360,'Prelims')]:pdf.drawString(x,560,text)
     pdf.drawString(30,540,'1');pdf.drawString(42,540,'Heat, Runner');pdf.drawString(216,540,'Example Club')
@@ -26,15 +28,17 @@ with tempfile.TemporaryDirectory() as folder:
     pdf.drawRightString(396,460,'44.00');pdf.save()
     rows,issues=parser.parse_pdf(path,{'date':'2026-09-27','files':[{'url':'https://example.org/synthetic.pdf'}]})
     assert not issues,issues
-    assert len(rows)==2
-    assert [r['club'] for r in rows]==['Example Club','Example Club']
+    assert len(rows)==3
+    assert [r['club'] for r in rows]==['Example Club']*3
     assert rows[0]['performance']=='5:50.40' and rows[0]['original']['Seed']=='6:00.00'
     assert rows[0]['original']['Points']=='3' and rows[0]['finishSeconds']==350.4
     assert rows[1]['performance']=='8.63m' and rows[1]['finishSeconds'] is None
+    assert rows[2]['performance']=='8.50mR'
     assert all(r['independentTextCompared'] for r in rows)
     columns=pathlib.Path(folder)/'columns.pdf'
     pdf=canvas.Canvas(str(columns),pagesize=(612,792));pdf.setFont('Courier',8)
     for offset,heading,name,time in [(0,'Women 100 Meter Run Open','Left, Runner','12.34'),(291.6,'Men 200 Meter Run Open','Right, Runner','24.56')]:
+        if offset:pdf.drawString(18+offset,760,'2026 - 2026-06-13')
         pdf.drawString(18+offset,740,heading)
         for x,text in [(42,'Name'),(140,'Age'),(168,'Team'),(235,'Finals')]:pdf.drawString(x+offset,720,text)
         pdf.drawString(30+offset,700,'1');pdf.drawString(42+offset,700,name);pdf.drawString(168+offset,700,'Example Club')
@@ -44,4 +48,4 @@ with tempfile.TemporaryDirectory() as folder:
     assert not issues,issues
     assert [(r['name'],r['performance'],r['gender']) for r in rows]==[('Left, Runner','12.34','Female'),('Right, Runner','24.56','Male')]
     assert len({r['sourceRow'] for r in rows})==2
-print('Trackie synthetic PDF: club, seed, final, decimal precision and field mark checks passed.')
+print('Trackie synthetic PDF: headings, columns, titles, exact marks and record suffix checks passed.')

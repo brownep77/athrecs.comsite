@@ -146,3 +146,50 @@ The production transaction retains the original PDFs, private evidence and
 holds; public profile data does not expose that evidence. No recurring scan is
 enabled. The next unscanned archive page is page 3; unsupported page-2 formats
 remain separate follow-up work.
+
+## Third supervised batch
+
+The owner's continuation covers the live third page, checked on 21 October
+2026: 15 listings dated 13 June–5 July. Batch ID:
+`trackie-public-20261021-batch3`. Private capture approval:
+`trackie-owner-private-20261021-batch3`; run:
+`dc2a53ab-d121-5559-b19c-e15da699c00d`.
+
+| Source listing | Compared individual finals |
+| --- | ---: |
+| StFX Blue and White Twilight, 10317 | 37 |
+| Royal Canadian Legion District K, 10318 | 513 |
+| Royal Canadian Legion District F, 10320 | 511 |
+| Royal Canadian Legion District H, 10324 | 579 |
+| Royal Canadian Legion District E, 10325 | 462 |
+| Move More Bermuda, 10327 | 57 |
+| Track North Sudbury Twilight #2, 10328 | 182 |
+| **Total** | **2,341** |
+
+The reviewed plan contains 767 new unclaimed profiles, 1,801 linked unverified
+results, seven new meetings and 470 event/category competitions. It creates
+37 clubs/teams and reuses 19. Another 540 compared rows are held, primarily for
+existing athlete/account identity candidates. One additional StFX row is held
+for overlapping PDF text and excluded from the compared total. The complete
+athlete/account alias directory was checked again against this final row set.
+
+Parser v6 ignores split report-date titles and preserves record suffixes that
+extend slightly past a numeric column heading. Exact marks, including `R` and
+`#`, remain as printed. Synthetic regressions cover the title and record-mark
+cases. The publisher also holds damaged name encoding and explicit source ages
+that conflict with numeric age bands. Names are not silently repaired.
+
+Thirteen original PDFs are retained privately, including six held reports.
+PEI, Jack Brow, Bermuda Nationals, ABAA Nationals and Mississauga need specific
+competition dates or resolution of conflicting date spans. Hamilton Canada Day
+uses an unsupported MeetPro PDF layout. District C Crystal Taylor uses HTML;
+Solstice redirects to `https://viaa.ca/results/2026/solstice/`, which public
+retrieval could not open. Neither is counted as imported. VIAA is registered as
+a disabled research source after a registry and event-inventory duplicate check.
+
+Club expansions use the retained Trackie team directory and prior reviewed club
+sources. Ambiguous abbreviations remain unlinked. No nationality, birth date,
+current membership, account ownership or verified achievement is inferred.
+Validation includes exact history-schema checks, an isolated database rehearsal,
+transaction guards, independent readback and live public-page checks. The next
+unscanned 2026 archive page is page 4; the held formats remain follow-up work.

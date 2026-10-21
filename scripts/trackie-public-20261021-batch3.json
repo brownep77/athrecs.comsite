@@ -1,0 +1,508 @@
+{
+  "batchId": "trackie-public-20261021-batch3",
+  "instruction": "Continue adding Trackie results, athlete profiles, clubs, meetings and events to AthRecs. Owner continuation: can you continue please.",
+  "clubs": [
+    {
+      "name": "The Gazelles Track and Field Club",
+      "aliases": [
+        "The Gazelles",
+        "The Gazelles Tfc"
+      ],
+      "website": "https://thegazelles.ca/",
+      "sourceUrl": "https://thegazelles.ca/",
+      "country": "Canada",
+      "city": ""
+    },
+    {
+      "name": "Bermuda Pacers Track Club",
+      "aliases": [
+        "BPTC",
+        "Bermuda Pace",
+        "Pacers Track Club",
+        "BPTC"
+      ],
+      "website": "https://www.pacersbda.com/aboutpacers/",
+      "sourceUrl": "https://www.pacersbda.com/aboutpacers/",
+      "country": "Bermuda",
+      "city": ""
+    },
+    {
+      "name": "Track North Athletic Club",
+      "aliases": [
+        "Track North"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "North Bay Legion",
+      "aliases": [
+        "North Bay Le"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Three Fires Track Club",
+      "aliases": [
+        "Three Fires"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Sudbury Endurance",
+      "aliases": [
+        "Sudbury Endu"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "York University Track & Field Club",
+      "aliases": [
+        "York Univers",
+        "York University"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Waterloo Track Club",
+      "aliases": [
+        "Waterloo Track Club",
+        "Waterloo Tra"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Speed Academy Athletics Club",
+      "aliases": [
+        "Speed Academ",
+        "Speed Academy"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Peterborough Legion Track Club",
+      "aliases": [
+        "Peterborough"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Royal City Athletics Club",
+      "aliases": [
+        "Royal City A",
+        "Royal City AC"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Bolton Pole Vault",
+      "aliases": [
+        "Bolton Pole Vault"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "310 Running",
+      "aliases": [
+        "310 Running"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Newmarket Huskies Track Club",
+      "aliases": [
+        "Newmarket Hu",
+        "Newmarket Huskie"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Quest Sports Track and Field Club",
+      "aliases": [
+        "Quest Sports",
+        "Quest Sports Tfc"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Extreme Velocity Track Club",
+      "aliases": [
+        "Extreme Velo"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Variety Village Athletic Club",
+      "aliases": [
+        "Variety Vill"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "United Tamil Sports Club",
+      "aliases": [
+        "United Tamil"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "South Simcoe Dufferin T.F.C.",
+      "aliases": [
+        "South Simcoe",
+        "SSD"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Almaguin TC",
+      "aliases": [
+        "Almaguin TC"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Athletics East Nova Scotia",
+      "aliases": [
+        "Athletics Ea"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Bayside SS - Belleville",
+      "aliases": [
+        "Bayside SS -"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Bishop Alexander Carter",
+      "aliases": [
+        "Bishop Alexa"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Centre Hastings HS - Madoc",
+      "aliases": [
+        "Centre Hasti"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Chippewa Secondary School",
+      "aliases": [
+        "Chippewa Sec"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Collingwood Runners",
+      "aliases": [
+        "Collingwood Runners"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Dr. JH Gillis High School",
+      "aliases": [
+        "Dr. JH Gilli"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Englehart Public School",
+      "aliases": [
+        "Englehart Pu"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Englehart S.S.",
+      "aliases": [
+        "Englehart S."
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "English Catholic Central School",
+      "aliases": [
+        "English Cath"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Halifax Road Hammers",
+      "aliases": [
+        "Halifax Road"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Highlands Track And Field",
+      "aliases": [
+        "Highlands Tr"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Huntsville Hurricanes",
+      "aliases": [
+        "Huntsville Hurri"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Islanders Track and Field",
+      "aliases": [
+        "Islanders Tr"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "J. Clarke Richardson",
+      "aliases": [
+        "J. Clarke Ri"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Kawartha Lakes Lightning",
+      "aliases": [
+        "Kawartha Lak"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Lasalle Secondary School",
+      "aliases": [
+        "Lasalle Seco"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Limitless Era Track Club",
+      "aliases": [
+        "Limitless Er"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Manitoulin Island Legion Branch 514",
+      "aliases": [
+        "Manitoulin I"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Marmora",
+      "aliases": [
+        "Marmora"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Marymount Academy",
+      "aliases": [
+        "Marymount Ac"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "New Liskeard Public School",
+      "aliases": [
+        "New Liskeard"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "O'Gorman - Timmins",
+      "aliases": [
+        "O'Gorman - T"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Pickering HS",
+      "aliases": [
+        "Pickering HS"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Quinte Christian - Belleville",
+      "aliases": [
+        "Quinte Chris"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "St. Peter's School",
+      "aliases": [
+        "St. Peter's School"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Stfx Track And Field Club",
+      "aliases": [
+        "Stfx Track A"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Superior Heights CVS",
+      "aliases": [
+        "Superior Hei"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Temiskaming District Secondary School",
+      "aliases": [
+        "Temiskaming"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Timmins Chargers",
+      "aliases": [
+        "Timmins Char"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Timmins High",
+      "aliases": [
+        "Timmins High"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Valley Athletics",
+      "aliases": [
+        "Valley Athle"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Valley View Public School",
+      "aliases": [
+        "Valley View"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "White Pine Collegiate and Vocational School",
+      "aliases": [
+        "White Pine C"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "705 Jumps And Throws",
+      "aliases": [
+        "705 Jump & Throw"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Athletic Victory (Speed) Club",
+      "aliases": [
+        "Athletic Victory"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    }
+  ],
+  "meetings": {
+    "10317": {
+      "name": "StFX Blue and White Twilight: Fueling the Future",
+      "slug": "trackie-stfx-blue-and-white-twilight-fueling-the-future-10317",
+      "city": "Antigonish",
+      "region": "Nova Scotia",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Saint Francis Xavier University",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10318": {
+      "name": "Royal Canadian Legion District K Qualifier",
+      "slug": "trackie-royal-canadian-legion-district-k-qualifier-10318",
+      "city": "Timmins",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "THVS",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10320": {
+      "name": "Royal Canadian Legion District F Qualifier",
+      "slug": "trackie-royal-canadian-legion-district-f-qualifier-10320",
+      "city": "Belleville",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Belleville",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10324": {
+      "name": "Royal Canadian Legion District H Qualifier",
+      "slug": "trackie-royal-canadian-legion-district-h-qualifier-10324",
+      "city": "Sudbury",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Sudbury",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10325": {
+      "name": "Royal Canadian Legion District E Qualifier",
+      "slug": "trackie-royal-canadian-legion-district-e-qualifier-10325",
+      "city": "Midland",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "St. Theresa’s High School",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10327": {
+      "name": "Move More Bermuda",
+      "slug": "trackie-move-more-bermuda-10327",
+      "city": "",
+      "region": "",
+      "country": "Bermuda",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "NSC",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10328": {
+      "name": "Track North Sudbury Twilight #2",
+      "slug": "trackie-track-north-sudbury-twilight-2-10328",
+      "city": "Sudbury",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Laurentian Community Track",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    }
+  }
+}
