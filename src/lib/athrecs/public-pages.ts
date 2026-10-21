@@ -2,6 +2,7 @@ import { SPORT_PAGES } from "./sport-pages";
 import { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } from "../running/road-ultras";
 import { EDITORIAL_ARTICLES } from "../../data/athrecs-editorial";
 import { editorialPath } from "./editorial";
+import { SPORTS_ORGANISATIONS } from "../../data/sports-organisations";
 
 /** One list for the HTML directory and the XML sitemap. Account tools stay private. */
 export const PUBLIC_PAGES = [
@@ -22,6 +23,11 @@ export const PUBLIC_PAGES = [
   { path: "/calendar", name: "Athletics calendar" },
   { path: "/race-series", name: "Athletics disciplines and championships" },
   { path: "/clubs", name: "Running and athletics clubs" },
+  { path: "/directory", name: "Sports federations and governing bodies" },
+  ...SPORTS_ORGANISATIONS.map((body) => ({
+    path: `/directory/${body.slug}`,
+    name: `${body.name} — sports organisation`,
+  })),
   { path: "/find-events", name: "Find sporting events" },
   { path: "/join", name: "Create an athlete profile" },
   { path: "/brands", name: "Sports brands and partners" },

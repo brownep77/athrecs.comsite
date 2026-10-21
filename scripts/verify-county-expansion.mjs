@@ -6,7 +6,7 @@ const data = JSON.parse(await readFile("src/data/county-expansion-2026-10-21.jso
 const baseline = JSON.parse(await readFile("scripts/lib/county-expansion-baseline.json"));
 const publishing = await import("../src/lib/athrecs/catalogue-publishing.server.ts");
 const { queryRacePlaceRows } = await import("../src/lib/athrecs/race-places.server.ts");
-const { isReviewedFixturePlaceholder, checkedFixtureStart } =
+const { isReviewedFixturePlaceholder, checkedFixtureStart, FIXTURE_DETAILS } =
   await import("../src/data/fixture-details.ts");
 const { pg, sql } = await bulkFixture();
 try {
@@ -68,8 +68,10 @@ try {
       );
       assert(live, `Missing distance: ${event.slug} ${edition.distance}`);
       assert.equal(live.checkedAt, "2026-10-21");
-      assert.equal(live.startTime, edition.startTime ?? null);
-      assert.equal(live.sourceUrl, edition.source);
+      const current = FIXTURE_DETAILS[`${edition.eventSlug}|${edition.date}`];
+      const start = current?.starts[edition.distance];
+      assert.equal(live.startTime, start ? start.time : (edition.startTime ?? null));
+      assert.equal(live.sourceUrl, start?.sourceUrl ?? current?.sourceUrl ?? edition.source);
       if (edition.endDate) assert.equal(live.endDate, edition.endDate);
     }
     if (event.sport === "Parkrun") {

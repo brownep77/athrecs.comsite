@@ -44,3 +44,32 @@ export function publicProfileDetails(value: unknown, dob?: string | null): Publi
   }
   return { ...details, birthday };
 }
+
+/** Only individually published source facts belong in an unclaimed public preview. */
+export function publishedSourceProfileDetails(
+  value: unknown,
+  dob: string | null,
+  athleteId: number,
+): PublicProfileDetails | null {
+  const record = (input: unknown): Record<string, unknown> =>
+    input && typeof input === "object" && !Array.isArray(input)
+      ? (input as Record<string, unknown>)
+      : {};
+  const stored = record(value);
+  const publication = record(stored.worldAthleticsProfileDetailsPublication);
+  if (publication.athleteId !== athleteId || !publication.reviewedAt) return null;
+  const approved = record(publication.filledProfileDetails);
+  const current = publicProfileDetails(value, dob);
+  const details = publicProfileDetails({});
+  if (
+    approved.birthdayVisibility === current.birthdayVisibility &&
+    current.birthdayVisibility !== "hidden"
+  ) {
+    details.birthdayVisibility = current.birthdayVisibility;
+    details.birthday = current.birthday;
+  }
+  for (const field of ["manager", "birthCountry"] as const) {
+    if (approved[field] === current[field]) details[field] = current[field];
+  }
+  return details.birthday || details.manager || details.birthCountry ? details : null;
+}

@@ -1,7 +1,18 @@
 import { selectProfilePersonalBests } from "./reported-personal-bests.ts";
+import { historicalTime } from "./history-performance.ts";
 import { formatDuration } from "./format.ts";
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory } from "./source-performance-history";
+
+/** Retain source fractions only when they agree with the stored finish to within rounding. */
+function recordedMark(row: ProfileResult): string {
+  const mark = row.details?.reportedPerformance?.trim();
+  const seconds = mark ? historicalTime(mark) : null;
+  return mark && seconds != null && row.finishTimeSeconds != null &&
+    Math.abs(seconds - row.finishTimeSeconds) < 1
+    ? mark
+    : formatDuration(row.finishTimeSeconds);
+}
 
 /** Public cards are calculated before pagination and contain no private evidence. */
 export function profilePersonalBestSummary(
@@ -19,8 +30,7 @@ export function profilePersonalBestSummary(
       mark:
         candidate.kind === "reported"
           ? (candidate.value.displayMark ?? formatDuration(row.finishTimeSeconds))
-          : (candidate.value.history?.performance.performance ??
-            formatDuration(row.finishTimeSeconds)),
+          : (candidate.value.history?.performance.performance ?? recordedMark(candidate.value)),
       event: candidate.kind === "reported" ? candidate.value.event : candidate.value.eventName,
       date: candidate.kind === "reported" ? candidate.value.date : candidate.value.eventDate,
       label:

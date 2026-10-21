@@ -146,3 +146,114 @@ The production transaction retains the original PDFs, private evidence and
 holds; public profile data does not expose that evidence. No recurring scan is
 enabled. The next unscanned archive page is page 3; unsupported page-2 formats
 remain separate follow-up work.
+
+## Third supervised batch
+
+The owner's continuation covers the live third page, checked on 21 October
+2026: 15 listings dated 13 June–5 July. Batch ID:
+`trackie-public-20261021-batch3`. Private capture approval:
+`trackie-owner-private-20261021-batch3`; run:
+`dc2a53ab-d121-5559-b19c-e15da699c00d`.
+
+| Source listing | Compared individual finals |
+| --- | ---: |
+| StFX Blue and White Twilight, 10317 | 37 |
+| Royal Canadian Legion District K, 10318 | 513 |
+| Royal Canadian Legion District F, 10320 | 511 |
+| Royal Canadian Legion District H, 10324 | 579 |
+| Royal Canadian Legion District E, 10325 | 462 |
+| Move More Bermuda, 10327 | 57 |
+| Track North Sudbury Twilight #2, 10328 | 182 |
+| **Total** | **2,341** |
+
+The reviewed plan contains 767 new unclaimed profiles, 1,801 linked unverified
+results, seven new meetings and 470 event/category competitions. It creates
+37 clubs/teams and reuses 19. Another 540 compared rows are held, primarily for
+existing athlete/account identity candidates. One additional StFX row is held
+for overlapping PDF text and excluded from the compared total. The complete
+athlete/account alias directory was checked again against this final row set.
+
+Parser v6 ignores split report-date titles and preserves record suffixes that
+extend slightly past a numeric column heading. Exact marks, including `R` and
+`#`, remain as printed. Synthetic regressions cover the title and record-mark
+cases. The publisher also holds damaged name encoding and explicit source ages
+that conflict with numeric age bands. Names are not silently repaired.
+
+Thirteen original PDFs are retained privately, including six held reports.
+PEI, Jack Brow, Bermuda Nationals, ABAA Nationals and Mississauga need specific
+competition dates or resolution of conflicting date spans. Hamilton Canada Day
+uses an unsupported MeetPro PDF layout. District C Crystal Taylor uses HTML;
+Solstice redirects to `https://viaa.ca/results/2026/solstice/`, which public
+retrieval could not open. Neither is counted as imported. VIAA is registered as
+a disabled research source after a registry and event-inventory duplicate check.
+
+Club expansions use the retained Trackie team directory and prior reviewed club
+sources. Ambiguous abbreviations remain unlinked. No nationality, birth date,
+current membership, account ownership or verified achievement is inferred.
+Validation includes exact history-schema checks, an isolated database rehearsal,
+transaction guards, independent readback and live public-page checks. The next
+unscanned 2026 archive page is page 4; the held formats remain follow-up work.
+
+## Fourth supervised batch
+
+The owner asked for more. The live fourth page, checked on 21 October 2026,
+contains 15 listings dated 16 May–13 June. Batch ID:
+`trackie-public-20261021-batch4`; private capture approval:
+`trackie-owner-private-20261021-batch4`; run:
+`897a5b37-f97b-5325-803a-c81c0e301a30`.
+
+| Source listing | Compared individual finals |
+| --- | ---: |
+| YUTC Twilight #1, 10309 | 80 |
+| MTA Outdoor Prep Meet #1, 10311 | 496 |
+| OAC Twilight Meet #2, 10312 | 244 |
+| Royal Canadian Legion Zone K1, 10313 | 573 |
+| YUTC Twilight #2, 10331 | 223 |
+| YUTC Throws Night, 10332 | 56 |
+| **Total** | **1,672** |
+
+The reviewed plan publishes 620 new unclaimed profiles and 1,159 unverified
+results. It links six meetings (three new, three existing), 375 event/category
+competitions, and 60 club identities (25 new, 35 existing). Another 513 source
+rows remain held for existing identities, ambiguous names/clubs or source
+conflicts. The live directory was checked against the final corrected name set.
+
+Parser v7 maps a Prelims column separately when it accompanies Finals; its
+values cannot become club names. Name and team extraction share one boundary,
+allowing the small printed alignment difference between headings and body rows.
+It also detects slash-formatted and reversed date ranges. Synthetic PDFs cover
+all three cases. A read-only audit of the previous batches compared 4,081
+retained rows with no name, club, mark or placing changes from these fixes.
+Another 26 legacy continuation rows are omitted by both baseline v6 and v7;
+their original compared evidence is retained and no historical rows are changed.
+
+Eleven original PDFs are retained privately. Five remain held: both Hamilton
+reports (image-only or unsupported MeetPro), Cali and SSNS multi-day reports,
+and UTTC Twilight #2, whose title conflicts between 2 June and 19 May. Bolton
+#4 and Skiffington/Grant are HTML listings outside this PDF adapter. Bolton #3
+is explicitly cancelled. Sabrecats redirects to AthleticLIVE; the retrieved
+shell supplied no rows. These are not counted as imported.
+
+YUTC Throws Night is the existing Project Athletics Throws Night, event 4392539.
+The actual World Athletics report at
+<https://worldathletics.org/competition/calendar-results/results/7243424>
+was opened directly and compared with Trackie's original PDF: same date, venue
+and 14 matching performances across six event headings. This avoids another
+meeting record despite the different title. Four new profiles retain CAN as
+explicitly reported nationality, with source row, hash and original value in
+private evidence. A fifth proposed profile is held because the U20 category
+conflicts with an explicitly reported birth year. No birthday or nationality
+is inferred, and these source comparisons do not establish account ownership.
+
+The supporting World Athletics HTML and reviewed rows, and the original Trackie
+team directory, are retained with the private capture approval. The optional
+supplementary review file checks exact Trackie row identifiers, names, gender,
+date and marks before applying nationalities or holds. Public profiles expose
+nationality but keep its source evidence in the staff backend.
+
+The organiser's results index at <https://www.yorkutrackclub.com/results> is
+registered disabled. Existing AthleticNET, Athletics Ontario and Athletics
+Canada sources are reused with the newly observed result URLs. Club expansions
+use the Trackie team directory, Flying Angels' official membership page and the
+Project Athletics and Brampton Racers club websites. No recurring scan is enabled.
+The next unscanned 2026 archive page is page 5.

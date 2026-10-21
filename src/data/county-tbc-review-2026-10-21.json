@@ -1,0 +1,1490 @@
+{
+  "checkedAt": "2026-10-21",
+  "sourcePrefix": "athrecs:county-tbc-review:2026-10-21",
+  "details": {
+    "far-stratford-triathlon|2027-04-18": {
+      "summary": "Stratford Triathlon in Stratford-upon-Avon, Warwickshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/stratford-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Stratford-upon-Avon",
+        "county": "Warwickshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category 07:30–09:30; female category 09:30–10:15. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 10:45–11:10. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "far-cheshire-triathlon|2027-05-09": {
+      "summary": "Cheshire Triathlon in Nantwich, Cheshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/cheshire-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Nantwich",
+        "county": "Cheshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category 07:45–10:30; female category 10:30–11:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: female 12:15–12:30; open 12:30–12:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "far-henley-triathlon|2027-06-06": {
+      "summary": "Henley Triathlon in Henley-on-Thames, Oxfordshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/henley-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Henley-on-Thames",
+        "county": "Oxfordshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category from 08:30; female from 09:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 10:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "far-shropshire-triathlon|2027-06-19": {
+      "summary": "Shropshire Triathlon in Ellesmere, Shropshire, with Sprint, Olympic options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/shropshire-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ellesmere",
+        "county": "Shropshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 07:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Olympic": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 07:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "far-york-triathlon|2027-08-22": {
+      "summary": "York Triathlon in York, North Yorkshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/york-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "York",
+        "county": "North Yorkshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:15–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 12:40–13:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "ellesmere-triathlon|2027-09-04": {
+      "summary": "Ellesmere Triathlon in Ellesmere, Shropshire, with Middle, Olympic, Sprint, Fun Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/ellesmere-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ellesmere",
+        "county": "Shropshire"
+      },
+      "starts": {
+        "Middle": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 07:30. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Olympic": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 08:30. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 09:10. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Fun Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: no separate Fun Sprint time located. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "far-north-west-triathlon|2027-09-19": {
+      "summary": "North West Triathlon in Nantwich, Cheshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/north-west-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Nantwich",
+        "county": "Cheshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–11:30. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 12:00–12:30. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "far-warwickshire-triathlon|2027-10-03": {
+      "summary": "Warwickshire Triathlon in Stratford-upon-Avon, Warwickshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/warwickshire-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Stratford-upon-Avon",
+        "county": "Warwickshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category 07:45–09:30; female 09:30–10:15. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category 10:45–11:00; female is printed as 10:45–10:45, which needs clarification. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "ultimate-triathlon-150-100-and-50|2027-06-20": {
+      "summary": "Ultimate Triathlon 150, 100 and 50 in Ellesmere, Shropshire, with Ultimate 150, Ultimate 100, Ultimate 50 options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/ultimate-triathlon-150-100-50",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ellesmere",
+        "county": "Shropshire"
+      },
+      "starts": {
+        "Ultimate 150": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page lists 07:30 for Ultimate 150, 100 and 50, but the adjacent race-information link is explicitly for 2026. Please confirm the 2027 programme."
+        },
+        "Ultimate 100": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page lists 07:30 for Ultimate 150, 100 and 50, but the adjacent race-information link is explicitly for 2026. Please confirm the 2027 programme."
+        },
+        "Ultimate 50": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page lists 07:30 for Ultimate 150, 100 and 50, but the adjacent race-information link is explicitly for 2026. Please confirm the 2027 programme."
+        }
+      }
+    },
+    "glasgow-triathlon|2027-05-22": {
+      "summary": "Glasgow Triathlon in Glasgow, Glasgow City, with Fun Challenge, Endeavour, Venture, Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/glasgow-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Glasgow",
+        "county": "Glasgow City"
+      },
+      "starts": {
+        "Fun Challenge": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Endeavour": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Venture": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "caldicot-triathlon|2027-06-26": {
+      "summary": "Caldicot Triathlon in Caldicot, Monmouthshire, with Fun Challenge, Endeavour, Venture, Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/caldicot-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Caldicot",
+        "county": "Monmouthshire"
+      },
+      "starts": {
+        "Fun Challenge": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page shows estimated 11:00–13:00 starts alongside a 2026 race-information heading; 2027 personal allocation needs confirmation."
+        },
+        "Endeavour": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page shows estimated 11:00–13:00 starts alongside a 2026 race-information heading; 2027 personal allocation needs confirmation."
+        },
+        "Venture": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page shows estimated 11:00–13:00 starts alongside a 2026 race-information heading; 2027 personal allocation needs confirmation."
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page shows estimated 11:00–13:00 starts alongside a 2026 race-information heading; 2027 personal allocation needs confirmation."
+        }
+      }
+    },
+    "west-midlands-triathlon|2027-08-07": {
+      "summary": "West Midlands Triathlon in Birmingham, West Midlands, with Fun Challenge, Endeavour, Venture, Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/west-midlands-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Birmingham",
+        "county": "West Midlands"
+      },
+      "starts": {
+        "Fun Challenge": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Endeavour": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Venture": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      }
+    },
+    "woodhall-spa-triathlon|2027-09-19": {
+      "summary": "Woodhall Spa Triathlon in Woodhall Spa, Lincolnshire, with Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://curlysathletes.co.uk/woodhall-spa-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Woodhall Spa",
+        "county": "Lincolnshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Start time not found in the accessible 2027 organiser page. Its athlete pack and direct buy-ticket link are labelled 2026; the linked 2027 EtchRock information page could not be retrieved during this check."
+        }
+      }
+    },
+    "newport-sprint-and-olympic-triathlon|2027-09-11": {
+      "summary": "Newport Sprint and Olympic Triathlon in Newport, Newport, with Sprint, Olympic options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.letsdothis.com/gb/e/newport-sprint-olympic-triathlon-2027-189321",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Newport",
+        "county": "Newport"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "13:00",
+          "note": "13:00 in the organiser-linked 2027 entry programme; follow individual pool-swim instructions."
+        },
+        "Olympic": {
+          "time": "13:00",
+          "note": "13:00 in the organiser-linked 2027 entry programme; follow individual pool-swim instructions."
+        }
+      }
+    },
+    "slateman-triathlon|2027-06-13": {
+      "summary": "Slateman Triathlon in Llanberis, Gwynedd, with Sprint, Standard, Legend 70.3, Ultra Chwarel, Ultra Mynydd options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Llanberis",
+        "county": "Gwynedd"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 09:00.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        },
+        "Standard": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 08.00.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        },
+        "Legend 70.3": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 07.00.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        },
+        "Ultra Chwarel": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 05.15am.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        },
+        "Ultra Mynydd": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 05.15am.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        }
+      }
+    },
+    "slateman-duathlon|2027-06-13": {
+      "summary": "Slateman Duathlon in Llanberis, Gwynedd, with Standard options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Llanberis",
+        "county": "Gwynedd"
+      },
+      "starts": {
+        "Standard": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 08:00.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        }
+      }
+    },
+    "the-wild-scottish-cycle|2027-04-03": {
+      "summary": "The Wild Scottish Cycle in Perth, Perth and Kinross, with 50K, 100K options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/the-wild-scottish-cycle-scone-palace-15884",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Perth",
+        "county": "Perth and Kinross"
+      },
+      "starts": {
+        "50K": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "100K": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      }
+    },
+    "sherwood-pines-festive-duathlons|2026-12-13": {
+      "summary": "Sherwood Pines Festive Duathlons in Edwinstowe, Nottinghamshire, with Sprint, Standard options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/sherwood-pines-festive-duathlons-2026-14698",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Edwinstowe",
+        "county": "Nottinghamshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "10:10",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow. The organiser describes the programme as provisional/approximate."
+        },
+        "Standard": {
+          "time": "10:10",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow. The organiser describes the programme as provisional/approximate."
+        }
+      }
+    },
+    "essex-open-water-swims|2027-05-15": {
+      "summary": "Essex Open Water Swims in South Hanningfield, Essex, with 750m, 1500m options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/essex-open-water-swims-2027-14515",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "South Hanningfield",
+        "county": "Essex"
+      },
+      "starts": {
+        "750m": {
+          "time": "09:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "1500m": {
+          "time": "09:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow. The form also shows an end value of 17:22; this is not treated as a second start."
+        }
+      }
+    },
+    "swim-derwent|2027-07-04": {
+      "summary": "Swim Derwent in Consett, County Durham, with 400m, 0.5mi, 1mi, 2mi, 3mi options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/swim-derwent-14533",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Consett",
+        "county": "County Durham"
+      },
+      "starts": {
+        "400m": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        },
+        "0.5mi": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        },
+        "1mi": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        },
+        "2mi": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        },
+        "3mi": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        }
+      }
+    },
+    "derwent-reservoir-triathlons|2027-07-04": {
+      "summary": "Derwent Reservoir Triathlons in Consett, County Durham, with Sprint, Standard options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/derwent-reservoir-triathlons-and-duathlons-14540",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Consett",
+        "county": "County Durham"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Standard": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "derwent-reservoir-duathlons|2027-07-04": {
+      "summary": "Derwent Reservoir Duathlons in Consett, County Durham, with Sprint, Standard options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/derwent-reservoir-triathlons-and-duathlons-14540",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Consett",
+        "county": "County Durham"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Standard": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "big-lime-triathlons|2027-08-08": {
+      "summary": "Big Lime Triathlons in Hartlepool, County Durham, with Sprint, Standard options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/the-big-lime-triathlons-hartlepool-marina-14569",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Hartlepool",
+        "county": "County Durham"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "07:45",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Standard": {
+          "time": "07:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "windermere-triathlon|2027-07-10": {
+      "summary": "Windermere Triathlon in Bowness-on-Windermere, Cumbria, with Novice, Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Bowness-on-Windermere",
+        "county": "Cumbria"
+      },
+      "starts": {
+        "Novice": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Sprint": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "windermere-triathlon|2027-07-11": {
+      "summary": "Windermere Triathlon in Bowness-on-Windermere, Cumbria, with Standard options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Bowness-on-Windermere",
+        "county": "Cumbria"
+      },
+      "starts": {
+        "Standard": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "windermere-duathlon|2027-07-10": {
+      "summary": "Windermere Duathlon in Bowness-on-Windermere, Cumbria, with Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Bowness-on-Windermere",
+        "county": "Cumbria"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "windermere-duathlon|2027-07-11": {
+      "summary": "Windermere Duathlon in Bowness-on-Windermere, Cumbria, with Standard options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Bowness-on-Windermere",
+        "county": "Cumbria"
+      },
+      "starts": {
+        "Standard": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "west-lancs-spring-triathlon|2027-04-18": {
+      "summary": "West Lancs Spring Triathlon in Ormskirk, Lancashire, with Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://epicevents.co.uk/events/west-lancs-spring-triathlon-multisport/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ormskirk",
+        "county": "Lancashire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "06:30",
+          "note": "First swim starts from 06:30 within the published 06:30–12:30 window. Your individual swim time is allocated separately before the event."
+        }
+      }
+    },
+    "rb-west-lancs-summer-triathlon-multisport|2027-08-22": {
+      "summary": "West Lancs Summer Triathlon in Ormskirk, Lancashire, with Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://epicevents.co.uk/events/west-lancs-summer-triathlon-multisport/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ormskirk",
+        "county": "Lancashire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "06:30",
+          "note": "First swim starts from 06:30 within the published 06:30–12:30 window. Your individual swim time is allocated separately before the event."
+        }
+      }
+    },
+    "rivington-duathlon|2027-03-14": {
+      "summary": "Rivington Duathlon in Rivington, Lancashire, with Standard options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://epicevents.co.uk/events/rivington-duathlon/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Rivington",
+        "county": "Lancashire"
+      },
+      "starts": {
+        "Standard": {
+          "time": "08:00",
+          "note": "08:00 in the organiser’s event-information timings section."
+        }
+      }
+    },
+    "wa-england-athletics-senior-u20-combined-events-championships-7219932|2027-01-16": {
+      "summary": "England Senior and U20 Indoor Combined Events, Para and Race Walk Championships in Sheffield, South Yorkshire, with Track & Field options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.englandathletics.org/2027-championships/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Sheffield",
+        "county": "South Yorkshire"
+      },
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "Championship dates are listed by the governing body. A discipline/session start timetable was not located in the checked 2027 fixture material."
+        }
+      }
+    },
+    "wa-england-athletics-u15-u17-20-indoor-championships-7220520|2027-02-06": {
+      "summary": "England U16, U18 and U20 Indoor Championships in Sheffield, South Yorkshire, with Track & Field options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.englandathletics.org/2027-championships/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Sheffield",
+        "county": "South Yorkshire"
+      },
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "Championship dates are listed by the governing body. A discipline/session start timetable was not located in the checked 2027 fixture material."
+        }
+      }
+    },
+    "wa-england-athletics-age-group-ce-and-junior-para-championships-7234033|2027-03-06": {
+      "summary": "England Age Group Indoor Combined Events and Junior Para Championships in Sheffield, South Yorkshire, with Track & Field options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.englandathletics.org/2027-championships/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Sheffield",
+        "county": "South Yorkshire"
+      },
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "Championship dates are listed by the governing body. A discipline/session start timetable was not located in the checked 2027 fixture material."
+        }
+      }
+    },
+    "glamis-castle-festive-trail-runs|2026-12-06": {
+      "summary": "Glamis Castle Festive Trail Runs at Glamis Castle in Glamis, Angus. Choose from 1mi, 5mi, 10mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/glamis-castle-festive-trail-runs-2026-14682",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Glamis",
+        "county": "Angus"
+      },
+      "starts": {
+        "1mi": {
+          "time": "09:15",
+          "note": "Family mile 09:15 in the organiser’s race-day schedule, taking precedence over 09:00 in the entry table. The programme labels times approximate."
+        },
+        "5mi": {
+          "time": "09:45",
+          "note": "Published race-day schedule: 09:45; approximate and subject to change."
+        },
+        "10mi": {
+          "time": "09:45",
+          "note": "Published race-day schedule: 09:45; approximate and subject to change."
+        }
+      }
+    },
+    "moors-valley-festive-trail-runs|2026-12-06": {
+      "summary": "Moors Valley Festive Trail Runs at Moors Valley Country Park in Ringwood, Dorset. Choose from 2K, 5K, 10K.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/moors-valley-festive-trail-runs-2km-santa-run-5km-and-10km-14910",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ringwood",
+        "county": "Dorset"
+      },
+      "starts": {
+        "2K": {
+          "time": null,
+          "note": "2K start needs clarification: the entry category says 10:00, but the on-the-day section says starts from 10:30 without a separate 2K exception. Confirm the children’s fun-run start with the organiser."
+        },
+        "5K": {
+          "time": "10:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "10:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      }
+    },
+    "sherwood-pines-festive-trail-runs|2026-12-13": {
+      "summary": "Sherwood Pines Festive Trail Runs at Sherwood Pines in Edwinstowe, Nottinghamshire. Choose from 1mi, 5K, 10K.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/sherwood-pines-festive-trail-runs-2026-14700",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Edwinstowe",
+        "county": "Nottinghamshire"
+      },
+      "starts": {
+        "1mi": {
+          "time": "09:10",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "5K": {
+          "time": "09:35",
+          "note": "General runners 09:35; canicross 09:30. The specific race-day programme takes precedence over the entry table’s 09:30. Times are provisional."
+        },
+        "10K": {
+          "time": "09:35",
+          "note": "General runners 09:35; canicross 09:30. The specific race-day programme takes precedence over the entry table’s 09:30. Times are provisional."
+        }
+      }
+    },
+    "gibside-wild-new-year-trail-runs-5-mile-2027|2027-01-03": {
+      "summary": "Gibside Wild New Year Trail Runs at Gibside National Trust in Rowlands Gill, Tyne and Wear. Choose from 5mi, 10mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/gibside-wild-new-year-trail-runs-15425",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Rowlands Gill",
+        "county": "Tyne and Wear"
+      },
+      "starts": {
+        "5mi": {
+          "time": "09:00",
+          "note": "Provisional 09:00: entry form and organiser guidance agree, but the organiser explicitly says the final start will be confirmed in event information."
+        },
+        "10mi": {
+          "time": "09:00",
+          "note": "Provisional 09:00: entry form and organiser guidance agree, but the organiser explicitly says the final start will be confirmed in event information."
+        }
+      }
+    },
+    "wild-deer-harewood-house-trail-runs|2027-01-09": {
+      "summary": "Harewood House New Year Trail Runs at Harewood House in Leeds, West Yorkshire. Choose from 5K, 10K, HM.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/yorkshire-new-year-trail-runs-2027-harewood-house-14484",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Leeds",
+        "county": "West Yorkshire"
+      },
+      "starts": {
+        "5K": {
+          "time": "09:50",
+          "note": "General runners 09:50; canicross 09:45. The distance-specific programme takes precedence over the entry-table default. Final confirmation follows in event emails."
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "General runners 10:00; canicross 09:55. The distance-specific programme takes precedence over the entry-table default. Final confirmation follows in event emails."
+        },
+        "HM": {
+          "time": "10:30",
+          "note": "General runners 10:30; canicross 10:25. The distance-specific programme takes precedence over the entry-table default. Final confirmation follows in event emails."
+        },
+        "Half": {
+          "time": "10:30",
+          "note": "General runners 10:30; canicross 10:25. The distance-specific programme takes precedence over the entry-table default. Final confirmation follows in event emails."
+        }
+      }
+    },
+    "fountains-abbey-wild-trail-runs|2027-02-28": {
+      "summary": "Fountains Abbey Wild Trail Runs at Fountains Abbey and Studley Royal Water Garden in Ripon, North Yorkshire. Choose from 5K, 10K, HM.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/fountains-abbey-wild-trail-runs-14487",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ripon",
+        "county": "North Yorkshire"
+      },
+      "starts": {
+        "5K": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "09:25",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "HM": {
+          "time": "09:20",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      }
+    },
+    "high-lodge-wild-trail-runs|2027-04-11": {
+      "summary": "High Lodge Wild Trail Runs at High Lodge, Thetford Forest in Brandon, Suffolk. Choose from 5K, 10K, HM.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/high-lodge-wild-trail-runs-2027-5km-10km-and-new-half-marathon-14502",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Brandon",
+        "county": "Suffolk"
+      },
+      "starts": {
+        "5K": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "09:15",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "HM": {
+          "time": "09:15",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      }
+    },
+    "bamburgh-castle-wild-10k-trail-run|2027-04-17": {
+      "summary": "Bamburgh Castle Wild 10K Trail Run at Links Road car park in Bamburgh, Northumberland. Advertised format: 10K.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/bamburgh-castle-wild-10km-trail-run-15391",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Bamburgh",
+        "county": "Northumberland"
+      },
+      "starts": {
+        "10K": {
+          "time": "10:00",
+          "note": "Provisional 10:00: entry form and organiser guidance agree, but the organiser explicitly says the final start will be confirmed in event information."
+        }
+      }
+    },
+    "the-derwent-60k-trail-ultra|2027-05-16": {
+      "summary": "The Derwent 60K Trail Ultra at Derwent Reservoir in Consett, County Durham. Advertised format: 60K.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/the-derwent-60km-trail-ultra-early-bird-prices-16255",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Consett",
+        "county": "County Durham"
+      },
+      "starts": {
+        "60K": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      }
+    },
+    "wentworth-castle-trail-runs|2027-06-16": {
+      "summary": "Wentworth Castle Gardens Trail Runs at Wentworth Castle Gardens in Barnsley, South Yorkshire. Choose from 5K, 10K.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/wentworth-castle-gardens-trail-runs-5km-and-10km-14499",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Barnsley",
+        "county": "South Yorkshire"
+      },
+      "starts": {
+        "5K": {
+          "time": "19:10",
+          "note": "The organiser’s specific race-day schedule gives 19:10 for 5K, taking precedence over the entry table’s 19:00. The programme labels times approximate."
+        },
+        "10K": {
+          "time": "19:00",
+          "note": "Published race-day schedule: 19:00 for 10K; approximate and subject to change."
+        }
+      }
+    },
+    "lambton-castle-summer-trail-runs|2027-08-15": {
+      "summary": "Lambton Castle Summer Trail Runs at Lambton Castle in Chester-le-Street, County Durham. Choose from 5K, 5mi, 10mi, 15mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/lambton-castle-summer-trail-runs-14571",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Chester-le-Street",
+        "county": "County Durham"
+      },
+      "starts": {
+        "5K": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "5mi": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "10mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "15mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        }
+      }
+    },
+    "raby-castle-trail-runs|2027-09-05": {
+      "summary": "Raby Castle Trail Runs at Raby Castle in Staindrop, County Durham. Choose from 5K, 10K, HM.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/raby-castle-trail-runs-14580",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Staindrop",
+        "county": "County Durham"
+      },
+      "starts": {
+        "5K": {
+          "time": "10:10",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "HM": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        }
+      }
+    },
+    "outlaw-nottingham-sprint|2027-05-22": {
+      "summary": "Outlaw Nottingham Sprint at National Water Sports Centre in Nottingham, Nottinghamshire. Advertised format: Sprint.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://outlawtriathlon.com/outlaw-nottingham/sprint",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Nottingham",
+        "county": "Nottinghamshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "07:30",
+          "note": "Published waves at 07:30, 10:00 and 12:30; use your assigned age-group/wave start."
+        }
+      }
+    },
+    "outlaw-original-sprint|2027-07-24": {
+      "summary": "Outlaw Original Sprint at National Water Sports Centre in Nottingham, Nottinghamshire. Advertised format: Sprint.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://outlawtriathlon.com/outlaw-original/outlaw-sprint",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Nottingham",
+        "county": "Nottinghamshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "07:30",
+          "note": "Published waves at 07:30, 10:00 and 12:30; use your assigned age-group/wave start."
+        }
+      }
+    },
+    "suffolk-go-wild|2026-11-01": {
+      "summary": "Suffolk Go Wild at RSPB Minsmere in Saxmundham, Suffolk. Choose from 25mi, 50mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/go-wild/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Saxmundham",
+        "county": "Suffolk"
+      },
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "Ride start TBC: organiser gives village hours 07:00–16:00, which are not a rider start time. Check the rider welcome/final-instructions email."
+        },
+        "50mi": {
+          "time": null,
+          "note": "Ride start TBC: organiser gives village hours 07:00–16:00, which are not a rider start time. Check the rider welcome/final-instructions email."
+        }
+      }
+    },
+    "tour-de-broads-winter-series|2026-11-29": {
+      "summary": "Tour de Broads Winter Series at Whitlingham Country Park in Norwich, Norfolk. Choose from 25mi, 50mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/winter-series/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Norwich",
+        "county": "Norfolk"
+      },
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        },
+        "50mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        }
+      }
+    },
+    "tour-de-broads-winter-series|2026-12-13": {
+      "summary": "Tour de Broads Winter Series at Whitlingham Country Park in Norwich, Norfolk. Choose from 25mi, 50mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/winter-series/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Norwich",
+        "county": "Norfolk"
+      },
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        },
+        "50mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        }
+      }
+    },
+    "tour-de-broads-winter-series|2026-12-27": {
+      "summary": "Tour de Broads Winter Series at Whitlingham Country Park in Norwich, Norfolk. Choose from 25mi, 50mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/winter-series/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Norwich",
+        "county": "Norfolk"
+      },
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        },
+        "50mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        }
+      }
+    },
+    "far-atw-grafham-triathlon|2027-09-25": {
+      "summary": "ATW Grafham Triathlon at Grafham Water Visitor Centre in Grafham, Cambridgeshire. Choose from Sprint, Standard.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.atwevents.co.uk/e/atw-grafham-triathlon-8879",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Grafham",
+        "county": "Cambridgeshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Standard": {
+          "time": "08:15",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "atw-grafman-middle-distance-triathlon|2027-06-06": {
+      "summary": "ATW Grafman Middle Distance Triathlon at Grafham Water Visitor Centre in Grafham, Cambridgeshire. Advertised format: Middle.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.atwevents.co.uk/e/atw-grafman-middle-distance-triathlon-8919",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Grafham",
+        "county": "Cambridgeshire"
+      },
+      "starts": {
+        "Middle": {
+          "time": "07:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "far-atw-oundle-triathlon|2027-08-15": {
+      "summary": "ATW Oundle Triathlon at Oundle School Swimming Pool in Oundle, Northamptonshire. Choose from Super Sprint, Sprint.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.atwevents.co.uk/e/atw-oundle-triathlon-9004",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Oundle",
+        "county": "Northamptonshire"
+      },
+      "starts": {
+        "Super Sprint": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Sprint": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "far-atw-oundle-childrens-triathlon|2027-08-15": {
+      "summary": "ATW Oundle Childrens Triathlon at Oundle School Swimming Pool in Oundle, Northamptonshire. Choose from Tristart, Tristar 1, Tristar 2, Tristar 3, Youth.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.atwevents.co.uk/e/atw-oundle-children-s-triathlon-9006",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Oundle",
+        "county": "Northamptonshire"
+      },
+      "starts": {
+        "Tristart": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Tristar 1": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Tristar 2": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Tristar 3": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Youth": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      }
+    },
+    "atw-debden-5k-10k-2027|2027-03-14": {
+      "summary": "ATW Debden 10K and 5K at Debden Airfield, Carver Barracks in Saffron Walden, Essex. Choose from 5K, 10K.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.atwevents.co.uk/e/atw-debden-10k-and-5k-10400",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Saffron Walden",
+        "county": "Essex"
+      },
+      "starts": {
+        "5K": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      }
+    },
+    "ea-runevents-atw-remembrance-runs-saffron-walden|2026-11-07": {
+      "summary": "ATW Remembrance Runs at Debden Airfield, Carver Barracks in Saffron Walden, Essex. Choose from 1mi, 5K, 10K, HM.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.atwevents.co.uk/e/atw-remembrance-runs-9066",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Saffron Walden",
+        "county": "Essex"
+      },
+      "starts": {
+        "1mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "5K": {
+          "time": "10:45",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "10:45",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "HM": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "Half": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      }
+    },
+    "essex-20|2027-03-14": {
+      "summary": "Essex 20 at Debden Airfield, Carver Barracks in Saffron Walden, Essex. Advertised format: 20mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.atwevents.co.uk/e/essex-20-8956",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Saffron Walden",
+        "county": "Essex"
+      },
+      "starts": {
+        "20mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      }
+    },
+    "cambridge-cambourne-10k-and-fun-run|2027-04-11": {
+      "summary": "Cambridge Cambourne 10K and Fun Run at Cambourne Business Park in Cambourne, Cambridgeshire. Choose from 5K, 10K, 1mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.atwevents.co.uk/e/cambridge-cambourne-10k-and-fun-run-8935",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Cambourne",
+        "county": "Cambridgeshire"
+      },
+      "starts": {
+        "5K": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The linked race pack is for 2026, so its 09:35 fun-run start is not applied to 2027."
+        },
+        "10K": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The linked race pack is for 2026, so its 09:35 fun-run start is not applied to 2027."
+        },
+        "1mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The linked race pack is for 2026, so its 09:35 fun-run start is not applied to 2027."
+        }
+      }
+    },
+    "wa-f0652b6bc69f7151|2027-07-31": {
+      "summary": "Novuna UK Athletics Championships at Alexander Stadium in Birmingham, West Midlands. Advertised format: Track & Field.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.britishathletics.org.uk/events/2027-novuna-uk-athletics-championships/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Birmingham",
+        "county": "West Midlands"
+      },
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "Championship dates are listed by the governing body. A discipline/session start timetable was not located in the checked 2027 fixture material."
+        }
+      }
+    },
+    "great-north-swim|2027-06-12": {
+      "summary": "Great North Swim at Brockhole on Windermere in Windermere, Cumbria. Choose from 2mi, 1mi, 0.5mi, 250m.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://greatswim.org/great-north-swim/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Windermere",
+        "county": "Cumbria"
+      },
+      "starts": {
+        "2mi": {
+          "time": "09:30",
+          "note": "Published organiser timetable is subject to change. Attend the wave selected on your booking."
+        },
+        "1mi": {
+          "time": "09:30",
+          "note": "Waves at 09:30, 10:00, 11:00, 12:00 and 13:00. Published organiser timetable is subject to change. Attend the wave selected on your booking."
+        },
+        "0.5mi": {
+          "time": null,
+          "note": "Saturday general half-mile is listed at 14:30. Saturday also shows a 14:00 quiet wave, while the explanatory paragraph places the quiet wave on Sunday. Confirm the booked wave; no single earliest start is asserted."
+        },
+        "250m": {
+          "time": "15:00",
+          "note": "Published organiser timetable is subject to change. Attend the wave selected on your booking."
+        }
+      }
+    },
+    "swim-england-east-region-long-course-championships-norwich|2027-05-01": {
+      "summary": "Swim England East Region Long Course Championships – Norwich at Sportspark, University of East Anglia in Norwich, Norfolk. Advertised format: Pool meet.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.eastswimming.org/event/regional-long-course-championships-5/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Norwich",
+        "county": "Norfolk"
+      },
+      "starts": {
+        "Pool meet": {
+          "time": null,
+          "note": "Regional calendar confirms 1–3 May 2027 at UEA Sportspark. Session start times were not located on the checked calendar page."
+        }
+      }
+    },
+    "swim-england-national-winter-championships|2026-12-10": {
+      "summary": "Swim England National Winter Championships at Ponds Forge International Sports Centre in Sheffield, South Yorkshire. Advertised format: Pool meet.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.swimming.org/library/documents/7707/download",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Sheffield",
+        "county": "South Yorkshire"
+      },
+      "starts": {
+        "Pool meet": {
+          "time": "09:00",
+          "note": "Morning heats begin at 09:00 on 10–13 December. Slower distance heats and finals are explicitly TBC in the official schedule; individual races depend on the session programme."
+        }
+      }
+    },
+    "race-for-life-ipswich|2027-06-20": {
+      "summary": "Race for Life Ipswich at Trinity Park, Suffolk. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "3K": {
+          "time": "11:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-5k-2027-06-20-1100"
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-10k-2027-06-20-1000"
+        }
+      },
+      "place": {
+        "city": "Ipswich",
+        "county": "Suffolk"
+      }
+    }
+  },
+  "reviewedEditionKeys": [
+    "atw-debden-5k-10k-2027|2027-03-14|5K",
+    "glamis-castle-festive-trail-runs|2026-12-06|10mi",
+    "wild-deer-harewood-house-trail-runs|2027-01-09|Half",
+    "fountains-abbey-wild-trail-runs|2027-02-28|10K",
+    "high-lodge-wild-trail-runs|2027-04-11|10K",
+    "wentworth-castle-trail-runs|2027-06-16|10K",
+    "race-for-life-ipswich|2027-06-20|5K",
+    "ea-runevents-atw-remembrance-runs-saffron-walden|2026-11-07|5K",
+    "ea-runevents-atw-remembrance-runs-saffron-walden|2026-11-07|10K",
+    "ea-runevents-atw-remembrance-runs-saffron-walden|2026-11-07|Half",
+    "wild-deer-harewood-house-trail-runs|2027-01-09|5K",
+    "fountains-abbey-wild-trail-runs|2027-02-28|5K",
+    "high-lodge-wild-trail-runs|2027-04-11|5K",
+    "wentworth-castle-trail-runs|2027-06-16|5K",
+    "gibside-wild-new-year-trail-runs-5-mile-2027|2027-01-03|5mi",
+    "glamis-castle-festive-trail-runs|2026-12-06|5mi",
+    "lambton-castle-summer-trail-runs|2027-08-15|5mi",
+    "lambton-castle-summer-trail-runs|2027-08-15|5K",
+    "lambton-castle-summer-trail-runs|2027-08-15|10mi",
+    "lambton-castle-summer-trail-runs|2027-08-15|15mi",
+    "far-stratford-triathlon|2027-04-18|Sprint",
+    "far-stratford-triathlon|2027-04-18|Super Sprint",
+    "far-cheshire-triathlon|2027-05-09|Sprint",
+    "far-cheshire-triathlon|2027-05-09|Super Sprint",
+    "far-henley-triathlon|2027-06-06|Sprint",
+    "far-henley-triathlon|2027-06-06|Super Sprint",
+    "far-shropshire-triathlon|2027-06-19|Sprint",
+    "far-shropshire-triathlon|2027-06-19|Olympic",
+    "far-york-triathlon|2027-08-22|Sprint",
+    "far-york-triathlon|2027-08-22|Super Sprint",
+    "ellesmere-triathlon|2027-09-04|Middle",
+    "ellesmere-triathlon|2027-09-04|Olympic",
+    "ellesmere-triathlon|2027-09-04|Sprint",
+    "ellesmere-triathlon|2027-09-04|Fun Sprint",
+    "far-north-west-triathlon|2027-09-19|Sprint",
+    "far-north-west-triathlon|2027-09-19|Super Sprint",
+    "far-warwickshire-triathlon|2027-10-03|Sprint",
+    "far-warwickshire-triathlon|2027-10-03|Super Sprint",
+    "ultimate-triathlon-150-100-and-50|2027-06-20|Ultimate 150",
+    "ultimate-triathlon-150-100-and-50|2027-06-20|Ultimate 100",
+    "ultimate-triathlon-150-100-and-50|2027-06-20|Ultimate 50",
+    "glasgow-triathlon|2027-05-22|Fun Challenge",
+    "glasgow-triathlon|2027-05-22|Endeavour",
+    "glasgow-triathlon|2027-05-22|Venture",
+    "glasgow-triathlon|2027-05-22|Sprint",
+    "caldicot-triathlon|2027-06-26|Fun Challenge",
+    "caldicot-triathlon|2027-06-26|Endeavour",
+    "caldicot-triathlon|2027-06-26|Venture",
+    "caldicot-triathlon|2027-06-26|Sprint",
+    "west-midlands-triathlon|2027-08-07|Fun Challenge",
+    "west-midlands-triathlon|2027-08-07|Endeavour",
+    "west-midlands-triathlon|2027-08-07|Venture",
+    "west-midlands-triathlon|2027-08-07|Sprint",
+    "woodhall-spa-triathlon|2027-09-19|Sprint",
+    "newport-sprint-and-olympic-triathlon|2027-09-11|Sprint",
+    "newport-sprint-and-olympic-triathlon|2027-09-11|Olympic",
+    "slateman-triathlon|2027-06-13|Sprint",
+    "slateman-triathlon|2027-06-13|Standard",
+    "slateman-triathlon|2027-06-13|Legend 70.3",
+    "slateman-triathlon|2027-06-13|Ultra Chwarel",
+    "slateman-triathlon|2027-06-13|Ultra Mynydd",
+    "slateman-duathlon|2027-06-13|Standard",
+    "the-wild-scottish-cycle|2027-04-03|50K",
+    "the-wild-scottish-cycle|2027-04-03|100K",
+    "sherwood-pines-festive-duathlons|2026-12-13|Sprint",
+    "sherwood-pines-festive-duathlons|2026-12-13|Standard",
+    "essex-open-water-swims|2027-05-15|750m",
+    "essex-open-water-swims|2027-05-15|1500m",
+    "swim-derwent|2027-07-04|400m",
+    "swim-derwent|2027-07-04|0.5mi",
+    "swim-derwent|2027-07-04|1mi",
+    "swim-derwent|2027-07-04|2mi",
+    "swim-derwent|2027-07-04|3mi",
+    "derwent-reservoir-triathlons|2027-07-04|Sprint",
+    "derwent-reservoir-triathlons|2027-07-04|Standard",
+    "derwent-reservoir-duathlons|2027-07-04|Sprint",
+    "derwent-reservoir-duathlons|2027-07-04|Standard",
+    "big-lime-triathlons|2027-08-08|Sprint",
+    "big-lime-triathlons|2027-08-08|Standard",
+    "windermere-triathlon|2027-07-10|Novice",
+    "windermere-triathlon|2027-07-10|Sprint",
+    "windermere-triathlon|2027-07-11|Standard",
+    "windermere-duathlon|2027-07-10|Sprint",
+    "windermere-duathlon|2027-07-11|Standard",
+    "west-lancs-spring-triathlon|2027-04-18|Sprint",
+    "rb-west-lancs-summer-triathlon-multisport|2027-08-22|Sprint",
+    "rivington-duathlon|2027-03-14|Standard",
+    "wa-england-athletics-senior-u20-combined-events-championships-7219932|2027-01-16|Track & Field",
+    "wa-england-athletics-u15-u17-20-indoor-championships-7220520|2027-02-06|Track & Field",
+    "wa-england-athletics-age-group-ce-and-junior-para-championships-7234033|2027-03-06|Track & Field",
+    "glamis-castle-festive-trail-runs|2026-12-06|1mi",
+    "moors-valley-festive-trail-runs|2026-12-06|2K",
+    "moors-valley-festive-trail-runs|2026-12-06|5K",
+    "moors-valley-festive-trail-runs|2026-12-06|10K",
+    "sherwood-pines-festive-trail-runs|2026-12-13|1mi",
+    "sherwood-pines-festive-trail-runs|2026-12-13|5K",
+    "sherwood-pines-festive-trail-runs|2026-12-13|10K",
+    "gibside-wild-new-year-trail-runs-5-mile-2027|2027-01-03|10mi",
+    "wild-deer-harewood-house-trail-runs|2027-01-09|10K",
+    "fountains-abbey-wild-trail-runs|2027-02-28|HM",
+    "high-lodge-wild-trail-runs|2027-04-11|HM",
+    "bamburgh-castle-wild-10k-trail-run|2027-04-17|10K",
+    "the-derwent-60k-trail-ultra|2027-05-16|60K",
+    "raby-castle-trail-runs|2027-09-05|5K",
+    "raby-castle-trail-runs|2027-09-05|10K",
+    "raby-castle-trail-runs|2027-09-05|HM",
+    "outlaw-nottingham-sprint|2027-05-22|Sprint",
+    "outlaw-original-sprint|2027-07-24|Sprint",
+    "suffolk-go-wild|2026-11-01|25mi",
+    "suffolk-go-wild|2026-11-01|50mi",
+    "tour-de-broads-winter-series|2026-11-29|25mi",
+    "tour-de-broads-winter-series|2026-11-29|50mi",
+    "tour-de-broads-winter-series|2026-12-13|25mi",
+    "tour-de-broads-winter-series|2026-12-13|50mi",
+    "tour-de-broads-winter-series|2026-12-27|25mi",
+    "tour-de-broads-winter-series|2026-12-27|50mi",
+    "far-atw-grafham-triathlon|2027-09-25|Sprint",
+    "far-atw-grafham-triathlon|2027-09-25|Standard",
+    "atw-grafman-middle-distance-triathlon|2027-06-06|Middle",
+    "far-atw-oundle-triathlon|2027-08-15|Super Sprint",
+    "far-atw-oundle-triathlon|2027-08-15|Sprint",
+    "far-atw-oundle-childrens-triathlon|2027-08-15|Tristart",
+    "far-atw-oundle-childrens-triathlon|2027-08-15|Tristar 1",
+    "far-atw-oundle-childrens-triathlon|2027-08-15|Tristar 2",
+    "far-atw-oundle-childrens-triathlon|2027-08-15|Tristar 3",
+    "far-atw-oundle-childrens-triathlon|2027-08-15|Youth",
+    "atw-debden-5k-10k-2027|2027-03-14|10K",
+    "ea-runevents-atw-remembrance-runs-saffron-walden|2026-11-07|1mi",
+    "essex-20|2027-03-14|20mi",
+    "cambridge-cambourne-10k-and-fun-run|2027-04-11|5K",
+    "cambridge-cambourne-10k-and-fun-run|2027-04-11|10K",
+    "cambridge-cambourne-10k-and-fun-run|2027-04-11|1mi",
+    "wa-f0652b6bc69f7151|2027-07-31|Track & Field",
+    "great-north-swim|2027-06-12|2mi",
+    "great-north-swim|2027-06-12|1mi",
+    "great-north-swim|2027-06-12|0.5mi",
+    "great-north-swim|2027-06-12|250m",
+    "swim-england-east-region-long-course-championships-norwich|2027-05-01|Pool meet",
+    "swim-england-national-winter-championships|2026-12-10|Pool meet"
+  ]
+}

@@ -39,6 +39,10 @@ export function historyResultSurface(
   row: SourcePerformance,
   sport: HistoryResult["sport"],
 ): string {
+  if (sport === "Walking") {
+    const surfaces = [...new Set(row.labels.filter((label) => /^(?:road|track)$/i.test(label.trim())).map((label) => /^track$/i.test(label.trim()) ? "Track" : "Road"))];
+    return surfaces.length === 1 ? surfaces[0] : "Unknown";
+  }
   if (sport === "Running" || sport === "Parkrun") {
     const surfaces = new Set<string>();
     if (isCrossCountryHistoryResult(row)) surfaces.add("Cross Country");

@@ -5,6 +5,7 @@ import { CompactResultsTable } from "./CompactResultsTable";
 import { ProfileSignIn } from "./ProfileSignIn";
 import { AthleteId } from "./AthleteId";
 import { CountryFlag } from "./CountryFlag";
+import { ProfileDetails } from "./ProfileDetails";
 import { Badge } from "@/components/ui/badge";
 import { ShareProfileButton } from "./ShareProfileButton";
 import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
@@ -58,6 +59,12 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             <SportBadge key={sport} sport={sport} />
           ))}
         </div>
+        {profile.details ? (
+          <ProfileDetails
+            details={profile.details}
+            nationality={profile.nationality ?? undefined}
+          />
+        ) : null}
         {biography.length ? (
           <div className="space-y-2">
             <h2 className="text-sm font-semibold">Biography</h2>

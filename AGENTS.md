@@ -43,6 +43,13 @@ publication and personal-best calculations in this repository.
   nationality on approved public, unclaimed source profiles. Never infer it from
   a name, club, language, residence or race location; leave absent values empty.
   Do not overwrite athlete-supplied nationality or treat it as identity verification.
+- Owner instruction, 21 October 2026: collect the other explicitly supplied
+  athlete-profile facts too, including exact date of birth, nationality,
+  residence, birthplace and representative where available. Preserve original
+  values and provenance; leave absent or conflicting facts empty or held.
+  Publish reviewed details on approved unclaimed profiles while retaining
+  explicit privacy choices. Never substitute nationality or a race venue for
+  residence, or expose staff evidence and contact details with these facts.
 - Keep unsupported accounts explicitly unverified and out of verified personal
   bests, medals and rankings. An absent name is a review flag, not proof that the
   athlete did not participate; check aliases, pagination, DNS/DNF and identity.

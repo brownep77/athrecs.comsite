@@ -35,10 +35,14 @@ const nav = [
     match: (p: string) => p.startsWith("/athletes"),
   },
   {
-    to: "/clubs",
-    label: "Clubs",
+    to: "/directory",
+    label: "Directory",
     icon: Building2,
-    match: (p: string) => p === "/clubs" || p.startsWith("/clubs/"),
+    match: (p: string) =>
+      p === "/directory" ||
+      p.startsWith("/directory/") ||
+      p === "/clubs" ||
+      p.startsWith("/clubs/"),
   },
   {
     to: "/results",
@@ -219,6 +223,12 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-40 text-xs text-muted sm:pb-24 md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
+          <Link to="/directory" search={{}} className="hover:text-accent">
+            Federations & governing bodies
+          </Link>
+          <Link to="/clubs" className="hover:text-accent">
+            Clubs
+          </Link>
           <Link to="/running" className="hover:text-accent">
             Running
           </Link>

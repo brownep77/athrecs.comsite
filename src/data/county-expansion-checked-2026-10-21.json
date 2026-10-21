@@ -1,0 +1,2196 @@
+{
+  "events": [
+    {
+      "slug": "cheshire-kids-fun-duathlon",
+      "name": "Cheshire Kids Fun Duathlon",
+      "sport": "Duathlon",
+      "country": "England",
+      "county": "Cheshire",
+      "city": "Nantwich",
+      "area": "Barony Park",
+      "surface": "Multisport",
+      "summary": "Cheshire Kids Fun Duathlon at Barony Park in Nantwich, Cheshire. A non-competitive children’s run, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "description": "Cheshire Kids Fun Duathlon at Barony Park in Nantwich, Cheshire. A non-competitive children’s run, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "organiser": "UK Triathlon",
+      "website": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "distances": ["Tin", "Zinc", "Steel", "Bronze", "Silver", "Gold"]
+    },
+    {
+      "slug": "glasgow-kids-fun-triathlon",
+      "name": "Glasgow Kids Fun Triathlon",
+      "sport": "Triathlon",
+      "country": "Scotland",
+      "county": "Glasgow City",
+      "city": "Glasgow",
+      "area": "Bellahouston Leisure Centre and Park",
+      "surface": "Multisport",
+      "summary": "Glasgow Kids Fun Triathlon at Bellahouston Leisure Centre and Park in Glasgow, Glasgow City. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "description": "Glasgow Kids Fun Triathlon at Bellahouston Leisure Centre and Park in Glasgow, Glasgow City. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "organiser": "UK Triathlon",
+      "website": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "distances": ["Zinc", "Steel", "Bronze", "Silver", "Gold"]
+    },
+    {
+      "slug": "henley-kids-fun-triathlon",
+      "name": "Henley Kids Fun Triathlon",
+      "sport": "Triathlon",
+      "country": "England",
+      "county": "Oxfordshire",
+      "city": "Henley-on-Thames",
+      "area": "Henley Leisure Centre and Gillotts School",
+      "surface": "Multisport",
+      "summary": "Henley Kids Fun Triathlon at Henley Leisure Centre and Gillotts School in Henley-on-Thames, Oxfordshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "description": "Henley Kids Fun Triathlon at Henley Leisure Centre and Gillotts School in Henley-on-Thames, Oxfordshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "organiser": "UK Triathlon",
+      "website": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "distances": ["Tin", "Zinc", "Steel", "Bronze", "Silver", "Gold"]
+    },
+    {
+      "slug": "caldicot-kids-fun-triathlon",
+      "name": "Caldicot Kids Fun Triathlon",
+      "sport": "Triathlon",
+      "country": "Wales",
+      "county": "Monmouthshire",
+      "city": "Caldicot",
+      "area": "Caldicot Leisure Centre",
+      "surface": "Multisport",
+      "summary": "Caldicot Kids Fun Triathlon at Caldicot Leisure Centre in Caldicot, Monmouthshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "description": "Caldicot Kids Fun Triathlon at Caldicot Leisure Centre in Caldicot, Monmouthshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "organiser": "UK Triathlon",
+      "website": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "distances": ["Tin", "Zinc", "Steel", "Bronze", "Silver", "Gold"]
+    },
+    {
+      "slug": "marlborough-kids-fun-triathlon",
+      "name": "Marlborough Kids Fun Triathlon",
+      "sport": "Triathlon",
+      "country": "England",
+      "county": "Wiltshire",
+      "city": "Marlborough",
+      "area": "Marlborough College",
+      "surface": "Multisport",
+      "summary": "Marlborough Kids Fun Triathlon at Marlborough College in Marlborough, Wiltshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "description": "Marlborough Kids Fun Triathlon at Marlborough College in Marlborough, Wiltshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "organiser": "UK Triathlon",
+      "website": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "distances": ["Tin", "Zinc", "Steel", "Bronze", "Silver", "Gold", "Platinum"]
+    },
+    {
+      "slug": "west-midlands-kids-fun-triathlon",
+      "name": "West Midlands Kids Fun Triathlon",
+      "sport": "Triathlon",
+      "country": "England",
+      "county": "West Midlands",
+      "city": "Birmingham",
+      "area": "King Edward’s School",
+      "surface": "Multisport",
+      "summary": "West Midlands Kids Fun Triathlon at King Edward’s School in Birmingham, West Midlands. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "description": "West Midlands Kids Fun Triathlon at King Edward’s School in Birmingham, West Midlands. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "organiser": "UK Triathlon",
+      "website": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "distances": ["Tin", "Zinc", "Steel", "Bronze", "Silver", "Gold", "Platinum"]
+    },
+    {
+      "slug": "york-kids-fun-triathlon",
+      "name": "York Kids Fun Triathlon",
+      "sport": "Triathlon",
+      "country": "England",
+      "county": "North Yorkshire",
+      "city": "York",
+      "area": "York Sports Village",
+      "surface": "Multisport",
+      "summary": "York Kids Fun Triathlon at York Sports Village in York, North Yorkshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "description": "York Kids Fun Triathlon at York Sports Village in York, North Yorkshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "organiser": "UK Triathlon",
+      "website": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "distances": ["Tin", "Zinc", "Steel", "Bronze", "Silver", "Gold"]
+    },
+    {
+      "slug": "north-west-kids-fun-duathlon",
+      "name": "North West Kids Fun Duathlon",
+      "sport": "Duathlon",
+      "country": "England",
+      "county": "Cheshire",
+      "city": "Nantwich",
+      "area": "Barony Park",
+      "surface": "Multisport",
+      "summary": "North West Kids Fun Duathlon at Barony Park in Nantwich, Cheshire. A non-competitive children’s run, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "description": "North West Kids Fun Duathlon at Barony Park in Nantwich, Cheshire. A non-competitive children’s run, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "organiser": "UK Triathlon",
+      "website": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "distances": ["Tin", "Zinc", "Steel", "Bronze", "Silver", "Gold"]
+    },
+    {
+      "slug": "race-for-life-norwich",
+      "name": "Race for Life Norwich",
+      "sport": "Running",
+      "country": "England",
+      "county": "Norfolk",
+      "city": "Norwich",
+      "area": "Norfolk Showground",
+      "surface": "Mixed",
+      "summary": "Race for Life Norwich at Norfolk Showground, Norfolk. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "description": "Race for Life Norwich at Norfolk Showground, Norfolk. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100",
+      "distances": ["3K", "5K", "10K"]
+    },
+    {
+      "slug": "race-for-life-ipswich",
+      "name": "Race for Life Ipswich",
+      "sport": "Running",
+      "country": "England",
+      "county": "Suffolk",
+      "city": "Ipswich",
+      "area": "Trinity Park",
+      "surface": "Mixed",
+      "summary": "Race for Life Ipswich at Trinity Park, Suffolk. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "description": "Race for Life Ipswich at Trinity Park, Suffolk. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100",
+      "distances": ["3K", "5K", "10K"]
+    },
+    {
+      "slug": "race-for-life-chelmsford",
+      "name": "Race for Life Chelmsford",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Chelmsford",
+      "area": "Hylands Park",
+      "surface": "Mixed",
+      "summary": "Race for Life Chelmsford at Hylands Park, Essex. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "description": "Race for Life Chelmsford at Hylands Park, Essex. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030",
+      "distances": ["3K", "5K", "10K"]
+    },
+    {
+      "slug": "race-for-life-cambridge",
+      "name": "Race for Life Cambridge",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cambridgeshire",
+      "city": "Cambridge",
+      "area": "Jesus Green",
+      "surface": "Mixed",
+      "summary": "Race for Life Cambridge at Jesus Green, Cambridgeshire. Choose 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "description": "Race for Life Cambridge at Jesus Green, Cambridgeshire. Choose 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100",
+      "distances": ["5K", "10K"]
+    },
+    {
+      "slug": "race-for-life-lincoln",
+      "name": "Race for Life Lincoln",
+      "sport": "Running",
+      "country": "England",
+      "county": "Lincolnshire",
+      "city": "Lincoln",
+      "area": "Lincolnshire Showground",
+      "surface": "Mixed",
+      "summary": "Race for Life Lincoln at Lincolnshire Showground, Lincolnshire. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "description": "Race for Life Lincoln at Lincolnshire Showground, Lincolnshire. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "organiser": "Cancer Research UK",
+      "website": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100",
+      "distances": ["3K", "5K", "10K"]
+    },
+    {
+      "slug": "tour-de-broads",
+      "name": "Tour de Broads",
+      "sport": "Cycling",
+      "country": "England",
+      "county": "Norfolk",
+      "city": "Norfolk Broads",
+      "area": "Venue TBC",
+      "surface": "Road",
+      "summary": "Tour de Broads 2027 offers 25, 50, 75 and 100-mile cycling options in the Norfolk Broads. The date is 15 August 2027; the organiser has yet to confirm the venue, routes and rider start times. A family ride is advertised without a confirmed distance.",
+      "description": "Tour de Broads 2027 offers 25, 50, 75 and 100-mile cycling options in the Norfolk Broads. The date is 15 August 2027; the organiser has yet to confirm the venue, routes and rider start times. A family ride is advertised without a confirmed distance.",
+      "organiser": "TPR Events",
+      "website": "https://tprevents.co.uk/product/tour-de-broads/",
+      "distances": ["25mi", "50mi", "75mi", "100mi"]
+    }
+  ],
+  "editions": [
+    {
+      "eventSlug": "cheshire-kids-fun-duathlon",
+      "date": "2027-05-08",
+      "distance": "Tin",
+      "distanceKm": 1.6,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Tin; organiser age guide 5-7 yrs. 100m run, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "cheshire-kids-fun-duathlon",
+      "date": "2027-05-08",
+      "distance": "Zinc",
+      "distanceKm": 1.7,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Zinc; organiser age guide 6-9 yrs. 200m run, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:45 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "cheshire-kids-fun-duathlon",
+      "date": "2027-05-08",
+      "distance": "Steel",
+      "distanceKm": 3.2,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Steel; organiser age guide 8-11 yrs. 200m run, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:25 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "cheshire-kids-fun-duathlon",
+      "date": "2027-05-08",
+      "distance": "Bronze",
+      "distanceKm": 4.9,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Bronze; organiser age guide 10-13 yrs. 400m run, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:10 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "cheshire-kids-fun-duathlon",
+      "date": "2027-05-08",
+      "distance": "Silver",
+      "distanceKm": 6.4,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Silver; organiser age guide 12-15 yrs. 400m run, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:05 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "cheshire-kids-fun-duathlon",
+      "date": "2027-05-08",
+      "distance": "Gold",
+      "distanceKm": 7.1,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Gold; organiser age guide 13-16 yrs. 600m run, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "glasgow-kids-fun-triathlon",
+      "date": "2027-05-22",
+      "distance": "Zinc",
+      "distanceKm": 1.525,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "glasgow-kids-fun-triathlon",
+      "date": "2027-05-22",
+      "distance": "Steel",
+      "distanceKm": 3.05,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "glasgow-kids-fun-triathlon",
+      "date": "2027-05-22",
+      "distance": "Bronze",
+      "distanceKm": 4.55,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "glasgow-kids-fun-triathlon",
+      "date": "2027-05-22",
+      "distance": "Silver",
+      "distanceKm": 6.1,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "glasgow-kids-fun-triathlon",
+      "date": "2027-05-22",
+      "distance": "Gold",
+      "distanceKm": 6.65,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "henley-kids-fun-triathlon",
+      "date": "2027-06-05",
+      "distance": "Tin",
+      "distanceKm": 1.51,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Tin; organiser age guide 5-7 yrs. 10m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 16:30 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "henley-kids-fun-triathlon",
+      "date": "2027-06-05",
+      "distance": "Zinc",
+      "distanceKm": 1.525,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 15:30 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "henley-kids-fun-triathlon",
+      "date": "2027-06-05",
+      "distance": "Steel",
+      "distanceKm": 3.05,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 14:30 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "henley-kids-fun-triathlon",
+      "date": "2027-06-05",
+      "distance": "Bronze",
+      "distanceKm": 4.55,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:50 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "henley-kids-fun-triathlon",
+      "date": "2027-06-05",
+      "distance": "Silver",
+      "distanceKm": 6.1,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:30 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "henley-kids-fun-triathlon",
+      "date": "2027-06-05",
+      "distance": "Gold",
+      "distanceKm": 6.65,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Gold; organiser age guide 13-17 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "caldicot-kids-fun-triathlon",
+      "date": "2027-06-26",
+      "distance": "Tin",
+      "distanceKm": 1.51,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Tin; organiser age guide 5-7 yrs. 10m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "caldicot-kids-fun-triathlon",
+      "date": "2027-06-26",
+      "distance": "Zinc",
+      "distanceKm": 1.52,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Zinc; organiser age guide 6-9 yrs. 20m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "caldicot-kids-fun-triathlon",
+      "date": "2027-06-26",
+      "distance": "Steel",
+      "distanceKm": 3.04,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Steel; organiser age guide 8-11 yrs. 40m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "caldicot-kids-fun-triathlon",
+      "date": "2027-06-26",
+      "distance": "Bronze",
+      "distanceKm": 4.54,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Bronze; organiser age guide 10-13 yrs. 40m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "caldicot-kids-fun-triathlon",
+      "date": "2027-06-26",
+      "distance": "Silver",
+      "distanceKm": 6.08,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Silver; organiser age guide 12-15 yrs. 80m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "caldicot-kids-fun-triathlon",
+      "date": "2027-06-26",
+      "distance": "Gold",
+      "distanceKm": 6.62,
+      "status": "TBC",
+      "source": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Gold; organiser age guide 14-16 yrs. 120m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "unknown",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "marlborough-kids-fun-triathlon",
+      "date": "2027-07-10",
+      "distance": "Tin",
+      "distanceKm": 1.515,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Tin; organiser age guide 5-7 yrs. 15m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "marlborough-kids-fun-triathlon",
+      "date": "2027-07-10",
+      "distance": "Zinc",
+      "distanceKm": 1.525,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "marlborough-kids-fun-triathlon",
+      "date": "2027-07-10",
+      "distance": "Steel",
+      "distanceKm": 3.05,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "marlborough-kids-fun-triathlon",
+      "date": "2027-07-10",
+      "distance": "Bronze",
+      "distanceKm": 4.55,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "marlborough-kids-fun-triathlon",
+      "date": "2027-07-10",
+      "distance": "Silver",
+      "distanceKm": 6.1,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "marlborough-kids-fun-triathlon",
+      "date": "2027-07-10",
+      "distance": "Gold",
+      "distanceKm": 6.65,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "marlborough-kids-fun-triathlon",
+      "date": "2027-07-10",
+      "distance": "Platinum",
+      "distanceKm": 8.2,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Platinum; organiser age guide 15-18 yrs. 200m swim, 5km bike, 3km run. Individual start TBC; race details normally emailed 7–10 days before.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "west-midlands-kids-fun-triathlon",
+      "date": "2027-08-07",
+      "distance": "Tin",
+      "distanceKm": 1.515,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Tin; organiser age guide 5-7 yrs. 15m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "west-midlands-kids-fun-triathlon",
+      "date": "2027-08-07",
+      "distance": "Zinc",
+      "distanceKm": 1.525,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "west-midlands-kids-fun-triathlon",
+      "date": "2027-08-07",
+      "distance": "Steel",
+      "distanceKm": 3.05,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "west-midlands-kids-fun-triathlon",
+      "date": "2027-08-07",
+      "distance": "Bronze",
+      "distanceKm": 4.55,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "west-midlands-kids-fun-triathlon",
+      "date": "2027-08-07",
+      "distance": "Silver",
+      "distanceKm": 6.1,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "west-midlands-kids-fun-triathlon",
+      "date": "2027-08-07",
+      "distance": "Gold",
+      "distanceKm": 6.65,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "west-midlands-kids-fun-triathlon",
+      "date": "2027-08-07",
+      "distance": "Platinum",
+      "distanceKm": 8.2,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Platinum; organiser age guide 15-18 yrs. 200m swim, 5km bike, 3km run. Individual start TBC; race details normally emailed 7–10 days before. New Platinum course is in the main programme; no Platinum estimate is in the start-time table.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "york-kids-fun-triathlon",
+      "date": "2027-08-21",
+      "distance": "Tin",
+      "distanceKm": 1.518,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Tin; organiser age guide 5-7 yrs. 18m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 16:20 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "york-kids-fun-triathlon",
+      "date": "2027-08-21",
+      "distance": "Zinc",
+      "distanceKm": 1.525,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 15:20 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "york-kids-fun-triathlon",
+      "date": "2027-08-21",
+      "distance": "Steel",
+      "distanceKm": 3.05,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 14:20 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "york-kids-fun-triathlon",
+      "date": "2027-08-21",
+      "distance": "Bronze",
+      "distanceKm": 4.55,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:40 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "york-kids-fun-triathlon",
+      "date": "2027-08-21",
+      "distance": "Silver",
+      "distanceKm": 6.1,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:20 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "york-kids-fun-triathlon",
+      "date": "2027-08-21",
+      "distance": "Gold",
+      "distanceKm": 6.65,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "notes": "Date and programme checked 21 October 2026. Gold; organiser age guide 13-16 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "north-west-kids-fun-duathlon",
+      "date": "2027-09-18",
+      "distance": "Tin",
+      "distanceKm": 1.6,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Tin; organiser age guide 5-7 yrs. 100m run, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:00 (subject to change). The source uses the malformed label 13:00pm; confirm the personal start.",
+      "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "north-west-kids-fun-duathlon",
+      "date": "2027-09-18",
+      "distance": "Zinc",
+      "distanceKm": 1.7,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Zinc; organiser age guide 6-9 yrs. 200m run, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:40 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "north-west-kids-fun-duathlon",
+      "date": "2027-09-18",
+      "distance": "Steel",
+      "distanceKm": 3.2,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Steel; organiser age guide 8-11 yrs. 200m run, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:20 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "north-west-kids-fun-duathlon",
+      "date": "2027-09-18",
+      "distance": "Bronze",
+      "distanceKm": 4.9,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Bronze; organiser age guide 10-13 yrs. 400m run, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:10 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "north-west-kids-fun-duathlon",
+      "date": "2027-09-18",
+      "distance": "Silver",
+      "distanceKm": 6.4,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Silver; organiser age guide 12-15 yrs. 400m run, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:05 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "north-west-kids-fun-duathlon",
+      "date": "2027-09-18",
+      "distance": "Gold",
+      "distanceKm": 7.1,
+      "status": "Open",
+      "source": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "notes": "Date and programme checked 21 October 2026. Gold; organiser age guide 13-16 yrs. 600m run, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:00 (subject to change).",
+      "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "UK Triathlon",
+          "entryUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-norwich",
+      "date": "2027-05-09",
+      "distance": "3K",
+      "distanceKm": 3,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-norwich",
+      "date": "2027-05-09",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-5k-2027-05-09-1100",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-5k-2027-05-09-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-5k-2027-05-09-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-5k-2027-05-09-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-norwich",
+      "date": "2027-05-09",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-10k-2027-05-09-1000",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "10:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-10k-2027-05-09-1000",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-10k-2027-05-09-1000",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-10k-2027-05-09-1000",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-ipswich",
+      "date": "2027-06-20",
+      "distance": "3K",
+      "distanceKm": 3,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-ipswich",
+      "date": "2027-06-20",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-10k-2027-06-20-1000",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "10:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-10k-2027-06-20-1000",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-10k-2027-06-20-1000",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-10k-2027-06-20-1000",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-chelmsford",
+      "date": "2027-07-18",
+      "distance": "3K",
+      "distanceKm": 3,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "10:30",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-chelmsford",
+      "date": "2027-07-18",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-5k-2027-07-18-1030",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "10:30",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-5k-2027-07-18-1030",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-5k-2027-07-18-1030",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-5k-2027-07-18-1030",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-chelmsford",
+      "date": "2027-07-18",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-10k-2027-07-18-0930",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "09:30",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-10k-2027-07-18-0930",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-10k-2027-07-18-0930",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-10k-2027-07-18-0930",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-cambridge",
+      "date": "2027-07-04",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-cambridge",
+      "date": "2027-07-04",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-10k-2027-07-04-1030",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "10:30",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-10k-2027-07-04-1030",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-10k-2027-07-04-1030",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-10k-2027-07-04-1030",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-lincoln",
+      "date": "2027-07-17",
+      "distance": "3K",
+      "distanceKm": 3,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-lincoln",
+      "date": "2027-07-17",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-5k-2027-07-17-1100",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page.",
+      "startTime": "11:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-5k-2027-07-17-1100",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-5k-2027-07-17-1100",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-5k-2027-07-17-1100",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "race-for-life-lincoln",
+      "date": "2027-07-17",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "source": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-10k-2027-07-17-1000",
+      "notes": "Date and programme checked 21 October 2026. Start published on Cancer Research UK’s distance-specific 2027 event page. Starts from 10:00; select and follow your booked start.",
+      "startTime": "10:00",
+      "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-10k-2027-07-17-1000",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Cancer Research UK",
+          "entryUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-10k-2027-07-17-1000",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-10k-2027-07-17-1000",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "tour-de-broads",
+      "date": "2027-08-15",
+      "distance": "25mi",
+      "distanceKm": 40.2336,
+      "status": "Open",
+      "source": "https://tprevents.co.uk/product/tour-de-broads/",
+      "notes": "Date and programme checked 21 October 2026. Date confirmed; venue, final routes and rider start times TBC. Mileage is the published entry option, subject to final route information.",
+      "entryUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "TPR Events",
+          "entryUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "tour-de-broads",
+      "date": "2027-08-15",
+      "distance": "50mi",
+      "distanceKm": 80.4672,
+      "status": "Open",
+      "source": "https://tprevents.co.uk/product/tour-de-broads/",
+      "notes": "Date and programme checked 21 October 2026. Date confirmed; venue, final routes and rider start times TBC. Mileage is the published entry option, subject to final route information.",
+      "entryUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "TPR Events",
+          "entryUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "tour-de-broads",
+      "date": "2027-08-15",
+      "distance": "75mi",
+      "distanceKm": 120.7008,
+      "status": "Open",
+      "source": "https://tprevents.co.uk/product/tour-de-broads/",
+      "notes": "Date and programme checked 21 October 2026. Date confirmed; venue, final routes and rider start times TBC. Mileage is the published entry option, subject to final route information.",
+      "entryUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "TPR Events",
+          "entryUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "tour-de-broads",
+      "date": "2027-08-15",
+      "distance": "100mi",
+      "distanceKm": 160.9344,
+      "status": "Open",
+      "source": "https://tprevents.co.uk/product/tour-de-broads/",
+      "notes": "Date and programme checked 21 October 2026. Date confirmed; venue, final routes and rider start times TBC. Mileage is the published entry option, subject to final route information.",
+      "entryUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "TPR Events",
+          "entryUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-10-21",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    }
+  ],
+  "details": {
+    "cheshire-kids-fun-duathlon|2027-05-08": {
+      "summary": "Cheshire Kids Fun Duathlon at Barony Park in Nantwich, Cheshire. A non-competitive children’s run, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 100m run, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 200m run, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:45 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 200m run, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:25 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 400m run, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:10 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 400m run, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:05 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 13-16 yrs. 600m run, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        }
+      }
+    },
+    "glasgow-kids-fun-triathlon|2027-05-22": {
+      "summary": "Glasgow Kids Fun Triathlon at Bellahouston Leisure Centre and Park in Glasgow, Glasgow City. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 11:00–12:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        }
+      }
+    },
+    "henley-kids-fun-triathlon|2027-06-05": {
+      "summary": "Henley Kids Fun Triathlon at Henley Leisure Centre and Gillotts School in Henley-on-Thames, Oxfordshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 10m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 16:30 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 15:30 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 14:30 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:50 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:30 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 13-17 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        }
+      }
+    },
+    "caldicot-kids-fun-triathlon|2027-06-26": {
+      "summary": "Caldicot Kids Fun Triathlon at Caldicot Leisure Centre in Caldicot, Monmouthshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 10m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 20m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 40m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 40m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 80m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 14-16 yrs. 120m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–12:00 (subject to change). The adjacent race-information heading still says 2026; confirm the 2027 timetable.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        }
+      }
+    },
+    "marlborough-kids-fun-triathlon|2027-07-10": {
+      "summary": "Marlborough Kids Fun Triathlon at Marlborough College in Marlborough, Wiltshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 15m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon"
+        },
+        "Platinum": {
+          "time": null,
+          "note": "Platinum; organiser age guide 15-18 yrs. 200m swim, 5km bike, 3km run. Individual start TBC; race details normally emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon"
+        }
+      }
+    },
+    "west-midlands-kids-fun-triathlon|2027-08-07": {
+      "summary": "West Midlands Kids Fun Triathlon at King Edward’s School in Birmingham, West Midlands. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 15m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 10:00–13:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Platinum": {
+          "time": null,
+          "note": "Platinum; organiser age guide 15-18 yrs. 200m swim, 5km bike, 3km run. Individual start TBC; race details normally emailed 7–10 days before. New Platinum course is in the main programme; no Platinum estimate is in the start-time table.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        }
+      }
+    },
+    "york-kids-fun-triathlon|2027-08-21": {
+      "summary": "York Kids Fun Triathlon at York Sports Village in York, North Yorkshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 18m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 16:20 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 15:20 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 14:20 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:40 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:20 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 13-16 yrs. 150m swim, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        }
+      }
+    },
+    "north-west-kids-fun-duathlon|2027-09-18": {
+      "summary": "North West Kids Fun Duathlon at Barony Park in Nantwich, Cheshire. A non-competitive children’s run, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 100m run, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 13:00 (subject to change). The source uses the malformed label 13:00pm; confirm the personal start.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 200m run, 1km bike, 500m run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:40 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 200m run, 2km bike, 1km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:20 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 400m run, 3km bike, 1.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:10 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 400m run, 4km bike, 2km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:05 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 13-16 yrs. 600m run, 4km bike, 2.5km run. Individual start TBC; race details normally emailed 7–10 days before. Organiser’s planning estimate: 12:00 (subject to change).",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        }
+      }
+    },
+    "race-for-life-norwich|2027-05-09": {
+      "summary": "Race for Life Norwich at Norfolk Showground, Norfolk. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "3K": {
+          "time": "11:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-5k-2027-05-09-1100"
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-10k-2027-05-09-1000"
+        }
+      }
+    },
+    "race-for-life-ipswich|2027-06-20": {
+      "summary": "Race for Life Ipswich at Trinity Park, Suffolk. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "3K": {
+          "time": "11:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-5k-2027-06-20-1100"
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-10k-2027-06-20-1000"
+        }
+      }
+    },
+    "race-for-life-chelmsford|2027-07-18": {
+      "summary": "Race for Life Chelmsford at Hylands Park, Essex. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "3K": {
+          "time": "10:30",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030"
+        },
+        "5K": {
+          "time": "10:30",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-5k-2027-07-18-1030"
+        },
+        "10K": {
+          "time": "09:30",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-10k-2027-07-18-0930"
+        }
+      }
+    },
+    "race-for-life-cambridge|2027-07-04": {
+      "summary": "Race for Life Cambridge at Jesus Green, Cambridgeshire. Choose 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "5K": {
+          "time": "11:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100"
+        },
+        "10K": {
+          "time": "10:30",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-10k-2027-07-04-1030"
+        }
+      }
+    },
+    "race-for-life-lincoln|2027-07-17": {
+      "summary": "Race for Life Lincoln at Lincolnshire Showground, Lincolnshire. Choose 3K, 5K, 10K and walk, jog or run to support Cancer Research UK. The organiser publishes a separate start for each distance; check your chosen event before travelling.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "3K": {
+          "time": "11:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100"
+        },
+        "5K": {
+          "time": "11:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-5k-2027-07-17-1100"
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "Start published on Cancer Research UK’s distance-specific 2027 event page. Starts from 10:00; select and follow your booked start.",
+          "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-10k-2027-07-17-1000"
+        }
+      }
+    },
+    "tour-de-broads|2027-08-15": {
+      "summary": "Tour de Broads 2027 offers 25, 50, 75 and 100-mile cycling options in the Norfolk Broads. The date is 15 August 2027; the organiser has yet to confirm the venue, routes and rider start times. A family ride is advertised without a confirmed distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "Date confirmed; venue, final routes and rider start times TBC. Mileage is the published entry option, subject to final route information.",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/"
+        },
+        "50mi": {
+          "time": null,
+          "note": "Date confirmed; venue, final routes and rider start times TBC. Mileage is the published entry option, subject to final route information.",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/"
+        },
+        "75mi": {
+          "time": null,
+          "note": "Date confirmed; venue, final routes and rider start times TBC. Mileage is the published entry option, subject to final route information.",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/"
+        },
+        "100mi": {
+          "time": null,
+          "note": "Date confirmed; venue, final routes and rider start times TBC. Mileage is the published entry option, subject to final route information.",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/"
+        }
+      }
+    }
+  }
+}
