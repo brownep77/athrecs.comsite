@@ -17,7 +17,10 @@ import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 import { cn } from "@/lib/utils";
 import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 import { SiteLanguagePicker } from "@/components/language/SiteLanguagePicker";
-import { publicTranslationUrl } from "@/lib/athrecs/site-translation";
+import {
+  evaluatePublicFeatureFlags,
+  publicFeatureFlagConfig,
+} from "@/lib/athrecs/public-feature-flags";
 import {
   HomepageAppearanceProvider,
   HomepageColourPicker,
@@ -108,8 +111,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 }
 
 function PublicAppShell({ children, pathname }: { children: React.ReactNode; pathname: string }) {
-  const showHomepageColours = IS_ATHRECS_SITE && pathname === "/";
-  const showLanguagePicker = IS_ATHRECS_SITE && publicTranslationUrl(pathname) !== null;
+  const featureFlags = evaluatePublicFeatureFlags(
+    pathname,
+    IS_ATHRECS_SITE,
+    publicFeatureFlagConfig({
+      VITE_FLAG_HOMEPAGE_COLOUR_PICKER: import.meta.env.VITE_FLAG_HOMEPAGE_COLOUR_PICKER,
+      VITE_FLAG_LANGUAGE_PICKER: import.meta.env.VITE_FLAG_LANGUAGE_PICKER,
+    }),
+  );
+  const showHomepageColours = featureFlags["homepage-colour-picker"] === true;
+  const showLanguagePicker = featureFlags["language-picker"] === true;
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col overflow-x-hidden bg-bg">
       <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block">
@@ -203,7 +214,7 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
           </ul>
         </nav>
       ) : null}
-      <SiteAnalytics />
+      <SiteAnalytics featureFlags={featureFlags} />
       <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">{children}</main>
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-40 text-xs text-muted sm:pb-24 md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>

@@ -249,6 +249,12 @@ function AthletePrivacyPage() {
               not turn on Vercel tracking automatically.
             </p>
             <p className="mt-3">
+              Page views also include simple on/off values for public site features, such as the
+              homepage colour picker and language selector, so we can compare feature usage. These
+              values describe the site version shown, not your chosen colours, language, identity or
+              profile details.
+            </p>
+            <p className="mt-3">
               We exclude account, staff, claim and registration-management pages and remove query
               strings and URL fragments from tracked page addresses. We do not send form contents,
               account details or result-claim evidence. Vercel processes request information to
