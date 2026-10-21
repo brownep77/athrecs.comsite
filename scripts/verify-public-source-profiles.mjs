@@ -328,6 +328,45 @@ try {
   assert.equal(readSourceNationality(nationalityDetails).provider, "DUV");
   assert(!("details" in p));
   assert(!JSON.stringify(p).includes("birthYear"), "Only the nationality observation is exposed");
+  const reviewedDetails = {
+    ...nationalityDetails,
+    birthdayVisibility: "full",
+    manager: "Synthetic Representative",
+    coach: "Unpublished Coach",
+    acceptContact: true,
+    worldAthleticsProfileDetailsPublication: {
+      athleteId: a.id,
+      reviewedAt: "2026-10-21T00:00:00Z",
+      filledProfileDetails: { birthdayVisibility: "full", manager: "Synthetic Representative" },
+      sourceUrl: "https://example.test/staff-only-evidence",
+    },
+  };
+  await sql`update athletes set profile_details=${JSON.stringify(reviewedDetails)}::jsonb where id=${a.id}`;
+  const withDetails = await read();
+  assert.equal(withDetails.details.birthday, "1 January 1980");
+  assert.equal(withDetails.details.manager, "Synthetic Representative");
+  assert.equal(withDetails.details.coach, "");
+  assert.equal(withDetails.details.acceptContact, false);
+  assert.doesNotMatch(
+    JSON.stringify(withDetails),
+    /staff-only-evidence|Unpublished Coach|reviewedAt|1980-01-01/,
+  );
+  const detailHtml = await (await fetch(origin + "/athletes/synthetic-duv-public")).text();
+  const detailMarkup = detailHtml.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+  assert.match(detailMarkup, /Birthday/);
+  assert.match(detailMarkup, /1 January 1980/);
+  assert.match(detailMarkup, /Synthetic Representative/);
+  assert.doesNotMatch(detailHtml, /staff-only-evidence|Unpublished Coach/);
+  await sql`update athletes set profile_details=${JSON.stringify({ ...reviewedDetails, birthdayVisibility: "hidden", manager: "Unpublished Replacement" })}::jsonb where id=${a.id}`;
+  const hiddenDetails = await read();
+  assert(
+    !hiddenDetails.details,
+    "A later privacy choice or unreviewed edit cannot reuse publication approval",
+  );
+  assert.doesNotMatch(JSON.stringify(hiddenDetails), /January 1980|Unpublished Replacement/);
+  await sql`update athletes set profile_details=${JSON.stringify({ ...reviewedDetails, worldAthleticsProfileDetailsPublication: { ...reviewedDetails.worldAthleticsProfileDetailsPublication, athleteId: a.id + 1 } })}::jsonb where id=${a.id}`;
+  assert(!(await read()).details, "Approval belongs to the exact athlete");
+  await sql`update athletes set profile_details=${JSON.stringify(nationalityDetails)}::jsonb where id=${a.id}`;
   const directory = await rpc("athrecs/athlete-directory-api", "getAthleteDirectory", {
     q: "Synthetic DUV Public",
   });

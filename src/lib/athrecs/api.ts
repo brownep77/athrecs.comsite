@@ -5,7 +5,7 @@ import { getReportedRaceHistory } from "./reported-race-history";
 import { readResultDetails } from "./result-details";
 import { parseProfileRoles } from "./athlete-profile-roles";
 import { combineProfileResults } from "./profile-records";
-import { publicProfileDetails } from "./profile-details";
+import { publicProfileDetails, publishedSourceProfileDetails } from "./profile-details";
 import { readSourceNationality } from "./source-nationality";
 import { loadUpcoming } from "./athlete-upcoming-api";
 import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
@@ -1147,7 +1147,7 @@ const readAdministratorPublishedAthlete = createServerOnlyFn(
     ]);
     const { results: legacyResults, ...publicProfile } = profile;
     void legacyResults;
-    // The publication covers sporting results and basic athlete identity only.
+    // Individually reviewed source details may accompany an unclaimed profile.
     // Account details, contact preferences and future plans remain member-only.
     return {
       ...publicProfile,
@@ -1162,7 +1162,13 @@ const readAdministratorPublishedAthlete = createServerOnlyFn(
         country: sharing?.share_location === false ? "" : profile.athlete.country,
         club: sharing?.share_club === false ? null : profile.athlete.club,
         club_slug: sharing?.share_club === false ? null : profile.athlete.club_slug,
-        details: publicProfileDetails({}),
+        details: athlete.has_account_link
+          ? publicProfileDetails({})
+          : (publishedSourceProfileDetails(
+              athlete.profile_details,
+              athlete.date_of_birth,
+              athlete.id,
+            ) ?? publicProfileDetails({})),
         aliases: [],
         date_of_birth: null,
         place_of_birth: null,
@@ -1236,6 +1242,13 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
         country: profile.athlete.country,
         nationality: profile.athlete.nationality,
         nationalitySource: profile.athlete.nationality_source,
+        details: !identity.has_account_link
+          ? (publishedSourceProfileDetails(
+              identity.profile_details,
+              identity.date_of_birth,
+              identity.id,
+            ) ?? undefined)
+          : undefined,
         sports: profile.athlete.sports,
         biography: profile.shareBiography
           ? (career?.biography ?? [profile.publishedBiography || athleteSearchContent(profile).bio])
