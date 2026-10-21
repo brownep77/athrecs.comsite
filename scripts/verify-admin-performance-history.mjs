@@ -145,8 +145,9 @@ try {
           ],
         },
       ],
-    ),
-    [],
+    ).map((win) => ({ kind: win.kind, verified: win.results[0].verified })),
+    [{ kind: "overall", verified: false }],
+    "A recorded win counts immediately while its verification remains pending",
   );
   const count = (await sql`select count(*)::int as n from athlete_source_histories`)[0].n;
   await db.exec(
@@ -159,7 +160,7 @@ try {
   );
   assert.equal((await sql`select count(*)::int as n from athlete_source_histories`)[0].n, count);
   console.log(
-    "PASS: staff-only explicit approval, unchanged athlete response, raw precision/unknown dates, atomic audit, replay, denial/private sharing protection, owner-only removal/restore and exclusion from verified wins.",
+    "PASS: staff-only explicit approval, unchanged athlete response, raw precision/unknown dates, atomic audit, replay, denial/private sharing protection, owner-only removal/restore and separate recorded-win verification.",
   );
 } finally {
   await db.close();
