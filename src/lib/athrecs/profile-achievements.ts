@@ -232,15 +232,12 @@ export function buildProfileAchievements(results: AchievementResult[], today = n
         [first],
       );
   }
-  const countryMilestone = [50, 25, 10, 5, 2].find((n) => countries.size >= n);
-  if (countryMilestone)
+  if (countries.size >= 2)
     add(
       "countries",
-      `${countryMilestone} countries raced`,
+      `${countries.size} countries raced`,
       "One completed event in each different country; UK home nations count together.",
-      [...countries.values()]
-        .slice(0, countryMilestone)
-        .map((country) => byDate(country.results)[0]),
+      [...countries.values()].map((country) => byDate(country.results)[0]),
     );
   if (completedMajors.length)
     add(
