@@ -107,6 +107,7 @@ export function athleteSearchContent(
       h.performances
         .filter(
           (r) =>
+            accepted.has(r.verificationStatus ?? "") &&
             isCompletedHistoryResult(r, today) &&
             hasHistoryFinish(r) &&
             dated(r.date) &&

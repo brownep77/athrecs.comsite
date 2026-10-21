@@ -1,5 +1,6 @@
 import type { CompetitionHonour } from "@/lib/athrecs/competition-honours";
 import { ProfileAward } from "./ProfileAward";
+import { AchievementVerification } from "./AchievementVerification";
 import { resultCredit } from "@/lib/athrecs/result-credit";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
@@ -29,6 +30,7 @@ export function CompetitionHonours({
               <ProfileAward kind={honour.kind} tier={honour.tier} label={honour.title} decorative />
               <span>
                 <strong className="block text-sm">{honour.title}</strong>
+                <AchievementVerification verified={honour.evidence.every((row) => row.verified)} />
                 <span className="block text-xs text-muted">{honour.scope}</span>
                 <span className="mt-1 block text-xs font-medium">
                   {honour.evidence.length}{" "}
@@ -47,6 +49,7 @@ export function CompetitionHonours({
               {honour.evidence.map((row) => (
                 <li key={row.key}>
                   <strong className="block">{row.event}</strong>
+                  <AchievementVerification verified={row.verified} />
                   <span>
                     {formatRaceDateShort(row.date)} · {profileDisciplineLabel(row.discipline)}
                   </span>

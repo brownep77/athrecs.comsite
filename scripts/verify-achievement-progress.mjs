@@ -95,17 +95,18 @@ const history = {
     },
   ],
 };
-const reportedYear = buildProfileAchievementSummary([], [history], today);
+const pending = buildProfileAchievementSummary([], [history], today);
+const reportedYear = pending;
 assert.deepEqual(reportedYear.earned.find(({ id }) => id === "years").calendarYears, [
   { year: 2026, verified: false },
 ]);
-assert.equal(
-  reportedYear.progress.find(({ id }) => id === "finishes").completed,
-  0,
-  "Counting a recorded year does not verify the underlying performance",
-);
+assert.equal(pending.progress[0].completed, 1);
+assert.equal(pending.earned.find((a) => a.id === "finishes").verified, false);
 history.performances[0].verificationStatus = "source_verified";
-assert.equal(buildProfileAchievementSummary([], [history], today).progress[0].completed, 1);
+const confirmed = buildProfileAchievementSummary([], [history], today);
+assert.equal(confirmed.progress[0].completed, 1);
+assert.equal(confirmed.earned.find((a) => a.id === "finishes").verified, true);
+assert.deepEqual(confirmed.progress, pending.progress);
 
 const threeCountries = buildProfileAchievementSummary(
   [race(1, { country: "Bermuda" }), race(2, { country: "Canada" }), race(3, { country: "Canada" })],
@@ -132,6 +133,12 @@ try {
     createElement(AchievementSummary, { summary: threeCountries }),
   );
   assert(countriesMarkup.includes("3 countries raced"));
+  assert(countriesMarkup.includes('data-achievement-verification="pending"'));
+  const verifiedMarkup = renderToStaticMarkup(
+    createElement(AchievementSummary, { summary: confirmed }),
+  );
+  assert(verifiedMarkup.includes('data-achievement-verification="verified"'));
+  assert(verifiedMarkup.includes("Supporting results verified"));
   assert(!countriesMarkup.includes("2 countries raced"));
   const yearMarkup = renderToStaticMarkup(
     createElement(AchievementSummary, { summary: reportedYear }),

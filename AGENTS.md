@@ -94,3 +94,17 @@ publication and personal-best calculations in this repository.
   attribution (including photo credits).
 
 - Owner instruction, 20 October 2026: when researching race results, add any newly found results websites missing from Sources. Check the existing registry and wider event inventory for duplicates; retain the actual URL, provider credit, checked date and coverage evidence. Registration alone does not enable automated collection or verify participant results.
+
+- Owner instruction, 21 October 2026: all recorded completed results contribute
+  immediately to profile achievements, countries raced, PBs, milestones and honours.
+  Verification is a separate tick, added only when the supporting result evidence is
+  confirmed. Do not upgrade stored verification status to make achievements appear.
+  Keep invalid, excluded, future, disqualified and contradictory results ineligible;
+  preserve round, classification, course and timing rules. This supersedes any
+  verified-only profile achievement gate, not ranking or source-verification rules.
+
+- Owner instruction, 21 October 2026: every athlete has a staff backend profile,
+  claimed or unclaimed, with profile and result verification checkboxes. Profile
+  review is separate from ownership and individual result verification. Preserve
+  reviewer, time, evidence and changes in the private audit. Source provider names,
+  links and review notes belong only in staff views, never public/member profiles.

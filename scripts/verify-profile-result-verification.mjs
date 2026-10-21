@@ -1,3 +1,4 @@
+import "./verify-staff-athlete-verification.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";

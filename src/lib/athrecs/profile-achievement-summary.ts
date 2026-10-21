@@ -22,7 +22,7 @@ export type AchievementProgress = {
 };
 
 export type ProfileAchievementSummary = {
-  earned: Pick<ProfileAchievement, "id" | "title" | "rule" | "calendarYears">[];
+  earned: Pick<ProfileAchievement, "id" | "title" | "rule" | "calendarYears" | "verified">[];
   progress: AchievementProgress[];
   raceWins: RaceWinSummary[];
 };
@@ -86,10 +86,11 @@ export function buildProfileAchievementSummary(
       "calendar years with a finish",
     );
   return {
-    earned: record.milestones.map(({ id, title, rule, calendarYears }) => ({
+    earned: record.milestones.map(({ id, title, rule, calendarYears, verified }) => ({
       id,
       title,
       rule,
+      verified,
       ...(calendarYears ? { calendarYears } : {}),
     })),
     progress,

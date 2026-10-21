@@ -115,3 +115,37 @@ The synthetic examples cover optional columns, distinct gender/category ranks,
 wrong times, wrong dates, missing athletes, ambiguous matches and unexpected
 headers. No private athlete export or real review manifest belongs in this
 code-only change.
+
+## Profile achievements and verification
+
+Owner instruction, 21 October 2026: published, completed results contribute to
+profile achievements immediately, including pending results. Countries raced,
+PBs, milestones, progress and competition honours are calculated from the visible
+record. A separate tick means the required supporting evidence is verified.
+A threshold can use any qualifying confirmed results; each country, sport, major
+or year needs one confirmed qualifying performance. A faster pending PB replaces
+a slower confirmed PB, with its tick appearing only after that performance is
+confirmed. Verification never changes the achieved count by itself.
+
+This display policy does not upgrade stored result verification, change ranking
+eligibility, publish hidden records or verify account ownership. Invalid,
+conflicting, future, excluded and disqualified results stay ineligible. Final
+rounds, overall/gender/category positions, course conditions and timing categories
+retain their existing meaning. Original evidence remains in staff-only storage.
+
+## Staff checkboxes for every profile
+
+The staff athlete directory includes claimed, unclaimed, public and private
+profiles. Each backend profile has a profile-details review checkbox and separate
+result checkboxes, including imported history from every provider. Profile review
+never verifies results or grants ownership. Changed profile details invalidate a
+previous profile-details tick. Checking a result requires a source link, row
+locator, identity match and staff confirmation; unchecking it reopens verification.
+Reviewers, timestamps, original values and private notes are kept in the audit.
+Pending athlete requests reflect the same staff decision. Visibility never changes.
+
+Public and signed-in athlete profile projections remove provider names, URLs and
+staff review notes. Derived sport classifications, deduplication keys and existing
+verification status remain usable without exposing the original source. Staff
+readers keep the original evidence. No existing profile or result is automatically
+verified by installing these controls.

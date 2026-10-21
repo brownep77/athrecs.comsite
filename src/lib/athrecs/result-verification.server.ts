@@ -249,7 +249,7 @@ export async function staffRequests(
     staffEvidence: staffEvidence ? JSON.stringify(staffEvidence, null, 2) : null,
   }));
 }
-async function updateHistory(
+export async function updateHistory(
   sql: Sql,
   athleteId: number,
   provider: string,
@@ -257,10 +257,11 @@ async function updateHistory(
   index: number,
   original: Record<string, unknown>,
   review: unknown,
+  verificationStatus = "verified_by_administrator",
 ) {
   const updated = {
     ...original,
-    verificationStatus: "verified_by_administrator",
+    verificationStatus,
     staffVerification: review,
   };
   // Carry profile display choices across a row's new evidence hash.

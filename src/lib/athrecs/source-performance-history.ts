@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { disqualificationSchema } from "./result-details.ts";
 import { performanceTimingSchema } from "./performance-timing.ts";
+import type { Sport } from "./types";
 
 // Text fields deliberately retain decimal precision, field marks, heat positions,
 // non-finishes and source annotations; never coerce these into integer seconds.
@@ -73,6 +74,10 @@ export const historyPerformanceSchema = sourcePerformanceSchema.extend({
   date: z.string().regex(/^(?:\d{4}-\d{2}-\d{2})?$/),
 });
 export type SourcePerformance = z.infer<typeof sourcePerformanceSchema>;
+// Browser-only derived classification preserves calculations after source names are removed.
+export type DisplaySourcePerformance = SourcePerformance & {
+  displaySport?: Sport | "Unclassified";
+};
 export const sourceHistorySchema = z.object({
   provider: z.string(),
   externalId: z.string(),
@@ -83,4 +88,7 @@ export const sourceHistorySchema = z.object({
   yearsCaptured: z.array(z.number().int()),
   performances: z.array(historyPerformanceSchema),
 });
-export type SourceHistory = z.infer<typeof sourceHistorySchema>;
+export type SourceHistory = Omit<z.infer<typeof sourceHistorySchema>, "performances"> & {
+  performances: DisplaySourcePerformance[];
+  rankingHistory?: boolean;
+};

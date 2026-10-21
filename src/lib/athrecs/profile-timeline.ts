@@ -73,7 +73,10 @@ export function buildProfileTimeline(
       details: { ...r.details },
     }));
   const history: HistoryResult[] = [];
-  const sourcePlaces = new Map<ProfileResult, { priority: number; places: Set<string> }>();
+  const sourcePlaces = new Map<
+    ProfileResult,
+    { priority: number; places: Set<string>; verified: boolean }
+  >();
   for (const source of histories) {
     for (const [index, original] of source.performances.entries()) {
       if (original.profileExcluded) continue;
@@ -95,9 +98,13 @@ export function buildProfileTimeline(
         const sourceRound = row.labels.some((label) => /^round:/i.test(label))
           ? competitionRound(row.labels)
           : undefined;
-        if (sourceRound && resultVerification(row.verificationStatus, row.providerName).verified)
+        if (sourceRound) {
           known.displayRound =
             known.displayRound && known.displayRound !== sourceRound ? "conflicting" : sourceRound;
+          known.displayAwardVerified =
+            (known.displayAwardVerified ?? true) &&
+            resultVerification(row.verificationStatus, row.providerName).verified;
+        }
         known.sourceUrls = [
           ...new Set([
             ...known.sourceUrls,
@@ -119,18 +126,24 @@ export function buildProfileTimeline(
           );
         const supplied = row.places ? String(row.places.overall ?? "") : row.place;
         const place = supplied.match(/^([1-9]\d*(?:=|[AB])?)(?:\/(?:[1-9]\d*)?){0,2}$/)?.[1];
-        if (
-          known.overallPlace === null &&
-          !known.conflicting &&
-          place &&
-          hasHistoryFinish(row) &&
-          resultVerification(row.verificationStatus, row.providerName).verified
-        ) {
-          const priority = /^world\s*athletics$/i.test(row.providerName.trim()) ? 2 : 1;
+        if (known.overallPlace === null && !known.conflicting && place && hasHistoryFinish(row)) {
+          const priority = /^(?:world\s*athletics|Verified record)$/i.test(row.providerName.trim())
+            ? 2
+            : 1;
           const existing = sourcePlaces.get(known);
           if (!existing || priority > existing.priority)
-            sourcePlaces.set(known, { priority, places: new Set([place]) });
-          else if (priority === existing.priority) existing.places.add(place);
+            sourcePlaces.set(known, {
+              priority,
+              places: new Set([place]),
+              verified: resultVerification(row.verificationStatus, row.providerName).verified,
+            });
+          else if (priority === existing.priority) {
+            existing.places.add(place);
+            existing.verified ||= resultVerification(
+              row.verificationStatus,
+              row.providerName,
+            ).verified;
+          }
         }
         continue;
       }
@@ -150,6 +163,13 @@ export function buildProfileTimeline(
       if (duplicate) {
         duplicate.performance = {
           ...duplicate.performance,
+          verificationStatus:
+            resultVerification(row.verificationStatus, row.providerName).verified &&
+            row.ageGroup === duplicate.performance.ageGroup &&
+            JSON.stringify(row.places) === JSON.stringify(duplicate.performance.places) &&
+            competitionRound(row.labels) === competitionRound(duplicate.performance.labels)
+              ? (row.verificationStatus ?? "source_verified")
+              : duplicate.performance.verificationStatus,
           sourceUrls: [...new Set([...duplicate.performance.sourceUrls, ...row.sourceUrls])],
           ...(duplicate.performance.sourceKeys || row.sourceKeys
             ? {
@@ -173,7 +193,10 @@ export function buildProfileTimeline(
     }
   }
   for (const [result, candidates] of sourcePlaces) {
-    if (candidates.places.size === 1) result.displayOverallPlace = [...candidates.places][0];
+    if (candidates.places.size === 1) {
+      result.displayOverallPlace = [...candidates.places][0];
+      result.displayAwardVerified = (result.displayAwardVerified ?? true) && candidates.verified;
+    }
   }
   return { results, history, count: results.length + history.length };
 }

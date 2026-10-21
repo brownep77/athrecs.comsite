@@ -24,12 +24,23 @@ const row = (extra = {}) => ({
 const histories = (rows) => [{ provider: "Synthetic", externalId: "test", performances: rows }];
 const bests = (rows) => selectProfilePersonalBests([], [], histories(rows));
 assert.equal(bests([row()])[0].value.finishTimeSeconds, 1082);
-assert.equal(bests([row({ verificationStatus: "unverified" })]).length, 0);
+assert.equal(bests([row({ verificationStatus: "unverified" })]).length, 1);
+assert.equal(bests([row({ verificationStatus: "unverified" })])[0].verified, false);
+assert.equal(bests([row()])[0].verified, true);
+const fasterPending = [
+  row(),
+  row({ date: "2021-05-10", performance: "17:59", verificationStatus: "unverified" }),
+];
+assert.equal(bests(fasterPending)[0].value.finishTimeSeconds, 1079);
+assert.equal(bests(fasterPending)[0].verified, false);
+fasterPending[1].verificationStatus = "source_verified";
+assert.equal(bests(fasterPending)[0].verified, true);
 const reported = row({ verificationStatus: "unverified", reportedPersonalBest: true });
-assert.equal(bests([reported])[0].kind, "reported");
+assert.equal(bests([reported])[0].kind, "recorded");
+assert.equal(bests([reported])[0].verified, false);
 assert.equal(
   buildProfileAchievements(profileAchievementResults([], histories([reported]))).finishes.length,
-  0,
+  1,
 );
 const track = row({ discipline: "5000", performance: "16:12.55", labels: [] });
 assert.equal(bests([track])[0].value.finishTimeSeconds, 972.55);

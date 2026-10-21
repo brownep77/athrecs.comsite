@@ -1,3 +1,4 @@
+import { StaffAthleteVerification } from "@/components/staff/StaffAthleteVerification";
 import { ResultVerificationInbox } from "@/components/staff/ResultVerificationInbox";
 import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import {
@@ -138,6 +139,7 @@ function StaffAthleteProfile() {
               />
             </Suspense>
           ) : null}
+          <StaffAthleteVerification key={athleteId} athleteNumber={profile.athlete.athleteNumber} />
           {profile.athlete.sources.length ? (
             <ResultVerificationInbox
               athleteIds={profile.athlete.sources.map((source) => source.id)}

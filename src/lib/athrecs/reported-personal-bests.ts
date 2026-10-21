@@ -8,6 +8,7 @@ import { profileAchievementResults, type AchievementResult } from "./profile-his
 import { historicalMark, historicalPbEligible } from "./history-performance.ts";
 import { hasHistoryFinish } from "./profile-result-presentation.ts";
 import type { SourceHistory } from "./source-performance-history";
+import { achievementResultVerified } from "./achievement-verification.ts";
 
 export const CHIP_TIME_CAVEAT = "Not verified by chip time";
 
@@ -35,12 +36,20 @@ export function selectProfilePersonalBests(
   histories: readonly SourceHistory[] = [],
 ) {
   type Candidate =
-    | { kind: "recorded"; value: AchievementResult }
-    | { kind: "reported"; value: ReportedPersonalBest };
+    | { kind: "recorded"; value: AchievementResult; verified: boolean }
+    | { kind: "reported"; value: ReportedPersonalBest; verified: boolean };
   const bests = new Map<string, Candidate>();
   const projected = profileAchievementResults(results, histories);
-  for (const value of findPersonalBests(projected)) {
-    bests.set(personalBestGroup(value), { kind: "recorded", value });
+  // Prefer confirmed evidence for equal marks without hiding a faster pending PB.
+  const confirmedFirst = [...projected].sort(
+    (a, b) => Number(achievementResultVerified(b)) - Number(achievementResultVerified(a)),
+  );
+  for (const value of findPersonalBests(confirmedFirst)) {
+    bests.set(personalBestGroup(value), {
+      kind: "recorded",
+      value,
+      verified: achievementResultVerified(value),
+    });
   }
   const supplied: ReportedPersonalBest[] = projected.flatMap((result) => {
     const row = result.history?.performance;
@@ -77,7 +86,7 @@ export function selectProfilePersonalBests(
     const key = personalBestGroup(value) + (value.qualification ? `|${value.qualification}` : "");
     const previous = bests.get(key);
     if (!previous || value.finishTimeSeconds < previous.value.finishTimeSeconds!) {
-      bests.set(key, { kind: "reported", value });
+      bests.set(key, { kind: "reported", value, verified: false });
     }
   }
   return [...bests.values()].sort(

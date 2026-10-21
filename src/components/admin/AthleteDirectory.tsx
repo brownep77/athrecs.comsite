@@ -118,8 +118,8 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
           </p>
           <h1 className="font-display text-3xl font-semibold">Athlete directory</h1>
           <p className="mt-2 text-sm text-muted">
-            All athlete profiles, one permanent AthRecs ID across every sport. Linked source records
-            are grouped under their account.
+            All athletes, claimed and unclaimed, have a backend profile and verification controls.
+            Linked source records are grouped under their account.
           </p>
         </div>
         <Button

@@ -24,6 +24,8 @@ export type ProfileResult = {
   displayOverallPlace?: string;
   /** Explicit source round retained by timeline deduplication for championship awards. */
   displayRound?: string;
+  /** Pending supplemental round/placing evidence keeps the award tick pending. */
+  displayAwardVerified?: boolean;
   genderPlace?: number | null;
   categoryPlace?: number | null;
   resultGender?: string | null;

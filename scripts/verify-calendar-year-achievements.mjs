@@ -129,11 +129,11 @@ const strict = buildProfileAchievements(
   profileAchievementResults([], [history([row(2020)])]),
   today,
 );
-assert.equal(strict.finishes.length, 0);
+assert.equal(strict.finishes.length, 1);
 assert.equal(
   strict.calendarYears.length,
-  0,
-  "Verified biography/award callers keep their existing eligibility",
+  1,
+  "Completed recorded results count before verification",
 );
 console.log(
   "Calendar years: full history, legacy/unverified records, distinct years, verification, exclusions, privacy and automatic updates passed.",

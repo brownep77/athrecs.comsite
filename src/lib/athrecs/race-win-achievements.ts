@@ -168,12 +168,14 @@ export function buildRaceWinAchievements(
       sourceUrls: result.sourceUrls,
       evidenceLabel: resultEvidenceLabel(result),
       result,
-      verified: resultVerification(
-        result.details?.verificationStatus,
-        result.resultSource,
-        result.conflicting,
-      ).verified,
-      sourceKeys: /^world\s*athletics$/i.test(result.resultSource ?? "")
+      verified:
+        result.displayAwardVerified !== false &&
+        resultVerification(
+          result.details?.verificationStatus,
+          result.resultSource,
+          result.conflicting,
+        ).verified,
+      sourceKeys: /^(?:world\s*athletics|Verified record)$/i.test(result.resultSource ?? "")
         ? undefined
         : result.sourceKeys,
     };
@@ -202,8 +204,9 @@ export function buildRaceWinAchievements(
   for (const history of histories)
     for (const row of history.performances) {
       if (row.profileExcluded || row.syntheticTest) continue;
-      const sport = sourceHistorySport(row.discipline, history.provider, row.meeting);
-      if (!sport || sport === "Parkrun") continue;
+      const sport =
+        row.displaySport ?? sourceHistorySport(row.discipline, history.provider, row.meeting);
+      if (!sport || sport === "Unclassified" || sport === "Parkrun") continue;
       const code = row.discipline
         .replace(
           /^(?:triathlon|duathlon|aquathlon|aquabike|cycling|swimming|swim|rowing)\s*[-–—:]?\s+/i,
@@ -247,7 +250,9 @@ export function buildRaceWinAchievements(
         evidenceLabel: "Source-history result",
         verified: resultVerification(row.verificationStatus, row.providerName || history.provider)
           .verified,
-        sourceKeys: /^world\s*athletics$/i.test(row.providerName || history.provider)
+        sourceKeys: /^(?:world\s*athletics|Verified record)$/i.test(
+          row.providerName || history.provider,
+        )
           ? undefined
           : row.sourceKeys,
       };

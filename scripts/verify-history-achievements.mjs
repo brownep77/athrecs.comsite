@@ -73,8 +73,28 @@ assert.equal(
   "Administrator-accepted results count towards completion",
 );
 assert.equal(board([row({ verificationStatus: "source_verified" })]).finishes.length, 1);
+const pending = board([row({ verificationStatus: "unverified" })]);
+assert.equal(pending.finishes.length, 1);
+assert.equal(pending.milestones.find((m) => m.id === "finishes").verified, false);
+assert.equal(board([row()]).milestones.find((m) => m.id === "finishes").verified, true);
+const countries = board([
+  row({ verificationStatus: "unverified", date: "2025-01-01" }),
+  row({ date: "2025-02-01" }),
+  row({ country: "US", date: "2025-03-01" }),
+]);
+assert.equal(countries.countries.length, 2);
+assert.equal(countries.milestones.find((m) => m.id === "countries").verified, true);
+const pendingCountry = board([
+  row(),
+  row({ country: "US", date: "2025-03-01", verificationStatus: "unverified" }),
+]);
+assert.equal(
+  pendingCountry.milestones.find((m) => m.id === "countries").title,
+  "2 countries raced",
+);
+assert.equal(pendingCountry.milestones.find((m) => m.id === "countries").verified, false);
+
 for (const extra of [
-  { verificationStatus: "unverified" },
   { verificationStatus: undefined },
   { profileExcluded: true },
   { performance: "DNF" },

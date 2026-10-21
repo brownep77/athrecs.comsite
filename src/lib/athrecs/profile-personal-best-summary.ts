@@ -11,6 +11,7 @@ export function profilePersonalBestSummary(
   return selectProfilePersonalBests([...results], [], histories).map((candidate) => {
     const row = candidate.value;
     return {
+      verified: candidate.verified,
       id: `${row.sport}|${row.surface}|${row.distanceCode}|${candidate.kind === "reported" ? (candidate.value.qualification ?? "") : ""}`,
       sport: row.sport,
       surface: row.surface,

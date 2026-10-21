@@ -83,7 +83,12 @@ assert.equal(
 assert.equal(
   buildProfileTimeline([result], history([row({ place: "1", verificationStatus: "unverified" })]))
     .results[0].displayOverallPlace,
-  undefined,
+  "1",
+);
+assert.equal(
+  buildProfileTimeline([result], history([row({ place: "1", verificationStatus: "unverified" })]))
+    .results[0].displayAwardVerified,
+  false,
 );
 assert.equal(
   buildProfileTimeline(

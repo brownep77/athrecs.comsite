@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { Medal, TrendingUp, Trophy } from "lucide-react";
 import { ANZ_PROVIDER, anzProgress, anzTime, type AnzMedal } from "@/lib/anz/core";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
+import { AchievementVerification } from "./AchievementVerification";
+import { resultVerification } from "@/lib/athrecs/profile-result-presentation";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 
 export function AnzPerformanceOverview({
@@ -16,7 +18,7 @@ export function AnzPerformanceOverview({
   const events = useMemo(() => anzProgress(histories), [histories]);
   const [selected, setSelected] = useState("");
   const event = events.find((e) => e.discipline === selected) ?? events[0];
-  const source = histories.find((h) => h.provider === ANZ_PROVIDER);
+  const source = histories.find((h) => h.provider === ANZ_PROVIDER || h.rankingHistory === true);
   if (!source || !events.length) return null;
   const first = event.years[0],
     latest = event.years.at(-1)!;
@@ -30,7 +32,7 @@ export function AnzPerformanceOverview({
   const y = (seconds: number) => 140 - ((max - seconds) / span) * 106;
   const latestResult = [...event.rows].sort((a, b) => b.date.localeCompare(a.date))[0];
   return (
-    <section aria-label="ANZ performance overview" className="space-y-5">
+    <section aria-label="Performance overview" className="space-y-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h2 className="flex items-center gap-2 font-display text-xl font-semibold">
@@ -56,6 +58,11 @@ export function AnzPerformanceOverview({
               <span className="ml-2 text-xs font-normal text-muted">{item.surface}</span>
             </span>
             <strong className="my-1 block text-2xl tabular-nums">{item.best.performance}</strong>
+            <AchievementVerification
+              verified={
+                resultVerification(item.best.verificationStatus, item.best.providerName).verified
+              }
+            />
             <span className="block text-xs text-muted">
               {formatRaceDateShort(item.best.date)} · {item.best.venue}
             </span>

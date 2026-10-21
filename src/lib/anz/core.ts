@@ -55,7 +55,7 @@ export function publicAnzMedals(details: unknown, histories: readonly SourceHist
   return parsed.data.filter((medal) =>
     histories.some(
       (h) =>
-        h.provider === ANZ_PROVIDER &&
+        (h.provider === ANZ_PROVIDER || h.rankingHistory === true) &&
         h.sourceUrl === medal.sourceUrl &&
         h.performances.some(
           (row) =>
@@ -96,7 +96,7 @@ export function anzTime(row: SourcePerformance): number | null {
 }
 export function anzProgress(histories: readonly SourceHistory[]) {
   const groups = new Map<string, SourcePerformance[]>();
-  for (const h of histories.filter((h) => h.provider === ANZ_PROVIDER))
+  for (const h of histories.filter((h) => h.provider === ANZ_PROVIDER || h.rankingHistory === true))
     for (const row of h.performances) {
       if (anzTime(row) === null) continue;
       const rows = groups.get(row.discipline) ?? [];
