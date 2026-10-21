@@ -9,7 +9,7 @@ const publish = (sql, publishing, data, baseline) =>
   publishCountyExpansion(sql, publishing, data, baseline, COUNTY_EXPANSION_MORE);
 const publishing = await import("../src/lib/athrecs/catalogue-publishing.server.ts");
 const { queryRacePlaceRows } = await import("../src/lib/athrecs/race-places.server.ts");
-const { isReviewedFixturePlaceholder, checkedFixtureStart } =
+const { isReviewedFixturePlaceholder, checkedFixtureStart, FIXTURE_DETAILS } =
   await import("../src/data/fixture-details.ts");
 const { pg, sql } = await bulkFixture();
 try {
@@ -84,8 +84,10 @@ try {
       );
       assert(live, `Missing distance: ${event.slug} ${edition.distance}`);
       assert.equal(live.checkedAt, "2026-10-21");
-      assert.equal(live.startTime, edition.startTime ?? null);
-      assert.equal(live.sourceUrl, edition.source);
+      const current = FIXTURE_DETAILS[`${edition.eventSlug}|${edition.date}`];
+      const start = current?.starts[edition.distance];
+      assert.equal(live.startTime, start ? start.time : (edition.startTime ?? null));
+      assert.equal(live.sourceUrl, start?.sourceUrl ?? current?.sourceUrl ?? edition.source);
       if (edition.endDate) assert.equal(live.endDate, edition.endDate);
     }
     if (event.sport === "Parkrun") {
@@ -99,7 +101,7 @@ try {
   for (const edition of baseline.editions) {
     const event = baseline.events.find((event) => event.id === edition.event_id);
     const date = String(edition.event_date).slice(0, 10);
-    const checked = data.details[`${event.slug}|${date}`]?.starts[edition.distance_code];
+    const checked = FIXTURE_DETAILS[`${event.slug}|${date}`]?.starts[edition.distance_code];
     if (!checked) continue;
     const live = rows
       .find((row) => row.slug === event.slug)

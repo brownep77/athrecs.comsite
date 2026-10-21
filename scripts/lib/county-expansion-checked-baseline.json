@@ -1,0 +1,45 @@
+{
+  "revision": 280,
+  "checkedAt": "2026-10-21",
+  "events": [
+    {
+      "id": 3061074,
+      "slug": "race-for-life-ipswich",
+      "name": "Race For Life Ipswich",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Ipswich",
+      "area": "Trinity Park",
+      "surface": "Mixed",
+      "summary": "Race For Life Ipswich — Trinity Park, Ipswich. Listed on runABC (South of England).",
+      "description": "Race For Life Ipswich — Trinity Park, Ipswich. Listed on runABC (South of England). Confirm date, distance and entry on the runABC event page or organiser site.",
+      "organiser": "See runABC / organiser",
+      "website": "https://runabc.co.uk/race-for-life-ipswich"
+    }
+  ],
+  "editions": [
+    {
+      "id": 71614315,
+      "event_id": 3061074,
+      "event_date": "2027-06-20",
+      "distance_code": "5K",
+      "distance_km": 5,
+      "status": "Open",
+      "entry_url": "https://runabc.co.uk/race-for-life-ipswich",
+      "source_url": "https://runabc.co.uk/race-for-life-ipswich",
+      "start_time": "10:00",
+      "notes": null,
+      "end_date": null,
+      "end_time": null,
+      "end_source_url": null,
+      "end_checked_at": null
+    }
+  ],
+  "distances": [
+    {
+      "event_id": 3061074,
+      "distance_code": "5K"
+    }
+  ]
+}

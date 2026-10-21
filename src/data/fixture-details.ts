@@ -1,5 +1,7 @@
 import countyExpansion from "./county-expansion-2026-10-21.json" with { type: "json" };
 import countyExpansionMore from "./county-expansion-more-2026-10-21.json" with { type: "json" };
+import countyExpansionChecked from "./county-expansion-checked-2026-10-21.json" with { type: "json" };
+import countyTbcReview from "./county-tbc-review-2026-10-21.json" with { type: "json" };
 
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
@@ -8,12 +10,17 @@ export type FixtureDetail = {
   timeZone: string;
   sourceUrl: string;
   checkedAt: string;
-  starts: Record<string, { time: string | null; note?: string; publicNote?: string }>;
+  starts: Record<
+    string,
+    { time: string | null; note?: string; publicNote?: string; sourceUrl?: string }
+  >;
 };
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   ...countyExpansion.details,
   ...countyExpansionMore.details,
+  ...countyExpansionChecked.details,
+  ...countyTbcReview.details,
   "chase-the-train|2026-11-01": {
     summary: "A point-to-point trail run beside the Bure Valley Railway from Aylsham to Wroxham.",
     timeZone: "Europe/London",

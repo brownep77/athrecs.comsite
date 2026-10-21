@@ -1,0 +1,4140 @@
+{
+  "checkedAt": "2026-10-21",
+  "scope": {
+    "dateFrom": "2026-10-21",
+    "dateTo": "2028-12-31",
+    "minKm": 0.0,
+    "maxKm": 804.672,
+    "countries": ["england", "northern ireland", "scotland", "united kingdom", "wales"],
+    "sport": "Running"
+  },
+  "scopeOverride": "AthRecs county sports, all seven configured sports; this additions batch contains Running, Triathlon, Duathlon and Cycling. No new parkrun venue, athletics meet or standalone swim added in this batch.",
+  "initialTbcEventDates": 63,
+  "initialTbcPhysicalOptions": 135,
+  "notes": [
+    "Two HM labels in prior manifests alias existing Half editions and are not additional physical options.",
+    "75 previously TBC physical options now display a published race start, provisional start, window opening or morning-session start. Final personal waves may still be pending.",
+    "60 original physical options retain no exact start. 34 original event/date programmes need some follow-up, including partially resolved and provisional programmes.",
+    "Additional 2027 programmes add 66 options across 13 new events and one existing Ipswich identity. All 66 dates are explicitly published; no 2028 recurrence inferred.",
+    "Second pass checked full race programmes, entry categories, deeper FAQs, edition-specific links and downloaded PDFs. This is a bounded source review, not an exhaustive proof that a missing timetable is unpublished."
+  ],
+  "baselineRevision": 280,
+  "runningReconciliation": {
+    "add": [
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-norwich",
+          "expectedId": null,
+          "name": "Race for Life Norwich",
+          "country": "England",
+          "city": "Norwich",
+          "date": "2027-05-09",
+          "distance": "3K",
+          "distanceKm": 3.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-norwich",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-norwich",
+          "expectedId": null,
+          "name": "Race for Life Norwich",
+          "country": "England",
+          "city": "Norwich",
+          "date": "2027-05-09",
+          "distance": "5K",
+          "distanceKm": 5.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-5k-2027-05-09-1100",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-5k-2027-05-09-1100"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-norwich",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-norwich",
+          "expectedId": null,
+          "name": "Race for Life Norwich",
+          "country": "England",
+          "city": "Norwich",
+          "date": "2027-05-09",
+          "distance": "10K",
+          "distanceKm": 10.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-10k-2027-05-09-1000",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-10k-2027-05-09-1000"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-norwich",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-ipswich",
+          "expectedId": 3061074,
+          "name": "Race for Life Ipswich",
+          "country": "England",
+          "city": "Ipswich",
+          "date": "2027-06-20",
+          "distance": "3K",
+          "distanceKm": 3.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-ipswich",
+        "expectedId": 3061074
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-ipswich",
+          "expectedId": 3061074,
+          "name": "Race for Life Ipswich",
+          "country": "England",
+          "city": "Ipswich",
+          "date": "2027-06-20",
+          "distance": "10K",
+          "distanceKm": 10.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-10k-2027-06-20-1000",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-10k-2027-06-20-1000"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-ipswich",
+        "expectedId": 3061074
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-chelmsford",
+          "expectedId": null,
+          "name": "Race for Life Chelmsford",
+          "country": "England",
+          "city": "Chelmsford",
+          "date": "2027-07-18",
+          "distance": "3K",
+          "distanceKm": 3.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-chelmsford",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-chelmsford",
+          "expectedId": null,
+          "name": "Race for Life Chelmsford",
+          "country": "England",
+          "city": "Chelmsford",
+          "date": "2027-07-18",
+          "distance": "5K",
+          "distanceKm": 5.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-5k-2027-07-18-1030",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-5k-2027-07-18-1030"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-chelmsford",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-chelmsford",
+          "expectedId": null,
+          "name": "Race for Life Chelmsford",
+          "country": "England",
+          "city": "Chelmsford",
+          "date": "2027-07-18",
+          "distance": "10K",
+          "distanceKm": 10.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-10k-2027-07-18-0930",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-10k-2027-07-18-0930"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-chelmsford",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-cambridge",
+          "expectedId": null,
+          "name": "Race for Life Cambridge",
+          "country": "England",
+          "city": "Cambridge",
+          "date": "2027-07-04",
+          "distance": "5K",
+          "distanceKm": 5.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-cambridge",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-cambridge",
+          "expectedId": null,
+          "name": "Race for Life Cambridge",
+          "country": "England",
+          "city": "Cambridge",
+          "date": "2027-07-04",
+          "distance": "10K",
+          "distanceKm": 10.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-10k-2027-07-04-1030",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-10k-2027-07-04-1030"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-cambridge",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-lincoln",
+          "expectedId": null,
+          "name": "Race for Life Lincoln",
+          "country": "England",
+          "city": "Lincoln",
+          "date": "2027-07-17",
+          "distance": "3K",
+          "distanceKm": 3.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-lincoln",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-lincoln",
+          "expectedId": null,
+          "name": "Race for Life Lincoln",
+          "country": "England",
+          "city": "Lincoln",
+          "date": "2027-07-17",
+          "distance": "5K",
+          "distanceKm": 5.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-5k-2027-07-17-1100",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-5k-2027-07-17-1100"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-lincoln",
+        "expectedId": null
+      },
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-lincoln",
+          "expectedId": null,
+          "name": "Race for Life Lincoln",
+          "country": "England",
+          "city": "Lincoln",
+          "date": "2027-07-17",
+          "distance": "10K",
+          "distanceKm": 10.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-10k-2027-07-17-1000",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-10k-2027-07-17-1000"
+          }
+        },
+        "reason": "absent from snapshot; supplied evidence fields complete",
+        "canonicalSlug": "race-for-life-lincoln",
+        "expectedId": null
+      }
+    ],
+    "skip": [
+      {
+        "candidate": {
+          "eventSlug": "race-for-life-ipswich",
+          "expectedId": 3061074,
+          "name": "Race for Life Ipswich",
+          "country": "England",
+          "city": "Ipswich",
+          "date": "2027-06-20",
+          "distance": "5K",
+          "distanceKm": 5.0,
+          "source": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-5k-2027-06-20-1100",
+          "evidence": {
+            "primary": true,
+            "dateVerified": true,
+            "distanceVerified": true,
+            "checkedAt": "2026-10-21",
+            "sourceUrl": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-5k-2027-06-20-1100"
+          }
+        },
+        "reason": "already listed",
+        "canonicalSlug": "race-for-life-ipswich",
+        "expectedId": 3061074,
+        "existingEditionId": 71614315
+      }
+    ],
+    "held": [],
+    "excluded": [],
+    "counts": {
+      "add": 13,
+      "skip": 1,
+      "held": 0,
+      "excluded": 0
+    },
+    "scope": {
+      "dateFrom": "2026-10-21",
+      "dateTo": "2028-12-31",
+      "minKm": 0.0,
+      "maxKm": 804.672,
+      "countries": ["england", "northern ireland", "scotland", "united kingdom", "wales"],
+      "sport": "Running"
+    },
+    "notice": "Offline matching aid only. Review evidence, held identities and fresh publication guards before any write."
+  },
+  "multisportIdentityReview": [
+    {
+      "candidate": "cheshire-kids-fun-duathlon",
+      "decision": "new identity",
+      "reason": "No exact slug, name or event-specific URL match in fresh global sport identities or aliases. Kids programmes are distinct from adult events; Tour de Broads is distinct from the Winter Series and generic Broads Bike Challenge.",
+      "nearby": [
+        {
+          "score": 0.634,
+          "slug": "yorkshire-duathlons",
+          "name": "Yorkshire Duathlons"
+        },
+        {
+          "score": 0.634,
+          "slug": "sheffield-duathlons",
+          "name": "Sheffield Duathlons"
+        },
+        {
+          "score": 0.619,
+          "slug": "east-fortune-duathlon",
+          "name": "East Fortune Duathlon"
+        }
+      ]
+    },
+    {
+      "candidate": "glasgow-kids-fun-triathlon",
+      "decision": "new identity",
+      "reason": "No exact slug, name or event-specific URL match in fresh global sport identities or aliases. Kids programmes are distinct from adult events; Tour de Broads is distinct from the Winter Series and generic Broads Bike Challenge.",
+      "nearby": [
+        {
+          "score": 0.821,
+          "slug": "glasgow-triathlon",
+          "name": "Glasgow Triathlon"
+        },
+        {
+          "score": 0.636,
+          "slug": "royal-windsor-triathlon",
+          "name": "Royal Windsor Triathlon"
+        },
+        {
+          "score": 0.636,
+          "slug": "cal-tri-austin-triathlon",
+          "name": "Cal Tri Austin Triathlon"
+        }
+      ]
+    },
+    {
+      "candidate": "henley-kids-fun-triathlon",
+      "decision": "new identity",
+      "reason": "No exact slug, name or event-specific URL match in fresh global sport identities or aliases. Kids programmes are distinct from adult events; Tour de Broads is distinct from the Winter Series and generic Broads Bike Challenge.",
+      "nearby": [
+        {
+          "score": 0.811,
+          "slug": "far-henley-triathlon",
+          "name": "Henley Triathlon"
+        },
+        {
+          "score": 0.683,
+          "slug": "far-the-bedford-triathlon",
+          "name": "The Bedford Triathlon"
+        },
+        {
+          "score": 0.682,
+          "slug": "rb-helvellyn-triathlon",
+          "name": "Helvellyn Triathlon 2026"
+        }
+      ]
+    },
+    {
+      "candidate": "caldicot-kids-fun-triathlon",
+      "decision": "new identity",
+      "reason": "No exact slug, name or event-specific URL match in fresh global sport identities or aliases. Kids programmes are distinct from adult events; Tour de Broads is distinct from the Winter Series and generic Broads Bike Challenge.",
+      "nearby": [
+        {
+          "score": 0.829,
+          "slug": "caldicot-triathlon",
+          "name": "Caldicot Triathlon"
+        },
+        {
+          "score": 0.762,
+          "slug": "cal-tri-dfw-triathlon",
+          "name": "Cal Tri DFW Triathlon"
+        },
+        {
+          "score": 0.732,
+          "slug": "cal-tri-dc-triathlon",
+          "name": "Cal Tri DC Triathlon"
+        }
+      ]
+    },
+    {
+      "candidate": "marlborough-kids-fun-triathlon",
+      "decision": "new identity",
+      "reason": "No exact slug, name or event-specific URL match in fresh global sport identities or aliases. Kids programmes are distinct from adult events; Tour de Broads is distinct from the Winter Series and generic Broads Bike Challenge.",
+      "nearby": [
+        {
+          "score": 0.691,
+          "slug": "far-middlesbrough-sprint-triathlon",
+          "name": "Middlesbrough Sprint Triathlon"
+        },
+        {
+          "score": 0.622,
+          "slug": "cal-tri-dfw-triathlon",
+          "name": "Cal Tri DFW Triathlon"
+        },
+        {
+          "score": 0.612,
+          "slug": "cal-tri-houston-triathlon",
+          "name": "Cal Tri Houston Triathlon"
+        }
+      ]
+    },
+    {
+      "candidate": "west-midlands-kids-fun-triathlon",
+      "decision": "new identity",
+      "reason": "No exact slug, name or event-specific URL match in fresh global sport identities or aliases. Kids programmes are distinct from adult events; Tour de Broads is distinct from the Winter Series and generic Broads Bike Challenge.",
+      "nearby": [
+        {
+          "score": 0.857,
+          "slug": "west-midlands-triathlon",
+          "name": "West Midlands Triathlon"
+        },
+        {
+          "score": 0.731,
+          "slug": "rb-west-lancs-summer-triathlon-multisport",
+          "name": "West Lancs Summer Triathlon"
+        },
+        {
+          "score": 0.731,
+          "slug": "west-lancs-spring-triathlon",
+          "name": "West Lancs Spring Triathlon"
+        }
+      ]
+    },
+    {
+      "candidate": "york-kids-fun-triathlon",
+      "decision": "new identity",
+      "reason": "No exact slug, name or event-specific URL match in fresh global sport identities or aliases. Kids programmes are distinct from adult events; Tour de Broads is distinct from the Winter Series and generic Broads Bike Challenge.",
+      "nearby": [
+        {
+          "score": 0.788,
+          "slug": "far-york-triathlon",
+          "name": "York Triathlon"
+        },
+        {
+          "score": 0.684,
+          "slug": "cal-tri-dfw-triathlon",
+          "name": "Cal Tri DFW Triathlon"
+        },
+        {
+          "score": 0.667,
+          "slug": "norwich-triathlon",
+          "name": "Norwich Triathlon"
+        }
+      ]
+    },
+    {
+      "candidate": "north-west-kids-fun-duathlon",
+      "decision": "new identity",
+      "reason": "No exact slug, name or event-specific URL match in fresh global sport identities or aliases. Kids programmes are distinct from adult events; Tour de Broads is distinct from the Winter Series and generic Broads Bike Challenge.",
+      "nearby": [
+        {
+          "score": 0.625,
+          "slug": "dalby-forest-wild-duathlons",
+          "name": "Dalby Forest Wild Duathlons"
+        },
+        {
+          "score": 0.612,
+          "slug": "forest-of-dean-wild-duathlons",
+          "name": "Forest of Dean Wild Duathlons"
+        },
+        {
+          "score": 0.605,
+          "slug": "east-fortune-duathlon",
+          "name": "East Fortune Duathlon"
+        }
+      ]
+    },
+    {
+      "candidate": "tour-de-broads",
+      "decision": "new identity",
+      "reason": "No exact slug, name or event-specific URL match in fresh global sport identities or aliases. Kids programmes are distinct from adult events; Tour de Broads is distinct from the Winter Series and generic Broads Bike Challenge.",
+      "nearby": [
+        {
+          "score": 0.667,
+          "slug": "tour-de-broads-winter-series",
+          "name": "Tour de Broads Winter Series"
+        },
+        {
+          "score": 0.571,
+          "slug": "far-tour-de-m-n",
+          "name": "Tour de Môn"
+        },
+        {
+          "score": 0.5,
+          "slug": "riderman",
+          "name": "RiderMan"
+        }
+      ]
+    }
+  ],
+  "previousTbcReview": [
+    {
+      "key": "far-stratford-triathlon|2027-04-18",
+      "name": "Stratford Triathlon",
+      "sport": "Triathlon",
+      "county": "Warwickshire",
+      "source": "https://uktriathlon.co.uk/events/stratford-triathlon",
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category 07:30–09:30; female category 09:30–10:15. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 10:45–11:10. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/stratford-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://uktriathlon.co.uk/application/files/7217/7572/6997/Stratford_Race_Day_Information.pdf",
+          "checked": "2026-10-21",
+          "scope": "Linked document inspected by label/URL only; not treated as a verified 2027 timetable"
+        }
+      ]
+    },
+    {
+      "key": "far-cheshire-triathlon|2027-05-09",
+      "name": "Cheshire Triathlon",
+      "sport": "Triathlon",
+      "county": "Cheshire",
+      "source": "https://uktriathlon.co.uk/events/cheshire-triathlon",
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category 07:45–10:30; female category 10:30–11:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: female 12:15–12:30; open 12:30–12:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/cheshire-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://uktriathlon.co.uk/application/files/4117/7754/1614/Cheshire_Race_Day_Information_2026.pdf",
+          "checked": "2026-10-21",
+          "scope": "Linked document inspected by label/URL only; not treated as a verified 2027 timetable"
+        }
+      ]
+    },
+    {
+      "key": "far-henley-triathlon|2027-06-06",
+      "name": "Henley Triathlon",
+      "sport": "Triathlon",
+      "county": "Oxfordshire",
+      "source": "https://uktriathlon.co.uk/events/henley-triathlon",
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category from 08:30; female from 09:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 10:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/henley-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://uktriathlon.co.uk/application/files/6717/7919/5371/Henley_Race_Day_Information_2026.pdf",
+          "checked": "2026-10-21",
+          "scope": "Linked document inspected by label/URL only; not treated as a verified 2027 timetable"
+        }
+      ]
+    },
+    {
+      "key": "far-shropshire-triathlon|2027-06-19",
+      "name": "Shropshire Triathlon",
+      "sport": "Triathlon",
+      "county": "Shropshire",
+      "source": "https://uktriathlon.co.uk/events/shropshire-triathlon",
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 07:45. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Olympic": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 07:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/shropshire-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://uktriathlon.co.uk/application/files/2017/8031/8561/Shropshire_Race_Day_Information_2026.pdf",
+          "checked": "2026-10-21",
+          "scope": "Linked document inspected by label/URL only; not treated as a verified 2027 timetable"
+        }
+      ]
+    },
+    {
+      "key": "far-york-triathlon|2027-08-22",
+      "name": "York Triathlon",
+      "sport": "Triathlon",
+      "county": "North Yorkshire",
+      "source": "https://uktriathlon.co.uk/events/york-triathlon",
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:15–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 12:40–13:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/york-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "ellesmere-triathlon|2027-09-04",
+      "name": "Ellesmere Triathlon",
+      "sport": "Triathlon",
+      "county": "Shropshire",
+      "source": "https://uktriathlon.co.uk/events/ellesmere-triathlon",
+      "starts": {
+        "Middle": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 07:30. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Olympic": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 08:30. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: from 09:10. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Fun Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: no separate Fun Sprint time located. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/ellesmere-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "far-north-west-triathlon|2027-09-19",
+      "name": "North West Triathlon",
+      "sport": "Triathlon",
+      "county": "Cheshire",
+      "source": "https://uktriathlon.co.uk/events/north-west-triathlon",
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–11:30. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 12:00–12:30. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/north-west-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "far-warwickshire-triathlon|2027-10-03",
+      "name": "Warwickshire Triathlon",
+      "sport": "Triathlon",
+      "county": "Warwickshire",
+      "source": "https://uktriathlon.co.uk/events/warwickshire-triathlon",
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category 07:45–09:30; female 09:30–10:15. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: open category 10:45–11:00; female is printed as 10:45–10:45, which needs clarification. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/warwickshire-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://uktriathlon.co.uk/application/files/7417/9023/8907/Warwickshire_Race_Day_Information.pdf",
+          "checked": "2026-10-21",
+          "scope": "Linked document inspected by label/URL only; not treated as a verified 2027 timetable"
+        }
+      ]
+    },
+    {
+      "key": "ultimate-triathlon-150-100-and-50|2027-06-20",
+      "name": "Ultimate Triathlon 150, 100 and 50",
+      "sport": "Triathlon",
+      "county": "Shropshire",
+      "source": "https://uktriathlon.co.uk/events/ultimate-triathlon-150-100-50",
+      "starts": {
+        "Ultimate 150": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page lists 07:30 for Ultimate 150, 100 and 50, but the adjacent race-information link is explicitly for 2026. Please confirm the 2027 programme."
+        },
+        "Ultimate 100": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page lists 07:30 for Ultimate 150, 100 and 50, but the adjacent race-information link is explicitly for 2026. Please confirm the 2027 programme."
+        },
+        "Ultimate 50": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page lists 07:30 for Ultimate 150, 100 and 50, but the adjacent race-information link is explicitly for 2026. Please confirm the 2027 programme."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/ultimate-triathlon-150-100-50",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://uktriathlon.co.uk/application/files/3717/8031/8739/Ultimate_Race_Day_Information_2026.pdf",
+          "checked": "2026-10-21",
+          "scope": "Linked document inspected by label/URL only; not treated as a verified 2027 timetable"
+        }
+      ]
+    },
+    {
+      "key": "glasgow-triathlon|2027-05-22",
+      "name": "Glasgow Triathlon",
+      "sport": "Triathlon",
+      "county": "Glasgow City",
+      "source": "https://uktriathlon.co.uk/events/glasgow-triathlon",
+      "starts": {
+        "Fun Challenge": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Endeavour": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Venture": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/glasgow-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://uktriathlon.co.uk/application/files/1617/7814/6704/Glasgow_Race_Day_Information.pdf",
+          "checked": "2026-10-21",
+          "scope": "Linked document inspected by label/URL only; not treated as a verified 2027 timetable"
+        }
+      ]
+    },
+    {
+      "key": "caldicot-triathlon|2027-06-26",
+      "name": "Caldicot Triathlon",
+      "sport": "Triathlon",
+      "county": "Monmouthshire",
+      "source": "https://uktriathlon.co.uk/events/caldicot-triathlon",
+      "starts": {
+        "Fun Challenge": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page shows estimated 11:00–13:00 starts alongside a 2026 race-information heading; 2027 personal allocation needs confirmation."
+        },
+        "Endeavour": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page shows estimated 11:00–13:00 starts alongside a 2026 race-information heading; 2027 personal allocation needs confirmation."
+        },
+        "Venture": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page shows estimated 11:00–13:00 starts alongside a 2026 race-information heading; 2027 personal allocation needs confirmation."
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Start time TBC for 2027. The page shows estimated 11:00–13:00 starts alongside a 2026 race-information heading; 2027 personal allocation needs confirmation."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/caldicot-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "west-midlands-triathlon|2027-08-07",
+      "name": "West Midlands Triathlon",
+      "sport": "Triathlon",
+      "county": "West Midlands",
+      "source": "https://uktriathlon.co.uk/events/west-midlands-triathlon",
+      "starts": {
+        "Fun Challenge": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Endeavour": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Venture": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Individual start TBC. Published planning guidance: 08:00–12:00. The organiser labels this an estimate, subject to change; personal instructions normally follow 7–10 days before."
+        }
+      },
+      "outcome": "Estimated/previous-year guidance only; personal starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://uktriathlon.co.uk/events/west-midlands-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "woodhall-spa-triathlon|2027-09-19",
+      "name": "Woodhall Spa Triathlon",
+      "sport": "Triathlon",
+      "county": "Lincolnshire",
+      "source": "https://curlysathletes.co.uk/woodhall-spa-triathlon",
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Start time not found in the accessible 2027 organiser page. Its athlete pack and direct buy-ticket link are labelled 2026; the linked 2027 EtchRock information page could not be retrieved during this check."
+        }
+      },
+      "outcome": "Access gap and older linked pack; please review 2027 entry page",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://curlysathletes.co.uk/woodhall-spa-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://etchrock.com/challenge/info/woodhall-spa-sprint-triathlon-2027",
+          "checked": "2026-10-21",
+          "scope": "Attempted through direct fetch and web retrieval; unavailable to this check"
+        }
+      ]
+    },
+    {
+      "key": "newport-sprint-and-olympic-triathlon|2027-09-11",
+      "name": "Newport Sprint and Olympic Triathlon",
+      "sport": "Triathlon",
+      "county": "Newport",
+      "source": "https://www.trimaxevents.co.uk/nisv",
+      "starts": {
+        "Sprint": {
+          "time": "13:00",
+          "note": "13:00 in the organiser-linked 2027 entry programme; follow individual pool-swim instructions."
+        },
+        "Olympic": {
+          "time": "13:00",
+          "note": "13:00 in the organiser-linked 2027 entry programme; follow individual pool-swim instructions."
+        }
+      },
+      "outcome": "Published starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.trimaxevents.co.uk/nisv",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.letsdothis.com/gb/e/newport-sprint-olympic-triathlon-2027-189321",
+          "checked": "2026-10-21",
+          "scope": "Organiser-linked entry page: Sprint and Olympic each 13:00, 11 September 2027"
+        }
+      ]
+    },
+    {
+      "key": "slateman-triathlon|2027-06-13",
+      "name": "Slateman Triathlon",
+      "sport": "Triathlon",
+      "county": "Gwynedd",
+      "source": "https://alwaysaimhighevents.com/events/slateman-triathlon",
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 09:00.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        },
+        "Standard": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 08.00.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        },
+        "Legend 70.3": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 07.00.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        },
+        "Ultra Chwarel": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 05.15am.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        },
+        "Ultra Mynydd": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 05.15am.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        }
+      },
+      "outcome": "Usual start guidance found; final 2027 waves pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://alwaysaimhighevents.com/events/slateman-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-sprint",
+          "checked": "2026-10-21",
+          "scope": "2027 distance-specific wave-start guidance; wording “usually”, final instructions ten days before"
+        },
+        {
+          "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-standard",
+          "checked": "2026-10-21",
+          "scope": "2027 distance-specific wave-start guidance; wording “usually”, final instructions ten days before"
+        },
+        {
+          "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-legend",
+          "checked": "2026-10-21",
+          "scope": "2027 distance-specific wave-start guidance; wording “usually”, final instructions ten days before"
+        },
+        {
+          "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-2026-triathlon-ultra",
+          "checked": "2026-10-21",
+          "scope": "2027 distance-specific wave-start guidance; wording “usually”, final instructions ten days before"
+        },
+        {
+          "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-2026-triathlon-ultra",
+          "checked": "2026-10-21",
+          "scope": "2027 distance-specific wave-start guidance; wording “usually”, final instructions ten days before"
+        }
+      ]
+    },
+    {
+      "key": "slateman-duathlon|2027-06-13",
+      "name": "Slateman Duathlon",
+      "sport": "Duathlon",
+      "county": "Gwynedd",
+      "source": "https://alwaysaimhighevents.com/events/slateman-triathlon",
+      "starts": {
+        "Standard": {
+          "time": null,
+          "note": "Start time TBC: the 2027 distance page says it usually starts at 08:00.; final instructions and waves follow about ten days before the race. This is planning guidance."
+        }
+      },
+      "outcome": "Usual start guidance found; final 2027 waves pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://alwaysaimhighevents.com/events/slateman-triathlon",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-standard-duathlon",
+          "checked": "2026-10-21",
+          "scope": "2027 distance-specific wave-start guidance; wording “usually”, final instructions ten days before"
+        }
+      ]
+    },
+    {
+      "key": "the-wild-scottish-cycle|2027-04-03",
+      "name": "The Wild Scottish Cycle",
+      "sport": "Cycling",
+      "county": "Perth and Kinross",
+      "source": "https://www.wilddeerevents.co.uk/e/the-wild-scottish-cycle-scone-palace-15884",
+      "starts": {
+        "50K": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "100K": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/the-wild-scottish-cycle-scone-palace-15884",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/15884?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "sherwood-pines-festive-duathlons|2026-12-13",
+      "name": "Sherwood Pines Festive Duathlons",
+      "sport": "Duathlon",
+      "county": "Nottinghamshire",
+      "source": "https://www.wilddeerevents.co.uk/e/sherwood-pines-festive-duathlons-2026-14698",
+      "starts": {
+        "Sprint": {
+          "time": "10:10",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow. The organiser describes the programme as provisional/approximate."
+        },
+        "Standard": {
+          "time": "10:10",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow. The organiser describes the programme as provisional/approximate."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/sherwood-pines-festive-duathlons-2026-14698",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14698?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "essex-open-water-swims|2027-05-15",
+      "name": "Essex Open Water Swims",
+      "sport": "Swimming",
+      "county": "Essex",
+      "source": "https://www.wilddeerevents.co.uk/e/essex-open-water-swims-2027-14515",
+      "starts": {
+        "750m": {
+          "time": "09:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "1500m": {
+          "time": "09:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow. The form also shows an end value of 17:22; this is not treated as a second start."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/essex-open-water-swims-2027-14515",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14515?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "swim-derwent|2027-07-04",
+      "name": "Swim Derwent",
+      "sport": "Swimming",
+      "county": "County Durham",
+      "source": "https://www.wilddeerevents.co.uk/e/swim-derwent-14533",
+      "starts": {
+        "400m": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        },
+        "0.5mi": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        },
+        "1mi": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        },
+        "2mi": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        },
+        "3mi": {
+          "time": null,
+          "note": "Distance-specific start TBC. The organiser says swims are expected between 09:00 and 10:00, with exact starts to follow. The entry form uses 09:00 for every distance, so it is not treated as an allocated start."
+        }
+      },
+      "outcome": "Estimated 09:00–10:00 window found; exact distance starts pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/swim-derwent-14533",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14533?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "derwent-reservoir-triathlons|2027-07-04",
+      "name": "Derwent Reservoir Triathlons",
+      "sport": "Triathlon",
+      "county": "County Durham",
+      "source": "https://www.wilddeerevents.co.uk/e/derwent-reservoir-triathlons-and-duathlons-14540",
+      "starts": {
+        "Sprint": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Standard": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/derwent-reservoir-triathlons-and-duathlons-14540",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14540?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "derwent-reservoir-duathlons|2027-07-04",
+      "name": "Derwent Reservoir Duathlons",
+      "sport": "Duathlon",
+      "county": "County Durham",
+      "source": "https://www.wilddeerevents.co.uk/e/derwent-reservoir-triathlons-and-duathlons-14540",
+      "starts": {
+        "Sprint": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Standard": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/derwent-reservoir-triathlons-and-duathlons-14540",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14540?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "big-lime-triathlons|2027-08-08",
+      "name": "Big Lime Triathlons",
+      "sport": "Triathlon",
+      "county": "County Durham",
+      "source": "https://www.wilddeerevents.co.uk/e/the-big-lime-triathlons-hartlepool-marina-14569",
+      "starts": {
+        "Sprint": {
+          "time": "07:45",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Standard": {
+          "time": "07:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/the-big-lime-triathlons-hartlepool-marina-14569",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14569?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "windermere-triathlon|2027-07-10",
+      "name": "Windermere Triathlon",
+      "sport": "Triathlon",
+      "county": "Cumbria",
+      "source": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "starts": {
+        "Novice": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Sprint": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14528?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "windermere-triathlon|2027-07-11",
+      "name": "Windermere Triathlon",
+      "sport": "Triathlon",
+      "county": "Cumbria",
+      "source": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "starts": {
+        "Standard": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14528?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "windermere-duathlon|2027-07-10",
+      "name": "Windermere Duathlon",
+      "sport": "Duathlon",
+      "county": "Cumbria",
+      "source": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "starts": {
+        "Sprint": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14528?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "windermere-duathlon|2027-07-11",
+      "name": "Windermere Duathlon",
+      "sport": "Duathlon",
+      "county": "Cumbria",
+      "source": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "starts": {
+        "Standard": {
+          "time": "06:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14528?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "west-lancs-spring-triathlon|2027-04-18",
+      "name": "West Lancs Spring Triathlon",
+      "sport": "Triathlon",
+      "county": "Lancashire",
+      "source": "https://epicevents.co.uk/events/west-lancs-spring-triathlon-multisport/",
+      "starts": {
+        "Sprint": {
+          "time": "06:30",
+          "note": "First swim starts from 06:30 within the published 06:30–12:30 window. Your individual swim time is allocated separately before the event."
+        }
+      },
+      "outcome": "Start window found; individual allocation pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://epicevents.co.uk/events/west-lancs-spring-triathlon-multisport/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "rb-west-lancs-summer-triathlon-multisport|2027-08-22",
+      "name": "West Lancs Summer Triathlon",
+      "sport": "Triathlon",
+      "county": "Lancashire",
+      "source": "https://epicevents.co.uk/events/west-lancs-summer-triathlon-multisport/",
+      "starts": {
+        "Sprint": {
+          "time": "06:30",
+          "note": "First swim starts from 06:30 within the published 06:30–12:30 window. Your individual swim time is allocated separately before the event."
+        }
+      },
+      "outcome": "Start window found; individual allocation pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://epicevents.co.uk/events/west-lancs-summer-triathlon-multisport/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "rivington-duathlon|2027-03-14",
+      "name": "Rivington Duathlon",
+      "sport": "Duathlon",
+      "county": "Lancashire",
+      "source": "https://epicevents.co.uk/events/rivington-duathlon/",
+      "starts": {
+        "Standard": {
+          "time": "08:00",
+          "note": "08:00 in the organiser’s event-information timings section."
+        }
+      },
+      "outcome": "Published start found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://epicevents.co.uk/events/rivington-duathlon/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "wa-england-athletics-senior-u20-combined-events-championships-7219932|2027-01-16",
+      "name": "England Senior and U20 Indoor Combined Events, Para and Race Walk Championships",
+      "sport": "Athletics",
+      "county": "South Yorkshire",
+      "source": "https://www.englandathletics.org/2027-championships/",
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "Championship dates are listed by the governing body. A discipline/session start timetable was not located in the checked 2027 fixture material."
+        }
+      },
+      "outcome": "Dates confirmed; discipline timetable not located",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.englandathletics.org/2027-championships/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "wa-england-athletics-u15-u17-20-indoor-championships-7220520|2027-02-06",
+      "name": "England U16, U18 and U20 Indoor Championships",
+      "sport": "Athletics",
+      "county": "South Yorkshire",
+      "source": "https://www.englandathletics.org/2027-championships/",
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "Championship dates are listed by the governing body. A discipline/session start timetable was not located in the checked 2027 fixture material."
+        }
+      },
+      "outcome": "Dates confirmed; discipline timetable not located",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.englandathletics.org/2027-championships/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "wa-england-athletics-age-group-ce-and-junior-para-championships-7234033|2027-03-06",
+      "name": "England Age Group Indoor Combined Events and Junior Para Championships",
+      "sport": "Athletics",
+      "county": "South Yorkshire",
+      "source": "https://www.englandathletics.org/2027-championships/",
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "Championship dates are listed by the governing body. A discipline/session start timetable was not located in the checked 2027 fixture material."
+        }
+      },
+      "outcome": "Dates confirmed; discipline timetable not located",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.englandathletics.org/2027-championships/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "glamis-castle-festive-trail-runs|2026-12-06",
+      "name": "Glamis Castle Festive Trail Runs",
+      "sport": "Running",
+      "county": "Angus",
+      "source": "https://www.wilddeerevents.co.uk/e/glamis-castle-festive-trail-runs-2026-14682",
+      "starts": {
+        "1mi": {
+          "time": "09:15",
+          "note": "Family mile 09:15 in the organiser’s race-day schedule, taking precedence over 09:00 in the entry table. The programme labels times approximate."
+        },
+        "5mi": {
+          "time": "09:45",
+          "note": "Published race-day schedule: 09:45; approximate and subject to change."
+        },
+        "10mi": {
+          "time": "09:45",
+          "note": "Published race-day schedule: 09:45; approximate and subject to change."
+        }
+      },
+      "outcome": "Race-day programme takes precedence over entry-table default; published times provisional",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/glamis-castle-festive-trail-runs-2026-14682",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links; distance-specific schedule compared against entry categories"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14682?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "moors-valley-festive-trail-runs|2026-12-06",
+      "name": "Moors Valley Festive Trail Runs",
+      "sport": "Running",
+      "county": "Dorset",
+      "source": "https://www.wilddeerevents.co.uk/e/moors-valley-festive-trail-runs-2km-santa-run-5km-and-10km-14910",
+      "starts": {
+        "2K": {
+          "time": null,
+          "note": "2K start needs clarification: the entry category says 10:00, but the on-the-day section says starts from 10:30 without a separate 2K exception. Confirm the children’s fun-run start with the organiser."
+        },
+        "5K": {
+          "time": "10:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "10:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      },
+      "outcome": "5K/10K 10:30 found; 2K start conflicts",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/moors-valley-festive-trail-runs-2km-santa-run-5km-and-10km-14910",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links; distance-specific schedule compared against entry categories"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14910?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "sherwood-pines-festive-trail-runs|2026-12-13",
+      "name": "Sherwood Pines Festive Trail Runs",
+      "sport": "Running",
+      "county": "Nottinghamshire",
+      "source": "https://www.wilddeerevents.co.uk/e/sherwood-pines-festive-trail-runs-2026-14700",
+      "starts": {
+        "1mi": {
+          "time": "09:10",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "5K": {
+          "time": "09:35",
+          "note": "General runners 09:35; canicross 09:30. The specific race-day programme takes precedence over the entry table’s 09:30. Times are provisional."
+        },
+        "10K": {
+          "time": "09:35",
+          "note": "General runners 09:35; canicross 09:30. The specific race-day programme takes precedence over the entry table’s 09:30. Times are provisional."
+        }
+      },
+      "outcome": "Race-day programme takes precedence over entry-table default; published times provisional",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/sherwood-pines-festive-trail-runs-2026-14700",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links; distance-specific schedule compared against entry categories"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14700?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "gibside-wild-new-year-trail-runs-5-mile-2027|2027-01-03",
+      "name": "Gibside Wild New Year Trail Runs",
+      "sport": "Running",
+      "county": "Tyne and Wear",
+      "source": "https://www.wilddeerevents.co.uk/e/gibside-wild-new-year-trail-runs-15425",
+      "starts": {
+        "5mi": {
+          "time": "09:00",
+          "note": "Provisional 09:00: entry form and organiser guidance agree, but the organiser explicitly says the final start will be confirmed in event information."
+        },
+        "10mi": {
+          "time": "09:00",
+          "note": "Provisional 09:00: entry form and organiser guidance agree, but the organiser explicitly says the final start will be confirmed in event information."
+        }
+      },
+      "outcome": "Provisional published start found; final confirmation pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/gibside-wild-new-year-trail-runs-15425",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/15425?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "wild-deer-harewood-house-trail-runs|2027-01-09",
+      "name": "Harewood House New Year Trail Runs",
+      "sport": "Running",
+      "county": "West Yorkshire",
+      "source": "https://www.wilddeerevents.co.uk/e/yorkshire-new-year-trail-runs-2027-harewood-house-14484",
+      "starts": {
+        "5K": {
+          "time": "09:50",
+          "note": "General runners 09:50; canicross 09:45. The distance-specific programme takes precedence over the entry-table default. Final confirmation follows in event emails."
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "General runners 10:00; canicross 09:55. The distance-specific programme takes precedence over the entry-table default. Final confirmation follows in event emails."
+        },
+        "HM": {
+          "time": "10:30",
+          "note": "General runners 10:30; canicross 10:25. The distance-specific programme takes precedence over the entry-table default. Final confirmation follows in event emails."
+        },
+        "Half": {
+          "time": "10:30",
+          "note": "General runners 10:30; canicross 10:25. The distance-specific programme takes precedence over the entry-table default. Final confirmation follows in event emails."
+        }
+      },
+      "outcome": "Race-day programme takes precedence over entry-table default; published times provisional",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/yorkshire-new-year-trail-runs-2027-harewood-house-14484",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links; distance-specific schedule compared against entry categories"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14484?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "fountains-abbey-wild-trail-runs|2027-02-28",
+      "name": "Fountains Abbey Wild Trail Runs",
+      "sport": "Running",
+      "county": "North Yorkshire",
+      "source": "https://www.wilddeerevents.co.uk/e/fountains-abbey-wild-trail-runs-14487",
+      "starts": {
+        "5K": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "09:25",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "HM": {
+          "time": "09:20",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/fountains-abbey-wild-trail-runs-14487",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14487?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "high-lodge-wild-trail-runs|2027-04-11",
+      "name": "High Lodge Wild Trail Runs",
+      "sport": "Running",
+      "county": "Suffolk",
+      "source": "https://www.wilddeerevents.co.uk/e/high-lodge-wild-trail-runs-2027-5km-10km-and-new-half-marathon-14502",
+      "starts": {
+        "5K": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "09:15",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "HM": {
+          "time": "09:15",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/high-lodge-wild-trail-runs-2027-5km-10km-and-new-half-marathon-14502",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14502?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "bamburgh-castle-wild-10k-trail-run|2027-04-17",
+      "name": "Bamburgh Castle Wild 10K Trail Run",
+      "sport": "Running",
+      "county": "Northumberland",
+      "source": "https://www.wilddeerevents.co.uk/e/bamburgh-castle-wild-10km-trail-run-15391",
+      "starts": {
+        "10K": {
+          "time": "10:00",
+          "note": "Provisional 10:00: entry form and organiser guidance agree, but the organiser explicitly says the final start will be confirmed in event information."
+        }
+      },
+      "outcome": "Provisional published start found; final confirmation pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/bamburgh-castle-wild-10km-trail-run-15391",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/15391?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "the-derwent-60k-trail-ultra|2027-05-16",
+      "name": "The Derwent 60K Trail Ultra",
+      "sport": "Running",
+      "county": "County Durham",
+      "source": "https://www.wilddeerevents.co.uk/e/the-derwent-60km-trail-ultra-early-bird-prices-16255",
+      "starts": {
+        "60K": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/the-derwent-60km-trail-ultra-early-bird-prices-16255",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/16255?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "wentworth-castle-trail-runs|2027-06-16",
+      "name": "Wentworth Castle Gardens Trail Runs",
+      "sport": "Running",
+      "county": "South Yorkshire",
+      "source": "https://www.wilddeerevents.co.uk/e/wentworth-castle-gardens-trail-runs-5km-and-10km-14499",
+      "starts": {
+        "5K": {
+          "time": "19:10",
+          "note": "The organiser’s specific race-day schedule gives 19:10 for 5K, taking precedence over the entry table’s 19:00. The programme labels times approximate."
+        },
+        "10K": {
+          "time": "19:00",
+          "note": "Published race-day schedule: 19:00 for 10K; approximate and subject to change."
+        }
+      },
+      "outcome": "Race-day programme takes precedence over entry-table default; published times provisional",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/wentworth-castle-gardens-trail-runs-5km-and-10km-14499",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links; distance-specific schedule compared against entry categories"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14499?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "lambton-castle-summer-trail-runs|2027-08-15",
+      "name": "Lambton Castle Summer Trail Runs",
+      "sport": "Running",
+      "county": "County Durham",
+      "source": "https://www.wilddeerevents.co.uk/e/lambton-castle-summer-trail-runs-14571",
+      "starts": {
+        "5K": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "5mi": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "10mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "15mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/lambton-castle-summer-trail-runs-14571",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14571?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "raby-castle-trail-runs|2027-09-05",
+      "name": "Raby Castle Trail Runs",
+      "sport": "Running",
+      "county": "County Durham",
+      "source": "https://www.wilddeerevents.co.uk/e/raby-castle-trail-runs-14580",
+      "starts": {
+        "5K": {
+          "time": "10:10",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        },
+        "HM": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The organiser describes the programme as provisional/approximate."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.wilddeerevents.co.uk/e/raby-castle-trail-runs-14580",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/14580?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "outlaw-nottingham-sprint|2027-05-22",
+      "name": "Outlaw Nottingham Sprint",
+      "sport": "Triathlon",
+      "county": "Nottinghamshire",
+      "source": "https://outlawtriathlon.com/outlaw-nottingham/sprint",
+      "starts": {
+        "Sprint": {
+          "time": "07:30",
+          "note": "Published waves at 07:30, 10:00 and 12:30; use your assigned age-group/wave start."
+        }
+      },
+      "outcome": "Wave programme found; individual allocation pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://outlawtriathlon.com/outlaw-nottingham/sprint",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "outlaw-original-sprint|2027-07-24",
+      "name": "Outlaw Original Sprint",
+      "sport": "Triathlon",
+      "county": "Nottinghamshire",
+      "source": "https://outlawtriathlon.com/outlaw-original/outlaw-sprint",
+      "starts": {
+        "Sprint": {
+          "time": "07:30",
+          "note": "Published waves at 07:30, 10:00 and 12:30; use your assigned age-group/wave start."
+        }
+      },
+      "outcome": "Wave programme found; individual allocation pending",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://outlawtriathlon.com/outlaw-original/outlaw-sprint",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "suffolk-go-wild|2026-11-01",
+      "name": "Suffolk Go Wild",
+      "sport": "Cycling",
+      "county": "Suffolk",
+      "source": "https://tprevents.co.uk/product/go-wild/",
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "Ride start TBC: organiser gives village hours 07:00–16:00, which are not a rider start time. Check the rider welcome/final-instructions email."
+        },
+        "50mi": {
+          "time": null,
+          "note": "Ride start TBC: organiser gives village hours 07:00–16:00, which are not a rider start time. Check the rider welcome/final-instructions email."
+        }
+      },
+      "outcome": "Village hours known; rider start not located",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://tprevents.co.uk/product/go-wild/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.cyclinguk.org/event/rspb-suffolk-go-wild-gravel",
+          "checked": "2026-10-21",
+          "scope": "Current listing inspected; no reliable distance-specific start located"
+        }
+      ]
+    },
+    {
+      "key": "tour-de-broads-winter-series|2026-11-29",
+      "name": "Tour de Broads Winter Series",
+      "sport": "Cycling",
+      "county": "Norfolk",
+      "source": "https://tprevents.co.uk/product/winter-series/",
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        },
+        "50mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        }
+      },
+      "outcome": "Village hours known; older 2025 start rejected",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://tprevents.co.uk/product/winter-series/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://tprevents.co.uk/tour-de-broads-winter-series/",
+          "checked": "2026-10-21",
+          "scope": "Older route article explicitly describes 2025; 09:30 is not 2026 evidence"
+        }
+      ]
+    },
+    {
+      "key": "tour-de-broads-winter-series|2026-12-13",
+      "name": "Tour de Broads Winter Series",
+      "sport": "Cycling",
+      "county": "Norfolk",
+      "source": "https://tprevents.co.uk/product/winter-series/",
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        },
+        "50mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        }
+      },
+      "outcome": "Village hours known; older 2025 start rejected",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://tprevents.co.uk/product/winter-series/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://tprevents.co.uk/tour-de-broads-winter-series/",
+          "checked": "2026-10-21",
+          "scope": "Older route article explicitly describes 2025; 09:30 is not 2026 evidence"
+        }
+      ]
+    },
+    {
+      "key": "tour-de-broads-winter-series|2026-12-27",
+      "name": "Tour de Broads Winter Series",
+      "sport": "Cycling",
+      "county": "Norfolk",
+      "source": "https://tprevents.co.uk/product/winter-series/",
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        },
+        "50mi": {
+          "time": null,
+          "note": "Ride start TBC: current 2026 page gives event-village hours 09:00–15:00. The separate 09:30 route article describes 2025 dates, so that clock has not been copied to 2026."
+        }
+      },
+      "outcome": "Village hours known; older 2025 start rejected",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://tprevents.co.uk/product/winter-series/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://tprevents.co.uk/tour-de-broads-winter-series/",
+          "checked": "2026-10-21",
+          "scope": "Older route article explicitly describes 2025; 09:30 is not 2026 evidence"
+        }
+      ]
+    },
+    {
+      "key": "far-atw-grafham-triathlon|2027-09-25",
+      "name": "ATW Grafham Triathlon",
+      "sport": "Triathlon",
+      "county": "Cambridgeshire",
+      "source": "https://www.atwevents.co.uk/e/atw-grafham-triathlon-8879",
+      "starts": {
+        "Sprint": {
+          "time": "08:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Standard": {
+          "time": "08:15",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.atwevents.co.uk/e/atw-grafham-triathlon-8879",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/8879?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "atw-grafman-middle-distance-triathlon|2027-06-06",
+      "name": "ATW Grafman Middle Distance Triathlon",
+      "sport": "Triathlon",
+      "county": "Cambridgeshire",
+      "source": "https://www.atwevents.co.uk/e/atw-grafman-middle-distance-triathlon-8919",
+      "starts": {
+        "Middle": {
+          "time": "07:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.atwevents.co.uk/e/atw-grafman-middle-distance-triathlon-8919",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/8919?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "far-atw-oundle-triathlon|2027-08-15",
+      "name": "ATW Oundle Triathlon",
+      "sport": "Triathlon",
+      "county": "Northamptonshire",
+      "source": "https://www.atwevents.co.uk/e/atw-oundle-triathlon-9004",
+      "starts": {
+        "Super Sprint": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Sprint": {
+          "time": "07:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.atwevents.co.uk/e/atw-oundle-triathlon-9004",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/9004?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "far-atw-oundle-childrens-triathlon|2027-08-15",
+      "name": "ATW Oundle Childrens Triathlon",
+      "sport": "Triathlon",
+      "county": "Northamptonshire",
+      "source": "https://www.atwevents.co.uk/e/atw-oundle-children-s-triathlon-9006",
+      "starts": {
+        "Tristart": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Tristar 1": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Tristar 2": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Tristar 3": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        },
+        "Youth": {
+          "time": "13:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. Individual wave allocation may follow."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.atwevents.co.uk/e/atw-oundle-children-s-triathlon-9006",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/9006?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "atw-debden-5k-10k-2027|2027-03-14",
+      "name": "ATW Debden 10K and 5K",
+      "sport": "Running",
+      "county": "Essex",
+      "source": "https://www.atwevents.co.uk/e/atw-debden-10k-and-5k-10400",
+      "starts": {
+        "5K": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.atwevents.co.uk/e/atw-debden-10k-and-5k-10400",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/10400?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "ea-runevents-atw-remembrance-runs-saffron-walden|2026-11-07",
+      "name": "ATW Remembrance Runs",
+      "sport": "Running",
+      "county": "Essex",
+      "source": "https://www.atwevents.co.uk/e/atw-remembrance-runs-9066",
+      "starts": {
+        "1mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "5K": {
+          "time": "10:45",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "10K": {
+          "time": "10:45",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "HM": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        },
+        "Half": {
+          "time": "10:00",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.atwevents.co.uk/e/atw-remembrance-runs-9066",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/9066?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "essex-20|2027-03-14",
+      "name": "Essex 20",
+      "sport": "Running",
+      "county": "Essex",
+      "source": "https://www.atwevents.co.uk/e/essex-20-8956",
+      "starts": {
+        "20mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.atwevents.co.uk/e/essex-20-8956",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/8956?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        }
+      ]
+    },
+    {
+      "key": "cambridge-cambourne-10k-and-fun-run|2027-04-11",
+      "name": "Cambridge Cambourne 10K and Fun Run",
+      "sport": "Running",
+      "county": "Cambridgeshire",
+      "source": "https://www.atwevents.co.uk/e/cambridge-cambourne-10k-and-fun-run-8935",
+      "starts": {
+        "5K": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The linked race pack is for 2026, so its 09:35 fun-run start is not applied to 2027."
+        },
+        "10K": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The linked race pack is for 2026, so its 09:35 fun-run start is not applied to 2027."
+        },
+        "1mi": {
+          "time": "09:30",
+          "note": "Published start in the organiser’s entry form; follow any later race-day instructions. The linked race pack is for 2026, so its 09:35 fun-run start is not applied to 2027."
+        }
+      },
+      "outcome": "Published race starts found",
+      "needsReview": false,
+      "checks": [
+        {
+          "url": "https://www.atwevents.co.uk/e/cambridge-cambourne-10k-and-fun-run-8935",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.clubtrac.co.uk/api/v0/occasions/8935?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+          "checked": "2026-10-21",
+          "scope": "Public race categories used by the organiser’s entry form; exact race and date matched"
+        },
+        {
+          "url": "https://drive.google.com/file/d/1Uv4Kqv2wqg1hwlE1AGMpx0xa4HB9IRjT/view",
+          "checked": "2026-10-21",
+          "scope": "Downloaded nine-page pack; cover explicitly 12 April 2026, not 2027"
+        }
+      ]
+    },
+    {
+      "key": "wa-f0652b6bc69f7151|2027-07-31",
+      "name": "Novuna UK Athletics Championships",
+      "sport": "Athletics",
+      "county": "West Midlands",
+      "source": "https://www.britishathletics.org.uk/events/2027-novuna-uk-athletics-championships/",
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "Championship dates are listed by the governing body. A discipline/session start timetable was not located in the checked 2027 fixture material."
+        }
+      },
+      "outcome": "Dates confirmed; discipline timetable not located",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.britishathletics.org.uk/events/2027-novuna-uk-athletics-championships/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "great-north-swim|2027-06-12",
+      "name": "Great North Swim",
+      "sport": "Swimming",
+      "county": "Cumbria",
+      "source": "https://greatswim.org/great-north-swim/",
+      "starts": {
+        "2mi": {
+          "time": "09:30",
+          "note": "Published organiser timetable is subject to change. Attend the wave selected on your booking."
+        },
+        "1mi": {
+          "time": "09:30",
+          "note": "Waves at 09:30, 10:00, 11:00, 12:00 and 13:00. Published organiser timetable is subject to change. Attend the wave selected on your booking."
+        },
+        "0.5mi": {
+          "time": null,
+          "note": "Saturday general half-mile is listed at 14:30. Saturday also shows a 14:00 quiet wave, while the explanatory paragraph places the quiet wave on Sunday. Confirm the booked wave; no single earliest start is asserted."
+        },
+        "250m": {
+          "time": "15:00",
+          "note": "Published organiser timetable is subject to change. Attend the wave selected on your booking."
+        }
+      },
+      "outcome": "General wave 14:30 found; quiet-wave day conflicts",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://greatswim.org/great-north-swim/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.letsdothis.com/gb/o/26391/checkout/ticket?preferred=true&eventId=250141&occurrenceId=21111177161",
+          "checked": "2026-10-21",
+          "scope": "Public organiser-linked booking page fetched; no usable wave schedule in returned content"
+        }
+      ]
+    },
+    {
+      "key": "swim-england-east-region-long-course-championships-norwich|2027-05-01",
+      "name": "Swim England East Region Long Course Championships – Norwich",
+      "sport": "Swimming",
+      "county": "Norfolk",
+      "source": "https://www.eastswimming.org/event/regional-long-course-championships-5/",
+      "starts": {
+        "Pool meet": {
+          "time": null,
+          "note": "Regional calendar confirms 1–3 May 2027 at UEA Sportspark. Session start times were not located on the checked calendar page."
+        }
+      },
+      "outcome": "Dates confirmed; session timetable not located",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.eastswimming.org/event/regional-long-course-championships-5/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        }
+      ]
+    },
+    {
+      "key": "swim-england-national-winter-championships|2026-12-10",
+      "name": "Swim England National Winter Championships",
+      "sport": "Swimming",
+      "county": "South Yorkshire",
+      "source": "https://www.eastswimming.org/event/swimming-national-winter-championships-25m/",
+      "starts": {
+        "Pool meet": {
+          "time": "09:00",
+          "note": "Morning heats begin at 09:00 on 10–13 December. Slower distance heats and finals are explicitly TBC in the official schedule; individual races depend on the session programme."
+        }
+      },
+      "outcome": "Morning heats found; later sessions explicitly TBC",
+      "needsReview": true,
+      "checks": [
+        {
+          "url": "https://www.eastswimming.org/event/swimming-national-winter-championships-25m/",
+          "checked": "2026-10-21",
+          "scope": "Edition page, programme, FAQs and available links"
+        },
+        {
+          "url": "https://www.swimming.org/library/documents/7707/download",
+          "checked": "2026-10-21",
+          "scope": "Downloaded two-page 2026 schedule; first page visually checked. 09:00 heats each day; later sessions explicitly TBC."
+        }
+      ]
+    }
+  ],
+  "entryCategoryEvidence": [
+    {
+      "id": "9066",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/9066?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:03:10.166Z",
+      "name": "ATW Remembrance Runs",
+      "categories": [
+        {
+          "id": 63440,
+          "name": "Family Mile",
+          "date": "07/11/2026, 09:30",
+          "hidden": false
+        },
+        {
+          "id": 63442,
+          "name": "Half Marathon",
+          "date": "07/11/2026, 10:00",
+          "hidden": false
+        },
+        {
+          "id": 63443,
+          "name": "10K",
+          "date": "07/11/2026, 10:45",
+          "hidden": false
+        },
+        {
+          "id": 63444,
+          "name": "5K",
+          "date": "07/11/2026, 10:45",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14580",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14580?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:59.240Z",
+      "name": "RABY CASTLE TRAIL RUNS",
+      "categories": [
+        {
+          "id": 83076,
+          "name": "10KM TRAIL RUN ",
+          "date": "05/09/2027, 10:00",
+          "hidden": false
+        },
+        {
+          "id": 83077,
+          "name": "HALF MARATHON TRAIL RUN",
+          "date": "05/09/2027, 10:00",
+          "hidden": false
+        },
+        {
+          "id": 83075,
+          "name": "5KM TRAIL RUN ",
+          "date": "05/09/2027, 10:10",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "8919",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/8919?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:03:04.108Z",
+      "name": "ATW Grafman Middle Distance Triathlon",
+      "categories": [
+        {
+          "id": 76741,
+          "name": "Middle Distance Triathlon",
+          "date": "06/06/2027, 07:00",
+          "hidden": false
+        },
+        {
+          "id": 76742,
+          "name": "Middle Distance Aquabike",
+          "date": "06/06/2027, 07:00",
+          "hidden": false
+        },
+        {
+          "id": 76743,
+          "name": "Middle Distance Triathlon Relay",
+          "date": "06/06/2027, 07:00",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "8935",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/8935?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:03:10.364Z",
+      "name": "Cambridge Cambourne 10k & Fun Run ",
+      "categories": [
+        {
+          "id": 76806,
+          "name": "Cambridge & Cambourne 10K",
+          "date": "11/04/2027, 09:30",
+          "hidden": false
+        },
+        {
+          "id": 76807,
+          "name": "Cambridge & Cambourne 5K",
+          "date": "11/04/2027, 09:30",
+          "hidden": false
+        },
+        {
+          "id": 76808,
+          "name": "Fun Run",
+          "date": "11/04/2027, 09:30",
+          "hidden": false
+        },
+        {
+          "id": 76809,
+          "name": "Fun Run (Accompanying Adult)",
+          "date": "11/04/2027, 09:30",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14571",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14571?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:59.544Z",
+      "name": "LAMBTON CASTLE SUMMER TRAIL RUNS ",
+      "categories": [
+        {
+          "id": 78593,
+          "name": "10 MILE TRAIL RUN ",
+          "date": "15/08/2027, 09:30",
+          "hidden": false
+        },
+        {
+          "id": 78594,
+          "name": "15 MILE TRAIL RUN ",
+          "date": "15/08/2027, 09:30",
+          "hidden": false
+        },
+        {
+          "id": 78592,
+          "name": "5 MILE TRAIL RUN ",
+          "date": "15/08/2027, 10:00",
+          "hidden": false
+        },
+        {
+          "id": 78595,
+          "name": "5KM TRAIL RUN ",
+          "date": "15/08/2027, 10:00",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "9004",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/9004?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:03:04.168Z",
+      "name": "ATW Oundle Triathlon",
+      "categories": [
+        {
+          "id": 82990,
+          "name": "Sprint Distance Triathlon Relay",
+          "date": "15/08/2027, 07:30",
+          "hidden": false
+        },
+        {
+          "id": 82991,
+          "name": "Sprint Distance Aquabike",
+          "date": "15/08/2027, 07:30",
+          "hidden": false
+        },
+        {
+          "id": 82992,
+          "name": "Sprint Distance Triathlon",
+          "date": "15/08/2027, 07:30",
+          "hidden": false
+        },
+        {
+          "id": 82993,
+          "name": "Super Sprint Distance Triathlon",
+          "date": "15/08/2027, 07:30",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "16255",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/16255?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:53.362Z",
+      "name": "THE DERWENT - 60KM TRAIL ULTRA - EARLY BIRD PRICES!",
+      "categories": [
+        {
+          "id": 84056,
+          "name": "60km Ultra",
+          "date": "16/05/2027, 07:30",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14487",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14487?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:53.124Z",
+      "name": "FOUNTAINS ABBEY WILD TRAIL RUNS ",
+      "categories": [
+        {
+          "id": 66920,
+          "name": "HALF MARATHON",
+          "date": "28/02/2027, 09:20",
+          "hidden": false
+        },
+        {
+          "id": 66919,
+          "name": "10KM",
+          "date": "28/02/2027, 09:25",
+          "hidden": false
+        },
+        {
+          "id": 66918,
+          "name": "5km",
+          "date": "28/02/2027, 09:30",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "8956",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/8956?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:03:09.988Z",
+      "name": "Essex 20",
+      "categories": [
+        {
+          "id": 75346,
+          "name": "Essex 20",
+          "date": "14/03/2027, 09:30",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "15425",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/15425?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:47.597Z",
+      "name": "GIBSIDE WILD NEW YEAR TRAIL RUNS ",
+      "categories": [
+        {
+          "id": 71469,
+          "name": "5 MILE ",
+          "date": "03/01/2027, 09:00",
+          "hidden": false
+        },
+        {
+          "id": 71470,
+          "name": "10 MILE ",
+          "date": "03/01/2027, 09:00",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14484",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14484?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:47.876Z",
+      "name": "YORKSHIRE NEW YEAR TRAIL RUNS  2027 - HAREWOOD HOUSE",
+      "categories": [
+        {
+          "id": 66461,
+          "name": "5KM TRAIL RUN",
+          "date": "09/01/2027, 09:45",
+          "hidden": false
+        },
+        {
+          "id": 66462,
+          "name": "10KM TRAIL RUN",
+          "date": "09/01/2027, 09:55",
+          "hidden": false
+        },
+        {
+          "id": 66463,
+          "name": "HALF MARATHON TRAIL RUN",
+          "date": "09/01/2027, 10:25",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14569",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14569?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:42.096Z",
+      "name": "THE BIG LIME TRIATHLONS - HARTLEPOOL MARINA ",
+      "categories": [
+        {
+          "id": 78303,
+          "name": "STANDARD TRIATHLON",
+          "date": "08/08/2027, 07:00",
+          "hidden": false
+        },
+        {
+          "id": 78304,
+          "name": "STANDARD AQUABIKE",
+          "date": "08/08/2027, 07:00",
+          "hidden": false
+        },
+        {
+          "id": 78305,
+          "name": "STANDARD TRIATHLON RELAY",
+          "date": "08/08/2027, 07:00",
+          "hidden": false
+        },
+        {
+          "id": 78298,
+          "name": "SPRINT TRIATHLON",
+          "date": "08/08/2027, 07:45",
+          "hidden": false
+        },
+        {
+          "id": 78300,
+          "name": "SPRINT AQUABIKE",
+          "date": "08/08/2027, 07:45",
+          "hidden": false
+        },
+        {
+          "id": 78302,
+          "name": "SPRINT TRIATHLON RELAY",
+          "date": "08/08/2027, 07:45",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "15391",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/15391?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:53.280Z",
+      "name": "BAMBURGH CASTLE WILD 10KM TRAIL RUN",
+      "categories": [
+        {
+          "id": 71007,
+          "name": "10KM",
+          "date": "17/04/2027, 10:00",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "10400",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/10400?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:03:04.440Z",
+      "name": "ATW Debden 10k and 5k",
+      "categories": [
+        {
+          "id": 75349,
+          "name": "Debden 10k",
+          "date": "14/03/2027, 10:00",
+          "hidden": false
+        },
+        {
+          "id": 75350,
+          "name": "Debden 5k",
+          "date": "14/03/2027, 10:00",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14910",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14910?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:47.956Z",
+      "name": "MOORS VALLEY FESTIVE TRAIL RUNS - 2km Santa Run, 5km & 10km ",
+      "categories": [
+        {
+          "id": 67009,
+          "name": "FESTIVE 2KM FUN RUN",
+          "date": "06/12/2026, 10:00",
+          "hidden": false
+        },
+        {
+          "id": 67010,
+          "name": "FESTIVE 5KM TRAIL RUN",
+          "date": "06/12/2026, 10:30",
+          "hidden": false
+        },
+        {
+          "id": 67011,
+          "name": "FESTIVE 10KM TRAIL RUN",
+          "date": "06/12/2026, 10:30",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14499",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14499?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:59.740Z",
+      "name": "WENTWORTH CASTLE GARDENS TRAIL RUNS - 5KM & 10KM ",
+      "categories": [
+        {
+          "id": 74473,
+          "name": "5km",
+          "date": "16/06/2027, 19:00",
+          "hidden": false
+        },
+        {
+          "id": 74474,
+          "name": "10km",
+          "date": "16/06/2027, 19:00",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14502",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14502?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:53.255Z",
+      "name": "HIGH LODGE WILD TRAIL RUNS 2027 - 5km, 10km & NEW HALF MARATHON.",
+      "categories": [
+        {
+          "id": 72153,
+          "name": "Half Marathon Trail Run",
+          "date": "11/04/2027, 09:15",
+          "hidden": false
+        },
+        {
+          "id": 72154,
+          "name": "10km Trail Run",
+          "date": "11/04/2027, 09:15",
+          "hidden": false
+        },
+        {
+          "id": 72156,
+          "name": "5km Trail Run",
+          "date": "11/04/2027, 09:30",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "15884",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/15884?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:36.823Z",
+      "name": "THE WILD SCOTTISH CYCLE - SCONE PALACE",
+      "categories": [
+        {
+          "id": 78312,
+          "name": "50KM CYCLE SPORTIVE",
+          "date": "03/04/2027, 07:30",
+          "hidden": false
+        },
+        {
+          "id": 78313,
+          "name": "100KM CYCLE SPORTIVE",
+          "date": "03/04/2027, 07:30",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14698",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14698?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:36.890Z",
+      "name": "SHERWOOD PINES FESTIVE DUATHLONS 2026",
+      "categories": [
+        {
+          "id": 64909,
+          "name": "Festive Sprint Duathlon",
+          "date": "13/12/2026, 10:10",
+          "hidden": false
+        },
+        {
+          "id": 64910,
+          "name": "Festive Standard Duathlon",
+          "date": "13/12/2026, 10:10",
+          "hidden": false
+        },
+        {
+          "id": 64911,
+          "name": "Festive Sprint Duathlon Relay",
+          "date": "13/12/2026, 10:10",
+          "hidden": false
+        },
+        {
+          "id": 64912,
+          "name": "Festive Standard Duathlon Relay",
+          "date": "13/12/2026, 10:10",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14540",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14540?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:42.527Z",
+      "name": "DERWENT RESERVOIR TRIATHLONS & DUATHLONS",
+      "categories": [
+        {
+          "id": 76296,
+          "name": "SPRINT TRIATHLON",
+          "date": "04/07/2027, 08:00",
+          "hidden": false
+        },
+        {
+          "id": 76297,
+          "name": "STANDARD TRIATHLON",
+          "date": "04/07/2027, 08:00",
+          "hidden": false
+        },
+        {
+          "id": 76298,
+          "name": "SPRINT AQUABIKE",
+          "date": "04/07/2027, 08:00",
+          "hidden": false
+        },
+        {
+          "id": 76299,
+          "name": "STANDARD AQUABIKE",
+          "date": "04/07/2027, 08:00",
+          "hidden": false
+        },
+        {
+          "id": 76300,
+          "name": "SPRINT TRIATHLON RELAY",
+          "date": "04/07/2027, 08:00",
+          "hidden": false
+        },
+        {
+          "id": 76301,
+          "name": "STANDARD TRIATHLON RELAY",
+          "date": "04/07/2027, 08:00",
+          "hidden": false
+        },
+        {
+          "id": 78308,
+          "name": "SPRINT DUATHLON",
+          "date": "04/07/2027, 08:00",
+          "hidden": false
+        },
+        {
+          "id": 78309,
+          "name": "STANDARD DUATHLON",
+          "date": "04/07/2027, 08:00",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14515",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14515?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:37.144Z",
+      "name": "ESSEX OPEN WATER SWIMS 2027",
+      "categories": [
+        {
+          "id": 72589,
+          "name": "750M OPEN WATER SWIM ",
+          "date": "15/05/2027, 09:00",
+          "hidden": false
+        },
+        {
+          "id": 72590,
+          "name": "1500M OPEN WATER SWIM",
+          "date": "15/05/2027, 09:00 - 17:22",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "9006",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/9006?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:03:04.588Z",
+      "name": "ATW Oundle Children’s Triathlon",
+      "categories": [
+        {
+          "id": 82995,
+          "name": "Tristar2 Tri",
+          "date": "15/08/2027, 13:00",
+          "hidden": false
+        },
+        {
+          "id": 82996,
+          "name": "Tristar3 Tri",
+          "date": "15/08/2027, 13:00",
+          "hidden": false
+        },
+        {
+          "id": 82997,
+          "name": "Tristart Tri",
+          "date": "15/08/2027, 13:00",
+          "hidden": false
+        },
+        {
+          "id": 82998,
+          "name": "Tristar1 Tri",
+          "date": "15/08/2027, 13:00",
+          "hidden": false
+        },
+        {
+          "id": 82999,
+          "name": "Youth Tri",
+          "date": "15/08/2027, 13:00",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14700",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14700?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:47.227Z",
+      "name": "SHERWOOD PINES FESTIVE TRAIL RUNS 2026",
+      "categories": [
+        {
+          "id": 64913,
+          "name": "FESTIVE FAMILY 1 MILE RUN",
+          "date": "13/12/2026, 09:10",
+          "hidden": false
+        },
+        {
+          "id": 64914,
+          "name": "FESTIVE 5KM TRAIL RUN",
+          "date": "13/12/2026, 09:30",
+          "hidden": false
+        },
+        {
+          "id": 64915,
+          "name": "FESTIVE 10KM TRAIL RUN",
+          "date": "13/12/2026, 09:30",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14682",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14682?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:42.348Z",
+      "name": "GLAMIS CASTLE FESTIVE TRAIL RUNS 2026",
+      "categories": [
+        {
+          "id": 64699,
+          "name": "FESTIVE FAMILY 1 MILE",
+          "date": "06/12/2026, 09:00",
+          "hidden": false
+        },
+        {
+          "id": 64697,
+          "name": "FESTIVE 5 MILE TRAIL RUN",
+          "date": "06/12/2026, 09:45",
+          "hidden": false
+        },
+        {
+          "id": 64698,
+          "name": "FESTIVE 10 MILE TRAIL RUN",
+          "date": "06/12/2026, 09:45",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14533",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14533?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:37.171Z",
+      "name": "SWIM DERWENT ",
+      "categories": [
+        {
+          "id": 76368,
+          "name": "400M SWIM ",
+          "date": "04/07/2027, 09:00",
+          "hidden": false
+        },
+        {
+          "id": 76369,
+          "name": "800M SWIM ",
+          "date": "04/07/2027, 09:00",
+          "hidden": false
+        },
+        {
+          "id": 76370,
+          "name": "1 MILE SWIM ",
+          "date": "04/07/2027, 09:00",
+          "hidden": false
+        },
+        {
+          "id": 76371,
+          "name": "2 MILE SWIM ",
+          "date": "04/07/2027, 09:00",
+          "hidden": false
+        },
+        {
+          "id": 76373,
+          "name": "3 MILE SWIM ",
+          "date": "04/07/2027, 09:00",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "8879",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/8879?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:59.652Z",
+      "name": "ATW Grafham Triathlon",
+      "categories": [
+        {
+          "id": 82297,
+          "name": "Sprint Triathlon",
+          "date": "25/09/2027, 08:00",
+          "hidden": false
+        },
+        {
+          "id": 82298,
+          "name": "Standard Triathlon Relay",
+          "date": "25/09/2027, 08:15",
+          "hidden": false
+        },
+        {
+          "id": 82299,
+          "name": "Standard Triathlon",
+          "date": "25/09/2027, 08:15",
+          "hidden": false
+        },
+        {
+          "id": 82300,
+          "name": "Standard Aquabike",
+          "date": "25/09/2027, 08:15",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "id": "14528",
+      "url": "https://www.clubtrac.co.uk/api/v0/occasions/14528?ref=https%3A%2F%2Fwww.atwevents.co.uk&iframe=false",
+      "checkedAt": "2026-10-21T08:02:42.167Z",
+      "name": "WINDERMERE TRIATHLONS & MULTISPORT WEEKEND",
+      "categories": [
+        {
+          "id": 75580,
+          "name": "NOVICE TRIATHLON",
+          "date": "10/07/2027, 06:30",
+          "hidden": false
+        },
+        {
+          "id": 75581,
+          "name": "SPRINT TRIATHLON",
+          "date": "10/07/2027, 06:30",
+          "hidden": false
+        },
+        {
+          "id": 75582,
+          "name": "SPRINT DUATHLON",
+          "date": "10/07/2027, 06:30",
+          "hidden": false
+        },
+        {
+          "id": 75583,
+          "name": "SPRINT AQUATHLON",
+          "date": "10/07/2027, 06:30",
+          "hidden": false
+        },
+        {
+          "id": 75587,
+          "name": "SPRINT AQUABIKE",
+          "date": "10/07/2027, 06:30",
+          "hidden": false
+        },
+        {
+          "id": 75584,
+          "name": "STANDARD TRIATHLON",
+          "date": "11/07/2027, 06:30",
+          "hidden": false
+        },
+        {
+          "id": 75585,
+          "name": "STANDARD DUATHLON",
+          "date": "11/07/2027, 06:30",
+          "hidden": false
+        },
+        {
+          "id": 75586,
+          "name": "STANDARD AQUABIKE",
+          "date": "11/07/2027, 06:30",
+          "hidden": false
+        },
+        {
+          "id": 75588,
+          "name": "STANDARD AQUATHLON",
+          "date": "11/07/2027, 06:30",
+          "hidden": false
+        },
+        {
+          "id": 75589,
+          "name": "STANDARD TRIATHLON RELAY",
+          "date": "11/07/2027, 06:30",
+          "hidden": false
+        }
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "url": "https://www.britishtriathlon.org/events/atw-grafham-triathlon_17511",
+      "checkedAt": "2026-10-21T07:57:37.432Z",
+      "captureSha256": "0d5aadf2206d4a0cb6754e512f0b4ede8daab14960860b0dca28a27459d35874"
+    },
+    {
+      "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-legend",
+      "checkedAt": "2026-10-21T08:04:31.338Z",
+      "captureSha256": "441378be5589e53554411f7c82f1eaf21b9cc8475393883a3040bc243ecc9b35"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-10k-2027-07-17-1000",
+      "checkedAt": "2026-10-21T08:04:08.826Z",
+      "captureSha256": "755fc1dad9aadf4aee52e8e33d55a1e7608878393f31af623d2e9c1f99003d57"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/essex-20-8956",
+      "checkedAt": "2026-10-21T07:54:57.101Z",
+      "captureSha256": "60f35e0d5d7a9b52a08984b7698af04515680edb0ff65409bed2233c39e4536b"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/warwickshire-triathlon",
+      "checkedAt": "2026-10-21T07:53:57.627Z",
+      "captureSha256": "e56e9da297ee50c93098f2737991e58ec6adf6ea8f5b47be216af34112367aee"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/moors-valley-festive-trail-runs-2km-santa-run-5km-and-10km-14910",
+      "checkedAt": "2026-10-21T07:56:59.399Z",
+      "captureSha256": "b199f05cf01352ead37ee1121d589f6a6cc3ed8593e8219acecfe22d7a843900"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/north-west-triathlon",
+      "checkedAt": "2026-10-21T07:53:57.577Z",
+      "captureSha256": "53b97c4290ceb7caed976be919b284dda2cc810c314ebe39cba639467a46b0ab"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-3k-2027-05-09-1100",
+      "checkedAt": "2026-10-21T08:03:02.367Z",
+      "captureSha256": "232d9755163782bd06288799b6e343161ed410159174f25f1e6bc2b7ebcae8f5"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/bamburgh-castle-wild-10km-trail-run-15391",
+      "checkedAt": "2026-10-21T07:54:36.968Z",
+      "captureSha256": "fc582c6f11057e4ba42b39888aee2284f3822613f65a87c25a758aa3d40095f1"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14533?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:04.226Z",
+      "captureSha256": "93033e6b02def856327bc26e8a82367fca656bd9ce1450940213979ffc6ac9cc"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/sherwood-pines-festive-trail-runs-2026-14700",
+      "checkedAt": "2026-10-21T07:54:26.616Z",
+      "captureSha256": "4fbdde3f74ab5f64c8f12549e67c0f64851e1aeaa0e22cb1250f76003a74fe39"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-3k-2027-07-18-1030",
+      "checkedAt": "2026-10-21T08:03:06.098Z",
+      "captureSha256": "0939778f3f481c3b580383aa847161b9f9876089eaf7992932f85dc2c6b09116"
+    },
+    {
+      "url": "https://curlysathletes.co.uk/woodhall-spa-triathlon",
+      "checkedAt": "2026-10-21T07:54:09.902Z",
+      "captureSha256": "34fe97cb6f92c75ebba616e85c8c44c94ab4f5f125a88daadb026980a768961e"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14571?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:28.227Z",
+      "captureSha256": "17521df5cd3ae9bb988288aa66d2731b0571534b936946d0bdc3142ac9587185"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "checkedAt": "2026-10-21T08:01:34.162Z",
+      "captureSha256": "b13247f3c8df17d6ca66d1f1d2494ca740ff4251f3f3f0b78142ceb94c5b632d"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/the-big-lime-triathlons-hartlepool-marina-14569",
+      "checkedAt": "2026-10-21T07:56:47.412Z",
+      "captureSha256": "4e084614a2355f4bd6b9074a01340e85da7fe87c585f0c3532292a0ba484d85b"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14528?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:09.881Z",
+      "captureSha256": "a5cb2ee83454d068c26fa4d9ec76e9414f64e70a7997eb5d2b2ddeaa50414bbc"
+    },
+    {
+      "url": "https://www.letsdothis.com/gb/o/26391/checkout/ticket?preferred=true&eventId=250141&occurrenceId=21111177161",
+      "checkedAt": "2026-10-21T08:04:33.468Z",
+      "captureSha256": "886bbb83d92bfdcc9cda408874f66020452c97042323510932844f1bb9bab0df"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-oundle-children-s-triathlon-9006",
+      "checkedAt": "2026-10-21T07:54:49.868Z",
+      "captureSha256": "f0c375f65ab5765d1cb071d8351df63a7ad86150e46b3c4b1ff656870af05f0b"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14580?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:28.305Z",
+      "captureSha256": "c42b30491760f6a59995f021f35376c3c3753057edd741402ef0241a2e15cbb9"
+    },
+    {
+      "url": "https://alwaysaimhighevents.com/events/slateman-triathlon",
+      "checkedAt": "2026-10-21T07:54:07.575Z",
+      "captureSha256": "e127187123578637dde66048bd700771341dea596780ae69c40f9cf09cf763c5"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/lambton-castle-summer-trail-runs-14571",
+      "checkedAt": "2026-10-21T07:54:37.045Z",
+      "captureSha256": "8383e469fe20a39d734ce0c66701bff9fa2ac5467ca270115dea552e5ce00b2c"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/sherwood-pines-festive-trail-runs-2026-14700",
+      "checkedAt": "2026-10-21T07:57:00.591Z",
+      "captureSha256": "4fbdde3f74ab5f64c8f12549e67c0f64851e1aeaa0e22cb1250f76003a74fe39"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "checkedAt": "2026-10-21T08:01:29.157Z",
+      "captureSha256": "d19d85d44b3b011cae96e8ea5732e42ce2f34af365b82316b97eb755baa13541"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14569?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:10.160Z",
+      "captureSha256": "df9fd9f5b250bd61a914ae17b02a18b446f84a641ec006c6a662440c45aea6a0"
+    },
+    {
+      "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-standard",
+      "checkedAt": "2026-10-21T08:04:26.772Z",
+      "captureSha256": "d98ddddf7eddcb1b844e471115ee2050c446600ca6a8e0c64e2cccaffb67b2a7"
+    },
+    {
+      "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-standard-duathlon",
+      "checkedAt": "2026-10-21T08:04:31.413Z",
+      "captureSha256": "6e7d030969a241d264eb19e69e0532f354b21d0ef256f5b6d16563ce5c9bb1c6"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/west-midlands-triathlon",
+      "checkedAt": "2026-10-21T07:54:03.706Z",
+      "captureSha256": "fab19ce54870c8bfc9e43ea55c55cd182429004bf46f68b33efc71c08a51329d"
+    },
+    {
+      "url": "https://outlawtriathlon.com/outlaw-original/outlaw-sprint",
+      "checkedAt": "2026-10-21T07:54:40.048Z",
+      "captureSha256": "87b173ea6df193633dd2b4faff3340547f2968e1bdb89995087e667323e0ada9"
+    },
+    {
+      "url": "https://www.eastswimming.org/event/regional-long-course-championships-5/",
+      "checkedAt": "2026-10-21T07:54:57.699Z",
+      "captureSha256": "114427f8422d0204560dd93648346b2b1fb31d91fd2522785ee4ef25b6117aa6"
+    },
+    {
+      "url": "https://tprevents.co.uk/product/winter-series/",
+      "checkedAt": "2026-10-21T07:54:41.891Z",
+      "captureSha256": "a0fbbefc403a6c2df855b3ad87e1e2560f4f6c4690770543f3ca6854e1d33d7d"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/derwent-reservoir-triathlons-and-duathlons-14540",
+      "checkedAt": "2026-10-21T07:56:48.149Z",
+      "captureSha256": "8f7487776d23c64c89f19d9ab92ff0ac530a42e91a6ca47161fa53fa5abfe677"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/raby-castle-trail-runs-14580",
+      "checkedAt": "2026-10-21T07:54:43.760Z",
+      "captureSha256": "800873281b7941b0f642df1d119e0b06650bab6a2e025bcc7a3e3fb4c1fb5d98"
+    },
+    {
+      "url": "https://www.britishathletics.org.uk/events/2027-novuna-uk-athletics-championships/",
+      "checkedAt": "2026-10-21T07:54:53.731Z",
+      "captureSha256": "f0e4110fc2d2ebe865f3ef7eb81b640e660f86eae2f68d2f903f72f503ee8d85"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-10421",
+      "checkedAt": "2026-10-21T08:02:56.971Z",
+      "captureSha256": "307009471b5a5eda45182425f9db89f25178e9ee9a5e158031e7c9776771ed18"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/the-derwent-60km-trail-ultra-early-bird-prices-16255",
+      "checkedAt": "2026-10-21T07:57:09.350Z",
+      "captureSha256": "3388980f8112d2ec94ab7b18e239a210f28fa2090927e571d4b21fead8ddadf8"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/the-wild-scottish-cycle-scone-palace-15884",
+      "checkedAt": "2026-10-21T07:54:09.507Z",
+      "captureSha256": "aca8bea183309a9b33ae8c843989581c83f77a00128cf722586d6a65e8ca139e"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/calendars/sport-events",
+      "checkedAt": "2026-10-21T07:57:34.740Z",
+      "captureSha256": "9e34c0ca8116e9a14581c1343d1bffb91208220b5108adf1013ae515b3c5bd93"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-5k-2027-07-17-1100",
+      "checkedAt": "2026-10-21T08:04:03.751Z",
+      "captureSha256": "115b65b4788d53fc6b4fc7fd50417a0a5feaa534ade08cee8171801940a06158"
+    },
+    {
+      "url": "https://www.trimaxevents.co.uk/nisv",
+      "checkedAt": "2026-10-21T07:54:10.322Z",
+      "captureSha256": "bb769bc0e7a618aeea10d08d5ebb35ceeeb2d403675d42f4d3ebbf5344e33329"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/widget/entry/9066?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:34.555Z",
+      "captureSha256": "288bfe7236099904f755efacd06820cbdd4b802572df8377771f6b8665881206"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/stratford-triathlon",
+      "checkedAt": "2026-10-21T07:53:51.260Z",
+      "captureSha256": "c5fef492ca0d3c52d233962b4d8432db256276a2883febbbe78bb07729adc7f1"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14499?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:28.170Z",
+      "captureSha256": "cf0791b6c8cda03f2aa72820392271a5ba9d3a1ac4911a5a370ae193c9ab0354"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/caldicot-triathlon",
+      "checkedAt": "2026-10-21T07:54:03.699Z",
+      "captureSha256": "46b8b347c0e6fef3fc8ffea1a8307f23221bf4791c496202ba885d7c788dc9fd"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-10k-2027-06-20-1000",
+      "checkedAt": "2026-10-21T08:03:06.287Z",
+      "captureSha256": "87f9a4c40ff097bc93d8f4a7ba484335d3bad8dd953e7003159b7a68d30aba81"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/essex-open-water-swims-2027-14515",
+      "checkedAt": "2026-10-21T07:54:17.342Z",
+      "captureSha256": "362615a8f00ce4bd14f4470c75ef23ecda5d2e5163354b29bb96084f233b3b22"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/fountains-abbey-wild-trail-runs-14487",
+      "checkedAt": "2026-10-21T07:54:30.937Z",
+      "captureSha256": "ba0db108b4a6dc73213d871347d6c8eed2540af98caf92dad36d6231e79cbbc8"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-debden-10k-and-5k-10400",
+      "checkedAt": "2026-10-21T07:54:50.005Z",
+      "captureSha256": "91c73a2805522e7ee024508f12c967641e13073e347c73a736a4c934a4d787c4"
+    },
+    {
+      "url": "https://outlawtriathlon.com/outlaw-nottingham/sprint",
+      "checkedAt": "2026-10-21T07:54:40.055Z",
+      "captureSha256": "9dc1a12f4ab3d38de7c7b32966021a353c40450eccedda386a156ca82efe0939"
+    },
+    {
+      "url": "https://www.britishtriathlon.org/events/oundle-triathlon_15359",
+      "checkedAt": "2026-10-21T07:57:37.400Z",
+      "captureSha256": "7ad7742f5eabbb44c3a26526bc8ed1fde8161c91a6fe250ab50ee842ee8e5b7d"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/cheshire-triathlon",
+      "checkedAt": "2026-10-21T07:53:51.294Z",
+      "captureSha256": "6c9d1a54596f2deb691714f343903a07a2ce0bfdf7313462bc6a8ce05ac72829"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/wentworth-castle-gardens-trail-runs-5km-and-10km-14499",
+      "checkedAt": "2026-10-21T07:57:19.687Z",
+      "captureSha256": "94935e58b02ef988a22b3827e16eab5b6c51d3dad0e8c8d2b600f449d68f0f09"
+    },
+    {
+      "url": "https://www.letsdothis.com/gb/e/newport-sprint-olympic-triathlon-2027-189321",
+      "checkedAt": "2026-10-21T08:04:33.653Z",
+      "captureSha256": "6a1d4457384202f1acc0532fc240965e7b413872563281435a42c5a31d796d1d"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/atw-remembrance-runs-9066",
+      "checkedAt": "2026-10-21T07:57:28.866Z",
+      "captureSha256": "68cc889bc7df1a917a803bf60c9702675bf57284732efc150ce934e15de97208"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-5k-2027-07-04-1100",
+      "checkedAt": "2026-10-21T08:04:04.598Z",
+      "captureSha256": "be20f45df92c74400cc11ffd67398747988a6d188d33efbdf7f90dfad8a4b61d"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/widget/entry/8919?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:31.319Z",
+      "captureSha256": "c2ed3a913a8f3afe8823f67bea48c3f27e561df90bbcece26ac105aabd23bb7c"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-grafman-middle-distance-triathlon-8919",
+      "checkedAt": "2026-10-21T07:54:44.325Z",
+      "captureSha256": "679e49943847bf4b9ed9566bd0e1fc7e0f0142ef954a33b7672dfa94af32cf96"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/fountains-abbey-wild-trail-runs-14487",
+      "checkedAt": "2026-10-21T07:57:09.017Z",
+      "captureSha256": "ba0db108b4a6dc73213d871347d6c8eed2540af98caf92dad36d6231e79cbbc8"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/york-triathlon",
+      "checkedAt": "2026-10-21T07:53:57.589Z",
+      "captureSha256": "0b33de3bcdea37f76ec0189f5024899de34a42f957dbdc0957f4c67c05f7233d"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/widget/entry/10400?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:31.194Z",
+      "captureSha256": "b9dacdb1373822301e943d5940ab5ae6898e469fadd0c093e7347bee1edc617d"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/shropshire-triathlon",
+      "checkedAt": "2026-10-21T07:53:51.693Z",
+      "captureSha256": "b8ae05a01f14b1740ffcfb4b577d9627d8fc0b121c67bc2d58c24d7395eb3fc5"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/gibside-wild-new-year-trail-runs-15425",
+      "checkedAt": "2026-10-21T07:56:59.677Z",
+      "captureSha256": "4332d053f12f0eea05d2c913409d3807b6548537b82b10540c3a3a600afb2830"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/atw-oundle-triathlon-9004",
+      "checkedAt": "2026-10-21T07:57:23.469Z",
+      "captureSha256": "6f397ece7152908496d83f9da83a721daa834431764b158982f54d48de387663"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/ellesmere-triathlon",
+      "checkedAt": "2026-10-21T07:53:57.604Z",
+      "captureSha256": "d1fc81d2f6048c3265794ba4fdc818b93114792b77f133c3b84cdf7723bef623"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "checkedAt": "2026-10-21T07:56:46.786Z",
+      "captureSha256": "ac613279382b040b8a12bfbeb0e7d39923da39f4d7338d018e4627f2666a280f"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "checkedAt": "2026-10-21T08:01:34.249Z",
+      "captureSha256": "925f253d80c0510e4b8f7d1f02ffe80fe5fd5f579b633420825c96f4ee58f582"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/15391?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:23.225Z",
+      "captureSha256": "cd1894002184e9b1e5e4d36f355393a9f4cf8bb10dfa4ec3e1a69f9e6f52e880"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/atw-debden-10k-and-5k-10400",
+      "checkedAt": "2026-10-21T07:57:29.060Z",
+      "captureSha256": "91c73a2805522e7ee024508f12c967641e13073e347c73a736a4c934a4d787c4"
+    },
+    {
+      "url": "https://www.englandathletics.org/2027-championships/",
+      "checkedAt": "2026-10-21T07:54:29.391Z",
+      "captureSha256": "105c6ba20daa8a656c27417682df33eb67a9d6c65920377b357db84ff930a4b2"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "checkedAt": "2026-10-21T08:01:28.793Z",
+      "captureSha256": "ea31316bc6142830c96f1881d12a2628dbac0aed9c0a3c25ad08710795a3f7e2"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "checkedAt": "2026-10-21T08:01:34.202Z",
+      "captureSha256": "e4ba2b4127314c56514963290a646c89dc612cecb1df9a24e8a18c211f48edc3"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14515?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:04.292Z",
+      "captureSha256": "3421a6fe3e0e7c2889354d70dee82f73092c4da546e42279a8e2d80ba3bc56e3"
+    },
+    {
+      "url": "https://cambridgeandcoleridge.org.uk/events/cambridge-cambourne-10k-fun-run/",
+      "checkedAt": "2026-10-21T07:57:33.189Z",
+      "captureSha256": "32ca09b97fa1bc7574ae9751c4c43367efe75b2853fd26ab34dadcece79a423e"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/yorkshire-new-year-trail-runs-2027-harewood-house-14484",
+      "checkedAt": "2026-10-21T07:54:31.856Z",
+      "captureSha256": "50083b2bc63a8095e4658d795ee139a68fa288501ff25ce0b6fc417b84e9a20d"
+    },
+    {
+      "url": "https://tprevents.co.uk/product/tour-de-broads/",
+      "checkedAt": "2026-10-21T08:05:56.835Z",
+      "captureSha256": "7eed30c4f0207aa5cf8a85d6561da6172bd53a164cfdb8309c6a16db8f45e05b"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-10k-2027-05-09-1000",
+      "checkedAt": "2026-10-21T08:03:01.771Z",
+      "captureSha256": "18fcfafda8223d18438149c5598ee2f87db8c99f34576129680452fded3a48c9"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/widget/entry/8956?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:34.554Z",
+      "captureSha256": "03ffcd93cbbe21b903cacf498e295962796a23a58cade75652410b3b62853bba"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14700?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:17.860Z",
+      "captureSha256": "7d6feb32b00568abf55db29bffac5cc83583f148646ba1cf21ce86b0aa96a673"
+    },
+    {
+      "url": "https://www.cyclinguk.org/event/rspb-suffolk-go-wild-gravel",
+      "checkedAt": "2026-10-21T08:05:54.057Z",
+      "captureSha256": "39ac2921e0d3a1a79a3823e5c6c9d6ee650dc799df723f09344acff9dc30fd08"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-8892",
+      "checkedAt": "2026-10-21T08:02:57.657Z",
+      "captureSha256": "ea2323114885ecd3bfa68e581a7fdc856cc1e480074b904a850960fe78c1bacb"
+    },
+    {
+      "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-2026-triathlon-ultra",
+      "checkedAt": "2026-10-21T08:04:31.503Z",
+      "captureSha256": "208c3c064a83f894c650efdb8b9be2fcfecca1bfb6c4811eab4975e05ccb3f5a"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14682?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:10.005Z",
+      "captureSha256": "816a079b47a51e13c4a43deab6e6b83d25fba1d5a7070399e86636fd135ef964"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14698?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:04.222Z",
+      "captureSha256": "7f326d93265c008a1cbe094554943f0eb5fa6dc75c32320a72ec9c4ed8a23eac"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/atw-grafman-middle-distance-triathlon-8919",
+      "checkedAt": "2026-10-21T07:57:23.802Z",
+      "captureSha256": "679e49943847bf4b9ed9566bd0e1fc7e0f0142ef954a33b7672dfa94af32cf96"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/widget/entry/8935?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:34.350Z",
+      "captureSha256": "76c62db75827c9f2988d64d0f88606eea2ddd9a4f0ac3752df56e50c04523f29"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/cambridge-cambourne-10k-and-fun-run-8935",
+      "checkedAt": "2026-10-21T07:57:35.532Z",
+      "captureSha256": "e1137498bbc4d12b4c93293a76a01ce56e51d6462fab92a4af202b3326b9868d"
+    },
+    {
+      "url": "https://epicevents.co.uk/events/west-lancs-summer-triathlon-multisport/",
+      "checkedAt": "2026-10-21T07:54:22.926Z",
+      "captureSha256": "10050800ff3d0d8ba6f58925d844bfc05a14225d175c7edf255dedc7faef19b0"
+    },
+    {
+      "url": "https://greatswim.org/great-north-swim/",
+      "checkedAt": "2026-10-21T07:54:53.904Z",
+      "captureSha256": "586bf9f8b4409c35c73051eef8c6c7bafd6b510440cacfdfb1b0f6178edd5a97"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/lincolnshire-showground-3k-2027-07-17-1100",
+      "checkedAt": "2026-10-21T08:04:04.001Z",
+      "captureSha256": "633cd62cb4038afb4aed7a363b32037b1c099ecabbb7ec74bda0fb587ef716a5"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/atw-oundle-children-s-triathlon-9006",
+      "checkedAt": "2026-10-21T07:57:29.769Z",
+      "captureSha256": "f0c375f65ab5765d1cb071d8351df63a7ad86150e46b3c4b1ff656870af05f0b"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/wentworth-castle-gardens-trail-runs-5km-and-10km-14499",
+      "checkedAt": "2026-10-21T07:54:37.294Z",
+      "captureSha256": "94935e58b02ef988a22b3827e16eab5b6c51d3dad0e8c8d2b600f449d68f0f09"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/raby-castle-trail-runs-14580",
+      "checkedAt": "2026-10-21T07:57:18.593Z",
+      "captureSha256": "800873281b7941b0f642df1d119e0b06650bab6a2e025bcc7a3e3fb4c1fb5d98"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/sherwood-pines-festive-duathlons-2026-14698",
+      "checkedAt": "2026-10-21T07:54:09.487Z",
+      "captureSha256": "2af46fb8aea6a786e76610bc947cb2011a9b14c164b0d73dd8378ebc51a1944b"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "checkedAt": "2026-10-21T08:01:28.736Z",
+      "captureSha256": "579514c6df26d6e65ec87a896c4b166a000b5d2cf8f380b0285ec610f88a6c78"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/glasgow-triathlon",
+      "checkedAt": "2026-10-21T07:54:03.716Z",
+      "captureSha256": "a1dc2e251abe6206f2dc9980eae3c409d415bb4af93b333458f40024491178bd"
+    },
+    {
+      "url": "https://tprevents.co.uk/tour-de-broads-winter-series/",
+      "checkedAt": "2026-10-21T08:05:59.747Z",
+      "captureSha256": "f3ce3327aa18d8e5d8874efc2829b742ae64b6f868bd974986863de86b9b7709"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14540?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:10.218Z",
+      "captureSha256": "9e9cb81fb5b9d39910c37ca7aa8a0618e241efaa4cb6de7ce6aa0ef5bd7cfdec"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/cambridge-cambourne-10k-and-fun-run-8935",
+      "checkedAt": "2026-10-21T07:54:56.656Z",
+      "captureSha256": "1d5f36eab2102051a83a6fd966a298358bfb2d7098ae7c05dbe08daf5ebab4eb"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-grafham-triathlon-8879",
+      "checkedAt": "2026-10-21T07:54:44.929Z",
+      "captureSha256": "569c9f2f433878a7cbeb2f1b92ae80765ccdb897e7626409c491b6ee14f0f16a"
+    },
+    {
+      "url": "https://www.letsdothis.com/gb/checkout/ticket?preferred=true&eventId=266445&occurrenceId=21111174942&utm_source=website&utm_medium=organic&utm_campaign=general-ticket-selection&utm_organiser_id=179885",
+      "checkedAt": "2026-10-21T08:04:27.738Z",
+      "captureSha256": "e33ef03a058aa2256f17498eccf58fd0a1702bb357b65fb1d430d8224b1eeea4"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-mallory-race-circuit-winter-runs-half-marathon-10k-5k-and-fun-run-11292",
+      "checkedAt": "2026-10-21T08:02:56.960Z",
+      "captureSha256": "202ece1872e47658081eb35221b36b86c6ca48bb7ad40167e154b57d06dc1cff"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/yorkshire-new-year-trail-runs-2027-harewood-house-14484",
+      "checkedAt": "2026-10-21T07:56:59.390Z",
+      "captureSha256": "50083b2bc63a8095e4658d795ee139a68fa288501ff25ce0b6fc417b84e9a20d"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/windermere-triathlons-and-multisport-weekend-14528",
+      "checkedAt": "2026-10-21T07:54:23.240Z",
+      "captureSha256": "ac613279382b040b8a12bfbeb0e7d39923da39f4d7338d018e4627f2666a280f"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-first-to-full-triathlon-festival-14048",
+      "checkedAt": "2026-10-21T08:02:57.925Z",
+      "captureSha256": "1622c2011b3ab23e3af9101a0a7a2e4ef359940765896b93670d19850512efaa"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "checkedAt": "2026-10-21T08:01:28.816Z",
+      "captureSha256": "aa60f00f57fe7b434582cc92d08ae72c942955bee453343d3c9e9f42bbdbde81"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/essex-20-8956",
+      "checkedAt": "2026-10-21T07:57:29.516Z",
+      "captureSha256": "60f35e0d5d7a9b52a08984b7698af04515680edb0ff65409bed2233c39e4536b"
+    },
+    {
+      "url": "https://epicevents.co.uk/events/rivington-duathlon/",
+      "checkedAt": "2026-10-21T07:54:22.910Z",
+      "captureSha256": "c1b5e42a9a74623a2e9d8314a1cdcc6fe1a6369a9f5c20e15587e038dcd8c041"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "checkedAt": "2026-10-21T08:01:34.380Z",
+      "captureSha256": "edcfe8ff7e3fd365be630fa8dc5b64d2b2177fb741955a3e0921b0b29b194ae1"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-remembrance-runs-9066",
+      "checkedAt": "2026-10-21T07:54:49.907Z",
+      "captureSha256": "68cc889bc7df1a917a803bf60c9702675bf57284732efc150ce934e15de97208"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/15425?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:17.748Z",
+      "captureSha256": "ff27840b15ecda0dcabd3bccec2cf4b0116f612d4f00e95219a450f207f76ae1"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events",
+      "checkedAt": "2026-10-21T07:57:34.650Z",
+      "captureSha256": "6cd06f54725cf3c8cd81be965cd862ee0f4476133ad698eb3a40a6a4d5b907d6"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14487?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:23.379Z",
+      "captureSha256": "653051c8c2078b1e3d052d927103cafe999ffe63bb3658a23762fbd78427b684"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/henley-triathlon",
+      "checkedAt": "2026-10-21T07:53:51.310Z",
+      "captureSha256": "3cb4cc0d7410620727a223afe5ee6d5ef4da865ce194cbcc62ee32deae7fd058"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/swim-derwent-14533",
+      "checkedAt": "2026-10-21T07:56:34.652Z",
+      "captureSha256": "0948599cd025bcf3b7317aeddc3d3aab5aad9be0961746de2fb34cfd044d4e34"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/essex-open-water-swims-2027-14515",
+      "checkedAt": "2026-10-21T07:56:34.635Z",
+      "captureSha256": "362615a8f00ce4bd14f4470c75ef23ecda5d2e5163354b29bb96084f233b3b22"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/moors-valley-festive-trail-runs-2km-santa-run-5km-and-10km-14910",
+      "checkedAt": "2026-10-21T07:54:26.814Z",
+      "captureSha256": "b199f05cf01352ead37ee1121d589f6a6cc3ed8593e8219acecfe22d7a843900"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14502?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:23.425Z",
+      "captureSha256": "ac45bbcec79f803eef7d8892a36c52be137547479c73577564a755bdb6b0436e"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-10k-2027-07-18-0930",
+      "checkedAt": "2026-10-21T08:03:10.573Z",
+      "captureSha256": "fd7f6e9dcf818fd5100baef8c8d06c68c25395173bcfda56fc20dd39c59b999f"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14910?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:17.798Z",
+      "captureSha256": "c23cbbb1e8569c56cf09a7d00683825187ac0b08b1ad86717f5d73a7637f8dc5"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/gibside-wild-new-year-trail-runs-15425",
+      "checkedAt": "2026-10-21T07:54:31.014Z",
+      "captureSha256": "4332d053f12f0eea05d2c913409d3807b6548537b82b10540c3a3a600afb2830"
+    },
+    {
+      "url": "https://tprevents.co.uk/product/go-wild/",
+      "checkedAt": "2026-10-21T07:54:45.717Z",
+      "captureSha256": "945c63de92d8407a77550d5a9bca0033b18d57c7f0ad9c14f37e0930eff31ffe"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/the-big-lime-triathlons-hartlepool-marina-14569",
+      "checkedAt": "2026-10-21T07:54:16.983Z",
+      "captureSha256": "4e084614a2355f4bd6b9074a01340e85da7fe87c585f0c3532292a0ba484d85b"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-3k-2027-06-20-1100",
+      "checkedAt": "2026-10-21T08:03:01.969Z",
+      "captureSha256": "acd52ca4772cec5435364ff3899421e4b04e14c82e915261f4c603814247dfb0"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/hylands-park-5k-2027-07-18-1030",
+      "checkedAt": "2026-10-21T08:03:06.436Z",
+      "captureSha256": "71400190424d7dc623893ff3285bbb6fded081311543c0e6d6b08cf2da250b3a"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/high-lodge-wild-trail-runs-2027-5km-10km-and-new-half-marathon-14502",
+      "checkedAt": "2026-10-21T07:54:31.377Z",
+      "captureSha256": "1d5aff2a9268217b6d1e8fc8298fd80d8d7d0d2b0057157c0b14d6f507b59816"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/bamburgh-castle-wild-10km-trail-run-15391",
+      "checkedAt": "2026-10-21T07:57:08.852Z",
+      "captureSha256": "fc582c6f11057e4ba42b39888aee2284f3822613f65a87c25a758aa3d40095f1"
+    },
+    {
+      "url": "https://www.eastswimming.org/event/swimming-national-winter-championships-25m/",
+      "checkedAt": "2026-10-21T07:54:57.708Z",
+      "captureSha256": "13656ac4ceec31c74aa78ee56da10e146d0a96558e7deb5ef629c5511645025a"
+    },
+    {
+      "url": "https://epicevents.co.uk/events/west-lancs-spring-triathlon-multisport/",
+      "checkedAt": "2026-10-21T07:54:23.148Z",
+      "captureSha256": "bbb509933221d72125f9052b1d4c20600fd3289750328eea6b7e03e64f63a8de"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/14484?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:17.678Z",
+      "captureSha256": "d9d3cee77a32b9c7d9b26abea71fecbefb724d383aeb975cf2cb530f69bfdaaf"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/atw-grafham-triathlon-8879",
+      "checkedAt": "2026-10-21T07:57:16.579Z",
+      "captureSha256": "569c9f2f433878a7cbeb2f1b92ae80765ccdb897e7626409c491b6ee14f0f16a"
+    },
+    {
+      "url": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-sprint",
+      "checkedAt": "2026-10-21T08:04:26.864Z",
+      "captureSha256": "533c53f14fa970d4c47f5d53fc41158a3bf3900aeb0da5f4b80fb7b30f201b58"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/events/ultimate-triathlon-150-100-50",
+      "checkedAt": "2026-10-21T07:54:03.750Z",
+      "captureSha256": "f8db4d47877dcc56f63071eb80cb2275b71a18d6373ac8f299e49a66eaafd3b3"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/trinity-park-5k-2027-06-20-1100",
+      "checkedAt": "2026-10-21T08:03:07.066Z",
+      "captureSha256": "db5356dc7ee587549c436c1eb1decfe59aa3a46162d95d06ca4f88ab91a0d20c"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/glamis-castle-festive-trail-runs-2026-14682",
+      "checkedAt": "2026-10-21T07:56:47.300Z",
+      "captureSha256": "d0aec07755d9bd0a0d536a1cb7232494f6a917b9944fb57aa8604cd6739c1ad6"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/15884?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:04.281Z",
+      "captureSha256": "4066e1d20b7e2167f65ef493913d517800b6a8b351cd4918e59bb107f5298b5f"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/sherwood-pines-festive-duathlons-2026-14698",
+      "checkedAt": "2026-10-21T07:56:35.173Z",
+      "captureSha256": "2af46fb8aea6a786e76610bc947cb2011a9b14c164b0d73dd8378ebc51a1944b"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/high-lodge-wild-trail-runs-2027-5km-10km-and-new-half-marathon-14502",
+      "checkedAt": "2026-10-21T07:57:08.906Z",
+      "captureSha256": "1d5aff2a9268217b6d1e8fc8298fd80d8d7d0d2b0057157c0b14d6f507b59816"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/jesus-green-10k-2027-07-04-1030",
+      "checkedAt": "2026-10-21T08:04:04.391Z",
+      "captureSha256": "f97fc80d2e53f69906b41a4cd65ac22ae71ca406dd37fde1581edee067d82f67"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/the-derwent-60km-trail-ultra-early-bird-prices-16255",
+      "checkedAt": "2026-10-21T07:54:37.786Z",
+      "captureSha256": "3388980f8112d2ec94ab7b18e239a210f28fa2090927e571d4b21fead8ddadf8"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/swim-derwent-14533",
+      "checkedAt": "2026-10-21T07:54:16.572Z",
+      "captureSha256": "0948599cd025bcf3b7317aeddc3d3aab5aad9be0961746de2fb34cfd044d4e34"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/widget/entry/8879?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:27.904Z",
+      "captureSha256": "422804ca493b0bb3de57f98a0e5de1d6ed7a4d4d8ebc92b9e905b08632596b12"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/widget/entry/9006?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:31.184Z",
+      "captureSha256": "1a3a7562b1dfc6d0e4437e7be908899f8b459c304215af1fca7b458997cbeb4b"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/widget/entry/9004?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:31.465Z",
+      "captureSha256": "2ece1bc8a115b427caf09a5ac48d80bec44c5c021a038d1116fc23a356cbeb18"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/derwent-reservoir-triathlons-and-duathlons-14540",
+      "checkedAt": "2026-10-21T07:54:16.710Z",
+      "captureSha256": "8f7487776d23c64c89f19d9ab92ff0ac530a42e91a6ca47161fa53fa5abfe677"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/e/glamis-castle-festive-trail-runs-2026-14682",
+      "checkedAt": "2026-10-21T07:54:26.897Z",
+      "captureSha256": "d0aec07755d9bd0a0d536a1cb7232494f6a917b9944fb57aa8604cd6739c1ad6"
+    },
+    {
+      "url": "https://www.atwevents.co.uk/e/atw-oundle-triathlon-9004",
+      "checkedAt": "2026-10-21T07:54:50.186Z",
+      "captureSha256": "6f397ece7152908496d83f9da83a721daa834431764b158982f54d48de387663"
+    },
+    {
+      "url": "https://uktriathlon.co.uk/kids/alderford-kids-fun-triathlon",
+      "checkedAt": "2026-10-21T08:01:41.321Z",
+      "captureSha256": "5e4bc31359cbd60d0de9d90b8713aa658f7c2f3a8acb3a3f7ff7cfd220b86f88"
+    },
+    {
+      "url": "https://raceforlife.cancerresearchuk.org/find-an-event/norfolk-showground-5k-2027-05-09-1100",
+      "checkedAt": "2026-10-21T08:03:03.242Z",
+      "captureSha256": "149aadb48db7500fbe9637a68a800bd5c77a036a6b1b06bd6aa21e869f95dae1"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/the-wild-scottish-cycle-scone-palace-15884",
+      "checkedAt": "2026-10-21T07:56:34.722Z",
+      "captureSha256": "aca8bea183309a9b33ae8c843989581c83f77a00128cf722586d6a65e8ca139e"
+    },
+    {
+      "url": "https://www.wilddeerevents.co.uk/widget/entry/16255?checkout=external&container=internal",
+      "checkedAt": "2026-10-21T07:57:23.308Z",
+      "captureSha256": "1cf06885aafea577e88b91ed0c9155b394cad01b55c173a96959a1b244434503"
+    },
+    {
+      "url": "https://www.eventrac.co.uk/e/lambton-castle-summer-trail-runs-14571",
+      "checkedAt": "2026-10-21T07:57:19.678Z",
+      "captureSha256": "8383e469fe20a39d734ce0c66701bff9fa2ac5467ca270115dea552e5ce00b2c"
+    }
+  ],
+  "documentEvidence": [
+    {
+      "url": "https://www.swimming.org/library/documents/7707/download",
+      "file": "SWIWIN26_Schedule_1.pdf",
+      "pages": 2,
+      "checkedAt": "2026-10-21",
+      "sha256": "289600a74c8ce051bcaa04b505216971bd72e6fba92b0d46c2ac7e18a39ad7bf",
+      "finding": "2026 meet 10–13 December; morning heats 09:00 daily; subsequent distance heats and finals explicitly TBC. Page 1 visually checked."
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Uv4Kqv2wqg1hwlE1AGMpx0xa4HB9IRjT/view",
+      "pages": 9,
+      "checkedAt": "2026-10-21",
+      "sha256": "a00e797bc44295e5dbbe0f33a342f0e621003fb033b3aaeccc34ea2ffe9f070f",
+      "finding": "Cover visually confirms 12 April 2026, 10K 09:30, fun run 09:35. Not used as a 2027 timetable."
+    }
+  ],
+  "held": [
+    {
+      "name": "Glasgow Kids Fun Triathlon — Tin",
+      "date": "2027-05-22",
+      "source": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "reason": "Same page gives 14m and 12.5m swim distances. Tin held; five other unambiguous distances added."
+    },
+    {
+      "name": "Alderford adult and children’s triathlons; Birmingham adult triathlon",
+      "date": null,
+      "source": "https://uktriathlon.co.uk/events",
+      "reason": "Index shows TBC/date coming soon. No new dated fixture inferred; possible renamed Birmingham/West Midlands relationship not resolved by that index."
+    }
+  ],
+  "sourceGaps": [
+    {
+      "name": "Woodhall Spa 2027 authorised entry detail",
+      "url": "https://etchrock.com/challenge/info/woodhall-spa-sprint-triathlon-2027",
+      "reason": "Direct fetch and web retrieval unsuccessful; accessible organiser page links a 2026 athlete pack and 2026 buy-ticket route."
+    },
+    {
+      "name": "Great North Swim booking widget",
+      "reason": "No usable wave timetable in returned public checkout content; Saturday quiet-wave discrepancy remains."
+    }
+  ],
+  "publication": {
+    "sourcePrefixes": [
+      "athrecs:county-expansion-checked:2026-10-21",
+      "athrecs:county-tbc-review:2026-10-21"
+    ],
+    "eventsAdded": 13,
+    "eventsEnriched": 1,
+    "editionsAdded": 66,
+    "existingEditionsReviewed": 139,
+    "newCounties": [
+      "Cambridgeshire",
+      "Cheshire",
+      "Essex",
+      "Glasgow City",
+      "Lincolnshire",
+      "Monmouthshire",
+      "Norfolk",
+      "North Yorkshire",
+      "Oxfordshire",
+      "Suffolk",
+      "West Midlands",
+      "Wiltshire"
+    ]
+  }
+}
