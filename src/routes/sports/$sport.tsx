@@ -118,6 +118,9 @@ function SportPage() {
         <Link to="/news" search={{ sport: sport.slug }} className={textLink}>
           News
         </Link>
+        <Link to="/directory" search={{ sport: sport.slug }} className={textLink}>
+          Federations & governing bodies
+        </Link>
         {sport.slug === "road-running" && (
           <>
             <Link

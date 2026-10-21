@@ -51,6 +51,15 @@ function ClubsPage() {
       <header className="space-y-2">
         <div className="flex flex-wrap items-center gap-2">
           <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Clubs</h1>
+          {!IS_RUNRECS_SITE ? (
+            <Link
+              to="/directory"
+              search={{}}
+              className="text-sm font-medium text-accent hover:underline"
+            >
+              Federations & governing bodies →
+            </Link>
+          ) : null}
           <Link
             to="/athletes"
             className="text-sm font-medium text-accent no-underline hover:underline"
