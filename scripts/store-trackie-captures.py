@@ -85,6 +85,7 @@ def main():
                 comparedRows=sum(r["rows"] for r in summary if r["state"]=="compared"),
                 heldFiles=sum(r["state"]=="held" for r in summary),
                 unavailableListings=sum(r["state"]=="unavailable-or-unsupported" for r in summary),
+                externalRedirectListings=sum(r["state"]=="external-redirect" for r in summary),
                 publicResultsWritten=0,athleteAccountsChanged=0,details=summary)
     query([("UPDATE result_archive_capture_runs SET status='partial',summary=$2::jsonb,updated_at=now() WHERE id=$1::uuid RETURNING id",[run_id,json.dumps(totals)])])
     (args.directory/"database-summary.json").write_text(json.dumps(totals,indent=2))

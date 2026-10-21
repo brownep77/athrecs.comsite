@@ -26,8 +26,11 @@ Four additional original PDFs are retained as held captures: LCS XCR
 Invitational & Relays, Dakota Classic, Vigars & Salter Western Invitational,
 and Purple and White Intrasquad. Their layouts need separate adapters. No
 participant count is invented for those files. Lakefront Marauder and Don
-Mills returned page navigation without a result attachment; both remain in
-the run inventory, not in the imported count.
+Mills use JavaScript redirects to external results: Lakefront to
+`https://live.sportmadesimple.com/meets/79356/events/xc/2931974` (an application
+shell in public retrieval), and Don Mills to `https://share.google/ActZtLYBj1lytlH7K`
+(which public retrieval could not open). Both remain outside the imported count.
+SportMadeSimple / AthleticLIVE is also registered as a disabled research source.
 
 ## Evidence and limits
 

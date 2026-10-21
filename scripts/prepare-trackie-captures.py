@@ -159,7 +159,9 @@ def main():
         item["date"] = dt.datetime.strptime("2026 " + item["dateLabel"], "%Y %b %d").date().isoformat()
         attachments = item.get("files", [])
         if not attachments or attachments[0]["format"] != "pdf":
-            summary.append(dict(key=item["key"], name=item["name"], rows=0, state="unavailable-or-unsupported"))
+            summary.append(dict(key=item["key"], name=item["name"], rows=0,
+                                state="external-redirect" if item.get("externalRedirect") else "unavailable-or-unsupported",
+                                url=item.get("externalRedirect", item["url"])))
             continue
         path = Path(attachments[0]["path"])
         rows, issues = parse_pdf(path, item)
