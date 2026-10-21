@@ -8,6 +8,7 @@ process.env.DATABASE_URL = "postgresql://synthetic:synthetic@127.0.0.1:1/unused"
 const db = new PGlite();
 await db.exec(`create table events(id int, slug text, name text, sport text, country text, county text, region text, city text, summary text, featured boolean);
 create table editions(event_id int, event_date date, distance_code text, status text, end_date date, end_source_url text, end_checked_at date);
+create table event_distances(event_id int, distance_code text);
 create table event_groups(event_id int,level text);
 create table slug_redirects(entity_type text, old_slug text, current_slug text);
 insert into events values (1,'synthetic-race','Synthetic Norfolk 10K','Running','England','Norfolk',null,'Norwich','Fictional test race, with no live entries.',true),
