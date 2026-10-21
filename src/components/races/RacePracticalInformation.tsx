@@ -66,15 +66,17 @@ export function RacePracticalInformation({
         {visible.length ? (
           <ul className="divide-y divide-border">
             {visible.map((edition) => {
-              const start = formatStartTime(
-                supplementedStart(
-                  event,
-                  edition.event_date,
-                  edition.distance_code,
-                  edition.start_time,
-                ),
-                { ...event, date: edition.event_date },
-              );
+              const start =
+                edition.start_label ??
+                formatStartTime(
+                  supplementedStart(
+                    event,
+                    edition.event_date,
+                    edition.distance_code,
+                    edition.start_time,
+                  ),
+                  { ...event, date: edition.event_date },
+                );
               const entry = editionEntry(edition);
               const source = raceLink(edition.source_url);
               const editionGuide = raceGuideFor(event, edition.event_date);
@@ -93,7 +95,8 @@ export function RacePracticalInformation({
                       <p
                         className={`mt-1 text-sm ${start ? "font-semibold text-accent" : "text-muted"}`}
                       >
-                        {start ? `Starts ${start}` : "Start time not yet confirmed"}
+                        {edition.start_label ??
+                          (start ? `Starts ${start}` : "Start time not yet verified")}
                       </p>
                       <p className="mt-1 text-sm text-muted">
                         {statusLabel(
