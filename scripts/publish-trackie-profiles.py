@@ -67,7 +67,7 @@ def prepare(args):
     for path in sorted(args.captures.glob('*.capture.json')):
         cap=json.loads(path.read_text()); p=cap['payload']; key=p['sourceKey']
         if not p['rows'] or cap['state']!='compared': continue
-        if p['schemaVersion'] not in (4,5,6,7) or cap['issues']: raise ValueError('Unreviewed parser version')
+        if p['schemaVersion'] not in (4,5,6,7,8) or cap['issues']: raise ValueError('Unreviewed parser version')
         if hashlib.sha256(pathlib.Path(cap['sourcePath']).read_bytes()).hexdigest()!=cap['sourceSha256']: raise ValueError('Original PDF changed')
         m={**config['meetings'][key], 'key':key, 'date':p['index']['date'], 'sourceUrl':p['sourceUrl'], 'attachmentUrl':p['attachmentUrl'], 'competitions':[]}
         for heading, rs in __import__('itertools').groupby(sorted(p['rows'],key=lambda r:r['tableKey']),lambda r:r['tableKey']):

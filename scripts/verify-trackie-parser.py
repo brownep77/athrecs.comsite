@@ -50,7 +50,7 @@ with tempfile.TemporaryDirectory() as folder:
     assert len({r['sourceRow'] for r in rows})==2
     shifted=pathlib.Path(folder)/'shifted.pdf'
     pdf=canvas.Canvas(str(shifted));pdf.setFont('Courier',10)
-    pdf.drawString(18,740,'Women 100 Meter Dash')
+    pdf.drawString(18,740,'Women 100 Meter Sprint U20')
     for x,text in [(42,'Name'),(216,'Team'),(320,'Prelims'),(410,'Finals')]:pdf.drawString(x,720,text)
     pdf.drawString(30,700,'1');pdf.drawString(42,700,'Example, Runner');pdf.drawString(214.9,700,'Example Club')
     pdf.drawRightString(362,700,'12.12');pdf.drawRightString(446,700,'12.34');pdf.save()
@@ -58,6 +58,8 @@ with tempfile.TemporaryDirectory() as folder:
     assert not issues and len(rows)==1,issues
     assert rows[0]['name']=='Example, Runner' and rows[0]['club']=='Example Club'
     assert rows[0]['original']['Prelims']=='12.12' and rows[0]['performance']=='12.34'
+    assert rows[0]['finishSeconds']==12.34 and rows[0]['status']=='finished'
+    assert rows[0]['category']=='U20'
     ambiguous=pathlib.Path(folder)/'ambiguous.pdf'
     pdf=canvas.Canvas(str(ambiguous));pdf.setFont('Courier',10)
     pdf.drawString(18,780,'Example Twilight - 6/2/2026 to 5/19/2026')

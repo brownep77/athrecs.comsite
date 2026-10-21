@@ -161,9 +161,11 @@ def parse_pdf(path, item):
                     issues.append(f"page {page_no}: independent text comparison differs: {text}")
                 distance = re.search(r"(\d+(?:\.\d+)?\s*(?:Mile|Meter|Kilometer|[kK](?:m)?))\b", section)
                 distance_label = distance[1] if distance else ""
-                timed = bool(distance and re.search(r"Run|Dash|Hurdles|Walk|[kK]\b", section))
+                timed = bool(distance and re.search(r"Run|Dash|Sprint|Hurdles|Walk|[kK]\b", section))
                 status = performance if performance in ("DNS", "DNF", "DQ") else "finished" if timed and seconds(performance) is not None else "unknown"
                 category = re.search(r"(?:Boys|Girls|Men|Women)\s+(\d+-\d+|\d+\+|U\d+|\d+(?=\s+\d+\s))(?=\s)", section)
+                if not category:
+                    category = re.search(r"\b(U\d+)\b", section)
                 values.update({"Source Place": prefix[0]["text"], "Event": section,
                                "PDF Page": str(page_no), "Source row": text,
                                "Source URL": item["files"][0]["url"]})
@@ -216,7 +218,7 @@ def main():
         issues = [issue for issue in issues if issue not in comparison_issues]
         if not rows and not issues:
             issues.append('No independently compared result rows')
-        payload = dict(schemaVersion=7, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
+        payload = dict(schemaVersion=8, provider="Trackie", sourceKey=item["key"], sourceUrl=item["url"],
                        sourceMimeType="application/pdf", attachmentUrl=attachments[0]["url"],
                        index=dict(name=item["name"], date=item["date"], dateLabel=item["dateLabel"], location=item["location"]),
                        publication="staff_only", identity="unreviewed", rows=rows,
