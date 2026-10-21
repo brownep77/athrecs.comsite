@@ -1,4 +1,5 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { DIRECTORY_COUNTRIES } from "@/lib/athrecs/sports-directory";
 import { SportsDiscovery } from "@/components/running/SportsDiscovery";
 import {
   COUNTRY_SITES,
@@ -80,6 +81,18 @@ function CountrySportsPage() {
         </button>
       </form>
       <SportsDiscovery site={site} />
+      <Link
+        to="/directory"
+        search={{
+          country: DIRECTORY_COUNTRIES.includes(site.country) ? site.country : "International",
+        }}
+        className="inline-flex min-h-11 items-center rounded-lg border border-border px-4 text-sm font-semibold"
+      >
+        {DIRECTORY_COUNTRIES.includes(site.country)
+          ? `Sports federations and governing bodies in ${site.country}`
+          : "International sports federations"}{" "}
+        →
+      </Link>
     </div>
   );
 }
