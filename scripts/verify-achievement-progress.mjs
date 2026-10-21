@@ -155,6 +155,35 @@ try {
   assert(markup.includes("10 more finishes needed"));
   assert(markup.includes('aria-label="Progress towards 50 finishes"'));
   assert(markup.includes('value="40" max="50"'));
+  const winningInput = {
+    ...input,
+    results: input.results.map((result, index) => ({
+      ...result,
+      sourceUrls: [`https://example.test/private-evidence/${result.resultId}`],
+      overallPlace: 1,
+      details: { verificationStatus: index < 30 ? "source_verified" : "unverified" },
+    })),
+  };
+  const winningPage = buildPublicAthletePreview(winningInput);
+  assert.deepEqual(
+    winningPage.achievements.raceWins,
+    buildPublicAthletePreview({ ...winningInput, resultPage: 2 }).achievements.raceWins,
+  );
+  assert.equal(winningPage.achievements.raceWins[0].count, 40);
+  assert.equal(winningPage.achievements.raceWins[0].verifiedCount, 30);
+  assert.deepEqual(
+    Object.keys(winningPage.achievements.raceWins[0]).sort(),
+    ["count", "distance", "id", "kind", "label", "sport", "verifiedCount"].sort(),
+    "Only safe aggregate fields enter the public win summary",
+  );
+  const winMarkup = renderToStaticMarkup(
+    createElement(AchievementSummary, { summary: winningPage.achievements }),
+  );
+  assert(winMarkup.includes("Race wins by sport and distance"));
+  assert(winMarkup.includes("40 wins"));
+  assert(winMarkup.includes("30 of 40 verified"));
+  assert(winMarkup.includes("10 awaiting verification"));
+  assert(winMarkup.includes('data-race-win="overall"'));
   assert(
     !markup.includes("<details"),
     "Achievements and progress are visible without expanding a section",

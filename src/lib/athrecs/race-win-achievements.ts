@@ -1,6 +1,9 @@
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory } from "./source-performance-history";
 import { isCompletedResult, resultDay, resultEvidenceLabel } from "./profile-achievements.ts";
+import { historicalDistance, historicalTime } from "./history-performance.ts";
+import { hasFinishMark, resultVerification } from "./profile-result-presentation.ts";
+import { sourceHistorySport } from "./source-history-sport.ts";
 
 type WinKind = "overall" | "gender" | "category";
 export type WinEvidence = {
@@ -8,6 +11,8 @@ export type WinEvidence = {
   date: string;
   sourceUrls: string[];
   evidenceLabel: string;
+  verified: boolean;
+  sourceKeys?: string[];
   performance?: string;
   result?: ProfileResult;
 };
@@ -31,12 +36,14 @@ type Candidate = {
   genderLabel: string;
   categoryLabel: string;
   evidence: WinEvidence;
+  mark: string;
 };
 
 const normalise = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, "");
 const excludedRace = /\b(?:relay|stage|leg|split|heat|heats|semi[- ]?final|qualif\w*|virtual)\b/i;
-const uncertain =
-  /\b(?:unverified|uncertain|unresolved|conflict\w*|disputed|club.reported|not independently verified|dnf|dns|dq|dsq|disqualified)\b/i;
+const uncertain = /\b(?:uncertain|unresolved|conflict\w*|disputed|dnf|dns|dq|dsq|disqualified)\b/i;
+const nonFinalRound =
+  /\b(?:heat|heats|semi[- ]?final|qualif\w*|prelim\w*|section)\b|^(?:Round:\s*)?(?:h|sf|q)\d*$/i;
 const validPlace = (value: number | null | undefined) =>
   value != null && Number.isInteger(value) && value > 0 ? value : null;
 const categoryName = (value: string | null | undefined) =>
@@ -102,8 +109,8 @@ function winDistance(code: string, km = 0, triathlonSport = false): Distance | n
     : null;
 }
 
-function sportName(value: string): string {
-  return /^(?:running|athletics)$/i.test(value.trim()) ? "Running" : value.trim();
+function sportName(value: string, surface = ""): string {
+  return /^athletics$/i.test(value.trim()) && /^road$/i.test(surface) ? "Running" : value.trim();
 }
 
 function aliases(evidence: WinEvidence, sport: string, distance: Distance): string[] {
@@ -111,9 +118,13 @@ function aliases(evidence: WinEvidence, sport: string, distance: Distance): stri
   return [
     `${prefix}name:${normalise(evidence.event)}`,
     // Only the primary result source identifies a race; secondary news pages may cover many races.
-    ...(evidence.sourceUrls[0] ? [`${prefix}url:${evidence.sourceUrls[0]}`] : []),
+    ...(evidence.sourceKeys?.length
+      ? [`${prefix}source:${evidence.sourceKeys[0]}`]
+      : evidence.sourceUrls[0] && !/worldathletics\.org\/athletes\//i.test(evidence.sourceUrls[0])
+        ? [`${prefix}url:${evidence.sourceUrls[0]}`]
+        : []),
     ...(evidence.result?.editionId && evidence.result.editionId > 0
-      ? [`edition:${evidence.result.editionId}`]
+      ? [`${prefix}edition:${evidence.result.editionId}`]
       : []),
   ];
 }
@@ -122,50 +133,63 @@ function aliases(evidence: WinEvidence, sport: string, distance: Distance): stri
 function sourcePlace(
   labels: string[],
   pattern: RegExp,
+  explicit?: number | null,
 ): { value: number | null; conflict: boolean } {
   const values = [
-    ...new Set(
-      labels.flatMap((label) => {
+    ...new Set([
+      ...(validPlace(explicit) != null ? [explicit!] : []),
+      ...labels.flatMap((label) => {
         const match = label.match(pattern);
         return match ? [Number(match[1])] : [];
       }),
-    ),
+    ]),
   ];
   return { value: values.length === 1 ? validPlace(values[0]) : null, conflict: values.length > 1 };
 }
 
 export function buildRaceWinAchievements(
-  results: ProfileResult[],
+  results: readonly ProfileResult[],
   histories: readonly SourceHistory[] = [],
   sourceGender = "",
   today = new Date(),
 ): RaceWinAchievement[] {
   const candidates: Candidate[] = [];
   for (const result of results) {
+    const sport = sportName(result.sport, result.surface);
     const distance = winDistance(
-      result.distanceCode,
+      historicalDistance(result.distanceCode, sport).code,
       result.distanceKm,
-      /^triathlon$/i.test(result.sport),
+      /^(?:triathlon|duathlon|aquathlon|aquabike)$/i.test(sport),
     );
     if (!distance) continue;
-    const sport = sportName(result.sport);
     const evidence: WinEvidence = {
       event: result.eventName,
       date: result.eventDate,
       sourceUrls: result.sourceUrls,
       evidenceLabel: resultEvidenceLabel(result),
       result,
+      verified: resultVerification(
+        result.details?.verificationStatus,
+        result.resultSource,
+        result.conflicting,
+      ).verified,
+      sourceKeys: /^world\s*athletics$/i.test(result.resultSource ?? "")
+        ? undefined
+        : result.sourceKeys,
     };
     candidates.push({
       aliases: aliases(evidence, sport, distance),
       sport,
       distance,
       evidence,
+      mark: String(result.finishTimeSeconds ?? result.status),
       eligible:
         isCompletedResult(result, today) &&
+        !result.details?.profileExcluded &&
         !/parkrun/i.test(`${result.sport} ${result.eventName}`) &&
+        !nonFinalRound.test(result.displayRound ?? "") &&
         !excludedRace.test(
-          `${result.eventName} ${result.distanceCode} ${result.details?.note ?? ""}`,
+          `${result.eventName} ${result.distanceCode} ${result.displayRound ?? ""}`,
         ) &&
         !uncertain.test(result.details?.note ?? ""),
       overall: validPlace(result.overallPlace),
@@ -177,57 +201,79 @@ export function buildRaceWinAchievements(
   }
   for (const history of histories)
     for (const row of history.performances) {
-      if (
-        row.profileExcluded ||
-        row.verificationStatus === "unverified" ||
-        row.verificationStatus === "verified_by_administrator"
-      )
-        continue;
-      const distance = winDistance(row.discipline, 0, /^triathlon/i.test(row.discipline));
+      if (row.profileExcluded || row.syntheticTest) continue;
+      const sport = sourceHistorySport(row.discipline, history.provider, row.meeting);
+      if (!sport || sport === "Parkrun") continue;
+      const code = row.discipline
+        .replace(
+          /^(?:triathlon|duathlon|aquathlon|aquabike|cycling|swimming|swim|rowing)\s*[-–—:]?\s+/i,
+          "",
+        )
+        .replace(/\s+(?:road|track|cross[ -]country|trail)$/i, "");
+      const suppliedDistance = historicalDistance(code, sport);
+      const distance = winDistance(
+        suppliedDistance.code,
+        suppliedDistance.km,
+        /^(?:triathlon|duathlon|aquathlon|aquabike)$/i.test(sport),
+      );
       if (!distance) continue;
-      const sport = /^triathlon/i.test(row.discipline) ? "Triathlon" : "Running";
       const overall = sourcePlace(
         row.labels,
         /^Overall (?:Pos|Position):\s*(\d+)(?:\s*\([^)]*\))?$/i,
+        row.places?.overall,
       );
       const gender = sourcePlace(
         row.labels,
         /^Gender (?:Pos|Position):\s*(\d+)(?:\s*\([^)]*\))?$/i,
+        row.places?.gender,
       );
       const category = sourcePlace(
         row.labels,
         /^(?:Cat|Category) (?:Pos|Position):\s*(\d+)(?:\s*\([^)]*\))?$/i,
+        row.places?.category,
       );
       const day = resultDay(row.date);
+      const years = (row.yearLabel || String(row.year)).match(/\b\d{4}\b/g)?.map(Number) ?? [];
+      const dated = row.date
+        ? day != null && day <= today.getTime()
+        : years.length > 0 && Math.max(...years) <= today.getUTCFullYear();
+      const finalRound = row.labels.some((label) => /^Round:\s*(?:final|finals|f)$/i.test(label));
+      const nonFinal = row.labels.some((label) => nonFinalRound.test(label));
       const evidence: WinEvidence = {
         event: row.meeting,
-        date: row.date,
+        date: row.date || row.dateLabel || row.yearLabel || String(row.year),
         sourceUrls: row.sourceUrls,
         performance: row.performance,
         evidenceLabel: "Source-history result",
+        verified: resultVerification(row.verificationStatus, row.providerName || history.provider)
+          .verified,
+        sourceKeys: /^world\s*athletics$/i.test(row.providerName || history.provider)
+          ? undefined
+          : row.sourceKeys,
       };
       candidates.push({
         aliases: aliases(evidence, sport, distance),
         sport,
         distance,
         evidence,
+        mark: String(historicalTime(row.performance) ?? row.performance),
         eligible:
-          day != null &&
-          day <= today.getTime() &&
-          row.sourceUrls.length > 0 &&
+          dated &&
+          (!row.endDate ||
+            (resultDay(row.endDate) != null && resultDay(row.endDate)! <= today.getTime())) &&
+          (row.sourceUrls.length > 0 || (row.sourceKeys?.length ?? 0) > 0) &&
           !row.disqualification &&
-          /^\d+(?::\d{2}){1,2}(?:\.\d+)?$/.test(row.performance.trim()) &&
-          /[1-9]/.test(row.performance) &&
+          hasFinishMark(row.performance, row.place) &&
           !/parkrun/i.test(row.meeting) &&
           !excludedRace.test(`${row.meeting} ${row.discipline}`) &&
-          !row.labels.some((label) =>
-            /\b(?:virtual|heat|heats|semi[- ]?final|stage result|relay result)\b/i.test(label),
-          ) &&
+          (!nonFinal || finalRound) &&
+          !row.labels.some((label) => /\b(?:virtual|stage result|relay result)\b/i.test(label)) &&
           !(
             sport !== "Triathlon" &&
             row.labels.some((label) => /\b(?:split|segment|leg)\b/i.test(label))
           ) &&
           !uncertain.test(row.labels.join(" ")) &&
+          !/conflicting (?:source|details|result)|disputed placing/i.test(row.notes ?? "") &&
           !overall.conflict &&
           !gender.conflict &&
           !category.conflict,
@@ -251,6 +297,7 @@ export function buildRaceWinAchievements(
   for (const group of new Set(indexed.values())) {
     const rows = [...group];
     if (rows.some((row) => !row.eligible)) continue;
+    if (new Set(rows.map((row) => row.mark)).size !== 1) continue;
     const first = rows[0];
     for (const kind of ["overall", "gender", "category"] as const) {
       const places = new Set(rows.map((row) => row[kind]).filter((value) => value != null));
@@ -281,6 +328,7 @@ export function buildRaceWinAchievements(
       const evidence = rows.find((row) => row[kind] === 1)!.evidence;
       achievement.results.push({
         ...evidence,
+        verified: rows.some((row) => row[kind] === 1 && row.evidence.verified),
         sourceUrls: [...new Set(rows.flatMap((row) => row.evidence.sourceUrls))],
       });
       wins.set(id, achievement);

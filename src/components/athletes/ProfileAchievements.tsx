@@ -467,8 +467,8 @@ export function ProfileRecordHighlights({
   compact?: boolean;
 }) {
   const summary = useMemo(
-    () => buildProfileAchievementSummary(results, sourceHistories),
-    [results, sourceHistories],
+    () => buildProfileAchievementSummary(results, sourceHistories, new Date(), sourceGender),
+    [results, sourceHistories, sourceGender],
   );
   return (
     <div className="space-y-4">
