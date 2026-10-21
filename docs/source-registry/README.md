@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 302 unique sources. Only 36 are enabled; the other 266 remain
+The registry contains 303 unique sources. Only 36 are enabled; the other 267 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 302 sources create exactly one source job;
+- all 303 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 266 sources are retained as blocked jobs with their reason;
+- the other 267 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -108,3 +108,7 @@ Registered UK Results, SportSoft / Race Results, Joe Lee Computing and Sunderlan
 Added New Marske Harriers, Hartlepool Burn Road Harriers and Whats My Time Results as manual research leads. Their discovered archive/result URLs are retained with the observed retrieval failures (406, timeout and 403 respectively). No participant row was verified from those unavailable pages, and automated collection remains disabled.
 
 When researching results, check the source inventory and register any missing result website with its actual URL, provider credit and checked evidence. Preserve existing review and collection settings.
+
+## Trackie results, 21 October 2026
+
+Added Trackie after inspecting its current index and downloadable reports. The supervised import stores private source observations, original PDFs, exact source precision and page/row locators. Name matches do not link accounts. Public reuse and recurring collection are separate decisions; the general source worker remains disabled. Current-page coverage and any held layouts are recorded in the private capture-run receipt.

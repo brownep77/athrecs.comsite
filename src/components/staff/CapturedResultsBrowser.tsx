@@ -209,7 +209,7 @@ function CapturedRace({ id }: { id: string }) {
                     "Bib",
                     "Status",
                     "Chip time",
-                    "Gun / source time",
+                    "Gun / source performance",
                     "Overall / gender / category",
                   ].map((h) => (
                     <th className="p-2" key={h}>
@@ -248,7 +248,7 @@ function CapturedRace({ id }: { id: string }) {
                       </details>
                     </td>
                     <td className="p-2">
-                      {row.distanceLabel}
+                      {row.distanceLabel || row.tableKey || "Distance not supplied"}
                       <div className="text-xs text-muted">{row.date}</div>
                     </td>
                     <td className="p-2">{row.bib || "—"}</td>
@@ -258,12 +258,19 @@ function CapturedRace({ id }: { id: string }) {
                       {row.original?.["Gun Time"] ||
                         row.original?.Time ||
                         row.original?.["Total Time"] ||
+                        row.original?.Finals ||
+                        row.original?.TIME ||
                         "—"}
                     </td>
                     <td className="p-2">
                       {row.original?.Position || "—"} / {row.original?.["Gender Pos"] || "—"} /{" "}
                       {row.original?.["Cat Pos"] || "—"}
                       <div className="text-xs text-muted">{row.original?.Category || "—"}</div>
+                      {row.original?.["Source Place"] && (
+                        <div className="mt-1 text-xs text-muted">
+                          Source place {row.original["Source Place"]} · {row.original.Event}
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))}
