@@ -99,3 +99,15 @@ assert(!JSON.stringify(profilePersonalBestSummary([], privateHistory)).includes(
 console.log(
   "Historical PB checks passed: verification, opt-in reports, aided courses, precision, timing, conflicts, privacy and sport separation.",
 );
+
+const walk = row({ discipline: "5000 Metres Race Walk", performance: "28:12.45", labels: ["Track"] });
+assert.equal(bests([walk])[0].value.sport, "Walking");
+assert.equal(bests([walk])[0].value.distanceKm, 5);
+assert.equal(profilePersonalBestSummary([], histories([walk]))[0].mark, "28:12.45");
+assert.equal(bests([{ ...walk, labels: [] }]).length, 0);
+assert.equal(bests([{ ...walk, verificationStatus: "unverified" }]).length, 0);
+assert.equal(bests([track, walk]).length, 2, "Running and walking PBs remain separate");
+const precise = { ...profileAchievementResults([], histories([track]))[0], history: undefined,
+  finishTimeSeconds: 973, details: { reportedPerformance: "16:12.55", verificationStatus: "source_verified" } };
+assert.equal(profilePersonalBestSummary([precise], [])[0].mark, "16:12.55");
+assert.equal(profilePersonalBestSummary([{ ...precise, details: { reportedPerformance: "15:00" } }], [])[0].mark, "16:13");

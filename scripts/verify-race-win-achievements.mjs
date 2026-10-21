@@ -292,3 +292,10 @@ assert.equal(
 console.log(
   "Race-win checks passed: classification, distances, deduplication, conflicts, source provenance and exclusions.",
 );
+
+const walkingWin = source({ discipline: "5000 Metres Race Walk", performance: "28:12.45",
+  ageGroup: "", labels: ["Track", "Round: Final"], places: { gender: 1 }, verificationStatus: "source_verified" });
+assert.equal(wins([], [walkingWin])[0].sport, "Walking");
+assert.equal(wins([], [walkingWin])[0].distance, "5000m");
+assert.equal(wins([], [walkingWin])[0].kind, "gender");
+assert.equal(wins([], [{ ...walkingWin, places: undefined, place: "1" }]).length, 0);
