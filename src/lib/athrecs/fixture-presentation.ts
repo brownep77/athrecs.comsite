@@ -139,7 +139,8 @@ export function formatFixtureStart(
   timeZone: string | null,
 ): string {
   const match = time?.trim().match(/^(\d{1,2}):(\d{2})(?::00)?$/);
-  if (!match || Number(match[1]) > 23 || Number(match[2]) > 59) return "Start time TBC";
+  if (!match || Number(match[1]) > 23 || Number(match[2]) > 59)
+    return "Start time not yet verified";
   const clock = `${match[1].padStart(2, "0")}:${match[2]}`;
   if (!timeZone) return `${clock} local · time zone TBC`;
   const wall = Date.parse(`${date}T${clock}:00Z`);

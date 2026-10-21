@@ -78,6 +78,7 @@ type EditionRow = {
   entry_options: EditionEntryOption[];
   spectator_access: EditionSpectatorAccess | null;
   start_time: string | null;
+  start_label?: string | null;
   end_date?: string | null;
   end_time?: string | null;
   notes?: string | null;
@@ -293,7 +294,7 @@ export function RacePageContent({
     county: event.county,
     date: next?.event_date,
   };
-  const nextStart = formatStartTime(next?.start_time, place);
+  const nextStart = next?.start_label ?? formatStartTime(next?.start_time, place);
   const zone = timeZoneForPlace({
     country: event.country,
     county: event.county,
@@ -423,7 +424,8 @@ export function RacePageContent({
                 <p className="text-sm font-medium text-muted">
                   {isRunningEvent && nextDayEditions.length > 1
                     ? `${nextDayEditions.length} distances · see start times below`
-                    : (nextStart ?? (zoneAbbr ? `Time TBC · ${zoneAbbr}` : "Time TBC"))}
+                    : (nextStart ??
+                      (zoneAbbr ? `Time not yet verified · ${zoneAbbr}` : "Time not yet verified"))}
                 </p>
               </div>
             ) : (
@@ -1338,11 +1340,13 @@ function EditionList({
         <div className="grid gap-2">
           {items.map((ed) => {
             const st = effectiveStatus(ed.event_date, ed.status as EntryStatus);
-            const start = formatStartTime(ed.start_time, {
-              country,
-              county,
-              date: ed.event_date,
-            });
+            const start =
+              ed.start_label ??
+              formatStartTime(ed.start_time, {
+                country,
+                county,
+                date: ed.event_date,
+              });
             return (
               <div
                 key={`${ed.id}-${ed.event_date}`}

@@ -92,9 +92,10 @@ export type EventListItem = {
   next_distance: string | null;
   next_status: EntryStatus | null;
   next_start_time: string | null;
+  next_start_label?: string | null;
   /** Only a verified official entry route for the displayed edition. */
   next_entry_url?: string | null;
-  next_starts?: Array<{ distance: string; time: string | null }>;
+  next_starts?: Array<{ distance: string; time: string | null; label?: string | null }>;
   upcoming_count: number;
   past_count: number;
   edition_count: number;

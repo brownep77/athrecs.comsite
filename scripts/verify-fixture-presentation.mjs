@@ -32,8 +32,14 @@ assert.equal(
   formatFixtureStart("07:00", "2026-10-10", "Asia/Kolkata"),
   "07:00 Asia/Kolkata (UTC+5:30)",
 );
-assert.equal(formatFixtureStart("24:00", "2026-10-10", "Europe/London"), "Start time TBC");
-assert.equal(formatFixtureStart(null, "2026-10-10", "Europe/London"), "Start time TBC");
+assert.equal(
+  formatFixtureStart("24:00", "2026-10-10", "Europe/London"),
+  "Start time not yet verified",
+);
+assert.equal(
+  formatFixtureStart(null, "2026-10-10", "Europe/London"),
+  "Start time not yet verified",
+);
 assert.equal(formatFixtureStart("09:00", "2026-10-10", "invalid"), "09:00 local · time zone TBC");
 assert.equal(fixtureTimeZone("United States"), null, "Do not assign Eastern time to all US races");
 assert.equal(

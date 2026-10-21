@@ -28,6 +28,7 @@ export type SportFixture = {
     sourceUrl: string | null;
     checkedAt: string | null;
     note: string | null;
+    label: string | null;
   }>;
 };
 
@@ -165,7 +166,9 @@ export async function readSportFixtures(
           )
           .map((start) => {
             const checked = detail?.starts[start.distance];
-            const sourceUrl = publicHttpUrl(checked ? detail.sourceUrl : start.sourceUrl);
+            const sourceUrl = publicHttpUrl(
+              checked ? (checked.sourceUrl ?? detail.sourceUrl) : start.sourceUrl,
+            );
             // Legacy runABC imports contain UTC-shifted clocks and midnight
             // placeholders. Do not present those as race starts without a check.
             const legacyImport =
@@ -176,6 +179,7 @@ export async function readSportFixtures(
               sourceUrl,
               checkedAt: checked ? detail.checkedAt : null,
               note: checked?.note ?? null,
+              label: checked?.label ?? null,
             };
           })
           .sort(

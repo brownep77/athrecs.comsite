@@ -60,11 +60,13 @@ export function RaceCard({
   const focusStatus =
     race.next_date && race.next_status ? effectiveStatus(race.next_date, race.next_status) : null;
   const visibleStatus = focusStatus === "TBC" ? null : focusStatus;
-  const startLabel = formatStartTime(race.next_start_time, {
-    country: race.country,
-    county: race.county,
-    date: race.next_date,
-  });
+  const startLabel =
+    race.next_start_label ??
+    formatStartTime(race.next_start_time, {
+      country: race.country,
+      county: race.county,
+      date: race.next_date,
+    });
   const distances = sanitizeDistances(race.name, race.distances);
   const venue = venueForEvent({
     slug: race.slug,
@@ -155,7 +157,8 @@ export function RaceCard({
           {focusDate ? (
             <p className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold text-fg">
               <Clock3 className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
-              {startLabel ? `Starts ${startLabel}` : "Start time TBC"}
+              {race.next_start_label ??
+                (startLabel ? `Starts ${startLabel}` : "Start time not yet verified")}
             </p>
           ) : null}
           <div className="mt-1.5 flex min-w-0 flex-wrap items-center justify-between gap-2">

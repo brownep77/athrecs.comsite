@@ -21,8 +21,9 @@ const project = (row) => Object.fromEntries(fields.map((field) => [field, row[fi
 const hash = (payload) => createHash("sha256").update(JSON.stringify(payload)).digest("hex");
 
 export function reviewedCountyBatches(data, baseline) {
-  assert.equal(data.reviewedEditionKeys.length, 139);
-  assert.equal(new Set(data.reviewedEditionKeys).size, 139);
+  const expectedCount = data.expectedEditions ?? 139;
+  assert.equal(data.reviewedEditionKeys.length, expectedCount);
+  assert.equal(new Set(data.reviewedEditionKeys).size, expectedCount);
   const events = new Map(baseline.events.map((event) => [event.id, event]));
   const rows = new Map(
     baseline.editions.map((row) => [
@@ -45,12 +46,14 @@ export function reviewedCountyBatches(data, baseline) {
       status: row.status,
       ...(start.time === null ? {} : { startTime: start.time }),
       source: start.sourceUrl ?? detail.sourceUrl,
-      notes: [
-        row.notes,
-        `Rechecked ${data.checkedAt} against ${start.sourceUrl ?? detail.sourceUrl}. ${start.note ?? ""}`,
-      ]
-        .filter(Boolean)
-        .join("\n"),
+      notes:
+        start.editionNote ??
+        [
+          row.notes,
+          `Rechecked ${data.checkedAt} against ${start.sourceUrl ?? detail.sourceUrl}. ${start.note ?? ""}`,
+        ]
+          .filter(Boolean)
+          .join("\n"),
     };
   });
   const batches = [];

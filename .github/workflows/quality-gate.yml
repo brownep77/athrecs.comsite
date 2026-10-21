@@ -68,6 +68,9 @@ jobs:
       - name: Verify location race pages and automatic date rollover
         run: node scripts/verify-event-colours.mjs
 
+      - name: Verify county additions and published start windows
+        run: node --experimental-strip-types scripts/verify-county-deep-recheck.mjs
+
       - name: Verify athlete search metadata and crawlable directory pages
         run: |
           node scripts/verify-source-history-sport.mjs

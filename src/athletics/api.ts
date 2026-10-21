@@ -9,6 +9,7 @@ import { supplementedStart } from "../data/runrecs-race-guides";
 import {
   FIXTURE_DETAILS,
   checkedFixtureStart,
+  checkedFixtureStartLabel,
   isReviewedFixturePlaceholder,
 } from "../data/fixture-details";
 import * as base from "../lib/athrecs/api";
@@ -300,6 +301,7 @@ export type AthleticsCalendarItem = {
   event_date: string;
   status: string;
   start_time: string | null;
+  start_label?: string | null;
   event_slug: string;
   event_name: string;
   sport: string;
@@ -494,6 +496,7 @@ async function queryAthleticsCalendarPage(
   return {
     items: rows.map(({ total_count: _totalCount, summary, description, ...row }) => ({
       ...row,
+      start_label: checkedFixtureStartLabel(row.event_slug, row.event_date, row.distance_code),
       start_time: checkedFixtureStart(
         row.event_slug,
         row.event_date,

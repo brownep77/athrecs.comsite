@@ -34,6 +34,7 @@ export type PlaceEdition = {
   entryUrl?: string | null;
   startTime?: string | null;
   startNote?: string | null;
+  startLabel?: string | null;
   sourceUrl?: string | null;
   checkedAt?: string | null;
   checkedCity?: string | null;

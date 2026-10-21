@@ -103,7 +103,8 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
                       label={edition.distance === "Half" ? "Half marathon" : edition.distance}
                     />
                     <span>
-                      {formatFixtureStart(edition.startTime ?? null, edition.date, race.timeZone)}
+                      {edition.startLabel ??
+                        formatFixtureStart(edition.startTime ?? null, edition.date, race.timeZone)}
                     </span>
                   </div>
                   {edition.startNote ? (

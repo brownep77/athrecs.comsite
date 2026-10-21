@@ -211,7 +211,8 @@ function AthleticsCalendarCard({ edition }: { edition: AthleticsCalendarItem }) 
             {formatRaceDateShort(edition.event_date)}
           </time>
           <p className="mt-1 text-xs text-subtle">
-            {edition.start_time ? formatStartTime(edition.start_time) : "Time TBC"}
+            {edition.start_label ??
+              (edition.start_time ? formatStartTime(edition.start_time) : "Time not yet verified")}
           </p>
         </div>
 

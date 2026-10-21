@@ -3,6 +3,9 @@ import countyExpansionMore from "./county-expansion-more-2026-10-21.json" with {
 import countyExpansionChecked from "./county-expansion-checked-2026-10-21.json" with { type: "json" };
 import countyTbcReview from "./county-tbc-review-2026-10-21.json" with { type: "json" };
 
+import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type: "json" };
+import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
+
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
   place?: { town?: string; city?: string; county?: string; state?: string };
@@ -12,7 +15,7 @@ export type FixtureDetail = {
   checkedAt: string;
   starts: Record<
     string,
-    { time: string | null; note?: string; publicNote?: string; sourceUrl?: string }
+    { time: string | null; note?: string; publicNote?: string; sourceUrl?: string; label?: string }
   >;
 };
 
@@ -21,6 +24,8 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   ...countyExpansionMore.details,
   ...countyExpansionChecked.details,
   ...countyTbcReview.details,
+  ...countyDeepReview.details,
+  ...countyExpansionDeep.details,
   "chase-the-train|2026-11-01": {
     summary: "A point-to-point trail run beside the Bure Valley Railway from Aylsham to Wroxham.",
     timeZone: "Europe/London",
@@ -318,4 +323,23 @@ export function checkedFixtureStart(
     return starts.map((start) => start.time!).sort()[0] ?? fallback;
   }
   return fallback;
+}
+
+/** A published window/estimate is distinct from an exact machine-readable start. */
+export function checkedFixtureStartLabel(
+  slug: string,
+  date: string | null,
+  distanceCodes: string | null,
+): string | null {
+  if (!date || !distanceCodes) return null;
+  const detail = FIXTURE_DETAILS[`${slug}|${date}`];
+  if (!detail) return null;
+  const codes = distanceCodes.split(" · ").map((code) => code.trim());
+  const labels = codes.map((code) => detail.starts[code]?.label ?? null);
+  if (labels.every((label) => label === labels[0])) return labels[0] ?? null;
+  if (labels.some(Boolean))
+    return codes
+      .map((code, index) => `${code}: ${labels[index] ?? "see distance programme"}`)
+      .join("; ");
+  return null;
 }

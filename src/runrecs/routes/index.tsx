@@ -719,11 +719,13 @@ function HomeStat({ label, value }: { label: string; value: number }) {
 }
 
 function HomeRaceRow({ race }: { race: EventListItem }) {
-  const start = formatStartTime(race.next_start_time, {
-    country: race.country,
-    county: race.county,
-    date: race.next_date,
-  });
+  const start =
+    race.next_start_label ??
+    formatStartTime(race.next_start_time, {
+      country: race.country,
+      county: race.county,
+      date: race.next_date,
+    });
   const competition = race.groups[0]?.label;
 
   return (
@@ -735,7 +737,9 @@ function HomeRaceRow({ race }: { race: EventListItem }) {
         >
           {race.next_date ? formatHomeDate(race.next_date) : "Date TBC"}
         </time>
-        <span className="mt-1 block text-[11px] text-subtle">{start ?? "Time TBC"}</span>
+        <span className="mt-1 block text-[11px] text-subtle">
+          {start ?? "Time not yet verified"}
+        </span>
       </div>
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-2">

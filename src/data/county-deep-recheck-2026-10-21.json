@@ -1,0 +1,1684 @@
+{
+  "checkedAt": "2026-10-21",
+  "sourcePrefix": "athrecs:county-deep-recheck:2026-10-21",
+  "expectedEditions": 126,
+  "details": {
+    "far-stratford-triathlon|2027-04-18": {
+      "summary": "Stratford Triathlon in Stratford-upon-Avon, Warwickshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/stratford-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Stratford-upon-Avon",
+        "county": "Warwickshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: open category 07:30–09:30; female category 09:30–10:15. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 07:30–10:15 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.4km swim / 18km cycle / 5km run. Organiser’s current event-page estimate: open category 07:30–09:30; female category 09:30–10:15. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/stratford-triathlon"
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 10:45–11:10. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 10:45–11:10 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.2km swim / 18km cycle / 2.5km run. Organiser’s current event-page estimate: 10:45–11:10. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/stratford-triathlon"
+        }
+      }
+    },
+    "far-cheshire-triathlon|2027-05-09": {
+      "summary": "Cheshire Triathlon in Nantwich, Cheshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/cheshire-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Nantwich",
+        "county": "Cheshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: open category 07:45–10:30; female category 10:30–11:45. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 07:45–11:45 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.5km swim / 21km cycle / 5km run. Organiser’s current event-page estimate: open category 07:45–10:30; female category 10:30–11:45. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/cheshire-triathlon"
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: female 12:15–12:30; open 12:30–12:45. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 12:15–12:45 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.2km swim / 21km cycle / 2.5km run. Organiser’s current event-page estimate: female 12:15–12:30; open 12:30–12:45. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/cheshire-triathlon"
+        }
+      }
+    },
+    "far-henley-triathlon|2027-06-06": {
+      "summary": "Henley Triathlon in Henley-on-Thames, Oxfordshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/henley-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Henley-on-Thames",
+        "county": "Oxfordshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: open category from 08:30; female from 09:45. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts from 08:30 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.4km swim / 25km cycle / 5km run. Organiser’s current event-page estimate: open category from 08:30; female from 09:45. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/henley-triathlon"
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: from 10:45. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts from 10:45 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.2km swim / 12.5km cycle / 2.5km run. Organiser’s current event-page estimate: from 10:45. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/henley-triathlon"
+        }
+      }
+    },
+    "far-shropshire-triathlon|2027-06-19": {
+      "summary": "Shropshire Triathlon in Ellesmere, Shropshire, with Sprint, Olympic options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/shropshire-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ellesmere",
+        "county": "Shropshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: from 07:45. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts from 07:45 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.75km swim / 25km cycle / 5km run. Organiser’s current event-page estimate: from 07:45. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/shropshire-triathlon"
+        },
+        "Olympic": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: from 07:00. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts from 07:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "1.5km swim / 39km cycle / 10km run. Organiser’s current event-page estimate: from 07:00. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/shropshire-triathlon"
+        }
+      }
+    },
+    "far-york-triathlon|2027-08-22": {
+      "summary": "York Triathlon in York, North Yorkshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/york-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "York",
+        "county": "North Yorkshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 08:15–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 08:15–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.4km swim / 20km cycle / 5km run. Organiser’s current event-page estimate: 08:15–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/york-triathlon"
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 12:40–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 12:40–13:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.2km swim / 10km cycle / 2.5km run. Organiser’s current event-page estimate: 12:40–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/york-triathlon"
+        }
+      }
+    },
+    "ellesmere-triathlon|2027-09-04": {
+      "summary": "Ellesmere Triathlon in Ellesmere, Shropshire, with Middle, Olympic, Sprint, Fun Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/ellesmere-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ellesmere",
+        "county": "Shropshire"
+      },
+      "starts": {
+        "Middle": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: from 07:30. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts from 07:30 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "2km swim / 78km cycle / 20km run. Organiser’s current event-page estimate: from 07:30. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/ellesmere-triathlon"
+        },
+        "Olympic": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: from 08:30. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts from 08:30 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "1.5km swim / 39km cycle / 10km run. Organiser’s current event-page estimate: from 08:30. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/ellesmere-triathlon"
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: from 09:10. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts from 09:10 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.75km swim / 25km cycle / 5km run. Organiser’s current event-page estimate: from 09:10. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/ellesmere-triathlon"
+        },
+        "Fun Sprint": {
+          "time": null,
+          "note": "The organiser allocates individual starts 7–10 days before. The current timetable lists Sprint from 09:10 but does not separately identify the Fun Sprint; its specific start has not been verified.",
+          "label": "Individual start allocated before event",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "0.2km swim / 25km cycle / 5km run. The organiser allocates individual starts 7–10 days before. The current timetable lists Sprint from 09:10 but does not separately identify the Fun Sprint; its specific start has not been verified. Source checked 2026-10-21: https://uktriathlon.co.uk/events/ellesmere-triathlon"
+        }
+      }
+    },
+    "far-north-west-triathlon|2027-09-19": {
+      "summary": "North West Triathlon in Nantwich, Cheshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/north-west-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Nantwich",
+        "county": "Cheshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 08:00–11:30. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 08:00–11:30 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.5km swim / 21km cycle / 5km run. Organiser’s current event-page estimate: 08:00–11:30. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/north-west-triathlon"
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 12:00–12:30. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 12:00–12:30 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.2km swim / 21km cycle / 2.5km run. Organiser’s current event-page estimate: 12:00–12:30. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/north-west-triathlon"
+        }
+      }
+    },
+    "far-warwickshire-triathlon|2027-10-03": {
+      "summary": "Warwickshire Triathlon in Stratford-upon-Avon, Warwickshire, with Sprint, Super Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/warwickshire-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Stratford-upon-Avon",
+        "county": "Warwickshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: open category 07:45–09:30; female 09:30–10:15. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 07:45–10:15 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.4km swim / 18km cycle / 5km run. Organiser’s current event-page estimate: open category 07:45–09:30; female 09:30–10:15. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/warwickshire-triathlon"
+        },
+        "Super Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: open category 10:45–11:00; female is printed as 10:45–10:45, which needs clarification. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts from 10:45 local",
+          "status": "estimate",
+          "needsReview": true,
+          "editionNote": "0.2km swim / 18km cycle / 2.5km run. Organiser’s current event-page estimate: open category 10:45–11:00; female is printed as 10:45–10:45, which needs clarification. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/warwickshire-triathlon"
+        }
+      }
+    },
+    "ultimate-triathlon-150-100-and-50|2027-06-20": {
+      "summary": "Ultimate Triathlon 150, 100 and 50 in Ellesmere, Shropshire, with Ultimate 150, Ultimate 100, Ultimate 50 options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/ultimate-triathlon-150-100-50",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ellesmere",
+        "county": "Shropshire"
+      },
+      "starts": {
+        "Ultimate 150": {
+          "time": "07:30",
+          "note": "The current page dated 20 June 2027 lists a 07:30 start for Ultimate 150, 100 and 50 in its Start times section. The linked PDF is explicitly the 2026 pack; the current-page programme is shown here and final 2027 instructions still take priority.",
+          "label": "Published start 07:30 local",
+          "status": "published",
+          "needsReview": false,
+          "editionNote": "3km swim / 117km cycle / 30km run. The current page dated 20 June 2027 lists a 07:30 start for Ultimate 150, 100 and 50 in its Start times section. The linked PDF is explicitly the 2026 pack; the current-page programme is shown here and final 2027 instructions still take priority. Source checked 2026-10-21: https://uktriathlon.co.uk/events/ultimate-triathlon-150-100-50"
+        },
+        "Ultimate 100": {
+          "time": "07:30",
+          "note": "The current page dated 20 June 2027 lists a 07:30 start for Ultimate 150, 100 and 50 in its Start times section. The linked PDF is explicitly the 2026 pack; the current-page programme is shown here and final 2027 instructions still take priority.",
+          "label": "Published start 07:30 local",
+          "status": "published",
+          "needsReview": false,
+          "editionNote": "2km swim / 78km cycle / 20km run. The current page dated 20 June 2027 lists a 07:30 start for Ultimate 150, 100 and 50 in its Start times section. The linked PDF is explicitly the 2026 pack; the current-page programme is shown here and final 2027 instructions still take priority. Source checked 2026-10-21: https://uktriathlon.co.uk/events/ultimate-triathlon-150-100-50"
+        },
+        "Ultimate 50": {
+          "time": "07:30",
+          "note": "The current page dated 20 June 2027 lists a 07:30 start for Ultimate 150, 100 and 50 in its Start times section. The linked PDF is explicitly the 2026 pack; the current-page programme is shown here and final 2027 instructions still take priority.",
+          "label": "Published start 07:30 local",
+          "status": "published",
+          "needsReview": false,
+          "editionNote": "1km swim / 39km cycle / 10km run. The current page dated 20 June 2027 lists a 07:30 start for Ultimate 150, 100 and 50 in its Start times section. The linked PDF is explicitly the 2026 pack; the current-page programme is shown here and final 2027 instructions still take priority. Source checked 2026-10-21: https://uktriathlon.co.uk/events/ultimate-triathlon-150-100-50"
+        }
+      }
+    },
+    "glasgow-triathlon|2027-05-22": {
+      "summary": "Glasgow Triathlon in Glasgow, Glasgow City, with Fun Challenge, Endeavour, Venture, Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/glasgow-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Glasgow",
+        "county": "Glasgow City"
+      },
+      "starts": {
+        "Fun Challenge": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 08:00–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 08:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.1km swim / 3km cycle / 1km run. Organiser’s current event-page estimate: 08:00–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/glasgow-triathlon"
+        },
+        "Endeavour": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 08:00–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 08:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.15km swim / 6km cycle / 2km run. Organiser’s current event-page estimate: 08:00–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/glasgow-triathlon"
+        },
+        "Venture": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 08:00–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 08:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.2km swim / 9km cycle / 3km run. Organiser’s current event-page estimate: 08:00–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/glasgow-triathlon"
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 08:00–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change.",
+          "label": "Estimated starts 08:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.4km swim / 9km cycle / 5km run. Organiser’s current event-page estimate: 08:00–12:00. Personal start times are emailed 7–10 days before the event; the estimate may change. Source checked 2026-10-21: https://uktriathlon.co.uk/events/glasgow-triathlon"
+        }
+      }
+    },
+    "caldicot-triathlon|2027-06-26": {
+      "summary": "Caldicot Triathlon in Caldicot, Monmouthshire, with Fun Challenge, Endeavour, Venture, Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/caldicot-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Caldicot",
+        "county": "Monmouthshire"
+      },
+      "starts": {
+        "Fun Challenge": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 11:00–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change. The downloadable race pack is still for 2026; the window is current-page guidance, not a final 2027 allocation.",
+          "label": "Estimated starts 11:00–13:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.1km swim / 3km cycle / 1km run. Organiser’s current event-page estimate: 11:00–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change. The downloadable race pack is still for 2026; the window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/events/caldicot-triathlon"
+        },
+        "Endeavour": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 11:00–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change. The downloadable race pack is still for 2026; the window is current-page guidance, not a final 2027 allocation.",
+          "label": "Estimated starts 11:00–13:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.16km swim / 4km cycle / 2km run. Organiser’s current event-page estimate: 11:00–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change. The downloadable race pack is still for 2026; the window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/events/caldicot-triathlon"
+        },
+        "Venture": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 11:00–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change. The downloadable race pack is still for 2026; the window is current-page guidance, not a final 2027 allocation.",
+          "label": "Estimated starts 11:00–13:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.2km swim / 5km cycle / 3km run. Organiser’s current event-page estimate: 11:00–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change. The downloadable race pack is still for 2026; the window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/events/caldicot-triathlon"
+        },
+        "Sprint": {
+          "time": null,
+          "note": "Organiser’s current event-page estimate: 11:00–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change. The downloadable race pack is still for 2026; the window is current-page guidance, not a final 2027 allocation.",
+          "label": "Estimated starts 11:00–13:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "0.4km swim / 6km cycle / 5km run. Organiser’s current event-page estimate: 11:00–13:00. Personal start times are emailed 7–10 days before the event; the estimate may change. The downloadable race pack is still for 2026; the window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/events/caldicot-triathlon"
+        }
+      }
+    },
+    "west-midlands-triathlon|2027-08-07": {
+      "summary": "West Midlands Triathlon in Birmingham, West Midlands, with Fun Challenge, Endeavour, Venture, Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/events/west-midlands-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Birmingham",
+        "county": "West Midlands"
+      },
+      "starts": {
+        "Fun Challenge": {
+          "time": null,
+          "note": "UK Triathlon’s current page estimates 08:00–12:00; its linked UK Charity Triathlon page gives 08:00–10:00 for 7 August 2027. No source establishes whether charity entries have separate waves. Follow the personal allocation; do not assume one window supersedes the other. Charity source: https://charitytriathlon.org/west-midlands-triathlon/",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "0.1km swim / 3km cycle / 1km run. UK Triathlon’s current page estimates 08:00–12:00; its linked UK Charity Triathlon page gives 08:00–10:00 for 7 August 2027. No source establishes whether charity entries have separate waves. Follow the personal allocation; do not assume one window supersedes the other. Charity source: https://charitytriathlon.org/west-midlands-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/events/west-midlands-triathlon"
+        },
+        "Endeavour": {
+          "time": null,
+          "note": "UK Triathlon’s current page estimates 08:00–12:00; its linked UK Charity Triathlon page gives 08:00–10:00 for 7 August 2027. No source establishes whether charity entries have separate waves. Follow the personal allocation; do not assume one window supersedes the other. Charity source: https://charitytriathlon.org/west-midlands-triathlon/",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "0.15km swim / 4km cycle / 2km run. UK Triathlon’s current page estimates 08:00–12:00; its linked UK Charity Triathlon page gives 08:00–10:00 for 7 August 2027. No source establishes whether charity entries have separate waves. Follow the personal allocation; do not assume one window supersedes the other. Charity source: https://charitytriathlon.org/west-midlands-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/events/west-midlands-triathlon"
+        },
+        "Venture": {
+          "time": null,
+          "note": "UK Triathlon’s current page estimates 08:00–12:00; its linked UK Charity Triathlon page gives 08:00–10:00 for 7 August 2027. No source establishes whether charity entries have separate waves. Follow the personal allocation; do not assume one window supersedes the other. Charity source: https://charitytriathlon.org/west-midlands-triathlon/",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "0.2km swim / 5km cycle / 3km run. UK Triathlon’s current page estimates 08:00–12:00; its linked UK Charity Triathlon page gives 08:00–10:00 for 7 August 2027. No source establishes whether charity entries have separate waves. Follow the personal allocation; do not assume one window supersedes the other. Charity source: https://charitytriathlon.org/west-midlands-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/events/west-midlands-triathlon"
+        },
+        "Sprint": {
+          "time": null,
+          "note": "UK Triathlon’s current page estimates 08:00–12:00; its linked UK Charity Triathlon page gives 08:00–10:00 for 7 August 2027. No source establishes whether charity entries have separate waves. Follow the personal allocation; do not assume one window supersedes the other. Charity source: https://charitytriathlon.org/west-midlands-triathlon/",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "0.4km swim / 6km cycle / 5km run. UK Triathlon’s current page estimates 08:00–12:00; its linked UK Charity Triathlon page gives 08:00–10:00 for 7 August 2027. No source establishes whether charity entries have separate waves. Follow the personal allocation; do not assume one window supersedes the other. Charity source: https://charitytriathlon.org/west-midlands-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/events/west-midlands-triathlon"
+        }
+      }
+    },
+    "woodhall-spa-triathlon|2027-09-19": {
+      "summary": "Woodhall Spa Triathlon in Woodhall Spa, Lincolnshire, with Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://curlysathletes.co.uk/woodhall-spa-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Woodhall Spa",
+        "county": "Lincolnshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "07:30",
+          "note": "The 19 September 2027 organiser page publishes waves from 07:30 until around 12:30, allocated by predicted swim time, with faster swimmers later. Follow your personal allocation. The 2027 pack is due 10–14 days before the event. Entry availability remains unconfirmed.",
+          "label": "Waves 07:30–around 12:30 local",
+          "status": "wave_window",
+          "needsReview": false,
+          "editionNote": "0.4km swim / 24km cycle / 5km run. The 19 September 2027 organiser page publishes waves from 07:30 until around 12:30, allocated by predicted swim time, with faster swimmers later. Follow your personal allocation. The 2027 pack is due 10–14 days before the event. Entry availability remains unconfirmed. Source checked 2026-10-21: https://curlysathletes.co.uk/woodhall-spa-triathlon"
+        }
+      }
+    },
+    "slateman-triathlon|2027-06-13": {
+      "summary": "Slateman Triathlon in Llanberis, Gwynedd, with Sprint, Standard, Legend 70.3, Ultra Chwarel, Ultra Mynydd options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Llanberis",
+        "county": "Gwynedd"
+      },
+      "starts": {
+        "Sprint": {
+          "time": null,
+          "note": "The current 13 June 2027 distance page says the race usually starts at 09:00. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race.",
+          "label": "Usual first start 09:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-sprint",
+          "editionNote": "0.75km swim / 20.2km cycle / 5.8km run. The current 13 June 2027 distance page says the race usually starts at 09:00. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race. Source checked 2026-10-21: https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-sprint"
+        },
+        "Standard": {
+          "time": null,
+          "note": "The current 13 June 2027 distance page says the race usually starts at 08:00. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race.",
+          "label": "Usual first start 08:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-standard",
+          "editionNote": "1.5km swim / 49.9km cycle / 11.7km run. The current 13 June 2027 distance page says the race usually starts at 08:00. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race. Source checked 2026-10-21: https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-standard"
+        },
+        "Legend 70.3": {
+          "time": null,
+          "note": "The current 13 June 2027 distance page says the race usually starts at 07:00. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race.",
+          "label": "Usual first start 07:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-legend",
+          "editionNote": "1.9km swim / 92.6km cycle / 23.1km run. The current 13 June 2027 distance page says the race usually starts at 07:00. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race. Source checked 2026-10-21: https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-triathlon-legend"
+        },
+        "Ultra Chwarel": {
+          "time": null,
+          "note": "The current 13 June 2027 distance page says the race usually starts at 05:15. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race.",
+          "label": "Usual first start 05:15 local",
+          "status": "estimate",
+          "needsReview": false,
+          "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-2026-triathlon-ultra",
+          "editionNote": "3.86243km swim / 180km cycle / 44.5km run. The current 13 June 2027 distance page says the race usually starts at 05:15. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race. Source checked 2026-10-21: https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-2026-triathlon-ultra"
+        },
+        "Ultra Mynydd": {
+          "time": null,
+          "note": "The current 13 June 2027 distance page says the race usually starts at 05:15. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race.",
+          "label": "Usual first start 05:15 local",
+          "status": "estimate",
+          "needsReview": false,
+          "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-2026-triathlon-ultra",
+          "editionNote": "3.86243km swim / 180km cycle / 49.9km run. The current 13 June 2027 distance page says the race usually starts at 05:15. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race. Source checked 2026-10-21: https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-2026-triathlon-ultra"
+        }
+      }
+    },
+    "slateman-duathlon|2027-06-13": {
+      "summary": "Slateman Duathlon in Llanberis, Gwynedd, with Standard options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Llanberis",
+        "county": "Gwynedd"
+      },
+      "starts": {
+        "Standard": {
+          "time": null,
+          "note": "The current 13 June 2027 distance page says the race usually starts at 08:00. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race.",
+          "label": "Usual first start 08:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "sourceUrl": "https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-standard-duathlon",
+          "editionNote": "5.8km run / 49.9km cycle / 11.7km run. The current 13 June 2027 distance page says the race usually starts at 08:00. This is organiser planning guidance; confirmed waves and final instructions are due about ten days before the race. Source checked 2026-10-21: https://alwaysaimhighevents.com/events/slateman-triathlon/slateman-standard-duathlon"
+        }
+      }
+    },
+    "swim-derwent|2027-07-04": {
+      "summary": "Swim Derwent in Consett, County Durham, with 400m, 0.5mi, 1mi, 2mi, 3mi options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/swim-derwent-14533",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Consett",
+        "county": "County Durham"
+      },
+      "starts": {
+        "400m": {
+          "time": null,
+          "note": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels.",
+          "label": "Expected starts 09:00–10:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/swim-derwent-14533"
+        },
+        "0.5mi": {
+          "time": null,
+          "note": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels.",
+          "label": "Expected starts 09:00–10:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/swim-derwent-14533"
+        },
+        "1mi": {
+          "time": null,
+          "note": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels.",
+          "label": "Expected starts 09:00–10:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/swim-derwent-14533"
+        },
+        "2mi": {
+          "time": null,
+          "note": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels.",
+          "label": "Expected starts 09:00–10:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/swim-derwent-14533"
+        },
+        "3mi": {
+          "time": null,
+          "note": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels.",
+          "label": "Expected starts 09:00–10:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "The organiser expects all swims between 09:00 and 10:00 on 4 July 2027. Exact distance waves will follow closer to the event. The entry form’s generic 09:00 is not an individual allocation. Routes may vary with water levels. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/swim-derwent-14533"
+        }
+      }
+    },
+    "west-lancs-spring-triathlon|2027-04-18": {
+      "summary": "West Lancs Spring Triathlon in Ormskirk, Lancashire, with Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://epicevents.co.uk/events/west-lancs-spring-triathlon-multisport/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ormskirk",
+        "county": "Lancashire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "06:30",
+          "note": "The first swim starts at 06:30 within the organiser’s 06:30–12:30 window. Personal swim times are allocated separately before the event.",
+          "label": "Swim starts 06:30–12:30 local",
+          "status": "wave_window",
+          "needsReview": false,
+          "editionNote": "0.4km swim / 21km cycle / 5km run. The first swim starts at 06:30 within the organiser’s 06:30–12:30 window. Personal swim times are allocated separately before the event. Source checked 2026-10-21: https://epicevents.co.uk/events/west-lancs-spring-triathlon-multisport/"
+        }
+      }
+    },
+    "rb-west-lancs-summer-triathlon-multisport|2027-08-22": {
+      "summary": "West Lancs Summer Triathlon in Ormskirk, Lancashire, with Sprint options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://epicevents.co.uk/events/west-lancs-summer-triathlon-multisport/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ormskirk",
+        "county": "Lancashire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "06:30",
+          "note": "The first swim starts at 06:30 within the organiser’s 06:30–12:30 window. Personal swim times are allocated separately before the event.",
+          "label": "Swim starts 06:30–12:30 local",
+          "status": "wave_window",
+          "needsReview": false,
+          "editionNote": "0.4km swim / 21km cycle / 5km run. The first swim starts at 06:30 within the organiser’s 06:30–12:30 window. Personal swim times are allocated separately before the event. Source checked 2026-10-21: https://epicevents.co.uk/events/west-lancs-summer-triathlon-multisport/"
+        }
+      }
+    },
+    "wa-england-athletics-senior-u20-combined-events-championships-7219932|2027-01-16": {
+      "summary": "England Senior and U20 Indoor Combined Events, Para and Race Walk Championships in Sheffield, South Yorkshire, with Track & Field options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.englandathletics.org/2027-championships/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Sheffield",
+        "county": "South Yorkshire"
+      },
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "The governing body’s 2027 championships page confirms the dates at EIS Sheffield. No discipline/session timetable was located in the current page, linked information or targeted searches. The linked Eventbrite organiser listing could not be retrieved. This is a research gap, not an organiser declaration of TBC.",
+          "label": "Session timetable not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The governing body’s 2027 championships page confirms the dates at EIS Sheffield. No discipline/session timetable was located in the current page, linked information or targeted searches. The linked Eventbrite organiser listing could not be retrieved. This is a research gap, not an organiser declaration of TBC. Source checked 2026-10-21: https://www.englandathletics.org/2027-championships/"
+        }
+      }
+    },
+    "wa-england-athletics-u15-u17-20-indoor-championships-7220520|2027-02-06": {
+      "summary": "England U16, U18 and U20 Indoor Championships in Sheffield, South Yorkshire, with Track & Field options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.englandathletics.org/2027-championships/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Sheffield",
+        "county": "South Yorkshire"
+      },
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "The governing body’s 2027 championships page confirms the dates at EIS Sheffield. No discipline/session timetable was located in the current page, linked information or targeted searches. The linked Eventbrite organiser listing could not be retrieved. This is a research gap, not an organiser declaration of TBC.",
+          "label": "Session timetable not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The governing body’s 2027 championships page confirms the dates at EIS Sheffield. No discipline/session timetable was located in the current page, linked information or targeted searches. The linked Eventbrite organiser listing could not be retrieved. This is a research gap, not an organiser declaration of TBC. Source checked 2026-10-21: https://www.englandathletics.org/2027-championships/"
+        }
+      }
+    },
+    "wa-england-athletics-age-group-ce-and-junior-para-championships-7234033|2027-03-06": {
+      "summary": "England Age Group Indoor Combined Events and Junior Para Championships in Sheffield, South Yorkshire, with Track & Field options.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.englandathletics.org/2027-championships/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Sheffield",
+        "county": "South Yorkshire"
+      },
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "The governing body’s 2027 championships page confirms the dates at EIS Sheffield. No discipline/session timetable was located in the current page, linked information or targeted searches. The linked Eventbrite organiser listing could not be retrieved. This is a research gap, not an organiser declaration of TBC.",
+          "label": "Session timetable not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The governing body’s 2027 championships page confirms the dates at EIS Sheffield. No discipline/session timetable was located in the current page, linked information or targeted searches. The linked Eventbrite organiser listing could not be retrieved. This is a research gap, not an organiser declaration of TBC. Source checked 2026-10-21: https://www.englandathletics.org/2027-championships/"
+        }
+      }
+    },
+    "moors-valley-festive-trail-runs|2026-12-06": {
+      "summary": "Moors Valley Festive Trail Runs at Moors Valley Country Park in Ringwood, Dorset. Choose from 2K, 5K, 10K.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/moors-valley-festive-trail-runs-2km-santa-run-5km-and-10km-14910",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Ringwood",
+        "county": "Dorset"
+      },
+      "starts": {
+        "2K": {
+          "time": null,
+          "note": "The 2K entry category gives 10:00; the organiser’s on-the-day section says starts from 10:30 without identifying a separate 2K exception. The event FAQ does not resolve it. Please check the children’s allocation. Entry: https://www.clubtrac.co.uk/registration-form/14910",
+          "label": "Published starts conflict: 10:00 / 10:30",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "The 2K entry category gives 10:00; the organiser’s on-the-day section says starts from 10:30 without identifying a separate 2K exception. The event FAQ does not resolve it. Please check the children’s allocation. Entry: https://www.clubtrac.co.uk/registration-form/14910 Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/moors-valley-festive-trail-runs-2km-santa-run-5km-and-10km-14910"
+        },
+        "5K": {
+          "time": "10:30",
+          "note": "The organiser’s event programme and distance entry category agree on 10:30.",
+          "label": "Start 10:30 local",
+          "status": "published",
+          "needsReview": false,
+          "editionNote": "The organiser’s event programme and distance entry category agree on 10:30. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/moors-valley-festive-trail-runs-2km-santa-run-5km-and-10km-14910"
+        },
+        "10K": {
+          "time": "10:30",
+          "note": "The organiser’s event programme and distance entry category agree on 10:30.",
+          "label": "Start 10:30 local",
+          "status": "published",
+          "needsReview": false,
+          "editionNote": "The organiser’s event programme and distance entry category agree on 10:30. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/moors-valley-festive-trail-runs-2km-santa-run-5km-and-10km-14910"
+        }
+      }
+    },
+    "gibside-wild-new-year-trail-runs-5-mile-2027|2027-01-03": {
+      "summary": "Gibside Wild New Year Trail Runs at Gibside National Trust in Rowlands Gill, Tyne and Wear. Choose from 5mi, 10mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/gibside-wild-new-year-trail-runs-15425",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Rowlands Gill",
+        "county": "Tyne and Wear"
+      },
+      "starts": {
+        "5mi": {
+          "time": "09:00",
+          "note": "The organiser’s expected start is 09:00, matching the entry form. Final confirmation will be included in event information.",
+          "label": "Expected start 09:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "The organiser’s expected start is 09:00, matching the entry form. Final confirmation will be included in event information. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/gibside-wild-new-year-trail-runs-15425"
+        },
+        "10mi": {
+          "time": "09:00",
+          "note": "The organiser’s expected start is 09:00, matching the entry form. Final confirmation will be included in event information.",
+          "label": "Expected start 09:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "The organiser’s expected start is 09:00, matching the entry form. Final confirmation will be included in event information. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/gibside-wild-new-year-trail-runs-15425"
+        }
+      }
+    },
+    "bamburgh-castle-wild-10k-trail-run|2027-04-17": {
+      "summary": "Bamburgh Castle Wild 10K Trail Run at Links Road car park in Bamburgh, Northumberland. Advertised format: 10K.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.wilddeerevents.co.uk/e/bamburgh-castle-wild-10km-trail-run-15391",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Bamburgh",
+        "county": "Northumberland"
+      },
+      "starts": {
+        "10K": {
+          "time": "10:00",
+          "note": "The organiser’s expected start is 10:00, matching the entry form. Final confirmation will be included in event information.",
+          "label": "Expected start 10:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "The organiser’s expected start is 10:00, matching the entry form. Final confirmation will be included in event information. Source checked 2026-10-21: https://www.wilddeerevents.co.uk/e/bamburgh-castle-wild-10km-trail-run-15391"
+        }
+      }
+    },
+    "outlaw-nottingham-sprint|2027-05-22": {
+      "summary": "Outlaw Nottingham Sprint at National Water Sports Centre in Nottingham, Nottinghamshire. Advertised format: Sprint.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://outlawtriathlon.com/outlaw-nottingham/sprint",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Nottingham",
+        "county": "Nottinghamshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "07:30",
+          "note": "Published wave programme; use your assigned age-group/wave start.",
+          "label": "Waves 07:30, 10:00 and 12:30 local",
+          "status": "wave_window",
+          "needsReview": false,
+          "editionNote": "0.75km swim / 20km cycle / 5km run. Published wave programme; use your assigned age-group/wave start. Source checked 2026-10-21: https://outlawtriathlon.com/outlaw-nottingham/sprint"
+        }
+      }
+    },
+    "outlaw-original-sprint|2027-07-24": {
+      "summary": "Outlaw Original Sprint at National Water Sports Centre in Nottingham, Nottinghamshire. Advertised format: Sprint.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://outlawtriathlon.com/outlaw-original/outlaw-sprint",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Nottingham",
+        "county": "Nottinghamshire"
+      },
+      "starts": {
+        "Sprint": {
+          "time": "07:30",
+          "note": "Published wave programme; use your assigned age-group/wave start.",
+          "label": "Waves 07:30, 10:00 and 12:30 local",
+          "status": "wave_window",
+          "needsReview": false,
+          "editionNote": "0.75km swim / 20km cycle / 5km run. Published wave programme; use your assigned age-group/wave start. Source checked 2026-10-21: https://outlawtriathlon.com/outlaw-original/outlaw-sprint"
+        }
+      }
+    },
+    "suffolk-go-wild|2026-11-01": {
+      "summary": "Suffolk Go Wild at RSPB Minsmere in Saxmundham, Suffolk. Choose from 25mi, 50mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/go-wild/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Saxmundham",
+        "county": "Suffolk"
+      },
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "The organiser page and Cycling UK listing confirm 1 November 2026. Village hours are 07:00–16:00; a rider start was not located. The FAQ says welcome information is emailed three weeks before and final instructions one week before. The five-mile family option is separately confirmed by Cycling UK.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The organiser page and Cycling UK listing confirm 1 November 2026. Village hours are 07:00–16:00; a rider start was not located. The FAQ says welcome information is emailed three weeks before and final instructions one week before. The five-mile family option is separately confirmed by Cycling UK. Source checked 2026-10-21: https://tprevents.co.uk/product/go-wild/"
+        },
+        "50mi": {
+          "time": null,
+          "note": "The organiser page and Cycling UK listing confirm 1 November 2026. Village hours are 07:00–16:00; a rider start was not located. The FAQ says welcome information is emailed three weeks before and final instructions one week before. The five-mile family option is separately confirmed by Cycling UK.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The organiser page and Cycling UK listing confirm 1 November 2026. Village hours are 07:00–16:00; a rider start was not located. The FAQ says welcome information is emailed three weeks before and final instructions one week before. The five-mile family option is separately confirmed by Cycling UK. Source checked 2026-10-21: https://tprevents.co.uk/product/go-wild/"
+        }
+      }
+    },
+    "tour-de-broads-winter-series|2026-11-29": {
+      "summary": "Tour de Broads Winter Series at Whitlingham Country Park in Norwich, Norfolk. Choose from 25mi, 50mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/winter-series/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Norwich",
+        "county": "Norfolk"
+      },
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants. Source checked 2026-10-21: https://tprevents.co.uk/product/winter-series/"
+        },
+        "50mi": {
+          "time": null,
+          "note": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants. Source checked 2026-10-21: https://tprevents.co.uk/product/winter-series/"
+        }
+      }
+    },
+    "tour-de-broads-winter-series|2026-12-13": {
+      "summary": "Tour de Broads Winter Series at Whitlingham Country Park in Norwich, Norfolk. Choose from 25mi, 50mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/winter-series/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Norwich",
+        "county": "Norfolk"
+      },
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants. Source checked 2026-10-21: https://tprevents.co.uk/product/winter-series/"
+        },
+        "50mi": {
+          "time": null,
+          "note": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants. Source checked 2026-10-21: https://tprevents.co.uk/product/winter-series/"
+        }
+      }
+    },
+    "tour-de-broads-winter-series|2026-12-27": {
+      "summary": "Tour de Broads Winter Series at Whitlingham Country Park in Norwich, Norfolk. Choose from 25mi, 50mi.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/winter-series/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Norwich",
+        "county": "Norfolk"
+      },
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants. Source checked 2026-10-21: https://tprevents.co.uk/product/winter-series/"
+        },
+        "50mi": {
+          "time": null,
+          "note": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants.",
+          "label": "Ride start not yet verified",
+          "status": "not_located",
+          "needsReview": true,
+          "editionNote": "The current 2026 product page gives village hours 09:00–15:00, not a rider start. The separate 09:30 article explicitly describes 2025 dates. Current rider times were not located; welcome/final instructions are emailed to entrants. Source checked 2026-10-21: https://tprevents.co.uk/product/winter-series/"
+        }
+      }
+    },
+    "wa-f0652b6bc69f7151|2027-07-31": {
+      "summary": "Novuna UK Athletics Championships at Alexander Stadium in Birmingham, West Midlands. Advertised format: Track & Field.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.britishathletics.org.uk/events/2027-novuna-uk-athletics-championships/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Birmingham",
+        "county": "West Midlands"
+      },
+      "starts": {
+        "Track & Field": {
+          "time": null,
+          "note": "British Athletics gives Saturday 11:30–19:25 TBC and Sunday 11:30–16:30 TBC. The detailed discipline timetable will be published in July 2027. These are provisional main-programme hours, not each athlete’s start.",
+          "label": "Provisional programme from 11:30 local",
+          "status": "organiser_pending",
+          "needsReview": true,
+          "editionNote": "British Athletics gives Saturday 11:30–19:25 TBC and Sunday 11:30–16:30 TBC. The detailed discipline timetable will be published in July 2027. These are provisional main-programme hours, not each athlete’s start. Source checked 2026-10-21: https://www.britishathletics.org.uk/events/2027-novuna-uk-athletics-championships/"
+        }
+      }
+    },
+    "great-north-swim|2027-06-12": {
+      "summary": "Great North Swim at Brockhole on Windermere in Windermere, Cumbria. Choose from 2mi, 1mi, 0.5mi, 250m.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://greatswim.org/great-north-swim/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Windermere",
+        "county": "Cumbria"
+      },
+      "starts": {
+        "2mi": {
+          "time": "09:30",
+          "note": "Published organiser timetable is subject to change. Attend the wave selected on your booking.",
+          "label": "Start 09:30 local",
+          "status": "wave_window",
+          "needsReview": false,
+          "editionNote": "Published organiser timetable is subject to change. Attend the wave selected on your booking. Source checked 2026-10-21: https://greatswim.org/great-north-swim/"
+        },
+        "1mi": {
+          "time": "09:30",
+          "note": "Waves at 09:30, 10:00, 11:00, 12:00 and 13:00. Published organiser timetable is subject to change. Attend the wave selected on your booking.",
+          "label": "Waves from 09:30 local",
+          "status": "wave_window",
+          "needsReview": false,
+          "editionNote": "Waves at 09:30, 10:00, 11:00, 12:00 and 13:00. Published organiser timetable is subject to change. Attend the wave selected on your booking. Source checked 2026-10-21: https://greatswim.org/great-north-swim/"
+        },
+        "0.5mi": {
+          "time": null,
+          "note": "Saturday’s general half-mile wave is published at 14:30. The table also lists a Saturday 14:00 quiet wave, but explanatory text puts the quiet wave on Sunday. The linked booking page did not expose wave choices publicly. Confirm the quiet-wave date on your booking; no single earliest start is asserted.",
+          "label": "General wave 14:30; quiet wave unresolved",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "Saturday’s general half-mile wave is published at 14:30. The table also lists a Saturday 14:00 quiet wave, but explanatory text puts the quiet wave on Sunday. The linked booking page did not expose wave choices publicly. Confirm the quiet-wave date on your booking; no single earliest start is asserted. Source checked 2026-10-21: https://greatswim.org/great-north-swim/"
+        },
+        "250m": {
+          "time": "15:00",
+          "note": "Published organiser timetable is subject to change. Attend the wave selected on your booking.",
+          "label": "Start 15:00 local",
+          "status": "wave_window",
+          "needsReview": false,
+          "editionNote": "Published organiser timetable is subject to change. Attend the wave selected on your booking. Source checked 2026-10-21: https://greatswim.org/great-north-swim/"
+        }
+      }
+    },
+    "swim-england-east-region-long-course-championships-norwich|2027-05-01": {
+      "summary": "Swim England East Region Long Course Championships – Norwich at Sportspark, University of East Anglia in Norwich, Norfolk. Advertised format: Pool meet.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.eastswimming.org/event/regional-long-course-championships-5/",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Norwich",
+        "county": "Norfolk"
+      },
+      "starts": {
+        "Pool meet": {
+          "time": null,
+          "note": "The 2027 dates PDF confirms 1–3 May at UEA Sportspark and the age-group programme. The region says final information packs with timings are published in the week before each meet. Exact session clocks are not yet in the checked material.",
+          "label": "Session times published nearer the meet",
+          "status": "organiser_pending",
+          "needsReview": true,
+          "sourceUrl": "https://www.eastswimming.org/swimming/swimming-competitions/",
+          "editionNote": "The 2027 dates PDF confirms 1–3 May at UEA Sportspark and the age-group programme. The region says final information packs with timings are published in the week before each meet. Exact session clocks are not yet in the checked material. Source checked 2026-10-21: https://www.eastswimming.org/swimming/swimming-competitions/"
+        }
+      }
+    },
+    "swim-england-national-winter-championships|2026-12-10": {
+      "summary": "Swim England National Winter Championships at Ponds Forge International Sports Centre in Sheffield, South Yorkshire. Advertised format: Pool meet.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://www.swimming.org/library/documents/7707/download",
+      "checkedAt": "2026-10-21",
+      "place": {
+        "city": "Sheffield",
+        "county": "South Yorkshire"
+      },
+      "starts": {
+        "Pool meet": {
+          "time": "09:00",
+          "note": "The official 2026 schedule gives morning heats at 09:00 on 10–13 December. Slower distance heats and finals are explicitly marked TBC. Individual races depend on the final session programme.",
+          "label": "Morning heats 09:00 local; later sessions TBC",
+          "status": "organiser_pending",
+          "needsReview": true,
+          "sourceUrl": "https://www.swimming.org/library/documents/7707/download",
+          "editionNote": "The official 2026 schedule gives morning heats at 09:00 on 10–13 December. Slower distance heats and finals are explicitly marked TBC. Individual races depend on the final session programme. Source checked 2026-10-21: https://www.swimming.org/library/documents/7707/download"
+        }
+      }
+    },
+    "cheshire-kids-fun-duathlon|2027-05-08": {
+      "summary": "Cheshire Kids Fun Duathlon at Barony Park in Nantwich, Cheshire. A non-competitive children’s run, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 100m run, 1km bike, 500m run. Organiser’s current event-page estimate: 13:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "label": "Estimated starts 13:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Tin; organiser age guide 5-7 yrs. 100m run, 1km bike, 500m run. Organiser’s current event-page estimate: 13:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 200m run, 1km bike, 500m run. Organiser’s current event-page estimate: 12:45. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "label": "Estimated starts 12:45 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Zinc; organiser age guide 6-9 yrs. 200m run, 1km bike, 500m run. Organiser’s current event-page estimate: 12:45. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 200m run, 2km bike, 1km run. Organiser’s current event-page estimate: 12:25. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "label": "Estimated starts 12:25 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Steel; organiser age guide 8-11 yrs. 200m run, 2km bike, 1km run. Organiser’s current event-page estimate: 12:25. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 400m run, 3km bike, 1.5km run. Organiser’s current event-page estimate: 12:10. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "label": "Estimated starts 12:10 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Bronze; organiser age guide 10-13 yrs. 400m run, 3km bike, 1.5km run. Organiser’s current event-page estimate: 12:10. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 400m run, 4km bike, 2km run. Organiser’s current event-page estimate: 12:05. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "label": "Estimated starts 12:05 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Silver; organiser age guide 12-15 yrs. 400m run, 4km bike, 2km run. Organiser’s current event-page estimate: 12:05. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 13-16 yrs. 600m run, 4km bike, 2.5km run. Organiser’s current event-page estimate: 12:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon",
+          "label": "Estimated starts 12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Gold; organiser age guide 13-16 yrs. 600m run, 4km bike, 2.5km run. Organiser’s current event-page estimate: 12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/cheshire-kids-fun-duathlon"
+        }
+      }
+    },
+    "glasgow-kids-fun-triathlon|2027-05-22": {
+      "summary": "Glasgow Kids Fun Triathlon at Bellahouston Leisure Centre and Park in Glasgow, Glasgow City. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "label": "Estimated starts 11:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "label": "Estimated starts 11:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "label": "Estimated starts 11:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "label": "Estimated starts 11:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon",
+          "label": "Estimated starts 11:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. Organiser’s current event-page estimate: 11:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/glasgow-kids-fun-triathlon"
+        }
+      }
+    },
+    "henley-kids-fun-triathlon|2027-06-05": {
+      "summary": "Henley Kids Fun Triathlon at Henley Leisure Centre and Gillotts School in Henley-on-Thames, Oxfordshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 10m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 16:30. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "label": "Estimated starts 16:30 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Tin; organiser age guide 5-7 yrs. 10m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 16:30. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 15:30. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "label": "Estimated starts 15:30 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 15:30. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Organiser’s current event-page estimate: 14:30. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "label": "Estimated starts 14:30 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Organiser’s current event-page estimate: 14:30. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Organiser’s current event-page estimate: 13:50. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "label": "Estimated starts 13:50 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Organiser’s current event-page estimate: 13:50. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Organiser’s current event-page estimate: 13:30. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "label": "Estimated starts 13:30 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Organiser’s current event-page estimate: 13:30. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 13-17 yrs. 150m swim, 4km bike, 2.5km run. Organiser’s current event-page estimate: 13:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon",
+          "label": "Estimated starts 13:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Gold; organiser age guide 13-17 yrs. 150m swim, 4km bike, 2.5km run. Organiser’s current event-page estimate: 13:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/henley-kids-fun-triathlon"
+        }
+      }
+    },
+    "caldicot-kids-fun-triathlon|2027-06-26": {
+      "summary": "Caldicot Kids Fun Triathlon at Caldicot Leisure Centre in Caldicot, Monmouthshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 10m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "label": "Estimated starts 10:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Tin; organiser age guide 5-7 yrs. 10m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 20m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "label": "Estimated starts 10:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Zinc; organiser age guide 6-9 yrs. 20m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 40m swim, 2km bike, 1km run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "label": "Estimated starts 10:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Steel; organiser age guide 8-11 yrs. 40m swim, 2km bike, 1km run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 40m swim, 3km bike, 1.5km run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "label": "Estimated starts 10:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Bronze; organiser age guide 10-13 yrs. 40m swim, 3km bike, 1.5km run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 80m swim, 4km bike, 2km run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "label": "Estimated starts 10:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Silver; organiser age guide 12-15 yrs. 80m swim, 4km bike, 2km run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 14-16 yrs. 120m swim, 4km bike, 2.5km run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon",
+          "label": "Estimated starts 10:00–12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Gold; organiser age guide 14-16 yrs. 120m swim, 4km bike, 2.5km run. Organiser’s current event-page estimate: 10:00–12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. The linked PDF is still for 2026; this window is current-page guidance, not a final 2027 allocation. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/caldicot-kids-fun-triathlon"
+        }
+      }
+    },
+    "marlborough-kids-fun-triathlon|2027-07-10": {
+      "summary": "Marlborough Kids Fun Triathlon at Marlborough College in Marlborough, Wiltshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/marlborough-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 15m swim, 1km bike, 500m run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before.",
+          "sourceUrl": "https://charitytriathlon.org/marlborough-kids-triathlon/",
+          "label": "Event window 11:00–17:00 local",
+          "status": "event_window",
+          "needsReview": false,
+          "editionNote": "Tin; organiser age guide 5-7 yrs. 15m swim, 1km bike, 500m run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before. Source checked 2026-10-21: https://charitytriathlon.org/marlborough-kids-triathlon/"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before.",
+          "sourceUrl": "https://charitytriathlon.org/marlborough-kids-triathlon/",
+          "label": "Event window 11:00–17:00 local",
+          "status": "event_window",
+          "needsReview": false,
+          "editionNote": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before. Source checked 2026-10-21: https://charitytriathlon.org/marlborough-kids-triathlon/"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before.",
+          "sourceUrl": "https://charitytriathlon.org/marlborough-kids-triathlon/",
+          "label": "Event window 11:00–17:00 local",
+          "status": "event_window",
+          "needsReview": false,
+          "editionNote": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before. Source checked 2026-10-21: https://charitytriathlon.org/marlborough-kids-triathlon/"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before.",
+          "sourceUrl": "https://charitytriathlon.org/marlborough-kids-triathlon/",
+          "label": "Event window 11:00–17:00 local",
+          "status": "event_window",
+          "needsReview": false,
+          "editionNote": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before. Source checked 2026-10-21: https://charitytriathlon.org/marlborough-kids-triathlon/"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before.",
+          "sourceUrl": "https://charitytriathlon.org/marlborough-kids-triathlon/",
+          "label": "Event window 11:00–17:00 local",
+          "status": "event_window",
+          "needsReview": false,
+          "editionNote": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before. Source checked 2026-10-21: https://charitytriathlon.org/marlborough-kids-triathlon/"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before.",
+          "sourceUrl": "https://charitytriathlon.org/marlborough-kids-triathlon/",
+          "label": "Event window 11:00–17:00 local",
+          "status": "event_window",
+          "needsReview": false,
+          "editionNote": "Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before. Source checked 2026-10-21: https://charitytriathlon.org/marlborough-kids-triathlon/"
+        },
+        "Platinum": {
+          "time": null,
+          "note": "Platinum; organiser age guide 15-18 yrs. 200m swim, 5km bike, 3km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before.",
+          "sourceUrl": "https://charitytriathlon.org/marlborough-kids-triathlon/",
+          "label": "Event window 11:00–17:00 local",
+          "status": "event_window",
+          "needsReview": false,
+          "editionNote": "Platinum; organiser age guide 15-18 yrs. 200m swim, 5km bike, 3km run. The organiser-linked UK Charity Triathlon page publishes 11:00–17:00 for 10 July 2027. This is the event window; category and personal starts are emailed 7–10 days before. Source checked 2026-10-21: https://charitytriathlon.org/marlborough-kids-triathlon/"
+        }
+      }
+    },
+    "west-midlands-kids-fun-triathlon|2027-08-07": {
+      "summary": "West Midlands Kids Fun Triathlon at King Edward’s School in Birmingham, West Midlands. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 15m swim, 1km bike, 500m run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "Tin; organiser age guide 5-7 yrs. 15m swim, 1km bike, 500m run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "Gold; organiser age guide 14-16 yrs. 150m swim, 4km bike, 2.5km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        },
+        "Platinum": {
+          "time": null,
+          "note": "Platinum; organiser age guide 15-18 yrs. 200m swim, 5km bike, 3km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon",
+          "label": "Start windows differ — check booking",
+          "status": "conflict",
+          "needsReview": true,
+          "editionNote": "Platinum; organiser age guide 15-18 yrs. 200m swim, 5km bike, 3km run. UK Triathlon estimates 10:00–13:00 for Tin–Gold; its linked charity page gives 11:00–14:00 for 7 August 2027. Platinum has no separate timing row. Neither page explains the difference. Personal allocations follow before the event. Charity source: https://charitytriathlon.org/west-midlands-kids-triathlon/ Source checked 2026-10-21: https://uktriathlon.co.uk/kids/West-Midlands-kids-fun-triathlon"
+        }
+      }
+    },
+    "york-kids-fun-triathlon|2027-08-21": {
+      "summary": "York Kids Fun Triathlon at York Sports Village in York, North Yorkshire. A non-competitive children’s swim, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 18m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 16:20. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "label": "Estimated starts 16:20 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Tin; organiser age guide 5-7 yrs. 18m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 16:20. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 15:20. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "label": "Estimated starts 15:20 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Zinc; organiser age guide 6-9 yrs. 25m swim, 1km bike, 500m run. Organiser’s current event-page estimate: 15:20. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Organiser’s current event-page estimate: 14:20. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "label": "Estimated starts 14:20 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Steel; organiser age guide 8-11 yrs. 50m swim, 2km bike, 1km run. Organiser’s current event-page estimate: 14:20. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Organiser’s current event-page estimate: 13:40. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "label": "Estimated starts 13:40 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Bronze; organiser age guide 10-13 yrs. 50m swim, 3km bike, 1.5km run. Organiser’s current event-page estimate: 13:40. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Organiser’s current event-page estimate: 13:20. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "label": "Estimated starts 13:20 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Silver; organiser age guide 12-15 yrs. 100m swim, 4km bike, 2km run. Organiser’s current event-page estimate: 13:20. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 13-16 yrs. 150m swim, 4km bike, 2.5km run. Organiser’s current event-page estimate: 13:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/york-kids-fun-triathlon",
+          "label": "Estimated starts 13:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Gold; organiser age guide 13-16 yrs. 150m swim, 4km bike, 2.5km run. Organiser’s current event-page estimate: 13:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/york-kids-fun-triathlon"
+        }
+      }
+    },
+    "north-west-kids-fun-duathlon|2027-09-18": {
+      "summary": "North West Kids Fun Duathlon at Barony Park in Nantwich, Cheshire. A non-competitive children’s run, bike and run event, with ability-based course options and individual starts. Check the organiser’s age guidance before choosing a distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "Tin": {
+          "time": null,
+          "note": "Tin; organiser age guide 5-7 yrs. 100m run, 1km bike, 500m run. Organiser’s current event-page estimate: 13:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "label": "Estimated starts 13:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Tin; organiser age guide 5-7 yrs. 100m run, 1km bike, 500m run. Organiser’s current event-page estimate: 13:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Zinc": {
+          "time": null,
+          "note": "Zinc; organiser age guide 6-9 yrs. 200m run, 1km bike, 500m run. Organiser’s current event-page estimate: 12:40. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "label": "Estimated starts 12:40 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Zinc; organiser age guide 6-9 yrs. 200m run, 1km bike, 500m run. Organiser’s current event-page estimate: 12:40. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Steel": {
+          "time": null,
+          "note": "Steel; organiser age guide 8-11 yrs. 200m run, 2km bike, 1km run. Organiser’s current event-page estimate: 12:20. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "label": "Estimated starts 12:20 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Steel; organiser age guide 8-11 yrs. 200m run, 2km bike, 1km run. Organiser’s current event-page estimate: 12:20. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Bronze": {
+          "time": null,
+          "note": "Bronze; organiser age guide 10-13 yrs. 400m run, 3km bike, 1.5km run. Organiser’s current event-page estimate: 12:10. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "label": "Estimated starts 12:10 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Bronze; organiser age guide 10-13 yrs. 400m run, 3km bike, 1.5km run. Organiser’s current event-page estimate: 12:10. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Silver": {
+          "time": null,
+          "note": "Silver; organiser age guide 12-15 yrs. 400m run, 4km bike, 2km run. Organiser’s current event-page estimate: 12:05. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "label": "Estimated starts 12:05 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Silver; organiser age guide 12-15 yrs. 400m run, 4km bike, 2km run. Organiser’s current event-page estimate: 12:05. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        },
+        "Gold": {
+          "time": null,
+          "note": "Gold; organiser age guide 13-16 yrs. 600m run, 4km bike, 2.5km run. Organiser’s current event-page estimate: 12:00. Category starts may change; each child’s individual start is emailed 7–10 days before.",
+          "sourceUrl": "https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon",
+          "label": "Estimated starts 12:00 local",
+          "status": "estimate",
+          "needsReview": false,
+          "editionNote": "Gold; organiser age guide 13-16 yrs. 600m run, 4km bike, 2.5km run. Organiser’s current event-page estimate: 12:00. Category starts may change; each child’s individual start is emailed 7–10 days before. Source checked 2026-10-21: https://uktriathlon.co.uk/kids/north-west-kids-fun-duathlon"
+        }
+      }
+    },
+    "tour-de-broads|2027-08-15": {
+      "summary": "Tour de Broads 2027 offers 25, 50, 75 and 100-mile cycling options in the Norfolk Broads. The date is 15 August 2027; the organiser has yet to confirm the venue, routes and rider start times. A family ride is advertised without a confirmed distance.",
+      "timeZone": "Europe/London",
+      "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+      "checkedAt": "2026-10-21",
+      "starts": {
+        "25mi": {
+          "time": null,
+          "note": "The organiser confirms 15 August 2027 and says venue, routes and rider start times will be announced. Published entry distances remain subject to final route information.",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "label": "Organiser: rider starts not yet announced",
+          "status": "organiser_pending",
+          "needsReview": true,
+          "editionNote": "The organiser confirms 15 August 2027 and says venue, routes and rider start times will be announced. Published entry distances remain subject to final route information. Source checked 2026-10-21: https://tprevents.co.uk/product/tour-de-broads/"
+        },
+        "50mi": {
+          "time": null,
+          "note": "The organiser confirms 15 August 2027 and says venue, routes and rider start times will be announced. Published entry distances remain subject to final route information.",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "label": "Organiser: rider starts not yet announced",
+          "status": "organiser_pending",
+          "needsReview": true,
+          "editionNote": "The organiser confirms 15 August 2027 and says venue, routes and rider start times will be announced. Published entry distances remain subject to final route information. Source checked 2026-10-21: https://tprevents.co.uk/product/tour-de-broads/"
+        },
+        "75mi": {
+          "time": null,
+          "note": "The organiser confirms 15 August 2027 and says venue, routes and rider start times will be announced. Published entry distances remain subject to final route information.",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "label": "Organiser: rider starts not yet announced",
+          "status": "organiser_pending",
+          "needsReview": true,
+          "editionNote": "The organiser confirms 15 August 2027 and says venue, routes and rider start times will be announced. Published entry distances remain subject to final route information. Source checked 2026-10-21: https://tprevents.co.uk/product/tour-de-broads/"
+        },
+        "100mi": {
+          "time": null,
+          "note": "The organiser confirms 15 August 2027 and says venue, routes and rider start times will be announced. Published entry distances remain subject to final route information.",
+          "sourceUrl": "https://tprevents.co.uk/product/tour-de-broads/",
+          "label": "Organiser: rider starts not yet announced",
+          "status": "organiser_pending",
+          "needsReview": true,
+          "editionNote": "The organiser confirms 15 August 2027 and says venue, routes and rider start times will be announced. Published entry distances remain subject to final route information. Source checked 2026-10-21: https://tprevents.co.uk/product/tour-de-broads/"
+        }
+      }
+    }
+  },
+  "reviewedEditionKeys": [
+    "far-stratford-triathlon|2027-04-18|Sprint",
+    "far-stratford-triathlon|2027-04-18|Super Sprint",
+    "far-cheshire-triathlon|2027-05-09|Sprint",
+    "far-cheshire-triathlon|2027-05-09|Super Sprint",
+    "far-henley-triathlon|2027-06-06|Sprint",
+    "far-henley-triathlon|2027-06-06|Super Sprint",
+    "far-shropshire-triathlon|2027-06-19|Sprint",
+    "far-shropshire-triathlon|2027-06-19|Olympic",
+    "far-york-triathlon|2027-08-22|Sprint",
+    "far-york-triathlon|2027-08-22|Super Sprint",
+    "ellesmere-triathlon|2027-09-04|Middle",
+    "ellesmere-triathlon|2027-09-04|Olympic",
+    "ellesmere-triathlon|2027-09-04|Sprint",
+    "ellesmere-triathlon|2027-09-04|Fun Sprint",
+    "far-north-west-triathlon|2027-09-19|Sprint",
+    "far-north-west-triathlon|2027-09-19|Super Sprint",
+    "far-warwickshire-triathlon|2027-10-03|Sprint",
+    "far-warwickshire-triathlon|2027-10-03|Super Sprint",
+    "ultimate-triathlon-150-100-and-50|2027-06-20|Ultimate 150",
+    "ultimate-triathlon-150-100-and-50|2027-06-20|Ultimate 100",
+    "ultimate-triathlon-150-100-and-50|2027-06-20|Ultimate 50",
+    "glasgow-triathlon|2027-05-22|Fun Challenge",
+    "glasgow-triathlon|2027-05-22|Endeavour",
+    "glasgow-triathlon|2027-05-22|Venture",
+    "glasgow-triathlon|2027-05-22|Sprint",
+    "caldicot-triathlon|2027-06-26|Fun Challenge",
+    "caldicot-triathlon|2027-06-26|Endeavour",
+    "caldicot-triathlon|2027-06-26|Venture",
+    "caldicot-triathlon|2027-06-26|Sprint",
+    "west-midlands-triathlon|2027-08-07|Fun Challenge",
+    "west-midlands-triathlon|2027-08-07|Endeavour",
+    "west-midlands-triathlon|2027-08-07|Venture",
+    "west-midlands-triathlon|2027-08-07|Sprint",
+    "woodhall-spa-triathlon|2027-09-19|Sprint",
+    "slateman-triathlon|2027-06-13|Sprint",
+    "slateman-triathlon|2027-06-13|Standard",
+    "slateman-triathlon|2027-06-13|Legend 70.3",
+    "slateman-triathlon|2027-06-13|Ultra Chwarel",
+    "slateman-triathlon|2027-06-13|Ultra Mynydd",
+    "slateman-duathlon|2027-06-13|Standard",
+    "swim-derwent|2027-07-04|400m",
+    "swim-derwent|2027-07-04|0.5mi",
+    "swim-derwent|2027-07-04|1mi",
+    "swim-derwent|2027-07-04|2mi",
+    "swim-derwent|2027-07-04|3mi",
+    "west-lancs-spring-triathlon|2027-04-18|Sprint",
+    "rb-west-lancs-summer-triathlon-multisport|2027-08-22|Sprint",
+    "wa-england-athletics-senior-u20-combined-events-championships-7219932|2027-01-16|Track & Field",
+    "wa-england-athletics-u15-u17-20-indoor-championships-7220520|2027-02-06|Track & Field",
+    "wa-england-athletics-age-group-ce-and-junior-para-championships-7234033|2027-03-06|Track & Field",
+    "moors-valley-festive-trail-runs|2026-12-06|2K",
+    "moors-valley-festive-trail-runs|2026-12-06|5K",
+    "moors-valley-festive-trail-runs|2026-12-06|10K",
+    "gibside-wild-new-year-trail-runs-5-mile-2027|2027-01-03|5mi",
+    "gibside-wild-new-year-trail-runs-5-mile-2027|2027-01-03|10mi",
+    "bamburgh-castle-wild-10k-trail-run|2027-04-17|10K",
+    "outlaw-nottingham-sprint|2027-05-22|Sprint",
+    "outlaw-original-sprint|2027-07-24|Sprint",
+    "suffolk-go-wild|2026-11-01|25mi",
+    "suffolk-go-wild|2026-11-01|50mi",
+    "tour-de-broads-winter-series|2026-11-29|25mi",
+    "tour-de-broads-winter-series|2026-11-29|50mi",
+    "tour-de-broads-winter-series|2026-12-13|25mi",
+    "tour-de-broads-winter-series|2026-12-13|50mi",
+    "tour-de-broads-winter-series|2026-12-27|25mi",
+    "tour-de-broads-winter-series|2026-12-27|50mi",
+    "wa-f0652b6bc69f7151|2027-07-31|Track & Field",
+    "great-north-swim|2027-06-12|2mi",
+    "great-north-swim|2027-06-12|1mi",
+    "great-north-swim|2027-06-12|0.5mi",
+    "great-north-swim|2027-06-12|250m",
+    "swim-england-east-region-long-course-championships-norwich|2027-05-01|Pool meet",
+    "swim-england-national-winter-championships|2026-12-10|Pool meet",
+    "cheshire-kids-fun-duathlon|2027-05-08|Tin",
+    "cheshire-kids-fun-duathlon|2027-05-08|Zinc",
+    "cheshire-kids-fun-duathlon|2027-05-08|Steel",
+    "cheshire-kids-fun-duathlon|2027-05-08|Bronze",
+    "cheshire-kids-fun-duathlon|2027-05-08|Silver",
+    "cheshire-kids-fun-duathlon|2027-05-08|Gold",
+    "glasgow-kids-fun-triathlon|2027-05-22|Zinc",
+    "glasgow-kids-fun-triathlon|2027-05-22|Steel",
+    "glasgow-kids-fun-triathlon|2027-05-22|Bronze",
+    "glasgow-kids-fun-triathlon|2027-05-22|Silver",
+    "glasgow-kids-fun-triathlon|2027-05-22|Gold",
+    "henley-kids-fun-triathlon|2027-06-05|Tin",
+    "henley-kids-fun-triathlon|2027-06-05|Zinc",
+    "henley-kids-fun-triathlon|2027-06-05|Steel",
+    "henley-kids-fun-triathlon|2027-06-05|Bronze",
+    "henley-kids-fun-triathlon|2027-06-05|Silver",
+    "henley-kids-fun-triathlon|2027-06-05|Gold",
+    "caldicot-kids-fun-triathlon|2027-06-26|Tin",
+    "caldicot-kids-fun-triathlon|2027-06-26|Zinc",
+    "caldicot-kids-fun-triathlon|2027-06-26|Steel",
+    "caldicot-kids-fun-triathlon|2027-06-26|Bronze",
+    "caldicot-kids-fun-triathlon|2027-06-26|Silver",
+    "caldicot-kids-fun-triathlon|2027-06-26|Gold",
+    "marlborough-kids-fun-triathlon|2027-07-10|Tin",
+    "marlborough-kids-fun-triathlon|2027-07-10|Zinc",
+    "marlborough-kids-fun-triathlon|2027-07-10|Steel",
+    "marlborough-kids-fun-triathlon|2027-07-10|Bronze",
+    "marlborough-kids-fun-triathlon|2027-07-10|Silver",
+    "marlborough-kids-fun-triathlon|2027-07-10|Gold",
+    "marlborough-kids-fun-triathlon|2027-07-10|Platinum",
+    "west-midlands-kids-fun-triathlon|2027-08-07|Tin",
+    "west-midlands-kids-fun-triathlon|2027-08-07|Zinc",
+    "west-midlands-kids-fun-triathlon|2027-08-07|Steel",
+    "west-midlands-kids-fun-triathlon|2027-08-07|Bronze",
+    "west-midlands-kids-fun-triathlon|2027-08-07|Silver",
+    "west-midlands-kids-fun-triathlon|2027-08-07|Gold",
+    "west-midlands-kids-fun-triathlon|2027-08-07|Platinum",
+    "york-kids-fun-triathlon|2027-08-21|Tin",
+    "york-kids-fun-triathlon|2027-08-21|Zinc",
+    "york-kids-fun-triathlon|2027-08-21|Steel",
+    "york-kids-fun-triathlon|2027-08-21|Bronze",
+    "york-kids-fun-triathlon|2027-08-21|Silver",
+    "york-kids-fun-triathlon|2027-08-21|Gold",
+    "north-west-kids-fun-duathlon|2027-09-18|Tin",
+    "north-west-kids-fun-duathlon|2027-09-18|Zinc",
+    "north-west-kids-fun-duathlon|2027-09-18|Steel",
+    "north-west-kids-fun-duathlon|2027-09-18|Bronze",
+    "north-west-kids-fun-duathlon|2027-09-18|Silver",
+    "north-west-kids-fun-duathlon|2027-09-18|Gold",
+    "tour-de-broads|2027-08-15|25mi",
+    "tour-de-broads|2027-08-15|50mi",
+    "tour-de-broads|2027-08-15|75mi",
+    "tour-de-broads|2027-08-15|100mi"
+  ]
+}

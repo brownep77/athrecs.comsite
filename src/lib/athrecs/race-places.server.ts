@@ -72,6 +72,7 @@ export async function queryRacePlaceRows(
               ? edition.startTime
               : null,
           startNote: checked?.note ?? null,
+          startLabel: checked?.label ?? null,
           sourceUrl: checked?.sourceUrl ?? detail?.sourceUrl ?? edition.sourceUrl,
           checkedAt: detail?.checkedAt ?? null,
           checkedCity: detail?.place?.city ?? detail?.place?.town ?? null,
