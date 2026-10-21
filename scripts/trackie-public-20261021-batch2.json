@@ -1,0 +1,490 @@
+{
+  "batchId": "trackie-public-20261021-batch2",
+  "instruction": "Continue adding Trackie results, athlete profiles, clubs, meetings and events to AthRecs. Owner continuation: can you continue please.",
+  "clubs": [
+    {
+      "name": "CALTAF Track and Field Club",
+      "aliases": [
+        "Caltaf Athle",
+        "CALTAF"
+      ],
+      "website": "https://caltaf.com/",
+      "sourceUrl": "https://caltaf.com/",
+      "country": "Canada",
+      "city": "Calgary"
+    },
+    {
+      "name": "University of Calgary Athletic Club",
+      "aliases": [
+        "Ucac Track A",
+        "UCAC"
+      ],
+      "website": "",
+      "sourceUrl": "https://athleticsalberta.com/ucac-development-coach-speedpower/",
+      "country": "Canada",
+      "city": "Calgary"
+    },
+    {
+      "name": "Burlington Track and Field Club",
+      "aliases": [
+        "Burlington Tfc",
+        "Burlington T"
+      ],
+      "website": "https://www.burlingtontrackandfield.org/",
+      "sourceUrl": "https://www.burlingtontrackandfield.org/",
+      "country": "Canada",
+      "city": "Burlington"
+    },
+    {
+      "name": "The Gazelles Track and Field Club",
+      "aliases": [
+        "The Gazelles"
+      ],
+      "website": "https://thegazelles.ca/",
+      "sourceUrl": "https://thegazelles.ca/",
+      "country": "Canada",
+      "city": ""
+    },
+    {
+      "name": "Etobicoke Track",
+      "aliases": [
+        "Etobicoke Track"
+      ],
+      "website": "https://etobicoketrack.ca/",
+      "sourceUrl": "https://etobicoketrack.ca/",
+      "country": "Canada",
+      "city": "Toronto"
+    },
+    {
+      "name": "Red Deer Titans Track and Field Club",
+      "aliases": [
+        "Red Deer Titans"
+      ],
+      "website": "https://titanstrack.com/",
+      "sourceUrl": "https://titanstrack.com/",
+      "country": "Canada",
+      "city": "Red Deer"
+    },
+    {
+      "name": "Chinook Track and Field Club",
+      "aliases": [
+        "Chinook Track an",
+        "Chinook Trac"
+      ],
+      "website": "https://www.chinooktf.com/",
+      "sourceUrl": "https://www.chinooktf.com/",
+      "country": "Canada",
+      "city": ""
+    },
+    {
+      "name": "Track North Athletic Club",
+      "aliases": [
+        "Track North"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "North Bay Legion",
+      "aliases": [
+        "North Bay Le"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Three Fires Track Club",
+      "aliases": [
+        "Three Fires"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Sudbury Endurance",
+      "aliases": [
+        "Sudbury Endu"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Sudbury Rocks",
+      "aliases": [
+        "Sudbury Rock"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Blacktoe Running",
+      "aliases": [
+        "Blacktoe Run"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Brampton Track Club",
+      "aliases": [
+        "Brampton Track Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "York University Track & Field Club",
+      "aliases": [
+        "York Univers"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Monarch Athletics Club",
+      "aliases": [
+        "Monarch Athl"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Waterloo Track Club",
+      "aliases": [
+        "Waterloo Track Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Sisu Throws Club",
+      "aliases": [
+        "Sisu Throws Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Throwers Club",
+      "aliases": [
+        "Throwers Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Laurel Creek T.F.C",
+      "aliases": [
+        "Laurel Creek T.F.C"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Mississauga T.F.C.",
+      "aliases": [
+        "Mississauga T.F.C."
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Speed Academy Athletics Club",
+      "aliases": [
+        "Speed Academ"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Peterborough Legion Track Club",
+      "aliases": [
+        "Peterborough"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Royal City Athletics Club",
+      "aliases": [
+        "Royal City A"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "BOOST Athletics Club",
+      "aliases": [
+        "Boost Athlet"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Jamcan International Athletics Club",
+      "aliases": [
+        "Jamcan Inter"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Masters of Speed Athletics",
+      "aliases": [
+        "Masters Of S"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Maximus Performance",
+      "aliases": [
+        "Maximus Performance"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Mecca Athletic Club",
+      "aliases": [
+        "Mecca Athletic Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Cruisers Sports",
+      "aliases": [
+        "Cruisers Sports"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Aetos Athletica",
+      "aliases": [
+        "Aetos Athletica"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Bolton Pole Vault",
+      "aliases": [
+        "Bolton Pole Vault"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "M.B. Track Club",
+      "aliases": [
+        "M.B. Track Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Lyfestyle Athletics",
+      "aliases": [
+        "Lyfestyle Athletics"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Rhythm Athletics",
+      "aliases": [
+        "Rhythm Athletics"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "310 Running",
+      "aliases": [
+        "310 Running"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Royal City Track & Field Club",
+      "aliases": [
+        "Royal City T"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Runners Of Collingwood",
+      "aliases": [
+        "Runners Of C"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Running Wild Athletics Club",
+      "aliases": [
+        "Running Wild"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Top Notch Masters",
+      "aliases": [
+        "Top Notch Masters"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Green And Gold Track And Field Club",
+      "aliases": [
+        "Green And Go"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Edmonton Masters Athletics Association",
+      "aliases": [
+        "Edmonton Mas"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Northern Endurance",
+      "aliases": [
+        "Northern Endurance",
+        "Northern End"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Newmarket Huskies Track Club",
+      "aliases": [
+        "Newmarket Hu"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Quest Sports Track and Field Club",
+      "aliases": [
+        "Quest Sports"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Extreme Velocity Track Club",
+      "aliases": [
+        "Extreme Velo"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "London Western Track and Field Club",
+      "aliases": [
+        "London Weste"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "St Thomas Legion Track & Field Club",
+      "aliases": [
+        "St Thomas Le"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Variety Village Athletic Club",
+      "aliases": [
+        "Variety Vill"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "United Tamil Sports Club",
+      "aliases": [
+        "United Tamil"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Toronto Olympic Track & Field Club",
+      "aliases": [
+        "Toronto Olym"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "South Simcoe Dufferin T.F.C.",
+      "aliases": [
+        "South Simcoe"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Saint John Reds Track & Field",
+      "aliases": [
+        "Saint John R"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "UTS Norths Athletics Club",
+      "aliases": [
+        "Uts Norths A"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    }
+  ],
+  "meetings": {
+    "10350": {
+      "name": "CALTAF Throws Fest #1",
+      "slug": "wa-caltaf-throws-fest-1-7242403",
+      "city": "Calgary",
+      "region": "Alberta",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "New Glenmore Athletic Park",
+      "disciplineId": 9,
+      "existingId": 3065904,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10342": {
+      "name": "YUTC Twilight #5",
+      "slug": "wa-york-university-tfc-twilight-5-7227580",
+      "city": "Toronto",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Toronto Track & Field Centre",
+      "disciplineId": 9,
+      "existingId": 4389761,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10343": {
+      "name": "YUTC Twilight #4",
+      "slug": "wa-york-university-tfc-twilight-4-7227579",
+      "city": "Toronto",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Toronto Track & Field Centre",
+      "disciplineId": 9,
+      "existingId": 4389633,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10346": {
+      "name": "Track North Sudbury Twilight #5",
+      "slug": "trackie-track-north-sudbury-twilight-5-10346",
+      "city": "Sudbury",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Laurentian Community Track",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10347": {
+      "name": "Track North Sudbury Twilight #4",
+      "slug": "trackie-track-north-sudbury-twilight-4-10347",
+      "city": "Sudbury",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Laurentian Community Track",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    },
+    "10348": {
+      "name": "Track North Night of 5km PBs and Sudbury Twilight #3",
+      "slug": "trackie-track-north-sudbury-twilight-3-10348",
+      "city": "Sudbury",
+      "region": "Ontario",
+      "country": "Canada",
+      "surface": "Track",
+      "sport": "Athletics",
+      "venue": "Laurentian Community Track",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Coverage is limited to independently compared individual finals. Heats, relays and uncertain rows are held separately."
+    }
+  }
+}
