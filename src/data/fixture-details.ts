@@ -88,12 +88,12 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
     checkedAt: "2026-10-21",
     starts: {
       "5K": {
-        time: "10:15",
-        note: "Adults 10:15; juniors 10:00. Using Reepham Runners’ race programme; the entry table still lists adults at 10:30. Check your final race instructions.",
+        time: null,
+        note: "Adult one-lap start TBC; juniors start 10:00. The programme gives adults 10:15 but both senior entry options give 10:30. Organiser clarification requested; separate adult waves have not been confirmed.",
       },
       "10K": {
-        time: "10:15",
-        note: "Adult start from Reepham Runners’ race programme. The entry table still lists 10:30; check your final race instructions.",
+        time: null,
+        note: "Adult two-lap start TBC. The programme gives 10:15 but the senior entry option gives 10:30. Organiser clarification requested; do not treat the conflicting times as separate waves.",
       },
     },
   },
@@ -106,11 +106,11 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
     starts: {
       Marathon: {
         time: "09:00",
-        note: "Using Boghopper Races’ 2027 race-day timetable: registration 07:30–08:30, race start 09:00. The entry-page description still gives 08:30.",
+        note: "Published race start 09:00; registration 07:30–08:30. Boghopper Races’ 2027 timetable and FAQ (https://boghopperraces.co.uk/faqs) agree with the entry option. The entry-page programme still gives 08:30; clarification requested. No separate early start or wave is specified in the current timetable.",
       },
       Half: {
         time: "10:30",
-        note: "Using Boghopper Races’ 2027 race-day timetable: registration 08:30–10:00, race start 10:30. A summary bullet still gives 10:00; check your final race instructions.",
+        note: "Published race start 10:30; registration 08:30–10:00. Boghopper Races’ 2027 timetable and FAQ (https://boghopperraces.co.uk/faqs) agree with the entry option. A summary bullet and the entry-page programme still give 10:00; clarification requested. No separate wave is specified; follow final race instructions.",
       },
     },
   },

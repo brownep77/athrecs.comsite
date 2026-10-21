@@ -38,10 +38,11 @@ assert.equal(
   checkedFixtureStart("marriotts-way-races", "2027-02-21", "Half · Marathon", "10:30"),
   "09:00",
 );
-assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "5K", null), "10:15");
+assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "5K", "10:15"), null);
+assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "10K", "10:30"), null);
 assert.match(
   FIXTURE_DETAILS["reepham-cross-country|2027-01-31"].starts["5K"].note,
-  /juniors 10:00/,
+  /juniors start 10:00/,
 );
 FIXTURE_DETAILS["synthetic-unresolved|2027-01-01"] = {
   starts: { "5K": { time: null } },
