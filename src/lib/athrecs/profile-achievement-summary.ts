@@ -2,6 +2,15 @@ import { buildProfileAchievements } from "./profile-achievements.ts";
 import { profileAchievementResults } from "./profile-history-results.ts";
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory } from "./source-performance-history";
+import { buildRaceWinAchievements, type RaceWinAchievement } from "./race-win-achievements.ts";
+
+export type RaceWinSummary = Pick<
+  RaceWinAchievement,
+  "id" | "sport" | "distance" | "kind" | "label"
+> & {
+  count: number;
+  verifiedCount: number;
+};
 
 export type AchievementProgress = {
   id: string;
@@ -15,6 +24,7 @@ export type AchievementProgress = {
 export type ProfileAchievementSummary = {
   earned: { id: string; title: string; rule: string }[];
   progress: AchievementProgress[];
+  raceWins: RaceWinSummary[];
 };
 
 /** Derive totals from the complete visible record, before result pagination. */
@@ -22,6 +32,7 @@ export function buildProfileAchievementSummary(
   results: readonly ProfileResult[],
   histories: readonly SourceHistory[] = [],
   today = new Date(),
+  sourceGender = "",
 ): ProfileAchievementSummary {
   const record = buildProfileAchievements(
     profileAchievementResults(
@@ -74,5 +85,20 @@ export function buildProfileAchievementSummary(
   return {
     earned: record.milestones.map(({ id, title, rule }) => ({ id, title, rule })),
     progress,
+    // Counts only: full histories, source URLs and research notes stay out of the public summary.
+    raceWins: buildRaceWinAchievements(
+      results.filter((result) => !result.details?.profileExcluded),
+      histories,
+      sourceGender,
+      today,
+    ).map(({ id, sport, distance, kind, label, results: wins }) => ({
+      id,
+      sport,
+      distance,
+      kind,
+      label,
+      count: wins.length,
+      verifiedCount: wins.filter((win) => win.verified).length,
+    })),
   };
 }

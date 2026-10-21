@@ -75,7 +75,9 @@ jobs:
           node scripts/verify-public-career-discovery.mjs
 
       - name: Achievement progress and public profile pagination
-        run: node --experimental-strip-types scripts/verify-achievement-progress.mjs
+        run: |
+          node --experimental-strip-types scripts/verify-race-win-achievements.mjs
+          node --experimental-strip-types scripts/verify-achievement-progress.mjs
 
       - name: Verify indexing recovery and archive privacy
         run: node scripts/verify-indexing-recovery.mjs
