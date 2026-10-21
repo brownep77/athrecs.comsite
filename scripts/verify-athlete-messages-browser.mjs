@@ -23,6 +23,7 @@ const rows=[{id:'sent-1',direction:'sent',channel:'email',subject:'Welcome to At
 {id:'received-1',direction:'received',channel:'email',subject:'My missing result',body:'<script>window.executedMessage=true</script> Please add my result.',contact:'avery@example.test',sender:'avery@example.test',status:'received',source:'inbox',occurredAt:'2026-10-12T11:00:00Z'}];
 export async function getStaffAthleteMessages({data}){if(window.failLoad)throw Error('Synthetic read failure');const filtered=rows.filter(r=>data.direction==='all'||r.direction===data.direction).sort((a,b)=>b.occurredAt.localeCompare(a.occurredAt));return{messages:filtered.slice((data.page-1)*20,data.page*20),sent:rows.filter(r=>r.direction==='sent').length,received:rows.filter(r=>r.direction==='received').length,total:filtered.length,page:data.page,pageSize:20};}
 export async function saveStaffAthleteMessage({data}){if(window.failSave)throw Error('Synthetic save failure');window.savedMessages.push(data);rows.push({...data,id:data.entryId,status:'recorded',source:'manual',sender:null});return{saved:true};}
+export async function sendStaffAthleteEmail(){throw Error('Email delivery is not part of this isolated message-history test');}
 `,
 );
 file("style.css", `@import "${resolve("src/styles.css")}";\n@source "${resolve("src")}";`);

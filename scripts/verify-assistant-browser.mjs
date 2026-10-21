@@ -28,7 +28,7 @@ export async function getStaffAssistantTranscript(){return {chat:{id:'00000000-0
 export async function deleteStaffAssistantTranscript(){return {deleted:true};}
 `,
 );
-const router = file("router.js", "export const createFileRoute=()=>options=>options;");
+const router = file("router.js", "export const createFileRoute=()=>options=>({...options,useSearch:()=>options.validateSearch(Object.fromEntries(new URLSearchParams(location.search)))});");
 file(
   "index.html",
   '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Assistant test fixture</title></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>',
@@ -41,6 +41,7 @@ file(
 const server = await createServer({
   configFile: false,
   root,
+  cacheDir: resolve(root, ".vite"),
   plugins: [react(), tailwind()],
   resolve: {
     alias: [
@@ -131,6 +132,9 @@ try {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto(`${origin}/staff`);
   await page.getByRole("button", { name: /Synthetic visitor question/ }).click();
+  await page.getByText("Synthetic assistant answer", { exact: true }).waitFor();
+  // A notification link must select its transcript without another list click.
+  await page.goto(`${origin}/staff?chat=00000000-0000-4000-8000-000000000001`);
   await page.getByText("Synthetic assistant answer", { exact: true }).waitFor();
   const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: "Download transcript" }).click();
