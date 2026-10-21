@@ -14,7 +14,7 @@ writeFileSync(resolve(root, "main.tsx"), `import React from 'react';import{creat
 writeFileSync(resolve(root, "index.html"), '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
 const server = await createServer({ configFile: false, root, plugins: [react(), tailwindcss()], resolve: { alias: { "@": resolve("src") } }, server: { host: "127.0.0.1", port: 8101, strictPort: true, fs: { allow: [process.cwd()] } } });
 await server.listen();
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({ headless: true, executablePath: process.env.ATHRECS_BROWSER_EXECUTABLE || undefined });
 let page;
 try {
   page = await browser.newPage({ viewport: { width: 1365, height: 1000 } });
@@ -28,14 +28,15 @@ try {
   assert.equal(await page.getByRole("link", { name: "Open Stats", exact: true }).getAttribute("href"), "/admin/collection-stats");
   assert.equal(await page.getByRole("link", {name:"Open Result verification inbox",exact:true}).getAttribute("href"), "/admin/athlete-workspace#result-verification");
   assert.equal(await page.getByRole("link", { name: "Open Chat transcripts", exact: true }).getAttribute("href"), "/admin/assistant-chats");
+  assert.equal(await page.getByRole("link", { name: "Open Manage athlete accounts and client data", exact: true }).getAttribute("href"), "/admin/athlete-accounts?view=client-data");
   const paths = await cards.locator("a").evaluateAll(anchors => anchors.map(anchor => anchor.getAttribute("href")));
   assert.equal(new Set(paths).size, paths.length);
   for (const path of paths) {
     assert(path === "/admin" || path.startsWith("/admin/") || path.startsWith("/admin#"));
-    const route = path.split("#")[0];
+    const route = new URL(path, "http://127.0.0.1").pathname;
     assert(existsSync(`src/routes${route === "/admin" ? "/admin/index" : route}.tsx`), `Missing route: ${path}`);
   }
-  const covered = new Set(paths.map(path => path.split("#")[0]));
+  const covered = new Set(paths.map(path => new URL(path, "http://127.0.0.1").pathname));
   for (const name of readdirSync("src/routes/admin").filter(name => name.endsWith(".tsx") && !name.includes("$"))) {
     const route = name === "index.tsx" ? "/admin" : `/admin/${name.slice(0, -4)}`;
     assert(covered.has(route), `Top-level staff tool missing from panel: ${route}`);
