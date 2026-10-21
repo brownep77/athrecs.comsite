@@ -11,6 +11,9 @@ export const disqualificationSchema = z.object({
 });
 export type Disqualification = z.infer<typeof disqualificationSchema>;
 export const resultDetailsSchema = z.object({
+  // Source precision and field marks are display text, never integer timing or PB evidence.
+  reportedPerformance: z.string().max(100).optional(),
+  reportedPlace: z.string().max(40).optional(),
   syntheticTest: z.boolean().optional(),
   verificationStatus: z
     .enum(["unverified", "source_verified", "verified_by_administrator"])

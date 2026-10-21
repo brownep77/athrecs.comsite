@@ -160,6 +160,19 @@ try {
   await db.query("update results set result_details = $1 where id = 1", [JSON.stringify({ verificationStatus: "source_verified", sourceNationality: "KEN", privateEvidence: "staff-only" })]);
   assert(!JSON.stringify(await api.getPublicRaceResults({ data: { editionId: 10 } })).includes("staff-only"));
 
+  // Exact source marks are display values; private provenance stays in storage.
+  for (const reportedPerformance of ["17:04.9", "9.71m", "2903", "SCR"]) {
+    await db.query("update results set result_details = $1 where id = 1", [JSON.stringify({
+      verificationStatus: "unverified", reportedPerformance, reportedPlace: "2",
+      archiveReference: { sourceRow: "private-locator" },
+    })]);
+    const source = (await api.getPublicRaceResults({ data: { editionId: 10 } })).results[0];
+    assert.equal(source.reported_performance, reportedPerformance);
+    assert.equal(source.reported_place, "2");
+    assert.equal(source.verification_status, "unverified");
+    assert(!JSON.stringify(source).includes("private-locator"));
+  }
+
   await db.exec(`
     insert into events (id, name, sport, surface) values
       (20, 'Trail Run', 'Running', 'Trail'),

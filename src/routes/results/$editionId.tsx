@@ -92,7 +92,7 @@ function RaceResultsPage() {
           <table className="w-full min-w-[58rem] text-left text-sm">
             <caption className="sr-only">Recorded results for {edition.event_name}. Placings are as recorded, not recalculated for this list.</caption>
             <thead className="border-b border-border bg-accent-soft/40 text-[11px] uppercase tracking-wide text-muted">
-              <tr>{["Pos", "Athlete", "Nationality", "Profile club", "Category", "Time", "Chip", "Gun", ""].map((label, index) => <th key={index} scope="col" className="px-3 py-3">{label || <span className="sr-only">Claim result</span>}</th>)}</tr>
+              <tr>{["Pos", "Athlete", "Nationality", "Profile club", "Category", "Performance", "Chip", "Gun", ""].map((label, index) => <th key={index} scope="col" className="px-3 py-3">{label || <span className="sr-only">Claim result</span>}</th>)}</tr>
             </thead>
             <tbody>
               {results.map((result) => {
@@ -100,9 +100,10 @@ function RaceResultsPage() {
                 const credit = resultCredit(result.source_url, result.result_source);
                 return (
                   <tr id={`result-${result.id}`} key={result.id} className="border-b border-border/70 last:border-0 hover:bg-elevated/40">
-                    <td className="px-3 py-4 align-top font-semibold tabular-nums">{result.disqualified ? "—" : result.overall_place ?? "—"}</td>
+                    <td className="px-3 py-4 align-top font-semibold tabular-nums">{result.disqualified ? "—" : result.overall_place ?? result.reported_place ?? "—"}</td>
                     <td className="px-3 py-4 align-top">
                       <Link to="/athletes/$slug" params={{ slug: result.athlete_slug }} className="font-semibold text-fg no-underline hover:text-accent">{result.athlete_name}</Link>
+                      {result.verification_status === "unverified" ? <p className="mt-1 text-xs text-muted">Unverified result</p> : null}
                       {!finished ? <p className="mt-1 text-xs text-muted">{result.disqualified ? "Disqualified" : result.status}</p> : null}
                       {finished && result.gender_place !== null ? <p className="mt-1 text-xs text-muted">Gender position {result.gender_place}</p> : null}
                       {credit ? <a href={credit.url} target="_blank" rel="noreferrer" className="mt-1 block text-xs text-accent underline">Results: {credit.name}</a> : null}
@@ -110,7 +111,7 @@ function RaceResultsPage() {
                     <td className="whitespace-nowrap px-3 py-4 align-top text-muted">{result.nationality ? <CountryFlag country={result.nationality} showCode /> : "—"}</td>
                     <td className="max-w-44 px-3 py-4 align-top text-muted">{result.profile_club || "—"}</td>
                     <td className="px-3 py-4 align-top text-muted">{result.category || "—"}{finished && result.category_place !== null ? <p className="mt-1 text-xs">Position {result.category_place}</p> : null}</td>
-                    <td className="whitespace-nowrap px-3 py-4 align-top font-semibold tabular-nums">{finished ? formatDuration(result.finish_time_seconds) : "—"}</td>
+                    <td className="whitespace-nowrap px-3 py-4 align-top font-semibold tabular-nums">{result.reported_performance || (finished ? formatDuration(result.finish_time_seconds) : "—")}</td>
                     <td className="whitespace-nowrap px-3 py-4 align-top tabular-nums text-muted">{finished ? formatDuration(result.chip_time_seconds) : "—"}</td>
                     <td className="whitespace-nowrap px-3 py-4 align-top tabular-nums text-muted">{finished ? formatDuration(result.gun_time_seconds) : "—"}</td>
                     <td className="px-3 py-4 align-top"><Link to="/claim-results" search={{ resultId: result.id }} className="inline-flex min-h-10 items-center gap-1.5 rounded-lg border border-border px-3 text-xs font-medium text-accent no-underline hover:bg-accent-soft"><SearchCheck className="size-4 shrink-0" aria-hidden="true" />Claim this result</Link></td>

@@ -517,11 +517,12 @@ export function RacePageContent({
                 <li key={result.id} className="text-sm">
                   <span className="font-semibold">{result.athlete_name}</span>
                   {" · "}
-                  {finished
-                    ? formatDuration(result.finish_time_seconds)
-                    : result.disqualified
-                      ? "Disqualified"
-                      : result.status}
+                  {result.reported_performance ||
+                    (finished
+                      ? formatDuration(result.finish_time_seconds)
+                      : result.disqualified
+                        ? "Disqualified"
+                        : result.status)}
                   {credit ? (
                     <>
                       {" "}
@@ -905,7 +906,7 @@ export function RacePageContent({
                       <th className="px-3 py-2.5">Athlete</th>
                       <th className="px-3 py-2.5">Club</th>
                       <th className="px-3 py-2.5">Cat</th>
-                      <th className="px-3 py-2.5">Time</th>
+                      <th className="px-3 py-2.5">Performance</th>
                       <th className="px-3 py-2.5">Claim</th>
                     </tr>
                   </thead>
@@ -913,7 +914,9 @@ export function RacePageContent({
                     {results.map((r) => (
                       <tr key={r.id} className="border-b border-border/70 last:border-0">
                         <td className="px-3 py-2.5 tabular text-muted">
-                          {isDisqualified(r) ? "DQ" : (r.overall_place ?? "—")}
+                          {isDisqualified(r)
+                            ? "DQ"
+                            : (r.overall_place ?? r.details.reportedPlace ?? "—")}
                         </td>
                         <td className="px-3 py-2.5">
                           <Link
@@ -924,11 +927,14 @@ export function RacePageContent({
                             {r.athlete_name}
                           </Link>
                           <ResultDisqualification decision={r.details.disqualification} />
+                          {r.details.verificationStatus === "unverified" ? (
+                            <p className="text-xs text-muted">Unverified result</p>
+                          ) : null}
                         </td>
                         <td className="px-3 py-2.5 text-muted">{r.club ?? "—"}</td>
                         <td className="px-3 py-2.5 text-muted">{r.category ?? "—"}</td>
                         <td className="px-3 py-2.5 font-medium tabular">
-                          {formatDuration(r.finish_time_seconds)}
+                          {r.details.reportedPerformance || formatDuration(r.finish_time_seconds)}
                           {isDisqualified(r) ? (
                             <span aria-label="Disqualified result">*</span>
                           ) : null}
