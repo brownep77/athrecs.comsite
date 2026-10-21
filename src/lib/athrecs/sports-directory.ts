@@ -15,6 +15,11 @@ export type DirectorySearch = {
 export const DIRECTORY_COUNTRIES = [
   ...new Set(SPORTS_ORGANISATIONS.flatMap((body) => body.territories)),
 ].sort();
+export const DIRECTORY_NATIONAL_COUNTRIES = [
+  ...new Set(
+    SPORTS_ORGANISATIONS.filter((body) => body.type === "national").map((body) => body.country),
+  ),
+].sort();
 const normalise = (value: string) =>
   value
     .normalize("NFKD")
@@ -84,8 +89,12 @@ export const DIRECTORY_QUESTIONS = [
   },
   {
     question: "Which countries and sports are included?",
+    answer: `The directory covers every sport section currently listed on AthRecs, with national federations in ${DIRECTORY_NATIONAL_COUNTRIES.length} countries across Europe, the Americas, Africa, Asia and Oceania. It also includes home-nation and regional bodies, specialist associations, funding agencies and international organisations. Use the country and sport filters to find the relevant entries. Coverage is growing and is not exhaustive in every country or discipline. Jurisdiction describes an organisation’s remit; it does not determine an athlete’s nationality or team eligibility.`,
+  },
+  {
+    question: "How do regional and specialist organisations fit in?",
     answer:
-      "This first collection covers every sport section currently listed on AthRecs, with national bodies in the UK, Ireland, the United States, Canada, Australia, New Zealand and South Africa, plus UK home-nation and international organisations. It is a growing directory, not an exhaustive list of every federation or specialist association worldwide. Jurisdiction describes an organisation’s remit; it does not determine an athlete’s nationality or team eligibility.",
+      "Regional bodies serve a defined area: Cycling Ulster covers the nine counties of Ulster, across Northern Ireland and Ireland, while Swim Ulster is part of the Swim Ireland family. Specialist associations focus on activities such as fell running, trail running or masters swimming. Their profiles explain their particular roles; they do not automatically replace the national federation. Continental federations support member countries and continental competition.",
   },
   {
     question: "Is parkrun a national governing body?",

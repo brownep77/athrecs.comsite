@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { SPORTS_ORGANISATIONS } from "../src/data/sports-organisations.ts";
+import { ORGANISATION_TYPES, SPORTS_ORGANISATIONS } from "../src/data/sports-organisations.ts";
 import { SPORT_PAGES } from "../src/lib/athrecs/sport-pages.ts";
 import {
   filterSportsOrganisations,
@@ -14,6 +14,7 @@ for (const body of SPORTS_ORGANISATIONS) {
   slugs.add(body.slug);
   assert.match(body.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
   assert(body.name && body.summary && body.jurisdiction && body.territories.length);
+  assert(Object.hasOwn(ORGANISATION_TYPES, body.type), `Unknown type: ${body.name}`);
   assert.match(body.checkedAt, /^\d{4}-\d{2}-\d{2}$/);
   assert(body.sources.length, `Missing references: ${body.name}`);
   for (const value of [body.website, ...body.sources]) {
@@ -60,6 +61,25 @@ assert(
   ),
 );
 assert.deepEqual(names({ q: "Team GB", type: "olympic" }), ["british-olympic-association"]);
+assert.deepEqual(names({ country: "Japan", sport: "duathlon", type: "national" }), [
+  "triathlon-japan",
+]);
+assert.deepEqual(names({ country: "Brazil", sport: "swimming", type: "national" }), [
+  "brazilian-aquatics",
+]);
+assert.deepEqual(names({ q: "francaise natation" }), ["french-swimming"]);
+assert.deepEqual(names({ q: "BDR" }), ["german-cycling"]);
+assert.deepEqual(names({ q: "Swim Denmark" }), ["danish-swimming"]);
+assert.deepEqual(names({ q: "Japan Triathlon Union" }), ["triathlon-japan"]);
+assert.deepEqual(names({ q: "ITRA", type: "national" }), []);
+assert(names({ q: "ITRA", type: "specialist" }).includes("itra"));
+assert(names({ type: "continental", sport: "bmx" }).includes("uec"));
+for (const country of ["Ireland", "Northern Ireland"]) {
+  assert(names({ country, sport: "bmx", type: "regional" }).includes("cycling-ulster"));
+  assert(names({ country, sport: "swimming", type: "regional" }).includes("swim-ulster"));
+}
+assert(!names({ country: "England", type: "regional" }).includes("cycling-ulster"));
+assert.equal(parseDirectorySearch({ type: "specialist", country: "Brazil" }).type, "specialist");
 assert.deepEqual(names({ sport: "parkrun", type: "organiser" }), ["parkrun"]);
 assert.deepEqual(names({ sport: "parkrun", type: "national" }), []);
 assert(!names({ sport: "duathlon", type: "olympic" }).length);
