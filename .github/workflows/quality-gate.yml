@@ -93,6 +93,7 @@ jobs:
           node scripts/verify-race-page-schema.mjs
           node scripts/verify-event-offer-publication.mjs
           node scripts/verify-event-schema-publication.mjs
+          node scripts/verify-race-ending-display.mjs
           node scripts/verify-public-results-section.mjs
 
       - name: Verify running event register and contact history

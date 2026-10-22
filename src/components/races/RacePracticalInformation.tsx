@@ -98,6 +98,12 @@ export function RacePracticalInformation({
                         {edition.start_label ??
                           (start ? `Starts ${start}` : "Start time not yet verified")}
                       </p>
+                      {edition.end_date ? (
+                        <p className="mt-1 text-sm text-muted">
+                          Ends {formatRaceDateShort(edition.end_date)}
+                          {edition.end_time ? ` at ${edition.end_time} local time` : ""}
+                        </p>
+                      ) : null}
                       <p className="mt-1 text-sm text-muted">
                         {statusLabel(
                           effectiveStatus(edition.event_date, edition.status as EntryStatus),
