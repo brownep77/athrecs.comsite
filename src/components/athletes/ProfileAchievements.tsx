@@ -239,6 +239,14 @@ export function AchievementsBoard({
       results: record.finishes,
       verified: achievementEvidenceVerified(record.finishes),
     },
+    ...record.distanceFinishes.map((distance) => ({
+      id: distance.id,
+      label: distance.plural.charAt(0).toUpperCase() + distance.plural.slice(1),
+      value: distance.results.length,
+      icon: Flag,
+      results: distance.results,
+      verified: achievementEvidenceVerified(distance.results),
+    })),
     ...(hasRunning
       ? [
           {

@@ -64,6 +64,16 @@ export function buildProfileAchievementSummary(
     });
   };
   add("finishes", record.finishes.length, [1, 5, 10, 25, 50, 100, 250, 500], "finish", "finishes");
+  for (const distance of record.distanceFinishes) {
+    if (distance.nextTarget !== null)
+      add(
+        distance.id,
+        distance.results.length,
+        [distance.nextTarget],
+        distance.label,
+        distance.plural,
+      );
+  }
   if (record.marathons.length)
     add("marathons", record.marathons.length, [1, 5, 10, 20, 25, 50, 100], "marathon", "marathons");
   if (record.ultras.length)
