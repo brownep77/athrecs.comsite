@@ -288,7 +288,10 @@ function DirectoryPage() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center gap-1"
               >
-                Official website <ArrowUpRight className="size-4" aria-hidden="true" />
+                {body.websiteKind === "member-directory"
+                  ? "Official member directory"
+                  : "Official website"}{" "}
+                <ArrowUpRight className="size-4" aria-hidden="true" />
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
             </div>

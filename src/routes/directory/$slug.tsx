@@ -47,8 +47,9 @@ export const Route = createFileRoute("/directory/$slug")({
                 name: body.name,
                 alternateName: body.aliases,
                 description: body.summary,
-                url: body.website,
-                sameAs: [body.website],
+                ...(body.websiteKind === "member-directory"
+                  ? {}
+                  : { url: body.website, sameAs: [body.website] }),
               },
               {
                 "@type": "BreadcrumbList",
@@ -104,7 +105,10 @@ function OrganisationPage() {
           rel="noopener noreferrer"
           className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-fg no-underline"
         >
-          Visit official website <ArrowUpRight className="size-4" aria-hidden="true" />
+          {body.websiteKind === "member-directory"
+            ? "View official member directory"
+            : "Visit official website"}{" "}
+          <ArrowUpRight className="size-4" aria-hidden="true" />
           <span className="sr-only"> (opens in a new tab)</span>
         </a>
       </header>
