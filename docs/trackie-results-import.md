@@ -314,3 +314,76 @@ Validation includes the source comparisons, PDF regression, all final public
 history schemas, source-registry and bulk-run checks, production-copy rehearsal,
 exact production readback and live profile/club/meeting/result pages. Existing
 profiles, accounts and claims are not modified.
+
+## Review of fifth-batch holds — 22 October 2026
+
+The current production capture and publication audit were read before review.
+None of the 414 held source locators was present in either a Trackie canonical
+result or a Trackie athlete history. No later Trackie resolution audit was found.
+The original 839 published results were excluded from this review.
+
+All seven original PDFs were recovered through the private source-capture store
+and their SHA-256 hashes checked. Four supplementary retained references were
+also recovered from the private approval, including the separate March report.
+All 1,253 compared rows were reproduced from the original PDFs using the two
+PDF engines. These are retained captures from 21 October, not fresh live checks.
+
+The reviewed append-only plan resolves 126 observations onto 54 existing public,
+unclaimed source profiles. Exact full name, sex, explicit source age and reviewed
+club identity agree across separate reports; 89 earlier source rows were checked
+against their original PDFs. Two earlier continuation rows were compared directly
+with both PDF engines because the current adapter omits their repeated headings.
+All 566 profiles added since the original identity screen and all 19 account
+directory entries were screened again, with no additional candidate conflicts.
+No exact birth date, nationality, account ownership or current membership is
+inferred. Result verification remains `unverified`.
+
+| Meeting | Newly resolved result records |
+| --- | ---: |
+| BNAA meet hosted by Pacers, 10291 | 28 |
+| Vernon All Comers, 10293 | 34 |
+| OAC Twilight Meet #1, 10296 | 64 |
+| **Total** | **126** |
+
+The total includes two explicitly printed DNFs, retained as DNFs. No new athlete,
+club, meeting or competition is required. Existing profile facts, visibility,
+history entries and verification values remain unchanged.
+
+| Remaining review reason (mutually exclusive) | Observations |
+| --- | ---: |
+| Existing athlete/account candidates, without a supported identity match | 231 |
+| Existing candidates plus different source clubs | 7 |
+| Different source clubs without an existing candidate | 18 |
+| Clipped names | 23 |
+| Shortened surname requiring identity resolution | 2 |
+| Damaged name encoding | 5 |
+| Multiple rows in the same competition | 2 |
+| **Still held** | **288** |
+
+Existing-name candidates need independent full-name, age/year, club or other
+identity evidence; fuzzy similarity is not enough. Club conflicts need evidence
+connecting the affiliations. Damaged or clipped names need an unclipped original
+result or an independently linked athlete record. Same-competition duplicates
+need round/attempt or distinct-person evidence. No source PDF is missing for the
+414 observations. The separate multi-day/relay reports with no compared rows
+remain outside this denominator and still need dates or relay-specific handling.
+
+`resolve-trackie-observations.py` extends the supervised publication process to
+append reviewed observations to existing histories. Private plans and receipts
+stay outside git. It requires an unchanged production-copy rehearsal, locks the
+identity/history tables, rechecks the live directory fingerprint and exact prior
+JSON, refuses account links, claims and active invitations, checks original held
+locators and capture hashes, and rejects duplicate source rows or competitions.
+Original history values and the full decisions/remaining holds are recorded in
+the staff-only `trackie.held_resolved` audit under
+`trackie-review-20261022-batch5`; earlier publication audits remain immutable.
+Future reviews must subtract these resolved locators rather than replay PR #809.
+
+Validation includes six synthetic negative tests, all 54 complete updated
+application history schemas, the public athlete/results privacy regressions,
+copied-production rehearsal and independent exact history/result/profile readback.
+Production publication and independent readback confirmed all 54 updated profiles
+and 126 public result records, with zero linked accounts and no verification or
+integer-timing changes. Reviewed plan SHA-256:
+`e845cc1ee030913eb9bf27d0f5be11b1d6ab635e2932c7547efdf4295ee4f19c`.
+The review branch was `br-misty-fire-ayrxcmjl`.
