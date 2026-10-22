@@ -5,11 +5,11 @@ organisations behind all 11 current AthRecs sport sections. Clubs remain at
 `/clubs`, linked prominently from the directory. The primary Directory item,
 sport pages, footer, HTML site map and XML pages sitemap expose the new section.
 
-Research and expansion, 22 October 2026: 155 organisations, including national
-federations in 27 countries and territories. The original UK/home nations, Ireland, USA, Canada,
+Research and expansion, 22 October 2026: 194 organisations, including 146 national
+federations in 37 countries and territories. The original UK/home nations, Ireland, USA, Canada,
 Australia, New Zealand and South Africa coverage is joined by France, Germany,
 Spain, Italy, Portugal, Netherlands, Belgium, Switzerland, Sweden, Denmark,
-Japan and Brazil. The latest additions cover Austria, Finland, Norway, Poland,
+Japan and Brazil. The earlier additions cover Austria, Finland, Norway, Poland,
 India, Singapore, Kenya and Bermuda. All eight have athletics, swimming and
 triathlon entries; seven also have cycling entries. Kenyan cycling remains a
 research gap rather than linking an unverified independent website. Scottish
@@ -24,7 +24,7 @@ and Swim Ulster; US and Australian specialist associations; funding bodies in
 Australia, Canada and New Zealand; and SASCOC in South Africa. This is not an
 exhaustive global federation or specialist association census.
 
-The latest review revisited all 123 existing records, checking the official
+The earlier review revisited all 123 original records, checking the official
 website/source destinations and organisational role or affiliation evidence.
 It corrected the Welsh display names to Beicio Cymru and Triathlon Cymru,
 retaining old-name aliases and stable slugs; clarified Athletics Ireland's
@@ -32,6 +32,18 @@ all-island remit; updated the WMRA destination and several role references;
 and expanded parkrun's country filters. France is excluded from active parkrun
 coverage because its specific suspension notice takes precedence over the
 generic special-days table. See [the review record](sports-directory-review-2026-10-22.md).
+
+A further 39 national federations cover Czechia, Hungary, Romania, Greece,
+Turkey, Estonia, Latvia, Lithuania, Mexico and South Korea. Nine countries have
+athletics, cycling, swimming and triathlon entries; Mexico has cycling,
+aquatics and triathlon. Mexico's current entries use Unión Ciclista de México
+and Aquatics México. See [the second expansion record](sports-directory-expansion-2026-10-22-b.md)
+for source checks, conservative sport mappings and remaining gaps.
+
+Where a usable standalone website cannot be verified, `websiteKind` identifies
+an official member-directory destination. Cards and profiles label that link
+explicitly, and the parent directory is not emitted as the national body's
+own URL or `sameAs` in structured data.
 
 ## Editorial rules
 

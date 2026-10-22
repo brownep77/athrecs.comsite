@@ -79,6 +79,36 @@ assert.equal(getSportsOrganisation("welsh-cycling").name, "Beicio Cymru");
 assert.deepEqual(names({ q: "plywacki" }), ["polish-swimming"]);
 assert.deepEqual(names({ q: "Norges Svommeforbund" }), ["norwegian-swimming"]);
 assert.deepEqual(names({ q: "Kenya Swimming Federation" }), ["kenya-aquatics"]);
+for (const country of [
+  "Czechia",
+  "Hungary",
+  "Romania",
+  "Greece",
+  "Turkey",
+  "Estonia",
+  "Latvia",
+  "Lithuania",
+  "South Korea",
+]) {
+  for (const sport of ["track-and-field", "road-cycling", "swimming", "triathlon"]) {
+    assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
+  }
+}
+assert.deepEqual(names({ q: "Czech Republic", sport: "triathlon" }), ["czech-triathlon"]);
+assert.deepEqual(names({ q: "Turkiye", sport: "triathlon" }), ["turkish-triathlon"]);
+assert.deepEqual(names({ q: "Republic of Korea", sport: "swimming" }), ["korean-swimming"]);
+assert.deepEqual(names({ q: "Magyar Uszo Szovetseg" }), ["hungarian-swimming"]);
+assert.deepEqual(names({ q: "Lithuanian Swimming Federation" }), ["ltu-aquatics"]);
+assert.deepEqual(names({ country: "Mexico", sport: "swimming", type: "national" }), [
+  "aquatics-mexico",
+]);
+assert.deepEqual(names({ country: "Mexico", sport: "bmx", type: "national" }), ["mexican-cycling"]);
+assert.equal(getSportsOrganisation("mexican-cycling").website, "https://ucmex.org/");
+assert.equal(getSportsOrganisation("aquatics-mexico").websiteKind, "member-directory");
+assert.equal(getSportsOrganisation("czech-swimming").websiteKind, "member-directory");
+assert.equal(getSportsOrganisation("hellenic-triathlon").website, "https://hellastriathlon.gr/en/");
+assert.deepEqual(names({ country: "Romania", sport: "bmx", type: "national" }), []);
+assert.deepEqual(names({ country: "Lithuania", sport: "duathlon", type: "national" }), []);
 for (const country of ["Austria", "Finland", "Norway", "Poland", "India", "Singapore", "Bermuda"]) {
   assert.equal(names({ country, type: "national" }).length, 4, `${country}: four national bodies`);
   for (const sport of ["track-and-field", "road-cycling", "swimming", "triathlon"]) {
