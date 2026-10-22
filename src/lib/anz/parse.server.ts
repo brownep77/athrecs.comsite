@@ -119,6 +119,10 @@ export function parseAnzEvent(
     if (!value("Perf") || !value("Competition") || !/^\d+$/.test(value("Rank")))
       throw new Error("Missing ANZ performance evidence.");
     const discipline = event.name.replace(/^1 Mile \(Road\)$/i, "Mile Road");
+    // ANZ's ranking vocabulary uses km for road and m for track (Ground Rules,
+    // Presentation Format 3). This source-specific evidence must survive import;
+    // generic distance-only histories must still retain an unknown surface.
+    const road = /^(?:\d+(?:\.\d+)?km|Half Marathon|Marathon|Mile Road)$/i.test(discipline);
     rows.push({
       year: Number(date.slice(0, 4)),
       date,
@@ -133,7 +137,14 @@ export function parseAnzEvent(
       sourceUrls: [profile.url],
       providerName: ANZ_PROVIDER,
       verificationStatus: "source_verified",
-      labels: ["ANZ performance", ...(value("Note") ? [`ANZ note: ${value("Note")}`] : [])],
+      labels: [
+        "ANZ performance",
+        ...(road ? ["Road"] : []),
+        ...(value("Note") ? [`ANZ note: ${value("Note")}`] : []),
+        // ANZ abbreviates downhill road courses as DH. Retain the original note
+        // and its eligibility qualification when making road results comparable.
+        ...(road && /\bDH\b/i.test(value("Note")) ? ["Aided course"] : []),
+      ],
       notes: `ANZ athlete ${profile.externalId}, ${profile.name}, ${profile.club}. Row locator: eventID=${event.id}; year=0; order_by=1; row ${index + 1}; source rank ${value("Rank")}. Identity and named result columns compared. Place is the original source annotation; gender/category and chip/gun basis are not supplied.${value("Note") ? ` Source note: ${value("Note")}.` : ""}`,
     });
   });

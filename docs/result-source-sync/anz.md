@@ -6,11 +6,15 @@ The importer follows the public athlete form, submitting each listed event with 
 
 The preview makes no database changes. Saving fetches the source again and checks a content/version digest, exact linked source identity, athlete name, ownership and existing history. It rejects changed or missing historical marks, unexpected tables, pagination and partial event captures. Account-managed athletes require owner review. New histories stay private; existing publication settings, exclusions and disqualifications are retained. The previous history and source metadata are archived in the transaction audit.
 
-Eligible running performances feed the public ANZ PB and annual-progression view. Track and road disciplines stay separate, decimal precision is preserved, and unsupported, unverified, excluded, disqualified, wind-assisted and annotated nonstandard marks do not become PBs. This is coverage of results available on ANZ, not a claim of a complete racing career.
+Eligible recorded running performances feed profile PBs and annual progression; verification is a separate tick. Track and road disciplines stay separate, decimal precision is preserved, and excluded, disqualified, wind-assisted and annotated nonstandard marks do not become PBs. This is coverage of results available on ANZ, not a claim of a complete racing career.
+
+The parser retains a `Road` label for ANZ's unqualified kilometre events, Half Marathon, Marathon and road mile. This is ANZ-specific classification, not a distance-to-surface assumption for other sources. ANZ's [Ground Rules](https://www.anzrankings.org.nz/userfiles/file/Ground_Rules_for_performances_for_Rankings_lists.pdf), Presentation Format point 3, distinguish kilometre road events from metre track events; its [ranking standards](https://www.anzrankings.org.nz/userfiles/file/Minimum_Performances_for_Ranking_Purposes.pdf) list the marathon disciplines in that road-distance group. Both were checked on 22 October 2026. The [abbreviation list](https://www.anzrankings.org.nz/site/abbrev_con) identifies `DH` as a downhill road course: retain that source note and an aided-course qualification so it cannot silently become an unqualified PB.
+
+Legacy histories may lack these surface labels. Any correction must match the exact source and disciplines, preserve result values, order, publication and review flags, and archive the complete before/after history in the private audit. Do not change the shared PB rule to admit unknown surfaces.
 
 Validation:
 
-- `node scripts/verify-anz-import.mjs`: synthetic source tables, identity checks, precision, privacy, repeat imports, stale previews and transaction rollback.
+- `node scripts/verify-anz-import.mjs`: synthetic source tables through profile PB selection (including slower pacing results, half marathon, track separation, unknown surfaces, downhill qualifications and privacy), identity checks, precision, repeat imports, stale previews and transaction rollback. This runs in the quality gate.
 - `node scripts/verify-anz-browser.mjs`: synthetic desktop/mobile interaction fixture. Requires a supported Playwright Chromium installation; optionally set `ATHRECS_CHROMIUM_PATH`.
 - Existing profile timeline, achievement and athlete-link checks cover integration behaviour.
 

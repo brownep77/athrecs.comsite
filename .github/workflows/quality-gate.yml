@@ -102,7 +102,10 @@ jobs:
         run: npm run verify:profile-result-verification
 
       - name: Verify historical result source safeguards
-        run: node scripts/verify-result-source-sync.mjs
+        run: |
+          node scripts/verify-result-source-sync.mjs
+          node scripts/verify-anz-import.mjs
+          node scripts/verify-historical-personal-bests.mjs
 
       - name: Verify independent result evidence comparisons
         run: node scripts/verify-result-evidence-audit.mjs
