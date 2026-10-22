@@ -137,6 +137,8 @@ def prepare(args):
             evidence=[x['review'] for x in rs if x['review'].get('nationality')]
             profiles[-1]['details']['archiveCreation']['nationalityEvidence']=evidence
             profiles[-1]['details']['sourceNationalityObservation']={'value':profiles[-1]['nation'],'provider':evidence[0]['provider'],'sourceUrl':evidence[0]['sourceUrl']}
+    for profile in profiles:
+        profile['details']['archiveCreation']['approvedAt'] = config.get('approvedAt', '2026-10-21')
     plan={'batchId':BATCH,'instruction':INSTRUCTION,'directoryFingerprint':directory['fingerprint'],'clubs':club_plan,'heldClubs':held_clubs,'meetings':meetings,'profiles':profiles,'held':holds,'captures':captures}
     if supplemental['sources']:plan['supplementarySources']=supplemental['sources']
     plan['summary']={'profiles':len(profiles),'results':sum(len(p['performances']) for p in profiles),'meetings':len(meetings),'newMeetings':sum(not m.get('existingId') for m in meetings),'competitions':sum(len(m['competitions']) for m in meetings),'newClubs':sum(not c['existingId'] for c in club_plan),'linkedClubs':sum(bool(c['existingId']) for c in club_plan),'heldRows':sum(h.get('rows',1) for h in holds),'heldGroups':len(holds),'unresolvedClubLabels':sorted({x['row']['club'] for rs in groups.values() for x in rs if x['row']['club'] not in club_by_alias and not re.match(r'^(?:Unattached|UNA)',x['row']['club'],re.I)})}

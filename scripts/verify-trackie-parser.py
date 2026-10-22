@@ -60,6 +60,17 @@ with tempfile.TemporaryDirectory() as folder:
     assert rows[0]['original']['Prelims']=='12.12' and rows[0]['performance']=='12.34'
     assert rows[0]['finishSeconds']==12.34 and rows[0]['status']=='finished'
     assert rows[0]['category']=='U20'
+    yearbib=pathlib.Path(folder)/'yearbib.pdf'
+    pdf=canvas.Canvas(str(yearbib));pdf.setFont('Courier',10)
+    pdf.drawString(18,740,'Girls 60 Meter Dash U14')
+    for x,text in [(42,'Name'),(180,'Yr'),(216,'Team'),(360,'Finals')]:pdf.drawString(x,720,text)
+    pdf.drawString(30,700,'1');pdf.drawString(42,700,'444 Demo, Runner');pdf.drawRightString(192,700,'14');pdf.drawString(216,700,'Example Club');pdf.drawRightString(396,700,'8.61')
+    pdf.drawString(18,680,'Preliminaries')
+    pdf.drawString(30,660,'2');pdf.drawString(42,660,'555 Heat, Runner');pdf.drawRightString(192,660,'14');pdf.drawString(216,660,'Example Club');pdf.drawRightString(396,660,'9.75');pdf.save()
+    rows,issues=parser.parse_pdf(yearbib,{'date':'2026-03-15','files':[{'url':'https://example.org/yearbib.pdf'}]})
+    assert not issues and len(rows)==1,issues
+    assert rows[0]['name']=='Demo, Runner' and rows[0]['bib']=='444'
+    assert rows[0]['original']['Yr']=='14' and rows[0]['performance']=='8.61'
     ambiguous=pathlib.Path(folder)/'ambiguous.pdf'
     pdf=canvas.Canvas(str(ambiguous));pdf.setFont('Courier',10)
     pdf.drawString(18,780,'Example Twilight - 6/2/2026 to 5/19/2026')

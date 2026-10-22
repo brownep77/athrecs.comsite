@@ -1,0 +1,227 @@
+{
+  "batchId": "trackie-public-20261022-batch6",
+  "approvedAt": "2026-10-22",
+  "instruction": "Continue adding Trackie athlete profiles, results, clubs, meetings and events to AthRecs. Owner continuation: keep going please.",
+  "clubs": [
+    {
+      "name": "Athletic Victory (Speed) Club",
+      "aliases": [
+        "Athletic Victory (Speed) Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Blue Devils Athletics Club",
+      "aliases": [
+        "Blue Devils Athletics Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Brampton Track Club",
+      "aliases": [
+        "Brampton Track Club Inc."
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Brock Badgers",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Brock Badgers"
+      ]
+    },
+    {
+      "name": "Eclipse Track & Field Inc",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Eclipse Track & Field Inc"
+      ]
+    },
+    {
+      "name": "Extreme Velocity Track Club",
+      "aliases": [
+        "Extreme Velocity Track Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Glen Manor Track Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Glen Manor Track Club"
+      ]
+    },
+    {
+      "name": "Laurel Creek T.F.C",
+      "aliases": [
+        "Laurel Creek T.F.C"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Lyfestyle Athletics",
+      "aliases": [
+        "Lyfestyle Athletics"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "M.B. Track Club",
+      "aliases": [
+        "M.B. Track Club",
+        "M.B. Track Club."
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Masters of Speed Athletics",
+      "aliases": [
+        "Masters of Speed Athletics"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Motown Athletics Club",
+      "aliases": [
+        "Motown Athletics Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Newmarket Huskies Track Club",
+      "aliases": [
+        "Newmarket Huskies Track Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Peterborough Legion Track Club",
+      "aliases": [
+        "Peterborough Legion Track Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Project Athletics Track And Field Program",
+      "aliases": [
+        "Project Athletics"
+      ],
+      "website": "https://www.projectathletics.com/",
+      "sourceUrl": "https://www.projectathletics.com/",
+      "country": "Canada",
+      "city": "Toronto"
+    },
+    {
+      "name": "Quest Sports Track and Field Club",
+      "aliases": [
+        "Quest Sports Track and Field C"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Speed Academy Athletics Club",
+      "aliases": [
+        "Speed Academy Athletics Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Toronto Olympic Track & Field Club",
+      "aliases": [
+        "Toronto Olympic Track & Field"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "University Of Toronto Tc",
+      "aliases": [
+        "University Of Toronto Tc"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Variety Village Athletic Club",
+      "aliases": [
+        "Variety Village Athletic Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "York University Track & Field Club",
+      "aliases": [
+        "York University Track & Field"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Panthers International",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Panthers Int"
+      ]
+    },
+    {
+      "name": "PSE Sports Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Pse"
+      ]
+    },
+    {
+      "name": "Roots Athletic Club",
+      "aliases": [
+        "Roots Athlet"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/abba-road-race-series-26-27-1-mile-run/10359/"
+    },
+    {
+      "name": "Wadadli Athletic Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Wadadli Athl"
+      ]
+    }
+  ],
+  "meetings": {
+    "10289": {
+      "name": "Variety Village All Comers Mini Meet 2026",
+      "slug": "wa-variety-village-all-comers-mini-meet-7236593",
+      "city": "Scarborough",
+      "region": "Ontario",
+      "country": "Canada",
+      "venue": "Wise Foundation Fieldhouse",
+      "surface": "Indoor Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": 4391345,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10283": {
+      "name": "2026 BNAA Track & Field Meet Hosted by Pacers",
+      "slug": "trackie-2026-bnaa-track-field-meet-hosted-by-pacers-10283",
+      "city": "",
+      "region": "",
+      "country": "Bermuda",
+      "venue": "National Sports Centre",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10276": {
+      "name": "ABAA Development Meet Series 2026-Meet #4",
+      "slug": "trackie-abaa-development-meet-series-2026-meet-4-10276",
+      "city": "Saint John",
+      "region": "",
+      "country": "Antigua and Barbuda",
+      "venue": "YASCO Sports Complex",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    }
+  }
+}
