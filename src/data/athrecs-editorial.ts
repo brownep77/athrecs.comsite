@@ -1,5 +1,6 @@
 import { NEWS_ARTICLES } from "./runrecs-news";
 import { BURE_REPORT } from "./bure-valley-2026";
+import { OCTOBER_WEEKEND_PREVIEWS } from "./october-weekend-previews";
 import type { EditorialArticle } from "../lib/athrecs/editorial";
 
 // Reuse the already-published report without changing its text or the RunRecs feed.
@@ -9,6 +10,7 @@ const publishedReport = NEWS_ARTICLES.find(
 );
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  ...OCTOBER_WEEKEND_PREVIEWS,
   BURE_REPORT,
   ...(publishedReport
     ? [
@@ -24,3 +26,4 @@ export const EDITORIAL_ARTICLES: EditorialArticle[] = [
       ]
     : []),
 ];
+
