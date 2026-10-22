@@ -165,6 +165,92 @@ try {
   const firstPage = buildPublicAthletePreview(input);
   const secondPage = buildPublicAthletePreview({ ...input, resultPage: 2 });
   assert(firstPage.entries.length < 40, "Exercise actual pagination");
+  const { publicAnzMedals, ANZ_PROVIDER } = await server.ssrLoadModule("/src/lib/anz/core.ts");
+  const { AnzChampionshipMedals } = await server.ssrLoadModule(
+    "/src/components/athletes/AnzChampionshipMedals.tsx",
+  );
+  const medalHistory = {
+    ...history,
+    provider: ANZ_PROVIDER,
+    performances: [
+      {
+        ...history.performances[0],
+        year: 2020,
+        date: "2020-06-01",
+        discipline: "10km",
+        place: "4",
+      },
+      {
+        ...history.performances[0],
+        year: 2021,
+        date: "2021-06-01",
+        discipline: "Half Marathon",
+        performance: "1:20:01",
+        place: "2",
+      },
+    ],
+  };
+  const medalMetadata = {
+    anzImport: {
+      verificationStatus: "source_verified",
+      medals: [
+        {
+          year: 2020,
+          event: "10km",
+          performance: "40:00",
+          ageGroup: "Open Women",
+          medal: "bronze",
+          sourceUrl: medalHistory.sourceUrl,
+        },
+        {
+          year: 2021,
+          event: "Half Marathon",
+          performance: "1:20:01",
+          ageGroup: "Senior Women",
+          medal: "silver",
+          sourceUrl: medalHistory.sourceUrl,
+        },
+      ],
+    },
+  };
+  const medals = publicAnzMedals(medalMetadata, [medalHistory]);
+  const medalInput = { ...input, histories: [medalHistory], anzMedals: medals };
+  const medalPreview = buildPublicAthletePreview(medalInput);
+  assert.equal(medalPreview.championshipMedals.length, 2);
+  assert.deepEqual(
+    medalPreview.championshipMedals,
+    buildPublicAthletePreview({ ...medalInput, resultPage: 2 }).championshipMedals,
+  );
+  assert(
+    medalPreview.entries.every((entry) => entry.kind === "recorded"),
+    "Older championship medals must survive the latest-five-results limit",
+  );
+  assert(!JSON.stringify(medalPreview.championshipMedals).includes("source"));
+  assert(!JSON.stringify(medalPreview.championshipMedals).includes("example.test"));
+  assert.equal(
+    medalHistory.performances[0].place,
+    "4",
+    "A championship bronze never overwrites overall placing",
+  );
+  const medalMarkup = renderToStaticMarkup(
+    createElement(AnzChampionshipMedals, { medals: medalPreview.championshipMedals }),
+  );
+  assert(medalMarkup.includes("New Zealand championship medals"));
+  assert(medalMarkup.includes('data-profile-award="silver"'));
+  assert(medalMarkup.includes('data-profile-award="bronze"'));
+  assert.equal((medalMarkup.match(/data-award-tier="national"/g) ?? []).length, 2);
+  assert.equal((medalMarkup.match(/data-achievement-verification="verified"/g) ?? []).length, 2);
+  assert(medalMarkup.includes("Open Women") && medalMarkup.includes("1:20:01"));
+  assert.equal(renderToStaticMarkup(createElement(AnzChampionshipMedals, { medals: [] })), "");
+  assert.equal(
+    publicAnzMedals(medalMetadata, [
+      {
+        ...medalHistory,
+        performances: medalHistory.performances.map((row) => ({ ...row, profileExcluded: true })),
+      },
+    ]).length,
+    0,
+  );
   assert.deepEqual(
     firstPage.achievements,
     secondPage.achievements,

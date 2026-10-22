@@ -19,7 +19,7 @@ const row = (discipline, performance, year) => ({
   venue: "Example Town",
   meeting: "Example meeting",
   sourceUrls: ["https://www.anzrankings.org.nz/site/profiles_con/athlete/42"],
-  labels: [],
+  labels: discipline === "10km" ? ["Road"] : [],
   verificationStatus: "source_verified",
 });
 const capture = {
@@ -103,8 +103,22 @@ try {
   await page.getByRole("heading", { name: "PBs", exact: true }).waitFor();
   await page.getByRole("combobox", { name: "Event" }).selectOption("10km");
   assert.equal(
-    await page.getByRole("button", { name: /10km Road/ }).getAttribute("aria-pressed"),
+    await page.getByRole("button", { name: /10km\s*Road/ }).getAttribute("aria-pressed"),
     "true",
+  );
+  const medals = page.getByRole("region", { name: "New Zealand championship medals" });
+  assert.equal(await medals.locator("article").count(), data.medals.length);
+  for (const medal of data.medals) {
+    assert.equal(
+      await medals
+        .locator(`[data-profile-award="${medal.medal}"][data-award-tier="national"]`)
+        .count(),
+      data.medals.filter((item) => item.medal === medal.medal).length,
+    );
+  }
+  assert.equal(
+    await medals.locator('[data-achievement-verification="verified"]').count(),
+    data.medals.length,
   );
   await page.screenshot({ path: resolve(root, "desktop.png"), fullPage: true });
   await page.getByRole("button", { name: "Preview ANZ results", exact: true }).click();

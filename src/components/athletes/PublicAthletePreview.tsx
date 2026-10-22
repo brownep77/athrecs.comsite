@@ -12,6 +12,7 @@ import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
 import { AthleteBusinessLink } from "./AthleteBusinessLink";
 import { AchievementSummary } from "./AchievementSummary";
 import { AchievementVerification } from "./AchievementVerification";
+import { AnzChampionshipMedals } from "./AnzChampionshipMedals";
 import { buildProfileAchievementSummary } from "@/lib/athrecs/profile-achievement-summary";
 import {
   publicAthleteResultPath,
@@ -85,6 +86,9 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
       <div id="profile-achievements" className="scroll-mt-24">
         <AchievementSummary summary={profile.achievements ?? buildProfileAchievementSummary([])} />
       </div>
+      {profile.championshipMedals?.length ? (
+        <AnzChampionshipMedals medals={profile.championshipMedals} />
+      ) : null}
       {profile.personalBests?.length ? (
         <section aria-label="PBs" className="space-y-3">
           <h2 className="font-display text-lg font-semibold">PBs & best performances</h2>
