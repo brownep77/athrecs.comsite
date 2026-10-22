@@ -176,7 +176,8 @@ try {
     assert(!/noindex/.test(page.$('meta[name=robots]').attr('content')), path);
     assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${path}`);
     assert.match(page.$('title').text(), /Page 2/);
-    assert(page.$('main a[href^="/races/test-indexing-directory-"]').length > 0);
+    assert.equal(page.$("#fixtures article h3").length, 17);
+    assert.match(page.$("#fixtures article h3").first().text(), /Synthetic Indexing Fixture/);
   }
   assert.match((await get('/sports/track-and-field?q=absent-synthetic')).$('meta[name=robots]').attr('content'), /noindex/);
   await sql`update events set sport='Running', surface='Road' where slug like 'test-indexing-directory-%'`;
