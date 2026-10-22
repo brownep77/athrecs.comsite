@@ -74,7 +74,7 @@ def parse_pdf(path, item):
                 if text.startswith("#") and re.search(r"\b(?:Women|Men)", text):
                     section = text
                     headings = None
-                if text == "Team Scores" or ("RNK" in text and "TOTAL TIME" in text):
+                if text in ("Team Scores", "Preliminaries") or ("RNK" in text and "TOTAL TIME" in text):
                     headings = None
                     continue
                 names = [w["text"] for w in line]
@@ -103,7 +103,7 @@ def parse_pdf(path, item):
                 # Numeric Hy-Tek columns are right aligned to their headings.
                 # Resolve these first so a seed time never becomes a final time.
                 if name_key == "Name":
-                    for key in ("Age", "Year", "Seed", "Prelims", "Finals", "Wind", "H#", "Points"):
+                    for key in ("Age", "Year", "Yr", "Seed", "Prelims", "Finals", "Wind", "H#", "Points"):
                         if key not in headings:
                             continue
                         cells = [(i, w) for i, w in enumerate(line)
@@ -115,7 +115,7 @@ def parse_pdf(path, item):
                         values[key] = " ".join(w["text"] for _, w in cells)
                         used.update(i for i, _ in cells)
                     team_start = headings["Team"]["x0"] - 2
-                    age_head = headings.get("Age", headings.get("Year"))
+                    age_head = headings.get("Age", headings.get("Year", headings.get("Yr")))
                     name_end = age_head["x0"] - 1 if age_head else team_start
                     name_words = [w["text"] for w in line
                                   if name_head["x0"] - 1 <= w["x0"] < name_end]
@@ -146,7 +146,7 @@ def parse_pdf(path, item):
                                               if headings["TEAM"]["x0"] - 1 <= w["x0"] < team_end)
                     performance = values["TIME"]
                 name = values[name_key]
-                bib_match = re.match(r"#\s*(\d+)\s+(.+)", name)
+                bib_match = re.match(r"#?\s*(\d+)\s+(.+)", name)
                 bib = bib_match[1] if bib_match else ""
                 if bib_match:
                     name = bib_match[2]
