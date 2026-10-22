@@ -106,6 +106,49 @@ assert.deepEqual(names({ country: "Mexico", sport: "bmx", type: "national" }), [
 assert.equal(getSportsOrganisation("mexican-cycling").website, "https://ucmex.org/");
 assert.equal(getSportsOrganisation("aquatics-mexico").websiteKind, "member-directory");
 assert.equal(getSportsOrganisation("czech-swimming").websiteKind, "member-directory");
+for (const country of [
+  "Chile",
+  "Colombia",
+  "Malaysia",
+  "Thailand",
+  "Philippines",
+  "Indonesia",
+  "Hong Kong",
+]) {
+  assert.equal(names({ country, type: "national" }).length, 4, `${country}: four national bodies`);
+  for (const sport of ["track-and-field", "road-cycling", "swimming", "triathlon"]) {
+    assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
+  }
+}
+// Argentina has a cycling umbrella and three separate discipline federations.
+assert.equal(names({ country: "Argentina", type: "national" }).length, 7);
+for (const [sport, specialist] of [
+  ["road-cycling", "argentine-road-track-cycling"],
+  ["track-cycling", "argentine-road-track-cycling"],
+  ["mountain-biking", "argentine-mountain-biking"],
+  ["bmx", "argentine-bmx"],
+]) {
+  assert.deepEqual(
+    names({ country: "Argentina", sport, type: "national" }).sort(),
+    ["ucra", specialist].sort(),
+  );
+}
+assert.deepEqual(names({ q: "PRSI" }), ["akuatik-indonesia"]);
+assert.deepEqual(names({ q: "Thailand Swimming Association" }), ["thailand-aquatics"]);
+assert.deepEqual(names({ q: "PATAFA" }), ["philippine-athletics"]);
+assert.equal(getSportsOrganisation("argentine-athletics").website, "https://cada-atletismo.com/");
+assert.equal(
+  getSportsOrganisation("philippine-athletics").website,
+  "https://www.philippineathletics.org/",
+);
+assert.equal(getSportsOrganisation("colombian-athletics").websiteKind, "member-directory");
+assert.deepEqual(names({ country: "Hong Kong", sport: "duathlon", type: "national" }), [
+  "hong-kong-triathlon",
+]);
+assert.deepEqual(names({ country: "Thailand", sport: "duathlon", type: "national" }), []);
+assert.deepEqual(names({ country: "Argentina", sport: "trail-running", type: "national" }), [
+  "argentine-athletics",
+]);
 assert.equal(getSportsOrganisation("hellenic-triathlon").website, "https://hellastriathlon.gr/en/");
 assert.deepEqual(names({ country: "Romania", sport: "bmx", type: "national" }), []);
 assert.deepEqual(names({ country: "Lithuania", sport: "duathlon", type: "national" }), []);

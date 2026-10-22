@@ -5,8 +5,8 @@ organisations behind all 11 current AthRecs sport sections. Clubs remain at
 `/clubs`, linked prominently from the directory. The primary Directory item,
 sport pages, footer, HTML site map and XML pages sitemap expose the new section.
 
-Research and expansion, 22 October 2026: 194 organisations, including 146 national
-federations in 37 countries and territories. The original UK/home nations, Ireland, USA, Canada,
+Research and expansion, 22 October 2026: 229 organisations, including 181 national
+federations in 45 countries and territories. The original UK/home nations, Ireland, USA, Canada,
 Australia, New Zealand and South Africa coverage is joined by France, Germany,
 Spain, Italy, Portugal, Netherlands, Belgium, Switzerland, Sweden, Denmark,
 Japan and Brazil. The earlier additions cover Austria, Finland, Norway, Poland,
@@ -40,6 +40,13 @@ aquatics and triathlon. Mexico's current entries use Unión Ciclista de México
 and Aquatics México. See [the second expansion record](sports-directory-expansion-2026-10-22-b.md)
 for source checks, conservative sport mappings and remaining gaps.
 
+A further 35 organisations cover Argentina, Chile, Colombia, Malaysia, Thailand,
+the Philippines, Indonesia and Hong Kong. Each has athletics, cycling, swimming
+and triathlon coverage; Argentina additionally has separate road/track, mountain
+bike and BMX federations alongside the UCRA umbrella. See
+[the third expansion record](sports-directory-expansion-2026-10-22-c.md) for
+current names, destination checks and the scope of this addition.
+
 Where a usable standalone website cannot be verified, `websiteKind` identifies
 an official member-directory destination. Cards and profiles label that link
 explicitly, and the parent directory is not emitted as the national body's
@@ -61,7 +68,7 @@ own URL or `sameAs` in structured data.
   regional remit explicit; they do not govern all of either country.
 - Retain local-language names and English/acronym aliases for search. Reviewed
   current names include German Cycling, SvømDanmark and Triathlon Japan.
-- Bermuda is counted as a territory. Country totals count national-federation
+- Bermuda and Hong Kong are counted as territories. Country totals count national-federation
   jurisdictions, not parkrun-only locations or separate UK home-nation entries.
 - Empty sport arrays are reserved for cross-sport funding/development bodies.
   Olympic/Paralympic entries must not imply that duathlon or parkrun are Games sports.
