@@ -65,7 +65,7 @@ def parse_pdf(path, item):
                 text = " ".join(w["text"] for w in line)
                 # A centred report title may spill into the second column.
                 # Its year/date fragment is not an athlete's placing and name.
-                if re.fullmatch(r'20\d{2}\s+-\s+20\d{2}-\d{2}-\d{2}', text):
+                if re.fullmatch(r'\d+\s+-\s+\d{1,4}[-/]\d{1,2}[-/]\d{2,4}', text):
                     continue
                 heading_text = re.sub(r"^\.+", "", text).strip()
                 if re.match(r"^(?:(?:Event \d+|Throws Pentathlon: #\d+)\s+)?(?:Boys|Girls|Men|Women|Mixed)\b", heading_text):

@@ -1,0 +1,258 @@
+{
+  "batchId": "trackie-public-20261022-batch8",
+  "approvedAt": "2026-10-22",
+  "instruction": "Continue adding Trackie athletes, results, clubs, meetings and events to AthRecs. Owner continuation: can you add more to there please",
+  "clubs": [
+    {
+      "name": "Panthers International",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Panthers international"
+      ]
+    },
+    {
+      "name": "PSE Sports Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Pse"
+      ]
+    },
+    {
+      "name": "Wadadli Athletic Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Wadadli Athletic Club"
+      ]
+    },
+    {
+      "name": "Etonics Track andField Club",
+      "aliases": [
+        "Etonics Track andField Club",
+        "Etonics Trac"
+      ],
+      "country": "St Kitts & Nevis",
+      "sourceUrl": "https://www.trackie.com/results/2026-s-l-horsford-skn-classic-5/10224/"
+    },
+    {
+      "name": "Outer Limits Athletic Club",
+      "aliases": [
+        "Outer Limits Athletic Club",
+        "Outer Limits"
+      ],
+      "country": "St Kitts & Nevis",
+      "sourceUrl": "https://www.trackie.com/results/2026-s-l-horsford-skn-classic-5/10224/"
+    },
+    {
+      "name": "Over The Top Track Club",
+      "aliases": [
+        "Over The Top Track Club"
+      ],
+      "country": "St Kitts & Nevis",
+      "sourceUrl": "https://www.trackie.com/results/2026-s-l-horsford-skn-classic-5/10224/"
+    },
+    {
+      "name": "Phase Track & Field Club",
+      "aliases": [
+        "Phase Track & Field Club",
+        "Phase Track"
+      ],
+      "country": "St Kitts & Nevis",
+      "sourceUrl": "https://www.trackie.com/results/2026-s-l-horsford-skn-classic-5/10224/"
+    },
+    {
+      "name": "PhoenixSKN Track Club",
+      "aliases": [
+        "PhoenixSKN Track Club",
+        "PhoenixSKN T"
+      ],
+      "country": "St Kitts & Nevis",
+      "sourceUrl": "https://www.trackie.com/results/2026-s-l-horsford-skn-classic-5/10224/"
+    },
+    {
+      "name": "Titans Athletic Club",
+      "aliases": [
+        "Titans Athletic Club"
+      ],
+      "country": "St Kitts & Nevis",
+      "sourceUrl": "https://www.trackie.com/results/2026-s-l-horsford-skn-classic-5/10224/"
+    },
+    {
+      "name": "Bermuda Pacers Track Club",
+      "aliases": [
+        "BERMUDA PACE"
+      ],
+      "website": "https://www.pacersbda.com/aboutpacers/",
+      "sourceUrl": "https://www.pacersbda.com/aboutpacers/",
+      "country": "Bermuda",
+      "city": ""
+    },
+    {
+      "name": "Developing National Athletes - BNAA",
+      "aliases": [
+        "DEVELOPING N"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Discipline Application of Speed through Hard Work - BNAA",
+      "aliases": [
+        "DISCIPLINE A"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Blue Devils Athletics Club",
+      "aliases": [
+        "Blue Devils AC"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Boardwalk RC",
+      "aliases": [
+        "Boardwalk RC"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Durham Dragons",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Durham Dragons"
+      ]
+    },
+    {
+      "name": "Extreme Velocity Track Club",
+      "aliases": [
+        "Extreme Velocity"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Glen Manor Track Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Glen Manor TC"
+      ]
+    },
+    {
+      "name": "Lyfestyle Athletics",
+      "aliases": [
+        "Lyfestyle Athletics"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Project Athletics Track And Field Program",
+      "aliases": [
+        "Project Athletics"
+      ],
+      "website": "https://www.projectathletics.com/",
+      "sourceUrl": "https://www.projectathletics.com/",
+      "country": "Canada",
+      "city": "Toronto"
+    },
+    {
+      "name": "Quest Sports Track and Field Club",
+      "aliases": [
+        "Quest Sports"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Speed Academy Athletics Club",
+      "aliases": [
+        "Speed Academy"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "STAC Hamilton",
+      "aliases": [
+        "Stac Hamilton"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Variety Village Athletic Club",
+      "aliases": [
+        "Variety Village"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Waterloo Warriors",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Waterloo Warriors"
+      ]
+    }
+  ],
+  "meetings": {
+    "10223": {
+      "name": "ABAA Development Meet Series 2026 - Meet #2",
+      "slug": "trackie-abaa-development-meet-series-2026-meet-2-10223",
+      "city": "Saint John",
+      "region": "",
+      "country": "Antigua and Barbuda",
+      "venue": "YASCO Sports Complex",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10224": {
+      "name": "2026 S L Horsford/SKN Classic 5",
+      "slug": "wa-skna-classic-5-7236790",
+      "city": "Basseterre",
+      "region": "",
+      "country": "St Kitts & Nevis",
+      "venue": "Kim Collins Athletic Stadium",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": 4390749,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10192": {
+      "name": "2026 SKN Classic 4",
+      "slug": "wa-skna-classic-4-7236789",
+      "city": "Basseterre",
+      "region": "",
+      "country": "St Kitts & Nevis",
+      "venue": "Kim Collins Athletic Stadium",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": 4390668,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10182": {
+      "name": "2026 BNAA Carifta Trials Jan  7th",
+      "slug": "trackie-2026-bnaa-carifta-trials-jan-7th-10182",
+      "city": "",
+      "region": "",
+      "country": "Bermuda",
+      "venue": "National Sports Centre",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10181": {
+      "name": "Variety Village Winter Season Opener 2026",
+      "slug": "wa-variety-village-winter-season-opener-7235905",
+      "city": "Toronto",
+      "region": "Ontario",
+      "country": "Canada",
+      "venue": "Wise Family Field House",
+      "surface": "Indoor Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": 4390612,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    }
+  }
+}
