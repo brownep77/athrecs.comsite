@@ -249,7 +249,7 @@ function AthleteAccountPage() {
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted">
             {IS_ATHRECS_SITE
-              ? "Start with your email or an available sign-in provider. No date of birth or address needed. You can add your athlete details later."
+              ? "Start with your email or an available sign-in provider. After verification, add private athlete details so we can find your results."
               : "Use your email address or choose an available sign-in provider to create your ATHRECS Athlete Account. Gmail, Outlook, Hotmail, Yahoo, iCloud and other email addresses are welcome."}
           </p>
           <Button
@@ -404,6 +404,12 @@ function SignedInAccount() {
                 current && {
                   ...current,
                   fullName: updated.fullName,
+                  dateOfBirth: updated.dateOfBirth,
+                  nationality: updated.nationality,
+                  country: updated.country,
+                  postcode: updated.postcode,
+                  region: updated.region,
+                  clubOrTeam: updated.clubOrTeam,
                   privacyAcknowledged: updated.privacyAcknowledged,
                 },
             );
@@ -482,7 +488,7 @@ function SignedInAccount() {
           ) : null}
 
           {show("potential") ? (
-            IS_ATHRECS_SITE && !account.data.fullName.trim() ? null : (
+            IS_ATHRECS_SITE && (!account.data.exists || !account.data.fullName.trim()) ? null : (
               <PotentialResultMatchesPanel />
             )
           ) : null}

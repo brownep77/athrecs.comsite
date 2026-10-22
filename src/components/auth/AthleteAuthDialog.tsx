@@ -747,7 +747,7 @@ export function AthleteAuthDialog() {
                     ) : null}
                     {quickEntry && !codeSentTo ? (
                       <p className="text-center text-xs text-muted">
-                        No date of birth or address needed. Add your athlete details later.
+                        Verify your email, then add private athlete details to find your results.
                       </p>
                     ) : null}
                   </form>

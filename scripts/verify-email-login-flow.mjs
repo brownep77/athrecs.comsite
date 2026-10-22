@@ -297,6 +297,75 @@ try {
         ),
       "Cross-site writes are rejected",
     );
+    const registration = {
+      firstName: "Code",
+      surname: "Runner",
+      dateOfBirth: "1990-04-12",
+      nationality: "British / Irish",
+      country: "United Kingdom",
+      region: "Norfolk",
+      postcode: "",
+      clubOrTeam: "",
+      privacyAcknowledged: true,
+    };
+    for (const invalid of [
+      { firstName: "" },
+      { surname: "" },
+      { nationality: "" },
+      { country: "" },
+      { dateOfBirth: "" },
+      { dateOfBirth: "2025-02-29" },
+      { dateOfBirth: "2999-01-01" },
+      { privacyAcknowledged: false },
+    ]) {
+      await assert.rejects(() =>
+        rpc(
+          "athrecs/athlete-account-api",
+          "saveMyAthleteRegistration",
+          { ...registration, ...invalid },
+          user.token,
+        ),
+      );
+    }
+    await assert.rejects(() =>
+      rpc("athrecs/athlete-account-api", "saveMyAthleteRegistration", registration),
+    );
+    await assert.rejects(() =>
+      rpc("athrecs/athlete-account-api", "saveMyAthleteRegistration", registration, user.token, {
+        origin: "https://untrusted.example",
+        "sec-fetch-site": "cross-site",
+      }),
+    );
+    const registered = await rpc(
+      "athrecs/athlete-account-api",
+      "saveMyAthleteRegistration",
+      {
+        ...registration,
+        userId: "another-user",
+        consents: { marketing: true },
+      },
+      user.token,
+    );
+    assert.equal(
+      registered.athleteProfileId,
+      withDetails.athleteProfileId,
+      "Reuse the existing private profile",
+    );
+    assert.equal(registered.athleteNumber, withDetails.athleteNumber);
+    assert.equal(registered.profileDetails.birthdayVisibility, "hidden");
+    assert.equal(registered.consents.marketing, false);
+    assert.deepEqual(registered.claimedProfiles, withDetails.claimedProfiles);
+    assert.deepEqual(registered.claimedResults, withDetails.claimedResults);
+    assert.equal(registered.claimCount, withDetails.claimCount);
+    assert.equal(registered.nationality, "British / Irish");
+    assert.equal(registered.region, "Norfolk");
+    const mononym = await rpc(
+      "athrecs/athlete-account-api",
+      "saveMyAthleteRegistration",
+      { ...registration, firstName: "Single", surname: "", singleName: true },
+      user.token,
+    );
+    assert.equal(mononym.fullName, "Single");
     const cleared = await rpc(
       "athrecs/athlete-account-api",
       "saveMyAthleteAccount",

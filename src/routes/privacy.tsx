@@ -124,14 +124,17 @@ function AthletePrivacyPage() {
 
         <NoticeSection title="Required and optional details for a profile claim">
           <p>
-            A profile claim requires your full name and verified email. Date of birth and
-            nationality are optional: you can leave either blank, add them later or remove them
-            without losing access to profile claims or stored-result suggestions. If supplied, birth
-            date helps compare your age on historical race dates with recorded age categories and
-            route child claims for staff review. Nationality helps distinguish similar records only
-            when the source explicitly reports it; we never infer it from your address, club or
-            name. You can enter multiple nationalities or Stateless. These details are supporting
-            clues, not proof of identity. Uncertain or conflicting claims receive human review.
+            After verifying your email, the athlete registration step asks for first name(s),
+            surname (or a single name), date of birth, nationality and country of residence.
+            Postcode or ZIP, broader area and sporting affiliation are optional. These details help
+            find potential results. Existing accounts can still correct or remove their details
+            without losing account access. A profile claim requires your full name and verified
+            email. Birth date helps compare your age on historical race dates with recorded age
+            categories and route child claims for staff review. Nationality helps distinguish
+            similar records only when the source explicitly reports it; we never infer it from your
+            address, club or name. You can enter multiple nationalities or Stateless. These details
+            are supporting clues, not proof of identity. Uncertain or conflicting claims receive
+            human review.
           </p>
           <p className="mt-3">
             Birth date is hidden unless you explicitly choose to share it in profile settings. Email

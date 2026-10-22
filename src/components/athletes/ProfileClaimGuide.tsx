@@ -8,6 +8,7 @@ import {
   saveMyAthleteRacingName,
   type AthleteAccountData,
 } from "@/lib/athrecs/athlete-account-api";
+import { AthleteRegistration } from "./AthleteRegistration";
 import { unfinishedClaim } from "@/lib/athrecs/claim-resume";
 
 export function ProfileClaimSteps({ step }: { step: 1 | 2 | 3 }) {
@@ -212,8 +213,9 @@ export function ProfileClaimGuide({
             </Link>
           </Button>
         </>
-      ) : !account.fullName.trim() ? (
-        <ClaimRacingName
+      ) : !account.exists || !account.fullName.trim() ? (
+        <AthleteRegistration
+          account={account}
           onSaved={(updated) => {
             onNameSaved(updated);
             void navigate({ to: "/athlete-account", search: { section: "potential" } });

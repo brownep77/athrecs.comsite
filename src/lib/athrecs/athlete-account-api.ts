@@ -779,6 +779,68 @@ export const saveMyAthleteRacingName = createServerFn({ method: "POST" })
     return loadAccount(sql, context.userId);
   });
 
+// A narrow onboarding write preserves existing preferences, consents, source links
+// and account identity. Saving matching details never claims or publishes results.
+export const saveMyAthleteRegistration = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .validator(
+    (input: {
+      firstName: string;
+      surname: string;
+      singleName?: boolean;
+      dateOfBirth: string;
+      nationality: string;
+      country: string;
+      postcode?: string;
+      region?: string;
+      clubOrTeam?: string;
+      privacyAcknowledged: boolean;
+    }) => {
+      const firstName = text(input?.firstName, 120, "First name", true);
+      const surname = text(input?.surname, 120, "Surname", input?.singleName !== true);
+      const fullName = text([firstName, surname].filter(Boolean).join(" "), 120, "Full name", true);
+      const dateOfBirth = optionalDate(input?.dateOfBirth);
+      if (!dateOfBirth) throw new Error("Enter your date of birth");
+      if (input?.privacyAcknowledged !== true) throw new Error("Acknowledge the privacy notice");
+      return {
+        fullName,
+        dateOfBirth,
+        nationality: text(input?.nationality, 100, "Nationality", true),
+        country: text(input?.country, 100, "Country", true),
+        postcode: text(input?.postcode, 30, "Postcode or ZIP"),
+        region: text(input?.region, 120, "Area or region"),
+        clubOrTeam: text(input?.clubOrTeam, 160, "Club or team"),
+      };
+    },
+  )
+  .handler(async ({ data, context }) => {
+    const sql = await ready();
+    const users = await sql<{ email: string; email_verified: boolean }>`
+      select lower("email") as email, "emailVerified" as email_verified
+      from "user" where "id" = ${context.userId} limit 1
+    `;
+    const user = users[0];
+    if (!user?.email_verified)
+      throw new Error("Verify your email before saving your athlete profile");
+    await sql`
+      insert into athlete_private_profiles (
+        user_id, verified_email, full_name, date_of_birth, nationality, country,
+        postcode, region, club_or_team, privacy_notice_version,
+        privacy_acknowledged_at, onboarding_completed_at
+      ) values (
+        ${context.userId}, ${user.email}, ${data.fullName}, ${data.dateOfBirth}::date,
+        ${data.nationality}, ${data.country}, ${data.postcode || null},
+        ${data.region || null}, ${data.clubOrTeam || null}, ${ATHLETE_PRIVACY_VERSION}, now(), now()
+      ) on conflict (user_id) do update set
+        verified_email = excluded.verified_email, full_name = excluded.full_name,
+        date_of_birth = excluded.date_of_birth, nationality = excluded.nationality,
+        country = excluded.country, postcode = excluded.postcode, region = excluded.region,
+        club_or_team = excluded.club_or_team, privacy_notice_version = excluded.privacy_notice_version,
+        privacy_acknowledged_at = now(), onboarding_completed_at = now(), updated_at = now()
+    `;
+    return loadAccount(sql, context.userId);
+  });
+
 export const saveMyAthleteAccount = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
   .validator((input: AthleteAccountInput) => validateAccountInput(input))
