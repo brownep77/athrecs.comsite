@@ -43,6 +43,7 @@ assert(names({ country: "England", sport: "triathlon" }).includes("british-triat
 assert(names({ country: "England", sport: "duathlon" }).includes("triathlon-england"));
 assert(names({ country: "Scotland", sport: "swimming" }).includes("scottish-swimming"));
 for (const [sport, body] of [
+  ["track-and-field", "athletics-ireland"],
   ["triathlon", "triathlon-ireland"],
   ["duathlon", "triathlon-ireland"],
   ["bmx", "cycling-ireland"],
@@ -71,6 +72,28 @@ assert.deepEqual(names({ q: "francaise natation" }), ["french-swimming"]);
 assert.deepEqual(names({ q: "BDR" }), ["german-cycling"]);
 assert.deepEqual(names({ q: "Swim Denmark" }), ["danish-swimming"]);
 assert.deepEqual(names({ q: "Japan Triathlon Union" }), ["triathlon-japan"]);
+assert.deepEqual(names({ q: "Welsh Triathlon", type: "home" }), ["welsh-triathlon"]);
+assert.deepEqual(names({ q: "Welsh Cycling", type: "home" }), ["welsh-cycling"]);
+assert.equal(getSportsOrganisation("welsh-triathlon").name, "Triathlon Cymru");
+assert.equal(getSportsOrganisation("welsh-cycling").name, "Beicio Cymru");
+assert.deepEqual(names({ q: "plywacki" }), ["polish-swimming"]);
+assert.deepEqual(names({ q: "Norges Svommeforbund" }), ["norwegian-swimming"]);
+assert.deepEqual(names({ q: "Kenya Swimming Federation" }), ["kenya-aquatics"]);
+for (const country of ["Austria", "Finland", "Norway", "Poland", "India", "Singapore", "Bermuda"]) {
+  assert.equal(names({ country, type: "national" }).length, 4, `${country}: four national bodies`);
+  for (const sport of ["track-and-field", "road-cycling", "swimming", "triathlon"]) {
+    assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
+  }
+}
+assert.equal(names({ country: "Kenya", type: "national" }).length, 3);
+assert.deepEqual(names({ country: "India", sport: "duathlon" }), ["indian-triathlon"]);
+assert.deepEqual(names({ country: "Bermuda", sport: "bmx" }), []);
+assert.deepEqual(names({ country: "Bermuda", sport: "track-cycling" }), []);
+assert(!names({ q: "Scottish Hill Runners", type: "national" }).length);
+assert(names({ country: "Scotland", type: "specialist" }).includes("scottish-hill-runners"));
+assert(names({ country: "Japan", sport: "parkrun" }).includes("parkrun"));
+assert(names({ country: "Poland", sport: "parkrun" }).includes("parkrun"));
+assert(!names({ country: "France", sport: "parkrun" }).includes("parkrun"));
 assert.deepEqual(names({ q: "ITRA", type: "national" }), []);
 assert(names({ q: "ITRA", type: "specialist" }).includes("itra"));
 assert(names({ type: "continental", sport: "bmx" }).includes("uec"));

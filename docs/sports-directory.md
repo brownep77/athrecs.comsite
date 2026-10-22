@@ -5,20 +5,33 @@ organisations behind all 11 current AthRecs sport sections. Clubs remain at
 `/clubs`, linked prominently from the directory. The primary Directory item,
 sport pages, footer, HTML site map and XML pages sitemap expose the new section.
 
-Research and expansion, 21 October 2026: 123 organisations, including national
-federations in 19 countries. The original UK/home nations, Ireland, USA, Canada,
+Research and expansion, 22 October 2026: 155 organisations, including national
+federations in 27 countries and territories. The original UK/home nations, Ireland, USA, Canada,
 Australia, New Zealand and South Africa coverage is joined by France, Germany,
 Spain, Italy, Portugal, Netherlands, Belgium, Switzerland, Sweden, Denmark,
-Japan and Brazil. Each new country has athletics, cycling, swimming and triathlon
-federations. Sport mappings describe the reviewed disciplines, not a claim of
+Japan and Brazil. The latest additions cover Austria, Finland, Norway, Poland,
+India, Singapore, Kenya and Bermuda. All eight have athletics, swimming and
+triathlon entries; seven also have cycling entries. Kenyan cycling remains a
+research gap rather than linking an unverified independent website. Scottish
+Hill Runners is added as a specialist service association, not a governing body.
+Sport mappings describe the reviewed disciplines, not a claim of
 complete country coverage. Parkrun remains separately classified as an event charity.
 
-The 70 additions include 48 national federations and 22 other organisations:
+The previous 70 additions included 48 national federations and 22 other organisations:
 European continental bodies; international mountain, trail, ultra and masters
 running organisations; UK/Ireland specialist running associations; Cycling Ulster
 and Swim Ulster; US and Australian specialist associations; funding bodies in
 Australia, Canada and New Zealand; and SASCOC in South Africa. This is not an
 exhaustive global federation or specialist association census.
+
+The latest review revisited all 123 existing records, checking the official
+website/source destinations and organisational role or affiliation evidence.
+It corrected the Welsh display names to Beicio Cymru and Triathlon Cymru,
+retaining old-name aliases and stable slugs; clarified Athletics Ireland's
+all-island remit; updated the WMRA destination and several role references;
+and expanded parkrun's country filters. France is excluded from active parkrun
+coverage because its specific suspension notice takes precedence over the
+generic special-days table. See [the review record](sports-directory-review-2026-10-22.md).
 
 ## Editorial rules
 
@@ -29,10 +42,15 @@ exhaustive global federation or specialist association census.
 - An organisation's remit is not an athlete's nationality or team eligibility.
 - British Triathlon, British Cycling and Aquatics GB have Great Britain remits;
   Triathlon Ireland, Cycling Ireland and Swim Ireland cover the island of Ireland.
+- Athletics Ireland has clubs throughout the 32 counties and Irish national
+  representation across the island; Athletics Northern Ireland also retains its
+  separate governing/development role within UK Athletics. Remits overlap.
 - Ulster regional entries appear for both Ireland and Northern Ireland, with their
   regional remit explicit; they do not govern all of either country.
 - Retain local-language names and English/acronym aliases for search. Reviewed
   current names include German Cycling, SvømDanmark and Triathlon Japan.
+- Bermuda is counted as a territory. Country totals count national-federation
+  jurisdictions, not parkrun-only locations or separate UK home-nation entries.
 - Empty sport arrays are reserved for cross-sport funding/development bodies.
   Olympic/Paralympic entries must not imply that duathlon or parkrun are Games sports.
 - Keep official source URLs and review dates on records. The initial review used

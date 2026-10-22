@@ -181,7 +181,7 @@ function DirectoryPage() {
               value={search.country ?? ""}
               onChange={(event) => update({ country: event.target.value || undefined })}
             >
-              <option value="">All countries & international</option>
+              <option value="">All countries, territories & international</option>
               {DIRECTORY_COUNTRIES.map((country) => (
                 <option key={country}>{country}</option>
               ))}
@@ -315,10 +315,10 @@ function DirectoryPage() {
           </details>
         ))}
         <p className="text-xs leading-5 text-muted">
-          National federations in {DIRECTORY_NATIONAL_COUNTRIES.length} countries, alongside
-          home-nation, regional, specialist and international organisations. Coverage is growing and
-          is not exhaustive. Official references and review dates appear on each organisation’s
-          page.
+          National federations in {DIRECTORY_NATIONAL_COUNTRIES.length} countries and territories,
+          alongside home-nation, regional, specialist and international organisations. Coverage is
+          growing and is not exhaustive. Official references and review dates appear on each
+          organisation’s page.
         </p>
       </section>
     </div>
