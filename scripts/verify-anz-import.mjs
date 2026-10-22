@@ -4,6 +4,9 @@ import { PGlite } from "@electric-sql/pglite";
 import { parseAnzProfile, parseAnzEvent, assembleAnzCapture } from "../src/lib/anz/parse.server.ts";
 import { anzSource, anzTime, anzProgress, publicAnzMedals } from "../src/lib/anz/core.ts";
 import { anzTarget, saveAnzCapture } from "../src/lib/anz/store.server.ts";
+import { profilePersonalBestSummary } from "../src/lib/athrecs/profile-personal-best-summary.ts";
+import { profileAchievementResults } from "../src/lib/athrecs/profile-history-results.ts";
+import { withoutProfileEvidence } from "../src/lib/athrecs/profile-evidence.ts";
 const url = "https://www.anzrankings.org.nz/site/profiles_con/athlete/42";
 const identity = `<h2 class="h2-four">Avery <strong>EXAMPLE</strong></h2><div class="record"><strong>CLUB:</strong> Test Club<br><strong>COACH:</strong> Example Coach<br></div><form action="https://www.anzrankings.org.nz/site/profiles_con/athlete_data/42"><input name="athleteID" value="42"><input name="csrf_token" value="synthetic"><select name="eventID"><option value="9">3000m</option></select></form>`;
 const table = (headers, rows) =>
@@ -71,6 +74,75 @@ for (const bad of [
 ])
   assert.throws(() => anzSource(bad));
 const capture = assembleAnzCapture(profile, [rows], "2026-10-11T07:00:00Z");
+
+// Exercise the real parser-to-profile path: a verified road result must beat a
+// slower, explicitly labelled pacing result without merging with track 10000m.
+function eventRows(name, performance, note = "", meeting = "Synthetic competition") {
+  const eventIdentity = identity.replace('value="9">3000m', `value="9">${name}`);
+  const eventProfile = parseAnzProfile(eventIdentity, url);
+  return parseAnzEvent(
+    eventIdentity +
+      `<h2>${name} - All Years</h2>` +
+      table(headers, [["10 Mar 2025", meeting, "2", performance, "1", "", "Example town", note]]),
+    eventProfile,
+    eventProfile.events[0],
+  );
+}
+const roadRows = eventRows("10km", "35:12", "PB");
+const halfRows = eventRows("Half Marathon", "1:17:01", "PB");
+const trackRows = eventRows("10000m", "36:08.42", "PB");
+const pbHistory = (performances) => [{ ...capture.history, performances }];
+const pacer = {
+  ...roadRows[0],
+  date: "2024-03-10",
+  year: 2024,
+  performance: "44:00",
+  meeting: "Synthetic pacing appearance",
+  labels: ["Road", "Pacer"],
+};
+const importedBests = profilePersonalBestSummary(
+  [],
+  pbHistory([...roadRows, ...halfRows, ...trackRows, pacer]),
+);
+assert.equal(importedBests.find((best) => best.distance === "10K")?.mark, "35:12");
+assert.equal(importedBests.find((best) => best.distance === "Half")?.mark, "1:17:01");
+assert.equal(importedBests.find((best) => best.distance === "10000m")?.mark, "36:08.42");
+assert.equal(importedBests.length, 3);
+assert(importedBests.every((best) => best.verified));
+assert.deepEqual(
+  profilePersonalBestSummary(
+    [],
+    withoutProfileEvidence(pbHistory([...roadRows, ...halfRows, ...trackRows, pacer])),
+  ),
+  importedBests,
+);
+assert(!JSON.stringify(importedBests).includes("anzrankings"));
+for (const discipline of ["3km", "5km", "10km", "Half Marathon", "Marathon", "1 Mile (Road)"])
+  assert(eventRows(discipline, "35:12")[0].labels.includes("Road"), discipline);
+for (const discipline of ["10000m", "Mile", "10km XC", "10km Trail", "10km Relay Leg", "Unknown"])
+  assert(!eventRows(discipline, "35:12")[0].labels.includes("Road"), discipline);
+const unknownRoad = { ...roadRows[0], providerName: "Synthetic generic source", labels: [] };
+assert.equal(profileAchievementResults([], pbHistory([unknownRoad]))[0].surface, "Unknown");
+assert.equal(profilePersonalBestSummary([], pbHistory([unknownRoad])).length, 0);
+for (const note of ["Short course", "Assisted", "DH", "PB DH"]) {
+  const qualified = pbHistory(eventRows("10km", "30:00", note));
+  assert.equal(profilePersonalBestSummary([], qualified).length, 0, note);
+  assert.equal(anzProgress(qualified).length, 0, note);
+}
+for (const patch of [
+  { profileExcluded: true },
+  { performance: "DNF" },
+  { date: "2099-01-01" },
+  { labels: [...roadRows[0].labels, "Trail"] },
+])
+  assert.equal(profilePersonalBestSummary([], pbHistory([{ ...roadRows[0], ...patch }])).length, 0);
+const pendingRoad = profilePersonalBestSummary(
+  [],
+  pbHistory([{ ...roadRows[0], verificationStatus: "unverified" }]),
+);
+assert.equal(pendingRoad[0].mark, "35:12");
+assert.equal(pendingRoad[0].verified, false);
+
 assert.equal(anzProgress([capture.history])[0].best.performance, "10:01.23");
 assert.equal(
   anzTime({ ...rows[0], verificationStatus: "unverified" }),
@@ -185,14 +257,44 @@ assert.equal(
   (await sql`select performances from athlete_source_histories`)[0].performances[0].profileExcluded,
   true,
 );
-target = await anzTarget(sql, 1, capture);
+// Refresh a legacy road history without surface labels; saved source facts and
+// publication remain intact while the new labels reach the PB selector.
+const refreshedCapture = {
+  ...capture,
+  history: { ...capture.history, performances: [...rows, ...roadRows, ...halfRows] },
+};
+const legacy = refreshedCapture.history.performances.map((row) => ({
+  ...row,
+  labels: row.labels.filter((label) => label !== "Road"),
+}));
+legacy[0].profileExcluded = true;
+await sql`update athlete_source_histories set performances=${JSON.stringify(legacy)}::jsonb`;
+target = await anzTarget(sql, 1, refreshedCapture);
+await saveAnzCapture(sql, 1, refreshedCapture, target.version, {
+  note: "Source surface correction",
+});
+const refreshed = (await sql`select performances,published_at from athlete_source_histories`)[0];
+assert(refreshed.published_at);
+assert(refreshed.performances[0].profileExcluded);
+assert.deepEqual(
+  refreshed.performances.map((row) => row.performance),
+  legacy.map((row) => row.performance),
+);
+const refreshedBests = profilePersonalBestSummary([], pbHistory(refreshed.performances));
+assert.equal(refreshedBests.find((best) => best.distance === "10K")?.mark, "35:12");
+assert.equal(refreshedBests.find((best) => best.distance === "Half")?.mark, "1:17:01");
+const refreshAudit = (
+  await sql`select before_value from network_audit_log where note='Source surface correction'`
+)[0];
+assert.deepEqual(refreshAudit.before_value.history.performances, legacy);
+target = await anzTarget(sql, 1, refreshedCapture);
 failAudit = true;
 await assert.rejects(
-  () => saveAnzCapture(sql, 1, capture, target.version, { note: "rollback" }),
+  () => saveAnzCapture(sql, 1, refreshedCapture, target.version, { note: "rollback" }),
   /audit failure/,
 );
 failAudit = false;
-assert.equal((await anzTarget(sql, 1, capture)).version, target.version);
+assert.equal((await anzTarget(sql, 1, refreshedCapture)).version, target.version);
 await sql`insert into athletes values(2,'Another Athlete','another-athlete','private',${url},'{}')`;
 await assert.rejects(() => anzTarget(sql, 1, capture), /duplicate/);
 await sql`delete from athletes where id=2`;

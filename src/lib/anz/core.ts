@@ -86,7 +86,7 @@ export function anzTime(row: SourcePerformance): number | null {
     !runningEvents.test(row.discipline) ||
     !/^(?:\d+:)*\d+(?:\.\d+)?$/.test(row.performance) ||
     (row.wind && (!/^[+-]?\d+(?:\.\d+)?$/.test(row.wind) || Number(row.wind) > 2)) ||
-    row.labels.some((l) => /short course|hand tim|indoor|implement|hurdle|assisted/i.test(l))
+    row.labels.some((l) => /short course|hand tim|indoor|implement|hurdle|assisted|aided/i.test(l))
   )
     return null;
   const parts = row.performance.split(":").map(Number);
