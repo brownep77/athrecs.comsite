@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { listEvents } from "@/runrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
 import { SPORTS as PUBLIC_SPORTS } from "@/runrecs/filters";
@@ -109,11 +109,11 @@ export const Route = createFileRoute("/running/events")({
     };
   },
   loaderDeps: ({ search }): RaceSearchParams => search,
-  loader: ({ deps }) => {
+  loader: async ({ deps }) => {
     const filters = filtersFromSearch(deps);
     const api = searchToApi(filters);
     const page = deps.page ?? 1;
-    return listEvents({
+    const events = await listEvents({
       data: {
         ...api,
         sport: api.sport as Sport | undefined,
@@ -122,13 +122,16 @@ export const Route = createFileRoute("/running/events")({
         offset: (page - 1) * PAGE_SIZE,
       },
     });
+    const filtered = Object.entries(deps).some(([key, value]) => key !== "page" && Boolean(value));
+    if (!filtered && page > 1 && !events.length) throw notFound();
+    return events;
   },
-  head: ({ match }) => {
+  head: ({ match, loaderData }) => {
     const page = match.search.page ?? 1;
     const url = `${SITE_URL}/running/events${page > 1 ? `?page=${page}` : ""}`;
     const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
     return {
-      meta: siteGraphMeta({ title: `Running races${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find running races and parkruns by date, country, distance and surface, with official entry links on AthRecs.", url }).map((tag) => filtered && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
+      meta: siteGraphMeta({ title: `Running races${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find running races and parkruns by date, country, distance and surface, with official entry links on AthRecs.", url }).map((tag) => (filtered || !loaderData?.length) && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
       links: [{ rel: "canonical", href: url }],
     };
   },

@@ -35,22 +35,31 @@ export const Route = createFileRoute("/results/")({
     if (IS_RUNRECS_SITE) throw notFound();
   },
   loaderDeps: ({ search }) => normalizeResultsSearch(search),
-  loader: ({ deps }) => listPublicResultEditions({ data: deps }),
+  loader: async ({ deps }) => {
+    const data = await listPublicResultEditions({ data: deps });
+    const filtered = Object.entries(deps).some(([key, value]) => key !== "page" && Boolean(value));
+    if (!filtered && deps.page > 1 && !data.editions.length) throw notFound();
+    return data;
+  },
   staleTime: 60_000,
-  head: ({ match }) => ({
-    meta: [
-      ...siteGraphMeta({
-        title: "Race results | ATHRECS.com",
+  head: ({ match, loaderData }) => {
+    const search = normalizeResultsSearch(match.search);
+    const filtered = Object.entries(search).some(([key, value]) => key !== "page" && Boolean(value));
+    const url = `${SITE_URL}/results${!filtered && search.page > 1 ? `?page=${search.page}` : ""}`;
+    return {
+      meta: siteGraphMeta({
+        title: `Race results${search.page > 1 ? ` — Page ${search.page}` : ""} | ATHRECS.com`,
         description:
           "Explore race results on AthRecs. Find a race, view performances and connect results to your athlete profile.",
-        url: `${SITE_URL}/results`,
-      }),
-      ...(Object.values(match.search).some(Boolean)
-        ? [{ name: "robots", content: "noindex, follow" }]
-        : []),
-    ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/results` }],
-  }),
+        url,
+      }).map((tag) =>
+        (filtered || !loaderData?.editions.length) && "name" in tag && tag.name === "robots"
+          ? { name: "robots", content: "noindex, follow" }
+          : tag,
+      ),
+      links: [{ rel: "canonical", href: url }],
+    };
+  },
   pendingComponent: () => (
     <p role="status" className="py-12 text-center text-muted">
       Loading results…
