@@ -393,7 +393,21 @@ try {
   assert.equal(clubProfiles[hydrographic.slug].founded_year, undefined);
   assert.equal(clubProfiles[hydrographic.slug].notable_members, undefined);
   assert.equal(clubEnrichment[hydrographic.slug].postcode, "TQ2 7HN");
-  assert.equal(clubProfiles["horsham-run-fit"], undefined);
+  // Batch 143 resolves the narrative hold, while retaining unknown foundation/venue details.
+  const horsham143 = bySlug.get("horsham-run-fit");
+  assert.equal(clubProfiles[horsham143.slug].biography.length, 3);
+  assert.equal(clubProfiles[horsham143.slug].founded_year, undefined);
+  assert.equal(clubProfiles[horsham143.slug].notable_members, undefined);
+  assert.equal(clubProfiles[horsham143.slug].corrections, undefined);
+  assert.equal(horsham143.adult_only, true);
+  assert.equal(horsham143.address_kind, "directory");
+  assert.equal(horsham143.checked_at, "2026-10-13");
+  assert.equal(horsham143.contacts.length, 1);
+  assert.equal(horsham143.contacts[0].checked_at, "2026-10-18");
+  assert.equal(horsham143.socials.length, 1);
+  assert.equal(horsham143.socials[0].platform, "Strava");
+  assert.equal(horsham143.socials[0].checked_at, "2026-10-19");
+  assert.ok(!horsham143.website);
   // Batch 126: distinct clubs, dated archives and unchanged enquiry provenance.
   const batch126Slugs = ["carlisle-aspatria-ac", "lancashire-fire-and-rescue-service-and-aa", "lancashire-constabulary-athletics-section"];
   for (const slug of batch126Slugs) {
@@ -799,7 +813,7 @@ try {
     assert.equal(club.checked_at, "2026-10-13");
     assert.equal(club.country, "England");
     if (slug !== "riverside-harriers") assert.ok(!club.contacts.some(c => c.phone));
-    if (!["riverside-harriers", "michelin-running-club", "runwednesdays", "helpston-harriers-ac", "rising-brook-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
+    if (!["horsham-run-fit", "riverside-harriers", "michelin-running-club", "runwednesdays", "helpston-harriers-ac", "rising-brook-runners"].includes(slug)) assert.equal(clubProfiles[slug], undefined);
   }
   assert.equal(bySlug.get("michelin-running-club").name, "Michelin Running Club");
   assert.equal(bySlug.get("michelin-running-club").address_kind, "directory");
