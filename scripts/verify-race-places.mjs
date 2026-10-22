@@ -28,7 +28,7 @@ const { buildRacePlaces, nextPlaceEdition, racePlacePage } =
 const { racePlaceHead } = await import("../src/lib/athrecs/race-places-seo.ts");
 const { racePlaceCopy, runningDistanceNames } =
   await import("../src/lib/athrecs/race-places-copy.ts");
-const { queryRacePlaceRows, racePlaceSitemapPaths } =
+const { queryRacePlaceRows, queryRacePlacePage, createRacePlaceRowsCache, racePlaceSitemapPaths } =
   await import("../src/lib/athrecs/race-places.server.ts");
 const { PGlite } = await import("@electric-sql/pglite");
 const now = "2026-10-19T23:30:00Z";
@@ -397,7 +397,97 @@ assert.equal(
   (await db.query("select count(*)::int n from editions where event_date='2026-11-08'")).rows[0].n,
   1,
 );
+// Exercise compact discovery with enough rows to paginate and large unused
+// descriptions/URLs. Compare whole responses, not only the visible row count.
+await db.exec(`
+ insert into events(id,slug,name,sport,country,county,region,city,summary,featured,surface)
+ select n,'synthetic-egress-'||n,'Race '||lpad(n::text,3,'0'),
+ case when n%7=0 then 'Cycling' else 'Running' end,
+ 'England',case when n%4=0 then 'Suffolk' else 'Norfolk' end,null,
+ case when n%4=0 then 'Ipswich' else 'Norwich' end,repeat('Full public description. ',300),n%5=0,
+ case when n%3=0 then 'Trail' else 'Road' end
+ from generate_series(3,86) n;
+ insert into editions(event_id,event_date,distance_code,status,entry_url,start_time,source_url,
+   end_date,end_source_url,end_checked_at)
+ select n,'2027-01-01'::date + m*31,
+ case when m%2=0 then '10K' else 'Half' end,
+ case when n%11=0 then 'Cancelled' when n%13=0 then 'Finished' else 'Open' end,
+ 'https://entry.example.test/'||repeat('entry/',30)||n,'09:30',
+ 'https://source.example.test/'||repeat('source/',30)||n,
+ case when m=0 then '2027-02-02'::date end,
+ case when m=0 then 'https://organiser.example.test/programme' end,
+ case when m=0 then '2026-10-01'::date end
+ from generate_series(3,86) n cross join generate_series(0,3) m;
+`);
+const fullRows = await queryRacePlaceRows(sql, now);
+const compactRows = await queryRacePlaceRows(sql, now, { compact: true });
+assert(compactRows.every((row) => row.summary === ""));
+assert.deepEqual(racePlaceSitemapPaths(compactRows), racePlaceSitemapPaths(fullRows));
+let detailReads = [];
+const boundedSql = {
+  query: async (text, params) => {
+    assert(
+      text.includes("e.id = any($5::int[])"),
+      "detail query must be scoped before aggregation",
+    );
+    assert(params[4].length > 0 && params[4].length <= 43, "bounded visible event IDs");
+    detailReads.push(params[4]);
+    return sql.query(text, params);
+  },
+};
+for (const args of [
+  ["", now, 1, false, {}],
+  ["", now, 2, false, {}],
+  [key, now, 1, true, {}],
+  [key + "/running/10k", now, 1, false, { month: "2027-02", city: "Norwich" }],
+  [key + "/running/trail", now, 1, false, {}],
+  [key, "2027-01-31T23:59:59Z", 1, false, {}],
+  [key, "2027-02-01T00:00:01Z", 1, false, {}],
+]) {
+  const expected = racePlacePage(await queryRacePlaceRows(sql, args[1]), ...args);
+  const index = await queryRacePlaceRows(sql, args[1], { compact: true });
+  const actual = await queryRacePlacePage(boundedSql, index, ...args);
+  assert.deepEqual(actual, expected, `Compact page parity: ${JSON.stringify(args)}`);
+}
+const beforeInvalid = detailReads.length;
+assert.equal(await queryRacePlacePage(boundedSql, compactRows, "unknown", now), null);
+assert.equal(await queryRacePlacePage(boundedSql, compactRows, "", now, 99999), null);
+assert.equal(detailReads.length, beforeInvalid, "invalid pages must not hydrate the catalogue");
+// A race removed between the metadata read and the detail query is not served.
+await db.exec("delete from events where id=3");
+const removed = await queryRacePlacePage(boundedSql, compactRows, "", now);
+assert(!removed.races.some((race) => race.id === 3));
+assert(
+  removed.races.every((race) => race.summary),
+  "replacement cards are hydrated too",
+);
 await db.close();
+
+let clock = 0,
+  loads = 0,
+  fail = false;
+const cachedRead = createRacePlaceRowsCache(
+  async () => {
+    loads++;
+    if (fail) throw new Error("Synthetic database failure");
+    return compactRows;
+  },
+  () => clock,
+);
+await Promise.all(Array.from({ length: 20 }, () => cachedRead()));
+assert.equal(loads, 1, "concurrent cold requests share one catalogue read");
+clock = 299999;
+await cachedRead();
+assert.equal(loads, 1, "warm metadata is reused for five minutes");
+clock = 300000;
+fail = true;
+await assert.rejects(cachedRead(), /Synthetic/);
+fail = false;
+await cachedRead();
+assert.equal(loads, 3, "failed refresh is retried and does not become a permanent rejected cache");
+console.log(
+  "Egress checks passed: compact/full response parity, bounded detail reads, concurrent cache loads and failed refresh recovery.",
+);
 if (process.argv.includes("--catalogue")) {
   const { seriesList, editions } = await import("../src/data/catalogue.ts");
   const bySlug = new Map();
