@@ -65,7 +65,9 @@ try {
       (5, 'outside-window', 'Outside Window', 'Running', 'Ireland'),
       (6, 'cycling', 'Cycling', 'Cycling', 'United Kingdom'),
       (7, 'parkrun', 'Parkrun', 'Parkrun', 'Australia'),
-      (8, 'triathlon', 'Synthetic Triathlon', 'Triathlon', 'United Kingdom');
+      (8, 'triathlon', 'Synthetic Triathlon', 'Triathlon', 'United Kingdom'),
+      (9, 'swimming', 'Synthetic Swim', 'Swimming', 'United Kingdom'),
+      (10, 'duathlon', 'Synthetic Duathlon', 'Duathlon', 'United Kingdom');
     insert into editions values (1,1,'2026-09-20','1500m'), (2,2,'2026-09-20','10K'),
       (3,3,'2026-09-20','5K'), (4,4,'2026-09-20','Marathon'), (5,5,'2028-01-01','5K'),
       (6,6,'2026-09-20','Road race'), (7,1,'9999-01-01','1500m'),
@@ -95,14 +97,20 @@ try {
     "/races/runrecs-only",
     "/races/marathon",
     "/races/outside-window",
+    "/races/cycling",
     "/races/parkrun",
     "/races/triathlon",
+    "/races/swimming",
+    "/races/duathlon",
   ]);
   assert.deepEqual(await contentSitemapPaths(sql, "clubs", 1), [
     "/clubs/athletics-club",
     "/clubs/running-club",
+    "/clubs/private-member-only",
+    "/clubs/out-of-scope",
     "/clubs/triathlon-club",
     "/clubs/triathlon-result-club",
+    "/clubs/private-triathlon-only",
   ]);
   assert.deepEqual(await contentSitemapPaths(sql, "results", 1), [
     "/results/track-meeting-2026-09-20-1500m-1",
@@ -122,8 +130,8 @@ try {
     ...(await contentSitemapPaths(sql, "clubs", 1)),
     ...(await contentSitemapPaths(sql, "clubs", 2)),
   ];
-  assert.equal(clubs.length, 5004);
-  assert.equal(new Set(clubs).size, 5004);
+  assert.equal(clubs.length, 5007);
+  assert.equal(new Set(clubs).size, 5007);
   assert.deepEqual(await contentSitemapPaths(sql, "clubs", 3), []);
   assert.deepEqual(await contentSitemapPaths(sql, "clubs", 0), []);
   // Synthetic records reproduce stale catalogue aliases after a deliberate rename.
@@ -161,7 +169,7 @@ try {
     "Sitemaps must list the canonical page, not its redirect",
   );
   console.log(
-    "PASS: readable collision-safe result URLs; complete sitemap pagination; event scope; published Running, Parkrun and Triathlon inclusion; public triathlon clubs; private, hidden, disabled and future result exclusions; immediate publication changes.",
+    "PASS: readable collision-safe result URLs; complete sitemap pagination; event scope; all seven public event sports; public club identities independent of member visibility; private, hidden, disabled and future result exclusions; immediate publication changes.",
   );
 } finally {
   await db.close();

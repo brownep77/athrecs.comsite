@@ -166,6 +166,63 @@ try {
     assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${canonical}`, path);
   }
   console.log('PASS: populated race directory pages stay indexable; empty and filtered pages remain noindex with unchanged canonicals.');
+
+  // These browse pages contain distinct records, not search refinements.
+  // Exercise their final HTTP status and SSR metadata, not only head helpers.
+  await sql`update editions set event_date=event_date-36525
+    where event_id not in (select id from events where slug like 'test-indexing-directory-%')`;
+  for (const path of ['/sports/track-and-field?page=2']) {
+    const page = await get(path);
+    assert(!/noindex/.test(page.$('meta[name=robots]').attr('content')), path);
+    assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${path}`);
+    assert.match(page.$('title').text(), /Page 2/);
+    assert.equal(page.$("#fixtures article h3").length, 17);
+    assert.match(page.$("#fixtures article h3").first().text(), /Synthetic Indexing Fixture/);
+  }
+  assert.match((await get('/sports/track-and-field?q=absent-synthetic')).$('meta[name=robots]').attr('content'), /noindex/);
+  await sql`update events set sport='Running', surface='Road' where slug like 'test-indexing-directory-%'`;
+  const running = await get('/running/events?page=2');
+  assert.equal(running.$('link[rel=canonical]').attr('href'), 'https://www.athrecs.com/running/events?page=2');
+  assert(!/noindex/.test(running.$('meta[name=robots]').attr('content')));
+  assert.match((await get('/running/events?q=absent-synthetic')).$('meta[name=robots]').attr('content'), /noindex/);
+  await sql`update athletes set profile_visibility='public' where id=${publicId}`;
+  await sql`insert into editions(event_id,event_date,distance_code,distance_km,status)
+    select id,'2010-01-01','5K',5,'Finished' from events where slug like 'test-indexing-directory-%'`;
+  await sql`insert into results(athlete_id,edition_id,status,finish_time_seconds,result_visibility)
+    select ${publicId},ed.id,'finished',1200,'public' from editions ed join events e on e.id=ed.event_id
+    where e.slug like 'test-indexing-directory-%' and ed.event_date='2010-01-01'`;
+  const resultsDirectory = await get('/results?page=2');
+  assert.equal(resultsDirectory.$('link[rel=canonical]').attr('href'), 'https://www.athrecs.com/results?page=2');
+  assert(!/noindex/.test(resultsDirectory.$('meta[name=robots]').attr('content')));
+  assert.match(resultsDirectory.$('title').text(), /Page 2/);
+  assert(resultsDirectory.$('main a[href^="/results/"]').length > 0);
+  const filteredResults = await get('/results?q=absent-synthetic');
+  assert.match(filteredResults.$('meta[name=robots]').attr('content'), /noindex/);
+  assert.equal(filteredResults.$('link[rel=canonical]').attr('href'), 'https://www.athrecs.com/results');
+  for (const path of ['/results?page=1000', '/running/events?page=250', '/sports/track-and-field?page=400']) {
+    const response = await fetch(`${origin}${path}`, {headers: {connection: 'close'}});
+    await response.text();
+    assert.equal(response.status, 404, path);
+  }
+  for (const sport of ['Cycling', 'Swimming', 'Duathlon']) {
+    const slug = `test-indexing-${sport.toLowerCase()}`;
+    await sql`insert into events(slug,name,sport,country,city,surface)
+      values (${slug},${`Synthetic ${sport}`},${sport},'United Kingdom','Test City','Road')`;
+    const [{ id: clubId }] = await sql`insert into clubs(slug,name,city,county,country,sports)
+      values (${slug},${`Synthetic ${sport} Club`},'Test City','','United Kingdom',${sport}) returning id`;
+    await sql`update athletes set club_id=${clubId} where slug='synthetic-private'`;
+    for (const kind of ['races', 'clubs']) {
+      const path = `/${kind}/${slug}`;
+      const page = await get(path);
+      assert(!page.html.includes('Synthetic Private Runner'));
+      assert(!/noindex/.test(page.$('meta[name=robots]').attr('content')));
+      assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${path}`);
+      const shard = await contentSitemapPageCount(sql, kind);
+      assert((await get(`/sitemaps/${kind}-${shard}.xml`)).html.includes(`https://www.athrecs.com${path}</loc>`));
+    }
+  }
+  console.log('PASS: results/sport/running browse pagination is indexable and self-canonical; empty later pages return 404; searches stay noindex; multisport sitemap inclusion preserves member privacy.');
+
   console.log('PASS: data-only collections SSR, bounded homepage and directory, A–Z crawlability, robots headers, factual biography/Person schema, locale consolidation and immediate withdrawal.');
   console.log('PASS: SSR archive distinction, safe result preview, credits, original result links, country running default, explicit sport selection, empty-directory noindex and live sitemap exclusion.');
 } finally {

@@ -32,21 +32,25 @@ export const Route = createFileRoute("/sports/$sport")({
     const sport = getSportPage(params.sport);
     if (!sport) throw notFound();
     const fixtures = await getSportFixtures({ data: { slug: sport.slug, ...deps } });
+    if (!deps.q && !deps.country && !deps.distance && (deps.page ?? 1) > 1 && !fixtures.fixtures.length)
+      throw notFound();
     return { sport, ...fixtures, broadcasts: upcomingBroadcasts(sport) };
   },
   staleTime: 60_000,
   head: ({ params, match }) => {
     const sport = getSportPage(params.sport);
     if (!sport) return {};
-    const url = `${SITE_URL}/sports/${sport.slug}`;
+    const page = match.search.page ?? 1;
+    const filtered = Boolean(match.search.q || match.search.country || match.search.distance);
+    const url = `${SITE_URL}/sports/${sport.slug}${!filtered && page > 1 ? `?page=${page}` : ""}`;
     return {
       meta: [
         ...siteGraphMeta({
-          title: `${sport.label} events, dates & results | AthRecs`,
+          title: `${sport.label} events, dates & results${page > 1 ? ` — Page ${page}` : ""} | AthRecs`,
           description: disciplineIntros[sport.slug] ?? sportGuideText(sport.sport).intro,
           url,
         }),
-        ...(match.search.q || match.search.country || match.search.distance || match.search.page
+        ...(filtered
           ? [{ name: "robots", content: "noindex, follow" }]
           : []),
       ],
