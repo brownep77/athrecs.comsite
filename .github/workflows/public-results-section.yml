@@ -5,6 +5,7 @@ on:
     paths:
       - "src/routes/results/**"
       - "src/lib/athrecs/public-results*"
+      - "src/lib/athrecs/unlinked-results-api.ts"
       - "src/components/layout/AppShell.tsx"
       - "scripts/verify-public-results-section.mjs"
       - ".github/workflows/public-results-section.yml"
@@ -50,6 +51,8 @@ jobs:
           src/lib/athrecs/public-results-search.ts
           src/lib/athrecs/public-results-api.ts
           src/lib/athrecs/public-results-seo.ts
+          src/lib/athrecs/unlinked-results-api.ts
+          src/routes/results/unlinked.tsx
           src/routes/results/index.tsx
           'src/routes/results/$editionId.tsx'
           src/components/layout/AppShell.tsx

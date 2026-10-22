@@ -103,6 +103,7 @@ export async function publishAthleteProfiles(
         where i.number=any(${numbers}::bigint[])
           and coalesce(a.profile_visibility,'private') <> 'public'
           and a.profile_type <> 'Public figure'
+          and coalesce(a.profile_details#>>'{nameReview,mode}','') <> 'results_only'
           and not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
         order by a.id for update of a
       ), updated as (

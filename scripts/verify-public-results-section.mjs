@@ -54,7 +54,7 @@ let queryCount = 0;
 const sql = async (strings, ...values) => {
   let text = strings[0];
   for (let i = 0; i < values.length; i += 1) text += `$${i + 1}${strings[i + 1]}`;
-  assert.match(text.trim(), /^select\s/i, "Public handlers must only issue SELECT statements");
+  assert.match(text.trim(), /^(select\s|with held as materialized)/i, "Public handlers must only issue SELECT statements");
   queryCount += 1;
   return (await db.query(text, values)).rows;
 };
@@ -79,7 +79,7 @@ try {
     create table editions (id integer primary key, event_id integer, event_date date, distance_code text);
     create table clubs (id integer primary key, name text);
     create table athletes (id integer primary key, display_name text, slug text, club_id integer,
-      profile_type text, profile_visibility text);
+      profile_type text, profile_visibility text, parent_athlete_id integer, profile_details jsonb default '{}');
     create table results (id integer primary key, athlete_id integer, edition_id integer,
       status text, result_details jsonb default '{}', result_visibility text,
       source_url text, result_source text,
@@ -92,7 +92,7 @@ try {
       (11, 'Future race', 'Running', 'Example town', 'United Kingdom');
     insert into editions values (10, 10, '2026-09-20', '10K'), (11, 11, '2027-01-01', '10K');
     insert into clubs values (1, 'Synthetic Club');
-    insert into athletes values
+    insert into athletes(id,display_name,slug,club_id,profile_type,profile_visibility) values
       (1, 'Alex Example', 'alex-example-one', 1, 'Athlete', 'public'),
       (2, 'Private Athlete', 'private', 1, 'Athlete', 'private'),
       (3, 'Hidden Result', 'hidden', 1, 'Athlete', 'public'),
@@ -293,10 +293,52 @@ try {
   await assert.rejects(route.loader({ params, deps: search.normalizeResultsSearch({ page: 3 }) }), /notFound/);
   assert.equal((await route.loader({ params, deps: search.normalizeResultsSearch({ q: "no-match" }) })).results.length, 0);
 
+  // Explicit results-only holds keep already-public performances available,
+  // without inventing a profile or exposing accounts, private histories or evidence.
+  await db.exec(`
+    create table athlete_source_histories (athlete_id integer, provider text, external_id text,
+      source_url text, performances jsonb, published_at timestamptz);
+    insert into athletes(id,display_name,slug,profile_type,profile_visibility,profile_details) values
+      (900001,'Jo? Example','damaged-name','Athlete','private','{"nameReview":{"mode":"results_only","candidateIds":[987]}}'),
+      (900002,'Owned? Example','owned-name','Athlete','private','{"nameReview":{"mode":"results_only"}}');
+    insert into athlete_account_links values ('owner',900002,'active');
+    insert into results(id,athlete_id,edition_id,status,result_visibility,finish_time_seconds) values
+      (900001,900001,10,'finished','public',2222),
+      (900002,900002,10,'finished','public',2223),
+      (900003,900001,10,'finished','private',2224),
+      (900004,900001,11,'finished','public',2225);
+    insert into athlete_source_histories values
+      (900001,'Example Timer','source-1','https://example.test/results',
+       '[{"year":2025,"meeting":"Year-only marathon","discipline":"Marathon","performance":"3:11:22","notes":"PRIVATE EVIDENCE","archiveReference":{"private":"SECRET"}},
+         {"year":2025,"meeting":"Excluded","profileExcluded":true},
+         {"year":2027,"meeting":"Future"}]',now()),
+      (900001,'Example Timer','source-2','https://example.test/results','[{"year":2025,"meeting":"Private history"}]',null),
+      (900002,'Example Timer','source-3','https://example.test/results','[{"year":2025,"meeting":"Owned history"}]',now());
+  `);
+  const heldResult = (await api.getPublicRaceResults({ data: {editionId:10,q:'Jo?'} })).results;
+  assert.equal(heldResult.length,1);
+  assert.equal(heldResult[0].athlete_slug,null);
+  const heldHead=publicResultsHead(resultPage1.edition,heldResult,{q:'',page:1});
+  assert.doesNotMatch(heldHead.scripts[0].children,/\/athletes\/null|"@type":"Person"/);
+  const unlinked=loadTypeScript('src/lib/athrecs/unlinked-results-api.ts',{
+    '@tanstack/react-start':{createServerFn},'@/lib/db':{getSql:async()=>sql},
+    '@/lib/site-scope':scope,'./seed.server':{ensureAthrecsSeeded:async()=>{}},
+    './format':{todayIso:()=> '2026-09-23'},'./public-results-search':search,
+  });
+  const heldPage=await unlinked.listUnlinkedResults({data:{}});
+  assert.equal(heldPage.results.length,2);
+  assert.equal(heldPage.results.find(row=>row.meeting==='Year-only marathon').date,'');
+  assert.equal((await unlinked.listUnlinkedResults({data:{year:'2025'}})).results.length,1);
+  assert.equal((await unlinked.listUnlinkedResults({data:{q:'no-match'}})).results.length,0);
+  assert.doesNotMatch(JSON.stringify(heldPage),/PRIVATE|SECRET|candidateIds|Owned|Excluded|Future|Private history|damaged-name/);
+  await db.exec("update athletes set profile_details='{}' where id=900001");
+  assert.equal((await unlinked.listUnlinkedResults({data:{}})).results.length,0,'Resolving a hold removes results-only projection');
+
   scope.IS_RUNRECS_SITE = true;
   const previousQueryCount = queryCount;
   assert.equal((await api.listPublicResultEditions({ data: {} })).editions.length, 0);
   assert.equal(await api.getPublicRaceResults({ data: { editionId: 10 } }), null);
+  assert.equal((await unlinked.listUnlinkedResults({data:{}})).results.length,0);
   assert.equal(queryCount, previousQueryCount, "RunRecs must not query the AthRecs archive");
 
   const pageSource = readFileSync("src/routes/results/$editionId.tsx", "utf8");

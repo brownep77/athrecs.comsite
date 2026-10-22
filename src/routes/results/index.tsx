@@ -91,6 +91,10 @@ function ResultsPage() {
         </Button>
       </header>
 
+      <a href="/results/unlinked" className="inline-block text-sm text-accent underline">
+        Results awaiting a profile match
+      </a>
+
       <form
         action="/results"
         method="get"

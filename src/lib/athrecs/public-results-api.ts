@@ -20,7 +20,7 @@ export type PublicResultEdition = {
 export type PublicRaceResult = {
   id: number;
   athlete_name: string;
-  athlete_slug: string;
+  athlete_slug: string | null;
   nationality: string | null;
   profile_club: string | null;
   source_url: string | null;
@@ -46,7 +46,7 @@ const like = (value: string) => (value ? `%${value.replace(/[\\%_]/g, "\\$&")}%`
 /**
  * Public READ-ONLY projection of canonical results. This never imports, creates,
  * merges, claims, verifies or changes the visibility of an athlete or result.
- * Both result and athlete publication are required; owner opt-outs win.
+ * Result publication and either profile publication or an explicit results-only hold are required; owner opt-outs win.
  * Deliberately separate from the staff-only ingestion archive and from the
  * specialist event catalogue API aliases. AthRecs athlete results span sports.
  */
@@ -75,7 +75,10 @@ export const listPublicResultEditions = createServerFn({ method: "GET" })
       join events e on e.id = ed.event_id
       where ed.event_date <= ${todayIso()}::date
         and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
-        and (a.profile_visibility = 'public' or a.profile_type = 'Public figure')
+        and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
+          or (a.profile_visibility='private' and a.parent_athlete_id is null
+            and a.profile_details#>>'{nameReview,mode}'='results_only'
+            and not exists (select 1 from athlete_account_links owner where owner.athlete_id=a.id)))
         and not exists (
           select 1 from athlete_account_links l
           join athlete_public_shares s on s.user_id = l.user_id
@@ -120,7 +123,10 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
       join events e on e.id = ed.event_id
       where ed.id = ${data.editionId} and ed.event_date <= ${todayIso()}::date
         and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
-        and (a.profile_visibility = 'public' or a.profile_type = 'Public figure')
+        and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
+          or (a.profile_visibility='private' and a.parent_athlete_id is null
+            and a.profile_details#>>'{nameReview,mode}'='results_only'
+            and not exists (select 1 from athlete_account_links owner where owner.athlete_id=a.id)))
         and not exists (
           select 1 from athlete_account_links l
           join athlete_public_shares s on s.user_id = l.user_id
@@ -139,7 +145,7 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
     const q = like(data.q);
     const offset = (data.page - 1) * RESULT_PAGE_SIZE;
     const rows = await sql<PublicRaceResult>`
-      select r.id, a.display_name as athlete_name, a.slug as athlete_slug,
+      select r.id, a.display_name as athlete_name, case when a.profile_details#>>'{nameReview,mode}'='results_only' then null else a.slug end as athlete_slug,
         case when r.result_details->>'verificationStatus' = 'source_verified'
           and jsonb_typeof(r.result_details->'sourceNationality') = 'string'
           and length(trim(r.result_details->>'sourceNationality')) between 1 and 100
@@ -162,7 +168,10 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
       left join clubs c on c.id = a.club_id
       where r.edition_id = ${data.editionId}
         and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
-        and (a.profile_visibility = 'public' or a.profile_type = 'Public figure')
+        and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
+          or (a.profile_visibility='private' and a.parent_athlete_id is null
+            and a.profile_details#>>'{nameReview,mode}'='results_only'
+            and not exists (select 1 from athlete_account_links owner where owner.athlete_id=a.id)))
         and not exists (
           select 1 from athlete_account_links l
           join athlete_public_shares s on s.user_id = l.user_id
