@@ -7,7 +7,13 @@ import { FIXTURE_DETAILS, isReviewedFixturePlaceholder } from "../../data/fixtur
 import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews";
 import { ROAD_MARATHONS } from "../../data/road-marathons";
 import { ROAD_HALF_MARATHONS } from "../../data/road-half-marathons";
-import { buildRacePlaces, placePath, type PlaceRace } from "./race-places";
+import {
+  buildRacePlaces,
+  placePath,
+  racePlacePage,
+  type PlaceEdition,
+  type PlaceRace,
+} from "./race-places";
 import {
   PLACE_SPORTS,
   PLACE_TERRAINS,
@@ -29,37 +35,60 @@ const aliases = JSON.stringify(
 export async function queryRacePlaceRows(
   sql: Sql,
   now = new Date().toISOString(),
+  options: { compact?: boolean; eventIds?: number[] } = {},
 ): Promise<PlaceRace[]> {
-  const rows = await sql.query<Omit<PlaceRace, "timeZone">>(
+  if (options.eventIds?.length === 0) return [];
+  // The shared index needs dates for filters and rollover, but not descriptions,
+  // entry links or source links for every future edition in the world.
+  // Tuples also avoid repeating JSON property names for recurring fixtures.
+  type EditionTuple = [string, string, string, string | null];
+  const endDate = `case when ed.end_source_url is not null and ed.end_checked_at is not null
+          and ed.end_date >= ed.event_date then ed.end_date::text end`;
+  const editionJson = options.compact
+    ? `json_build_array(ed.event_date::text, ed.distance_code, ed.status, ${endDate})`
+    : `json_build_object(
+        'date', ed.event_date::text, 'distance', ed.distance_code, 'status', ed.status, 'entryUrl', ed.entry_url,
+        'startTime', ed.start_time, 'sourceUrl', ed.source_url, 'endDate', ${endDate})`;
+  const rows = await sql.query<
+    Omit<PlaceRace, "timeZone" | "editions"> & { editions: (PlaceEdition | EditionTuple)[] }
+  >(
     `
     select e.id, e.slug, e.name, e.sport, e.country, e.county, e.region, e.city,
-      e.summary, e.surface, (e.featured or exists (select 1 from event_groups g where g.event_id=e.id
+      ${options.compact ? "''::text" : "e.summary"} as summary, e.surface, (e.featured or exists (select 1 from event_groups g where g.event_id=e.id
         and g.level in ('major','final'))) as featured,
       array(select ed.distance_code from editions ed where ed.event_id=e.id
         and ed.status <> 'Cancelled' and ed.distance_code is not null
         union select distance_code from event_distances where event_id=e.id) as "distanceCodes",
       (select max(ed.event_date)::text from editions ed where ed.event_id=e.id
         and ed.event_date < $1::date and ed.status <> 'Cancelled') as "lastDate",
-      coalesce((select json_agg(json_build_object(
-        'date', ed.event_date::text, 'distance', ed.distance_code, 'status', ed.status, 'entryUrl', ed.entry_url,
-        'startTime', ed.start_time, 'sourceUrl', ed.source_url,
-        'endDate', case when ed.end_source_url is not null and ed.end_checked_at is not null
-          and ed.end_date >= ed.event_date then ed.end_date::text end
-      ) order by ed.event_date, ed.distance_code) from editions ed
+      coalesce((select json_agg(${editionJson}
+        order by ed.event_date, ed.distance_code) from editions ed
       where ed.event_id=e.id and coalesce(ed.end_date, ed.event_date) >= $1::date - interval '2 days'
         and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($4::text[]))), '[]') as editions
     from events e where e.sport in ('Running','Athletics','Triathlon','Parkrun','Cycling','Swimming','Duathlon')
+      ${options.eventIds ? "and e.id = any($5::int[])" : ""}
       and not (e.slug = any($2::text[]))
       and not exists (select 1 from jsonb_to_recordset($3::jsonb) a(old_slug text, current_slug text)
         join events target on target.slug = coalesce((select current_slug from slug_redirects
           where entity_type='event' and old_slug=a.current_slug), a.current_slug)
         where a.old_slug=e.slug and target.id<>e.id)
     order by e.id`,
-    [now.slice(0, 10), retainedFixtureAliasSlugs, aliases, withheldFixtureDateKeys],
+    [
+      now.slice(0, 10),
+      retainedFixtureAliasSlugs,
+      aliases,
+      withheldFixtureDateKeys,
+      ...(options.eventIds ? [options.eventIds] : []),
+    ],
   );
   return rows.map((race) => ({
     ...race,
     editions: race.editions
+      .map((edition): PlaceEdition =>
+        Array.isArray(edition)
+          ? { date: edition[0], distance: edition[1], status: edition[2], endDate: edition[3] }
+          : edition,
+      )
       .filter((edition) => !isReviewedFixturePlaceholder(race.slug, edition.date, edition.distance))
       .map((edition) => {
         const detail = FIXTURE_DETAILS[`${race.slug}|${edition.date}`];
@@ -84,24 +113,71 @@ export async function queryRacePlaceRows(
   }));
 }
 
-let cached: { rows: PlaceRace[]; expires: number } | undefined;
-let pending: Promise<PlaceRace[]> | undefined;
+/** One bounded metadata entry per instance. Failed reads never poison the cache.
+ * This is public fixture metadata only; athlete privacy decisions are not cached.
+ * Date visibility is still recalculated for every request, including midnight.
+ */
+export function createRacePlaceRowsCache(load: () => Promise<PlaceRace[]>, clock = Date.now) {
+  let cached: { rows: PlaceRace[]; expires: number } | undefined;
+  let pending: Promise<PlaceRace[]> | undefined;
+  return async () => {
+    if (cached && cached.expires > clock()) return cached.rows;
+    if (!pending)
+      pending = load()
+        .then((rows) => {
+          cached = { rows, expires: clock() + 5 * 60_000 };
+          return rows;
+        })
+        .finally(() => {
+          pending = undefined;
+        });
+    return pending;
+  };
+}
 
-/** Short metadata cache; date visibility is recalculated on every request. */
-export async function readRacePlaceRows() {
-  if (cached && cached.expires > Date.now()) return cached.rows;
-  if (!pending)
-    pending = (async () => {
-      const { ensureAthrecsSeeded } = await import("./seed.server");
-      const { getSql } = await import("../db");
-      await ensureAthrecsSeeded();
-      const rows = await queryRacePlaceRows(await getSql());
-      cached = { rows, expires: Date.now() + 60_000 };
-      return rows;
-    })().finally(() => {
-      pending = undefined;
-    });
-  return pending;
+export const readRacePlaceRows = createRacePlaceRowsCache(async () => {
+  const { ensureAthrecsSeeded } = await import("./seed.server");
+  const { getSql } = await import("../db");
+  await ensureAthrecsSeeded();
+  return queryRacePlaceRows(await getSql(), new Date().toISOString(), { compact: true });
+});
+
+/** Fetch full descriptions and entry/start information only for visible cards.
+ * Keep the complete date index: truncating it would silently break month,
+ * distance, archive and timezone filtering. At most 43 event IDs per round.
+ */
+export async function queryRacePlacePage(
+  sql: Sql,
+  rows: readonly PlaceRace[],
+  ...args: Parameters<typeof racePlacePage> extends [unknown, ...infer Rest] ? Rest : never
+) {
+  let current = rows;
+  const loaded = new Set<number>();
+  for (let attempt = 0; attempt <= 3; attempt++) {
+    const page = racePlacePage(current, ...args);
+    if (!page) return null;
+    const overviewSlugs = new Set(page.overview.nextRaces.map((race) => race.slug));
+    const ids = [
+      ...new Set(
+        [
+          ...page.races,
+          ...page.archivePreview,
+          ...page.featuredRaces,
+          ...current.filter((race) => overviewSlugs.has(race.slug)),
+        ].map((race) => race.id),
+      ),
+    ].filter((id) => !loaded.has(id));
+    if (!ids.length) return page;
+    if (attempt === 3) break;
+    const detailRows = await queryRacePlaceRows(sql, args[1], { eventIds: ids });
+    const byId = new Map(detailRows.map((race) => [race.id, race]));
+    ids.forEach((id) => loaded.add(id));
+    // A removed or newly withheld event must not survive in the returned cards.
+    current = current
+      .filter((race) => !ids.includes(race.id) || byId.has(race.id))
+      .map((race) => byId.get(race.id) ?? race);
+  }
+  throw new Error("Race listings changed during this request. Please retry.");
 }
 
 export function racePlaceSitemapPaths(rows: readonly PlaceRace[]) {

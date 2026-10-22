@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { racePlacePage } from "./race-places";
 import { IS_RUNRECS_SITE } from "../site-scope";
 
 export const getRacePlacePage = createServerFn({ method: "GET" })
@@ -14,8 +13,10 @@ export const getRacePlacePage = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     if (IS_RUNRECS_SITE) return null;
-    const { readRacePlaceRows } = await import("./race-places.server");
-    return racePlacePage(
+    const { readRacePlaceRows, queryRacePlacePage } = await import("./race-places.server");
+    const { getSql } = await import("../db");
+    return queryRacePlacePage(
+      await getSql(),
       await readRacePlaceRows(),
       data.key,
       new Date().toISOString(),
