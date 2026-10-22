@@ -16,6 +16,7 @@ import type { SourceHistory } from "./source-performance-history";
 import type { ReportedRaceRecord } from "./reported-race-history";
 import type { SourceNationality } from "./source-nationality";
 import type { PublicProfileDetails } from "./profile-details";
+import type { AnzMedal } from "../anz/core";
 import { publicAthleteCareer, type PublicCareerSummary } from "./public-athlete-career";
 import {
   profilePersonalBestSummary,
@@ -26,6 +27,11 @@ import {
   PUBLIC_PROFILE_RESULT_LIMIT,
 } from "./public-athlete-result-pages";
 export { PUBLIC_PROFILE_RESULT_LIMIT } from "./public-athlete-result-pages";
+
+export type ChampionshipMedalSummary = Pick<
+  AnzMedal,
+  "year" | "event" | "ageGroup" | "performance" | "medal"
+>;
 
 export type PublicAthletePreview = {
   slug: string;
@@ -42,6 +48,7 @@ export type PublicAthletePreview = {
   careerSummary: PublicCareerSummary | null;
   achievements?: ProfileAchievementSummary;
   personalBests?: PersonalBestSummary;
+  championshipMedals?: ChampionshipMedalSummary[];
   entries: ResultsHistoryEntry[];
   reportedRecords: ReportedRaceRecord[];
   totalResults: number;
@@ -66,6 +73,8 @@ export function buildPublicAthletePreview(input: {
   biographySources?: readonly { label: string; url: string }[];
   results: readonly ProfileResult[];
   histories: readonly SourceHistory[];
+  /** Already matched to visible completed results by publicAnzMedals on the server. */
+  anzMedals?: readonly AnzMedal[];
   reportedRecords?: readonly ReportedRaceRecord[];
   searchIndexable: boolean;
   allowResultPagination?: boolean;
@@ -111,6 +120,15 @@ export function buildPublicAthletePreview(input: {
     sports,
     achievements: buildProfileAchievementSummary(timeline.results, input.histories),
     personalBests: profilePersonalBestSummary(timeline.results, input.histories),
+    championshipMedals: (input.anzMedals ?? []).map(
+      ({ year, event, ageGroup, performance, medal }) => ({
+        year,
+        event,
+        ageGroup,
+        performance,
+        medal,
+      }),
+    ),
     biography: input.biography
       ? [...input.biography]
       : [

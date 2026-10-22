@@ -1260,6 +1260,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
         biographySources: profile.shareBiography ? career?.biographySources : [],
         results: profile.profileResults,
         histories: profile.sourceHistories,
+        anzMedals: profile.anzMedals,
         reportedRecords: getReportedRaceHistory(profile.athlete.slug)?.records,
         searchIndexable: profile.searchIndexable,
         // Pagination exposes only this same evidence-stripped projection of

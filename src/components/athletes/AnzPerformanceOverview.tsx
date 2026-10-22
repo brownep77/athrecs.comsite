@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
-import { Medal, TrendingUp, Trophy } from "lucide-react";
+import { TrendingUp, Trophy } from "lucide-react";
 import { ANZ_PROVIDER, anzProgress, anzTime, type AnzMedal } from "@/lib/anz/core";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { AchievementVerification } from "./AchievementVerification";
 import { resultVerification } from "@/lib/athrecs/profile-result-presentation";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
+import { AnzChampionshipMedals } from "./AnzChampionshipMedals";
 
 export function AnzPerformanceOverview({
   histories,
@@ -171,30 +172,7 @@ export function AnzPerformanceOverview({
           {formatRaceDateShort(latestResult.date)} · {latestResult.meeting}
         </p>
       </div>
-      {medals.length ? (
-        <div>
-          <h3 className="mb-3 flex items-center gap-2 font-display text-lg font-semibold">
-            <Medal className="size-5 text-amber-700" aria-hidden="true" />
-            New Zealand championship medals
-          </h3>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {medals.map((m) => (
-              <article
-                key={`${m.year}-${m.event}-${m.medal}`}
-                className="rounded-xl border border-border bg-surface p-4 no-underline hover:bg-elevated"
-              >
-                <span className="text-xs font-semibold uppercase tracking-wide text-muted">
-                  {m.year} · {m.medal}
-                </span>
-                <strong className="mt-1 block">
-                  {m.event} · {m.performance}
-                </strong>
-                <span className="text-sm text-muted">{m.ageGroup}</span>
-              </article>
-            ))}
-          </div>
-        </div>
-      ) : null}
+      <AnzChampionshipMedals medals={medals} />
       <div className="space-y-1 text-xs text-muted">
         {coach ? (
           <p>
