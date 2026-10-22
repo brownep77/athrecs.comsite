@@ -1,0 +1,608 @@
+{
+  "batchId": "trackie-public-20261022-batch7",
+  "approvedAt": "2026-10-22",
+  "instruction": "Continue adding Trackie athletes, results, clubs, meetings and events to AthRecs. Owner continuation: Thank you can you do more please.",
+  "clubs": [
+    {
+      "name": "A+ Institute Junior Academy",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "A+ INSTITUTE"
+      ]
+    },
+    {
+      "name": "Bermuda Pacers Track Club",
+      "aliases": [
+        "BERMUDA PACE",
+        "PACERS TRACK CLUB"
+      ],
+      "website": "https://www.pacersbda.com/aboutpacers/",
+      "sourceUrl": "https://www.pacersbda.com/aboutpacers/",
+      "country": "Bermuda",
+      "city": ""
+    },
+    {
+      "name": "Discipline Application of Speed through Hard Work - BNAA",
+      "aliases": [
+        "DISCIPLINE A"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Mid Atlantic Athletic Club",
+      "aliases": [
+        "MID-ATLANTIC"
+      ],
+      "website": "https://www.maac.bm/about-maac/overview.html",
+      "sourceUrl": "https://www.maac.bm/about-maac/overview.html",
+      "country": "Bermuda",
+      "city": ""
+    },
+    {
+      "name": "BOOST Athletics Club",
+      "aliases": [
+        "Boost Athlet"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Guelph Gryphons",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Guelph Gryphons"
+      ]
+    },
+    {
+      "name": "Project Athletics Track And Field Program",
+      "aliases": [
+        "Project Athl"
+      ],
+      "website": "https://www.projectathletics.com/",
+      "sourceUrl": "https://www.projectathletics.com/",
+      "country": "Canada",
+      "city": "Toronto"
+    },
+    {
+      "name": "Thorold Elite Track Club",
+      "aliases": [
+        "Thorold Elit"
+      ],
+      "website": "https://www.thoroldelitetc.ca/",
+      "sourceUrl": "https://www.thoroldelitetc.ca/",
+      "country": "Canada",
+      "city": "Thorold"
+    },
+    {
+      "name": "Throwers Club",
+      "aliases": [
+        "Throwers Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Blue Devils Athletics Club",
+      "aliases": [
+        "Blue Devils"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Boardwalk RC",
+      "aliases": [
+        "Boardwalk RC"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Brampton Racers Track Club",
+      "aliases": [
+        "Brampton Rac"
+      ],
+      "website": "https://www.bramptonracerstrackclub.com/",
+      "sourceUrl": "https://www.bramptonracerstrackclub.com/",
+      "country": "Canada",
+      "city": "Brampton"
+    },
+    {
+      "name": "Brantford TFC",
+      "aliases": [
+        "Brantford T.F.C.",
+        "Brantford Tfc"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Burlington Track and Field Club",
+      "aliases": [
+        "Burlington Tfc",
+        "Burlington T"
+      ],
+      "website": "https://www.burlingtontrackandfield.org/",
+      "sourceUrl": "https://www.burlingtontrackandfield.org/",
+      "country": "Canada",
+      "city": "Burlington"
+    },
+    {
+      "name": "CK Running Club",
+      "aliases": [
+        "CK Running Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Crown Athletics",
+      "aliases": [
+        "Crown Athletics"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Etobicoke Track",
+      "aliases": [
+        "Etobicoke Track"
+      ],
+      "website": "https://etobicoketrack.ca/",
+      "sourceUrl": "https://etobicoketrack.ca/",
+      "country": "Canada",
+      "city": "Toronto"
+    },
+    {
+      "name": "Flying Angels Track & Field Academy",
+      "aliases": [
+        "Flying Angels"
+      ],
+      "website": "https://www.flyingangels.ca/",
+      "sourceUrl": "https://www.trackie.com/club/2026-flying-angels-track-field-academy-membership/1035513/",
+      "country": "Canada"
+    },
+    {
+      "name": "Glen Manor Track Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Glen Manor T"
+      ]
+    },
+    {
+      "name": "Kawartha Lakes Lightning",
+      "aliases": [
+        "Kawartha Lak"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "M.B. Track Club",
+      "aliases": [
+        "M B Track Club"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Motown Athletics Club",
+      "aliases": [
+        "Motown Athle"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Newmarket Huskies Track Club",
+      "aliases": [
+        "Newmarket Hu"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Oakville Renegades Track Club",
+      "aliases": [
+        "Oakville Ren"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "PACK Running Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Pack Running Club"
+      ]
+    },
+    {
+      "name": "Quest Sports Track and Field Club",
+      "aliases": [
+        "Quest Sports"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Restigouche",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Restigouche"
+      ]
+    },
+    {
+      "name": "RoadRunners Track & Field",
+      "aliases": [
+        "RoadRunners"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Runners Of Collingwood",
+      "aliases": [
+        "Runners Of C"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Simple Fitness Track Club",
+      "aliases": [
+        "Simple Fitne"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "South Simcoe Dufferin T.F.C.",
+      "aliases": [
+        "South Simcoe"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "The Gazelles Track and Field Club",
+      "aliases": [
+        "The Gazelles"
+      ],
+      "website": "https://thegazelles.ca/",
+      "sourceUrl": "https://thegazelles.ca/",
+      "country": "Canada",
+      "city": ""
+    },
+    {
+      "name": "Toronto Olympic Track & Field Club",
+      "aliases": [
+        "Toronto Olym"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Toronto West Athletics",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Toronto West"
+      ]
+    },
+    {
+      "name": "United Tamil Sports Club",
+      "aliases": [
+        "United Tamil",
+        "United Tamil SC"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "York University Track & Field Club",
+      "aliases": [
+        "York Univers"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Acadia Axemen/Axewomen",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Acadia Axeme"
+      ]
+    },
+    {
+      "name": "Aetos Athletica",
+      "aliases": [
+        "Aetos Athlet"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Athletics East Nova Scotia",
+      "aliases": [
+        "Athletics Ea"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Dalhousie Tigers",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Dalhousie Ti"
+      ]
+    },
+    {
+      "name": "Grit Athletics Track And Field Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Grit Athleti"
+      ]
+    },
+    {
+      "name": "Halifax Road Hammers",
+      "aliases": [
+        "Halifax Road"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Holland College Hurricanes",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Holland Coll"
+      ]
+    },
+    {
+      "name": "Islanders Track and Field",
+      "aliases": [
+        "Islanders Tr"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Memorial Sea-Hawks",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Memorial Sea"
+      ]
+    },
+    {
+      "name": "Moncton Aigles Bleu",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Moncton Aigl"
+      ]
+    },
+    {
+      "name": "Pace Athletics",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Pace Athleti"
+      ]
+    },
+    {
+      "name": "Saint John Reds Track & Field",
+      "aliases": [
+        "Saint John R"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Slow Ships Athletic Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Slow Ships A"
+      ]
+    },
+    {
+      "name": "Stfx Track And Field Club",
+      "aliases": [
+        "Stfx Track A"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Truro Lions Track & Field Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Truro Lions"
+      ]
+    },
+    {
+      "name": "UNB Reds",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Unb Reds"
+      ]
+    },
+    {
+      "name": "UPEI Panthers",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Upei Panther"
+      ]
+    },
+    {
+      "name": "Valley Athletics",
+      "aliases": [
+        "Valley Athle"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Panthers International",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Panthers Int"
+      ]
+    },
+    {
+      "name": "PSE Sports Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Pse"
+      ]
+    },
+    {
+      "name": "Roots Athletic Club",
+      "aliases": [
+        "Roots Athlet"
+      ],
+      "sourceUrl": "https://www.trackie.com/results/abba-road-race-series-26-27-1-mile-run/10359/"
+    },
+    {
+      "name": "Wadadli Athletic Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Wadadli Athl"
+      ]
+    },
+    {
+      "name": "Developing National Athletes - BNAA",
+      "aliases": [
+        "DEVELOPING N"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    },
+    {
+      "name": "Calgary Dinos",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Calgary Dinos"
+      ]
+    },
+    {
+      "name": "Calgary Spartans",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Calgary Spar"
+      ]
+    },
+    {
+      "name": "CALTAF Track and Field Club",
+      "aliases": [
+        "Caltaf Athle"
+      ],
+      "website": "https://caltaf.com/",
+      "sourceUrl": "https://caltaf.com/",
+      "country": "Canada",
+      "city": "Calgary"
+    },
+    {
+      "name": "Cochrane Endurance Project",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Cochrane End"
+      ]
+    },
+    {
+      "name": "East Kootenay Track & Field Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "East Kootena"
+      ]
+    },
+    {
+      "name": "Lethbridge Track And Field Club",
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php",
+      "aliases": [
+        "Lethbridge T"
+      ]
+    },
+    {
+      "name": "Vancouver Thunderbirds",
+      "aliases": [
+        "Vancouver Th"
+      ],
+      "sourceUrl": "https://www.trackie.com/ajax/get-custom-team-list.php"
+    }
+  ],
+  "meetings": {
+    "10261": {
+      "name": "2026 BNAA Track & Field Meet Feb 15th",
+      "slug": "trackie-2026-bnaa-track-field-meet-feb-15th-10261",
+      "city": "",
+      "region": "",
+      "country": "Bermuda",
+      "venue": "National Sports Centre",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10264": {
+      "name": "Family Day Last Chance Throw's Meet",
+      "slug": "trackie-family-day-last-chance-throws-meet-10264",
+      "city": "Toronto",
+      "region": "Ontario",
+      "country": "Canada",
+      "venue": "Toronto TF Centre",
+      "surface": "Indoor Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10277": {
+      "name": "MTA INDOOR PREP  MEET #2",
+      "slug": "trackie-mta-indoor-prep-meet-2-10277",
+      "city": "Toronto",
+      "region": "Ontario",
+      "country": "Canada",
+      "venue": "Toronto Track and Field Centre",
+      "surface": "Indoor Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10248": {
+      "name": "2026 SMU Open",
+      "slug": "trackie-2026-smu-open-10248",
+      "city": "Halifax",
+      "region": "Nova Scotia",
+      "country": "Canada",
+      "venue": "Canada Games Centre",
+      "surface": "Indoor Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10270": {
+      "name": "ABAA Development Meet Series 2026-Meet #3",
+      "slug": "trackie-abaa-development-meet-series-2026-meet-3-10270",
+      "city": "Saint John",
+      "region": "",
+      "country": "Antigua and Barbuda",
+      "venue": "YASCO Sports Complex",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed. Report main title/date and Trackie index identify Series 3 on February 7; a secondary subtitle says Series 4."
+    },
+    "10238": {
+      "name": "2026 BNAA Carifta Trials Feb 4th",
+      "slug": "trackie-2026-bnaa-carifta-trials-feb-4th-10238",
+      "city": "",
+      "region": "",
+      "country": "Bermuda",
+      "venue": "National Sports Centre - Flora Duffy Stadium",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10231": {
+      "name": "2026 BNAA Track & Field Meet Jan 31st",
+      "slug": "trackie-2026-bnaa-track-field-meet-jan-31st-10231",
+      "city": "",
+      "region": "",
+      "country": "Bermuda",
+      "venue": "National Sports Centre",
+      "surface": "Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": null,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    },
+    "10221": {
+      "name": "DINOS CLASSIC",
+      "slug": "wa-dinos-classic-7219425",
+      "city": "Calgary",
+      "region": "Alberta",
+      "country": "Canada",
+      "venue": "Jack Simpson/Olympic Oval, University of Calgary",
+      "surface": "Indoor Track",
+      "sport": "Athletics",
+      "disciplineId": 9,
+      "existingId": 4386568,
+      "qualification": "Supported individual finals only. Source affiliations are historical; athlete identity is unconfirmed."
+    }
+  }
+}
