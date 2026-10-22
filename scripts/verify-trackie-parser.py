@@ -53,7 +53,8 @@ with tempfile.TemporaryDirectory() as folder:
     pdf.drawString(18,740,'Women 100 Meter Sprint U20')
     for x,text in [(42,'Name'),(216,'Team'),(320,'Prelims'),(410,'Finals')]:pdf.drawString(x,720,text)
     pdf.drawString(30,700,'1');pdf.drawString(42,700,'Example, Runner');pdf.drawString(214.9,700,'Example Club')
-    pdf.drawRightString(362,700,'12.12');pdf.drawRightString(446,700,'12.34');pdf.save()
+    pdf.drawRightString(362,700,'12.12');pdf.drawRightString(446,700,'12.34')
+    pdf.showPage();pdf.setFont('Courier',10);pdf.drawString(18,740,'4 - 1/11/2026');pdf.save()
     rows,issues=parser.parse_pdf(shifted,{'date':'2026-06-09','files':[{'url':'https://example.org/shifted.pdf'}]})
     assert not issues and len(rows)==1,issues
     assert rows[0]['name']=='Example, Runner' and rows[0]['club']=='Example Club'
