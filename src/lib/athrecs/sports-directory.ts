@@ -24,7 +24,11 @@ const normalise = (value: string) =>
   value
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
+    .toLowerCase()
+    .replace(/ø/g, "o")
+    .replace(/ł/g, "l")
+    .replace(/æ/g, "ae")
+    .replace(/ß/g, "ss");
 
 export function parseDirectorySearch(raw: Record<string, unknown>): DirectorySearch {
   return {
@@ -80,7 +84,7 @@ export const DIRECTORY_QUESTIONS = [
   {
     question: "Who governs triathlon and duathlon in Britain?",
     answer:
-      "British Triathlon is the governing body for triathlon, duathlon and related multisport in Great Britain. Its member associations are Triathlon England, Triathlon Scotland and Welsh Triathlon. Triathlon Ireland covers the Republic of Ireland and Northern Ireland.",
+      "British Triathlon is the governing body for triathlon, duathlon and related multisport in Great Britain. Its member associations are Triathlon England, Triathlon Scotland and Triathlon Cymru (Welsh Triathlon). Triathlon Ireland covers the Republic of Ireland and Northern Ireland.",
   },
   {
     question: "Does Sport England make the rules for every sport?",
@@ -88,8 +92,8 @@ export const DIRECTORY_QUESTIONS = [
       "Sport England funds and develops participation and sets requirements for organisations it funds. Individual national and international federations set or apply their sports’ competition rules. Funding conditions, sport rules and legislation are separate things.",
   },
   {
-    question: "Which countries and sports are included?",
-    answer: `The directory covers every sport section currently listed on AthRecs, with national federations in ${DIRECTORY_NATIONAL_COUNTRIES.length} countries across Europe, the Americas, Africa, Asia and Oceania. It also includes home-nation and regional bodies, specialist associations, funding agencies and international organisations. Use the country and sport filters to find the relevant entries. Coverage is growing and is not exhaustive in every country or discipline. Jurisdiction describes an organisation’s remit; it does not determine an athlete’s nationality or team eligibility.`,
+    question: "Which countries, territories and sports are included?",
+    answer: `The directory covers every sport section currently listed on AthRecs, with national federations in ${DIRECTORY_NATIONAL_COUNTRIES.length} countries and territories across Europe, the Americas, Africa, Asia and Oceania. It also includes home-nation and regional bodies, specialist associations, funding agencies and international organisations. Use the country and sport filters to find the relevant entries. Coverage is growing and is not exhaustive in every country or discipline. Jurisdiction describes an organisation’s remit; it does not determine an athlete’s nationality or team eligibility.`,
   },
   {
     question: "How do regional and specialist organisations fit in?",
