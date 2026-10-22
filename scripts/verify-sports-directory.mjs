@@ -149,6 +149,47 @@ assert.deepEqual(names({ country: "Thailand", sport: "duathlon", type: "national
 assert.deepEqual(names({ country: "Argentina", sport: "trail-running", type: "national" }), [
   "argentine-athletics",
 ]);
+for (const country of [
+  "Croatia",
+  "Slovenia",
+  "Slovakia",
+  "Serbia",
+  "Bulgaria",
+  "Iceland",
+  "Luxembourg",
+  "Israel",
+]) {
+  assert.equal(names({ country, type: "national" }).length, 4, `${country}: four national bodies`);
+  for (const sport of ["track-and-field", "road-cycling", "swimming", "triathlon"]) {
+    assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
+  }
+}
+// Membership alone does not establish every cycling or multisport discipline.
+for (const country of ["Croatia", "Serbia", "Iceland"]) {
+  assert.equal(names({ country, type: "national", sport: "mountain-biking" }).length, 1);
+  assert.deepEqual(names({ country, type: "national", sport: "track-cycling" }), []);
+  assert.deepEqual(names({ country, type: "national", sport: "bmx" }), []);
+}
+for (const country of ["Slovenia", "Slovakia", "Bulgaria"]) {
+  assert.equal(names({ country, type: "national", sport: "track-cycling" }).length, 1);
+  assert.equal(names({ country, type: "national", sport: "bmx" }).length, 1);
+}
+for (const country of ["Luxembourg", "Israel"]) {
+  assert.equal(names({ country, type: "national", sport: "track-cycling" }).length, 1);
+  assert.deepEqual(names({ country, type: "national", sport: "bmx" }), []);
+}
+for (const country of ["Croatia", "Slovenia", "Slovakia", "Serbia", "Bulgaria", "Luxembourg"]) {
+  assert.equal(names({ country, type: "national", sport: "duathlon" }).length, 1);
+}
+for (const country of ["Iceland", "Israel"]) {
+  assert.deepEqual(names({ country, type: "national", sport: "duathlon" }), []);
+}
+assert.deepEqual(names({ q: "Slovenska plavecka federacia" }), ["slovak-swimming"]);
+assert.deepEqual(names({ q: "Thrithrautarsamband Islands" }), ["icelandic-triathlon"]);
+assert.deepEqual(names({ q: "Icelandic Cycling Association" }), ["icelandic-cycling"]);
+assert.deepEqual(names({ q: "Croatia Swimming Association" }), ["croatian-swimming"]);
+assert.deepEqual(names({ q: "Българска асоциация по триатлон" }), ["bulgarian-triathlon"]);
+assert.equal(getSportsOrganisation("bulgarian-triathlon").website, "https://bat.triathlon.bg/");
 assert.equal(getSportsOrganisation("hellenic-triathlon").website, "https://hellastriathlon.gr/en/");
 assert.deepEqual(names({ country: "Romania", sport: "bmx", type: "national" }), []);
 assert.deepEqual(names({ country: "Lithuania", sport: "duathlon", type: "national" }), []);
