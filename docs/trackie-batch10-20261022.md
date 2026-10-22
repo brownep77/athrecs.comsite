@@ -8,8 +8,10 @@ The MTA December report is held because the index says December 14 while the rep
 
 The capture command now accepts an explicit archive year, defaulting to its previous 2026 behavior. Publication derives performance years from source dates and profile years from the performances. A synthetic end-to-end regression checks a 2025 capture and publication plan. Every batch-10 result and profile year was checked as 2025 before rehearsal.
 
-Server-side screening returned 7,163 candidate athlete records and identified 542 athlete/account candidates. Full directory fingerprints guard screening and publication; the entire athlete directory was not downloaded.
+The initial server-side screening returned 7,163 candidate athlete records and identified 542 athlete/account candidates. Full directory fingerprints guard screening and publication; the entire athlete directory was not downloaded.
 
 Track Database and Athletics New Brunswick were discovered through actual Trackie redirects, opened successfully and checked against both the source registry and event URLs. Both were registered disabled for manual review. Their participant results are not part of this publication. The original external pages, PDFs, identity candidates, holds, mapping decisions and receipts remain staff-only. Team-directory evidence reuses the capture from earlier on October 22.
 
 No nationality, residence, exact date of birth, ownership or verification is inferred. Public athlete profiles omit source evidence. Exact histories, profile details, result marks and competition links are checked on an isolated database branch and after production publication.
+
+The first rehearsal rolled back because the catalogue fingerprint changed after screening. A fresh server-side screen returned 7,164 candidate records and the same 542 matched entities. The publication plan was unchanged apart from its current directory fingerprint; rehearsal was repeated against that current snapshot.
