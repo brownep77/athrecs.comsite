@@ -191,12 +191,13 @@ def main():
     logging.getLogger("pdfminer").setLevel(logging.ERROR)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("directory", type=Path)
+    parser.add_argument("--year", type=int, default=2026, choices=range(1900, 2101))
     args = parser.parse_args()
     inventory = json.loads((args.directory / "inventory.json").read_text())
     summary = []
     for item in inventory:
         single_day = bool(re.fullmatch(r"[A-Za-z]{3} \d{1,2}", item["dateLabel"]))
-        item["date"] = dt.datetime.strptime("2026 " + item["dateLabel"], "%Y %b %d").date().isoformat() if single_day else None
+        item["date"] = dt.datetime.strptime(str(args.year) + " " + item["dateLabel"], "%Y %b %d").date().isoformat() if single_day else None
         attachments = item.get("files", [])
         if not attachments or attachments[0]["format"] != "pdf":
             summary.append(dict(key=item["key"], name=item["name"], rows=0,

@@ -83,4 +83,19 @@ with tempfile.TemporaryDirectory() as folder:
     capture=json.loads((pathlib.Path(folder)/'synthetic.capture.json').read_text())
     assert capture['state']=='held' and capture['rows']==0
     assert 'event-specific dates' in capture['issues'][0]
+    # Archive year must survive both capture and publication-plan preparation.
+    inventory=[{'key':'prior-year','url':'https://example.org/result','name':'Example Meet','dateLabel':'Dec 27','location':'Example','files':[{'url':'https://example.org/yearbib.pdf','path':str(yearbib),'format':'pdf'}]}]
+    (pathlib.Path(folder)/'inventory.json').write_text(json.dumps(inventory))
+    subprocess.run([sys.executable,str(root/'prepare-trackie-captures.py'),folder,'--year','2025'],check=True,capture_output=True)
+    capture=json.loads((pathlib.Path(folder)/'prior-year.capture.json').read_text())
+    assert capture['payload']['rows'][0]['date']=='2025-12-27'
+    work=pathlib.Path(folder)/'work';work.mkdir()
+    (work/'directory.json').write_text(json.dumps({'index':{},'entities':{},'fingerprint':'synthetic'}))
+    (work/'clubs.json').write_text('[]')
+    config={'batchId':'trackie-public-synthetic','clubs':[],'meetings':{'prior-year':{'name':'Example Meet','slug':'example-meet','city':'','region':'','country':'','venue':'Example','surface':'Indoor Track','sport':'Athletics','disciplineId':9,'existingId':None}}}
+    (work/'config.json').write_text(json.dumps(config))
+    subprocess.run([sys.executable,str(root/'publish-trackie-profiles.py'),'prepare','--work',str(work),'--captures',folder,'--config',str(work/'config.json')],check=True,capture_output=True)
+    plan=json.loads((work/'plan.private.json').read_text());assert len(plan['profiles'])==1
+    assert plan['profiles'][0]['years']==[2025]
+    assert plan['profiles'][0]['performances'][0]['year']==2025
 print('Trackie synthetic PDF: headings, columns, titles, exact marks and record suffix checks passed.')
