@@ -61,10 +61,14 @@ export function publicResultsHead(
           url: `${url}#result-${result.id}`,
           name: `${result.athlete_name} — ${edition.distance_code} recorded result`,
           description: details,
-          item: {
+          item: result.athlete_slug ? {
             "@type": "Person",
             name: result.athlete_name,
             url: `${SITE_URL}/athletes/${encodeURIComponent(result.athlete_slug)}`,
+          } : {
+            "@type": "Thing",
+            name: result.athlete_name,
+            description: "Recorded name under review; athlete profile not linked",
           },
         };
       }),

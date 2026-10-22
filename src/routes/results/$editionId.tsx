@@ -102,7 +102,8 @@ function RaceResultsPage() {
                   <tr id={`result-${result.id}`} key={result.id} className="border-b border-border/70 last:border-0 hover:bg-elevated/40">
                     <td className="px-3 py-4 align-top font-semibold tabular-nums">{result.disqualified ? "—" : result.overall_place ?? result.reported_place ?? "—"}</td>
                     <td className="px-3 py-4 align-top">
-                      <Link to="/athletes/$slug" params={{ slug: result.athlete_slug }} className="font-semibold text-fg no-underline hover:text-accent">{result.athlete_name}</Link>
+                      {result.athlete_slug ? <Link to="/athletes/$slug" params={{ slug: result.athlete_slug }} className="font-semibold text-fg no-underline hover:text-accent">{result.athlete_name}</Link> : <span className="font-semibold">{result.athlete_name}</span>}
+                      {!result.athlete_slug ? <p className="mt-1 text-xs text-muted">Name under review · profile not linked</p> : null}
                       {result.verification_status === "unverified" ? <p className="mt-1 text-xs text-muted">Unverified result</p> : null}
                       {!finished ? <p className="mt-1 text-xs text-muted">{result.disqualified ? "Disqualified" : result.status}</p> : null}
                       {finished && result.gender_place !== null ? <p className="mt-1 text-xs text-muted">Gender position {result.gender_place}</p> : null}

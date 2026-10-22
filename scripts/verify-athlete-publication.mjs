@@ -25,7 +25,7 @@ try {
   await db.exec(`
     create table "user" (id text primary key);
     insert into "user" values ('staff'), ('owner');
-    create table athletes (id integer primary key, profile_visibility text default 'private', profile_type text default 'Athlete', bio text default 'Unchanged');
+    create table athletes (id integer primary key, profile_visibility text default 'private', profile_type text default 'Athlete', bio text default 'Unchanged', profile_details jsonb default '{}');
     insert into athletes(id) select generate_series(1,56);
     update athletes set profile_visibility='public' where id=3;
     update athletes set profile_type='Public figure' where id=4;
@@ -95,6 +95,13 @@ try {
   });
 
   // Roll back visibility and results if any part of publication fails.
+  await db.exec(`insert into athletes(id,profile_details) values (57,'{"nameReview":{"mode":"results_only"}}');
+    insert into athlete_identifiers(number,athlete_id) values (157,57);
+    insert into results values (57,57,'public');`);
+  assert.deepEqual(await publishAthleteProfiles(sql,["157"],actor),{published:0,resultsPublished:0,skipped:1});
+  assert.equal((await sql`select profile_visibility from athletes where id=57`)[0].profile_visibility,'private',
+    'Bulk publication must not release an unresolved name hold');
+
   await db.exec(`create function reject_test_publication() returns trigger language plpgsql as $$ begin raise exception 'test publication failure'; end $$;
     create trigger reject_test_publication before update on athlete_source_histories for each row execute function reject_test_publication();`);
   await assert.rejects(publishAthleteProfiles(sql, ["106"], actor), /test publication failure/);

@@ -84,6 +84,7 @@ import { Route as ResultsIndexRouteImport } from './routes/results/index'
 import { Route as ResultsEditionIdRouteImport } from './routes/results/$editionId'
 import { Route as ResultsBerlinMarathon2026RouteImport } from './routes/results/berlin-marathon-2026'
 import { Route as ResultsBureValley102026RouteImport } from './routes/results/bure-valley-10-2026'
+import { Route as ResultsUnlinkedRouteImport } from './routes/results/unlinked'
 import { Route as RunningIndexRouteImport } from './routes/running/index'
 import { Route as RunningGuideRouteImport } from './routes/running/$guide'
 import { Route as RunningCalendarRouteImport } from './routes/running/calendar'
@@ -483,6 +484,11 @@ const ResultsBureValley102026Route = ResultsBureValley102026RouteImport.update({
   path: '/results/bure-valley-10-2026',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResultsUnlinkedRoute = ResultsUnlinkedRouteImport.update({
+  id: '/results/unlinked',
+  path: '/results/unlinked',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RunningIndexRoute = RunningIndexRouteImport.update({
   id: '/running/',
   path: '/running/',
@@ -651,6 +657,7 @@ export interface FileRoutesByFullPath {
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
+  '/results/unlinked': typeof ResultsUnlinkedRoute
   '/running/$guide': typeof RunningGuideRoute
   '/running/calendar': typeof RunningCalendarRoute
   '/running/events': typeof RunningEventsRoute
@@ -747,6 +754,7 @@ export interface FileRoutesByTo {
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
+  '/results/unlinked': typeof ResultsUnlinkedRoute
   '/running/$guide': typeof RunningGuideRoute
   '/running/calendar': typeof RunningCalendarRoute
   '/running/events': typeof RunningEventsRoute
@@ -844,6 +852,7 @@ export interface FileRoutesById {
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
+  '/results/unlinked': typeof ResultsUnlinkedRoute
   '/running/$guide': typeof RunningGuideRoute
   '/running/calendar': typeof RunningCalendarRoute
   '/running/events': typeof RunningEventsRoute
@@ -942,6 +951,7 @@ export interface FileRouteTypes {
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
+    | '/results/unlinked'
     | '/running/$guide'
     | '/running/calendar'
     | '/running/events'
@@ -1038,6 +1048,7 @@ export interface FileRouteTypes {
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
+    | '/results/unlinked'
     | '/running/$guide'
     | '/running/calendar'
     | '/running/events'
@@ -1134,6 +1145,7 @@ export interface FileRouteTypes {
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
+    | '/results/unlinked'
     | '/running/$guide'
     | '/running/calendar'
     | '/running/events'
@@ -1231,6 +1243,7 @@ export interface RootRouteChildren {
   ResultsEditionIdRoute: typeof ResultsEditionIdRoute
   ResultsBerlinMarathon2026Route: typeof ResultsBerlinMarathon2026Route
   ResultsBureValley102026Route: typeof ResultsBureValley102026Route
+  ResultsUnlinkedRoute: typeof ResultsUnlinkedRoute
   RunningGuideRoute: typeof RunningGuideRoute
   RunningCalendarRoute: typeof RunningCalendarRoute
   RunningEventsRoute: typeof RunningEventsRoute
@@ -1788,6 +1801,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResultsBureValley102026RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/results/unlinked': {
+      id: '/results/unlinked'
+      path: '/results/unlinked'
+      fullPath: '/results/unlinked'
+      preLoaderRoute: typeof ResultsUnlinkedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/running/': {
       id: '/running/'
       path: '/running'
@@ -1991,6 +2011,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResultsEditionIdRoute: ResultsEditionIdRoute,
   ResultsBerlinMarathon2026Route: ResultsBerlinMarathon2026Route,
   ResultsBureValley102026Route: ResultsBureValley102026Route,
+  ResultsUnlinkedRoute: ResultsUnlinkedRoute,
   RunningGuideRoute: RunningGuideRoute,
   RunningCalendarRoute: RunningCalendarRoute,
   RunningEventsRoute: RunningEventsRoute,
