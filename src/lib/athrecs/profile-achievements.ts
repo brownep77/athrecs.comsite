@@ -199,6 +199,36 @@ export function buildProfileAchievements(
   }
   const marathons = finishes.filter((r) => runningDistanceKind(r) === "marathon");
   const ultras = finishes.filter((r) => runningDistanceKind(r) === "ultra");
+  // Use the same distinct completed results for distance totals, evidence and progress.
+  // Completion does not require PB eligibility, a known surface or verification.
+  const distanceFinishes = [
+    { id: "miles", km: 1.609344, label: "mile race", plural: "mile races" },
+    { id: "5K", km: 5, label: "5K finish", plural: "5K finishes" },
+    { id: "10K", km: 10, label: "10K finish", plural: "10K finishes" },
+    { id: "half-marathons", km: 21.0975, label: "half marathon", plural: "half marathons" },
+  ]
+    .map(({ km, ...distance }) => {
+      const matching = finishes.filter((result) => {
+        const row = result.history?.performance;
+        const qualifications = [result.distanceCode, row?.discipline, ...(row?.labels ?? [])].join(
+          " ",
+        );
+        return (
+          recordedSport(result) === "Running" &&
+          [km, Number(km.toFixed(2)), Number(km.toFixed(1))].includes(result.distanceKm) &&
+          !/relay|stage|split|intermediate|short[ -]course|\bmulti\b(?![ -]terrain)/i.test(
+            qualifications,
+          )
+        );
+      });
+      return {
+        ...distance,
+        results: matching,
+        nextTarget:
+          [1, 5, 10, 20, 25, 50, 100, 250, 500].find((target) => target > matching.length) ?? null,
+      };
+    })
+    .filter((distance) => distance.results.length > 0);
   const countries = new Map<string, { code: string; name: string; results: AchievementResult[] }>();
   for (const result of finishes) {
     const flag = countryFlag(result.country);
@@ -276,27 +306,13 @@ export function buildProfileAchievements(
   milestone("finishes", finishes, "finish", [500, 250, 100, 50, 25, 10, 5, 1]);
   milestone("marathons", marathons, "marathon", [100, 50, 25, 20, 10, 5, 1]);
   milestone("ultras", ultras, "ultra", [100, 50, 25, 10, 5, 1]);
-  for (const [distance, label] of [
-    [1.609344, "mile"],
-    [5, "5K"],
-    [10, "10K"],
-    [21.0975, "half marathon"],
-  ] as const) {
-    const first = byDate(finishes).find(
-      (r) =>
-        recordedSport(r) === "Running" &&
-        [distance, Number(distance.toFixed(2)), Number(distance.toFixed(1))].includes(
-          r.distanceKm,
-        ) &&
-        !/relay|multi|stage/i.test(r.distanceCode),
+  for (const { id, label, plural, results: matching } of distanceFinishes) {
+    add(
+      id,
+      matching.length === 1 ? `First recorded ${label}` : `${matching.length} ${plural} completed`,
+      `Based on ${matching.length} distinct completed ${matching.length === 1 ? label : plural} in your linked record.`,
+      byDate(matching),
     );
-    if (first)
-      add(
-        `first-${label}`,
-        `First recorded ${label}`,
-        "First matching distance in your linked results; earlier unlinked history may exist.",
-        [first],
-      );
   }
   if (countries.size >= 2)
     add(
@@ -409,6 +425,7 @@ export function buildProfileAchievements(
     finishes,
     marathons,
     ultras,
+    distanceFinishes,
     countries: [...countries.values()].sort((a, b) => a.name.localeCompare(b.name)),
     marathonWeek,
     sports,

@@ -121,6 +121,142 @@ assert.equal(
 assert.equal(threeCountries.progress.find((goal) => goal.id === "countries").completed, 3);
 assert.equal(threeCountries.progress.find((goal) => goal.id === "countries").remaining, 2);
 
+// Distance achievements must advance beyond the first finish, across the full history.
+const halfRows = Array.from({ length: 12 }, (_, index) => ({
+  ...history.performances[0],
+  year: 2020,
+  date: `2020-${String(index + 1).padStart(2, "0")}-01`,
+  discipline: index % 2 ? "Half" : "Half Marathon",
+  meeting: `Example half marathon ${index + 1}`,
+  performance: "1:20:00",
+  labels: ["Road"],
+  verificationStatus: index < 10 ? "source_verified" : "unverified",
+}));
+const halfHistory = { ...history, performances: halfRows };
+const halfSummary = buildProfileAchievementSummary([], [halfHistory], today);
+assert.equal(
+  halfSummary.earned.find(({ id }) => id === "half-marathons").title,
+  "12 half marathons completed",
+);
+assert.equal(halfSummary.earned.find(({ id }) => id === "half-marathons").verified, false);
+assert.deepEqual(
+  halfSummary.progress.find(({ id }) => id === "half-marathons"),
+  {
+    id: "half-marathons",
+    title: "20 half marathons",
+    completed: 12,
+    target: 20,
+    remaining: 8,
+    remainingLabel: "8 more half marathons",
+  },
+);
+const verifiedHalves = buildProfileAchievementSummary(
+  [],
+  [
+    {
+      ...halfHistory,
+      performances: halfRows.map((row) => ({ ...row, verificationStatus: "source_verified" })),
+    },
+  ],
+  today,
+);
+assert.equal(
+  buildProfileAchievementSummary(
+    [],
+    [
+      {
+        ...halfHistory,
+        performances: halfRows.map((row) => ({ ...row, labels: ["Multi-terrain"] })),
+      },
+    ],
+    today,
+  ).progress.find(({ id }) => id === "half-marathons").completed,
+  12,
+  "Surface does not disqualify a recorded distance completion",
+);
+assert.equal(verifiedHalves.earned.find(({ id }) => id === "half-marathons").verified, true);
+assert.deepEqual(
+  verifiedHalves.progress,
+  halfSummary.progress,
+  "Verification only changes the tick, never the count",
+);
+const duplicateHalf = race(200, {
+  eventDate: halfRows[0].date,
+  eventName: halfRows[0].meeting,
+  distanceCode: "Half",
+  distanceKm: 21.0975,
+  finishTimeSeconds: 4800,
+});
+const repeatedHistory = { ...halfHistory, provider: "Second example source" };
+assert.equal(
+  buildProfileAchievementSummary(
+    [duplicateHalf],
+    [halfHistory, repeatedHistory],
+    today,
+  ).progress.find(({ id }) => id === "half-marathons").completed,
+  12,
+  "Recorded and history duplicates count once",
+);
+const ineligibleHalfRows = [
+  { profileExcluded: true },
+  { performance: "DNF" },
+  { performance: "DQ" },
+  { date: "2027-01-01", year: 2027 },
+  { notes: "conflicting source result" },
+  { labels: ["Road", "Relay leg"] },
+  { labels: ["Road", "Split"] },
+  { labels: ["Road", "Short course"] },
+].map((overrides, index) => ({
+  ...halfRows[0],
+  meeting: `Ineligible half ${index}`,
+  ...overrides,
+}));
+assert.equal(
+  buildProfileAchievementSummary(
+    [],
+    [{ ...halfHistory, performances: [...halfRows, ...ineligibleHalfRows] }],
+    today,
+  ).progress.find(({ id }) => id === "half-marathons").completed,
+  12,
+);
+for (const [distanceCode, distanceKm, id] of [
+  ["5K", 5, "5K"],
+  ["10K", 10, "10K"],
+  ["Mile", 1.609344, "miles"],
+  ["Half", 21.1, "half-marathons"],
+]) {
+  const summary = buildProfileAchievementSummary(
+    four.map((row) => ({ ...row, distanceCode, distanceKm })),
+    [],
+    today,
+  );
+  assert.equal(summary.progress.find((goal) => goal.id === id).completed, 4);
+  assert.equal(summary.progress.find((goal) => goal.id === id).remaining, 1);
+}
+assert(
+  !buildProfileAchievementSummary(
+    [
+      race(300, { sport: "Athletics", surface: "Track", distanceCode: "10000m" }),
+      race(301, { sport: "Cycling" }),
+    ],
+    [],
+    today,
+  ).earned.some(({ id }) => id === "10K"),
+  "Track and cycling must not become running 10K completions",
+);
+const twenty = buildProfileAchievementSummary(
+  Array.from({ length: 20 }, (_, index) =>
+    race(index + 1, { distanceCode: "Half", distanceKm: 21.0975 }),
+  ),
+  [],
+  today,
+);
+assert.equal(
+  twenty.earned.find(({ id }) => id === "half-marathons").title,
+  "20 half marathons completed",
+);
+assert.equal(twenty.progress.find(({ id }) => id === "half-marathons").target, 25);
+
 const server = await createServer({ server: { middlewareMode: true } });
 try {
   const { buildPublicAthletePreview } = await server.ssrLoadModule(
@@ -129,6 +265,23 @@ try {
   const { AchievementSummary } = await server.ssrLoadModule(
     "/src/components/athletes/AchievementSummary.tsx",
   );
+  const halfMarkup = renderToStaticMarkup(
+    createElement(AchievementSummary, { summary: halfSummary }),
+  );
+  assert(halfMarkup.includes("12 half marathons completed"));
+  assert(halfMarkup.includes("8 more half marathons"));
+  assert(halfMarkup.includes('value="12" max="20"'));
+  assert(!halfMarkup.includes("First recorded half marathon"));
+  assert(!halfMarkup.includes("example.test"));
+  const { AchievementsBoard } = await server.ssrLoadModule(
+    "/src/components/athletes/ProfileAchievements.tsx",
+  );
+  const boardMarkup = renderToStaticMarkup(
+    createElement(AchievementsBoard, { results: [], sourceHistories: [halfHistory] }),
+  );
+  assert(boardMarkup.includes("Half marathons"));
+  assert(boardMarkup.includes("12 half marathons completed"));
+  assert(!boardMarkup.includes("example.test"));
   const countriesMarkup = renderToStaticMarkup(
     createElement(AchievementSummary, { summary: threeCountries }),
   );
@@ -165,6 +318,17 @@ try {
   const firstPage = buildPublicAthletePreview(input);
   const secondPage = buildPublicAthletePreview({ ...input, resultPage: 2 });
   assert(firstPage.entries.length < 40, "Exercise actual pagination");
+  const halfInput = { ...input, histories: [halfHistory] };
+  const halfPreview = buildPublicAthletePreview(halfInput);
+  assert.equal(
+    halfPreview.achievements.earned.find(({ id }) => id === "half-marathons").title,
+    "12 half marathons completed",
+  );
+  assert.deepEqual(
+    halfPreview.achievements,
+    buildPublicAthletePreview({ ...halfInput, resultPage: 2 }).achievements,
+  );
+  assert(!JSON.stringify(halfPreview.achievements).includes("example.test"));
   const { publicAnzMedals, ANZ_PROVIDER } = await server.ssrLoadModule("/src/lib/anz/core.ts");
   const { AnzChampionshipMedals } = await server.ssrLoadModule(
     "/src/components/athletes/AnzChampionshipMedals.tsx",
