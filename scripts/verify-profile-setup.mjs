@@ -229,10 +229,10 @@ try {
         .getByLabel("Current club or team (optional)", { exact: true })
         .fill("Synthetic Current AC");
       await page
-        .getByLabel("Previous clubs or teams (optional)", { exact: true })
+        .getByLabel(/^Previous clubs or teams/)
         .fill("Synthetic Former AC\nSynthetic Old AC");
       await page
-        .getByLabel("Your public profile or result links (optional)", { exact: true })
+        .getByLabel(/^Your public profile or result links/)
         .fill("https://www.parkrun.org.uk/parkrunner/9876543/");
       await page.getByRole("checkbox", { name: /I acknowledge/ }).check();
       await page.screenshot({ path: "/tmp/athrecs-setup-mobile.png", fullPage: true });
@@ -245,7 +245,7 @@ try {
       assert(new URL(page.url()).searchParams.get("section") === "potential");
       await page.getByRole("button", { name: "Add clubs or profile links" }).click();
       assert.equal(
-        await page.getByLabel("Previous clubs or teams (optional)", { exact: true }).inputValue(),
+        await page.getByLabel(/^Previous clubs or teams/).inputValue(),
         "Synthetic Former AC\nSynthetic Old AC",
       );
       await page.setViewportSize({ width: 1440, height: 1000 });

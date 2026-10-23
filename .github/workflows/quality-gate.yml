@@ -56,9 +56,6 @@ jobs:
       - name: Verify World Athletics refresh preservation
         run: node scripts/verify-world-athletics-refresh.mjs
 
-      - name: Verify profile setup, former clubs and staff alerts
-        run: node --experimental-strip-types scripts/verify-profile-setup.mjs
-
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
 
@@ -121,6 +118,9 @@ jobs:
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+
+      - name: Verify profile setup, former clubs and staff alerts on mobile and desktop
+        run: node --experimental-strip-types scripts/verify-profile-setup.mjs --browser
 
       - name: Verify consented feature flags in Web Analytics
         run: npm run verify:analytics-flags
