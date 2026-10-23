@@ -12,7 +12,7 @@ export const Route = createFileRoute("/api/result-claim-alerts")({
         const ready = claimAlertReadiness();
         if (!ready.production || !ready.persistent || !ready.emailConfigured)
           return Response.json(
-            { error: "Conflict email delivery is not configured" },
+            { error: "Claim email delivery is not configured" },
             { status: 503, headers },
           );
         const { getSql } = await import("@/lib/db");

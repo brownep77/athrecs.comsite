@@ -50,13 +50,32 @@ export async function queueClaimConflict(sql: Sql, claimId?: number): Promise<vo
   `;
 }
 
+/** Save the notification atomically with a successful claim, before any email attempt. */
+export async function queueCompletedClaim(sql: Sql, claimId: number): Promise<void> {
+  await sql`
+    insert into result_claim_alerts (claim_id, summary, event_kind)
+    select claim.id, athlete.display_name || ' — ' || result.event_name || ', ' ||
+      result.event_date || ', ' || result.distance_code, 'claim_completed'
+    from result_claims claim
+    join athletes athlete on athlete.id = claim.athlete_id
+    join athlete_claimable_results result on result.id = claim.claim_key
+    where claim.id = ${claimId} and claim.status = 'approved'
+      and claim.confirmation_method = 'athlete'
+    on conflict (claim_id) do nothing
+  `;
+}
+
 /** Freeze recipients and content before the first send, so retry keys reuse identical payloads. */
 async function prepareDeliveries(sql: Sql, claimId?: number) {
   const recipients = staffRecipients();
   if (!recipients.length) return;
   await sql.transaction(async (tx) => {
-    const rows = await tx<{ claim_id: number; summary: string }>`
-      select alert.claim_id, alert.summary from result_claim_alerts alert
+    const rows = await tx<{
+      claim_id: number;
+      summary: string;
+      event_kind: "ownership_conflict" | "claim_completed";
+    }>`
+      select alert.claim_id, alert.summary, alert.event_kind from result_claim_alerts alert
       where (${claimId ?? null}::bigint is null or alert.claim_id = ${claimId ?? null})
         and not exists (select 1 from result_claim_alert_deliveries delivery
           where delivery.claim_id = alert.claim_id)
@@ -67,10 +86,20 @@ async function prepareDeliveries(sql: Sql, claimId?: number) {
       for (const to of recipients) {
         const payload: Email = {
           to,
-          subject: `ATHRECS ownership conflict — claim #${row.claim_id}`,
-          heading: "A result has competing profile claims",
-          message: `More than one account has claimed this athlete identity: ${row.summary}. When flagged, the new claim was held for staff review and the existing owner was not replaced. Open claim #${row.claim_id} to compare the accounts, evidence and current decision.`,
-          actionLabel: "Review the conflict",
+          subject:
+            row.event_kind === "claim_completed"
+              ? `ATHRECS result claimed — claim #${row.claim_id}`
+              : `ATHRECS ownership conflict — claim #${row.claim_id}`,
+          heading:
+            row.event_kind === "claim_completed"
+              ? "An athlete has claimed their results"
+              : "A result has competing profile claims",
+          message:
+            row.event_kind === "claim_completed"
+              ? `Claim #${row.claim_id} completed through athlete self-confirmation: ${row.summary}. The athlete profile and its stored results were linked to their account immediately, without waiting for staff approval. This is a notification after completion. Open the staff record to see who claimed it and the current status. Claiming does not independently verify the performance or identity.`
+              : `More than one account has claimed this athlete identity: ${row.summary}. When flagged, the new claim was held for staff review and the existing owner was not replaced. Open claim #${row.claim_id} to compare the accounts, evidence and current decision.`,
+          actionLabel:
+            row.event_kind === "claim_completed" ? "View completed claim" : "Review the conflict",
           actionUrl: `https://${staffHost}/admin/result-claims?claimId=${row.claim_id}`,
         };
         await tx`insert into result_claim_alert_deliveries (claim_id, recipient, email_payload)
@@ -81,7 +110,7 @@ async function prepareDeliveries(sql: Sql, claimId?: number) {
   });
 }
 
-export async function deliverClaimConflictAlerts(sql: Sql, claimId?: number) {
+export async function deliverClaimAlerts(sql: Sql, claimId?: number) {
   const ready = claimAlertReadiness();
   if (!ready.production || !ready.persistent || !ready.emailConfigured || !ready.recipientCount)
     return { sent: 0, failed: 0, paused: true };
@@ -145,6 +174,9 @@ export async function deliverClaimConflictAlerts(sql: Sql, claimId?: number) {
   }
   return { sent, failed, paused: false };
 }
+
+// Compatibility for existing workers and integrations; this drains both event types.
+export const deliverClaimConflictAlerts = deliverClaimAlerts;
 
 export async function claimAlertSummary(sql: Sql) {
   const rows = await sql<{

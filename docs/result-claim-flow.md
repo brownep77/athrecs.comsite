@@ -4,7 +4,7 @@
 
 1. Sign in, verify the email address and open a private result match.
 2. Review every associated result in the account dialog or direct claim/invitation page. Remove and restore individual results, add missing results, then confirm the selected results together. Evidence links are optional.
-3. Straightforward claims complete immediately: the existing athlete record and its stored results are linked once. Claiming each race separately is unnecessary.
+3. Straightforward claims complete immediately: the existing athlete record and its stored results are linked once. Claiming each race separately is unnecessary. Staff receive a notification afterwards, without an approval step for the athlete.
 4. The completion page and receipt say **Claim complete**. The audit records **Athlete self-confirmation**, with a completion timestamp. This does not mean staff, photo or ID verification.
 5. Conflicts, previous staff decisions, revoked links, name or known date-of-birth discrepancies, protected public figures and child/guardian claims remain pending with a specific reason. Staff record the evidence resolving that issue before approval.
 
@@ -28,7 +28,9 @@ Every ownership change locks the athlete before the claim. Completion and the ac
 
 Completing one profile claim also completes that account's eligible pending claims on the same athlete. Staff approval completes same-account pending/needs-info siblings with a linked review note; only other claimants are treated as competitors. Revocation closes all approved sibling claims for the removed owner and remains binding across resubmission, withdrawal and different results. Review markers survive deletion of a staff account.
 
-Batch completion freezes the final ownership status and selection counts into one durable receipt in the same transaction. Straightforward completions send that completion receipt without a second per-result receipt or staff-review email. Replays reuse the same audit and provider idempotency key. Missing result proposals remain unverified in the staff queue. Held claims retain staff review notifications and the durable competing-claim alert outbox. See [collected results and claims](collected-results-and-claims.md).
+Batch completion freezes the final ownership status and selection counts into one durable receipt in the same transaction. Straightforward completions send that completion receipt without a second per-result receipt or staff-review email. They also queue one `claim_completed` staff notification in the ownership transaction. Delivery starts after commit and retries through the existing ten-minute worker. Delivery failure never makes a completed claim pending. Replays and sibling result claims reuse the same notification; already-owned profiles do not create fresh alerts. There is no historical completion backfill.
+
+The staff email identifies the athlete and anchor result and links to the exact private claim record, where the claimant and current ownership status can be inspected. It says the claim completed without waiting for approval, rather than asking staff to approve it. Recipients use `ATHRECS_CLAIMS_EMAILS`, then `ATHRECS_STAFF_EMAILS`, then the same two owner inboxes used for signup alerts. Frozen messages and provider keys, reservation/backoff and the 23-hour ambiguous-delivery hold apply to both completion and conflict alerts. Staff can inspect sent/waiting statuses and retry due messages in Result claims. Missing result proposals remain unverified in the staff queue. Held claims retain staff review notifications and the durable competing-claim alert outbox. See [collected results and claims](collected-results-and-claims.md).
 
 ## Rollout and checks
 

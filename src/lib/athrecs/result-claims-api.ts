@@ -23,7 +23,12 @@ import {
 import { resultIdentityEvidence, scorePotentialResultNameMatch } from "./result-match";
 import { sourceIdentityFromUrl } from "./profile-connections";
 import { ensureAthrecsSeeded } from "./seed.server";
-import { queueClaimConflict, deliverClaimConflictAlerts } from "./result-claim-alerts.server";
+import {
+  queueClaimConflict,
+  queueCompletedClaim,
+  deliverClaimAlerts,
+  deliverClaimConflictAlerts,
+} from "./result-claim-alerts.server";
 
 export type ResultClaimStatus = "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
 export type ClaimConfirmationMethod = "unrecorded" | "athlete" | "staff";
@@ -921,6 +926,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         await tx`update athlete_claim_invitations set claim_id=${claimId},user_id=coalesce(user_id,${context.userId}) where id=${invitation.id}`;
       const isConflict = Boolean(owner) || otherClaimCount > 0;
       if (isConflict) await queueClaimConflict(tx, claimId);
+      if (nextStatus === "approved") await queueCompletedClaim(tx, claimId);
       return {
         status: nextStatus,
         summary: summary ? { ...summary, ...summaryEmail } : null,
@@ -960,6 +966,12 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       await notifyResultClaimSubmitted(outcome.email, { notifyStaff: !outcome.isConflict });
     }
     if (outcome.status === "approved" && !outcome.alreadyOwned) {
+      // Ownership has committed. A mail outage must not turn completion into a pending claim.
+      try {
+        if (outcome.claimId !== null) await deliverClaimAlerts(sql, outcome.claimId);
+      } catch {
+        console.error("[claim-alerts] completed-claim notification deferred to the worker");
+      }
       await syncAthleteAccountAfterClaim(outcome.claimantUserId);
       if (outcome.email && !outcome.summary)
         await notifyResultClaimSubmitted(outcome.email, {

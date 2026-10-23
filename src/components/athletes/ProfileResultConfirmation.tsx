@@ -161,8 +161,9 @@ function ProfileResultConfirmationBody({
         <p className="mt-2 text-sm text-muted">
           Registration creates your account. You must also claim your athlete profile to manage its
           results. Review the list, remove anything that is not yours and add any missing results
-          before confirming. Straightforward, uncontested matches link immediately; staff check
-          conflicts, discrepancies, protected profiles and child or guardian claims.
+          before confirming. Straightforward, uncontested matches link immediately without waiting
+          for staff approval. We notify the team afterwards. Staff check conflicts, discrepancies,
+          protected profiles and child or guardian claims.
         </p>
         {claim?.status === "approved" ? (
           <p role="status" className="mt-2 font-semibold text-emerald-800">
