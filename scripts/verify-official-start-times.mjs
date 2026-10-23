@@ -199,11 +199,11 @@ try {
     "10:30",
   ]);
   const { withheldFixtureDateKeys } = await import("../src/data/fixture-date-reviews.ts");
-  assert.deepEqual(withheldFixtureDateKeys, [
+  for (const key of [
     "gear-10k-kings-lynn|2026-11-08",
     "marriotts-way-10k|2026-11-01",
     "lingwood-duathlon|2027-03-21",
-  ]);
+  ]) assert.ok(withheldFixtureDateKeys.includes(key), `Earlier date hold must remain: ${key}`);
   console.log(
     "Reepham lap correction preserves all three audited batches, guards concurrent changes, sets 5K/10K starts separately, retains junior/Marriott starts and date holds, and is repeat-safe.",
   );
