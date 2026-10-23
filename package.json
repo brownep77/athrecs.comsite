@@ -41,7 +41,7 @@
     "verify:club-registration-flow": "node scripts/verify-club-registration-flow.mjs",
     "verify:club-registration-browser": "node scripts/verify-club-registration-browser.mjs",
     "verify:race-groups": "node --experimental-strip-types scripts/verify-race-groups.mjs",
-    "verify:sources": "node scripts/verify-source-registry.mjs",
+    "verify:sources": "node scripts/verify-source-registry.mjs && node --experimental-strip-types scripts/verify-organisation-sources.mjs",
     "verify:bulk-source-run": "node --experimental-strip-types scripts/verify-bulk-source-run.mjs",
     "verify:workbook-overrides": "node scripts/verify-workbook-event-overrides.mjs",
     "verify:scraper-workbook-import": "node scripts/verify-scraper-workbook-import.mjs",

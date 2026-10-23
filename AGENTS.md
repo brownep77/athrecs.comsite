@@ -1,5 +1,13 @@
 # Athlete result evidence
 
+- Owner instruction, 23 October 2026: add federations and organisations to the
+  Sources list for fixture, result and athlete-profile research, and reconcile
+  earlier directory entries too. Preserve source capability evidence and original
+  check dates. Membership-directory links remain research references until actual
+  data pages are inspected. Registration alone never enables automated collection.
+  Run `npm run verify:sources` after directory or source changes; the organisation
+  source check identifies missing registrations.
+
 ## Fixture dates and start times
 
 - Owner instruction, 21 October 2026: resolve conflicting fixture start times
