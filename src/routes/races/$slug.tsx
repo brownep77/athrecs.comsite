@@ -1,4 +1,5 @@
 import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
+import { checkedFixtureEventStart } from "@/data/fixture-details";
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { ResultDisqualification } from "@/components/athletes/ResultDisqualification";
 import { isDisqualified } from "@/lib/athrecs/result-details";
@@ -175,7 +176,11 @@ export const Route = createFileRoute("/races/$slug")({
               region: event.county,
               country: event.country,
               startDate: next?.event_date,
-              startTime: next?.start_time,
+              startTime: checkedFixtureEventStart(
+                event.slug,
+                next?.event_date,
+                next?.start_time ?? null,
+              ),
               endDate: next?.end_date,
               endTime: next?.end_time,
               sport: event.sport,
@@ -294,7 +299,12 @@ export function RacePageContent({
     county: event.county,
     date: next?.event_date,
   };
-  const nextStart = next?.start_label ?? formatStartTime(next?.start_time, place);
+  const nextStart =
+    next?.start_label ??
+    formatStartTime(
+      checkedFixtureEventStart(event.slug, next?.event_date, next?.start_time ?? null),
+      place,
+    );
   const zone = timeZoneForPlace({
     country: event.country,
     county: event.county,

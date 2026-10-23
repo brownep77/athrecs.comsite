@@ -46,7 +46,9 @@ preserved. New confirmation notes are appended to the history; concise current
 notes are displayed on the public schedule.
 
 Both current fixture overrides and the relevant seed values use the confirmed
-starts. Stored edition starts feed event-page structured data. Listing helpers
+starts. The combined event header and structured data use the first confirmed
+race start, 08:30, instead of selecting the half marathon merely because it is
+listed first. Both distance starts remain in the public schedule. Listing helpers
 use the same edition-specific override. No value is copied into another year
 or into Marriott’s Way 10K. Historical holding imports are not published here. In particular, the ready
 31 August batch `athrecs-holding:delta:35cf58569f6f93479e6ce60f`

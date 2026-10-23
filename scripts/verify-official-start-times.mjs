@@ -8,7 +8,8 @@ import { NORFOLK_CLARIFICATION_DETAILS } from "./lib/norfolk-start-clarification
 import { REEPHAM_LAP_STARTS_REVIEW } from "./lib/reepham-lap-starts-review.mjs";
 import { MARRIOTTS_CONFIRMATION_REVIEW } from "./lib/marriotts-organiser-confirmation-review.mjs";
 import marriottsConfirmation from "../src/data/marriotts-organiser-confirmation-2026-10-23.json" with { type: "json" };
-const { FIXTURE_DETAILS, checkedFixtureStart } = await import("../src/data/fixture-details.ts");
+const { FIXTURE_DETAILS, checkedFixtureStart, checkedFixtureEventStart } =
+  await import("../src/data/fixture-details.ts");
 const publishing = await import("../src/lib/athrecs/catalogue-publishing.server.ts");
 
 // Rehearse the exact four public fixture corrections in disposable Postgres.
@@ -277,6 +278,18 @@ try {
     [confirmed.revisionId],
   );
   assert.equal(confirmationAudit.length, 2);
+  assert.equal(checkedFixtureEventStart("marriotts-way-races", "2027-02-21", "10:00"), "08:30");
+  assert.equal(checkedFixtureEventStart("marriotts-way-races", "2028-02-21", "10:00"), "10:00");
+  assert.equal(checkedFixtureEventStart("reepham-cross-country", "2027-01-31", "10:15"), "10:15");
+  assert.equal(
+    sportsEventJsonLd({
+      name: "Marriott’s Way Marathon & Half",
+      slug: "marriotts-way-races",
+      startDate: "2027-02-21",
+      startTime: checkedFixtureEventStart("marriotts-way-races", "2027-02-21", "10:00"),
+    }).startDate,
+    "2027-02-21T08:30",
+  );
   assert.deepEqual(confirmationAudit.map((change) => change.before_json.record.start_time).sort(), [
     "09:00",
     "10:30",

@@ -14,6 +14,7 @@ export type FixtureDetail = {
   timeZone: string;
   sourceUrl: string;
   checkedAt: string;
+  eventStartTime?: string;
   starts: Record<
     string,
     { time: string | null; note?: string; publicNote?: string; sourceUrl?: string; label?: string }
@@ -291,6 +292,15 @@ export function isReviewedFixturePlaceholder(slug: string, date: string, distanc
     (Object.hasOwn(countyExpansion.details, `${slug}|${date}`) ||
       Object.hasOwn(countyExpansionMore.details, `${slug}|${date}`))
   );
+}
+
+/** Explicit start of a confirmed multi-distance programme; all other events keep their fallback. */
+export function checkedFixtureEventStart(
+  slug: string,
+  date: string | undefined,
+  fallback: string | null,
+) {
+  return (date && FIXTURE_DETAILS[`${slug}|${date}`]?.eventStartTime) || fallback;
 }
 
 /** Never carry checked starts across dates; an explicit conflict also hides stored times. */
