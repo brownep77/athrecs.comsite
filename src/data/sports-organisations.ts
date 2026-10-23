@@ -655,16 +655,33 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["https://www.ausport.gov.au/australian_sports_directory", "https://www.swimming.org.au/"],
     ["world-aquatics"],
   ),
-  federation(
-    "austriathlon",
-    "AusTriathlon",
-    "Australia",
-    multisport,
+  record({
+  "slug": "austriathlon",
+  "name": "AusTriathlon",
+  "country": "Australia",
+  "jurisdiction": "Australia",
+  "territories": [
+    "Australia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlon.org.au/",
+  "summary": "Australia’s national triathlon organisation, covering triathlon and multisport.",
+  "sources": [
+    "https://www.ausport.gov.au/australian_sports_directory",
     "https://www.triathlon.org.au/",
-    "Australia’s national triathlon organisation, covering triathlon and multisport.",
-    ["https://www.ausport.gov.au/australian_sports_directory", "https://www.triathlon.org.au/"],
-    ["world-triathlon"],
-  ),
+    "https://triathlon.org/members/triathlon-australia",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [],
+  "detail": "World Triathlon lists this body as AusTriathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "athletics-new-zealand",
     "Athletics New Zealand",
@@ -695,16 +712,32 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["https://www.swimmingnz.org/"],
     ["world-aquatics"],
   ),
-  federation(
-    "triathlon-new-zealand",
-    "Triathlon New Zealand",
-    "New Zealand",
-    multisport,
+  record({
+  "slug": "triathlon-new-zealand",
+  "name": "Triathlon New Zealand",
+  "country": "New Zealand",
+  "jurisdiction": "New Zealand",
+  "territories": [
+    "New Zealand"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlon.kiwi/",
+  "summary": "New Zealand’s national triathlon and multisport organisation.",
+  "sources": [
     "https://www.triathlon.kiwi/",
-    "New Zealand’s national triathlon and multisport organisation.",
-    ["https://www.triathlon.kiwi/"],
-    ["world-triathlon"],
-  ),
+    "https://triathlon.org/members/triathlon-new-zealand",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [],
+  "detail": "World Triathlon lists this body as Triathlon New Zealand and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "athletics-south-africa",
     "Athletics South Africa",
@@ -10036,6 +10069,270 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   "sources": [
     "https://triathlon.org/members/triathlon-grenada",
     "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "american-samoa-triathlon",
+  "name": "American Samoa Triathlon Association",
+  "type": "national",
+  "country": "American Samoa",
+  "jurisdiction": "American Samoa",
+  "territories": [
+    "American Samoa"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for American Samoa, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/american-samoa-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/american-samoa-triathlon-association",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cook-islands-triathlon",
+  "name": "Cook Islands Triathlon Association",
+  "type": "national",
+  "country": "Cook Islands",
+  "jurisdiction": "Cook Islands",
+  "territories": [
+    "Cook Islands"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Cook Islands, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/cook-islands-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/cook-islands-triathlon-federation",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "fiji-triathlon",
+  "name": "Fiji Triathlon Association",
+  "type": "national",
+  "country": "Fiji",
+  "jurisdiction": "Fiji",
+  "territories": [
+    "Fiji"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Fiji, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/fiji-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/fiji-triathlon-association",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "guam-triathlon",
+  "name": "Guam Triathlon Federation",
+  "type": "national",
+  "country": "Guam",
+  "jurisdiction": "Guam",
+  "territories": [
+    "Guam"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Guam, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/guam-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/guam-triathlon-federation",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "northern-mariana-islands-triathlon",
+  "name": "Triathlon Association of the CMNI",
+  "type": "national",
+  "country": "Northern Mariana Islands",
+  "jurisdiction": "Northern Mariana Islands",
+  "territories": [
+    "Northern Mariana Islands"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Northern Mariana Islands, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied.",
+  "website": "https://triathlon.org/members/triathlon-association-of-the-cmni",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/triathlon-association-of-the-cmni",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "palau-triathlon",
+  "name": "Belau Triathlon Federation",
+  "type": "national",
+  "country": "Palau",
+  "jurisdiction": "Palau",
+  "territories": [
+    "Palau"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Palau, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/palau-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/palau-triathlon-federation",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "papua-new-guinea-triathlon",
+  "name": "PNG Triathlon Association",
+  "type": "national",
+  "country": "Papua New Guinea",
+  "jurisdiction": "Papua New Guinea",
+  "territories": [
+    "Papua New Guinea"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Papua New Guinea, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/png-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/png-triathlon-association",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "samoa-triathlon",
+  "name": "Tri-Sports Samoa Association",
+  "type": "national",
+  "country": "Samoa",
+  "jurisdiction": "Samoa",
+  "territories": [
+    "Samoa"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Samoa, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/samoa-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/samoa-triathlon-federation",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "solomon-islands-triathlon",
+  "name": "Triathlon Solomon Islands",
+  "type": "national",
+  "country": "Solomon Islands",
+  "jurisdiction": "Solomon Islands",
+  "territories": [
+    "Solomon Islands"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Solomon Islands, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/triathlon-solomon-islands",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/triathlon-solomon-islands",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tahiti-triathlon",
+  "name": "Fédération Tahitienne de Triathlon",
+  "type": "national",
+  "country": "Tahiti",
+  "jurisdiction": "Tahiti",
+  "territories": [
+    "Tahiti"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Tahiti, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/tahiti-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/tahiti-triathlon-association",
+    "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tonga-triathlon",
+  "name": "Tonga - Friendly Islands Triathlon Association",
+  "type": "national",
+  "country": "Tonga",
+  "jurisdiction": "Tonga",
+  "territories": [
+    "Tonga"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Tonga, listed by World Triathlon and Oceania Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/friendly-islands-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/friendly-islands-triathlon-association",
+    "https://oceania.triathlon.org/national-federations"
   ],
   "related": [
     "world-triathlon"
