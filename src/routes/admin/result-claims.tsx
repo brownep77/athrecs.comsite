@@ -21,6 +21,7 @@ import {
 } from "@/lib/athrecs/result-claims-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ClaimAlertStatus } from "@/components/staff/ClaimAlertStatus";
+import { ArchiveClaimRequests } from "@/components/staff/ArchiveClaimRequests";
 
 export const Route = createFileRoute("/admin/result-claims")({
   validateSearch: (search: Record<string, unknown>): { claimId?: number; claimant?: string } => {
@@ -143,6 +144,7 @@ function AdminResultClaimsPage() {
           </Link>
         </p>
       ) : null}
+      <ArchiveClaimRequests />
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="space-y-2">
           <p className="text-xs font-medium uppercase tracking-wider text-subtle">

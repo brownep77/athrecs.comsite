@@ -897,6 +897,7 @@ try {
   const completionSend = sends.at(-1);
   assert.equal(sends.length, beforeCompletionSend + 1);
   assert.match(completionSend.email.subject, /result claimed/);
+  assert.equal(completionSend.email.to, "info@athrecs.com");
   assert.match(completionSend.email.message, /without waiting for staff approval/);
   assert.match(completionSend.email.actionUrl, new RegExp(`claimId=${self.claimId}$`));
   assert.doesNotMatch(completionSend.email.heading, /needs review/);

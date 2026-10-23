@@ -113,7 +113,11 @@ export async function requestArchiveMatch(
 export async function requestArchiveMatches(
   sql: Sql,
   userId: string,
-  input: { entries: { entryId: number; revision: number }[]; note: string },
+  input: {
+    entries: { entryId: number; revision: number }[];
+    note: string;
+    declarationAccepted?: boolean;
+  },
 ) {
   if (!input.entries.length || input.entries.length > 30)
     throw new Error("Select between 1 and 30 results per review request");
@@ -121,23 +125,35 @@ export async function requestArchiveMatches(
     throw new Error("Each result can only be selected once");
   if (input.note.trim().length < 12 || input.note.length > 2000)
     throw new Error("Add a short supporting note for the selected results");
-  return sql.transaction(async (tx) => {
+  const result = await sql.transaction(async (tx) => {
     const [user] = await tx<{
       verified: boolean;
     }>`select "emailVerified" as verified from "user" where id=${userId} for update`;
     if (!user?.verified) throw new Error("Verify your email before requesting an identity review");
     // Keep the source revisions stable until the complete selection is saved.
+    await tx`select d.id from result_archive_datasets d where d.id in
+      (select dataset_id from result_archive_entries where id=any(${input.entries.map((e) => e.entryId)}::bigint[])) order by d.id for update`;
     await tx`select id from result_archive_entries
       where id=any(${input.entries.map((entry) => entry.entryId)}::integer[])
-      order by id for share`;
+      order by id for update`;
     const matches = await memberArchiveMatches(
       tx,
       userId,
       undefined,
       input.entries.map((entry) => entry.entryId),
     );
+    const linked = await tx<{
+      id: number;
+      revision: number;
+      requested: boolean;
+    }>`select a.id,a.revision,true as requested from result_archive_entries a
+      join result_archive_match_requests q on q.entry_id=a.id and q.user_id=${userId}
+      join results r on r.id=a.canonical_result_id join athlete_account_links l on l.athlete_id=r.athlete_id and l.user_id=${userId} and l.status='active'
+      where a.id=any(${input.entries.map((e) => e.entryId)}::bigint[])`;
     const selected = input.entries.map((entry) => {
-      const match = matches.find((m) => m.id === entry.entryId && m.revision === entry.revision);
+      const match = [...matches, ...linked].find(
+        (m) => m.id === entry.entryId && m.revision === entry.revision,
+      );
       if (!match)
         throw new Error(
           "A suggestion has changed or is no longer available to your account. Reload and review your selection.",
@@ -154,8 +170,37 @@ export async function requestArchiveMatches(
       from jsonb_to_recordset(${JSON.stringify(input.entries.map((entry) => ({ entry_id: entry.entryId, revision: entry.revision })))}::jsonb)
         as selection(entry_id integer,revision integer)
       on conflict do nothing returning entry_id`;
-    return { requested: selected.length, created: saved.length };
+    if (input.declarationAccepted) {
+      const { completeOwnArchiveRequests } = await import("./claim.server");
+      return {
+        requested: selected.length,
+        created: saved.length,
+        ...(await completeOwnArchiveRequests(
+          tx,
+          userId,
+          input.entries.map((e) => e.entryId),
+        )),
+      };
+    }
+    return {
+      requested: selected.length,
+      created: saved.length,
+      claimed: 0,
+      added: 0,
+      duplicates: 0,
+      held: [],
+      claimIds: [] as number[],
+    };
   });
+  if (result.claimIds.length) {
+    try {
+      const { deliverClaimAlerts } = await import("../athrecs/result-claim-alerts.server");
+      for (const claimId of result.claimIds) await deliverClaimAlerts(sql, claimId);
+    } catch {
+      console.error("[claim-alerts] archive completion emails remain queued");
+    }
+  }
+  return result;
 }
 export async function staffArchiveRequests(sql: Sql) {
   return sql<{
@@ -166,8 +211,9 @@ export async function staffArchiveRequests(sql: Sql) {
     event: string;
     created: string;
     athleteIds: number[];
+    userId: string;
   }>`
-    select r.entry_id as "entryId",r.revision,u.name,r.note,e.name as event,r.created_at::text as created,
+    select r.entry_id as "entryId",r.revision,u.name,r.user_id as "userId",r.note,e.name as event,r.created_at::text as created,
       array(select l.athlete_id from athlete_account_links l where l.user_id=r.user_id and l.status='active') as "athleteIds"
     from result_archive_match_requests r join "user" u on u.id=r.user_id join result_archive_entries a on a.id=r.entry_id
     join result_archive_datasets d on d.id=a.dataset_id join editions ed on ed.id=d.edition_id join events e on e.id=ed.event_id

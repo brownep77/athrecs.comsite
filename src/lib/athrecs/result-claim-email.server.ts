@@ -41,7 +41,7 @@ export function staffRecipients(): string[] {
   const raw =
     process.env.ATHRECS_CLAIMS_EMAILS?.trim() ||
     process.env.ATHRECS_STAFF_EMAILS?.trim() ||
-    "paul@athrecs.com,paultwbrowne@gmail.com";
+    "info@athrecs.com";
   return [
     ...new Set(
       raw

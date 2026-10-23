@@ -33,7 +33,7 @@ export function ClaimAlertStatus() {
     >
       <h2 className="font-semibold">Claim email alerts</h2>
       <p className="text-sm text-muted">
-        Straightforward claims complete immediately. Staff receive a notification afterwards;
+        Straightforward claims complete immediately. Notifications go to info@athrecs.com afterwards;
         ownership conflicts remain flagged for attention.
       </p>
       <p className="text-sm text-muted">

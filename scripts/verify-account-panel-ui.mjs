@@ -165,9 +165,10 @@ try {
       })
       .check();
     await page
-      .getByLabel("What helps us confirm these results are yours?")
+      .getByLabel("Optional note about these results")
       .fill("Synthetic bib and club details for this test.");
-    await page.getByRole("button", { name: "Request review of 1 result", exact: true }).click();
+    await page.getByLabel("I confirm these selected results belong to me.").check();
+    await page.getByRole("button", { name: "Claim 1 selected result", exact: true }).click();
     // This complete page uses temporary PGlite, so the production persistence guard must hold.
     // The archive's separate browser/SQL suite covers successful persistent submissions.
     await page

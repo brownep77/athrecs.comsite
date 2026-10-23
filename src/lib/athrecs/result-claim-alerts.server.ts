@@ -11,7 +11,7 @@ export function claimAlertReadiness() {
     production: process.env.VERCEL_ENV === "production" && !IS_RUNRECS_SITE,
     persistent: dbSource === "neon",
     emailConfigured: authEmailConfigured(),
-    recipientCount: staffRecipients().length,
+    recipientCount: new Set([...staffRecipients(), "info@athrecs.com"]).size,
     retriesConfigured: Boolean(process.env.CRON_SECRET?.trim()),
   };
 }
@@ -60,15 +60,12 @@ export async function queueCompletedClaim(sql: Sql, claimId: number): Promise<vo
     join athletes athlete on athlete.id = claim.athlete_id
     join athlete_claimable_results result on result.id = claim.claim_key
     where claim.id = ${claimId} and claim.status = 'approved'
-      and claim.confirmation_method = 'athlete'
     on conflict (claim_id) do nothing
   `;
 }
 
 /** Freeze recipients and content before the first send, so retry keys reuse identical payloads. */
 async function prepareDeliveries(sql: Sql, claimId?: number) {
-  const recipients = staffRecipients();
-  if (!recipients.length) return;
   await sql.transaction(async (tx) => {
     const rows = await tx<{
       claim_id: number;
@@ -82,6 +79,8 @@ async function prepareDeliveries(sql: Sql, claimId?: number) {
       order by alert.created_at limit 10 for update skip locked
     `;
     for (const row of rows) {
+      const recipients =
+        row.event_kind === "claim_completed" ? ["info@athrecs.com"] : staffRecipients();
       const staffHost = process.env.ATHRECS_STAFF_HOST?.trim() || "update.athrecs.com";
       for (const to of recipients) {
         const payload: Email = {
