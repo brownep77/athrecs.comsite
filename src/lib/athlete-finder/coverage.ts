@@ -63,6 +63,13 @@ export type SourceCoverageStores = {
   extraction: boolean;
 };
 
+export type SourceCoverageIssue = {
+  store: keyof SourceCoverageStores;
+  reason: "missing" | "timed_out" | "locked" | "unavailable" | "invalid_data";
+  /** A safe explanation; never includes SQL, payloads, or database error text. */
+  message: string;
+};
+
 export type SourceCoverageResponse = {
   rows: SourceCoverageRow[];
   total: number;
@@ -79,5 +86,6 @@ export type SourceCoverageResponse = {
     inventory: SourceInventoryCounts;
   };
   stores: SourceCoverageStores;
+  issues: SourceCoverageIssue[];
   notes: string[];
 };

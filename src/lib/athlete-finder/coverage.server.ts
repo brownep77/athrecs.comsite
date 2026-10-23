@@ -4,6 +4,7 @@ import type { Sql } from "../db";
 import { registrySourceHosts, sourceUrlHost } from "./core";
 import type {
   SourceCoverageInput,
+  SourceCoverageIssue,
   SourceCoverageResponse,
   SourceCoverageRow,
   SourceCoverageStores,
@@ -44,13 +45,61 @@ const inventoryKeys: (keyof SourceInventoryCounts)[] = [
   "failedResultItems",
   "heldCapturePages",
 ];
+const storeCounts: Record<keyof SourceCoverageStores, CountKey[]> = {
+  canonical: ["canonicalResults"],
+  archive: ["archiveDatasets", "archiveRows"],
+  captures: ["capturePages", "captureRows", "heldCapturePages"],
+  histories: ["historyProfiles", "historyRows"],
+  resultLinks: ["savedResultLinks"],
+  inventorySources: ["sources", "pendingLinks"],
+  inventoryRecords: ["records"],
+  extraction: [
+    "knownResultItems",
+    "extractedResultItems",
+    "partialResultItems",
+    "pendingResultItems",
+    "heldResultItems",
+    "failedResultItems",
+  ],
+};
+const storeLabels: Record<keyof SourceCoverageStores, string> = {
+  canonical: "Profile results",
+  archive: "Central archive rows",
+  captures: "Saved capture rows",
+  histories: "History performances",
+  resultLinks: "Saved result links",
+  inventorySources: "Source inventory",
+  inventoryRecords: "Source observations",
+  extraction: "Extraction progress",
+};
+const issueMessages: Record<SourceCoverageIssue["reason"], string> = {
+  missing: "This collection is not available in this environment.",
+  timed_out: "Counting this collection reached the time limit. Refresh to try again.",
+  locked: "This collection was busy. Refresh to try again.",
+  unavailable: "This collection could not be read. Refresh to try again.",
+  invalid_data: "This collection contains invalid count data and could not be counted reliably.",
+};
 
-// These expressions only contain fixed column names from this module. Source
-// names, filters, and registry data never become SQL fragments.
-const urlDomain = (column: string) =>
-  `regexp_replace(regexp_replace(lower(substring(trim(${column}) from '(?i)^https?://([^/?#:@]+)(?::[0-9]+)?(?:[/?#]|$)')), '[.]$', ''), '^www[.]', '')`;
+function validCount(value: unknown): boolean {
+  if (
+    typeof value !== "number" &&
+    typeof value !== "bigint" &&
+    (typeof value !== "string" || !/^\d+$/.test(value))
+  )
+    return false;
+  return Number.isSafeInteger(Number(value)) && Number(value) >= 0;
+}
+
+// Group authorities in SQL, then normalize the small result set with the same
+// URL parser as the registry. This handles IDNs, encoded hosts and invalid ports
+// without reading every stored URL into the application. Credentials are excluded.
+// These expressions only contain fixed column names from this module.
+const urlAuthority = (column: string) =>
+  `substring(trim(${column}) from '(?i)^https?://([^/?#@]+)(?:[/?#]|$)')`;
 const inventoryDomain = (host: string, url: string) =>
-  `coalesce(nullif(regexp_replace(regexp_replace(lower(trim(${host})), '[.]$', ''), '^www[.]', ''), ''), ${urlDomain(url)})`;
+  `coalesce(nullif(trim(${host}), ''), ${urlAuthority(url)})`;
+const normalizedDomain = (authority: string | null) =>
+  authority ? sourceUrlHost(authority.includes("://") ? authority : `https://${authority}`) : null;
 
 function emptyCounts(stores: SourceCoverageStores): Counts {
   return {
@@ -137,18 +186,59 @@ export async function athleteFinderSourceCoverage(
     to_regclass('public.event_register_sources') IS NOT NULL AS "inventorySources",
     to_regclass('public.event_register_source_records') IS NOT NULL AS "inventoryRecords",
     to_regclass('public.event_register_extraction_items') IS NOT NULL AS extraction`;
-  const stores: SourceCoverageStores = availability;
-  async function readStore<T>(key: keyof SourceCoverageStores, query: string): Promise<T[]> {
+  const stores: SourceCoverageStores = { ...availability };
+  const issues: SourceCoverageIssue[] = [];
+  const unavailable = (
+    store: keyof SourceCoverageStores,
+    reason: SourceCoverageIssue["reason"],
+  ) => {
+    stores[store] = false;
+    issues.push({ store, reason, message: `${storeLabels[store]}: ${issueMessages[reason]}` });
+  };
+  for (const key of Object.keys(stores) as (keyof SourceCoverageStores)[]) {
+    if (!stores[key]) unavailable(key, "missing");
+  }
+  async function readStore<T extends Group>(
+    key: keyof SourceCoverageStores,
+    query: string,
+  ): Promise<T[]> {
     if (!stores[key]) return [];
+    const started = Date.now();
     try {
-      return await sql.transaction(async (tx) => {
+      const rows = await sql.transaction(async (tx) => {
         await tx.query("set local statement_timeout = '15000ms'");
         await tx.query("set local lock_timeout = '1000ms'");
         return tx.query<T>(query);
       });
-    } catch {
+      for (const countKey of storeCounts[key]) {
+        let total = 0;
+        for (const row of rows) {
+          const value = row[countKey];
+          if (!validCount(value) || !Number.isSafeInteger((total += Number(value)))) {
+            unavailable(key, "invalid_data");
+            return [];
+          }
+        }
+      }
+      return rows;
+    } catch (error) {
       // Counts for a missing, busy or failed store are unknown, never zero.
-      stores[key] = false;
+      const code = (error as { code?: unknown } | null)?.code;
+      const reason =
+        code === "57014"
+          ? "timed_out"
+          : code === "55P03"
+            ? "locked"
+            : code === "42P01"
+              ? "missing"
+              : "unavailable";
+      unavailable(key, reason);
+      console.warn("Athlete source coverage collection unavailable", {
+        store: key,
+        reason,
+        elapsedMs: Date.now() - started,
+        ...(typeof code === "string" && /^[0-9A-Z]{5}$/.test(code) ? { sqlState: code } : {}),
+      });
       return [];
     }
   }
@@ -156,7 +246,7 @@ export async function athleteFinderSourceCoverage(
     await Promise.all([
       readStore<Group>(
         "canonical",
-        `SELECT ${urlDomain("source_url")} AS domain,
+        `SELECT ${urlAuthority("source_url")} AS domain,
           count(*)::bigint AS "canonicalResults" FROM results GROUP BY 1`,
       ),
       // Count entries before joining so the domain regex runs once per dataset.
@@ -165,7 +255,7 @@ export async function athleteFinderSourceCoverage(
         `WITH entry_counts AS MATERIALIZED (
           SELECT dataset_id,count(*)::bigint AS row_count
           FROM result_archive_entries GROUP BY dataset_id
-        ) SELECT ${urlDomain("d.source_url")} AS domain,
+        ) SELECT ${urlAuthority("d.source_url")} AS domain,
           count(*)::bigint AS "archiveDatasets",
           coalesce(sum(e.row_count),0)::bigint AS "archiveRows"
         FROM result_archive_datasets d LEFT JOIN entry_counts e ON e.dataset_id=d.id
@@ -186,7 +276,7 @@ export async function athleteFinderSourceCoverage(
               WHERE body.id=l.id) AS publication
           FROM latest l JOIN result_archive_capture_approvals a ON a.id=l.approval_id
           WHERE a.scope='staff_only' AND a.revoked_at IS NULL
-        ) SELECT ${urlDomain("c.source_url")} AS domain,
+        ) SELECT ${urlAuthority("c.source_url")} AS domain,
           count(*) FILTER (WHERE c.source_check IN ('compared','empty'))::bigint AS "capturePages",
           coalesce(sum(c.row_count) FILTER (WHERE c.source_check IN ('compared','empty')),0)::bigint AS "captureRows",
           count(*) FILTER (WHERE c.source_check NOT IN ('compared','empty'))::bigint AS "heldCapturePages"
@@ -206,7 +296,7 @@ export async function athleteFinderSourceCoverage(
             coalesce(sum(row_count),0)::bigint AS row_count,
             count(*) FILTER (WHERE row_count IS NULL)::bigint AS invalid_histories
           FROM sizes GROUP BY source_url
-        ) SELECT ${urlDomain("source_url")} AS domain,
+        ) SELECT ${urlAuthority("source_url")} AS domain,
           sum(profiles)::bigint AS "historyProfiles",
           sum(row_count)::bigint AS "historyRows",
           sum(invalid_histories)::bigint AS invalid_histories
@@ -214,7 +304,7 @@ export async function athleteFinderSourceCoverage(
       ),
       readStore<Group>(
         "resultLinks",
-        `SELECT ${urlDomain("results_url")} AS domain,
+        `SELECT ${urlAuthority("results_url")} AS domain,
           count(*)::bigint AS "savedResultLinks" FROM edition_result_links GROUP BY 1`,
       ),
       readStore<InventoryGroup>(
@@ -250,7 +340,7 @@ export async function athleteFinderSourceCoverage(
   // A malformed legacy history must not become a zero performance count. Keep
   // the previous unknown-store behavior without throwing inside the aggregate.
   if (histories.some((group) => Number(group.invalid_histories) > 0)) {
-    stores.histories = false;
+    unavailable("histories", "invalid_data");
     histories.length = 0;
   }
 
@@ -266,6 +356,7 @@ export async function athleteFinderSourceCoverage(
     ...records,
     ...extraction,
   ]) {
+    group.domain = normalizedDomain(group.domain);
     const domain = group.domain ?? "";
     const counts = byDomain.get(domain) ?? emptyCounts(stores);
     for (const key of [...storedKeys, ...inventoryKeys]) {
@@ -296,8 +387,8 @@ export async function athleteFinderSourceCoverage(
       )
       .map((source) => source.search_text)
       .join(" ");
-  const candidates: { row: SourceCoverageRow; search: string }[] = registryHosts.map(
-    ({ source, hosts }) => {
+  const candidates: { row: SourceCoverageRow; search: string; hosts: string[] }[] =
+    registryHosts.map(({ source, hosts }) => {
       const counts = matchedCounts(hosts);
       const runnable = source.enabled && RUNNABLE_SOURCE_RIGHTS_STATUSES.has(source.rights_status);
       const domain = sourceUrlHost(source.start_url) ?? hosts[0] ?? "";
@@ -318,18 +409,11 @@ export async function athleteFinderSourceCoverage(
         coverageState: coverageState(counts),
         stored: selectCounts(counts, storedKeys),
         inventory: selectCounts(counts, inventoryKeys),
-        sharedDomain: registryHosts.some(
-          (other) =>
-            other.source.source_id !== source.source_id &&
-            hosts.some((host) =>
-              other.hosts.some(
-                (otherHost) => isWithinDomain(host, otherHost) || isWithinDomain(otherHost, host),
-              ),
-            ),
-        ),
+        sharedDomain: false,
       };
       return {
         row,
+        hosts,
         search: [
           source.source_id,
           source.source_name,
@@ -342,17 +426,19 @@ export async function athleteFinderSourceCoverage(
           .join(" ")
           .toLowerCase(),
       };
-    },
-  );
+    });
 
   // Wider inventory hosts not represented in the fixture registry remain visible.
   // One representative source per host avoids claiming its URLs are unique races.
-  for (const source of sources) {
+  const inventoryDomains = new Set<string>();
+  for (const source of [...sources].sort((a, b) => a.source_key.localeCompare(b.source_key))) {
     if (
       !source.domain ||
+      inventoryDomains.has(source.domain) ||
       registryHosts.some(({ hosts }) => hosts.some((host) => isWithinDomain(source.domain!, host)))
     )
       continue;
+    inventoryDomains.add(source.domain);
     const counts = matchedCounts([source.domain]);
     candidates.push({
       row: {
@@ -368,12 +454,33 @@ export async function athleteFinderSourceCoverage(
         coverageState: coverageState(counts),
         stored: selectCounts(counts, storedKeys),
         inventory: selectCounts(counts, inventoryKeys),
-        sharedDomain: Number(source.sources ?? 0) > 1,
+        sharedDomain:
+          sources
+            .filter((other) => other.domain === source.domain)
+            .reduce((sum, other) => sum + Number(other.sources), 0) > 1,
       },
-      search: [source.source_key, source.name, source.url, source.domain, source.search_text]
+      hosts: [source.domain],
+      search: [
+        source.source_key,
+        source.name,
+        source.url,
+        source.domain,
+        inventorySearch([source.domain]),
+      ]
         .join(" ")
         .toLowerCase(),
     });
+  }
+  for (const candidate of candidates) {
+    candidate.row.sharedDomain ||= candidates.some(
+      (other) =>
+        other !== candidate &&
+        candidate.hosts.some((host) =>
+          other.hosts.some(
+            (otherHost) => isWithinDomain(host, otherHost) || isWithinDomain(otherHost, host),
+          ),
+        ),
+    );
   }
   const needle = input.q.toLowerCase();
   const matching = candidates
@@ -405,13 +512,14 @@ export async function athleteFinderSourceCoverage(
       inventory: selectCounts(totals, inventoryKeys),
     },
     stores,
+    issues,
     notes: [
       "Counts describe stored observations, not unique athlete results. The same performance can appear in more than one store.",
       "Source coverage is matched by domain, including its subdomains. Registry entries sharing a domain can show the same counts; do not add them together.",
       "Metadata enabled describes existing event collection settings. It does not enable participant collection or verify a result.",
       "A saved URL or event inventory record is a location to inspect, not searchable participant data. Extraction items describe known pages or documents, not the full size of a website.",
       "Saved result links count edition-level URL records by their results-page domain, including held or rejected metadata. They do not establish usable participant data or permission to collect it.",
-      "Capture counts use the latest approved staff-only observation per provider and source. Held or revoked captures do not count as searchable rows.",
+      "Capture counts inspect the latest observation per provider and source, then require active staff approval and staff-only publication. Held, revoked or non-staff versions do not count as searchable rows.",
       "Canonical coverage uses the main result source URL; history coverage uses the saved athlete-history source URL. Supporting result references and individual history links can yield additional search matches.",
       "Summary totals include records with unknown or uncatalogued source domains. A source with no linked rows has not been searched live.",
       "Coverage is incomplete when no stored rows are known and at least one result collection could not be inspected. Saved links and extraction counts remain visible without implying that no participant rows exist.",

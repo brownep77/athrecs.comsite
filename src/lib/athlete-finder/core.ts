@@ -83,23 +83,31 @@ export type FinderSearchResponse = {
   };
 };
 
-/** Only literal Unicode name words reach to_tsquery; user search syntax is never evaluated. */
-export function finderNameQuery(names: string[]): string {
-  const queries = finderNameWords(names).map((words) =>
-    words.map((word) => `'${word}':*`).join(" & "),
+/** PostgreSQL supplies these lexemes using exactly the same lexer as the indexes. */
+export type FinderNameTerms = string[][][];
+
+export function finderNameTerms(names: string[][]): FinderNameTerms {
+  return names.map((words) =>
+    words.map((word) =>
+      // PostgreSQL's simple dictionary lowercases Σ to σ, while a source can
+      // contain the contextual lowercase ς. Match either without rewriting
+      // stored names or making the existing GIN index a false-negative filter.
+      [...new Set([word, word.replace(/ς/g, "σ"), word.replace(/σ$/u, "ς")])],
+    ),
   );
-  return [...new Set(queries.filter(Boolean))].map((query) => `(${query})`).join(" | ");
 }
 
-/** Candidate keys are short enough for a GIN array index even for a very large race. */
-export function finderNameWords(names: string[]): string[][] {
-  return names.map(
-    (value) =>
-      value
-        .normalize("NFKC")
-        .toLowerCase()
-        .match(/[\p{L}\p{N}]+/gu) ?? [],
+/** Only quoted database lexemes reach to_tsquery; user syntax is never evaluated. */
+export function finderNameQuery(names: FinderNameTerms): string {
+  const queries = names.map((words) =>
+    words
+      .map(
+        (variants) =>
+          `(${variants.map((word) => `'${word.replace(/\\/g, "\\\\").replace(/'/g, "''")}':*`).join(" | ")})`,
+      )
+      .join(" & "),
   );
+  return [...new Set(queries.filter(Boolean))].map((query) => `(${query})`).join(" | ");
 }
 
 export function sourceUrlHost(value: string | null | undefined): string | null {
@@ -131,7 +139,9 @@ export function registrySourceHosts(
 export function finderNames(input: Pick<FinderSearchQuery, "q" | "aliases">): string[] {
   const seen = new Set<string>();
   return [input.q, ...input.aliases].filter((value) => {
-    const key = value.normalize("NFKC").toLowerCase();
+    // Do not discard case variants using JavaScript's different Unicode case
+    // mapping. Database-normalized terms are deduplicated before searching.
+    const key = value.normalize("NFKC");
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

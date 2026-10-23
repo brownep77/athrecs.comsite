@@ -10,9 +10,9 @@ import { z } from "zod";
 
 const require = createRequire(import.meta.url);
 const ts = require("typescript");
-export function loadFinderModule(path, dependencies = {}) {
+export function loadFinderModule(path, dependencies = {}, verificationExports = "") {
   const module = { exports: {} };
-  const code = ts.transpileModule(readFileSync(path, "utf8"), {
+  const code = ts.transpileModule(readFileSync(path, "utf8") + verificationExports, {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
   }).outputText;
   new Function("require", "module", "exports", code)(
@@ -24,6 +24,117 @@ export function loadFinderModule(path, dependencies = {}) {
     module.exports,
   );
   return module.exports;
+}
+
+async function verifyCapturePrefilterParity(sql, core) {
+  // Expose the actual private builder only in this disposable test module.
+  const { captureCandidatesForVerification: build } = loadFinderModule(
+    "src/lib/athlete-finder/search.server.ts",
+    { "./core": core },
+    "\nexport const captureCandidatesForVerification = captureCandidates;\n",
+  );
+  const names = [
+    "Paul Browne",
+    "PAUL BROWNE",
+    "paul-browne",
+    "Paul A. Browne",
+    "NotPaul NotBrowne",
+    "Paula Browne",
+    "Ｐａｕｌ Ｂｒｏｗｎｅ",
+    "𝑷𝒂𝒖𝒍 𝑩𝒓𝒐𝒘𝒏𝒆",
+    "Paul Browne\u200b",
+    "Paul Browne\u0301",
+    "Jane Doe",
+    "JANE-DOE",
+    "O'Neill",
+    "O’Neill",
+    "ONeill",
+    "J.R. Smith",
+    "JR Smith",
+    "I Smith",
+    "i smith",
+    "İ Smith",
+    "ı Smith",
+    "İsmail Kaya",
+    "Ismail Kaya",
+    "ismail kaya",
+    "François Brown",
+    "FRANÇOIS BROWN",
+    "Francois Brown",
+    "ΣΩΤΗΡΗΣ ΣΠΥΡΟΣ",
+    "σωτηρης σπυρος",
+    "σωτηρησ σπυροσ",
+    "Άλφα",
+    "ΑΛΦΑ",
+    "Džordže Brown",
+    "DŽORDŽE BROWN",
+    "Alice Smith",
+    "Paul Brown",
+    "Browne Paul",
+    "P. Browne",
+    "",
+    null,
+    "Paul Browne " + "x".repeat(2000) + "é",
+    "x".repeat(2000) + "Paul Browne",
+  ];
+  const queries = [
+    ["Paul Browne"],
+    ["Paul Browne", "Jane Doe"],
+    ["Paul Browne", "Άλφα"],
+    ["I Smith"],
+    ["İsmail Kaya"],
+    ["François Brown", "Jane Doe"],
+    ["Ｐａｕｌ Ｂｒｏｗｎｅ"],
+    ["O’Neill"],
+    ["ΣΩΤΗΡΗΣ ΣΠΥΡΟΣ"],
+    ["Džordže Brown"],
+    ["J.R. Smith"],
+    ["P. Browne"],
+  ];
+  const exact =
+    "to_tsvector('simple',regexp_replace(normalize(left(coalesce(p.value->>'name',''),2000),NFKC),'[^[:alnum:]]+',' ','g')) @@ to_tsquery('simple',$1)";
+  let comparisons = 0;
+  let positive = 0;
+  let fastPaths = 0;
+  for (const aliases of queries) {
+    const lexemes = await sql.query(
+      "select tsvector_to_array(to_tsvector('simple',regexp_replace(normalize(name,NFKC),'[^[:alnum:]]+',' ','g'))) as words from unnest($1::text[]) name",
+      [aliases],
+    );
+    const terms = core.finderNameTerms(lexemes.map((row) => row.words));
+    const built = build(terms);
+    if (built.nameClause.startsWith("case")) fastPaths++;
+    const parameters = [core.finderNameQuery(terms), "", null, null, [], 0, ...built.values, names];
+    const types = parameters
+      .map((_, index) => {
+        const type =
+          index < 2 ? "text" : index === 2 || index === 3 || index === 5 ? "integer" : "text[]";
+        return `$${index + 1}::${type} as p${index + 1}`;
+      })
+      .join(",");
+    const rows = await sql.query(
+      `with typed_parameters as (select ${types})
+        select sample.name,(${exact}) as original,(${built.nameClause}) as filtered
+        from unnest($${parameters.length}::text[]) sample(name)
+        cross join lateral(select jsonb_build_object('name',sample.name) as value) p`,
+      parameters,
+    );
+    for (const row of rows) {
+      assert.equal(
+        row.filtered,
+        row.original,
+        `Prefilter changed ${JSON.stringify(row.name)} for ${aliases.join(" / ")}`,
+      );
+      comparisons++;
+      if (row.original) positive++;
+    }
+  }
+  assert.equal(comparisons, 504);
+  assert.equal(positive, 72, "Parity must include real positive matches");
+  assert.equal(fastPaths, 10, "A Unicode-only alias must disable the shortcut");
+  console.log(
+    "ASCII shortcut parity: 504 SQL comparisons, 72 positive matches, mixed aliases and Unicode/truncation boundaries passed.",
+  );
 }
 
 export function finderSqlFor(database, connection = database, observedQueries = []) {
@@ -293,7 +404,8 @@ async function verifyFinder() {
       "Searching performs no writes",
     );
     assert.ok(
-      queries.filter((query) => query.startsWith("set local statement_timeout")).length === 4,
+      queries.filter((query) => query.startsWith("set local statement_timeout")).length === 5,
+      "Input normalization and every selected store have bounded read-only transactions",
     );
     const second = await find({ offset: first.nextOffset });
     assert.equal(second.rows.length, 12);
@@ -472,6 +584,113 @@ async function verifyFinder() {
       "Capture candidates can use the GIN name index",
     );
 
+    // Model broad race-level keys: many pages are candidates, while name-word
+    // conjunction must still match a single participant. The first page must
+    // stop before expanding every capture and later pages must remain exact.
+    for (let index = 0; index < 8; index++) {
+      await insertCapture(
+        `ordered-page-${index}`,
+        Array.from({ length: 3 }, () => ({ name: "Synthetic Orderedpage" })),
+      );
+    }
+    const orderedCaptureId = await insertCapture(
+      "ordered-page-newest",
+      Array.from({ length: 31 }, (_, index) => ({
+        name:
+          index === 0
+            ? "Ｓｙｎｔｈｅｔｉｃ Ｏｒｄｅｒｅｄｐａｇｅ"
+            : index === 1
+              ? "SYNTHETIC ORDEREDPAGE"
+              : index === 2
+                ? "Synthetic-Orderedpage"
+                : "Synthetic Orderedpage",
+      })),
+    );
+    const splitCaptureId = await insertCapture("ordered-page-split-name-decoy", [
+      { name: "Synthetic Other" },
+      { name: "Unrelated Orderedpage" },
+      { name: "Nonsynthetic Orderedpage" },
+      { name: "Synthetic Preorderedpage" },
+    ]);
+    let orderedRequest;
+    const observeSql = {
+      transaction: (work) =>
+        sql.transaction((tx) =>
+          work({
+            query: (query, values) => {
+              if (query.startsWith("with candidates")) orderedRequest = { query, values };
+              return tx.query(query, values);
+            },
+          }),
+        ),
+    };
+    const orderedFirst = await service.searchStoredAthleteResults(
+      observeSql,
+      { q: "Synthetic Orderedpage", kind: "capture" },
+      registry,
+    );
+    assert.equal(orderedFirst.rows.length, 25);
+    assert.ok(orderedFirst.rows.every((row) => row.captureId === orderedCaptureId));
+    assert.equal(
+      orderedFirst.rows[0].captureOrdinal,
+      1,
+      "Fullwidth names bypass the ASCII shortcut",
+    );
+    assert.equal(orderedFirst.rows[2].captureOrdinal, 3, "Punctuation remains a word boundary");
+    const orderedSecond = await find({ q: "Synthetic Orderedpage", kind: "capture", offset: 25 });
+    const orderedThird = await find({ q: "Synthetic Orderedpage", kind: "capture", offset: 50 });
+    const orderedRows = [...orderedFirst.rows, ...orderedSecond.rows, ...orderedThird.rows];
+    assert.equal(orderedRows.length, 55);
+    assert.equal(new Set(orderedRows.map((row) => row.key)).size, 55);
+    assert.equal(orderedThird.hasMore, false);
+    assert.ok(orderedRows.every((row) => row.captureId !== splitCaptureId));
+    assert.ok(
+      orderedRows.every((row, index) => {
+        const previous = orderedRows[index - 1];
+        return (
+          !previous ||
+          BigInt(previous.captureId) > BigInt(row.captureId) ||
+          (previous.captureId === row.captureId && previous.captureOrdinal < row.captureOrdinal)
+        );
+      }),
+      "Capture IDs descend and source row ordinals ascend across page boundaries",
+    );
+    const [orderedPlan] = await sql.query(
+      `explain (analyze true, timing false, format json) ${orderedRequest.query}`,
+      orderedRequest.values,
+    );
+    const planNodes = [];
+    const collectPlan = (node) => {
+      planNodes.push(node);
+      for (const child of node.Plans ?? []) collectPlan(child);
+    };
+    collectPlan(orderedPlan["QUERY PLAN"][0].Plan);
+    assert.ok(
+      planNodes.some(
+        (node) =>
+          node["Node Type"] === "Incremental Sort" &&
+          node["Presorted Key"]?.includes("selected.id"),
+      ),
+      "Paging must preserve ordered candidate execution instead of sorting all expanded rows",
+    );
+    const expansions = planNodes.find(
+      (node) => node["Node Type"] === "Function Scan" && node.Alias === "p",
+    );
+    assert.ok(
+      expansions && expansions["Actual Loops"] < 10,
+      "The first page does not expand all ten candidate captures",
+    );
+    assert.equal(
+      (await find({ q: "Unrelated Alias", aliases: ["Synthetic Orderedpage"], kind: "capture" }))
+        .rows[0].captureId,
+      orderedCaptureId,
+      "The ASCII shortcut includes supplied aliases",
+    );
+    console.log(
+      "Capture paging: 55 exact observations across three pages; bounded ordered expansion, fullwidth names, aliases and split-person decoys passed.",
+    );
+    await verifyCapturePrefilterParity(sql, core);
+
     await db.exec("alter table result_source_references rename to finder_test_saved_references");
     const noReferences = await find({ kind: "canonical" });
     assert.equal(noReferences.rows.length, 2);
@@ -495,19 +714,69 @@ async function verifyFinder() {
       "alter function finder_test_saved_name_keys(jsonb) rename to athlete_finder_capture_name_keys",
     );
     const timeoutSql = {
-      transaction: async () => {
-        const error = new Error("Synthetic timeout");
-        error.code = "57014";
-        throw error;
-      },
+      transaction: (work) =>
+        sql.transaction((tx) =>
+          work({
+            query: (query, values) => {
+              if (query.startsWith("with candidates")) {
+                const error = new Error("Synthetic capture timeout");
+                error.code = "57014";
+                throw error;
+              }
+              return tx.query(query, values);
+            },
+          }),
+        ),
     };
     const timeout = await service.searchStoredAthleteResults(
       timeoutSql,
-      { q: searchName, kind: "capture" },
+      { q: searchName },
       registry,
     );
-    assert.equal(timeout.stores[0].status, "timed_out");
+    assert.equal(timeout.stores.find((store) => store.kind === "capture").status, "timed_out");
+    assert.ok(timeout.rows.some((row) => row.kind === "canonical"));
     assert.equal(timeout.completeForSelectedStores, false);
+
+    // Exact names and ordinary case variants must survive both the indexed
+    // candidate pass and the final PostgreSQL word comparison in every store.
+    const unicodeCases = [
+      ["İpek Yılmaz", "İpek Yılmaz"],
+      ["İpek Yılmaz", "İPEK YILMAZ"],
+      ["ΟΣ ΚΟΣ", "ΟΣ ΚΟΣ"],
+      ["ΟΣ ΚΟΣ", "ος κος"],
+      ["ος κος", "ΟΣ ΚΟΣ"],
+      ["अनिता शर्मा", "अनिता शर्मा"],
+      ["Amélie Synthetic", "Ame\u0301lie Synthetic"],
+      ["中文合成测试", "中文合成测试"],
+    ];
+    const unicodeMisses = [];
+    for (const [index, [storedName, requestedName]] of unicodeCases.entries()) {
+      await sql.query("update athletes set display_name=$1 where id=$2", [
+        storedName,
+        ids.athleteId,
+      ]);
+      await sql.query(
+        "update result_archive_entries set payload=jsonb_set(payload,'{name}',to_jsonb($1::text)) where id=$2",
+        [storedName, ids.archiveEntryId],
+      );
+      const captureId = await insertCapture(`unicode-case-${index}`, [{ name: storedName }]);
+      const found = await find({ q: requestedName });
+      const expected = {
+        canonical: (row) => row.kind === "canonical" && row.resultId === ids.resultId,
+        archive: (row) => row.archiveEntryId === ids.archiveEntryId,
+        capture: (row) => row.captureId === captureId,
+        history: (row) => row.kind === "history" && row.athleteId === ids.athleteId,
+      };
+      for (const [kind, matches] of Object.entries(expected)) {
+        if (!found.rows.some(matches)) unicodeMisses.push({ storedName, requestedName, kind });
+      }
+    }
+    assert.deepEqual(
+      unicodeMisses,
+      [],
+      "Unicode names and Greek final-sigma case variants must not silently return false zeroes",
+    );
+    console.log("Unicode adversarial search: 32 store/name assertions passed.");
     const api = readFileSync("src/lib/athlete-finder/api.ts", "utf8");
     assert.match(api, /\.middleware\(\[staffMiddleware\]\)/);
     assert.match(api, /finderSearchSchema\.parse/);

@@ -26,7 +26,20 @@ export function AthleteSourceCheck({
     mutationFn: (input: SourceCheckInput) => checkAthleteSource({ data: input }),
   });
   const response = !check.isPending && !check.isError ? check.data : undefined;
+  const checkedQuery = check.variables;
+  const currentQuery = sourceCheckSchema.safeParse({ url, name, aliases, club });
+  const matchesCheckedQuery = Boolean(
+    checkedQuery &&
+    currentQuery.success &&
+    JSON.stringify(currentQuery.data) === JSON.stringify(checkedQuery),
+  );
   async function review(capture: SourceReviewCapture) {
+    if (!matchesCheckedQuery) {
+      setError(
+        "Check the page again for the current name and source before opening import review.",
+      );
+      return;
+    }
     setHandoff(capture.table);
     setError("");
     try {
@@ -114,6 +127,21 @@ export function AthleteSourceCheck({
                 ? `${response.matchedRows ?? 0} possible matching rows on this page`
                 : "This page could not be checked"}
             </p>
+            {checkedQuery && (
+              <div className="mt-2 space-y-1 text-xs">
+                <p>Checked racing name: {checkedQuery.name}</p>
+                {!!checkedQuery.aliases?.length && (
+                  <p>Other racing names: {checkedQuery.aliases.join(", ")}</p>
+                )}
+                {checkedQuery.club && <p>Club clue: {checkedQuery.club}</p>}
+              </div>
+            )}
+            {!matchesCheckedQuery && (
+              <p role="status" className="mt-2 font-medium">
+                The name, racing names, club clue or URL has changed. Check the page again before
+                reviewing these rows for import.
+              </p>
+            )}
             <p className="mt-2 break-all text-xs">
               {response.coverage.pagesChecked ? "Checked page: " : "Requested page: "}
               <a
@@ -187,7 +215,7 @@ export function AthleteSourceCheck({
                   <Button
                     key={capture.table}
                     variant="secondary"
-                    disabled={handoff !== null}
+                    disabled={handoff !== null || !matchesCheckedQuery}
                     onClick={() => void review(capture)}
                   >
                     {handoff === capture.table

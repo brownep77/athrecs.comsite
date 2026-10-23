@@ -82,6 +82,19 @@ for (const invalid of [
   assert.equal(trtResultUrl(invalid), null, invalid);
 assert.throws(() => sourceCheckSchema.parse({ ...input, aliases: Array(9).fill("Zoe Oneil") }));
 assert.throws(() => sourceCheckSchema.parse({ ...input, url: "not a RESULT_URL" }));
+for (const invalid of [
+  { ...input, name: "- -" },
+  { ...input, name: "Z" },
+  { ...input, name: "Z".repeat(161) },
+  { ...input, aliases: [" "] },
+  { ...input, club: "x".repeat(161) },
+  { ...input, providerOverride: "example.test" },
+])
+  assert.equal(sourceCheckSchema.safeParse(invalid).success, false);
+assert.equal(
+  sourceCheckSchema.parse({ ...input, aliases: Array(8).fill("李 明") }).aliases.length,
+  8,
+);
 assert.equal(sourceNameKey("Zoë O’Neil"), sourceNameKey("ZOE O'NEIL"));
 assert.notEqual(sourceNameKey("李 明"), sourceNameKey("王 明"));
 
@@ -268,6 +281,147 @@ const colliding = readTrtNameMatches(
 );
 assert.equal(parseBrowserCapture(colliding.reviewCaptures[0].json).table.rows.length, 1);
 
+// Metadata belongs to its own race section, never the preceding table.
+const withoutDate = table([row()], headers, "sr2", "5K").replace(/<p>.*?<\/p>/, "");
+const separateDates = readTrtNameMatches(
+  table([row()]) + withoutDate,
+  RESULT_URL,
+  input,
+  capturedAt,
+);
+assert.equal(
+  separateDates.rows[1].date,
+  null,
+  "A missing race date must not inherit another race's date",
+);
+assert.deepEqual(
+  separateDates.reviewCaptures.map((capture) => capture.table),
+  [1],
+);
+const withoutHeading = table([row()]).replace(/<h[23][^>]*>.*?<\/h[23]>|<p>.*?<\/p>/g, "");
+const separateHeadings = readTrtNameMatches(
+  table([row()]) + withoutHeading,
+  RESULT_URL,
+  input,
+  capturedAt,
+);
+assert.equal(separateHeadings.rows[1].distance, "");
+assert.equal(separateHeadings.rows[1].date, null);
+assert.equal(new Set(separateHeadings.rows.map((row) => row.key)).size, 2);
+assert.deepEqual(
+  separateHeadings.reviewCaptures.map((capture) => capture.table),
+  [1],
+);
+const duplicateAnchors = readTrtNameMatches(
+  table([row()]) + table([row()], headers, "sr1", "5K", "02/01/2025"),
+  RESULT_URL,
+  input,
+  capturedAt,
+);
+assert.equal(new Set(duplicateAnchors.rows.map((row) => row.key)).size, 2);
+assert.equal(
+  duplicateAnchors.reviewCaptures.length,
+  0,
+  "Ambiguous table IDs cannot support an import handoff",
+);
+assert.ok(
+  duplicateAnchors.rows.every((row) => row.issues.some((issue) => /table locator/.test(issue))),
+);
+assert.throws(
+  () =>
+    readTrtNameMatches(
+      `<title>Just a moment</title><h1>Verify you are human</h1>${html}`,
+      RESULT_URL,
+      input,
+      capturedAt,
+    ),
+  /access challenge/,
+  "An access challenge must stop the check even if stale result tables remain in the HTML",
+);
+const unknownDistance = readTrtNameMatches(
+  table([row()], headers, "sr1", "Results"),
+  RESULT_URL,
+  input,
+  capturedAt,
+);
+assert.equal(unknownDistance.rows.length, 1);
+assert.equal(
+  unknownDistance.reviewCaptures.length,
+  0,
+  "An unrecognised distance needs manual review",
+);
+const zeroTime = row();
+zeroTime[headers.indexOf("Chip Time")] = "00:00:00";
+zeroTime[headers.indexOf("Gun Time")] = "00:00:00";
+for (const [label, fixture] of [
+  ["zero finish", table([zeroTime])],
+  ["contradictory generic finish", table([[...row(), "00:10:00"]], [...headers, "Time"])],
+  ["multiple possible distances", table([row()], headers, "sr1", "5K and 10K")],
+]) {
+  const held = readTrtNameMatches(fixture, RESULT_URL, input, capturedAt);
+  assert.equal(held.rows.length, 1);
+  assert.equal(
+    held.reviewCaptures.length,
+    0,
+    `${label} needs source interpretation before an import handoff`,
+  );
+}
+const consistentGenericTime = readTrtNameMatches(
+  table([[...row(), "00:40:18.91"]], [...headers, "Time"]),
+  RESULT_URL,
+  input,
+  capturedAt,
+);
+assert.equal(consistentGenericTime.reviewCaptures.length, 1);
+for (const [column, invalid] of [
+  ["Position", "0"],
+  ["Position", "-1"],
+  ["Gender Pos", "one"],
+  ["Chip Time", "00:60:00"],
+  ["Chip Time", "00:40:99"],
+  ["Chip Time", "NaN"],
+  ["Tag", "x".repeat(101)],
+]) {
+  const cells = row();
+  cells[headers.indexOf(column)] = invalid;
+  const held = readTrtNameMatches(table([cells]), RESULT_URL, input, capturedAt);
+  assert.equal(held.rows[0].original[column], invalid);
+  assert.equal(
+    held.reviewCaptures.length,
+    0,
+    `Malformed ${column} remains available for manual review only`,
+  );
+}
+const unreasonablyLong = readTrtNameMatches(
+  table([[...row(), "x".repeat(4001)]], [...headers, "Comment"]),
+  RESULT_URL,
+  input,
+  capturedAt,
+);
+assert.equal(unreasonablyLong.matchedRows, 1);
+assert.equal(unreasonablyLong.returnedRows, 0);
+assert.equal(unreasonablyLong.truncated, true);
+assert.equal(unreasonablyLong.reviewCaptures.length, 0);
+const manyTables = readTrtNameMatches(
+  Array.from({ length: 11 }, (_, i) =>
+    table([row("Zoe", String(i + 1))], headers, `sr${i + 1}`),
+  ).join(""),
+  RESULT_URL,
+  input,
+  capturedAt,
+);
+assert.equal(manyTables.rows.length, 11);
+assert.equal(manyTables.reviewCaptures.length, 10);
+assert.match(manyTables.issues.join(" "), /first ten matching tables/);
+const nonLatin = readTrtNameMatches(
+  table([["1", "25", "李", "明", "", "00:40:12.34", "00:40:18.91", "1", "1"]]),
+  RESULT_URL,
+  { url: RESULT_URL, name: "李 明" },
+  capturedAt,
+);
+assert.equal(nonLatin.matchedRows, 1);
+assert.equal(nonLatin.rows[0].name, "李 明");
+
 // Crawl rules are interpreted before fetching any athlete results page.
 assert.equal(sourceRobotsPolicy("User-agent: *\nDisallow: /", "/raceresults/123").allowed, false);
 assert.equal(
@@ -308,6 +462,26 @@ assert.throws(
   () => sourceRobotsPolicy("User-agent: *\nCrawl-delay: nope", "/raceresults/123"),
   /crawl delay/,
 );
+assert.equal(
+  sourceRobotsPolicy("User-agent: *\rDisallow: /", "/raceresults/123").allowed,
+  false,
+  "CR-only robots records are valid line endings and must retain the denial",
+);
+assert.equal(
+  sourceRobotsPolicy("User-agent: *\nDisallow: /\nUser-agent: https\nAllow: /", "/raceresults/123")
+    .allowed,
+  false,
+  "A token in the crawler's documentation URL is not its robots product token",
+);
+assert.equal(
+  sourceRobotsPolicy(
+    "User-agent: AthRecsResultsArchive\nDisallow: /\nUser-agent: ATHRECSRESULTSARCHIVE\nAllow: /raceresults/123$",
+    "/raceresults/123",
+  ).allowed,
+  true,
+  "Matching product groups combine case-insensitively and the longest path applies",
+);
+assert.throws(() => sourceRobotsPolicy("Access denied", "/raceresults/123"), /access challenge/);
 
 const pg = new PGlite({ parsers: { 20: Number } });
 await pg.exec(`create table network_audit_log (
@@ -333,6 +507,7 @@ const calls = [],
 function fetcher({
   robots = "User-agent: *\nAllow: /",
   robotsStatus = 200,
+  robotsHeaders = {},
   result = html,
   resultStatus = 200,
   resultHeaders = {},
@@ -348,7 +523,10 @@ function fetcher({
     assert.ok(!String(url).includes("Zoe"), "Names are never sent to another website");
     calls.push(url);
     return url === ROBOTS
-      ? new Response(robots, { status: robotsStatus, headers: { "content-type": "text/plain" } })
+      ? new Response(robots, {
+          status: robotsStatus,
+          headers: { "content-type": "text/plain", ...robotsHeaders },
+        })
       : new Response(result, {
           status: resultStatus,
           headers: { "content-type": "text/html", ...resultHeaders },
@@ -486,6 +664,37 @@ try {
     );
   }
 
+  // HTTP denials remain authoritative when their response stream has failed.
+  for (const status of [401, 403, 429]) {
+    await reset();
+    const brokenBody = new ReadableStream({
+      start(controller) {
+        controller.error(new Error("Synthetic disconnected denial body"));
+      },
+    });
+    result = await checkSourcePage(
+      input,
+      actor,
+      dependencies({ resultStatus: status, result: brokenBody }),
+    );
+    assert.equal(
+      result.status,
+      "blocked",
+      `HTTP ${status} must survive a body cancellation failure`,
+    );
+    assert.ok(result.retryAfterSeconds >= (status === 429 ? 60 : 900));
+    assert.equal(
+      (
+        await sql`select count(*)::int as count from network_audit_log where action='athlete.source_provider_cooldown'`
+      )[0].count,
+      1,
+    );
+    const made = calls.length;
+    result = await checkSourcePage(input, actor, dependencies());
+    assert.equal(result.status, "rate_limited");
+    assert.equal(calls.length, made, "A failed denial body cannot enable another provider request");
+  }
+
   await reset();
   result = await checkSourcePage(
     input,
@@ -502,6 +711,8 @@ try {
 
   for (const [resultHeaders, body] of [
     [{ "content-type": "application/pdf" }, "PDF"],
+    [{ "content-type": "text/html-unrecognised" }, html],
+    [{ "content-type": "application/unknown; note=text/html" }, html],
     [{ "content-length": "6000001" }, html],
     [{}, "x".repeat(6_000_001)],
   ]) {
@@ -510,6 +721,116 @@ try {
     assert.equal(result.status, "unavailable");
     assert.equal(result.fetchedAt, null);
     assert.equal(result.rows.length, 0);
+  }
+
+  // Response boundaries are measured in bytes and enforced while streaming too.
+  for (const body of [
+    new Uint8Array([0xc3, 0x28]), // invalid UTF-8
+    new ReadableStream({
+      start(controller) {
+        controller.error(new Error("Synthetic broken stream"));
+      },
+    }),
+    new ReadableStream({
+      start(controller) {
+        controller.enqueue(new Uint8Array(3_000_000));
+        controller.enqueue(new Uint8Array(3_000_001));
+        controller.close();
+      },
+    }),
+    "é".repeat(3_000_001),
+  ]) {
+    await reset();
+    result = await checkSourcePage(input, actor, dependencies({ result: body }));
+    assert.equal(result.status, "unavailable");
+    assert.equal(result.fetchedAt, null);
+    assert.equal(result.rows.length, 0);
+    assert.equal(result.reviewCaptures.length, 0);
+    assert.equal(
+      (
+        await sql`select count(*)::int as count from network_audit_log where action='athlete.source_check_completed'`
+      )[0].count,
+      0,
+    );
+  }
+  for (const options of [
+    { robots: "x".repeat(256_001) },
+    { robots: "{}", robotsHeaders: { "content-type": "application/json" } },
+    { robots: "%PDF-1.4", robotsHeaders: { "content-type": "application/pdf" } },
+    { robots: "Access denied" },
+    { robots: "<html>Denied</html>" },
+    { robots: "Unavailable", robotsStatus: 503 },
+    {
+      robots: "Moved",
+      robotsStatus: 302,
+      robotsHeaders: { location: "https://example.test/robots.txt" },
+    },
+  ]) {
+    await reset();
+    result = await checkSourcePage(input, actor, dependencies(options));
+    assert.notEqual(result.status, "checked");
+    assert.deepEqual(
+      calls,
+      [ROBOTS],
+      "An unreadable or redirected robots response never authorizes a results request",
+    );
+    assert.equal(result.reviewCaptures.length, 0);
+  }
+  await reset();
+  result = await checkSourcePage(
+    input,
+    actor,
+    dependencies({
+      resultStatus: 302,
+      resultHeaders: { location: "https://example.test/results" },
+    }),
+  );
+  assert.equal(result.status, "unavailable");
+  assert.deepEqual(calls, [ROBOTS, RESULT_URL]);
+  assert.equal(result.fetchedAt, null);
+
+  // The timeout signal applies to the response body, not just initial headers.
+  await reset();
+  const originalTimeout = AbortSignal.timeout;
+  const deadlines = [];
+  const controllers = [];
+  AbortSignal.timeout = (ms) => {
+    deadlines.push(ms);
+    const controller = new AbortController();
+    controllers.push(controller);
+    return controller.signal;
+  };
+  try {
+    const defaults = dependencies();
+    result = await checkSourcePage(input, actor, {
+      ...defaults,
+      fetcher: async (url, options) => {
+        if (url === ROBOTS) return defaults.fetcher(url, options);
+        calls.push(url);
+        return new Response(
+          new ReadableStream({
+            start(controller) {
+              controller.enqueue(new TextEncoder().encode("<html>"));
+              options.signal.addEventListener(
+                "abort",
+                () => controller.error(options.signal.reason),
+                { once: true },
+              );
+              queueMicrotask(() =>
+                controllers.at(-1).abort(new DOMException("Synthetic timeout", "TimeoutError")),
+              );
+            },
+          }),
+          { headers: { "content-type": "text/html" } },
+        );
+      },
+    });
+    assert.deepEqual(deadlines, [10_000, 18_000]);
+    assert.equal(result.status, "unavailable");
+    assert.equal(result.fetchedAt, null);
+    assert.equal(result.rows.length, 0);
+  } finally {
+    AbortSignal.timeout = originalTimeout;
   }
 
   await reset();
