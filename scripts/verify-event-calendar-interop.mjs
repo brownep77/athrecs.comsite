@@ -11,3 +11,13 @@ for(const sample of [{},{startTime:null},{startTime:null,endDate:'2027-07-06'},{
  n++;
 }
 console.log('PASS: '+n+' ICS roundtrips through independent ical.js 2.2.1 parser: UTC/all-day/multiday/rollover/DST/Unicode/escaping/UID.');
+
+const { raceCalendarFeed } = await import('../src/lib/athrecs/calendar-subscription.ts');
+const subscription = new ICAL.Component(ICAL.parse(raceCalendarFeed([
+  base, { ...base, id: 'second', startTime: null }, base,
+  { ...base, id: 'cancelled', status: 'Cancelled' },
+])));
+assert.equal(subscription.getAllSubcomponents('vevent').length, 2);
+assert.equal(subscription.getFirstPropertyValue('x-wr-calname'), 'My AthRecs races');
+assert.equal(new ICAL.Component(ICAL.parse(raceCalendarFeed([]))).getAllSubcomponents('vevent').length, 0);
+console.log('PASS: multi-event and empty subscription feeds roundtrip through independent ical.js.');

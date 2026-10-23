@@ -7,9 +7,17 @@ have the same action. Non-running pages expose remaining loaded dates through
 Show all listed events. Future records using these templates inherit the action.
 
 Google Calendar, Outlook.com and Microsoft 365 open a prefilled event for review.
-Apple Calendar and other compatible apps use a downloaded RFC 5545 `.ics` file.
-No AthRecs login, calendar permission, paid provider, new database query or calendar
-account connection is required. The athlete must review and save the event.
+Apple Calendar opens `/my-race-calendar?race=<canonical-id>` to add the selected
+race to a private subscription. Sign in, explicitly add the race, then use Open
+Apple Calendar and confirm the subscription in the calendar app. Subscribe once;
+subsequent selections use the same calendar. The HTTPS address is also available
+for manual subscription in compatible apps. Calendar refresh timing belongs to
+the client and changes are not instant.
+
+Download calendar file (.ics) remains a separate one-off fallback. Google,
+Outlook and downloads require no AthRecs login; private subscription management
+requires sign-in and JavaScript. No OAuth calendar-write permission is requested.
+Neither opening a race nor signing in automatically saves it or enters the race.
 
 ## Date and source rules
 
@@ -27,8 +35,8 @@ account connection is required. The athlete must review and save the event.
   start marker. Calendar clients may choose their own default editable duration.
 - Reject invalid/reversed dates and cancelled/postponed/finished statuses.
   Provisional curated dates remain explicitly provisional and ICS TENTATIVE.
-- These are one-off copies, not subscriptions. Later changes/cancellations do not
-  update an already saved event. Stable UIDs help identify exports, but repeat
+- Google/Outlook exports and downloads are one-off copies. Later changes/cancellations
+  do not update an already saved copy. Stable UIDs help identify exports, but repeat
   import behaviour belongs to the calendar client and cannot guarantee deduplication.
 
 ## Verification
@@ -55,8 +63,8 @@ preserved after hydration. They do not save anything to a personal calendar.
 A user reported that the calendar choices did not appear. The fully hydrated race
 page worked in a local production build, but the original dialog had no usable
 fallback before hydration or when scripts failed. The control now uses native
-`details`/`summary` and renders every provider choice on the server. Apple/ICS
-uses a normal POST form returning a calendar attachment, without Blob URLs or
+`details`/`summary` and renders every provider choice on the server. The explicit
+download uses a normal POST form returning a calendar attachment, without Blob URLs or
 client download handlers. The endpoint validates public fields, rejects unavailable
 events and malformed/oversized bodies, and makes no database queries.
 
@@ -82,3 +90,43 @@ America/Los_Angeles process timezones.
 Native Apple Calendar/iOS Safari and authenticated Google/Microsoft Save screens
 are not covered by these automated Chromium tests. Provider-link formats can
 change; the standards-based ICS option is always available as a fallback.
+
+## Private subscriptions
+
+`athlete_race_calendars` and `athlete_race_calendar_items` are separate from public
+planned races. Authenticated server functions derive ownership from the verified
+session and enforce same-site requests. Reads never create tokens or selections.
+Only canonical race IDs are accepted, with at most 200 selections per account;
+mutations lock the owner row and duplicate additions are idempotent. The additive
+migration cascades deletion when the account is deleted.
+
+A 256-bit random bearer link permits calendar clients to fetch without a browser
+session. Anyone possessing that link can read the selected races; the UI explains
+this. Reset creates a new link and revokes the old one; disable revokes access
+while retaining the selection. Neither operation erases cached client events;
+the user removes the subscribed calendar in their calendar app. Links are never
+placed in public profile data, SSR payloads or analytics events. HTTP access
+infrastructure may log requested paths, so these tokens are treated as secrets.
+
+The feed resolves a bounded list of canonical editions on every fetch. Catalogue
+corrections retain the edition UID. Cancelled or unavailable editions disappear;
+curated IDs include their edition date, so a removed curated edition is omitted
+rather than silently replaced with a different year. Withheld fixtures and
+private/source-review fields are excluded. No supplied remote URL is fetched.
+The feed contains no owner name, email, profile or results. Unknown/revoked links
+return 404; server failures return 503, never a misleading empty successful feed.
+A valid subscription with no selected races returns a valid empty VCALENDAR.
+
+`verify-event-calendar-subscription.mjs` uses isolated PGlite to test 16 adversarial
+scenarios: canonical input, ownership, limits, idempotency, correction/cancellation,
+withheld dates, revocation, empty feeds, injection, UTF-8 folding and stable UIDs.
+`verify-event-calendar-subscription-built.mjs` drives the actual production bundle
+with two local test accounts, real session cookies and the sign-in UI. It checks
+selection preservation, explicit saving, HTTP feed contents, anonymous/cross-site
+mutation rejection, account isolation, removal, revocation, shared guide feeds,
+and 320/390/1280px layouts. Outbound server requests are blocked and no email is
+sent. Run it after compilation and `node scripts/copy-pglite-assets.mjs`.
+
+The automated test verifies the native `webcal:` link and the full HTTP feed,
+but cannot confirm launching or saving in native Apple Calendar on iPhone/Mac.
+The subscription-address instructions and explicit download remain available.

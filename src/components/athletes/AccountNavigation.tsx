@@ -82,6 +82,12 @@ export function AccountNavigation({
             </ul>
           </div>
         ))}
+        <a
+          href="/my-race-calendar"
+          className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-accent hover:bg-elevated"
+        >
+          My race calendar
+        </a>
       </nav>
     </aside>
   );

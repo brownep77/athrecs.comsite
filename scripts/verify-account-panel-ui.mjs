@@ -24,6 +24,7 @@ try {
   await server.listen();
   database = await (await server.ssrLoadModule("/src/lib/db.ts")).getPglite();
   browser = await chromium.launch({
+    executablePath: process.env.ATHRECS_CHROMIUM_EXECUTABLE || undefined,
     headless: true,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
   });
@@ -59,7 +60,9 @@ try {
     if (await analyticsChoice.isVisible()) await analyticsChoice.click();
     const labels = await nav.getByRole("link").allTextContents();
     assert.deepEqual(labels.slice(0, 2), ["Find and claim results", "My races"]);
-    assert.equal(labels.length, 21);
+    assert.equal(labels.length, 22);
+    assert.equal(labels.at(-1), "My race calendar");
+    assert.equal(await nav.getByRole("link", { name: "My race calendar", exact: true }).getAttribute("href"), "/my-race-calendar");
     await go("Personal details");
     await page.getByLabel("Full name", { exact: false }).fill("Sidebar Test Runner");
     await page.getByLabel("Display name", { exact: false }).fill("Sidebar Test Runner");
@@ -313,7 +316,7 @@ try {
     await page.screenshot({ path: "artifacts/account-sidebar-mobile.png", fullPage: true });
     assert.deepEqual(errors, []);
     console.log(
-      "PASS: all 21 account sections, deep links/history, mobile navigation, saved and unsaved drafts, actual claim/remove/restore RPCs and unchanged official result.",
+      "PASS: all 21 account sections, private calendar link, deep links/history, mobile navigation, saved and unsaved drafts, actual claim/remove/restore RPCs and unchanged official result.",
     );
   }
 } catch (error) {

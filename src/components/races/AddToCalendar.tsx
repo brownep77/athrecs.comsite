@@ -85,18 +85,20 @@ export function AddToCalendar({ race }: { race: CalendarRace }) {
               </a>
             </Button>
           ))}
-          <Button type="submit" variant="secondary">
-            Apple Calendar
-            <Download className="h-4 w-4" aria-hidden="true" />
+          <Button asChild variant="secondary">
+            <a href={`/my-race-calendar?race=${encodeURIComponent(race.id)}`}>
+              Apple Calendar
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </a>
           </Button>
           <Button type="submit" variant="secondary" className="sm:col-span-2">
-            Other calendars (.ics)
+            Download calendar file (.ics)
             <Download className="h-4 w-4" aria-hidden="true" />
           </Button>
         </form>
         <p className="text-xs text-muted">
-          Review and save in your calendar. For Apple and other calendar apps, open the downloaded
-          file. This is a one-off copy; check the race page for changes or cancellations.
+          Google and Outlook open a prepared event for you to save. Apple uses your private AthRecs
+          race subscription. Download a one-off file only if you prefer to import it yourself.
         </p>
       </div>
     </details>
