@@ -2,6 +2,7 @@ import { formatDuration } from "@/lib/athrecs/format";
 import type { ProfileResult } from "@/lib/athrecs/profile-records";
 import { timingBasis } from "@/lib/athrecs/profile-records";
 import {
+  hasMinutePrecisionTime,
   hasTimedMark,
   historicalTimingLines,
   type PerformanceTiming,
@@ -32,7 +33,7 @@ export function HistoricalTiming({
   discipline?: string;
   timing?: PerformanceTiming;
 }) {
-  return hasTimedMark(performance, discipline) ? (
+  return hasTimedMark(performance, discipline) || hasMinutePrecisionTime(performance) ? (
     <TimingLines lines={historicalTimingLines(performance, timing)} />
   ) : null;
 }
