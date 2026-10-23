@@ -1,17 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
-import { ExternalLink, ShieldCheck } from "lucide-react";
+import { ArrowRight, ExternalLink, ShieldCheck } from "lucide-react";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
 import { raceGroupDefinitions } from "@/data/race-collections";
+import { SUPERHALFS_PATH } from "@/data/superhalfs";
 import { listEvents } from "@/runrecs/api";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import type { EventListItem, RaceGroupCode } from "@/lib/athrecs/types";
 
-const groupOrder: RaceGroupCode[] = [
-  "world-marathon-majors",
-  "utmb-world-series",
-  "utmb-index",
-];
+const groupOrder: RaceGroupCode[] = ["world-marathon-majors", "utmb-world-series", "utmb-index"];
 
 export const Route = createFileRoute("/running/race-series")({
   loader: async () => {
@@ -26,9 +23,9 @@ export const Route = createFileRoute("/running/race-series")({
   head: () => ({
     links: [{ rel: "canonical", href: `${SITE_URL}/running/race-series` }],
     meta: siteGraphMeta({
-      title: "World Marathon Majors & UTMB races | ATHRECS",
+      title: "SuperHalfs, World Marathon Majors & UTMB races | ATHRECS",
       description:
-        "Explore the World Marathon Majors, official UTMB World Series events and verified UTMB Index races on ATHRECS.",
+        "Explore SuperHalfs half marathons, World Marathon Majors, official UTMB World Series events and verified UTMB Index races on AthRecs.",
       url: `${SITE_URL}/running/race-series`,
     }),
   }),
@@ -45,17 +42,23 @@ function RaceSeriesPage() {
         <div className="h-1.5 bg-primary" />
         <div className="space-y-4 p-5 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-            Official race collections
+            Running race series
           </p>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
-            World Marathon Majors &amp; UTMB races
+            SuperHalfs, World Marathon Majors &amp; UTMB races
           </h1>
           <p className="max-w-3xl text-sm leading-relaxed text-muted">
-            Browse the World Marathon Majors, the official UTMB World Series
-            calendar, and individually verified UTMB Index races. UTMB Index races contribute to
-            an athlete’s Index but do not award Running Stones.
+            Explore the six SuperHalfs half marathons, World Marathon Majors, the official UTMB
+            World Series calendar, and individually verified UTMB Index races. UTMB Index races
+            contribute to an athlete’s Index but do not award Running Stones.
           </p>
           <div className="flex flex-wrap gap-2">
+            <a
+              href="#superhalfs"
+              className="inline-flex min-h-10 items-center rounded-lg border border-border bg-elevated px-3 text-sm font-medium text-fg no-underline hover:border-border-strong"
+            >
+              SuperHalfs · 6
+            </a>
             {raceGroupDefinitions.map((definition) => (
               <a
                 key={definition.code}
@@ -68,6 +71,38 @@ function RaceSeriesPage() {
           </div>
         </div>
       </header>
+
+      <section
+        id="superhalfs"
+        aria-labelledby="superhalfs-heading"
+        className="scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-surface shadow-card"
+      >
+        <div className="h-1.5 bg-accent" />
+        <div className="space-y-4 p-5 md:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+            Half marathon series
+          </p>
+          <h2 id="superhalfs-heading" className="font-display text-2xl font-semibold text-fg">
+            SuperHalfs: six cities, six half marathons
+          </h2>
+          <p className="max-w-3xl leading-7 text-muted">
+            Lisbon, Prague, Berlin, Copenhagen, Cardiff and Valencia. Complete the six designated
+            races in any order, with no series completion deadline, and work towards the official
+            SuperMedal through your SuperPassport.
+          </p>
+          <p className="max-w-3xl text-sm leading-6 text-muted">
+            Our guide brings together race dates, entry options, course information, time limits,
+            results links and practical guidance for amateur and elite athletes.
+          </p>
+          <Link
+            to={SUPERHALFS_PATH}
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-primary-fg no-underline hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            Explore the SuperHalfs guide
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
 
       {raceGroupDefinitions.map((definition) => {
         const races = racesByCode.get(definition.code) ?? [];

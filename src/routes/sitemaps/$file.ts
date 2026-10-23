@@ -22,6 +22,8 @@ export const Route = createFileRoute("/sitemaps/$file")({
             const { roadGuideModifiedAt } = await import("@/lib/running/guide-modified");
             const { ROAD_ULTRAS, ULTRA_CHECKED, ULTRA_GUIDE_PATH, ultraPath } =
               await import("@/lib/running/road-ultras");
+            const { SUPERHALFS_PATH, SUPERHALFS_CHECKED_AT } = await import("@/data/superhalfs");
+            modified.set(SUPERHALFS_PATH, SUPERHALFS_CHECKED_AT);
             for (const [countries, races] of [
               [MARATHON_COUNTRIES, ROAD_MARATHONS],
               [HALF_MARATHON_COUNTRIES, ROAD_HALF_MARATHONS],
@@ -42,7 +44,10 @@ export const Route = createFileRoute("/sitemaps/$file")({
             for (const race of ROAD_ULTRAS) modified.set(ultraPath(race.slug), ULTRA_CHECKED);
             runningPaths.push(
               "/running",
-              "/running/road", "/running/trail", "/running/fell", "/running/cross-country",
+              "/running/road",
+              "/running/trail",
+              "/running/fell",
+              "/running/cross-country",
               ...HALF_MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
               ...ROAD_HALF_MARATHONS.map((race) => `/running/races/${race.slug}`),
               ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
@@ -53,12 +58,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
             sitemapXml(
               (IS_RUNRECS_SITE
                 ? ["/", "/races", "/calendar", "/race-series", "/clubs", "/privacy"]
-                : [
-                    ...PUBLIC_PAGES.map(
-                      (page) => page.path,
-                    ),
-                    ...runningPaths,
-                  ]
+                : [...PUBLIC_PAGES.map((page) => page.path), ...runningPaths]
               )
                 .filter((path, index, paths) => paths.indexOf(path) === index)
                 .map((path) => ({ url: `${SITE_URL}${path}`, lastmod: modified.get(path) })),
@@ -66,20 +66,31 @@ export const Route = createFileRoute("/sitemaps/$file")({
           );
         }
         if (!IS_RUNRECS_SITE && params.file === "race-places.xml") {
-          const { readRacePlaceRows, racePlaceSitemapPaths } = await import("@/lib/athrecs/race-places.server");
-          return sitemapResponse(sitemapXml(racePlaceSitemapPaths(await readRacePlaceRows()).map((path) => `${SITE_URL}${path}`)));
+          const { readRacePlaceRows, racePlaceSitemapPaths } =
+            await import("@/lib/athrecs/race-places.server");
+          return sitemapResponse(
+            sitemapXml(
+              racePlaceSitemapPaths(await readRacePlaceRows()).map((path) => `${SITE_URL}${path}`),
+            ),
+          );
         }
         if (!IS_RUNRECS_SITE && params.file === "countries.xml") {
           const { getSql } = await import("@/lib/db");
           const { ensureAthrecsSeeded } = await import("@/lib/athrecs/seed.server");
-          const { populatedRunningCountries } = await import("@/lib/athrecs/country-sitemap.server");
+          const { populatedRunningCountries } =
+            await import("@/lib/athrecs/country-sitemap.server");
           await ensureAthrecsSeeded();
-          const populated = await populatedRunningCountries(await getSql(), COUNTRY_SITES.map((site) => site.country));
+          const populated = await populatedRunningCountries(
+            await getSql(),
+            COUNTRY_SITES.map((site) => site.country),
+          );
           return sitemapResponse(
             sitemapXml(
               COUNTRY_SITES.flatMap((site) => [
                 `${SITE_URL}/en/${site.slug}`,
-                ...(populated.has(site.country) ? SITE_LANGUAGES.map((language) => `${SITE_URL}/${language}/${site.slug}/races`) : []),
+                ...(populated.has(site.country)
+                  ? SITE_LANGUAGES.map((language) => `${SITE_URL}/${language}/${site.slug}/races`)
+                  : []),
               ]),
             ),
           );
@@ -91,10 +102,11 @@ export const Route = createFileRoute("/sitemaps/$file")({
           const { athleteSitemapSlugs } = await import("@/lib/athrecs/athlete-sitemap.server");
           await ensureAthrecsSeeded();
           const slugs = await athleteSitemapSlugs(await getSql(), Number(athleteMatch[1]));
-          if (!slugs.length) return new Response("Sitemap not found", {
-            status: 404,
-            headers: { "Cache-Control": "no-store" },
-          });
+          if (!slugs.length)
+            return new Response("Sitemap not found", {
+              status: 404,
+              headers: { "Cache-Control": "no-store" },
+            });
           return sitemapResponse(sitemapXml(slugs.map((slug) => `${SITE_URL}/athletes/${slug}`)));
         }
         const contentMatch = /^(races|clubs|results)-([1-9]\d{0,5})\.xml$/.exec(params.file);

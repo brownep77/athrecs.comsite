@@ -3,6 +3,7 @@ import { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } from "../running/road-ultras
 import { EDITORIAL_ARTICLES } from "../../data/athrecs-editorial";
 import { editorialPath } from "./editorial";
 import { SPORTS_ORGANISATIONS } from "../../data/sports-organisations";
+import { SUPERHALFS_PATH } from "../../data/superhalfs";
 
 /** One list for the HTML directory and the XML sitemap. Account tools stay private. */
 export const PUBLIC_PAGES = [
@@ -20,6 +21,7 @@ export const PUBLIC_PAGES = [
   { path: "/running/events", name: "Running race search" },
   { path: "/running/calendar", name: "Running calendar" },
   { path: "/running/race-series", name: "Running race series" },
+  { path: SUPERHALFS_PATH, name: "SuperHalfs series: races, dates and entry" },
   { path: "/calendar", name: "Athletics calendar" },
   { path: "/race-series", name: "Athletics disciplines and championships" },
   { path: "/clubs", name: "Running and athletics clubs" },

@@ -27,6 +27,8 @@ import { Route as SiteMapRouteImport } from './routes/site-map'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
+import { Route as SuperHalfsRouteImport } from './routes/super-halfs'
+import { Route as SuperhalfsRouteImport } from './routes/superhalfs'
 import { Route as TestAccountRouteImport } from './routes/test-account'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminApprovalsRouteImport } from './routes/admin/approvals'
@@ -92,6 +94,7 @@ import { Route as RunningGuideRouteImport } from './routes/running/$guide'
 import { Route as RunningCalendarRouteImport } from './routes/running/calendar'
 import { Route as RunningEventsRouteImport } from './routes/running/events'
 import { Route as RunningRaceSeriesRouteImport } from './routes/running/race-series'
+import { Route as RunningSuperhalfsRouteImport } from './routes/running/superhalfs'
 import { Route as RunningUkMarathonsRouteImport } from './routes/running/uk-marathons'
 import { Route as RunningUkRoadUltramarathonsRouteImport } from './routes/running/uk-road-ultramarathons'
 import { Route as SitemapsFileRouteImport } from './routes/sitemaps/$file'
@@ -195,6 +198,16 @@ const SponsorshipRoute = SponsorshipRouteImport.update({
 const SportsrecsRoute = SportsrecsRouteImport.update({
   id: '/sportsrecs',
   path: '/sportsrecs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuperHalfsRoute = SuperHalfsRouteImport.update({
+  id: '/super-halfs',
+  path: '/super-halfs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuperhalfsRoute = SuperhalfsRouteImport.update({
+  id: '/superhalfs',
+  path: '/superhalfs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestAccountRoute = TestAccountRouteImport.update({
@@ -527,6 +540,11 @@ const RunningRaceSeriesRoute = RunningRaceSeriesRouteImport.update({
   path: '/running/race-series',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RunningSuperhalfsRoute = RunningSuperhalfsRouteImport.update({
+  id: '/running/superhalfs',
+  path: '/running/superhalfs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RunningUkMarathonsRoute = RunningUkMarathonsRouteImport.update({
   id: '/running/uk-marathons',
   path: '/running/uk-marathons',
@@ -622,6 +640,8 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/super-halfs': typeof SuperHalfsRoute
+  '/superhalfs': typeof SuperhalfsRoute
   '/test-account': typeof TestAccountRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/assistant-chats': typeof AdminAssistantChatsRoute
@@ -677,6 +697,7 @@ export interface FileRoutesByFullPath {
   '/running/calendar': typeof RunningCalendarRoute
   '/running/events': typeof RunningEventsRoute
   '/running/race-series': typeof RunningRaceSeriesRoute
+  '/running/superhalfs': typeof RunningSuperhalfsRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -721,6 +742,8 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/super-halfs': typeof SuperHalfsRoute
+  '/superhalfs': typeof SuperhalfsRoute
   '/test-account': typeof TestAccountRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/assistant-chats': typeof AdminAssistantChatsRoute
@@ -776,6 +799,7 @@ export interface FileRoutesByTo {
   '/running/calendar': typeof RunningCalendarRoute
   '/running/events': typeof RunningEventsRoute
   '/running/race-series': typeof RunningRaceSeriesRoute
+  '/running/superhalfs': typeof RunningSuperhalfsRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -821,6 +845,8 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/super-halfs': typeof SuperHalfsRoute
+  '/superhalfs': typeof SuperhalfsRoute
   '/test-account': typeof TestAccountRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/assistant-chats': typeof AdminAssistantChatsRoute
@@ -876,6 +902,7 @@ export interface FileRoutesById {
   '/running/calendar': typeof RunningCalendarRoute
   '/running/events': typeof RunningEventsRoute
   '/running/race-series': typeof RunningRaceSeriesRoute
+  '/running/superhalfs': typeof RunningSuperhalfsRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -922,6 +949,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/super-halfs'
+    | '/superhalfs'
     | '/test-account'
     | '/admin/approvals'
     | '/admin/assistant-chats'
@@ -977,6 +1006,7 @@ export interface FileRouteTypes {
     | '/running/calendar'
     | '/running/events'
     | '/running/race-series'
+    | '/running/superhalfs'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -1021,6 +1051,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/super-halfs'
+    | '/superhalfs'
     | '/test-account'
     | '/admin/approvals'
     | '/admin/assistant-chats'
@@ -1076,6 +1108,7 @@ export interface FileRouteTypes {
     | '/running/calendar'
     | '/running/events'
     | '/running/race-series'
+    | '/running/superhalfs'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -1120,6 +1153,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/super-halfs'
+    | '/superhalfs'
     | '/test-account'
     | '/admin/approvals'
     | '/admin/assistant-chats'
@@ -1175,6 +1210,7 @@ export interface FileRouteTypes {
     | '/running/calendar'
     | '/running/events'
     | '/running/race-series'
+    | '/running/superhalfs'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -1220,6 +1256,8 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SponsorshipRoute: typeof SponsorshipRoute
   SportsrecsRoute: typeof SportsrecsRoute
+  SuperHalfsRoute: typeof SuperHalfsRoute
+  SuperhalfsRoute: typeof SuperhalfsRoute
   TestAccountRoute: typeof TestAccountRoute
   AdminApprovalsRoute: typeof AdminApprovalsRoute
   AdminAssistantChatsRoute: typeof AdminAssistantChatsRoute
@@ -1275,6 +1313,7 @@ export interface RootRouteChildren {
   RunningCalendarRoute: typeof RunningCalendarRoute
   RunningEventsRoute: typeof RunningEventsRoute
   RunningRaceSeriesRoute: typeof RunningRaceSeriesRoute
+  RunningSuperhalfsRoute: typeof RunningSuperhalfsRoute
   RunningUkMarathonsRoute: typeof RunningUkMarathonsRoute
   RunningUkRoadUltramarathonsRoute: typeof RunningUkRoadUltramarathonsRoute
   SitemapsFileRoute: typeof SitemapsFileRoute
@@ -1427,6 +1466,20 @@ declare module '@tanstack/react-router' {
       path: '/sportsrecs'
       fullPath: '/sportsrecs'
       preLoaderRoute: typeof SportsrecsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/super-halfs': {
+      id: '/super-halfs'
+      path: '/super-halfs'
+      fullPath: '/super-halfs'
+      preLoaderRoute: typeof SuperHalfsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/superhalfs': {
+      id: '/superhalfs'
+      path: '/superhalfs'
+      fullPath: '/superhalfs'
+      preLoaderRoute: typeof SuperhalfsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/test-account': {
@@ -1884,6 +1937,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RunningRaceSeriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/running/superhalfs': {
+      id: '/running/superhalfs'
+      path: '/running/superhalfs'
+      fullPath: '/running/superhalfs'
+      preLoaderRoute: typeof RunningSuperhalfsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/running/uk-marathons': {
       id: '/running/uk-marathons'
       path: '/running/uk-marathons'
@@ -2004,6 +2064,8 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SponsorshipRoute: SponsorshipRoute,
   SportsrecsRoute: SportsrecsRoute,
+  SuperHalfsRoute: SuperHalfsRoute,
+  SuperhalfsRoute: SuperhalfsRoute,
   TestAccountRoute: TestAccountRoute,
   AdminApprovalsRoute: AdminApprovalsRoute,
   AdminAssistantChatsRoute: AdminAssistantChatsRoute,
@@ -2059,6 +2121,7 @@ const rootRouteChildren: RootRouteChildren = {
   RunningCalendarRoute: RunningCalendarRoute,
   RunningEventsRoute: RunningEventsRoute,
   RunningRaceSeriesRoute: RunningRaceSeriesRoute,
+  RunningSuperhalfsRoute: RunningSuperhalfsRoute,
   RunningUkMarathonsRoute: RunningUkMarathonsRoute,
   RunningUkRoadUltramarathonsRoute: RunningUkRoadUltramarathonsRoute,
   SitemapsFileRoute: SitemapsFileRoute,
