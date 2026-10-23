@@ -7,6 +7,8 @@ import { NORFOLK_CLARIFICATION_DETAILS } from "./lib/norfolk-start-clarification
 import { REEPHAM_LAP_STARTS_REVIEW } from "./lib/reepham-lap-starts-review.mjs";
 import { MARRIOTTS_CONFIRMATION_REVIEW } from "./lib/marriotts-organiser-confirmation-review.mjs";
 import marriottsConfirmation from "../src/data/marriotts-organiser-confirmation-2026-10-23.json" with { type: "json" };
+import { TIMING_DIRECTORY_STARTS_20261023_REVIEW } from "./lib/timing-directory-starts-2026-10-23-review.mjs";
+import timingDirectoryStarts from "../src/data/timing-directory-starts-2026-10-23.json" with { type: "json" };
 if (process.env.VERCEL_ENV !== "production" || process.env.VERCEL_GIT_COMMIT_REF !== "main") {
   console.log("[fixture-checks] skipping outside production/main");
   process.exit(0);
@@ -59,6 +61,15 @@ try {
       publishing,
       marriottsConfirmation,
       MARRIOTTS_CONFIRMATION_REVIEW,
+    ),
+  );
+  console.log(
+    "[timing-directory-starts-2026-10-23]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      timingDirectoryStarts,
+      TIMING_DIRECTORY_STARTS_20261023_REVIEW,
     ),
   );
 } finally {
