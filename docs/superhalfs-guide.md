@@ -211,3 +211,12 @@ assets loaded, the correct Welsh asset was used, and Lisbon's source discrepancy
 was visible beside its start field. A 390px mobile preview had 375px document and
 scroll widths, with the flag and explanatory note contained in the race card.
 The temporary mobile QA page and preview-host configuration were removed.
+
+## Show both Lisbon times — 23 October 2026
+
+At the owner's request, the Lisbon start field now lists **09:20 / 09:30 — TBC**
+instead of "TBC — official sources disagree". The adjacent explanation continues
+to identify 09:20 as the official programme time and 09:30 as the time in the
+2027 regulations and runner FAQ. Both are Lisbon local times; neither is treated
+as the confirmed final start. The existing source links and country flags remain
+in place.

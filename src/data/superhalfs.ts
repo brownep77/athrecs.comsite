@@ -54,7 +54,7 @@ export const SUPERHALFS_RACES: readonly SuperHalfsRace[] = [
     date: "2027-03-07",
     dateLabel: "Sunday 7 March 2027",
     dateStatus: "confirmed",
-    start: "TBC — official sources disagree",
+    start: "09:20 / 09:30 — TBC",
     startNote:
       "The 7 March 2027 programme lists 09:20. The 2027 regulations and official runner FAQ say 09:30. Confirm the final start and your wave with the organiser before race day.",
     timeZone: "Europe/Lisbon",
