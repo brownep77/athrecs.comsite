@@ -5492,4 +5492,532 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
+  record({
+  "slug": "iran-athletics",
+  "name": "Athletic Federation of I.R. Iran",
+  "type": "national",
+  "country": "Iran",
+  "jurisdiction": "Iran",
+  "territories": [
+    "Iran"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Iran, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "iran-cycling",
+  "name": "Cycling Federation Of The Islamic Republic Of Iran",
+  "type": "national",
+  "country": "Iran",
+  "jurisdiction": "Iran",
+  "territories": [
+    "Iran"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Iran, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "iraq-athletics",
+  "name": "Iraqi Athletics Federation",
+  "type": "national",
+  "country": "Iraq",
+  "jurisdiction": "Iraq",
+  "territories": [
+    "Iraq"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Iraq, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "iraq-cycling",
+  "name": "Iraqi Cycling Federation",
+  "type": "national",
+  "country": "Iraq",
+  "jurisdiction": "Iraq",
+  "territories": [
+    "Iraq"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Iraq, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "jordan-athletics",
+  "name": "Jordan Athletics Federation",
+  "type": "national",
+  "country": "Jordan",
+  "jurisdiction": "Jordan",
+  "territories": [
+    "Jordan"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Jordan, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "jordan-cycling",
+  "name": "Jordan Cycling Federation",
+  "type": "national",
+  "country": "Jordan",
+  "jurisdiction": "Jordan",
+  "territories": [
+    "Jordan"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Jordan, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kuwait-athletics",
+  "name": "Kuwait Athletics Federation",
+  "type": "national",
+  "country": "Kuwait",
+  "jurisdiction": "Kuwait",
+  "territories": [
+    "Kuwait"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Kuwait, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kuwait-cycling",
+  "name": "Kuwait Cycling Committee",
+  "type": "national",
+  "country": "Kuwait",
+  "jurisdiction": "Kuwait",
+  "territories": [
+    "Kuwait"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Kuwait, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "lebanon-athletics",
+  "name": "Fédération Libanaise d'Athlétisme",
+  "type": "national",
+  "country": "Lebanon",
+  "jurisdiction": "Lebanon",
+  "territories": [
+    "Lebanon"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Lebanon, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "lebanon-cycling",
+  "name": "Federation Libanaise De Cyclisme",
+  "type": "national",
+  "country": "Lebanon",
+  "jurisdiction": "Lebanon",
+  "territories": [
+    "Lebanon"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Lebanon, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "myanmar-athletics",
+  "name": "Myanmar Track & Field Federation",
+  "type": "national",
+  "country": "Myanmar",
+  "jurisdiction": "Myanmar",
+  "territories": [
+    "Myanmar"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Myanmar, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "myanmar-cycling",
+  "name": "Myanmar Cycling Federation",
+  "type": "national",
+  "country": "Myanmar",
+  "jurisdiction": "Myanmar",
+  "territories": [
+    "Myanmar"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Myanmar, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "oman-athletics",
+  "name": "Oman Athletic Association",
+  "type": "national",
+  "country": "Oman",
+  "jurisdiction": "Oman",
+  "territories": [
+    "Oman"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Oman, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "oman-cycling",
+  "name": "Oman Cycling Association",
+  "type": "national",
+  "country": "Oman",
+  "jurisdiction": "Oman",
+  "territories": [
+    "Oman"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Oman, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "qatar-athletics",
+  "name": "Qatar Athletics Federation",
+  "type": "national",
+  "country": "Qatar",
+  "jurisdiction": "Qatar",
+  "territories": [
+    "Qatar"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Qatar, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "qatar-cycling",
+  "name": "Qatar Cycling & Triathlon Federation",
+  "type": "national",
+  "country": "Qatar",
+  "jurisdiction": "Qatar",
+  "territories": [
+    "Qatar"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Qatar, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "saudi-arabia-athletics",
+  "name": "Saudi Arabian Athletics Federation",
+  "type": "national",
+  "country": "Saudi Arabia",
+  "jurisdiction": "Saudi Arabia",
+  "territories": [
+    "Saudi Arabia"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Saudi Arabia, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "saudi-arabia-cycling",
+  "name": "Saudi Cycling Federation",
+  "type": "national",
+  "country": "Saudi Arabia",
+  "jurisdiction": "Saudi Arabia",
+  "territories": [
+    "Saudi Arabia"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Saudi Arabia, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tajikistan-athletics",
+  "name": "Athletics Federation of the Republic of Tajikistan",
+  "type": "national",
+  "country": "Tajikistan",
+  "jurisdiction": "Tajikistan",
+  "territories": [
+    "Tajikistan"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Tajikistan, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tajikistan-cycling",
+  "name": "Tajikistan Cycling Federation",
+  "type": "national",
+  "country": "Tajikistan",
+  "jurisdiction": "Tajikistan",
+  "territories": [
+    "Tajikistan"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Tajikistan, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "turkmenistan-athletics",
+  "name": "Amateur Athletic Federation of Turkmenistan",
+  "type": "national",
+  "country": "Turkmenistan",
+  "jurisdiction": "Turkmenistan",
+  "territories": [
+    "Turkmenistan"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Turkmenistan, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "turkmenistan-cycling",
+  "name": "Turkmenistan Cycling Federation",
+  "type": "national",
+  "country": "Turkmenistan",
+  "jurisdiction": "Turkmenistan",
+  "territories": [
+    "Turkmenistan"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Turkmenistan, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "uzbekistan-athletics",
+  "name": "The Athletic Federation of Uzbekistan",
+  "type": "national",
+  "country": "Uzbekistan",
+  "jurisdiction": "Uzbekistan",
+  "territories": [
+    "Uzbekistan"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Uzbekistan, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "uzbekistan-cycling",
+  "name": "Uzbekistan Cycling Federation",
+  "type": "national",
+  "country": "Uzbekistan",
+  "jurisdiction": "Uzbekistan",
+  "territories": [
+    "Uzbekistan"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Uzbekistan, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
 ];
