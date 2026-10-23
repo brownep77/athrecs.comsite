@@ -1,5 +1,7 @@
 # Athlete finder adversarial verification — 23 October 2026
 
+This report records the first test round. The [follow-up performance report](athlete-result-finder-performance-tests-2026-10-23.md) covers the subsequent participant index, further regressions and current performance measurements.
+
 ## Scope and method
 
 The fault-finding exercise covered the staff athlete result finder, its four stored collections, source coverage, the supported Total Race Timing URL preview, and the selected-row handoff to the existing importer. The baseline was the deployed finder plus the subsequent public-profile evidence privacy fix. The changes also preserve the later source-registry additions from main.
@@ -61,7 +63,7 @@ CI also runs the existing central-archive workflow and the repository quality ga
 - A matching name is a possible identity match. These code tests do not verify an athlete, a performance or the full stored catalogue.
 - Coverage counts represent overlapping observations, not unique performances, and saved URLs do not contain searchable participant data until extracted.
 - The earlier intermittent capture coverage failure cannot be assigned a proven cause because the old handler discarded its reason. The new refresh and diagnostics improve recovery and investigation; they do not prove that database failures cannot recur.
-- Coverage now normalizes encoded and IDN hosts, but the stored-search source filter still uses ordinary SQL host comparison. Unusual legacy hostname spellings can therefore be missed with a source filter. A malformed URL with a port above 65535 can also be included under that domain filter, although its unusable link is omitted from the response. Searching all websites avoids the missed-match filtering limitation; consistent historic URL normalization remains follow-up work.
+- Coverage now normalizes encoded and IDN hosts, but the stored-search source filter still uses ordinary SQL host comparison. Unusual legacy hostname spellings can therefore be missed with a source filter. Searching all websites avoids the missed-match filtering limitation; consistent historic URL normalization remains follow-up work. The follow-up test round also fixes the earlier acceptance of ports above 65535 in that filter.
 - The live URL adapter remains limited to supplied supported TRT pages. It does not search the entire internet or every URL in the registry.
 - Synthetic malformed-page cases do not cover every future provider layout. Ambiguous or unsupported tables retain their evidence for manual review and may have no automatic handoff.
 

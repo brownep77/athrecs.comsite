@@ -17,8 +17,13 @@ import {
 } from "./core";
 
 // SQL fragments below only receive developer-authored expressions, never input.
-const host = (url: string) =>
-  `regexp_replace(regexp_replace(substring(lower(btrim(coalesce(${url},''))) from '^https?://([^/?#:@]+)(?::[0-9]+)?(?:[/?#]|$)'), '^www\\.', ''), '\\.$', '')`;
+const host = (url: string) => {
+  const value = `lower(btrim(coalesce(${url},'')))`;
+  const port = `coalesce(nullif(ltrim(substring(${value} from '^https?://[^/?#:@]+:([0-9]+)(?:[/?#]|$)'),'0'),''),'0')`;
+  // Compare bounded decimal text, avoiding casts on malformed legacy URLs.
+  return `case when length(${port})<5 or (length(${port})=5 and ${port} collate "C"<='65535')
+    then regexp_replace(regexp_replace(substring(${value} from '^https?://([^/?#:@]+)(?::[0-9]+)?(?:[/?#]|$)'), '^www\\.', ''), '\\.$', '') end`;
+};
 const sourceMatches = (url: string) =>
   `(coalesce(array_length($5::text[],1),0)=0 or exists(select 1 from unnest($5::text[]) wanted(host)
     where ${host(url)}=wanted.host or right(${host(url)},length(wanted.host)+1)='.'||wanted.host))`;
@@ -48,6 +53,66 @@ const historyClub = `coalesce(nullif(p.value->>'club',''),p.value#>>'{archiveRef
     case when jsonb_typeof(p.value->'labels')='array' then p.value->'labels' else '[]'::jsonb end
   ) label where label ~* '^Club( at race)?:' limit 1))`;
 const captureDate = "coalesce(nullif(p.value->>'date',''),c.payload->'index'->>'date')";
+const captureProjection = `select c.id::text||':'||p.ordinality::text as "localKey",left(p.value->>'name',200) as name,
+    left(p.value->>'club',200) as club,left(c.payload->'index'->>'name',300) as event,
+    left(${captureDate},80) as date,left(coalesce(p.value->>'distanceLabel',p.value->>'tableKey'),100) as distance,
+    left(case when p.value#>>'{original,Chip Time}' is not null or p.value#>>'{original,Gun Time}' is not null
+      then concat_ws(' · ',case when p.value#>>'{original,Chip Time}' is not null
+        then 'Chip '||left(p.value#>>'{original,Chip Time}',60) end,
+        case when p.value#>>'{original,Gun Time}' is not null then 'Gun '||left(p.value#>>'{original,Gun Time}',60) end)
+      else coalesce(p.value#>>'{original,Time}',p.value#>>'{original,Total Time}',p.value#>>'{original,Finals}',
+        p.value#>>'{original,TIME}',p.value->>'performance') end,160) as performance,
+    left(p.value->>'status',60) as status,left(c.provider,150) as "sourceName",
+    ${safeSourceUrl("c.source_url")} as "sourceUrl",
+    left(concat('Capture ',c.id,' · ',coalesce(p.value->>'tableKey','table'),
+      ' · source row ',coalesce(p.value->>'sourceRow',p.ordinality::text)),500) as "rowLocator",
+    'private capture · identity unreviewed'::text as "reviewState",
+    c.id::text as "captureId",p.ordinality::integer as "captureOrdinal"`;
+const captureEligibility = `c.source_check in ('compared','empty')
+      and approval.scope='staff_only' and approval.revoked_at is null
+      and ${sourceMatches("c.source_url")}
+      and not exists(select 1 from result_archive_source_captures newer
+        where newer.provider=c.provider and newer.source_key=c.source_key
+          and (newer.captured_at,newer.id)>(c.captured_at,c.id))`;
+const completeCaptureIndex = `search_state.index_version=1
+  and ((search_state.staff_only and search_state.indexed_rows=search_state.expected_rows)
+    or (not search_state.staff_only and search_state.indexed_rows=0 and search_state.expected_rows=0))`;
+const unindexedCapture = `not exists(select 1 from athlete_finder_capture_search_state search_state
+  where search_state.capture_id=c.id and ${completeCaptureIndex})`;
+const legacyCaptureCandidates = `select c.id
+    from result_archive_source_captures c
+    join result_archive_capture_approvals approval on approval.id=c.approval_id
+    where c.payload->>'publication'='staff_only' and ${captureEligibility}
+      and (/* capture_name_candidates */)
+    order by c.id desc`;
+const unindexedCaptureCandidates = `select c.id
+    from result_archive_source_captures c
+    join result_archive_capture_approvals approval on approval.id=c.approval_id
+    where ${captureEligibility} and ${unindexedCapture}
+    order by c.id desc`;
+const indexedCaptureQuery = `with named_participants as materialized (
+    select capture_id,row_ordinal from athlete_finder_capture_search_rows
+    where name_vector @@ to_tsquery('simple',$1)
+  ), eligible_indexed_captures as materialized (
+    select c.id from (select distinct capture_id from named_participants) wanted
+    join result_archive_source_captures c on c.id=wanted.capture_id
+    join athlete_finder_capture_search_state search_state on search_state.capture_id=c.id
+    join result_archive_capture_approvals approval on approval.id=c.approval_id
+    where search_state.staff_only and ${completeCaptureIndex}
+      and ${captureEligibility}
+  ), matching_participants as materialized (
+    select participant.capture_id,participant.row_ordinal
+    from named_participants participant
+    join eligible_indexed_captures eligible on eligible.id=participant.capture_id
+    order by participant.capture_id desc,participant.row_ordinal
+  ) ${captureProjection}
+    from matching_participants matched
+    cross join lateral(select c.id,c.payload,c.provider,c.source_url
+      from result_archive_source_captures c where c.id=matched.capture_id offset 0) c
+    cross join lateral(select c.payload->'rows'->(matched.row_ordinal-1) as value,
+      matched.row_ordinal as ordinality offset 0) p
+    where ${clubMatches("p.value->>'club'")} and ${yearMatches(captureDate)}
+    order by matched.capture_id desc,matched.row_ordinal ${take}`;
 
 const queries: Record<FinderStoreKind, string> = {
   canonical: `select r.id::text as "localKey",left(a.display_name,200) as name,
@@ -88,35 +153,7 @@ const queries: Record<FinderStoreKind, string> = {
       and ${yearMatches("ed.event_date::text")} and ${sourceMatches("d.source_url")}
     order by a.id desc ${take}`,
 
-  capture: `with candidates as materialized (
-    select c.id
-    from result_archive_source_captures c
-    join result_archive_capture_approvals approval on approval.id=c.approval_id
-    where c.payload->>'publication'='staff_only' and c.source_check in ('compared','empty')
-      and approval.scope='staff_only' and approval.revoked_at is null
-      and (/* capture_name_candidates */)
-      and ${sourceMatches("c.source_url")}
-      -- Select latest version before checking approval or names. A superseded
-      -- result must not reappear when the latest capture is held or revoked.
-      and not exists(select 1 from result_archive_source_captures newer
-        where newer.provider=c.provider and newer.source_key=c.source_key
-          and (newer.captured_at,newer.id)>(c.captured_at,c.id))
-    order by c.id desc
-  ) select c.id::text||':'||p.ordinality::text as "localKey",left(p.value->>'name',200) as name,
-    left(p.value->>'club',200) as club,left(c.payload->'index'->>'name',300) as event,
-    left(${captureDate},80) as date,left(coalesce(p.value->>'distanceLabel',p.value->>'tableKey'),100) as distance,
-    left(case when p.value#>>'{original,Chip Time}' is not null or p.value#>>'{original,Gun Time}' is not null
-      then concat_ws(' · ',case when p.value#>>'{original,Chip Time}' is not null
-        then 'Chip '||left(p.value#>>'{original,Chip Time}',60) end,
-        case when p.value#>>'{original,Gun Time}' is not null then 'Gun '||left(p.value#>>'{original,Gun Time}',60) end)
-      else coalesce(p.value#>>'{original,Time}',p.value#>>'{original,Total Time}',p.value#>>'{original,Finals}',
-        p.value#>>'{original,TIME}',p.value->>'performance') end,160) as performance,
-    left(p.value->>'status',60) as status,left(c.provider,150) as "sourceName",
-    ${safeSourceUrl("c.source_url")} as "sourceUrl",
-    left(concat('Capture ',c.id,' · ',coalesce(p.value->>'tableKey','table'),
-      ' · source row ',coalesce(p.value->>'sourceRow',p.ordinality::text)),500) as "rowLocator",
-    'private capture · identity unreviewed'::text as "reviewState",
-    c.id::text as "captureId",p.ordinality::integer as "captureOrdinal"
+  capture: `with candidates as materialized (/* capture_candidate_query */) ${captureProjection}
     from candidates selected
     cross join lateral(select c.id,c.payload,c.provider,c.source_url
       from result_archive_source_captures c where c.id=selected.id offset 0) c
@@ -124,7 +161,8 @@ const queries: Record<FinderStoreKind, string> = {
       select p.value,p.ordinality from jsonb_array_elements(
         case when jsonb_typeof(c.payload->'rows')='array' then c.payload->'rows' else '[]'::jsonb end
       ) with ordinality p(value,ordinality)
-      where /* capture_row_name_matches */ and ${clubMatches("p.value->>'club'")}
+      where c.payload->>'publication'='staff_only'
+        and /* capture_row_name_matches */ and ${clubMatches("p.value->>'club'")}
         and ${yearMatches(captureDate)}
       order by p.ordinality limit ($6::integer+${FINDER_PAGE_SIZE + 1})
     ) p
@@ -233,9 +271,9 @@ async function normalizeNames(sql: Sql, names: string[]): Promise<FinderNameTerm
   return terms;
 }
 
-function captureCandidates(names: FinderNameTerms) {
+function captureCandidates(names: FinderNameTerms, includePageKeys = true) {
   const values: string[][] = [];
-  const clauses = names.map((words) => {
+  const clauses = (includePageKeys ? names : []).map((words) => {
     const required: string[] = [];
     const alternatives: string[][] = [];
     for (const variants of words) {
@@ -285,7 +323,7 @@ async function searchStore(
   kind: FinderStoreKind,
   params: unknown[],
   offset: number,
-  candidates: ReturnType<typeof captureCandidates>,
+  nameTerms: FinderNameTerms,
 ) {
   try {
     return await sql.transaction(async (tx) => {
@@ -296,10 +334,13 @@ async function searchStore(
         available: boolean;
         supporting: boolean;
         captureIndex: boolean;
+        participantIndex: boolean;
       }>(
         `select bool_and(to_regclass('public.'||name) is not null) as available,
           to_regclass('public.result_source_references') is not null as supporting,
-          to_regprocedure('athlete_finder_capture_name_keys(jsonb)') is not null as "captureIndex"
+          to_regprocedure('athlete_finder_capture_name_keys(jsonb)') is not null as "captureIndex",
+          (to_regclass('public.athlete_finder_capture_search_rows') is not null
+            and to_regclass('public.athlete_finder_capture_search_state') is not null) as "participantIndex"
           from unnest($1::text[]) name`,
         [storeTables[kind]],
       );
@@ -319,12 +360,29 @@ async function searchStore(
           } satisfies FinderStoreStatus,
         };
       }
-      const query = queries[kind]
+      const candidates = captureCandidates(nameTerms, !tables.participantIndex);
+      let query = queries[kind]
         .replace("/* supporting_source_join */", () =>
           tables.supporting ? supportingJoin : absentSupportingJoin,
         )
+        .replace("/* capture_candidate_query */", () =>
+          tables.participantIndex ? unindexedCaptureCandidates : legacyCaptureCandidates,
+        )
         .replace("/* capture_name_candidates */", () => candidates.clause)
         .replace("/* capture_row_name_matches */", () => candidates.nameClause);
+      if (kind === "capture" && tables.participantIndex) {
+        // Merge both exact streams before paging. A capture belongs to just one
+        // branch; incomplete/backfill rows must never turn into false zeroes.
+        // Fallback candidates contain metadata only: the materialized boundary
+        // prevents payload reads for fully indexed captures, even if the planner
+        // would otherwise reorder an index anti-join after JSON predicates.
+        const branchTake = `limit ($6::integer+${FINDER_PAGE_SIZE + 1})`;
+        query = `with capture_search as materialized (
+          (${indexedCaptureQuery.replace(take, branchTake)})
+          union all (${query.replace(take, branchTake)})
+        ) select * from capture_search
+          order by "captureId"::bigint desc,"captureOrdinal" ${take}`;
+      }
       const found = await tx.query<RawRow>(
         query,
         kind === "capture" ? [...params, ...candidates.values] : params,
@@ -394,9 +452,8 @@ export async function searchStoredAthleteResults(
     hosts,
     data.offset,
   ];
-  const candidates = captureCandidates(nameTerms);
   const searched = await Promise.all(
-    kinds.map((kind) => searchStore(sql, kind, params, data.offset, candidates)),
+    kinds.map((kind) => searchStore(sql, kind, params, data.offset, nameTerms)),
   );
   const stores = searched.map((result) => result.store);
   const hasMore = stores.some((store) => store.hasMore);

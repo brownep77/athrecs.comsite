@@ -26,16 +26,18 @@ The first version does not require storing an entire website. Retaining normaliz
 
 - Profile results in `results`, with athlete, event and edition context.
 - Central observations in `result_archive_entries` and their datasets.
-- Rows in the latest eligible, approved, staff-only `result_archive_source_captures`.
+- Rows in each source's newest `result_archive_source_captures` observation, when that observation is approved for staff use. A newer held, revoked or nonstaff version suppresses older approved versions.
 - Performances in `athlete_source_histories`, including private/unpublished histories labelled as such.
 
 The search accepts a racing name, up to eight explicit aliases, an optional club filter, years and a registered source website. Source filtering matches its registered hosts and subdomains, not arbitrary substring lookalikes. Name words and aliases generate possible matches; they do not establish identity. Club and year filters exclude rows where the required information is absent, so start without them when coverage is uncertain.
 
 The default page returns up to 25 observations per collection. Collections report pagination and their own unavailable, timed-out or failed states. Results can overlap between collections; displayed counts are not unique races. A bounded search with missing collections must not be presented as an exhaustive negative result.
 
-The database migration adds search indexes and a compact capture-name candidate index. Exact row-level name matching still runs after candidate selection. Whole source HTML and unrelated participants are not returned in the stored-search response. Search transactions have statement and lock time limits.
+Saved captures use a private participant-name index containing capture IDs, original row ordinals and normalized name vectors. Original source rows and HTML remain in the capture. New or changed payloads update the index and its completion metadata atomically. Historical captures with missing, unsupported or inconsistent completion metadata use exact stored-row matching. Both streams merge before paging, so unfinished backfill cannot hide existing matches. Whole source HTML and unrelated participants are not returned in the stored-search response. Search transactions retain their statement and lock time limits.
 
-Search inputs use PostgreSQL's name normalization to agree with those indexes, including tested Turkish, Greek and Indic cases. Capture search processes candidate races in result order and can stop after enough matching rows for the requested page. A preliminary literal check skips expensive name-vector work only for safe ASCII cases; non-ASCII source names still use the complete matcher. Broad names can still reach the time limit and must remain explicitly incomplete.
+Search inputs use PostgreSQL's name normalization to agree with those indexes, including tested Turkish, Greek and Indic cases. The participant index applies the same exact name predicate to individual rows, avoiding race-level candidates where different people supply different words of the searched name. The legacy fallback retains its safe ASCII preliminary check and exact matcher. A completed index avoids the fallback's payload reads. Broad names, restrictive club/year filters or deep pages can still reach the time limit and must remain explicitly incomplete.
+
+Index completion is measured against the actual stored participant array, separately from a capture's declared summary row count. A legacy capture can retain a positive summary count without containing participant rows; the finder cannot search names that were never retained. Such a capture needs the original extraction workflow to become searchable. Indexing does not reconstruct those missing rows or fetch the source website.
 
 Legacy URLs with a percent-encoded or Unicode hostname can be counted correctly in coverage while being missed by the stored-search source filter, whose SQL currently compares ordinary host strings. Search **all source websites** when investigating an apparent missing match in this situation. Normalizing historic source URLs for search remains follow-up work; coverage normalization does not rewrite stored evidence.
 
@@ -65,7 +67,7 @@ The coverage panel reads the current source registry, saved edition result links
 
 Coverage distinguishes stored rows, extraction/review backlog, links without rows and no linked stored evidence. Missing optional stores are reported as unknown rather than zero; if no rows are known and any participant collection is unavailable, the stage is explicitly incomplete. Saved result-link counts include held and rejected references and do not authorize collection. Canonical counts use the primary result source URL and history counts use the parent history URL; supporting references or individual performance URLs can yield search matches beyond those per-domain counts.
 
-The **Refresh source coverage** button retries the current filter and page. Partial failures have a safe collection-specific explanation, such as a missing collection, time limit or busy store. A failed count remains unknown until a successful refresh; it is never replaced with zero. Server diagnostics retain the failure category, safe SQLSTATE and elapsed time without logging SQL text or private result payloads. Domain grouping uses the same URL normalization as the registry, and both sides of an overlapping registry/inventory domain receive the shared-count warning.
+The **Refresh source coverage** button retries the current filter and page. Partial failures have a safe collection-specific explanation, such as a missing collection, time limit or busy store. A failed count remains unknown until a successful refresh; it is never replaced with zero. Current capture search metadata supplies publication eligibility and actual retained row counts without opening the original payload; missing metadata uses one bounded lookup for the same information. Missing or malformed participant arrays contribute zero retained rows. The saved-capture browser uses the same actual-array count, while original declared summary values remain unchanged in the database. Server diagnostics retain the failure category, safe SQLSTATE and elapsed time without logging SQL text or private result payloads. Domain grouping uses the same URL normalization as the registry, and both sides of an overlapping registry/inventory domain receive the shared-count warning.
 
 Registry enable/hold states describe existing metadata collection settings. This feature does not change them or enable participant collection across all registered sources. Saved captures are screened against the newest version so a superseded approved page cannot reappear when its replacement is held or revoked.
 
@@ -75,17 +77,20 @@ Focused verification uses synthetic records in disposable PGlite databases, boun
 
 The [23 October adversarial test report](athlete-result-finder-fault-tests-2026-10-23.md) records reproduced faults, regression coverage and remaining limits.
 
+The [follow-up performance report](athlete-result-finder-performance-tests-2026-10-23.md) records the participant-index rehearsal, result-equivalence checks and additional faults found during the second test round.
+
 Run:
 
 ```sh
 npm run verify:athlete-source-finder
 npm run verify:athlete-source-coverage
+npm run verify:athlete-finder-capture-backfill
 npm run verify:athlete-source-check
 npm run verify:athlete-source-finder-browser
 npm run typecheck
 npm run build:dev
 ```
 
-The browser verifier can use `ATHRECS_TEST_CHROMIUM_EXECUTABLE` to select an installed test binary; CI uses the project Playwright browser. The normal production build applies the additive migration. No new API credential, source registration or source enablement is needed.
+The browser verifier can use `ATHRECS_TEST_CHROMIUM_EXECUTABLE` to select an installed test binary; CI uses the project Playwright browser. The normal production build applies the additive migration, creating empty derived tables and enabling atomic maintenance for new writes. Backfill historical captures separately with `scripts/backfill-athlete-finder-capture-index.mjs`: default `--check` is read only; explicit `--apply` builds derived rows in bounded, resumable transactions. Complete the backfill and analyze the derived tables before assessing normal search speed. Search remains available during rollout, but the exact fallback can be slower while many captures remain unindexed. No new API credential, source registration or source enablement is needed.
 
-Rollback is a normal code revert. The additive indexes/function can remain unused until a separately reviewed cleanup; there are no result-data rewrites to undo. Any records subsequently saved through the existing importer remain normal reviewed archive records and should not be removed by a code rollback.
+An application revert restores the previous search code. The database trigger continues maintaining the derived index until a separately reviewed schema rollback; a code revert does not disable it. Original source and result records are unchanged by indexing. Any records subsequently saved through the existing importer remain normal reviewed archive records and should not be removed by a code rollback.

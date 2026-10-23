@@ -26,16 +26,24 @@ export type CapturedRow = {
     original?: Record<string, string>;
   };
 };
-// Choose the latest observation per provider/source without losing older
-// captures. Original HTML stays server-side; only one bounded row page leaves.
-const latest = `WITH latest AS (
-  SELECT DISTINCT ON (c.provider,c.source_key) c.id,c.provider,c.source_key,
-    c.source_url,c.payload,c.row_count,c.captured_at
-  FROM result_archive_source_captures c
+// Count retained rows without rewriting a legacy source's declared summary.
+const storedRows = `CASE WHEN jsonb_typeof(c.payload->'rows')='array'
+  THEN c.payload->'rows' ELSE '[]'::jsonb END`;
+// Choose the latest observation before applying eligibility. A newer held or
+// revoked capture must never make an older approved version current again.
+// Original HTML stays server-side; only one bounded row page leaves.
+const latest = `WITH observations AS (
+  SELECT DISTINCT ON (provider,source_key) id
+  FROM result_archive_source_captures
+  ORDER BY provider,source_key,captured_at DESC,id DESC
+), latest AS (
+  SELECT c.id,c.provider,c.source_key,
+    c.source_url,c.payload,jsonb_array_length(${storedRows}) AS row_count,c.captured_at
+  FROM observations o
+  JOIN result_archive_source_captures c ON c.id=o.id
   JOIN result_archive_capture_approvals a ON a.id=c.approval_id
   WHERE c.payload->>'publication'='staff_only' AND c.source_check IN ('compared','empty')
     AND a.scope='staff_only' AND a.revoked_at IS NULL
-  ORDER BY c.provider,c.source_key,c.captured_at DESC,c.id DESC
 )`;
 const columns = `id::text,provider,source_url,payload->'index'->>'name' AS name,
   payload->'index'->>'date' AS date,payload->'index'->>'location' AS location,
@@ -79,7 +87,7 @@ export async function capturedRaceRows(sql: Sql, input: { id: string; q: string;
   const [result] = await sql.query<{ rows: CapturedRow[]; total: number }>(
     `${latest}, matches AS (
     SELECT r.ordinality::int AS ordinal,r.value AS row FROM latest c,
-      LATERAL jsonb_array_elements(c.payload->'rows') WITH ORDINALITY r
+      LATERAL jsonb_array_elements(${storedRows}) WITH ORDINALITY r
     WHERE c.id=$1::bigint AND ($2='' OR strpos(lower(coalesce(r.value->>'name','')||' '||coalesce(r.value->>'bib','')||' '||coalesce(r.value->>'club','')||' '||coalesce(r.value->>'distanceLabel','')),$2)>0)
   ) SELECT (SELECT count(*)::int FROM matches) AS total,
     coalesce((SELECT jsonb_agg(to_jsonb(page) ORDER BY ordinal) FROM (SELECT * FROM matches ORDER BY ordinal LIMIT 100 OFFSET $3) page),'[]'::jsonb) AS rows`,

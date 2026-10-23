@@ -175,7 +175,7 @@ export async function athleteFinderSourceCoverage(
   input: SourceCoverageInput,
   registry: FixtureSource[],
 ): Promise<SourceCoverageResponse> {
-  const [availability] = await sql<SourceCoverageStores>`SELECT
+  const [availability] = await sql<SourceCoverageStores & { captureSearchState: boolean }>`SELECT
     to_regclass('public.results') IS NOT NULL AS canonical,
     (to_regclass('public.result_archive_datasets') IS NOT NULL AND
       to_regclass('public.result_archive_entries') IS NOT NULL) AS archive,
@@ -185,8 +185,9 @@ export async function athleteFinderSourceCoverage(
     to_regclass('public.edition_result_links') IS NOT NULL AS "resultLinks",
     to_regclass('public.event_register_sources') IS NOT NULL AS "inventorySources",
     to_regclass('public.event_register_source_records') IS NOT NULL AS "inventoryRecords",
-    to_regclass('public.event_register_extraction_items') IS NOT NULL AS extraction`;
-  const stores: SourceCoverageStores = { ...availability };
+    to_regclass('public.event_register_extraction_items') IS NOT NULL AS extraction,
+    to_regclass('public.athlete_finder_capture_search_state') IS NOT NULL AS "captureSearchState"`;
+  const { captureSearchState, ...stores } = availability;
   const issues: SourceCoverageIssue[] = [];
   const unavailable = (
     store: keyof SourceCoverageStores,
@@ -242,6 +243,20 @@ export async function athleteFinderSourceCoverage(
       return [];
     }
   }
+  const captureMetadataFallback = `(SELECT jsonb_build_object(
+      'staff_only',body.payload->>'publication'='staff_only',
+      'rows',CASE WHEN jsonb_typeof(body.payload->'rows')='array'
+        THEN jsonb_array_length(body.payload->'rows') ELSE 0 END)
+    FROM result_archive_source_captures body WHERE body.id=l.id)`;
+  const captureMetadata = captureSearchState
+    ? `CASE WHEN search_state.index_version=1 AND search_state.staff_only IS NOT NULL
+        AND search_state.expected_rows>=0 THEN jsonb_build_object(
+          'staff_only',search_state.staff_only,'rows',search_state.expected_rows)
+        ELSE ${captureMetadataFallback} END`
+    : captureMetadataFallback;
+  const captureStateJoin = captureSearchState
+    ? "LEFT JOIN athlete_finder_capture_search_state search_state ON search_state.capture_id=l.id"
+    : "";
   const [canonical, archive, captures, histories, resultLinks, sources, records, extraction] =
     await Promise.all([
       readStore<Group>(
@@ -261,26 +276,25 @@ export async function athleteFinderSourceCoverage(
         FROM result_archive_datasets d LEFT JOIN entry_counts e ON e.dataset_id=d.id
         GROUP BY 1`,
       ),
-      // Choose the current version and approval before de-TOASTing its payload.
-      // The scalar PK lookup prevents a flattened join from reading old bodies.
+      // Current metadata carries publication and actual retained row counts. During
+      // rollout, only captures with missing/outdated metadata use the scalar PK
+      // fallback. Latest version and live approval checks always come first.
       readStore<Group>(
         "captures",
         `WITH latest AS MATERIALIZED (
-          SELECT DISTINCT ON (provider,source_key) id,approval_id,source_url,
-            source_check,row_count
+          SELECT DISTINCT ON (provider,source_key) id,approval_id,source_url,source_check
           FROM result_archive_source_captures
           ORDER BY provider,source_key,captured_at DESC,id DESC
         ), approved AS MATERIALIZED (
-          SELECT l.source_url,l.source_check,l.row_count,
-            (SELECT body.payload->>'publication' FROM result_archive_source_captures body
-              WHERE body.id=l.id) AS publication
+          SELECT l.source_url,l.source_check,${captureMetadata} AS metadata
           FROM latest l JOIN result_archive_capture_approvals a ON a.id=l.approval_id
+          ${captureStateJoin}
           WHERE a.scope='staff_only' AND a.revoked_at IS NULL
         ) SELECT ${urlAuthority("c.source_url")} AS domain,
           count(*) FILTER (WHERE c.source_check IN ('compared','empty'))::bigint AS "capturePages",
-          coalesce(sum(c.row_count) FILTER (WHERE c.source_check IN ('compared','empty')),0)::bigint AS "captureRows",
+          coalesce(sum((c.metadata->>'rows')::bigint) FILTER (WHERE c.source_check IN ('compared','empty')),0)::bigint AS "captureRows",
           count(*) FILTER (WHERE c.source_check NOT IN ('compared','empty'))::bigint AS "heldCapturePages"
-        FROM approved c WHERE c.publication='staff_only'
+        FROM approved c WHERE (c.metadata->>'staff_only')::boolean
         GROUP BY 1`,
       ),
       // Keep large performance JSON out of sorts and group repeated URLs before
@@ -519,7 +533,7 @@ export async function athleteFinderSourceCoverage(
       "Metadata enabled describes existing event collection settings. It does not enable participant collection or verify a result.",
       "A saved URL or event inventory record is a location to inspect, not searchable participant data. Extraction items describe known pages or documents, not the full size of a website.",
       "Saved result links count edition-level URL records by their results-page domain, including held or rejected metadata. They do not establish usable participant data or permission to collect it.",
-      "Capture counts inspect the latest observation per provider and source, then require active staff approval and staff-only publication. Held, revoked or non-staff versions do not count as searchable rows.",
+      "Capture counts inspect the latest observation per provider and source, then require active staff approval and staff-only publication. Row totals use the retained rows array, which can differ from the original declared count. Held, revoked or non-staff versions do not count as searchable rows.",
       "Canonical coverage uses the main result source URL; history coverage uses the saved athlete-history source URL. Supporting result references and individual history links can yield additional search matches.",
       "Summary totals include records with unknown or uncatalogued source domains. A source with no linked rows has not been searched live.",
       "Coverage is incomplete when no stored rows are known and at least one result collection could not be inspected. Saved links and extraction counts remain visible without implying that no participant rows exist.",

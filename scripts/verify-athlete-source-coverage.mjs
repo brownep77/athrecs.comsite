@@ -85,6 +85,7 @@ let queryCount = 0;
 let failHistoryRead = false;
 let failCaptureReadCode = null;
 let captureAggregateOverride = null;
+let captureAggregateQuery = null;
 function sqlFor(connection) {
   const sql = async (parts, ...values) =>
     sql.query(
@@ -96,6 +97,7 @@ function sqlFor(connection) {
     if (failHistoryRead && /FROM athlete_source_histories/i.test(text))
       throw Object.assign(new Error("Synthetic timeout"), { code: "57014" });
     const captureRead = /FROM result_archive_source_captures\b/i.test(text);
+    if (captureRead) captureAggregateQuery = text;
     if (captureRead && failCaptureReadCode)
       throw Object.assign(new Error("PRIVATE DATABASE ERROR SENTINEL"), {
         code: failCaptureReadCode,
@@ -109,6 +111,83 @@ function sqlFor(connection) {
 const sql = sqlFor(db);
 const request = (input = {}, sources = registry) =>
   athleteFinderSourceCoverage(sql, sourceCoverageInputSchema.parse(input), sources);
+
+async function capturePublicationFallbackExecutions() {
+  assert.ok(captureAggregateQuery, "Inspect the actual capture query issued by the service");
+  const [
+    {
+      "QUERY PLAN": [plan],
+    },
+  ] = (await db.query(`EXPLAIN (ANALYZE, FORMAT JSON) ${captureAggregateQuery}`)).rows;
+  const nodes = [];
+  const visit = (node) => {
+    nodes.push(node);
+    for (const child of node.Plans ?? []) visit(child);
+  };
+  visit(plan.Plan);
+  const fallback = nodes.filter((node) => node.Alias === "body");
+  assert.ok(fallback.length, "The fallback remains available for incomplete metadata");
+  return fallback.reduce((loops, node) => loops + node["Actual Loops"], 0);
+}
+
+async function verifyRetainedCaptureCounts(expectedFallbackExecutions) {
+  const before = await request();
+  const cases = [
+    { declared: 9, body: {}, actual: 0 },
+    { declared: 8, body: { rows: [] }, actual: 0 },
+    { declared: 7, body: { rows: {} }, actual: 0 },
+    { declared: 6, body: { rows: null }, actual: 0 },
+    { declared: 5, body: { rows: 42 }, actual: 0 },
+    {
+      declared: 0,
+      body: { rows: [{ name: "Synthetic One" }, { name: "Synthetic Two" }] },
+      actual: 2,
+    },
+    { declared: 99, body: { rows: [{ name: "Synthetic Three" }] }, actual: 1 },
+  ];
+  for (const [index, item] of cases.entries()) {
+    await db.query(
+      `insert into result_archive_source_captures values
+      ($1,'retained-counts',$2,'active',$3,$4::jsonb,'compared',$5,'2026-10-24')`,
+      [
+        70 + index,
+        String(index),
+        `https://alpha.test/legacy-${index}`,
+        JSON.stringify({ publication: "staff_only", ...item.body }),
+        item.declared,
+      ],
+    );
+  }
+  const actual = await request();
+  assert.equal(actual.summary.stored.captureRows, before.summary.stored.captureRows + 3);
+  assert.equal(
+    actual.summary.stored.capturePages,
+    before.summary.stored.capturePages + cases.length,
+  );
+  assert.equal(await capturePublicationFallbackExecutions(), expectedFallbackExecutions);
+  assert.deepEqual(
+    (
+      await db.query(
+        "select row_count from result_archive_source_captures where id>=70 order by id",
+      )
+    ).rows.map((row) => row.row_count),
+    cases.map((item) => item.declared),
+    "Counting retained rows never rewrites the original declared summary",
+  );
+  if (expectedFallbackExecutions === 0) {
+    assert.deepEqual(
+      (
+        await db.query(
+          "select expected_rows from athlete_finder_capture_search_state where capture_id>=70 order by capture_id",
+        )
+      ).rows.map((row) => row.expected_rows),
+      cases.map((item) => item.actual),
+      "Trusted metadata records actual retained arrays, including declared-zero captures",
+    );
+  }
+  await db.exec("delete from result_archive_source_captures where id>=70");
+  assert.deepEqual((await request()).summary.stored, before.summary.stored);
+}
 
 try {
   const missing = await request();
@@ -159,6 +238,9 @@ try {
       (8,'test','public','active','https://alpha.test/public','{"publication":"public"}','compared',5,'2026-10-22'),
       (9,'test','empty','active','https://alpha.test/empty','{"publication":"staff_only"}','empty',0,'2026-10-22'),
       (10,'test','document','active','https://beta.test/document','{"publication":"staff_only"}','held',0,'2026-10-22');
+    update result_archive_source_captures c set payload=payload || jsonb_build_object('rows',
+      (select coalesce(jsonb_agg(jsonb_build_object('name','PRIVATE PARTICIPANT SENTINEL')),'[]'::jsonb)
+        from generate_series(1,c.row_count)));
     insert into athlete_source_histories values
       ('https://alpha.test/athlete/1','[{"name":"PRIVATE PARTICIPANT SENTINEL"},{}]'),
       ('https://alpha.test/athlete/2','[{}]'),('https://gamma.test/athlete/3','[{}]');
@@ -216,6 +298,12 @@ try {
     historyProfiles: 3,
     historyRows: 4,
   });
+  assert.doesNotMatch(captureAggregateQuery, /athlete_finder_capture_search_state/);
+  assert.equal(
+    await capturePublicationFallbackExecutions(),
+    5,
+    "Without search metadata, inspect only current captures with active approval",
+  );
   assert.equal(
     response.summary.inventory.knownResultItems,
     5,
@@ -434,6 +522,9 @@ try {
       (56,'test','missing-publication','active','https://alpha.test/no-publication','{"publication":"staff_only"}','compared',30,'2026-10-22'),
       (57,'test','missing-publication','active','https://alpha.test/no-publication','{}','compared',30,'2026-10-23')
   `);
+  await db.exec(`update result_archive_source_captures c set payload=payload || jsonb_build_object('rows',
+    (select coalesce(jsonb_agg(jsonb_build_object('name','Synthetic Captured Runner')),'[]'::jsonb)
+      from generate_series(1,c.row_count))) where id>=50`);
   const superseded = await request();
   assert.equal(superseded.summary.stored.captureRows, 14);
   assert.equal(superseded.summary.stored.capturePages, 5);
@@ -444,6 +535,133 @@ try {
     2,
   );
   await db.exec("delete from result_archive_source_captures where id>=50");
+  await verifyRetainedCaptureCounts(12);
+
+  // Apply the real metadata/index trigger to a disposable schema. Existing
+  // captures are deliberately unindexed until explicitly backfilled.
+  await db.exec("alter table result_archive_source_captures add primary key(id)");
+  await db.exec(readFileSync("migrations/20261023_athlete_finder_participant_index.sql", "utf8"));
+  assert.deepEqual((await request()).summary.stored, response.summary.stored);
+  assert.equal(await capturePublicationFallbackExecutions(), 5);
+
+  await db.query(`select athlete_finder_refresh_capture_search(id::bigint)
+    from result_archive_source_captures where id in (1,4,8,9,10)`);
+  const partiallyIndexed = await request();
+  assert.deepEqual(partiallyIndexed.summary.stored, response.summary.stored);
+  assert.equal(partiallyIndexed.summary.inventory.heldCapturePages, 2);
+  assert.equal(
+    await capturePublicationFallbackExecutions(),
+    1,
+    "Only the missing current approved capture reads publication JSON; an older marker is insufficient",
+  );
+  await db.exec(`update athlete_finder_capture_search_state
+    set index_version=2,staff_only=false where capture_id=4`);
+  const unsupportedMetadata = await request();
+  assert.equal(unsupportedMetadata.summary.inventory.heldCapturePages, 2);
+  assert.equal(
+    await capturePublicationFallbackExecutions(),
+    2,
+    "Unknown metadata versions fall back to the current source payload",
+  );
+  await db.exec("delete from athlete_finder_capture_search_state where capture_id=8");
+  assert.equal((await request()).summary.stored.captureRows, 3);
+  assert.equal(
+    await capturePublicationFallbackExecutions(),
+    3,
+    "An unindexed non-staff latest version cannot expose its older staff-only version",
+  );
+
+  await db.query(`select athlete_finder_refresh_capture_search(id::bigint)
+    from result_archive_source_captures`);
+  const completelyIndexed = await request();
+  assert.deepEqual(completelyIndexed.summary.stored, response.summary.stored);
+  assert.equal(completelyIndexed.summary.inventory.heldCapturePages, 2);
+  assert.equal(
+    await capturePublicationFallbackExecutions(),
+    0,
+    "Complete current metadata must leave the payload lookup unexecuted",
+  );
+  assert.equal(
+    (
+      await db.query(
+        "select indexed_rows from athlete_finder_capture_search_state where capture_id=2",
+      )
+    ).rows[0].indexed_rows,
+    3,
+    "Index metadata represents the retained source rows",
+  );
+  await verifyRetainedCaptureCounts(0);
+  await db.exec(
+    "update result_archive_capture_approvals set revoked_at='2026-10-24' where id='active'",
+  );
+  const approvalRevoked = await request();
+  assert.equal(approvalRevoked.summary.stored.captureRows, 0);
+  assert.equal(approvalRevoked.summary.inventory.heldCapturePages, 0);
+  assert.equal(await capturePublicationFallbackExecutions(), 0);
+  await db.exec("update result_archive_capture_approvals set revoked_at=null where id='active'");
+
+  await db.exec(`insert into result_archive_source_captures values
+    (60,'test','normal','active','https://alpha.test/normal',
+      '{"publication":"staff_only","rows":[{"name":"Synthetic Runner One"},{"name":"Synthetic Runner Two"}]}',
+      'compared',2,'2026-10-24')`);
+  assert.equal((await request()).summary.stored.captureRows, 2);
+  assert.equal(await capturePublicationFallbackExecutions(), 0);
+  assert.equal(
+    (
+      await db.query(
+        "select indexed_rows from athlete_finder_capture_search_state where capture_id=60",
+      )
+    ).rows[0].indexed_rows,
+    2,
+    "The actual insertion trigger creates publication metadata atomically with its name rows",
+  );
+  await db.exec(`update result_archive_source_captures
+    set payload=jsonb_set(payload,'{publication}','"public"') where id=60`);
+  assert.equal((await request()).summary.stored.captureRows, 0);
+  assert.equal(await capturePublicationFallbackExecutions(), 0);
+  await db.exec(`update result_archive_source_captures
+    set payload=jsonb_set(payload,'{publication}','"staff_only"') where id=60`);
+  assert.equal((await request()).summary.stored.captureRows, 2);
+  assert.equal(await capturePublicationFallbackExecutions(), 0);
+  await db.exec("update result_archive_source_captures set source_check='held' where id=60");
+  const latestHeld = await request();
+  assert.equal(latestHeld.summary.stored.captureRows, 0);
+  assert.equal(latestHeld.summary.inventory.heldCapturePages, 3);
+  await db.exec("update result_archive_source_captures set approval_id='revoked' where id=60");
+  const latestRevoked = await request();
+  assert.equal(latestRevoked.summary.stored.captureRows, 0);
+  assert.equal(latestRevoked.summary.inventory.heldCapturePages, 2);
+  await db.exec(`update result_archive_source_captures
+    set source_check='compared',approval_id='active' where id=60;
+    insert into result_archive_source_captures values
+      (61,'test','normal','active','https://alpha.test/normal',
+        '{"publication":"public","rows":[{"name":"Synthetic Nonstaff Runner"}]}',
+        'compared',1,'2026-10-24')`);
+  assert.equal(
+    (await request()).summary.stored.captureRows,
+    0,
+    "A newer same-timestamp non-staff capture blocks an older fully indexed staff capture",
+  );
+  await db.exec("delete from result_archive_source_captures where id>=60");
+  assert.equal(
+    (
+      await db.query(
+        "select count(*)::int as count from athlete_finder_capture_search_state where capture_id>=60",
+      )
+    ).rows[0].count,
+    0,
+    "Deleting a capture cannot leave usable publication metadata behind",
+  );
+  await db.exec(`alter table athlete_finder_capture_search_state
+    rename to unavailable_capture_search_state`);
+  const metadataUnavailable = await request();
+  assert.deepEqual(metadataUnavailable.summary.stored, response.summary.stored);
+  assert.equal(metadataUnavailable.stores.captures, true);
+  assert.equal(await capturePublicationFallbackExecutions(), 5);
+  await db.exec(`alter table unavailable_capture_search_state
+    rename to athlete_finder_capture_search_state`);
+  assert.deepEqual((await request()).summary.stored, response.summary.stored);
+  assert.equal(await capturePublicationFallbackExecutions(), 0);
 
   const capturedWarnings = [];
   const originalWarn = console.warn;
@@ -627,7 +845,7 @@ try {
   assert.equal(partial.rows[0].coverageState, "stored_rows");
 
   console.log(
-    "Athlete source coverage verified: bounded aggregates, URL authority normalization, registry/inventory overlap, latest capture supersession, repeated history URLs, malformed histories/counts, saved links, extraction states, deterministic pagination, safe failure diagnostics, explicit recovery, and staff-only metadata.",
+    "Athlete source coverage verified: bounded aggregates, URL authority normalization, registry/inventory overlap, latest capture supersession, partial search-metadata rollout, actual retained capture counts, atomic publication updates, zero payload fallback reads with complete metadata, repeated history URLs, malformed histories/counts, saved links, extraction states, deterministic pagination, safe failure diagnostics, explicit recovery, and staff-only metadata.",
   );
 } finally {
   await db.close();
