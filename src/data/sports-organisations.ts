@@ -13577,4 +13577,786 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     },
     "2026-10-23",
   ),
+
+  // Asian member bodies checked against World Aquatics, 23 October 2026.
+  record({
+  "slug": "afghanistan-swimming",
+  "name": "Afghanistan National Swimming Federation",
+  "aliases": [
+    "Afghanistan swimming federation"
+  ],
+  "type": "national",
+  "country": "Afghanistan",
+  "jurisdiction": "Afghanistan",
+  "territories": [
+    "Afghanistan"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Afghanistan by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "bangladesh-swimming",
+  "name": "Bangladesh Swimming Federation",
+  "aliases": [
+    "Bangladesh swimming federation"
+  ],
+  "type": "national",
+  "country": "Bangladesh",
+  "jurisdiction": "Bangladesh",
+  "territories": [
+    "Bangladesh"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Bangladesh by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "bhutan-swimming",
+  "name": "Bhutan Aquatics Federation",
+  "aliases": [
+    "Bhutan swimming federation"
+  ],
+  "type": "national",
+  "country": "Bhutan",
+  "jurisdiction": "Bhutan",
+  "territories": [
+    "Bhutan"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Bhutan by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "bahrain-swimming",
+  "name": "Bahrain Swimming Association",
+  "aliases": [
+    "Bahrain swimming federation"
+  ],
+  "type": "national",
+  "country": "Bahrain",
+  "jurisdiction": "Bahrain",
+  "territories": [
+    "Bahrain"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Bahrain by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "brunei-swimming",
+  "name": "Brunei Amateur Swimming Association",
+  "aliases": [
+    "Brunei swimming federation"
+  ],
+  "type": "national",
+  "country": "Brunei",
+  "jurisdiction": "Brunei",
+  "territories": [
+    "Brunei"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Brunei by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cambodia-swimming",
+  "name": "Khmer Amateur Swimming Federation",
+  "aliases": [
+    "Cambodia swimming federation"
+  ],
+  "type": "national",
+  "country": "Cambodia",
+  "jurisdiction": "Cambodia",
+  "territories": [
+    "Cambodia"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Cambodia by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "iran-swimming",
+  "name": "I.R. Iran Amateur Swimming Federation",
+  "aliases": [
+    "Iran swimming federation"
+  ],
+  "type": "national",
+  "country": "Iran",
+  "jurisdiction": "Iran",
+  "territories": [
+    "Iran"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Iran by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "iraq-swimming",
+  "name": "Iraq Aquatics",
+  "aliases": [
+    "Iraq swimming federation"
+  ],
+  "type": "national",
+  "country": "Iraq",
+  "jurisdiction": "Iraq",
+  "territories": [
+    "Iraq"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Iraq by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "jordan-swimming",
+  "name": "Jordan Swimming Federation",
+  "aliases": [
+    "Jordan swimming federation"
+  ],
+  "type": "national",
+  "country": "Jordan",
+  "jurisdiction": "Jordan",
+  "territories": [
+    "Jordan"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Jordan by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kazakhstan-swimming",
+  "name": "Republican Public Association Qazaq Aquatics",
+  "aliases": [
+    "Kazakhstan swimming federation"
+  ],
+  "type": "national",
+  "country": "Kazakhstan",
+  "jurisdiction": "Kazakhstan",
+  "territories": [
+    "Kazakhstan"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Kazakhstan by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kyrgyzstan-swimming",
+  "name": "Federation of Aquatic Sports of the Kyrgyz Republic",
+  "aliases": [
+    "Kyrgyzstan swimming federation"
+  ],
+  "type": "national",
+  "country": "Kyrgyzstan",
+  "jurisdiction": "Kyrgyzstan",
+  "territories": [
+    "Kyrgyzstan"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Kyrgyzstan by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "saudi-arabia-swimming",
+  "name": "Saudi Arabian Swimming Federation",
+  "aliases": [
+    "Saudi Arabia swimming federation"
+  ],
+  "type": "national",
+  "country": "Saudi Arabia",
+  "jurisdiction": "Saudi Arabia",
+  "territories": [
+    "Saudi Arabia"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Saudi Arabia by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kuwait-swimming",
+  "name": "Kuwait Aquatics",
+  "aliases": [
+    "Kuwait swimming federation"
+  ],
+  "type": "national",
+  "country": "Kuwait",
+  "jurisdiction": "Kuwait",
+  "territories": [
+    "Kuwait"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Kuwait by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "laos-swimming",
+  "name": "Lao Swimming Federation",
+  "aliases": [
+    "Laos swimming federation"
+  ],
+  "type": "national",
+  "country": "Laos",
+  "jurisdiction": "Laos",
+  "territories": [
+    "Laos"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Laos by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "lebanon-swimming",
+  "name": "Fédération Libanaise de Natation",
+  "aliases": [
+    "Lebanon swimming federation"
+  ],
+  "type": "national",
+  "country": "Lebanon",
+  "jurisdiction": "Lebanon",
+  "territories": [
+    "Lebanon"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Lebanon by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "maldives-swimming",
+  "name": "Maldives Aquatics",
+  "aliases": [
+    "Maldives swimming federation"
+  ],
+  "type": "national",
+  "country": "Maldives",
+  "jurisdiction": "Maldives",
+  "territories": [
+    "Maldives"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Maldives by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "mongolia-swimming",
+  "name": "Mongolian Amateur Swimming Federation",
+  "aliases": [
+    "Mongolia swimming federation"
+  ],
+  "type": "national",
+  "country": "Mongolia",
+  "jurisdiction": "Mongolia",
+  "territories": [
+    "Mongolia"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Mongolia by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "myanmar-swimming",
+  "name": "Myanmar Swimming Federation",
+  "aliases": [
+    "Myanmar swimming federation"
+  ],
+  "type": "national",
+  "country": "Myanmar",
+  "jurisdiction": "Myanmar",
+  "territories": [
+    "Myanmar"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Myanmar by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "oman-swimming",
+  "name": "Oman Aquatics Federation",
+  "aliases": [
+    "Oman swimming federation"
+  ],
+  "type": "national",
+  "country": "Oman",
+  "jurisdiction": "Oman",
+  "territories": [
+    "Oman"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Oman by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "pakistan-swimming",
+  "name": "Pakistan Swimming Federation",
+  "aliases": [
+    "Pakistan swimming federation"
+  ],
+  "type": "national",
+  "country": "Pakistan",
+  "jurisdiction": "Pakistan",
+  "territories": [
+    "Pakistan"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Pakistan by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "palestine-swimming",
+  "name": "Palestinian Swimming Federation and Aquatic Sports",
+  "aliases": [
+    "Palestine swimming federation"
+  ],
+  "type": "national",
+  "country": "Palestine",
+  "jurisdiction": "Palestine",
+  "territories": [
+    "Palestine"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Palestine by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "north-korea-swimming",
+  "name": "Amateur Swimming Association of D.P.R. Korea",
+  "aliases": [
+    "North Korea swimming federation"
+  ],
+  "type": "national",
+  "country": "North Korea",
+  "jurisdiction": "North Korea",
+  "territories": [
+    "North Korea"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for North Korea by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "qatar-swimming",
+  "name": "Qatar Aquatics Federation",
+  "aliases": [
+    "Qatar swimming federation"
+  ],
+  "type": "national",
+  "country": "Qatar",
+  "jurisdiction": "Qatar",
+  "territories": [
+    "Qatar"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Qatar by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "syria-swimming",
+  "name": "Syrian Arab Swimming and Aquatic Sports Federation",
+  "aliases": [
+    "Syria swimming federation"
+  ],
+  "type": "national",
+  "country": "Syria",
+  "jurisdiction": "Syria",
+  "territories": [
+    "Syria"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Syria by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tajikistan-swimming",
+  "name": "National Swimming Federation of the Republic of Tajikistan",
+  "aliases": [
+    "Tajikistan swimming federation"
+  ],
+  "type": "national",
+  "country": "Tajikistan",
+  "jurisdiction": "Tajikistan",
+  "territories": [
+    "Tajikistan"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Tajikistan by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "turkmenistan-swimming",
+  "name": "National Federation of Aquatics of Turkmenistan",
+  "aliases": [
+    "Turkmenistan swimming federation"
+  ],
+  "type": "national",
+  "country": "Turkmenistan",
+  "jurisdiction": "Turkmenistan",
+  "territories": [
+    "Turkmenistan"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Turkmenistan by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "timor-leste-swimming",
+  "name": "Federação Natação de Timor Leste",
+  "aliases": [
+    "Timor-Leste swimming federation"
+  ],
+  "type": "national",
+  "country": "Timor-Leste",
+  "jurisdiction": "Timor-Leste",
+  "territories": [
+    "Timor-Leste"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Timor-Leste by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "united-arab-emirates-swimming",
+  "name": "UAE Aquatics",
+  "aliases": [
+    "United Arab Emirates swimming federation"
+  ],
+  "type": "national",
+  "country": "United Arab Emirates",
+  "jurisdiction": "United Arab Emirates",
+  "territories": [
+    "United Arab Emirates"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for United Arab Emirates by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "uzbekistan-swimming",
+  "name": "Uzbekistan Aquatics",
+  "aliases": [
+    "Uzbekistan swimming federation"
+  ],
+  "type": "national",
+  "country": "Uzbekistan",
+  "jurisdiction": "Uzbekistan",
+  "territories": [
+    "Uzbekistan"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Uzbekistan by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "yemen-swimming",
+  "name": "Yemen Swimming & Aquatics Federation",
+  "aliases": [
+    "Yemen swimming federation"
+  ],
+  "type": "national",
+  "country": "Yemen",
+  "jurisdiction": "Yemen",
+  "territories": [
+    "Yemen"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The national aquatics member body listed for Yemen by World Aquatics.",
+  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations"
+  ],
+  "related": [
+    "world-aquatics"
+  ]
+}, "2026-10-23"),
 ];
