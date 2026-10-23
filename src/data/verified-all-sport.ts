@@ -1,3 +1,4 @@
+import { beijing2026Series, beijing2026Editions } from "./beijing-2026-swimming.ts";
 import type { Edition, Series } from "./types";
 import {
   belgiumEliteYouthCompetitionEditions,
@@ -11,6 +12,7 @@ import {
  * governing-body page. Participant-level results are deliberately excluded.
  */
 export const verifiedAllSportSeries: Series[] = [
+  ...beijing2026Series,
   ...belgiumEliteYouthCompetitionSeries,
   {
     slug: "british-rowing-beach-sprint-championships",
@@ -71,6 +73,7 @@ export const verifiedAllSportSeries: Series[] = [
 ];
 
 export const verifiedAllSportEditions: Edition[] = [
+  ...beijing2026Editions,
   ...belgiumEliteYouthCompetitionEditions,
   {
     seriesSlug: "british-rowing-beach-sprint-championships",

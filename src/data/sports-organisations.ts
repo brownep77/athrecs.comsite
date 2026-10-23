@@ -11299,4 +11299,1384 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
+
+  // World Aquatics African national members, checked 23 October 2026.
+  record({
+    "slug": "africa-aquatics",
+    "name": "Africa Aquatics",
+    "aliases": [
+      "CANA",
+      "African Swimming Confederation"
+    ],
+    "type": "continental",
+    "country": "International",
+    "jurisdiction": "Africa",
+    "territories": [
+      "International"
+    ],
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://africaaquatics.org/",
+    "summary": "Continental aquatic sports organisation for Africa, recognised by World Aquatics.",
+    "sources": [
+      "https://www.worldaquatics.com/members/continental-organisations",
+      "https://africaaquatics.org/events"
+    ],
+    "related": [
+      "world-aquatics"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "algeria-swimming",
+    "name": "Fédération Algérienne de Natation",
+    "country": "Algeria",
+    "jurisdiction": "Algeria",
+    "territories": [
+      "Algeria"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Algeria, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Algeria Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "angola-swimming",
+    "name": "Federação Angolana de Natação",
+    "country": "Angola",
+    "jurisdiction": "Angola",
+    "territories": [
+      "Angola"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Angola, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Angola Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "burundi-swimming",
+    "name": "Fédération Burundaise de Natation",
+    "country": "Burundi",
+    "jurisdiction": "Burundi",
+    "territories": [
+      "Burundi"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Burundi, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Burundi Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "benin-swimming",
+    "name": "Fédération Béninoise de Natation",
+    "country": "Benin",
+    "jurisdiction": "Benin",
+    "territories": [
+      "Benin"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Benin, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Benin Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "botswana-swimming",
+    "name": "Botswana Swimming Sport Association",
+    "country": "Botswana",
+    "jurisdiction": "Botswana",
+    "territories": [
+      "Botswana"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Botswana, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Botswana Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "burkina-faso-swimming",
+    "name": "Fédération Burkinabé de Natation et de Sauvetage",
+    "country": "Burkina Faso",
+    "jurisdiction": "Burkina Faso",
+    "territories": [
+      "Burkina Faso"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Burkina Faso, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Burkina Faso Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "central-african-republic-swimming",
+    "name": "Fédération Centrafricaine de Natation",
+    "country": "Central African Republic",
+    "jurisdiction": "Central African Republic",
+    "territories": [
+      "Central African Republic"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Central African Republic, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Central African Republic Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "republic-of-the-congo-swimming",
+    "name": "Fédération Congolaise de Natation",
+    "country": "Republic of the Congo",
+    "jurisdiction": "Republic of the Congo",
+    "territories": [
+      "Republic of the Congo"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Republic of the Congo, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Republic of the Congo Swimming Federation",
+      "Congo"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "chad-swimming",
+    "name": "Fédération Tchadienne de Natation Amateur",
+    "country": "Chad",
+    "jurisdiction": "Chad",
+    "territories": [
+      "Chad"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Chad, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Chad Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "cote-divoire-swimming",
+    "name": "Fédération Ivoirienne de Natation et de Sauvetage",
+    "country": "Côte d’Ivoire",
+    "jurisdiction": "Côte d’Ivoire",
+    "territories": [
+      "Côte d’Ivoire"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Côte d’Ivoire, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Côte d’Ivoire Swimming Federation",
+      "Côte d'Ivoire"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "cameroon-swimming",
+    "name": "Fédération Camerounaise de Natation et de Sauvetage",
+    "country": "Cameroon",
+    "jurisdiction": "Cameroon",
+    "territories": [
+      "Cameroon"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Cameroon, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Cameroon Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "democratic-republic-of-the-congo-swimming",
+    "name": "Fédération de Natation en République Démocratique du Congo",
+    "country": "Democratic Republic of the Congo",
+    "jurisdiction": "Democratic Republic of the Congo",
+    "territories": [
+      "Democratic Republic of the Congo"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Democratic Republic of the Congo, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Democratic Republic of the Congo Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "comoros-swimming",
+    "name": "Comoros Swimming Federation",
+    "country": "Comoros",
+    "jurisdiction": "Comoros",
+    "territories": [
+      "Comoros"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Comoros, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": []
+  }, "2026-10-23"),
+  record({
+    "slug": "cabo-verde-swimming",
+    "name": "Federacao Cabo-verdiana de Natacao - FECAN",
+    "country": "Cabo Verde",
+    "jurisdiction": "Cabo Verde",
+    "territories": [
+      "Cabo Verde"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Cabo Verde, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Cabo Verde Swimming Federation",
+      "Cape Verde"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "djibouti-swimming",
+    "name": "Fédération Djiboutienne de Natation",
+    "country": "Djibouti",
+    "jurisdiction": "Djibouti",
+    "territories": [
+      "Djibouti"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Djibouti, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Djibouti Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "egypt-swimming",
+    "name": "Egyptian Swimming Federation",
+    "country": "Egypt",
+    "jurisdiction": "Egypt",
+    "territories": [
+      "Egypt"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Egypt, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Egypt Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "eritrea-swimming",
+    "name": "Eritrean National Swimming Federation",
+    "country": "Eritrea",
+    "jurisdiction": "Eritrea",
+    "territories": [
+      "Eritrea"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Eritrea, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Eritrea Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "ethiopia-swimming",
+    "name": "Ethiopian Aquatics Federation",
+    "country": "Ethiopia",
+    "jurisdiction": "Ethiopia",
+    "territories": [
+      "Ethiopia"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Ethiopia, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Ethiopia Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "gabon-swimming",
+    "name": "Fédération Gabonaise de Natation",
+    "country": "Gabon",
+    "jurisdiction": "Gabon",
+    "territories": [
+      "Gabon"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Gabon, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Gabon Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "gambia-swimming",
+    "name": "Gambia Swimming & Aquatic Sports Association",
+    "country": "Gambia",
+    "jurisdiction": "Gambia",
+    "territories": [
+      "Gambia"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Gambia, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Gambia Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "guinea-bissau-swimming",
+    "name": "Guiné-Bissau Aquatics",
+    "country": "Guinea-Bissau",
+    "jurisdiction": "Guinea-Bissau",
+    "territories": [
+      "Guinea-Bissau"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Guinea-Bissau, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Guinea-Bissau Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "equatorial-guinea-swimming",
+    "name": "Federación Ecuatoguineana de Natación",
+    "country": "Equatorial Guinea",
+    "jurisdiction": "Equatorial Guinea",
+    "territories": [
+      "Equatorial Guinea"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Equatorial Guinea, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Equatorial Guinea Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "ghana-swimming",
+    "name": "Ghana Swimming Association",
+    "country": "Ghana",
+    "jurisdiction": "Ghana",
+    "territories": [
+      "Ghana"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Ghana, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Ghana Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "guinea-swimming",
+    "name": "Fédération Guinéenne de Natation et Sauvetage",
+    "country": "Guinea",
+    "jurisdiction": "Guinea",
+    "territories": [
+      "Guinea"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Guinea, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations",
+      "https://africaaquatics.org/post-standard/back-where-it-began-guinea-to-host-the-third-edition-and-grand-final-of-the-africa-aquatics-open-water-swimming-cup-21-22-november"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Guinea Swimming Federation",
+      "Fédération Aquatique de Guinée"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "libya-swimming",
+    "name": "Libyan Swimming Federation",
+    "country": "Libya",
+    "jurisdiction": "Libya",
+    "territories": [
+      "Libya"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Libya, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Libya Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "liberia-swimming",
+    "name": "Liberia National Swimming Federation",
+    "country": "Liberia",
+    "jurisdiction": "Liberia",
+    "territories": [
+      "Liberia"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Liberia, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Liberia Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "lesotho-swimming",
+    "name": "Lesotho Swimmers Association",
+    "country": "Lesotho",
+    "jurisdiction": "Lesotho",
+    "territories": [
+      "Lesotho"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Lesotho, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Lesotho Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "madagascar-swimming",
+    "name": "Fédération Malgache de Natation",
+    "country": "Madagascar",
+    "jurisdiction": "Madagascar",
+    "territories": [
+      "Madagascar"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Madagascar, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Madagascar Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "morocco-swimming",
+    "name": "Fédération Royale Marocaine de Natation",
+    "country": "Morocco",
+    "jurisdiction": "Morocco",
+    "territories": [
+      "Morocco"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Morocco, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Morocco Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "malawi-swimming",
+    "name": "Malawi Aquatic Union",
+    "country": "Malawi",
+    "jurisdiction": "Malawi",
+    "territories": [
+      "Malawi"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Malawi, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Malawi Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "mali-swimming",
+    "name": "Fédération Malienne de Natation",
+    "country": "Mali",
+    "jurisdiction": "Mali",
+    "territories": [
+      "Mali"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Mali, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Mali Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "mozambique-swimming",
+    "name": "Federação Moçambicana de Natação",
+    "country": "Mozambique",
+    "jurisdiction": "Mozambique",
+    "territories": [
+      "Mozambique"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Mozambique, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Mozambique Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "mauritania-swimming",
+    "name": "Fédération Mauritanienne de Natation",
+    "country": "Mauritania",
+    "jurisdiction": "Mauritania",
+    "territories": [
+      "Mauritania"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Mauritania, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Mauritania Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "namibia-swimming",
+    "name": "Namibia Aquatic Sports Federation",
+    "country": "Namibia",
+    "jurisdiction": "Namibia",
+    "territories": [
+      "Namibia"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Namibia, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Namibia Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "nigeria-swimming",
+    "name": "Nigeria Aquatics Federation",
+    "country": "Nigeria",
+    "jurisdiction": "Nigeria",
+    "territories": [
+      "Nigeria"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Nigeria, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Nigeria Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "niger-swimming",
+    "name": "Fédération Nigérienne des Sports Nautiques",
+    "country": "Niger",
+    "jurisdiction": "Niger",
+    "territories": [
+      "Niger"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Niger, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Niger Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "rwanda-swimming",
+    "name": "Rwanda Swimming Federation",
+    "country": "Rwanda",
+    "jurisdiction": "Rwanda",
+    "territories": [
+      "Rwanda"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Rwanda, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": []
+  }, "2026-10-23"),
+  record({
+    "slug": "senegal-swimming",
+    "name": "Fédération Sénégalaise de Natation et de Sauvetage",
+    "country": "Senegal",
+    "jurisdiction": "Senegal",
+    "territories": [
+      "Senegal"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Senegal, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Senegal Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "seychelles-swimming",
+    "name": "Seychelles Aquatics Federation",
+    "country": "Seychelles",
+    "jurisdiction": "Seychelles",
+    "territories": [
+      "Seychelles"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Seychelles, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Seychelles Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "sierra-leone-swimming",
+    "name": "Sierra Leone Amateur Swimming, Diving and Water Polo Association",
+    "country": "Sierra Leone",
+    "jurisdiction": "Sierra Leone",
+    "territories": [
+      "Sierra Leone"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Sierra Leone, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Sierra Leone Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "somalia-swimming",
+    "name": "Somali Swimming Federation",
+    "country": "Somalia",
+    "jurisdiction": "Somalia",
+    "territories": [
+      "Somalia"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Somalia, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Somalia Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "sao-tome-and-principe-swimming",
+    "name": "Federacão de Natação Tomé e Príncipe",
+    "country": "Sao Tome and Principe",
+    "jurisdiction": "Sao Tome and Principe",
+    "territories": [
+      "Sao Tome and Principe"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Sao Tome and Principe, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Sao Tome and Principe Swimming Federation",
+      "São Tomé e Príncipe"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "sudan-swimming",
+    "name": "Sudan Amateur Swimming Association",
+    "country": "Sudan",
+    "jurisdiction": "Sudan",
+    "territories": [
+      "Sudan"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Sudan, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Sudan Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "eswatini-swimming",
+    "name": "Eswatini Swimming Association",
+    "country": "Eswatini",
+    "jurisdiction": "Eswatini",
+    "territories": [
+      "Eswatini"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Eswatini, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Eswatini Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "tanzania-swimming",
+    "name": "Tanzania Swimming Association",
+    "country": "Tanzania",
+    "jurisdiction": "Tanzania",
+    "territories": [
+      "Tanzania"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Tanzania, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Tanzania Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "togo-swimming",
+    "name": "Fédération Togolaise de Natation et de Sauvetage",
+    "country": "Togo",
+    "jurisdiction": "Togo",
+    "territories": [
+      "Togo"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Togo, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Togo Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "tunisia-swimming",
+    "name": "Fédération Tunisienne de Natation",
+    "country": "Tunisia",
+    "jurisdiction": "Tunisia",
+    "territories": [
+      "Tunisia"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Tunisia, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Tunisia Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "uganda-swimming",
+    "name": "Uganda Aquatics",
+    "country": "Uganda",
+    "jurisdiction": "Uganda",
+    "territories": [
+      "Uganda"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Uganda, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Uganda Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "zambia-swimming",
+    "name": "Zambia Amateur Swimming Union",
+    "country": "Zambia",
+    "jurisdiction": "Zambia",
+    "territories": [
+      "Zambia"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Zambia, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Zambia Swimming Federation"
+    ]
+  }, "2026-10-23"),
+  record({
+    "slug": "zimbabwe-swimming",
+    "name": "Zimbabwe Aquatic Union",
+    "country": "Zimbabwe",
+    "jurisdiction": "Zimbabwe",
+    "territories": [
+      "Zimbabwe"
+    ],
+    "type": "national",
+    "sports": [
+      "swimming"
+    ],
+    "website": "https://www.worldaquatics.com/members/national-federations",
+    "websiteKind": "member-directory",
+    "summary": "National swimming member body for Zimbabwe, listed by World Aquatics.",
+    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
+    "sources": [
+      "https://www.worldaquatics.com/members/national-federations"
+    ],
+    "related": [
+      "world-aquatics",
+      "africa-aquatics"
+    ],
+    "aliases": [
+      "Zimbabwe Swimming Federation"
+    ]
+  }, "2026-10-23"),
 ];
