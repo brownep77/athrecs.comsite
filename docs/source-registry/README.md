@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 342 unique sources. Only 36 are enabled; the other 306 remain
+The registry contains 348 unique sources. Only 36 are enabled; the other 312 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 342 sources create exactly one source job;
+- all 348 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 306 sources are retained as blocked jobs with their reason;
+- the other 312 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -240,3 +240,23 @@ Static co-organiser placings and current timer placings retain their source cont
 A result page does not resolve an ambiguous athlete name; identity comparisons and
 participant captures remain in private staff evidence. No automated collection
 setting is changed.
+
+
+## Multiday and further historical result archives, 23 October 2026
+
+Registered SPORTident, Extreme North Events, Waterford Viking Marathon, DATASPORT
+Poland, Big Bear Events and the unavailable Enigma Running archive as disabled
+manual research sources. Existing wider-inventory SPORTident, Big Bear and Enigma
+hosts are retained. The Polish DATASPORT host is outside the existing Swiss
+source domain list; no shared ownership is inferred. Cork Athletics coverage was
+extended in its existing row, with edition-specific Sports Timing credit.
+The registry now contains 348 sources: 36 enabled and 312 disabled.
+
+Daily Quadrathon results remain separate from their four-day aggregate. Preserve
+provisional status, tied places and the displayed placing fields rather than hidden
+sort values. Fixed-duration challenges retain achieved distance, laps and elapsed
+time without becoming standard marathon marks. Reusable result-page headers may
+advertise a later edition; use the actual dated result sheet. Conflicting report
+versions retain their export timestamps and original observations. Enigma returned
+502/503, so its search snippets verified no individual result. Participant evidence
+and identity decisions remain in the staff backend. No collection setting changes.

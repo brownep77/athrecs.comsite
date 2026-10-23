@@ -110,8 +110,13 @@ try {
   const { HistoricalResultRow } = await server.ssrLoadModule(
     "/src/components/athletes/HistoricalResultRow.tsx",
   );
-  const { historyResultSurface, profileAchievementResults } = await server.ssrLoadModule(
-    "/src/lib/athrecs/profile-history-results.ts",
+  const { historyResultSurface, isCompletedHistoryResult, profileAchievementResults } =
+    await server.ssrLoadModule("/src/lib/athrecs/profile-history-results.ts");
+  const { buildProfileAchievements } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-achievements.ts",
+  );
+  const { selectProfilePersonalBests } = await server.ssrLoadModule(
+    "/src/lib/athrecs/reported-personal-bests.ts",
   );
   const surfaceBase = {
     ...historyResults[0].performance,
@@ -187,6 +192,92 @@ try {
   assert.equal(
     profileAchievementResults([], surfaceHistory({ ...surfaceBase, labels: ["Road"] }))[0].surface,
     "Road",
+  );
+  const fixedDurationBase = historyPerformanceSchema.parse({
+    ...surfaceBase,
+    discipline: "6 Hours Running",
+    performance: "31.5 miles",
+    place: "9",
+    meeting: "Synthetic fixed-duration event",
+  });
+  for (const [discipline, performance] of [
+    ["6 Hours Running", "31.5 miles"],
+    ["12 Hours Running", "80.25 km"],
+    ["24 Hours Running", "110 mi"],
+    ["48 Hours Running", "250 km"],
+  ]) {
+    const row = { ...fixedDurationBase, discipline, performance };
+    assert.equal(isCompletedHistoryResult(row), true, `${discipline}: accepted distance finish`);
+    assert.equal(hasHistoryFinish(row), true, `${discipline}: accepted finish decoration`);
+    assert.equal(hasFinishMark(performance), false, "A distance alone is not a timed finish mark");
+    const projected = profileAchievementResults([], surfaceHistory(row));
+    assert.equal(projected[0].sport, "Running");
+    assert.equal(projected[0].distanceCode, discipline);
+    assert.equal(projected[0].distanceKm, 0, "Covered distance does not become the race distance");
+    assert.equal(projected[0].finishTimeSeconds, null);
+    assert.equal(projected[0].chipTimeSeconds, null);
+    assert.equal(projected[0].gunTimeSeconds, null);
+    const achievements = buildProfileAchievements(projected);
+    assert.equal(achievements.finishes.length, 1);
+    assert.equal(achievements.marathons.length, 0);
+    assert.equal(achievements.ultras.length, 0);
+    assert.equal(selectProfilePersonalBests([], [], surfaceHistory(row)).length, 0);
+    const rendered = load(`<table><tbody>${renderToStaticMarkup(
+      createElement(HistoricalResultRow, {
+        result: {
+          key: "synthetic-duration",
+          sport: "Running",
+          performance: withoutProfileEvidence(row),
+        },
+        hasActions: false,
+      }),
+    )}</tbody></table>`);
+    assert.equal(rendered('[data-profile-award="finisher"]').length, 1);
+    assert.equal(rendered("[data-result-timing]").length, 0);
+    assert(rendered('[data-label="Performance"]').text().includes(performance));
+  }
+  for (const changes of [
+    { performance: "0 km" },
+    { performance: "-1 miles" },
+    { performance: "Infinity km" },
+    { performance: "31.5 laps" },
+    { performance: "31.5 miles+" },
+    { performance: "31.5 miles DNF" },
+    { performance: "DNF" },
+    { performance: "DNS" },
+    { performance: "DQ" },
+    { discipline: "Marathon" },
+    { discipline: "100 Miles" },
+    { discipline: "Running" },
+    { discipline: "6 laps Running" },
+    { discipline: "16 Hours Running" },
+    { discipline: "72 Hours Running" },
+    { date: "2199-01-01" },
+    { date: "2020-02-30" },
+    { profileExcluded: true },
+    { syntheticTest: true },
+    {
+      disqualification: {
+        reason: "other",
+        decisionDate: "2020-06-02",
+        sourceUrl: "",
+        note: "Synthetic DQ",
+      },
+    },
+  ]) {
+    const row = { ...fixedDurationBase, ...changes };
+    assert.equal(isCompletedHistoryResult(row), false, JSON.stringify(changes));
+    assert.equal(hasHistoryFinish(row), false, JSON.stringify(changes));
+    assert.equal(selectProfilePersonalBests([], [], surfaceHistory(row)).length, 0);
+  }
+  assert.equal(hasHistoryFinish({ ...fixedDurationBase, labels: ["Intermediate split"] }), false);
+  assert.equal(
+    buildProfileAchievements(profileAchievementResults([], surfaceHistory({
+      ...fixedDurationBase,
+      notes: "Conflicting source results remain unresolved",
+    }))).finishes.length,
+    0,
+    "Conflicting distance results remain excluded from completion achievements",
   );
   const triathlonPerformance = historyPerformanceSchema.parse({
     ...historyResults[4].performance,
@@ -453,9 +544,6 @@ try {
   );
   const { buildCompetitionHonours } = await server.ssrLoadModule(
     "/src/lib/athrecs/competition-honours.ts",
-  );
-  const { selectProfilePersonalBests } = await server.ssrLoadModule(
-    "/src/lib/athrecs/reported-personal-bests.ts",
   );
   const { eligiblePerformance } = await server.ssrLoadModule("/src/lib/athrecs/profile-records.ts");
   const evidenceUrl = "https://evidence.example/private-result";

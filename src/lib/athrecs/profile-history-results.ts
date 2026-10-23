@@ -2,6 +2,7 @@ import type { ProfileResult } from "./profile-records";
 import type { SourceHistory, SourcePerformance } from "./source-performance-history";
 import { countryFlag } from "./country-flags.ts";
 import { sourceHistorySport } from "./source-history-sport.ts";
+import { hasFixedDurationDistanceMark } from "./performance-timing.ts";
 import type { Sport } from "./types";
 import {
   historicalDistance,
@@ -126,8 +127,9 @@ export function isCompletedHistoryResult(row: SourcePerformance, today = new Dat
     return false;
   const mark = row.performance.trim();
   const positiveMark =
-    /^(?:\d+:)*\d+(?:\.\d+)?a?(?:\((?:\d+:)*\d+(?:\.\d+)?\))?[aiwc]*$/i.test(mark) &&
-    /[1-9]/.test(mark);
+    hasFixedDurationDistanceMark(mark, row.discipline) ||
+    (/^(?:\d+:)*\d+(?:\.\d+)?a?(?:\((?:\d+:)*\d+(?:\.\d+)?\))?[aiwc]*$/i.test(mark) &&
+      /[1-9]/.test(mark));
   // Some accepted relay reports establish a finish/place but omit the team time.
   if (!positiveMark && !(mark === "" && /^[1-9]\d*$/.test(row.place))) return false;
   if (row.date) {

@@ -2,6 +2,7 @@ import type { ProfileResult } from "./profile-records";
 import type { SourcePerformance } from "./source-performance-history";
 import type { ReportedRaceRecord } from "./reported-race-history";
 import { isDisqualified } from "./result-details.ts";
+import { hasFixedDurationDistanceMark } from "./performance-timing.ts";
 
 export type ResultVerification = { verified: boolean; explanation: string };
 
@@ -73,7 +74,8 @@ export function hasHistoryFinish(row: SourcePerformance): boolean {
     !row.disqualification &&
     !row.labels.some((label) => /^(?:split|intermediate)(?:\b|:)/i.test(label)) &&
     hasPastYear(row.date || row.yearLabel || String(row.year)) &&
-    hasFinishMark(row.performance, row.place)
+    (hasFinishMark(row.performance, row.place) ||
+      hasFixedDurationDistanceMark(row.performance, row.discipline))
   );
 }
 
