@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -7,10 +7,28 @@ import { getMyMatchingSettings } from "@/lib/athrecs/result-matching-settings-ap
 import { getMyProfileSetupStatus, saveMyProfileSetup } from "@/lib/athrecs/profile-setup-api";
 import { setupLines } from "@/lib/athrecs/profile-setup";
 import type { MatchingSettings } from "@/lib/athrecs/result-matching-settings";
+import { getMyOpenClaimInvitations } from "@/lib/athrecs/claim-invitations-api";
+import { listMyResultClaims } from "@/lib/athrecs/result-claims-api";
+import { unfinishedClaim } from "@/lib/athrecs/claim-resume";
 
 export function ProfileResultsSetup({ account }: { account: AthleteAccountData }) {
   const [editing, setEditing] = useState(false);
   const [skipped, setSkipped] = useState(false);
+  const [resume, setResume] = useState<number | null>(null);
+  useEffect(() => setResume(unfinishedClaim(account.userId)), [account.userId]);
+  const invitations = useQuery({
+    queryKey: ["my-open-claim-invitations", account.userId],
+    queryFn: () => getMyOpenClaimInvitations(),
+    enabled: account.emailVerified,
+    retry: false,
+    gcTime: 0,
+  });
+  const claims = useQuery({
+    queryKey: ["my-result-claims", account.userId],
+    queryFn: () => listMyResultClaims(),
+    enabled: account.emailVerified,
+    retry: false,
+  });
   const settings = useQuery({
     queryKey: ["my-matching-settings", account.userId],
     queryFn: () => getMyMatchingSettings(),
@@ -24,6 +42,16 @@ export function ProfileResultsSetup({ account }: { account: AthleteAccountData }
     retry: false,
   });
   if (!account.emailVerified) return null;
+  // Invitations and unfinished claims already identify a concrete next step.
+  // Keep optional research details out of the way until that claim is complete.
+  if (
+    invitations.isPending ||
+    claims.isPending ||
+    invitations.data?.length ||
+    claims.data?.some((claim) => claim.status === "pending" || claim.status === "needs_info") ||
+    (resume && !claims.data?.some((claim) => claim.resultId === resume))
+  )
+    return null;
   return (
     <section
       className="space-y-3 rounded-xl border border-accent/40 bg-surface p-5"

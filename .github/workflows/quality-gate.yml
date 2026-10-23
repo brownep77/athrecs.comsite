@@ -48,6 +48,12 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Verify profile setup, former clubs and staff alerts on mobile and desktop
+        run: node --experimental-strip-types scripts/verify-profile-setup.mjs --browser
+
       - name: Verify AI chat privacy, transcripts and usage limits
         run: |
           node --experimental-strip-types scripts/verify-assistant.mjs
@@ -115,12 +121,6 @@ jobs:
           node scripts/verify-mo-farah-road-records.mjs
           node scripts/verify-public-figure-refresh.mjs
           node scripts/verify-reported-race-history.mjs
-
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
-
-      - name: Verify profile setup, former clubs and staff alerts on mobile and desktop
-        run: node --experimental-strip-types scripts/verify-profile-setup.mjs --browser
 
       - name: Verify consented feature flags in Web Analytics
         run: npm run verify:analytics-flags

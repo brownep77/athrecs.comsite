@@ -1,5 +1,9 @@
 import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
+import { ProfileResultsSetup } from "@/components/athletes/ProfileResultsSetup";
+import { saveMyProfileSetup } from "@/lib/athrecs/profile-setup-api";
+import { profileSetupSchema, setupLines } from "@/lib/athrecs/profile-setup";
+import { readProfileDetails } from "@/lib/athrecs/profile-details";
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -187,8 +191,8 @@ function JoinPage() {
             </li>
           </ul>
           <p className="mt-5 border-t border-border pt-4 text-xs leading-5 text-muted">
-            For every level, from first-timers to lifelong athletes. You can add result links and
-            find existing performances after creating your profile.
+            For every level, from first-timers to lifelong athletes. Add current and previous clubs
+            and optional profile links to help find your results as you join.
           </p>
           <Link
             to="/athletes"
@@ -206,6 +210,10 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
   const queryClient = useQueryClient();
   const [fullName, setFullName] = useState(account.fullName || "");
   const [sport, setSport] = useState<AthleteSportCode>("Running");
+  const [currentClub, setCurrentClub] = useState("");
+  const [previousClubs, setPreviousClubs] = useState("");
+  const [previousNames, setPreviousNames] = useState("");
+  const [profileLinks, setProfileLinks] = useState("");
   const [privacy, setPrivacy] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -215,12 +223,26 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
     setBusy(true);
     setError("");
     try {
+      const setup = profileSetupSchema.parse({
+        fullName,
+        currentClub,
+        previousClubs: setupLines(previousClubs),
+        previousNames: setupLines(previousNames),
+        sourceUrls: setupLines(profileLinks),
+        privacyAcknowledged: true,
+      });
       const saved = await saveMyAthleteAccount({
         data: {
           preferences: account.preferences,
           consents: account.consents,
           fullName: fullName.trim(),
           displayName: fullName.trim(),
+          clubOrTeam: setup.currentClub,
+          profileDetails: {
+            ...readProfileDetails(account.profileDetails),
+            previousClub: setup.previousClubs[0] ?? "",
+          },
+          previousNames: setup.previousNames,
           privacyAcknowledged: true,
           sports: [
             {
@@ -240,6 +262,7 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
           ],
         },
       });
+      await saveMyProfileSetup({ data: setup });
       queryClient.setQueryData(["my-athlete-account", account.userId], saved);
       await queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
     } catch (cause) {
@@ -261,11 +284,12 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
         </p>
         <h2 className="mt-2 font-display text-2xl font-semibold">Let’s start your profile</h2>
         <p className="mt-2 text-sm text-muted">
-          Just your name and first sport. Add everything else when you’re ready.
+          Add your full racing name and first sport. Optional clubs and profile links help us find
+          more of your results.
         </p>
       </div>
       <label className="block text-sm font-semibold">
-        Your name
+        Your full racing name
         <input
           autoComplete="name"
           value={fullName}
@@ -293,6 +317,56 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
           ))}
         </select>
       </div>
+      <fieldset className="space-y-4 rounded-xl border border-border p-4">
+        <legend className="px-1 text-sm font-semibold">Find more of your results (optional)</legend>
+        <label className="block text-sm font-semibold">
+          Current club or team
+          <input
+            className={field}
+            maxLength={160}
+            value={currentClub}
+            disabled={busy}
+            onChange={(e) => setCurrentClub(e.target.value)}
+          />
+        </label>
+        <label className="block text-sm font-semibold">
+          Previous clubs or teams
+          <textarea
+            className={`${field} h-auto`}
+            rows={2}
+            value={previousClubs}
+            disabled={busy}
+            onChange={(e) => setPreviousClubs(e.target.value)}
+            placeholder="One club per line"
+          />
+        </label>
+        <label className="block text-sm font-semibold">
+          Previous racing names
+          <textarea
+            className={`${field} h-auto`}
+            rows={2}
+            value={previousNames}
+            disabled={busy}
+            onChange={(e) => setPreviousNames(e.target.value)}
+            placeholder="One full name per line"
+          />
+        </label>
+        <label className="block text-sm font-semibold">
+          Public profile or result links
+          <textarea
+            className={`${field} h-auto`}
+            rows={3}
+            value={profileLinks}
+            disabled={busy}
+            onChange={(e) => setProfileLinks(e.target.value)}
+            placeholder="Power of 10, parkrun or other public HTTPS links, one per line"
+          />
+        </label>
+        <p className="text-xs leading-5 text-muted">
+          These links stay private. We’ll notify our team to check your profile and look for more
+          results. You can claim suggested results immediately while we check.
+        </p>
+      </fieldset>
       <label className="flex items-start gap-3 text-sm leading-6">
         <input
           type="checkbox"
@@ -339,8 +413,10 @@ function ProfileReady({ account }: { account: AthleteAccountData }) {
   if (!account.claimedProfiles.length)
     return (
       <div className="space-y-5">
+        <ProfileResultsSetup account={account} />
         <ProfileClaimGuide
           account={account}
+          hideRacingNameForm
           showSteps={false}
           onNameSaved={() => {
             void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });

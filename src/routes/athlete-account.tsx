@@ -282,7 +282,7 @@ function AthleteAccountPage() {
 function SignedInAccount() {
   const { section } = Route.useSearch();
   const hash = useLocation({ select: (location) => location.hash });
-  const activeSection = section ?? (hash === "profile-visibility" ? "sharing" : "potential");
+  const activeSection = section ?? (hash === "profile-visibility" ? "sharing" : "races");
   const show = (id: AccountSectionId) => !IS_ATHRECS_SITE || activeSection === id;
   const lastLoadedForm = useRef<AthleteAccountInput | null>(null);
   const queryClient = useQueryClient();
@@ -396,9 +396,10 @@ function SignedInAccount() {
         </p>
       ) : null}
       {IS_ATHRECS_SITE ? <ProfileResultsSetup account={account.data} /> : null}
-      {IS_ATHRECS_SITE && account.data.fullName.trim() ? (
+      {IS_ATHRECS_SITE ? (
         <ProfileClaimGuide
           account={account.data}
+          hideRacingNameForm
           onNameSaved={(updated) => {
             lastLoadedForm.current = accountToForm(updated);
             setForm(

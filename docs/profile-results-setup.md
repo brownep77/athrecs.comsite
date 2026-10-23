@@ -7,6 +7,14 @@ all reach the same authenticated setup. Optional discovery details are collected
 after email verification, so no profile data is kept in browser storage while
 waiting for an email or OAuth callback.
 
+The `/join` signup form includes the same optional clubs, previous names and
+public profile links alongside the full racing name and main sport. It submits
+the private follow-up request before showing the ready state. Athletes arriving
+with an invitation or unfinished claim retain their direct claim shortcut; the
+optional setup stays out of that path. Established accounts keep My races as
+their default account section, while the generic signup callback explicitly opens
+Find and claim results.
+
 The short setup asks for the full racing name, current club, up to ten previous
 clubs, up to eight previous racing names and up to ten public HTTPS profile or
 result links. Power of 10 and parkrun links use existing source-identity matching.

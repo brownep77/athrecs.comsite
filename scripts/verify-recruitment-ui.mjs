@@ -60,8 +60,15 @@ try {
   await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
   await page.getByRole("heading", { name: "Let’s start your profile", exact: true }).waitFor();
   assert.equal(new URL(page.url()).searchParams.get("from"), source);
-  await page.getByLabel("Your name", { exact: true }).fill("Fictional Recruitment Runner");
+  await page
+    .getByLabel("Your full racing name", { exact: true })
+    .fill("Fictional Recruitment Runner");
   await page.getByLabel("Your main sport", { exact: true }).selectOption("Running");
+  await page.getByLabel("Current club or team", { exact: true }).fill("Fictional Current AC");
+  await page.getByLabel("Previous clubs or teams", { exact: true }).fill("Fictional Former AC");
+  await page
+    .getByLabel("Public profile or result links", { exact: true })
+    .fill("https://www.parkrun.org.uk/parkrunner/9876543/");
   const save = page.getByRole("button", { name: "Create my private profile", exact: true });
   assert.equal(await save.isDisabled(), true, "Privacy acknowledgement is explicit");
   await page.getByRole("checkbox").check();
@@ -77,6 +84,22 @@ try {
   assert.equal(rows.length, 1);
   assert.equal(rows[0].emailVerified, true);
   assert.equal(rows[0].full_name, "Fictional Recruitment Runner");
+  const [setupProfile] =
+    await sql`select club_or_team from athlete_private_profiles where user_id=${rows[0].id}`;
+  assert.equal(setupProfile.club_or_team, "Fictional Current AC");
+  const [matching] =
+    await sql`select settings from athlete_result_matching_settings where user_id=${rows[0].id}`;
+  assert.deepEqual(matching.settings.previousClubs, ["Fictional Former AC"]);
+  assert.deepEqual(matching.settings.sourceUrls, [
+    "https://www.parkrun.org.uk/parkrunner/9876543/",
+  ]);
+  assert.equal(
+    (
+      await sql`select count(*)::int as n from athlete_profile_setup_requests where user_id=${rows[0].id}`
+    )[0].n,
+    1,
+  );
+  await page.getByText(/Your profile is in our review queue/).waitFor();
   const sports =
     await sql`select sport_code, is_primary from athlete_sport_profiles where user_id=${rows[0].id}`;
   assert.deepEqual(sports, [{ sport_code: "Running", is_primary: true }]);
@@ -102,7 +125,7 @@ try {
     })
     .waitFor();
   assert.equal(
-    await page.getByLabel("Your name", { exact: true }).count(),
+    await page.getByLabel("Your full racing name", { exact: true }).count(),
     0,
     "Existing profiles are not overwritten by onboarding",
   );
