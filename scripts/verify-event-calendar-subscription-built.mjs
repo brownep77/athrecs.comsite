@@ -85,6 +85,11 @@ try {
   );
   const page = await context.newPage();
   const errors = [];
+  const privateReads = [];
+  page.on("response", (response) => {
+    if (response.request().method() === "GET" && response.url().includes("raceId"))
+      privateReads.push(response);
+  });
   page.on("pageerror", (error) => errors.push(error.message));
   const email = "calendar-runner@example.test";
   const password = "Calendar-test-only-123!";
@@ -141,6 +146,11 @@ try {
   console.log(
     "PASS: explicit add produces an anonymous-readable private feed with the canonical race time",
   );
+  assert(privateReads.length > 0, "Capture authenticated calendar reads");
+  for (const response of privateReads) {
+    assert.equal(response.headers()["cache-control"], "private, no-store");
+    assert.match(response.headers().vary, /Cookie/);
+  }
   assert(writeRequest, "Capture actual authenticated mutation for boundary checks");
   const { cookie, ...anonymousHeaders } = writeRequest.headers;
   // A copied API request without the session must not read or mutate this account.

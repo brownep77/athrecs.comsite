@@ -14,6 +14,11 @@ export const getMyRaceCalendar = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .validator((input: { raceId?: string }) => z.object({ raceId }).parse(input))
   .handler(async ({ context, data }) => {
+    const { setResponseHeader } = await import("@tanstack/react-start/server");
+    setResponseHeader("Cache-Control", "private, no-store");
+    setResponseHeader("Vary", "Cookie, Authorization");
+    setResponseHeader("Referrer-Policy", "no-referrer");
+    setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     const { loadRaceCalendar } = await import("./calendar-subscription.server");
     await ensureAthrecsSeeded();
     return loadRaceCalendar(await getSql(), context.userId, data.raceId);
@@ -28,6 +33,11 @@ export const updateMyRaceCalendar = createServerFn({ method: "POST" })
         .parse(input),
   )
   .handler(async ({ context, data }) => {
+    const { setResponseHeader } = await import("@tanstack/react-start/server");
+    setResponseHeader("Cache-Control", "private, no-store");
+    setResponseHeader("Vary", "Cookie, Authorization");
+    setResponseHeader("Referrer-Policy", "no-referrer");
+    setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     const { changeRaceCalendar } = await import("./calendar-subscription.server");
     await ensureAthrecsSeeded();
     return changeRaceCalendar(await getSql(), context.userId, data.action, data.raceId);
