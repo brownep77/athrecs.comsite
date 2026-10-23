@@ -5,10 +5,24 @@ import type { Sport } from "./types";
 
 // Text fields deliberately retain decimal precision, field marks, heat positions,
 // non-finishes and source annotations; never coerce these into integer seconds.
-const sourceUrl = z
+// Enigma's original result PDFs are still served over HTTP. Retain the actual
+// evidence URL instead of fabricating an HTTPS equivalent or losing the archive.
+// This exception applies only to the organiser's two exact legacy hostnames.
+export const historySourceUrlSchema = z
   .string()
   .url()
-  .refine((value) => new URL(value).protocol === "https:");
+  .refine((value) => {
+    const url = new URL(value);
+    if (url.protocol === "https:") return true;
+    return (
+      url.protocol === "http:" &&
+      /^http:\/\/(?:www\.)?enigmarunning\.co\.uk\//.test(value) &&
+      !url.username &&
+      !url.password &&
+      !url.port &&
+      ["enigmarunning.co.uk", "www.enigmarunning.co.uk"].includes(url.hostname)
+    );
+  });
 export const sourcePerformanceSchema = z.object({
   syntheticTest: z.boolean().optional(),
   year: z.number().int().min(1800).max(2200),
@@ -65,7 +79,7 @@ export const sourcePerformanceSchema = z.object({
   place: z.string(),
   venue: z.string(),
   meeting: z.string(),
-  sourceUrls: z.array(sourceUrl),
+  sourceUrls: z.array(historySourceUrlSchema),
   sourceKeys: z.array(z.string()).optional(),
   labels: z.array(z.string()),
   disqualification: disqualificationSchema.optional(),
@@ -81,7 +95,7 @@ export type DisplaySourcePerformance = SourcePerformance & {
 export const sourceHistorySchema = z.object({
   provider: z.string(),
   externalId: z.string(),
-  sourceUrl,
+  sourceUrl: historySourceUrlSchema,
   capturedAt: z.string(),
   complete: z.boolean(),
   yearsExpected: z.array(z.number().int()),
