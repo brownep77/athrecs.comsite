@@ -15,7 +15,8 @@ const sql=async(strings,...values)=>{let text=strings[0];values.forEach((_,i)=>{
 sql.transaction=async fn=>{await client.query('begin');try{const r=await fn(sql);await client.query('commit');return r;}catch(e){await client.query('rollback');throw e;}};
 const core=load('src/lib/athlete-workspace/core.ts',{zod});
 const details=load('src/lib/athrecs/result-details.ts',{zod});
-const presentation=load('src/lib/athrecs/profile-result-presentation.ts',{'./result-details.ts':details});
+const timing=load('src/lib/athrecs/performance-timing.ts',{zod});
+const presentation=load('src/lib/athrecs/profile-result-presentation.ts',{'./result-details.ts':details,'./performance-timing.ts':timing});
 const scope={IS_RUNRECS_SITE:false},db={getSql:async()=>sql,dbSource:'neon'};
 const service=load('src/lib/athlete-workspace/service.server.ts',{'node:crypto':crypto,'../db':db,'../site-scope':scope,'./core':core,'../athrecs/profile-result-presentation':presentation});
 const publication=load('src/lib/athlete-workspace/publication.server.ts',{'node:crypto':crypto,'../db':db,'../site-scope':scope,'./core':core});

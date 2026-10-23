@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { historyPerformanceSchema } from "../athrecs/source-performance-history.ts";
+import {
+  historyPerformanceSchema,
+  historySourceUrlSchema,
+} from "../athrecs/source-performance-history.ts";
 export const adminHistoryInput = z.object({
   athleteId: z.number().int().positive(),
   requestId: z.string().uuid(),
-  sourceUrl: z
-    .string()
-    .url()
-    .refine((value) => new URL(value).protocol === "https:"),
+  sourceUrl: historySourceUrlSchema,
   performances: z.array(historyPerformanceSchema).min(1).max(250),
   reason: z.string().trim().min(12).max(4000),
   administratorApproval: z.literal(true),
