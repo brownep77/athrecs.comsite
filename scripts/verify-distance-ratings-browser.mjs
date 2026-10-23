@@ -102,10 +102,17 @@ try {
     await page.goto(server.resolvedUrls.local[0]);
     await page.getByRole("heading", { name: "Distance ratings & race points" }).waitFor();
     const allTime = page.getByRole("article").first();
-    assert.match(await allTime.innerText(), /465 points/);
+    assert.match(await allTime.innerText(), /480.61 points/);
+    assert.match(await allTime.innerText(), /15.61 ultra bonus/);
+    await page.getByText("Ultra participation bonuses", { exact: true }).click();
+    const bonusTable = page
+      .getByRole("table")
+      .filter({ has: page.getByText("Part of each race", { exact: true }) });
+    assert.equal(await bonusTable.locator("tbody tr").count(), 4);
+    await page.getByText("Ultra participation bonuses", { exact: true }).click();
     assert.match(await allTime.innerText(), /28 completed events/);
     await page.getByText(`Every rated performance · ${year} (27)`, { exact: true }).click();
-    const individual = page.getByRole("table").nth(1);
+    const individual = page.getByRole("table", { name: /^Individual performance ratings for / });
     assert.equal(await individual.locator("tbody tr").count(), 10);
     await page.getByRole("button", { name: "Show more performances" }).click();
     assert.equal(await individual.locator("tbody tr").count(), 27);
@@ -113,7 +120,7 @@ try {
     assert.equal(await individual.locator("tbody tr").count(), 1);
     assert.match(await page.getByRole("article").nth(1).innerText(), /15 points/);
     assert.match(await individual.innerText(), /18:00/);
-    const groups = page.getByRole("table").first();
+    const groups = page.getByRole("table", { name: "Performance rating by distance" });
     assert.equal(
       await groups.locator("tbody tr").count(),
       3,

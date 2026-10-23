@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   buildProfileDistanceSummary,
   distanceSummaryToday,
+  ultraParticipationBonus,
 } from "../src/lib/athrecs/profile-distance-summary.ts";
 
 const today = new Date("2026-10-23T12:00:00Z");
@@ -72,7 +73,8 @@ assert.deepEqual(basic.allTime, {
   unknownDistanceRaces: 1,
   racePoints: 70,
   distancePoints: 156.69,
-  totalPoints: 226.69,
+  ultraBonusPoints: 62.41,
+  totalPoints: 289.1,
   verifiedRaces: 0,
   verifiedTotalPoints: 0,
 });
@@ -264,6 +266,7 @@ assert.deepEqual(buildProfileDistanceSummary([], [], today).currentSeason, {
   unknownDistanceRaces: 0,
   racePoints: 0,
   distancePoints: 0,
+  ultraBonusPoints: 0,
   totalPoints: 0,
   verifiedRaces: 0,
   verifiedTotalPoints: 0,
@@ -361,6 +364,102 @@ assert.equal(
     .completedRaces,
   0,
   "Explicit timing basis cannot contradict its own main mark",
+);
+
+// Progressive ultra bonuses are earned by an individual completed race, never
+// by adding together the athlete's shorter events or rounding each event first.
+for (const [distanceKm, expected] of [
+  [5, 15],
+  [10, 20],
+  [21.0975, 31.1],
+  [42.195, 52.2],
+  [50, 75.61],
+  [80.4672, 167.01],
+  [100, 225.61],
+  [160.9344, 469.35],
+  [200, 664.68],
+  [250, 914.68],
+]) {
+  const tally = summary([race(1, { distanceCode: `${distanceKm}K`, distanceKm })]).allTime;
+  assert.equal(tally.totalPoints, expected, `Progressive participation points for ${distanceKm}km`);
+}
+for (const invalidDistance of [0, -50, NaN, Infinity])
+  assert.equal(ultraParticipationBonus(invalidDistance), 0);
+assert.equal(ultraParticipationBonus(42.195), 0, "A marathon does not earn an ultra bonus");
+for (const boundary of [42.195, 100, 160.9344]) {
+  const before = ultraParticipationBonus(boundary - 0.000001);
+  const at = ultraParticipationBonus(boundary);
+  const after = ultraParticipationBonus(boundary + 0.000001);
+  assert(before <= at && at < after, `Bonus increases beyond ${boundary}km`);
+  assert(after - before < 0.00001, "No sudden threshold jump");
+}
+const weeklyParkruns = summary(
+  Array.from({ length: 20 }, (_, index) =>
+    race(index + 1, { sport: "Parkrun", surface: "Parkrun" }),
+  ),
+).allTime;
+assert.equal(weeklyParkruns.distanceKm, 100);
+assert.equal(
+  weeklyParkruns.ultraBonusPoints,
+  0,
+  "Career/season kilometres never trigger an ultra bonus",
+);
+assert.equal(weeklyParkruns.totalPoints, 300);
+const twoFifties = summary([
+  race(1, { distanceCode: "50K", distanceKm: 50 }),
+  race(2, { distanceCode: "50K", distanceKm: 50 }),
+]).allTime;
+assert.equal(twoFifties.ultraBonusPoints, 31.22);
+assert.equal(twoFifties.totalPoints, 151.22);
+assert(twoFifties.totalPoints < 225.61, "A single 100K rewards the longer continuous event");
+const seasonalUltras = summary([
+  race(1, {
+    distanceCode: "50K",
+    distanceKm: 50,
+    eventDate: "2025-06-01",
+    details: { verificationStatus: "source_verified" },
+  }),
+  race(2, { distanceCode: "100K", distanceKm: 100 }),
+]);
+assert.equal(seasonalUltras.allTime.totalPoints, 301.22);
+assert.equal(seasonalUltras.allTime.ultraBonusPoints, 131.22);
+assert.equal(
+  seasonalUltras.allTime.verifiedTotalPoints,
+  75.61,
+  "Verified subtotal includes only the verified event's bonus",
+);
+assert.equal(seasonalUltras.currentSeason.totalPoints, 225.61);
+assert.equal(seasonalUltras.seasons.find(({ year }) => year === 2025).totalPoints, 75.61);
+assert.equal(
+  summary([race(1, { distanceCode: "Marathon", distanceKm: 42.2 })]).allTime.ultraBonusPoints,
+  0,
+  "Rounded marathon is not an ultra",
+);
+assert.equal(
+  summary([race(1, { distanceCode: "Ultra", distanceKm: 0 })]).allTime.ultraBonusPoints,
+  0,
+);
+const duplicateUltra = race(1, { distanceCode: "50K", distanceKm: 50 });
+assert.equal(
+  summary([duplicateUltra, { ...duplicateUltra, resultId: 99 }]).allTime.totalPoints,
+  75.61,
+);
+assert.equal(summary([{ ...duplicateUltra, status: "DNF" }]).allTime.ultraBonusPoints, 0);
+assert.equal(
+  summary([
+    duplicateUltra,
+    { ...duplicateUltra, resultId: 99, finishTimeSeconds: 1201, chipTimeSeconds: 1201 },
+  ]).allTime.ultraBonusPoints,
+  0,
+);
+assert.equal(
+  summary(
+    Array.from({ length: 3 }, (_, index) =>
+      race(index + 1, { distanceCode: "100mi", distanceKm: 160.9344 }),
+    ),
+  ).allTime.totalPoints,
+  1408.04,
+  "Sum raw bonuses before rounding the total",
 );
 
 console.log(

@@ -16,6 +16,7 @@ export type ParticipationTally = {
   unknownDistanceRaces: number;
   racePoints: number;
   distancePoints: number;
+  ultraBonusPoints: number;
   totalPoints: number;
   verifiedRaces: number;
   verifiedTotalPoints: number;
@@ -34,6 +35,16 @@ export type ProfileDistanceSummary = {
 
 const normal = (value: string) => value.trim().toLowerCase().replace(/\s+/g, " ");
 const round = (value: number) => Math.round((value + Number.EPSILON) * 100) / 100;
+
+/** Per-event bonus: never apply thresholds to cumulative season/career kilometres. */
+export function ultraParticipationBonus(distanceKm: number): number {
+  if (!Number.isFinite(distanceKm) || distanceKm <= 42.195) return 0;
+  return (
+    2 * Math.max(0, distanceKm - 42.195) +
+    Math.max(0, distanceKm - 100) +
+    Math.max(0, distanceKm - 160.9344)
+  );
+}
 
 /** Seasons and the future-result cutoff use the site's UK calendar. */
 export function distanceSummaryToday(today: Date): string {
@@ -246,6 +257,10 @@ function contradictory(group: AchievementResult[], day: string): boolean {
 
 function tally(finishes: readonly DistanceSummaryFinish[]): ParticipationTally {
   const distance = finishes.reduce((total, result) => total + knownDistance(result), 0);
+  const bonus = finishes.reduce(
+    (total, result) => total + ultraParticipationBonus(knownDistance(result)),
+    0,
+  );
   const verified = finishes.filter((result) => result.participationVerified);
   return {
     completedRaces: finishes.length,
@@ -253,10 +268,15 @@ function tally(finishes: readonly DistanceSummaryFinish[]): ParticipationTally {
     unknownDistanceRaces: finishes.filter((result) => knownDistance(result) === 0).length,
     racePoints: finishes.length * 10,
     distancePoints: round(distance),
-    totalPoints: round(finishes.length * 10 + distance),
+    ultraBonusPoints: round(bonus),
+    totalPoints: round(finishes.length * 10 + distance + bonus),
     verifiedRaces: verified.length,
     verifiedTotalPoints: round(
-      verified.length * 10 + verified.reduce((total, result) => total + knownDistance(result), 0),
+      verified.length * 10 +
+        verified.reduce((total, result) => {
+          const km = knownDistance(result);
+          return total + km + ultraParticipationBonus(km);
+        }, 0),
     ),
   };
 }

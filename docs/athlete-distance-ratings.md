@@ -39,10 +39,29 @@ Examples using the frozen references:
 ## Participation points
 
 Running finishes of 5 km or longer receive 10 completion points plus 1 point per
-known kilometre raced. This includes parkrun and trail/ultra events. An accepted
+known kilometre raced, with a progressive ultra bonus. This includes parkrun and trail/ultra events. An accepted
 running finish of unknown length receives the 10 completion points only. Track
 and field events shorter than 5 km, other sports, splits and team/relay totals
 are outside this first version's scope.
+
+The distance reward increases within each individual race:
+
+| Part of each race                            | Total points per km in that part |
+| -------------------------------------------- | -------------------------------: |
+| First 42.195 km                              |                                1 |
+| Beyond 42.195 km, up to 100 km               |                                3 |
+| Beyond 100 km, up to 100 miles (160.9344 km) |                                4 |
+| Beyond 100 miles                             |                                5 |
+
+The raw bonus for a race of `d` kilometres is
+`2×max(0,d−42.195) + max(0,d−100) + max(0,d−160.9344)`.
+The race earns `10 + d + bonus`. These are AthRecs participation rules, separate
+from time ratings, with the same rules applied to historic and current seasons.
+Each threshold applies only to that part of that individual race, so there is no
+sudden points jump at a boundary. Cumulative athlete kilometres never trigger an
+ultra bonus: twenty 5K finishes receive 300 points and no ultra bonus, while a
+single 100K finish receives 225.61 points. Completion count still rewards
+consistent participation; two 50K finishes receive 151.22 points in total.
 
 | Completed distance | Participation points |
 | ------------------ | -------------------: |
@@ -50,14 +69,16 @@ are outside this first version's scope.
 | 10K                |                   20 |
 | Half marathon      |                31.10 |
 | Marathon           |                52.20 |
-| 50K                |                   60 |
-| 100K               |                  110 |
-| 100 miles          |               170.93 |
+| 50K                |                75.61 |
+| 50 miles           |               167.01 |
+| 100K               |               225.61 |
+| 100 miles          |               469.35 |
+| 200K               |               664.68 |
 
-The raw known distances are summed before rounding totals to two decimal places.
+The raw known distances and per-event bonuses are summed before rounding totals to two decimal places.
 Consequently a total may differ by a cent from the sum of individually rounded
 examples. All-time and selected-season cards show completed events, kilometres,
-completion points, distance points, combined points and the verified subset.
+completion points, base distance points, ultra bonuses, combined points and the verified subset.
 These describe the linked recorded history, not every event the athlete has run.
 
 ## Evidence and visibility

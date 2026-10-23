@@ -53,6 +53,7 @@ function ParticipationCard({ title, tally }: { title: string; tally: Participati
       </p>
       <p className="text-xs text-muted">
         {number(tally.racePoints)} finish points + {number(tally.distancePoints)} distance points
+        {tally.ultraBonusPoints > 0 ? <> + {number(tally.ultraBonusPoints)} ultra bonus</> : null}
       </p>
       <p className="text-xs text-muted">
         {number(tally.verifiedRaces)} verified finishes · {number(tally.verifiedTotalPoints)}{" "}
@@ -159,9 +160,64 @@ export function DistanceRatings({
       </div>
       <p className="text-xs text-muted">
         Participation covers running events of 5 km or longer: 10 points per completed event + 1
-        point per kilometre raced. Parkrun counts as a completed event. Recorded running finishes of
-        unknown distance earn finish points only.
+        point per kilometre raced, with an increasing distance bonus for ultras. Parkrun counts as a
+        completed event. Recorded running finishes of unknown distance earn finish points only.
       </p>
+      <details className="rounded-lg border border-border p-3">
+        <summary className="min-h-8 cursor-pointer text-sm font-semibold">
+          Ultra participation bonuses
+        </summary>
+        <p className="mt-2 text-xs text-muted">
+          Distance points increase as each individual race gets longer. Add 10 completion points to
+          the distance points below. The bonus applies to that race’s distance, independently of
+          other races completed.
+        </p>
+        <p className="mt-2 text-xs text-muted">
+          Totals use unrounded distances and bonuses. Rounded components may differ from the total
+          by 0.01 points.
+        </p>
+        <table className="mt-3 w-full text-left text-xs">
+          <caption className="sr-only">
+            Distance points earned in successive parts of each race
+          </caption>
+          <thead>
+            <tr className="border-b border-border">
+              <th scope="col" className="p-2">
+                Part of each race
+              </th>
+              <th scope="col" className="p-2">
+                Points per km
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b border-border">
+              <th scope="row" className="p-2 font-normal">
+                First 42.195 km
+              </th>
+              <td className="p-2">1</td>
+            </tr>
+            <tr className="border-b border-border">
+              <th scope="row" className="p-2 font-normal">
+                Beyond 42.195 km, up to 100 km
+              </th>
+              <td className="p-2">3</td>
+            </tr>
+            <tr className="border-b border-border">
+              <th scope="row" className="p-2 font-normal">
+                Beyond 100 km, up to 100 miles
+              </th>
+              <td className="p-2">4</td>
+            </tr>
+            <tr>
+              <th scope="row" className="p-2 font-normal">
+                Beyond 100 miles
+              </th>
+              <td className="p-2">5</td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
       {groups.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">

@@ -57,7 +57,13 @@ try {
   assert.match($("article").first().text(), /2 completed events/);
   assert.match($("article").first().text(), /15 km raced/);
   assert.equal($("select option[value='2025']").length, 1);
-  assert.equal($("table").first().find("tbody tr").length, 2);
+  assert.equal(
+    $("caption")
+      .filter((_, element) => $(element).text() === "Performance rating by distance")
+      .parent()
+      .find("tbody tr").length,
+    2,
+  );
   assert.match(html, /Awaiting verification/);
   for (const privateValue of ["PRIVATE-RESULT-EVIDENCE", "PRIVATE-PROVIDER", "PRIVATE-REVIEW-NOTE"])
     assert(!html.includes(privateValue), `Never render athlete evidence: ${privateValue}`);
@@ -81,7 +87,9 @@ try {
       ],
     }),
   );
-  assert.match(trail, /60 points/);
+  assert.match(trail, /75.61 points/);
+  assert.match(trail, /15.61 ultra bonus/);
+  assert.match(trail, /Ultra participation bonuses/);
   assert.match(trail, /Trail/);
   assert.match(trail, /Distance-only estimate/);
   assert(!trail.includes("PRIVATE-"));
