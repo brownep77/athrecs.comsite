@@ -90,6 +90,9 @@ function StaffAthleteProfile() {
               coaches={profile.athlete.coaches}
             />
             <div className="flex flex-wrap gap-3">
+              <Button asChild variant="secondary">
+                <a href={`/admin/athlete-result-finder?name=${encodeURIComponent(profile.athlete.name)}`}>Find more results</a>
+              </Button>
               {!profile.athlete.registered && profile.athlete.sources.length ? (
                 <Button
                   type="button"

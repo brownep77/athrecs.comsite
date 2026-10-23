@@ -3,6 +3,12 @@ on:
   pull_request:
     paths: &archive-paths
       - "src/lib/results-archive/**"
+      - "src/lib/athlete-finder/**"
+      - "src/components/staff/AthleteResultFinder.tsx"
+      - "src/components/staff/AthleteSourceCheck.tsx"
+      - "src/components/staff/AthleteSourceCoverage.tsx"
+      - "src/routes/admin/athlete-result-finder.tsx"
+      - "scripts/verify-athlete-source-*.mjs"
       - "src/components/staff/*Archive*"
       - "src/components/athletes/*Result*"
       - "src/lib/athrecs/seed.server.ts"
@@ -58,8 +64,15 @@ jobs:
         run: npm run verify:results-archive
         env:
           ATHRECS_ARCHIVE_TEST_POSTGRES: "1"
+      - name: Athlete finder, source coverage and supported URL checks
+        run: |
+          npm run verify:athlete-source-finder
+          npm run verify:athlete-source-coverage
+          npm run verify:athlete-source-check
       - run: npx playwright install --with-deps chromium
       - name: Browser bookmark capture and London list regression
         run: node scripts/verify-browser-results-button.mjs
       - name: Browser to API to disposable database
         run: npm run verify:results-archive-browser
+      - name: Athlete finder browser to API to disposable database
+        run: npm run verify:athlete-source-finder-browser

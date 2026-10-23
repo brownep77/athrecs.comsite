@@ -99,6 +99,9 @@ function ResultArchivePage() {
         </div>
         <div className="flex flex-wrap gap-2">
           <Button asChild variant="secondary">
+            <a href="/admin/athlete-result-finder">Find results for an athlete</a>
+          </Button>
+          <Button asChild variant="secondary">
             <Link to="/admin/result-claims" search={{ claimId: undefined }}>
               Review claim conflicts
             </Link>
