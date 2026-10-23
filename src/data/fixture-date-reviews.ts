@@ -14,7 +14,7 @@ export const FIXTURE_DATE_REVIEWS: Record<
       {
         sourceUrl: `https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-${month}-2027`,
         checkedAt: "2026-10-23",
-        note: "This occurrence belongs to its separate month-specific Heaton Park listing. The duplicate attached to the March page is retained only in storage.",
+        note: "See the month-specific Heaton Park listing for this date; this page covers the March 2027 event.",
       },
     ]),
   ),
