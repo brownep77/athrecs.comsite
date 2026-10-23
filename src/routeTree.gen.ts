@@ -60,6 +60,7 @@ import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
 import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scanner-worker'
 import { Route as ApiCollectionStatsWorkerRouteImport } from './routes/api/collection-stats-worker'
+import { Route as ApiDiagnosticsRouteImport } from './routes/api/diagnostics'
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
 import { Route as ApiResultClaimAlertsRouteImport } from './routes/api/result-claim-alerts'
 import { Route as ApiSignupAlertsRouteImport } from './routes/api/signup-alerts'
@@ -363,6 +364,11 @@ const ApiCollectionStatsWorkerRoute =
     path: '/api/collection-stats-worker',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiDiagnosticsRoute = ApiDiagnosticsRouteImport.update({
+  id: '/api/diagnostics',
+  path: '/api/diagnostics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiRaceCollectorWorkerRoute = ApiRaceCollectorWorkerRouteImport.update({
   id: '/api/race-collector-worker',
   path: '/api/race-collector-worker',
@@ -641,6 +647,7 @@ export interface FileRoutesByFullPath {
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
+  '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
@@ -738,6 +745,7 @@ export interface FileRoutesByTo {
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
+  '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
@@ -836,6 +844,7 @@ export interface FileRoutesById {
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
+  '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
@@ -935,6 +944,7 @@ export interface FileRouteTypes {
     | '/api/catalogue-automation'
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
+    | '/api/diagnostics'
     | '/api/race-collector-worker'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
@@ -1032,6 +1042,7 @@ export interface FileRouteTypes {
     | '/api/catalogue-automation'
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
+    | '/api/diagnostics'
     | '/api/race-collector-worker'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
@@ -1129,6 +1140,7 @@ export interface FileRouteTypes {
     | '/api/catalogue-automation'
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
+    | '/api/diagnostics'
     | '/api/race-collector-worker'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
@@ -1227,6 +1239,7 @@ export interface RootRouteChildren {
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
   ApiClubScannerWorkerRoute: typeof ApiClubScannerWorkerRoute
   ApiCollectionStatsWorkerRoute: typeof ApiCollectionStatsWorkerRoute
+  ApiDiagnosticsRoute: typeof ApiDiagnosticsRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
   ApiResultClaimAlertsRoute: typeof ApiResultClaimAlertsRoute
   ApiSignupAlertsRoute: typeof ApiSignupAlertsRoute
@@ -1633,6 +1646,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCollectionStatsWorkerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/diagnostics': {
+      id: '/api/diagnostics'
+      path: '/api/diagnostics'
+      fullPath: '/api/diagnostics'
+      preLoaderRoute: typeof ApiDiagnosticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/race-collector-worker': {
       id: '/api/race-collector-worker'
       path: '/api/race-collector-worker'
@@ -1995,6 +2015,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
   ApiClubScannerWorkerRoute: ApiClubScannerWorkerRoute,
   ApiCollectionStatsWorkerRoute: ApiCollectionStatsWorkerRoute,
+  ApiDiagnosticsRoute: ApiDiagnosticsRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,
   ApiResultClaimAlertsRoute: ApiResultClaimAlertsRoute,
   ApiSignupAlertsRoute: ApiSignupAlertsRoute,

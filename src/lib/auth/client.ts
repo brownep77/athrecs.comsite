@@ -8,11 +8,20 @@ import {
   type BrokerSocialProviderId,
 } from "./auth-methods";
 import { GROK_PROVIDERS } from "./providers";
+import { reportBrowserDiagnostic } from "../browser-diagnostics";
 
 /** Same-origin Better Auth client. Preview sessions use a bearer token. */
 export const authClient = createAuthClient({
   plugins: [genericOAuthClient(), emailOTPClient()],
   fetchOptions: {
+    async customFetchImpl(input, init) {
+      try {
+        return await fetch(input, init);
+      } catch (error) {
+        reportBrowserDiagnostic("network_error", error);
+        throw error;
+      }
+    },
     onRequest(ctx) {
       const token = getBearerToken();
       if (token) ctx.headers.set("Authorization", `Bearer ${token}`);

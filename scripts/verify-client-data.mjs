@@ -69,7 +69,7 @@ globalThis.fetch = async (input, init) => {
 };
 const modules = new Map();
 async function rpc(name, data, token, extra = {}) {
-  const file = "athrecs/client-data-api";
+  const file = name === "listAccessLog" ? "athrecs/access-log-api" : "athrecs/client-data-api";
   if (!modules.has(file))
     modules.set(file, await (await fetch(`${origin}/src/lib/${file}.ts`)).text());
   const source = modules.get(file),
@@ -278,6 +278,173 @@ try {
     "PASS: migration/backfill, real signup/login cookie reuse and tampering, device parsing, trusted geolocation, logout persistence, counts, access control, safe payloads, pagination, retention and account deletion.",
   );
 
+  // New cross-account log: real auth requests, never synthetic claims of success.
+  await post("sign-in/email", { email: "client@example.test", password });
+  await post("sign-in/email", { email: "client@example.test", password: "wrong" });
+  const access = (data = {}, userToken = token) => rpc("listAccessLog", data, userToken);
+  const log = await access({ q: "client@example.test" });
+  assert(log.events.some((e) => e.outcome === "failed" && e.identity === "entered"));
+  assert(log.events.some((e) => e.outcome === "success" && e.identity === "account"));
+  const success = log.events.find((e) => e.outcome === "success" && e.requestId);
+  assert(success && success.durationMs >= 0 && success.httpStatus === 200);
+  assert.equal(success.host, "127.0.0.1");
+  assert.equal(success.browser, "Chrome");
+  assert.equal(success.browserVersion, "155.0.0.0");
+  const failures = await access({ outcome: "failed", q: "client@example.test" });
+  assert(failures.events.every((e) => e.outcome === "failed"));
+  assert(failures.events.some((e) => e.errorCode === "INVALID_EMAIL_OR_PASSWORD"));
+  assert.equal(failures.summary.successful, 0);
+  assert(
+    (await access({ view: "sessions", q: "client@example.test" })).events.every(
+      (e) => new Date(e.expiresAt) > new Date(),
+    ),
+  );
+  const activeBefore = (await access({ view: "sessions", q: "client@example.test" })).summary.total;
+  await sql`update session set "expiresAt"=now()-interval '1 second' where id='client-history-2'`;
+  assert.equal(
+    (await access({ view: "sessions", q: "client@example.test" })).summary.total,
+    activeBefore - 1,
+  );
+  assert(
+    (await access({ q: "client@example.test", outcome: "info" })).events.some(
+      (e) => e.kind === "sign_out" && e.identity === "account",
+    ),
+  );
+  assert.equal((await access({ q: "%" })).summary.total, 0);
+  assert.equal((await access({ browser: "Safari", q: "client@example.test" })).summary.total, 0);
+  assert((await access({ device: "Mobile phone", browser: "Chrome" })).summary.total > 0);
+  await assert.rejects(() => rpc("listAccessLog", {}, undefined), /Unauthorized/);
+  await assert.rejects(() => access({}, client.body.token), /Forbidden/);
+  await assert.rejects(() => access({ days: 500 }));
+  assert.equal(lastHeaders.get("cache-control"), "private, no-store");
+  await assert.rejects(
+    () =>
+      rpc("listAccessLog", {}, token, {
+        origin: "https://untrusted.example",
+        "sec-fetch-site": "cross-site",
+      }),
+    /Forbidden|Cross/,
+  );
+  await assert.rejects(
+    () => rpc("listAccessLog", {}, token, { "x-forwarded-host": "www.athrecs.com" }),
+    /staff host required/,
+  );
+  const diagnostics = await server.ssrLoadModule("/src/lib/auth/access-diagnostics.server.ts");
+  const secrets = [
+    password,
+    token,
+    client.body.token,
+    "secret-code-123456",
+    "private-message",
+    "private-token",
+  ];
+  const request = new Request(`${origin}/api/auth/sign-in/email-otp?token=private-token`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ email: "client@example.test", otp: "secret-code-123456", password }),
+  });
+  const response = await diagnostics.handleAuthWithDiagnostics(
+    request,
+    async () =>
+      Response.json(
+        { code: "OTP_EXPIRED", message: "private-message", token: "private-token" },
+        { status: 400 },
+      ),
+    async () => sql,
+  );
+  assert.equal(response.status, 400);
+  assert.equal(
+    (await response.json()).message,
+    "private-message",
+    "Logging must preserve response body",
+  );
+  assert((await access({ q: "OTP_EXPIRED" })).summary.total > 0);
+  await diagnostics.handleAuthWithDiagnostics(
+    new Request(`${origin}/api/auth/callback/google?code=secret-code-123456`),
+    async () =>
+      new Response(null, {
+        status: 302,
+        headers: { location: `${origin}/account?error=access_denied&token=private-token` },
+      }),
+    async () => sql,
+  );
+  assert(
+    (await access({ q: "access_denied" })).events.some((e) => e.route === "/callback/:provider"),
+  );
+  await assert.rejects(
+    () =>
+      diagnostics.handleAuthWithDiagnostics(
+        new Request(`${origin}/api/auth/sign-in/email`),
+        async () => {
+          throw new Error("private-message");
+        },
+        async () => sql,
+      ),
+    /private-message/,
+  );
+  assert((await access({ outcome: "error" })).events.some((e) => e.errorCode === "SERVER_ERROR"));
+  const preserved = await diagnostics.handleAuthWithDiagnostics(
+    new Request(`${origin}/api/auth/sign-out`),
+    async () => Response.json({ success: true }),
+    async () => {
+      throw new Error("storage failure");
+    },
+  );
+  assert.equal(preserved.status, 200, "Logging failure must not break auth");
+  const browserReport = {
+    kind: "page_error",
+    code: "TypeError",
+    route: "/athletes/private-name?token=private-token",
+    reference: crypto.randomUUID(),
+    online: true,
+    viewport: "small",
+  };
+  const report = async (body = browserReport, headers = {}) =>
+    fetch(`${origin}/api/diagnostics`, {
+      method: "POST",
+      headers: {
+        origin,
+        "sec-fetch-site": "same-origin",
+        "content-type": "application/json",
+        "user-agent": android,
+        authorization: `Bearer ${client.body.token}`,
+        ...headers,
+      },
+      body: JSON.stringify(body),
+    });
+  assert.equal((await report()).status, 204);
+  const reported = (await access({ outcome: "error", q: "client@example.test" })).events.find(
+    (e) => e.source === "browser",
+  );
+  assert.equal(reported.route, "/athletes/:page");
+  assert.equal(reported.identity, "account");
+  assert.equal(reported.requestId, browserReport.reference);
+  assert.equal((await report({ ...browserReport, userId: staff.body.user.id })).status, 400);
+  assert.equal((await report(browserReport, { origin: "https://evil.example" })).status, 403);
+  for (let i = 0; i < 9; i++)
+    assert.equal((await report({ ...browserReport, reference: crypto.randomUUID() })).status, 204);
+  assert.equal((await report()).status, 429);
+  const stored = JSON.stringify(await sql`select * from athlete_access_events`);
+  for (const secret of secrets)
+    assert(!stored.includes(secret), "Sensitive input excluded from diagnostic storage");
+  assert(!stored.includes("private-name"));
+  const accessPayload = JSON.stringify(await access());
+  for (const secret of [...secrets, "user_agent", "session_id", "device_key_hash", "ipAddress"])
+    assert(!accessPayload.includes(secret), "Sensitive material excluded from staff payload");
+  const pages = await access({ days: 90 }),
+    page2 = await access({ days: 90, page: 2 });
+  assert.equal(pages.events.length, 25);
+  assert(!pages.events.some((e) => page2.events.some((other) => other.id === e.id)));
+  await sql`insert into athlete_access_events(kind,outcome,request_id,source,occurred_at) values('page_error','error','expired-diagnostic','browser',now()-interval '91 days')`;
+  await access();
+  assert.equal(
+    (await sql`select id from athlete_access_events where request_id='expired-diagnostic'`).length,
+    0,
+  );
+  console.log(
+    "PASS: shared timeline, real successful/failed sign-ins, OAuth/OTP/server errors, safe diagnostics, storage outage isolation, access controls, session expiry, filtering, pagination, rate limits and retention.",
+  );
+
   if (process.argv.includes("--browser")) {
     // A fresh captured login makes the browser assertions exercise populated fields.
     process.env.VERCEL = "1";
@@ -324,6 +491,48 @@ try {
     await page.getByRole("heading", { name: "Signed-up athletes", exact: true }).waitFor();
     await page.getByRole("button", { name: "Client data", exact: true }).click();
     assert(page.url().includes("view=client-data"));
+    await page.getByRole("button", { name: "Login & diagnostics", exact: true }).click();
+    await page.getByRole("heading", { name: "Login & diagnostics", exact: true }).waitFor();
+    await page.getByLabel("Search accounts or errors").fill("client@example.test");
+    await page.getByRole("button", { name: "Search log", exact: true }).click();
+    await page
+      .getByRole("cell", { name: /Email entered \(unverified\)/ })
+      .first()
+      .waitFor();
+    await page.getByLabel("Outcome", { exact: true }).selectOption("failed");
+    await page.getByText("INVALID_EMAIL_OR_PASSWORD", { exact: true }).first().waitFor();
+    await page.screenshot({ path: "artifacts/login-log-mobile.png", fullPage: true });
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.screenshot({ path: "artifacts/login-log-desktop.png", fullPage: true });
+    await page.getByRole("button", { name: "Unexpired sessions", exact: true }).click();
+    await page.getByText(/This does not show who is online now/).waitFor();
+    await page
+      .getByRole("cell", { name: /Expires/ })
+      .first()
+      .waitFor();
+    await page.getByRole("button", { name: "All access events", exact: true }).click();
+    assert(page.url().includes("view=login-log"));
+    await sql`delete from athlete_diagnostic_limits`;
+    const browserStored = page.waitForResponse(
+      (response) => response.url().endsWith("/api/diagnostics") && response.status() === 204,
+    );
+    const supportRef = await page.evaluate(async () => {
+      const { reportBrowserDiagnostic } = await import("/src/lib/browser-diagnostics.ts");
+      return reportBrowserDiagnostic("page_error", new TypeError("private-browser-error"));
+    });
+    assert(supportRef);
+    await browserStored;
+    assert(
+      (await access({ q: supportRef })).events.some(
+        (e) => e.errorCode === "TypeError" && e.route === "/admin/:page",
+      ),
+    );
+    assert(
+      !JSON.stringify(await sql`select * from athlete_access_events`).includes(
+        "private-browser-error",
+      ),
+    );
     assert.deepEqual(errors, []);
     console.log(
       "PASS: staff client-data page, deep link, search, expanded history, mobile layout and tab navigation.",

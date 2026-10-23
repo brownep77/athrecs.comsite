@@ -1,8 +1,13 @@
 import type { ErrorComponentProps } from "@tanstack/react-router";
 import { TriangleAlert } from "lucide-react";
+import { useEffect, useState } from "react";
+import { reportBrowserDiagnostic } from "./browser-diagnostics";
 
 export function AppErrorComponent({ error }: ErrorComponentProps) {
-  const message = error instanceof Error ? error.message : "";
+  const [reference, setReference] = useState<string | null>(null);
+  useEffect(() => {
+    setReference(reportBrowserDiagnostic("page_error", error));
+  }, [error]);
   return (
     <main
       className={
@@ -15,8 +20,18 @@ export function AppErrorComponent({ error }: ErrorComponentProps) {
       </span>
       <h1 className="text-lg font-semibold">Something went wrong</h1>
       <p className="max-w-md text-sm break-words text-zinc-500 dark:text-zinc-400">
-        {message || "An unexpected error occurred. Try reloading the page."}
+        An unexpected error occurred. Try reloading the page.
       </p>
+      {reference ? (
+        <p className="max-w-full break-all text-xs">Support reference: {reference}</p>
+      ) : null}
+      <button
+        type="button"
+        className="rounded-lg border px-4 py-2"
+        onClick={() => window.location.reload()}
+      >
+        Reload page
+      </button>
     </main>
   );
 }
