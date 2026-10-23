@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 335 unique sources. Only 36 are enabled; the other 299 remain
+The registry contains 342 unique sources. Only 36 are enabled; the other 306 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 335 sources create exactly one source job;
+- all 342 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 299 sources are retained as blocked jobs with their reason;
+- the other 306 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -213,3 +213,30 @@ This source remains disabled for manual rights and selector review. No individua
 performance was imported from it in this batch, and archive-year links do not
 establish complete coverage. The registry now contains 335 sources: 36 enabled
 and 299 disabled.
+
+## Further Irish and Northern Irish result archives, 23 October 2026
+
+Added the Belfast and Dublin organiser archives, Run4Time and the Elite Timing
+`elitetiming.co.uk` result archive as disabled manual research sources. Existing
+Belfast and Elite Timing wider-inventory records and existing Dublin event links
+are retained. Both Elite Timing hosts use Ireland branding, but their published
+company descriptions and contacts differ; no alias or common-ownership statement
+was found. Keep the source hosts separate pending provider-identity review without
+asserting that they are distinct companies.
+
+Also registered the Connemarathon organiser results index, the Racetimer result
+host embedded by MyRunResults, and the Cork Athletics co-organiser result table.
+Existing Connemarathon and Racetimer wider-inventory records are reused; no Cork
+Athletics domain match was returned. Embedding does not establish that Racetimer
+and MyRunResults are aliases or share ownership. Existing RedTag, MyRunResults,
+Pop Up Races and RACE RESULT registrations retain the timing-provider roles.
+Coverage is limited to the indexes and edition-specific reports actually opened.
+The registry now contains 342 sources: 36 enabled and 306 disabled.
+
+Original timer headings control chip/gun distinctions when legacy archive columns
+differ. Keep separate same-day races, mixed-distance classes, fractional precision
+and provisional status, including the organiser's 2026 Connemarathon qualification.
+Static co-organiser placings and current timer placings retain their source context.
+A result page does not resolve an ambiguous athlete name; identity comparisons and
+participant captures remain in private staff evidence. No automated collection
+setting is changed.
