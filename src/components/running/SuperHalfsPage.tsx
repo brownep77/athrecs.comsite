@@ -1,8 +1,11 @@
 import type { ReactNode } from "react";
 import { ArrowUpRight, CalendarDays, Flag, Gauge, Medal, Users } from "lucide-react";
 import {
+  SUPERHALFS_BERLIN_FAQ,
+  SUPERHALFS_CARDIFF_RACE_INFO,
   SUPERHALFS_CHECKED_AT,
   SUPERHALFS_CHECKED_LABEL,
+  SUPERHALFS_CLAIMS,
   SUPERHALFS_OFFICIAL,
   SUPERHALFS_PACE_TARGETS,
   SUPERHALFS_QUESTIONS,
@@ -100,7 +103,7 @@ function RaceCard({ race, index }: { race: SuperHalfsRace; index: number }) {
           )}
         </div>
         <p className="text-xs leading-relaxed text-muted">
-          Organiser evidence:{" "}
+          Official race information:{" "}
           {race.sources.map((source, sourceIndex) => (
             <span key={source.url}>
               {sourceIndex > 0 && " · "}
@@ -150,15 +153,15 @@ export function SuperHalfsPage() {
               The AthRecs race-series guide
             </p>
             <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-fg sm:text-4xl lg:text-5xl">
-              SuperHalfs series
+              SuperHalfs 2027
               <br />
-              <span className="text-accent">Six cities. Your journey.</span>
+              <span className="text-accent">Race preview &amp; runner guide</span>
             </h1>
             <p className="max-w-2xl text-base leading-relaxed text-muted">
               SuperHalfs brings together six European half marathons: Lisbon, Prague, Berlin,
-              Copenhagen, Cardiff and Valencia. Complete the set to earn the official SuperMedal.
-              Use this guide to compare 2027 dates, entries, courses, cutoffs and elite
-              opportunities.
+              Copenhagen, Cardiff and Valencia. Each race covers 21.0975 kilometres (13.1 miles).
+              Complete all six in any order to earn the official SuperMedal. Compare 2027 dates,
+              courses, entry routes and practical advice for amateur, club and elite runners.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -230,12 +233,15 @@ export function SuperHalfsPage() {
 
       <nav aria-label="On this page" className="flex flex-wrap gap-2 border-y border-border py-4">
         {[
+          ["preview", "2027 preview"],
           ["dates", "2027 dates"],
+          ["choose", "Choose your race"],
           ["entry", "Entry & passport"],
-          ["races", "Race guides"],
+          ["races", "Race previews"],
           ["cutoffs", "Cutoffs"],
           ["amateur", "Amateur planning"],
           ["elite", "Elite athletes"],
+          ["checklist", "Runner checklist"],
           ["pace", "Pace guide"],
           ["questions", "Questions"],
         ].map(([id, label]) => (
@@ -248,6 +254,75 @@ export function SuperHalfsPage() {
           </a>
         ))}
       </nav>
+
+      <section id="preview" className={sectionStyle} aria-labelledby="preview-heading">
+        <div className="space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+            The season ahead
+          </p>
+          <h2 id="preview-heading" className={headingStyle}>
+            SuperHalfs 2027 preview: plan your next half marathon
+          </h2>
+          <p className="max-w-4xl text-base leading-relaxed text-muted">
+            Three spring races and three autumn races shape the 2027 calendar. Lisbon opens the
+            season, with Prague and Berlin following in April. Copenhagen and Cardiff begin the
+            autumn sequence, followed by Valencia’s provisional October date. Your starting point
+            can be any of the six cities.
+          </p>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2">
+          {[
+            { name: "Spring 2027", months: "March–April", races: SUPERHALFS_RACES.slice(0, 3) },
+            { name: "Autumn 2027", months: "September–October", races: SUPERHALFS_RACES.slice(3) },
+          ].map((season) => (
+            <div
+              key={season.name}
+              className="rounded-xl border border-border bg-surface p-5 md:p-6"
+            >
+              <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-4">
+                <h3 className="font-display text-xl font-semibold text-fg">{season.name}</h3>
+                <p className="text-xs font-medium text-muted">{season.months}</p>
+              </div>
+              <ol className="divide-y divide-border">
+                {season.races.map((race) => (
+                  <li
+                    key={race.id}
+                    className="flex items-baseline justify-between gap-4 py-3.5 last:pb-0"
+                  >
+                    <a href={`#${race.id}`} className={`${linkStyle} text-sm`}>
+                      {race.city}
+                    </a>
+                    <div className="text-right text-sm text-fg">
+                      <time dateTime={race.date}>{race.dateLabel.replace(" 2027", "")}</time>
+                      {race.dateStatus === "provisional" && (
+                        <p className="mt-1 text-xs font-medium text-muted">Provisional date</p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
+        <div className="grid gap-5 text-sm leading-relaxed text-muted lg:grid-cols-2">
+          <p>
+            <strong className="text-fg">Build a season that fits your goals.</strong> One spring
+            race and one autumn race is a possible starting plan; one race each year also works.
+            Prague and Berlin are on consecutive days, so consider separate years for these two. The
+            current six-race series has no completion deadline.
+          </p>
+          <p>
+            <strong className="text-fg">Secure a place before arranging travel.</strong> A
+            SuperPassport records progress but does not reserve entries. Check each organiser’s
+            available entry routes, the full cost of a travel or charity place, and the edition’s
+            final course and race-day instructions.
+          </p>
+        </div>
+        <p className="text-xs text-muted">
+          Dates and race details are linked to their organisers below.{" "}
+          <OfficialLink href={SUPERHALFS_RULES}>Official series rules and calendar</OfficialLink>
+        </p>
+      </section>
 
       <section id="dates" className={sectionStyle} aria-labelledby="dates-heading">
         <div className="space-y-2">
@@ -315,6 +390,98 @@ export function SuperHalfsPage() {
         </p>
       </section>
 
+      <section id="choose" className={sectionStyle} aria-labelledby="choose-heading">
+        <h2 id="choose-heading" className={headingStyle}>
+          Which SuperHalfs race should I run first?
+        </h2>
+        <p className="max-w-3xl text-sm leading-relaxed text-muted">
+          Choose the race whose entry availability, finishing requirements and travel arrangements
+          fit your circumstances. There is no compulsory starting city. Use your main goal to decide
+          which details matter most.
+        </p>
+        <div
+          className="overflow-x-auto rounded-xl border border-border bg-surface"
+          tabIndex={0}
+          role="region"
+          aria-label="Choose a SuperHalfs race by your running goal, scroll horizontally if needed"
+        >
+          <table className="w-full min-w-[620px] text-left text-sm">
+            <caption className="sr-only">
+              SuperHalfs race-choice guide for five running goals
+            </caption>
+            <thead className="border-b border-border bg-elevated text-xs uppercase tracking-wide text-muted">
+              <tr>
+                <th scope="col" className="px-5 py-4">
+                  Your goal
+                </th>
+                <th scope="col" className="px-5 py-4">
+                  What to compare
+                </th>
+                <th scope="col" className="px-5 py-4">
+                  Start here
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                [
+                  "First half marathon",
+                  "Your expected finish time, the cutoff’s timing basis and any intermediate checkpoints.",
+                  "cutoffs",
+                  "Compare cutoffs",
+                ],
+                [
+                  "Personal best",
+                  "The confirmed course, start wave, qualifying evidence and likely race-day conditions. No course guarantees a PB.",
+                  "pace",
+                  "Check goal pace",
+                ],
+                [
+                  "Running and a city break",
+                  "Course landmarks, bib-collection days, accommodation and transport to the start.",
+                  "races",
+                  "Explore the six races",
+                ],
+                [
+                  "Elite or professional competition",
+                  "Accepted performances, the qualifying window, application deadlines and confirmed race support.",
+                  "elite",
+                  "Plan elite entry",
+                ],
+                [
+                  "Completing all six",
+                  "The cities still missing from your passport, available places and space between races.",
+                  "entry",
+                  "Check passport rules",
+                ],
+              ].map(([goal, comparison, target, label]) => (
+                <tr key={goal} className="border-b border-border last:border-0">
+                  <th scope="row" className="px-5 py-4 font-semibold text-fg">
+                    {goal}
+                  </th>
+                  <td className="px-5 py-4 leading-relaxed text-muted">{comparison}</td>
+                  <td className="px-5 py-4">
+                    <a href={`#${target}`} className={linkStyle}>
+                      {label}
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-4xl text-sm leading-relaxed text-muted">
+          Expecting to need more than three hours? Look closely at Berlin’s published
+          3-hour-15-minute net limit and Cardiff’s four-hour allowance from the last starter. Their
+          timing rules differ, so read the{" "}
+          <a href="#cutoffs" className={linkStyle}>
+            cutoff comparison
+          </a>{" "}
+          before choosing. A longer time allowance does not establish which course will feel
+          easiest.
+        </p>
+      </section>
+
       <section id="entry" className={sectionStyle} aria-labelledby="entry-heading">
         <h2 id="entry-heading" className={headingStyle}>
           How do I enter SuperHalfs?
@@ -372,7 +539,7 @@ export function SuperHalfsPage() {
       <section id="races" className={sectionStyle} aria-labelledby="races-heading">
         <div className="space-y-2">
           <h2 id="races-heading" className={headingStyle}>
-            The six SuperHalfs race guides
+            The six SuperHalfs race previews
           </h2>
           <p className="max-w-3xl text-sm leading-relaxed text-muted">
             Compare the race experience, practical arrangements and entry routes. Entry status
@@ -530,6 +697,91 @@ export function SuperHalfsPage() {
           </ul>
         </section>
       </div>
+
+      <section id="checklist" className={sectionStyle} aria-labelledby="checklist-heading">
+        <h2 id="checklist-heading" className={headingStyle}>
+          Your SuperHalfs runner checklist
+        </h2>
+        <p className="max-w-3xl text-sm leading-relaxed text-muted">
+          Work through these four stages for each race. Keep the organiser’s final instructions with
+          your entry confirmation so you can check details while travelling.
+        </p>
+        <ol className="grid gap-5 md:grid-cols-2">
+          <li className="space-y-3 rounded-xl border border-border bg-surface p-5 md:p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+              01 · Before entry
+            </p>
+            <h3 className="font-display text-xl font-semibold text-fg">
+              Confirm your place and details
+            </h3>
+            <p className="text-sm leading-relaxed text-muted">
+              Select the designated half marathon and correct year. Compare the cutoff with your
+              expected finish, read the entry conditions, and budget for the whole trip. Use the
+              same name as your SuperHalfs account and include your SuperPassport number.
+            </p>
+          </li>
+          <li className="space-y-3 rounded-xl border border-border bg-surface p-5 md:p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+              02 · Before travel
+            </p>
+            <h3 className="font-display text-xl font-semibold text-fg">
+              Plan around bib collection
+            </h3>
+            <p className="text-sm leading-relaxed text-muted">
+              Berlin requires personal collection at the EXPO with your start card and photo ID;
+              there is no collection on race Sunday, 4 April 2027. Cardiff’s current guidance
+              provides posted packs for UK entrants and Event Village collection for overseas
+              entrants. Check the final instructions for your edition before booking arrival times.
+            </p>
+            <p className="text-xs">
+              <OfficialLink href={SUPERHALFS_BERLIN_FAQ}>Berlin collection rules</OfficialLink>
+              {" · "}
+              <OfficialLink href={SUPERHALFS_CARDIFF_RACE_INFO}>
+                Cardiff race information
+              </OfficialLink>
+            </p>
+          </li>
+          <li className="space-y-3 rounded-xl border border-border bg-surface p-5 md:p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+              03 · Race morning
+            </p>
+            <h3 className="font-display text-xl font-semibold text-fg">
+              Know your start arrangements
+            </h3>
+            <p className="text-sm leading-relaxed text-muted">
+              Check your allocated wave, local start time, transport, baggage arrangements and
+              intermediate checkpoints. Confirm any guide-runner, companion or accessibility
+              arrangements in advance. Elite athletes should follow their accepted entry’s
+              instructions, including any separate start location.
+            </p>
+          </li>
+          <li className="space-y-3 rounded-xl border border-border bg-surface p-5 md:p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+              04 · After finishing
+            </p>
+            <h3 className="font-display text-xl font-semibold text-fg">
+              Check your result and passport
+            </h3>
+            <p className="text-sm leading-relaxed text-muted">
+              Keep your official result link and check your name, bib, chip time and finish status.
+              If a stamp is missing after results are processed, use the official claim form with
+              the race year, event, bib number and chip time. Eligible races run before passport
+              registration can also be claimed.
+            </p>
+            <p className="text-xs">
+              <OfficialLink href={SUPERHALFS_CLAIMS}>
+                Claim a missing SuperHalfs result
+              </OfficialLink>
+            </p>
+          </li>
+        </ol>
+        <p className="max-w-4xl text-sm leading-relaxed text-muted">
+          <strong className="text-fg">Running your sixth and final race?</strong> Check that the
+          previous five eligible finishes appear in your SuperPassport and that your final entry
+          includes its number. Follow the series instructions for the SuperMedal collection area.{" "}
+          <OfficialLink href={SUPERHALFS_RULES}>Passport and medal guidance</OfficialLink>
+        </p>
+      </section>
 
       <section id="pace" className={sectionStyle} aria-labelledby="pace-heading">
         <div className="flex items-start gap-3">

@@ -2,11 +2,16 @@
 export const SUPERHALFS_PATH = "/running/superhalfs";
 export const SUPERHALFS_CHECKED_AT = "2026-10-23";
 export const SUPERHALFS_CHECKED_LABEL = "23 October 2026";
-export const SUPERHALFS_TITLE = "SuperHalfs 2027: Six Races, Entry & Elite Guide | AthRecs";
+export const SUPERHALFS_TITLE = "SuperHalfs 2027 Preview: Races, Dates & Runner Guide | AthRecs";
 export const SUPERHALFS_DESCRIPTION =
-  "Plan the six SuperHalfs half marathons: 2027 dates, entry options, cutoffs, elite guidance, official results, SuperPassport rules and practical race advice.";
+  "Compare the six SuperHalfs races for 2027: dates, course previews, entry routes, cutoffs and practical advice for amateur, club and elite runners.";
 export const SUPERHALFS_OFFICIAL = "https://www.superhalfs.com/en/";
 export const SUPERHALFS_RULES = "https://www.superhalfs.com/en/faqs/";
+export const SUPERHALFS_CLAIMS = "https://www.superhalfs.com/en/accounts/claims/";
+export const SUPERHALFS_BERLIN_FAQ =
+  "https://www.generali-berliner-halbmarathon.de/en/preparation/event-faq";
+export const SUPERHALFS_CARDIFF_RACE_INFO =
+  "https://www.cardiffhalfmarathon.co.uk/get-race-ready-fast/race-info/";
 export const SUPERHALFS_TIME_LIMIT_NEWS =
   "https://www.superhalfs.com/en/articles/news/2025/02/11/superhalfs-changes-an-important-rule/";
 
@@ -342,6 +347,12 @@ export const SUPERHALFS_QUESTIONS = [
     question: "Where can I find my official SuperHalfs race result?",
     answer:
       "Use the official results link in each race guide above and select the correct year and distance. Check your name, bib, chip time and finish status before matching it to your athlete profile.",
+    source: SUPERHALFS_RULES,
+  },
+  {
+    question: "Can I claim a SuperHalfs race I ran before registering?",
+    answer:
+      "Yes, if the race and edition are eligible. Use the official result-claim form with the year, race, bib number and chip time. Newly completed races become claimable after SuperHalfs has received and processed the organiser’s results.",
     source: SUPERHALFS_RULES,
   },
   {

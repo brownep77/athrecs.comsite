@@ -32,10 +32,12 @@ export function superhalfsHead() {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": "WebPage",
+          "@type": "WebPageElement",
+          "@id": `${url}#${race.id}`,
           name: race.name,
           url: `${url}#${race.id}`,
           description: race.course,
+          isPartOf: { "@id": url },
         },
       })),
     },

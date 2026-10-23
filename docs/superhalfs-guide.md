@@ -133,3 +133,50 @@ Verification completed before publication:
 The temporary local verification pages and preview-host configuration were removed.
 Production deployment and external indexing are separate from these local checks;
 the pull request and deployment records provide the publication status.
+
+## Runner preview expansion — 23 October 2026
+
+The follow-up adds a 2027 season preview, two seasonal calendars, a goal-based
+race-choice comparison, and a four-stage runner checklist. The visible H1 and
+metadata now identify the page as a race preview and runner guide. The existing
+race-series page links to it with a descriptive 2027 preview label. The canonical
+URL is unchanged.
+
+The ItemList now identifies the six race-card fragments as `WebPageElement`
+objects belonging to this CollectionPage, rather than describing them as separate
+web pages. See [Schema.org WebPageElement](https://schema.org/WebPageElement).
+This change describes the real page structure; it does not claim a special search
+feature or guaranteed indexing.
+
+Additional official evidence checked:
+
+- [Berlin event FAQ](https://www.generali-berliner-halbmarathon.de/en/preparation/event-faq):
+  runners collect personally at the EXPO with a start card and photo ID; there is
+  no collection on Sunday 4 April 2027.
+- [Cardiff race information](https://www.cardiffhalfmarathon.co.uk/get-race-ready-fast/race-info/):
+  UK packs are posted and overseas entrants collect at the Event Village. The
+  linked race brochure still refers to 2026, so the checklist describes the
+  current webpage guidance and directs runners to final edition instructions.
+- [SuperHalfs result claims](https://www.superhalfs.com/en/faqs/): eligible earlier
+  or missing results can be claimed using the race year, event, bib and chip time
+  after the organiser’s results have been processed. Link to the
+  [official claim form](https://www.superhalfs.com/en/accounts/claims/).
+
+The seasonal scheduling and goal comparison are AthRecs planning guidance. They
+do not promise personal bests, name unconfirmed 2027 contenders or prescribe a
+training programme. All previously labelled edition uncertainties remain visible.
+
+Google documents [URL Inspection and sitemap discovery](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl)
+as routes for recrawling. No Search Console submission capability is exposed in
+this workspace. Crawlability and publication must not be reported as proof of
+Google indexing or as a submitted indexing request.
+
+Follow-up verification passed: development build, TypeScript, focused ESLint,
+independent content/semantic review and 30 raw-HTML browser checks. Those checks
+covered the new preview, five-goal comparison, four-stage checklist, all six race
+cards, twelve visible questions, canonical/robots metadata, structured-data
+fragments, anchor targets, sitemap inclusion and the incoming preview link.
+Desktop visual inspection and a 390px mobile iframe confirmed the layout, working
+section navigation, a single-column seasonal layout and no document horizontal
+overflow (375px content width and scroll width). The temporary QA page and local
+preview-host setting were removed before creating the release commit.
