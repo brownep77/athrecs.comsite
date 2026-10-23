@@ -237,19 +237,24 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
   // Revisions stay fixed across background refreshes; the server checks them on submission.
   const [selectedArchive, setSelectedArchive] = useState<Map<number, number>>(() => new Map());
   const [archiveNote, setArchiveNote] = useState("");
+  const [archiveDeclaration, setArchiveDeclaration] = useState(false);
   const requestArchive = useMutation({
     mutationFn: () =>
       requestMyArchiveMatches({
         data: {
           entries: [...selectedArchive].map(([entryId, revision]) => ({ entryId, revision })),
-          note: archiveNote,
+          note: archiveNote.trim() || "I confirm these selected archive results belong to me.",
+          declarationAccepted: archiveDeclaration,
         },
       }),
     onSuccess: async (result) => {
       setSelectedArchive(new Map());
       setArchiveNote("");
+      setArchiveDeclaration(false);
       setFeedback(
-        `${result.requested} saved ${result.requested === 1 ? "result" : "results"} submitted for a match check.`,
+        result.claimed
+          ? `${result.claimed} results claimed: ${result.added} added and ${result.duplicates} linked to results already on your profile. ${result.held.length ? `${result.held.length} need staff attention.` : "Our team is notified afterwards."}`
+          : `${result.requested} saved ${result.requested === 1 ? "result" : "results"} submitted for a match check. Claim your athlete profile first if you have not linked it yet.`,
       );
       await refresh();
     },
@@ -573,13 +578,13 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
           disabled={requestArchive.isPending}
           className="space-y-3 border-t border-border bg-accent-soft p-5"
         >
-          <legend className="sr-only">Request a match check for selected saved results</legend>
+          <legend className="sr-only">Claim selected saved results</legend>
           <p role="status" className="font-semibold">
             {selectedArchive.size} saved {selectedArchive.size === 1 ? "result" : "results"}{" "}
             selected
           </p>
           <label className="block text-sm">
-            What helps us confirm these results are yours?
+            Optional note about these results
             <textarea
               className="mt-2 w-full rounded-lg border border-border bg-bg p-3"
               maxLength={2000}
@@ -588,17 +593,31 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
               placeholder="Your club at the time, bib numbers or other identifying details"
             />
           </label>
+          <label className="flex items-start gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={archiveDeclaration}
+              onChange={(e) => setArchiveDeclaration(e.target.checked)}
+              className="mt-1"
+            />
+            I confirm these selected results belong to me.
+          </label>
           <p className="text-xs text-muted">
-            One note covers your selection. Up to 30 result reviews per day.
+            Suitable results go straight to your linked athlete profile. Staff are notified at
+            info@athrecs.com afterwards. Uncertain matches stay in the claims queue. Up to 30 per
+            day.
           </p>
           <div className="flex flex-wrap gap-2">
             <Button
-              disabled={archiveNote.trim().length < 12}
+              disabled={
+                !archiveDeclaration ||
+                (archiveNote.trim().length > 0 && archiveNote.trim().length < 12)
+              }
               onClick={() => requestArchive.mutate()}
             >
               {requestArchive.isPending
                 ? "Submitting…"
-                : `Request review of ${selectedArchive.size} ${selectedArchive.size === 1 ? "result" : "results"}`}
+                : `Claim ${selectedArchive.size} selected ${selectedArchive.size === 1 ? "result" : "results"}`}
             </Button>
             <Button variant="secondary" onClick={() => setSelectedArchive(new Map())}>
               Clear selection

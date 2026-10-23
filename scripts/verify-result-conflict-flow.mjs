@@ -868,8 +868,46 @@ try {
   const beforeSources = JSON.stringify(
     await sql`select * from results where athlete_id=100 order by id`,
   );
+  failOutbox = true;
+  await assert.rejects(() => claim("self", 100), /Synthetic outbox failure/);
+  assert.equal(
+    (await sql`select * from athlete_account_links where athlete_id=100`).length,
+    0,
+    "Claim and durable staff notification commit atomically",
+  );
+  failOutbox = false;
+  configured = true;
+  failEmail = true;
+  const beforeCompletionSend = sends.length;
   const self = await claim("self", 100);
   assert.equal(self.status, "approved");
+  const [completedAlert] =
+    await sql`select * from result_claim_alerts where claim_id=${self.claimId}`;
+  assert.equal(completedAlert.event_kind, "claim_completed");
+  assert.equal(
+    (await alerts.deliverClaimAlerts(sql, self.claimId)).sent,
+    0,
+    "Immediate failed notification respects retry backoff",
+  );
+  assert.equal(
+    (await sql`select status from result_claims where id=${self.claimId}`)[0].status,
+    "approved",
+    "A failed staff email cannot undo the completed claim",
+  );
+  const completionSend = sends.at(-1);
+  assert.equal(sends.length, beforeCompletionSend + 1);
+  assert.match(completionSend.email.subject, /result claimed/);
+  assert.equal(completionSend.email.to, "info@athrecs.com");
+  assert.match(completionSend.email.message, /without waiting for staff approval/);
+  assert.match(completionSend.email.actionUrl, new RegExp(`claimId=${self.claimId}$`));
+  assert.doesNotMatch(completionSend.email.heading, /needs review/);
+  await sql`update result_claim_alert_deliveries set next_attempt_at=now() where claim_id=${self.claimId}`;
+  failEmail = false;
+  assert.equal((await alerts.deliverClaimAlerts(sql, self.claimId)).sent, 1);
+  assert.deepEqual(sends.at(-1), completionSend, "Completed-claim retries retain payload and key");
+  await alerts.deliverClaimAlerts(sql, self.claimId);
+  assert.equal(sends.length, beforeCompletionSend + 2, "A successful completion alert sends once");
+  configured = false;
   assert.equal(receipts.at(-1).selfConfirmed, true);
   assert.equal(
     receipts.at(-1).notifyStaff,
@@ -910,6 +948,11 @@ try {
     receipts.length,
     beforeRepeat,
     "Completed claims are idempotent without repeated receipts",
+  );
+  assert.equal(
+    (await sql`select * from result_claim_alerts where claim_id=${self.claimId}`).length,
+    1,
+    "Repeated and sibling claims reuse one completed-claim notification",
   );
   const child = await claim("child", 101);
   assert.equal(child.status, "pending");
@@ -1237,6 +1280,7 @@ try {
   );
   const receiptBefore = summarySends.length;
   const genericBefore = receipts.length;
+  const staffBefore = sends.length;
   const submitted = await submitWithIdentity(batchInput, user("batch-user"));
   assert.equal(
     submitted.status,
@@ -1244,6 +1288,17 @@ try {
     "An eligible batch claim completes with the same ownership safeguards",
   );
   assert.deepEqual(submitted.confirmation, { included: 2, excluded: 2, added: 1, reused: false });
+  assert.equal(
+    sends.length,
+    staffBefore + 1,
+    "Whole-profile claims notify staff once after completion",
+  );
+  assert.match(sends.at(-1).email.subject, /result claimed/);
+  assert.equal(
+    (await sql`select event_kind from result_claim_alerts where claim_id=${submitted.claimId}`)[0]
+      .event_kind,
+    "claim_completed",
+  );
   assert.equal(
     (await sql`select * from result_claims where claimant_user_id='batch-user'`).length,
     1,
@@ -1284,6 +1339,7 @@ try {
   const replay = await submitWithIdentity(batchInput, user("batch-user"));
   assert.equal(replay.confirmation.reused, true);
   assert.equal(summarySends.length, receiptBefore + 1, "Retry sends no extra athlete email");
+  assert.equal(sends.length, staffBefore + 1, "Retry sends no extra staff completion notification");
   const replayNewId = await submitWithIdentity(
     { ...batchInput, review: { ...batchInput.review, requestId: crypto.randomUUID() } },
     user("batch-user"),

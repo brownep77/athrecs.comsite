@@ -625,14 +625,14 @@ try {
       entries: selected.slice(0, 2),
       note,
     }),
-    { requested: 2, created: 2 },
+    { requested: 2, created: 2, claimed: 0, added: 0, duplicates: 0, held: [], claimIds: [] },
   );
   assert.deepEqual(
     await member.requestArchiveMatches(sql, "archive-bulk", {
       entries: selected.slice(0, 2),
       note,
     }),
-    { requested: 2, created: 0 },
+    { requested: 2, created: 0, claimed: 0, added: 0, duplicates: 0, held: [], claimIds: [] },
   );
   await assert.rejects(
     () => member.requestArchiveMatches(sql, "archive-bulk", { entries: selected.slice(2), note }),

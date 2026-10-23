@@ -13,11 +13,11 @@ export function ClaimAlertStatus() {
     mutationFn: () => retryClaimAlerts(),
     onSuccess: () => client.invalidateQueries({ queryKey: ["claim-alert-status"] }),
   });
-  if (summary.isPending) return <p role="status">Checking conflict email status…</p>;
+  if (summary.isPending) return <p role="status">Checking claim email status…</p>;
   if (summary.isError)
     return (
       <p role="alert">
-        Conflict email status could not be loaded.{" "}
+        Claim email status could not be loaded.{" "}
         <button type="button" className="underline" onClick={() => void summary.refetch()}>
           Try again
         </button>
@@ -28,14 +28,18 @@ export function ClaimAlertStatus() {
     data.production && data.persistent && data.emailConfigured && data.recipientCount > 0;
   return (
     <section
-      aria-label="Conflict email alerts"
+      aria-label="Claim email alerts"
       className="space-y-3 rounded-xl border border-border bg-surface p-4"
     >
-      <h2 className="font-semibold">Conflict email alerts</h2>
+      <h2 className="font-semibold">Claim email alerts</h2>
+      <p className="text-sm text-muted">
+        Straightforward claims complete immediately. Notifications go to info@athrecs.com afterwards;
+        ownership conflicts remain flagged for attention.
+      </p>
       <p className="text-sm text-muted">
         {configured
           ? `Staff alerts go to ${data.recipientCount} configured recipient${data.recipientCount === 1 ? "" : "s"}. ${data.retriesConfigured ? "Failed sends retry every 10 minutes." : "Scheduled retries need configuration."}`
-          : "Email delivery is paused in this environment. Conflicts remain saved for staff review."}
+          : "Email delivery is paused in this environment. Claims and queued notifications remain saved."}
       </p>
       <p className="text-sm">
         {data.sent} accepted by the email service · {data.pending} waiting · {data.awaiting_setup}{" "}

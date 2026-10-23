@@ -653,8 +653,9 @@ function ClaimResultsPage() {
                 ) : null}
 
                 <p className="text-center text-xs text-subtle">
-                  Straightforward claims complete immediately. Staff review conflicts, discrepancies
-                  and child or guardian claims. Do not put personal ID documents in public links.
+                  Straightforward claims complete immediately and notify our team afterwards. Staff
+                  review conflicts, discrepancies and child or guardian claims. Do not put personal
+                  ID documents in public links.
                 </p>
               </form>
             )}

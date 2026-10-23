@@ -45,21 +45,27 @@ export const getStaffArchiveRequests = createServerFn({ method: "GET" })
 
 export const requestMyArchiveMatches = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .validator((input: { entries: { entryId: number; revision: number }[]; note: string }) =>
-    z
-      .object({
-        entries: z
-          .array(z.object({ entryId: positiveId, revision: positiveId }).strict())
-          .min(1)
-          .max(30)
-          .refine(
-            (entries) => new Set(entries.map((entry) => entry.entryId)).size === entries.length,
-            "Select each result once",
-          ),
-        note: z.string().trim().min(12).max(2000),
-      })
-      .strict()
-      .parse(input),
+  .validator(
+    (input: {
+      entries: { entryId: number; revision: number }[];
+      note: string;
+      declarationAccepted?: boolean;
+    }) =>
+      z
+        .object({
+          entries: z
+            .array(z.object({ entryId: positiveId, revision: positiveId }).strict())
+            .min(1)
+            .max(30)
+            .refine(
+              (entries) => new Set(entries.map((entry) => entry.entryId)).size === entries.length,
+              "Select each result once",
+            ),
+          note: z.string().trim().min(12).max(2000),
+          declarationAccepted: z.boolean().optional(),
+        })
+        .strict()
+        .parse(input),
   )
   .handler(async ({ data, context }) => {
     if (dbSource !== "neon")
@@ -67,4 +73,29 @@ export const requestMyArchiveMatches = createServerFn({ method: "POST" })
     if (process.env.VERCEL_ENV === "preview")
       throw new Error("Archive review requests are disabled in deployment previews");
     return requestArchiveMatches(await getSql(), context.userId, data);
+  });
+
+export const processStaffArchiveClaims = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((input: { userId: string; entryIds: number[] }) =>
+    z
+      .object({ userId: z.string().min(1).max(200), entryIds: z.array(positiveId).min(1).max(30) })
+      .strict()
+      .parse(input),
+  )
+  .handler(async ({ data }) => {
+    if (dbSource !== "neon" || process.env.VERCEL_ENV === "preview")
+      throw new Error("Use the production staff claims queue");
+    const sql = await getSql();
+    const { completeOwnArchiveRequests } = await import("./claim.server");
+    const result = await sql.transaction((tx) =>
+      completeOwnArchiveRequests(tx, data.userId, data.entryIds),
+    );
+    try {
+      const { deliverClaimAlerts } = await import("../athrecs/result-claim-alerts.server");
+      for (const id of result.claimIds) await deliverClaimAlerts(sql, id);
+    } catch {
+      console.error("[claim-alerts] archive completion emails remain queued");
+    }
+    return result;
   });
