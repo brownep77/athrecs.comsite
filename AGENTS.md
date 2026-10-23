@@ -115,3 +115,10 @@ publication and personal-best calculations in this repository.
   review is separate from ownership and individual result verification. Preserve
   reviewer, time, evidence and changes in the private audit. Source provider names,
   links and review notes belong only in staff views, never public/member profiles.
+
+- Owner instruction, 23 October 2026: no runABC names, links, descriptions or
+  attribution may appear on the public website, including metadata and serialized
+  browser data. Preserve original evidence in server storage/private audits.
+  Apply the public catalogue projection before returning fixture or result data;
+  never treat a directory URL as an official entry/results fallback. Keep the
+  primary-source publication guard in force.

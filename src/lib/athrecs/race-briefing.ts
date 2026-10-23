@@ -1,10 +1,11 @@
+import { publicCatalogueText } from "./public-catalogue-content.ts";
 /** Original ATHRECS athlete briefings. Facts only — never copy official guides. */
 
 import type { Sport } from "./types";
 
 export type EventSource = {
   label: string;
-  kind: "world-triathlon" | "world-athletics" | "parkrun" | "results-base" | "find-a-race" | "runabc" | "organiser";
+  kind: "world-triathlon" | "world-athletics" | "parkrun" | "results-base" | "find-a-race" | "organiser";
   url?: string | null;
 };
 
@@ -14,7 +15,7 @@ export function eventSourceOf(input: {
   website?: string | null;
   organiser?: string | null;
 }): EventSource {
-  const url = input.website || "";
+  const url = publicCatalogueText(input.website || "");
   const slug = input.slug.toLowerCase();
   if (slug.startsWith("wt-") || /triathlon\.org/i.test(url)) {
     return { label: "World Triathlon calendar", kind: "world-triathlon", url: url || "https://events.triathlon.org/" };
@@ -31,10 +32,7 @@ export function eventSourceOf(input: {
   if (/findarace\.com/i.test(url)) {
     return { label: "Find A Race listing", kind: "find-a-race", url };
   }
-  if (/runabc\.co\.uk/i.test(url) || slug.startsWith("runabc")) {
-    return { label: "RunABC listing", kind: "runabc", url };
-  }
-  return { label: input.organiser || "Event organiser", kind: "organiser", url: url || null };
+  return { label: publicCatalogueText(input.organiser || "") || "Event organiser", kind: "organiser", url: url || null };
 }
 
 export function sportLabel(sport: Sport): string {

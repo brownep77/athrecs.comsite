@@ -22,6 +22,18 @@ export type FixtureDetail = {
 };
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
+  "ea-runevents-fenland-10-wisbech|2026-10-25": {
+    summary: "Fenland Running Club's ten-mile road race in the Wisbech area.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://fenlandrunningclub.co.uk/home/fen10",
+    checkedAt: "2026-10-23",
+    starts: {
+      "10mi": {
+        time: "11:00",
+        note: "Main race at 11:00. An optional 10:45 early start is available for runners expecting to take more than two hours; arrange it with the organiser.",
+      },
+    },
+  },
   ...countyExpansion.details,
   ...countyExpansionMore.details,
   ...countyExpansionChecked.details,

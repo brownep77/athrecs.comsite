@@ -1,3 +1,4 @@
+import { publicCatalogueContent } from "../src/lib/athrecs/public-catalogue-content.ts";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import ts from "typescript";
@@ -67,6 +68,7 @@ function handlers(runrecs) {
     IS_RUNRECS_SITE: runrecs,
     ...limits,
     ready: async () => sql,
+    publicCatalogueContent,
     readResultDetails: (value) => value,
     getReportedRaceHistory: () => null,
     countPublishedSourceResults,

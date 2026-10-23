@@ -1,3 +1,4 @@
+import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
@@ -101,7 +102,10 @@ export const listPublicResultEditions = createServerFn({ method: "GET" })
       order by ed.event_date desc, ed.id desc
       limit ${EDITION_PAGE_SIZE + 1} offset ${offset}
     `;
-    return { editions: rows.slice(0, EDITION_PAGE_SIZE), hasMore: rows.length > EDITION_PAGE_SIZE };
+    return {
+      editions: rows.slice(0, EDITION_PAGE_SIZE).map(publicCatalogueContent),
+      hasMore: rows.length > EDITION_PAGE_SIZE,
+    };
   });
 
 export const getPublicRaceResults = createServerFn({ method: "GET" })
@@ -194,7 +198,7 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
     `;
     return {
       edition,
-      results: rows.slice(0, RESULT_PAGE_SIZE),
+      results: rows.slice(0, RESULT_PAGE_SIZE).map(publicCatalogueContent),
       hasMore: rows.length > RESULT_PAGE_SIZE,
     };
   });

@@ -208,8 +208,8 @@ export function FixtureImportPage({
             </p>
             <p>
               sourceKind must be organiser, entry, governing-body or timing-provider. Read the
-              actual race or timing programme and follow its direct entry link. RunABC cannot be
-              used as the primary source or entry link.
+              actual race or timing programme and follow its direct entry link. Discovery calendars
+              cannot be used as the primary source or entry link.
             </p>
             <p>
               evidence briefly describes where the date, distance and venue were checked. checkedAt

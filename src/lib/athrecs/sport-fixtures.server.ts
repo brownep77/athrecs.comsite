@@ -1,3 +1,4 @@
+import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
 import type { SportFixtureSearch, SportPage } from "./sport-pages";
 import { fixtureDistanceCode, publicHttpUrl, UK_FIXTURE_COUNTRIES } from "./sport-pages.ts";
@@ -141,54 +142,57 @@ export async function readSportFixtures(
   return {
     countries: [...countries].sort((a, b) => a.localeCompare(b, "en")),
     distances,
-    fixtures: rows.slice(0, SPORT_FIXTURE_PAGE_SIZE).map((row): SportFixture => {
-      const detail = FIXTURE_DETAILS[`${row.slug}|${row.event_date}`];
-      const starts = JSON.parse(row.starts_json) as Array<{
-        distance: string;
-        time: string | null;
-        sourceUrl: string | null;
-      }>;
-      return {
-        eventId: row.event_id,
-        name: row.name,
-        eventDate: row.event_date,
-        town: detail?.place?.town ?? null,
-        city: detail?.place?.city ?? row.city,
-        county: detail?.place?.county ?? row.county,
-        state: detail?.place?.state ?? null,
-        country: canonicalCountry(row.country),
-        website: publicHttpUrl(detail?.sourceUrl ?? row.website),
-        summary: fixtureSummary(detail?.summary ?? row.summary, row.sport, row.city),
-        timeZone: detail?.timeZone ?? fixtureTimeZone(row.country),
-        starts: starts
-          .filter(
-            (start) => !isReviewedFixturePlaceholder(row.slug, row.event_date, start.distance),
-          )
-          .map((start) => {
-            const checked = detail?.starts[start.distance];
-            const sourceUrl = publicHttpUrl(
-              checked ? (checked.sourceUrl ?? detail.sourceUrl) : start.sourceUrl,
-            );
-            // Legacy runABC imports contain UTC-shifted clocks and midnight
-            // placeholders. Do not present those as race starts without a check.
-            const legacyImport =
-              sourceUrl && /(^|\.)runabc\.co\.uk$/i.test(new URL(sourceUrl).hostname);
-            return {
-              distance: start.distance,
-              time: checked ? checked.time : sourceUrl && !legacyImport ? start.time : null,
-              sourceUrl,
-              checkedAt: checked ? detail.checkedAt : null,
-              note: checked?.note ?? null,
-              label: checked?.label ?? null,
-            };
-          })
-          .sort(
-            (a, b) =>
-              (a.time ?? "99:99").localeCompare(b.time ?? "99:99") ||
-              a.distance.localeCompare(b.distance),
-          ),
-      };
-    }),
+    fixtures: rows
+      .slice(0, SPORT_FIXTURE_PAGE_SIZE)
+      .map((row): SportFixture => {
+        const detail = FIXTURE_DETAILS[`${row.slug}|${row.event_date}`];
+        const starts = JSON.parse(row.starts_json) as Array<{
+          distance: string;
+          time: string | null;
+          sourceUrl: string | null;
+        }>;
+        return {
+          eventId: row.event_id,
+          name: row.name,
+          eventDate: row.event_date,
+          town: detail?.place?.town ?? null,
+          city: detail?.place?.city ?? row.city,
+          county: detail?.place?.county ?? row.county,
+          state: detail?.place?.state ?? null,
+          country: canonicalCountry(row.country),
+          website: publicHttpUrl(detail?.sourceUrl ?? row.website),
+          summary: fixtureSummary(detail?.summary ?? row.summary, row.sport, row.city),
+          timeZone: detail?.timeZone ?? fixtureTimeZone(row.country),
+          starts: starts
+            .filter(
+              (start) => !isReviewedFixturePlaceholder(row.slug, row.event_date, start.distance),
+            )
+            .map((start) => {
+              const checked = detail?.starts[start.distance];
+              const sourceUrl = publicHttpUrl(
+                checked ? (checked.sourceUrl ?? detail.sourceUrl) : start.sourceUrl,
+              );
+              // Legacy runABC imports contain UTC-shifted clocks and midnight
+              // placeholders. Do not present those as race starts without a check.
+              const legacyImport =
+                sourceUrl && /(^|\.)runabc\.co\.uk$/i.test(new URL(sourceUrl).hostname);
+              return {
+                distance: start.distance,
+                time: checked ? checked.time : sourceUrl && !legacyImport ? start.time : null,
+                sourceUrl,
+                checkedAt: checked ? detail.checkedAt : null,
+                note: checked?.note ?? null,
+                label: checked?.label ?? null,
+              };
+            })
+            .sort(
+              (a, b) =>
+                (a.time ?? "99:99").localeCompare(b.time ?? "99:99") ||
+                a.distance.localeCompare(b.distance),
+            ),
+        };
+      })
+      .map(publicCatalogueContent),
     hasMore: rows.length > SPORT_FIXTURE_PAGE_SIZE,
     page,
   };

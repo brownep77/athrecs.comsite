@@ -1,9 +1,10 @@
+import { hasWithheldCatalogueReference } from "./public-catalogue-content.ts";
 import { effectiveStatus, todayIso } from "./format";
 import type { EditionEntryOption, EntryStatus } from "./types";
 
 /** Public links only. Never render imported javascript/data URLs as race actions. */
 export function raceLink(value: string | null | undefined): string | null {
-  if (!value?.trim()) return null;
+  if (!value?.trim() || hasWithheldCatalogueReference(value)) return null;
   try {
     const url = new URL(value.trim());
     return ["https:", "http:"].includes(url.protocol) && !url.username && !url.password

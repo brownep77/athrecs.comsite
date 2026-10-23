@@ -306,11 +306,11 @@ try {
     assert((await publishCheckedFixtures(sql, publishing, details, review)).alreadyPublished);
   assert.deepEqual(await sql.query("select * from editions order by id"), confirmedRows);
   const { withheldFixtureDateKeys } = await import("../src/data/fixture-date-reviews.ts");
-  assert.deepEqual(withheldFixtureDateKeys, [
+  for (const key of [
     "gear-10k-kings-lynn|2026-11-08",
     "marriotts-way-10k|2026-11-01",
     "lingwood-duathlon|2027-03-21",
-  ]);
+  ]) assert.ok(withheldFixtureDateKeys.includes(key), `Earlier date hold must remain: ${key}`);
   console.log(
     "Historical batches and Marriott organiser confirmation passed: exact scope, guarded replacements, rollback, source history, structured starts and replay safety.",
   );

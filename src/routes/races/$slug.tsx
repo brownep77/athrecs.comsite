@@ -347,10 +347,7 @@ export function RacePageContent({
   const spectatorLabel = spectatorAccessLabel(spectatorAccess);
   const pastWithResults = past.filter(
     (ed) =>
-      ed.result_count > 0 ||
-      ed.result_links.length > 0 ||
-      Boolean(ed.results_official_url?.trim()) ||
-      isRunAbcUrl(ed.source_url),
+      ed.result_count > 0 || ed.result_links.length > 0 || Boolean(ed.results_official_url?.trim()),
   );
   const upcomingPreview = event.sport === "Parkrun" ? upcoming.slice(0, 6) : upcoming.slice(0, 12);
   const upcomingHidden = upcoming.length - upcomingPreview.length;
@@ -1136,7 +1133,6 @@ function resultProvider(url: string): string {
     const labels: Record<string, string> = {
       "chiptiming.co.uk": "Chip Timing UK",
       "results.frsys.uk": "FR Systems",
-      "runabc.co.uk": "runABC",
       "totalracetiming.co.uk": "Total Race Timing",
       "results.sporthive.com": "Sporthive",
       "sportmaniacs.com": "Sportmaniacs",
@@ -1158,16 +1154,6 @@ function canonicalResultUrl(url: string): string {
     return parsed.toString();
   } catch {
     return url.trim();
-  }
-}
-
-function isRunAbcUrl(url: string | null | undefined): boolean {
-  if (!url) return false;
-  try {
-    const host = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
-    return host === "runabc.co.uk";
-  } catch {
-    return false;
   }
 }
 
@@ -1222,7 +1208,6 @@ function EditionResultsLinks({
           {shown.map(({ date, editions }) => {
             const externalLinks = new Map<string, { label: string; url: string }>();
             for (const edition of editions) {
-              let editionHasDirectLink = false;
               for (const resultLink of edition.result_links) {
                 const canonical = canonicalResultUrl(resultLink.results_url);
                 if (!externalLinks.has(canonical)) {
@@ -1231,7 +1216,6 @@ function EditionResultsLinks({
                     url: resultLink.results_url,
                   });
                 }
-                editionHasDirectLink = true;
               }
               const officialUrl = edition.results_official_url?.trim();
               if (officialUrl) {
@@ -1240,17 +1224,6 @@ function EditionResultsLinks({
                   externalLinks.set(canonical, {
                     label: `Results · ${resultProvider(officialUrl)}`,
                     url: officialUrl,
-                  });
-                }
-                editionHasDirectLink = true;
-              }
-              if (!editionHasDirectLink && isRunAbcUrl(edition.source_url)) {
-                const runAbcUrl = edition.source_url!.trim();
-                const canonical = canonicalResultUrl(runAbcUrl);
-                if (!externalLinks.has(canonical)) {
-                  externalLinks.set(canonical, {
-                    label: "Find results · runABC",
-                    url: runAbcUrl,
                   });
                 }
               }
@@ -1370,8 +1343,7 @@ function EditionList({
                     </Badge>
                     {(ed.result_count > 0 ||
                       ed.result_links.length > 0 ||
-                      ed.results_official_url ||
-                      isRunAbcUrl(ed.source_url)) && <Badge variant="outline">Results</Badge>}
+                      ed.results_official_url) && <Badge variant="outline">Results</Badge>}
                   </div>
                   <p className="text-sm font-semibold text-fg">
                     {formatRaceDateShort(ed.event_date)}

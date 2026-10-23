@@ -1,3 +1,4 @@
+import { hasWithheldCatalogueReference } from "./public-catalogue-content.ts";
 import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
 import { canonicalEventSlug } from "@/data/entry-options";
 import { getSql } from "@/lib/db";
@@ -5,7 +6,7 @@ import { todayIso } from "@/lib/athrecs/format";
 import { ensureAthrecsSeeded } from "@/lib/athrecs/seed.server";
 
 function safeHttpsUrl(value: string | null | undefined): string | null {
-  if (!value) return null;
+  if (!value || hasWithheldCatalogueReference(value)) return null;
   try {
     const url = new URL(value);
     return url.protocol === "https:" ? url.toString() : null;

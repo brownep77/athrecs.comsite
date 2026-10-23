@@ -20,7 +20,7 @@ export async function assertCollectorPublication(sql: Sql, batchId: string, payl
   for (const row of rows) {
     const c = row.candidate;
     if (isRunAbcUrl(c.sourceUrl) || isRunAbcUrl(c.entryUrl))
-      throw new Error("RunABC cannot be published as primary race or entry evidence.");
+      throw new Error("Discovery calendars cannot be published as primary race or entry evidence.");
     if (
       rows.some(
         (other) => other.event_slug !== row.event_slug && sharesProgramme(c, other.candidate),

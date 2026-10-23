@@ -19,8 +19,9 @@ function loadTypeScript(path, dependencies = {}) {
   return module.exports;
 }
 
+const catalogueContent = loadTypeScript("src/lib/athrecs/public-catalogue-content.ts");
 const sportPages = loadTypeScript("src/lib/athrecs/sport-pages.ts");
-const { resultCredit } = loadTypeScript("src/lib/athrecs/result-credit.ts");
+const { resultCredit } = loadTypeScript("src/lib/athrecs/result-credit.ts", { "./public-catalogue-content.ts": catalogueContent });
 assert.deepEqual(resultCredit("https://totalracetiming.co.uk/raceresults/123", "import"), { name: "Total Race Timing", url: "https://totalracetiming.co.uk/raceresults/123" });
 assert.equal(resultCredit("https://example.com/result", "Example Timing").name, "Example Timing");
 assert.equal(resultCredit("javascript:alert(1)", "Unsafe"), null);
@@ -64,6 +65,7 @@ const createServerFn = ({ method }) => {
 };
 const scope = { IS_RUNRECS_SITE: false };
 const api = loadTypeScript("src/lib/athrecs/public-results-api.ts", {
+  "./public-catalogue-content.ts": catalogueContent,
   "@tanstack/react-start": { createServerFn },
   "@/lib/db": { getSql: async () => sql },
   "@/lib/site-scope": scope,
@@ -331,6 +333,12 @@ try {
   assert.equal((await unlinked.listUnlinkedResults({data:{year:'2025'}})).results.length,1);
   assert.equal((await unlinked.listUnlinkedResults({data:{q:'no-match'}})).results.length,0);
   assert.doesNotMatch(JSON.stringify(heldPage),/PRIVATE|SECRET|candidateIds|Owned|Excluded|Future|Private history|damaged-name/);
+  await db.exec("update results set source_url='https://runabc.co.uk/synthetic',result_source='runABC' where id=900001");
+  const withheldProvider = (await api.getPublicRaceResults({ data: { editionId: 10, q: 'Jo?' } })).results;
+  assert.equal(withheldProvider.length, 1, 'Source suppression must retain the published performance');
+  assert.doesNotMatch(JSON.stringify(withheldProvider), /runabc/i);
+  assert.equal((await db.query('select result_source from results where id=900001')).rows[0].result_source, 'runABC', 'Stored evidence must be unchanged');
+
   await db.exec("update athletes set profile_details='{}' where id=900001");
   assert.equal((await unlinked.listUnlinkedResults({data:{}})).results.length,0,'Resolving a hold removes results-only projection');
 

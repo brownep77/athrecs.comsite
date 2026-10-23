@@ -246,7 +246,7 @@ export function candidateProblems(c: Candidate, job: Window, scope: Scope): stri
   )
     issues.push("Primary date/distance evidence missing");
   if ([c.sourceUrl, c.entryUrl].some(isRunAbcUrl))
-    issues.push("RunABC is a discovery calendar, not primary race or entry evidence");
+    issues.push("Discovery calendars are not primary race or entry evidence");
   if (c.entryUrl && !safeUrl(c.entryUrl)) issues.push("Invalid entry URL");
   if (c.startTime && !/^([01]\d|2[0-3]):[0-5]\d$/.test(c.startTime))
     issues.push("Invalid start time");

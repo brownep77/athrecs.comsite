@@ -1,8 +1,23 @@
-/** Reviewed unsupported dates are retained in storage, but never advertised as upcoming. */
+/** Reviewed unsupported or duplicate dates stay in storage, outside public listings. */
 export const FIXTURE_DATE_REVIEWS: Record<
   string,
   { sourceUrl: string; checkedAt: string; note: string }
 > = {
+  ...Object.fromEntries(
+    [
+      ["2027-01-17", "january"],
+      ["2027-05-02", "may"],
+      ["2027-10-17", "october"],
+      ["2027-12-12", "december"],
+    ].map(([date, month]) => [
+      `run-heaton-park-half-marathon-march-2027|${date}`,
+      {
+        sourceUrl: `https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-${month}-2027`,
+        checkedAt: "2026-10-23",
+        note: "This occurrence belongs to its separate month-specific Heaton Park listing. The duplicate attached to the March page is retained only in storage.",
+      },
+    ]),
+  ),
   "gear-10k-kings-lynn|2026-11-08": {
     sourceUrl: "https://www.runforall.com/events/10k/gear-10k/",
     checkedAt: "2026-10-20",
