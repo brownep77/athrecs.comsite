@@ -64,12 +64,16 @@ export function withoutProfileEvidence<T>(value: T): T {
         ].includes(key)
       ) {
         output[key] = null;
-      } else if (key === "sourceUrls") {
-        output.sourceUrls = [];
-        output.sourceKeys =
-          Array.isArray(item) && item.length
-            ? item.map((url) => sourceKey(String(url)))
-            : (row.sourceKeys ?? []);
+      } else if (key === "sourceUrls" || key === "sourceKeys") {
+        if (key === "sourceUrls") output.sourceUrls = [];
+        // Match calculation precedence, including explicit empty keys. Handle both
+        // fields together so property order cannot restore private source locators.
+        const identities = Array.isArray(row.sourceKeys)
+          ? row.sourceKeys
+          : Array.isArray(row.sourceUrls)
+            ? row.sourceUrls
+            : [];
+        output.sourceKeys = identities.map((identity) => sourceKey(String(identity)));
       } else if (["sources", "biographySources", "sourceLabels"].includes(key)) {
         output[key] = [];
         if (key === "sources" && "finishTimeSeconds" in row && "distanceKm" in row)

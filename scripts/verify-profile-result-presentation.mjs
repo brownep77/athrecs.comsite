@@ -549,6 +549,73 @@ try {
     buildProfileTimeline(bridge.results, bridge.histories).count,
     "Transitive duplicate matches retain all opaque source keys",
   );
+  const { profilePersonalBestSummary } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-personal-best-summary.ts",
+  );
+  const { buildProfileAchievementSummary } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-achievement-summary.ts",
+  );
+  const privateSourceKeys = ["private-synthetic-locator:A", "private-synthetic-locator:B"];
+  const withSourceIdentity = (row, urls, keys, keysFirst) => {
+    const identity = keysFirst
+      ? { sourceKeys: keys, sourceUrls: urls }
+      : { sourceUrls: urls, sourceKeys: keys };
+    return Object.fromEntries([
+      ...Object.entries(row).filter(([key]) => !["sourceUrls", "sourceKeys"].includes(key)),
+      ...Object.entries(identity),
+    ]);
+  };
+  const publicSummary = (input) => ({
+    count: buildProfileTimeline(input.results, input.histories).count,
+    personalBests: profilePersonalBestSummary(input.results, input.histories),
+    achievements: buildProfileAchievementSummary(
+      input.results,
+      input.histories,
+      new Date("2025-01-01T00:00:00Z"),
+      "M",
+    ),
+  });
+  for (const keysFirst of [false, true]) {
+    for (const urls of [[evidenceUrl], []]) {
+      for (const [resultKeys, historyKeys, expectedCount] of [
+        [[privateSourceKeys[0]], [privateSourceKeys[0]], 1],
+        [[privateSourceKeys[0]], [privateSourceKeys[1]], 2],
+        [[], [], 2],
+      ]) {
+        const input = {
+          results: [withSourceIdentity(fixtureResult, urls, resultKeys, keysFirst)],
+          histories: [
+            {
+              ...fixtureHistory,
+              performances: [withSourceIdentity(fixturePerformance, urls, historyKeys, keysFirst)],
+            },
+          ],
+        };
+        const original = JSON.stringify(input);
+        const expected = publicSummary(input);
+        assert.equal(expected.count, expectedCount, "Explicit source keys control matching");
+        const projected = withoutProfileEvidence(input);
+        for (const output of [projected, withoutProfileEvidence(projected)]) {
+          const serialized = JSON.stringify(output);
+          for (const secret of [evidenceUrl, ...privateSourceKeys])
+            assert(!serialized.includes(secret), "Raw source locators must never serialize");
+          for (const row of [output.results[0], output.histories[0].performances[0]]) {
+            assert.deepEqual(row.sourceUrls, []);
+            assert(row.sourceKeys.every((key) => /^record-\d+$/.test(key)));
+          }
+          assert.deepEqual(
+            publicSummary(output),
+            expected,
+            "Source-key privacy preserves matching, PBs and achievements on repeated projection",
+          );
+        }
+        assert.equal(JSON.stringify(input), original, "Stored source keys remain unchanged");
+      }
+    }
+  }
+  const keysWithoutUrls = withoutProfileEvidence({ sourceKeys: privateSourceKeys });
+  assert(keysWithoutUrls.sourceKeys.every((key) => /^record-\d+$/.test(key)));
+  assert(!JSON.stringify(keysWithoutUrls).includes("private-synthetic-locator"));
   const decisions = {
     results: [],
     histories: [
