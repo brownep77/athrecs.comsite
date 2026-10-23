@@ -7428,4 +7428,580 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
+  record({
+  "slug": "djibouti-athletics",
+  "name": "Fédération Djiboutienne d’Athlétisme",
+  "type": "national",
+  "country": "Djibouti",
+  "jurisdiction": "Djibouti",
+  "territories": [
+    "Djibouti"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Djibouti, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/djibouti",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/djibouti"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "egypt-athletics",
+  "name": "Egyptian Athletic Federation",
+  "type": "national",
+  "country": "Egypt",
+  "jurisdiction": "Egypt",
+  "territories": [
+    "Egypt"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Egypt, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/egypt-egypte",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/egypt-egypte"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "eritrea-athletics",
+  "name": "Eritrean National Athletics Federation",
+  "type": "national",
+  "country": "Eritrea",
+  "jurisdiction": "Eritrea",
+  "territories": [
+    "Eritrea"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Eritrea, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/erytrea-erithree",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/erytrea-erithree"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "ethiopia-athletics",
+  "name": "Ethiopian Athletic Federation",
+  "type": "national",
+  "country": "Ethiopia",
+  "jurisdiction": "Ethiopia",
+  "territories": [
+    "Ethiopia"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Ethiopia, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/ethiopia-ethiopie",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/ethiopia-ethiopie"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "gabon-athletics",
+  "name": "Fédération Gabonaise d’Athlétisme",
+  "type": "national",
+  "country": "Gabon",
+  "jurisdiction": "Gabon",
+  "territories": [
+    "Gabon"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Gabon, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/gabon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/gabon"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "guinea-athletics",
+  "name": "Fédération Guinéenne d’Athlétisme Amateur",
+  "type": "national",
+  "country": "Guinea",
+  "jurisdiction": "Guinea",
+  "territories": [
+    "Guinea"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Guinea, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/guinea-guinee",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/guinea-guinee"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "lesotho-athletics",
+  "name": "Lesotho Amateur Athletics Association",
+  "type": "national",
+  "country": "Lesotho",
+  "jurisdiction": "Lesotho",
+  "territories": [
+    "Lesotho"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Lesotho, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/lesotho",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/lesotho"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "liberia-athletics",
+  "name": "Liberia Track & Field Federation",
+  "type": "national",
+  "country": "Liberia",
+  "jurisdiction": "Liberia",
+  "territories": [
+    "Liberia"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Liberia, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/liberia",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/liberia"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "madagascar-athletics",
+  "name": "Fédération Malagasy d’Athlétisme",
+  "type": "national",
+  "country": "Madagascar",
+  "jurisdiction": "Madagascar",
+  "territories": [
+    "Madagascar"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Madagascar, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/madagascar",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/madagascar"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "malawi-athletics",
+  "name": "Athletics Association of Malawi",
+  "type": "national",
+  "country": "Malawi",
+  "jurisdiction": "Malawi",
+  "territories": [
+    "Malawi"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Malawi, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/malawi",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/malawi"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "morocco-athletics",
+  "name": "Fédération Royale Marocaine d’Athlétisme",
+  "type": "national",
+  "country": "Morocco",
+  "jurisdiction": "Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Morocco, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/marocco-maroc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/marocco-maroc"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "mauritania-athletics",
+  "name": "Fédération d’Athlétisme de la République Islamique de Mauritanie (FAIM)",
+  "type": "national",
+  "country": "Mauritania",
+  "jurisdiction": "Mauritania",
+  "territories": [
+    "Mauritania"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Mauritania, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/mauritania-mauritanie",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/mauritania-mauritanie"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "namibia-athletics",
+  "name": "Athletics Namibia",
+  "type": "national",
+  "country": "Namibia",
+  "jurisdiction": "Namibia",
+  "territories": [
+    "Namibia"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Namibia, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/namibia-namibie",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/namibia-namibie"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "niger-athletics",
+  "name": "Federation Nigérienne d’Athlétisme",
+  "type": "national",
+  "country": "Niger",
+  "jurisdiction": "Niger",
+  "territories": [
+    "Niger"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Niger, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/niger",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/niger"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "senegal-athletics",
+  "name": "Fédération Sénégalaise d’Athlétisme",
+  "type": "national",
+  "country": "Senegal",
+  "jurisdiction": "Senegal",
+  "territories": [
+    "Senegal"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Senegal, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/senegal",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/senegal"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "burkina-faso-athletics",
+  "name": "Fédération Burkinabé d’Athlétisme",
+  "type": "national",
+  "country": "Burkina Faso",
+  "jurisdiction": "Burkina Faso",
+  "territories": [
+    "Burkina Faso"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Burkina Faso, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/burkina-faso",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/burkina-faso"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "burundi-athletics",
+  "name": "Fédération d’Athlétisme du Burundi",
+  "type": "national",
+  "country": "Burundi",
+  "jurisdiction": "Burundi",
+  "territories": [
+    "Burundi"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Burundi, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/burundi",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/burundi"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cameroon-athletics",
+  "name": "Fédération Camerounaise d’Athlétisme",
+  "type": "national",
+  "country": "Cameroon",
+  "jurisdiction": "Cameroon",
+  "territories": [
+    "Cameroon"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Cameroon, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/cameroon-cameroun",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/cameroon-cameroun"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "central-african-republic-athletics",
+  "name": "Fédération centrafricaine d’Athlétisme",
+  "type": "national",
+  "country": "Central African Republic",
+  "jurisdiction": "Central African Republic",
+  "territories": [
+    "Central African Republic"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Central African Republic, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/central-african-republic-republique-centrafricaine",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/central-african-republic-republique-centrafricaine"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "chad-athletics",
+  "name": "Fédération Tchadienne d’Athlétisme",
+  "type": "national",
+  "country": "Chad",
+  "jurisdiction": "Chad",
+  "territories": [
+    "Chad"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Chad, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/chad-tchad",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/chad-tchad"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "comoros-athletics",
+  "name": "Fédération Comorienne d’Athlétisme",
+  "type": "national",
+  "country": "Comoros",
+  "jurisdiction": "Comoros",
+  "territories": [
+    "Comoros"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Comoros, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/comoros-comores",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/comoros-comores"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "republic-of-the-congo-athletics",
+  "name": "Fédération Congolaise d’Athlétisme",
+  "type": "national",
+  "country": "Republic of the Congo",
+  "jurisdiction": "Republic of the Congo",
+  "territories": [
+    "Republic of the Congo"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Republic of the Congo, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/congo",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/congo"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "algeria-athletics",
+  "name": "Fédération Algérienne d’Athlétisme",
+  "type": "national",
+  "country": "Algeria",
+  "jurisdiction": "Algeria",
+  "territories": [
+    "Algeria"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Algeria, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/algeria-algerie",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/algeria-algerie"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "botswana-athletics",
+  "name": "Botswana Athletics Association",
+  "type": "national",
+  "country": "Botswana",
+  "jurisdiction": "Botswana",
+  "territories": [
+    "Botswana"
+  ],
+  "sports": [
+    "road-running",
+    "trail-running",
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Botswana, listed in the Confederation of African Athletics member directory.",
+  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/botswana",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/botswana"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
 ];
