@@ -1,4 +1,4 @@
-import { publicCatalogueContent } from "./public-catalogue-content";
+import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { withheldFixtureDateKeys } from "@/data/fixture-date-reviews";
 import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
 import { profileReadMiddleware } from "@/lib/auth/profile-access";

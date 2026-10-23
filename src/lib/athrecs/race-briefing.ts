@@ -1,4 +1,4 @@
-import { publicCatalogueText } from "./public-catalogue-content";
+import { publicCatalogueText } from "./public-catalogue-content.ts";
 /** Original ATHRECS athlete briefings. Facts only — never copy official guides. */
 
 import type { Sport } from "./types";

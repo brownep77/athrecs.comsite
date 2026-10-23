@@ -1,4 +1,4 @@
-import { publicCatalogueContent } from "./public-catalogue-content";
+import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
 import { fixtureTimeZone } from "./fixture-presentation";
 import { resolveCountry } from "./countries";

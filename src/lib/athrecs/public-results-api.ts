@@ -1,4 +1,4 @@
-import { publicCatalogueContent } from "./public-catalogue-content";
+import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";

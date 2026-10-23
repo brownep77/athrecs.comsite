@@ -1,4 +1,4 @@
-import { publicCatalogueContent } from "../athrecs/public-catalogue-content";
+import { publicCatalogueContent } from "../athrecs/public-catalogue-content.ts";
 import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews";
 import { getSql } from "../db";
 import { ensureAthrecsSeeded } from "../athrecs/seed.server";

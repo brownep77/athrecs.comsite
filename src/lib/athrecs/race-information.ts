@@ -1,4 +1,4 @@
-import { hasWithheldCatalogueReference } from "./public-catalogue-content";
+import { hasWithheldCatalogueReference } from "./public-catalogue-content.ts";
 import { effectiveStatus, todayIso } from "./format";
 import type { EditionEntryOption, EntryStatus } from "./types";
 

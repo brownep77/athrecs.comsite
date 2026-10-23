@@ -1,4 +1,4 @@
-import { hasWithheldCatalogueReference } from "./public-catalogue-content";
+import { hasWithheldCatalogueReference } from "./public-catalogue-content.ts";
 /** Public attribution only: never expose private ingestion notes or file names. */
 export function resultCredit(sourceUrl: string | null, sourceName: string | null) {
   if (!sourceUrl || hasWithheldCatalogueReference(sourceUrl) || hasWithheldCatalogueReference(sourceName)) return null;

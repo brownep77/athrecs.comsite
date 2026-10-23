@@ -1,4 +1,4 @@
-import { publicCatalogueContent } from "./public-catalogue-content";
+import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
 import type { SportFixtureSearch, SportPage } from "./sport-pages";
 import { fixtureDistanceCode, publicHttpUrl, UK_FIXTURE_COUNTRIES } from "./sport-pages.ts";

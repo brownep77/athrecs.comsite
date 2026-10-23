@@ -1,4 +1,4 @@
-import { hasWithheldCatalogueReference } from "./public-catalogue-content";
+import { hasWithheldCatalogueReference } from "./public-catalogue-content.ts";
 import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
 import { canonicalEventSlug } from "@/data/entry-options";
 import { getSql } from "@/lib/db";

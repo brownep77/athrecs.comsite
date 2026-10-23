@@ -287,6 +287,7 @@ try {
     null,
     "Do not carry a checked time into another edition or show legacy midnight clocks",
   );
+  assert.doesNotMatch(JSON.stringify(checked), /runabc/i, "Public fixture payloads must exclude withheld sources");
   const checked5k = await filtered({ q: "Checked schedule test", distance: "5K" });
   assert.deepEqual(
     checked5k.fixtures[0].starts.map((start) => start.distance),
