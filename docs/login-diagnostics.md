@@ -87,3 +87,21 @@ capture, OAuth/OTP/server failures, storage-outage isolation, staff-only API
 access, origin/host restrictions, filtering, pagination, retention, rate limits,
 session expiry, and desktop/mobile navigation. All accounts are synthetic and
 mail/network services are disabled. The existing quality gate runs this suite.
+
+`node scripts/verify-ios-signin.mjs` tests the Google redirect/callback and
+post-login journey in Playwright WebKit with an iPhone viewport. Install the
+Playwright WebKit browser and its host dependencies first; OpenSSL is required
+to create the disposable local HTTPS certificate. The test exercises actual
+OAuth state handling and secure host-only session cookies, first-name-only
+profile setup, reload, private profile and private calendar navigation. It uses
+an in-memory database, synthetic accounts and a simulated Google response;
+external browser/server requests are blocked and no real email is sent.
+An optional `--chromium` argument runs the same scenario in Chromium.
+This is a local WebKit regression test, not a physical iPhone or live Google
+sign-in test, and cannot reproduce production network or database conditions.
+The test retains request-failure evidence and allows only an observed cancellation
+of the background `/api/auth/get-session` request during the OAuth redirect. The
+current auth client can log that normal navigation cancellation as a
+`network_error / TypeError` even though sign-in succeeds. Other network failures,
+data-error reports and failed auth/data responses fail the test. This known
+logging noise does not establish the cause of an unrelated `data_error` report.
