@@ -22,6 +22,13 @@ export function attachSourceOrganisations(
 ): FixtureSource[] {
   const groups = groupOrganisations(organisations);
   const reviewedLinks: Record<string, string[]> = {
+    australian_open_water_swimming_championships_2027: ["swimming-australia"],
+    australian_swimming_open_2027: ["swimming-australia"],
+    australian_age_swimming_championships_2027: ["swimming-australia"],
+    australian_swimming_trials_2027: ["swimming-australia"],
+    swimming_australia_results_central: ["swimming-australia"],
+    swimming_australia_athlete_profiles: ["swimming-australia"],
+
     swimming_canada_national_calendar: ["swimming-canada"],
     swimming_canada_upcoming_meets: ["swimming-canada"],
     swimming_canada_results: ["swimming-canada"],
