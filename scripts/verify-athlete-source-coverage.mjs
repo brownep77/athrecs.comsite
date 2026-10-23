@@ -298,6 +298,50 @@ try {
     response.rows.map((row) => row.sourceId),
   );
 
+  await db.exec(`
+    insert into athlete_source_histories values
+      ('https://alpha.test/athlete/repeated','[{},{}]'),
+      ('https://alpha.test/athlete/repeated','[]')
+  `);
+  const repeatedHistory = await request({ q: "alpha main" });
+  assert.equal(
+    repeatedHistory.rows[0].stored.historyProfiles,
+    4,
+    "Grouping repeated source URLs must preserve every stored history profile",
+  );
+  assert.equal(repeatedHistory.rows[0].stored.historyRows, 5);
+  assert.equal(repeatedHistory.summary.stored.historyProfiles, 5);
+  assert.equal(repeatedHistory.summary.stored.historyRows, 6);
+  await db.exec(
+    "delete from athlete_source_histories where source_url='https://alpha.test/athlete/repeated'",
+  );
+
+  // Legacy malformed JSON must not silently turn missing performance counts
+  // into zero, even though modern schemas require an array in this column.
+  await db.exec(`
+    insert into athlete_source_histories values
+      ('https://none.test/malformed-history','{"not":"an array"}')
+  `);
+  const malformedHistory = await request();
+  assert.equal(malformedHistory.stores.histories, false);
+  assert.equal(malformedHistory.summary.stored.historyProfiles, null);
+  assert.equal(malformedHistory.summary.stored.historyRows, null);
+  assert.equal(malformedHistory.summary.stored.archiveRows, 2);
+  assert.equal(malformedHistory.summary.stored.captureRows, 3);
+  assert.equal(
+    malformedHistory.rows.find((row) => row.sourceId === "no_data").coverageState,
+    "incomplete",
+    "Malformed histories leave the collection unknown rather than claim no stored rows",
+  );
+  assert.equal(
+    malformedHistory.rows.find((row) => row.sourceId === "alpha_main").coverageState,
+    "stored_rows",
+    "Other known collections remain visible when malformed histories cannot be counted",
+  );
+  await db.exec(
+    "delete from athlete_source_histories where source_url='https://none.test/malformed-history'",
+  );
+
   failHistoryRead = true;
   const busy = await request({ q: "alpha main" });
   assert.equal(busy.stores.histories, false);
@@ -342,7 +386,7 @@ try {
   assert.equal(partial.rows[0].coverageState, "stored_rows");
 
   console.log(
-    "Athlete source coverage verified: bounded domain aggregation, latest approved captures, source overlap, saved result links, extraction states, literal filters, pagination, incomplete stores, and staff-only metadata.",
+    "Athlete source coverage verified: bounded domain aggregation, latest approved captures, repeated history URLs, malformed histories, source overlap, saved result links, extraction states, literal filters, pagination, incomplete stores, and staff-only metadata.",
   );
 } finally {
   await db.close();
