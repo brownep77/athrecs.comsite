@@ -1,0 +1,659 @@
+import type { ReactNode } from "react";
+import { ArrowUpRight, CalendarDays, Flag, Gauge, Medal, Users } from "lucide-react";
+import {
+  SUPERHALFS_CHECKED_AT,
+  SUPERHALFS_CHECKED_LABEL,
+  SUPERHALFS_OFFICIAL,
+  SUPERHALFS_PACE_TARGETS,
+  SUPERHALFS_QUESTIONS,
+  SUPERHALFS_RACES,
+  SUPERHALFS_RULES,
+  SUPERHALFS_TIME_LIMIT_NEWS,
+  type SuperHalfsRace,
+} from "@/data/superhalfs";
+
+const linkStyle =
+  "font-semibold text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
+const sectionStyle = "scroll-mt-24 space-y-5";
+const headingStyle = "font-display text-2xl font-semibold tracking-tight text-fg md:text-3xl";
+
+function OfficialLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={linkStyle}>
+      {children}
+      <ArrowUpRight aria-hidden="true" className="ml-1 inline h-3.5 w-3.5" />
+      <span className="sr-only"> (opens in a new tab)</span>
+    </a>
+  );
+}
+
+function RaceCard({ race, index }: { race: SuperHalfsRace; index: number }) {
+  return (
+    <article
+      id={race.id}
+      className="scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-surface shadow-card"
+    >
+      <div className="flex items-center justify-between gap-3 border-b border-border bg-elevated px-5 py-4">
+        <div className="flex items-center gap-3">
+          <span aria-hidden="true" className="font-display text-3xl font-semibold text-accent/60">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <p className="text-sm font-semibold text-fg">{race.country}</p>
+        </div>
+        <span className="rounded-md border border-border px-2 py-1 text-xs font-semibold text-muted">
+          {race.countryCode}
+        </span>
+      </div>
+      <div className="space-y-5 p-5 md:p-6">
+        <div className="space-y-2">
+          <h3 className="font-display text-xl font-semibold leading-tight text-fg">{race.name}</h3>
+          <p className="text-sm font-semibold text-accent">
+            <time dateTime={race.date}>{race.dateLabel}</time>
+            {race.dateStatus === "provisional" && " · Provisional"}
+          </p>
+          <p className="text-sm leading-relaxed text-muted">{race.course}</p>
+        </div>
+        <dl className="grid gap-3 rounded-xl border border-border bg-elevated p-4 text-sm sm:grid-cols-2">
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-wide text-muted">
+              2027 local start
+            </dt>
+            <dd className="mt-1 font-medium text-fg">{race.start}</dd>
+            <dd className="mt-1 text-xs text-muted">
+              {race.timeZone.replace("Europe/", "")} local time
+            </dd>
+          </div>
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-wide text-muted">
+              Published cutoff
+            </dt>
+            <dd className="mt-1 font-medium text-fg">{race.cutoff}</dd>
+            <dd className="mt-1 text-xs text-muted">{race.cutoffStatus}</dd>
+          </div>
+        </dl>
+        <div className="space-y-4 text-sm leading-relaxed text-muted">
+          <div>
+            <h4 className="mb-1 font-semibold text-fg">Amateur and club entry</h4>
+            <p>{race.entry}</p>
+          </div>
+          <div>
+            <h4 className="mb-1 font-semibold text-fg">Race-week planning</h4>
+            <p>{race.practical}</p>
+          </div>
+          <div>
+            <h4 className="mb-1 font-semibold text-fg">Elite and professional athletes</h4>
+            <p>{race.elite}</p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-x-5 gap-y-3 border-t border-border pt-4 text-sm">
+          <OfficialLink href={race.entryUrl}>Official entry</OfficialLink>
+          <OfficialLink href={race.resultsUrl}>{race.resultsLabel}</OfficialLink>
+          <OfficialLink href={race.eliteUrl}>
+            {race.id === "cardiff" || race.id === "copenhagen"
+              ? "Elite information"
+              : "Organiser and elite enquiries"}
+          </OfficialLink>
+          {race.id === "cardiff" && (
+            <a className={linkStyle} href="/running/races/cardiff-half-marathon">
+              AthRecs Cardiff guide
+            </a>
+          )}
+        </div>
+        <p className="text-xs leading-relaxed text-muted">
+          Organiser evidence:{" "}
+          {race.sources.map((source, sourceIndex) => (
+            <span key={source.url}>
+              {sourceIndex > 0 && " · "}
+              <a
+                className="underline underline-offset-2 hover:text-fg"
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {source.label}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </span>
+          ))}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+export function SuperHalfsPage() {
+  return (
+    <article className="space-y-10 pb-12 md:space-y-14">
+      <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-muted">
+        <a href="/" className="hover:text-fg">
+          Home
+        </a>
+        <span aria-hidden="true">/</span>
+        <a href="/running" className="hover:text-fg">
+          Running
+        </a>
+        <span aria-hidden="true">/</span>
+        <a href="/running/race-series" className="hover:text-fg">
+          Race series
+        </a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page" className="font-semibold text-fg">
+          SuperHalfs
+        </span>
+      </nav>
+
+      <header className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
+        <div className="h-1.5 bg-accent" />
+        <div className="grid gap-8 p-5 md:p-8 lg:grid-cols-[1.5fr_1fr] lg:p-10">
+          <div className="space-y-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+              The AthRecs race-series guide
+            </p>
+            <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-fg sm:text-4xl lg:text-5xl">
+              SuperHalfs series
+              <br />
+              <span className="text-accent">Six cities. Your journey.</span>
+            </h1>
+            <p className="max-w-2xl text-base leading-relaxed text-muted">
+              SuperHalfs brings together six European half marathons: Lisbon, Prague, Berlin,
+              Copenhagen, Cardiff and Valencia. Complete the set to earn the official SuperMedal.
+              Use this guide to compare 2027 dates, entries, courses, cutoffs and elite
+              opportunities.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="#dates"
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-fg no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              >
+                <CalendarDays aria-hidden="true" className="h-4 w-4" />
+                Compare the six races
+              </a>
+              <a
+                href="#entry"
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-semibold text-fg no-underline hover:bg-elevated"
+              >
+                How to enter <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+              </a>
+            </div>
+            <p className="text-xs leading-relaxed text-muted">
+              By AthRecs · Information checked{" "}
+              <time dateTime={SUPERHALFS_CHECKED_AT}>{SUPERHALFS_CHECKED_LABEL}</time>.{" "}
+              <a href="#sources" className="underline underline-offset-2">
+                Official sources and update notes
+              </a>
+            </p>
+          </div>
+          <aside
+            aria-label="SuperHalfs essentials"
+            className="space-y-5 rounded-xl border border-border bg-elevated p-5 md:p-6"
+          >
+            <div className="grid grid-cols-3 gap-3 border-b border-border pb-5 text-center">
+              <div>
+                <p className="font-display text-3xl font-semibold text-fg">6</p>
+                <p className="mt-1 text-xs text-muted">races</p>
+              </div>
+              <div>
+                <p className="font-display text-3xl font-semibold text-fg">21.1</p>
+                <p className="mt-1 text-xs text-muted">km each</p>
+              </div>
+              <div>
+                <Medal aria-hidden="true" className="mx-auto h-9 w-9 text-accent" />
+                <p className="mt-1 text-xs text-muted">one SuperMedal</p>
+              </div>
+            </div>
+            <h2 className="font-display text-lg font-semibold text-fg">
+              No deadline for the six-race journey
+            </h2>
+            <p className="text-sm leading-relaxed text-muted">
+              The former five-year limit was removed in 2025. Plan around your race entries, goals
+              and available time.
+            </p>
+            <p className="text-xs">
+              <OfficialLink href={SUPERHALFS_TIME_LIMIT_NEWS}>
+                Official completion-rule update
+              </OfficialLink>
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {SUPERHALFS_RACES.map((race) => (
+                <a
+                  key={race.id}
+                  href={`#${race.id}`}
+                  className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-fg no-underline hover:border-accent"
+                >
+                  {race.city}
+                </a>
+              ))}
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      <nav aria-label="On this page" className="flex flex-wrap gap-2 border-y border-border py-4">
+        {[
+          ["dates", "2027 dates"],
+          ["entry", "Entry & passport"],
+          ["races", "Race guides"],
+          ["cutoffs", "Cutoffs"],
+          ["amateur", "Amateur planning"],
+          ["elite", "Elite athletes"],
+          ["pace", "Pace guide"],
+          ["questions", "Questions"],
+        ].map(([id, label]) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            className="inline-flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-muted no-underline hover:bg-elevated hover:text-fg"
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <section id="dates" className={sectionStyle} aria-labelledby="dates-heading">
+        <div className="space-y-2">
+          <h2 id="dates-heading" className={headingStyle}>
+            When are the SuperHalfs races in 2027?
+          </h2>
+          <p className="max-w-3xl text-sm leading-relaxed text-muted">
+            Five dates are confirmed on the organisers’ websites. Valencia is provisionally listed
+            by SuperHalfs. All dates refer to the local race day.
+          </p>
+        </div>
+        <div
+          className="overflow-x-auto rounded-xl border border-border bg-surface"
+          tabIndex={0}
+          role="region"
+          aria-label="SuperHalfs 2027 dates table, scroll horizontally if needed"
+        >
+          <table className="w-full min-w-[620px] text-left text-sm">
+            <caption className="sr-only">
+              The six SuperHalfs races, their 2027 dates and confirmation status, checked{" "}
+              {SUPERHALFS_CHECKED_LABEL}
+            </caption>
+            <thead className="border-b border-border bg-elevated text-xs uppercase tracking-wide text-muted">
+              <tr>
+                <th scope="col" className="px-5 py-4">
+                  Race
+                </th>
+                <th scope="col" className="px-5 py-4">
+                  Country
+                </th>
+                <th scope="col" className="px-5 py-4">
+                  2027 date
+                </th>
+                <th scope="col" className="px-5 py-4">
+                  Date status
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {SUPERHALFS_RACES.map((race) => (
+                <tr key={race.id} className="border-b border-border last:border-0">
+                  <th scope="row" className="px-5 py-4">
+                    <a className={linkStyle} href={`#${race.id}`}>
+                      {race.city}
+                    </a>
+                  </th>
+                  <td className="px-5 py-4 text-muted">{race.country}</td>
+                  <td className="whitespace-nowrap px-5 py-4 text-fg">
+                    <time dateTime={race.date}>{race.dateLabel}</time>
+                  </td>
+                  <td className="px-5 py-4">
+                    <span className="rounded-full border border-border bg-elevated px-2.5 py-1 text-xs font-semibold text-fg">
+                      {race.dateStatus === "confirmed" ? "Confirmed" : "Provisional"}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-sm leading-relaxed text-muted">
+          <strong className="text-fg">Planning note:</strong> Prague is on Saturday 3 April and
+          Berlin on Sunday 4 April. Completing both in the same weekend is unnecessary for the
+          series; choose editions that suit your recovery and travel plans.
+        </p>
+      </section>
+
+      <section id="entry" className={sectionStyle} aria-labelledby="entry-heading">
+        <h2 id="entry-heading" className={headingStyle}>
+          How do I enter SuperHalfs?
+        </h2>
+        <ol className="grid gap-4 md:grid-cols-3">
+          {[
+            [
+              "Create your SuperPassport",
+              "Register with SuperHalfs for your free digital passport. Keep its number ready when entering each race.",
+            ],
+            [
+              "Secure each race entry",
+              "Enter through the individual organiser’s available ballot, entry, charity or official travel route. Each race has its own fees and conditions.",
+            ],
+            [
+              "Run, record and complete",
+              "Include the passport number in your entries, check your stamps after each finish and collect the SuperMedal after completing the set.",
+            ],
+          ].map(([title, description], index) => (
+            <li key={title} className="rounded-xl border border-border bg-surface p-5">
+              <span className="text-xs font-semibold uppercase tracking-wider text-accent">
+                Step {index + 1}
+              </span>
+              <h3 className="mb-2 mt-3 font-display text-lg font-semibold text-fg">{title}</h3>
+              <p className="text-sm leading-relaxed text-muted">{description}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="text-sm">
+          <OfficialLink href={SUPERHALFS_OFFICIAL}>
+            Visit the official SuperHalfs website
+          </OfficialLink>
+        </p>
+        <div className="space-y-3 rounded-xl border border-border bg-elevated p-5">
+          <h3 className="font-display text-lg font-semibold text-fg">
+            Which previous finishes count?
+          </h3>
+          <p className="text-sm leading-relaxed text-muted">
+            Eligible editions begin with Prague on 2 April 2022; Berlin counts from 2024. Match the
+            named event, year and official chip-time finish. Lisbon’s qualifying 2022 edition was in
+            May. Cardiff’s March 2022 race is excluded; its October edition qualifies.
+          </p>
+          <p className="text-sm leading-relaxed text-muted">
+            The original SH5 scheme is closed to new registrations. Retained five-race participants
+            have a rolling 36-month window and can ask SuperHalfs to switch to SH6.
+          </p>
+          <p className="text-xs">
+            <OfficialLink href={SUPERHALFS_RULES}>
+              Check eligibility and your SuperPassport
+            </OfficialLink>
+          </p>
+        </div>
+      </section>
+
+      <section id="races" className={sectionStyle} aria-labelledby="races-heading">
+        <div className="space-y-2">
+          <h2 id="races-heading" className={headingStyle}>
+            The six SuperHalfs race guides
+          </h2>
+          <p className="max-w-3xl text-sm leading-relaxed text-muted">
+            Compare the race experience, practical arrangements and entry routes. Entry status
+            reflects the checked date; use the organiser’s links for availability, prices and final
+            race instructions.
+          </p>
+        </div>
+        <div className="grid items-start gap-5 lg:grid-cols-2">
+          {SUPERHALFS_RACES.map((race, index) => (
+            <RaceCard key={race.id} race={race} index={index} />
+          ))}
+        </div>
+      </section>
+
+      <section id="cutoffs" className={sectionStyle} aria-labelledby="cutoffs-heading">
+        <h2 id="cutoffs-heading" className={headingStyle}>
+          What are the SuperHalfs finishing time limits?
+        </h2>
+        <p className="max-w-3xl text-sm leading-relaxed text-muted">
+          The series has no overall deadline, but each individual race has a cutoff. Net time starts
+          when you cross the start line; gun time starts at the race signal. Intermediate
+          checkpoints and road closures can also apply.
+        </p>
+        <div
+          className="overflow-x-auto rounded-xl border border-border bg-surface"
+          tabIndex={0}
+          role="region"
+          aria-label="SuperHalfs cutoff comparison, scroll horizontally if needed"
+        >
+          <table className="w-full min-w-[680px] text-left text-sm">
+            <caption className="sr-only">
+              Published SuperHalfs cutoffs, their timing basis and applicable edition
+            </caption>
+            <thead className="border-b border-border bg-elevated text-xs uppercase tracking-wide text-muted">
+              <tr>
+                <th scope="col" className="px-5 py-4">
+                  Race
+                </th>
+                <th scope="col" className="px-5 py-4">
+                  Published limit
+                </th>
+                <th scope="col" className="px-5 py-4">
+                  Timing and edition
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {SUPERHALFS_RACES.map((race) => (
+                <tr key={race.id} className="border-b border-border last:border-0">
+                  <th scope="row" className="px-5 py-4 text-fg">
+                    <a href={race.rulesUrl} className={linkStyle}>
+                      {race.city}
+                    </a>
+                  </th>
+                  <td className="whitespace-nowrap px-5 py-4 font-semibold text-fg">
+                    {race.cutoff}
+                  </td>
+                  <td className="px-5 py-4 text-muted">
+                    <p className="font-medium text-fg">{race.cutoffStatus}</p>
+                    <p className="mt-1 leading-relaxed">{race.cutoffBasis}</p>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-sm leading-relaxed text-muted">
+          Valencia’s figure is a{" "}
+          <strong className="text-fg">2026 reference, not a confirmed 2027 limit</strong>. Prague’s
+          published general rule also needs checking against the final 2027 instructions. Plan with
+          a margin for aid stations and checkpoints.
+        </p>
+      </section>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <section
+          id="amateur"
+          className={`${sectionStyle} rounded-2xl border border-border bg-surface p-5 md:p-6`}
+          aria-labelledby="amateur-heading"
+        >
+          <Users aria-hidden="true" className="h-6 w-6 text-accent" />
+          <h2 id="amateur-heading" className="font-display text-2xl font-semibold text-fg">
+            For amateur, club and first-time runners
+          </h2>
+          <p className="text-sm leading-relaxed text-muted">
+            Start with the race you can enter and prepare for comfortably. A useful series plan
+            balances running, cost and the time needed to enjoy each city.
+          </p>
+          <ul className="space-y-3 text-sm leading-relaxed text-muted">
+            <li>
+              <strong className="text-fg">Choose your goal.</strong> Decide whether you want a first
+              finish, a personal best or a city break. Compare the cutoff and course before choosing
+              a target.
+            </li>
+            <li>
+              <strong className="text-fg">Budget for the whole trip.</strong> Include entry,
+              transport, accommodation, local travel and any charity commitment. Confirm your place
+              before making inflexible bookings.
+            </li>
+            <li>
+              <strong className="text-fg">Plan around bib collection.</strong> An early flight on
+              race morning may leave no opportunity to collect your number. Check expo days,
+              identification and collection rules.
+            </li>
+            <li>
+              <strong className="text-fg">Check access and support.</strong> Ask the organiser about
+              guide runners, disability entries, wheelchair categories, accessible facilities and
+              companion arrangements before booking.
+            </li>
+            <li>
+              <strong className="text-fg">Leave recovery space.</strong> Spread races across seasons
+              or years. Your training, work and family schedule can shape the order.
+            </li>
+          </ul>
+        </section>
+        <section
+          id="elite"
+          className={`${sectionStyle} rounded-2xl border border-border bg-surface p-5 md:p-6`}
+          aria-labelledby="elite-heading"
+        >
+          <Flag aria-hidden="true" className="h-6 w-6 text-accent" />
+          <h2 id="elite-heading" className="font-display text-2xl font-semibold text-fg">
+            For elite and professional athletes
+          </h2>
+          <p className="text-sm leading-relaxed text-muted">
+            Use each organiser’s elite process and obtain written acceptance. The event-specific
+            notes above identify confirmed provisions and requirements still awaiting publication.
+          </p>
+          <ul className="space-y-3 text-sm leading-relaxed text-muted">
+            <li>
+              <strong className="text-fg">Prepare a performance record.</strong> Have recent
+              official results, personal and season bests, race dates, timing type and
+              representative contact details ready.
+            </li>
+            <li>
+              <strong className="text-fg">Confirm the qualifying window.</strong> Ask which
+              distances and results are accepted, whether marks must be gun or chip times, and the
+              application deadline.
+            </li>
+            <li>
+              <strong className="text-fg">Confirm the race package.</strong> Ask about entry,
+              travel, accommodation, personal refreshments, start access and any appearance or prize
+              arrangements.
+            </li>
+            <li>
+              <strong className="text-fg">Check classification rules.</strong> Confirm the course,
+              category and governing-body requirements relevant to your record, ranking or
+              qualification objective.
+            </li>
+            <li>
+              <strong className="text-fg">Keep series tracking organised.</strong> If you also want
+              to complete SuperHalfs, confirm that your accepted entry carries the correct
+              SuperPassport details.
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <section id="pace" className={sectionStyle} aria-labelledby="pace-heading">
+        <div className="flex items-start gap-3">
+          <Gauge aria-hidden="true" className="mt-1 h-6 w-6 shrink-0 text-accent" />
+          <div className="space-y-2">
+            <h2 id="pace-heading" className={headingStyle}>
+              Half-marathon pace guide
+            </h2>
+            <p className="max-w-3xl text-sm leading-relaxed text-muted">
+              Average even pace over 21.0975 kilometres, rounded to the nearest second. These are
+              arithmetic reference points, not elite-entry standards or a promise that a race
+              accepts that finishing time.
+            </p>
+          </div>
+        </div>
+        <div className="overflow-hidden rounded-xl border border-border bg-surface">
+          <table className="w-full text-left text-sm">
+            <caption className="sr-only">
+              Half-marathon target finish times and average pace per kilometre and per mile
+            </caption>
+            <thead className="border-b border-border bg-elevated text-xs text-muted">
+              <tr>
+                <th scope="col" className="px-4 py-3">
+                  Finish time
+                </th>
+                <th scope="col" className="px-4 py-3">
+                  Minutes / km
+                </th>
+                <th scope="col" className="px-4 py-3">
+                  Minutes / mile
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {SUPERHALFS_PACE_TARGETS.map((target) => (
+                <tr key={target.finish} className="border-b border-border last:border-0">
+                  <th scope="row" className="px-4 py-2.5 font-semibold tabular-nums text-fg">
+                    {target.finish}
+                  </th>
+                  <td className="px-4 py-2.5 tabular-nums text-muted">{target.perKm}</td>
+                  <td className="px-4 py-2.5 tabular-nums text-muted">{target.perMile}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="questions" className={sectionStyle} aria-labelledby="questions-heading">
+        <h2 id="questions-heading" className={headingStyle}>
+          SuperHalfs questions, answered
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          {SUPERHALFS_QUESTIONS.map((item) => (
+            <div
+              key={item.question}
+              className="space-y-3 rounded-xl border border-border bg-surface p-5"
+            >
+              <h3 className="font-display text-lg font-semibold leading-snug text-fg">
+                {item.question}
+              </h3>
+              <p className="text-sm leading-relaxed text-muted">{item.answer}</p>
+              <a
+                href={item.source}
+                className="text-xs font-medium text-accent underline underline-offset-3"
+              >
+                Official information<span className="sr-only"> for: {item.question}</span>
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="profile-heading"
+        className="grid gap-5 rounded-2xl border border-border bg-elevated p-5 md:p-8 lg:grid-cols-[1.5fr_1fr] lg:items-center"
+      >
+        <div className="space-y-3">
+          <h2 id="profile-heading" className={headingStyle}>
+            Bring your running history together
+          </h2>
+          <p className="text-sm leading-relaxed text-muted">
+            Find your athlete profile on AthRecs, explore your recorded performances and keep your
+            half-marathon goals in view. The official race archives above are the starting point for
+            checking an individual result.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3 lg:justify-end">
+          <a
+            href="/athletes"
+            className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-fg no-underline"
+          >
+            Find your athlete profile
+          </a>
+          <a
+            href="/running/events"
+            className="inline-flex min-h-11 items-center rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-fg no-underline"
+          >
+            Explore running races
+          </a>
+        </div>
+      </section>
+
+      <footer id="sources" className="scroll-mt-24 space-y-4 border-t border-border pt-6">
+        <h2 className="font-display text-xl font-semibold text-fg">Sources and updates</h2>
+        <p className="max-w-4xl text-sm leading-relaxed text-muted">
+          This independent AthRecs guide was checked against the SuperHalfs website and the six race
+          organisers on <time dateTime={SUPERHALFS_CHECKED_AT}>{SUPERHALFS_CHECKED_LABEL}</time>.
+          Organiser links appear beside the race details. Entries and the official SuperMedal are
+          managed by the organisers.
+        </p>
+        <p className="max-w-4xl text-sm leading-relaxed text-muted">
+          Pending details are labelled by edition: Valencia’s 2027 date is provisional; Lisbon’s
+          start time needs clarification; several 2027 elite requirements and race-week arrangements
+          remain unpublished. Recheck the organiser before entering or travelling.
+        </p>
+        <div className="flex flex-wrap gap-x-5 gap-y-3 text-sm">
+          <OfficialLink href={SUPERHALFS_OFFICIAL}>Official SuperHalfs</OfficialLink>
+          <OfficialLink href={SUPERHALFS_RULES}>Series rules and passport help</OfficialLink>
+          <a href="/running/race-series" className={linkStyle}>
+            More running race series
+          </a>
+        </div>
+      </footer>
+    </article>
+  );
+}

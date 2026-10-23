@@ -11,6 +11,7 @@ import {
 import type { PlaceTerrain } from "@/lib/athrecs/race-place-facets";
 import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
 import { HALF_MARATHON_COUNTRIES } from "@/data/road-half-marathons/countries";
+import { SUPERHALFS_PATH } from "@/data/superhalfs";
 
 const cardClass =
   "rounded-xl border border-border bg-surface p-5 hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
@@ -56,6 +57,9 @@ export function RunningDiscovery({ site }: { site?: CountrySite }) {
         </a>
         <a href="/running/race-series" className={linkClass}>
           Race series
+        </a>
+        <a href={SUPERHALFS_PATH} className={linkClass}>
+          SuperHalfs: six European half marathons
         </a>
         <a href={place ? `${place}/running` : "/races/places/running"} className={linkClass}>
           All running races by location
@@ -170,6 +174,9 @@ export function RunningDisciplineDiscovery({ discipline }: { discipline: PlaceTe
           <p className="text-muted">
             Looking for a longer race? Explore the established marathon and half-marathon guides.
           </p>
+          <a href={SUPERHALFS_PATH} className={linkClass}>
+            Plan your SuperHalfs series: dates, entry and courses
+          </a>
           {[
             { title: "Road marathons by country", items: MARATHON_COUNTRIES },
             { title: "Road half marathons by country", items: HALF_MARATHON_COUNTRIES },

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { HALF_MARATHON_COUNTRIES, halfMarathonCountry } from "@/data/road-half-marathons/countries";
+import { SUPERHALFS_PATH } from "@/data/superhalfs";
 import { MARATHON_COUNTRIES, countryGuide } from "@/data/road-marathons/countries";
 import type { MarathonCountryGuide, RoadMarathon } from "@/data/road-marathons/types";
 import { roadMarathonDate, upcomingRoadEditions } from "@/lib/running/road-marathon-calendar";
@@ -117,6 +118,19 @@ export function CountryMarathonPage({
         </p>
       </header>
       <CountryNavigation selected={country.id} half={half} />
+      {half ? (
+        <aside className="rounded-xl border border-border bg-accent-soft/40 p-5">
+          <h2 className="font-display text-xl font-semibold">Take on the SuperHalfs series</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
+            Explore six European half marathons in Lisbon, Prague, Berlin, Copenhagen, Cardiff and
+            Valencia. Compare race dates, entry routes, courses and guidance for amateur and elite
+            athletes.
+          </p>
+          <Link to={SUPERHALFS_PATH} className={linkClass}>
+            Read the SuperHalfs guide
+          </Link>
+        </aside>
+      ) : null}
       <nav aria-label="Country guide sections" className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
         {[
           ["upcoming", "Race dates"],
