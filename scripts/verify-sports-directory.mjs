@@ -190,6 +190,55 @@ assert.deepEqual(names({ q: "Icelandic Cycling Association" }), ["icelandic-cycl
 assert.deepEqual(names({ q: "Croatia Swimming Association" }), ["croatian-swimming"]);
 assert.deepEqual(names({ q: "Българска асоциация по триатлон" }), ["bulgarian-triathlon"]);
 assert.equal(getSportsOrganisation("bulgarian-triathlon").website, "https://bat.triathlon.bg/");
+for (const country of [
+  "Jamaica",
+  "Barbados",
+  "Bahamas",
+  "Trinidad and Tobago",
+  "Cyprus",
+  "Malta",
+  "Mauritius",
+  "Uruguay",
+]) {
+  const bodies = filterSportsOrganisations({ country, type: "national" });
+  assert.equal(bodies.length, 4, `${country}: four national bodies`);
+  assert(bodies.every((body) => body.checkedAt === "2026-10-23"));
+  for (const sport of ["track-and-field", "road-cycling", "swimming", "triathlon"]) {
+    assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
+  }
+}
+assert.equal(getSportsOrganisation("british-triathlon").checkedAt, "2026-10-22");
+assert.deepEqual(names({ country: "Jamaica", sport: "track-cycling", type: "national" }), [
+  "jamaican-cycling",
+]);
+assert.deepEqual(names({ country: "Uruguay", sport: "bmx", type: "national" }), [
+  "uruguayan-cycling",
+]);
+assert.deepEqual(names({ country: "Trinidad and Tobago", sport: "bmx", type: "national" }), []);
+for (const country of ["Barbados", "Bahamas", "Malta"]) {
+  assert.deepEqual(names({ country, sport: "mountain-biking", type: "national" }), []);
+}
+for (const country of ["Cyprus", "Mauritius"]) {
+  assert.equal(names({ country, sport: "mountain-biking", type: "national" }).length, 1);
+  assert.deepEqual(names({ country, sport: "track-cycling", type: "national" }), []);
+}
+for (const country of ["Barbados", "Trinidad and Tobago", "Cyprus", "Malta", "Mauritius"]) {
+  assert.equal(names({ country, sport: "duathlon", type: "national" }).length, 1);
+}
+for (const country of ["Jamaica", "Bahamas", "Uruguay"]) {
+  assert.deepEqual(names({ country, sport: "duathlon", type: "national" }), []);
+}
+assert.deepEqual(names({ q: "JAAA" }), ["jamaican-athletics"]);
+assert.deepEqual(names({ q: "Federation Mauricienne de Natation" }), ["mauritian-swimming"]);
+assert.deepEqual(names({ q: "Bahamas Swimming Federation" }), ["bahamian-swimming"]);
+assert.deepEqual(names({ q: "NAAATT" }), ["trinidad-tobago-athletics"]);
+assert.equal(getSportsOrganisation("jamaican-athletics").website, "https://athleticsja.org/");
+assert.equal(getSportsOrganisation("jamaican-swimming").website, "https://www.asaj.com.jm/");
+assert.equal(getSportsOrganisation("uruguayan-triathlon").websiteKind, "member-directory");
+assert.equal(
+  getSportsOrganisation("uruguayan-triathlon").website,
+  "https://triathlon.org/members/uruguay-triathlon-federation",
+);
 assert.equal(getSportsOrganisation("hellenic-triathlon").website, "https://hellastriathlon.gr/en/");
 assert.deepEqual(names({ country: "Romania", sport: "bmx", type: "national" }), []);
 assert.deepEqual(names({ country: "Lithuania", sport: "duathlon", type: "national" }), []);
