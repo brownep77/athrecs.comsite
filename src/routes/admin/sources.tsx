@@ -28,7 +28,7 @@ function optionValues(values: string[]) {
 
 function AdminSourcesPage() {
   const [query, setQuery] = useState("");
-  const [status, setStatus] = useState<SourceStatus>("held");
+  const [status, setStatus] = useState<SourceStatus>("all");
   const [region, setRegion] = useState(ALL);
   const [country, setCountry] = useState(ALL);
 
@@ -110,9 +110,16 @@ function AdminSourcesPage() {
         </Button>
       </div>
 
-      <Button asChild>
-        <Link to="/admin/fixture-import">Import verified fixture file</Link>
-      </Button>
+      <div className="flex flex-wrap gap-3">
+        <Button asChild>
+          <Link to="/admin/collection-stats" search={{ section: "sources" }}>
+            Sources & coverage percentages
+          </Link>
+        </Button>
+        <Button asChild variant="secondary">
+          <Link to="/admin/fixture-import">Import verified fixture file</Link>
+        </Button>
+      </div>
 
       {registry.isLoading && <p className="text-sm text-muted">Loading source registry…</p>}
       {registry.isError && (
