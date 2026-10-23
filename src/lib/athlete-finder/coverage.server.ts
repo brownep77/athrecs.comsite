@@ -14,6 +14,7 @@ import type {
 type Counts = StoredSourceCounts & SourceInventoryCounts;
 type CountKey = keyof Counts;
 type Group = { domain: string | null } & Partial<Record<CountKey, number | string>>;
+type HistoryGroup = Group & { invalid_histories: number | string };
 type InventoryGroup = Group & {
   source_key: string;
   name: string;
@@ -141,7 +142,7 @@ export async function athleteFinderSourceCoverage(
     if (!stores[key]) return [];
     try {
       return await sql.transaction(async (tx) => {
-        await tx.query("set local statement_timeout = '7000ms'");
+        await tx.query("set local statement_timeout = '15000ms'");
         await tx.query("set local lock_timeout = '1000ms'");
         return tx.query<T>(query);
       });
@@ -158,35 +159,58 @@ export async function athleteFinderSourceCoverage(
         `SELECT ${urlDomain("source_url")} AS domain,
           count(*)::bigint AS "canonicalResults" FROM results GROUP BY 1`,
       ),
+      // Count entries before joining so the domain regex runs once per dataset.
       readStore<Group>(
         "archive",
-        `SELECT ${urlDomain("d.source_url")} AS domain,
-          count(DISTINCT d.id)::bigint AS "archiveDatasets",
-          count(e.id)::bigint AS "archiveRows"
-        FROM result_archive_datasets d LEFT JOIN result_archive_entries e ON e.dataset_id=d.id
+        `WITH entry_counts AS MATERIALIZED (
+          SELECT dataset_id,count(*)::bigint AS row_count
+          FROM result_archive_entries GROUP BY dataset_id
+        ) SELECT ${urlDomain("d.source_url")} AS domain,
+          count(*)::bigint AS "archiveDatasets",
+          coalesce(sum(e.row_count),0)::bigint AS "archiveRows"
+        FROM result_archive_datasets d LEFT JOIN entry_counts e ON e.dataset_id=d.id
         GROUP BY 1`,
       ),
+      // Choose the current version and approval before de-TOASTing its payload.
+      // The scalar PK lookup prevents a flattened join from reading old bodies.
       readStore<Group>(
         "captures",
-        `WITH latest AS (
+        `WITH latest AS MATERIALIZED (
           SELECT DISTINCT ON (provider,source_key) id,approval_id,source_url,
-            payload->>'publication' AS publication,source_check,row_count
+            source_check,row_count
           FROM result_archive_source_captures
           ORDER BY provider,source_key,captured_at DESC,id DESC
+        ), approved AS MATERIALIZED (
+          SELECT l.source_url,l.source_check,l.row_count,
+            (SELECT body.payload->>'publication' FROM result_archive_source_captures body
+              WHERE body.id=l.id) AS publication
+          FROM latest l JOIN result_archive_capture_approvals a ON a.id=l.approval_id
+          WHERE a.scope='staff_only' AND a.revoked_at IS NULL
         ) SELECT ${urlDomain("c.source_url")} AS domain,
           count(*) FILTER (WHERE c.source_check IN ('compared','empty'))::bigint AS "capturePages",
           coalesce(sum(c.row_count) FILTER (WHERE c.source_check IN ('compared','empty')),0)::bigint AS "captureRows",
           count(*) FILTER (WHERE c.source_check NOT IN ('compared','empty'))::bigint AS "heldCapturePages"
-        FROM latest c JOIN result_archive_capture_approvals a ON a.id=c.approval_id
-        WHERE c.publication='staff_only' AND a.scope='staff_only' AND a.revoked_at IS NULL
+        FROM approved c WHERE c.publication='staff_only'
         GROUP BY 1`,
       ),
-      readStore<Group>(
+      // Keep large performance JSON out of sorts and group repeated URLs before
+      // calculating domains. Materialization keeps this projection in place.
+      readStore<HistoryGroup>(
         "histories",
-        `SELECT ${urlDomain("source_url")} AS domain,
-          count(*)::bigint AS "historyProfiles",
-          coalesce(sum(jsonb_array_length(performances)),0)::bigint AS "historyRows"
-        FROM athlete_source_histories GROUP BY 1`,
+        `WITH sizes AS MATERIALIZED (
+          SELECT source_url,CASE WHEN jsonb_typeof(performances)='array'
+            THEN jsonb_array_length(performances) END AS row_count
+          FROM athlete_source_histories
+        ), by_url AS MATERIALIZED (
+          SELECT source_url,count(*)::bigint AS profiles,
+            coalesce(sum(row_count),0)::bigint AS row_count,
+            count(*) FILTER (WHERE row_count IS NULL)::bigint AS invalid_histories
+          FROM sizes GROUP BY source_url
+        ) SELECT ${urlDomain("source_url")} AS domain,
+          sum(profiles)::bigint AS "historyProfiles",
+          sum(row_count)::bigint AS "historyRows",
+          sum(invalid_histories)::bigint AS invalid_histories
+        FROM by_url GROUP BY 1`,
       ),
       readStore<Group>(
         "resultLinks",
@@ -222,6 +246,13 @@ export async function athleteFinderSourceCoverage(
         GROUP BY 1`,
       ),
     ]);
+
+  // A malformed legacy history must not become a zero performance count. Keep
+  // the previous unknown-store behavior without throwing inside the aggregate.
+  if (histories.some((group) => Number(group.invalid_histories) > 0)) {
+    stores.histories = false;
+    histories.length = 0;
+  }
 
   const byDomain = new Map<string, Counts>();
   const totals = emptyCounts(stores);
