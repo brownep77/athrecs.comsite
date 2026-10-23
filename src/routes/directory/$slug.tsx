@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { OrganisationSports } from "@/components/directory/OrganisationSports";
+import { SportCollections } from "@/components/directory/SportCollections";
 import { ORGANISATION_TYPES } from "@/data/sports-organisations";
 import { getSportsOrganisation } from "@/lib/athrecs/sports-directory";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
@@ -126,6 +127,7 @@ function OrganisationPage() {
           team-selection eligibility are set out on the organisation’s official website.
         </p>
       </section>
+      <SportCollections sports={body.sports.length ? body.sports : undefined} />
       {related.length ? (
         <section aria-labelledby="related-heading" className="space-y-4">
           <h2 id="related-heading" className="font-display text-2xl font-semibold">

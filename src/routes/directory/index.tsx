@@ -3,6 +3,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowUpRight, Building2, Search } from "lucide-react";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { OrganisationSports } from "@/components/directory/OrganisationSports";
+import { SportCollections } from "@/components/directory/SportCollections";
 import { Button } from "@/components/ui/button";
 import { ORGANISATION_TYPES, SPORTS_ORGANISATIONS } from "@/data/sports-organisations";
 import {
@@ -144,6 +145,8 @@ function DirectoryPage() {
           </p>
         </div>
       </section>
+
+      <SportCollections sports={search.sport ? [search.sport] : undefined} />
 
       <section aria-label="Find a sports organisation" className="space-y-4">
         <form
