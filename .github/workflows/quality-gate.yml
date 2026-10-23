@@ -358,4 +358,3 @@ jobs:
           name: athrecs-browser-smoke
           path: artifacts/
           if-no-files-found: warn
-

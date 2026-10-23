@@ -20,7 +20,7 @@ export const saveMyProfileSetup = createServerFn({ method: "POST" })
     await sql.transaction(async (tx) => {
       await tx`insert into athlete_private_profiles(user_id,verified_email,full_name,club_or_team,previous_names,profile_details,privacy_notice_version,privacy_acknowledged_at)
         values(${context.userId},${user.email},${data.fullName},${data.currentClub || null},${data.previousNames},${JSON.stringify({ previousClub: data.previousClubs[0] ?? "" })}::jsonb,${MATCHING_NOTICE_VERSION},now())
-        on conflict(user_id) do update set full_name=excluded.full_name,club_or_team=excluded.club_or_team,previous_names=excluded.previous_names,
+        on conflict(user_id) do update set verified_email=excluded.verified_email,full_name=excluded.full_name,club_or_team=excluded.club_or_team,previous_names=excluded.previous_names,
         profile_details=coalesce(athlete_private_profiles.profile_details,'{}'::jsonb)||excluded.profile_details,
         privacy_notice_version=excluded.privacy_notice_version,privacy_acknowledged_at=now(),updated_at=now()`;
       // Merge only discovery fields; preserve all other account settings and consents.

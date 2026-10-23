@@ -10,6 +10,7 @@ import type { MatchingSettings } from "@/lib/athrecs/result-matching-settings";
 
 export function ProfileResultsSetup({ account }: { account: AthleteAccountData }) {
   const [editing, setEditing] = useState(false);
+  const [skipped, setSkipped] = useState(false);
   const settings = useQuery({
     queryKey: ["my-matching-settings", account.userId],
     queryFn: () => getMyMatchingSettings(),
@@ -57,12 +58,16 @@ export function ProfileResultsSetup({ account }: { account: AthleteAccountData }
             Try again
           </button>
         </p>
-      ) : editing || (!status.data && !account.claimedProfiles.length) ? (
+      ) : editing || (!status.data && !account.claimedProfiles.length && !skipped) ? (
         <SetupForm
           key={account.userId}
           account={account}
           settings={settings.data}
           onSaved={() => setEditing(false)}
+          onSkip={() => {
+            setSkipped(true);
+            setEditing(false);
+          }}
         />
       ) : (
         <Button variant="secondary" onClick={() => setEditing(true)}>
@@ -77,10 +82,12 @@ function SetupForm({
   account,
   settings,
   onSaved,
+  onSkip,
 }: {
   account: AthleteAccountData;
   settings: MatchingSettings;
   onSaved: () => void;
+  onSkip: () => void;
 }) {
   const [name, setName] = useState(account.fullName || account.authName || "");
   const [club, setClub] = useState(account.clubOrTeam);
@@ -130,7 +137,11 @@ function SetupForm({
       await client.cancelQueries({ queryKey: ["my-external-runner-matches"] });
       client.removeQueries({ queryKey: ["my-external-runner-matches"] });
       onSaved();
-      void navigate({ to: "/athlete-account", search: { section: "potential" } });
+      void navigate({
+        to: "/athlete-account",
+        search: { section: "potential" },
+        hash: "account-section-content",
+      });
     },
   });
   const field = "min-h-11 w-full rounded-lg border border-border bg-bg px-3 py-2 text-fg";
@@ -229,7 +240,13 @@ function SetupForm({
         <Button disabled={save.isPending} type="submit">
           {save.isPending ? "Finding your results…" : "Save and find my results"}
         </Button>
-        <Link to="/athlete-account" search={{ section: "potential" }} className="text-sm underline">
+        <Link
+          to="/athlete-account"
+          search={{ section: "potential" }}
+          hash="account-section-content"
+          onClick={onSkip}
+          className="text-sm underline"
+        >
           Review available results now
         </Link>
       </div>

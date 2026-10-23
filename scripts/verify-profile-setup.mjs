@@ -224,6 +224,8 @@ try {
       const errors = [];
       page.on("pageerror", (e) => errors.push(e.message));
       await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle" });
+      await page.getByRole("link", { name: "Review available results now" }).click();
+      await page.getByRole("button", { name: "Add clubs or profile links" }).click();
       await page.getByLabel("Full racing name", { exact: true }).fill("Synthetic Runner");
       await page
         .getByLabel("Current club or team (optional)", { exact: true })
