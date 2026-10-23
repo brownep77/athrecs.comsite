@@ -10,6 +10,14 @@ export const performanceTimingSchema = z.object({
 });
 export type PerformanceTiming = z.infer<typeof performanceTimingSchema>;
 
+/** Explicit hours and minutes establish a finish without supplying exact seconds. */
+export function hasMinutePrecisionTime(performance: string): boolean {
+  const match = /^(\d+)h ?([0-5]\d)m$/i.exec(performance.trim());
+  if (!match) return false;
+  const hours = Number(match[1]);
+  return Number.isSafeInteger(hours) && (hours > 0 || Number(match[2]) > 0);
+}
+
 /** A distance covered in a fixed-duration event establishes a finish, never a timed mark. */
 export function hasFixedDurationDistanceMark(performance: string, discipline: string): boolean {
   if (!/^(?:6|12|24|48)\s*(?:h|hrs?|hours?)(?:\s+running)?$/i.test(discipline.trim()))
@@ -34,6 +42,7 @@ export function timingLabel(basis: PerformanceTiming["basis"]): string {
 
 export function historicalTimingLines(performance: string, timing?: PerformanceTiming): string[] {
   const lines = [timingLabel(timing?.basis ?? "unknown")];
+  if (hasMinutePrecisionTime(performance)) lines.unshift("Time recorded to minutes");
   if (timing?.chip && !(timing.basis === "chip" && timing.chip === performance))
     lines.push(`Chip ${timing.chip}`);
   if (timing?.gun && !(timing.basis === "gun" && timing.gun === performance))

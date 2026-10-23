@@ -9,6 +9,14 @@ import {
   sourceHistorySports,
 } from "../src/lib/athrecs/profile-history-results.ts";
 import { historyPerformanceSchema } from "../src/lib/athrecs/source-performance-history.ts";
+import { hasMinutePrecisionTime, hasTimedMark } from "../src/lib/athrecs/performance-timing.ts";
+import { hasFinishMark } from "../src/lib/athrecs/profile-result-presentation.ts";
+import {
+  historicalMark,
+  historicalPbEligible,
+  historicalTime,
+} from "../src/lib/athrecs/history-performance.ts";
+import { profilePersonalBestSummary } from "../src/lib/athrecs/profile-personal-best-summary.ts";
 
 const today = new Date("2026-10-09T12:00:00Z");
 const row = (extra = {}) => ({
@@ -57,6 +65,55 @@ assert.deepEqual(sourceHistorySports(history([row({ discipline: "5km road relay 
 ]);
 const board = (rows, recorded = []) =>
   buildProfileAchievements(profileAchievementResults(recorded, history(rows)), today);
+
+// Some original results record hours and minutes without supplying seconds.
+for (const performance of ["3h 44m", "3h44m", "0h 01m", "3h 00m", "27h 59m"]) {
+  const minuteRow = historyPerformanceSchema.parse(row({ discipline: "Marathon", performance }));
+  assert.equal(hasMinutePrecisionTime(performance), true);
+  assert.equal(hasFinishMark(performance), true);
+  assert.equal(isCompletedHistoryResult(minuteRow, today), true);
+  assert.equal(hasTimedMark(performance, "Marathon"), false, "No exact timed mark is invented");
+  assert.equal(historicalTime(performance), null);
+  assert.equal(historicalMark(minuteRow), null);
+  assert.equal(historicalPbEligible(minuteRow), false);
+  const projected = profileAchievementResults([], history([minuteRow]))[0];
+  assert.equal(projected.history.performance.performance, performance, "Keep the source text");
+  assert.equal(projected.finishTimeSeconds, null);
+  assert.equal(projected.chipTimeSeconds, null);
+  assert.equal(projected.gunTimeSeconds, null);
+  const achievements = board([minuteRow]);
+  assert.equal(achievements.finishes.length, 1);
+  assert.equal(achievements.marathons.length, 1);
+  assert.equal(achievements.countries.length, 1);
+  assert.deepEqual(profilePersonalBestSummary([], history([minuteRow])), []);
+  assert.deepEqual(
+    profilePersonalBestSummary([], history([{ ...minuteRow, reportedPersonalBest: true }])),
+    [],
+    "An opted-in reported PB still needs an exact time",
+  );
+}
+for (const performance of [
+  "0h 00m", "0h00m", "3h60m", "3h -1m", "-1h 44m", "3h 4m",
+  "3h 44m 00s", "3h 44m DNF", "DNF", "999999999999999999h 44m",
+]) {
+  assert.equal(hasMinutePrecisionTime(performance), false, performance);
+  assert.equal(hasFinishMark(performance), false, performance);
+  assert.equal(board([row({ discipline: "Marathon", performance })]).finishes.length, 0);
+}
+assert.equal(historicalTime("3:44"), 224, "Colon notation keeps its existing minutes:seconds meaning");
+for (const extra of [
+  { profileExcluded: true },
+  { syntheticTest: true },
+  { date: "2199-01-01" },
+  { notes: "Conflicting source results" },
+  { disqualification: { reason: "other", decisionDate: "2026-01-01", sourceUrl: "https://example.test/dq" } },
+])
+  assert.equal(
+    board([row({ discipline: "Marathon", performance: "3h 44m", ...extra })]).finishes.length,
+    0,
+    "Minute precision does not bypass completion exclusions",
+  );
+
 assert.equal(historyResultCountry(row()), "United Kingdom");
 assert.equal(historyResultCountry(row({ country: "", venue: "Valencia, ESP" })), "Spain");
 assert.equal(historyResultCountry(row({ country: "", venue: "Paris, FRA" })), "France");

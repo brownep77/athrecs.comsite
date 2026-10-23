@@ -2,7 +2,7 @@ import type { ProfileResult } from "./profile-records";
 import type { SourcePerformance } from "./source-performance-history";
 import type { ReportedRaceRecord } from "./reported-race-history";
 import { isDisqualified } from "./result-details.ts";
-import { hasFixedDurationDistanceMark } from "./performance-timing.ts";
+import { hasFixedDurationDistanceMark, hasMinutePrecisionTime } from "./performance-timing.ts";
 
 export type ResultVerification = { verified: boolean; explanation: string };
 
@@ -38,6 +38,7 @@ const nonFinish =
 export function hasFinishMark(mark: string, place = ""): boolean {
   if (nonFinish.test(mark) || /\+/.test(mark)) return false;
   const time = mark.trim().replace(/\s*\(SC\)$/i, "");
+  if (hasMinutePrecisionTime(time)) return true;
   if (/^(?:\d+:)*\d+(?:\.\d+)?a?(?:\((?:\d+:)*\d+(?:\.\d+)?\))?[aiwch]*$/i.test(time))
     return /[1-9]/.test(time);
   if (/^(?:finished|completed|fin)$/i.test(time)) return true;

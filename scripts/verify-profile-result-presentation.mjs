@@ -382,6 +382,35 @@ try {
   assert.equal(historicalTimingText("2:30:00(2:32:00)", "Half Marathon"), "Timing unknown");
   assert.equal(historicalTimingText("61:18a", "Half Marathon"), "Timing unknown");
   assert.equal(historicalTimingText("3:57.18", "1500 Metres"), "Timing unknown");
+  assert.equal(
+    historicalTimingText("3h 44m", "Marathon"),
+    "Time recorded to minutes · Timing unknown",
+  );
+  for (const performance of ["0h00m", "3h60m", "3h 44m DNF"])
+    assert.equal(historicalTimingText(performance, "Marathon"), "");
+  const minutePrecisionRow = historyPerformanceSchema.parse({
+    ...historyResults[4].performance,
+    discipline: "Marathon",
+    performance: "3h 44m",
+    place: "",
+    timing: { basis: "unknown" },
+  });
+  const minuteMarkup = load(
+    renderToStaticMarkup(
+      createElement("table", null,
+        createElement("tbody", null,
+          createElement(HistoricalResultRow, {
+            result: { key: "synthetic:minute-precision", sport: "Running", performance: minutePrecisionRow },
+            hasActions: false,
+          }),
+        ),
+      ),
+    ),
+  );
+  assert.equal(minuteMarkup('[data-label="Performance"]').contents().first().text(), "3h 44m");
+  assert.equal(minuteMarkup('[data-result-timing]').text(), "Time recorded to minutes · Timing unknown");
+  assert.equal(minuteMarkup('[data-profile-award="finisher"]').length, 1);
+  assert(!minuteMarkup('[data-label="Performance"]').text().includes("3:44:00"));
   for (const [performance, discipline] of [
     ["DNF", "5000 Metres"],
     ["7.90", "LJ"],
