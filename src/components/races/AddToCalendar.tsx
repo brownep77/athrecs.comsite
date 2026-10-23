@@ -1,110 +1,104 @@
-import { useId, useMemo, useState } from "react";
-import { Trigger as DialogTrigger } from "@radix-ui/react-dialog";
-import { CalendarPlus, Download, ExternalLink } from "lucide-react";
+import { useMemo } from "react";
+import { CalendarPlus, ChevronDown, Download, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import {
   buildCalendarEvent,
-  calendarFilename,
-  calendarIcs,
   calendarLinks,
   calendarUnavailable,
   type CalendarRace,
 } from "@/lib/athrecs/event-calendar";
 
-/** One edition per control: never silently export a different distance or date. */
+/** Native disclosure and form submission work before hydration and without JavaScript. */
 export function AddToCalendar({ race }: { race: CalendarRace }) {
-  const noticeId = useId();
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const unavailable = calendarUnavailable(race);
-  const event = useMemo(() => (open ? buildCalendarEvent(race) : null), [open, race]);
-  const links = event ? calendarLinks(event) : null;
-  const download = () => {
-    if (!event) return;
-    setError(null);
-    try {
-      const url = URL.createObjectURL(
-        new Blob([calendarIcs(event)], { type: "text/calendar;charset=utf-8" }),
-      );
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = calendarFilename(event);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      // Safari may not start consuming the blob synchronously.
-      window.setTimeout(() => URL.revokeObjectURL(url), 60000);
-    } catch {
-      setError("The calendar file could not be created. Please try a calendar link or try again.");
-    }
+  const event = useMemo(() => buildCalendarEvent(race), [race]);
+  const label = `Add ${race.name}, ${race.distance ?? "event"}, ${race.date} to calendar`;
+  if (unavailable || !event) {
+    return (
+      <Button
+        type="button"
+        variant="secondary"
+        disabled
+        title={unavailable ?? undefined}
+        aria-label={label}
+      >
+        <CalendarPlus className="h-4 w-4" aria-hidden="true" /> Add to calendar
+      </Button>
+    );
+  }
+  const links = calendarLinks(event);
+  // Only public calendar fields travel to the independently validated download.
+  const payload: CalendarRace = {
+    id: race.id,
+    name: race.name,
+    date: race.date,
+    distance: race.distance,
+    startTime: race.startTime,
+    startLabel: race.startLabel,
+    endDate: race.endDate,
+    endTime: race.endTime,
+    timeZone: race.timeZone,
+    location: race.location,
+    pageUrl: race.pageUrl,
+    officialUrl: race.officialUrl,
+    entryUrl: race.entryUrl,
+    status: race.status,
+    provisional: race.provisional,
   };
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(value) => {
-        setOpen(value);
-        setError(null);
-      }}
-    >
-      <DialogTrigger asChild>
-        <Button
-          type="button"
-          variant="secondary"
-          disabled={Boolean(unavailable)}
-          title={unavailable ?? undefined}
-          aria-label={`Add ${race.name}, ${race.distance ?? "event"}, ${race.date} to calendar`}
-        >
-          <CalendarPlus className="h-4 w-4" aria-hidden="true" /> Add to calendar
-        </Button>
-      </DialogTrigger>
-      {open && event && links ? (
-        <DialogContent className="max-h-[85dvh] overflow-y-auto" aria-describedby={noticeId}>
-          <DialogHeader>
-            <DialogTitle>Add to calendar</DialogTitle>
-          </DialogHeader>
-          <p className="break-words font-semibold">{event.title}</p>
-          <p className="text-sm text-muted">
-            {race.date}
-            {event.startUtc ? ` · ${race.startTime} (${event.timeZone})` : " · Date-only reminder"}
-          </p>
-          {race.provisional ? (
-            <p className="text-sm font-semibold">Provisional date — confirm with the organiser.</p>
-          ) : null}
-          <p className="text-sm text-muted">{event.notice}</p>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {[
-              ["Google Calendar", links.google],
-              ["Outlook.com", links.outlook],
-              ["Microsoft 365", links.office],
-            ].map(([label, href]) => (
-              <Button key={label} asChild variant="secondary">
-                <a href={href} target="_blank" rel="noopener noreferrer">
-                  {label}
-                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                </a>
-              </Button>
-            ))}
-            <Button type="button" variant="secondary" onClick={download}>
-              Apple Calendar
-              <Download className="h-4 w-4" aria-hidden="true" />
+    <details className="group min-w-0" suppressHydrationWarning>
+      <summary
+        aria-label={label}
+        className="inline-flex min-h-11 cursor-pointer list-none items-center justify-center gap-2 rounded-md border border-border bg-elevated px-4 py-2 text-sm font-medium text-fg hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 [&::-webkit-details-marker]:hidden"
+      >
+        <CalendarPlus className="h-4 w-4" aria-hidden="true" /> Add to calendar
+        <ChevronDown
+          className="h-4 w-4 transition-transform group-open:rotate-180"
+          aria-hidden="true"
+        />
+      </summary>
+      <div
+        role="group"
+        aria-label="Calendar options"
+        className="mt-3 max-w-xl space-y-3 rounded-xl border border-border bg-surface p-4"
+      >
+        <p className="break-words font-semibold">{event.title}</p>
+        <p className="text-sm text-muted">
+          {race.date}
+          {event.startUtc ? ` · ${race.startTime} (${event.timeZone})` : " · Date-only reminder"}
+        </p>
+        {race.provisional ? (
+          <p className="text-sm font-semibold">Provisional date — confirm with the organiser.</p>
+        ) : null}
+        <p className="text-sm text-muted">{event.notice}</p>
+        <form method="post" action="/api/event-calendar" className="grid gap-2 sm:grid-cols-2">
+          <input type="hidden" name="race" value={JSON.stringify(payload)} />
+          {[
+            ["Google Calendar", links.google],
+            ["Outlook.com", links.outlook],
+            ["Microsoft 365", links.office],
+          ].map(([name, href]) => (
+            <Button key={name} asChild variant="secondary">
+              <a href={href} target="_blank" rel="noopener noreferrer">
+                {name}
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </a>
             </Button>
-            <Button type="button" variant="secondary" onClick={download} className="sm:col-span-2">
-              Other calendars (.ics)
-              <Download className="h-4 w-4" aria-hidden="true" />
-            </Button>
-          </div>
-          <p id={noticeId} className="text-xs text-muted">
-            Review and save in your calendar. For Apple and other calendar apps, open the downloaded
-            file. This is a one-off copy; check the race page for changes or cancellations.
-          </p>
-          {error ? (
-            <p role="alert" className="text-sm">
-              {error}
-            </p>
-          ) : null}
-        </DialogContent>
-      ) : null}
-    </Dialog>
+          ))}
+          <Button type="submit" variant="secondary">
+            Apple Calendar
+            <Download className="h-4 w-4" aria-hidden="true" />
+          </Button>
+          <Button type="submit" variant="secondary" className="sm:col-span-2">
+            Other calendars (.ics)
+            <Download className="h-4 w-4" aria-hidden="true" />
+          </Button>
+        </form>
+        <p className="text-xs text-muted">
+          Review and save in your calendar. For Apple and other calendar apps, open the downloaded
+          file. This is a one-off copy; check the race page for changes or cancellations.
+        </p>
+      </div>
+    </details>
   );
 }

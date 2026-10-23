@@ -5,6 +5,7 @@ import { createRequire } from "node:module";
 import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { calendarDownloadResponse } from "../src/lib/athrecs/calendar-download.ts";
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.ATHRECS_BROWSER_MODULE || "playwright");
 const root = path.resolve("artifacts/calendar-browser-fixture");
@@ -15,12 +16,12 @@ fs.writeFileSync(
 );
 fs.writeFileSync(
   path.join(root, "index.html"),
-  '<html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>',
+  '<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="root"></div><link rel="stylesheet" href="/style.css?direct"><script type="module" src="/entry.tsx"></script></body></html>',
 );
 fs.writeFileSync(
   path.join(root, "main.tsx"),
   `
-import React,{useState} from 'react';import{createRoot}from'react-dom/client';
+import React,{useState} from 'react';
 import{AddToCalendar}from'/@fs/${path.resolve("src/components/races/AddToCalendar.tsx")}';
 import{RacePracticalInformation}from'/@fs/${path.resolve("src/components/races/RacePracticalInformation.tsx")}';
 import './style.css';
@@ -34,13 +35,42 @@ function App(){const[other,setOther]=useState(false);return <main style={{maxWid
 <div data-case="provisional"><AddToCalendar race={{...base,id:'provisional',provisional:true,startTime:null,endDate:'2027-07-06'}}/></div>
 <div data-case="long"><AddToCalendar race={{...base,id:'long',name:'Very long international race name 東京 '.repeat(8),location:'Long location '.repeat(60)}}/></div>
 <div data-case="integrated"><RacePracticalInformation data={{event:{id:9,slug:'synthetic',name:'Synthetic integrated race',sport:'Running',country:'England',county:'Norfolk',city:'Norwich',website:'https://example.org',description:'Synthetic test',surface:'Road'},upcoming:[{id:91,event_date:'2027-07-04',distance_code:'Half',distance_km:21.0975,start_time:'10:00',status:'Open',entry_options:[],entry_url:null,source_url:null},{id:92,event_date:'2027-07-04',distance_code:'Marathon',distance_km:42.195,start_time:'08:30',status:'Open',entry_options:[],entry_url:null,source_url:null}],past:[],groups:[],distances:[],related:[]}}/></div>
-</main>}createRoot(document.getElementById('root')!).render(<App/>);
+</main>}export{App};
 `,
+);
+fs.writeFileSync(
+  path.join(root, "entry.tsx"),
+  `import React from 'react';import{hydrateRoot}from'react-dom/client';import{App}from'./main';hydrateRoot(document.getElementById('root')!,<App/>);document.documentElement.dataset.calendarHydrated='yes';`,
+);
+fs.writeFileSync(
+  path.join(root, "ssr.tsx"),
+  `import React from 'react';import{renderToString}from'react-dom/server';import{App}from'./main';export const markup=renderToString(<App/>);`,
 );
 const server = await createServer({
   configFile: false,
   root,
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    {
+      name: "calendar-download-fixture",
+      configureServer(vite) {
+        vite.middlewares.use("/api/event-calendar", async (req, res) => {
+          const chunks = [];
+          for await (const c of req) chunks.push(c);
+          const response = await calendarDownloadResponse(
+            new Request("http://127.0.0.1:8106/api/event-calendar", {
+              method: req.method,
+              headers: req.headers,
+              body: Buffer.concat(chunks),
+            }),
+          );
+          res.writeHead(response.status, Object.fromEntries(response.headers));
+          res.end(Buffer.from(await response.arrayBuffer()));
+        });
+      },
+    },
+  ],
   resolve: { alias: { "@": path.resolve("src") }, dedupe: ["react", "react-dom"] },
   server: {
     host: "127.0.0.1",
@@ -55,6 +85,13 @@ const errors = [];
 let downloads = 0;
 try {
   await server.listen();
+  const { markup } = await server.ssrLoadModule("/ssr.tsx");
+  fs.writeFileSync(
+    path.join(root, "index.html"),
+    fs
+      .readFileSync(path.join(root, "index.html"), "utf8")
+      .replace('<div id="root"></div>', '<div id="root">' + markup + "</div>"),
+  );
   browser = await chromium.launch({
     headless: true,
     executablePath: process.env.ATHRECS_CHROMIUM_EXECUTABLE || undefined,
@@ -62,9 +99,9 @@ try {
   page = await browser.newPage({ viewport: { width: 1280, height: 900 }, acceptDownloads: true });
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("http://127.0.0.1:8106");
-  const mainButton = page.locator('[data-case="changing"] button');
+  const mainButton = page.locator('[data-case="changing"] summary');
   await mainButton.click();
-  const dialog = page.getByRole("dialog");
+  const dialog = page.locator('details[open] [role="group"]');
   await dialog.waitFor();
   assert.match(await dialog.innerText(), /Half marathon/);
   for (const [name, host] of [
@@ -92,11 +129,11 @@ try {
     assert(download.suggestedFilename().endsWith(".ics"));
     downloads++;
   }
-  await page.keyboard.press("Escape");
+  await page.locator("details[open] > summary").click();
   await dialog.waitFor({ state: "hidden" });
   assert(
     await mainButton.evaluate((el) => document.activeElement === el),
-    "Closing dialog must return keyboard focus to its trigger",
+    "Closing the native disclosure keeps keyboard focus on its summary",
   );
   await page.getByRole("button", { name: "Change selected distance" }).click();
   await mainButton.click();
@@ -105,21 +142,21 @@ try {
     await dialog.getByRole("link", { name: "Google Calendar", exact: true }).getAttribute("href"),
     /20270704T073000Z/,
   );
-  await page.keyboard.press("Escape");
+  await page.locator("details[open] > summary").click();
   assert(await page.locator('[data-case="cancelled"] button').isDisabled());
   assert(await page.locator('[data-case="invalid"] button').isDisabled());
-  await page.locator('[data-case="unknown"] button').click();
+  await page.locator('[data-case="unknown"] summary').click();
   assert.match(await dialog.innerText(), /Date-only reminder/);
   const allDay = new URL(
     await dialog.getByRole("link", { name: "Google Calendar", exact: true }).getAttribute("href"),
   );
   assert.equal(allDay.searchParams.get("dates"), "20270704/20270705");
-  await page.keyboard.press("Escape");
-  await page.locator('[data-case="provisional"] button').click();
+  await page.locator("details[open] > summary").click();
+  await page.locator('[data-case="provisional"] summary').click();
   assert.match(await dialog.innerText(), /Provisional date/);
-  await page.keyboard.press("Escape");
+  await page.locator("details[open] > summary").click();
   const integrated = page.locator('[data-case="integrated"]');
-  const addButtons = integrated.getByRole("button", { name: /to calendar/ });
+  const addButtons = integrated.locator("summary");
   assert.equal(await addButtons.count(), 2);
   for (let i = 0; i < 2; i++) {
     await addButtons.nth(i).click();
@@ -130,11 +167,11 @@ try {
       params.get("dates"),
       i === 0 ? "20270704T090000Z/20270704T090000Z" : "20270704T073000Z/20270704T073000Z",
     );
-    await page.keyboard.press("Escape");
+    await page.locator("details[open] > summary").click();
   }
   for (const width of [320, 390, 768, 1280]) {
     await page.setViewportSize({ width, height: 844 });
-    await page.locator('[data-case="long"] button').click();
+    await page.locator('[data-case="long"] summary').click();
     assert(
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
       "overflow at " + width,
@@ -145,23 +182,54 @@ try {
       assert(box.x >= 0 && box.x + box.width <= width + 1, "control clipped");
     }
     await page.screenshot({ path: "artifacts/calendar-" + width + ".png", fullPage: true });
-    await page.keyboard.press("Escape");
+    await page.locator("details[open] > summary").click();
   }
-  // A platform download failure must remain recoverable.
-  await mainButton.click();
-  await page.evaluate(() => {
-    URL.createObjectURL = () => {
-      throw new Error("synthetic unavailable download");
-    };
-  });
-  await dialog.getByRole("button", { name: "Apple Calendar", exact: true }).click();
-  assert.match(await dialog.getByRole("alert").innerText(), /could not be created/);
-  assert(await dialog.getByRole("link", { name: "Google Calendar", exact: true }).isVisible());
+  // The actual reported boundary: choices and downloads cannot depend on JS.
+  for (const mode of ["disabled", "delayed"]) {
+    const context = await browser.newContext({
+      javaScriptEnabled: mode !== "disabled",
+      acceptDownloads: true,
+      viewport: { width: 390, height: 844 },
+    });
+    const noJs = await context.newPage();
+    noJs.on("pageerror", (e) => errors.push(e.message));
+    let release;
+    if (mode === "delayed") {
+      const gate = new Promise((resolve) => {
+        release = resolve;
+      });
+      await noJs.route("**/entry.tsx", async (route) => {
+        await gate;
+        await route.continue();
+      });
+    }
+    await noJs.goto("http://127.0.0.1:8106", { waitUntil: mode === "delayed" ? "commit" : "load" });
+    const summary = noJs.locator('[data-case="changing"] summary');
+    await summary.click();
+    const choices = noJs.locator('[data-case="changing"] [role="group"]');
+    assert(await choices.isVisible(), mode + " scripts: choices must open");
+    for (const name of ["Google Calendar", "Outlook.com", "Microsoft 365"])
+      assert(await choices.getByRole("link", { name, exact: true }).isVisible());
+    if (release) {
+      release();
+      await noJs.waitForFunction(() => document.documentElement.dataset.calendarHydrated === "yes");
+      assert(await choices.isVisible(), "Hydration must preserve an already open menu");
+    }
+    const pending = noJs.waitForEvent("download");
+    await choices.getByRole("button", { name: "Apple Calendar", exact: true }).click();
+    const downloaded = await pending;
+    assert.match(fs.readFileSync(await downloaded.path(), "utf8"), /DTSTART:20270704T090000Z/);
+    downloads++;
+    await summary.focus();
+    await noJs.keyboard.press("Space");
+    assert(!(await choices.isVisible()), "Native keyboard toggle");
+    await context.close();
+  }
   assert.deepEqual(errors, []);
   console.log(
     "PASS: real React controls and integrated race schedule; 3 provider URLs; " +
       downloads +
-      " downloaded ICS files; changed distances; date-only and disabled states; keyboard focus; download failure recovery; 320/390/768/1280px.",
+      " downloaded ICS files; changed distances; date-only and disabled states; native keyboard controls; scripts disabled/delayed; server ICS downloads; 320/390/768/1280px.",
   );
 } finally {
   await browser?.close();
