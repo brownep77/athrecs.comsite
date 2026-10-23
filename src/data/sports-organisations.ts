@@ -6020,4 +6020,268 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
+  record({
+  "slug": "afghanistan-athletics",
+  "name": "Afghanistan Athletic Federation",
+  "type": "national",
+  "country": "Afghanistan",
+  "jurisdiction": "Afghanistan",
+  "territories": [
+    "Afghanistan"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Afghanistan, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "afghanistan-cycling",
+  "name": "Afghanistan Cycling Federation",
+  "type": "national",
+  "country": "Afghanistan",
+  "jurisdiction": "Afghanistan",
+  "territories": [
+    "Afghanistan"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Afghanistan, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "north-korea-athletics",
+  "name": "Amateur Athletics Association of DPR of Korea",
+  "type": "national",
+  "country": "North Korea",
+  "jurisdiction": "North Korea",
+  "territories": [
+    "North Korea"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for North Korea, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "north-korea-cycling",
+  "name": "Cycling Association of the Democratic People's Republic of Korea",
+  "type": "national",
+  "country": "North Korea",
+  "jurisdiction": "North Korea",
+  "territories": [
+    "North Korea"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for North Korea, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "palestine-athletics",
+  "name": "Palestine Athletic Federation",
+  "type": "national",
+  "country": "Palestine",
+  "jurisdiction": "Palestine",
+  "territories": [
+    "Palestine"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Palestine, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "palestine-cycling",
+  "name": "Palestinian Cycling Federation",
+  "type": "national",
+  "country": "Palestine",
+  "jurisdiction": "Palestine",
+  "territories": [
+    "Palestine"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Palestine, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "syria-athletics",
+  "name": "Syrian Arab Athletic Federation",
+  "type": "national",
+  "country": "Syria",
+  "jurisdiction": "Syria",
+  "territories": [
+    "Syria"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Syria, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "syria-cycling",
+  "name": "Syrian Arab Cycling Federation",
+  "type": "national",
+  "country": "Syria",
+  "jurisdiction": "Syria",
+  "territories": [
+    "Syria"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Syria, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "timor-leste-athletics",
+  "name": "Federação Timor-Leste de Atletismo",
+  "type": "national",
+  "country": "Timor-Leste",
+  "jurisdiction": "Timor-Leste",
+  "territories": [
+    "Timor-Leste"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Timor-Leste, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "timor-leste-cycling",
+  "name": "East Timor Cycling Federation",
+  "type": "national",
+  "country": "Timor-Leste",
+  "jurisdiction": "Timor-Leste",
+  "territories": [
+    "Timor-Leste"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Timor-Leste, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "yemen-athletics",
+  "name": "Yemen Athletics Federation",
+  "type": "national",
+  "country": "Yemen",
+  "jurisdiction": "Yemen",
+  "territories": [
+    "Yemen"
+  ],
+  "sports": [
+    "track-and-field"
+  ],
+  "summary": "National athletics body for Yemen, listed by Asian Athletics.",
+  "website": "https://asianathletics.com/member-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://asianathletics.com/member-federations"
+  ],
+  "related": [
+    "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "yemen-cycling",
+  "name": "Yemen Cycling Federation",
+  "type": "national",
+  "country": "Yemen",
+  "jurisdiction": "Yemen",
+  "territories": [
+    "Yemen"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Yemen, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/asia-continental-confederations-national-federations/2qHYguLi3IuvD3iCfHX9Aa"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
 ];
