@@ -207,7 +207,7 @@ for (const country of [
     assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
   }
 }
-assert.equal(getSportsOrganisation("british-triathlon").checkedAt, "2026-10-22");
+assert.equal(getSportsOrganisation("british-triathlon").checkedAt, "2026-10-23");
 for (const country of [
   "Bolivia",
   "Costa Rica",
