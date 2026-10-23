@@ -122,6 +122,9 @@ jobs:
       - name: Reviewed source-verification batch safeguards
         run: npm run verify:source-verification-batch
 
+      - name: Trackie high-jump status and nonfinish safeguards
+        run: npm run verify:trackie-result-status
+
       - name: Verify historical result source safeguards
         run: |
           node scripts/verify-result-source-sync.mjs
