@@ -71,7 +71,15 @@ try {
           .getAttribute("href"),
       ).searchParams.get("dates");
       const pending = page.waitForEvent("download");
-      await choices.getByRole("button", { name: "Apple Calendar", exact: true }).click();
+      assert.match(
+        await choices
+          .getByRole("link", { name: "Apple Calendar", exact: true })
+          .getAttribute("href"),
+        /^\/my-race-calendar\?race=/,
+      );
+      await choices
+        .getByRole("button", { name: "Download calendar file (.ics)", exact: true })
+        .click();
       const download = await pending;
       const text = fs.readFileSync(await download.path(), "utf8");
       assert.match(text, /BEGIN:VCALENDAR/);

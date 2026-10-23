@@ -119,7 +119,11 @@ try {
     assert.equal(await link.getAttribute("target"), "_blank");
     assert.match(await link.getAttribute("rel"), /noopener/);
   }
-  for (const name of ["Apple Calendar", "Other calendars (.ics)"]) {
+  assert.equal(
+    await dialog.getByRole("link", { name: "Apple Calendar", exact: true }).getAttribute("href"),
+    "/my-race-calendar?race=synthetic-half",
+  );
+  for (const name of ["Download calendar file (.ics)"]) {
     const pending = page.waitForEvent("download");
     await dialog.getByRole("button", { name, exact: true }).click();
     const download = await pending;
@@ -216,7 +220,10 @@ try {
       assert(await choices.isVisible(), "Hydration must preserve an already open menu");
     }
     const pending = noJs.waitForEvent("download");
-    await choices.getByRole("button", { name: "Apple Calendar", exact: true }).click();
+    assert(await choices.getByRole("link", { name: "Apple Calendar", exact: true }).isVisible());
+    await choices
+      .getByRole("button", { name: "Download calendar file (.ics)", exact: true })
+      .click();
     const downloaded = await pending;
     assert.match(fs.readFileSync(await downloaded.path(), "utf8"), /DTSTART:20270704T090000Z/);
     downloads++;

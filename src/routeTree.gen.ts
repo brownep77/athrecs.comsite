@@ -19,6 +19,7 @@ import { Route as ClaimResultsRouteImport } from './routes/claim-results'
 import { Route as FindEventsRouteImport } from './routes/find-events'
 import { Route as JoinRouteImport } from './routes/join'
 import { Route as MyAthleteProfileRouteImport } from './routes/my-athlete-profile'
+import { Route as MyRaceCalendarRouteImport } from './routes/my-race-calendar'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
@@ -104,6 +105,7 @@ import { Route as SportsSportRouteImport } from './routes/sports/$sport'
 import { Route as LanguageCountryIndexRouteImport } from './routes/$language/$country/index'
 import { Route as AdminAthletesAthleteIdRouteImport } from './routes/admin/athletes.$athleteId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ApiRaceCalendarTokenRouteImport } from './routes/api/race-calendar/$token'
 import { Route as RacesPlacesIndexRouteImport } from './routes/races/places/index'
 import { Route as RacesPlacesSplatRouteImport } from './routes/races/places/$'
 import { Route as RunningRacesSlugRouteImport } from './routes/running/races/$slug'
@@ -160,6 +162,11 @@ const JoinRoute = JoinRouteImport.update({
 const MyAthleteProfileRoute = MyAthleteProfileRouteImport.update({
   id: '/my-athlete-profile',
   path: '/my-athlete-profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyRaceCalendarRoute = MyRaceCalendarRouteImport.update({
+  id: '/my-race-calendar',
+  path: '/my-race-calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OpportunitiesRoute = OpportunitiesRouteImport.update({
@@ -593,6 +600,11 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiRaceCalendarTokenRoute = ApiRaceCalendarTokenRouteImport.update({
+  id: '/api/race-calendar/$token',
+  path: '/api/race-calendar/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RacesPlacesIndexRoute = RacesPlacesIndexRouteImport.update({
   id: '/races/places/',
   path: '/races/places/',
@@ -644,6 +656,7 @@ export interface FileRoutesByFullPath {
   '/find-events': typeof FindEventsRoute
   '/join': typeof JoinRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
+  '/my-race-calendar': typeof MyRaceCalendarRoute
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
@@ -728,6 +741,7 @@ export interface FileRoutesByFullPath {
   '/running/': typeof RunningIndexRoute
   '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
@@ -748,6 +762,7 @@ export interface FileRoutesByTo {
   '/find-events': typeof FindEventsRoute
   '/join': typeof JoinRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
+  '/my-race-calendar': typeof MyRaceCalendarRoute
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
@@ -832,6 +847,7 @@ export interface FileRoutesByTo {
   '/running': typeof RunningIndexRoute
   '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
@@ -853,6 +869,7 @@ export interface FileRoutesById {
   '/find-events': typeof FindEventsRoute
   '/join': typeof JoinRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
+  '/my-race-calendar': typeof MyRaceCalendarRoute
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
@@ -937,6 +954,7 @@ export interface FileRoutesById {
   '/running/': typeof RunningIndexRoute
   '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
@@ -959,6 +977,7 @@ export interface FileRouteTypes {
     | '/find-events'
     | '/join'
     | '/my-athlete-profile'
+    | '/my-race-calendar'
     | '/opportunities'
     | '/privacy'
     | '/race-series'
@@ -1043,6 +1062,7 @@ export interface FileRouteTypes {
     | '/running/'
     | '/admin/athletes/$athleteId'
     | '/api/auth/$'
+    | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
     | '/running/ultramarathons/$slug'
@@ -1063,6 +1083,7 @@ export interface FileRouteTypes {
     | '/find-events'
     | '/join'
     | '/my-athlete-profile'
+    | '/my-race-calendar'
     | '/opportunities'
     | '/privacy'
     | '/race-series'
@@ -1147,6 +1168,7 @@ export interface FileRouteTypes {
     | '/running'
     | '/admin/athletes/$athleteId'
     | '/api/auth/$'
+    | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
     | '/running/ultramarathons/$slug'
@@ -1167,6 +1189,7 @@ export interface FileRouteTypes {
     | '/find-events'
     | '/join'
     | '/my-athlete-profile'
+    | '/my-race-calendar'
     | '/opportunities'
     | '/privacy'
     | '/race-series'
@@ -1251,6 +1274,7 @@ export interface FileRouteTypes {
     | '/running/'
     | '/admin/athletes/$athleteId'
     | '/api/auth/$'
+    | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
     | '/running/ultramarathons/$slug'
@@ -1272,6 +1296,7 @@ export interface RootRouteChildren {
   FindEventsRoute: typeof FindEventsRoute
   JoinRoute: typeof JoinRoute
   MyAthleteProfileRoute: typeof MyAthleteProfileRoute
+  MyRaceCalendarRoute: typeof MyRaceCalendarRoute
   OpportunitiesRoute: typeof OpportunitiesRoute
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
@@ -1356,6 +1381,7 @@ export interface RootRouteChildren {
   RunningIndexRoute: typeof RunningIndexRoute
   AdminAthletesAthleteIdRoute: typeof AdminAthletesAthleteIdRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiRaceCalendarTokenRoute: typeof ApiRaceCalendarTokenRoute
   RacesPlacesSplatRoute: typeof RacesPlacesSplatRoute
   RunningRacesSlugRoute: typeof RunningRacesSlugRoute
   RunningUltramarathonsSlugRoute: typeof RunningUltramarathonsSlugRoute
@@ -1436,6 +1462,13 @@ declare module '@tanstack/react-router' {
       path: '/my-athlete-profile'
       fullPath: '/my-athlete-profile'
       preLoaderRoute: typeof MyAthleteProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-race-calendar': {
+      id: '/my-race-calendar'
+      path: '/my-race-calendar'
+      fullPath: '/my-race-calendar'
+      preLoaderRoute: typeof MyRaceCalendarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/opportunities': {
@@ -2033,6 +2066,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/race-calendar/$token': {
+      id: '/api/race-calendar/$token'
+      path: '/api/race-calendar/$token'
+      fullPath: '/api/race-calendar/$token'
+      preLoaderRoute: typeof ApiRaceCalendarTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/races/places/': {
       id: '/races/places/'
       path: '/races/places'
@@ -2096,6 +2136,7 @@ const rootRouteChildren: RootRouteChildren = {
   FindEventsRoute: FindEventsRoute,
   JoinRoute: JoinRoute,
   MyAthleteProfileRoute: MyAthleteProfileRoute,
+  MyRaceCalendarRoute: MyRaceCalendarRoute,
   OpportunitiesRoute: OpportunitiesRoute,
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
@@ -2180,6 +2221,7 @@ const rootRouteChildren: RootRouteChildren = {
   RunningIndexRoute: RunningIndexRoute,
   AdminAthletesAthleteIdRoute: AdminAthletesAthleteIdRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiRaceCalendarTokenRoute: ApiRaceCalendarTokenRoute,
   RacesPlacesSplatRoute: RacesPlacesSplatRoute,
   RunningRacesSlugRoute: RunningRacesSlugRoute,
   RunningUltramarathonsSlugRoute: RunningUltramarathonsSlugRoute,

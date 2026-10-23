@@ -9,6 +9,7 @@ const PRIVATE_PATHS = [
   "/api",
   "/auth",
   "/athlete-account",
+  "/my-race-calendar",
   "/my-athlete-profile",
   "/athlete-results",
   "/claim-results",
