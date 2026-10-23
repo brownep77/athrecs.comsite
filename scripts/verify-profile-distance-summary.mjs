@@ -176,6 +176,8 @@ assert.equal(
 );
 
 for (const change of [
+  { distanceCode: "800m", distanceKm: 0.8 },
+  { distanceCode: "0.999K", distanceKm: 0.999 },
   { status: "DNF" },
   { status: "DNS" },
   { status: "DQ" },
@@ -369,6 +371,12 @@ assert.equal(
 // Progressive ultra bonuses are earned by an individual completed race, never
 // by adding together the athlete's shorter events or rounding each event first.
 for (const [distanceKm, expected] of [
+  [1, 11],
+  [1.5, 11.5],
+  [1.609344, 11.61],
+  [2, 12],
+  [3, 13],
+  [4, 14],
   [5, 15],
   [10, 20],
   [21.0975, 31.1],
@@ -386,6 +394,24 @@ for (const [distanceKm, expected] of [
 for (const invalidDistance of [0, -50, NaN, Infinity])
   assert.equal(ultraParticipationBonus(invalidDistance), 0);
 assert.equal(ultraParticipationBonus(42.195), 0, "A marathon does not earn an ultra bonus");
+assert.equal(
+  summary([race(1, { sport: "Athletics", surface: "Track", distanceCode: "1000m", distanceKm: 1 })])
+    .allTime.totalPoints,
+  11,
+  "A complete 1,000m track race earns points",
+);
+assert.equal(
+  summary([], [row({ discipline: "1000m", labels: ["Track"], performance: "3:00" })]).allTime
+    .totalPoints,
+  11,
+  "Historical track 1K is covered",
+);
+assert.equal(
+  summary([race(1, { sport: "Parkrun", surface: "Parkrun", distanceCode: "2K", distanceKm: 2 })])
+    .allTime.totalPoints,
+  12,
+  "Explicit 2K parkrun distance is retained",
+);
 for (const boundary of [42.195, 100, 160.9344]) {
   const before = ultraParticipationBonus(boundary - 0.000001);
   const at = ultraParticipationBonus(boundary);

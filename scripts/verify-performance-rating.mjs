@@ -4,6 +4,7 @@ import {
   performanceRatingCategory,
   performanceRatingDistance,
   historicalRatingTimingConsistent,
+  performanceRatingReference,
 } from "../src/lib/athrecs/performance-rating.ts";
 import { PERFORMANCE_REFERENCE_STANDARDS } from "../src/lib/athrecs/performance-rating-standards.ts";
 
@@ -141,7 +142,77 @@ assert.equal(
 );
 assert.equal(performanceRatingDistance("5M", 8.05).key, "5mi");
 assert.equal(performanceRatingDistance("5K", 8), null);
-assert.equal(performanceRatingDistance("2K", 2), null);
+assert.equal(performanceRatingDistance("2K", 2).km, 2);
+assert.equal(performanceRatingDistance("1000m", 1).km, 1);
+assert.equal(performanceRatingDistance("1500m", 1.5).km, 1.5);
+assert.equal(performanceRatingDistance("Mile", 1.609344).key, "1mi");
+assert.equal(performanceRatingDistance("1 mile", 1.61).key, "1mi");
+assert.equal(performanceRatingDistance("Road mile", 1.609344).key, "1mi");
+assert.equal(performanceRatingDistance("999m", 0.999), null);
+assert.equal(performanceRatingDistance("1K", 2), null);
+assert.equal(
+  performanceRatingDistance("parkrun", 5).key,
+  "5K",
+  "Adding the mile cannot change parkrun's exact distance",
+);
+assert.equal(performanceRatingReference(1.609344, "men").seconds, 227);
+assert.equal(performanceRatingReference(1.609344, "women").seconds, 253);
+assert.equal(performanceRatingReference(1.609344, "men").method, "published-road-standard");
+assert.equal(performanceRatingReference(1.609344, "men").extrapolated, false);
+const oneK = performanceRatingReference(1, "men");
+assert.ok(
+  Math.abs(oneK.seconds - 136.0201520171711) < 0.00000001,
+  "Frozen mile-to-5K segment defines the estimated 1K reference",
+);
+assert.equal(oneK.method, "short-distance-extrapolation");
+assert.equal(oneK.interpolated, true, "Legacy estimate flag includes a below-mile model estimate");
+assert.equal(oneK.extrapolated, true);
+assert.ok(
+  Math.abs(performanceRatingReference(1, "women").seconds - 153.3465347680933) < 0.00000001,
+);
+for (const km of [1, 1.5, 2, 3, 3.218688, 4]) {
+  const rating = score({ distanceCode: `${km}K`, distanceKm: km, finishTimeSeconds: 300 });
+  assert.equal(rating.comparison, "distance-only-estimate");
+  assert.equal(rating.distance.km, km);
+  assert.equal(rating.standardsVersion, "usatf-mldr-2025-open-v2");
+  assert.equal(
+    rating.referenceMethod,
+    km < 1.609344 ? "short-distance-extrapolation" : "interpolated-distance-estimate",
+  );
+}
+const roadMile = score({ distanceCode: "1mi", distanceKm: 1.609344, finishTimeSeconds: 227 });
+assert.equal(roadMile.score, 1000);
+assert.equal(roadMile.comparison, "road-standard");
+assert.equal(
+  score({ distanceCode: "1mi", distanceKm: 1.609344, sport: "Athletics", surface: "Track" })
+    .comparison,
+  "distance-only-estimate",
+);
+for (const invalidKm of [0, 0.999, 200.001, 201, NaN, Infinity])
+  assert.equal(
+    performanceRatingReference(invalidKm, "men"),
+    null,
+    `No unsupported reference at ${invalidKm}km`,
+  );
+for (const category of ["men", "women"]) {
+  let previous = 0;
+  for (let step = 100; step <= 500; step++) {
+    const reference = performanceRatingReference(step / 100, category);
+    assert(
+      reference.seconds > previous,
+      "Short-distance estimates increase continuously with distance",
+    );
+    previous = reference.seconds;
+  }
+  for (const boundary of [1.609344, 5]) {
+    const before = performanceRatingReference(boundary - 0.0000001, category).seconds;
+    const after = performanceRatingReference(boundary + 0.0000001, category).seconds;
+    assert(
+      after > before && after - before < 0.0001,
+      "No jump at short-distance reference boundaries",
+    );
+  }
+}
 
 const interpolated = score({ distanceCode: "55K", distanceKm: 55, finishTimeSeconds: 18000 });
 assert.equal(interpolated.interpolated, true);

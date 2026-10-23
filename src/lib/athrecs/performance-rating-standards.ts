@@ -5,7 +5,7 @@
  * Male workbook title: Version 2025-07-27; retrieved 2026-10-23.
  * Provenance and exact source blob SHAs: docs/performance-rating-standards.md.
  */
-export const PERFORMANCE_STANDARDS_VERSION = "usatf-mldr-2025-open-v1";
+export const PERFORMANCE_STANDARDS_VERSION = "usatf-mldr-2025-open-v2";
 
 export type PerformanceRatingCategory = "men" | "women";
 export type PerformanceRatingDistance = { key: string; label: string; km: number };
@@ -15,6 +15,7 @@ export type PerformanceReferenceStandard = PerformanceRatingDistance & {
 };
 
 export const PERFORMANCE_REFERENCE_STANDARDS: readonly PerformanceReferenceStandard[] = [
+  { key: "1mi", label: "1 mile", km: 1.609344, men: 227, women: 253 },
   { key: "5K", label: "5K", km: 5, men: 769, women: 834 },
   { key: "6K", label: "6K", km: 6, men: 930, women: 1010 },
   { key: "4mi", label: "4 miles", km: 6.437376, men: 1000, women: 1087 },

@@ -159,7 +159,7 @@ export function DistanceRatings({
         <ParticipationCard title={`${year} participation`} tally={season} />
       </div>
       <p className="text-xs text-muted">
-        Participation covers running events of 5 km or longer: 10 points per completed event + 1
+        Participation covers running events of 1 km or longer: 10 points per completed event + 1
         point per kilometre raced, with an increasing distance bonus for ultras. Parkrun counts as a
         completed event. Recorded running finishes of unknown distance earn finish points only.
       </p>
@@ -267,7 +267,7 @@ export function DistanceRatings({
         </div>
       ) : (
         <p className="text-sm text-muted">
-          Time ratings need a recorded finish time, a supported distance of at least 5 km and a
+          Time ratings need a recorded finish time, a supported distance of at least 1 km and a
           supplied men’s or women’s racing category.
         </p>
       )}
@@ -285,8 +285,8 @@ export function DistanceRatings({
             a distance-only estimate, which does not adjust for elevation, terrain or conditions.
           </p>
           <p>
-            Supported reference distances extend to 200 km. Intermediate distances use an
-            interpolated reference and are marked as estimates. Longer or unknown distances can earn
+            Time ratings cover 1 km to 200 km. Distances without an exact reference use a modelled
+            reference and are marked as estimates. Longer or unknown distances can earn
             participation points without a time rating.
           </p>
           <p>

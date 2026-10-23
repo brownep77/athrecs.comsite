@@ -46,6 +46,7 @@ const results = [
     chipTimeSeconds: 18000,
   }),
   race(32, { sport: "Parkrun", surface: "Parkrun" }),
+  race(33, { distanceCode: "1K", distanceKm: 1, finishTimeSeconds: 180, chipTimeSeconds: 180 }),
 ];
 let server;
 let browser;
@@ -102,7 +103,7 @@ try {
     await page.goto(server.resolvedUrls.local[0]);
     await page.getByRole("heading", { name: "Distance ratings & race points" }).waitFor();
     const allTime = page.getByRole("article").first();
-    assert.match(await allTime.innerText(), /480.61 points/);
+    assert.match(await allTime.innerText(), /491.61 points/);
     assert.match(await allTime.innerText(), /15.61 ultra bonus/);
     await page.getByText("Ultra participation bonuses", { exact: true }).click();
     const bonusTable = page
@@ -110,12 +111,12 @@ try {
       .filter({ has: page.getByText("Part of each race", { exact: true }) });
     assert.equal(await bonusTable.locator("tbody tr").count(), 4);
     await page.getByText("Ultra participation bonuses", { exact: true }).click();
-    assert.match(await allTime.innerText(), /28 completed events/);
-    await page.getByText(`Every rated performance · ${year} (27)`, { exact: true }).click();
+    assert.match(await allTime.innerText(), /29 completed events/);
+    await page.getByText(`Every rated performance · ${year} (28)`, { exact: true }).click();
     const individual = page.getByRole("table", { name: /^Individual performance ratings for / });
     assert.equal(await individual.locator("tbody tr").count(), 10);
     await page.getByRole("button", { name: "Show more performances" }).click();
-    assert.equal(await individual.locator("tbody tr").count(), 27);
+    assert.equal(await individual.locator("tbody tr").count(), 28);
     await page.getByLabel("Season", { exact: true }).selectOption(String(year - 1));
     assert.equal(await individual.locator("tbody tr").count(), 1);
     assert.match(await page.getByRole("article").nth(1).innerText(), /15 points/);
@@ -123,8 +124,8 @@ try {
     const groups = page.getByRole("table", { name: "Performance rating by distance" });
     assert.equal(
       await groups.locator("tbody tr").count(),
-      3,
-      "Road, parkrun and trail remain separate",
+      4,
+      "1K and 5K, road, parkrun and trail remain separate",
     );
     assert.match(await groups.innerText(), /Distance-only estimate/);
     assert(!(await page.content()).includes("PRIVATE-EVIDENCE"));

@@ -227,7 +227,10 @@ try {
       .getByText("50", { exact: true })
       .waitFor();
     await page.getByLabel("Year", { exact: true }).selectOption("2019");
-    const assistedRow = page.getByRole("row").filter({ hasText: "59:07" });
+    const assistedRow = page
+      .locator("#results-history")
+      .getByRole("row")
+      .filter({ hasText: "59:07" });
     assert.equal(
       await assistedRow.getByText("Assisted course · excluded from PBs", { exact: true }).count(),
       0,
@@ -237,7 +240,7 @@ try {
     assert.equal(await page.getByText("Show all 52 results", { exact: true }).count(), 0);
     assert.equal(await page.locator("#results-history table").count(), 1);
     assert.equal(await page.locator("#results-history tbody tr:visible").count(), 52);
-    await page.getByRole("row").filter({ hasText: "13:30" }).waitFor();
+    await page.locator("#results-history").getByRole("row").filter({ hasText: "13:30" }).waitFor();
     await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
     assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);
     assert.equal(

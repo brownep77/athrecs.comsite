@@ -93,6 +93,22 @@ try {
   assert.match(trail, /Trail/);
   assert.match(trail, /Distance-only estimate/);
   assert(!trail.includes("PRIVATE-"));
+  const short = renderToStaticMarkup(
+    createElement(DistanceRatings, {
+      results: [
+        race(11, {
+          distanceCode: "1K",
+          distanceKm: 1,
+          finishTimeSeconds: 180,
+          chipTimeSeconds: 180,
+        }),
+      ],
+    }),
+  );
+  assert.match(short, /11 points/);
+  assert.match(short, /Performance rating by distance/);
+  assert.match(short, /1K/);
+  assert.match(short, /Distance-only estimate/);
   console.log(
     "Distance ratings UI: totals, distance groups, historical season, pending verification and evidence privacy passed.",
   );

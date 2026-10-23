@@ -21,8 +21,9 @@ precision and chip/gun/unknown timing labels are retained.
 
 Parkrun is distinct from road 5K. Other surfaces use a labelled distance-only
 estimate, with no adjustment for elevation, terrain or conditions. Fixed
-intermediate distances from 5–200 km use an explicitly labelled interpolated
-reference. Longer events can contribute participation points without a rating.
+distances from 1–200 km without an exact reference use an explicitly labelled modelled
+reference. The 1K to mile extension uses the frozen mile-to-5K relationship;
+see the standards document for the method. Longer events can contribute participation points without a rating.
 No global competitive leaderboard is added by this change.
 
 Examples using the frozen references:
@@ -38,10 +39,10 @@ Examples using the frozen references:
 
 ## Participation points
 
-Running finishes of 5 km or longer receive 10 completion points plus 1 point per
+Running finishes of 1 km or longer receive 10 completion points plus 1 point per
 known kilometre raced, with a progressive ultra bonus. This includes parkrun and trail/ultra events. An accepted
-running finish of unknown length receives the 10 completion points only. Track
-and field events shorter than 5 km, other sports, splits and team/relay totals
+running finish of unknown length receives the 10 completion points only.
+Running events shorter than 1 km, field events, other sports, splits and team/relay totals
 are outside this first version's scope.
 
 The distance reward increases within each individual race:
@@ -65,6 +66,12 @@ consistent participation; two 50K finishes receive 151.22 points in total.
 
 | Completed distance | Participation points |
 | ------------------ | -------------------: |
+| 1K                 |                   11 |
+| 1,500m             |                11.50 |
+| 1 mile             |                11.61 |
+| 2K                 |                   12 |
+| 3K                 |                   13 |
+| 4K                 |                   14 |
 | Parkrun / 5K       |                   15 |
 | 10K                |                   20 |
 | Half marathon      |                31.10 |

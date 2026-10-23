@@ -18,6 +18,17 @@ export type {
 export type PerformanceRatingComparison =
   "road-standard" | "course-unadjusted" | "distance-only-estimate";
 
+export type PerformanceReferenceMethod =
+  "published-road-standard" | "interpolated-distance-estimate" | "short-distance-extrapolation";
+
+export type PerformanceRatingReference = {
+  seconds: number;
+  /** True for either interpolated or extrapolated distance estimates. */
+  interpolated: boolean;
+  extrapolated: boolean;
+  method: PerformanceReferenceMethod;
+};
+
 export type PerformanceRating = {
   /** Full precision is retained for ordering; display rounding never breaks a tie. */
   score: number;
@@ -27,6 +38,8 @@ export type PerformanceRating = {
   category: PerformanceRatingCategory;
   comparison: PerformanceRatingComparison;
   interpolated: boolean;
+  extrapolated: boolean;
+  referenceMethod: PerformanceReferenceMethod;
   finishTimeSeconds: number;
   benchmarkSeconds: number;
   standardsVersion: string;
@@ -56,8 +69,10 @@ export function performanceRatingDistance(code: string, km = 0): PerformanceRati
     : /^(?:full )?marathon$/i.test(name)
       ? PERFORMANCE_REFERENCE_STANDARDS.find((standard) => standard.key === "Marathon")
       : /^parkrun$/i.test(name)
-        ? PERFORMANCE_REFERENCE_STANDARDS[0]
-        : undefined;
+        ? PERFORMANCE_REFERENCE_STANDARDS.find((standard) => standard.key === "5K")
+        : /^(?:mile|road mile|mile road)$/i.test(name)
+          ? PERFORMANCE_REFERENCE_STANDARDS.find((standard) => standard.key === "1mi")
+          : undefined;
   if (special)
     return agreesWithDistance(km, special.km)
       ? { key: special.key, label: special.label, km: special.km }
@@ -72,7 +87,7 @@ export function performanceRatingDistance(code: string, km = 0): PerformanceRati
     const miles = /^mi/i.test(unit) || (unit === "M" && agreesWithDistance(km, value * 1.609344));
     const metres = /^m$/i.test(unit) && !miles;
     const exact = value * (miles ? 1.609344 : metres ? 0.001 : 1);
-    if (exact < 5 || !Number.isFinite(exact) || !agreesWithDistance(km, exact)) return null;
+    if (exact < 1 || !Number.isFinite(exact) || !agreesWithDistance(km, exact)) return null;
     const standard = PERFORMANCE_REFERENCE_STANDARDS.find(
       (entry) => Math.abs(entry.km - exact) < 1e-9,
     );
@@ -104,24 +119,35 @@ export function performanceRatingCategory(
   return null;
 }
 
-/** Log-distance/log-time interpolation is an AthRecs estimate, never an official standard. */
-function referenceTime(
+/** Modelled distances are AthRecs estimates, never additional official standards. */
+export function performanceRatingReference(
   km: number,
   category: PerformanceRatingCategory,
-): { seconds: number; interpolated: boolean } | null {
+): PerformanceRatingReference | null {
+  if (!Number.isFinite(km) || km < 1 || km > 200) return null;
   const exact = PERFORMANCE_REFERENCE_STANDARDS.find((entry) => Math.abs(entry.km - km) < 1e-9);
-  if (exact) return { seconds: exact[category], interpolated: false };
-  if (km < 5 || km > 200) return null;
+  if (exact)
+    return {
+      seconds: exact[category],
+      interpolated: false,
+      extrapolated: false,
+      method: "published-road-standard",
+    };
   const upperIndex = PERFORMANCE_REFERENCE_STANDARDS.findIndex((entry) => entry.km > km);
-  if (upperIndex <= 0) return null;
-  const lower = PERFORMANCE_REFERENCE_STANDARDS[upperIndex - 1];
-  const upper = PERFORMANCE_REFERENCE_STANDARDS[upperIndex];
+  if (upperIndex < 0) return null;
+  // Below the mile, extend only the first mile-to-5K segment down to 1K.
+  // Keeping this model separate prevents changing any existing 5K+ reference.
+  const extrapolated = upperIndex === 0;
+  const lower = PERFORMANCE_REFERENCE_STANDARDS[extrapolated ? 0 : upperIndex - 1];
+  const upper = PERFORMANCE_REFERENCE_STANDARDS[extrapolated ? 1 : upperIndex];
   const proportion = Math.log(km / lower.km) / Math.log(upper.km / lower.km);
   return {
     seconds: Math.exp(
       Math.log(lower[category]) + proportion * Math.log(upper[category] / lower[category]),
     ),
     interpolated: true,
+    extrapolated,
+    method: extrapolated ? "short-distance-extrapolation" : "interpolated-distance-estimate",
   };
 }
 
@@ -189,7 +215,7 @@ export function ratePerformance(
   if (!category) return null;
   const distance = performanceRatingDistance(result.distanceCode, result.distanceKm);
   if (!distance) return null;
-  const reference = referenceTime(distance.km, category);
+  const reference = performanceRatingReference(distance.km, category);
   if (!reference) return null;
   const surface = surfaceGroup(result);
   const comparison: PerformanceRatingComparison = reference.interpolated
@@ -208,6 +234,8 @@ export function ratePerformance(
     category,
     comparison,
     interpolated: reference.interpolated,
+    extrapolated: reference.extrapolated,
+    referenceMethod: reference.method,
     finishTimeSeconds: seconds,
     benchmarkSeconds: reference.seconds,
     standardsVersion: PERFORMANCE_STANDARDS_VERSION,

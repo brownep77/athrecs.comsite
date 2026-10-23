@@ -140,7 +140,7 @@ function inScope(result: AchievementResult): boolean {
   const km = knownDistance(result);
   const explicit = distanceFromCode(result.distanceCode, result.distanceKm);
   if (km > 0 && explicit != null && Math.abs(km - explicit) > 0.0000001) return false;
-  if (km > 0) return km >= 5;
+  if (km > 0) return km >= 1;
   // A completed running race of unknown length earns completion points only.
   return normal(result.sport) === "running" || kind === "parkrun";
 }

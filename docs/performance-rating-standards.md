@@ -7,7 +7,7 @@ an age grade or a percentile. A score can exceed 1000; the reference times are
 fixed standards, not a live world-record feed. Full precision orders scores;
 only the displayed score is rounded.
 
-## Frozen source: `usatf-mldr-2025-open-v1`
+## Frozen source: `usatf-mldr-2025-open-v2`
 
 The open-category benchmarks are extracted from the numeric **OC sec** row in
 the first worksheet of Alan Jones and Tom Bernhard's 2025 USATF Masters Long
@@ -25,7 +25,11 @@ The first row's numeric values are authoritative for this extraction. Some
 workbook display-formatted rows differ; AthRecs does not silently substitute
 those display values. Tiny binary floating-point residue in whole-second
 numeric standards is rounded to the nearest integer (e.g. 23590.999999999996
-becomes 23591). Distances below 5 km are outside this feature's scope.
+becomes 23591). Version 2 adds the original workbooks' **1 Mile** reference:
+men 227 seconds (3:47), women 253 seconds (4:13), at exactly 1.609344 km.
+The mile values were re-opened and compared with the distance/header/OC-sec
+rows on 23 October 2026, using the same source blob SHAs above. Every existing
+5–200 km reference and score is unchanged from version 1.
 
 The same frozen standards apply to historic results and the current season.
 A future standards release must have a new version and recalculate both views
@@ -34,11 +38,35 @@ consistently, rather than changing the meaning of an older score silently.
 ## Comparison limits
 
 Standard road distances use their matching road reference. Other explicit fixed
-distances between 5 and 200 km use log-distance/log-time interpolation between
+distances between one mile and 200 km use log-distance/log-time interpolation between
 the adjacent reference standards and are labelled interpolated estimates.
+The requested 1 km to below-one-mile range extends the frozen one-mile-to-5K
+log-distance/log-time segment down to 1 km. This is an **AthRecs short-distance
+estimate**, not an additional USATF or track standard. For each category, with
+`S_mile` its published mile reference and `S_5K` its published 5K reference:
+
+`u = log(distance_km / 1.609344) / log(5 / 1.609344)`
+
+`reference_seconds = exp(log(S_mile) + u × log(S_5K / S_mile))`
+
+The same formula interpolates between one mile and 5K; below one mile its `u`
+is negative and it is explicitly marked as extrapolated. Estimated 1K
+references are approximately 136.020152 seconds for men and 153.346535 seconds
+for women. These are model references, not claimed personal performances or
+world records. No distance below 1 km receives a time rating.
+
 There is no extrapolation beyond 200 km. Distances stay distinct; a 55 km race
 does not become a 50 km result. Timed events need their own distance-in-duration
 method and do not receive a finish-time score.
+
+`performanceRatingReference(km, category)` exposes the exact reference and its
+method (`published-road-standard`, `interpolated-distance-estimate`, or
+`short-distance-extrapolation`). The `interpolated` flag remains true for any
+modelled reference for backward compatibility; `extrapolated` distinguishes the
+below-mile extension. Both kinds display as distance-only estimates. A target
+rating of `R` corresponds to `1000 × reference_seconds / R` seconds, allowing a
+consistent rating ladder without manufacturing a separate standard for every
+rating or race distance.
 
 Parkrun remains separate from road 5K and its score is course-unadjusted. Track,
 trail, fell, mountain, cross-country and unknown surfaces remain separate and
