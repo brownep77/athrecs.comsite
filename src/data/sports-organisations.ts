@@ -12679,4 +12679,415 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       "Zimbabwe Swimming Federation"
     ]
   }, "2026-10-23"),
+
+  // Oceania membership checked against both official directories, 23 October 2026.
+  record({
+  "slug": "american-samoa-swimming",
+  "name": "American Samoa Swimming Association",
+  "aliases": [
+    "American Samoa swimming federation"
+  ],
+  "type": "national",
+  "country": "American Samoa",
+  "jurisdiction": "American Samoa",
+  "territories": [
+    "American Samoa"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for American Samoa by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cook-islands-swimming",
+  "name": "Cook Islands Aquatics Federation",
+  "aliases": [
+    "Cook Islands swimming federation"
+  ],
+  "type": "national",
+  "country": "Cook Islands",
+  "jurisdiction": "Cook Islands",
+  "territories": [
+    "Cook Islands"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Cook Islands by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "fiji-swimming",
+  "name": "Fiji Swimming",
+  "aliases": [
+    "Fiji swimming federation"
+  ],
+  "type": "national",
+  "country": "Fiji",
+  "jurisdiction": "Fiji",
+  "territories": [
+    "Fiji"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Fiji by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "federated-states-of-micronesia-swimming",
+  "name": "Federated States of Micronesia Swimming Association",
+  "aliases": [
+    "Federated States of Micronesia swimming federation",
+    "Federated States of Micronesia"
+  ],
+  "type": "national",
+  "country": "Micronesia",
+  "jurisdiction": "Micronesia",
+  "territories": [
+    "Micronesia"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Federated States of Micronesia by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "guam-swimming",
+  "name": "Guam Swimming Federation",
+  "aliases": [
+    "Guam swimming federation"
+  ],
+  "type": "national",
+  "country": "Guam",
+  "jurisdiction": "Guam",
+  "territories": [
+    "Guam"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Guam by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "marshall-islands-swimming",
+  "name": "Marshall Islands Swimming Federation",
+  "aliases": [
+    "Marshall Islands swimming federation"
+  ],
+  "type": "national",
+  "country": "Marshall Islands",
+  "jurisdiction": "Marshall Islands",
+  "territories": [
+    "Marshall Islands"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Marshall Islands by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "northern-mariana-islands-swimming",
+  "name": "Northern Mariana Islands Swimming Federation",
+  "aliases": [
+    "Northern Mariana Islands swimming federation"
+  ],
+  "type": "national",
+  "country": "Northern Mariana Islands",
+  "jurisdiction": "Northern Mariana Islands",
+  "territories": [
+    "Northern Mariana Islands"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Northern Mariana Islands by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "palau-swimming",
+  "name": "Palau Swimming Association",
+  "aliases": [
+    "Palau swimming federation"
+  ],
+  "type": "national",
+  "country": "Palau",
+  "jurisdiction": "Palau",
+  "territories": [
+    "Palau"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Palau by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "papua-new-guinea-swimming",
+  "name": "Papua New Guinea Swimming Inc.",
+  "aliases": [
+    "Papua New Guinea swimming federation"
+  ],
+  "type": "national",
+  "country": "Papua New Guinea",
+  "jurisdiction": "Papua New Guinea",
+  "territories": [
+    "Papua New Guinea"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Papua New Guinea by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "samoa-swimming",
+  "name": "Samoa Swimming Association",
+  "aliases": [
+    "Samoa swimming federation"
+  ],
+  "type": "national",
+  "country": "Samoa",
+  "jurisdiction": "Samoa",
+  "territories": [
+    "Samoa"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Samoa by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "solomon-islands-swimming",
+  "name": "Solomon Islands Swimming Federation",
+  "aliases": [
+    "Solomon Islands swimming federation"
+  ],
+  "type": "national",
+  "country": "Solomon Islands",
+  "jurisdiction": "Solomon Islands",
+  "territories": [
+    "Solomon Islands"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Solomon Islands by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tonga-swimming",
+  "name": "Tonga Swimming Association",
+  "aliases": [
+    "Tonga swimming federation"
+  ],
+  "type": "national",
+  "country": "Tonga",
+  "jurisdiction": "Tonga",
+  "territories": [
+    "Tonga"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Tonga by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "vanuatu-swimming",
+  "name": "Vanuatu Aquatics Federation",
+  "aliases": [
+    "Vanuatu swimming federation"
+  ],
+  "type": "national",
+  "country": "Vanuatu",
+  "jurisdiction": "Vanuatu",
+  "territories": [
+    "Vanuatu"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The swimming member body listed for Vanuatu by World Aquatics and Oceania Aquatics.",
+  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
+  "website": "https://www.worldaquatics.com/members/national-federations",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.worldaquatics.com/members/national-federations",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "oceania-aquatics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "oceania-aquatics",
+  "name": "Oceania Aquatics",
+  "aliases": [
+    "Oceania Swimming Association",
+    "OSA"
+  ],
+  "type": "continental",
+  "country": "International",
+  "jurisdiction": "Oceania",
+  "territories": [
+    "American Samoa",
+    "Australia",
+    "Cook Islands",
+    "Fiji",
+    "Micronesia",
+    "Guam",
+    "Marshall Islands",
+    "Northern Mariana Islands",
+    "New Zealand",
+    "Palau",
+    "Papua New Guinea",
+    "Samoa",
+    "Solomon Islands",
+    "Tonga",
+    "Vanuatu"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "The World Aquatics continental organisation for the Oceania region.",
+  "detail": "Connects the national member federations across Oceania and supports aquatic competitions and development.",
+  "website": "https://oceaniaaquatics.org/",
+  "sources": [
+    "https://www.worldaquatics.com/members/continental-organisations",
+    "https://oceaniaaquatics.org/",
+    "https://oceaniaaquatics.org/members/"
+  ],
+  "related": [
+    "world-aquatics",
+    "swimming-australia",
+    "swimming-new-zealand"
+  ]
+}, "2026-10-23"),
 ];
