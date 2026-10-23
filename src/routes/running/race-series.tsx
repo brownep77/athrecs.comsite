@@ -98,7 +98,7 @@ function RaceSeriesPage() {
             to={SUPERHALFS_PATH}
             className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-primary-fg no-underline hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
           >
-            Explore the SuperHalfs guide
+            Read the 2027 SuperHalfs race preview
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
