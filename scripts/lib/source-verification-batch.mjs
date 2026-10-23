@@ -198,7 +198,7 @@ function hasUnresolvedReview(value) {
   );
 }
 const nonFinish =
-  /\b(?:DQ|DSQ|DNF|DNS|DNC|DNQ|NM|NH|FOUL|FAIL|NT|disqualified|withdrawn|retired|did not (?:finish|start))\b/i;
+  /\b(?:DQ|DSQ|DNF|XDNF|DNS|DNC|DNQ|NM|NH|FOUL|FAIL|NT|PASS|disqualified|withdrawn|retired|did not (?:finish|start))\b/i;
 function checkResultHolds(row, container = {}, today = new Date().toISOString().slice(0, 10)) {
   if (
     [row.sourceIdentityReview, row.sourceQualificationReview].some(hasUnresolvedReview) ||

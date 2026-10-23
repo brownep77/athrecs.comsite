@@ -348,7 +348,7 @@ try {
     initial,
     "A newer held capture also blocks verification against an obsolete capture.",
   );
-  for (const mark of ["FOUL", "FAIL", "NT"]) {
+  for (const mark of ["FOUL", "FAIL", "NT", "XDNF", "PASS"]) {
     const invalid = clone(plan);
     invalid.entries[1].before[0].performance = mark;
     await assert.rejects(
