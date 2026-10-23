@@ -1,3 +1,5 @@
+import { AddToCalendar } from "@/components/races/AddToCalendar";
+import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
 import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
 import { checkedFixtureEventStart } from "@/data/fixture-details";
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
@@ -349,8 +351,6 @@ export function RacePageContent({
     (ed) =>
       ed.result_count > 0 || ed.result_links.length > 0 || Boolean(ed.results_official_url?.trim()),
   );
-  const upcomingPreview = event.sport === "Parkrun" ? upcoming.slice(0, 6) : upcoming.slice(0, 12);
-  const upcomingHidden = upcoming.length - upcomingPreview.length;
   const pastPreview = past.slice(0, 12);
   const pastHidden = past.length - pastPreview.length;
 
@@ -841,8 +841,8 @@ export function RacePageContent({
               ? "Upcoming — weekly through 25 December 2027"
               : "Upcoming races"
           }
-          items={upcomingPreview}
-          hidden={upcomingHidden}
+          items={upcoming}
+          calendarEvent={event}
           country={event.country}
           county={event.county}
         />
@@ -1300,6 +1300,7 @@ function Fact({ label, value, hint }: { label: string; value: ReactNode; hint?: 
 function EditionList({
   title,
   items,
+  calendarEvent,
   hidden = 0,
   onResults,
   country,
@@ -1307,11 +1308,14 @@ function EditionList({
 }: {
   title: string;
   items: EditionRow[];
+  calendarEvent?: Parameters<typeof catalogueCalendarRace>[0];
   hidden?: number;
   onResults?: (id: number) => void;
   country?: string;
   county?: string;
 }) {
+  const [showAll, setShowAll] = useState(false);
+  const visibleItems = calendarEvent && !showAll ? items.slice(0, 12) : items;
   return (
     <section className="space-y-3">
       <h2 className="font-display text-lg font-semibold text-fg">{title}</h2>
@@ -1321,7 +1325,7 @@ function EditionList({
         </p>
       ) : (
         <div className="grid gap-2">
-          {items.map((ed) => {
+          {visibleItems.map((ed) => {
             const st = effectiveStatus(ed.event_date, ed.status as EntryStatus);
             const start =
               ed.start_label ??
@@ -1363,6 +1367,9 @@ function EditionList({
                   {ed.notes ? <p className="text-xs text-subtle">{ed.notes}</p> : null}
                 </div>
                 <div className="flex flex-wrap gap-2">
+                  {calendarEvent ? (
+                    <AddToCalendar race={catalogueCalendarRace(calendarEvent, ed, SITE_URL)} />
+                  ) : null}
                   {ed.result_count > 0 && onResults && (
                     <button
                       type="button"
@@ -1389,6 +1396,11 @@ function EditionList({
               </div>
             );
           })}
+          {items.length > visibleItems.length ? (
+            <Button variant="secondary" onClick={() => setShowAll(true)}>
+              Show all {items.length} listed events
+            </Button>
+          ) : null}
           {hidden > 0 ? (
             <p className="px-1 text-xs text-subtle">
               {hidden} more date{hidden === 1 ? "" : "s"} on the listing — open the official page

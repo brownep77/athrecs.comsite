@@ -1,3 +1,4 @@
+import { AddToCalendar } from "@/components/races/AddToCalendar";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ExternalLink, Search } from "lucide-react";
@@ -407,6 +408,20 @@ export function RoadUltraDetail({ race, today }: { race: RoadUltra; today: strin
                 >
                   Official edition details <ExternalLink size={14} aria-hidden="true" />
                 </a>
+                <AddToCalendar
+                  race={{
+                    id: `ultra-${race.slug}-${edition.date}`,
+                    name: race.name,
+                    date: edition.date,
+                    endDate: edition.endDate,
+                    distance: race.distance,
+                    location: race.location,
+                    timeZone: "Europe/London",
+                    provisional: edition.provisional,
+                    officialUrl: edition.url,
+                    pageUrl: `https://www.athrecs.com/running/ultramarathons/${encodeURIComponent(race.slug)}`,
+                  }}
+                />
               </li>
             ))}
           </ul>

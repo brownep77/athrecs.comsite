@@ -1,3 +1,4 @@
+import { AddToCalendar } from "@/components/races/AddToCalendar";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { HALF_MARATHON_COUNTRIES, halfMarathonCountry } from "@/data/road-half-marathons/countries";
@@ -481,13 +482,32 @@ export function RoadMarathonPage({
           {upcoming.length ? (
             <ul className="mt-3 space-y-3">
               {upcoming.map((edition) => (
-                <li key={edition.date} id={`edition-${edition.date}`} className="scroll-mt-24">
+                <li
+                  key={edition.date}
+                  id={`edition-${edition.date}`}
+                  className="scroll-mt-24 space-y-2"
+                >
                   <a href={edition.sourceUrl} className={linkClass}>
                     <time dateTime={edition.date}>
                       {roadMarathonDate(edition.date, edition.endDate)}
                     </time>
                     <ArrowUpRight className="size-4" aria-hidden="true" />
                   </a>
+                  <div>
+                    <AddToCalendar
+                      race={{
+                        id: `road-${race.slug}-${edition.date}`,
+                        name: race.name,
+                        date: edition.date,
+                        endDate: edition.endDate,
+                        distance: half ? "Half marathon" : "Marathon",
+                        timeZone: race.timeZone,
+                        location: roadRaceLocation(race, country.name),
+                        officialUrl: race.officialUrl,
+                        pageUrl: `https://www.athrecs.com/running/races/${encodeURIComponent(race.slug)}`,
+                      }}
+                    />
+                  </div>
                 </li>
               ))}
             </ul>
