@@ -22,6 +22,16 @@ are private/no-store and excluded from indexing.
   anonymous. Browser and server observations can describe the same incident;
   error counts are observations, not a count of distinct affected users.
 
+New browser reports distinguish failed queries (`data_query_error`) from failed
+mutations (`data_mutation_error`). Existing `data_error` records remain unchanged.
+Account, own-profile, claim/review and private race-calendar pages retain their
+static route name; personal path segments and all query/hash values remain hidden.
+Ordinary `Error` objects and allowlisted names on serialised/cross-realm errors
+retain their category. `UnknownError` means no recognised category was supplied,
+not a diagnosis of a particular browser problem. Arbitrary messages and stacks
+remain excluded. These improvements cannot reconstruct missing details in older
+reports or establish whether a failed mutation changed server-side data.
+
 The log displays UK timestamps, account/entered email, outcome, method, browser
 and version, OS, broad device type, recognised browser number where available,
 approximate platform location, endpoint/page family, HTTP status, authentication
