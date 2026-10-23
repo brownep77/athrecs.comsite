@@ -1,0 +1,26 @@
+{
+  "halloween-nighttrail|2026-10-24": {
+    "summary": "Halloween Nighttrail in Lichtaart, with separate 4 km, 8 km and 14 km trail runs after dark.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://nighttrail.be/halloween-night-trail/",
+    "checkedAt": "2026-10-23",
+    "eventStartTime": "18:30",
+    "starts": {
+      "4K": {
+        "time": "19:05",
+        "note": "Official organiser programme: the 4 km trail run starts at 19:05. The family walk starts separately at 19:15.",
+        "publicNote": "4 km trail run starts at 19:05 local time."
+      },
+      "8K": {
+        "time": "18:55",
+        "note": "Official organiser programme: the 8 km trail run starts at 18:55. The walk starts separately at 19:15.",
+        "publicNote": "8 km trail run starts at 18:55 local time."
+      },
+      "14K": {
+        "time": "18:30",
+        "note": "Official organiser programme: the 14 km trail run starts at 18:30. The walk starts separately at 18:40.",
+        "publicNote": "14 km trail run starts at 18:30 local time."
+      }
+    }
+  }
+}
