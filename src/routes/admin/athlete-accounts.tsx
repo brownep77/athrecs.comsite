@@ -1,3 +1,4 @@
+import { ProfileSetupRequests } from "@/components/staff/ProfileSetupRequests";
 import { ClientData } from "@/components/staff/ClientData";
 import { AccessLog } from "@/components/staff/AccessLog";
 import { RegisteredAthletes } from "@/components/staff/RegisteredAthletes";
@@ -75,6 +76,7 @@ function AdminAthleteAccountsPage() {
           Client data
         </Button>
       </div>
+      <ProfileSetupRequests />
       {view === "login-log" ? (
         <AccessLog />
       ) : view === "client-data" ? (

@@ -1,5 +1,6 @@
 import { ResultMatchingSettings } from "@/components/athletes/ResultMatchingSettings";
 import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
+import { ProfileResultsSetup } from "@/components/athletes/ProfileResultsSetup";
 import { AccountNavigation } from "@/components/athletes/AccountNavigation";
 import { AccountRaces } from "@/components/athletes/AccountRaces";
 import { AccountPhotos } from "@/components/athletes/AccountPhotos";
@@ -281,7 +282,7 @@ function AthleteAccountPage() {
 function SignedInAccount() {
   const { section } = Route.useSearch();
   const hash = useLocation({ select: (location) => location.hash });
-  const activeSection = section ?? (hash === "profile-visibility" ? "sharing" : "races");
+  const activeSection = section ?? (hash === "profile-visibility" ? "sharing" : "potential");
   const show = (id: AccountSectionId) => !IS_ATHRECS_SITE || activeSection === id;
   const lastLoadedForm = useRef<AthleteAccountInput | null>(null);
   const queryClient = useQueryClient();
@@ -394,7 +395,8 @@ function SignedInAccount() {
           .
         </p>
       ) : null}
-      {IS_ATHRECS_SITE ? (
+      {IS_ATHRECS_SITE ? <ProfileResultsSetup account={account.data} /> : null}
+      {IS_ATHRECS_SITE && account.data.fullName.trim() ? (
         <ProfileClaimGuide
           account={account.data}
           onNameSaved={(updated) => {

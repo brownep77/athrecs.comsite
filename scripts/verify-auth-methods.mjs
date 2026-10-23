@@ -44,7 +44,7 @@ assert.equal(
 );
 assert.equal(
   athleteAuthDestination("/athlete-account?section=identity", true),
-  "/athlete-account?section=potential",
+  "/athlete-account?section=identity",
 );
 assert.equal(
   athleteAuthDestination("/claim-results?resultId=42", true),

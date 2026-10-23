@@ -7,6 +7,7 @@ export type PotentialResultMatchContext = {
   region?: string | null;
   country?: string | null;
   clubOrTeam?: string | null;
+  previousClubs?: string[];
   dateOfBirth?: string | null;
   nationality?: string | null;
 };
@@ -196,17 +197,21 @@ function contextualBoost(
 ): { boost: number; reasons: string[] } {
   let boost = 0;
   const reasons: string[] = [];
-  const accountClub = comparableText(account.clubOrTeam);
+  const accountClubs = [account.clubOrTeam, ...(account.previousClubs ?? [])]
+    .map(comparableText)
+    .filter(Boolean);
   const candidateClub = comparableText(candidate.clubName);
   if (
-    accountClub &&
     candidateClub &&
-    (accountClub === candidateClub ||
-      (accountClub.length >= 5 && candidateClub.includes(accountClub)) ||
-      (candidateClub.length >= 5 && accountClub.includes(candidateClub)))
+    accountClubs.some(
+      (accountClub) =>
+        accountClub === candidateClub ||
+        (accountClub.length >= 5 && candidateClub.includes(accountClub)) ||
+        (candidateClub.length >= 5 && accountClub.includes(candidateClub)),
+    )
   ) {
     boost += 12;
-    reasons.push("Club or team matches");
+    reasons.push("Current or previous club matches");
   }
 
   const accountCity = comparableText(account.city);

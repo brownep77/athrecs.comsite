@@ -76,7 +76,7 @@ export function AthleteAuthDialog() {
   const [resendAfter, setResendAfter] = useState(0);
   const [usePassword, setUsePassword] = useState(false);
   const [showAllProviders, setShowAllProviders] = useState(false);
-  const [findRaceResults, setFindRaceResults] = useState(false);
+  const [findRaceResults, setFindRaceResults] = useState(true);
 
   const methods = useQuery({
     queryKey: ["available-auth-methods"],
@@ -144,7 +144,7 @@ export function AthleteAuthDialog() {
       setNeedsVerification(false);
       setUsePassword(false);
       setShowAllProviders(false);
-      setFindRaceResults(false);
+      setFindRaceResults(true);
       setPassword("");
       setConfirmPassword("");
       setShowPassword(false);
@@ -541,8 +541,8 @@ export function AthleteAuthDialog() {
                   <span>
                     <span className="font-semibold text-fg">Find my race results</span>
                     <span className="mt-1 block text-xs leading-5 text-muted">
-                      Optional. Show possible matches already on AthRecs after signing in. You
-                      choose which results to add.
+                      Add your full racing name, current and previous clubs, and optional profile
+                      links after signing in. Review and claim your suggested results straight away.
                     </span>
                   </span>
                 </label>

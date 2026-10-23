@@ -70,6 +70,7 @@ type IdentityRow = {
   region: string | null;
   country: string | null;
   club_or_team: string | null;
+  previous_club: string | null;
   power_of_10_url: string | null;
   world_athletics_url: string | null;
   parkrun_id: string | null;
@@ -131,7 +132,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           profile.city,
           profile.region,
           profile.country,
-          profile.club_or_team
+          profile.club_or_team, profile.profile_details->>'previousClub' as previous_club
         from "user" account_user
         left join athlete_private_profiles profile on profile.user_id = account_user."id"
         left join athlete_result_matching_settings settings on settings.user_id=account_user."id"
@@ -246,6 +247,10 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
       region: identity.region,
       country: identity.country,
       clubOrTeam: identity.club_or_team,
+      previousClubs: [
+        identity.previous_club,
+        ...(identity.matching_settings?.previousClubs ?? []),
+      ].filter((v): v is string => Boolean(v)),
       dateOfBirth: identity.date_of_birth,
       nationality: identity.nationality,
     };

@@ -43,6 +43,7 @@ export function publicResultUrl(value: string): string {
 export const matchingSettingsSchema = z
   .object({
     otherSurnames: names,
+    previousClubs: z.array(z.string().trim().min(1).max(160)).max(10).default([]),
     maidenName: z.string().trim().max(120).default(""),
     sourceUrls: z.array(z.string().trim().max(2048).transform(publicResultUrl)).max(10).default([]),
     address: z.string().trim().max(500).default(""),
