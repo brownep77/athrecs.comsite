@@ -333,14 +333,14 @@ try {
   assert.equal((await unlinked.listUnlinkedResults({data:{year:'2025'}})).results.length,1);
   assert.equal((await unlinked.listUnlinkedResults({data:{q:'no-match'}})).results.length,0);
   assert.doesNotMatch(JSON.stringify(heldPage),/PRIVATE|SECRET|candidateIds|Owned|Excluded|Future|Private history|damaged-name/);
-  await db.exec("update athletes set profile_details='{}' where id=900001");
-  assert.equal((await unlinked.listUnlinkedResults({data:{}})).results.length,0,'Resolving a hold removes results-only projection');
-
   await db.exec("update results set source_url='https://runabc.co.uk/synthetic',result_source='runABC' where id=900001");
   const withheldProvider = (await api.getPublicRaceResults({ data: { editionId: 10, q: 'Jo?' } })).results;
   assert.equal(withheldProvider.length, 1, 'Source suppression must retain the published performance');
   assert.doesNotMatch(JSON.stringify(withheldProvider), /runabc/i);
   assert.equal((await db.query('select result_source from results where id=900001')).rows[0].result_source, 'runABC', 'Stored evidence must be unchanged');
+
+  await db.exec("update athletes set profile_details='{}' where id=900001");
+  assert.equal((await unlinked.listUnlinkedResults({data:{}})).results.length,0,'Resolving a hold removes results-only projection');
 
   scope.IS_RUNRECS_SITE = true;
   const previousQueryCount = queryCount;
