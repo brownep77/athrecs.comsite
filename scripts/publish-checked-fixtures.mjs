@@ -5,6 +5,8 @@ import { OFFICIAL_START_TIME_DETAILS } from "./lib/official-start-time-details.m
 import { NORFOLK_CLARIFICATION_REVIEW } from "./lib/norfolk-start-clarification-review.mjs";
 import { NORFOLK_CLARIFICATION_DETAILS } from "./lib/norfolk-start-clarification-details.mjs";
 import { REEPHAM_LAP_STARTS_REVIEW } from "./lib/reepham-lap-starts-review.mjs";
+import { MARRIOTTS_CONFIRMATION_REVIEW } from "./lib/marriotts-organiser-confirmation-review.mjs";
+import marriottsConfirmation from "../src/data/marriotts-organiser-confirmation-2026-10-23.json" with { type: "json" };
 if (process.env.VERCEL_ENV !== "production" || process.env.VERCEL_GIT_COMMIT_REF !== "main") {
   console.log("[fixture-checks] skipping outside production/main");
   process.exit(0);
@@ -48,6 +50,15 @@ try {
       publishing,
       { "reepham-cross-country|2027-01-31": FIXTURE_DETAILS["reepham-cross-country|2027-01-31"] },
       REEPHAM_LAP_STARTS_REVIEW,
+    ),
+  );
+  console.log(
+    "[marriotts-organiser-confirmation]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      marriottsConfirmation,
+      MARRIOTTS_CONFIRMATION_REVIEW,
     ),
   );
 } finally {

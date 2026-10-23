@@ -5,6 +5,7 @@ import countyTbcReview from "./county-tbc-review-2026-10-21.json" with { type: "
 
 import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type: "json" };
 import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
+import marriottsConfirmation from "./marriotts-organiser-confirmation-2026-10-23.json" with { type: "json" };
 
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
@@ -13,6 +14,7 @@ export type FixtureDetail = {
   timeZone: string;
   sourceUrl: string;
   checkedAt: string;
+  eventStartTime?: string;
   starts: Record<
     string,
     { time: string | null; note?: string; publicNote?: string; sourceUrl?: string; label?: string }
@@ -116,23 +118,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
       },
     },
   },
-  "marriotts-way-races|2027-02-21": {
-    summary:
-      "Point-to-point marathon and half-marathon trail routes along Marriott’s Way, finishing in Aylsham.",
-    timeZone: "Europe/London",
-    sourceUrl: "https://boghopperraces.co.uk/2027-marriotts-way-races-1",
-    checkedAt: "2026-10-21",
-    starts: {
-      Marathon: {
-        time: "09:00",
-        note: "Published race start 09:00; registration 07:30–08:30. Boghopper Races’ 2027 timetable and FAQ (https://boghopperraces.co.uk/faqs) agree with the entry option. The entry-page programme still gives 08:30; clarification requested. No separate early start or wave is specified in the current timetable.",
-      },
-      Half: {
-        time: "10:30",
-        note: "Published race start 10:30; registration 08:30–10:00. Boghopper Races’ 2027 timetable and FAQ (https://boghopperraces.co.uk/faqs) agree with the entry option. A summary bullet and the entry-page programme still give 10:00; clarification requested. No separate wave is specified; follow final race instructions.",
-      },
-    },
-  },
+  ...marriottsConfirmation,
   "larking-gowen-norwich-half|2027-04-04": {
     summary:
       "A closed-road half marathon from Norfolk Showground through the surrounding villages.",
@@ -306,6 +292,15 @@ export function isReviewedFixturePlaceholder(slug: string, date: string, distanc
     (Object.hasOwn(countyExpansion.details, `${slug}|${date}`) ||
       Object.hasOwn(countyExpansionMore.details, `${slug}|${date}`))
   );
+}
+
+/** Explicit start of a confirmed multi-distance programme; all other events keep their fallback. */
+export function checkedFixtureEventStart(
+  slug: string,
+  date: string | undefined,
+  fallback: string | null,
+) {
+  return (date && FIXTURE_DETAILS[`${slug}|${date}`]?.eventStartTime) || fallback;
 }
 
 /** Never carry checked starts across dates; an explicit conflict also hides stored times. */

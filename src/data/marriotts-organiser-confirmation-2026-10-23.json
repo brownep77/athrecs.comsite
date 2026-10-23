@@ -1,0 +1,21 @@
+{
+  "marriotts-way-races|2027-02-21": {
+    "summary": "Point-to-point marathon and half-marathon trail routes along Marriott’s Way, finishing in Aylsham.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://boghopperraces.co.uk/2027-marriotts-way-races-1",
+    "checkedAt": "2026-10-23",
+    "eventStartTime": "08:30",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "note": "Janice of Boghopper Races confirmed directly by email on 23 October 2026: marathon 08:30 GMT. This supersedes the 09:00 timetable interpretation recorded on 21 October. Coach availability caused the earlier inconsistencies. One mass start for runners and walkers; gun-timed start and chip-timed finish. The organiser reported correcting the website and registration platform. Earlier source evidence is retained as history.",
+        "publicNote": "Organiser confirmed 23 October 2026: marathon starts at 08:30 GMT. One mass start for runners and walkers, with a gun-timed start and chip-timed finish."
+      },
+      "Half": {
+        "time": "10:00",
+        "note": "Janice of Boghopper Races confirmed directly by email on 23 October 2026: half marathon 10:00 GMT. This supersedes the 10:30 timetable interpretation recorded on 21 October. Coach availability caused the earlier inconsistencies. One mass start for runners and walkers; gun-timed start and chip-timed finish. The organiser reported correcting the website and registration platform. Earlier source evidence is retained as history.",
+        "publicNote": "Organiser confirmed 23 October 2026: half marathon starts at 10:00 GMT. One mass start for runners and walkers, with a gun-timed start and chip-timed finish."
+      }
+    }
+  }
+}

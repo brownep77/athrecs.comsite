@@ -6,7 +6,10 @@ import { OFFICIAL_START_TIME_DETAILS } from "./lib/official-start-time-details.m
 import { NORFOLK_CLARIFICATION_REVIEW } from "./lib/norfolk-start-clarification-review.mjs";
 import { NORFOLK_CLARIFICATION_DETAILS } from "./lib/norfolk-start-clarification-details.mjs";
 import { REEPHAM_LAP_STARTS_REVIEW } from "./lib/reepham-lap-starts-review.mjs";
-const { FIXTURE_DETAILS, checkedFixtureStart } = await import("../src/data/fixture-details.ts");
+import { MARRIOTTS_CONFIRMATION_REVIEW } from "./lib/marriotts-organiser-confirmation-review.mjs";
+import marriottsConfirmation from "../src/data/marriotts-organiser-confirmation-2026-10-23.json" with { type: "json" };
+const { FIXTURE_DETAILS, checkedFixtureStart, checkedFixtureEventStart } =
+  await import("../src/data/fixture-details.ts");
 const publishing = await import("../src/lib/athrecs/catalogue-publishing.server.ts");
 
 // Rehearse the exact four public fixture corrections in disposable Postgres.
@@ -19,7 +22,7 @@ try {
       [row.event_id, slug],
     );
     await sql.query(
-      "insert into editions(id,event_id,event_date,distance_code,distance_km,status,start_time,source_url,notes) values($1,$2,$3,$4,$5,$6,$7,$8,$9)",
+      "insert into editions(id,event_id,event_date,distance_code,distance_km,status,start_time,source_url,notes,entry_url) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
       [
         row.id,
         row.event_id,
@@ -30,6 +33,7 @@ try {
         row.start_time,
         row.source_url,
         row.notes,
+        row.event_id === 74 ? "https://totalracetiming.co.uk/race/693" : null,
       ],
     );
   }
@@ -198,6 +202,109 @@ try {
     "10:15",
     "10:30",
   ]);
+  // A direct organiser reply now replaces exactly the two Marriott's Way clocks.
+  const confirmation = () =>
+    publishCheckedFixtures(sql, publishing, marriottsConfirmation, MARRIOTTS_CONFIRMATION_REVIEW);
+  await assert.rejects(
+    publishCheckedFixtures(sql, publishing, marriottsConfirmation, {
+      ...MARRIOTTS_CONFIRMATION_REVIEW,
+      startCorrections: undefined,
+    }),
+    /Start changed since review/,
+  );
+  await assert.rejects(
+    publishCheckedFixtures(sql, publishing, marriottsConfirmation, {
+      ...MARRIOTTS_CONFIRMATION_REVIEW,
+      baseline: undefined,
+    }),
+    /Start changed since review/,
+  );
+  await sql.query("update editions set start_time='10:45' where id=71609697");
+  await assert.rejects(confirmation(), /Reviewed baseline changed/);
+  assert.equal((await sql.query("select count(*)::int n from catalogue_revisions"))[0].n, 3);
+  assert.equal(
+    (await sql.query("select start_time from editions where id=71609696"))[0].start_time,
+    "09:00",
+  );
+  await sql.query("update editions set start_time='10:30' where id=71609697");
+  const confirmed = await confirmation();
+  const confirmedRows = await sql.query("select * from editions order by id");
+  assert.equal(confirmedRows.length, 4);
+  assert.deepEqual(
+    confirmedRows.filter((row) => row.event_id !== 74),
+    finalRows.filter((row) => row.event_id !== 74),
+    "No unrelated race changes",
+  );
+  const { sportsEventJsonLd } = await import("../src/lib/athrecs/seo.ts");
+  for (const [distance, time] of [
+    ["Marathon", "08:30"],
+    ["Half", "10:00"],
+  ]) {
+    const row = confirmedRows.find(
+      (item) => item.event_id === 74 && item.distance_code === distance,
+    );
+    const before = finalRows.find((item) => item.id === row.id);
+    assert.equal(row.start_time, time);
+    assert(row.notes.startsWith(before.notes));
+    assert.match(
+      row.notes,
+      /Janice of Boghopper Races confirmed directly by email on 23 October 2026/,
+    );
+    assert.match(
+      row.notes,
+      /One mass start for runners and walkers; gun-timed start and chip-timed finish/,
+    );
+    assert.deepEqual({ ...row, start_time: before.start_time, notes: before.notes }, before);
+    assert.equal(
+      checkedFixtureStart("marriotts-way-races", "2027-02-21", distance, before.start_time),
+      time,
+    );
+    assert.equal(
+      checkedFixtureStart("marriotts-way-races", "2028-02-21", distance, "12:00"),
+      "12:00",
+    );
+    assert.equal(
+      sportsEventJsonLd({
+        name: `Marriott's Way ${distance}`,
+        slug: "marriotts-way-races",
+        startDate: row.event_date,
+        startTime: row.start_time,
+      }).startDate,
+      `2027-02-21T${time}`,
+    );
+  }
+  const confirmationAudit = await sql.query(
+    "select before_json,after_json from catalogue_change_log where revision_id=$1",
+    [confirmed.revisionId],
+  );
+  assert.equal(confirmationAudit.length, 2);
+  assert.equal(checkedFixtureEventStart("marriotts-way-races", "2027-02-21", "10:00"), "08:30");
+  assert.equal(checkedFixtureEventStart("marriotts-way-races", "2028-02-21", "10:00"), "10:00");
+  assert.equal(checkedFixtureEventStart("reepham-cross-country", "2027-01-31", "10:15"), "10:15");
+  assert.equal(
+    sportsEventJsonLd({
+      name: "Marriott’s Way Marathon & Half",
+      slug: "marriotts-way-races",
+      startDate: "2027-02-21",
+      startTime: checkedFixtureEventStart("marriotts-way-races", "2027-02-21", "10:00"),
+    }).startDate,
+    "2027-02-21T08:30",
+  );
+  assert.deepEqual(confirmationAudit.map((change) => change.before_json.record.start_time).sort(), [
+    "09:00",
+    "10:30",
+  ]);
+  assert.deepEqual(confirmationAudit.map((change) => change.after_json.record.start_time).sort(), [
+    "08:30",
+    "10:00",
+  ]);
+  for (const [details, review] of [
+    [OFFICIAL_START_TIME_DETAILS, START_TIME_REVIEW],
+    [NORFOLK_CLARIFICATION_DETAILS, NORFOLK_CLARIFICATION_REVIEW],
+    [marriottsConfirmation, MARRIOTTS_CONFIRMATION_REVIEW],
+  ])
+    assert((await publishCheckedFixtures(sql, publishing, details, review)).alreadyPublished);
+  assert.deepEqual(await sql.query("select * from editions order by id"), confirmedRows);
   const { withheldFixtureDateKeys } = await import("../src/data/fixture-date-reviews.ts");
   assert.deepEqual(withheldFixtureDateKeys, [
     "gear-10k-kings-lynn|2026-11-08",
@@ -205,7 +312,7 @@ try {
     "lingwood-duathlon|2027-03-21",
   ]);
   console.log(
-    "Reepham lap correction preserves all three audited batches, guards concurrent changes, sets 5K/10K starts separately, retains junior/Marriott starts and date holds, and is repeat-safe.",
+    "Historical batches and Marriott organiser confirmation passed: exact scope, guarded replacements, rollback, source history, structured starts and replay safety.",
   );
 } finally {
   await pg.close();

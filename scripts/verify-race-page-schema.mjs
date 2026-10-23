@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { sportsEventJsonLd } from "../src/lib/athrecs/seo.ts";
 import * as runrecsSeo from "../src/runrecs/seo.ts";
+import { checkedFixtureEventStart } from "../src/data/fixture-details.ts";
 
 const race = {
   name: 'Example meeting "Autumn"',
@@ -297,7 +298,21 @@ for (const [, expression] of nextSelectors) {
   assert.equal(selectNext([{ event_date: "2026-12-26", status: "Cancelled" }]), undefined);
 }
 assert.match(route, /startDate: next\?\.event_date/);
-assert.match(route, /startTime: next\?\.start_time/);
+const startExpression = route.match(/startTime: (checkedFixtureEventStart\([\s\S]*?\)),/);
+assert(startExpression, "The event schema must use the confirmed programme start with its edition fallback");
+const selectStart = new Function("event", "next", "checkedFixtureEventStart", `return ${startExpression[1]};`);
+for (const schema of [sportsEventJsonLd, runrecsSeo.sportsEventJsonLd]) {
+  for (const [slug, date, stored, expected] of [
+    ["marriotts-way-races", "2027-02-21", "10:30", "08:30"],
+    ["marriotts-way-races", "2028-02-21", "10:30", "10:30"],
+    ["unrelated-event", "2027-02-21", "09:45", "09:45"],
+  ]) {
+    const time = selectStart({ slug }, { event_date: date, start_time: stored }, checkedFixtureEventStart);
+    assert.equal(schema({ ...race, slug, startDate: date, startTime: time }).startDate, `${date}T${expected}`);
+  }
+  const time = selectStart(race, undefined, checkedFixtureEventStart);
+  assert.equal(schema({ ...race, startTime: time })["@type"], "WebPage");
+}
 assert.match(route, /entryOptions: next\?\.entry_options/);
 assert.match(route, /endDate: next\?\.end_date/);
 assert.match(route, /endTime: next\?\.end_time/);

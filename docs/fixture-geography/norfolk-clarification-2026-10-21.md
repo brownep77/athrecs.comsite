@@ -1,5 +1,7 @@
 # Norfolk start-time clarification — 21 October 2026
 
+**Marriott’s Way superseded on 23 October 2026:** the [organiser’s direct confirmation](marriotts-confirmation-2026-10-23.md) sets the marathon to 08:30 and half marathon to 10:00. The account below remains the historical evidence and decision record.
+
 Reepham adult TBC values below were subsequently superseded by the
 [owner clarification of one- and two-lap starts](reepham-lap-starts-2026-10-21.md).
 This document retains the evidence and decision published in PR #793.
