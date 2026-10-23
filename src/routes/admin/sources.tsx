@@ -110,9 +110,12 @@ function AdminSourcesPage() {
         </Button>
       </div>
 
-      <Button asChild>
-        <Link to="/admin/fixture-import">Import verified fixture file</Link>
-      </Button>
+      <div className="flex flex-wrap gap-2">
+        <Button asChild><a href="/admin/athlete-result-finder">Search sources for an athlete</a></Button>
+        <Button asChild variant="secondary">
+          <Link to="/admin/fixture-import">Import verified fixture file</Link>
+        </Button>
+      </div>
 
       {registry.isLoading && <p className="text-sm text-muted">Loading source registry…</p>}
       {registry.isError && (

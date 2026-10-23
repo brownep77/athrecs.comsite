@@ -16,6 +16,7 @@ import {
   MessageCircle,
   Network,
   RefreshCcw,
+  Search,
   ShieldCheck,
   UserRoundCog,
 } from "lucide-react";
@@ -139,6 +140,12 @@ const staffNav = [
     label: "Fixtures",
     icon: CalendarCheck,
     match: (path: string) => path.startsWith("/admin/fixture-review"),
+  },
+  {
+    to: "/admin/athlete-result-finder",
+    label: "Athlete result finder",
+    icon: Search,
+    match: (path: string) => path.startsWith("/admin/athlete-result-finder"),
   },
   {
     to: "/admin/result-archive",

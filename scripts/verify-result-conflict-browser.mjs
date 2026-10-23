@@ -35,6 +35,11 @@ const alerts = file(
 export async function getClaimAlertSummary(){return {production:!location.search.includes('paused'),persistent:true,emailConfigured:true,recipientCount:1,retriesConfigured:true,pending:window.retryCount?0:1,sent:window.retryCount?1:0,needs_review:0,awaiting_setup:0}}
 export async function retryClaimAlerts(){if(window.failRetry)throw Error('Synthetic failure');window.retryCount++;return {sent:1,failed:0,paused:false}}`,
 );
+const archiveClaims = file(
+  "archive-claims.js",
+  `export async function getStaffArchiveRequests(){return []}
+export async function processStaffArchiveClaims(){throw Error('No archive ownership changes in this synthetic fixture')}`,
+);
 file("style.css", `@import "${resolve("src/styles.css")}";\n@source "${resolve("src")}";`);
 file(
   "index.html",
@@ -54,6 +59,7 @@ const server = await createServer({
       { find: "@tanstack/react-router", replacement: router },
       { find: "@/lib/athrecs/result-claims-api", replacement: claims },
       { find: "@/lib/athrecs/result-claim-alerts-api", replacement: alerts },
+      { find: "@/lib/results-archive/member-api", replacement: archiveClaims },
       { find: "@", replacement: resolve("src") },
     ],
   },

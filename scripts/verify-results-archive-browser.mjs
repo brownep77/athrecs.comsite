@@ -182,7 +182,7 @@ const server = await createServer({
 await server.listen();
 const browser = await chromium.launch({
   headless: true,
-  executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+  executablePath: process.env.ATHRECS_TEST_CHROMIUM_EXECUTABLE ?? process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
 });
 try {
   const page = await browser.newPage({ viewport: { width: 1365, height: 1000 } });
@@ -273,6 +273,23 @@ try {
   await receiver.getByRole("link", { name: "Continue to import" }).click();
   await receiver.getByText("Loaded 2 captured rows", { exact: false }).waitFor();
   // A reload (including a sign-in round trip) must not lose the pending page.
+  await receiver.reload();
+  await receiver.getByText("Loaded 2 captured rows", { exact: false }).waitFor();
+  // A finder deep link must win over an unrelated pending browser import.
+  // Use the real persisted capture and reload the real archive component so its
+  // asynchronous IndexedDB hydration runs after the requested entry is selected.
+  const pendingImportUrl = receiver.url();
+  const [requestedEntry] = await sql`select id::int from result_archive_entries where payload->>'name'='Morgan Browser Synthetic' order by id limit 1`;
+  await receiver.goto(`${pendingImportUrl.split("#")[0]}#entry=${requestedEntry.id}`);
+  await receiver.reload();
+  await receiver.getByRole("button", { name: "Review 2 received rows", exact: true }).waitFor();
+  await receiver.getByRole("heading", { name: `Review entry #${requestedEntry.id}`, exact: true }).waitFor();
+  await receiver.getByText("Inspect Synthetic Timing source", { exact: true }).waitFor();
+  assert.equal(await receiver.getByRole("button", { name: "Source results", exact: true }).getAttribute("aria-pressed"), "true", "A pending browser capture cannot replace the requested archive-entry tab");
+  assert.equal(await receiver.getByRole("button", { name: "Import a race", exact: true }).getAttribute("aria-pressed"), "false");
+  assert.equal(await receiver.getByText("Loaded 2 captured rows", { exact: false }).count(), 0, "Pending capture stays available without opening the import wizard");
+  assert.equal((await sql`select count(*)::int n from result_archive_batches`)[0].n, 1, "Opening a stored entry does not save the pending capture");
+  await receiver.goto(pendingImportUrl);
   await receiver.reload();
   await receiver.getByText("Loaded 2 captured rows", { exact: false }).waitFor();
   await receiver.getByRole("button", { name: "Continue to race" }).click();
@@ -424,7 +441,7 @@ try {
   await collectionContext.close();
   assert.deepEqual(errors, []);
   console.log(
-    "Archive browser -> validated API -> disposable database -> UI passed: upload, lost-response resume, private matching request, staff link, canonical view and mobile layout.",
+    "Archive browser -> validated API -> disposable database -> UI passed: upload, lost-response resume, stored-entry deep link with a pending import, private matching request, staff link, canonical view and mobile layout.",
   );
 } finally {
   await browser.close();

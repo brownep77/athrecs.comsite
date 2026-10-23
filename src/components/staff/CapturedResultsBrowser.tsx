@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { getCapturedRaces, getCapturedRaceRows } from "@/lib/results-archive/captures-api";
@@ -11,6 +11,19 @@ export function CapturedResultsBrowser() {
   const [q, setQ] = useState("");
   const [offset, setOffset] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
+  const [selectedName, setSelectedName] = useState("");
+  useEffect(() => {
+    const openRequestedCapture = () => {
+      const hash = new URLSearchParams(window.location.hash.slice(1));
+      const id = hash.get("capture");
+      if (!id || !/^[1-9]\d{0,19}$/.test(id)) return;
+      setSelected(id);
+      setSelectedName((hash.get("name") || "").slice(0, 160));
+    };
+    openRequestedCapture();
+    window.addEventListener("hashchange", openRequestedCapture);
+    return () => window.removeEventListener("hashchange", openRequestedCapture);
+  }, []);
   const races = useQuery({
     queryKey: ["captured-races", q, offset],
     queryFn: () => getCapturedRaces({ data: { q, offset } }),
@@ -92,7 +105,10 @@ export function CapturedResultsBrowser() {
                     <td className="p-3">
                       <button
                         className="text-left font-medium underline"
-                        onClick={() => setSelected(race.id)}
+                        onClick={() => {
+                          setSelected(race.id);
+                          setSelectedName("");
+                        }}
                       >
                         {race.name}
                       </button>
@@ -139,14 +155,20 @@ export function CapturedResultsBrowser() {
           </div>
         </>
       )}
-      {selected && <CapturedRace key={selected} id={selected} />}
+      {selected && (
+        <CapturedRace
+          key={`${selected}:${selectedName}`}
+          id={selected}
+          initialName={selectedName}
+        />
+      )}
     </section>
   );
 }
 
-function CapturedRace({ id }: { id: string }) {
-  const [draft, setDraft] = useState("");
-  const [q, setQ] = useState("");
+function CapturedRace({ id, initialName = "" }: { id: string; initialName?: string }) {
+  const [draft, setDraft] = useState(initialName);
+  const [q, setQ] = useState(initialName);
   const [offset, setOffset] = useState(0);
   const results = useQuery({
     queryKey: ["captured-race", id, q, offset],

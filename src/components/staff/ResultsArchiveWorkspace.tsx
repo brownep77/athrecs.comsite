@@ -43,11 +43,16 @@ export function ResultsArchiveWorkspace() {
         if (!active) return;
         setPending(captures);
         const requested = location.hash.match(/^#import=([a-f0-9-]{36})$/i)?.[1];
+        const reviewingEvidence = /^#(?:entry=[1-9]\d{0,14}$|capture=[1-9]\d{0,19}(?:&|$))/.test(
+          location.hash,
+        );
         const selected = requested
           ? captures.find((c) => c.id === requested)
-          : window.opener
-            ? captures.at(-1)
-            : captures[0];
+          : reviewingEvidence
+            ? undefined
+            : window.opener
+              ? captures.at(-1)
+              : captures[0];
         if (selected) {
           setIncoming(selected);
           setTab("upload");
@@ -77,6 +82,18 @@ export function ResultsArchiveWorkspace() {
   const [pages, setPages] = useState<number[]>([0]);
   const after = pages.at(-1)!;
   const [selected, setSelected] = useState<number | null>(null);
+  useEffect(() => {
+    const openRequestedEntry = () => {
+      const id = window.location.hash.match(/^#entry=([1-9]\d{0,14})$/)?.[1];
+      if (id && Number.isSafeInteger(Number(id))) {
+        setSelected(Number(id));
+        setTab("source");
+      }
+    };
+    openRequestedEntry();
+    window.addEventListener("hashchange", openRequestedEntry);
+    return () => window.removeEventListener("hashchange", openRequestedEntry);
+  }, []);
   const overview = useQuery({
     queryKey: ["archive-workspace", "overview"],
     queryFn: () => getArchiveOverview(),

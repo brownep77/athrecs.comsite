@@ -33,6 +33,7 @@ import { Route as AdminApprovalsRouteImport } from './routes/admin/approvals'
 import { Route as AdminAssistantChatsRouteImport } from './routes/admin/assistant-chats'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
 import { Route as AdminAthleteDirectoryRouteImport } from './routes/admin/athlete-directory'
+import { Route as AdminAthleteResultFinderRouteImport } from './routes/admin/athlete-result-finder'
 import { Route as AdminAthleteToolsRouteImport } from './routes/admin/athlete-tools'
 import { Route as AdminAthleteWorkspaceRouteImport } from './routes/admin/athlete-workspace'
 import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
@@ -226,6 +227,12 @@ const AdminAthleteDirectoryRoute = AdminAthleteDirectoryRouteImport.update({
   path: '/admin/athlete-directory',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAthleteResultFinderRoute =
+  AdminAthleteResultFinderRouteImport.update({
+    id: '/admin/athlete-result-finder',
+    path: '/admin/athlete-result-finder',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AdminAthleteToolsRoute = AdminAthleteToolsRouteImport.update({
   id: '/admin/athlete-tools',
   path: '/admin/athlete-tools',
@@ -620,6 +627,7 @@ export interface FileRoutesByFullPath {
   '/admin/assistant-chats': typeof AdminAssistantChatsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
+  '/admin/athlete-result-finder': typeof AdminAthleteResultFinderRoute
   '/admin/athlete-tools': typeof AdminAthleteToolsRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
@@ -718,6 +726,7 @@ export interface FileRoutesByTo {
   '/admin/assistant-chats': typeof AdminAssistantChatsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
+  '/admin/athlete-result-finder': typeof AdminAthleteResultFinderRoute
   '/admin/athlete-tools': typeof AdminAthleteToolsRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
@@ -817,6 +826,7 @@ export interface FileRoutesById {
   '/admin/assistant-chats': typeof AdminAssistantChatsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
+  '/admin/athlete-result-finder': typeof AdminAthleteResultFinderRoute
   '/admin/athlete-tools': typeof AdminAthleteToolsRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
@@ -917,6 +927,7 @@ export interface FileRouteTypes {
     | '/admin/assistant-chats'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
+    | '/admin/athlete-result-finder'
     | '/admin/athlete-tools'
     | '/admin/athlete-workspace'
     | '/admin/catalogue-publishing'
@@ -1015,6 +1026,7 @@ export interface FileRouteTypes {
     | '/admin/assistant-chats'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
+    | '/admin/athlete-result-finder'
     | '/admin/athlete-tools'
     | '/admin/athlete-workspace'
     | '/admin/catalogue-publishing'
@@ -1113,6 +1125,7 @@ export interface FileRouteTypes {
     | '/admin/assistant-chats'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
+    | '/admin/athlete-result-finder'
     | '/admin/athlete-tools'
     | '/admin/athlete-workspace'
     | '/admin/catalogue-publishing'
@@ -1212,6 +1225,7 @@ export interface RootRouteChildren {
   AdminAssistantChatsRoute: typeof AdminAssistantChatsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
   AdminAthleteDirectoryRoute: typeof AdminAthleteDirectoryRoute
+  AdminAthleteResultFinderRoute: typeof AdminAthleteResultFinderRoute
   AdminAthleteToolsRoute: typeof AdminAthleteToolsRoute
   AdminAthleteWorkspaceRoute: typeof AdminAthleteWorkspaceRoute
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
@@ -1455,6 +1469,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/athlete-directory'
       fullPath: '/admin/athlete-directory'
       preLoaderRoute: typeof AdminAthleteDirectoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/athlete-result-finder': {
+      id: '/admin/athlete-result-finder'
+      path: '/admin/athlete-result-finder'
+      fullPath: '/admin/athlete-result-finder'
+      preLoaderRoute: typeof AdminAthleteResultFinderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/athlete-tools': {
@@ -1988,6 +2009,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminAssistantChatsRoute: AdminAssistantChatsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
   AdminAthleteDirectoryRoute: AdminAthleteDirectoryRoute,
+  AdminAthleteResultFinderRoute: AdminAthleteResultFinderRoute,
   AdminAthleteToolsRoute: AdminAthleteToolsRoute,
   AdminAthleteWorkspaceRoute: AdminAthleteWorkspaceRoute,
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
