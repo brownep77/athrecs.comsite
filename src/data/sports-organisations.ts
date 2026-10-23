@@ -712,8 +712,10 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     multisport,
     "https://triathlonsa.co.za/",
     "South Africa’s governing body for triathlon and related multisport.",
-    ["https://triathlonsa.co.za/"],
+    ["https://triathlonsa.co.za/", "https://triathlon.org/members/triathlon-south-africa-tsa", "https://africa.triathlon.org/national-federations"],
     ["world-triathlon"],
+    [],
+    "2026-10-23",
   ),
   record({
     slug: "parkrun",
@@ -2021,9 +2023,11 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     [
       "https://triathlon.org/members/kenyan-triathlon-association",
       "https://www.triathlonkenya.org/",
+      "https://africa.triathlon.org/national-federations",
     ],
     ["world-triathlon"],
     ["Kenyan Triathlon Association", "KTF"],
+    "2026-10-23",
   ),
   federation(
     "bermuda-athletics",
@@ -3954,7 +3958,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["triathlon", "duathlon"],
     "https://fmtri.mu/",
     "National federation for triathlon and duathlon in Mauritius.",
-    ["https://triathlon.org/members/mauritius-triathlon-federation", "https://fmtri.mu/"],
+    ["https://triathlon.org/members/mauritius-triathlon-federation", "https://fmtri.mu/", "https://africa.triathlon.org/national-federations"],
     ["world-triathlon"],
     ["FMTri", "Mauritius Triathlon Federation", "Mauritian Triathlon"],
     "2026-10-23",
@@ -8002,6 +8006,678 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   ],
   "related": [
     "world-athletics"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "algeria-triathlon",
+  "name": "Fédération Algérienne de Triathlon",
+  "type": "national",
+  "country": "Algeria",
+  "jurisdiction": "Algeria",
+  "territories": [
+    "Algeria"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Algeria, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federation-algerienne-de-triathlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federation-algerienne-de-triathlon",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "burundi-triathlon",
+  "name": "Burundi triathlon union",
+  "type": "national",
+  "country": "Burundi",
+  "jurisdiction": "Burundi",
+  "territories": [
+    "Burundi"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Burundi, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/burundi-triathlon-union",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/burundi-triathlon-union",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "benin-triathlon",
+  "name": "Fédération Béninoise de Triathlon",
+  "type": "national",
+  "country": "Benin",
+  "jurisdiction": "Benin",
+  "territories": [
+    "Benin"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Benin, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/association-de-triathlon-benin",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/association-de-triathlon-benin",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "burkina-faso-triathlon",
+  "name": "Federation Burkinabe De Triathlon",
+  "type": "national",
+  "country": "Burkina Faso",
+  "jurisdiction": "Burkina Faso",
+  "territories": [
+    "Burkina Faso"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Burkina Faso, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/burkina-faso-provisions-member",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/burkina-faso-provisions-member",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "central-african-republic-triathlon",
+  "name": "Fédération Centrafricaine de Triathlon",
+  "type": "national",
+  "country": "Central African Republic",
+  "jurisdiction": "Central African Republic",
+  "territories": [
+    "Central African Republic"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Central African Republic, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federation-centrafricaine-de-triathlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federation-centrafricaine-de-triathlon",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cote-divoire-triathlon",
+  "name": "Fédération Ivoirienne de Triathlon et Disciplines Associées",
+  "type": "national",
+  "country": "Côte d’Ivoire",
+  "jurisdiction": "Côte d’Ivoire",
+  "territories": [
+    "Côte d’Ivoire"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Côte d’Ivoire, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federation-ivoirienne-de-triathlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federation-ivoirienne-de-triathlon",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cameroon-triathlon",
+  "name": "Cameroun Triathlon",
+  "type": "national",
+  "country": "Cameroon",
+  "jurisdiction": "Cameroon",
+  "territories": [
+    "Cameroon"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Cameroon, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/cameroon-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/cameroon-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "democratic-republic-of-the-congo-triathlon",
+  "name": "DRCongo federation of Triathlon",
+  "type": "national",
+  "country": "Democratic Republic of the Congo",
+  "jurisdiction": "Democratic Republic of the Congo",
+  "territories": [
+    "Democratic Republic of the Congo"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Democratic Republic of the Congo, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/drcongo-federation-of-triathlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/drcongo-federation-of-triathlon",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "egypt-triathlon",
+  "name": "Egyptian Triathlon Federation",
+  "type": "national",
+  "country": "Egypt",
+  "jurisdiction": "Egypt",
+  "territories": [
+    "Egypt"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Egypt, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/egyptian-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/egyptian-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "gambia-triathlon",
+  "name": "Gambia Triathlon Union",
+  "type": "national",
+  "country": "Gambia",
+  "jurisdiction": "Gambia",
+  "territories": [
+    "Gambia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Gambia, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/gambia-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/gambia-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "ghana-triathlon",
+  "name": "Ghana Triathlon Federation",
+  "type": "national",
+  "country": "Ghana",
+  "jurisdiction": "Ghana",
+  "territories": [
+    "Ghana"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Ghana, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/ghana-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/ghana-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "guinea-triathlon",
+  "name": "Guinea Triathlon Federation",
+  "type": "national",
+  "country": "Guinea",
+  "jurisdiction": "Guinea",
+  "territories": [
+    "Guinea"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Guinea, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/guinea-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/guinea-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "libya-triathlon",
+  "name": "Libyan Triathlon Federation",
+  "type": "national",
+  "country": "Libya",
+  "jurisdiction": "Libya",
+  "territories": [
+    "Libya"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Libya, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/libyan-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/libyan-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "madagascar-triathlon",
+  "name": "Madagascar Triathlon Federation",
+  "type": "national",
+  "country": "Madagascar",
+  "jurisdiction": "Madagascar",
+  "territories": [
+    "Madagascar"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Madagascar, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/madagascar-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/madagascar-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "morocco-triathlon",
+  "name": "Fédération Royale Marocaine de Triathlon",
+  "type": "national",
+  "country": "Morocco",
+  "jurisdiction": "Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Morocco, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/morocan-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/morocan-triathlon-association",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "mozambique-triathlon",
+  "name": "União Moçambicana de Triatlo",
+  "type": "national",
+  "country": "Mozambique",
+  "jurisdiction": "Mozambique",
+  "territories": [
+    "Mozambique"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Mozambique, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/uniaeo-mocambicana-de-triatlo",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/uniaeo-mocambicana-de-triatlo",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "namibia-triathlon",
+  "name": "Namibian Triathlon Federation",
+  "type": "national",
+  "country": "Namibia",
+  "jurisdiction": "Namibia",
+  "territories": [
+    "Namibia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Namibia, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/namibian-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/namibian-triathlon-association",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "nigeria-triathlon",
+  "name": "Triathlon Nigeria",
+  "type": "national",
+  "country": "Nigeria",
+  "jurisdiction": "Nigeria",
+  "territories": [
+    "Nigeria"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Nigeria, listed by World Triathlon and Africa Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/nigerian-triathlon-union",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/nigerian-triathlon-union",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "niger-triathlon",
+  "name": "Fédération Nigérienne de Triathlon",
+  "type": "national",
+  "country": "Niger",
+  "jurisdiction": "Niger",
+  "territories": [
+    "Niger"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Niger, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/niger",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/niger",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "rwanda-triathlon",
+  "name": "Federation Rwandaise de Triathlon",
+  "type": "national",
+  "country": "Rwanda",
+  "jurisdiction": "Rwanda",
+  "territories": [
+    "Rwanda"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Rwanda, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federation-rwandaise-de-triathlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federation-rwandaise-de-triathlon",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "senegal-triathlon",
+  "name": "Senegal Triathlon Federation",
+  "type": "national",
+  "country": "Senegal",
+  "jurisdiction": "Senegal",
+  "territories": [
+    "Senegal"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Senegal, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/senegal-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/senegal-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "sierra-leone-triathlon",
+  "name": "Sierra Leone National Triathlon Association",
+  "type": "national",
+  "country": "Sierra Leone",
+  "jurisdiction": "Sierra Leone",
+  "territories": [
+    "Sierra Leone"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Sierra Leone, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/sierra-leone-national-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/sierra-leone-national-triathlon-association",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tanzania-triathlon",
+  "name": "Tanzania Triathlon",
+  "type": "national",
+  "country": "Tanzania",
+  "jurisdiction": "Tanzania",
+  "territories": [
+    "Tanzania"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Tanzania, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/tanzania-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/tanzania-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "togo-triathlon",
+  "name": "Togo Triathlon Federation",
+  "type": "national",
+  "country": "Togo",
+  "jurisdiction": "Togo",
+  "territories": [
+    "Togo"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Togo, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/togo-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/togo-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tunisia-triathlon",
+  "name": "Fédération Tunisienne de Triathlon & Para triathlon",
+  "type": "national",
+  "country": "Tunisia",
+  "jurisdiction": "Tunisia",
+  "territories": [
+    "Tunisia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Tunisia, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/tunisia-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/tunisia-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "uganda-triathlon",
+  "name": "Uganda Triathlon Federation",
+  "type": "national",
+  "country": "Uganda",
+  "jurisdiction": "Uganda",
+  "territories": [
+    "Uganda"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Uganda, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/uganda-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/uganda-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "zambia-triathlon",
+  "name": "Triathlon Zambia",
+  "type": "national",
+  "country": "Zambia",
+  "jurisdiction": "Zambia",
+  "territories": [
+    "Zambia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Zambia, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/triathlon-zambia",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/triathlon-zambia",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "zimbabwe-triathlon",
+  "name": "Zimbabwe Triathlon Federation",
+  "type": "national",
+  "country": "Zimbabwe",
+  "jurisdiction": "Zimbabwe",
+  "territories": [
+    "Zimbabwe"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon body for Zimbabwe, listed by World Triathlon and Africa Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/zimbabwe-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/zimbabwe-triathlon-federation",
+    "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
   ]
 }, "2026-10-23"),
 ];
