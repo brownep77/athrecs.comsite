@@ -32,7 +32,13 @@ export const Route = createFileRoute("/sports/$sport")({
     const sport = getSportPage(params.sport);
     if (!sport) throw notFound();
     const fixtures = await getSportFixtures({ data: { slug: sport.slug, ...deps } });
-    if (!deps.q && !deps.country && !deps.distance && (deps.page ?? 1) > 1 && !fixtures.fixtures.length)
+    if (
+      !deps.q &&
+      !deps.country &&
+      !deps.distance &&
+      (deps.page ?? 1) > 1 &&
+      !fixtures.fixtures.length
+    )
       throw notFound();
     return { sport, ...fixtures, broadcasts: upcomingBroadcasts(sport) };
   },
@@ -50,9 +56,7 @@ export const Route = createFileRoute("/sports/$sport")({
           description: disciplineIntros[sport.slug] ?? sportGuideText(sport.sport).intro,
           url,
         }),
-        ...(filtered
-          ? [{ name: "robots", content: "noindex, follow" }]
-          : []),
+        ...(filtered ? [{ name: "robots", content: "noindex, follow" }] : []),
       ],
       links: [{ rel: "canonical", href: url }],
     };
@@ -115,6 +119,13 @@ function SportPage() {
         </a>
         <Link to="/results" search={{ category: sport.slug }} className={textLink}>
           Results <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
+        <Link to="/athletes" search={{ sport: sport.sport }} className={textLink}>
+          {sport.sport === "Cycling"
+            ? "Cycling athletes"
+            : sport.sport === "Running"
+              ? "Runners"
+              : "Athletes"}
         </Link>
         <Link to="/race-reports" search={{ sport: sport.slug }} className={textLink}>
           Race Reports
