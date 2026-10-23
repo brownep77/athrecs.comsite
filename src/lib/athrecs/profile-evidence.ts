@@ -75,6 +75,13 @@ export function withoutProfileEvidence<T>(value: T): T {
         if (key === "sources" && "finishTimeSeconds" in row && "distanceKm" in row)
           output.hasSourceEvidence =
             row.hasSourceEvidence ?? (Array.isArray(item) && item.length > 0);
+      } else if (key === "labels" && Array.isArray(item)) {
+        // Import provenance is staff evidence, including in serialized page data.
+        // Retain race classifications and qualifications used by achievements.
+        output[key] = item.filter(
+          (label) =>
+            !/^(?:Abbott\s+)?World Marathon Majors source result$/i.test(String(label).trim()),
+        );
       } else if (key === "externalId") output[key] = sourceKey(`history:${row.provider}:${item}`);
       else if (
         [
