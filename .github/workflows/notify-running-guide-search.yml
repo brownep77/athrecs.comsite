@@ -1,0 +1,63 @@
+name: Notify search engines of public running guides
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/routes/running/guides.tsx"
+      - "src/components/running/RunningGuidesPage.tsx"
+      - "src/components/running/RunningGuidesLink.tsx"
+      - "src/components/running/Road*Pages.tsx"
+      - "src/components/running/SuperHalfsPage.tsx"
+      - "src/components/running/RunningDiscovery.tsx"
+      - "src/components/layout/AppShell.tsx"
+      - "src/routes/running/race-series.tsx"
+      - "src/routes/running/superhalfs.tsx"
+      - "src/routes/running/$guide.tsx"
+      - "src/routes/running/races/$slug.tsx"
+      - "src/routes/running/ultramarathons/$slug.tsx"
+      - "src/routes/sitemaps/$file.ts"
+      - "src/lib/athrecs/public-pages.ts"
+      - "src/lib/athrecs/seo.ts"
+      - "src/lib/running/guide-directory*.ts"
+      - "src/lib/running/guide-modified.ts"
+      - "src/lib/running/*seo.ts"
+      - "src/data/road-marathons/**"
+      - "src/data/road-half-marathons/**"
+      - "src/lib/running/road-ultras.ts"
+      - "src/data/superhalfs.ts"
+      - "src/data/race-collections.ts"
+      - "scripts/submit-running-guides-indexnow.mjs"
+      - "scripts/lib/athlete-search-readiness.mjs"
+      - "scripts/indexnow-key-file.txt"
+      - "public/*.txt"
+      - ".github/workflows/notify-running-guide-search.yml"
+  pull_request:
+    paths:
+      - "scripts/submit-running-guides-indexnow.mjs"
+      - "scripts/lib/athlete-search-readiness.mjs"
+      - ".github/workflows/notify-running-guide-search.yml"
+permissions:
+  contents: read
+concurrency:
+  group: notify-running-guides-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  notify:
+    name: Validate and notify public running guides
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify fail-closed notification safeguards
+        run: node scripts/submit-running-guides-indexnow.mjs --self-test
+      - name: Wait for production and notify the complete public guide set
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: node scripts/submit-running-guides-indexnow.mjs --submit --wait-for-hub=720 --expected-release="$GITHUB_SHA"

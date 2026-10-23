@@ -1,4 +1,5 @@
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { roadGuideModifiedAt } from "./guide-modified";
 import {
   ROAD_ULTRAS,
   ULTRA_CHECKED,
@@ -25,7 +26,7 @@ export function roadUltraHead(today: string, race?: RoadUltra) {
       name: title,
       description,
       inLanguage: "en-GB",
-      dateModified: ULTRA_CHECKED,
+      dateModified: roadGuideModifiedAt([ULTRA_CHECKED]),
       isPartOf: { "@id": `${SITE_URL}/#website` },
       ...(race ? {} : { mainEntity: { "@id": `${url}#races` } }),
     },

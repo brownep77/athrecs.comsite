@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { ArrowUpRight, CalendarDays, Flag, Gauge, Medal, Users } from "lucide-react";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
+import { RunningGuidesLink } from "./RunningGuidesLink";
 import {
   SUPERHALFS_BERLIN_FAQ,
   SUPERHALFS_CARDIFF_RACE_INFO,
@@ -162,6 +163,7 @@ export function SuperHalfsPage() {
         </span>
       </nav>
 
+      <RunningGuidesLink />
       <header className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
         <div className="h-1.5 bg-accent" />
         <div className="grid gap-8 p-5 md:p-8 lg:grid-cols-[1.5fr_1fr] lg:p-10">

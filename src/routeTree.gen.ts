@@ -94,6 +94,7 @@ import { Route as RunningIndexRouteImport } from './routes/running/index'
 import { Route as RunningGuideRouteImport } from './routes/running/$guide'
 import { Route as RunningCalendarRouteImport } from './routes/running/calendar'
 import { Route as RunningEventsRouteImport } from './routes/running/events'
+import { Route as RunningGuidesRouteImport } from './routes/running/guides'
 import { Route as RunningRaceSeriesRouteImport } from './routes/running/race-series'
 import { Route as RunningSuperhalfsRouteImport } from './routes/running/superhalfs'
 import { Route as RunningUkMarathonsRouteImport } from './routes/running/uk-marathons'
@@ -541,6 +542,11 @@ const RunningEventsRoute = RunningEventsRouteImport.update({
   path: '/running/events',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RunningGuidesRoute = RunningGuidesRouteImport.update({
+  id: '/running/guides',
+  path: '/running/guides',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RunningRaceSeriesRoute = RunningRaceSeriesRouteImport.update({
   id: '/running/race-series',
   path: '/running/race-series',
@@ -703,6 +709,7 @@ export interface FileRoutesByFullPath {
   '/running/$guide': typeof RunningGuideRoute
   '/running/calendar': typeof RunningCalendarRoute
   '/running/events': typeof RunningEventsRoute
+  '/running/guides': typeof RunningGuidesRoute
   '/running/race-series': typeof RunningRaceSeriesRoute
   '/running/superhalfs': typeof RunningSuperhalfsRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
@@ -806,6 +813,7 @@ export interface FileRoutesByTo {
   '/running/$guide': typeof RunningGuideRoute
   '/running/calendar': typeof RunningCalendarRoute
   '/running/events': typeof RunningEventsRoute
+  '/running/guides': typeof RunningGuidesRoute
   '/running/race-series': typeof RunningRaceSeriesRoute
   '/running/superhalfs': typeof RunningSuperhalfsRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
@@ -910,6 +918,7 @@ export interface FileRoutesById {
   '/running/$guide': typeof RunningGuideRoute
   '/running/calendar': typeof RunningCalendarRoute
   '/running/events': typeof RunningEventsRoute
+  '/running/guides': typeof RunningGuidesRoute
   '/running/race-series': typeof RunningRaceSeriesRoute
   '/running/superhalfs': typeof RunningSuperhalfsRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
@@ -1015,6 +1024,7 @@ export interface FileRouteTypes {
     | '/running/$guide'
     | '/running/calendar'
     | '/running/events'
+    | '/running/guides'
     | '/running/race-series'
     | '/running/superhalfs'
     | '/running/uk-marathons'
@@ -1118,6 +1128,7 @@ export interface FileRouteTypes {
     | '/running/$guide'
     | '/running/calendar'
     | '/running/events'
+    | '/running/guides'
     | '/running/race-series'
     | '/running/superhalfs'
     | '/running/uk-marathons'
@@ -1221,6 +1232,7 @@ export interface FileRouteTypes {
     | '/running/$guide'
     | '/running/calendar'
     | '/running/events'
+    | '/running/guides'
     | '/running/race-series'
     | '/running/superhalfs'
     | '/running/uk-marathons'
@@ -1325,6 +1337,7 @@ export interface RootRouteChildren {
   RunningGuideRoute: typeof RunningGuideRoute
   RunningCalendarRoute: typeof RunningCalendarRoute
   RunningEventsRoute: typeof RunningEventsRoute
+  RunningGuidesRoute: typeof RunningGuidesRoute
   RunningRaceSeriesRoute: typeof RunningRaceSeriesRoute
   RunningSuperhalfsRoute: typeof RunningSuperhalfsRoute
   RunningUkMarathonsRoute: typeof RunningUkMarathonsRoute
@@ -1950,6 +1963,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RunningEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/running/guides': {
+      id: '/running/guides'
+      path: '/running/guides'
+      fullPath: '/running/guides'
+      preLoaderRoute: typeof RunningGuidesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/running/race-series': {
       id: '/running/race-series'
       path: '/running/race-series'
@@ -2141,6 +2161,7 @@ const rootRouteChildren: RootRouteChildren = {
   RunningGuideRoute: RunningGuideRoute,
   RunningCalendarRoute: RunningCalendarRoute,
   RunningEventsRoute: RunningEventsRoute,
+  RunningGuidesRoute: RunningGuidesRoute,
   RunningRaceSeriesRoute: RunningRaceSeriesRoute,
   RunningSuperhalfsRoute: RunningSuperhalfsRoute,
   RunningUkMarathonsRoute: RunningUkMarathonsRoute,

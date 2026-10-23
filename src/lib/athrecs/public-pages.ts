@@ -4,6 +4,7 @@ import { EDITORIAL_ARTICLES } from "../../data/athrecs-editorial";
 import { editorialPath } from "./editorial";
 import { SPORTS_ORGANISATIONS } from "../../data/sports-organisations";
 import { SUPERHALFS_PATH } from "../../data/superhalfs";
+import { RUNNING_GUIDES_PATH } from "../running/guide-directory";
 
 /** One list for the HTML directory and the XML sitemap. Account tools stay private. */
 export const PUBLIC_PAGES = [
@@ -20,6 +21,7 @@ export const PUBLIC_PAGES = [
   { path: "/races/places", name: "Major races by continent, country and county" },
   { path: "/running/events", name: "Running race search" },
   { path: "/running/calendar", name: "Running calendar" },
+  { path: RUNNING_GUIDES_PATH, name: "Running guides by country and race series" },
   { path: "/running/race-series", name: "Running race series" },
   { path: SUPERHALFS_PATH, name: "SuperHalfs series: races, dates and entry" },
   { path: "/calendar", name: "Athletics calendar" },
