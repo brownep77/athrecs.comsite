@@ -131,7 +131,13 @@ try {
   await apple.waitFor();
   await page.getByRole("heading", { name: "Selected races (1)", exact: true }).waitFor();
   const appleHref = await apple.getAttribute("href");
-  assert.match(appleHref, /^webcal:\/\/www\.athrecs\.com\/api\/race-calendar\/[a-f0-9]{64}$/);
+  assert.equal(new URL(appleHref).protocol, "webcal:");
+  assert.equal(
+    new URL(appleHref).host,
+    new URL(origin).host,
+    "Subscription stays on the signed-in site",
+  );
+  assert.match(new URL(appleHref).pathname, /^\/api\/race-calendar\/[a-f0-9]{64}$/);
   const localFeed = (url) => origin + new URL(url).pathname;
   const firstFeed = localFeed(appleHref);
   const feed = await fetch(firstFeed);
@@ -184,7 +190,7 @@ try {
   assert.equal(await apple.getAttribute("href"), appleHref);
   await page.locator("summary").filter({ hasText: "Subscription address and controls" }).click();
   const address = page.getByRole("textbox", { name: "Private subscription address", exact: true });
-  assert.equal(await address.inputValue(), appleHref.replace("webcal:", "https:"));
+  assert.equal(await address.inputValue(), localFeed(appleHref));
   for (const width of [320, 390, 1280]) {
     await page.setViewportSize({ width, height: 900 });
     assert(

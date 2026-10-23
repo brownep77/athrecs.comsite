@@ -59,7 +59,10 @@ function MyRaceCalendar() {
   const data = query.data;
   const candidate = data?.candidate;
   const alreadyAdded = data?.items.some((item) => item.id === raceId);
-  const feedUrl = data?.feedPath ? `https://www.athrecs.com${data.feedPath}` : "";
+  const feedUrl =
+    data?.feedPath && typeof window !== "undefined"
+      ? new URL(data.feedPath, window.location.origin).href
+      : "";
   return (
     <main className="mx-auto max-w-3xl space-y-6">
       <header className="space-y-3">
@@ -150,7 +153,7 @@ function MyRaceCalendar() {
             {feedUrl ? (
               <>
                 <Button asChild>
-                  <a href={feedUrl.replace(/^https:/, "webcal:")} rel="noreferrer">
+                  <a href={feedUrl.replace(/^https?:/, "webcal:")} rel="noreferrer">
                     Open Apple Calendar <ExternalLink className="size-4" aria-hidden="true" />
                   </a>
                 </Button>
