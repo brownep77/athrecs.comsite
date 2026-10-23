@@ -13,6 +13,7 @@ import {
 } from "@/lib/running/road-marathon-seo";
 import { MARATHON_PLANNING } from "@/data/road-marathons/planning";
 import { roadGuideModifiedAt } from "@/lib/running/guide-modified";
+import { RunningGuidesLink } from "./RunningGuidesLink";
 import { useRaceDateRefresh } from "./use-race-date-refresh";
 
 const linkClass =
@@ -105,6 +106,7 @@ export function CountryMarathonPage({
           {country.name} {distance}s
         </span>
       </nav>
+      <RunningGuidesLink />
       <header className="max-w-4xl">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">
           {country.name} · Road running
@@ -425,6 +427,7 @@ export function RoadMarathonPage({
         <span aria-hidden="true">/</span>
         <span aria-current="page">{race.name}</span>
       </nav>
+      <RunningGuidesLink />
       <header className="border-b border-border pb-7">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">
           {country.name} · Road {half ? "half marathon · 21.0975 km" : "marathon · 42.195 km"}

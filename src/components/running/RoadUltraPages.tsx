@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ExternalLink, Search } from "lucide-react";
 import { useRaceDateRefresh } from "./use-race-date-refresh";
+import { RunningGuidesLink } from "./RunningGuidesLink";
 import {
   ROAD_ULTRAS,
   ULTRA_CHECKED,
@@ -121,6 +122,7 @@ export function RoadUltraGuide({ today }: { today: string }) {
   return (
     <article className="space-y-10 pb-8">
       <Breadcrumbs />
+      <RunningGuidesLink />
       <header className="space-y-5 border-b border-border pb-7">
         <p className="text-sm font-semibold uppercase tracking-wider text-accent">
           AthRecs running guides
@@ -356,6 +358,7 @@ export function RoadUltraDetail({ race, today }: { race: RoadUltra; today: strin
   return (
     <article className="mx-auto max-w-4xl space-y-8 pb-8">
       <Breadcrumbs race={race} />
+      <RunningGuidesLink />
       <header className="space-y-4 border-b border-border pb-6">
         <p className="text-sm font-semibold uppercase tracking-wider text-accent">
           UK road ultramarathons · {formatLabels[race.format]}

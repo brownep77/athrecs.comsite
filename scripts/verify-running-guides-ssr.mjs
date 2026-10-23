@@ -32,10 +32,30 @@ const MARATHON_COUNTRIES = [...FULL_COUNTRIES, ...HALF_MARATHON_COUNTRIES];
 const { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } =
   await import("../src/lib/running/road-ultras.ts");
 const { SUPERHALFS_PATH } = await import("../src/data/superhalfs.ts");
+const { raceGroupDefinitions } = await import("../src/data/race-collections.ts");
+const { COUNTRY_SITES } = await import("../src/lib/athrecs/country-sites.ts");
+const siteUrl = "https://www.athrecs.com";
+const guideHubPath = "/running/guides";
+// Derive coverage from the published source catalogues, independently of the
+// directory builder, so omitting a catalogue from the page cannot hide a gap.
+const countryGuidePaths = [
+  ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
+  ULTRA_GUIDE_PATH,
+];
+const raceGuidePaths = [
+  ...ROAD_MARATHONS.map((race) => `/running/races/${race.slug}`),
+  ...ROAD_ULTRAS.map((race) => ultraPath(race.slug)),
+];
+const seriesGuidePaths = [
+  SUPERHALFS_PATH,
+  ...raceGroupDefinitions.map((group) => `/running/race-series#${group.code}`),
+];
+const countryPortalPaths = COUNTRY_SITES.map((country) => `/en/${country.slug}`);
 const base = process.env.RUNNING_VERIFY_BASE ?? "http://127.0.0.1:8097";
 const toolPaths = ["/running/events", "/running/calendar", "/running/race-series"];
 const paths = [
   "/running",
+  guideHubPath,
   "/running/road",
   "/running/trail",
   "/running/fell",
@@ -48,6 +68,77 @@ const paths = [
 ];
 const titles = new Set();
 const descriptions = new Set();
+
+function verifyGuideHub($) {
+  // Inspect raw SSR anchors. Native details are intentionally allowed: their
+  // links remain present and usable without JavaScript, even when collapsed.
+  const crawlableLinks = new Set(
+    $("main a[href]")
+      .toArray()
+      .filter(
+        (element) =>
+          $(element).text().trim() &&
+          !$(element).closest("[hidden], [aria-hidden=true], template").length &&
+          !($(element).attr("rel") ?? "").split(/\s+/).includes("nofollow"),
+      )
+      .map((element) => new URL($(element).attr("href"), siteUrl).href),
+  );
+  for (const [kind, expectedPaths] of [
+    ["country guide", countryGuidePaths],
+    ["individual race guide", raceGuidePaths],
+    ["race series", seriesGuidePaths],
+    ["country portal", countryPortalPaths],
+  ]) {
+    for (const destination of expectedPaths)
+      assert(
+        crawlableLinks.has(`${siteUrl}${destination}`),
+        `${guideHubPath}: missing readable, followable SSR link to ${kind} ${destination}`,
+      );
+  }
+
+  const schemaNodes = [];
+  function collectSchemaNodes(value) {
+    if (Array.isArray(value)) value.forEach(collectSchemaNodes);
+    else if (value && typeof value === "object") {
+      schemaNodes.push(value);
+      Object.values(value).forEach(collectSchemaNodes);
+    }
+  }
+  $('script[type="application/ld+json"]')
+    .toArray()
+    .forEach((element) => collectSchemaNodes(JSON.parse($(element).html())));
+  const hasType = (node, type) => [node["@type"]].flat().includes(type);
+  assert(
+    schemaNodes.some(
+      (node) => hasType(node, "CollectionPage") && node.url === `${siteUrl}${guideHubPath}`,
+    ),
+    `${guideHubPath}: canonical CollectionPage markup missing`,
+  );
+  const itemLists = schemaNodes.filter((node) => hasType(node, "ItemList"));
+  assert(itemLists.length, `${guideHubPath}: guide list markup missing`);
+  for (const list of itemLists) {
+    assert(list.itemListElement?.length, `${guideHubPath}: empty structured guide list`);
+    for (const entry of list.itemListElement) {
+      const item = entry.item ?? entry;
+      const destination = typeof item === "string" ? item : (item.url ?? item["@id"]);
+      assert(
+        typeof destination === "string" && crawlableLinks.has(new URL(destination, siteUrl).href),
+        `${guideHubPath}: structured guide destination is missing from readable SSR links: ${destination}`,
+      );
+    }
+  }
+  assert(
+    schemaNodes.some((node) => {
+      if (!hasType(node, "BreadcrumbList")) return false;
+      const lastItem = node.itemListElement?.at(-1)?.item;
+      const destination =
+        typeof lastItem === "string" ? lastItem : (lastItem?.["@id"] ?? lastItem?.url);
+      return destination === `${siteUrl}${guideHubPath}`;
+    }),
+    `${guideHubPath}: breadcrumb must identify the canonical guide directory`,
+  );
+}
+
 let cursor = 0;
 async function worker() {
   while (cursor < paths.length) {
@@ -75,11 +166,12 @@ async function worker() {
     );
     for (const script of $('script[type="application/ld+json"]').toArray())
       JSON.parse($(script).html());
+    if (route === guideHubPath) verifyGuideHub($);
     $("main a[href]").each((i, element) => {
       const href = $(element).attr("href");
       if (href.startsWith("/running"))
         assert(
-          [...paths, ...toolPaths].includes(href.split("#")[0]),
+          [...paths, ...toolPaths].includes(new URL(href, siteUrl).pathname),
           `${route} has broken internal link ${href}`,
         );
       else if (href.startsWith("/")) $(element).attr("href", `https://www.athrecs.com${href}`);
@@ -177,5 +269,5 @@ for (const route of paths) {
 for (const route of ["/running/unknown-country", "/running/races/not-a-real-marathon"])
   assert.equal((await fetch(`${base}${route}`)).status, 404, route);
 console.log(
-  `Passed SSR: ${paths.length} routes, distance labels, metadata, JSON-LD, results links, internal links, sitemap and 404s.`,
+  `Passed SSR: ${paths.length} routes; hub links to ${countryGuidePaths.length} country guides, ${raceGuidePaths.length} individual race guides, ${seriesGuidePaths.length} race series and ${countryPortalPaths.length} country portals; distance labels, metadata, JSON-LD, results links, internal links, sitemap and 404s.`,
 );

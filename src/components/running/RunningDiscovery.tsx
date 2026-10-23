@@ -12,6 +12,7 @@ import type { PlaceTerrain } from "@/lib/athrecs/race-place-facets";
 import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
 import { HALF_MARATHON_COUNTRIES } from "@/data/road-half-marathons/countries";
 import { SUPERHALFS_PATH } from "@/data/superhalfs";
+import { RUNNING_GUIDES_PATH } from "@/lib/running/guide-directory";
 
 const cardClass =
   "rounded-xl border border-border bg-surface p-5 hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
@@ -49,6 +50,9 @@ export function RunningDiscovery({ site }: { site?: CountrySite }) {
         </p>
       </header>
       <nav aria-label="Running tools" className="flex flex-wrap gap-x-6 font-semibold">
+        <a href={RUNNING_GUIDES_PATH} className={linkClass}>
+          Running guides by country and race series
+        </a>
         <a href={`/running/events${search}`} className={linkClass}>
           Search running races
         </a>
@@ -149,6 +153,9 @@ export function RunningDisciplineDiscovery({ discipline }: { discipline: PlaceTe
         className={linkClass}
       >
         Search all {discipline.label.toLowerCase()} races
+      </a>
+      <a href={RUNNING_GUIDES_PATH} className={linkClass}>
+        Browse all country guides, race series and individual race guides
       </a>
       <section aria-labelledby="running-continents" className="space-y-4">
         <h2 id="running-continents" className="font-display text-2xl font-semibold">

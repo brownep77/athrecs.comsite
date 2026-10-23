@@ -7,6 +7,7 @@ import { SUPERHALFS_PATH } from "@/data/superhalfs";
 import { listEvents } from "@/runrecs/api";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import type { EventListItem, RaceGroupCode } from "@/lib/athrecs/types";
+import { RunningGuidesLink } from "@/components/running/RunningGuidesLink";
 
 const groupOrder: RaceGroupCode[] = ["world-marathon-majors", "utmb-world-series", "utmb-index"];
 
@@ -28,6 +29,53 @@ export const Route = createFileRoute("/running/race-series")({
         "Explore SuperHalfs half marathons, World Marathon Majors, official UTMB World Series events and verified UTMB Index races on AthRecs.",
       url: `${SITE_URL}/running/race-series`,
     }),
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "CollectionPage",
+              "@id": `${SITE_URL}/running/race-series#page`,
+              url: `${SITE_URL}/running/race-series`,
+              name: "SuperHalfs, World Marathon Majors & UTMB races",
+              inLanguage: "en-GB",
+              breadcrumb: { "@id": `${SITE_URL}/running/race-series#breadcrumb` },
+              mainEntity: {
+                "@type": "ItemList",
+                itemListElement: [
+                  { name: "SuperHalfs", path: SUPERHALFS_PATH },
+                  ...raceGroupDefinitions.map((group) => ({
+                    name: group.name,
+                    path: `/running/race-series#${group.code}`,
+                  })),
+                ].map((item, index) => ({
+                  "@type": "ListItem",
+                  position: index + 1,
+                  name: item.name,
+                  url: `${SITE_URL}${item.path}`,
+                })),
+              },
+            },
+            {
+              "@type": "BreadcrumbList",
+              "@id": `${SITE_URL}/running/race-series#breadcrumb`,
+              itemListElement: [
+                { name: "AthRecs", path: "/" },
+                { name: "Running", path: "/running" },
+                { name: "Race series", path: "/running/race-series" },
+              ].map((item, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: item.name,
+                item: `${SITE_URL}${item.path}`,
+              })),
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: RaceSeriesPage,
 });
@@ -38,6 +86,18 @@ function RaceSeriesPage() {
 
   return (
     <div className="space-y-8 pb-10">
+      <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-muted">
+        <a href="/" className="hover:text-accent">
+          AthRecs
+        </a>
+        <span aria-hidden="true">/</span>
+        <a href="/running" className="hover:text-accent">
+          Running
+        </a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Race series</span>
+      </nav>
+      <RunningGuidesLink />
       <header className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
         <div className="h-1.5 bg-primary" />
         <div className="space-y-4 p-5 md:p-8">

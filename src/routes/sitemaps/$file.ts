@@ -23,6 +23,15 @@ export const Route = createFileRoute("/sitemaps/$file")({
             const { ROAD_ULTRAS, ULTRA_CHECKED, ULTRA_GUIDE_PATH, ultraPath } =
               await import("@/lib/running/road-ultras");
             const { SUPERHALFS_PATH, SUPERHALFS_CHECKED_AT } = await import("@/data/superhalfs");
+            const { RUNNING_GUIDES_PATH, RUNNING_GUIDES_MODIFIED } =
+              await import("@/lib/running/guide-directory");
+            const { getRunningGuideDirectory } =
+              await import("@/lib/running/guide-directory.server");
+            modified.set(RUNNING_GUIDES_PATH, (await getRunningGuideDirectory()).modifiedAt);
+            modified.set("/running/race-series", RUNNING_GUIDES_MODIFIED);
+            modified.set("/running", RUNNING_GUIDES_MODIFIED);
+            for (const discipline of ["road", "trail", "fell", "cross-country"])
+              modified.set(`/running/${discipline}`, RUNNING_GUIDES_MODIFIED);
             modified.set(SUPERHALFS_PATH, SUPERHALFS_CHECKED_AT);
             for (const [countries, races] of [
               [MARATHON_COUNTRIES, ROAD_MARATHONS],
@@ -40,8 +49,9 @@ export const Route = createFileRoute("/sitemaps/$file")({
               for (const race of races)
                 modified.set(`/running/races/${race.slug}`, roadGuideModifiedAt([race.checkedAt]));
             }
-            modified.set(ULTRA_GUIDE_PATH, ULTRA_CHECKED);
-            for (const race of ROAD_ULTRAS) modified.set(ultraPath(race.slug), ULTRA_CHECKED);
+            modified.set(ULTRA_GUIDE_PATH, roadGuideModifiedAt([ULTRA_CHECKED]));
+            for (const race of ROAD_ULTRAS)
+              modified.set(ultraPath(race.slug), roadGuideModifiedAt([ULTRA_CHECKED]));
             runningPaths.push(
               "/running",
               "/running/road",
