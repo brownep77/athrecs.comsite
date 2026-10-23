@@ -277,3 +277,27 @@ export function formatLocalClock(
   const abbr = timeZoneAbbr(tz, place?.date || "2026-08-15");
   return `${clock} ${abbr}`;
 }
+
+/** Calendar exports must not use the display helper's guessed country/default zone. */
+export function calendarTimeZoneForPlace(place?: PlaceTime | null): string | null {
+  const country = (place?.country || place?.nation || "").trim().toLowerCase();
+  const region = (place?.county || "").trim().toLowerCase();
+  const singleZone = new Set([
+    "england", "scotland", "wales", "northern ireland", "united kingdom", "ireland",
+    "jersey", "guernsey", "isle of man", "gibraltar", "belgium", "germany", "switzerland",
+    "italy", "poland", "austria", "finland", "sweden", "lithuania", "estonia", "iceland",
+    "czechia", "czech republic", "slovakia", "hungary", "slovenia", "japan", "south africa",
+    "namibia", "eswatini", "singapore", "malaysia", "moldova", "peru", "algeria", "saudi arabia",
+    "tunisia", "senegal", "mozambique", "turkey", "egypt", "china", "united arab emirates",
+    "iran", "jordan", "bermuda", "costa rica", "venezuela", "uruguay", "kyrgyzstan", "benin",
+    "argentina", "taiwan", "south korea", "hong kong", "qatar", "philippines", "malta", "latvia",
+  ]);
+  if (singleZone.has(country)) return COUNTRY_TZ[country] ?? null;
+  // Only unambiguous, country-qualified regions. Split states/provinces need an explicit zone.
+  const regions: Record<string, string[]> = {
+    "united states": ["california", "washington", "colorado", "utah", "new mexico", "wyoming", "illinois", "wisconsin", "minnesota", "iowa", "missouri", "arkansas", "louisiana", "oklahoma", "alabama", "mississippi", "georgia", "north carolina", "south carolina", "virginia", "west virginia", "maryland", "delaware", "pennsylvania", "new york", "new jersey", "connecticut", "rhode island", "massachusetts", "new hampshire", "vermont", "maine", "ohio", "hawaii", "washington dc"],
+    canada: ["alberta", "manitoba", "nova scotia", "new brunswick", "prince edward island"],
+    australia: ["south australia", "northern territory", "queensland", "tasmania", "victoria", "australian capital territory"],
+  };
+  return regions[country]?.includes(region) ? REGION_TZ[region] : null;
+}

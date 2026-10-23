@@ -1,3 +1,6 @@
+import { AddToCalendar } from "./AddToCalendar";
+import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
+import { SITE_URL } from "@/lib/athrecs/seo";
 import { useState } from "react";
 import { ArrowUpRight, CalendarDays, MapPin, Ticket } from "lucide-react";
 import type { getEventBySlug } from "@/lib/athrecs/api";
@@ -129,6 +132,7 @@ export function RacePracticalInformation({
                       <p className="text-sm text-muted">Entry link not yet listed</p>
                     )}
                   </div>
+                  <AddToCalendar race={catalogueCalendarRace(event, edition, SITE_URL)} />
                   {notes ? <p className="text-sm leading-relaxed text-muted">{notes}</p> : null}
                   {editionGuide || source ? (
                     <a
