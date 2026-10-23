@@ -17,7 +17,11 @@ export const profileDetailsSchema = z.object({
   acceptContact: z.boolean().default(false),
 });
 export type AthleteProfileDetails = z.infer<typeof profileDetailsSchema>;
-export type PublicProfileDetails = AthleteProfileDetails & { birthday: string };
+export type PublicProfileDetails = AthleteProfileDetails & {
+  birthday: string;
+  birthYear?: string;
+  birthplace?: string;
+};
 export function readProfileDetails(value: unknown): AthleteProfileDetails {
   // Imports may represent unknown details as JSON null. Treat those fields as
   // absent when reading, so the existing blank/private defaults apply. Keep the
@@ -56,11 +60,13 @@ export function publishedSourceProfileDetails(
       ? (input as Record<string, unknown>)
       : {};
   const stored = record(value);
-  const publication = record(stored.worldAthleticsProfileDetailsPublication);
-  if (publication.athleteId !== athleteId || !publication.reviewedAt) return null;
-  const approved = record(publication.filledProfileDetails);
   const current = publicProfileDetails(value, dob);
   const details = publicProfileDetails({});
+  const publication = record(stored.worldAthleticsProfileDetailsPublication);
+  const approved =
+    publication.athleteId === athleteId && publication.reviewedAt
+      ? record(publication.filledProfileDetails)
+      : {};
   if (
     approved.birthdayVisibility === current.birthdayVisibility &&
     current.birthdayVisibility !== "hidden"
@@ -71,5 +77,38 @@ export function publishedSourceProfileDetails(
   for (const field of ["manager", "birthCountry"] as const) {
     if (approved[field] === current[field]) details[field] = current[field];
   }
-  return details.birthday || details.manager || details.birthCountry ? details : null;
+  const sourcePublication = record(stored.sourceProfileDetailsPublication);
+  const sourceApproved = record(sourcePublication.filledProfileDetails);
+  const observed = record(stored.sourceProfileObservation);
+  if (
+    sourcePublication.athleteId === athleteId &&
+    sourcePublication.reviewedAt &&
+    typeof observed.birthplace === "string" &&
+    observed.birthplace.trim() &&
+    observed.birthplace.length <= 160 &&
+    sourceApproved.birthplace === observed.birthplace
+  ) {
+    details.birthplace = observed.birthplace;
+  }
+  // A reviewed year-only fact must never become an invented birthday or bypass
+  // a later birthday privacy choice. Raw source observations stay private.
+  if (
+    sourcePublication.athleteId === athleteId &&
+    sourcePublication.reviewedAt &&
+    dob === null &&
+    (!Object.hasOwn(stored, "birthdayVisibility") || stored.birthdayVisibility === "full") &&
+    Number.isInteger(observed.birthYear) &&
+    Number(observed.birthYear) >= 1850 &&
+    Number(observed.birthYear) <= new Date().getUTCFullYear() &&
+    sourceApproved.birthYear === observed.birthYear
+  ) {
+    details.birthYear = String(observed.birthYear);
+  }
+  return details.birthday ||
+    details.birthYear ||
+    details.birthplace ||
+    details.manager ||
+    details.birthCountry
+    ? details
+    : null;
 }

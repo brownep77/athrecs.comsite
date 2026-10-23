@@ -366,6 +366,63 @@ try {
   assert.doesNotMatch(JSON.stringify(hiddenDetails), /January 1980|Unpublished Replacement/);
   await sql`update athletes set profile_details=${JSON.stringify({ ...reviewedDetails, worldAthleticsProfileDetailsPublication: { ...reviewedDetails.worldAthleticsProfileDetailsPublication, athleteId: a.id + 1 } })}::jsonb where id=${a.id}`;
   assert(!(await read()).details, "Approval belongs to the exact athlete");
+  const yearDetails = {
+    ...nationalityDetails,
+    sourceProfileObservation: {
+      birthYear: 1980,
+      sourceUrl: "https://example.test/private-year-evidence",
+    },
+    sourceProfileDetailsPublication: {
+      athleteId: a.id,
+      reviewedAt: "2026-10-23T00:00:00Z",
+      filledProfileDetails: { birthYear: 1980 },
+    },
+  };
+  await sql`update athletes set date_of_birth=null, profile_details=${JSON.stringify(yearDetails)}::jsonb where id=${a.id}`;
+  const withYear = await read();
+  assert.equal(withYear.details.birthYear, "1980");
+  assert.equal(withYear.details.birthday, "");
+  assert.doesNotMatch(
+    JSON.stringify(withYear),
+    /private-year-evidence|sourceProfileObservation|reviewedAt/,
+  );
+  const yearHtml = await (await fetch(origin + "/athletes/synthetic-duv-public")).text();
+  assert.match(yearHtml.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ""), /Birth year/);
+  assert.doesNotMatch(yearHtml, /private-year-evidence/);
+  const placeDetails = {
+    ...yearDetails,
+    sourceProfileObservation: { ...yearDetails.sourceProfileObservation, birthplace: "Test City" },
+    sourceProfileDetailsPublication: {
+      ...yearDetails.sourceProfileDetailsPublication,
+      filledProfileDetails: { birthYear: 1980, birthplace: "Test City" },
+    },
+  };
+  await sql`update athletes set profile_details=${JSON.stringify(placeDetails)}::jsonb where id=${a.id}`;
+  assert.equal((await read()).details.birthplace, "Test City");
+  await sql`update athletes set profile_details=${JSON.stringify({ ...placeDetails, sourceProfileObservation: { birthYear: 1980, birthplace: "Changed City" } })}::jsonb where id=${a.id}`;
+  assert.equal(
+    (await read()).details.birthplace,
+    undefined,
+    "Birthplaces require approval of the current value",
+  );
+  for (const change of [
+    { birthdayVisibility: "hidden" },
+    { birthdayVisibility: "day-month" },
+    { sourceProfileObservation: { birthYear: 1981 } },
+    {
+      sourceProfileDetailsPublication: {
+        ...yearDetails.sourceProfileDetailsPublication,
+        athleteId: a.id + 1,
+      },
+    },
+    { sourceProfileDetailsPublication: null },
+  ]) {
+    await sql`update athletes set profile_details=${JSON.stringify({ ...yearDetails, ...change })}::jsonb where id=${a.id}`;
+    assert(
+      !(await read()).details,
+      "Year-only facts need matching approval and must respect privacy",
+    );
+  }
   await sql`update athletes set profile_details=${JSON.stringify(nationalityDetails)}::jsonb where id=${a.id}`;
   const directory = await rpc("athrecs/athlete-directory-api", "getAthleteDirectory", {
     q: "Synthetic DUV Public",

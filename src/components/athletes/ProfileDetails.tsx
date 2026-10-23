@@ -16,7 +16,9 @@ export function ProfileDetails({
 }) {
   const rows = [
     ["Country of birth", details.birthCountry],
+    ["Birthplace", details.birthplace || ""],
     ["Birthday", details.birthday],
+    ["Birth year", details.birthday ? "" : details.birthYear || ""],
     ["Running age category", details.runningAgeCategory],
     ["Previous club", details.previousClub],
     ["Coach", details.coach],
