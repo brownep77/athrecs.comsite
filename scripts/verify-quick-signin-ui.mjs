@@ -163,17 +163,14 @@ try {
     await dialog.getByLabel("Password", { exact: true }).fill(legacyPassword);
     await dialog.getByRole("button", { name: "Sign in with email", exact: true }).click();
     await check("Existing shorter passwords work through the UI", () =>
-      page.waitForURL(`${origin}/athlete-account`, { timeout: 10000 }),
+      page.waitForURL(`${origin}/athlete-account?section=potential`, { timeout: 10000 }),
     );
     await context.clearCookies();
     dialog = await open();
     assert.equal(await dialog.getByRole("heading", { name: "Welcome to AthRecs" }).count(), 1);
     assert.equal(await dialog.getByRole("textbox").count(), 1);
     assert.equal(await dialog.locator('input[type="password"],input[type="date"]').count(), 0);
-    assert.equal(
-      await dialog.getByRole("checkbox", { name: /Find my race results/ }).isChecked(),
-      false,
-    );
+    assert.equal(await dialog.getByRole("checkbox", { name: /Find my race results/ }).count(), 0);
     assert.equal(await dialog.getByRole("button", { name: "Continue with Microsoft" }).count(), 0);
     await dialog.getByRole("button", { name: "More sign-in options" }).click();
     await dialog.getByRole("button", { name: "Continue with Microsoft" }).waitFor();
@@ -197,7 +194,7 @@ try {
     // Both code signup and an explicit signup link start with only an email.
     dialog = await open("signup");
     assert.equal(await dialog.getByRole("textbox").count(), 1);
-    await dialog.getByRole("checkbox", { name: /Find my race results/ }).check();
+    assert.equal(await dialog.getByText("Find my race results", { exact: true }).count(), 1);
     await dialog.getByLabel("Email address", { exact: true }).fill("quick-runner@example.test");
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
@@ -226,7 +223,8 @@ try {
       insert into results (id, edition_id, athlete_id, finish_time_seconds) values (990021, 990021, 990021, 2400);
     `);
     await page.getByLabel("Full racing name", { exact: false }).fill("Quick Signup Runner");
-    await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
+    await page.getByRole("checkbox", { name: /I acknowledge/ }).check();
+    await page.getByRole("button", { name: "Save and find my results", exact: true }).click();
     await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
     await page
       .getByRole("article")
@@ -281,10 +279,7 @@ try {
     );
     await context.clearCookies();
     dialog = await open("signup");
-    assert.equal(
-      await dialog.getByRole("checkbox", { name: /Find my race results/ }).isChecked(),
-      false,
-    );
+    assert.equal(await dialog.getByRole("checkbox", { name: /Find my race results/ }).count(), 0);
     await dialog.getByLabel("Email address", { exact: true }).fill("skip-results@example.test");
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
@@ -293,11 +288,14 @@ try {
       .text.match(/\b([0-9]{6})\b/)[1];
     await dialog.getByLabel("Six-digit code", { exact: true }).fill(skipCode);
     await dialog.getByRole("button", { name: "Verify code and continue" }).click();
-    await page.waitForURL(`${origin}/athlete-account`);
-    await page.getByRole("heading", { name: "My races", exact: true }).waitFor();
+    await page.waitForURL(`${origin}/athlete-account?section=potential`);
+    await page.getByLabel("Full racing name", { exact: false }).waitFor();
     assert.equal(await page.getByLabel("Full racing name", { exact: false }).count(), 1);
+    await page.getByRole("link", { name: "Review available results now", exact: true }).click();
+    await page.getByRole("button", { name: "Add clubs or profile links", exact: true }).waitFor();
+    assert.equal(await page.getByLabel("Full racing name", { exact: false }).count(), 0);
     console.log(
-      "PASS: email-only signup, wrong/correct codes, mobile layout, optional result discovery, name capture, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
+      "PASS: email-only signup, wrong/correct codes, mobile layout, default result discovery, optional matching details, name capture, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
     );
   }
   assert.deepEqual(errors, []);

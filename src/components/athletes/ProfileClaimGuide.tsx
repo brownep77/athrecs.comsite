@@ -89,10 +89,12 @@ export function ProfileClaimGuide({
   account,
   onNameSaved,
   showSteps = true,
+  hideRacingNameForm = false,
 }: {
   account: AthleteAccountData;
   onNameSaved: (account: AthleteAccountData) => void;
   showSteps?: boolean;
+  hideRacingNameForm?: boolean;
 }) {
   const navigate = useNavigate();
   const [resume, setResume] = useState<number | null>(null);
@@ -213,12 +215,19 @@ export function ProfileClaimGuide({
           </Button>
         </>
       ) : !account.fullName.trim() ? (
-        <ClaimRacingName
-          onSaved={(updated) => {
-            onNameSaved(updated);
-            void navigate({ to: "/athlete-account", search: { section: "potential" } });
-          }}
-        />
+        hideRacingNameForm ? (
+          <p className="text-sm text-muted">
+            Add your full racing name in the matching details above, then review your suggested
+            results.
+          </p>
+        ) : (
+          <ClaimRacingName
+            onSaved={(updated) => {
+              onNameSaved(updated);
+              void navigate({ to: "/athlete-account", search: { section: "potential" } });
+            }}
+          />
+        )
       ) : (
         <>
           <p className="text-sm text-muted">

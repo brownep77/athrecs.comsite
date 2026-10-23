@@ -1,5 +1,6 @@
 import { ResultMatchingSettings } from "@/components/athletes/ResultMatchingSettings";
 import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
+import { ProfileResultsSetup } from "@/components/athletes/ProfileResultsSetup";
 import { AccountNavigation } from "@/components/athletes/AccountNavigation";
 import { AccountRaces } from "@/components/athletes/AccountRaces";
 import { AccountPhotos } from "@/components/athletes/AccountPhotos";
@@ -395,8 +396,31 @@ function SignedInAccount() {
         </p>
       ) : null}
       {IS_ATHRECS_SITE ? (
+        <ProfileResultsSetup
+          account={account.data}
+          onSaved={(updated) => {
+            lastLoadedForm.current = accountToForm(updated);
+            setForm(
+              (current) =>
+                current && {
+                  ...current,
+                  fullName: updated.fullName,
+                  clubOrTeam: updated.clubOrTeam,
+                  previousNames: updated.previousNames,
+                  profileDetails: {
+                    ...readProfileDetails(current.profileDetails),
+                    previousClub: updated.profileDetails?.previousClub ?? "",
+                  },
+                  privacyAcknowledged: updated.privacyAcknowledged,
+                },
+            );
+          }}
+        />
+      ) : null}
+      {IS_ATHRECS_SITE ? (
         <ProfileClaimGuide
           account={account.data}
+          hideRacingNameForm
           onNameSaved={(updated) => {
             lastLoadedForm.current = accountToForm(updated);
             setForm(

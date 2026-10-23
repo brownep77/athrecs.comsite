@@ -76,7 +76,6 @@ export function AthleteAuthDialog() {
   const [resendAfter, setResendAfter] = useState(0);
   const [usePassword, setUsePassword] = useState(false);
   const [showAllProviders, setShowAllProviders] = useState(false);
-  const [findRaceResults, setFindRaceResults] = useState(false);
 
   const methods = useQuery({
     queryKey: ["available-auth-methods"],
@@ -98,7 +97,7 @@ export function AthleteAuthDialog() {
   const codeEntry = mode === "code" || quickEntry;
   const visibleProviders =
     quickEntry && !showAllProviders ? socialProviders.slice(0, 2) : socialProviders;
-  const destination = athleteAuthDestination(callbackURL, IS_ATHRECS_SITE && findRaceResults);
+  const destination = athleteAuthDestination(callbackURL, IS_ATHRECS_SITE);
   const showResultChoice =
     IS_ATHRECS_SITE &&
     callbackURL.split(/[?#]/)[0] === "/athlete-account" &&
@@ -144,7 +143,6 @@ export function AthleteAuthDialog() {
       setNeedsVerification(false);
       setUsePassword(false);
       setShowAllProviders(false);
-      setFindRaceResults(false);
       setPassword("");
       setConfirmPassword("");
       setShowPassword(false);
@@ -530,22 +528,15 @@ export function AthleteAuthDialog() {
 
             <div className="space-y-5 p-5 sm:p-7">
               {showResultChoice ? (
-                <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-accent-soft p-3 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={findRaceResults}
-                    disabled={Boolean(busy)}
-                    onChange={(event) => setFindRaceResults(event.target.checked)}
-                    className="mt-0.5 size-4 shrink-0 accent-accent"
-                  />
+                <div className="flex items-start gap-3 rounded-lg border border-border bg-accent-soft p-3 text-sm">
                   <span>
                     <span className="font-semibold text-fg">Find my race results</span>
                     <span className="mt-1 block text-xs leading-5 text-muted">
-                      Optional. Show possible matches already on AthRecs after signing in. You
-                      choose which results to add.
+                      Add your full racing name, current and previous clubs, and optional profile
+                      links after signing in. Review and claim your suggested results straight away.
                     </span>
                   </span>
-                </label>
+                </div>
               ) : null}
               {quickEntry ? null : mode === "signin" || mode === "signup" ? (
                 <div className="grid grid-cols-2 rounded-lg bg-elevated p-1" role="tablist">

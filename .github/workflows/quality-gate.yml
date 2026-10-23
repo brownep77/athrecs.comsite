@@ -48,6 +48,21 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Verify profile setup, former clubs and staff alerts on mobile and desktop
+        run: node --experimental-strip-types scripts/verify-profile-setup.mjs --browser
+
+      - name: Quick sign-up and default result discovery
+        run: |
+          node scripts/verify-quick-signin-ui.mjs
+          node scripts/verify-quick-signin-ui.mjs --no-email
+          node scripts/verify-quick-signin-ui.mjs --runrecs
+
+      - name: Social recruitment and sourced athlete profile
+        run: node scripts/verify-recruitment-ui.mjs
+
       - name: Verify AI chat privacy, transcripts and usage limits
         run: |
           node --experimental-strip-types scripts/verify-assistant.mjs
@@ -119,9 +134,6 @@ jobs:
           node scripts/verify-public-figure-refresh.mjs
           node scripts/verify-reported-race-history.mjs
 
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
-
       - name: Verify consented feature flags in Web Analytics
         run: npm run verify:analytics-flags
 
@@ -151,15 +163,6 @@ jobs:
 
       - name: Email-only sign-in form
         run: node scripts/verify-email-code-ui.mjs
-
-      - name: Quick sign-up and optional result discovery
-        run: |
-          node scripts/verify-quick-signin-ui.mjs
-          node scripts/verify-quick-signin-ui.mjs --no-email
-          node scripts/verify-quick-signin-ui.mjs --runrecs
-
-      - name: Social recruitment and sourced athlete profile
-        run: node scripts/verify-recruitment-ui.mjs
 
       - name: Combined result discovery and confirmation safeguards
         run: |

@@ -18,7 +18,10 @@ export const Route = createFileRoute("/api/signup-alerts")({
         const { deliverSignupWelcomes } = await import("@/lib/auth/signup-welcome.server");
         const alerts = await deliverSignupAlerts(sql);
         const welcomes = await deliverSignupWelcomes(sql);
-        return Response.json({ ...alerts, welcomes }, { headers });
+        const { deliverProfileSetupAlerts } =
+          await import("@/lib/athrecs/profile-setup-alerts.server");
+        const profileSetups = await deliverProfileSetupAlerts(sql);
+        return Response.json({ ...alerts, welcomes, profileSetups }, { headers });
       },
     },
   },

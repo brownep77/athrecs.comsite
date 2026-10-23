@@ -58,7 +58,7 @@ function emailFor(row: Delivery): SignupEmail {
   };
 }
 
-async function sendSignupEmail(email: SignupEmail, idempotencyKey: string) {
+export async function sendSignupEmail(email: SignupEmail, idempotencyKey: string) {
   const key = emailKey();
   if (!key) throw new Error("Signup notification email is not configured");
   if (

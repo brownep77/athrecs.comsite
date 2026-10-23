@@ -52,7 +52,12 @@ export function safeAuthCallback(value: string | undefined, fallback = "/athlete
 export function athleteAuthDestination(callbackURL: string, findResults: boolean): string {
   const safe = safeAuthCallback(callbackURL);
   const url = new URL(safe, "https://www.athrecs.com");
-  if (findResults && url.pathname === "/athlete-account") {
+  if (
+    findResults &&
+    url.pathname === "/athlete-account" &&
+    !url.searchParams.has("section") &&
+    !url.hash
+  ) {
     url.searchParams.set("section", "potential");
   }
   return `${url.pathname}${url.search}${url.hash}`;

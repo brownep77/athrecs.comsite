@@ -103,11 +103,14 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
         region: string | null;
         country: string | null;
         club: string | null;
+        previous_club: string | null;
+        previous_clubs: string[] | null;
         dob: string | null;
         nationality: string | null;
       }>`
-        select city,region,country,club_or_team as club,date_of_birth::text as dob,nationality
-        from athlete_private_profiles where user_id=${context.userId}`,
+        select city,region,country,club_or_team as club,date_of_birth::text as dob,nationality,
+          profile_details->>'previousClub' as previous_club,s.settings->'previousClubs' as previous_clubs
+        from athlete_private_profiles p left join athlete_result_matching_settings s on s.user_id=p.user_id where p.user_id=${context.userId}`,
     ]);
     // Evidence is used only on the server for comparison, never returned to members.
     const archiveDates = [...new Set(archive.map((row) => row.date))];
@@ -153,6 +156,9 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
       region: account?.region,
       country: account?.country,
       clubOrTeam: account?.club,
+      previousClubs: [account?.previous_club, ...(account?.previous_clubs ?? [])].filter(
+        (v): v is string => Boolean(v),
+      ),
       dateOfBirth: account?.dob,
       nationality: account?.nationality,
     };
