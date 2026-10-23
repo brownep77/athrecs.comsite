@@ -348,6 +348,16 @@ try {
     initial,
     "A newer held capture also blocks verification against an obsolete capture.",
   );
+  for (const mark of ["FOUL", "FAIL", "NT"]) {
+    const invalid = clone(plan);
+    invalid.entries[1].before[0].performance = mark;
+    await assert.rejects(
+      () => applySourceVerificationPlan(sql, invalid, { dryRun: false }),
+      /Non-finish or disqualification/,
+      `${mark} is not a completed performance and must not receive source verification from this batch.`,
+    );
+  }
+  assert.deepEqual(await state(), initial, "Non-completion marks cannot mutate any batch records.");
   for (const mutate of [
     (p) => {
       p.entries[0].evidence.sourceChecked = false;
