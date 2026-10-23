@@ -395,7 +395,28 @@ function SignedInAccount() {
           .
         </p>
       ) : null}
-      {IS_ATHRECS_SITE ? <ProfileResultsSetup account={account.data} /> : null}
+      {IS_ATHRECS_SITE ? (
+        <ProfileResultsSetup
+          account={account.data}
+          onSaved={(updated) => {
+            lastLoadedForm.current = accountToForm(updated);
+            setForm(
+              (current) =>
+                current && {
+                  ...current,
+                  fullName: updated.fullName,
+                  clubOrTeam: updated.clubOrTeam,
+                  previousNames: updated.previousNames,
+                  profileDetails: {
+                    ...readProfileDetails(current.profileDetails),
+                    previousClub: updated.profileDetails?.previousClub ?? "",
+                  },
+                  privacyAcknowledged: updated.privacyAcknowledged,
+                },
+            );
+          }}
+        />
+      ) : null}
       {IS_ATHRECS_SITE ? (
         <ProfileClaimGuide
           account={account.data}

@@ -11,7 +11,13 @@ import { getMyOpenClaimInvitations } from "@/lib/athrecs/claim-invitations-api";
 import { listMyResultClaims } from "@/lib/athrecs/result-claims-api";
 import { unfinishedClaim } from "@/lib/athrecs/claim-resume";
 
-export function ProfileResultsSetup({ account }: { account: AthleteAccountData }) {
+export function ProfileResultsSetup({
+  account,
+  onSaved,
+}: {
+  account: AthleteAccountData;
+  onSaved?: (account: AthleteAccountData) => void;
+}) {
   const [editing, setEditing] = useState(false);
   const [skipped, setSkipped] = useState(false);
   const [resume, setResume] = useState<number | null>(null);
@@ -91,7 +97,10 @@ export function ProfileResultsSetup({ account }: { account: AthleteAccountData }
           key={account.userId}
           account={account}
           settings={settings.data}
-          onSaved={() => setEditing(false)}
+          onSaved={(updated) => {
+            setEditing(false);
+            if (updated) onSaved?.(updated);
+          }}
           onSkip={() => {
             setSkipped(true);
             setEditing(false);
@@ -114,7 +123,7 @@ function SetupForm({
 }: {
   account: AthleteAccountData;
   settings: MatchingSettings;
-  onSaved: () => void;
+  onSaved: (account?: AthleteAccountData) => void;
   onSkip: () => void;
 }) {
   const [name, setName] = useState(account.fullName || account.authName || "");
@@ -164,7 +173,10 @@ function SetupForm({
       // Profile links queue staff research; do not imply an automatic external feed.
       await client.cancelQueries({ queryKey: ["my-external-runner-matches"] });
       client.removeQueries({ queryKey: ["my-external-runner-matches"] });
-      onSaved();
+      const updated =
+        client.getQueryData<AthleteAccountData>(["my-athlete-account"]) ??
+        client.getQueryData<AthleteAccountData>(["my-athlete-account", account.userId]);
+      onSaved(updated?.userId === account.userId ? updated : undefined);
       void navigate({
         to: "/athlete-account",
         search: { section: "potential" },
