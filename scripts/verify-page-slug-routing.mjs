@@ -110,12 +110,16 @@ for (const [oldSlug, currentSlug] of Object.entries(eventSlugAliases))
 const seo = await import("../src/lib/athrecs/seo.ts");
 const runrecsSeo = await import("../src/runrecs/seo.ts");
 const berlin = await import("../src/lib/athrecs/berlin-results.ts");
+const raceCollections = await import("../src/data/race-collections.ts");
+const superhalfs = await import("../src/data/superhalfs.ts");
 const route = (file, extra = {}) =>
   load(file, {
     "@tanstack/react-router": { createFileRoute: () => (options) => options, stripSearchParams },
     "@/lib/athrecs/seo": seo,
     "@/lib/site-scope": { IS_RUNRECS_SITE: false },
     "@/lib/athrecs/berlin-results": berlin,
+    "@/data/race-collections": raceCollections,
+    "@/data/superhalfs": superhalfs,
     "@/data/berlin-marathon-2026.json": {
       default: JSON.parse(fs.readFileSync("src/data/berlin-marathon-2026.json", "utf8")),
     },
@@ -174,6 +178,13 @@ for (const [file, slug] of [
     const canonical = head.links.find((link) => link.rel === "canonical").href;
     assert.equal(canonical, `${selectedSeo.SITE_URL}${slug}`);
     assert.equal(head.meta.find((meta) => meta.property === "og:url").content, canonical);
+    if (slug === "/running/race-series") {
+      const graph = JSON.parse(head.scripts.find((script) => script.type === "application/ld+json").children)["@graph"];
+      const items = graph.find((item) => item["@type"] === "CollectionPage").mainEntity.itemListElement;
+      assert.equal(items.length, raceCollections.raceGroupDefinitions.length + 1);
+      assert.equal(items[0].url, `${selectedSeo.SITE_URL}${superhalfs.SUPERHALFS_PATH}`);
+      assert(items.every((item) => item.url.startsWith(selectedSeo.SITE_URL) && !item.url.includes("undefined")));
+    }
   }
 }
 const berlinRoute = route("src/routes/results/berlin-marathon-2026.tsx");
