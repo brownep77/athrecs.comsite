@@ -10,6 +10,14 @@ export const performanceTimingSchema = z.object({
 });
 export type PerformanceTiming = z.infer<typeof performanceTimingSchema>;
 
+/** A distance covered in a fixed-duration event establishes a finish, never a timed mark. */
+export function hasFixedDurationDistanceMark(performance: string, discipline: string): boolean {
+  if (!/^(?:6|12|24|48)\s*(?:h|hrs?|hours?)(?:\s+running)?$/i.test(discipline.trim()))
+    return false;
+  const distance = /^(\d+(?:\.\d+)?)\s*(?:km|mi|miles?)$/i.exec(performance.trim());
+  return distance !== null && Number.isFinite(Number(distance[1])) && Number(distance[1]) > 0;
+}
+
 export function hasTimedMark(performance: string, discipline = ""): boolean {
   if (
     /jump|vault|shot|throw|^(?:LJ|TJ|HJ|PV|SP|DT|JT|HT|WT)(?:\d.*)?$|discus|javelin|hammer|points|pentathlon|heptathlon|decathlon|(?:6|12|24|48)\s*(?:h|hours)/i.test(
