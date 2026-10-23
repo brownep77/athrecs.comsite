@@ -1,0 +1,33 @@
+name: Athlete distance ratings and participation
+on:
+  pull_request:
+    paths:
+      - "src/lib/athrecs/*rating*"
+      - "src/lib/athrecs/profile-distance-summary.ts"
+      - "src/lib/athrecs/profile-history-results.ts"
+      - "src/lib/athrecs/profile-records.ts"
+      - "src/components/athletes/DistanceRatings.tsx"
+      - "src/components/athletes/ProfileAchievements.tsx"
+      - "scripts/verify-*rating*"
+      - "scripts/verify-profile-distance-summary.mjs"
+      - "package*.json"
+      - ".github/workflows/athlete-distance-ratings.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ratings:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ""
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run verify:distance-ratings
+      - run: npm run typecheck
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/verify-distance-ratings-browser.mjs
