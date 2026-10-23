@@ -10,6 +10,8 @@ import { z } from "zod";
 
 const require = createRequire(import.meta.url);
 const ts = require("typescript");
+const participantMigration = "20261023_athlete_finder_participant_index.sql";
+const isCaptureSearch = (query) => /^with (?:candidates|capture_search)\b/.test(query);
 export function loadFinderModule(path, dependencies = {}, verificationExports = "") {
   const module = { exports: {} };
   const code = ts.transpileModule(readFileSync(path, "utf8") + verificationExports, {
@@ -160,7 +162,7 @@ export function finderSqlFor(database, connection = database, observedQueries = 
   return sql;
 }
 
-export async function createFinderSyntheticFixture() {
+export async function createFinderSyntheticFixture({ withoutParticipantIndex = false } = {}) {
   const db = new PGlite();
   await db.waitReady;
   const queries = [];
@@ -168,7 +170,10 @@ export async function createFinderSyntheticFixture() {
   const core = loadFinderModule("src/lib/athlete-finder/core.ts", { zod: { z } });
   const service = loadFinderModule("src/lib/athlete-finder/search.server.ts", { "./core": core });
   for (const filename of readdirSync("migrations")
-    .filter((name) => name.endsWith(".sql"))
+    .filter(
+      (name) =>
+        name.endsWith(".sql") && (!withoutParticipantIndex || name !== participantMigration),
+    )
     .sort()) {
     await db.exec(readFileSync(`migrations/${filename}`, "utf8"));
   }
@@ -270,7 +275,7 @@ export async function createFinderSyntheticFixture() {
     values('20000000-0000-4000-8000-000000000001','finder-active','Synthetic Timing','[]')`;
   const insertCapture = async (sourceKey, rows, options = {}) => {
     const payload = {
-      publication: "staff_only",
+      publication: options.publication ?? "staff_only",
       index: { name: "Synthetic Captured 10K", date: "2026-10-01", ...options.index },
       rows,
     };
@@ -354,8 +359,329 @@ export async function createFinderSyntheticFixture() {
   };
 }
 
+async function verifyParticipantIndexLifecycle(fixture) {
+  const { sql, service, registry, insertCapture } = fixture;
+  const find = (q) => service.searchStoredAthleteResults(sql, { q, kind: "capture" }, registry);
+  const captureId = await insertCapture("index-lifecycle", [{ name: "Synthetic Indexbefore" }]);
+  const snapshot = async () =>
+    (
+      await sql`select index_version,staff_only,expected_rows,indexed_rows,indexed_at,
+      (select count(*)::int from athlete_finder_capture_search_rows where capture_id=${captureId}::bigint) actual_rows
+      from athlete_finder_capture_search_state where capture_id=${captureId}::bigint`
+    )[0];
+  assert.deepEqual(
+    { ...(await snapshot()), indexed_at: undefined },
+    {
+      index_version: 1,
+      staff_only: true,
+      expected_rows: 1,
+      indexed_rows: 1,
+      indexed_at: undefined,
+      actual_rows: 1,
+    },
+    "Inserts atomically create a complete, private participant index",
+  );
+  await sql`update result_archive_source_captures
+    set payload=jsonb_set(payload,'{rows,0,name}','"Synthetic Indexafter"'::jsonb)
+    where id=${captureId}::bigint`;
+  assert.equal((await find("Synthetic Indexbefore")).rows.length, 0);
+  assert.equal((await find("Synthetic Indexafter")).rows[0].captureId, captureId);
+  const unchanged = await snapshot();
+  await sql`update result_archive_source_captures set last_seen_at=now(),payload=payload where id=${captureId}::bigint`;
+  assert.deepEqual(
+    await snapshot(),
+    unchanged,
+    "An unchanged payload does not rebuild derived names",
+  );
+  await assert.rejects(
+    () =>
+      sql.transaction(async (tx) => {
+        await tx`update result_archive_source_captures
+        set payload=jsonb_set(payload,'{rows,0,name}','"Synthetic Indexrolledback"'::jsonb)
+        where id=${captureId}::bigint`;
+        throw new Error("Synthetic rollback");
+      }),
+    /Synthetic rollback/,
+  );
+  assert.deepEqual(
+    await snapshot(),
+    unchanged,
+    "Rollback restores completion metadata with derived rows",
+  );
+  assert.equal((await find("Synthetic Indexrolledback")).rows.length, 0);
+  assert.equal((await find("Synthetic Indexafter")).rows[0].captureId, captureId);
+  await sql`update result_archive_source_captures
+    set payload=jsonb_set(payload,'{publication}','"held"'::jsonb) where id=${captureId}::bigint`;
+  const hidden = await snapshot();
+  assert.equal(hidden.staff_only, false);
+  assert.equal(hidden.expected_rows, 0);
+  assert.equal(hidden.indexed_rows, 0);
+  assert.equal(hidden.actual_rows, 0);
+  assert.equal((await find("Synthetic Indexafter")).rows.length, 0);
+  await sql`delete from result_archive_source_captures where id=${captureId}::bigint`;
+  assert.equal(
+    await snapshot(),
+    undefined,
+    "Deleting the source capture cascades completion metadata",
+  );
+  assert.equal(
+    (
+      await sql`select count(*)::int n from athlete_finder_capture_search_rows where capture_id=${captureId}::bigint`
+    )[0].n,
+    0,
+  );
+
+  const older = await insertCapture("index-latest-publication", [
+    { name: "Synthetic Newpublication" },
+  ]);
+  await insertCapture("index-latest-publication", [{ name: "Synthetic Newpublication" }], {
+    publication: "held",
+    capturedAt: "2026-10-02T12:00:00Z",
+  });
+  assert.equal(
+    (await find("Synthetic Newpublication")).rows.length,
+    0,
+    "A newer non-staff capture suppresses older approved source versions",
+  );
+  await sql`delete from athlete_finder_capture_search_state where capture_id=${older}::bigint`;
+  assert.equal(
+    (await find("Synthetic Newpublication")).rows.length,
+    0,
+    "Latest-before-publication also gates the unindexed fallback",
+  );
+  await sql`select athlete_finder_refresh_capture_search(${older}::bigint)`;
+
+  const malformedId = await insertCapture("index-malformed-members", [
+    null,
+    42,
+    "not an object",
+    { name: null },
+    { name: 12345 },
+    { name: "Synthetic Malformedmember" },
+  ]);
+  const [malformed] =
+    await sql`select indexed_rows from athlete_finder_capture_search_state where capture_id=${malformedId}::bigint`;
+  assert.equal(
+    malformed.indexed_rows,
+    6,
+    "Empty vectors retain raw array ordinals and completion counts",
+  );
+  assert.equal((await find("Synthetic Malformedmember")).rows[0].captureOrdinal, 6);
+  assert.equal((await find("12345")).rows[0].captureOrdinal, 5);
+  await sql`update result_archive_source_captures set payload=payload-'rows',row_count=0 where id=${malformedId}::bigint`;
+  assert.equal(
+    (
+      await sql`select indexed_rows from athlete_finder_capture_search_state where capture_id=${malformedId}::bigint`
+    )[0].indexed_rows,
+    0,
+  );
+  assert.equal(
+    (await find("Synthetic Malformedmember")).rows.length,
+    0,
+    "Missing legacy rows arrays remain safely empty",
+  );
+  console.log(
+    "Participant index lifecycle: insert/update, unchanged payload, atomic rollback, publication/latest gates, malformed members and deletion cascade passed.",
+  );
+}
+
+async function verifyParticipantIndexParity(fixture) {
+  const { sql, service, registry, insertCapture, searchName } = fixture;
+  const corpusId = await insertCapture("index-exact-parity", [
+    { name: "Annabelle Ivers", club: "Synthetic Parity AC", date: "2025-03-01" },
+    { name: "A Ivers", club: "Synthetic Parity AC", date: "2026-03-01" },
+    { name: "Éva O’Neill", club: "Synthetic Parity AC" },
+    { name: "Ｓｙｎｔｈｅｔｉｃ Ｗｉｄｅｎａｍｅ" },
+    { name: "Synthetic Pairedtarget" },
+    { name: "Pairedtarget Elsewhere" },
+    { name: "Synthetic Different" },
+    { name: "Nonsynthetic Prepairedtarget" },
+    { name: "İpek Yılmaz" },
+    { name: "ΟΣ ΚΟΣ" },
+    { name: "अनिता शर्मा" },
+    { name: "Amélie Synthetic" },
+    { name: "中文合成测试" },
+  ]);
+  const legacySql = {
+    transaction: (work) =>
+      sql.transaction((tx) =>
+        work({
+          query: async (query, values) => {
+            const rows = await tx.query(query, values);
+            return query.includes('as "participantIndex"')
+              ? rows.map((row) => ({ ...row, participantIndex: false }))
+              : rows;
+          },
+        }),
+      ),
+  };
+  const cases = [
+    { q: "Ann Anna" },
+    { q: "Ive Ann" },
+    { q: "A Ive" },
+    { q: "Éva O'Neill", club: "Synthetic Parity" },
+    { q: "Synthetic Widename" },
+    { q: "ＳＹＮＴＨＥＴＩＣ ＷＩＤＥＮＡＭＥ" },
+    { q: "Synthetic Pairedtarget" },
+    { q: "Synthetic Pairedtarget", club: "Absent club" },
+    { q: "Ivers", yearFrom: 2025, yearTo: 2025 },
+    { q: "Ivers", sourceId: "synthetic_other" },
+    { q: "Ivers", sourceId: "synthetic_timing" },
+    { q: "Unmatched Alias", aliases: ["Ann Ivers", "Synthetic Widename"] },
+    { q: "İPEK YILMAZ" },
+    { q: "ος κος" },
+    { q: "अनिता शर्मा" },
+    { q: "Ame\u0301lie Synthetic" },
+    { q: "中文合成测试" },
+    { q: searchName },
+    { q: searchName, offset: 25 },
+  ];
+  for (const input of cases) {
+    const actual = await service.searchStoredAthleteResults(
+      sql,
+      { ...input, kind: "capture" },
+      registry,
+    );
+    const legacy = await service.searchStoredAthleteResults(
+      legacySql,
+      { ...input, kind: "capture" },
+      registry,
+    );
+    assert.equal(actual.stores[0].status, "searched");
+    assert.equal(legacy.stores[0].status, "searched");
+    assert.deepEqual(
+      actual.rows,
+      legacy.rows,
+      `Participant index preserves exact legacy matches for ${JSON.stringify(input)}`,
+    );
+    assert.equal(actual.hasMore, legacy.hasMore);
+    if (input.q === "Ann Anna")
+      assert.ok(
+        actual.rows.some((row) => row.captureId === corpusId && row.captureOrdinal === 1),
+        "Two prefix terms can match the same stored word",
+      );
+    if (input.q === "Synthetic Pairedtarget" && !input.club)
+      assert.deepEqual(
+        actual.rows.filter((row) => row.captureId === corpusId).map((row) => row.captureOrdinal),
+        [5],
+      );
+  }
+  console.log(
+    `Participant index parity: ${cases.length} exact indexed-versus-legacy searches passed, including filters, aliases, same-word prefixes, Unicode and split-person decoys.`,
+  );
+}
+
+async function verifyStaleCaptureSummaries(fixture) {
+  const { db, sql, service, registry, insertCapture } = fixture;
+  // Reproduce permissive legacy rows in this disposable database only. The
+  // modern source-table check would otherwise prevent several old shapes.
+  const [constraint] = await sql`select conname,pg_get_constraintdef(oid) definition
+    from pg_constraint where conrelid='result_archive_source_captures'::regclass
+      and contype='c' and pg_get_constraintdef(oid) like '%jsonb_array_length%'`;
+  assert.ok(constraint);
+  const quoted = `"${constraint.conname.replaceAll('"', '""')}"`;
+  const ids = [];
+  await db.exec(`alter table result_archive_source_captures drop constraint ${quoted}`);
+  try {
+    const cases = [
+      { declared: 21, expected: 0 },
+      { declared: 0, rows: [{ name: "Synthetic Stalearray" }], expected: 1 },
+      { declared: 7, rows: [], expected: 0 },
+      { declared: 0, rows: {}, expected: 0 },
+      { declared: 4, rows: "wrong legacy type", expected: 0 },
+      { declared: 2, rows: null, expected: 0 },
+    ];
+    for (const [index, test] of cases.entries()) {
+      const captureId = await insertCapture(`stale-source-summary-${index}`, []);
+      ids.push(captureId);
+      const payload = JSON.stringify({ publication: "staff_only", rows: test.rows });
+      await sql`update result_archive_source_captures set payload=${payload}::jsonb,row_count=${test.declared}
+        where id=${captureId}::bigint`;
+      const [state] = await sql`select expected_rows,indexed_rows,
+        (index_version=1 and indexed_rows=expected_rows) ready
+        from athlete_finder_capture_search_state where capture_id=${captureId}::bigint`;
+      assert.deepEqual(
+        state,
+        { expected_rows: test.expected, indexed_rows: test.expected, ready: true },
+        `Actual array completion is independent of stale declared summary ${index}`,
+      );
+    }
+    const found = await service.searchStoredAthleteResults(
+      sql,
+      { q: "Synthetic Stalearray", kind: "capture" },
+      registry,
+    );
+    assert.equal(found.stores[0].status, "searched");
+    assert.equal(found.completeForSelectedStores, true);
+    assert.deepEqual(
+      found.rows.map((row) => row.captureId),
+      [ids[1]],
+      "A nonempty actual array remains searchable when its declared summary says zero",
+    );
+  } finally {
+    await sql`delete from result_archive_source_captures where id=any(${ids}::bigint[])`;
+    await db.exec(
+      `alter table result_archive_source_captures add constraint ${quoted} ${constraint.definition}`,
+    );
+  }
+  console.log(
+    "Legacy source summaries: six stale/missing/malformed array cases complete from actual arrays, with no false zero for a nonempty source.",
+  );
+}
+
+async function verifySourcePorts(fixture) {
+  const { sql, service, registry, searchName, ids } = fixture;
+  await assert.rejects(
+    () =>
+      sql.transaction(async (tx) => {
+        for (const [port, expected] of [
+          ["443", true],
+          ["65535", true],
+          ["00000443", true],
+          ["65536", false],
+          ["9".repeat(100), false],
+        ]) {
+          const url = `https://timing.test:${port}/synthetic-port`;
+          await tx`update results set source_url=${url} where id=${ids.resultId}`;
+          await tx`update result_archive_datasets set source_url=${url} where id=${ids.datasetId}`;
+          await tx`update result_archive_source_captures set source_url=${url} where id=${ids.captureId}::bigint`;
+          await tx`update athlete_source_histories set source_url=${url},performances=jsonb_build_array(jsonb_build_object('meeting','Synthetic Port','sourceUrls',jsonb_build_array(${url}::text))) where athlete_id=${ids.athleteId}`;
+          const singleTransaction = {
+            transaction: (work) =>
+              work({
+                query: (q, values) =>
+                  q.startsWith("set ") ? Promise.resolve([]) : tx.query(q, values),
+              }),
+          };
+          const found = await service.searchStoredAthleteResults(
+            singleTransaction,
+            { q: searchName, sourceId: "synthetic_timing" },
+            registry,
+          );
+          assert.ok(found.stores.every((store) => store.status === "searched"));
+          for (const [kind, matches] of Object.entries({
+            canonical: (row) => row.kind === "canonical" && row.resultId === ids.resultId,
+            archive: (row) => row.kind === "archive",
+            capture: (row) => row.captureId === ids.captureId,
+            history: (row) => row.kind === "history" && row.athleteId === ids.athleteId,
+          }))
+            assert.equal(
+              found.rows.some(matches),
+              expected,
+              `${kind} validates source port ${port}`,
+            );
+        }
+        throw new Error("Synthetic port rollback");
+      }),
+    /Synthetic port rollback/,
+  );
+  console.log(
+    "Source ports: 20 cross-store assertions passed for valid, zero-padded, out-of-range and oversized ports.",
+  );
+}
+
 async function verifyFinder() {
-  const fixture = await createFinderSyntheticFixture();
+  const fixture = await createFinderSyntheticFixture({ withoutParticipantIndex: true });
   const { db, sql, service, core, registry, queries, searchName, marker, ids, insertCapture } =
     fixture;
   const find = (input = {}) =>
@@ -516,6 +842,82 @@ async function verifyFinder() {
       "private",
     );
 
+    // Upgrade an existing collection without a deploy-time data scan. Empty,
+    // partial and unsupported markers must all retain the exact legacy search.
+    await db.exec(readFileSync(`migrations/${participantMigration}`, "utf8"));
+    assert.equal(
+      (await sql`select count(*)::int n from athlete_finder_capture_search_rows`)[0].n,
+      0,
+    );
+    assert.equal(
+      (await sql`select count(*)::int n from athlete_finder_capture_search_state`)[0].n,
+      0,
+    );
+    const captureKeys = async () => {
+      const pages = [await find({ kind: "capture" }), await find({ kind: "capture", offset: 25 })];
+      assert.ok(pages.every((page) => page.stores[0].status === "searched"));
+      return pages.flatMap((page) => page.rows.map((row) => row.key));
+    };
+    const originalCaptureKeys = captures.map((row) => row.key);
+    assert.deepEqual(
+      await captureKeys(),
+      originalCaptureKeys,
+      "An empty new index falls back to stored captures",
+    );
+    assert.equal(
+      (await sql`select athlete_finder_refresh_capture_search(${ids.captureId}::bigint) n`)[0].n,
+      31,
+    );
+    assert.deepEqual(
+      await captureKeys(),
+      originalCaptureKeys,
+      "Partial backfill neither omits nor duplicates rows",
+    );
+    await sql`update athlete_finder_capture_search_state set index_version=2 where capture_id=${ids.captureId}::bigint`;
+    assert.deepEqual(
+      await captureKeys(),
+      originalCaptureKeys,
+      "Unsupported marker versions use the legacy path",
+    );
+    await sql`update athlete_finder_capture_search_state set index_version=1,indexed_rows=1 where capture_id=${ids.captureId}::bigint`;
+    assert.deepEqual(
+      await captureKeys(),
+      originalCaptureKeys,
+      "A partial row-count marker cannot hide remaining source rows",
+    );
+    await sql`select athlete_finder_refresh_capture_search(id) from result_archive_source_captures`;
+    assert.deepEqual(
+      await captureKeys(),
+      originalCaptureKeys,
+      "Complete backfill preserves all source locators",
+    );
+
+    await db.exec(
+      "alter table athlete_finder_capture_search_rows rename to finder_test_saved_search_rows",
+    );
+    assert.deepEqual(
+      await captureKeys(),
+      originalCaptureKeys,
+      "A missing row table falls back even when state is present",
+    );
+    await db.exec(
+      "alter table finder_test_saved_search_rows rename to athlete_finder_capture_search_rows",
+    );
+    await db.exec(
+      "alter table athlete_finder_capture_search_state rename to finder_test_saved_search_state",
+    );
+    assert.deepEqual(
+      await captureKeys(),
+      originalCaptureKeys,
+      "A missing state table falls back even when indexed rows exist",
+    );
+    await db.exec(
+      "alter table finder_test_saved_search_state rename to athlete_finder_capture_search_state",
+    );
+    await verifyParticipantIndexLifecycle(fixture);
+    await verifyStaleCaptureSummaries(fixture);
+    await verifySourcePorts(fixture);
+
     await insertCapture(
       "oversized-fields",
       [
@@ -566,7 +968,7 @@ async function verifyFinder() {
       club: "Harbour AC",
       original: { private: marker },
     });
-    await insertCapture("large-race", largeRows);
+    const largeCaptureId = await insertCapture("large-race", largeRows);
     const tail = await find({ q: "Synthetic Endmarker", kind: "capture" });
     assert.equal(tail.stores[0].status, "searched");
     assert.equal(
@@ -584,9 +986,8 @@ async function verifyFinder() {
       "Capture candidates can use the GIN name index",
     );
 
-    // Model broad race-level keys: many pages are candidates, while name-word
-    // conjunction must still match a single participant. The first page must
-    // stop before expanding every capture and later pages must remain exact.
+    // Broad race-level keys can occur on different people. The row index must
+    // identify one participant without expanding complete race arrays.
     for (let index = 0; index < 8; index++) {
       await insertCapture(
         `ordered-page-${index}`,
@@ -612,13 +1013,15 @@ async function verifyFinder() {
       { name: "Nonsynthetic Orderedpage" },
       { name: "Synthetic Preorderedpage" },
     ]);
+    await sql.query("vacuum analyze athlete_finder_capture_search_rows");
+    await sql.query("analyze athlete_finder_capture_search_state");
     let orderedRequest;
     const observeSql = {
       transaction: (work) =>
         sql.transaction((tx) =>
           work({
             query: (query, values) => {
-              if (query.startsWith("with candidates")) orderedRequest = { query, values };
+              if (isCaptureSearch(query)) orderedRequest = { query, values };
               return tx.query(query, values);
             },
           }),
@@ -666,19 +1069,62 @@ async function verifyFinder() {
     };
     collectPlan(orderedPlan["QUERY PLAN"][0].Plan);
     assert.ok(
-      planNodes.some(
-        (node) =>
-          node["Node Type"] === "Incremental Sort" &&
-          node["Presorted Key"]?.includes("selected.id"),
-      ),
-      "Paging must preserve ordered candidate execution instead of sorting all expanded rows",
+      planNodes.some((node) => node["Index Name"] === "athlete_finder_capture_search_names"),
+      "Participant matching uses the narrow name-vector GIN index",
     );
     const expansions = planNodes.find(
       (node) => node["Node Type"] === "Function Scan" && node.Alias === "p",
     );
     assert.ok(
-      expansions && expansions["Actual Loops"] < 10,
-      "The first page does not expand all ten candidate captures",
+      expansions && expansions["Actual Loops"] === 0,
+      "A completely indexed collection never expands fallback capture arrays",
+    );
+    const fallbackFetch = planNodes.find(
+      (node) =>
+        node["Index Name"] === "result_archive_source_captures_pkey" && node["Actual Loops"] === 0,
+    );
+    assert.ok(
+      fallbackFetch,
+      "The metadata fence prevents fallback payload fetches before completion filtering",
+    );
+    const partialIds = [...new Set(orderedRows.map((row) => row.captureId))].filter(
+      (_, index) => index % 2 === 0,
+    );
+    await sql`delete from athlete_finder_capture_search_state where capture_id=any(${partialIds}::bigint[])`;
+    const mixedPages = [];
+    for (const offset of [0, 25, 50])
+      mixedPages.push(await find({ q: "Synthetic Orderedpage", kind: "capture", offset }));
+    assert.ok(mixedPages.every((page) => page.stores[0].status === "searched"));
+    assert.deepEqual(
+      mixedPages.flatMap((page) => page.rows.map((row) => row.key)),
+      orderedRows.map((row) => row.key),
+      "Indexed and unindexed streams merge before global pagination without repeats or omissions",
+    );
+    await sql`select athlete_finder_refresh_capture_search(id) from result_archive_source_captures where id=any(${partialIds}::bigint[])`;
+    const broadFirst = await service.searchStoredAthleteResults(
+      observeSql,
+      { q: "Bulk", kind: "capture" },
+      registry,
+    );
+    assert.equal(broadFirst.stores[0].status, "searched");
+    assert.equal(broadFirst.rows.length, 25);
+    assert.equal(broadFirst.hasMore, true);
+    assert.ok(broadFirst.rows.every((row) => row.captureId === largeCaptureId));
+    const [broadPlan] = await sql.query(
+      `explain (analyze true, timing false, format json) ${orderedRequest.query}`,
+      orderedRequest.values,
+    );
+    planNodes.length = 0;
+    collectPlan(broadPlan["QUERY PLAN"][0].Plan);
+    const payloadFetches = planNodes.filter(
+      (node) =>
+        node["Index Name"] === "result_archive_source_captures_pkey" &&
+        node["Index Cond"]?.includes("matched.capture_id"),
+    );
+    assert.ok(payloadFetches.length > 0);
+    assert.ok(
+      payloadFetches.every((node) => node["Actual Loops"] <= 26),
+      "A 35,000-match prefix page fetches at most 26 source payloads before its row limit",
     );
     assert.equal(
       (await find({ q: "Unrelated Alias", aliases: ["Synthetic Orderedpage"], kind: "capture" }))
@@ -687,9 +1133,10 @@ async function verifyFinder() {
       "The ASCII shortcut includes supplied aliases",
     );
     console.log(
-      "Capture paging: 55 exact observations across three pages; bounded ordered expansion, fullwidth names, aliases and split-person decoys passed.",
+      "Capture paging: 55 exact observations across three pages, complete and mixed backfill; GIN row matching, zero complete-index fallback reads, and <=26 payload fetches for a 35,000-match prefix passed.",
     );
     await verifyCapturePrefilterParity(sql, core);
+    await verifyParticipantIndexParity(fixture);
 
     await db.exec("alter table result_source_references rename to finder_test_saved_references");
     const noReferences = await find({ kind: "canonical" });
@@ -718,7 +1165,7 @@ async function verifyFinder() {
         sql.transaction((tx) =>
           work({
             query: (query, values) => {
-              if (query.startsWith("with candidates")) {
+              if (isCaptureSearch(query)) {
                 const error = new Error("Synthetic capture timeout");
                 error.code = "57014";
                 throw error;

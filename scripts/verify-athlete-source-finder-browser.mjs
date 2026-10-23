@@ -5,8 +5,11 @@ import { AsyncLocalStorage } from "node:async_hooks";
 import crypto from "node:crypto";
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { z } from "zod";
+import { fromJSON, toJSONAsync } from "seroval";
+import { encode } from "@tanstack/router-core";
 import * as cheerio from "cheerio";
 import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
@@ -42,6 +45,9 @@ const { db, sql, core, service } = fixture;
 const name = "Browser Finder Synthetic";
 const club = "Synthetic browser club";
 const origin = "http://127.0.0.1:8147";
+const rpcDirectory = dirname(
+  fileURLToPath(import.meta.resolve("@tanstack/start-client-core/client-rpc")),
+);
 const root = resolve("artifacts/athlete-source-finder-browser");
 mkdirSync(root, { recursive: true });
 const staff = { id: "finder-browser-staff", email: "finder-browser-staff@example.test" };
@@ -55,6 +61,37 @@ const requests = [];
 const providerRequests = [];
 const externalBrowserRequests = [];
 const errors = [];
+const responseGates = new Map();
+
+function holdSearchResponse(query) {
+  const entered = Promise.withResolvers();
+  const released = Promise.withResolvers();
+  const gate = { entered, released };
+  assert.equal(responseGates.has(query), false);
+  responseGates.set(query, gate);
+  return {
+    async waitUntilEntered() {
+      let timeout;
+      try {
+        await Promise.race([
+          entered.promise,
+          new Promise((_, reject) => {
+            timeout = setTimeout(
+              () => reject(new Error("Synthetic search did not reach its response gate")),
+              20_000,
+            );
+          }),
+        ]);
+      } finally {
+        clearTimeout(timeout);
+      }
+    },
+    release: () => {
+      responseGates.delete(query);
+      released.resolve();
+    },
+  };
+}
 
 try {
   await sql`insert into "user"(id,name,email,"emailVerified") values
@@ -173,7 +210,7 @@ try {
       const chain = { client: () => chain, server: (fn) => fn };
       return chain;
     },
-    createServerFn: () => {
+    createServerFn: (options = {}) => {
       let middleware = [],
         validate = (input) => input;
       const chain = {
@@ -186,7 +223,7 @@ try {
           return chain;
         },
         handler(handler) {
-          return async (raw) => {
+          const execute = async (raw) => {
             assert.deepEqual(
               middleware,
               [auth.staffMiddleware],
@@ -201,6 +238,7 @@ try {
                   });
             return run(0, {});
           };
+          return Object.assign(execute, { httpMethod: options.method ?? "GET" });
         },
       };
       return chain;
@@ -280,7 +318,7 @@ try {
     ...coverageApi,
     ...checkApi,
     listFixtureSources: start
-      .createServerFn()
+      .createServerFn({ method: "GET" })
       .middleware([auth.staffMiddleware])
       .handler(async () => ({ sources: registry })),
   };
@@ -291,13 +329,34 @@ try {
   }
   const bridge = file(
     "bridge.js",
-    Object.keys(methods)
-      .map(
-        (method) =>
-          `export async function ${method}(arg={}){const response=await fetch('/finder-test-api/${method}',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(arg.data||{})});const value=await response.json();if(!response.ok)throw Error(value.error);return value;}`,
-      )
-      .join("\n"),
+    // Use the installed RPC fetcher, including its GET query serializer and
+    // AbortSignal forwarding. Only app-specific Start options are absent from
+    // this isolated component fixture; the transport is not a POST-only mock.
+    `import{serverFnFetcher}from'/@fs/${resolve(rpcDirectory, "serverFnFetcher.js")}';\n` +
+      Object.entries(methods)
+        .map(
+          ([method, fn]) =>
+            `export async function ${method}(arg={}){const value=await serverFnFetcher('/finder-test-api/${method}',[{...arg,method:${JSON.stringify(fn.httpMethod)}}],fetch);if(value?.error)throw Error(value.error);return value;}`,
+        )
+        .join("\n"),
   );
+  const startOptions = file(
+    "start-options.js",
+    "export function getStartOptions(){return undefined}",
+  );
+
+  async function apiRequest(method, input, headers = {}) {
+    const httpMethod = methods[method].httpMethod;
+    const payload = JSON.stringify(await toJSONAsync({ data: input }));
+    return fetch(
+      `${origin}/finder-test-api/${method}${httpMethod === "GET" ? `?${encode({ payload })}` : ""}`,
+      {
+        method: httpMethod,
+        headers: { "Content-Type": "application/json", ...headers },
+        ...(httpMethod === "POST" ? { body: payload } : {}),
+      },
+    );
+  }
   file(
     "index.html",
     '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>',
@@ -320,7 +379,8 @@ try {
         configureServer(vite) {
           vite.middlewares.use(async (req, res, next) => {
             if (!req.url?.startsWith("/finder-test-api/")) return next();
-            const method = req.url.split("/").at(-1);
+            const requestUrl = new URL(req.url, origin);
+            const method = requestUrl.pathname.split("/").at(-1);
             const role = req.headers.cookie?.match(
               /(?:^|;\s*)finder-test-role=(staff|member)(?:;|$)/,
             )?.[1];
@@ -335,14 +395,42 @@ try {
             await requestState.run(context, async () => {
               try {
                 assert.ok(Object.hasOwn(methods, method), "Unknown test API");
+                assert.equal(
+                  req.method,
+                  methods[method].httpMethod,
+                  "Use the API's declared HTTP method",
+                );
                 let body = "";
                 for await (const chunk of req) {
                   body += chunk;
                   if (body.length > 100_000) throw new Error("Synthetic request too large");
                 }
-                const input = JSON.parse(body || "{}");
-                requests.push({ method, input, role });
+                const serialized =
+                  req.method === "GET" ? requestUrl.searchParams.get("payload") : body;
+                const input = serialized ? (fromJSON(JSON.parse(serialized)).data ?? {}) : {};
+                requests.push({
+                  method,
+                  input,
+                  role,
+                  httpMethod: req.method,
+                  requestTarget: req.url,
+                  wireLength: Buffer.byteLength(req.url),
+                  bodyLength: Buffer.byteLength(body),
+                  contentType: req.headers["content-type"],
+                  serverFnHeader: req.headers["x-tsr-serverfn"],
+                  fetchSite: req.headers["sec-fetch-site"],
+                  requestOrigin: req.headers.origin,
+                  equivalentGetWireLength: Buffer.byteLength(
+                    `${requestUrl.pathname}?${encode({ payload: serialized })}`,
+                  ),
+                });
                 const response = await methods[method](input);
+                const gate =
+                  method === "searchAthleteSourceResults" ? responseGates.get(input.q) : undefined;
+                if (gate) {
+                  gate.entered.resolve();
+                  await gate.released.promise;
+                }
                 res.setHeader("Content-Type", "application/json");
                 res.end(JSON.stringify(response));
               } catch (error) {
@@ -359,6 +447,7 @@ try {
     ],
     resolve: {
       alias: [
+        { find: /^\.{1,2}\/getStartOptions\.js$/, replacement: startOptions },
         { find: "@/lib/athlete-finder/api", replacement: bridge },
         { find: "@/lib/athlete-finder/coverage-api", replacement: bridge },
         { find: "@/lib/athlete-finder/source-check-api", replacement: bridge },
@@ -366,7 +455,12 @@ try {
         { find: "@", replacement: resolve("src") },
       ],
     },
-    server: { host: "127.0.0.1", port: 8147, strictPort: true, fs: { allow: [process.cwd()] } },
+    server: {
+      host: "127.0.0.1",
+      port: 8147,
+      strictPort: true,
+      fs: { allow: [process.cwd(), resolve(rpcDirectory, "..")] },
+    },
   });
   await server.listen();
 
@@ -381,11 +475,7 @@ try {
       ["anonymous", 401],
       ["member", 403],
     ]) {
-      const denied = await fetch(`${origin}/finder-test-api/${method}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Cookie: `finder-test-role=${role}` },
-        body: JSON.stringify(input),
-      });
+      const denied = await apiRequest(method, input, { Cookie: `finder-test-role=${role}` });
       assert.equal(
         denied.status,
         expected,
@@ -396,16 +486,26 @@ try {
       assert.ok(!(await denied.text()).includes(name));
     }
   }
-  const crossSite = await fetch(`${origin}/finder-test-api/searchAthleteSourceResults`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: "finder-test-role=staff",
-      "Sec-Fetch-Site": "cross-site",
-    },
-    body: JSON.stringify({ q: name }),
-  });
-  assert.equal(crossSite.status, 403);
+  for (const [site, mode] of [
+    ["same-site", "cors"],
+    ["cross-site", "cors"],
+    ["same-site", "navigate"],
+    ["cross-site", "navigate"],
+  ]) {
+    const denied = await apiRequest(
+      "searchAthleteSourceResults",
+      { q: name },
+      {
+        Cookie: "finder-test-role=staff",
+        "Sec-Fetch-Site": site,
+        "Sec-Fetch-Mode": mode,
+        "Sec-Fetch-Dest": mode === "navigate" ? "document" : "empty",
+      },
+    );
+    assert.equal(denied.status, 403, "POST must not inherit the top-level GET exception");
+    assert.equal(denied.headers.get("cache-control"), "private, no-store");
+    assert.ok(!(await denied.text()).includes(name));
+  }
   assert.equal(providerRequests.length, 0);
   requests.length = 0;
 
@@ -506,6 +606,170 @@ try {
   await page
     .getByRole("heading", { name: `28 stored matches on this page for ${name}`, exact: true })
     .waitFor();
+
+  // Inputs are editable while a request is pending, but the resulting rows and
+  // pagination must keep the submitted query, not relabel it using later drafts.
+  const heldDraftResponse = holdSearchResponse(name);
+  await page.getByRole("button", { name: "Search stored results", exact: true }).click();
+  await heldDraftResponse.waitUntilEntered();
+  await page.getByLabel("Athlete name", { exact: true }).fill("Unsubmitted Synthetic Draft");
+  await page.getByLabel("Other racing names").fill("Unsubmitted Synthetic Alias");
+  await page.getByLabel("Club filter").fill("Unsubmitted Synthetic Club");
+  assert.ok(
+    await page.getByRole("button", { name: "Searching stored results…", exact: true }).isDisabled(),
+  );
+  assert.equal(
+    await resultTable.count(),
+    0,
+    "A pending request must not present earlier results as current",
+  );
+  heldDraftResponse.release();
+  await page
+    .getByRole("heading", { name: `28 stored matches on this page for ${name}`, exact: true })
+    .waitFor();
+  assert.equal(
+    await page.getByLabel("Athlete name", { exact: true }).inputValue(),
+    "Unsubmitted Synthetic Draft",
+  );
+  await page.getByRole("button", { name: "Next page", exact: true }).click();
+  await page
+    .getByRole("heading", { name: `1 stored matches on this page for ${name}`, exact: true })
+    .waitFor();
+  const pagedDraft = requests
+    .filter((request) => request.method === "searchAthleteSourceResults")
+    .at(-1).input;
+  assert.equal(pagedDraft.q, name);
+  assert.deepEqual(pagedDraft.aliases, []);
+  assert.equal(pagedDraft.club, "");
+  assert.equal(pagedDraft.offset, 25);
+  await page.getByLabel("Other racing names").fill("");
+  await page.getByLabel("Club filter").fill("");
+
+  // Stress an overlapping submission directly: ordinary pending UI prevents
+  // this, but a late old response still must not replace the newest mutation.
+  const delayedName = "Delayed Previous Synthetic Request";
+  const oldResponse = holdSearchResponse(delayedName);
+  await page.getByLabel("Athlete name", { exact: true }).fill(delayedName);
+  await page.getByRole("button", { name: "Search stored results", exact: true }).click();
+  await oldResponse.waitUntilEntered();
+  await page.getByLabel("Athlete name", { exact: true }).fill(name);
+  await page
+    .locator("form")
+    .first()
+    .evaluate((form) => form.requestSubmit());
+  await page
+    .getByRole("heading", { name: `28 stored matches on this page for ${name}`, exact: true })
+    .waitFor();
+  const oldDelivered = page.waitForResponse((response) => {
+    const url = new URL(response.url());
+    if (url.pathname !== "/finder-test-api/searchAthleteSourceResults") return false;
+    const payload = response.request().postData();
+    return payload && fromJSON(JSON.parse(payload)).data?.q === delayedName;
+  });
+  oldResponse.release();
+  await (await oldDelivered).finished();
+  await page.evaluate(
+    () => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))),
+  );
+  await page
+    .getByRole("heading", { name: `28 stored matches on this page for ${name}`, exact: true })
+    .waitFor();
+  assert.equal(
+    await page
+      .getByRole("heading", {
+        name: `0 stored matches on this page for ${delayedName}`,
+        exact: true,
+      })
+      .count(),
+    0,
+  );
+
+  // Historical and partially indexed captures must remain searchable while the
+  // new index rolls out. A missing/unknown/inconsistent marker selects the exact
+  // legacy fallback; it must never become a successful but false empty search.
+  await page.getByRole("combobox", { name: /^Collection/ }).selectOption("capture");
+  for (const [label, mutation] of [
+    [
+      "missing marker",
+      "delete from athlete_finder_capture_search_state where capture_id=$1::bigint",
+    ],
+    [
+      "unknown index version",
+      "update athlete_finder_capture_search_state set index_version=2 where capture_id=$1::bigint",
+    ],
+    [
+      "inconsistent indexed row count",
+      "update athlete_finder_capture_search_state set indexed_rows=0 where capture_id=$1::bigint",
+    ],
+  ]) {
+    await sql.query(mutation, [capture.id]);
+    try {
+      const responseReady = page.waitForResponse(
+        (response) =>
+          new URL(response.url()).pathname === "/finder-test-api/searchAthleteSourceResults",
+      );
+      await page.getByRole("button", { name: "Search stored results", exact: true }).click();
+      const response = await (await responseReady).json();
+      assert.equal(
+        response.completeForSelectedStores,
+        true,
+        `${label}: exact fallback is a completed search`,
+      );
+      assert.deepEqual(
+        response.stores.map(({ kind, status, returned }) => ({ kind, status, returned })),
+        [{ kind: "capture", status: "searched", returned: 1 }],
+      );
+      assert.deepEqual(
+        response.rows.map((row) => [row.captureId, row.captureOrdinal]),
+        [[capture.id, 1]],
+        `${label}: the source row must not disappear`,
+      );
+      await page
+        .getByRole("heading", { name: `1 stored matches on this page for ${name}`, exact: true })
+        .waitFor();
+      assert.equal(await page.getByText("Search incomplete", { exact: true }).count(), 0);
+      assert.equal(
+        await resultTable.getByRole("link", { name: "Open saved race rows" }).getAttribute("href"),
+        `/admin/result-archive#capture=${capture.id}&name=${encodeURIComponent(name)}`,
+      );
+    } finally {
+      await sql`select athlete_finder_refresh_capture_search(${capture.id}::bigint)`;
+    }
+  }
+  await page.getByRole("combobox", { name: /^Collection/ }).selectOption("all");
+
+  // Exercise maximum accepted browser fields through the installed POST serializer.
+  // The full Unicode payload must arrive in the body without lengthening the URL.
+  const maximumName = "李".repeat(160);
+  const maximumAliases = [..."許鍾鄧黃鄭謝何陳"].map((character) => character.repeat(160));
+  const maximumClub = "俱".repeat(160);
+  await page.getByLabel("Athlete name", { exact: true }).fill(maximumName);
+  await page.getByLabel("Other racing names").fill(maximumAliases.join(";"));
+  await page.getByLabel("Club filter").fill(maximumClub);
+  await page.getByRole("button", { name: "Search stored results", exact: true }).click();
+  await page
+    .getByText("No matching rows were returned from the available stored data.", { exact: false })
+    .waitFor();
+  const maximumRequest = requests
+    .filter((request) => request.method === "searchAthleteSourceResults")
+    .at(-1);
+  assert.equal(maximumRequest.httpMethod, "POST");
+  assert.equal(maximumRequest.input.q, maximumName);
+  assert.deepEqual(maximumRequest.input.aliases, maximumAliases);
+  assert.equal(maximumRequest.input.club, maximumClub);
+  assert.equal(maximumRequest.requestTarget, "/finder-test-api/searchAthleteSourceResults");
+  assert.ok(maximumRequest.wireLength < 200, "Search fields must not enter the request URL");
+  assert.ok(maximumRequest.bodyLength > 4_800 && maximumRequest.bodyLength < 10_000);
+  assert.equal(maximumRequest.contentType, "application/json");
+  assert.equal(maximumRequest.serverFnHeader, "true");
+  assert.equal(maximumRequest.fetchSite, "same-origin");
+  assert.equal(maximumRequest.requestOrigin, origin);
+  assert.ok(
+    maximumRequest.equivalentGetWireLength > 14 * 1024,
+    "The equivalent GET serialization must exceed the documented 14 KB URL limit",
+  );
+  await page.getByLabel("Other racing names").fill("");
+  await page.getByLabel("Club filter").fill("");
 
   await page.getByLabel("Athlete name", { exact: true }).fill("Nobody With This Synthetic Name");
   await page.getByRole("button", { name: "Search stored results", exact: true }).click();
@@ -694,9 +958,13 @@ try {
   );
   assert.deepEqual(errors, []);
   console.log(
-    "Athlete finder browser verified: four stores, submit-only search, pagination, review links, unavailable-store distinction, source coverage refresh recovery, mobile layout, staff access, stale-preview protection and durable selected-row import handoff.",
+    `Maximum Unicode finder transport: ${maximumRequest.httpMethod}, request target ${maximumRequest.wireLength} bytes, body ${maximumRequest.bodyLength} bytes; equivalent encoded GET target ${maximumRequest.equivalentGetWireLength} bytes.`,
+  );
+  console.log(
+    "Athlete finder browser verified: real GET/POST transport, maximum Unicode POST inputs, delayed and reordered responses, partial-index fallback, four stores, submit-only search, pagination, review links, unavailable-store distinction, source coverage refresh recovery, mobile layout, staff access, stale-preview protection and durable selected-row import handoff.",
   );
 } finally {
+  for (const gate of responseGates.values()) gate.released.resolve();
   if (beforeAllowlist === undefined) delete process.env.ATHRECS_STAFF_EMAILS;
   else process.env.ATHRECS_STAFF_EMAILS = beforeAllowlist;
   await browser?.close();

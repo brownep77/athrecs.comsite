@@ -52,6 +52,8 @@
     "verify:private-result-archive": "node scripts/verify-private-result-archive.mjs",
     "verify:athlete-source-finder": "node scripts/verify-athlete-source-finder.mjs",
     "verify:athlete-source-coverage": "node scripts/verify-athlete-source-coverage.mjs",
+    "backfill:athlete-finder-capture-index": "node scripts/backfill-athlete-finder-capture-index.mjs",
+    "verify:athlete-finder-capture-backfill": "node scripts/verify-athlete-finder-capture-backfill.mjs",
     "verify:athlete-source-check": "node scripts/verify-athlete-source-check.mjs",
     "verify:athlete-source-finder-browser": "node scripts/verify-athlete-source-finder-browser.mjs",
     "verify:result-matches": "node --experimental-strip-types scripts/verify-result-matches.mjs",
