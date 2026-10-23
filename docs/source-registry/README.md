@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 327 unique sources. Only 36 are enabled; the other 291 remain
+The registry contains 334 unique sources. Only 36 are enabled; the other 298 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 327 sources create exactly one source job;
+- all 334 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 291 sources are retained as blocked jobs with their reason;
+- the other 298 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -181,3 +181,20 @@ Added My BEST Runs as a disabled secondary research source, reusing its wider-in
 Expanded the existing Race Roster source with the observed Online Race Results archive redirect and results-host aliases, without creating a duplicate collector. The sampled legacy participant page failed to load, so no result was imported from it. The registry now contains 327 sources: 36 enabled and 291 disabled.
 
 Further Surf City results use official female-filtered tables and independent individual result cards. Existing source IDs and uncertain athlete matches are retained for review; no duplicate performance is created. Participant evidence stays in the staff backend.
+
+## Organiser and timing archives, 23 October 2026
+
+Added Longford Marathon, TIMING Ljubljana, Dorsal21, Phoenix Running, Atlas Running,
+the Irish Mountain Running Association and We Run Wild NI as disabled manual
+research sources. Registry and wider event-inventory checks retain the existing
+TIMING Ljubljana, Phoenix and We Run Wild provider records. Coverage describes
+only the editions and original reports actually inspected; it does not establish
+a complete archive. The registry contains 334 sources: 36 enabled and 298 disabled.
+
+Preserve chip, gun and unqualified time labels, race-distance classifications and
+placing scopes. Fixed-time distance totals are separate from elapsed-time results.
+IMRA live retrieval returned HTTP 403; cached event information does not verify a
+participant result. Athlete-specific captures and identity decisions remain in
+staff evidence. The owner excluded MarathonView from the current individual-athlete
+review; that scope is recorded privately and its existing registry row remains
+disabled. None of these registrations enables automated collection.
