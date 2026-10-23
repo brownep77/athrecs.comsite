@@ -1,3 +1,4 @@
+import { newZealand2027Series, newZealand2027Editions } from "./new-zealand-swimming-2027.ts";
 import { beijing2026Series, beijing2026Editions } from "./beijing-2026-swimming.ts";
 import type { Edition, Series } from "./types";
 import {
@@ -12,6 +13,7 @@ import {
  * governing-body page. Participant-level results are deliberately excluded.
  */
 export const verifiedAllSportSeries: Series[] = [
+  ...newZealand2027Series,
   ...beijing2026Series,
   ...belgiumEliteYouthCompetitionSeries,
   {
@@ -73,6 +75,7 @@ export const verifiedAllSportSeries: Series[] = [
 ];
 
 export const verifiedAllSportEditions: Edition[] = [
+  ...newZealand2027Editions,
   ...beijing2026Editions,
   ...belgiumEliteYouthCompetitionEditions,
   {
