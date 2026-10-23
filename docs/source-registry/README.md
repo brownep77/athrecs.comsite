@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 334 unique sources. Only 36 are enabled; the other 298 remain
+The registry contains 335 unique sources. Only 36 are enabled; the other 299 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 334 sources create exactly one source job;
+- all 335 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 298 sources are retained as blocked jobs with their reason;
+- the other 299 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -198,3 +198,18 @@ participant result. Athlete-specific captures and identity decisions remain in
 staff evidence. The owner excluded MarathonView from the current individual-athlete
 review; that scope is recorded privately and its existing registry row remains
 disabled. None of these registrations enables automated collection.
+
+
+## Race Results / EMIT UK, 23 October 2026
+
+Registered the opened RaceResults.uk index, branded race-results.info, and its
+explicit relationship with EMIT UK. The current index includes 2026 running,
+triathlon, athletics and orienteering listings, with links to RaceSignup reports
+and its own static reports. The current EMIT results route replaces the broken
+older route found in organiser manuals. Registry and wider-inventory domain
+checks precede registration; existing event identities are not duplicated.
+
+This source remains disabled for manual rights and selector review. No individual
+performance was imported from it in this batch, and archive-year links do not
+establish complete coverage. The registry now contains 335 sources: 36 enabled
+and 299 disabled.

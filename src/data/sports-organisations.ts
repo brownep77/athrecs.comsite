@@ -1268,17 +1268,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["JASF", "日本水泳連盟"],
   ),
-  federation(
-    "triathlon-japan",
-    "Triathlon Japan",
-    "Japan",
-    multisport,
+  record({
+  "slug": "triathlon-japan",
+  "name": "Triathlon Japan",
+  "country": "Japan",
+  "jurisdiction": "Japan",
+  "territories": [
+    "Japan"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.jtu.or.jp/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Japan.",
+  "sources": [
     "https://www.jtu.or.jp/",
-    "National federation for triathlon and related multisport, including duathlon, in Japan.",
-    ["https://www.jtu.or.jp/"],
-    ["world-triathlon"],
-    ["Japan Triathlon Union", "JTU", "トライアスロンジャパン"],
-  ),
+    "https://triathlon.org/members/japan-triathlon-union",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Japan Triathlon Union",
+    "JTU",
+    "トライアスロンジャパン"
+  ]
+}, "2026-10-23"),
   federation(
     "brazilian-athletics",
     "Confederação Brasileira de Atletismo",
@@ -1919,21 +1937,34 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["SFI"],
   ),
-  federation(
-    "indian-triathlon",
-    "Indian Triathlon Federation",
-    "India",
-    multisport,
+  record({
+  "slug": "indian-triathlon",
+  "name": "Indian Triathlon Federation",
+  "country": "India",
+  "jurisdiction": "India",
+  "territories": [
+    "India"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlonindia.com/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in India.",
+  "sources": [
+    "https://triathlon.org/members/indian-triathlon-federation",
+    "https://www.triathlonindia.com/events/event-sanction-process",
     "https://www.triathlonindia.com/",
-    "National federation for triathlon and related multisport, including duathlon, in India.",
-    [
-      "https://triathlon.org/members/indian-triathlon-federation",
-      "https://www.triathlonindia.com/events/event-sanction-process",
-      "https://www.triathlonindia.com/",
-    ],
-    ["world-triathlon"],
-    ["ITF"],
-  ),
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "ITF"
+  ]
+}, "2026-10-23"),
   federation(
     "singapore-athletics",
     "Singapore Athletics",
@@ -1973,21 +2004,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["SAQ", "Singapore Swimming Association"],
   ),
-  federation(
-    "singapore-triathlon",
-    "Triathlon Singapore",
-    "Singapore",
-    multisport,
+  record({
+  "slug": "singapore-triathlon",
+  "name": "Triathlon Singapore",
+  "country": "Singapore",
+  "jurisdiction": "Singapore",
+  "territories": [
+    "Singapore"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlonsingapore.org/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Singapore.",
+  "sources": [
+    "https://triathlon.org/members/triathlon-association-of-singapore",
+    "https://www.triathlonsingapore.org/events/sanctioned-events/",
     "https://www.triathlonsingapore.org/",
-    "National federation for triathlon and related multisport, including duathlon, in Singapore.",
-    [
-      "https://triathlon.org/members/triathlon-association-of-singapore",
-      "https://www.triathlonsingapore.org/events/sanctioned-events/",
-      "https://www.triathlonsingapore.org/",
-    ],
-    ["world-triathlon"],
-    ["Triathlon Association of Singapore", "TAS"],
-  ),
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Triathlon Association of Singapore",
+    "TAS"
+  ]
+}, "2026-10-23"),
   federation(
     "athletics-kenya",
     "Athletics Kenya",
@@ -2568,21 +2613,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["KSF", "Republic of Korea Swimming"],
   ),
-  federation(
-    "korean-triathlon",
-    "Korea Triathlon Federation",
-    "South Korea",
-    multisport,
+  record({
+  "slug": "korean-triathlon",
+  "name": "Korea Triathlon Federation",
+  "country": "South Korea",
+  "jurisdiction": "South Korea",
+  "territories": [
+    "South Korea"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triathlon.or.kr/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in South Korea.",
+  "sources": [
+    "https://triathlon.org/members/korean-triathlon-federation",
     "https://triathlon.or.kr/",
-    "National federation for triathlon and related multisport, including duathlon, in South Korea.",
-    [
-      "https://triathlon.org/members/korean-triathlon-federation",
-      "https://triathlon.or.kr/",
-      "https://triathlon.or.kr/events/tour/",
-    ],
-    ["world-triathlon"],
-    ["Republic of Korea Triathlon", "대한철인3종협회"],
-  ),
+    "https://triathlon.or.kr/events/tour/",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Republic of Korea Triathlon",
+    "대한철인3종협회"
+  ]
+}, "2026-10-23"),
 
   federation(
     "argentine-athletics",
@@ -2828,21 +2887,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["Akuatik Malaysia", "MAS", "Amateur Swimming Union of Malaysia", "ASUM"],
   ),
-  federation(
-    "malaysian-triathlon",
-    "Malaysia Triathlon Association",
-    "Malaysia",
-    multisport,
+  record({
+  "slug": "malaysian-triathlon",
+  "name": "Malaysia Triathlon Association",
+  "country": "Malaysia",
+  "jurisdiction": "Malaysia",
+  "territories": [
+    "Malaysia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://malaysiatriathlon.wordpress.com/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Malaysia.",
+  "sources": [
+    "https://triathlon.org/members/triathlon-association-of-malaysia",
     "https://malaysiatriathlon.wordpress.com/",
-    "National federation for triathlon and related multisport, including duathlon, in Malaysia.",
-    [
-      "https://triathlon.org/members/triathlon-association-of-malaysia",
-      "https://malaysiatriathlon.wordpress.com/",
-      "https://malaysiatriathlon.wordpress.com/about-malaysia-triathlon/",
-    ],
-    ["world-triathlon"],
-    ["Malaysia Triathlon", "Persatuan Triathlon Malaysia Baru", "MTA"],
-  ),
+    "https://malaysiatriathlon.wordpress.com/about-malaysia-triathlon/",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Malaysia Triathlon",
+    "Persatuan Triathlon Malaysia Baru",
+    "MTA"
+  ]
+}, "2026-10-23"),
   federation(
     "thai-athletics",
     "Athletic Association of Thailand",
@@ -2895,22 +2969,34 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     detail:
       "The federation’s current website uses Thailand Aquatic Sports Association (TASA). World Aquatics’ member directory still lists the older Thailand Swimming Association name; both names are searchable here.",
   },
-  {
-    ...federation(
-      "thai-triathlon",
-      "Thailand Triathlon",
-      "Thailand",
-      ["triathlon"],
-      "https://triathlon.org/members/triathlon-association-of-thailand",
-      "National federation for triathlon in Thailand, recognised by World Triathlon.",
-      ["https://triathlon.org/members/triathlon-association-of-thailand"],
-      ["world-triathlon"],
-      ["Triathlon Association of Thailand", "Thai Triathlon"],
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens Thailand’s World Triathlon member profile, which lists the federation’s affiliation and contact information. No standalone website is listed in that member entry.",
-  },
+  record({
+  "slug": "thai-triathlon",
+  "name": "Thailand Triathlon",
+  "country": "Thailand",
+  "jurisdiction": "Thailand",
+  "territories": [
+    "Thailand"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/triathlon-association-of-thailand",
+  "summary": "National federation for triathlon in Thailand, recognised by World Triathlon.",
+  "sources": [
+    "https://triathlon.org/members/triathlon-association-of-thailand",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Triathlon Association of Thailand",
+    "Thai Triathlon"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens Thailand’s World Triathlon member profile, which lists the federation’s affiliation and contact information. No standalone website is listed in that member entry."
+}, "2026-10-23"),
   federation(
     "philippine-athletics",
     "Philippine Athletics Track and Field Association",
@@ -2957,22 +3043,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["PAI", "Philippines Aquatics", "Philippine Swimming"],
   ),
-  {
-    ...federation(
-      "philippine-triathlon",
-      "Triathlon Association of the Philippines",
-      "Philippines",
-      ["triathlon"],
-      "https://triathlon.org/members/triathlon-association-of-the-philippines",
-      "National federation for triathlon in Philippines, recognised by World Triathlon.",
-      ["https://triathlon.org/members/triathlon-association-of-the-philippines"],
-      ["world-triathlon"],
-      ["TriPhil", "Triathlon Philippines", "TRAP"],
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens the Philippines’ World Triathlon member profile, with federation contact details. The standalone site listed there could not be retrieved during this review.",
-  },
+  record({
+  "slug": "philippine-triathlon",
+  "name": "Triathlon Association of the Philippines",
+  "country": "Philippines",
+  "jurisdiction": "Philippines",
+  "territories": [
+    "Philippines"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/triathlon-association-of-the-philippines",
+  "summary": "National federation for triathlon in Philippines, recognised by World Triathlon.",
+  "sources": [
+    "https://triathlon.org/members/triathlon-association-of-the-philippines",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "TriPhil",
+    "Triathlon Philippines",
+    "TRAP"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens the Philippines’ World Triathlon member profile, with federation contact details. The standalone site listed there could not be retrieved during this review."
+}, "2026-10-23"),
   federation(
     "indonesian-athletics",
     "Persatuan Atletik Seluruh Indonesia",
@@ -3036,22 +3135,34 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     detail:
       "Formerly Persatuan Renang Seluruh Indonesia (PRSI), the federation adopted the Akuatik Indonesia name in August 2023. World Aquatics’ directory retains the older name; both are searchable here.",
   },
-  {
-    ...federation(
-      "indonesian-triathlon",
-      "Indonesian Triathlon Federation",
-      "Indonesia",
-      ["triathlon"],
-      "https://triathlon.org/members/indonesian-triathlon-federation",
-      "National federation for triathlon in Indonesia, recognised by World Triathlon.",
-      ["https://triathlon.org/members/indonesian-triathlon-federation"],
-      ["world-triathlon"],
-      ["Federasi Triathlon Indonesia", "FTI"],
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens Indonesia’s World Triathlon member profile, with federation contact details. The standalone site listed there could not be retrieved during this review.",
-  },
+  record({
+  "slug": "indonesian-triathlon",
+  "name": "Indonesian Triathlon Federation",
+  "country": "Indonesia",
+  "jurisdiction": "Indonesia",
+  "territories": [
+    "Indonesia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/indonesian-triathlon-federation",
+  "summary": "National federation for triathlon in Indonesia, recognised by World Triathlon.",
+  "sources": [
+    "https://triathlon.org/members/indonesian-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Federasi Triathlon Indonesia",
+    "FTI"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens Indonesia’s World Triathlon member profile, with federation contact details. The standalone site listed there could not be retrieved during this review."
+}, "2026-10-23"),
   federation(
     "hong-kong-athletics",
     "Hong Kong, China Association of Athletics Affiliates",
@@ -3095,21 +3206,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["HKGSA", "Hong Kong Swimming", "Hong Kong, China"],
   ),
-  federation(
-    "hong-kong-triathlon",
-    "Triathlon Association of Hong Kong China",
-    "Hong Kong",
-    multisport,
+  record({
+  "slug": "hong-kong-triathlon",
+  "name": "Triathlon Association of Hong Kong China",
+  "country": "Hong Kong",
+  "jurisdiction": "Hong Kong",
+  "territories": [
+    "Hong Kong"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlon.com.hk/",
+  "summary": "Governing body for triathlon and related multisport, including duathlon, in Hong Kong.",
+  "sources": [
+    "https://triathlon.org/members/hong-kong-triathlon-association",
     "https://www.triathlon.com.hk/",
-    "Governing body for triathlon and related multisport, including duathlon, in Hong Kong.",
-    [
-      "https://triathlon.org/members/hong-kong-triathlon-association",
-      "https://www.triathlon.com.hk/",
-      "https://www.triathlon.com.hk/en/event/trihk_race_info/",
-    ],
-    ["world-triathlon"],
-    ["TriHK", "Hong Kong Triathlon", "Hong Kong, China"],
-  ),
+    "https://www.triathlon.com.hk/en/event/trihk_race_info/",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "TriHK",
+    "Hong Kong Triathlon",
+    "Hong Kong, China"
+  ]
+}, "2026-10-23"),
 
   federation(
     "croatian-athletics",
@@ -4520,23 +4646,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "2026-10-23",
   ),
 
-  record(
-    {
-      slug: "chinese-triathlon",
-      name: "China Triathlon Sports Association",
-      type: "national",
-      country: "China",
-      jurisdiction: "China",
-      territories: ["China"],
-      sports: ["triathlon"],
-      summary: "National federation for triathlon in China.",
-      website: "https://triathlon.org/members/china-triathlon-sports-association",
-      sources: ["https://triathlon.org/members/china-triathlon-sports-association"],
-      related: ["world-triathlon"],
-      websiteKind: "member-directory",
-    },
-    "2026-10-23",
-  ),
+  record({
+  "slug": "chinese-triathlon",
+  "name": "China Triathlon Sports Association",
+  "type": "national",
+  "country": "China",
+  "jurisdiction": "China",
+  "territories": [
+    "China"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National federation for triathlon in China.",
+  "website": "https://triathlon.org/members/china-triathlon-sports-association",
+  "sources": [
+    "https://triathlon.org/members/china-triathlon-sports-association",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "websiteKind": "member-directory"
+}, "2026-10-23"),
 
   record(
     {
@@ -4556,24 +4688,32 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "2026-10-23",
   ),
 
-  record(
-    {
-      slug: "chinese-taipei-triathlon",
-      name: "Chinese Taipei Triathlon Association",
-      type: "national",
-      country: "Chinese Taipei",
-      jurisdiction: "Chinese Taipei",
-      territories: ["Chinese Taipei"],
-      sports: ["triathlon"],
-      summary: "National federation for triathlon in Chinese Taipei.",
-      website: "https://triathlon.org/members/chinese-taipei-triathlon-association",
-      sources: ["https://triathlon.org/members/chinese-taipei-triathlon-association"],
-      related: ["world-triathlon"],
-      websiteKind: "member-directory",
-      aliases: ["Taiwan Triathlon"],
-    },
-    "2026-10-23",
-  ),
+  record({
+  "slug": "chinese-taipei-triathlon",
+  "name": "Chinese Taipei Triathlon Association",
+  "type": "national",
+  "country": "Chinese Taipei",
+  "jurisdiction": "Chinese Taipei",
+  "territories": [
+    "Chinese Taipei"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National federation for triathlon in Chinese Taipei.",
+  "website": "https://triathlon.org/members/chinese-taipei-triathlon-association",
+  "sources": [
+    "https://triathlon.org/members/chinese-taipei-triathlon-association",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "websiteKind": "member-directory",
+  "aliases": [
+    "Taiwan Triathlon"
+  ]
+}, "2026-10-23"),
 
   record(
     {
@@ -4595,23 +4735,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "2026-10-23",
   ),
 
-  record(
-    {
-      slug: "nepalese-triathlon",
-      name: "Nepal Triathlon Association",
-      type: "national",
-      country: "Nepal",
-      jurisdiction: "Nepal",
-      territories: ["Nepal"],
-      sports: ["triathlon"],
-      summary: "National federation for triathlon in Nepal.",
-      website: "https://triathlon.org/members/nepal-triathlon-association-nta",
-      sources: ["https://triathlon.org/members/nepal-triathlon-association-nta"],
-      related: ["world-triathlon"],
-      websiteKind: "member-directory",
-    },
-    "2026-10-23",
-  ),
+  record({
+  "slug": "nepalese-triathlon",
+  "name": "Nepal Triathlon Association",
+  "type": "national",
+  "country": "Nepal",
+  "jurisdiction": "Nepal",
+  "territories": [
+    "Nepal"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National federation for triathlon in Nepal.",
+  "website": "https://triathlon.org/members/nepal-triathlon-association-nta",
+  "sources": [
+    "https://triathlon.org/members/nepal-triathlon-association-nta",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "websiteKind": "member-directory"
+}, "2026-10-23"),
 
   record(
     {
@@ -4631,25 +4777,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "2026-10-23",
   ),
 
-  record(
-    {
-      slug: "vietnamese-triathlon",
-      name: "Vietnam Triathlon Federation",
-      type: "national",
-      country: "Vietnam",
-      jurisdiction: "Vietnam",
-      territories: ["Vietnam"],
-      sports: ["triathlon", "duathlon"],
-      summary: "National federation for triathlon and duathlon in Vietnam.",
-      website: "https://triathlonvietnam.org/",
-      sources: [
-        "https://triathlon.org/members/vietnam-triathlon-federation",
-        "https://triathlonvietnam.org/",
-      ],
-      related: ["world-triathlon"],
-    },
-    "2026-10-23",
-  ),
+  record({
+  "slug": "vietnamese-triathlon",
+  "name": "Vietnam Triathlon Federation",
+  "type": "national",
+  "country": "Vietnam",
+  "jurisdiction": "Vietnam",
+  "territories": [
+    "Vietnam"
+  ],
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "summary": "National federation for triathlon and duathlon in Vietnam.",
+  "website": "https://triathlonvietnam.org/",
+  "sources": [
+    "https://triathlon.org/members/vietnam-triathlon-federation",
+    "https://triathlonvietnam.org/",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
 
   record(
     {
@@ -4669,23 +4820,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "2026-10-23",
   ),
 
-  record(
-    {
-      slug: "sri-lankan-triathlon",
-      name: "Sri Lanka Triathlon",
-      type: "national",
-      country: "Sri Lanka",
-      jurisdiction: "Sri Lanka",
-      territories: ["Sri Lanka"],
-      sports: ["triathlon"],
-      summary: "National federation for triathlon in Sri Lanka.",
-      website: "https://triathlon.org/members/sri-lanka-triathlon",
-      sources: ["https://triathlon.org/members/sri-lanka-triathlon"],
-      related: ["world-triathlon"],
-      websiteKind: "member-directory",
-    },
-    "2026-10-23",
-  ),
+  record({
+  "slug": "sri-lankan-triathlon",
+  "name": "Sri Lanka Triathlon",
+  "type": "national",
+  "country": "Sri Lanka",
+  "jurisdiction": "Sri Lanka",
+  "territories": [
+    "Sri Lanka"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National federation for triathlon in Sri Lanka.",
+  "website": "https://triathlon.org/members/sri-lanka-triathlon",
+  "sources": [
+    "https://triathlon.org/members/sri-lanka-triathlon",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "websiteKind": "member-directory"
+}, "2026-10-23"),
 
   record(
     {
@@ -4707,24 +4864,32 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "2026-10-23",
   ),
 
-  record(
-    {
-      slug: "macau-triathlon",
-      name: "China Macau Triathlon General Association",
-      type: "national",
-      country: "Macau",
-      jurisdiction: "Macau, China",
-      territories: ["Macau"],
-      sports: ["triathlon"],
-      summary: "National federation for triathlon in Macau.",
-      website: "https://triathlon.org/members/macau-triathlon-association",
-      sources: ["https://triathlon.org/members/macau-triathlon-association"],
-      related: ["world-triathlon"],
-      websiteKind: "member-directory",
-      aliases: ["Macao Triathlon"],
-    },
-    "2026-10-23",
-  ),
+  record({
+  "slug": "macau-triathlon",
+  "name": "China Macau Triathlon General Association",
+  "type": "national",
+  "country": "Macau",
+  "jurisdiction": "Macau, China",
+  "territories": [
+    "Macau"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National federation for triathlon in Macau.",
+  "website": "https://triathlon.org/members/macau-triathlon-association",
+  "sources": [
+    "https://triathlon.org/members/macau-triathlon-association",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "websiteKind": "member-directory",
+  "aliases": [
+    "Macao Triathlon"
+  ]
+}, "2026-10-23"),
 
   record(
     {
@@ -8675,6 +8840,534 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   "sources": [
     "https://triathlon.org/members/zimbabwe-triathlon-federation",
     "https://africa.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "bangladesh-triathlon",
+  "name": "Bangladesh Triathlon Association",
+  "type": "national",
+  "country": "Bangladesh",
+  "jurisdiction": "Bangladesh",
+  "territories": [
+    "Bangladesh"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Bangladesh, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/triathlon-federation-of-bangladesh",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/triathlon-federation-of-bangladesh",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "bahrain-triathlon",
+  "name": "Bahrain Triathlon Association",
+  "type": "national",
+  "country": "Bahrain",
+  "jurisdiction": "Bahrain",
+  "territories": [
+    "Bahrain"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Bahrain, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/bahrain-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/bahrain-triathlon-association",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cambodia-triathlon",
+  "name": "Cambodia Triathlon Federation",
+  "type": "national",
+  "country": "Cambodia",
+  "jurisdiction": "Cambodia",
+  "territories": [
+    "Cambodia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Cambodia, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/cambodia-triathlon-federation-ctf",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/cambodia-triathlon-federation-ctf",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "iran-triathlon",
+  "name": "Iran Triathlon Federation",
+  "type": "national",
+  "country": "Iran",
+  "jurisdiction": "Iran",
+  "territories": [
+    "Iran"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Iran, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/iran-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/iran-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "iraq-triathlon",
+  "name": "Iraq Triathlon Federation",
+  "type": "national",
+  "country": "Iraq",
+  "jurisdiction": "Iraq",
+  "territories": [
+    "Iraq"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Iraq, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/iraq-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/iraq-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "jordan-triathlon",
+  "name": "Jordan Triathlon Association",
+  "type": "national",
+  "country": "Jordan",
+  "jurisdiction": "Jordan",
+  "territories": [
+    "Jordan"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Jordan, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/jordanian-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/jordanian-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kazakhstan-triathlon",
+  "name": "Kazakhstan Triathlon Federation",
+  "type": "national",
+  "country": "Kazakhstan",
+  "jurisdiction": "Kazakhstan",
+  "territories": [
+    "Kazakhstan"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Kazakhstan, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/kazakhstan-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/kazakhstan-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kyrgyzstan-triathlon",
+  "name": "Kyrgyz Republic Triathlon Federation",
+  "type": "national",
+  "country": "Kyrgyzstan",
+  "jurisdiction": "Kyrgyzstan",
+  "territories": [
+    "Kyrgyzstan"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Kyrgyzstan, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "saudi-arabia-triathlon",
+  "name": "Saudi Triathlon Federation",
+  "type": "national",
+  "country": "Saudi Arabia",
+  "jurisdiction": "Saudi Arabia",
+  "territories": [
+    "Saudi Arabia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Saudi Arabia, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/saudi-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/saudi-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kuwait-triathlon",
+  "name": "Kuwait Triathlon Club",
+  "type": "national",
+  "country": "Kuwait",
+  "jurisdiction": "Kuwait",
+  "territories": [
+    "Kuwait"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Kuwait, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/kuwait-triathlon-committee",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/kuwait-triathlon-committee",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "lebanon-triathlon",
+  "name": "Lebanese Triathlon Federation",
+  "type": "national",
+  "country": "Lebanon",
+  "jurisdiction": "Lebanon",
+  "territories": [
+    "Lebanon"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Lebanon, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/lebanon-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/lebanon-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "maldives-triathlon",
+  "name": "Triathlon Association of Maldives",
+  "type": "national",
+  "country": "Maldives",
+  "jurisdiction": "Maldives",
+  "territories": [
+    "Maldives"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Maldives, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/triathlon-association-of-maldives",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/triathlon-association-of-maldives",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "mongolia-triathlon",
+  "name": "Mongolia Triathlon",
+  "type": "national",
+  "country": "Mongolia",
+  "jurisdiction": "Mongolia",
+  "territories": [
+    "Mongolia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Mongolia, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/mongolian-triathlon-union",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/mongolian-triathlon-union",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "oman-triathlon",
+  "name": "Oman Triathlon Federation",
+  "type": "national",
+  "country": "Oman",
+  "jurisdiction": "Oman",
+  "territories": [
+    "Oman"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Oman, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/oman-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/oman-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "pakistan-triathlon",
+  "name": "Pakistan Triathlon Federation",
+  "type": "national",
+  "country": "Pakistan",
+  "jurisdiction": "Pakistan",
+  "territories": [
+    "Pakistan"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Pakistan, listed by World Triathlon and Asia Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/pakistan-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/pakistan-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "palestine-triathlon",
+  "name": "Palestine Triathlon Federation",
+  "type": "national",
+  "country": "Palestine",
+  "jurisdiction": "Palestine",
+  "territories": [
+    "Palestine"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Palestine, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/palestine-triathlon-committee",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/palestine-triathlon-committee",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "qatar-triathlon",
+  "name": "Qatar Triathlon Federation",
+  "type": "national",
+  "country": "Qatar",
+  "jurisdiction": "Qatar",
+  "territories": [
+    "Qatar"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Qatar, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/qatar-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/qatar-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "syria-triathlon",
+  "name": "Syria Arab Triathlon Federation",
+  "type": "national",
+  "country": "Syria",
+  "jurisdiction": "Syria",
+  "territories": [
+    "Syria"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Syria, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/syrian-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/syrian-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "timor-leste-triathlon",
+  "name": "Federacao Triatlo de Timor-Leste",
+  "type": "national",
+  "country": "Timor-Leste",
+  "jurisdiction": "Timor-Leste",
+  "territories": [
+    "Timor-Leste"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Timor-Leste, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federacao-triatlo-de-timor-leste",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federacao-triatlo-de-timor-leste",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "united-arab-emirates-triathlon",
+  "name": "UAE Triathlon Federation",
+  "type": "national",
+  "country": "United Arab Emirates",
+  "jurisdiction": "United Arab Emirates",
+  "territories": [
+    "United Arab Emirates"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for United Arab Emirates, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/united-arab-emirates-triathlon-committee",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/united-arab-emirates-triathlon-committee",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "uzbekistan-triathlon",
+  "name": "Uzbekistan Triathlon Federation",
+  "type": "national",
+  "country": "Uzbekistan",
+  "jurisdiction": "Uzbekistan",
+  "territories": [
+    "Uzbekistan"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Uzbekistan, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/uzbekistan-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/uzbekistan-triathlon-federation",
+    "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "yemen-triathlon",
+  "name": "Yemen Aquatics",
+  "type": "national",
+  "country": "Yemen",
+  "jurisdiction": "Yemen",
+  "territories": [
+    "Yemen"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Yemen, listed by World Triathlon and Asia Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/yemen-aquatics",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/yemen-aquatics",
+    "https://asia.triathlon.org/national-federations"
   ],
   "related": [
     "world-triathlon"
