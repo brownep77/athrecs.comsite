@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 326 unique sources. Only 36 are enabled; the other 290 remain
+The registry contains 327 unique sources. Only 36 are enabled; the other 291 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 326 sources create exactly one source job;
+- all 327 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 290 sources are retained as blocked jobs with their reason;
+- the other 291 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -173,3 +173,11 @@ The organiser directly links the 2026 Surf City results to Laurel. Results are
 checked by table headings and individual result cards, preserving chip/gun times
 and overall, gender and division placements. Generated recaps are not evidence.
 Private participant captures and identity decisions remain in the staff backend.
+
+## Further Surf City research, 23 October 2026
+
+Added My BEST Runs as a disabled secondary research source, reusing its wider-inventory host. Its rolling leaderboard is a discovery aid, not a race placing table; cached retrieval and live HTTP 503 responses are recorded separately.
+
+Expanded the existing Race Roster source with the observed Online Race Results archive redirect and results-host aliases, without creating a duplicate collector. The sampled legacy participant page failed to load, so no result was imported from it. The registry now contains 327 sources: 36 enabled and 291 disabled.
+
+Further Surf City results use official female-filtered tables and independent individual result cards. Existing source IDs and uncertain athlete matches are retained for review; no duplicate performance is created. Participant evidence stays in the staff backend.
