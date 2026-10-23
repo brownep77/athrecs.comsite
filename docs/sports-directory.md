@@ -5,8 +5,8 @@ organisations behind all 11 current AthRecs sport sections. Clubs remain at
 `/clubs`, linked prominently from the directory. The primary Directory item,
 sport pages, footer, HTML site map and XML pages sitemap expose the new section.
 
-Research and expansion, 23 October 2026: 293 organisations, including 245 national
-federations in 61 countries and territories. The original UK/home nations, Ireland, USA, Canada,
+Research and expansion, 23 October 2026: 325 organisations, including 277 national
+federations in 69 countries and territories. The original UK/home nations, Ireland, USA, Canada,
 Australia, New Zealand and South Africa coverage is joined by France, Germany,
 Spain, Italy, Portugal, Netherlands, Belgium, Switzerland, Sweden, Denmark,
 Japan and Brazil. The earlier additions cover Austria, Finland, Norway, Poland,
@@ -58,6 +58,13 @@ Trinidad and Tobago, Cyprus, Malta, Mauritius and Uruguay. Each has athletics,
 cycling, swimming and triathlon entries. See [the fifth expansion record](sports-directory-expansion-2026-10-23.md)
 for current destinations, discipline mappings and eight labelled member-directory links.
 New records carry their own review date; earlier records retain their original dates.
+
+The second 23 October expansion adds 32 federations in Bolivia, Costa Rica,
+the Dominican Republic, Ecuador, Guatemala, Panama, Paraguay and Peru.
+Each country gains athletics, cycling, swimming and triathlon entries.
+See [the sixth expansion record](sports-directory-expansion-2026-10-23-b.md)
+for identity evidence, renamed organisations, current websites and ten additional
+labelled member-directory links. All 293 preceding records remain unchanged.
 
 Where a usable standalone website cannot be verified, `websiteKind` identifies
 an official member-directory destination. Cards and profiles label that link

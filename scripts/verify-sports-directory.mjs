@@ -208,6 +208,44 @@ for (const country of [
   }
 }
 assert.equal(getSportsOrganisation("british-triathlon").checkedAt, "2026-10-22");
+for (const country of [
+  "Bolivia",
+  "Costa Rica",
+  "Dominican Republic",
+  "Ecuador",
+  "Guatemala",
+  "Panama",
+  "Paraguay",
+  "Peru",
+]) {
+  const bodies = filterSportsOrganisations({ country, type: "national" });
+  assert.equal(bodies.length, 4, `${country}: four national bodies`);
+  assert(bodies.every((body) => body.checkedAt === "2026-10-23"));
+  for (const sport of ["track-and-field", "road-cycling", "swimming", "triathlon"]) {
+    assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
+  }
+}
+for (const country of ["Costa Rica", "Ecuador", "Guatemala", "Paraguay", "Peru"]) {
+  for (const sport of ["mountain-biking", "track-cycling", "bmx"]) {
+    assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
+  }
+}
+for (const country of ["Costa Rica", "Guatemala"]) {
+  assert.equal(names({ country, type: "national", sport: "duathlon" }).length, 1);
+}
+for (const country of ["Bolivia", "Dominican Republic", "Ecuador", "Panama", "Paraguay", "Peru"]) {
+  assert.deepEqual(names({ country, type: "national", sport: "duathlon" }), []);
+}
+assert.deepEqual(names({ q: "FEDONA" }), ["dominican-republic-swimming"]);
+assert.deepEqual(names({ q: "FDNDA" }), ["peruvian-swimming"]);
+assert.deepEqual(names({ q: "FEPANA" }), ["paraguayan-swimming"]);
+assert.equal(getSportsOrganisation("dominican-republic-swimming").website, "https://feddard.org/");
+assert.equal(getSportsOrganisation("guatemalan-athletics").website, "https://fdna.gt/");
+assert.equal(getSportsOrganisation("panamanian-cycling").websiteKind, "member-directory");
+assert.equal(
+  getSportsOrganisation("panamanian-cycling").website,
+  "https://copanama.com/federaciones/",
+);
 assert.deepEqual(names({ country: "Jamaica", sport: "track-cycling", type: "national" }), [
   "jamaican-cycling",
 ]);
