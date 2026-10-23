@@ -321,30 +321,42 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   ),
 
   record({
-    slug: "british-triathlon",
-    name: "British Triathlon",
-    aliases: ["British Triathlon Federation", "BTF"],
-    type: "national",
-    country: "United Kingdom",
-    jurisdiction: "Great Britain",
-    territories: gb,
-    sports: multisport,
-    website: "https://www.britishtriathlon.org/",
-    summary: "Governs triathlon, duathlon and related multisport in Great Britain.",
-    detail:
-      "Its member associations are Triathlon England, Triathlon Scotland and Welsh Triathlon. Triathlon Ireland’s remit covers the Republic of Ireland and Northern Ireland. Team eligibility is governed by the relevant selection rules.",
-    sources: [
-      "https://www.britishtriathlon.org/about-us",
-      "https://www.triathlonireland.com/get-involved/triathlon-ireland-faqs/",
-    ],
-    related: [
-      "world-triathlon",
-      "triathlon-england",
-      "triathlon-scotland",
-      "welsh-triathlon",
-      "triathlon-ireland",
-    ],
-  }),
+  "slug": "british-triathlon",
+  "name": "British Triathlon",
+  "aliases": [
+    "British Triathlon Federation",
+    "BTF"
+  ],
+  "type": "national",
+  "country": "United Kingdom",
+  "jurisdiction": "Great Britain",
+  "territories": [
+    "United Kingdom",
+    "England",
+    "Scotland",
+    "Wales"
+  ],
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.britishtriathlon.org/",
+  "summary": "Governs triathlon, duathlon and related multisport in Great Britain.",
+  "detail": "Its member associations are Triathlon England, Triathlon Scotland and Welsh Triathlon. Triathlon Ireland’s remit covers the Republic of Ireland and Northern Ireland. Team eligibility is governed by the relevant selection rules. World Triathlon lists this body as British Triathlon Federation and reports affiliated status (checked 23 October 2026).",
+  "sources": [
+    "https://www.britishtriathlon.org/about-us",
+    "https://www.triathlonireland.com/get-involved/triathlon-ireland-faqs/",
+    "https://triathlon.org/members/british-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "triathlon-england",
+    "triathlon-scotland",
+    "welsh-triathlon",
+    "triathlon-ireland"
+  ]
+}, "2026-10-23"),
   ...[
     [
       "triathlon-england",
@@ -468,19 +480,32 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     related: ["world-athletics", "athletics-northern-ireland"],
   }),
   record({
-    slug: "triathlon-ireland",
-    name: "Triathlon Ireland",
-    type: "national",
-    country: "Ireland",
-    jurisdiction: "Island of Ireland, including Northern Ireland",
-    territories: ireland,
-    sports: multisport,
-    website: "https://www.triathlonireland.com/",
-    summary:
-      "Governs triathlon, duathlon and related multisport in the Republic of Ireland and Northern Ireland.",
-    sources: ["https://www.triathlonireland.com/get-involved/triathlon-ireland-faqs/"],
-    related: ["world-triathlon"],
-  }),
+  "slug": "triathlon-ireland",
+  "name": "Triathlon Ireland",
+  "type": "national",
+  "country": "Ireland",
+  "jurisdiction": "Island of Ireland, including Northern Ireland",
+  "territories": [
+    "Ireland",
+    "Northern Ireland",
+    "United Kingdom"
+  ],
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlonireland.com/",
+  "summary": "Governs triathlon, duathlon and related multisport in the Republic of Ireland and Northern Ireland.",
+  "sources": [
+    "https://www.triathlonireland.com/get-involved/triathlon-ireland-faqs/",
+    "https://triathlon.org/members/triathlon-ireland",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "detail": "World Triathlon lists this body as Triathlon Ireland and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   record({
     slug: "cycling-ireland",
     name: "Cycling Ireland",
@@ -857,17 +882,37 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["FFN", "French Swimming Federation"],
   ),
-  federation(
-    "french-triathlon",
-    "Fédération Française de Triathlon",
-    "France",
-    multisport,
+  record({
+  "slug": "french-triathlon",
+  "name": "Fédération Française de Triathlon",
+  "country": "France",
+  "jurisdiction": "France",
+  "territories": [
+    "France"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.fftri.com/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in France.",
+  "sources": [
+    "https://triathlon.org/members/federation-francaise-de-triathlon",
     "https://www.fftri.com/",
-    "National federation for triathlon and related multisport, including duathlon, in France.",
-    ["https://triathlon.org/members/federation-francaise-de-triathlon", "https://www.fftri.com/"],
-    ["world-triathlon", "europe-triathlon"],
-    ["FFTri", "French Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "FFTri",
+    "French Triathlon Federation",
+    "Federation Francaise de Triathlon"
+  ],
+  "detail": "World Triathlon lists this body as Federation Francaise de Triathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "german-athletics",
     "Deutscher Leichtathletik-Verband",
@@ -904,20 +949,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["DSV", "German Swimming Federation"],
   ),
-  federation(
-    "german-triathlon",
-    "Deutsche Triathlon Union",
-    "Germany",
-    multisport,
+  record({
+  "slug": "german-triathlon",
+  "name": "Deutsche Triathlon Union",
+  "country": "Germany",
+  "jurisdiction": "Germany",
+  "territories": [
+    "Germany"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlondeutschland.de/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Germany.",
+  "sources": [
+    "https://triathlon.org/members/deutsche-triathlon-union",
     "https://www.triathlondeutschland.de/",
-    "National federation for triathlon and related multisport, including duathlon, in Germany.",
-    [
-      "https://triathlon.org/members/deutsche-triathlon-union",
-      "https://www.triathlondeutschland.de/",
-    ],
-    ["world-triathlon", "europe-triathlon"],
-    ["DTU", "German Triathlon Union"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "DTU",
+    "German Triathlon Union"
+  ],
+  "detail": "World Triathlon lists this body as Deutsche Triathlon Union and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "spanish-athletics",
     "Real Federación Española de Atletismo",
@@ -951,17 +1012,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["RFEN", "Royal Spanish Swimming Federation", "RFEN Aquatics"],
   ),
-  federation(
-    "spanish-triathlon",
-    "Federación Española de Triatlón",
-    "Spain",
-    multisport,
+  record({
+  "slug": "spanish-triathlon",
+  "name": "Federación Española de Triatlón",
+  "country": "Spain",
+  "jurisdiction": "Spain",
+  "territories": [
+    "Spain"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triatlon.org/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Spain.",
+  "sources": [
+    "https://triathlon.org/members/federacion-espanola-de-triatlon",
     "https://www.triatlon.org/",
-    "National federation for triathlon and related multisport, including duathlon, in Spain.",
-    ["https://triathlon.org/members/federacion-espanola-de-triatlon", "https://www.triatlon.org/"],
-    ["world-triathlon", "europe-triathlon"],
-    ["FETRI", "Spanish Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "FETRI",
+    "Spanish Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Federación Española de Triatlón and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "italian-athletics",
     "Federazione Italiana di Atletica Leggera",
@@ -998,17 +1078,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["FIN", "Italian Swimming Federation"],
   ),
-  federation(
-    "italian-triathlon",
-    "Federazione Italiana Triathlon",
-    "Italy",
-    multisport,
+  record({
+  "slug": "italian-triathlon",
+  "name": "Federazione Italiana Triathlon",
+  "country": "Italy",
+  "jurisdiction": "Italy",
+  "territories": [
+    "Italy"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.fitri.it/it/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Italy.",
+  "sources": [
+    "https://triathlon.org/members/italian-triathlon-federation",
     "https://www.fitri.it/it/",
-    "National federation for triathlon and related multisport, including duathlon, in Italy.",
-    ["https://triathlon.org/members/italian-triathlon-federation", "https://www.fitri.it/it/"],
-    ["world-triathlon", "europe-triathlon"],
-    ["FITri", "Italian Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "FITri",
+    "Italian Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Federazione Italiana Triathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "portuguese-athletics",
     "Federação Portuguesa de Atletismo",
@@ -1042,20 +1141,37 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["FPN", "Portuguese Swimming Federation"],
   ),
-  federation(
-    "portuguese-triathlon",
-    "Federação de Triatlo de Portugal",
-    "Portugal",
-    multisport,
+  record({
+  "slug": "portuguese-triathlon",
+  "name": "Federação de Triatlo de Portugal",
+  "country": "Portugal",
+  "jurisdiction": "Portugal",
+  "territories": [
+    "Portugal"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.federacao-triatlo.pt/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Portugal.",
+  "sources": [
+    "https://triathlon.org/members/federacao-de-triatlo-de-portugal",
     "https://www.federacao-triatlo.pt/",
-    "National federation for triathlon and related multisport, including duathlon, in Portugal.",
-    [
-      "https://triathlon.org/members/federacao-de-triatlo-de-portugal",
-      "https://www.federacao-triatlo.pt/",
-    ],
-    ["world-triathlon", "europe-triathlon"],
-    ["FTP", "Portuguese Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "FTP",
+    "Portuguese Triathlon Federation",
+    "Federacao de Triatlo de Portugal"
+  ],
+  "detail": "World Triathlon lists this body as Federacao de Triatlo de Portugal and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "dutch-athletics",
     "Atletiekunie",
@@ -1089,17 +1205,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["KNZB", "Royal Dutch Swimming Federation"],
   ),
-  federation(
-    "dutch-triathlon",
-    "Nederlandse Triathlon Bond",
-    "Netherlands",
-    multisport,
+  record({
+  "slug": "dutch-triathlon",
+  "name": "Nederlandse Triathlon Bond",
+  "country": "Netherlands",
+  "jurisdiction": "Netherlands",
+  "territories": [
+    "Netherlands"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlonbond.nl/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Netherlands.",
+  "sources": [
+    "https://triathlon.org/members/nederlandse-triathlon-bond",
     "https://www.triathlonbond.nl/",
-    "National federation for triathlon and related multisport, including duathlon, in Netherlands.",
-    ["https://triathlon.org/members/nederlandse-triathlon-bond", "https://www.triathlonbond.nl/"],
-    ["world-triathlon", "europe-triathlon"],
-    ["NTB", "Dutch Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "NTB",
+    "Dutch Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Nederlandse Triathlon Bond and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "belgian-athletics",
     "Belgian Athletics",
@@ -1136,20 +1271,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["KBZB", "FRBN", "Koninklijke Belgische Zwembond", "Fédération Royale Belge de Natation"],
   ),
-  federation(
-    "belgian-triathlon",
-    "Belgian Triathlon",
-    "Belgium",
-    multisport,
+  record({
+  "slug": "belgian-triathlon",
+  "name": "Belgian Triathlon",
+  "country": "Belgium",
+  "jurisdiction": "Belgium",
+  "territories": [
+    "Belgium"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlon.be/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Belgium.",
+  "sources": [
+    "https://triathlon.org/members/belgium-triathlon-duathlon-federation",
     "https://www.triathlon.be/",
-    "National federation for triathlon and related multisport, including duathlon, in Belgium.",
-    [
-      "https://triathlon.org/members/belgium-triathlon-duathlon-federation",
-      "https://www.triathlon.be/",
-    ],
-    ["world-triathlon", "europe-triathlon"],
-    ["Be3", "Belgian Triathlon and Duathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "Be3",
+    "Belgian Triathlon and Duathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Belgian Triathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "swiss-athletics",
     "Swiss Athletics",
@@ -1186,17 +1337,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["Swiss Swimming Federation", "Schweizerischer Schwimmverband"],
   ),
-  federation(
-    "swiss-triathlon",
-    "Swiss Triathlon",
-    "Switzerland",
-    multisport,
+  record({
+  "slug": "swiss-triathlon",
+  "name": "Swiss Triathlon",
+  "country": "Switzerland",
+  "jurisdiction": "Switzerland",
+  "territories": [
+    "Switzerland"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://swisstriathlon.ch/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Switzerland.",
+  "sources": [
+    "https://triathlon.org/members/swiss-triathlon-federation",
     "https://swisstriathlon.ch/",
-    "National federation for triathlon and related multisport, including duathlon, in Switzerland.",
-    ["https://triathlon.org/members/swiss-triathlon-federation", "https://swisstriathlon.ch/"],
-    ["world-triathlon", "europe-triathlon"],
-    ["Swiss Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "Swiss Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Swiss Triathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "swedish-athletics",
     "Svenska Friidrottsförbundet",
@@ -1230,20 +1399,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["Svensk Simidrott", "Sweden Aquatics", "Swedish Swimming Federation", "SSF"],
   ),
-  federation(
-    "swedish-triathlon",
-    "Svenska Triathlonförbundet",
-    "Sweden",
-    multisport,
+  record({
+  "slug": "swedish-triathlon",
+  "name": "Svenska Triathlonförbundet",
+  "country": "Sweden",
+  "jurisdiction": "Sweden",
+  "territories": [
+    "Sweden"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.svensktriathlon.org/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Sweden.",
+  "sources": [
+    "https://triathlon.org/members/swedish-triathlon-federation",
     "https://www.svensktriathlon.org/",
-    "National federation for triathlon and related multisport, including duathlon, in Sweden.",
-    [
-      "https://triathlon.org/members/swedish-triathlon-federation",
-      "https://www.svensktriathlon.org/",
-    ],
-    ["world-triathlon", "europe-triathlon"],
-    ["Swedish Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "Swedish Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Swedish Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "danish-athletics",
     "Dansk Atletik",
@@ -1277,17 +1461,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["Danish Swimming Federation", "Dansk Svømmeunion", "Swim Denmark"],
   ),
-  federation(
-    "danish-triathlon",
-    "Triatlon Danmark",
-    "Denmark",
-    multisport,
+  record({
+  "slug": "danish-triathlon",
+  "name": "Triatlon Danmark",
+  "country": "Denmark",
+  "jurisdiction": "Denmark",
+  "territories": [
+    "Denmark"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triatlon.dk/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Denmark.",
+  "sources": [
+    "https://triathlon.org/members/danish-triathlon-federation",
     "https://www.triatlon.dk/",
-    "National federation for triathlon and related multisport, including duathlon, in Denmark.",
-    ["https://triathlon.org/members/danish-triathlon-federation", "https://www.triatlon.dk/"],
-    ["world-triathlon", "europe-triathlon"],
-    ["Triathlon Denmark", "Danish Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "Triathlon Denmark",
+    "Danish Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Triathlon Denmark and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "japan-athletics",
     "Japan Association of Athletics Federations",
@@ -1812,21 +2015,38 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["OSV", "Austrian Swimming Federation"],
   ),
-  federation(
-    "austrian-triathlon",
-    "Triathlon Austria",
-    "Austria",
-    multisport,
+  record({
+  "slug": "austrian-triathlon",
+  "name": "Triathlon Austria",
+  "country": "Austria",
+  "jurisdiction": "Austria",
+  "territories": [
+    "Austria"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlon-austria.at/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Austria.",
+  "sources": [
+    "https://triathlon.org/members/austrian-triathlon-federation",
+    "https://www.triathlon-austria.at/de/service-termine",
     "https://www.triathlon-austria.at/",
-    "National federation for triathlon and related multisport, including duathlon, in Austria.",
-    [
-      "https://triathlon.org/members/austrian-triathlon-federation",
-      "https://www.triathlon-austria.at/de/service-termine",
-      "https://www.triathlon-austria.at/",
-    ],
-    ["world-triathlon", "europe-triathlon"],
-    ["Österreichischer Triathlonverband", "ÖTRV", "Austrian Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "Österreichischer Triathlonverband",
+    "ÖTRV",
+    "Austrian Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Triathlon Austria and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "finnish-athletics",
     "Suomen Urheiluliitto",
@@ -1866,21 +2086,37 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["Finnish Swimming Association", "Finnish Swimming Federation"],
   ),
-  federation(
-    "finnish-triathlon",
-    "Triathlon Finland",
-    "Finland",
-    multisport,
+  record({
+  "slug": "finnish-triathlon",
+  "name": "Triathlon Finland",
+  "country": "Finland",
+  "jurisdiction": "Finland",
+  "territories": [
+    "Finland"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlon.fi/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Finland.",
+  "sources": [
+    "https://triathlon.org/members/finnish-triathlon-federation",
+    "https://www.triathlon.fi/tapahtumat2/",
     "https://www.triathlon.fi/",
-    "National federation for triathlon and related multisport, including duathlon, in Finland.",
-    [
-      "https://triathlon.org/members/finnish-triathlon-federation",
-      "https://www.triathlon.fi/tapahtumat2/",
-      "https://www.triathlon.fi/",
-    ],
-    ["world-triathlon", "europe-triathlon"],
-    ["Suomen Triathlonliitto", "Finnish Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "Suomen Triathlonliitto",
+    "Finnish Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Triathlon Finland and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "norwegian-athletics",
     "Norges Friidrettsforbund",
@@ -1914,21 +2150,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["Norwegian Swimming Federation", "NSF"],
   ),
-  federation(
-    "norwegian-triathlon",
-    "Norges Triatlonforbund",
-    "Norway",
-    multisport,
+  record({
+  "slug": "norwegian-triathlon",
+  "name": "Norges Triatlonforbund",
+  "country": "Norway",
+  "jurisdiction": "Norway",
+  "territories": [
+    "Norway"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triatlonforbundet.no/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Norway.",
+  "sources": [
+    "https://triathlon.org/members/norwegian-triathlon-federation",
+    "https://www.triatlonforbundet.no/terminliste/",
     "https://www.triatlonforbundet.no/",
-    "National federation for triathlon and related multisport, including duathlon, in Norway.",
-    [
-      "https://triathlon.org/members/norwegian-triathlon-federation",
-      "https://www.triatlonforbundet.no/terminliste/",
-      "https://www.triatlonforbundet.no/",
-    ],
-    ["world-triathlon", "europe-triathlon"],
-    ["Norwegian Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "Norwegian Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Norwegian Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "polish-athletics",
     "Polski Związek Lekkiej Atletyki",
@@ -1962,21 +2213,38 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics", "european-aquatics"],
     ["PZP", "Polish Swimming Federation"],
   ),
-  federation(
-    "polish-triathlon",
-    "Polski Związek Triathlonu",
-    "Poland",
-    multisport,
+  record({
+  "slug": "polish-triathlon",
+  "name": "Polski Związek Triathlonu",
+  "country": "Poland",
+  "jurisdiction": "Poland",
+  "territories": [
+    "Poland"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlon.pl/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Poland.",
+  "sources": [
+    "https://triathlon.org/members/polski-zwiazek-triathlonu",
+    "https://triathlon.pl/kalendarz/",
     "https://www.triathlon.pl/",
-    "National federation for triathlon and related multisport, including duathlon, in Poland.",
-    [
-      "https://triathlon.org/members/polski-zwiazek-triathlonu",
-      "https://triathlon.pl/kalendarz/",
-      "https://www.triathlon.pl/",
-    ],
-    ["world-triathlon", "europe-triathlon"],
-    ["PZTri", "Polish Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon",
+    "europe-triathlon"
+  ],
+  "aliases": [
+    "PZTri",
+    "Polish Triathlon Federation",
+    "Polski Zwiazek Triathlonu"
+  ],
+  "detail": "World Triathlon lists this body as Polski Zwiazek Triathlonu and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "indian-athletics",
     "Athletics Federation of India",
@@ -2281,21 +2549,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     detail:
       "The official link opens World Aquatics’ member directory. Find Czechia for the swimming federation’s current contact information; the separately listed water polo federation has its own remit.",
   },
-  federation(
-    "czech-triathlon",
-    "Czech Triathlon Association",
-    "Czechia",
-    multisport,
+  record({
+  "slug": "czech-triathlon",
+  "name": "Czech Triathlon Association",
+  "country": "Czechia",
+  "jurisdiction": "Czechia",
+  "territories": [
+    "Czechia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triatlon.cz/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Czechia.",
+  "sources": [
+    "https://triathlon.org/members/czech-triathlon-federation",
     "https://triatlon.cz/",
-    "National federation for triathlon and related multisport, including duathlon, in Czechia.",
-    [
-      "https://triathlon.org/members/czech-triathlon-federation",
-      "https://triatlon.cz/",
-      "https://triatlon.cz/wp-content/uploads/Soutezni-smernice_2026_1F.pdf",
-    ],
-    ["world-triathlon"],
-    ["Česká triatlonová asociace", "Czech Republic Triathlon"],
-  ),
+    "https://triatlon.cz/wp-content/uploads/Soutezni-smernice_2026_1F.pdf",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Česká triatlonová asociace",
+    "Czech Republic Triathlon"
+  ],
+  "detail": "World Triathlon lists this body as Czech Triathlon Association and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "hungarian-athletics",
     "Hungarian Athletics Association",
@@ -2333,21 +2616,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["Magyar Úszó Szövetség", "MÚSZ"],
   ),
-  federation(
-    "hungarian-triathlon",
-    "Hungarian Triathlon Federation",
-    "Hungary",
-    multisport,
+  record({
+  "slug": "hungarian-triathlon",
+  "name": "Hungarian Triathlon Federation",
+  "country": "Hungary",
+  "jurisdiction": "Hungary",
+  "territories": [
+    "Hungary"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triatlon.hu/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Hungary.",
+  "sources": [
+    "https://triathlon.org/members/hungarian-triathlon-federation",
     "https://triatlon.hu/",
-    "National federation for triathlon and related multisport, including duathlon, in Hungary.",
-    [
-      "https://triathlon.org/members/hungarian-triathlon-federation",
-      "https://triatlon.hu/",
-      "https://triatlon.hu/versenynaptar/",
-    ],
-    ["world-triathlon"],
-    ["Magyar Triatlon Szövetség"],
-  ),
+    "https://triatlon.hu/versenynaptar/",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Magyar Triatlon Szövetség"
+  ],
+  "detail": "World Triathlon lists this body as Hungarian Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "romanian-athletics",
     "Romanian Athletics Federation",
@@ -2384,17 +2681,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["Federația Română de Natație și Pentatlon Modern", "FRNPM"],
   ),
-  federation(
-    "romanian-triathlon",
-    "Triathlon Romania",
-    "Romania",
-    multisport,
+  record({
+  "slug": "romanian-triathlon",
+  "name": "Triathlon Romania",
+  "country": "Romania",
+  "jurisdiction": "Romania",
+  "territories": [
+    "Romania"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triatlonromania.ro/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Romania.",
+  "sources": [
+    "https://triathlon.org/members/romanian-triathlon-federation",
     "https://triatlonromania.ro/",
-    "National federation for triathlon and related multisport, including duathlon, in Romania.",
-    ["https://triathlon.org/members/romanian-triathlon-federation", "https://triatlonromania.ro/"],
-    ["world-triathlon"],
-    ["Federația Română de Triatlon", "Romanian Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Federația Română de Triatlon",
+    "Romanian Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Triathlon Romania and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "hellenic-athletics",
     "Hellenic Athletics Federation",
@@ -2432,22 +2747,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["KOE", "Greek Swimming Federation"],
   ),
-  federation(
-    "hellenic-triathlon",
-    "Hellenic Triathlon Federation",
-    "Greece",
-    multisport,
+  record({
+  "slug": "hellenic-triathlon",
+  "name": "Hellenic Triathlon Federation",
+  "country": "Greece",
+  "jurisdiction": "Greece",
+  "territories": [
+    "Greece"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://hellastriathlon.gr/en/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Greece.",
+  "sources": [
+    "https://triathlon.org/members/hellenic-triathlon-federation",
     "https://hellastriathlon.gr/en/",
-    "National federation for triathlon and related multisport, including duathlon, in Greece.",
-    [
-      "https://triathlon.org/members/hellenic-triathlon-federation",
-      "https://hellastriathlon.gr/en/",
-      "https://www.hoc.gr/en/members/hellenic-federation-of-triathlon/",
-      "https://hellastriathlon.gr/agonistiko-programma-2026/",
-    ],
-    ["world-triathlon"],
-    ["Greek Triathlon Federation"],
-  ),
+    "https://www.hoc.gr/en/members/hellenic-federation-of-triathlon/",
+    "https://hellastriathlon.gr/agonistiko-programma-2026/",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Greek Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Hellenic Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "turkish-athletics",
     "Türkiye Athletics Federation",
@@ -2481,17 +2810,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["Türkiye Yüzme Federasyonu", "Turkish Swimming Federation"],
   ),
-  federation(
-    "turkish-triathlon",
-    "Türkiye Triathlon Federation",
-    "Turkey",
-    multisport,
+  record({
+  "slug": "turkish-triathlon",
+  "name": "Türkiye Triathlon Federation",
+  "country": "Turkey",
+  "jurisdiction": "Turkey",
+  "territories": [
+    "Turkey"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triatlon.org.tr/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Turkey.",
+  "sources": [
+    "https://triathlon.org/members/turkish-triathlon-federation",
     "https://www.triatlon.org.tr/",
-    "National federation for triathlon and related multisport, including duathlon, in Turkey.",
-    ["https://triathlon.org/members/turkish-triathlon-federation", "https://www.triatlon.org.tr/"],
-    ["world-triathlon"],
-    ["Türkiye Triatlon Federasyonu", "Turkish Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Türkiye Triatlon Federasyonu",
+    "Turkish Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Türkiye Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "estonian-athletics",
     "Estonian Athletics Association",
@@ -2525,17 +2872,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["Eesti Ujumisliit"],
   ),
-  federation(
-    "estonian-triathlon",
-    "Estonian Triathlon Association",
-    "Estonia",
-    multisport,
+  record({
+  "slug": "estonian-triathlon",
+  "name": "Estonian Triathlon Association",
+  "country": "Estonia",
+  "jurisdiction": "Estonia",
+  "territories": [
+    "Estonia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triatlon.ee/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Estonia.",
+  "sources": [
+    "https://triathlon.org/members/estonian-triathlon-federation",
     "https://www.triatlon.ee/",
-    "National federation for triathlon and related multisport, including duathlon, in Estonia.",
-    ["https://triathlon.org/members/estonian-triathlon-federation", "https://www.triatlon.ee/"],
-    ["world-triathlon"],
-    ["Eesti Triatloni Liit", "Estonian Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Eesti Triatloni Liit",
+    "Estonian Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Estonian Triathlon Association and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "latvian-athletics",
     "Latvian Athletics Association",
@@ -2569,21 +2934,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["Latvijas Peldēšanas federācija", "Latvian Swimming Federation"],
   ),
-  federation(
-    "latvian-triathlon",
-    "Latvian Triathlon Federation",
-    "Latvia",
-    multisport,
+  record({
+  "slug": "latvian-triathlon",
+  "name": "Latvian Triathlon Federation",
+  "country": "Latvia",
+  "jurisdiction": "Latvia",
+  "territories": [
+    "Latvia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triatlons.lv/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Latvia.",
+  "sources": [
+    "https://triathlon.org/members/latvian-triathlon-federation",
     "https://www.triatlons.lv/",
-    "National federation for triathlon and related multisport, including duathlon, in Latvia.",
-    [
-      "https://triathlon.org/members/latvian-triathlon-federation",
-      "https://www.triatlons.lv/",
-      "https://www.triatlons.lv/lv/news/ltf-kausa-izcina-ieklautas-sacensibas-2026-gada-sezona-1b95821f-890a-405c-bcf7-44fa6ac86cc7",
-    ],
-    ["world-triathlon"],
-    ["Latvijas Triatlona federācija"],
-  ),
+    "https://www.triatlons.lv/lv/news/ltf-kausa-izcina-ieklautas-sacensibas-2026-gada-sezona-1b95821f-890a-405c-bcf7-44fa6ac86cc7",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Latvijas Triatlona federācija"
+  ],
+  "detail": "World Triathlon lists this body as Latvian Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "lithuanian-athletics",
     "Lithuanian Athletics Federation",
@@ -2617,17 +2996,33 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["Association LTU Aquatics", "Lithuanian Swimming Federation", "Lietuvos plaukimo federacija"],
   ),
-  federation(
-    "lithuanian-triathlon",
-    "Lithuanian Triathlon Federation",
-    "Lithuania",
-    ["triathlon"],
+  record({
+  "slug": "lithuanian-triathlon",
+  "name": "Lithuanian Triathlon Federation",
+  "country": "Lithuania",
+  "jurisdiction": "Lithuania",
+  "territories": [
+    "Lithuania"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://www.triatlonas.lt/",
+  "summary": "National federation for triathlon in Lithuania, supporting clubs, national championships and international representation.",
+  "sources": [
+    "https://triathlon.org/members/lithuanian-triathlon-federation",
     "https://www.triatlonas.lt/",
-    "National federation for triathlon in Lithuania, supporting clubs, national championships and international representation.",
-    ["https://triathlon.org/members/lithuanian-triathlon-federation", "https://www.triatlonas.lt/"],
-    ["world-triathlon"],
-    ["Lietuvos triatlono federacija"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Lietuvos triatlono federacija"
+  ],
+  "detail": "World Triathlon lists this body as Lithuanian Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "mexican-cycling",
     "Unión Ciclista de México",
@@ -3432,21 +3827,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["HPS", "Croatian Swimming Federation", "Croatia Swimming Association"],
   ),
-  federation(
-    "croatian-triathlon",
-    "Hrvatski triatlon savez",
-    "Croatia",
-    multisport,
+  record({
+  "slug": "croatian-triathlon",
+  "name": "Hrvatski triatlon savez",
+  "country": "Croatia",
+  "jurisdiction": "Croatia",
+  "territories": [
+    "Croatia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triatlon.hr/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Croatia.",
+  "sources": [
+    "https://triathlon.org/members/croatian-triathlon-federation",
     "https://triatlon.hr/",
-    "National federation for triathlon and related multisport, including duathlon, in Croatia.",
-    [
-      "https://triathlon.org/members/croatian-triathlon-federation",
-      "https://triatlon.hr/",
-      "https://triatlon.hr/wp-content/uploads/2026/05/Raspis-6.Polojski-duatlon-PH-u-SS-duatlonu-2026-2152026.pdf",
-    ],
-    ["world-triathlon"],
-    ["HTS", "Croatian Triathlon Federation"],
-  ),
+    "https://triatlon.hr/wp-content/uploads/2026/05/Raspis-6.Polojski-duatlon-PH-u-SS-duatlonu-2026-2152026.pdf",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "HTS",
+    "Croatian Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Croatian Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "slovenian-athletics",
     "Atletska zveza Slovenije",
@@ -3486,20 +3896,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["PZS", "Slovenian Swimming Federation"],
   ),
-  federation(
-    "slovenian-triathlon",
-    "Triatlon zveza Slovenije",
-    "Slovenia",
-    multisport,
+  record({
+  "slug": "slovenian-triathlon",
+  "name": "Triatlon zveza Slovenije",
+  "country": "Slovenia",
+  "jurisdiction": "Slovenia",
+  "territories": [
+    "Slovenia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triatlonslovenije.si/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Slovenia.",
+  "sources": [
+    "https://triathlon.org/members/slovenian-triathlon-federation",
     "https://triatlonslovenije.si/",
-    "National federation for triathlon and related multisport, including duathlon, in Slovenia.",
-    [
-      "https://triathlon.org/members/slovenian-triathlon-federation",
-      "https://triatlonslovenije.si/",
-    ],
-    ["world-triathlon"],
-    ["TZS", "Slovenian Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "TZS",
+    "Slovenian Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Slovenian Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "slovak-athletics",
     "Slovenský atletický zväz",
@@ -3533,21 +3958,37 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["SPF", "Slovak Swimming Federation"],
   ),
-  federation(
-    "slovak-triathlon",
-    "Slovenská triatlonová únia",
-    "Slovakia",
-    multisport,
+  record({
+  "slug": "slovak-triathlon",
+  "name": "Slovenská triatlonová únia",
+  "country": "Slovakia",
+  "jurisdiction": "Slovakia",
+  "territories": [
+    "Slovakia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathlon.sk/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Slovakia.",
+  "sources": [
+    "https://triathlon.org/members/slovak-triathlon-union",
     "https://www.triathlon.sk/",
-    "National federation for triathlon and related multisport, including duathlon, in Slovakia.",
-    [
-      "https://triathlon.org/members/slovak-triathlon-union",
-      "https://www.triathlon.sk/",
-      "https://www.triathlon.sk/vyzva-pre-organizatorov-podujati-v-roku-2026-369",
-    ],
-    ["world-triathlon"],
-    ["STÚ", "STU", "Slovak Triathlon Union"],
-  ),
+    "https://www.triathlon.sk/vyzva-pre-organizatorov-podujati-v-roku-2026-369",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "STÚ",
+    "STU",
+    "Slovak Triathlon Union"
+  ],
+  "detail": "World Triathlon lists this body as Slovak Triathlon Union and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "serbian-athletics",
     "Srpski atletski savez",
@@ -3584,17 +4025,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["PSS", "Serbian Swimming Federation"],
   ),
-  federation(
-    "serbian-triathlon",
-    "Srpski triatlon",
-    "Serbia",
-    multisport,
+  record({
+  "slug": "serbian-triathlon",
+  "name": "Srpski triatlon",
+  "country": "Serbia",
+  "jurisdiction": "Serbia",
+  "territories": [
+    "Serbia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triatlon.org.rs/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Serbia.",
+  "sources": [
+    "https://triathlon.org/members/serbian-triathon-union",
     "https://triatlon.org.rs/",
-    "National federation for triathlon and related multisport, including duathlon, in Serbia.",
-    ["https://triathlon.org/members/serbian-triathon-union", "https://triatlon.org.rs/"],
-    ["world-triathlon"],
-    ["ST", "Serbia Triathlon", "Serbian Triathlon Union"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "ST",
+    "Serbia Triathlon",
+    "Serbian Triathlon Union"
+  ],
+  "detail": "World Triathlon lists this body as Serbia Triathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "bulgarian-athletics",
     "Bulgarian Athletics Federation",
@@ -3628,21 +4088,37 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["BFPS", "Българска федерация плувни спортове"],
   ),
-  federation(
-    "bulgarian-triathlon",
-    "Bulgarian Triathlon Association",
-    "Bulgaria",
-    multisport,
+  record({
+  "slug": "bulgarian-triathlon",
+  "name": "Bulgarian Triathlon Association",
+  "country": "Bulgaria",
+  "jurisdiction": "Bulgaria",
+  "territories": [
+    "Bulgaria"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://bat.triathlon.bg/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Bulgaria.",
+  "sources": [
+    "https://triathlon.org/members/bulgarian-triathlon-federation",
     "https://bat.triathlon.bg/",
-    "National federation for triathlon and related multisport, including duathlon, in Bulgaria.",
-    [
-      "https://triathlon.org/members/bulgarian-triathlon-federation",
-      "https://bat.triathlon.bg/",
-      "https://bat.triathlon.bg/wp-content/uploads/2024/04/pravila-za-provezhdane-na-darzhvani-parvenstva-bat.pdf",
-    ],
-    ["world-triathlon"],
-    ["BAT", "Българска асоциация по триатлон", "БАТ"],
-  ),
+    "https://bat.triathlon.bg/wp-content/uploads/2024/04/pravila-za-provezhdane-na-darzhvani-parvenstva-bat.pdf",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "BAT",
+    "Българска асоциация по триатлон",
+    "БАТ"
+  ],
+  "detail": "World Triathlon lists this body as Bulgarian Triathlon Association and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "icelandic-athletics",
     "Frjálsíþróttasamband Íslands",
@@ -3690,17 +4166,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["SSÍ", "Icelandic Swimming Association"],
   ),
-  federation(
-    "icelandic-triathlon",
-    "Þríþrautarsamband Íslands",
-    "Iceland",
-    ["triathlon"],
+  record({
+  "slug": "icelandic-triathlon",
+  "name": "Þríþrautarsamband Íslands",
+  "country": "Iceland",
+  "jurisdiction": "Iceland",
+  "territories": [
+    "Iceland"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.is/",
+  "summary": "National federation for triathlon in Iceland, recognised by World Triathlon.",
+  "sources": [
+    "https://triathlon.org/members/icelandic-triathlon-committee",
     "https://triathlon.is/",
-    "National federation for triathlon in Iceland, recognised by World Triathlon.",
-    ["https://triathlon.org/members/icelandic-triathlon-committee", "https://triathlon.is/"],
-    ["world-triathlon"],
-    ["ÞRÍ", "Icelandic Triathlon Federation", "Thrithrautarsamband Islands"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "ÞRÍ",
+    "Icelandic Triathlon Federation",
+    "Thrithrautarsamband Islands"
+  ],
+  "detail": "World Triathlon lists this body as Icelandic Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "luxembourg-athletics",
     "Fédération Luxembourgeoise d’Athlétisme",
@@ -3741,20 +4235,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["FLNS", "Luxembourg Swimming and Lifesaving Federation"],
   ),
-  federation(
-    "luxembourg-triathlon",
-    "Fédération Luxembourgeoise de Triathlon",
-    "Luxembourg",
-    multisport,
+  record({
+  "slug": "luxembourg-triathlon",
+  "name": "Fédération Luxembourgeoise de Triathlon",
+  "country": "Luxembourg",
+  "jurisdiction": "Luxembourg",
+  "territories": [
+    "Luxembourg"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.fltri.lu/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Luxembourg.",
+  "sources": [
+    "https://triathlon.org/members/federation-luxembourgeoise-de-triathlon",
     "https://www.fltri.lu/",
-    "National federation for triathlon and related multisport, including duathlon, in Luxembourg.",
-    [
-      "https://triathlon.org/members/federation-luxembourgeoise-de-triathlon",
-      "https://www.fltri.lu/",
-    ],
-    ["world-triathlon"],
-    ["FLTRI", "Luxembourg Triathlon Federation"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "FLTRI",
+    "Luxembourg Triathlon Federation",
+    "Federation Luxembourgeoise de Triathlon"
+  ],
+  "detail": "World Triathlon lists this body as Federation Luxembourgeoise de Triathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "israeli-athletics",
     "Israel Athletics Association",
@@ -3788,20 +4298,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["ISA", "Israeli Swimming Association", "איגוד השחייה בישראל"],
   ),
-  federation(
-    "israeli-triathlon",
-    "Israeli Triathlon Association",
-    "Israel",
-    ["triathlon"],
+  record({
+  "slug": "israeli-triathlon",
+  "name": "Israeli Triathlon Association",
+  "country": "Israel",
+  "jurisdiction": "Israel",
+  "territories": [
+    "Israel"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://www.triathlon.org.il/",
+  "summary": "National federation for triathlon in Israel, recognised by World Triathlon.",
+  "sources": [
+    "https://triathlon.org/members/israeli-triathlon-association",
     "https://www.triathlon.org.il/",
-    "National federation for triathlon in Israel, recognised by World Triathlon.",
-    [
-      "https://triathlon.org/members/israeli-triathlon-association",
-      "https://www.triathlon.org.il/",
-    ],
-    ["world-triathlon"],
-    ["ITA", "Israel Triathlon Association", "איגוד הטריאתלון הישראלי"],
-  ),
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "ITA",
+    "Israel Triathlon Association",
+    "איגוד הטריאתלון הישראלי"
+  ],
+  "detail": "World Triathlon lists this body as Israeli Triathlon Association and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
 
   federation(
     "jamaican-athletics",
@@ -4168,22 +4693,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["KOEK", "Κυπριακή Ομοσπονδία Κολύμβησης"],
     "2026-10-23",
   ),
-  federation(
-    "cypriot-triathlon",
-    "Cyprus Triathlon Federation",
-    "Cyprus",
-    ["triathlon", "duathlon"],
+  record({
+  "slug": "cypriot-triathlon",
+  "name": "Cyprus Triathlon Federation",
+  "country": "Cyprus",
+  "jurisdiction": "Cyprus",
+  "territories": [
+    "Cyprus"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://cytrifed.org/",
+  "summary": "National federation for triathlon and duathlon in Cyprus.",
+  "sources": [
+    "https://triathlon.org/members/cyprus-triathlon-federation",
     "https://cytrifed.org/",
-    "National federation for triathlon and duathlon in Cyprus.",
-    [
-      "https://triathlon.org/members/cyprus-triathlon-federation",
-      "https://cytrifed.org/",
-      "https://cytrifed.org/about-us/",
-    ],
-    ["world-triathlon"],
-    ["CTF", "Cypriot Triathlon"],
-    "2026-10-23",
-  ),
+    "https://cytrifed.org/about-us/",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "CTF",
+    "Cypriot Triathlon"
+  ],
+  "detail": "World Triathlon lists this body as Cyprus Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "maltese-athletics",
     "Athletics Malta",
@@ -4229,22 +4768,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["ASA Malta", "Malta Swimming", "Maltese Aquatics"],
     "2026-10-23",
   ),
-  federation(
-    "maltese-triathlon",
-    "Malta Triathlon Federation",
-    "Malta",
-    ["triathlon", "duathlon"],
+  record({
+  "slug": "maltese-triathlon",
+  "name": "Malta Triathlon Federation",
+  "country": "Malta",
+  "jurisdiction": "Malta",
+  "territories": [
+    "Malta"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triathlonmalta.org/",
+  "summary": "National federation for triathlon and duathlon in Malta.",
+  "sources": [
+    "https://triathlon.org/members/malta-triathlon-federation",
     "https://triathlonmalta.org/",
-    "National federation for triathlon and duathlon in Malta.",
-    [
-      "https://triathlon.org/members/malta-triathlon-federation",
-      "https://triathlonmalta.org/",
-      "https://triathlonmalta.org/hall-of-fame/",
-    ],
-    ["world-triathlon"],
-    ["MTF", "Maltese Triathlon"],
-    "2026-10-23",
-  ),
+    "https://triathlonmalta.org/hall-of-fame/",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "MTF",
+    "Maltese Triathlon"
+  ],
+  "detail": "World Triathlon lists this body as Malta Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "mauritian-athletics",
     "Mauritius Athletics Association",
@@ -10333,6 +10886,414 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   "sources": [
     "https://triathlon.org/members/friendly-islands-triathlon-association",
     "https://oceania.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "albania-triathlon",
+  "name": "Albanian Triathlon Federation",
+  "type": "national",
+  "country": "Albania",
+  "jurisdiction": "Albania",
+  "territories": [
+    "Albania"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Albania, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/albanian-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/albanian-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "andorra-triathlon",
+  "name": "Federació Andorrana de Triatló",
+  "type": "national",
+  "country": "Andorra",
+  "jurisdiction": "Andorra",
+  "territories": [
+    "Andorra"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Andorra, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/federacio-andorrana-de-triatlo",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federacio-andorrana-de-triatlo",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "armenia-triathlon",
+  "name": "Armenian Triathlon Federation",
+  "type": "national",
+  "country": "Armenia",
+  "jurisdiction": "Armenia",
+  "territories": [
+    "Armenia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Armenia, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/armenian-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/armenian-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "azerbaijan-triathlon",
+  "name": "Azerbaijan Triathlon Federation",
+  "type": "national",
+  "country": "Azerbaijan",
+  "jurisdiction": "Azerbaijan",
+  "territories": [
+    "Azerbaijan"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Azerbaijan, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/azerbaijan-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/azerbaijan-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "bosnia-and-herzegovina-triathlon",
+  "name": "Triathlon and Pentathlon Federation of Bosnia and Herzegovina",
+  "type": "national",
+  "country": "Bosnia and Herzegovina",
+  "jurisdiction": "Bosnia and Herzegovina",
+  "territories": [
+    "Bosnia and Herzegovina"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Bosnia and Herzegovina, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "belarus-triathlon",
+  "name": "Belarusian Triathlon Federation",
+  "type": "national",
+  "country": "Belarus",
+  "jurisdiction": "Belarus",
+  "territories": [
+    "Belarus"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Belarus, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/belarus-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/belarus-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "faroe-islands-triathlon",
+  "name": "The Faroe Islands Triathlon Federation",
+  "type": "national",
+  "country": "Faroe Islands",
+  "jurisdiction": "Faroe Islands",
+  "territories": [
+    "Faroe Islands"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Faroe Islands, listed by World Triathlon and Europe Triathlon.",
+  "detail": "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied.",
+  "website": "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "georgia-triathlon",
+  "name": "National Triathlon Federation of Georgia",
+  "type": "national",
+  "country": "Georgia",
+  "jurisdiction": "Georgia",
+  "territories": [
+    "Georgia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Georgia, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/national-triathlon-federation-of-georgia",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/national-triathlon-federation-of-georgia",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "gibraltar-triathlon",
+  "name": "Gibraltar Triathlon Association",
+  "type": "national",
+  "country": "Gibraltar",
+  "jurisdiction": "Gibraltar",
+  "territories": [
+    "Gibraltar"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Gibraltar, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/gibraltar-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/gibraltar-triathlon-association",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kosovo-triathlon",
+  "name": "Kosovo Triathlon Federation",
+  "type": "national",
+  "country": "Kosovo",
+  "jurisdiction": "Kosovo",
+  "territories": [
+    "Kosovo"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Kosovo, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/kosovo-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/kosovo-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "liechtenstein-triathlon",
+  "name": "Liechtenstein Triathlon Federation",
+  "type": "national",
+  "country": "Liechtenstein",
+  "jurisdiction": "Liechtenstein",
+  "territories": [
+    "Liechtenstein"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Liechtenstein, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/liechtenstein-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/liechtenstein-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "moldova-triathlon",
+  "name": "National Triathlon Federation of the Republic of Moldova",
+  "type": "national",
+  "country": "Moldova",
+  "jurisdiction": "Moldova",
+  "territories": [
+    "Moldova"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Moldova, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/moldovan-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/moldovan-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "north-macedonia-triathlon",
+  "name": "Triathlon Federation of North Macedonia",
+  "type": "national",
+  "country": "North Macedonia",
+  "jurisdiction": "North Macedonia",
+  "territories": [
+    "North Macedonia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for North Macedonia, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/macedonian-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/macedonian-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "montenegro-triathlon",
+  "name": "Triathlon Federation of Montenegro",
+  "type": "national",
+  "country": "Montenegro",
+  "jurisdiction": "Montenegro",
+  "territories": [
+    "Montenegro"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Montenegro, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/triathlon-federation-of-montenegro",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/triathlon-federation-of-montenegro",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "monaco-triathlon",
+  "name": "Triathlon Monegasque Federation",
+  "type": "national",
+  "country": "Monaco",
+  "jurisdiction": "Monaco",
+  "territories": [
+    "Monaco"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Monaco, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/monaco-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/monaco-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "russia-triathlon",
+  "name": "Russian Triathlon Federation",
+  "type": "national",
+  "country": "Russia",
+  "jurisdiction": "Russia",
+  "territories": [
+    "Russia"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Russia, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/russian-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/russian-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "ukraine-triathlon",
+  "name": "Ukrainian Triathlon Federation",
+  "type": "national",
+  "country": "Ukraine",
+  "jurisdiction": "Ukraine",
+  "territories": [
+    "Ukraine"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Ukraine, listed by World Triathlon and Europe Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
+  "website": "https://triathlon.org/members/ukrainian-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/ukrainian-triathlon-federation",
+    "https://europe.triathlon.org/national-federations"
   ],
   "related": [
     "world-triathlon"
