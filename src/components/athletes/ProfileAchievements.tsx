@@ -29,6 +29,7 @@ import {
 } from "@/lib/athrecs/achievement-verification";
 import { buildProfileAchievementSummary } from "@/lib/athrecs/profile-achievement-summary";
 import { CalendarYearList } from "./CalendarYearList";
+import { DistanceRatings } from "./DistanceRatings";
 
 type BoardHighlight = {
   id: string;
@@ -524,6 +525,11 @@ export function ProfileRecordHighlights({
   return (
     <div className="space-y-4">
       <AchievementSummary summary={summary} />
+      <DistanceRatings
+        results={results}
+        sourceHistories={sourceHistories}
+        sourceGender={sourceGender}
+      />
       <PersonalBestStrip
         results={results}
         reportedBests={reportedBests}
