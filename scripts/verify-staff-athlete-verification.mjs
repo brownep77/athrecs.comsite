@@ -251,6 +251,38 @@ try {
     sourceHistorySports(providerOnly),
   );
   assert.deepEqual(withoutProfileEvidence(safe), safe, "Public sanitization remains idempotent");
+  const imported = {
+    ...histories[0],
+    provider: "Abbott World Marathon Majors",
+    performances: [
+      {
+        ...row,
+        labels: [
+          "World Marathon Majors source result",
+          "Road",
+          "Exact race date not supplied",
+          "Round: Final",
+          "World Marathon Major",
+        ],
+      },
+    ],
+  };
+  const importedBefore = structuredClone(imported);
+  const publicImport = withoutProfileEvidence(imported);
+  assert.doesNotMatch(JSON.stringify(publicImport), /World Marathon Majors source result/);
+  assert.deepEqual(publicImport.performances[0].labels, [
+    "Road",
+    "Exact race date not supplied",
+    "Round: Final",
+    "World Marathon Major",
+  ]);
+  assert.deepEqual(imported, importedBefore, "Stored import evidence is untouched");
+  assert.deepEqual(withoutProfileEvidence(publicImport), publicImport);
+  assert.deepEqual(
+    buildProfileAchievementSummary([], [publicImport]),
+    buildProfileAchievementSummary([], [imported]),
+    "Removing import branding preserves earned achievements",
+  );
   console.log(
     "PASS: staff-only profile/result checkboxes, claimed/unclaimed/account-only coverage, source evidence, undo, stale edits, audit trail, unchanged ownership/visibility and public source privacy.",
   );
