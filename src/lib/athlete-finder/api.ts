@@ -5,7 +5,7 @@ import { getFixtureSourceRegistry } from "../athrecs/source-registry.server";
 import { finderSearchSchema, type FinderSearchInput } from "./core";
 import { searchStoredAthleteResults } from "./search.server";
 
-export const searchAthleteSourceResults = createServerFn({ method: "GET" })
+export const searchAthleteSourceResults = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .validator((input: FinderSearchInput) => finderSearchSchema.parse(input))
   .handler(async ({ data }) => {

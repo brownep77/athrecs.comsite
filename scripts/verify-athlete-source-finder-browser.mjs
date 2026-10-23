@@ -413,7 +413,16 @@ try {
                   input,
                   role,
                   httpMethod: req.method,
+                  requestTarget: req.url,
                   wireLength: Buffer.byteLength(req.url),
+                  bodyLength: Buffer.byteLength(body),
+                  contentType: req.headers["content-type"],
+                  serverFnHeader: req.headers["x-tsr-serverfn"],
+                  fetchSite: req.headers["sec-fetch-site"],
+                  requestOrigin: req.headers.origin,
+                  equivalentGetWireLength: Buffer.byteLength(
+                    `${requestUrl.pathname}?${encode({ payload: serialized })}`,
+                  ),
                 });
                 const response = await methods[method](input);
                 const gate =
@@ -477,15 +486,26 @@ try {
       assert.ok(!(await denied.text()).includes(name));
     }
   }
-  const crossSite = await apiRequest(
-    "searchAthleteSourceResults",
-    { q: name },
-    {
-      Cookie: "finder-test-role=staff",
-      "Sec-Fetch-Site": "cross-site",
-    },
-  );
-  assert.equal(crossSite.status, 403);
+  for (const [site, mode] of [
+    ["same-site", "cors"],
+    ["cross-site", "cors"],
+    ["same-site", "navigate"],
+    ["cross-site", "navigate"],
+  ]) {
+    const denied = await apiRequest(
+      "searchAthleteSourceResults",
+      { q: name },
+      {
+        Cookie: "finder-test-role=staff",
+        "Sec-Fetch-Site": site,
+        "Sec-Fetch-Mode": mode,
+        "Sec-Fetch-Dest": mode === "navigate" ? "document" : "empty",
+      },
+    );
+    assert.equal(denied.status, 403, "POST must not inherit the top-level GET exception");
+    assert.equal(denied.headers.get("cache-control"), "private, no-store");
+    assert.ok(!(await denied.text()).includes(name));
+  }
   assert.equal(providerRequests.length, 0);
   requests.length = 0;
 
@@ -643,7 +663,7 @@ try {
   const oldDelivered = page.waitForResponse((response) => {
     const url = new URL(response.url());
     if (url.pathname !== "/finder-test-api/searchAthleteSourceResults") return false;
-    const payload = url.searchParams.get("payload");
+    const payload = response.request().postData();
     return payload && fromJSON(JSON.parse(payload)).data?.q === delayedName;
   });
   oldResponse.release();
@@ -718,8 +738,8 @@ try {
   }
   await page.getByRole("combobox", { name: /^Collection/ }).selectOption("all");
 
-  // Exercise maximum accepted browser fields through the actual GET serializer,
-  // including multibyte Unicode, rather than a smaller ASCII POST-only bridge.
+  // Exercise maximum accepted browser fields through the installed POST serializer.
+  // The full Unicode payload must arrive in the body without lengthening the URL.
   const maximumName = "李".repeat(160);
   const maximumAliases = [..."許鍾鄧黃鄭謝何陳"].map((character) => character.repeat(160));
   const maximumClub = "俱".repeat(160);
@@ -733,13 +753,20 @@ try {
   const maximumRequest = requests
     .filter((request) => request.method === "searchAthleteSourceResults")
     .at(-1);
-  assert.equal(maximumRequest.httpMethod, "GET");
+  assert.equal(maximumRequest.httpMethod, "POST");
   assert.equal(maximumRequest.input.q, maximumName);
   assert.deepEqual(maximumRequest.input.aliases, maximumAliases);
   assert.equal(maximumRequest.input.club, maximumClub);
+  assert.equal(maximumRequest.requestTarget, "/finder-test-api/searchAthleteSourceResults");
+  assert.ok(maximumRequest.wireLength < 200, "Search fields must not enter the request URL");
+  assert.ok(maximumRequest.bodyLength > 4_800 && maximumRequest.bodyLength < 10_000);
+  assert.equal(maximumRequest.contentType, "application/json");
+  assert.equal(maximumRequest.serverFnHeader, "true");
+  assert.equal(maximumRequest.fetchSite, "same-origin");
+  assert.equal(maximumRequest.requestOrigin, origin);
   assert.ok(
-    maximumRequest.wireLength > 14_000,
-    "The large encoded GET must actually cross the HTTP boundary",
+    maximumRequest.equivalentGetWireLength > 14 * 1024,
+    "The equivalent GET serialization must exceed the documented 14 KB URL limit",
   );
   await page.getByLabel("Other racing names").fill("");
   await page.getByLabel("Club filter").fill("");
@@ -931,7 +958,10 @@ try {
   );
   assert.deepEqual(errors, []);
   console.log(
-    "Athlete finder browser verified: real GET/POST transport, maximum Unicode inputs, delayed and reordered responses, partial-index fallback, four stores, submit-only search, pagination, review links, unavailable-store distinction, source coverage refresh recovery, mobile layout, staff access, stale-preview protection and durable selected-row import handoff.",
+    `Maximum Unicode finder transport: ${maximumRequest.httpMethod}, request target ${maximumRequest.wireLength} bytes, body ${maximumRequest.bodyLength} bytes; equivalent encoded GET target ${maximumRequest.equivalentGetWireLength} bytes.`,
+  );
+  console.log(
+    "Athlete finder browser verified: real GET/POST transport, maximum Unicode POST inputs, delayed and reordered responses, partial-index fallback, four stores, submit-only search, pagination, review links, unavailable-store distinction, source coverage refresh recovery, mobile layout, staff access, stale-preview protection and durable selected-row import handoff.",
   );
 } finally {
   for (const gate of responseGates.values()) gate.released.resolve();

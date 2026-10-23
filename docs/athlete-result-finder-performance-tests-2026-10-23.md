@@ -51,6 +51,12 @@ This correction does not recover missing participants. A saved URL or summary co
 
 The shared stored-search host comparison now rejects ports above 65535 without casting unbounded input to an integer. Twenty cross-store assertions cover valid ports, zero padding, out-of-range values and oversized port strings. Percent-encoded and Unicode host equivalence remains separate follow-up work.
 
+### Maximum Unicode searches depended on an oversized URL
+
+The expanded transport check found that the maximum permitted racing name, eight aliases and club can produce an encoded GET URL above 14 KB. [Vercel documents a 14 KB CDN URL limit](https://vercel.com/docs/errors/url_too_long) and recommends moving oversized query parameters into a POST body. Stored search now uses TanStack's supported POST server-function transport while retaining the existing validator, staff authentication, same-site checks and private/no-store response.
+
+The old GET request did complete successfully in one bounded live test; HTTP 414 was **not** reproduced on that deployment. This change removes reliance on an oversized URL rather than claiming that every host or request already failed. In the loopback regression, the maximum input used a **43-byte request target and 5,223-byte POST body**; equivalent GET serialization produced a **15,455-byte request target**. All input values arrived unchanged. Anonymous/member requests and same-site/cross-site POST requests in both scripted and navigation modes remained denied with private/no-store responses. The search itself still makes no result, claim or source-fetch writes.
+
 ## Regression evidence
 
 The focused service verifiers cover:
@@ -65,7 +71,7 @@ The focused service verifiers cover:
 
 The resumable runner's synthetic tests verify default read-only inspection, argument bounds, latest-first selection, limited runs and resume, row-lock failure and next-run retry, failure rollback, post-refresh consistency, time-budget interruption, statistics maintenance, no-op reruns and sanitized progress output. Each CLI capture refresh has its own bounded transaction. The isolated volume rehearsal used bounded connector transactions to exercise the same database refresh function because a direct database connection was unavailable from the test runner.
 
-The integrated browser harness uses the installed TanStack client RPC serializer for real GET/POST encoding. It verifies nine 160-character Unicode names plus a 160-character Unicode club through a request exceeding 14 KB, draft edits while a response is held, pagination retaining the submitted query, and an older overlapping response not replacing a newer one. No stale-response product fault was reproduced. Missing, unsupported and inconsistent index markers still return exact fallback matches and working review links. Existing authentication, private response bounds, coverage refresh, mobile layout, stale live previews and selected-row import handoff remain covered.
+The integrated browser harness uses the installed TanStack client RPC serializer for real GET/POST encoding. It verifies nine 160-character Unicode names plus a 160-character Unicode club in a POST body with a short URL, draft edits while a response is held, pagination retaining the submitted query, and an older overlapping response not replacing a newer one. No stale-response product fault was reproduced. Missing, unsupported and inconsistent index markers still return exact fallback matches and working review links. Existing authentication, private response bounds, coverage refresh, mobile layout, stale live previews and selected-row import handoff remain covered.
 
 ## Reproduction and rollout
 

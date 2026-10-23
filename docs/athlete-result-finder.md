@@ -31,6 +31,8 @@ The first version does not require storing an entire website. Retaining normaliz
 
 The search accepts a racing name, up to eight explicit aliases, an optional club filter, years and a registered source website. Source filtering matches its registered hosts and subdomains, not arbitrary substring lookalikes. Name words and aliases generate possible matches; they do not establish identity. Club and year filters exclude rows where the required information is absent, so start without them when coverage is uncertain.
 
+Stored search sends the validated input in a POST body so maximum-length Unicode names and aliases do not depend on a long query-string URL. The endpoint remains read only, staff authenticated, same-site checked and private/no-store.
+
 The default page returns up to 25 observations per collection. Collections report pagination and their own unavailable, timed-out or failed states. Results can overlap between collections; displayed counts are not unique races. A bounded search with missing collections must not be presented as an exhaustive negative result.
 
 Saved captures use a private participant-name index containing capture IDs, original row ordinals and normalized name vectors. Original source rows and HTML remain in the capture. New or changed payloads update the index and its completion metadata atomically. Historical captures with missing, unsupported or inconsistent completion metadata use exact stored-row matching. Both streams merge before paging, so unfinished backfill cannot hide existing matches. Whole source HTML and unrelated participants are not returned in the stored-search response. Search transactions retain their statement and lock time limits.
