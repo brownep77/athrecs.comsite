@@ -119,6 +119,9 @@ jobs:
       - name: Profile result verification ownership and evidence safeguards
         run: npm run verify:profile-result-verification
 
+      - name: Reviewed source-verification batch safeguards
+        run: npm run verify:source-verification-batch
+
       - name: Verify historical result source safeguards
         run: |
           node scripts/verify-result-source-sync.mjs

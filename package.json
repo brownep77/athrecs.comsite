@@ -91,6 +91,7 @@
     "verify:athlete-bio": "node --experimental-strip-types scripts/verify-athlete-bio.mjs",
     "verify:athlete-profile-results": "node scripts/verify-athlete-profile-results.mjs",
     "verify:profile-result-verification": "node --experimental-strip-types scripts/verify-profile-result-verification.mjs",
+    "verify:source-verification-batch": "node scripts/verify-source-verification-batch.mjs",
     "verify:uk-ireland-prominent-races": "node --experimental-strip-types scripts/verify-uk-ireland-prominent-races.mjs",
     "verify:uk-home-nation-championships": "node --experimental-strip-types scripts/verify-uk-home-nation-championships.mjs",
     "verify:uk-ireland-non-standard-distances": "node --experimental-strip-types scripts/verify-uk-ireland-non-standard-distances.mjs",
