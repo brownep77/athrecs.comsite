@@ -422,10 +422,31 @@ try {
     mutate(invalid);
     assert.throws(() => validateSourceVerificationPlan(invalid));
   }
+  const [secondCanonical] = await sql.query(
+    "select to_jsonb(r) as value from results r where id=2",
+  );
+  const sharedEditionPlan = clone(plan);
+  sharedEditionPlan.entries.push({
+    target: { kind: "result", resultId: 2, athleteId: 2 },
+    before: secondCanonical.value,
+    evidence: {
+      ...evidence,
+      sourceRow: { Name: "Another Synthetic Athlete", Time: "21:40" },
+    },
+  });
+  const startSharedEdition = statements.length;
+  assert.equal((await applySourceVerificationPlan(sql, sharedEditionPlan)).canonicalResultCount, 2);
+  assert.equal(
+    statements.slice(startSharedEdition).filter((text) => text.includes("from editions")).length,
+    1,
+    "Canonical results sharing one edition reuse the date protected by its transaction-held share lock.",
+  );
+  assert.deepEqual(await state(), initial);
   await sql.query("update editions set event_date='2099-01-01' where id=10");
   await assert.rejects(
-    () => applySourceVerificationPlan(sql, plan, { dryRun: false }),
+    () => applySourceVerificationPlan(sql, sharedEditionPlan, { dryRun: false }),
     /Future result/,
+    "A later transaction must read the changed edition date instead of reusing an earlier cache.",
   );
   await sql.query("update editions set event_date='2020-01-01' where id=10");
   assert.deepEqual(

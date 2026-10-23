@@ -508,17 +508,24 @@ export async function applySourceVerificationPlan(sql, input, { dryRun = true } 
       let canonicalResultCount = 0,
         excludedCanonicalResultCount = 0;
       const checkedCaptures = new Set();
+      const lockedEditions = new Map();
       for (const entry of ordered) {
         const current = await loadEntry(tx, entry);
         if (!same(current, entry.before))
           throw new Error("Stale result/history preimage; no batch changes applied.");
         const target = entry.target;
         if (target.kind === "result") {
-          const [edition] = await tx.query(
-            "select event_date::text as event_date from editions where id=$1 for share",
-            [entry.before.edition_id],
-          );
-          if (!edition) throw new Error("The canonical result edition no longer exists.");
+          const editionId = entry.before.edition_id;
+          let edition = lockedEditions.get(editionId);
+          if (!edition) {
+            [edition] = await tx.query(
+              "select event_date::text as event_date from editions where id=$1 for share",
+              [editionId],
+            );
+            if (!edition) throw new Error("The canonical result edition no longer exists.");
+            // The share lock holds this date stable until this transaction ends.
+            lockedEditions.set(editionId, edition);
+          }
           checkResultHolds(entry.before.result_details ?? {}, {
             ...entry.before,
             event_date: edition.event_date,
