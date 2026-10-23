@@ -5,7 +5,7 @@ import {
   FINDER_STORE_KINDS,
   finderNames,
   finderNameQuery,
-  finderNameWords,
+  finderNameTerms,
   finderSearchSchema,
   registrySourceHosts,
   type FinderRow,
@@ -13,6 +13,7 @@ import {
   type FinderSearchResponse,
   type FinderStoreKind,
   type FinderStoreStatus,
+  type FinderNameTerms,
 } from "./core";
 
 // SQL fragments below only receive developer-authored expressions, never input.
@@ -23,7 +24,9 @@ const sourceMatches = (url: string) =>
     where ${host(url)}=wanted.host or right(${host(url)},length(wanted.host)+1)='.'||wanted.host))`;
 const nameMatches = (name: string) =>
   `to_tsvector('simple',regexp_replace(normalize(left(coalesce(${name},''),2000),NFKC),'[^[:alnum:]]+',' ','g')) @@ to_tsquery('simple',$1)`;
-const clubMatches = (club: string) => `($2='' or strpos(lower(coalesce(${club},'')),$2)>0)`;
+const clubText = (value: string) => `replace(lower(normalize(coalesce(${value},''),NFKC)),'ς','σ')`;
+const clubMatches = (club: string) =>
+  `($2='' or strpos(${clubText(club)},${clubText("$2::text")})>0)`;
 const yearMatches = (date: string) =>
   `(($3::integer is null and $4::integer is null) or
     (left(coalesce(${date},''),4) ~ '^[0-9]{4}$'
@@ -98,6 +101,7 @@ const queries: Record<FinderStoreKind, string> = {
       and not exists(select 1 from result_archive_source_captures newer
         where newer.provider=c.provider and newer.source_key=c.source_key
           and (newer.captured_at,newer.id)>(c.captured_at,c.id))
+    order by c.id desc
   ) select c.id::text||':'||p.ordinality::text as "localKey",left(p.value->>'name',200) as name,
     left(p.value->>'club',200) as club,left(c.payload->'index'->>'name',300) as event,
     left(${captureDate},80) as date,left(coalesce(p.value->>'distanceLabel',p.value->>'tableKey'),100) as distance,
@@ -113,13 +117,18 @@ const queries: Record<FinderStoreKind, string> = {
       ' · source row ',coalesce(p.value->>'sourceRow',p.ordinality::text)),500) as "rowLocator",
     'private capture · identity unreviewed'::text as "reviewState",
     c.id::text as "captureId",p.ordinality::integer as "captureOrdinal"
-    from candidates selected join result_archive_source_captures c on c.id=selected.id
-    cross join lateral jsonb_array_elements(
-      case when jsonb_typeof(c.payload->'rows')='array' then c.payload->'rows' else '[]'::jsonb end
-    ) with ordinality p(value,ordinality)
-    where ${nameMatches("p.value->>'name'")} and ${clubMatches("p.value->>'club'")}
-      and ${yearMatches(captureDate)}
-    order by c.id desc,p.ordinality ${take}`,
+    from candidates selected
+    cross join lateral(select c.id,c.payload,c.provider,c.source_url
+      from result_archive_source_captures c where c.id=selected.id offset 0) c
+    cross join lateral(
+      select p.value,p.ordinality from jsonb_array_elements(
+        case when jsonb_typeof(c.payload->'rows')='array' then c.payload->'rows' else '[]'::jsonb end
+      ) with ordinality p(value,ordinality)
+      where /* capture_row_name_matches */ and ${clubMatches("p.value->>'club'")}
+        and ${yearMatches(captureDate)}
+      order by p.ordinality limit ($6::integer+${FINDER_PAGE_SIZE + 1})
+    ) p
+    order by selected.id desc,p.ordinality ${take}`,
 
   history: `select h.athlete_id::text||':'||md5(h.provider||':'||h.external_id)||':'||p.ordinality::text as "localKey",
     left(a.display_name,200) as name,left(${historyClub},200) as club,
@@ -203,12 +212,80 @@ const storeTables: Record<FinderStoreKind, string[]> = {
   history: ["athlete_source_histories", "athletes"],
 };
 
+async function normalizeNames(sql: Sql, names: string[]): Promise<FinderNameTerms> {
+  // At most nine 160-character inputs. This never reads participant tables.
+  // JavaScript case folding/word classes differ from the PostgreSQL indexes
+  // for Turkish I, Greek sigma and scripts containing combining marks.
+  const rows = await sql.transaction(async (tx) => {
+    await tx.query("set transaction read only");
+    await tx.query("set local statement_timeout = '7000ms'");
+    await tx.query("set local lock_timeout = '1000ms'");
+    return tx.query<{ words: string[] }>(
+      `select distinct tsvector_to_array(to_tsvector('simple',
+        regexp_replace(normalize(variant,NFKC),'[^[:alnum:]]+',' ','g'))) as words
+        from unnest($1::text[]) name
+        cross join lateral (values(name),(upper(name)),(translate(name,'Iİ','ıi'))) variants(variant)`,
+      [names],
+    );
+  });
+  const terms = finderNameTerms(rows.map((row) => row.words).filter((words) => words.length));
+  if (!terms.length) throw new Error("Enter a name containing searchable letters or numbers");
+  return terms;
+}
+
+function captureCandidates(names: FinderNameTerms) {
+  const values: string[][] = [];
+  const clauses = names.map((words) => {
+    const required: string[] = [];
+    const alternatives: string[][] = [];
+    for (const variants of words) {
+      const keys = [...new Set(variants.map((word) => [...word].slice(0, 3).join("")))];
+      if (keys.length === 1) required.push(keys[0]);
+      else alternatives.push(keys);
+    }
+    const parts: string[] = [];
+    if (required.length) {
+      values.push([...new Set(required)]);
+      parts.push(`athlete_finder_capture_name_keys(c.payload) @> $${values.length + 6}::text[]`);
+    }
+    for (const keys of alternatives) {
+      values.push(keys);
+      parts.push(`athlete_finder_capture_name_keys(c.payload) && $${values.length + 6}::text[]`);
+    }
+    return `(${parts.join(" and ")})`;
+  });
+  const needles = names.map(
+    (words) =>
+      words
+        .filter((variants) => variants.length === 1 && /^[a-z0-9]{2,}$/.test(variants[0]))
+        .map((variants) => variants[0])
+        .sort((a, b) => b.length - a.length)[0],
+  );
+  let nameClause = nameMatches("p.value->>'name'");
+  if (needles.every(Boolean)) {
+    const unique = [...new Set(needles)];
+    values.push(unique);
+    const raw = "left(coalesce(p.value->>'name',''),2000)";
+    const asciiLower = `translate(${raw},'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')`;
+    const required = unique
+      .map((_, index) => `strpos(${asciiLower},($${values.length + 6}::text[])[${index + 1}])>0`)
+      .join(" or ");
+    // A matching ASCII lexeme must appear literally in an ASCII source name.
+    // Bypass the shortcut for all non-ASCII source names: NFKC and dictionary
+    // case mappings can change those characters. CASE ensures a rejected row
+    // never constructs a tsvector, regardless of planner predicate ordering.
+    nameClause = `case when octet_length(${raw})=length(${raw}) and not (${required})
+      then false else ${nameClause} end`;
+  }
+  return { clause: clauses.join(" or "), nameClause, values };
+}
+
 async function searchStore(
   sql: Sql,
   kind: FinderStoreKind,
   params: unknown[],
   offset: number,
-  candidateKeys: string[][],
+  candidates: ReturnType<typeof captureCandidates>,
 ) {
   try {
     return await sql.transaction(async (tx) => {
@@ -246,16 +323,11 @@ async function searchStore(
         .replace("/* supporting_source_join */", () =>
           tables.supporting ? supportingJoin : absentSupportingJoin,
         )
-        .replace("/* capture_name_candidates */", () =>
-          candidateKeys
-            .map(
-              (_, index) => `athlete_finder_capture_name_keys(c.payload) @> $${index + 7}::text[]`,
-            )
-            .join(" or "),
-        );
+        .replace("/* capture_name_candidates */", () => candidates.clause)
+        .replace("/* capture_row_name_matches */", () => candidates.nameClause);
       const found = await tx.query<RawRow>(
         query,
-        kind === "capture" ? [...params, ...candidateKeys] : params,
+        kind === "capture" ? [...params, ...candidates.values] : params,
       );
       const rows = found.slice(0, FINDER_PAGE_SIZE).map((row) => compactRow(kind, row));
       const hasMore = found.length > FINDER_PAGE_SIZE;
@@ -313,19 +385,18 @@ export async function searchStoredAthleteResults(
   if (selected && !hosts.length)
     throw new Error("This source has no usable registered website host");
   const kinds: readonly FinderStoreKind[] = data.kind === "all" ? FINDER_STORE_KINDS : [data.kind];
+  const nameTerms = await normalizeNames(sql, names);
   const params = [
-    finderNameQuery(names),
-    data.club.toLowerCase(),
+    finderNameQuery(nameTerms),
+    data.club,
     data.yearFrom ?? null,
     data.yearTo ?? null,
     hosts,
     data.offset,
   ];
-  const candidateKeys = finderNameWords(names).map((words) => [
-    ...new Set(words.map((word) => [...word].slice(0, 3).join(""))),
-  ]);
+  const candidates = captureCandidates(nameTerms);
   const searched = await Promise.all(
-    kinds.map((kind) => searchStore(sql, kind, params, data.offset, candidateKeys)),
+    kinds.map((kind) => searchStore(sql, kind, params, data.offset, candidates)),
   );
   const stores = searched.map((result) => result.store);
   const hasMore = stores.some((store) => store.hasMore);

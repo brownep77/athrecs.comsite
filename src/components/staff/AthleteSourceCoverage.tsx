@@ -71,10 +71,23 @@ export function AthleteSourceCoverage({
             <Button type="submit" variant="secondary">
               Filter sources
             </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              disabled={coverage.isFetching}
+              onClick={() => void coverage.refetch()}
+            >
+              Refresh source coverage
+            </Button>
           </form>
           {coverage.isPending && (
             <p role="status" className="text-sm">
               Checking stored source coverage…
+            </p>
+          )}
+          {coverage.isFetching && !coverage.isPending && (
+            <p role="status" className="text-sm">
+              Refreshing source coverage…
             </p>
           )}
           {coverage.isError && (
@@ -100,6 +113,13 @@ export function AthleteSourceCoverage({
                   </div>
                 ))}
               </div>
+              {coverage.data.issues.length > 0 && (
+                <div role="alert" className="space-y-1 rounded-lg border border-border p-3 text-sm">
+                  {coverage.data.issues.map((issue) => (
+                    <p key={issue.store}>{issue.message}</p>
+                  ))}
+                </div>
+              )}
               <p className="text-xs leading-5 text-muted">
                 {coverage.data.summary.registrySources.toLocaleString()} registered sources. Counts
                 below group stored evidence by website; overlapping sources can share the same
@@ -184,7 +204,20 @@ export function AthleteSourceCoverage({
                 </table>
               </div>
               {!coverage.data.rows.length && (
-                <p className="text-sm">No source websites match this filter.</p>
+                <p className="text-sm">
+                  {coverage.data.total ? (
+                    <>
+                      No sources on this page.{" "}
+                      <button className="underline" onClick={() => setOffset(0)}>
+                        Return to first sources
+                      </button>
+                    </>
+                  ) : coverage.data.stores.inventorySources ? (
+                    "No source websites match this filter."
+                  ) : (
+                    "No matching registered sources were found. The wider source inventory could not be checked."
+                  )}
+                </p>
               )}
               <div className="flex flex-wrap items-center gap-3">
                 <Button
@@ -195,9 +228,11 @@ export function AthleteSourceCoverage({
                   Previous sources
                 </Button>
                 <span className="text-xs text-muted">
-                  {coverage.data.total
+                  {coverage.data.rows.length
                     ? `${offset + 1}–${offset + coverage.data.rows.length} of ${coverage.data.total}`
-                    : "0 sources"}
+                    : coverage.data.total
+                      ? `${coverage.data.total} matching sources`
+                      : "0 sources"}
                 </span>
                 <Button
                   variant="secondary"

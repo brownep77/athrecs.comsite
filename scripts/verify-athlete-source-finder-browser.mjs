@@ -537,8 +537,26 @@ try {
   await savedLinkSource.getByText("Coverage incomplete", { exact: true }).waitFor();
   await savedLinkSource.getByText("Saved result links: 1", { exact: true }).waitFor();
   await savedLinkSource.getByText("History performances: Unknown", { exact: true }).waitFor();
+  const coverageFailure = page.getByText(
+    "History performances: This collection is not available in this environment.",
+    { exact: true },
+  );
+  await coverageFailure.waitFor();
+  const failedCoverageRequests = called("getAthleteFinderSourceCoverage");
   await db.exec(
     "alter table athlete_source_histories_browser_hidden rename to athlete_source_histories",
+  );
+  assert.equal(called("getAthleteFinderSourceCoverage"), failedCoverageRequests);
+  await page.getByRole("button", { name: "Refresh source coverage", exact: true }).click();
+  await savedLinkSource.getByText("Links held; rows not collected", { exact: true }).waitFor();
+  await coverageFailure.waitFor({ state: "hidden" });
+  assert.equal(called("getAthleteFinderSourceCoverage"), failedCoverageRequests + 1);
+  assert.equal(await page.getByLabel("Filter source coverage").inputValue(), "");
+  assert.equal(
+    requests.filter((request) => request.method === "getAthleteFinderSourceCoverage").at(-1).input
+      .offset,
+    0,
+    "Refreshing a failed collection preserves the current coverage page",
   );
   await page.getByLabel("Filter source coverage").fill("Synthetic URL-only source");
   await page.getByRole("button", { name: "Filter sources", exact: true }).click();
@@ -606,6 +624,35 @@ try {
   await page.getByText(`${name} · ${club} · 10K · Row 1`, { exact: true }).click();
   await page.getByText("00:40:12.34", { exact: true }).waitFor();
   await page.getByText("00:40:14.56", { exact: true }).waitFor();
+  const reviewButton = page.getByRole("button", {
+    name: "Review 1 matching rows · 10K",
+    exact: true,
+  });
+  const stalePreview = page.getByText(
+    "The name, racing names, club clue or URL has changed. Check the page again before reviewing these rows for import.",
+    { exact: true },
+  );
+  const checkedName = page.getByText(`Checked racing name: ${name}`, { exact: true });
+  await checkedName.waitFor();
+  for (const [label, changed, original] of [
+    ["Athlete name", "Different Synthetic Athlete", name],
+    ["Other racing names", "Different Synthetic Alias", ""],
+    ["Club filter", "Different Synthetic Club", ""],
+    ["Official results page URL", "https://totalracetiming.co.uk/raceresults/456", sourceUrl],
+  ]) {
+    const input = page.getByLabel(label, { exact: label === "Athlete name" });
+    await input.fill(changed);
+    await stalePreview.waitFor();
+    assert.ok(
+      await reviewButton.isDisabled(),
+      `Changing ${label} must prevent importing an earlier preview`,
+    );
+    await checkedName.waitFor();
+    assert.equal(providerRequests.length, 2, "Editing preview inputs must not fetch another page");
+    await input.fill(original);
+    await stalePreview.waitFor({ state: "hidden" });
+    assert.ok(await reviewButton.isEnabled(), "Restoring the checked inputs restores its preview");
+  }
   assert.deepEqual(
     await sql`select (select count(*)::int from results) canonical,(select count(*)::int from result_archive_entries) archive,(select count(*)::int from result_archive_source_captures) capture`,
     beforeResults,
@@ -647,7 +694,7 @@ try {
   );
   assert.deepEqual(errors, []);
   console.log(
-    "Athlete finder browser verified: four stores, submit-only search, pagination, review links, unavailable-store distinction, source coverage, mobile layout, staff access, synthetic source preview and durable import handoff.",
+    "Athlete finder browser verified: four stores, submit-only search, pagination, review links, unavailable-store distinction, source coverage refresh recovery, mobile layout, staff access, stale-preview protection and durable selected-row import handoff.",
   );
 } finally {
   if (beforeAllowlist === undefined) delete process.env.ATHRECS_STAFF_EMAILS;

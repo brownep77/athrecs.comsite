@@ -83,6 +83,8 @@ const registry = [
 const db = new PGlite();
 let queryCount = 0;
 let failHistoryRead = false;
+let failCaptureReadCode = null;
+let captureAggregateOverride = null;
 function sqlFor(connection) {
   const sql = async (parts, ...values) =>
     sql.query(
@@ -93,7 +95,13 @@ function sqlFor(connection) {
     if (!/^set local /i.test(text)) queryCount += 1;
     if (failHistoryRead && /FROM athlete_source_histories/i.test(text))
       throw Object.assign(new Error("Synthetic timeout"), { code: "57014" });
-    return (await connection.query(text, values)).rows;
+    const captureRead = /FROM result_archive_source_captures\b/i.test(text);
+    if (captureRead && failCaptureReadCode)
+      throw Object.assign(new Error("PRIVATE DATABASE ERROR SENTINEL"), {
+        code: failCaptureReadCode,
+      });
+    const rows = (await connection.query(text, values)).rows;
+    return captureRead && captureAggregateOverride ? captureAggregateOverride(rows) : rows;
   };
   sql.transaction = (work) => db.transaction((tx) => work(sqlFor(tx)));
   return sql;
@@ -107,6 +115,8 @@ try {
   assert.equal(queryCount, 1, "Absent optional stores should not be queried");
   assert.equal(missing.total, registry.length);
   assert.ok(Object.values(missing.stores).every((available) => !available));
+  assert.equal(missing.issues.length, 8);
+  assert.ok(missing.issues.every((issue) => issue.reason === "missing"));
   assert.equal(missing.summary.stored.canonicalResults, null);
   assert.equal(missing.summary.inventory.knownResultItems, null);
   assert.equal(missing.summary.inventory.savedResultLinks, null);
@@ -185,6 +195,7 @@ try {
     "Use one availability query and at most one aggregate per store, never one query per registry source",
   );
   assert.ok(Object.values(response.stores).every(Boolean));
+  assert.deepEqual(response.issues, []);
   assert.equal(response.total, 7, "Include one wider-inventory row per unregistered domain");
   assert.equal(response.summary.registrySources, 6);
   assert.equal(response.summary.registryDomains, 5);
@@ -288,6 +299,217 @@ try {
     "Only aggregate counts and source metadata may leave the service",
   );
 
+  const urlCases = [
+    ["HTTPS://WWW.ALPHA.TEST.:443/results", "alpha"],
+    ["https://%61lpha.test/results", "alpha"],
+    ["https://alpha.test:65535/results", "alpha"],
+    ["http://alpha.test:0/results", "alpha"],
+    ["https://alpha.test:65536/results", "invalid"],
+    ["https://alpha.test:999999999999999/results", "invalid"],
+    ["https://user:secret@alpha.test/results", "invalid"],
+    ["https://alpha.test.evil/results", "lookalike"],
+    ["javascript:alpha.test/results", "invalid"],
+    ["https://bücher.test/results", "idn"],
+    ["https://xn--bcher-kva.test/results", "idn"],
+  ];
+  for (const [index, [url]] of urlCases.entries()) {
+    await db.query("insert into results values ($1,$2)", [1000 + index, url]);
+  }
+  const idnSource = {
+    ...registry[0],
+    source_id: "idn_source",
+    source_name: "IDN source",
+    start_url: "https://bücher.test/",
+    allowed_domains: "xn--bcher-kva.test",
+  };
+  const normalized = await request({}, [...registry, idnSource]);
+  assert.equal(
+    normalized.rows.find((row) => row.sourceId === "alpha_main").stored.canonicalResults,
+    7,
+    "Normalize case, www, trailing dots, encoded hosts and valid ports; reject credentials and invalid ports",
+  );
+  assert.equal(
+    normalized.rows.find((row) => row.sourceId === "idn_source").stored.canonicalResults,
+    2,
+    "Unicode and punycode versions of the same host must share coverage",
+  );
+  assert.equal(normalized.summary.stored.canonicalResults, 5 + urlCases.length);
+  await db.exec(`
+    insert into event_register_sources values
+      ('idn-a','Unicode inventory','https://bücher.test/','bücher.test','Test','[]'),
+      ('idn-b','Punycode inventory alias','https://xn--bcher-kva.test/','xn--bcher-kva.test','Test','[]')
+  `);
+  const idnInventory = await request({ q: "Punycode inventory alias" });
+  assert.equal(idnInventory.rows.length, 1);
+  assert.equal(idnInventory.rows[0].domain, "xn--bcher-kva.test");
+  assert.equal(idnInventory.rows[0].stored.canonicalResults, 2);
+  assert.equal(idnInventory.rows[0].inventory.sources, 2);
+  assert.equal(idnInventory.rows[0].sharedDomain, true);
+  const idnRegistered = await request({ q: "Punycode inventory alias" }, [...registry, idnSource]);
+  assert.equal(
+    idnRegistered.rows.length,
+    1,
+    "Registry metadata takes precedence over inventory aliases",
+  );
+  assert.equal(idnRegistered.rows[0].registrySourceId, "idn_source");
+  await db.exec(
+    "delete from results where id>=1000; delete from event_register_sources where source_key like 'idn-%'",
+  );
+
+  await db.exec(`
+    insert into event_register_sources values
+      ('overlap-parent','Overlap parent','https://overlap.test/','overlap.test','Test','[]'),
+      ('overlap-child','Overlap child','https://results.overlap.test/','results.overlap.test','Test','[]');
+    insert into results values
+      (2000,'https://overlap.test/race'),
+      (2001,'https://results.overlap.test/race'),
+      (2002,'https://nested.results.overlap.test/race')
+  `);
+  const overlapRegistry = [
+    ...registry,
+    {
+      ...registry[0],
+      source_id: "overlap_specific",
+      source_name: "Overlap registered subdomain",
+      start_url: "https://results.overlap.test/",
+      allowed_domains: "results.overlap.test|*.nested.results.overlap.test",
+    },
+  ];
+  const overlapping = await request({ q: "Overlap" }, overlapRegistry);
+  assert.equal(overlapping.total, 2, "The registered subdomain replaces its inventory row");
+  const registeredOverlap = overlapping.rows.find((row) => row.registrySourceId);
+  const inventoryOverlap = overlapping.rows.find((row) => row.origin === "inventory");
+  assert.equal(
+    registeredOverlap.stored.canonicalResults,
+    2,
+    "A child domain cannot claim its parent's rows",
+  );
+  assert.equal(inventoryOverlap.stored.canonicalResults, 3);
+  assert.equal(registeredOverlap.sharedDomain, true);
+  assert.equal(
+    inventoryOverlap.sharedDomain,
+    true,
+    "Inventory and registry overlap must both be flagged",
+  );
+  assert.equal(
+    overlapping.summary.stored.canonicalResults,
+    8,
+    "Shared rows count only once in global totals",
+  );
+  await db.exec(
+    "delete from results where id>=2000; delete from event_register_sources where source_key like 'overlap-%'",
+  );
+
+  const tiedNames = ["tie_z", "tie_a"].map((sourceId) => ({
+    ...registry[0],
+    source_id: sourceId,
+    source_name: "Identical source title",
+  }));
+  const tiedFirst = await request({ q: "Identical source title", limit: 1 }, tiedNames);
+  const tiedSecond = await request(
+    { q: "Identical source title", limit: 1, offset: tiedFirst.nextOffset },
+    tiedNames,
+  );
+  assert.equal(tiedFirst.rows[0].sourceId, "tie_a");
+  assert.equal(tiedSecond.rows[0].sourceId, "tie_z");
+  assert.equal(tiedSecond.nextOffset, null);
+  const beyond = await request({ q: "Identical source title", offset: 999 }, tiedNames);
+  assert.deepEqual(beyond.rows, []);
+  assert.equal(beyond.total, 2);
+  assert.equal(beyond.nextOffset, null);
+  assert.deepEqual(
+    beyond.summary.stored,
+    response.summary.stored,
+    "Pagination and filters cannot change collection totals",
+  );
+
+  await db.exec(`
+    insert into result_archive_source_captures values
+      (50,'test','same-timestamp','active','https://alpha.test/tie','{"publication":"staff_only"}','compared',100,'2026-10-23'),
+      (51,'test','same-timestamp','active','https://alpha.test/tie','{"publication":"staff_only"}','held',100,'2026-10-23'),
+      (52,'provider-two','normal','active','https://alpha.test/other-provider','{"publication":"staff_only"}','compared',2,'2026-10-23'),
+      (53,'provider-three','normal','active','https://alpha.test/third-provider','{"publication":"staff_only"}','compared',4,'2026-10-23'),
+      (54,'test','moved','active','https://alpha.test/old-location','{"publication":"staff_only"}','compared',20,'2026-10-22'),
+      (55,'test','moved','active','https://beta.test/new-location','{"publication":"staff_only"}','compared',5,'2026-10-23'),
+      (56,'test','missing-publication','active','https://alpha.test/no-publication','{"publication":"staff_only"}','compared',30,'2026-10-22'),
+      (57,'test','missing-publication','active','https://alpha.test/no-publication','{}','compared',30,'2026-10-23')
+  `);
+  const superseded = await request();
+  assert.equal(superseded.summary.stored.captureRows, 14);
+  assert.equal(superseded.summary.stored.capturePages, 5);
+  assert.equal(superseded.rows.find((row) => row.sourceId === "alpha_main").stored.captureRows, 9);
+  assert.equal(superseded.rows.find((row) => row.sourceId === "beta").stored.captureRows, 5);
+  assert.equal(
+    superseded.rows.find((row) => row.sourceId === "alpha_main").inventory.heldCapturePages,
+    2,
+  );
+  await db.exec("delete from result_archive_source_captures where id>=50");
+
+  const capturedWarnings = [];
+  const originalWarn = console.warn;
+  console.warn = (...args) => capturedWarnings.push(args);
+  try {
+    for (const [code, reason] of [
+      ["57014", "timed_out"],
+      ["55P03", "locked"],
+      ["08006", "unavailable"],
+      ["42P01", "missing"],
+    ]) {
+      failCaptureReadCode = code;
+      queryCount = 0;
+      const failed = await request({ q: "No linked data" });
+      assert.equal(
+        queryCount,
+        9,
+        "A collection failure must not trigger automatic expensive retries",
+      );
+      assert.equal(failed.stores.captures, false);
+      assert.equal(failed.summary.stored.captureRows, null);
+      assert.equal(failed.rows[0].coverageState, "incomplete");
+      assert.equal(failed.issues.find((issue) => issue.store === "captures").reason, reason);
+      assert.equal(JSON.stringify(failed).includes("PRIVATE DATABASE ERROR SENTINEL"), false);
+      failCaptureReadCode = null;
+      const recovered = await request({ q: "No linked data" });
+      assert.equal(
+        recovered.stores.captures,
+        true,
+        "A fresh request must recover without stale failure state",
+      );
+      assert.equal(recovered.summary.stored.captureRows, 3);
+      assert.equal(recovered.rows[0].coverageState, "no_linked_rows");
+      assert.deepEqual(recovered.issues, []);
+    }
+  } finally {
+    console.warn = originalWarn;
+    failCaptureReadCode = null;
+  }
+  assert.equal(capturedWarnings.length, 4);
+  assert.equal(JSON.stringify(capturedWarnings).includes("PRIVATE DATABASE ERROR SENTINEL"), false);
+  for (const invalid of [NaN, Infinity, -1, 1.5, null, "", true, "9007199254740992", undefined]) {
+    captureAggregateOverride = (rows) =>
+      rows.map((row, index) => (index === 0 ? { ...row, captureRows: invalid } : row));
+    const invalidCount = await request();
+    assert.equal(
+      invalidCount.stores.captures,
+      false,
+      `Reject malformed aggregate ${String(invalid)}`,
+    );
+    assert.equal(invalidCount.summary.stored.captureRows, null);
+    assert.equal(
+      invalidCount.issues.find((issue) => issue.store === "captures").reason,
+      "invalid_data",
+    );
+  }
+  captureAggregateOverride = (rows) =>
+    rows.map((row, index) => ({ ...row, captureRows: index ? 1 : Number.MAX_SAFE_INTEGER }));
+  const overflowingCount = await request();
+  assert.equal(
+    overflowingCount.stores.captures,
+    false,
+    "Reject totals that lose integer precision",
+  );
+  captureAggregateOverride = null;
+
   const firstPage = await request({ limit: 3 });
   const secondPage = await request({ limit: 3, offset: firstPage.nextOffset });
   const finalPage = await request({ limit: 3, offset: secondPage.nextOffset });
@@ -318,29 +540,48 @@ try {
 
   // Legacy malformed JSON must not silently turn missing performance counts
   // into zero, even though modern schemas require an array in this column.
-  await db.exec(`
-    insert into athlete_source_histories values
-      ('https://none.test/malformed-history','{"not":"an array"}')
-  `);
-  const malformedHistory = await request();
-  assert.equal(malformedHistory.stores.histories, false);
-  assert.equal(malformedHistory.summary.stored.historyProfiles, null);
-  assert.equal(malformedHistory.summary.stored.historyRows, null);
-  assert.equal(malformedHistory.summary.stored.archiveRows, 2);
-  assert.equal(malformedHistory.summary.stored.captureRows, 3);
+  for (const malformed of ['{"not":"an array"}', '"text"', "42", "true", "null", null]) {
+    await db.query("insert into athlete_source_histories values ($1,$2::jsonb)", [
+      "https://none.test/malformed-history",
+      malformed,
+    ]);
+    const malformedHistory = await request();
+    assert.equal(malformedHistory.stores.histories, false);
+    assert.equal(malformedHistory.summary.stored.historyProfiles, null);
+    assert.equal(malformedHistory.summary.stored.historyRows, null);
+    assert.equal(malformedHistory.summary.stored.archiveRows, 2);
+    assert.equal(malformedHistory.summary.stored.captureRows, 3);
+    assert.equal(
+      malformedHistory.issues.find((issue) => issue.store === "histories").reason,
+      "invalid_data",
+    );
+    assert.equal(
+      malformedHistory.rows.find((row) => row.sourceId === "no_data").coverageState,
+      "incomplete",
+      "Malformed histories leave the collection unknown rather than claim no stored rows",
+    );
+    assert.equal(
+      malformedHistory.rows.find((row) => row.sourceId === "alpha_main").coverageState,
+      "stored_rows",
+      "Other known collections remain visible when malformed histories cannot be counted",
+    );
+    await db.exec(
+      "delete from athlete_source_histories where source_url='https://none.test/malformed-history'",
+    );
+  }
+
+  await db.exec("alter table event_register_sources rename to unavailable_source_inventory");
+  const unavailableInventory = await request({ q: "Gamma inventory" });
+  assert.deepEqual(unavailableInventory.rows, []);
+  assert.equal(unavailableInventory.total, 0);
+  assert.equal(unavailableInventory.stores.inventorySources, false);
+  assert.equal(unavailableInventory.summary.inventorySources, null);
   assert.equal(
-    malformedHistory.rows.find((row) => row.sourceId === "no_data").coverageState,
-    "incomplete",
-    "Malformed histories leave the collection unknown rather than claim no stored rows",
+    unavailableInventory.issues.find((issue) => issue.store === "inventorySources").reason,
+    "missing",
   );
-  assert.equal(
-    malformedHistory.rows.find((row) => row.sourceId === "alpha_main").coverageState,
-    "stored_rows",
-    "Other known collections remain visible when malformed histories cannot be counted",
-  );
-  await db.exec(
-    "delete from athlete_source_histories where source_url='https://none.test/malformed-history'",
-  );
+  await db.exec("alter table unavailable_source_inventory rename to event_register_sources");
+  assert.equal((await request({ q: "Gamma inventory" })).rows.length, 1);
 
   failHistoryRead = true;
   const busy = await request({ q: "alpha main" });
@@ -386,7 +627,7 @@ try {
   assert.equal(partial.rows[0].coverageState, "stored_rows");
 
   console.log(
-    "Athlete source coverage verified: bounded domain aggregation, latest approved captures, repeated history URLs, malformed histories, source overlap, saved result links, extraction states, literal filters, pagination, incomplete stores, and staff-only metadata.",
+    "Athlete source coverage verified: bounded aggregates, URL authority normalization, registry/inventory overlap, latest capture supersession, repeated history URLs, malformed histories/counts, saved links, extraction states, deterministic pagination, safe failure diagnostics, explicit recovery, and staff-only metadata.",
   );
 } finally {
   await db.close();

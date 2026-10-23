@@ -11,12 +11,12 @@ It is linked from Sources, Collected results, the staff navigation and each staf
 
 A saved URL identifies a location; it does not contain the participants or performances. Searching a URL string cannot discover a runner inside the referenced page.
 
-| What AthRecs holds | What the finder can do |
-| --- | --- |
-| Canonical results, normalized archive rows, approved race captures or imported athlete histories | Search the stored participant observations immediately. |
-| A supported public results URL | Fetch that one page on request, extract and compare names, and show a private preview. Staff can open selected matching rows in the importer. |
-| An unextracted PDF, spreadsheet or other saved document | Show the extraction inventory state; use the existing extraction/import workflow before its participant rows become searchable here. |
-| A source homepage, directory or unsupported results URL | Show source coverage and direct staff to existing collectors or import tools. Do not imply the source has been searched. |
+| What AthRecs holds                                                                               | What the finder can do                                                                                                                        |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Canonical results, normalized archive rows, approved race captures or imported athlete histories | Search the stored participant observations immediately.                                                                                       |
+| A supported public results URL                                                                   | Fetch that one page on request, extract and compare names, and show a private preview. Staff can open selected matching rows in the importer. |
+| An unextracted PDF, spreadsheet or other saved document                                          | Show the extraction inventory state; use the existing extraction/import workflow before its participant rows become searchable here.          |
+| A source homepage, directory or unsupported results URL                                          | Show source coverage and direct staff to existing collectors or import tools. Do not imply the source has been searched.                      |
 
 The first version does not require storing an entire website. Retaining normalized result rows and their source URL, row locator, capture date and original evidence supports repeat searches and later source comparisons. A live preview itself is not a saved archive entry. The normal importer controls retention, mapping and review.
 
@@ -35,6 +35,10 @@ The default page returns up to 25 observations per collection. Collections repor
 
 The database migration adds search indexes and a compact capture-name candidate index. Exact row-level name matching still runs after candidate selection. Whole source HTML and unrelated participants are not returned in the stored-search response. Search transactions have statement and lock time limits.
 
+Search inputs use PostgreSQL's name normalization to agree with those indexes, including tested Turkish, Greek and Indic cases. Capture search processes candidate races in result order and can stop after enough matching rows for the requested page. A preliminary literal check skips expensive name-vector work only for safe ASCII cases; non-ASCII source names still use the complete matcher. Broad names can still reach the time limit and must remain explicitly incomplete.
+
+Legacy URLs with a percent-encoded or Unicode hostname can be counted correctly in coverage while being missed by the stored-search source filter, whose SQL currently compares ordinary host strings. Search **all source websites** when investigating an apparent missing match in this situation. Normalizing historic source URLs for search remains follow-up work; coverage normalization does not rewrite stored evidence.
+
 Archive rows open their existing review detail directly. Capture links open the selected saved race and prefill the athlete name. Profile and history observations open the existing athlete review workspace. These links do not create claims or change result ownership.
 
 ## Live URL check
@@ -45,7 +49,11 @@ The staff-only POST validates the exact supported host and path, checks publishe
 
 Preview rows retain original column headings and values, including distinct timing and placing fields. At most 50 matching rows and bounded original text are returned. The response distinguishes checked, blocked, unavailable and rate-limited states, with truthful fetch/check times. A blocked source does not become a zero-match result.
 
+Each preview labels the racing name, aliases and club used for that check. Editing any of these inputs or the results URL makes the preview stale and disables its import-review action. Restoring the checked inputs restores the existing preview; running a new check replaces it. Editing a field never fetches a source page by itself.
+
 Before enabling a table's import handoff, the adapter runs the existing independent TRT source comparison against the full original table, passing the source bib to distinguish separate entrants with the same name. Flagged, malformed, empty, unsupported or ambiguous comparisons retain their preview evidence but withhold the automatic handoff. A generic Name-only table can be previewed, but remains manual-only because the independent TRT auditor does not recognize that layout. This comparison does not establish athlete identity or mark results verified.
+
+Dates and distance headings must belong to the same race section as their table. Missing dates, duplicate table anchors, ambiguous distance headings, zero finish times and contradictory timing columns require manual interpretation. An access challenge stops the check even if the response also contains an old results table. Provider denials retain their cooldown when response-body cleanup fails.
 
 For a successful comparison, staff may open matching rows from one table in the existing archive importer. The handoff explicitly records that it contains selected matching rows from a server-fetched single-page preview. It is not a claim that the whole race was captured. The importer still requires a race edition, column mapping, authority to retain and its normal review/save steps. No source record, claim, notification or public profile is created just by searching.
 
@@ -57,11 +65,15 @@ The coverage panel reads the current source registry, saved edition result links
 
 Coverage distinguishes stored rows, extraction/review backlog, links without rows and no linked stored evidence. Missing optional stores are reported as unknown rather than zero; if no rows are known and any participant collection is unavailable, the stage is explicitly incomplete. Saved result-link counts include held and rejected references and do not authorize collection. Canonical counts use the primary result source URL and history counts use the parent history URL; supporting references or individual performance URLs can yield search matches beyond those per-domain counts.
 
+The **Refresh source coverage** button retries the current filter and page. Partial failures have a safe collection-specific explanation, such as a missing collection, time limit or busy store. A failed count remains unknown until a successful refresh; it is never replaced with zero. Server diagnostics retain the failure category, safe SQLSTATE and elapsed time without logging SQL text or private result payloads. Domain grouping uses the same URL normalization as the registry, and both sides of an overlapping registry/inventory domain receive the shared-count warning.
+
 Registry enable/hold states describe existing metadata collection settings. This feature does not change them or enable participant collection across all registered sources. Saved captures are screened against the newest version so a superseded approved page cannot reappear when its replacement is held or revoked.
 
 ## Validation and rollout
 
 Focused verification uses synthetic records in disposable PGlite databases, bounded fake source responses and a loopback browser harness. It covers the four search stores, pagination, aliases, missing stores, source-domain matching, capture approvals, extraction inventory, live-fetch restrictions and selected-row import handoff. No production athlete data or source HTML belongs in tests or git.
+
+The [23 October adversarial test report](athlete-result-finder-fault-tests-2026-10-23.md) records reproduced faults, regression coverage and remaining limits.
 
 Run:
 

@@ -16,7 +16,8 @@ import {
 const PROVIDER = "Total Race Timing";
 const PROVIDER_KEY = "total-race-timing";
 const ROBOTS_URL = "https://totalracetiming.co.uk/robots.txt";
-const AGENT = "AthRecsResultsArchive/1.0 (+https://athrecs.com)";
+const AGENT_PRODUCT = "AthRecsResultsArchive";
+const AGENT = `${AGENT_PRODUCT}/1.0 (+https://athrecs.com)`;
 const MAX_ROWS = 50;
 const MAX_MATCH_TEXT = 100_000;
 const MIN_SPACING_MS = 2_000;
@@ -37,15 +38,34 @@ class SourceCheckError extends Error {
 
 const clean = (value: string) => value.replace(/\s+/g, " ").trim();
 
+/** A disconnected body must not erase a denial or stall its durable cooldown. */
+function cancelBody(stream: { cancel(): Promise<unknown> } | null | undefined) {
+  try {
+    void stream?.cancel().catch(() => {});
+  } catch {
+    // Cancellation is cleanup; retain the status/error already observed.
+  }
+}
+
 /** Match the applicable robots groups and longest path rule; allow wins a tie. */
 export function sourceRobotsPolicy(robots: string, path: string) {
+  if (
+    /^\s*(?:access denied|forbidden|captcha|verify (?:that )?you are human|just a moment)\b/i.test(
+      robots,
+    )
+  )
+    throw new SourceCheckError(
+      "The source presented an access challenge instead of crawl rules. No results page was requested.",
+      "blocked",
+      900,
+    );
   if (/^\s*</.test(robots))
     throw new SourceCheckError("The source returned a web page instead of crawl rules.", "blocked");
   type Group = { agents: string[]; rules: { allow: boolean; path: string }[]; delay: number };
   const groups: Group[] = [];
   let group: Group | null = null;
   let hasDirectives = false;
-  for (const line of robots.split(/\r?\n/)) {
+  for (const line of robots.split(/\r\n|\r|\n/)) {
     const plain = line.split("#", 1)[0].trim();
     const colon = plain.indexOf(":");
     if (colon < 0) continue;
@@ -88,11 +108,11 @@ export function sourceRobotsPolicy(robots: string, path: string) {
       }
     }
   }
-  const agent = AGENT.toLowerCase();
-  const strength = (g: Group) =>
-    Math.max(-1, ...g.agents.map((a) => (a === "*" ? 0 : a && agent.includes(a) ? a.length : -1)));
-  const best = Math.max(-1, ...groups.map(strength));
-  const selected = best < 0 ? [] : groups.filter((g) => strength(g) === best);
+  // RFC 9309 matches the crawler product token, not its version or contact URL.
+  const matching = groups.filter((group) => group.agents.includes(AGENT_PRODUCT.toLowerCase()));
+  const selected = matching.length
+    ? matching
+    : groups.filter((group) => group.agents.includes("*"));
   let priority = -1,
     allowed = true;
   for (const rule of selected.flatMap((g) => g.rules)) {
@@ -240,7 +260,7 @@ async function fetchText(
       315_360_000,
       Math.max(response.status === 429 ? 60 : 900, Number.isFinite(supplied) ? supplied : 0),
     );
-    await response.body?.cancel();
+    cancelBody(response.body);
     await cooldown(
       sql,
       actor,
@@ -254,34 +274,35 @@ async function fetchText(
     );
   }
   if (robots && response.status === 404) {
-    await response.body?.cancel();
+    cancelBody(response.body);
     return "";
   }
   if (!response.ok) {
-    await response.body?.cancel();
+    cancelBody(response.body);
     throw new SourceCheckError(
       `The ${robots ? "crawl-rules page" : "results page"} returned HTTP ${response.status}.`,
     );
   }
-  if (
-    robots &&
-    /text\/html|application\/(?:json|xml)/i.test(response.headers.get("content-type") ?? "")
-  ) {
-    await response.body?.cancel();
+  const mimeType = (response.headers.get("content-type") ?? "")
+    .split(";", 1)[0]
+    .trim()
+    .toLowerCase();
+  if (robots && mimeType && mimeType !== "text/plain") {
+    cancelBody(response.body);
     throw new SourceCheckError(
       "The source returned another document format instead of crawl rules.",
       "blocked",
     );
   }
-  if (!robots && !response.headers.get("content-type")?.toLowerCase().includes("text/html")) {
-    await response.body?.cancel();
+  if (!robots && mimeType !== "text/html") {
+    cancelBody(response.body);
     throw new SourceCheckError(
       "This adapter reads HTML results tables; this link returned another format.",
     );
   }
   const maxBytes = robots ? 256_000 : 6_000_000;
   if (Number(response.headers.get("content-length")) > maxBytes) {
-    await response.body?.cancel();
+    cancelBody(response.body);
     throw new SourceCheckError("The source response exceeds this preview's size limit.");
   }
   const reader = response.body?.getReader();
@@ -298,7 +319,7 @@ async function fetchText(
       chunks.push(value);
     }
   } finally {
-    await reader.cancel();
+    cancelBody(reader);
   }
   return new TextDecoder("utf-8", { fatal: true }).decode(Buffer.concat(chunks));
 }
@@ -313,6 +334,16 @@ export function readTrtNameMatches(
   const input = sourceCheckSchema.parse(raw),
     $ = load(html);
   $("br").replaceWith(" ");
+  if (
+    /captcha|verify (?:that )?you are human|access denied|just a moment/i.test(
+      $("title").text() + " " + $("h1").text(),
+    )
+  )
+    throw new SourceCheckError(
+      "The source presented an access challenge. The check stopped without bypassing it.",
+      "blocked",
+      900,
+    );
   const eventName = clean(
     $("h2").first().text() || $("h1").first().text() || $("title").text(),
   ).slice(0, 500);
@@ -324,6 +355,11 @@ export function readTrtNameMatches(
   const rows: SourceCheckRow[] = [],
     reviewCaptures: SourceCheckResponse["reviewCaptures"] = [],
     issues: string[] = [];
+  const anchorCounts = new Map<string, number>();
+  $("[id]").each((_, element) => {
+    const id = $(element).attr("id") ?? "";
+    if (/^sr\d+$/.test(id)) anchorCounts.set(id, (anchorCounts.get(id) ?? 0) + 1);
+  });
   const raceId = new URL(url).pathname.split("/").at(-1)!;
   let sourceRows = 0,
     matchedRows = 0,
@@ -332,10 +368,13 @@ export function readTrtNameMatches(
     textSize = 0;
   $("table").each((tableIndex, element) => {
     const table = $(element),
-      heading = table.prevAll("h3").first();
-    const distance = clean(heading.text()).slice(0, 200),
+      heading = table.prevAll("h1, h2, h3, table").first();
+    const distance = heading.is("h3") ? clean(heading.text()).slice(0, 200) : "",
       tableNumber = tableIndex + 1;
-    const anchor = /^sr\d+$/.test(heading.attr("id") ?? "") ? heading.attr("id")! : "";
+    const candidateAnchor =
+      heading.is("h3") && /^sr\d+$/.test(heading.attr("id") ?? "") ? heading.attr("id")! : "";
+    const repeatedAnchor = Boolean(candidateAnchor && anchorCounts.get(candidateAnchor) !== 1);
+    const anchor = repeatedAnchor ? "" : candidateAnchor;
     const sourceUrl = url + (anchor ? `#${anchor}` : "");
     const headings = table
       .find("thead th")
@@ -377,7 +416,7 @@ export function readTrtNameMatches(
       return;
     }
     supportedTables++;
-    const start = clean(table.prevAll("p").first().text());
+    const start = clean(table.prevUntil("h1, h2, h3, table", "p").first().text());
     const dates = start.match(/\b\d{2}\/\d{2}\/\d{4}\b/g) ?? [];
     const possibleDate = dates.length === 1 ? dates[0].split("/").reverse().join("-") : "";
     const date =
@@ -438,6 +477,10 @@ export function readTrtNameMatches(
       const rowIssues = ["Potential name match only; athlete identity has not been checked."];
       if (!date) rowIssues.push("The source date is missing or ambiguous.");
       if (!distance) rowIssues.push("The source distance/table heading is missing.");
+      if (repeatedAnchor)
+        rowIssues.push(
+          "The source table locator is repeated on the page; use the printed table and row numbers.",
+        );
       if (!bib)
         rowIssues.push(
           "No bib was supplied; the page, table and printed row number are the locator.",
@@ -507,12 +550,37 @@ export function readTrtNameMatches(
       try {
         if (!eventName || !distance || !date || !anchor)
           throw new Error("The source race, date, distance or table locator needs manual review.");
+        const distanceLabels =
+          distance.match(
+            /\d+(?:\.\d+)?\s*(?:k(?:m)?|mi(?:le)?s?|metres?|meters?|m)\b|(?:half[- ]+)?marathon\b/gi,
+          ) ?? [];
+        if (distanceLabels.length !== 1 || Number.parseFloat(distanceLabels[0] ?? "") === 0)
+          throw new Error("The source distance heading needs manual interpretation.");
         if (sourceTableRows.some((cells) => cells.length !== headings.length))
           throw new Error("The full original table contains rows with an ambiguous layout.");
         const parsedCapture = parseBrowserCapture(JSON.stringify(capture));
         const proposals = mapArchiveRows(parsedCapture.table, parsedCapture.mapping);
-        if (proposals.some((proposal) => !proposal.name || proposal.finishSeconds === null))
+        if (
+          proposals.some(
+            (proposal) =>
+              !proposal.name || proposal.finishSeconds === null || proposal.finishSeconds <= 0,
+          )
+        )
           throw new Error("The source finish status or timing headings need manual review.");
+        if (
+          proposals.some((proposal) => {
+            const labelled = [proposal.chipSeconds, proposal.gunSeconds].filter(
+              (value): value is number => value !== null,
+            );
+            return (
+              labelled.length > 0 &&
+              labelled.every((value) => Math.abs(value - proposal.finishSeconds!) > 1)
+            );
+          })
+        )
+          throw new Error(
+            "The generic finish time contradicts the labelled chip and gun times; its timing basis needs manual review.",
+          );
         const audit = auditResults(
           proposals.map((proposal) => ({
             id: proposal.sourceKey,
@@ -583,16 +651,6 @@ export function readTrtNameMatches(
     }
   });
   if (!supportedTables) {
-    if (
-      /captcha|verify (?:that )?you are human|access denied|just a moment/i.test(
-        $("title").text() + " " + $("h1").text(),
-      )
-    )
-      throw new SourceCheckError(
-        "The source presented an access challenge. The check stopped without bypassing it.",
-        "blocked",
-        900,
-      );
     throw new SourceCheckError(
       "No supported athlete result tables were found. The page may require manual or browser collection.",
     );
