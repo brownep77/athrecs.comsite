@@ -44,8 +44,17 @@ export async function publishCheckedFixtures(sql, publishing, details, review = 
           continue;
         if (!row && events[0].id !== 43) throw new Error("GEAR canonical event changed");
         // New contradictory metadata requires a fresh review rather than an overwrite.
-        if (start.time !== null && row?.start_time && row.start_time !== start.time)
-          throw new Error(`Start changed since review: ${key} ${distance}`);
+        if (start.time !== null && row?.start_time && row.start_time !== start.time) {
+          const correction = review.startCorrections?.[`${key}|${distance}`];
+          // Replacing a known time needs both the checked row baseline above and
+          // an explicit reviewed before/after pair. Never allow a blanket override.
+          if (
+            !review.baseline ||
+            correction?.from !== row.start_time ||
+            correction?.to !== start.time
+          )
+            throw new Error(`Start changed since review: ${key} ${distance}`);
+        }
         const note = [`Date checked ${detail.checkedAt} against ${detail.sourceUrl}.`, start.note]
           .filter(Boolean)
           .join(" ");

@@ -1,5 +1,7 @@
 # Official start-time priority — 21 October 2026
 
+**Marriott’s Way superseded on 23 October 2026:** the [organiser’s direct confirmation](marriotts-confirmation-2026-10-23.md) sets the marathon to 08:30 and half marathon to 10:00. The account below remains the historical evidence and decision record.
+
 **Superseded for Reepham adults:** the [subsequent clarification check](norfolk-clarification-2026-10-21.md)
 restores TBC while awaiting the organiser. The Marriott's Way selected starts
 remain supported by the organiser timetable and its FAQ. The account below is

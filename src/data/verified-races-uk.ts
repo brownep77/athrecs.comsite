@@ -2846,7 +2846,7 @@ export const verifiedUkEditions: Edition[] = [
     distanceKm: 21.1,
     status: "Open",
     entryUrl: "https://totalracetiming.co.uk/race/693",
-    startTime: "10:30",
+    startTime: "10:00",
     source: "https://boghopperraces.co.uk/2027-marriotts-way-races",
     notes: "The organiser states that the point-to-point trail distance is approximate.",
   },

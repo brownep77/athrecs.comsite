@@ -36,7 +36,7 @@ for (const [a, b] of [
   assert.equal(distanceTone(a), distanceTone(b), `${a}/${b}`);
 assert.equal(
   checkedFixtureStart("marriotts-way-races", "2027-02-21", "Half · Marathon", "10:30"),
-  "09:00",
+  "08:30",
 );
 assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "5K", null), "10:15");
 assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "10K", null), "10:30");
@@ -110,8 +110,8 @@ assert.match(
 );
 assert.equal(
   supplementedStart({ slug: "marriotts-way-races" }, "2027-02-21", "Half", "10:30"),
-  "10:30",
-  "organiser timetable takes precedence over stored fallback",
+  "10:00",
+  "organiser direct confirmation takes precedence over stored fallback",
 );
 assert.equal(
   supplementedStart({ slug: "east-coast-10k" }, "2027-11-01", "10K", null),
