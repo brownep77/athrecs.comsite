@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 309 unique sources. Only 36 are enabled; the other 273 remain
+The registry contains 319 unique sources. Only 36 are enabled; the other 283 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 309 sources create exactly one source job;
+- all 319 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 273 sources are retained as blocked jobs with their reason;
+- the other 283 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -116,3 +116,29 @@ Added Trackie after inspecting its current index and downloadable reports. The s
 The Lakefront listing redirects to SportMadeSimple / AthleticLIVE. Its observed
 result URL is registered separately, disabled pending dynamic-table and rights
 review; no result rows were obtained from that destination.
+
+## US timing sources, 23 October 2026
+
+Registered Xact Results and Laurel Results after opening selected organiser-linked
+result tables. Both remain disabled for automated collection. Xact hash routes
+require explicit edition-title checks; Laurel table columns take precedence over
+generated recap text. Existing Laurel event-catalogue links are retained without
+duplicating event identities. Individual athlete evidence remains in the private
+backend and is not included in this source inventory.
+
+## Fixture, result and athlete research coverage, 23 October 2026
+
+| Source | Checked use |
+| --- | --- |
+| RunSignup | Fixtures, official result cards and athlete research |
+| World Athletics | Calendar fixtures, official results and athlete profiles; enabled worker remains event-only |
+| Athlinks, ChronoTrack, Xact and Laurel | Result tables and athlete-result research |
+| McCourt Foundation, Mountains 2 Beach and Eugene Marathon | Organiser fixtures and official result-archive discovery |
+| Abbott World Marathon Majors | Rankings, athlete result research and qualifying-race discovery |
+| Instagram | Manual athlete-post leads; primary results still required |
+
+The existing RunSignup, Athlinks, ChronoTrack and World Athletics rows were enriched,
+not duplicated. The existing managed WMM source identifier is reused. Existing
+Eugene, Instagram and WMM event-inventory hosts are retained. All seven new CSV
+entries remain disabled; registration does not start recurring scans or verify a
+participant. The source list contains no athlete-specific private evidence.
