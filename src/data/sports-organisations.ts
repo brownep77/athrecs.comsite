@@ -542,16 +542,32 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["https://www.usaswimming.org/about-usas/governance/rules-policies"],
     ["world-aquatics"],
   ),
-  federation(
-    "usa-triathlon",
-    "USA Triathlon",
-    "United States",
-    multisport,
-    "https://www.usatriathlon.org/",
-    "US governing body for triathlon and multisport, including duathlon.",
-    ["https://www.usatriathlon.org/multisport/rules"],
-    ["world-triathlon"],
-  ),
+  record({
+  "slug": "usa-triathlon",
+  "name": "USA Triathlon",
+  "country": "United States",
+  "jurisdiction": "United States",
+  "territories": [
+    "United States"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.usatriathlon.org/",
+  "summary": "US governing body for triathlon and multisport, including duathlon.",
+  "sources": [
+    "https://www.usatriathlon.org/multisport/rules",
+    "https://triathlon.org/members/usa-triathlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [],
+  "detail": "World Triathlon lists this body as USA Triathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "athletics-canada",
     "Athletics Canada",
@@ -582,19 +598,33 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["https://www.swimming.ca/about-us/"],
     ["world-aquatics"],
   ),
-  federation(
-    "triathlon-canada",
-    "Triathlon Canada",
-    "Canada",
-    multisport,
+  record({
+  "slug": "triathlon-canada",
+  "name": "Triathlon Canada",
+  "country": "Canada",
+  "jurisdiction": "Canada",
+  "territories": [
+    "Canada"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://www.triathloncanada.com/",
+  "summary": "Canada’s triathlon governing body, also supporting duathlon and related multisport.",
+  "sources": [
     "https://www.triathloncanada.com/",
-    "Canada’s triathlon governing body, also supporting duathlon and related multisport.",
-    [
-      "https://www.triathloncanada.com/",
-      "https://www.triathloncanada.com/athletes-teams/multisport/",
-    ],
-    ["world-triathlon"],
-  ),
+    "https://www.triathloncanada.com/athletes-teams/multisport/",
+    "https://triathlon.org/members/triathlon-canada",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [],
+  "detail": "World Triathlon lists this body as Triathlon Canada and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "australian-athletics",
     "Australian Athletics",
@@ -1330,17 +1360,38 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["CBDA", "Brazilian Aquatic Sports Confederation"],
   ),
-  federation(
-    "brazilian-triathlon",
-    "Confederação Brasileira de Triathlon",
-    "Brazil",
-    multisport,
+  record({
+  "slug": "brazilian-triathlon",
+  "name": "Confederação Brasileira de Triathlon",
+  "country": "Brazil",
+  "jurisdiction": "Brazil",
+  "territories": [
+    "Brazil"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://cbtri.org.br/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Brazil.",
+  "sources": [
+    "https://cbtri.org.br/sobre-nos/",
     "https://cbtri.org.br/",
-    "National federation for triathlon and related multisport, including duathlon, in Brazil.",
-    ["https://cbtri.org.br/sobre-nos/", "https://cbtri.org.br/"],
-    ["world-triathlon"],
-    ["CBTri", "Brasil Triathlon", "Brazilian Triathlon Confederation"],
-  ),
+    "https://triathlon.org/members/brazilian-triathlon-federation",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "CBTri",
+    "Brasil Triathlon",
+    "Brazilian Triathlon Confederation",
+    "Triathlon Brasil"
+  ],
+  "detail": "World Triathlon lists this body as Triathlon Brasil and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   record({
     slug: "european-athletics",
     name: "European Athletics",
@@ -2110,17 +2161,34 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["BASA"],
   ),
-  federation(
-    "bermuda-triathlon",
-    "Bermuda Triathlon Association",
-    "Bermuda",
-    ["triathlon"],
+  record({
+  "slug": "bermuda-triathlon",
+  "name": "Bermuda Triathlon Association",
+  "country": "Bermuda",
+  "jurisdiction": "Bermuda",
+  "territories": [
+    "Bermuda"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://bermudatriathlon.com/",
+  "summary": "Bermuda’s triathlon association, supporting the sport and national representation through World Triathlon.",
+  "sources": [
+    "https://triathlon.org/members/bermuda-triathlon-federation",
     "https://bermudatriathlon.com/",
-    "Bermuda’s triathlon association, supporting the sport and national representation through World Triathlon.",
-    ["https://triathlon.org/members/bermuda-triathlon-federation", "https://bermudatriathlon.com/"],
-    ["world-triathlon"],
-    ["BTA", "Bermuda Triathlon Federation"],
-  ),
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "BTA",
+    "Bermuda Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Bermuda Triathlon Association and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   record({
     slug: "scottish-hill-runners",
     name: "Scottish Hill Runners",
@@ -2563,17 +2631,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     detail:
       "The official link opens World Aquatics’ member directory; find Mexico for the current federation. Aquatics México is distinct from the former Mexican Swimming Federation, which World Aquatics expelled in November 2024. No standalone website is listed in the current member entry.",
   },
-  federation(
-    "mexican-triathlon",
-    "Federación Mexicana de Triatlón",
-    "Mexico",
-    multisport,
+  record({
+  "slug": "mexican-triathlon",
+  "name": "Federación Mexicana de Triatlón",
+  "country": "Mexico",
+  "jurisdiction": "Mexico",
+  "territories": [
+    "Mexico"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triatlon.com.mx/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Mexico.",
+  "sources": [
+    "https://triathlon.org/members/federacion-mexicana-de-triatlon",
     "https://triatlon.com.mx/",
-    "National federation for triathlon and related multisport, including duathlon, in Mexico.",
-    ["https://triathlon.org/members/federacion-mexicana-de-triatlon", "https://triatlon.com.mx/"],
-    ["world-triathlon"],
-    ["Mexican Triathlon Federation", "FMTRI"],
-  ),
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Mexican Triathlon Federation",
+    "FMTRI",
+    "Federacion Mexicana de Triatlon AC"
+  ],
+  "detail": "World Triathlon lists this body as Federacion Mexicana de Triatlon AC and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "korean-athletics",
     "Korea Association of Athletics Federations",
@@ -2720,22 +2807,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["CADDA", "Argentine Aquatic Sports Confederation"],
   ),
-  {
-    ...federation(
-      "argentine-triathlon",
-      "Federación Argentina de Triatlón",
-      "Argentina",
-      ["triathlon"],
-      "https://triathlon.org/members/federacion-argentina-de-triatlon",
-      "National federation for triathlon in Argentina, recognised by World Triathlon.",
-      ["https://triathlon.org/members/federacion-argentina-de-triatlon"],
-      ["world-triathlon"],
-      ["FAT", "Argentine Triathlon Federation"],
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens Argentina’s World Triathlon member profile, with current federation contact information and its listed social channel.",
-  },
+  record({
+  "slug": "argentine-triathlon",
+  "name": "Federación Argentina de Triatlón",
+  "country": "Argentina",
+  "jurisdiction": "Argentina",
+  "territories": [
+    "Argentina"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/federacion-argentina-de-triatlon",
+  "summary": "National federation for triathlon in Argentina, recognised by World Triathlon.",
+  "sources": [
+    "https://triathlon.org/members/federacion-argentina-de-triatlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "FAT",
+    "Argentine Triathlon Federation",
+    "Federación Argentina de Triatlon"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens Argentina’s World Triathlon member profile, with current federation contact information and its listed social channel. World Triathlon lists this body as Federación Argentina de Triatlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "chilean-athletics",
     "Federación Atlética de Chile",
@@ -2769,21 +2869,37 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["FECHIDA", "Chilean Aquatic Sports Federation"],
   ),
-  federation(
-    "chilean-triathlon",
-    "Federación Chilena de Triatlón",
-    "Chile",
-    multisport,
+  record({
+  "slug": "chilean-triathlon",
+  "name": "Federación Chilena de Triatlón",
+  "country": "Chile",
+  "jurisdiction": "Chile",
+  "territories": [
+    "Chile"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triatlonchile.cl/",
+  "summary": "National federation for triathlon and related multisport, including duathlon, in Chile.",
+  "sources": [
+    "https://triathlon.org/members/federacion-chilena-de-triathlon",
     "https://triatlonchile.cl/",
-    "National federation for triathlon and related multisport, including duathlon, in Chile.",
-    [
-      "https://triathlon.org/members/federacion-chilena-de-triathlon",
-      "https://triatlonchile.cl/",
-      "https://triatlonchile.cl/noticias/convocatoria-internacional-age-group-2026-id-22500",
-    ],
-    ["world-triathlon"],
-    ["FECHITRI", "Chilean Triathlon Federation"],
-  ),
+    "https://triatlonchile.cl/noticias/convocatoria-internacional-age-group-2026-id-22500",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "FECHITRI",
+    "Chilean Triathlon Federation",
+    "Federacion Chilena de Triatlón"
+  ],
+  "detail": "World Triathlon lists this body as Federacion Chilena de Triatlón and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   {
     ...federation(
       "colombian-athletics",
@@ -2828,22 +2944,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["world-aquatics"],
     ["FECNA", "Colombian Swimming Federation"],
   ),
-  {
-    ...federation(
-      "colombian-triathlon",
-      "Federación Colombiana de Triatlón",
-      "Colombia",
-      ["triathlon"],
-      "https://triathlon.org/members/federacion-colombiana-de-triathlon",
-      "National federation for triathlon in Colombia, recognised by World Triathlon.",
-      ["https://triathlon.org/members/federacion-colombiana-de-triathlon"],
-      ["world-triathlon"],
-      ["FEDECOLTRI", "Colombian Triathlon Federation"],
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens Colombia’s World Triathlon member profile. The standalone federation website was displaying a maintenance page at the time of review.",
-  },
+  record({
+  "slug": "colombian-triathlon",
+  "name": "Federación Colombiana de Triatlón",
+  "country": "Colombia",
+  "jurisdiction": "Colombia",
+  "territories": [
+    "Colombia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/federacion-colombiana-de-triathlon",
+  "summary": "National federation for triathlon in Colombia, recognised by World Triathlon.",
+  "sources": [
+    "https://triathlon.org/members/federacion-colombiana-de-triathlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "FEDECOLTRI",
+    "Colombian Triathlon Federation",
+    "Federacion Colombiana de Triathlon"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens Colombia’s World Triathlon member profile. The standalone federation website was displaying a maintenance page at the time of review. World Triathlon lists this body as Federacion Colombiana de Triathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "malaysian-athletics",
     "Malaysia Athletics Federation",
@@ -3689,23 +3818,34 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["ASAJ", "Jamaica Swimming", "Jamaican Aquatics"],
     "2026-10-23",
   ),
-  {
-    ...federation(
-      "jamaican-triathlon",
-      "Jamaica Triathlon Association",
-      "Jamaica",
-      ["triathlon"],
-      "https://triathlon.org/members/jamaican-triathlon-federation",
-      "National federation for triathlon in Jamaica.",
-      ["https://triathlon.org/members/jamaican-triathlon-federation"],
-      ["world-triathlon"],
-      ["JTA", "Jamaican Triathlon"],
-      "2026-10-23",
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens Jamaica’s World Triathlon member profile, which lists the association and its social channel.",
-  },
+  record({
+  "slug": "jamaican-triathlon",
+  "name": "Jamaica Triathlon Association",
+  "country": "Jamaica",
+  "jurisdiction": "Jamaica",
+  "territories": [
+    "Jamaica"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/jamaican-triathlon-federation",
+  "summary": "National federation for triathlon in Jamaica.",
+  "sources": [
+    "https://triathlon.org/members/jamaican-triathlon-federation",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "JTA",
+    "Jamaican Triathlon"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens Jamaica’s World Triathlon member profile, which lists the association and its social channel. World Triathlon lists this body as Jamaica Triathlon Association and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "barbadian-athletics",
     "Athletics Association of Barbados Inc.",
@@ -3756,22 +3896,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     detail:
       "The official link opens World Aquatics’ national-federation directory. Find Barbados for the association’s entry and contact information.",
   },
-  federation(
-    "barbadian-triathlon",
-    "Barbados Federation of Island Triathletes",
-    "Barbados",
-    ["triathlon", "duathlon"],
+  record({
+  "slug": "barbadian-triathlon",
+  "name": "Barbados Federation of Island Triathletes",
+  "country": "Barbados",
+  "jurisdiction": "Barbados",
+  "territories": [
+    "Barbados"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triathlonbarbados.com/",
+  "summary": "National federation for triathlon and duathlon in Barbados.",
+  "sources": [
+    "https://triathlon.org/members/barbados-federation-of-island-triathletes",
     "https://triathlonbarbados.com/",
-    "National federation for triathlon and duathlon in Barbados.",
-    [
-      "https://triathlon.org/members/barbados-federation-of-island-triathletes",
-      "https://triathlonbarbados.com/",
-      "https://triathlonbarbados.com/services/duathlon-championships/",
-    ],
-    ["world-triathlon"],
-    ["BFIT", "Barbados Triathlon"],
-    "2026-10-23",
-  ),
+    "https://triathlonbarbados.com/services/duathlon-championships/",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "BFIT",
+    "Barbados Triathlon"
+  ],
+  "detail": "World Triathlon lists this body as Barbados Federation of Island Triathletes and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   {
     ...federation(
       "bahamian-athletics",
@@ -3829,18 +3983,34 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["Bahamas Aquatics", "Bahamas Aquatic Federation", "Bahamas Swimming Federation"],
     "2026-10-23",
   ),
-  federation(
-    "bahamian-triathlon",
-    "Bahamas Triathlon Association",
-    "Bahamas",
-    ["triathlon"],
+  record({
+  "slug": "bahamian-triathlon",
+  "name": "Bahamas Triathlon Association",
+  "country": "Bahamas",
+  "jurisdiction": "Bahamas",
+  "territories": [
+    "Bahamas"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://www.bahamastriathlon.org/",
+  "summary": "National federation for triathlon in Bahamas.",
+  "sources": [
+    "https://triathlon.org/members/bahamas-triathlon",
     "https://www.bahamastriathlon.org/",
-    "National federation for triathlon in Bahamas.",
-    ["https://triathlon.org/members/bahamas-triathlon", "https://www.bahamastriathlon.org/"],
-    ["world-triathlon"],
-    ["BTA", "Bahamian Triathlon"],
-    "2026-10-23",
-  ),
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "BTA",
+    "Bahamian Triathlon"
+  ],
+  "detail": "World Triathlon lists this body as Bahamas Triathlon Association and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "trinidad-tobago-athletics",
     "National Association of Athletics Administrations of Trinidad and Tobago",
@@ -3889,22 +4059,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["ASATT", "Trinidad & Tobago Swimming", "Aquatic Sports Association of Trinidad & Tobago"],
     "2026-10-23",
   ),
-  federation(
-    "trinidad-tobago-triathlon",
-    "Trinidad and Tobago Triathlon Federation",
-    "Trinidad and Tobago",
-    ["triathlon", "duathlon"],
+  record({
+  "slug": "trinidad-tobago-triathlon",
+  "name": "Trinidad and Tobago Triathlon Federation",
+  "country": "Trinidad and Tobago",
+  "jurisdiction": "Trinidad and Tobago",
+  "territories": [
+    "Trinidad and Tobago"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triathlon.co.tt/",
+  "summary": "National federation for triathlon and duathlon in Trinidad and Tobago.",
+  "sources": [
+    "https://triathlon.org/members/trinidad-tobago-triathlon-association",
     "https://triathlon.co.tt/",
-    "National federation for triathlon and duathlon in Trinidad and Tobago.",
-    [
-      "https://triathlon.org/members/trinidad-tobago-triathlon-association",
-      "https://triathlon.co.tt/",
-      "https://triathlon.co.tt/events",
-    ],
-    ["world-triathlon"],
-    ["TTTF", "Trinidad & Tobago Triathlon Federation"],
-    "2026-10-23",
-  ),
+    "https://triathlon.co.tt/events",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "TTTF",
+    "Trinidad & Tobago Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Trinidad & Tobago Triathlon Federation and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "cypriot-athletics",
     "Cyprus Amateur Athletic Association",
@@ -4132,23 +4316,37 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["FUN", "Uruguayan Swimming Federation"],
     "2026-10-23",
   ),
-  {
-    ...federation(
-      "uruguayan-triathlon",
-      "Unión de Triatlón del Uruguay",
-      "Uruguay",
-      ["triathlon"],
-      "https://triathlon.org/members/uruguay-triathlon-federation",
-      "National federation for triathlon in Uruguay.",
-      ["https://triathlon.org/members/uruguay-triathlon-federation"],
-      ["world-triathlon"],
-      ["UTU", "UTriU", "Uruguay Triathlon Union", "Unión de Triathlon del Uruguay"],
-      "2026-10-23",
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens Uruguay’s World Triathlon member profile. The older standalone address currently presents a different amateur organisation, so this directory links to the national federation’s member profile.",
-  },
+  record({
+  "slug": "uruguayan-triathlon",
+  "name": "Unión de Triatlón del Uruguay",
+  "country": "Uruguay",
+  "jurisdiction": "Uruguay",
+  "territories": [
+    "Uruguay"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/uruguay-triathlon-federation",
+  "summary": "National federation for triathlon in Uruguay.",
+  "sources": [
+    "https://triathlon.org/members/uruguay-triathlon-federation",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "UTU",
+    "UTriU",
+    "Uruguay Triathlon Union",
+    "Unión de Triathlon del Uruguay",
+    "Union de Triatlón del Uruguay"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens Uruguay’s World Triathlon member profile. The older standalone address currently presents a different amateur organisation, so this directory links to the national federation’s member profile. World Triathlon lists this body as Union de Triatlón del Uruguay and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
 
   federation(
     "bolivian-athletics",
@@ -4203,23 +4401,34 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     detail:
       "The official link opens World Aquatics’ national-federation directory. Find Bolivia for the swimming federation’s entry. Its older standalone website now redirects to a social page.",
   },
-  {
-    ...federation(
-      "bolivian-triathlon",
-      "Federación Boliviana de Triatlón",
-      "Bolivia",
-      ["triathlon"],
-      "https://triathlon.org/members/bolivian-triathlon-federation",
-      "National federation for triathlon in Bolivia.",
-      ["https://triathlon.org/members/bolivian-triathlon-federation"],
-      ["world-triathlon"],
-      ["Bolivian Triathlon Federation", "Bolivia Triathlon"],
-      "2026-10-23",
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens Bolivia’s World Triathlon member profile and federation contact information.",
-  },
+  record({
+  "slug": "bolivian-triathlon",
+  "name": "Federación Boliviana de Triatlón",
+  "country": "Bolivia",
+  "jurisdiction": "Bolivia",
+  "territories": [
+    "Bolivia"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/bolivian-triathlon-federation",
+  "summary": "National federation for triathlon in Bolivia.",
+  "sources": [
+    "https://triathlon.org/members/bolivian-triathlon-federation",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Bolivian Triathlon Federation",
+    "Bolivia Triathlon"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens Bolivia’s World Triathlon member profile and federation contact information. World Triathlon lists this body as Federación Boliviana de Triatlón and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "costa-rican-athletics",
     "Federación Costarricense de Atletismo",
@@ -4256,22 +4465,38 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["FECODA", "Costa Rican Swimming Federation", "Costa Rica Aquatics"],
     "2026-10-23",
   ),
-  federation(
-    "costa-rican-triathlon",
-    "Federación Unida de Triatlón",
-    "Costa Rica",
-    ["triathlon", "duathlon"],
+  record({
+  "slug": "costa-rican-triathlon",
+  "name": "Federación Unida de Triatlón",
+  "country": "Costa Rica",
+  "jurisdiction": "Costa Rica",
+  "territories": [
+    "Costa Rica"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://feutri.org/",
+  "summary": "National federation for triathlon and duathlon in Costa Rica.",
+  "sources": [
+    "https://triathlon.org/members/federacion-unida-de-triatlon-costa-rica",
     "https://feutri.org/",
-    "National federation for triathlon and duathlon in Costa Rica.",
-    [
-      "https://triathlon.org/members/federacion-unida-de-triatlon-costa-rica",
-      "https://feutri.org/",
-      "https://feutri.org/tienda/afiliaciones/1-dia-licencia-para-duatlon/",
-    ],
-    ["world-triathlon"],
-    ["FEUTRI", "Federación Unida de Triatlón Costa Rica", "Costa Rica Triathlon"],
-    "2026-10-23",
-  ),
+    "https://feutri.org/tienda/afiliaciones/1-dia-licencia-para-duatlon/",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "FEUTRI",
+    "Federación Unida de Triatlón Costa Rica",
+    "Costa Rica Triathlon",
+    "Federacion Unida de Triatlon Costa Rica"
+  ],
+  "detail": "World Triathlon lists this body as Federacion Unida de Triatlon Costa Rica and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   {
     ...federation(
       "dominican-republic-athletics",
@@ -4333,23 +4558,34 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ],
     "2026-10-23",
   ),
-  {
-    ...federation(
-      "dominican-republic-triathlon",
-      "Federación Dominicana de Triatlón",
-      "Dominican Republic",
-      ["triathlon"],
-      "https://triathlon.org/members/federacion-dominicana-de-triathlon",
-      "National federation for triathlon in Dominican Republic.",
-      ["https://triathlon.org/members/federacion-dominicana-de-triathlon"],
-      ["world-triathlon"],
-      ["FEDOTRI", "Dominican Republic Triathlon Federation"],
-      "2026-10-23",
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens the Dominican Republic’s World Triathlon member profile and federation contact information.",
-  },
+  record({
+  "slug": "dominican-republic-triathlon",
+  "name": "Federación Dominicana de Triatlón",
+  "country": "Dominican Republic",
+  "jurisdiction": "Dominican Republic",
+  "territories": [
+    "Dominican Republic"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/federacion-dominicana-de-triathlon",
+  "summary": "National federation for triathlon in Dominican Republic.",
+  "sources": [
+    "https://triathlon.org/members/federacion-dominicana-de-triathlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "FEDOTRI",
+    "Dominican Republic Triathlon Federation"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens the Dominican Republic’s World Triathlon member profile and federation contact information. World Triathlon lists this body as Federación Dominicana de Triatlón and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "ecuadorian-athletics",
     "Federación Ecuatoriana de Atletismo",
@@ -4390,23 +4626,34 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["FENA", "Ecuadorian Swimming Federation"],
     "2026-10-23",
   ),
-  {
-    ...federation(
-      "ecuadorian-triathlon",
-      "Federación Ecuatoriana de Triatlón",
-      "Ecuador",
-      ["triathlon"],
-      "https://triathlon.org/members/federacion-ecuatoriana-de-triatlon",
-      "National federation for triathlon in Ecuador.",
-      ["https://triathlon.org/members/federacion-ecuatoriana-de-triatlon"],
-      ["world-triathlon"],
-      ["TRIFED", "Ecuadorian Triathlon Federation"],
-      "2026-10-23",
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens Ecuador’s World Triathlon member profile. The standalone address listed there could not be accessed during this review.",
-  },
+  record({
+  "slug": "ecuadorian-triathlon",
+  "name": "Federación Ecuatoriana de Triatlón",
+  "country": "Ecuador",
+  "jurisdiction": "Ecuador",
+  "territories": [
+    "Ecuador"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://triathlon.org/members/federacion-ecuatoriana-de-triatlon",
+  "summary": "National federation for triathlon in Ecuador.",
+  "sources": [
+    "https://triathlon.org/members/federacion-ecuatoriana-de-triatlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "TRIFED",
+    "Ecuadorian Triathlon Federation"
+  ],
+  "websiteKind": "member-directory",
+  "detail": "The official link opens Ecuador’s World Triathlon member profile. The standalone address listed there could not be accessed during this review. World Triathlon lists this body as Federación Ecuatoriana de Triatlón and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "guatemalan-athletics",
     "Federación Deportiva Nacional de Atletismo de Guatemala",
@@ -4447,22 +4694,37 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["FENADEGUA", "Guatemalan Swimming Federation", "Guatemala Swimming"],
     "2026-10-23",
   ),
-  federation(
-    "guatemalan-triathlon",
-    "Federación Deportiva Nacional de Triatlón de Guatemala",
-    "Guatemala",
-    ["triathlon", "duathlon"],
+  record({
+  "slug": "guatemalan-triathlon",
+  "name": "Federación Deportiva Nacional de Triatlón de Guatemala",
+  "country": "Guatemala",
+  "jurisdiction": "Guatemala",
+  "territories": [
+    "Guatemala"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon",
+    "duathlon"
+  ],
+  "website": "https://triatlon.gt/",
+  "summary": "National federation for triathlon and duathlon in Guatemala.",
+  "sources": [
+    "https://triathlon.org/members/federacion-nacional-de-triatlon-de-guatemala",
     "https://triatlon.gt/",
-    "National federation for triathlon and duathlon in Guatemala.",
-    [
-      "https://triathlon.org/members/federacion-nacional-de-triatlon-de-guatemala",
-      "https://triatlon.gt/",
-      "https://app.triatlon.gt/events/duatlon-nueva-santa-rosa-2026",
-    ],
-    ["world-triathlon"],
-    ["Guatemalan Triathlon Federation", "Guatemala Triathlon"],
-    "2026-10-23",
-  ),
+    "https://app.triatlon.gt/events/duatlon-nueva-santa-rosa-2026",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "Guatemalan Triathlon Federation",
+    "Guatemala Triathlon",
+    "Federación deportiva nacional de Triatlón Guatemala"
+  ],
+  "detail": "World Triathlon lists this body as Federación deportiva nacional de Triatlón Guatemala and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   {
     ...federation(
       "panamanian-athletics",
@@ -4513,21 +4775,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["FPN", "Panama Swimming Federation", "Panamanian Swimming Federation"],
     "2026-10-23",
   ),
-  federation(
-    "panamanian-triathlon",
-    "Unión de Triatlón de Panamá",
-    "Panama",
-    ["triathlon"],
+  record({
+  "slug": "panamanian-triathlon",
+  "name": "Unión de Triatlón de Panamá",
+  "country": "Panama",
+  "jurisdiction": "Panama",
+  "territories": [
+    "Panama"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://www.triathlonpanama.com/",
+  "summary": "National federation for triathlon in Panama.",
+  "sources": [
+    "https://triathlon.org/members/union-de-triatlon-de-panama",
     "https://www.triathlonpanama.com/",
-    "National federation for triathlon in Panama.",
-    [
-      "https://triathlon.org/members/union-de-triatlon-de-panama",
-      "https://www.triathlonpanama.com/",
-    ],
-    ["world-triathlon"],
-    ["UTP", "Panama Triathlon Union", "Union de Triatlon de Panama"],
-    "2026-10-23",
-  ),
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "UTP",
+    "Panama Triathlon Union",
+    "Union de Triatlon de Panama"
+  ],
+  "detail": "World Triathlon lists this body as Unión de Triatlón de Panamá and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "paraguayan-athletics",
     "Federación Paraguaya de Atletismo",
@@ -4573,18 +4849,35 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["FEPADA", "FEPANA", "Federación Paraguaya de Natación", "Paraguayan Swimming Federation"],
     "2026-10-23",
   ),
-  federation(
-    "paraguayan-triathlon",
-    "Federación Paraguaya de Triathlon",
-    "Paraguay",
-    ["triathlon"],
+  record({
+  "slug": "paraguayan-triathlon",
+  "name": "Federación Paraguaya de Triathlon",
+  "country": "Paraguay",
+  "jurisdiction": "Paraguay",
+  "territories": [
+    "Paraguay"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://fepatri.org.py/",
+  "summary": "National federation for triathlon in Paraguay.",
+  "sources": [
+    "https://triathlon.org/members/asociacion-paraguaya-de-triathlon",
     "https://fepatri.org.py/",
-    "National federation for triathlon in Paraguay.",
-    ["https://triathlon.org/members/asociacion-paraguaya-de-triathlon", "https://fepatri.org.py/"],
-    ["world-triathlon"],
-    ["FEPATRI", "Asociación Paraguaya de Triathlon", "Paraguayan Triathlon Federation"],
-    "2026-10-23",
-  ),
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "FEPATRI",
+    "Asociación Paraguaya de Triathlon",
+    "Paraguayan Triathlon Federation"
+  ],
+  "detail": "World Triathlon lists this body as Federación Paraguaya de Triathlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
   federation(
     "peruvian-athletics",
     "Federación Deportiva Peruana de Atletismo",
@@ -4630,21 +4923,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["FDNDA", "FDPN", "Federación Deportiva Peruana de Natación", "Peruvian Swimming Federation"],
     "2026-10-23",
   ),
-  federation(
-    "peruvian-triathlon",
-    "Federación Peruana de Triatlón",
-    "Peru",
-    ["triathlon"],
+  record({
+  "slug": "peruvian-triathlon",
+  "name": "Federación Peruana de Triatlón",
+  "country": "Peru",
+  "jurisdiction": "Peru",
+  "territories": [
+    "Peru"
+  ],
+  "type": "national",
+  "sports": [
+    "triathlon"
+  ],
+  "website": "https://fedenatri.pe/",
+  "summary": "National federation for triathlon in Peru.",
+  "sources": [
+    "https://triathlon.org/members/federacion-deportiva-nacional-de-triatlon",
     "https://fedenatri.pe/",
-    "National federation for triathlon in Peru.",
-    [
-      "https://triathlon.org/members/federacion-deportiva-nacional-de-triatlon",
-      "https://fedenatri.pe/",
-    ],
-    ["world-triathlon"],
-    ["FEDENATRI", "Federación Deportiva Nacional de Triatlón", "Peruvian Triathlon Federation"],
-    "2026-10-23",
-  ),
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ],
+  "aliases": [
+    "FEDENATRI",
+    "Federación Deportiva Nacional de Triatlón",
+    "Peruvian Triathlon Federation",
+    "Federacion Peruana de Triatlon"
+  ],
+  "detail": "World Triathlon lists this body as Federacion Peruana de Triatlon and reports affiliated status (checked 23 October 2026)."
+}, "2026-10-23"),
 
   record({
   "slug": "chinese-triathlon",
@@ -9368,6 +9676,366 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   "sources": [
     "https://triathlon.org/members/yemen-aquatics",
     "https://asia.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "el-salvador-triathlon",
+  "name": "Federación Salvadoreña de Triatlón",
+  "type": "national",
+  "country": "El Salvador",
+  "jurisdiction": "El Salvador",
+  "territories": [
+    "El Salvador"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for El Salvador, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federacion-salvadorena-de-triatlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federacion-salvadorena-de-triatlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "saint-kitts-and-nevis-triathlon",
+  "name": "Saint Kitts & Nevis Triathlon Federation",
+  "type": "national",
+  "country": "Saint Kitts and Nevis",
+  "jurisdiction": "Saint Kitts and Nevis",
+  "territories": [
+    "Saint Kitts and Nevis"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Saint Kitts and Nevis, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/saint-kitts-nevis-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/saint-kitts-nevis-triathlon-federation",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "puerto-rico-triathlon",
+  "name": "Federación Puertorriqueña Triatlón PR",
+  "type": "national",
+  "country": "Puerto Rico",
+  "jurisdiction": "Puerto Rico",
+  "territories": [
+    "Puerto Rico"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Puerto Rico, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federacion-puertoriquena-de-triatlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federacion-puertoriquena-de-triatlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "honduras-triathlon",
+  "name": "Honduras Triathlon Federation",
+  "type": "national",
+  "country": "Honduras",
+  "jurisdiction": "Honduras",
+  "territories": [
+    "Honduras"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Honduras, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/honduras-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/honduras-triathlon-federation",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "venezuela-triathlon",
+  "name": "Federación Venezolana de Triatlón",
+  "type": "national",
+  "country": "Venezuela",
+  "jurisdiction": "Venezuela",
+  "territories": [
+    "Venezuela"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Venezuela, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federacion-venezolana-de-triatlon-fevetri",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federacion-venezolana-de-triatlon-fevetri",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "virgin-islands-triathlon",
+  "name": "Virgin Islands Triathlon",
+  "type": "national",
+  "country": "Virgin Islands",
+  "jurisdiction": "Virgin Islands",
+  "territories": [
+    "Virgin Islands"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Virgin Islands, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/virgin-islands-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/virgin-islands-triathlon-federation",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "aruba-triathlon",
+  "name": "Aruba Triathlon Association",
+  "type": "national",
+  "country": "Aruba",
+  "jurisdiction": "Aruba",
+  "territories": [
+    "Aruba"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Aruba, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/aruba-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/aruba-triathlon-federation",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cuba-triathlon",
+  "name": "Federación Cubana de Triatlón",
+  "type": "national",
+  "country": "Cuba",
+  "jurisdiction": "Cuba",
+  "territories": [
+    "Cuba"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Cuba, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federacion-cubana-de-triatlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federacion-cubana-de-triatlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "belize-triathlon",
+  "name": "Belize National Triathlon Association",
+  "type": "national",
+  "country": "Belize",
+  "jurisdiction": "Belize",
+  "territories": [
+    "Belize"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Belize, listed by World Triathlon and Americas Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/belize-national-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/belize-national-triathlon-association",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "antigua-and-barbuda-triathlon",
+  "name": "Antigua and Barbuda Triathlon Association",
+  "type": "national",
+  "country": "Antigua and Barbuda",
+  "jurisdiction": "Antigua and Barbuda",
+  "territories": [
+    "Antigua and Barbuda"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Antigua and Barbuda, listed by World Triathlon and Americas Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/antigua-and-barbuda-triathlon-association",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/antigua-and-barbuda-triathlon-association",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "haiti-triathlon",
+  "name": "Union de Haitienne Triathlon",
+  "type": "national",
+  "country": "Haiti",
+  "jurisdiction": "Haiti",
+  "territories": [
+    "Haiti"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Haiti, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/union-de-haitienne-triathlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/union-de-haitienne-triathlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cayman-islands-triathlon",
+  "name": "Cayman Islands Triathlon Association",
+  "type": "national",
+  "country": "Cayman Islands",
+  "jurisdiction": "Cayman Islands",
+  "territories": [
+    "Cayman Islands"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Cayman Islands, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/cayman-islands-triathlon-federation",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/cayman-islands-triathlon-federation",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "suriname-triathlon",
+  "name": "Surinaamse Triathlon Unie",
+  "type": "national",
+  "country": "Suriname",
+  "jurisdiction": "Suriname",
+  "territories": [
+    "Suriname"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Suriname, listed by World Triathlon and Americas Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/surinaamse-triathlon-unie",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/surinaamse-triathlon-unie",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "nicaragua-triathlon",
+  "name": "Federación Nicaraguense de Triatlón",
+  "type": "national",
+  "country": "Nicaragua",
+  "jurisdiction": "Nicaragua",
+  "territories": [
+    "Nicaragua"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Nicaragua, listed by World Triathlon and Americas Triathlon.",
+  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/federacion-nicaraguense-de-triatlon",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/federacion-nicaraguense-de-triatlon",
+    "https://americas.triathlon.org/national-federations"
+  ],
+  "related": [
+    "world-triathlon"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "grenada-triathlon",
+  "name": "Triathlon Grenada",
+  "type": "national",
+  "country": "Grenada",
+  "jurisdiction": "Grenada",
+  "territories": [
+    "Grenada"
+  ],
+  "sports": [
+    "triathlon"
+  ],
+  "summary": "National triathlon member body for Grenada, listed by World Triathlon and Americas Triathlon.",
+  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
+  "website": "https://triathlon.org/members/triathlon-grenada",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://triathlon.org/members/triathlon-grenada",
+    "https://americas.triathlon.org/national-federations"
   ],
   "related": [
     "world-triathlon"
