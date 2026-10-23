@@ -286,7 +286,7 @@ for (const country of ["Austria", "Finland", "Norway", "Poland", "India", "Singa
     assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
   }
 }
-assert.equal(names({ country: "Kenya", type: "national" }).length, 3);
+assert.equal(names({ country: "Kenya", type: "national" }).length, 4);
 assert.deepEqual(names({ country: "India", sport: "duathlon" }), ["indian-triathlon"]);
 assert.deepEqual(names({ country: "Bermuda", sport: "bmx" }), []);
 assert.deepEqual(names({ country: "Bermuda", sport: "track-cycling" }), []);

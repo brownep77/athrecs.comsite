@@ -6724,4 +6724,708 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
+  record({
+  "slug": "gambia-cycling",
+  "name": "GAMBIA CYCLING ASSOCIATION",
+  "type": "national",
+  "country": "Gambia",
+  "jurisdiction": "Gambia",
+  "territories": [
+    "Gambia"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Gambia, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "ghana-cycling",
+  "name": "GHANA CYCLING FEDERATION",
+  "type": "national",
+  "country": "Ghana",
+  "jurisdiction": "Ghana",
+  "territories": [
+    "Ghana"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Ghana, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "guinea-cycling",
+  "name": "FÉDÉRATION GUINEENNE DE CYCLISME",
+  "type": "national",
+  "country": "Guinea",
+  "jurisdiction": "Guinea",
+  "territories": [
+    "Guinea"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Guinea, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "guinea-bissau-cycling",
+  "name": "FEDERACAO DE CICLISMO DE GUINE-BISSAU",
+  "type": "national",
+  "country": "Guinea-Bissau",
+  "jurisdiction": "Guinea-Bissau",
+  "territories": [
+    "Guinea-Bissau"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Guinea-Bissau, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "cote-divoire-cycling",
+  "name": "FÉDÉRATION IVOIRIENNE DE CYCLISME",
+  "type": "national",
+  "country": "Côte d’Ivoire",
+  "jurisdiction": "Côte d’Ivoire",
+  "territories": [
+    "Côte d’Ivoire"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Côte d’Ivoire, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "kenya-cycling",
+  "name": "KENYA CYCLING FEDERATION",
+  "type": "national",
+  "country": "Kenya",
+  "jurisdiction": "Kenya",
+  "territories": [
+    "Kenya"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Kenya, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "lesotho-cycling",
+  "name": "LESOTHO CYCLING ASSOCIATION",
+  "type": "national",
+  "country": "Lesotho",
+  "jurisdiction": "Lesotho",
+  "territories": [
+    "Lesotho"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Lesotho, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "liberia-cycling",
+  "name": "LIBERIA NATIONAL CYCLING ASSOCIATION",
+  "type": "national",
+  "country": "Liberia",
+  "jurisdiction": "Liberia",
+  "territories": [
+    "Liberia"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Liberia, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "libya-cycling",
+  "name": "LIBYAN CYCLING FEDERATION",
+  "type": "national",
+  "country": "Libya",
+  "jurisdiction": "Libya",
+  "territories": [
+    "Libya"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Libya, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "madagascar-cycling",
+  "name": "FÉDÉRATION MALGACHE DE CYCLISME",
+  "type": "national",
+  "country": "Madagascar",
+  "jurisdiction": "Madagascar",
+  "territories": [
+    "Madagascar"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Madagascar, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "malawi-cycling",
+  "name": "CYCLING FEDERATION OF MALAWI",
+  "type": "national",
+  "country": "Malawi",
+  "jurisdiction": "Malawi",
+  "territories": [
+    "Malawi"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Malawi, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "mali-cycling",
+  "name": "FÉDÉRATION MALIENNE DE CYCLISME",
+  "type": "national",
+  "country": "Mali",
+  "jurisdiction": "Mali",
+  "territories": [
+    "Mali"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Mali, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "mauritania-cycling",
+  "name": "FÉDÉRATION MAURITANIENNE DE CYCLISME",
+  "type": "national",
+  "country": "Mauritania",
+  "jurisdiction": "Mauritania",
+  "territories": [
+    "Mauritania"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Mauritania, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "morocco-cycling",
+  "name": "FÉDÉRATION ROYALE MAROCAINE DE CYCLISME",
+  "type": "national",
+  "country": "Morocco",
+  "jurisdiction": "Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Morocco, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "mozambique-cycling",
+  "name": "FEDERAÇÄO MOÇAMBICANA DE CICLISMO",
+  "type": "national",
+  "country": "Mozambique",
+  "jurisdiction": "Mozambique",
+  "territories": [
+    "Mozambique"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Mozambique, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "namibia-cycling",
+  "name": "NAMIBIAN CYCLING FEDERATION",
+  "type": "national",
+  "country": "Namibia",
+  "jurisdiction": "Namibia",
+  "territories": [
+    "Namibia"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Namibia, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "niger-cycling",
+  "name": "FÉDÉRATION NIGERIENNE DE CYCLISME",
+  "type": "national",
+  "country": "Niger",
+  "jurisdiction": "Niger",
+  "territories": [
+    "Niger"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Niger, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "nigeria-cycling",
+  "name": "CYCLING FEDERATION OF NIGERIA",
+  "type": "national",
+  "country": "Nigeria",
+  "jurisdiction": "Nigeria",
+  "territories": [
+    "Nigeria"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Nigeria, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "rwanda-cycling",
+  "name": "FÉDÉRATION RWANDAISE DE CYCLISME",
+  "type": "national",
+  "country": "Rwanda",
+  "jurisdiction": "Rwanda",
+  "territories": [
+    "Rwanda"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Rwanda, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "sao-tome-and-principe-cycling",
+  "name": "FÉDÉRATION SANTOMEENE DE CYCLISME",
+  "type": "national",
+  "country": "Sao Tome and Principe",
+  "jurisdiction": "Sao Tome and Principe",
+  "territories": [
+    "Sao Tome and Principe"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Sao Tome and Principe, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "senegal-cycling",
+  "name": "FÉDÉRATION SÉNÉGALAISE DE CYCLISME",
+  "type": "national",
+  "country": "Senegal",
+  "jurisdiction": "Senegal",
+  "territories": [
+    "Senegal"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Senegal, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "seychelles-cycling",
+  "name": "UNION CYCLISTE DES SEYCHELLES",
+  "type": "national",
+  "country": "Seychelles",
+  "jurisdiction": "Seychelles",
+  "territories": [
+    "Seychelles"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Seychelles, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "sierra-leone-cycling",
+  "name": "SIERRA LEONE NATIONAL CYCLING ASSOCIATION",
+  "type": "national",
+  "country": "Sierra Leone",
+  "jurisdiction": "Sierra Leone",
+  "territories": [
+    "Sierra Leone"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Sierra Leone, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "somalia-cycling",
+  "name": "SOMALI CYCLING FEDERATION",
+  "type": "national",
+  "country": "Somalia",
+  "jurisdiction": "Somalia",
+  "territories": [
+    "Somalia"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Somalia, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "sudan-cycling",
+  "name": "SUDAN CYCLING FEDERATION",
+  "type": "national",
+  "country": "Sudan",
+  "jurisdiction": "Sudan",
+  "territories": [
+    "Sudan"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Sudan, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "south-sudan-cycling",
+  "name": "South Sudan Cycling Federation",
+  "type": "national",
+  "country": "South Sudan",
+  "jurisdiction": "South Sudan",
+  "territories": [
+    "South Sudan"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for South Sudan, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "togo-cycling",
+  "name": "FÉDÉRATION TOGOLAISE DE CYCLISME",
+  "type": "national",
+  "country": "Togo",
+  "jurisdiction": "Togo",
+  "territories": [
+    "Togo"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Togo, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tunisia-cycling",
+  "name": "FÉDÉRATION TUNISIENNE DE CYCLISME",
+  "type": "national",
+  "country": "Tunisia",
+  "jurisdiction": "Tunisia",
+  "territories": [
+    "Tunisia"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Tunisia, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "uganda-cycling",
+  "name": "UGANDA CYCLING ASSOCIATION",
+  "type": "national",
+  "country": "Uganda",
+  "jurisdiction": "Uganda",
+  "territories": [
+    "Uganda"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Uganda, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "tanzania-cycling",
+  "name": "CYCLING ASSOCIATION OF TANZANIA",
+  "type": "national",
+  "country": "Tanzania",
+  "jurisdiction": "Tanzania",
+  "territories": [
+    "Tanzania"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Tanzania, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "zambia-cycling",
+  "name": "CYCLING ASSOCIATION OF ZAMBIA",
+  "type": "national",
+  "country": "Zambia",
+  "jurisdiction": "Zambia",
+  "territories": [
+    "Zambia"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Zambia, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
+  record({
+  "slug": "zimbabwe-cycling",
+  "name": "CYCLING ZIMBABWE",
+  "type": "national",
+  "country": "Zimbabwe",
+  "jurisdiction": "Zimbabwe",
+  "territories": [
+    "Zimbabwe"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "National cycling body for Zimbabwe, listed by the Union Cycliste Internationale.",
+  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+  ],
+  "related": [
+    "uci"
+  ]
+}, "2026-10-23"),
 ];
