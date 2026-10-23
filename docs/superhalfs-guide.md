@@ -180,3 +180,34 @@ Desktop visual inspection and a 390px mobile iframe confirmed the layout, workin
 section navigation, a single-column seasonal layout and no document horizontal
 overflow (375px content width and scroll width). The temporary QA page and local
 preview-host setting were removed before creating the release commit.
+
+## Lisbon start recheck and country flags — 23 October 2026
+
+The start time was rechecked at the owner's request. The organiser's
+[edition-specific programme](https://maratonaclubedeportugal.com/en/corrida-marco/edp-lisbon-half-marathon/)
+still lists **09:20** on 7 March 2027. Article 1 of the currently linked
+[2027 regulations](https://maratonaclubedeportugal.com/wp-content/uploads/REGULAMENTO_EDP_MEIA_MARATONA_DE_LISBOA_2027_EN.docx.pdf)
+and the [official runner FAQ](https://maratonaclubedeportugal.com/en/faqs-edp-lisbon-half-marathon/)
+state **09:30**. Both times refer to Lisbon local time. No opened source provides
+a dated correction that explicitly resolves the discrepancy. The regulations
+also leave detailed times and starting boxes for later publication.
+
+The previous display was "Awaiting organiser clarification". It now reads
+"TBC — official sources disagree", with both published times and their sources
+explained beside the start field. The current programme remains identified
+separately from the regulations and FAQ. Do not present either time as an
+unqualified confirmed start or infer a ten-minute elite/mass split: the regulations
+describe simultaneous elite and mass starts at separate locations.
+
+Country flags reuse the site's existing CountryFlag component in the dates table
+and all six race-card headers. Country names remain readable as text, and the
+adjacent flags are decorative for assistive technology. Cardiff uses the Welsh
+flag (GB-WLS) while retaining the existing "Wales, United Kingdom" label and GB
+country code.
+
+Validation: TypeScript, focused ESLint, formatting, whitespace checks and the
+development build passed. Browser inspection confirmed all six table flag
+assets loaded, the correct Welsh asset was used, and Lisbon's source discrepancy
+was visible beside its start field. A 390px mobile preview had 375px document and
+scroll widths, with the flag and explanatory note contained in the race card.
+The temporary mobile QA page and preview-host configuration were removed.

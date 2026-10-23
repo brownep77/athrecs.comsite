@@ -21,10 +21,12 @@ export type SuperHalfsRace = {
   city: string;
   country: string;
   countryCode: string;
+  countryFlagCode?: string;
   date: string;
   dateLabel: string;
   dateStatus: "confirmed" | "provisional";
   start: string;
+  startNote?: string;
   timeZone: string;
   cutoff: string;
   cutoffBasis: string;
@@ -52,7 +54,9 @@ export const SUPERHALFS_RACES: readonly SuperHalfsRace[] = [
     date: "2027-03-07",
     dateLabel: "Sunday 7 March 2027",
     dateStatus: "confirmed",
-    start: "Awaiting organiser clarification",
+    start: "TBC — official sources disagree",
+    startNote:
+      "The 7 March 2027 programme lists 09:20. The 2027 regulations and official runner FAQ say 09:30. Confirm the final start and your wave with the organiser before race day.",
     timeZone: "Europe/Lisbon",
     cutoff: "3 hours",
     cutoffBasis: "Published duration; confirm the final wave and closing timetable.",
@@ -62,7 +66,7 @@ export const SUPERHALFS_RACES: readonly SuperHalfsRace[] = [
     entry:
       "The 2027 ballot has closed. Follow the organiser for any remaining official entry routes and their availability.",
     practical:
-      "Bib collection is advertised for 4–6 March at Centro de Congressos de Lisboa, with no race-day collection or bag-drop service. The event agenda says 09:20 and the regulations say 09:30; the start time remains unresolved here.",
+      "Bib collection is advertised for 4–6 March at Centro de Congressos de Lisboa, with no race-day collection or bag-drop service. Read the organiser’s final travel and start-area instructions before travelling.",
     elite:
       "The 2027 regulations list a men’s half-marathon mark under 1:05 and a women’s benchmark of 1:20, achieved within the previous three years at a recognised event. Confirm your evidence, acceptance and start location with the organiser.",
     website: "https://maratonaclubedeportugal.com/en/corrida-marco/edp-lisbon-half-marathon/",
@@ -82,6 +86,10 @@ export const SUPERHALFS_RACES: readonly SuperHalfsRace[] = [
       {
         label: "2027 regulations (PDF)",
         url: "https://maratonaclubedeportugal.com/wp-content/uploads/REGULAMENTO_EDP_MEIA_MARATONA_DE_LISBOA_2027_EN.docx.pdf",
+      },
+      {
+        label: "Official runner FAQ and start guidance",
+        url: "https://maratonaclubedeportugal.com/en/faqs-edp-lisbon-half-marathon/",
       },
     ],
   },
@@ -205,6 +213,7 @@ export const SUPERHALFS_RACES: readonly SuperHalfsRace[] = [
     city: "Cardiff",
     country: "Wales, United Kingdom",
     countryCode: "GB",
+    countryFlagCode: "GB-WLS",
     date: "2027-10-03",
     dateLabel: "Sunday 3 October 2027",
     dateStatus: "confirmed",

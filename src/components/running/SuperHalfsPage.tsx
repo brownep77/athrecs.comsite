@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ArrowUpRight, CalendarDays, Flag, Gauge, Medal, Users } from "lucide-react";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
 import {
   SUPERHALFS_BERLIN_FAQ,
   SUPERHALFS_CARDIFF_RACE_INFO,
@@ -19,6 +20,17 @@ const linkStyle =
   "font-semibold text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 const sectionStyle = "scroll-mt-24 space-y-5";
 const headingStyle = "font-display text-2xl font-semibold tracking-tight text-fg md:text-3xl";
+
+function RaceCountry({ race }: { race: SuperHalfsRace }) {
+  return (
+    <span className="inline-flex items-center gap-2">
+      <span aria-hidden="true" className="inline-flex shrink-0">
+        <CountryFlag country={race.countryFlagCode ?? race.countryCode} />
+      </span>
+      <span>{race.country}</span>
+    </span>
+  );
+}
 
 function OfficialLink({ href, children }: { href: string; children: ReactNode }) {
   return (
@@ -41,7 +53,9 @@ function RaceCard({ race, index }: { race: SuperHalfsRace; index: number }) {
           <span aria-hidden="true" className="font-display text-3xl font-semibold text-accent/60">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <p className="text-sm font-semibold text-fg">{race.country}</p>
+          <p className="text-sm font-semibold text-fg">
+            <RaceCountry race={race} />
+          </p>
         </div>
         <span className="rounded-md border border-border px-2 py-1 text-xs font-semibold text-muted">
           {race.countryCode}
@@ -65,6 +79,9 @@ function RaceCard({ race, index }: { race: SuperHalfsRace; index: number }) {
             <dd className="mt-1 text-xs text-muted">
               {race.timeZone.replace("Europe/", "")} local time
             </dd>
+            {race.startNote && (
+              <dd className="mt-2 text-xs leading-relaxed text-muted">{race.startNote}</dd>
+            )}
           </div>
           <div>
             <dt className="text-xs font-semibold uppercase tracking-wide text-muted">
@@ -369,7 +386,9 @@ export function SuperHalfsPage() {
                       {race.city}
                     </a>
                   </th>
-                  <td className="px-5 py-4 text-muted">{race.country}</td>
+                  <td className="px-5 py-4 text-muted">
+                    <RaceCountry race={race} />
+                  </td>
                   <td className="whitespace-nowrap px-5 py-4 text-fg">
                     <time dateTime={race.date}>{race.dateLabel}</time>
                   </td>
