@@ -108,6 +108,10 @@ export const legacyFixtureAliases: Readonly<Record<string, string>> = {
 
 /** Public aliases whose imported database rows and references must be retained. */
 export const retainedFixtureAliases: Readonly<Record<string, string>> = {
+  // Organiser programmes checked 23 October 2026; same date, distance and venue.
+  // Keep all imported rows/dependants; expose one page and redirect old links.
+  "green-thumb-fenland-10": "ea-runevents-fenland-10-wisbech",
+  "lingwood-santa-dash": "santa-dash-lingwood",
   "spar-budapest-international-marathon": "budapest-marathon",
   // Official venue URLs and locations checked 10 October 2026. Keep both
   // database identities and dependencies; public links resolve to the older

@@ -282,7 +282,7 @@ function AdminResultLinksPage() {
           <li>Exact event slug + date + distance match only; no fuzzy attachment.</li>
           <li>Canonical URL duplicates are skipped within the file and against the database.</li>
           <li>Multiple different providers may be published for the same edition.</li>
-          <li>RunABC and every other held registry domain remain blocked pending review.</li>
+          <li>Held registry domains remain blocked pending review.</li>
           <li>Only event-level links are stored; this importer does not copy participant rows.</li>
         </ul>
       </section>

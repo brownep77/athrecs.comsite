@@ -1,3 +1,4 @@
+import { publicCatalogueContent } from "./public-catalogue-content";
 import { withheldFixtureDateKeys } from "@/data/fixture-date-reviews";
 import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
 import { profileReadMiddleware } from "@/lib/auth/profile-access";
@@ -447,7 +448,8 @@ export const listEvents = createServerFn({ method: "GET" })
         ),
       )
       .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.name))
-      .slice(0, limit);
+      .slice(0, limit)
+      .map(publicCatalogueContent);
   });
 
 export const getEventBySlug = createServerFn({ method: "GET" })
@@ -670,26 +672,31 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         (
           select ed.event_date::text from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_date,
         (
           select ed.distance_code from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_distance,
         (
           select ed.status from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_status,
         (
           select ed.start_time from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_start_time,
         (
           select count(*)::int from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         ) as upcoming_count,
         (
           select count(*)::int from editions ed
@@ -709,6 +716,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         (
           select min(ed.event_date) from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         ) asc nulls last
       limit 8
     `;
@@ -726,16 +734,18 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       };
     });
 
-    return twoOceansRacePresentation(
-      {
-        event,
-        groups,
-        distances: distances.map((d) => d.distance_code),
-        upcoming,
-        past: editions.filter((e) => e.event_date < today),
-        related,
-      },
-      slug,
+    return publicCatalogueContent(
+      twoOceansRacePresentation(
+        {
+          event,
+          groups,
+          distances: distances.map((d) => d.distance_code),
+          upcoming,
+          past: editions.filter((e) => e.event_date < today),
+          related,
+        },
+        slug,
+      ),
     );
   });
 
@@ -789,10 +799,12 @@ export const getEditionResults = createServerFn({ method: "GET" })
       order by (lower(r.status) in ('finished', 'fin')) desc, r.finish_time_seconds asc nulls last, a.display_name asc, r.id
       limit ${IS_RUNRECS_SITE ? null : PUBLIC_EDITION_PREVIEW_LIMIT}
     `;
-    return rows.map(({ result_details, ...row }) => ({
-      ...row,
-      details: readResultDetails(result_details),
-    }));
+    return rows
+      .map(({ result_details, ...row }) => ({
+        ...row,
+        details: readResultDetails(result_details),
+      }))
+      .map(publicCatalogueContent);
   });
 
 export const listAthletes = createServerFn({ method: "GET" })
@@ -1507,6 +1519,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       from events event
       join editions edition on edition.event_id = event.id
       where edition.event_date >= ${today}::date
+        and not ((event.slug || '|' || edition.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         and not (event.slug = any(${retainedFixtureAliasSlugs}::text[]))
     ),
     fixture_updates as (
@@ -1608,21 +1621,23 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       published_at desc
   `;
 
-  return rows.map((row): HomeSportUpdate => ({
-    id: row.id,
-    kind: row.kind,
-    sport: row.sport,
-    eventSlug: row.event_slug,
-    eventName: row.event_name,
-    country: row.country,
-    county: row.county,
-    city: row.city,
-    eventDate: row.event_date,
-    distance: row.distance,
-    status: row.status,
-    providerName: row.provider_name,
-    publishedAt: row.published_at,
-  }));
+  return rows
+    .map((row): HomeSportUpdate => ({
+      id: row.id,
+      kind: row.kind,
+      sport: row.sport,
+      eventSlug: row.event_slug,
+      eventName: row.event_name,
+      country: row.country,
+      county: row.county,
+      city: row.city,
+      eventDate: row.event_date,
+      distance: row.distance,
+      status: row.status,
+      providerName: row.provider_name,
+      publishedAt: row.published_at,
+    }))
+    .map(publicCatalogueContent);
 });
 
 /** Live DB backend + row counts for admin diagnosis (Neon vs ephemeral PGLite). */
@@ -1956,7 +1971,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         (a, b) =>
           a.event_date.localeCompare(b.event_date) || a.event_name.localeCompare(b.event_name),
       );
-    return filtered.slice(0, limit).map(twoOceansCalendarPresentation);
+    return filtered.slice(0, limit).map(twoOceansCalendarPresentation).map(publicCatalogueContent);
   });
 
 // -- Admin / catalogue imports --

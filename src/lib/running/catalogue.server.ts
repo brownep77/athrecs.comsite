@@ -1,3 +1,4 @@
+import { publicCatalogueContent } from "../athrecs/public-catalogue-content";
 import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews";
 import { getSql } from "../db";
 import { ensureAthrecsSeeded } from "../athrecs/seed.server";
@@ -398,5 +399,6 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
       ),
     )
     .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.name))
-    .slice(0, limit);
+    .slice(0, limit)
+    .map(publicCatalogueContent);
 }

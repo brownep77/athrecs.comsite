@@ -1,3 +1,4 @@
+import { publicCatalogueContent } from "./public-catalogue-content";
 import type { Sql } from "../db";
 import { fixtureTimeZone } from "./fixture-presentation";
 import { resolveCountry } from "./countries";
@@ -81,36 +82,40 @@ export async function queryRacePlaceRows(
       ...(options.eventIds ? [options.eventIds] : []),
     ],
   );
-  return rows.map((race) => ({
-    ...race,
-    editions: race.editions
-      .map((edition): PlaceEdition =>
-        Array.isArray(edition)
-          ? { date: edition[0], distance: edition[1], status: edition[2], endDate: edition[3] }
-          : edition,
-      )
-      .filter((edition) => !isReviewedFixturePlaceholder(race.slug, edition.date, edition.distance))
-      .map((edition) => {
-        const detail = FIXTURE_DETAILS[`${race.slug}|${edition.date}`];
-        const checked = detail?.starts[edition.distance];
-        return {
-          ...edition,
-          startTime: checked
-            ? checked.time
-            : edition.sourceUrl && !/runabc\.co\.uk/i.test(edition.sourceUrl)
-              ? edition.startTime
-              : null,
-          startNote: checked?.note ?? null,
-          startLabel: checked?.label ?? null,
-          sourceUrl: checked?.sourceUrl ?? detail?.sourceUrl ?? edition.sourceUrl,
-          checkedAt: detail?.checkedAt ?? null,
-          checkedCity: detail?.place?.city ?? detail?.place?.town ?? null,
-        };
-      }),
-    timeZone:
-      checkedZones.get(race.slug) ??
-      fixtureTimeZone(resolveCountry({ country: race.country }).name),
-  }));
+  return rows
+    .map((race) => ({
+      ...race,
+      editions: race.editions
+        .map((edition): PlaceEdition =>
+          Array.isArray(edition)
+            ? { date: edition[0], distance: edition[1], status: edition[2], endDate: edition[3] }
+            : edition,
+        )
+        .filter(
+          (edition) => !isReviewedFixturePlaceholder(race.slug, edition.date, edition.distance),
+        )
+        .map((edition) => {
+          const detail = FIXTURE_DETAILS[`${race.slug}|${edition.date}`];
+          const checked = detail?.starts[edition.distance];
+          return {
+            ...edition,
+            startTime: checked
+              ? checked.time
+              : edition.sourceUrl && !/runabc\.co\.uk/i.test(edition.sourceUrl)
+                ? edition.startTime
+                : null,
+            startNote: checked?.note ?? null,
+            startLabel: checked?.label ?? null,
+            sourceUrl: checked?.sourceUrl ?? detail?.sourceUrl ?? edition.sourceUrl,
+            checkedAt: detail?.checkedAt ?? null,
+            checkedCity: detail?.place?.city ?? detail?.place?.town ?? null,
+          };
+        }),
+      timeZone:
+        checkedZones.get(race.slug) ??
+        fixtureTimeZone(resolveCountry({ country: race.country }).name),
+    }))
+    .map(publicCatalogueContent);
 }
 
 /** One bounded metadata entry per instance. Failed reads never poison the cache.

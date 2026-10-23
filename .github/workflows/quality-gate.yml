@@ -56,6 +56,9 @@ jobs:
       - name: Verify World Athletics refresh preservation
         run: node scripts/verify-world-athletics-refresh.mjs
 
+      - name: Verify public catalogue source policy and reviewed duplicates
+        run: node --experimental-strip-types scripts/verify-public-catalogue-content.mjs
+
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
 
