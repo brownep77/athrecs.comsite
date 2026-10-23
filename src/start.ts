@@ -1,4 +1,5 @@
 import { createMiddleware, createStart } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import {
   ATHLETE_INDEXING_HEADER,
   ATHLETE_UNAVAILABLE_HEADER,
@@ -48,6 +49,40 @@ const memberProfileResponses = createMiddleware().server(async ({ pathname, next
   return result;
 });
 
+const diagnosticResponses = createMiddleware().server(async ({ pathname, next }) => {
+  if (pathname.startsWith("/api/auth/") || pathname === "/api/diagnostics") return next();
+  const started = performance.now();
+  let status = 500;
+  try {
+    const result = await next();
+    status = result.response.status;
+    return result;
+  } catch (error) {
+    const thrownStatus =
+      error instanceof Response
+        ? error.status
+        : error && typeof error === "object" && "statusCode" in error
+          ? error.statusCode
+          : error && typeof error === "object" && "status" in error
+            ? error.status
+            : undefined;
+    status =
+      typeof thrownStatus === "number" && thrownStatus >= 300 && thrownStatus <= 599
+        ? thrownStatus
+        : 500;
+    throw error;
+  } finally {
+    if (status >= 500) {
+      try {
+        const { recordServerFailure } = await import("./lib/auth/server-diagnostics.server");
+        await recordServerFailure(getRequest(), status, performance.now() - started);
+      } catch {
+        console.warn("[server-diagnostics] Capture unavailable");
+      }
+    }
+  }
+});
+
 export const startInstance = createStart(() => ({
-  requestMiddleware: [memberProfileResponses],
+  requestMiddleware: [diagnosticResponses, memberProfileResponses],
 }));

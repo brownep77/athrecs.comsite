@@ -10,6 +10,7 @@ import { authEmailConfigured, sendAthrecsAuthEmail } from "./email.server";
 import { emailAndPasswordEnabled } from "./email-password";
 import { GROK_PROVIDERS } from "./providers";
 import { pgliteDialect } from "./pglite-dialect";
+import { captureCreatedSession } from "./access-diagnostics.server";
 import {
   GROK_ISSUER_DEFAULT,
   PREVIEW_ALLOWED_HOSTS,
@@ -335,6 +336,7 @@ export const auth = betterAuth({
     session: {
       create: {
         after: async (session, context) => {
+          captureCreatedSession(session);
           try {
             const { getSql } = await import("../db");
             const { recordClientLogin } = await import("./client-login.server");

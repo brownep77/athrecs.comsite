@@ -5,8 +5,10 @@ import {
   createRootRoute,
   useRouterState,
 } from "@tanstack/react-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, QueryCache, MutationCache } from "@tanstack/react-query";
+import { reportBrowserDiagnostic } from "@/lib/browser-diagnostics";
 import { AthleteAuthDialog } from "@/components/auth/AthleteAuthDialog";
+import { BrowserDiagnostics } from "@/components/auth/BrowserDiagnostics";
 import { AppShell } from "@/components/layout/AppShell";
 import { isSiteLanguage } from "@/lib/athrecs/country-sites";
 import {
@@ -19,6 +21,16 @@ import {
 import appCss from "@/styles.css?url";
 
 const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error) => {
+      reportBrowserDiagnostic("data_error", error);
+    },
+  }),
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      reportBrowserDiagnostic("data_error", error);
+    },
+  }),
   defaultOptions: {
     queries: { staleTime: 30_000, retry: 1 },
   },
@@ -77,6 +89,7 @@ function RootComponent() {
             <Outlet />
           </AppShell>
           <AthleteAuthDialog />
+          <BrowserDiagnostics />
         </QueryClientProvider>
         <Scripts />
       </body>

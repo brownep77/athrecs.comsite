@@ -212,6 +212,18 @@ function AthletePrivacyPage() {
         </NoticeSection>
 
         <NoticeSection title="Sign-in and recognised browser records">
+          <p className="mb-3">
+            We also record failed authentication requests, verification and recovery requests,
+            sign-out requests and technical error categories to help resolve access problems.
+            An email entered during a failed attempt is unverified and does not prove who made it.
+            Diagnostics include the website and page category, response status and duration,
+            browser version, release reference, and a support reference. Browser error reports
+            include a broad screen-size category and whether the browser reports being online.
+            We do not store passwords, verification codes, session tokens, request bodies,
+            page query strings, raw error messages or stack traces in these diagnostics.
+            Browser reports are limited to five per page load and rate-limited using a short-lived,
+            keyed network reference; raw IP addresses are not stored in this log.
+          </p>
           <p>
             To support your account and investigate access problems, authorised staff can see your
             email verification status, successful sign-in counts, sign-in times and methods,
@@ -227,7 +239,12 @@ function AthletePrivacyPage() {
             recognised browser records expire after 90 days and are removed on the next sign-in or
             staff client-data visit. Overall counts remain while the account exists. Deleting the
             account also deletes its login history and recognised browser records. These records are
-            private and are not used for marketing.
+            private and are not used for marketing. Failed-attempt and error diagnostics also
+            expire after 90 days and are removed on the next diagnostic capture or staff log
+            visit. Short-lived rate-limit references are removed after a day on the next such
+            request. Account deletion removes associated diagnostics and failed attempts using
+            that account's current email. Browser reports can be missing if the network is
+            unavailable, the page cannot start, or reporting limits are reached.
           </p>
         </NoticeSection>
 

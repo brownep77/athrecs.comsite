@@ -1,4 +1,5 @@
 import { ClientData } from "@/components/staff/ClientData";
+import { AccessLog } from "@/components/staff/AccessLog";
 import { RegisteredAthletes } from "@/components/staff/RegisteredAthletes";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -21,9 +22,13 @@ import {
 export const Route = createFileRoute("/admin/athlete-accounts")({
   validateSearch: (
     search: Record<string, unknown>,
-  ): { view?: "client-data" | "saved-details" } => ({
+  ): { view?: "client-data" | "saved-details" | "login-log" } => ({
     view:
-      search.view === "client-data" || search.view === "saved-details" ? search.view : undefined,
+      search.view === "client-data" ||
+      search.view === "saved-details" ||
+      search.view === "login-log"
+        ? search.view
+        : undefined,
   }),
   head: () => ({
     meta: [
@@ -41,6 +46,13 @@ function AdminAthleteAccountsPage() {
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap gap-2" aria-label="Account views">
+        <Button
+          variant={view === "login-log" ? "default" : "secondary"}
+          aria-pressed={view === "login-log"}
+          onClick={() => void navigate({ search: { view: "login-log" } })}
+        >
+          Login & diagnostics
+        </Button>
         <Button
           variant={!view ? "default" : "secondary"}
           aria-pressed={!view}
@@ -63,7 +75,9 @@ function AdminAthleteAccountsPage() {
           Client data
         </Button>
       </div>
-      {view === "client-data" ? (
+      {view === "login-log" ? (
+        <AccessLog />
+      ) : view === "client-data" ? (
         <ClientData />
       ) : details ? (
         <SavedAthleteAccounts />
