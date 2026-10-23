@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   competitionContext,
   historyAwards,
+  historyCompetition,
   recordedAwards,
 } from "../src/lib/athrecs/competition-awards.ts";
 import { buildCompetitionHonours } from "../src/lib/athrecs/competition-honours.ts";
@@ -102,6 +103,37 @@ assert(pendingHonours.some((award) => award.kind === "gold"));
 assert(pendingHonours.every((award) => award.evidence.every((e) => !e.verified)));
 assert.equal(historyAwards(row({ verificationStatus: "unverified" }))[0].verified, false);
 assert.equal(historyAwards(row())[0].verified, true);
+for (const meeting of ["Boston Marathon", "Chicago Marathon"]) {
+  const yearOnly = row({
+    meeting,
+    discipline: "Marathon",
+    date: "",
+    year: 2025,
+    yearLabel: "2025",
+    performance: "3:12:34",
+    place: "4000",
+    labels: ["Road"],
+    verificationStatus: "unverified",
+  });
+  assert.equal(historyCompetition(yearOnly).tier, "major");
+  assert.equal(historyAwards(yearOnly)[0].kind, "finisher");
+  assert.match(historyAwards(yearOnly)[0].label, /Major marathon.*Finisher/);
+  assert.equal(historyAwards(yearOnly)[0].verified, false);
+  assert.equal(yearOnly.date, "", "Classification must preserve year-only precision");
+  assert.equal(historyCompetition({ ...yearOnly, yearLabel: "2024 / 2025" }).tier, "race");
+  assert.deepEqual(historyAwards({ ...yearOnly, year: 2199, yearLabel: "2199" }), []);
+}
+assert.equal(
+  historyCompetition(
+    row({
+      meeting: "Sydney Marathon",
+      discipline: "Marathon",
+      date: "",
+      year: 2024,
+    }),
+  ).tier,
+  "race",
+);
 assert(honours([row()]).every((award) => award.evidence.every((e) => e.verified)));
 assert.equal(honours([row({ performance: "DNF" })])[0].kind, "participation");
 assert.deepEqual(honours([row({ performance: "DNS" })]), []);

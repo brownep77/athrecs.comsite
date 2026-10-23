@@ -260,12 +260,12 @@ export function buildProfileAchievements(
     results: marathons.filter((result) => {
       const code = countryFlag(result.country).code;
       const country = code?.startsWith("GB-") ? "GB" : code;
-      const day = resultDay(result.eventDate);
+      const year = recordedCalendarYear(result, today);
       return (
         major.slugs.includes(result.eventSlug) &&
         country === major.country &&
-        day != null &&
-        (!major.fromYear || Number(result.eventDate.slice(0, 4)) >= major.fromYear) &&
+        year != null &&
+        (!major.fromYear || year >= major.fromYear) &&
         !/virtual|relay|multi|stage/i.test(
           `${result.eventName} ${result.distanceCode} ${result.surface}`,
         )
