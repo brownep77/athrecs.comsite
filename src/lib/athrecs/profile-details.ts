@@ -83,6 +83,18 @@ export function publishedSourceProfileDetails(
   if (
     sourcePublication.athleteId === athleteId &&
     sourcePublication.reviewedAt &&
+    dob &&
+    observed.dateOfBirth === dob &&
+    sourceApproved.dateOfBirth === dob &&
+    sourceApproved.birthdayVisibility === current.birthdayVisibility &&
+    current.birthdayVisibility !== "hidden"
+  ) {
+    details.birthdayVisibility = current.birthdayVisibility;
+    details.birthday = current.birthday;
+  }
+  if (
+    sourcePublication.athleteId === athleteId &&
+    sourcePublication.reviewedAt &&
     typeof observed.birthplace === "string" &&
     observed.birthplace.trim() &&
     observed.birthplace.length <= 160 &&

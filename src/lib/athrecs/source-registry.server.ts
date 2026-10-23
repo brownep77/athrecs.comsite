@@ -1,5 +1,7 @@
 import { createHash } from "node:crypto";
 import registryCsv from "../../../docs/source-registry/fixture-result-sources.csv?raw";
+import { SPORTS_ORGANISATIONS } from "../../data/sports-organisations";
+import { attachSourceOrganisations } from "./organisation-sources";
 import {
   buildBulkSourceJobManifest,
   parseFixtureSourceRegistry,
@@ -9,7 +11,10 @@ import {
 let registryCache: ReturnType<typeof parseFixtureSourceRegistry> | undefined;
 
 export function getFixtureSourceRegistry() {
-  registryCache ??= parseFixtureSourceRegistry(registryCsv);
+  registryCache ??= attachSourceOrganisations(
+    parseFixtureSourceRegistry(registryCsv),
+    SPORTS_ORGANISATIONS,
+  );
   return registryCache;
 }
 

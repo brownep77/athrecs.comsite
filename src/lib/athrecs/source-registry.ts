@@ -40,6 +40,16 @@ export type FixtureSource = {
     : Key extends "max_pages" | "rate_limit_seconds"
       ? number
       : string;
+} & {
+  organisations?: {
+    slug: string;
+    name: string;
+    aliases: string[];
+    country: string;
+    sports: string[];
+    membershipReference: boolean;
+    directoryCheckedAt: string;
+  }[];
 };
 
 export type BulkSourceJobManifest = FixtureSource & {

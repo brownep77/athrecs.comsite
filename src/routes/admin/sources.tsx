@@ -45,12 +45,13 @@ function AdminSourcesPage() {
   const countries = useMemo(
     () =>
       optionValues(
-        sources.flatMap((source) =>
-          source.country_focus
+        sources.flatMap((source) => [
+          ...source.country_focus
             .split("|")
             .map((value) => value.trim())
             .filter(Boolean),
-        ),
+          ...(source.organisations ?? []).map((body) => body.country),
+        ]),
       ),
     [sources],
   );
@@ -66,7 +67,8 @@ function AdminSourcesPage() {
         !source.country_focus
           .split("|")
           .map((value) => value.trim())
-          .includes(country)
+          .includes(country) &&
+        !source.organisations?.some((body) => body.country === country)
       ) {
         return false;
       }
@@ -80,6 +82,13 @@ function AdminSourcesPage() {
         source.rights_status,
         source.block_reason ?? "",
         source.notes,
+        ...(source.organisations ?? []).flatMap((body) => [
+          body.name,
+          body.slug,
+          body.country,
+          ...body.aliases,
+          ...body.sports,
+        ]),
       ].some((value) => value.toLowerCase().includes(needle));
     });
   }, [country, query, region, sources, status]);
@@ -94,12 +103,14 @@ function AdminSourcesPage() {
             Source administration
           </p>
           <h1 className="font-display text-2xl font-semibold text-fg md:text-3xl">
-            Fixture and result sources
+            Fixture, result and athlete sources
           </h1>
           <p className="max-w-3xl text-sm text-muted">
             Inspect registered websites, prepare verified fixture files and narrow the source list
-            by country or region. Registry approval is not a completed crawl. Held sources need
-            their rights and technical checks completed before automated collection.
+            by country or region. Federation links include membership references and websites
+            awaiting fixture, result and athlete-profile assessment. Registry approval is not a
+            completed crawl. Held sources need their rights and technical checks completed before
+            automated collection.
           </p>
         </div>
         <Button asChild variant="secondary">
@@ -111,7 +122,9 @@ function AdminSourcesPage() {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <Button asChild><a href="/admin/athlete-result-finder">Search sources for an athlete</a></Button>
+        <Button asChild>
+          <a href="/admin/athlete-result-finder">Search sources for an athlete</a>
+        </Button>
         <Button asChild variant="secondary">
           <Link to="/admin/fixture-import">Import verified fixture file</Link>
         </Button>
@@ -266,6 +279,34 @@ function AdminSourcesPage() {
                     </a>
                     <p className="mt-1 break-all text-xs text-subtle">{source.source_id}</p>
                     <p className="mt-1 text-xs text-muted">{source.source_section}</p>
+                    {!!source.organisations?.length && (
+                      <details className="mt-2 text-xs text-muted">
+                        <summary className="cursor-pointer">
+                          {source.organisations.length} linked organisation
+                          {source.organisations.length === 1 ? "" : "s"}
+                        </summary>
+                        <ul className="mt-2 space-y-2">
+                          {source.organisations.map((body) => (
+                            <li key={body.slug}>
+                              <Link
+                                to="/directory/$slug"
+                                params={{ slug: body.slug }}
+                                className="text-accent"
+                              >
+                                {body.name}
+                              </Link>
+                              <span className="block">
+                                {body.country} ·{" "}
+                                {body.membershipReference
+                                  ? "Membership reference"
+                                  : "Organisation website"}{" "}
+                                · Directory checked {body.directoryCheckedAt}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    )}
                   </td>
                   <td className="px-3 py-3">
                     {source.queue_status === "queued" ? (
