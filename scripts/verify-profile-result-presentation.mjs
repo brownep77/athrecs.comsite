@@ -359,6 +359,13 @@ try {
   );
   assert.equal($("tbody [data-profile-award=bronze]").length, 1);
   assert.equal($("tbody [data-profile-award=finisher]").length, 6);
+  $("tbody [data-profile-award=finisher]").each((_, medal) => {
+    assert.equal(
+      $(medal).find("span:not(.sr-only)").text(),
+      "Finisher",
+      "Every completion medal has a visible label, including historical and reported rows",
+    );
+  });
   assert.equal($("[aria-label='Result medal key']").length, 1);
   assert.equal(rows.filter((row) => row.includes("Verified")).length, 3);
   assert.equal(rows.filter((row) => row.includes("Unverified")).length, 11);

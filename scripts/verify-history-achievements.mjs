@@ -191,6 +191,57 @@ const marathonRows = [
 ];
 assert.equal(board(marathonRows).marathons.length, 2);
 assert.equal(board(marathonRows).completedMajors.length, 1);
+const yearOnlyMajors = ["Boston", "Chicago"].map((city) =>
+  row({
+    meeting: `${city} Marathon`,
+    eventSlug: `${city.toLowerCase()}-marathon`,
+    discipline: "Marathon",
+    performance: "3:12:34",
+    country: "US",
+    labels: ["Road"],
+    date: "",
+    year: 2025,
+    yearLabel: "2025",
+    verificationStatus: "unverified",
+  }),
+);
+const yearOnlyBoard = board(yearOnlyMajors);
+assert.equal(yearOnlyBoard.completedMajors.length, 2);
+assert.equal(yearOnlyBoard.milestones.find((m) => m.id === "majors").verified, false);
+assert.equal(yearOnlyBoard.marathonWeek.length, 0, "A year never supplies a date-window finish");
+assert(yearOnlyBoard.finishes.every((r) => r.eventDate === "2025"));
+for (const extra of [
+  { yearLabel: "2024 / 2025" },
+  { yearLabel: "Unknown" },
+  { year: 2199, yearLabel: "2199" },
+  { dateLabel: "2024 or 2025" },
+  { country: "GB" },
+  { profileExcluded: true },
+  { performance: "DNF" },
+])
+  assert.equal(
+    board([{ ...yearOnlyMajors[0], ...extra }]).completedMajors.length,
+    0,
+    JSON.stringify(extra),
+  );
+for (const [year, expected] of [
+  [2024, 0],
+  [2025, 1],
+]) {
+  assert.equal(
+    board([
+      {
+        ...yearOnlyMajors[0],
+        meeting: "Sydney Marathon",
+        eventSlug: "sydney-marathon",
+        country: "AU",
+        year,
+        yearLabel: String(year),
+      },
+    ]).completedMajors.length,
+    expected,
+  );
+}
 assert.equal(
   board([
     row({

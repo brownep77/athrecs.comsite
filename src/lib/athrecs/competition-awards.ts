@@ -231,10 +231,13 @@ export function recordedCompetition(result: ProfileResult): CompetitionContext {
   });
 }
 export function historyCompetition(row: SourcePerformance): CompetitionContext {
+  // An explicit racing year can identify a major without inventing a race day.
+  // Season ranges must not be reduced to their first year.
+  const year = row.yearLabel?.trim() || String(row.year);
   return competitionContext({
     event: row.meeting,
     eventSlug: row.eventSlug,
-    date: row.date,
+    date: row.date || (/^\d{4}$/.test(year) ? year : undefined),
     discipline: row.discipline,
     labels: row.labels,
     verified: resultVerification(row.verificationStatus, row.providerName).verified,

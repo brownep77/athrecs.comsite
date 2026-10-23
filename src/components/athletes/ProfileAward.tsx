@@ -113,9 +113,10 @@ export function ProfileAward({
     (tier === "olympic" || tier === "paralympic" || tier === "world");
   const ParticipationIcon =
     tier === "olympic" || tier === "paralympic" ? Flame : tier === "world" ? Globe2 : Flag;
+  const finisherLabel = completion && kind === "finisher" && !decorative;
   return (
     <span
-      className={`inline-flex shrink-0 ${colour}`}
+      className={`inline-flex shrink-0 items-center ${finisherLabel ? "gap-1 rounded border border-current/20 px-1.5 py-0.5" : ""} ${colour}`}
       data-profile-award={kind}
       data-award-tier={tier}
       aria-hidden={decorative || undefined}
@@ -137,6 +138,11 @@ export function ProfileAward({
         <Icon className="size-5" aria-hidden="true" />
       )}
       {!decorative ? <span className="sr-only">{description} · </span> : null}
+      {finisherLabel ? (
+        <span aria-hidden="true" className="text-[10px] font-medium">
+          Finisher
+        </span>
+      ) : null}
     </span>
   );
 }
