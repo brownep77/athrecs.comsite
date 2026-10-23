@@ -46,10 +46,24 @@ safety, calendar URL parameters, organiser overrides and future-year isolation.
 Mutation checks must reject deliberately broken offsets, ambiguous clocks, end
 dates, cancellation checks, UTF-8 folding, URL validation and unique identifiers.
 
-Browser checks use the actual React control and race schedule with synthetic data:
+Browser checks use server-rendered controls and the actual race schedule with synthetic data:
 provider links, downloaded ICS contents, changed distances, cancelled/invalid
-states, provisional dates, 320–1280px layouts, focus restoration, and recoverable
-file-download errors. They do not save anything to a personal calendar.
+states, provisional dates and 320–1280px layouts. The choices and server downloads
+must work with JavaScript disabled and delayed; opening before hydration must be
+preserved after hydration. They do not save anything to a personal calendar.
+
+A user reported that the calendar choices did not appear. The fully hydrated race
+page worked in a local production build, but the original dialog had no usable
+fallback before hydration or when scripts failed. The control now uses native
+`details`/`summary` and renders every provider choice on the server. Apple/ICS
+uses a normal POST form returning a calendar attachment, without Blob URLs or
+client download handlers. The endpoint validates public fields, rejects unavailable
+events and malformed/oversized bodies, and makes no database queries.
+
+`verify-event-calendar-built.mjs` exercises the production-built shared race page
+and guide page with scripts enabled and disabled, including real HTTP downloads.
+`verify-event-calendar-download.mjs` covers the download handler and bounded input.
+The specific cause in the reporting user's browser was not captured.
 
 Found and fixed before rollout: malformed-surrogate event identifiers crashed URI
 encoding; closing the initial dialog did not return keyboard focus to its trigger.

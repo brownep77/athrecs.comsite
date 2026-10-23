@@ -7,6 +7,7 @@ on:
       - 'src/components/races/**'
       - 'src/components/running/Road*Pages.tsx'
       - 'src/routes/races/$slug.tsx'
+      - 'src/routes/api/event-calendar.ts'
       - 'scripts/verify-event-calendar*'
       - '.github/workflows/event-calendar.yml'
   workflow_dispatch:
@@ -28,6 +29,7 @@ jobs:
       - run: npm ci
       - run: node scripts/verify-event-calendar.mjs --mutations
       - run: node scripts/verify-event-calendar-catalogue.mjs
+      - run: node scripts/verify-event-calendar-download.mjs
       - name: Independently parse exported calendar files
         run: |
           npm install --prefix "$RUNNER_TEMP/calendar-interop" --ignore-scripts --no-audit --no-fund ical.js@2.2.1
@@ -37,6 +39,8 @@ jobs:
       - run: node scripts/verify-event-calendar-browser.mjs
       # Compilation only: do not migrate, seed, email or publish production data.
       - run: npx vite build
+      - run: node scripts/copy-pglite-assets.mjs
+      - run: node scripts/verify-event-calendar-built.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

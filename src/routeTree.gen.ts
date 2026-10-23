@@ -64,6 +64,7 @@ import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalog
 import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scanner-worker'
 import { Route as ApiCollectionStatsWorkerRouteImport } from './routes/api/collection-stats-worker'
 import { Route as ApiDiagnosticsRouteImport } from './routes/api/diagnostics'
+import { Route as ApiEventCalendarRouteImport } from './routes/api/event-calendar'
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
 import { Route as ApiResultClaimAlertsRouteImport } from './routes/api/result-claim-alerts'
 import { Route as ApiSignupAlertsRouteImport } from './routes/api/signup-alerts'
@@ -389,6 +390,11 @@ const ApiDiagnosticsRoute = ApiDiagnosticsRouteImport.update({
   path: '/api/diagnostics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiEventCalendarRoute = ApiEventCalendarRouteImport.update({
+  id: '/api/event-calendar',
+  path: '/api/event-calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiRaceCollectorWorkerRoute = ApiRaceCollectorWorkerRouteImport.update({
   id: '/api/race-collector-worker',
   path: '/api/race-collector-worker',
@@ -676,6 +682,7 @@ export interface FileRoutesByFullPath {
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
+  '/api/event-calendar': typeof ApiEventCalendarRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
@@ -778,6 +785,7 @@ export interface FileRoutesByTo {
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
+  '/api/event-calendar': typeof ApiEventCalendarRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
@@ -881,6 +889,7 @@ export interface FileRoutesById {
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
+  '/api/event-calendar': typeof ApiEventCalendarRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
@@ -985,6 +994,7 @@ export interface FileRouteTypes {
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
+    | '/api/event-calendar'
     | '/api/race-collector-worker'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
@@ -1087,6 +1097,7 @@ export interface FileRouteTypes {
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
+    | '/api/event-calendar'
     | '/api/race-collector-worker'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
@@ -1189,6 +1200,7 @@ export interface FileRouteTypes {
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
+    | '/api/event-calendar'
     | '/api/race-collector-worker'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
@@ -1292,6 +1304,7 @@ export interface RootRouteChildren {
   ApiClubScannerWorkerRoute: typeof ApiClubScannerWorkerRoute
   ApiCollectionStatsWorkerRoute: typeof ApiCollectionStatsWorkerRoute
   ApiDiagnosticsRoute: typeof ApiDiagnosticsRoute
+  ApiEventCalendarRoute: typeof ApiEventCalendarRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
   ApiResultClaimAlertsRoute: typeof ApiResultClaimAlertsRoute
   ApiSignupAlertsRoute: typeof ApiSignupAlertsRoute
@@ -1727,6 +1740,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiDiagnosticsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/event-calendar': {
+      id: '/api/event-calendar'
+      path: '/api/event-calendar'
+      fullPath: '/api/event-calendar'
+      preLoaderRoute: typeof ApiEventCalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/race-collector-worker': {
       id: '/api/race-collector-worker'
       path: '/api/race-collector-worker'
@@ -2100,6 +2120,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiClubScannerWorkerRoute: ApiClubScannerWorkerRoute,
   ApiCollectionStatsWorkerRoute: ApiCollectionStatsWorkerRoute,
   ApiDiagnosticsRoute: ApiDiagnosticsRoute,
+  ApiEventCalendarRoute: ApiEventCalendarRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,
   ApiResultClaimAlertsRoute: ApiResultClaimAlertsRoute,
   ApiSignupAlertsRoute: ApiSignupAlertsRoute,
