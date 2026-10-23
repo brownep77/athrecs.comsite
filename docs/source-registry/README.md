@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 322 unique sources. Only 36 are enabled; the other 286 remain
+The registry contains 326 unique sources. Only 36 are enabled; the other 290 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 322 sources create exactly one source job;
+- all 326 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 286 sources are retained as blocked jobs with their reason;
+- the other 290 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -158,3 +158,18 @@ The current page header may advertise a later edition than the archived results.
 Award summaries can differ from individual timing records, and aggregated
 histories can duplicate one performance under several years. Neither is a reason
 to overwrite an independently checked result silently.
+
+
+## Surf City and further discovery sources, 23 October 2026
+
+Registered the Surf City organiser archive, MyRace, MarathonView and Raceview Australia.
+Existing Surf City and MarathonView wider-inventory entries are retained. The latter
+three are secondary research leads: same-name histories, generated analysis and
+placeholder values do not establish verified participation. Raceview’s sampled
+individual lookup was blocked; no access restriction was bypassed. All four remain
+disabled. The registry now has 326 sources, with 36 enabled and 290 disabled.
+
+The organiser directly links the 2026 Surf City results to Laurel. Results are
+checked by table headings and individual result cards, preserving chip/gun times
+and overall, gender and division placements. Generated recaps are not evidence.
+Private participant captures and identity decisions remain in the staff backend.
