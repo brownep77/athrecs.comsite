@@ -91,7 +91,6 @@ jobs:
             driver: "12.20.0"
     env:
       DEVELOPER_DIR: ${{ matrix.xcode }}
-      ATHRECS_WDA_DERIVED_DATA_PATH: ${{ runner.temp }}/athrecs-wda
       ATHRECS_SAFARI_REQUIRED_RUNTIME_VERSION: ${{ matrix.runtime }}
       ATHRECS_SAFARI_REQUIRED_DEVICE_NAME: ${{ matrix.device }}
     steps:
@@ -110,6 +109,8 @@ jobs:
           appium driver install xcuitest@${{ matrix.driver }} 2>&1 | tee artifacts/race-actions-ios-native-driver-install.log
       - name: Build the native test runner before booting Simulator
         timeout-minutes: 6
+        env:
+          ATHRECS_WDA_DERIVED_DATA_PATH: ${{ runner.temp }}/athrecs-wda
         run: |
           set -o pipefail
           ATHRECS_WDA_SOURCE=$(node --input-type=module <<'NODE'
@@ -141,6 +142,8 @@ jobs:
         run: node scripts/prepare-ios-safari-simulator.mjs
       - name: Test calendar and sharing through native iPhone controls
         timeout-minutes: 9
+        env:
+          ATHRECS_WDA_DERIVED_DATA_PATH: ${{ runner.temp }}/athrecs-wda
         run: |
           mkdir -p artifacts
           appium --address 127.0.0.1 --port 4723 --log artifacts/race-actions-ios-native-appium.log > artifacts/race-actions-ios-native-server.log 2>&1 &
