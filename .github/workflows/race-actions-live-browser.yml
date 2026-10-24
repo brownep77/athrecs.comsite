@@ -1,0 +1,82 @@
+name: Live race actions - Safari and mobile
+
+# These checks exercise the current PUBLIC production site. Branch/component
+# regression coverage remains in event-calendar.yml. No production credentials,
+# calendar saves, social posts, emails, or database mutations are performed.
+on:
+  pull_request:
+    paths:
+      - "scripts/verify-race-actions-mobile.mjs"
+      - "scripts/verify-race-actions-safari.mjs"
+      - "scripts/prepare-ios-safari-simulator.mjs"
+      - ".github/workflows/race-actions-live-browser.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: race-actions-live-browser-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  safari:
+    name: Safari - ${{ matrix.platform }}
+    runs-on: macos-15
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos, ios]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Select Xcode matching the installed iOS Simulator
+        if: matrix.platform == 'ios'
+        run: sudo /usr/bin/xcode-select --switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Enable Safari's native WebDriver
+        run: sudo /usr/bin/safaridriver --enable
+      - name: Boot an installed iPhone Simulator
+        if: matrix.platform == 'ios'
+        run: node scripts/prepare-ios-safari-simulator.mjs
+      - name: Test public calendar and sharing in native Safari
+        run: node scripts/verify-race-actions-safari.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: race-actions-safari-${{ matrix.platform }}
+          path: artifacts/race-actions-safari-*
+          if-no-files-found: warn
+
+  mobile:
+    name: Touch layouts - ${{ matrix.engine }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Install the selected test browser
+        run: npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Identify branded Chrome used for Android emulation
+        if: matrix.engine == 'chromium'
+        run: google-chrome --version
+      - name: Test live pages with touch input and mobile layouts
+        env:
+          ATHRECS_MOBILE_ENGINE: ${{ matrix.engine }}
+        run: node scripts/verify-race-actions-mobile.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: race-actions-mobile-${{ matrix.engine }}
+          path: artifacts/race-actions-mobile-*
+          if-no-files-found: warn

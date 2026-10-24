@@ -2,19 +2,22 @@ name: Event calendar export
 on:
   pull_request:
     paths:
-      - 'src/lib/athrecs/*calendar*'
-      - 'src/lib/athrecs/race-sharing.ts'
-      - 'src/lib/athrecs/timezone.ts'
-      - 'src/components/races/**'
-      - 'src/components/running/Road*Pages.tsx'
-      - 'src/routes/races/$slug.tsx'
-      - 'src/routes/api/event-calendar.ts'
-      - 'src/routes/api/race-calendar/**'
-      - 'src/routes/my-race-calendar.tsx'
-      - 'migrations/*race_calendar*'
-      - 'scripts/verify-event-calendar*'
-      - 'scripts/verify-race-sharing.mjs'
-      - '.github/workflows/event-calendar.yml'
+      - "src/lib/athrecs/*calendar*"
+      - "src/lib/athrecs/race-sharing.ts"
+      - "src/lib/athrecs/timezone.ts"
+      - "src/components/races/**"
+      - "src/components/running/Road*Pages.tsx"
+      - "src/components/analytics/SiteAnalytics.tsx"
+      - "src/components/layout/AppShell.tsx"
+      - "src/router.tsx"
+      - "src/routes/races/$slug.tsx"
+      - "src/routes/api/event-calendar.ts"
+      - "src/routes/api/race-calendar/**"
+      - "src/routes/my-race-calendar.tsx"
+      - "migrations/*race_calendar*"
+      - "scripts/verify-event-calendar*"
+      - "scripts/verify-race-sharing.mjs"
+      - ".github/workflows/event-calendar.yml"
   workflow_dispatch:
 permissions:
   contents: read
@@ -52,11 +55,16 @@ jobs:
       # Compilation only: do not migrate, seed, email or publish production data.
       - run: npx vite build
       - run: node scripts/copy-pglite-assets.mjs
+      - name: Keep loading-time gestures and Back navigation stable in all browsers
+        timeout-minutes: 5
+        run: node scripts/verify-event-calendar-hydration.mjs
       - run: node scripts/verify-event-calendar-built.mjs
       - run: node scripts/verify-event-calendar-subscription-built.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: event-calendar-browser-evidence
-          path: artifacts/calendar-*.png
+          path: |
+            artifacts/calendar-*.png
+            artifacts/calendar-hydration-*.json
           if-no-files-found: warn

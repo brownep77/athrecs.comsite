@@ -219,7 +219,9 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
         </nav>
       ) : null}
       <SiteAnalytics featureFlags={featureFlags} />
-      <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">{children}</main>
+      <main data-athrecs-main="" className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">
+        {children}
+      </main>
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-40 text-xs text-muted sm:pb-24 md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
