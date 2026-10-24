@@ -200,7 +200,17 @@ RESULT_SQL = [
 """UPDATE athletes a SET club_id=c.id,source_club_name=x->>'sourceClub' FROM trackie_plan CROSS JOIN LATERAL jsonb_array_elements(p->'profiles') x JOIN clubs c ON c.slug=x->>'clubSlug' WHERE a.slug=x->>'slug' AND a.profile_details #>> '{archiveCreation,batchId}'='trackie-public-20261021'""",
 """INSERT INTO athlete_clubs(athlete_id,club_id,relationship,source_name) SELECT a.id,a.club_id,'primary',a.source_club_name FROM athletes a WHERE a.slug IN (SELECT x->>'slug' FROM trackie_plan CROSS JOIN LATERAL jsonb_array_elements(p->'profiles') x) AND a.profile_details #>> '{archiveCreation,batchId}'='trackie-public-20261021' AND a.club_id IS NOT NULL ON CONFLICT DO NOTHING""",
 """INSERT INTO results(edition_id,athlete_id,status,finish_time_seconds,overall_place,category,bib,result_source,source_url,result_visibility,result_details)
-SELECT d.id,a.id,CASE WHEN h->>'performance' ~ '^([0-9]+:)*[0-9]+([.][0-9]+)?m?$' THEN 'finished' ELSE h->>'performance' END,NULL,NULL,nullif(h->>'ageGroup',''),nullif(h->>'bib',''),'Trackie',h->'sourceUrls'->>0,'public',jsonb_build_object('verificationStatus','unverified','profileExcluded',true,'reportedPerformance',h->>'performance','reportedPlace',h->>'place','sourceClub',h->>'sourceClub','qualification',h->>'notes','archiveReference',h->'archiveReference','batchId','trackie-public-20261021','profileDisplay','athlete_source_histories')
+SELECT d.id,a.id,CASE
+  WHEN btrim(h->>'sourceStatus') ~* '^(DNS|DNF|XDNF|DQ|DSQ|DNC|DNQ|NM|NH|FOUL|FAIL|NT|PASS|disqualified|withdrawn|retired|did not (finish|start))$'
+    THEN h->>'sourceStatus'
+  WHEN h->>'performance' ~ '^([0-9]+:)*[0-9]+([.][0-9]+)?m?$' THEN 'finished'
+  -- A J-qualified high-jump height is still a completed source mark; retain J in reportedPerformance.
+  WHEN h->>'competitionName' ~* '(^|[[:space:]])High[[:space:]]+Jump([[:space:]]|$)'
+    AND coalesce(h->>'sourceStatus', 'unknown') IN ('unknown', 'finished')
+    AND substring(h->>'performance' from '^J([0-9]+([.][0-9]+)?)m$')::numeric > 0
+    THEN 'finished'
+  ELSE h->>'performance'
+END,NULL,NULL,nullif(h->>'ageGroup',''),nullif(h->>'bib',''),'Trackie',h->'sourceUrls'->>0,'public',jsonb_build_object('verificationStatus','unverified','profileExcluded',true,'reportedPerformance',h->>'performance','reportedPlace',h->>'place','sourceClub',h->>'sourceClub','qualification',h->>'notes','archiveReference',h->'archiveReference','batchId','trackie-public-20261021','profileDisplay','athlete_source_histories')
 FROM trackie_plan CROSS JOIN LATERAL jsonb_array_elements(p->'profiles') x CROSS JOIN LATERAL jsonb_array_elements(x->'performances') h JOIN athletes a ON a.slug=x->>'slug' JOIN events e ON e.slug=h->>'eventSlug' JOIN editions d ON d.event_id=e.id AND d.event_date=(h->>'date')::date AND d.distance_code=h->>'competitionName' ON CONFLICT(edition_id,athlete_id) DO NOTHING""",
 """INSERT INTO trackie_guard SELECT (SELECT count(*) FROM jsonb_array_elements(p->'profiles') x JOIN athletes a ON a.slug=x->>'slug' JOIN results r ON r.athlete_id=a.id WHERE r.result_details->>'batchId'=p->>'batchId')=(p->'summary'->>'results')::int AND (SELECT count(*) FROM jsonb_array_elements(p->'profiles') x JOIN athletes a ON a.slug=x->>'slug' WHERE a.profile_details #>> '{archiveCreation,batchId}'=p->>'batchId')=(p->'summary'->>'profiles')::int FROM trackie_plan""",
 ]

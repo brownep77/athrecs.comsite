@@ -17,7 +17,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     env:
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/athrecs_ci
       # Deliberately omit Resend. Browser coverage must prove that account
@@ -118,6 +118,12 @@ jobs:
 
       - name: Profile result verification ownership and evidence safeguards
         run: npm run verify:profile-result-verification
+
+      - name: Reviewed source-verification batch safeguards
+        run: npm run verify:source-verification-batch
+
+      - name: Trackie high-jump status and nonfinish safeguards
+        run: npm run verify:trackie-result-status
 
       - name: Verify historical result source safeguards
         run: |
