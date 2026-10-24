@@ -286,26 +286,27 @@ export function buildProfileAchievements(
   };
   const byDate = (list: AchievementResult[]) =>
     [...list].sort((a, b) => a.eventDate.localeCompare(b.eventDate) || a.resultId - b.resultId);
-  // Any qualifying confirmed witness can verify a threshold, country, sport or year.
+  // Any qualifying confirmed witness can verify a country, sport or year.
   const confirmedFirst = (list: AchievementResult[]) =>
     byDate(list).sort(
       (a, b) => Number(achievementResultVerified(b)) - Number(achievementResultVerified(a)),
     );
-  const milestone = (id: string, list: AchievementResult[], label: string, levels: number[]) => {
-    const target = levels.find((count) => list.length >= count);
-    if (target)
+  // Completion achievements show the current total. Thresholds belong to the
+  // separate next-milestone progress cards; otherwise 16 marathons looks stuck at 10.
+  const completion = (id: string, list: AchievementResult[], label: string) => {
+    if (list.length)
       add(
         id,
-        target === 1
+        list.length === 1
           ? `First recorded ${label}`
-          : `${target} ${label}${label === "finish" ? "es" : "s"} completed`,
-        `Based on ${target} distinct completed events in your linked record.`,
-        confirmedFirst(list).slice(0, target),
+          : `${list.length} ${label}${label === "finish" ? "es" : "s"} completed`,
+        `Based on ${list.length} distinct completed events in your linked record.`,
+        byDate(list),
       );
   };
-  milestone("finishes", finishes, "finish", [500, 250, 100, 50, 25, 10, 5, 1]);
-  milestone("marathons", marathons, "marathon", [100, 50, 25, 20, 10, 5, 1]);
-  milestone("ultras", ultras, "ultra", [100, 50, 25, 10, 5, 1]);
+  completion("finishes", finishes, "finish");
+  completion("marathons", marathons, "marathon");
+  completion("ultras", ultras, "ultra");
   for (const { id, label, plural, results: matching } of distanceFinishes) {
     add(
       id,
