@@ -1,4 +1,4 @@
-import { AddToCalendar } from "@/components/races/AddToCalendar";
+import { RaceActions } from "@/components/races/RaceActions";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { HALF_MARATHON_COUNTRIES, halfMarathonCountry } from "@/data/road-half-marathons/countries";
@@ -497,7 +497,7 @@ export function RoadMarathonPage({
                     <ArrowUpRight className="size-4" aria-hidden="true" />
                   </a>
                   <div>
-                    <AddToCalendar
+                    <RaceActions
                       race={{
                         id: `road-${race.slug}-${edition.date}`,
                         name: race.name,

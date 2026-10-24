@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'src/lib/athrecs/*calendar*'
+      - 'src/lib/athrecs/race-sharing.ts'
       - 'src/lib/athrecs/timezone.ts'
       - 'src/components/races/**'
       - 'src/components/running/Road*Pages.tsx'
@@ -12,6 +13,7 @@ on:
       - 'src/routes/my-race-calendar.tsx'
       - 'migrations/*race_calendar*'
       - 'scripts/verify-event-calendar*'
+      - 'scripts/verify-race-sharing.mjs'
       - '.github/workflows/event-calendar.yml'
   workflow_dispatch:
 permissions:
@@ -30,6 +32,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: node scripts/verify-race-sharing.mjs
       - run: node scripts/verify-event-calendar.mjs --mutations
       - run: node scripts/verify-event-calendar-catalogue.mjs
       - run: node scripts/verify-event-calendar-download.mjs
