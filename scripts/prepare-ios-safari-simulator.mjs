@@ -1,15 +1,17 @@
 import { execFile } from "node:child_process";
-import { appendFile, mkdir, stat, writeFile } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
+import { appendFile, mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { freemem, loadavg, release, totalmem, version } from "node:os";
 import { isAbsolute, join } from "node:path";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
 const commandTimeout = 20_000;
-const inventoryTimeout = 60_000;
+const inventoryTimeout = 180_000;
 const cacheTimeout = 180_000;
-const bootTimeout = 180_000;
+const bootTimeout = 300_000;
 const safariLaunchTimeout = 120_000;
+const screenReadinessTimeout = 180_000;
 const udidPattern = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const artifactPrefix = "artifacts/race-actions-safari-ios-setup";
 const started = Date.now();
@@ -60,7 +62,13 @@ async function phase(name) {
   await saveDiagnostics();
 }
 
-async function runCommand(file, args, timeout = commandTimeout, combineOutput = false) {
+async function runCommand(
+  file,
+  args,
+  timeout = commandTimeout,
+  combineOutput = false,
+  deadline = Infinity,
+) {
   const commandStarted = Date.now();
   const commandText = `${file} ${args.join(" ")}`;
   const isInventory = file === "xcrun" && args[0] === "simctl" && args[1] === "list";
@@ -76,6 +84,10 @@ async function runCommand(file, args, timeout = commandTimeout, combineOutput = 
   note(`Starting ${commandText} (limit ${timeout / 1000}s)`);
   await saveDiagnostics();
   try {
+    timeout = Math.min(timeout, deadline - Date.now());
+    if (timeout <= 0)
+      throw new Error("Overall screen-readiness deadline expired before capture could start.");
+    command.timeoutMs = timeout;
     const { stdout, stderr } = await exec(file, args, {
       encoding: "utf8",
       timeout,
@@ -112,8 +124,8 @@ async function runCommand(file, args, timeout = commandTimeout, combineOutput = 
   }
 }
 
-const simctl = (args, timeout = commandTimeout) =>
-  runCommand("xcrun", ["simctl", ...args], timeout);
+const simctl = (args, timeout = commandTimeout, deadline = Infinity) =>
+  runCommand("xcrun", ["simctl", ...args], timeout, false, deadline);
 
 async function inventory(args, timeout = commandTimeout) {
   const output = await simctl(args, timeout);
@@ -297,8 +309,10 @@ async function openSimulatorUI() {
 }
 
 async function captureSimulatorScreen() {
-  if (!report.readiness || report.diagnosticScreenshot) return;
-  const path = `${artifactPrefix}-screen.png`;
+  // A failed readiness gate already retained its captures; do not start another
+  // loop or extend its deadline from the failure-diagnostic path.
+  if (!report.readiness || report.diagnosticScreenshot || report.screenReadiness) return;
+  const path = `${artifactPrefix}-failure-screen-${randomUUID()}.png`;
   report.diagnosticScreenshot = { path, phase: report.phase, status: "running" };
   try {
     await simctl(["io", report.selectedDevice.udid, "screenshot", path]);
@@ -314,6 +328,109 @@ async function captureSimulatorScreen() {
     note(`Simulator screenshot diagnostic failed: ${error.message}`);
   }
   await saveDiagnostics();
+}
+
+async function validateScreenPng(path) {
+  const { size } = await stat(path);
+  if (size < 45 || size > 64 * 1024 * 1024) throw new Error("Screenshot PNG has an invalid size.");
+  const data = await readFile(path);
+  if (!data.subarray(0, 8).equals(Buffer.from("89504e470d0a1a0a", "hex"))) {
+    throw new Error("Screenshot does not have a PNG signature.");
+  }
+  let offset = 8;
+  let width = 0;
+  let height = 0;
+  let hasImageData = false;
+  let complete = false;
+  while (offset + 12 <= data.length) {
+    const length = data.readUInt32BE(offset);
+    const type = data.toString("ascii", offset + 4, offset + 8);
+    const next = offset + length + 12;
+    if (next > data.length) throw new Error("Screenshot PNG contains a truncated chunk.");
+    if (offset === 8) {
+      if (type !== "IHDR" || length !== 13)
+        throw new Error("Screenshot PNG lacks its IHDR header.");
+      width = data.readUInt32BE(offset + 8);
+      height = data.readUInt32BE(offset + 12);
+    } else if (type === "IHDR") {
+      throw new Error("Screenshot PNG contains a duplicate IHDR header.");
+    }
+    if (type === "IDAT" && length > 0) hasImageData = true;
+    if (type === "IEND") {
+      complete = length === 0 && next === data.length;
+      break;
+    }
+    offset = next;
+  }
+  if (
+    !hasImageData ||
+    !complete ||
+    width < 200 ||
+    height < 200 ||
+    width > 10000 ||
+    height > 10000
+  ) {
+    throw new Error("Screenshot PNG is incomplete or has implausible iPhone dimensions.");
+  }
+  return {
+    bytes: data.length,
+    width,
+    height,
+    validation: "PNG signature, chunk bounds, IHDR, IDAT and final IEND",
+  };
+}
+
+async function requireSimulatorScreen() {
+  const screenStarted = Date.now();
+  const deadline = screenStarted + screenReadinessTimeout;
+  const captureId = randomUUID();
+  const screen = {
+    status: "running",
+    startedAt: new Date(screenStarted).toISOString(),
+    deadlineAt: new Date(deadline).toISOString(),
+    timeoutMs: screenReadinessTimeout,
+    preliminaryOnly: true,
+    finalProofRequired: "Native Safari session, trusted taps and application checks must pass",
+    attempts: [],
+  };
+  report.screenReadiness = screen;
+  while (Date.now() < deadline) {
+    const path = `${artifactPrefix}-screen-${captureId}-${screen.attempts.length + 1}.png`;
+    const attemptStarted = Date.now();
+    const attempt = { path, startedAt: new Date(attemptStarted).toISOString(), status: "running" };
+    screen.attempts.push(attempt);
+    try {
+      await simctl(["io", report.selectedDevice.udid, "screenshot", path], 20_000, deadline);
+      Object.assign(attempt, await validateScreenPng(path));
+      if (Date.now() >= deadline)
+        throw new Error("Fresh PNG arrived after the screen-readiness deadline.");
+      attempt.status = "captured";
+      attempt.elapsedMs = Date.now() - attemptStarted;
+      screen.status = "passed";
+      screen.firstSuccessfulCapture = { ...attempt };
+      screen.elapsedMs = Date.now() - screenStarted;
+      report.diagnosticScreenshot = { ...attempt, phase: report.phase };
+      note(
+        `Fresh native screen captured (${attempt.width}x${attempt.height}); native Safari input and application checks remain mandatory.`,
+      );
+      await saveDiagnostics();
+      return;
+    } catch (error) {
+      attempt.status = "failed";
+      attempt.error = error.message;
+      attempt.elapsedMs = Date.now() - attemptStarted;
+      note(`Native screen attempt ${screen.attempts.length} failed: ${error.message}`);
+      await saveDiagnostics();
+    }
+    const pauseMs = Math.min(5_000, deadline - Date.now());
+    if (pauseMs > 0) await new Promise((resolve) => setTimeout(resolve, pauseMs));
+  }
+  screen.status = "failed";
+  screen.elapsedMs = Date.now() - screenStarted;
+  await saveDiagnostics();
+  throw new Error(
+    `No fresh valid native PNG was captured within ${screenReadinessTimeout / 1000}s (${screen.attempts.length} attempts).`,
+  );
 }
 
 function compareVersions(a, b) {
@@ -435,8 +552,8 @@ async function main() {
   // This is a bounded warm-up; only the subsequent native session can verify it.
   await phase("launch-safari");
   await simctl(["launch", device.udid, "com.apple.mobilesafari"], safariLaunchTimeout);
-  await phase("capture-safari-screen");
-  await captureSimulatorScreen();
+  await phase("native-screen-readiness");
+  await requireSimulatorScreen();
   await phase("export-environment");
   const environment = {
     ATHRECS_SAFARI_DEVICE_UDID: device.udid,

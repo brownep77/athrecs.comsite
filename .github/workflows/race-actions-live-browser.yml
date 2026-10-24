@@ -10,6 +10,7 @@ on:
       - "scripts/verify-race-actions-safari.mjs"
       - "scripts/verify-race-actions-ios-native.mjs"
       - "scripts/prepare-ios-safari-simulator.mjs"
+      - "scripts/prepare-ios-webdriveragent-prebuilt.mjs"
       - ".github/workflows/race-actions-live-browser.yml"
   workflow_dispatch:
 
@@ -24,7 +25,7 @@ jobs:
   safari:
     name: Safari - ${{ matrix.profile }}
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 15
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -74,7 +75,7 @@ jobs:
   native-ios:
     name: Safari - native iOS ${{ matrix.runtime }} interface
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 28
+    timeout-minutes: 35
     strategy:
       fail-fast: false
       matrix:
@@ -107,43 +108,15 @@ jobs:
           set -o pipefail
           npm install --global appium@3.8.0 2>&1 | tee artifacts/race-actions-ios-native-appium-install.log
           appium driver install xcuitest@${{ matrix.driver }} 2>&1 | tee artifacts/race-actions-ios-native-driver-install.log
-      - name: Build the native test runner before booting Simulator
-        timeout-minutes: 6
+      - name: Prepare the matching official Simulator test runner
+        timeout-minutes: 3
         env:
-          ATHRECS_WDA_DERIVED_DATA_PATH: ${{ runner.temp }}/athrecs-wda
-        run: |
-          set -o pipefail
-          ATHRECS_WDA_SOURCE=$(node --input-type=module <<'NODE'
-          import fs from 'node:fs';
-          import { createRequire } from 'node:module';
-          import { homedir } from 'node:os';
-          import path from 'node:path';
-          const appiumRoot = process.env.APPIUM_HOME || path.join(homedir(), '.appium');
-          const rootRequire = createRequire(path.join(appiumRoot, 'package.json'));
-          const driverManifest = rootRequire.resolve('appium-xcuitest-driver/package.json');
-          const driverRequire = createRequire(driverManifest);
-          const wdaManifest = driverRequire.resolve('appium-webdriveragent/package.json');
-          fs.writeFileSync('artifacts/race-actions-ios-native-build-versions.json', JSON.stringify({
-            architecture: process.arch,
-            driver: rootRequire(driverManifest).version,
-            webdriverAgent: driverRequire(wdaManifest).version,
-          }, null, 2) + '\n');
-          console.log(path.dirname(wdaManifest));
-          NODE
-          )
-          xcodebuild clean build-for-testing \
-            -project "$ATHRECS_WDA_SOURCE/WebDriverAgent.xcodeproj" \
-            -derivedDataPath "$ATHRECS_WDA_DERIVED_DATA_PATH" \
-            -scheme WebDriverAgentRunner \
-            -destination 'generic/platform=iOS Simulator' \
-            -jobs 2 CODE_SIGNING_ALLOWED=NO ARCHS=x86_64 \
-            2>&1 | tee artifacts/race-actions-ios-native-wda-build.log
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/prepare-ios-webdriveragent-prebuilt.mjs
       - name: Prepare the installed iPhone and Safari
         run: node scripts/prepare-ios-safari-simulator.mjs
       - name: Test calendar and sharing through native iPhone controls
         timeout-minutes: 9
-        env:
-          ATHRECS_WDA_DERIVED_DATA_PATH: ${{ runner.temp }}/athrecs-wda
         run: |
           mkdir -p artifacts
           appium --address 127.0.0.1 --port 4723 --log artifacts/race-actions-ios-native-appium.log > artifacts/race-actions-ios-native-server.log 2>&1 &

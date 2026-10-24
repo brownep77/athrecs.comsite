@@ -344,7 +344,37 @@ try {
   report.toolchain = setup.toolchain;
   const prebuiltCapabilities = {};
   const derivedDataPath = process.env.ATHRECS_WDA_DERIVED_DATA_PATH;
-  if (derivedDataPath) {
+  const prebuiltAppPath = process.env.ATHRECS_WDA_PREBUILT_APP_PATH;
+  assert(
+    !(derivedDataPath && prebuiltAppPath),
+    "Choose either a verified downloaded WDA app or a derived-data build, not both",
+  );
+  if (prebuiltAppPath) {
+    mark("validate the verified official Simulator WebDriverAgent app");
+    assert(path.isAbsolute(prebuiltAppPath), "Downloaded WDA app path must be absolute");
+    const sourceReport = "artifacts/race-actions-ios-native-wda-download.json";
+    const download = JSON.parse(fs.readFileSync(sourceReport, "utf8"));
+    assert.equal(download.status, "passed", "Official WDA preparation must have passed");
+    assert.equal(download.download?.verified, true, "Official WDA checksum must be verified");
+    assert.match(download.download.actualDigest || "", /^sha256:[a-f0-9]{64}$/);
+    assert.equal(download.download.actualDigest, download.release?.expectedDigest);
+    assert.equal(
+      download.app?.path,
+      prebuiltAppPath,
+      "WDA app must match the verified download report",
+    );
+    assert(fs.statSync(prebuiltAppPath).isDirectory(), "Verified Simulator WDA app is missing");
+    report.prebuiltWDA = {
+      sourceReport,
+      appPath: prebuiltAppPath,
+      installed: download.installed,
+      release: download.release,
+      download: download.download,
+    };
+    prebuiltCapabilities["appium:usePreinstalledWDA"] = true;
+    prebuiltCapabilities["appium:prebuiltWDAPath"] = prebuiltAppPath;
+    save();
+  } else if (derivedDataPath) {
     mark("validate WebDriverAgent built before Simulator boot");
     assert(path.isAbsolute(derivedDataPath), "Prebuilt WDA derived-data path must be absolute");
     const products = path.join(derivedDataPath, "Build", "Products");
