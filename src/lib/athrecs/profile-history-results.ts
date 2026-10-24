@@ -1,3 +1,4 @@
+import { isParkrunResult } from "./parkrun-timing.ts";
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory, SourcePerformance } from "./source-performance-history";
 import { countryFlag } from "./country-flags.ts";
@@ -41,7 +42,13 @@ export function historyResultSurface(
   sport: HistoryResult["sport"],
 ): string {
   if (sport === "Walking") {
-    const surfaces = [...new Set(row.labels.filter((label) => /^(?:road|track)$/i.test(label.trim())).map((label) => /^track$/i.test(label.trim()) ? "Track" : "Road"))];
+    const surfaces = [
+      ...new Set(
+        row.labels
+          .filter((label) => /^(?:road|track)$/i.test(label.trim()))
+          .map((label) => (/^track$/i.test(label.trim()) ? "Track" : "Road")),
+      ),
+    ];
     return surfaces.length === 1 ? surfaces[0] : "Unknown";
   }
   if (sport === "Running" || sport === "Parkrun") {
@@ -188,6 +195,11 @@ export function profileAchievementResults(
     ...results,
     ...history.map((entry, index): AchievementResult => {
       const row = entry.performance;
+      const parkrun = isParkrunResult({
+        sport: entry.sport,
+        eventName: row.meeting,
+        distanceCode: row.discipline,
+      });
       const distance = historicalDistance(row.discipline, entry.sport);
       const mark = historicalMark(row);
       const conflicting = Boolean(row.date) && (marks.get(conflictKey(entry))?.size ?? 0) > 1;
@@ -201,8 +213,8 @@ export function profileAchievementResults(
         editionId: 0,
         eventName: row.meeting,
         eventSlug: row.eventSlug ?? "",
-        sport: entry.sport,
-        surface: entry.sport === "Parkrun" ? "Parkrun" : historyResultSurface(row, entry.sport),
+        sport: parkrun ? "Parkrun" : entry.sport,
+        surface: parkrun ? "Parkrun" : historyResultSurface(row, entry.sport),
         country: historyResultCountry(row),
         eventDate: row.date || (/^\d{4}$/.test(year) ? year : ""),
         distanceCode: distance.code,
@@ -210,8 +222,10 @@ export function profileAchievementResults(
         status: "finished",
         conflicting,
         finishTimeSeconds: timed ? (mark?.seconds ?? null) : null,
-        chipTimeSeconds: timed && row.timing?.chip ? historicalTime(row.timing.chip) : null,
-        gunTimeSeconds: timed && row.timing?.gun ? historicalTime(row.timing.gun) : null,
+        chipTimeSeconds:
+          !parkrun && timed && row.timing?.chip ? historicalTime(row.timing.chip) : null,
+        gunTimeSeconds:
+          !parkrun && timed && row.timing?.gun ? historicalTime(row.timing.gun) : null,
         overallPlace: null,
         category: row.ageGroup || null,
         sourceUrls: row.sourceUrls,

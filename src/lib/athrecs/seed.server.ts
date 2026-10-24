@@ -1,3 +1,4 @@
+import { isParkrunResult } from "./parkrun-timing";
 import { dbSource, getSql } from "@/lib/db";
 import { CLUB_PROFILE_VERSION } from "@/data/club-profiles";
 import {
@@ -1616,9 +1617,7 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
     .map((edition) => editionIds.get(`${edition.seriesSlug}|${edition.date}|${edition.distance}`))
     .filter((editionId): editionId is number => editionId != null);
   for (const batch of chunks(explicitOptionsWithoutOfficialIds, 1_000)) {
-    const placeholders = batch
-      .map((_, index) => `$${index + 1}`)
-      .join(", ");
+    const placeholders = batch.map((_, index) => `$${index + 1}`).join(", ");
     await sql.query(
       `delete from edition_entry_options
        where edition_id in (${placeholders})
@@ -3097,8 +3096,15 @@ async function seedCatalogue(sql: Sql): Promise<void> {
     event_slug: string;
     event_date: string;
     distance_code: string;
-  }>`select ed.id, e.slug as event_slug, ed.event_date::text as event_date, ed.distance_code
-      from editions ed join events e on e.id = ed.event_id`;
+    sport: string;
+    event_name: string;
+  }>`select ed.id, e.slug as event_slug, ed.event_date::text as event_date, ed.distance_code,
+      e.sport, e.name as event_name from editions ed join events e on e.id = ed.event_id`;
+  const parkrunSlugs = new Set(
+    editionRows
+      .filter((row) => isParkrunResult({ sport: row.sport, eventName: row.event_name }))
+      .map((row) => row.event_slug),
+  );
   const editionIds = new Map(
     editionRows.map((row) => [`${row.event_slug}|${row.event_date}|${row.distance_code}`, row.id]),
   );
@@ -3135,8 +3141,8 @@ async function seedCatalogue(sql: Sql): Promise<void> {
         result.status && !["finished", "FIN"].includes(result.status)
           ? null
           : (result.finishTimeSeconds ?? parseTimeToSeconds(result.time)),
-        result.chipTimeSeconds ?? null,
-        result.gunTimeSeconds ?? null,
+        parkrunSlugs.has(result.eventSlug) ? null : (result.chipTimeSeconds ?? null),
+        parkrunSlugs.has(result.eventSlug) ? null : (result.gunTimeSeconds ?? null),
         result.bib ?? null,
         result.place,
         result.genderPlace ?? null,

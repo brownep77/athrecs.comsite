@@ -115,7 +115,7 @@
     "verify:sponsorship": "node --experimental-strip-types scripts/verify-sponsorship.mjs",
     "verify:profile-timeline": "node --experimental-strip-types scripts/verify-profile-timeline.mjs && node --experimental-strip-types scripts/verify-profile-result-presentation.mjs",
     "verify:result-certificates": "node scripts/verify-result-certificates.mjs",
-    "verify:profile-achievements": "node --experimental-strip-types scripts/verify-profile-achievements.mjs",
+    "verify:profile-achievements": "node --experimental-strip-types scripts/verify-profile-achievements.mjs && node --experimental-strip-types scripts/verify-parkrun-timing.mjs",
     "verify:paul-profile-publication": "node scripts/verify-paul-profile-publication.mjs",
     "verify:email-login-flow": "node scripts/verify-email-login-flow.mjs && node scripts/verify-email-login-flow.mjs --no-email",
     "verify:athlete-publication": "node --experimental-strip-types scripts/verify-athlete-publication.mjs && node --experimental-strip-types scripts/verify-admin-performance-history.mjs && node --experimental-strip-types scripts/verify-legacy-history-sources.mjs",

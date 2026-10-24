@@ -44,6 +44,10 @@ publication and personal-best calculations in this repository.
 - Map timing tables by column headings, never positional offsets. Keep overall,
   gender and category positions separate. Keep chip and gun times separate.
   Preserve source precision and document conversion to integer storage.
+- Owner instruction, 24 October 2026: parkruns are not chip timed. Store their
+  published time as a finish time, leaving chip/gun fields empty, and label it
+  "parkrun finish time · Not chip timed". Keep parkrun PBs separate from road-race
+  PBs. Timing method and result verification are independent.
 - Do not infer an exact birth date or age from an age category. Do not manufacture
   dates to turn year-only biographical accounts into dated race results.
 - For all future imports, preserve nationality explicitly supplied by the athlete

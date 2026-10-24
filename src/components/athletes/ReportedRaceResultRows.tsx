@@ -1,3 +1,4 @@
+import { isParkrunResult } from "@/lib/athrecs/parkrun-timing";
 import { ResultDistance } from "./ResultDistance";
 import { distanceResultStyle } from "@/lib/athrecs/profile-colours";
 import { CHIP_TIME_CAVEAT } from "@/lib/athrecs/reported-personal-bests";
@@ -63,14 +64,29 @@ export function ReportedRaceResultRows({
         {bestIds.has(record.id) ? (
           <span
             className="ml-2 text-xs font-semibold text-accent"
-            aria-label="PB, not verified by chip time"
+            aria-label={
+              isParkrunResult({ event: record.event, distanceCode: record.distance })
+                ? "PB, verification pending"
+                : "PB, not verified by chip time"
+            }
           >
             PB*
           </span>
         ) : null}
         <ResultVerificationBadge status="unverified" />
-        <HistoricalTiming performance={record.reportedTime} discipline={record.distance} />
-        {showEvidence ? <span className="block text-xs text-muted">{CHIP_TIME_CAVEAT}</span> : null}
+        <HistoricalTiming
+          performance={record.reportedTime}
+          discipline={record.distance}
+          eventName={record.event}
+          sport={reportedResultSport(record)}
+        />
+        {showEvidence ? (
+          <span className="block text-xs text-muted">
+            {isParkrunResult({ event: record.event, distanceCode: record.distance })
+              ? "Verification pending"
+              : CHIP_TIME_CAVEAT}
+          </span>
+        ) : null}
       </td>
       <td role="cell" data-label="Place" className="px-3 py-2 text-xs">
         {record.reportedPlace}

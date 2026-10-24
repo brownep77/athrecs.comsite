@@ -1,4 +1,9 @@
 import { formatDuration } from "@/lib/athrecs/format";
+import {
+  isParkrunResult,
+  PARKRUN_TIMING_LABEL,
+  type ParkrunContext,
+} from "@/lib/athrecs/parkrun-timing";
 import type { ProfileResult } from "@/lib/athrecs/profile-records";
 import { timingBasis } from "@/lib/athrecs/profile-records";
 import {
@@ -15,6 +20,7 @@ export function ResultTiming({ result }: { result: ProfileResult }) {
     result.finishTimeSeconds < 0
   )
     return null;
+  if (isParkrunResult(result)) return <TimingLines lines={[PARKRUN_TIMING_LABEL]} />;
   const basis = timingBasis(result);
   const lines = [basis === "Unknown" ? "Timing unknown" : `${basis} time`];
   if (result.chipTimeSeconds != null && basis !== "Chip" && basis !== "Chip / gun")
@@ -28,13 +34,21 @@ export function HistoricalTiming({
   performance,
   discipline,
   timing,
+  sport,
+  eventName,
 }: {
   performance: string;
   discipline?: string;
   timing?: PerformanceTiming;
-}) {
+} & Pick<ParkrunContext, "sport" | "eventName">) {
   return hasTimedMark(performance, discipline) || hasMinutePrecisionTime(performance) ? (
-    <TimingLines lines={historicalTimingLines(performance, timing)} />
+    <TimingLines
+      lines={
+        isParkrunResult({ sport, eventName, distanceCode: discipline })
+          ? [PARKRUN_TIMING_LABEL]
+          : historicalTimingLines(performance, timing)
+      }
+    />
   ) : null;
 }
 

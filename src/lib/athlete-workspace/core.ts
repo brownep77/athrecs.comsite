@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isParkrunResult } from "../athrecs/parkrun-timing.ts";
 
 export const httpsUrl = z.string().trim().url().max(2000).refine(value => {
   try {
@@ -79,6 +80,7 @@ export function isoDate(value: string, order: "day-first" | "month-first" = "day
 }
 export function resultIssues(row: DraftResult, asOf = new Date().toISOString().slice(0,10)): string[] {
   const issues: string[] = [];
+  if (isParkrunResult({ eventName: row.race, distanceCode: row.distance }) && row.timingBasis !== "unspecified") issues.push("parkrun is not chip timed. Choose unspecified for its finish time; do not label it chip or gun time.");
   if (row.race.length < 3) issues.push("Race/meeting name required");
   const parsed = Date.parse(row.date);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(row.date) || !Number.isFinite(parsed) || new Date(parsed).toISOString().slice(0,10) !== row.date || row.date > asOf) issues.push("Use a valid past date with a four-digit year");

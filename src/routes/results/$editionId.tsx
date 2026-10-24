@@ -1,3 +1,4 @@
+import { isParkrunResult, PARKRUN_TIMING_EXPLANATION } from "@/lib/athrecs/parkrun-timing";
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, SearchCheck } from "lucide-react";
@@ -52,6 +53,8 @@ export const Route = createFileRoute("/results/$editionId")({
 
 function RaceResultsPage() {
   const { edition, results, hasMore } = Route.useLoaderData();
+  const parkrun = isParkrunResult({ sport: edition.sport, eventName: edition.event_name });
+  const columns = ["Pos", "Athlete", "Nationality", "Profile club", "Category", ...(parkrun ? ["Finish time"] : ["Performance", "Chip", "Gun"]), ""];
   const search = normalizeResultsSearch(Route.useSearch());
   const params = { editionId: resultSlug(edition) };
   const credits = [...new Map(results.flatMap((result) => {
@@ -73,6 +76,7 @@ function RaceResultsPage() {
           Follow the credited provider links for the original results. Placings are retained from the source.
           Nationalities, where available, are as recorded for the race.
         </p>
+        {parkrun ? <p className="max-w-3xl text-sm text-muted">{PARKRUN_TIMING_EXPLANATION}</p> : null}
         {credits.length ? <div className="space-y-1 text-sm text-muted" aria-label="Results provider credits">
           <p>Results credited to:</p>
           <ul className="flex flex-wrap gap-x-4 gap-y-2">{credits.map((credit) => <li key={credit.url}><a href={credit.url} target="_blank" rel="noreferrer" className="text-accent underline">{credit.name}</a></li>)}</ul>
@@ -92,7 +96,7 @@ function RaceResultsPage() {
           <table className="w-full min-w-[58rem] text-left text-sm">
             <caption className="sr-only">Recorded results for {edition.event_name}. Placings are as recorded, not recalculated for this list.</caption>
             <thead className="border-b border-border bg-accent-soft/40 text-[11px] uppercase tracking-wide text-muted">
-              <tr>{["Pos", "Athlete", "Nationality", "Profile club", "Category", "Performance", "Chip", "Gun", ""].map((label, index) => <th key={index} scope="col" className="px-3 py-3">{label || <span className="sr-only">Claim result</span>}</th>)}</tr>
+              <tr>{columns.map((label, index) => <th key={index} scope="col" className="px-3 py-3">{label || <span className="sr-only">Claim result</span>}</th>)}</tr>
             </thead>
             <tbody>
               {results.map((result) => {
@@ -113,13 +117,13 @@ function RaceResultsPage() {
                     <td className="max-w-44 px-3 py-4 align-top text-muted">{result.profile_club || "—"}</td>
                     <td className="px-3 py-4 align-top text-muted">{result.category || "—"}{finished && result.category_place !== null ? <p className="mt-1 text-xs">Position {result.category_place}</p> : null}</td>
                     <td className="whitespace-nowrap px-3 py-4 align-top font-semibold tabular-nums">{result.reported_performance || (finished ? formatDuration(result.finish_time_seconds) : "—")}</td>
-                    <td className="whitespace-nowrap px-3 py-4 align-top tabular-nums text-muted">{finished ? formatDuration(result.chip_time_seconds) : "—"}</td>
-                    <td className="whitespace-nowrap px-3 py-4 align-top tabular-nums text-muted">{finished ? formatDuration(result.gun_time_seconds) : "—"}</td>
+                    {!parkrun ? <td className="whitespace-nowrap px-3 py-4 align-top tabular-nums text-muted">{finished ? formatDuration(result.chip_time_seconds) : "—"}</td> : null}
+                    {!parkrun ? <td className="whitespace-nowrap px-3 py-4 align-top tabular-nums text-muted">{finished ? formatDuration(result.gun_time_seconds) : "—"}</td> : null}
                     <td className="px-3 py-4 align-top"><Link to="/claim-results" search={{ resultId: result.id }} className="inline-flex min-h-10 items-center gap-1.5 rounded-lg border border-border px-3 text-xs font-medium text-accent no-underline hover:bg-accent-soft"><SearchCheck className="size-4 shrink-0" aria-hidden="true" />Claim this result</Link></td>
                   </tr>
                 );
               })}
-              {!results.length ? <tr><td colSpan={9} className="p-8 text-center text-muted">No recorded results match this search.</td></tr> : null}
+              {!results.length ? <tr><td colSpan={columns.length} className="p-8 text-center text-muted">No recorded results match this search.</td></tr> : null}
             </tbody>
           </table>
         </div>
