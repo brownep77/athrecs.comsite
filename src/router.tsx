@@ -29,10 +29,14 @@ export function getRouter() {
     defaultPreload: "intent",
     defaultErrorComponent: AppErrorComponent,
   });
-  initialLocation = {
-    href: router.latestLocation.href,
-    historyKey: router.latestLocation.state.__TSR_key,
-  };
+  // Start supplies the server request history after creating the router.
+  const initialClientLocation = typeof window === "undefined" ? undefined : router.latestLocation;
+  if (initialClientLocation) {
+    initialLocation = {
+      href: initialClientLocation.href,
+      historyKey: initialClientLocation.state.__TSR_key,
+    };
+  }
   return router;
 }
 

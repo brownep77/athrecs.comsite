@@ -62,6 +62,7 @@ async function simctl(args, timeout = commandTimeout) {
       maxBuffer: 2 * 1024 * 1024,
     });
     command.status = "passed";
+    command.code = 0;
     command.elapsedMs = Date.now() - commandStarted;
     // Retain boot progress and errors, never the full simulator inventory.
     if (args[0] !== "list" && stdout.trim()) command.stdoutTail = stdout.trim().slice(-2000);
@@ -229,6 +230,10 @@ async function main() {
     observedAt: new Date().toISOString(),
     finalProofRequired: "Native Safari session, navigation and application checks must pass",
   };
+  // Launch the installed browser once before WebDriver's remote connection.
+  // This is a bounded warm-up; only the subsequent native session can verify it.
+  await phase("launch-safari");
+  await simctl(["launch", device.udid, "com.apple.mobilesafari"], 30_000);
   await phase("export-environment");
   const environment = {
     ATHRECS_SAFARI_DEVICE_UDID: device.udid,
