@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { setTimeout as pause } from "node:timers/promises";
 
@@ -132,7 +133,7 @@ async function showControl(control, { hittable = false, enabled = true } = {}) {
   save();
   return evidence;
 }
-async function tap(targetControl) {
+async function tap(targetControl, { shareMustBeOpen = false } = {}) {
   const control = typeof targetControl === "string" ? await named(targetControl) : targetControl;
   const { label, element } = control;
   // The test never activates providers, save/download controls, or recipients.
@@ -145,6 +146,10 @@ async function tap(targetControl) {
   // Reuse the observed element, rather than selecting the first global match:
   // Share titles may be identical for different dated race editions.
   const evidence = await showControl(control, { hittable: true });
+  if (shareMustBeOpen) {
+    assert(!(await shareClosed()), "Share must still be open immediately before the outside tap");
+    evidence.shareWasOpenBeforeTap = true;
+  }
   report.taps.push({
     ...evidence,
     method: "XCTest element click",
@@ -158,7 +163,14 @@ async function verifyLabels(labels, label) {
   const found = [];
   // A landscape viewport need not contain the entire menu at once. Prove each
   // option can actually be brought into view, without activating its link.
-  for (const expected of labels) found.push(await showControl(await named(expected)));
+  for (const expected of labels) {
+    const control = await named(expected);
+    assert(
+      ["XCUIElementTypeLink", "XCUIElementTypeButton"].includes(control.type),
+      `${expected} must be an actionable native link or button, found ${control.type}`,
+    );
+    found.push(await showControl(control, { hittable: true }));
+  }
   passed(label);
   return found;
 }
@@ -284,7 +296,7 @@ async function checkView(orientation) {
   passed(`${orientation}: ${view.clipboard.result} verified through native Simulator APIs`);
 
   mark(`${orientation}: one outside tap opens the other distance's calendar`);
-  await tap(second.calendar);
+  await tap(second.calendar, { shareMustBeOpen: true });
   await until("outside tap closes Share", shareClosed);
   view.calendarLabels = await verifyLabels(
     calendarLabels,
@@ -298,7 +310,7 @@ async function checkView(orientation) {
   mark(`${orientation}: second-distance Share and first-distance calendar`);
   await tap(second.share);
   await verifyLabels(sharingLabels, `${orientation}: second-distance Share works`);
-  await tap(first.calendar);
+  await tap(first.calendar, { shareMustBeOpen: true });
   await until("second Share closes after the outside calendar tap", shareClosed);
   await verifyLabels(calendarLabels, `${orientation}: first-distance calendar works`);
   await tap(first.calendar);
@@ -330,6 +342,30 @@ try {
     timeout: 10000,
   }).trim();
   report.toolchain = setup.toolchain;
+  const prebuiltCapabilities = {};
+  const derivedDataPath = process.env.ATHRECS_WDA_DERIVED_DATA_PATH;
+  if (derivedDataPath) {
+    mark("validate WebDriverAgent built before Simulator boot");
+    assert(path.isAbsolute(derivedDataPath), "Prebuilt WDA derived-data path must be absolute");
+    const products = path.join(derivedDataPath, "Build", "Products");
+    const runnerApp = path.join(
+      products,
+      "Debug-iphonesimulator",
+      "WebDriverAgentRunner-Runner.app",
+    );
+    assert(fs.statSync(runnerApp).isDirectory(), "Prebuilt Simulator WDA app is missing");
+    const testRuns = fs
+      .readdirSync(products)
+      .filter((name) => /^WebDriverAgentRunner_.*\.xctestrun$/.test(name));
+    assert(testRuns.length > 0, "Prebuilt WDA test-run metadata is missing");
+    report.prebuiltWDA = { derivedDataPath, runnerApp, testRuns };
+    // Official Appium prebuild flow: reuse build-for-testing output and run
+    // test-without-building. A missing build fails above rather than rebuilding
+    // while the Simulator is already consuming the runner's resources.
+    prebuiltCapabilities["appium:usePrebuiltWDA"] = true;
+    prebuiltCapabilities["appium:derivedDataPath"] = derivedDataPath;
+    save();
+  }
   mark("wait for local Appium readiness");
   await until(
     "Appium ready",
@@ -352,11 +388,13 @@ try {
     "appium:noReset": true,
     "appium:fullReset": false,
     "appium:autoWebview": false,
+    "appium:screenshotQuality": 0,
     "appium:showXcodeLog": true,
     "appium:wdaLaunchTimeout": 120000,
     "appium:wdaConnectionTimeout": 30000,
     "appium:wdaStartupRetries": 1,
     "appium:newCommandTimeout": 90,
+    ...prebuiltCapabilities,
   };
   report.requestedCapabilities = capabilities;
   mark("create native XCTest session for Mobile Safari");

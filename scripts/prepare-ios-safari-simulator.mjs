@@ -7,6 +7,7 @@ import { promisify } from "node:util";
 const exec = promisify(execFile);
 const commandTimeout = 20_000;
 const inventoryTimeout = 60_000;
+const cacheTimeout = 180_000;
 const bootTimeout = 180_000;
 const safariLaunchTimeout = 120_000;
 const udidPattern = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
@@ -59,7 +60,7 @@ async function phase(name) {
   await saveDiagnostics();
 }
 
-async function runCommand(file, args, timeout = commandTimeout) {
+async function runCommand(file, args, timeout = commandTimeout, combineOutput = false) {
   const commandStarted = Date.now();
   const commandText = `${file} ${args.join(" ")}`;
   const isInventory = file === "xcrun" && args[0] === "simctl" && args[1] === "list";
@@ -88,7 +89,7 @@ async function runCommand(file, args, timeout = commandTimeout) {
     if (!isInventory && stdout.trim()) command.stdoutTail = stdout.trim().slice(-2000);
     if (stderr?.trim()) command.stderrTail = stderr.trim().slice(-2000);
     note(`Completed ${commandText} (${command.elapsedMs}ms)`);
-    return stdout;
+    return combineOutput ? `${stdout}\n${stderr ?? ""}` : stdout;
   } catch (error) {
     command.status = "failed";
     command.elapsedMs = Date.now() - commandStarted;
@@ -159,6 +160,106 @@ async function recordToolchain() {
   await saveDiagnostics();
 }
 
+async function recordHostDiagnostics(label) {
+  if (process.platform !== "darwin" || process.env.GITHUB_ACTIONS !== "true") return;
+  const commands = [
+    { file: "/bin/ps", args: ["-axo", "pid,ppid,pcpu,rss,state,comm"] },
+    { file: "/usr/bin/vm_stat", args: [] },
+    { file: "/usr/sbin/sysctl", args: ["vm.swapusage"] },
+  ];
+  const snapshot = {
+    label,
+    phase: report.phase,
+    startedAt: new Date().toISOString(),
+    commands: [],
+  };
+  (report.hostDiagnostics ??= []).push(snapshot);
+  const results = await Promise.allSettled(
+    commands.map(({ file, args }) =>
+      exec(file, args, {
+        encoding: "utf8",
+        timeout: 10_000,
+        killSignal: "SIGKILL",
+        maxBuffer: 512 * 1024,
+      }),
+    ),
+  );
+  for (const [index, result] of results.entries()) {
+    const command = { ...commands[index], timeoutMs: 10_000, status: result.status };
+    if (result.status === "fulfilled") {
+      command.stdout = result.value.stdout.trim();
+      command.stderr = result.value.stderr.trim();
+      command.exitCode = 0;
+    } else {
+      command.error = String(result.reason.message).slice(-1200);
+      command.stdout = String(result.reason.stdout ?? "").trim();
+      command.stderr = String(result.reason.stderr ?? "").trim();
+      command.exitCode = result.reason.code ?? null;
+      command.signal = result.reason.signal ?? null;
+      command.timedOut = Boolean(result.reason.killed);
+    }
+    snapshot.commands.push(command);
+  }
+  snapshot.finishedAt = new Date().toISOString();
+  note(`Recorded host process, memory and swap diagnostics: ${label}`);
+  await saveDiagnostics();
+}
+
+async function stopOtherActiveDevices(devices, selectedUDID) {
+  const active = Object.entries(devices).flatMap(([runtime, entries]) =>
+    entries
+      .filter((device) => ["Booted", "Booting"].includes(device.state))
+      .map(({ name, udid, state }) => ({ name, udid, state, runtime })),
+  );
+  report.initialActiveDevices = active;
+  report.otherDeviceShutdowns = [];
+  for (const device of active) {
+    if (device.udid === selectedUDID) continue;
+    if (!udidPattern.test(device.udid)) {
+      throw new Error(
+        "An initially active Simulator has an invalid UDID; cannot isolate the selected device.",
+      );
+    }
+    const shutdown = { ...device, status: "running" };
+    report.otherDeviceShutdowns.push(shutdown);
+    await simctl(["shutdown", device.udid], 30_000);
+    shutdown.status = "completed";
+  }
+  // This records the initial inventory and exact shutdown commands only. A fresh
+  // post-boot inventory previously hung; actual native Safari remains the gate.
+  await saveDiagnostics();
+}
+
+async function prepareRuntimeCache(runtime) {
+  report.runtimeCache = { runtime: runtime.identifier, status: "probing" };
+  const help = await runCommand("xcrun", ["simctl", "help", "runtime"], commandTimeout, true);
+  report.runtimeCache.help = help.trim();
+  if (!/\bdyld_shared_cache\b/.test(help)) {
+    report.runtimeCache.status = "unsupported";
+    report.runtimeCache.evidence =
+      "Successful simctl help runtime output did not advertise dyld_shared_cache.";
+    note(
+      "Selected simctl does not advertise runtime dyld_shared_cache; native Safari must still verify readiness.",
+    );
+    await saveDiagnostics();
+    return;
+  }
+  report.runtimeCache.status = "updating";
+  try {
+    // Wait for this runtime's cache only. Do not create caches for every installed
+    // Xcode/runtime or force deletion and rebuilding of an existing cache.
+    await simctl(["runtime", "dyld_shared_cache", "update", runtime.identifier], cacheTimeout);
+    report.runtimeCache.status = "completed";
+    report.runtimeCache.exitCode = 0;
+  } catch (error) {
+    report.runtimeCache.status = "failed";
+    report.runtimeCache.error = error.message;
+    throw error;
+  } finally {
+    await saveDiagnostics();
+  }
+}
+
 function validateRequestedDevice() {
   const { runtimeVersion, name } = report.requestedDevice;
   if (runtimeVersion !== null && !/^\d+(?:\.\d+){1,2}$/.test(runtimeVersion)) {
@@ -184,9 +285,13 @@ async function openSimulatorUI() {
     throw new Error(`Selected Xcode does not contain Simulator.app: ${application}`);
   }
   report.simulatorUI = { application, deviceUDID: report.selectedDevice.udid, status: "opening" };
-  // Use the selected Xcode's UI. The requested device has already finished booting;
-  // do not change Simulator preferences or let Launch Services choose another Xcode.
-  await runCommand("/usr/bin/open", ["-a", application], 30_000);
+  // Use the selected Xcode's UI and WebKit's startup flag to avoid automatic
+  // host/Simulator pasteboard synchronization. Explicit clipboard tests still run.
+  await runCommand(
+    "/usr/bin/open",
+    ["-a", application, "--args", "-PasteboardAutomaticSync", "0"],
+    30_000,
+  );
   report.simulatorUI.status = "open-command-completed";
   await saveDiagnostics();
 }
@@ -300,8 +405,14 @@ async function main() {
     runtime: { name: runtime.name, identifier: runtime.identifier, version: runtime.version },
   };
   note(`Preparing ${device.name} | ${runtime.name} | ${device.udid}`);
+  await phase("isolate-selected-device");
+  await stopOtherActiveDevices(simulatorInventory.devices, device.udid);
+  await phase("runtime-cache");
+  await prepareRuntimeCache(runtime);
+  await phase("before-boot-diagnostics");
+  await recordHostDiagnostics("before-boot");
   await phase("boot");
-  if (device.state !== "Booted") {
+  if (!["Booted", "Booting"].includes(device.state)) {
     await simctl(["boot", device.udid], 30_000);
   }
   await phase("bootstatus");
@@ -316,6 +427,8 @@ async function main() {
     observedAt: new Date().toISOString(),
     finalProofRequired: "Native Safari session, navigation and application checks must pass",
   };
+  await phase("after-bootstatus-diagnostics");
+  await recordHostDiagnostics("after-bootstatus");
   await phase("open-simulator-ui");
   await openSimulatorUI();
   // Launch the installed browser once before WebDriver's remote connection.
@@ -362,6 +475,7 @@ async function run() {
     report.failure = { phase: report.phase, message: error.message };
     note(`iOS Safari simulator setup failed: ${error.message}`);
     process.exitCode = 1;
+    await recordHostDiagnostics("failure");
     await captureSimulatorScreen();
   } finally {
     report.finishedAt = new Date().toISOString();

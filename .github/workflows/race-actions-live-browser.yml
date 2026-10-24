@@ -74,7 +74,7 @@ jobs:
   native-ios:
     name: Safari - native iOS ${{ matrix.runtime }} interface
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 18
+    timeout-minutes: 28
     strategy:
       fail-fast: false
       matrix:
@@ -91,6 +91,7 @@ jobs:
             driver: "12.20.0"
     env:
       DEVELOPER_DIR: ${{ matrix.xcode }}
+      ATHRECS_WDA_DERIVED_DATA_PATH: ${{ runner.temp }}/athrecs-wda
       ATHRECS_SAFARI_REQUIRED_RUNTIME_VERSION: ${{ matrix.runtime }}
       ATHRECS_SAFARI_REQUIRED_DEVICE_NAME: ${{ matrix.device }}
     steps:
@@ -100,13 +101,44 @@ jobs:
           node-version: 24
       - name: Select matching Xcode
         run: sudo /usr/bin/xcode-select --switch "$DEVELOPER_DIR"
+      - name: Install pinned native XCTest automation
+        timeout-minutes: 8
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm install --global appium@3.8.0 2>&1 | tee artifacts/race-actions-ios-native-appium-install.log
+          appium driver install xcuitest@${{ matrix.driver }} 2>&1 | tee artifacts/race-actions-ios-native-driver-install.log
+      - name: Build the native test runner before booting Simulator
+        timeout-minutes: 6
+        run: |
+          set -o pipefail
+          ATHRECS_WDA_SOURCE=$(node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { createRequire } from 'node:module';
+          import { homedir } from 'node:os';
+          import path from 'node:path';
+          const appiumRoot = process.env.APPIUM_HOME || path.join(homedir(), '.appium');
+          const rootRequire = createRequire(path.join(appiumRoot, 'package.json'));
+          const driverManifest = rootRequire.resolve('appium-xcuitest-driver/package.json');
+          const driverRequire = createRequire(driverManifest);
+          const wdaManifest = driverRequire.resolve('appium-webdriveragent/package.json');
+          fs.writeFileSync('artifacts/race-actions-ios-native-build-versions.json', JSON.stringify({
+            architecture: process.arch,
+            driver: rootRequire(driverManifest).version,
+            webdriverAgent: driverRequire(wdaManifest).version,
+          }, null, 2) + '\n');
+          console.log(path.dirname(wdaManifest));
+          NODE
+          )
+          xcodebuild clean build-for-testing \
+            -project "$ATHRECS_WDA_SOURCE/WebDriverAgent.xcodeproj" \
+            -derivedDataPath "$ATHRECS_WDA_DERIVED_DATA_PATH" \
+            -scheme WebDriverAgentRunner \
+            -destination 'generic/platform=iOS Simulator' \
+            -jobs 2 CODE_SIGNING_ALLOWED=NO ARCHS=x86_64 \
+            2>&1 | tee artifacts/race-actions-ios-native-wda-build.log
       - name: Prepare the installed iPhone and Safari
         run: node scripts/prepare-ios-safari-simulator.mjs
-      - name: Install pinned native XCTest automation
-        timeout-minutes: 4
-        run: |
-          npm install --global appium@3.8.0
-          appium driver install xcuitest@${{ matrix.driver }}
       - name: Test calendar and sharing through native iPhone controls
         timeout-minutes: 9
         run: |
