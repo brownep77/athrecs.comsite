@@ -1,4 +1,4 @@
-import { AddToCalendar } from "@/components/races/AddToCalendar";
+import { RaceActions } from "@/components/races/RaceActions";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ExternalLink, Search } from "lucide-react";
@@ -411,7 +411,7 @@ export function RoadUltraDetail({ race, today }: { race: RoadUltra; today: strin
                 >
                   Official edition details <ExternalLink size={14} aria-hidden="true" />
                 </a>
-                <AddToCalendar
+                <RaceActions
                   race={{
                     id: `ultra-${race.slug}-${edition.date}`,
                     name: race.name,

@@ -1,4 +1,4 @@
-import { AddToCalendar } from "@/components/races/AddToCalendar";
+import { RaceActions } from "@/components/races/RaceActions";
 import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
 import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
 import { checkedFixtureEventStart } from "@/data/fixture-details";
@@ -1368,7 +1368,7 @@ function EditionList({
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {calendarEvent ? (
-                    <AddToCalendar race={catalogueCalendarRace(calendarEvent, ed, SITE_URL)} />
+                    <RaceActions race={catalogueCalendarRace(calendarEvent, ed, SITE_URL)} />
                   ) : null}
                   {ed.result_count > 0 && onResults && (
                     <button
