@@ -32,6 +32,26 @@ not a diagnosis of a particular browser problem. Arbitrary messages and stacks
 remain excluded. These improvements cannot reconstruct missing details in older
 reports or establish whether a failed mutation changed server-side data.
 
+Browser report content is unverified, but any associated account is resolved
+from the session on the server when the report arrives. An associated account
+therefore means the server accepted that session at reporting time; it does not
+prove the preceding data operation succeeded or that the visitor saw an error.
+
+## Request and session recovery
+
+Malformed plain GET requests to server functions can return a null/primitive
+value without an HTTP Response. The response middleware now returns an uncached,
+non-indexable 400 for that case instead of crashing while reading `response.status`.
+Normal RPC null results still use the framework serializer, and missing responses
+from other handlers remain failures. This does not change profile access checks.
+
+On the Athlete Account and My Athlete Profile pages, a failed initial session
+check now shows a retry card. It no longer presents the signed-out screen solely
+because the session service/network failed. Retry checks the existing session;
+an ordinary null session or explicit 401 still leads to the sign-in gate. These
+changes address reproduced failure modes, not a proven cause of any historical
+generic browser report.
+
 The log displays UK timestamps, account/entered email, outcome, method, browser
 and version, OS, broad device type, recognised browser number where available,
 approximate platform location, endpoint/page family, HTTP status, authentication
@@ -105,3 +125,10 @@ current auth client can log that normal navigation cancellation as a
 `network_error / TypeError` even though sign-in succeeds. Other network failures,
 data-error reports and failed auth/data responses fail the test. This known
 logging noise does not establish the cause of an unrelated `data_error` report.
+
+Add `--faults` to inject a profile-data HTTP 503 and session-check HTTP 503s.
+The test verifies that the data failure is associated with the still-authenticated
+synthetic account, that the profile recovers, and that both account/profile
+session checks can recover through the retry button without signing in again.
+It then removes the synthetic browser cookies and verifies that the private
+profile is still protected. No failure is injected into the live website.

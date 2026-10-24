@@ -55,6 +55,7 @@ process.env.BETTER_AUTH_SECRET = "client-data-test-only-secret-at-least-32-chars
 const origin = "http://127.0.0.1:18247";
 process.env.BETTER_AUTH_URL = origin;
 process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
+globalThis.__athrecsFullSeedPromise__ = Promise.resolve();
 const server = await createServer({
   server: { host: "127.0.0.1", port: 18247, strictPort: true },
   cacheDir: ".client-data-vite",
@@ -120,6 +121,49 @@ try {
   const sql = await db.getSql();
   const helpers = await server.ssrLoadModule("/src/lib/athrecs/client-data.ts");
   const diagnosticHelpers = await server.ssrLoadModule("/src/lib/athrecs/access-diagnostics.ts");
+  // A crawler opening a public preview RPC as a plain URL can produce a null
+  // terminal value. Diagnostics must not dereference a nonexistent response.
+  const previewModule = await (
+    await fetch(`${origin}/src/lib/athrecs/athlete-profile-share-api.ts`)
+  ).text();
+  const previewStart = previewModule.indexOf("const getPublicSharedProfilePreview =");
+  assert(previewStart >= 0);
+  const previewSection = previewModule.slice(
+    previewStart,
+    previewModule.indexOf(";", previewStart),
+  );
+  const previewId = previewSection.match(/createClientRpc\("([^"]+)"\)/)?.[1];
+  assert(previewId);
+  const malformedPreview = await fetch(`${origin}/_serverFn/${previewId}`);
+  assert.equal(
+    malformedPreview.status,
+    400,
+    "Malformed plain preview RPC is a client error, not a logging crash",
+  );
+  assert.match(malformedPreview.headers.get("cache-control"), /private.*no-store/);
+  assert.match(malformedPreview.headers.get("x-robots-tag"), /noindex/);
+  const validMissingPreview = await runWithStartContext({ startOptions: {} }, () =>
+    createClientRpc(previewId)({
+      method: "GET",
+      data: { slug: "synthetic-missing-profile" },
+      headers: { origin, "sec-fetch-site": "same-origin" },
+      context: {},
+    }),
+  );
+  assert.equal(
+    validMissingPreview.result,
+    null,
+    "A valid RPC still returns the original null result",
+  );
+  assert.equal(validMissingPreview.error, undefined);
+  assert.equal(
+    (
+      await database.query(
+        "select count(*)::int as n from athlete_access_events where kind='server_error'",
+      )
+    ).rows[0].n,
+    0,
+  );
   assert.equal(diagnosticHelpers.browserErrorCode(new Error("private-message")), "Error");
   assert.equal(
     diagnosticHelpers.browserErrorCode(runInNewContext('new TypeError("private-message")')),

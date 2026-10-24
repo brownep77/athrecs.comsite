@@ -35,6 +35,7 @@ import { listMyPotentialResultMatches } from "@/lib/athrecs/result-match-api";
 import { ProfileConnectionsPanel } from "@/components/athletes/ProfileConnectionsPanel";
 import { ProfileProgress } from "@/components/athletes/ProfileProgress";
 import { AthleteId } from "@/components/athletes/AthleteId";
+import { SessionCheckError } from "@/components/auth/SessionCheckError";
 
 export const Route = createFileRoute("/my-athlete-profile")({
   head: () => ({
@@ -51,7 +52,7 @@ export const Route = createFileRoute("/my-athlete-profile")({
 });
 
 function MyAthleteProfilePage() {
-  const { user, isPending: sessionPending } = useCurrentUserState();
+  const { user, isPending: sessionPending, hasSessionError, retrySession } = useCurrentUserState();
   const queryClient = useQueryClient();
   const [selectedSport, setSelectedSport] = useState("All sports");
   const potentialMatches = useQuery({
@@ -105,6 +106,7 @@ function MyAthleteProfilePage() {
   }
 
   if (sessionPending) return <LoadingCard label="Checking your private profile…" />;
+  if (hasSessionError) return <SessionCheckError onRetry={retrySession} />;
 
   if (!user) {
     return (
@@ -228,8 +230,8 @@ function MyAthleteProfilePage() {
               </div>
 
               <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
-                Your results, PBs and sporting progress together. Choose a sport to focus
-                your profile, or view your complete history.
+                Your results, PBs and sporting progress together. Choose a sport to focus your
+                profile, or view your complete history.
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">

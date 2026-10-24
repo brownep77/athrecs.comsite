@@ -96,8 +96,35 @@ try {
   browser = await engine.launch({ headless: true });
   const context = await browser.newContext({ ...devices["iPhone 13"], ignoreHTTPSErrors: true });
   const requests = [];
+  let failureMode = null;
+  let injectedFailures = 0;
   await context.route("**/*", async (route) => {
     const url = new URL(route.request().url());
+    if (url.origin === origin && failureMode) {
+      const functionId = url.pathname.split("/_serverFn/")[1];
+      const functionName = functionId
+        ? JSON.parse(Buffer.from(functionId, "base64url").toString()).export
+        : "";
+      if (
+        failureMode === "profile-data" &&
+        functionName === "getMyAthleteAccount_createServerFn_handler"
+      ) {
+        injectedFailures++;
+        return route.fulfill({
+          status: 503,
+          contentType: "text/plain",
+          body: "Synthetic profile data unavailable",
+        });
+      }
+      if (failureMode === "session-check" && url.pathname === "/api/auth/get-session") {
+        injectedFailures++;
+        return route.fulfill({
+          status: 503,
+          contentType: "application/json",
+          body: JSON.stringify({ message: "Synthetic session check unavailable" }),
+        });
+      }
+    }
     if (url.hostname === "accounts.google.com") {
       const state = url.searchParams.get("state");
       assert(state, "Google authorisation carries real generated state");
@@ -162,7 +189,8 @@ try {
   await page.reload({ waitUntil: "networkidle" });
   await page.getByRole("heading", { name: "Search your race results", exact: true }).waitFor();
   stage = "private-profile";
-  await page.goto(`${origin}/my-athlete-profile`, { waitUntil: "networkidle" });
+  await page.getByRole("link", { name: "My profile", exact: true }).click();
+  await page.waitForURL(`${origin}/my-athlete-profile`);
   await page.getByRole("heading", { name: "Test", exact: true }).waitFor();
   stage = "private-calendar";
   await page.goto(`${origin}/my-race-calendar`, { waitUntil: "networkidle" });
@@ -213,6 +241,94 @@ try {
   console.log(
     "PASS: first-name-only setup, reload, private profile and private calendar remain signed in without data errors.",
   );
+  if (process.argv.includes("--faults")) {
+    stage = "injected-profile-data-failure";
+    failureMode = "profile-data";
+    const reportReceived = page.waitForResponse(
+      (response) =>
+        new URL(response.url()).pathname === "/api/diagnostics" && response.status() === 204,
+    );
+    await page.goto(`${origin}/my-athlete-profile`, { waitUntil: "networkidle" });
+    await page
+      .getByText("Your private Athlete Profile could not be loaded.", { exact: false })
+      .waitFor();
+    await reportReceived;
+    assert(injectedFailures > 0);
+    const duringFailure = await page.evaluate(async () =>
+      (await fetch("/api/auth/get-session")).json(),
+    );
+    assert.equal(
+      duringFailure.user.email,
+      `${oauthIdentity}@example.test`,
+      "A failed data read does not end the session",
+    );
+    const dataReports = (
+      await database.query(
+        "select kind,error_code,route,user_id from athlete_access_events where kind='data_query_error'",
+      )
+    ).rows;
+    assert(
+      dataReports.some(
+        (event) =>
+          event.error_code === "Error" &&
+          event.route === "/my-athlete-profile" &&
+          event.user_id === session.user.id,
+      ),
+    );
+    assert.equal(await page.getByText("Something went wrong", { exact: true }).count(), 0);
+    console.log(
+      "PASS: injected profile HTTP 503 produces an authenticated data-query error and a recoverable inline message, not a lost session.",
+    );
+    failureMode = null;
+    await page.reload({ waitUntil: "networkidle" });
+    await page.getByRole("heading", { name: "Test", exact: true }).waitFor();
+    console.log("PASS: profile recovers after the data service returns without signing in again.");
+
+    for (const [route, heading] of [
+      ["/my-athlete-profile", "Test"],
+      ["/athlete-account?section=potential", "Search your race results"],
+    ]) {
+      stage = "injected-session-check-failure";
+      failureMode = "session-check";
+      injectedFailures = 0;
+      await page.goto(`${origin}${route}`, { waitUntil: "networkidle" });
+      await page
+        .getByRole("heading", { name: "We couldn’t check your sign-in", exact: true })
+        .waitFor();
+      assert.equal(
+        await page
+          .getByRole("heading", { name: /Sign in (?:to view your profile|or create your account)/ })
+          .count(),
+        0,
+      );
+      assert(injectedFailures > 0);
+      assert(
+        (await context.cookies()).some(
+          (cookie) => cookie.name === "__Host-grok-auth.session_token",
+        ),
+      );
+      failureMode = null;
+      const retainedSession = await page.evaluate(async () =>
+        (await fetch("/api/auth/get-session")).json(),
+      );
+      assert.equal(retainedSession.user.id, session.user.id);
+      await page.getByRole("button", { name: "Try again", exact: true }).click();
+      await page.getByRole("heading", { name: heading, exact: true }).waitFor();
+    }
+    assert.deepEqual(errors, [], "Neither injected failure should crash rendering");
+    console.log(
+      "PASS: account/profile session-check failures show a retry state and recover without another Google login.",
+    );
+    await context.clearCookies();
+    await page.goto(`${origin}/my-athlete-profile`, { waitUntil: "networkidle" });
+    await page
+      .getByRole("heading", { name: "Sign in to view your profile", exact: true })
+      .waitFor();
+    assert.equal(await page.getByRole("heading", { name: "Test", exact: true }).count(), 0);
+    console.log(
+      "PASS: genuinely signed-out visitors still see the sign-in gate and no private profile.",
+    );
+  }
 } catch (error) {
   if (browser) {
     const page = browser.contexts()[0]?.pages()[0];

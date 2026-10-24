@@ -45,6 +45,7 @@ import { Button } from "@/components/ui/button";
 import { authClient, openAthleteAuth, signOut } from "@/lib/auth/client";
 import { getAvailableAuthMethods } from "@/lib/auth/auth-methods-api";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
+import { SessionCheckError } from "@/components/auth/SessionCheckError";
 import {
   ATHLETE_SPORTS,
   getMyAthleteAccount,
@@ -232,10 +233,11 @@ function accountToForm(account: AthleteAccountData): AthleteAccountInput {
 }
 
 function AthleteAccountPage() {
-  const { user, isPending } = useCurrentUserState();
+  const { user, isPending, hasSessionError, retrySession } = useCurrentUserState();
   if (isPending) {
     return <LoadingCard label="Checking your Athlete Account…" />;
   }
+  if (hasSessionError) return <SessionCheckError onRetry={retrySession} />;
 
   if (!user) {
     return (

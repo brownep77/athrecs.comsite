@@ -9,6 +9,7 @@ import {
 
 const memberProfileResponses = createMiddleware().server(async ({ pathname, next }) => {
   const result = await next();
+  if (!result.response) return result;
   if (
     pathname === "/athletes" ||
     pathname.startsWith("/athletes/") ||
@@ -49,12 +50,36 @@ const memberProfileResponses = createMiddleware().server(async ({ pathname, next
   return result;
 });
 
-const diagnosticResponses = createMiddleware().server(async ({ pathname, next }) => {
+const diagnosticResponses = createMiddleware().server(async ({ pathname, handlerType, next }) => {
   if (pathname.startsWith("/api/auth/") || pathname === "/api/diagnostics") return next();
   const started = performance.now();
   let status = 500;
   try {
     const result = await next();
+    // Plain URL requests to a server function can return a primitive/null
+    // instead of a Response. Normal RPC transport serialises those values.
+    // Reject the malformed GET without turning diagnostic capture into a crash.
+    if (!result.response) {
+      const request = getRequest();
+      if (
+        handlerType === "serverFn" &&
+        request.method === "GET" &&
+        request.headers.get("x-tsr-serverFn") !== "true"
+      ) {
+        status = 400;
+        return new Response("Invalid data request", {
+          status,
+          headers: {
+            "Cache-Control": "private, no-store",
+            "X-Robots-Tag": "noindex, nofollow, noarchive",
+          },
+        });
+      }
+      // Preserve the framework's failure for other missing-response cases.
+      // In particular, never convert a failed normal RPC into a success.
+      status = 500;
+      return result;
+    }
     status = result.response.status;
     return result;
   } catch (error) {
