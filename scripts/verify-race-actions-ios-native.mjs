@@ -3,6 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { setTimeout as pause } from "node:timers/promises";
+import { verifyNativeSafariInput } from "./ios-safari-input-probe.mjs";
+import { verifyNativeShareSheet } from "./ios-safari-share-sheet.mjs";
 
 // Native XCTest accessibility and input in the installed Mobile Safari app.
 // This deliberately does not request browserName or a WebKit/webview context.
@@ -31,7 +33,7 @@ const report = {
   notCovered: [
     "Physical iPhone/iPad hardware",
     "DOM, JavaScript event.isTrusted, provider URL payloads or CSS measurements",
-    "Native share-sheet display/cancellation and recipient delivery",
+    "Recipient delivery through the native share sheet",
     "External provider navigation and calendar saves",
   ],
 };
@@ -56,7 +58,7 @@ function passed(label) {
   console.log(`PASS: ${label}`);
   save();
 }
-async function api(method, route, body, timeout = 30000) {
+async function api(method, route, body, timeout = 65000) {
   const response = await fetch(new URL(route, endpoint), {
     method,
     headers: { "Content-Type": "application/json" },
@@ -97,7 +99,11 @@ async function describe(element) {
 }
 async function named(label) {
   return until(`native element ${label}`, async () => {
-    const matches = await find(`${labelPredicate(label)} AND enabled == true`);
+    // Mobile Safari exposes a labelled Link/Button and often a same-named
+    // StaticText child. Only the actionable parent is a menu control.
+    const matches = await find(
+      `${labelPredicate(label)} AND type IN {"XCUIElementTypeLink", "XCUIElementTypeButton"} AND enabled == true`,
+    );
     if (!matches.length) return null;
     assert.equal(matches.length, 1, `Ambiguous native menu control: ${label}`);
     return describe(matches[0]);
@@ -106,7 +112,9 @@ async function named(label) {
 const trueAttribute = (value) => value === true || value === "true" || value === 1;
 async function showControl(control, { hittable = false, enabled = true } = {}) {
   const { element, label, type } = control;
-  await mobile("scrollToElement", { elementId: element[elementKey] });
+  const alreadyVisible = trueAttribute(await attribute(element, "visible"));
+  const alreadyHittable = alreadyVisible && trueAttribute(await attribute(element, "hittable"));
+  if (!alreadyHittable) await mobile("scrollToElement", { elementId: element[elementKey] });
   const state = await until(
     `visible${hittable ? "/hittable" : ""} native control ${label}`,
     async () => {
@@ -127,6 +135,7 @@ async function showControl(control, { hittable = false, enabled = true } = {}) {
     type,
     elementId: element[elementKey],
     ...state,
+    accessible: trueAttribute(await attribute(element, "accessible")),
     rect: await command("GET", `/element/${element[elementKey]}/rect`),
   };
   report.controls.push(evidence);
@@ -150,14 +159,31 @@ async function tap(targetControl, { shareMustBeOpen = false } = {}) {
     assert(!(await shareClosed()), "Share must still be open immediately before the outside tap");
     evidence.shareWasOpenBeforeTap = true;
   }
+  const measured = evidence.rect;
+  assert(measured.width > 0 && measured.height > 0, "Native target must have a nonempty rectangle");
+  // A web summary can be an inaccessible AX container with an accessible text
+  // child. Tap its observed screen centre directly, without asking XCTest to
+  // choose an accessibility activation point. The preceding local input probe
+  // must independently prove that this route delivers one trusted browser tap.
+  const point = {
+    x: measured.x + measured.width / 2,
+    y: measured.y + measured.height / 2,
+  };
+  const currentRect = await command("GET", `/element/${element[elementKey]}/rect`);
+  for (const key of ["x", "y", "width", "height"])
+    assert(
+      Math.abs(currentRect[key] - measured[key]) <= 1,
+      `Native target moved before tap: ${key}`,
+    );
   report.taps.push({
     ...evidence,
-    method: "XCTest element click",
+    point,
+    method: "XCTest tap at the measured native screen centre",
     at: new Date().toISOString(),
   });
   save();
-  // Exactly one click; a missing state transition fails instead of retapping.
-  await command("POST", `/element/${element[elementKey]}/click`, {});
+  // Exactly one touch; a missing state transition fails instead of retapping.
+  await mobile("tap", point);
 }
 async function verifyLabels(labels, label) {
   const found = [];
@@ -179,7 +205,7 @@ async function shareClosed() {
   return matches.length === 0;
 }
 async function screenshot(label, orientation) {
-  const png = Buffer.from(await command("GET", "/screenshot", undefined, 15000), "base64");
+  const png = Buffer.from(await command("GET", "/screenshot", undefined, 65000), "base64");
   assert(png.subarray(1, 4).equals(Buffer.from("PNG")), "Expected a native PNG screenshot");
   const size = { width: png.readUInt32BE(16), height: png.readUInt32BE(20) };
   fs.writeFileSync(`${prefix}-${label}.png`, png);
@@ -191,7 +217,7 @@ async function screenshot(label, orientation) {
   return size;
 }
 async function saveSource(label) {
-  const xml = await command("GET", "/source", undefined, 15000);
+  const xml = await command("GET", "/source", undefined, 65000);
   assert.equal(typeof xml, "string");
   fs.writeFileSync(`${prefix}-${label}.xml`, xml);
   return xml;
@@ -272,6 +298,29 @@ async function checkView(orientation) {
   view.shareScreenshot = await screenshot(`${orientation.toLowerCase()}-share`, orientation);
   await saveSource(`${orientation.toLowerCase()}-share`);
 
+  mark(`${orientation}: open and cancel the native system share sheet`);
+  view.nativeShareSheet = await verifyNativeShareSheet({
+    mobile,
+    command,
+    find,
+    attribute,
+    describe,
+    showControl,
+    screenshot,
+    saveSource,
+    until,
+    target,
+    orientation,
+    platformVersion:
+      report.capabilities.platformVersion || report.capabilities["appium:platformVersion"],
+    record: (evidence) => {
+      view.nativeShareSheet = evidence;
+      save();
+    },
+    save,
+  });
+  passed(`${orientation}: native system share sheet opens, cancels and reopens without copying`);
+
   mark(`${orientation}: native Copy link and Simulator pasteboard`);
   const clipboardSentinel = `athrecs-native-copy-before-${orientation}-${Date.now()}`;
   await mobile("setPasteboard", { content: clipboardSentinel });
@@ -331,7 +380,22 @@ try {
     "Use a credential-free Appium root URL",
   );
   const setup = JSON.parse(fs.readFileSync("artifacts/race-actions-safari-ios-setup.json", "utf8"));
-  assert.equal(setup.status, "passed", "The installed Simulator must finish setup");
+  const appiumManagedStartup = setup.mode === "appium-managed";
+  if (appiumManagedStartup) {
+    assert.equal(setup.status, "selected", "Managed startup requires a completed device selection");
+  } else {
+    assert.equal(setup.status, "passed", "The installed Simulator must finish setup");
+  }
+  const sessionCreationTimeout = 600000;
+  report.startup = {
+    owner: appiumManagedStartup ? "Appium XCUITest" : "Simulator preparation script",
+    preparationMode: setup.mode || "prebooted",
+    preparationStatus: setup.status,
+    deviceSelectionOnly: appiumManagedStartup,
+    sessionCreationTimeoutMs: sessionCreationTimeout,
+    ...(appiumManagedStartup ? { simulatorStartupTimeoutMs: 300000 } : {}),
+    finalProofRequired: "Native session, device, Safari screenshots, taps and application checks",
+  };
   const selected = setup.selectedDevice;
   const udid = process.env.ATHRECS_SAFARI_DEVICE_UDID || selected?.udid;
   assert.match(udid || "", /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i);
@@ -345,6 +409,10 @@ try {
   const prebuiltCapabilities = {};
   const derivedDataPath = process.env.ATHRECS_WDA_DERIVED_DATA_PATH;
   const prebuiltAppPath = process.env.ATHRECS_WDA_PREBUILT_APP_PATH;
+  assert(
+    !appiumManagedStartup || prebuiltAppPath,
+    "Appium-managed startup requires the verified official preinstalled WDA app",
+  );
   assert(
     !(derivedDataPath && prebuiltAppPath),
     "Choose either a verified downloaded WDA app or a derived-data build, not both",
@@ -421,10 +489,20 @@ try {
     "appium:screenshotQuality": 0,
     "appium:showXcodeLog": true,
     "appium:wdaLaunchTimeout": 120000,
-    "appium:wdaConnectionTimeout": 30000,
+    "appium:wdaConnectionTimeout": 60000,
     "appium:wdaStartupRetries": 1,
-    "appium:newCommandTimeout": 90,
+    "appium:newCommandTimeout": 120,
+    // State assertions below remain explicit. Avoid spending ten seconds on
+    // each XCTest idle check while Safari's first-boot services are settling.
+    "appium:waitForIdleTimeout": 1,
     ...prebuiltCapabilities,
+    ...(appiumManagedStartup
+      ? {
+          "appium:isHeadless": false,
+          "appium:simulatorStartupTimeout": 300000,
+          "appium:forceAppLaunch": true,
+        }
+      : {}),
   };
   report.requestedCapabilities = capabilities;
   mark("create native XCTest session for Mobile Safari");
@@ -432,7 +510,7 @@ try {
     "POST",
     "/session",
     { capabilities: { alwaysMatch: capabilities } },
-    180000,
+    sessionCreationTimeout,
   );
   sessionId = session.sessionId;
   assert(sessionId, "Appium did not return a session");
@@ -447,6 +525,25 @@ try {
   );
   await command("POST", "/timeouts", { implicit: 0 });
   await mobile("activateApp", { bundleId });
+  await command("POST", "/orientation", { orientation: "PORTRAIT" });
+  report.inputProbe = await verifyNativeSafariInput({
+    mobile,
+    command,
+    find,
+    attribute,
+    describe,
+    showControl,
+    screenshot,
+    saveSource,
+    record: (evidence) => {
+      report.inputProbe = evidence;
+      save();
+    },
+    phase: mark,
+  });
+  passed(
+    "Native centre taps deliver one trusted click on a button and a disclosure in Mobile Safari",
+  );
   for (const orientation of ["PORTRAIT", "LANDSCAPE"]) await checkView(orientation);
   report.status = "passed";
   mark("complete");
@@ -457,20 +554,30 @@ try {
   save();
   console.error(`FAIL native iOS Safari (${phase}): ${error.stack}`);
   if (sessionId) {
-    const diagnostics = await Promise.allSettled([
-      saveSource("failure"),
-      screenshot("failure"),
-      mobile("activeAppInfo", {}, 10000),
-    ]);
-    report.failure.diagnostics = diagnostics.map((result, index) => ({
-      kind: ["native accessibility XML", "native screenshot", "active app"][index],
-      status: result.status,
-      ...(result.status === "rejected"
-        ? { error: result.reason.message }
-        : index === 2
-          ? { value: result.value }
-          : {}),
-    }));
+    // XCTest has one command stream. Serial diagnostic reads avoid queueing
+    // three expensive native snapshots behind a stalled request.
+    report.failure.diagnostics = [];
+    for (const [kind, collect] of [
+      ["native accessibility XML", () => saveSource("failure")],
+      ["native screenshot", () => screenshot("failure")],
+      ["active app", () => mobile("activeAppInfo", {}, 65000)],
+    ]) {
+      try {
+        const value = await collect();
+        report.failure.diagnostics.push({
+          kind,
+          status: "fulfilled",
+          ...(kind === "active app" ? { value } : {}),
+        });
+      } catch (diagnosticError) {
+        report.failure.diagnostics.push({
+          kind,
+          status: "rejected",
+          error: diagnosticError.message,
+        });
+      }
+      save();
+    }
   }
 } finally {
   if (sessionId) {
