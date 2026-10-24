@@ -1,3 +1,4 @@
+import { isParkrunResult, PARKRUN_TIMING_LABEL } from "./parkrun-timing.ts";
 import type { PublicResultEdition, PublicRaceResult } from "./public-results-api";
 import type { ResultsSearch } from "./public-results-search";
 import { formatDuration, formatRaceDateShort } from "./format";
@@ -10,6 +11,7 @@ export function publicResultsHead(
   results: PublicRaceResult[],
   search: Pick<ResultsSearch, "q" | "page">,
 ) {
+  const parkrun = isParkrunResult({ sport: edition.sport, eventName: edition.event_name });
   const baseUrl = `${SITE_URL}/results/${resultSlug(edition)}`;
   const filtered = Boolean(search.q);
   const url = !filtered && search.page > 1 ? `${baseUrl}?page=${search.page}` : baseUrl;
@@ -44,10 +46,11 @@ export function publicResultsHead(
               result.finish_time_seconds !== null
                 ? `Recorded time ${formatDuration(result.finish_time_seconds)}`
                 : "Finish time not supplied",
-              ...(result.chip_time_seconds !== null
+              ...(parkrun ? [PARKRUN_TIMING_LABEL] : []),
+              ...(!parkrun && result.chip_time_seconds !== null
                 ? [`chip time ${formatDuration(result.chip_time_seconds)}`]
                 : []),
-              ...(result.gun_time_seconds !== null
+              ...(!parkrun && result.gun_time_seconds !== null
                 ? [`gun time ${formatDuration(result.gun_time_seconds)}`]
                 : []),
               ...(result.overall_place !== null ? [`source position ${result.overall_place}`] : []),
