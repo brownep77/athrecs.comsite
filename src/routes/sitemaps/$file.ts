@@ -23,6 +23,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
             const { ROAD_ULTRAS, ULTRA_CHECKED, ULTRA_GUIDE_PATH, ultraPath } =
               await import("@/lib/running/road-ultras");
             const { SUPERHALFS_PATH, SUPERHALFS_CHECKED_AT } = await import("@/data/superhalfs");
+            const { RUNNING_SERIES_GUIDES } = await import("@/data/running-series-guides");
             const { RUNNING_GUIDES_PATH, RUNNING_GUIDES_MODIFIED } =
               await import("@/lib/running/guide-directory");
             const { getRunningGuideDirectory } =
@@ -33,6 +34,8 @@ export const Route = createFileRoute("/sitemaps/$file")({
             for (const discipline of ["road", "trail", "fell", "cross-country"])
               modified.set(`/running/${discipline}`, RUNNING_GUIDES_MODIFIED);
             modified.set(SUPERHALFS_PATH, SUPERHALFS_CHECKED_AT);
+            for (const guide of RUNNING_SERIES_GUIDES)
+              modified.set(`/running/series/${guide.slug}`, guide.checkedAt);
             for (const [countries, races] of [
               [MARATHON_COUNTRIES, ROAD_MARATHONS],
               [HALF_MARATHON_COUNTRIES, ROAD_HALF_MARATHONS],
@@ -62,6 +65,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
               ...ROAD_HALF_MARATHONS.map((race) => `/running/races/${race.slug}`),
               ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
               ...ROAD_MARATHONS.map((race) => `/running/races/${race.slug}`),
+              ...RUNNING_SERIES_GUIDES.map((guide) => `/running/series/${guide.slug}`),
             );
           }
           return sitemapResponse(

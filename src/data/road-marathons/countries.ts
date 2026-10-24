@@ -65,6 +65,51 @@ export const MARATHON_COUNTRIES: readonly MarathonCountryGuide[] = [
     description:
       "South Africa’s road marathons take in Cape Town’s coastline, Soweto’s streets and some fairly persuasive hills. Compare 42.195 km races by province, with confirmed dates, entry options, course guides, approximate fields and previous results. A downhill route may look generous on paper; your legs might offer a different review the following morning.",
   },
+  {
+    id: "spain",
+    name: "Spain",
+    guide: "spain-marathons",
+    countryCode: "ES",
+    regionLabel: "Autonomous community",
+    description:
+      "Compare selected Spanish road marathons in Valencia and Barcelona, with official dates, entry routes, course previews and results links. Choose a race for your first marathon or a competitive time target, and check the edition-specific information before booking. Dates awaiting organiser confirmation remain TBC.",
+  },
+  {
+    id: "portugal",
+    name: "Portugal",
+    guide: "portugal-marathons",
+    countryCode: "PT",
+    regionLabel: "Metropolitan area",
+    description:
+      "Explore selected road marathons in Lisbon and Porto, with organiser-confirmed dates, course information, entry options and results links. Check the published start venue and transport plan for your edition. Completed editions provide context, while dates for a new edition stay TBC until confirmed.",
+  },
+  {
+    id: "germany",
+    name: "Germany",
+    guide: "germany-marathons",
+    countryCode: "DE",
+    regionLabel: "State / city",
+    description:
+      "Compare the Berlin and Frankfurt road marathons, with confirmed dates, official entry routes, course previews and results archives. Plan a first marathon, a personal-best attempt or a competitive application using each organiser's current rules. Earlier maps are labelled so runners can distinguish a preview from final edition information.",
+  },
+  {
+    id: "denmark",
+    name: "Denmark",
+    guide: "denmark-marathons",
+    countryCode: "DK",
+    regionLabel: "Region",
+    description:
+      "Compare Copenhagen Marathon and HCA Marathon in Odense, with official dates, entry guidance, course previews and previous-results links. Find practical advice for amateur, club and competitive runners. Confirm your edition's timetable and distinguish an older published map from a final route announcement.",
+  },
+  {
+    id: "czechia",
+    name: "Czechia",
+    guide: "czechia-marathons",
+    countryCode: "CZ",
+    regionLabel: "Region",
+    description:
+      "Explore Prague Marathon and Třeboň Nature Marathon, with confirmed dates, entry links, course surfaces, practical guidance and previous results. Compare the city and countryside settings while checking the actual road surface and profile. Each guide identifies the edition behind its published timetable and course preview.",
+  },
 ];
 
 export const countryGuide = (id: string) => MARATHON_COUNTRIES.find((country) => country.id === id);

@@ -17,6 +17,9 @@ The directory uses the existing content registries:
   the existing World Marathon Majors, UTMB World Series and UTMB Index collections.
   Series without separate editorial pages link to their sections on
   `/running/race-series`.
+- `src/data/running-series-guides.ts` supplies road, trail, desert and event-family
+  guides at `/running/series/:slug`. The hub and series directory receive compact
+  summaries through server functions; full prose is loaded for the chosen guide.
 - `src/lib/athrecs/country-sites.ts` supplies country event portals. A portal is
   distinct from a dedicated country race guide; a country need not have both.
 
@@ -76,7 +79,9 @@ safeguards on relevant pull requests. On relevant `main` pushes it waits up to
 submits the eligible guide batch. The marker is the Vercel Git commit SHA; it
 prevents an older live page from satisfying a new release's readiness check. Its receipt
 reports a count and response code: HTTP 200 acknowledges receipt, while HTTP 202
-means ownership validation is pending. Neither proves indexing. No Google
+means ownership validation is pending. Neither proves indexing. The workflow then
+runs the full SSR verifier against production to check guide content, structured
+data, internal links, sitemap membership and 404 responses. No Google
 Search Console submission is performed; the site's existing connection is for
 read-only reporting. Google can discover the published URLs through the internal
 links and the sitemap already advertised in robots.txt.
@@ -104,6 +109,42 @@ links inside native `details`. It checks that structured list destinations also
 exist in the rendered links. The existing route checks cover HTTP status,
 metadata, canonicals, robots, JSON-LD, internal links, sitemap membership and 404s.
 Counts are derived from the registries rather than frozen in the test.
+
+## European country and series expansion, 23–24 October 2026
+
+Spain, Portugal, Germany, Denmark and Czechia now have selected marathon and
+half-marathon country collections. These are editorial selections rather than
+complete national calendars. Each individual guide retains organiser evidence,
+the original source-check date and edition qualifications. Older course maps are
+labelled by year; unconfirmed dates do not produce SportsEvent markup. Lisbon's
+unresolved 09:20 / 09:30 half-marathon start-time conflict remains TBC, without
+assigning the conflicting times to invented waves.
+
+Eight new series pages explain the format, entry routes, amateur and competitive
+guidance, completion or ranking rules, planning, visible questions and official
+links. The pages distinguish event families, completion challenges and competitive
+championships. Article and BreadcrumbList describe the editorial guides; they are
+not marked up as individual dated races. Full prose stays in server modules,
+while listing routes receive only compact summaries.
+
+The directory, country overviews, individual guides, series listings, related
+links and HTML site map form a connected set of public pages. The XML sitemap
+derives new series paths from the content registry. IndexNow uses the same
+canonical paths and preserves its release, public-access, robots, canonical,
+sitemap and ownership safeguards.
+
+The verification scripts cover all new guide URLs, visible sections and FAQs,
+official links, schema, related navigation, sitemap inclusion and invalid-guide
+404 responses. Country data checks assert unique IDs and the presence of the
+published countries. The synthetic notification suite rejects a noindex series
+page before any notification is sent.
+
+An interrupted publishing session required reconstruction of the unpublished
+changes on 24 October, based on the retained 23 October evidence. Research dates
+were not advanced. The recovery was reconciled against the newer production
+baseline, retaining the calendar subscription feature and intervening source
+registry additions. Record actual validation, deployment and notification results
+in the release handover; this document does not itself claim indexing.
 
 Separately inspect desktop and mobile layouts, keyboard operation of the native
 groups, and filter/reset behaviour. Record actual verification and deployment

@@ -1,3 +1,8 @@
+import { RACES as SPAIN } from "./spain";
+import { RACES as PORTUGAL } from "./portugal";
+import { RACES as GERMANY } from "./germany";
+import { RACES as DENMARK } from "./denmark";
+import { RACES as CZECHIA } from "./czechia";
 import { AUSTRALIA_ROAD_MARATHONS } from "./australia";
 import { CANADA_ROAD_MARATHONS } from "./canada";
 import { IRELAND_ROAD_MARATHONS } from "./ireland";
@@ -33,6 +38,11 @@ export const ROAD_MARATHONS: readonly RoadMarathon[] = [
   ...SOUTH_AFRICA_KZN_MARATHONS,
   ...SOUTH_AFRICA_MB_MARATHONS,
   ...SOUTH_AFRICA_WESTERN_MARATHONS,
+  ...SPAIN,
+  ...PORTUGAL,
+  ...GERMANY,
+  ...DENMARK,
+  ...CZECHIA,
 ];
 
 export const roadMarathonsForCountry = (country: MarathonCountry) =>

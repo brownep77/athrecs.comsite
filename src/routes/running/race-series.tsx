@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { ArrowRight, ExternalLink, ShieldCheck } from "lucide-react";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
@@ -8,25 +9,34 @@ import { listEvents } from "@/runrecs/api";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import type { EventListItem, RaceGroupCode } from "@/lib/athrecs/types";
 import { RunningGuidesLink } from "@/components/running/RunningGuidesLink";
+import { runningSeriesGuidePath } from "@/lib/running/series-guides";
+
+const loadSeriesGuides = createServerFn({ method: "GET" }).handler(async () => {
+  const { getRunningSeriesSummaries } = await import("@/lib/running/series-guides.server");
+  return getRunningSeriesSummaries();
+});
 
 const groupOrder: RaceGroupCode[] = ["world-marathon-majors", "utmb-world-series", "utmb-index"];
 
 export const Route = createFileRoute("/running/race-series")({
   loader: async () => {
-    const collections = await Promise.all(
-      groupOrder.map(async (code) => ({
-        code,
-        races: await listEvents({ data: { group: code, upcomingOnly: false, limit: 80 } }),
-      })),
-    );
-    return collections;
+    const [collections, guides] = await Promise.all([
+      Promise.all(
+        groupOrder.map(async (code) => ({
+          code,
+          races: await listEvents({ data: { group: code, upcomingOnly: false, limit: 80 } }),
+        })),
+      ),
+      loadSeriesGuides(),
+    ]);
+    return { collections, guides };
   },
-  head: () => ({
+  head: ({ loaderData }) => ({
     links: [{ rel: "canonical", href: `${SITE_URL}/running/race-series` }],
     meta: siteGraphMeta({
-      title: "SuperHalfs, World Marathon Majors & UTMB races | ATHRECS",
+      title: "Running race series: road, trail & desert guides | AthRecs",
       description:
-        "Explore SuperHalfs half marathons, World Marathon Majors, official UTMB World Series events and verified UTMB Index races on AthRecs.",
+        "Compare SuperHalfs, European Marathon Classics, Marathon des Sables and other road, trail and desert series, with entry and runner-planning guides.",
       url: `${SITE_URL}/running/race-series`,
     }),
     scripts: [
@@ -39,7 +49,7 @@ export const Route = createFileRoute("/running/race-series")({
               "@type": "CollectionPage",
               "@id": `${SITE_URL}/running/race-series#page`,
               url: `${SITE_URL}/running/race-series`,
-              name: "SuperHalfs, World Marathon Majors & UTMB races",
+              name: "Running race series and challenges",
               inLanguage: "en-GB",
               breadcrumb: { "@id": `${SITE_URL}/running/race-series#breadcrumb` },
               mainEntity: {
@@ -49,6 +59,10 @@ export const Route = createFileRoute("/running/race-series")({
                   ...raceGroupDefinitions.map((group) => ({
                     name: group.name,
                     path: `/running/race-series#${group.code}`,
+                  })),
+                  ...(loaderData?.guides ?? []).map((guide) => ({
+                    name: guide.name,
+                    path: runningSeriesGuidePath(guide.slug),
                   })),
                 ].map((item, index) => ({
                   "@type": "ListItem",
@@ -73,7 +87,7 @@ export const Route = createFileRoute("/running/race-series")({
               })),
             },
           ],
-        }),
+        }).replace(/</g, "\\u003c"),
       },
     ],
   }),
@@ -82,7 +96,9 @@ export const Route = createFileRoute("/running/race-series")({
 
 function RaceSeriesPage() {
   const loaded = Route.useLoaderData();
-  const racesByCode = new Map(loaded.map((collection) => [collection.code, collection.races]));
+  const racesByCode = new Map(
+    loaded.collections.map((collection) => [collection.code, collection.races]),
+  );
 
   return (
     <div className="space-y-8 pb-10">
@@ -105,14 +121,20 @@ function RaceSeriesPage() {
             Running race series
           </p>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
-            SuperHalfs, World Marathon Majors &amp; UTMB races
+            Running race series and challenges
           </h1>
           <p className="max-w-3xl text-sm leading-relaxed text-muted">
-            Explore the six SuperHalfs half marathons, World Marathon Majors, the official UTMB
-            World Series calendar, and individually verified UTMB Index races. UTMB Index races
-            contribute to an athlete’s Index but do not award Running Stones.
+            Compare road, trail, mountain and desert races, from a first series challenge to a
+            competitive season. Read the guides for entry routes, completion and ranking rules,
+            practical preparation and official organiser information.
           </p>
           <div className="flex flex-wrap gap-2">
+            <a
+              href="#series-guides"
+              className="inline-flex min-h-10 items-center rounded-lg border border-border bg-elevated px-3 text-sm font-medium text-fg no-underline hover:border-border-strong"
+            >
+              Series and challenge guides
+            </a>
             <a
               href="#superhalfs"
               className="inline-flex min-h-10 items-center rounded-lg border border-border bg-elevated px-3 text-sm font-medium text-fg no-underline hover:border-border-strong"
@@ -131,6 +153,40 @@ function RaceSeriesPage() {
           </div>
         </div>
       </header>
+
+      <section
+        id="series-guides"
+        aria-labelledby="series-guides-heading"
+        className="scroll-mt-24 space-y-4"
+      >
+        <div className="space-y-2">
+          <h2 id="series-guides-heading" className="font-display text-2xl font-semibold">
+            Explore series and challenge guides
+          </h2>
+          <p className="max-w-3xl leading-7 text-muted">
+            Find practical advice for amateur, club and competitive runners. Each guide
+            distinguishes an event family, a completion challenge or a championship.
+          </p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {loaded.guides.map((guide) => (
+            <a
+              key={guide.slug}
+              href={runningSeriesGuidePath(guide.slug)}
+              className="group flex flex-col rounded-xl border border-border bg-surface p-5 no-underline transition-colors hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:p-6"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+                {guide.format}
+              </p>
+              <h3 className="mt-2 font-display text-xl font-semibold text-fg">{guide.name}</h3>
+              <p className="mt-3 flex-1 text-sm leading-6 text-muted">{guide.shortDescription}</p>
+              <span className="mt-4 inline-flex items-center gap-2 font-semibold text-accent">
+                Read the runner guide <ArrowRight className="size-4" aria-hidden="true" />
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
 
       <section
         id="superhalfs"

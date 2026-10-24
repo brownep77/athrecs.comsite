@@ -31,7 +31,22 @@ const { countryMarathonHead, roadRaceHead } =
   await import("../src/lib/running/road-marathon-seo.ts");
 const now = process.env.MARATHON_VERIFY_NOW ?? new Date().toISOString();
 const countries = new Set(MARATHON_COUNTRIES.map((country) => country.id));
-assert.equal(countries.size, 7);
+assert.equal(countries.size, MARATHON_COUNTRIES.length, "Country IDs must be unique");
+for (const country of [
+  "uk",
+  "australia",
+  "new-zealand",
+  "usa",
+  "canada",
+  "ireland",
+  "south-africa",
+  "spain",
+  "portugal",
+  "germany",
+  "denmark",
+  "czechia",
+])
+  assert(countries.has(country), `Missing marathon country guide: ${country}`);
 assert.equal(roadMarathonsForCountry("uk").length, 15);
 assert.equal(
   new Set(ROAD_MARATHONS.map((race) => race.slug)).size,

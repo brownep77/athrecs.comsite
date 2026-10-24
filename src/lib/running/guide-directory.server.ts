@@ -5,6 +5,8 @@ import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
 import type { MarathonCountryGuide, RoadRace } from "@/data/road-marathons/types";
 import { raceGroupDefinitions, raceGroupMemberships } from "@/data/race-collections";
 import { SUPERHALFS_CHECKED_AT, SUPERHALFS_PATH } from "@/data/superhalfs";
+import { RUNNING_SERIES_GUIDES } from "@/data/running-series-guides";
+import { runningSeriesGuidePath } from "./series-guides";
 import { COUNTRY_SITES, countryHomePath } from "@/lib/athrecs/country-sites";
 import { ROAD_GUIDE_TEMPLATE_MODIFIED } from "./guide-modified";
 import {
@@ -123,6 +125,13 @@ export async function getRunningGuideDirectory(): Promise<RunningGuideDirectory>
       description: seriesDescriptions[group.code] ?? group.description,
       kind: group.code === "utmb-index" ? ("collection" as const) : ("series" as const),
     })),
+    ...RUNNING_SERIES_GUIDES.map((guide) => ({
+      id: guide.slug,
+      name: guide.name,
+      path: runningSeriesGuidePath(guide.slug),
+      description: guide.shortDescription,
+      kind: guide.kind,
+    })),
   ];
 
   const portals = COUNTRY_SITES.map((site) => ({
@@ -139,6 +148,7 @@ export async function getRunningGuideDirectory(): Promise<RunningGuideDirectory>
     ...ROAD_MARATHONS.map((race) => race.checkedAt),
     ...ROAD_HALF_MARATHONS.map((race) => race.checkedAt),
     ...raceGroupMemberships.map((membership) => membership.checkedAt),
+    ...RUNNING_SERIES_GUIDES.map((guide) => guide.checkedAt),
   ]
     .sort()
     .at(-1)!;

@@ -32,6 +32,31 @@ export const runningCountryPalettes = {
     border: "#c9d9bb",
     accent: "#285c49",
   },
+  spain: {
+    background: "linear-gradient(135deg, #f8dfe4 0%, #fff1c4 50%, #f6dce1 100%)",
+    border: "#e8cfb8",
+    accent: "#853e32",
+  },
+  portugal: {
+    background: "linear-gradient(135deg, #dceee0 0%, #fff4cf 48%, #f6dce1 100%)",
+    border: "#cddbbd",
+    accent: "#315d45",
+  },
+  germany: {
+    background: "linear-gradient(135deg, #e4e7eb 0%, #f6dce1 50%, #fff0be 100%)",
+    border: "#ddd0c4",
+    accent: "#63413a",
+  },
+  denmark: {
+    background: "linear-gradient(135deg, #f7dce2 0%, #fffafa 50%, #f4dce1 100%)",
+    border: "#e7c3cc",
+    accent: "#8d3c4b",
+  },
+  czechia: {
+    background: "linear-gradient(135deg, #dce7fa 0%, #fffafa 48%, #f6dce1 100%)",
+    border: "#ccd4e3",
+    accent: "#3c527b",
+  },
   "south-africa": {
     background:
       "linear-gradient(135deg, #dee3e7 0%, #f6e7b7 18%, #deede1 38%, #fcfbf6 54%, #f2dddd 76%, #dce6f5 100%)",

@@ -24,7 +24,7 @@ export const Route = createFileRoute("/running/guides")({
       ...siteGraphMeta({
         title: "Running guides by country & race series | AthRecs",
         description:
-          "Find marathon, half-marathon and ultra guides by country. Explore SuperHalfs, World Marathon Majors and UTMB, with courses, entry details and runner information.",
+          "Find marathon, half-marathon and ultra guides by country. Explore road, trail and desert race series with course previews, entry details and runner advice.",
         url: `${SITE_URL}${RUNNING_GUIDES_PATH}`,
       }),
       ...(loaderData?.release ? [{ name: "athrecs-release", content: loaderData.release }] : []),

@@ -40,6 +40,7 @@ function validateScope(scope) {
       ) ||
         /^\/running\/[a-z0-9-]+-marathons$/.test(pathname) ||
         /^\/running\/(?:races|ultramarathons)\/[a-z0-9-]+$/.test(pathname) ||
+        /^\/running\/series\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(pathname) ||
         ["/running", "/site-map"].includes(pathname),
       "URL is outside the running-guide notification scope",
     );
@@ -72,17 +73,27 @@ export async function runningGuideSearchScope() {
     },
   });
   try {
-    const [full, halves, fullCountries, halfCountries, ultras, series, superhalfs, hub] =
-      await Promise.all([
-        import("../src/data/road-marathons/index.ts"),
-        import("../src/data/road-half-marathons/index.ts"),
-        import("../src/data/road-marathons/countries.ts"),
-        import("../src/data/road-half-marathons/countries.ts"),
-        import("../src/lib/running/road-ultras.ts"),
-        import("../src/data/race-collections.ts"),
-        import("../src/data/superhalfs.ts"),
-        import("../src/lib/running/guide-directory.ts"),
-      ]);
+    const [
+      full,
+      halves,
+      fullCountries,
+      halfCountries,
+      ultras,
+      series,
+      superhalfs,
+      hub,
+      editorialSeries,
+    ] = await Promise.all([
+      import("../src/data/road-marathons/index.ts"),
+      import("../src/data/road-half-marathons/index.ts"),
+      import("../src/data/road-marathons/countries.ts"),
+      import("../src/data/road-half-marathons/countries.ts"),
+      import("../src/lib/running/road-ultras.ts"),
+      import("../src/data/race-collections.ts"),
+      import("../src/data/superhalfs.ts"),
+      import("../src/lib/running/guide-directory.ts"),
+      import("../src/data/running-series-guides.ts"),
+    ]);
     assert.equal(`${origin}${hub.RUNNING_GUIDES_PATH}`, hubUrl);
     const countryPaths = [
       ...fullCountries.MARATHON_COUNTRIES,
@@ -94,10 +105,20 @@ export async function runningGuideSearchScope() {
     );
     racePaths.push(...ultras.ROAD_ULTRAS.map((race) => ultras.ultraPath(race.slug)));
     assert(countryPaths.length > 0 && racePaths.length > 0, "Empty guide registry");
+    const editorialSeriesPaths = editorialSeries.RUNNING_SERIES_GUIDES.map(
+      (guide) => `/running/series/${guide.slug}`,
+    );
+    assert(editorialSeriesPaths.length >= 8, "The eight new series guides must be present");
+    assert.equal(
+      new Set(editorialSeriesPaths).size,
+      editorialSeriesPaths.length,
+      "Duplicate series guide URL",
+    );
     const hubLinks = [
       ...countryPaths,
       ...racePaths,
       superhalfs.SUPERHALFS_PATH,
+      ...editorialSeriesPaths,
       ...series.raceGroupDefinitions.map((group) => `/running/race-series#${group.code}`),
     ].map((pathname) => `${origin}${pathname}`);
     const canonicalLinks = hubLinks.map((value) => {
@@ -124,6 +145,7 @@ export async function runningGuideSearchScope() {
       ].sort(),
       countryGuides: countryPaths.length,
       raceGuides: racePaths.length,
+      seriesGuides: editorialSeriesPaths.length,
     };
     validateScope(scope);
     return scope;
@@ -391,7 +413,12 @@ export async function notifyRunningGuideSearch({
 export async function verifyRunningGuideNotification() {
   const race = `${origin}/running/races/synthetic-race`;
   const country = `${origin}/running/uk-marathons`;
-  const scope = { hubUrl, urls: [hubUrl, country, race], hubLinks: [country, race] };
+  const seriesGuide = `${origin}/running/series/synthetic-series`;
+  const scope = {
+    hubUrl,
+    urls: [hubUrl, country, race, seriesGuide],
+    hubLinks: [country, race, seriesGuide],
+  };
   const keyFile = "synthetic-guide-key.txt";
   const key = "synthetic-guide-key";
   const expectedRelease = "a".repeat(40);
@@ -441,7 +468,7 @@ export async function verifyRunningGuideNotification() {
   checks++;
   for (const status of [200, 202]) {
     const test = fixture({ [endpoint]: () => response("", "text/plain", status) });
-    assert.deepEqual(await run(test, { checkOnly: false }), { checked: 3, submitted: 3, status });
+    assert.deepEqual(await run(test, { checkOnly: false }), { checked: 4, submitted: 4, status });
     const posts = test.calls.filter((call) => call.method === "POST");
     assert.equal(posts.length, 1);
     assert.deepEqual(JSON.parse(posts[0].body), {
@@ -461,10 +488,11 @@ export async function verifyRunningGuideNotification() {
         ),
     },
     { [race]: () => response(html(race, "noindex, follow")) },
+    { [seriesGuide]: () => response(html(seriesGuide, "noindex, follow")) },
     { [race]: () => response(html(country)) },
     { [race]: () => response(html(race), "text/html", 200, { "X-Robots-Tag": "noindex" }) },
     { [race]: () => response("", "text/html", 302, { Location: "/join" }) },
-    { [sitemapUrl]: () => response(xml([hubUrl, country]), "application/xml") },
+    { [sitemapUrl]: () => response(xml([hubUrl, country, seriesGuide]), "application/xml") },
     { [`${origin}/robots.txt`]: () => response("User-agent: *\nDisallow: /running", "text/plain") },
     {
       [`${origin}/robots.txt`]: () =>
@@ -488,7 +516,7 @@ export async function verifyRunningGuideNotification() {
         html(hubUrl).replace(`<meta name="athrecs-release" content="${expectedRelease}">`, ""),
       ),
   });
-  assert.equal((await run(noMarker, { expectedRelease: undefined })).checked, 3);
+  assert.equal((await run(noMarker, { expectedRelease: undefined })).checked, 4);
   checks++;
   const allowed = fixture({
     [`${origin}/robots.txt`]: () =>
@@ -497,7 +525,7 @@ export async function verifyRunningGuideNotification() {
         "text/plain",
       ),
   });
-  assert.equal((await run(allowed)).checked, 3);
+  assert.equal((await run(allowed)).checked, 4);
   checks++;
   let sitemapReads = 0;
   const changed = fixture({
@@ -537,7 +565,7 @@ export async function verifyRunningGuideNotification() {
         },
       })
     ).checked,
-    3,
+    4,
   );
   checks++;
   clock = 0;
@@ -602,7 +630,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       const waitMs =
         Number(args.find((arg) => arg.startsWith("--wait-for-hub="))?.split("=")[1] ?? 0) * 1000;
       console.log(
-        `Checking ${scope.urls.length} canonical pages: hub, ${scope.countryGuides} country collections, ${scope.raceGuides} race guides, series and updated discovery pages.`,
+        `Checking ${scope.urls.length} canonical pages: hub, ${scope.countryGuides} country collections, ${scope.raceGuides} race guides, ${scope.seriesGuides} new series guides and updated discovery pages.`,
       );
       const result = await notifyRunningGuideSearch({
         scope,
