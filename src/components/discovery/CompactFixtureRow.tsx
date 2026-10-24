@@ -62,7 +62,10 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
           aria-label={dateLabel}
           className="flex w-14 shrink-0 flex-col items-center rounded-lg border border-accent/20 bg-accent-soft py-2 text-accent"
         >
-          <span aria-hidden="true" className="text-[10px] font-bold uppercase tracking-wider">
+          <span
+            aria-hidden="true"
+            className="whitespace-nowrap text-[9px] leading-[15px] font-bold uppercase"
+          >
             {date
               ? `${new Intl.DateTimeFormat("en-GB", { weekday: "short", timeZone: "UTC" }).format(date)} · ${new Intl.DateTimeFormat("en-GB", { month: "short", timeZone: "UTC" }).format(date)}`
               : "Date"}
