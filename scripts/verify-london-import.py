@@ -1,4 +1,4 @@
-"""Bounded read-only verification of the completed London 2025 production import.
+"""Bounded read-only verification of the completed London edition production import.
 
 No queries execute at import. --check-inputs validates local plan/snapshot only.
 Private plan, receipt, snapshot and report paths must remain outside this repo.
@@ -108,7 +108,7 @@ LEFT JOIN LATERAL (
   AND search_row.row_ordinal=item.ordinality::int
 ) search ON true"""
 
-NEW_SQL = """WITH expected AS (SELECT value p FROM jsonb_array_elements($1::jsonb))
+_NEW_SQL = """WITH expected AS (SELECT value p FROM jsonb_array_elements($1::jsonb))
 SELECT p->>'groupId' group_id,a.id,a.slug,
  (a.id IS NOT NULL AND h.athlete_id=a.id) profile_and_history_exist,
  (a.display_name=p#>>'{athleteDraft,displayName}'
@@ -126,10 +126,10 @@ SELECT p->>'groupId' group_id,a.id,a.slug,
  (h.performances=p#>'{history,performances}' AND jsonb_array_length(h.performances)=1
   AND h.performances->0->>'verificationStatus'='unverified'
   AND h.performances->0->'timing'='{"basis":"unknown"}'::jsonb
-  AND h.performances->0->>'discipline'='Marathon' AND h.performances->0->>'date'='2025-04-27'
+  AND h.performances->0->>'discipline'='Marathon' AND h.performances->0->>'date'='__LONDON_DATE__'
   AND h.performances->0->>'place'='' AND h.performances->0->'places'=
     '{"overall":null,"gender":null,"category":null}'::jsonb) one_exact_unverified_generic_result,
- (h.published_at IS NOT NULL AND NOT h.complete AND h.years_expected=ARRAY[2025] AND h.years_captured=ARRAY[2025]
+ (h.published_at IS NOT NULL AND NOT h.complete AND h.years_expected=ARRAY[__LONDON_YEAR__] AND h.years_captured=ARRAY[__LONDON_YEAR__]
   AND h.source_url=p#>>'{history,sourceUrl}' AND a.source_url=h.source_url
   AND h.captured_at=(p#>>'{history,capturedAt}')::timestamptz) history_publication_and_capture_date,
  ((SELECT count(*) FROM athlete_source_histories hh WHERE hh.athlete_id=a.id)=1
@@ -148,8 +148,8 @@ LEFT JOIN LATERAL (
  AND hx.external_id=p#>>'{history,externalId}' OFFSET 0
 ) h ON true"""
 
-AUDITS_SQL = """SELECT id,entity_type,entity_id,after_value FROM network_audit_log
-WHERE action='athlete.london2025_evidence_reused' AND after_value->>'batchId'=$1
+_AUDITS_SQL = """SELECT id,entity_type,entity_id,after_value FROM network_audit_log
+WHERE action='athlete.london__LONDON_YEAR___evidence_reused' AND after_value->>'batchId'=$1
 AND id>$2 ORDER BY id LIMIT 500"""
 
 HISTORY_ORIGINALS_SQL = """SELECT p->>'resultId' verification_result_id,
@@ -159,6 +159,18 @@ h.performances->((p->>'ordinal')::int-1) performance
 FROM jsonb_array_elements($1::jsonb) p LEFT JOIN athlete_source_histories h
 ON h.athlete_id=(p->>'athleteId')::int AND h.provider=p->>'provider'
 AND h.external_id=p->>'externalId'"""
+
+
+def configure(context=None):
+    """Use the exact frozen edition for all independently loaded modules."""
+    global BATCH, NEW_SQL, AUDITS_SQL
+    apply.configure(context)
+    snapshotter.configure(apply.EDITION_CONTEXT)
+    BATCH = apply.BATCH
+    # A validated integer year and strict ISO date are the only SQL tokens;
+    # participant, source and instruction values are always query parameters.
+    NEW_SQL = _NEW_SQL.replace('__LONDON_YEAR__', str(apply.YEAR)).replace('__LONDON_DATE__', apply.EDITION_DATE)
+    AUDITS_SQL = _AUDITS_SQL.replace('__LONDON_YEAR__', str(apply.YEAR))
 
 
 def check_rows(rows, expected_count, key, exempt, failures):
@@ -192,6 +204,7 @@ def public_checks(base_url, profiles, groups_by_slug):
             checks.append({"slug": profile["slug"], "url": page_url, "status": status,
                 "hasLicenceCredit": all(part in normalized for part in ("Andrew Kam", "Pace Notes", "https://doi.org/10.6084/m9.figshare.33965155.v3", "https://creativecommons.org/licenses/by/4.0/")),
                 "hasUnverifiedLabel": "unverified" in normalized.lower(),
+                "hasEditionCompatibleCredit": apply.YEAR == 2025 or "London 2025 subset; names reordered for display." not in normalized,
                 "hasPerformance": performance["performance"] in normalized or performance["performance"].lstrip("0") in normalized,
                 "individualSourceUrlsHidden": all(source not in normalized for source in private_urls),
                 "privateArchiveReferenceHidden": '"archiveReference"' not in normalized})
@@ -203,16 +216,22 @@ def public_checks(base_url, profiles, groups_by_slug):
 def verify(args):
     safe_paths(args)
     plan = apply.read_json(args.plan)
+    configure(plan.get("editionContext"))
     planner.validate_plan(plan)
+    apply.assert_plan_context(plan)
     snapshot_path = args.snapshot / "snapshot.json" if args.snapshot.is_dir() else args.snapshot
     snapshot = apply.read_json(snapshot_path)
     require(plan["batchId"] == BATCH and planner._hash(snapshot) == plan["snapshotDigest"], "plan_snapshot_binding_changed")
     require((snapshot.get("metadata") or {}).get("branchId") == PRODUCTION, "snapshot_is_not_production")
+    context_digest = planner._hash(apply.EDITION_CONTEXT) if apply.EDITION_CONTEXT is not None else None
+    require((snapshot.get("metadata") or {}).get("editionContextDigest") == context_digest, "snapshot_edition_context_changed")
     new_groups = [group for group in plan["groups"] if group["disposition"] == "new"]
     linked_groups = [group for group in plan["groups"] if group["disposition"] == "linked"]
     source_keys = [row["observationKey"] for row in plan["observations"]]
-    require(len(source_keys) == 111233 and len(set(source_keys)) == len(source_keys), "source_observation_coverage_changed")
-    require(len(linked_groups) == 10608, "reviewed_reuse_count_changed")
+    expected_sources = (apply.EDITION_CONTEXT["paceRecords"] + apply.EDITION_CONTEXT["guideRecords"]) if apply.EDITION_CONTEXT is not None else 111233
+    expected_reuses = plan["summary"]["linked"] if apply.EDITION_CONTEXT is not None else 10608
+    require(len(source_keys) == expected_sources and len(set(source_keys)) == len(source_keys), "source_observation_coverage_changed")
+    require(len(linked_groups) == expected_reuses, "reviewed_reuse_count_changed")
     require(all(len(group["resultIds"]) == 1 for group in linked_groups), "reuse_target_not_unique")
     require(len({str(group["athleteId"]) for group in linked_groups}) == len(linked_groups), "reused_athlete_repeated")
     require(len({str(group["resultIds"][0]) for group in linked_groups}) == len(linked_groups), "reused_result_repeated")
@@ -225,6 +244,7 @@ def verify(args):
     plan_hash = planner._hash(plan)
     require(receipt.get("completed") is True and receipt.get("mode") == "production" and receipt.get("branchId") == PRODUCTION and receipt.get("projectId") == PROJECT, "production_receipt_not_complete")
     require(receipt.get("planHash") == plan_hash and receipt.get("batchId") == BATCH, "receipt_plan_binding_changed")
+    require(receipt.get("editionContextDigest") == context_digest, "receipt_edition_context_changed")
     require(receipt.get("existingDataFingerprintUnchanged") is True and receipt.get("snapshotFingerprint") == snapshot["metadata"]["fingerprint"], "receipt_original_fingerprint_proof_missing")
     require(len(receipt.get("profiles", [])) == len(new_groups) and len(receipt.get("reusedGroups", [])) == len(linked_groups), "receipt_group_counts_changed")
     require(receipt.get("created", 0) + receipt.get("alreadyPresent", 0) == len(new_groups), "receipt_creation_counts_changed")
@@ -241,7 +261,7 @@ def verify(args):
 
     failures = []
     report = {"batchId": BATCH, "projectId": PROJECT, "branchId": PRODUCTION, "planHash": plan_hash,
-              "snapshotDigest": plan["snapshotDigest"], "startedAt": dt.datetime.now(dt.timezone.utc).isoformat(),
+              "snapshotDigest": plan["snapshotDigest"], "editionContextDigest": context_digest, "startedAt": dt.datetime.now(dt.timezone.utc).isoformat(),
               "creditDeployment": receipt.get("creditDeployment"),
               "mode": "read_only", "counts": counts, "failures": failures, "passed": False,
               "checks": {"planAndSnapshotBound": True, "completedProductionReceipt": True,
@@ -390,12 +410,15 @@ def verify(args):
     if args.public_base_url:
         checks = public_checks(args.public_base_url, new_profiles, {group["athleteDraft"]["slug"]: group for group in new_groups})
         report["publicChecks"] = checks
-        checkpoint("publicProfileSamples", all(row.get("status") == 200 and all(row.get(field) is True for field in ("hasLicenceCredit", "hasUnverifiedLabel", "hasPerformance", "individualSourceUrlsHidden", "privateArchiveReferenceHidden")) for row in checks), "public_profile_read_verification_failed")
+        checkpoint("publicProfileSamples", all(row.get("status") == 200 and all(row.get(field) is True for field in ("hasLicenceCredit", "hasEditionCompatibleCredit", "hasUnverifiedLabel", "hasPerformance", "individualSourceUrlsHidden", "privateArchiveReferenceHidden")) for row in checks), "public_profile_read_verification_failed")
     report.update({"passed": True, "completedAt": dt.datetime.now(dt.timezone.utc).isoformat(),
                    "originalDatePrecisionPreserved": True, "newVerificationUpgrades": 0,
                    "privateSourceObservationsDistinct": len(evidence), "fullDirectoryRefetched": False})
     private_dump(args.output, report)
     print(json.dumps({"phase": "verification_complete", "passed": True, **counts, "examples": report["examples"]}), flush=True)
+
+
+configure()
 
 
 if __name__ == "__main__":
