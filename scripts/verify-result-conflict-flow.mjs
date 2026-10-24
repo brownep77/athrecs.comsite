@@ -202,7 +202,7 @@ const invitations = load("src/lib/athrecs/claim-invitations.server.ts", {
   "./profile-connections": shared["./profile-connections"],
   "./claim-invitation": invitationCore,
 });
-const reviewCore = load("src/lib/athlete-workspace/core.ts", { zod: require("zod") });
+const reviewCore = load("src/lib/athlete-workspace/core.ts", { zod: require("zod"), "../athrecs/parkrun-timing.ts": load("src/lib/athrecs/parkrun-timing.ts") });
 const resultReview = load("src/lib/athrecs/profile-result-review.server.ts", {
   "./result-candidate-groups": resultCandidateGroups,
   "node:crypto": crypto,

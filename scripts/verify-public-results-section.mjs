@@ -1,3 +1,7 @@
+import * as jsxRuntime from "react/jsx-runtime";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { load } from "cheerio";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import ts from "typescript";
@@ -19,6 +23,7 @@ function loadTypeScript(path, dependencies = {}) {
   return module.exports;
 }
 
+const parkrun = loadTypeScript("src/lib/athrecs/parkrun-timing.ts");
 const catalogueContent = loadTypeScript("src/lib/athrecs/public-catalogue-content.ts");
 const sportPages = loadTypeScript("src/lib/athrecs/sport-pages.ts");
 const { resultCredit } = loadTypeScript("src/lib/athrecs/result-credit.ts", { "./public-catalogue-content.ts": catalogueContent });
@@ -32,6 +37,7 @@ const format = loadTypeScript("src/lib/athrecs/format.ts", {
   "./timezone.ts": loadTypeScript("src/lib/athrecs/timezone.ts"),
 });
 const { publicResultsHead } = loadTypeScript("src/lib/athrecs/public-results-seo.ts", {
+  "./parkrun-timing.ts": parkrun,
   "./format": format,
   "./result-slug": loadTypeScript("src/lib/athrecs/result-slug.ts"),
   "./seo": loadTypeScript("src/lib/athrecs/seo.ts"),
@@ -261,11 +267,12 @@ try {
 
   // Exercise the real route loader and head contract, including empty-page handling.
   const route = loadTypeScript("src/routes/results/$editionId.tsx", {
-    "react/jsx-runtime": {},
-    "@tanstack/react-router": { createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: (options) => Object.assign(new Error("redirect"), options) },
-    "lucide-react": {}, "@/components/ui/badge": {}, "@/components/ui/button": {},
-    "@/components/athletes/CountryFlag": {},
-    "@/components/races/EventBadges": {},
+    "react/jsx-runtime": jsxRuntime,
+    "@/lib/athrecs/parkrun-timing": parkrun,
+    "@tanstack/react-router": { Link: ({children,to}) => createElement("a",{href:to},children), createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: (options) => Object.assign(new Error("redirect"), options) },
+    "lucide-react": { ArrowLeft: () => null, SearchCheck: () => null }, "@/components/ui/badge": {}, "@/components/ui/button": { Button: ({children}) => createElement("button",null,children) },
+    "@/components/athletes/CountryFlag": { CountryFlag: () => null },
+    "@/components/races/EventBadges": { SportBadge: () => null, DistanceBadge: () => null },
     "@/lib/athrecs/public-results-api": api,
     "@/lib/athrecs/public-results-search": search,
     "@/lib/athrecs/format": format,
@@ -274,6 +281,22 @@ try {
     "@/lib/site-scope": scope,
     "@/lib/athrecs/result-credit": { resultCredit },
   }).Route;
+  route.useSearch = () => ({});
+  route.useLoaderData = () => resultPage1;
+  const roadTable = load(renderToStaticMarkup(route.component()));
+  assert(roadTable("th").toArray().some((cell) => roadTable(cell).text() === "Chip"));
+  const parkrunEdition = { ...resultPage1.edition, sport: "Parkrun", event_name: "Synthetic parkrun", distance_code: "5K" };
+  route.useLoaderData = () => ({ ...resultPage1, edition: parkrunEdition });
+  const parkrunTable = load(renderToStaticMarkup(route.component()));
+  const labels = parkrunTable("th").toArray().map((cell) => parkrunTable(cell).text());
+  assert(labels.includes("Finish time"));
+  assert(!labels.includes("Chip") && !labels.includes("Gun"));
+  assert(parkrunTable.text().includes("parkrun does not use chip timing"));
+  assert.equal(parkrunTable("tbody tr").first().find("td").length, labels.length);
+  const parkrunHead = publicResultsHead(parkrunEdition, resultPage1.results, { q: "", page: 1 });
+  const parkrunDetails = JSON.parse(parkrunHead.scripts[0].children).mainEntity.itemListElement[0].description;
+  assert(parkrunDetails.includes(parkrun.PARKRUN_TIMING_LABEL));
+  assert.doesNotMatch(parkrunDetails, /chip time [0-9]|gun time [0-9]/);
   const params = { editionId: "synthetic-10k-2026-09-20-10k-10" };
   // Bookmarked numeric URLs and older race names retain filters and pagination
   // while redirecting directly to the same current public edition.
