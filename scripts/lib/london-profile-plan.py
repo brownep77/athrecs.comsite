@@ -1,4 +1,6 @@
-"""Pure, conservative London 2025 source-profile planning. No network or DB writes.
+"""Pure, conservative London source-profile planning. No network or DB writes.
+
+configure(context=None) selects a frozen edition or restores legacy London 2025.
 
 Public API: load_sources(input_dir), build_plan(observations, snapshot, edition,
 batch_id, created_at, review_manifest=None, review_approval=None),
@@ -91,6 +93,49 @@ SOURCE_ATTRIBUTION = [
         "coverage": "All 56,186 records in the observed published archive; whole-race completeness not established.",
     },
 ]
+
+# Legacy defaults remain byte-for-byte compatible with the reviewed 2025 plan.
+# New editions require their complete retained-source configuration.
+YEAR = 2025
+DATE = "2025-04-27"
+PACE_RECORDS = 55047
+GUIDE_RECORDS = 56186
+GUIDE_SUBEVENT = "694227"
+PACE_ROWS_FILE = "raw/pace_notes_2025.jsonl"
+PACE_CSV_FILE = "London_Marathon_2025_Pace_Notes.csv"
+GUIDE_CSV_FILE = "London_Marathon_2025_MarathonGuide.csv"
+EDITION_CONTEXT = None
+_LEGACY_INPUT_SHA256 = copy.deepcopy(INPUT_SHA256)
+_LEGACY_SOURCE_ATTRIBUTION = copy.deepcopy(SOURCE_ATTRIBUTION)
+_context_spec = importlib.util.spec_from_file_location("london_planner_context", Path(__file__).with_name("london-edition-context.py"))
+_context = importlib.util.module_from_spec(_context_spec)
+_context_spec.loader.exec_module(_context)
+
+
+def configure(context=None):
+    """Select one validated edition; None restores the original 2025 adapter."""
+    global YEAR, DATE, EDITION_KEY, GUIDE_PUBLICATION, GUIDE_SUBEVENT
+    global PACE_RECORDS, GUIDE_RECORDS, PACE_ROWS_FILE, PACE_CSV_FILE, GUIDE_CSV_FILE
+    global INPUT_SHA256, SOURCE_ATTRIBUTION, EDITION_CONTEXT
+    context = _context.validate_context(context) if context is not None else None
+    EDITION_CONTEXT = context
+    YEAR = context["year"] if context else 2025
+    DATE = context["date"] if context else "2025-04-27"
+    EDITION_KEY = f"london-marathon:{YEAR}"
+    GUIDE_PUBLICATION = context["guidePublication"] if context else _LEGACY_SOURCE_ATTRIBUTION[1]["publicationUrl"]
+    GUIDE_SUBEVENT = context["guideSubevent"] if context else "694227"
+    PACE_RECORDS = context["paceRecords"] if context else 55047
+    GUIDE_RECORDS = context["guideRecords"] if context else 56186
+    PACE_ROWS_FILE = context["paceRowsFile"] if context else "raw/pace_notes_2025.jsonl"
+    PACE_CSV_FILE = context["paceCsvFile"] if context else "London_Marathon_2025_Pace_Notes.csv"
+    GUIDE_CSV_FILE = context["guideCsvFile"] if context else "London_Marathon_2025_MarathonGuide.csv"
+    INPUT_SHA256 = copy.deepcopy(context["inputSha256"] if context else _LEGACY_INPUT_SHA256)
+    SOURCE_ATTRIBUTION = copy.deepcopy(_LEGACY_SOURCE_ATTRIBUTION)
+    if context:
+        SOURCE_ATTRIBUTION[1]["publicationUrl"] = GUIDE_PUBLICATION
+        SOURCE_ATTRIBUTION[1]["coverage"] = f"All {GUIDE_RECORDS:,} records in the observed published archive; whole-race completeness not established."
+    return copy.deepcopy(context)
+
 
 # Reuse the earlier supervised profile-import screening rules. These modules
 # contain definitions only at import; no network or database work is invoked.
@@ -189,12 +234,12 @@ def normalize_pace_row(row, flags=None):
     """Map an already header-matched raw Pace Notes row without promoting facts."""
     if not isinstance(row, dict) or set(row) != set(PACE_COLUMNS):
         raise ValueError("Pace Notes row does not match the retained schema")
-    if row["race"] != "London Marathon" or row["year"] != 2025 or row["city"] != "London":
+    if row["race"] != "London Marathon" or row["year"] != YEAR or row["city"] != "London":
         raise ValueError("Pace Notes observation is outside the requested edition")
     raw_url = _text(row["source_url"])
     url = urlsplit(raw_url)
     query = parse_qs(url.query, keep_blank_values=True)
-    if url.scheme != "https" or url.netloc != "results.tcslondonmarathon.com" or url.path != "/2025/" or url.fragment:
+    if url.scheme != "https" or url.netloc != "results.tcslondonmarathon.com" or url.path != f"/{YEAR}/" or url.fragment:
         raise ValueError("Unexpected retained London result URL")
     if any(len(query.get(k, [])) != 1 for k in ("content", "idp", "event")) or query["content"] != ["detail"]:
         raise ValueError("London result URL lacks a unique observed row locator")
@@ -245,7 +290,7 @@ def normalize_pace_row(row, flags=None):
     }
 
 
-def normalize_guide_row(record, page, subevent="694227"):
+def normalize_guide_row(record, page, subevent=None):
     """Map the displayed headings and retain the observed relative result path."""
     if page.get("headings") != GUIDE_HEADINGS or page.get("headings_verified") is not True:
         raise ValueError("MarathonGuide page headings were not retained and checked")
@@ -254,8 +299,9 @@ def normalize_guide_row(record, page, subevent="694227"):
         raise ValueError("MarathonGuide field map differs from its displayed row")
     result_id = _text(record.get("provider_result_id"))
     source_path = _text(record.get("sourcePath"))
-    expected_path = f"/races/run/london-marathon-21/2025/results/{result_id}/"
-    if not result_id.isdigit() or source_path != expected_path or str(subevent) != "694227":
+    subevent = GUIDE_SUBEVENT if subevent is None else subevent
+    expected_path = urlsplit(GUIDE_PUBLICATION).path + result_id + "/"
+    if not result_id.isdigit() or source_path != expected_path or str(subevent) != GUIDE_SUBEVENT:
         raise ValueError("MarathonGuide row does not contain the expected observed result locator")
     # This resolves an observed href; it never manufactures a provider result ID.
     source_url = urljoin(GUIDE_PUBLICATION, source_path)
@@ -352,34 +398,35 @@ def load_sources(input_dir):
     if len(flags) != len(flag_rows):
         raise ValueError("Duplicate publisher record flags")
     pace = []
-    with (folder / "raw/pace_notes_2025.jsonl").open(encoding="utf-8") as handle:
+    with (folder / PACE_ROWS_FILE).open(encoding="utf-8") as handle:
         for line in handle:
             values = json.loads(line)
             if not isinstance(values, list) or len(values) != len(columns):
                 raise ValueError("Raw Pace Notes values do not match their headers")
             row = dict(zip(columns, values))
             pace.append(normalize_pace_row(row, flags.get(str(row["id"]))))
-    if len(pace) != 55047 or not set(flags) <= {o["publisherRecordId"] for o in pace}:
+    if len(pace) != PACE_RECORDS or not set(flags) <= {o["publisherRecordId"] for o in pace}:
         raise ValueError("Pace Notes source coverage changed")
     raw_guide = json.loads((folder / "raw/marathonguide_pages.json").read_text())
-    if raw_guide.get("collection_complete") is not True or raw_guide.get("advertised_total") != 56186 or raw_guide.get("year") != 2025:
+    if raw_guide.get("collection_complete") is not True or raw_guide.get("advertised_total") != GUIDE_RECORDS or raw_guide.get("year") != YEAR:
         raise ValueError("MarathonGuide archive is incomplete or has changed scope")
     pages = raw_guide["pages"]
-    if [p["page"] for p in pages] != list(range(1, 563)):
+    page_count = (GUIDE_RECORDS + 99) // 100
+    if [p["page"] for p in pages] != list(range(1, page_count + 1)):
         raise ValueError("MarathonGuide source pages are not consecutive")
     guide = []
     for page in pages:
-        if len(page["records"]) != (86 if page["page"] == 562 else 100):
+        if len(page["records"]) != ((GUIDE_RECORDS - 1) % 100 + 1 if page["page"] == page_count else 100):
             raise ValueError("Unexpected MarathonGuide page size")
         for record in page["records"]:
             observation = normalize_guide_row(record, page, raw_guide["source_subevent"])
             if observation["sourceReportedPlace"] != len(guide) + 1:
                 raise ValueError("MarathonGuide retained archive place order changed")
             guide.append(observation)
-    if len(guide) != 56186:
+    if len(guide) != GUIDE_RECORDS:
         raise ValueError("MarathonGuide source coverage changed")
-    _compare_saved_csv(folder / "London_Marathon_2025_Pace_Notes.csv", pace, PACE)
-    _compare_saved_csv(folder / "London_Marathon_2025_MarathonGuide.csv", guide, GUIDE)
+    _compare_saved_csv(folder / PACE_CSV_FILE, pace, PACE)
+    _compare_saved_csv(folder / GUIDE_CSV_FILE, guide, GUIDE)
     observations = pace + guide
     if len({o["sourceKey"] for o in observations}) != len(observations):
         raise ValueError("Duplicate retained source result keys")
@@ -533,7 +580,7 @@ def _review_context(manifest, approval, snapshot, snapshot_digest, groups, obser
         year_only_wmm = (
             result.get("provider") == "Abbott World Marathon Majors"
             and result.get("sourceKind") == "history" and result.get("editionId") is None
-            and result.get("date") in (None, "") and result.get("year") == 2025
+            and result.get("date") in (None, "") and result.get("year") == YEAR
             and name_key(result.get("eventName")) == "london marathon"
             and name_key(result.get("distanceCode")) == "marathon"
             and result.get("distanceKm") == edition["distanceKm"]
@@ -543,9 +590,9 @@ def _review_context(manifest, approval, snapshot, snapshot_digest, groups, obser
         if year_only_wmm:
             original = (result.get("original") or {}).get("performance") or {}
             source = (original.get("archiveReference") or {}).get("original") or {}
-            if original.get("date") not in (None, "") or original.get("year") != 2025 or name_key(original.get("meeting")) != "london marathon" or name_key(original.get("discipline")) != "marathon":
+            if original.get("date") not in (None, "") or original.get("year") != YEAR or name_key(original.get("meeting")) != "london marathon" or name_key(original.get("discipline")) != "marathon":
                 raise ValueError("Year-only WMM history does not contain the explicit reviewed event/year/distance")
-            if source.get("result_year") != 2025 or name_key(source.get("event_title")) != "london marathon" or str(source.get("athlete_id")) != str((result.get("historyIdentity") or {}).get("externalId")):
+            if source.get("result_year") != YEAR or name_key(source.get("event_title")) != "london marathon" or str(source.get("athlete_id")) != str((result.get("historyIdentity") or {}).get("externalId")):
                 raise ValueError("Original WMM row does not corroborate its retained history identity")
             original_seconds = parse_finish_time(original.get("performance"))[1]
             if original_seconds not in _result_times(result) or source.get("finish_time_secs") != original_seconds or parse_finish_time(source.get("finish_time"))[1] != original_seconds:
@@ -609,7 +656,7 @@ def _make_groups(observations):
             members = sorted(members, key=lambda o: (o["provider"] != PACE, o["sourceKey"]))
             primary = members[0]
             groups.append({
-                "groupId": "london-2025-performance-" + _hash(primary["sourceKey"])[:24],
+                "groupId": f"london-{YEAR}-performance-" + _hash(primary["sourceKey"])[:24],
                 "primaryObservationKey": primary["observationKey"],
                 "observationKeys": [o["observationKey"] for o in members],
                 "sourceKeys": sorted(o["sourceKey"] for o in members),
@@ -648,16 +695,16 @@ def _source_name_collisions(groups):
 def _profile_slug(name, source_key):
     ascii_name = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode().lower()
     readable = re.sub(r"[^a-z0-9]+", "-", ascii_name).strip("-")[:90].rstrip("-") or "athlete"
-    return readable + "-london-2025-" + _hash(source_key)[:16]
+    return readable + f"-london-{YEAR}-" + _hash(source_key)[:16]
 
 
 def _history_and_athlete(group, observations, edition, batch_id):
     primary = next(o for o in observations if o["observationKey"] == group["primaryObservationKey"])
     if primary["provider"] != PACE:
         raise ValueError("A new profile needs its licensed Pace Notes observation")
-    history_id = f"london-2025:{primary['sourceScope'].lower()}:{primary['sourceResultId']}"
+    history_id = f"london-{YEAR}:{primary['sourceScope'].lower()}:{primary['sourceResultId']}"
     performance = {
-        "year": 2025, "date": edition["date"], "sourceDate": edition["date"],
+        "year": YEAR, "date": edition["date"], "sourceDate": edition["date"],
         "ageGroup": primary["category"], "discipline": "Marathon",
         "performance": primary["finishTime"], "timing": {"basis": "unknown"},
         "wind": "", "place": "", "places": {"overall": None, "gender": None, "category": None},
@@ -684,7 +731,7 @@ def _history_and_athlete(group, observations, edition, batch_id):
     history = {
         "provider": PACE_NAME, "externalId": history_id, "sourceUrl": PACE_PUBLICATION,
         "capturedAt": primary["capturedAt"], "complete": False,
-        "yearsExpected": [2025], "yearsCaptured": [2025], "performances": [performance],
+        "yearsExpected": [YEAR], "yearsCaptured": [YEAR], "performances": [performance],
     }
     draft = {
         "slug": _profile_slug(primary["name"], primary["sourceKey"]),
@@ -713,8 +760,15 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, review_
     A linked group means reuse/append evidence to an existing performance; it
     deliberately contains no extra history performance or athlete draft.
     """
-    if not batch_id or edition.get("date") != "2025-04-27" or edition.get("distanceKm") != 42.195:
-        raise ValueError("An explicit London 2025 marathon edition and batch ID are required")
+    if not batch_id or edition.get("date") != DATE or edition.get("distanceKm") != 42.195:
+        raise ValueError(f"An explicit London {YEAR} marathon edition and batch ID are required")
+    if EDITION_CONTEXT:
+        if edition != EDITION_CONTEXT["edition"] or batch_id != EDITION_CONTEXT["batchId"]:
+            raise ValueError("Plan edition or batch differs from its frozen configuration")
+        if (snapshot.get("metadata") or {}).get("editionContextDigest") != _hash(EDITION_CONTEXT):
+            raise ValueError("Snapshot was not taken under this edition configuration")
+        if Counter(o["provider"] for o in observations) != {PACE: PACE_RECORDS, GUIDE: GUIDE_RECORDS}:
+            raise ValueError("Plan input does not cover the complete configured collection")
     _entity_id(edition.get("id"))
     accepted_editions = {_entity_id(edition["id"]), *(_entity_id(value) for value in edition.get("equivalentIds", []))}
     if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", edition.get("eventSlug", "")) or not edition.get("eventName") or not edition.get("country"):
@@ -804,7 +858,10 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, review_
             mismatch = []
             # The caller may supply explicitly reviewed duplicate catalogue
             # edition IDs for this same date/distance; no name-based fallback.
-            if str(result.get("editionId")) not in accepted_editions:
+            if (str(result.get("editionId")) not in accepted_editions
+                    or result.get("date") not in (None, "", edition["date"])
+                    or result.get("year") not in (None, YEAR)
+                    or result.get("distanceKm") not in (None, edition["distanceKm"])):
                 mismatch.append("existing_locator_edition_conflict")
             if group["finishSeconds"] not in _result_times(result):
                 mismatch.append("existing_locator_time_conflict")
@@ -840,7 +897,7 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, review_
                 "resultId": result["id"], "athleteId": result["athleteId"], "editionId": result["editionId"],
                 "timeSeconds": group["finishSeconds"], "sourceKind": result.get("sourceKind"),
                 "existingSourceUrls": sorted(set(result["sourceUrls"])),
-                "basis": "Same known full name/alias, reviewed London 2025 edition, exact recorded time, no supplied demographic conflict; retained result URL not matched.",
+                "basis": f"Same known full name/alias, reviewed London {YEAR} edition, exact recorded time, no supplied demographic conflict; retained result URL not matched.",
                 "action": "review_existing_same_performance",
             })
         if same_performance_candidates:
@@ -938,6 +995,8 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, review_
             "Pace Notes licence attribution must accompany any public reuse.",
         ],
     }
+    if EDITION_CONTEXT:
+        plan["editionContext"] = copy.deepcopy(EDITION_CONTEXT)
     if review:
         plan["reviewedReuse"] = {"approval": copy.deepcopy(review_approval), "manifest": copy.deepcopy(review_manifest)}
     validate_plan(plan, snapshot=snapshot)
@@ -946,7 +1005,23 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, review_
 
 def validate_plan(plan, *, snapshot=None):
     """Reject lost observations, unsafe creation or accidental verification."""
+    frozen_context = plan.get("editionContext")
+    if frozen_context is not None:
+        frozen_context = _context.validate_context(frozen_context)
+    if frozen_context != EDITION_CONTEXT:
+        raise ValueError("Plan configuration differs from the configured adapter")
+    if EDITION_CONTEXT:
+        if plan["edition"] != EDITION_CONTEXT["edition"] or plan["batchId"] != EDITION_CONTEXT["batchId"]:
+            raise ValueError("Plan edition or batch differs from its frozen configuration")
+        if snapshot is not None and (snapshot.get("metadata") or {}).get("editionContextDigest") != _hash(EDITION_CONTEXT):
+            raise ValueError("Snapshot configuration binding changed")
     observations = plan["observations"]
+    if EDITION_CONTEXT and Counter(o["provider"] for o in observations) != {PACE: PACE_RECORDS, GUIDE: GUIDE_RECORDS}:
+        raise ValueError("Plan omits a configured source observation")
+    if any(o["editionKey"] != EDITION_KEY or o["sourceKey"] != _source_key(o["provider"], o["sourceScope"], o["sourceResultId"]) for o in observations):
+        raise ValueError("Plan contains observations from a different edition")
+    if plan["edition"]["date"] != DATE:
+        raise ValueError("Plan edition date changed")
     by_key = {o["observationKey"]: o for o in observations}
     if len(by_key) != len(observations):
         raise ValueError("Plan repeats an observation")
@@ -1023,6 +1098,12 @@ def validate_plan(plan, *, snapshot=None):
         if history["complete"] is not False or len(history["performances"]) != 1:
             raise ValueError("A new source profile must contain one incomplete-history observation")
         performance = history["performances"][0]
+        primary = by_key[group["primaryObservationKey"]]
+        expected_external_id = f"london-{YEAR}:{primary['sourceScope'].lower()}:{primary['sourceResultId']}"
+        if (history["externalId"] != expected_external_id or draft["slug"] != _profile_slug(primary["name"], primary["sourceKey"])
+                or history["yearsExpected"] != [YEAR] or history["yearsCaptured"] != [YEAR]
+                or performance["year"] != YEAR or performance["date"] != DATE or performance["sourceDate"] != DATE):
+            raise ValueError("New profile or performance crosses the configured edition")
         if performance["verificationStatus"] != "unverified" or performance["timing"] != {"basis": "unknown"}:
             raise ValueError("Secondary history evidence must remain unverified with unknown time basis")
         if performance["places"] != {"overall": None, "gender": None, "category": None} or performance["place"] != "":
