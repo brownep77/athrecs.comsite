@@ -52,6 +52,8 @@ function fixture(overrides = {}) {
   };
 }
 let checks = 0;
+assert.equal(publicUrl(`${origin}/clubs/caf%C3%A9-ac`).pathname, "/clubs/caf%C3%A9-ac");
+checks++;
 const dry = fixture();
 const dryResult = await notifyPublicPages(dry);
 assert.equal(dryResult.inventory, 2);
@@ -128,6 +130,9 @@ for (const url of [
   `${origin}/a#b`,
   `${origin}/a/../b`,
   `${origin}/a%2fb%3fc`,
+  `${origin}/%2fadmin`,
+  `${origin}//admin`,
+  `${origin}/races/a%2Fb`,
 ]) {
   assert.throws(() => publicUrl(url));
   checks++;
@@ -135,6 +140,7 @@ for (const url of [
 for (const badXml of [
   xml(["https://evil.example/a"]),
   xml([`${origin}/athletes/private`]),
+  xml([`${origin}/%61thletes/private`]),
   xml([`${origin}/api/private`]),
   "<!DOCTYPE urlset><urlset/>",
   '<urlset xmlns="wrong"/>',
