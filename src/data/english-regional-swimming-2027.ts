@@ -1,0 +1,216 @@
+import type { Edition, Series } from "./types";
+
+export const englishRegionalSwimming2027Series: Series[] = [
+  {
+    slug: "east-region-long-course-championships-luton-weekend-one",
+    name: "East Region Long Course Championships – Luton Weekend One",
+    sport: "Swimming",
+    country: "England",
+    county: "Bedfordshire",
+    city: "Luton",
+    area: "Inspire Luton Sports Village",
+    surface: "Pool",
+    distances: ["Multi-day competition"],
+    summary: "East Region Long Course Championships – Luton Weekend One: 2027-04-16 to 2027-04-18.",
+    description:
+      "2027-04-16 to 2027-04-18, inclusive. 50m pool. Friday evening: mixed 15+ 800m freestyle; Saturday and Sunday: 15+ individual events, relays and para-swimming. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed. The calendar advertises a 17:30 opening time; this is not treated as a verified race start. Published entry closing date: 6 April 2027 at midnight (original organiser wording).",
+    organiser: "Swim England East Region",
+    website: "https://www.eastswimming.org/event/regional-long-course-championships-4/",
+    source_url: "https://www.eastswimming.org/event/regional-long-course-championships-4/",
+    featured: false,
+  },
+  {
+    slug: "east-region-long-course-championships-luton-weekend-three",
+    name: "East Region Long Course Championships – Luton Weekend Three",
+    sport: "Swimming",
+    country: "England",
+    county: "Bedfordshire",
+    city: "Luton",
+    area: "Inspire Luton Sports Village",
+    surface: "Pool",
+    distances: ["Multi-day competition"],
+    summary:
+      "East Region Long Course Championships – Luton Weekend Three: 2027-05-07 to 2027-05-09.",
+    description:
+      "2027-05-07 to 2027-05-09, inclusive. 50m pool. Friday evening: mixed 14/under 800m freestyle; Saturday and Sunday: 14/under individual events. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed. The calendar advertises a 17:30 opening time; this is not treated as a verified race start. Published entry closing date: 6 April 2027 at midnight (original organiser wording).",
+    organiser: "Swim England East Region",
+    website: "https://www.eastswimming.org/event/regional-long-course-championships-6/",
+    source_url: "https://www.eastswimming.org/event/regional-long-course-championships-6/",
+    featured: false,
+  },
+  {
+    slug: "east-region-short-course-swimming-championships",
+    name: "East Region Short Course Swimming Championships",
+    sport: "Swimming",
+    country: "England",
+    county: "Bedfordshire",
+    city: "Luton",
+    area: "Inspire Luton Sports Village",
+    surface: "Pool",
+    distances: ["Multi-day competition"],
+    summary: "East Region Short Course Swimming Championships: 2027-11-05 to 2027-11-07.",
+    description:
+      "2027-11-05 to 2027-11-07, inclusive. 25m pool. Friday evening: 800m women and 1500m male/open; Saturday and Sunday: all other events. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed. The calendar advertises a 17:30 opening time; this is not treated as a verified race start. Published entry closing date: 26 October 2027 at midnight (original organiser wording).",
+    organiser: "Swim England East Region",
+    website: "https://www.eastswimming.org/event/regional-short-course-championships/",
+    source_url: "https://www.eastswimming.org/event/regional-short-course-championships/",
+    featured: false,
+  },
+  {
+    slug: "south-east-age-group-swimming-championships-crawley",
+    name: "South East Age Group Long Course Championships – Crawley",
+    sport: "Swimming",
+    country: "England",
+    county: "West Sussex",
+    city: "Crawley",
+    area: "K2 Crawley",
+    surface: "Pool",
+    distances: ["Multi-day competition"],
+    summary: "South East Age Group Long Course Championships – Crawley: 2027-04-24 to 2027-04-25.",
+    description:
+      "2027-04-24 to 2027-04-25, inclusive. Age Group Long Course Championships. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed.",
+    organiser: "Swim England South East Region",
+    website: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    source_url: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    featured: false,
+  },
+  {
+    slug: "south-east-age-group-swimming-championships-winchester",
+    name: "South East Age Group Long Course Championships – Winchester",
+    sport: "Swimming",
+    country: "England",
+    county: "Hampshire",
+    city: "Winchester",
+    area: "Winchester Sports and Leisure Park",
+    surface: "Pool",
+    distances: ["Multi-day competition"],
+    summary:
+      "South East Age Group Long Course Championships – Winchester: 2027-05-08 to 2027-05-09.",
+    description:
+      "2027-05-08 to 2027-05-09, inclusive. Age Group Long Course Championships. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed.",
+    organiser: "Swim England South East Region",
+    website: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    source_url: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    featured: false,
+  },
+  {
+    slug: "south-east-youth-swimming-championships-wycombe",
+    name: "South East Youth Long Course Championships – Wycombe",
+    sport: "Swimming",
+    country: "England",
+    county: "Buckinghamshire",
+    city: "High Wycombe",
+    area: "Wycombe Leisure Centre",
+    surface: "Pool",
+    distances: ["Multi-day competition"],
+    summary: "South East Youth Long Course Championships – Wycombe: 2027-04-30 to 2027-05-03.",
+    description:
+      "2027-04-30 to 2027-05-03, inclusive. Youth Long Course Championships. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed.",
+    organiser: "Swim England South East Region",
+    website: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    source_url: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    featured: false,
+  },
+];
+
+export const englishRegionalSwimming2027Editions: Edition[] = [
+  {
+    seriesSlug: "east-region-long-course-championships-luton-weekend-one",
+    date: "2027-04-16",
+    distance: "Multi-day competition",
+    distanceKm: 0,
+    status: "TBC",
+    source: "https://www.eastswimming.org/event/regional-long-course-championships-4/",
+    publishAllDistances: true,
+    notes:
+      "2027-04-16 to 2027-04-18, inclusive. 50m pool. Friday evening: mixed 15+ 800m freestyle; Saturday and Sunday: 15+ individual events, relays and para-swimming. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed. The calendar advertises a 17:30 opening time; this is not treated as a verified race start. Published entry closing date: 6 April 2027 at midnight (original organiser wording).",
+  },
+  {
+    seriesSlug: "east-region-long-course-championships-luton-weekend-three",
+    date: "2027-05-07",
+    distance: "Multi-day competition",
+    distanceKm: 0,
+    status: "TBC",
+    source: "https://www.eastswimming.org/event/regional-long-course-championships-6/",
+    publishAllDistances: true,
+    notes:
+      "2027-05-07 to 2027-05-09, inclusive. 50m pool. Friday evening: mixed 14/under 800m freestyle; Saturday and Sunday: 14/under individual events. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed. The calendar advertises a 17:30 opening time; this is not treated as a verified race start. Published entry closing date: 6 April 2027 at midnight (original organiser wording).",
+  },
+  {
+    seriesSlug: "east-region-short-course-swimming-championships",
+    date: "2027-11-05",
+    distance: "Multi-day competition",
+    distanceKm: 0,
+    status: "TBC",
+    source: "https://www.eastswimming.org/event/regional-short-course-championships/",
+    publishAllDistances: true,
+    notes:
+      "2027-11-05 to 2027-11-07, inclusive. 25m pool. Friday evening: 800m women and 1500m male/open; Saturday and Sunday: all other events. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed. The calendar advertises a 17:30 opening time; this is not treated as a verified race start. Published entry closing date: 26 October 2027 at midnight (original organiser wording).",
+  },
+  {
+    seriesSlug: "south-east-age-group-swimming-championships-crawley",
+    date: "2027-04-24",
+    distance: "Multi-day competition",
+    distanceKm: 0,
+    status: "TBC",
+    source: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    publishAllDistances: true,
+    notes:
+      "2027-04-24 to 2027-04-25, inclusive. Age Group Long Course Championships. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed.",
+  },
+  {
+    seriesSlug: "south-east-age-group-swimming-championships-winchester",
+    date: "2027-05-08",
+    distance: "Multi-day competition",
+    distanceKm: 0,
+    status: "TBC",
+    source: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    publishAllDistances: true,
+    notes:
+      "2027-05-08 to 2027-05-09, inclusive. Age Group Long Course Championships. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed.",
+  },
+  {
+    seriesSlug: "south-east-youth-swimming-championships-wycombe",
+    date: "2027-04-30",
+    distance: "Multi-day competition",
+    distanceKm: 0,
+    status: "TBC",
+    source: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    publishAllDistances: true,
+    notes:
+      "2027-04-30 to 2027-05-03, inclusive. Youth Long Course Championships. Meeting-level listing, not an individual race. Exact race and session starts and current entry availability remain unconfirmed.",
+  },
+];
+
+export const englishRegionalSwimming2027DateRanges = {
+  "east-region-long-course-championships-luton-weekend-one:2027-04-16": {
+    endDate: "2027-04-18",
+    sourceUrl: "https://www.eastswimming.org/event/regional-long-course-championships-4/",
+    checkedAt: "2026-10-24",
+  },
+  "east-region-long-course-championships-luton-weekend-three:2027-05-07": {
+    endDate: "2027-05-09",
+    sourceUrl: "https://www.eastswimming.org/event/regional-long-course-championships-6/",
+    checkedAt: "2026-10-24",
+  },
+  "east-region-short-course-swimming-championships:2027-11-05": {
+    endDate: "2027-11-07",
+    sourceUrl: "https://www.eastswimming.org/event/regional-short-course-championships/",
+    checkedAt: "2026-10-24",
+  },
+  "south-east-age-group-swimming-championships-crawley:2027-04-24": {
+    endDate: "2027-04-25",
+    sourceUrl: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    checkedAt: "2026-10-24",
+  },
+  "south-east-age-group-swimming-championships-winchester:2027-05-08": {
+    endDate: "2027-05-09",
+    sourceUrl: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    checkedAt: "2026-10-24",
+  },
+  "south-east-youth-swimming-championships-wycombe:2027-04-30": {
+    endDate: "2027-05-03",
+    sourceUrl: "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+    checkedAt: "2026-10-24",
+  },
+};
