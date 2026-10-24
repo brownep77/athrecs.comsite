@@ -29,7 +29,10 @@ const clubs = Array.from({ length: 52 }, (_, i) => ({
 const router = file(
   "router.tsx",
   `import React from 'react';
-export const createFileRoute=(path)=>(options)=>({...options,useLoaderData:()=>window.fixtureClubs,useSearch:()=>({})});
+const subscribe=(notify)=>{window.addEventListener('popstate',notify);return()=>window.removeEventListener('popstate',notify)};
+function useSearch(){const query=React.useSyncExternalStore(subscribe,()=>location.search);return React.useMemo(()=>Object.fromEntries(new URLSearchParams(query)),[query])}
+export const createFileRoute=(path)=>(options)=>({...options,fullPath:path,useLoaderData:()=>window.fixtureClubs,useSearch});
+export function useNavigate(){return ({search,replace=false})=>{const previous=Object.fromEntries(new URLSearchParams(location.search));const next=typeof search==='function'?search(previous):search;const url=new URL(location.href);url.search=new URLSearchParams(Object.entries(next||{}).filter(([,value])=>value!==undefined)).toString();history[replace?'replaceState':'pushState']({},'',url);window.dispatchEvent(new PopStateEvent('popstate'));return Promise.resolve()}}
 export function Link({to,search,params,hash,children,...props}){let href=to;if(params)for(const [key,value]of Object.entries(params))href=href.replace('$'+key,value);if(search)href+='?'+new URLSearchParams(search).toString();if(hash)href+='#'+hash;return <a href={href} {...props}>{children}</a>}`,
 );
 const auth = file(
@@ -93,7 +96,10 @@ const browser = await chromium.launch({
 try {
   const page = await browser.newPage({ viewport: { width: 1280, height: 1100 } });
   const errors = [];
-  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("pageerror", (error) => {
+    errors.push(error.message);
+    console.error(`Club registration fixture page error: ${error.message}`);
+  });
   await page.goto(`${origin}/clubs`);
   await page.getByRole("heading", { name: "Clubs", exact: true }).waitFor();
   assert.equal(
@@ -112,6 +118,14 @@ try {
   );
   await page.getByLabel("Sport", { exact: true }).selectOption("Running");
   await page.getByText("No clubs match these filters.", { exact: false }).waitFor();
+  assert.equal(new URL(page.url()).searchParams.get("sport"), "Running");
+  await page.goto(`${origin}/clubs?sport=Triathlon`);
+  await page.getByRole("heading", { name: "Clubs", exact: true }).waitFor();
+  assert.equal(await page.getByLabel("Sport", { exact: true }).inputValue(), "Triathlon");
+  assert.equal(
+    await page.getByRole("link", { name: "Register this club", exact: true }).count(),
+    2,
+  );
   await page.goto(`${origin}/clubs/register?signedout=true`);
   await page.getByRole("button", { name: "Sign in or create account" }).click();
   assert.equal(await page.evaluate(() => window.signInOpened), true);
