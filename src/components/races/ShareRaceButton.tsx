@@ -29,7 +29,7 @@ export function ShareRaceButton({ race }: { race: CalendarRace }) {
 
   useEffect(() => {
     if (!open) return;
-    const closeOutside = (event: PointerEvent) => {
+    const closeOutside = (event: MouseEvent) => {
       if (
         disclosure.current &&
         event.target instanceof Node &&
@@ -38,8 +38,10 @@ export function ShareRaceButton({ race }: { race: CalendarRace }) {
         disclosure.current.open = false;
       }
     };
-    document.addEventListener("pointerdown", closeOutside);
-    return () => document.removeEventListener("pointerdown", closeOutside);
+    // Close after the outside control receives its click; collapsing this in-flow
+    // panel on pointerdown would move that control before pointerup and lose the click.
+    document.addEventListener("click", closeOutside);
+    return () => document.removeEventListener("click", closeOutside);
   }, [open]);
 
   async function shareRace(useDevice: boolean) {
