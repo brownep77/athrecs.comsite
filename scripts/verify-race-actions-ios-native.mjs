@@ -331,7 +331,22 @@ try {
     "Use a credential-free Appium root URL",
   );
   const setup = JSON.parse(fs.readFileSync("artifacts/race-actions-safari-ios-setup.json", "utf8"));
-  assert.equal(setup.status, "passed", "The installed Simulator must finish setup");
+  const appiumManagedStartup = setup.mode === "appium-managed";
+  if (appiumManagedStartup) {
+    assert.equal(setup.status, "selected", "Managed startup requires a completed device selection");
+  } else {
+    assert.equal(setup.status, "passed", "The installed Simulator must finish setup");
+  }
+  const sessionCreationTimeout = appiumManagedStartup ? 600000 : 180000;
+  report.startup = {
+    owner: appiumManagedStartup ? "Appium XCUITest" : "Simulator preparation script",
+    preparationMode: setup.mode || "prebooted",
+    preparationStatus: setup.status,
+    deviceSelectionOnly: appiumManagedStartup,
+    sessionCreationTimeoutMs: sessionCreationTimeout,
+    ...(appiumManagedStartup ? { simulatorStartupTimeoutMs: 300000 } : {}),
+    finalProofRequired: "Native session, device, Safari screenshots, taps and application checks",
+  };
   const selected = setup.selectedDevice;
   const udid = process.env.ATHRECS_SAFARI_DEVICE_UDID || selected?.udid;
   assert.match(udid || "", /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i);
@@ -345,6 +360,10 @@ try {
   const prebuiltCapabilities = {};
   const derivedDataPath = process.env.ATHRECS_WDA_DERIVED_DATA_PATH;
   const prebuiltAppPath = process.env.ATHRECS_WDA_PREBUILT_APP_PATH;
+  assert(
+    !appiumManagedStartup || prebuiltAppPath,
+    "Appium-managed startup requires the verified official preinstalled WDA app",
+  );
   assert(
     !(derivedDataPath && prebuiltAppPath),
     "Choose either a verified downloaded WDA app or a derived-data build, not both",
@@ -425,6 +444,13 @@ try {
     "appium:wdaStartupRetries": 1,
     "appium:newCommandTimeout": 90,
     ...prebuiltCapabilities,
+    ...(appiumManagedStartup
+      ? {
+          "appium:isHeadless": false,
+          "appium:simulatorStartupTimeout": 300000,
+          "appium:forceAppLaunch": true,
+        }
+      : {}),
   };
   report.requestedCapabilities = capabilities;
   mark("create native XCTest session for Mobile Safari");
@@ -432,7 +458,7 @@ try {
     "POST",
     "/session",
     { capabilities: { alwaysMatch: capabilities } },
-    180000,
+    sessionCreationTimeout,
   );
   sessionId = session.sessionId;
   assert(sessionId, "Appium did not return a session");

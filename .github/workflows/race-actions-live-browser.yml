@@ -10,6 +10,7 @@ on:
       - "scripts/verify-race-actions-safari.mjs"
       - "scripts/verify-race-actions-ios-native.mjs"
       - "scripts/prepare-ios-safari-simulator.mjs"
+      - "scripts/select-ios-safari-simulator.mjs"
       - "scripts/prepare-ios-webdriveragent-prebuilt.mjs"
       - ".github/workflows/race-actions-live-browser.yml"
   workflow_dispatch:
@@ -23,52 +24,24 @@ concurrency:
 
 jobs:
   safari:
-    name: Safari - ${{ matrix.profile }}
-    runs-on: ${{ matrix.runner }}
-    timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - profile: macos
-            platform: macos
-            runner: macos-15
-          - profile: ios-18.5
-            platform: ios
-            runner: macos-15
-            xcode: /Applications/Xcode_16.4.app/Contents/Developer
-            runtime: "18.5"
-            device: iPhone 16
-          - profile: ios-26.5
-            platform: ios
-            runner: macos-26-intel
-            xcode: /Applications/Xcode_26.6.app/Contents/Developer
-            runtime: "26.5"
-            device: iPhone 17
+    name: Safari - macos
+    runs-on: macos-15
+    timeout-minutes: 15
     env:
-      ATHRECS_SAFARI_PLATFORM: ${{ matrix.platform }}
+      ATHRECS_SAFARI_PLATFORM: macos
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Select Xcode matching the installed iOS Simulator
-        if: matrix.platform == 'ios'
-        run: sudo /usr/bin/xcode-select --switch "${{ matrix.xcode }}"
       - name: Enable Safari's native WebDriver
         run: sudo /usr/bin/safaridriver --enable
-      - name: Boot an installed iPhone Simulator
-        if: matrix.platform == 'ios'
-        env:
-          ATHRECS_SAFARI_REQUIRED_RUNTIME_VERSION: ${{ matrix.runtime }}
-          ATHRECS_SAFARI_REQUIRED_DEVICE_NAME: ${{ matrix.device }}
-        run: node scripts/prepare-ios-safari-simulator.mjs
       - name: Test public calendar and sharing in native Safari
         run: node scripts/verify-race-actions-safari.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: race-actions-safari-${{ matrix.profile }}
+          name: race-actions-safari-macos
           path: artifacts/race-actions-safari-*
           if-no-files-found: warn
 
@@ -113,10 +86,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/prepare-ios-webdriveragent-prebuilt.mjs
-      - name: Prepare the installed iPhone and Safari
-        run: node scripts/prepare-ios-safari-simulator.mjs
+      - name: Select the installed iPhone for Appium-managed startup
+        run: node scripts/select-ios-safari-simulator.mjs
       - name: Test calendar and sharing through native iPhone controls
-        timeout-minutes: 9
+        timeout-minutes: 15
         run: |
           mkdir -p artifacts
           appium --address 127.0.0.1 --port 4723 --log artifacts/race-actions-ios-native-appium.log > artifacts/race-actions-ios-native-server.log 2>&1 &
