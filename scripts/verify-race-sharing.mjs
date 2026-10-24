@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { buildRaceShareData } from "../src/lib/athrecs/race-sharing.ts";
+import { buildRaceShareData, buildRaceShareLinks } from "../src/lib/athrecs/race-sharing.ts";
 
 const base = {
   id: "synthetic-half",
@@ -147,6 +147,135 @@ check("date-only race days remain stable across process timezones", () => {
     else process.env.TZ = originalTimeZone;
   }
 });
+
+check("five direct sharing destinations use the intended provider endpoints", () => {
+  const links = buildRaceShareLinks(buildRaceShareData(base));
+  assert.deepEqual(
+    links.map(({ id, label }) => [id, label]),
+    [
+      ["whatsapp", "WhatsApp"],
+      ["facebook", "Facebook"],
+      ["x", "X"],
+      ["telegram", "Telegram"],
+      ["email", "Email"],
+    ],
+  );
+  const endpoints = {
+    whatsapp: ["https:", "wa.me", "/"],
+    facebook: ["https:", "www.facebook.com", "/sharer/sharer.php"],
+    x: ["https:", "x.com", "/intent/tweet"],
+    telegram: ["https:", "t.me", "/share/url"],
+    email: ["mailto:", "", ""],
+  };
+  for (const link of links) {
+    const url = new URL(link.href);
+    assert.deepEqual([url.protocol, url.hostname, url.pathname], endpoints[link.id]);
+    assert.equal(url.hash, "");
+  }
+});
+
+check("provider parameters roundtrip punctuation and Unicode without private query values", () => {
+  const data = buildRaceShareData({
+    ...base,
+    name: "Race & + % #? 🏃 東京",
+    distance: "5K",
+    location: "A&B",
+    pageUrl:
+      "https://www.athrecs.com/races/%E6%9D%B1%E4%BA%AC?token=private-token&utm_source=private-source#private-fragment",
+  });
+  const links = Object.fromEntries(
+    buildRaceShareLinks(data).map(({ id, href }) => [id, new URL(href)]),
+  );
+  assert.equal(links.whatsapp.searchParams.get("text"), `${data.text}\r\n\r\n${data.url}`);
+  assert.equal(links.facebook.searchParams.get("u"), data.url);
+  assert.deepEqual([...links.facebook.searchParams.keys()], ["u"]);
+  assert.equal(links.x.searchParams.get("text"), data.text);
+  assert.equal(links.x.searchParams.get("url"), data.url);
+  assert.equal(links.telegram.searchParams.get("text"), data.text);
+  assert.equal(links.telegram.searchParams.get("url"), data.url);
+  assert.equal(links.email.searchParams.get("subject"), data.title);
+  assert.equal(links.email.searchParams.get("body"), `${data.text}\r\n\r\n${data.url}`);
+  assert.doesNotMatch(JSON.stringify(links), /private-token|private-source|private-fragment/);
+});
+
+check("query and email header injection characters remain ordinary encoded message text", () => {
+  const data = buildRaceShareData({
+    ...base,
+    name: "Synthetic\r\nBcc: nowhere@example.test &bcc=nowhere@example.test?x=1#fragment",
+    location: "A+B &subject=changed",
+  });
+  const expectedKeys = {
+    whatsapp: ["text"],
+    facebook: ["u"],
+    x: ["text", "url"],
+    telegram: ["text", "url"],
+    email: ["body", "subject"],
+  };
+  for (const { id, href } of buildRaceShareLinks(data)) {
+    const url = new URL(href);
+    assert.deepEqual([...url.searchParams.keys()].sort(), expectedKeys[id]);
+    assert.equal(url.hash, "");
+    assert.doesNotMatch(href, /[\r\n]/);
+    if (id === "email") {
+      assert.equal(url.pathname, "", "Do not preselect an email recipient");
+      assert.equal(url.searchParams.get("subject"), data.title);
+      assert.doesNotMatch(url.searchParams.get("subject"), /[\r\n]/);
+      assert.equal(url.searchParams.get("body"), `${data.text}\r\n\r\n${data.url}`);
+    }
+  }
+});
+
+check("long Unicode race names stay shareable and X text stays within 120 codepoints", () => {
+  for (const name of [
+    "Long race name ".repeat(60),
+    "A" + "🏃".repeat(250),
+    "東京".repeat(250),
+    "Synthetic \ud800 race",
+  ]) {
+    const data = buildRaceShareData({ ...base, name, location: "Long venue ".repeat(60) });
+    let links;
+    assert.doesNotThrow(() => {
+      links = buildRaceShareLinks(data);
+    });
+    const x = new URL(links.find(({ id }) => id === "x").href);
+    const text = x.searchParams.get("text");
+    assert([...text].length <= 120);
+    assert(text.endsWith("…"), "Long X descriptions should visibly indicate truncation");
+    assert.equal(x.searchParams.get("url"), data.url);
+    for (const { href } of links) {
+      for (const value of new URL(href).searchParams.values()) {
+        assert(value.isWellFormed(), "Provider parameters must not contain broken Unicode");
+      }
+    }
+  }
+});
+
+check(
+  "short X text retains cancellation and provisional qualifications before long race names",
+  () => {
+    for (const [status, marker] of [
+      ["Cancelled", /cancelled/i],
+      ["Postponed", /postponed/i],
+      ["Finished", /past race|finished/i],
+    ]) {
+      const data = buildRaceShareData({
+        ...base,
+        name: "東京 Marathon 🏃 ".repeat(40),
+        location: "Norwich 東京 ".repeat(40),
+        status,
+        provisional: true,
+      });
+      const link = buildRaceShareLinks(data).find(({ id }) => id === "x");
+      const text = new URL(link.href).searchParams.get("text");
+      assert([...text].length <= 120);
+      assert.match(text, marker);
+      assert.match(text, /provisional/i);
+      assert.match(text, /4 Jul(?:y)? 2027/);
+    }
+    const provisional = buildRaceShareData({ ...base, date: "2027-02-30", provisional: true });
+    assert.match(provisional.text, /date to be confirmed/i);
+  },
+);
 
 console.log(
   `PASS: ${checks} focused race-sharing checks; no external sharing or clipboard access.`,
