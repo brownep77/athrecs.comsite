@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { disqualificationSchema } from "./result-details.ts";
 import { performanceTimingSchema } from "./performance-timing.ts";
+import { PUBLIC_RESULT_LICENCE_CREDIT_IDS } from "./public-result-licence.ts";
 import type { Sport } from "./types";
 
 // Text fields deliberately retain decimal precision, field marks, heat positions,
@@ -94,6 +95,8 @@ export type DisplaySourcePerformance = SourcePerformance & {
 };
 export const sourceHistorySchema = z.object({
   provider: z.string(),
+  // Public projection uses fixed licence identifiers, never arbitrary evidence URLs.
+  publicLicenceCredits: z.array(z.enum(PUBLIC_RESULT_LICENCE_CREDIT_IDS)).optional(),
   externalId: z.string(),
   sourceUrl: historySourceUrlSchema,
   capturedAt: z.string(),

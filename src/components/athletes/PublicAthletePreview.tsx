@@ -3,6 +3,7 @@ import { SportBadge } from "@/components/races/EventBadges";
 import { Link } from "@tanstack/react-router";
 import type { PublicAthletePreview as Preview } from "@/lib/athrecs/public-athlete-preview";
 import { CompactResultsTable } from "./CompactResultsTable";
+import { PublicResultLicenceCredits } from "./PublicResultLicenceCredits";
 import { ProfileSignIn } from "./ProfileSignIn";
 import { AthleteId } from "./AthleteId";
 import { CountryFlag } from "./CountryFlag";
@@ -216,6 +217,7 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             ) : null}
           </nav>
         ) : null}
+        <PublicResultLicenceCredits credits={profile.publicLicenceCredits} />
       </section>
       <ProfileSignIn returnTo={`/athletes/${encodeURIComponent(profile.slug)}`} preview />
     </div>

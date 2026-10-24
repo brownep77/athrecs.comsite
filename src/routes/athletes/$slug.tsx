@@ -23,6 +23,8 @@ import {
 } from "@/components/athletes/EditorialAthleteOverview";
 import { sourceHistorySports } from "@/lib/athrecs/profile-history-results";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
+import { PublicResultLicenceCredits } from "@/components/athletes/PublicResultLicenceCredits";
+import { profileResultLicenceCredits } from "@/lib/athrecs/public-result-licence";
 import { buildProfileTimeline } from "@/lib/athrecs/profile-timeline";
 import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
 import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
@@ -585,6 +587,7 @@ function AthleteContent() {
           historyResults={historyResults}
           reportedHistory={includedHistory}
         />
+        <PublicResultLicenceCredits credits={profileResultLicenceCredits(sourceHistories)} />
       </section>
       {upcoming.length > 0 ? (
         <details className="rounded-lg border border-border bg-surface p-4">
