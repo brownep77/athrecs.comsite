@@ -156,7 +156,7 @@ try {
   assert.match(html, /href="https:\/\/doi\.org\/10\.6084\/m9\.figshare\.33965155\.v3"/);
   assert.match(html, /href="https:\/\/creativecommons\.org\/licenses\/by\/4\.0\/"/);
   assert.match(html, /CC BY 4\.0/);
-  assert.match(html, /London 2025 subset; names reordered for display\./);
+  assert.match(html, /Selected London Marathon editions; names reordered for display\./);
   assert.doesNotMatch(html, /example\.test|private-identity-review|synthetic-private-id/);
   assert.equal(
     renderToStaticMarkup(createElement(PublicResultLicenceCredits, { credits: [] })),
