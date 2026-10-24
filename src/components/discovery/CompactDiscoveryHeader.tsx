@@ -74,7 +74,8 @@ export function CompactDiscoveryHeader({
             alt="ATHRECS.com"
             width={190}
             height={39}
-            className={`h-auto w-36 sm:w-48 ${theme === "midnight" ? "brightness-0 invert" : ""}`}
+            className="h-auto w-36 sm:w-48"
+            style={theme === "midnight" ? { filter: "brightness(0) invert(1)" } : undefined}
           />
         </Link>
         <form
