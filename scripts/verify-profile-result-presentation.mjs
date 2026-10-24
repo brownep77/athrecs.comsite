@@ -193,6 +193,76 @@ try {
     profileAchievementResults([], surfaceHistory({ ...surfaceBase, labels: ["Road"] }))[0].surface,
     "Road",
   );
+  const publicQualifications = [
+    "Non-competitive event",
+    "Manually timed",
+    "Distance not established",
+    "Preliminary results",
+    "Provisional results",
+  ];
+  const privateQualificationLabels = [
+    "Unknown result qualification",
+    "Source: Private qualification provider",
+    "https://example.test/private-qualification-source",
+    "Private qualification review notes",
+    "Not manually timed",
+    "Non-competitive event: private detail",
+    "<b>Provisional results</b>",
+  ];
+  for (const [labels, expected] of [
+    [
+      [
+        ...publicQualifications,
+        ...publicQualifications,
+        " manually TIMED ",
+        ...privateQualificationLabels,
+      ],
+      publicQualifications,
+    ],
+    [privateQualificationLabels, []],
+    [[], []],
+  ]) {
+    const row = historyPerformanceSchema.parse({
+      ...surfaceBase,
+      meeting: "Synthetic qualified event",
+      discipline: "Running Challenge",
+      place: "",
+      labels,
+      providerName: "Private qualification provider",
+      sourceUrls: ["https://example.test/private-qualification-source"],
+      notes: "Private qualification review notes",
+    });
+    const before = JSON.stringify(row);
+    for (const performance of [row, withoutProfileEvidence(row)]) {
+      const html = renderToStaticMarkup(
+        createElement("table", null,
+          createElement("tbody", null,
+            createElement(HistoricalResultRow, {
+              result: { key: "synthetic:qualifications", sport: "Running", performance },
+              hasActions: false,
+            }),
+          ),
+        ),
+      );
+      const rendered = load(html);
+      const qualification = rendered("[data-result-qualifications]");
+      assert.equal(qualification.length, expected.length ? 1 : 0);
+      assert.equal(
+        qualification.text(),
+        expected.join(" · "),
+        "Only safe qualifications appear, with canonical wording and no duplicates",
+      );
+      for (const hidden of [
+        ...privateQualificationLabels,
+        "Private qualification provider",
+      ])
+        assert(!html.includes(hidden), `Private or unknown label remains hidden: ${hidden}`);
+      assert.equal(rendered(".result-evidence").length, 0, "Evidence stays staff-only");
+      assert.equal(rendered('[data-label="Source"]').length, 0);
+      assert.equal(rendered('[data-label="Performance"]').contents().first().text(), "46:55");
+    }
+    assert.equal(JSON.stringify(row), before, "Qualification display never rewrites results");
+  }
   const fixedDurationBase = historyPerformanceSchema.parse({
     ...surfaceBase,
     discipline: "6 Hours Running",
