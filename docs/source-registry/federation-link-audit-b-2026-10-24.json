@@ -1,0 +1,666 @@
+{
+  "checkedAt": "2026-10-24",
+  "scope": "65 direct triathlon organisation URLs, excluding three cross-sport Olympic bodies already screened and all membership-only references; follow-up on all 11 earlier aquatics exceptions.",
+  "triathlonStatusCounts": {
+    "content_retrieved": 57,
+    "retrieval_failed": 3,
+    "inappropriate_content": 1,
+    "partial_content": 3,
+    "event_landing": 1
+  },
+  "triathlon": [
+    {
+      "slug": "world-triathlon",
+      "name": "World Triathlon",
+      "url": "https://triathlon.org/",
+      "finalUrl": "https://triathlon.org/",
+      "title": "World Triathlon: Be Your Extraordinary",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "british-triathlon",
+      "name": "British Triathlon",
+      "url": "https://www.britishtriathlon.org/",
+      "finalUrl": "https://www.britishtriathlon.org/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Automated retrieval blocked; independent web open also returned HTTP 403. No claim that the domain is invalid; content not confirmed during this pass."
+    },
+    {
+      "slug": "triathlon-england",
+      "name": "Triathlon England",
+      "url": "https://www.britishtriathlon.org/england",
+      "finalUrl": "https://www.britishtriathlon.org/england",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Automated retrieval blocked; independent web open also returned HTTP 403. No claim that the domain is invalid; content not confirmed during this pass."
+    },
+    {
+      "slug": "triathlon-scotland",
+      "name": "Triathlon Scotland",
+      "url": "https://www.triathlonscotland.org/",
+      "finalUrl": "https://www.triathlonscotland.org/",
+      "title": "Triathlon Scotland",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "welsh-triathlon",
+      "name": "Triathlon Cymru",
+      "url": "https://welshtriathlon.org/",
+      "finalUrl": "https://welshtriathlon.org/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Automated retrieval blocked; independent web open also returned HTTP 403. No claim that the domain is invalid; content not confirmed during this pass."
+    },
+    {
+      "slug": "triathlon-ireland",
+      "name": "Triathlon Ireland",
+      "url": "https://www.triathlonireland.com/",
+      "finalUrl": "https://www.triathlonireland.com/",
+      "title": "Home - Triathlon Ireland",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "usa-triathlon",
+      "name": "USA Triathlon",
+      "url": "https://www.usatriathlon.org/",
+      "finalUrl": "https://www.usatriathlon.org/",
+      "title": "USA Triathlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "triathlon-canada",
+      "name": "Triathlon Canada",
+      "url": "https://www.triathloncanada.com/",
+      "finalUrl": "https://www.triathloncanada.com/",
+      "title": "Home - Triathlon Canada",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "austriathlon",
+      "name": "AusTriathlon",
+      "url": "https://www.triathlon.org.au/",
+      "finalUrl": "https://www.triathlon.org.au/",
+      "title": "Home – AusTriathlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "triathlon-new-zealand",
+      "name": "Triathlon New Zealand",
+      "url": "https://www.triathlon.kiwi/",
+      "finalUrl": "https://www.triathlon.kiwi/",
+      "title": "Triathlon New Zealand | Official Tri NZ Website",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "triathlon-south-africa",
+      "name": "Triathlon South Africa",
+      "url": "https://triathlonsa.co.za/",
+      "finalUrl": "https://triathlonsa.co.za/",
+      "title": "Home - Triathlon South Africa",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "french-triathlon",
+      "name": "Fédération Française de Triathlon",
+      "url": "https://www.fftri.com/",
+      "finalUrl": "https://www.fftri.com/",
+      "title": "Fédération Française de Triathlon - FFTRI",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "german-triathlon",
+      "name": "Deutsche Triathlon Union",
+      "url": "https://www.triathlondeutschland.de/",
+      "finalUrl": "https://www.triathlondeutschland.de/",
+      "title": "Deutsche Triathlon Union",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "spanish-triathlon",
+      "name": "Federación Española de Triatlón",
+      "url": "https://www.triatlon.org/",
+      "finalUrl": "https://www.triatlon.org/",
+      "title": "HOME » FETRI - FEDERACIÓN ESPAÑOLA DE TRIATLÓN",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "italian-triathlon",
+      "name": "Federazione Italiana Triathlon",
+      "url": "https://www.fitri.it/it/",
+      "finalUrl": "https://www.fitri.it/",
+      "title": "Home - FITRI - Federazione Italiana Triathlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "portuguese-triathlon",
+      "name": "Federação de Triatlo de Portugal",
+      "url": "https://www.federacao-triatlo.pt/",
+      "finalUrl": "https://www.federacao-triatlo.pt/ftp2015/",
+      "title": "Bem vindo à Federação de Triatlo de Portugal | Entidade Oficial",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "dutch-triathlon",
+      "name": "Nederlandse Triathlon Bond",
+      "url": "https://www.triathlonbond.nl/",
+      "finalUrl": "https://www.triathlonbond.nl/",
+      "title": "Wij zijn de Nederlandse Triathlon bond",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "belgian-triathlon",
+      "name": "Belgian Triathlon",
+      "url": "https://www.triathlon.be/",
+      "finalUrl": "https://www.triathlon.be/",
+      "title": "HOME | Belgian Triathlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "swiss-triathlon",
+      "name": "Swiss Triathlon",
+      "url": "https://swisstriathlon.ch/",
+      "finalUrl": "https://swisstriathlon.ch/",
+      "title": "Home DE - Swiss Triathlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "swedish-triathlon",
+      "name": "Svenska Triathlonförbundet",
+      "url": "https://www.svensktriathlon.org/",
+      "finalUrl": "https://www.svensktriathlon.org/",
+      "title": "TRIATHLONLICENS",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "danish-triathlon",
+      "name": "Triatlon Danmark",
+      "url": "https://www.triatlon.dk/",
+      "finalUrl": "https://www.triatlon.dk/",
+      "title": "Triatlon Danmark er forbundet for triatlon i Danmark. Find klubber, stævner og viden – uanset om du er ny eller erfaren triatlet.Forside | Triatlon Danmark - forbundet for triatleter  | Triatlon Danmark",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "triathlon-japan",
+      "name": "Triathlon Japan",
+      "url": "https://www.jtu.or.jp/",
+      "finalUrl": "https://www.jtu.or.jp/",
+      "title": "Triathlon Japan｜公益社団法人トライアスロンジャパン",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "brazilian-triathlon",
+      "name": "Confederação Brasileira de Triathlon",
+      "url": "https://cbtri.org.br/",
+      "finalUrl": "https://cbtri.org.br/",
+      "title": "Homepage - Main - Confederação Brasileira de Triathlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "europe-triathlon",
+      "name": "Europe Triathlon",
+      "url": "https://europe.triathlon.org/",
+      "finalUrl": "https://europe.triathlon.org/",
+      "title": "Europe Triathlon | Home",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "austrian-triathlon",
+      "name": "Triathlon Austria",
+      "url": "https://www.triathlon-austria.at/",
+      "finalUrl": "https://www.triathlon-austria.at/de",
+      "title": "ÖTRV Triathlon Austria",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "finnish-triathlon",
+      "name": "Triathlon Finland",
+      "url": "https://www.triathlon.fi/",
+      "finalUrl": "https://www.triathlon.fi/",
+      "title": "Etusivu",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "norwegian-triathlon",
+      "name": "Norges Triatlonforbund",
+      "url": "https://www.triatlonforbundet.no/",
+      "finalUrl": "https://www.triatlonforbundet.no/",
+      "title": "Forside",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "polish-triathlon",
+      "name": "Polski Związek Triathlonu",
+      "url": "https://www.triathlon.pl/",
+      "finalUrl": "https://triathlon.pl/",
+      "title": "Strona główna - Triathlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "indian-triathlon",
+      "name": "Indian Triathlon Federation",
+      "url": "https://www.triathlonindia.com/",
+      "finalUrl": "https://www.triathlonindia.com/",
+      "title": "Indian Triathlon Federation | ITF",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "singapore-triathlon",
+      "name": "Triathlon Singapore",
+      "url": "https://www.triathlonsingapore.org/",
+      "finalUrl": "https://www.triathlonsingapore.org/",
+      "title": "Triathlon Singapore – Triathlon Singapore",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "kenya-triathlon",
+      "name": "Kenya Triathlon Federation",
+      "url": "https://www.triathlonkenya.org/",
+      "finalUrl": "https://www.triathlonkenya.org/",
+      "title": "Triathlon Kenya – Global MultiSport Community",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "bermuda-triathlon",
+      "name": "Bermuda Triathlon Association",
+      "url": "https://bermudatriathlon.com/",
+      "finalUrl": "https://bermudatriathlon.com/",
+      "title": "Homepage | Bermuda Triathlon Association",
+      "status": "inappropriate_content",
+      "note": "Listed homepage served unrelated football, NFL, tennis and basketball articles. Replaced with the opened BTA homepage at https://www.bta.bm/; About Us identifies the association and a historical organiser registration page references bta.bm. World Triathlon still lists the old domain; this discrepancy is recorded, not treated as proof the old page remains appropriate."
+    },
+    {
+      "slug": "czech-triathlon",
+      "name": "Czech Triathlon Association",
+      "url": "https://triatlon.cz/",
+      "finalUrl": "https://triatlon.cz/",
+      "title": "Česká triatlonová asociace – Triatlon.cz",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "hungarian-triathlon",
+      "name": "Hungarian Triathlon Federation",
+      "url": "https://triatlon.hu/",
+      "finalUrl": "https://triatlon.hu/",
+      "title": "Magyar Triatlon Szövetség | Hivatalos weboldala",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "romanian-triathlon",
+      "name": "Triathlon Romania",
+      "url": "https://triatlonromania.ro/",
+      "finalUrl": "https://triatlonromania.ro/",
+      "title": "Triatlon România",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "hellenic-triathlon",
+      "name": "Hellenic Triathlon Federation",
+      "url": "https://hellastriathlon.gr/en/",
+      "finalUrl": "https://hellastriathlon.gr/en/",
+      "title": "Τριαθλητική Ομοσπονδία Ελλάδας | Επίσημος ιστότοπος",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "turkish-triathlon",
+      "name": "Türkiye Triathlon Federation",
+      "url": "https://www.triatlon.org.tr/",
+      "finalUrl": "https://www.triatlon.org.tr/",
+      "title": "Türkiye Triatlon Federasyonu",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "estonian-triathlon",
+      "name": "Estonian Triathlon Association",
+      "url": "https://www.triatlon.ee/",
+      "finalUrl": "https://www.triatlon.ee/",
+      "title": "Eesti Triatloni Liit - Triatloni edendamine ja koordineerimine Eestis",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "latvian-triathlon",
+      "name": "Latvian Triathlon Federation",
+      "url": "https://www.triatlons.lv/",
+      "finalUrl": "https://www.triatlons.lv/lv/home",
+      "title": "Sākumlapa  | Latvijas Triatlona Federācija",
+      "status": "partial_content",
+      "note": "Federation title, contact and membership sections retrieved; partner/news/competition areas were incomplete or loading."
+    },
+    {
+      "slug": "lithuanian-triathlon",
+      "name": "Lithuanian Triathlon Federation",
+      "url": "https://www.triatlonas.lt/",
+      "finalUrl": "https://www.triatlonas.lt/",
+      "title": "Lietuvos Triatlono Federacija – Lietuvos triatlono bendruomenės namai",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "mexican-triathlon",
+      "name": "Federación Mexicana de Triatlón",
+      "url": "https://triatlon.com.mx/",
+      "finalUrl": "https://triatlon.com.mx/",
+      "title": "Home Triatlon - FMTRI",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "korean-triathlon",
+      "name": "Korea Triathlon Federation",
+      "url": "https://triathlon.or.kr/",
+      "finalUrl": "https://triathlon.or.kr/",
+      "title": "(사)대한철인3종협회",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "chilean-triathlon",
+      "name": "Federación Chilena de Triatlón",
+      "url": "https://triatlonchile.cl/",
+      "finalUrl": "https://triatlonchile.cl/",
+      "title": "Triatlón",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "malaysian-triathlon",
+      "name": "Malaysia Triathlon Association",
+      "url": "https://malaysiatriathlon.wordpress.com/",
+      "finalUrl": "https://malaysiatriathlon.wordpress.com/",
+      "title": "(no title)",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "hong-kong-triathlon",
+      "name": "Triathlon Association of Hong Kong China",
+      "url": "https://www.triathlon.com.hk/",
+      "finalUrl": "https://www.triathlon.com.hk/zh-hant/",
+      "title": "首頁 | Triathlon Association of Hong Kong China",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "croatian-triathlon",
+      "name": "Hrvatski triatlon savez",
+      "url": "https://triatlon.hr/",
+      "finalUrl": "https://triatlon.hr/",
+      "title": "HRVATSKI TRIATLON SAVEZ | Croatian Triathlon Federation",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "slovenian-triathlon",
+      "name": "Triatlon zveza Slovenije",
+      "url": "https://triatlonslovenije.si/",
+      "finalUrl": "https://triatlonslovenije.si/",
+      "title": "Triatlon zveza – Slovenije",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "slovak-triathlon",
+      "name": "Slovenská triatlonová únia",
+      "url": "https://www.triathlon.sk/",
+      "finalUrl": "https://www.triathlon.sk/",
+      "title": "Úvod | Triathlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "serbian-triathlon",
+      "name": "Srpski triatlon",
+      "url": "https://triatlon.org.rs/",
+      "finalUrl": "https://triatlon.org.rs/",
+      "title": "Početna - Srpski Triatlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "bulgarian-triathlon",
+      "name": "Bulgarian Triathlon Association",
+      "url": "https://bat.triathlon.bg/",
+      "finalUrl": "https://bat.triathlon.bg/",
+      "title": "Българска Асоциация по Триатлон",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "icelandic-triathlon",
+      "name": "Þríþrautarsamband Íslands",
+      "url": "https://triathlon.is/",
+      "finalUrl": "https://triathlon.is/",
+      "title": "\n      \n            Þríþrautarsamband Íslands\n        ",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "luxembourg-triathlon",
+      "name": "Fédération Luxembourgeoise de Triathlon",
+      "url": "https://www.fltri.lu/",
+      "finalUrl": "https://www.fltri.lu/fr/1/accueil/",
+      "title": "FLTRI Home",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "israeli-triathlon",
+      "name": "Israeli Triathlon Association",
+      "url": "https://www.triathlon.org.il/",
+      "finalUrl": "https://www.triathlon.org.il/",
+      "title": "עמוד הבית - איגוד הטריאתלון הישראלי",
+      "status": "partial_content",
+      "note": "Federation title and a short 2026 event item retrieved; detailed fixture/results/profile capabilities not assessed."
+    },
+    {
+      "slug": "barbadian-triathlon",
+      "name": "Barbados Federation of Island Triathletes",
+      "url": "https://triathlonbarbados.com/",
+      "finalUrl": "https://triathlonbarbados.com/",
+      "title": "Barbados Federation of Island Triathletes – BFIT: Building Champions, One Triathlon at a Time",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "bahamian-triathlon",
+      "name": "Bahamas Triathlon Association",
+      "url": "https://www.bahamastriathlon.org/",
+      "finalUrl": "https://www.bahamastriathlon.org/en/",
+      "title": "Bahamas Triathlon Association - Nassau, Bahamas",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "trinidad-tobago-triathlon",
+      "name": "Trinidad and Tobago Triathlon Federation",
+      "url": "https://triathlon.co.tt/",
+      "finalUrl": "https://triathlon.co.tt/",
+      "title": "Home",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "cypriot-triathlon",
+      "name": "Cyprus Triathlon Federation",
+      "url": "https://cytrifed.org/",
+      "finalUrl": "https://cytrifed.org/",
+      "title": "Cyprus Triathlon Federation",
+      "status": "partial_content",
+      "note": "Federation title and navigation retrieved, but no substantive fixture/results/profile content."
+    },
+    {
+      "slug": "maltese-triathlon",
+      "name": "Malta Triathlon Federation",
+      "url": "https://triathlonmalta.org/",
+      "finalUrl": "https://triathlonmalta.org/",
+      "title": "Malta Triathlon Federation",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "mauritian-triathlon",
+      "name": "Fédération Mauricienne de Triathlon",
+      "url": "https://fmtri.mu/",
+      "finalUrl": "https://fmtri.mu/",
+      "title": "FMTri Home - Federation Mauricienne de Triathlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "costa-rican-triathlon",
+      "name": "Federación Unida de Triatlón",
+      "url": "https://feutri.org/",
+      "finalUrl": "https://feutri.org/",
+      "title": "Federación Unida de Triatlón – Triatlon en Costa Rica – Sitio web oficial de la FEUTRI y Triatlon en Costa Rica",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "guatemalan-triathlon",
+      "name": "Federación Deportiva Nacional de Triatlón de Guatemala",
+      "url": "https://triatlon.gt/",
+      "finalUrl": "https://triatlon.gt/",
+      "title": "Triatlon Guatemala – Federacion Deportiva Nacional de Triatlon",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "panamanian-triathlon",
+      "name": "Unión de Triatlón de Panamá",
+      "url": "https://www.triathlonpanama.com/",
+      "finalUrl": "https://www.triathlonpanama.com/",
+      "title": "Inicio - Unión de Triatlón de Panamá",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "paraguayan-triathlon",
+      "name": "Federación Paraguaya de Triathlon",
+      "url": "https://fepatri.org.py/",
+      "finalUrl": "https://fepatri.org.py/",
+      "title": "Federación Paraguaya de Triathlon – Fepatri",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "peruvian-triathlon",
+      "name": "Federación Peruana de Triatlón",
+      "url": "https://fedenatri.pe/",
+      "finalUrl": "https://fedenatri.pe/",
+      "title": "Federación Peruana de Triatlón | Sitio Oficial",
+      "status": "content_retrieved",
+      "note": "Opened page title and organisation-related content correspond to the listed body. Individual linked pages, dates and athlete rows remain separately reviewable."
+    },
+    {
+      "slug": "vietnamese-triathlon",
+      "name": "Vietnam Triathlon Federation",
+      "url": "https://triathlonvietnam.org/",
+      "finalUrl": "https://triathlonvietnam.org/",
+      "title": "Asia Triathlon Cup Tam Chúc 2026 – Hồ Sơ Tài Trợ",
+      "status": "event_landing",
+      "note": "World Triathlon explicitly links this domain, but its homepage currently presents a Tam Chuc 2026 event sponsorship proposal. Appropriate federation-linked event site, not a general fixture/results/profile directory; public directory wording qualified."
+    }
+  ],
+  "aquaticsFollowup": [
+    {
+      "slug": "scottish-swimming",
+      "url": "https://www.scottishswimming.com/",
+      "status": "unresolved",
+      "note": "Homepage again returned only an embedded/navigation shell. Existing domain corroboration retained; detailed content still unconfirmed."
+    },
+    {
+      "slug": "portuguese-swimming",
+      "url": "https://www.fpnatacao.pt/",
+      "status": "unresolved",
+      "note": "Non-www homepage also blocked; independent web retrieval returned HTTP 403. Search indexing alone not accepted as opened data evidence."
+    },
+    {
+      "slug": "brazilian-aquatics",
+      "url": "https://www.cbda.org.br/",
+      "status": "unresolved",
+      "note": "Homepage again rate-limited with HTTP 429; independent retrieval returned HTTP 403. Detailed content remains unconfirmed."
+    },
+    {
+      "slug": "peruvian-swimming",
+      "url": "https://www.fdpn.org/",
+      "status": "unresolved",
+      "note": "Homepage again returned only Cargando...; independent retrieval returned no body content. No replacement domain guessed."
+    },
+    {
+      "slug": "bulgarian-swimming",
+      "url": "https://bul-swimming.org/",
+      "status": "deeper_pages_retrieved",
+      "note": "Opened results archive, 2026 results index and domestic 2026 calendar table. Homepage placeholder warning retained. Calendar has a postponed entry, an empty competition name and a 2025 label within its 2026 table; edition details require review."
+    },
+    {
+      "slug": "guatemalan-swimming",
+      "url": "https://fenadegua.gt/",
+      "status": "deeper_pages_retrieved",
+      "note": "Mission page explicitly identifies the national aquatics remit. Swimming results indexes expose 2025/2026 and named 2026 competitions. Homepage media limitation retained; events page timed out. No PDF result rows imported."
+    },
+    {
+      "slug": "swiss-aquatics",
+      "url": "https://www.swiss-aquatics.ch/",
+      "status": "deeper_pages_retrieved",
+      "note": "Opened 2026 short-course championship page with dates, venue, regulations and organiser-linked Swimrankings calendar route. Homepage remained thin; result destination not treated as opened results."
+    },
+    {
+      "slug": "finnish-swimming",
+      "url": "https://www.uimaliitto.fi/",
+      "status": "deeper_pages_retrieved",
+      "note": "Swimming calendar exposed dated 2026/2027 meets, venues, cancellation marking, invitation links and pagination. Homepage limitation does not apply to this separately inspected calendar; no individual race starts inferred."
+    },
+    {
+      "slug": "icelandic-swimming",
+      "url": "https://www.sundsamband.is/",
+      "status": "deeper_pages_retrieved",
+      "note": "Meet index and 2026 25m championship page opened with dates, rules, draft session times and a Swimify schedule link. The source explicitly warns times may change; no definitive start times imported."
+    },
+    {
+      "slug": "cypriot-swimming",
+      "url": "https://koek.org.cy/",
+      "status": "deeper_pages_retrieved",
+      "note": "2026 international masters meet page opened with invitation, entry-list and result-PDF links. Actual PDF result rows remain unchecked."
+    },
+    {
+      "slug": "swim-england-west-midland-region",
+      "url": "https://westmidlandswimming.org.uk/",
+      "status": "deeper_pages_retrieved",
+      "note": "Events page opened with named 2026/2027 meetings and links. Existing warning about unrelated homepage content remains; individual pages require manual review."
+    }
+  ]
+}

@@ -2480,11 +2480,12 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   "sports": [
     "triathlon"
   ],
-  "website": "https://bermudatriathlon.com/",
+  "website": "https://www.bta.bm/",
   "summary": "Bermuda’s triathlon association, supporting the sport and national representation through World Triathlon.",
   "sources": [
     "https://triathlon.org/members/bermuda-triathlon-federation",
-    "https://bermudatriathlon.com/",
+    "https://www.bta.bm/",
+    "https://www.bta.bm/about.html",
     "https://americas.triathlon.org/national-federations"
   ],
   "related": [
@@ -2494,8 +2495,8 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "BTA",
     "Bermuda Triathlon Federation"
   ],
-  "detail": "World Triathlon lists this body as Bermuda Triathlon Association and reports affiliated status (checked 23 October 2026)."
-}, "2026-10-23"),
+  "detail": "World Triathlon lists this body as Bermuda Triathlon Association and reports affiliated status (checked 23 October 2026). The BTA website includes membership, competition rules, newsletters and local event information."
+}, "2026-10-24"),
   record({
     slug: "scottish-hill-runners",
     name: "Scottish Hill Runners",
@@ -5692,6 +5693,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   ],
   "summary": "National federation for triathlon and duathlon in Vietnam.",
   "website": "https://triathlonvietnam.org/",
+  "detail": "World Triathlon links this federation domain. On 24 October 2026 its homepage presented the Tam Chúc 2026 event and sponsorship information; use the World Triathlon reference for federation details.",
   "sources": [
     "https://triathlon.org/members/vietnam-triathlon-federation",
     "https://triathlonvietnam.org/",
@@ -5700,7 +5702,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   "related": [
     "world-triathlon"
   ]
-}, "2026-10-23"),
+}, "2026-10-24"),
 
   record(
     {
