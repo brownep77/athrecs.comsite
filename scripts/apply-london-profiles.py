@@ -373,7 +373,10 @@ def apply(args):
         raise ValueError('Identity snapshot changed after planning')
     snapshot_module = load('london_apply_snapshot', ROOT / 'snapshot-london-profiles.py')
     fingerprint_sql = snapshot_module.fingerprint_sql()
-    cfg, query = base.connection(args.connection, args.confirm_branch, timeout=70)
+    # A resumed review compute may need to load the directory into its cache.
+    # This transport budget also covers upload time; mutation statements retain
+    # their separate 55-second database limit and the unchanged freshness guards.
+    cfg, query = base.connection(args.connection, args.confirm_branch, timeout=180)
     if cfg['projectId'] != PROJECT or (args.review and cfg['branchId'] == PRODUCTION) or (not args.review and cfg['branchId'] != PRODUCTION):
         raise ValueError('Explicit review/production target does not match connection')
     if not args.review:
