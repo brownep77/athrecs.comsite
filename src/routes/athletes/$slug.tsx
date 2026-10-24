@@ -321,15 +321,36 @@ function AthletePage() {
     // Re-run the existing privacy-aware loader when returning to this profile.
     // Achievements are derived from current results, never a saved badge snapshot.
     let lastRefresh = 0;
-    const refresh = () => {
-      if (document.visibilityState !== "visible" || Date.now() - lastRefresh < 1000) return;
+    let refreshing = false;
+    const refresh = async () => {
+      if (
+        document.visibilityState !== "visible" ||
+        !navigator.onLine ||
+        refreshing ||
+        Date.now() - lastRefresh < 1000
+      )
+        return;
       lastRefresh = Date.now();
-      void router.invalidate();
+      refreshing = true;
+      try {
+        await router.invalidate({ filter: (match) => match.routeId === Route.id, sync: true });
+      } catch {
+        // The route handles read errors; a transient poll failure must not create
+        // an unhandled rejection or prevent the next refresh attempt.
+      } finally {
+        refreshing = false;
+      }
     };
+    // Keep an already-open profile current after staff imports or result claims.
+    // Hidden/offline tabs do no polling; focus/reconnect checks resume immediately.
+    const interval = window.setInterval(() => void refresh(), 60_000);
     window.addEventListener("focus", refresh);
+    window.addEventListener("online", refresh);
     document.addEventListener("visibilitychange", refresh);
     return () => {
+      window.clearInterval(interval);
       window.removeEventListener("focus", refresh);
+      window.removeEventListener("online", refresh);
       document.removeEventListener("visibilitychange", refresh);
     };
   }, [router]);

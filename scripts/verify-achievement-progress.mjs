@@ -33,7 +33,7 @@ assert.equal(empty.progress[0].remaining, 1);
 const four = Array.from({ length: 4 }, (_, i) => race(i + 1));
 const progress = buildProfileAchievementSummary(four, [], today);
 assert.equal(progress.progress.find((goal) => goal.id === "finishes").remaining, 1);
-assert(progress.earned.some((achievement) => achievement.title === "First recorded finish"));
+assert(progress.earned.some((achievement) => achievement.title === "4 finishes completed"));
 const five = buildProfileAchievementSummary([...four, race(5)], [], today);
 assert(five.earned.some((achievement) => achievement.title === "5 finishes completed"));
 assert.equal(five.progress.find((goal) => goal.id === "finishes").remaining, 5);
@@ -62,6 +62,33 @@ const marathonGoal = buildProfileAchievementSummary(marathons, [], today).progre
   (goal) => goal.id === "marathons",
 );
 assert.equal(marathonGoal.remaining, 1);
+// Actual totals must advance on every finish, including between and beyond thresholds.
+for (const [id, distanceCode, distanceKm, count, label] of [
+  ["finishes", "10K", 10, 70, "finishes"],
+  ["marathons", "Marathon", 42.195, 16, "marathons"],
+  ["ultras", "50K", 50, 3, "ultras"],
+  ["marathons", "Marathon", 42.195, 121, "marathons"],
+]) {
+  const rows = Array.from({ length: count }, (_, index) =>
+    race(index + 1, {
+      distanceCode,
+      distanceKm,
+      details: { verificationStatus: "source_verified" },
+    }),
+  );
+  const summary = (input) =>
+    buildProfileAchievementSummary(input, [], today).earned.find((a) => a.id === id);
+  assert.equal(summary(rows).title, `${count} ${label} completed`);
+  assert.equal(summary(rows).verified, true);
+  const added = [...rows, race(count + 1, { distanceCode, distanceKm })];
+  assert.equal(summary(added).title, `${count + 1} ${label} completed`);
+  assert.equal(summary(added).verified, false, "Verification covers the full displayed total");
+  assert.equal(
+    summary([...rows, { ...added.at(-1), status: "DQ" }]).title,
+    `${count} ${label} completed`,
+  );
+  assert.equal(summary(rows.slice(1)).title, `${count - 1} ${label} completed`);
+}
 const homeNations = buildProfileAchievementSummary(
   [race(1, { country: "England" }), race(2, { country: "Scotland" })],
   [],
@@ -454,7 +481,7 @@ try {
   const markup = renderToStaticMarkup(
     createElement(AchievementSummary, { summary: firstPage.achievements }),
   );
-  assert(markup.includes("25 finishes completed"));
+  assert(markup.includes("40 finishes completed"));
   assert(markup.includes("10 more finishes needed"));
   assert(markup.includes('aria-label="Progress towards 50 finishes"'));
   assert(markup.includes('value="40" max="50"'));

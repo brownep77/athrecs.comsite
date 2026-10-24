@@ -624,12 +624,53 @@ try {
       executablePath: process.env.ATHRECS_BROWSER_EXECUTABLE || undefined,
     });
     try {
+      // Update the database while the same page stays open. No navigation,
+      // focus event or manual reload may be needed to update its achievements.
+      const checkLiveAchievements = async (page) => {
+        const [original] = await sql`select performances from athlete_source_histories
+          where athlete_id=${publishedAthlete.id} and external_id='public-history-test'`;
+        const marathon = page.locator('[data-earned-achievement="marathons"]');
+        await marathon.getByText("2 marathons completed", { exact: true }).waitFor();
+        const added = {
+          ...performance,
+          date: "2024-06-01",
+          year: 2024,
+          discipline: "Marathon",
+          performance: "4:00:00",
+          meeting: "Synthetic refresh marathon",
+          country: "France",
+          verificationStatus: "unverified",
+        };
+        const update = async (rows) => {
+          await sql`update athlete_source_histories set performances=${JSON.stringify(rows)}::jsonb
+            where athlete_id=${publishedAthlete.id} and external_id='public-history-test'`;
+        };
+        try {
+          await update([...original.performances, added]);
+          await page.clock.fastForward(61_000);
+          await marathon
+            .getByText("3 marathons completed", { exact: true })
+            .waitFor({ timeout: 30000 });
+          assert((await marathon.innerText()).includes("Awaiting verification"));
+          // Excluding a newly added result must also remove its achievement credit.
+          await update([...original.performances, { ...added, profileExcluded: true }]);
+          await page.clock.fastForward(61_000);
+          await marathon
+            .getByText("2 marathons completed", { exact: true })
+            .waitFor({ timeout: 30000 });
+          assert(!(await page.locator("body").innerText()).includes("Private biography sentinel"));
+        } finally {
+          await update(original.performances);
+        }
+      };
       const anonymous = await browser.newContext({ viewport: { width: 390, height: 844 } });
       const guest = await anonymous.newPage();
+      await guest.clock.install();
       await guest.goto(origin + "/athletes/published-history-fixture", {
         waitUntil: "networkidle",
       });
       assert.equal(await guest.locator("#results-history tbody tr").count(), 5);
+      await checkLiveAchievements(guest);
       await guest
         .getByRole("button", { name: "Sign in or create an account", exact: true })
         .click();
@@ -645,6 +686,7 @@ try {
           extraHTTPHeaders: { authorization: `Bearer ${token}` },
         });
         const page = await context.newPage();
+        await page.clock.install();
         await page.goto(origin + "/athletes/published-history-fixture", {
           waitUntil: "networkidle",
         });
@@ -696,10 +738,11 @@ try {
             .length,
           0,
         );
+        if (viewport.width > 1000) await checkLiveAchievements(page);
         await context.close();
       }
       console.log(
-        "PASS: signed-in desktop and mobile browsers show one results history, working sport/year/search filters, all rows and collapsed source details.",
+        "PASS: desktop/mobile profile rendering and automatic anonymous/member achievement updates after imported and excluded results.",
       );
     } finally {
       await browser.close();
