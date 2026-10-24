@@ -1,4 +1,7 @@
-"""Read-only, streamed London 2025 duplicate-screening snapshot.
+"""Read-only, streamed duplicate-screening snapshot for one London edition.
+
+Use --edition-config for explicitly reviewed 2023/2024 retained collections.
+Without it, the original London 2025 scope remains unchanged.
 
 Private outputs and connection files belong outside the repository. The SQL
 fingerprint is reusable under table locks before publication. New rows from this
@@ -17,6 +20,9 @@ from collections import Counter
 
 ROOT = pathlib.Path(__file__).resolve().parent
 BATCH = "london-2025-20261024"
+YEAR = 2025
+DATE = "2025-04-27"
+EDITION_CONTEXT = None
 PRODUCTION_BRANCH = "br-flat-unit-aydbwlfk"
 PROJECT = "lively-resonance-04577945"
 EDITION_IDS = (71613035, 109240293, 109241811)
@@ -100,6 +106,35 @@ PARTS = (
     ("historyChoices", CHOICES_SQL, "user_id,athlete_id,provider,external_id,performance_hash"),
     ("hiddenSourceResults", HIDDEN_SQL, "user_id,source_result_id"),
 )
+
+
+_RESULTS_SQL_TEMPLATE = RESULTS_SQL.replace("71613035,109240293,109241811", "__LONDON_EDITION_IDS__")
+_HISTORIES_SQL_TEMPLATE = HISTORIES_SQL.replace("2025", "__LONDON_YEAR__")
+
+
+def configure(context=None):
+    """Bind SQL and source normalization to one validated, frozen edition."""
+    global BATCH, YEAR, DATE, EDITION_IDS, EDITION_CONTEXT
+    global RESULTS_SQL, HISTORIES_SQL, PARTS
+    context = plan.configure(context)
+    EDITION_CONTEXT = context
+    BATCH = context["batchId"] if context else "london-2025-20261024"
+    YEAR = context["year"] if context else 2025
+    DATE = context["date"] if context else "2025-04-27"
+    EDITION_IDS = tuple([context["edition"]["id"], *context["edition"]["equivalentIds"]]) if context else (71613035, 109240293, 109241811)
+    RESULTS_SQL = _RESULTS_SQL_TEMPLATE.replace("__LONDON_EDITION_IDS__", ",".join(str(value) for value in EDITION_IDS))
+    HISTORIES_SQL = _HISTORIES_SQL_TEMPLATE.replace("__LONDON_YEAR__", str(YEAR))
+    PARTS = (
+        ("athletes", ATHLETES_SQL, "id"),
+        ("accounts", ACCOUNTS_SQL, "id"),
+        ("links", LINKS_SQL, "athlete_id,user_id"),
+        ("results", RESULTS_SQL, "id"),
+        ("histories", HISTORIES_SQL, "athlete_id,provider,external_id,ordinal"),
+        ("shares", SHARES_SQL, "user_id"),
+        ("historyChoices", CHOICES_SQL, "user_id,athlete_id,provider,external_id,performance_hash"),
+        ("hiddenSourceResults", HIDDEN_SQL, "user_id,source_result_id"),
+    )
+    return context
 
 
 def fingerprint_sql():
@@ -193,9 +228,9 @@ def normalize_result(row, kind):
     urls = source_urls(performance) | source_urls(row["source_url"])
     marathon = str(performance.get("discipline") or "").strip().lower() in {"marathon", "42.195km", "42.195 km"}
     london = bool(re.search(r"\blondon\s+marathon\b", str(performance.get("meeting") or ""), re.I)) or performance.get("eventSlug") == "london-marathon"
-    exact_date = performance.get("date") == "2025-04-27"
-    official_url = any(re.match(r"^https?://results\.(?:tcslondonmarathon|virginmoneylondonmarathon)\.com/2025(?:/|[?#]|$)", url, re.I) for url in urls)
-    compatible_edition = performance.get("date") in (None, "", "2025-04-27") and str(performance.get("year")) == "2025"
+    exact_date = performance.get("date") == DATE
+    official_url = any(re.match(rf"^https?://results\.(?:tcslondonmarathon|virginmoneylondonmarathon)\.com/{YEAR}(?:/|[?#]|$)", url, re.I) for url in urls)
+    compatible_edition = performance.get("date") in (None, "", DATE) and str(performance.get("year")) == str(YEAR)
     explicit_edition = marathon and ((london and exact_date) or (official_url and compatible_edition))
     identity = [row["athlete_id"], row["provider"], row["external_id"], row["ordinal"]]
     finish = seconds(performance.get("performance"))
@@ -217,6 +252,17 @@ def normalize_result(row, kind):
 
 
 def snapshot(args):
+    config_path = getattr(args, "edition_config", None)
+    if config_path:
+        if config_path.resolve().is_relative_to(ROOT.parent.resolve()):
+            raise ValueError("Private edition configuration must remain outside the repository")
+        configure(json.loads(config_path.read_text(encoding="utf-8")))
+    else:
+        configure()
+    if args.batch is None:
+        args.batch = BATCH
+    if EDITION_CONTEXT and args.batch != BATCH:
+        raise ValueError("Snapshot batch differs from the frozen edition configuration")
     args.output.mkdir(parents=True, exist_ok=True)
     args.output.chmod(0o700)
     if ROOT.parent.resolve() in args.output.resolve().parents:
@@ -283,7 +329,9 @@ def snapshot(args):
         result.update({"gender": owner["gender"], "nationality": owner.get("nationality"), "dateOfBirth": owner.get("dateOfBirth")})
     output = {"athletes": athletes, "accounts": accounts, "results": results,
               "privacy": {name: by_part[name] for name in ("shares", "historyChoices", "hiddenSourceResults")},
-              "metadata": {"snapshotAt": started, "completedAt": dt.datetime.now(dt.timezone.utc).isoformat(), "branchId": cfg["branchId"], "projectId": cfg["projectId"], "batchId": args.batch, "fingerprint": expected, "partHashes": part_hashes, "directoryScanned": scanned, "directoryMaximumId": maximum, "allowedNameKeys": len(allowed_keys), "scope": "All directory names/aliases; accounts/links; reviewed London2025 canonical editions and London2025 candidate history performances. Year-only histories have no inferred edition date."}}
+              "metadata": {"snapshotAt": started, "completedAt": dt.datetime.now(dt.timezone.utc).isoformat(), "branchId": cfg["branchId"], "projectId": cfg["projectId"], "batchId": args.batch, "fingerprint": expected, "partHashes": part_hashes, "directoryScanned": scanned, "directoryMaximumId": maximum, "allowedNameKeys": len(allowed_keys), "scope": f"All directory names/aliases; accounts/links; reviewed London{YEAR} canonical editions and London{YEAR} candidate history performances. Year-only histories have no inferred edition date."}}
+    if EDITION_CONTEXT:
+        output["metadata"]["editionContextDigest"] = plan._hash(EDITION_CONTEXT)
     dump(args.output / "snapshot.json", output)
     summary = {**output["metadata"], "counts": {"athletes": len(athletes), "accounts": len(accounts), "results": len(results), "canonicalResults": len(canonical_rows), "historyPerformances": len(history_rows)}, "historyProviders": dict(Counter(row["provider"] for row in history_rows)), "editionEvidence": dict(Counter(row.get("editionEvidence", "canonical") for row in results))}
     dump(args.output / "metadata.json", summary)
@@ -298,5 +346,6 @@ if __name__ == "__main__":
     parser.add_argument("--confirm-branch", required=True)
     parser.add_argument("--source", type=pathlib.Path, required=True)
     parser.add_argument("--output", type=pathlib.Path, required=True)
-    parser.add_argument("--batch", default=BATCH)
+    parser.add_argument("--batch")
+    parser.add_argument("--edition-config", type=pathlib.Path)
     snapshot(parser.parse_args())
