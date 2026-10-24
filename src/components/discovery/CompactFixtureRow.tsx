@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useState } from "react";
 import { Bookmark, Check, ChevronRight, ExternalLink, MapPin } from "lucide-react";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { AddToCalendar } from "@/components/races/AddToCalendar";
@@ -35,7 +35,6 @@ function statusLabel(status: string | null | undefined) {
 /** Compact public catalogue card; every action retains its actual race-edition identity. */
 export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = true }: Props) {
   const theme = useHomepageTheme();
-  const selectionId = useId();
   const [selectedEdition, setSelectedEdition] = useState(fixture.starts[0]?.editionId);
   const selectedStart =
     fixture.starts.find((start) => start.editionId === selectedEdition) ?? fixture.starts[0];
@@ -45,6 +44,7 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
   const date = hasDate ? new Date(`${fixture.eventDate}T00:00:00Z`) : null;
   const dateLabel = date
     ? new Intl.DateTimeFormat("en-GB", {
+        weekday: "long",
         day: "numeric",
         month: "long",
         year: "numeric",
@@ -64,7 +64,7 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
         >
           <span aria-hidden="true" className="text-[10px] font-bold uppercase tracking-wider">
             {date
-              ? new Intl.DateTimeFormat("en-GB", { month: "short", timeZone: "UTC" }).format(date)
+              ? `${new Intl.DateTimeFormat("en-GB", { weekday: "short", timeZone: "UTC" }).format(date)} · ${new Intl.DateTimeFormat("en-GB", { month: "short", timeZone: "UTC" }).format(date)}`
               : "Date"}
           </span>
           <span aria-hidden="true" className="text-2xl font-bold leading-7">
@@ -102,14 +102,36 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
           >
             {fixture.starts.map((start) => {
               const status = statusLabel(start.status);
-              return (
-                <li key={start.editionId}>
+              const description = (
+                <>
                   <span className="font-semibold text-accent">{distanceLabel(start.distance)}</span>
                   <span aria-hidden="true"> · </span>
                   <span>
                     {start.label ??
                       formatFixtureStart(start.time, fixture.eventDate, fixture.timeZone)}
                   </span>
+                </>
+              );
+              return (
+                <li key={start.editionId}>
+                  {fixture.starts.length > 1 ? (
+                    <button
+                      type="button"
+                      aria-pressed={selectedStart?.editionId === start.editionId}
+                      title="Use this distance for calendar and sharing"
+                      onClick={() => setSelectedEdition(start.editionId)}
+                      className={cn(
+                        "min-h-11 rounded-md border px-2.5 py-2 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                        selectedStart?.editionId === start.editionId
+                          ? "border-accent bg-accent-soft"
+                          : "border-border bg-surface hover:bg-accent-soft",
+                      )}
+                    >
+                      {description}
+                    </button>
+                  ) : (
+                    description
+                  )}
                   {status ? (
                     <span
                       className={`ml-1.5 font-semibold ${theme === "midnight" ? "text-rose-300" : "text-[#9f3a30]"}`}
@@ -149,7 +171,7 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
         </div>
       </div>
 
-      <div className="compact-fixture-actions mt-3 flex min-w-0 flex-wrap items-start gap-2 sm:pl-[72px] [&>details>summary]:border-border [&>details>summary]:bg-surface [&>details>summary]:px-3 [&>details>summary]:text-xs [&>details>summary]:text-accent [&>details>summary:hover]:bg-accent-soft">
+      <div className="compact-fixture-actions mt-3 flex min-w-0 flex-wrap items-start gap-2 sm:pl-[72px] [&>details>summary]:px-3 [&>details>summary]:text-xs">
         {pagePath ? (
           <a
             href={pagePath}
@@ -186,26 +208,6 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
           )}
           {saved ? "Saved" : "Save"}
         </button>
-        {fixture.starts.length > 1 ? (
-          <div className="flex min-h-11 min-w-0 items-center gap-1.5 text-xs text-muted">
-            <label htmlFor={selectionId} className="shrink-0">
-              Actions for
-            </label>
-            <select
-              id={selectionId}
-              value={selectedStart?.editionId ?? ""}
-              onChange={(event) => setSelectedEdition(Number(event.target.value))}
-              className="min-h-11 max-w-52 rounded-md border border-border bg-surface px-2 text-xs font-semibold text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            >
-              {fixture.starts.map((start) => (
-                <option key={start.editionId} value={start.editionId}>
-                  {distanceLabel(start.distance)}
-                  {start.time ? ` · ${start.time.slice(0, 5)}` : ""}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : null}
         {calendarRace ? (
           <AddToCalendar key={`calendar-${calendarRace.id}`} race={calendarRace} />
         ) : null}
