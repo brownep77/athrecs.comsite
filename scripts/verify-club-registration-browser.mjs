@@ -29,7 +29,10 @@ const clubs = Array.from({ length: 52 }, (_, i) => ({
 const router = file(
   "router.tsx",
   `import React from 'react';
-export const createFileRoute=(path)=>(options)=>({...options,useLoaderData:()=>window.fixtureClubs,useSearch:()=>({})});
+const subscribe=(notify)=>{window.addEventListener('popstate',notify);return()=>window.removeEventListener('popstate',notify)};
+function useSearch(){return Object.fromEntries(new URLSearchParams(React.useSyncExternalStore(subscribe,()=>location.search)))}
+export const createFileRoute=(path)=>(options)=>({...options,fullPath:path,useLoaderData:()=>window.fixtureClubs,useSearch});
+export function useNavigate(){return({to,search})=>{const query=new URLSearchParams(Object.entries(search||{}).filter(([,value])=>value!==undefined)).toString();history.replaceState(null,'',to+(query?'?'+query:''));window.dispatchEvent(new PopStateEvent('popstate'))}}
 export function Link({to,search,params,hash,children,...props}){let href=to;if(params)for(const [key,value]of Object.entries(params))href=href.replace('$'+key,value);if(search)href+='?'+new URLSearchParams(search).toString();if(hash)href+='#'+hash;return <a href={href} {...props}>{children}</a>}`,
 );
 const auth = file(
@@ -90,9 +93,9 @@ const browser = await chromium.launch({
   executablePath: process.env.ATHRECS_BROWSER_EXECUTABLE || undefined,
   args: ["--no-sandbox"],
 });
+const errors = [];
 try {
   const page = await browser.newPage({ viewport: { width: 1280, height: 1100 } });
-  const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto(`${origin}/clubs`);
   await page.getByRole("heading", { name: "Clubs", exact: true }).waitFor();
@@ -121,6 +124,22 @@ try {
     "Signed-out visitors do not request private applications",
   );
   await page.goto(`${origin}/clubs/register`);
+  for (const sport of [
+    "HYROX",
+    "DEKA",
+    "CrossFit",
+    "Functional Fitness",
+    "OCR",
+    "Swimrun",
+    "Aquathlon",
+    "Aquabike",
+    "Rowing",
+    "Indoor Rowing",
+    "Orienteering",
+    "Adventure Racing",
+  ]) {
+    await page.getByRole("checkbox", { name: sport, exact: true }).check();
+  }
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("alert").filter({ hasText: "Enter your full name and club role" }).waitFor();
@@ -128,6 +147,14 @@ try {
   await page.getByLabel("Your role in the club", { exact: true }).fill("Secretary");
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
   await page.getByRole("status").filter({ hasText: "Draft saved" }).waitFor();
+  assert.ok(
+    await page.evaluate(
+      () =>
+        window.saves.at(-1).details.sports.includes("HYROX") &&
+        window.saves.at(-1).details.sports.includes("Swimrun"),
+    ),
+    "New sport choices survive the registration draft",
+  );
   await page.reload();
   await page.getByRole("button", { name: "2. Your details", exact: true }).click();
   assert.equal(
@@ -207,6 +234,7 @@ try {
     "Club browser flow passed: directory-first links, filters/pagination, sign-in gate, draft/resume, validation, failed-save retry, submission, unverified-email gate, mobile layout and reviewer checks. APIs used isolated synthetic fixtures.",
   );
 } catch (error) {
+  if (errors.length) console.error("Club browser errors:", errors);
   const failedPage = browser.contexts()[0]?.pages()[0];
   if (failedPage) {
     await failedPage

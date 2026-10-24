@@ -125,6 +125,12 @@ export const SPORTS = [
   "OCR",
   "Adventure Racing",
   "Functional Fitness",
+  "HYROX",
+  "DEKA",
+  "CrossFit",
+  "Swimrun",
+  "Indoor Rowing",
+  "Orienteering",
   "Walking",
 ] as const;
 
@@ -211,10 +217,24 @@ export function subfiltersForSport(sport: string): SubfilterDef[] {
   ) {
     return MULTISPORT_SUBFILTERS;
   }
-  if (sport === "OCR" || sport === "Adventure Racing" || sport === "Walking") {
+  if (
+    sport === "OCR" ||
+    sport === "Adventure Racing" ||
+    sport === "Walking" ||
+    sport === "Swimrun" ||
+    sport === "Orienteering"
+  ) {
     return TERRAIN_AND_DISTANCE_SUBFILTERS;
   }
-  if (sport === "Rowing" || sport === "Functional Fitness") return [];
+  if (sport === "Indoor Rowing")
+    return [
+      {
+        key: "distance",
+        label: "Distance",
+        options: ["All", "500m", "1000m", "2000m", "5K", "10K", "Other"],
+      },
+    ];
+  if (["Rowing", "Functional Fitness", "HYROX", "DEKA", "CrossFit"].includes(sport)) return [];
   return [];
 }
 

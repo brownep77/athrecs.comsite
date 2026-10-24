@@ -1,6 +1,7 @@
 import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
 import { getSportPage, SPORT_PAGES, type SportPage } from "@/lib/athrecs/sport-pages";
 import { countrySlug } from "@/lib/athrecs/country-sites";
+import { HYBRID_FITNESS_SPORTS } from "@/lib/athrecs/public-sports";
 
 // These are the English-speaking countries with published road-marathon guides.
 const featuredGuideIds = [
@@ -39,7 +40,21 @@ export const QUICK_SPORTS = [
   { label: "Swimming", slug: "swimming", sport: "Swimming", path: "/sports/swimming" },
   { label: "Duathlon", slug: "duathlon", sport: "Duathlon", path: "/sports/duathlon" },
   { label: "parkrun", slug: "parkrun", sport: "Parkrun", path: "/sports/parkrun" },
+  {
+    label: "Hybrid & Fitness",
+    slug: "hybrid-fitness",
+    sport: "Functional Fitness",
+    path: "/sports/hybrid-fitness",
+  },
 ] as const;
+
+export const MORE_SPORTS = SPORT_PAGES.filter(
+  (page) => !QUICK_SPORTS.some((item) => item.slug === page.slug),
+);
+
+export function isHybridFitnessSport(sport: string | undefined) {
+  return !!sport && (HYBRID_FITNESS_SPORTS as readonly string[]).includes(sport);
+}
 
 export function activeDiscoverySport(pathname: string) {
   return pathname === "/" ? "Running" : getSportPage(pathname.split("/")[2])?.sport;
@@ -55,8 +70,10 @@ export function discoverySportLinks(sport?: SportPage) {
       { label: "Fell running", path: "/running/fell" },
       { label: "Ultramarathons", path: "/?distance=Ultra" },
     ];
-  if (sport.sport === "Cycling")
-    return SPORT_PAGES.filter((page) => page.sport === "Cycling").map((page) => ({
+  if (sport.sport === "Cycling" || isHybridFitnessSport(sport.sport))
+    return SPORT_PAGES.filter((page) =>
+      sport.sport === "Cycling" ? page.sport === "Cycling" : isHybridFitnessSport(page.sport),
+    ).map((page) => ({
       label: page.label,
       path: `/sports/${page.slug}`,
     }));
@@ -74,7 +91,13 @@ export function discoverySportLinks(sport?: SportPage) {
 
 export function fixtureFilterLabel(sport?: SportPage) {
   if (sport?.sport === "Athletics") return "Event / distance";
-  if (sport?.sport === "Triathlon" || sport?.sport === "Duathlon") return "Format / distance";
+  if (isHybridFitnessSport(sport?.sport)) return "Competition / format";
+  if (
+    ["Triathlon", "Duathlon", "Aquathlon", "Aquabike", "Swimrun", "Adventure Racing"].includes(
+      sport?.sport ?? "",
+    )
+  )
+    return "Format / distance";
   return "Distance";
 }
 

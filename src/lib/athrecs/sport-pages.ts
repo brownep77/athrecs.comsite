@@ -1,4 +1,5 @@
 import type { Sport } from "./types";
+import { HYBRID_FITNESS_SPORTS } from "./public-sports.ts";
 
 // One registry drives navigation, fixture scope, results links and page metadata.
 export const SPORT_PAGES = [
@@ -68,6 +69,61 @@ export const SPORT_PAGES = [
   },
   { slug: "swimming", label: "Swimming", sport: "Swimming", sports: ["Swimming"], surfaces: null },
   { slug: "duathlon", label: "Duathlon", sport: "Duathlon", sports: ["Duathlon"], surfaces: null },
+  {
+    slug: "hybrid-fitness",
+    label: "Hybrid & Fitness",
+    sport: "Functional Fitness",
+    sports: HYBRID_FITNESS_SPORTS,
+    surfaces: null,
+  },
+  { slug: "hyrox", label: "HYROX", sport: "HYROX", sports: ["HYROX"], surfaces: null },
+  { slug: "deka", label: "DEKA", sport: "DEKA", sports: ["DEKA"], surfaces: null },
+  { slug: "crossfit", label: "CrossFit", sport: "CrossFit", sports: ["CrossFit"], surfaces: null },
+  {
+    slug: "functional-fitness",
+    label: "Functional Fitness",
+    sport: "Functional Fitness",
+    sports: ["Functional Fitness"],
+    surfaces: null,
+  },
+  {
+    slug: "obstacle-course-racing",
+    label: "Obstacle Course Racing",
+    sport: "OCR",
+    sports: ["OCR"],
+    surfaces: null,
+  },
+  { slug: "swimrun", label: "Swimrun", sport: "Swimrun", sports: ["Swimrun"], surfaces: null },
+  {
+    slug: "aquathlon",
+    label: "Aquathlon",
+    sport: "Aquathlon",
+    sports: ["Aquathlon"],
+    surfaces: null,
+  },
+  { slug: "aquabike", label: "Aquabike", sport: "Aquabike", sports: ["Aquabike"], surfaces: null },
+  { slug: "rowing", label: "Rowing", sport: "Rowing", sports: ["Rowing"], surfaces: null },
+  {
+    slug: "indoor-rowing",
+    label: "Indoor Rowing",
+    sport: "Indoor Rowing",
+    sports: ["Indoor Rowing"],
+    surfaces: null,
+  },
+  {
+    slug: "orienteering",
+    label: "Orienteering",
+    sport: "Orienteering",
+    sports: ["Orienteering"],
+    surfaces: null,
+  },
+  {
+    slug: "adventure-racing",
+    label: "Adventure Racing",
+    sport: "Adventure Racing",
+    sports: ["Adventure Racing"],
+    surfaces: null,
+  },
 ] as const satisfies readonly {
   slug: string;
   label: string;

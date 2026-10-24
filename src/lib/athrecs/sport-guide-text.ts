@@ -42,6 +42,70 @@ const guides: Record<string, { intro: string; planning: string }> = {
     planning:
       "Check all three leg distances, the cycling route, transition arrangements and your assigned start wave in the organiser’s current guide.",
   },
+  "Functional Fitness": {
+    intro:
+      "Explore hybrid races and functional fitness competitions, including HYROX, DEKA and CrossFit.",
+    planning:
+      "Choose the competition format and division, then check the organiser’s workout standards, equipment and scoring rules.",
+  },
+  HYROX: {
+    intro: "Find HYROX events combining running and workout stations, with dates and locations.",
+    planning:
+      "Check your individual, doubles or relay division, workout standards and assigned start wave. Compare performances within the same division and format.",
+  },
+  DEKA: {
+    intro:
+      "Explore DEKA fitness competitions and compare their dates, locations and advertised formats.",
+    planning:
+      "Check whether your entry is for FIT, MILE, STRONG or another DEKA format, then read the current competition standards and start arrangements.",
+  },
+  CrossFit: {
+    intro: "Explore CrossFit competitions, from local events to the Open and championship stages.",
+    planning:
+      "Check the workout standards, division, score submission deadline and judging requirements. Workout scores and overall standings depend on the competition rules.",
+  },
+  OCR: {
+    intro:
+      "Find obstacle course races and compare their dates, locations and advertised distances.",
+    planning:
+      "Check the obstacle rules, penalties, competitive or participation category, course distance and equipment requirements.",
+  },
+  Swimrun: {
+    intro: "Explore swimrun events combining repeated swimming and running sections.",
+    planning:
+      "Check each swim and run section, whether the entry is solo or paired, and the organiser’s equipment, cut-off and team rules.",
+  },
+  Aquathlon: {
+    intro: "Find aquathlon events combining swimming and running.",
+    planning:
+      "Check the exact order and distances of the swim and run legs, the venue and your assigned start wave.",
+  },
+  Aquabike: {
+    intro: "Explore aquabike events combining swimming and cycling.",
+    planning:
+      "Check both leg distances, the swim start, transition arrangements and where the official finish is recorded.",
+  },
+  Rowing: {
+    intro: "Explore rowing events and compare dates, venues and advertised race formats.",
+    planning:
+      "Check the boat class, crew category, course distance and race timetable with the organiser.",
+  },
+  "Indoor Rowing": {
+    intro:
+      "Find indoor rowing competitions and compare dates, locations and advertised distances or formats.",
+    planning:
+      "Check the machine standard, distance or timed format, age and weight categories, and whether racing is in person or online.",
+  },
+  Orienteering: {
+    intro: "Explore orienteering events that combine navigation with outdoor competition.",
+    planning:
+      "Check the course length and difficulty, map and timing arrangements, start window and any mandatory equipment.",
+  },
+  "Adventure Racing": {
+    intro: "Find adventure races combining endurance disciplines and navigation.",
+    planning:
+      "Check the disciplines, team size, navigation rules, mandatory equipment, checkpoints and overall time limit.",
+  },
 };
 export function sportGuideText(sport: string) {
   return (

@@ -2,15 +2,7 @@ import * as base from "../lib/athrecs/filters";
 export * from "../lib/athrecs/filters";
 
 /** Public event sports supported by ATHRECS. */
-export const SPORTS = [
-  "Athletics",
-  "Running",
-  "Parkrun",
-  "Triathlon",
-  "Cycling",
-  "Swimming",
-  "Duathlon",
-] as const;
+export { ATHRECS_PUBLIC_SPORTS as SPORTS } from "../lib/athrecs/public-sports.ts";
 export const DEFAULT_SPORT = "Athletics" as const;
 
 // The running directory's All option combines Running and Parkrun.

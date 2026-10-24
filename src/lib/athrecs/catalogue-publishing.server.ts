@@ -23,6 +23,12 @@ const SPORTS = new Set([
   "OCR",
   "Adventure Racing",
   "Functional Fitness",
+  "HYROX",
+  "DEKA",
+  "CrossFit",
+  "Swimrun",
+  "Indoor Rowing",
+  "Orienteering",
   "Walking",
 ]);
 

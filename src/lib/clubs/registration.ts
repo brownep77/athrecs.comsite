@@ -1,3 +1,4 @@
+import { ATHRECS_PUBLIC_SPORTS } from "../athrecs/public-sports.ts";
 import { z } from "zod";
 
 export const CLUB_NOTICE_VERSION = "club-registration-2026-10-13";
@@ -10,7 +11,7 @@ export const CLUB_STATUS_LABELS: Record<string, string> = {
   revoked: "Access removed",
   withdrawn: "Withdrawn",
 };
-export const CLUB_SPORTS = ["Running", "Athletics", "Triathlon", "Swimming", "Cycling"] as const;
+export const CLUB_SPORTS = ATHRECS_PUBLIC_SPORTS;
 const shortText = z.string().trim().max(160).default("");
 // Links are evidence references only. They are never fetched on the server.
 const publicUrl = z
@@ -42,7 +43,7 @@ export const clubDetailsSchema = z.object({
   city: shortText,
   county: shortText,
   country: shortText,
-  sports: z.array(z.enum(CLUB_SPORTS)).max(5).default([]),
+  sports: z.array(z.enum(CLUB_SPORTS)).max(CLUB_SPORTS.length).default([]),
   website: publicUrl,
   affiliation: z.enum(["affiliated", "unaffiliated", "unknown"]).default("unknown"),
   governingBody: shortText,
