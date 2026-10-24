@@ -15091,4 +15091,152 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "scottish-swimming"
   ]
 }, "2026-10-24"),
+  record({
+    "slug": "swim-england-norfolk",
+    "name": "Swim England Norfolk",
+    "aliases": [
+      "Norfolk County ASA"
+    ],
+    "jurisdiction": "Norfolk",
+    "website": "https://norfolkswimming.org.uk/",
+    "related": [
+      "swim-england",
+      "swim-england-east-region"
+    ],
+    "summary": "County swimming association organising competitions and maintaining county swimming records.",
+    "detail": "Supports affiliated clubs and county competitions, including the County Championships, relay gala, County Challenge and open-water results.",
+    "sources": [
+      "https://norfolkswimming.org.uk/",
+      "https://norfolkswimming.org.uk/swimming-results/",
+      "https://norfolkswimming.org.uk/swimming-records-2/"
+    ],
+    "type": "regional",
+    "country": "England",
+    "territories": [
+      "England",
+      "United Kingdom"
+    ],
+    "sports": [
+      "swimming"
+    ]
+  }, "2026-10-24"),
+  record({
+    "slug": "swim-england-suffolk",
+    "name": "Swim England Suffolk",
+    "aliases": [
+      "Suffolk County ASA"
+    ],
+    "jurisdiction": "Suffolk",
+    "website": "https://www.suffolkswimming.org.uk/",
+    "related": [
+      "swim-england",
+      "swim-england-east-region"
+    ],
+    "summary": "County aquatics association supporting swimming competitions, clubs and volunteers in Suffolk.",
+    "detail": "Organises county championships and development competitions, with separate information for masters, open-water swimming, leagues and county records.",
+    "sources": [
+      "https://www.suffolkswimming.org.uk/",
+      "https://www.suffolkswimming.org.uk/county-championships.html",
+      "https://www.suffolkswimming.org.uk/results.html"
+    ],
+    "type": "regional",
+    "country": "England",
+    "territories": [
+      "England",
+      "United Kingdom"
+    ],
+    "sports": [
+      "swimming"
+    ]
+  }, "2026-10-24"),
+  record({
+    "slug": "swim-england-essex",
+    "name": "Swim England Essex",
+    "aliases": [
+      "Essex County ASA"
+    ],
+    "jurisdiction": "Essex county swimming",
+    "website": "https://www.essexswimming.org/wp/",
+    "related": [
+      "swim-england",
+      "swim-england-east-region",
+      "swim-england-london-region"
+    ],
+    "summary": "County association supporting swimming and other aquatic disciplines across Essex clubs.",
+    "detail": "Works across Swim England East and London Regions. Its programme includes age-group, masters, winter and SwimAbility championships, with county records and results archives.",
+    "sources": [
+      "https://www.essexswimming.org/wp/",
+      "https://www.essexswimming.org/wp/?page_id=103",
+      "https://www.essexswimming.org/wp/?cat=34"
+    ],
+    "type": "regional",
+    "country": "England",
+    "territories": [
+      "England",
+      "United Kingdom"
+    ],
+    "sports": [
+      "swimming"
+    ]
+  }, "2026-10-24"),
+  record({
+    "slug": "cambridgeshire-asa",
+    "name": "Cambridgeshire ASA",
+    "aliases": [
+      "Cambridgeshire County Amateur Swimming Association",
+      "Swim England Cambridgeshire"
+    ],
+    "jurisdiction": "Cambridgeshire",
+    "website": "https://www.swimcambs.org/",
+    "related": [
+      "swim-england",
+      "swim-england-east-region"
+    ],
+    "summary": "County aquatics association organising swimming championships and supporting club development.",
+    "detail": "Provides county and development championships, swimming records, meet-licensing information and support for masters, diving, open-water and disability swimming.",
+    "sources": [
+      "https://www.swimcambs.org/",
+      "https://www.swimcambs.org/swimming/competitions/",
+      "https://www.swimcambs.org/important-updates-for-2027-championships/"
+    ],
+    "type": "regional",
+    "country": "England",
+    "territories": [
+      "England",
+      "United Kingdom"
+    ],
+    "sports": [
+      "swimming"
+    ]
+  }, "2026-10-24"),
+  record({
+    "slug": "hampshire-county-asa",
+    "name": "Hampshire County ASA",
+    "aliases": [
+      "Hampshire County Amateur Swimming Association",
+      "Hampshire and Channel Islands ASA"
+    ],
+    "jurisdiction": "Hampshire and the Channel Islands",
+    "website": "https://hampshireswimming.com/",
+    "related": [
+      "swim-england",
+      "swim-england-south-east-region"
+    ],
+    "summary": "County swimming association organising championship, development and masters competitions.",
+    "detail": "Publishes county competition programmes and results for Hampshire and Channel Islands swimmers, with support for clubs, officials and county teams.",
+    "sources": [
+      "https://hampshireswimming.com/",
+      "https://hampshireswimming.com/speed-swimming/county-swimming-competitions/2027-county-swimming-championships",
+      "https://hampshireswimming.com/hampshire-county-development-meet-2027"
+    ],
+    "type": "regional",
+    "country": "England",
+    "territories": [
+      "England",
+      "United Kingdom"
+    ],
+    "sports": [
+      "swimming"
+    ]
+  }, "2026-10-24"),
 ];

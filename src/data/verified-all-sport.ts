@@ -1,4 +1,12 @@
 import {
+  llanelliTriathlon2026Series,
+  llanelliTriathlon2026Editions,
+} from "./llanelli-triathlon-2026.ts";
+import {
+  countySwimming2027Series,
+  countySwimming2027Editions,
+} from "./county-swimming-2027.ts";
+import {
   scottishSwimming2027Series,
   scottishSwimming2027Editions,
 } from "./scottish-swimming-2027.ts";
@@ -37,6 +45,8 @@ import {
  * governing-body page. Participant-level results are deliberately excluded.
  */
 export const verifiedAllSportSeries: Series[] = [
+  ...llanelliTriathlon2026Series,
+  ...countySwimming2027Series,
   ...scottishSwimming2027Series,
   ...englishRegionalSwimming2027SSeries,
   ...englishRegionalSwimming2027Series,
@@ -105,6 +115,8 @@ export const verifiedAllSportSeries: Series[] = [
 ];
 
 export const verifiedAllSportEditions: Edition[] = [
+  ...llanelliTriathlon2026Editions,
+  ...countySwimming2027Editions,
   ...scottishSwimming2027Editions,
   ...englishRegionalSwimming2027SEditions,
   ...englishRegionalSwimming2027Editions,

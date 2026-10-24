@@ -21,15 +21,15 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 841 unique sources. Only 36 are enabled; the other 805 remain
+The registry contains 903 unique sources as of 24 October 2026. Only 36 are enabled; the other 867 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
 ## Scope
 
-This uploaded registry is a running and athletics discovery pack. Its fields describe
-road, trail, fell, cross-country, track, mixed-terrain and beach events. It does not
-provide safe sport-specific selectors for every Athrecs sport.
+The registry covers running, athletics and reviewed federation, organiser and timing
+sources for other Athrecs sports. Each source records the capabilities actually
+inspected. It does not provide reviewed sport-specific selectors for every source.
 
 Athrecs currently supports Running, Cycling, Swimming, Triathlon, Duathlon, Parkrun,
 Aquathlon, Aquabike, Rowing, OCR and Athletics. Fixtures for the other sports must use
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 841 sources create exactly one source job;
+- all 903 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 805 sources are retained as blocked jobs with their reason;
+- the other 867 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -268,3 +268,26 @@ Added 14 disabled research references for Sparta Copenhagen, HCA Marathon, Sport
 The notes preserve the access and evidence limits: SportsTiming human verification, SportHive application shells, provisional Porto classifications, Aarhus winners-only coverage and Berlin archive reuse restrictions. No participant result is verified by these registrations, and no automated collection is enabled.
 
 Restored the reviewed additions on 24 October 2026 and reconciled them with the newer registry, preserving the intervening source additions. This recovery is not a new live source check. The current registry contains 841 sources: 36 enabled and 805 disabled.
+
+## County swimming and triathlon expansion — 24 October 2026
+
+Registered 30 additional source pages: 21 for Norfolk, Suffolk, Essex, Cambridgeshire
+and Hampshire swimming, and nine for federation-linked triathlon fixtures, results and
+athlete discovery. The existing World Triathlon athlete-search source was enriched
+with separately checked profile-research evidence; its canonical identifier, original
+check notes and collection settings are retained. The swimming pass adds five county organisations and ten confirmed
+2027 meeting weekends. Norfolk and Suffolk 2027 date leads remain unpublished until
+exact competition dates are established.
+Two historical Llanelli triathlon programmes on 9 May 2026 are also retained as
+separate editions, supporting the reviewed results without duplicating the event.
+
+The triathlon sources include World Triathlon athlete search, British Triathlon
+Super Series results, two distinct Llanelli timing programmes, the Titanium result
+index, Triathlon Scotland profiles and championship archives, and official Tarragona
+and Nyon course information. Existing Titanium entries in the wider event inventory
+are retained; they are not counted as newly discovered providers.
+
+All 30 new registrations and the existing World Triathlon athlete-search source remain
+disabled for automated collection. Preserve original
+capture dates separately from this review date. Private athlete identity checks,
+source exports and publication receipts are held outside the public repository.
