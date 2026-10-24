@@ -4,6 +4,7 @@ const publicQualifications = [
   "Distance not established",
   "Preliminary results",
   "Provisional results",
+  "Seconds disputed; minute precision",
 ] as const;
 
 /** Only explicit public qualifications may be rendered from the mixed label field. */

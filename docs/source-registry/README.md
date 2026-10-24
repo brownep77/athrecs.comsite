@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 925 unique sources as of 24 October 2026. Only 36 are enabled; the other 889 remain
+The registry contains 930 unique sources as of 24 October 2026. Only 36 are enabled; the other 894 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 925 sources create exactly one source job;
+- all 930 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 889 sources are retained as blocked jobs with their reason;
+- the other 894 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -400,3 +400,8 @@ its existing disabled managed source; no duplicate static or database source is
 created. Broader-inventory reuse preserves existing URLs and settings while
 adding provenance. Registration alone never verifies a participant, approves
 bulk reuse or enables collection. No private participant evidence is committed.
+
+
+### Further historical result capabilities, 24 October 2026
+
+Five disabled manual sources cover the Isle of Man organiser archive, Ultimate Sport Service results, the Ove Schneider copied report, Monaghan Phoenix and Dingle Marathon. Existing Ultimate and Dingle inventory identities are reused. Czech federation, Sparta, RunPorto and RunCzech entries gain dated capability notes; Cesky beh remains part of the existing Czech federation identity. The registry now has 930 sources, with 36 enabled and 894 disabled. Original and republished reports, stage totals, wave ranks and timing labels remain distinct. Registration does not enable collection or verify an individual result.
