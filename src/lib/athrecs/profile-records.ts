@@ -1,5 +1,6 @@
 import { roadPerformanceCondition } from "./road-performance-conditions.ts";
 import { isDisqualified, type ResultDetails } from "./result-details.ts";
+import { isParkrunResult, type ParkrunContext } from "./parkrun-timing.ts";
 
 export type ProfileResult = {
   city?: string;
@@ -39,6 +40,7 @@ export type ProfileResult = {
 
 export function timingBasis(result: ProfileResult): string {
   if (result.finishTimeSeconds == null) return "Unknown";
+  if (isParkrunResult(result)) return "parkrun finish";
   if (
     result.finishTimeSeconds === result.chipTimeSeconds &&
     result.finishTimeSeconds === result.gunTimeSeconds
@@ -51,7 +53,11 @@ export function timingBasis(result: ProfileResult): string {
   return "Unknown";
 }
 
-type PerformanceCategory = Pick<ProfileResult, "sport" | "distanceCode" | "distanceKm" | "surface">;
+type PerformanceCategory = Pick<
+  ProfileResult,
+  "sport" | "distanceCode" | "distanceKm" | "surface"
+> &
+  ParkrunContext;
 
 function comparisonDistanceKm(result: Pick<ProfileResult, "distanceCode" | "distanceKm">): number {
   // Older imports rounded standard race distances to one or two decimal places.
@@ -73,17 +79,20 @@ function comparisonDistanceKm(result: Pick<ProfileResult, "distanceCode" | "dist
 
 export function performanceGroup(result: ProfileResult): string {
   return [
-    result.sport,
+    isParkrunResult(result) ? "Parkrun" : result.sport,
     result.distanceCode,
     comparisonDistanceKm(result),
-    result.surface,
+    isParkrunResult(result) ? "Parkrun" : result.surface,
     timingBasis(result),
   ].join("|");
 }
 
-function personalBestSport(result: Pick<ProfileResult, "sport" | "surface">): string {
+function personalBestSport(
+  result: Pick<ProfileResult, "sport" | "surface"> & ParkrunContext,
+): string {
   // Road races imported from athletics calendars belong to the same PB category
   // as running road races. Track, parkrun and other sports remain distinct.
+  if (isParkrunResult(result)) return "Parkrun";
   return result.sport === "Athletics" && result.surface === "Road" ? "Running" : result.sport;
 }
 
@@ -94,7 +103,7 @@ export function personalBestGroup(result: PerformanceCategory): string {
     personalBestSport(result),
     result.distanceCode,
     comparisonDistanceKm(result),
-    result.surface,
+    isParkrunResult(result) ? "Parkrun" : result.surface,
   ].join("|");
 }
 
@@ -192,7 +201,9 @@ export function eligiblePerformance(result: ProfileResult): boolean {
     result.distanceKm > 0 &&
     !/ultra|unknown|tbc|variable|multi/i.test(result.distanceCode) &&
     !/trail|cross.country|^xc$|fell|mountain|mixed|unknown/i.test(result.surface) &&
-    ["Running", "Parkrun", "Athletics", "Walking", "Cycling", "Swimming", "Rowing"].includes(result.sport)
+    ["Running", "Parkrun", "Athletics", "Walking", "Cycling", "Swimming", "Rowing"].includes(
+      result.sport,
+    )
   );
 }
 

@@ -1,3 +1,4 @@
+import { sourceHistorySport } from "@/lib/athrecs/source-history-sport";
 import { ResultDistance } from "./ResultDistance";
 import { distanceResultStyle } from "@/lib/athrecs/profile-colours";
 import { useState } from "react";
@@ -24,6 +25,7 @@ export function SourcePerformanceHistory({
     .flatMap((history) =>
       history.performances.map((row, index) => ({
         ...row,
+        sport: sourceHistorySport(row.discipline, history.provider, row.meeting),
         notes: showEvidence
           ? row.notes
           : publicProfileResultNotes(
@@ -213,6 +215,8 @@ export function SourcePerformanceHistory({
                       performance={row.performance}
                       discipline={row.discipline}
                       timing={row.timing}
+                      eventName={row.meeting}
+                      sport={row.sport ?? undefined}
                     />
                     {row.verificationStatus === "unverified" ? (
                       <span className="block text-xs font-normal text-muted">

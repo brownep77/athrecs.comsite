@@ -1,3 +1,5 @@
+import { isParkrunResult } from "./parkrun-timing.ts";
+import { personalBestGroup } from "./profile-records.ts";
 import { selectProfilePersonalBests } from "./reported-personal-bests.ts";
 import { historicalTime } from "./history-performance.ts";
 import { formatDuration } from "./format.ts";
@@ -8,7 +10,9 @@ import type { SourceHistory } from "./source-performance-history";
 function recordedMark(row: ProfileResult): string {
   const mark = row.details?.reportedPerformance?.trim();
   const seconds = mark ? historicalTime(mark) : null;
-  return mark && seconds != null && row.finishTimeSeconds != null &&
+  return mark &&
+    seconds != null &&
+    row.finishTimeSeconds != null &&
     Math.abs(seconds - row.finishTimeSeconds) < 1
     ? mark
     : formatDuration(row.finishTimeSeconds);
@@ -23,9 +27,9 @@ export function profilePersonalBestSummary(
     const row = candidate.value;
     return {
       verified: candidate.verified,
-      id: `${row.sport}|${row.surface}|${row.distanceCode}|${candidate.kind === "reported" ? (candidate.value.qualification ?? "") : ""}`,
-      sport: row.sport,
-      surface: row.surface,
+      id: `${personalBestGroup(row)}|${candidate.kind === "reported" ? (candidate.value.qualification ?? "") : ""}`,
+      sport: isParkrunResult(row) ? "Parkrun" : row.sport,
+      surface: isParkrunResult(row) ? "Parkrun" : row.surface,
       distance: row.distanceCode,
       mark:
         candidate.kind === "reported"

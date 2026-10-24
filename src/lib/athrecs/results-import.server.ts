@@ -1,3 +1,4 @@
+import { isParkrunResult } from "./parkrun-timing";
 import { createHash, randomUUID } from "node:crypto";
 import { getSql } from "@/lib/db";
 import { slugify } from "./import.server";
@@ -390,6 +391,19 @@ export async function applyResultsImport(
         }
         if (!raw.distance?.trim()) throw new Error("distance required");
 
+        const knownEvent = eventBySlug.get(raw.eventSlug);
+        if (
+          isParkrunResult({
+            sport: knownEvent?.sport ?? raw.sport ?? sport,
+            eventName: knownEvent?.name ?? eventTitle(raw),
+            distanceCode: raw.distance,
+          }) &&
+          (raw.chipTimeSeconds != null || raw.gunTimeSeconds != null)
+        ) {
+          throw new Error(
+            "parkrun is not chip timed. Map its result to finishTimeSeconds or time, leaving chip and gun fields empty.",
+          );
+        }
         const displayName = resolveDisplayName(raw);
         const athleteSlug = resolveAthleteSlug(raw, displayName);
         const clubSlug = resolveClubSlug(raw);

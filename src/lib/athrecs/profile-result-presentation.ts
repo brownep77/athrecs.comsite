@@ -1,3 +1,4 @@
+import { isParkrunResult } from "./parkrun-timing.ts";
 import type { ProfileResult } from "./profile-records";
 import type { SourcePerformance } from "./source-performance-history";
 import type { ReportedRaceRecord } from "./reported-race-history";
@@ -85,6 +86,7 @@ export function reportedResultYear(record: ReportedRaceRecord): string {
 }
 
 export function reportedResultSport(record: ReportedRaceRecord): string {
+  if (isParkrunResult({ event: record.event, distanceCode: record.distance })) return "Parkrun";
   return /triathlon/i.test(record.distance)
     ? "Triathlon"
     : /duathlon/i.test(record.distance)

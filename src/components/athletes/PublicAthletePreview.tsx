@@ -1,3 +1,4 @@
+import { isParkrunResult, PARKRUN_TIMING_LABEL } from "@/lib/athrecs/parkrun-timing";
 import { SportBadge } from "@/components/races/EventBadges";
 import { Link } from "@tanstack/react-router";
 import type { PublicAthletePreview as Preview } from "@/lib/athrecs/public-athlete-preview";
@@ -104,6 +105,9 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
                 <strong className="text-lg tabular-nums">{best.mark}</strong>
                 <p className="text-xs font-semibold text-accent">{best.label}</p>
                 <AchievementVerification verified={best.verified} />
+                {isParkrunResult(best) ? (
+                  <p className="text-xs text-muted">{PARKRUN_TIMING_LABEL}</p>
+                ) : null}
                 <p className="text-xs text-muted">
                   {best.event} · {best.date}
                 </p>

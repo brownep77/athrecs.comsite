@@ -1,3 +1,4 @@
+import { isParkrunResult, PARKRUN_TIMING_LABEL } from "@/lib/athrecs/parkrun-timing";
 import { ClaimIdentityGate } from "./ClaimIdentityGate";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
@@ -98,6 +99,7 @@ function ProfileResultConfirmationBody({
   const filtered = review.rows.filter((row) =>
     `${row.race} ${row.date} ${row.distance}`.toLowerCase().includes(query.toLowerCase()),
   );
+  const draftIsParkrun = isParkrunResult({ eventName: draft.race, distanceCode: draft.distance });
   const removed = review.rows.length - included.size;
   const buttonLabel =
     removed === 0 && !additions.length
@@ -324,7 +326,16 @@ function ProfileResultConfirmationBody({
                     type={type}
                     value={draft[key]}
                     maxLength={key === "sourceUrl" ? 2000 : 200}
-                    onChange={(event) => setDraft({ ...draft, [key]: event.target.value })}
+                    onChange={(event) =>
+                      setDraft({
+                        ...draft,
+                        [key]: event.target.value,
+                        timingBasis:
+                          key === "race" && isParkrunResult({ eventName: event.target.value })
+                            ? "unspecified"
+                            : draft.timingBasis,
+                      })
+                    }
                     className="h-11 w-full rounded-lg border border-border bg-bg px-3"
                   />
                 </label>
@@ -342,9 +353,15 @@ function ProfileResultConfirmationBody({
                   }
                   className="h-11 w-full rounded-lg border border-border bg-bg px-3"
                 >
-                  <option value="unspecified">Unknown</option>
-                  <option value="chip">Chip time</option>
-                  <option value="gun">Gun time</option>
+                  <option value="unspecified">
+                    {draftIsParkrun ? "parkrun finish time (not chip timed)" : "Unknown"}
+                  </option>
+                  <option value="chip" disabled={draftIsParkrun}>
+                    Chip time
+                  </option>
+                  <option value="gun" disabled={draftIsParkrun}>
+                    Gun time
+                  </option>
                 </select>
               </label>
             </div>
@@ -448,12 +465,18 @@ function ProfileResultConfirmationBody({
                   </p>
                 ) : null}
                 <p className="text-xs text-muted">
-                  {row.chip !== null ? `Chip ${formatDuration(row.chip)} · ` : ""}
-                  {row.gun !== null
-                    ? `Gun ${formatDuration(row.gun)}`
-                    : row.chip === null
-                      ? "Time type as recorded; not inferred"
-                      : ""}
+                  {isParkrunResult({ eventName: row.race, distanceCode: row.distance }) ? (
+                    PARKRUN_TIMING_LABEL
+                  ) : (
+                    <>
+                      {row.chip !== null ? `Chip ${formatDuration(row.chip)} · ` : ""}
+                      {row.gun !== null
+                        ? `Gun ${formatDuration(row.gun)}`
+                        : row.chip === null
+                          ? "Time type as recorded; not inferred"
+                          : ""}
+                    </>
+                  )}
                 </p>
                 <p className="text-xs text-muted">
                   {[

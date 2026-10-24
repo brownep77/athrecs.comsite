@@ -101,6 +101,8 @@ export function HistoricalResultRow({
           performance={row.performance}
           discipline={row.discipline}
           timing={row.timing}
+          sport={result.sport}
+          eventName={row.meeting}
         />
         {result.sport === "Triathlon" && row.triathlonSplits ? (
           <dl
