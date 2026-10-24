@@ -33,6 +33,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Select Xcode matching the installed iOS Simulator
+        if: matrix.platform == 'ios'
+        run: sudo /usr/bin/xcode-select --switch /Applications/Xcode_26.2.app/Contents/Developer
       - name: Enable Safari's native WebDriver
         run: sudo /usr/bin/safaridriver --enable
       - name: Boot an installed iPhone Simulator

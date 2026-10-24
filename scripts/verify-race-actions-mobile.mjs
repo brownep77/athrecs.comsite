@@ -276,11 +276,12 @@ async function checkDelayedHydration() {
     });
     await page.goto(origin + routes[1], { waitUntil: "commit" });
     const summary = page.locator(shareSelector).first();
-    const panel = group(summary, "Sharing options");
-    const copy = panel.getByRole("button", { name: "Copy link", exact: true });
+    const panel = summary.locator("..").locator('[role="group"][aria-label="Sharing options"]');
+    const copy = panel.getByRole("button", { name: "Copy link", exact: true, includeHidden: true });
     assert(await copy.isDisabled(), "London action is genuinely pre-hydration");
     phase = "single native tap before hydration";
     await summary.tap();
+    await panel.waitFor({ state: "visible" });
     assert(await panel.isVisible(), "one pre-hydration touch opens the London sharing panel");
     release();
     phase = "hydration preserves the opened disclosure";
@@ -591,6 +592,7 @@ try {
       const summary = page.locator(shareSelector).first();
       await summary.tap();
       const panel = group(summary, "Sharing options");
+      await panel.waitFor({ state: "visible" });
       assert(await panel.isVisible(), "no-JavaScript sharing opens by touch");
       await inspectSharing(
         panel,
@@ -600,6 +602,7 @@ try {
       assert(await panel.getByRole("button", { name: "Copy link", exact: true }).isDisabled());
       const calendar = page.locator(calendarSelector).first();
       await calendar.tap();
+      await group(calendar, "Calendar options").waitFor({ state: "visible" });
       assert(
         await group(calendar, "Calendar options").isVisible(),
         "no-JavaScript calendar opens by touch",

@@ -4,6 +4,7 @@ import { promisify } from "node:util";
 
 const exec = promisify(execFile);
 const commandTimeout = 20_000;
+const inventoryTimeout = 60_000;
 const bootTimeout = 180_000;
 const udidPattern = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const artifactPrefix = "artifacts/race-actions-safari-ios-setup";
@@ -26,8 +27,7 @@ function note(message) {
 }
 
 function saveDiagnostics() {
-  // Initial inventory commands run together; serialize artifact writes so their
-  // progress cannot overwrite a later command's outcome with an older snapshot.
+  // Serialize diagnostic writes so an older snapshot cannot overwrite progress.
   writes = writes.then(async () => {
     await writeFile(`${artifactPrefix}.json`, JSON.stringify(report, null, 2) + "\n", "utf8");
     await writeFile(`${artifactPrefix}.log`, log.join("\n") + "\n", "utf8");
@@ -195,18 +195,17 @@ async function main() {
   await phase("toolchain");
   await recordToolchain();
   await phase("inventory");
-  const [deviceInventory, runtimeInventory] = await Promise.all([
-    inventory(["list", "devices", "available", "--json"]),
-    inventory(["list", "runtimes", "--json"]),
-  ]);
+  // One request starts CoreSimulator once and returns both collections. Avoid
+  // competing cold-start requests while the selected Xcode initializes it.
+  const simulatorInventory = await inventory(["list", "--json"], inventoryTimeout);
   if (
-    !deviceInventory.devices ||
-    typeof deviceInventory.devices !== "object" ||
-    !Array.isArray(runtimeInventory.runtimes)
+    !simulatorInventory.devices ||
+    typeof simulatorInventory.devices !== "object" ||
+    !Array.isArray(simulatorInventory.runtimes)
   ) {
     throw new Error("Simulator inventory is missing its devices or runtimes collection.");
   }
-  const { device, runtime } = selectDevice(deviceInventory.devices, runtimeInventory.runtimes);
+  const { device, runtime } = selectDevice(simulatorInventory.devices, simulatorInventory.runtimes);
   report.selectedDevice = {
     name: device.name,
     udid: device.udid,
