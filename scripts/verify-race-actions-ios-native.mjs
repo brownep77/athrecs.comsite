@@ -6,6 +6,7 @@ import { setTimeout as pause } from "node:timers/promises";
 import { verifyNativeSafariInput } from "./ios-safari-input-probe.mjs";
 import { verifyNativeShareSheet } from "./ios-safari-share-sheet.mjs";
 import { requestAppiumJson } from "./ios-safari-appium-http.mjs";
+import { ensureNativeControlClear, rectIsClear } from "./ios-safari-clear-control.mjs";
 
 // Native XCTest accessibility and input in the installed Mobile Safari app.
 // This deliberately does not request browserName or a WebKit/webview context.
@@ -30,6 +31,7 @@ const report = {
   checks: [],
   taps: [],
   controls: [],
+  visibilityChecks: [],
   views: [],
   notCovered: [
     "Physical iPhone/iPad hardware",
@@ -130,11 +132,27 @@ async function named(label) {
   });
 }
 const trueAttribute = (value) => value === true || value === "true" || value === 1;
-async function showControl(control, { hittable = false, enabled = true } = {}) {
+async function showControl(control, { hittable = false, enabled = true, webContent = true } = {}) {
   const { element, label, type } = control;
-  const alreadyVisible = trueAttribute(await attribute(element, "visible"));
-  const alreadyHittable = alreadyVisible && trueAttribute(await attribute(element, "hittable"));
-  if (!alreadyHittable) await mobile("scrollToElement", { elementId: element[elementKey] });
+  let clearanceIndex, clearance;
+  if (webContent) {
+    clearanceIndex = report.visibilityChecks.length;
+    clearance = await ensureNativeControlClear({
+      control,
+      mobile,
+      command,
+      find,
+      attribute,
+      record: (evidence) => {
+        report.visibilityChecks[clearanceIndex] = { phase, ...evidence };
+        save();
+      },
+    });
+  } else {
+    const alreadyVisible = trueAttribute(await attribute(element, "visible"));
+    const alreadyHittable = alreadyVisible && trueAttribute(await attribute(element, "hittable"));
+    if (!alreadyHittable) await mobile("scrollToElement", { elementId: element[elementKey] });
+  }
   const state = await until(
     `visible${hittable ? "/hittable" : ""} native control ${label}`,
     async () => {
@@ -156,10 +174,16 @@ async function showControl(control, { hittable = false, enabled = true } = {}) {
     elementId: element[elementKey],
     ...state,
     accessible: trueAttribute(await attribute(element, "accessible")),
+    ...(clearanceIndex === undefined ? {} : { clearanceIndex }),
     rect: await command("GET", `/element/${element[elementKey]}/rect`),
   };
   report.controls.push(evidence);
   save();
+  if (clearance)
+    assert(
+      rectIsClear(evidence.rect, clearance.viewport),
+      "Native web control moved outside the observed clear viewport before use",
+    );
   return evidence;
 }
 async function tap(targetControl, { shareMustBeOpen = false } = {}) {
@@ -318,29 +342,6 @@ async function checkView(orientation) {
   view.shareScreenshot = await screenshot(`${orientation.toLowerCase()}-share`, orientation);
   await saveSource(`${orientation.toLowerCase()}-share`);
 
-  mark(`${orientation}: open and cancel the native system share sheet`);
-  view.nativeShareSheet = await verifyNativeShareSheet({
-    mobile,
-    command,
-    find,
-    attribute,
-    describe,
-    showControl,
-    screenshot,
-    saveSource,
-    until,
-    target,
-    orientation,
-    platformVersion:
-      report.capabilities.platformVersion || report.capabilities["appium:platformVersion"],
-    record: (evidence) => {
-      view.nativeShareSheet = evidence;
-      save();
-    },
-    save,
-  });
-  passed(`${orientation}: native system share sheet opens, cancels and reopens without copying`);
-
   mark(`${orientation}: native Copy link and Simulator pasteboard`);
   const clipboardSentinel = `athrecs-native-copy-before-${orientation}-${Date.now()}`;
   await mobile("setPasteboard", { content: clipboardSentinel });
@@ -386,6 +387,44 @@ async function checkView(orientation) {
   await until("first calendar closed", async () => (await exact("Google Calendar")).length === 0);
   assert.equal((await mobile("activeAppInfo")).bundleId, bundleId);
   passed(`${orientation}: all actions remained in installed Mobile Safari`);
+}
+
+async function checkSystemSharing(view) {
+  const { orientation } = view;
+  mark(`${orientation}: return to the first distance for native sharing`);
+  await command("POST", "/orientation", { orientation });
+  assert.equal(await command("GET", "/orientation"), orientation);
+  await mobile("deepLink", { url: target + "#race-schedule", bundleId });
+  assert.equal((await mobile("activeAppInfo")).bundleId, bundleId);
+  const [first] = await discoverRows();
+  assert(await shareClosed(), "System-sharing check starts with the web disclosure closed");
+  await tap(first.share);
+  mark(`${orientation}: open and cancel the native system share sheet`);
+  view.nativeShareSheet = await verifyNativeShareSheet({
+    mobile,
+    command,
+    find,
+    attribute,
+    describe,
+    showControl: (control, options) =>
+      showControl(control, { ...options, webContent: control.label === "More sharing options" }),
+    screenshot,
+    saveSource,
+    until,
+    target,
+    orientation,
+    platformVersion:
+      report.capabilities.platformVersion || report.capabilities["appium:platformVersion"],
+    record: (evidence) => {
+      view.nativeShareSheet = evidence;
+      save();
+    },
+    save,
+  });
+  passed(`${orientation}: native system share sheet opens, cancels and reopens without copying`);
+
+  await tap(first.share);
+  await until("sharing closed after native sheet cancellation", shareClosed);
 }
 
 try {
@@ -524,6 +563,12 @@ try {
     // State assertions below remain explicit. Avoid spending ten seconds on
     // each XCTest idle check while Safari's first-boot services are settling.
     "appium:waitForIdleTimeout": 1,
+    // The iOS 18 runner reached WDA but XCTest's plain Safari launch timed
+    // out. This supported URL launch uses the alternative native launch path;
+    // the same session, fixture and production assertions still follow.
+    ...(selected.runtime.version === "18.5"
+      ? { "appium:initialDeeplinkUrl": target + "#race-schedule" }
+      : {}),
     ...prebuiltCapabilities,
     ...(appiumManagedStartup
       ? {
@@ -561,7 +606,9 @@ try {
     find,
     attribute,
     describe,
-    showControl,
+    // The controlled fixture has no fixed site navigation. Its independent
+    // trusted-event telemetry and screenshots prove each actual target hit.
+    showControl: (control, options) => showControl(control, { ...options, webContent: false }),
     screenshot,
     saveSource,
     record: (evidence) => {
@@ -574,6 +621,7 @@ try {
     "Native centre taps deliver one trusted click on a button and a disclosure in Mobile Safari",
   );
   for (const orientation of ["PORTRAIT", "LANDSCAPE"]) await checkView(orientation);
+  for (const view of report.views) await checkSystemSharing(view);
   report.status = "passed";
   mark("complete");
 } catch (error) {

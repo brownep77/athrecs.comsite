@@ -12,6 +12,8 @@ on:
       - "scripts/ios-safari-input-probe.mjs"
       - "scripts/ios-safari-share-sheet.mjs"
       - "scripts/ios-safari-appium-http.mjs"
+      - "scripts/ios-safari-clear-control.mjs"
+      - "scripts/verify-ios-safari-clear-control.mjs"
       - "scripts/wait-ios-appium-ready.mjs"
       - "scripts/prepare-ios-safari-simulator.mjs"
       - "scripts/select-ios-safari-simulator.mjs"
@@ -38,6 +40,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Check native viewport and touch guards
+        run: node --test scripts/verify-ios-safari-clear-control.mjs
       - name: Enable Safari's native WebDriver
         run: sudo /usr/bin/safaridriver --enable
       - name: Test public calendar and sharing in native Safari
