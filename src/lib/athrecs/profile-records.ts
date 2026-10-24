@@ -201,9 +201,16 @@ export function eligiblePerformance(result: ProfileResult): boolean {
     result.distanceKm > 0 &&
     !/ultra|unknown|tbc|variable|multi/i.test(result.distanceCode) &&
     !/trail|cross.country|^xc$|fell|mountain|mixed|unknown/i.test(result.surface) &&
-    ["Running", "Parkrun", "Athletics", "Walking", "Cycling", "Swimming", "Rowing"].includes(
-      result.sport,
-    )
+    [
+      "Running",
+      "Parkrun",
+      "Athletics",
+      "Walking",
+      "Cycling",
+      "Swimming",
+      "Rowing",
+      "Indoor Rowing",
+    ].includes(result.sport)
   );
 }
 

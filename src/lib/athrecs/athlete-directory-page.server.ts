@@ -22,11 +22,11 @@ const publicCountrySql = `case when exists (select 1 from athlete_account_links 
   where l.athlete_id=a.id and l.status='active' and s.share_location=false) then '' else (${countrySql}) end`;
 const clubSql = `case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
   where l.athlete_id=a.id and l.status='active' and s.share_club=false) then nullif(c.name,'Unattached') end`;
-const sourceSportSql = `athlete_source_sport_v3(h.provider,p->>'discipline',p->>'meeting')`;
+const sourceSportSql = `athlete_source_sport_v4(h.provider,p->>'discipline',p->>'meeting')`;
 // Claimed profiles use their existing owner-controlled sport/result paths.
 const publicProfileSportsSql = `case when a.profile_visibility='public'
   and not exists(select 1 from athlete_account_links l where l.athlete_id=a.id)
-  then athlete_profile_sports_v1(a.profile_details) else array[]::text[] end`;
+  then athlete_profile_sports_v2(a.profile_details) else array[]::text[] end`;
 const visibleSourcePerformanceSql = `coalesce(p->>'profileExcluded','false')<>'true'
   and not exists (select 1 from athlete_profile_history_choices choice
     join athlete_account_links owner_link on owner_link.user_id=choice.user_id
@@ -77,11 +77,11 @@ export async function readAthleteDirectoryPage(
         union all
         (select h.athlete_id as id from athlete_source_histories h
           where h.published_at is not null
-            and athlete_history_sports_v3(h.provider,h.performances) @> array[$1]::text[] limit $2)
+            and athlete_history_sports_v4(h.provider,h.performances) @> array[$1]::text[] limit $2)
         union all
         (select a.id from athletes a where a.profile_visibility='public'
           and ${profileSportEvidencePredicateSql()}
-          and athlete_profile_sports_v1(a.profile_details) @> array[$1]::text[]
+          and athlete_profile_sports_v2(a.profile_details) @> array[$1]::text[]
           and not exists(select 1 from athlete_account_links l where l.athlete_id=a.id) limit $2)
       ) members limit $2`,
       [search.sport, probeLimit],
@@ -110,7 +110,7 @@ export async function readAthleteDirectoryPage(
           where l.athlete_id=a.id and hidden.result_id=r.id)
     ) or exists (
       select 1 from athlete_source_histories h where h.athlete_id=a.id and h.published_at is not null
-        and athlete_history_sports_v3(h.provider,h.performances) @> array[$7]::text[]
+        and athlete_history_sports_v4(h.provider,h.performances) @> array[$7]::text[]
         and ${sourcePermission}
         and exists (select 1 from jsonb_array_elements(h.performances) p
           where (${sourceSportSql})=$7 and ${visibleSourcePerformanceSql})

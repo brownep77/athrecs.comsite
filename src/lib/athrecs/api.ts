@@ -920,7 +920,7 @@ const readAthleteIdentity = createServerOnlyFn(
         a.profile_details, a.date_of_birth::text as date_of_birth,
         case when a.profile_visibility='public'
           and not exists(select 1 from athlete_account_links l where l.athlete_id=a.id)
-          then athlete_profile_sports_v1(a.profile_details) else array[]::text[] end as sports,
+          then athlete_profile_sports_v2(a.profile_details) else array[]::text[] end as sports,
         identifier.athlete_number::text as athlete_number,
         c.name as club,
         c.slug as club_slug,

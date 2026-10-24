@@ -43,6 +43,26 @@ assert.equal(
   1,
 );
 const track = row({ discipline: "5000", performance: "16:12.55", labels: [] });
+const erg = row({
+  discipline: "Indoor Rowing 1000m",
+  performance: "02:38.9",
+  labels: ["Indoor Rowing", "Round: Final"],
+  meeting: "Synthetic indoor championships",
+});
+const lightweightErg = {
+  ...erg,
+  discipline: "Indoor Rowing Lightweight 1000m",
+  performance: "02:59.8",
+};
+assert.equal(bests([erg])[0].value.sport, "Indoor Rowing");
+assert.equal(bests([erg])[0].value.finishTimeSeconds, 158.9);
+assert.equal(profilePersonalBestSummary([], histories([erg]))[0].mark, "02:38.9");
+assert.equal(
+  bests([erg, lightweightErg, row({ discipline: "1000m", performance: "02:40.1", labels: [] })])
+    .length,
+  3,
+  "Rowing weight classes and track performances remain separate",
+);
 assert.equal(bests([track])[0].value.finishTimeSeconds, 972.55);
 assert.equal(profilePersonalBestSummary([], histories([track]))[0].mark, "16:12.55");
 assert.equal(bests([row(), track, row({ discipline: "parkrun", labels: [] })]).length, 3);
@@ -111,7 +131,11 @@ console.log(
   "Historical PB checks passed: verification, opt-in reports, aided courses, precision, timing, conflicts, privacy and sport separation.",
 );
 
-const walk = row({ discipline: "5000 Metres Race Walk", performance: "28:12.45", labels: ["Track"] });
+const walk = row({
+  discipline: "5000 Metres Race Walk",
+  performance: "28:12.45",
+  labels: ["Track"],
+});
 assert.equal(bests([walk])[0].value.sport, "Walking");
 assert.equal(bests([walk])[0].value.distanceKm, 5);
 assert.equal(profilePersonalBestSummary([], histories([walk]))[0].mark, "28:12.45");
@@ -120,7 +144,15 @@ const pendingWalk = bests([{ ...walk, verificationStatus: "unverified" }]);
 assert.equal(pendingWalk.length, 1, "A recorded walking PB counts before verification");
 assert.equal(pendingWalk[0].verified, false);
 assert.equal(bests([track, walk]).length, 2, "Running and walking PBs remain separate");
-const precise = { ...profileAchievementResults([], histories([track]))[0], history: undefined,
-  finishTimeSeconds: 973, details: { reportedPerformance: "16:12.55", verificationStatus: "source_verified" } };
+const precise = {
+  ...profileAchievementResults([], histories([track]))[0],
+  history: undefined,
+  finishTimeSeconds: 973,
+  details: { reportedPerformance: "16:12.55", verificationStatus: "source_verified" },
+};
 assert.equal(profilePersonalBestSummary([precise], [])[0].mark, "16:12.55");
-assert.equal(profilePersonalBestSummary([{ ...precise, details: { reportedPerformance: "15:00" } }], [])[0].mark, "16:13");
+assert.equal(
+  profilePersonalBestSummary([{ ...precise, details: { reportedPerformance: "15:00" } }], [])[0]
+    .mark,
+  "16:13",
+);
