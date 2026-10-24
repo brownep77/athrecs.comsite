@@ -151,7 +151,11 @@ export async function assertAthleteSearchReady(url, fetchImpl = fetch) {
     .toArray()
     .filter((tag) => ($(tag).attr("rel") ?? "").toLowerCase().split(/\s+/).includes("canonical"));
   assert.equal(canonical.length, 1, `Expected one canonical link: ${url}`);
-  assert.equal($(canonical[0]).attr("href"), url, `Canonical mismatch: ${url}`);
+  const href = $(canonical[0]).attr("href");
+  // An absolute origin URL and its serialized trailing-slash form are the same
+  // homepage URL. Keep exact matching for every non-root path.
+  const canonicalUrl = href === ATHLETE_SEARCH_ORIGIN ? `${href}/` : href;
+  assert.equal(canonicalUrl, url, `Canonical mismatch: ${url}`);
 }
 
 export async function checkAthleteSearchReadiness(fetchImpl = fetch, options = {}) {

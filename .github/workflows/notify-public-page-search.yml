@@ -1,0 +1,85 @@
+name: Notify search engines of all other public pages
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "47 * * * *"
+  pull_request:
+    paths:
+      - "scripts/submit-public-page-indexnow.mjs"
+      - "scripts/verify-public-page-notification.mjs"
+      - "scripts/lib/athlete-search-readiness.mjs"
+      - ".github/workflows/notify-public-page-search.yml"
+  push:
+    branches: [main]
+    paths:
+      - "src/routes/sitemap*.ts"
+      - "src/routes/sitemaps/**"
+      - "src/routes/races/**"
+      - "src/routes/results/**"
+      - "src/routes/clubs/**"
+      - "src/routes/directory/**"
+      - "src/lib/athrecs/public-pages.ts"
+      - "src/lib/athrecs/content-sitemap.server.ts"
+      - "src/data/sports-organisations.ts"
+      - "scripts/submit-public-page-indexnow.mjs"
+      - "scripts/verify-public-page-notification.mjs"
+      - "scripts/lib/athlete-search-readiness.mjs"
+      - ".github/workflows/notify-public-page-search.yml"
+permissions:
+  contents: read
+concurrency:
+  group: public-page-notifications-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  safeguards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node scripts/verify-public-page-notification.mjs
+      - name: Read-only sample across public sitemap families
+        if: github.event_name == 'pull_request'
+        run: node scripts/submit-public-page-indexnow.mjs --check --max-urls=500
+  notify:
+    needs: safeguards
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Restore accepted receipts
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: artifacts/public-page-search-state.json
+          key: public-page-indexnow-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: public-page-indexnow-v1-
+      - name: Check current public permissions and submit due URLs
+        run: node scripts/submit-public-page-indexnow.mjs --submit --max-urls=5000 --state-file=artifacts/public-page-search-state.json --report-file=artifacts/public-page-search-report.json
+      - name: Preserve only accepted progress
+        if: always() && hashFiles('artifacts/public-page-search-state.json') != ''
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: artifacts/public-page-search-state.json
+          key: public-page-indexnow-v1-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Preserve public receipt and held-page report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-page-search-report
+          path: artifacts/public-page-search-report.json
+          if-no-files-found: ignore
+          retention-days: 14
