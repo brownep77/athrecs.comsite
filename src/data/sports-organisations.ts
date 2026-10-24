@@ -14965,4 +14965,122 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "swim-england"
   ]
 }, "2026-10-24"),
+
+  record({
+  "slug": "sasa-east-district",
+  "name": "SASA East District",
+  "type": "regional",
+  "country": "Scotland",
+  "jurisdiction": "SASA East District, Scotland",
+  "territories": [
+    "Scotland",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Scottish Swimming district supporting affiliated clubs, aquatic competition and volunteers.",
+  "detail": "District identity and services checked on its official website on 24 October 2026. Results indexes support research; individual athlete performances require separate source-row checks.",
+  "website": "https://www.sasaeastdistrict.org.uk/",
+  "sources": [
+    "https://www.sasaeastdistrict.org.uk/",
+    "https://www.sasaeastdistrict.org.uk/about-us-contact/"
+  ],
+  "related": [
+    "scottish-swimming"
+  ]
+}, "2026-10-24"),
+  record({
+  "slug": "sasa-midland-district",
+  "name": "SASA Midland District",
+  "type": "regional",
+  "country": "Scotland",
+  "jurisdiction": "SASA Midland District, Scotland",
+  "territories": [
+    "Scotland",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Scottish Swimming district supporting affiliated clubs, aquatic competition and volunteers.",
+  "detail": "District identity and services checked on its official website on 24 October 2026. Results indexes support research; individual athlete performances require separate source-row checks.",
+  "website": "https://www.sasamidlanddistrict.co.uk/",
+  "sources": [
+    "https://www.sasamidlanddistrict.co.uk/",
+    "https://www.sasamidlanddistrict.co.uk/about"
+  ],
+  "related": [
+    "scottish-swimming"
+  ]
+}, "2026-10-24"),
+  record({
+  "slug": "sasa-north-district",
+  "name": "SASA North District",
+  "type": "regional",
+  "country": "Scotland",
+  "jurisdiction": "SASA North District, Scotland",
+  "territories": [
+    "Scotland",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Scottish Swimming district supporting affiliated clubs, aquatic competition and volunteers.",
+  "detail": "District identity and services checked on its official website on 24 October 2026. Results indexes support research; individual athlete performances require separate source-row checks.",
+  "website": "https://www.sasanorth.org.uk/",
+  "sources": [
+    "https://www.sasanorth.org.uk/"
+  ],
+  "related": [
+    "scottish-swimming"
+  ]
+}, "2026-10-24"),
+  record({
+  "slug": "sasa-west-district",
+  "name": "SASA West District",
+  "type": "regional",
+  "country": "Scotland",
+  "jurisdiction": "SASA West District, Scotland",
+  "territories": [
+    "Scotland",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Scottish Swimming district supporting affiliated clubs, aquatic competition and volunteers.",
+  "detail": "District identity and services checked on its official website on 24 October 2026. Results indexes support research; individual athlete performances require separate source-row checks.",
+  "website": "https://www.scotswimwest.co.uk/",
+  "sources": [
+    "https://www.scotswimwest.co.uk/"
+  ],
+  "related": [
+    "scottish-swimming"
+  ]
+}, "2026-10-24"),
+  record({
+  "slug": "scottish-schools-swimming-association",
+  "name": "Scottish Schools Swimming Association",
+  "type": "specialist",
+  "country": "Scotland",
+  "jurisdiction": "School swimming in Scotland",
+  "territories": [
+    "Scotland",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Organises Scottish schools swimming championship finals and team relay championships.",
+  "detail": "Official 2027 finals announcement and 2026 individual and team results indexes inspected on 24 October 2026. Qualification is administered through area representatives.",
+  "website": "https://www.scottishschoolsswimming.co.uk/",
+  "sources": [
+    "https://www.scottishschoolsswimming.co.uk/"
+  ],
+  "related": [
+    "scottish-swimming"
+  ]
+}, "2026-10-24"),
 ];
