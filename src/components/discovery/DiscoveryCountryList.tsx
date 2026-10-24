@@ -49,6 +49,7 @@ export function DiscoveryCountryList({ sport, countries, search }: Props) {
       search: { ...search, country, page: undefined },
       hash: "fixtures",
       preload: false as const,
+      activeOptions: { exact: true },
       className: `flex min-h-10 items-center gap-2 rounded-md px-2.5 py-1.5 text-[13px] no-underline transition-colors focus-visible:outline-2 focus-visible:outline-accent ${selected ? "bg-accent-soft font-semibold text-accent" : "text-muted hover:bg-accent-soft hover:text-accent"}`,
       "aria-current": selected ? ("true" as const) : undefined,
     };

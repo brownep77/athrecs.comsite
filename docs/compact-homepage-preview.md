@@ -46,6 +46,8 @@ The focused checks cover TypeScript, changed-file linting, fixture scope and mon
 
 The hosted desktop preview has also exercised a United Kingdom / April 2027 / Half marathon search, saved a real fixture, switched through Athletics and Swimming, restored the Running filters, retained the shortlist across sports, expanded all seven country guide links and loaded the Canadian marathon guide. The first cold catalogue load is slower than subsequent navigation. Phone-width browser review remains part of the user review checklist.
 
+The later country-menu update passed type checking, targeted linting and the isolated build. A render with the actual router checked country and All countries links on the homepage and Swimming: sport routes and month/distance/text filters are preserved, pagination is cleared, aliases are deduplicated, and UK home nations remain separate. Interactive review of that update is still through the protected preview.
+
 ```sh
 npm run typecheck
 node --experimental-strip-types scripts/verify-sport-fixture-pages.mjs
