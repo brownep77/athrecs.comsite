@@ -29,9 +29,9 @@ CREATED = "2026-10-24T15:00:00Z"
 def pace(number=1, name="Marlow, Amber (GBR)", time="03:10:00", sex="F", category="18-39", flags=None, event="MAS"):
     row = {column: None for column in planner.PACE_COLUMNS}
     row.update({
-        "id": number, "race": "London Marathon", "year": 2025, "city": "London",
+        "id": number, "race": "London Marathon", "year": planner.YEAR, "city": "London",
         "runner": name, "sex": sex, "age_group": category, "split_42_2km": time,
-        "source_url": f"https://results.tcslondonmarathon.com/2025/?content=detail&idp={number:014}&lang=EN&event={event}",
+        "source_url": f"https://results.tcslondonmarathon.com/{planner.YEAR}/?content=detail&idp={number:014}&lang=EN&event={event}",
         "ingested_at": "2026-09-01T18:31:57Z",
     })
     return planner.normalize_pace_row(row, flags)
@@ -41,7 +41,7 @@ def guide(number=1, name="Amber MARLOW", time="03:10:00", sex="Female", place="ð
     fields = dict(zip(planner.GUIDE_HEADINGS, [place, name, "Marathon", time, sex, "", "Claim"]))
     record = {
         "fields": fields, "cells": list(fields.values()), "provider_result_id": str(9000 + number),
-        "sourcePath": f"/races/run/london-marathon-21/2025/results/{9000 + number}/",
+        "sourcePath": planner.GUIDE_PUBLICATION.removeprefix("https://marathonguide.com") + f"{9000 + number}/",
     }
     page = {
         "page": 1, "observed_at": "2026-10-24T12:10:38Z", "headings": planner.GUIDE_HEADINGS,
@@ -432,6 +432,194 @@ console.log(JSON.stringify({histories: histories.length, valid: true}));
         )
         self.assertEqual(checked.returncode, 0, checked.stderr)
         self.assertEqual(json.loads(checked.stdout), {"histories": 1, "valid": True})
+
+
+def edition_context(year=2024):
+    date = {2024: "2024-04-21", 2023: "2023-04-23"}[year]
+    slug_number = {2024: 25, 2023: 24}[year]
+    edition = {**EDITION, "id": year * 10, "equivalentIds": [year * 10 + 1], "date": date}
+    filenames = {
+        "paceRowsFile": f"raw/pace_notes_{year}.jsonl",
+        "paceCsvFile": f"London_Marathon_{year}_Pace_Notes.csv",
+        "guideCsvFile": f"London_Marathon_{year}_MarathonGuide.csv",
+    }
+    return {
+        "formatVersion": 1, "year": year, "date": date, "batchId": f"london-{year}-synthetic",
+        "edition": edition, **filenames,
+        "inputSha256": {name: "a" * 64 for name in [*filenames.values(), "raw/pace_notes_schema.json", "raw/pace_notes_metadata.json", "raw/marathonguide_pages.json"]},
+        "paceRecords": 1, "guideRecords": 1, "guideSubevent": str(100000 + year),
+        "guidePublication": f"https://marathonguide.com/races/run/london-marathon-{slug_number}/{year}/results/",
+        "collectionFileId": "libfile_synthetic", "collectionSha256": "b" * 64,
+        "ownerInstruction": "Synthetic owner instruction for the explicitly named London edition.",
+    }
+
+
+def configured_snapshot(context, **parts):
+    return {"athletes": [], "results": [], "accounts": [],
+            "metadata": {"editionContextDigest": planner._hash(context), "batchId": context["batchId"]}, **parts}
+
+
+def configured_plan(context, rows=None, existing=None):
+    return planner.build_plan(rows if rows is not None else [pace(), guide()],
+                              existing if existing is not None else configured_snapshot(context),
+                              context["edition"], context["batchId"], CREATED)
+
+
+class LondonEditionContextTests(unittest.TestCase):
+    def tearDown(self):
+        planner.configure()
+
+    def test_same_result_locators_cannot_collide_between_editions(self):
+        keys, groups, profiles, histories = set(), set(), set(), set()
+        for year in (2024, 2023):
+            context = edition_context(year)
+            planner.configure(context)
+            result = configured_plan(context)
+            group = result["groups"][0]
+            keys.add(group["primaryObservationKey"])
+            groups.add(group["groupId"])
+            profiles.add(group["athleteDraft"]["slug"])
+            histories.add(group["history"]["externalId"])
+            self.assertEqual(group["history"]["performances"][0]["date"], context["date"])
+            self.assertEqual(group["history"]["yearsExpected"], [year])
+            self.assertEqual(result["editionContext"], context)
+        self.assertEqual([len(items) for items in [keys, groups, profiles, histories]], [2, 2, 2, 2])
+
+    def test_wrong_year_or_guide_slug_in_retained_locator_is_rejected(self):
+        context = edition_context()
+        planner.configure(context)
+        raw = pace()["original"]
+        raw["source_url"] = raw["source_url"].replace("/2024/", "/2025/")
+        with self.assertRaises(ValueError):
+            planner.normalize_pace_row(raw)
+        row = guide()["original"]
+        row["sourcePath"] = row["sourcePath"].replace("london-marathon-25", "london-marathon-21")
+        page = {"headings": planner.GUIDE_HEADINGS, "headings_verified": True}
+        with self.assertRaises(ValueError):
+            planner.normalize_guide_row(row, page)
+
+    def test_other_year_profile_name_still_requires_identity_review(self):
+        context = edition_context()
+        planner.configure(context)
+        existing = configured_snapshot(context, athletes=[{
+            "id": 9, "displayName": "Amber Marlow", "aliases": [], "gender": "F",
+            "slug": "amber-marlow-london-2025-existing", "visibility": "public",
+        }])
+        group = configured_plan(context, existing=existing)["groups"][0]
+        self.assertEqual(group["disposition"], "held")
+        self.assertIn("existing_name_or_alias_requires_review", group["reasons"])
+        self.assertNotIn("history", group)
+
+    def test_config_cannot_be_replaced_without_a_new_snapshot(self):
+        context = edition_context()
+        planner.configure(context)
+        stale = configured_snapshot(context)
+        changed = copy.deepcopy(context)
+        changed["inputSha256"][changed["paceRowsFile"]] = "c" * 64
+        planner.configure(changed)
+        with self.assertRaisesRegex(ValueError, "Snapshot"):
+            configured_plan(changed, existing=stale)
+
+    def test_mismatched_frozen_context_and_cross_year_history_are_rejected(self):
+        context = edition_context()
+        planner.configure(context)
+        result = configured_plan(context)
+        result["groups"][0]["history"]["performances"][0]["year"] = 2023
+        with self.assertRaisesRegex(ValueError, "crosses"):
+            planner.validate_plan(result)
+        result = configured_plan(context)
+        result["editionContext"]["collectionSha256"] = "c" * 64
+        with self.assertRaisesRegex(ValueError, "configuration differs"):
+            planner.validate_plan(result)
+
+    def test_configured_plan_cannot_omit_one_provider(self):
+        context = edition_context()
+        planner.configure(context)
+        with self.assertRaisesRegex(ValueError, "complete configured collection"):
+            configured_plan(context, [pace()])
+
+    def test_invalid_context_scope_paths_and_missing_pins_are_rejected(self):
+        changes = [
+            ("date", "2023-04-23"), ("batchId", "london-2025-synthetic"),
+            ("guidePublication", "https://example.test/2024/results/"),
+            ("guideSubevent", "1; SELECT 1"), ("paceRecords", True),
+        ]
+        for key, value in changes:
+            bad = edition_context()
+            bad[key] = value
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                planner.configure(bad)
+        bad = edition_context()
+        del bad["inputSha256"][bad["paceRowsFile"]]
+        with self.assertRaises(ValueError):
+            planner.configure(bad)
+        bad = edition_context()
+        bad["inputSha256"]["../outside.json"] = "a" * 64
+        with self.assertRaises(ValueError):
+            planner.configure(bad)
+
+    def test_configured_year_only_review_preserves_empty_date_and_checks_original_year(self):
+        context = edition_context()
+        planner.configure(context)
+        rows = [pace(), guide()]
+        existing, manifest, approval = reviewed_fixture(rows, year_only=True)
+        existing["metadata"].update(batchId=context["batchId"], editionContextDigest=planner._hash(context))
+        target = existing["results"][0]
+        target["year"] = context["year"]
+        target["original"]["performance"]["year"] = context["year"]
+        target["original"]["performance"]["archiveReference"]["original"]["result_year"] = context["year"]
+        manifest["associations"][0]["originalYear"] = context["year"]
+        manifest["snapshotDigest"] = planner._hash(existing)
+        approval.update(batchId=context["batchId"], snapshotDigest=planner._hash(existing), manifestDigest=planner._hash(manifest))
+        result = planner.build_plan(rows, existing, context["edition"], context["batchId"], CREATED, review_manifest=manifest, review_approval=approval)
+        match = result["groups"][0]["existingMatches"][0]
+        self.assertEqual(result["groups"][0]["disposition"], "linked")
+        self.assertEqual(match["originalDate"], "")
+        self.assertEqual(match["originalYear"], 2024)
+        target["original"]["performance"]["archiveReference"]["original"]["result_year"] = 2025
+        manifest["snapshotDigest"] = planner._hash(existing)
+        approval.update(snapshotDigest=planner._hash(existing), manifestDigest=planner._hash(manifest))
+        with self.assertRaisesRegex(ValueError, "Original WMM row"):
+            planner.build_plan(rows, existing, context["edition"], context["batchId"], CREATED, review_manifest=manifest, review_approval=approval)
+
+    def test_locator_with_conflicting_existing_year_remains_held(self):
+        context = edition_context()
+        planner.configure(context)
+        row = pace()
+        existing = snapshot(row, editionId=context["edition"]["id"], year=2025, date="2025-04-27")
+        existing["metadata"] = configured_snapshot(context)["metadata"]
+        group = configured_plan(context, [row, guide()], existing)["groups"][0]
+        self.assertEqual(group["disposition"], "held")
+        self.assertIn("existing_locator_edition_conflict", group["reasons"])
+
+    def test_snapshot_scope_uses_configured_year_and_resets_legacy_sql(self):
+        spec = importlib.util.spec_from_file_location("london_snapshot_test", ROOT / "scripts/snapshot-london-profiles.py")
+        snapshotter = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(snapshotter)
+        original_sql = snapshotter.fingerprint_sql()
+        context = edition_context()
+        snapshotter.configure(context)
+        self.assertIn("2024", snapshotter.HISTORIES_SQL)
+        self.assertNotIn("2025", snapshotter.HISTORIES_SQL)
+        self.assertIn("20240,20241", snapshotter.RESULTS_SQL)
+        self.assertNotIn("71613035", snapshotter.RESULTS_SQL)
+        raw = {"athlete_id": 9, "provider": "Synthetic", "external_id": "stable", "source_url": "https://example.test/profile",
+               "ordinal": "1", "performance": {"year": 2024, "date": "", "meeting": "London Marathon", "discipline": "Marathon", "performance": "03:10:00"}}
+        result = snapshotter.normalize_result(raw, "history")
+        self.assertIsNone(result["editionId"])
+        self.assertEqual(result["date"], "")
+        raw["performance"]["date"] = context["date"]
+        self.assertEqual(snapshotter.normalize_result(raw, "history")["editionId"], context["edition"]["id"])
+        snapshotter.configure()
+        self.assertEqual(snapshotter.fingerprint_sql(), original_sql)
+
+    def test_reset_preserves_legacy_plan_shape_and_attribution(self):
+        baseline = plan([pace(), guide()])
+        planner.configure(edition_context())
+        configured_plan(edition_context())
+        planner.configure()
+        self.assertEqual(plan([pace(), guide()]), baseline)
+        self.assertNotIn("editionContext", baseline)
 
 
 if __name__ == "__main__":
