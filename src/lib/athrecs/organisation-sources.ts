@@ -22,6 +22,24 @@ export function attachSourceOrganisations(
 ): FixtureSource[] {
   const groups = groupOrganisations(organisations);
   const reviewedLinks: Record<string, string[]> = {
+    sasa_east_district: ["sasa-east-district"],
+    sasa_midland_district: ["sasa-midland-district"],
+    sasa_north_district: ["sasa-north-district"],
+    sasa_west_district: ["sasa-west-district"],
+    scottish_schools_swimming: ["scottish-schools-swimming-association"],
+    sasa_east_about: ["sasa-east-district"],
+    sasa_midland_about: ["sasa-midland-district"],
+    sasa_east_lothian_results: ["sasa-east-district"],
+    sasa_midland_results: ["sasa-midland-district"],
+    sasa_north_2026_meets: ["sasa-north-district"],
+    sasa_north_2027_meets: ["sasa-north-district"],
+    sasa_west_2027_club_meets: ["sasa-west-district"],
+    sasa_west_results: ["sasa-west-district"],
+    scottish_schools_2026_results: ["scottish-schools-swimming-association"],
+    scottish_schools_2026_team_results: ["scottish-schools-swimming-association"],
+    team_scotland_duncan_scott: ["scottish-swimming"],
+    aquatics_gb_duncan_scott: ["aquatics-gb"],
+
     swim_england_regions: ["swim-england"],
     swim_england_north_west_region: ["swim-england-north-west-region"],
     swim_england_north_east_region: ["swim-england-north-east-region"],

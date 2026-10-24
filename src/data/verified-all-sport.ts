@@ -1,4 +1,8 @@
 import {
+  scottishSwimming2027Series,
+  scottishSwimming2027Editions,
+} from "./scottish-swimming-2027.ts";
+import {
   englishRegionalSwimming2027SSeries,
   englishRegionalSwimming2027SEditions,
 } from "./english-regional-swimming-2027-s.ts";
@@ -33,6 +37,7 @@ import {
  * governing-body page. Participant-level results are deliberately excluded.
  */
 export const verifiedAllSportSeries: Series[] = [
+  ...scottishSwimming2027Series,
   ...englishRegionalSwimming2027SSeries,
   ...englishRegionalSwimming2027Series,
   ...australianSwimming2027Series,
@@ -100,6 +105,7 @@ export const verifiedAllSportSeries: Series[] = [
 ];
 
 export const verifiedAllSportEditions: Edition[] = [
+  ...scottishSwimming2027Editions,
   ...englishRegionalSwimming2027SEditions,
   ...englishRegionalSwimming2027Editions,
   ...australianSwimming2027Editions,
