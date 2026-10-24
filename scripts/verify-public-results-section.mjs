@@ -43,6 +43,8 @@ const { publicResultsHead } = loadTypeScript("src/lib/athrecs/public-results-seo
   "./seo": loadTypeScript("src/lib/athrecs/seo.ts"),
 });
 assert.equal(search.normalizeResultsSearch({ category: "trail-running" }).category, "trail-running");
+assert.equal(search.normalizeResultsSearch({ category: "all-running" }).category, "all-running");
+assert.equal(search.normalizeResultsSearch({ category: "running" }).category, "road-running", "Legacy running category keeps its Road Running meaning");
 assert.equal(search.normalizeResultsSearch({ category: "unknown" }).category, "");
 assert.equal(search.normalizeResultsSearch(undefined).page, 1);
 for (const page of [-1, 0, NaN, Infinity, "bad", {}, []]) {
@@ -197,7 +199,13 @@ try {
       (31, 'BMX Race', 'Cycling', 'BMX Track'),
       (32, 'Cyclo-cross Race', 'Cycling', 'Cyclo-cross'),
       (33, 'Gravel Race', 'Cycling', 'Gravel'),
-      (34, 'Velodrome Meet', 'Cycling', 'Velodrome');
+      (34, 'Velodrome Meet', 'Cycling', 'Velodrome'),
+      (35, 'Synthetic parkrun', 'Parkrun', 'Road'),
+      (36, 'Field Meeting', 'Athletics', 'Field'),
+      (37, 'Fell Athletics', 'Athletics', 'Fell'),
+      (38, 'XC Athletics', 'Athletics', 'XC'),
+      (39, 'Mixed Athletics', 'Athletics', 'Mixed'),
+      (40, 'Park Mixed Athletics', 'Athletics', 'Park / mixed');
     insert into editions select id, id, '2026-09-01', 'Other' from events where id >= 20;
     insert into results (id, athlete_id, edition_id, status, result_visibility)
       select id, 1, id, 'Finished', 'public' from editions where id >= 20;
@@ -210,6 +218,24 @@ try {
   assert.deepEqual(await namesFor("mountain-biking"), ["MTB Gravel Programme", "MTB Race"]);
   assert.deepEqual(await namesFor("track-cycling"), ["Track Cycling", "Velodrome Meet"]);
   assert.deepEqual(await namesFor("bmx"), ["BMX Race"]);
+  await db.exec(`
+    insert into events (id, name, sport, surface)
+      select n, 'Recent Cycling ' || n, 'Cycling', 'Road' from generate_series(200, 229) n;
+    insert into editions select n, n, '2026-09-22', 'Other' from generate_series(200, 229) n;
+    insert into results (id, athlete_id, edition_id, status, result_visibility)
+      select n, 1, n, 'Finished', 'public' from generate_series(200, 229) n;
+  `);
+  const broadBefore = await snapshot();
+  const allRunning = await api.listPublicResultEditions({ data: { category: "all-running" } });
+  assert.deepEqual(allRunning.editions.map((row) => row.event_name).sort(), [
+    "Athletics Road", "Cross Country", "Fell Athletics", "Mixed Athletics", "Park Mixed Athletics",
+    "Synthetic 10K", "Track Run", "Trail Athletics", "Trail Run", "XC Athletics",
+  ], "All running matches homepage scope, excluding Parkrun and Athletics track/field before pagination");
+  assert.equal(allRunning.hasMore, false, "More recent excluded sports must not consume the result limit");
+  assert.equal(allRunning.editions.find((row) => row.edition_id === 10).result_count, 3, "Broad scope keeps result/profile privacy and owner opt-outs");
+  assert.deepEqual(await namesFor("running"), ["Athletics Road", "Synthetic 10K"]);
+  assert.deepEqual((await api.listPublicResultEditions({ data: { sport: "Running" } })).editions.map((row) => row.event_name).sort(), ["Synthetic 10K", "Track Run", "Trail Run"], "Explicit sport=Running is not broadened");
+  assert.equal(await snapshot(), broadBefore, "New category only reads existing public results");
   await db.exec(`delete from results where edition_id >= 20; delete from editions where id >= 20; delete from events where id >= 20;`);
 
   await db.exec(`
@@ -376,7 +402,7 @@ try {
   assert.match(pageSource, /to="\/claim-results" search=\{\{ resultId: result.id \}\}/);
   assert.match(pageSource, /slug: result.athlete_slug/);
   assert.doesNotMatch(pageSource, /submitResultClaim|applyResultsImport|applyImportBundle/);
-  console.log("PASS: public results privacy, page-specific canonicals, indexable pagination, filtered/empty pages, qualified structured data, script escaping, recorded placings, distinct chip/gun times and RunRecs isolation.");
+  console.log("PASS: all-running category scope, legacy category/sport compatibility, public results privacy, page-specific canonicals, indexable pagination, filtered/empty pages, qualified structured data, script escaping, recorded placings, distinct chip/gun times and RunRecs isolation.");
 } finally {
   await db.close();
 }

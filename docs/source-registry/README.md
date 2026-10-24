@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 918 unique sources as of 24 October 2026. Only 36 are enabled; the other 882 remain
+The registry contains 931 unique sources as of 24 October 2026. Only 36 are enabled; the other 895 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 918 sources create exactly one source job;
+- all 931 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 882 sources are retained as blocked jobs with their reason;
+- the other 895 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -371,3 +371,53 @@ remains limited to its reviewed featured-event-card collection.
 The registry now contains 918 sources: 36 enabled and 882 disabled. No newly
 registered source is enabled, and no individual athlete evidence is included
 in this source-control change.
+
+
+## Further original archives and supporting club reports, 24 October 2026
+
+Registered Dunstable Road Runners, Time2Run Events, Great Barrow Challenge,
+Scrabo Striders, Celtic Warrior, Tic Toc Timing and Athy Triathlon Club as seven
+disabled manual research sources. The registry now contains 925 sources: 36
+enabled and 889 disabled.
+
+Dunstable provides an organiser results index and an inspected provisional 2014
+marathon PDF. Time2Run’s archived original indexes link timing reports, including
+an opened 2018 RACE RESULT timed-event table. Great Barrow’s inspected seasonal
+index supports discovery; the captured Christmas pages did not expose their
+embedded individual results. These capabilities must remain distinct.
+
+Celtic Warrior’s existing wider-inventory identity is reused, and its linked CDN
+is recorded only as an asset host. Tic Toc remains a separately credited timing
+provider. Scrabo’s existing inventory identity is also reused. Scrabo and Athy
+provide first-hand club reports for edition and identity corroboration; they are
+not official timing archives. The Athy PDF was opened through the web source
+reader, while a separate direct download returned 403.
+
+Existing Cork Athletics, Run Armagh, Athletics NI and my.raceresult.com entries
+received scoped capability notes. Their original evidence, check dates, URLs,
+rights and collection settings are retained. Marathon Club Ireland remains with
+its existing disabled managed source; no duplicate static or database source is
+created. Broader-inventory reuse preserves existing URLs and settings while
+adding provenance. Registration alone never verifies a participant, approves
+bulk reuse or enables collection. No private participant evidence is committed.
+
+
+### Further historical result capabilities, 24 October 2026
+
+Five disabled manual sources cover the Isle of Man organiser archive, Ultimate Sport Service results, the Ove Schneider copied report, Monaghan Phoenix and Dingle Marathon. Existing Ultimate and Dingle inventory identities are reused. Czech federation, Sparta, RunPorto and RunCzech entries gain dated capability notes; Cesky beh remains part of the existing Czech federation identity. The registry now has 930 sources, with 36 enabled and 894 disabled. Original and republished reports, stage totals, wave ranks and timing labels remain distinct. Registration does not enable collection or verify an individual result.
+
+## London 2025 secondary result sources, 24 October 2026
+
+Registered one disabled Pace Notes research source, with Andrew Kam's publisher
+credit, Figshare licence reference, reviewed London 2025 coverage and the
+publisher's incomplete/held qualification. Updated the existing MarathonGuide
+source with its observed London 2025 results capability while retaining the
+previous fixture-directory evidence and source identity. Neither source is
+enabled and neither registration verifies individual results or identities.
+
+The [source evidence note](london-2025-research-sources.md) records the opened
+pages, original capture/review dates, timing qualifications and coverage limits.
+The source registry and wider repository event inventory were checked for
+duplicates. Private participant records remain outside this repository.
+
+The registry now contains 931 sources: 36 enabled and 895 disabled.

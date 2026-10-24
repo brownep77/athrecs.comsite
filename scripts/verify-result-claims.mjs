@@ -14,6 +14,10 @@ const athleteApi = await readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8
 const athleteRoute = await readFile(resolve(root, "src/routes/athletes/$slug.tsx"), "utf8");
 const raceRoute = await readFile(resolve(root, "src/routes/races/$slug.tsx"), "utf8");
 const homeRoute = await readFile(resolve(root, "src/routes/index.tsx"), "utf8");
+const homeDiscovery = await readFile(
+  resolve(root, "src/components/discovery/CompactDiscoveryPage.tsx"),
+  "utf8",
+);
 const claimRoute = await readFile(resolve(root, "src/routes/claim-results.tsx"), "utf8");
 const vercelConfig = JSON.parse(await readFile(resolve(root, "vercel.json"), "utf8"));
 const adminClaimRoute = await readFile(resolve(root, "src/routes/admin/result-claims.tsx"), "utf8");
@@ -107,7 +111,12 @@ assert.match(
   /Claim this profile/,
 );
 assert.match(raceRoute, /to="\/claim-results"/);
-assert.match(homeRoute, /Claim race results/);
+assert.match(homeRoute, /<CompactDiscoveryPage\b/, "Homepage must render its account entry point");
+assert.match(
+  homeDiscovery,
+  /<Link\b[^>]*\bto="\/athlete-account"[^>]*>\s*Find my results\s*<\/Link>/,
+  "Homepage result discovery must open the athlete account flow",
+);
 assert.match(staffShell, /\/admin\/result-claims/);
 assert.match(claimRoute, /response\.status === "approved"/);
 assert.match(api, /for update/);

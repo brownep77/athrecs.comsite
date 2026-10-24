@@ -3,6 +3,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { setTimeout as pause } from "node:timers/promises";
+import { verifyNativeSafariInput } from "./ios-safari-input-probe.mjs";
+import { verifyNativeShareSheet } from "./ios-safari-share-sheet.mjs";
+import { requestAppiumJson } from "./ios-safari-appium-http.mjs";
+import { ensureNativeControlClear, rectIsClear } from "./ios-safari-clear-control.mjs";
 
 // Native XCTest accessibility and input in the installed Mobile Safari app.
 // This deliberately does not request browserName or a WebKit/webview context.
@@ -27,11 +31,12 @@ const report = {
   checks: [],
   taps: [],
   controls: [],
+  visibilityChecks: [],
   views: [],
   notCovered: [
     "Physical iPhone/iPad hardware",
     "DOM, JavaScript event.isTrusted, provider URL payloads or CSS measurements",
-    "Native share-sheet display/cancellation and recipient delivery",
+    "Recipient delivery through the native share sheet",
     "External provider navigation and calendar saves",
   ],
 };
@@ -56,17 +61,36 @@ function passed(label) {
   console.log(`PASS: ${label}`);
   save();
 }
-async function api(method, route, body, timeout = 30000) {
-  const response = await fetch(new URL(route, endpoint), {
-    method,
-    headers: { "Content-Type": "application/json" },
-    ...(body === undefined ? {} : { body: JSON.stringify(body) }),
-    signal: AbortSignal.timeout(timeout),
-  });
-  const result = await response.json();
-  if (!response.ok || result.value?.error)
-    throw Error(`${method} ${route}: ${JSON.stringify(result.value).slice(0, 3000)}`);
-  return result.value;
+async function api(method, route, body, timeout = 65000) {
+  try {
+    return await requestAppiumJson({ endpoint, method, route, body, timeout });
+  } catch (error) {
+    let serverProcess;
+    const pid = Number(process.env.ATHRECS_APPIUM_PROCESS);
+    if (Number.isSafeInteger(pid) && pid > 0) {
+      try {
+        process.kill(pid, 0);
+        serverProcess = { pid, alive: true };
+      } catch (processError) {
+        serverProcess = { pid, alive: false, code: processError.code };
+      }
+    }
+    report.lastRequestFailure = {
+      method,
+      route,
+      timeout,
+      elapsedMs: error.elapsedMs,
+      statusCode: error.statusCode,
+      message: error.message,
+      code: error.code,
+      cause: error.cause
+        ? { name: error.cause.name, message: error.cause.message, code: error.cause.code }
+        : undefined,
+      serverProcess,
+    };
+    save();
+    throw error;
+  }
 }
 const command = (method, route, body, timeout) =>
   api(method, `/session/${sessionId}${route}`, body, timeout);
@@ -97,16 +121,38 @@ async function describe(element) {
 }
 async function named(label) {
   return until(`native element ${label}`, async () => {
-    const matches = await find(`${labelPredicate(label)} AND enabled == true`);
+    // Mobile Safari exposes a labelled Link/Button and often a same-named
+    // StaticText child. Only the actionable parent is a menu control.
+    const matches = await find(
+      `${labelPredicate(label)} AND type IN {"XCUIElementTypeLink", "XCUIElementTypeButton"} AND enabled == true`,
+    );
     if (!matches.length) return null;
     assert.equal(matches.length, 1, `Ambiguous native menu control: ${label}`);
     return describe(matches[0]);
   });
 }
 const trueAttribute = (value) => value === true || value === "true" || value === 1;
-async function showControl(control, { hittable = false, enabled = true } = {}) {
+async function showControl(control, { hittable = false, enabled = true, webContent = true } = {}) {
   const { element, label, type } = control;
-  await mobile("scrollToElement", { elementId: element[elementKey] });
+  let clearanceIndex, clearance;
+  if (webContent) {
+    clearanceIndex = report.visibilityChecks.length;
+    clearance = await ensureNativeControlClear({
+      control,
+      mobile,
+      command,
+      find,
+      attribute,
+      record: (evidence) => {
+        report.visibilityChecks[clearanceIndex] = { phase, ...evidence };
+        save();
+      },
+    });
+  } else {
+    const alreadyVisible = trueAttribute(await attribute(element, "visible"));
+    const alreadyHittable = alreadyVisible && trueAttribute(await attribute(element, "hittable"));
+    if (!alreadyHittable) await mobile("scrollToElement", { elementId: element[elementKey] });
+  }
   const state = await until(
     `visible${hittable ? "/hittable" : ""} native control ${label}`,
     async () => {
@@ -127,10 +173,17 @@ async function showControl(control, { hittable = false, enabled = true } = {}) {
     type,
     elementId: element[elementKey],
     ...state,
+    accessible: trueAttribute(await attribute(element, "accessible")),
+    ...(clearanceIndex === undefined ? {} : { clearanceIndex }),
     rect: await command("GET", `/element/${element[elementKey]}/rect`),
   };
   report.controls.push(evidence);
   save();
+  if (clearance)
+    assert(
+      rectIsClear(evidence.rect, clearance.viewport),
+      "Native web control moved outside the observed clear viewport before use",
+    );
   return evidence;
 }
 async function tap(targetControl, { shareMustBeOpen = false } = {}) {
@@ -150,14 +203,31 @@ async function tap(targetControl, { shareMustBeOpen = false } = {}) {
     assert(!(await shareClosed()), "Share must still be open immediately before the outside tap");
     evidence.shareWasOpenBeforeTap = true;
   }
+  const measured = evidence.rect;
+  assert(measured.width > 0 && measured.height > 0, "Native target must have a nonempty rectangle");
+  // A web summary can be an inaccessible AX container with an accessible text
+  // child. Tap its observed screen centre directly, without asking XCTest to
+  // choose an accessibility activation point. The preceding local input probe
+  // must independently prove that this route delivers one trusted browser tap.
+  const point = {
+    x: measured.x + measured.width / 2,
+    y: measured.y + measured.height / 2,
+  };
+  const currentRect = await command("GET", `/element/${element[elementKey]}/rect`);
+  for (const key of ["x", "y", "width", "height"])
+    assert(
+      Math.abs(currentRect[key] - measured[key]) <= 1,
+      `Native target moved before tap: ${key}`,
+    );
   report.taps.push({
     ...evidence,
-    method: "XCTest element click",
+    point,
+    method: "XCTest tap at the measured native screen centre",
     at: new Date().toISOString(),
   });
   save();
-  // Exactly one click; a missing state transition fails instead of retapping.
-  await command("POST", `/element/${element[elementKey]}/click`, {});
+  // Exactly one touch; a missing state transition fails instead of retapping.
+  await mobile("tap", point);
 }
 async function verifyLabels(labels, label) {
   const found = [];
@@ -179,7 +249,7 @@ async function shareClosed() {
   return matches.length === 0;
 }
 async function screenshot(label, orientation) {
-  const png = Buffer.from(await command("GET", "/screenshot", undefined, 15000), "base64");
+  const png = Buffer.from(await command("GET", "/screenshot", undefined, 65000), "base64");
   assert(png.subarray(1, 4).equals(Buffer.from("PNG")), "Expected a native PNG screenshot");
   const size = { width: png.readUInt32BE(16), height: png.readUInt32BE(20) };
   fs.writeFileSync(`${prefix}-${label}.png`, png);
@@ -191,7 +261,7 @@ async function screenshot(label, orientation) {
   return size;
 }
 async function saveSource(label) {
-  const xml = await command("GET", "/source", undefined, 15000);
+  const xml = await command("GET", "/source", undefined, 65000);
   assert.equal(typeof xml, "string");
   fs.writeFileSync(`${prefix}-${label}.xml`, xml);
   return xml;
@@ -319,6 +389,44 @@ async function checkView(orientation) {
   passed(`${orientation}: all actions remained in installed Mobile Safari`);
 }
 
+async function checkSystemSharing(view) {
+  const { orientation } = view;
+  mark(`${orientation}: return to the first distance for native sharing`);
+  await command("POST", "/orientation", { orientation });
+  assert.equal(await command("GET", "/orientation"), orientation);
+  await mobile("deepLink", { url: target + "#race-schedule", bundleId });
+  assert.equal((await mobile("activeAppInfo")).bundleId, bundleId);
+  const [first] = await discoverRows();
+  assert(await shareClosed(), "System-sharing check starts with the web disclosure closed");
+  await tap(first.share);
+  mark(`${orientation}: open and cancel the native system share sheet`);
+  view.nativeShareSheet = await verifyNativeShareSheet({
+    mobile,
+    command,
+    find,
+    attribute,
+    describe,
+    showControl: (control, options) =>
+      showControl(control, { ...options, webContent: control.label === "More sharing options" }),
+    screenshot,
+    saveSource,
+    until,
+    target,
+    orientation,
+    platformVersion:
+      report.capabilities.platformVersion || report.capabilities["appium:platformVersion"],
+    record: (evidence) => {
+      view.nativeShareSheet = evidence;
+      save();
+    },
+    save,
+  });
+  passed(`${orientation}: native system share sheet opens, cancels and reopens without copying`);
+
+  await tap(first.share);
+  await until("sharing closed after native sheet cancellation", shareClosed);
+}
+
 try {
   assert.equal(process.platform, "darwin", "Native iOS testing requires macOS");
   assert.equal(endpoint.protocol, "http:");
@@ -331,13 +439,22 @@ try {
     "Use a credential-free Appium root URL",
   );
   const setup = JSON.parse(fs.readFileSync("artifacts/race-actions-safari-ios-setup.json", "utf8"));
+  report.serverStartup = JSON.parse(
+    fs.readFileSync("artifacts/race-actions-ios-native-server-startup.json", "utf8"),
+  );
+  assert.equal(report.serverStartup.status, "ready", "Appium must be ready before Simulator boot");
+  assert.equal(
+    report.serverStartup.lastResponse?.version,
+    "3.8.0",
+    "Unexpected Appium server version",
+  );
   const appiumManagedStartup = setup.mode === "appium-managed";
   if (appiumManagedStartup) {
     assert.equal(setup.status, "selected", "Managed startup requires a completed device selection");
   } else {
     assert.equal(setup.status, "passed", "The installed Simulator must finish setup");
   }
-  const sessionCreationTimeout = appiumManagedStartup ? 600000 : 180000;
+  const sessionCreationTimeout = 600000;
   report.startup = {
     owner: appiumManagedStartup ? "Appium XCUITest" : "Simulator preparation script",
     preparationMode: setup.mode || "prebooted",
@@ -440,9 +557,18 @@ try {
     "appium:screenshotQuality": 0,
     "appium:showXcodeLog": true,
     "appium:wdaLaunchTimeout": 120000,
-    "appium:wdaConnectionTimeout": 30000,
+    "appium:wdaConnectionTimeout": 60000,
     "appium:wdaStartupRetries": 1,
-    "appium:newCommandTimeout": 90,
+    "appium:newCommandTimeout": 120,
+    // State assertions below remain explicit. Avoid spending ten seconds on
+    // each XCTest idle check while Safari's first-boot services are settling.
+    "appium:waitForIdleTimeout": 1,
+    // The iOS 18 runner reached WDA but XCTest's plain Safari launch timed
+    // out. This supported URL launch uses the alternative native launch path;
+    // the same session, fixture and production assertions still follow.
+    ...(selected.runtime.version === "18.5"
+      ? { "appium:initialDeeplinkUrl": target + "#race-schedule" }
+      : {}),
     ...prebuiltCapabilities,
     ...(appiumManagedStartup
       ? {
@@ -473,7 +599,29 @@ try {
   );
   await command("POST", "/timeouts", { implicit: 0 });
   await mobile("activateApp", { bundleId });
+  await command("POST", "/orientation", { orientation: "PORTRAIT" });
+  report.inputProbe = await verifyNativeSafariInput({
+    mobile,
+    command,
+    find,
+    attribute,
+    describe,
+    // The controlled fixture has no fixed site navigation. Its independent
+    // trusted-event telemetry and screenshots prove each actual target hit.
+    showControl: (control, options) => showControl(control, { ...options, webContent: false }),
+    screenshot,
+    saveSource,
+    record: (evidence) => {
+      report.inputProbe = evidence;
+      save();
+    },
+    phase: mark,
+  });
+  passed(
+    "Native centre taps deliver one trusted click on a button and a disclosure in Mobile Safari",
+  );
   for (const orientation of ["PORTRAIT", "LANDSCAPE"]) await checkView(orientation);
+  for (const view of report.views) await checkSystemSharing(view);
   report.status = "passed";
   mark("complete");
 } catch (error) {
@@ -483,20 +631,30 @@ try {
   save();
   console.error(`FAIL native iOS Safari (${phase}): ${error.stack}`);
   if (sessionId) {
-    const diagnostics = await Promise.allSettled([
-      saveSource("failure"),
-      screenshot("failure"),
-      mobile("activeAppInfo", {}, 10000),
-    ]);
-    report.failure.diagnostics = diagnostics.map((result, index) => ({
-      kind: ["native accessibility XML", "native screenshot", "active app"][index],
-      status: result.status,
-      ...(result.status === "rejected"
-        ? { error: result.reason.message }
-        : index === 2
-          ? { value: result.value }
-          : {}),
-    }));
+    // XCTest has one command stream. Serial diagnostic reads avoid queueing
+    // three expensive native snapshots behind a stalled request.
+    report.failure.diagnostics = [];
+    for (const [kind, collect] of [
+      ["native accessibility XML", () => saveSource("failure")],
+      ["native screenshot", () => screenshot("failure")],
+      ["active app", () => mobile("activeAppInfo", {}, 65000)],
+    ]) {
+      try {
+        const value = await collect();
+        report.failure.diagnostics.push({
+          kind,
+          status: "fulfilled",
+          ...(kind === "active app" ? { value } : {}),
+        });
+      } catch (diagnosticError) {
+        report.failure.diagnostics.push({
+          kind,
+          status: "rejected",
+          error: diagnosticError.message,
+        });
+      }
+      save();
+    }
   }
 } finally {
   if (sessionId) {

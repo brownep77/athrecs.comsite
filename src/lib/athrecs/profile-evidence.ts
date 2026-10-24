@@ -1,4 +1,8 @@
 import { sourceHistorySport } from "./source-history-sport.ts";
+import {
+  profileResultLicenceCredits,
+  publicResultLicenceCreditIds,
+} from "./public-result-licence.ts";
 
 /** A browser projection only. Stored records and staff reads retain original evidence.
  * Opaque, response-local keys preserve source-based duplicate matching without URLs.
@@ -50,6 +54,8 @@ export function withoutProfileEvidence<T>(value: T): T {
           : /^(?:athlete|Athlete-submitted)$/i.test(String(item ?? ""))
             ? "Athlete-submitted"
             : "Recorded results";
+      } else if (key === "publicLicenceCredits") {
+        output[key] = publicResultLicenceCreditIds(item);
       } else if (key === "performances" && Array.isArray(item)) {
         output[key] = item.map((performance) => visit(performance, provider));
       } else if (key === "key" && "performance" in row && "sport" in row) {
@@ -112,6 +118,17 @@ export function withoutProfileEvidence<T>(value: T): T {
           )
           .map((item) => visit(item));
       else output[key] = visit(item);
+    }
+    if (Array.isArray(row.performances)) {
+      const publicLicenceCredits = profileResultLicenceCredits([
+        {
+          provider: row.provider,
+          publicLicenceCredits: row.publicLicenceCredits,
+          performances: row.performances,
+        },
+      ]);
+      if (publicLicenceCredits.length) output.publicLicenceCredits = publicLicenceCredits;
+      else delete output.publicLicenceCredits;
     }
     return output;
   };

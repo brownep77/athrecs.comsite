@@ -4,6 +4,8 @@ import { sourceHistorySports } from "@/lib/athrecs/profile-history-results";
 import { CountryFlag } from "./CountryFlag";
 import { ProfileRecordHighlights } from "./ProfileAchievements";
 import { CompactResults } from "./CompactResultsTable";
+import { PublicResultLicenceCredits } from "./PublicResultLicenceCredits";
+import { profileResultLicenceCredits } from "@/lib/athrecs/public-result-licence";
 import { UpcomingTable } from "./UpcomingEvents";
 import { ProfileDetails } from "./ProfileDetails";
 import { Link } from "@tanstack/react-router";
@@ -120,6 +122,9 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
         className="scroll-mt-24 rounded-xl border border-border bg-surface p-4 sm:p-5"
       >
         <CompactResults results={timeline.results} historyResults={timeline.history} />
+        <PublicResultLicenceCredits
+          credits={profileResultLicenceCredits(profile.sourceHistories ?? [])}
+        />
       </section>
       {profile.upcoming.length > 0 ? (
         <details className="rounded-lg border border-border bg-surface p-3">

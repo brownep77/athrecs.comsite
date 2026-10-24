@@ -1,13 +1,25 @@
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { listClubs } from "@/lib/athrecs/api";
 import { ClubCard } from "@/components/clubs/ClubCard";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/clubs/")({
+  validateSearch: (search: Record<string, unknown>): { sport?: string } => {
+    // Clubs include disciplines beyond the public event catalogue, such as
+    // TrackAndField. Keep those stored labels usable rather than narrowing the
+    // existing directory to the homepage's seven sport tabs.
+    const sport = typeof search.sport === "string" ? search.sport.trim() : "";
+    return {
+      sport:
+        sport && sport.length <= 60 && sport !== "All" && sport !== "All sports"
+          ? sport
+          : undefined,
+    };
+  },
   loader: () => listClubs({ data: {} }),
   head: () =>
     IS_RUNRECS_SITE
@@ -26,9 +38,10 @@ export const Route = createFileRoute("/clubs/")({
 
 function ClubsPage() {
   const initial = Route.useLoaderData();
+  const { sport = "" } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
   const [q, setQ] = useState("");
   const [country, setCountry] = useState("");
-  const [sport, setSport] = useState("");
   const [page, setPage] = useState(1);
   const { data = initial } = useQuery({
     queryKey: ["clubs", q],
@@ -39,7 +52,9 @@ function ClubsPage() {
     refetchOnMount: false,
   });
   const countries = [...new Set(initial.map((club) => club.country).filter(Boolean))].sort();
-  const sports = [...new Set(initial.flatMap((club) => club.sports))].sort();
+  const sports = [
+    ...new Set([...initial.flatMap((club) => club.sports), ...(sport ? [sport] : [])]),
+  ].sort();
   const filtered = data.filter(
     (club) => (!country || club.country === country) && (!sport || club.sports.includes(sport)),
   );
@@ -121,7 +136,11 @@ function ClubsPage() {
             aria-label="Sport"
             value={sport}
             onChange={(e) => {
-              setSport(e.target.value);
+              void navigate({
+                to: "/clubs",
+                search: { sport: e.target.value || undefined },
+                resetScroll: false,
+              });
               setPage(1);
             }}
             className="ml-2 min-h-11 rounded-lg border border-border bg-surface px-3"

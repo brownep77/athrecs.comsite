@@ -51,12 +51,37 @@ assert.deepEqual(
 );
 
 const homepage = await readFile(resolve(root, "src/routes/index.tsx"), "utf8");
-assert.match(homepage, /Race board/);
-assert.match(homepage, /boardView === "results"/);
-assert.match(homepage, /regional\.map/);
-assert.match(homepage, /HOME_SPORTS\.map/);
-assert.match(homepage, /Ultra marathon/);
+const discovery = await readFile(
+  resolve(root, "src/components/discovery/CompactDiscoveryPage.tsx"),
+  "utf8",
+);
+const header = await readFile(
+  resolve(root, "src/components/discovery/CompactDiscoveryHeader.tsx"),
+  "utf8",
+);
+const navigation = await readFile(
+  resolve(root, "src/components/discovery/discovery-navigation.ts"),
+  "utf8",
+);
+assert.match(homepage, /getRunningFixtures\(\{\s*data:\s*deps\s*\}\)/);
+assert.match(homepage, /parseSportFixtureSearch\(raw\)/);
+assert.match(homepage, /<CompactDiscoveryPage\b/);
+assert.match(discovery, /\/results\?category=all-running/);
+assert.match(header, /QUICK_SPORTS\.map/);
+for (const path of [
+  "/sports/track-and-field",
+  "/sports/triathlon",
+  "/sports/road-cycling",
+  "/sports/swimming",
+  "/sports/duathlon",
+  "/sports/parkrun",
+  "/?distance=Ultra",
+]) {
+  assert(navigation.includes(`path: "${path}"`), `Missing sport shortcut ${path}`);
+}
 assert.doesNotMatch(homepage, /dangerouslySetInnerHTML/);
+assert.doesNotMatch(discovery, /dangerouslySetInnerHTML/);
+assert.doesNotMatch(header, /dangerouslySetInnerHTML/);
 
 const api = await readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8");
 const updatesStart = api.indexOf("export const getHomeSportUpdates");
@@ -67,4 +92,6 @@ assert.match(updatesSource, /from edition_result_links/);
 assert.match(updatesSource, /from events event/);
 assert.doesNotMatch(updatesSource, /fetch\(|rss|newsapi/i);
 
-console.log("Homepage all-sport counts and copyright-safe regional updates verified");
+console.log(
+  "Compact Running homepage, sport/result shortcuts and copyright-safe regional updates verified",
+);
