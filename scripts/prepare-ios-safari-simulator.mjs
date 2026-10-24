@@ -5,7 +5,6 @@ import { promisify } from "node:util";
 const exec = promisify(execFile);
 const commandTimeout = 20_000;
 const bootTimeout = 180_000;
-const verificationTimeout = 60_000;
 const udidPattern = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const artifactPrefix = "artifacts/race-actions-safari-ios-setup";
 const started = Date.now();
@@ -101,6 +100,39 @@ async function inventory(args, timeout = commandTimeout) {
   }
 }
 
+async function recordToolchain() {
+  const commands = [
+    { name: "developerDirectory", file: "/usr/bin/xcode-select", args: ["-p"] },
+    { name: "xcodeVersion", file: "/usr/bin/xcodebuild", args: ["-version"] },
+  ];
+  const results = await Promise.allSettled(
+    commands.map(({ file, args }) =>
+      exec(file, args, {
+        encoding: "utf8",
+        timeout: commandTimeout,
+        killSignal: "SIGKILL",
+        maxBuffer: 64 * 1024,
+      }),
+    ),
+  );
+  report.toolchain = {};
+  for (const [index, result] of results.entries()) {
+    const { name, file, args } = commands[index];
+    const diagnostic = { command: `${file} ${args.join(" ")}`, timeoutMs: commandTimeout };
+    if (result.status === "fulfilled") {
+      diagnostic.output = result.value.stdout.trim();
+      if (result.value.stderr.trim()) diagnostic.stderr = result.value.stderr.trim();
+      note(`${diagnostic.command}: ${diagnostic.output}`);
+    } else {
+      diagnostic.error = String(result.reason.message).slice(-1200);
+      diagnostic.timedOut = Boolean(result.reason.killed);
+      note(`Toolchain diagnostic failed: ${diagnostic.command}: ${diagnostic.error}`);
+    }
+    report.toolchain[name] = diagnostic;
+  }
+  await saveDiagnostics();
+}
+
 function compareVersions(a, b) {
   const left = String(a).split(".").map(Number);
   const right = String(b).split(".").map(Number);
@@ -160,6 +192,8 @@ async function main() {
   if (process.platform !== "darwin" || process.env.GITHUB_ACTIONS !== "true") {
     throw new Error("This setup runs only in GitHub Actions on a macOS runner.");
   }
+  await phase("toolchain");
+  await recordToolchain();
   await phase("inventory");
   const [deviceInventory, runtimeInventory] = await Promise.all([
     inventory(["list", "devices", "available", "--json"]),
@@ -186,35 +220,41 @@ async function main() {
   }
   await phase("bootstatus");
   await simctl(["bootstatus", device.udid, "-b"], bootTimeout);
-
-  await phase("verify-booted");
-  // A fresh iOS runtime can still be busy immediately after bootstatus returns.
-  // Ask only for booted devices and give this final state check a bounded minute.
-  const afterBoot = await inventory(["list", "devices", "booted", "--json"], verificationTimeout);
-  const actual = afterBoot.devices?.[runtime.identifier]?.find(
-    (candidate) => candidate.udid === device.udid,
-  );
-  report.observedDevice = {
-    udid: device.udid,
-    state: actual?.state ?? "missing",
-    isAvailable: actual?.isAvailable ?? false,
+  // Post-boot inventory queries can hang even after bootstatus exits successfully.
+  // The next step must prove readiness by creating native Safari and loading the
+  // public page; this setup records only the preliminary bootstatus evidence.
+  report.readiness = {
+    evidence: "xcrun simctl bootstatus exited 0",
+    exitCode: 0,
+    deviceUDID: device.udid,
+    observedAt: new Date().toISOString(),
+    finalProofRequired: "Native Safari session, navigation and application checks must pass",
   };
-  if (actual?.state !== "Booted" || actual.isAvailable !== true) {
-    throw new Error(
-      `${device.name} (${device.udid}) did not remain available and Booted after bootstatus; ` +
-        `observed state: ${actual?.state ?? "missing"}.`,
-    );
-  }
   await phase("export-environment");
+  const environment = {
+    ATHRECS_SAFARI_DEVICE_UDID: device.udid,
+    ATHRECS_SAFARI_PLATFORM: "ios",
+    ATHRECS_SAFARI_DEVICE_NAME: device.name,
+    ATHRECS_SAFARI_RUNTIME_VERSION: runtime.version,
+  };
+  for (const value of Object.values(environment)) {
+    if (typeof value !== "string" || !value || /[\r\n\0]/.test(value)) {
+      throw new Error("Selected Simulator metadata cannot be exported safely.");
+    }
+  }
   if (process.env.GITHUB_ENV) {
     await appendFile(
       process.env.GITHUB_ENV,
-      `ATHRECS_SAFARI_DEVICE_UDID=${device.udid}\nATHRECS_SAFARI_PLATFORM=ios\n`,
+      Object.entries(environment)
+        .map(([key, value]) => `${key}=${value}\n`)
+        .join(""),
       "utf8",
     );
   }
   report.environmentExported = Boolean(process.env.GITHUB_ENV);
-  note(`Ready: ${device.name} | ${runtime.name} | ${device.udid}`);
+  note(
+    `Bootstatus completed: ${device.name} | ${runtime.name} | ${device.udid}; native Safari must now verify readiness.`,
+  );
 }
 
 async function run() {

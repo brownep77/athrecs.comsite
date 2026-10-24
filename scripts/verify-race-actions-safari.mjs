@@ -6,7 +6,7 @@ import { setTimeout as pause } from "node:timers/promises";
 // Native Safari, not Playwright WebKit. Runner setup must first enable safaridriver.
 // Protocol: https://www.w3.org/TR/webdriver2/ ; iOS: https://webkit.org/blog/9395/
 const platform = process.env.ATHRECS_SAFARI_PLATFORM || "macos";
-const deviceUDID = process.env.ATHRECS_SAFARI_DEVICE_UDID;
+let deviceUDID = process.env.ATHRECS_SAFARI_DEVICE_UDID;
 const target = "https://www.athrecs.com/races/holkham-half-10k";
 const prefix = `artifacts/race-actions-safari-${platform}`;
 const elementKey = "element-6066-11e4-a52e-4f735466cecf";
@@ -200,26 +200,35 @@ try {
   assert(["macos", "ios"].includes(platform), "ATHRECS_SAFARI_PLATFORM must be macos or ios");
   report.hostMacOSVersion = execFileSync("/usr/bin/sw_vers", ["-productVersion"], {
     encoding: "utf8",
+    timeout: 10000,
+    killSignal: "SIGKILL",
   }).trim();
   if (platform === "ios") {
-    const inventory = JSON.parse(
-      execFileSync("/usr/bin/xcrun", ["simctl", "list", "--json"], { encoding: "utf8" }),
+    const setup = JSON.parse(fs.readFileSync(`${prefix}-setup.json`, "utf8"));
+    assert.equal(setup.status, "passed", "iOS Simulator setup did not complete successfully");
+    assert.equal(setup.readiness?.exitCode, 0, "Missing successful bootstatus evidence");
+    const selected = setup.selectedDevice;
+    assert(selected?.name && selected.runtime?.version, "Missing selected Simulator metadata");
+    assert.match(selected.udid, /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i);
+    deviceUDID ??= selected.udid;
+    assert.equal(
+      deviceUDID.toLowerCase(),
+      selected.udid.toLowerCase(),
+      "Requested Simulator differs from setup",
     );
-    report.simulators = Object.entries(inventory.devices).flatMap(([runtime, devices]) =>
-      devices
-        .filter((device) => (deviceUDID ? device.udid === deviceUDID : device.state === "Booted"))
-        .map((device) => ({
-          name: device.name,
-          udid: device.udid,
-          state: device.state,
-          runtime:
-            inventory.runtimes.find((item) => item.identifier === runtime)?.version ?? runtime,
-        })),
+    assert.equal(
+      setup.readiness.deviceUDID,
+      selected.udid,
+      "Bootstatus evidence belongs to another Simulator",
     );
-    assert(
-      report.simulators.some((device) => device.state === "Booted"),
-      "Requested iOS Simulator is not booted",
-    );
+    report.simulatorSetup = {
+      selectedDevice: selected,
+      readiness: setup.readiness,
+      toolchain: setup.toolchain,
+    };
+    report.simulators = [
+      { name: selected.name, udid: selected.udid, runtime: selected.runtime.version },
+    ];
   }
   driver = spawn("/usr/bin/safaridriver", ["--port", "4444"], {
     stdio: ["ignore", "pipe", "pipe"],
@@ -251,13 +260,39 @@ try {
       ...(deviceUDID ? { "safari:deviceUDID": deviceUDID } : {}),
     });
   phase = "create native Safari session";
-  const session = await api("POST", "/session", { capabilities: { alwaysMatch: capabilities } });
+  report.requestedCapabilities = capabilities;
+  console.log("REQUEST NATIVE SAFARI: " + JSON.stringify(capabilities));
+  const session = await api(
+    "POST",
+    "/session",
+    { capabilities: { alwaysMatch: capabilities } },
+    60000,
+  );
   sessionId = session.sessionId;
   report.capabilities = session.capabilities;
   assert(sessionId);
   assert.equal(session.capabilities.browserName.toLowerCase(), "safari");
-  assert(session.capabilities.browserVersion, "Safari did not return a browser version");
-  assert.match(session.capabilities.platformName, platform === "ios" ? /ios/i : /mac/i);
+  assert.equal(
+    typeof session.capabilities.browserVersion,
+    "string",
+    "Safari did not return a browser version",
+  );
+  assert(session.capabilities.browserVersion.trim(), "Safari returned an empty browser version");
+  assert.match(session.capabilities.platformName, platform === "ios" ? /^ios$/i : /mac/i);
+  if (platform === "ios") {
+    if (session.capabilities["safari:deviceUDID"] !== undefined)
+      assert.equal(
+        String(session.capabilities["safari:deviceUDID"]).toLowerCase(),
+        deviceUDID.toLowerCase(),
+        "Safari returned a different Simulator UDID",
+      );
+    if (session.capabilities["safari:useSimulator"] !== undefined)
+      assert.equal(
+        session.capabilities["safari:useSimulator"],
+        true,
+        "Safari did not report a Simulator session",
+      );
+  }
   report.coverage =
     platform === "ios"
       ? "Native Safari in iOS Simulator; not physical hardware"

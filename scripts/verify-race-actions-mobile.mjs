@@ -77,8 +77,8 @@ async function checkLayout(page, panel, width, label) {
     // Centering establishes reachability in a short viewport without pretending
     // that a desktop scroll command tests physical finger-swipe behavior.
     await control.evaluate((el) => el.scrollIntoView({ block: "center", inline: "nearest" }));
-    const box = await control.boundingBox();
-    const sizing = await control.evaluate((el) => ({
+    const { box, ...sizing } = await control.evaluate((el) => ({
+      box: el.getBoundingClientRect().toJSON(),
       label: el.textContent.trim(),
       width: el.offsetWidth,
       height: el.offsetHeight,
@@ -251,7 +251,89 @@ async function nativeAndClipboardFallbacks(page, summary, expectedUrl, title) {
   return { mockedNativeCalls: 3, manualSelection: selection.text || "not exposed by this engine" };
 }
 
+async function checkDelayedHydration() {
+  // Hold the production scripts deliberately, tap once using native HTML,
+  // then release hydration and require the same menu to remain open.
+  const delayed = await browser.newContext({
+    ...profileOptions("iPhone 13"),
+    serviceWorkers: "block",
+  });
+  let release;
+  const gate = new Promise((resolve) => {
+    release = resolve;
+  });
+  let page;
+  let phase = "loading server HTML";
+  const consoleErrors = [];
+  try {
+    page = await delayed.newPage();
+    page.on("console", (message) => {
+      if (message.type() === "error") consoleErrors.push(message.text());
+    });
+    await delayed.route("**/*", async (route) => {
+      if (route.request().resourceType() === "script") await gate;
+      await route.continue();
+    });
+    await page.goto(origin + routes[1], { waitUntil: "commit" });
+    const summary = page.locator(shareSelector).first();
+    const panel = group(summary, "Sharing options");
+    const copy = panel.getByRole("button", { name: "Copy link", exact: true });
+    assert(await copy.isDisabled(), "London action is genuinely pre-hydration");
+    phase = "single native tap before hydration";
+    await summary.tap();
+    assert(await panel.isVisible(), "one pre-hydration touch opens the London sharing panel");
+    release();
+    phase = "hydration preserves the opened disclosure";
+    await copy.tap({ trial: true, timeout: 30000 });
+    assert(await panel.isVisible(), "London sharing panel remains open after hydration");
+    await inspectSharing(
+      panel,
+      origin + routes[1],
+      (await summary.getAttribute("aria-label")).slice(6),
+    );
+    console.log(
+      "PASS WebKit iPhone London: one touch before delayed hydration; open panel and correct links preserved after hydration.",
+    );
+  } catch (error) {
+    if (page) {
+      await page
+        .screenshot({
+          path: "artifacts/race-actions-mobile-webkit-delayed-failure.png",
+          fullPage: true,
+        })
+        .catch(() => {});
+      fs.writeFileSync(
+        "artifacts/race-actions-mobile-webkit-delayed-failure.json",
+        JSON.stringify(
+          {
+            phase,
+            error: error.message,
+            consoleErrors,
+            state: await page
+              .evaluate(() =>
+                [...document.querySelectorAll('summary[aria-label^="Share "]')].map((el) => ({
+                  label: el.getAttribute("aria-label"),
+                  open: el.parentElement.open,
+                  ready: !el.parentElement.querySelector("button")?.disabled,
+                })),
+              )
+              .catch(() => []),
+          },
+          null,
+          2,
+        ),
+      );
+    }
+    throw error;
+  } finally {
+    release();
+    await delayed.unrouteAll({ behavior: "wait" });
+    await delayed.close();
+  }
+}
+
 try {
+  if (engine === "webkit") await checkDelayedHydration();
   for (const name of profiles[engine]) {
     const options = profileOptions(name);
     const context = await browser.newContext({
@@ -263,14 +345,18 @@ try {
     const page = await context.newPage();
     page.setDefaultTimeout(15000);
     const errors = [];
+    const consoleErrors = [];
     page.on("pageerror", (error) => errors.push(error.message));
+    page.on("console", (message) => {
+      if (message.type() === "error") consoleErrors.push(message.text());
+    });
     await context.addInitScript(
       ({ name }) => {
         window.__trustedTouchCount = 0;
         document.addEventListener("pointerdown", (event) => {
           if (event.isTrusted && event.pointerType === "touch") window.__trustedTouchCount++;
         });
-        if (name === "iPhone 13" && location.pathname === "/running/races/london-marathon") {
+        if (location.pathname === "/running/races/london-marathon") {
           const ids = new WeakMap();
           let nextId = 0;
           const id = (el) => {
@@ -291,6 +377,10 @@ try {
               time: performance.now(),
               scrollY,
               fonts: document.fonts.status,
+              analyticsBanner: document
+                .querySelector('section[aria-labelledby="analytics-choices-title"]')
+                ?.getBoundingClientRect()
+                .toJSON(),
               ...data,
               summaries: window.__raceSummaryState(),
             });
@@ -457,19 +547,22 @@ try {
       fs.writeFileSync(
         `${stem}-failure.json`,
         JSON.stringify(
-          await page
-            .evaluate(() => ({
-              url: location.href,
-              state: window.__raceSummaryState?.(),
-              trace: window.__raceActionTrace,
-              awaited: window.__awaitedShareSummary
-                ? {
-                    connected: window.__awaitedShareSummary.isConnected,
-                    open: window.__awaitedShareSummary.parentElement?.open,
-                  }
-                : null,
-            }))
-            .catch(() => ({})),
+          {
+            consoleErrors,
+            ...(await page
+              .evaluate(() => ({
+                url: location.href,
+                state: window.__raceSummaryState?.(),
+                trace: window.__raceActionTrace,
+                awaited: window.__awaitedShareSummary
+                  ? {
+                      connected: window.__awaitedShareSummary.isConnected,
+                      open: window.__awaitedShareSummary.parentElement?.open,
+                    }
+                  : null,
+              }))
+              .catch(() => ({}))),
+          },
           null,
           2,
         ),
@@ -485,49 +578,6 @@ try {
       throw error;
     } finally {
       await context.close();
-    }
-    if (engine === "webkit" && name === "iPhone 13") {
-      // Hold the production scripts deliberately, tap once using native HTML,
-      // then release hydration and require the same menu to remain open.
-      const delayed = await browser.newContext({
-        ...profileOptions("iPhone 13"),
-        serviceWorkers: "block",
-      });
-      let release;
-      const gate = new Promise((resolve) => {
-        release = resolve;
-      });
-      try {
-        const page = await delayed.newPage();
-        await delayed.route("**/*", async (route) => {
-          if (route.request().resourceType() === "script") await gate;
-          await route.continue();
-        });
-        await page.goto(origin + routes[1], { waitUntil: "commit" });
-        const summary = page.locator(shareSelector).first();
-        const panel = group(summary, "Sharing options");
-        const copy = panel.getByRole("button", { name: "Copy link", exact: true });
-        assert(await copy.isDisabled(), "London action is genuinely pre-hydration");
-        await summary.tap();
-        assert(await panel.isVisible(), "one pre-hydration touch opens the London sharing panel");
-        release();
-        await page.waitForFunction((el) => !el.disabled, await copy.elementHandle(), {
-          timeout: 30000,
-        });
-        assert(await panel.isVisible(), "London sharing panel remains open after hydration");
-        await inspectSharing(
-          panel,
-          origin + routes[1],
-          (await summary.getAttribute("aria-label")).slice(6),
-        );
-        console.log(
-          "PASS WebKit iPhone London: one touch before delayed hydration; open panel and correct links preserved after hydration.",
-        );
-      } finally {
-        release();
-        await delayed.unrouteAll({ behavior: "wait" });
-        await delayed.close();
-      }
     }
   }
   if (engine === "webkit") {
