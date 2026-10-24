@@ -200,6 +200,7 @@ try {
     "Preliminary results",
     "Provisional results",
     "Seconds disputed; minute precision",
+    "Organiser-listed 42.00 km",
   ];
   const privateQualificationLabels = [
     "Unknown result qualification",
@@ -210,6 +211,7 @@ try {
     "Non-competitive event: private detail",
     "<b>Provisional results</b>",
     "Seconds disputed; minute precision: private detail",
+    "Organiser-listed 42.00 km: private detail",
   ];
   for (const [labels, expected] of [
     [
