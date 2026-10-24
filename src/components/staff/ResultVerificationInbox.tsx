@@ -1,3 +1,4 @@
+import { ResultCertificates } from "@/components/athletes/ResultCertificates";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -132,6 +133,9 @@ function VerificationCase({ row }: { row: Case }) {
       >
         Open this athlete’s backend
       </a>
+      {row.key.startsWith("r:") ? (
+        <ResultCertificates resultId={Number(row.key.slice(2))} staff />
+      ) : null}
       {row.note ? (
         <p className="whitespace-pre-wrap break-words text-sm">Athlete note: {row.note}</p>
       ) : null}

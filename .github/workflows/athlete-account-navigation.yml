@@ -25,6 +25,13 @@ on:
       - 'vercel.json'
       - 'scripts/verify-account-panel-ui.mjs'
       - 'scripts/verify-photo-gallery.mjs'
+      - 'scripts/verify-result-certificates.mjs'
+      - 'src/components/athletes/ResultCertificates.tsx'
+      - 'src/components/athletes/useProfileResultRefresh.ts'
+      - 'src/lib/athrecs/profile-revision*'
+      - 'src/lib/athrecs/result-certificates.server.ts'
+      - 'src/routes/api/result-certificates.ts'
+      - 'migrations/*result_certificates.sql'
       - '.github/workflows/athlete-account-navigation.yml'
   workflow_dispatch:
 permissions:
@@ -72,10 +79,16 @@ jobs:
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright
         run: node scripts/verify-photo-gallery.mjs
+      - name: Private certificates and automatic achievement refresh
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright
+        run: npm run verify:result-certificates
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: account-navigation-screenshots
-          path: artifacts/account-*.png
+          path: |
+            artifacts/account-*.png
+            artifacts/result-certificates-*.png
           if-no-files-found: ignore
           retention-days: 7

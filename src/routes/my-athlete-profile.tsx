@@ -1,3 +1,4 @@
+import { useProfileResultRefresh } from "@/components/athletes/useProfileResultRefresh";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
 import { UpcomingEventsEditor } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
@@ -53,6 +54,7 @@ export const Route = createFileRoute("/my-athlete-profile")({
 
 function MyAthleteProfilePage() {
   const { user, isPending: sessionPending, hasSessionError, retrySession } = useCurrentUserState();
+  useProfileResultRefresh(user?.id);
   const queryClient = useQueryClient();
   const [selectedSport, setSelectedSport] = useState("All sports");
   const potentialMatches = useQuery({

@@ -1,3 +1,4 @@
+import { useProfileResultRefresh } from "@/components/athletes/useProfileResultRefresh";
 import { ResultMatchingSettings } from "@/components/athletes/ResultMatchingSettings";
 import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
 import { ProfileResultsSetup } from "@/components/athletes/ProfileResultsSetup";
@@ -234,6 +235,7 @@ function accountToForm(account: AthleteAccountData): AthleteAccountInput {
 
 function AthleteAccountPage() {
   const { user, isPending, hasSessionError, retrySession } = useCurrentUserState();
+  useProfileResultRefresh(user?.id);
   if (isPending) {
     return <LoadingCard label="Checking your Athlete Account…" />;
   }
