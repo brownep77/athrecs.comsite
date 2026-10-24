@@ -22,6 +22,36 @@ are private/no-store and excluded from indexing.
   anonymous. Browser and server observations can describe the same incident;
   error counts are observations, not a count of distinct affected users.
 
+New browser reports distinguish failed queries (`data_query_error`) from failed
+mutations (`data_mutation_error`). Existing `data_error` records remain unchanged.
+Account, own-profile, claim/review and private race-calendar pages retain their
+static route name; personal path segments and all query/hash values remain hidden.
+Ordinary `Error` objects and allowlisted names on serialised/cross-realm errors
+retain their category. `UnknownError` means no recognised category was supplied,
+not a diagnosis of a particular browser problem. Arbitrary messages and stacks
+remain excluded. These improvements cannot reconstruct missing details in older
+reports or establish whether a failed mutation changed server-side data.
+
+Browser report content is unverified, but any associated account is resolved
+from the session on the server when the report arrives. An associated account
+therefore means the server accepted that session at reporting time; it does not
+prove the preceding data operation succeeded or that the visitor saw an error.
+
+## Request and session recovery
+
+Malformed plain GET requests to server functions can return a null/primitive
+value without an HTTP Response. The response middleware now returns an uncached,
+non-indexable 400 for that case instead of crashing while reading `response.status`.
+Normal RPC null results still use the framework serializer, and missing responses
+from other handlers remain failures. This does not change profile access checks.
+
+On the Athlete Account and My Athlete Profile pages, a failed initial session
+check now shows a retry card. It no longer presents the signed-out screen solely
+because the session service/network failed. Retry checks the existing session;
+an ordinary null session or explicit 401 still leads to the sign-in gate. These
+changes address reproduced failure modes, not a proven cause of any historical
+generic browser report.
+
 The log displays UK timestamps, account/entered email, outcome, method, browser
 and version, OS, broad device type, recognised browser number where available,
 approximate platform location, endpoint/page family, HTTP status, authentication
@@ -77,3 +107,28 @@ capture, OAuth/OTP/server failures, storage-outage isolation, staff-only API
 access, origin/host restrictions, filtering, pagination, retention, rate limits,
 session expiry, and desktop/mobile navigation. All accounts are synthetic and
 mail/network services are disabled. The existing quality gate runs this suite.
+
+`node scripts/verify-ios-signin.mjs` tests the Google redirect/callback and
+post-login journey in Playwright WebKit with an iPhone viewport. Install the
+Playwright WebKit browser and its host dependencies first; OpenSSL is required
+to create the disposable local HTTPS certificate. The test exercises actual
+OAuth state handling and secure host-only session cookies, first-name-only
+profile setup, reload, private profile and private calendar navigation. It uses
+an in-memory database, synthetic accounts and a simulated Google response;
+external browser/server requests are blocked and no real email is sent.
+An optional `--chromium` argument runs the same scenario in Chromium.
+This is a local WebKit regression test, not a physical iPhone or live Google
+sign-in test, and cannot reproduce production network or database conditions.
+The test retains request-failure evidence and allows only an observed cancellation
+of the background `/api/auth/get-session` request during the OAuth redirect. The
+current auth client can log that normal navigation cancellation as a
+`network_error / TypeError` even though sign-in succeeds. Other network failures,
+data-error reports and failed auth/data responses fail the test. This known
+logging noise does not establish the cause of an unrelated `data_error` report.
+
+Add `--faults` to inject a profile-data HTTP 503 and session-check HTTP 503s.
+The test verifies that the data failure is associated with the still-authenticated
+synthetic account, that the profile recovers, and that both account/profile
+session checks can recover through the retry button without signing in again.
+It then removes the synthetic browser cookies and verifies that the private
+profile is still protected. No failure is injected into the live website.

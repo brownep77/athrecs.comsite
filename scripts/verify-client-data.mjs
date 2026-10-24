@@ -6,6 +6,7 @@ import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
 import { chromium } from "playwright";
+import { runInNewContext } from "node:vm";
 
 // Prove backfill does not manufacture history or change existing totals.
 const migrationDb = new PGlite();
@@ -54,6 +55,7 @@ process.env.BETTER_AUTH_SECRET = "client-data-test-only-secret-at-least-32-chars
 const origin = "http://127.0.0.1:18247";
 process.env.BETTER_AUTH_URL = origin;
 process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
+globalThis.__athrecsFullSeedPromise__ = Promise.resolve();
 const server = await createServer({
   server: { host: "127.0.0.1", port: 18247, strictPort: true },
   cacheDir: ".client-data-vite",
@@ -118,6 +120,88 @@ try {
   database = await db.getPglite();
   const sql = await db.getSql();
   const helpers = await server.ssrLoadModule("/src/lib/athrecs/client-data.ts");
+  const diagnosticHelpers = await server.ssrLoadModule("/src/lib/athrecs/access-diagnostics.ts");
+  // A crawler opening a public preview RPC as a plain URL can produce a null
+  // terminal value. Diagnostics must not dereference a nonexistent response.
+  const previewModule = await (
+    await fetch(`${origin}/src/lib/athrecs/athlete-profile-share-api.ts`)
+  ).text();
+  const previewStart = previewModule.indexOf("const getPublicSharedProfilePreview =");
+  assert(previewStart >= 0);
+  const previewSection = previewModule.slice(
+    previewStart,
+    previewModule.indexOf(";", previewStart),
+  );
+  const previewId = previewSection.match(/createClientRpc\("([^"]+)"\)/)?.[1];
+  assert(previewId);
+  const malformedPreview = await fetch(`${origin}/_serverFn/${previewId}`);
+  assert.equal(
+    malformedPreview.status,
+    400,
+    "Malformed plain preview RPC is a client error, not a logging crash",
+  );
+  assert.match(malformedPreview.headers.get("cache-control"), /private.*no-store/);
+  assert.match(malformedPreview.headers.get("x-robots-tag"), /noindex/);
+  const validMissingPreview = await runWithStartContext({ startOptions: {} }, () =>
+    createClientRpc(previewId)({
+      method: "GET",
+      data: { slug: "synthetic-missing-profile" },
+      headers: { origin, "sec-fetch-site": "same-origin" },
+      context: {},
+    }),
+  );
+  assert.equal(
+    validMissingPreview.result,
+    null,
+    "A valid RPC still returns the original null result",
+  );
+  assert.equal(validMissingPreview.error, undefined);
+  assert.equal(
+    (
+      await database.query(
+        "select count(*)::int as n from athlete_access_events where kind='server_error'",
+      )
+    ).rows[0].n,
+    0,
+  );
+  assert.equal(diagnosticHelpers.browserErrorCode(new Error("private-message")), "Error");
+  assert.equal(
+    diagnosticHelpers.browserErrorCode(runInNewContext('new TypeError("private-message")')),
+    "TypeError",
+  );
+  assert.equal(
+    diagnosticHelpers.browserErrorCode({ name: "Error", message: "private-message" }),
+    "Error",
+  );
+  for (const error of [
+    null,
+    "private-message",
+    { name: "private-message" },
+    {
+      get name() {
+        throw new Error("private-message");
+      },
+    },
+  ])
+    assert.equal(diagnosticHelpers.browserErrorCode(error), "UnknownError");
+  for (const route of [
+    "athlete-account",
+    "my-athlete-profile",
+    "my-race-calendar",
+    "claim-results",
+    "review-results",
+  ]) {
+    const safe = diagnosticHelpers.diagnosticRoute(`/${route}?token=private-token#private-name`);
+    assert.equal(safe, `/${route}`);
+    assert.equal(
+      diagnosticHelpers.diagnosticRoute(safe),
+      safe,
+      "Server sanitisation is idempotent",
+    );
+    assert.equal(diagnosticHelpers.diagnosticRoute(`/${route}/private-name`), `/${route}/:page`);
+  }
+  assert.equal(diagnosticHelpers.diagnosticRoute("/api/race-calendar/private-token"), "/:page");
+  assert.equal(diagnosticHelpers.diagnosticRoute("/private-name"), "/:page");
   assert.equal(helpers.describeClientDevice(android).deviceType, "Mobile phone");
   assert.equal(
     helpers.describeClientDevice("Mozilla/5.0 (iPad; CPU OS 17) Version/17 Safari/605").deviceType,
@@ -421,7 +505,29 @@ try {
   assert.equal(reported.requestId, browserReport.reference);
   assert.equal((await report({ ...browserReport, userId: staff.body.user.id })).status, 400);
   assert.equal((await report(browserReport, { origin: "https://evil.example" })).status, 403);
-  for (let i = 0; i < 9; i++)
+  for (const [kind, route] of [
+    ["data_query_error", "/athlete-account"],
+    ["data_mutation_error", "/my-race-calendar"],
+  ]) {
+    const reference = crypto.randomUUID();
+    assert.equal(
+      (
+        await report({
+          ...browserReport,
+          kind,
+          route: `${route}?race=private-name`,
+          code: "Error",
+          reference,
+        })
+      ).status,
+      204,
+    );
+    const event = (await access({ q: reference })).events[0];
+    assert.equal(event.kind, kind);
+    assert.equal(event.route, route);
+    assert.equal(event.errorCode, "Error");
+  }
+  for (let i = 0; i < 7; i++)
     assert.equal((await report({ ...browserReport, reference: crypto.randomUUID() })).status, 204);
   assert.equal((await report()).status, 429);
   const stored = JSON.stringify(await sql`select * from athlete_access_events`);

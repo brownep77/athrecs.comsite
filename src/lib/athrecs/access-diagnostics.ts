@@ -6,9 +6,12 @@ export const diagnosticKinds = [
   "unhandled_rejection",
   "network_error",
   "data_error",
+  "data_query_error",
+  "data_mutation_error",
 ] as const;
 export type DiagnosticKind = (typeof diagnosticKinds)[number];
 export const browserErrorCodes = [
+  "Error",
   "TypeError",
   "ReferenceError",
   "SyntaxError",
@@ -18,8 +21,15 @@ export const browserErrorCodes = [
   "UnknownError",
 ] as const;
 export function browserErrorCode(error: unknown): (typeof browserErrorCodes)[number] {
-  const name = error instanceof Error ? error.name : "";
-  return browserErrorCodes.find((code) => code === name) ?? "UnknownError";
+  // RPC errors and errors from another browser realm need not pass instanceof.
+  // Copy only an allowlisted name, never arbitrary messages or stack traces.
+  try {
+    const name = error && typeof error === "object" ? (error as { name?: unknown }).name : null;
+    return browserErrorCodes.find((code) => code === name) ?? "UnknownError";
+  } catch {
+    // A thrown accessor/proxy must not make diagnostic reporting throw too.
+    return "UnknownError";
+  }
 }
 
 /** Route families only: never retain athlete names, email, tokens, query or hash. */
@@ -29,9 +39,14 @@ export function diagnosticRoute(path: string): string {
   const parts = clean.split("/").filter(Boolean);
   const allowed = new Set([
     "account",
+    "athlete-account",
+    "my-athlete-profile",
+    "my-race-calendar",
     "athletes",
     "athlete-results",
     "claim",
+    "claim-results",
+    "review-results",
     "claim-profile",
     "running",
     "triathlon",

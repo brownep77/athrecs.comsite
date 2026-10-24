@@ -28,10 +28,13 @@ export const DEV_USER: AppUser = {
 
 /** `useCurrentUserState()` result: the user plus the session-loading flag. */
 export type CurrentUserState = {
-  /** The user — `null` BOTH while the session loads and when signed out. */
+  /** Null while loading, after a failed check, or when confirmed signed out. */
   user: AppUser | null;
   /** True while the session is still resolving — don't treat `user: null` as signed out yet. */
   isPending: boolean;
+  /** The session could not be checked; this is not a confirmed signed-out state. */
+  hasSessionError: boolean;
+  retrySession: () => Promise<void>;
 };
 
 const subscribeToHydration = () => () => {};
@@ -65,8 +68,9 @@ function useBrowserHydrated(): boolean {
  * every hard reload:
  *
  *   import { RedirectToSignIn } from "@/lib/auth/gates";
- *   const { user, isPending } = useCurrentUserState();
+ *   const { user, isPending, hasSessionError, retrySession } = useCurrentUserState();
  *   if (isPending) return null;              // still resolving — don't redirect yet
+ *   if (hasSessionError) return <SessionCheckError onRetry={retrySession} />;
  *   if (!user) return <RedirectToSignIn />;  // definitely signed out
  *
  * `authEnabled` is a module-level constant fixed at load, so its branch remains
@@ -75,12 +79,15 @@ function useBrowserHydrated(): boolean {
 export function useCurrentUserState(): CurrentUserState {
   const browserHydrated = useBrowserHydrated();
   const session = authClient.useSession();
+  const retrySession = () => session.refetch();
 
-  if (!authEnabled) return { user: DEV_USER, isPending: false };
+  if (!authEnabled)
+    return { user: DEV_USER, isPending: false, hasSessionError: false, retrySession };
 
   // Force the same pending view on the server and on the browser's first render.
   // Once hydration completes, expose Better Auth's actual session state.
-  if (!browserHydrated) return { user: null, isPending: true };
+  if (!browserHydrated)
+    return { user: null, isPending: true, hasSessionError: false, retrySession };
 
   const user = session.data?.user;
   return {
@@ -94,6 +101,10 @@ export function useCurrentUserState(): CurrentUserState {
         }
       : null,
     isPending: session.isPending,
+    // A valid null session (or an explicit 401) means signed out. Transport and
+    // service failures must not tell an existing member to sign in again.
+    hasSessionError: !user && Boolean(session.error) && session.error?.status !== 401,
+    retrySession,
   };
 }
 

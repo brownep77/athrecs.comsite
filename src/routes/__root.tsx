@@ -23,12 +23,12 @@ import appCss from "@/styles.css?url";
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error) => {
-      reportBrowserDiagnostic("data_error", error);
+      reportBrowserDiagnostic("data_query_error", error);
     },
   }),
   mutationCache: new MutationCache({
     onError: (error) => {
-      reportBrowserDiagnostic("data_error", error);
+      reportBrowserDiagnostic("data_mutation_error", error);
     },
   }),
   defaultOptions: {
