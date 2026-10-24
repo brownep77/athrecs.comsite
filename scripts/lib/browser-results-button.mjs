@@ -1,4 +1,6 @@
-import { readLondonCollectionPage, startLondonCollection } from './london-page-collection.mjs';
+import { marathonPageReaderExpression } from './marathon-page-collection.mjs';
+import { startBrowserCollection } from './browser-page-collection.mjs';
+import { resultCollectionProvider } from '../../src/lib/results-archive/collection-provider.ts';
 /** Self-contained functions: embedded in a bookmark, with no remote scripts; handoff is an explicit click. */
 export function collectBrowserResults(doc = document) {
   const win = doc.defaultView;
@@ -68,7 +70,7 @@ export function collectBrowserResults(doc = document) {
     const body = rows.slice(headIndex + 1).filter(row => !row.closest('tfoot'));
     add(container, header, body.map(cells), body, label);
   }
-  // Mika's London layout has a separate heading row and typed fields, not table cells.
+  // Mika's labelled list layout has a separate heading row and typed fields, not table cells.
   // Match its complete header structure, checking each row's types and inline labels.
   for (const container of doc.querySelectorAll('ul.list-group-multicolumn')) {
     if (!visible(container) || container.closest('[data-athrecs-capture]')) continue;
@@ -80,7 +82,7 @@ export function collectBrowserResults(doc = document) {
     if (!header.length || !rows.length) continue;
     const heading = cell => text(cell, '.list-label');
     if (header.some(cell => !visible(cell) || !heading(cell))) {
-      warnings.push('London-style results: widen the browser window until all column headings are visible, then try again.'); continue;
+      warnings.push('Labelled results list: widen the browser window until all column headings are visible, then try again.'); continue;
     }
     const signature = cell => [...cell.classList].filter(c => c.startsWith('type-') || c === 'place-primary' || c === 'place-secondary' || c === 'split').sort().join(' ');
     const body = rows.map(fields);
@@ -88,9 +90,9 @@ export function collectBrowserResults(doc = document) {
       const inline = cell.querySelector('.list-label')?.textContent.replace(/\s+/g, ' ').trim();
       return !visible(cell) || signature(cell) !== signature(header[i]) || (inline && inline !== heading(header[i]));
     }))) {
-      warnings.push('London-style results: the row fields do not match the column headings; no rows exported.'); continue;
+      warnings.push('Labelled results list: the row fields do not match the column headings; no rows exported.'); continue;
     }
-    add(container, header, body, rows, 'London-style results', { omit: '.list-label', links: '.type-fullname a[href]' });
+    add(container, header, body, rows, 'Labelled results list', { omit: '.list-label', links: '.type-fullname a[href]' });
   }
   // Results providers also render labelled responsive lists instead of HTML tables.
   for (const container of doc.querySelectorAll('ul.list-group,ol.list-group,[data-results-list]')) {
@@ -115,7 +117,7 @@ export function collectBrowserResults(doc = document) {
   };
 }
 
-export function showBrowserResults(collect, readLondon, startCollection) {
+export function showBrowserResults(collect, readCollection, startCollection, identifyProvider) {
   const previous = document.querySelector('[data-athrecs-capture]');
   if (previous) { previous.stopCollection?.(); previous.remove(); return; }
   let capture;
@@ -182,9 +184,9 @@ export function showBrowserResults(collect, readLondon, startCollection) {
       window.addEventListener('message', receive);
       const timeout = setTimeout(() => finish('The transfer could not be confirmed. Check the AthRecs tab. If it has no capture, use Download a file instead.'), 35000);
     };
-    if (location.hostname === 'results.tcslondonmarathon.com') {
+    if (identifyProvider(location.href)) {
       try {
-        const first = readLondon(document, location.href);
+        const first = readCollection(document, location.href);
         if (first.page !== 1) throw Error('Open page 1 to collect every page for these filters.');
         make('p', `Collect every page for: ${first.filterLabel} · ${first.totalPages} pages · ${first.totalRows.toLocaleString()} results. To collect the whole field, choose All runners and remove other filters on the results website first.`);
         const all = make('button', 'Collect all pages', actions);
@@ -196,7 +198,7 @@ export function showBrowserResults(collect, readLondon, startCollection) {
           if (!target) { summary.textContent = 'Allow the AthRecs tab to open, then try Collect all pages again.'; return; }
           all.disabled = true; send.disabled = true;
           const collection = { version: 1, firstUrl: first.capture.page.url, totalPages: first.totalPages, totalRows: first.totalRows, pageSize: first.pageSize, filterLabel: first.filterLabel };
-          const stop = startCollection(first, readLondon, target, token, summary, { pause, resume });
+          const stop = startCollection(first, readCollection, target, token, summary, { pause, resume });
           let received = false;
           const ready = event => {
             if (event.source !== target || event.origin !== origin || event.data?.token !== token) return;
@@ -231,5 +233,5 @@ export function showBrowserResults(collect, readLondon, startCollection) {
 }
 
 export function browserResultsBookmark() {
-  return 'javascript:' + encodeURIComponent(`void (${showBrowserResults.toString()})(${collectBrowserResults.toString()},${readLondonCollectionPage.toString()},${startLondonCollection.toString()})`);
+  return 'javascript:' + encodeURIComponent(`void (${showBrowserResults.toString()})(${collectBrowserResults.toString()},${marathonPageReaderExpression()},${startBrowserCollection.toString()},${resultCollectionProvider.toString()})`);
 }

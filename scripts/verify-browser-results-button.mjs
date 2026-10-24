@@ -4,7 +4,8 @@ import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright';
 import ts from 'typescript';
 import { z } from 'zod';
-import { readLondonCollectionPage } from './lib/london-page-collection.mjs';
+import { marathonPageReaderExpression } from './lib/marathon-page-collection.mjs';
+import * as providers from '../src/lib/results-archive/collection-provider.ts';
 import { londonPaginationFixture, londonFixtureUrl } from './fixtures/london-pagination.mjs';
 import { collectBrowserResults, browserResultsBookmark } from './lib/browser-results-button.mjs';
 
@@ -17,7 +18,7 @@ function load(file, deps) {
 const core = load('src/lib/results-archive/core.ts', { zod: { z } });
 const captureParser = load('src/lib/results-archive/browser-capture.ts', { zod: { z }, './core': core });
 const { parseBrowserCapture } = captureParser;
-const collectionParser = load('src/lib/results-archive/browser-collection.ts', { zod: { z }, './core': core, './browser-capture': captureParser });
+const collectionParser = load('src/lib/results-archive/browser-collection.ts', { zod: { z }, './core': core, './browser-capture': captureParser, './collection-provider': providers });
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage'] });
 try {
   const context = await browser.newContext({ acceptDownloads: true });
@@ -152,7 +153,7 @@ try {
   // Pagination comes from the site's actual links; filter changes and corrupt lists stop collection.
   await page.goto(londonFixtureUrl);
   await page.setContent(londonPaginationFixture(1));
-  const plan = await page.evaluate('(' + readLondonCollectionPage.toString() + ')(document,location.href)');
+  const plan = await page.evaluate('(' + marathonPageReaderExpression() + ')(document,location.href)');
   const metadata = { version: 1, firstUrl: plan.capture.page.url, totalPages: plan.totalPages, totalRows: plan.totalRows, pageSize: plan.pageSize, filterLabel: plan.filterLabel };
   assert.deepEqual(collectionParser.collectionSchema.parse(metadata), metadata);
   collectionParser.validateCollectionPage(JSON.stringify(plan.capture), metadata, 1);
@@ -167,8 +168,56 @@ try {
   assert.equal(core.mapArchiveRows(firstPage.table, firstPage.mapping)[0].name, 'Morgan Browser Synthetic');
   for (const fixture of [londonPaginationFixture(1, { wrongHeader: true }), londonPaginationFixture(1).replace('5 Results', 'Results unavailable'), londonPaginationFixture(1).replaceAll('9002', '9001')]) {
     await page.setContent(fixture);
-    await assert.rejects(() => page.evaluate('(' + readLondonCollectionPage.toString() + ')(document,location.href)'));
+    await assert.rejects(() => page.evaluate('(' + marathonPageReaderExpression() + ')(document,location.href)'));
   }
+
+  // Host recognition alone never enables a provider whose actual layout needs review.
+  for (const host of ['results.chicagomarathon.com', 'chicago-history.r.mikatiming.com']) {
+    const url = `https://${host}/2025/?pid=list&event=synthetic-event&page=1&num_results=2`;
+    assert.equal(providers.resultCollectionProvider(url)?.automatic, false);
+    assert.throws(() => providers.resultCollectionScope(url), /inspected results-page sample/);
+    await page.goto(url);
+    await page.setContent(londonPaginationFixture(1));
+    await page.evaluate(decodeURIComponent(browserResultsBookmark().slice('javascript:'.length)));
+    assert.equal(await page.getByRole('button', { name: 'Collect all pages', exact: true }).count(), 0);
+    assert.equal(await page.getByRole('button', { name: 'Send to AthRecs', exact: true }).count(), 1);
+    assert.match(await page.getByRole('dialog').innerText(), /Chicago automatic collection needs an inspected/);
+    assert.deepEqual(providers.collectionImportDefaults(url), {
+      raceName: 'Chicago Marathon',
+      sourceUrl: `https://${host}/2025/?pid=list&event=synthetic-event`,
+      sourceRaceKey: `https://${host}/2025/?pid=list&event=synthetic-event`,
+    });
+  }
+  for (const url of [londonFixtureUrl + '&page=2', londonFixtureUrl + '&event=other', londonFixtureUrl.replace('page=1', 'page=01'), londonFixtureUrl.replace('num_results=2', 'num_results=2e0')])
+    assert.throws(() => providers.resultCollectionScope(url), /unambiguous/);
+
+  // The shared reader tolerates a genuine column reorder, mapping values by headings.
+  await page.goto(londonFixtureUrl);
+  await page.setContent(londonPaginationFixture(1));
+  await page.evaluate(() => document.querySelectorAll('.list-group-multicolumn > li').forEach(row => {
+    const fields = [...row.querySelectorAll('.list-field')].filter(el => !el.classList.contains('type-favorite'));
+    row.prepend(fields.find(el => el.classList.contains('type-fullname')));
+  }));
+  const reordered = await page.evaluate('(' + marathonPageReaderExpression() + ')(document,location.href)');
+  const reorderedCapture = parseBrowserCapture(JSON.stringify(reordered.capture));
+  const reorderedRow = core.mapArchiveRows(reorderedCapture.table, reorderedCapture.mapping)[0];
+  assert.equal(reorderedRow.name, 'Morgan Browser Synthetic');
+  assert.equal(reorderedRow.overallPlace, 1);
+  assert.equal(reorderedRow.finishSeconds, 1860);
+  // A plausible response for the wrong page must not become a new checkpoint.
+  await page.setContent(londonPaginationFixture(2));
+  await assert.rejects(() => page.evaluate('(' + marathonPageReaderExpression() + ')(document,location.href)'), /requested page and filters/);
+  await page.setContent(londonPaginationFixture(1).replace('5 Results', '1,2 Results'));
+  await assert.rejects(() => page.evaluate('(' + marathonPageReaderExpression() + ')(document,location.href)'), /missing or ambiguous/);
+  for (const query of ['?pid=list&event=OTHER', '?pid=list&event=MAS&event=OTHER']) {
+    await page.goto('https://results.tcslondonmarathon.com/2026/' + query);
+    await page.setContent(londonPaginationFixture(1));
+    await assert.rejects(() => page.evaluate('(' + marathonPageReaderExpression() + ')(document,location.href)'), /requested page and filters/);
+  }
+  // Explicit filters are preserved when the site's navigation supplies default page/size.
+  await page.goto('https://results.tcslondonmarathon.com/2026/?pid=list&event=MAS');
+  await page.setContent(londonPaginationFixture(1));
+  assert.equal((await page.evaluate('(' + marathonPageReaderExpression() + ')(document,location.href)')).totalRows, 5);
 
   // Setup page uses the exact tested bookmark, with a usable mobile layout.
   await page.setContent(readFileSync('public/tools/browser-results.html', 'utf8'));
