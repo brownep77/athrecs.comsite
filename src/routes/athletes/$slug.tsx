@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { SportBadge } from "@/components/races/EventBadges";
 import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOverview";
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
@@ -26,7 +27,7 @@ import { buildProfileTimeline } from "@/lib/athrecs/profile-timeline";
 import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
 import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
-import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect, useRouter } from "@tanstack/react-router";
 import { ArrowLeft, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
 import {
   getAthleteBySlug,
@@ -313,6 +314,23 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
 }
 
 function AthletePage() {
+  const router = useRouter();
+  useEffect(() => {
+    // Re-run the existing privacy-aware loader when returning to this profile.
+    // Achievements are derived from current results, never a saved badge snapshot.
+    let lastRefresh = 0;
+    const refresh = () => {
+      if (document.visibilityState !== "visible" || Date.now() - lastRefresh < 1000) return;
+      lastRefresh = Date.now();
+      void router.invalidate();
+    };
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, [router]);
   const data = Route.useLoaderData();
   const { slug } = Route.useParams();
   const preview =

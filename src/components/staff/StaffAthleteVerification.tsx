@@ -1,3 +1,4 @@
+import { ResultCertificates } from "@/components/athletes/ResultCertificates";
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -230,6 +231,9 @@ function ResultCheckbox({ athleteNumber, row }: { athleteNumber: string; row: Re
         />
         Result verified
       </label>
+      {row.target.kind === "result" ? (
+        <ResultCertificates resultId={row.target.resultId} staff />
+      ) : null}
       <details className="text-xs">
         <summary className="cursor-pointer">Stored result & previous review</summary>
         <pre className="max-h-64 overflow-auto whitespace-pre-wrap break-words">

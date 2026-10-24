@@ -67,6 +67,7 @@ import { Route as ApiCollectionStatsWorkerRouteImport } from './routes/api/colle
 import { Route as ApiDiagnosticsRouteImport } from './routes/api/diagnostics'
 import { Route as ApiEventCalendarRouteImport } from './routes/api/event-calendar'
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
+import { Route as ApiResultCertificatesRouteImport } from './routes/api/result-certificates'
 import { Route as ApiResultClaimAlertsRouteImport } from './routes/api/result-claim-alerts'
 import { Route as ApiSignupAlertsRouteImport } from './routes/api/signup-alerts'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
@@ -409,6 +410,11 @@ const ApiRaceCollectorWorkerRoute = ApiRaceCollectorWorkerRouteImport.update({
   path: '/api/race-collector-worker',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiResultCertificatesRoute = ApiResultCertificatesRouteImport.update({
+  id: '/api/result-certificates',
+  path: '/api/result-certificates',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiResultClaimAlertsRoute = ApiResultClaimAlertsRouteImport.update({
   id: '/api/result-claim-alerts',
   path: '/api/result-claim-alerts',
@@ -709,6 +715,7 @@ export interface FileRoutesByFullPath {
   '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/event-calendar': typeof ApiEventCalendarRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
+  '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
   '/athletes/$slug': typeof AthletesSlugRoute
@@ -816,6 +823,7 @@ export interface FileRoutesByTo {
   '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/event-calendar': typeof ApiEventCalendarRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
+  '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
   '/athletes/$slug': typeof AthletesSlugRoute
@@ -924,6 +932,7 @@ export interface FileRoutesById {
   '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/event-calendar': typeof ApiEventCalendarRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
+  '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
   '/athletes/$slug': typeof AthletesSlugRoute
@@ -1033,6 +1042,7 @@ export interface FileRouteTypes {
     | '/api/diagnostics'
     | '/api/event-calendar'
     | '/api/race-collector-worker'
+    | '/api/result-certificates'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
     | '/athletes/$slug'
@@ -1140,6 +1150,7 @@ export interface FileRouteTypes {
     | '/api/diagnostics'
     | '/api/event-calendar'
     | '/api/race-collector-worker'
+    | '/api/result-certificates'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
     | '/athletes/$slug'
@@ -1247,6 +1258,7 @@ export interface FileRouteTypes {
     | '/api/diagnostics'
     | '/api/event-calendar'
     | '/api/race-collector-worker'
+    | '/api/result-certificates'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
     | '/athletes/$slug'
@@ -1355,6 +1367,7 @@ export interface RootRouteChildren {
   ApiDiagnosticsRoute: typeof ApiDiagnosticsRoute
   ApiEventCalendarRoute: typeof ApiEventCalendarRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
+  ApiResultCertificatesRoute: typeof ApiResultCertificatesRoute
   ApiResultClaimAlertsRoute: typeof ApiResultClaimAlertsRoute
   ApiSignupAlertsRoute: typeof ApiSignupAlertsRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
@@ -1813,6 +1826,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRaceCollectorWorkerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/result-certificates': {
+      id: '/api/result-certificates'
+      path: '/api/result-certificates'
+      fullPath: '/api/result-certificates'
+      preLoaderRoute: typeof ApiResultCertificatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/result-claim-alerts': {
       id: '/api/result-claim-alerts'
       path: '/api/result-claim-alerts'
@@ -2203,6 +2223,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiDiagnosticsRoute: ApiDiagnosticsRoute,
   ApiEventCalendarRoute: ApiEventCalendarRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,
+  ApiResultCertificatesRoute: ApiResultCertificatesRoute,
   ApiResultClaimAlertsRoute: ApiResultClaimAlertsRoute,
   ApiSignupAlertsRoute: ApiSignupAlertsRoute,
   AthletesSlugRoute: AthletesSlugRoute,

@@ -1,3 +1,4 @@
+import { ResultCertificates } from "./ResultCertificates";
 import { VerifyResultButton } from "./VerifyResultButton";
 import { resultVerification } from "@/lib/athrecs/profile-result-presentation";
 import { ResultMedal } from "./ProfileAward";
@@ -613,5 +614,10 @@ function ResultVerificationActions({ result }: { result: AthleteResult }) {
     result.resultSource,
     result.conflicting,
   ).verified;
-  return <VerifyResultButton resultKey={`r:${result.resultId}`} verified={verified} />;
+  return (
+    <div className="flex flex-wrap items-start gap-2">
+      <VerifyResultButton resultKey={`r:${result.resultId}`} verified={verified} />
+      <ResultCertificates resultId={result.resultId} />
+    </div>
+  );
 }
