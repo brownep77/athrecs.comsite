@@ -76,6 +76,13 @@ function AthletePrivacyPage() {
               conversation so we can locate it.
             </p>
             <p className="mt-3">
+              When staff notifications are enabled, we may send authorised staff a WhatsApp alert
+              containing a conversation reference and a link to the private inbox. The alert does
+              not include your message text, name or contact details. Staff must sign in to read
+              the conversation. Meta processes these notification details under its own service
+              controls; deleting a website conversation does not retract an alert already sent.
+            </p>
+            <p className="mt-3">
               If an Open WhatsApp link is available, it opens a separate conversation in WhatsApp.
               Your website chat is not forwarded automatically, and WhatsApp messages are not
               included in these website transcripts.

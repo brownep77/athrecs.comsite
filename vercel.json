@@ -574,6 +574,10 @@
     {
       "path": "/api/collection-stats-worker",
       "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/assistant-chat-alerts",
+      "schedule": "* * * * *"
     }
   ]
 }

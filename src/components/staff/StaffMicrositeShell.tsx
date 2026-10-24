@@ -31,6 +31,7 @@ import {
 } from "@/lib/auth/staff-config";
 import { cn } from "@/lib/utils";
 import { IS_ATHRECS_SITE } from "@/lib/site-scope";
+import { assistantInboxPath } from "@/lib/athrecs/assistant-link";
 
 const staffSiteUrl =
   import.meta.env.VITE_STAFF_SITE_URL?.trim().replace(/\/+$/, "") || DEFAULT_STAFF_SITE_URL;
@@ -267,7 +268,9 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
       setSignInError(null);
       try {
         // Fixed first-party destination, never an arbitrary user-supplied redirect.
-        const returnTo = pathname === "/admin/collection-stats" ? "/admin/collection-stats" : pathname === "/admin/athlete-accounts" ? "/admin/athlete-accounts" : pathname === "/admin/athlete-tools" ? "/admin/athlete-tools" : pathname === "/admin/check-results-upload" ? "/admin/check-results-upload" : "/admin";
+        const returnTo = pathname === "/admin/assistant-chats"
+          ? assistantInboxPath(new URLSearchParams(window.location.search).get("chat"))
+          : pathname === "/admin/collection-stats" ? "/admin/collection-stats" : pathname === "/admin/athlete-accounts" ? "/admin/athlete-accounts" : pathname === "/admin/athlete-tools" ? "/admin/athlete-tools" : pathname === "/admin/check-results-upload" ? "/admin/check-results-upload" : "/admin";
         await signIn("grok-google", {
           callbackURL: returnTo,
           errorCallbackURL: returnTo,

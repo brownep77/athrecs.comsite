@@ -10,6 +10,11 @@ import {
 } from "./assistant-store.server";
 import { askOpenAI } from "./assistant-provider.server";
 import { assistantProviderConfig } from "./assistant-config.server";
+import {
+  assistantAlertConfig,
+  assistantAlertSummary,
+  deliverAssistantAlerts,
+} from "./assistant-alerts.server";
 
 export function assistantConfig() {
   const provider = assistantProviderConfig();
@@ -84,10 +89,19 @@ export async function assistantSend(input: AssistantInput) {
         .digest("hex")
     : null;
   try {
+    const sql = await getSql();
+    const alertConfig = assistantAlertConfig();
     const messages = await runAssistantTurn(
-      await getSql(),
-      { tokenHash, networkHash, input, monthlyLimit: config.monthlyLimit },
+      sql,
+      {
+        tokenHash,
+        networkHash,
+        input,
+        monthlyLimit: config.monthlyLimit,
+        alertDestinationKey: alertConfig.enabled ? alertConfig.destinationKey : undefined,
+      },
       (history) => askOpenAI(history, input.language, config),
+      alertConfig.enabled ? (id) => deliverAssistantAlerts(sql, alertConfig, id) : undefined,
     );
     return { messages, error: null };
   } catch (error) {
@@ -116,6 +130,7 @@ export async function listAssistantChats(page: number) {
     chats: chats.slice(0, 25),
     hasMore: chats.length > 25,
     enabled: assistantConfig().enabled,
+    alerts: await assistantAlertSummary(sql),
   };
 }
 export async function assistantTranscript(id: string) {

@@ -16,6 +16,7 @@ function load(path, deps = {}) {
 }
 const db = new PGlite();
 await db.exec(readFileSync('migrations/20261016_assistant_chats.sql','utf8'));
+await db.exec(readFileSync('migrations/20261020_assistant_chat_alerts.sql','utf8'));
 function wrap(connection) {
   const sql = async (strings,...params) => (await connection.query(strings.reduce((s,p,i)=>s+(i?`$${i}`:'')+p,''),params)).rows;
   sql.transaction = fn => connection.transaction(tx => fn(wrap(tx)));
@@ -23,6 +24,7 @@ function wrap(connection) {
 }
 const sql = wrap(db);
 const config = load('src/lib/athrecs/assistant-config.server.ts');
+const alerts = load('src/lib/athrecs/assistant-alerts.server.ts', {'node:crypto':crypto});
 const analytics = load('src/lib/athrecs/web-analytics.ts');
 const translation = load('src/lib/athrecs/site-translation.ts', {'./web-analytics.ts':analytics});
 const core = load('src/lib/athrecs/assistant.ts', {zod,'./site-translation.ts':translation});
@@ -31,7 +33,7 @@ const store = load('src/lib/athrecs/assistant-store.server.ts', {'node:crypto':c
 let request, cookies = {}, setCookies = [], headers = {}, user = null, google = true;
 const requestApi = {getRequest:()=>request,getCookie:name=>cookies[name],setCookie:(name,value,options)=>{cookies[name]=value;setCookies.push({name,value,options});},setResponseHeader:(name,value)=>{headers[name]=value;}};
 const database = {getSql:async()=>sql};
-const server = load('src/lib/athrecs/assistant.server.ts', {'node:crypto':crypto,'@tanstack/react-start/server':requestApi,'../db':database,'./assistant-store.server':store,'./assistant-provider.server':{askOpenAI:async()=> 'Synthetic reply'},'./assistant-config.server':config});
+const server = load('src/lib/athrecs/assistant.server.ts', {'node:crypto':crypto,'@tanstack/react-start/server':requestApi,'../db':database,'./assistant-store.server':store,'./assistant-provider.server':{askOpenAI:async()=> 'Synthetic reply'},'./assistant-config.server':config,'./assistant-alerts.server':alerts});
 const staffConfig = load('src/lib/auth/staff-config.ts');
 class UnauthorizedError extends Error {}
 const staff = load('src/lib/auth/staff.server.ts', {'@tanstack/react-start/server':requestApi,'@/lib/db':{getSql:async()=>async()=>google?[{provider_id:'google'}]:[{provider_id:'credential'}]},'./verify.server':{UnauthorizedError,getSessionUser:async()=>user},'./staff-config':staffConfig});
