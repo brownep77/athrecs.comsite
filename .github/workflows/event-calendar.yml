@@ -6,6 +6,7 @@ on:
       - "src/lib/athrecs/race-sharing.ts"
       - "src/lib/athrecs/timezone.ts"
       - "src/components/races/**"
+      - "src/components/discovery/CompactFixtureRow.tsx"
       - "src/components/running/Road*Pages.tsx"
       - "src/components/analytics/SiteAnalytics.tsx"
       - "src/components/layout/AppShell.tsx"
