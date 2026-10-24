@@ -8,6 +8,7 @@ on:
     paths:
       - "scripts/verify-race-actions-mobile.mjs"
       - "scripts/verify-race-actions-safari.mjs"
+      - "scripts/verify-race-actions-ios-native.mjs"
       - "scripts/prepare-ios-safari-simulator.mjs"
       - ".github/workflows/race-actions-live-browser.yml"
   workflow_dispatch:
@@ -39,7 +40,7 @@ jobs:
             device: iPhone 16
           - profile: ios-26.5
             platform: ios
-            runner: macos-26
+            runner: macos-26-intel
             xcode: /Applications/Xcode_26.6.app/Contents/Developer
             runtime: "26.5"
             device: iPhone 17
@@ -68,6 +69,59 @@ jobs:
         with:
           name: race-actions-safari-${{ matrix.profile }}
           path: artifacts/race-actions-safari-*
+          if-no-files-found: warn
+
+  native-ios:
+    name: Safari - native iOS ${{ matrix.runtime }} interface
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runtime: "18.5"
+            runner: macos-15-intel
+            xcode: /Applications/Xcode_16.4.app/Contents/Developer
+            device: iPhone 16
+            driver: "12.12.4"
+          - runtime: "26.5"
+            runner: macos-26-intel
+            xcode: /Applications/Xcode_26.6.app/Contents/Developer
+            device: iPhone 17
+            driver: "12.20.0"
+    env:
+      DEVELOPER_DIR: ${{ matrix.xcode }}
+      ATHRECS_SAFARI_REQUIRED_RUNTIME_VERSION: ${{ matrix.runtime }}
+      ATHRECS_SAFARI_REQUIRED_DEVICE_NAME: ${{ matrix.device }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Select matching Xcode
+        run: sudo /usr/bin/xcode-select --switch "$DEVELOPER_DIR"
+      - name: Prepare the installed iPhone and Safari
+        run: node scripts/prepare-ios-safari-simulator.mjs
+      - name: Install pinned native XCTest automation
+        timeout-minutes: 4
+        run: |
+          npm install --global appium@3.8.0
+          appium driver install xcuitest@${{ matrix.driver }}
+      - name: Test calendar and sharing through native iPhone controls
+        timeout-minutes: 9
+        run: |
+          mkdir -p artifacts
+          appium --address 127.0.0.1 --port 4723 --log artifacts/race-actions-ios-native-appium.log > artifacts/race-actions-ios-native-server.log 2>&1 &
+          ATHRECS_APPIUM_PROCESS=$!
+          trap 'kill "$ATHRECS_APPIUM_PROCESS" 2>/dev/null || true' EXIT
+          node scripts/verify-race-actions-ios-native.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: race-actions-safari-native-interface-ios-${{ matrix.runtime }}
+          path: |
+            artifacts/race-actions-safari-ios-setup*
+            artifacts/race-actions-ios-native*
           if-no-files-found: warn
 
   mobile:

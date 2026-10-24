@@ -1,6 +1,6 @@
 import { execFile } from "node:child_process";
 import { appendFile, mkdir, stat, writeFile } from "node:fs/promises";
-import { release, version } from "node:os";
+import { freemem, loadavg, release, totalmem, version } from "node:os";
 import { isAbsolute, join } from "node:path";
 import { promisify } from "node:util";
 
@@ -46,7 +46,15 @@ function saveDiagnostics() {
 
 async function phase(name) {
   report.phase = name;
-  report.phases.push({ name, startedAt: new Date().toISOString() });
+  report.phases.push({
+    name,
+    startedAt: new Date().toISOString(),
+    hostResources: {
+      physicalMemoryBytes: totalmem(),
+      freeMemoryBytes: freemem(),
+      loadAverage: loadavg(),
+    },
+  });
   note(`Phase: ${name}`);
   await saveDiagnostics();
 }

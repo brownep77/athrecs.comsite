@@ -17,6 +17,7 @@ const report = {
   requestedPlatform: platform,
   checks: [],
   views: [],
+  taps: [],
   notCovered: [
     "Native OS share sheets and recipient delivery",
     "Physical iPhone/iPad hardware",
@@ -52,7 +53,97 @@ async function api(method, route, body, timeout = 60000) {
 const command = (method, route, body) => api(method, `/session/${sessionId}${route}`, body);
 const inspect = (fn, ...args) =>
   command("POST", "/execute/sync", { script: `return (${fn}).apply(null, arguments);`, args });
-const click = (element) => command("POST", `/element/${element[elementKey]}/click`, {});
+const tapGeometry = (element) =>
+  inspect((el) => {
+    const r = el.getBoundingClientRect(),
+      v = window.visualViewport;
+    const viewport = v
+      ? { x: v.offsetLeft, y: v.offsetTop, width: v.width, height: v.height, scale: v.scale }
+      : { x: 0, y: 0, width: innerWidth, height: innerHeight, scale: 1 };
+    const center = { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+    const hit = document.elementFromPoint(center.x, center.y);
+    return {
+      connected: el.isConnected,
+      label: el.getAttribute("aria-label") || el.textContent.trim(),
+      rect: { x: r.x, y: r.y, width: r.width, height: r.height },
+      center,
+      viewport,
+      scroll: { x: scrollX, y: scrollY },
+      centerVisible:
+        r.width > 0 &&
+        r.height > 0 &&
+        center.x >= viewport.x &&
+        center.y >= viewport.y &&
+        center.x < viewport.x + viewport.width &&
+        center.y < viewport.y + viewport.height,
+      hitIntended: !!hit && el.contains(hit),
+      hit: hit
+        ? {
+            tag: hit.tagName,
+            id: hit.id,
+            label:
+              hit.closest("summary,button,a")?.getAttribute("aria-label") ||
+              hit.textContent.trim().slice(0, 120),
+          }
+        : null,
+      open: el.closest("details")?.open ?? null,
+    };
+  }, element);
+async function click(element) {
+  if (platform !== "ios") return command("POST", `/element/${element[elementKey]}/click`, {});
+  const attempt = {
+    id: report.taps.length + 1,
+    phase,
+    beforeScroll: await tapGeometry(element),
+    samples: [],
+  };
+  report.taps.push(attempt);
+  await inspect(
+    (el, id) => {
+      window.__athrecsSafariTapTarget = el;
+      window.__athrecsSafariQa.tapId = id;
+      el.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" });
+    },
+    element,
+    attempt.id,
+  );
+  let previous,
+    stable = 0;
+  attempt.before = await until(
+    "stable centered iOS tap target and visual viewport",
+    async () => {
+      const state = await tapGeometry(element);
+      attempt.samples.push(state);
+      if (attempt.samples.length > 8) attempt.samples.shift();
+      const signature = JSON.stringify({
+        rect: state.rect,
+        viewport: state.viewport,
+        scroll: state.scroll,
+      });
+      stable =
+        state.connected && state.centerVisible && state.hitIntended && signature === previous
+          ? stable + 1
+          : 0;
+      previous = signature;
+      return stable >= 2 ? state : null;
+    },
+    10000,
+  );
+  console.log(
+    "IOS TAP BEFORE: " + JSON.stringify({ id: attempt.id, phase, state: attempt.before }),
+  );
+  // One trusted WebDriver click only. A missed gesture remains a failing check.
+  await command("POST", `/element/${element[elementKey]}/click`, {});
+  attempt.after = await tapGeometry(element);
+  attempt.events = await inspect(
+    (id) => window.__athrecsSafariQa.events.filter((event) => event.tapId === id),
+    attempt.id,
+  );
+  console.log(
+    "IOS TAP AFTER: " +
+      JSON.stringify({ id: attempt.id, state: attempt.after, events: attempt.events }),
+  );
+}
 const open = (summary) => inspect((el) => el.parentElement.open, summary);
 async function until(label, predicate, timeout = 30000) {
   const deadline = Date.now() + timeout;
@@ -355,11 +446,63 @@ try {
   );
   assert.equal(await command("GET", "/url"), target);
   await inspect(() => {
-    window.__athrecsSafariQa = { errors: [], clicks: [], keys: [] };
+    window.__athrecsSafariQa = { errors: [], clicks: [], keys: [], events: [], tapId: null };
     addEventListener("error", (event) => window.__athrecsSafariQa.errors.push(event.message));
     addEventListener("unhandledrejection", (event) =>
       window.__athrecsSafariQa.errors.push(String(event.reason)),
     );
+    for (const type of [
+      "touchstart",
+      "touchend",
+      "touchcancel",
+      "pointerdown",
+      "pointerup",
+      "pointercancel",
+      "click",
+    ])
+      document.addEventListener(
+        type,
+        (event) => {
+          const target = event.target instanceof Element ? event.target : null;
+          const control = target?.closest("summary,button,a");
+          const point = event.changedTouches?.[0] || event;
+          const intended = window.__athrecsSafariTapTarget;
+          const r = intended?.getBoundingClientRect(),
+            v = window.visualViewport;
+          window.__athrecsSafariQa.events.push({
+            type,
+            tapId: window.__athrecsSafariQa.tapId,
+            time: performance.now(),
+            trusted: event.isTrusted,
+            pointerType: event.pointerType ?? null,
+            client: { x: point.clientX ?? null, y: point.clientY ?? null },
+            page: { x: point.pageX ?? null, y: point.pageY ?? null },
+            target: target
+              ? {
+                  tag: target.tagName,
+                  id: target.id,
+                  label:
+                    control?.getAttribute("aria-label") ||
+                    (control || target).textContent.trim().slice(0, 160),
+                }
+              : null,
+            hitIntended: !!target && !!intended?.contains(target),
+            intendedRect: r ? { x: r.x, y: r.y, width: r.width, height: r.height } : null,
+            scroll: { x: scrollX, y: scrollY },
+            viewport: v
+              ? {
+                  x: v.offsetLeft,
+                  y: v.offsetTop,
+                  width: v.width,
+                  height: v.height,
+                  scale: v.scale,
+                }
+              : null,
+          });
+          if (window.__athrecsSafariQa.events.length > 100) window.__athrecsSafariQa.events.shift();
+        },
+        true,
+      );
     document.addEventListener(
       "click",
       (event) => {
