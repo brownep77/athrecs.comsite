@@ -1,0 +1,1089 @@
+{
+  "checkedAt": "2026-10-24",
+  "scope": "Primary URLs of directory organisations tagged swimming, including cross-sport bodies; not every linked subpage or every national federation homepage.",
+  "organisations": 236,
+  "uniquePrimaryUrls": 93,
+  "membershipReferenceOrganisations": 144,
+  "statusCounts": {
+    "content_retrieved": 81,
+    "content_review": 2,
+    "partial_content": 7,
+    "retrieval_failed": 2,
+    "membership_reference": 1
+  },
+  "links": [
+    {
+      "url": "https://africaaquatics.org/",
+      "finalUrl": "https://africaaquatics.org/",
+      "title": "Africa Aquatics",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "africa-aquatics"
+      ]
+    },
+    {
+      "url": "https://akuatikindonesia.id/",
+      "finalUrl": "https://akuatikindonesia.id/",
+      "title": "Akuatik Indonesia",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "akuatik-indonesia"
+      ]
+    },
+    {
+      "url": "https://aquatics.lk/en/",
+      "finalUrl": "https://aquatics.lk/en/",
+      "title": "Aquatic Sports Union Sri Lanka",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "sri-lankan-swimming"
+      ]
+    },
+    {
+      "url": "https://aquatics.or.jp/",
+      "finalUrl": "https://aquatics.or.jp/",
+      "title": "公益財団法人日本水泳連盟",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "japan-swimming"
+      ]
+    },
+    {
+      "url": "https://asaner.org.uk/",
+      "finalUrl": "https://asaner.org.uk/",
+      "title": "Welcome to the North East Region",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-england-north-east-region"
+      ]
+    },
+    {
+      "url": "https://asaofmalta.eu/",
+      "finalUrl": "https://asaofmalta.eu/",
+      "title": "Aquatic Sports Association of Malta | ASA Malta",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "maltese-swimming"
+      ]
+    },
+    {
+      "url": "https://bul-swimming.org/",
+      "finalUrl": "https://bul-swimming.org/",
+      "title": "БЪЛГАРСКА ФЕДЕРАЦИЯ ПЛУВНИ СПОРТОВЕ",
+      "status": "content_review",
+      "note": "Federation title and relevant navigation retrieved, but main content includes Lorem Ipsum placeholder text. Review actual data pages before use.",
+      "organisations": [
+        "bulgarian-swimming"
+      ]
+    },
+    {
+      "url": "https://cadda.org.ar/",
+      "finalUrl": "https://cadda.org.ar/",
+      "title": "Cadda | Confederacion Argentina de Deportes Acuaticos",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "argentine-aquatics"
+      ]
+    },
+    {
+      "url": "https://eastmidlandswimming.org/",
+      "finalUrl": "https://eastmidlandswimming.org/",
+      "title": "Swim England - East Midlands | Swimming",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-england-east-midlands-region"
+      ]
+    },
+    {
+      "url": "https://europeanaquatics.org/",
+      "finalUrl": "https://europeanaquatics.org/",
+      "title": "Home | European Aquatics®",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "european-aquatics"
+      ]
+    },
+    {
+      "url": "https://fechida.cl/",
+      "finalUrl": "https://fechida.cl/",
+      "title": "Federación Chilena de Deportes Acuáticos – FECHIDA",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "chilean-aquatics"
+      ]
+    },
+    {
+      "url": "https://fecna.com.co/",
+      "finalUrl": "https://fecna.com.co/",
+      "title": "Inicio - Federacion Colombiana de Natacion",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "colombian-swimming"
+      ]
+    },
+    {
+      "url": "https://fecodacrc.org/",
+      "finalUrl": "https://fecodacrc.org/",
+      "title": "Inicio - Federación Costarricense de Deportes Acuáticos",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "costa-rican-swimming"
+      ]
+    },
+    {
+      "url": "https://feddard.org/",
+      "finalUrl": "https://feddard.org/",
+      "title": "Guerrero, Matos Y Torres Triunfan Nado Sincronizado",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "dominican-republic-swimming"
+      ]
+    },
+    {
+      "url": "https://fena-ecuador.org/",
+      "finalUrl": "https://fena-ecuador.org/",
+      "title": "Federación Ecuatoriana de Natación – Otro sitio realizado con WordPress",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "ecuadorian-swimming"
+      ]
+    },
+    {
+      "url": "https://fenadegua.gt/",
+      "finalUrl": "https://fenadegua.gt/",
+      "title": "FENADEGUA",
+      "status": "partial_content",
+      "note": "Federation title and relevant navigation retrieved, but main content consisted of unavailable media and a finished countdown. Actual data pages require review.",
+      "organisations": [
+        "guatemalan-swimming"
+      ]
+    },
+    {
+      "url": "https://fepada.org/",
+      "finalUrl": "https://fepada.org/?lang=en",
+      "title": "FEPADA – FEPADA, sitio oficial",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "paraguayan-swimming"
+      ]
+    },
+    {
+      "url": "https://fun.org.uy/",
+      "finalUrl": "https://fun.org.uy/",
+      "title": "Federación Uruguaya de Natación | Natación, Waterpolo y Deportes Acuáticos en Uruguay",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "uruguayan-swimming"
+      ]
+    },
+    {
+      "url": "https://hunswim.com/",
+      "finalUrl": "https://hunswim.com/",
+      "title": "Hírek",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "hungarian-swimming"
+      ]
+    },
+    {
+      "url": "https://isr.org.il/",
+      "finalUrl": "https://isr.org.il/",
+      "title": "אתר איגוד השחייה",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "israeli-swimming"
+      ]
+    },
+    {
+      "url": "https://koe.org.gr/",
+      "finalUrl": "https://koe.org.gr/",
+      "title": "Κολυμβητική Ομοσπονδία Ελλάδας - koe.org.gr",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "hellenic-swimming"
+      ]
+    },
+    {
+      "url": "https://koek.org.cy/",
+      "finalUrl": "https://koek.org.cy/",
+      "title": "ΑΡΧΙΚΗ ΣΕΛΙΔΑ - Cyprus Swimming Federation",
+      "status": "partial_content",
+      "note": "Cyprus federation identity and contact content retrieved; detailed capabilities not assessed.",
+      "organisations": [
+        "cypriot-swimming"
+      ]
+    },
+    {
+      "url": "https://ltuaquatics.com/",
+      "finalUrl": "https://ltuaquatics.com/",
+      "title": "LTU Aquatics : Plaukimas, šuoliai į vandenį, dailusis plaukimas",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "ltu-aquatics"
+      ]
+    },
+    {
+      "url": "https://mastersswimming.org.au/",
+      "finalUrl": "https://mastersswimming.org.au/",
+      "title": "Masters Swimming | Australia",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "masters-swimming-australia"
+      ]
+    },
+    {
+      "url": "https://mauritiusaquatics.org/",
+      "finalUrl": "https://mauritiusaquatics.org/",
+      "title": "Mauritius Swimming Federation",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "mauritian-swimming"
+      ]
+    },
+    {
+      "url": "https://oceaniaaquatics.org/",
+      "finalUrl": "https://oceaniaaquatics.org/",
+      "title": "Oceania Federation of World Aquatics",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "oceania-aquatics"
+      ]
+    },
+    {
+      "url": "https://paralympics.org.uk/",
+      "finalUrl": "https://paralympics.org.uk/",
+      "title": "ParalympicsGB",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "british-paralympic-association"
+      ]
+    },
+    {
+      "url": "https://polswim.pl/",
+      "finalUrl": "https://polswim.pl/",
+      "title": "Polski Związek Pływacki",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "polish-swimming"
+      ]
+    },
+    {
+      "url": "https://rfen.es/",
+      "finalUrl": "https://rfen.es/",
+      "title": "RFEN",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "spanish-swimming"
+      ]
+    },
+    {
+      "url": "https://svensksimidrott.se/",
+      "finalUrl": "https://svensksimidrott.se/",
+      "title": "AKTIV",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swedish-swimming"
+      ]
+    },
+    {
+      "url": "https://svomming.no/",
+      "finalUrl": "https://svomming.no/",
+      "title": "Norges Svømmeforbund",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "norwegian-swimming"
+      ]
+    },
+    {
+      "url": "https://swimireland.ie/",
+      "finalUrl": "https://swimireland.ie/",
+      "title": "Home - Swim Ireland",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-ireland"
+      ]
+    },
+    {
+      "url": "https://swimming.ee/",
+      "finalUrl": "https://swimming.ee/",
+      "title": "Avaleht - Eesti Ujumisliit",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "estonian-swimming"
+      ]
+    },
+    {
+      "url": "https://swimming.lv/",
+      "finalUrl": "https://swimming.lv/",
+      "title": "Latvijas Peldēšanas federācija",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "latvian-swimming"
+      ]
+    },
+    {
+      "url": "https://swimmsvk.sk/",
+      "finalUrl": "https://swimmsvk.sk/",
+      "title": "Hlavná stránka | Slovenská plavecká federácia",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "slovak-swimming"
+      ]
+    },
+    {
+      "url": "https://swimnorthwest.org/",
+      "finalUrl": "https://swimnorthwest.org/",
+      "title": "Home - Swim England North West",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-england-north-west-region"
+      ]
+    },
+    {
+      "url": "https://swimsa.org/",
+      "finalUrl": "https://swimsa.org/",
+      "title": "Swimming South Africa",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swimming-south-africa"
+      ]
+    },
+    {
+      "url": "https://ttaquatics.com/",
+      "finalUrl": "https://ttaquatics.com/",
+      "title": "Aquatics Sports Association of Trinidad & Tobago",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "trinidad-tobago-swimming"
+      ]
+    },
+    {
+      "url": "https://uk.gomotionapp.com/team/basa/page/home",
+      "finalUrl": "https://uk.gomotionapp.com/team/basa/page/home",
+      "title": "Bermuda Amateur Swimming Association Home",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "bermuda-swimming"
+      ]
+    },
+    {
+      "url": "https://westmidlandswimming.org.uk/",
+      "finalUrl": "https://westmidlandswimming.org.uk/",
+      "title": "Swim England West Midlands",
+      "status": "content_review",
+      "note": "Regional identity retrieved, alongside an unrelated casino article. Retain manual content review; no whole-site collection.",
+      "organisations": [
+        "swim-england-west-midland-region"
+      ]
+    },
+    {
+      "url": "https://www.aquaticsgb.com/",
+      "finalUrl": "https://www.aquaticsgb.com/",
+      "title": "Homepage",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "aquatics-gb"
+      ]
+    },
+    {
+      "url": "https://www.asaj.com.jm/",
+      "finalUrl": "https://www.asaj.com.jm/",
+      "title": "The Aquatic Sports Association of Jamaica",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "jamaican-swimming"
+      ]
+    },
+    {
+      "url": "https://www.bahamasaquatics.com/",
+      "finalUrl": "https://www.bahamasaquatics.com/",
+      "title": "Home | Bahamas Aquatics",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "bahamian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.belswim.be/en",
+      "finalUrl": "https://www.belswim.be/en",
+      "title": "Royal Belgian Swimming Federation | KBZB",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "belgian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.cbda.org.br/",
+      "finalUrl": "https://www.cbda.org.br/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Initial retrieval rate-limited (HTTP 429); second retrieval method returned HTTP 403. Page content not confirmed.",
+      "organisations": [
+        "brazilian-aquatics"
+      ]
+    },
+    {
+      "url": "https://www.croswim.org/",
+      "finalUrl": "https://www.croswim.org/",
+      "title": "Hrvatski plivački savez",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "croatian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.dsv.de/",
+      "finalUrl": "https://www.dsv.de/",
+      "title": "Deutscher Schwimm-Verband e. V. – Wir sind der Schwimmsport",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "german-swimming"
+      ]
+    },
+    {
+      "url": "https://www.eastswimming.org/swimming/swimming-competitions/",
+      "finalUrl": "https://www.eastswimming.org/swimming/swimming-competitions/",
+      "title": "Swimming competitions - Swim England East Region",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-england-east-region"
+      ]
+    },
+    {
+      "url": "https://www.fdpn.org/",
+      "finalUrl": "https://www.fdpn.org/",
+      "title": "Federación Deportiva Nacional de Deportes Acuáticos - Página Oficial",
+      "status": "partial_content",
+      "note": "Federation title retrieved, but body contained only Cargando...; fixture, result and profile content not confirmed.",
+      "organisations": [
+        "peruvian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.federnuoto.it/",
+      "finalUrl": "https://www.federnuoto.it/",
+      "title": "Federazione Italiana Nuoto - Home",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "italian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.ffnatation.fr/",
+      "finalUrl": "https://www.ffnatation.fr/",
+      "title": "Fédération Française de Natation | FFN",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "french-swimming"
+      ]
+    },
+    {
+      "url": "https://www.flns.lu/",
+      "finalUrl": "https://www.flns.lu/",
+      "title": "F L N S",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "luxembourg-swimming"
+      ]
+    },
+    {
+      "url": "https://www.fpnatacao.pt/",
+      "finalUrl": "https://www.fpnatacao.pt/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Retrieval blocked by the site; second retrieval method returned HTTP 403. Page content not confirmed; this does not establish that the URL is wrong.",
+      "organisations": [
+        "portuguese-swimming"
+      ]
+    },
+    {
+      "url": "https://www.fpnpty.com/",
+      "finalUrl": "https://www.fpnpty.com/",
+      "title": "Federación Panameña de Natación",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "panamanian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.frnpm.ro/",
+      "finalUrl": "https://www.frnpm.ro/",
+      "title": "Federatia Romana de Natatie si Pentatlon Modern - Site",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "romanian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.hkgswimming.org.hk/",
+      "finalUrl": "https://www.hkgswimming.org.hk/zh-hant/",
+      "title": "Hong Kong China Swimming Association",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "hong-kong-swimming"
+      ]
+    },
+    {
+      "url": "https://www.kenyaaquatics.org/",
+      "finalUrl": "https://www.kenyaaquatics.org/",
+      "title": "Kenya Aquatics - Make Waves, not Excuses!",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "kenya-aquatics"
+      ]
+    },
+    {
+      "url": "https://www.knzb.nl/",
+      "finalUrl": "https://www.knzb.nl/",
+      "title": "Homepage",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "dutch-swimming"
+      ]
+    },
+    {
+      "url": "https://www.korswim.co.kr/",
+      "finalUrl": "https://www.korswim.co.kr/",
+      "title": "대한수영연맹",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "korean-swimming"
+      ]
+    },
+    {
+      "url": "https://www.malaysiaaquatics.org/",
+      "finalUrl": "https://www.malaysiaaquatics.org/",
+      "title": "Home - Malaysia Aquatics",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "malaysia-aquatics"
+      ]
+    },
+    {
+      "url": "https://www.philippineaquatics.com/index.php/en/",
+      "finalUrl": "https://www.philippineaquatics.com/index.php/en/",
+      "title": "Philippine Aquatics, Inc. - Home",
+      "status": "content_retrieved",
+      "note": "Initial timeout; independent web retrieval displayed federation identity, 2026 event information and rankings/results links. Individual data pages and rows not assessed.",
+      "organisations": [
+        "philippine-aquatics"
+      ]
+    },
+    {
+      "url": "https://www.plavalna-zveza.si/",
+      "finalUrl": "https://www.plavalna-zveza.si/",
+      "title": "Plavalna Zveza Slovenije – Plavalna Zveza Slovenije",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "slovenian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.sasaeastdistrict.org.uk/",
+      "finalUrl": "https://www.sasaeastdistrict.org.uk/",
+      "title": "Scottish Amateur Swimming Association - East District website",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "sasa-east-district"
+      ]
+    },
+    {
+      "url": "https://www.sasamidlanddistrict.co.uk/",
+      "finalUrl": "https://www.sasamidlanddistrict.co.uk/",
+      "title": "SASA Midland District",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "sasa-midland-district"
+      ]
+    },
+    {
+      "url": "https://www.sasanorth.org.uk/",
+      "finalUrl": "https://www.sasanorth.org.uk/",
+      "title": "SASA North District",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "sasa-north-district"
+      ]
+    },
+    {
+      "url": "https://www.schwimmverband.at/",
+      "finalUrl": "https://www.schwimmverband.at/",
+      "title": "Österreichischer Schwimmverband: Österreichischer Schwimmverband",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "austrian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.scotswimwest.co.uk/",
+      "finalUrl": "https://www.scotswimwest.co.uk/",
+      "title": "Scottish Swimming - West District",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "sasa-west-district"
+      ]
+    },
+    {
+      "url": "https://www.scottishschoolsswimming.co.uk/",
+      "finalUrl": "https://www.scottishschoolsswimming.co.uk/",
+      "title": "Scottish Schools Swimming Association | Swimming | Scotland",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "scottish-schools-swimming-association"
+      ]
+    },
+    {
+      "url": "https://www.scottishswimming.com/",
+      "finalUrl": "https://www.scottishswimming.com/",
+      "title": "| Scottish Swimming",
+      "status": "partial_content",
+      "note": "Official domain corroborated by Aquatics GB About Us; homepage and /home returned navigation-only content. Fixture, result and athlete data remain unassessed.",
+      "organisations": [
+        "scottish-swimming"
+      ]
+    },
+    {
+      "url": "https://www.serbia-swim.org.rs/",
+      "finalUrl": "https://www.serbia-swim.org.rs/",
+      "title": "Plivacki savez Srbije - Serbian Swimming Federation",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "serbian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.sgaquatics.org.sg/",
+      "finalUrl": "https://www.sgaquatics.org.sg/",
+      "title": "Welcome to Singapore Aquatics",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "singapore-aquatics"
+      ]
+    },
+    {
+      "url": "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+      "finalUrl": "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+      "title": "Long Course Championships 2027 - ASA South East Region website",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-england-south-east-region"
+      ]
+    },
+    {
+      "url": "https://www.sundsamband.is/",
+      "finalUrl": "https://www.sundsamband.is/",
+      "title": "SSÍ",
+      "status": "partial_content",
+      "note": "Icelandic federation title and limited sponsor/login content retrieved; detailed capabilities not assessed.",
+      "organisations": [
+        "icelandic-swimming"
+      ]
+    },
+    {
+      "url": "https://www.svoem.org/",
+      "finalUrl": "https://www.svoem.org/",
+      "title": "Forside  | Dansk Svømmeunion",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "danish-swimming"
+      ]
+    },
+    {
+      "url": "https://www.swimming.ca/",
+      "finalUrl": "https://www.swimming.ca/",
+      "title": "Swimming Canada",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swimming-canada"
+      ]
+    },
+    {
+      "url": "https://www.swimming.org.au/",
+      "finalUrl": "https://www.swimming.org.au/",
+      "title": "Swimming Australia - To enrich and inspire the nation",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swimming-australia"
+      ]
+    },
+    {
+      "url": "https://www.swimming.org.in/",
+      "finalUrl": "https://www.swimming.org.in/",
+      "title": "Swimming Federation of India - Governing Body of Aquatic Sports",
+      "status": "content_retrieved",
+      "note": "Initial timeout; independent web retrieval displayed federation identity, current news and events/results/athlete navigation. Individual data pages and rows not assessed.",
+      "organisations": [
+        "indian-swimming"
+      ]
+    },
+    {
+      "url": "https://www.swimming.org/london/",
+      "finalUrl": "https://www.swimming.org/london/",
+      "title": "Welcome to Swim England London Region | Swimming.org",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-england-london-region"
+      ]
+    },
+    {
+      "url": "https://www.swimming.org/swimengland/",
+      "finalUrl": "https://www.swimming.org/swimengland/",
+      "title": "Swim England | Welcome to the home of Swim England",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-england"
+      ]
+    },
+    {
+      "url": "https://www.swimmingnz.org/",
+      "finalUrl": "https://www.swimmingnz.org/",
+      "title": "HOME | Swimming New Zealand",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swimming-new-zealand"
+      ]
+    },
+    {
+      "url": "https://www.swimulster.com/",
+      "finalUrl": "https://www.swimulster.com/",
+      "title": "Swim Ulster | Aquatic Sports Northern Ireland",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-ulster"
+      ]
+    },
+    {
+      "url": "https://www.swimwales.org/",
+      "finalUrl": "https://www.swimwales.org/",
+      "title": "Swim Wales – National Governing Body",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-wales"
+      ]
+    },
+    {
+      "url": "https://www.swimwest.org.uk/",
+      "finalUrl": "https://www.swimwest.org.uk/",
+      "title": "Home",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "swim-england-south-west-region"
+      ]
+    },
+    {
+      "url": "https://www.swiss-aquatics.ch/",
+      "finalUrl": "https://www.swiss-aquatics.ch/de",
+      "title": "Swiss Aquatics – Schweizer Schwimmverband",
+      "status": "partial_content",
+      "note": "Swiss Aquatics title and a small amount of meet content retrieved after redirect to /de; detailed capabilities not assessed.",
+      "organisations": [
+        "swiss-aquatics"
+      ]
+    },
+    {
+      "url": "https://www.teamgb.com/",
+      "finalUrl": "https://www.teamgb.com/",
+      "title": "Home | Team GB",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "british-olympic-association"
+      ]
+    },
+    {
+      "url": "https://www.teamsa.co.za/",
+      "finalUrl": "https://www.teamsa.co.za/",
+      "title": "Official Home of Team South Africa | TeamSA",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "sascoc"
+      ]
+    },
+    {
+      "url": "https://www.thaiaquatics.or.th/",
+      "finalUrl": "https://www.thaiaquatics.or.th/",
+      "title": null,
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "thailand-aquatics"
+      ]
+    },
+    {
+      "url": "https://www.tyf.gov.tr/",
+      "finalUrl": "https://www.tyf.gov.tr/",
+      "title": "Türkiye Yüzme Federasyonu - TYF",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "turkish-swimming"
+      ]
+    },
+    {
+      "url": "https://www.uimaliitto.fi/",
+      "finalUrl": "https://www.uimaliitto.fi/",
+      "title": "Etusivu",
+      "status": "partial_content",
+      "note": "Finnish federation title and limited navigation retrieved; detailed capabilities not assessed.",
+      "organisations": [
+        "finnish-swimming"
+      ]
+    },
+    {
+      "url": "https://www.usaswimming.org/",
+      "finalUrl": "https://www.usaswimming.org/",
+      "title": "Home",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "usa-swimming"
+      ]
+    },
+    {
+      "url": "https://www.usms.org/",
+      "finalUrl": "https://www.usms.org/",
+      "title": "Homepage | U.S. Masters Swimming",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "us-masters-swimming"
+      ]
+    },
+    {
+      "url": "https://www.worldaquatics.com/",
+      "finalUrl": "https://www.worldaquatics.com/",
+      "title": "World Aquatics",
+      "status": "content_retrieved",
+      "note": "Page title and organisation-related content retrieved. This is link screening, not independent validation of every statement or data page.",
+      "organisations": [
+        "world-aquatics"
+      ]
+    },
+    {
+      "url": "https://www.worldaquatics.com/members/national-federations",
+      "finalUrl": "https://www.worldaquatics.com/members/national-federations",
+      "title": "World Aquatics",
+      "status": "membership_reference",
+      "note": "World Aquatics national federation membership directory retrieved. Shared membership reference, not a federation homepage or a fixture/result/profile source.",
+      "organisations": [
+        "czech-swimming",
+        "aquatics-mexico",
+        "barbadian-swimming",
+        "bolivian-swimming",
+        "chinese-swimming",
+        "chinese-taipei-swimming",
+        "nepalese-swimming",
+        "vietnamese-swimming",
+        "macau-swimming",
+        "algeria-swimming",
+        "angola-swimming",
+        "burundi-swimming",
+        "benin-swimming",
+        "botswana-swimming",
+        "burkina-faso-swimming",
+        "central-african-republic-swimming",
+        "republic-of-the-congo-swimming",
+        "chad-swimming",
+        "cote-divoire-swimming",
+        "cameroon-swimming",
+        "democratic-republic-of-the-congo-swimming",
+        "comoros-swimming",
+        "cabo-verde-swimming",
+        "djibouti-swimming",
+        "egypt-swimming",
+        "eritrea-swimming",
+        "ethiopia-swimming",
+        "gabon-swimming",
+        "gambia-swimming",
+        "guinea-bissau-swimming",
+        "equatorial-guinea-swimming",
+        "ghana-swimming",
+        "guinea-swimming",
+        "libya-swimming",
+        "liberia-swimming",
+        "lesotho-swimming",
+        "madagascar-swimming",
+        "morocco-swimming",
+        "malawi-swimming",
+        "mali-swimming",
+        "mozambique-swimming",
+        "mauritania-swimming",
+        "namibia-swimming",
+        "nigeria-swimming",
+        "niger-swimming",
+        "rwanda-swimming",
+        "senegal-swimming",
+        "seychelles-swimming",
+        "sierra-leone-swimming",
+        "somalia-swimming",
+        "sao-tome-and-principe-swimming",
+        "sudan-swimming",
+        "eswatini-swimming",
+        "tanzania-swimming",
+        "togo-swimming",
+        "tunisia-swimming",
+        "uganda-swimming",
+        "zambia-swimming",
+        "zimbabwe-swimming",
+        "american-samoa-swimming",
+        "cook-islands-swimming",
+        "fiji-swimming",
+        "federated-states-of-micronesia-swimming",
+        "guam-swimming",
+        "marshall-islands-swimming",
+        "northern-mariana-islands-swimming",
+        "palau-swimming",
+        "papua-new-guinea-swimming",
+        "samoa-swimming",
+        "solomon-islands-swimming",
+        "tonga-swimming",
+        "vanuatu-swimming",
+        "anguilla-swimming",
+        "antigua-and-barbuda-swimming",
+        "aruba-swimming",
+        "belize-swimming",
+        "cayman-islands-swimming",
+        "cuba-swimming",
+        "curacao-swimming",
+        "dominica-swimming",
+        "el-salvador-swimming",
+        "grenada-swimming",
+        "guyana-swimming",
+        "haiti-swimming",
+        "honduras-swimming",
+        "us-virgin-islands-swimming",
+        "british-virgin-islands-swimming",
+        "saint-lucia-swimming",
+        "sint-maarten-swimming",
+        "nicaragua-swimming",
+        "puerto-rico-swimming",
+        "saint-kitts-and-nevis-swimming",
+        "suriname-swimming",
+        "turks-and-caicos-islands-swimming",
+        "venezuela-swimming",
+        "saint-vincent-and-the-grenadines-swimming",
+        "afghanistan-swimming",
+        "bangladesh-swimming",
+        "bhutan-swimming",
+        "bahrain-swimming",
+        "brunei-swimming",
+        "cambodia-swimming",
+        "iran-swimming",
+        "iraq-swimming",
+        "jordan-swimming",
+        "kazakhstan-swimming",
+        "kyrgyzstan-swimming",
+        "saudi-arabia-swimming",
+        "kuwait-swimming",
+        "laos-swimming",
+        "lebanon-swimming",
+        "maldives-swimming",
+        "mongolia-swimming",
+        "myanmar-swimming",
+        "oman-swimming",
+        "pakistan-swimming",
+        "palestine-swimming",
+        "north-korea-swimming",
+        "qatar-swimming",
+        "syria-swimming",
+        "tajikistan-swimming",
+        "turkmenistan-swimming",
+        "timor-leste-swimming",
+        "united-arab-emirates-swimming",
+        "uzbekistan-swimming",
+        "yemen-swimming",
+        "andorra-swimming",
+        "armenia-swimming",
+        "azerbaijan-swimming",
+        "bosnia-and-herzegovina-swimming",
+        "belarus-swimming",
+        "faroe-islands-swimming",
+        "georgia-swimming",
+        "gibraltar-swimming",
+        "kosovo-swimming",
+        "liechtenstein-swimming",
+        "moldova-swimming",
+        "north-macedonia-swimming",
+        "montenegro-swimming",
+        "monaco-swimming",
+        "russia-swimming",
+        "san-marino-swimming",
+        "ukraine-swimming",
+        "albania-swimming"
+      ]
+    }
+  ]
+}
