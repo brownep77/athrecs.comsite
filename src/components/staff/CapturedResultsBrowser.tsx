@@ -278,6 +278,8 @@ function CapturedRace({ id, initialName = "" }: { id: string; initialName?: stri
                     <td className="whitespace-nowrap p-2">{row.original?.["Chip Time"] || "—"}</td>
                     <td className="whitespace-nowrap p-2">
                       {row.original?.["Gun Time"] ||
+                        row.original?.["Finish Time"] ||
+                        row.original?.["Final Time"] ||
                         row.original?.Time ||
                         row.original?.["Total Time"] ||
                         row.original?.Finals ||
