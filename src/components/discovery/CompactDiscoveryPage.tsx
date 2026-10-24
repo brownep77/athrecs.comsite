@@ -15,7 +15,6 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { Button } from "@/components/ui/button";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { disciplineIntros, sportGuideText } from "@/lib/athrecs/sport-guide-text";
@@ -27,6 +26,7 @@ import {
 import type { SportFixture } from "@/lib/athrecs/sport-fixtures.server";
 import type { SportBroadcast } from "@/data/sport-broadcasts";
 import { CompactFixtureRow } from "./CompactFixtureRow";
+import { DiscoveryCountryList } from "./DiscoveryCountryList";
 import { useSavedFixtures } from "./useSavedFixtures";
 import {
   DISCOVERY_COUNTRIES,
@@ -196,22 +196,12 @@ export function CompactDiscoveryPage({
                   <MapPin className="size-4 text-accent" aria-hidden="true" />
                   Explore by place
                 </h2>
-                <nav aria-label="Explore by country">
-                  {DISCOVERY_COUNTRIES.map((country) => (
-                    <a
-                      key={country.slug}
-                      href={
-                        !sport
-                          ? country.path
-                          : `${pathname}?country=${encodeURIComponent(country.name)}`
-                      }
-                      className={sideLink}
-                    >
-                      <CountryFlag country={country.name} />
-                      <span>{country.name}</span>
-                    </a>
-                  ))}
-                </nav>
+                <DiscoveryCountryList
+                  key={`${pathname}:${search.country ?? ""}`}
+                  sport={sport}
+                  countries={countries}
+                  search={search}
+                />
               </section>
               <section
                 className="mt-4 border-t border-border pt-3"

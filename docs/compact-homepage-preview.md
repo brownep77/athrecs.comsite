@@ -6,7 +6,7 @@ This branch implements the selected compact teal layout for the AthRecs homepage
 
 - The homepage opens on broad Running: Running records and Athletics records on recognised running surfaces. Track and field and parkrun have their own pages.
 - Country, Month and Distance are together above the fixture list. On a phone, Month and Distance remain next to each other.
-- The left navigation includes UK, Ireland, United States, Canada, Australia, New Zealand and South Africa. These are the seven requested countries with published road-marathon guides. Homepage country links open the existing running-country hubs; country links on a discipline page retain that discipline.
+- The left navigation shows UK, Ireland, United States, Canada, Australia, New Zealand and South Africa as a short list. A More countries disclosure opens a searchable alphabetical list using the current sport's country options, plus those seven shortcuts and any selected country. Country selection stays in the current sport, preserves month, distance and text filters, and resets pagination. An All countries link clears only the country filter. Selected countries are highlighted; a selected country outside the short list opens the full list automatically.
 - The Guides section links to the running guide directory, seven country marathon guides, race series and individual race guides.
 - The desktop sidebar scrolls independently when its expanded guide list is taller than the available window.
 - The sport bar changes to separate pages for Athletics, Triathlon, Cycling, Swimming, Duathlon and parkrun. Cycling also has road, mountain-bike, track and BMX shortcuts. Each page uses the matching catalogue, labels and practical information.
