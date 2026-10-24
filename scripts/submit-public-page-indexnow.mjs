@@ -21,7 +21,13 @@ export function publicUrl(value) {
   assert(!url.username && !url.password && !url.search && !url.hash, "Unexpected URL attributes");
   assert.equal(url.href, value, "Use exact canonical URLs");
   const path = decodeURIComponent(url.pathname);
-  assert(!/[\\%?#]/.test(path) && !privatePath.test(path), "Private or ambiguous path");
+  assert(
+    !/%(?:2f|5c|25|3f|23)/i.test(url.pathname) &&
+      !path.includes("//") &&
+      !/[\\%?#]/.test(path) &&
+      !privatePath.test(path),
+    "Private or ambiguous path",
+  );
   return url;
 }
 
@@ -61,7 +67,7 @@ export function sitemapEntries(text, index = false) {
 }
 
 function assertFamily(entry, sitemap) {
-  const path = publicUrl(entry.url).pathname;
+  const path = decodeURIComponent(publicUrl(entry.url).pathname);
   assert(!/^\/athletes\//.test(path), "Athlete profiles use their existing dedicated worker");
   const family = new URL(sitemap).pathname.split("/").at(-1);
   const numbered = /^(races|clubs|results)-/.exec(family);
@@ -157,7 +163,10 @@ export function validateState(state) {
   assert(state.accepted && typeof state.accepted === "object" && !Array.isArray(state.accepted));
   for (const [url, receipt] of Object.entries(state.accepted)) {
     publicUrl(url);
-    assert(!/^\/athletes\//.test(new URL(url).pathname), "Wrong checkpoint scope");
+    assert(
+      !/^\/athletes\//.test(decodeURIComponent(new URL(url).pathname)),
+      "Wrong checkpoint scope",
+    );
     assert(Number.isFinite(Date.parse(receipt.at)), "Invalid receipt time");
     assert(
       receipt.lastmod === null || typeof receipt.lastmod === "string",
