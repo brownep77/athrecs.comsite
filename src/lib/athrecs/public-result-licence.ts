@@ -9,7 +9,7 @@ const credits = {
     publicationUrl: "https://doi.org/10.6084/m9.figshare.33965155.v3",
     licence: "CC BY 4.0",
     licenceUrl: "https://creativecommons.org/licenses/by/4.0/",
-    changes: "London 2025 subset; names reordered for display.",
+    changes: "Selected London Marathon editions; names reordered for display.",
   },
 } as const;
 
