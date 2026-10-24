@@ -288,6 +288,58 @@ assert(
   docs.includes("Public URL migration and domain activation require a separate approved release."),
 );
 
+// Exercise the production sync query against dated meetings. The original
+// suggestion view emits only the first day; explicit legacy ranges must survive
+// subsequent staff syncs without changing active network records.
+const { PGlite } = await import("@electric-sql/pglite");
+const { syncSportsRecsNetworkFoundation } = await import(
+  "../src/lib/athrecs/sportsrecs-network.server.ts"
+);
+const syncStatements = [];
+await syncSportsRecsNetworkFoundation({ query: async (statement) => syncStatements.push(statement) });
+const rangeDb = new PGlite();
+try {
+  await rangeDb.exec(`
+    create table editions(event_id int, event_date date, end_date date);
+    insert into editions values
+      (1,'2027-02-05','2027-02-06'), (1,'2027-02-05','2027-02-07'),
+      (1,'2027-02-20','2027-02-21'), (2,'2027-03-01',null),
+      (3,'2027-04-05','2027-04-07'), (4,'2027-05-08','2027-05-09');
+    create view sportsrecs_network_edition_suggestions as
+      select event_id, 'Synthetic meeting'::text as edition_name,
+        event_date as start_date, event_date as end_date, 'TBC'::text as status,
+        count(*)::int as legacy_edition_count
+      from editions group by event_id,event_date;
+    create table network_event_editions(
+      event_id int, edition_name text, start_date date, end_date date, status text,
+      migration_state text, legacy_edition_count int, updated_at timestamptz,
+      unique(event_id,start_date)
+    );
+    insert into network_event_editions values
+      (3,'Reviewed active meeting','2027-04-05','2027-04-10','Open','active',1,null),
+      (4,'Previous shadow meeting','2027-05-08','2027-05-08','TBC','shadow',1,null);
+  `);
+  const rangeSync = syncStatements.find((statement) =>
+    statement.includes("insert into network_event_editions"),
+  );
+  assert(rangeSync, "Network sync query is missing");
+  await rangeDb.exec(rangeSync);
+  await rangeDb.exec(rangeSync);
+  const { rows: ranges } = await rangeDb.query(`
+    select event_id,start_date::text,end_date::text,migration_state
+    from network_event_editions order by event_id,start_date
+  `);
+  assert.deepEqual(ranges, [
+    { event_id: 1, start_date: "2027-02-05", end_date: "2027-02-07", migration_state: "shadow" },
+    { event_id: 1, start_date: "2027-02-20", end_date: "2027-02-21", migration_state: "shadow" },
+    { event_id: 2, start_date: "2027-03-01", end_date: "2027-03-01", migration_state: "shadow" },
+    { event_id: 3, start_date: "2027-04-05", end_date: "2027-04-10", migration_state: "active" },
+    { event_id: 4, start_date: "2027-05-08", end_date: "2027-05-09", migration_state: "shadow" },
+  ]);
+} finally {
+  await rangeDb.close();
+}
+
 process.stdout.write(
   "SportsRecs network and complete specialist public-scope verification passed.\n",
 );

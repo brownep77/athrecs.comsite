@@ -70,7 +70,15 @@ export async function syncSportsRecsNetworkFoundation(sql: Sql): Promise<void> {
       suggestion.event_id,
       suggestion.edition_name,
       suggestion.start_date,
-      suggestion.end_date,
+      greatest(
+        suggestion.end_date,
+        (
+          select max(edition.end_date)
+          from editions edition
+          where edition.event_id = suggestion.event_id
+            and edition.event_date = suggestion.start_date
+        )
+      ),
       suggestion.status,
       'shadow',
       suggestion.legacy_edition_count
