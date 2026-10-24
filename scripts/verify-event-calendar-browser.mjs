@@ -26,6 +26,7 @@ fs.writeFileSync(
 import React,{useState} from 'react';
 import{RaceActions}from'/@fs/${path.resolve("src/components/races/RaceActions.tsx")}';
 import{RacePracticalInformation}from'/@fs/${path.resolve("src/components/races/RacePracticalInformation.tsx")}';
+import{CompactFixtureRow}from'/@fs/${path.resolve("src/components/discovery/CompactFixtureRow.tsx")}';
 import './style.css';
 const base={id:'synthetic-half',name:'Calendar test race 🏃',distance:'Half marathon',date:'2027-07-04',startTime:'10:00',timeZone:'Europe/London',pageUrl:'https://www.athrecs.com/races/synthetic',location:'Synthetic venue',officialUrl:'https://example.org'};
 function App(){const[other,setOther]=useState(false);const[later,setLater]=useState(false);const[different,setDifferent]=useState(false);const selected={...base,...(other?{id:'synthetic-full',distance:'Marathon',startTime:'08:30'}:{}),...(different?{id:'other-synthetic',name:'Other synthetic race',pageUrl:'https://www.athrecs.com/races/other-synthetic'}:{}),date:later?'2027-07-05':base.date};return <main style={{maxWidth:900,margin:'auto',padding:16}}>
@@ -39,6 +40,7 @@ function App(){const[other,setOther]=useState(false);const[later,setLater]=useSt
 <div data-case="provisional"><RaceActions race={{...base,id:'provisional',provisional:true,startTime:null,endDate:'2027-07-06'}}/></div>
 <div data-case="long"><RaceActions race={{...base,id:'long',name:'Very long international race name 東京 '.repeat(8),location:'Long location '.repeat(60)}}/></div>
 <div data-case="integrated"><RacePracticalInformation data={{event:{id:9,slug:'synthetic',name:'Synthetic integrated race',sport:'Running',country:'England',county:'Norfolk',city:'Norwich',website:'https://example.org',description:'Synthetic test',surface:'Road'},upcoming:[{id:91,event_date:'2027-07-04',distance_code:'Half',distance_km:21.0975,start_time:'10:00',status:'Open',entry_options:[],entry_url:null,source_url:null},{id:92,event_date:'2027-07-04',distance_code:'Marathon',distance_km:42.195,start_time:'08:30',status:'Open',entry_options:[],entry_url:null,source_url:null}],past:[],groups:[],distances:[],related:[]}}/></div>
+<div data-case="compact"><CompactFixtureRow fixture={{eventId:9,slug:'synthetic',name:base.name,eventDate:base.date,city:'Norwich',town:null,county:'Norfolk',state:null,country:'England',website:base.officialUrl,summary:'',timeZone:base.timeZone,starts:[{editionId:91,distance:'Half',distanceKm:21.0975,status:'Open',time:'10:00',label:null,note:null,calendarRace:base},{editionId:92,distance:'Marathon',distanceKm:42.195,status:'Open',time:'08:30',label:null,note:null,calendarRace:{...base,id:'synthetic-full',distance:'Marathon',startTime:'08:30'}}]}} saved={false} onToggleSaved={()=>{}}/></div>
 </main>}export{App};
 `,
 );
@@ -510,11 +512,82 @@ try {
     assert(!(await choices.isVisible()), "Native keyboard toggle");
     await context.close();
   }
+  const compact = page.locator('[data-case="compact"]');
+  assert.equal(await compact.locator("select").count(), 0, "No duplicate distance dropdown");
+  const compactDate = compact.locator("time");
+  assert.equal(await compactDate.getAttribute("aria-label"), "Sunday, 4 July 2027");
+  assert.match(await compactDate.innerText(), /Sun · Jul/i);
+  const marathonChoice = compact.getByRole("button", { name: /Marathon.*08:30/ });
+  await marathonChoice.focus();
+  await page.keyboard.press("Space");
+  assert.equal(await marathonChoice.getAttribute("aria-pressed"), "true");
+  const compactCalendar = compact.locator('summary[aria-label$="to calendar"]');
+  const compactShare = compact.locator('summary[aria-label^="Share "]');
+  await compactCalendar.click();
+  const compactPayload = JSON.parse(await compact.locator('input[name="race"]').inputValue());
+  assert.equal(compactPayload.id, "synthetic-full");
+  assert.equal(compactPayload.startTime, "08:30");
+  assert.equal(
+    new URL(
+      await compact
+        .getByRole("link", { name: "Google Calendar", exact: true })
+        .getAttribute("href"),
+    ).searchParams.get("dates"),
+    "20270704T073000Z/20270704T073000Z",
+  );
+  await compactCalendar.click();
+  await compactShare.click();
+  assert.match(
+    await compact.getByRole("group", { name: "Sharing options" }).innerText(),
+    /Marathon/,
+  );
+  await compact.getByRole("button", { name: /Half marathon.*10:00/ }).click();
+  assert.match(await compactCalendar.getAttribute("aria-label"), /Half marathon/);
+  assert.match(await compactShare.getAttribute("aria-label"), /Half marathon/);
+  assert.equal(
+    await compact.locator("details[open]").count(),
+    0,
+    "Changing distance clears old choices",
+  );
+  const colours = (el) => {
+    const style = getComputedStyle(el);
+    return [style.backgroundColor, style.color, style.borderTopColor];
+  };
+  await page.mouse.move(0, 0);
+  assert.deepEqual(
+    await compactCalendar.evaluate(colours),
+    await mainButton.evaluate(colours),
+    "Calendar retains its original purple colours",
+  );
+  assert.deepEqual(
+    await compactShare.evaluate(colours),
+    await shareSummary.evaluate(colours),
+    "Share retains its original blue colours",
+  );
+  for (const width of [320, 390, 768, 1280]) {
+    await page.setViewportSize({ width, height: 844 });
+    assert(
+      await compact.evaluate((el) => el.scrollWidth <= el.clientWidth + 1),
+      "Compact fixture overflow at " + width,
+    );
+    assert(
+      await compactDate
+        .locator("span")
+        .first()
+        .evaluate(
+          (el) =>
+            el.scrollWidth <= el.parentElement.clientWidth &&
+            el.getBoundingClientRect().height < 20,
+        ),
+      "Weekday and month fit on one neat line",
+    );
+    await compact.screenshot({ path: `artifacts/calendar-${engine}-compact-${width}.png` });
+  }
   assert.deepEqual(errors, []);
   console.log(
     `PASS (${engine}): real React controls and integrated race schedule; 3 calendar and 5 sharing provider URLs; ` +
       downloads +
-      " downloaded ICS files; changed distances; date-only and disabled states; native keyboard controls; scripts disabled/delayed; server ICS downloads; sharing Escape/outside close and focus; independent Copy; mocked native sharing/cancellation and clipboard/manual fallbacks; current share race/date/distance; 320/390/768/1280px.",
+      " downloaded ICS files; changed distances; date-only and disabled states; native keyboard controls; scripts disabled/delayed; server ICS downloads; sharing Escape/outside close and focus; independent Copy; mocked native sharing/cancellation and clipboard/manual fallbacks; current share race/date/distance; compact fixture weekday, original button colours and distance selection; 320/390/768/1280px.",
   );
 } finally {
   await browser?.close();
