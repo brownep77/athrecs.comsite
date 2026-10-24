@@ -55,6 +55,18 @@ export async function publishCheckedFixtures(sql, publishing, details, review = 
           )
             throw new Error(`Start changed since review: ${key} ${distance}`);
         }
+        const statusCorrection = review.statusCorrections?.[`${key}|${distance}`];
+        let status = row?.status ?? "Open";
+        if (statusCorrection) {
+          if (
+            !review.baseline ||
+            !row ||
+            statusCorrection.from !== row.status ||
+            !statusCorrection.to
+          )
+            throw new Error(`Status changed since review: ${key} ${distance}`);
+          status = statusCorrection.to;
+        }
         const note = [`Date checked ${detail.checkedAt} against ${detail.sourceUrl}.`, start.note]
           .filter(Boolean)
           .join(" ");
@@ -63,7 +75,7 @@ export async function publishCheckedFixtures(sql, publishing, details, review = 
           date,
           distance,
           distanceKm: row ? Number(row.distance_km) : 10,
-          status: row?.status ?? "Open",
+          status,
           startTime: start.time ?? undefined,
           source: detail.sourceUrl,
           notes: [row?.notes, note].filter(Boolean).join("\n"),

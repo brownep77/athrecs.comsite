@@ -9,6 +9,8 @@ import { MARRIOTTS_CONFIRMATION_REVIEW } from "./lib/marriotts-organiser-confirm
 import marriottsConfirmation from "../src/data/marriotts-organiser-confirmation-2026-10-23.json" with { type: "json" };
 import { TIMING_DIRECTORY_STARTS_20261023_REVIEW } from "./lib/timing-directory-starts-2026-10-23-review.mjs";
 import timingDirectoryStarts from "../src/data/timing-directory-starts-2026-10-23.json" with { type: "json" };
+import { TIMING_DIRECTORY_STARTS_20261024_REVIEW } from "./lib/timing-directory-starts-2026-10-24-review.mjs";
+import timingDirectoryStarts20261024 from "../src/data/timing-directory-starts-2026-10-24.json" with { type: "json" };
 if (process.env.VERCEL_ENV !== "production" || process.env.VERCEL_GIT_COMMIT_REF !== "main") {
   console.log("[fixture-checks] skipping outside production/main");
   process.exit(0);
@@ -70,6 +72,15 @@ try {
       publishing,
       timingDirectoryStarts,
       TIMING_DIRECTORY_STARTS_20261023_REVIEW,
+    ),
+  );
+  console.log(
+    "[timing-directory-starts-2026-10-24]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      timingDirectoryStarts20261024,
+      TIMING_DIRECTORY_STARTS_20261024_REVIEW,
     ),
   );
 } finally {

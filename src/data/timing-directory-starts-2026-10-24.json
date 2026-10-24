@@ -1,0 +1,30 @@
+{
+  "pnc-atlanta-10-miler-5k|2026-10-24": {
+    "summary": "Atlanta Track Club's youth Mile at Atlantic Station, held on the Saturday of the PNC Atlanta 10 Miler & 5K weekend.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://www.atlantatrackclub.org/2026-pnc-atlanta-mile-dash",
+    "checkedAt": "2026-10-24",
+    "eventStartTime": "09:00",
+    "starts": {
+      "1 Mile": {
+        "time": "09:00",
+        "note": "Official Atlanta Track Club schedule: the one-mile race starts at 09:00. Number pickup and festival activities open separately at 07:30.",
+        "publicNote": "Youth mile starts at 09:00 local time; registration is closed."
+      }
+    }
+  },
+  "polar-circle-marathon|2026-10-24": {
+    "summary": "The Polar Circle Marathon near Kangerlussuaq, Greenland, with a course across ice-sheet and Arctic tundra terrain.",
+    "timeZone": "America/Nuuk",
+    "sourceUrl": "https://polar-circle-marathon.com/package/2026-polar-circle-marathon-5-day-package",
+    "checkedAt": "2026-10-24",
+    "eventStartTime": "09:30",
+    "starts": {
+      "Marathon": {
+        "time": "09:30",
+        "note": "Official organiser itinerary: the full marathon starts at 09:30 on 24 October, with a seven-hour limit. The 08:00 time is transport to the start, not the race start.",
+        "publicNote": "Marathon starts at 09:30 local time; 2026 registration is closed."
+      }
+    }
+  }
+}

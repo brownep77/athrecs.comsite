@@ -7,6 +7,7 @@ import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type
 import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
 import marriottsConfirmation from "./marriotts-organiser-confirmation-2026-10-23.json" with { type: "json" };
 import timingDirectoryStarts from "./timing-directory-starts-2026-10-23.json" with { type: "json" };
+import timingDirectoryStarts20261024 from "./timing-directory-starts-2026-10-24.json" with { type: "json" };
 
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
@@ -133,6 +134,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   },
   ...marriottsConfirmation,
   ...timingDirectoryStarts,
+  ...timingDirectoryStarts20261024,
   "larking-gowen-norwich-half|2027-04-04": {
     summary:
       "A closed-road half marathon from Norfolk Showground through the surrounding villages.",
