@@ -33,6 +33,7 @@ const { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } =
   await import("../src/lib/running/road-ultras.ts");
 const { SUPERHALFS_PATH } = await import("../src/data/superhalfs.ts");
 const { raceGroupDefinitions } = await import("../src/data/race-collections.ts");
+const { RUNNING_SERIES_GUIDES } = await import("../src/data/running-series-guides.ts");
 const { COUNTRY_SITES } = await import("../src/lib/athrecs/country-sites.ts");
 const siteUrl = "https://www.athrecs.com";
 const guideHubPath = "/running/guides";
@@ -48,8 +49,15 @@ const raceGuidePaths = [
 ];
 const seriesGuidePaths = [
   SUPERHALFS_PATH,
+  ...RUNNING_SERIES_GUIDES.map((guide) => `/running/series/${guide.slug}`),
   ...raceGroupDefinitions.map((group) => `/running/race-series#${group.code}`),
 ];
+assert(RUNNING_SERIES_GUIDES.length >= 8, "The eight new series guides must be present");
+assert.equal(
+  new Set(RUNNING_SERIES_GUIDES.map((guide) => guide.slug)).size,
+  RUNNING_SERIES_GUIDES.length,
+  "Series guide slugs must be unique",
+);
 const countryPortalPaths = COUNTRY_SITES.map((country) => `/en/${country.slug}`);
 const base = process.env.RUNNING_VERIFY_BASE ?? "http://127.0.0.1:8097";
 const toolPaths = ["/running/events", "/running/calendar", "/running/race-series"];
@@ -60,7 +68,9 @@ const paths = [
   "/running/trail",
   "/running/fell",
   "/running/cross-country",
+  "/running/race-series",
   SUPERHALFS_PATH,
+  ...RUNNING_SERIES_GUIDES.map((guide) => `/running/series/${guide.slug}`),
   ULTRA_GUIDE_PATH,
   ...ROAD_ULTRAS.map((race) => ultraPath(race.slug)),
   ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
@@ -139,6 +149,111 @@ function verifyGuideHub($) {
   );
 }
 
+function verifySeriesGuide($, guide, route) {
+  const canonical = `${siteUrl}${route}`;
+  const normalise = (value) => value.replace(/\s+/g, " ").trim();
+  const visibleText = (selection) => {
+    const copy = selection.clone();
+    copy.find("[hidden], [aria-hidden=true], template").remove();
+    return normalise(copy.text());
+  };
+  for (const id of [
+    "overview",
+    "entry",
+    "amateurs",
+    "competition",
+    "completion",
+    "planning",
+    "questions",
+    "official-links",
+  ]) {
+    const section = $(`#${id}`);
+    assert.equal(section.length, 1, `${route}: missing or duplicate ${id} section`);
+    assert(
+      !section.closest("[hidden], [aria-hidden=true], template").length && visibleText(section),
+      `${route}: ${id} section must have visible, readable content`,
+    );
+  }
+  for (const [id, field] of [
+    ["overview", "overview"],
+    ["entry", "entryAdvice"],
+    ["amateurs", "amateurAdvice"],
+    ["competition", "competitiveAdvice"],
+    ["completion", "completionOrRanking"],
+    ["planning", "planningAdvice"],
+  ]) {
+    assert(guide[field].length > 0, `${route}: ${field} is empty`);
+    const content = visibleText($(`#${id}`));
+    for (const paragraph of guide[field])
+      assert(
+        normalise(paragraph) && content.includes(normalise(paragraph)),
+        `${route}: ${field} paragraph missing from visible SSR content`,
+      );
+  }
+  assert(guide.faqs.length > 0, `${route}: runner questions are required`);
+  const questions = visibleText($("#questions"));
+  for (const faq of guide.faqs) {
+    assert(
+      normalise(faq.question) && questions.includes(normalise(faq.question)),
+      `${route}: runner question missing from visible SSR content`,
+    );
+    assert(
+      normalise(faq.answer) && questions.includes(normalise(faq.answer)),
+      `${route}: runner answer missing from visible SSR content`,
+    );
+  }
+
+  const readableLinks = (selector) =>
+    new Set(
+      $(selector)
+        .toArray()
+        .filter(
+          (element) =>
+            visibleText($(element)) &&
+            !$(element).closest("[hidden], [aria-hidden=true], template").length &&
+            !($(element).attr("rel") ?? "").toLowerCase().split(/\s+/).includes("nofollow"),
+        )
+        .map((element) => new URL($(element).attr("href"), siteUrl).href),
+    );
+  assert(guide.officialLinks.length > 0, `${route}: official sources are required`);
+  const officialLinks = readableLinks("#official-links a[href]");
+  for (const source of guide.officialLinks)
+    assert(
+      officialLinks.has(new URL(source.url).href),
+      `${route}: official source is missing from readable, followable SSR links: ${source.url}`,
+    );
+  assert(
+    readableLinks("main a[href]").has(`${siteUrl}${guideHubPath}`),
+    `${route}: readable return link to the running-guide hub is missing`,
+  );
+
+  const schemaNodes = [];
+  function collect(value) {
+    if (Array.isArray(value)) value.forEach(collect);
+    else if (value && typeof value === "object") {
+      schemaNodes.push(value);
+      Object.values(value).forEach(collect);
+    }
+  }
+  $('script[type="application/ld+json"]')
+    .toArray()
+    .forEach((element) => collect(JSON.parse($(element).html())));
+  const hasType = (node, type) => [node["@type"]].flat().includes(type);
+  const articles = schemaNodes.filter((node) => hasType(node, "Article"));
+  assert.equal(articles.length, 1, `${route}: one editorial Article is required`);
+  assert.equal(articles[0].url, canonical, `${route}: Article URL must be canonical`);
+  assert.equal(articles[0].mainEntityOfPage, canonical, `${route}: Article page must be canonical`);
+  assert.equal(articles[0].dateModified, guide.checkedAt, `${route}: Article check date differs`);
+  assert(
+    !schemaNodes.some((node) =>
+      [node["@type"]]
+        .flat()
+        .some((type) => typeof type === "string" && /Event(?:Series)?$/.test(type)),
+    ),
+    `${route}: an editorial series guide must not create Event markup`,
+  );
+}
+
 let cursor = 0;
 async function worker() {
   while (cursor < paths.length) {
@@ -167,6 +282,10 @@ async function worker() {
     for (const script of $('script[type="application/ld+json"]').toArray())
       JSON.parse($(script).html());
     if (route === guideHubPath) verifyGuideHub($);
+    const seriesGuide = RUNNING_SERIES_GUIDES.find(
+      (guide) => route === `/running/series/${guide.slug}`,
+    );
+    if (seriesGuide) verifySeriesGuide($, seriesGuide, route);
     $("main a[href]").each((i, element) => {
       const href = $(element).attr("href");
       if (href.startsWith("/running"))
@@ -266,8 +385,15 @@ for (const route of paths) {
     assert.match(sitemapDoc(entry).find("lastmod").text(), /^\d{4}-\d{2}-\d{2}$/, route);
   }
 }
-for (const route of ["/running/unknown-country", "/running/races/not-a-real-marathon"])
+for (const route of [
+  "/running/unknown-country",
+  "/running/races/not-a-real-marathon",
+  "/running/series/not-a-real-series",
+])
   assert.equal((await fetch(`${base}${route}`)).status, 404, route);
+// Invalid percent-encoded UTF-8 is rejected by the HTTP/router layer before
+// slug lookup. A missing but well-formed guide remains a 404 above.
+assert.equal((await fetch(`${base}/running/series/%E0%A4%A`)).status, 400);
 console.log(
-  `Passed SSR: ${paths.length} routes; hub links to ${countryGuidePaths.length} country guides, ${raceGuidePaths.length} individual race guides, ${seriesGuidePaths.length} race series and ${countryPortalPaths.length} country portals; distance labels, metadata, JSON-LD, results links, internal links, sitemap and 404s.`,
+  `Passed SSR: ${paths.length} routes; hub links to ${countryGuidePaths.length} country guides, ${raceGuidePaths.length} individual race guides, ${seriesGuidePaths.length} race series and ${countryPortalPaths.length} country portals; ${RUNNING_SERIES_GUIDES.length} editorial series guides with visible sections, questions, official sources and canonical Article markup; distance labels, metadata, JSON-LD, results links, internal links, sitemap and 404s.`,
 );

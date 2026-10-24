@@ -1,5 +1,16 @@
 export type MarathonCountry =
-  "uk" | "australia" | "new-zealand" | "usa" | "canada" | "ireland" | "south-africa";
+  | "uk"
+  | "australia"
+  | "new-zealand"
+  | "usa"
+  | "canada"
+  | "ireland"
+  | "south-africa"
+  | "spain"
+  | "portugal"
+  | "germany"
+  | "denmark"
+  | "czechia";
 
 export type RaceLink = { label: string; url: string };
 

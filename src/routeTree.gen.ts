@@ -109,6 +109,7 @@ import { Route as ApiRaceCalendarTokenRouteImport } from './routes/api/race-cale
 import { Route as RacesPlacesIndexRouteImport } from './routes/races/places/index'
 import { Route as RacesPlacesSplatRouteImport } from './routes/races/places/$'
 import { Route as RunningRacesSlugRouteImport } from './routes/running/races/$slug'
+import { Route as RunningSeriesSeriesRouteImport } from './routes/running/series/$series'
 import { Route as RunningUltramarathonsSlugRouteImport } from './routes/running/ultramarathons/$slug'
 import { Route as LanguageCountryRacesIndexRouteImport } from './routes/$language/$country/races/index'
 import { Route as LanguageCountryRacesSlugRouteImport } from './routes/$language/$country/races/$slug'
@@ -620,6 +621,11 @@ const RunningRacesSlugRoute = RunningRacesSlugRouteImport.update({
   path: '/running/races/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RunningSeriesSeriesRoute = RunningSeriesSeriesRouteImport.update({
+  id: '/running/series/$series',
+  path: '/running/series/$series',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RunningUltramarathonsSlugRoute =
   RunningUltramarathonsSlugRouteImport.update({
     id: '/running/ultramarathons/$slug',
@@ -744,6 +750,7 @@ export interface FileRoutesByFullPath {
   '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
+  '/running/series/$series': typeof RunningSeriesSeriesRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/races/places/': typeof RacesPlacesIndexRoute
@@ -850,6 +857,7 @@ export interface FileRoutesByTo {
   '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
+  '/running/series/$series': typeof RunningSeriesSeriesRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
   '/$language/$country': typeof LanguageCountryIndexRoute
   '/races/places': typeof RacesPlacesIndexRoute
@@ -957,6 +965,7 @@ export interface FileRoutesById {
   '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
+  '/running/series/$series': typeof RunningSeriesSeriesRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/races/places/': typeof RacesPlacesIndexRoute
@@ -1065,6 +1074,7 @@ export interface FileRouteTypes {
     | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
+    | '/running/series/$series'
     | '/running/ultramarathons/$slug'
     | '/$language/$country/'
     | '/races/places/'
@@ -1171,6 +1181,7 @@ export interface FileRouteTypes {
     | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
+    | '/running/series/$series'
     | '/running/ultramarathons/$slug'
     | '/$language/$country'
     | '/races/places'
@@ -1277,6 +1288,7 @@ export interface FileRouteTypes {
     | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
+    | '/running/series/$series'
     | '/running/ultramarathons/$slug'
     | '/$language/$country/'
     | '/races/places/'
@@ -1384,6 +1396,7 @@ export interface RootRouteChildren {
   ApiRaceCalendarTokenRoute: typeof ApiRaceCalendarTokenRoute
   RacesPlacesSplatRoute: typeof RacesPlacesSplatRoute
   RunningRacesSlugRoute: typeof RunningRacesSlugRoute
+  RunningSeriesSeriesRoute: typeof RunningSeriesSeriesRoute
   RunningUltramarathonsSlugRoute: typeof RunningUltramarathonsSlugRoute
   LanguageCountryIndexRoute: typeof LanguageCountryIndexRoute
   RacesPlacesIndexRoute: typeof RacesPlacesIndexRoute
@@ -2094,6 +2107,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RunningRacesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/running/series/$series': {
+      id: '/running/series/$series'
+      path: '/running/series/$series'
+      fullPath: '/running/series/$series'
+      preLoaderRoute: typeof RunningSeriesSeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/running/ultramarathons/$slug': {
       id: '/running/ultramarathons/$slug'
       path: '/running/ultramarathons/$slug'
@@ -2224,6 +2244,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiRaceCalendarTokenRoute: ApiRaceCalendarTokenRoute,
   RacesPlacesSplatRoute: RacesPlacesSplatRoute,
   RunningRacesSlugRoute: RunningRacesSlugRoute,
+  RunningSeriesSeriesRoute: RunningSeriesSeriesRoute,
   RunningUltramarathonsSlugRoute: RunningUltramarathonsSlugRoute,
   LanguageCountryIndexRoute: LanguageCountryIndexRoute,
   RacesPlacesIndexRoute: RacesPlacesIndexRoute,

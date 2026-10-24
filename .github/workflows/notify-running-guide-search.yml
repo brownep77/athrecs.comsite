@@ -12,6 +12,11 @@ on:
       - "src/components/running/RunningDiscovery.tsx"
       - "src/components/layout/AppShell.tsx"
       - "src/routes/running/race-series.tsx"
+      - "src/routes/running/series/**"
+      - "src/components/running/RunningSeriesGuidePage.tsx"
+      - "src/lib/running/series-guides*.ts"
+      - "src/data/running-series-guides.ts"
+      - "src/routes/site-map.tsx"
       - "src/routes/running/superhalfs.tsx"
       - "src/routes/running/$guide.tsx"
       - "src/routes/running/races/$slug.tsx"
@@ -28,6 +33,7 @@ on:
       - "src/data/superhalfs.ts"
       - "src/data/race-collections.ts"
       - "scripts/submit-running-guides-indexnow.mjs"
+      - "scripts/verify-running-guides-ssr.mjs"
       - "scripts/lib/athlete-search-readiness.mjs"
       - "scripts/indexnow-key-file.txt"
       - "public/*.txt"
@@ -58,6 +64,15 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Verify fail-closed notification safeguards
         run: node scripts/submit-running-guides-indexnow.mjs --self-test
+      - name: Verify country and individual road-guide data
+        run: |
+          npm run verify:road-marathon-guides
+          npm run verify:road-half-marathon-guides
       - name: Wait for production and notify the complete public guide set
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: node scripts/submit-running-guides-indexnow.mjs --submit --wait-for-hub=720 --expected-release="$GITHUB_SHA"
+      - name: Verify published guide pages, structured data and sitemap
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          RUNNING_VERIFY_BASE: https://www.athrecs.com
+        run: node scripts/verify-running-guides-ssr.mjs

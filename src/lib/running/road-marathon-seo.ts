@@ -95,7 +95,7 @@ export function countryMarathonQuestions(
     {
       question: "Where can I find past race and category results?",
       answer:
-        "Each race guide links to the organiser’s results. Choose the correct distance and edition to find a runner or published category standings.",
+        "Each race guide links to the organiser or timing provider’s published records. Choose the correct distance and edition, and read the coverage notes: some archives contain winners only, provisional classifications or results that need further searching.",
     },
   ];
 }
@@ -210,7 +210,7 @@ export function roadRaceQuestions(race: RoadMarathon, now: string) {
     {
       question: `Where can I find past ${race.name} results?`,
       answer:
-        "The past races and results section links to the organiser’s results. Select the distance and edition for participant searches and published category standings.",
+        "The past races and results section links to the organiser or timing provider’s published records. Check the distance and edition, and read this guide’s coverage notes: some sources show winners only, provisional classifications or a results portal that needs further searching.",
     },
   ];
 }

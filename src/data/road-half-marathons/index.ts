@@ -1,3 +1,8 @@
+import { RACES as SPAIN } from "./spain";
+import { RACES as PORTUGAL } from "./portugal";
+import { RACES as GERMANY } from "./germany";
+import { RACES as DENMARK } from "./denmark";
+import { RACES as CZECHIA } from "./czechia";
 import type { MarathonCountry } from "../road-marathons/types";
 import { RACES as UK } from "./uk";
 import { RACES as IRELAND } from "./ireland";
@@ -15,6 +20,11 @@ export const ROAD_HALF_MARATHONS = [
   ...AUSTRALIA,
   ...NEW_ZEALAND,
   ...SOUTH_AFRICA,
+  ...SPAIN,
+  ...PORTUGAL,
+  ...GERMANY,
+  ...DENMARK,
+  ...CZECHIA,
 ];
 export const roadHalfMarathonsForCountry = (country: MarathonCountry) =>
   ROAD_HALF_MARATHONS.filter((race) => race.country === country);

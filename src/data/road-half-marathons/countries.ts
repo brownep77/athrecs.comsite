@@ -64,6 +64,51 @@ export const HALF_MARATHON_COUNTRIES: readonly MarathonCountryGuide[] = [
     description:
       "South Africa’s road half marathons range from Cape Town’s established races to club events in Gauteng. Compare 21.0975 km races by province, with dates, entry methods, route information and results. Check each organiser’s licence and entry rules before booking. The early alarm is often part of the experience; a sensible first kilometre remains optional, but advisable.",
   },
+  {
+    id: "spain",
+    name: "Spain",
+    guide: "spain-half-marathons",
+    countryCode: "ES",
+    regionLabel: "Autonomous community",
+    description:
+      "Compare the Valencia and Barcelona half marathons, with official entry routes, course previews, local start information and results links. These 21.0975 km guides help amateur, club and elite runners plan a Spanish race weekend. Provisional dates and older course information are clearly labelled.",
+  },
+  {
+    id: "portugal",
+    name: "Portugal",
+    guide: "portugal-half-marathons",
+    countryCode: "PT",
+    regionLabel: "Metropolitan area",
+    description:
+      "Compare Lisbon and Porto half marathons, with course previews, entry guidance, published dates and practical runner information. Check the correct edition before arranging travel. Lisbon's conflicting official start times are shown together as TBC, and older Porto route and timetable details are labelled by year.",
+  },
+  {
+    id: "germany",
+    name: "Germany",
+    guide: "germany-half-marathons",
+    countryCode: "DE",
+    regionLabel: "State / city",
+    description:
+      "Explore selected German road half marathons in Berlin and Cologne, with entry routes, organiser evidence, course previews and results links. Compare practical information for amateur and competitive runners. Confirm the current edition's timetable and registration status before making travel plans.",
+  },
+  {
+    id: "denmark",
+    name: "Denmark",
+    guide: "denmark-half-marathons",
+    countryCode: "DK",
+    regionLabel: "Region",
+    description:
+      "Compare Copenhagen Half Marathon and Aarhus City Half, with confirmed dates, entry routes, course previews and practical guidance. The Copenhagen guide distinguishes its 2027 event from the 2026 championship. Follow the official organiser links for final start instructions, time limits and any remaining entry options.",
+  },
+  {
+    id: "czechia",
+    name: "Czechia",
+    guide: "czechia-half-marathons",
+    countryCode: "CZ",
+    regionLabel: "Region",
+    description:
+      "Compare Prague and Olomouc half marathons, with organiser-confirmed dates, published start times, entry routes and course previews. Find practical guidance for amateur, club and competitive runners, including the timing basis of published limits. Confirm the race's own distance and edition before arranging travel.",
+  },
 ];
 
 export const halfMarathonCountry = (id: string) =>

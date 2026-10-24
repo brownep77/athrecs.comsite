@@ -62,6 +62,56 @@ export const MARATHON_PLANNING: Record<MarathonCountry, { title: string; text: s
       text: "At events with a half marathon, relay or ultra, check that your entry is for the individual full marathon. Look for collection arrangements, start times and any transport to the start before making the weekend plan. Previous results help show the race’s scale, but finishers are not the same as entries. For a time target, study the route map as well as the headline course description; hills have never been much impressed by ambition.",
     },
   ],
+  spain: [
+    {
+      title: "Separate the full marathon from the half",
+      text: "Valencia and Barcelona each have separate marathon and half-marathon guides. Check the distance, edition and official entry link together before making a booking. A half-marathon place does not provide entry to the full marathon, and a future date mentioned provisionally should not be treated as a confirmed travel date.",
+    },
+    {
+      title: "Match your time goal to the current entry rules",
+      text: "Read the organiser's current wave, qualifying and elite-entry requirements before deciding how to apply. Check whether a previous performance needs supporting evidence and whether the course information belongs to the edition you plan to run. The individual guides link to official maps and results archives so you can compare the route and field with your own target.",
+    },
+  ],
+  portugal: [
+    {
+      title: "Plan transport around the published start",
+      text: "Use the edition-specific start location and transport instructions when planning Lisbon or Porto. Do not assume an older route or start venue still applies. Check number collection, the journey to the start and your return from the finish separately, and leave bookings flexible where the next edition is still awaiting confirmation.",
+    },
+    {
+      title: "Keep dates, distances and timetables together",
+      text: "Lisbon and Porto both have separate full-marathon and half-marathon events. Follow the entry and timetable links for the correct distance rather than carrying over details from another race. Where official information disagrees or a newer programme has not been published, the guides explain the uncertainty; confirm the final runner instructions before race day.",
+    },
+  ],
+  germany: [
+    {
+      title: "Check how to secure your place",
+      text: "Berlin and Frankfurt have their own entry processes, eligibility rules and deadlines. Use the current organiser entry page to check which route is open to you before arranging travel. A published date or a previous qualifying performance does not by itself confirm a place, and competitive or elite applications may have separate requirements.",
+    },
+    {
+      title: "Use the correct edition's runner information",
+      text: "Compare official course maps, wave instructions and number-collection arrangements for the year you intend to run. An older map can help you understand the event, but it is a preview until the organiser confirms the new route. Check full-marathon results when assessing the field and retain the distinction between chip time, gun time and qualifying rules.",
+    },
+  ],
+  denmark: [
+    {
+      title: "Compare Copenhagen and Odense on race-day detail",
+      text: "Read each marathon's course preview, entry guidance and practical notes before choosing a race. Check the exact start area, number collection and organiser transport advice rather than assuming that staying near the city centre settles the logistics. An available race date does not mean every part of the final programme has been announced.",
+    },
+    {
+      title: "Keep elite applications and general entry separate",
+      text: "Athletes seeking a competitive or elite place should use the organiser's current application rules and resolve any conflicting deadline directly. Other runners should check general entry status and the applicable time limit. Treat an earlier edition's route as a labelled preview until the organiser publishes the new map and final runner instructions.",
+    },
+  ],
+  czechia: [
+    {
+      title: "Read the route beyond the event name",
+      text: "Prague and Třeboň offer different settings, but the name alone does not establish the surface or profile. Use the course notes and official map to assess the route, turns and start-to-finish arrangements. If you are choosing a road marathon, check the published surface description rather than treating nature branding as proof of a trail course.",
+    },
+    {
+      title: "Check the timing basis and the exact race",
+      text: "Confirm whether the organiser applies its time limit from the starting gun or your individual start. Marathon weekends and race families can include several distances, each with its own timetable and entry conditions. Choose the full-marathon registration, check collection arrangements and use the edition-specific instructions for your pacing and travel plans.",
+    },
+  ],
   "south-africa": [
     {
       title: "Choose your province, then read the profile",

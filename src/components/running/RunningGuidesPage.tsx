@@ -458,9 +458,11 @@ export function RunningGuidesPage({ directory }: { directory: RunningGuideDirect
               <a href="#race-series" className="text-accent underline underline-offset-4">
                 race-series section
               </a>{" "}
-              links to the SuperHalfs guide and the World Marathon Majors, UTMB World Series and
-              UTMB Index race collections. UTMB Index is a race collection, separate from the UTMB
-              World Series.
+              links to SuperHalfs, European Marathon Classics, Marathon des Sables and other road,
+              trail and desert guides, alongside the World Marathon Majors, UTMB World Series and
+              UTMB Index race collections. Each guide explains its entry routes and any completion
+              or ranking rules. UTMB Index is a race collection, separate from the UTMB World
+              Series.
             </p>
           </div>
           <div>

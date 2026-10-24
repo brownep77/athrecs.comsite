@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 348 unique sources. Only 36 are enabled; the other 312 remain
+The registry contains 841 unique sources. Only 36 are enabled; the other 805 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 348 sources create exactly one source job;
+- all 841 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 312 sources are retained as blocked jobs with their reason;
+- the other 805 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -260,3 +260,11 @@ advertise a later edition; use the actual dated result sheet. Conflicting report
 versions retain their export timestamps and original observations. Enigma returned
 502/503, so its search snippets verified no individual result. Participant evidence
 and identity decisions remain in the staff backend. No collection setting changes.
+
+## European road-guide research, checked 23 October 2026
+
+Added 14 disabled research references for Sparta Copenhagen, HCA Marathon, SportsTiming Denmark, Aarhus City Half winners, Třeboň Nature Marathon, Stopnito, Valencia, both Barcelona races, Maratona Clube de Portugal, Runporto, SCC Berlin, Frankfurt and Cologne. Paired organiser archives share records. Existing RunCzech, Sportmaniacs, SportHive and Mika Timing records retain their original configuration and check history, with dated coverage notes appended.
+
+The notes preserve the access and evidence limits: SportsTiming human verification, SportHive application shells, provisional Porto classifications, Aarhus winners-only coverage and Berlin archive reuse restrictions. No participant result is verified by these registrations, and no automated collection is enabled.
+
+Restored the reviewed additions on 24 October 2026 and reconciled them with the newer registry, preserving the intervening source additions. This recovery is not a new live source check. The current registry contains 841 sources: 36 enabled and 805 disabled.
