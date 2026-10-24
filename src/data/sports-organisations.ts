@@ -259,7 +259,13 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     sports: swimming,
     website: "https://www.worldaquatics.com/",
     summary: "International federation for aquatic sports, including pool and open-water swimming.",
-    sources: ["https://www.worldaquatics.com/", "https://swimireland.ie/about/"],
+    sources: [
+      "https://www.worldaquatics.com/",
+      "https://swimireland.ie/about/",
+      "https://www.worldaquatics.com/competitions",
+      "https://www.worldaquatics.com/results",
+      "https://www.worldaquatics.com/athletes",
+    ],
   }),
 
   record({

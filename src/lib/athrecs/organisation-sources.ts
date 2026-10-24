@@ -22,6 +22,10 @@ export function attachSourceOrganisations(
 ): FixtureSource[] {
   const groups = groupOrganisations(organisations);
   const reviewedLinks: Record<string, string[]> = {
+    world_aquatics_calendar: ["world-aquatics"],
+    world_aquatics_results: ["world-aquatics"],
+    world_aquatics_athletes: ["world-aquatics"],
+
     sasa_east_district: ["sasa-east-district"],
     sasa_midland_district: ["sasa-midland-district"],
     sasa_north_district: ["sasa-north-district"],
