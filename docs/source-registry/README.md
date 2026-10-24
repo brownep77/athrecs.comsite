@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 903 unique sources as of 24 October 2026. Only 36 are enabled; the other 867 remain
+The registry contains 905 unique sources as of 24 October 2026. Only 36 are enabled; the other 869 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 903 sources create exactly one source job;
+- all 905 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 867 sources are retained as blocked jobs with their reason;
+- the other 869 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -291,3 +291,33 @@ All 30 new registrations and the existing World Triathlon athlete-search source 
 disabled for automated collection. Preserve original
 capture dates separately from this review date. Private athlete identity checks,
 source exports and publication receipts are held outside the public repository.
+
+## Club member marathon histories, 24 October 2026
+
+Registered Club Super Marathon Italia as one disabled manual research source. Its
+public rankings index links club member totals and historical race logs through
+TeamOrg / ProgettoD and the observed tmo-048.cloud host. These linked service hosts
+are recorded together rather than added as duplicate sources. Registry and wider
+event-inventory checks found no existing matching entry.
+
+The club records support historical research; they are not original timing reports
+or proof of a complete current history. Resolve date and distance anomalies against
+organiser or timing-provider evidence, and preserve minute-only times without
+inventing seconds. Aggregate counts do not establish additional participations.
+Individual captures and identity decisions stay in private staff evidence. Automated
+collection remains disabled pending rights and selector review. The registry now
+contains 905 sources: 36 enabled and 869 disabled.
+
+## Tri-Island Running organiser archive, 24 October 2026
+
+Registered the opened Tri-Island Running general results index as a disabled manual
+research source. Its Frosty Triple archive lists dated daily reports for 2017–2022
+and separate three-day standings. The 2020 edition is explicitly virtual. Registry
+and wider event-inventory checks found no existing matching provider.
+
+Use the original organiser reports to establish each edition, day, distance, finish
+status and timing basis. Daily race results, series aggregates and virtual results
+remain separate. The index alone does not verify an athlete result. Individual
+captures stay in private staff evidence; registration does not enable automated
+collection or establish participant-reuse rights. The registry contains 905 sources:
+36 enabled and 869 disabled.
