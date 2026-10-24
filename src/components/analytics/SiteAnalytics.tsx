@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { Analytics } from "@vercel/analytics/react";
 import { FlagValues } from "flags/react";
@@ -52,24 +52,63 @@ export function SiteAnalytics({ featureFlags = {} }: { featureFlags?: PublicFeat
   const preferencesButton = useRef<HTMLButtonElement>(null);
   const preferencesPanel = useRef<HTMLElement>(null);
   const moveFocus = useRef(false);
+  const initialChoiceRead = useRef(false);
+  const hydrationViewport = useRef<{
+    main: HTMLElement;
+    top: number;
+    x: number;
+    y: number;
+  } | null>(null);
   const analyticsDisabled = isPrivateAnalyticsPath(pathname) || isSportsRecsHostname();
 
   useEffect(() => {
     if (analyticsDisabled) return;
+    let nextChoice: Exclude<ConsentChoice, "unknown"> = "denied";
     try {
       const stored = localStorage.getItem(CONSENT_KEY);
       // An old first-party-only choice does not cover the new Vercel notice.
-      setChoice(
+      nextChoice =
         stored === "denied"
           ? "denied"
           : hasWebAnalyticsConsent(localStorage)
             ? "granted"
-            : "undecided",
-      );
+            : "undecided";
     } catch {
-      setChoice("denied");
+      // Unavailable storage leaves tracking off.
     }
+    if (!initialChoiceRead.current) {
+      initialChoiceRead.current = true;
+      const main = document.querySelector<HTMLElement>("main[data-athrecs-main]");
+      if (main && window.scrollY > 0) {
+        const top = main.getBoundingClientRect().top;
+        hydrationViewport.current = { main, top, x: window.scrollX, y: window.scrollY };
+      }
+    }
+    setChoice(nextChoice);
   }, [analyticsDisabled]);
+
+  useLayoutEffect(() => {
+    if (choice === "unknown") return;
+    const snapshot = hydrationViewport.current;
+    hydrationViewport.current = null;
+    if (
+      !snapshot ||
+      analyticsDisabled ||
+      !snapshot.main.isConnected ||
+      document.querySelector("main[data-athrecs-main]") !== snapshot.main
+    )
+      return;
+    const top = snapshot.main.getBoundingClientRect().top;
+    // Geometry reads may apply native scroll anchoring. Do not undo that, or a
+    // scroll the user/router made while the initial consent choice was resolving.
+    if (window.scrollX !== snapshot.x || window.scrollY !== snapshot.y) return;
+    const delta = top - snapshot.top;
+    if (Number.isFinite(delta) && delta !== 0) {
+      // Keep an already visible race control in place when the initial notice
+      // appears above main; later explicit privacy choices retain normal focus.
+      window.scrollBy({ top: delta, left: 0, behavior: "instant" });
+    }
+  }, [analyticsDisabled, choice]);
 
   useEffect(() => {
     if (analyticsDisabled || choice !== "granted") return;

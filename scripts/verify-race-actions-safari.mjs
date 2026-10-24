@@ -29,6 +29,14 @@ let driver,
   failure,
   phase = "setup";
 const driverLog = fs.createWriteStream(`${prefix}-driver.log`);
+function driverState() {
+  return {
+    pid: driver?.pid ?? null,
+    exitCode: driver?.exitCode ?? null,
+    signalCode: driver?.signalCode ?? null,
+    spawnError: driverError?.message ?? null,
+  };
+}
 async function api(method, route, body, timeout = 60000) {
   const response = await fetch(`http://127.0.0.1:4444${route}`, {
     method,
@@ -238,20 +246,48 @@ try {
   });
   driver.stdout.pipe(driverLog, { end: false });
   driver.stderr.pipe(driverLog, { end: false });
-  await until(
-    "safaridriver ready",
-    async () => {
-      if (driverError) throw driverError;
-      if (driver.exitCode !== null || driver.signalCode !== null)
-        throw new Error(`safaridriver exited ${driver.exitCode ?? driver.signalCode}`);
-      try {
-        return (await api("GET", "/status", undefined, 2000)).ready;
-      } catch {
-        return false;
-      }
-    },
-    20000,
-  );
+  phase = "wait for safaridriver readiness";
+  const readinessStarted = Date.now();
+  report.driverReadiness = {
+    timeoutMs: platform === "ios" ? 60000 : 20000,
+    attempts: 0,
+    lastStatusResponse: null,
+    lastStatusError: null,
+  };
+  try {
+    await until(
+      "safaridriver ready",
+      async () => {
+        report.driverReadiness.attempts++;
+        if (driverError) throw driverError;
+        if (driver.exitCode !== null || driver.signalCode !== null)
+          throw new Error(`safaridriver exited ${driver.exitCode ?? driver.signalCode}`);
+        try {
+          const response = await api("GET", "/status", undefined, 2000);
+          report.driverReadiness.lastStatusResponse = {
+            observedAt: new Date().toISOString(),
+            value: response ?? null,
+          };
+          report.driverReadiness.lastAttemptOutcome = "response";
+          return response?.ready === true;
+        } catch (error) {
+          report.driverReadiness.lastStatusError = {
+            observedAt: new Date().toISOString(),
+            name: error.name,
+            message: error.message,
+            code: error.code ?? error.cause?.code ?? null,
+            cause: error.cause?.message ?? null,
+          };
+          report.driverReadiness.lastAttemptOutcome = "error";
+          return false;
+        }
+      },
+      report.driverReadiness.timeoutMs,
+    );
+  } finally {
+    report.driverReadiness.elapsedMs = Date.now() - readinessStarted;
+    report.driverReadiness.process = driverState();
+  }
   const capabilities = { browserName: "Safari", pageLoadStrategy: "normal" };
   if (platform === "ios")
     Object.assign(capabilities, {
@@ -492,7 +528,15 @@ try {
 } catch (error) {
   failure = error;
   report.failure = { phase, message: error.message, stack: error.stack };
+  report.driverStateAtFailure = driverState();
   console.error(`FAIL (${phase}): ${error.stack}`);
+  console.error(
+    "SAFARIDRIVER DIAGNOSTICS: " +
+      JSON.stringify({
+        readiness: report.driverReadiness ?? null,
+        process: report.driverStateAtFailure,
+      }),
+  );
   if (sessionId) {
     try {
       await screenshot("failure");
@@ -511,6 +555,7 @@ try {
     }
   }
 } finally {
+  report.driverStateBeforeCleanup = driverState();
   if (sessionId)
     try {
       await api("DELETE", `/session/${sessionId}`);
@@ -523,6 +568,7 @@ try {
     await pause(300);
     if (driver.exitCode === null && driver.signalCode === null) driver.kill("SIGKILL");
   }
+  report.driverStateAfterCleanup = driverState();
   driverLog.end();
   report.finishedAt = new Date().toISOString();
   report.result = failure ? "FAIL" : "PASS";
