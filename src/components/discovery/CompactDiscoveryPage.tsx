@@ -146,7 +146,7 @@ export function CompactDiscoveryPage({
       </nav>
       <div className="grid items-start gap-5 bg-[#f5f8f9] px-3 py-5 sm:px-5 lg:grid-cols-[190px_minmax(0,1fr)] lg:px-6 xl:grid-cols-[205px_minmax(0,1fr)_245px] xl:gap-6 2xl:px-8">
         <aside
-          className="rounded-lg border border-border bg-white p-3 lg:sticky lg:top-37"
+          className="rounded-lg border border-border bg-white p-3 lg:sticky lg:top-37 lg:max-h-[calc(100dvh_-_10.25rem)] lg:overflow-y-auto lg:overscroll-contain"
           aria-label={`${sportName} navigation`}
         >
           <div>

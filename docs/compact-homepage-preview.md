@@ -8,6 +8,7 @@ This branch implements the selected compact teal layout for the AthRecs homepage
 - Country, Month and Distance are together above the fixture list. On a phone, Month and Distance remain next to each other.
 - The left navigation includes UK, Ireland, United States, Canada, Australia, New Zealand and South Africa. These are the seven requested countries with published road-marathon guides. Homepage country links open the existing running-country hubs; country links on a discipline page retain that discipline.
 - The Guides section links to the running guide directory, seven country marathon guides, race series and individual race guides.
+- The desktop sidebar scrolls independently when its expanded guide list is taller than the available window.
 - The sport bar changes to separate pages for Athletics, Triathlon, Cycling, Swimming, Duathlon and parkrun. Cycling also has road, mountain-bike, track and BMX shortcuts. Each page uses the matching catalogue, labels and practical information.
 - Sport filters are remembered in the current browser tab. Text search keeps the selected country, month and distance.
 - Results and Clubs shortcuts carry the current sport context. Broad Running results use the explicit `all-running` category, leaving the older `running` alias unchanged.
@@ -41,7 +42,9 @@ Local server checks have exercised the actual Running and Athletics pages, not o
 
 ## Verification
 
-The focused checks cover TypeScript, changed-file linting, fixture scope and month filtering before pagination, result scope, saved-item validation, calendar identity and preview isolation. The preview isolation test uses a disposable database and rejects outbound network requests. Hosted browser and cold-start checks are the remaining deployment checks after Vercel team access is granted.
+The focused checks cover TypeScript, changed-file linting, fixture scope and month filtering before pagination, result scope, saved-item validation, calendar identity and preview isolation. The preview isolation test uses a disposable database and rejects outbound network requests.
+
+The hosted desktop preview has also exercised a United Kingdom / April 2027 / Half marathon search, saved a real fixture, switched through Athletics and Swimming, restored the Running filters, retained the shortlist across sports, expanded all seven country guide links and loaded the Canadian marathon guide. The first cold catalogue load is slower than subsequent navigation. Phone-width browser review remains part of the user review checklist.
 
 ```sh
 npm run typecheck
