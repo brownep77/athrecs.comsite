@@ -1,17 +1,26 @@
 import { execFile } from "node:child_process";
-import { appendFile, mkdir, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, stat, writeFile } from "node:fs/promises";
+import { release, version } from "node:os";
+import { isAbsolute, join } from "node:path";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
 const commandTimeout = 20_000;
 const inventoryTimeout = 60_000;
 const bootTimeout = 180_000;
+const safariLaunchTimeout = 120_000;
 const udidPattern = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const artifactPrefix = "artifacts/race-actions-safari-ios-setup";
 const started = Date.now();
 const report = {
   startedAt: new Date(started).toISOString(),
   hostPlatform: process.platform,
+  hostArchitecture: process.arch,
+  hostOS: { release: release(), version: version() },
+  requestedDevice: {
+    runtimeVersion: process.env.ATHRECS_SAFARI_REQUIRED_RUNTIME_VERSION ?? null,
+    name: process.env.ATHRECS_SAFARI_REQUIRED_DEVICE_NAME ?? null,
+  },
   status: "running",
   phase: "initialising",
   phases: [],
@@ -42,9 +51,12 @@ async function phase(name) {
   await saveDiagnostics();
 }
 
-async function simctl(args, timeout = commandTimeout) {
+async function runCommand(file, args, timeout = commandTimeout) {
   const commandStarted = Date.now();
+  const commandText = `${file} ${args.join(" ")}`;
+  const isInventory = file === "xcrun" && args[0] === "simctl" && args[1] === "list";
   const command = {
+    file,
     args,
     phase: report.phase,
     timeoutMs: timeout,
@@ -52,10 +64,10 @@ async function simctl(args, timeout = commandTimeout) {
     status: "running",
   };
   report.commands.push(command);
-  note(`Starting xcrun simctl ${args.join(" ")} (limit ${timeout / 1000}s)`);
+  note(`Starting ${commandText} (limit ${timeout / 1000}s)`);
   await saveDiagnostics();
   try {
-    const { stdout, stderr } = await exec("xcrun", ["simctl", ...args], {
+    const { stdout, stderr } = await exec(file, args, {
       encoding: "utf8",
       timeout,
       killSignal: "SIGKILL",
@@ -65,9 +77,9 @@ async function simctl(args, timeout = commandTimeout) {
     command.code = 0;
     command.elapsedMs = Date.now() - commandStarted;
     // Retain boot progress and errors, never the full simulator inventory.
-    if (args[0] !== "list" && stdout.trim()) command.stdoutTail = stdout.trim().slice(-2000);
+    if (!isInventory && stdout.trim()) command.stdoutTail = stdout.trim().slice(-2000);
     if (stderr?.trim()) command.stderrTail = stderr.trim().slice(-2000);
-    note(`Completed xcrun simctl ${args.join(" ")} (${command.elapsedMs}ms)`);
+    note(`Completed ${commandText} (${command.elapsedMs}ms)`);
     return stdout;
   } catch (error) {
     command.status = "failed";
@@ -76,21 +88,23 @@ async function simctl(args, timeout = commandTimeout) {
     command.signal = error.signal ?? null;
     command.timedOut = Boolean(error.killed);
     if (error.stderr?.trim()) command.stderrTail = error.stderr.trim().slice(-2000);
-    if (args[0] !== "list" && error.stdout?.trim())
-      command.stdoutTail = error.stdout.trim().slice(-2000);
+    if (!isInventory && error.stdout?.trim()) command.stdoutTail = error.stdout.trim().slice(-2000);
     const reason = error.killed
       ? `timed out after ${timeout / 1000}s`
       : `failed (${error.code ?? error.signal ?? "unknown status"})`;
     const detail = String(error.stderr || error.message || "")
       .trim()
       .slice(-1200);
-    command.error = `xcrun simctl ${args.join(" ")} ${reason}${detail ? `: ${detail}` : ""}`;
+    command.error = `${commandText} ${reason}${detail ? `: ${detail}` : ""}`;
     note(command.error);
     throw new Error(command.error);
   } finally {
     await saveDiagnostics();
   }
 }
+
+const simctl = (args, timeout = commandTimeout) =>
+  runCommand("xcrun", ["simctl", ...args], timeout);
 
 async function inventory(args, timeout = commandTimeout) {
   const output = await simctl(args, timeout);
@@ -105,6 +119,8 @@ async function recordToolchain() {
   const commands = [
     { name: "developerDirectory", file: "/usr/bin/xcode-select", args: ["-p"] },
     { name: "xcodeVersion", file: "/usr/bin/xcodebuild", args: ["-version"] },
+    { name: "macOSVersion", file: "/usr/bin/sw_vers", args: [] },
+    { name: "hostMachine", file: "/usr/bin/uname", args: ["-m"] },
   ];
   const results = await Promise.allSettled(
     commands.map(({ file, args }) =>
@@ -117,6 +133,7 @@ async function recordToolchain() {
     ),
   );
   report.toolchain = {};
+  report.toolchain.developerDirectoryOverride = process.env.DEVELOPER_DIR ?? null;
   for (const [index, result] of results.entries()) {
     const { name, file, args } = commands[index];
     const diagnostic = { command: `${file} ${args.join(" ")}`, timeoutMs: commandTimeout };
@@ -130,6 +147,58 @@ async function recordToolchain() {
       note(`Toolchain diagnostic failed: ${diagnostic.command}: ${diagnostic.error}`);
     }
     report.toolchain[name] = diagnostic;
+  }
+  await saveDiagnostics();
+}
+
+function validateRequestedDevice() {
+  const { runtimeVersion, name } = report.requestedDevice;
+  if (runtimeVersion !== null && !/^\d+(?:\.\d+){1,2}$/.test(runtimeVersion)) {
+    throw new Error(
+      "ATHRECS_SAFARI_REQUIRED_RUNTIME_VERSION must be an exact version such as 18.5.",
+    );
+  }
+  if (name !== null && (!name.trim() || name !== name.trim() || /[\r\n\0]/.test(name))) {
+    throw new Error("ATHRECS_SAFARI_REQUIRED_DEVICE_NAME must be an exact nonempty device name.");
+  }
+}
+
+async function openSimulatorUI() {
+  const selectedDirectory = process.env.DEVELOPER_DIR || report.toolchain.developerDirectory.output;
+  if (!selectedDirectory || !isAbsolute(selectedDirectory) || /[\r\n\0]/.test(selectedDirectory)) {
+    throw new Error("Cannot resolve Simulator.app from the active Xcode developer directory.");
+  }
+  const developerDirectory = selectedDirectory.endsWith(".app")
+    ? join(selectedDirectory, "Contents", "Developer")
+    : selectedDirectory;
+  const application = join(developerDirectory, "Applications", "Simulator.app");
+  if (!(await stat(application)).isDirectory()) {
+    throw new Error(`Selected Xcode does not contain Simulator.app: ${application}`);
+  }
+  report.simulatorUI = { application, deviceUDID: report.selectedDevice.udid, status: "opening" };
+  // Use the selected Xcode's UI. The requested device has already finished booting;
+  // do not change Simulator preferences or let Launch Services choose another Xcode.
+  await runCommand("/usr/bin/open", ["-a", application], 30_000);
+  report.simulatorUI.status = "open-command-completed";
+  await saveDiagnostics();
+}
+
+async function captureSimulatorScreen() {
+  if (!report.readiness || report.diagnosticScreenshot) return;
+  const path = `${artifactPrefix}-screen.png`;
+  report.diagnosticScreenshot = { path, phase: report.phase, status: "running" };
+  try {
+    await simctl(["io", report.selectedDevice.udid, "screenshot", path]);
+    const { size } = await stat(path);
+    if (!size) throw new Error("Simulator screenshot is empty.");
+    report.diagnosticScreenshot.status = "captured";
+    report.diagnosticScreenshot.bytes = size;
+  } catch (error) {
+    // A diagnostic capture is not evidence of readiness and cannot turn a setup
+    // or native browser failure into a pass.
+    report.diagnosticScreenshot.status = "failed";
+    report.diagnosticScreenshot.error = error.message;
+    note(`Simulator screenshot diagnostic failed: ${error.message}`);
   }
   await saveDiagnostics();
 }
@@ -157,7 +226,12 @@ function selectDevice(devices, runtimes) {
     /^com\.apple\.CoreSimulator\.SimRuntime\.iOS-/.test(runtime.identifier),
   );
   const available = iosRuntimes
-    .filter((runtime) => runtime.isAvailable === true)
+    .filter(
+      (runtime) =>
+        runtime.isAvailable === true &&
+        (report.requestedDevice.runtimeVersion === null ||
+          runtime.version === report.requestedDevice.runtimeVersion),
+    )
     .sort(
       (a, b) => compareVersions(b.version, a.version) || a.identifier.localeCompare(b.identifier),
     );
@@ -167,6 +241,7 @@ function selectDevice(devices, runtimes) {
         (device) =>
           device.isAvailable === true &&
           udidPattern.test(device.udid) &&
+          (report.requestedDevice.name === null || device.name === report.requestedDevice.name) &&
           (/^iPhone\b/.test(device.name) || /\.iPhone-/.test(device.deviceTypeIdentifier ?? "")),
       )
       .sort(
@@ -182,7 +257,9 @@ function selectDevice(devices, runtimes) {
     .map((runtime) => `${runtime.name} (${runtime.isAvailable ? "available" : "unavailable"})`)
     .join(", ");
   throw new Error(
-    "No available existing iPhone Simulator was found. " +
+    "No available existing iPhone Simulator matched " +
+      `runtime ${report.requestedDevice.runtimeVersion ?? "any installed version"} and ` +
+      `device ${report.requestedDevice.name ?? "any iPhone"}. ` +
       `Reported iOS runtimes: ${summary || "none"}. ` +
       "Use a macOS runner with Xcode and an installed iOS Simulator runtime; this setup does not download runtimes.",
   );
@@ -193,6 +270,7 @@ async function main() {
   if (process.platform !== "darwin" || process.env.GITHUB_ACTIONS !== "true") {
     throw new Error("This setup runs only in GitHub Actions on a macOS runner.");
   }
+  validateRequestedDevice();
   await phase("toolchain");
   await recordToolchain();
   await phase("inventory");
@@ -230,10 +308,14 @@ async function main() {
     observedAt: new Date().toISOString(),
     finalProofRequired: "Native Safari session, navigation and application checks must pass",
   };
+  await phase("open-simulator-ui");
+  await openSimulatorUI();
   // Launch the installed browser once before WebDriver's remote connection.
   // This is a bounded warm-up; only the subsequent native session can verify it.
   await phase("launch-safari");
-  await simctl(["launch", device.udid, "com.apple.mobilesafari"], 30_000);
+  await simctl(["launch", device.udid, "com.apple.mobilesafari"], safariLaunchTimeout);
+  await phase("capture-safari-screen");
+  await captureSimulatorScreen();
   await phase("export-environment");
   const environment = {
     ATHRECS_SAFARI_DEVICE_UDID: device.udid,
@@ -272,6 +354,7 @@ async function run() {
     report.failure = { phase: report.phase, message: error.message };
     note(`iOS Safari simulator setup failed: ${error.message}`);
     process.exitCode = 1;
+    await captureSimulatorScreen();
   } finally {
     report.finishedAt = new Date().toISOString();
     report.elapsedMs = Date.now() - started;
