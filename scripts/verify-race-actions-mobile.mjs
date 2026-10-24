@@ -46,9 +46,10 @@ const group = (summary, label) =>
 
 async function open(summary) {
   if (!(await summary.evaluate((el) => el.parentElement.open))) await summary.tap();
-  await summary
-    .page()
-    .waitForFunction((el) => el.parentElement.open, await summary.elementHandle());
+  await summary.evaluate((el) => {
+    window.__awaitedShareSummary = el;
+  });
+  await summary.locator("xpath=parent::details[@open]").waitFor({ state: "attached" });
 }
 async function close(summary) {
   if (await summary.evaluate((el) => el.parentElement.open)) await summary.tap();
@@ -77,7 +78,27 @@ async function checkLayout(page, panel, width, label) {
     // that a desktop scroll command tests physical finger-swipe behavior.
     await control.evaluate((el) => el.scrollIntoView({ block: "center", inline: "nearest" }));
     const box = await control.boundingBox();
-    assert(box && box.width >= 43.5 && box.height >= 43.5, `${label}: target smaller than 44px`);
+    const sizing = await control.evaluate((el) => ({
+      label: el.textContent.trim(),
+      width: el.offsetWidth,
+      height: el.offsetHeight,
+      active: el.matches(":active"),
+      scale: getComputedStyle(el).scale,
+      transform: getComputedStyle(el).transform,
+    }));
+    // The shared Button intentionally shrinks to 98% while pressed. Its normal
+    // touch target must still be 44px; account only for that known active effect.
+    const pressedFeedback = sizing.active && /^0\.98(?: 0\.98)?$/.test(sizing.scale);
+    if (pressedFeedback)
+      console.log(`Observed pressed-button scale: ${JSON.stringify({ label, box, sizing })}`);
+    assert(
+      sizing.width >= 44 &&
+        sizing.height >= 44 &&
+        box &&
+        box.width >= 43.5 * (pressedFeedback ? 0.98 : 1) &&
+        box.height >= 43.5 * (pressedFeedback ? 0.98 : 1),
+      `${label}: target smaller than 44px ${JSON.stringify({ box, sizing })}`,
+    );
     assert(box.x >= -1 && box.x + box.width <= width + 1, `${label}: clipped control`);
     assert(
       await control.evaluate((el) => {
@@ -243,12 +264,88 @@ try {
     page.setDefaultTimeout(15000);
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
-    await context.addInitScript(() => {
-      window.__trustedTouchCount = 0;
-      document.addEventListener("pointerdown", (event) => {
-        if (event.isTrusted && event.pointerType === "touch") window.__trustedTouchCount++;
-      });
-    });
+    await context.addInitScript(
+      ({ name }) => {
+        window.__trustedTouchCount = 0;
+        document.addEventListener("pointerdown", (event) => {
+          if (event.isTrusted && event.pointerType === "touch") window.__trustedTouchCount++;
+        });
+        if (name === "iPhone 13" && location.pathname === "/running/races/london-marathon") {
+          const ids = new WeakMap();
+          let nextId = 0;
+          const id = (el) => {
+            if (!ids.has(el)) ids.set(el, ++nextId);
+            return ids.get(el);
+          };
+          window.__raceActionTrace = [];
+          window.__raceSummaryState = () =>
+            [...document.querySelectorAll('summary[aria-label^="Share "]')].map((el) => ({
+              id: id(el),
+              label: el.getAttribute("aria-label"),
+              open: el.parentElement.open,
+              ready: !el.parentElement.querySelector("button")?.disabled,
+              rect: el.getBoundingClientRect().toJSON(),
+            }));
+          const record = (data) => {
+            window.__raceActionTrace.push({
+              time: performance.now(),
+              scrollY,
+              fonts: document.fonts.status,
+              ...data,
+              summaries: window.__raceSummaryState(),
+            });
+            if (window.__raceActionTrace.length > 80) window.__raceActionTrace.shift();
+          };
+          for (const type of ["pointerdown", "pointerup", "click", "toggle"])
+            document.addEventListener(
+              type,
+              (event) => {
+                const target =
+                  event.target instanceof Element
+                    ? event.target.closest("summary,button,a,details")
+                    : null;
+                record({
+                  type,
+                  trusted: event.isTrusted,
+                  target: target?.getAttribute("aria-label") || target?.textContent.slice(0, 100),
+                  x: event.clientX,
+                  y: event.clientY,
+                  hit: Number.isFinite(event.clientX)
+                    ? document
+                        .elementFromPoint(event.clientX, event.clientY)
+                        ?.outerHTML.slice(0, 250)
+                    : null,
+                });
+              },
+              true,
+            );
+          new MutationObserver((records) => {
+            for (const r of records) {
+              if (
+                r.type === "attributes" &&
+                r.target.matches('details:has(summary[aria-label^="Share "])')
+              )
+                record({ type: "open attribute", open: r.target.open });
+              if (
+                [...r.removedNodes].some(
+                  (n) =>
+                    n instanceof Element &&
+                    (n.matches('summary[aria-label^="Share "]') ||
+                      n.querySelector('summary[aria-label^="Share "]')),
+                )
+              )
+                record({ type: "share DOM removed" });
+            }
+          }).observe(document, {
+            subtree: true,
+            childList: true,
+            attributes: true,
+            attributeFilter: ["open"],
+          });
+        }
+      },
+      { name },
+    );
     const result = {
       profile: name,
       engine,
@@ -357,6 +454,26 @@ try {
       results.push(result);
       console.log(`PASS mobile ${JSON.stringify(result)}`);
     } catch (error) {
+      fs.writeFileSync(
+        `${stem}-failure.json`,
+        JSON.stringify(
+          await page
+            .evaluate(() => ({
+              url: location.href,
+              state: window.__raceSummaryState?.(),
+              trace: window.__raceActionTrace,
+              awaited: window.__awaitedShareSummary
+                ? {
+                    connected: window.__awaitedShareSummary.isConnected,
+                    open: window.__awaitedShareSummary.parentElement?.open,
+                  }
+                : null,
+            }))
+            .catch(() => ({})),
+          null,
+          2,
+        ),
+      );
       await page.screenshot({ path: `${stem}-failure.png`, fullPage: true }).catch(() => {});
       fs.writeFileSync(
         `${stem}-failure.txt`,
@@ -368,6 +485,49 @@ try {
       throw error;
     } finally {
       await context.close();
+    }
+    if (engine === "webkit" && name === "iPhone 13") {
+      // Hold the production scripts deliberately, tap once using native HTML,
+      // then release hydration and require the same menu to remain open.
+      const delayed = await browser.newContext({
+        ...profileOptions("iPhone 13"),
+        serviceWorkers: "block",
+      });
+      let release;
+      const gate = new Promise((resolve) => {
+        release = resolve;
+      });
+      try {
+        const page = await delayed.newPage();
+        await delayed.route("**/*", async (route) => {
+          if (route.request().resourceType() === "script") await gate;
+          await route.continue();
+        });
+        await page.goto(origin + routes[1], { waitUntil: "commit" });
+        const summary = page.locator(shareSelector).first();
+        const panel = group(summary, "Sharing options");
+        const copy = panel.getByRole("button", { name: "Copy link", exact: true });
+        assert(await copy.isDisabled(), "London action is genuinely pre-hydration");
+        await summary.tap();
+        assert(await panel.isVisible(), "one pre-hydration touch opens the London sharing panel");
+        release();
+        await page.waitForFunction((el) => !el.disabled, await copy.elementHandle(), {
+          timeout: 30000,
+        });
+        assert(await panel.isVisible(), "London sharing panel remains open after hydration");
+        await inspectSharing(
+          panel,
+          origin + routes[1],
+          (await summary.getAttribute("aria-label")).slice(6),
+        );
+        console.log(
+          "PASS WebKit iPhone London: one touch before delayed hydration; open panel and correct links preserved after hydration.",
+        );
+      } finally {
+        release();
+        await delayed.unrouteAll({ behavior: "wait" });
+        await delayed.close();
+      }
     }
   }
   if (engine === "webkit") {
