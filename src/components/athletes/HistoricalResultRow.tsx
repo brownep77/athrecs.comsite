@@ -15,6 +15,7 @@ import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
 import { historyAwards, historyCompetition } from "@/lib/athrecs/competition-awards";
 import { ResultVerificationBadge } from "./ResultVerificationBadge";
 import { HistoricalTiming } from "./ResultTiming";
+import { historicalResultQualifications } from "@/lib/athrecs/historical-result-qualifications";
 
 export function HistoricalResultRow({
   result,
@@ -27,6 +28,7 @@ export function HistoricalResultRow({
 }) {
   const row = result.performance;
   const awards = historyAwards(row);
+  const qualifications = historicalResultQualifications(row.labels);
   const field = /jump|shot|^sp\d|discus|javelin|hammer/i.test(row.discipline);
   const combined = /pentathlon|heptathlon|decathlon/i.test(row.discipline);
   const discipline = /^\d+$/.test(row.discipline) ? `${row.discipline} m` : row.discipline;
@@ -58,6 +60,14 @@ export function HistoricalResultRow({
           {row.meeting || "Meeting not recorded"}
         </span>
         <CompetitionTierBadge context={historyCompetition(row)} />
+        {qualifications.length ? (
+          <span
+            data-result-qualifications
+            className="mt-1 block max-w-lg whitespace-normal text-xs font-normal text-subtle"
+          >
+            {qualifications.join(" · ")}
+          </span>
+        ) : null}
         <ResultEvidence
           notes={row.notes}
           provider={row.providerName}

@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 911 unique sources as of 24 October 2026. Only 36 are enabled; the other 875 remain
+The registry contains 918 unique sources as of 24 October 2026. Only 36 are enabled; the other 882 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 911 sources create exactly one source job;
+- all 918 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 875 sources are retained as blocked jobs with their reason;
+- the other 882 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -346,3 +346,28 @@ separate Netto and Result headings; its men-only rank is not an overall rank.
 Registration does not verify any participant, establish reuse rights or enable
 automated collection. Individual captures and identity decisions stay in staff
 evidence outside source control.
+
+
+## Further original-result and edition evidence, 24 October 2026
+
+Added seven disabled manual references: Run Armagh’s archived result tables,
+North Down AC’s contemporary reports, Denzil’s 12 in 12 calendar, Running Miles’
+archived results, How Hard Can It Be Events’ organiser/entry information, Jerry
+Forde’s first-hand marathon list and RunIreland’s submitted event announcements.
+These sources have distinct capabilities; calendars and personal logs do not
+verify another participant’s finish. The How Hard Can It Be Events entry reuses
+the wider inventory’s observed codrc.co.uk source. Archive capture dates remain
+separate from event dates and review dates.
+
+Enriched the existing Club Super Marathon Italia, Racetimer, North Belfast
+Harriers, Webscorer and JustRuns rows with the actual additional capabilities
+inspected. Original organiser/timer reports are distinguished from club-maintained
+logs, series aggregates and participant reports. Noncompetitive/manual-timing
+qualifications, mixed-distance categories, provisional status and original time
+precision must survive result review. Existing check dates, collection settings
+and provider identities are preserved. In particular, JustRuns’ enabled worker
+remains limited to its reviewed featured-event-card collection.
+
+The registry now contains 918 sources: 36 enabled and 882 disabled. No newly
+registered source is enabled, and no individual athlete evidence is included
+in this source-control change.
