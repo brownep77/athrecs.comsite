@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 905 unique sources as of 24 October 2026. Only 36 are enabled; the other 869 remain
+The registry contains 911 unique sources as of 24 October 2026. Only 36 are enabled; the other 875 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 905 sources create exactly one source job;
+- all 911 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 869 sources are retained as blocked jobs with their reason;
+- the other 875 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -321,3 +321,28 @@ remain separate. The index alone does not verify an athlete result. Individual
 captures stay in private staff evidence; registration does not enable automated
 collection or establish participant-reuse rights. The registry contains 905 sources:
 36 enabled and 869 disabled.
+
+
+## Archived organiser tables and supporting club reports, 24 October 2026
+
+Registered six disabled manual research sources: East Antrim Marathon Series,
+Wicklow Hospice Foundation, Springwell Running Club, Mallusk Harriers, North Belfast
+Harriers and the NLB Ljubljana Marathon organiser archive. Registry and wider
+event-inventory checks found no existing matching organiser or club entry. The
+existing TIMING Ljubljana registrations and their check history are retained.
+The registry now contains 911 sources: 36 enabled and 875 disabled.
+
+East Antrim and Wicklow use actual dated Internet Archive captures of the original
+organiser pages. Retain the original provider hosts, capture timestamps and the
+separate review date; Internet Archive is not an additional race organiser.
+The three clubs provide contemporary reports for edition-date and distance
+corroboration, not complete result archives or timing-provider services. Coverage
+is limited to the editions and reports actually inspected.
+
+Keep daily races, mixed-distance classifications and unlabelled distance units
+separate. A page title or publication date is not necessarily the race date.
+Ljubljana's organiser table retains its unofficial-results qualification and
+separate Netto and Result headings; its men-only rank is not an overall rank.
+Registration does not verify any participant, establish reuse rights or enable
+automated collection. Individual captures and identity decisions stay in staff
+evidence outside source control.
