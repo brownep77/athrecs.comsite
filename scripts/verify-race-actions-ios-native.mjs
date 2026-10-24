@@ -5,6 +5,7 @@ import { execFileSync } from "node:child_process";
 import { setTimeout as pause } from "node:timers/promises";
 import { verifyNativeSafariInput } from "./ios-safari-input-probe.mjs";
 import { verifyNativeShareSheet } from "./ios-safari-share-sheet.mjs";
+import { requestAppiumJson } from "./ios-safari-appium-http.mjs";
 
 // Native XCTest accessibility and input in the installed Mobile Safari app.
 // This deliberately does not request browserName or a WebKit/webview context.
@@ -59,16 +60,35 @@ function passed(label) {
   save();
 }
 async function api(method, route, body, timeout = 65000) {
-  const response = await fetch(new URL(route, endpoint), {
-    method,
-    headers: { "Content-Type": "application/json" },
-    ...(body === undefined ? {} : { body: JSON.stringify(body) }),
-    signal: AbortSignal.timeout(timeout),
-  });
-  const result = await response.json();
-  if (!response.ok || result.value?.error)
-    throw Error(`${method} ${route}: ${JSON.stringify(result.value).slice(0, 3000)}`);
-  return result.value;
+  try {
+    return await requestAppiumJson({ endpoint, method, route, body, timeout });
+  } catch (error) {
+    let serverProcess;
+    const pid = Number(process.env.ATHRECS_APPIUM_PROCESS);
+    if (Number.isSafeInteger(pid) && pid > 0) {
+      try {
+        process.kill(pid, 0);
+        serverProcess = { pid, alive: true };
+      } catch (processError) {
+        serverProcess = { pid, alive: false, code: processError.code };
+      }
+    }
+    report.lastRequestFailure = {
+      method,
+      route,
+      timeout,
+      elapsedMs: error.elapsedMs,
+      statusCode: error.statusCode,
+      message: error.message,
+      code: error.code,
+      cause: error.cause
+        ? { name: error.cause.name, message: error.cause.message, code: error.cause.code }
+        : undefined,
+      serverProcess,
+    };
+    save();
+    throw error;
+  }
 }
 const command = (method, route, body, timeout) =>
   api(method, `/session/${sessionId}${route}`, body, timeout);
@@ -380,6 +400,15 @@ try {
     "Use a credential-free Appium root URL",
   );
   const setup = JSON.parse(fs.readFileSync("artifacts/race-actions-safari-ios-setup.json", "utf8"));
+  report.serverStartup = JSON.parse(
+    fs.readFileSync("artifacts/race-actions-ios-native-server-startup.json", "utf8"),
+  );
+  assert.equal(report.serverStartup.status, "ready", "Appium must be ready before Simulator boot");
+  assert.equal(
+    report.serverStartup.lastResponse?.version,
+    "3.8.0",
+    "Unexpected Appium server version",
+  );
   const appiumManagedStartup = setup.mode === "appium-managed";
   if (appiumManagedStartup) {
     assert.equal(setup.status, "selected", "Managed startup requires a completed device selection");
