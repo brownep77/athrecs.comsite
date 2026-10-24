@@ -22,6 +22,17 @@ export function attachSourceOrganisations(
 ): FixtureSource[] {
   const groups = groupOrganisations(organisations);
   const reviewedLinks: Record<string, string[]> = {
+    east_region_swimming_competitions: ["swim-england-east-region"],
+    east_region_swimming_results: ["swim-england-east-region"],
+    east_region_swimming_2027_dates: ["swim-england-east-region"],
+    south_east_swimming_2027: ["swim-england-south-east-region"],
+    south_east_swimming_results: ["swim-england-south-east-region"],
+    teamsa_pieter_coetze_profile: ["sascoc"],
+    east_region_swimming_2027_weekend_1: ["swim-england-east-region"],
+    east_region_swimming_2027_weekend_2: ["swim-england-east-region"],
+    east_region_swimming_2027_weekend_3: ["swim-england-east-region"],
+    east_region_swimming_2027_weekend_4: ["swim-england-east-region"],
+
     australian_open_water_swimming_championships_2027: ["swimming-australia"],
     australian_swimming_open_2027: ["swimming-australia"],
     australian_age_swimming_championships_2027: ["swimming-australia"],
