@@ -41,6 +41,7 @@ export function attachSourceOrganisations(
     bermuda_triathlon_newsletter: ["bermuda-triathlon"],
     world_triathlon_athlete_search: ["world-triathlon"],
     world_triathlon_result_search: ["world-triathlon"],
+    world_triathlon_results: ["world-triathlon"],
     world_triathlon_bermuda_member: ["bermuda-triathlon"],
     world_triathlon_vietnam_member: ["vietnamese-triathlon"],
 
