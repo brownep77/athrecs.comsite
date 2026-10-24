@@ -25,7 +25,7 @@ function loadTypeScript(path, dependencies = {}) {
 
 const parkrun = loadTypeScript("src/lib/athrecs/parkrun-timing.ts");
 const catalogueContent = loadTypeScript("src/lib/athrecs/public-catalogue-content.ts");
-const sportPages = loadTypeScript("src/lib/athrecs/sport-pages.ts");
+const sportPages = loadTypeScript("src/lib/athrecs/sport-pages.ts", { "./public-sports.ts": loadTypeScript("src/lib/athrecs/public-sports.ts") });
 const { resultCredit } = loadTypeScript("src/lib/athrecs/result-credit.ts", { "./public-catalogue-content.ts": catalogueContent });
 assert.deepEqual(resultCredit("https://totalracetiming.co.uk/raceresults/123", "import"), { name: "Total Race Timing", url: "https://totalracetiming.co.uk/raceresults/123" });
 assert.equal(resultCredit("https://example.com/result", "Example Timing").name, "Example Timing");
@@ -46,6 +46,9 @@ assert.equal(search.normalizeResultsSearch({ category: "trail-running" }).catego
 assert.equal(search.normalizeResultsSearch({ category: "all-running" }).category, "all-running");
 assert.equal(search.normalizeResultsSearch({ category: "running" }).category, "road-running", "Legacy running category keeps its Road Running meaning");
 assert.equal(search.normalizeResultsSearch({ category: "unknown" }).category, "");
+for (const category of ["hybrid-fitness", "hyrox", "deka", "crossfit", "functional-fitness", "swimrun", "aquathlon", "aquabike", "rowing", "indoor-rowing", "orienteering", "adventure-racing", "obstacle-course-racing"]) {
+  assert.equal(search.normalizeResultsSearch({ category }).category, category);
+}
 assert.equal(search.normalizeResultsSearch(undefined).page, 1);
 for (const page of [-1, 0, NaN, Infinity, "bad", {}, []]) {
   assert.equal(search.normalizeResultsSearch({ page }).page, 1);

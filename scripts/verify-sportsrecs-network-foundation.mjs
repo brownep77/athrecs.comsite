@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
-const compactSource = (value) => value.replace(/\s+/g, "").replace(/,([\])])/g, "$1");
 import { readFile } from "node:fs/promises";
 
 const migration = await readFile("migrations/0027_sportsrecs_network_foundation.sql", "utf8");
@@ -98,11 +97,7 @@ assert(
   "ATHRECS public reads must default to Athletics",
 );
 assert(
-  compactSource(athleticsApi).includes(
-    compactSource(
-      '["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(result.event.sport)',
-    ),
-  ) &&
+  athleticsApi.includes("isAthrecsPublicSport(result.event.sport)") &&
     athleticsApi.includes("queryRunningEvents") &&
     !athleticsApi.includes("isTemporaryRunningEdition"),
   "AthRecs direct URLs must include published Athletics, Running, Parkrun, Triathlon and Cycling events",
@@ -114,11 +109,8 @@ assert(
 
 const athleticsFilters = await readFile("src/athletics/filters.ts", "utf8");
 assert(
-  compactSource(athleticsFilters).includes(
-    compactSource(
-      'export const SPORTS = ["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"] as const',
-    ),
-  ) && athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
+  athleticsFilters.includes("ATHRECS_PUBLIC_SPORTS as SPORTS") &&
+    athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
   "ATHRECS must default to Athletics while offering Running, Parkrun, Triathlon and Cycling",
 );
 
@@ -143,9 +135,8 @@ for (const routeSource of athleticsRoutes) {
 const athleticsOfficialEntry = await readFile("src/athletics/official-entry.server.ts", "utf8");
 const runRecsOfficialEntry = await readFile("src/runrecs/official-entry.server.ts", "utf8");
 assert(
-  athleticsOfficialEntry.includes(
-    "sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon', 'Cycling', 'Swimming', 'Duathlon')",
-  ) && athleticsOfficialEntry.includes("if (!allowed.length) return null"),
+  athleticsOfficialEntry.includes("sport = any(${[...ATHRECS_PUBLIC_SPORTS]}::text[])") &&
+    athleticsOfficialEntry.includes("if (!allowed.length) return null"),
   "ATHRECS official-entry redirects must fail closed outside Athletics, Running, Parkrun, Triathlon and Cycling",
 );
 assert(
@@ -191,11 +182,7 @@ assert(
 const siteScope = await readFile("src/lib/site-scope.ts", "utf8");
 assert(
   siteScope.includes('sport === "Running" || sport === "Parkrun"') &&
-    compactSource(siteScope).includes(
-      compactSource(
-        '["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(sport)',
-      ),
-    ),
+    siteScope.includes("isAthrecsPublicSport(sport)"),
   "Signed-in specialist pages need one shared sport-scope predicate",
 );
 
@@ -292,11 +279,12 @@ assert(
 // suggestion view emits only the first day; explicit legacy ranges must survive
 // subsequent staff syncs without changing active network records.
 const { PGlite } = await import("@electric-sql/pglite");
-const { syncSportsRecsNetworkFoundation } = await import(
-  "../src/lib/athrecs/sportsrecs-network.server.ts"
-);
+const { syncSportsRecsNetworkFoundation } =
+  await import("../src/lib/athrecs/sportsrecs-network.server.ts");
 const syncStatements = [];
-await syncSportsRecsNetworkFoundation({ query: async (statement) => syncStatements.push(statement) });
+await syncSportsRecsNetworkFoundation({
+  query: async (statement) => syncStatements.push(statement),
+});
 const rangeDb = new PGlite();
 try {
   await rangeDb.exec(`

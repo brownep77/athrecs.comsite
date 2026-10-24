@@ -15,11 +15,18 @@ const sportTones: Record<string, ProfileTone> = {
   OCR: "gold",
   "Adventure Racing": "sand",
   "Functional Fitness": "coral",
+  HYROX: "gold",
+  DEKA: "peach",
+  CrossFit: "coral",
+  Swimrun: "teal",
+  "Indoor Rowing": "periwinkle",
+  Orienteering: "mint",
   Walking: "mint",
 };
 
 export function sportColourClass(sport: string): string {
-  if (/^(?:road|trail|ultra|cross[ -]country) running$/i.test(sport.trim())) return profileToneClass("blue");
+  if (/^(?:road|trail|ultra|cross[ -]country) running$/i.test(sport.trim()))
+    return profileToneClass("blue");
   if (/^track (?:&|and) field$/i.test(sport.trim())) return profileToneClass("lilac");
   const key = Object.keys(sportTones).find(
     (item) => item.toLowerCase() === sport.trim().toLowerCase(),

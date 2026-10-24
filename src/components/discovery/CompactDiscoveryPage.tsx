@@ -346,7 +346,7 @@ export function CompactDiscoveryPage({
                     <option value="">
                       {sportName === "Athletics"
                         ? "All events"
-                        : sportName === "Triathlon" || sportName === "Duathlon"
+                        : fixtureFilterLabel(sport) !== "Distance"
                           ? "All formats"
                           : "All distances"}
                     </option>

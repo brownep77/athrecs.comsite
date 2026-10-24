@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { ATHRECS_PUBLIC_SPORTS, isAthrecsPublicSport } from "../src/lib/athrecs/public-sports.ts";
+import { SPORT_PAGES } from "../src/lib/athrecs/sport-pages.ts";
 import assert from "node:assert/strict";
 const compactSource = (value) => value.replace(/\s+/g, "").replace(/,([\])])/g, "$1");
 import { readFile } from "node:fs/promises";
@@ -6,6 +8,28 @@ import {
   isTemporaryRunningEdition,
   isTemporaryRunningEvent,
 } from "../src/athletics/temporary-running.ts";
+
+const addedSports = [
+  "HYROX",
+  "DEKA",
+  "CrossFit",
+  "Swimrun",
+  "Indoor Rowing",
+  "Orienteering",
+  "Aquathlon",
+  "Aquabike",
+  "Rowing",
+  "OCR",
+  "Adventure Racing",
+  "Functional Fitness",
+];
+for (const sport of addedSports) {
+  assert(isAthrecsPublicSport(sport));
+  assert(SPORT_PAGES.some((page) => page.sport === sport));
+}
+assert.equal(new Set(ATHRECS_PUBLIC_SPORTS).size, ATHRECS_PUBLIC_SPORTS.length);
+for (const invalid of [null, undefined, "All", "Unsupported", "constructor", "__proto__"])
+  assert(!isAthrecsPublicSport(invalid));
 
 const networkSports = ["Adventure Racing", "Functional Fitness", "Walking"];
 const sharedTaxonomyFiles = [
@@ -20,7 +44,7 @@ const sharedTaxonomyFiles = [
 // multi-sport even though each public specialist site exposes a narrower scope.
 for (const path of sharedTaxonomyFiles) {
   const source = await readFile(path, "utf8");
-  for (const sport of networkSports) {
+  for (const sport of [...networkSports, ...addedSports]) {
     assert(source.includes(`"${sport}"`), `${path} does not include ${sport}`);
   }
 }
@@ -28,7 +52,7 @@ for (const path of sharedTaxonomyFiles) {
 const filters = await readFile("src/lib/athrecs/filters.ts", "utf8");
 assert(filters.includes('sport === "Adventure Racing"'), "Adventure Racing needs shared filters");
 assert(
-  filters.includes('sport === "Functional Fitness"'),
+  compactSource(filters).includes('["Rowing","FunctionalFitness","HYROX","DEKA","CrossFit"].includes(sport)'),
   "Functional Fitness needs shared filters",
 );
 assert(filters.includes('sport === "Walking"'), "Walking needs shared filters");
@@ -54,11 +78,8 @@ for (const routeSource of [raceRoute, countryRaceRoute]) {
 }
 
 assert(
-  compactSource(athleticsFilters).includes(
-    compactSource(
-      'export const SPORTS = ["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"] as const',
-    ),
-  ) && athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
+  athleticsFilters.includes("ATHRECS_PUBLIC_SPORTS as SPORTS") &&
+    athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
   "ATHRECS must expose Athletics, Running, Parkrun, Triathlon and Cycling, defaulting to Athletics",
 );
 assert(

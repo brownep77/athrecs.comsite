@@ -168,8 +168,34 @@ try {
     !racePaths.includes("/races/wa-cardiff-half-marathon-7240793"),
     "Sitemaps must list the canonical page, not its redirect",
   );
+  for (const [index, sport] of [
+    "HYROX",
+    "DEKA",
+    "CrossFit",
+    "Swimrun",
+    "Indoor Rowing",
+    "Orienteering",
+    "Aquathlon",
+    "Aquabike",
+    "Rowing",
+    "OCR",
+    "Adventure Racing",
+    "Functional Fitness",
+  ].entries()) {
+    await db.query("insert into events(id,slug,name,sport) values($1,$2,$3,$3)", [
+      1000 + index,
+      `new-sport-${index}`,
+      sport,
+    ]);
+  }
+  await db.query(
+    "insert into events(id,slug,name,sport) values(2000,'unknown-sport','Unknown','Unsupported')",
+  );
+  const expandedPaths = await contentSitemapPaths(sql, "races", 1);
+  for (let i = 0; i < 12; i++) assert(expandedPaths.includes(`/races/new-sport-${i}`));
+  assert(!expandedPaths.includes("/races/unknown-sport"));
   console.log(
-    "PASS: readable collision-safe result URLs; complete sitemap pagination; event scope; all seven public event sports; public club identities independent of member visibility; private, hidden, disabled and future result exclusions; immediate publication changes.",
+    "PASS: readable collision-safe result URLs; complete sitemap pagination; event scope; all supported public event sports; public club identities independent of member visibility; private, hidden, disabled and future result exclusions; immediate publication changes.",
   );
 } finally {
   await db.close();

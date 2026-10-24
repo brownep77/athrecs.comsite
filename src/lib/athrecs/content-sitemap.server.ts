@@ -1,3 +1,4 @@
+import { ATHRECS_PUBLIC_SPORTS } from "./public-sports.ts";
 import type { Sql } from "../db";
 import { resultSlug } from "./result-slug.ts";
 import { eventSlugAliases } from "../../data/entry-options";
@@ -13,7 +14,7 @@ export type ContentSitemapKind = "races" | "clubs" | "results";
 function selection(kind: ContentSitemapKind): { query: string; values: unknown[] } {
   if (kind === "races")
     return {
-      query: `select e.id, e.slug from events e where e.sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon', 'Cycling', 'Swimming', 'Duathlon')
+      query: `select e.id, e.slug from events e where e.sport = any($2::text[])
       and not exists (
         select 1 from jsonb_to_recordset($1::jsonb) aliases(old_slug text, current_slug text)
         join events target on target.slug = coalesce(
@@ -21,7 +22,7 @@ function selection(kind: ContentSitemapKind): { query: string; values: unknown[]
            where entity_type = 'event' and old_slug = aliases.current_slug), aliases.current_slug)
         where aliases.old_slug = e.slug and target.id <> e.id
       )`,
-      values: [eventAliases],
+      values: [eventAliases, [...ATHRECS_PUBLIC_SPORTS]],
     };
   if (kind === "clubs")
     return {

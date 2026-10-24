@@ -12,6 +12,12 @@ export type Sport =
   | "Athletics"
   | "Adventure Racing"
   | "Functional Fitness"
+  | "HYROX"
+  | "DEKA"
+  | "CrossFit"
+  | "Swimrun"
+  | "Indoor Rowing"
+  | "Orienteering"
   | "Walking";
 
 export type EntryStatus = "Open" | "ClosingSoon" | "Closed" | "Finished" | "Cancelled" | "TBC";

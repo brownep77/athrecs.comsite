@@ -1,3 +1,4 @@
+import { ATHRECS_PUBLIC_SPORTS, isAthrecsPublicSport } from "../lib/athrecs/public-sports.ts";
 import { withheldFixtureDateKeys } from "../data/fixture-date-reviews";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
@@ -42,12 +43,7 @@ export const listEventRegions = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     if (data.sport === "Running" || data.sport === "Parkrun" || data.sport === "All")
       return queryRunningRegions(data);
-    if (
-      data.sport === "Triathlon" ||
-      data.sport === "Cycling" ||
-      data.sport === "Swimming" ||
-      data.sport === "Duathlon"
-    )
+    if (isAthrecsPublicSport(data.sport) && !isAthleticsSport(data.sport))
       return base.listEventRegions({ data });
     if (data.sport && !isAthleticsSport(data.sport)) return [];
     return base.listEventRegions({ data: { ...data, sport: ATHLETICS_SPORT } });
@@ -83,12 +79,7 @@ export const listEvents = createServerFn({ method: "GET" })
         distance: data.distance === "All" ? undefined : data.distance,
       });
     }
-    if (
-      data.sport === "Triathlon" ||
-      data.sport === "Cycling" ||
-      data.sport === "Swimming" ||
-      data.sport === "Duathlon"
-    )
+    if (isAthrecsPublicSport(data.sport) && !isAthleticsSport(data.sport))
       return base.listEvents({ data });
     if (data.sport && !isAthleticsSport(data.sport)) return [];
     return base.listEvents({
@@ -104,12 +95,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const result = await base.getEventBySlug({ data });
     if (!result) return null;
-    if (
-      !["Athletics", "Running", "Parkrun", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(
-        result.event.sport,
-      )
-    )
-      return null;
+    if (!isAthrecsPublicSport(result.event.sport)) return null;
     return {
       ...result,
       upcoming: result.upcoming
@@ -128,9 +114,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
             ...edition,
             start_time: checked
               ? checked.time
-              : ["Athletics", "Triathlon", "Cycling", "Swimming", "Duathlon"].includes(
-                    result.event.sport,
-                  )
+              : !["Running", "Parkrun"].includes(result.event.sport)
                 ? edition.start_time
                 : supplementedStart(
                     result.event,
@@ -144,17 +128,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
                 .join(" ") || null,
           };
         }),
-      related: result.related.filter((event) =>
-        [
-          "Athletics",
-          "Running",
-          "Parkrun",
-          "Triathlon",
-          "Cycling",
-          "Swimming",
-          "Duathlon",
-        ].includes(event.sport),
-      ),
+      related: result.related.filter((event) => isAthrecsPublicSport(event.sport)),
     };
   });
 
@@ -167,7 +141,7 @@ export const getEditionResults = createServerFn({ method: "GET" })
       from editions edition
       join events event on event.id = edition.event_id
       where edition.id = ${data}
-        and event.sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon', 'Cycling', 'Swimming', 'Duathlon')
+        and event.sport = any(${[...ATHRECS_PUBLIC_SPORTS]}::text[])
       limit 1
     `;
     if (!allowed.length) return [];
@@ -358,15 +332,7 @@ async function queryAthleticsCalendarPage(
   data: AthleticsCalendarPageInput = {},
 ): Promise<AthleticsCalendarPage> {
   const sql = await ready();
-  const calendarSport =
-    data.sport === "Running" ||
-    data.sport === "Parkrun" ||
-    data.sport === "Triathlon" ||
-    data.sport === "Cycling" ||
-    data.sport === "Swimming" ||
-    data.sport === "Duathlon"
-      ? data.sport
-      : ATHLETICS_SPORT;
+  const calendarSport = isAthrecsPublicSport(data.sport) ? data.sport : ATHLETICS_SPORT;
   const rawQ = data.q?.trim() ?? "";
   const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
   const region = data.region?.trim() || null;
@@ -522,12 +488,7 @@ export const listAthleticsCalendarPage = createServerFn({ method: "GET" })
 export const listCalendarEditions = createServerFn({ method: "GET" })
   .validator((input: CalendarInput) => input ?? {})
   .handler(async ({ data }) => {
-    if (
-      data.sport === "Triathlon" ||
-      data.sport === "Cycling" ||
-      data.sport === "Swimming" ||
-      data.sport === "Duathlon"
-    )
+    if (isAthrecsPublicSport(data.sport) && !isAthleticsSport(data.sport))
       return base.listCalendarEditions({ data });
     if (data.sport && data.sport !== "All" && !isAthleticsSport(data.sport)) return [];
     return base.listCalendarEditions({
