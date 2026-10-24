@@ -128,7 +128,8 @@ const snapshot = (page) =>
     },
     { selector, keys, bannerSelector },
   );
-async function settled(page, choice) {
+async function settled(page, choice, phase) {
+  phase("wait for hydrated Share and consent UI");
   await page.waitForFunction(
     ({ selector, bannerSelector, privacySelector, choice }) => {
       const copy = document.querySelector(selector)?.parentElement.querySelector("button");
@@ -140,6 +141,7 @@ async function settled(page, choice) {
     },
     { selector, bannerSelector, privacySelector, choice },
   );
+  phase("wait for hydrated layout frames");
   await frames(page);
 }
 const hashAligned = (page, id) =>
@@ -178,87 +180,164 @@ async function check(browser, engine, choice) {
     analyticsSeen = resolve;
   });
   const stem = `artifacts/calendar-hydration-${engine}-${choice}`;
-  await context.addInitScript(
-    ({ keys, choice, version }) => {
-      localStorage.removeItem(keys.choice);
-      localStorage.removeItem(keys.notice);
-      if (choice !== "fresh") {
-        localStorage.setItem(keys.choice, choice);
-        localStorage.setItem(keys.notice, version);
-      }
-      window.__hydrationEvents = [];
-      for (const type of ["pointerdown", "pointerup", "pointercancel", "click", "toggle"])
-        document.addEventListener(
-          type,
-          (event) => {
-            const target =
-              event.target instanceof Element
-                ? event.target.closest("summary,button,a,details")
-                : null;
-            window.__hydrationEvents.push({
-              type,
-              trusted: event.isTrusted,
-              pointerType: event.pointerType,
-              label: target?.getAttribute("aria-label") || target?.textContent.trim().slice(0, 100),
-              x: event.clientX,
-              y: event.clientY,
-              scrollY,
-              time: performance.now(),
-            });
-            if (window.__hydrationEvents.length > 40) window.__hydrationEvents.shift();
-          },
-          true,
-        );
-    },
-    { keys, choice, version: WEB_ANALYTICS_NOTICE_VERSION },
-  );
-  await context.route("**/*", async (route) => {
-    const request = route.request(),
-      url = new URL(request.url());
-    if (!["GET", "HEAD"].includes(request.method())) {
-      const body = request.postData() || "";
-      const record = { path: url.pathname, method: request.method() };
-      if (
-        request.method() === "POST" &&
-        body.includes("consentVersion") &&
-        body.includes("sessionId")
-      ) {
-        posts.push(record);
-        analyticsSeen();
-      } else unexpectedWrites.push(record);
-      await route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: '{"result":{"accepted":true}}',
-      });
-      return;
+  const started = Date.now(),
+    progress = [];
+  let timeoutError, timeoutPhase, timeoutCapture;
+  const mark = (next) => {
+    if (timeoutError) throw timeoutError;
+    phase = next;
+    const entry = { phase, elapsedMs: Date.now() - started };
+    progress.push(entry);
+    console.log(`HYDRATION ${engine}/${choice} +${entry.elapsedMs}ms: ${phase}`);
+    fs.writeFileSync(
+      `${stem}-progress.json`,
+      JSON.stringify({ engine, choice, progress }, null, 2),
+    );
+  };
+  const diagnostics = async () => {
+    let timer;
+    try {
+      return await Promise.race([
+        Promise.all([
+          snapshot(page).catch(() => null),
+          page.evaluate(() => window.__hydrationEvents).catch(() => []),
+        ]).then(([state, events]) => ({ state, events })),
+        new Promise((resolve) => {
+          timer = setTimeout(() => resolve({ diagnosticsTimedOut: true }), 2000);
+        }),
+      ]);
+    } finally {
+      clearTimeout(timer);
     }
-    if (url.origin !== origin || request.resourceType() === "font") return route.abort();
-    if (url.pathname.startsWith("/api/auth/"))
-      return route.fulfill({ status: 200, contentType: "application/json", body: "null" });
-    if (request.resourceType() === "script") {
-      gatedScripts++;
-      await gate;
-    }
-    await route.continue();
-  });
+  };
+  const writeFailure = (error, details = {}) =>
+    fs.writeFileSync(
+      `${stem}-failure.json`,
+      JSON.stringify(
+        {
+          engine,
+          choice,
+          phase: timeoutPhase || phase,
+          timedOut: !!timeoutError,
+          elapsedMs: Date.now() - started,
+          error: error.stack,
+          before,
+          hydrated,
+          errors,
+          posts,
+          unexpectedWrites,
+          serverWrites,
+          progress,
+          ...details,
+        },
+        null,
+        2,
+      ),
+    );
+  const watchdog = setTimeout(() => {
+    timeoutPhase = phase;
+    timeoutError = Error(`Hydration case exceeded 60000ms during ${phase}`);
+    console.error(`TIMEOUT hydration ${engine}/${choice}: ${phase}`);
+    writeFailure(timeoutError);
+    timeoutCapture = diagnostics().then((details) => writeFailure(timeoutError, details));
+    void timeoutCapture
+      .finally(() => {
+        release();
+        return context.close();
+      })
+      .catch((error) => console.error(`Hydration timeout cleanup: ${error.message}`));
+  }, 60000);
   try {
+    mark("configure script gate and consent");
+    await context.addInitScript(
+      ({ keys, choice, version }) => {
+        localStorage.removeItem(keys.choice);
+        localStorage.removeItem(keys.notice);
+        if (choice !== "fresh") {
+          localStorage.setItem(keys.choice, choice);
+          localStorage.setItem(keys.notice, version);
+        }
+        window.__hydrationEvents = [];
+        for (const type of ["pointerdown", "pointerup", "pointercancel", "click", "toggle"])
+          document.addEventListener(
+            type,
+            (event) => {
+              const target =
+                event.target instanceof Element
+                  ? event.target.closest("summary,button,a,details")
+                  : null;
+              window.__hydrationEvents.push({
+                type,
+                trusted: event.isTrusted,
+                pointerType: event.pointerType,
+                label:
+                  target?.getAttribute("aria-label") || target?.textContent.trim().slice(0, 100),
+                x: event.clientX,
+                y: event.clientY,
+                scrollY,
+                time: performance.now(),
+              });
+              if (window.__hydrationEvents.length > 40) window.__hydrationEvents.shift();
+            },
+            true,
+          );
+      },
+      { keys, choice, version: WEB_ANALYTICS_NOTICE_VERSION },
+    );
+    await context.route("**/*", async (route) => {
+      const request = route.request(),
+        url = new URL(request.url());
+      if (!["GET", "HEAD"].includes(request.method())) {
+        const body = request.postData() || "";
+        const record = { path: url.pathname, method: request.method() };
+        if (
+          request.method() === "POST" &&
+          body.includes("consentVersion") &&
+          body.includes("sessionId")
+        ) {
+          posts.push(record);
+          analyticsSeen();
+        } else unexpectedWrites.push(record);
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: '{"result":{"accepted":true}}',
+        });
+        return;
+      }
+      if (url.origin !== origin || request.resourceType() === "font") return route.abort();
+      if (url.pathname.startsWith("/api/auth/"))
+        return route.fulfill({ status: 200, contentType: "application/json", body: "null" });
+      if (request.resourceType() === "script") {
+        gatedScripts++;
+        await gate;
+      }
+      await route.continue();
+    });
+    mark("wait for server HTML commit");
     const response = await page.goto(origin + racePath, { waitUntil: "commit", timeout: 60000 });
     assert.equal(response.status(), 200);
+    mark("wait for SSR footer");
     await page.locator("footer").waitFor({ state: "attached" });
+    mark("wait for local stylesheets");
     await page.waitForFunction(() => {
       const links = [...document.querySelectorAll('link[rel="stylesheet"]')].filter(
         (el) => new URL(el.href).origin === location.origin,
       );
       return links.length > 0 && links.every((el) => el.sheet);
     });
-    await page.evaluate(() => document.fonts.ready);
+    // FontFaceSet.ready also waits for document loading, which our held module
+    // scripts intentionally prevent. Font requests are aborted above; loaded
+    // stylesheets and layout frames keep the fallback-font geometry stable.
+    mark("scroll SSR Share with font requests blocked");
     const summary = page.locator(selector).first();
     await summary.evaluate((el) => {
       window.__heldShareSummary = el;
       el.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" });
     });
+    mark("wait for SSR layout frames");
     await frames(page);
+    mark("measure unhydrated Share");
     before = await snapshot(page);
     assert(gatedScripts > 0, "Production JavaScript is held at the network gate");
     assert.equal(before.ready, false, "The gesture starts on genuinely unhydrated HTML");
@@ -266,7 +345,7 @@ async function check(browser, engine, choice) {
     assert.deepEqual(posts, [], "No analytics before application hydration");
     const point = { x: Math.round(before.center.x), y: Math.round(before.center.y) };
     const cdp = engine === "chromium" ? await context.newCDPSession(page) : null;
-    phase = "pointer held across hydration";
+    mark("pointer held across hydration");
     if (cdp)
       await cdp.send("Input.dispatchTouchEvent", {
         type: "touchStart",
@@ -281,8 +360,10 @@ async function check(browser, engine, choice) {
     );
     assert(down?.trusted && down.label?.startsWith("Share "), "The one gesture starts on Share");
     assert.equal(down.pointerType, cdp ? "touch" : "mouse");
+    mark("release script gate while pointer stays down");
     release();
-    await settled(page, choice);
+    await settled(page, choice, mark);
+    mark("check held-pointer geometry");
     hydrated = await snapshot(page);
     assert(hydrated.sameNode, "Hydration retains the pressed native summary");
     assert(
@@ -298,7 +379,7 @@ async function check(browser, engine, choice) {
       "The original release coordinates still hit Share",
     );
     assert.equal(hydrated.open, false, "The gesture has not yet activated Share");
-    phase = "release at original coordinates";
+    mark("release at original coordinates");
     if (cdp) await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
     else await page.mouse.up();
     await summary.locator("xpath=parent::details[@open]").waitFor({ state: "attached" });
@@ -309,6 +390,7 @@ async function check(browser, engine, choice) {
     assert(clickEvents[0].trusted && clickEvents[0].label?.startsWith("Share "));
     assert.equal((await snapshot(page)).consent, choice === "fresh" ? null : choice);
     if (choice === "granted") {
+      mark("wait for granted analytics positive control");
       await new Promise((resolve, reject) => {
         const timeout = setTimeout(
           () => reject(Error("No granted analytics request observed")),
@@ -322,7 +404,7 @@ async function check(browser, engine, choice) {
       assert(posts.length > 0, "Granted analytics is intercepted as a positive control");
     } else assert.deepEqual(posts, [], "Fresh/denied consent never sends analytics");
 
-    phase = "SPA navigation and Back without another scroll";
+    mark("SPA navigation without another scroll");
     const expectedY = hydrated.y;
     const token = `${engine}-${choice}-${Date.now()}`;
     await page.evaluate(
@@ -345,29 +427,35 @@ async function check(browser, engine, choice) {
       token,
       "Navigation stays in this document",
     );
+    mark("Back without another scroll");
     await page.goBack();
     await page.waitForURL(origin + racePath);
-    await settled(page, choice);
+    await settled(page, choice, mark);
+    mark("verify Back restored the preserved position");
     await page.waitForFunction((y) => Math.abs(scrollY - y) <= 2, expectedY);
     assert.equal(
       await page.evaluate(() => window.__hydrationDocument),
       token,
       "Back stays in this document",
     );
+    mark("capture restored page");
     await page.screenshot({ path: `${stem}.png` });
 
     if (choice === "fresh") {
-      phase = "subsequent and initial hash navigation";
+      mark("subsequent hash navigation");
       await page
         .locator('a[href="#entry"]')
         .first()
         .evaluate((el) => el.click());
       await page.waitForURL((url) => url.hash === "#entry");
       await hashAligned(page, "entry");
+      mark("initial hash navigation");
       await page.goto(origin + racePath + "#dates", { waitUntil: "domcontentloaded" });
-      await settled(page, choice);
+      await settled(page, choice, mark);
+      mark("verify initial hash alignment");
       await hashAligned(page, "dates");
     }
+    mark("final error and consent checks");
     assert.deepEqual(errors, [], "No uncaught application errors");
     assert.deepEqual(unexpectedWrites, [], "No unrelated mutation or diagnostic requests");
     assert.deepEqual(serverWrites, [], "No writes reach the application server");
@@ -377,30 +465,14 @@ async function check(browser, engine, choice) {
       `PASS hydration ${engine}/${choice}: ${cdp ? "trusted held touch" : "trusted held mouse"}, stable Share, one click, SPA top/Back${choice === "fresh" ? ", initial/subsequent hashes" : ""}`,
     );
   } catch (error) {
-    fs.writeFileSync(
-      `${stem}-failure.json`,
-      JSON.stringify(
-        {
-          engine,
-          choice,
-          phase,
-          error: error.stack,
-          before,
-          hydrated,
-          errors,
-          posts,
-          unexpectedWrites,
-          serverWrites,
-          state: await snapshot(page).catch(() => null),
-          events: await page.evaluate(() => window.__hydrationEvents).catch(() => []),
-        },
-        null,
-        2,
-      ),
-    );
-    await page.screenshot({ path: `${stem}-failure.png`, timeout: 5000 }).catch(() => {});
-    throw error;
+    if (timeoutCapture) await timeoutCapture;
+    else {
+      writeFailure(error, await diagnostics());
+      await page.screenshot({ path: `${stem}-failure.png`, timeout: 2000 }).catch(() => {});
+    }
+    throw timeoutError || error;
   } finally {
+    clearTimeout(watchdog);
     release();
     await context.close();
   }

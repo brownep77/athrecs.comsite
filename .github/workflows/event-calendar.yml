@@ -56,6 +56,7 @@ jobs:
       - run: npx vite build
       - run: node scripts/copy-pglite-assets.mjs
       - name: Keep loading-time gestures and Back navigation stable in all browsers
+        timeout-minutes: 5
         run: node scripts/verify-event-calendar-hydration.mjs
       - run: node scripts/verify-event-calendar-built.mjs
       - run: node scripts/verify-event-calendar-subscription-built.mjs
