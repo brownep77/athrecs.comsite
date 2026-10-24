@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 931 unique sources as of 24 October 2026. Only 36 are enabled; the other 895 remain
+The registry contains 935 unique sources as of 24 October 2026. Only 36 are enabled; the other 899 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 931 sources create exactly one source job;
+- all 935 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 895 sources are retained as blocked jobs with their reason;
+- the other 899 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -421,3 +421,28 @@ The source registry and wider repository event inventory were checked for
 duplicates. Private participant records remain outside this repository.
 
 The registry now contains 931 sources: 36 enabled and 895 disabled.
+
+
+## Further Irish and English original archives, 24 October 2026
+
+Added four disabled manual sources: Donegal Marathon organiser results, the
+archived Halifax Marathon organiser, North East Marathon Club, and RaceTec
+Results RunNation tenant `CId=16685`. Donegal reuses its existing observed-host
+inventory identity; its earlier URL and provenance remain intact. The RunNation
+tenant is distinct from RaceTec South Africa and other RaceTec client IDs.
+Internet Archive captures retain the original organiser or timer identity.
+
+Existing IMRA, SPORTident, Extreme North and Ulster Athletics Archive entries
+receive append-only capability notes. These cover opened original event details,
+historical daily and aggregate reports, and community-preserved worksheets.
+Earlier checks, failures, rights and collection settings remain unchanged. The
+Ulster archive is credited for preservation; original publication provenance
+remains a separate review. Daily/aggregate disagreements remain held, and
+multiday totals are not additional daily finishes.
+
+Read the actual headings: distinguish chip/net and gun values, overall/gender/
+category positions, different distances and relay classes. Generic Time fields
+and unlabelled sequence columns do not establish timing method or placing.
+Private participant evidence is excluded from these registrations. No collector
+or extraction profile changes are included. The registry now contains 935
+sources: 36 enabled and 899 disabled.
