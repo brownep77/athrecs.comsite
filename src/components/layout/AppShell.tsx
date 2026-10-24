@@ -1,3 +1,4 @@
+import { CompactDiscoveryHeader } from "@/components/discovery/CompactDiscoveryHeader";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Home,
@@ -8,6 +9,7 @@ import {
   Handshake,
   Trophy,
   Building2,
+  BookOpen,
 } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
@@ -123,51 +125,90 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
       VITE_FLAG_LANGUAGE_PICKER: import.meta.env.VITE_FLAG_LANGUAGE_PICKER,
     }),
   );
+  const compact = IS_ATHRECS_SITE && (pathname === "/" || pathname.startsWith("/sports/"));
+  const layoutPreview = import.meta.env.VITE_ATHRECS_LAYOUT_PREVIEW === "true";
+  const visibleNav = layoutPreview
+    ? nav.filter((item) => !["/my-athlete-profile", "/athlete-account"].includes(item.to))
+    : nav;
+  const mobileNav = compact
+    ? [
+        nav[0],
+        nav[3],
+        nav[1],
+        {
+          to: "/running/guides" as const,
+          label: "Guides",
+          icon: BookOpen,
+          match: (p: string) => p.startsWith("/running/guides"),
+        },
+      ]
+    : visibleNav;
   const showHomepageColours = featureFlags["homepage-colour-picker"] === true;
   const showLanguagePicker = featureFlags["language-picker"] === true;
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col overflow-x-hidden bg-bg">
-      <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block">
-        <div className="flex h-16 items-center justify-between gap-3 px-6">
-          <BrandLink desktop />
-          <nav className="flex items-center gap-0.5" aria-label="Primary">
-            {nav.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                aria-current={item.match(pathname) ? "page" : undefined}
-                className={cn(
-                  "inline-flex h-10 items-center gap-1.5 rounded-md px-1.5 text-sm font-medium no-underline transition-colors xl:px-2",
-                  item.match(pathname)
-                    ? "bg-elevated text-fg"
-                    : "text-muted hover:bg-elevated/60 hover:text-fg",
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="relative flex shrink-0 items-center gap-1">
-              <AthleteAccountAccess compact={showHomepageColours || showLanguagePicker} />
-              {showHomepageColours ? <HomepageColourPicker /> : null}
-              {showLanguagePicker ? <SiteLanguagePicker pathname={pathname} /> : null}
+    <div
+      className={cn(
+        "mx-auto flex min-h-dvh w-full flex-col bg-bg",
+        compact ? "max-w-[1600px]" : "max-w-6xl overflow-x-hidden",
+      )}
+    >
+      {layoutPreview && !compact && (
+        <p className="bg-accent-soft px-4 py-2 text-center text-xs text-accent">
+          Test preview · Catalogue snapshot · Accounts and submissions are disabled
+        </p>
+      )}
+      {compact ? (
+        <CompactDiscoveryHeader pathname={pathname} />
+      ) : (
+        <>
+          <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block">
+            <div className="flex h-16 items-center justify-between gap-3 px-6">
+              <BrandLink desktop />
+              <nav className="flex items-center gap-0.5" aria-label="Primary">
+                {visibleNav.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    aria-current={item.match(pathname) ? "page" : undefined}
+                    className={cn(
+                      "inline-flex h-10 items-center gap-1.5 rounded-md px-1.5 text-sm font-medium no-underline transition-colors xl:px-2",
+                      item.match(pathname)
+                        ? "bg-elevated text-fg"
+                        : "text-muted hover:bg-elevated/60 hover:text-fg",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <div className="relative flex shrink-0 items-center gap-1">
+                  {layoutPreview ? (
+                    <span className="text-xs text-muted">Test preview</span>
+                  ) : (
+                    <AthleteAccountAccess compact={showHomepageColours || showLanguagePicker} />
+                  )}
+                  {showHomepageColours ? <HomepageColourPicker /> : null}
+                  {showLanguagePicker ? <SiteLanguagePicker pathname={pathname} /> : null}
+                </div>
+              </nav>
             </div>
-          </nav>
-        </div>
-      </header>
-      <header className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md lg:hidden">
-        <div className="flex h-14 items-center justify-between gap-2 px-4">
-          <BrandLink />
-          <div className="relative flex shrink-0 items-center gap-2">
-            <AthleteAccountAccess compact />
-            {showHomepageColours ? <HomepageColourPicker /> : null}
-            {showLanguagePicker ? <SiteLanguagePicker pathname={pathname} /> : null}
-          </div>
-        </div>
-      </header>
-      {pathname === "/" ||
-      pathname.startsWith("/sports/") ||
-      pathname.startsWith("/race-reports") ||
-      pathname.startsWith("/news") ? (
+          </header>
+          <header className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md lg:hidden">
+            <div className="flex h-14 items-center justify-between gap-2 px-4">
+              <BrandLink />
+              <div className="relative flex shrink-0 items-center gap-2">
+                {layoutPreview ? (
+                  <span className="text-xs text-muted">Test preview</span>
+                ) : (
+                  <AthleteAccountAccess compact />
+                )}
+                {showHomepageColours ? <HomepageColourPicker /> : null}
+                {showLanguagePicker ? <SiteLanguagePicker pathname={pathname} /> : null}
+              </div>
+            </div>
+          </header>
+        </>
+      )}
+      {!compact && (pathname.startsWith("/race-reports") || pathname.startsWith("/news")) ? (
         <nav
           aria-label="Browse by sport"
           className="border-b border-accent/20 bg-accent-soft px-4 md:px-6"
@@ -218,8 +259,12 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
           </ul>
         </nav>
       ) : null}
-      <SiteAnalytics featureFlags={featureFlags} />
-      <main data-athrecs-main="" className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">
+      {!layoutPreview && <SiteAnalytics featureFlags={featureFlags} />}
+      <main
+        id="main-content"
+        data-athrecs-main=""
+        className={cn("min-w-0 flex-1", compact ? "pb-8" : "px-4 pb-8 pt-4 md:px-6 md:pt-7")}
+      >
         {children}
       </main>
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-40 text-xs text-muted sm:pb-24 md:mx-6 lg:pb-5">
@@ -272,13 +317,18 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
           </Link>
         </div>
       </footer>
-      {IS_ATHRECS_SITE ? <AssistantLauncher pathname={pathname} /> : null}
+      {IS_ATHRECS_SITE && !layoutPreview ? <AssistantLauncher pathname={pathname} /> : null}
       <nav
         className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md lg:hidden"
         aria-label="Primary"
       >
-        <ul className="mx-auto grid max-w-xl grid-cols-4 px-1 pt-1 sm:grid-cols-8">
-          {nav.map((item) => {
+        <ul
+          className={cn(
+            "mx-auto grid max-w-xl grid-cols-4 px-1 pt-1",
+            !compact && "sm:grid-cols-8",
+          )}
+        >
+          {mobileNav.map((item) => {
             const active = item.match(pathname);
             return (
               <li key={item.to} className="min-w-0">

@@ -10,6 +10,7 @@ import {
 
 /** Native disclosure and form submission work before hydration and without JavaScript. */
 export function AddToCalendar({ race }: { race: CalendarRace }) {
+  const layoutPreview = import.meta.env.VITE_ATHRECS_LAYOUT_PREVIEW === "true";
   const unavailable = calendarUnavailable(race);
   const event = useMemo(() => buildCalendarEvent(race), [race]);
   const label = `Add ${race.name}, ${race.distance ?? "event"}, ${race.date} to calendar`;
@@ -85,20 +86,23 @@ export function AddToCalendar({ race }: { race: CalendarRace }) {
               </a>
             </Button>
           ))}
-          <Button asChild variant="secondary">
-            <a href={`/my-race-calendar?race=${encodeURIComponent(race.id)}`}>
-              Apple Calendar
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </Button>
+          {!layoutPreview && (
+            <Button asChild variant="secondary">
+              <a href={`/my-race-calendar?race=${encodeURIComponent(race.id)}`}>
+                Apple Calendar
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </Button>
+          )}
           <Button type="submit" variant="secondary" className="sm:col-span-2">
             Download calendar file (.ics)
             <Download className="h-4 w-4" aria-hidden="true" />
           </Button>
         </form>
         <p className="text-xs text-muted">
-          Google and Outlook open a prepared event for you to save. Apple uses your private AthRecs
-          race subscription. Download a one-off file only if you prefer to import it yourself.
+          {layoutPreview
+            ? "Google and Outlook open a prepared event for you to save. Download a one-off .ics file for Apple Calendar or another calendar app. Account subscriptions are disabled in this preview."
+            : "Google and Outlook open a prepared event for you to save. Apple uses your private AthRecs race subscription. Download a one-off file only if you prefer to import it yourself."}
         </p>
       </div>
     </details>

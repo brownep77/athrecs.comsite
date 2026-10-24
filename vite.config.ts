@@ -6,6 +6,43 @@ import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
 import { WORKER_MAX_DURATION_SECONDS } from "./src/lib/race-collector/timing.ts";
+import { layoutPreviewBuildRequested } from "./scripts/build-layout-preview.mjs";
+import {
+  LAYOUT_PREVIEW_MESSAGE,
+  layoutPreviewHeaders,
+  layoutPreviewRequestStatus,
+} from "./src/lib/layout-preview-policy.ts";
+
+const layoutPreview = layoutPreviewBuildRequested(process.env);
+
+/** Also covers Vite's OAuth popup, which runs before TanStack request middleware. */
+function layoutPreviewDevPlugin(): Plugin {
+  return {
+    name: "athrecs:read-only-layout-preview",
+    apply: "serve",
+    enforce: "pre",
+    configureServer(server) {
+      if (!layoutPreview) return;
+      server.middlewares.use((req, res, next) => {
+        for (const [name, value] of Object.entries(layoutPreviewHeaders()))
+          res.setHeader(name, value);
+        const method = req.method ?? "GET";
+        const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
+        const status = layoutPreviewRequestStatus(method, pathname);
+        if (!status && pathname === "/robots.txt") {
+          res.setHeader("Content-Type", "text/plain; charset=utf-8");
+          res.end(method.toUpperCase() === "HEAD" ? undefined : "User-agent: *\nDisallow: /\n");
+          return;
+        }
+        if (!status) return next();
+        res.statusCode = status;
+        res.setHeader("Content-Type", "text/plain; charset=utf-8");
+        if (status === 405) res.setHeader("Allow", "GET, HEAD");
+        res.end(method.toUpperCase() === "HEAD" ? undefined : LAYOUT_PREVIEW_MESSAGE);
+      });
+    },
+  };
+}
 
 /**
  * Build a specialist RunRecs deployment from the same repository without
@@ -20,10 +57,11 @@ function runRecsVariantPlugin(): Plugin {
     process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim().toLowerCase() ?? "";
   const runRecsProject = projectProductionHost.includes("runrecs");
   const enabled =
-    explicitBrand === "runrecs" ||
-    runRecsProject ||
-    branch === "feat/runrecs-running-site" ||
-    branch === "runrecs-production";
+    !layoutPreview &&
+    (explicitBrand === "runrecs" ||
+      runRecsProject ||
+      branch === "feat/runrecs-running-site" ||
+      branch === "runrecs-production");
 
   const moduleAliases = new Map<string, string>([
     ["@/lib/athrecs/api", "src/runrecs/api.ts"],
@@ -83,10 +121,11 @@ function athleticsVariantPlugin(): Plugin {
   const projectProductionHost =
     process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim().toLowerCase() ?? "";
   const runRecsEnabled =
-    explicitBrand === "runrecs" ||
-    projectProductionHost.includes("runrecs") ||
-    branch === "feat/runrecs-running-site" ||
-    branch === "runrecs-production";
+    !layoutPreview &&
+    (explicitBrand === "runrecs" ||
+      projectProductionHost.includes("runrecs") ||
+      branch === "feat/runrecs-running-site" ||
+      branch === "runrecs-production");
   const enabled = !runRecsEnabled;
 
   const moduleAliases = new Map<string, string>([
@@ -259,6 +298,10 @@ function authPopupPlugin(): Plugin {
 // The dev server starts once `src/router.tsx` and `src/routes/` exist — see
 // AGENTS.md § "First scaffold".
 export default defineConfig(({ command }) => ({
+  ...(layoutPreview ? { envDir: false as const } : {}),
+  define: {
+    "import.meta.env.VITE_ATHRECS_LAYOUT_PREVIEW": JSON.stringify(layoutPreview ? "true" : "false"),
+  },
   server: {
     host: "0.0.0.0",
     port: 8080,
@@ -324,6 +367,7 @@ export default defineConfig(({ command }) => ({
   },
   resolve: { tsconfigPaths: true },
   plugins: [
+    layoutPreviewDevPlugin(),
     runRecsVariantPlugin(),
     athleticsVariantPlugin(),
     pgliteBootstrapPlugin(),
@@ -336,6 +380,9 @@ export default defineConfig(({ command }) => ({
           nitro({
             preset: "vercel",
             vercel: {
+              // The complete committed catalogue is seeded into PGlite on a
+              // cold preview instance. Keep its extra allowance out of production.
+              ...(layoutPreview ? { functions: { maxDuration: 120 } } : {}),
               functionRules: {
                 "/api/race-collector-worker": { maxDuration: WORKER_MAX_DURATION_SECONDS },
                 "/api/collection-stats-worker": { maxDuration: 90 },

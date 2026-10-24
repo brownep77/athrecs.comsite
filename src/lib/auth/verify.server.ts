@@ -1,5 +1,6 @@
 import { getRequest } from "@tanstack/react-start/server";
 import { auth, authConfigured } from "./server";
+import { IS_LAYOUT_PREVIEW } from "../layout-preview";
 
 /**
  * Server-side session resolution (server-only).
@@ -12,7 +13,7 @@ import { auth, authConfigured } from "./server";
  */
 
 /** True when a real database is configured server-side. */
-const databaseConfigured = Boolean(process.env.DATABASE_URL?.trim());
+const databaseConfigured = !IS_LAYOUT_PREVIEW && Boolean(process.env.DATABASE_URL?.trim());
 
 /** Re-export so callers can branch on it without importing `server.ts`. */
 export { authConfigured };
@@ -53,9 +54,7 @@ export type VerifiedUser = { id: string; email: string | null };
  * as a bearer token, which we present as `Authorization: Bearer …` (the `bearer`
  * plugin resolves it). When deployed no token is passed and the cookie is used.
  */
-export async function getSessionUser(
-  bearerToken?: string,
-): Promise<VerifiedUser | null> {
+export async function getSessionUser(bearerToken?: string): Promise<VerifiedUser | null> {
   if (!authConfigured) return null;
   const request = getRequest();
   if (!request) return null;
@@ -81,6 +80,8 @@ export async function getSessionUser(
  * - Auth disabled + no database -> the shared dev user id.
  */
 export async function requireUserId(bearerToken?: string): Promise<string> {
+  // A public layout preview must never acquire the shared local-development user.
+  if (IS_LAYOUT_PREVIEW) throw new UnauthorizedError();
   if (!authConfigured) {
     if (databaseConfigured) {
       throw new Error(

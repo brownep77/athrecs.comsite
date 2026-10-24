@@ -88,8 +88,12 @@ function RootComponent() {
           <AppShell>
             <Outlet />
           </AppShell>
-          <AthleteAuthDialog />
-          <BrowserDiagnostics />
+          {import.meta.env.VITE_ATHRECS_LAYOUT_PREVIEW !== "true" && (
+            <>
+              <AthleteAuthDialog />
+              <BrowserDiagnostics />
+            </>
+          )}
         </QueryClientProvider>
         <Scripts />
       </body>

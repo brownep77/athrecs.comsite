@@ -44,7 +44,9 @@ export const Route = createFileRoute("/results/")({
   staleTime: 60_000,
   head: ({ match, loaderData }) => {
     const search = normalizeResultsSearch(match.search);
-    const filtered = Object.entries(search).some(([key, value]) => key !== "page" && Boolean(value));
+    const filtered = Object.entries(search).some(
+      ([key, value]) => key !== "page" && Boolean(value),
+    );
     const url = `${SITE_URL}/results${!filtered && search.page > 1 ? `?page=${search.page}` : ""}`;
     return {
       meta: siteGraphMeta({
@@ -148,6 +150,7 @@ function ResultsPage() {
             Sport category
             <select className={fieldClass} name="category" defaultValue={search.category}>
               <option value="">All categories</option>
+              <option value="all-running">All running</option>
               {SPORT_PAGES.map((page) => (
                 <option key={page.slug} value={page.slug}>
                   {page.label}
@@ -198,7 +201,9 @@ function ResultsPage() {
         {(!search.q || /bure|valley|banningham|norfolk/i.test(search.q)) &&
         (!search.year || search.year === "2026") &&
         (!search.sport || search.sport === "Running") &&
-        (!search.category || search.category === "road-running") &&
+        (!search.category ||
+          search.category === "road-running" ||
+          search.category === "all-running") &&
         (!search.distance || ["10mi", "10M"].includes(search.distance)) &&
         search.page === 1 ? (
           <a

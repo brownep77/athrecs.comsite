@@ -1,11 +1,34 @@
 import { createMiddleware, createStart } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
+import { IS_LAYOUT_PREVIEW } from "./lib/layout-preview";
+import {
+  layoutPreviewBlockedResponse,
+  layoutPreviewHeaders,
+  layoutPreviewRequestStatus,
+} from "./lib/layout-preview-policy";
 import {
   ATHLETE_INDEXING_HEADER,
   ATHLETE_UNAVAILABLE_HEADER,
   INDEXABLE_ATHLETE_ROBOTS,
   PRIVATE_ATHLETE_ROBOTS,
 } from "./lib/athrecs/athlete-search-policy";
+
+const layoutPreviewResponses = createMiddleware().server(async ({ pathname, next }) => {
+  if (!IS_LAYOUT_PREVIEW) return next();
+  const request = getRequest();
+  const blocked = layoutPreviewRequestStatus(request.method, pathname);
+  if (blocked) return layoutPreviewBlockedResponse(request.method, blocked);
+  const result = await next();
+  if (!result.response) return result;
+  const headers = new Headers(result.response.headers);
+  for (const [name, value] of Object.entries(layoutPreviewHeaders())) headers.set(name, value);
+  headers.delete("Set-Cookie");
+  return new Response(result.response.body, {
+    status: result.response.status,
+    statusText: result.response.statusText,
+    headers,
+  });
+});
 
 const memberProfileResponses = createMiddleware().server(async ({ pathname, next }) => {
   const result = await next();
@@ -109,5 +132,5 @@ const diagnosticResponses = createMiddleware().server(async ({ pathname, handler
 });
 
 export const startInstance = createStart(() => ({
-  requestMiddleware: [diagnosticResponses, memberProfileResponses],
+  requestMiddleware: [layoutPreviewResponses, diagnosticResponses, memberProfileResponses],
 }));

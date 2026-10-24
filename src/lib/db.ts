@@ -1,11 +1,13 @@
 import { postgresConnectionConfig } from "./postgres-connection.js";
+import { IS_LAYOUT_PREVIEW } from "./layout-preview";
 
 /** Which database backend is active. */
 export type DbSource = "neon" | "pglite";
 
 // An empty/whitespace DATABASE_URL (an easy misconfig in deploy UIs) must mean
 // "unset" — otherwise production would silently run on the PGLite fallback.
-const rawDatabaseUrl = typeof process !== "undefined" ? process.env.DATABASE_URL : undefined;
+const rawDatabaseUrl =
+  !IS_LAYOUT_PREVIEW && typeof process !== "undefined" ? process.env.DATABASE_URL : undefined;
 const databaseUrl = rawDatabaseUrl && rawDatabaseUrl.trim() ? rawDatabaseUrl : undefined;
 
 /**

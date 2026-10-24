@@ -6,6 +6,7 @@ import { createPrivateKey, randomBytes, sign as signDigest } from "node:crypto";
 import { Pool } from "pg";
 import { ensureDbReady, getPglite } from "../db";
 import { postgresConnectionConfig } from "../postgres-connection.js";
+import { IS_LAYOUT_PREVIEW } from "../layout-preview";
 import { authEmailConfigured, sendAthrecsAuthEmail } from "./email.server";
 import { emailAndPasswordEnabled } from "./email-password";
 import { GROK_PROVIDERS } from "./providers";
@@ -32,11 +33,12 @@ function previewAuthSecret(): string {
 
 /** Read an env var, treating empty/whitespace as unset. */
 const env = (key: string): string | undefined => {
+  if (IS_LAYOUT_PREVIEW) return undefined;
   const value = process.env[key]?.trim();
   return value ? value : undefined;
 };
 
-const authDisabled = env("VITE_AUTH_ENABLED") === "false";
+const authDisabled = IS_LAYOUT_PREVIEW || env("VITE_AUTH_ENABLED") === "false";
 const emailPasswordConfigured = !authDisabled && emailAndPasswordEnabled;
 const emailDeliveryConfigured = emailPasswordConfigured && authEmailConfigured();
 

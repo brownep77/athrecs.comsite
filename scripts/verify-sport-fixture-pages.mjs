@@ -5,7 +5,12 @@ import {
   getSportPage,
   parseSportFixtureSearch,
   publicHttpUrl,
+  RUNNING_FIXTURE_SCOPE,
+  SPORT_PAGES,
 } from "../src/lib/athrecs/sport-pages.ts";
+import { buildCalendarEvent, calendarUnavailable } from "../src/lib/athrecs/event-calendar.ts";
+import { validCalendarRaceId } from "../src/lib/athrecs/calendar-subscription.ts";
+import { buildRaceShareData } from "../src/lib/athrecs/race-sharing.ts";
 import { SPORT_BROADCASTS, upcomingBroadcasts } from "../src/data/sport-broadcasts.ts";
 
 assert.equal(getSportPage("biking").slug, "road-cycling");
@@ -18,6 +23,10 @@ for (const slug of ["mountain-biking", "track-cycling", "bmx"]) {
 }
 assert.equal(getSportPage("unknown"), undefined);
 assert.equal(getSportPage("running").slug, "road-running");
+assert.ok(
+  !SPORT_PAGES.some((page) => page.slug === "running"),
+  "Broad Running is not a new navigation route",
+);
 assert.equal(
   upcomingBroadcasts(getSportPage("road-running"), new Date("2026-09-26T12:00:00Z")).length,
   1,
@@ -36,11 +45,30 @@ assert.equal(parseSportFixtureSearch({ page: "9999" }).page, 400);
 assert.deepEqual(parseSportFixtureSearch({ country: " Ireland ", distance: " Half ", page: "2" }), {
   q: undefined,
   country: "Ireland",
+  month: undefined,
   distance: "Half",
   page: 2,
 });
 assert.equal(parseSportFixtureSearch({ country: ["Ireland"], distance: {} }).country, undefined);
 assert.equal(parseSportFixtureSearch({ country: "All", distance: " " }).distance, undefined);
+assert.equal(parseSportFixtureSearch({ month: " 2027-01 " }).month, "2027-01");
+for (const month of [
+  "2027-00",
+  "2027-13",
+  "2027-1",
+  "27-01",
+  "0000-01",
+  "2027-01-01",
+  "2027-01' OR 1=1 --",
+  ["2027-01"],
+  {},
+]) {
+  assert.equal(
+    parseSportFixtureSearch({ month }).month,
+    undefined,
+    `Reject invalid month ${String(month)}`,
+  );
+}
 assert.equal(publicHttpUrl("javascript:alert(1)"), null);
 assert.equal(publicHttpUrl("https://user:secret@example.com"), null);
 
@@ -82,12 +110,17 @@ const db = new PGlite();
 try {
   await db.exec(`
     create table events (id int primary key, name text, sport text, city text, country text, website text, surface text default 'Road', slug text, summary text, county text);
-    create table editions (id int primary key, event_id int, event_date date, distance_code text, start_time text, source_url text default 'https://example.com/schedule');
-    insert into events (id, name, sport, city, country, website) values
-      (1, 'Example Run', 'Running', 'Norwich', 'United Kingdom', 'https://example.com/run'),
-      (2, 'Example Swim', 'Swimming', 'Norwich', 'United Kingdom', 'javascript:alert(1)'),
-      (3, 'Example Ride', 'Cycling', 'Norwich', 'United Kingdom', null),
-      (4, '100% Run', 'Running', 'Norwich', 'United Kingdom', null);
+    create table editions (
+      id int primary key, event_id int, event_date date, distance_code text,
+      distance_km double precision not null default 0, status text not null default 'TBC',
+      start_time text, source_url text default 'https://example.com/schedule',
+      end_date date, end_time text, end_source_url text, end_checked_at date
+    );
+    insert into events (id, slug, name, sport, city, country, website) values
+      (1, 'example-run', 'Example Run', 'Running', 'Norwich', 'United Kingdom', 'https://example.com/run'),
+      (2, 'example-swim', 'Example Swim', 'Swimming', 'Norwich', 'United Kingdom', 'javascript:alert(1)'),
+      (3, 'example-ride', 'Example Ride', 'Cycling', 'Norwich', 'United Kingdom', null),
+      (4, 'literal-percent-run', '100% Run', 'Running', 'Norwich', 'United Kingdom', null);
     insert into editions (id, event_id, event_date, distance_code, start_time) values
       (1,1,'2026-09-25','10K','09:00'),
       (2,1,'2026-09-26','10K','09:00'),
@@ -95,6 +128,9 @@ try {
       (4,2,'2026-09-27','1500m',null),
       (5,3,'2026-09-27','Road',null),
       (6,4,'2026-09-27','10K',null);
+    update editions set distance_km=10, status='Open', end_date='2026-09-27', end_time='10:00',
+      end_source_url='https://example.com/schedule', end_checked_at='2026-09-01' where id=2;
+    update editions set distance_km=5, status='Cancelled', end_date='2026-09-27', end_time='13:00' where id=3;
   `);
   const sql = { query: async (query, params) => (await db.query(query, params)).rows };
   const running = await readSportFixtures(sql, { ...getSportPage("road-running") }, "2026-09-26");
@@ -104,6 +140,35 @@ try {
   );
   assert.equal(running.fixtures[0].starts.length, 2, "Group distances on the same event day");
   assert.equal(running.fixtures[0].starts[1].time, null, "Do not manufacture start times");
+  const tenK = running.fixtures[0].starts[0];
+  assert.equal(running.fixtures[0].slug, "example-run");
+  assert.equal(tenK.editionId, 2);
+  assert.equal(tenK.distanceKm, 10);
+  assert.equal(tenK.status, "Open");
+  assert.equal(tenK.calendarRace.id, "edition-2-10K");
+  assert.ok(
+    validCalendarRaceId(tenK.calendarRace.id),
+    "Calendar subscription accepts the real edition identity",
+  );
+  assert.equal(tenK.calendarRace.pageUrl, "https://www.athrecs.com/races/example-run");
+  assert.equal(buildRaceShareData(tenK.calendarRace).url, tenK.calendarRace.pageUrl);
+  assert.equal(buildCalendarEvent(tenK.calendarRace).startUtc, "2026-09-26T08:00:00Z");
+  assert.equal(tenK.endDate, "2026-09-27");
+  assert.equal(tenK.endTime, "10:00");
+  assert.equal(tenK.calendarRace.endDate, tenK.endDate);
+  const cancelled = running.fixtures[0].starts[1];
+  assert.equal(cancelled.calendarRace.status, "Cancelled");
+  assert.ok(
+    calendarUnavailable(cancelled.calendarRace),
+    "Cancelled editions cannot be added to a calendar",
+  );
+  assert.equal(cancelled.endDate, null, "Unverified end fields must remain absent");
+  assert.equal(cancelled.endTime, null);
+  assert.equal(
+    running.fixtures[1].starts[0].calendarRace.provisional,
+    undefined,
+    "TBC entry status does not imply a provisional date",
+  );
   assert.equal(
     (await readSportFixtures(sql, { ...getSportPage("road-running"), q: "%" }, "2026-09-26"))
       .fixtures.length,
@@ -142,7 +207,12 @@ try {
       (21, 'BMX Race', 'Cycling', 'BMX Track'),
       (22, 'Cyclo-cross Race', 'Cycling', 'Cyclo-cross'),
       (23, 'Gravel Race', 'Cycling', 'Gravel'),
-      (24, 'Velodrome Meet', 'Cycling', 'Velodrome');
+      (24, 'Velodrome Meet', 'Cycling', 'Velodrome'),
+      (25, 'Fell Athletics', 'Athletics', 'Fell'),
+      (26, 'Mixed Athletics', 'Athletics', 'Mixed'),
+      (27, 'XC Athletics', 'Athletics', 'XC'),
+      (28, 'Field Meet', 'Athletics', 'Field'),
+      (29, 'Example parkrun', 'Parkrun', 'Road');
     insert into editions (id, event_id, event_date, distance_code, start_time) select id, id, '2026-10-01', 'Other', null from events where id >= 10;
   `);
   const namesFor = async (slug) =>
@@ -156,6 +226,30 @@ try {
   assert.deepEqual(await namesFor("mountain-biking"), ["MTB Gravel Programme", "MTB Race"]);
   assert.deepEqual(await namesFor("track-cycling"), ["Track Cycling", "Velodrome Meet"]);
   assert.deepEqual(await namesFor("bmx"), ["BMX Race"]);
+  const broadRunning = await readSportFixtures(sql, RUNNING_FIXTURE_SCOPE, "2026-09-26");
+  assert.deepEqual(broadRunning.fixtures.map((row) => row.name).sort(), [
+    "100% Run",
+    "Athletics Road",
+    "Cross Country",
+    "Example Run",
+    "Fell Athletics",
+    "Mixed Athletics",
+    "Track Run",
+    "Trail Athletics",
+    "Trail Run",
+    "XC Athletics",
+  ]);
+  assert.ok(
+    !broadRunning.fixtures.some((row) =>
+      ["Track Meeting", "Field Meet", "Example parkrun"].includes(row.name),
+    ),
+    "Running excludes Athletics track/field and the separate Parkrun sport",
+  );
+  assert.equal(
+    broadRunning.fixtures.find((row) => row.name === "Cross Country").starts[0].calendarRace,
+    null,
+    "Missing canonical slugs cannot produce invented share/calendar URLs",
+  );
   await db.exec(`delete from editions where event_id >= 10; delete from events where id >= 10;`);
   await db.exec(`
     insert into editions (id, event_id, event_date, distance_code, start_time) select 100+n, 1, '2026-10-01'::date+n, '10K', null from generate_series(0,30) n;
@@ -199,6 +293,50 @@ try {
     ["Example Ireland"],
   );
   assert.equal(irishHalf.hasMore, false);
+  const september = await filtered({ month: "2026-09" });
+  assert.deepEqual(
+    september.fixtures.map((row) => row.eventDate),
+    ["2026-09-26", "2026-09-27"],
+  );
+  const octoberFirst = await filtered({ month: "2026-10" });
+  const octoberSecond = await filtered({ month: "2026-10", page: 2 });
+  assert.equal(octoberFirst.fixtures.length, 24);
+  assert.equal(octoberFirst.hasMore, true);
+  assert.equal(octoberSecond.fixtures.length, 7);
+  assert.equal(octoberSecond.hasMore, false);
+  assert.equal(octoberFirst.fixtures[0].eventDate, "2026-10-01");
+  assert.equal(octoberSecond.fixtures.at(-1).eventDate, "2026-10-31");
+  assert.ok(octoberFirst.fixtures.at(-1).eventDate < octoberSecond.fixtures[0].eventDate);
+  const january = await filtered({ month: "2027-01" });
+  assert.equal(
+    january.fixtures.length,
+    6,
+    "Month applies before pagination, including dates beyond the unfiltered first page",
+  );
+  assert.ok(january.fixtures.every((row) => row.eventDate.startsWith("2027-01-")));
+  assert.equal((await filtered({ month: "2026-11" })).fixtures.length, 0);
+  assert.deepEqual(
+    january.countries,
+    irishHalf.countries,
+    "Month must not narrow whole-sport country choices",
+  );
+  assert.deepEqual(
+    january.distances,
+    irishHalf.distances,
+    "Month must not narrow whole-sport distance choices",
+  );
+  assert.deepEqual(
+    january.months,
+    ["2026-09", "2026-10", "2027-01"],
+    "Month choices cover the full upcoming scope",
+  );
+  assert.deepEqual(
+    (
+      await filtered({ country: "Ireland", distance: "Half", q: "Example", month: "2027-01" })
+    ).fixtures.map((row) => row.name),
+    ["Example Ireland"],
+    "All compact filters work together",
+  );
   assert.deepEqual(
     irishHalf.distances,
     ["5K", "10K", "Half"],
@@ -277,6 +415,13 @@ try {
     ],
   );
   assert.ok(checked.fixtures[0].starts.every((start) => start.checkedAt === "2026-10-07"));
+  assert.deepEqual(
+    checked.fixtures[0].starts.map((start) => [start.editionId, start.calendarRace.startTime]),
+    [
+      [901, "19:00"],
+      [900, "19:04"],
+    ],
+  );
   assert.ok(
     checked.fixtures[0].starts.every((start) =>
       start.sourceUrl.startsWith("https://www.runthrough.co.uk/"),
@@ -287,7 +432,16 @@ try {
     null,
     "Do not carry a checked time into another edition or show legacy midnight clocks",
   );
-  assert.doesNotMatch(JSON.stringify(checked), /runabc/i, "Public fixture payloads must exclude withheld sources");
+  assert.equal(
+    checked.fixtures[1].starts[0].calendarRace.startTime,
+    null,
+    "Calendar data must not reintroduce an unverified legacy clock",
+  );
+  assert.doesNotMatch(
+    JSON.stringify(checked),
+    /runabc/i,
+    "Public fixture payloads must exclude withheld sources",
+  );
   const checked5k = await filtered({ q: "Checked schedule test", distance: "5K" });
   assert.deepEqual(
     checked5k.fixtures[0].starts.map((start) => start.distance),
@@ -298,5 +452,5 @@ try {
   await db.close();
 }
 console.log(
-  "Sport fixtures: combined country/distance/search filters, UK nations, complete options, local broadcast expiry, grouped distances, escaping and pagination passed.",
+  "Sport fixtures: broad Running scope, validated month/country/distance/search filters, complete options, canonical calendar/share identities, checked times, qualified ends, UK nations, broadcasts, grouping and pagination passed.",
 );
