@@ -22,6 +22,24 @@ export function attachSourceOrganisations(
 ): FixtureSource[] {
   const groups = groupOrganisations(organisations);
   const reviewedLinks: Record<string, string[]> = {
+    swim_england_regions: ["swim-england"],
+    swim_england_north_west_region: ["swim-england-north-west-region"],
+    swim_england_north_east_region: ["swim-england-north-east-region"],
+    swim_england_east_midlands_region: ["swim-england-east-midlands-region"],
+    swim_england_west_midland_region: ["swim-england-west-midland-region"],
+    swim_england_london_region: ["swim-england-london-region"],
+    swim_england_south_west_region: ["swim-england-south-west-region"],
+    north_west_swimming_2027: ["swim-england-north-west-region"],
+    east_midlands_swimming_2027: ["swim-england-east-midlands-region"],
+    north_west_swimming_results: ["swim-england-north-west-region"],
+    south_west_swimming_results: ["swim-england-south-west-region"],
+    london_swimming_results: ["swim-england-london-region"],
+    north_east_swimming_results: ["swim-england-north-east-region"],
+    east_midlands_swimming_competitions: ["swim-england-east-midlands-region"],
+    west_midland_age_group_swimming: ["swim-england-west-midland-region"],
+    team_england_abbie_wood_profile: ["swim-england"],
+    aquatics_gb_abbie_wood_profile: ["aquatics-gb"],
+
     east_region_swimming_competitions: ["swim-england-east-region"],
     east_region_swimming_results: ["swim-england-east-region"],
     east_region_swimming_2027_dates: ["swim-england-east-region"],

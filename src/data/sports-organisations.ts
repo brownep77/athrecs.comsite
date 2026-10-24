@@ -14820,4 +14820,149 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "swim-england"
   ]
 }, "2026-10-24"),
+
+  record({
+  "slug": "swim-england-north-west-region",
+  "name": "Swim England North West Region",
+  "type": "regional",
+  "country": "England",
+  "jurisdiction": "North West Region, England",
+  "territories": [
+    "England",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Regional aquatics organisation supporting affiliated clubs, volunteers and competition opportunities.",
+  "detail": "Listed among Swim England’s eight regions. Official regional pages inspected on 24 October 2026. Results indexes are research references; individual performances require separate source-row checks.",
+  "website": "https://swimnorthwest.org/",
+  "sources": [
+    "https://www.swimming.org/swimengland/regions/",
+    "https://swimnorthwest.org/"
+  ],
+  "related": [
+    "swim-england"
+  ]
+}, "2026-10-24"),
+  record({
+  "slug": "swim-england-north-east-region",
+  "name": "Swim England North East Region",
+  "type": "regional",
+  "country": "England",
+  "jurisdiction": "North East Region, England",
+  "territories": [
+    "England",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Regional aquatics organisation supporting affiliated clubs, volunteers and competition opportunities.",
+  "detail": "Listed among Swim England’s eight regions. Official regional pages inspected on 24 October 2026. Results indexes are research references; individual performances require separate source-row checks.",
+  "website": "https://asaner.org.uk/",
+  "sources": [
+    "https://www.swimming.org/swimengland/regions/",
+    "https://asaner.org.uk/"
+  ],
+  "related": [
+    "swim-england"
+  ]
+}, "2026-10-24"),
+  record({
+  "slug": "swim-england-east-midlands-region",
+  "name": "Swim England East Midlands Region",
+  "type": "regional",
+  "country": "England",
+  "jurisdiction": "East Midlands Region, England",
+  "territories": [
+    "England",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Regional aquatics organisation supporting affiliated clubs, volunteers and competition opportunities.",
+  "detail": "Listed among Swim England’s eight regions. Official regional pages inspected on 24 October 2026. Results indexes are research references; individual performances require separate source-row checks.",
+  "website": "https://eastmidlandswimming.org/",
+  "sources": [
+    "https://www.swimming.org/swimengland/regions/",
+    "https://eastmidlandswimming.org/"
+  ],
+  "related": [
+    "swim-england"
+  ]
+}, "2026-10-24"),
+  record({
+  "slug": "swim-england-west-midland-region",
+  "name": "Swim England West Midland Region",
+  "type": "regional",
+  "country": "England",
+  "jurisdiction": "West Midland Region, England",
+  "territories": [
+    "England",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Regional aquatics organisation supporting affiliated clubs, volunteers and competition opportunities.",
+  "detail": "Listed among Swim England’s eight regions. Official regional pages inspected on 24 October 2026. Results indexes are research references; individual performances require separate source-row checks.",
+  "website": "https://westmidlandswimming.org.uk/",
+  "sources": [
+    "https://www.swimming.org/swimengland/regions/",
+    "https://westmidlandswimming.org.uk/"
+  ],
+  "related": [
+    "swim-england"
+  ]
+}, "2026-10-24"),
+  record({
+  "slug": "swim-england-london-region",
+  "name": "Swim England London Region",
+  "type": "regional",
+  "country": "England",
+  "jurisdiction": "London Region, England",
+  "territories": [
+    "England",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Regional aquatics organisation supporting affiliated clubs, volunteers and competition opportunities.",
+  "detail": "Listed among Swim England’s eight regions. Official regional pages inspected on 24 October 2026. Results indexes are research references; individual performances require separate source-row checks.",
+  "website": "https://www.swimming.org/london/",
+  "sources": [
+    "https://www.swimming.org/swimengland/regions/",
+    "https://www.swimming.org/london/"
+  ],
+  "related": [
+    "swim-england"
+  ]
+}, "2026-10-24"),
+  record({
+  "slug": "swim-england-south-west-region",
+  "name": "Swim England South West Region",
+  "type": "regional",
+  "country": "England",
+  "jurisdiction": "South West Region, England",
+  "territories": [
+    "England",
+    "United Kingdom"
+  ],
+  "sports": [
+    "swimming"
+  ],
+  "summary": "Regional aquatics organisation supporting affiliated clubs, volunteers and competition opportunities.",
+  "detail": "Listed among Swim England’s eight regions. Official regional pages inspected on 24 October 2026. Results indexes are research references; individual performances require separate source-row checks.",
+  "website": "https://www.swimwest.org.uk/",
+  "sources": [
+    "https://www.swimming.org/swimengland/regions/",
+    "https://www.swimwest.org.uk/"
+  ],
+  "related": [
+    "swim-england"
+  ]
+}, "2026-10-24"),
 ];
