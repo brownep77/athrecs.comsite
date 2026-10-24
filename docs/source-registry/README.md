@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 930 unique sources as of 24 October 2026. Only 36 are enabled; the other 894 remain
+The registry contains 931 unique sources as of 24 October 2026. Only 36 are enabled; the other 895 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 930 sources create exactly one source job;
+- all 931 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 894 sources are retained as blocked jobs with their reason;
+- the other 895 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -405,3 +405,19 @@ bulk reuse or enables collection. No private participant evidence is committed.
 ### Further historical result capabilities, 24 October 2026
 
 Five disabled manual sources cover the Isle of Man organiser archive, Ultimate Sport Service results, the Ove Schneider copied report, Monaghan Phoenix and Dingle Marathon. Existing Ultimate and Dingle inventory identities are reused. Czech federation, Sparta, RunPorto and RunCzech entries gain dated capability notes; Cesky beh remains part of the existing Czech federation identity. The registry now has 930 sources, with 36 enabled and 894 disabled. Original and republished reports, stage totals, wave ranks and timing labels remain distinct. Registration does not enable collection or verify an individual result.
+
+## London 2025 secondary result sources, 24 October 2026
+
+Registered one disabled Pace Notes research source, with Andrew Kam's publisher
+credit, Figshare licence reference, reviewed London 2025 coverage and the
+publisher's incomplete/held qualification. Updated the existing MarathonGuide
+source with its observed London 2025 results capability while retaining the
+previous fixture-directory evidence and source identity. Neither source is
+enabled and neither registration verifies individual results or identities.
+
+The [source evidence note](london-2025-research-sources.md) records the opened
+pages, original capture/review dates, timing qualifications and coverage limits.
+The source registry and wider repository event inventory were checked for
+duplicates. Private participant records remain outside this repository.
+
+The registry now contains 931 sources: 36 enabled and 895 disabled.

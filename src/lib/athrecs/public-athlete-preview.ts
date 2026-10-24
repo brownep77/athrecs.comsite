@@ -11,6 +11,10 @@ import {
 import { reportedResultSortDate } from "./profile-result-presentation";
 import { publicAthleteBio } from "./public-athlete-bio";
 import { withoutProfileEvidence } from "./profile-evidence";
+import {
+  profileResultLicenceCredits,
+  type PublicResultLicenceCreditId,
+} from "./public-result-licence";
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory } from "./source-performance-history";
 import type { ReportedRaceRecord } from "./reported-race-history";
@@ -49,6 +53,7 @@ export type PublicAthletePreview = {
   achievements?: ProfileAchievementSummary;
   personalBests?: PersonalBestSummary;
   championshipMedals?: ChampionshipMedalSummary[];
+  publicLicenceCredits?: PublicResultLicenceCreditId[];
   entries: ResultsHistoryEntry[];
   reportedRecords: ReportedRaceRecord[];
   totalResults: number;
@@ -116,6 +121,7 @@ export function buildPublicAthletePreview(input: {
     clubSlug: input.club ? (input.clubSlug ?? null) : null,
     nationality: input.nationality ?? null,
     nationalitySource: null,
+    publicLicenceCredits: profileResultLicenceCredits(input.histories),
     ...(input.details ? { details: input.details } : {}),
     sports,
     achievements: buildProfileAchievementSummary(timeline.results, input.histories),
