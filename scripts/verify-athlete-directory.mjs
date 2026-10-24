@@ -1,6 +1,7 @@
 // Exercise the real importer and HTTP handlers against a disposable PGLite database.
 // Environment changes affect only this test process, never a deployment or configured database.
 import assert from "node:assert/strict";
+import { load } from "cheerio";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
@@ -289,8 +290,14 @@ try {
     const html = await response.text();
     assert(!html.includes("Directory Fixture Secret"));
     if (path === "/") {
-      assert(html.includes("Explore sports by country"));
-      assert(html.includes('href="/races"'), "Homepage must link to AthRecs fixtures");
+      const home = load(html);
+      assert.equal(home("main h1").text().trim(), "Find your next running race");
+      assert(home('main a[href="#fixtures"]').length, "Homepage must link to its fixture list");
+      const filters = home('main #fixtures form[method="get"][action="/"]');
+      assert.equal(filters.length, 1, "Homepage filters must submit to the Running homepage");
+      for (const name of ["country", "month", "distance"]) {
+        assert.equal(filters.find(`select[name="${name}"]`).length, 1, `Missing ${name} filter`);
+      }
       assert(html.includes('href="/sports/road-running"'));
       assert(!html.includes("https://www.runrecs.com/races"));
       assert(!html.includes("Upcoming athletics"));

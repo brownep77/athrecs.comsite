@@ -5,7 +5,7 @@ import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
 import { normalizeResultsSearch, parseResultsEditionId } from "./public-results-search";
-import { getSportPage } from "./sport-pages";
+import { ATHLETICS_RUNNING_SURFACES, getSportPage, RUNNING_FIXTURE_SCOPE } from "./sport-pages";
 
 export type PublicResultEdition = {
   edition_id: number;
@@ -59,7 +59,8 @@ export const listPublicResultEditions = createServerFn({ method: "GET" })
     const sql = await getSql();
     const q = like(data.q);
     const sport = data.sport || null;
-    const category = getSportPage(data.category);
+    const broadRunning = data.category === "all-running";
+    const category = broadRunning ? RUNNING_FIXTURE_SCOPE : getSportPage(data.category);
     const categorySports = category ? [...category.sports] : null;
     const surfaces = category?.surfaces ? [...category.surfaces] : null;
     const distance = data.distance || null;
@@ -95,6 +96,8 @@ export const listPublicResultEditions = createServerFn({ method: "GET" })
         and (${sport}::text is null or e.sport = ${sport})
         and (${categorySports}::text[] is null or e.sport = any(${categorySports}::text[]))
         and (${surfaces}::text[] is null or e.surface = any(${surfaces}::text[]))
+        and (not ${broadRunning}::boolean or e.sport = 'Running'
+          or (e.sport = 'Athletics' and e.surface = any(${ATHLETICS_RUNNING_SURFACES}::text[])))
         and (${distance}::text is null or ed.distance_code = ${distance})
         and (${from}::date is null or ed.event_date >= ${from}::date)
         and (${until}::date is null or ed.event_date < ${until}::date)

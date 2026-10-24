@@ -322,14 +322,14 @@ jobs:
               "$GITHUB_WORKSPACE/artifacts/sportsrecs-mobile.png"
 
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Choose your sport||Explore sports by country||Find an athlete||Build my profile' \
+          BROWSER_SMOKE_EXPECT_TEXT='Find your next running race||Explore by place||More countries||Month||Distance||Find my results' \
           BROWSER_SMOKE_REJECT_TEXT='Upcoming athletics||Browse verified athletics fixtures' \
           BROWSER_SMOKE_REJECT_HEADING='Event calendar' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home.png"
           BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
           BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Choose your sport||Find an athlete||Find my results' \
+          BROWSER_SMOKE_EXPECT_TEXT='Find your next running race||Month||Distance||Find my results' \
           BROWSER_SMOKE_REJECT_TEXT='Upcoming athletics||Browse verified athletics fixtures' \
           BROWSER_SMOKE_REJECT_HEADING='Event calendar' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home-mobile.png"

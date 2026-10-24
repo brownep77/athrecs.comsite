@@ -78,6 +78,33 @@ export const SPORT_PAGES = [
 
 export type SportPage = (typeof SPORT_PAGES)[number];
 
+export type SportFixtureScope = {
+  sports: readonly Sport[];
+  surfaces: readonly string[] | null;
+  broadRunning?: boolean;
+};
+
+// Running's homepage includes every Running terrain and the non-track running
+// fixtures also catalogued as Athletics. This is a data scope, not a new route:
+// the existing /sports/running alias must continue to resolve to Road Running.
+export const RUNNING_FIXTURE_SCOPE = {
+  sports: ["Running", "Athletics"],
+  surfaces: null,
+  broadRunning: true,
+} as const satisfies SportFixtureScope;
+
+// The running terrain taxonomy, plus the explicit cross-country/mixed aliases
+// already present in the catalogue. Track/field Athletics stays on its own hub.
+export const ATHLETICS_RUNNING_SURFACES = [
+  "Road",
+  "Trail",
+  "Fell",
+  "XC",
+  "Cross Country",
+  "Mixed",
+  "Park / mixed",
+] as const;
+
 export const UK_FIXTURE_COUNTRIES = [
   "United Kingdom",
   "England",
@@ -92,6 +119,7 @@ export const UK_FIXTURE_COUNTRIES = [
 export type SportFixtureSearch = {
   q?: string;
   country?: string;
+  month?: string;
   distance?: string;
   page?: number;
 };
@@ -119,6 +147,7 @@ export function getSportPage(slug: unknown): SportPage | undefined {
 
 export function parseSportFixtureSearch(raw: Record<string, unknown>): SportFixtureSearch {
   const page = typeof raw.page === "number" || typeof raw.page === "string" ? Number(raw.page) : 1;
+  const month = typeof raw.month === "string" ? raw.month.trim() : "";
   const filter = (value: unknown) =>
     typeof value === "string" && value.trim() !== "All"
       ? value.trim().slice(0, 120) || undefined
@@ -126,6 +155,7 @@ export function parseSportFixtureSearch(raw: Record<string, unknown>): SportFixt
   return {
     q: typeof raw.q === "string" ? raw.q.trim().slice(0, 120) || undefined : undefined,
     country: filter(raw.country),
+    month: /^\d{4}-(0[1-9]|1[0-2])$/.test(month) && !month.startsWith("0000-") ? month : undefined,
     distance: filter(raw.distance) ? fixtureDistanceCode(filter(raw.distance)!) : undefined,
     page: Number.isSafeInteger(page) && page > 1 ? Math.min(page, 400) : undefined,
   };
