@@ -157,7 +157,7 @@ assert.equal(FIXTURE_DETAILS["gothenburg-marathon|2026-10-10"].timeZone, "Europe
 const db = new PGlite();
 try {
   await db.exec(`create table events(id integer primary key,slug text unique,name text,sport text,country text,county text,city text,area text,summary text,description text,organiser text,website text,source_url text,surface text,updated_at timestamptz);
- create table editions(id integer primary key,event_id integer,event_date date,distance_code text,start_time text,status text,entry_url text,source_url text,notes text,unique(event_id,event_date,distance_code));create table app_meta(key text primary key,value text not null);`);
+ create table editions(id integer primary key,event_id integer,event_date date,distance_code text,distance_km double precision not null default 0,start_time text,status text,entry_url text,source_url text,notes text,end_date date,end_time text,end_source_url text,end_checked_at date,unique(event_id,event_date,distance_code));create table app_meta(key text primary key,value text not null);`);
   for (const [i, c] of corrections.entries()) {
     // Synthetic IDs; preserve non-geography values to detect accidental broad writes.
     const oldCounty =
@@ -191,7 +191,7 @@ try {
     await db.query("update events set county=$1 where slug=$2", [m[3], m[1]]);
   const gid = (await db.query("select id from events where slug='gothenburg-marathon'")).rows[0].id;
   await db.query(
-    "insert into editions values(1,$1,'2026-10-09','Marathon','23:00','Open','https://runabc.co.uk/gothenburg-marathon','https://runabc.co.uk/gothenburg-marathon','Original note')",
+    "insert into editions(id,event_id,event_date,distance_code,start_time,status,entry_url,source_url,notes) values(1,$1,'2026-10-09','Marathon','23:00','Open','https://runabc.co.uk/gothenburg-marathon','https://runabc.co.uk/gothenburg-marathon','Original note')",
     [gid],
   );
   await db.exec(
