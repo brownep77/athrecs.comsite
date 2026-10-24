@@ -41,7 +41,7 @@ export async function excludeOwnedPerformance({data}){window.calls.push({kind:'h
 
 `);
 writeFileSync(resolve(root,'router.js'),'export const createFileRoute=()=>options=>({options});');
-writeFileSync(resolve(root,'auth.js'),'export const openAthleteAuth=()=>{};');
+writeFileSync(resolve(root,'auth.js'),'export const openAthleteAuth=()=>{}; export const getBearerToken=async()=>null;');
 writeFileSync(resolve(root,'user.js'),"export const useCurrentUserState=()=>({user:{id:'synthetic-recipient'},isPending:false});");
 writeFileSync(resolve(root,'scope.js'),'export const IS_ATHRECS_SITE=!location.search.includes("runrecs=1");');
 writeFileSync(resolve(root,'style.css'),`@import "${resolve('src/styles.css')}";\n@source "${resolve('src')}";`);
