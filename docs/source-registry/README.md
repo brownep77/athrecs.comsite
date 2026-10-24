@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 925 unique sources as of 24 October 2026. Only 36 are enabled; the other 889 remain
+The registry contains 926 unique sources as of 24 October 2026. Only 36 are enabled; the other 890 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 925 sources create exactly one source job;
+- all 926 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 889 sources are retained as blocked jobs with their reason;
+- the other 890 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -400,3 +400,19 @@ its existing disabled managed source; no duplicate static or database source is
 created. Broader-inventory reuse preserves existing URLs and settings while
 adding provenance. Registration alone never verifies a participant, approves
 bulk reuse or enables collection. No private participant evidence is committed.
+
+## London 2025 secondary result sources, 24 October 2026
+
+Registered one disabled Pace Notes research source, with Andrew Kam's publisher
+credit, Figshare licence reference, reviewed London 2025 coverage and the
+publisher's incomplete/held qualification. Updated the existing MarathonGuide
+source with its observed London 2025 results capability while retaining the
+previous fixture-directory evidence and source identity. Neither source is
+enabled and neither registration verifies individual results or identities.
+
+The [source evidence note](london-2025-research-sources.md) records the opened
+pages, original capture/review dates, timing qualifications and coverage limits.
+The source registry and wider repository event inventory were checked for
+duplicates. Private participant records remain outside this repository.
+
+The registry now contains 926 sources: 36 enabled and 890 disabled.
