@@ -7,6 +7,7 @@ import {
   type CollectionProgress,
 } from "@/lib/results-archive/browser-collection";
 import { parseBrowserCapture } from "@/lib/results-archive/browser-capture";
+import { collectionImportDefaults } from "@/lib/results-archive/collection-provider";
 import {
   discardBrowserCapture,
   type PendingBrowserCapture,
@@ -122,11 +123,11 @@ export function ArchiveRaceUpload({
       setProvider(url.hostname);
       setSourceUrl(capture.sourceUrl);
       setExpected("");
-      if (url.hostname === "results.tcslondonmarathon.com") {
-        const stable = `${url.origin}${url.pathname}?pid=list`;
-        setSourceUrl(stable);
-        setSourceRaceKey(stable);
-        setQ("London Marathon");
+      const defaults = collectionImportDefaults(capture.sourceUrl);
+      if (defaults) {
+        setSourceUrl(defaults.sourceUrl);
+        setSourceRaceKey(defaults.sourceRaceKey);
+        setQ(defaults.raceName);
       } else setSourceRaceKey(capture.sourceUrl.slice(0, 300));
     }
   }
@@ -684,7 +685,7 @@ export function ArchiveRaceUpload({
           </p>
           {!collectionProgress.complete && (
             <p className="text-sm">
-              Keep this tab and the London results tab open. Pause or resume using the buttons on
+              Keep this tab and the source results tab open. Pause or resume using the buttons on
               the results tab. If either tab is closed, restart from page 1; saved rows are checked
               for duplicates.
             </p>
@@ -693,9 +694,11 @@ export function ArchiveRaceUpload({
             <Button
               variant="secondary"
               onClick={() => {
+                const firstUrl = collectionCapture.current?.collection?.firstUrl;
+                if (!firstUrl) return;
                 window.opener?.postMessage(
                   { type: "athrecs-collection-stop", token: collectionCapture.current?.id },
-                  "https://results.tcslondonmarathon.com",
+                  new URL(firstUrl).origin,
                 );
               }}
             >

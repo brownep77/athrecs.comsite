@@ -24,6 +24,11 @@ on:
       - "public/tools/import-results.*"
       - "scripts/lib/browser-results-receiver.ts"
       - "scripts/lib/london-page-collection.mjs"
+      - "scripts/lib/marathon-page-collection.mjs"
+      - "scripts/lib/browser-page-collection.mjs"
+      - "scripts/lib/marathon-collection-job.mjs"
+      - "scripts/collect-marathon-results.mjs"
+      - "scripts/verify-marathon-collection-job.mjs"
       - "scripts/fixtures/london-pagination.mjs"
       - "src/routes/admin/result-archive.tsx"
       - "scripts/verify-captured-results.mjs"
@@ -73,8 +78,10 @@ jobs:
           npm run verify:athlete-finder-capture-backfill
           npm run verify:athlete-source-check
       - run: npx playwright install --with-deps chromium
-      - name: Browser bookmark capture and London list regression
+      - name: Browser bookmark capture and provider boundary regression
         run: node scripts/verify-browser-results-button.mjs
+      - name: Durable local collection and importable exports
+        run: npm run verify:marathon-collection
       - name: Browser to API to disposable database
         run: npm run verify:results-archive-browser
       - name: Athlete finder browser to API to disposable database

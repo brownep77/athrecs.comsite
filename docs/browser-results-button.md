@@ -1,6 +1,6 @@
 # Browser results import
 
-Setup: `/tools/browser-results.html?v=4`. Replace any older bookmark by dragging
+Setup: `/tools/browser-results.html?v=5`. Replace any older bookmark by dragging
 **Save results to AthRecs** to the bookmarks bar. On an HTTPS results page, run
 the bookmark, select a detected table and check its preview. For a supported London
 listing on page 1, use **Collect all pages**. For a single page, **Send to AthRecs**
@@ -8,6 +8,13 @@ opens a receiving tab. **Continue to import** opens the staff import wizard;
 sign in first if needed. **Download a file instead** remains available if popups,
 browser storage or opener access are blocked. Existing `.athrecs.json`, CSV and
 TSV files can be selected or dropped into the same wizard.
+
+For long collections that need to survive closing the browser or restarting a
+computer, use the [local marathon collector](marathon-collection-worker.md).
+It saves checked page captures and a durable checkpoint, then exports files for
+this same importer. It does not require hosted infrastructure. The two-tab
+bookmark still needs both tabs open; its in-session pause/resume is separate
+from the local runner's disk-backed recovery.
 
 The wizard has four steps: choose results, confirm the exact race edition,
 check and save, then athlete matching. Recognised headings are suggested;
@@ -31,6 +38,25 @@ follows validated next-page links for the selected filters. Neither mode loads
 remote bookmark scripts or reads credentials/inputs. Unsupported layouts
 fail visibly. London/Mika lists with a heading row and typed fields are supported;
 a wide desktop window is required so every heading is visible.
+
+The provider profile, page reader and collection engine are now separate. The
+bookmark and local runner share `scripts/lib/marathon-page-collection.mjs`; the
+staff receiver independently applies the same scope rules from
+`src/lib/results-archive/collection-provider.ts`. London's inspected ten headings
+may appear in a different order, but unknown/duplicate/missing headings, changed
+filters, repeated runners and inconsistent totals stop collection. Query
+parameters must be unambiguous, and a returned page must match its requested
+page number and filters.
+
+Chicago's current and historical hosts are recognised for import suggestions.
+Automatic paging remains disabled until an actual results-page sample has been
+inspected and its adapter tested. The exact known 2025 listing returned HTTP 403
+in this environment on 24 October 2026, including a normal browser visit; no
+Chicago headings or pagination were available for review. The generic
+single-page capture remains available when it recognises a visible table. Source
+recognition alone never enables a scheduled source, verifies a result or confirms
+an athlete identity. Existing Sources registry capability/approval flags are
+unchanged.
 
 After saving, **Review athlete matches** opens the imported race's unmatched
 entries. Saved-name suggestions and member claim requests use the existing
