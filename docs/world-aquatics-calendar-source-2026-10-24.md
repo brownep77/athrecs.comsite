@@ -19,7 +19,8 @@ directory check date are retained. No duplicate organisation is created.
 The homepage reconciliation note retains its original wording and records this
 follow-up separately.
 
-The two additional source pages bring the registry from 841 to 843 records.
+The two additional source pages bring the registry from 853 to 855 records.
+The concurrent aquatics-link audit and its twelve additional sources are retained.
 All 36 enabled collection records are unchanged. These inspected entry points
 remain available for supervised research; registration does not install or
 enable an automated collector, import fixtures, or verify athlete results.

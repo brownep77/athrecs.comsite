@@ -14795,7 +14795,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   ],
   "summary": "Regional swimming organisation publishing championship fixtures and results.",
   "detail": "Competition and results pages inspected on 24 October 2026. Individual athlete results need separate source-row checks.",
-  "website": "https://www.eastswimming.org/swimming/swimming-competitions/",
+  "website": "https://www.eastswimming.org/",
   "sources": [
     "https://www.eastswimming.org/swimming/swimming-competitions/"
   ],
@@ -14818,7 +14818,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   ],
   "summary": "Regional swimming organisation publishing championship fixtures and results.",
   "detail": "Competition and results pages inspected on 24 October 2026. Individual athlete results need separate source-row checks.",
-  "website": "https://www.southeastswimming.org/swimming/long-course-championships-2027/",
+  "website": "https://www.southeastswimming.org/",
   "sources": [
     "https://www.southeastswimming.org/swimming/long-course-championships-2027/"
   ],
