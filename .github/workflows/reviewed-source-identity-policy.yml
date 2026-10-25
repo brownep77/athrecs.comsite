@@ -1,0 +1,30 @@
+name: Reviewed source identity policy
+
+on:
+  pull_request:
+    paths: &policy-paths
+      - "AGENTS.md"
+      - "docs/reviewed-source-identity-policy.md"
+      - "docs/archive-athlete-candidate-screening.md"
+      - "docs/london-2025-profile-import.md"
+      - "scripts/lib/reviewed-source-identity-policy.py"
+      - "scripts/review-source-identity-policy.py"
+      - "scripts/verify-reviewed-source-identity-policy.py"
+      - ".github/workflows/reviewed-source-identity-policy.yml"
+  push:
+    branches: [main]
+    paths: *policy-paths
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-policy-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/verify-reviewed-source-identity-policy.py
