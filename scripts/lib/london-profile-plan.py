@@ -1061,7 +1061,23 @@ def validate_plan(plan, *, snapshot=None):
         if group["disposition"] == "linked":
             if "history" in group or "athleteDraft" in group or not group["existingMatches"]:
                 raise ValueError("An existing performance must be reused without duplication")
+            # The applier's targets must be the exact targets supported below.
+            target_athlete_id = _entity_id(group.get("athleteId"))
+            matched_athlete_ids = {_entity_id(m["athleteId"]) for m in group["existingMatches"]}
+            matched_result_ids = [_entity_id(m["resultId"]) for m in group["existingMatches"]]
+            target_result_ids = group.get("resultIds")
+            if (matched_athlete_ids != {target_athlete_id}
+                    or any(m["athleteId"] != group["athleteId"] for m in group["existingMatches"])
+                    or not isinstance(target_result_ids, list)
+                    or [_entity_id(value) for value in target_result_ids] != matched_result_ids
+                    or target_result_ids != [m["resultId"] for m in group["existingMatches"]]
+                    or len(set(matched_result_ids)) != len(matched_result_ids)):
+                raise ValueError("Linked group targets differ from existing performance evidence")
             for match in group["existingMatches"]:
+                if snapshot is not None:
+                    target = snapshot_results.get(_entity_id(match["resultId"]))
+                    if target is None or _entity_id(target["athleteId"]) != target_athlete_id:
+                        raise ValueError("Linked target performance or athlete differs from the frozen snapshot")
                 if match["conflicts"] or match["matchedTimeSeconds"] != group["finishSeconds"]:
                     raise ValueError("Existing performance linkage lacks compatible evidence")
                 if match.get("method") != REVIEW_METHOD:
