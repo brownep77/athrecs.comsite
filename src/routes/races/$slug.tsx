@@ -313,6 +313,7 @@ export function RacePageContent({
         surface: event.surface,
         organiser: event.organiser,
         website: event.website,
+        sourceUrl: event.source_url,
         nextDate: next ? formatRaceDateShort(next.event_date) : null,
       }),
     [event, country, next],

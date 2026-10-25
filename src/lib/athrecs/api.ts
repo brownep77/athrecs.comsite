@@ -473,6 +473,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
           description: string;
           organiser: string;
           website: string;
+          source_url: string | null;
         }
       | undefined;
     if (!event) return null;

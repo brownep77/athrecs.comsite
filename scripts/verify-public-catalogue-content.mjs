@@ -96,6 +96,12 @@ try {
   assert.equal(publicSeed.editions.length, editions.length);
   const { raceLink } = await vite.ssrLoadModule("/src/lib/athrecs/race-information.ts");
   const { eventSourceOf } = await vite.ssrLoadModule("/src/lib/athrecs/race-briefing.ts");
+  for (const website of ["", "https://example.org/organiser"]) {
+    const source = eventSourceOf({ slug: "synthetic-readable-meeting-abcd1234", sport: "Athletics", website,
+      sourceUrl: "https://worldathletics.org/competition/calendar-results" });
+    assert.equal(source.kind, "world-athletics", "A readable URL retains its stored provider attribution");
+    assert.equal(source.url, "https://worldathletics.org/competition/calendar-results");
+  }
   const { resultCredit } = await vite.ssrLoadModule("/src/lib/athrecs/result-credit.ts");
   assert.equal(raceLink("https://runabc.co.uk/example"), null);
   assert.equal(raceLink("https://example.org/enter"), "https://example.org/enter");
