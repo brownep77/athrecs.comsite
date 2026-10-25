@@ -1,5 +1,7 @@
 import type { ResultsHistoryEntry } from "./profile-history-results";
 import { hasRecordedFinish, hasHistoryFinish } from "./profile-result-presentation.ts";
+import { formatDuration } from "./format.ts";
+import { historicalResultQualifications } from "./historical-result-qualifications.ts";
 
 export const PUBLIC_CAREER_EVENT_LIMIT = 6;
 
@@ -8,6 +10,8 @@ export type PublicCareerEvent = {
   eventSlug: string | null;
   year: string;
   discipline: string;
+  performance?: string;
+  qualifications?: string[];
   verification: "Source checked" | "Administrator confirmed" | "Unverified record";
 };
 
@@ -30,12 +34,13 @@ const verification = (value?: string): PublicCareerEvent["verification"] =>
       : "Unverified record";
 
 /** A small public summary of privacy-filtered records, never the full result history.
- * Only allowlisted event facts leave this function: no times, placings, evidence or notes.
+ * Only allowlisted event facts and the published mark leave this function; evidence stays private.
  * Publication and verification remain separate; missing verification is never inferred.
  */
 export function publicAthleteCareer(
   name: string,
   entries: readonly ResultsHistoryEntry[],
+  includePerformances = false,
 ): PublicCareerSummary | null {
   const facts = entries
     .flatMap((entry): Array<PublicCareerEvent & { date: string }> => {
@@ -49,6 +54,9 @@ export function publicAthleteCareer(
             year: row.eventDate.slice(0, 4),
             date: row.eventDate,
             discipline: disciplineLabel(row.distanceCode),
+            ...(includePerformances
+              ? { performance: formatDuration(row.finishTimeSeconds), qualifications: [] }
+              : {}),
             verification: verification(row.details?.verificationStatus),
           },
         ];
@@ -65,6 +73,12 @@ export function publicAthleteCareer(
           year,
           date: row.date || year,
           discipline: disciplineLabel(row.discipline),
+          ...(includePerformances
+            ? {
+                performance: row.performance || "Not recorded",
+                qualifications: historicalResultQualifications(row.labels),
+              }
+            : {}),
           verification: verification(row.verificationStatus),
         },
       ];

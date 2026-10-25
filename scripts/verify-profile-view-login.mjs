@@ -422,6 +422,10 @@ try {
   });
   assert.equal(secondPage.resultPage, 2);
   assert.equal(secondPage.resultPages, 3);
+  assert(
+    secondPage.careerSummary.events.every((event) => event.performance),
+    "Approved unclaimed career highlights include the already-public performance",
+  );
   assert.equal(secondPage.entries.length + secondPage.reportedRecords.length, 5);
   assert.equal(lastPage.entries.length + lastPage.reportedRecords.length, 1);
   for (const page of [secondPage, lastPage]) {
@@ -624,6 +628,30 @@ try {
       executablePath: process.env.ATHRECS_BROWSER_EXECUTABLE || undefined,
     });
     try {
+      const checkPerformanceVisibility = async (page) => {
+        const cells = await page
+          .locator(
+            '#results-history td[data-label="Performance"], #results-history td[data-label="Time"]',
+          )
+          .evaluateAll((elements) =>
+            elements.map((element) => {
+              const cell = element.getBoundingClientRect();
+              const panel = element.closest(".profile-table-wrap").getBoundingClientRect();
+              return {
+                text: element.textContent.trim(),
+                visible:
+                  cell.width > 0 &&
+                  cell.left >= Math.max(0, panel.left) - 1 &&
+                  cell.right <= Math.min(innerWidth, panel.right) + 1,
+              };
+            }),
+          );
+        assert(cells.length > 0);
+        assert(
+          cells.every((cell) => cell.text && cell.visible),
+          `Every result time must fit without horizontal scrolling at ${page.viewportSize().width}px`,
+        );
+      };
       // Update the database while the same page stays open. No navigation,
       // focus event or manual reload may be needed to update its achievements.
       const checkLiveAchievements = async (page) => {
@@ -670,6 +698,11 @@ try {
         waitUntil: "networkidle",
       });
       assert.equal(await guest.locator("#results-history tbody tr").count(), 5);
+      for (const width of [390, 640, 768, 820, 1023, 1365]) {
+        await guest.setViewportSize({ width, height: 844 });
+        await checkPerformanceVisibility(guest);
+      }
+      await guest.setViewportSize({ width: 390, height: 844 });
       await checkLiveAchievements(guest);
       await guest
         .getByRole("button", { name: "Sign in or create an account", exact: true })
@@ -679,6 +712,7 @@ try {
       await anonymous.close();
       for (const viewport of [
         { width: 1365, height: 900 },
+        { width: 768, height: 900 },
         { width: 390, height: 844 },
       ]) {
         const context = await browser.newContext({
@@ -709,6 +743,7 @@ try {
         assert.equal(await page.getByText("Show all 11 results", { exact: true }).count(), 0);
         assert.equal(await history.locator("table").count(), 1);
         assert.equal(await history.locator("tbody tr:visible").count(), 11);
+        await checkPerformanceVisibility(page);
         assert.equal(
           await history.locator(".result-evidence a[href^='https://example.test']").count(),
           0,

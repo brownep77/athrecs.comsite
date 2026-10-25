@@ -148,6 +148,15 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
                   {event.year}
                   {event.discipline ? ` · ${event.discipline}` : ""}
                 </p>
+                {event.performance ? (
+                  <p className="mt-1 text-sm">
+                    <span className="text-muted">Performance: </span>
+                    <strong className="tabular-nums">{event.performance}</strong>
+                  </p>
+                ) : null}
+                {event.qualifications?.length ? (
+                  <p className="text-xs text-muted">{event.qualifications.join(" · ")}</p>
+                ) : null}
                 <Badge variant="outline">{event.verification}</Badge>
               </li>
             ))}
