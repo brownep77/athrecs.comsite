@@ -82,6 +82,231 @@ const federation = (
  */
 export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   {
+  "slug": "morocco-beni-mellal-khenifra-cycling",
+  "name": "Ligue Béni Mellal Khénifra de Cyclisme",
+  "type": "regional",
+  "country": "Morocco",
+  "jurisdiction": "Béni Mellal-Khénifra, Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "Regional cycling league for Béni Mellal-Khénifra, listed by Morocco’s national cycling federation.",
+  "detail": "Official FRMC profile checked 25 October 2026. Provides league and affiliated-club information; competition and athlete facts require separate sources.",
+  "website": "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-beni-mellal-khenifra-de-cyclisme",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.frmcyclisme.ma/fr/ligues-regionales",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-beni-mellal-khenifra-de-cyclisme"
+  ],
+  "related": [
+    "morocco-cycling"
+  ],
+  "checkedAt": "2026-10-25"
+},
+  {
+  "slug": "morocco-casablanca-settat-cycling",
+  "name": "Ligue Casablanca Settat de Cyclisme",
+  "type": "regional",
+  "country": "Morocco",
+  "jurisdiction": "Casablanca-Settat, Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "Regional cycling league for Casablanca-Settat, listed by Morocco’s national cycling federation.",
+  "detail": "Official FRMC profile checked 25 October 2026. Provides league and affiliated-club information; competition and athlete facts require separate sources.",
+  "website": "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-casablanca-settat-de-cyclisme",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.frmcyclisme.ma/fr/ligues-regionales",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-casablanca-settat-de-cyclisme"
+  ],
+  "related": [
+    "morocco-cycling"
+  ],
+  "checkedAt": "2026-10-25"
+},
+  {
+  "slug": "morocco-oriental-cycling",
+  "name": "Ligue de l’Oriental de Cyclisme",
+  "type": "regional",
+  "country": "Morocco",
+  "jurisdiction": "L’Oriental, Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "Regional cycling league for L’Oriental, listed by Morocco’s national cycling federation.",
+  "detail": "Official FRMC profile checked 25 October 2026. Provides league and affiliated-club information; competition and athlete facts require separate sources.",
+  "website": "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-de-loriental-de-cyclisme",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.frmcyclisme.ma/fr/ligues-regionales",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-de-loriental-de-cyclisme"
+  ],
+  "related": [
+    "morocco-cycling"
+  ],
+  "checkedAt": "2026-10-25"
+},
+  {
+  "slug": "morocco-fes-meknes-cycling",
+  "name": "Ligue Fès Meknès de Cyclisme",
+  "type": "regional",
+  "country": "Morocco",
+  "jurisdiction": "Fès-Meknès, Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "Regional cycling league for Fès-Meknès, listed by Morocco’s national cycling federation.",
+  "detail": "Official FRMC profile checked 25 October 2026. Provides league and affiliated-club information; competition and athlete facts require separate sources.",
+  "website": "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-fes-meknes-de-cyclisme",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.frmcyclisme.ma/fr/ligues-regionales",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-fes-meknes-de-cyclisme"
+  ],
+  "related": [
+    "morocco-cycling"
+  ],
+  "checkedAt": "2026-10-25"
+},
+  {
+  "slug": "morocco-guelmim-oued-noun-cycling",
+  "name": "Ligue Guelmim Oued Noun de Cyclisme",
+  "type": "regional",
+  "country": "Morocco",
+  "jurisdiction": "Guelmim-Oued Noun, Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "Regional cycling league for Guelmim-Oued Noun, listed by Morocco’s national cycling federation.",
+  "detail": "Official FRMC profile checked 25 October 2026. Provides league and affiliated-club information; competition and athlete facts require separate sources.",
+  "website": "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-guelmim-oued-noun-de-cyclisme",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.frmcyclisme.ma/fr/ligues-regionales",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-guelmim-oued-noun-de-cyclisme"
+  ],
+  "related": [
+    "morocco-cycling"
+  ],
+  "checkedAt": "2026-10-25"
+},
+  {
+  "slug": "morocco-marrakech-safi-cycling",
+  "name": "Ligue Marrakech Safi de Cyclisme",
+  "type": "regional",
+  "country": "Morocco",
+  "jurisdiction": "Marrakech-Safi, Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "Regional cycling league for Marrakech-Safi, listed by Morocco’s national cycling federation.",
+  "detail": "Official FRMC profile checked 25 October 2026. Provides league and affiliated-club information; competition and athlete facts require separate sources.",
+  "website": "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-marrakech-safi-de-cyclisme",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.frmcyclisme.ma/fr/ligues-regionales",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-marrakech-safi-de-cyclisme"
+  ],
+  "related": [
+    "morocco-cycling"
+  ],
+  "checkedAt": "2026-10-25"
+},
+  {
+  "slug": "morocco-rabat-sale-kenitra-cycling",
+  "name": "Ligue Rabat Salé Kénitra de Cyclisme",
+  "type": "regional",
+  "country": "Morocco",
+  "jurisdiction": "Rabat-Salé-Kénitra, Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "Regional cycling league for Rabat-Salé-Kénitra, listed by Morocco’s national cycling federation.",
+  "detail": "Official FRMC profile checked 25 October 2026. Provides league and affiliated-club information; competition and athlete facts require separate sources.",
+  "website": "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-rabat-sale-kenitra-de-cyclisme",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.frmcyclisme.ma/fr/ligues-regionales",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-rabat-sale-kenitra-de-cyclisme"
+  ],
+  "related": [
+    "morocco-cycling"
+  ],
+  "checkedAt": "2026-10-25"
+},
+  {
+  "slug": "morocco-souss-massa-cycling",
+  "name": "Ligue Souss Massa de Cyclisme",
+  "type": "regional",
+  "country": "Morocco",
+  "jurisdiction": "Souss-Massa, Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "Regional cycling league for Souss-Massa, listed by Morocco’s national cycling federation.",
+  "detail": "Official FRMC profile checked 25 October 2026. Provides league and affiliated-club information; competition and athlete facts require separate sources.",
+  "website": "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-souss-massa-de-cyclisme",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.frmcyclisme.ma/fr/ligues-regionales",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-souss-massa-de-cyclisme"
+  ],
+  "related": [
+    "morocco-cycling"
+  ],
+  "checkedAt": "2026-10-25"
+},
+  {
+  "slug": "morocco-tanger-tetouan-al-hoceima-cycling",
+  "name": "Ligue Tanger Tétouan Al Hoceima de Cyclisme",
+  "type": "regional",
+  "country": "Morocco",
+  "jurisdiction": "Tanger-Tétouan-Al Hoceïma, Morocco",
+  "territories": [
+    "Morocco"
+  ],
+  "sports": [
+    "road-cycling"
+  ],
+  "summary": "Regional cycling league for Tanger-Tétouan-Al Hoceïma, listed by Morocco’s national cycling federation.",
+  "detail": "Official FRMC profile checked 25 October 2026. Provides league and affiliated-club information; competition and athlete facts require separate sources.",
+  "website": "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-tanger-tetouan-al-hoceima-de-cyclisme",
+  "websiteKind": "member-directory",
+  "sources": [
+    "https://www.frmcyclisme.ma/fr/ligues-regionales",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales/ligue-tanger-tetouan-al-hoceima-de-cyclisme"
+  ],
+  "related": [
+    "morocco-cycling"
+  ],
+  "checkedAt": "2026-10-25"
+},
+  {
     slug: "hyrox",
     name: "HYROX",
     type: "organiser",
@@ -7598,7 +7823,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
+  {
   "slug": "benin-cycling",
   "name": "FÉDÉRATION BENINOISE DE CYCLISME",
   "type": "national",
@@ -7611,16 +7836,22 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "road-cycling"
   ],
   "summary": "National cycling body for Benin, listed by the Union Cycliste Internationale.",
-  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
-  "websiteKind": "member-directory",
+  "website": "https://fbc.bj/",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://fbc.bj/",
+    "https://fbc.bj/nationale/",
+    "https://fbc.bj/category/competitions-nationales/",
+    "https://fbc.bj/category/equipe-nationale/",
+    "https://fbc.bj/championnat-dafrique-au-kenya-le-benin-present-avec-14-coureurs/"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
-  record({
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "National website reviewed 25 October 2026. Competition and national-team reports provide research leads; narrative classifications and article dates require edition-specific verification."
+},
+  {
   "slug": "botswana-cycling",
   "name": "BOTSWANA CYCLING ASSOCIATION",
   "type": "national",
@@ -7633,15 +7864,18 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "road-cycling"
   ],
   "summary": "National cycling body for Botswana, listed by the Union Cycliste Internationale.",
-  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "website": "https://www.bnsc.co.bw/node/256",
   "websiteKind": "member-directory",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://www.bnsc.co.bw/node/256"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "Named National Sport Commission profile reviewed 25 October 2026. Its event and club information includes historical 2009 material and must not be read as a current calendar."
+},
   record({
   "slug": "burkina-faso-cycling",
   "name": "FÉDÉRATION BURKINABE DE CYCLISME",
@@ -7686,7 +7920,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
+  {
   "slug": "cameroon-cycling",
   "name": "FÉDÉRATION CAMEROUNAISE DE CYCLISME",
   "type": "national",
@@ -7699,15 +7933,18 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "road-cycling"
   ],
   "summary": "National cycling body for Cameroon, listed by the Union Cycliste Internationale.",
-  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
-  "websiteKind": "member-directory",
+  "website": "https://fecacyclisme.com/",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://fecacyclisme.com/",
+    "https://fecacyclisme.com/public/documents/CAC_African_Championships_Kisumu_2026_Communique_5_Resultats.pdf"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "National website reviewed 25 October 2026. Provides competition news, team announcements and linked results documents; stage classifications, overall classifications and time gaps require separate interpretation."
+},
   record({
   "slug": "cabo-verde-cycling",
   "name": "FEDERAÇÃO CABO - VERDIANA DE CICLISMO",
@@ -8016,7 +8253,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
+  {
   "slug": "ghana-cycling",
   "name": "GHANA CYCLING FEDERATION",
   "type": "national",
@@ -8029,15 +8266,20 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "road-cycling"
   ],
   "summary": "National cycling body for Ghana, listed by the Union Cycliste Internationale.",
-  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
-  "websiteKind": "member-directory",
+  "website": "https://ghanacyclingfederation.com/",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://ghanacyclingfederation.com/",
+    "https://ghanacyclingfederation.com/about/",
+    "https://ghanacyclingfederation.com/gcf-program-of-activities/",
+    "https://ghanacyclingfederation.com/wp-content/uploads/2026/06/GCF-PROGRAM-OF-ACTIVITIES-2026-SPORTING-YEAR-2.pdf"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "National website and embedded 2026 programme reviewed 25 October 2026. The annual plan uses months rather than exact race dates and contains outdated entries; use current edition-specific programmes for fixtures."
+},
   record({
   "slug": "guinea-cycling",
   "name": "FÉDÉRATION GUINEENNE DE CYCLISME",
@@ -8280,7 +8522,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
+  {
   "slug": "morocco-cycling",
   "name": "FÉDÉRATION ROYALE MAROCAINE DE CYCLISME",
   "type": "national",
@@ -8293,15 +8535,21 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "road-cycling"
   ],
   "summary": "National cycling body for Morocco, listed by the Union Cycliste Internationale.",
-  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
-  "websiteKind": "member-directory",
+  "website": "https://www.frmcyclisme.ma/",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://www.frmcyclisme.ma/",
+    "https://www.frmcyclisme.ma/fr/calendrier-des-courses",
+    "https://www.frmcyclisme.ma/fr/proces-verbaux",
+    "https://www.frmcyclisme.ma/sites/default/files/2026-10/PV%20N%C2%B0%2017.pdf",
+    "https://www.frmcyclisme.ma/fr/ligues-regionales"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "National website reviewed 25 October 2026. Provides regional-league profiles and dated federation bulletins containing governance and race-programme information."
+},
   record({
   "slug": "mozambique-cycling",
   "name": "FEDERAÇÄO MOÇAMBICANA DE CICLISMO",
@@ -8324,7 +8572,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
+  {
   "slug": "namibia-cycling",
   "name": "NAMIBIAN CYCLING FEDERATION",
   "type": "national",
@@ -8337,15 +8585,21 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "road-cycling"
   ],
   "summary": "National cycling body for Namibia, listed by the Union Cycliste Internationale.",
-  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
-  "websiteKind": "member-directory",
+  "website": "https://namibian-cycling-federation.org/",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://namibian-cycling-federation.org/",
+    "https://olympic.org.na/affiliated-members/namibia-cycling-federation",
+    "https://namibian-cycling-federation.org/event-calender",
+    "https://namibian-cycling-federation.org/event-calender?results=true",
+    "https://namibian-cycling-federation.org/article/2026-nedbank-national-road-cycling-championship-winners"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "National website corroborated by the Namibia Olympic Committee on 25 October 2026. Includes championship news and calendar/results navigation; dynamic event and result rows require separate checks."
+},
   record({
   "slug": "niger-cycling",
   "name": "FÉDÉRATION NIGERIENNE DE CYCLISME",
@@ -8390,7 +8644,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
+  {
   "slug": "rwanda-cycling",
   "name": "FÉDÉRATION RWANDAISE DE CYCLISME",
   "type": "national",
@@ -8406,12 +8660,15 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
   "websiteKind": "member-directory",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://olympicrwanda.org/sports-federations-2/"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "Website review on 25 October 2026 found template personnel and ambiguous event dates on the national domain. The UCI membership reference is retained while those details await clarification."
+},
   record({
   "slug": "sao-tome-and-principe-cycling",
   "name": "FÉDÉRATION SANTOMEENE DE CYCLISME",
@@ -8610,7 +8867,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
+  {
   "slug": "uganda-cycling",
   "name": "UGANDA CYCLING ASSOCIATION",
   "type": "national",
@@ -8623,15 +8880,18 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "road-cycling"
   ],
   "summary": "National cycling body for Uganda, listed by the Union Cycliste Internationale.",
-  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "website": "https://www.ncs.go.ug/associations/uganda-cycling-association-uca",
   "websiteKind": "member-directory",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://www.ncs.go.ug/associations/uganda-cycling-association-uca"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "National Council of Sports profile reviewed 25 October 2026. This is a governance reference; the national association website returned a maintenance message."
+},
   record({
   "slug": "tanzania-cycling",
   "name": "CYCLING ASSOCIATION OF TANZANIA",
@@ -8654,7 +8914,7 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
+  {
   "slug": "zambia-cycling",
   "name": "CYCLING ASSOCIATION OF ZAMBIA",
   "type": "national",
@@ -8667,16 +8927,22 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "road-cycling"
   ],
   "summary": "National cycling body for Zambia, listed by the Union Cycliste Internationale.",
-  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
-  "websiteKind": "member-directory",
+  "website": "https://www.caz.africa/",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://www.caz.africa/",
+    "https://www.caz.africa/index.php/about",
+    "https://www.caz.africa/index.php/events",
+    "https://www.caz.africa/index.php/event-calendar",
+    "https://www.caz.africa/index.php/events/national-road-race-championships-2026"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
-  record({
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "National website reviewed 25 October 2026. Provides 2024–26 event notices, including national championships. Some template text and older events labelled upcoming remain; verify each edition separately."
+},
+  {
   "slug": "zimbabwe-cycling",
   "name": "CYCLING ZIMBABWE",
   "type": "national",
@@ -8689,15 +8955,18 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "road-cycling"
   ],
   "summary": "National cycling body for Zimbabwe, listed by the Union Cycliste Internationale.",
-  "website": "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+  "website": "https://src.org.zw/dt_team/cycling-zimbabwe/",
   "websiteKind": "member-directory",
   "sources": [
-    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc"
+    "https://www.uci.org/africa-continental-confederations-national-federations/52DfWCi6lPxLk3dfvEIhyc",
+    "https://src.org.zw/dt_team/cycling-zimbabwe/"
   ],
   "related": [
     "uci"
-  ]
-}, "2026-10-23"),
+  ],
+  "checkedAt": "2026-10-23",
+  "detail": "Sports and Recreation Commission profile reviewed 25 October 2026. This identifies the national body; the researched national domain returned a coming-soon placeholder and was not adopted as the primary link."
+},
   record({
   "slug": "djibouti-athletics",
   "name": "Fédération Djiboutienne d’Athlétisme",
