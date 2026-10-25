@@ -1,0 +1,2456 @@
+{
+  "checkedAt": "2026-10-25",
+  "scope": "All 108 triathlon organisations still using World Triathlon membership profiles as primary links after audit F.",
+  "organisationCount": 108,
+  "membershipChecks": [
+    {
+      "slug": "argentine-triathlon",
+      "url": "https://triathlon.org/members/federacion-argentina-de-triatlon",
+      "finalUrl": "https://triathlon.org/members/federacion-argentina-de-triatlon",
+      "title": "Federación Argentina de Triatlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.instagram.com/tri.arg"
+        }
+      ],
+      "pageSHA256": "f33f7407d9889f66b114c08adb8f26611afd660f4ee27dd4052c22102293daf2",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Visit website points to a social account or media page, not a checked federation data website."
+    },
+    {
+      "slug": "colombian-triathlon",
+      "url": "https://triathlon.org/members/federacion-colombiana-de-triathlon",
+      "finalUrl": "https://triathlon.org/members/federacion-colombiana-de-triathlon",
+      "title": "Federacion Colombiana de Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.fedecoltri.com/"
+        }
+      ],
+      "pageSHA256": "260c209f78e4a804ab8cffc0d3327845d68ec346273fdc822563856edb25dd75",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Federation-branded maintenance page; detailed data unavailable."
+    },
+    {
+      "slug": "thai-triathlon",
+      "url": "https://triathlon.org/members/triathlon-association-of-thailand",
+      "finalUrl": "https://triathlon.org/members/triathlon-association-of-thailand",
+      "title": "Thailand Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "a37191d54fd10d675976efdb9db6e2553e5bd7d74dfaca4390925c5dae50d7ec",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "philippine-triathlon",
+      "url": "https://triathlon.org/members/triathlon-association-of-the-philippines",
+      "finalUrl": "https://triathlon.org/members/triathlon-association-of-the-philippines",
+      "title": "Triathlon Association of the Philippines | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.triathlon.org.ph/"
+        }
+      ],
+      "pageSHA256": "00facb40d57c45f7deef7a538ef20e4bee0505f917af6d4274d164f5ed4ddfd7",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Server index, not an operational federation or data page."
+    },
+    {
+      "slug": "indonesian-triathlon",
+      "url": "https://triathlon.org/members/indonesian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/indonesian-triathlon-federation",
+      "title": "Indonesian Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.triathlon.or.id/"
+        }
+      ],
+      "pageSHA256": "731562079c5cd28ae1b139318b61955a2ddac1025f09513b6e84bc5ac9657ca5",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "jamaican-triathlon",
+      "url": "https://triathlon.org/members/jamaican-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/jamaican-triathlon-federation",
+      "title": "Jamaica Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.facebook.com/groups/247470745269029/"
+        }
+      ],
+      "pageSHA256": "6e92fa75c78bf259be5c46bffa7df3bc1c11c9bd9ad93603a6e2a46740a46a70",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Visit website points to a social account or media page, not a checked federation data website."
+    },
+    {
+      "slug": "uruguayan-triathlon",
+      "url": "https://triathlon.org/members/uruguay-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/uruguay-triathlon-federation",
+      "title": "Union de Triatlón del Uruguay | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.triatlonuruguay.org"
+        }
+      ],
+      "pageSHA256": "b771e439d3f8c9b5a73b2eeb3ee61c7c3f7c4e289f9602bc9ef03faf51a48a5c",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Destination identifies Union de Triatlon Costa Azul and an amateur circuit, differing from the World Triathlon-listed national body. Ownership/suitability unresolved."
+    },
+    {
+      "slug": "bolivian-triathlon",
+      "url": "https://triathlon.org/members/bolivian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/bolivian-triathlon-federation",
+      "title": "Federación Boliviana de Triatlón | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "8c4534012d2175c213fc253afd87272cd2028fff7c708cdcbb52aed312ae6035",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "dominican-republic-triathlon",
+      "url": "https://triathlon.org/members/federacion-dominicana-de-triathlon",
+      "finalUrl": "https://triathlon.org/members/federacion-dominicana-de-triathlon",
+      "title": "Federación Dominicana de Triatlón | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "153cf3170710a7bf714593af35bb0773eb315db07f82d289a25e756126403ca8",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "ecuadorian-triathlon",
+      "url": "https://triathlon.org/members/federacion-ecuatoriana-de-triatlon",
+      "finalUrl": "https://triathlon.org/members/federacion-ecuatoriana-de-triatlon",
+      "title": "Federación Ecuatoriana de Triatlón | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://trifed.com.ec/"
+        }
+      ],
+      "pageSHA256": "a689126528da4148ed80948a858c3b427e00af89faa7447d0079d8d0ea69570b",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "chinese-triathlon",
+      "url": "https://triathlon.org/members/china-triathlon-sports-association",
+      "finalUrl": "https://triathlon.org/members/china-triathlon-sports-association",
+      "title": "China Triathlon Sports Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.ctsa.org.cn/"
+        }
+      ],
+      "pageSHA256": "6cf1cc68e27c809ccd6783f6b2b6346fa6965dc926627e3803b38f36ef17662c",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "chinese-taipei-triathlon",
+      "url": "https://triathlon.org/members/chinese-taipei-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/chinese-taipei-triathlon-association",
+      "title": "Chinese Taipei Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.ctta.org.tw/"
+        }
+      ],
+      "pageSHA256": "84f752a79908a253c72611f3fbdf3b791eff2fa0fa3420a2f0741270b4477286",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. World Triathlon-linked federation website works over HTTP and shows events and named team information. HTTPS failed through two retrieval methods. Retain the public HTTPS membership reference; current individual facts and ROC/Gregorian date interpretations still need checks."
+    },
+    {
+      "slug": "nepalese-triathlon",
+      "url": "https://triathlon.org/members/nepal-triathlon-association-nta",
+      "finalUrl": "https://triathlon.org/members/nepal-triathlon-association-nta",
+      "title": "Nepal Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://nocnepal.org.np/nepal-triathlon-association"
+        }
+      ],
+      "pageSHA256": "c5f646a4ae874060f102fd585bc29f640043452cad558f00a04d0b60891c98fd",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Nepal Olympic Committee membership profile, not the federation homepage. Governance reference only; local-calendar dates and office-holder claims are not competition or athlete data."
+    },
+    {
+      "slug": "sri-lankan-triathlon",
+      "url": "https://triathlon.org/members/sri-lanka-triathlon",
+      "finalUrl": "https://triathlon.org/members/sri-lanka-triathlon",
+      "title": "Sri Lanka Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.triathlon.lk"
+        }
+      ],
+      "pageSHA256": "1eea8ad52e049e41b93d636f2e11eb9389626cd5396f85795062da85b8d86128",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "macau-triathlon",
+      "url": "https://triathlon.org/members/macau-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/macau-triathlon-association",
+      "title": "China Macau Triathlon General Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "b892fede29751c2884650bb5630271af34fed061b8a9e0f4d82d42ae979a1276",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "algeria-triathlon",
+      "url": "https://triathlon.org/members/federation-algerienne-de-triathlon",
+      "finalUrl": "https://triathlon.org/members/federation-algerienne-de-triathlon",
+      "title": "Fédération Algérienne de Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://radioalgerie.dz/news/fr/tags/f%C3%A9d%C3%A9ration-alg%C3%A9rienne-de-triathlon?qt-ligue_1_mobilis=1&qt-sidebar_tabs=0"
+        }
+      ],
+      "pageSHA256": "825259e37e014e8f562d9b0365d4b2b58bed1f75247d373f9c25726c8f7fe0ad",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Visit website points to a social account or media page, not a checked federation data website."
+    },
+    {
+      "slug": "burundi-triathlon",
+      "url": "https://triathlon.org/members/burundi-triathlon-union",
+      "finalUrl": "https://triathlon.org/members/burundi-triathlon-union",
+      "title": "Burundi triathlon union | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "a5d315a046be3dc68ff72a8a5ff5e65660e992c7224228096e27bc9cdb0cc3ee",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "benin-triathlon",
+      "url": "https://triathlon.org/members/association-de-triathlon-benin",
+      "finalUrl": "https://triathlon.org/members/association-de-triathlon-benin",
+      "title": "Fédération Béninoise de Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "3215868a5a494d81b1a231a3c256e5a99c774232728bae2a8d69db0d52fdc225",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "burkina-faso-triathlon",
+      "url": "https://triathlon.org/members/burkina-faso-provisions-member",
+      "finalUrl": "https://triathlon.org/members/burkina-faso-provisions-member",
+      "title": "Federation Burkinabe De Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "3ae8d03373308c86785a47b77c0259c6f7f0a011518e73573264a94d3d605dce",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "central-african-republic-triathlon",
+      "url": "https://triathlon.org/members/federation-centrafricaine-de-triathlon",
+      "finalUrl": "https://triathlon.org/members/federation-centrafricaine-de-triathlon",
+      "title": "Fédération Centrafricaine de Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "e9bba480dd04f2990e23b33779f0aca1e6d116b35688564d9969a58b673f22f0",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "cote-divoire-triathlon",
+      "url": "https://triathlon.org/members/federation-ivoirienne-de-triathlon",
+      "finalUrl": "https://triathlon.org/members/federation-ivoirienne-de-triathlon",
+      "title": "Fédération Ivoirienne de Triathlon et Disciplines Associées | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "abe9c0e29cb403bd04d233ab99861969541e568ba7b48ce426fb85bb25689ed3",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "cameroon-triathlon",
+      "url": "https://triathlon.org/members/cameroon-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/cameroon-triathlon-federation",
+      "title": "Cameroun Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "1ae4ddbe953c5648dc793179f41e6c15afb55fa3960029f81bbdf2adc3a46084",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "democratic-republic-of-the-congo-triathlon",
+      "url": "https://triathlon.org/members/drcongo-federation-of-triathlon",
+      "finalUrl": "https://triathlon.org/members/drcongo-federation-of-triathlon",
+      "title": "DRCongo federation of Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "ce73f04bdf7eb06dacbfc8e58f32c715f460b2c998e96b42862f7b553841e693",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "egypt-triathlon",
+      "url": "https://triathlon.org/members/egyptian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/egyptian-triathlon-federation",
+      "title": "Egyptian Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://triathlonegypt.org/"
+        }
+      ],
+      "pageSHA256": "3348918971d59ce8cb6f84fbe81961a6b9305e4f984d7f5a2c3535add9ae652e",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "gambia-triathlon",
+      "url": "https://triathlon.org/members/gambia-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/gambia-triathlon-federation",
+      "title": "Gambia Triathlon Union | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "5e3d2c2367838b0b0d1ca17be430e057fe9420e6164dd4a7c1a114117b1c2774",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "ghana-triathlon",
+      "url": "https://triathlon.org/members/ghana-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/ghana-triathlon-federation",
+      "title": "Ghana Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://ghanatriathlon.org/"
+        }
+      ],
+      "pageSHA256": "7c14bc752b4e2173a82b635276f8e0a3ecb2d68fbd1241e4e5654080be496d70",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Unrelated Chinese-language service content explicitly disclaims representing the former federation. Do not use as a federation data source."
+    },
+    {
+      "slug": "guinea-triathlon",
+      "url": "https://triathlon.org/members/guinea-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/guinea-triathlon-federation",
+      "title": "Guinea Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "711eecd7e8d88e1a9b6e58fbae174a1f00c66c3233a13a992dde0569498ab8c9",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "libya-triathlon",
+      "url": "https://triathlon.org/members/libyan-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/libyan-triathlon-federation",
+      "title": "Libyan Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.facebook.com/people/Libyan-Triathlon-Federation/100054592232977/"
+        }
+      ],
+      "pageSHA256": "a29abd46c2b4a0ed7ca5128838e9c93d24c20fda6255913962961d951209fad8",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Visit website points to a social account or media page, not a checked federation data website."
+    },
+    {
+      "slug": "madagascar-triathlon",
+      "url": "https://triathlon.org/members/madagascar-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/madagascar-triathlon-federation",
+      "title": "Madagascar Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "1e87701fdd3afb406bf7f1e7f06f46a9ac4a22e7fbaf9d235aee960af5f07c3f",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "morocco-triathlon",
+      "url": "https://triathlon.org/members/morocan-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/morocan-triathlon-association",
+      "title": "Fédération Royale Marocaine de Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.frmtri.org"
+        }
+      ],
+      "pageSHA256": "fb6ae91870dd4416bf8c431b2dabcc624212246fc6926d93b2e1b7fd56dc8461",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "mozambique-triathlon",
+      "url": "https://triathlon.org/members/uniaeo-mocambicana-de-triatlo",
+      "finalUrl": "https://triathlon.org/members/uniaeo-mocambicana-de-triatlo",
+      "title": "União Moçambicana de Triatlo | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "7433c84100765c4f012c058f59270935febc7f52bfb86aaad734815d2c4c7311",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "namibia-triathlon",
+      "url": "https://triathlon.org/members/namibian-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/namibian-triathlon-association",
+      "title": "Namibian Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://ntf.go.na"
+        }
+      ],
+      "pageSHA256": "05b570a55c3cac4860604d61da6a96b694c7148d78fadb7957fad4ab761b5004",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "nigeria-triathlon",
+      "url": "https://triathlon.org/members/nigerian-triathlon-union",
+      "finalUrl": "https://triathlon.org/members/nigerian-triathlon-union",
+      "title": "Triathlon Nigeria | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://nigeriantriathlon.org/"
+        }
+      ],
+      "pageSHA256": "f62759cb27f95bdd3df563bd43d4976d37d1d3b023ee3cf1f955fcbec16e157d",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "niger-triathlon",
+      "url": "https://triathlon.org/members/niger",
+      "finalUrl": "https://triathlon.org/members/niger",
+      "title": "Fédération Nigérienne de Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "d2404c972f0e124cf1aff7a63c1b839b230980a649cf37d66e5b920200fa92fc",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "rwanda-triathlon",
+      "url": "https://triathlon.org/members/federation-rwandaise-de-triathlon",
+      "finalUrl": "https://triathlon.org/members/federation-rwandaise-de-triathlon",
+      "title": "Federation Rwandaise de Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.rwandatri.org/"
+        }
+      ],
+      "pageSHA256": "1c488567e7994940cd09d4d0c16b27d595d60b96bf166ce4db2e8b378095357a",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "senegal-triathlon",
+      "url": "https://triathlon.org/members/senegal-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/senegal-triathlon-federation",
+      "title": "Senegal Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.fstri.org"
+        }
+      ],
+      "pageSHA256": "0133ac76c275ab21fc34fa4c6bb1af183382e5e4291fde64c9be63ada581209d",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "sierra-leone-triathlon",
+      "url": "https://triathlon.org/members/sierra-leone-national-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/sierra-leone-national-triathlon-association",
+      "title": "Sierra Leone National Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "889688eab7793a8c0607b8478b4918c556a98f6779b342a76aea3c69fbc52904",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "tanzania-triathlon",
+      "url": "https://triathlon.org/members/tanzania-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/tanzania-triathlon-federation",
+      "title": "Tanzania Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "6d9e0d091734a763d7c457354ce5e3c7717e04740e943ba45d2d6d742d3f3cac",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "togo-triathlon",
+      "url": "https://triathlon.org/members/togo-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/togo-triathlon-federation",
+      "title": "Togo Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "d23b19c86100870aa7a7bbdcbcb7574d0ccba18451fe9218e715783d414dd59c",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "tunisia-triathlon",
+      "url": "https://triathlon.org/members/tunisia-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/tunisia-triathlon-federation",
+      "title": "Fédération Tunisienne de Triathlon & Para triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://fttri.com/"
+        }
+      ],
+      "pageSHA256": "a1ac21b590e3e95b27e1156c7ef5212e9d27b705e49bd7f14fab55dd69207b38",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Server directory listing, not assessed federation content."
+    },
+    {
+      "slug": "uganda-triathlon",
+      "url": "https://triathlon.org/members/uganda-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/uganda-triathlon-federation",
+      "title": "Uganda Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "00d3b63c823942636555a555d2466487e83eb4fff3e9b2c0a149faf71efe862e",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "zambia-triathlon",
+      "url": "https://triathlon.org/members/triathlon-zambia",
+      "finalUrl": "https://triathlon.org/members/triathlon-zambia",
+      "title": "Triathlon Zambia | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "b41272432cfd98688f85b274250bfe8730289ad29c6b6957d154f46ed1fa7c9e",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "zimbabwe-triathlon",
+      "url": "https://triathlon.org/members/zimbabwe-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/zimbabwe-triathlon-federation",
+      "title": "Zimbabwe Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.zimtri.org/"
+        }
+      ],
+      "pageSHA256": "2ec83617c998a79b6ea1178de3e9850c42a303bd5c336bce00e3be1d8521dad2",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "bangladesh-triathlon",
+      "url": "https://triathlon.org/members/triathlon-federation-of-bangladesh",
+      "finalUrl": "https://triathlon.org/members/triathlon-federation-of-bangladesh",
+      "title": "Bangladesh Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.triathlonbd.org/"
+        }
+      ],
+      "pageSHA256": "6e3b85f3421c92719a8c0d9aae50011f13d7562250a5b1fdc15f8d733fb9a29d",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "bahrain-triathlon",
+      "url": "https://triathlon.org/members/bahrain-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/bahrain-triathlon-association",
+      "title": "Bahrain Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.triathlon.bh/"
+        }
+      ],
+      "pageSHA256": "d5ac6d4ba71e51b5a53bb233aa58169f54f5235a8a14340721a274c8e31fcd8d",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "cambodia-triathlon",
+      "url": "https://triathlon.org/members/cambodia-triathlon-federation-ctf",
+      "finalUrl": "https://triathlon.org/members/cambodia-triathlon-federation-ctf",
+      "title": "Cambodia Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "4e27017325543976ea10624ca4256244be9af636034e217b8bb5ff742c89f713",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "iran-triathlon",
+      "url": "https://triathlon.org/members/iran-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/iran-triathlon-federation",
+      "title": "Iran Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://irtriathlon.ir/"
+        }
+      ],
+      "pageSHA256": "5617286051c3ee54f10362812fb072e4378ef9c7ed7337e5716ec589cdd458c9",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "iraq-triathlon",
+      "url": "https://triathlon.org/members/iraq-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/iraq-triathlon-federation",
+      "title": "Iraq Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.iraqiolympic.org/"
+        }
+      ],
+      "pageSHA256": "1566fe1626df62414a5229abd674d2aa2f64d44f11f4e310f6f07f894b1bcad4",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "jordan-triathlon",
+      "url": "https://triathlon.org/members/jordanian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/jordanian-triathlon-federation",
+      "title": "Jordan Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.facebook.com/jordantriathlon/"
+        }
+      ],
+      "pageSHA256": "d5189e0aa87dbe33966ca01ebf9bf8be006e41f87d3228ded0c9c085fd0feab2",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Visit website points to a social account or media page, not a checked federation data website."
+    },
+    {
+      "slug": "kazakhstan-triathlon",
+      "url": "https://triathlon.org/members/kazakhstan-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/kazakhstan-triathlon-federation",
+      "title": "Kazakhstan Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.triathlon.org.kz"
+        }
+      ],
+      "pageSHA256": "5af60fd3826953a4ffbaf604dc14c84a7df9c2884aa3e9a7d57cdf0ad58db8ef",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "kyrgyzstan-triathlon",
+      "url": "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
+      "title": "Kyrgyz Republic Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.triathlon.kg/"
+        }
+      ],
+      "pageSHA256": "cb56ccbfb4e28292debe1eb74f7a0d8b761d0e6e5b7cc87f18b6dad631b462bf",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "saudi-arabia-triathlon",
+      "url": "https://triathlon.org/members/saudi-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/saudi-triathlon-federation",
+      "title": "Saudi Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.triathlon.sa"
+        }
+      ],
+      "pageSHA256": "7222507f71e64a0da94fe7fd31c225ef086e6c9f4e3c3d8747400ea0e0ea7006",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "kuwait-triathlon",
+      "url": "https://triathlon.org/members/kuwait-triathlon-committee",
+      "finalUrl": "https://triathlon.org/members/kuwait-triathlon-committee",
+      "title": "Kuwait Triathlon Club | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://triathlon.org.kw/"
+        }
+      ],
+      "pageSHA256": "f93015a00a38a04c9c21c770e26a245816085379c7ef0c7bbdc49ed5cf7cf32f",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "lebanon-triathlon",
+      "url": "https://triathlon.org/members/lebanon-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/lebanon-triathlon-federation",
+      "title": "Lebanese Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "27bcfdc5ae02f125586a5d422e8bb7f9518935a6ad03adb2b81a776e0224e3fe",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "maldives-triathlon",
+      "url": "https://triathlon.org/members/triathlon-association-of-maldives",
+      "finalUrl": "https://triathlon.org/members/triathlon-association-of-maldives",
+      "title": "Triathlon Association of Maldives | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "b12899b7f5ffcd711fc60920603eb88dd654ddf7bea056b020c1f50689215288",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "mongolia-triathlon",
+      "url": "https://triathlon.org/members/mongolian-triathlon-union",
+      "finalUrl": "https://triathlon.org/members/mongolian-triathlon-union",
+      "title": "Mongolia Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://sport.gov.mn/triathlon"
+        }
+      ],
+      "pageSHA256": "77d4b81ad880066e7cf2c379ba267f7e544d430f27c9cb7d58887071dabef1a7",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Government-hosted sport section returned loading placeholders; operational data not assessed."
+    },
+    {
+      "slug": "oman-triathlon",
+      "url": "https://triathlon.org/members/oman-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/oman-triathlon-federation",
+      "title": "Oman Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.omantriathlon.om"
+        }
+      ],
+      "pageSHA256": "122e3aa51e6d3be6492432ebfcef4ee6e3f78980b9ebf255329ea08c55abb1e0",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "pakistan-triathlon",
+      "url": "https://triathlon.org/members/pakistan-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/pakistan-triathlon-federation",
+      "title": "Pakistan Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "cbdf80daef105bdf3a9eb332e3dc1d243ab73f6b3aa0adff5d27e9440701b81d",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "palestine-triathlon",
+      "url": "https://triathlon.org/members/palestine-triathlon-committee",
+      "finalUrl": "https://triathlon.org/members/palestine-triathlon-committee",
+      "title": "Palestine Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "08e26889aa0ec16352250fef2a0728ffeb02f471edfd1bc084e54e3051de298f",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "qatar-triathlon",
+      "url": "https://triathlon.org/members/qatar-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/qatar-triathlon-federation",
+      "title": "Qatar Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://qatartriathlon.org/"
+        }
+      ],
+      "pageSHA256": "804071c0c991cfa5d111e465a8b7cf57bb2fd0d5c16b198e220fe1023131b605",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "syria-triathlon",
+      "url": "https://triathlon.org/members/syrian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/syrian-triathlon-federation",
+      "title": "Syria Arab Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "badfc741e6d9165a00ce29e1468ded6a3006ce175236d78a40151531b5e1c0bd",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "timor-leste-triathlon",
+      "url": "https://triathlon.org/members/federacao-triatlo-de-timor-leste",
+      "finalUrl": "https://triathlon.org/members/federacao-triatlo-de-timor-leste",
+      "title": "Federacao Triatlo de Timor-Leste | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "fb1c80e05d0d461716f93a3bf6d707848c5a5899eedfeb094e1f4da80bbf3560",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "united-arab-emirates-triathlon",
+      "url": "https://triathlon.org/members/united-arab-emirates-triathlon-committee",
+      "finalUrl": "https://triathlon.org/members/united-arab-emirates-triathlon-committee",
+      "title": "UAE Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://uaetriathlon.ae/"
+        }
+      ],
+      "pageSHA256": "36c33478ca402e4b2b02994c7562eae53e8c7959a130851ab5d2c31dda3a48c8",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. National website redirects to a general triathlon timing article on timer.now, not a federation homepage."
+    },
+    {
+      "slug": "uzbekistan-triathlon",
+      "url": "https://triathlon.org/members/uzbekistan-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/uzbekistan-triathlon-federation",
+      "title": "Uzbekistan Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://triathlon.uz/ru"
+        }
+      ],
+      "pageSHA256": "1d7fbca3331688a2d6feecbd5ab286f427d56e990c2f381790e5553c5eedbdaf",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "yemen-triathlon",
+      "url": "https://triathlon.org/members/yemen-aquatics",
+      "finalUrl": "https://triathlon.org/members/yemen-aquatics",
+      "title": "Yemen Aquatics | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "bb1194eceb1ca4e5f9e51312b6d93b2a26babb4df63ed2db96bea43fb067b38f",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "el-salvador-triathlon",
+      "url": "https://triathlon.org/members/federacion-salvadorena-de-triatlon",
+      "finalUrl": "https://triathlon.org/members/federacion-salvadorena-de-triatlon",
+      "title": "Federación Salvadoreña de Triatlón | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.facebook.com/federacion.triatlon/"
+        }
+      ],
+      "pageSHA256": "dd8a957306788861e76f5865a0ec624eb7ee01b0bd1416f1b437f62f50e63466",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Visit website points to a social account or media page, not a checked federation data website."
+    },
+    {
+      "slug": "saint-kitts-and-nevis-triathlon",
+      "url": "https://triathlon.org/members/saint-kitts-nevis-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/saint-kitts-nevis-triathlon-federation",
+      "title": "Saint Kitts & Nevis Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "22a6b8b60b7f2f35019c101d35cd20ea214186a3f5086ac3a16f976dbf62e658",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "puerto-rico-triathlon",
+      "url": "https://triathlon.org/members/federacion-puertoriquena-de-triatlon",
+      "finalUrl": "https://triathlon.org/members/federacion-puertoriquena-de-triatlon",
+      "title": "Federación Puertorriqueña Triatlón PR | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.triatlonpur.org"
+        }
+      ],
+      "pageSHA256": "d5bdfb9db0924262a374a9a3ee3900524b8d9364e272f2a9f6f00f3fcbdd1097",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "honduras-triathlon",
+      "url": "https://triathlon.org/members/honduras-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/honduras-triathlon-federation",
+      "title": "Honduras Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "c5e3ce7558f783827e88a523cf43c4fb37f79638ea54969dbd1c2c56572d0ba7",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "venezuela-triathlon",
+      "url": "https://triathlon.org/members/federacion-venezolana-de-triatlon-fevetri",
+      "finalUrl": "https://triathlon.org/members/federacion-venezolana-de-triatlon-fevetri",
+      "title": "Federación Venezolana de Triatlón | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://federacionvenezolanadetriatlon.org/"
+        }
+      ],
+      "pageSHA256": "fb0df6d58f17b0a9725840fcbe2629e5d3cb0b120458c6e8fe35aacf267f553e",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "virgin-islands-triathlon",
+      "url": "https://triathlon.org/members/virgin-islands-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/virgin-islands-triathlon-federation",
+      "title": "Virgin Islands Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.vitf.org/"
+        }
+      ],
+      "pageSHA256": "c48e498ffbf60b53186cb6e5c68f455b18c6cdc20b939062a73175bcd6565edb",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "aruba-triathlon",
+      "url": "https://triathlon.org/members/aruba-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/aruba-triathlon-federation",
+      "title": "Aruba Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://arubatriathlon.com/pages/"
+        }
+      ],
+      "pageSHA256": "fd2565d4a022c3ffe76d2c214304f8baebf742afc2292beb3c6330c6bf65df33",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "cuba-triathlon",
+      "url": "https://triathlon.org/members/federacion-cubana-de-triatlon",
+      "finalUrl": "https://triathlon.org/members/federacion-cubana-de-triatlon",
+      "title": "Federación Cubana de Triatlón | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "f4b0c990a4b29d449078613173fe99c4f46c9b31f1be053437266ac84f4b3158",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "belize-triathlon",
+      "url": "https://triathlon.org/members/belize-national-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/belize-national-triathlon-association",
+      "title": "Belize National Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "4dabeaacb1cf2aa3f301e67b586b8998830d6ef5a9c111e90ab4368a92462af9",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "antigua-and-barbuda-triathlon",
+      "url": "https://triathlon.org/members/antigua-and-barbuda-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/antigua-and-barbuda-triathlon-association",
+      "title": "Antigua and Barbuda Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://antiguanice.com/client.php?id=396"
+        }
+      ],
+      "pageSHA256": "99dc6536108e8775389ea2ecb99582a340fce28fcb6a13102797a81be477f8d6",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "haiti-triathlon",
+      "url": "https://triathlon.org/members/union-de-haitienne-triathlon",
+      "finalUrl": "https://triathlon.org/members/union-de-haitienne-triathlon",
+      "title": "Union de Haitienne Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "076f28051717c24d2d3cf8d1ee87cb3f54c7e1a2431091669a359a65607618e2",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "cayman-islands-triathlon",
+      "url": "https://triathlon.org/members/cayman-islands-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/cayman-islands-triathlon-federation",
+      "title": "Cayman Islands Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.triathlon.ky"
+        }
+      ],
+      "pageSHA256": "47fd9215f852ee3a2cb1778db37c67ab1d37449db5137a2e2b4d2636b6fa2b8f",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "suriname-triathlon",
+      "url": "https://triathlon.org/members/surinaamse-triathlon-unie",
+      "finalUrl": "https://triathlon.org/members/surinaamse-triathlon-unie",
+      "title": "Surinaamse Triathlon Unie | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "814c693b62924c641a203ec14d2ecd3394cd9afa1056f945a50cf9c4627534db",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "nicaragua-triathlon",
+      "url": "https://triathlon.org/members/federacion-nicaraguense-de-triatlon",
+      "finalUrl": "https://triathlon.org/members/federacion-nicaraguense-de-triatlon",
+      "title": "Federación Nicaraguense de Triatlón | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.fenitriatnica.es.tl"
+        }
+      ],
+      "pageSHA256": "e0357c5b18e1380c3d3f1c432579e7ebe8153b6e9b7a7a9ac7e92a78e5281a7c",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "grenada-triathlon",
+      "url": "https://triathlon.org/members/triathlon-grenada",
+      "finalUrl": "https://triathlon.org/members/triathlon-grenada",
+      "title": "Triathlon Grenada | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://grenadatriathlon.com"
+        }
+      ],
+      "pageSHA256": "5d8d01591810b0672398bd20256118eda0065ddb2b7114aa2f27b53f6e299821",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "american-samoa-triathlon",
+      "url": "https://triathlon.org/members/american-samoa-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/american-samoa-triathlon-association",
+      "title": "American Samoa Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "e2120573a7ee2b3ded9711d757b899e74c922e12de656468fb72e3700fb739bc",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "cook-islands-triathlon",
+      "url": "https://triathlon.org/members/cook-islands-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/cook-islands-triathlon-federation",
+      "title": "Cook Islands Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.rarotri.com/"
+        }
+      ],
+      "pageSHA256": "d726dfe29449aaf450b7183f7af0cf6aa58ce194745091608a4311df08b6529f",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "fiji-triathlon",
+      "url": "https://triathlon.org/members/fiji-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/fiji-triathlon-association",
+      "title": "Fiji Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.fasanoc.org.fj/nf/triathlon"
+        }
+      ],
+      "pageSHA256": "b30557532d1b28dc94649fc6bc8b3153b13f00535019c2f9575547ee0ff04f15",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. FASANOC membership profile corroborates the association. This is an Olympic-directory reference, not a standalone federation fixture/results feed."
+    },
+    {
+      "slug": "guam-triathlon",
+      "url": "https://triathlon.org/members/guam-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/guam-triathlon-federation",
+      "title": "Guam Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.facebook.com/triathlonguam"
+        }
+      ],
+      "pageSHA256": "9a44fd45b6607db5ac297c4fe64bbc374afc8a76a726a35c203e850ffab8c951",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Visit website points to a social account or media page, not a checked federation data website."
+    },
+    {
+      "slug": "northern-mariana-islands-triathlon",
+      "url": "https://triathlon.org/members/triathlon-association-of-the-cmni",
+      "finalUrl": "https://triathlon.org/members/triathlon-association-of-the-cmni",
+      "title": "Triathlon Association of the CMNI | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://sites.google.com/view/triathloncnmi/home"
+        }
+      ],
+      "pageSHA256": "080debe8595b62388604c5ca71240c2d5f4cc2faf9dfaec8ca31b7326e1f383d",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "palau-triathlon",
+      "url": "https://triathlon.org/members/palau-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/palau-triathlon-federation",
+      "title": "Belau Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.sportingpulse.com/assoc_page.cgi?assoc=1777&pID=2"
+        }
+      ],
+      "pageSHA256": "2842685dcd4b848cafce34fdcbd144ac57f167f765ec862a2882748149632180",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The linked external site could not be retrieved after a second method; this is a review limitation, not proof the domain is incorrect."
+    },
+    {
+      "slug": "papua-new-guinea-triathlon",
+      "url": "https://triathlon.org/members/png-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/png-triathlon-association",
+      "title": "PNG Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "2ca2ed7496620e59d0a26ccfcdf20154c91740d3565795e7df20b7c1a84da40b",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "samoa-triathlon",
+      "url": "https://triathlon.org/members/samoa-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/samoa-triathlon-federation",
+      "title": "Tri-Sports Samoa Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "cf29f2dbb055706e462484c6dca21ebc3b0c3c7002594c47e8fd4ddffaa3e095",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "solomon-islands-triathlon",
+      "url": "https://triathlon.org/members/triathlon-solomon-islands",
+      "finalUrl": "https://triathlon.org/members/triathlon-solomon-islands",
+      "title": "Triathlon Solomon Islands | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "e19f4fc094d72a36bd4e9d3409a2c93623d9c11f2ba9a7dcc4e1a62702343c75",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "tahiti-triathlon",
+      "url": "https://triathlon.org/members/tahiti-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/tahiti-triathlon-association",
+      "title": "Fédération Tahitienne de Triathlon | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.tahititriathlon.pf"
+        }
+      ],
+      "pageSHA256": "4ff32196a4229ee9fb0e8d4518120bc9812ba40f9cf323457b5bad14357d014c",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "tonga-triathlon",
+      "url": "https://triathlon.org/members/friendly-islands-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/friendly-islands-triathlon-association",
+      "title": "Tonga - Friendly Islands Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "76131bf57211eb01a92aedbaaa1a801f528461390e879de95c91e8f842d8fbac",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "albania-triathlon",
+      "url": "https://triathlon.org/members/albanian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/albanian-triathlon-federation",
+      "title": "Albanian Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "518fd50fa89db4a8ab0b3630f52c5081adc1ab93a1842b3575c0a4433380421c",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "andorra-triathlon",
+      "url": "https://triathlon.org/members/federacio-andorrana-de-triatlo",
+      "finalUrl": "https://triathlon.org/members/federacio-andorrana-de-triatlo",
+      "title": "Federació Andorrana de Triatló | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://triatlo.ad/"
+        }
+      ],
+      "pageSHA256": "c751ddee6dda013b147606f62a85441aa8289b222f43fd0a51798ef2a94cdf6a",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Homepage and calendar/results sections show federation content, but the linked athlete route redirects to unrelated gambling content in two fresh retrievals. Older search capture differs. Retain the World Triathlon primary reference and hold national-site data pending review; do not register the unsuitable athlete route."
+    },
+    {
+      "slug": "armenia-triathlon",
+      "url": "https://triathlon.org/members/armenian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/armenian-triathlon-federation",
+      "title": "Armenian Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.triathlon.am"
+        }
+      ],
+      "pageSHA256": "081bcd2adf5e7222abc7742e765ca04f9606d74c7a852c6b432089e8ac7afd6f",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. Hosting-provider welcome page; operational federation content not confirmed."
+    },
+    {
+      "slug": "azerbaijan-triathlon",
+      "url": "https://triathlon.org/members/azerbaijan-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/azerbaijan-triathlon-federation",
+      "title": "Azerbaijan Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "http://www.triathlon.az"
+        }
+      ],
+      "pageSHA256": "8ae2b9106317b65ae91703736684c33f1a82e404380883c324f15c7207d6e468",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "bosnia-and-herzegovina-triathlon",
+      "url": "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
+      "finalUrl": "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
+      "title": "Triathlon and Pentathlon Federation of Bosnia and Herzegovina | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://tpsbih.ba/"
+        }
+      ],
+      "pageSHA256": "98da9318da153d8be6121007db3a11818f1e36ca4300aac2e6d32d032366b82a",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "belarus-triathlon",
+      "url": "https://triathlon.org/members/belarus-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/belarus-triathlon-federation",
+      "title": "Belarusian Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://triatlon.by/"
+        }
+      ],
+      "pageSHA256": "1842c1ab0b3c0c62555f3f9faf06754b684c6061b8791b2536cc2cbd24c0c587",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "faroe-islands-triathlon",
+      "url": "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
+      "finalUrl": "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
+      "title": "The Faroe Islands Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.sst.fo"
+        }
+      ],
+      "pageSHA256": "54c9c2fb4d4297bbc25e4ad5d8eed06955d5226becf58cfc1d75c6cb3c048f1a",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "georgia-triathlon",
+      "url": "https://triathlon.org/members/national-triathlon-federation-of-georgia",
+      "finalUrl": "https://triathlon.org/members/national-triathlon-federation-of-georgia",
+      "title": "National Triathlon Federation of Georgia | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "ae0cad3fe3cae256c57688d3ddbde08b42eede45c1f43d634f098d41d8a04d43",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "gibraltar-triathlon",
+      "url": "https://triathlon.org/members/gibraltar-triathlon-association",
+      "finalUrl": "https://triathlon.org/members/gibraltar-triathlon-association",
+      "title": "Gibraltar Triathlon Association | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://gibraltartriathlon.com"
+        }
+      ],
+      "pageSHA256": "1e3c0d377734c17889b805fd21eda618ac6d39f41e109cf83f3d3c3fa375233f",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "kosovo-triathlon",
+      "url": "https://triathlon.org/members/kosovo-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/kosovo-triathlon-federation",
+      "title": "Kosovo Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://kosovatriathlon.org"
+        }
+      ],
+      "pageSHA256": "2bdd63b26af81017ddc738c6dd6d402cff1cc811c060e24eec552379f4de5ff6",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "liechtenstein-triathlon",
+      "url": "https://triathlon.org/members/liechtenstein-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/liechtenstein-triathlon-federation",
+      "title": "Liechtenstein Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.triathlon.li"
+        }
+      ],
+      "pageSHA256": "c83ae9f416514d65199d3ef23b0f03495300acd7306cbb0b017d88b4ad50cd43",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "moldova-triathlon",
+      "url": "https://triathlon.org/members/moldovan-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/moldovan-triathlon-federation",
+      "title": "National Triathlon Federation of the Republic of Moldova | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://ftrm.md/en"
+        }
+      ],
+      "pageSHA256": "37f55725f323519cecc39f71908bbcd3e0142341dbda238423b56a30d3c59cd0",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "north-macedonia-triathlon",
+      "url": "https://triathlon.org/members/macedonian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/macedonian-triathlon-federation",
+      "title": "Triathlon Federation of North Macedonia | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.triathlon.mk"
+        }
+      ],
+      "pageSHA256": "c7a1844dd535929bfaea9899872008a6cce36ab0f59fbb7fe7d3a71c374b4117",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "montenegro-triathlon",
+      "url": "https://triathlon.org/members/triathlon-federation-of-montenegro",
+      "finalUrl": "https://triathlon.org/members/triathlon-federation-of-montenegro",
+      "title": "Triathlon Federation of Montenegro | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://triatlon.me/"
+        }
+      ],
+      "pageSHA256": "e726b6c8a6b1f0a94ea5aec8a9686c11563704577e4e421c1585564259415284",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "monaco-triathlon",
+      "url": "https://triathlon.org/members/monaco-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/monaco-triathlon-federation",
+      "title": "Triathlon Monegasque Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [],
+      "pageSHA256": "274d9d07b227863c7672a9a0c00e282f38683bae5ac6691c524ea386fa9d52b0",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. No Visit website link was present; this does not prove no national website exists elsewhere."
+    },
+    {
+      "slug": "russia-triathlon",
+      "url": "https://triathlon.org/members/russian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/russian-triathlon-federation",
+      "title": "Russian Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.rustriathlon.ru/"
+        }
+      ],
+      "pageSHA256": "534f0e5a2c746734ce27091b651237c0684c03526000d592f2cc1a424093bbbc",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    },
+    {
+      "slug": "ukraine-triathlon",
+      "url": "https://triathlon.org/members/ukrainian-triathlon-federation",
+      "finalUrl": "https://triathlon.org/members/ukrainian-triathlon-federation",
+      "title": "Ukrainian Triathlon Federation | World Triathlon",
+      "status": "membership_reference_confirmed",
+      "websiteLinks": [
+        {
+          "label": "Visit website",
+          "url": "https://www.triathlon.org.ua"
+        }
+      ],
+      "pageSHA256": "8950bfb4940955c5286139120f2dd560afb0fac5bc12125b7bcbf3a151f9af26",
+      "note": "Named national federation membership page opened and reviewed. Membership and outbound website links are references only; global navigation to events/results/athletes does not establish federation-specific data. The corroborated national homepage is now primary; this membership reference is retained."
+    }
+  ],
+  "memberPagesWithWebsiteLink": 65,
+  "memberPagesWithoutWebsiteLink": 43,
+  "socialOrMediaDestinationsNotPromoted": 7,
+  "nationalAndReferenceSitesChecked": 58,
+  "nationalSiteChecks": [
+    {
+      "slug": "colombian-triathlon",
+      "url": "http://www.fedecoltri.com/",
+      "status": "maintenance_notice",
+      "note": "Federation-branded maintenance page; detailed data unavailable.",
+      "finalUrl": "https://fedecoltri.com/",
+      "title": "Fedecoltri is under maintenance"
+    },
+    {
+      "slug": "philippine-triathlon",
+      "url": "http://www.triathlon.org.ph/",
+      "status": "server_directory",
+      "note": "Server index, not an operational federation or data page.",
+      "finalUrl": "http://www.triathlon.org.ph/",
+      "title": "Index of /"
+    },
+    {
+      "slug": "indonesian-triathlon",
+      "url": "http://www.triathlon.or.id/",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "uruguayan-triathlon",
+      "url": "https://www.triatlonuruguay.org",
+      "status": "organisation_mismatch",
+      "note": "Destination identifies Union de Triatlon Costa Azul and an amateur circuit, differing from the World Triathlon-listed national body. Ownership/suitability unresolved.",
+      "finalUrl": "https://www.triatlonuruguay.org",
+      "title": "Triatlón Costa Azul: calendario, reglamentos y escuelas amateur | UTCA"
+    },
+    {
+      "slug": "ecuadorian-triathlon",
+      "url": "https://trifed.com.ec/",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "chinese-triathlon",
+      "url": "http://www.ctsa.org.cn/",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "chinese-taipei-triathlon",
+      "url": "http://www.ctta.org.tw/",
+      "status": "qualified_research_reference",
+      "note": "World Triathlon-linked federation website works over HTTP and shows events and named team information. HTTPS failed through two retrieval methods. Retain the public HTTPS membership reference; current individual facts and ROC/Gregorian date interpretations still need checks.",
+      "finalUrl": "http://www.ctta.org.tw/",
+      "title": "全國鐵人三項協會"
+    },
+    {
+      "slug": "nepalese-triathlon",
+      "url": "https://nocnepal.org.np/nepal-triathlon-association",
+      "status": "qualified_research_reference",
+      "note": "Nepal Olympic Committee membership profile, not the federation homepage. Governance reference only; local-calendar dates and office-holder claims are not competition or athlete data.",
+      "finalUrl": "https://nocnepal.org.np/nepal-triathlon-association",
+      "title": "Nepal Olympic Committee"
+    },
+    {
+      "slug": "sri-lankan-triathlon",
+      "url": "http://www.triathlon.lk",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "egypt-triathlon",
+      "url": "https://triathlonegypt.org/",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "morocco-triathlon",
+      "url": "http://www.frmtri.org",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "namibia-triathlon",
+      "url": "https://ntf.go.na",
+      "status": "official_homepage_confirmed",
+      "note": "World Triathlon-linked federation site confirmed. The events page lists a 2026 calendar and links past results; each edition and start time still needs separate checking.",
+      "finalUrl": "https://ntf.go.na",
+      "title": "NTF | Namibian Triathlon Federation"
+    },
+    {
+      "slug": "rwanda-triathlon",
+      "url": "https://www.rwandatri.org/",
+      "status": "official_homepage_confirmed",
+      "note": "World Triathlon-linked federation site confirmed. The homepage includes dated 2026 triathlon and duathlon entries; individual results and athlete facts remain unassessed.",
+      "finalUrl": "https://www.rwandatri.org/",
+      "title": "Home | RwandaTri"
+    },
+    {
+      "slug": "senegal-triathlon",
+      "url": "http://www.fstri.org",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "tunisia-triathlon",
+      "url": "https://fttri.com/",
+      "status": "server_directory",
+      "note": "Server directory listing, not assessed federation content.",
+      "finalUrl": "https://fttri.com/",
+      "title": "Index of /"
+    },
+    {
+      "slug": "zimbabwe-triathlon",
+      "url": "https://www.zimtri.org/",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed, with 2026–27 calendar and results-document indexes. One October 2026 results PDF was opened; individual performances remain unverified.",
+      "finalUrl": "https://www.zimtri.org/",
+      "title": "Zimbabwe Triathlon | \r\n    Zimbabwe Triathlon Association"
+    },
+    {
+      "slug": "bangladesh-triathlon",
+      "url": "https://www.triathlonbd.org/",
+      "status": "official_homepage_confirmed",
+      "note": "Federation site corroborated by World Triathlon. The prominent championship material is from 2018; current fixture, result and athlete coverage remains unassessed.",
+      "finalUrl": "https://www.triathlonbd.org/",
+      "title": "Bangladesh Triathlon Association - Practice & Participate"
+    },
+    {
+      "slug": "bahrain-triathlon",
+      "url": "http://www.triathlon.bh/",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "iran-triathlon",
+      "url": "https://irtriathlon.ir/",
+      "status": "official_homepage_confirmed",
+      "note": "Federation site corroborated by World Triathlon and its events section. The athlete list remains a loading shell; Iranian-calendar labels require careful interpretation.",
+      "finalUrl": "https://irtriathlon.ir/",
+      "title": "سامانه ملی فدراسیون ترای‌اتلون"
+    },
+    {
+      "slug": "iraq-triathlon",
+      "url": "http://www.iraqiolympic.org/",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "kazakhstan-triathlon",
+      "url": "https://www.triathlon.org.kz",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. The results index exposes 2022–24 archive entries and a named national-team list; the events search returned no matches.",
+      "finalUrl": "https://triathlon.org.kz/",
+      "title": "Казахстанская Федерация Триатлона"
+    },
+    {
+      "slug": "kyrgyzstan-triathlon",
+      "url": "https://www.triathlon.kg/",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. Its archive lists dated 2026 competitions and categories; individual result rows still require review.",
+      "finalUrl": "https://www.triathlon.kg/",
+      "title": "Федерация Триатлона Кыргызской Республики"
+    },
+    {
+      "slug": "saudi-arabia-triathlon",
+      "url": "https://www.triathlon.sa",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. The event list contains dated 2026 and older races; an athlete section lists names without verified nationality or identity evidence.",
+      "finalUrl": "https://www.triathlon.sa",
+      "title": "Saudi Triathlon Federation | Triathlon Events in Saudi Arabia"
+    },
+    {
+      "slug": "kuwait-triathlon",
+      "url": "https://triathlon.org.kw/",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "mongolia-triathlon",
+      "url": "https://sport.gov.mn/triathlon",
+      "status": "loading_shell",
+      "note": "Government-hosted sport section returned loading placeholders; operational data not assessed.",
+      "finalUrl": "https://sport.gov.mn/triathlon",
+      "title": "Нүүр хуудас"
+    },
+    {
+      "slug": "oman-triathlon",
+      "url": "https://www.omantriathlon.om",
+      "status": "official_homepage_confirmed",
+      "note": "World Triathlon-linked national governing-body website confirmed. The events page describes a 2024 series despite its upcoming-events heading; newer coverage remains unconfirmed.",
+      "finalUrl": "https://www.omantriathlon.om",
+      "title": "Oman Triathlon Committee"
+    },
+    {
+      "slug": "united-arab-emirates-triathlon",
+      "url": "https://uaetriathlon.ae/",
+      "status": "unrelated_redirect",
+      "note": "National website redirects to a general triathlon timing article on timer.now, not a federation homepage.",
+      "finalUrl": "https://timer.now/blog/uae-triathlon-precision-timing-milliseconds-to-marathon",
+      "title": "Triathlon Timing: Splits, Transitions and Training"
+    },
+    {
+      "slug": "uzbekistan-triathlon",
+      "url": "https://triathlon.uz/ru",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. The archive contains named 2026 races and the national-team page includes country-labelled athlete cards. Identity and individual facts need separate comparison.",
+      "finalUrl": "https://triathlon.uz/ru",
+      "title": "Triathlon"
+    },
+    {
+      "slug": "puerto-rico-triathlon",
+      "url": "http://www.triatlonpur.org",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "venezuela-triathlon",
+      "url": "https://federacionvenezolanadetriatlon.org/",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "virgin-islands-triathlon",
+      "url": "https://www.vitf.org/",
+      "status": "official_homepage_confirmed",
+      "note": "Federation identity confirmed through its About page. The 2026 calendar links results and explicitly marks a cancellation and June schedule changes.",
+      "finalUrl": "https://www.vitf.org/",
+      "title": "Home | Virgin Islands Triat"
+    },
+    {
+      "slug": "aruba-triathlon",
+      "url": "https://arubatriathlon.com/pages/",
+      "status": "official_homepage_confirmed",
+      "note": "Federation identity confirmed through World Triathlon and the association website. The result-history page links 2026 and historical results; its calendar is presented as an uninspected image.",
+      "retrieval": "Web fallback opened the association homepage, About and results-history pages after the primary fetch was blocked."
+    },
+    {
+      "slug": "antigua-and-barbuda-triathlon",
+      "url": "https://antiguanice.com/client.php?id=396",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "cayman-islands-triathlon",
+      "url": "https://www.triathlon.ky",
+      "status": "official_homepage_confirmed",
+      "note": "Official association site confirmed. Its event list includes November 2026 competitions and older editions; displayed time ranges require edition-specific programme checks.",
+      "finalUrl": "https://www.triathlon.ky",
+      "title": "Cayman Islands Triathlon Association - Welcome"
+    },
+    {
+      "slug": "nicaragua-triathlon",
+      "url": "https://www.fenitriatnica.es.tl",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "grenada-triathlon",
+      "url": "http://grenadatriathlon.com",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "cook-islands-triathlon",
+      "url": "https://www.rarotri.com/",
+      "status": "official_homepage_confirmed",
+      "note": "Official association site confirmed. The calendar lists the 2027 Rarotonga festival; its multi-day festival window is not an individual race start time.",
+      "finalUrl": "https://www.rarotri.com/",
+      "title": "Home\n                - Rarotonga Triathlon Association"
+    },
+    {
+      "slug": "fiji-triathlon",
+      "url": "https://www.fasanoc.org.fj/nf/triathlon",
+      "status": "qualified_research_reference",
+      "note": "FASANOC membership profile corroborates the association. This is an Olympic-directory reference, not a standalone federation fixture/results feed.",
+      "finalUrl": "https://www.fasanoc.org.fj/nf/triathlon",
+      "title": "Fiji Triathlon Association | FASANOC"
+    },
+    {
+      "slug": "northern-mariana-islands-triathlon",
+      "url": "https://sites.google.com/view/triathloncnmi/home",
+      "status": "official_homepage_confirmed",
+      "note": "World Triathlon-linked association website confirmed. The events section mainly contains historical entries and some dates lack a year; no year has been inferred.",
+      "finalUrl": "https://sites.google.com/view/triathloncnmi/home",
+      "title": "Triathlon CNMI"
+    },
+    {
+      "slug": "palau-triathlon",
+      "url": "http://www.sportingpulse.com/assoc_page.cgi?assoc=1777&pID=2",
+      "status": "unavailable_in_this_review",
+      "note": "Primary retrieval and web fallback failed. Retain the membership reference; no domain-invalidity claim."
+    },
+    {
+      "slug": "tahiti-triathlon",
+      "url": "https://www.tahititriathlon.pf",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. The 2026 calendar contains event and document links plus provisional rankings; camps and training are distinguished from races.",
+      "finalUrl": "https://www.tahititriathlon.pf",
+      "title": "Fédération Tahitienne de Triathlon – Site Officiel de la Fédération Tahitienne de Triathlon et des disciplines enchaînées"
+    },
+    {
+      "slug": "andorra-triathlon",
+      "url": "https://triatlo.ad/",
+      "status": "qualified_research_reference",
+      "note": "Homepage and calendar/results sections show federation content, but the linked athlete route redirects to unrelated gambling content in two fresh retrievals. Older search capture differs. Retain the World Triathlon primary reference and hold national-site data pending review; do not register the unsuitable athlete route.",
+      "finalUrl": "https://triatlo.ad/",
+      "title": "Home"
+    },
+    {
+      "slug": "armenia-triathlon",
+      "url": "http://www.triathlon.am",
+      "status": "hosting_placeholder",
+      "note": "Hosting-provider welcome page; operational federation content not confirmed.",
+      "finalUrl": "http://www.triathlon.am",
+      "title": "Хостинг-провайдер TimeWeb.ru | Мы рады приветствовать Вас среди наших клиентов!"
+    },
+    {
+      "slug": "azerbaijan-triathlon",
+      "url": "http://www.triathlon.az",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. The results index links 2023–25 files, while the events page exposes headers without rows. Athlete text needs identity and source-row checks.",
+      "finalUrl": "https://www.triathlon.az/az/",
+      "title": null
+    },
+    {
+      "slug": "bosnia-and-herzegovina-triathlon",
+      "url": "https://tpsbih.ba/",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. Its 2026 event table distinguishes disciplines and organisers; repeated championship classifications may describe the same meeting.",
+      "finalUrl": "https://tpsbih.ba/",
+      "title": "Triatlon i pentatlon savez Bosne i Hercegovine"
+    },
+    {
+      "slug": "belarus-triathlon",
+      "url": "https://triatlon.by/",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. The 2026 competition page includes calendar amendments and result-document links; its separate rankings section returned no rankings.",
+      "finalUrl": "https://triatlon.by/",
+      "title": "Общественное объединение «Белорусская федерация триатлона»"
+    },
+    {
+      "slug": "faroe-islands-triathlon",
+      "url": "https://www.sst.fo",
+      "status": "official_homepage_confirmed",
+      "note": "World Triathlon-linked SST website confirmed. Calendars and results cover both cycling and triathlon; selection standards are not achieved athlete performances.",
+      "finalUrl": "https://www.sst.fo",
+      "title": "Heim - sst.fo"
+    },
+    {
+      "slug": "gibraltar-triathlon",
+      "url": "https://gibraltartriathlon.com",
+      "status": "official_homepage_confirmed",
+      "note": "World Triathlon-linked association site confirmed. It describes senior and junior activity; detailed result and athlete datasets remain unassessed.",
+      "finalUrl": "https://www.gibraltartriathlon.com/",
+      "title": "Home | Gibraltar Triathlon"
+    },
+    {
+      "slug": "liechtenstein-triathlon",
+      "url": "https://www.triathlon.li",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. News links individual competition results; the competition section explains participation rules rather than providing a fixture table.",
+      "finalUrl": "https://www.triathlon.li",
+      "title": "Aktuelles"
+    },
+    {
+      "slug": "moldova-triathlon",
+      "url": "https://ftrm.md/en",
+      "status": "official_homepage_confirmed",
+      "note": "Federation identity corroborated by World Triathlon and its About page. That page contains historical information; current fixtures, results and athlete coverage remain unassessed.",
+      "finalUrl": "https://ftrm.md/en",
+      "title": "Федерация Триатлона Республики Молдова"
+    },
+    {
+      "slug": "north-macedonia-triathlon",
+      "url": "https://www.triathlon.mk",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. The 2026 calendar includes repeated entries and a triathlon/duathlon label discrepancy; resolve them before importing fixtures.",
+      "finalUrl": "https://triathlon.mk/",
+      "title": "Triathlon – Triathlon Federation Of North Macedonia"
+    },
+    {
+      "slug": "montenegro-triathlon",
+      "url": "https://triatlon.me/",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. Its 2026 calendar separates senior and youth competitions; several entries give only a month or month range.",
+      "finalUrl": "https://triatlon.me/",
+      "title": "TRIATLON SAVEZ CRNE GORE"
+    },
+    {
+      "slug": "russia-triathlon",
+      "url": "https://www.rustriathlon.ru/",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. The calendar contains late-2026 events and a named national-team list; the results section returned only an archive heading.",
+      "finalUrl": "https://rustriathlon.ru/",
+      "title": "Федерация Триатлона России"
+    },
+    {
+      "slug": "ukraine-triathlon",
+      "url": "https://www.triathlon.org.ua",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. The results index has dated 2026 editions and a separate candidate-team announcement. Generic 08:00–15:00 windows are not verified race starts.",
+      "finalUrl": "https://www.triathlon.org.ua",
+      "title": "Федерація триатлону України"
+    },
+    {
+      "slug": "ghana-triathlon",
+      "url": "http://ghanatriathlon.org/",
+      "status": "unrelated_content",
+      "note": "Unrelated Chinese-language service content explicitly disclaims representing the former federation. Do not use as a federation data source.",
+      "finalUrl": "http://ghanatriathlon.org/",
+      "title": "极速云123官网入口_仪表盘最新地址_手机版App下载"
+    },
+    {
+      "slug": "nigeria-triathlon",
+      "url": "https://nigeriantriathlon.org/",
+      "status": "official_homepage_confirmed",
+      "note": "World Triathlon-linked federation site confirmed. News content is available; dedicated fixture, result and athlete datasets remain unassessed.",
+      "finalUrl": "https://nigeriantriathlon.org/",
+      "title": "NTU – Nigeria Triathlon Union"
+    },
+    {
+      "slug": "qatar-triathlon",
+      "url": "https://qatartriathlon.org/",
+      "status": "official_homepage_confirmed",
+      "note": "World Triathlon-linked federation site confirmed. The year-planner route returned navigation and a heading without dated entries; detailed data capability remains unconfirmed.",
+      "finalUrl": "https://qatartriathlon.org/",
+      "title": "Qatar Triathlon Federation"
+    },
+    {
+      "slug": "kosovo-triathlon",
+      "url": "https://kosovatriathlon.org",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation site confirmed. Its 2026 calendar supplies dates, disciplines and displayed times; edition programmes require separate checks before fixture publication.",
+      "finalUrl": "https://kosovatriathlon.org/",
+      "title": "Federata e Triathlonit të Kosovës"
+    }
+  ],
+  "detailChecks": [
+    {
+      "slug": "namibia-triathlon",
+      "suffix": "events",
+      "url": "https://ntf.go.na/event-directory/",
+      "note": "2026 events index with named dates and a past-results link. Page still labels past dates as upcoming; individual edition and start-time checks remain necessary.",
+      "skip": false
+    },
+    {
+      "slug": "zimbabwe-triathlon",
+      "suffix": "calendar",
+      "url": "https://www.zimtri.org/calendar-of-events/",
+      "note": "2026–27 season calendar PDF link, labelled edited 29 September. Page explicitly says events may change without notice; the PDF rows were not inspected.",
+      "skip": false
+    },
+    {
+      "slug": "zimbabwe-triathlon",
+      "suffix": "results_2026_2027",
+      "url": "https://www.zimtri.org/2026-2027-results/",
+      "note": "2026–27 results and series-points PDF links. One 11 October 2026 result document was downloaded separately; series points must remain distinct from race placings.",
+      "skip": false
+    },
+    {
+      "slug": "zimbabwe-triathlon",
+      "suffix": "results_2025_2026",
+      "url": "https://www.zimtri.org/2025-2026-results-points/",
+      "note": "2025–26 results-document archive with named event/date links; individual PDF rows not compared.",
+      "skip": false
+    },
+    {
+      "slug": "kazakhstan-triathlon",
+      "suffix": "events",
+      "url": "https://triathlon.org.kz/ru/event",
+      "note": "Events search returned no matches in this view. Homepage news alone is not a verified fixture feed.",
+      "skip": false
+    },
+    {
+      "slug": "kazakhstan-triathlon",
+      "suffix": "results",
+      "url": "https://triathlon.org.kz/ru/result",
+      "note": "Historical results index exposes 2022–24 entries and pagination. Current homepage news does not establish current results coverage.",
+      "skip": false
+    },
+    {
+      "slug": "kazakhstan-triathlon",
+      "suffix": "athletes",
+      "url": "https://triathlon.org.kz/ru/athlete",
+      "note": "Named national-team index with athlete links. National-team membership alone does not establish citizenship, exact birth date or a matched profile.",
+      "skip": false
+    },
+    {
+      "slug": "kyrgyzstan-triathlon",
+      "suffix": "events_archive",
+      "url": "https://www.triathlon.kg/events/archive",
+      "note": "Archive lists dated 2026 competitions, category labels and registration-closed status. Individual result rows and race starts not checked.",
+      "skip": false
+    },
+    {
+      "slug": "saudi-arabia-triathlon",
+      "suffix": "events",
+      "url": "https://www.triathlon.sa/event-list",
+      "note": "Event list contains 2026 national-series entries with times plus older races. Listed time ranges and repeated summaries require edition-specific programme checks.",
+      "skip": false
+    },
+    {
+      "slug": "saudi-arabia-triathlon",
+      "suffix": "athletes",
+      "url": "https://www.triathlon.sa/epp-athletes",
+      "note": "Athlete section lists names only in the retrieved text. No nationality, exact birth date, identity match or performance verified.",
+      "skip": false
+    },
+    {
+      "slug": "oman-triathlon",
+      "suffix": "events",
+      "url": "https://www.omantriathlon.om/events.html",
+      "note": "Upcoming-events heading contains a 2024 series and results/points PDF links. Historical reference; not evidence of upcoming 2026 fixtures.",
+      "skip": false
+    },
+    {
+      "slug": "cayman-islands-triathlon",
+      "suffix": "events",
+      "url": "https://www.triathlon.ky/events",
+      "note": "Event index contains November 2026 races and older editions. A 2024-titled event is dated January 2025; retain edition/date distinction. Time ranges are not yet programme-verified starts.",
+      "skip": false
+    },
+    {
+      "slug": "cook-islands-triathlon",
+      "suffix": "events",
+      "url": "https://www.rarotri.com/events/list",
+      "note": "2027 Rarotonga festival listing shows 29 April–4 May. This multi-day festival window is not a race start or one continuous competition.",
+      "skip": false
+    },
+    {
+      "slug": "northern-mariana-islands-triathlon",
+      "suffix": "events",
+      "url": "https://sites.google.com/view/triathloncnmi/events",
+      "note": "Past-events list includes 2025 dates and one March entry without a year. No missing year inferred.",
+      "skip": false
+    },
+    {
+      "slug": "tahiti-triathlon",
+      "suffix": "calendar_2026",
+      "url": "https://www.tahititriathlon.pf/calendrier-2026/",
+      "note": "2026 calendar links race, camp and training documents and results files. Provisional points rankings use some abbreviated names; preserve provisional status and separate camps from races.",
+      "skip": false
+    },
+    {
+      "slug": "andorra-triathlon",
+      "suffix": "calendar",
+      "url": "https://triatlo.ad/federacio/calendari",
+      "note": "Named 2026 competition calendar. Other sections of this national website returned unrelated content; keep this as a qualified manual lead pending site review.",
+      "skip": false
+    },
+    {
+      "slug": "andorra-triathlon",
+      "suffix": "results",
+      "url": "https://triatlo.ad/federacio/resultats",
+      "note": "2026 results summaries with placing/finish-status text and links to World Triathlon results. Other sections of this website returned unrelated content; no individual performances accepted.",
+      "skip": false
+    },
+    {
+      "slug": "andorra-triathlon",
+      "suffix": "athletes",
+      "url": "https://triatlo.ad/atletes",
+      "note": "UNSUITABLE ATHLETE ROUTE — do not register",
+      "skip": true
+    },
+    {
+      "slug": "azerbaijan-triathlon",
+      "suffix": "events",
+      "url": "https://www.triathlon.az/az/events",
+      "note": "Event page returned column headings without event rows; fixture capability unconfirmed.",
+      "skip": false
+    },
+    {
+      "slug": "azerbaijan-triathlon",
+      "suffix": "results",
+      "url": "https://www.triathlon.az/az/results",
+      "note": "Named results-document index covering 2023–25. Individual and team lists are separate; PDF/XLSX contents need their own checks.",
+      "skip": false
+    },
+    {
+      "slug": "azerbaijan-triathlon",
+      "suffix": "athletes",
+      "url": "https://www.triathlon.az/az/athletes",
+      "note": "Athlete section contains club and achievement descriptions but extraction omits clear identity headings in places. Do not attach these biographies or nationality to a profile without identity evidence.",
+      "skip": false
+    },
+    {
+      "slug": "bosnia-and-herzegovina-triathlon",
+      "suffix": "events",
+      "url": "https://tpsbih.ba/dogadjaji/",
+      "note": "2026 table exposes date, championship level, venue, discipline, distance, event and organiser. Multiple championship classifications may share one meeting; generic/test posts below the table are not fixtures.",
+      "skip": false
+    },
+    {
+      "slug": "belarus-triathlon",
+      "suffix": "competitions_2026",
+      "url": "https://triatlon.by/sorevnovaniya/federacziya/2026",
+      "note": "2026 competition table links calendar amendments and results protocols. Dates are sometimes multi-day windows; protocol rows and start times not checked.",
+      "skip": false
+    },
+    {
+      "slug": "belarus-triathlon",
+      "suffix": "rankings",
+      "url": "https://triatlon.by/federacziya/rejting",
+      "note": "Rankings route returned federation footer/contact information without rankings; capability unconfirmed.",
+      "skip": false
+    },
+    {
+      "slug": "faroe-islands-triathlon",
+      "suffix": "calendar",
+      "url": "https://www.sst.fo/kalendari/",
+      "note": "Shared cycling/triathlon calendar includes social events and training camps. Do not import every row as a triathlon fixture or mistake registration for a start time.",
+      "skip": false
+    },
+    {
+      "slug": "faroe-islands-triathlon",
+      "suffix": "results",
+      "url": "https://www.sst.fo/urslit/",
+      "note": "Results index spans triathlon and several cycling disciplines and links external result providers. The intro mentions Webscorer, while some links point to RACE RESULT; attribute each edition to its actual source.",
+      "skip": false
+    },
+    {
+      "slug": "faroe-islands-triathlon",
+      "suffix": "national_team",
+      "url": "https://www.sst.fo/landslid/",
+      "note": "National-team information includes selection standards and historical 2023 criteria beneath newer headings. Standards are not recorded performances and this is not a verified current roster.",
+      "skip": false
+    },
+    {
+      "slug": "russia-triathlon",
+      "suffix": "calendar",
+      "url": "https://rustriathlon.ru/calendarPage/all",
+      "note": "Calendar exposes October–December 2026 competitions and date ranges. Programme-specific discipline/wave start times remain unassessed.",
+      "skip": false
+    },
+    {
+      "slug": "russia-triathlon",
+      "suffix": "results",
+      "url": "https://rustriathlon.ru/results",
+      "note": "Results route returned an archive heading without result rows or document links in the retrieved content.",
+      "skip": false
+    },
+    {
+      "slug": "russia-triathlon",
+      "suffix": "national_team",
+      "url": "https://rustriathlon.ru/members/group/a56dfb11c0cf42c1018f3b55738e85977cdba287",
+      "note": "Named senior national-team list with sporting titles. Names and federation membership alone do not establish citizenship, exact birth date or identity matches.",
+      "skip": false
+    },
+    {
+      "slug": "ukraine-triathlon",
+      "suffix": "calendar",
+      "url": "https://www.triathlon.org.ua/calendar_types/profesijnij-sport/",
+      "note": "Professional-sport calendar category returned navigation and descriptive text without fixture rows.",
+      "skip": false
+    },
+    {
+      "slug": "ukraine-triathlon",
+      "suffix": "results",
+      "url": "https://www.triathlon.org.ua/results_types/profesijnij-sport/",
+      "note": "Dated 2026 results index with generic 08:00–15:00 windows. These are not verified race starts; edition-specific result pages still require inspection.",
+      "skip": false
+    },
+    {
+      "slug": "ukraine-triathlon",
+      "suffix": "national_team_candidates_2026",
+      "url": "https://www.triathlon.org.ua/news/naczionalna-zbirna-sklad-sportsmeniv-kandydativ-2026/",
+      "note": "Announcement dated 5 March 2026 lists candidate-team athletes. Candidate status must not be upgraded to final selection; individual identity and nationality facts remain unverified.",
+      "skip": false
+    },
+    {
+      "slug": "qatar-triathlon",
+      "suffix": "calendar",
+      "url": "https://qatartriathlon.org/events/calendar",
+      "note": "Year Planner route returned navigation and a heading only; no calendar rows assessed.",
+      "skip": false
+    },
+    {
+      "slug": "kosovo-triathlon",
+      "suffix": "calendar",
+      "url": "https://kosovatriathlon.org/kalendar",
+      "note": "2026 calendar includes dated event cards, disciplines/distances and displayed times. Edition-specific programmes and categories require checking before importing fixtures.",
+      "skip": false
+    },
+    {
+      "slug": "montenegro-triathlon",
+      "suffix": "calendar",
+      "url": "https://triatlon.me/kalendar-takmicenja",
+      "note": "2026 senior/youth calendar includes exact dates, month-only dates and month ranges. Do not manufacture missing days or treat every row as one distinct event.",
+      "skip": false
+    },
+    {
+      "slug": "virgin-islands-triathlon",
+      "suffix": "events",
+      "url": "https://www.vitf.org/events",
+      "note": "2026 calendar and historical result links; March duathlon explicitly cancelled, and October/November changes marked as revised 11 June 2026. Preserve cancellation and revision notes.",
+      "skip": false
+    },
+    {
+      "slug": "iran-triathlon",
+      "suffix": "events",
+      "url": "https://irtriathlon.ir/events",
+      "note": "Events page shows zero upcoming and one past event with Iranian-calendar year 1405. No Gregorian conversion or start-time inference made.",
+      "skip": false
+    },
+    {
+      "slug": "iran-triathlon",
+      "suffix": "about",
+      "url": "https://irtriathlon.ir/aboutus",
+      "note": "About page identifies the federation but leadership content remains loading. Organisation reference, not athlete/result data.",
+      "skip": false
+    },
+    {
+      "slug": "liechtenstein-triathlon",
+      "suffix": "competitions",
+      "url": "https://www.triathlon.li/wettkämpfe/",
+      "note": "Competition section explains licence and championship participation rules; it is not a dated fixture table.",
+      "skip": false
+    },
+    {
+      "slug": "uzbekistan-triathlon",
+      "suffix": "events",
+      "url": "https://triathlon.uz/ru/competitions",
+      "note": "No active events in the retrieved calendar; archive assessed separately. This is not proof the federation has no future events."
+    },
+    {
+      "slug": "uzbekistan-triathlon",
+      "suffix": "events_archive",
+      "url": "https://triathlon.uz/ru/competitions/archive",
+      "note": "Named 2026 competition archive with dates and categories. Distances and programme starts require edition-level checking."
+    },
+    {
+      "slug": "uzbekistan-triathlon",
+      "suffix": "national_team",
+      "url": "https://triathlon.uz/ru/athletes/national-team",
+      "note": "Named national-team cards explicitly display Uzbekistan. Preserve that as source-reported country representation; citizenship, exact birth dates and identity matches are not established."
+    },
+    {
+      "slug": "moldova-triathlon",
+      "suffix": "about",
+      "url": "https://ftrm.md/about-ru",
+      "note": "Substantive federation identity and remit information, including historical 2018 details. Not current competition or athlete coverage."
+    },
+    {
+      "slug": "virgin-islands-triathlon",
+      "suffix": "about",
+      "url": "https://www.vitf.org/about-1",
+      "note": "Federation governance page corroborates organisation identity; officers are not an athlete-results dataset."
+    },
+    {
+      "slug": "iran-triathlon",
+      "suffix": "athletes",
+      "url": "https://irtriathlon.ir/athletes",
+      "note": "Athlete list remained a loading placeholder. An export link is present but was not downloaded; no individual facts assessed."
+    },
+    {
+      "slug": "aruba-triathlon",
+      "suffix": "about",
+      "url": "https://arubatriathlon.com/pages/about/",
+      "note": "Association identity and remit corroborated on its About page through web fallback."
+    },
+    {
+      "slug": "aruba-triathlon",
+      "suffix": "results_history",
+      "url": "https://arubatriathlon.com/pages/race-result-history/",
+      "note": "Results index contains 2026 and historical editions with separate overall/category and sprint/other-distance links. Cancellation/postponement labels and some invalid historical date text require edition-level checking; individual rows not compared."
+    },
+    {
+      "slug": "zimbabwe-triathlon",
+      "suffix": "results_2026_10_11_pdf",
+      "url": "https://www.zimtri.org/wp-content/uploads/bsk-pdf-manager/EVENT_3_-_RESULTS_-_11_OCTOBER_-_FINAL_2324.pdf",
+      "note": "Publisher Zimbabwe Triathlon. PDF downloaded; first page inspected. Distinct clock time, finish time, actual time, overall position and category position columns; DNS/DNF explicit. Timing provider and chip/gun method unconfirmed. No nationality column on the inspected page; age category is not exact birth date. No individual row matched or imported."
+    }
+  ],
+  "sourcesAdded": [
+    "namibia_triathlon_official",
+    "rwanda_triathlon_official",
+    "zimbabwe_triathlon_official",
+    "bangladesh_triathlon_official",
+    "iran_triathlon_official",
+    "kazakhstan_triathlon_official",
+    "kyrgyzstan_triathlon_official",
+    "saudi_arabia_triathlon_official",
+    "oman_triathlon_official",
+    "uzbekistan_triathlon_official",
+    "virgin_islands_triathlon_official",
+    "cayman_islands_triathlon_official",
+    "cook_islands_triathlon_official",
+    "northern_mariana_islands_triathlon_official",
+    "tahiti_triathlon_official",
+    "azerbaijan_triathlon_official",
+    "bosnia_and_herzegovina_triathlon_official",
+    "belarus_triathlon_official",
+    "faroe_islands_triathlon_official",
+    "gibraltar_triathlon_official",
+    "liechtenstein_triathlon_official",
+    "moldova_triathlon_official",
+    "north_macedonia_triathlon_official",
+    "montenegro_triathlon_official",
+    "russia_triathlon_official",
+    "ukraine_triathlon_official",
+    "nigeria_triathlon_official",
+    "qatar_triathlon_official",
+    "kosovo_triathlon_official",
+    "aruba_triathlon_official",
+    "chinese_taipei_triathlon_research_reference",
+    "nepalese_triathlon_research_reference",
+    "fiji_triathlon_research_reference",
+    "andorra_triathlon_research_reference",
+    "namibia_triathlon_events",
+    "zimbabwe_triathlon_calendar",
+    "zimbabwe_triathlon_results_2026_2027",
+    "zimbabwe_triathlon_results_2025_2026",
+    "kazakhstan_triathlon_events",
+    "kazakhstan_triathlon_results",
+    "kazakhstan_triathlon_athletes",
+    "kyrgyzstan_triathlon_events_archive",
+    "saudi_arabia_triathlon_events",
+    "saudi_arabia_triathlon_athletes",
+    "oman_triathlon_events",
+    "cayman_islands_triathlon_events",
+    "cook_islands_triathlon_events",
+    "northern_mariana_islands_triathlon_events",
+    "tahiti_triathlon_calendar_2026",
+    "andorra_triathlon_calendar",
+    "andorra_triathlon_results",
+    "azerbaijan_triathlon_events",
+    "azerbaijan_triathlon_results",
+    "azerbaijan_triathlon_athletes",
+    "bosnia_and_herzegovina_triathlon_events",
+    "belarus_triathlon_competitions_2026",
+    "belarus_triathlon_rankings",
+    "faroe_islands_triathlon_calendar",
+    "faroe_islands_triathlon_results",
+    "faroe_islands_triathlon_national_team",
+    "russia_triathlon_calendar",
+    "russia_triathlon_results",
+    "russia_triathlon_national_team",
+    "ukraine_triathlon_calendar",
+    "ukraine_triathlon_results",
+    "ukraine_triathlon_national_team_candidates_2026",
+    "qatar_triathlon_calendar",
+    "kosovo_triathlon_calendar",
+    "montenegro_triathlon_calendar",
+    "virgin_islands_triathlon_events",
+    "iran_triathlon_events",
+    "iran_triathlon_about",
+    "liechtenstein_triathlon_competitions",
+    "uzbekistan_triathlon_events",
+    "uzbekistan_triathlon_events_archive",
+    "uzbekistan_triathlon_national_team",
+    "moldova_triathlon_about",
+    "virgin_islands_triathlon_about",
+    "iran_triathlon_athletes",
+    "aruba_triathlon_about",
+    "aruba_triathlon_results_history",
+    "zimbabwe_triathlon_results_2026_10_11_pdf"
+  ],
+  "sourcesUpdated": [
+    "organisation_argentine_triathlon",
+    "organisation_colombian_triathlon",
+    "organisation_thai_triathlon",
+    "organisation_philippine_triathlon",
+    "organisation_indonesian_triathlon",
+    "organisation_jamaican_triathlon",
+    "organisation_uruguayan_triathlon",
+    "organisation_bolivian_triathlon",
+    "organisation_dominican_republic_triathlon",
+    "organisation_ecuadorian_triathlon",
+    "organisation_chinese_triathlon",
+    "organisation_chinese_taipei_triathlon",
+    "organisation_nepalese_triathlon",
+    "organisation_sri_lankan_triathlon",
+    "organisation_macau_triathlon",
+    "organisation_algeria_triathlon",
+    "organisation_burundi_triathlon",
+    "organisation_benin_triathlon",
+    "organisation_burkina_faso_triathlon",
+    "organisation_central_african_republic_triathlon",
+    "organisation_cote_divoire_triathlon",
+    "organisation_cameroon_triathlon",
+    "organisation_democratic_republic_of_the_congo_triathlon",
+    "organisation_egypt_triathlon",
+    "organisation_gambia_triathlon",
+    "organisation_ghana_triathlon",
+    "organisation_guinea_triathlon",
+    "organisation_libya_triathlon",
+    "organisation_madagascar_triathlon",
+    "organisation_morocco_triathlon",
+    "organisation_mozambique_triathlon",
+    "organisation_namibia_triathlon",
+    "organisation_nigeria_triathlon",
+    "organisation_niger_triathlon",
+    "organisation_rwanda_triathlon",
+    "organisation_senegal_triathlon",
+    "organisation_sierra_leone_triathlon",
+    "organisation_tanzania_triathlon",
+    "organisation_togo_triathlon",
+    "organisation_tunisia_triathlon",
+    "organisation_uganda_triathlon",
+    "organisation_zambia_triathlon",
+    "organisation_zimbabwe_triathlon",
+    "organisation_bangladesh_triathlon",
+    "organisation_bahrain_triathlon",
+    "organisation_cambodia_triathlon",
+    "organisation_iran_triathlon",
+    "organisation_iraq_triathlon",
+    "organisation_jordan_triathlon",
+    "organisation_kazakhstan_triathlon",
+    "organisation_kyrgyzstan_triathlon",
+    "organisation_saudi_arabia_triathlon",
+    "organisation_kuwait_triathlon",
+    "organisation_lebanon_triathlon",
+    "organisation_maldives_triathlon",
+    "organisation_mongolia_triathlon",
+    "organisation_oman_triathlon",
+    "organisation_pakistan_triathlon",
+    "organisation_palestine_triathlon",
+    "organisation_qatar_triathlon",
+    "organisation_syria_triathlon",
+    "organisation_timor_leste_triathlon",
+    "organisation_united_arab_emirates_triathlon",
+    "organisation_uzbekistan_triathlon",
+    "organisation_yemen_triathlon",
+    "organisation_el_salvador_triathlon",
+    "organisation_saint_kitts_and_nevis_triathlon",
+    "organisation_puerto_rico_triathlon",
+    "organisation_honduras_triathlon",
+    "organisation_venezuela_triathlon",
+    "organisation_virgin_islands_triathlon",
+    "organisation_aruba_triathlon",
+    "organisation_cuba_triathlon",
+    "organisation_belize_triathlon",
+    "organisation_antigua_and_barbuda_triathlon",
+    "organisation_haiti_triathlon",
+    "organisation_cayman_islands_triathlon",
+    "organisation_suriname_triathlon",
+    "organisation_nicaragua_triathlon",
+    "organisation_grenada_triathlon",
+    "organisation_american_samoa_triathlon",
+    "organisation_cook_islands_triathlon",
+    "organisation_fiji_triathlon",
+    "organisation_guam_triathlon",
+    "organisation_northern_mariana_islands_triathlon",
+    "organisation_palau_triathlon",
+    "organisation_papua_new_guinea_triathlon",
+    "organisation_samoa_triathlon",
+    "organisation_solomon_islands_triathlon",
+    "organisation_tahiti_triathlon",
+    "organisation_tonga_triathlon",
+    "organisation_albania_triathlon",
+    "organisation_andorra_triathlon",
+    "organisation_armenia_triathlon",
+    "organisation_azerbaijan_triathlon",
+    "organisation_bosnia_and_herzegovina_triathlon",
+    "organisation_belarus_triathlon",
+    "organisation_faroe_islands_triathlon",
+    "organisation_georgia_triathlon",
+    "organisation_gibraltar_triathlon",
+    "organisation_kosovo_triathlon",
+    "organisation_liechtenstein_triathlon",
+    "organisation_moldova_triathlon",
+    "organisation_north_macedonia_triathlon",
+    "organisation_montenegro_triathlon",
+    "organisation_monaco_triathlon",
+    "organisation_russia_triathlon",
+    "organisation_ukraine_triathlon"
+  ],
+  "registryBefore": 1164,
+  "registryAfter": 1246,
+  "enabled": 36,
+  "disabled": 1210,
+  "homepageUpgrades": [
+    "namibia-triathlon",
+    "rwanda-triathlon",
+    "zimbabwe-triathlon",
+    "bangladesh-triathlon",
+    "iran-triathlon",
+    "kazakhstan-triathlon",
+    "kyrgyzstan-triathlon",
+    "saudi-arabia-triathlon",
+    "oman-triathlon",
+    "uzbekistan-triathlon",
+    "virgin-islands-triathlon",
+    "cayman-islands-triathlon",
+    "cook-islands-triathlon",
+    "northern-mariana-islands-triathlon",
+    "tahiti-triathlon",
+    "azerbaijan-triathlon",
+    "bosnia-and-herzegovina-triathlon",
+    "belarus-triathlon",
+    "faroe-islands-triathlon",
+    "gibraltar-triathlon",
+    "liechtenstein-triathlon",
+    "moldova-triathlon",
+    "north-macedonia-triathlon",
+    "montenegro-triathlon",
+    "russia-triathlon",
+    "ukraine-triathlon",
+    "nigeria-triathlon",
+    "qatar-triathlon",
+    "kosovo-triathlon",
+    "aruba-triathlon"
+  ],
+  "directoryRecordsUpdated": [
+    "namibia-triathlon",
+    "rwanda-triathlon",
+    "zimbabwe-triathlon",
+    "bangladesh-triathlon",
+    "iran-triathlon",
+    "kazakhstan-triathlon",
+    "kyrgyzstan-triathlon",
+    "saudi-arabia-triathlon",
+    "oman-triathlon",
+    "uzbekistan-triathlon",
+    "virgin-islands-triathlon",
+    "cayman-islands-triathlon",
+    "cook-islands-triathlon",
+    "northern-mariana-islands-triathlon",
+    "tahiti-triathlon",
+    "azerbaijan-triathlon",
+    "bosnia-and-herzegovina-triathlon",
+    "belarus-triathlon",
+    "faroe-islands-triathlon",
+    "gibraltar-triathlon",
+    "liechtenstein-triathlon",
+    "moldova-triathlon",
+    "north-macedonia-triathlon",
+    "montenegro-triathlon",
+    "russia-triathlon",
+    "ukraine-triathlon",
+    "nigeria-triathlon",
+    "qatar-triathlon",
+    "kosovo-triathlon",
+    "aruba-triathlon",
+    "andorra-triathlon"
+  ],
+  "pdfCheck": {
+    "url": "https://www.zimtri.org/wp-content/uploads/bsk-pdf-manager/EVENT_3_-_RESULTS_-_11_OCTOBER_-_FINAL_2324.pdf",
+    "status": 200,
+    "sha256": "5c685393f15da0d1fd39e2cc6de5e20d56f5f9f321a6d22df0cb41836e99e191",
+    "scope": "First page only",
+    "qualification": "First page only: table distinguishes clock time, finish time and actual time, plus overall and category positions. DNS and DNF are explicit. No nationality column on the inspected page; age category is not exact birth date. Publisher Zimbabwe Triathlon; timing provider and chip/gun method not established. No individual row matched or imported."
+  },
+  "limits": "Link/source capability review only. No fixtures, start times, athlete facts, nationalities or individual results imported or marked verified. All new sources are disabled manual references. Named team lists, selection standards, citizenship and identity are distinct. Raw captures and original values are retained privately."
+}

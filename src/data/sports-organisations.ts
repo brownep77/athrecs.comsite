@@ -9657,54 +9657,53 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "namibia-triathlon",
-  "name": "Namibian Triathlon Federation",
-  "type": "national",
-  "country": "Namibia",
-  "jurisdiction": "Namibia",
-  "territories": [
-    "Namibia"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon body for Namibia, listed by World Triathlon and Africa Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/namibian-triathlon-association",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/namibian-triathlon-association",
-    "https://africa.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "nigeria-triathlon",
-  "name": "Triathlon Nigeria",
-  "type": "national",
-  "country": "Nigeria",
-  "jurisdiction": "Nigeria",
-  "territories": [
-    "Nigeria"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon body for Nigeria, listed by World Triathlon and Africa Triathlon.",
-  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/nigerian-triathlon-union",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/nigerian-triathlon-union",
-    "https://africa.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "namibia-triathlon",
+      name: "Namibian Triathlon Federation",
+      type: "national",
+      country: "Namibia",
+      jurisdiction: "Namibia",
+      territories: ["Namibia"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon body for Namibia, listed by World Triathlon and Africa Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked federation site confirmed. The events page lists a 2026 calendar and links past results; each edition and start time still needs separate checking.",
+      website: "https://ntf.go.na",
+      sources: [
+        "https://triathlon.org/members/namibian-triathlon-association",
+        "https://africa.triathlon.org/national-federations",
+        "https://ntf.go.na",
+        "https://ntf.go.na/event-directory/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "nigeria-triathlon",
+      name: "Triathlon Nigeria",
+      type: "national",
+      country: "Nigeria",
+      jurisdiction: "Nigeria",
+      territories: ["Nigeria"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon body for Nigeria, listed by World Triathlon and Africa Triathlon.",
+      detail:
+        "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked federation site confirmed. News content is available; dedicated fixture, result and athlete datasets remain unassessed.",
+      website: "https://nigeriantriathlon.org/",
+      sources: [
+        "https://triathlon.org/members/nigerian-triathlon-union",
+        "https://africa.triathlon.org/national-federations",
+        "https://nigeriantriathlon.org/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "niger-triathlon",
   "name": "Fédération Nigérienne de Triathlon",
@@ -9729,30 +9728,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "rwanda-triathlon",
-  "name": "Federation Rwandaise de Triathlon",
-  "type": "national",
-  "country": "Rwanda",
-  "jurisdiction": "Rwanda",
-  "territories": [
-    "Rwanda"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon body for Rwanda, listed by World Triathlon and Africa Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/federation-rwandaise-de-triathlon",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/federation-rwandaise-de-triathlon",
-    "https://africa.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "rwanda-triathlon",
+      name: "Federation Rwandaise de Triathlon",
+      type: "national",
+      country: "Rwanda",
+      jurisdiction: "Rwanda",
+      territories: ["Rwanda"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon body for Rwanda, listed by World Triathlon and Africa Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked federation site confirmed. The homepage includes dated 2026 triathlon and duathlon entries; individual results and athlete facts remain unassessed.",
+      website: "https://www.rwandatri.org/",
+      sources: [
+        "https://triathlon.org/members/federation-rwandaise-de-triathlon",
+        "https://africa.triathlon.org/national-federations",
+        "https://www.rwandatri.org/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "senegal-triathlon",
   "name": "Senegal Triathlon Federation",
@@ -9921,54 +9919,56 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "zimbabwe-triathlon",
-  "name": "Zimbabwe Triathlon Federation",
-  "type": "national",
-  "country": "Zimbabwe",
-  "jurisdiction": "Zimbabwe",
-  "territories": [
-    "Zimbabwe"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon body for Zimbabwe, listed by World Triathlon and Africa Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/zimbabwe-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/zimbabwe-triathlon-federation",
-    "https://africa.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "bangladesh-triathlon",
-  "name": "Bangladesh Triathlon Association",
-  "type": "national",
-  "country": "Bangladesh",
-  "jurisdiction": "Bangladesh",
-  "territories": [
-    "Bangladesh"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Bangladesh, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/triathlon-federation-of-bangladesh",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/triathlon-federation-of-bangladesh",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "zimbabwe-triathlon",
+      name: "Zimbabwe Triathlon Federation",
+      type: "national",
+      country: "Zimbabwe",
+      jurisdiction: "Zimbabwe",
+      territories: ["Zimbabwe"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon body for Zimbabwe, listed by World Triathlon and Africa Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed, with 2026–27 calendar and results-document indexes. One October 2026 results PDF was opened; individual performances remain unverified.",
+      website: "https://www.zimtri.org/",
+      sources: [
+        "https://triathlon.org/members/zimbabwe-triathlon-federation",
+        "https://africa.triathlon.org/national-federations",
+        "https://www.zimtri.org/",
+        "https://www.zimtri.org/calendar-of-events/",
+        "https://www.zimtri.org/2026-2027-results/",
+        "https://www.zimtri.org/2025-2026-results-points/",
+        "https://www.zimtri.org/wp-content/uploads/bsk-pdf-manager/EVENT_3_-_RESULTS_-_11_OCTOBER_-_FINAL_2324.pdf",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "bangladesh-triathlon",
+      name: "Bangladesh Triathlon Association",
+      type: "national",
+      country: "Bangladesh",
+      jurisdiction: "Bangladesh",
+      territories: ["Bangladesh"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Bangladesh, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Federation site corroborated by World Triathlon. The prominent championship material is from 2018; current fixture, result and athlete coverage remains unassessed.",
+      website: "https://www.triathlonbd.org/",
+      sources: [
+        "https://triathlon.org/members/triathlon-federation-of-bangladesh",
+        "https://asia.triathlon.org/national-federations",
+        "https://www.triathlonbd.org/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "bahrain-triathlon",
   "name": "Bahrain Triathlon Association",
@@ -10017,30 +10017,32 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "iran-triathlon",
-  "name": "Iran Triathlon Federation",
-  "type": "national",
-  "country": "Iran",
-  "jurisdiction": "Iran",
-  "territories": [
-    "Iran"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Iran, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/iran-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/iran-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "iran-triathlon",
+      name: "Iran Triathlon Federation",
+      type: "national",
+      country: "Iran",
+      jurisdiction: "Iran",
+      territories: ["Iran"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Iran, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Federation site corroborated by World Triathlon and its events section. The athlete list remains a loading shell; Iranian-calendar labels require careful interpretation.",
+      website: "https://irtriathlon.ir/",
+      sources: [
+        "https://triathlon.org/members/iran-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://irtriathlon.ir/",
+        "https://irtriathlon.ir/events",
+        "https://irtriathlon.ir/aboutus",
+        "https://irtriathlon.ir/athletes",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "iraq-triathlon",
   "name": "Iraq Triathlon Federation",
@@ -10089,78 +10091,81 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "kazakhstan-triathlon",
-  "name": "Kazakhstan Triathlon Federation",
-  "type": "national",
-  "country": "Kazakhstan",
-  "jurisdiction": "Kazakhstan",
-  "territories": [
-    "Kazakhstan"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Kazakhstan, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/kazakhstan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/kazakhstan-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "kyrgyzstan-triathlon",
-  "name": "Kyrgyz Republic Triathlon Federation",
-  "type": "national",
-  "country": "Kyrgyzstan",
-  "jurisdiction": "Kyrgyzstan",
-  "territories": [
-    "Kyrgyzstan"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Kyrgyzstan, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "saudi-arabia-triathlon",
-  "name": "Saudi Triathlon Federation",
-  "type": "national",
-  "country": "Saudi Arabia",
-  "jurisdiction": "Saudi Arabia",
-  "territories": [
-    "Saudi Arabia"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Saudi Arabia, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/saudi-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/saudi-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "kazakhstan-triathlon",
+      name: "Kazakhstan Triathlon Federation",
+      type: "national",
+      country: "Kazakhstan",
+      jurisdiction: "Kazakhstan",
+      territories: ["Kazakhstan"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Kazakhstan, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. The results index exposes 2022–24 archive entries and a named national-team list; the events search returned no matches.",
+      website: "https://triathlon.org.kz/",
+      sources: [
+        "https://triathlon.org/members/kazakhstan-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://triathlon.org.kz/",
+        "https://triathlon.org.kz/ru/event",
+        "https://triathlon.org.kz/ru/result",
+        "https://triathlon.org.kz/ru/athlete",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "kyrgyzstan-triathlon",
+      name: "Kyrgyz Republic Triathlon Federation",
+      type: "national",
+      country: "Kyrgyzstan",
+      jurisdiction: "Kyrgyzstan",
+      territories: ["Kyrgyzstan"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Kyrgyzstan, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. Its archive lists dated 2026 competitions and categories; individual result rows still require review.",
+      website: "https://www.triathlon.kg/",
+      sources: [
+        "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://www.triathlon.kg/",
+        "https://www.triathlon.kg/events/archive",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "saudi-arabia-triathlon",
+      name: "Saudi Triathlon Federation",
+      type: "national",
+      country: "Saudi Arabia",
+      jurisdiction: "Saudi Arabia",
+      territories: ["Saudi Arabia"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Saudi Arabia, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. The event list contains dated 2026 and older races; an athlete section lists names without verified nationality or identity evidence.",
+      website: "https://www.triathlon.sa",
+      sources: [
+        "https://triathlon.org/members/saudi-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://www.triathlon.sa",
+        "https://www.triathlon.sa/event-list",
+        "https://www.triathlon.sa/epp-athletes",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "kuwait-triathlon",
   "name": "Kuwait Triathlon Club",
@@ -10257,30 +10262,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "oman-triathlon",
-  "name": "Oman Triathlon Federation",
-  "type": "national",
-  "country": "Oman",
-  "jurisdiction": "Oman",
-  "territories": [
-    "Oman"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Oman, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/oman-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/oman-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "oman-triathlon",
+      name: "Oman Triathlon Federation",
+      type: "national",
+      country: "Oman",
+      jurisdiction: "Oman",
+      territories: ["Oman"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Oman, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked national governing-body website confirmed. The events page describes a 2024 series despite its upcoming-events heading; newer coverage remains unconfirmed.",
+      website: "https://www.omantriathlon.om",
+      sources: [
+        "https://triathlon.org/members/oman-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://www.omantriathlon.om",
+        "https://www.omantriathlon.om/events.html",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "pakistan-triathlon",
   "name": "Pakistan Triathlon Federation",
@@ -10329,30 +10334,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "qatar-triathlon",
-  "name": "Qatar Triathlon Federation",
-  "type": "national",
-  "country": "Qatar",
-  "jurisdiction": "Qatar",
-  "territories": [
-    "Qatar"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Qatar, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/qatar-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/qatar-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "qatar-triathlon",
+      name: "Qatar Triathlon Federation",
+      type: "national",
+      country: "Qatar",
+      jurisdiction: "Qatar",
+      territories: ["Qatar"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Qatar, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked federation site confirmed. The year-planner route returned navigation and a heading without dated entries; detailed data capability remains unconfirmed.",
+      website: "https://qatartriathlon.org/",
+      sources: [
+        "https://triathlon.org/members/qatar-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://qatartriathlon.org/",
+        "https://qatartriathlon.org/events/calendar",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "syria-triathlon",
   "name": "Syria Arab Triathlon Federation",
@@ -10425,30 +10430,32 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "uzbekistan-triathlon",
-  "name": "Uzbekistan Triathlon Federation",
-  "type": "national",
-  "country": "Uzbekistan",
-  "jurisdiction": "Uzbekistan",
-  "territories": [
-    "Uzbekistan"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Uzbekistan, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/uzbekistan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/uzbekistan-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "uzbekistan-triathlon",
+      name: "Uzbekistan Triathlon Federation",
+      type: "national",
+      country: "Uzbekistan",
+      jurisdiction: "Uzbekistan",
+      territories: ["Uzbekistan"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Uzbekistan, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. The archive contains named 2026 races and the national-team page includes country-labelled athlete cards. Identity and individual facts need separate comparison.",
+      website: "https://triathlon.uz/ru",
+      sources: [
+        "https://triathlon.org/members/uzbekistan-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://triathlon.uz/ru",
+        "https://triathlon.uz/ru/competitions",
+        "https://triathlon.uz/ru/competitions/archive",
+        "https://triathlon.uz/ru/athletes/national-team",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "yemen-triathlon",
   "name": "Yemen Aquatics",
@@ -10593,54 +10600,56 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "virgin-islands-triathlon",
-  "name": "Virgin Islands Triathlon",
-  "type": "national",
-  "country": "Virgin Islands",
-  "jurisdiction": "Virgin Islands",
-  "territories": [
-    "Virgin Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Virgin Islands, listed by World Triathlon and Americas Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/virgin-islands-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/virgin-islands-triathlon-federation",
-    "https://americas.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "aruba-triathlon",
-  "name": "Aruba Triathlon Association",
-  "type": "national",
-  "country": "Aruba",
-  "jurisdiction": "Aruba",
-  "territories": [
-    "Aruba"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Aruba, listed by World Triathlon and Americas Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/aruba-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/aruba-triathlon-federation",
-    "https://americas.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "virgin-islands-triathlon",
+      name: "Virgin Islands Triathlon",
+      type: "national",
+      country: "Virgin Islands",
+      jurisdiction: "Virgin Islands",
+      territories: ["Virgin Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Virgin Islands, listed by World Triathlon and Americas Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Federation identity confirmed through its About page. The 2026 calendar links results and explicitly marks a cancellation and June schedule changes.",
+      website: "https://www.vitf.org/",
+      sources: [
+        "https://triathlon.org/members/virgin-islands-triathlon-federation",
+        "https://americas.triathlon.org/national-federations",
+        "https://www.vitf.org/",
+        "https://www.vitf.org/events",
+        "https://www.vitf.org/about-1",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "aruba-triathlon",
+      name: "Aruba Triathlon Association",
+      type: "national",
+      country: "Aruba",
+      jurisdiction: "Aruba",
+      territories: ["Aruba"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Aruba, listed by World Triathlon and Americas Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Federation identity confirmed through World Triathlon and the association website. The result-history page links 2026 and historical results; its calendar is presented as an uninspected image.",
+      website: "https://arubatriathlon.com/pages/",
+      sources: [
+        "https://triathlon.org/members/aruba-triathlon-federation",
+        "https://americas.triathlon.org/national-federations",
+        "https://arubatriathlon.com/pages/",
+        "https://arubatriathlon.com/pages/about/",
+        "https://arubatriathlon.com/pages/race-result-history/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "cuba-triathlon",
   "name": "Federación Cubana de Triatlón",
@@ -10737,30 +10746,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "cayman-islands-triathlon",
-  "name": "Cayman Islands Triathlon Association",
-  "type": "national",
-  "country": "Cayman Islands",
-  "jurisdiction": "Cayman Islands",
-  "territories": [
-    "Cayman Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Cayman Islands, listed by World Triathlon and Americas Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/cayman-islands-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/cayman-islands-triathlon-federation",
-    "https://americas.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "cayman-islands-triathlon",
+      name: "Cayman Islands Triathlon Association",
+      type: "national",
+      country: "Cayman Islands",
+      jurisdiction: "Cayman Islands",
+      territories: ["Cayman Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Cayman Islands, listed by World Triathlon and Americas Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official association site confirmed. Its event list includes November 2026 competitions and older editions; displayed time ranges require edition-specific programme checks.",
+      website: "https://www.triathlon.ky",
+      sources: [
+        "https://triathlon.org/members/cayman-islands-triathlon-federation",
+        "https://americas.triathlon.org/national-federations",
+        "https://www.triathlon.ky",
+        "https://www.triathlon.ky/events",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "suriname-triathlon",
   "name": "Surinaamse Triathlon Unie",
@@ -10857,30 +10866,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "cook-islands-triathlon",
-  "name": "Cook Islands Triathlon Association",
-  "type": "national",
-  "country": "Cook Islands",
-  "jurisdiction": "Cook Islands",
-  "territories": [
-    "Cook Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Cook Islands, listed by World Triathlon and Oceania Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/cook-islands-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/cook-islands-triathlon-federation",
-    "https://oceania.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "cook-islands-triathlon",
+      name: "Cook Islands Triathlon Association",
+      type: "national",
+      country: "Cook Islands",
+      jurisdiction: "Cook Islands",
+      territories: ["Cook Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Cook Islands, listed by World Triathlon and Oceania Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official association site confirmed. The calendar lists the 2027 Rarotonga festival; its multi-day festival window is not an individual race start time.",
+      website: "https://www.rarotri.com/",
+      sources: [
+        "https://triathlon.org/members/cook-islands-triathlon-federation",
+        "https://oceania.triathlon.org/national-federations",
+        "https://www.rarotri.com/",
+        "https://www.rarotri.com/events/list",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "fiji-triathlon",
   "name": "Fiji Triathlon Association",
@@ -10929,30 +10938,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "northern-mariana-islands-triathlon",
-  "name": "Triathlon Association of the CMNI",
-  "type": "national",
-  "country": "Northern Mariana Islands",
-  "jurisdiction": "Northern Mariana Islands",
-  "territories": [
-    "Northern Mariana Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Northern Mariana Islands, listed by World Triathlon and Oceania Triathlon.",
-  "detail": "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied.",
-  "website": "https://triathlon.org/members/triathlon-association-of-the-cmni",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/triathlon-association-of-the-cmni",
-    "https://oceania.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "northern-mariana-islands-triathlon",
+      name: "Triathlon Association of the CMNI",
+      type: "national",
+      country: "Northern Mariana Islands",
+      jurisdiction: "Northern Mariana Islands",
+      territories: ["Northern Mariana Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Northern Mariana Islands, listed by World Triathlon and Oceania Triathlon.",
+      detail:
+        "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied. Link review 25 October 2026: World Triathlon-linked association website confirmed. The events section mainly contains historical entries and some dates lack a year; no year has been inferred.",
+      website: "https://sites.google.com/view/triathloncnmi/home",
+      sources: [
+        "https://triathlon.org/members/triathlon-association-of-the-cmni",
+        "https://oceania.triathlon.org/national-federations",
+        "https://sites.google.com/view/triathloncnmi/home",
+        "https://sites.google.com/view/triathloncnmi/events",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "palau-triathlon",
   "name": "Belau Triathlon Federation",
@@ -11049,30 +11058,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "tahiti-triathlon",
-  "name": "Fédération Tahitienne de Triathlon",
-  "type": "national",
-  "country": "Tahiti",
-  "jurisdiction": "Tahiti",
-  "territories": [
-    "Tahiti"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Tahiti, listed by World Triathlon and Oceania Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/tahiti-triathlon-association",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/tahiti-triathlon-association",
-    "https://oceania.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "tahiti-triathlon",
+      name: "Fédération Tahitienne de Triathlon",
+      type: "national",
+      country: "Tahiti",
+      jurisdiction: "Tahiti",
+      territories: ["Tahiti"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Tahiti, listed by World Triathlon and Oceania Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. The 2026 calendar contains event and document links plus provisional rankings; camps and training are distinguished from races.",
+      website: "https://www.tahititriathlon.pf",
+      sources: [
+        "https://triathlon.org/members/tahiti-triathlon-association",
+        "https://oceania.triathlon.org/national-federations",
+        "https://www.tahititriathlon.pf",
+        "https://www.tahititriathlon.pf/calendrier-2026/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "tonga-triathlon",
   "name": "Tonga - Friendly Islands Triathlon Association",
@@ -11121,30 +11130,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "andorra-triathlon",
-  "name": "Federació Andorrana de Triatló",
-  "type": "national",
-  "country": "Andorra",
-  "jurisdiction": "Andorra",
-  "territories": [
-    "Andorra"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Andorra, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/federacio-andorrana-de-triatlo",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/federacio-andorrana-de-triatlo",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "andorra-triathlon",
+      name: "Federació Andorrana de Triatló",
+      type: "national",
+      country: "Andorra",
+      jurisdiction: "Andorra",
+      territories: ["Andorra"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Andorra, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: The linked national website returned conflicting content across sections, including unrelated material on its athlete route. The World Triathlon membership reference remains primary while the website is reviewed.",
+      website: "https://triathlon.org/members/federacio-andorrana-de-triatlo",
+      websiteKind: "member-directory",
+      sources: [
+        "https://triathlon.org/members/federacio-andorrana-de-triatlo",
+        "https://europe.triathlon.org/national-federations",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "armenia-triathlon",
   "name": "Armenian Triathlon Federation",
@@ -11169,102 +11177,107 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "azerbaijan-triathlon",
-  "name": "Azerbaijan Triathlon Federation",
-  "type": "national",
-  "country": "Azerbaijan",
-  "jurisdiction": "Azerbaijan",
-  "territories": [
-    "Azerbaijan"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Azerbaijan, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/azerbaijan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/azerbaijan-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "bosnia-and-herzegovina-triathlon",
-  "name": "Triathlon and Pentathlon Federation of Bosnia and Herzegovina",
-  "type": "national",
-  "country": "Bosnia and Herzegovina",
-  "jurisdiction": "Bosnia and Herzegovina",
-  "territories": [
-    "Bosnia and Herzegovina"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Bosnia and Herzegovina, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "belarus-triathlon",
-  "name": "Belarusian Triathlon Federation",
-  "type": "national",
-  "country": "Belarus",
-  "jurisdiction": "Belarus",
-  "territories": [
-    "Belarus"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Belarus, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/belarus-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/belarus-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "faroe-islands-triathlon",
-  "name": "The Faroe Islands Triathlon Federation",
-  "type": "national",
-  "country": "Faroe Islands",
-  "jurisdiction": "Faroe Islands",
-  "territories": [
-    "Faroe Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Faroe Islands, listed by World Triathlon and Europe Triathlon.",
-  "detail": "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied.",
-  "website": "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "azerbaijan-triathlon",
+      name: "Azerbaijan Triathlon Federation",
+      type: "national",
+      country: "Azerbaijan",
+      jurisdiction: "Azerbaijan",
+      territories: ["Azerbaijan"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Azerbaijan, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The results index links 2023–25 files, while the events page exposes headers without rows. Athlete text needs identity and source-row checks.",
+      website: "https://www.triathlon.az/az/",
+      sources: [
+        "https://triathlon.org/members/azerbaijan-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.triathlon.az/az/",
+        "https://www.triathlon.az/az/events",
+        "https://www.triathlon.az/az/results",
+        "https://www.triathlon.az/az/athletes",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "bosnia-and-herzegovina-triathlon",
+      name: "Triathlon and Pentathlon Federation of Bosnia and Herzegovina",
+      type: "national",
+      country: "Bosnia and Herzegovina",
+      jurisdiction: "Bosnia and Herzegovina",
+      territories: ["Bosnia and Herzegovina"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Bosnia and Herzegovina, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. Its 2026 event table distinguishes disciplines and organisers; repeated championship classifications may describe the same meeting.",
+      website: "https://tpsbih.ba/",
+      sources: [
+        "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
+        "https://europe.triathlon.org/national-federations",
+        "https://tpsbih.ba/",
+        "https://tpsbih.ba/dogadjaji/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "belarus-triathlon",
+      name: "Belarusian Triathlon Federation",
+      type: "national",
+      country: "Belarus",
+      jurisdiction: "Belarus",
+      territories: ["Belarus"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Belarus, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The 2026 competition page includes calendar amendments and result-document links; its separate rankings section returned no rankings.",
+      website: "https://triatlon.by/",
+      sources: [
+        "https://triathlon.org/members/belarus-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://triatlon.by/",
+        "https://triatlon.by/sorevnovaniya/federacziya/2026",
+        "https://triatlon.by/federacziya/rejting",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "faroe-islands-triathlon",
+      name: "The Faroe Islands Triathlon Federation",
+      type: "national",
+      country: "Faroe Islands",
+      jurisdiction: "Faroe Islands",
+      territories: ["Faroe Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Faroe Islands, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied. Link review 25 October 2026: World Triathlon-linked SST website confirmed. Calendars and results cover both cycling and triathlon; selection standards are not achieved athlete performances.",
+      website: "https://www.sst.fo",
+      sources: [
+        "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.sst.fo",
+        "https://www.sst.fo/kalendari/",
+        "https://www.sst.fo/urslit/",
+        "https://www.sst.fo/landslid/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "georgia-triathlon",
   "name": "National Triathlon Federation of Georgia",
@@ -11289,150 +11302,148 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "gibraltar-triathlon",
-  "name": "Gibraltar Triathlon Association",
-  "type": "national",
-  "country": "Gibraltar",
-  "jurisdiction": "Gibraltar",
-  "territories": [
-    "Gibraltar"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Gibraltar, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/gibraltar-triathlon-association",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/gibraltar-triathlon-association",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "kosovo-triathlon",
-  "name": "Kosovo Triathlon Federation",
-  "type": "national",
-  "country": "Kosovo",
-  "jurisdiction": "Kosovo",
-  "territories": [
-    "Kosovo"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Kosovo, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/kosovo-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/kosovo-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "liechtenstein-triathlon",
-  "name": "Liechtenstein Triathlon Federation",
-  "type": "national",
-  "country": "Liechtenstein",
-  "jurisdiction": "Liechtenstein",
-  "territories": [
-    "Liechtenstein"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Liechtenstein, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/liechtenstein-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/liechtenstein-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "moldova-triathlon",
-  "name": "National Triathlon Federation of the Republic of Moldova",
-  "type": "national",
-  "country": "Moldova",
-  "jurisdiction": "Moldova",
-  "territories": [
-    "Moldova"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Moldova, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/moldovan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/moldovan-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "north-macedonia-triathlon",
-  "name": "Triathlon Federation of North Macedonia",
-  "type": "national",
-  "country": "North Macedonia",
-  "jurisdiction": "North Macedonia",
-  "territories": [
-    "North Macedonia"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for North Macedonia, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/macedonian-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/macedonian-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "montenegro-triathlon",
-  "name": "Triathlon Federation of Montenegro",
-  "type": "national",
-  "country": "Montenegro",
-  "jurisdiction": "Montenegro",
-  "territories": [
-    "Montenegro"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Montenegro, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/triathlon-federation-of-montenegro",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/triathlon-federation-of-montenegro",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "gibraltar-triathlon",
+      name: "Gibraltar Triathlon Association",
+      type: "national",
+      country: "Gibraltar",
+      jurisdiction: "Gibraltar",
+      territories: ["Gibraltar"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Gibraltar, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: World Triathlon-linked association site confirmed. It describes senior and junior activity; detailed result and athlete datasets remain unassessed.",
+      website: "https://www.gibraltartriathlon.com/",
+      sources: [
+        "https://triathlon.org/members/gibraltar-triathlon-association",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.gibraltartriathlon.com/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "kosovo-triathlon",
+      name: "Kosovo Triathlon Federation",
+      type: "national",
+      country: "Kosovo",
+      jurisdiction: "Kosovo",
+      territories: ["Kosovo"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Kosovo, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. Its 2026 calendar supplies dates, disciplines and displayed times; edition programmes require separate checks before fixture publication.",
+      website: "https://kosovatriathlon.org/",
+      sources: [
+        "https://triathlon.org/members/kosovo-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://kosovatriathlon.org/",
+        "https://kosovatriathlon.org/kalendar",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "liechtenstein-triathlon",
+      name: "Liechtenstein Triathlon Federation",
+      type: "national",
+      country: "Liechtenstein",
+      jurisdiction: "Liechtenstein",
+      territories: ["Liechtenstein"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Liechtenstein, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. News links individual competition results; the competition section explains participation rules rather than providing a fixture table.",
+      website: "https://www.triathlon.li",
+      sources: [
+        "https://triathlon.org/members/liechtenstein-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.triathlon.li",
+        "https://www.triathlon.li/wettk%C3%A4mpfe/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "moldova-triathlon",
+      name: "National Triathlon Federation of the Republic of Moldova",
+      type: "national",
+      country: "Moldova",
+      jurisdiction: "Moldova",
+      territories: ["Moldova"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Moldova, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Federation identity corroborated by World Triathlon and its About page. That page contains historical information; current fixtures, results and athlete coverage remain unassessed.",
+      website: "https://ftrm.md/en",
+      sources: [
+        "https://triathlon.org/members/moldovan-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://ftrm.md/en",
+        "https://ftrm.md/about-ru",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "north-macedonia-triathlon",
+      name: "Triathlon Federation of North Macedonia",
+      type: "national",
+      country: "North Macedonia",
+      jurisdiction: "North Macedonia",
+      territories: ["North Macedonia"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for North Macedonia, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The 2026 calendar includes repeated entries and a triathlon/duathlon label discrepancy; resolve them before importing fixtures.",
+      website: "https://triathlon.mk/",
+      sources: [
+        "https://triathlon.org/members/macedonian-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://triathlon.mk/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "montenegro-triathlon",
+      name: "Triathlon Federation of Montenegro",
+      type: "national",
+      country: "Montenegro",
+      jurisdiction: "Montenegro",
+      territories: ["Montenegro"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Montenegro, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. Its 2026 calendar separates senior and youth competitions; several entries give only a month or month range.",
+      website: "https://triatlon.me/",
+      sources: [
+        "https://triathlon.org/members/triathlon-federation-of-montenegro",
+        "https://europe.triathlon.org/national-federations",
+        "https://triatlon.me/",
+        "https://triatlon.me/kalendar-takmicenja",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "monaco-triathlon",
   "name": "Triathlon Monegasque Federation",
@@ -11457,54 +11468,58 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "russia-triathlon",
-  "name": "Russian Triathlon Federation",
-  "type": "national",
-  "country": "Russia",
-  "jurisdiction": "Russia",
-  "territories": [
-    "Russia"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Russia, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/russian-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/russian-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "ukraine-triathlon",
-  "name": "Ukrainian Triathlon Federation",
-  "type": "national",
-  "country": "Ukraine",
-  "jurisdiction": "Ukraine",
-  "territories": [
-    "Ukraine"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Ukraine, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/ukrainian-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/ukrainian-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "russia-triathlon",
+      name: "Russian Triathlon Federation",
+      type: "national",
+      country: "Russia",
+      jurisdiction: "Russia",
+      territories: ["Russia"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Russia, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The calendar contains late-2026 events and a named national-team list; the results section returned only an archive heading.",
+      website: "https://rustriathlon.ru/",
+      sources: [
+        "https://triathlon.org/members/russian-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://rustriathlon.ru/",
+        "https://rustriathlon.ru/calendarPage/all",
+        "https://rustriathlon.ru/results",
+        "https://rustriathlon.ru/members/group/a56dfb11c0cf42c1018f3b55738e85977cdba287",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "ukraine-triathlon",
+      name: "Ukrainian Triathlon Federation",
+      type: "national",
+      country: "Ukraine",
+      jurisdiction: "Ukraine",
+      territories: ["Ukraine"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Ukraine, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The results index has dated 2026 editions and a separate candidate-team announcement. Generic 08:00–15:00 windows are not verified race starts.",
+      website: "https://www.triathlon.org.ua",
+      sources: [
+        "https://triathlon.org/members/ukrainian-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.triathlon.org.ua",
+        "https://www.triathlon.org.ua/calendar_types/profesijnij-sport/",
+        "https://www.triathlon.org.ua/results_types/profesijnij-sport/",
+        "https://www.triathlon.org.ua/news/naczionalna-zbirna-sklad-sportsmeniv-kandydativ-2026/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
 
   // World Aquatics African national members, checked 23 October 2026.
   record({
