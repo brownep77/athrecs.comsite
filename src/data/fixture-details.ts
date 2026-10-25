@@ -12,6 +12,8 @@ import accraStart from "./accra-start-2026-10-25.json" with { type: "json" };
 import imminentStarts from "./imminent-starts-2026-10-25.json" with { type: "json" };
 import urgentStarts from "./urgent-starts-followup-2026-10-25.json" with { type: "json" };
 import { isUrgentReviewedPlaceholder } from "./urgent-starts-followup-2026-10-25.ts";
+import nextUrgentStarts from "./urgent-starts-next-2026-10-25.json" with { type: "json" };
+import { isNextUrgentPlaceholder } from "./urgent-starts-next-2026-10-25.ts";
 
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
@@ -68,6 +70,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   },
   ...imminentStarts,
   ...urgentStarts,
+  ...nextUrgentStarts,
   ...accraStart,
   "wa-32-hella-hamburg-half-marathon-7238156|2026-10-25": {
     place: { city: "Hamburg" },
@@ -356,6 +359,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
+  if (isNextUrgentPlaceholder(slug, date, distance)) return true;
   if (isUrgentReviewedPlaceholder(slug, date, distance)) return true;
   // The federation import is the same half marathon, not another race distance.
   if (

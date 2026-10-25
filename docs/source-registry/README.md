@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1075 unique sources as of 25 October 2026. Only 36 are enabled; the other 1039 remain
+The registry contains 1089 unique sources as of 25 October 2026. Only 36 are enabled; the other 1053 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 1075 sources create exactly one source job;
+- all 1089 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 1039 sources are retained as blocked jobs with their reason;
+- the other 1053 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being

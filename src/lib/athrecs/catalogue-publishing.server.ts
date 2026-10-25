@@ -4,6 +4,7 @@ import { dbSource, getSql, type Sql } from "@/lib/db";
 import {
   applyImportBundle,
   slugify,
+  importEventSlug,
   type ImportBundle,
   type ImportEditionInput,
   type ImportEventInput,
@@ -116,11 +117,11 @@ function isIsoDate(value: string | undefined): boolean {
 }
 
 function eventSlug(event: ImportEventInput): string {
-  return slugify(event.slug || event.name);
+  return importEventSlug(event.slug, event.name);
 }
 
 function editionSlug(edition: ImportEditionInput): string {
-  return slugify(edition.eventSlug || edition.eventName || "");
+  return importEventSlug(edition.eventSlug, edition.eventName);
 }
 
 function editionKey(edition: ImportEditionInput): string {
