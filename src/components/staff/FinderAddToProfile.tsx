@@ -46,6 +46,7 @@ function Lookup({
   onChoose: (id: number | undefined) => void;
 }) {
   const [text, setText] = useState(initialQuery);
+  const [selected, setSelected] = useState("");
   const [query, setQuery] = useState(initialQuery.length >= 2 ? initialQuery : "");
   const options = useQuery({
     queryKey: ["finder-profile-options", kind, query],
@@ -60,6 +61,7 @@ function Lookup({
         onSubmit={(event) => {
           event.preventDefault();
           setQuery(text.trim());
+          setSelected("");
           onChoose(undefined);
         }}
       >
@@ -96,9 +98,10 @@ function Lookup({
           {kind === "athlete" ? "Choose athlete profile" : "Choose race edition"}
           <select
             className={fieldClass}
-            defaultValue=""
-            key={`${kind}:${query}`}
+            value={selected}
+            aria-label={kind === "athlete" ? "Choose athlete profile" : "Choose race edition"}
             onChange={(event) => {
+              setSelected(event.target.value);
               onChoose(event.target.value ? Number(event.target.value) : undefined);
             }}
           >
