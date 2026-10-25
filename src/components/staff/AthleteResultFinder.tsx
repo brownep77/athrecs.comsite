@@ -4,6 +4,7 @@ import { Database, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { listFixtureSources } from "@/lib/athrecs/api";
 import { searchAthleteSourceResults } from "@/lib/athlete-finder/api";
+import { findPossibleAthleteProfiles } from "@/lib/athlete-finder/identity-review-api";
 import {
   finderSearchSchema,
   type FinderRow,
@@ -130,6 +131,20 @@ export function AthleteResultFinder({
   });
   const search = useMutation({
     mutationFn: (input: FinderSearchInput) => searchAthleteSourceResults({ data: input }),
+  });
+  const identityReview = useQuery({
+    queryKey: ["staff-athlete-identity-review", submitted?.q, submitted?.aliases, submitted?.club],
+    enabled: Boolean(submitted),
+    retry: false,
+    staleTime: 60_000,
+    queryFn: () =>
+      findPossibleAthleteProfiles({
+        data: {
+          name: submitted!.q,
+          aliases: submitted!.aliases ?? [],
+          club: submitted!.club ?? "",
+        },
+      }),
   });
   const aliases = aliasesText
     .split(/[;\n]/)
@@ -311,6 +326,134 @@ export function AthleteResultFinder({
             </p>
           )}
         </form>
+        {submitted && (
+          <section
+            aria-labelledby="identity-review-heading"
+            data-testid="identity-review"
+            className="space-y-3 rounded-lg border border-amber-300 p-3"
+            aria-live="polite"
+          >
+            <h3 id="identity-review-heading" className="font-semibold">
+              Recorded aliases and possible profile matches
+            </h3>
+            <p className="text-xs text-muted">
+              Initials, common short names and recorded racing names are flagged for review. Club
+              history can support a match; it does not establish identity. Nothing is merged
+              automatically.
+            </p>
+            {identityReview.isFetching && (
+              <p role="status" className="text-sm">
+                Checking name variants and club history…
+              </p>
+            )}
+            {identityReview.isError && (
+              <p role="alert" className="text-sm">
+                Profile matching could not finish. Stored result search is separate.{" "}
+                <button
+                  type="button"
+                  className="underline"
+                  onClick={() => identityReview.refetch()}
+                >
+                  Retry profile matching
+                </button>
+              </p>
+            )}
+            {!identityReview.isFetching && !identityReview.isError && identityReview.data && (
+              <>
+                {identityReview.data.message && (
+                  <p className="text-sm font-medium">{identityReview.data.message}</p>
+                )}
+                {!identityReview.data.candidates.length && !identityReview.data.message && (
+                  <p className="text-sm">
+                    No possible profiles were returned. This does not confirm that a new profile is
+                    needed.
+                  </p>
+                )}
+                <ul className="grid gap-3 md:grid-cols-2">
+                  {identityReview.data.candidates.map((candidate) => (
+                    <li
+                      key={candidate.id}
+                      className="min-w-0 space-y-2 rounded-lg border border-border bg-surface p-3"
+                    >
+                      <a
+                        className="font-semibold underline"
+                        href={`/admin/athlete-tools?section=review&athleteId=${candidate.id}`}
+                      >
+                        {candidate.name}
+                      </a>
+                      <div className="flex flex-wrap gap-1">
+                        {candidate.reasons.map((reason) => (
+                          <span
+                            key={reason}
+                            className="rounded bg-amber-100 px-2 py-1 text-xs text-amber-950"
+                          >
+                            {reason}
+                          </span>
+                        ))}
+                      </div>
+                      {candidate.weak && (
+                        <p className="text-xs font-semibold">
+                          Weak name match — could be a different person.
+                        </p>
+                      )}
+                      <p className="text-xs text-muted">
+                        {candidate.clubs.length
+                          ? candidate.clubs
+                              .map(
+                                (c) =>
+                                  `${c.name}${c.relationship === "historical" ? " (historical)" : " (recorded)"}`,
+                              )
+                              .join(" · ")
+                          : "No club history recorded"}
+                      </p>
+                      {candidate.clubMatch && (
+                        <p className="text-xs font-semibold">{candidate.clubMatch}</p>
+                      )}
+                      {!!candidate.aliases.length && (
+                        <p className="break-words text-xs">
+                          Recorded names: {candidate.aliases.join(" / ")}
+                        </p>
+                      )}
+                      {candidate.managed && (
+                        <p className="text-xs">
+                          Account-managed profile — ownership needs separate review.
+                        </p>
+                      )}
+                      <button
+                        type="button"
+                        className="min-h-10 text-left text-xs font-semibold underline"
+                        disabled={search.isPending}
+                        onClick={() => {
+                          const otherNames = [
+                            ...new Set([
+                              submitted.q,
+                              ...(submitted.aliases ?? []),
+                              ...candidate.aliases,
+                            ]),
+                          ]
+                            .filter((n) => n !== candidate.name)
+                            .slice(0, 8);
+                          setName(candidate.name);
+                          setAliasesText(otherNames.join("; "));
+                          setClub("");
+                          run({
+                            ...submitted,
+                            q: candidate.name,
+                            aliases: otherNames,
+                            club: "",
+                            offset: 0,
+                          });
+                        }}
+                      >
+                        Search recorded names across clubs
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </section>
+        )}
         {search.isPending && (
           <p role="status" className="text-sm">
             Searching the selected stored collections…

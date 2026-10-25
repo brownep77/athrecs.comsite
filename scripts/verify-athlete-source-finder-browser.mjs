@@ -107,6 +107,7 @@ try {
     values(${event.id},'2026-10-01','10K',10,'Finished') returning id`;
   const [athlete] = await sql`insert into athletes(slug,display_name,source_club_name)
     values('finder-browser-athlete',${name},${club}) returning id`;
+  await sql`update athletes set profile_details='{"aliases":["B Finder Synthetic"],"clubHistory":[{"name":"Former synthetic club"}]}'::jsonb where id=${athlete.id}`;
   const [result] =
     await sql`insert into results(edition_id,athlete_id,status,finish_time_seconds,source_url,result_source,result_details)
     values(${edition.id},${athlete.id},'finished',2400,'https://finder-browser.test/result/1','Synthetic browser timer',
@@ -262,6 +263,15 @@ try {
     "./core": core,
     "./search.server": service,
   });
+  const identityCore = load("src/lib/athlete-finder/identity-review.ts", { zod: { z } });
+  const identityService = load("src/lib/athlete-finder/identity-review.server.ts", {
+    "./identity-review.ts": identityCore,
+  });
+  const identityApi = load("src/lib/athlete-finder/identity-review-api.ts", {
+    ...common,
+    "./identity-review": identityCore,
+    "./identity-review.server": identityService,
+  });
   const registryCore = load("src/lib/athrecs/source-registry.ts");
   const coverage = load("src/lib/athlete-finder/coverage.ts", { zod: { z } });
   const coverageService = load("src/lib/athlete-finder/coverage.server.ts", {
@@ -315,6 +325,7 @@ try {
   });
   const methods = {
     ...searchApi,
+    ...identityApi,
     ...coverageApi,
     ...checkApi,
     listFixtureSources: start
@@ -449,6 +460,7 @@ try {
       alias: [
         { find: /^\.{1,2}\/getStartOptions\.js$/, replacement: startOptions },
         { find: "@/lib/athlete-finder/api", replacement: bridge },
+        { find: "@/lib/athlete-finder/identity-review-api", replacement: bridge },
         { find: "@/lib/athlete-finder/coverage-api", replacement: bridge },
         { find: "@/lib/athlete-finder/source-check-api", replacement: bridge },
         { find: "@/lib/athrecs/api", replacement: bridge },
@@ -467,6 +479,7 @@ try {
   // Exercise the real staff middleware and allowlist with synthetic sessions.
   const protectedMethods = {
     searchAthleteSourceResults: { q: name },
+    findPossibleAthleteProfiles: { name },
     getAthleteFinderSourceCoverage: {},
     checkAthleteSource: { name, url: sourceUrl },
   };
@@ -560,6 +573,16 @@ try {
     name: "Possible athlete matches in stored collections",
   });
   assert.equal(await resultTable.locator("tbody tr").count(), 28);
+  await page
+    .getByTestId("identity-review")
+    .getByText("Exact recorded name", { exact: true })
+    .waitFor();
+  assert.ok(
+    await page
+      .getByTestId("identity-review")
+      .getByText(/Nothing is merged automatically/)
+      .count(),
+  );
   for (const label of [
     "Profile results",
     "Central archive",
@@ -869,6 +892,33 @@ try {
     "finder_browser_test",
   );
 
+  await page
+    .getByTestId("identity-review")
+    .getByText("Former synthetic club (historical)", { exact: false })
+    .waitFor();
+  await page
+    .getByRole("button", { name: "Search recorded names across clubs", exact: true })
+    .click();
+  await page
+    .getByRole("heading", {
+      name: `28 stored matches on this page for ${name} / B Finder Synthetic`,
+      exact: true,
+    })
+    .waitFor();
+  assert.equal(await page.getByLabel("Club filter").inputValue(), "");
+  assert.deepEqual(
+    requests.filter((r) => r.method === "searchAthleteSourceResults").at(-1).input.aliases,
+    ["B Finder Synthetic"],
+  );
+  assert.equal(
+    requests.filter((r) => r.method === "searchAthleteSourceResults").at(-1).input.sourceId,
+    "finder_browser_test",
+  );
+  await page.getByLabel("Other racing names").fill("");
+  await page.getByRole("button", { name: "Search stored results", exact: true }).click();
+  await page
+    .getByRole("heading", { name: `28 stored matches on this page for ${name}`, exact: true })
+    .waitFor();
   await page.setViewportSize({ width: 390, height: 844 });
   assert.ok(
     await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
