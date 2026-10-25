@@ -1,0 +1,172 @@
+{
+  "trail-cross-curepto|2026-11-08": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "America/Santiago",
+    "sourceUrl": "https://drive.google.com/file/d/1XjiE4COeLHQ9jyWPMOfwm9vSTj5yrvN9/view",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "10:00",
+        "note": "Organiser regulations linked by authorised GUCA entry, page 2, explicitly date 8 November 2026 and list 20K 09:30, 15K 09:40, 10K 09:50, family 5K 10:00. Warm-up 09:15 and generic entry 09:00 are not race starts.",
+        "publicNote": "5K starts at 10:00 local time."
+      },
+      "10K": {
+        "time": "09:50",
+        "note": "Organiser regulations linked by authorised GUCA entry, page 2, explicitly date 8 November 2026 and list 20K 09:30, 15K 09:40, 10K 09:50, family 5K 10:00. Warm-up 09:15 and generic entry 09:00 are not race starts.",
+        "publicNote": "10K starts at 09:50 local time."
+      },
+      "15K": {
+        "time": "09:40",
+        "note": "Organiser regulations linked by authorised GUCA entry, page 2, explicitly date 8 November 2026 and list 20K 09:30, 15K 09:40, 10K 09:50, family 5K 10:00. Warm-up 09:15 and generic entry 09:00 are not race starts.",
+        "publicNote": "15K starts at 09:40 local time."
+      },
+      "20K": {
+        "time": "09:30",
+        "note": "Organiser regulations linked by authorised GUCA entry, page 2, explicitly date 8 November 2026 and list 20K 09:30, 15K 09:40, 10K 09:50, family 5K 10:00. Warm-up 09:15 and generic entry 09:00 are not race starts.",
+        "publicNote": "20K starts at 09:30 local time."
+      }
+    }
+  },
+  "lleu-lleu-trail-running|2026-11-28": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "America/Santiago",
+    "sourceUrl": "https://drive.google.com/file/d/1JyN4Bxo0_czcfqIP9KxzTU7DelTdeN49/view",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "7K": {
+        "time": "09:45",
+        "note": "Organiser regulations linked by GUCA date Saturday 28 November 2026; section 11 explicitly gives 15K 09:30 and 7K 09:45. The generic 08:00 meeting/event time and 08:30 entry header are not starts.",
+        "publicNote": "7K starts at 09:45 local time."
+      },
+      "15K": {
+        "time": "09:30",
+        "note": "Organiser regulations linked by GUCA date Saturday 28 November 2026; section 11 explicitly gives 15K 09:30 and 7K 09:45. The generic 08:00 meeting/event time and 08:30 entry header are not starts.",
+        "publicNote": "15K starts at 09:30 local time."
+      }
+    }
+  },
+  "media-maraton-negrete|2026-12-06": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "America/Santiago",
+    "sourceUrl": "https://drive.google.com/file/d/1dtoBqY5jvMo1yLUbQI5NtolHcesec4tt/view",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "09:20",
+        "note": "Municipal organiser regulations linked by GUCA, page 1, explicitly date 6 December 2026: 21K starts 09:00; 5K and 10K start 09:20. Kit collection and generic 08:30 entry header are separate.",
+        "publicNote": "5K starts at 09:20 local time."
+      },
+      "10K": {
+        "time": "09:20",
+        "note": "Municipal organiser regulations linked by GUCA, page 1, explicitly date 6 December 2026: 21K starts 09:00; 5K and 10K start 09:20. Kit collection and generic 08:30 entry header are separate.",
+        "publicNote": "10K starts at 09:20 local time."
+      },
+      "21K": {
+        "time": "09:00",
+        "note": "Municipal organiser regulations linked by GUCA, page 1, explicitly date 6 December 2026: 21K starts 09:00; 5K and 10K start 09:20. Kit collection and generic 08:30 entry header are separate.",
+        "publicNote": "21K starts at 09:00 local time."
+      }
+    }
+  },
+  "corrida-concon-10k-segunda-fecha|2026-12-06": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "America/Santiago",
+    "sourceUrl": "https://assets.efluj.com/file/efluj-static/media/events/terms/51a5b906-9812-430d-b262-28a939c3bf45.pdf",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "3K": {
+        "time": "10:30",
+        "note": "Municipal/Quinta Sport regulations for 6 December 2026, article 2, explicitly list 10K 08:30 and 3K 10:30. Event opening 07:30 and entry header 07:00 are not starts. Disability category starts five minutes before the main field.",
+        "publicNote": "The disability category starts five minutes before the main field. Follow your category instructions.",
+        "label": "Main start 10:30 CLST · disability category 10:25"
+      },
+      "10K": {
+        "time": "08:30",
+        "note": "Municipal/Quinta Sport regulations for 6 December 2026, article 2, explicitly list 10K 08:30 and 3K 10:30. Event opening 07:30 and entry header 07:00 are not starts. Disability category starts five minutes before the main field.",
+        "publicNote": "The disability category starts five minutes before the main field. Follow your category instructions.",
+        "label": "Main start 08:30 CLST · disability category 08:25"
+      }
+    }
+  },
+  "run-huskisson|2026-10-31": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "Australia/Sydney",
+    "sourceUrl": "https://runhusky.com.au/og/schedule/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "note": "Organiser October 31, 2026 marathon programme and marathon category page agree on wave starts from 09:00 to 10:00. The half marathon has a separate 06:30–08:30 programme.",
+        "publicNote": "Follow the colour wave selected in your entry. Marathon waves start between 09:00 and 10:00.",
+        "label": "First wave 09:00 AEDT · waves until 10:00"
+      }
+    }
+  },
+  "benidorm-marathon-half-running-crazy-10k|2026-11-21": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://benidormhalf.com/info-corredores/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10K": {
+        "time": "17:00",
+        "note": "Organiser 21 November 2026 runner information explicitly separates 10K 17:00 from half marathon 18:00. The 10K starting corrals open earlier at 16:15.",
+        "publicNote": "10K starts at 17:00 local time."
+      }
+    }
+  },
+  "discoveries-half-marathon|2026-11-29": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "Europe/Lisbon",
+    "sourceUrl": "https://meiamaratonadosdescobrimentos.com/informacoes/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "10:00",
+        "note": "Organiser 29 November 2026 programme gives half marathon waves 10:00, 10:05 and 10:10 by pace. The separately listed 10K starts at 09:15.",
+        "publicNote": "Follow your pace group: half marathon waves start at 10:00, 10:05 and 10:10.",
+        "label": "First wave 10:00 WET · later waves 10:05 and 10:10"
+      }
+    }
+  },
+  "wa-verona-run-marathon-7236316|2026-11-15": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "Europe/Rome",
+    "sourceUrl": "https://www.veronarunmarathon.it/regolamento-42k?lang=en",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "note": "Organiser 2026 marathon rules explicitly give 42K start 09:00 at Corso Porta Nuova. Date corroborated by the current November 15, 2026 organiser home page. Corrals are assigned by bib; no different start clock is published.",
+        "publicNote": "Enter the corral shown on your race bib at least 20 minutes before the start."
+      }
+    }
+  },
+  "wa-ring-running-series-7238229|2026-11-21": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "Europe/Berlin",
+    "sourceUrl": "https://ringrunningseries.com/veranstaltung/2026/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "10:00",
+        "note": "Organiser 21 November 2026 programme explicitly gives first marathon start 10:00. FAQ confirms marathon starts take about ten minutes; half marathon starts separately at 11:00.",
+        "publicNote": "Join the start corridor for your running pace. The marathon start process takes about ten minutes.",
+        "label": "First start 10:00 CET · starts over about 10 minutes"
+      }
+    }
+  },
+  "wa-milano-half-marathon-7240157|2026-11-22": {
+    "summary": "Race-day start information for this edition.",
+    "timeZone": "Europe/Rome",
+    "sourceUrl": "https://followyourpassion.it/programma-milanohalfmarathon/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "08:45",
+        "note": "Organiser detailed Sunday 22 November 2026 programme explicitly gives half marathon 08:45, with 10K following. October 2026 competition regulations corroborate 08:45. The generic Other placeholder is not assigned this clock.",
+        "publicNote": "Half starts at 08:45 local time."
+      }
+    }
+  }
+}
