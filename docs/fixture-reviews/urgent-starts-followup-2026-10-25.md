@@ -1,6 +1,6 @@
 # Urgent start-time follow-up — 25 October 2026
 
-Continues the 49-entry queue reported to the owner. This pass examines 19 entries: nine starts confirmed, ten researched but unresolved, and 30 not checked in this pass. The separate holds from the earlier 66-entry checkpoint remain outstanding. Requery live data before resuming.
+Continues the 49-entry queue reported to the owner. This pass examines 22 entries: nine starts confirmed, thirteen researched but unresolved, and 27 not checked in this pass. The separate holds from the earlier 66-entry checkpoint remain outstanding. Requery live data before resuming.
 
 | Race | Distance | Local start, 25 October 2026 |
 | --- | --- | --- |

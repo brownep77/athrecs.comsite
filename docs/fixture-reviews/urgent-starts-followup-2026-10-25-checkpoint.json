@@ -1,13 +1,13 @@
 {
   "checkedAt": "2026-10-25",
-  "scope": "Follow-up of the 49 unresolved urgent entries reported to the owner. 19 examined in this pass; 30 unchecked in this pass. Nine exact distance starts prepared for publication; ten researched entries unresolved. Other holds from the earlier 66-item checkpoint remain separate.",
+  "scope": "Follow-up of the 49 unresolved urgent entries reported to the owner. 22 examined in this pass; 27 unchecked in this pass. Nine exact distance starts prepared for publication; thirteen researched entries unresolved. Other holds from the earlier 66-item checkpoint remain separate.",
   "previousCheckpoint": "docs/fixture-reviews/imminent-starts-2026-10-25-checkpoint.json",
   "counts": {
     "queueAtStart": 49,
-    "checkedThisPass": 19,
+    "checkedThisPass": 22,
     "confirmedStarts": 9,
-    "researchedUnresolved": 10,
-    "uncheckedInThisPass": 30
+    "researchedUnresolved": 13,
+    "uncheckedInThisPass": 27
   },
   "items": [
     {
@@ -427,21 +427,37 @@
       "eventSlug": "wt-2026-americas-triathlon-carifta-championships-bermuda",
       "date": "2026-10-25",
       "distance": "Other",
-      "status": "unchecked_in_this_pass"
+      "status": "conflicting",
+      "sources": [
+        "https://triathlon.org/events/2026-americas-triathlon-carifta-championships-bermuda/race-info",
+        "https://bbc.bm/bermuda-set-for-home-carifta-triathlon-title-defence-as-dates-confirmed"
+      ],
+      "finding": "Opened World Triathlon programme lists Sunday 25 October senior relay 07:30, junior relay 09:00 and aquathlon categories from 10:30. Newer broadcaster report claims dates changed to 23–24 October. Obtain latest Bermuda Triathlon Association programme before asserting Sunday start; one universal athlete clock would be misleading.",
+      "checkedAt": "2026-10-25"
     },
     {
       "editionId": 79124127,
       "eventSlug": "ironman-703-agadir",
       "date": "2026-10-25",
       "distance": "70.3",
-      "status": "unchecked_in_this_pass"
+      "status": "primary_schedule_inaccessible",
+      "sources": [
+        "https://www.ironman.com/races/im703-agadir/schedule"
+      ],
+      "finding": "Organiser schedule retrieval returned HTTP 402. Secondary timetable lead gives 06:45–07:05 on 25 October; booking headline 05:00 may represent event opening. Neither is treated as confirmed race start without accessible primary race-day programme.",
+      "checkedAt": "2026-10-25"
     },
     {
       "editionId": 71616275,
       "eventSlug": "wt-2026-europe-triathlon-cup-alanya",
       "date": "2026-10-25",
       "distance": "Other",
-      "status": "unchecked_in_this_pass"
+      "status": "date_scope_unresolved",
+      "sources": [
+        "https://triathlon.org/events/2026-europe-triathlon-cup-alanya/race-info"
+      ],
+      "finding": "Governing-body header spans 24–25 October, but detailed programme lists elite women 10:00 and men 12:30 on Saturday 24 October only. No Sunday 25 October start verified; do not copy Saturday clocks to the stored final-day row. Athlete guide needs further examination.",
+      "checkedAt": "2026-10-25"
     },
     {
       "editionId": 109479968,
