@@ -4692,21 +4692,31 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["NAAATT", "NAAA", "Trinidad & Tobago Athletics"],
     "2026-10-23",
   ),
-  federation(
-    "trinidad-tobago-cycling",
-    "Trinidad and Tobago Cycling Federation",
-    "Trinidad and Tobago",
-    ["road-cycling", "mountain-biking", "track-cycling"],
-    "https://ttcyclingfederation.org/",
-    "National cycling federation supporting road cycling, mountain biking and track cycling in Trinidad and Tobago.",
-    [
-      "https://www.copaci.org/en/nf-members/",
-      "https://ttcyclingfederation.org/",
-      "https://ttcyclingfederation.org/about-us/",
-    ],
-    ["uci"],
-    ["TTCF", "Trinidad & Tobago Cycling Federation"],
-    "2026-10-23",
+  record(
+    {
+      slug: "trinidad-tobago-cycling",
+      name: "Trinidad and Tobago Cycling Federation",
+      country: "Trinidad and Tobago",
+      jurisdiction: "Trinidad and Tobago",
+      territories: ["Trinidad and Tobago"],
+      type: "national",
+      sports: ["road-cycling", "mountain-biking", "track-cycling"],
+      website: "https://ttcyclingfederation.org/",
+      summary:
+        "National cycling federation supporting road cycling, mountain biking and track cycling in Trinidad and Tobago.",
+      sources: [
+        "https://www.copaci.org/en/nf-members/",
+        "https://ttcyclingfederation.org/",
+        "https://ttcyclingfederation.org/about-us/",
+        "https://ttcyclingfederation.org/track/track-events/",
+        "https://ttcyclingfederation.org/road/road-events/",
+      ],
+      related: ["uci"],
+      aliases: ["TTCF", "Trinidad & Tobago Cycling Federation"],
+      detail:
+        "The federation website remains a useful organisation and historical reference. Its road and track event indexes checked on 25 October 2026 contained listings from 2017–2021; they should not be treated as a confirmed current fixture calendar.",
+    },
+    "2026-10-25",
   ),
   federation(
     "trinidad-tobago-swimming",

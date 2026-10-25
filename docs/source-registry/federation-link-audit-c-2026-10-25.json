@@ -1,0 +1,829 @@
+{
+  "checkedAt": "2026-10-25",
+  "scope": "All 66 direct road-cycling-tagged organisation URLs, excluding funding/Olympic bodies and membership-only references; 25 linked detail/reference destinations inspected.",
+  "statusCounts": {
+    "partial_content": 9,
+    "retrieval_failed": 6,
+    "content_retrieved": 48,
+    "content_review": 2,
+    "historical_content": 1
+  },
+  "cycling": [
+    {
+      "slug": "uci",
+      "name": "Union Cycliste Internationale",
+      "url": "https://www.uci.org/",
+      "finalUrl": "https://www.uci.org/",
+      "title": "Home",
+      "status": "partial_content",
+      "note": "Navigation only; no calendar, result or rider rows retrieved. The linked calendar also returned navigation only."
+    },
+    {
+      "slug": "british-cycling",
+      "name": "British Cycling",
+      "url": "https://www.britishcycling.org.uk/",
+      "finalUrl": "https://www.britishcycling.org.uk/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Retrieval failed (bot_blocked); second web-open attempt also failed. This does not establish that the domain is invalid."
+    },
+    {
+      "slug": "scottish-cycling",
+      "name": "Scottish Cycling",
+      "url": "https://scottishcycling.org.uk/",
+      "finalUrl": "https://scottishcycling.org.uk/",
+      "title": "Scottish Cycling – From the playground to podium – and everything in between",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data. Linked calendar explicitly describes provisional/draft 2026 and 2026/27 schedules; publication dates and spreadsheet filenames differ, so latest edition-specific details require confirmation. Track championship page links a 2025 results book; do not relabel it as 2026. National record PDFs not compared row by row."
+    },
+    {
+      "slug": "welsh-cycling",
+      "name": "Beicio Cymru",
+      "url": "https://www.beiciocymru.org/",
+      "finalUrl": "https://www.beiciocymru.org/",
+      "title": "Home - Beicio Cymru",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data. Event index yielded description only, but the linked Newport Omnium #3 page contains a named event, venue, session time and categories. A session time is not a start for each race or wave."
+    },
+    {
+      "slug": "cycling-ireland",
+      "name": "Cycling Ireland",
+      "url": "https://www.cyclingireland.ie/",
+      "finalUrl": "https://www.cyclingireland.ie/",
+      "title": "Cycling Ireland | Official website for Cycling Ireland",
+      "status": "partial_content",
+      "note": "Short membership/news extract. Linked event and results routes opened with expected titles and navigation, but no event or result rows were retrieved."
+    },
+    {
+      "slug": "usa-cycling",
+      "name": "USA Cycling",
+      "url": "https://usacycling.org/",
+      "finalUrl": "https://usacycling.org/",
+      "title": "Cycling News and Clubs | Bike Races | USA Cycling",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "cycling-canada",
+      "name": "Cycling Canada",
+      "url": "https://cyclingcanada.ca/",
+      "finalUrl": "https://cyclingcanada.ca/",
+      "title": "Cycling Canada™ | Canada's National Cycling Organization",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data. Opened event and result indexes and the national-team directory with named entries. Team representation alone does not establish nationality or other profile facts."
+    },
+    {
+      "slug": "auscycling",
+      "name": "AusCycling",
+      "url": "https://auscycling.org.au/",
+      "finalUrl": "https://auscycling.org.au/",
+      "title": "Your home of Cycling and Riding in Australia | AusCycling",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "cycling-new-zealand",
+      "name": "Cycling New Zealand",
+      "url": "https://www.cyclingnewzealand.nz/",
+      "finalUrl": "https://www.cyclingnewzealand.nz/",
+      "title": "Home | Cycling New Zealand",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "cycling-south-africa",
+      "name": "Cycling South Africa",
+      "url": "https://www.cyclingsa.com/",
+      "finalUrl": "https://www.cyclingsa.com/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Retrieval failed (target_http_error); second web-open attempt also failed. This does not establish that the domain is invalid."
+    },
+    {
+      "slug": "french-cycling",
+      "name": "Fédération Française de Cyclisme",
+      "url": "https://www.ffc.fr/",
+      "finalUrl": "https://ffc.fr/",
+      "title": "Site officiel Fédération Française de Cyclisme",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "german-cycling",
+      "name": "German Cycling",
+      "url": "https://germancycling.com/",
+      "finalUrl": "https://germancycling.com/",
+      "title": "German Cycling: Wir sind Radsport",
+      "status": "content_review",
+      "note": "Homepage mixes federation information with Lorem ipsum placeholder text. UEC member page explicitly links this domain and its imprint names German Cycling e.V.; domain retained. The events page yielded no event rows; linked rad-net homepage contains cycling news, not inspected result rows."
+    },
+    {
+      "slug": "spanish-cycling",
+      "name": "Real Federación Española de Ciclismo",
+      "url": "https://www.rfec.com/",
+      "finalUrl": "https://rfec.com/index.php/es/smartweb/seccion/seccion/rfec/home",
+      "title": "REAL FEDERACIÓN ESPAÑOLA DE CICLISMO",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "italian-cycling",
+      "name": "Federazione Ciclistica Italiana",
+      "url": "https://www.federciclismo.it/",
+      "finalUrl": "https://www.federciclismo.it/",
+      "title": "Federciclismo – Federazione Ciclistica Italiana",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "portuguese-cycling",
+      "name": "Federação Portuguesa de Ciclismo",
+      "url": "https://www.fpciclismo.pt/",
+      "finalUrl": "https://www.fpciclismo.pt/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Retrieval failed (timeout); second web-open attempt also failed. This does not establish that the domain is invalid."
+    },
+    {
+      "slug": "dutch-cycling",
+      "name": "Koninklijke Nederlandsche Wielren Unie",
+      "url": "https://www.knwu.nl/",
+      "finalUrl": "https://www.knwu.nl/",
+      "title": "Welkom bij de KNWU - Maakt wielerdromen waar - KNWU",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "belgian-cycling",
+      "name": "Belgian Cycling",
+      "url": "https://www.belgiancycling.be/",
+      "finalUrl": "https://www.belgiancycling.be/",
+      "title": "Homepage - Belgian Cycling",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "swiss-cycling",
+      "name": "Swiss Cycling",
+      "url": "https://www.swiss-cycling.ch/",
+      "finalUrl": "https://www.swiss-cycling.ch/de/",
+      "title": "Home - Swiss Cycling",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data. Homepage results teaser includes a future 18 February 2027 date. Separately opened calendar, results index and athlete list contain named entries, but dates and individual performances require edition-specific checks."
+    },
+    {
+      "slug": "swedish-cycling",
+      "name": "Svenska Cykelförbundet",
+      "url": "https://scf.se/",
+      "finalUrl": "https://scf.se/",
+      "title": "Svenska Cykelförbundet",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "danish-cycling",
+      "name": "Danmarks Cykle Union",
+      "url": "https://cyklingdanmark.dk/",
+      "finalUrl": "https://www.cyklingdanmark.dk/",
+      "title": "Danmarks Cykle Union",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "japan-cycling",
+      "name": "Japan Cycling Federation",
+      "url": "https://jcf.or.jp/",
+      "finalUrl": "https://jcf.or.jp/",
+      "title": "日本自転車競技連盟 WEB SITE",
+      "status": "partial_content",
+      "note": "Navigation only. The linked race calendar displayed month/year controls and dates, but no named competitions were retrieved."
+    },
+    {
+      "slug": "brazilian-cycling",
+      "name": "Confederação Brasileira de Ciclismo",
+      "url": "https://www.cbc.esp.br/",
+      "finalUrl": "https://www.cbc.esp.br/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Retrieval failed (target_unreachable); second web-open attempt also failed. This does not establish that the domain is invalid."
+    },
+    {
+      "slug": "uec",
+      "name": "Union Européenne de Cyclisme",
+      "url": "https://www.uec.ch/",
+      "finalUrl": "https://www.uec.ch/",
+      "title": "UEC- Accueil",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "cycling-ulster",
+      "name": "Cycling Ulster",
+      "url": "https://www.cyclingulster.com/",
+      "finalUrl": "https://www.cyclingulster.com/",
+      "title": "Home - Cycling Ulster",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "austrian-cycling",
+      "name": "Cycling Austria",
+      "url": "https://cyclingaustria.at/",
+      "finalUrl": "https://cyclingaustria.at/",
+      "title": "Cycling Austria",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "finnish-cycling",
+      "name": "Suomen Pyöräily",
+      "url": "https://www.pyoraily.fi/",
+      "finalUrl": "https://pyoraily.fi/",
+      "title": "Suomalaisen pyöräilyurheilun puolestapuhuja - Suomen Pyöräily",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "norwegian-cycling",
+      "name": "Norges Cykleforbund",
+      "url": "https://www.sykling.no/",
+      "finalUrl": "https://sykling.no/",
+      "title": "Hjem - sykling.no",
+      "status": "partial_content",
+      "note": "Only a short federation description retrieved. The linked race-calendar page describes its purpose but yielded no race rows."
+    },
+    {
+      "slug": "polish-cycling",
+      "name": "Polski Związek Kolarski",
+      "url": "https://www.pzkol.pl/",
+      "finalUrl": "https://www.pzkol.pl/",
+      "title": "Polski Związek Kolarski",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "indian-cycling",
+      "name": "Cycling Federation of India",
+      "url": "https://www.cfiindia.in/",
+      "finalUrl": "https://www.cfiindia.in/",
+      "title": "Home  | CFI India",
+      "status": "partial_content",
+      "note": "Only navigation retrieved; actual fixture, result and athlete content not established."
+    },
+    {
+      "slug": "singapore-cycling",
+      "name": "Singapore Cycling Federation",
+      "url": "https://singaporecycling.org.sg/",
+      "finalUrl": "https://singaporecycling.org.sg/",
+      "title": "Singapore Cycling Federation",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "bermuda-cycling",
+      "name": "Bermuda Bicycle Association",
+      "url": "https://www.bermudabicycle.bm/",
+      "finalUrl": "https://www.bermudabicycle.bm/",
+      "title": "Join Bermuda Bicycle Asso for Bermuda Cycling Events and Development | Road & Mountain Biking",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data. Homepage states no events at the moment; this does not prove there are no scheduled competitions."
+    },
+    {
+      "slug": "czech-cycling",
+      "name": "Czech Cycling Federation",
+      "url": "https://www.czechcyclingfederation.com/",
+      "finalUrl": "https://www.czechcyclingfederation.com/",
+      "title": "Vyjádření Českého svazu cyklistiky k údajnému porušení nominačních kritérií na OH Paříž 2024",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "hungarian-cycling",
+      "name": "Hungarian Cycling Federation",
+      "url": "https://bringasport.hu/",
+      "finalUrl": "https://bringasport.hu/",
+      "title": "BringaSport – Magyar Kerékpáros Szövetség",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "romanian-cycling",
+      "name": "Romanian Cycling Federation",
+      "url": "https://federatiadeciclism.ro/",
+      "finalUrl": "https://federatiadeciclism.ro/",
+      "title": "Acasa",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "hellenic-cycling",
+      "name": "Hellenic Cycling Federation",
+      "url": "https://hellenic-cycling.gr/",
+      "finalUrl": "https://hellenic-cycling.gr/",
+      "title": "Ελληνική Ομοσπονδία Ποδηλασίας",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "turkish-cycling",
+      "name": "Türkiye Cycling Federation",
+      "url": "https://bisiklet.org.tr/",
+      "finalUrl": "https://bisiklet.org.tr/",
+      "title": "Türkiye Bisiklet Federasyonu",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "estonian-cycling",
+      "name": "Estonian Cyclists Union",
+      "url": "https://ejl.ee/",
+      "finalUrl": "https://ejl.ee/",
+      "title": "Eesti Jalgratturite Liit",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "latvian-cycling",
+      "name": "Latvian Cycling Federation",
+      "url": "https://lrf.lv/",
+      "finalUrl": "https://lrf.lv/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Retrieval failed (target_http_error); second web-open attempt also failed. This does not establish that the domain is invalid."
+    },
+    {
+      "slug": "lithuanian-cycling",
+      "name": "Lithuanian Cycling Federation",
+      "url": "https://ldsf.lt/",
+      "finalUrl": "https://ldsf.lt/",
+      "title": "LDSF – Lietuvos dviračių sporto federacija",
+      "status": "partial_content",
+      "note": "Only cookie-consent text retrieved from both homepage and linked event page. No event data confirmed."
+    },
+    {
+      "slug": "mexican-cycling",
+      "name": "Unión Ciclista de México",
+      "url": "https://ucmex.org/",
+      "finalUrl": "https://ucmex.org/",
+      "title": "Unión Ciclista de México",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "korean-cycling",
+      "name": "Korea Cycling Federation",
+      "url": "https://cycling.or.kr/",
+      "finalUrl": "https://cycling.or.kr/",
+      "title": "대한사이클연맹",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "ucra",
+      "name": "Unión Ciclista de la República Argentina",
+      "url": "https://ucraargentina.com/",
+      "finalUrl": "https://ucraargentina.com/",
+      "title": "UCRA Argentina",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "argentine-road-track-cycling",
+      "name": "Federación Argentina de Ciclismo de Pista y Ruta",
+      "url": "https://ciclismoarg.com.ar/",
+      "finalUrl": "https://ciclismoarg.com.ar/",
+      "title": "Página oficial de Facpyr, Federación Argentina de Ciclismo de Pista y Ruta con todas las noticias del ciclismo argentino y la selección - Ciclismo Argentino Facpyr",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "chilean-cycling",
+      "name": "Federación Deportiva Nacional de Ciclismo de Chile",
+      "url": "https://fdnciclismochile.cl/",
+      "finalUrl": "https://fdnciclismochile.cl/",
+      "title": "Ciclismo en Chile | Federación Deportiva Nacional de Ciclismo de Chile",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "colombian-cycling",
+      "name": "Federación Colombiana de Ciclismo",
+      "url": "https://www.federacioncolombianadeciclismo.com/",
+      "finalUrl": "https://www.federacioncolombianadeciclismo.com/",
+      "title": "Federación Colombiana de Ciclismo - Federación Colombiana de Ciclismo",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "malaysian-cycling",
+      "name": "Malaysian National Cycling Federation",
+      "url": "https://www.mncf.my/",
+      "finalUrl": "https://www.mncf.my/",
+      "title": "Home",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "thai-cycling",
+      "name": "Thailand Cycling Association",
+      "url": "https://www.thaicycling.or.th/en/",
+      "finalUrl": "https://www.thaicycling.or.th/en/",
+      "title": "Thaicycling Association",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "philcycling",
+      "name": "Integrated Cycling Federation of the Philippines",
+      "url": "https://philcycling.wordpress.com/",
+      "finalUrl": "https://philcycling.wordpress.com/",
+      "title": "PHILCYCLING",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data. The 2011 welcome post coexists with 2026 federation notices. Do not classify the entire site as inactive from the welcome-post date."
+    },
+    {
+      "slug": "hong-kong-cycling",
+      "name": "The Cycling Association of Hong Kong, China Limited",
+      "url": "https://www.cycling.org.hk/",
+      "finalUrl": "https://www.cycling.org.hk/",
+      "title": "",
+      "status": "retrieval_failed",
+      "note": "Retrieval failed (bot_blocked); second web-open attempt also failed. This does not establish that the domain is invalid."
+    },
+    {
+      "slug": "croatian-cycling",
+      "name": "Hrvatski biciklistički savez",
+      "url": "https://www.hbs.hr/",
+      "finalUrl": "https://www.hbs.hr/",
+      "title": "Naslovna — Hrvatski biciklistički savez",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "slovenian-cycling",
+      "name": "Kolesarska zveza Slovenije",
+      "url": "https://kolesarska-zveza.si/",
+      "finalUrl": "https://kolesarska-zveza.si/",
+      "title": "KZS - Kolesarska zveza Slovenije",
+      "status": "partial_content",
+      "note": "Calendar widget returned zero events and placeholder cells; this is not evidence that the federation has no competitions."
+    },
+    {
+      "slug": "slovak-cycling",
+      "name": "Slovenský zväz cyklistiky",
+      "url": "https://www.cyklistikaszc.sk/",
+      "finalUrl": "https://www.cyklistikaszc.sk/",
+      "title": "Úvod - Slovenský zväz cyklistiky",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "serbian-cycling",
+      "name": "Biciklistički savez Srbije",
+      "url": "https://bss.rs/",
+      "finalUrl": "https://bss.rs/",
+      "title": "Biciklistički savez Srbije",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "bulgarian-cycling",
+      "name": "Bulgarian Cycling Federation",
+      "url": "https://bgcf.bg/",
+      "finalUrl": "https://bgcf.bg/",
+      "title": "%%sitename%%",
+      "status": "partial_content",
+      "note": "One federation general-meeting notice retrieved; page title is an unresolved site-name placeholder. Data capabilities not established."
+    },
+    {
+      "slug": "icelandic-cycling",
+      "name": "Hjólreiðasamband Íslands",
+      "url": "https://hri.is/",
+      "finalUrl": "https://hri.is/",
+      "title": "Hjólreiðasamband Íslands",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "luxembourg-cycling",
+      "name": "Fédération du Sport Cycliste Luxembourgeois",
+      "url": "https://www.fscl.lu/",
+      "finalUrl": "https://www.fscl.lu/",
+      "title": "Fédération du Sport Cycliste Luxembourgeois",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "israeli-cycling",
+      "name": "Israel Cycling Federation",
+      "url": "https://israelcycling.org.il/",
+      "finalUrl": "https://israelcycling.org.il/",
+      "title": "",
+      "status": "partial_content",
+      "note": "Only a federation recruitment notice retrieved; no title or fixture/result/profile rows confirmed."
+    },
+    {
+      "slug": "jamaican-cycling",
+      "name": "Jamaica Cycling Federation",
+      "url": "https://jamaicacycling.com/",
+      "finalUrl": "https://jamaicacycling.com/",
+      "title": "Jamaica Cycling Federation",
+      "status": "content_review",
+      "note": "Homepage contains placeholder testimonial text and lists past dates under upcoming events. The linked 2026 track championship page has a 5-6 September title, a single 5 September date field, and CAC Games report body. Dates and midnight calendar values must not be imported as confirmed race schedules."
+    },
+    {
+      "slug": "trinidad-tobago-cycling",
+      "name": "Trinidad and Tobago Cycling Federation",
+      "url": "https://ttcyclingfederation.org/",
+      "finalUrl": "https://ttcyclingfederation.org/",
+      "title": "Home",
+      "status": "historical_content",
+      "note": "Homepage highlights 2015 and 2017 material; inspected track-event index contains 2017-2021 listings and road-event index 2017-2018 listings. Retain as federation/historical reference, not a verified current fixture feed. No alternative current homepage established."
+    },
+    {
+      "slug": "cypriot-cycling",
+      "name": "Cyprus Cycling Federation",
+      "url": "https://www.cypruscycling.org/",
+      "finalUrl": "https://www.cypruscycling.org/",
+      "title": "Αρχική | Κυπριακή Ομοσπονδία Ποδηλασίας",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "uruguayan-cycling",
+      "name": "Federación Ciclista Uruguaya",
+      "url": "https://federacionciclista.com.uy/",
+      "finalUrl": "https://federacionciclista.com.uy/",
+      "title": "Home | FCU",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "costa-rican-cycling",
+      "name": "Federación Costarricense de Ciclismo",
+      "url": "https://fecoci.net/",
+      "finalUrl": "https://fecoci.net/",
+      "title": "Portada - Federación Costarricense de Ciclismo",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "ecuadorian-cycling",
+      "name": "Federación Ecuatoriana de Ciclismo",
+      "url": "https://www.fec.ec/",
+      "finalUrl": "https://www.fec.ec/",
+      "title": "Federación Ecuatoriana de Ciclismo - Inicio",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data. Federation description and calendar/results navigation retrieved, but the news area is still loading; downstream data not assessed."
+    },
+    {
+      "slug": "guatemalan-cycling",
+      "name": "Federación Guatemalteca de Ciclismo",
+      "url": "https://fedeciclismogua.org/",
+      "finalUrl": "https://fedeciclismogua.org/",
+      "title": "Fedeciclismo | Federación de Ciclismo de Guatemala",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data. Homepage mixes 2025 banners with 2026 news; match the year of every event before reuse."
+    },
+    {
+      "slug": "peruvian-cycling",
+      "name": "Federación Nacional Deportiva Peruana de Ciclismo",
+      "url": "https://fedepeci.pe/",
+      "finalUrl": "https://fedepeci.pe/",
+      "title": "Federación Nacional Deportiva Peruana de Ciclismo – FNDPC",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    },
+    {
+      "slug": "chinese-taipei-cycling",
+      "name": "Chinese Taipei Cycling Association",
+      "url": "https://cycling.org.tw/",
+      "finalUrl": "https://cycling.org.tw/",
+      "title": "中華民國自由車協會 Chinese Taipei Cycling Association",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or linked data."
+    }
+  ],
+  "detailChecks": [
+    {
+      "url": "https://scottishcycling.org.uk/events/calendar/",
+      "title": "2026 Calendar – Scottish Cycling",
+      "finalUrl": "https://scottishcycling.org.uk/events/calendar/"
+    },
+    {
+      "url": "https://scottishcycling.org.uk/events/scottish-national-records/",
+      "title": "Scottish National Records – Scottish Cycling",
+      "finalUrl": "https://scottishcycling.org.uk/events/scottish-national-records/"
+    },
+    {
+      "url": "https://scottishcycling.org.uk/events/track-champs/",
+      "title": "Scottish National Track Championships – Scottish Cycling",
+      "finalUrl": "https://scottishcycling.org.uk/events/track-champs/"
+    },
+    {
+      "url": "https://www.beiciocymru.org/events/",
+      "title": "Events - Beicio Cymru",
+      "finalUrl": "https://www.beiciocymru.org/events/"
+    },
+    {
+      "url": "https://www.cyclingireland.ie/events/find-an-event/",
+      "title": "Cycling Events | Cycling Ireland Events Calendar | Sportive",
+      "finalUrl": "https://www.cyclingireland.ie/events/find-an-event/"
+    },
+    {
+      "url": "https://www.cyclingireland.ie/events/results/",
+      "title": "Cycling Ireland | Results",
+      "finalUrl": "https://www.cyclingireland.ie/events/results/"
+    },
+    {
+      "url": "https://cyclingcanada.ca/national-team/",
+      "title": "National Team",
+      "finalUrl": "https://cyclingcanada.ca/national-team/"
+    },
+    {
+      "url": "https://cyclingcanada.ca/events-results/find-events/",
+      "title": "Find Events | Events & Results | Cycling Canada",
+      "finalUrl": "https://cyclingcanada.ca/events-results/find-events/"
+    },
+    {
+      "url": "https://cyclingcanada.ca/events-results/results/",
+      "title": "Results | Events & Results | Cycling Canada",
+      "finalUrl": "https://cyclingcanada.ca/events-results/results/"
+    },
+    {
+      "url": "https://germancycling.com/impressum",
+      "title": "Impressum",
+      "finalUrl": "https://germancycling.com/impressum"
+    },
+    {
+      "url": "https://www.swiss-cycling.ch/de/athletinnen/",
+      "title": "Athlet/-innen - Swiss Cycling",
+      "finalUrl": "https://www.swiss-cycling.ch/de/athletinnen/"
+    },
+    {
+      "url": "https://www.swiss-cycling.ch/de/veranstaltungen/kalender/",
+      "title": "Kalender - Swiss Cycling",
+      "finalUrl": "https://www.swiss-cycling.ch/de/veranstaltungen/kalender/"
+    },
+    {
+      "url": "https://www.swiss-cycling.ch/de/veranstaltungen/resultate/",
+      "title": "Resultate - Swiss Cycling",
+      "finalUrl": "https://www.swiss-cycling.ch/de/veranstaltungen/resultate/"
+    },
+    {
+      "url": "https://jcf.or.jp/event/",
+      "title": "日本自転車競技連盟 WEB SITE",
+      "finalUrl": "https://jcf.or.jp/event/"
+    },
+    {
+      "url": "https://sykling.no/sykkelritt/terminliste/",
+      "title": "Terminliste - sykling.no",
+      "finalUrl": "https://sykling.no/sykkelritt/terminliste/"
+    },
+    {
+      "url": "https://ldsf.lt/renginiai",
+      "title": "LDSF – Lietuvos dviračių sporto federacija",
+      "finalUrl": "https://ldsf.lt/renginiai/"
+    },
+    {
+      "url": "https://ttcyclingfederation.org/track/track-events/",
+      "title": "Track Events | TTCF",
+      "finalUrl": "https://ttcyclingfederation.org/track/track-events/"
+    },
+    {
+      "url": "https://ttcyclingfederation.org/road/road-events/",
+      "title": "Road Events | TTCF",
+      "finalUrl": "https://ttcyclingfederation.org/road/road-events/"
+    },
+    {
+      "url": "https://jamaicacycling.com/event/2026-track-cycling-championships/",
+      "title": "Save the Date: Sept 5-6, 2026 Track Cycling Championships – Jamaica Cycling Federation",
+      "finalUrl": "https://jamaicacycling.com/event/2026-track-cycling-championships/"
+    },
+    {
+      "url": "https://www.uci.org/calendar/all/2jnxYAuvjgttyHi6YQ94EJ",
+      "title": "Calendar",
+      "finalUrl": "https://www.uci.org/calendar/all/2jnxYAuvjgttyHi6YQ94EJ"
+    },
+    {
+      "url": "https://uec.ch/en/federation/german-cycling-federation/19",
+      "title": "GERMAN CYCLING | UEC - Union Européenne de Cyclisme",
+      "finalUrl": "https://uec.ch/en/federation/german-cycling-federation/19"
+    },
+    {
+      "url": "https://ttcyclingfederation.org/about-us/",
+      "title": "About Us | TTCF",
+      "finalUrl": "https://ttcyclingfederation.org/about-us/"
+    },
+    {
+      "url": "https://germancycling.com/events",
+      "title": "Radsport live erleben | Events von German Cycling",
+      "finalUrl": "https://germancycling.com/events"
+    },
+    {
+      "url": "https://www.rad-net.de/ajax.aspx/Home.html",
+      "title": "rad-net.de - Home",
+      "finalUrl": "https://www.rad-net.de/ajax.aspx/Home.html"
+    },
+    {
+      "url": "https://www.beiciocymru.org/event/newport-omnium-race-night-3/",
+      "title": "Newport Omnium Race Night #3 - Beicio Cymru",
+      "finalUrl": "https://www.beiciocymru.org/event/newport-omnium-race-night-3/"
+    }
+  ],
+  "sourcesAdded": [
+    "scottish_cycling_calendar",
+    "scottish_cycling_records",
+    "scottish_cycling_track_championships",
+    "welsh_cycling_events",
+    "welsh_cycling_newport_omnium_3",
+    "cycling_ireland_calendar",
+    "cycling_ireland_results",
+    "cycling_canada_athletes",
+    "cycling_canada_calendar",
+    "cycling_canada_results",
+    "swiss_cycling_athletes",
+    "swiss_cycling_calendar",
+    "swiss_cycling_results",
+    "german_cycling_imprint",
+    "uec_german_cycling_member",
+    "german_cycling_rad_net_news",
+    "trinidad_tobago_cycling_track_archive",
+    "trinidad_tobago_cycling_road_archive",
+    "jamaican_cycling_track_championship_2026"
+  ],
+  "sourcesUpdated": [
+    "organisation_uci",
+    "organisation_british_cycling",
+    "organisation_scottish_cycling",
+    "organisation_welsh_cycling",
+    "organisation_cycling_ireland",
+    "organisation_usa_cycling",
+    "organisation_cycling_canada",
+    "organisation_auscycling",
+    "organisation_cycling_new_zealand",
+    "organisation_cycling_south_africa",
+    "organisation_french_cycling",
+    "organisation_german_cycling",
+    "organisation_spanish_cycling",
+    "organisation_italian_cycling",
+    "organisation_portuguese_cycling",
+    "organisation_dutch_cycling",
+    "organisation_belgian_cycling",
+    "organisation_swiss_cycling",
+    "organisation_swedish_cycling",
+    "organisation_danish_cycling",
+    "organisation_japan_cycling",
+    "organisation_brazilian_cycling",
+    "organisation_uec",
+    "organisation_cycling_ulster",
+    "organisation_austrian_cycling",
+    "organisation_finnish_cycling",
+    "organisation_norwegian_cycling",
+    "organisation_polish_cycling",
+    "organisation_indian_cycling",
+    "organisation_singapore_cycling",
+    "organisation_bermuda_cycling",
+    "organisation_czech_cycling",
+    "organisation_hungarian_cycling",
+    "organisation_romanian_cycling",
+    "organisation_hellenic_cycling",
+    "organisation_turkish_cycling",
+    "organisation_estonian_cycling",
+    "organisation_latvian_cycling",
+    "organisation_lithuanian_cycling",
+    "organisation_mexican_cycling",
+    "organisation_korean_cycling",
+    "organisation_ucra",
+    "organisation_argentine_road_track_cycling",
+    "organisation_chilean_cycling",
+    "organisation_colombian_cycling",
+    "organisation_malaysian_cycling",
+    "organisation_thai_cycling",
+    "organisation_philcycling",
+    "organisation_hong_kong_cycling",
+    "organisation_croatian_cycling",
+    "organisation_slovenian_cycling",
+    "organisation_slovak_cycling",
+    "organisation_serbian_cycling",
+    "organisation_bulgarian_cycling",
+    "organisation_icelandic_cycling",
+    "organisation_luxembourg_cycling",
+    "organisation_israeli_cycling",
+    "organisation_jamaican_cycling",
+    "organisation_trinidad_tobago_cycling",
+    "organisation_cypriot_cycling",
+    "organisation_uruguayan_cycling",
+    "organisation_costa_rican_cycling",
+    "organisation_ecuadorian_cycling",
+    "organisation_guatemalan_cycling",
+    "organisation_peruvian_cycling",
+    "organisation_chinese_taipei_cycling",
+    "uci_calendar_results"
+  ],
+  "registryBefore": 959,
+  "registryAfter": 978,
+  "enabled": 36,
+  "disabled": 942,
+  "limits": "Homepage content checks and registered research destinations do not establish individual fixture, result, nationality or athlete verification. No such data records changed."
+}
