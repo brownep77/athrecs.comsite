@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1164 unique sources as of 25 October 2026. Only 36 are enabled; the other 1128 remain
+The registry contains 1263 unique sources as of 25 October 2026. Only 36 are enabled; the other 1227 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -85,9 +85,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 1164 sources create exactly one source job;
+- all 1263 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 1128 sources are retained as blocked jobs with their reason;
+- the other 1227 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -429,3 +429,19 @@ The registry now contains 931 sources: 36 enabled and 895 disabled.
 ## Romania continuation — 25 October 2026
 
 Ten official event programme sources were inspected for the Romanian 2027 running calendar: Oradea City Trail, URC, La Petrovaselo în Vie, Obciniada Night Run, Crosul Orașului Mioveni 1485, Sports Festival Crosul Supereroilor, Primavera Trail Race, Făgăraș Rocks!, Buila Trail Race and Ultrabug. All ten remain disabled pending collection-rights and selector review. The current inspection verifies event-level fixtures only; linked results and participant profiles have not been verified. Buila and Ultrabug expose their current programmes in public client applications.
+
+
+## Further Romanian start-time research, 25 October 2026
+
+Added thirteen disabled research references covering X-Run Oradea and its official
+entry platform, Gerar / YOLO Events, Șiria Winter Trail, Maratonul Nordului, S24H,
+Scaunul Domnului, both Retezat programmes, Cluj EcoTrail, Timotion, Maratonul
+Argonauților and AMiCUS. Only X-Run supplied a complete dated 2027 distance and
+start programme in this pass. Older programmes, inaccessible pages and date-only
+announcements remain research leads. The X-Run route lengths differ from its
+rounded race names; the detailed organiser distances are preserved.
+
+The existing Brașov 21K source supplied four explicit 09:00 starts for 18 April
+2027; children’s wave times remain unverified. Registration never enables automated
+collection or verifies athlete results. Counts above include intervening registry
+additions from other research.
