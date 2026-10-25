@@ -564,27 +564,43 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     }),
   ),
 
-  record({
-    slug: "athletics-ireland",
-    name: "Athletics Ireland",
-    aliases: ["Athletic Association of Ireland", "AAI"],
-    type: "national",
-    country: "Ireland",
-    jurisdiction: "Island of Ireland, including Northern Ireland",
-    territories: ireland,
-    sports: athletics,
-    website: "https://www.athleticsireland.ie/",
-    summary:
-      "Ireland’s athletics federation, supporting clubs and athletes across all 32 counties.",
-    detail:
-      "Athletics Ireland’s membership and Irish national representation extend across the island. Athletics Northern Ireland also has its own governing and development role in Northern Ireland within the UK Athletics structure. These overlapping remits do not determine an athlete’s team eligibility.",
-    sources: [
-      "https://www.athleticsireland.ie/about/history/",
-      "https://www.athleticsireland.ie/wp-content/uploads/2026/06/Athletic-Association-of-Ireland-Bye-Laws-Amended-April-25-2026.pdf",
-      "https://athleticsni.org/",
-    ],
-    related: ["world-athletics", "athletics-northern-ireland"],
-  }),
+  record(
+    {
+      "slug": "athletics-ireland",
+      "name": "Athletics Ireland",
+      "aliases": [
+        "Athletic Association of Ireland",
+        "AAI"
+      ],
+      "type": "national",
+      "country": "Ireland",
+      "jurisdiction": "Island of Ireland, including Northern Ireland",
+      "territories": [
+        "Ireland",
+        "Northern Ireland",
+        "United Kingdom"
+      ],
+      "sports": [
+        "road-running",
+        "trail-running",
+        "track-and-field"
+      ],
+      "website": "https://www.athleticsireland.ie/",
+      "summary": "Ireland’s athletics federation, supporting clubs and athletes across all 32 counties.",
+      "detail": "Athletics Ireland’s membership and Irish national representation extend across the island. Athletics Northern Ireland also has its own governing and development role in Northern Ireland within the UK Athletics structure. These overlapping remits do not determine an athlete’s team eligibility. The fixtures and results index links dated competitions, timetables and results. Older results articles remain historical references; check the edition shown on the linked event page.",
+      "sources": [
+        "https://www.athleticsireland.ie/about/history/",
+        "https://www.athleticsireland.ie/wp-content/uploads/2026/06/Athletic-Association-of-Ireland-Bye-Laws-Amended-April-25-2026.pdf",
+        "https://athleticsni.org/",
+        "https://www.athleticsireland.ie/competitions-events/fixtures-results/"
+      ],
+      "related": [
+        "world-athletics",
+        "athletics-northern-ireland"
+      ]
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "triathlon-ireland",
   "name": "Triathlon Ireland",
@@ -955,16 +971,39 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   }),
 
   // Further national federations: reviewed against official organisation and member pages.
-  federation(
-    "french-athletics",
-    "Fédération Française d’Athlétisme",
-    "France",
-    athletics,
-    "https://www.athle.fr/",
-    "National athletics federation covering track and field, road running, and mountain or trail running in France.",
-    ["https://www.athle.fr/"],
-    ["world-athletics", "european-athletics"],
-    ["FFA", "French Athletics Federation"],
+  record(
+    {
+      "slug": "french-athletics",
+      "name": "Fédération Française d’Athlétisme",
+      "country": "France",
+      "jurisdiction": "France",
+      "territories": [
+        "France"
+      ],
+      "type": "national",
+      "sports": [
+        "road-running",
+        "trail-running",
+        "track-and-field"
+      ],
+      "website": "https://www.athle.fr/",
+      "summary": "National athletics federation covering track and field, road running, and mountain or trail running in France.",
+      "sources": [
+        "https://www.athle.fr/",
+        "https://www.athle.fr/base/calendrier/",
+        "https://www.athle.fr/base/resultats/"
+      ],
+      "related": [
+        "world-athletics",
+        "european-athletics"
+      ],
+      "aliases": [
+        "FFA",
+        "French Athletics Federation"
+      ],
+      "detail": "Calendar and results pages are organised by season. The seasonal links checked on 25 October 2026 redirect to 2027; check each competition’s own date and edition."
+    },
+    "2026-10-25",
   ),
   federation(
     "french-cycling",
@@ -2491,19 +2530,36 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "TAS"
   ]
 }, "2026-10-23"),
-  federation(
-    "athletics-kenya",
-    "Athletics Kenya",
-    "Kenya",
-    ["road-running", "track-and-field"],
-    "https://www.athleticskenya.or.ke/",
-    "National athletics federation supporting track and field and road running in Kenya.",
-    [
-      "https://www.athleticskenya.or.ke/",
-      "https://www.athleticskenya.or.ke/wp-content/uploads/2014/12/Athletics-Kenya-CONSTITUTION-AND-RULES-final-.pdf",
-    ],
-    ["world-athletics"],
-    ["AK"],
+  record(
+    {
+      "slug": "athletics-kenya",
+      "name": "Athletics Kenya",
+      "country": "Kenya",
+      "jurisdiction": "Kenya",
+      "territories": [
+        "Kenya"
+      ],
+      "type": "national",
+      "sports": [
+        "road-running",
+        "track-and-field"
+      ],
+      "website": "https://www.athleticskenya.or.ke/",
+      "summary": "National athletics federation supporting track and field and road running in Kenya.",
+      "sources": [
+        "https://www.athleticskenya.or.ke/",
+        "https://www.athleticskenya.or.ke/wp-content/uploads/2014/12/Athletics-Kenya-CONSTITUTION-AND-RULES-final-.pdf",
+        "https://www.athleticskenya.or.ke/results-and-calendar/"
+      ],
+      "related": [
+        "world-athletics"
+      ],
+      "aliases": [
+        "AK"
+      ],
+      "detail": "The calendar and results index checked on 25 October 2026 opens on November 2020 entries. It remains a historical research reference; current fixtures need confirmation from a dated competition page."
+    },
+    "2026-10-25",
   ),
   federation(
     "kenya-aquatics",

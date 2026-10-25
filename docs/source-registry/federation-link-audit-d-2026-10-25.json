@@ -1,0 +1,994 @@
+{
+  "checkedAt": "2026-10-25",
+  "scope": "All 75 direct road-running or track-and-field-tagged federation URLs, excluding funding/Olympic bodies and membership-only references; 32 linked detail destinations inspected.",
+  "statusCounts": {
+    "content_retrieved": 55,
+    "content_review": 4,
+    "partial_content": 12,
+    "historical_content": 4
+  },
+  "athletics": [
+    {
+      "slug": "world-athletics",
+      "name": "World Athletics",
+      "url": "https://worldathletics.org/",
+      "finalUrl": "https://worldathletics.org/",
+      "title": "World Athletics Home Page | World Athletics",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "uk-athletics",
+      "name": "UK Athletics",
+      "url": "https://www.uka.org.uk/",
+      "finalUrl": "https://www.uka.org.uk/",
+      "title": "Home",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "england-athletics",
+      "name": "England Athletics",
+      "url": "https://www.englandathletics.org/",
+      "finalUrl": "https://www.englandathletics.org/",
+      "title": "Home - England Athletics",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. Homepage includes a temporary Athletics Hub closure notice; this does not establish that the federation website is unavailable."
+    },
+    {
+      "slug": "scottish-athletics",
+      "name": "scottishathletics",
+      "url": "https://www.scottishathletics.org.uk/",
+      "finalUrl": "https://www.scottishathletics.org.uk/",
+      "title": "Home - Scottish Athletics",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. Linked athlete page is participation/performance information, not a biography directory. Calendar returned navigation; its event-list route redirects to the events-information hub, whose JustGo link yielded a loading shell. No event rows confirmed. Broken social widget does not establish an invalid domain."
+    },
+    {
+      "slug": "welsh-athletics",
+      "name": "Welsh Athletics",
+      "url": "https://www.welshathletics.org/",
+      "finalUrl": "https://www.welshathletics.org/",
+      "title": "Welsh Athletics",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "athletics-northern-ireland",
+      "name": "Athletics Northern Ireland",
+      "url": "https://athleticsni.org/",
+      "finalUrl": "https://athleticsni.org/",
+      "title": "Athletics Northern Ireland | Athletics Northern Ireland",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "athletics-ireland",
+      "name": "Athletics Ireland",
+      "url": "https://www.athleticsireland.ie/",
+      "finalUrl": "https://www.athleticsireland.ie/",
+      "title": "Homepage - Athletics Ireland",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. Current competitions-events/fixtures-results route contains dated entries and results links, mixed with awards and magazine items. Legacy competition-events/results redirects to an old results article with 2014 links; get-involved/events-calendar resolves to News & Blog without fixtures."
+    },
+    {
+      "slug": "usa-track-field",
+      "name": "USA Track & Field",
+      "url": "https://www.usatf.org/",
+      "finalUrl": "https://www.usatf.org/",
+      "title": "USA Track & Field | Home",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "athletics-canada",
+      "name": "Athletics Canada",
+      "url": "https://athletics.ca/",
+      "finalUrl": "https://athletics.ca/",
+      "title": "Home",
+      "status": "content_review",
+      "note": "Homepage and a linked athlete profile put a nationality adjective under a birthplace heading. Hold that field for clarification; do not reinterpret it as verified nationality or birthplace. Rankings table has labelled performance columns and a separate wind-assisted section; individual identities and performances not verified."
+    },
+    {
+      "slug": "australian-athletics",
+      "name": "Australian Athletics",
+      "url": "https://www.athletics.com.au/",
+      "finalUrl": "https://www.athletics.com.au/",
+      "title": "Australian Athletics",
+      "status": "content_review",
+      "note": "Homepage pairs a 2027 championship title with a March 2026 date. Hold that event until edition-specific reconciliation. Calendar and athlete index yielded no named records; results index contains 2025/2026 and historical document links alongside older boilerplate."
+    },
+    {
+      "slug": "athletics-new-zealand",
+      "name": "Athletics New Zealand",
+      "url": "https://athletics.org.nz/",
+      "finalUrl": "https://athletics.org.nz/",
+      "title": "Athletics New Zealand",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "athletics-south-africa",
+      "name": "Athletics South Africa",
+      "url": "https://athleticssa.org.za/",
+      "finalUrl": "https://athleticssa.org.za/",
+      "title": "Athletics South Africa",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "french-athletics",
+      "name": "Fédération Française d’Athlétisme",
+      "url": "https://www.athle.fr/",
+      "finalUrl": "https://www.athle.fr/",
+      "title": "Fédération Française d'Athlétisme",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. Seasonal 2026 calendar/results URLs redirect to 2027 hubs. Direct base calendar/results indexes contain named competitions; biography index also opened. Preserve existing copying restrictions: discovery only, with organiser verification before reuse; no participant data imported."
+    },
+    {
+      "slug": "german-athletics",
+      "name": "Deutscher Leichtathletik-Verband",
+      "url": "https://www.leichtathletik.de/",
+      "finalUrl": "https://www.leichtathletik.de/",
+      "title": "das Leichtathletik-Portal - Start",
+      "status": "partial_content",
+      "note": "Only federation service/navigation content retrieved; no fixture, result or athlete rows confirmed."
+    },
+    {
+      "slug": "spanish-athletics",
+      "name": "Real Federación Española de Atletismo",
+      "url": "https://atletismorfea.es/",
+      "finalUrl": "https://atletismorfea.es/",
+      "title": "Portada Atletismo+",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "italian-athletics",
+      "name": "Federazione Italiana di Atletica Leggera",
+      "url": "https://www.fidal.it/",
+      "finalUrl": "https://www.fidal.it/",
+      "title": "FIDAL - Federazione Italiana Di Atletica Leggera",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. Calendar material includes cancellation markers; do not import an entry without checking its current status."
+    },
+    {
+      "slug": "portuguese-athletics",
+      "name": "Federação Portuguesa de Atletismo",
+      "url": "https://fpatletismo.pt/",
+      "finalUrl": "https://fpatletismo.pt/",
+      "title": "Atletismo - Federação Portuguesa de Atletismo",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "dutch-athletics",
+      "name": "Atletiekunie",
+      "url": "https://www.atletiekunie.nl/",
+      "finalUrl": "https://www.atletiekunie.nl/",
+      "title": "Homepage",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "belgian-athletics",
+      "name": "Belgian Athletics",
+      "url": "https://www.belgian-athletics.be/",
+      "finalUrl": "https://www.belgian-athletics.be/",
+      "title": "Belgian Athletics",
+      "status": "partial_content",
+      "note": "Federation name and contact information retrieved; no competition or athlete data established."
+    },
+    {
+      "slug": "swiss-athletics",
+      "name": "Swiss Athletics",
+      "url": "https://www.swiss-athletics.ch/",
+      "finalUrl": "https://www.swiss-athletics.ch/",
+      "title": "Home",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "swedish-athletics",
+      "name": "Svenska Friidrottsförbundet",
+      "url": "https://www.friidrott.se/",
+      "finalUrl": "https://www.friidrott.se/",
+      "title": "Svensk Friidrott",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "danish-athletics",
+      "name": "Dansk Atletik",
+      "url": "https://dansk-atletik.dk/",
+      "finalUrl": "https://dansk-atletik.dk/",
+      "title": "Nyheder og information - Dansk Atletik",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "japan-athletics",
+      "name": "Japan Association of Athletics Federations",
+      "url": "https://www.jaaf.or.jp/",
+      "finalUrl": "https://www.jaaf.or.jp/",
+      "title": "日本陸上競技連盟公式サイト - Japan Association of Athletics Federations",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "brazilian-athletics",
+      "name": "Confederação Brasileira de Atletismo",
+      "url": "https://cbat.org.br/",
+      "finalUrl": "https://cbat.org.br/",
+      "title": "CBAt - CONFEDERAÇÃO BRASILEIRA DE ATLETISMO",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "european-athletics",
+      "name": "European Athletics",
+      "url": "https://www.european-athletics.com/",
+      "finalUrl": "https://www.european-athletics.com/",
+      "title": "European Athletics Homepage | European Athletics",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "iau",
+      "name": "International Association of Ultrarunners",
+      "url": "https://iau-ultramarathon.org/",
+      "finalUrl": "https://iau-ultramarathon.org/",
+      "title": "Home - IAU - International Association of Ultrarunners",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "world-masters-athletics",
+      "name": "World Masters Athletics",
+      "url": "https://world-masters-athletics.org/",
+      "finalUrl": "https://world-masters-athletics.org/",
+      "title": "HOME - World Masters Athletics",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "austrian-athletics",
+      "name": "Österreichischer Leichtathletik-Verband",
+      "url": "https://www.oelv.at/",
+      "finalUrl": "https://www.oelv.at/de",
+      "title": "ÖLV - Österreichischer Leichtathletik-Verband",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "finnish-athletics",
+      "name": "Suomen Urheiluliitto",
+      "url": "https://www.yleisurheilu.fi/",
+      "finalUrl": "https://www.yleisurheilu.fi/",
+      "title": "Suomen Urheiluliitto – Yleisurheilun lajiliitto",
+      "status": "partial_content",
+      "note": "Homepage extraction returned cookie text. A separately opened calendar/results hub was readable through web fallback and links to 2026/2027 calendars and specialist providers; documents and provider rows not compared."
+    },
+    {
+      "slug": "norwegian-athletics",
+      "name": "Norges Friidrettsforbund",
+      "url": "https://www.friidrett.no/",
+      "finalUrl": "https://www.friidrett.no/",
+      "title": "Friidrett",
+      "status": "partial_content",
+      "note": "Federation conference notice and navigation retrieved; no fixture, result or athlete records confirmed."
+    },
+    {
+      "slug": "polish-athletics",
+      "name": "Polski Związek Lekkiej Atletyki",
+      "url": "https://pzla.pl/",
+      "finalUrl": "https://pzla.pl/",
+      "title": "",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. Initial retrieval failed with HTTP 502; a web fallback retrieved dated October 2026 news and navigation."
+    },
+    {
+      "slug": "indian-athletics",
+      "name": "Athletics Federation of India",
+      "url": "https://indianathletics.in/",
+      "finalUrl": "https://indianathletics.in/",
+      "title": "Athletics Federation of India (AFI) - Official Website of Indian Athletics",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "singapore-athletics",
+      "name": "Singapore Athletics",
+      "url": "https://www.singaporeathletics.org.sg/",
+      "finalUrl": "https://www.singaporeathletics.org.sg/",
+      "title": "Singapore Athletics",
+      "status": "partial_content",
+      "note": "Navigation, mailing-list form and a loading event widget retrieved; no named event records confirmed."
+    },
+    {
+      "slug": "athletics-kenya",
+      "name": "Athletics Kenya",
+      "url": "https://www.athleticskenya.or.ke/",
+      "finalUrl": "https://www.athleticskenya.or.ke/",
+      "title": "New Home",
+      "status": "content_review",
+      "note": "Homepage combines athletics news with placeholder text. Linked calendar/results first page contains November 2020 entries; later pages not assessed. Athlete-profile route yielded navigation only. Retain as a research reference, not a confirmed current fixture feed."
+    },
+    {
+      "slug": "bermuda-athletics",
+      "name": "Bermuda National Athletics Association",
+      "url": "https://www.athleticsbda.com/",
+      "finalUrl": "https://www.athleticsbda.com/",
+      "title": "Bermuda National Athletics Association",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "czech-athletics",
+      "name": "Czech Athletic Federation",
+      "url": "https://www.atletika.cz/",
+      "finalUrl": "https://www.atletika.cz/",
+      "title": "Atletika.cz",
+      "status": "partial_content",
+      "note": "One athletics news teaser retrieved; deeper fixture, result and athlete capabilities not established."
+    },
+    {
+      "slug": "hungarian-athletics",
+      "name": "Hungarian Athletics Association",
+      "url": "https://www.atletika.hu/",
+      "finalUrl": "https://www.atletika.hu/kezdolap",
+      "title": "Atletika.hu | A Magyar Atlétikai Szövetség hivatalos weboldala",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "romanian-athletics",
+      "name": "Romanian Athletics Federation",
+      "url": "https://www.fra.ro/",
+      "finalUrl": "https://www.fra.ro/",
+      "title": "ACASĂ",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. Linked 2026 calendar and results index contain named events. One results-index date reads 14-15.02.3036; hold that date until checked against the original event document."
+    },
+    {
+      "slug": "hellenic-athletics",
+      "name": "Hellenic Athletics Federation",
+      "url": "https://www.segas.gr/",
+      "finalUrl": "https://www.segas.gr/",
+      "title": "ΣΕΓΑΣ - Το Επίσημο Site της Ελληνικής Ομοσπονδίας Στίβου",
+      "status": "partial_content",
+      "note": "Homepage extraction returned cookie text. The linked athlete directory was readable through web fallback with names and profile links; individual biographies not reviewed."
+    },
+    {
+      "slug": "turkish-athletics",
+      "name": "Türkiye Athletics Federation",
+      "url": "https://taf.org.tr/",
+      "finalUrl": "https://taf.org.tr/",
+      "title": "Türkiye Atletizm Federasyonu",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "estonian-athletics",
+      "name": "Estonian Athletics Association",
+      "url": "https://www.ekjl.ee/",
+      "finalUrl": "https://www.ekjl.ee/",
+      "title": "Eesti Kergejõustikuliit",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. Calendar includes youth/category events and times; these do not establish every race or wave start."
+    },
+    {
+      "slug": "latvian-athletics",
+      "name": "Latvian Athletics Association",
+      "url": "https://athletics.lv/",
+      "finalUrl": "https://athletics.lv/lv",
+      "title": "Latvijas Vieglatlētikas savienība",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "lithuanian-athletics",
+      "name": "Lithuanian Athletics Federation",
+      "url": "https://lengvoji.lt/en/",
+      "finalUrl": "https://lengvoji.lt/en/",
+      "title": "LLAF – Home",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "korean-athletics",
+      "name": "Korea Association of Athletics Federations",
+      "url": "https://www.kaaf.or.kr/",
+      "finalUrl": "https://www.kaaf.or.kr/ver3/main/main.asp",
+      "title": "대한육상연맹",
+      "status": "partial_content",
+      "note": "Federation navigation, registration links and browser-support notices retrieved; no competition/result/profile rows confirmed."
+    },
+    {
+      "slug": "argentine-athletics",
+      "name": "Confederación Argentina de Atletismo",
+      "url": "https://cada-atletismo.com/",
+      "finalUrl": "https://cada-atletismo.com/",
+      "title": "CADA ATLETISMO - Sitio Oficial.",
+      "status": "partial_content",
+      "note": "Short truncated news excerpts retrieved; fixture, result and profile capabilities not established."
+    },
+    {
+      "slug": "chilean-athletics",
+      "name": "Federación Atlética de Chile",
+      "url": "https://fedachi.cl/",
+      "finalUrl": "https://fedachi.cl/",
+      "title": "Fedachi - Federación Atlética de Chile",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "malaysian-athletics",
+      "name": "Malaysia Athletics Federation",
+      "url": "https://mafmalaysia.com/",
+      "finalUrl": "https://mafmalaysia.com/",
+      "title": "KESATUAN OLAHRAGA MALAYSIA - MALAYSIA ATHLETICS FEDERATION",
+      "status": "historical_content",
+      "note": "Retrieved homepage news is dated April-May 2025; current fixture/result coverage was not established. This does not prove that the organisation or site is inactive."
+    },
+    {
+      "slug": "thai-athletics",
+      "name": "Athletic Association of Thailand",
+      "url": "https://aat.or.th/",
+      "finalUrl": "https://aat.or.th/",
+      "title": "สมาคมกีฬากรีฑาแห่งประเทศไทย",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "philippine-athletics",
+      "name": "Philippine Athletics Track and Field Association",
+      "url": "https://www.philippineathletics.org/",
+      "finalUrl": "https://www.philippineathletics.org/",
+      "title": "Philippine Athletics, Inc. | Official Website",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "indonesian-athletics",
+      "name": "Persatuan Atletik Seluruh Indonesia",
+      "url": "https://www.pbpasi.org/",
+      "finalUrl": "https://www.pbpasi.org/",
+      "title": "PBPASI – Athletics Federation of Indonesia",
+      "status": "content_review",
+      "note": "Federation content is accompanied by a donation-widget test-mode notice. Athlete page is explicitly a 2024 training roster; linked 2025 championship page has image/download results references. Neither current profile facts nor individual performances are verified."
+    },
+    {
+      "slug": "hong-kong-athletics",
+      "name": "Hong Kong, China Association of Athletics Affiliates",
+      "url": "https://www.hkaaa.com/",
+      "finalUrl": "https://hkaaa.com/tc/",
+      "title": "",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "croatian-athletics",
+      "name": "Hrvatski atletski savez",
+      "url": "https://www.has.hr/",
+      "finalUrl": "https://www.has.hr/",
+      "title": "Naslovna - Hrvatski atletski savez",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "slovenian-athletics",
+      "name": "Atletska zveza Slovenije",
+      "url": "https://slovenska-atletika.si/",
+      "finalUrl": "https://slovenska-atletika.si/",
+      "title": "ATLETSKA ZVEZA SLOVENIJE – ATLETSKA ZVEZA SLOVENIJE",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "slovak-athletics",
+      "name": "Slovenský atletický zväz",
+      "url": "https://www.atletika.sk/",
+      "finalUrl": "https://www.atletika.sk/",
+      "title": "Atletika.sk",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "serbian-athletics",
+      "name": "Srpski atletski savez",
+      "url": "https://sas.rs/",
+      "finalUrl": "https://sas.rs/",
+      "title": "Srpski Atletski Savez - Srpski Atletski Savez",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "bulgarian-athletics",
+      "name": "Bulgarian Athletics Federation",
+      "url": "https://bfla.org/",
+      "finalUrl": "https://bfla.org/",
+      "title": "Българска Федерация по Лека Атлетика – БЪЛГАРСКА ФЕДЕРАЦИЯ ПО ЛЕКА АТЛЕТИКА",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "icelandic-athletics",
+      "name": "Frjálsíþróttasamband Íslands",
+      "url": "https://fri.is/",
+      "finalUrl": "https://fri.is/",
+      "title": "Forsíða - Frjálsíþróttasamband Íslands",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "luxembourg-athletics",
+      "name": "Fédération Luxembourgeoise d’Athlétisme",
+      "url": "https://www.fla.lu/",
+      "finalUrl": "https://www.fla.lu/",
+      "title": "Fédération Luxembourgeoise d'Athlétisme",
+      "status": "partial_content",
+      "note": "Homepage yielded one brief press notice. Linked calendar contains named events, weekdays, times and places but complete dates were absent from the extraction; open event details before use."
+    },
+    {
+      "slug": "israeli-athletics",
+      "name": "Israel Athletics Association",
+      "url": "https://www.iaa.co.il/",
+      "finalUrl": "https://www.iaa.co.il/",
+      "title": "איגוד האתלטיקה בישראל – איגוד האתלטיקה בישראל",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "jamaican-athletics",
+      "name": "Jamaica Athletics Administrative Association",
+      "url": "https://athleticsja.org/",
+      "finalUrl": "https://athleticsja.org/",
+      "title": "AthleticsJA.ORG | Official Home of Athletics in Jamaica",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. Downloads distinguish initial and audited NEW VER results; retain document version and compare the final relevant edition."
+    },
+    {
+      "slug": "barbadian-athletics",
+      "name": "Athletics Association of Barbados Inc.",
+      "url": "https://aab.sports.bb/",
+      "finalUrl": "https://aab.sports.bb/",
+      "title": "Athletics Association of Barbados Inc. – The Home of Athletics in Barbados",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "trinidad-tobago-athletics",
+      "name": "National Association of Athletics Administrations of Trinidad and Tobago",
+      "url": "https://naaatt.org/",
+      "finalUrl": "https://naaatt.org/",
+      "title": "",
+      "status": "partial_content",
+      "note": "Homepage yielded navigation. Linked events/results table contains 2026 and older editions, non-race events, blanks and tentative details. Athlete directory has historical updates from 2008-2022; profile facts need a fresh check."
+    },
+    {
+      "slug": "cypriot-athletics",
+      "name": "Cyprus Amateur Athletic Association",
+      "url": "https://koeas.org.cy/",
+      "finalUrl": "https://koeas.org.cy/",
+      "title": "ΚΟΕΑΣ | Κυπριακή Ομοσπονδία Ερασιτεχνικού Αθλητισμού Στίβου",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "maltese-athletics",
+      "name": "Athletics Malta",
+      "url": "https://athleticsmalta.com/",
+      "finalUrl": "https://athleticsmalta.com/",
+      "title": "Home - Athletics Malta",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "mauritian-athletics",
+      "name": "Mauritius Athletics Association",
+      "url": "https://mauritiusathletics.org/",
+      "finalUrl": "https://mauritiusathletics.org/",
+      "title": "MAA – Mauritius Athletics Association",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "uruguayan-athletics",
+      "name": "Confederación Atlética del Uruguay",
+      "url": "https://confederacionatletica.org/",
+      "finalUrl": "https://confederacionatletica.org/",
+      "title": "CAU - Confederación Atlética del Uruguay",
+      "status": "historical_content",
+      "note": "Homepage highlights 2024/2025 news, but the separately opened 2026 results index contains named document links. The 2026 calendar page yielded navigation only. Do not classify the entire site as inactive."
+    },
+    {
+      "slug": "bolivian-athletics",
+      "name": "Federación Atlética de Bolivia",
+      "url": "https://www.atlebolivia.net/",
+      "finalUrl": "https://www.atlebolivia.net/",
+      "title": "Federación Atlética de Bolivia",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data. A no-events-registered message does not establish that there are no competitions."
+    },
+    {
+      "slug": "costa-rican-athletics",
+      "name": "Federación Costarricense de Atletismo",
+      "url": "https://www.fecoa.org/",
+      "finalUrl": "https://www.fecoa.org/Main.aspx",
+      "title": "FECOA (Federación Costarricense de Atletismo)",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "ecuadorian-athletics",
+      "name": "Federación Ecuatoriana de Atletismo",
+      "url": "https://www.featle.org.ec/",
+      "finalUrl": "https://www.featle.org.ec/",
+      "title": "Federación de Atletismo",
+      "status": "historical_content",
+      "note": "Homepage exposes 2022/2024 news and month/day event teasers. Linked event page names competitions and locations but yielded no dates/years; current fixture coverage unconfirmed."
+    },
+    {
+      "slug": "guatemalan-athletics",
+      "name": "Federación Deportiva Nacional de Atletismo de Guatemala",
+      "url": "https://fdna.gt/",
+      "finalUrl": "https://fdna.gt/",
+      "title": "",
+      "status": "partial_content",
+      "note": "Initial retrieval failed with proxy error; web fallback returned a JavaScript-required shell. This does not establish that the domain is wrong; data capabilities remain unconfirmed."
+    },
+    {
+      "slug": "paraguayan-athletics",
+      "name": "Federación Paraguaya de Atletismo",
+      "url": "https://www.fpa.org.py/",
+      "finalUrl": "https://www.fpa.org.py/",
+      "title": "FEDERACION PARAGUAYA DE ATLETISMO",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "peruvian-athletics",
+      "name": "Federación Deportiva Peruana de Atletismo",
+      "url": "https://fedepeatle.org/",
+      "finalUrl": "https://fedepeatle.org/",
+      "title": "Federacion Deportiva Peruana de Atletismo",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "nepalese-athletics",
+      "name": "Nepal Athletics Association",
+      "url": "https://nepalathletics.org.np",
+      "finalUrl": "https://nepalathletics.org.np",
+      "title": "Nepal Athletics Association (NAA) | Home",
+      "status": "historical_content",
+      "note": "Retrieved homepage exposes 2025 articles; current fixture/result/profile coverage not established. No inference of organisational inactivity."
+    },
+    {
+      "slug": "sri-lankan-athletics",
+      "name": "Sri Lanka Athletics",
+      "url": "https://sriathletics.lk",
+      "finalUrl": "https://sriathletics.lk",
+      "title": "Sri Lanka Athletics",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    },
+    {
+      "slug": "macau-athletics",
+      "name": "Associação de Atletismo de Macau",
+      "url": "https://www.aamc.org.mo",
+      "finalUrl": "https://www.aamc.org.mo",
+      "title": "澳門田徑總會官網",
+      "status": "content_retrieved",
+      "note": "Opened organisation-related content corresponds to the listed body. This is a homepage-content check, not independent verification of all organisational facts or downstream data."
+    }
+  ],
+  "detailChecks": [
+    {
+      "url": "https://athletics.ca/events/",
+      "finalUrl": "https://athletics.ca/events/",
+      "title": "Events Calendar",
+      "note": "Event calendar exposes filters and category/discipline metadata with detail links; retrieved text did not establish complete named-event/date rows."
+    },
+    {
+      "url": "https://www.athletics.com.au/event-calendar/",
+      "finalUrl": "https://www.athletics.com.au/event-calendar/",
+      "title": "Event Calendar | Australian Athletics",
+      "note": "Calendar route returned footer/supporter text without event rows."
+    },
+    {
+      "url": "https://www.athletics.com.au/results/",
+      "finalUrl": "https://www.athletics.com.au/results/",
+      "title": "Results | Australian Athletics",
+      "note": "Results index links 2026, 2025 and historical discipline documents. Some 2021-2024 boilerplate remains; confirm each linked edition. PDF/result rows not compared."
+    },
+    {
+      "url": "https://www.athletics.com.au/athletes/",
+      "finalUrl": "https://www.athletics.com.au/athletes/",
+      "title": "Athletes | Australian Athletics",
+      "note": "Athlete filters and event categories retrieved, but no named biography cards. Profile data coverage unconfirmed."
+    },
+    {
+      "url": "https://www.scottishathletics.org.uk/events-calendar/",
+      "finalUrl": "https://www.scottishathletics.org.uk/events-calendar/",
+      "title": "Events Calendar - Scottish Athletics",
+      "note": "Calendar route returned navigation and news without event rows in primary and fallback checks. View Event List redirects to the events-information hub; linked JustGo search also yielded a loading shell."
+    },
+    {
+      "url": "https://www.scottishathletics.org.uk/athletes/",
+      "finalUrl": "https://www.scottishathletics.org.uk/athletes/",
+      "title": "Athletes - Scottish Athletics",
+      "note": "Participation, club, para and performance information hub. This is not an athlete biography directory; no nationality or individual performance inferred."
+    },
+    {
+      "url": "https://www.athleticsireland.ie/competitions-events/fixtures-results/",
+      "finalUrl": "https://www.athleticsireland.ie/competitions-events/fixtures-results/",
+      "title": "Fixtures Archive - Athletics Ireland",
+      "note": "Dated 2026 event listings with places, timetable and result links. Index also contains awards and magazine preorders; filter non-race items and inspect edition-specific programmes before importing starts."
+    },
+    {
+      "url": "https://www.fra.ro/competitii/calendar",
+      "finalUrl": "https://www.fra.ro/competitii/calendar",
+      "title": "Calendar",
+      "note": "2026 national competition table with names, dates and towns. Confirm category, edition and event timetable; publication timestamps are not race starts."
+    },
+    {
+      "url": "https://www.fra.ro/rezultate/rezultate-2026",
+      "finalUrl": "https://www.fra.ro/rezultate/rezultate-2026",
+      "title": "Rezultate 2026",
+      "note": "Named 2026 results links retrieved; one date reads 14-15.02.3036. Hold that date until reconciled with the original event document. Individual result/PDF rows not compared."
+    },
+    {
+      "url": "https://www.athle.fr/base/biographies",
+      "finalUrl": "https://www.athle.fr/base/biographies",
+      "title": "les Biographies | Fédération Française d'Athlétisme",
+      "note": "Biography index exposes names and labelled biographical fields. Discovery only under existing source-copying restrictions; no participant records retained or imported by this audit."
+    },
+    {
+      "url": "https://www.athle.fr/contenu/tout-le-calendrier-2026/5255",
+      "finalUrl": "https://www.athle.fr/contenu/tout-le-calendrier-2027/5255",
+      "title": "Tout le calendrier 2027 | Fédération Française d'Athlétisme",
+      "note": "Opened 2026 route redirected to 2027 hub with season filters including 2026-2027 and 2027-2028. Season label is not an event date. Discovery only; verify each race with its organiser."
+    },
+    {
+      "url": "https://www.athle.fr/contenu/tous-les-resultats-2026/5257",
+      "finalUrl": "https://www.athle.fr/contenu/tous-les-resultats-2027/5257",
+      "title": "Tous les résultats 2027 | Fédération Française d'Athlétisme",
+      "note": "Opened 2026 route redirected to 2027 results hub. Filter/navigation hub does not establish completed 2027 results. Discovery only; individual result rows not verified."
+    },
+    {
+      "url": "https://www.athleticskenya.or.ke/results-and-calendar/",
+      "finalUrl": "https://www.athleticskenya.or.ke/results-and-calendar/",
+      "title": "Calendar and Results",
+      "note": "First page contains November 2020 entries and pagination; later pages not reviewed. Historical first-page evidence only; current fixture coverage unconfirmed."
+    },
+    {
+      "url": "https://www.athleticskenya.or.ke/athletes-profile/",
+      "finalUrl": "https://www.athleticskenya.or.ke/athletes-profile/",
+      "title": "Athletes Profile",
+      "note": "Expected athlete-profile route returned navigation without biographies. Manual follow-up required; profile data coverage unconfirmed."
+    },
+    {
+      "url": "https://www.pbpasi.org/athletespasi/",
+      "finalUrl": "https://www.pbpasi.org/athletespasi/",
+      "title": "Athletes PASI – PBPASI",
+      "note": "Explicitly 2024 national-training roster with names and events; some names abbreviated. Historical roster only, not current profile facts or nationality evidence. Donation widget is in test mode."
+    },
+    {
+      "url": "https://www.pbpasi.org/gallery-final-results-lps-kejurnas-atletik-solo-2025/",
+      "finalUrl": "https://www.pbpasi.org/gallery-final-results-lps-kejurnas-atletik-solo-2025/",
+      "title": "GALLERY & FINAL RESULTS LPS KEJURNAS ATLETIK & INDONESIA U18 OPEN CHAMPIONSHIPS SOLO 2025 – PBPASI",
+      "note": "2025 championship page exposes images and download links for results. No result-table rows compared; no individual performance verified."
+    },
+    {
+      "url": "https://www.featle.org.ec/events",
+      "finalUrl": "https://www.featle.org.ec/events",
+      "title": "Federación de Atletismo",
+      "note": "Named youth and Grand Prix events with places, but no dates or years retrieved. Hold current fixture coverage until edition detail is confirmed."
+    },
+    {
+      "url": "https://confederacionatletica.org/resultados-2026/",
+      "finalUrl": "https://confederacionatletica.org/resultados-2026/",
+      "title": "Resultados 2026 - Confederación Atlética del Uruguay",
+      "note": "Named 2026 championship and meeting document links retrieved despite older homepage news. Linked PDF result rows have not been compared."
+    },
+    {
+      "url": "https://confederacionatletica.org/calendario-2026-atletismo-uruguay/",
+      "finalUrl": "https://confederacionatletica.org/calendario-2026-atletismo-uruguay/",
+      "title": "Calendario CAU 2026 - Confederación Atlética del Uruguay",
+      "note": "Expected 2026 calendar title and navigation retrieved, but no calendar rows. Fixture coverage remains unconfirmed."
+    },
+    {
+      "url": "https://www.yleisurheilu.fi/kannusta-ja-seuraa/kilpailukalenterit-ja-tulokset/",
+      "finalUrl": "https://www.yleisurheilu.fi/kannusta-ja-seuraa/kilpailukalenterit-ja-tulokset/",
+      "title": "Kilpailukalenterit ja tulokset - Suomen Urheiluliitto ry",
+      "note": "Primary extraction returned cookie text; web fallback retrieved 2026/2027 calendar PDF links and named calendar/statistics providers. Linked documents and providers not independently opened; use as a discovery hub."
+    },
+    {
+      "url": "https://www.segas.gr/athletes/",
+      "finalUrl": "https://www.segas.gr/athletes/",
+      "title": "Αθλητές - ΣΕΓΑΣ",
+      "note": "Primary extraction returned cookie text; web fallback retrieved a filtered index with athlete names and profile links. Individual biography facts and nationality require separate review."
+    },
+    {
+      "url": "https://naaatt.org/competition/events-results/",
+      "finalUrl": "https://naaatt.org/competition/events-results/",
+      "title": "Events & Results",
+      "note": "2026 and historical event/result table includes schools, development and non-race events, blank cells and tentative venues. Follow edition detail and column headings before importing; session dates are not every race start."
+    },
+    {
+      "url": "https://naaatt.org/gallery/athletes-profiles/",
+      "finalUrl": "https://naaatt.org/gallery/athletes-profiles/",
+      "title": "Athletes Profiles",
+      "note": "Named athlete directory with disciplines and profile update dates from 2008-2022. Historical reference; current clubs, nationality and biography facts need fresh source confirmation."
+    },
+    {
+      "url": "https://www.fla.lu/calendrier-80552v4",
+      "finalUrl": "https://www.fla.lu/calendrier-80552v4",
+      "title": "Tous les événements  - Tous les événements  - Fédération Luxembourgeoise d'Athlétisme ",
+      "note": "Named events, weekdays, times and places retrieved, but complete dates were absent from extraction. Open individual event detail before treating an item as a verified fixture."
+    },
+    {
+      "url": "https://athletics.ca/rankings-records/rankings/",
+      "finalUrl": "https://athletics.ca/rankings-records/rankings/",
+      "title": "Rankings",
+      "note": "Labelled ranking tables contain marks, wind, athletes, clubs, year of birth, placing, location and date; wind-assisted marks are separate. Event/filter scope and individual source rows must be matched before verification. Year of birth is not an exact birth date."
+    },
+    {
+      "url": "https://www.athle.fr/base/calendrier/",
+      "finalUrl": "https://www.athle.fr/base/calendrier/",
+      "title": "le Calendrier des Compétitions | Fédération Française d'Athlétisme",
+      "note": "Named October 2026 competition calendar entries retrieved. Preserve explicit source-copying restriction; discovery only before organiser verification."
+    },
+    {
+      "url": "https://www.athle.fr/base/resultats/",
+      "finalUrl": "https://www.athle.fr/base/resultats/",
+      "title": "les Résultats des Compétitions | Fédération Française d'Athlétisme",
+      "note": "Named October 2026 competition-result index retrieved. Discovery only under existing source-copying restrictions; no individual result rows retained or verified."
+    },
+    {
+      "url": "https://www.athleticsireland.ie/competition-events/results/",
+      "finalUrl": "https://www.athleticsireland.ie/results/",
+      "title": "Results - Athletics Ireland",
+      "note": "Legacy competition-events/results route redirects here. Old article originally dated 4 May 2006 includes 2014 results and site-migration warning. Historical reference only, not a current results index."
+    },
+    {
+      "url": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "finalUrl": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "title": "News & Blog - Athletics Ireland",
+      "note": "Resolves to News & Blog with newsletter/footer content, not a usable fixture calendar."
+    },
+    {
+      "url": "https://www.scottishathletics.org.uk/calendar/events",
+      "finalUrl": "https://www.scottishathletics.org.uk/events/",
+      "title": "Events - Scottish Athletics",
+      "note": "Redirects to the events-information hub, which links JustGo. This route itself is not a populated event list."
+    },
+    {
+      "url": "https://scottishathletics.justgo.com/Workbench/i/r/public/EventsAndBookingsPublic/browse/?latlng=55.9501963|-3.1875632&date=all&distance=all&category=all&provider=all&price=all&sortBy=date&orderBy=asc&",
+      "finalUrl": "https://scottishathletics.justgo.com/Workbench/i/r/public/EventsAndBookingsPublic/browse/?latlng=55.9501963%7c-3.1875632&date=all&distance=all&category=all&provider=all&price=all&sortBy=date&orderBy=asc&",
+      "title": null,
+      "note": "Federation events-information hub explicitly links this public JustGo search. Loading UI shell retrieved without named event records; event coverage unconfirmed."
+    }
+  ],
+  "privateProfileChecks": 1,
+  "sourcesAdded": [
+    "athletics_canada_events",
+    "athletics_canada_rankings",
+    "australian_athletics_results",
+    "australian_athletics_athletes",
+    "scottish_athletics_calendar",
+    "scottish_athletics_athlete_information",
+    "athletics_ireland_fixtures_results",
+    "athletics_ireland_legacy_results",
+    "romanian_athletics_calendar",
+    "romanian_athletics_results_2026",
+    "french_athletics_biographies",
+    "french_athletics_calendar_season",
+    "french_athletics_results_season",
+    "french_athletics_results_index",
+    "athletics_kenya_athlete_profiles",
+    "indonesian_athletics_roster_2024",
+    "indonesian_athletics_results_2025",
+    "ecuadorian_athletics_events",
+    "uruguayan_athletics_results_2026",
+    "uruguayan_athletics_calendar_2026",
+    "finnish_athletics_calendars_results",
+    "greek_athletics_athletes",
+    "trinidad_tobago_athletics_events_results",
+    "trinidad_tobago_athletics_profiles",
+    "luxembourg_athletics_calendar",
+    "scottish_athletics_justgo_events"
+  ],
+  "sourcesUpdated": [
+    "athletics_ireland",
+    "scottish_athletics",
+    "welsh_athletics",
+    "ffa",
+    "athletics_australia",
+    "athletics_nz",
+    "jaaf",
+    "athletics_kenya",
+    "athletics_canada",
+    "cbat",
+    "swiss_athletics",
+    "swedish_athletics",
+    "singapore_athletics",
+    "fedachi_chile",
+    "ukathletics",
+    "athletics_sa",
+    "oelv_austria",
+    "fidal",
+    "dlv_germany",
+    "atletiekunie_nl",
+    "segas_greece",
+    "has_croatia",
+    "saaf_slovakia",
+    "cas_czechia",
+    "fra_romania",
+    "bfla_bulgaria",
+    "nif_norway",
+    "sul_finland",
+    "fri_iceland",
+    "usatf",
+    "kaa_korea",
+    "aat_thailand",
+    "aai_india",
+    "world_masters_athletics",
+    "organisation_world_athletics",
+    "organisation_england_athletics",
+    "organisation_athletics_northern_ireland",
+    "organisation_australian_athletics",
+    "organisation_french_athletics",
+    "organisation_spanish_athletics",
+    "organisation_portuguese_athletics",
+    "organisation_belgian_athletics",
+    "organisation_danish_athletics",
+    "organisation_european_athletics",
+    "organisation_iau",
+    "organisation_polish_athletics",
+    "organisation_athletics_kenya",
+    "organisation_bermuda_athletics",
+    "organisation_hungarian_athletics",
+    "organisation_turkish_athletics",
+    "organisation_estonian_athletics",
+    "organisation_latvian_athletics",
+    "organisation_lithuanian_athletics",
+    "organisation_argentine_athletics",
+    "organisation_malaysian_athletics",
+    "organisation_philippine_athletics",
+    "organisation_indonesian_athletics",
+    "organisation_hong_kong_athletics",
+    "organisation_slovenian_athletics",
+    "organisation_serbian_athletics",
+    "organisation_luxembourg_athletics",
+    "organisation_israeli_athletics",
+    "organisation_jamaican_athletics",
+    "organisation_barbadian_athletics",
+    "organisation_trinidad_tobago_athletics",
+    "organisation_cypriot_athletics",
+    "organisation_maltese_athletics",
+    "organisation_mauritian_athletics",
+    "organisation_uruguayan_athletics",
+    "organisation_bolivian_athletics",
+    "organisation_costa_rican_athletics",
+    "organisation_ecuadorian_athletics",
+    "organisation_guatemalan_athletics",
+    "organisation_paraguayan_athletics",
+    "organisation_peruvian_athletics",
+    "organisation_nepalese_athletics",
+    "organisation_sri_lankan_athletics",
+    "organisation_macau_athletics"
+  ],
+  "registryBefore": 990,
+  "registryAfter": 1016,
+  "enabled": 36,
+  "disabled": 980,
+  "directoryRecordsUpdated": [
+    "athletics-ireland",
+    "french-athletics",
+    "athletics-kenya"
+  ],
+  "limits": "Homepage screening and source registration do not verify individual fixtures, starts, results, athlete identities or nationalities. No such records changed. Existing collection restrictions retained; French sources remain discovery only."
+}
