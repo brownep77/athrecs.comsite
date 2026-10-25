@@ -1,7 +1,8 @@
 import { compactFixtureLocation } from "./fixture-presentation.ts";
 import { sanitizeDistances } from "./filters.ts";
-import { SITE_NAME } from "./seo.ts";
+import { publicOrganiserName } from "./seo.ts";
 import { searchSnippet } from "./search-text.ts";
+import { raceGuideFor } from "../../data/runrecs-race-guides.ts";
 import { racePageReviewFor } from "../../data/race-page-reviews.ts";
 
 type Edition = { event_date: string; distance_code: string; status: string; result_count?: number };
@@ -33,12 +34,20 @@ const validDate = (value: string) =>
   new Date(value).toISOString().slice(0, 10) === value;
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat("en-GB", {
+    weekday: "long",
     day: "numeric",
     month: "long",
     year: "numeric",
     timeZone: "UTC",
   }).format(new Date(`${value}T00:00:00Z`));
 const distanceName = (value: string) => (value === "Half" ? "half marathon" : value);
+
+/** Share the same next edition across the visible header, title and event metadata. */
+export function nextRaceEdition<T extends Edition>(upcoming: T[]): T | undefined {
+  return upcoming
+    .filter((row) => row.status !== "Cancelled" && validDate(row.event_date))
+    .sort((a, b) => a.event_date.localeCompare(b.event_date))[0];
+}
 
 /** A readable race biography from existing catalogue facts, without invented history. */
 export function raceSearchContent(data: Race) {
@@ -60,9 +69,7 @@ export function raceSearchContent(data: Race) {
         .map(distanceName),
     ),
   ];
-  const next = upcoming
-    .filter((row) => row.status !== "Cancelled" && validDate(row.event_date))
-    .sort((a, b) => a.event_date.localeCompare(b.event_date))[0];
+  const next = nextRaceEdition(upcoming);
   const review = racePageReviewFor(event.slug, next?.event_date);
   const years = [
     ...new Set(
@@ -78,7 +85,9 @@ export function raceSearchContent(data: Race) {
       `Recorded disciplines include ${distances.slice(0, 8).join(", ")}${distances.length > 8 ? " and other events" : ""}.`,
     );
   if (surface) facts.push(`The listed surface is ${surface.toLowerCase()}.`);
-  if (known(event.organiser)) facts.push(`The listed organiser is ${known(event.organiser)}.`);
+  const guide = event.slug ? raceGuideFor({ slug: event.slug }, next?.event_date) : undefined;
+  const organiser = publicOrganiserName(guide?.organiser?.name ?? event.organiser);
+  if (organiser) facts.push(`The listed organiser is ${organiser}.`);
   if (next)
     facts.push(
       `The next listed date is ${formatDate(next.event_date)}. Check the organiser's information for entry and race-day arrangements.`,
@@ -93,17 +102,22 @@ export function raceSearchContent(data: Race) {
     : years.length
       ? `Recorded editions: ${years[0]}${years.length > 1 ? `–${years.at(-1)}` : ""}.`
       : "Race details and recorded editions.";
+  const titleName = `${event.name}${next && !new RegExp(`\\b${next.event_date.slice(0, 4)}\\b`).test(event.name) ? ` ${next.event_date.slice(0, 4)}` : ""}`;
+  const titleSuffix = next ? "Date & Entry" : years.length ? "Results & History" : "Race Details";
+  const standardTitle = `${titleName} | ${titleSuffix} | AthRecs`;
   return {
     biography: review
       ? [...review.biography, ...facts.filter((fact) => fact.startsWith("The ATHRECS archive"))]
       : facts,
     title:
       review?.title ??
-      `${event.name}${next ? ` ${next.event_date.slice(0, 4)}` : " results & history"}${place ? ` — ${place}` : ""} | ${SITE_NAME}`,
+      (standardTitle.length <= 80
+        ? standardTitle
+        : `${titleName}${!next && years.length ? " | Results" : ""} | AthRecs`),
     description:
       review?.description ??
       searchSnippet(
-        `${event.name}${place ? ` in ${place}` : ""}${distances.length ? `: ${distances.slice(0, 3).join(", ")}` : ""}. ${timing}`,
+        `${event.name}. ${timing}${place ? ` ${place}.` : ""}${distances.length ? ` ${distances.slice(0, 3).join(", ")}.` : ""}`,
       ),
     next,
   };

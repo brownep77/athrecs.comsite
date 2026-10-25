@@ -1,7 +1,6 @@
 import { RaceActions } from "@/components/races/RaceActions";
 import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
 import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
-import { checkedFixtureEventStart } from "@/data/fixture-details";
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { ResultDisqualification } from "@/components/athletes/ResultDisqualification";
 import { isDisqualified } from "@/lib/athrecs/result-details";
@@ -66,8 +65,11 @@ import { RacePracticalInformation } from "@/components/races/RacePracticalInform
 import { RaceEntryOptions } from "@/components/races/RaceEntryOptions";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { editionEntry } from "@/lib/athrecs/race-information";
-import { raceSearchContent } from "@/lib/athrecs/race-search-content";
-import { racePageReviewFor, reviewedRacePage } from "@/data/race-page-reviews";
+import { raceSearchContent, nextRaceEdition } from "@/lib/athrecs/race-search-content";
+import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
+import { racePageMetadata, raceEditionStart } from "@/lib/athrecs/race-page-metadata";
+import { publicOrganiserName } from "@/lib/athrecs/seo";
+import { reviewedRacePage } from "@/data/race-page-reviews";
 
 type EditionRow = {
   id: number;
@@ -138,17 +140,9 @@ export const Route = createFileRoute("/races/$slug")({
     const { event, upcoming, archiveResults } = loaderData;
     const searchContent = raceSearchContent(loaderData);
     const canonical = `${SITE_URL}/races/${event.slug}`;
-    const archiveLabel = archiveResults
-      ? `${archiveResults.edition.event_date} · ${archiveResults.edition.distance_code} · ${archiveResults.results
-          .slice(0, 3)
-          .map((result) => result.athlete_name)
-          .join(", ")}`
-      : null;
-    const title = archiveLabel
-      ? `${event.name} results — ${archiveLabel} | ${SITE_NAME}`
-      : IS_RUNRECS_SITE
-        ? `${event.name}${event.city ? ` — ${event.city}` : ""} | ${SITE_NAME}`
-        : searchContent.title;
+    const title = IS_RUNRECS_SITE
+      ? searchContent.title.replace(/\| AthRecs$/, "| RunRecs")
+      : searchContent.title;
     const description = archiveResults
       ? `Recorded ${archiveResults.edition.distance_code} performances at ${event.name}, ${archiveResults.edition.event_date}, ${[event.city, event.country].filter(Boolean).join(", ")}. ${archiveResults.results
           .slice(0, 3)
@@ -158,8 +152,8 @@ export const Route = createFileRoute("/races/$slug")({
         ? event.summary ||
           `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`
         : searchContent.description;
-    const next = upcoming.find((edition) => edition.status !== "Cancelled");
-    const review = racePageReviewFor(event.slug, next?.event_date);
+    const metadata = racePageMetadata(event, upcoming);
+    const next = metadata.next;
 
     return {
       meta: siteGraphMeta({
@@ -181,18 +175,15 @@ export const Route = createFileRoute("/races/$slug")({
               region: event.county,
               country: event.country,
               startDate: next?.event_date,
-              utcOffset: review?.utcOffset,
-              venue: review?.venue,
-              startTime: checkedFixtureEventStart(
-                event.slug,
-                next?.event_date,
-                next?.start_time ?? null,
-              ),
+              utcOffset: metadata.utcOffset,
+              endUtcOffset: metadata.endUtcOffset,
+              venue: metadata.venue,
+              startTime: metadata.startTime,
               endDate: next?.end_date,
-              endTime: next?.end_time,
+              endTime: metadata.endTime,
               sport: event.sport,
-              website: event.website,
-              organiser: event.organiser,
+              website: metadata.organiserWebsite,
+              organiser: metadata.organiser ?? event.organiser,
               entryOptions: next?.entry_options,
             }),
           ).replace(/</g, "\\u003c"),
@@ -299,20 +290,9 @@ export function RacePageContent({
     area: event.area,
   });
   const location = compactFixtureLocation({ ...event, country: filterCountryName(country) });
-  const next = upcoming.find((edition) => edition.status !== "Cancelled");
+  const next = nextRaceEdition(upcoming);
   const archived = !next && past.length > 0;
-  const place = {
-    country: event.country,
-    county: event.county,
-    date: next?.event_date,
-  };
-  const nextStart =
-    next?.start_label ??
-    racePageReviewFor(event.slug, next?.event_date)?.startLabel ??
-    formatStartTime(
-      checkedFixtureEventStart(event.slug, next?.event_date, next?.start_time ?? null),
-      place,
-    );
+  const nextStart = raceEditionStart(event, next);
   const zone = timeZoneForPlace({
     country: event.country,
     county: event.county,
@@ -699,7 +679,10 @@ export function RacePageContent({
             />
             <Fact label="Surface" value={event.surface || "TBC"} />
             <Fact label="Sport" value={sportLabel(event.sport)} />
-            <Fact label="Organiser" value={event.organiser || "See official page"} />
+            <Fact
+              label="Organiser"
+              value={publicOrganiserName(event.organiser) || "Organiser not yet confirmed"}
+            />
             <Fact
               label="Entry"
               value={nextStatus ? statusLabel(nextStatus) : "See official page"}
@@ -1030,6 +1013,7 @@ export function RacePageContent({
           )}
         </aside>
       )}
+      <SuggestRaceEdit key={event.slug} slug={event.slug} name={event.name} />
     </div>
   );
 }

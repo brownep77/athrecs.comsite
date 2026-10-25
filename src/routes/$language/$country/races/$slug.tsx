@@ -1,5 +1,9 @@
-import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { SITE_URL, siteGraphMeta, sportsEventJsonLd } from "@/lib/athrecs/seo";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
+import { raceSearchContent } from "@/lib/athrecs/race-search-content";
+import { racePageMetadata } from "@/lib/athrecs/race-page-metadata";
+import { reviewedRacePage } from "@/data/race-page-reviews";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { getEventBySlug } from "@/lib/athrecs/api";
 import { countryMatchesFilter, resolveCountry } from "@/lib/athrecs/countries";
 import { countrySiteFromSlug, isSiteLanguage } from "@/lib/athrecs/country-sites";
@@ -12,7 +16,8 @@ export const Route = createFileRoute("/$language/$country/races/$slug")({
     const site = countrySiteFromSlug(params.country);
     if (!site || !isSiteLanguage(params.language)) throw notFound();
 
-    const data = await getEventBySlug({ data: params.slug });
+    const loaded = await getEventBySlug({ data: params.slug });
+    const data = loaded ? reviewedRacePage(loaded) : null;
     if (!data) {
       const currentSlug = await resolveSlugRedirect({
         data: { entityType: "event", slug: params.slug },
@@ -50,9 +55,38 @@ export const Route = createFileRoute("/$language/$country/races/$slug")({
     if (!loaderData) return {};
     const { data } = loaderData;
     const url = `${SITE_URL}/races/${data.event.slug}`;
+    const content = raceSearchContent(data);
+    const metadata = racePageMetadata(data.event, data.upcoming);
+    const next = metadata.next;
     return {
-      meta: siteGraphMeta({ title: `${data.event.name} | ATHRECS`, description: `${data.event.name}: date, venue, distances, entries and results on AthRecs.`, url }),
+      meta: siteGraphMeta({
+        title: IS_RUNRECS_SITE ? content.title.replace(/\| AthRecs$/, "| RunRecs") : content.title,
+        description: content.description,
+        url,
+      }),
       links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            sportsEventJsonLd({
+              ...data.event,
+              description: content.biography.join(" "),
+              region: data.event.county,
+              startDate: next?.event_date,
+              startTime: metadata.startTime,
+              utcOffset: metadata.utcOffset,
+              endDate: next?.end_date,
+              endTime: metadata.endTime,
+              endUtcOffset: metadata.endUtcOffset,
+              venue: metadata.venue,
+              organiser: metadata.organiser ?? data.event.organiser,
+              website: metadata.organiserWebsite,
+              entryOptions: next?.entry_options,
+            }),
+          ).replace(/</g, "\\u003c"),
+        },
+      ],
     };
   },
   component: LocalizedRacePage,

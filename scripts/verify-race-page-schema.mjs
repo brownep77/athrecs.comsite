@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { sportsEventJsonLd } from "../src/lib/athrecs/seo.ts";
 import * as runrecsSeo from "../src/runrecs/seo.ts";
-import { checkedFixtureEventStart } from "../src/data/fixture-details.ts";
 
 const race = {
   name: 'Example meeting "Autumn"',
@@ -277,45 +276,16 @@ assert.equal(
 // The route must use the shared guard and the displayed upcoming edition.
 const route = readFileSync(new URL("../src/routes/races/$slug.tsx", import.meta.url), "utf8");
 assert.match(route, /sportsEventJsonLd\(\{/);
-const nextSelectors = [...route.matchAll(/const next = (upcoming\.find\([^;]+\));/g)];
-assert.equal(
-  nextSelectors.length,
-  2,
-  "The page and its structured data select a scheduled edition",
-);
-for (const [, expression] of nextSelectors) {
-  const selectNext = new Function("upcoming", `return ${expression};`);
-  const selected = selectNext([
-    { event_date: "2026-12-26", status: "Cancelled", start_time: "09:00" },
-    { event_date: "2027-01-01", status: "Open", start_time: "09:30" },
-  ]);
-  assert.equal(selected.event_date, "2027-01-01");
-  assert.equal(
-    serialized({ ...race, startDate: selected.event_date, startTime: selected.start_time })
-      .startDate,
-    "2027-01-01T09:30",
-  );
-  assert.equal(selectNext([{ event_date: "2026-12-26", status: "Cancelled" }]), undefined);
-}
+assert.match(route, /const metadata = racePageMetadata\(event, upcoming\)/);
+assert.match(route, /const next = metadata\.next/);
+assert.match(route, /const next = nextRaceEdition\(upcoming\)/);
 assert.match(route, /startDate: next\?\.event_date/);
-const startExpression = route.match(/startTime: (checkedFixtureEventStart\([\s\S]*?\)),/);
-assert(startExpression, "The event schema must use the confirmed programme start with its edition fallback");
-const selectStart = new Function("event", "next", "checkedFixtureEventStart", `return ${startExpression[1]};`);
-for (const schema of [sportsEventJsonLd, runrecsSeo.sportsEventJsonLd]) {
-  for (const [slug, date, stored, expected] of [
-    ["marriotts-way-races", "2027-02-21", "10:30", "08:30"],
-    ["marriotts-way-races", "2028-02-21", "10:30", "10:30"],
-    ["unrelated-event", "2027-02-21", "09:45", "09:45"],
-  ]) {
-    const time = selectStart({ slug }, { event_date: date, start_time: stored }, checkedFixtureEventStart);
-    assert.equal(schema({ ...race, slug, startDate: date, startTime: time }).startDate, `${date}T${expected}`);
-  }
-  const time = selectStart(race, undefined, checkedFixtureEventStart);
-  assert.equal(schema({ ...race, startTime: time })["@type"], "WebPage");
-}
+assert.match(route, /startTime: metadata\.startTime/);
 assert.match(route, /entryOptions: next\?\.entry_options/);
 assert.match(route, /endDate: next\?\.end_date/);
-assert.match(route, /endTime: next\?\.end_time/);
+assert.match(route, /endTime: metadata\.endTime/);
+// Behavioural programme selection and date-scoped overrides are exercised against
+// racePageMetadata in verify-race-page-rollout.mjs; do not eval source expressions.
 assert.equal(
   serialized({ ...race, entryOptions: [option] }).offers,
   undefined,

@@ -90,6 +90,21 @@ function httpsUrl(value: string): boolean {
   }
 }
 
+/** Imported research instructions are not organiser identities. Keep originals in storage. */
+export function publicOrganiserName(value?: string | null): string | undefined {
+  const name = value?.replace(/\s+/g, " ").trim();
+  if (
+    !name ||
+    /^(?:unknown|tbc|tbd|other|n\/?a|not (?:recorded|confirmed)|[-—])$/i.test(name) ||
+    /^(?:see\b|check\b|https?:\/\/|official event organi[sz]er|england athletics licensed competition|world athletics \/ national federation|utmb world series \/ local organiser|park west race organiser \/ eventmaster)/i.test(
+      name,
+    ) ||
+    /run\s*abc/i.test(name)
+  )
+    return undefined;
+  return name;
+}
+
 /** Only these stored statuses establish Google's supported ticket availability. */
 function offerAvailability(status: string): string | undefined {
   switch (status) {
@@ -117,6 +132,7 @@ export function sportsEventJsonLd(
     startDate?: string | null;
     startTime?: string | null;
     utcOffset?: string | null;
+    endUtcOffset?: string | null;
     venue?: {
       name: string;
       streetAddress?: string;
@@ -202,7 +218,7 @@ export function sportsEventJsonLd(
           (input.endDate > date! ||
             !input.startTime ||
             input.endTime.padEnd(8, ":00") >= input.startTime.padEnd(8, ":00"))
-          ? `${input.endDate}T${input.endTime}`
+          ? `${input.endDate}T${input.endTime}${/^(?:[+-](?:0\d|1[0-3]):[0-5]\d|[+-]14:00)$/.test(input.endUtcOffset ?? "") ? input.endUtcOffset : ""}`
           : input.endDate
         : undefined,
     eventStatus: start ? "https://schema.org/EventScheduled" : undefined,
@@ -221,15 +237,13 @@ export function sportsEventJsonLd(
       },
     },
     sport: input.sport || "Athletics",
-    organizer:
-      input.organiser?.trim() &&
-      // Legacy imports sometimes store source instructions or licensing labels
-      // here. These are not organiser identities; retain them in storage only.
-      !/^(unknown|tbc|n\/a|see (?:official (?:race )?(?:site|website)|runabc \/ organiser|event listing)|not recorded|official event organiser|england athletics licensed competition|world athletics \/ national federation|utmb world series \/ local organiser|park west race organiser \/ eventmaster)$/i.test(
-        input.organiser.trim(),
-      )
-        ? { "@type": "Organization", name: input.organiser.trim(), url: input.website || undefined }
-        : undefined,
+    organizer: publicOrganiserName(input.organiser)
+      ? {
+          "@type": "Organization",
+          name: publicOrganiserName(input.organiser),
+          url: input.website && httpsUrl(input.website) ? input.website : undefined,
+        }
+      : undefined,
     offers: input.entryOptions?.flatMap((option) => {
       if (
         option.is_verified !== true ||
