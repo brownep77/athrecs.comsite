@@ -1,0 +1,166 @@
+{
+  "checkedAt": "2026-10-25T16:42:58.904783+00:00",
+  "publication": {
+    "id": "afan-start-reconciliation-20261025-r384",
+    "mode": "append_only",
+    "error": null,
+    "status": "published",
+    "source_key": "athrecs:afan-start-reconciliation:2026-10-25",
+    "source_url": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+    "payload_hash": "98c3f418bf4cd3d1f7dda7d0af8de0e8e599aaaad71b4b48f6fae16a130a70a9",
+    "published_at": "2026-10-25T16:40:26.224642+00:00",
+    "submitted_at": "2026-10-25T16:40:26.224642+00:00",
+    "submitted_by": "paul-authorised-afan-start-review@athrecs.com",
+    "validated_at": "2026-10-25T16:40:26.224642+00:00",
+    "publish_summary": {
+      "newEvents": 0,
+      "newStarts": 1,
+      "revisionId": 385,
+      "newEditions": 0,
+      "rollbackNote": "Edition snapshots support normal rollback. Queue amendments intentionally retain organiser-confirmed starts; original queue rows and hashes are in validation_summary.queueReconciliation.",
+      "editionsUpserted": 2,
+      "reconfirmedStarts": 1,
+      "entryOptionsUpserted": 0,
+      "reconciledPendingRows": 12,
+      "reconciledPendingBatches": 6
+    }
+  },
+  "editions": [
+    {
+      "id": 71613968,
+      "event_id": 3061155,
+      "date": "2026-11-29",
+      "distance": "10K",
+      "startTime": "11:00",
+      "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869"
+    },
+    {
+      "id": 108804223,
+      "event_id": 3061155,
+      "date": "2026-11-29",
+      "distance": "5K",
+      "startTime": "11:00",
+      "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869"
+    }
+  ],
+  "preserved": {
+    "event": true,
+    "options": true,
+    "distances": true,
+    "revision384": true,
+    "audit384": true
+  },
+  "queue": [
+    {
+      "id": "02a4f827-1220-4dd1-9b75-3215309a54f0",
+      "status": "ready",
+      "beforeHash": "16e24ef79cf124707bbb37c5a0f21a481ae70ee86924ac79febea9938aeb01ae",
+      "afterHash": "248f4757fa169947499078bd0ca6c4b18d5d7a30c1c8869e0c1a16b8ac8de916",
+      "unrelatedEditionsUnchanged": true,
+      "eventsUnchanged": true,
+      "changedAfanRows": 2
+    },
+    {
+      "id": "0f64bcde-683e-4e9d-99b5-294c27b01ce8",
+      "status": "ready",
+      "beforeHash": "38963caab705381f4d03cb62b382b5b626972122fa987e8e108ea5f3d89b0a29",
+      "afterHash": "994f7f731ea0f27af8c1a07262b01c42a13e56d641a0c7482d9330ceca2f1651",
+      "unrelatedEditionsUnchanged": true,
+      "eventsUnchanged": true,
+      "changedAfanRows": 2
+    },
+    {
+      "id": "35ef3f81-b8be-416d-98bd-f70ec1e9b5c4",
+      "status": "ready",
+      "beforeHash": "abd03beb472aec1f9e54caa32877beeb00cdfb65ea775745d106942c36cb6ea1",
+      "afterHash": "e39fb9ab79aef714bb57905dadca0a69020f3e583801ab67ecbfce5a14bf4e60",
+      "unrelatedEditionsUnchanged": true,
+      "eventsUnchanged": true,
+      "changedAfanRows": 2
+    },
+    {
+      "id": "4986573f-a315-4423-ae7e-a2ac18151fc2",
+      "status": "ready",
+      "beforeHash": "c407e07e8b98acf58243730cc9d405bdf87a776ed48c36a6695670d78d4de695",
+      "afterHash": "534d4456628061059e4f34c9ec9f073f0478c48f5f713c87418f890b7acd5ddb",
+      "unrelatedEditionsUnchanged": true,
+      "eventsUnchanged": true,
+      "changedAfanRows": 2
+    },
+    {
+      "id": "51f29419-4586-4ffb-a818-c1cfb3238111",
+      "status": "ready",
+      "beforeHash": "aa0d3145d43f63942f71dec529ecc1ef994f1125419fd354cf9404fef9c0c2cb",
+      "afterHash": "3d73242c0978eb65b72a479b862ceb9df8609913c807503cdea025fed411e5e1",
+      "unrelatedEditionsUnchanged": true,
+      "eventsUnchanged": true,
+      "changedAfanRows": 2
+    },
+    {
+      "id": "c2667c76-0dae-46b2-a32e-3635ed0f240e",
+      "status": "ready",
+      "beforeHash": "8e3120e8e7e65d65bd3efa928b3c2aca4f3ea0a23337fe80866a1c8afc2ac56f",
+      "afterHash": "f29e897de3edfd43b0b224f4c175b115803311e923b5323823877169b0288d16",
+      "unrelatedEditionsUnchanged": true,
+      "eventsUnchanged": true,
+      "changedAfanRows": 2
+    }
+  ],
+  "livePage": "https://www.athrecs.com/races/rtt-afan-forest-trail-10k-5k",
+  "livePageStartLabels": ["5K: Starts 11:00 GMT", "10K: Starts 11:00 GMT"],
+  "calendarExports": [
+    {
+      "distance": "5K",
+      "httpStatus": 200,
+      "contentType": "text/calendar; charset=utf-8",
+      "uid": "edition-108804223-5K@athrecs.com",
+      "dtstart": "20261129T110000Z",
+      "input": {
+        "id": "edition-108804223-5K",
+        "name": "RTT Afan Forest Trail 10K & 5K",
+        "date": "2026-11-29",
+        "distance": "5K · 5 km / 3.1 mi",
+        "startTime": "11:00",
+        "startLabel": null,
+        "endDate": null,
+        "endTime": null,
+        "timeZone": "Europe/London",
+        "location": "Port Talbot, Wales",
+        "raceDayInformation": "",
+        "pageUrl": "https://www.athrecs.com/races/rtt-afan-forest-trail-10k-5k",
+        "officialUrl": "",
+        "status": "TBC"
+      }
+    },
+    {
+      "distance": "10K",
+      "httpStatus": 200,
+      "contentType": "text/calendar; charset=utf-8",
+      "uid": "edition-71613968-10K@athrecs.com",
+      "dtstart": "20261129T110000Z",
+      "input": {
+        "id": "edition-71613968-10K",
+        "name": "RTT Afan Forest Trail 10K & 5K",
+        "date": "2026-11-29",
+        "distance": "10K · 10 km / 6.2 mi",
+        "startTime": "11:00",
+        "startLabel": null,
+        "endDate": null,
+        "endTime": null,
+        "timeZone": "Europe/London",
+        "location": "Port Talbot, Wales",
+        "raceDayInformation": "",
+        "pageUrl": "https://www.athrecs.com/races/rtt-afan-forest-trail-10k-5k",
+        "officialUrl": "",
+        "status": "Open"
+      }
+    }
+  ],
+  "checks": {
+    "exactProductionRehearsal": 64,
+    "syntheticRehearsal": 58,
+    "calendarAssertions": 382,
+    "fixtureStartClarity": "passed",
+    "eslint": "passed"
+  }
+}

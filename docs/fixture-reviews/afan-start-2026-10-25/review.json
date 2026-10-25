@@ -1,0 +1,901 @@
+{
+  "batch_id": "afan-start-reconciliation-20261025-r384",
+  "source_key": "athrecs:afan-start-reconciliation:2026-10-25",
+  "expected_revision": 384,
+  "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+  "note": "Start checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP.",
+  "before_event": {
+    "id": 3061155,
+    "area": "Bryn Bettws Lodge",
+    "city": "Port Talbot",
+    "name": "RTT Afan Forest Trail 10K & 5K",
+    "slug": "rtt-afan-forest-trail-10k-5k",
+    "sport": "Running",
+    "county": "Wales",
+    "region": null,
+    "country": "Wales",
+    "summary": "RTT Afan Forest Trail 10K & 5K — Bryn Bettws Lodge, Port Talbot. Listed on runABC (South of England).",
+    "surface": "Trail",
+    "website": "https://runabc.co.uk/rtt-afan-forest-trail-10k-5k",
+    "featured": false,
+    "latitude": null,
+    "postcode": null,
+    "longitude": null,
+    "organiser": "See runABC / organiser",
+    "source_id": null,
+    "created_at": "2026-08-24T23:31:18.850884+00:00",
+    "source_url": null,
+    "updated_at": "2026-08-24T23:31:18.850884+00:00",
+    "description": "RTT Afan Forest Trail 10K & 5K — Bryn Bettws Lodge, Port Talbot. Listed on runABC (South of England). Confirm date, distance and entry on the runABC event page or organiser site.",
+    "data_verified_at": null,
+    "official_website_status": "legacy",
+    "official_website_checked_at": null,
+    "official_website_checked_by": null,
+    "official_website_review_note": null,
+    "official_website_evidence_url": null
+  },
+  "before_editions": [
+    {
+      "id": 71613968,
+      "notes": null,
+      "status": "Open",
+      "end_date": null,
+      "end_time": null,
+      "event_id": 3061155,
+      "entry_url": "https://runabc.co.uk/rtt-afan-forest-trail-10k-5k",
+      "source_id": null,
+      "event_date": "2026-11-29",
+      "source_url": "https://runabc.co.uk/rtt-afan-forest-trail-10k-5k",
+      "start_time": "11:00",
+      "distance_km": 10,
+      "distance_code": "10K",
+      "end_checked_at": null,
+      "end_source_url": null,
+      "results_access": null,
+      "results_hosting": null,
+      "stats_created_at": null,
+      "results_permission": null,
+      "public_result_count": null,
+      "athlete_result_count": null,
+      "partner_result_count": null,
+      "results_official_url": null,
+      "results_permission_at": null,
+      "results_permission_by": null,
+      "results_permission_note": null,
+      "results_rights_requested_at": null
+    },
+    {
+      "id": 108804223,
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "status": "TBC",
+      "end_date": null,
+      "end_time": null,
+      "event_id": 3061155,
+      "entry_url": null,
+      "source_id": null,
+      "event_date": "2026-11-29",
+      "source_url": "https://runabc.co.uk/rtt-afan-forest-trail-10k-5k",
+      "start_time": null,
+      "distance_km": 5,
+      "distance_code": "5K",
+      "end_checked_at": null,
+      "end_source_url": null,
+      "results_access": null,
+      "results_hosting": null,
+      "stats_created_at": null,
+      "results_permission": null,
+      "public_result_count": null,
+      "athlete_result_count": null,
+      "partner_result_count": null,
+      "results_official_url": null,
+      "results_permission_at": null,
+      "results_permission_by": null,
+      "results_permission_note": null,
+      "results_rights_requested_at": null
+    }
+  ],
+  "before_options": [
+    {
+      "id": 204723947,
+      "notes": null,
+      "status": "open",
+      "opens_at": null,
+      "closes_at": null,
+      "entry_url": "https://runabc.co.uk/rtt-afan-forest-trail-10k-5k",
+      "checked_at": "2026-10-19T17:19:42.04+00:00",
+      "created_at": "2026-08-24T23:32:00.913736+00:00",
+      "edition_id": 71613968,
+      "entry_type": "official",
+      "is_primary": true,
+      "source_url": "https://runabc.co.uk/rtt-afan-forest-trail-10k-5k",
+      "updated_at": "2026-10-19T17:19:22.958983+00:00",
+      "is_verified": false,
+      "review_note": null,
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "price_amount": null,
+      "canonical_url": null,
+      "provider_code": "official",
+      "provider_name": "Official race entry",
+      "review_status": "legacy",
+      "price_currency": null,
+      "provider_relationship": "legacy"
+    }
+  ],
+  "before_distances": [
+    {
+      "event_id": 3061155,
+      "distance_code": "10K"
+    },
+    {
+      "event_id": 3061155,
+      "distance_code": "5K"
+    }
+  ],
+  "queue": [
+    {
+      "id": "02a4f827-1220-4dd1-9b75-3215309a54f0",
+      "source_key": "athrecs-holding:delta:958b4dfd57b20fa76fc02aed",
+      "before_hash": "16e24ef79cf124707bbb37c5a0f21a481ae70ee86924ac79febea9938aeb01ae",
+      "before_md5": "f4369edf28ac31f62d0c5712fa714f03",
+      "after_hash": "248f4757fa169947499078bd0ca6c4b18d5d7a30c1c8869e0c1a16b8ac8de916",
+      "before_validation_summary": {
+        "errors": [],
+        "events": 75,
+        "editions": 110,
+        "invalidRows": 0
+      },
+      "before_validated_at": "2026-08-26T06:00:13.570549+00:00",
+      "before_error": null,
+      "rows": [
+        {
+          "row_number": 90,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T05:59:29+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T05:59:29+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        },
+        {
+          "row_number": 91,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T05:59:29+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T05:59:29+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        }
+      ]
+    },
+    {
+      "id": "0f64bcde-683e-4e9d-99b5-294c27b01ce8",
+      "source_key": "athrecs-holding:delta:a26f43ba32669d443f396a15",
+      "before_hash": "38963caab705381f4d03cb62b382b5b626972122fa987e8e108ea5f3d89b0a29",
+      "before_md5": "6632705b2b6a35445f25832d8f8c8073",
+      "after_hash": "994f7f731ea0f27af8c1a07262b01c42a13e56d641a0c7482d9330ceca2f1651",
+      "before_validation_summary": {
+        "errors": [],
+        "events": 75,
+        "editions": 115,
+        "invalidRows": 0
+      },
+      "before_validated_at": "2026-08-24T09:17:01.32354+00:00",
+      "before_error": null,
+      "rows": [
+        {
+          "row_number": 85,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-24T09:16:10+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-24T09:16:10+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        },
+        {
+          "row_number": 86,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-24T09:16:10+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-24T09:16:10+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        }
+      ]
+    },
+    {
+      "id": "35ef3f81-b8be-416d-98bd-f70ec1e9b5c4",
+      "source_key": "athrecs-holding:delta:5cf89d93206a939e185ca164",
+      "before_hash": "abd03beb472aec1f9e54caa32877beeb00cdfb65ea775745d106942c36cb6ea1",
+      "before_md5": "6b06b519cc403310700939ecd374e913",
+      "after_hash": "e39fb9ab79aef714bb57905dadca0a69020f3e583801ab67ecbfce5a14bf4e60",
+      "before_validation_summary": {
+        "errors": [],
+        "events": 67,
+        "editions": 92,
+        "invalidRows": 0
+      },
+      "before_validated_at": "2026-08-26T21:27:10.991149+00:00",
+      "before_error": null,
+      "rows": [
+        {
+          "row_number": 33,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T21:25:49+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T21:25:49+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        },
+        {
+          "row_number": 34,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T21:25:49+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T21:25:49+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        }
+      ]
+    },
+    {
+      "id": "4986573f-a315-4423-ae7e-a2ac18151fc2",
+      "source_key": "athrecs-holding:delta:cc591146cf764110af7cd0b5",
+      "before_hash": "c407e07e8b98acf58243730cc9d405bdf87a776ed48c36a6695670d78d4de695",
+      "before_md5": "71da944cbcf39895c9b5687d2fac5fd4",
+      "after_hash": "534d4456628061059e4f34c9ec9f073f0478c48f5f713c87418f890b7acd5ddb",
+      "before_validation_summary": {
+        "errors": [],
+        "events": 75,
+        "editions": 114,
+        "invalidRows": 0
+      },
+      "before_validated_at": "2026-08-25T05:57:29.488549+00:00",
+      "before_error": null,
+      "rows": [
+        {
+          "row_number": 84,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-25T05:56:39+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-25T05:56:39+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        },
+        {
+          "row_number": 85,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-25T05:56:39+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-25T05:56:39+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        }
+      ]
+    },
+    {
+      "id": "51f29419-4586-4ffb-a818-c1cfb3238111",
+      "source_key": "athrecs-holding:delta:96644bd8c3a6d7cca204df16",
+      "before_hash": "aa0d3145d43f63942f71dec529ecc1ef994f1125419fd354cf9404fef9c0c2cb",
+      "before_md5": "6ef633d1a592161f75ac4adf0a1cd999",
+      "after_hash": "3d73242c0978eb65b72a479b862ceb9df8609913c807503cdea025fed411e5e1",
+      "before_validation_summary": {
+        "errors": [],
+        "events": 67,
+        "editions": 92,
+        "invalidRows": 0
+      },
+      "before_validated_at": "2026-08-26T21:12:46.163054+00:00",
+      "before_error": null,
+      "rows": [
+        {
+          "row_number": 33,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T21:11:25+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T21:11:25+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        },
+        {
+          "row_number": 34,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T21:11:25+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-26T21:11:25+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        }
+      ]
+    },
+    {
+      "id": "c2667c76-0dae-46b2-a32e-3635ed0f240e",
+      "source_key": "athrecs-holding:delta:1063328511170371399ba0e4",
+      "before_hash": "8e3120e8e7e65d65bd3efa928b3c2aca4f3ea0a23337fe80866a1c8afc2ac56f",
+      "before_md5": "18e6b12921f85f1fce505b360fd6c471",
+      "after_hash": "f29e897de3edfd43b0b224f4c175b115803311e923b5323823877169b0288d16",
+      "before_validation_summary": {
+        "errors": [],
+        "events": 75,
+        "editions": 115,
+        "invalidRows": 0
+      },
+      "before_validated_at": "2026-08-24T09:46:36.392804+00:00",
+      "before_error": null,
+      "rows": [
+        {
+          "row_number": 85,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-24T09:45:45+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "10K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 10,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-24T09:45:45+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        },
+        {
+          "row_number": 86,
+          "before": {
+            "date": "2026-11-29",
+            "source": "https://www.tesportstiming.com/calendars/sport-events/",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-24T09:45:45+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ]
+          },
+          "after": {
+            "date": "2026-11-29",
+            "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+            "status": "Open",
+            "distance": "5K",
+            "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+            "eventName": "RTT Afan Forest Trail 10k & 5K",
+            "eventSlug": "rtt-afan-forest-trail-10k-5k",
+            "distanceKm": 5,
+            "entryOptions": [
+              {
+                "status": "open",
+                "entryUrl": "https://www.tesportstiming.com/e/rtt-afan-forest-trail-10k-and-5k-15903",
+                "checkedAt": "2026-08-24T09:45:45+00:00",
+                "entryType": "third_party",
+                "isPrimary": false,
+                "sourceUrl": "https://www.tesportstiming.com/calendars/sport-events/",
+                "isVerified": false,
+                "providerCode": "te-sports-timing",
+                "providerName": "TE Sports Timing",
+                "priceCurrency": "GBP"
+              }
+            ],
+            "startTime": "11:00",
+            "notes": "Original queued source retained: https://www.tesportstiming.com/calendars/sport-events/\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+          }
+        }
+      ]
+    }
+  ],
+  "payload": {
+    "events": [],
+    "editions": [
+      {
+        "eventSlug": "rtt-afan-forest-trail-10k-5k",
+        "date": "2026-11-29",
+        "distance": "10K",
+        "distanceKm": 10,
+        "status": "Open",
+        "startTime": "11:00",
+        "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+        "notes": "Start checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+      },
+      {
+        "eventSlug": "rtt-afan-forest-trail-10k-5k",
+        "date": "2026-11-29",
+        "distance": "5K",
+        "distanceKm": 5,
+        "status": "TBC",
+        "startTime": "11:00",
+        "source": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+        "notes": "Date and distance checked on 10 September 2026 against RunABC.\nStart checked 25 October 2026 against https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869. The 29 November 2026 organiser programme confirms both 5K and 10K start at 11:00 Europe/London (GMT), following the separate 10:50 briefing, at Bryn Bettws Lodge, Pontrhydyfen, Port Talbot SA12 9SP."
+      }
+    ]
+  },
+  "payload_hash": "98c3f418bf4cd3d1f7dda7d0af8de0e8e599aaaad71b4b48f6fae16a130a70a9"
+}
