@@ -1,12 +1,48 @@
 import assert from "node:assert/strict";
 import {
   TRANSLATION_LANGUAGES,
+  matchingTranslationLanguages,
   publicTranslationUrl,
   translatedPageUrl,
 } from "../src/lib/athrecs/site-translation.ts";
 
-assert.equal(TRANSLATION_LANGUAGES.length, 8);
-assert.equal(new Set(TRANSLATION_LANGUAGES.map(({ code }) => code)).size, 8);
+const expectedLanguages = [
+  "en",
+  "fr",
+  "de",
+  "es",
+  "it",
+  "nl",
+  "pl",
+  "pt",
+  "pt-BR",
+  "ar",
+  "ja",
+  "zh-CN",
+  "zh-TW",
+  "cs",
+  "da",
+  "ru",
+  "ro",
+  "tr",
+  "el",
+  "hu",
+  "sv",
+  "no",
+  "fi",
+  "ko",
+  "id",
+  "hi",
+  "th",
+  "cy",
+  "ga",
+  "af",
+];
+assert.equal(TRANSLATION_LANGUAGES.length, expectedLanguages.length);
+assert.deepEqual(
+  new Set(TRANSLATION_LANGUAGES.map(({ code }) => code)),
+  new Set(expectedLanguages),
+);
 for (const path of [
   "/",
   "/running/uk-marathons",
@@ -20,7 +56,8 @@ for (const path of [
     } else {
       assert.equal(destination.origin, "https://translate.google.com");
       assert.equal(destination.searchParams.get("sl"), "en");
-      assert.equal(destination.searchParams.get("tl"), code);
+      const target = code === "pt" ? "pt-PT" : code === "pt-BR" ? "pt" : code;
+      assert.equal(destination.searchParams.get("tl"), target);
       assert.equal(destination.searchParams.get("u"), `https://www.athrecs.com${path}`);
     }
   }
@@ -69,6 +106,27 @@ for (const path of [
 }
 assert.equal(translatedPageUrl("/", "unknown"), null);
 assert.equal(translatedPageUrl("/", "__proto__"), null);
+for (const [search, expected] of [
+  ["  JAPANESE ", ["ja"]],
+  ["العربية", ["ar"]],
+  ["日本語", ["ja"]],
+  ["中文", ["zh-CN", "zh-TW"]],
+  ["cestina", ["cs"]],
+  ["turkce", ["tr"]],
+  ["Portuguese", ["pt", "pt-BR"]],
+  ["Brazil", ["pt-BR"]],
+  ["pt-BR", ["pt-BR"]],
+  ["Cymraeg", ["cy"]],
+  ["Gaeilge", ["ga"]],
+  ["not-a-language", []],
+]) {
+  assert.deepEqual(
+    matchingTranslationLanguages(search).map(({ code }) => code),
+    expected,
+    search,
+  );
+}
+assert.equal(matchingTranslationLanguages("  ").length, 30);
 console.log(
-  "Site translation: eight language destinations, English originals and public-only URL boundaries verified.",
+  "Site translation: 30 language choices, regional targets, multilingual search, English originals and public-only URL boundaries verified.",
 );
