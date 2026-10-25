@@ -1,4 +1,5 @@
 import { isParkrunResult } from "./parkrun-timing";
+import { resolveEventSeedSlugs, preserveMigratedEventSeedSlugs } from "./event-seed-slugs.server";
 import { dbSource, getSql } from "@/lib/db";
 import { CLUB_PROFILE_VERSION } from "@/data/club-profiles";
 import {
@@ -2162,10 +2163,15 @@ async function upsertFeaturedWorldAthleticsHistories(sql: Sql): Promise<void> {
   `;
   if (meta[0]?.value === FEATURED_WA_HISTORIES_VERSION) return;
   // The 27 September card result is already stored on the catalogue event.
-  const histories = featuredWaHistories.filter(
+  const sourceHistories = featuredWaHistories.filter(
     (row) =>
       !(row.date === "2026-09-27" && (row.distance === "Marathon" || row.distance === "10K")),
   );
+  const eventSlugs = await resolveEventSeedSlugs(sql, sourceHistories.map((row) => row.eventSlug));
+  const histories = sourceHistories.map((row) => ({
+    ...row,
+    eventSlug: eventSlugs.get(row.eventSlug) ?? row.eventSlug,
+  }));
 
   async function rowsForSlugs<T>(
     build: (placeholders: string) => string,
@@ -2271,6 +2277,8 @@ async function upsertFeaturedWorldAthleticsHistories(sql: Sql): Promise<void> {
     );
     for (const row of again) eventIdBySlug.set(row.slug, Number(row.id));
   }
+
+  await preserveMigratedEventSeedSlugs(sql);
 
   const editionKey = (eventId: number, date: string, distance: string) =>
     `${eventId}|${date}|${distance}`;
