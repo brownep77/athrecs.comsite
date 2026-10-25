@@ -6,7 +6,8 @@ import { load } from "cheerio";
 import { racePageReviewFor, reviewedRacePage } from "../src/data/race-page-reviews.ts";
 import { sportsEventJsonLd } from "../src/lib/athrecs/seo.ts";
 import { catalogueCalendarRace } from "../src/lib/athrecs/catalogue-calendar.ts";
-import { buildCalendarEvent } from "../src/lib/athrecs/event-calendar.ts";
+import { buildCalendarEvent, calendarUtc } from "../src/lib/athrecs/event-calendar.ts";
+import { checkedFixtureStartLabel } from "../src/data/fixture-details.ts";
 
 const slug = "wa-32-hella-hamburg-half-marathon-7238156";
 const date = "2026-10-25";
@@ -18,7 +19,7 @@ const edition = {
   distance_km: 21.0975,
   status: "TBC",
   start_time: null,
-  start_label: null,
+  start_label: checkedFixtureStartLabel(slug, date, "Half"),
   source_url: null,
   entry_options: [],
   entry_url: null,
@@ -42,21 +43,17 @@ const original = {
   groups: [],
   related: [],
   past: [],
-  upcoming: [
-    edition,
-    {
-      ...edition,
-      id: 2,
-      distance_code: "Other",
-      source_url: "https://worldathletics.org/competition/calendar-results/results/7238156",
-    },
-  ],
+  upcoming: [edition],
 };
 const data = reviewedRacePage(original);
 assert.equal(original.event.organiser, "Steven Richter", "Do not mutate stored values");
-assert.equal(original.upcoming.length, 2);
+assert.equal(original.upcoming.length, 1);
 assert.equal(data.event.organiser, review.organiser);
-assert.equal(data.upcoming.length, 1, "One half marathon, not an extra unnamed distance");
+assert.equal(
+  data.upcoming,
+  original.upcoming,
+  "Preserve the programme supplied by the reviewed fixture API",
+);
 assert.equal(data.upcoming[0].id, 1, "Keep edition identity for calendars/results");
 assert.equal(
   reviewedRacePage({ ...original, event: { ...original.event, slug: "other-event" } }).event
@@ -73,7 +70,7 @@ assert.equal(
 assert.equal(
   reviewedRacePage({
     ...original,
-    upcoming: [edition, { ...original.upcoming[1], result_count: 1 }],
+    upcoming: [edition, { ...edition, id: 2, result_count: 1 }],
   }).upcoming.length,
   2,
   "Do not hide a row with results",
@@ -117,9 +114,14 @@ const calendar = buildCalendarEvent(
   catalogueCalendarRace(data.event, data.upcoming[0], "https://www.athrecs.com"),
 );
 assert.equal(
-  calendar.startUtc,
+  calendarUtc(date, "09:30", "Europe/Berlin"),
   "2026-10-25T08:30:00Z",
   "CET agrees with the IANA calendar conversion on clock-change day",
+);
+assert.equal(
+  calendar.startUtc,
+  null,
+  "Keep the existing date-only calendar reminder for assigned waves",
 );
 assert.match(calendar.description, /Wave A starts at 09:30/);
 assert.match(calendar.location, /Reeperbahn/);
@@ -148,7 +150,7 @@ try {
   assert.match($("#race-location").text(), /Race headquarters.*Hamburg Messe/s);
   assert.match($("#race-about-heading").parent().text(), /BMS Die Laufgesellschaft/);
   console.log(
-    "PASS: Hamburg example title, visible facts, structured data, CET calendar, duplicate-placeholder guard and year/cancellation boundaries.",
+    "PASS: Hamburg example title, visible facts, structured data, CET offset, assigned-wave calendar and year/cancellation boundaries.",
   );
 } finally {
   await server.close();

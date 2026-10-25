@@ -224,7 +224,6 @@ function fixedAbbr(timeZone: string, date: string): string | null {
     "Atlantic/Reykjavik": "GMT",
     "Atlantic/St_Helena": "GMT",
     "Atlantic/Stanley": "FKST",
-    "Europe/Gibraltar": usSummer(date) || Number(date.slice(5, 7)) >= 3 ? "CEST" : "CET",
     "Pacific/Honolulu": "HST",
     "America/Phoenix": "MST",
     "America/Regina": "CST",
@@ -251,18 +250,8 @@ function fixedAbbr(timeZone: string, date: string): string | null {
   if (timeZone === "America/Halifax" || timeZone === "America/Moncton") return usSummer(date) ? "ADT" : "AST";
   if (timeZone === "America/St_Johns") return usSummer(date) ? "NDT" : "NST";
 
-  if (
-    timeZone.startsWith("Europe/") &&
-    !["Europe/London", "Europe/Dublin", "Europe/Isle_of_Man"].includes(timeZone)
-  ) {
-    const m = Number(date.slice(5, 7));
-    const summer = m >= 4 && m <= 10;
-    if (["Europe/Lisbon"].includes(timeZone)) return summer ? "WEST" : "WET";
-    if (["Europe/Athens", "Europe/Helsinki", "Europe/Vilnius"].includes(timeZone)) {
-      return summer ? "EEST" : "EET";
-    }
-    return summer ? "CEST" : "CET";
-  }
+  // European clock changes depend on the exact date, not the month.
+  // Let timeZoneAbbr use the IANA rules through Intl.
   return null;
 }
 
@@ -271,8 +260,9 @@ export function formatLocalClock(
   place?: PlaceTime | null,
 ): string | null {
   if (!raw) return null;
-  const m = raw.trim().match(/^(\d{1,2}):(\d{2})/);
-  const clock = m ? `${String(Number(m[1])).padStart(2, "0")}:${m[2]}` : raw.trim();
+  const m = raw.trim().match(/^(\d{1,2}):(\d{2})(?::[0-5]\d)?$/);
+  if (!m || Number(m[1]) > 23 || Number(m[2]) > 59) return null;
+  const clock = `${String(Number(m[1])).padStart(2, "0")}:${m[2]}`;
   const tz = timeZoneForPlace(place);
   const abbr = timeZoneAbbr(tz, place?.date || "2026-08-15");
   return `${clock} ${abbr}`;

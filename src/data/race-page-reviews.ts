@@ -15,8 +15,6 @@ const hamburg = {
   website: "https://www.hamburg-halbmarathon.com/information/",
   utcOffset: "+01:00",
   startLabel: "First wave 09:30 CET (UTC+1)",
-  notes:
-    "Half marathon, 21.0975 km. Wave A 09:30; B 09:45; C 10:00; D 10:15; E 10:30; F 10:45; G 11:00. All times are CET (UTC+1). Follow the start block in your organiser email; clocks change on race morning.",
   venue: {
     name: "Reeperbahn / Glacischaussee — half-marathon start",
     streetAddress: "Reeperbahn / Glacischaussee",
@@ -29,7 +27,7 @@ const hamburg = {
     website:
       "https://www.hamburg-halbmarathon.de/2026/10/12/den-renntag-fest-im-blick-alle-infos-zur-teilnahme/",
     starts: { Half: "09:30" },
-    venue: "Reeperbahn / Glacischaussee, Hamburg (race start)",
+    venue: "Reeperbahn / Glacischaussee (race start), Hamburg",
     facts: [
       {
         label: "Start",
@@ -65,12 +63,7 @@ type ReviewedPage = {
   upcoming: Array<{
     event_date: string;
     distance_code: string;
-    start_time?: string | null;
-    start_label?: string | null;
     status: string;
-    notes?: string | null;
-    source_url?: string | null;
-    result_count?: number;
   }>;
 };
 
@@ -94,23 +87,5 @@ export function reviewedRacePage<T extends ReviewedPage>(data: T): T {
       website: review.website,
       description: review.description,
     },
-    upcoming: data.upcoming
-      .filter(
-        (edition) =>
-          !(
-            hasHalf &&
-            edition.event_date === review.date &&
-            edition.distance_code === "Other" &&
-            !edition.result_count &&
-            /worldathletics\.org\/.*7238156(?:[/?#]|$)/.test(edition.source_url ?? "")
-          ),
-      )
-      .map((edition) =>
-        edition.event_date === review.date &&
-        edition.distance_code === "Half" &&
-        edition.status !== "Cancelled"
-          ? { ...edition, start_time: "09:30", start_label: null, notes: review.notes }
-          : edition,
-      ),
   };
 }

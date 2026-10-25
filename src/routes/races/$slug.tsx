@@ -307,8 +307,8 @@ export function RacePageContent({
     date: next?.event_date,
   };
   const nextStart =
-    racePageReviewFor(event.slug, next?.event_date)?.startLabel ??
     next?.start_label ??
+    racePageReviewFor(event.slug, next?.event_date)?.startLabel ??
     formatStartTime(
       checkedFixtureEventStart(event.slug, next?.event_date, next?.start_time ?? null),
       place,

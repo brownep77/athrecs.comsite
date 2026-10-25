@@ -4,7 +4,7 @@ import { getSql } from "../db";
 import { ensureAthrecsSeeded } from "../athrecs/seed.server";
 import { todayIso } from "../athrecs/format";
 import type { EntryStatus, EventListItem, RaceGroupInfo, Sport } from "../athrecs/types";
-import { checkedFixtureStartLabel } from "../../data/fixture-details";
+import { checkedFixtureStartLabel, isReviewedFixturePlaceholder } from "../../data/fixture-details";
 import { supplementedStart } from "../../data/runrecs-race-guides";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication";
 
@@ -348,7 +348,10 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
         typeof next_starts_json === "string"
           ? (JSON.parse(next_starts_json) as Array<{ distance: string; time: string | null }>)
           : (next_starts_json ?? []);
-      const distances = sanitizeDistances(row.name, distances_csv ? distances_csv.split(",") : []);
+      const distances = sanitizeDistances(
+        row.name,
+        distances_csv ? distances_csv.split(",") : [],
+      ).filter((code) => !isReviewedFixturePlaceholder(row.slug, row.next_date ?? "", code));
       return {
         ...row,
         distances,
@@ -358,14 +361,18 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
           row.sport === "Parkrun"
             ? row.next_start_time
             : supplementedStart(row, row.next_date, row.next_distance, row.next_start_time),
-        next_starts: nextStarts.map((start) => ({
-          distance: start.distance,
-          label: checkedFixtureStartLabel(row.slug, row.next_date, start.distance),
-          time:
-            row.sport === "Parkrun"
-              ? start.time
-              : supplementedStart(row, row.next_date, start.distance, start.time),
-        })),
+        next_starts: nextStarts
+          .filter(
+            (start) => !isReviewedFixturePlaceholder(row.slug, row.next_date ?? "", start.distance),
+          )
+          .map((start) => ({
+            distance: start.distance,
+            label: checkedFixtureStartLabel(row.slug, row.next_date, start.distance),
+            time:
+              row.sport === "Parkrun"
+                ? start.time
+                : supplementedStart(row, row.next_date, start.distance, start.time),
+          })),
         next_status: row.next_status as EntryStatus | null,
         next_distance:
           row.next_distance === "Marathon" && !distances.includes("Marathon")

@@ -25,9 +25,10 @@ organiser “Steven Richter”, city-only event location and a start without a U
 offset in structured data. The visible time incorrectly said CEST. A second
 World Athletics observation labelled “Other” described the same race day.
 
-The page projection retains all stored records and evidence. It suppresses that
-specific unnamed World Athletics row only when the same-day Half row exists and
-the unnamed row has no recorded results; other distances/results are retained.
+The page projection retains all stored records, evidence and edition identities.
+It incorporates the independently published fixture clarification in PR #923,
+including its reviewed programme and explicit wave labels. The existing date-only
+calendar reminder is preserved for runners with individually assigned waves.
 The next edition must match the reviewed date. Archive and future editions keep
 their existing behaviour. Practical details are consistent between the visible
 page, metadata and calendar export. Search engines decide when to recrawl and

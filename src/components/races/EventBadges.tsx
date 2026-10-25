@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
+import { distanceDisplayLabel, formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { distanceColourClass } from "@/lib/athrecs/profile-colours";
 import { sportColourClass, sportDisplayLabel } from "@/lib/athrecs/event-colours";
 
@@ -18,7 +18,9 @@ export function DistanceBadge({
 }) {
   return (
     <Badge className={distanceColourClass(distance, distanceKm ?? 0)}>
-      {label ?? formatDistanceWithUnits(distance, distanceKm)}
+      {label != null
+        ? distanceDisplayLabel(label, distanceKm)
+        : formatDistanceWithUnits(distance, distanceKm)}
     </Badge>
   );
 }

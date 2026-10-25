@@ -100,10 +100,10 @@ export function RacePracticalInformation({
                       <p
                         className={`mt-1 text-sm ${start ? "font-semibold text-accent" : "text-muted"}`}
                       >
-                        {(edition.distance_code === "Half"
-                          ? racePageReviewFor(event.slug, edition.event_date)?.startLabel
-                          : undefined) ??
-                          edition.start_label ??
+                        {edition.start_label ??
+                          (edition.distance_code === "Half"
+                            ? racePageReviewFor(event.slug, edition.event_date)?.startLabel
+                            : undefined) ??
                           (start ? `Starts ${start}` : "Start time not yet verified")}
                       </p>
                       <p className="mt-1 text-sm text-muted">
