@@ -64,6 +64,26 @@ privacy choices and user-managed facts continue to apply. Stable profile slugs,
 provider/history IDs and guarded evidence receipts make interruption and replay
 safe; a changed identity snapshot requires renewed review.
 
+## Concurrent profile changes and continuation
+
+A freshness failure after another import, profile edit or merge changes the
+athlete directory requires a fresh snapshot, new reviewed plan and new
+rehearsal. Preserve the rejection diagnostics, old snapshots, plans, reviews and
+receipts; never edit a frozen fingerprint or weaken the existing guards to
+force continuation.
+
+Coordinate a window without competing profile writes. Take a new complete
+production snapshot into a new private directory, independently review the
+resulting plan, and rehearse that exact frozen plan on a matching production
+copy. The live source, identity, privacy, lock, statement and freshness checks
+still apply.
+
+Include profiles committed by earlier attempts as existing candidates. Reuse
+only uniquely matched existing performances, preserving their original source
+identities, histories, verification and privacy. Retain earlier partial receipts
+and count prior creations, later creations and repeated evidence associations
+separately; do not recreate a previously committed profile.
+
 ## Additional editions
 
 The original 2025 collection remains the default for compatibility with its
