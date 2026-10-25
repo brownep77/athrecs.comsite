@@ -12,6 +12,7 @@ import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { raceLink } from "@/lib/athrecs/race-information";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
+import { distanceDisplayLabel } from "@/lib/athrecs/distance";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { RaceGroupBadges } from "./RaceGroupBadges";
 import { DistanceBadge, SportBadge } from "./EventBadges";
@@ -109,7 +110,7 @@ export function RunRecsRaceCard({
                 {starts.length > 1
                   ? "Starts by distance"
                   : start
-                    ? `${start}${distances.length > 1 && race.next_distance ? ` · ${race.next_distance}` : ""}`
+                    ? `${start}${distances.length > 1 && race.next_distance ? ` · ${distanceDisplayLabel(race.next_distance)}` : ""}`
                     : "Start time not yet verified"}
               </span>
             </p>
@@ -122,7 +123,7 @@ export function RunRecsRaceCard({
             <ul className="w-full space-y-1 text-sm text-muted">
               {starts.slice(0, 3).map((item) => (
                 <li key={`${item.distance}-${item.time}`}>
-                  {item.distance} ·{" "}
+                  {distanceDisplayLabel(item.distance)} ·{" "}
                   {item.label ??
                     (formatStartTime(item.time, { ...race, date }) || "Time not yet verified")}
                 </li>

@@ -10,6 +10,12 @@
 
 ## Fixture dates and start times
 
+- Owner instruction, 25 October 2026: never display internal "Other" placeholders
+  as race distances or start times. Show the confirmed distance and local start;
+  identify first waves, later waves and start windows explicitly. When facts are
+  unknown, say "Distance not yet confirmed" or "Start time not yet verified".
+  Suppress a placeholder as a duplicate only after checking the organiser's
+  edition-specific programme; preserve its source record for audit.
 - Owner instruction, 21 October 2026: resolve conflicting fixture start times
   using the event organiser or the relevant governing body. Prefer the latest
   edition-specific organiser race-day timetable, then a governing-body fixture.

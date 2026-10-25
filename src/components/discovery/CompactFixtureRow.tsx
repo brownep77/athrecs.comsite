@@ -5,6 +5,7 @@ import { AddToCalendar } from "@/components/races/AddToCalendar";
 import { ShareRaceButton } from "@/components/races/ShareRaceButton";
 import { useHomepageTheme } from "@/components/running/HomepageAppearance";
 import { compactFixtureLocation, formatFixtureStart } from "@/lib/athrecs/fixture-presentation";
+import { distanceDisplayLabel } from "@/lib/athrecs/distance";
 import { validCalendarDate } from "@/lib/athrecs/event-calendar";
 import { cn } from "@/lib/utils";
 import type { SportFixture } from "@/lib/athrecs/sport-fixtures.server";
@@ -18,12 +19,6 @@ type Props = {
 
 const actionClass =
   "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md border border-border bg-surface px-3 py-2 text-xs font-semibold text-accent no-underline transition-colors hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50";
-
-function distanceLabel(distance: string) {
-  if (distance === "Half") return "Half marathon";
-  if (distance === "Ultra") return "Ultramarathon";
-  return distance;
-}
 
 function statusLabel(status: string | null | undefined) {
   if (/cancelled|canceled/i.test(status ?? "")) return "Cancelled";
@@ -107,7 +102,9 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
               const status = statusLabel(start.status);
               const description = (
                 <>
-                  <span className="font-semibold text-accent">{distanceLabel(start.distance)}</span>
+                  <span className="font-semibold text-accent">
+                    {distanceDisplayLabel(start.distance, start.distanceKm)}
+                  </span>
                   <span aria-hidden="true"> · </span>
                   <span>
                     {start.label ??
@@ -164,7 +161,7 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
                     ? ""
                     : `${fixture.starts
                         .filter((start) => start.note === note)
-                        .map((start) => distanceLabel(start.distance))
+                        .map((start) => distanceDisplayLabel(start.distance, start.distanceKm))
                         .join(" / ")}: `}
                   {note}
                 </p>

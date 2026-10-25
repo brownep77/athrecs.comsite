@@ -24,6 +24,22 @@ export type FixtureDetail = {
 };
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
+  "wa-32-hella-hamburg-half-marathon-7238156|2026-10-25": {
+    place: { city: "Hamburg" },
+    summary: "A half marathon from the Reeperbahn to Hamburg Messe.",
+    timeZone: "Europe/Berlin",
+    sourceUrl: "https://www.hamburg-halbmarathon.de/faq_0726/",
+    checkedAt: "2026-10-25",
+    starts: {
+      Half: {
+        time: "09:30",
+        label: "First wave 09:30 CET · waves until 11:00",
+        note: "Half marathon: block A 09:30, B 09:45, C 10:00, D 10:15, E 10:30, F 10:45, G 11:00. All times are local to Hamburg (CET, UTC+1). Follow the start block assigned by the organiser.",
+        publicNote:
+          "Half marathon: block A 09:30, B 09:45, C 10:00, D 10:15, E 10:30, F 10:45, G 11:00. All times are local to Hamburg (CET, UTC+1). Follow the start block assigned by the organiser.",
+      },
+    },
+  },
   "ea-runevents-fenland-10-wisbech|2026-10-25": {
     summary: "Fenland Running Club's ten-mile road race in the Wisbech area.",
     timeZone: "Europe/London",
@@ -295,6 +311,13 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
+  // The federation import is the same half marathon, not another race distance.
+  if (
+    slug === "wa-32-hella-hamburg-half-marathon-7238156" &&
+    date === "2026-10-25" &&
+    distance === "Other"
+  )
+    return true;
   // These imported 50km Ultra placeholders are superseded by the opened
   // organiser programmes: Beyond NCL 25/55km and The Priory 100km.
   if (
@@ -345,7 +368,10 @@ export function checkedFixtureStartLabel(
   if (!date || !distanceCodes) return null;
   const detail = FIXTURE_DETAILS[`${slug}|${date}`];
   if (!detail) return null;
-  const codes = distanceCodes.split(" · ").map((code) => code.trim());
+  const codes = distanceCodes
+    .split(" · ")
+    .map((code) => code.trim())
+    .filter((code) => !isReviewedFixturePlaceholder(slug, date, code));
   const labels = codes.map((code) => detail.starts[code]?.label ?? null);
   if (labels.every((label) => label === labels[0])) return labels[0] ?? null;
   if (labels.some(Boolean))
