@@ -1,0 +1,262 @@
+{
+  "santa-cruz-marathon|2026-10-25": {
+    "summary": "Santa Cruz Marathon. Start times are local to the race venue.",
+    "timeZone": "America/Los_Angeles",
+    "sourceUrl": "https://www.runsantacruz.com/schedule",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "note": "The 2026 organiser schedule explicitly places the marathon at 07:00; 07:15 belongs to the half marathon and 5 K."
+      }
+    }
+  },
+  "retie-trail|2026-10-25": {
+    "summary": "Retie Trail. Start times are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://www.retietrail.be/praktisch/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "8K": {
+        "time": "10:45",
+        "note": "The dated organiser programme lists 8 K at 10:45, 17 K at 11:00 and 31 K at 10:00. Bib collection is 09:00, not the race start."
+      },
+      "17K": {
+        "time": "11:00",
+        "note": "The dated organiser programme lists 8 K at 10:45, 17 K at 11:00 and 31 K at 10:00. Bib collection is 09:00, not the race start."
+      },
+      "31K": {
+        "time": "10:00",
+        "note": "The dated organiser programme lists 8 K at 10:45, 17 K at 11:00 and 31 K at 10:00. Bib collection is 09:00, not the race start."
+      }
+    }
+  },
+  "bbbrun|2026-10-25": {
+    "summary": "BBBRun Bennelong Bridge Run. Start times are local to the race venue.",
+    "timeZone": "Australia/Sydney",
+    "sourceUrl": "https://www.bbbrun.com.au/faq/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "06:50",
+        "note": "The edition-specific organiser FAQ says half marathon 06:50; 06:30 on the booking header is a generic event time. 05:45 is bib collection. Organiser says times are subject to change."
+      }
+    }
+  },
+  "runthrough-battersea-park-january-2027|2027-01-09": {
+    "summary": "Battersea Park 5K, 10K & Half Marathon — January 2027. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-january-2027",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "10:30",
+        "note": "The organiser event header and race-day schedule agree for Half 10:30 and 10 K 11:15. Hold 5 K: header 11:10 versus prose 11:11."
+      },
+      "10K": {
+        "time": "11:15",
+        "note": "The organiser event header and race-day schedule agree for Half 10:30 and 10 K 11:15. Hold 5 K: header 11:10 versus prose 11:11."
+      },
+      "5K": {
+        "time": null,
+        "label": "Start time awaiting organiser clarification",
+        "note": "The organiser's event header gives 11:10; its race-day schedule gives 11:11.",
+        "publicNote": "The organiser currently lists conflicting 5 K times. Check the final race instructions."
+      }
+    }
+  },
+  "endurancelife-dorset|2026-12-05": {
+    "summary": "Endurancelife Dorset. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.endurancelife.com/pop/times.asp?e=521",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10K": {
+        "time": "11:00",
+        "note": "The dated Dorset event links to the organiser's category timetable: marathon mass start 09:00, half 10:00, 10 K 11:00. Coach departures and briefings are explicitly separate."
+      },
+      "Half": {
+        "time": "10:00",
+        "note": "The dated Dorset event links to the organiser's category timetable: marathon mass start 09:00, half 10:00, 10 K 11:00. Coach departures and briefings are explicitly separate."
+      },
+      "Marathon": {
+        "time": "09:00",
+        "note": "The dated Dorset event links to the organiser's category timetable: marathon mass start 09:00, half 10:00, 10 K 11:00. Coach departures and briefings are explicitly separate."
+      }
+    }
+  },
+  "up-and-running-events-bellahouston-park-5k-10k-half-marathon-may-coa|2026-11-07": {
+    "summary": "Bellahouston Park 5K, 10K & Half Marathon. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.letsdothis.com/gb/e/bellahouston-park-5k10khalf-marathon-november-2026-261971",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "10:10",
+        "note": "Organiser-linked November 2026 entry page agrees in both start-time section and race-day logistics: Half 09:30, 10 K 10:00, 5 K 10:10. Stored organiser link was an old August edition."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "Organiser-linked November 2026 entry page agrees in both start-time section and race-day logistics: Half 09:30, 10 K 10:00, 5 K 10:10. Stored organiser link was an old August edition."
+      },
+      "Half": {
+        "time": "09:30",
+        "note": "Organiser-linked November 2026 entry page agrees in both start-time section and race-day logistics: Half 09:30, 10 K 10:00, 5 K 10:10. Stored organiser link was an old August edition."
+      }
+    }
+  },
+  "st-jude-memphis-marathon|2026-12-05": {
+    "summary": "St. Jude Memphis Marathon. Start times are local to the race venue.",
+    "timeZone": "America/Chicago",
+    "sourceUrl": "https://www.stjude.org/get-involved/fitness-fundraisers/memphis-marathon/races/in-person-races.html",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:00",
+        "note": "2026 organiser in-person race page and course-map schedule give marathon 08:00; wheelchair 07:55 is a separate start. Entries sold out."
+      }
+    }
+  },
+  "queens-park-5k-10k-october-4ho|2026-12-06": {
+    "summary": "Queen's Park 5K & 10K. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.letsdothis.com/gb/e/queens-park-5k10k-december-2026-261972",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "10:00",
+        "note": "Organiser-linked December entry page explicitly lists both 5 K and 10 K at 10:00 in its start section and race-day logistics."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "Organiser-linked December entry page explicitly lists both 5 K and 10 K at 10:00 in its start section and race-day logistics."
+      }
+    }
+  },
+  "california-international-marathon|2026-12-06": {
+    "summary": "California International Marathon. Start times are local to the race venue.",
+    "timeZone": "America/Los_Angeles",
+    "sourceUrl": "https://runcim.org/start-line/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "note": "The current organiser site confirms 6 December 2026; linked start-line page explicitly says mass start 07:00.07:30 refers to sweep runners."
+      }
+    }
+  },
+  "polar-night-marathon|2027-01-09": {
+    "summary": "PolarNight Marathon. Start times are local to the race venue.",
+    "timeZone": "Europe/Oslo",
+    "sourceUrl": "https://msm.no/en/polar-night-marathon/program-morketidslopet/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "13:00",
+        "note": "The organiser's dated 9 January 2027 programme puts the marathon start at 13:00 in Sjøtun; 11:30 is the bus departure and 15:00 belongs to the half marathon."
+      }
+    }
+  },
+  "neujahrsmarathon|2027-01-01": {
+    "summary": "Neujahrsmarathon. Start times are local to the race venue.",
+    "timeZone": "Europe/Zurich",
+    "sourceUrl": "https://www.neujahrsmarathon.ch/zeitplan/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "00:00",
+        "note": "The organiser's edition-specific timetable explicitly dates the marathon start 01.01.27 at 00:00. This is a verified midnight start, not an unknown-time default; the registration header's 31 December is the event weekend start."
+      }
+    }
+  },
+  "cebu-marathon|2027-01-10": {
+    "summary": "Cebu Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Manila",
+    "sourceUrl": "https://www.cebumarathon.com.ph/raceinfo",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "00:00",
+        "note": "The current 2027 race page confirms 10 January; its gun-start infographic was visually inspected and gives 42 K at 12:00 AM, half at 03:00, 10 K 04:30 and 5 K 05:30. Marathon is verified midnight."
+      }
+    }
+  },
+  "two-cities-marathon|2026-11-01": {
+    "summary": "Two Cities Marathon. Start times are local to the race venue.",
+    "timeZone": "America/Los_Angeles",
+    "sourceUrl": "https://www.run2cm.com/guide",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "06:30",
+        "note": "The 2026 organiser event guide explicitly dates the full marathon start Sunday 1 November at 06:30, with half also 06:30 and 5 K/10 K 06:45. Times are venue-local after the daylight-saving change."
+      }
+    }
+  },
+  "toulouse-metropole-run-experience|2026-11-01": {
+    "summary": "Harmonie Mutuelle Toulouse Métropole Run Experience. Start times are local to the race venue.",
+    "timeZone": "Europe/Paris",
+    "sourceUrl": "https://harmonie-mutuelle.toulouserunexperience.fr/marathon/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:00",
+        "note": "Dated 2026 organiser distance pages explicitly list the complete start waves. Publish with per-distance first-wave labels and calendar notes, never as a common start for every runner.",
+        "publicNote": "Start waves run from 08:00 to 08:30; wheelchair start 07:55. Follow your assigned corral.",
+        "label": "First wave 08:00 CET · waves until 08:30"
+      },
+      "Half": {
+        "time": "10:00",
+        "note": "Dated 2026 organiser distance pages explicitly list the complete start waves. Publish with per-distance first-wave labels and calendar notes, never as a common start for every runner.",
+        "publicNote": "Start waves run from 10:00 to 11:08; wheelchair start 09:55. Follow your assigned corral.",
+        "label": "First wave 10:00 CET · waves until 11:08",
+        "sourceUrl": "https://harmonie-mutuelle.toulouserunexperience.fr/semi-marathon/"
+      },
+      "10K": {
+        "time": "14:00",
+        "note": "Dated 2026 organiser distance pages explicitly list the complete start waves. Publish with per-distance first-wave labels and calendar notes, never as a common start for every runner.",
+        "publicNote": "Start waves run from 14:00 to 14:35; wheelchair start 13:55. Follow your assigned corral.",
+        "label": "First wave 14:00 CET · waves until 14:35",
+        "sourceUrl": "https://harmonie-mutuelle.toulouserunexperience.fr/10k/"
+      }
+    }
+  },
+  "wa-trek-marathon-de-lille-7244788|2026-10-25": {
+    "summary": "TREK Marathon de Lille. Start times are local to the race venue.",
+    "timeZone": "Europe/Paris",
+    "sourceUrl": "https://marathon-lille.com/les-courses/marathon.html",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "11:15",
+        "note": "Organiser regulations verify 25 October 2026, 42.195 km and 11:15 single start for all corrals. Registrations closed. Correct unsupportedOther 0 km in place, preserving canonical IDs and audit."
+      }
+    }
+  },
+  "reggae-marathon|2026-12-06": {
+    "summary": "Reggae Marathon. Start times are local to the race venue.",
+    "timeZone": "America/Jamaica",
+    "sourceUrl": "https://www.reggaemarathon.com/wp-content/uploads/2026/02/2026-Reggae-Marathon-International-Fact-Sheet-.pdf",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "05:45",
+        "note": "The 2026 organiser fact sheet verifies only in-person half marathon, 10 K and 5 K inKingston. Correct the unsupported full-marathon listing to the half at 05:45, preserving its canonical event/edition IDs; do not copy the time to a full marathon."
+      }
+    }
+  },
+  "cadbury-marathon|2027-01-03": {
+    "summary": "Cadbury Marathon: 2027 start awaiting confirmation.",
+    "timeZone": "Australia/Hobart",
+    "sourceUrl": "https://cadburymarathon.com.au/marathon/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": null,
+        "label": "Start time not yet confirmed",
+        "note": "The 2027 marathon page explicitly saysTBC. The booking header 06:00 and linked 2026 booklet do not resolve 2027.",
+        "publicNote": "The organiser has not confirmed the 2027 marathon start time."
+      }
+    }
+  }
+}

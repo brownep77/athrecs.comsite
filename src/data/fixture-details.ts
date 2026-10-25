@@ -12,6 +12,7 @@ import accraStart from "./accra-start-2026-10-25.json" with { type: "json" };
 import imminentStarts from "./imminent-starts-2026-10-25.json" with { type: "json" };
 import urgentStarts from "./urgent-starts-followup-2026-10-25.json" with { type: "json" };
 import { isUrgentReviewedPlaceholder } from "./urgent-starts-followup-2026-10-25.ts";
+import threeMonthStarts from "./three-month-starts-2026-10-25.json" with { type: "json" };
 import nextUrgentStarts from "./urgent-starts-next-2026-10-25.json" with { type: "json" };
 import { isNextUrgentPlaceholder } from "./urgent-starts-next-2026-10-25.ts";
 
@@ -68,6 +69,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
       },
     },
   },
+  ...threeMonthStarts,
   ...imminentStarts,
   ...urgentStarts,
   ...nextUrgentStarts,
