@@ -32,7 +32,10 @@ export async function publishCheckedFixtures(sql, publishing, details, review = 
           review.baseline?.[`${key}|${distance}`] === null &&
           addition?.eventId === events[0].id &&
           Number.isFinite(addition.distanceKm) &&
-          addition.distanceKm > 0 &&
+          (addition.distanceKm > 0 ||
+            (addition.distanceKm === 0 &&
+              distance === "Track & field" &&
+              addition.nonDistanceProgramme === true)) &&
           !!addition.status;
         if (review.baseline) {
           const expected = review.baseline[`${key}|${distance}`];

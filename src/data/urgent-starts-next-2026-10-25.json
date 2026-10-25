@@ -1,0 +1,218 @@
+{
+  "wa-privatbank-kyiv-unbroken-marathon-7237779|2026-10-25": {
+    "place": {
+      "city": "Khmelnytskyi",
+      "county": ""
+    },
+    "summary": "The 2026 Kyiv Unbroken races take place in Khmelnytskyi, starting at 5 Heroiv Maidanu Street.",
+    "timeZone": "Europe/Kyiv",
+    "sourceUrl": "https://kyivmarathon.org/programa-zahodu/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:02",
+        "label": "Open first wave 08:02 EET · waves until 08:04",
+        "note": "Open marathon waves: 08:02, 08:03 and 08:04 EET. The national championship starts separately at 08:00. Venue: Khmelnytskyi; village opening at 07:00 is not a race start.",
+        "publicNote": "Open marathon waves: 08:02, 08:03 and 08:04 EET. The national championship starts separately at 08:00. Venue: Khmelnytskyi; village opening at 07:00 is not a race start."
+      },
+      "21K": {
+        "time": "08:20",
+        "label": "First wave 08:20 EET · waves until 08:28",
+        "note": "21km waves: 08:20, 08:22, 08:24, 08:26 and 08:28 EET. Follow your assigned wave.",
+        "publicNote": "21km waves: 08:20, 08:22, 08:24, 08:26 and 08:28 EET. Follow your assigned wave."
+      },
+      "10K": {
+        "time": "08:10",
+        "label": "First wave 08:10 EET · waves until 08:14",
+        "note": "10km waves: 08:10, 08:11, 08:12, 08:13 and 08:14 EET. Follow your assigned wave.",
+        "publicNote": "10km waves: 08:10, 08:11, 08:12, 08:13 and 08:14 EET. Follow your assigned wave."
+      },
+      "5K": {
+        "time": "11:40",
+        "label": "First wave 11:40 EET · waves until 11:43",
+        "note": "5km waves: 11:40, 11:41, 11:42 and 11:43 EET. Follow your assigned wave.",
+        "publicNote": "5km waves: 11:40, 11:41, 11:42 and 11:43 EET. Follow your assigned wave."
+      }
+    }
+  },
+  "wa-5th-shuhei-nishida-memorial-track-and-field-tournament-7244642|2026-10-25": {
+    "place": {
+      "city": "Wakayama",
+      "county": ""
+    },
+    "summary": "The organiser's competition service reports cancellation due to heavy rain on Sunday 25 October.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://games.athleteranking.com/gamedata.php?gid=zha12026029",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Track & field": {
+        "time": null,
+        "label": "Cancelled due to heavy rain",
+        "note": "Cancellation notice issued on 25 October at 10:30 JST. The published Sunday programme had field events from 09:00; no remaining Sunday start is offered. This correction does not cancel Saturday's competition.",
+        "publicNote": "Cancellation notice issued on 25 October at 10:30 JST. The published Sunday programme had field events from 09:00; no remaining Sunday start is offered. This correction does not cancel Saturday's competition."
+      }
+    }
+  },
+  "wa-4th-kokushikan-university-competition-7245266|2026-11-07": {
+    "place": {
+      "city": "Tama",
+      "county": ""
+    },
+    "summary": "Kokushikan University's fourth 2026 meeting is on 7–8 November. The older 24–25 October dates are superseded.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://kokushikan-trackfield.com/schedule/%E7%AC%AC4%E5%9B%9E%E5%9B%BD%E5%A3%AB%E8%88%98%E5%A4%A7%E5%AD%A6%E7%AB%B6%E6%8A%80%E4%BC%9A/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Track & field": {
+        "time": null,
+        "label": "Start time not yet verified",
+        "note": "The organiser's event page and competition regulations confirm 7–8 November 2026. The opened regulations list disciplines by day but no start clock. Entry closed 23 October; 20:00 was the entry deadline, not the competition start.",
+        "publicNote": "The organiser's event page and competition regulations confirm 7–8 November 2026. The opened regulations list disciplines by day but no start clock. Entry closed 23 October; 20:00 was the entry deadline, not the competition start."
+      }
+    }
+  },
+  "wa-4th-kokushikan-university-competition-7245266|2026-11-08": {
+    "place": {
+      "city": "Tama",
+      "county": ""
+    },
+    "summary": "Kokushikan University's fourth 2026 meeting is on 7–8 November. The older 24–25 October dates are superseded.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://kokushikan-trackfield.com/schedule/%E7%AC%AC4%E5%9B%9E%E5%9B%BD%E5%A3%AB%E8%88%98%E5%A4%A7%E5%AD%A6%E7%AB%B6%E6%8A%80%E4%BC%9A/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Track & field": {
+        "time": null,
+        "label": "Start time not yet verified",
+        "note": "The organiser's event page and competition regulations confirm 7–8 November 2026. The opened regulations list disciplines by day but no start clock. Entry closed 23 October; 20:00 was the entry deadline, not the competition start.",
+        "publicNote": "The organiser's event page and competition regulations confirm 7–8 November 2026. The opened regulations list disciplines by day but no start clock. Entry closed 23 October; 20:00 was the entry deadline, not the competition start."
+      }
+    }
+  },
+  "wa-croatian-road-running-championships-7245412|2026-10-31": {
+    "place": {
+      "city": "Zaprešić",
+      "county": ""
+    },
+    "summary": "The Croatian road championships take place beside Westgate in Zaprešić on Saturday 31 October. The published timetable is preliminary.",
+    "timeZone": "Europe/Zagreb",
+    "sourceUrl": "https://has.hr/images/stories/HAS/servisi/raspisi26/20261031_Zapresic_PH_cestovna_trcanja_raspis.pdf",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "3K": {
+        "time": null,
+        "label": "Provisional: boys 11:05 · girls 11:25 CET",
+        "note": "Preliminary timetable: cadet boys 11:05 and cadet girls 11:25 CET. Confirm the final timetable with the organiser.",
+        "publicNote": "Preliminary timetable: cadet boys 11:05 and cadet girls 11:25 CET. Confirm the final timetable with the organiser."
+      },
+      "5K": {
+        "time": null,
+        "label": "Provisional: junior men 11:45 · junior women 12:15 CET",
+        "note": "Preliminary timetable: younger junior men 11:45, younger junior women 12:15; the separate ZŠĆ open 5km is 14:30 CET. Confirm your category and final timetable.",
+        "publicNote": "Preliminary timetable: younger junior men 11:45, younger junior women 12:15; the separate ZŠĆ open 5km is 14:30 CET. Confirm your category and final timetable."
+      },
+      "10K": {
+        "time": null,
+        "label": "Provisional: senior men 12:45 · senior women 13:40 CET",
+        "note": "Preliminary timetable: senior men 12:45 and senior women 13:40 CET. The 10:00 technical meeting and 11:00 programme opening are not these race starts.",
+        "publicNote": "Preliminary timetable: senior men 12:45 and senior women 13:40 CET. The 10:00 technical meeting and 11:00 programme opening are not these race starts."
+      }
+    }
+  },
+  "wa-yuen-long-district-sports-festival-yuen-tin-street-run-inline-speed-skating-7246699|2026-10-25": {
+    "place": {
+      "city": "Tin Shui Wai",
+      "county": ""
+    },
+    "summary": "Yuen Tin Street Run has separate running and inline-skating programmes. These listings cover the running distances.",
+    "timeZone": "Asia/Hong_Kong",
+    "sourceUrl": "https://ytstreetrun.sportsoho.com/inline-skating-street-run",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10K": {
+        "time": null,
+        "label": "Provisional start 08:30 HKT",
+        "note": "The organiser's programme marks the running 10km start as provisional at 08:30 HKT. The 07:15 start belongs to inline skating.",
+        "publicNote": "The organiser's programme marks the running 10km start as provisional at 08:30 HKT. The 07:15 start belongs to inline skating."
+      },
+      "3K": {
+        "time": null,
+        "label": "Provisional start 08:40 HKT",
+        "note": "The organiser's programme marks the running 3km start as provisional at 08:40 HKT.",
+        "publicNote": "The organiser's programme marks the running 3km start as provisional at 08:40 HKT."
+      },
+      "1K": {
+        "time": null,
+        "label": "Provisional family start 10:00 HKT",
+        "note": "The 1km family run is non-competitive and untimed. Its published 10:00 HKT start is provisional.",
+        "publicNote": "The 1km family run is non-competitive and untimed. Its published 10:00 HKT start is provisional."
+      }
+    }
+  },
+  "sierra-leone-marathon|2026-10-25": {
+    "place": {
+      "city": "Makeni",
+      "county": ""
+    },
+    "summary": "Street Child's marathon takes place in Makeni. The 2026 FAQ gives an approximate early-morning start.",
+    "timeZone": "Africa/Freetown",
+    "sourceUrl": "https://www.street-child.org/challenges/the-sierra-leone-marathon",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": null,
+        "label": "Approximately 06:00 GMT · exact start unverified",
+        "note": "The FAQ explicitly names Sunday 25 October 2026 and says races usually start around 06:00. This is an estimate, not a confirmed marathon clock; check your race instructions.",
+        "publicNote": "The FAQ explicitly names Sunday 25 October 2026 and says races usually start around 06:00. This is an estimate, not a confirmed marathon clock; check your race instructions."
+      }
+    }
+  },
+  "les-foulees-mamertines|2026-10-25": {
+    "place": {
+      "city": "Mamers",
+      "county": ""
+    },
+    "summary": "The children's programme groups the 1.5km and 3km races from 09:00; individual starts are not separately confirmed.",
+    "timeZone": "Europe/Paris",
+    "sourceUrl": "https://fr.milesrepublic.com/event/les-foulees-mamertines-17292",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "1.5K": {
+        "time": null,
+        "label": "Children's programme from 09:00 CET",
+        "note": "The authorised 2026 entry programme groups the 1.5km and 3km children's races at 09:00 CET. An exact start for this distance is not separately stated. Entry is on site; the youth runs are untimed.",
+        "publicNote": "The authorised 2026 entry programme groups the 1.5km and 3km children's races at 09:00 CET. An exact start for this distance is not separately stated. Entry is on site; the youth runs are untimed."
+      },
+      "3K": {
+        "time": null,
+        "label": "Children's programme from 09:00 CET",
+        "note": "The authorised 2026 entry programme groups the 1.5km and 3km children's races at 09:00 CET. An exact start for this distance is not separately stated. Entry is on site; the youth runs are untimed.",
+        "publicNote": "The authorised 2026 entry programme groups the 1.5km and 3km children's races at 09:00 CET. An exact start for this distance is not separately stated. Entry is on site; the youth runs are untimed."
+      }
+    }
+  },
+  "wa-media-maraton-del-callao-7247350|2026-10-25": {
+    "place": {
+      "city": "Callao",
+      "county": ""
+    },
+    "summary": "Callao's event includes a half marathon and 10km. The exact start remains under review.",
+    "timeZone": "America/Lima",
+    "sourceUrl": "https://perurunners.com/evento/media-maraton-del-callao-10k-2026/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": null,
+        "label": "Start time under review: 06:30 / 06:31 PET",
+        "note": "The organiser website gives 06:30 PET. A later race-week update reported elsewhere gives 06:31 for both distances, but its original social post could not be opened. Check the final organiser instructions.",
+        "publicNote": "The organiser website gives 06:30 PET. A later race-week update reported elsewhere gives 06:31 for both distances, but its original social post could not be opened. Check the final organiser instructions."
+      },
+      "10K": {
+        "time": null,
+        "label": "Start time under review: 06:30 / 06:31 PET",
+        "note": "The organiser website gives 06:30 PET. A later race-week update reported elsewhere gives 06:31 for both distances, but its original social post could not be opened. Check the final organiser instructions.",
+        "publicNote": "The organiser website gives 06:30 PET. A later race-week update reported elsewhere gives 06:31 for both distances, but its original social post could not be opened. Check the final organiser instructions."
+      }
+    }
+  }
+}

@@ -62,6 +62,14 @@ export function slugify(input: string): string {
     .replace(/-+$/g, "");
 }
 
+/** A supplied public identifier is not a display name to truncate or regenerate. */
+export function importEventSlug(supplied: string | undefined, name = ""): string {
+  const explicit = supplied?.trim();
+  return explicit && /^[a-z0-9][a-z0-9-]*$/.test(explicit)
+    ? explicit
+    : slugify(explicit || name);
+}
+
 function parseSport(raw: string): Sport {
   const t = raw.trim();
   if (/^track\s*(?:&|and)?\s*field$/i.test(t) || /^trackandfield$/i.test(t)) {
@@ -261,7 +269,7 @@ export function parseEventsCsv(csv: string): {
     if (!name) continue;
     const sport = get("sport") || "Running";
     const city = geography("city");
-    const slug = slugify(get("slug") || name);
+    const slug = importEventSlug(get("slug"), name);
     if (!eventsMap.has(slug)) {
       eventsMap.set(slug, {
         slug,
@@ -349,7 +357,7 @@ export async function applyImportBundle(
   for (const raw of bundle.events ?? []) {
     try {
       const sport = parseSport(raw.sport);
-      const slug = slugify(raw.slug || raw.name);
+      const slug = importEventSlug(raw.slug, raw.name);
       const distances = raw.distances?.length ? raw.distances : ["Other"];
       const existing = await sql<{ id: number }>`
         select id from events where slug = ${slug} limit 1
@@ -403,7 +411,7 @@ export async function applyImportBundle(
 
   for (const raw of bundle.editions ?? []) {
     try {
-      const slug = slugify(raw.eventSlug || raw.eventName || "");
+      const slug = importEventSlug(raw.eventSlug, raw.eventName);
       if (!slug) throw new Error("Edition needs eventSlug or eventName");
       if (!/^\d{4}-\d{2}-\d{2}$/.test(raw.date)) {
         throw new Error(`Bad date "${raw.date}" — use YYYY-MM-DD`);
