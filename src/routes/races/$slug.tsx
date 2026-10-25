@@ -1,6 +1,7 @@
 import { RaceActions } from "@/components/races/RaceActions";
 import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
 import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
+import { URGENT_RACE_PAGE_NOTICES } from "@/data/urgent-starts-next-2026-10-25-pages";
 import { FIXTURE_DETAILS } from "@/data/fixture-details";
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { ResultDisqualification } from "@/components/athletes/ResultDisqualification";
@@ -379,7 +380,7 @@ export function RacePageContent({
             {shownDistances.map((d) => (
               <DistanceBadge key={d} distance={d} />
             ))}
-            {Object.entries(FIXTURE_DATE_REVIEWS)
+            {Object.entries({ ...FIXTURE_DATE_REVIEWS, ...URGENT_RACE_PAGE_NOTICES })
               .filter(([key]) => key.startsWith(`${event.slug}|`))
               .map(([key, review]) => (
                 <p

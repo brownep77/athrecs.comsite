@@ -1,0 +1,2143 @@
+{
+  "checkedAt": "2026-10-25",
+  "scope": "All 144 swimming organisations still using World Aquatics membership as their primary link, plus deeper Scottish Swimming review.",
+  "membershipURL": "https://www.worldaquatics.com/members/national-federations",
+  "membershipMatches": [
+    {
+      "slug": "aquatics-mexico",
+      "storedName": "Aquatics México",
+      "country": "Mexico",
+      "name": "Federación de Asociaciones de Deportes Acuáticos Aquatics México, Asociación Civil",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": false
+    },
+    {
+      "slug": "barbadian-swimming",
+      "storedName": "Barbados Aquatic Sports Association",
+      "country": "Barbados",
+      "name": "Barbados Aquatic Sports Association",
+      "website": "https://www.swimbarbados.com",
+      "websiteText": "www.swimbarbados.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "bolivian-swimming",
+      "storedName": "Federación Boliviana de Natación",
+      "country": "Bolivia",
+      "name": "Swimming Federation of Bolivia",
+      "website": "https://www.febona.info",
+      "websiteText": "www.febona.info",
+      "nameMatches": false
+    },
+    {
+      "slug": "chinese-swimming",
+      "storedName": "China Swimming Association",
+      "country": "People's Republic of China",
+      "name": "China Swimming Association",
+      "website": "https://www.swimming.org.cn",
+      "websiteText": "www.swimming.org.cn",
+      "nameMatches": true
+    },
+    {
+      "slug": "chinese-taipei-swimming",
+      "storedName": "Chinese Taipei Swimming Association",
+      "country": "Chinese Taipei",
+      "name": "Chinese Taipei Swimming Association",
+      "website": "https://www.swimming.org.tw",
+      "websiteText": "www.swimming.org.tw",
+      "nameMatches": true
+    },
+    {
+      "slug": "nepalese-swimming",
+      "storedName": "Nepal Swimming Association",
+      "country": "Nepal",
+      "name": "Nepal Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "vietnamese-swimming",
+      "storedName": "Vietnam Aquatic Sports Association",
+      "country": "Vietnam",
+      "name": "Vietnam Aquatic Sports Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "macau-swimming",
+      "storedName": "Associacao Geral de Natacao de Macau, China",
+      "country": "Macau, China",
+      "name": "Associacao Geral de Natacao de Macau, China",
+      "website": "https://www.macaunatacao.org.mo",
+      "websiteText": "www.macaunatacao.org.mo",
+      "nameMatches": true
+    },
+    {
+      "slug": "algeria-swimming",
+      "storedName": "Fédération Algérienne de Natation",
+      "country": "Algeria",
+      "name": "Fédération Algérienne de Natation",
+      "website": "https://www.fanatation.dz",
+      "websiteText": "www.fanatation.dz",
+      "nameMatches": true
+    },
+    {
+      "slug": "angola-swimming",
+      "storedName": "Federação Angolana de Natação",
+      "country": "Angola",
+      "name": "Federação Angolana de Natação",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "burundi-swimming",
+      "storedName": "Fédération Burundaise de Natation",
+      "country": "Burundi",
+      "name": "Fédération Burundaise de Natation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "benin-swimming",
+      "storedName": "Fédération Béninoise de Natation",
+      "country": "Benin",
+      "name": "Fédération Béninoise de Natation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "botswana-swimming",
+      "storedName": "Botswana Swimming Sport Association",
+      "country": "Botswana",
+      "name": "Botswana Swimming Sport Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "burkina-faso-swimming",
+      "storedName": "Fédération Burkinabé de Natation et de Sauvetage",
+      "country": "Burkina Faso",
+      "name": "Fédération Burkinabé de Natation et de Sauvetage",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "central-african-republic-swimming",
+      "storedName": "Fédération Centrafricaine de Natation",
+      "country": "Central African Republic",
+      "name": "Fédération Centrafricaine de Natation",
+      "website": "https://www.fcn-rca.cabanova.fr",
+      "websiteText": "www.fcn-rca.cabanova.fr",
+      "nameMatches": true
+    },
+    {
+      "slug": "republic-of-the-congo-swimming",
+      "storedName": "Fédération Congolaise de Natation",
+      "country": "Congo",
+      "name": "Fédération Congolaise de Natation",
+      "website": "https://www.feconat.org",
+      "websiteText": "www.feconat.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "chad-swimming",
+      "storedName": "Fédération Tchadienne de Natation Amateur",
+      "country": "Chad",
+      "name": "Fédération Tchadienne de Natation Amateur",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "cote-divoire-swimming",
+      "storedName": "Fédération Ivoirienne de Natation et de Sauvetage",
+      "country": "Côte d'Ivoire",
+      "name": "Fédération Ivoirienne de Natation et de Sauvetage",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "cameroon-swimming",
+      "storedName": "Fédération Camerounaise de Natation et de Sauvetage",
+      "country": "Cameroon",
+      "name": "Fédération Camerounaise de Natation et de Sauvetage",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "democratic-republic-of-the-congo-swimming",
+      "storedName": "Fédération de Natation en République Démocratique du Congo",
+      "country": "Democratic Republic of the Congo",
+      "name": "Fédération de Natation en République Démocratique du Congo",
+      "website": "https://fenaderec.com",
+      "websiteText": "fenaderec.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "comoros-swimming",
+      "storedName": "Comoros Swimming Federation",
+      "country": "Comoros",
+      "name": "Comoros Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "cabo-verde-swimming",
+      "storedName": "Federacao Cabo-verdiana de Natacao - FECAN",
+      "country": "Cape Verde",
+      "name": "Federacao Cabo-verdiana de Natacao - FECAN",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "djibouti-swimming",
+      "storedName": "Fédération Djiboutienne de Natation",
+      "country": "Djibouti",
+      "name": "Fédération Djiboutienne de Natation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "egypt-swimming",
+      "storedName": "Egyptian Swimming Federation",
+      "country": "Egypt",
+      "name": "Egyptian Swimming Federation",
+      "website": "https://www.esf-eg.org",
+      "websiteText": "www.esf-eg.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "eritrea-swimming",
+      "storedName": "Eritrean National Swimming Federation",
+      "country": "Eritrea",
+      "name": "Eritrean National Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "ethiopia-swimming",
+      "storedName": "Ethiopian Aquatics Federation",
+      "country": "Ethiopia",
+      "name": "Ethiopian Aquatics Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "gabon-swimming",
+      "storedName": "Fédération Gabonaise de Natation",
+      "country": "Gabon",
+      "name": "Fédération Gabonaise de Natation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "gambia-swimming",
+      "storedName": "Gambia Swimming & Aquatic Sports Association",
+      "country": "Gambia",
+      "name": "Gambia Swimming & Aquatic Sports Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "guinea-bissau-swimming",
+      "storedName": "Guiné-Bissau Aquatics",
+      "country": "Guinea-Bissau",
+      "name": "Guiné-Bissau Aquatics",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "equatorial-guinea-swimming",
+      "storedName": "Federación Ecuatoguineana de Natación",
+      "country": "Equatorial Guinea",
+      "name": "Federación Ecuatoguineana de Natación",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "ghana-swimming",
+      "storedName": "Ghana Swimming Association",
+      "country": "Ghana",
+      "name": "Ghana Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "guinea-swimming",
+      "storedName": "Fédération Guinéenne de Natation et Sauvetage",
+      "country": "Guinea",
+      "name": "Fédération Guinéenne de Natation et Sauvetage",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "libya-swimming",
+      "storedName": "Libyan Swimming Federation",
+      "country": "Libya",
+      "name": "Libyan Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "liberia-swimming",
+      "storedName": "Liberia National Swimming Federation",
+      "country": "Liberia",
+      "name": "Liberia National Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "lesotho-swimming",
+      "storedName": "Lesotho Swimmers Association",
+      "country": "Lesotho",
+      "name": "Lesotho Swimmers Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "madagascar-swimming",
+      "storedName": "Fédération Malgache de Natation",
+      "country": "Madagascar",
+      "name": "Fédération Malgache de Natation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "morocco-swimming",
+      "storedName": "Fédération Royale Marocaine de Natation",
+      "country": "Morocco",
+      "name": "Fédération Royale Marocaine de Natation",
+      "website": "https://www.frmnatation.com",
+      "websiteText": "www.frmnatation.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "malawi-swimming",
+      "storedName": "Malawi Aquatic Union",
+      "country": "Malawi",
+      "name": "Malawi Aquatic Union",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "mali-swimming",
+      "storedName": "Fédération Malienne de Natation",
+      "country": "Mali",
+      "name": "Fédération Malienne de Natation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "mozambique-swimming",
+      "storedName": "Federação Moçambicana de Natação",
+      "country": "Mozambique",
+      "name": "Federação Moçambicana de Natação",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "mauritania-swimming",
+      "storedName": "Fédération Mauritanienne de Natation",
+      "country": "Mauritania",
+      "name": "Fédération Mauritanienne de Natation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "namibia-swimming",
+      "storedName": "Namibia Aquatic Sports Federation",
+      "country": "Namibia",
+      "name": "Namibia Aquatic Sports Federation",
+      "website": "https://swimmingnamibia.com/",
+      "websiteText": "https://swimmingnamibia.com/",
+      "nameMatches": true
+    },
+    {
+      "slug": "nigeria-swimming",
+      "storedName": "Nigeria Aquatics Federation",
+      "country": "Nigeria",
+      "name": "Nigeria Aquatics Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "niger-swimming",
+      "storedName": "Fédération Nigérienne des Sports Nautiques",
+      "country": "Niger",
+      "name": "Fédération Nigérienne des Sports Nautiques",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "rwanda-swimming",
+      "storedName": "Rwanda Swimming Federation",
+      "country": "Rwanda",
+      "name": "Rwanda Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "senegal-swimming",
+      "storedName": "Fédération Sénégalaise de Natation et de Sauvetage",
+      "country": "Senegal",
+      "name": "Fédération Sénégalaise de Natation et de Sauvetage",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "seychelles-swimming",
+      "storedName": "Seychelles Aquatics Federation",
+      "country": "Seychelles",
+      "name": "Seychelles Aquatics Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "sierra-leone-swimming",
+      "storedName": "Sierra Leone Amateur Swimming, Diving and Water Polo Association",
+      "country": "Sierra Leone",
+      "name": "Sierra Leone Amateur Swimming, Diving and Water Polo Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "somalia-swimming",
+      "storedName": "Somali Swimming Federation",
+      "country": "Somalia",
+      "name": "Somali Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "sudan-swimming",
+      "storedName": "Sudan Amateur Swimming Association",
+      "country": "Sudan",
+      "name": "Sudan Amateur Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "eswatini-swimming",
+      "storedName": "Eswatini Swimming Association",
+      "country": "Eswatini",
+      "name": "Eswatini Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "tanzania-swimming",
+      "storedName": "Tanzania Swimming Association",
+      "country": "Tanzania",
+      "name": "Tanzania Swimming Association",
+      "website": "https://www.swimtanzania.org",
+      "websiteText": "www.swimtanzania.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "togo-swimming",
+      "storedName": "Fédération Togolaise de Natation et de Sauvetage",
+      "country": "Togo",
+      "name": "Fédération Togolaise de Natation et de Sauvetage",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "tunisia-swimming",
+      "storedName": "Fédération Tunisienne de Natation",
+      "country": "Tunisia",
+      "name": "Fédération Tunisienne de Natation",
+      "website": "http://www.ftnatation.tn/",
+      "websiteText": "http://www.ftnatation.tn/",
+      "nameMatches": true
+    },
+    {
+      "slug": "uganda-swimming",
+      "storedName": "Uganda Aquatics",
+      "country": "Uganda",
+      "name": "Uganda Aquatics",
+      "website": "https://www.ugandaswimming.org",
+      "websiteText": "www.ugandaswimming.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "zambia-swimming",
+      "storedName": "Zambia Amateur Swimming Union",
+      "country": "Zambia",
+      "name": "Zambia Amateur Swimming Union",
+      "website": "https://www.swimzambia.org",
+      "websiteText": "www.swimzambia.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "zimbabwe-swimming",
+      "storedName": "Zimbabwe Aquatic Union",
+      "country": "Zimbabwe",
+      "name": "Zimbabwe Aquatic Union",
+      "website": "https://www.zimaquatics.co.zw",
+      "websiteText": "www.zimaquatics.co.zw",
+      "nameMatches": true
+    },
+    {
+      "slug": "american-samoa-swimming",
+      "storedName": "American Samoa Swimming Association",
+      "country": "American Samoa",
+      "name": "American Samoa Swimming Association",
+      "website": "https://www.oceaniasport.com/asswimming",
+      "websiteText": "www.oceaniasport.com/asswimming",
+      "nameMatches": true
+    },
+    {
+      "slug": "cook-islands-swimming",
+      "storedName": "Cook Islands Aquatics Federation",
+      "country": "Cook Islands",
+      "name": "Cook Islands Aquatics Federation",
+      "website": "https://www.cookislandsaquatics.com",
+      "websiteText": "www.cookislandsaquatics.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "fiji-swimming",
+      "storedName": "Fiji Swimming",
+      "country": "Fiji",
+      "name": "Fiji Swimming",
+      "website": "https://www.fijiswimming.org",
+      "websiteText": "www.fijiswimming.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "guam-swimming",
+      "storedName": "Guam Swimming Federation",
+      "country": "Guam",
+      "name": "Guam Swimming Federation",
+      "website": "https://www.guamswimming.org",
+      "websiteText": "www.guamswimming.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "marshall-islands-swimming",
+      "storedName": "Marshall Islands Swimming Federation",
+      "country": "Marshall Islands",
+      "name": "Marshall Islands Swimming Federation",
+      "website": "https://www.oceaniasport.com/marshalls",
+      "websiteText": "www.oceaniasport.com/marshalls",
+      "nameMatches": true
+    },
+    {
+      "slug": "northern-mariana-islands-swimming",
+      "storedName": "Northern Mariana Islands Swimming Federation",
+      "country": "Northern Mariana Islands",
+      "name": "Northern Mariana Islands Swimming Federation",
+      "website": "https://www.nmiswimmingfederation.org",
+      "websiteText": "www.nmiswimmingfederation.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "palau-swimming",
+      "storedName": "Palau Swimming Association",
+      "country": "Palau",
+      "name": "Palau Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "papua-new-guinea-swimming",
+      "storedName": "Papua New Guinea Swimming Inc.",
+      "country": "Papua New Guinea",
+      "name": "Papua New Guinea Swimming Inc.",
+      "website": "https://www.pngsi.org",
+      "websiteText": "www.pngsi.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "samoa-swimming",
+      "storedName": "Samoa Swimming Association",
+      "country": "Samoa",
+      "name": "Samoa Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "solomon-islands-swimming",
+      "storedName": "Solomon Islands Swimming Federation",
+      "country": "Solomon Islands",
+      "name": "Solomon Islands Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "tonga-swimming",
+      "storedName": "Tonga Swimming Association",
+      "country": "Tonga",
+      "name": "Tonga Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "vanuatu-swimming",
+      "storedName": "Vanuatu Aquatics Federation",
+      "country": "Vanuatu",
+      "name": "Vanuatu Aquatics Federation",
+      "website": "https://vanuatuaquatics.com",
+      "websiteText": "vanuatuaquatics.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "anguilla-swimming",
+      "storedName": "Anguilla Amateur Swimming Association",
+      "country": "Anguilla",
+      "name": "Anguilla Amateur Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "antigua-and-barbuda-swimming",
+      "storedName": "Antigua and Barbuda Swimming Federation",
+      "country": "Antigua and Barbuda",
+      "name": "Antigua and Barbuda Swimming Federation",
+      "website": "https://www.swimantiguabarbuda.com",
+      "websiteText": "www.swimantiguabarbuda.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "aruba-swimming",
+      "storedName": "Aruba Aquatics Federation",
+      "country": "Aruba",
+      "name": "Aruba Aquatics Federation",
+      "website": "https://www.arubaswimming.com",
+      "websiteText": "www.arubaswimming.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "belize-swimming",
+      "storedName": "Belize Aquatics Federation",
+      "country": "Belize",
+      "name": "Belize Aquatics Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "cayman-islands-swimming",
+      "storedName": "Cayman Islands Aquatic Sports Association",
+      "country": "Cayman Islands",
+      "name": "Cayman Islands Aquatic Sports Association",
+      "website": "https://www.ciasa.ky",
+      "websiteText": "www.ciasa.ky",
+      "nameMatches": true
+    },
+    {
+      "slug": "cuba-swimming",
+      "storedName": "Federación Cubana de Natación",
+      "country": "Cuba",
+      "name": "Federación Cubana de Natación",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "curacao-swimming",
+      "storedName": "Curacao Aquatics Federation",
+      "country": "Curacao",
+      "name": "Curacao Aquatics Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "dominica-swimming",
+      "storedName": "Dominica Amateur Swimming Association",
+      "country": "Dominica",
+      "name": "Dominica Amateur Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "el-salvador-swimming",
+      "storedName": "Federación Salvadoreña de Deportes Acuáticos",
+      "country": "El Salvador",
+      "name": "Federación Salvadoreña de Deportes Acuáticos",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "grenada-swimming",
+      "storedName": "Grenada Amateur Swimming Association",
+      "country": "Grenada",
+      "name": "Grenada Amateur Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "guyana-swimming",
+      "storedName": "Guyana Amateur Swimming Association",
+      "country": "Guyana",
+      "name": "Guyana Amateur Swimming Association",
+      "website": "https://www.swimguyana.com",
+      "websiteText": "https://www.swimguyana.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "haiti-swimming",
+      "storedName": "Fédération Haitienne des Sports Aquatiques",
+      "country": "Haiti",
+      "name": "Fédération Haitienne des Sports Aquatiques",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "honduras-swimming",
+      "storedName": "Federación Hondureña de Natación",
+      "country": "Honduras",
+      "name": "Federación Hondureña de Natación",
+      "website": "http://www.fehna.org/",
+      "websiteText": "http://www.fehna.org/",
+      "nameMatches": true
+    },
+    {
+      "slug": "us-virgin-islands-swimming",
+      "storedName": "Virgin Islands Swimming Federation",
+      "country": "Virgin Islands, US",
+      "name": "Virgin Islands Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "british-virgin-islands-swimming",
+      "storedName": "British Virgin Islands Swimming Association",
+      "country": "British Virgin Islands",
+      "name": "British Virgin Islands Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "saint-lucia-swimming",
+      "storedName": "St. Lucia Aquatic Federation",
+      "country": "Saint Lucia",
+      "name": "St. Lucia Aquatic Federation",
+      "website": "https://www.slasa.info",
+      "websiteText": "www.slasa.info",
+      "nameMatches": true
+    },
+    {
+      "slug": "sint-maarten-swimming",
+      "storedName": "SINT MAARTEN AQUATIC FEDERATION",
+      "country": "Sint Maarten",
+      "name": "SINT MAARTEN AQUATIC FEDERATION",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "nicaragua-swimming",
+      "storedName": "Federación de Natación de Nicaragua",
+      "country": "Nicaragua",
+      "name": "Federación de Natación de Nicaragua",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "puerto-rico-swimming",
+      "storedName": "Federación Puertorriqueña de Natación",
+      "country": "Puerto Rico",
+      "name": "Federación Puertorriqueña de Natación",
+      "website": "https://www.natacionpr.org",
+      "websiteText": "www.natacionpr.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "saint-kitts-and-nevis-swimming",
+      "storedName": "St. Kitts Nevis Aquatics Federation",
+      "country": "St. Kitts and Nevis",
+      "name": "St. Kitts Nevis Aquatics Federation",
+      "website": "https://www.sknaquatics.org",
+      "websiteText": "www.sknaquatics.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "suriname-swimming",
+      "storedName": "Surinaamse Zwem Bond",
+      "country": "Suriname",
+      "name": "Surinaamse Zwem Bond",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "turks-and-caicos-islands-swimming",
+      "storedName": "Turks & Caicos Islands Swim Federation",
+      "country": "Turks and Caicos Islands",
+      "name": "Turks & Caicos Islands Swim Federation",
+      "website": "https://www.tciswimfederation.com",
+      "websiteText": "www.tciswimfederation.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "venezuela-swimming",
+      "storedName": "Federación Venezolana de Deportes Acuáticos",
+      "country": "Venezuela",
+      "name": "Federación Venezolana de Deportes Acuáticos",
+      "website": "https://www.feveda.org.ve",
+      "websiteText": "www.feveda.org.ve",
+      "nameMatches": true
+    },
+    {
+      "slug": "saint-vincent-and-the-grenadines-swimming",
+      "storedName": "St. Vincent and the Grenadines Swimming Federation",
+      "country": "St. Vincent and Grenadines",
+      "name": "St. Vincent and the Grenadines Swimming Federation",
+      "website": "https://www.svgswimming.com",
+      "websiteText": "www.svgswimming.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "afghanistan-swimming",
+      "storedName": "Afghanistan National Swimming Federation",
+      "country": "Afghanistan",
+      "name": "Afghanistan National Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "bangladesh-swimming",
+      "storedName": "Bangladesh Swimming Federation",
+      "country": "Bangladesh",
+      "name": "Bangladesh Swimming Federation",
+      "website": "https://www.bdswimming.com",
+      "websiteText": "www.bdswimming.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "bhutan-swimming",
+      "storedName": "Bhutan Aquatics Federation",
+      "country": "Bhutan",
+      "name": "Bhutan Aquatics Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "bahrain-swimming",
+      "storedName": "Bahrain Swimming Association",
+      "country": "Bahrain",
+      "name": "Bahrain Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "brunei-swimming",
+      "storedName": "Brunei Amateur Swimming Association",
+      "country": "Brunei Darussalam",
+      "name": "Brunei Amateur Swimming Association",
+      "website": "https://www.bruneiswimming.com",
+      "websiteText": "www.bruneiswimming.com",
+      "nameMatches": true
+    },
+    {
+      "slug": "cambodia-swimming",
+      "storedName": "Khmer Amateur Swimming Federation",
+      "country": "Cambodia",
+      "name": "Khmer Amateur Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "iran-swimming",
+      "storedName": "I.R. Iran Amateur Swimming Federation",
+      "country": "Islamic Republic of Iran",
+      "name": "I.R. Iran Amateur Swimming Federation",
+      "website": "https://www.irsf.ir",
+      "websiteText": "www.irsf.ir",
+      "nameMatches": true
+    },
+    {
+      "slug": "iraq-swimming",
+      "storedName": "Iraq Aquatics",
+      "country": "Iraq",
+      "name": "Iraq Aquatics",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "jordan-swimming",
+      "storedName": "Jordan Swimming Federation",
+      "country": "Jordan",
+      "name": "Jordan Swimming Federation",
+      "website": "https://www.jsf.com.jo",
+      "websiteText": "www.jsf.com.jo",
+      "nameMatches": true
+    },
+    {
+      "slug": "kazakhstan-swimming",
+      "storedName": "Republican Public Association Qazaq Aquatics",
+      "country": "Kazakhstan",
+      "name": "Republican Public Association Qazaq Aquatics",
+      "website": "https://www.aquatics.kz",
+      "websiteText": "www.aquatics.kz",
+      "nameMatches": true
+    },
+    {
+      "slug": "kyrgyzstan-swimming",
+      "storedName": "Federation of Aquatic Sports of the Kyrgyz Republic",
+      "country": "Kyrgyzstan",
+      "name": "Federation of Aquatic Sports of the Kyrgyz Republic",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "saudi-arabia-swimming",
+      "storedName": "Saudi Arabian Swimming Federation",
+      "country": "Saudi Arabia",
+      "name": "Saudi Arabian Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "kuwait-swimming",
+      "storedName": "Kuwait Aquatics",
+      "country": "Kuwait",
+      "name": "Kuwait Aquatics",
+      "website": "https://www.kuwaitswimming.org",
+      "websiteText": "www.kuwaitswimming.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "laos-swimming",
+      "storedName": "Lao Swimming Federation",
+      "country": "Lao People's Democratic Republic",
+      "name": "Lao Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "lebanon-swimming",
+      "storedName": "Fédération Libanaise de Natation",
+      "country": "Lebanon",
+      "name": "Fédération Libanaise de Natation",
+      "website": "https://www.flbna.org",
+      "websiteText": "www.flbna.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "maldives-swimming",
+      "storedName": "Maldives Aquatics",
+      "country": "Maldives",
+      "name": "Maldives Aquatics",
+      "website": "https://www.swimming.org.mv",
+      "websiteText": "www.swimming.org.mv",
+      "nameMatches": true
+    },
+    {
+      "slug": "mongolia-swimming",
+      "storedName": "Mongolian Amateur Swimming Federation",
+      "country": "Mongolia",
+      "name": "Mongolian Amateur Swimming Federation",
+      "website": "https://www.mongoliaaquatics.mn",
+      "websiteText": "www.mongoliaaquatics.mn",
+      "nameMatches": true
+    },
+    {
+      "slug": "myanmar-swimming",
+      "storedName": "Myanmar Swimming Federation",
+      "country": "Myanmar",
+      "name": "Myanmar Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "oman-swimming",
+      "storedName": "Oman Aquatics Federation",
+      "country": "Oman",
+      "name": "Oman Aquatics Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "pakistan-swimming",
+      "storedName": "Pakistan Swimming Federation",
+      "country": "Pakistan",
+      "name": "Pakistan Swimming Federation",
+      "website": "https://www.pakswimfed.org.pk",
+      "websiteText": "www.pakswimfed.org.pk",
+      "nameMatches": true
+    },
+    {
+      "slug": "palestine-swimming",
+      "storedName": "Palestinian Swimming Federation and Aquatic Sports",
+      "country": "Palestine",
+      "name": "Palestinian Swimming Federation and Aquatic Sports",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "north-korea-swimming",
+      "storedName": "Amateur Swimming Association of D.P.R. Korea",
+      "country": "Democratic People's Republic of Korea",
+      "name": "Amateur Swimming Association of D.P.R. Korea",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "qatar-swimming",
+      "storedName": "Qatar Aquatics Federation",
+      "country": "Qatar",
+      "name": "Qatar Aquatics Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "syria-swimming",
+      "storedName": "Syrian Arab Swimming and Aquatic Sports Federation",
+      "country": "Syrian Arab Republic",
+      "name": "Syrian Arab Swimming and Aquatic Sports Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "tajikistan-swimming",
+      "storedName": "National Swimming Federation of the Republic of Tajikistan",
+      "country": "Tajikistan",
+      "name": "National Swimming Federation of the Republic of Tajikistan",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "turkmenistan-swimming",
+      "storedName": "National Federation of Aquatics of Turkmenistan",
+      "country": "Turkmenistan",
+      "name": "National Federation of Aquatics of Turkmenistan",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "united-arab-emirates-swimming",
+      "storedName": "UAE Aquatics",
+      "country": "United Arab Emirates",
+      "name": "UAE Aquatics",
+      "website": "http://www.uaeswimming.com/",
+      "websiteText": "http://www.uaeswimming.com/",
+      "nameMatches": true
+    },
+    {
+      "slug": "uzbekistan-swimming",
+      "storedName": "Uzbekistan Aquatics",
+      "country": "Uzbekistan",
+      "name": "Uzbekistan Aquatics",
+      "website": "https://aquatics.uz",
+      "websiteText": "aquatics.uz",
+      "nameMatches": true
+    },
+    {
+      "slug": "yemen-swimming",
+      "storedName": "Yemen Swimming & Aquatics Federation",
+      "country": "Yemen",
+      "name": "Yemen Swimming & Aquatics Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "andorra-swimming",
+      "storedName": "Federació Andorrana de Natació",
+      "country": "Andorra",
+      "name": "Federació Andorrana de Natació",
+      "website": "https://www.fan.ad",
+      "websiteText": "www.fan.ad",
+      "nameMatches": true
+    },
+    {
+      "slug": "armenia-swimming",
+      "storedName": "Water Kind Sports Association & Swimming Federation of Armenia",
+      "country": "Armenia",
+      "name": "Water Kind Sports Association & Swimming Federation of Armenia",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "azerbaijan-swimming",
+      "storedName": "Azerbaijan Swimming Federation",
+      "country": "Azerbaijan",
+      "name": "Azerbaijan Swimming Federation",
+      "website": "https://asf.az/",
+      "websiteText": "https://asf.az/",
+      "nameMatches": true
+    },
+    {
+      "slug": "bosnia-and-herzegovina-swimming",
+      "storedName": "Swimming Association of Bosnia and Herzegovina",
+      "country": "Bosnia and Herzegovina",
+      "name": "Swimming Association of Bosnia and Herzegovina",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "belarus-swimming",
+      "storedName": "Belarusian Swimming Federation",
+      "country": "Belarus",
+      "name": "Belarusian Swimming Federation",
+      "website": "https://www.blrswimming.by",
+      "websiteText": "www.blrswimming.by",
+      "nameMatches": true
+    },
+    {
+      "slug": "faroe-islands-swimming",
+      "storedName": "Faroe Islands Aquatics Federation",
+      "country": "Faroe Islands",
+      "name": "Faroe Islands Aquatics Federation",
+      "website": "https://www.ssf.fo",
+      "websiteText": "www.ssf.fo",
+      "nameMatches": true
+    },
+    {
+      "slug": "georgia-swimming",
+      "storedName": "Georgian Aquatic Sports National Federation",
+      "country": "Georgia",
+      "name": "Georgian Aquatic Sports National Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "gibraltar-swimming",
+      "storedName": "Gibraltar Amateur Swimming Association",
+      "country": "Gibraltar",
+      "name": "Gibraltar Amateur Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "kosovo-swimming",
+      "storedName": "Kosovo Aquatic Sports Federation",
+      "country": "Kosovo",
+      "name": "Kosovo Aquatic Sports Federation",
+      "website": "http://kosovo-asf.org",
+      "websiteText": "http://kosovo-asf.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "liechtenstein-swimming",
+      "storedName": "Liechtensteiner Schwimmverband",
+      "country": "Liechtenstein",
+      "name": "Liechtensteiner Schwimmverband",
+      "website": "https://www.lschv.li",
+      "websiteText": "www.lschv.li",
+      "nameMatches": true
+    },
+    {
+      "slug": "moldova-swimming",
+      "storedName": "Water Kind of Sports Federation of the Republic of Moldova",
+      "country": "Moldova",
+      "name": "Water Kind of Sports Federation of the Republic of Moldova",
+      "website": "https://www.swimmingmoldova.org",
+      "websiteText": "www.swimmingmoldova.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "north-macedonia-swimming",
+      "storedName": "Swimming Federation of North Macedonia",
+      "country": "North Macedonia",
+      "name": "Swimming Federation of North Macedonia",
+      "website": "http://www.pfm.mk",
+      "websiteText": "http://www.pfm.mk",
+      "nameMatches": true
+    },
+    {
+      "slug": "montenegro-swimming",
+      "storedName": "Montenegro Swimming Federation",
+      "country": "Montenegro",
+      "name": "Montenegro Swimming Federation",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "monaco-swimming",
+      "storedName": "Fédération Monégasque de Natation",
+      "country": "Monaco",
+      "name": "Fédération Monégasque de Natation",
+      "website": "https://www.montecarlo-swimming.org",
+      "websiteText": "www.montecarlo-swimming.org",
+      "nameMatches": true
+    },
+    {
+      "slug": "russia-swimming",
+      "storedName": "Russian Aquatic Sports Federation",
+      "country": "Russia",
+      "name": "Russian Aquatic Sports Federation",
+      "website": "https://russwimming.ru",
+      "websiteText": "https://russwimming.ru",
+      "nameMatches": true
+    },
+    {
+      "slug": "san-marino-swimming",
+      "storedName": "Federazione Sammarinese Nuoto",
+      "country": "San Marino",
+      "name": "Federazione Sammarinese Nuoto",
+      "website": "https://www.fsn.sm",
+      "websiteText": "www.fsn.sm",
+      "nameMatches": true
+    },
+    {
+      "slug": "ukraine-swimming",
+      "storedName": "Ukrainian Swimming Federation",
+      "country": "Ukraine",
+      "name": "Ukrainian Swimming Federation",
+      "website": "https://www.usf.org.ua",
+      "websiteText": "www.usf.org.ua",
+      "nameMatches": true
+    },
+    {
+      "slug": "albania-swimming",
+      "storedName": "Albanian Swimming Federation",
+      "country": "Albania",
+      "name": "Albanian Swimming Federation",
+      "website": "https://www.fshn.org.al",
+      "websiteText": "www.fshn.org.al",
+      "nameMatches": true
+    },
+    {
+      "slug": "czech-swimming",
+      "storedName": "Czech Swimming Federation",
+      "country": "Czechia",
+      "name": "Cesky Svaz Plaveckych Sportu",
+      "website": "https://www.czechswimming.cz",
+      "websiteText": "www.czechswimming.cz",
+      "nameMatches": false
+    },
+    {
+      "slug": "sao-tome-and-principe-swimming",
+      "storedName": "Federacão de Natação Tomé e Príncipe",
+      "country": "São Tomé e Príncipe",
+      "name": "Federacão de Natação Tomé e Príncipe",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "federated-states-of-micronesia-swimming",
+      "storedName": "Federated States of Micronesia Swimming Association",
+      "country": "Federated States of Micronesia",
+      "name": "Federated States of Micronesia Swimming Association",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    },
+    {
+      "slug": "timor-leste-swimming",
+      "storedName": "Federação Natação de Timor Leste",
+      "country": "Federação Natação de Timor Leste",
+      "name": "Federação Natação de Timor Leste",
+      "website": null,
+      "websiteText": "N/A",
+      "nameMatches": true
+    }
+  ],
+  "membershipHTMLSHA256": "44b606a15c4d693d515e1047ad69e72c1506a13471f9400518c60b9d3c73eae4",
+  "organisationCount": 145,
+  "nationalWebsitesChecked": 62,
+  "noWebsiteListedInMembership": 82,
+  "nationalSiteChecks": [
+    {
+      "slug": "barbadian-swimming",
+      "url": "https://www.swimbarbados.com",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "bolivian-swimming",
+      "url": "https://www.febona.info",
+      "status": "social_redirect",
+      "note": "Linked website redirects to a federation Facebook page; no dedicated fixture, result or athlete dataset assessed.",
+      "finalUrl": "https://www.facebook.com/federacionbolivianadedeportesacuaticos/",
+      "title": "Federacion Boliviana de Deportes Acuaticos | Sucre "
+    },
+    {
+      "slug": "chinese-swimming",
+      "url": "https://www.swimming.org.cn",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "chinese-taipei-swimming",
+      "url": "https://www.swimming.org.tw",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "macau-swimming",
+      "url": "https://www.macaunatacao.org.mo",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "algeria-swimming",
+      "url": "https://www.fanatation.dz",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "central-african-republic-swimming",
+      "url": "https://www.fcn-rca.cabanova.fr",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "republic-of-the-congo-swimming",
+      "url": "https://www.feconat.org",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "democratic-republic-of-the-congo-swimming",
+      "url": "https://fenaderec.com",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "egypt-swimming",
+      "url": "https://www.esf-eg.org",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "morocco-swimming",
+      "url": "https://www.frmnatation.com",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation homepage confirmed. The opened competition-results section is a historical archive (2015–19); the calendar section did not expose dated fixtures.",
+      "finalUrl": "https://frmnatation.com/",
+      "title": "Accueil | Fédération Royale Marocaine de Natation"
+    },
+    {
+      "slug": "namibia-swimming",
+      "url": "https://swimmingnamibia.com/",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation homepage confirmed. The events page links a 2025–26 calendar; the opened results index covers 2020–21. Athlete-profile links require individual evidence review.",
+      "finalUrl": "https://swimmingnamibia.com/",
+      "title": "NASFED | Namibia Swimming Federation"
+    },
+    {
+      "slug": "tanzania-swimming",
+      "url": "https://www.swimtanzania.org",
+      "status": "maintenance_notice",
+      "note": "Maintenance notice only; public membership reference retained.",
+      "finalUrl": "https://www.swimtanzania.org/",
+      "title": null
+    },
+    {
+      "slug": "tunisia-swimming",
+      "url": "http://www.ftnatation.tn/",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "uganda-swimming",
+      "url": "https://www.ugandaswimming.org",
+      "status": "loading_shell",
+      "note": "Federation title and loading placeholders; data availability unconfirmed.",
+      "finalUrl": "https://www.ugandaswimming.org",
+      "title": "The Uganda Swimming Federation"
+    },
+    {
+      "slug": "zambia-swimming",
+      "url": "https://www.swimzambia.org",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "zimbabwe-swimming",
+      "url": "https://www.zimaquatics.co.zw",
+      "status": "qualified_research_reference",
+      "note": "Historical aquatics website linked by World Aquatics, with 2008–13 material. Current operational status and current data are unconfirmed; public membership reference retained.",
+      "finalUrl": "https://www.zimaquatics.co.zw",
+      "title": "Welcome to Zimbabwe Aquatic Website"
+    },
+    {
+      "slug": "american-samoa-swimming",
+      "url": "https://www.oceaniasport.com/asswimming",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "cook-islands-swimming",
+      "url": "https://www.cookislandsaquatics.com",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "fiji-swimming",
+      "url": "https://www.fijiswimming.org",
+      "status": "official_homepage_confirmed",
+      "note": "The World Aquatics-listed website redirects to Fiji Aquatics. Its 2026 results index and calendar were opened; the calendar also includes camps, meetings and holidays and is subject to change.",
+      "finalUrl": "https://fijiaquatics.com/",
+      "title": "FIJI AQUATICS"
+    },
+    {
+      "slug": "guam-swimming",
+      "url": "https://www.guamswimming.org",
+      "status": "official_homepage_confirmed",
+      "note": "Official Guam Aquatics homepage and 2026 meet-results index confirmed. One January 2026 label links to a PDF filename containing 2025; that edition needs checking before use.",
+      "finalUrl": "https://www.guamswimming.org",
+      "title": "Guam Aquatics | The National Federation and National Governing Body for Aquatics in Guam"
+    },
+    {
+      "slug": "marshall-islands-swimming",
+      "url": "https://www.oceaniasport.com/marshalls",
+      "status": "generic_directory",
+      "note": "Generic reconstructed Oceania directory content, not an assessed federation data page.",
+      "finalUrl": "https://oceaniasport.com/marshalls",
+      "title": "Marshall Islands — Oceania Sports Directory"
+    },
+    {
+      "slug": "northern-mariana-islands-swimming",
+      "url": "https://www.nmiswimmingfederation.org",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation identity corroborated by its About page. The records page links course-specific PDFs; their contents and the calendar remain unassessed.",
+      "finalUrl": "https://www.nmiswimmingfederation.org",
+      "title": "NMI Swimming Federation"
+    },
+    {
+      "slug": "papua-new-guinea-swimming",
+      "url": "https://www.pngsi.org",
+      "status": "content_conflict",
+      "note": "Federation-like page has an unrelated Miami Beach title qualifier. Ownership and suitability require further corroboration.",
+      "finalUrl": "https://www.pngsi.org",
+      "title": "PNG Swimming | Papua New Guinea’s National Swimming Federation - Miami Beach, FL"
+    },
+    {
+      "slug": "vanuatu-swimming",
+      "url": "https://vanuatuaquatics.com",
+      "status": "official_homepage_confirmed",
+      "note": "World Aquatics-linked federation homepage confirmed. Dedicated fixture, result and athlete-profile data still require review.",
+      "finalUrl": "https://www.vanuatuaquatics.com/",
+      "title": "Vanuatu Aquatics Federation"
+    },
+    {
+      "slug": "antigua-and-barbuda-swimming",
+      "url": "https://www.swimantiguabarbuda.com",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation homepage confirmed. The CARIFTA section links an April 2026 competition summons; it is not a verified results feed.",
+      "finalUrl": "https://www.swimantiguabarbuda.com",
+      "title": "Antigua & Barbuda Swimming Federation"
+    },
+    {
+      "slug": "aruba-swimming",
+      "url": "https://www.arubaswimming.com",
+      "status": "qualified_research_reference",
+      "note": "Historical federation website linked by World Aquatics; opened homepage news is from 2016 and result links include 2013–15. Current operational status and current data are unconfirmed; public membership reference retained.",
+      "finalUrl": "https://arubaswimming.com/",
+      "title": "Home"
+    },
+    {
+      "slug": "cayman-islands-swimming",
+      "url": "https://www.ciasa.ky",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "guyana-swimming",
+      "url": "https://www.swimguyana.com",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "honduras-swimming",
+      "url": "http://www.fehna.org/",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "saint-lucia-swimming",
+      "url": "https://www.slasa.info",
+      "status": "parking_style_page",
+      "note": "Repeated domain welcome text; operational federation content not confirmed.",
+      "finalUrl": "https://www.slasa.info/",
+      "title": "slasa.info"
+    },
+    {
+      "slug": "puerto-rico-swimming",
+      "url": "https://www.natacionpr.org",
+      "status": "official_homepage_confirmed",
+      "note": "World Aquatics-linked federation homepage confirmed. Detailed competition and athlete data still require separate review.",
+      "finalUrl": "https://natacionpr.org/",
+      "title": "Home - Federación Puertorriqueña de Deportes Acuáticos"
+    },
+    {
+      "slug": "saint-kitts-and-nevis-swimming",
+      "url": "https://www.sknaquatics.org",
+      "status": "official_homepage_confirmed",
+      "note": "World Aquatics-linked aquatics federation homepage confirmed. Detailed fixture, result and athlete data remain unassessed.",
+      "finalUrl": "https://sknaquatics.org/",
+      "title": "St. Kitts Nevis Aquatics Federation"
+    },
+    {
+      "slug": "turks-and-caicos-islands-swimming",
+      "url": "https://www.tciswimfederation.com",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "venezuela-swimming",
+      "url": "https://www.feveda.org.ve",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "saint-vincent-and-the-grenadines-swimming",
+      "url": "https://www.svgswimming.com",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "bangladesh-swimming",
+      "url": "https://www.bdswimming.com",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "brunei-swimming",
+      "url": "https://www.bruneiswimming.com",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "iran-swimming",
+      "url": "https://www.irsf.ir",
+      "status": "official_homepage_confirmed",
+      "note": "World Aquatics-linked aquatics federation homepage confirmed over HTTPS. Detailed fixture, result and athlete data remain unassessed.",
+      "finalUrl": "https://irsf.ir/",
+      "title": "فدراسیون شنا، شیرجه و واترپلو جمهوری اسلامی ایران"
+    },
+    {
+      "slug": "jordan-swimming",
+      "url": "https://www.jsf.com.jo",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "kazakhstan-swimming",
+      "url": "https://www.aquatics.kz",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "kuwait-swimming",
+      "url": "https://www.kuwaitswimming.org",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "lebanon-swimming",
+      "url": "https://www.flbna.org",
+      "status": "service_provider_redirect",
+      "note": "Redirects to a web-design provider renovation notice, not federation data.",
+      "finalUrl": "https://www.dideas.net/",
+      "title": "D-iDeAs"
+    },
+    {
+      "slug": "maldives-swimming",
+      "url": "https://www.swimming.org.mv",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation homepage and records table confirmed. The events page contains historical material; record years and names alone do not establish exact event dates or athlete nationality.",
+      "finalUrl": "https://swimming.org.mv/",
+      "title": "Maldives Aquatics | Official Website of Maldives Aquatics"
+    },
+    {
+      "slug": "mongolia-swimming",
+      "url": "https://www.mongoliaaquatics.mn",
+      "status": "official_homepage_confirmed",
+      "note": "World Aquatics-linked federation homepage confirmed. Detailed fixture, result and athlete data remain unassessed.",
+      "finalUrl": "https://mongoliaaquatics.mn/",
+      "title": "Mongolia Aquatics"
+    },
+    {
+      "slug": "pakistan-swimming",
+      "url": "https://www.pakswimfed.org.pk",
+      "status": "official_homepage_confirmed",
+      "note": "World Aquatics-linked federation homepage confirmed. Detailed fixture, result and athlete data remain unassessed.",
+      "finalUrl": "https://www.pakswimfed.org.pk",
+      "title": "Welcome to Pakistan Swimming Federation"
+    },
+    {
+      "slug": "united-arab-emirates-swimming",
+      "url": "http://www.uaeswimming.com/",
+      "status": "parked_redirect",
+      "note": "Redirects to a parking/search page with unrelated links. Tokenized destination retained only in private evidence."
+    },
+    {
+      "slug": "uzbekistan-swimming",
+      "url": "https://aquatics.uz",
+      "status": "server_directory",
+      "note": "Server directory listing; operational federation data not confirmed.",
+      "finalUrl": "https://aquatics.uz",
+      "title": "Index of /"
+    },
+    {
+      "slug": "andorra-swimming",
+      "url": "https://www.fan.ad",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation homepage confirmed. Opened sections link 2026–27 calendars and records and 2025–26 results; document contents need separate checking.",
+      "finalUrl": "https://fan.ad/",
+      "title": "FEDERACIÓ ANDORRANA DE NATACIÓ – FAN"
+    },
+    {
+      "slug": "azerbaijan-swimming",
+      "url": "https://asf.az/",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation homepage confirmed. The opened calendar contained an unrendered widget and the swimming section was being updated; usable fixture or athlete rows were not confirmed.",
+      "finalUrl": "https://asf.az/",
+      "title": "ASF – Azerbaijan Swimming Federation"
+    },
+    {
+      "slug": "belarus-swimming",
+      "url": "https://www.blrswimming.by",
+      "status": "qualified_research_reference",
+      "note": "World Aquatics HTTPS link redirects to HTTP. Federation news is present, but the public HTTPS membership reference is retained. Separate HTTPS rankings/records pages were assessed.",
+      "finalUrl": "http://blrswimming.by/",
+      "title": "Главная"
+    },
+    {
+      "slug": "faroe-islands-swimming",
+      "url": "https://www.ssf.fo",
+      "status": "official_homepage_confirmed",
+      "note": "World Aquatics-linked federation homepage confirmed. A linked Swimify event could not be retrieved, so its result rows remain unassessed.",
+      "finalUrl": "https://ssf.fo/",
+      "title": "Svimjisamband Føroya"
+    },
+    {
+      "slug": "kosovo-swimming",
+      "url": "http://kosovo-asf.org",
+      "status": "under_construction",
+      "note": "Under-construction notice; public membership reference retained.",
+      "finalUrl": "https://kosovo-asf.org/",
+      "title": "kosovo-asf.org is under construction"
+    },
+    {
+      "slug": "liechtenstein-swimming",
+      "url": "https://www.lschv.li",
+      "status": "official_homepage_confirmed",
+      "note": "The World Aquatics-listed website redirects to Liechtenstein Swimming. Its swimming section describes development groups and selection information; individual athlete facts remain unverified.",
+      "finalUrl": "https://www.lieswimming.li/",
+      "title": "Aktuelles - Liechtenstein Swimming"
+    },
+    {
+      "slug": "moldova-swimming",
+      "url": "https://www.swimmingmoldova.org",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained."
+    },
+    {
+      "slug": "north-macedonia-swimming",
+      "url": "http://www.pfm.mk",
+      "status": "qualified_research_reference",
+      "note": "World Aquatics-linked HTTP website exposes 2023 federation material. Current data availability remains unconfirmed; public HTTPS membership reference retained.",
+      "finalUrl": "http://pfm.mk/",
+      "title": null
+    },
+    {
+      "slug": "monaco-swimming",
+      "url": "https://www.montecarlo-swimming.org",
+      "status": "unrelated_promotional_content",
+      "note": "Swimming article includes unrelated casino promotion; suitability as an operational federation source is unconfirmed.",
+      "finalUrl": "https://montecarlo-swimming.org/",
+      "title": "Mare Nostrum Swim Tour: Unveiling a Global Aquatic Odyssey -"
+    },
+    {
+      "slug": "russia-swimming",
+      "url": "https://russwimming.ru",
+      "status": "official_homepage_confirmed",
+      "note": "Federation identity corroborated by World Aquatics and its competition page. The October 2026 competition index contains dates and result links; edition details need separate checking.",
+      "finalUrl": "https://russwimming.ru",
+      "title": "Федерация водных видов спорта России"
+    },
+    {
+      "slug": "san-marino-swimming",
+      "url": "https://www.fsn.sm",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation homepage confirmed. The page labelled as an events archive currently describes the May 2026 Meeting Squalo Blu, not a general results archive.",
+      "finalUrl": "https://www.fsn.sm",
+      "title": "FSN – Federazione Sammarinese Nuoto"
+    },
+    {
+      "slug": "ukraine-swimming",
+      "url": "https://www.usf.org.ua",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation website confirmed. The results index lists 2026 competitions and result links; the calendar PDF and individual performances need separate review.",
+      "finalUrl": "https://www.usf.org.ua",
+      "title": "Федерація плавання України"
+    },
+    {
+      "slug": "albania-swimming",
+      "url": "https://www.fshn.org.al",
+      "status": "official_homepage_confirmed",
+      "note": "Official federation homepage confirmed. The calendar page links named 2025 and 2026 documents; the profile category is historical material rather than a current athlete roster.",
+      "finalUrl": "https://fshn.org.al/",
+      "title": "F.SH.N. – Federata Shqiptare e Notit"
+    },
+    {
+      "slug": "czech-swimming",
+      "url": "https://www.czechswimming.cz",
+      "status": "unavailable_in_this_review",
+      "note": "Both primary retrieval and web fallback failed. This is a review limitation, not proof the website is wrong; membership reference retained. The official competition subdomain was opened successfully and registered separately."
+    }
+  ],
+  "detailChecks": [
+    {
+      "id": "morocco_swimming_results_archive",
+      "slug": "morocco-swimming",
+      "name": "Fédération Royale Marocaine de Natation — results archive",
+      "url": "https://frmnatation.com/competitions-resultats",
+      "note": "Historical 2015–19 competition-results archive with document links; not current-season results."
+    },
+    {
+      "id": "morocco_swimming_calendar",
+      "slug": "morocco-swimming",
+      "name": "Fédération Royale Marocaine de Natation — calendar",
+      "url": "https://frmnatation.com/calendrier-federal",
+      "note": "Calendar route opened but no dated fixture rows exposed."
+    },
+    {
+      "id": "namibia_swimming_events",
+      "slug": "namibia-swimming",
+      "name": "Namibia Aquatic Sports Federation — events",
+      "url": "https://swimmingnamibia.com/events/",
+      "note": "Events index links a NASFED 2025–26 calendar PDF; document rows not inspected."
+    },
+    {
+      "id": "namibia_swimming_results_archive",
+      "slug": "namibia-swimming",
+      "name": "Namibia Aquatic Sports Federation — results archive",
+      "url": "https://swimmingnamibia.com/disciplines/swimming/results/",
+      "note": "Opened results index covers 2020–21; historical results reference only."
+    },
+    {
+      "id": "namibia_swimming_athlete_profiles",
+      "slug": "namibia-swimming",
+      "name": "Namibia Aquatic Sports Federation — athlete profiles",
+      "url": "https://swimmingnamibia.com/athlete-profiles/",
+      "note": "Named senior profile links and 2022 squad documents. General nationality eligibility text is not individual nationality evidence."
+    },
+    {
+      "id": "fiji_swimming_results_2026",
+      "slug": "fiji-swimming",
+      "name": "Fiji Swimming — results 2026",
+      "url": "https://fijiaquatics.com/2026-results/",
+      "note": "2026 meet-results index with named, dated PDF links; individual result rows not compared."
+    },
+    {
+      "id": "fiji_swimming_calendar",
+      "slug": "fiji-swimming",
+      "name": "Fiji Swimming — calendar",
+      "url": "https://fijiaquatics.com/calendar-of-events/",
+      "note": "2026 V2 calendar, updated 10 December 2025, includes competitions, camps, meetings and holidays. Subject to change; not every row is a fixture."
+    },
+    {
+      "id": "guam_swimming_results_2026",
+      "slug": "guam-swimming",
+      "name": "Guam Swimming Federation — results 2026",
+      "url": "https://www.guamswimming.org/2026-swim-meet-results/",
+      "note": "2026 meet-results index. January 24 2026 label links a PDF filename containing 2025. Resolve that discrepancy before importing its results."
+    },
+    {
+      "id": "andorra_swimming_calendar",
+      "slug": "andorra-swimming",
+      "name": "Federació Andorrana de Natació — calendar",
+      "url": "https://fan.ad/calendari/",
+      "note": "Links 2026–27 swimming calendar and artistic-swimming pre-calendar PDFs. Actual document rows not inspected; preserve provisional status."
+    },
+    {
+      "id": "andorra_swimming_results_records",
+      "slug": "andorra-swimming",
+      "name": "Federació Andorrana de Natació — results records",
+      "url": "https://fan.ad/resultats-i-records/",
+      "note": "Links 2025–26 results and 2026–27 records, distinguishing 25 m and 50 m courses. Individual document rows not inspected."
+    },
+    {
+      "id": "maldives_swimming_events",
+      "slug": "maldives-swimming",
+      "name": "Maldives Aquatics — events",
+      "url": "https://swimming.org.mv/events/",
+      "note": "Events index includes 2024/2020 headings but expanded content from 2015. Historical content, not evidence of current fixture coverage."
+    },
+    {
+      "id": "maldives_swimming_records",
+      "slug": "maldives-swimming",
+      "name": "Maldives Aquatics — records",
+      "url": "https://swimming.org.mv/records/",
+      "note": "Record table exposes length, event, time, gender, course, name, games and year. A year is not an exact event date; national-record context is not individual nationality evidence."
+    },
+    {
+      "id": "liechtenstein_swimming_swimming_information",
+      "slug": "liechtenstein-swimming",
+      "name": "Liechtensteiner Schwimmverband — swimming information",
+      "url": "https://www.lieswimming.li/swimming/",
+      "note": "Development groups, selection information and historical athlete names. The extracted athlete-team heading does not provide a current named roster; biography facts remain unverified."
+    },
+    {
+      "id": "san_marino_swimming_meeting_squalo_blu_2026",
+      "slug": "san-marino-swimming",
+      "name": "Federazione Sammarinese Nuoto — meeting squalo blu 2026",
+      "url": "https://www.fsn.sm/eventi/archivio/",
+      "note": "The archive URL currently describes Meeting Squalo Blu, 1–3 May 2026, with entries closed. Not a general results archive."
+    },
+    {
+      "id": "northern_mariana_islands_swimming_calendar",
+      "slug": "northern-mariana-islands-swimming",
+      "name": "Northern Mariana Islands Swimming Federation — calendar",
+      "url": "https://www.nmiswimmingfederation.org/calendar.html",
+      "note": "Calendar route returned navigation without dated event rows; fixture capability unconfirmed."
+    },
+    {
+      "id": "northern_mariana_islands_swimming_records",
+      "slug": "northern-mariana-islands-swimming",
+      "name": "Northern Mariana Islands Swimming Federation — records",
+      "url": "https://www.nmiswimmingfederation.org/nat-records.html",
+      "note": "National and age-group record PDF links distinguish course lengths; linked documents not opened and no individual facts verified."
+    },
+    {
+      "id": "antigua_and_barbuda_swimming_carifta_2026",
+      "slug": "antigua-and-barbuda-swimming",
+      "name": "Antigua and Barbuda Swimming Federation — carifta 2026",
+      "url": "https://www.swimantiguabarbuda.com/index.php/39th-carifta-championships",
+      "note": "39th CARIFTA section links a summons for 2–9 April 2026 in Martinique. This is an event-document reference, not verified result rows."
+    },
+    {
+      "id": "belarus_swimming_rankings",
+      "slug": "belarus-swimming",
+      "name": "Belarusian Swimming Federation — rankings",
+      "url": "https://rankings.blrswimming.by/",
+      "note": "HTTPS rankings landing page exposes federation identity and navigation; detailed records assessed separately."
+    },
+    {
+      "id": "belarus_swimming_records",
+      "slug": "belarus-swimming",
+      "name": "Belarusian Swimming Federation — records",
+      "url": "https://rankings.blrswimming.by/records",
+      "note": "Actual long-course records table with performance, event, date and split fields. Competition country is not athlete nationality; birth year is not an exact date of birth. No individual comparisons performed."
+    },
+    {
+      "id": "azerbaijan_swimming_calendar",
+      "slug": "azerbaijan-swimming",
+      "name": "Azerbaijan Swimming Federation — calendar",
+      "url": "https://asf.az/teqvim/",
+      "note": "Calendar section contains an unrendered shortcode and placeholder content; no usable dated event rows confirmed."
+    },
+    {
+      "id": "azerbaijan_swimming_swimming_section",
+      "slug": "azerbaijan-swimming",
+      "name": "Azerbaijan Swimming Federation — swimming section",
+      "url": "https://asf.az/uzguculuk/",
+      "note": "Swimming section says it is being updated; no athlete roster confirmed."
+    },
+    {
+      "id": "albania_swimming_calendar",
+      "slug": "albania-swimming",
+      "name": "Albanian Swimming Federation — calendar",
+      "url": "https://fshn.org.al/kalendari-sportiv/",
+      "note": "Calendar index links named 2025, 2026 and earlier PDF documents. Document dates, starts and event rows still require inspection."
+    },
+    {
+      "id": "albania_swimming_historical_profiles",
+      "slug": "albania-swimming",
+      "name": "Albanian Swimming Federation — historical profiles",
+      "url": "https://fshn.org.al/category/profile/",
+      "note": "Profile category contains historical obituary material; not a current athlete roster or independent nationality evidence."
+    },
+    {
+      "id": "ukraine_swimming_calendar_2026",
+      "slug": "ukraine-swimming",
+      "name": "Ukrainian Swimming Federation — calendar 2026",
+      "url": "https://www.usf.org.ua/ua/Kalendr-2026.html",
+      "note": "2026 calendar page links a PDF; embedded document content was unavailable in this view. No edition date or start-time rows checked."
+    },
+    {
+      "id": "ukraine_swimming_results",
+      "slug": "ukraine-swimming",
+      "name": "Ukrainian Swimming Federation — results",
+      "url": "https://www.usf.org.ua/ua/Rezultaty-zmahan.html",
+      "note": "Dated 2026 championship-results index with PDFs and SwimTime links. Individual rows and timing-provider attribution require edition-specific checks."
+    },
+    {
+      "id": "ukraine_swimming_national_team_information",
+      "slug": "ukraine-swimming",
+      "name": "Ukrainian Swimming Federation — national team information",
+      "url": "https://www.usf.org.ua/ua/Natsionalna-zbirna.html",
+      "note": "2026 national-team heading includes qualification standards and historical team document links. Standards are not achieved athlete performances or a current verified roster."
+    },
+    {
+      "id": "russia_swimming_competitions",
+      "slug": "russia-swimming",
+      "name": "Russian Aquatic Sports Federation — competitions",
+      "url": "https://russwimming.ru/competitions/",
+      "note": "October 2026 competition index exposes dates, places and result links; some event names are absent from extraction. Open edition details before use."
+    },
+    {
+      "id": "northern_mariana_islands_swimming_about",
+      "slug": "northern-mariana-islands-swimming",
+      "name": "Northern Mariana Islands Swimming Federation — about",
+      "url": "https://www.nmiswimmingfederation.org/about-nmisf.html",
+      "note": "Federation mission and governance page corroborates the World Aquatics-linked national website. Membership evidence, not a results or fixture feed."
+    },
+    {
+      "id": "namibia_swimming_profile_image_lead",
+      "slug": "namibia-swimming",
+      "name": "Namibia Aquatic Sports Federation — profile image lead",
+      "url": "https://swimmingnamibia.com/athlete-profiles/phillip-seidler/",
+      "note": "Individual profile page contains images and videos; biography text is supplied as an uninspected image. No nationality, exact date of birth or performance facts verified."
+    },
+    {
+      "id": "czech_swimming_competition_portal",
+      "slug": "czech-swimming",
+      "name": "Czech Swimming Federation — competition portal",
+      "url": "https://vysledky.czechswimming.cz/souteze",
+      "note": "Working official Czech federation competition portal with dated 2026 calendar rows, course lengths and document links. Main federation homepage could not be retrieved."
+    },
+    {
+      "id": "czech_swimming_znojmo_2026_programme",
+      "slug": "czech-swimming",
+      "name": "Czech Swimming Federation — znojmo 2026 programme",
+      "url": "https://vysledky.czechswimming.cz/souteze/10635",
+      "note": "Competition programme for VC Znojma, 5–6 September 2026, distinguishes session starts from warm-up times and links results PDF/Lenex documents. Individual results not inspected."
+    },
+    {
+      "id": "scottish_swimming_results",
+      "slug": "scottish-swimming",
+      "name": "Scottish Swimming — results hub",
+      "url": "https://www.scottishswimming.com/our-sports/swimming/results",
+      "note": "The interactive swimming results hub was opened and its 2026 links inspected. Three linked 2026 PDFs were downloaded and their first pages inspected: SNAGS, National Open Friday and Summer Meet. Tables contain names, ages, clubs, times and splits; no nationality column was found. Scottish Swimming is the publisher; a separate timing provider was not established. Calendar and athlete-profile content remain unassessed."
+    },
+    {
+      "id": "scottish_swimming_snags_results_2026",
+      "slug": "scottish-swimming",
+      "name": "Scottish Swimming — SNAGS 2026 results",
+      "url": "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/04/10082050/SNAGS-2026-Results.pdf",
+      "note": "Publisher: Scottish Swimming. Linked from its official results hub. PDF downloaded successfully; first-page table inspected for name, age, club, time and split-distance headings. No nationality column found; age and club do not establish nationality or exact birth date. Timing provider not independently established. No individual performance or identity comparison performed."
+    },
+    {
+      "id": "scottish_swimming_open_friday_results_2026",
+      "slug": "scottish-swimming",
+      "name": "Scottish Swimming — National Open 2026 Friday results",
+      "url": "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/06/30143358/Friday-Results-1.pdf",
+      "note": "Publisher: Scottish Swimming. Linked from its official results hub. PDF downloaded successfully; first-page table inspected for name, age, club, time and split-distance headings. No nationality column found; age and club do not establish nationality or exact birth date. Timing provider not independently established. No individual performance or identity comparison performed."
+    },
+    {
+      "id": "scottish_swimming_summer_meet_results_2026",
+      "slug": "scottish-swimming",
+      "name": "Scottish Swimming — Summer Meet 2026 results",
+      "url": "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/07/12221149/2026-Scottish-Summer-Meet.pdf",
+      "note": "Publisher: Scottish Swimming. Linked from its official results hub. PDF downloaded successfully; first-page table inspected for name, age, club, time and split-distance headings. No nationality column found; age and club do not establish nationality or exact birth date. Timing provider not independently established. No individual performance or identity comparison performed."
+    }
+  ],
+  "sourcesAdded": [
+    "morocco_swimming_official",
+    "namibia_swimming_official",
+    "fiji_swimming_official",
+    "guam_swimming_official",
+    "northern_mariana_islands_swimming_official",
+    "vanuatu_swimming_official",
+    "antigua_and_barbuda_swimming_official",
+    "puerto_rico_swimming_official",
+    "saint_kitts_and_nevis_swimming_official",
+    "iran_swimming_official",
+    "maldives_swimming_official",
+    "mongolia_swimming_official",
+    "pakistan_swimming_official",
+    "andorra_swimming_official",
+    "azerbaijan_swimming_official",
+    "faroe_islands_swimming_official",
+    "liechtenstein_swimming_official",
+    "russia_swimming_official",
+    "san_marino_swimming_official",
+    "ukraine_swimming_official",
+    "albania_swimming_official",
+    "aruba_swimming_research_website",
+    "zimbabwe_swimming_research_website",
+    "belarus_swimming_research_website",
+    "north_macedonia_swimming_research_website",
+    "morocco_swimming_results_archive",
+    "morocco_swimming_calendar",
+    "namibia_swimming_events",
+    "namibia_swimming_results_archive",
+    "namibia_swimming_athlete_profiles",
+    "fiji_swimming_results_2026",
+    "fiji_swimming_calendar",
+    "guam_swimming_results_2026",
+    "andorra_swimming_calendar",
+    "andorra_swimming_results_records",
+    "maldives_swimming_events",
+    "maldives_swimming_records",
+    "liechtenstein_swimming_swimming_information",
+    "san_marino_swimming_meeting_squalo_blu_2026",
+    "northern_mariana_islands_swimming_calendar",
+    "northern_mariana_islands_swimming_records",
+    "antigua_and_barbuda_swimming_carifta_2026",
+    "belarus_swimming_rankings",
+    "belarus_swimming_records",
+    "azerbaijan_swimming_calendar",
+    "azerbaijan_swimming_swimming_section",
+    "albania_swimming_calendar",
+    "albania_swimming_historical_profiles",
+    "ukraine_swimming_calendar_2026",
+    "ukraine_swimming_results",
+    "ukraine_swimming_national_team_information",
+    "russia_swimming_competitions",
+    "northern_mariana_islands_swimming_about",
+    "namibia_swimming_profile_image_lead",
+    "czech_swimming_competition_portal",
+    "czech_swimming_znojmo_2026_programme",
+    "scottish_swimming_results",
+    "scottish_swimming_snags_results_2026",
+    "scottish_swimming_open_friday_results_2026",
+    "scottish_swimming_summer_meet_results_2026"
+  ],
+  "sourcesUpdated": [
+    "organisation_scottish_swimming",
+    "organisation_czech_swimming"
+  ],
+  "registryBefore": 1089,
+  "registryAfter": 1149,
+  "enabled": 36,
+  "disabled": 1113,
+  "homepageUpgrades": [
+    "morocco-swimming",
+    "namibia-swimming",
+    "fiji-swimming",
+    "guam-swimming",
+    "northern-mariana-islands-swimming",
+    "vanuatu-swimming",
+    "antigua-and-barbuda-swimming",
+    "puerto-rico-swimming",
+    "saint-kitts-and-nevis-swimming",
+    "iran-swimming",
+    "maldives-swimming",
+    "mongolia-swimming",
+    "pakistan-swimming",
+    "andorra-swimming",
+    "azerbaijan-swimming",
+    "faroe-islands-swimming",
+    "liechtenstein-swimming",
+    "russia-swimming",
+    "san-marino-swimming",
+    "ukraine-swimming",
+    "albania-swimming"
+  ],
+  "directoryRecordsUpdated": [
+    "morocco-swimming",
+    "namibia-swimming",
+    "fiji-swimming",
+    "guam-swimming",
+    "northern-mariana-islands-swimming",
+    "vanuatu-swimming",
+    "antigua-and-barbuda-swimming",
+    "puerto-rico-swimming",
+    "saint-kitts-and-nevis-swimming",
+    "iran-swimming",
+    "maldives-swimming",
+    "mongolia-swimming",
+    "pakistan-swimming",
+    "andorra-swimming",
+    "azerbaijan-swimming",
+    "faroe-islands-swimming",
+    "liechtenstein-swimming",
+    "russia-swimming",
+    "san-marino-swimming",
+    "ukraine-swimming",
+    "albania-swimming",
+    "czech-swimming",
+    "scottish-swimming"
+  ],
+  "scottishPDFChecks": [
+    {
+      "url": "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/04/10082050/SNAGS-2026-Results.pdf",
+      "status": 200,
+      "sha256": "81df3be3a74e866c032c3fdccd29db3ed755372fce18ca041181661cc3d08653",
+      "pages": 119,
+      "scope": "First-page headers and table structure inspected; no individual athlete matching.",
+      "qualification": "PDF publisher is Scottish Swimming; website footer OCS-Software is not assumed to identify the result-timing provider. No individual athlete matching performed."
+    },
+    {
+      "url": "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/06/30143358/Friday-Results-1.pdf",
+      "status": 200,
+      "sha256": "881130432f49501880239abda9b6f7b69fd82bf73ca7749f47fc5b62b4b2d747",
+      "pages": 25,
+      "scope": "First-page headers and table structure inspected; no individual athlete matching.",
+      "qualification": "PDF publisher is Scottish Swimming; website footer OCS-Software is not assumed to identify the result-timing provider. No individual athlete matching performed."
+    },
+    {
+      "url": "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/07/12221149/2026-Scottish-Summer-Meet.pdf",
+      "status": 200,
+      "sha256": "07fc3a1151ecfd1bf0b11d36cdf7fc4bb265fc568ee72250f572ec12b7eccbe2",
+      "pages": 95,
+      "scope": "First-page headers and table structure inspected; no individual athlete matching.",
+      "qualification": "PDF publisher is Scottish Swimming; website footer OCS-Software is not assumed to identify the result-timing provider. No individual athlete matching performed."
+    }
+  ],
+  "limits": "Source and link review only. No fixtures, start times, athlete-profile facts, nationalities or individual results imported, corrected or marked verified. New sources are disabled manual research references. Calendar-document links are not verified fixture rows; historical material is not current coverage. Detailed raw captures remain in the private audit."
+}

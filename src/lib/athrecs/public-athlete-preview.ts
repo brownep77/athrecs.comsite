@@ -152,6 +152,9 @@ export function buildPublicAthletePreview(input: {
         : publicAthleteCareer(
             input.displayName,
             combined.filter((entry): entry is ResultsHistoryEntry => entry.kind !== "reported"),
+            // Only approved unclaimed histories expose older public results.
+            // Owner-shared previews retain their existing result limit.
+            input.allowResultPagination === true,
           ),
     entries: recent.filter((entry): entry is ResultsHistoryEntry => entry.kind !== "reported"),
     reportedRecords: recent.flatMap((entry) => (entry.kind === "reported" ? [entry.result] : [])),

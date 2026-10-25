@@ -29,10 +29,16 @@ const entries = [
   recorded("Disqualified event", "1997-01-01", { status: "DQ" }),
   recorded("Conflicted event", "1996-01-01", { conflicting: true }),
 ];
-const summary = publicAthleteCareer("Synthetic Runner", entries);
+const summary = publicAthleteCareer("Synthetic Runner", entries, true);
+assert(
+  publicAthleteCareer("Limited preview", entries).events.every(
+    (event) => !("performance" in event) && !("qualifications" in event),
+  ),
+);
 assert.equal(summary.events.length, 6);
 assert.equal(summary.events[0].name, "Early Marathon");
 assert.equal(summary.events[0].verification, "Unverified record");
+assert.equal(summary.events[0].performance, "4:19:59");
 assert.equal(summary.events[1].verification, "Source checked");
 assert.match(summary.text, /2006 to 2025/);
 assert.equal(new Set(summary.events.map((e) => e.name)).size, 6);
@@ -53,6 +59,8 @@ for (const event of summary.events)
     "discipline",
     "eventSlug",
     "name",
+    "performance",
+    "qualifications",
     "verification",
     "year",
   ]);
@@ -89,6 +97,20 @@ assert.equal(
 assert.equal(publicAthleteCareer("History", [history({ yearLabel: "2001–2002" })]), null);
 assert.equal(publicAthleteCareer("History", [history({ labels: ["split: half"] })]), null);
 assert.equal(publicAthleteCareer("History", [history({ profileExcluded: true })]), null);
+const precise = publicAthleteCareer(
+  "History",
+  [
+    history({
+      performance: "04:49:04.64",
+      verificationStatus: "unverified",
+      labels: ["Provisional results", "Private evidence sentinel"],
+    }),
+  ],
+  true,
+).events[0];
+assert.equal(precise.performance, "04:49:04.64", "Preserve the published precision");
+assert.equal(precise.verification, "Unverified record", "Showing a time does not verify it");
+assert.deepEqual(precise.qualifications, ["Provisional results"]);
 const content = publicAthleteSearchContent({
   slug: "synthetic",
   displayName: "Synthetic Runner",

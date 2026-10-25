@@ -851,7 +851,7 @@ export const runrecsGapFillSeries: Series[] = [
     city: "Kingston",
     area: "Kingston Waterfront",
     surface: "Road",
-    distances: ["Marathon", "Half", "10K", "5K"],
+    distances: ["Half", "10K", "5K"],
     summary: "Jamaica’s December waterfront road festival in Kingston.",
     description:
       "The 26th Reggae Marathon is Sunday 6 December 2026 on the Kingston Waterfront.",
@@ -10549,9 +10549,10 @@ export const runrecsGapFillEditions: Edition[] = [
 {
     seriesSlug: "reggae-marathon",
     date: "2026-12-06",
-    distance: "Marathon",
-    distanceKm: 42.195,
+    distance: "Half",
+    distanceKm: 21.0975,
     status: "Open",
+    startTime: "05:45",
     entryUrl: "https://www.reggaemarathon.com/",
     entryOptions: officialEntry(
       "reggae-marathon",
@@ -10559,8 +10560,8 @@ export const runrecsGapFillEditions: Edition[] = [
       "https://www.reggaemarathon.com/",
       "Official site: Sunday 6 December 2026, Kingston Waterfront.",
     ),
-    source: "https://www.reggaemarathon.com/",
-    notes: "Also half, 10K and 5K.",
+    source: "https://www.reggaemarathon.com/wp-content/uploads/2026/02/2026-Reggae-Marathon-International-Fact-Sheet-.pdf",
+    notes: "The 2026 organiser fact sheet confirms the half marathon at 05:45 local in Kingston. The in-person programme offers Half, 10K and 5K; no full marathon. Checked 25 October 2026.",
   },
 {
     seriesSlug: "nagoya-womens-marathon",
@@ -16602,10 +16603,11 @@ export const runrecsGapFillEditions: Edition[] = [
     distance: "Half",
     distanceKm: 21.0975,
     status: "Open",
+    startTime: "05:45",
     entryUrl: "https://www.ahotu.com/event/angkor-wat-international-half-marathon",
     entryOptions: officialEntry("angkor-wat-internati", "Angkor Wat International Half Marathon", "https://www.ahotu.com/event/angkor-wat-international-half-marathon", "Calendar listing: Sunday 6 December 2026."),
-    source: "https://www.ahotu.com/event/angkor-wat-international-half-marathon",
-    notes: "Half event.",
+    source: "https://cambodia-events.org/blog/angkor-wat-international-half-marathon",
+    notes: "Organiser programme for 6 December 2026: running half marathon starts 05:45 local (Asia/Phnom_Penh); wheelchair half 05:30 is separate. Checked 25 October 2026.",
   },
   {
     seriesSlug: "ayia-napa-half-marathon",

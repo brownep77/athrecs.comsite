@@ -17,6 +17,8 @@ import { IMMINENT_STARTS_REVIEW } from "./lib/imminent-starts-2026-10-25-review.
 import imminentStarts from "../src/data/imminent-starts-2026-10-25.json" with { type: "json" };
 import urgentStarts from "../src/data/urgent-starts-followup-2026-10-25.json" with { type: "json" };
 import { URGENT_STARTS_FOLLOWUP_REVIEW } from "./lib/urgent-starts-followup-2026-10-25-review.mjs";
+import thirdUrgentStarts from "../src/data/urgent-starts-third-2026-10-25.json" with { type: "json" };
+import { URGENT_STARTS_THIRD_REVIEW } from "./lib/urgent-starts-third-2026-10-25-review.mjs";
 import nextUrgentStarts from "../src/data/urgent-starts-next-2026-10-25.json" with { type: "json" };
 import { URGENT_STARTS_NEXT_REVIEW } from "./lib/urgent-starts-next-2026-10-25-review.mjs";
 if (process.env.VERCEL_ENV !== "production" || process.env.VERCEL_GIT_COMMIT_REF !== "main") {
@@ -120,6 +122,15 @@ try {
       publishing,
       nextUrgentStarts,
       URGENT_STARTS_NEXT_REVIEW,
+    ),
+  );
+  console.log(
+    "[urgent-starts-third-2026-10-25]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      thirdUrgentStarts,
+      URGENT_STARTS_THIRD_REVIEW,
     ),
   );
 } finally {

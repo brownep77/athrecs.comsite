@@ -1,0 +1,145 @@
+{
+  "maule-corre|2026-10-25": {
+    "place": {
+      "city": "Linares",
+      "county": ""
+    },
+    "summary": "Maule Corre takes place at Plaza de Armas in Linares. The 800m race starts at 09:00, followed by 3km, 5km and 10km at 09:30.",
+    "timeZone": "America/Santiago",
+    "sourceUrl": "https://www.maulecorre.cl/documentacion/bases2026.pdf",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "0.8K": {
+        "time": "09:00",
+        "label": "09:00 CLST (UTC−3)",
+        "note": "The 2026 organiser regulations, section 3, confirm this race start. Kit collection begins at 08:00; it is not the race start. Entry closed on 18 October.",
+        "publicNote": "The 2026 organiser regulations, section 3, confirm this race start. Kit collection begins at 08:00; it is not the race start. Entry closed on 18 October."
+      },
+      "3K": {
+        "time": "09:30",
+        "label": "09:30 CLST (UTC−3)",
+        "note": "The 2026 organiser regulations, section 3, confirm this race start. Kit collection begins at 08:00; it is not the race start. Entry closed on 18 October.",
+        "publicNote": "The 2026 organiser regulations, section 3, confirm this race start. Kit collection begins at 08:00; it is not the race start. Entry closed on 18 October."
+      },
+      "5K": {
+        "time": "09:30",
+        "label": "09:30 CLST (UTC−3)",
+        "note": "The 2026 organiser regulations, section 3, confirm this race start. Kit collection begins at 08:00; it is not the race start. Entry closed on 18 October.",
+        "publicNote": "The 2026 organiser regulations, section 3, confirm this race start. Kit collection begins at 08:00; it is not the race start. Entry closed on 18 October."
+      },
+      "10K": {
+        "time": "09:30",
+        "label": "09:30 CLST (UTC−3)",
+        "note": "The 2026 organiser regulations, section 3, confirm this race start. Kit collection begins at 08:00; it is not the race start. Entry closed on 18 October.",
+        "publicNote": "The 2026 organiser regulations, section 3, confirm this race start. Kit collection begins at 08:00; it is not the race start. Entry closed on 18 October."
+      }
+    }
+  },
+  "changsha-marathon|2026-11-15": {
+    "place": {
+      "city": "Changsha",
+      "county": ""
+    },
+    "summary": "The 2026 Changsha Marathon and Half Marathon take place on 15 November from Xiangjiang Middle Road beside Du Fu Jiang Ge. The event first gun is 07:00; runners must follow their assigned wave.",
+    "timeZone": "Asia/Shanghai",
+    "sourceUrl": "https://www.marathonchangsha.com/Detail/30",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "label": "First gun 07:00 CST (UTC+8) · later waves follow",
+        "note": "The current 2026 regulations and organiser news confirm 15 November at 07:00. The race uses multiple guns; later wave times remain to be announced. Follow your assigned start zone. General registration closed on 11 August.",
+        "publicNote": "The current 2026 regulations and organiser news confirm 15 November at 07:00. The race uses multiple guns; later wave times remain to be announced. Follow your assigned start zone. General registration closed on 11 August."
+      },
+      "Half": {
+        "time": null,
+        "label": "Event first gun 07:00 CST · half-marathon wave unverified",
+        "note": "The half marathon is on 15 November 2026. The event first gun is 07:00 CST (UTC+8), but the regulations place half-marathon runners in mixed later zones and do not confirm their separate wave clocks. Do not assume every half-marathon runner starts at 07:00.",
+        "publicNote": "The half marathon is on 15 November 2026. The event first gun is 07:00 CST (UTC+8), but the regulations place half-marathon runners in mixed later zones and do not confirm their separate wave clocks. Do not assume every half-marathon runner starts at 07:00."
+      }
+    }
+  },
+  "wa-ukrainian-cross-country-championships-7240272|2026-10-25": {
+    "place": {
+      "city": "Barvinok, Uzhhorod",
+      "county": ""
+    },
+    "summary": "Sunday’s Ukrainian cross-country championships have separate U23 and senior races at Zolota Hora, Barvinok, near Uzhhorod. The federation live timetable confirms four category starts; the draft relay still needs confirmation.",
+    "timeZone": "Europe/Kyiv",
+    "sourceUrl": "https://competitions.uaf.org.ua/2026.10.24-25_uzhhorod/live",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "6.4K U23 women": {
+        "time": "10:30",
+        "label": "U23 women 10:30 EET (UTC+2)",
+        "note": "The federation live timetable for Sunday 25 October confirms this category and start. Venue: Zolota Hora, Barvinok, near Uzhhorod. This is not the separately cancelled All-Ukrainian cross-country III stage.",
+        "publicNote": "The federation live timetable for Sunday 25 October confirms this category and start. Venue: Zolota Hora, Barvinok, near Uzhhorod. This is not the separately cancelled All-Ukrainian cross-country III stage."
+      },
+      "6.4K U23 men": {
+        "time": "11:05",
+        "label": "U23 men 11:05 EET (UTC+2)",
+        "note": "The federation live timetable for Sunday 25 October confirms this category and start. Venue: Zolota Hora, Barvinok, near Uzhhorod. This is not the separately cancelled All-Ukrainian cross-country III stage.",
+        "publicNote": "The federation live timetable for Sunday 25 October confirms this category and start. Venue: Zolota Hora, Barvinok, near Uzhhorod. This is not the separately cancelled All-Ukrainian cross-country III stage."
+      },
+      "8K women": {
+        "time": "11:45",
+        "label": "Senior women 11:45 EET (UTC+2)",
+        "note": "The federation live timetable for Sunday 25 October confirms this category and start. Venue: Zolota Hora, Barvinok, near Uzhhorod. This is not the separately cancelled All-Ukrainian cross-country III stage.",
+        "publicNote": "The federation live timetable for Sunday 25 October confirms this category and start. Venue: Zolota Hora, Barvinok, near Uzhhorod. This is not the separately cancelled All-Ukrainian cross-country III stage."
+      },
+      "8K men": {
+        "time": "12:30",
+        "label": "Senior men 12:30 EET (UTC+2)",
+        "note": "The federation live timetable for Sunday 25 October confirms this category and start. Venue: Zolota Hora, Barvinok, near Uzhhorod. This is not the separately cancelled All-Ukrainian cross-country III stage.",
+        "publicNote": "The federation live timetable for Sunday 25 October confirms this category and start. Venue: Zolota Hora, Barvinok, near Uzhhorod. This is not the separately cancelled All-Ukrainian cross-country III stage."
+      },
+      "4x1K relay": {
+        "time": null,
+        "label": "Draft relay start 13:20 EET · unconfirmed",
+        "note": "The federation draft PDF lists a mixed youth/junior 4 × 1km relay at 13:20 EET. The current live timetable does not list it, so participation and its start remain under review. Confirm with the organiser.",
+        "publicNote": "The federation draft PDF lists a mixed youth/junior 4 × 1km relay at 13:20 EET. The current live timetable does not list it, so participation and its start remain under review. Confirm with the organiser.",
+        "sourceUrl": "https://uaf.org.ua/images/otherdocuments/calendar/2026/2026.10.24-25_uzhhorod/2026.10.24-25_rozklad2.pdf"
+      }
+    }
+  },
+  "be-youth-cx-beernem-october|2026-10-25": {
+    "place": {
+      "city": "Beernem",
+      "county": ""
+    },
+    "summary": "Beernem’s youth cyclo-cross takes place at Sportpark Drogenbrood, Wellingstraat 29A. U12 starts at 10:00; the 12-, 13- and 14-year-old classes start separately in the afternoon. Races are timed by duration, not a fixed distance.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://cycling.vlaanderen/competitie/kalender",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Cyclo-cross U12": {
+        "time": "10:00",
+        "label": "U12 start 10:00 CET (UTC+1)",
+        "note": "The federation lists 10:00 for ages 8–11. Race durations are 10, 12, 15 and 17 minutes respectively. Registration is 09:00–09:45; follow the organiser’s age-group arrangements. Reviewed federation race-detail record 15032. Youth-only eligibility and federation licence requirements apply. https://cycling.vlaanderen/actions/cycling-api-module/api?method=races/15032.json",
+        "publicNote": "The federation lists 10:00 for ages 8–11. Race durations are 10, 12, 15 and 17 minutes respectively. Registration is 09:00–09:45; follow the organiser’s age-group arrangements.",
+        "sourceUrl": "https://cycling.vlaanderen/actions/cycling-api-module/api?method=races/15032.json"
+      },
+      "Cyclo-cross U15 - 12 years": {
+        "time": "13:30",
+        "label": "12-year-old class 13:30 CET (UTC+1)",
+        "note": "The federation’s 12-year-old class starts at 13:30 for 20 minutes. Registration is 12:30–13:15. Reviewed federation race-detail record 15033. Youth-only eligibility and federation licence requirements apply. https://cycling.vlaanderen/actions/cycling-api-module/api?method=races/15033.json",
+        "publicNote": "The federation’s 12-year-old class starts at 13:30 for 20 minutes. Registration is 12:30–13:15.",
+        "sourceUrl": "https://cycling.vlaanderen/actions/cycling-api-module/api?method=races/15033.json"
+      },
+      "Cyclo-cross U15 - 13 years": {
+        "time": "14:15",
+        "label": "13-year-old class 14:15 CET (UTC+1)",
+        "note": "The federation’s 13-year-old class starts at 14:15 for 22 minutes. Registration is 13:15–14:00. Reviewed federation race-detail record 15096. Youth-only eligibility and federation licence requirements apply. https://cycling.vlaanderen/actions/cycling-api-module/api?method=races/15096.json",
+        "publicNote": "The federation’s 13-year-old class starts at 14:15 for 22 minutes. Registration is 13:15–14:00.",
+        "sourceUrl": "https://cycling.vlaanderen/actions/cycling-api-module/api?method=races/15096.json"
+      },
+      "Cyclo-cross U15 - 14 years": {
+        "time": "15:00",
+        "label": "14-year-old class 15:00 CET (UTC+1)",
+        "note": "The federation’s 14-year-old class starts at 15:00 for 25 minutes. Registration is 14:00–14:45. Reviewed federation race-detail record 15097. Youth-only eligibility and federation licence requirements apply. https://cycling.vlaanderen/actions/cycling-api-module/api?method=races/15097.json",
+        "publicNote": "The federation’s 14-year-old class starts at 15:00 for 25 minutes. Registration is 14:00–14:45.",
+        "sourceUrl": "https://cycling.vlaanderen/actions/cycling-api-module/api?method=races/15097.json"
+      }
+    }
+  }
+}

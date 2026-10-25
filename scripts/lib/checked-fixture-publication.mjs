@@ -34,7 +34,13 @@ export async function publishCheckedFixtures(sql, publishing, details, review = 
           Number.isFinite(addition.distanceKm) &&
           (addition.distanceKm > 0 ||
             (addition.distanceKm === 0 &&
-              distance === "Track & field" &&
+              [
+                "Track & field",
+                "Cyclo-cross U12",
+                "Cyclo-cross U15 - 12 years",
+                "Cyclo-cross U15 - 13 years",
+                "Cyclo-cross U15 - 14 years",
+              ].includes(distance) &&
               addition.nonDistanceProgramme === true)) &&
           !!addition.status;
         if (review.baseline) {

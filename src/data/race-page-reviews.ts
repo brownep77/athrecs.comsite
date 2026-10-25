@@ -1,5 +1,6 @@
 import { raceGuideFor, type RaceGuide } from "./runrecs-race-guides.ts";
 import { FIXTURE_DETAILS } from "./fixture-details.ts";
+import { reviewedUrgentRacePage } from "./urgent-starts-next-2026-10-25-pages.ts";
 
 /** A single, edition-scoped search/page example. Source review: 25 October 2026. */
 const hamburg = {
@@ -70,6 +71,7 @@ type ReviewedPage = {
 
 /** Public page projection only; keep stored records and their source evidence intact. */
 export function reviewedRacePage<T extends ReviewedPage>(data: T): T {
+  data = reviewedUrgentRacePage(data);
   const next = data.upcoming.find((edition) => edition.status !== "Cancelled");
   const detail = FIXTURE_DETAILS[`${data.event.slug}|${next?.event_date}`];
   if (next && detail?.eventPageName && Object.hasOwn(detail.starts, next.distance_code)) {

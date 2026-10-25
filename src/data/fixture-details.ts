@@ -1,8 +1,9 @@
+import largeThreeMonthStarts from "./three-month-starts-batch-2026-10-25.json" with { type: "json" };
+import moreThreeMonthStarts from "./three-month-starts-more-2026-10-25.json" with { type: "json" };
 import countyExpansion from "./county-expansion-2026-10-21.json" with { type: "json" };
 import countyExpansionMore from "./county-expansion-more-2026-10-21.json" with { type: "json" };
 import countyExpansionChecked from "./county-expansion-checked-2026-10-21.json" with { type: "json" };
 import countyTbcReview from "./county-tbc-review-2026-10-21.json" with { type: "json" };
-import largeThreeMonthStarts from "./three-month-starts-batch-2026-10-25.json" with { type: "json" };
 
 import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type: "json" };
 import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
@@ -13,6 +14,9 @@ import accraStart from "./accra-start-2026-10-25.json" with { type: "json" };
 import imminentStarts from "./imminent-starts-2026-10-25.json" with { type: "json" };
 import urgentStarts from "./urgent-starts-followup-2026-10-25.json" with { type: "json" };
 import { isUrgentReviewedPlaceholder } from "./urgent-starts-followup-2026-10-25.ts";
+import threeMonthStarts from "./three-month-starts-2026-10-25.json" with { type: "json" };
+import thirdUrgentStarts from "./urgent-starts-third-2026-10-25.json" with { type: "json" };
+import { isThirdUrgentPlaceholder } from "./urgent-starts-third-2026-10-25.ts";
 import nextUrgentStarts from "./urgent-starts-next-2026-10-25.json" with { type: "json" };
 import { isNextUrgentPlaceholder } from "./urgent-starts-next-2026-10-25.ts";
 
@@ -69,9 +73,11 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
       },
     },
   },
+  ...threeMonthStarts,
   ...imminentStarts,
   ...urgentStarts,
   ...nextUrgentStarts,
+  ...thirdUrgentStarts,
   ...accraStart,
   "wa-32-hella-hamburg-half-marathon-7238156|2026-10-25": {
     place: { city: "Hamburg" },
@@ -356,19 +362,12 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
       "5K": { time: "08:10" },
     },
   },
+  ...moreThreeMonthStarts,
 };
-
-// Merge only the reviewed distances; preserve other checked starts for the same event.
-for (const [key, detail] of Object.entries(largeThreeMonthStarts)) {
-  FIXTURE_DETAILS[key] = {
-    ...FIXTURE_DETAILS[key],
-    ...detail,
-    starts: { ...FIXTURE_DETAILS[key]?.starts, ...detail.starts },
-  };
-}
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
+  if (isThirdUrgentPlaceholder(slug, date, distance)) return true;
   if (isNextUrgentPlaceholder(slug, date, distance)) return true;
   if (isUrgentReviewedPlaceholder(slug, date, distance)) return true;
   // The federation import is the same half marathon, not another race distance.
@@ -439,4 +438,14 @@ export function checkedFixtureStartLabel(
       .map((code, index) => `${code}: ${labels[index] ?? "see distance programme"}`)
       .join("; ");
   return null;
+}
+
+// Apply exact-edition reviewed starts while preserving other confirmed distances.
+for (const [key, reviewed] of Object.entries(largeThreeMonthStarts)) {
+  const existing = FIXTURE_DETAILS[key];
+  FIXTURE_DETAILS[key] = {
+    ...existing,
+    ...reviewed,
+    starts: { ...existing?.starts, ...reviewed.starts },
+  };
 }

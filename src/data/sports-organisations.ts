@@ -544,24 +544,62 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ],
     related: ["world-aquatics", "swim-england", "scottish-swimming", "swim-wales", "swim-ireland"],
   }),
-  ...[
-    ["swim-england", "Swim England", "England", "https://www.swimming.org/swimengland/"],
-    ["scottish-swimming", "Scottish Swimming", "Scotland", "https://www.scottishswimming.com/"],
-    ["swim-wales", "Swim Wales", "Wales", "https://www.swimwales.org/"],
-  ].map(([slug, name, country, website]) =>
-    record({
-      slug,
-      name,
-      country,
-      jurisdiction: country,
-      territories: [country, "United Kingdom"],
+  record(
+    {
+      slug: "swim-england",
+      name: "Swim England",
+      country: "England",
+      jurisdiction: "England",
+      territories: ["England", "United Kingdom"],
       type: "home",
-      sports: swimming,
-      website,
-      summary: `Home-nation governing body for swimming and aquatic sport in ${country}.`,
-      sources: ["https://www.aquaticsgb.com/about-us/", website],
+      sports: ["swimming"],
+      website: "https://www.swimming.org/swimengland/",
+      summary: "Home-nation governing body for swimming and aquatic sport in England.",
+      sources: ["https://www.aquaticsgb.com/about-us/", "https://www.swimming.org/swimengland/"],
       related: ["aquatics-gb"],
-    }),
+    },
+    "2026-10-22",
+  ),
+  record(
+    {
+      slug: "scottish-swimming",
+      name: "Scottish Swimming",
+      country: "Scotland",
+      jurisdiction: "Scotland",
+      territories: ["Scotland", "United Kingdom"],
+      type: "home",
+      sports: ["swimming"],
+      website: "https://www.scottishswimming.com/",
+      summary: "Home-nation governing body for swimming and aquatic sport in Scotland.",
+      sources: [
+        "https://www.aquaticsgb.com/about-us/",
+        "https://www.scottishswimming.com/",
+        "https://www.scottishswimming.com/our-sports/swimming/results",
+        "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/04/10082050/SNAGS-2026-Results.pdf",
+        "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/06/30143358/Friday-Results-1.pdf",
+        "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/07/12221149/2026-Scottish-Summer-Meet.pdf",
+      ],
+      related: ["aquatics-gb"],
+      detail:
+        "Link review 25 October 2026: The swimming results hub provides 2026 competition PDFs. Three documents were opened and their first-page tables inspected. Athlete nationality and identity are not established by names, ages or clubs.",
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "swim-wales",
+      name: "Swim Wales",
+      country: "Wales",
+      jurisdiction: "Wales",
+      territories: ["Wales", "United Kingdom"],
+      type: "home",
+      sports: ["swimming"],
+      website: "https://www.swimwales.org/",
+      summary: "Home-nation governing body for swimming and aquatic sport in Wales.",
+      sources: ["https://www.aquaticsgb.com/about-us/", "https://www.swimwales.org/"],
+      related: ["aquatics-gb"],
+    },
+    "2026-10-22",
   ),
 
   record(
@@ -2696,22 +2734,31 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["uci"],
     ["Český svaz cyklistiky", "Czech Republic Cycling"],
   ),
-  {
-    ...federation(
-      "czech-swimming",
-      "Czech Swimming Federation",
-      "Czechia",
-      swimming,
-      "https://www.worldaquatics.com/members/national-federations",
-      "National federation for swimming and related aquatic disciplines in Czechia, listed by World Aquatics.",
-      ["https://www.worldaquatics.com/members/national-federations"],
-      ["world-aquatics"],
-      ["Český svaz plaveckých sportů", "Czech Republic Swimming"],
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens World Aquatics’ member directory. Find Czechia for the swimming federation’s current contact information; the separately listed water polo federation has its own remit.",
-  },
+  record(
+    {
+      slug: "czech-swimming",
+      name: "Czech Swimming Federation",
+      country: "Czechia",
+      jurisdiction: "Czechia",
+      territories: ["Czechia"],
+      type: "national",
+      sports: ["swimming"],
+      website: "https://www.worldaquatics.com/members/national-federations",
+      summary:
+        "National federation for swimming and related aquatic disciplines in Czechia, listed by World Aquatics.",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://vysledky.czechswimming.cz/souteze",
+        "https://vysledky.czechswimming.cz/souteze/10635",
+      ],
+      related: ["world-aquatics"],
+      aliases: ["Český svaz plaveckých sportů", "Czech Republic Swimming"],
+      websiteKind: "member-directory",
+      detail:
+        "The official link opens World Aquatics’ member directory. Find Czechia for the swimming federation’s current contact information; the separately listed water polo federation has its own remit. Link review 25 October 2026: The main federation website could not be retrieved. Its official competition portal is working and provides dated programmes and results-document links; individual results still require checking.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "czech-triathlon",
   "name": "Czech Triathlon Association",
@@ -9610,54 +9657,53 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "namibia-triathlon",
-  "name": "Namibian Triathlon Federation",
-  "type": "national",
-  "country": "Namibia",
-  "jurisdiction": "Namibia",
-  "territories": [
-    "Namibia"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon body for Namibia, listed by World Triathlon and Africa Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/namibian-triathlon-association",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/namibian-triathlon-association",
-    "https://africa.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "nigeria-triathlon",
-  "name": "Triathlon Nigeria",
-  "type": "national",
-  "country": "Nigeria",
-  "jurisdiction": "Nigeria",
-  "territories": [
-    "Nigeria"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon body for Nigeria, listed by World Triathlon and Africa Triathlon.",
-  "detail": "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/nigerian-triathlon-union",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/nigerian-triathlon-union",
-    "https://africa.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "namibia-triathlon",
+      name: "Namibian Triathlon Federation",
+      type: "national",
+      country: "Namibia",
+      jurisdiction: "Namibia",
+      territories: ["Namibia"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon body for Namibia, listed by World Triathlon and Africa Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked federation site confirmed. The events page lists a 2026 calendar and links past results; each edition and start time still needs separate checking.",
+      website: "https://ntf.go.na",
+      sources: [
+        "https://triathlon.org/members/namibian-triathlon-association",
+        "https://africa.triathlon.org/national-federations",
+        "https://ntf.go.na",
+        "https://ntf.go.na/event-directory/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "nigeria-triathlon",
+      name: "Triathlon Nigeria",
+      type: "national",
+      country: "Nigeria",
+      jurisdiction: "Nigeria",
+      territories: ["Nigeria"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon body for Nigeria, listed by World Triathlon and Africa Triathlon.",
+      detail:
+        "World Triathlon lists this federation as “Not in good standing” (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked federation site confirmed. News content is available; dedicated fixture, result and athlete datasets remain unassessed.",
+      website: "https://nigeriantriathlon.org/",
+      sources: [
+        "https://triathlon.org/members/nigerian-triathlon-union",
+        "https://africa.triathlon.org/national-federations",
+        "https://nigeriantriathlon.org/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "niger-triathlon",
   "name": "Fédération Nigérienne de Triathlon",
@@ -9682,30 +9728,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "rwanda-triathlon",
-  "name": "Federation Rwandaise de Triathlon",
-  "type": "national",
-  "country": "Rwanda",
-  "jurisdiction": "Rwanda",
-  "territories": [
-    "Rwanda"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon body for Rwanda, listed by World Triathlon and Africa Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/federation-rwandaise-de-triathlon",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/federation-rwandaise-de-triathlon",
-    "https://africa.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "rwanda-triathlon",
+      name: "Federation Rwandaise de Triathlon",
+      type: "national",
+      country: "Rwanda",
+      jurisdiction: "Rwanda",
+      territories: ["Rwanda"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon body for Rwanda, listed by World Triathlon and Africa Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked federation site confirmed. The homepage includes dated 2026 triathlon and duathlon entries; individual results and athlete facts remain unassessed.",
+      website: "https://www.rwandatri.org/",
+      sources: [
+        "https://triathlon.org/members/federation-rwandaise-de-triathlon",
+        "https://africa.triathlon.org/national-federations",
+        "https://www.rwandatri.org/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "senegal-triathlon",
   "name": "Senegal Triathlon Federation",
@@ -9874,54 +9919,56 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "zimbabwe-triathlon",
-  "name": "Zimbabwe Triathlon Federation",
-  "type": "national",
-  "country": "Zimbabwe",
-  "jurisdiction": "Zimbabwe",
-  "territories": [
-    "Zimbabwe"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon body for Zimbabwe, listed by World Triathlon and Africa Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/zimbabwe-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/zimbabwe-triathlon-federation",
-    "https://africa.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "bangladesh-triathlon",
-  "name": "Bangladesh Triathlon Association",
-  "type": "national",
-  "country": "Bangladesh",
-  "jurisdiction": "Bangladesh",
-  "territories": [
-    "Bangladesh"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Bangladesh, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/triathlon-federation-of-bangladesh",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/triathlon-federation-of-bangladesh",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "zimbabwe-triathlon",
+      name: "Zimbabwe Triathlon Federation",
+      type: "national",
+      country: "Zimbabwe",
+      jurisdiction: "Zimbabwe",
+      territories: ["Zimbabwe"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon body for Zimbabwe, listed by World Triathlon and Africa Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed, with 2026–27 calendar and results-document indexes. One October 2026 results PDF was opened; individual performances remain unverified.",
+      website: "https://www.zimtri.org/",
+      sources: [
+        "https://triathlon.org/members/zimbabwe-triathlon-federation",
+        "https://africa.triathlon.org/national-federations",
+        "https://www.zimtri.org/",
+        "https://www.zimtri.org/calendar-of-events/",
+        "https://www.zimtri.org/2026-2027-results/",
+        "https://www.zimtri.org/2025-2026-results-points/",
+        "https://www.zimtri.org/wp-content/uploads/bsk-pdf-manager/EVENT_3_-_RESULTS_-_11_OCTOBER_-_FINAL_2324.pdf",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "bangladesh-triathlon",
+      name: "Bangladesh Triathlon Association",
+      type: "national",
+      country: "Bangladesh",
+      jurisdiction: "Bangladesh",
+      territories: ["Bangladesh"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Bangladesh, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Federation site corroborated by World Triathlon. The prominent championship material is from 2018; current fixture, result and athlete coverage remains unassessed.",
+      website: "https://www.triathlonbd.org/",
+      sources: [
+        "https://triathlon.org/members/triathlon-federation-of-bangladesh",
+        "https://asia.triathlon.org/national-federations",
+        "https://www.triathlonbd.org/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "bahrain-triathlon",
   "name": "Bahrain Triathlon Association",
@@ -9970,30 +10017,32 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "iran-triathlon",
-  "name": "Iran Triathlon Federation",
-  "type": "national",
-  "country": "Iran",
-  "jurisdiction": "Iran",
-  "territories": [
-    "Iran"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Iran, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/iran-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/iran-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "iran-triathlon",
+      name: "Iran Triathlon Federation",
+      type: "national",
+      country: "Iran",
+      jurisdiction: "Iran",
+      territories: ["Iran"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Iran, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Federation site corroborated by World Triathlon and its events section. The athlete list remains a loading shell; Iranian-calendar labels require careful interpretation.",
+      website: "https://irtriathlon.ir/",
+      sources: [
+        "https://triathlon.org/members/iran-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://irtriathlon.ir/",
+        "https://irtriathlon.ir/events",
+        "https://irtriathlon.ir/aboutus",
+        "https://irtriathlon.ir/athletes",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "iraq-triathlon",
   "name": "Iraq Triathlon Federation",
@@ -10042,78 +10091,81 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "kazakhstan-triathlon",
-  "name": "Kazakhstan Triathlon Federation",
-  "type": "national",
-  "country": "Kazakhstan",
-  "jurisdiction": "Kazakhstan",
-  "territories": [
-    "Kazakhstan"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Kazakhstan, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/kazakhstan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/kazakhstan-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "kyrgyzstan-triathlon",
-  "name": "Kyrgyz Republic Triathlon Federation",
-  "type": "national",
-  "country": "Kyrgyzstan",
-  "jurisdiction": "Kyrgyzstan",
-  "territories": [
-    "Kyrgyzstan"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Kyrgyzstan, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "saudi-arabia-triathlon",
-  "name": "Saudi Triathlon Federation",
-  "type": "national",
-  "country": "Saudi Arabia",
-  "jurisdiction": "Saudi Arabia",
-  "territories": [
-    "Saudi Arabia"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Saudi Arabia, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/saudi-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/saudi-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "kazakhstan-triathlon",
+      name: "Kazakhstan Triathlon Federation",
+      type: "national",
+      country: "Kazakhstan",
+      jurisdiction: "Kazakhstan",
+      territories: ["Kazakhstan"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Kazakhstan, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. The results index exposes 2022–24 archive entries and a named national-team list; the events search returned no matches.",
+      website: "https://triathlon.org.kz/",
+      sources: [
+        "https://triathlon.org/members/kazakhstan-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://triathlon.org.kz/",
+        "https://triathlon.org.kz/ru/event",
+        "https://triathlon.org.kz/ru/result",
+        "https://triathlon.org.kz/ru/athlete",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "kyrgyzstan-triathlon",
+      name: "Kyrgyz Republic Triathlon Federation",
+      type: "national",
+      country: "Kyrgyzstan",
+      jurisdiction: "Kyrgyzstan",
+      territories: ["Kyrgyzstan"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Kyrgyzstan, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. Its archive lists dated 2026 competitions and categories; individual result rows still require review.",
+      website: "https://www.triathlon.kg/",
+      sources: [
+        "https://triathlon.org/members/kyrgyzstan-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://www.triathlon.kg/",
+        "https://www.triathlon.kg/events/archive",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "saudi-arabia-triathlon",
+      name: "Saudi Triathlon Federation",
+      type: "national",
+      country: "Saudi Arabia",
+      jurisdiction: "Saudi Arabia",
+      territories: ["Saudi Arabia"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Saudi Arabia, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. The event list contains dated 2026 and older races; an athlete section lists names without verified nationality or identity evidence.",
+      website: "https://www.triathlon.sa",
+      sources: [
+        "https://triathlon.org/members/saudi-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://www.triathlon.sa",
+        "https://www.triathlon.sa/event-list",
+        "https://www.triathlon.sa/epp-athletes",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "kuwait-triathlon",
   "name": "Kuwait Triathlon Club",
@@ -10210,30 +10262,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "oman-triathlon",
-  "name": "Oman Triathlon Federation",
-  "type": "national",
-  "country": "Oman",
-  "jurisdiction": "Oman",
-  "territories": [
-    "Oman"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Oman, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/oman-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/oman-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "oman-triathlon",
+      name: "Oman Triathlon Federation",
+      type: "national",
+      country: "Oman",
+      jurisdiction: "Oman",
+      territories: ["Oman"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Oman, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked national governing-body website confirmed. The events page describes a 2024 series despite its upcoming-events heading; newer coverage remains unconfirmed.",
+      website: "https://www.omantriathlon.om",
+      sources: [
+        "https://triathlon.org/members/oman-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://www.omantriathlon.om",
+        "https://www.omantriathlon.om/events.html",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "pakistan-triathlon",
   "name": "Pakistan Triathlon Federation",
@@ -10282,30 +10334,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "qatar-triathlon",
-  "name": "Qatar Triathlon Federation",
-  "type": "national",
-  "country": "Qatar",
-  "jurisdiction": "Qatar",
-  "territories": [
-    "Qatar"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Qatar, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/qatar-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/qatar-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "qatar-triathlon",
+      name: "Qatar Triathlon Federation",
+      type: "national",
+      country: "Qatar",
+      jurisdiction: "Qatar",
+      territories: ["Qatar"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Qatar, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: World Triathlon-linked federation site confirmed. The year-planner route returned navigation and a heading without dated entries; detailed data capability remains unconfirmed.",
+      website: "https://qatartriathlon.org/",
+      sources: [
+        "https://triathlon.org/members/qatar-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://qatartriathlon.org/",
+        "https://qatartriathlon.org/events/calendar",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "syria-triathlon",
   "name": "Syria Arab Triathlon Federation",
@@ -10378,30 +10430,32 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "uzbekistan-triathlon",
-  "name": "Uzbekistan Triathlon Federation",
-  "type": "national",
-  "country": "Uzbekistan",
-  "jurisdiction": "Uzbekistan",
-  "territories": [
-    "Uzbekistan"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Uzbekistan, listed by World Triathlon and Asia Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/uzbekistan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/uzbekistan-triathlon-federation",
-    "https://asia.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "uzbekistan-triathlon",
+      name: "Uzbekistan Triathlon Federation",
+      type: "national",
+      country: "Uzbekistan",
+      jurisdiction: "Uzbekistan",
+      territories: ["Uzbekistan"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Uzbekistan, listed by World Triathlon and Asia Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. The archive contains named 2026 races and the national-team page includes country-labelled athlete cards. Identity and individual facts need separate comparison.",
+      website: "https://triathlon.uz/ru",
+      sources: [
+        "https://triathlon.org/members/uzbekistan-triathlon-federation",
+        "https://asia.triathlon.org/national-federations",
+        "https://triathlon.uz/ru",
+        "https://triathlon.uz/ru/competitions",
+        "https://triathlon.uz/ru/competitions/archive",
+        "https://triathlon.uz/ru/athletes/national-team",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "yemen-triathlon",
   "name": "Yemen Aquatics",
@@ -10546,54 +10600,56 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "virgin-islands-triathlon",
-  "name": "Virgin Islands Triathlon",
-  "type": "national",
-  "country": "Virgin Islands",
-  "jurisdiction": "Virgin Islands",
-  "territories": [
-    "Virgin Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Virgin Islands, listed by World Triathlon and Americas Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/virgin-islands-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/virgin-islands-triathlon-federation",
-    "https://americas.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "aruba-triathlon",
-  "name": "Aruba Triathlon Association",
-  "type": "national",
-  "country": "Aruba",
-  "jurisdiction": "Aruba",
-  "territories": [
-    "Aruba"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Aruba, listed by World Triathlon and Americas Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/aruba-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/aruba-triathlon-federation",
-    "https://americas.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "virgin-islands-triathlon",
+      name: "Virgin Islands Triathlon",
+      type: "national",
+      country: "Virgin Islands",
+      jurisdiction: "Virgin Islands",
+      territories: ["Virgin Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Virgin Islands, listed by World Triathlon and Americas Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Federation identity confirmed through its About page. The 2026 calendar links results and explicitly marks a cancellation and June schedule changes.",
+      website: "https://www.vitf.org/",
+      sources: [
+        "https://triathlon.org/members/virgin-islands-triathlon-federation",
+        "https://americas.triathlon.org/national-federations",
+        "https://www.vitf.org/",
+        "https://www.vitf.org/events",
+        "https://www.vitf.org/about-1",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "aruba-triathlon",
+      name: "Aruba Triathlon Association",
+      type: "national",
+      country: "Aruba",
+      jurisdiction: "Aruba",
+      territories: ["Aruba"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Aruba, listed by World Triathlon and Americas Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Federation identity confirmed through World Triathlon and the association website. The result-history page links 2026 and historical results; its calendar is presented as an uninspected image.",
+      website: "https://arubatriathlon.com/pages/",
+      sources: [
+        "https://triathlon.org/members/aruba-triathlon-federation",
+        "https://americas.triathlon.org/national-federations",
+        "https://arubatriathlon.com/pages/",
+        "https://arubatriathlon.com/pages/about/",
+        "https://arubatriathlon.com/pages/race-result-history/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "cuba-triathlon",
   "name": "Federación Cubana de Triatlón",
@@ -10690,30 +10746,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "cayman-islands-triathlon",
-  "name": "Cayman Islands Triathlon Association",
-  "type": "national",
-  "country": "Cayman Islands",
-  "jurisdiction": "Cayman Islands",
-  "territories": [
-    "Cayman Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Cayman Islands, listed by World Triathlon and Americas Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/cayman-islands-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/cayman-islands-triathlon-federation",
-    "https://americas.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "cayman-islands-triathlon",
+      name: "Cayman Islands Triathlon Association",
+      type: "national",
+      country: "Cayman Islands",
+      jurisdiction: "Cayman Islands",
+      territories: ["Cayman Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Cayman Islands, listed by World Triathlon and Americas Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official association site confirmed. Its event list includes November 2026 competitions and older editions; displayed time ranges require edition-specific programme checks.",
+      website: "https://www.triathlon.ky",
+      sources: [
+        "https://triathlon.org/members/cayman-islands-triathlon-federation",
+        "https://americas.triathlon.org/national-federations",
+        "https://www.triathlon.ky",
+        "https://www.triathlon.ky/events",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "suriname-triathlon",
   "name": "Surinaamse Triathlon Unie",
@@ -10810,30 +10866,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "cook-islands-triathlon",
-  "name": "Cook Islands Triathlon Association",
-  "type": "national",
-  "country": "Cook Islands",
-  "jurisdiction": "Cook Islands",
-  "territories": [
-    "Cook Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Cook Islands, listed by World Triathlon and Oceania Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/cook-islands-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/cook-islands-triathlon-federation",
-    "https://oceania.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "cook-islands-triathlon",
+      name: "Cook Islands Triathlon Association",
+      type: "national",
+      country: "Cook Islands",
+      jurisdiction: "Cook Islands",
+      territories: ["Cook Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Cook Islands, listed by World Triathlon and Oceania Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official association site confirmed. The calendar lists the 2027 Rarotonga festival; its multi-day festival window is not an individual race start time.",
+      website: "https://www.rarotri.com/",
+      sources: [
+        "https://triathlon.org/members/cook-islands-triathlon-federation",
+        "https://oceania.triathlon.org/national-federations",
+        "https://www.rarotri.com/",
+        "https://www.rarotri.com/events/list",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "fiji-triathlon",
   "name": "Fiji Triathlon Association",
@@ -10882,30 +10938,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "northern-mariana-islands-triathlon",
-  "name": "Triathlon Association of the CMNI",
-  "type": "national",
-  "country": "Northern Mariana Islands",
-  "jurisdiction": "Northern Mariana Islands",
-  "territories": [
-    "Northern Mariana Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Northern Mariana Islands, listed by World Triathlon and Oceania Triathlon.",
-  "detail": "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied.",
-  "website": "https://triathlon.org/members/triathlon-association-of-the-cmni",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/triathlon-association-of-the-cmni",
-    "https://oceania.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "northern-mariana-islands-triathlon",
+      name: "Triathlon Association of the CMNI",
+      type: "national",
+      country: "Northern Mariana Islands",
+      jurisdiction: "Northern Mariana Islands",
+      territories: ["Northern Mariana Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Northern Mariana Islands, listed by World Triathlon and Oceania Triathlon.",
+      detail:
+        "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied. Link review 25 October 2026: World Triathlon-linked association website confirmed. The events section mainly contains historical entries and some dates lack a year; no year has been inferred.",
+      website: "https://sites.google.com/view/triathloncnmi/home",
+      sources: [
+        "https://triathlon.org/members/triathlon-association-of-the-cmni",
+        "https://oceania.triathlon.org/national-federations",
+        "https://sites.google.com/view/triathloncnmi/home",
+        "https://sites.google.com/view/triathloncnmi/events",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "palau-triathlon",
   "name": "Belau Triathlon Federation",
@@ -11002,30 +11058,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "tahiti-triathlon",
-  "name": "Fédération Tahitienne de Triathlon",
-  "type": "national",
-  "country": "Tahiti",
-  "jurisdiction": "Tahiti",
-  "territories": [
-    "Tahiti"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Tahiti, listed by World Triathlon and Oceania Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026).",
-  "website": "https://triathlon.org/members/tahiti-triathlon-association",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/tahiti-triathlon-association",
-    "https://oceania.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "tahiti-triathlon",
+      name: "Fédération Tahitienne de Triathlon",
+      type: "national",
+      country: "Tahiti",
+      jurisdiction: "Tahiti",
+      territories: ["Tahiti"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Tahiti, listed by World Triathlon and Oceania Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Link review 25 October 2026: Official federation site confirmed. The 2026 calendar contains event and document links plus provisional rankings; camps and training are distinguished from races.",
+      website: "https://www.tahititriathlon.pf",
+      sources: [
+        "https://triathlon.org/members/tahiti-triathlon-association",
+        "https://oceania.triathlon.org/national-federations",
+        "https://www.tahititriathlon.pf",
+        "https://www.tahititriathlon.pf/calendrier-2026/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "tonga-triathlon",
   "name": "Tonga - Friendly Islands Triathlon Association",
@@ -11074,30 +11130,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "andorra-triathlon",
-  "name": "Federació Andorrana de Triatló",
-  "type": "national",
-  "country": "Andorra",
-  "jurisdiction": "Andorra",
-  "territories": [
-    "Andorra"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Andorra, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/federacio-andorrana-de-triatlo",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/federacio-andorrana-de-triatlo",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "andorra-triathlon",
+      name: "Federació Andorrana de Triatló",
+      type: "national",
+      country: "Andorra",
+      jurisdiction: "Andorra",
+      territories: ["Andorra"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Andorra, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: The linked national website returned conflicting content across sections, including unrelated material on its athlete route. The World Triathlon membership reference remains primary while the website is reviewed.",
+      website: "https://triathlon.org/members/federacio-andorrana-de-triatlo",
+      websiteKind: "member-directory",
+      sources: [
+        "https://triathlon.org/members/federacio-andorrana-de-triatlo",
+        "https://europe.triathlon.org/national-federations",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "armenia-triathlon",
   "name": "Armenian Triathlon Federation",
@@ -11122,102 +11177,107 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "azerbaijan-triathlon",
-  "name": "Azerbaijan Triathlon Federation",
-  "type": "national",
-  "country": "Azerbaijan",
-  "jurisdiction": "Azerbaijan",
-  "territories": [
-    "Azerbaijan"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Azerbaijan, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/azerbaijan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/azerbaijan-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "bosnia-and-herzegovina-triathlon",
-  "name": "Triathlon and Pentathlon Federation of Bosnia and Herzegovina",
-  "type": "national",
-  "country": "Bosnia and Herzegovina",
-  "jurisdiction": "Bosnia and Herzegovina",
-  "territories": [
-    "Bosnia and Herzegovina"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Bosnia and Herzegovina, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "belarus-triathlon",
-  "name": "Belarusian Triathlon Federation",
-  "type": "national",
-  "country": "Belarus",
-  "jurisdiction": "Belarus",
-  "territories": [
-    "Belarus"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Belarus, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/belarus-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/belarus-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "faroe-islands-triathlon",
-  "name": "The Faroe Islands Triathlon Federation",
-  "type": "national",
-  "country": "Faroe Islands",
-  "jurisdiction": "Faroe Islands",
-  "territories": [
-    "Faroe Islands"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Faroe Islands, listed by World Triathlon and Europe Triathlon.",
-  "detail": "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied.",
-  "website": "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "azerbaijan-triathlon",
+      name: "Azerbaijan Triathlon Federation",
+      type: "national",
+      country: "Azerbaijan",
+      jurisdiction: "Azerbaijan",
+      territories: ["Azerbaijan"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Azerbaijan, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The results index links 2023–25 files, while the events page exposes headers without rows. Athlete text needs identity and source-row checks.",
+      website: "https://www.triathlon.az/az/",
+      sources: [
+        "https://triathlon.org/members/azerbaijan-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.triathlon.az/az/",
+        "https://www.triathlon.az/az/events",
+        "https://www.triathlon.az/az/results",
+        "https://www.triathlon.az/az/athletes",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "bosnia-and-herzegovina-triathlon",
+      name: "Triathlon and Pentathlon Federation of Bosnia and Herzegovina",
+      type: "national",
+      country: "Bosnia and Herzegovina",
+      jurisdiction: "Bosnia and Herzegovina",
+      territories: ["Bosnia and Herzegovina"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Bosnia and Herzegovina, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. Its 2026 event table distinguishes disciplines and organisers; repeated championship classifications may describe the same meeting.",
+      website: "https://tpsbih.ba/",
+      sources: [
+        "https://triathlon.org/members/triathlon-association-in-bosnia-and-herzegovina",
+        "https://europe.triathlon.org/national-federations",
+        "https://tpsbih.ba/",
+        "https://tpsbih.ba/dogadjaji/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "belarus-triathlon",
+      name: "Belarusian Triathlon Federation",
+      type: "national",
+      country: "Belarus",
+      jurisdiction: "Belarus",
+      territories: ["Belarus"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Belarus, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The 2026 competition page includes calendar amendments and result-document links; its separate rankings section returned no rankings.",
+      website: "https://triatlon.by/",
+      sources: [
+        "https://triathlon.org/members/belarus-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://triatlon.by/",
+        "https://triatlon.by/sorevnovaniya/federacziya/2026",
+        "https://triatlon.by/federacziya/rejting",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "faroe-islands-triathlon",
+      name: "The Faroe Islands Triathlon Federation",
+      type: "national",
+      country: "Faroe Islands",
+      jurisdiction: "Faroe Islands",
+      territories: ["Faroe Islands"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Faroe Islands, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "World Triathlon lists this body as an associate member (checked 23 October 2026); full affiliated membership is not implied. Link review 25 October 2026: World Triathlon-linked SST website confirmed. Calendars and results cover both cycling and triathlon; selection standards are not achieved athlete performances.",
+      website: "https://www.sst.fo",
+      sources: [
+        "https://triathlon.org/members/the-faroe-islands-triathlon-federation1",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.sst.fo",
+        "https://www.sst.fo/kalendari/",
+        "https://www.sst.fo/urslit/",
+        "https://www.sst.fo/landslid/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "georgia-triathlon",
   "name": "National Triathlon Federation of Georgia",
@@ -11242,150 +11302,148 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "gibraltar-triathlon",
-  "name": "Gibraltar Triathlon Association",
-  "type": "national",
-  "country": "Gibraltar",
-  "jurisdiction": "Gibraltar",
-  "territories": [
-    "Gibraltar"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Gibraltar, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/gibraltar-triathlon-association",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/gibraltar-triathlon-association",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "kosovo-triathlon",
-  "name": "Kosovo Triathlon Federation",
-  "type": "national",
-  "country": "Kosovo",
-  "jurisdiction": "Kosovo",
-  "territories": [
-    "Kosovo"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Kosovo, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/kosovo-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/kosovo-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "liechtenstein-triathlon",
-  "name": "Liechtenstein Triathlon Federation",
-  "type": "national",
-  "country": "Liechtenstein",
-  "jurisdiction": "Liechtenstein",
-  "territories": [
-    "Liechtenstein"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Liechtenstein, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/liechtenstein-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/liechtenstein-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "moldova-triathlon",
-  "name": "National Triathlon Federation of the Republic of Moldova",
-  "type": "national",
-  "country": "Moldova",
-  "jurisdiction": "Moldova",
-  "territories": [
-    "Moldova"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Moldova, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/moldovan-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/moldovan-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "north-macedonia-triathlon",
-  "name": "Triathlon Federation of North Macedonia",
-  "type": "national",
-  "country": "North Macedonia",
-  "jurisdiction": "North Macedonia",
-  "territories": [
-    "North Macedonia"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for North Macedonia, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/macedonian-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/macedonian-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "montenegro-triathlon",
-  "name": "Triathlon Federation of Montenegro",
-  "type": "national",
-  "country": "Montenegro",
-  "jurisdiction": "Montenegro",
-  "territories": [
-    "Montenegro"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Montenegro, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/triathlon-federation-of-montenegro",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/triathlon-federation-of-montenegro",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "gibraltar-triathlon",
+      name: "Gibraltar Triathlon Association",
+      type: "national",
+      country: "Gibraltar",
+      jurisdiction: "Gibraltar",
+      territories: ["Gibraltar"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Gibraltar, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: World Triathlon-linked association site confirmed. It describes senior and junior activity; detailed result and athlete datasets remain unassessed.",
+      website: "https://www.gibraltartriathlon.com/",
+      sources: [
+        "https://triathlon.org/members/gibraltar-triathlon-association",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.gibraltartriathlon.com/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "kosovo-triathlon",
+      name: "Kosovo Triathlon Federation",
+      type: "national",
+      country: "Kosovo",
+      jurisdiction: "Kosovo",
+      territories: ["Kosovo"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Kosovo, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. Its 2026 calendar supplies dates, disciplines and displayed times; edition programmes require separate checks before fixture publication.",
+      website: "https://kosovatriathlon.org/",
+      sources: [
+        "https://triathlon.org/members/kosovo-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://kosovatriathlon.org/",
+        "https://kosovatriathlon.org/kalendar",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "liechtenstein-triathlon",
+      name: "Liechtenstein Triathlon Federation",
+      type: "national",
+      country: "Liechtenstein",
+      jurisdiction: "Liechtenstein",
+      territories: ["Liechtenstein"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Liechtenstein, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. News links individual competition results; the competition section explains participation rules rather than providing a fixture table.",
+      website: "https://www.triathlon.li",
+      sources: [
+        "https://triathlon.org/members/liechtenstein-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.triathlon.li",
+        "https://www.triathlon.li/wettk%C3%A4mpfe/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "moldova-triathlon",
+      name: "National Triathlon Federation of the Republic of Moldova",
+      type: "national",
+      country: "Moldova",
+      jurisdiction: "Moldova",
+      territories: ["Moldova"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Moldova, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Federation identity corroborated by World Triathlon and its About page. That page contains historical information; current fixtures, results and athlete coverage remain unassessed.",
+      website: "https://ftrm.md/en",
+      sources: [
+        "https://triathlon.org/members/moldovan-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://ftrm.md/en",
+        "https://ftrm.md/about-ru",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "north-macedonia-triathlon",
+      name: "Triathlon Federation of North Macedonia",
+      type: "national",
+      country: "North Macedonia",
+      jurisdiction: "North Macedonia",
+      territories: ["North Macedonia"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for North Macedonia, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The 2026 calendar includes repeated entries and a triathlon/duathlon label discrepancy; resolve them before importing fixtures.",
+      website: "https://triathlon.mk/",
+      sources: [
+        "https://triathlon.org/members/macedonian-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://triathlon.mk/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "montenegro-triathlon",
+      name: "Triathlon Federation of Montenegro",
+      type: "national",
+      country: "Montenegro",
+      jurisdiction: "Montenegro",
+      territories: ["Montenegro"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Montenegro, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. Its 2026 calendar separates senior and youth competitions; several entries give only a month or month range.",
+      website: "https://triatlon.me/",
+      sources: [
+        "https://triathlon.org/members/triathlon-federation-of-montenegro",
+        "https://europe.triathlon.org/national-federations",
+        "https://triatlon.me/",
+        "https://triatlon.me/kalendar-takmicenja",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "monaco-triathlon",
   "name": "Triathlon Monegasque Federation",
@@ -11410,54 +11468,58 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-triathlon"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "russia-triathlon",
-  "name": "Russian Triathlon Federation",
-  "type": "national",
-  "country": "Russia",
-  "jurisdiction": "Russia",
-  "territories": [
-    "Russia"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Russia, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/russian-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/russian-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "ukraine-triathlon",
-  "name": "Ukrainian Triathlon Federation",
-  "type": "national",
-  "country": "Ukraine",
-  "jurisdiction": "Ukraine",
-  "territories": [
-    "Ukraine"
-  ],
-  "sports": [
-    "triathlon"
-  ],
-  "summary": "National triathlon member body for Ukraine, listed by World Triathlon and Europe Triathlon.",
-  "detail": "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility.",
-  "website": "https://triathlon.org/members/ukrainian-triathlon-federation",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://triathlon.org/members/ukrainian-triathlon-federation",
-    "https://europe.triathlon.org/national-federations"
-  ],
-  "related": [
-    "world-triathlon"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "russia-triathlon",
+      name: "Russian Triathlon Federation",
+      type: "national",
+      country: "Russia",
+      jurisdiction: "Russia",
+      territories: ["Russia"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Russia, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The calendar contains late-2026 events and a named national-team list; the results section returned only an archive heading.",
+      website: "https://rustriathlon.ru/",
+      sources: [
+        "https://triathlon.org/members/russian-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://rustriathlon.ru/",
+        "https://rustriathlon.ru/calendarPage/all",
+        "https://rustriathlon.ru/results",
+        "https://rustriathlon.ru/members/group/a56dfb11c0cf42c1018f3b55738e85977cdba287",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "ukraine-triathlon",
+      name: "Ukrainian Triathlon Federation",
+      type: "national",
+      country: "Ukraine",
+      jurisdiction: "Ukraine",
+      territories: ["Ukraine"],
+      sports: ["triathlon"],
+      summary:
+        "National triathlon member body for Ukraine, listed by World Triathlon and Europe Triathlon.",
+      detail:
+        "Listed as affiliated by World Triathlon (checked 23 October 2026). Membership status does not establish athlete or event eligibility. Link review 25 October 2026: Official federation site confirmed. The results index has dated 2026 editions and a separate candidate-team announcement. Generic 08:00–15:00 windows are not verified race starts.",
+      website: "https://www.triathlon.org.ua",
+      sources: [
+        "https://triathlon.org/members/ukrainian-triathlon-federation",
+        "https://europe.triathlon.org/national-federations",
+        "https://www.triathlon.org.ua",
+        "https://www.triathlon.org.ua/calendar_types/profesijnij-sport/",
+        "https://www.triathlon.org.ua/results_types/profesijnij-sport/",
+        "https://www.triathlon.org.ua/news/naczionalna-zbirna-sklad-sportsmeniv-kandydativ-2026/",
+      ],
+      related: ["world-triathlon"],
+    },
+    "2026-10-25",
+  ),
 
   // World Aquatics African national members, checked 23 October 2026.
   record({
@@ -12245,33 +12307,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       "Madagascar Swimming Federation"
     ]
   }, "2026-10-23"),
-  record({
-    "slug": "morocco-swimming",
-    "name": "Fédération Royale Marocaine de Natation",
-    "country": "Morocco",
-    "jurisdiction": "Morocco",
-    "territories": [
-      "Morocco"
-    ],
-    "type": "national",
-    "sports": [
-      "swimming"
-    ],
-    "website": "https://www.worldaquatics.com/members/national-federations",
-    "websiteKind": "member-directory",
-    "summary": "National swimming member body for Morocco, listed by World Aquatics.",
-    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
-    "sources": [
-      "https://www.worldaquatics.com/members/national-federations"
-    ],
-    "related": [
-      "world-aquatics",
-      "africa-aquatics"
-    ],
-    "aliases": [
-      "Morocco Swimming Federation"
-    ]
-  }, "2026-10-23"),
+  record(
+    {
+      slug: "morocco-swimming",
+      name: "Fédération Royale Marocaine de Natation",
+      country: "Morocco",
+      jurisdiction: "Morocco",
+      territories: ["Morocco"],
+      type: "national",
+      sports: ["swimming"],
+      website: "https://frmnatation.com/",
+      summary: "National swimming member body for Morocco, listed by World Aquatics.",
+      detail:
+        "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers. Link review 25 October 2026: Official federation homepage confirmed. The opened competition-results section is a historical archive (2015–19); the calendar section did not expose dated fixtures.",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://frmnatation.com/",
+        "https://frmnatation.com/competitions-resultats",
+        "https://frmnatation.com/calendrier-federal",
+      ],
+      related: ["world-aquatics", "africa-aquatics"],
+      aliases: ["Morocco Swimming Federation"],
+    },
+    "2026-10-25",
+  ),
   record({
     "slug": "malawi-swimming",
     "name": "Malawi Aquatic Union",
@@ -12380,33 +12439,31 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       "Mauritania Swimming Federation"
     ]
   }, "2026-10-23"),
-  record({
-    "slug": "namibia-swimming",
-    "name": "Namibia Aquatic Sports Federation",
-    "country": "Namibia",
-    "jurisdiction": "Namibia",
-    "territories": [
-      "Namibia"
-    ],
-    "type": "national",
-    "sports": [
-      "swimming"
-    ],
-    "website": "https://www.worldaquatics.com/members/national-federations",
-    "websiteKind": "member-directory",
-    "summary": "National swimming member body for Namibia, listed by World Aquatics.",
-    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
-    "sources": [
-      "https://www.worldaquatics.com/members/national-federations"
-    ],
-    "related": [
-      "world-aquatics",
-      "africa-aquatics"
-    ],
-    "aliases": [
-      "Namibia Swimming Federation"
-    ]
-  }, "2026-10-23"),
+  record(
+    {
+      slug: "namibia-swimming",
+      name: "Namibia Aquatic Sports Federation",
+      country: "Namibia",
+      jurisdiction: "Namibia",
+      territories: ["Namibia"],
+      type: "national",
+      sports: ["swimming"],
+      website: "https://swimmingnamibia.com/",
+      summary: "National swimming member body for Namibia, listed by World Aquatics.",
+      detail:
+        "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers. Link review 25 October 2026: Official federation homepage confirmed. The events page links a 2025–26 calendar; the opened results index covers 2020–21. Athlete-profile links require individual evidence review.",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://swimmingnamibia.com/",
+        "https://swimmingnamibia.com/events/",
+        "https://swimmingnamibia.com/disciplines/swimming/results/",
+        "https://swimmingnamibia.com/athlete-profiles/",
+      ],
+      related: ["world-aquatics", "africa-aquatics"],
+      aliases: ["Namibia Swimming Federation"],
+    },
+    "2026-10-25",
+  ),
   record({
     "slug": "nigeria-swimming",
     "name": "Nigeria Aquatics Federation",
@@ -12896,34 +12953,31 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "oceania-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "fiji-swimming",
-  "name": "Fiji Swimming",
-  "aliases": [
-    "Fiji swimming federation"
-  ],
-  "type": "national",
-  "country": "Fiji",
-  "jurisdiction": "Fiji",
-  "territories": [
-    "Fiji"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The swimming member body listed for Fiji by World Aquatics and Oceania Aquatics.",
-  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations",
-    "https://oceaniaaquatics.org/members/"
-  ],
-  "related": [
-    "world-aquatics",
-    "oceania-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "fiji-swimming",
+      name: "Fiji Swimming",
+      aliases: ["Fiji swimming federation"],
+      type: "national",
+      country: "Fiji",
+      jurisdiction: "Fiji",
+      territories: ["Fiji"],
+      sports: ["swimming"],
+      summary: "The swimming member body listed for Fiji by World Aquatics and Oceania Aquatics.",
+      detail:
+        "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers. Link review 25 October 2026: The World Aquatics-listed website redirects to Fiji Aquatics. Its 2026 results index and calendar were opened; the calendar also includes camps, meetings and holidays and is subject to change.",
+      website: "https://fijiaquatics.com/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://oceaniaaquatics.org/members/",
+        "https://fijiaquatics.com/",
+        "https://fijiaquatics.com/2026-results/",
+        "https://fijiaquatics.com/calendar-of-events/",
+      ],
+      related: ["world-aquatics", "oceania-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "federated-states-of-micronesia-swimming",
   "name": "Federated States of Micronesia Swimming Association",
@@ -12953,34 +13007,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "oceania-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "guam-swimming",
-  "name": "Guam Swimming Federation",
-  "aliases": [
-    "Guam swimming federation"
-  ],
-  "type": "national",
-  "country": "Guam",
-  "jurisdiction": "Guam",
-  "territories": [
-    "Guam"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The swimming member body listed for Guam by World Aquatics and Oceania Aquatics.",
-  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations",
-    "https://oceaniaaquatics.org/members/"
-  ],
-  "related": [
-    "world-aquatics",
-    "oceania-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "guam-swimming",
+      name: "Guam Swimming Federation",
+      aliases: ["Guam swimming federation"],
+      type: "national",
+      country: "Guam",
+      jurisdiction: "Guam",
+      territories: ["Guam"],
+      sports: ["swimming"],
+      summary: "The swimming member body listed for Guam by World Aquatics and Oceania Aquatics.",
+      detail:
+        "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers. Link review 25 October 2026: Official Guam Aquatics homepage and 2026 meet-results index confirmed. One January 2026 label links to a PDF filename containing 2025; that edition needs checking before use.",
+      website: "https://www.guamswimming.org",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://oceaniaaquatics.org/members/",
+        "https://www.guamswimming.org",
+        "https://www.guamswimming.org/2026-swim-meet-results/",
+      ],
+      related: ["world-aquatics", "oceania-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "marshall-islands-swimming",
   "name": "Marshall Islands Swimming Federation",
@@ -13009,34 +13059,33 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "oceania-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "northern-mariana-islands-swimming",
-  "name": "Northern Mariana Islands Swimming Federation",
-  "aliases": [
-    "Northern Mariana Islands swimming federation"
-  ],
-  "type": "national",
-  "country": "Northern Mariana Islands",
-  "jurisdiction": "Northern Mariana Islands",
-  "territories": [
-    "Northern Mariana Islands"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The swimming member body listed for Northern Mariana Islands by World Aquatics and Oceania Aquatics.",
-  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations",
-    "https://oceaniaaquatics.org/members/"
-  ],
-  "related": [
-    "world-aquatics",
-    "oceania-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "northern-mariana-islands-swimming",
+      name: "Northern Mariana Islands Swimming Federation",
+      aliases: ["Northern Mariana Islands swimming federation"],
+      type: "national",
+      country: "Northern Mariana Islands",
+      jurisdiction: "Northern Mariana Islands",
+      territories: ["Northern Mariana Islands"],
+      sports: ["swimming"],
+      summary:
+        "The swimming member body listed for Northern Mariana Islands by World Aquatics and Oceania Aquatics.",
+      detail:
+        "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers. Link review 25 October 2026: Official federation identity corroborated by its About page. The records page links course-specific PDFs; their contents and the calendar remain unassessed.",
+      website: "https://www.nmiswimmingfederation.org",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://oceaniaaquatics.org/members/",
+        "https://www.nmiswimmingfederation.org",
+        "https://www.nmiswimmingfederation.org/calendar.html",
+        "https://www.nmiswimmingfederation.org/nat-records.html",
+        "https://www.nmiswimmingfederation.org/about-nmisf.html",
+      ],
+      related: ["world-aquatics", "oceania-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "palau-swimming",
   "name": "Palau Swimming Association",
@@ -13177,34 +13226,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "oceania-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "vanuatu-swimming",
-  "name": "Vanuatu Aquatics Federation",
-  "aliases": [
-    "Vanuatu swimming federation"
-  ],
-  "type": "national",
-  "country": "Vanuatu",
-  "jurisdiction": "Vanuatu",
-  "territories": [
-    "Vanuatu"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The swimming member body listed for Vanuatu by World Aquatics and Oceania Aquatics.",
-  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations",
-    "https://oceaniaaquatics.org/members/"
-  ],
-  "related": [
-    "world-aquatics",
-    "oceania-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "vanuatu-swimming",
+      name: "Vanuatu Aquatics Federation",
+      aliases: ["Vanuatu swimming federation"],
+      type: "national",
+      country: "Vanuatu",
+      jurisdiction: "Vanuatu",
+      territories: ["Vanuatu"],
+      sports: ["swimming"],
+      summary:
+        "The swimming member body listed for Vanuatu by World Aquatics and Oceania Aquatics.",
+      detail:
+        "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. Dedicated fixture, result and athlete-profile data still require review.",
+      website: "https://www.vanuatuaquatics.com/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://oceaniaaquatics.org/members/",
+        "https://www.vanuatuaquatics.com/",
+      ],
+      related: ["world-aquatics", "oceania-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "oceania-aquatics",
   "name": "Oceania Aquatics",
@@ -13284,13 +13329,16 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       summary:
         "The national aquatics member body listed for Antigua and Barbuda by World Aquatics.",
       detail:
-        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-      website: "https://www.worldaquatics.com/members/national-federations",
-      websiteKind: "member-directory",
-      sources: ["https://www.worldaquatics.com/members/national-federations"],
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: Official federation homepage confirmed. The CARIFTA section links an April 2026 competition summons; it is not a verified results feed.",
+      website: "https://www.swimantiguabarbuda.com",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.swimantiguabarbuda.com",
+        "https://www.swimantiguabarbuda.com/index.php/39th-carifta-championships",
+      ],
       related: ["world-aquatics"],
     },
-    "2026-10-23",
+    "2026-10-25",
   ),
   record(
     {
@@ -13625,13 +13673,15 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       sports: ["swimming"],
       summary: "The national aquatics member body listed for Puerto Rico by World Aquatics.",
       detail:
-        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-      website: "https://www.worldaquatics.com/members/national-federations",
-      websiteKind: "member-directory",
-      sources: ["https://www.worldaquatics.com/members/national-federations"],
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. Detailed competition and athlete data still require separate review.",
+      website: "https://natacionpr.org/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://natacionpr.org/",
+      ],
       related: ["world-aquatics"],
     },
-    "2026-10-23",
+    "2026-10-25",
   ),
   record(
     {
@@ -13646,13 +13696,15 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       summary:
         "The national aquatics member body listed for Saint Kitts and Nevis by World Aquatics.",
       detail:
-        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-      website: "https://www.worldaquatics.com/members/national-federations",
-      websiteKind: "member-directory",
-      sources: ["https://www.worldaquatics.com/members/national-federations"],
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked aquatics federation homepage confirmed. Detailed fixture, result and athlete data remain unassessed.",
+      website: "https://sknaquatics.org/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://sknaquatics.org/",
+      ],
       related: ["world-aquatics"],
     },
-    "2026-10-23",
+    "2026-10-25",
   ),
   record(
     {
@@ -13894,32 +13946,25 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "iran-swimming",
-  "name": "I.R. Iran Amateur Swimming Federation",
-  "aliases": [
-    "Iran swimming federation"
-  ],
-  "type": "national",
-  "country": "Iran",
-  "jurisdiction": "Iran",
-  "territories": [
-    "Iran"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The national aquatics member body listed for Iran by World Aquatics.",
-  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "iran-swimming",
+      name: "I.R. Iran Amateur Swimming Federation",
+      aliases: ["Iran swimming federation"],
+      type: "national",
+      country: "Iran",
+      jurisdiction: "Iran",
+      territories: ["Iran"],
+      sports: ["swimming"],
+      summary: "The national aquatics member body listed for Iran by World Aquatics.",
+      detail:
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked aquatics federation homepage confirmed over HTTPS. Detailed fixture, result and athlete data remain unassessed.",
+      website: "https://irsf.ir/",
+      sources: ["https://www.worldaquatics.com/members/national-federations", "https://irsf.ir/"],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "iraq-swimming",
   "name": "Iraq Aquatics",
@@ -14128,58 +14173,52 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "maldives-swimming",
-  "name": "Maldives Aquatics",
-  "aliases": [
-    "Maldives swimming federation"
-  ],
-  "type": "national",
-  "country": "Maldives",
-  "jurisdiction": "Maldives",
-  "territories": [
-    "Maldives"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The national aquatics member body listed for Maldives by World Aquatics.",
-  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "mongolia-swimming",
-  "name": "Mongolian Amateur Swimming Federation",
-  "aliases": [
-    "Mongolia swimming federation"
-  ],
-  "type": "national",
-  "country": "Mongolia",
-  "jurisdiction": "Mongolia",
-  "territories": [
-    "Mongolia"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The national aquatics member body listed for Mongolia by World Aquatics.",
-  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "maldives-swimming",
+      name: "Maldives Aquatics",
+      aliases: ["Maldives swimming federation"],
+      type: "national",
+      country: "Maldives",
+      jurisdiction: "Maldives",
+      territories: ["Maldives"],
+      sports: ["swimming"],
+      summary: "The national aquatics member body listed for Maldives by World Aquatics.",
+      detail:
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: Official federation homepage and records table confirmed. The events page contains historical material; record years and names alone do not establish exact event dates or athlete nationality.",
+      website: "https://swimming.org.mv/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://swimming.org.mv/",
+        "https://swimming.org.mv/events/",
+        "https://swimming.org.mv/records/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "mongolia-swimming",
+      name: "Mongolian Amateur Swimming Federation",
+      aliases: ["Mongolia swimming federation"],
+      type: "national",
+      country: "Mongolia",
+      jurisdiction: "Mongolia",
+      territories: ["Mongolia"],
+      sports: ["swimming"],
+      summary: "The national aquatics member body listed for Mongolia by World Aquatics.",
+      detail:
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. Detailed fixture, result and athlete data remain unassessed.",
+      website: "https://mongoliaaquatics.mn/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://mongoliaaquatics.mn/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "myanmar-swimming",
   "name": "Myanmar Swimming Federation",
@@ -14232,32 +14271,28 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "pakistan-swimming",
-  "name": "Pakistan Swimming Federation",
-  "aliases": [
-    "Pakistan swimming federation"
-  ],
-  "type": "national",
-  "country": "Pakistan",
-  "jurisdiction": "Pakistan",
-  "territories": [
-    "Pakistan"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The national aquatics member body listed for Pakistan by World Aquatics.",
-  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "pakistan-swimming",
+      name: "Pakistan Swimming Federation",
+      aliases: ["Pakistan swimming federation"],
+      type: "national",
+      country: "Pakistan",
+      jurisdiction: "Pakistan",
+      territories: ["Pakistan"],
+      sports: ["swimming"],
+      summary: "The national aquatics member body listed for Pakistan by World Aquatics.",
+      detail:
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. Detailed fixture, result and athlete data remain unassessed.",
+      website: "https://www.pakswimfed.org.pk",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.pakswimfed.org.pk",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "palestine-swimming",
   "name": "Palestinian Swimming Federation and Aquatic Sports",
@@ -14519,29 +14554,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   ]
 }, "2026-10-23"),
 
-  record({
-  "slug": "andorra-swimming",
-  "name": "Federació Andorrana de Natació",
-  "type": "national",
-  "country": "Andorra",
-  "jurisdiction": "Andorra",
-  "territories": [
-    "Andorra"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Andorra, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "andorra-swimming",
+      name: "Federació Andorrana de Natació",
+      type: "national",
+      country: "Andorra",
+      jurisdiction: "Andorra",
+      territories: ["Andorra"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Andorra, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation homepage confirmed. Opened sections link 2026–27 calendars and records and 2025–26 results; document contents need separate checking.",
+      website: "https://fan.ad/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://fan.ad/",
+        "https://fan.ad/calendari/",
+        "https://fan.ad/resultats-i-records/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "armenia-swimming",
   "name": "Water Kind Sports Association & Swimming Federation of Armenia",
@@ -14565,29 +14600,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-24"),
-  record({
-  "slug": "azerbaijan-swimming",
-  "name": "Azerbaijan Swimming Federation",
-  "type": "national",
-  "country": "Azerbaijan",
-  "jurisdiction": "Azerbaijan",
-  "territories": [
-    "Azerbaijan"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Azerbaijan, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "azerbaijan-swimming",
+      name: "Azerbaijan Swimming Federation",
+      type: "national",
+      country: "Azerbaijan",
+      jurisdiction: "Azerbaijan",
+      territories: ["Azerbaijan"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Azerbaijan, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation homepage confirmed. The opened calendar contained an unrendered widget and the swimming section was being updated; usable fixture or athlete rows were not confirmed.",
+      website: "https://asf.az/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://asf.az/",
+        "https://asf.az/teqvim/",
+        "https://asf.az/uzguculuk/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "bosnia-and-herzegovina-swimming",
   "name": "Swimming Association of Bosnia and Herzegovina",
@@ -14634,29 +14669,24 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-24"),
-  record({
-  "slug": "faroe-islands-swimming",
-  "name": "Faroe Islands Aquatics Federation",
-  "type": "national",
-  "country": "Faroe Islands",
-  "jurisdiction": "Faroe Islands",
-  "territories": [
-    "Faroe Islands"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Faroe Islands, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "faroe-islands-swimming",
+      name: "Faroe Islands Aquatics Federation",
+      type: "national",
+      country: "Faroe Islands",
+      jurisdiction: "Faroe Islands",
+      territories: ["Faroe Islands"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Faroe Islands, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. A linked Swimify event could not be retrieved, so its result rows remain unassessed.",
+      website: "https://ssf.fo/",
+      sources: ["https://www.worldaquatics.com/members/national-federations", "https://ssf.fo/"],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "georgia-swimming",
   "name": "Georgian Aquatic Sports National Federation",
@@ -14726,29 +14756,28 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-24"),
-  record({
-  "slug": "liechtenstein-swimming",
-  "name": "Liechtensteiner Schwimmverband",
-  "type": "national",
-  "country": "Liechtenstein",
-  "jurisdiction": "Liechtenstein",
-  "territories": [
-    "Liechtenstein"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Liechtenstein, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "liechtenstein-swimming",
+      name: "Liechtensteiner Schwimmverband",
+      type: "national",
+      country: "Liechtenstein",
+      jurisdiction: "Liechtenstein",
+      territories: ["Liechtenstein"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Liechtenstein, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: The World Aquatics-listed website redirects to Liechtenstein Swimming. Its swimming section describes development groups and selection information; individual athlete facts remain unverified.",
+      website: "https://www.lieswimming.li/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.lieswimming.li/",
+        "https://www.lieswimming.li/swimming/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "moldova-swimming",
   "name": "Water Kind of Sports Federation of the Republic of Moldova",
@@ -14841,98 +14870,97 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-24"),
-  record({
-  "slug": "russia-swimming",
-  "name": "Russian Aquatic Sports Federation",
-  "type": "national",
-  "country": "Russia",
-  "jurisdiction": "Russia",
-  "territories": [
-    "Russia"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Russia, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
-  record({
-  "slug": "san-marino-swimming",
-  "name": "Federazione Sammarinese Nuoto",
-  "type": "national",
-  "country": "San Marino",
-  "jurisdiction": "San Marino",
-  "territories": [
-    "San Marino"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for San Marino, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
-  record({
-  "slug": "ukraine-swimming",
-  "name": "Ukrainian Swimming Federation",
-  "type": "national",
-  "country": "Ukraine",
-  "jurisdiction": "Ukraine",
-  "territories": [
-    "Ukraine"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Ukraine, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
-  record({
-  "slug": "albania-swimming",
-  "name": "Albanian Swimming Federation",
-  "type": "national",
-  "country": "Albania",
-  "jurisdiction": "Albania",
-  "territories": [
-    "Albania"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Albania, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "russia-swimming",
+      name: "Russian Aquatic Sports Federation",
+      type: "national",
+      country: "Russia",
+      jurisdiction: "Russia",
+      territories: ["Russia"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Russia, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Federation identity corroborated by World Aquatics and its competition page. The October 2026 competition index contains dates and result links; edition details need separate checking.",
+      website: "https://russwimming.ru",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://russwimming.ru",
+        "https://russwimming.ru/competitions/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "san-marino-swimming",
+      name: "Federazione Sammarinese Nuoto",
+      type: "national",
+      country: "San Marino",
+      jurisdiction: "San Marino",
+      territories: ["San Marino"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for San Marino, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation homepage confirmed. The page labelled as an events archive currently describes the May 2026 Meeting Squalo Blu, not a general results archive.",
+      website: "https://www.fsn.sm",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.fsn.sm",
+        "https://www.fsn.sm/eventi/archivio/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "ukraine-swimming",
+      name: "Ukrainian Swimming Federation",
+      type: "national",
+      country: "Ukraine",
+      jurisdiction: "Ukraine",
+      territories: ["Ukraine"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Ukraine, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation website confirmed. The results index lists 2026 competitions and result links; the calendar PDF and individual performances need separate review.",
+      website: "https://www.usf.org.ua",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.usf.org.ua",
+        "https://www.usf.org.ua/ua/Kalendr-2026.html",
+        "https://www.usf.org.ua/ua/Rezultaty-zmahan.html",
+        "https://www.usf.org.ua/ua/Natsionalna-zbirna.html",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "albania-swimming",
+      name: "Albanian Swimming Federation",
+      type: "national",
+      country: "Albania",
+      jurisdiction: "Albania",
+      territories: ["Albania"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Albania, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation homepage confirmed. The calendar page links named 2025 and 2026 documents; the profile category is historical material rather than a current athlete roster.",
+      website: "https://fshn.org.al/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://fshn.org.al/",
+        "https://fshn.org.al/kalendari-sportiv/",
+        "https://fshn.org.al/category/profile/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "swim-england-east-region",
   "name": "Swim England East Region",
