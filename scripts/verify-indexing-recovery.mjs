@@ -36,7 +36,9 @@ try {
   };
   const archive = await get('/races/test-indexing-archive');
   assert.match(archive.$('#archive-results-heading').text(), /1500m/);
-  assert.match(archive.$('title').text(), /2014-06-07.*1500m.*Synthetic Public Runner/);
+  assert.equal(archive.$('title').text(), 'Synthetic Archive Meeting | Results & History | AthRecs');
+  assert.equal(archive.$('link[rel=canonical]').attr('href'), 'https://www.athrecs.com/races/test-indexing-archive');
+  assert(!/noindex|none/.test(archive.$('meta[name=robots]').attr('content') ?? ''));
   assert.match(archive.$('main').text(), /Synthetic Public Runner/);
   assert(!archive.html.includes('Synthetic Private Runner'));
   assert(!archive.$('main').text().includes('Before you go'));
