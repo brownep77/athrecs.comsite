@@ -44,10 +44,23 @@ export function formatKmMiles(km: number, approx = false): string {
   return `${kmLabel} / ${miLabel}`;
 }
 
+/** Internal placeholder codes must never masquerade as named race distances. */
+export function distanceDisplayLabel(code: string, knownKm?: number | null): string {
+  const label = code.trim();
+  if (!label || /^(other|unknown|tbc|tbd|n\/?a|unspecified)$/i.test(label)) {
+    return knownKm && Number.isFinite(knownKm) && knownKm > 0
+      ? formatKmMiles(knownKm)
+      : "Distance not yet confirmed";
+  }
+  if (label === "Half") return "Half marathon";
+  if (label === "Ultra") return "Ultramarathon";
+  return label;
+}
+
 export function formatDistanceWithUnits(code: string, knownKm?: number | null): string {
   const label = code.trim();
-  if (!label) return "";
-  if (label === "Other") return "Other";
+  if (!label || /^(other|unknown|tbc|tbd|n\/?a|unspecified)$/i.test(label))
+    return distanceDisplayLabel(label, knownKm);
   const known = knownKm && knownKm > 0 ? knownKm : null;
   if (label === "Ultra" && !known) return "Ultra";
   const km = kmFromDistanceCode(label, known);

@@ -626,15 +626,18 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ed.id desc
     `;
     const { checkedFixtureStartLabel } = await import("../../data/fixture-details");
-    const editions = editionRows.map(
-      ({ entry_options_json, result_links_json, spectator_access_json, ...edition }) => ({
+    const { isReviewedFixturePlaceholder } = await import("../../data/fixture-details");
+    const editions = editionRows
+      .filter(
+        (edition) => !isReviewedFixturePlaceholder(slug, edition.event_date, edition.distance_code),
+      )
+      .map(({ entry_options_json, result_links_json, spectator_access_json, ...edition }) => ({
         ...edition,
         start_label: checkedFixtureStartLabel(slug, edition.event_date, edition.distance_code),
         entry_options: parseEntryOptions(entry_options_json),
         result_links: parseResultLinks(result_links_json),
         spectator_access: parseSpectatorAccess(spectator_access_json),
-      }),
-    );
+      }));
 
     // Stored editions include official holiday dates and cancellations. Never
     // fabricate a missing weekly occurrence or replace its venue start time.
@@ -739,7 +742,20 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         {
           event,
           groups,
-          distances: distances.map((d) => d.distance_code),
+          distances: distances
+            .filter((d) => {
+              const matching = editionRows.filter(
+                (edition) => edition.distance_code === d.distance_code,
+              );
+              return (
+                !matching.length ||
+                matching.some(
+                  (edition) =>
+                    !isReviewedFixturePlaceholder(slug, edition.event_date, d.distance_code),
+                )
+              );
+            })
+            .map((d) => d.distance_code),
           upcoming,
           past: editions.filter((e) => e.event_date < today),
           related,
