@@ -3,6 +3,11 @@ export const FIXTURE_DATE_REVIEWS: Record<
   string,
   { sourceUrl: string; checkedAt: string; note: string }
 > = {
+  "toulouse-metropole-run-experience|2026-10-31": {
+    sourceUrl: "https://harmonie-mutuelle.toulouserunexperience.fr/marathon/",
+    checkedAt: "2026-10-25",
+    note: "The organiser confirms the 2026 marathon on 1 November, with starts from 08:00. The unsupported 31 October marathon duplicates the existing 1 November edition and is retained in storage for audit only.",
+  },
   "wa-croatian-road-running-championships-7245412|2026-10-25": {
     sourceUrl:
       "https://has.hr/images/stories/HAS/servisi/raspisi26/20261031_Zapresic_PH_cestovna_trcanja_raspis.pdf",
