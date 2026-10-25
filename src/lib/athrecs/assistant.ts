@@ -3,6 +3,10 @@ import { publicTranslationUrl, TRANSLATION_LANGUAGES } from "./site-translation.
 
 export const assistantLanguage = z.enum(["en", "fr", "de", "es", "it", "nl", "pl", "pt"]);
 export type AssistantLanguage = z.infer<typeof assistantLanguage>;
+// Page translation supports more languages than the reviewed chat interface.
+export const ASSISTANT_LANGUAGES = TRANSLATION_LANGUAGES.filter(
+  (language) => assistantLanguage.safeParse(language.code).success,
+);
 export const assistantInput = z.object({
   message: z.string().trim().min(1).max(1000),
   language: assistantLanguage,

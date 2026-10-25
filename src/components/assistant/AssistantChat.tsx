@@ -3,11 +3,11 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Loader2, Send, X } from "lucide-react";
 import {
   assistantActions,
+  ASSISTANT_LANGUAGES,
   type AssistantLanguage,
   type ChatMessage,
 } from "@/lib/athrecs/assistant";
 import { assistantCopy } from "@/lib/athrecs/assistant-copy";
-import { TRANSLATION_LANGUAGES } from "@/lib/athrecs/site-translation";
 import { getAssistantHistory, sendAssistantMessage } from "@/lib/athrecs/assistant-api";
 
 export default function AssistantChat({
@@ -112,7 +112,7 @@ export default function AssistantChat({
               onChange={(e) => setLanguage(e.target.value as AssistantLanguage)}
               className="max-w-40 rounded-md border border-border bg-bg p-1 text-sm"
             >
-              {TRANSLATION_LANGUAGES.map((item) => (
+              {ASSISTANT_LANGUAGES.map((item) => (
                 <option key={item.code} value={item.code}>
                   {item.flag} {item.label}
                 </option>
