@@ -15,6 +15,8 @@ import { ACCRA_START_REVIEW } from "./lib/accra-start-2026-10-25-review.mjs";
 import accraStart from "../src/data/accra-start-2026-10-25.json" with { type: "json" };
 import { IMMINENT_STARTS_REVIEW } from "./lib/imminent-starts-2026-10-25-review.mjs";
 import imminentStarts from "../src/data/imminent-starts-2026-10-25.json" with { type: "json" };
+import urgentStarts from "../src/data/urgent-starts-followup-2026-10-25.json" with { type: "json" };
+import { URGENT_STARTS_FOLLOWUP_REVIEW } from "./lib/urgent-starts-followup-2026-10-25-review.mjs";
 if (process.env.VERCEL_ENV !== "production" || process.env.VERCEL_GIT_COMMIT_REF !== "main") {
   console.log("[fixture-checks] skipping outside production/main");
   process.exit(0);
@@ -98,6 +100,15 @@ try {
       publishing,
       imminentStarts,
       IMMINENT_STARTS_REVIEW,
+    ),
+  );
+  console.log(
+    "[urgent-starts-followup-2026-10-25]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      urgentStarts,
+      URGENT_STARTS_FOLLOWUP_REVIEW,
     ),
   );
 } finally {

@@ -10,6 +10,8 @@ import timingDirectoryStarts from "./timing-directory-starts-2026-10-23.json" wi
 import timingDirectoryStarts20261024 from "./timing-directory-starts-2026-10-24.json" with { type: "json" };
 import accraStart from "./accra-start-2026-10-25.json" with { type: "json" };
 import imminentStarts from "./imminent-starts-2026-10-25.json" with { type: "json" };
+import urgentStarts from "./urgent-starts-followup-2026-10-25.json" with { type: "json" };
+import { isUrgentReviewedPlaceholder } from "./urgent-starts-followup-2026-10-25.ts";
 
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
@@ -65,6 +67,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
     },
   },
   ...imminentStarts,
+  ...urgentStarts,
   ...accraStart,
   "wa-32-hella-hamburg-half-marathon-7238156|2026-10-25": {
     place: { city: "Hamburg" },
@@ -353,6 +356,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
+  if (isUrgentReviewedPlaceholder(slug, date, distance)) return true;
   // The federation import is the same half marathon, not another race distance.
   if (
     slug === "wa-32-hella-hamburg-half-marathon-7238156" &&
