@@ -1,0 +1,127 @@
+{
+  "bbbrun|2026-10-25": {
+    "place": {
+      "city": "Sydney",
+      "state": "New South Wales"
+    },
+    "summary": "BBBRun's half marathon starts outside Marina Square, Wentworth Point.",
+    "timeZone": "Australia/Sydney",
+    "sourceUrl": "https://bbbrun.com.au/event-info/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "06:50",
+        "note": "The organiser's 25 October 2026 programme and half-marathon section both give 06:50 AEDT. Bib pickup opens 05:45; 06:40 is wheelchair 10K and 07:10 is running 10K.",
+        "publicNote": "Half marathon starts at 06:50 AEDT (UTC+11). Bib pickup opens at 05:45."
+      }
+    }
+  },
+  "retie-trail|2026-10-25": {
+    "place": {
+      "city": "Retie"
+    },
+    "summary": "Three trail distances through Prinsenpark, with separate starts for each distance.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://www.retietrail.be/praktisch/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "8K": {
+        "time": "10:45",
+        "note": "The organiser's 25 October 2026 programme lists 8km at 10:45 CET.",
+        "publicNote": "8km starts at 10:45 CET. Bib collection opens at 09:00."
+      },
+      "17K": {
+        "time": "11:00",
+        "note": "The organiser's 25 October 2026 programme lists 17km at 11:00 CET.",
+        "publicNote": "17km starts at 11:00 CET. Bib collection opens at 09:00."
+      },
+      "31K": {
+        "time": "10:00",
+        "note": "The organiser's 25 October 2026 programme lists 31km at 10:00 CET.",
+        "publicNote": "31km starts at 10:00 CET. Bib collection opens at 09:00."
+      }
+    }
+  },
+  "santa-cruz-marathon|2026-10-25": {
+    "place": {
+      "city": "Santa Cruz",
+      "state": "California"
+    },
+    "summary": "Santa Cruz's marathon starts at Beach Street and Westbrook Street.",
+    "timeZone": "America/Los_Angeles",
+    "sourceUrl": "https://racedayguide.runsantacruz.com/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "note": "The 2026 race-weekend guide gives marathon 07:00 on 25 October; organiser marathon page and event schedule agree. Half marathon and 5K start separately at 07:15. Marathon page says sold out.",
+        "publicNote": "Marathon starts at 07:00 PDT (UTC−7). The half marathon and 5K start at 07:15. Entries are closed."
+      }
+    }
+  },
+  "ecomarathon-futakotama-october|2026-10-25": {
+    "place": {
+      "city": "Kawasaki",
+      "state": "Kanagawa"
+    },
+    "summary": "The Futakotama autumn EcoMarathon starts beside the Tama River in Kawasaki.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://www.ecomarathon.run/%E4%BA%8C%E5%AD%90%E7%8E%89/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "11:00",
+        "note": "Organiser's 2026 autumn page and authorised Moshicom event 146770 confirm 25 October, all distances starting together at 11:00 JST. Reception is 09:30–10:30; opening ceremony 10:30. Entry deadline 22 October.",
+        "publicNote": "Half marathon starts at 11:00 JST (UTC+9). Reception is 09:30–10:30 at Tamagawa Green Space Barbecue Square, Kawasaki."
+      }
+    }
+  },
+  "wa-les-foul-es-monterelaises-7244787|2026-10-25": {
+    "place": {
+      "city": "Montereau"
+    },
+    "summary": "The 40th Foulées Monterelaises is a 10km road race in Montereau.",
+    "timeZone": "Europe/Paris",
+    "sourceUrl": "https://www.foulees-monterelaises.com/le-reglement/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10K": {
+        "time": "10:00",
+        "note": "Organiser's 2026 regulations identify the mixed 10km on 25 October at 10:00 CET, from Rue Léo Lagrange. Current homepage says entry capacity reached and no on-site entries. This reviewed distance supersedes the generic federation placeholder.",
+        "publicNote": "10km starts at 10:00 CET from Rue Léo Lagrange. Bib pickup closes at 09:30. Entries are closed."
+      }
+    }
+  },
+  "wa-trek-marathon-de-lille-7244788|2026-10-25": {
+    "place": {
+      "city": "Lille"
+    },
+    "summary": "The TREK Marathon de Lille starts on Boulevard de la Liberté and finishes at Champ de Mars.",
+    "timeZone": "Europe/Paris",
+    "sourceUrl": "https://www.marathon-lille.com/?id=4&view=page",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "11:15",
+        "note": "The 2026 organiser regulations give 25 October, 42.195km and one 11:15 CET start for all corrals. Registration closed. The half marathon's 08:30 start is separate; this reviewed marathon supersedes the generic federation placeholder.",
+        "publicNote": "Marathon starts at 11:15 CET, with a single start for all corrals. Start: 215 Boulevard de la Liberté. Entries are closed."
+      }
+    }
+  },
+  "wa-maratonina-citt-di-arezzo-7242465|2026-10-25": {
+    "place": {
+      "city": "Arezzo"
+    },
+    "summary": "The 27th Maratonina Città di Arezzo includes a certified half marathon through the city.",
+    "timeZone": "Europe/Rome",
+    "sourceUrl": "https://www.uppoliciano.com/news/maratonina-citta-di-arezzo-record-di-iscritti-oltre-2000-atleti-al-via-domenica-25-ottobre",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "09:30",
+        "note": "Organiser's 15 October 2026 announcement confirms 25 October departure at 09:30 CET from Via Crispi. Current event page identifies the half marathon and entry deadline 22 October. Gathering at 07:30 is not the start. Supersedes generic federation placeholder.",
+        "publicNote": "Half marathon starts at 09:30 CET from Via Crispi. Gathering is from 07:30 in Piazza Guido Monaco. Entries are closed."
+      }
+    }
+  }
+}
