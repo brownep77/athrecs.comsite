@@ -10,13 +10,24 @@
 
 ## Fixture dates and start times
 
+- Owner instruction, 25 October 2026: every race within the next **three calendar
+  months** requires exhaustive reasonable start-time research. Follow
+  `docs/fixture-geography/start-time-process.md` for all sports/countries and
+  each distance/category/wave, including existing fixtures. Use a rolling
+  inclusive window, not 90 days. Complete the source checklist, retain attempted
+  URLs/outcomes and a reason/next retry date for unresolved starts. Work today/
+  next two days, seven days, 30 days, then the rest of the window. Recheck
+  unresolved starts weekly beyond 30 days, every three days within 30 days,
+  and daily within seven days; reconfirm known starts at seven and two days.
+  A blank or plausible stored time is not evidence of a completed review.
+  Record capacity shortfalls and keep unchecked/overdue editions visible.
 - Owner instruction, 25 October 2026: missing starts need active follow-up, not
   only clearer labels. Read the linked edition-specific schedule, FAQ, race
   instructions/PDF and authorised entry programme before leaving a start blank.
   Record whether it is not yet published, inaccessible, conflicting or unchecked,
   with the pages attempted and check date. Prioritise races within 48 hours,
-  then seven days, then 30 days. Keep unchecked imminent editions visible in the
-  review queue and report the remaining count; never claim completeness from a
+  then seven days, then 30 days, then the rest of three months. Keep unchecked
+  editions visible in the review queue and report the remaining count; never claim completeness from a
   successful batch alone. Preserve confirmed starts and exact distance/wave scope.
 - Owner instruction, 25 October 2026: never display internal "Other" placeholders
   as race distances or start times. Show the confirmed distance and local start;

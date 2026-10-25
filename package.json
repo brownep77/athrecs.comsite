@@ -106,6 +106,7 @@
     "verify:grok-runner-search": "node scripts/verify-grok-runner-search.mjs",
     "verify:athlete-profile-share": "node --experimental-strip-types scripts/verify-athlete-profile-share.mjs",
     "verify:private-athlete-profile": "node --experimental-strip-types scripts/verify-private-athlete-profile.mjs",
+    "verify:start-time-process": "node scripts/verify-start-time-process.mjs",
     "verify:race-collector": "node --experimental-strip-types scripts/verify-race-collector.mjs",
     "verify:collector-bulk": "node scripts/verify-collector-bulk.mjs",
     "verify:unified-athlete-profiles": "node --experimental-strip-types scripts/verify-unified-athlete-profiles.mjs",
