@@ -51,6 +51,7 @@
     "verify:claim-experience": "node scripts/verify-claim-experience.mjs",
     "verify:private-result-archive": "node scripts/verify-private-result-archive.mjs",
     "verify:athlete-source-finder": "node scripts/verify-athlete-source-finder.mjs",
+    "verify:athlete-identity-review": "node scripts/verify-athlete-identity-review.mjs",
     "verify:athlete-source-coverage": "node scripts/verify-athlete-source-coverage.mjs",
     "backfill:athlete-finder-capture-index": "node scripts/backfill-athlete-finder-capture-index.mjs",
     "verify:athlete-finder-capture-backfill": "node scripts/verify-athlete-finder-capture-backfill.mjs",
