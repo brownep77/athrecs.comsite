@@ -3,6 +3,21 @@ export const FIXTURE_DATE_REVIEWS: Record<
   string,
   { sourceUrl: string; checkedAt: string; note: string }
 > = {
+  "tirana-marathon|2026-10-25": {
+    sourceUrl: "https://www.tiranamarathon.com/en",
+    checkedAt: "2026-10-25",
+    note: "The organiser postponed the weekend to 14–15 November 2026. The 10K, half marathon and marathon now start on 15 November at 09:00 CET. The former 25 October editions are retained for audit only.",
+  },
+  "cramond-promenade-5k-10k-half-marathon-october|2026-10-25": {
+    sourceUrl: "https://www.upandrunningevents.co.uk/events",
+    checkedAt: "2026-10-25",
+    note: "Date conflict: the organiser calendar lists 1 November 2026, while its linked Let's Do This event 268358 still lists 25 October. Neither date is treated as confirmed until the discrepancy is resolved; the stored 10:00 10K start is preserved for audit.",
+  },
+  "x-ray-marathon|2026-10-25": {
+    sourceUrl: "https://www.roentgenlauf.de/index.php/strecken-2/marathon-2",
+    checkedAt: "2026-10-25",
+    note: "Duplicate of the marathon in the Röntgenlauf event (roentgenlauf). The organiser confirms 25 October 2026 and a 09:30 CET marathon start at Clemenshammer. Use the existing Röntgenlauf edition; retain this directory record for audit.",
+  },
   ...Object.fromEntries(
     [
       ["2027-01-17", "january"],

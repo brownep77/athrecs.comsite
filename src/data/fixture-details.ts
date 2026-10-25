@@ -9,6 +9,7 @@ import marriottsConfirmation from "./marriotts-organiser-confirmation-2026-10-23
 import timingDirectoryStarts from "./timing-directory-starts-2026-10-23.json" with { type: "json" };
 import timingDirectoryStarts20261024 from "./timing-directory-starts-2026-10-24.json" with { type: "json" };
 import accraStart from "./accra-start-2026-10-25.json" with { type: "json" };
+import imminentStarts from "./imminent-starts-2026-10-25.json" with { type: "json" };
 
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
@@ -25,6 +26,7 @@ export type FixtureDetail = {
 };
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
+  ...imminentStarts,
   ...accraStart,
   "wa-32-hella-hamburg-half-marathon-7238156|2026-10-25": {
     place: { city: "Hamburg" },

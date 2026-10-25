@@ -1,0 +1,562 @@
+{
+  "checkedAt": "2026-10-25",
+  "scope": "Initial missing-start queue for 25–27 October 2026. Per-pass checkpoint, not a claim of catalogue-wide verification. Requery live editions before resuming; other publication may have changed them.",
+  "counts": {
+    "confirmed_programme_start": 1,
+    "unchecked_in_this_pass": 50,
+    "rescheduled": 4,
+    "distance_scope_unresolved": 2,
+    "provisional": 1,
+    "confirmed": 1,
+    "duplicate_verified": 1,
+    "not_yet_published_in_opened_primary": 1,
+    "start_not_found_in_opened_programme": 1,
+    "conflicting": 2,
+    "confirmed_first_start_wave_details_inaccessible": 1,
+    "primary_schedule_inaccessible": 1
+  },
+  "items": [
+    {
+      "editionId": 83204338,
+      "eventSlug": "wa-athletics-sa-state-all-schools-championships-7245416",
+      "date": "2026-10-25",
+      "distance": "Track & field",
+      "checkedAt": "2026-10-25",
+      "status": "confirmed_programme_start",
+      "sources": [
+        "https://liveresults.com.au/261024/",
+        "https://liveresults.com.au/261024/groups.html",
+        "https://worldathletics.org/competition/calendar-results/results/7245416"
+      ],
+      "finding": "Sunday programme begins 09:00 ACDT. This is a meeting start, not a common start for individual events."
+    },
+    {
+      "editionId": 109479922,
+      "eventSlug": "wa-bangladesh-championships-7247113",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 83204340,
+      "eventSlug": "wa-campeonato-roraimense-loterias-caixa-de-atletismo-7241257",
+      "date": "2026-10-25",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109593958,
+      "eventSlug": "wa-festival-piauiense-caixa-de-atletismo-sub-23-7246948",
+      "date": "2026-10-25",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109479929,
+      "eventSlug": "wa-meeting-mixto-final-u18-u20-7246844",
+      "date": "2026-10-25",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 83204357,
+      "eventSlug": "wa-sprints-hurdles-jumps-meeting-2-7243854",
+      "date": "2026-10-25",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 83204335,
+      "eventSlug": "wa-4th-kokushikan-university-competition-7245266",
+      "date": "2026-10-25",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 83204337,
+      "eventSlug": "wa-5th-shuhei-nishida-memorial-track-and-field-tournament-7244642",
+      "date": "2026-10-25",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 83204360,
+      "eventSlug": "wa-the-13th-tokai-sprint-games-7245402",
+      "date": "2026-10-25",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109593962,
+      "eventSlug": "wa-patafa-weekly-relay-series-final-track-events-7246688",
+      "date": "2026-10-25",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 79339796,
+      "eventSlug": "be-youth-cx-beernem-october",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 72051646,
+      "eventSlug": "tirana-marathon",
+      "date": "2026-10-25",
+      "distance": "2.3K",
+      "checkedAt": "2026-10-25",
+      "status": "rescheduled",
+      "sources": ["https://www.tiranamarathon.com/en"],
+      "finding": "Old 25 October dates withheld. Marathon/Half/10K confirmed 15 November 09:00 CET and added to same canonical event. We Too is listed for 14 November, but current exact distance remains unverified: do not carry 2.3K forward."
+    },
+    {
+      "editionId": 72051645,
+      "eventSlug": "tirana-marathon",
+      "date": "2026-10-25",
+      "distance": "10K",
+      "checkedAt": "2026-10-25",
+      "status": "rescheduled",
+      "sources": ["https://www.tiranamarathon.com/en"],
+      "finding": "Old 25 October dates withheld. Marathon/Half/10K confirmed 15 November 09:00 CET and added to same canonical event. We Too is listed for 14 November, but current exact distance remains unverified: do not carry 2.3K forward."
+    },
+    {
+      "editionId": 72051644,
+      "eventSlug": "tirana-marathon",
+      "date": "2026-10-25",
+      "distance": "Half",
+      "checkedAt": "2026-10-25",
+      "status": "rescheduled",
+      "sources": ["https://www.tiranamarathon.com/en"],
+      "finding": "Old 25 October dates withheld. Marathon/Half/10K confirmed 15 November 09:00 CET and added to same canonical event. We Too is listed for 14 November, but current exact distance remains unverified: do not carry 2.3K forward."
+    },
+    {
+      "editionId": 71611868,
+      "eventSlug": "tirana-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "checkedAt": "2026-10-25",
+      "status": "rescheduled",
+      "sources": ["https://www.tiranamarathon.com/en"],
+      "finding": "Old 25 October dates withheld. Marathon/Half/10K confirmed 15 November 09:00 CET and added to same canonical event. We Too is listed for 14 November, but current exact distance remains unverified: do not carry 2.3K forward."
+    },
+    {
+      "editionId": 106243529,
+      "eventSlug": "bbbrun",
+      "date": "2026-10-25",
+      "distance": "Half",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 78236553,
+      "eventSlug": "brita-urban-trail-ghent",
+      "date": "2026-10-25",
+      "distance": "7K",
+      "checkedAt": "2026-10-25",
+      "status": "distance_scope_unresolved",
+      "sources": [
+        "https://genturbantrail.be/nl/praktische-info/",
+        "https://genturbantrail.be/nl/het-parcours/"
+      ],
+      "finding": "Official 25 October waves 09:00/09:20/09:40/10:00/10:20/10:40; untimed. Current course page did not expose distances in retrieved text. Resolve stored 7K/12K versus other advertised 8/13 km before mapping waves."
+    },
+    {
+      "editionId": 78236554,
+      "eventSlug": "brita-urban-trail-ghent",
+      "date": "2026-10-25",
+      "distance": "12K",
+      "checkedAt": "2026-10-25",
+      "status": "distance_scope_unresolved",
+      "sources": [
+        "https://genturbantrail.be/nl/praktische-info/",
+        "https://genturbantrail.be/nl/het-parcours/"
+      ],
+      "finding": "Official 25 October waves 09:00/09:20/09:40/10:00/10:20/10:40; untimed. Current course page did not expose distances in retrieved text. Resolve stored 7K/12K versus other advertised 8/13 km before mapping waves."
+    },
+    {
+      "editionId": 78236555,
+      "eventSlug": "retie-trail",
+      "date": "2026-10-25",
+      "distance": "8K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 78236556,
+      "eventSlug": "retie-trail",
+      "date": "2026-10-25",
+      "distance": "17K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 78236557,
+      "eventSlug": "retie-trail",
+      "date": "2026-10-25",
+      "distance": "31K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 74028371,
+      "eventSlug": "banja-luka-marathon",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109455819,
+      "eventSlug": "course-en-sentier-smh",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 102159378,
+      "eventSlug": "niagara-falls-international-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "checkedAt": "2026-10-25",
+      "status": "provisional",
+      "sources": ["https://niagarafallsmarathon.com/marathon-event.html"],
+      "finding": "08:15 EDT explicitly tentative; keep machine clock null and show provisional label. 2026 course entirely in Canada."
+    },
+    {
+      "editionId": 109456040,
+      "eventSlug": "maule-corre",
+      "date": "2026-10-25",
+      "distance": "0.8K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109456041,
+      "eventSlug": "maule-corre",
+      "date": "2026-10-25",
+      "distance": "3K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109456042,
+      "eventSlug": "maule-corre",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109456043,
+      "eventSlug": "maule-corre",
+      "date": "2026-10-25",
+      "distance": "10K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 83428475,
+      "eventSlug": "changsha-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 83428474,
+      "eventSlug": "chengdu-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "checkedAt": "2026-10-25",
+      "status": "confirmed",
+      "sources": ["https://chengdumarathon.cn/column/articleDetail/95?column_id=66&lang=cn"],
+      "finding": "Marathon A/B/C and elites 07:30; D/E 07:50. Half 08:10 is outside this stored marathon edition."
+    },
+    {
+      "editionId": 71614990,
+      "eventSlug": "wa-shanghai-elite-10k-race-7236801",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71614981,
+      "eventSlug": "wa-croatian-road-running-championships-7245412",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 74248462,
+      "eventSlug": "ea-runevents-calder-vale-series-garstang",
+      "date": "2026-10-25",
+      "distance": "Fun Run",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 108804541,
+      "eventSlug": "canterbury-trail-marathon-half-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109456392,
+      "eventSlug": "les-foulees-mamertines",
+      "date": "2026-10-25",
+      "distance": "1.5K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109456393,
+      "eventSlug": "les-foulees-mamertines",
+      "date": "2026-10-25",
+      "distance": "3K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71614992,
+      "eventSlug": "wa-les-foul-es-monterelaises-7244787",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71614991,
+      "eventSlug": "wa-trek-marathon-de-lille-7244788",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71616367,
+      "eventSlug": "x-ray-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "checkedAt": "2026-10-25",
+      "status": "duplicate_verified",
+      "sources": [
+        "https://www.roentgenlauf.de/",
+        "https://www.roentgenlauf.de/index.php/strecken-2/marathon-2"
+      ],
+      "finding": "Duplicate of roentgenlauf canonical event 3349086, already has Marathon 09:30. Hide directory duplicate for this date only; original row retained."
+    },
+    {
+      "editionId": 109480013,
+      "eventSlug": "wa-yuen-long-district-sports-festival-yuen-tin-street-run-inline-speed-skating-7246699",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 103472895,
+      "eventSlug": "kashmir-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "checkedAt": "2026-10-25",
+      "status": "not_yet_published_in_opened_primary",
+      "sources": [
+        "https://kashmirmarathon.jk.gov.in/faq",
+        "https://kashmirmarathon.jk.gov.in/fullMarathon"
+      ],
+      "finding": "FAQ still says timing will be conveyed shortly; full marathon page has date but no start; linked brochure failed. Secondary reports 06:30 require primary confirmation."
+    },
+    {
+      "editionId": 71614976,
+      "eventSlug": "wa-maratonina-citt-di-arezzo-7242465",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 105604155,
+      "eventSlug": "ecomarathon-futakotama-october",
+      "date": "2026-10-25",
+      "distance": "Half",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 103472897,
+      "eventSlug": "turkistan-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "checkedAt": "2026-10-25",
+      "status": "start_not_found_in_opened_programme",
+      "sources": [
+        "https://almaty-marathon.kz/en/events/turkistan_marathon_2026/",
+        "https://almaty-marathon.kz/userdata/items/items_812/file_en.pdf?1786100930="
+      ],
+      "finding": "Official event and 22-page regulations checked.06:30–14:30 is an event operating window, not the marathon start. Need exact distance start timetable; do not assign06:30."
+    },
+    {
+      "editionId": 71614982,
+      "eventSlug": "wa-macedonian-cross-country-championships-7239577",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109479982,
+      "eventSlug": "wa-media-maraton-del-callao-7247350",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 108804057,
+      "eventSlug": "cramond-promenade-5k-10k-half-marathon-october",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "checkedAt": "2026-10-25",
+      "status": "conflicting",
+      "sources": [
+        "https://www.upandrunningevents.co.uk/events",
+        "https://www.letsdothis.com/gb/e/cramond-promenade-5k10khalf-marathon-268358"
+      ],
+      "finding": "Organiser calendar 1 November; linked authorised entry 25 October with Half 09:30 / 10K 10:00 / 5K 10:10. Withhold old date, preserve stored 10K start, do not invent rescheduled edition."
+    },
+    {
+      "editionId": 108804339,
+      "eventSlug": "cramond-promenade-5k-10k-half-marathon-october",
+      "date": "2026-10-25",
+      "distance": "Half",
+      "checkedAt": "2026-10-25",
+      "status": "conflicting",
+      "sources": [
+        "https://www.upandrunningevents.co.uk/events",
+        "https://www.letsdothis.com/gb/e/cramond-promenade-5k10khalf-marathon-268358"
+      ],
+      "finding": "Organiser calendar 1 November; linked authorised entry 25 October with Half 09:30 / 10K 10:00 / 5K 10:10. Withhold old date, preserve stored 10K start, do not invent rescheduled edition."
+    },
+    {
+      "editionId": 109461166,
+      "eventSlug": "cuningar-loop-5k-10k",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71614989,
+      "eventSlug": "wa-serbian-cross-country-championships-7240001",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71616411,
+      "eventSlug": "sierra-leone-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71614997,
+      "eventSlug": "wa-mae-moh-half-marathon-7244746",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 103472896,
+      "eventSlug": "mae-moh-half-marathon",
+      "date": "2026-10-25",
+      "distance": "Half",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109479897,
+      "eventSlug": "wa-privatbank-kyiv-unbroken-marathon-7237779",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71615008,
+      "eventSlug": "wa-ukrainian-cross-country-championships-7240272",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 102605761,
+      "eventSlug": "oktoberfest-half-college-station",
+      "date": "2026-10-25",
+      "distance": "Half",
+      "checkedAt": "2026-10-25",
+      "status": "confirmed_first_start_wave_details_inaccessible",
+      "sources": [
+        "https://raceroster.com/events/2026/115139/2026-oktoberfest-half-marathon10k-presented-by-cc-creations",
+        "https://bcshalf.com/",
+        "https://www.facebook.com/bcsmarathon/posts/1579343994219288/"
+      ],
+      "finding": "Authorised organiser entry programme gives 07:00 CDT start; registration closed. Website unavailable and social wave schedule inaccessible. Publish first start only with assigned-wave warning; do not infer 07:05."
+    },
+    {
+      "editionId": 104112280,
+      "eventSlug": "santa-cruz-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71616270,
+      "eventSlug": "wt-2026-americas-triathlon-carifta-championships-bermuda",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 79124128,
+      "eventSlug": "ironman-703-greece",
+      "date": "2026-10-25",
+      "distance": "70.3",
+      "checkedAt": "2026-10-25",
+      "status": "primary_schedule_inaccessible",
+      "sources": [
+        "https://www.ironman.com/races/im703-greece/schedule",
+        "https://event.marriott.com/klxwh-w-costa-navarino/events/messinia/ironman-703-greece-one-weekend-three-experiences"
+      ],
+      "finding": "Organiser schedule returned 402. Host venue programme explicitly gives 25 October 08:00 racestart, corroborating search lead. Held pending accessible organiser/governing-body programme or authorised entry evidence; no snippet-only publication."
+    },
+    {
+      "editionId": 79124127,
+      "eventSlug": "ironman-703-agadir",
+      "date": "2026-10-25",
+      "distance": "70.3",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 71616275,
+      "eventSlug": "wt-2026-europe-triathlon-cup-alanya",
+      "date": "2026-10-25",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109479968,
+      "eventSlug": "wa-juegos-binacionales-de-la-araucania-7246916",
+      "date": "2026-10-26",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109479963,
+      "eventSlug": "wa-corrida-internacional-santa-cruz-de-la-sierra-10k-7247022",
+      "date": "2026-10-26",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109479969,
+      "eventSlug": "wa-juegos-binacionales-de-la-araucania-7246916",
+      "date": "2026-10-27",
+      "distance": "Track & field",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109479942,
+      "eventSlug": "wa-60th-army-athletics-championships-7230449",
+      "date": "2026-10-27",
+      "distance": "Other",
+      "status": "unchecked_in_this_pass"
+    },
+    {
+      "editionId": 109709625,
+      "eventSlug": "hyrox-birmingham",
+      "date": "2026-10-27",
+      "distance": "HYROX",
+      "status": "unchecked_in_this_pass"
+    }
+  ]
+}

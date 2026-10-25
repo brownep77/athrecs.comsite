@@ -37,6 +37,7 @@ const COUNTRY_TZ: Record<string, string> = {
   slovakia: "Europe/Bratislava",
   hungary: "Europe/Budapest",
   slovenia: "Europe/Ljubljana",
+  albania: "Europe/Tirane",
   "united states": "America/New_York",
   canada: "America/Toronto",
   japan: "Asia/Tokyo",
@@ -161,6 +162,8 @@ const REGION_TZ: Record<string, string> = {
 };
 
 export type PlaceTime = {
+  /** An edition-specific, verified venue zone takes precedence over country defaults. */
+  timeZone?: string | null;
   country?: string | null;
   county?: string | null;
   date?: string | null;
@@ -168,6 +171,7 @@ export type PlaceTime = {
 };
 
 export function timeZoneForPlace(place?: PlaceTime | null): string {
+  if (place?.timeZone) return place.timeZone;
   const county = (place?.county || "").trim().toLowerCase();
   const country = (place?.country || place?.nation || "").trim().toLowerCase();
   if (county && REGION_TZ[county]) return REGION_TZ[county];
@@ -276,7 +280,7 @@ export function calendarTimeZoneForPlace(place?: PlaceTime | null): string | nul
     "england", "scotland", "wales", "northern ireland", "united kingdom", "ireland",
     "jersey", "guernsey", "isle of man", "gibraltar", "belgium", "germany", "switzerland",
     "italy", "poland", "austria", "finland", "sweden", "lithuania", "estonia", "iceland",
-    "czechia", "czech republic", "slovakia", "hungary", "slovenia", "japan", "south africa",
+    "czechia", "czech republic", "slovakia", "hungary", "slovenia", "albania", "japan", "south africa",
     "namibia", "eswatini", "singapore", "malaysia", "moldova", "peru", "algeria", "saudi arabia",
     "tunisia", "senegal", "mozambique", "turkey", "egypt", "china", "united arab emirates",
     "iran", "jordan", "bermuda", "costa rica", "venezuela", "uruguay", "kyrgyzstan", "benin",

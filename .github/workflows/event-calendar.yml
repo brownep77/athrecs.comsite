@@ -12,6 +12,11 @@ on:
       - "src/data/accra-start-2026-10-25.json"
       - "scripts/lib/accra-start-2026-10-25-review.mjs"
       - "scripts/verify-accra-start.mjs"
+      - "src/data/imminent-starts-2026-10-25*"
+      - "src/data/fixture-date-reviews.ts"
+      - "scripts/lib/checked-fixture-publication.mjs"
+      - "scripts/lib/imminent-starts-2026-10-25-review.mjs"
+      - "scripts/verify-imminent-starts.mjs"
       - "src/components/races/**"
       - "src/components/discovery/CompactFixtureRow.tsx"
       - "src/components/running/Road*Pages.tsx"
@@ -45,6 +50,7 @@ jobs:
       - run: npm ci
       - run: node scripts/verify-fixture-start-clarity.mjs
       - run: node scripts/verify-accra-start.mjs
+      - run: node scripts/verify-imminent-starts.mjs
       - run: node scripts/verify-race-sharing.mjs
       - run: node scripts/verify-event-calendar.mjs --mutations
       - run: node scripts/verify-event-calendar-catalogue.mjs

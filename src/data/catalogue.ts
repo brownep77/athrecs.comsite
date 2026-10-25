@@ -15,6 +15,7 @@ export type {
   EntryOptionType,
 } from "./types";
 import { legacyRaceGeography } from "./legacy-race-geography";
+import { imminentReviewedAdditions, reviewImminentEdition } from "./imminent-starts-2026-10-25";
 import { clubs as rawClubs } from "./clubs";
 import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
 import { belfastClubs } from "./clubs-belfast";
@@ -468,6 +469,7 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
 }));
 
 const mergedEditions = [
+  ...imminentReviewedAdditions,
   ...aimsEuropeEditions.filter((edition) => usedSlugs.has(edition.seriesSlug)),
   ...(coreEditions as Edition[]),
   ...(raceCollectionEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
@@ -642,7 +644,7 @@ export const editions: Edition[] = (() => {
     pushEdition(edition);
   }
 
-  return unique.map(reviewParkrunEdition);
+  return unique.map(reviewParkrunEdition).map(reviewImminentEdition);
 })();
 
 export { raceGroupDefinitions, raceGroupMemberships };
