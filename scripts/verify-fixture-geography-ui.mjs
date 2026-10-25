@@ -89,6 +89,7 @@ try {
     for (const sport of ["road-running", "trail-running", "track-and-field"]) {
       await page.goto(`${base}/sports/${sport}`, { waitUntil: "networkidle" });
       const countrySelect = page.getByLabel("Country", { exact: true });
+      await countrySelect.waitFor({ state: "visible" });
       const options = await countrySelect.locator("option").allTextContents();
       assert.equal(new Set(options).size, options.length, `${sport}: duplicate country options`);
       const chosen =
