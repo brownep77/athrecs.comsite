@@ -4087,18 +4087,18 @@ const raceConfigs: RaceConfig[] = [
     "surface": "Mixed",
     "organiser": "Golazo Sports",
     "website": "https://genturbantrail.be/",
-    "source": "https://golazorunningevents.com/fr/evenements/",
+    "source": "https://genturbantrail.be/nl/het-parcours/",
     "occurrences": [
       {
         "date": "2026-10-25",
         "distances": [
           {
-            "label": "7K",
-            "km": 7.0
+            "label": "8K",
+            "km": 8.0
           },
           {
-            "label": "12K",
-            "km": 12.0
+            "label": "13K",
+            "km": 13.0
           }
         ]
       }

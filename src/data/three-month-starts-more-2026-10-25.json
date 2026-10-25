@@ -1,0 +1,198 @@
+{
+  "ecomarathon-futakotama-october|2026-10-25": {
+    "summary": "EcoMarathon Futakotama October. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://japan.ecomarathon.run/nikotama-ecomarathon/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "11:00",
+        "note": "Organiser page explicitly starts all distances at 11:00; linked entry form is titled 261025, confirming this edition. Reception is 09:30–10:30."
+      }
+    }
+  },
+  "canterbury-trail-marathon-half-marathon|2026-10-25": {
+    "summary": "Canterbury Trail Marathon & Half Marathon. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.sportingeventsuk.com/e/canterbury-trail-marathon-and-half-marathon-14990",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "note": "Organiser page's embedded distance-specific entry programme: category 67499 Marathon 2026-10-25T08:30:00+00:00; category 67495 Half Marathon 2026-10-25T09:00:00+00:00; timezone Europe/London. Both entry categories closed. Correct unsupported stored half start 10:00."
+      },
+      "Half": {
+        "time": "09:00",
+        "note": "Organiser page's embedded distance-specific entry programme: category 67499 Marathon 2026-10-25T08:30:00+00:00; category 67495 Half Marathon 2026-10-25T09:00:00+00:00; timezone Europe/London. Both entry categories closed. Correct unsupported stored half start 10:00."
+      }
+    }
+  },
+  "holyrood-park-5k-10k-half-marathon-november|2026-11-08": {
+    "summary": "Holyrood Park 5K, 10K & Half Marathon — November. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.letsdothis.com/gb/e/holyrood-park-5k10khalf-marathon-november-2026-261976",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "10:10",
+        "note": "Organiser-authorised 8 November 2026 entry programme and race-day logistics agree: half 09:30, 10K 10:00, 5K 10:10."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "Organiser-authorised 8 November 2026 entry programme and race-day logistics agree: half 09:30, 10K 10:00, 5K 10:10."
+      },
+      "Half": {
+        "time": "09:30",
+        "note": "Organiser-authorised 8 November 2026 entry programme and race-day logistics agree: half 09:30, 10K 10:00, 5K 10:10."
+      }
+    }
+  },
+  "strathclyde-park-5k-10k-half-marathon-november|2026-11-08": {
+    "summary": "Strathclyde Park 5K, 10K & Half Marathon — November. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.letsdothis.com/gb/e/strathclyde-park-5k10khalf-marathon-november-2026-264235",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "09:00",
+        "note": "Organiser-authorised 8 November 2026 start table and logistics agree: 5K 09:00, half 09:45, 10K 10:00. Registration opens 08:00."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "Organiser-authorised 8 November 2026 start table and logistics agree: 5K 09:00, half 09:45, 10K 10:00. Registration opens 08:00."
+      },
+      "Half": {
+        "time": "09:45",
+        "note": "Organiser-authorised 8 November 2026 start table and logistics agree: 5K 09:00, half 09:45, 10K 10:00. Registration opens 08:00."
+      }
+    }
+  },
+  "up-and-running-events-bellahouston-park-5k-10k-half-marathon-may-coa|2027-01-16": {
+    "summary": "Bellahouston Park 5K, 10K & Half Marathon. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.letsdothis.com/gb/e/bellahouston-park-5k10khalf-marathon-january-2027-268258",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "10:10",
+        "note": "January 16 2027 organiser-authorised entry programme and race-day logistics agree for all three distances. The half-marathon entry is marked Coming Soon; its start is separately stated."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "January 16 2027 organiser-authorised entry programme and race-day logistics agree for all three distances. The half-marathon entry is marked Coming Soon; its start is separately stated."
+      },
+      "Half Marathon": {
+        "time": "09:30",
+        "note": "January 16 2027 organiser-authorised entry programme and race-day logistics agree for all three distances. The half-marathon entry is marked Coming Soon; its start is separately stated."
+      }
+    }
+  },
+  "angkor-wat-international-half|2026-12-06": {
+    "summary": "Angkor Wat International Half Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Phnom_Penh",
+    "sourceUrl": "https://cambodia-events.org/blog/angkor-wat-international-half-marathon",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "05:45",
+        "note": "Dated 6 December 2026 organiser article links a visually inspected start table: running half 05:45, wheelchair half 05:30, 10K 06:10, 5K 06:25, fun run 06:35. Correct stored 05:50 to 05:45; 05:00 is opening ceremony."
+      }
+    }
+  },
+  "mugdock-country-park-running-festival-2026|2026-10-31": {
+    "summary": "Mugdock Country Park Running Festival 2026. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.letsdothis.com/gb/e/mugdock-country-park-running-festival-268583",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "09:30",
+        "note": "Organiser-linked dated programme and logistics agree for half 09:30, 10K 10:00 and 2.5km kids race 12:00. 5K is excluded: header 10:15 and logistics 10:00 conflict."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "Organiser-linked dated programme and logistics agree for half 09:30, 10K 10:00 and 2.5km kids race 12:00. 5K is excluded: header 10:15 and logistics 10:00 conflict."
+      },
+      "2.5K": {
+        "time": "12:00",
+        "note": "Organiser-linked dated programme and logistics agree for half 09:30, 10K 10:00 and 2.5km kids race 12:00. 5K is excluded: header 10:15 and logistics 10:00 conflict."
+      },
+      "5K": {
+        "time": null,
+        "label": "Start time awaiting organiser clarification",
+        "note": "The current organiser-authorised entry page gives 10:15 in the start table and 10:00 in the logistics. The stored 09:00 is not supported by either. Retain previous value in storage and hold the public clock.",
+        "publicNote": "The organiser lists conflicting 5K starts, 10:00 and 10:15. Check your final race instructions."
+      }
+    }
+  },
+  "vogrie-country-park-november|2026-11-15": {
+    "summary": "Vogrie Country Park 5K, 10K & Half Marathon. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.letsdothis.com/gb/e/vogrie-country-park-5k10khalf-marathon-268328",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "10:00",
+        "note": "Organiser-linked November 15 2026 entry programme separately lists all three distances at 10:00. Logistics publishes no conflicting start."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "Organiser-linked November 15 2026 entry programme separately lists all three distances at 10:00. Logistics publishes no conflicting start."
+      },
+      "Half": {
+        "time": "10:00",
+        "note": "Organiser-linked November 15 2026 entry programme separately lists all three distances at 10:00. Logistics publishes no conflicting start."
+      }
+    }
+  },
+  "scurry-around-vogrie-country-park-2027|2027-01-17": {
+    "summary": "Scurry Around Vogrie Country Park 5K 2027. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.entrycentral.com/ScurryVogrieTyneValley",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "09:50",
+        "note": "Current 17 January 2027 organiser description explicitly gives half 09:30, 10K 09:45, 5K 09:50 and fun run 11:30. 09:15 is half-marathon assembly, not the start."
+      },
+      "Half": {
+        "time": "09:30",
+        "note": "Current 17 January 2027 organiser description explicitly gives half 09:30, 10K 09:45, 5K 09:50 and fun run 11:30. 09:15 is half-marathon assembly, not the start."
+      }
+    }
+  },
+  "brita-urban-trail-ghent|2026-10-25": {
+    "summary": "BRITA Urban Trail Ghent. Start times are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://genturbantrail.be/nl/praktische-info/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "8K": {
+        "time": "09:00",
+        "note": "2026 series calendar fixes 25 October. Current official home, course and entry pages consistently give approximate distances 8km and 13km, replacing stored 7km/12km. Six start waves at 09:00,09:20,09:40,10:00,10:20,10:40; follow assigned wave. The event is untimed.",
+        "label": "First wave 09:00 CET · waves until 10:40",
+        "publicNote": "Six waves run every 20 minutes from 09:00 to 10:40. Follow the wave on your e-ticket. Distances are approximately 8km and 13km."
+      },
+      "13K": {
+        "time": "09:00",
+        "note": "2026 series calendar fixes 25 October. Current official home, course and entry pages consistently give approximate distances 8km and 13km, replacing stored 7km/12km. Six start waves at 09:00,09:20,09:40,10:00,10:20,10:40; follow assigned wave. The event is untimed.",
+        "label": "First wave 09:00 CET · waves until 10:40",
+        "publicNote": "Six waves run every 20 minutes from 09:00 to 10:40. Follow the wave on your e-ticket. Distances are approximately 8km and 13km."
+      }
+    }
+  },
+  "niagara-falls-international-marathon|2026-10-25": {
+    "summary": "Niagara Falls Marathon. The organiser currently labels the 08:15 start tentative.",
+    "timeZone": "America/Toronto",
+    "sourceUrl": "https://niagarafallsmarathon.com/marathon-event.html",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": null,
+        "label": "Tentative start 08:15 EDT · confirm race instructions",
+        "note": "Current dated organiser programme puts Half/Marathon at 08:15 but explicitly calls the start tentative. The booking header 07:30 belongs to 10K. Do not turn a tentative start into an exact calendar time.",
+        "publicNote": "The organiser lists a tentative 08:15 marathon start. Confirm in your final race instructions."
+      }
+    }
+  }
+}

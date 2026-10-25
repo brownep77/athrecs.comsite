@@ -16602,10 +16602,11 @@ export const runrecsGapFillEditions: Edition[] = [
     distance: "Half",
     distanceKm: 21.0975,
     status: "Open",
+    startTime: "05:45",
     entryUrl: "https://www.ahotu.com/event/angkor-wat-international-half-marathon",
     entryOptions: officialEntry("angkor-wat-internati", "Angkor Wat International Half Marathon", "https://www.ahotu.com/event/angkor-wat-international-half-marathon", "Calendar listing: Sunday 6 December 2026."),
-    source: "https://www.ahotu.com/event/angkor-wat-international-half-marathon",
-    notes: "Half event.",
+    source: "https://cambodia-events.org/blog/angkor-wat-international-half-marathon",
+    notes: "Organiser programme for 6 December 2026: running half marathon starts 05:45 local (Asia/Phnom_Penh); wheelchair half 05:30 is separate. Checked 25 October 2026.",
   },
   {
     seriesSlug: "ayia-napa-half-marathon",
