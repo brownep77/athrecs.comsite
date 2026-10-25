@@ -187,7 +187,7 @@ const runningOnlyRows = enabledRows.filter((row) =>
   /road|trail|fell|cross country|track|mixed terrain|beach/i.test(row.surface_scope),
 );
 
-assert.equal(enabledRows.length, 36, "Enabled source count changed unexpectedly");
+assert.equal(enabledRows.length, 41, "Enabled source count changed unexpectedly");
 assert.equal(
   runningOnlyRows.length,
   enabledRows.length,

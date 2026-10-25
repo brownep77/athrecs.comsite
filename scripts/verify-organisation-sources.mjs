@@ -41,7 +41,7 @@ assert.notEqual(
 );
 assert.equal(
   buildBulkSourceJobManifest(linked).filter((source) => source.queue_status === "queued").length,
-  36,
+  41,
 );
 const membership = linked.find(
   (source) => source.organisations.filter((body) => body.membershipReference).length > 10,
