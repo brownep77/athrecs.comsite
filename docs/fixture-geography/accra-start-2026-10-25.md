@@ -19,6 +19,9 @@ Correct only the existing Marathon edition to 05:30, Africa/Accra (GMT, UTC+0),
 and Closed. Preserve identity and original notes. Do not copy this start to other
 distances or years, or add unreviewed editions. Retain exact baseline guards and
 transactional before/after catalogue audit through the checked fixture publisher.
+The existing source seed reads the same checked time and source, preventing a
+later reseed from restoring the blank. The seed version is unchanged: this release
+uses the single-edition audited publisher rather than a catalogue-wide refresh.
 
 ## Prevention
 

@@ -5,6 +5,15 @@ import { ACCRA_START_REVIEW } from "./lib/accra-start-2026-10-25-review.mjs";
 import details from "../src/data/accra-start-2026-10-25.json" with { type: "json" };
 const publishing = await import("../src/lib/athrecs/catalogue-publishing.server.ts");
 const { checkedFixtureStart, FIXTURE_DETAILS } = await import("../src/data/fixture-details.ts");
+const { runrecsGapFillEditions } = await import("../src/data/runrecs-gap-fill-2026-09.ts");
+const seeded = runrecsGapFillEditions.filter(
+  (edition) =>
+    edition.seriesSlug === "accra-international-marathon" && edition.date === "2026-10-25",
+);
+assert.equal(seeded.length, 1);
+assert.equal(seeded[0].startTime, "05:30", "a later seed must retain the verified start");
+assert.equal(seeded[0].status, "Closed");
+assert.equal(seeded[0].source, details["accra-international-marathon|2026-10-25"].sourceUrl);
 const { pg, sql } = await bulkFixture();
 try {
   const before = Object.values(ACCRA_START_REVIEW.baseline)[0];
