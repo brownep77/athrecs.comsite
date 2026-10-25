@@ -17,7 +17,7 @@ export type {
 import { legacyRaceGeography } from "./legacy-race-geography";
 import { imminentReviewedAdditions, reviewImminentEdition } from "./imminent-starts-2026-10-25";
 import { urgentReviewedAdditions, urgentReviewedSeriesOverrides, reviewUrgentEdition } from "./urgent-starts-followup-2026-10-25";
-import { nextUrgentAdditions, nextUrgentSeriesOverrides, reviewNextUrgentEdition } from "./urgent-starts-next-2026-10-25";
+import { nextUrgentAdditions, nextUrgentSeries, nextUrgentSeriesOverrides, reviewNextUrgentEdition } from "./urgent-starts-next-2026-10-25";
 import { clubs as rawClubs } from "./clubs";
 import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
 import { belfastClubs } from "./clubs-belfast";
@@ -373,6 +373,7 @@ const coreNameKeys = new Set(coreSeries.map((series) => normName(series.name)));
 const usedSlugs = new Set(coreSeries.map((series) => series.slug));
 const extraSeries: Series[] = [];
 for (const series of [
+  ...nextUrgentSeries,
   ...(raceCollectionSeries as Series[]),
   ...(marathonDesSablesSeries as Series[]),
   ...(afghanistanRaceSeries as Series[]),

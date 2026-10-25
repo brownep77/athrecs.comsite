@@ -11,7 +11,15 @@ assert.equal(importEventSlug("Not a Slug"), slugify("Not a Slug"));
 const { checkedFixtureStart, checkedFixtureStartLabel, isReviewedFixturePlaceholder } =
   await import("../src/data/fixture-details.ts");
 const { fixtureDateIsWithheld } = await import("../src/data/fixture-date-reviews.ts");
-const { editions } = await import("../src/data/catalogue.ts");
+const { editions, seriesList } = await import("../src/data/catalogue.ts");
+const { nextUrgentAdditions } = await import("../src/data/urgent-starts-next-2026-10-25.ts");
+for (const edition of nextUrgentAdditions) {
+  assert.equal(
+    seriesList.filter((s) => s.slug === edition.seriesSlug).length,
+    1,
+    "Every new edition needs exactly one canonical fallback event: " + edition.seriesSlug,
+  );
+}
 const { buildCalendarEvent } = await import("../src/lib/athrecs/event-calendar.ts");
 const { pg, sql } = await bulkFixture();
 try {

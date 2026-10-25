@@ -94,3 +94,7 @@ Publishing previously truncated a supplied event slug to 80 characters, which
 misidentified the existing Yuen Tin event. Explicit valid public slugs are now
 preserved consistently during staging, validation and import. Generated names
 continue to use the existing normalisation and length limit.
+
+The first full CI run exposed two imported events missing from the older static
+catalogue. Yuen Tin and Callao now have fallback event dependencies using their
+existing production IDs; every added edition is checked for one canonical event.

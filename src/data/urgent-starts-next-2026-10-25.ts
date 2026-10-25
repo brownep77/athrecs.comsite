@@ -1,6 +1,44 @@
 import details from "./urgent-starts-next-2026-10-25.json" with { type: "json" };
 import type { Edition, Series } from "./types";
 
+/** Existing production events absent from the older static catalogue. */
+export const nextUrgentSeries: Series[] = [
+  {
+    source_id: 4393342,
+    slug: "wa-media-maraton-del-callao-7247350",
+    name: "Media Maratón del Callao",
+    sport: "Running",
+    country: "Peru",
+    county: "",
+    city: "Callao",
+    area: "Callao (PER)",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary:
+      "Callao's event includes a half marathon and 10km. The exact start remains under review.",
+    description: "",
+    organiser: "Perú Runners",
+    website: "https://perurunners.com/evento/media-maraton-del-callao-10k-2026/",
+  },
+  {
+    source_id: 4393363,
+    slug: "wa-yuen-long-district-sports-festival-yuen-tin-street-run-inline-speed-skating-7246699",
+    name: "Yuen Long District Sports Festival - Yuen Tin Street Run & Inline Speed Skating",
+    sport: "Running",
+    country: "Hong Kong",
+    county: "",
+    city: "Tin Shui Wai, Hong Kong",
+    area: "Tin Shui Wai, Hong Kong (HKG)",
+    surface: "Road",
+    distances: ["10K", "3K", "1K"],
+    summary:
+      "Yuen Tin Street Run has separate running and inline-skating programmes. These listings cover the running distances.",
+    description: "",
+    organiser: "Yuen Long District Sports Association",
+    website: "https://ytstreetrun.sportsoho.com/inline-skating-street-run",
+  },
+];
+
 export const nextUrgentSeriesOverrides: Record<string, Partial<Series>> = {
   "wa-privatbank-kyiv-unbroken-marathon-7237779": {
     sport: "Running",

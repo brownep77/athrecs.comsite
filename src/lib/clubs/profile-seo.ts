@@ -18,12 +18,28 @@ type ClubSearchProfile = {
   profile?: { founded_year?: number; scope?: string } | null;
 };
 
+/** Describe sparse directory entries without inventing club history or facilities. */
+export function clubProfileSummary(club: ClubSearchProfile, siteName: string) {
+  const summary = club.summary.replace(/\s+/g, " ").trim();
+  const name = club.name.replace(/\s+/g, " ").trim();
+  const comparable = (value: string) => value.toLowerCase().replace(/[.!]+$/, "");
+  if (summary && comparable(summary) !== comparable(name)) return summary;
+
+  const place =
+    club.profile?.scope === "global"
+      ? "Worldwide"
+      : [...new Set([club.city, club.county, club.country].map((value) => value.trim()))]
+          .filter(Boolean)
+          .join(", ");
+  return `Club profile for ${name}${place ? ` (${place})` : ""} on ${siteName}. View available club details and public athlete profiles.`;
+}
+
 export function clubSearchMetadata(club: ClubSearchProfile, siteUrl: string, siteName: string) {
   const canonical = `${siteUrl}/clubs/${encodeURIComponent(club.slug)}`;
   const place =
     club.profile?.scope === "global" ? "Worldwide" : club.city || club.county || club.country;
   const title = `${club.name}${place ? ` | ${place}` : ""} | ${siteName}`;
-  const summary = club.summary.replace(/\s+/g, " ").trim();
+  const summary = clubProfileSummary(club, siteName);
   const description =
     summary.length <= 165 ? summary : `${summary.slice(0, 162).replace(/\s+\S*$/, "")}…`;
   const flag = countryFlag(club.country);
