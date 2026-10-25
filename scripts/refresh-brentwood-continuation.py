@@ -9,6 +9,11 @@ def load(name,file):
     s=importlib.util.spec_from_file_location(name,ROOT/file);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 c=load('refresh_continuation','continue-brentwood-results.py');a=load('refresh_continuation_apply','apply-brentwood-resolution.py');a.configure(c.BATCH)
 def run(args):
+    if getattr(args,'batch',None):
+        c.BATCH=args.batch;c.PREFIX=args.batch.replace('brentwood-','brentwood:',1)+':'
+        # Configure once: repeated configuration would duplicate SQL guards.
+        global a
+        a=load('refresh_selected_apply','apply-brentwood-resolution.py');a.configure(c.BATCH)
     cfg,q=a.a.base.connection(args.connection,args.branch,timeout=180)
     if cfg['projectId']!=a.a.imp.PROJECT or args.branch!=a.a.imp.PROD:raise ValueError('Unexpected production target')
     old=json.loads(args.plan.read_text());rows=[perf['archiveReference']['original'] for h in old['profiles']+old['existingHistories'] for perf in h['performances']]
@@ -77,4 +82,4 @@ def run(args):
 if __name__=='__main__':
     ap=argparse.ArgumentParser()
     for key in ['connection','plan','archive','sources','out','snapshot','compared']:ap.add_argument('--'+key,type=pathlib.Path,required=True)
-    ap.add_argument('--branch',required=True);run(ap.parse_args())
+    ap.add_argument('--batch');ap.add_argument('--branch',required=True);run(ap.parse_args())
