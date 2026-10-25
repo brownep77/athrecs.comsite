@@ -1,0 +1,99 @@
+{
+  "chengdu-marathon|2026-10-25": {
+    "place": {
+      "city": "Chengdu"
+    },
+    "summary": "A road marathon from Jinsha Site Museum to Century City International Convention and Exhibition Centre.",
+    "timeZone": "Asia/Shanghai",
+    "sourceUrl": "https://chengdumarathon.cn/column/articleDetail/95?column_id=66&lang=cn",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:30",
+        "label": "First wave 07:30 · later wave 07:50",
+        "note": "2026 regulations: elite runners and marathon groups A/B/C start at 07:30; marathon groups D/E at 07:50. China Standard Time (UTC+8). The 08:10 start is for half marathon groups F/G and must not be assigned to the marathon.",
+        "publicNote": "Marathon: elite runners and groups A/B/C at 07:30; groups D/E at 07:50. All times local (UTC+8). Follow your assigned group."
+      }
+    }
+  },
+  "oktoberfest-half-college-station|2026-10-25": {
+    "place": {
+      "city": "College Station",
+      "state": "Texas"
+    },
+    "summary": "The BCS Oktoberfest half marathon finishes inside Kyle Field.",
+    "timeZone": "America/Chicago",
+    "sourceUrl": "https://raceroster.com/events/2026/115139/2026-oktoberfest-half-marathon10k-presented-by-cc-creations",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "07:00",
+        "label": "Starts from 07:00 CDT · check your wave",
+        "note": "The organiser's 2026 authorised entry programme explicitly lists the half marathon and 10K start at 07:00 CDT. Individual wave allocation was not verified: the linked organiser website was unavailable and a newer social timetable could not be opened. Preserve 07:00 as the first published start, not a universal participant start. Entry page says sold out and online registration closed.",
+        "publicNote": "Published starts begin at 07:00 CDT (UTC−5). Follow your assigned wave in the organiser's race instructions. Registration is closed; no race-day packet pickup."
+      }
+    }
+  },
+  "wa-athletics-sa-state-all-schools-championships-7245416|2026-10-25": {
+    "place": {
+      "city": "Adelaide",
+      "state": "South Australia"
+    },
+    "summary": "Day two of Athletics South Australia's VIVA SA All Schools track and field championships.",
+    "timeZone": "Australia/Adelaide",
+    "sourceUrl": "https://liveresults.com.au/261024/groups.html",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Track & field": {
+        "time": "09:00",
+        "label": "Programme starts 09:00 ACDT",
+        "note": "The 2026 VIVA SA All Schools Athletics South Australia programme gives Sunday 09:00 for the first walks and long jumps. This is the meeting programme start, not every athlete's event start. Full programme at https://liveresults.com.au/261024/; the World Athletics fixture confirms the 24–25 October edition.",
+        "publicNote": "Sunday's programme begins at 09:00 ACDT (UTC+10:30). Individual track and field events have separate start times; check the event programme."
+      }
+    }
+  },
+  "niagara-falls-international-marathon|2026-10-25": {
+    "place": {
+      "city": "Niagara Falls",
+      "state": "Ontario"
+    },
+    "summary": "The 2026 marathon runs entirely in Canada, starting on Fallsview Boulevard and finishing on Stanley Avenue.",
+    "timeZone": "America/Toronto",
+    "sourceUrl": "https://niagarafallsmarathon.com/marathon-event.html",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": null,
+        "label": "Provisional 08:15 EDT",
+        "note": "The organiser's 2026 marathon page and Sunday timetable both give 08:15, but the page explicitly labels the start tentative. Retain that qualification and do not publish an exact calendar instant. The 2026 course is entirely in Canada; the previous border-marathon note is superseded.",
+        "publicNote": "The organiser lists 08:15 EDT (UTC−4) as tentative. Confirm the final instructions before travelling. Start: Fallsview Boulevard between Murray and Robinson Streets; no race-day bib pickup."
+      }
+    }
+  },
+  "tirana-marathon|2026-11-15": {
+    "place": {
+      "city": "Tirana"
+    },
+    "summary": "The rescheduled Wizz Air Tirana Marathon, half marathon and 10K take place on 15 November 2026.",
+    "timeZone": "Europe/Tirane",
+    "sourceUrl": "https://www.tiranamarathon.com/en",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10K": {
+        "time": "09:00",
+        "note": "The organiser's postponement announcement and revised 2026 week programme move the 10K, half marathon and marathon to Sunday 15 November, starting at 09:00 CET. Existing tickets transfer automatically; registrations remain open. Saturday 14 November is for 5K and We Too and is not this edition.",
+        "publicNote": "Rescheduled to Sunday 15 November 2026, starting at 09:00 CET (UTC+1). Existing tickets transfer automatically. No race-day bib pickup."
+      },
+      "Half": {
+        "time": "09:00",
+        "note": "The organiser's postponement announcement and revised 2026 week programme move the 10K, half marathon and marathon to Sunday 15 November, starting at 09:00 CET. Existing tickets transfer automatically; registrations remain open. Saturday 14 November is for 5K and We Too and is not this edition.",
+        "publicNote": "Rescheduled to Sunday 15 November 2026, starting at 09:00 CET (UTC+1). Existing tickets transfer automatically. No race-day bib pickup."
+      },
+      "Marathon": {
+        "time": "09:00",
+        "note": "The organiser's postponement announcement and revised 2026 week programme move the 10K, half marathon and marathon to Sunday 15 November, starting at 09:00 CET. Existing tickets transfer automatically; registrations remain open. Saturday 14 November is for 5K and We Too and is not this edition.",
+        "publicNote": "Rescheduled to Sunday 15 November 2026, starting at 09:00 CET (UTC+1). Existing tickets transfer automatically. No race-day bib pickup."
+      }
+    }
+  }
+}

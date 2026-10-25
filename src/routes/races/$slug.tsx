@@ -1,6 +1,7 @@
 import { RaceActions } from "@/components/races/RaceActions";
 import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
 import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
+import { FIXTURE_DETAILS } from "@/data/fixture-details";
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { ResultDisqualification } from "@/components/athletes/ResultDisqualification";
 import { isDisqualified } from "@/lib/athrecs/result-details";
@@ -294,8 +295,10 @@ export function RacePageContent({
   const archived = !next && past.length > 0;
   const nextStart = raceEditionStart(event, next);
   const zone = timeZoneForPlace({
+    timeZone: FIXTURE_DETAILS[`${event.slug}|${next?.event_date}`]?.timeZone,
     country: event.country,
     county: event.county,
+    date: next?.event_date,
   });
   const zoneAbbr = next?.event_date ? timeZoneAbbr(zone, next.event_date) : timeZoneAbbr(zone);
   const briefing = useMemo(
@@ -1320,6 +1323,9 @@ function EditionList({
             const start =
               ed.start_label ??
               formatStartTime(ed.start_time, {
+                timeZone: calendarEvent
+                  ? FIXTURE_DETAILS[`${calendarEvent.slug}|${ed.event_date}`]?.timeZone
+                  : undefined,
                 country,
                 county,
                 date: ed.event_date,

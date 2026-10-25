@@ -16,6 +16,7 @@ import { distanceDisplayLabel } from "@/lib/athrecs/distance";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { RaceGroupBadges } from "./RaceGroupBadges";
 import { DistanceBadge, SportBadge } from "./EventBadges";
+import { FIXTURE_DETAILS } from "@/data/fixture-details";
 
 export function RunRecsRaceCard({
   race,
@@ -28,7 +29,8 @@ export function RunRecsRaceCard({
   const status = date && race.next_status ? effectiveStatus(date, race.next_status) : null;
   const venue = venueForEvent(race);
   const location = compactFixtureLocation({ ...race, area: null, country: venue.nation }).text;
-  const start = race.next_start_label ?? formatStartTime(race.next_start_time, { ...race, date });
+  const placeTime = { ...race, date, timeZone: FIXTURE_DETAILS[`${race.slug}|${date}`]?.timeZone };
+  const start = race.next_start_label ?? formatStartTime(race.next_start_time, placeTime);
   const distances = sanitizeDistances(race.name, race.distances);
   const website = raceLink(race.website);
   const entry =
@@ -124,8 +126,7 @@ export function RunRecsRaceCard({
               {starts.slice(0, 3).map((item) => (
                 <li key={`${item.distance}-${item.time}`}>
                   {distanceDisplayLabel(item.distance)} ·{" "}
-                  {item.label ??
-                    (formatStartTime(item.time, { ...race, date }) || "Time not yet verified")}
+                  {item.label ?? (formatStartTime(item.time, placeTime) || "Time not yet verified")}
                 </li>
               ))}
               {starts.length > 3 ? <li>+{starts.length - 3} more on race page</li> : null}

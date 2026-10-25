@@ -31,6 +31,7 @@ import { TravelFacts } from "@/components/races/TravelFacts";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { RunRecsRaceCard } from "./RunRecsRaceCard";
+import { FIXTURE_DETAILS } from "@/data/fixture-details";
 
 function SportIcon({ sport }: { sport: Sport }) {
   if (sport === "Cycling") return <Bike className="h-3.5 w-3.5" />;
@@ -63,6 +64,7 @@ export function RaceCard({
   const startLabel =
     race.next_start_label ??
     formatStartTime(race.next_start_time, {
+      timeZone: FIXTURE_DETAILS[`${race.slug}|${race.next_date}`]?.timeZone,
       country: race.country,
       county: race.county,
       date: race.next_date,
