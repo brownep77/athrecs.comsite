@@ -62,6 +62,20 @@ try {
     authorityConfirmed: true,
     privacyAcknowledged: true,
   });
+  const additionalSports = [
+    "HYROX",
+    "DEKA",
+    "CrossFit",
+    "Swimrun",
+    "Indoor Rowing",
+    "Orienteering",
+    "Aquathlon",
+    "Aquabike",
+    "OCR",
+    "Adventure Racing",
+  ];
+  assert.deepEqual(clubDetailsSchema.parse({ sports: additionalSports }).sports, additionalSports);
+  assert.throws(() => clubDetailsSchema.parse({ sports: ["Unsupported sport"] }));
   const input = { clubId: club.id, details, submit: true };
   assert.throws(() =>
     clubSaveSchema.parse({ ...input, details: { ...details, authorityConfirmed: false } }),

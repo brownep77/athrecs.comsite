@@ -1,11 +1,28 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Bike, Footprints, Medal, Search, Timer, Waves, Grid2X2, Repeat2 } from "lucide-react";
+import {
+  Bike,
+  Footprints,
+  Medal,
+  Search,
+  Timer,
+  Waves,
+  Grid2X2,
+  Repeat2,
+  Dumbbell,
+  ChevronDown,
+} from "lucide-react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { SiteLanguagePicker } from "@/components/language/SiteLanguagePicker";
 import { HomepageColourPicker, useHomepageTheme } from "@/components/running/HomepageAppearance";
 import { homepageThemeStyle } from "@/lib/running/homepage-themes";
-import { QUICK_SPORTS, activeDiscoverySport } from "./discovery-navigation";
+import {
+  QUICK_SPORTS,
+  MORE_SPORTS,
+  activeDiscoverySport,
+  isHybridFitnessSport,
+} from "./discovery-navigation";
 import { parseSportFixtureSearch, type SportFixtureSearch } from "@/lib/athrecs/sport-pages";
 
 const icons = {
@@ -16,6 +33,7 @@ const icons = {
   Swimming: Waves,
   Duathlon: Repeat2,
   Parkrun: Footprints,
+  "Functional Fitness": Dumbbell,
 };
 const memoryKey = "athrecs:sport-filters:v1";
 
@@ -39,10 +57,13 @@ export function CompactDiscoveryHeader({
       const raw: unknown = JSON.parse(sessionStorage.getItem(memoryKey) ?? "{}");
       const restored: Record<string, SportFixtureSearch> = {};
       if (raw && typeof raw === "object" && !Array.isArray(raw)) {
-        for (const item of QUICK_SPORTS) {
-          const value = (raw as Record<string, unknown>)[item.path];
+        for (const path of [
+          ...QUICK_SPORTS.map((item) => item.path),
+          ...MORE_SPORTS.map((item) => `/sports/${item.slug}`),
+        ]) {
+          const value = (raw as Record<string, unknown>)[path];
           if (value && typeof value === "object" && !Array.isArray(value))
-            restored[item.path] = parseSportFixtureSearch(value as Record<string, unknown>);
+            restored[path] = parseSportFixtureSearch(value as Record<string, unknown>);
         }
       }
       restored[pathname] = parseSportFixtureSearch(
@@ -123,7 +144,9 @@ export function CompactDiscoveryHeader({
         <ul className="flex min-w-max items-stretch gap-1">
           {QUICK_SPORTS.map((item) => {
             const Icon = icons[item.sport];
-            const selected = active === item.sport;
+            const selected =
+              active === item.sport ||
+              (item.sport === "Functional Fitness" && isHybridFitnessSport(active));
             const className = `inline-flex min-h-12 items-center gap-2 border-b-3 px-3 text-sm font-semibold no-underline transition-colors hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-accent sm:px-4 ${selected ? "border-accent text-accent" : "border-transparent text-fg"}`;
             return (
               <li key={item.path}>
@@ -152,6 +175,34 @@ export function CompactDiscoveryHeader({
               </li>
             );
           })}
+          <li className="flex items-stretch">
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger className="inline-flex min-h-12 items-center gap-2 border-b-3 border-transparent px-3 text-sm font-semibold hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-accent">
+                More sports <ChevronDown className="size-4" aria-hidden="true" />
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Portal>
+                <DropdownMenu.Content
+                  align="end"
+                  sideOffset={4}
+                  className="z-50 max-h-[70dvh] w-64 overflow-y-auto rounded-lg border border-border bg-surface p-1 text-fg shadow-lg"
+                >
+                  {MORE_SPORTS.map((item) => (
+                    <DropdownMenu.Item key={item.slug} asChild>
+                      <Link
+                        to="/sports/$sport"
+                        params={{ sport: item.slug }}
+                        search={memory[`/sports/${item.slug}`] ?? {}}
+                        aria-current={pathname === `/sports/${item.slug}` ? "page" : undefined}
+                        className="flex min-h-11 items-center rounded px-3 text-sm font-medium no-underline outline-none data-[highlighted]:bg-accent-soft data-[highlighted]:text-accent"
+                      >
+                        {item.label}
+                      </Link>
+                    </DropdownMenu.Item>
+                  ))}
+                </DropdownMenu.Content>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Root>
+          </li>
           <li>
             <Link
               to="/site-map"

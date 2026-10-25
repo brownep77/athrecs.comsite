@@ -96,8 +96,14 @@ check("public metadata is clean and optional fields stay optional", () => {
   });
   assert(data);
   assert.match(data.title, /🏃/u);
-  assert.doesNotMatch(data.title, /[\u0000-\u001f\u007f]/);
-  assert.doesNotMatch(data.text, /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/);
+  // Check C0 and DEL directly; tabs and line breaks are allowed only in text.
+  for (const code of [...Array(32).keys(), 127]) {
+    const character = String.fromCharCode(code);
+    assert(!data.title.includes(character), `Title contains control character ${code}`);
+    if (![9, 10, 13].includes(code)) {
+      assert(!data.text.includes(character), `Text contains control character ${code}`);
+    }
+  }
   assert.doesNotMatch(JSON.stringify(data), /undefined|null/);
 });
 

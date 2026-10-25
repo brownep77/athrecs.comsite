@@ -29,7 +29,10 @@ const clubs = Array.from({ length: 52 }, (_, i) => ({
 const router = file(
   "router.tsx",
   `import React from 'react';
-export const createFileRoute=(path)=>(options)=>({...options,useLoaderData:()=>window.fixtureClubs,useSearch:()=>({})});
+const subscribe=(notify)=>{window.addEventListener('popstate',notify);return()=>window.removeEventListener('popstate',notify)};
+function useSearch(){return Object.fromEntries(new URLSearchParams(React.useSyncExternalStore(subscribe,()=>location.search)))}
+export const createFileRoute=(path)=>(options)=>({...options,fullPath:path,useLoaderData:()=>window.fixtureClubs,useSearch});
+export function useNavigate(){return({to,search})=>{const query=new URLSearchParams(Object.entries(search||{}).filter(([,value])=>value!==undefined)).toString();history.replaceState(null,'',to+(query?'?'+query:''));window.dispatchEvent(new PopStateEvent('popstate'))}}
 export function Link({to,search,params,hash,children,...props}){let href=to;if(params)for(const [key,value]of Object.entries(params))href=href.replace('$'+key,value);if(search)href+='?'+new URLSearchParams(search).toString();if(hash)href+='#'+hash;return <a href={href} {...props}>{children}</a>}`,
 );
 const auth = file(
@@ -59,7 +62,7 @@ file(
 file("style.css", `@import "${resolve("src/styles.css")}";\n@source "${resolve("src")}";`);
 file(
   "main.tsx",
-  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{ClubRegistration,MyClubRegistrations}from'/@fs/${resolve("src/components/clubs/ClubRegistration.tsx")}';import{Route as Directory}from'/@fs/${resolve("src/routes/clubs/index.tsx")}';import{Route as Review}from'/@fs/${resolve("src/routes/admin/club-registrations.tsx")}';import'./style.css';window.fixtureClubs=${JSON.stringify(clubs)};const client=new QueryClient({defaultOptions:{queries:{retry:false},mutations:{retry:false}}});const Component=location.pathname.includes('/admin')?Review.component:location.pathname==='/clubs'?Directory.component:location.pathname.endsWith('/account')?MyClubRegistrations:()=> <ClubRegistration club={window.fixtureClubs[0]} missing={false}/>;createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1000,margin:'auto',padding:20}}><p style={{fontSize:12,marginBottom:16}}>FICTIONAL TEST DATA · NO LIVE ACCOUNTS OR EMAILS</p><Component/></main></QueryClientProvider>);`,
+  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{ClubRegistration,MyClubRegistrations}from'/@fs/${resolve("src/components/clubs/ClubRegistration.tsx")}';import{Route as Directory}from'/@fs/${resolve("src/routes/clubs/index.tsx")}';import{Route as Review}from'/@fs/${resolve("src/routes/admin/club-registrations.tsx")}';import'./style.css';window.fixtureClubs=${JSON.stringify(clubs)};const client=new QueryClient({defaultOptions:{queries:{retry:false},mutations:{retry:false}}});const Component=location.pathname.includes('/admin')?Review.component:location.pathname==='/clubs'?Directory.component:location.pathname.endsWith('/account')?MyClubRegistrations:()=> <ClubRegistration club={location.search.includes('missing')?undefined:window.fixtureClubs[0]} missing={location.search.includes('missing')}/>;createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1000,margin:'auto',padding:20}}><p style={{fontSize:12,marginBottom:16}}>FICTIONAL TEST DATA · NO LIVE ACCOUNTS OR EMAILS</p><Component/></main></QueryClientProvider>);`,
 );
 const server = await createServer({
   configFile: false,
@@ -90,9 +93,9 @@ const browser = await chromium.launch({
   executablePath: process.env.ATHRECS_BROWSER_EXECUTABLE || undefined,
   args: ["--no-sandbox"],
 });
+const errors = [];
 try {
   const page = await browser.newPage({ viewport: { width: 1280, height: 1100 } });
-  const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto(`${origin}/clubs`);
   await page.getByRole("heading", { name: "Clubs", exact: true }).waitFor();
@@ -120,6 +123,37 @@ try {
     0,
     "Signed-out visitors do not request private applications",
   );
+  await page.goto(`${origin}/clubs/register?missing=true`);
+  await page.getByLabel("Club name", { exact: true }).fill("Synthetic Hybrid Club");
+  await page.getByLabel("Town or city", { exact: true }).fill("Norwich");
+  await page.getByLabel("Country", { exact: true }).fill("England");
+  for (const sport of [
+    "HYROX",
+    "DEKA",
+    "CrossFit",
+    "Functional Fitness",
+    "OCR",
+    "Swimrun",
+    "Aquathlon",
+    "Aquabike",
+    "Rowing",
+    "Indoor Rowing",
+    "Orienteering",
+    "Adventure Racing",
+  ]) {
+    await page.getByRole("checkbox", { name: sport, exact: true }).check();
+  }
+  await page.getByRole("button", { name: "Save draft", exact: true }).click();
+  await page.getByRole("status").filter({ hasText: "Draft saved" }).waitFor();
+  assert.ok(
+    await page.evaluate(
+      () =>
+        window.saves.at(-1).details.sports.includes("HYROX") &&
+        window.saves.at(-1).details.sports.includes("Swimrun"),
+    ),
+    "New sport choices survive the registration draft",
+  );
+  await page.evaluate(() => localStorage.clear());
   await page.goto(`${origin}/clubs/register`);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Continue", exact: true }).click();
@@ -207,6 +241,7 @@ try {
     "Club browser flow passed: directory-first links, filters/pagination, sign-in gate, draft/resume, validation, failed-save retry, submission, unverified-email gate, mobile layout and reviewer checks. APIs used isolated synthetic fixtures.",
   );
 } catch (error) {
+  if (errors.length) console.error("Club browser errors:", errors);
   const failedPage = browser.contexts()[0]?.pages()[0];
   if (failedPage) {
     await failedPage

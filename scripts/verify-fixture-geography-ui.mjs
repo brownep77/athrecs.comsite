@@ -88,7 +88,8 @@ try {
     // Exercise actual server filtering and the hydrated form on every sport fixture surface.
     for (const sport of ["road-running", "trail-running", "track-and-field"]) {
       await page.goto(`${base}/sports/${sport}`, { waitUntil: "networkidle" });
-      const options = await page.locator("#sport-fixture-country option").allTextContents();
+      const countrySelect = page.getByLabel("Country", { exact: true });
+      const options = await countrySelect.locator("option").allTextContents();
       assert.equal(new Set(options).size, options.length, `${sport}: duplicate country options`);
       const chosen =
         options.find((label) => label === "Sweden") ||
@@ -96,10 +97,10 @@ try {
           (label) => countryFlag(label).code && !countryFlag(label).code.startsWith("GB"),
         );
       assert.ok(chosen, `${sport}: no country filter`);
-      await page.getByLabel("Country", { exact: true }).selectOption({ label: chosen });
+      await countrySelect.selectOption({ label: chosen });
       await Promise.all([
         page.waitForURL((url) => url.searchParams.get("country") === chosen),
-        page.getByRole("button", { name: "Apply filters", exact: true }).click(),
+        page.locator("#fixtures").getByRole("button", { name: "Search", exact: true }).click(),
       ]);
       const flags = page.locator("#fixtures [data-country-code]");
       await flags.first().waitFor();

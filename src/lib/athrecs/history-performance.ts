@@ -20,14 +20,28 @@ export function historicalMark(row: SourcePerformance) {
 
 export function historicalDistance(discipline: string, sport: string) {
   const code = discipline.trim();
+  if (sport === "Indoor Rowing") {
+    const erg = /^Indoor Rowing (Lightweight )?(\d+(?:\.\d+)?)m$/i.exec(code);
+    if (erg)
+      return {
+        code: `${Number(erg[2])}m${erg[1] ? " Lightweight" : ""}`,
+        km: Number(erg[2]) / 1000,
+      };
+  }
   if (sport === "Parkrun" && /^parkrun$/i.test(code)) return { code: "5K", km: 5 };
   if (/^marathon$/i.test(code)) return { code: "Marathon", km: 42.195 };
   if (/^half(?: marathon)?$/i.test(code)) return { code: "Half", km: 21.0975 };
   if (sport === "Walking") {
-    const walk = /^(\d+(?:\.\d+)?)\s*(m|metres|meters|k|km|kilometres|kilometers)\s+race walk(?:ing)?$/i.exec(code);
+    const walk =
+      /^(\d+(?:\.\d+)?)\s*(m|metres|meters|k|km|kilometres|kilometers)\s+race walk(?:ing)?$/i.exec(
+        code,
+      );
     if (walk) {
       const metres = /^(?:m|metres|meters)$/i.test(walk[2]);
-      return { code: `${Number(walk[1])}${metres ? "m" : "K"}`, km: Number(walk[1]) / (metres ? 1000 : 1) };
+      return {
+        code: `${Number(walk[1])}${metres ? "m" : "K"}`,
+        km: Number(walk[1]) / (metres ? 1000 : 1),
+      };
     }
   }
   if (sport === "Athletics") {

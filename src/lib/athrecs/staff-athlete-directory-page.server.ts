@@ -64,13 +64,13 @@ function directoryCtes(filters: StaffDirectoryFilters) {
       select coalesce(l.number,i.number) from athlete_source_histories h
       join athlete_identifiers i on i.athlete_id=h.athlete_id
       left join linked l on l.athlete_id=h.athlete_id
-      where athlete_history_sports_v3(h.provider,h.performances) @> array[$2]::text[]
+      where athlete_history_sports_v4(h.provider,h.performances) @> array[$2]::text[]
       union
       select coalesce(l.number,i.number) from athletes a
       join athlete_identifiers i on i.athlete_id=a.id
       left join linked l on l.athlete_id=a.id
       where ${profileSportEvidencePredicateSql()}
-        and athlete_profile_sports_v1(a.profile_details) @> array[$2]::text[]
+        and athlete_profile_sports_v2(a.profile_details) @> array[$2]::text[]
       union
       select coalesce(l.number,i.number) from athlete_upcoming_events e
       join athlete_identifiers i on i.athlete_id=e.athlete_id
@@ -125,10 +125,10 @@ export async function loadStaffDirectoryPage(sql: Sql, filters: StaffDirectoryFi
         union all select sport from (values ${profileEvidenceSportNames.map((sport) => `('${sport}')`).join(",")}) candidate(sport)
           where exists (select 1 from athletes a
             where ${profileSportEvidencePredicateSql()}
-        and athlete_profile_sports_v1(a.profile_details) @> array[candidate.sport]::text[])
+        and athlete_profile_sports_v2(a.profile_details) @> array[candidate.sport]::text[])
         union all select sport from (values ${sourceHistorySportNames.map((sport) => `('${sport}')`).join(",")}) candidate(sport)
           where exists (select 1 from athlete_source_histories h
-            where athlete_history_sports_v3(h.provider,h.performances) @> array[candidate.sport]::text[])
+            where athlete_history_sports_v4(h.provider,h.performances) @> array[candidate.sport]::text[])
       ) sports where sport<>'' order by sport`);
     return { ...row, sports: sports.map((row) => row.sport) };
   });

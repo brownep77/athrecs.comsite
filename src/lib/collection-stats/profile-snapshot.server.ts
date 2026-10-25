@@ -64,9 +64,9 @@ export async function readProfileSnapshot(sql: Sql, refresh = false): Promise<Pr
       select r.athlete_id, e.sport from results r
         join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
       union
-      ${profileEvidenceSportNames.map((sport) => `select h.athlete_id, '${sport}'::text sport from athlete_source_histories h where athlete_history_sports_v3(h.provider,h.performances) @> array['${sport}']::text[]`).join(" union all ")}
+      ${profileEvidenceSportNames.map((sport) => `select h.athlete_id, '${sport}'::text sport from athlete_source_histories h where athlete_history_sports_v4(h.provider,h.performances) @> array['${sport}']::text[]`).join(" union all ")}
       union
-      ${profileEvidenceSportNames.map((sport) => `select a.id, '${sport}'::text sport from athletes a where ${profileSportEvidencePredicateSql()} and athlete_profile_sports_v1(a.profile_details) @> array['${sport}']::text[]`).join(" union all ")}
+      ${profileEvidenceSportNames.map((sport) => `select a.id, '${sport}'::text sport from athletes a where ${profileSportEvidencePredicateSql()} and athlete_profile_sports_v2(a.profile_details) @> array['${sport}']::text[]`).join(" union all ")}
       union
       select owner.athlete_id, sp.sport_code from athlete_account_links owner
         join athlete_sport_profiles sp on sp.user_id=owner.user_id where owner.status='active'

@@ -250,6 +250,59 @@ try {
     null,
     "Missing canonical slugs cannot produce invented share/calendar URLs",
   );
+  // Each new sport has an isolated catalogue; the hybrid hub deliberately combines only its members.
+  const additions = [
+    ["hyrox", "HYROX"],
+    ["deka", "DEKA"],
+    ["crossfit", "CrossFit"],
+    ["functional-fitness", "Functional Fitness"],
+    ["swimrun", "Swimrun"],
+    ["aquathlon", "Aquathlon"],
+    ["aquabike", "Aquabike"],
+    ["rowing", "Rowing"],
+    ["indoor-rowing", "Indoor Rowing"],
+    ["orienteering", "Orienteering"],
+    ["adventure-racing", "Adventure Racing"],
+    ["obstacle-course-racing", "OCR"],
+  ];
+  for (const [index, [slug, sport]] of additions.entries()) {
+    const id = 1000 + index;
+    await db.query(
+      "insert into events(id, slug, name, sport, country) values($1,$2,$3,$4,'Ireland')",
+      [id, `synthetic-${slug}`, `Synthetic ${sport}`, sport],
+    );
+    await db.query(
+      "insert into editions(id,event_id,event_date,distance_code) values($1,$1,'2027-01-15','Other')",
+      [id],
+    );
+    const page = await readSportFixtures(
+      sql,
+      { ...getSportPage(slug), country: "Ireland", month: "2027-01" },
+      "2026-09-26",
+    );
+    assert.deepEqual(
+      page.fixtures.map((row) => row.name),
+      [`Synthetic ${sport}`],
+      slug,
+    );
+    assert.equal(page.fixtures[0].starts[0].time, null);
+    assert.equal(
+      page.fixtures[0].starts[0].calendarRace.pageUrl,
+      `https://www.athrecs.com/races/synthetic-${slug}`,
+    );
+    assert.equal(
+      (await readSportFixtures(sql, { ...getSportPage(slug), country: "England" }, "2026-09-26"))
+        .fixtures.length,
+      0,
+    );
+  }
+  assert.deepEqual(await namesFor("hybrid-fitness"), [
+    "Synthetic CrossFit",
+    "Synthetic DEKA",
+    "Synthetic Functional Fitness",
+    "Synthetic HYROX",
+  ]);
+  assert.ok(!(await namesFor("road-running")).some((name) => name.startsWith("Synthetic")));
   await db.exec(`delete from editions where event_id >= 10; delete from events where id >= 10;`);
   await db.exec(`
     insert into editions (id, event_id, event_date, distance_code, start_time) select 100+n, 1, '2026-10-01'::date+n, '10K', null from generate_series(0,30) n;

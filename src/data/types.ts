@@ -14,6 +14,12 @@ export type Sport =
   | "Athletics"
   | "Adventure Racing"
   | "Functional Fitness"
+  | "HYROX"
+  | "DEKA"
+  | "CrossFit"
+  | "Swimrun"
+  | "Indoor Rowing"
+  | "Orienteering"
   | "Walking";
 
 export type Series = {
