@@ -34,8 +34,6 @@ const expectedLanguages = [
   "id",
   "hi",
   "th",
-  "cy",
-  "ga",
   "af",
 ];
 assert.equal(TRANSLATION_LANGUAGES.length, expectedLanguages.length);
@@ -116,8 +114,8 @@ for (const [search, expected] of [
   ["Portuguese", ["pt", "pt-BR"]],
   ["Brazil", ["pt-BR"]],
   ["pt-BR", ["pt-BR"]],
-  ["Cymraeg", ["cy"]],
-  ["Gaeilge", ["ga"]],
+  ["Cymraeg", []],
+  ["Gaeilge", []],
   ["not-a-language", []],
 ]) {
   assert.deepEqual(
@@ -126,7 +124,7 @@ for (const [search, expected] of [
     search,
   );
 }
-assert.equal(matchingTranslationLanguages("  ").length, 30);
+assert.equal(matchingTranslationLanguages("  ").length, 28);
 console.log(
-  "Site translation: 30 language choices, regional targets, multilingual search, English originals and public-only URL boundaries verified.",
+  "Site translation: 28 language choices, regional targets, multilingual search, English originals and public-only URL boundaries verified.",
 );
