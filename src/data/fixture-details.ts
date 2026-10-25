@@ -1,3 +1,4 @@
+import moreThreeMonthStarts from "./three-month-starts-more-2026-10-25.json" with { type: "json" };
 import countyExpansion from "./county-expansion-2026-10-21.json" with { type: "json" };
 import countyExpansionMore from "./county-expansion-more-2026-10-21.json" with { type: "json" };
 import countyExpansionChecked from "./county-expansion-checked-2026-10-21.json" with { type: "json" };
@@ -357,6 +358,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
       "5K": { time: "08:10" },
     },
   },
+  ...moreThreeMonthStarts,
 };
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
