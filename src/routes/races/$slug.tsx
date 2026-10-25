@@ -67,6 +67,7 @@ import { RaceEntryOptions } from "@/components/races/RaceEntryOptions";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { editionEntry } from "@/lib/athrecs/race-information";
 import { raceSearchContent } from "@/lib/athrecs/race-search-content";
+import { racePageReviewFor, reviewedRacePage } from "@/data/race-page-reviews";
 
 type EditionRow = {
   id: number;
@@ -90,7 +91,8 @@ type EditionRow = {
 
 export const Route = createFileRoute("/races/$slug")({
   loader: async ({ params }) => {
-    const data = await getEventBySlug({ data: params.slug });
+    const loaded = await getEventBySlug({ data: params.slug });
+    const data = loaded ? reviewedRacePage(loaded) : null;
     if (data) {
       if (data.event.slug !== params.slug) {
         throw redirect({
@@ -157,6 +159,7 @@ export const Route = createFileRoute("/races/$slug")({
           `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`
         : searchContent.description;
     const next = upcoming.find((edition) => edition.status !== "Cancelled");
+    const review = racePageReviewFor(event.slug, next?.event_date);
 
     return {
       meta: siteGraphMeta({
@@ -178,6 +181,8 @@ export const Route = createFileRoute("/races/$slug")({
               region: event.county,
               country: event.country,
               startDate: next?.event_date,
+              utcOffset: review?.utcOffset,
+              venue: review?.venue,
               startTime: checkedFixtureEventStart(
                 event.slug,
                 next?.event_date,
@@ -303,6 +308,7 @@ export function RacePageContent({
   };
   const nextStart =
     next?.start_label ??
+    racePageReviewFor(event.slug, next?.event_date)?.startLabel ??
     formatStartTime(
       checkedFixtureEventStart(event.slug, next?.event_date, next?.start_time ?? null),
       place,

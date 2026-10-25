@@ -2,10 +2,12 @@ import { compactFixtureLocation } from "./fixture-presentation.ts";
 import { sanitizeDistances } from "./filters.ts";
 import { SITE_NAME } from "./seo.ts";
 import { searchSnippet } from "./search-text.ts";
+import { racePageReviewFor } from "../../data/race-page-reviews.ts";
 
 type Edition = { event_date: string; distance_code: string; status: string; result_count?: number };
 type Race = {
   event: {
+    slug?: string;
     name: string;
     sport: string;
     city?: string | null;
@@ -61,6 +63,7 @@ export function raceSearchContent(data: Race) {
   const next = upcoming
     .filter((row) => row.status !== "Cancelled" && validDate(row.event_date))
     .sort((a, b) => a.event_date.localeCompare(b.event_date))[0];
+  const review = racePageReviewFor(event.slug, next?.event_date);
   const years = [
     ...new Set(
       past
@@ -91,11 +94,17 @@ export function raceSearchContent(data: Race) {
       ? `Recorded editions: ${years[0]}${years.length > 1 ? `–${years.at(-1)}` : ""}.`
       : "Race details and recorded editions.";
   return {
-    biography: facts,
-    title: `${event.name}${next ? ` ${next.event_date.slice(0, 4)}` : " results & history"}${place ? ` — ${place}` : ""} | ${SITE_NAME}`,
-    description: searchSnippet(
-      `${event.name}${place ? ` in ${place}` : ""}${distances.length ? `: ${distances.slice(0, 3).join(", ")}` : ""}. ${timing}`,
-    ),
+    biography: review
+      ? [...review.biography, ...facts.filter((fact) => fact.startsWith("The ATHRECS archive"))]
+      : facts,
+    title:
+      review?.title ??
+      `${event.name}${next ? ` ${next.event_date.slice(0, 4)}` : " results & history"}${place ? ` — ${place}` : ""} | ${SITE_NAME}`,
+    description:
+      review?.description ??
+      searchSnippet(
+        `${event.name}${place ? ` in ${place}` : ""}${distances.length ? `: ${distances.slice(0, 3).join(", ")}` : ""}. ${timing}`,
+      ),
     next,
   };
 }

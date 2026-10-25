@@ -3,6 +3,7 @@ import { raceGuideFor, supplementedStart } from "../../data/runrecs-race-guides.
 import { calendarTimeZoneForPlace } from "./timezone.ts";
 import { formatDistanceWithUnits } from "./distance.ts";
 import type { CalendarRace } from "./event-calendar.ts";
+import { racePageReviewFor } from "../../data/race-page-reviews.ts";
 
 /** Use only the selected edition's public practical details; HQ is not necessarily the start. */
 export function catalogueCalendarDetails(
@@ -19,7 +20,7 @@ export function catalogueCalendarDetails(
   distance: string,
 ) {
   const detail = FIXTURE_DETAILS[`${event.slug}|${date}`];
-  const matchedGuide = raceGuideFor(event, date);
+  const matchedGuide = racePageReviewFor(event.slug, date)?.guide ?? raceGuideFor(event, date);
   const guide =
     matchedGuide && Object.hasOwn(matchedGuide.starts, distance) ? matchedGuide : undefined;
   const area = [

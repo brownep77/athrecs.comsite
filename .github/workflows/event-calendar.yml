@@ -51,6 +51,7 @@ jobs:
           npm install --prefix "$RUNNER_TEMP/calendar-interop" --ignore-scripts --no-audit --no-fund ical.js@2.2.1
           CALENDAR_ICAL_MODULE="$RUNNER_TEMP/calendar-interop/node_modules/ical.js/dist/ical.js" node scripts/verify-event-calendar-interop.mjs
       - run: npx tsc --noEmit
+      - run: node scripts/verify-hamburg-race-example.mjs
       - run: npx playwright install --with-deps chromium firefox webkit
       - name: Check calendar and sharing in Chromium, Firefox and WebKit
         run: |

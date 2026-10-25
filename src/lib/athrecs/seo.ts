@@ -116,6 +116,13 @@ export function sportsEventJsonLd(
     country?: string | null;
     startDate?: string | null;
     startTime?: string | null;
+    utcOffset?: string | null;
+    venue?: {
+      name: string;
+      streetAddress?: string;
+      postalCode?: string;
+      countryCode?: string;
+    };
     sport?: string | null;
     website?: string | null;
     organiser?: string | null;
@@ -160,9 +167,12 @@ export function sportsEventJsonLd(
   }
 
   // An unknown or invalid local time must not corrupt an otherwise known date.
+  const utcOffset = /^(?:[+-](?:0\d|1[0-3]):[0-5]\d|[+-]14:00)$/.test(input.utcOffset ?? "")
+    ? input.utcOffset
+    : "";
   const start =
     input.startTime && /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.startTime)
-      ? `${date}T${input.startTime}`
+      ? `${date}T${input.startTime}${utcOffset}`
       : date;
   // Match todayIso() and visible entry deadlines: the site's calendar day is
   // Europe/London, including daylight saving, rather than the server's UTC day.
@@ -199,12 +209,15 @@ export function sportsEventJsonLd(
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {
       "@type": "Place",
-      name: [input.city, input.country].filter(Boolean).join(", ") || input.name,
+      name:
+        input.venue?.name || [input.city, input.country].filter(Boolean).join(", ") || input.name,
       address: {
         "@type": "PostalAddress",
+        streetAddress: input.venue?.streetAddress,
+        postalCode: input.venue?.postalCode,
         addressLocality: input.city || undefined,
         addressRegion: input.region || undefined,
-        addressCountry: input.country || undefined,
+        addressCountry: input.venue?.countryCode || input.country || undefined,
       },
     },
     sport: input.sport || "Athletics",
