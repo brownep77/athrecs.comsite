@@ -17,6 +17,10 @@ import tailwindcss from "@tailwindcss/vite";
 import { chromium } from "playwright";
 import { createFinderSyntheticFixture } from "./verify-athlete-source-finder.mjs";
 import { auditResults } from "./lib/result-evidence-audit.mjs";
+import {
+  createProfileAdditionFixture,
+  loadProfileAdditionModules,
+} from "./verify-finder-add-to-profile.mjs";
 
 const require = createRequire(import.meta.url);
 const ts = require("typescript");
@@ -323,7 +327,15 @@ try {
         }),
     },
   });
+  const additionModules = loadProfileAdditionModules();
+  const additionApi = load("src/lib/athlete-finder/add-to-profile-api.ts", {
+    ...common,
+    "../db": { getSql: async () => sql, dbSource: "neon" },
+    "./add-to-profile": additionModules.core,
+    "./add-to-profile.server": additionModules.service,
+  });
   const methods = {
+    ...additionApi,
     ...searchApi,
     ...identityApi,
     ...coverageApi,
@@ -461,6 +473,7 @@ try {
         { find: /^\.{1,2}\/getStartOptions\.js$/, replacement: startOptions },
         { find: "@/lib/athlete-finder/api", replacement: bridge },
         { find: "@/lib/athlete-finder/identity-review-api", replacement: bridge },
+        { find: "@/lib/athlete-finder/add-to-profile-api", replacement: bridge },
         { find: "@/lib/athlete-finder/coverage-api", replacement: bridge },
         { find: "@/lib/athlete-finder/source-check-api", replacement: bridge },
         { find: "@/lib/athrecs/api", replacement: bridge },
@@ -480,6 +493,9 @@ try {
   const protectedMethods = {
     searchAthleteSourceResults: { q: name },
     findPossibleAthleteProfiles: { name },
+    findFinderProfileOptions: { kind: "athlete", q: name },
+    previewFinderProfileAddition: { source: { kind: "archive", entryId: 1 } },
+    addFinderResultToProfile: {},
     getAthleteFinderSourceCoverage: {},
     checkAthleteSource: { name, url: sourceUrl },
   };
@@ -1000,6 +1016,114 @@ try {
     JSON.stringify(retained).includes("Different Participant"),
     false,
     "Only selected matching rows can enter the importer handoff",
+  );
+  // The actual button must save through staff middleware and the real transactional service.
+  const addition = await createProfileAdditionFixture(fixture, {
+    userId: staff.id,
+    staffEmail: staff.email,
+  });
+  await page.goto(origin);
+  await page.getByLabel("Athlete name", { exact: true }).fill("Avery Addition Synthetic");
+  await page.getByRole("button", { name: "Search stored results", exact: true }).click();
+  const additionTable = page.getByRole("table", {
+    name: "Possible athlete matches in stored collections",
+  });
+  const archiveRow = additionTable
+    .locator("tbody tr")
+    .filter({ hasText: "Central archive" })
+    .first();
+  await archiveRow.getByRole("button", { name: "Add to profile", exact: true }).click();
+  const dialog = page.getByRole("dialog", { name: "Add result to athlete profile" });
+  await dialog
+    .getByLabel("Choose athlete profile", { exact: true })
+    .selectOption(String(addition.target.id));
+  const saveButton = dialog.getByRole("button", {
+    name: "Add result to athlete profile",
+    exact: true,
+  });
+  await saveButton.waitFor();
+  assert.ok(await saveButton.isDisabled(), "Source and identity review is required before saving");
+  await dialog.getByLabel("Choose athlete profile", { exact: true }).selectOption("");
+  await dialog.getByText("Choose an existing athlete profile.", { exact: true }).waitFor();
+  assert.equal(
+    await saveButton.count(),
+    0,
+    "Clearing the selected athlete removes the save action",
+  );
+  await dialog
+    .getByLabel("Choose athlete profile", { exact: true })
+    .selectOption(String(addition.target.id));
+  await saveButton.waitFor();
+  const countBeforeCancel = (await sql`select count(*)::int n from results`)[0].n;
+  await dialog.getByRole("button", { name: "Close", exact: true }).click();
+  assert.equal((await sql`select count(*)::int n from results`)[0].n, countBeforeCancel);
+  await archiveRow.getByRole("button", { name: "Add to profile", exact: true }).click();
+  await dialog
+    .getByLabel("Choose athlete profile", { exact: true })
+    .selectOption(String(addition.target.id));
+  await saveButton.waitFor();
+  await dialog
+    .getByLabel("Why this result belongs to this athlete")
+    .fill("Synthetic browser identity matched to original source row and club.");
+  await dialog.getByRole("checkbox").nth(0).check();
+  await dialog.getByRole("checkbox").nth(1).check();
+  await saveButton.click();
+  await dialog.getByText("Result added to Avery Addition Synthetic.", { exact: true }).waitFor();
+  assert.equal(
+    (await sql`select count(*)::int n from results where athlete_id=${addition.target.id}`)[0].n,
+    1,
+  );
+  await page.screenshot({ path: resolve(root, "finder-add-profile-success.png"), fullPage: true });
+  await dialog.getByRole("button", { name: "Done", exact: true }).click();
+  await archiveRow.getByText("Added to Avery Addition Synthetic", { exact: true }).waitFor();
+  await page.reload();
+  await page.getByLabel("Athlete name", { exact: true }).fill("Avery Addition Synthetic");
+  await page.getByRole("button", { name: "Search stored results", exact: true }).click();
+  await archiveRow.getByRole("button", { name: "View profile attachment", exact: true }).click();
+  await dialog.getByText(/already attached to Avery Addition Synthetic/).waitFor();
+  assert.equal(
+    await saveButton.count(),
+    0,
+    "Already-attached results cannot be copied to another profile",
+  );
+  await dialog.getByRole("button", { name: "Close", exact: true }).click();
+  const captureRowForAdd = additionTable
+    .locator("tbody tr")
+    .filter({ hasText: "Saved race captures" })
+    .first();
+  await captureRowForAdd.getByRole("button", { name: "Add to profile", exact: true }).click();
+  await dialog.getByLabel("Find athlete profile", { exact: true }).fill("Avery Private Synthetic");
+  await dialog.getByRole("button", { name: "Find athlete", exact: true }).click();
+  await dialog
+    .getByLabel("Choose athlete profile", { exact: true })
+    .selectOption(String(addition.privateTarget.id));
+  await dialog
+    .getByLabel("Choose race edition", { exact: true })
+    .selectOption(String(addition.edition.id));
+  await saveButton.waitFor();
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert.ok(
+    await dialog.evaluate((el) => el.getBoundingClientRect().width <= innerWidth),
+    "Addition dialog fits a mobile viewport",
+  );
+  await dialog
+    .getByLabel("Why this result belongs to this athlete")
+    .fill("Synthetic captured original time and athlete identity reviewed.");
+  await dialog.getByRole("checkbox").nth(0).check();
+  await dialog.getByRole("checkbox").nth(1).check();
+  await page.screenshot({ path: resolve(root, "finder-add-profile-mobile.png"), fullPage: true });
+  await saveButton.click();
+  await dialog.getByText("Result added to Avery Private Synthetic.", { exact: true }).waitFor();
+  await dialog.getByText("Saved privately with the athlete profile.", { exact: true }).waitFor();
+  const [savedCapture] =
+    await sql`select result_visibility,chip_time_seconds,gun_time_seconds,result_details from results where athlete_id=${addition.privateTarget.id}`;
+  assert.equal(savedCapture.result_visibility, "private");
+  assert.equal(savedCapture.chip_time_seconds, null);
+  assert.equal(savedCapture.gun_time_seconds, null);
+  assert.equal(savedCapture.result_details.timing.finishSeconds, 2405.12);
+  await dialog.getByRole("button", { name: "Done", exact: true }).click();
+  console.log(
+    "Add to profile browser verified: staff authorization, cancellation, exact archive addition, existing-assignment block, saved capture edition selection, mobile save, confirmation and privacy.",
   );
   assert.equal(
     externalBrowserRequests.length,

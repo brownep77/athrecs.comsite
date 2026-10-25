@@ -13,6 +13,11 @@ import {
 } from "@/lib/athlete-finder/core";
 import { AthleteSourceCheck } from "./AthleteSourceCheck";
 import { AthleteSourceCoverage } from "./AthleteSourceCoverage";
+import { FinderAddToProfile } from "./FinderAddToProfile";
+import {
+  finderProfileSource,
+  type FinderProfileReceipt,
+} from "@/lib/athlete-finder/add-to-profile";
 
 const finderInputClass =
   "mt-1 min-h-11 w-full min-w-0 rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg";
@@ -54,7 +59,15 @@ function reviewLink(row: FinderRow): { href: string; label: string } | null {
   return null;
 }
 
-function MatchRow({ row }: { row: FinderRow }) {
+function MatchRow({
+  row,
+  onAdd,
+  receipt,
+}: {
+  row: FinderRow;
+  onAdd: () => void;
+  receipt?: FinderProfileReceipt;
+}) {
   const review = reviewLink(row);
   const source = finderSourceLink(row.sourceUrl);
   return (
@@ -93,6 +106,15 @@ function MatchRow({ row }: { row: FinderRow }) {
         )}
       </td>
       <td className="p-3">
+        {receipt ? (
+          <p className="mb-2 text-xs font-semibold text-green-800">Added to {receipt.name}</p>
+        ) : finderProfileSource(row) ? (
+          <Button className="mb-2" variant="secondary" onClick={onAdd}>
+            {row.resultId ? "View profile attachment" : "Add to profile"}
+          </Button>
+        ) : row.athleteId ? (
+          <p className="mb-2 text-xs font-semibold">Already attached to {row.name}'s profile</p>
+        ) : null}
         {review ? (
           <a
             href={review.href}
@@ -123,6 +145,8 @@ export function AthleteResultFinder({
   const [sourceId, setSourceId] = useState(initialSource);
   const [kind, setKind] = useState<FinderStoreKind | "all">("all");
   const [validation, setValidation] = useState("");
+  const [addingRow, setAddingRow] = useState<FinderRow | null>(null);
+  const [addedRows, setAddedRows] = useState<Record<string, FinderProfileReceipt>>({});
   const [submitted, setSubmitted] = useState<FinderSearchInput | null>(null);
   const registry = useQuery({
     queryKey: ["admin-fixture-sources"],
@@ -163,6 +187,17 @@ export function AthleteResultFinder({
   }
   return (
     <div className="min-w-0 space-y-6">
+      {addingRow && (
+        <FinderAddToProfile
+          key={addingRow.key}
+          row={addingRow}
+          onClose={() => setAddingRow(null)}
+          onSaved={(receipt) => {
+            setAddedRows((previous) => ({ ...previous, [addingRow.key]: receipt }));
+            if (submitted) search.mutate(submitted);
+          }}
+        />
+      )}
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="max-w-3xl space-y-2">
           <p className="text-xs font-semibold uppercase tracking-widest text-cyan-800">
@@ -516,7 +551,12 @@ export function AthleteResultFinder({
                   </thead>
                   <tbody>
                     {results.rows.map((row) => (
-                      <MatchRow key={row.key} row={row} />
+                      <MatchRow
+                        key={row.key}
+                        row={row}
+                        receipt={addedRows[row.key]}
+                        onAdd={() => setAddingRow(row)}
+                      />
                     ))}
                   </tbody>
                 </table>

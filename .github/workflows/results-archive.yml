@@ -5,11 +5,13 @@ on:
       - "src/lib/results-archive/**"
       - "src/lib/athlete-finder/**"
       - "src/components/staff/AthleteResultFinder.tsx"
+      - "src/components/staff/FinderAddToProfile.tsx"
       - "src/components/staff/AthleteSourceCheck.tsx"
       - "src/components/staff/AthleteSourceCoverage.tsx"
       - "src/routes/admin/athlete-result-finder.tsx"
       - "scripts/verify-athlete-source-*.mjs"
       - "scripts/verify-athlete-identity-review.mjs"
+      - "scripts/verify-finder-add-to-profile.mjs"
       - "scripts/backfill-athlete-finder-capture-index.mjs"
       - "scripts/verify-athlete-finder-capture-backfill.mjs"
       - "src/components/staff/*Archive*"
@@ -76,6 +78,7 @@ jobs:
         run: |
           npm run verify:athlete-source-finder
           npm run verify:athlete-identity-review
+          npm run verify:finder-add-to-profile
           npm run verify:athlete-source-coverage
           npm run verify:athlete-finder-capture-backfill
           npm run verify:athlete-source-check
