@@ -84,7 +84,10 @@ export const Route = createFileRoute("/sitemaps/$file")({
             await import("@/lib/athrecs/race-places.server");
           return sitemapResponse(
             sitemapXml(
-              racePlaceSitemapPaths(await readRacePlaceRows()).map((path) => `${SITE_URL}${path}`),
+              racePlaceSitemapPaths(await readRacePlaceRows())
+                // The directory root is already listed in pages.xml.
+                .filter((path) => path !== "/races/places")
+                .map((path) => `${SITE_URL}${path}`),
             ),
           );
         }
