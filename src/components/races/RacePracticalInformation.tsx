@@ -18,6 +18,7 @@ import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { raceGuideFor, supplementedStart } from "@/data/runrecs-race-guides";
 import { FIXTURE_DETAILS } from "@/data/fixture-details";
+import { racePageReviewFor } from "@/data/race-page-reviews";
 
 export function RacePracticalInformation({
   data,
@@ -28,7 +29,8 @@ export function RacePracticalInformation({
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? upcoming : upcoming.slice(0, event.sport === "Parkrun" ? 6 : 12);
   const venue = venueForEvent(event);
-  const guide = raceGuideFor(event, upcoming[0]?.event_date);
+  const review = racePageReviewFor(event.slug, upcoming[0]?.event_date);
+  const guide = review?.guide ?? raceGuideFor(event, upcoming[0]?.event_date);
   const address = guide?.venue || venue.address;
   const postcode = guide?.postcode || venue.postcode;
   const place = compactFixtureLocation({
@@ -98,13 +100,21 @@ export function RacePracticalInformation({
                       <p
                         className={`mt-1 text-sm ${start ? "font-semibold text-accent" : "text-muted"}`}
                       >
-                        {edition.start_label ??
+                        {(edition.distance_code === "Half"
+                          ? racePageReviewFor(event.slug, edition.event_date)?.startLabel
+                          : undefined) ??
+                          edition.start_label ??
                           (start ? `Starts ${start}` : "Start time not yet verified")}
                       </p>
                       <p className="mt-1 text-sm text-muted">
-                        {statusLabel(
-                          effectiveStatus(edition.event_date, edition.status as EntryStatus),
-                        )}
+                        {review &&
+                        edition.event_date === review.date &&
+                        edition.distance_code === "Half" &&
+                        edition.status === "TBC"
+                          ? "Date confirmed · Check entry availability with the organiser"
+                          : statusLabel(
+                              effectiveStatus(edition.event_date, edition.status as EntryStatus),
+                            )}
                       </p>
                     </div>
                     {entry ? (
@@ -182,7 +192,7 @@ export function RacePracticalInformation({
           </h2>
           <div>
             <p className="text-sm font-semibold">
-              {guide ? "Venue / race HQ" : "Listed venue / area"}
+              {review ? "Race start" : guide ? "Venue / race HQ" : "Listed venue / area"}
             </p>
             <p className="mt-1 flex flex-wrap items-center gap-1.5 text-sm leading-relaxed text-muted">
               <span>{location || "Location to be confirmed"}</span>

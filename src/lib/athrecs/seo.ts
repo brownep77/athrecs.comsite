@@ -1,4 +1,5 @@
 /** Shared SEO helpers — titles, Open Graph, JSON-LD for traditional + voice search. */
+import { racePageReviewFor } from "../../data/race-page-reviews.ts";
 
 export const SITE_URL = "https://www.athrecs.com";
 export const SITE_NAME = "ATHRECS.com";
@@ -160,10 +161,12 @@ export function sportsEventJsonLd(
   }
 
   // An unknown or invalid local time must not corrupt an otherwise known date.
+  const review = racePageReviewFor(input.slug, date);
   const start =
-    input.startTime && /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.startTime)
+    review?.startDate ??
+    (input.startTime && /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.startTime)
       ? `${date}T${input.startTime}`
-      : date;
+      : date);
   // Match todayIso() and visible entry deadlines: the site's calendar day is
   // Europe/London, including daylight saving, rather than the server's UTC day.
   const today = new Intl.DateTimeFormat("en-CA", {
@@ -197,7 +200,7 @@ export function sportsEventJsonLd(
         : undefined,
     eventStatus: start ? "https://schema.org/EventScheduled" : undefined,
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: {
+    location: review?.location ?? {
       "@type": "Place",
       name: [input.city, input.country].filter(Boolean).join(", ") || input.name,
       address: {
@@ -208,13 +211,14 @@ export function sportsEventJsonLd(
       },
     },
     sport: input.sport || "Athletics",
-    organizer:
-      input.organiser?.trim() &&
-      // Legacy imports sometimes store source instructions or licensing labels
-      // here. These are not organiser identities; retain them in storage only.
-      !/^(unknown|tbc|n\/a|see (?:official (?:race )?(?:site|website)|runabc \/ organiser|event listing)|not recorded|official event organiser|england athletics licensed competition|world athletics \/ national federation|utmb world series \/ local organiser|park west race organiser \/ eventmaster)$/i.test(
-        input.organiser.trim(),
-      )
+    organizer: review
+      ? { "@type": "Organization", name: review.organiser, url: review.website }
+      : input.organiser?.trim() &&
+          // Legacy imports sometimes store source instructions or licensing labels
+          // here. These are not organiser identities; retain them in storage only.
+          !/^(unknown|tbc|n\/a|see (?:official (?:race )?(?:site|website)|runabc \/ organiser|event listing)|not recorded|official event organiser|england athletics licensed competition|world athletics \/ national federation|utmb world series \/ local organiser|park west race organiser \/ eventmaster)$/i.test(
+            input.organiser.trim(),
+          )
         ? { "@type": "Organization", name: input.organiser.trim(), url: input.website || undefined }
         : undefined,
     offers: input.entryOptions?.flatMap((option) => {

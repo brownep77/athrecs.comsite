@@ -67,6 +67,7 @@ import { RaceEntryOptions } from "@/components/races/RaceEntryOptions";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { editionEntry } from "@/lib/athrecs/race-information";
 import { raceSearchContent } from "@/lib/athrecs/race-search-content";
+import { racePageReviewFor, reviewedRacePage } from "@/data/race-page-reviews";
 
 type EditionRow = {
   id: number;
@@ -90,7 +91,8 @@ type EditionRow = {
 
 export const Route = createFileRoute("/races/$slug")({
   loader: async ({ params }) => {
-    const data = await getEventBySlug({ data: params.slug });
+    const loaded = await getEventBySlug({ data: params.slug });
+    const data = loaded ? reviewedRacePage(loaded) : null;
     if (data) {
       if (data.event.slug !== params.slug) {
         throw redirect({
@@ -302,6 +304,7 @@ export function RacePageContent({
     date: next?.event_date,
   };
   const nextStart =
+    racePageReviewFor(event.slug, next?.event_date)?.startLabel ??
     next?.start_label ??
     formatStartTime(
       checkedFixtureEventStart(event.slug, next?.event_date, next?.start_time ?? null),
