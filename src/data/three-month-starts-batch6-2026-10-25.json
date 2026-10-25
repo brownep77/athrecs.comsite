@@ -1,0 +1,348 @@
+{
+  "ultra-trail-kempen|2026-10-31": {
+    "summary": "Ultra Trail Kempen. Starts are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://www.ultra-trail-kempen.be/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "100K": {
+        "time": "05:00",
+        "note": "Current organiser two-day 2026 programme explicitly assigns Saturday 31 October run 100 km to 05:00 and run 160 km to 06:00. Walks and Sunday 50 km are separate.",
+        "publicNote": ""
+      },
+      "160K": {
+        "time": "06:00",
+        "note": "Current organiser two-day 2026 programme explicitly assigns Saturday 31 October run 100 km to 05:00 and run 160 km to 06:00. Walks and Sunday 50 km are separate.",
+        "publicNote": ""
+      }
+    }
+  },
+  "corriendo-al-centenario-pucv|2026-11-08": {
+    "summary": "Corriendo al Centenario PUCV. Starts are local to the race venue.",
+    "timeZone": "America/Santiago",
+    "sourceUrl": "https://assets.efluj.com/file/efluj-static/media/events/terms/39ccba5f-47ad-4960-9c0e-7c4d25c35fc2.pdf",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10K": {
+        "time": "08:30",
+        "note": "Organiser rules, Article 2, explicitly give 8 November 2026: competitive 10 km 08:30 and recreational 3 km 10:00. The entry-page 07:30 header is not the category start.",
+        "publicNote": ""
+      },
+      "3K": {
+        "time": "10:00",
+        "note": "Organiser rules, Article 2, explicitly give 8 November 2026: competitive 10 km 08:30 and recreational 3 km 10:00. The entry-page 07:30 header is not the category start.",
+        "publicNote": ""
+      }
+    }
+  },
+  "victoria-park-5k-10k-half-marathon-january|2027-01-10": {
+    "summary": "Victoria Park 5K, 10K & Half Marathon. Starts are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-january-2027",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "09:30",
+        "note": "RunThrough 10 January 2027 header, race-day programme and logistics all give half marathon 09:30; other distances have separate starts.",
+        "publicNote": ""
+      }
+    }
+  },
+  "jekyll-island-marathon|2027-01-17": {
+    "summary": "Jekyll Island Marathon. Starts are local to the race venue.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://www.qrunningco.com/runjekyll",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:30",
+        "note": "Organiser 2027 weekend programme: Sunday 17 January marathon and half marathon start 07:30. Saturday races, briefing and packet collection are separate.",
+        "publicNote": ""
+      }
+    }
+  },
+  "bermuda-marathon|2027-01-17": {
+    "summary": "Bermuda Marathon. Starts are local to the race venue.",
+    "timeZone": "Atlantic/Bermuda",
+    "sourceUrl": "https://www.bermudatrianglechallenge.com/event-races/marathon/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "note": "Organiser 2027 marathon page explicitly gives Sunday 17 January 07:00 at Royal Naval Dockyard. Ferry departure 05:30 is not the start.",
+        "publicNote": ""
+      }
+    }
+  },
+  "rtt-afan-forest-trail-10k-5k|2026-11-29": {
+    "summary": "RTT Afan Forest Trail 10K & 5K. Starts are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.aspirexevents.com/e/rtt-afan-forest-trail-10k-and-5k-13869",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "11:00",
+        "note": "Current organiser 29 November 2026 programme explicitly lists 5 km and 10 km start 11:00, after 10:50 briefing.",
+        "publicNote": ""
+      }
+    }
+  },
+  "whiskey-tango-foxtrot-trail-races|2027-01-16": {
+    "summary": "Whiskey Tango Foxtrot Trail Half Marathon & 5 Mile. Starts are local to the race venue.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://runsignup.com/Race/Events/NC/Gibsonville/WTFTrailHalf",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5M": {
+        "time": "10:00",
+        "note": "Organiser-authorised RunSignup 16 January 2027 category programme: 5 Mile and economy 5 Mile start 10:00 EST. Registration close and half-marathon clocks are separate.",
+        "publicNote": ""
+      },
+      "Half": {
+        "time": "09:30",
+        "note": "Organiser-authorised category programme: main half marathon 09:30 EST, limited early-start/no-awards half 08:30 EST; ruck half also 08:30. Entrants must use their selected category.",
+        "publicNote": "The 08:30 early-start category is limited to entrants needing extra time and is not eligible for awards. Follow your entry confirmation.",
+        "label": "Main start 09:30 EST · approved early start 08:30 EST"
+      }
+    }
+  },
+  "rabid-raccoon-25k|2027-01-09": {
+    "summary": "Rabid Raccoon 25K. Starts are local to the race venue.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://ultrasignup.com/register.aspx?did=138553",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "25K": {
+        "time": "08:30",
+        "note": "Organiser-linked UltraSignup 2027 race-day section explicitly gives the 25 km start 08:30 EST on 9 January. Packet collection ends 08:15.",
+        "publicNote": ""
+      }
+    }
+  },
+  "nicosia-marathon|2027-01-24": {
+    "summary": "Nicosia Marathon. Starts are local to the race venue.",
+    "timeZone": "Asia/Nicosia",
+    "sourceUrl": "https://nicosiamarathon.com/week-program/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "06:45",
+        "note": "Organiser 24 January 2027 week programme and marathon page both give marathon 06:45. Countdown-style 07:00 is not the race timetable.",
+        "publicNote": ""
+      }
+    }
+  },
+  "sun-moon-lake-marathon|2026-11-01": {
+    "summary": "Sun Moon Lake Marathon. Starts are local to the race venue.",
+    "timeZone": "Asia/Taipei",
+    "sourceUrl": "https://isports-service.com/2026-%E7%B0%A1%E7%AB%A0/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "06:30",
+        "note": "Organiser 2026 regulations explicitly give 1 November marathon 42 km start 06:30, separately from gathering at 06:00, 29 km 06:35 and walk 06:40.",
+        "publicNote": ""
+      }
+    }
+  },
+  "the-one-in-the-park-victoria-november|2026-11-15": {
+    "summary": "The One In The Park Victoria November. Starts are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://onerace.events/events/victoria-park-half-marathon-10-mile-10k-november-2026",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "09:30",
+        "note": "Current organiser pre-race information explicitly gives Sunday 15 November 2026: half marathon 09:30; 10 Mile and 10 km 09:35. Race-number collection is 08:00.",
+        "publicNote": ""
+      },
+      "10mi": {
+        "time": "09:35",
+        "note": "Current organiser pre-race information explicitly gives Sunday 15 November 2026: half marathon 09:30; 10 Mile and 10 km 09:35. Race-number collection is 08:00.",
+        "publicNote": ""
+      },
+      "10K": {
+        "time": "09:35",
+        "note": "Current organiser pre-race information explicitly gives Sunday 15 November 2026: half marathon 09:30; 10 Mile and 10 km 09:35. Race-number collection is 08:00.",
+        "publicNote": ""
+      }
+    }
+  },
+  "larnaka-marathon|2026-11-15": {
+    "summary": "Larnaka Marathon. Starts are local to the race venue.",
+    "timeZone": "Asia/Nicosia",
+    "sourceUrl": "https://larnakamarathon.com/week-program/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "06:55",
+        "note": "Organiser 15 November 2026 week programme and marathon-specific page agree marathon 06:55, before the separate half marathon at 07:05.",
+        "publicNote": ""
+      }
+    }
+  },
+  "florence-marathon|2026-11-29": {
+    "summary": "Florence Marathon. Starts are local to the race venue.",
+    "timeZone": "Europe/Rome",
+    "sourceUrl": "https://www.firenzemarathon.it/en/marathon-regulation/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "note": "Organiser 2026 marathon regulations explicitly give Sunday 29 November start 08:30; assemble in assigned grid by 08:00. Generic FAQ contains older collection dates, so edition-specific regulations take precedence.",
+        "publicNote": ""
+      }
+    }
+  },
+  "mental-elf-fun-run-derbyshire|2026-11-29": {
+    "summary": "Mental Elf Fun Run Derbyshire. Starts are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.derbyshiremind.org.uk/mental-elf-2026/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "11:00",
+        "note": "Current organiser 2026 page explicitly gives Sunday 29 November: 10 km 10:00 and family 5 km fun run 11:00. This supersedes stale date/time prose on the linked entry page.",
+        "publicNote": ""
+      }
+    }
+  },
+  "klm-curacao-marathon|2026-11-29": {
+    "summary": "KLM Curaçao Marathon. Starts are local to the race venue.",
+    "timeZone": "America/Curacao",
+    "sourceUrl": "https://curacaomarathon.com/runners/race-week-activities",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "03:15",
+        "note": "Organiser 28–29 November 2026 weekend programme and current course page agree full marathon Sunday 29 November 03:15; half marathon and shorter distances have different starts.",
+        "publicNote": ""
+      }
+    }
+  },
+  "fiat-torino-city-marathon|2026-11-29": {
+    "summary": "FIAT Torino City Marathon. Starts are local to the race venue.",
+    "timeZone": "Europe/Rome",
+    "sourceUrl": "https://irp.cdn-website.com/3aa5a876/files/uploaded/TCM26+-+Dispositivo+di+gara.pdf",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "note": "Organiser-linked TCM26 race regulations first page explicitly gives 29 November 2026 marathon start 08:30, subject to organisational changes; 07:00–08:00 is exceptional on-day registration.",
+        "publicNote": ""
+      }
+    }
+  },
+  "world-aids-day-red-run|2026-11-21": {
+    "summary": "World AIDS Day Red Run. Starts are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.redrun.org.uk/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10K": {
+        "time": null,
+        "note": "Organiser 2026 FAQ explicitly provides a free start between 12:20 and 12:50, with no official group/gun start or chip time; 11:00 is village opening.",
+        "publicNote": "Choose your start within this window. This is an untimed event with no single gun time.",
+        "label": "Start window 12:20–12:50 GMT"
+      },
+      "5K": {
+        "time": null,
+        "note": "Organiser 2026 FAQ explicitly provides a free start between 12:20 and 12:50, with no official group/gun start or chip time; 11:00 is village opening.",
+        "publicNote": "Choose your start within this window. This is an untimed event with no single gun time.",
+        "label": "Start window 12:20–12:50 GMT"
+      }
+    }
+  },
+  "chocomoussetrail|2026-11-29": {
+    "summary": "Chocomoussetrail. Starts are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://chocomoussetrail.be/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": null,
+        "note": "Organiser Snow Edition 29 November 2026 advertises 5, 8, 10, 15 and 21 km, all with free starts 08:30–11:30. Routes page explicitly describes 21 km as a half marathon. Existing 08:30 is only the beginning of the window.",
+        "publicNote": "Start at any time within this window. This is a recreational run or walk without chip timing.",
+        "label": "Start window 08:30–11:30 CET"
+      },
+      "8K": {
+        "time": null,
+        "note": "Organiser Snow Edition 29 November 2026 advertises 5, 8, 10, 15 and 21 km, all with free starts 08:30–11:30. Routes page explicitly describes 21 km as a half marathon. Existing 08:30 is only the beginning of the window.",
+        "publicNote": "Start at any time within this window. This is a recreational run or walk without chip timing.",
+        "label": "Start window 08:30–11:30 CET"
+      },
+      "10K": {
+        "time": null,
+        "note": "Organiser Snow Edition 29 November 2026 advertises 5, 8, 10, 15 and 21 km, all with free starts 08:30–11:30. Routes page explicitly describes 21 km as a half marathon. Existing 08:30 is only the beginning of the window.",
+        "publicNote": "Start at any time within this window. This is a recreational run or walk without chip timing.",
+        "label": "Start window 08:30–11:30 CET"
+      },
+      "15K": {
+        "time": null,
+        "note": "Organiser Snow Edition 29 November 2026 advertises 5, 8, 10, 15 and 21 km, all with free starts 08:30–11:30. Routes page explicitly describes 21 km as a half marathon. Existing 08:30 is only the beginning of the window.",
+        "publicNote": "Start at any time within this window. This is a recreational run or walk without chip timing.",
+        "label": "Start window 08:30–11:30 CET"
+      },
+      "Half Marathon": {
+        "time": null,
+        "note": "Organiser Snow Edition 29 November 2026 advertises 5, 8, 10, 15 and 21 km, all with free starts 08:30–11:30. Routes page explicitly describes 21 km as a half marathon. Existing 08:30 is only the beginning of the window.",
+        "publicNote": "Start at any time within this window. This is a recreational run or walk without chip timing.",
+        "label": "Start window 08:30–11:30 CET"
+      }
+    }
+  },
+  "donkmeerloop|2026-11-01": {
+    "summary": "De Mooiste Halve / Donkmeerloop. Starts are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://www.demooistehalve.com/info.html",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10K": {
+        "time": "11:30",
+        "note": "Organiser current programme gives 10 km 11:30 and half marathon 13:00; linked SQMTime entry confirms 1 November 2026.",
+        "publicNote": ""
+      },
+      "Half Marathon": {
+        "time": "13:00",
+        "note": "Organiser current programme gives 10 km 11:30 and half marathon 13:00; linked SQMTime entry confirms 1 November 2026.",
+        "publicNote": ""
+      }
+    }
+  },
+  "istanbul-marathon|2026-11-01": {
+    "summary": "Istanbul Marathon. Starts are local to the race venue.",
+    "timeZone": "Europe/Istanbul",
+    "sourceUrl": "https://maraton.istanbul/race-day-program-2/?lang=en",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "note": "Organiser 1 November 2026 race-day programme explicitly gives marathon 09:00; wheelchair start is separately 08:45.",
+        "publicNote": ""
+      }
+    }
+  },
+  "h-t-remembrance-sunday-run|2026-11-08": {
+    "summary": "H&T Remembrance Sunday Run. Starts are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://hare-tortoise-running.eventize.co.uk/e/remembrance-sunday-2026-543",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "09:30",
+        "note": "Organiser-authorised 8 November 2026 entry programme category data explicitly gives 09:30 UTC for 10km, Half Marathon and Marathon; existing values reconfirmed. The separate 6.5mi stored category remains unmatched.",
+        "publicNote": ""
+      },
+      "Marathon": {
+        "time": "09:30",
+        "note": "Organiser-authorised 8 November 2026 entry programme category data explicitly gives 09:30 UTC for 10km, Half Marathon and Marathon; existing values reconfirmed. The separate 6.5mi stored category remains unmatched.",
+        "publicNote": ""
+      },
+      "10K": {
+        "time": "09:30",
+        "note": "Organiser-authorised 8 November 2026 entry programme category data explicitly gives 09:30 UTC for 10km, Half Marathon and Marathon; existing values reconfirmed. The separate 6.5mi stored category remains unmatched.",
+        "publicNote": ""
+      }
+    }
+  }
+}

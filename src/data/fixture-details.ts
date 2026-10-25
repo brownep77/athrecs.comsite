@@ -3,6 +3,7 @@ import countyExpansion from "./county-expansion-2026-10-21.json" with { type: "j
 import countyExpansionMore from "./county-expansion-more-2026-10-21.json" with { type: "json" };
 import countyExpansionChecked from "./county-expansion-checked-2026-10-21.json" with { type: "json" };
 import countyTbcReview from "./county-tbc-review-2026-10-21.json" with { type: "json" };
+import batch6ThreeMonthStarts from "./three-month-starts-batch6-2026-10-25.json" with { type: "json" };
 
 import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type: "json" };
 import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
@@ -389,6 +390,16 @@ export function isReviewedFixturePlaceholder(slug: string, date: string, distanc
     (Object.hasOwn(countyExpansion.details, `${slug}|${date}`) ||
       Object.hasOwn(countyExpansionMore.details, `${slug}|${date}`))
   );
+}
+
+// Apply this exact-edition review without replacing other checked distances.
+for (const [key, reviewed] of Object.entries(batch6ThreeMonthStarts)) {
+  const existing = FIXTURE_DETAILS[key];
+  FIXTURE_DETAILS[key] = {
+    ...existing,
+    ...reviewed,
+    starts: { ...existing?.starts, ...reviewed.starts },
+  };
 }
 
 /** Explicit start of a confirmed multi-distance programme; all other events keep their fallback. */
