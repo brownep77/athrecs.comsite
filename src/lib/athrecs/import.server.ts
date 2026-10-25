@@ -254,21 +254,24 @@ export function parseEventsCsv(csv: string): {
       const i = idx(name);
       return i >= 0 ? (cols[i] ?? "") : "";
     };
+    // An absent column preserves existing evidence; an explicit blank cell
+    // can clear a reviewed mistake. New records store either as unknown.
+    const geography = (name: string) => (idx(name) < 0 ? undefined : get(name));
     const name = get("name") || get("event") || get("event_name");
     if (!name) continue;
     const sport = get("sport") || "Running";
-    const city = get("city") || "";
+    const city = geography("city");
     const slug = slugify(get("slug") || name);
     if (!eventsMap.has(slug)) {
       eventsMap.set(slug, {
         slug,
         name,
         sport,
-        country: get("country") || "",
-        county: get("county") || "",
+        country: geography("country"),
+        county: geography("county"),
         city,
-        area: get("area") || "",
-        surface: get("surface") || "",
+        area: geography("area"),
+        surface: geography("surface"),
         summary: get("summary") || name,
         description: get("description") || "",
         organiser: get("organiser") || "",

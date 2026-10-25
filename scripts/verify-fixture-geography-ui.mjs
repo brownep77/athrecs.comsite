@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright";
 import { checkedUrl } from "./browser-guard.mjs";
 import { countryFlag } from "../src/lib/athrecs/country-flags.ts";
@@ -107,10 +107,18 @@ try {
       // Client navigation updates the URL before replacing the previous fixture
       // rows. Wait for the filtered result set, still requiring every country
       // flag to match rather than accepting stale or partially filtered cards.
-      await page.waitForFunction((expected) => {
-        const rendered = [...document.querySelectorAll("#fixtures [data-country-code]")];
-        return rendered.length > 0 && rendered.every((flag) => flag.getAttribute("data-country-code") === expected);
-      }, countryFlag(chosen).code);
+      try {
+        await page.waitForFunction((expected) => {
+          const rendered = [...document.querySelectorAll("#fixtures [data-country-code]")];
+          return rendered.length > 0 && rendered.every((flag) => flag.getAttribute("data-country-code") === expected);
+        }, countryFlag(chosen).code, { timeout: 30_000 });
+      } catch (error) {
+        console.error(JSON.stringify({ sport, width, chosen, url: page.url(), errors,
+          flags: await flags.evaluateAll((items) => items.map((item) => item.getAttribute("data-country-code"))) }));
+        await page.screenshot({ path: `artifacts/${sport}-country-failed-${width}.png` });
+        writeFileSync(`artifacts/${sport}-country-failed-${width}.html`, await page.content());
+        throw error;
+      }
       for (const flag of await flags.all())
         assert.equal(await flag.getAttribute("data-country-code"), countryFlag(chosen).code, sport);
       await page.screenshot({ path: `artifacts/${sport}-country-${width}.png` });

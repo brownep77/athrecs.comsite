@@ -5,11 +5,11 @@ const { applyImportBundle, parseEventsCsv } = await import("../src/lib/athrecs/i
 const { pg, sql } = await bulkFixture();
 try {
   const parsed = parseEventsCsv("name,sport,country,city\nSynthetic Virtual Open,CrossFit,International,Virtual");
-  assert.equal(parsed.events[0].county, "");
-  assert.equal(parsed.events[0].surface, "");
+  assert.equal(parsed.events[0].county, undefined);
+  assert.equal(parsed.events[0].surface, undefined);
   assert.equal(parsed.events[0].summary, "Synthetic Virtual Open");
   const unknown = parseEventsCsv("name\nSynthetic Unknown Venue").events[0];
-  for (const field of ["country", "county", "city", "surface"]) assert.equal(unknown[field], "");
+  for (const field of ["country", "county", "city", "surface"]) assert.equal(unknown[field], undefined);
 
   const event = { slug: "synthetic-virtual-open", name: "Synthetic Virtual Open", sport: "CrossFit", country: "International", city: "Virtual" };
   const apply = async (bundle) => {
@@ -21,6 +21,8 @@ try {
   assert.deepEqual(await read(), { country: "International", county: "", city: "Virtual", area: "", surface: "" });
   await apply({ events: [{ ...event, country: "Sweden", county: "Stockholm County", city: "Stockholm", area: "Test Venue", surface: "Indoor" }] });
   await apply({ events: [{ slug: event.slug, name: event.name, sport: event.sport }] });
+  assert.deepEqual(await read(), { country: "Sweden", county: "Stockholm County", city: "Stockholm", area: "Test Venue", surface: "Indoor" });
+  await apply(parseEventsCsv("name,sport,slug\nSynthetic Virtual Open,CrossFit,synthetic-virtual-open"));
   assert.deepEqual(await read(), { country: "Sweden", county: "Stockholm County", city: "Stockholm", area: "Test Venue", surface: "Indoor" });
   await apply({ events: [{ ...event, county: "", surface: "" }] });
   assert.equal((await read()).county, "", "Explicit corrections can clear an invented county");
