@@ -1,9 +1,9 @@
 {
   "checkedAt": "2026-10-25",
-  "scope": "Initial missing-start queue for 25–27 October 2026. Per-pass checkpoint, not a claim of catalogue-wide verification. Requery live editions before resuming; other publication may have changed them.",
+  "scope": "Initial missing-start queue for 25–27 October 2026. Per-pass checkpoint, not a claim of catalogue-wide verification. Requery live editions before resuming; other publication may have changed them. Continuation checked fresh production revision 360.",
   "counts": {
     "confirmed_programme_start": 1,
-    "unchecked_in_this_pass": 50,
+    "unchecked_in_this_pass": 40,
     "rescheduled": 4,
     "distance_scope_unresolved": 2,
     "provisional": 1,
@@ -13,7 +13,12 @@
     "start_not_found_in_opened_programme": 1,
     "conflicting": 2,
     "confirmed_first_start_wave_details_inaccessible": 1,
-    "primary_schedule_inaccessible": 1
+    "primary_schedule_inaccessible": 2,
+    "confirmed_pending_guarded_distance_correction": 1,
+    "distance_mapping_conflict": 2,
+    "distance_scope_conflicting": 1,
+    "conflicting_start_scope": 4,
+    "official_date_conflicts_with_stored": 1
   },
   "items": [
     {
@@ -107,7 +112,9 @@
       "distance": "2.3K",
       "checkedAt": "2026-10-25",
       "status": "rescheduled",
-      "sources": ["https://www.tiranamarathon.com/en"],
+      "sources": [
+        "https://www.tiranamarathon.com/en"
+      ],
       "finding": "Old 25 October dates withheld. Marathon/Half/10K confirmed 15 November 09:00 CET and added to same canonical event. We Too is listed for 14 November, but current exact distance remains unverified: do not carry 2.3K forward."
     },
     {
@@ -117,7 +124,9 @@
       "distance": "10K",
       "checkedAt": "2026-10-25",
       "status": "rescheduled",
-      "sources": ["https://www.tiranamarathon.com/en"],
+      "sources": [
+        "https://www.tiranamarathon.com/en"
+      ],
       "finding": "Old 25 October dates withheld. Marathon/Half/10K confirmed 15 November 09:00 CET and added to same canonical event. We Too is listed for 14 November, but current exact distance remains unverified: do not carry 2.3K forward."
     },
     {
@@ -127,7 +136,9 @@
       "distance": "Half",
       "checkedAt": "2026-10-25",
       "status": "rescheduled",
-      "sources": ["https://www.tiranamarathon.com/en"],
+      "sources": [
+        "https://www.tiranamarathon.com/en"
+      ],
       "finding": "Old 25 October dates withheld. Marathon/Half/10K confirmed 15 November 09:00 CET and added to same canonical event. We Too is listed for 14 November, but current exact distance remains unverified: do not carry 2.3K forward."
     },
     {
@@ -137,7 +148,9 @@
       "distance": "Marathon",
       "checkedAt": "2026-10-25",
       "status": "rescheduled",
-      "sources": ["https://www.tiranamarathon.com/en"],
+      "sources": [
+        "https://www.tiranamarathon.com/en"
+      ],
       "finding": "Old 25 October dates withheld. Marathon/Half/10K confirmed 15 November 09:00 CET and added to same canonical event. We Too is listed for 14 November, but current exact distance remains unverified: do not carry 2.3K forward."
     },
     {
@@ -153,12 +166,12 @@
       "date": "2026-10-25",
       "distance": "7K",
       "checkedAt": "2026-10-25",
-      "status": "distance_scope_unresolved",
+      "status": "distance_mapping_conflict",
       "sources": [
         "https://genturbantrail.be/nl/praktische-info/",
-        "https://genturbantrail.be/nl/het-parcours/"
+        "https://genturbantrail.be/nl/inschrijven/"
       ],
-      "finding": "Official 25 October waves 09:00/09:20/09:40/10:00/10:20/10:40; untimed. Current course page did not expose distances in retrieved text. Resolve stored 7K/12K versus other advertised 8/13 km before mapping waves."
+      "finding": "Official current programme lists about 8K, not stored 7K. Untimed waves are 09:00/09:20/09:40/10:00/10:20/10:40 CEST. Correct distance in place before mapping first wave."
     },
     {
       "editionId": 78236554,
@@ -166,12 +179,12 @@
       "date": "2026-10-25",
       "distance": "12K",
       "checkedAt": "2026-10-25",
-      "status": "distance_scope_unresolved",
+      "status": "distance_mapping_conflict",
       "sources": [
         "https://genturbantrail.be/nl/praktische-info/",
-        "https://genturbantrail.be/nl/het-parcours/"
+        "https://genturbantrail.be/nl/inschrijven/"
       ],
-      "finding": "Official 25 October waves 09:00/09:20/09:40/10:00/10:20/10:40; untimed. Current course page did not expose distances in retrieved text. Resolve stored 7K/12K versus other advertised 8/13 km before mapping waves."
+      "finding": "Official current programme lists about 13K, not stored 12K. Untimed waves are 09:00/09:20/09:40/10:00/10:20/10:40 CEST. Correct distance in place before mapping first wave."
     },
     {
       "editionId": 78236555,
@@ -199,7 +212,13 @@
       "eventSlug": "banja-luka-marathon",
       "date": "2026-10-25",
       "distance": "5K",
-      "status": "unchecked_in_this_pass"
+      "status": "distance_scope_conflicting",
+      "checkedAt": "2026-10-25",
+      "sources": [
+        "https://banjalukamaraton.com/",
+        "https://runsignup.com/Race/BA/BanjaLuka/BLmarathon"
+      ],
+      "finding": "Official programme distinguishes 2x5K relay and separate Women's 5K. Authorised registration gives 08:30 for marathon, half, 10K and relays but not a standalone 5K. Resolve stored generic 5K identity before assigning a clock."
     },
     {
       "editionId": 109455819,
@@ -215,7 +234,9 @@
       "distance": "Marathon",
       "checkedAt": "2026-10-25",
       "status": "provisional",
-      "sources": ["https://niagarafallsmarathon.com/marathon-event.html"],
+      "sources": [
+        "https://niagarafallsmarathon.com/marathon-event.html"
+      ],
       "finding": "08:15 EDT explicitly tentative; keep machine clock null and show provisional label. 2026 course entirely in Canada."
     },
     {
@@ -223,35 +244,61 @@
       "eventSlug": "maule-corre",
       "date": "2026-10-25",
       "distance": "0.8K",
-      "status": "unchecked_in_this_pass"
+      "status": "conflicting_start_scope",
+      "checkedAt": "2026-10-25",
+      "sources": [
+        "https://guca.cl/att_tickets/public/e/770/80-maule-corre"
+      ],
+      "finding": "Authorised entry page shows 08:00 but also says bib/chip collection is 08:00-08:50 and exposes no distance start timetable. Do not assign 08:00 to this 0.8K."
     },
     {
       "editionId": 109456041,
       "eventSlug": "maule-corre",
       "date": "2026-10-25",
       "distance": "3K",
-      "status": "unchecked_in_this_pass"
+      "status": "conflicting_start_scope",
+      "checkedAt": "2026-10-25",
+      "sources": [
+        "https://guca.cl/att_tickets/public/e/770/80-maule-corre"
+      ],
+      "finding": "Authorised entry page shows 08:00 but also says bib/chip collection is 08:00-08:50 and exposes no distance start timetable. Do not assign 08:00 to this 3K."
     },
     {
       "editionId": 109456042,
       "eventSlug": "maule-corre",
       "date": "2026-10-25",
       "distance": "5K",
-      "status": "unchecked_in_this_pass"
+      "status": "conflicting_start_scope",
+      "checkedAt": "2026-10-25",
+      "sources": [
+        "https://guca.cl/att_tickets/public/e/770/80-maule-corre"
+      ],
+      "finding": "Authorised entry page shows 08:00 but also says bib/chip collection is 08:00-08:50 and exposes no distance start timetable. Do not assign 08:00 to this 5K."
     },
     {
       "editionId": 109456043,
       "eventSlug": "maule-corre",
       "date": "2026-10-25",
       "distance": "10K",
-      "status": "unchecked_in_this_pass"
+      "status": "conflicting_start_scope",
+      "checkedAt": "2026-10-25",
+      "sources": [
+        "https://guca.cl/att_tickets/public/e/770/80-maule-corre"
+      ],
+      "finding": "Authorised entry page shows 08:00 but also says bib/chip collection is 08:00-08:50 and exposes no distance start timetable. Do not assign 08:00 to this 10K."
     },
     {
       "editionId": 83428475,
       "eventSlug": "changsha-marathon",
       "date": "2026-10-25",
       "distance": "Marathon",
-      "status": "unchecked_in_this_pass"
+      "status": "official_date_conflicts_with_stored",
+      "checkedAt": "2026-10-25",
+      "sources": [
+        "https://www.marathonchangsha.com/Detail/362",
+        "https://www.marathonchangsha.com/Detail/402"
+      ],
+      "finding": "Current organiser confirms Sunday 15 November 2026 at 07:00 CST, conflicting with stored AIMS-based 25 October. Prepare guarded in-place date/start correction; preserve edition ID 83428475."
     },
     {
       "editionId": 83428474,
@@ -260,7 +307,9 @@
       "distance": "Marathon",
       "checkedAt": "2026-10-25",
       "status": "confirmed",
-      "sources": ["https://chengdumarathon.cn/column/articleDetail/95?column_id=66&lang=cn"],
+      "sources": [
+        "https://chengdumarathon.cn/column/articleDetail/95?column_id=66&lang=cn"
+      ],
       "finding": "Marathon A/B/C and elites 07:30; D/E 07:50. Half 08:10 is outside this stored marathon edition."
     },
     {
@@ -310,7 +359,13 @@
       "eventSlug": "wa-les-foul-es-monterelaises-7244787",
       "date": "2026-10-25",
       "distance": "Other",
-      "status": "unchecked_in_this_pass"
+      "status": "confirmed_pending_guarded_distance_correction",
+      "checkedAt": "2026-10-25",
+      "sources": [
+        "https://www.foulees-monterelaises.com/",
+        "https://www.foulees-monterelaises.com/le-reglement/"
+      ],
+      "finding": "Official organiser regulations confirm the 2026 10K starts 10:00 CEST from rue Leo Lagrange. Stored Other/0km must be corrected in place before publication; preserve edition ID 71614992."
     },
     {
       "editionId": 71614991,
@@ -438,7 +493,13 @@
       "eventSlug": "sierra-leone-marathon",
       "date": "2026-10-25",
       "distance": "Marathon",
-      "status": "unchecked_in_this_pass"
+      "status": "unchecked_in_this_pass",
+      "checkedAt": "2026-10-25",
+      "sources": [
+        "https://street-child.org/challenges/the-sierra-leone-marathon/",
+        "https://street-child.org/challenges/"
+      ],
+      "finding": "Official organiser confirms 25 October but only says races usually begin around 06:00. Approximate wording is not an exact 2026 start; continue urgent athlete-guide search."
     },
     {
       "editionId": 71614997,
@@ -514,7 +575,12 @@
       "eventSlug": "ironman-703-agadir",
       "date": "2026-10-25",
       "distance": "70.3",
-      "status": "unchecked_in_this_pass"
+      "status": "primary_schedule_inaccessible",
+      "checkedAt": "2026-10-25",
+      "sources": [
+        "https://www.ironman.com/races/im703-agadir/schedule"
+      ],
+      "finding": "Official index exposes a 06:45-07:05 race start after transition 05:15-06:30, but direct page returned HTTP 402 and public-browser retry lacked credits. Do not publish snippet-only 06:45."
     },
     {
       "editionId": 71616275,
@@ -558,5 +624,21 @@
       "distance": "HYROX",
       "status": "unchecked_in_this_pass"
     }
-  ]
+  ],
+  "continuation": {
+    "checkedAt": "2026-10-25T08:45:00Z",
+    "catalogueRevision": 360,
+    "workflowRun": {
+      "id": 40170967250,
+      "conclusion": "success"
+    },
+    "reviewedEditionRows": 11,
+    "reviewedEvents": 7,
+    "newVerifiedLive": 0,
+    "libraryCheckpoint": {
+      "libraryFileId": "libfile_977bc9030fe8819184440cb484418609",
+      "version": 25
+    },
+    "millenniumWatch": "Fresh official pages still conflict on edition labeling/date and do not confirm a 2027 start. 06:15 remains an unverified prior-year lead."
+  }
 }
