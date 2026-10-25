@@ -1,4 +1,4 @@
-# London Marathon 2025 profile import
+# London Marathon edition profile import
 
 This supervised import uses retained Pace Notes and MarathonGuide observations.
 The private collection is checksum-pinned by the mapper. It does not fetch a
@@ -22,7 +22,7 @@ blocked timing site, infer missing race facts, or mark secondary records verifie
   existing athlete. It does not add another public performance, rewrite an
   existing history, change a privacy hash, claim an account or verify identity.
 - A year-only WMM observation may be associated with the independently reviewed
-  London 2025 edition after its event title, year, marathon distance, original
+  London edition after its event title, year, marathon distance, original
   source identity and exact time have been compared. Its original date precision
   remains unchanged. A frozen, snapshot-bound review is required for this path.
 - Ambiguous identities, source-quality flags, conflicting facts and excluded
@@ -63,6 +63,60 @@ athlete merges. Existing result/history JSON is preserved so per-performance
 privacy choices and user-managed facts continue to apply. Stable profile slugs,
 provider/history IDs and guarded evidence receipts make interruption and replay
 safe; a changed identity snapshot requires renewed review.
+
+## Concurrent profile changes and continuation
+
+A freshness failure after another import, profile edit or merge changes the
+athlete directory requires a fresh snapshot, new reviewed plan and new
+rehearsal. Preserve the rejection diagnostics, old snapshots, plans, reviews and
+receipts; never edit a frozen fingerprint or weaken the existing guards to
+force continuation.
+
+Coordinate a window without competing profile writes. Take a new complete
+production snapshot into a new private directory, independently review the
+resulting plan, and rehearse that exact frozen plan on a matching production
+copy. The live source, identity, privacy, lock, statement and freshness checks
+still apply.
+
+Include profiles committed by earlier attempts as existing candidates. Reuse
+only uniquely matched existing performances, preserving their original source
+identities, histories, verification and privacy. Retain earlier partial receipts
+and count prior creations, later creations and repeated evidence associations
+separately; do not recreate a previously committed profile.
+
+## Additional editions
+
+The original 2025 collection remains the default for compatibility with its
+saved plan and receipts. New 2024 and 2023 runs require a validated private
+edition configuration; the configuration is copied into the plan as
+`editionContext`. It contains the explicit date, canonical/equivalent edition
+IDs, batch ID, expected source counts, observed MarathonGuide archive route and
+subevent, source-file SHA-256 pins, retained collection identity/hash and owner
+instruction. See `scripts/lib/london-edition-context.py` for the exact schema.
+
+Pass `--edition-config /private/edition-context.json` to the snapshot command.
+Call the planner's `configure(context)` before loading source files and building
+that edition's plan. The snapshot records the context digest. The applier and
+independent verifier configure themselves exclusively from the frozen plan and
+check the snapshot and receipt digest; there is no separate live configuration
+that can silently change a reviewed import. `configure(None)` restores the
+original 2025 scope in a local script.
+
+Each edition has a separate plan, snapshot, review receipt and production
+receipt. Publish editions sequentially and take a fresh production snapshot for
+the next one. This includes newly created profiles in the following duplicate
+screen. A shared name in another year still requires identity review; this
+extension does not add a name-only cross-year merge rule.
+
+For a full-sized trial of both insertion paths, use `--review --limit 1000
+--review-linked-limit 1000 --batch-size 1000`. The existing default linked trial
+limit remains 100. The same-plan replay, source-integrity guards, publication
+locks and 55-second mutation statement limit are unchanged.
+
+Before publishing 2024 or 2023, deploy the fixed Pace Notes credit with wording
+covering selected London editions instead of claiming every subset is 2025.
+The live verifier checks the required v3 credit and rejects the old 2025-only
+wording on new-edition sample profiles.
 
 ## Focused checks
 

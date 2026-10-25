@@ -1,4 +1,4 @@
-"""Owner-authorized London 2025 profile import, with immutable evidence and replay guards.
+"""Owner-authorized London edition profile import, with immutable evidence and replay guards.
 
 Plans, credentials, snapshots and receipts belong outside the repository. This
 adapter creates provisional unclaimed profiles, preserves every observation in
@@ -26,7 +26,10 @@ import uuid
 ROOT = Path(__file__).resolve().parent
 PROJECT = 'lively-resonance-04577945'
 PRODUCTION = 'br-flat-unit-aydbwlfk'
+YEAR = 2025
+EDITION_DATE = '2025-04-27'
 BATCH = 'london-2025-20261024'
+EDITION_CONTEXT = None
 INSTRUCTION = 'can you create athletes and profiles and merge the ones there already checking for duplicates please.'
 COLLECTION_FILE_ID = 'libfile_3119e0d114d0819190bd1ba13c1ce5a0'
 COLLECTION_SHA256 = '347788b3bf0e0b3043c5a6011ae52b6c8ca6024847c9465b451114766e8cd3ea'
@@ -41,6 +44,12 @@ def load(name, path):
 
 base = load('london_apply_base', ROOT / 'create-private-archive-profiles.py')
 planner = load('london_apply_plan', ROOT / 'lib/london-profile-plan.py')
+context_schema = load('london_apply_context', ROOT / 'lib/london-edition-context.py')
+_LEGACY = {
+    'year': YEAR, 'date': EDITION_DATE, 'batchId': BATCH,
+    'ownerInstruction': INSTRUCTION, 'collectionFileId': COLLECTION_FILE_ID,
+    'collectionSha256': COLLECTION_SHA256,
+}
 
 
 def encoded(value):
@@ -82,13 +91,15 @@ def validate_private_paths(args):
         raise ValueError('Keep the rehearsal receipt separate from the production receipt')
 
 
-def select_groups(plan, review, limit):
+def select_groups(plan, review, limit, linked_limit=100):
+    if isinstance(linked_limit, bool) or not isinstance(linked_limit, int) or not 1 <= linked_limit <= 1000:
+        raise ValueError('Review linked limit must be between 1 and 1000')
     chosen = [g for g in plan['groups'] if g['disposition'] in ('new', 'linked')]
     if not review or not limit:
         return chosen, None
     # A creation-heavy edition must still rehearse the existing-performance path.
     chosen = ([g for g in chosen if g['disposition'] == 'new'][:limit]
-              + [g for g in chosen if g['disposition'] == 'linked'][:100])
+              + [g for g in chosen if g['disposition'] == 'linked'][:linked_limit])
     held = [g for g in plan['groups'] if g['disposition'] == 'held'][:50]
     return chosen, {key for g in [*chosen, *held] for key in g['observationKeys']}
 
@@ -113,7 +124,7 @@ def captured_row(observation, group):
     return {
         'name': observation['name'], 'bib': '', 'club': '',
         'gender': observation.get('gender') or '', 'category': observation.get('category') or '',
-        'distanceLabel': 'Marathon', 'date': '2025-04-27', 'status': 'finished',
+        'distanceLabel': 'Marathon', 'date': EDITION_DATE, 'status': 'finished',
         'tableKey': observation['sourceScope'], 'sourceRow': observation['sourceKey'],
         'sourceKey': observation['sourceKey'], 'sourceUrl': observation['sourceUrl'],
         'finishTime': observation['finishTime'], 'finishSeconds': observation['finishSeconds'],
@@ -127,6 +138,7 @@ def captured_row(observation, group):
 
 
 def capture_parts(plan, selected=None):
+    assert_plan_context(plan)
     groups = {key: group for group in plan['groups'] for key in group['observationKeys']}
     by_provider = collections.defaultdict(list)
     for observation in plan['observations']:
@@ -141,11 +153,11 @@ def capture_parts(plan, selected=None):
             part = observations[offset:offset + 500]
             rows = [captured_row(o, groups[o['observationKey']]) for o in part]
             # Locator-derived identity stays stable when a trial uses a subset.
-            source_key = 'london-2025:' + provider + ':rows-' + digest([o['sourceKey'] for o in part])[:24]
+            source_key = f'london-{YEAR}:' + provider + ':rows-' + digest([o['sourceKey'] for o in part])[:24]
             payload = {
                 'format': 'london-secondary-results-v1', 'contentType': 'application/json',
                 'publication': 'staff_only', 'batchId': BATCH,
-                'index': {'name': 'London Marathon 2025', 'date': '2025-04-27', 'location': 'London'},
+                'index': {'name': f'London Marathon {YEAR}', 'date': EDITION_DATE, 'location': 'London'},
                 'provider': part[0]['providerName'], 'rows': rows,
                 'retainedCollection': {'fileId': COLLECTION_FILE_ID, 'sha256': COLLECTION_SHA256},
                 'inputDigest': plan['inputDigest'],
@@ -258,27 +270,27 @@ def retain_captures(query, parts, receipt, save, workers=4):
     return evidence
 
 
-NEW_PROFILES = """WITH incoming AS (SELECT value p FROM jsonb_array_elements($1::jsonb)), created AS (
+_NEW_PROFILES_SQL = """WITH incoming AS (SELECT value p FROM jsonb_array_elements($1::jsonb)), created AS (
  INSERT INTO athletes(slug,display_name,given_name,family_name,gender,city,county,country,nation,bio,source_url,profile_type,profile_visibility,profile_roles,profile_details,profile_source_checked_at)
  SELECT p#>>'{athleteDraft,slug}',p#>>'{athleteDraft,displayName}',p#>>'{athleteDraft,givenName}',p#>>'{athleteDraft,familyName}',coalesce(nullif(p#>>'{athleteDraft,gender}',''),'U'),NULL,'','',NULL,'',p#>>'{history,sourceUrl}','Athlete','public','',p#>'{athleteDraft,profileDetails}',NULL
  FROM incoming WHERE NOT EXISTS(SELECT 1 FROM athlete_source_histories h WHERE h.provider='Pace Notes' AND h.external_id=p#>>'{history,externalId}')
  ON CONFLICT(slug) DO NOTHING RETURNING id,slug
 ), histories AS (
  INSERT INTO athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
- SELECT a.id,'Pace Notes',p#>>'{history,externalId}',p#>>'{history,sourceUrl}',(p#>>'{history,capturedAt}')::timestamptz,false,ARRAY[2025],ARRAY[2025],p#>'{history,performances}',now()
+ SELECT a.id,'Pace Notes',p#>>'{history,externalId}',p#>>'{history,sourceUrl}',(p#>>'{history,capturedAt}')::timestamptz,false,ARRAY[__LONDON_YEAR__],ARRAY[__LONDON_YEAR__],p#>'{history,performances}',now()
  FROM incoming JOIN created a ON a.slug=p#>>'{athleteDraft,slug}' RETURNING athlete_id,external_id
 ), audits AS (
  INSERT INTO network_audit_log(action,entity_type,entity_id,after_value,note)
  SELECT 'athlete.history_admin_published','athlete_source_history','Pace Notes:'||h.external_id,
  jsonb_build_object('athleteId',h.athlete_id,'batchId',$2::text,'planHash',$3::text,'groupId',p->>'groupId','sourceCaptureIds',p->'captureIds','sourceCompared',true,'officialSourceChecked',false,'identityVerified',false,'ownerInstruction',$4::text),
- 'Owner-authorized London 2025 profile; provisional unclaimed identity; retained secondary finish time; public CC BY credit; no chip/gun, placings, nationality or DOB inferred.'
+ 'Owner-authorized London __LONDON_YEAR__ profile; provisional unclaimed identity; retained secondary finish time; public CC BY credit; no chip/gun, placings, nationality or DOB inferred.'
  FROM histories h JOIN incoming ON h.external_id=p#>>'{history,externalId}' RETURNING id
 ) SELECT (SELECT count(*) FROM created)::int created,(SELECT count(*) FROM histories)::int histories,(SELECT count(*) FROM audits)::int audits"""
 
 
 # Keep each history lookup tied to its incoming external ID. The barrier avoids
 # stale provider statistics choosing all Pace Notes histories before the input.
-VERIFY_NEW = """WITH incoming AS (SELECT value p FROM jsonb_array_elements($1::jsonb))
+_VERIFY_NEW_SQL = """WITH incoming AS (SELECT value p FROM jsonb_array_elements($1::jsonb))
  SELECT a.id,a.slug,a.display_name,h.external_id,i.athlete_number
  FROM incoming CROSS JOIN LATERAL (
  SELECT hx.* FROM athlete_source_histories hx
@@ -293,30 +305,61 @@ VERIFY_NEW = """WITH incoming AS (SELECT value p FROM jsonb_array_elements($1::j
  AND a.source_url=p#>>'{history,sourceUrl}' AND a.bio='' AND a.profile_roles=''
  AND h.performances=p#>'{history,performances}' AND h.published_at IS NOT NULL AND NOT h.complete
  AND h.captured_at=(p#>>'{history,capturedAt}')::timestamptz AND h.source_url=p#>>'{history,sourceUrl}'
- AND h.years_expected=ARRAY[2025] AND h.years_captured=ARRAY[2025]
+ AND h.years_expected=ARRAY[__LONDON_YEAR__] AND h.years_captured=ARRAY[__LONDON_YEAR__]
  AND NOT EXISTS(SELECT 1 FROM athlete_account_links l WHERE l.athlete_id=a.id)
  AND NOT EXISTS(SELECT 1 FROM results r WHERE r.athlete_id=a.id)
  AND EXISTS(SELECT 1 FROM network_audit_log l WHERE l.action='athlete.history_admin_published' AND l.entity_id='Pace Notes:'||h.external_id AND l.after_value->>'athleteId'=a.id::text)
  ORDER BY a.id"""
 
 
-LINK_EVIDENCE = """WITH incoming AS(SELECT value p FROM jsonb_array_elements($1::jsonb)), added AS (
+_LINK_EVIDENCE_SQL = """WITH incoming AS(SELECT value p FROM jsonb_array_elements($1::jsonb)), added AS (
  INSERT INTO network_audit_log(action,entity_type,entity_id,after_value,note)
- SELECT 'athlete.london2025_evidence_reused','athlete',(p->>'athleteId'),
+ SELECT 'athlete.london__LONDON_YEAR___evidence_reused','athlete',(p->>'athleteId'),
  p||jsonb_build_object('batchId',$2::text,'planHash',$3::text,'ownerInstruction',$4::text,'identityVerified',false,'existingPerformancePreserved',true),
  'Imported observations reconciled with an existing performance. Original profile, result, history, visibility, claims and per-performance privacy hashes are unchanged.'
- FROM incoming WHERE NOT EXISTS(SELECT 1 FROM network_audit_log l WHERE l.action='athlete.london2025_evidence_reused' AND l.after_value->>'batchId'=$2 AND l.after_value->>'groupId'=p->>'groupId')
+ FROM incoming WHERE NOT EXISTS(SELECT 1 FROM network_audit_log l WHERE l.action='athlete.london__LONDON_YEAR___evidence_reused' AND l.after_value->>'batchId'=$2 AND l.after_value->>'groupId'=p->>'groupId')
  RETURNING id
 ) SELECT count(*)::int linked FROM added"""
 
 
-VERIFY_LINKED = """INSERT INTO london_import_guard SELECT count(*)=jsonb_array_length($1::jsonb)
+_VERIFY_LINKED_SQL = """INSERT INTO london_import_guard SELECT count(*)=jsonb_array_length($1::jsonb)
  FROM jsonb_array_elements($1::jsonb) p JOIN network_audit_log l
- ON l.action='athlete.london2025_evidence_reused' AND l.after_value->>'batchId'=$2
+ ON l.action='athlete.london__LONDON_YEAR___evidence_reused' AND l.after_value->>'batchId'=$2
  AND l.after_value->>'groupId'=p->>'groupId'
  WHERE l.entity_type='athlete' AND l.entity_id=p->>'athleteId'
  AND l.after_value=p||jsonb_build_object('batchId',$2::text,'planHash',$3::text,
  'ownerInstruction',$4::text,'identityVerified',false,'existingPerformancePreserved',true)"""
+
+
+def configure(context=None):
+    """Bind one validated edition; transport, integrity and publication rules stay fixed."""
+    global YEAR, EDITION_DATE, BATCH, INSTRUCTION, COLLECTION_FILE_ID, COLLECTION_SHA256, EDITION_CONTEXT
+    global NEW_PROFILES, VERIFY_NEW, LINK_EVIDENCE, VERIFY_LINKED
+    validated = context_schema.validate_context(context) if context is not None else None
+    values = validated if validated is not None else _LEGACY
+    planner.configure(validated)
+    YEAR, EDITION_DATE, BATCH = values['year'], values['date'], values['batchId']
+    INSTRUCTION = values['ownerInstruction']
+    COLLECTION_FILE_ID, COLLECTION_SHA256 = values['collectionFileId'], values['collectionSha256']
+    EDITION_CONTEXT = copy.deepcopy(validated)
+    # The only SQL substitution is an independently validated integer edition
+    # year. All source values, instructions and identity data remain parameters.
+    def year_sql(template):
+        return template.replace('__LONDON_YEAR__', str(YEAR))
+    NEW_PROFILES, VERIFY_NEW = year_sql(_NEW_PROFILES_SQL), year_sql(_VERIFY_NEW_SQL)
+    LINK_EVIDENCE, VERIFY_LINKED = year_sql(_LINK_EVIDENCE_SQL), year_sql(_VERIFY_LINKED_SQL)
+    return copy.deepcopy(EDITION_CONTEXT)
+
+
+def assert_plan_context(plan):
+    if plan.get('editionContext') != EDITION_CONTEXT or plan.get('batchId') != BATCH:
+        raise ValueError('Plan differs from the configured London edition')
+
+
+def configure_from_plan(plan):
+    configure(plan.get('editionContext'))
+    planner.validate_plan(plan)
+    assert_plan_context(plan)
 
 
 def guard_statements(fingerprint_sql, fingerprint, caps, fingerprint_tables):
@@ -340,6 +383,7 @@ def guard_statements(fingerprint_sql, fingerprint, caps, fingerprint_tables):
 
 
 def prepare_new(group, evidence, plan):
+    assert_plan_context(plan)
     row = copy.deepcopy(group)
     caps = {int(evidence[key]['id']): evidence[key] for key in group['observationKeys']}
     row['captureIds'] = sorted(caps)
@@ -361,17 +405,19 @@ def prepare_new(group, evidence, plan):
 def apply(args):
     validate_private_paths(args)
     plan = read_json(args.plan)
-    planner.validate_plan(plan)
-    if plan['batchId'] != BATCH:
-        raise ValueError('Wrong London import batch')
+    configure_from_plan(plan)
     plan_hash = digest(plan)
     snapshot = read_json(args.snapshot / 'snapshot.json')
     metadata = read_json(args.snapshot / 'metadata.json')
     if metadata.get('projectId') != PROJECT or metadata.get('batchId') != BATCH:
         raise ValueError('Identity snapshot belongs to a different project or batch')
+    context_digest = digest(EDITION_CONTEXT) if EDITION_CONTEXT is not None else None
+    if metadata.get('editionContextDigest') != context_digest:
+        raise ValueError('Identity snapshot belongs to a different London edition context')
     if planner._hash(snapshot) != plan['snapshotDigest']:
         raise ValueError('Identity snapshot changed after planning')
     snapshot_module = load('london_apply_snapshot', ROOT / 'snapshot-london-profiles.py')
+    snapshot_module.configure(EDITION_CONTEXT)
     fingerprint_sql = snapshot_module.fingerprint_sql()
     # A resumed review compute may need to load the directory into its cache.
     # This transport budget also covers upload time; mutation statements retain
@@ -384,6 +430,7 @@ def apply(args):
         if not (proof.get('planHash') == plan_hash and proof.get('completed') is True
                 and proof.get('replayVerified') is True and proof.get('projectId') == PROJECT
                 and proof.get('snapshotFingerprint') == metadata['fingerprint']
+                and proof.get('editionContextDigest') == context_digest
                 and proof.get('existingDataFingerprintUnchanged') is True
                 and proof.get('branchId') and proof.get('branchId') != PRODUCTION
                 and proof.get('mode') == 'review'):
@@ -393,10 +440,12 @@ def apply(args):
     current = query([(fingerprint_sql, [BATCH])], True)[0][0]['fingerprint']
     if current != metadata['fingerprint']:
         raise ValueError('Live identity data changed; take a new snapshot and re-review the plan')
-    chosen, selected = select_groups(plan, args.review, args.limit)
+    linked_limit = getattr(args, 'review_linked_limit', 100)
+    chosen, selected = select_groups(plan, args.review, args.limit, linked_limit)
     receipt = {'batchId': BATCH, 'projectId': PROJECT, 'branchId': cfg['branchId'], 'mode': 'review' if args.review else 'production',
-               'planHash': plan_hash, 'snapshotFingerprint': metadata['fingerprint'], 'planSummary': plan['summary'],
+               'planHash': plan_hash, 'snapshotFingerprint': metadata['fingerprint'], 'editionContextDigest': context_digest, 'planSummary': plan['summary'],
                'selectedGroups': dict(collections.Counter(g['disposition'] for g in chosen)), 'reviewNewLimit': args.limit if args.review else None,
+               'reviewLinkedLimit': linked_limit if args.review else None,
                'startedAt': dt.datetime.now(dt.timezone.utc).isoformat(), 'creditDeployment': args.credit_deployment,
                'created': 0, 'reused': 0, 'alreadyPresent': 0, 'profiles': [], 'reusedGroups': [], 'completed': False}
     save = lambda: dump(args.receipt, receipt)
@@ -455,6 +504,9 @@ def apply(args):
     print(json.dumps({key: value for key, value in receipt.items() if key not in ('profiles', 'reusedGroups', 'captures', 'planSummary')}, ensure_ascii=False), flush=True)
 
 
+configure()
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('connection', 'plan', 'snapshot', 'receipt'):
@@ -466,8 +518,9 @@ if __name__ == '__main__':
     parser.add_argument('--rehearsal-receipt', type=Path)
     parser.add_argument('--credit-deployment')
     parser.add_argument('--limit', type=int, default=0)
+    parser.add_argument('--review-linked-limit', type=int, default=100)
     parser.add_argument('--batch-size', type=int, default=1000)
     args = parser.parse_args()
-    if not 1 <= args.batch_size <= 1000 or args.limit < 0 or (args.limit and not args.review):
-        parser.error('Use batches of 1–1000; a positive limit is allowed only for review')
+    if not 1 <= args.batch_size <= 1000 or not 1 <= args.review_linked_limit <= 1000 or args.limit < 0 or (args.limit and not args.review) or (args.review_linked_limit != 100 and not args.review):
+        parser.error('Use batches/review-linked limits of 1–1000; selection limits are allowed only for review')
     apply(args)
