@@ -643,14 +643,15 @@
     "organisation_cycling_south_africa",
     "organisation_algeria_cycling"
   ],
-  "registryBefore": 1263,
-  "registryAfter": 1309,
+  "registryBefore": 1267,
+  "registryAfter": 1313,
   "enabled": 36,
-  "disabled": 1273,
+  "disabled": 1277,
   "held": {
     "algeria-cycling": "facyclisme.com could not be retrieved through structured fetch and web fallback; existing reference retained. Retrieval failure does not establish that the domain is wrong.",
     "eswatini-cycling": "Sports Council profile failed through structured fetch and web fallback. A similarly named cycling blog is not the national association; no primary-link change.",
     "cycling-south-africa": "Existing national homepage returned HTTP 403 in structured retrieval and web fallback. Link retained, availability unconfirmed in this pass."
   },
-  "limits": "Source-capability and directory review only. No fixtures, starts, athlete records, nationalities or individual performances imported or marked verified. All new sources are disabled manual research references. Raw captures and individual-source samples retained privately."
+  "limits": "Source-capability and directory review only. No fixtures, starts, athlete records, nationalities or individual performances imported or marked verified. All new sources are disabled manual research references. Raw captures and individual-source samples retained privately.",
+  "registryAtResearchStart": 1263
 }

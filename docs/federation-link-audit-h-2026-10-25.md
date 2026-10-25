@@ -8,7 +8,7 @@ Reviewed 14 targeted African national cycling entries and added nine Moroccan re
 - Three more specific membership references: Botswana's National Sport Commission, Uganda's National Council of Sports and Zimbabwe's Sports and Recreation Commission. These remain labelled as membership references, not national homepages.
 - Rwanda retains its UCI primary reference with a qualification about template personnel and ambiguous event dates on the national domain.
 - Nine new regional organisations, explicitly labelled regional: Béni Mellal-Khénifra, Casablanca-Settat, L’Oriental, Fès-Meknès, Guelmim-Oued Noun, Marrakech-Safi, Rabat-Salé-Kénitra, Souss-Massa and Tanger-Tétouan-Al Hoceïma. Each official FRMC profile was opened and checked against the regional directory. These pages provide governance and affiliated-club research, not verified athlete rosters.
-- Added 46 disabled manual sources and appended review notes to two existing source rows. The registry grows from 1,263 to 1,309 sources, with 36 enabled collectors unchanged and 1,273 disabled sources. The directory grows from 740 to 749 organisations; ten existing records are updated.
+- Added 46 disabled manual sources and appended review notes to two existing source rows. The registry grows from 1,267 to 1,313 sources, with 36 enabled collectors unchanged and 1,277 disabled sources. The directory grows from 740 to 749 organisations; ten existing records are updated.
 
 ## Source findings
 
@@ -36,4 +36,4 @@ No fixtures, starts, athlete records, nationalities or individual performances w
 
 ## Validation
 
-Source and organisation coverage, bulk jobs, directory, preservation, type checking, focused lint and development-build checks passed. All 740 original organisations remain; 730 are unchanged and ten retain their original check dates and non-link facts. All 1,263 old source rows are retained: 1,261 unchanged and two with appended notes. The 52 shared UCI associations and 36 enabled collectors are unchanged.
+Source and organisation coverage, bulk jobs, directory, preservation, type checking, focused lint and development-build checks passed. All 740 original organisations remain; 730 are unchanged and ten retain their original check dates and non-link facts. All 1,267 old source rows are retained: 1,265 unchanged and two with appended notes. The 52 shared UCI associations and 36 enabled collectors are unchanged.
