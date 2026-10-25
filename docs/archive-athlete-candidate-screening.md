@@ -28,6 +28,12 @@ conflict or source-name variation. Clubs are historical entry evidence. A
 candidate is not necessarily one unique athlete; names can be shared or change.
 Absence of a detected match is not proof that the person is absent from AthRecs.
 
+For a later supervised new-profile review, use the versioned
+[reviewed source identity policy](reviewed-source-identity-policy.md). It keeps
+this broad candidate discovery intact while recording source-supported distinct
+people and weak fuzzy nonblocking findings as different outcomes. Neither a
+screening score nor absence of a name conflict authorises a profile link/merge.
+
 The snapshot is time-bound. Recheck the live directory and all relevant evidence
 before creating a profile or attaching source results. Screening does not publish
 profiles, invite athletes, approve claims or verify a combined race history.
