@@ -91,7 +91,7 @@
   box-shadow: var(--shadow-card);
 }
 
-/* Public profile tables become labelled result cards on phones. One DOM record
+/* Public profile tables become labelled result cards on phones and tablets. One DOM record
    preserves links, filters, expansion and server-rendered/indexable results. */
 .public-athlete-profile {
   min-width: 0;
@@ -141,6 +141,10 @@
     min-height: 44px;
     font-size: 16px;
   }
+}
+/* Eight result columns cannot fit at tablet widths: keep the performance beside
+   the date instead of clipping it behind an off-screen horizontal scroll. */
+@media (max-width: 1023px) {
   .profile-table-wrap {
     overflow: visible;
     border: 0;
