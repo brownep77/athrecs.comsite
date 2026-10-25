@@ -14,6 +14,8 @@ import imminentStarts from "./imminent-starts-2026-10-25.json" with { type: "jso
 import urgentStarts from "./urgent-starts-followup-2026-10-25.json" with { type: "json" };
 import { isUrgentReviewedPlaceholder } from "./urgent-starts-followup-2026-10-25.ts";
 import threeMonthStarts from "./three-month-starts-2026-10-25.json" with { type: "json" };
+import thirdUrgentStarts from "./urgent-starts-third-2026-10-25.json" with { type: "json" };
+import { isThirdUrgentPlaceholder } from "./urgent-starts-third-2026-10-25.ts";
 import nextUrgentStarts from "./urgent-starts-next-2026-10-25.json" with { type: "json" };
 import { isNextUrgentPlaceholder } from "./urgent-starts-next-2026-10-25.ts";
 
@@ -74,6 +76,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   ...imminentStarts,
   ...urgentStarts,
   ...nextUrgentStarts,
+  ...thirdUrgentStarts,
   ...accraStart,
   "wa-32-hella-hamburg-half-marathon-7238156|2026-10-25": {
     place: { city: "Hamburg" },
@@ -363,6 +366,7 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
+  if (isThirdUrgentPlaceholder(slug, date, distance)) return true;
   if (isNextUrgentPlaceholder(slug, date, distance)) return true;
   if (isUrgentReviewedPlaceholder(slug, date, distance)) return true;
   // The federation import is the same half marathon, not another race distance.
