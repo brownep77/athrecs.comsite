@@ -8,6 +8,7 @@ const race = {
   timeZone: "Europe/London",
   pageUrl: "https://www.athrecs.com/races/test",
   location: "Test venue",
+  raceDayInformation: "Start and finish: Use the marked gate. HQ is at the hall.",
 };
 const request = (value = race) =>
   new Request("https://www.athrecs.com/api/event-calendar", {
@@ -28,6 +29,8 @@ for (const [input, status] of [
   [{ ...race, timeZone: {} }, 400],
   [{ ...race, name: "x".repeat(1001) }, 400],
   [{ ...race, provisional: "false" }, 400],
+  [{ ...race, raceDayInformation: {} }, 400],
+  [{ ...race, raceDayInformation: "x".repeat(2001) }, 400],
 ]) {
   assert.equal((await calendarDownloadResponse(request(input))).status, status);
   checks++;
@@ -39,7 +42,9 @@ assert.match(
   /^attachment; filename="[A-Za-z0-9-]+\.ics"$/,
 );
 assert.equal(response.headers.get("cache-control"), "private, no-store");
-assert.match(await response.text(), /DTSTART:20270704T090000Z\r\n/);
+const downloaded = (await response.text()).replace(/\r\n /g, "");
+assert.match(downloaded, /DTSTART:20270704T090000Z\r\n/);
+assert.match(downloaded, /Use the marked gate/);
 checks++;
 const attack = await calendarDownloadResponse(
   request({

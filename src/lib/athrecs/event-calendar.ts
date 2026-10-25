@@ -11,6 +11,7 @@ export type CalendarRace = {
   endTime?: string | null;
   timeZone?: string | null;
   location?: string | null;
+  raceDayInformation?: string | null;
   pageUrl: string;
   officialUrl?: string | null;
   entryUrl?: string | null;
@@ -22,6 +23,7 @@ export type CalendarEvent = {
   title: string;
   description: string;
   location: string;
+  officialUrl: string | null;
   pageUrl: string;
   date: string;
   endDateExclusive: string;
@@ -130,8 +132,11 @@ export function buildCalendarEvent(race: CalendarRace): CalendarEvent | null {
   const pageUrl = safeUrl(race.pageUrl) ?? "https://www.athrecs.com/";
   const official = safeUrl(race.officialUrl);
   const entry = safeUrl(race.entryUrl);
+  const location = clean(race.location);
+  const raceDayInformation = clean(race.raceDayInformation, 2000);
   const description = [
     title,
+    race.distance ? `Distance: ${clean(race.distance)}.` : "",
     race.provisional ? "PROVISIONAL DATE — confirm with the organiser before making plans." : "",
     startUtc
       ? `Local start: ${time} (${race.timeZone}).`
@@ -141,10 +146,15 @@ export function buildCalendarEvent(race: CalendarRace): CalendarEvent | null {
           ? `Listed local start: ${time}; timezone needs confirmation.`
           : "",
     race.endDate && !endUtc ? `Listed event dates: ${race.date} to ${race.endDate}.` : "",
+    location ? `Venue / race area: ${location}` : "",
+    raceDayInformation ? `Race-day information:\n${raceDayInformation}` : "",
     notice,
     "Check your assigned wave, exact start point and arrival instructions with the organiser.",
     `AthRecs: ${pageUrl}`,
-    official ? `Official website: ${official}` : "",
+    location
+      ? `Map of listed venue / area: https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
+      : "",
+    official ? `Race website: ${official}` : "",
     entry ? `Official entry: ${entry}` : "",
     "This is a one-off calendar copy. Check the race page for changes or cancellations.",
   ]
@@ -154,7 +164,8 @@ export function buildCalendarEvent(race: CalendarRace): CalendarEvent | null {
     uid: `${encodeURIComponent(new TextDecoder().decode(new TextEncoder().encode(race.id)))}@athrecs.com`,
     title: race.provisional ? `[Provisional] ${title}` : title,
     description,
-    location: clean(race.location),
+    location,
+    officialUrl: official,
     pageUrl,
     date: race.date,
     endDateExclusive: new Date(Date.parse(endDate + "T00:00:00Z") + DAY).toISOString().slice(0, 10),

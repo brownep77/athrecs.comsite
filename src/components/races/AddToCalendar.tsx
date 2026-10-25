@@ -39,6 +39,7 @@ export function AddToCalendar({ race }: { race: CalendarRace }) {
     endTime: race.endTime,
     timeZone: race.timeZone,
     location: race.location,
+    raceDayInformation: race.raceDayInformation,
     pageUrl: race.pageUrl,
     officialUrl: race.officialUrl,
     entryUrl: race.entryUrl,
@@ -67,6 +68,20 @@ export function AddToCalendar({ race }: { race: CalendarRace }) {
           {race.date}
           {event.startUtc ? ` · ${race.startTime} (${event.timeZone})` : " · Date-only reminder"}
         </p>
+        {event.location ? (
+          <p className="break-words text-sm text-muted">Venue / race area: {event.location}</p>
+        ) : null}
+        {event.officialUrl ? (
+          <a
+            href={event.officialUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent underline"
+          >
+            Race website
+            <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+          </a>
+        ) : null}
         {race.provisional ? (
           <p className="text-sm font-semibold">Provisional date — confirm with the organiser.</p>
         ) : null}
