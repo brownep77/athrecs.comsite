@@ -254,22 +254,25 @@ export function parseEventsCsv(csv: string): {
       const i = idx(name);
       return i >= 0 ? (cols[i] ?? "") : "";
     };
+    // An absent column preserves existing evidence; an explicit blank cell
+    // can clear a reviewed mistake. New records store either as unknown.
+    const geography = (name: string) => (idx(name) < 0 ? undefined : get(name));
     const name = get("name") || get("event") || get("event_name");
     if (!name) continue;
     const sport = get("sport") || "Running";
-    const city = get("city") || "Norfolk";
+    const city = geography("city");
     const slug = slugify(get("slug") || name);
     if (!eventsMap.has(slug)) {
       eventsMap.set(slug, {
         slug,
         name,
         sport,
-        country: get("country") || "England",
-        county: get("county") || "Norfolk",
+        country: geography("country"),
+        county: geography("county"),
         city,
-        area: get("area") || "",
-        surface: get("surface") || "Road",
-        summary: get("summary") || `${name} — Norfolk`,
+        area: geography("area"),
+        surface: geography("surface"),
+        summary: get("summary") || name,
         description: get("description") || "",
         organiser: get("organiser") || "",
         website: get("website") || get("entry_url") || "",
@@ -359,11 +362,11 @@ export async function applyImportBundle(
             update events set
               name = ${raw.name},
               sport = ${sport},
-              country = ${raw.country ?? "England"},
-              county = ${raw.county ?? "Norfolk"},
-              city = ${raw.city ?? ""},
-              area = ${raw.area ?? ""},
-              surface = ${raw.surface ?? "Road"},
+              country = coalesce(${raw.country ?? null}, country),
+              county = coalesce(${raw.county ?? null}, county),
+              city = coalesce(${raw.city ?? null}, city),
+              area = coalesce(${raw.area ?? null}, area),
+              surface = coalesce(${raw.surface ?? null}, surface),
               summary = ${raw.summary ?? ""},
               description = ${raw.description ?? ""},
               organiser = ${raw.organiser ?? ""},
@@ -377,9 +380,9 @@ export async function applyImportBundle(
             slug, name, sport, country, county, city, area, surface,
             summary, description, organiser, website, featured
           ) values (
-            ${slug}, ${raw.name}, ${sport}, ${raw.country ?? "England"},
-            ${raw.county ?? "Norfolk"},
-            ${raw.city ?? ""}, ${raw.area ?? ""}, ${raw.surface ?? "Road"},
+            ${slug}, ${raw.name}, ${sport}, ${raw.country ?? ""},
+            ${raw.county ?? ""},
+            ${raw.city ?? ""}, ${raw.area ?? ""}, ${raw.surface ?? ""},
             ${raw.summary ?? ""}, ${raw.description ?? ""},
             ${raw.organiser ?? ""}, ${raw.website ?? ""}, ${false}
           ) returning id
@@ -418,7 +421,7 @@ export async function applyImportBundle(
                 name: raw.eventName,
                 sport: "Running",
                 slug,
-                city: "Norfolk",
+                city: "",
                 distances: [raw.distance],
               },
             ],

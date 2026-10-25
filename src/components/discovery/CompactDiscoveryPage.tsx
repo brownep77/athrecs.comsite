@@ -304,9 +304,10 @@ export function CompactDiscoveryPage({
                   className="col-span-2 space-y-1.5 text-xs font-semibold sm:col-span-1"
                   htmlFor="compact-country"
                 >
-                  <span>Country</span>
+                  <span id="compact-country-label">Country</span>
                   <select
                     id="compact-country"
+                    aria-labelledby="compact-country-label"
                     name="country"
                     defaultValue={search.country ?? ""}
                     className={field}
@@ -320,9 +321,10 @@ export function CompactDiscoveryPage({
                   </select>
                 </label>
                 <label className="space-y-1.5 text-xs font-semibold" htmlFor="compact-month">
-                  <span>Month</span>
+                  <span id="compact-month-label">Month</span>
                   <select
                     id="compact-month"
+                    aria-labelledby="compact-month-label"
                     name="month"
                     defaultValue={search.month ?? ""}
                     className={field}
@@ -336,9 +338,10 @@ export function CompactDiscoveryPage({
                   </select>
                 </label>
                 <label className="space-y-1.5 text-xs font-semibold" htmlFor="compact-distance">
-                  <span>{fixtureFilterLabel(sport)}</span>
+                  <span id="compact-distance-label">{fixtureFilterLabel(sport)}</span>
                   <select
                     id="compact-distance"
+                    aria-labelledby="compact-distance-label"
                     name="distance"
                     defaultValue={search.distance ?? ""}
                     className={field}

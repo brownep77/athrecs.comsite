@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright";
 import { checkedUrl } from "./browser-guard.mjs";
 import { countryFlag } from "../src/lib/athrecs/country-flags.ts";
@@ -89,6 +89,7 @@ try {
     for (const sport of ["road-running", "trail-running", "track-and-field"]) {
       await page.goto(`${base}/sports/${sport}`, { waitUntil: "networkidle" });
       const countrySelect = page.getByLabel("Country", { exact: true });
+      await countrySelect.waitFor({ state: "visible" });
       const options = await countrySelect.locator("option").allTextContents();
       assert.equal(new Set(options).size, options.length, `${sport}: duplicate country options`);
       const chosen =
@@ -103,7 +104,21 @@ try {
         page.locator("#fixtures").getByRole("button", { name: "Search", exact: true }).click(),
       ]);
       const flags = page.locator("#fixtures [data-country-code]");
-      await flags.first().waitFor();
+      // Client navigation updates the URL before replacing the previous fixture
+      // rows. Wait for the filtered result set, still requiring every country
+      // flag to match rather than accepting stale or partially filtered cards.
+      try {
+        await page.waitForFunction((expected) => {
+          const rendered = [...document.querySelectorAll("#fixtures [data-country-code]")];
+          return rendered.length > 0 && rendered.every((flag) => flag.getAttribute("data-country-code") === expected);
+        }, countryFlag(chosen).code, { timeout: 30_000 });
+      } catch (error) {
+        console.error(JSON.stringify({ sport, width, chosen, url: page.url(), errors,
+          flags: await flags.evaluateAll((items) => items.map((item) => item.getAttribute("data-country-code"))) }));
+        await page.screenshot({ path: `artifacts/${sport}-country-failed-${width}.png` });
+        writeFileSync(`artifacts/${sport}-country-failed-${width}.html`, await page.content());
+        throw error;
+      }
       for (const flag of await flags.all())
         assert.equal(await flag.getAttribute("data-country-code"), countryFlag(chosen).code, sport);
       await page.screenshot({ path: `artifacts/${sport}-country-${width}.png` });
