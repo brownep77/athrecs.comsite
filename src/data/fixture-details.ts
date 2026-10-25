@@ -2,6 +2,7 @@ import countyExpansion from "./county-expansion-2026-10-21.json" with { type: "j
 import countyExpansionMore from "./county-expansion-more-2026-10-21.json" with { type: "json" };
 import countyExpansionChecked from "./county-expansion-checked-2026-10-21.json" with { type: "json" };
 import countyTbcReview from "./county-tbc-review-2026-10-21.json" with { type: "json" };
+import largeThreeMonthStarts from "./three-month-starts-batch-2026-10-25.json" with { type: "json" };
 
 import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type: "json" };
 import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
@@ -356,6 +357,15 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
     },
   },
 };
+
+// Merge only the reviewed distances; preserve other checked starts for the same event.
+for (const [key, detail] of Object.entries(largeThreeMonthStarts)) {
+  FIXTURE_DETAILS[key] = {
+    ...FIXTURE_DETAILS[key],
+    ...detail,
+    starts: { ...FIXTURE_DETAILS[key]?.starts, ...detail.starts },
+  };
+}
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
