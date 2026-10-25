@@ -15,6 +15,9 @@ on:
       - "src/data/imminent-starts-2026-10-25*"
       - "src/data/urgent-starts-followup-2026-10-25*"
       - "src/data/urgent-starts-next-2026-10-25*"
+      - "src/data/urgent-starts-third-2026-10-25*"
+      - "scripts/lib/urgent-starts-third-2026-10-25-review.mjs"
+      - "scripts/verify-urgent-starts-third.mjs"
       - "scripts/lib/urgent-starts-next-2026-10-25-review.mjs"
       - "scripts/verify-urgent-starts-next.mjs"
       - "scripts/lib/urgent-starts-followup-2026-10-25-review.mjs"
@@ -59,6 +62,7 @@ jobs:
       - run: node scripts/verify-imminent-starts.mjs
       - run: node scripts/verify-urgent-starts-followup.mjs
       - run: node scripts/verify-urgent-starts-next.mjs
+      - run: node scripts/verify-urgent-starts-third.mjs
       - run: node scripts/verify-race-sharing.mjs
       - run: node scripts/verify-event-calendar.mjs --mutations
       - run: node scripts/verify-event-calendar-catalogue.mjs

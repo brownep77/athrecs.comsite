@@ -17,6 +17,7 @@ export type {
 import { legacyRaceGeography } from "./legacy-race-geography";
 import { imminentReviewedAdditions, reviewImminentEdition } from "./imminent-starts-2026-10-25";
 import { urgentReviewedAdditions, urgentReviewedSeriesOverrides, reviewUrgentEdition } from "./urgent-starts-followup-2026-10-25";
+import { thirdUrgentAdditions, thirdUrgentSeriesOverrides, reviewThirdUrgentEdition } from "./urgent-starts-third-2026-10-25";
 import { nextUrgentAdditions, nextUrgentSeries, nextUrgentSeriesOverrides, reviewNextUrgentEdition } from "./urgent-starts-next-2026-10-25";
 import { clubs as rawClubs } from "./clubs";
 import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
@@ -471,12 +472,14 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
   ...legacyRaceGeography[series.slug],
   ...urgentReviewedSeriesOverrides[series.slug],
   ...nextUrgentSeriesOverrides[series.slug],
+  ...thirdUrgentSeriesOverrides[series.slug],
 }));
 
 const mergedEditions = [
   ...imminentReviewedAdditions,
   ...urgentReviewedAdditions,
   ...nextUrgentAdditions,
+  ...thirdUrgentAdditions,
   ...aimsEuropeEditions.filter((edition) => usedSlugs.has(edition.seriesSlug)),
   ...(coreEditions as Edition[]),
   ...(raceCollectionEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
@@ -651,7 +654,7 @@ export const editions: Edition[] = (() => {
     pushEdition(edition);
   }
 
-  return unique.map(reviewParkrunEdition).map(reviewImminentEdition).map(reviewUrgentEdition).map(reviewNextUrgentEdition);
+  return unique.map(reviewParkrunEdition).map(reviewImminentEdition).map(reviewUrgentEdition).map(reviewNextUrgentEdition).map(reviewThirdUrgentEdition);
 })();
 
 export { raceGroupDefinitions, raceGroupMemberships };
