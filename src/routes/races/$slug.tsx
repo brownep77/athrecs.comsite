@@ -427,8 +427,8 @@ export function RacePageContent({
                   {formatRaceDateShort(next.event_date)}
                 </p>
                 <p className="text-sm font-medium text-muted">
-                  {isRunningEvent && nextDayEditions.length > 1
-                    ? `${nextDayEditions.length} distances · see start times below`
+                  {nextDayEditions.length > 1
+                    ? `${nextDayEditions.length} ${isRunningEvent ? "distances" : "races"} · see start times below`
                     : (nextStart ??
                       (zoneAbbr ? `Time not yet verified · ${zoneAbbr}` : "Time not yet verified"))}
                 </p>
@@ -673,7 +673,11 @@ export function RacePageContent({
             />
             <Fact
               label="Local start"
-              value={nextStart ?? "Confirm officially"}
+              value={
+                nextDayEditions.length > 1
+                  ? "See category starts below"
+                  : (nextStart ?? "Confirm officially")
+              }
               hint={zoneAbbr ? `Venue zone ${zoneAbbr}` : undefined}
             />
             <Fact
@@ -1329,6 +1333,10 @@ function EditionList({
         <div className="grid gap-2">
           {visibleItems.map((ed) => {
             const st = effectiveStatus(ed.event_date, ed.status as EntryStatus);
+            const publicNote = calendarEvent
+              ? (FIXTURE_DETAILS[`${calendarEvent.slug}|${ed.event_date}`]?.starts[ed.distance_code]
+                  ?.publicNote ?? ed.notes)
+              : ed.notes;
             const start =
               ed.start_label ??
               formatStartTime(ed.start_time, {
@@ -1369,7 +1377,7 @@ function EditionList({
                       {ed.end_time ? ` at ${ed.end_time} local time` : ""}
                     </p>
                   ) : null}
-                  {ed.notes ? <p className="text-xs text-subtle">{ed.notes}</p> : null}
+                  {publicNote ? <p className="text-xs text-subtle">{publicNote}</p> : null}
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {calendarEvent ? (

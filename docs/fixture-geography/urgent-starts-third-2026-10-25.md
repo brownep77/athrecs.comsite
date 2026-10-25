@@ -91,3 +91,18 @@ ineligible. Page copy is scoped to the reviewed edition.
 The preceding passes' broad CI runs 40179200890 (PR 949) and 40179983871
 (PR 953) completed successfully. Production publication and live readback for
 this pass are recorded in the shared timing checkpoint after deployment.
+
+## Live-page follow-up
+
+Revision 380 published 15 editions (11 inserts and four Maule reconfirmations).
+The production readback exposed a calendar distinction: a qualified start label
+intentionally creates a date-only reminder. Removed redundant labels from the
+12 exact single-category starts and verified the real catalogue-to-calendar
+adapter. Changsha's first-gun label remains qualified because assigned waves
+can start later; its half marathon and the Ukrainian relay remain unconfirmed.
+
+The reviewed edition now supplies the page's category list, so Ukraine and
+Beernem no longer retain an unknown-distance heading. Multi-race days across
+all sports point to individual category starts in the headline and key facts.
+Beernem's cards use the reviewed public notes. Maule's official entry option
+shows closed for 25 October only, preserving other entry routes and years.

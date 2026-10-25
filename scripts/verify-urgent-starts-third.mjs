@@ -11,6 +11,7 @@ const { editions, seriesList } = await import("../src/data/catalogue.ts");
 const { thirdUrgentAdditions } = await import("../src/data/urgent-starts-third-2026-10-25.ts");
 const { reviewedRacePage } = await import("../src/data/race-page-reviews.ts");
 const { buildCalendarEvent } = await import("../src/lib/athrecs/event-calendar.ts");
+const { catalogueCalendarRace } = await import("../src/lib/athrecs/catalogue-calendar.ts");
 const { pg, sql } = await bulkFixture();
 try {
   const eventIds = new Set();
@@ -94,7 +95,25 @@ try {
     }
     assert.equal(checkedFixtureStart(slug, date, distance, "00:01"), start.time);
     assert.equal(checkedFixtureStart(slug, "2027-10-25", distance, null), null);
-    assert(checkedFixtureStartLabel(slug, date, distance));
+    assert.equal(checkedFixtureStartLabel(slug, date, distance), start.label ?? null);
+    const exported = buildCalendarEvent(
+      catalogueCalendarRace(
+        { slug, name: slug, country: "Test" },
+        {
+          id: row.id,
+          event_date: date,
+          distance_code: distance,
+          distance_km: row.distance_km,
+          status: row.status,
+          start_time: row.start_time,
+          start_label: checkedFixtureStartLabel(slug, date, distance),
+        },
+        "https://www.athrecs.com",
+      ),
+    );
+    if (start.label || start.time === null)
+      assert.equal(exported.startUtc, null, key + " qualified wave remains a date-only reminder");
+    else assert(exported.startUtc, key + " exact category start must export with a clock");
     const calendar = buildCalendarEvent({
       id: key,
       name: slug,
@@ -150,6 +169,7 @@ try {
     const page = reviewedRacePage(original);
     assert.equal(page.event.city, detail.place.city);
     assert.equal(page.event.description, detail.summary);
+    assert.deepEqual(page.distances, Object.keys(detail.starts));
     assert.equal(original.event.city, "Old city");
     assert.equal(
       reviewedRacePage({
@@ -159,6 +179,22 @@ try {
       "Old city",
     );
   }
+  const mauleEntry = reviewedRacePage({
+    event: { slug: "maule-corre" },
+    distances: ["Other"],
+    upcoming: ["2026-10-25", "2027-10-25"].map((event_date) => ({
+      event_date,
+      distance_code: "5K",
+      status: "Closed",
+      entry_options: [
+        { entry_type: "official", status: "open" },
+        { entry_type: "charity", status: "open" },
+      ],
+    })),
+  });
+  assert.equal(mauleEntry.upcoming[0].entry_options[0].status, "closed");
+  assert.equal(mauleEntry.upcoming[0].entry_options[1].status, "open");
+  assert.equal(mauleEntry.upcoming[1].entry_options[0].status, "open");
   const audit = await sql.query("select operation from catalogue_change_log where revision_id=$1", [
     published.revisionId,
   ]);
