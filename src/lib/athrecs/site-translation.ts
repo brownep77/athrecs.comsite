@@ -28,13 +28,6 @@ export const TRANSLATION_LANGUAGES = [
   { code: "id", flag: "🇮🇩", label: "Bahasa Indonesia", englishLabel: "Indonesian" },
   { code: "hi", flag: "🇮🇳", label: "हिन्दी", englishLabel: "Hindi" },
   { code: "th", flag: "🇹🇭", label: "ไทย", englishLabel: "Thai" },
-  {
-    code: "cy",
-    flag: "🏴\u{E0067}\u{E0062}\u{E0077}\u{E006C}\u{E0073}\u{E007F}",
-    label: "Cymraeg",
-    englishLabel: "Welsh",
-  },
-  { code: "ga", flag: "🇮🇪", label: "Gaeilge", englishLabel: "Irish" },
   { code: "af", flag: "🇿🇦", label: "Afrikaans", englishLabel: "Afrikaans" },
 ] as const;
 
