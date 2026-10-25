@@ -1,0 +1,16 @@
+{
+  "accra-international-marathon|2026-10-25": {
+    "place": { "city": "Accra" },
+    "summary": "A coastal marathon through Accra's beach communities, finishing at Labadi Beach Hotel.",
+    "timeZone": "Africa/Accra",
+    "sourceUrl": "https://aimghana.com/schedules.php",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "05:30",
+        "note": "2026 organiser schedule confirms the full marathon starts at 05:30 local (GMT, UTC+0) on Teshie Road near Family Health Hospital, opposite KAIPTC. Arrive at the start 30 minutes beforehand. The 04:30 hotel shuttle departure is not the race start. Registration closed at noon GMT on 24 October; no race-day registration. Schedule corroborated by the organiser's AIM 2026 entry page on ACTIVE.",
+        "publicNote": "Marathon starts at 05:30 GMT on Teshie Road near Family Health Hospital, opposite KAIPTC. Arrive 30 minutes before the start. No race-day registration."
+      }
+    }
+  }
+}

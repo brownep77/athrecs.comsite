@@ -5,6 +5,7 @@
  * Deduped by name+date+city against the existing catalogue merge.
  */
 import type { Edition, Series } from "./types";
+import accraStart from "./accra-start-2026-10-25.json" with { type: "json" };
 
 const CHECKED_AT = "2026-09-03";
 
@@ -10277,7 +10278,8 @@ export const runrecsGapFillEditions: Edition[] = [
     date: "2026-10-25",
     distance: "Marathon",
     distanceKm: 42.195,
-    status: "Open",
+    status: "Closed",
+    startTime: accraStart["accra-international-marathon|2026-10-25"].starts.Marathon.time,
     entryUrl: "https://aimghana.com/event-info.php",
     entryOptions: officialEntry(
       "accra-international-marathon",
@@ -10285,8 +10287,8 @@ export const runrecsGapFillEditions: Edition[] = [
       "https://aimghana.com/event-info.php",
       "Registration closes 24 October 2026 noon GMT. Race dated Sunday 25 October 2026.",
     ),
-    source: "https://aimghana.com/event-info.php",
-    notes: "Beach-to-beach course. Packet pickup at Labadi Beach Hotel.",
+    source: accraStart["accra-international-marathon|2026-10-25"].sourceUrl,
+    notes: `Beach-to-beach course. Packet pickup at Labadi Beach Hotel. Date checked 2026-10-25 against https://aimghana.com/schedules.php. ${accraStart["accra-international-marathon|2026-10-25"].starts.Marathon.note}`,
   },
 {
     seriesSlug: "kigali-international-peace-marathon",

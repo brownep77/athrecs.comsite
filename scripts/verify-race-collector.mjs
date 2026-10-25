@@ -247,6 +247,29 @@ assert.equal(
   }).candidates.length,
   1,
 );
+const missingStartReport = parseResearch({
+  output_text: JSON.stringify({ candidates: [c], sources: [c.sourceUrl], gaps: [] }),
+});
+assert.equal(missingStartReport.candidates[0].startTime, "", "never manufacture a start");
+assert.equal(missingStartReport.gaps.length, 1, "missing starts cannot disappear from review");
+assert(missingStartReport.gaps[0].includes(`${c.name} | ${c.date} | ${c.distanceLabel}`));
+const confirmedStartReport = parseResearch({
+  output_text: JSON.stringify({
+    candidates: [{ ...c, startTime: "09:15" }],
+    sources: [c.sourceUrl],
+    gaps: ["Venue requires review"],
+  }),
+});
+assert.deepEqual(confirmedStartReport.gaps, ["Venue requires review"]);
+const fullGapReport = parseResearch({
+  output_text: JSON.stringify({
+    candidates: [c],
+    sources: [],
+    gaps: Array.from({ length: 100 }, (_, i) => `Other gap ${i}`),
+  }),
+});
+assert.equal(fullGapReport.gaps.length, 100);
+assert(fullGapReport.gaps[0].includes("Start time unresolved"), "retain starts under report cap");
 const pg = new PGlite();
 // Festival distances and sponsor variants: identity comes from an exact event/entry link.
 const festival = {
