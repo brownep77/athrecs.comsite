@@ -30,6 +30,13 @@ blocked timing site, infer missing race facts, or mark secondary records verifie
   source review. Multiple existing identities are never structurally merged by
   this adapter.
 
+The default candidate holds above remain unchanged. A separately supervised held
+batch can apply the versioned [reviewed source identity policy](reviewed-source-identity-policy.md)
+with a pinned CLI receipt and current per-candidate evidence. That policy does
+not require a fixed ten-year age gap or opposite original recorded sex. It does
+not turn weak fuzzy suggestions into confirmed different people, publish
+unassigned rows, relax existing-profile links, or replace the publication guards.
+
 ## Workflow
 
 Keep all connection files, raw inputs, snapshots, plans, reviews and receipts

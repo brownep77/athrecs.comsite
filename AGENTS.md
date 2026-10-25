@@ -52,6 +52,15 @@
 These rules apply to athlete profiles, race histories, imports, catalogue seeds,
 publication and personal-best calculations in this repository.
 
+- Owner instruction, 25 October 2026: loosen held-result identity review sensibly
+  using `docs/reviewed-source-identity-policy.md`. A fixed ten-year age separation
+  or opposite recorded sex is not required for a source-supported distinct-person
+  decision. Review original names, all source-age uncertainty and every fresh
+  candidate/collision; keep compatible or unresolved same-name identities held.
+  Record weak fuzzy nonblocking findings separately from different-person evidence.
+  Preserve source eligibility, original facts, privacy/claim preferences, existing
+  linking standards and structural-merge safeguards. This is a supervised review
+  policy, not automatic fuzzy matching or public unassigned-result publication.
 - Never invent a race participation, time, placing, category, exact birth date or
   source URL. Plausible values, biographies, recurring fixtures and another
   athlete's results are not evidence. Leave unknown fields empty.
