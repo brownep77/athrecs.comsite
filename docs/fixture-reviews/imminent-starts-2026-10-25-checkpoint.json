@@ -626,7 +626,7 @@
     }
   ],
   "continuation": {
-    "checkedAt": "2026-10-25T08:45:00Z",
+    "checkedAt": "2026-10-25T08:10:00Z",
     "catalogueRevision": 360,
     "workflowRun": {
       "id": 40170967250,
@@ -637,7 +637,7 @@
     "newVerifiedLive": 0,
     "libraryCheckpoint": {
       "libraryFileId": "libfile_977bc9030fe8819184440cb484418609",
-      "version": 25
+      "version": 26
     },
     "millenniumWatch": "Fresh official pages still conflict on edition labeling/date and do not confirm a 2027 start. 06:15 remains an unverified prior-year lead."
   }
