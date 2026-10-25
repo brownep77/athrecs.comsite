@@ -149,7 +149,8 @@
     "verify:test-account": "node scripts/verify-test-account.mjs",
     "verify:analytics-flags": "node scripts/verify-analytics-flags.mjs",
     "collect:brussels-results": "node scripts/collect-brussels-results.mjs",
-    "verify:brussels-collection": "node scripts/verify-brussels-collection.mjs"
+    "verify:brussels-collection": "node scripts/verify-brussels-collection.mjs",
+    "verify:finder-add-to-profile": "node scripts/verify-finder-add-to-profile.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",

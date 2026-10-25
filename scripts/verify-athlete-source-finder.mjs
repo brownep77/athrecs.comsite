@@ -158,7 +158,9 @@ export function finderSqlFor(database, connection = database, observedQueries = 
     );
   sql.query = query;
   sql.transaction = (work) =>
-    database.transaction((tx) => work(finderSqlFor(database, tx, observedQueries)));
+    connection === database
+      ? database.transaction((tx) => work(finderSqlFor(database, tx, observedQueries)))
+      : work(sql);
   return sql;
 }
 
