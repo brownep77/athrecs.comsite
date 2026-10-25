@@ -15,6 +15,7 @@ import imminentStarts from "./imminent-starts-2026-10-25.json" with { type: "jso
 import urgentStarts from "./urgent-starts-followup-2026-10-25.json" with { type: "json" };
 import { isUrgentReviewedPlaceholder } from "./urgent-starts-followup-2026-10-25.ts";
 import threeMonthStarts from "./three-month-starts-2026-10-25.json" with { type: "json" };
+import batch5ThreeMonthStarts from "./three-month-starts-batch5-2026-10-25.json" with { type: "json" };
 import thirdUrgentStarts from "./urgent-starts-third-2026-10-25.json" with { type: "json" };
 import { isThirdUrgentPlaceholder } from "./urgent-starts-third-2026-10-25.ts";
 import nextUrgentStarts from "./urgent-starts-next-2026-10-25.json" with { type: "json" };
@@ -364,6 +365,16 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   },
   ...moreThreeMonthStarts,
 };
+
+// Apply exact-edition reviewed starts while preserving other confirmed distances.
+for (const [key, reviewed] of Object.entries(batch5ThreeMonthStarts)) {
+  const existing = FIXTURE_DETAILS[key];
+  FIXTURE_DETAILS[key] = {
+    ...existing,
+    ...reviewed,
+    starts: { ...existing?.starts, ...reviewed.starts },
+  };
+}
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
