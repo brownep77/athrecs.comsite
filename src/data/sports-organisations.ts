@@ -544,24 +544,62 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ],
     related: ["world-aquatics", "swim-england", "scottish-swimming", "swim-wales", "swim-ireland"],
   }),
-  ...[
-    ["swim-england", "Swim England", "England", "https://www.swimming.org/swimengland/"],
-    ["scottish-swimming", "Scottish Swimming", "Scotland", "https://www.scottishswimming.com/"],
-    ["swim-wales", "Swim Wales", "Wales", "https://www.swimwales.org/"],
-  ].map(([slug, name, country, website]) =>
-    record({
-      slug,
-      name,
-      country,
-      jurisdiction: country,
-      territories: [country, "United Kingdom"],
+  record(
+    {
+      slug: "swim-england",
+      name: "Swim England",
+      country: "England",
+      jurisdiction: "England",
+      territories: ["England", "United Kingdom"],
       type: "home",
-      sports: swimming,
-      website,
-      summary: `Home-nation governing body for swimming and aquatic sport in ${country}.`,
-      sources: ["https://www.aquaticsgb.com/about-us/", website],
+      sports: ["swimming"],
+      website: "https://www.swimming.org/swimengland/",
+      summary: "Home-nation governing body for swimming and aquatic sport in England.",
+      sources: ["https://www.aquaticsgb.com/about-us/", "https://www.swimming.org/swimengland/"],
       related: ["aquatics-gb"],
-    }),
+    },
+    "2026-10-22",
+  ),
+  record(
+    {
+      slug: "scottish-swimming",
+      name: "Scottish Swimming",
+      country: "Scotland",
+      jurisdiction: "Scotland",
+      territories: ["Scotland", "United Kingdom"],
+      type: "home",
+      sports: ["swimming"],
+      website: "https://www.scottishswimming.com/",
+      summary: "Home-nation governing body for swimming and aquatic sport in Scotland.",
+      sources: [
+        "https://www.aquaticsgb.com/about-us/",
+        "https://www.scottishswimming.com/",
+        "https://www.scottishswimming.com/our-sports/swimming/results",
+        "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/04/10082050/SNAGS-2026-Results.pdf",
+        "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/06/30143358/Friday-Results-1.pdf",
+        "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/07/12221149/2026-Scottish-Summer-Meet.pdf",
+      ],
+      related: ["aquatics-gb"],
+      detail:
+        "Link review 25 October 2026: The swimming results hub provides 2026 competition PDFs. Three documents were opened and their first-page tables inspected. Athlete nationality and identity are not established by names, ages or clubs.",
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "swim-wales",
+      name: "Swim Wales",
+      country: "Wales",
+      jurisdiction: "Wales",
+      territories: ["Wales", "United Kingdom"],
+      type: "home",
+      sports: ["swimming"],
+      website: "https://www.swimwales.org/",
+      summary: "Home-nation governing body for swimming and aquatic sport in Wales.",
+      sources: ["https://www.aquaticsgb.com/about-us/", "https://www.swimwales.org/"],
+      related: ["aquatics-gb"],
+    },
+    "2026-10-22",
   ),
 
   record(
@@ -2696,22 +2734,31 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     ["uci"],
     ["Český svaz cyklistiky", "Czech Republic Cycling"],
   ),
-  {
-    ...federation(
-      "czech-swimming",
-      "Czech Swimming Federation",
-      "Czechia",
-      swimming,
-      "https://www.worldaquatics.com/members/national-federations",
-      "National federation for swimming and related aquatic disciplines in Czechia, listed by World Aquatics.",
-      ["https://www.worldaquatics.com/members/national-federations"],
-      ["world-aquatics"],
-      ["Český svaz plaveckých sportů", "Czech Republic Swimming"],
-    ),
-    websiteKind: "member-directory",
-    detail:
-      "The official link opens World Aquatics’ member directory. Find Czechia for the swimming federation’s current contact information; the separately listed water polo federation has its own remit.",
-  },
+  record(
+    {
+      slug: "czech-swimming",
+      name: "Czech Swimming Federation",
+      country: "Czechia",
+      jurisdiction: "Czechia",
+      territories: ["Czechia"],
+      type: "national",
+      sports: ["swimming"],
+      website: "https://www.worldaquatics.com/members/national-federations",
+      summary:
+        "National federation for swimming and related aquatic disciplines in Czechia, listed by World Aquatics.",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://vysledky.czechswimming.cz/souteze",
+        "https://vysledky.czechswimming.cz/souteze/10635",
+      ],
+      related: ["world-aquatics"],
+      aliases: ["Český svaz plaveckých sportů", "Czech Republic Swimming"],
+      websiteKind: "member-directory",
+      detail:
+        "The official link opens World Aquatics’ member directory. Find Czechia for the swimming federation’s current contact information; the separately listed water polo federation has its own remit. Link review 25 October 2026: The main federation website could not be retrieved. Its official competition portal is working and provides dated programmes and results-document links; individual results still require checking.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "czech-triathlon",
   "name": "Czech Triathlon Association",
@@ -12245,33 +12292,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       "Madagascar Swimming Federation"
     ]
   }, "2026-10-23"),
-  record({
-    "slug": "morocco-swimming",
-    "name": "Fédération Royale Marocaine de Natation",
-    "country": "Morocco",
-    "jurisdiction": "Morocco",
-    "territories": [
-      "Morocco"
-    ],
-    "type": "national",
-    "sports": [
-      "swimming"
-    ],
-    "website": "https://www.worldaquatics.com/members/national-federations",
-    "websiteKind": "member-directory",
-    "summary": "National swimming member body for Morocco, listed by World Aquatics.",
-    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
-    "sources": [
-      "https://www.worldaquatics.com/members/national-federations"
-    ],
-    "related": [
-      "world-aquatics",
-      "africa-aquatics"
-    ],
-    "aliases": [
-      "Morocco Swimming Federation"
-    ]
-  }, "2026-10-23"),
+  record(
+    {
+      slug: "morocco-swimming",
+      name: "Fédération Royale Marocaine de Natation",
+      country: "Morocco",
+      jurisdiction: "Morocco",
+      territories: ["Morocco"],
+      type: "national",
+      sports: ["swimming"],
+      website: "https://frmnatation.com/",
+      summary: "National swimming member body for Morocco, listed by World Aquatics.",
+      detail:
+        "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers. Link review 25 October 2026: Official federation homepage confirmed. The opened competition-results section is a historical archive (2015–19); the calendar section did not expose dated fixtures.",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://frmnatation.com/",
+        "https://frmnatation.com/competitions-resultats",
+        "https://frmnatation.com/calendrier-federal",
+      ],
+      related: ["world-aquatics", "africa-aquatics"],
+      aliases: ["Morocco Swimming Federation"],
+    },
+    "2026-10-25",
+  ),
   record({
     "slug": "malawi-swimming",
     "name": "Malawi Aquatic Union",
@@ -12380,33 +12424,31 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       "Mauritania Swimming Federation"
     ]
   }, "2026-10-23"),
-  record({
-    "slug": "namibia-swimming",
-    "name": "Namibia Aquatic Sports Federation",
-    "country": "Namibia",
-    "jurisdiction": "Namibia",
-    "territories": [
-      "Namibia"
-    ],
-    "type": "national",
-    "sports": [
-      "swimming"
-    ],
-    "website": "https://www.worldaquatics.com/members/national-federations",
-    "websiteKind": "member-directory",
-    "summary": "National swimming member body for Namibia, listed by World Aquatics.",
-    "detail": "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers.",
-    "sources": [
-      "https://www.worldaquatics.com/members/national-federations"
-    ],
-    "related": [
-      "world-aquatics",
-      "africa-aquatics"
-    ],
-    "aliases": [
-      "Namibia Swimming Federation"
-    ]
-  }, "2026-10-23"),
+  record(
+    {
+      slug: "namibia-swimming",
+      name: "Namibia Aquatic Sports Federation",
+      country: "Namibia",
+      jurisdiction: "Namibia",
+      territories: ["Namibia"],
+      type: "national",
+      sports: ["swimming"],
+      website: "https://swimmingnamibia.com/",
+      summary: "National swimming member body for Namibia, listed by World Aquatics.",
+      detail:
+        "The link opens World Aquatics’ official national-federation directory. Membership identifies the sporting body; it does not establish government funding responsibilities or legislative powers. Link review 25 October 2026: Official federation homepage confirmed. The events page links a 2025–26 calendar; the opened results index covers 2020–21. Athlete-profile links require individual evidence review.",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://swimmingnamibia.com/",
+        "https://swimmingnamibia.com/events/",
+        "https://swimmingnamibia.com/disciplines/swimming/results/",
+        "https://swimmingnamibia.com/athlete-profiles/",
+      ],
+      related: ["world-aquatics", "africa-aquatics"],
+      aliases: ["Namibia Swimming Federation"],
+    },
+    "2026-10-25",
+  ),
   record({
     "slug": "nigeria-swimming",
     "name": "Nigeria Aquatics Federation",
@@ -12896,34 +12938,31 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "oceania-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "fiji-swimming",
-  "name": "Fiji Swimming",
-  "aliases": [
-    "Fiji swimming federation"
-  ],
-  "type": "national",
-  "country": "Fiji",
-  "jurisdiction": "Fiji",
-  "territories": [
-    "Fiji"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The swimming member body listed for Fiji by World Aquatics and Oceania Aquatics.",
-  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations",
-    "https://oceaniaaquatics.org/members/"
-  ],
-  "related": [
-    "world-aquatics",
-    "oceania-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "fiji-swimming",
+      name: "Fiji Swimming",
+      aliases: ["Fiji swimming federation"],
+      type: "national",
+      country: "Fiji",
+      jurisdiction: "Fiji",
+      territories: ["Fiji"],
+      sports: ["swimming"],
+      summary: "The swimming member body listed for Fiji by World Aquatics and Oceania Aquatics.",
+      detail:
+        "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers. Link review 25 October 2026: The World Aquatics-listed website redirects to Fiji Aquatics. Its 2026 results index and calendar were opened; the calendar also includes camps, meetings and holidays and is subject to change.",
+      website: "https://fijiaquatics.com/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://oceaniaaquatics.org/members/",
+        "https://fijiaquatics.com/",
+        "https://fijiaquatics.com/2026-results/",
+        "https://fijiaquatics.com/calendar-of-events/",
+      ],
+      related: ["world-aquatics", "oceania-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "federated-states-of-micronesia-swimming",
   "name": "Federated States of Micronesia Swimming Association",
@@ -12953,34 +12992,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "oceania-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "guam-swimming",
-  "name": "Guam Swimming Federation",
-  "aliases": [
-    "Guam swimming federation"
-  ],
-  "type": "national",
-  "country": "Guam",
-  "jurisdiction": "Guam",
-  "territories": [
-    "Guam"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The swimming member body listed for Guam by World Aquatics and Oceania Aquatics.",
-  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations",
-    "https://oceaniaaquatics.org/members/"
-  ],
-  "related": [
-    "world-aquatics",
-    "oceania-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "guam-swimming",
+      name: "Guam Swimming Federation",
+      aliases: ["Guam swimming federation"],
+      type: "national",
+      country: "Guam",
+      jurisdiction: "Guam",
+      territories: ["Guam"],
+      sports: ["swimming"],
+      summary: "The swimming member body listed for Guam by World Aquatics and Oceania Aquatics.",
+      detail:
+        "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers. Link review 25 October 2026: Official Guam Aquatics homepage and 2026 meet-results index confirmed. One January 2026 label links to a PDF filename containing 2025; that edition needs checking before use.",
+      website: "https://www.guamswimming.org",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://oceaniaaquatics.org/members/",
+        "https://www.guamswimming.org",
+        "https://www.guamswimming.org/2026-swim-meet-results/",
+      ],
+      related: ["world-aquatics", "oceania-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "marshall-islands-swimming",
   "name": "Marshall Islands Swimming Federation",
@@ -13009,34 +13044,33 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "oceania-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "northern-mariana-islands-swimming",
-  "name": "Northern Mariana Islands Swimming Federation",
-  "aliases": [
-    "Northern Mariana Islands swimming federation"
-  ],
-  "type": "national",
-  "country": "Northern Mariana Islands",
-  "jurisdiction": "Northern Mariana Islands",
-  "territories": [
-    "Northern Mariana Islands"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The swimming member body listed for Northern Mariana Islands by World Aquatics and Oceania Aquatics.",
-  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations",
-    "https://oceaniaaquatics.org/members/"
-  ],
-  "related": [
-    "world-aquatics",
-    "oceania-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "northern-mariana-islands-swimming",
+      name: "Northern Mariana Islands Swimming Federation",
+      aliases: ["Northern Mariana Islands swimming federation"],
+      type: "national",
+      country: "Northern Mariana Islands",
+      jurisdiction: "Northern Mariana Islands",
+      territories: ["Northern Mariana Islands"],
+      sports: ["swimming"],
+      summary:
+        "The swimming member body listed for Northern Mariana Islands by World Aquatics and Oceania Aquatics.",
+      detail:
+        "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers. Link review 25 October 2026: Official federation identity corroborated by its About page. The records page links course-specific PDFs; their contents and the calendar remain unassessed.",
+      website: "https://www.nmiswimmingfederation.org",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://oceaniaaquatics.org/members/",
+        "https://www.nmiswimmingfederation.org",
+        "https://www.nmiswimmingfederation.org/calendar.html",
+        "https://www.nmiswimmingfederation.org/nat-records.html",
+        "https://www.nmiswimmingfederation.org/about-nmisf.html",
+      ],
+      related: ["world-aquatics", "oceania-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "palau-swimming",
   "name": "Palau Swimming Association",
@@ -13177,34 +13211,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "oceania-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "vanuatu-swimming",
-  "name": "Vanuatu Aquatics Federation",
-  "aliases": [
-    "Vanuatu swimming federation"
-  ],
-  "type": "national",
-  "country": "Vanuatu",
-  "jurisdiction": "Vanuatu",
-  "territories": [
-    "Vanuatu"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The swimming member body listed for Vanuatu by World Aquatics and Oceania Aquatics.",
-  "detail": "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations",
-    "https://oceaniaaquatics.org/members/"
-  ],
-  "related": [
-    "world-aquatics",
-    "oceania-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "vanuatu-swimming",
+      name: "Vanuatu Aquatics Federation",
+      aliases: ["Vanuatu swimming federation"],
+      type: "national",
+      country: "Vanuatu",
+      jurisdiction: "Vanuatu",
+      territories: ["Vanuatu"],
+      sports: ["swimming"],
+      summary:
+        "The swimming member body listed for Vanuatu by World Aquatics and Oceania Aquatics.",
+      detail:
+        "The official membership directories establish the sporting affiliation. They do not establish government funding responsibilities or legislative powers. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. Dedicated fixture, result and athlete-profile data still require review.",
+      website: "https://www.vanuatuaquatics.com/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://oceaniaaquatics.org/members/",
+        "https://www.vanuatuaquatics.com/",
+      ],
+      related: ["world-aquatics", "oceania-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "oceania-aquatics",
   "name": "Oceania Aquatics",
@@ -13284,13 +13314,16 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       summary:
         "The national aquatics member body listed for Antigua and Barbuda by World Aquatics.",
       detail:
-        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-      website: "https://www.worldaquatics.com/members/national-federations",
-      websiteKind: "member-directory",
-      sources: ["https://www.worldaquatics.com/members/national-federations"],
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: Official federation homepage confirmed. The CARIFTA section links an April 2026 competition summons; it is not a verified results feed.",
+      website: "https://www.swimantiguabarbuda.com",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.swimantiguabarbuda.com",
+        "https://www.swimantiguabarbuda.com/index.php/39th-carifta-championships",
+      ],
       related: ["world-aquatics"],
     },
-    "2026-10-23",
+    "2026-10-25",
   ),
   record(
     {
@@ -13625,13 +13658,15 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       sports: ["swimming"],
       summary: "The national aquatics member body listed for Puerto Rico by World Aquatics.",
       detail:
-        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-      website: "https://www.worldaquatics.com/members/national-federations",
-      websiteKind: "member-directory",
-      sources: ["https://www.worldaquatics.com/members/national-federations"],
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. Detailed competition and athlete data still require separate review.",
+      website: "https://natacionpr.org/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://natacionpr.org/",
+      ],
       related: ["world-aquatics"],
     },
-    "2026-10-23",
+    "2026-10-25",
   ),
   record(
     {
@@ -13646,13 +13681,15 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       summary:
         "The national aquatics member body listed for Saint Kitts and Nevis by World Aquatics.",
       detail:
-        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-      website: "https://www.worldaquatics.com/members/national-federations",
-      websiteKind: "member-directory",
-      sources: ["https://www.worldaquatics.com/members/national-federations"],
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked aquatics federation homepage confirmed. Detailed fixture, result and athlete data remain unassessed.",
+      website: "https://sknaquatics.org/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://sknaquatics.org/",
+      ],
       related: ["world-aquatics"],
     },
-    "2026-10-23",
+    "2026-10-25",
   ),
   record(
     {
@@ -13894,32 +13931,25 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "iran-swimming",
-  "name": "I.R. Iran Amateur Swimming Federation",
-  "aliases": [
-    "Iran swimming federation"
-  ],
-  "type": "national",
-  "country": "Iran",
-  "jurisdiction": "Iran",
-  "territories": [
-    "Iran"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The national aquatics member body listed for Iran by World Aquatics.",
-  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "iran-swimming",
+      name: "I.R. Iran Amateur Swimming Federation",
+      aliases: ["Iran swimming federation"],
+      type: "national",
+      country: "Iran",
+      jurisdiction: "Iran",
+      territories: ["Iran"],
+      sports: ["swimming"],
+      summary: "The national aquatics member body listed for Iran by World Aquatics.",
+      detail:
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked aquatics federation homepage confirmed over HTTPS. Detailed fixture, result and athlete data remain unassessed.",
+      website: "https://irsf.ir/",
+      sources: ["https://www.worldaquatics.com/members/national-federations", "https://irsf.ir/"],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "iraq-swimming",
   "name": "Iraq Aquatics",
@@ -14128,58 +14158,52 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "maldives-swimming",
-  "name": "Maldives Aquatics",
-  "aliases": [
-    "Maldives swimming federation"
-  ],
-  "type": "national",
-  "country": "Maldives",
-  "jurisdiction": "Maldives",
-  "territories": [
-    "Maldives"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The national aquatics member body listed for Maldives by World Aquatics.",
-  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-23"),
-  record({
-  "slug": "mongolia-swimming",
-  "name": "Mongolian Amateur Swimming Federation",
-  "aliases": [
-    "Mongolia swimming federation"
-  ],
-  "type": "national",
-  "country": "Mongolia",
-  "jurisdiction": "Mongolia",
-  "territories": [
-    "Mongolia"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The national aquatics member body listed for Mongolia by World Aquatics.",
-  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "maldives-swimming",
+      name: "Maldives Aquatics",
+      aliases: ["Maldives swimming federation"],
+      type: "national",
+      country: "Maldives",
+      jurisdiction: "Maldives",
+      territories: ["Maldives"],
+      sports: ["swimming"],
+      summary: "The national aquatics member body listed for Maldives by World Aquatics.",
+      detail:
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: Official federation homepage and records table confirmed. The events page contains historical material; record years and names alone do not establish exact event dates or athlete nationality.",
+      website: "https://swimming.org.mv/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://swimming.org.mv/",
+        "https://swimming.org.mv/events/",
+        "https://swimming.org.mv/records/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "mongolia-swimming",
+      name: "Mongolian Amateur Swimming Federation",
+      aliases: ["Mongolia swimming federation"],
+      type: "national",
+      country: "Mongolia",
+      jurisdiction: "Mongolia",
+      territories: ["Mongolia"],
+      sports: ["swimming"],
+      summary: "The national aquatics member body listed for Mongolia by World Aquatics.",
+      detail:
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. Detailed fixture, result and athlete data remain unassessed.",
+      website: "https://mongoliaaquatics.mn/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://mongoliaaquatics.mn/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "myanmar-swimming",
   "name": "Myanmar Swimming Federation",
@@ -14232,32 +14256,28 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "pakistan-swimming",
-  "name": "Pakistan Swimming Federation",
-  "aliases": [
-    "Pakistan swimming federation"
-  ],
-  "type": "national",
-  "country": "Pakistan",
-  "jurisdiction": "Pakistan",
-  "territories": [
-    "Pakistan"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "The national aquatics member body listed for Pakistan by World Aquatics.",
-  "detail": "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "pakistan-swimming",
+      name: "Pakistan Swimming Federation",
+      aliases: ["Pakistan swimming federation"],
+      type: "national",
+      country: "Pakistan",
+      jurisdiction: "Pakistan",
+      territories: ["Pakistan"],
+      sports: ["swimming"],
+      summary: "The national aquatics member body listed for Pakistan by World Aquatics.",
+      detail:
+        "The World Aquatics membership directory establishes the sporting affiliation. It does not establish legislative powers, government funding responsibilities, or availability of fixture, result and athlete-profile data. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. Detailed fixture, result and athlete data remain unassessed.",
+      website: "https://www.pakswimfed.org.pk",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.pakswimfed.org.pk",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "palestine-swimming",
   "name": "Palestinian Swimming Federation and Aquatic Sports",
@@ -14519,29 +14539,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
   ]
 }, "2026-10-23"),
 
-  record({
-  "slug": "andorra-swimming",
-  "name": "Federació Andorrana de Natació",
-  "type": "national",
-  "country": "Andorra",
-  "jurisdiction": "Andorra",
-  "territories": [
-    "Andorra"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Andorra, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "andorra-swimming",
+      name: "Federació Andorrana de Natació",
+      type: "national",
+      country: "Andorra",
+      jurisdiction: "Andorra",
+      territories: ["Andorra"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Andorra, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation homepage confirmed. Opened sections link 2026–27 calendars and records and 2025–26 results; document contents need separate checking.",
+      website: "https://fan.ad/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://fan.ad/",
+        "https://fan.ad/calendari/",
+        "https://fan.ad/resultats-i-records/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "armenia-swimming",
   "name": "Water Kind Sports Association & Swimming Federation of Armenia",
@@ -14565,29 +14585,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-24"),
-  record({
-  "slug": "azerbaijan-swimming",
-  "name": "Azerbaijan Swimming Federation",
-  "type": "national",
-  "country": "Azerbaijan",
-  "jurisdiction": "Azerbaijan",
-  "territories": [
-    "Azerbaijan"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Azerbaijan, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "azerbaijan-swimming",
+      name: "Azerbaijan Swimming Federation",
+      type: "national",
+      country: "Azerbaijan",
+      jurisdiction: "Azerbaijan",
+      territories: ["Azerbaijan"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Azerbaijan, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation homepage confirmed. The opened calendar contained an unrendered widget and the swimming section was being updated; usable fixture or athlete rows were not confirmed.",
+      website: "https://asf.az/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://asf.az/",
+        "https://asf.az/teqvim/",
+        "https://asf.az/uzguculuk/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "bosnia-and-herzegovina-swimming",
   "name": "Swimming Association of Bosnia and Herzegovina",
@@ -14634,29 +14654,24 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-24"),
-  record({
-  "slug": "faroe-islands-swimming",
-  "name": "Faroe Islands Aquatics Federation",
-  "type": "national",
-  "country": "Faroe Islands",
-  "jurisdiction": "Faroe Islands",
-  "territories": [
-    "Faroe Islands"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Faroe Islands, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "faroe-islands-swimming",
+      name: "Faroe Islands Aquatics Federation",
+      type: "national",
+      country: "Faroe Islands",
+      jurisdiction: "Faroe Islands",
+      territories: ["Faroe Islands"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Faroe Islands, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: World Aquatics-linked federation homepage confirmed. A linked Swimify event could not be retrieved, so its result rows remain unassessed.",
+      website: "https://ssf.fo/",
+      sources: ["https://www.worldaquatics.com/members/national-federations", "https://ssf.fo/"],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "georgia-swimming",
   "name": "Georgian Aquatic Sports National Federation",
@@ -14726,29 +14741,28 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-24"),
-  record({
-  "slug": "liechtenstein-swimming",
-  "name": "Liechtensteiner Schwimmverband",
-  "type": "national",
-  "country": "Liechtenstein",
-  "jurisdiction": "Liechtenstein",
-  "territories": [
-    "Liechtenstein"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Liechtenstein, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "liechtenstein-swimming",
+      name: "Liechtensteiner Schwimmverband",
+      type: "national",
+      country: "Liechtenstein",
+      jurisdiction: "Liechtenstein",
+      territories: ["Liechtenstein"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Liechtenstein, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: The World Aquatics-listed website redirects to Liechtenstein Swimming. Its swimming section describes development groups and selection information; individual athlete facts remain unverified.",
+      website: "https://www.lieswimming.li/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.lieswimming.li/",
+        "https://www.lieswimming.li/swimming/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "moldova-swimming",
   "name": "Water Kind of Sports Federation of the Republic of Moldova",
@@ -14841,98 +14855,97 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-aquatics"
   ]
 }, "2026-10-24"),
-  record({
-  "slug": "russia-swimming",
-  "name": "Russian Aquatic Sports Federation",
-  "type": "national",
-  "country": "Russia",
-  "jurisdiction": "Russia",
-  "territories": [
-    "Russia"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Russia, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
-  record({
-  "slug": "san-marino-swimming",
-  "name": "Federazione Sammarinese Nuoto",
-  "type": "national",
-  "country": "San Marino",
-  "jurisdiction": "San Marino",
-  "territories": [
-    "San Marino"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for San Marino, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
-  record({
-  "slug": "ukraine-swimming",
-  "name": "Ukrainian Swimming Federation",
-  "type": "national",
-  "country": "Ukraine",
-  "jurisdiction": "Ukraine",
-  "territories": [
-    "Ukraine"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Ukraine, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
-  record({
-  "slug": "albania-swimming",
-  "name": "Albanian Swimming Federation",
-  "type": "national",
-  "country": "Albania",
-  "jurisdiction": "Albania",
-  "territories": [
-    "Albania"
-  ],
-  "sports": [
-    "swimming"
-  ],
-  "summary": "National aquatics member body for Albania, listed by World Aquatics.",
-  "detail": "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks.",
-  "website": "https://www.worldaquatics.com/members/national-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.worldaquatics.com/members/national-federations"
-  ],
-  "related": [
-    "world-aquatics"
-  ]
-}, "2026-10-24"),
+  record(
+    {
+      slug: "russia-swimming",
+      name: "Russian Aquatic Sports Federation",
+      type: "national",
+      country: "Russia",
+      jurisdiction: "Russia",
+      territories: ["Russia"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Russia, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Federation identity corroborated by World Aquatics and its competition page. The October 2026 competition index contains dates and result links; edition details need separate checking.",
+      website: "https://russwimming.ru",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://russwimming.ru",
+        "https://russwimming.ru/competitions/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "san-marino-swimming",
+      name: "Federazione Sammarinese Nuoto",
+      type: "national",
+      country: "San Marino",
+      jurisdiction: "San Marino",
+      territories: ["San Marino"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for San Marino, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation homepage confirmed. The page labelled as an events archive currently describes the May 2026 Meeting Squalo Blu, not a general results archive.",
+      website: "https://www.fsn.sm",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.fsn.sm",
+        "https://www.fsn.sm/eventi/archivio/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "ukraine-swimming",
+      name: "Ukrainian Swimming Federation",
+      type: "national",
+      country: "Ukraine",
+      jurisdiction: "Ukraine",
+      territories: ["Ukraine"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Ukraine, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation website confirmed. The results index lists 2026 competitions and result links; the calendar PDF and individual performances need separate review.",
+      website: "https://www.usf.org.ua",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://www.usf.org.ua",
+        "https://www.usf.org.ua/ua/Kalendr-2026.html",
+        "https://www.usf.org.ua/ua/Rezultaty-zmahan.html",
+        "https://www.usf.org.ua/ua/Natsionalna-zbirna.html",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
+  record(
+    {
+      slug: "albania-swimming",
+      name: "Albanian Swimming Federation",
+      type: "national",
+      country: "Albania",
+      jurisdiction: "Albania",
+      territories: ["Albania"],
+      sports: ["swimming"],
+      summary: "National aquatics member body for Albania, listed by World Aquatics.",
+      detail:
+        "Membership listing checked 24 October 2026. This establishes federation affiliation; competition eligibility and current event services require separate checks. Link review 25 October 2026: Official federation homepage confirmed. The calendar page links named 2025 and 2026 documents; the profile category is historical material rather than a current athlete roster.",
+      website: "https://fshn.org.al/",
+      sources: [
+        "https://www.worldaquatics.com/members/national-federations",
+        "https://fshn.org.al/",
+        "https://fshn.org.al/kalendari-sportiv/",
+        "https://fshn.org.al/category/profile/",
+      ],
+      related: ["world-aquatics"],
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "swim-england-east-region",
   "name": "Swim England East Region",
