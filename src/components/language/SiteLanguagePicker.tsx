@@ -9,6 +9,7 @@ import {
 
 export function SiteLanguagePicker({ pathname }: { pathname: string }) {
   const picker = useRef<HTMLDetailsElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
   const searchInput = useRef<HTMLInputElement>(null);
   const searchId = useId();
   const [open, setOpen] = useState(false);
@@ -54,7 +55,11 @@ export function SiteLanguagePicker({ pathname }: { pathname: string }) {
       translate="no"
       onToggle={(event) => {
         setOpen(event.currentTarget.open);
-        if (!event.currentTarget.open) setSearch("");
+        if (event.currentTarget.open) {
+          if (panel.current) panel.current.scrollTop = 0;
+        } else {
+          setSearch("");
+        }
       }}
     >
       <summary
@@ -70,7 +75,10 @@ export function SiteLanguagePicker({ pathname }: { pathname: string }) {
         <span className="sr-only">English / Choose translation language</span>
         <ChevronDown className="size-3 group-open:rotate-180" aria-hidden="true" />
       </summary>
-      <div className="absolute right-0 top-full z-50 mt-2 flex max-h-[calc(100dvh-8rem)] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-y-auto overscroll-contain rounded-xl border border-border bg-surface p-3 shadow-xl lg:max-h-[calc(100dvh-6rem)]">
+      <div
+        ref={panel}
+        className="absolute right-0 top-full z-50 mt-2 flex max-h-[calc(100dvh-8rem)] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-y-auto overscroll-contain rounded-xl border border-border bg-surface p-3 shadow-xl lg:max-h-[calc(100dvh-6rem)]"
+      >
         <div className="shrink-0 px-2">
           <p className="text-sm font-semibold text-fg">Choose a language</p>
           <p className="mt-1 text-xs leading-5 text-muted">
