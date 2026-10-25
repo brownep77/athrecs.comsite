@@ -16,7 +16,7 @@ export type {
 } from "./types";
 import { legacyRaceGeography } from "./legacy-race-geography";
 import { imminentReviewedAdditions, reviewImminentEdition } from "./imminent-starts-2026-10-25";
-import { urgentReviewedAdditions, reviewUrgentEdition } from "./urgent-starts-followup-2026-10-25";
+import { urgentReviewedAdditions, urgentReviewedSeriesOverrides, reviewUrgentEdition } from "./urgent-starts-followup-2026-10-25";
 import { clubs as rawClubs } from "./clubs";
 import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
 import { belfastClubs } from "./clubs-belfast";
@@ -467,6 +467,7 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
   ...dailyHalfTenMileSeriesOverrides[series.slug],
   ...reviewedParkrunSeriesOverrides[series.slug],
   ...legacyRaceGeography[series.slug],
+  ...urgentReviewedSeriesOverrides[series.slug],
 }));
 
 const mergedEditions = [

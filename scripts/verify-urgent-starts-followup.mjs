@@ -6,7 +6,16 @@ import details from "../src/data/urgent-starts-followup-2026-10-25.json" with { 
 const publishing = await import("../src/lib/athrecs/catalogue-publishing.server.ts");
 const { checkedFixtureStart, isReviewedFixturePlaceholder } =
   await import("../src/data/fixture-details.ts");
-const { editions } = await import("../src/data/catalogue.ts");
+const { editions, seriesList } = await import("../src/data/catalogue.ts");
+for (const slug of [
+  "wa-les-foul-es-monterelaises-7244787",
+  "wa-trek-marathon-de-lille-7244788",
+  "wa-maratonina-citt-di-arezzo-7242465",
+]) {
+  const series = seriesList.find((event) => event.slug === slug);
+  assert.equal(series.sport, "Running", "road races must not use track-and-field fallback");
+  assert(!series.distances.includes("Other"));
+}
 const { buildCalendarEvent } = await import("../src/lib/athrecs/event-calendar.ts");
 const { pg, sql } = await bulkFixture();
 try {

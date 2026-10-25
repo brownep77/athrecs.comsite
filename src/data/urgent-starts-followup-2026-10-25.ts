@@ -1,5 +1,36 @@
 import details from "./urgent-starts-followup-2026-10-25.json" with { type: "json" };
-import type { Edition } from "./types";
+import type { Edition, Series } from "./types";
+
+/** The federation label is a discovery source, not the sport or race distance. */
+export const urgentReviewedSeriesOverrides: Record<string, Partial<Series>> = {
+  "wa-les-foul-es-monterelaises-7244787": {
+    sport: "Running",
+    country: "France",
+    city: "Montereau",
+    county: "",
+    distances: ["10K"],
+    organiser: "CS Montereau Athletics",
+    website: "https://www.foulees-monterelaises.com/",
+  },
+  "wa-trek-marathon-de-lille-7244788": {
+    sport: "Running",
+    country: "France",
+    city: "Lille",
+    county: "",
+    distances: ["Marathon"],
+    organiser: "Ligue Hauts-de-France d’Athlétisme",
+    website: "https://www.marathon-lille.com/",
+  },
+  "wa-maratonina-citt-di-arezzo-7242465": {
+    sport: "Running",
+    country: "Italy",
+    city: "Arezzo",
+    county: "",
+    distances: ["Half"],
+    organiser: "U.P. Policiano Arezzo Atletica",
+    website: "https://www.uppoliciano.com/maratonina-citta-di-arezzo",
+  },
+};
 
 const checked: Record<
   string,
