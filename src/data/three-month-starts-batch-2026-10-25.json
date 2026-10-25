@@ -8,27 +8,32 @@
       "50K": {
         "time": "07:00",
         "sourceUrl": "https://runsignup.com/Rest/race/183891?format=json",
-        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately."
+        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately.",
+        "publicNote": ""
       },
       "25K": {
         "time": "07:00",
         "sourceUrl": "https://runsignup.com/Rest/race/183891?format=json",
-        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately."
+        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately.",
+        "publicNote": ""
       },
       "10K": {
         "time": "08:00",
         "sourceUrl": "https://runsignup.com/Rest/race/183891?format=json",
-        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately."
+        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately.",
+        "publicNote": ""
       },
       "5K": {
         "time": "08:30",
         "sourceUrl": "https://runsignup.com/Rest/race/183891?format=json",
-        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately."
+        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately.",
+        "publicNote": ""
       },
       "1mi Youth": {
         "time": "10:00",
         "sourceUrl": "https://runsignup.com/Rest/race/183891?format=json",
-        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately."
+        "note": "RunSignup race 183891 current 31 October 2026 event-specific start_time fields and America/Chicago timezone. 100K absent from current programme: held separately.",
+        "publicNote": ""
       }
     }
   },
@@ -41,12 +46,14 @@
       "Half": {
         "time": "09:30",
         "sourceUrl": "https://www.phoenixrunning.co.uk/events/remembrance-day-marathon-half-marathon",
-        "note": "8 November 2026 fixed-distance marathon and half marathon both start 09:30; the 11:00 two-minute remembrance pause is not the start."
+        "note": "8 November 2026 fixed-distance marathon and half marathon both start 09:30; the 11:00 two-minute remembrance pause is not the start.",
+        "publicNote": ""
       },
       "Marathon": {
         "time": "09:30",
         "sourceUrl": "https://www.phoenixrunning.co.uk/events/remembrance-day-marathon-half-marathon",
-        "note": "8 November 2026 fixed-distance marathon and half marathon both start 09:30; the 11:00 two-minute remembrance pause is not the start."
+        "note": "8 November 2026 fixed-distance marathon and half marathon both start 09:30; the 11:00 two-minute remembrance pause is not the start.",
+        "publicNote": ""
       }
     }
   },
@@ -59,22 +66,26 @@
       "Half": {
         "time": "09:30",
         "sourceUrl": "https://www.evententry.co.uk/pfw-running-world-diabetes-day-run",
-        "note": "15 November 2026 six-hour challenge starts 09:30. One lap 3.1 miles (approximately 5K), two laps approximately 10K; four/eight laps plus short out-and-back for half/marathon. Listed 3.1K is held as an unsupported distance."
+        "note": "15 November 2026 six-hour challenge starts 09:30. One lap 3.1 miles (approximately 5K), two laps approximately 10K; four/eight laps plus short out-and-back for half/marathon. Listed 3.1K is held as an unsupported distance.",
+        "publicNote": ""
       },
       "Marathon": {
         "time": "09:30",
         "sourceUrl": "https://www.evententry.co.uk/pfw-running-world-diabetes-day-run",
-        "note": "15 November 2026 six-hour challenge starts 09:30. One lap 3.1 miles (approximately 5K), two laps approximately 10K; four/eight laps plus short out-and-back for half/marathon. Listed 3.1K is held as an unsupported distance."
+        "note": "15 November 2026 six-hour challenge starts 09:30. One lap 3.1 miles (approximately 5K), two laps approximately 10K; four/eight laps plus short out-and-back for half/marathon. Listed 3.1K is held as an unsupported distance.",
+        "publicNote": ""
       },
       "5K": {
         "time": "09:30",
         "sourceUrl": "https://www.evententry.co.uk/pfw-running-world-diabetes-day-run",
-        "note": "15 November 2026 six-hour challenge starts 09:30. One lap 3.1 miles (approximately 5K), two laps approximately 10K; four/eight laps plus short out-and-back for half/marathon. Listed 3.1K is held as an unsupported distance."
+        "note": "15 November 2026 six-hour challenge starts 09:30. One lap 3.1 miles (approximately 5K), two laps approximately 10K; four/eight laps plus short out-and-back for half/marathon. Listed 3.1K is held as an unsupported distance.",
+        "publicNote": ""
       },
       "10K": {
         "time": "09:30",
         "sourceUrl": "https://www.evententry.co.uk/pfw-running-world-diabetes-day-run",
-        "note": "15 November 2026 six-hour challenge starts 09:30. One lap 3.1 miles (approximately 5K), two laps approximately 10K; four/eight laps plus short out-and-back for half/marathon. Listed 3.1K is held as an unsupported distance."
+        "note": "15 November 2026 six-hour challenge starts 09:30. One lap 3.1 miles (approximately 5K), two laps approximately 10K; four/eight laps plus short out-and-back for half/marathon. Listed 3.1K is held as an unsupported distance.",
+        "publicNote": ""
       }
     }
   },
@@ -87,22 +98,26 @@
       "5K": {
         "time": "11:15",
         "sourceUrl": "https://www.hardlopen.nl/evenementen/44206-spijkenisse-spark-marathon/",
-        "note": "Atletiekunie organiser listing explicitly gives all four distance starts for 29 November 2026."
+        "note": "Atletiekunie organiser listing explicitly gives all four distance starts for 29 November 2026.",
+        "publicNote": ""
       },
       "10K": {
         "time": "11:15",
         "sourceUrl": "https://www.hardlopen.nl/evenementen/44206-spijkenisse-spark-marathon/",
-        "note": "Atletiekunie organiser listing explicitly gives all four distance starts for 29 November 2026."
+        "note": "Atletiekunie organiser listing explicitly gives all four distance starts for 29 November 2026.",
+        "publicNote": ""
       },
       "Half": {
         "time": "11:00",
         "sourceUrl": "https://www.hardlopen.nl/evenementen/44206-spijkenisse-spark-marathon/",
-        "note": "Atletiekunie organiser listing explicitly gives all four distance starts for 29 November 2026."
+        "note": "Atletiekunie organiser listing explicitly gives all four distance starts for 29 November 2026.",
+        "publicNote": ""
       },
       "Marathon": {
         "time": "10:30",
         "sourceUrl": "https://www.hardlopen.nl/evenementen/44206-spijkenisse-spark-marathon/",
-        "note": "Atletiekunie organiser listing explicitly gives all four distance starts for 29 November 2026."
+        "note": "Atletiekunie organiser listing explicitly gives all four distance starts for 29 November 2026.",
+        "publicNote": ""
       }
     }
   },
@@ -115,12 +130,14 @@
       "30K": {
         "time": "08:05",
         "sourceUrl": "https://tctruns.com/folsom-lake-sweetwater-trail-run/",
-        "note": "23 January 2027 distance-specific wave schedule: 30K and half marathon start together at 08:05; generic 08:00 excludes these distances."
+        "note": "23 January 2027 distance-specific wave schedule: 30K and half marathon start together at 08:05; generic 08:00 excludes these distances.",
+        "publicNote": ""
       },
       "Half": {
         "time": "08:05",
         "sourceUrl": "https://tctruns.com/folsom-lake-sweetwater-trail-run/",
-        "note": "23 January 2027 distance-specific wave schedule: 30K and half marathon start together at 08:05; generic 08:00 excludes these distances."
+        "note": "23 January 2027 distance-specific wave schedule: 30K and half marathon start together at 08:05; generic 08:00 excludes these distances.",
+        "publicNote": ""
       }
     }
   },
@@ -133,12 +150,14 @@
       "Half": {
         "time": "09:00",
         "sourceUrl": "https://www.ridgerunners.co.uk/machen-races",
-        "note": "28 November 2026 organiser programme explicitly separates marathon 08:00 and half marathon 09:00."
+        "note": "28 November 2026 organiser programme explicitly separates marathon 08:00 and half marathon 09:00.",
+        "publicNote": ""
       },
       "Marathon": {
         "time": "08:00",
         "sourceUrl": "https://www.ridgerunners.co.uk/machen-races",
-        "note": "28 November 2026 organiser programme explicitly separates marathon 08:00 and half marathon 09:00."
+        "note": "28 November 2026 organiser programme explicitly separates marathon 08:00 and half marathon 09:00.",
+        "publicNote": ""
       }
     }
   },
@@ -151,12 +170,14 @@
       "56.4K": {
         "time": "05:00",
         "sourceUrl": "https://vietnamhighlands.utmb.world/races/50Kelephant",
-        "note": "50K Elephant programme explicitly identifies Saturday 9 January 2027, 56.4km, 05:00. Incidental 2026 typos in estimated finisher prose do not change the repeated 2027 race-date heading."
+        "note": "50K Elephant programme explicitly identifies Saturday 9 January 2027, 56.4km, 05:00. Incidental 2026 typos in estimated finisher prose do not change the repeated 2027 race-date heading.",
+        "publicNote": ""
       },
       "11.3K": {
         "time": "09:00",
         "sourceUrl": "https://vietnamhighlands.utmb.world/races/10Ktuyenlam",
-        "note": "10K Tuyen Lam programme explicitly identifies Saturday 9 January 2027, 11.3km, 09:00. Incidental 2026 typos in estimated finisher prose do not change the repeated 2027 race-date heading."
+        "note": "10K Tuyen Lam programme explicitly identifies Saturday 9 January 2027, 11.3km, 09:00. Incidental 2026 typos in estimated finisher prose do not change the repeated 2027 race-date heading.",
+        "publicNote": ""
       }
     }
   },
@@ -169,12 +190,14 @@
       "5K": {
         "time": "09:30",
         "sourceUrl": "https://www.eventsupnorth.co.uk/event/2025",
-        "note": "Authorised 7 November 2026 event and each 2026 ticket category explicitly give 5K 09:30 and 2K 10:30. One legacy 2025 typo in body is contradicted by repeated 2026 current heading and date."
+        "note": "Authorised 7 November 2026 event and each 2026 ticket category explicitly give 5K 09:30 and 2K 10:30. One legacy 2025 typo in body is contradicted by repeated 2026 current heading and date.",
+        "publicNote": ""
       },
       "2K": {
         "time": "10:30",
         "sourceUrl": "https://www.eventsupnorth.co.uk/event/2025",
-        "note": "Authorised 7 November 2026 event and each 2026 ticket category explicitly give 5K 09:30 and 2K 10:30. One legacy 2025 typo in body is contradicted by repeated 2026 current heading and date."
+        "note": "Authorised 7 November 2026 event and each 2026 ticket category explicitly give 5K 09:30 and 2K 10:30. One legacy 2025 typo in body is contradicted by repeated 2026 current heading and date.",
+        "publicNote": ""
       }
     }
   },
@@ -187,12 +210,14 @@
       "8mi": {
         "time": "09:00",
         "sourceUrl": "https://racesignup.co.uk/sphinx-ac-coombe-8-2026",
-        "note": "22 November 2026 Coombe 8 and 5 mile programme: briefing 08:50 then both routes start 09:00."
+        "note": "22 November 2026 Coombe 8 and 5 mile programme: briefing 08:50 then both routes start 09:00.",
+        "publicNote": ""
       },
       "5mi": {
         "time": "09:00",
         "sourceUrl": "https://racesignup.co.uk/sphinx-ac-coombe-8-2026",
-        "note": "22 November 2026 Coombe 8 and 5 mile programme: briefing 08:50 then both routes start 09:00."
+        "note": "22 November 2026 Coombe 8 and 5 mile programme: briefing 08:50 then both routes start 09:00.",
+        "publicNote": ""
       }
     }
   },
@@ -205,12 +230,14 @@
       "10K": {
         "time": "10:00",
         "sourceUrl": "https://www.runthrough.co.uk/event/finsbury-park-5k-10k-half-marathon-junior-run-january-2027",
-        "note": "24 January 2027 organiser Race Day Schedule and Race Starts agree: 10K 10:00, 5K 10:20."
+        "note": "24 January 2027 organiser Race Day Schedule and Race Starts agree: 10K 10:00, 5K 10:20.",
+        "publicNote": ""
       },
       "5K": {
         "time": "10:20",
         "sourceUrl": "https://www.runthrough.co.uk/event/finsbury-park-5k-10k-half-marathon-junior-run-january-2027",
-        "note": "24 January 2027 organiser Race Day Schedule and Race Starts agree: 10K 10:00, 5K 10:20."
+        "note": "24 January 2027 organiser Race Day Schedule and Race Starts agree: 10K 10:00, 5K 10:20.",
+        "publicNote": ""
       }
     }
   },
@@ -223,12 +250,14 @@
       "5K": {
         "time": "09:50",
         "sourceUrl": "https://www.entrycentral.com/Hermitage",
-        "note": "22 November 2026 authorised entry schedule separately states 10K 09:45 and 5K 09:50."
+        "note": "22 November 2026 authorised entry schedule separately states 10K 09:45 and 5K 09:50.",
+        "publicNote": ""
       },
       "10K": {
         "time": "09:45",
         "sourceUrl": "https://www.entrycentral.com/Hermitage",
-        "note": "22 November 2026 authorised entry schedule separately states 10K 09:45 and 5K 09:50."
+        "note": "22 November 2026 authorised entry schedule separately states 10K 09:45 and 5K 09:50.",
+        "publicNote": ""
       }
     }
   },
@@ -241,12 +270,14 @@
       "10K": {
         "time": "08:30",
         "sourceUrl": "https://www.resultsbase.net/event/7615",
-        "note": "14 November 2026 authorised entry distance-specific trail-run starts: 10K 08:30, 5K 08:50. Earlier canicross starts are separate categories."
+        "note": "14 November 2026 authorised entry distance-specific trail-run starts: 10K 08:30, 5K 08:50. Earlier canicross starts are separate categories.",
+        "publicNote": ""
       },
       "5K": {
         "time": "08:50",
         "sourceUrl": "https://www.resultsbase.net/event/7615",
-        "note": "14 November 2026 authorised entry distance-specific trail-run starts: 10K 08:30, 5K 08:50. Earlier canicross starts are separate categories."
+        "note": "14 November 2026 authorised entry distance-specific trail-run starts: 10K 08:30, 5K 08:50. Earlier canicross starts are separate categories.",
+        "publicNote": ""
       }
     }
   },
@@ -259,7 +290,8 @@
       "Half": {
         "time": "11:00",
         "sourceUrl": "https://www.entrycentral.com/event/108004",
-        "note": "15 November 2026 Rubicer Fraserburgh Half Marathon explicitly starts 11:00; registration 09:00 is distinct."
+        "note": "15 November 2026 Rubicer Fraserburgh Half Marathon explicitly starts 11:00; registration 09:00 is distinct.",
+        "publicNote": ""
       }
     }
   },
@@ -272,7 +304,8 @@
       "Half": {
         "time": "12:00",
         "sourceUrl": "https://www.entrycentral.com/Glen-Clova-Half",
-        "note": "21 November 2026 organiser entry programme explicitly states start 12 noon."
+        "note": "21 November 2026 organiser entry programme explicitly states start 12 noon.",
+        "publicNote": ""
       }
     }
   },
@@ -285,12 +318,14 @@
       "10K": {
         "time": "10:00",
         "sourceUrl": "https://events.kronosports.uk/event/2089",
-        "note": "15 November 2026 authorised entry tickets explicitly start both distances at 10:00."
+        "note": "15 November 2026 authorised entry tickets explicitly start both distances at 10:00.",
+        "publicNote": ""
       },
       "5K": {
         "time": "10:00",
         "sourceUrl": "https://events.kronosports.uk/event/2089",
-        "note": "15 November 2026 authorised entry tickets explicitly start both distances at 10:00."
+        "note": "15 November 2026 authorised entry tickets explicitly start both distances at 10:00.",
+        "publicNote": ""
       }
     }
   },
@@ -303,7 +338,8 @@
       "5mi": {
         "time": "10:00",
         "sourceUrl": "https://events.kronosports.uk/event/2835",
-        "note": "6 December 2026 five-mile race; 10:00 start repeated in programme and both affiliated/unaffiliated tickets."
+        "note": "6 December 2026 five-mile race; 10:00 start repeated in programme and both affiliated/unaffiliated tickets.",
+        "publicNote": ""
       }
     }
   },
@@ -316,7 +352,8 @@
       "Half": {
         "time": "17:30",
         "sourceUrl": "https://bigfeatevents.eventrac.co.uk/e/dark-valley-night-trails-7126",
-        "note": "21 November 2026 schedule explicitly states all three distances start 17:30 after 17:25 briefing."
+        "note": "21 November 2026 schedule explicitly states all three distances start 17:30 after 17:25 briefing.",
+        "publicNote": ""
       }
     }
   },
@@ -329,7 +366,8 @@
       "10K": {
         "time": "09:00",
         "sourceUrl": "https://bigbearevents.net/events/dormousechallenge",
-        "note": "20 November 2026 six-hour challenge begins 09:00; two 5K laps for listed 10K."
+        "note": "20 November 2026 six-hour challenge begins 09:00; two 5K laps for listed 10K.",
+        "publicNote": ""
       }
     }
   },
@@ -342,7 +380,8 @@
       "16K": {
         "time": "11:00",
         "sourceUrl": "https://www.greatowlrunning.com/e/kirkstall-calverley-cutter-and-kirkstall-bridge-10km-12148",
-        "note": "23 January 2027 organiser race details: 16K and 10K both start 11:00; 10:00 is registration."
+        "note": "23 January 2027 organiser race details: 16K and 10K both start 11:00; 10:00 is registration.",
+        "publicNote": ""
       }
     }
   },
@@ -355,12 +394,14 @@
       "5K": {
         "time": "10:25",
         "sourceUrl": "https://www.runthrough.co.uk/event/chepstow-running-festival-january-2027",
-        "note": "24 January 2027 organiser race schedule explicitly gives 10K 10:15 and 5K 10:25."
+        "note": "24 January 2027 organiser race schedule explicitly gives 10K 10:15 and 5K 10:25.",
+        "publicNote": ""
       },
       "10K": {
         "time": "10:15",
         "sourceUrl": "https://www.runthrough.co.uk/event/chepstow-running-festival-january-2027",
-        "note": "24 January 2027 organiser race schedule explicitly gives 10K 10:15 and 5K 10:25."
+        "note": "24 January 2027 organiser race schedule explicitly gives 10K 10:15 and 5K 10:25.",
+        "publicNote": ""
       }
     }
   },
@@ -373,12 +414,14 @@
       "Marathon": {
         "time": "08:00",
         "sourceUrl": "https://www.maratonadoporto.com/pt/regulamento-2026/",
-        "note": "8 November 2026 regulations section 8 explicitly assigns 08:00 to marathon and 10K. Unspecified Other category is not matched."
+        "note": "8 November 2026 regulations section 8 explicitly assigns 08:00 to marathon and 10K. Unspecified Other category is not matched.",
+        "publicNote": ""
       },
       "10K": {
         "time": "08:00",
         "sourceUrl": "https://www.maratonadoporto.com/pt/regulamento-2026/",
-        "note": "8 November 2026 regulations section 8 explicitly assigns 08:00 to marathon and 10K. Unspecified Other category is not matched."
+        "note": "8 November 2026 regulations section 8 explicitly assigns 08:00 to marathon and 10K. Unspecified Other category is not matched.",
+        "publicNote": ""
       }
     }
   },
@@ -391,7 +434,8 @@
       "Half": {
         "time": "08:00",
         "sourceUrl": "https://www.baa.org/races/boston-half/info-for-athletes/",
-        "note": "8 November 2026 official participant instructions explicitly state race starts 08:00; 08:15 is youth races."
+        "note": "8 November 2026 official participant instructions explicitly state race starts 08:00; 08:15 is youth races.",
+        "publicNote": ""
       }
     }
   },
@@ -404,22 +448,26 @@
       "7K": {
         "time": "14:15",
         "sourceUrl": "https://vandersanden-limburgruns.be/duinengordeltrail/",
-        "note": "2026 seventh edition, 21 November organiser programme explicitly distinguishes each distance start. 12:15 is bib collection."
+        "note": "2026 seventh edition, 21 November organiser programme explicitly distinguishes each distance start. 12:15 is bib collection.",
+        "publicNote": ""
       },
       "11K": {
         "time": "14:00",
         "sourceUrl": "https://vandersanden-limburgruns.be/duinengordeltrail/",
-        "note": "2026 seventh edition, 21 November organiser programme explicitly distinguishes each distance start. 12:15 is bib collection."
+        "note": "2026 seventh edition, 21 November organiser programme explicitly distinguishes each distance start. 12:15 is bib collection.",
+        "publicNote": ""
       },
       "16K": {
         "time": "13:45",
         "sourceUrl": "https://vandersanden-limburgruns.be/duinengordeltrail/",
-        "note": "2026 seventh edition, 21 November organiser programme explicitly distinguishes each distance start. 12:15 is bib collection."
+        "note": "2026 seventh edition, 21 November organiser programme explicitly distinguishes each distance start. 12:15 is bib collection.",
+        "publicNote": ""
       },
       "22K": {
         "time": "13:30",
         "sourceUrl": "https://vandersanden-limburgruns.be/duinengordeltrail/",
-        "note": "2026 seventh edition, 21 November organiser programme explicitly distinguishes each distance start. 12:15 is bib collection."
+        "note": "2026 seventh edition, 21 November organiser programme explicitly distinguishes each distance start. 12:15 is bib collection.",
+        "publicNote": ""
       }
     }
   },
@@ -432,17 +480,20 @@
       "7.5K": {
         "time": "10:30",
         "sourceUrl": "https://www.natuurpunt-herent.be/trailfornature",
-        "note": "15 November 2026 second-edition organiser distance cards explicitly state 7.5km 10:30, 15km 11:10 and 22km 10:00; kids are separate."
+        "note": "15 November 2026 second-edition organiser distance cards explicitly state 7.5km 10:30, 15km 11:10 and 22km 10:00; kids are separate.",
+        "publicNote": ""
       },
       "15K": {
         "time": "11:10",
         "sourceUrl": "https://www.natuurpunt-herent.be/trailfornature",
-        "note": "15 November 2026 second-edition organiser distance cards explicitly state 7.5km 10:30, 15km 11:10 and 22km 10:00; kids are separate."
+        "note": "15 November 2026 second-edition organiser distance cards explicitly state 7.5km 10:30, 15km 11:10 and 22km 10:00; kids are separate.",
+        "publicNote": ""
       },
       "22K": {
         "time": "10:00",
         "sourceUrl": "https://www.natuurpunt-herent.be/trailfornature",
-        "note": "15 November 2026 second-edition organiser distance cards explicitly state 7.5km 10:30, 15km 11:10 and 22km 10:00; kids are separate."
+        "note": "15 November 2026 second-edition organiser distance cards explicitly state 7.5km 10:30, 15km 11:10 and 22km 10:00; kids are separate.",
+        "publicNote": ""
       }
     }
   },
@@ -455,17 +506,20 @@
       "Half": {
         "time": "08:30",
         "sourceUrl": "https://brazenracing.com/newyearsday/race-info/",
-        "note": "Current organiser homepage explicitly identifies 1 January 2027 and links this race-information programme. Half 08:30; 10K 08:55; 5K 09:10. Separate 07:30 hiker division is not the running race start."
+        "note": "Current organiser homepage explicitly identifies 1 January 2027 and links this race-information programme. Half 08:30; 10K 08:55; 5K 09:10. Separate 07:30 hiker division is not the running race start.",
+        "publicNote": ""
       },
       "10K": {
         "time": "08:55",
         "sourceUrl": "https://brazenracing.com/newyearsday/race-info/",
-        "note": "Current organiser homepage explicitly identifies 1 January 2027 and links this race-information programme. Half 08:30; 10K 08:55; 5K 09:10. Separate 07:30 hiker division is not the running race start."
+        "note": "Current organiser homepage explicitly identifies 1 January 2027 and links this race-information programme. Half 08:30; 10K 08:55; 5K 09:10. Separate 07:30 hiker division is not the running race start.",
+        "publicNote": ""
       },
       "5K": {
         "time": "09:10",
         "sourceUrl": "https://brazenracing.com/newyearsday/race-info/",
-        "note": "Current organiser homepage explicitly identifies 1 January 2027 and links this race-information programme. Half 08:30; 10K 08:55; 5K 09:10. Separate 07:30 hiker division is not the running race start."
+        "note": "Current organiser homepage explicitly identifies 1 January 2027 and links this race-information programme. Half 08:30; 10K 08:55; 5K 09:10. Separate 07:30 hiker division is not the running race start.",
+        "publicNote": ""
       }
     }
   },
@@ -478,12 +532,14 @@
       "Half": {
         "time": "10:30",
         "sourceUrl": "https://bathhillyhalf.org/",
-        "note": "15 November 2026 official page explicitly states both half and Ultra 10K (approximately 12.45km, listed 12.5K) start together at 10:30."
+        "note": "15 November 2026 official page explicitly states both half and Ultra 10K (approximately 12.45km, listed 12.5K) start together at 10:30.",
+        "publicNote": ""
       },
       "12.5K": {
         "time": "10:30",
         "sourceUrl": "https://bathhillyhalf.org/",
-        "note": "15 November 2026 official page explicitly states both half and Ultra 10K (approximately 12.45km, listed 12.5K) start together at 10:30."
+        "note": "15 November 2026 official page explicitly states both half and Ultra 10K (approximately 12.45km, listed 12.5K) start together at 10:30.",
+        "publicNote": ""
       }
     }
   },
@@ -496,7 +552,8 @@
       "Half": {
         "time": "07:00",
         "sourceUrl": "https://napleshalfmarathon.net/",
-        "note": "17 January 2027 official event header and race-day packet collection precede explicit 07:00 race start."
+        "note": "17 January 2027 official event header and race-day packet collection precede explicit 07:00 race start.",
+        "publicNote": ""
       }
     }
   },
@@ -509,17 +566,20 @@
       "15K": {
         "time": "09:30",
         "sourceUrl": "https://www.atletieklandvanaalst.be/de-ferremen-dottertrail/",
-        "note": "Dated 15 November 2026 official programme separately lists 22/32 km at 09:00 and 15 km at 09:30. Stored 7.5 km is excluded because official short route is 7 km. Official programme takes precedence over conflicting secondary listing."
+        "note": "Dated 15 November 2026 official programme separately lists 22/32 km at 09:00 and 15 km at 09:30. Stored 7.5 km is excluded because official short route is 7 km. Official programme takes precedence over conflicting secondary listing.",
+        "publicNote": ""
       },
       "22K": {
         "time": "09:00",
         "sourceUrl": "https://www.atletieklandvanaalst.be/de-ferremen-dottertrail/",
-        "note": "Dated 15 November 2026 official programme separately lists 22/32 km at 09:00 and 15 km at 09:30. Stored 7.5 km is excluded because official short route is 7 km. Official programme takes precedence over conflicting secondary listing."
+        "note": "Dated 15 November 2026 official programme separately lists 22/32 km at 09:00 and 15 km at 09:30. Stored 7.5 km is excluded because official short route is 7 km. Official programme takes precedence over conflicting secondary listing.",
+        "publicNote": ""
       },
       "32K": {
         "time": "09:00",
         "sourceUrl": "https://www.atletieklandvanaalst.be/de-ferremen-dottertrail/",
-        "note": "Dated 15 November 2026 official programme separately lists 22/32 km at 09:00 and 15 km at 09:30. Stored 7.5 km is excluded because official short route is 7 km. Official programme takes precedence over conflicting secondary listing."
+        "note": "Dated 15 November 2026 official programme separately lists 22/32 km at 09:00 and 15 km at 09:30. Stored 7.5 km is excluded because official short route is 7 km. Official programme takes precedence over conflicting secondary listing.",
+        "publicNote": ""
       }
     }
   },
@@ -562,7 +622,8 @@
       "10mi": {
         "time": "10:00",
         "sourceUrl": "https://www.nice-work.org.uk/contents/2941-coastbuster-10-mile-and-10k-race-information",
-        "note": "Race-information page linked by the 15 November 2026 event gives both adult distances 10:00. The 09:30 event header is the junior race; registration 08:30 and briefing 09:50 are not starts."
+        "note": "Race-information page linked by the 15 November 2026 event gives both adult distances 10:00. The 09:30 event header is the junior race; registration 08:30 and briefing 09:50 are not starts.",
+        "publicNote": ""
       }
     }
   },
@@ -575,7 +636,8 @@
       "Ultra": {
         "time": "10:30",
         "sourceUrl": "https://www.sientries.co.uk/event.php?event_id=16921",
-        "note": "14 November 2026 Winter Weavers programme gives the stored 50 km category 10:30; 07:30 belongs to the separate 100 km race."
+        "note": "14 November 2026 Winter Weavers programme gives the stored 50 km category 10:30; 07:30 belongs to the separate 100 km race.",
+        "publicNote": ""
       }
     }
   },
@@ -588,7 +650,8 @@
       "10mi": {
         "time": "09:00",
         "sourceUrl": "https://www.ukrunningevents.co.uk/events/trail-runs/brighten-brighton-seafront-run-2027?atc=runabc",
-        "note": "17 January 2027 event-day timings explicitly give 10 miles 09:00; the 10.1 km category starts separately at 09:15."
+        "note": "17 January 2027 event-day timings explicitly give 10 miles 09:00; the 10.1 km category starts separately at 09:15.",
+        "publicNote": ""
       }
     }
   },
@@ -621,7 +684,8 @@
       "5mi": {
         "time": "11:02",
         "sourceUrl": "https://runnation.co.uk/races?race_filter%5Blocation%5D=3&race_filter%5Bmonth%5D=11&race_filter%5Bdistance%5D=&limit=9&race_filter%5Bkeyword%5D=",
-        "note": "Organiser current race list names the 8 November 2026 Remembrance Day 5 Miler and explicitly gives 11:02, after the silence. Historical slug is retained."
+        "note": "Organiser current race list names the 8 November 2026 Remembrance Day 5 Miler and explicitly gives 11:02, after the silence. Historical slug is retained.",
+        "publicNote": ""
       }
     }
   },
@@ -634,7 +698,8 @@
       "Ultra": {
         "time": "08:00",
         "sourceUrl": "https://resultsbase.net/event/7875",
-        "note": "Authorised 15 November 2026 entry programme lists TVU 50k 08:00 and 65k 07:30. Only the stored 50 km race is updated."
+        "note": "Authorised 15 November 2026 entry programme lists TVU 50k 08:00 and 65k 07:30. Only the stored 50 km race is updated.",
+        "publicNote": ""
       }
     }
   },
@@ -647,7 +712,8 @@
       "Ultra": {
         "time": "08:00",
         "sourceUrl": "https://resultsbase.net/event/7875",
-        "note": "Authorised 15 November 2026 entry programme lists TVU 50k 08:00 and 65k 07:30. This existing provider record receives the same 50 km start; no new event or edition is created."
+        "note": "Authorised 15 November 2026 entry programme lists TVU 50k 08:00 and 65k 07:30. This existing provider record receives the same 50 km start; no new event or edition is created.",
+        "publicNote": ""
       }
     }
   },
@@ -660,12 +726,14 @@
       "5K": {
         "time": "10:00",
         "sourceUrl": "https://www.runfestsilverstone.com/information",
-        "note": "Current official race information for 22 November 2026 explicitly groups half/10K/5K at 10:00, separately from the 09:30 family mile. This dated organiser programme supersedes the secondary charity listing at 09:00."
+        "note": "Current official race information for 22 November 2026 explicitly groups half/10K/5K at 10:00, separately from the 09:30 family mile. This dated organiser programme supersedes the secondary charity listing at 09:00.",
+        "publicNote": ""
       },
       "10K": {
         "time": "10:00",
         "sourceUrl": "https://www.runfestsilverstone.com/information",
-        "note": "Current official race information for 22 November 2026 explicitly groups half/10K/5K at 10:00, separately from the 09:30 family mile. This dated organiser programme supersedes the secondary charity listing at 09:00."
+        "note": "Current official race information for 22 November 2026 explicitly groups half/10K/5K at 10:00, separately from the 09:30 family mile. This dated organiser programme supersedes the secondary charity listing at 09:00.",
+        "publicNote": ""
       }
     }
   },
@@ -678,12 +746,14 @@
       "160K": {
         "time": "09:00",
         "sourceUrl": "https://www.saintelyon.com/races/160km-lyon-saintelyon",
-        "note": "Official 28 November 2026 160 km event page explicitly gives 09:00 from Halle Tony Garnier. The outward leg is untimed; return classification follows later."
+        "note": "Official 28 November 2026 160 km event page explicitly gives 09:00 from Halle Tony Garnier. The outward leg is untimed; return classification follows later.",
+        "publicNote": ""
       },
       "13K": {
         "time": "22:30",
         "sourceUrl": "https://www.saintelyon.com/races/13km-saintetic",
-        "note": "Official SaintéTic 13 km page explicitly gives 28 November 2026 at 22:30 from Chaponost."
+        "note": "Official SaintéTic 13 km page explicitly gives 28 November 2026 at 22:30 from Chaponost.",
+        "publicNote": ""
       },
       "80K": {
         "time": "23:30",
@@ -703,12 +773,14 @@
       "5K": {
         "time": "10:30",
         "sourceUrl": "https://www.berenloopterschelling.nl/programma/",
-        "note": "Official programme explicitly dates 5/10 km on 31 October 2026 (10:30/11:30) and half/marathon on 1 November (12:00/12:40). Current organiser programme supersedes secondary 10K listings at 10:40. Page was originally created in 2023 but its programme headings explicitly specify 2026."
+        "note": "Official programme explicitly dates 5/10 km on 31 October 2026 (10:30/11:30) and half/marathon on 1 November (12:00/12:40). Current organiser programme supersedes secondary 10K listings at 10:40. Page was originally created in 2023 but its programme headings explicitly specify 2026.",
+        "publicNote": ""
       },
       "10K": {
         "time": "11:30",
         "sourceUrl": "https://www.berenloopterschelling.nl/programma/",
-        "note": "Official programme explicitly dates 5/10 km on 31 October 2026 (10:30/11:30) and half/marathon on 1 November (12:00/12:40). Current organiser programme supersedes secondary 10K listings at 10:40. Page was originally created in 2023 but its programme headings explicitly specify 2026."
+        "note": "Official programme explicitly dates 5/10 km on 31 October 2026 (10:30/11:30) and half/marathon on 1 November (12:00/12:40). Current organiser programme supersedes secondary 10K listings at 10:40. Page was originally created in 2023 but its programme headings explicitly specify 2026.",
+        "publicNote": ""
       }
     }
   },
@@ -721,12 +793,14 @@
       "Half": {
         "time": "12:00",
         "sourceUrl": "https://www.berenloopterschelling.nl/programma/",
-        "note": "Official programme explicitly dates 5/10 km on 31 October 2026 (10:30/11:30) and half/marathon on 1 November (12:00/12:40). Current organiser programme supersedes secondary 10K listings at 10:40. Page was originally created in 2023 but its programme headings explicitly specify 2026."
+        "note": "Official programme explicitly dates 5/10 km on 31 October 2026 (10:30/11:30) and half/marathon on 1 November (12:00/12:40). Current organiser programme supersedes secondary 10K listings at 10:40. Page was originally created in 2023 but its programme headings explicitly specify 2026.",
+        "publicNote": ""
       },
       "Marathon": {
         "time": "12:40",
         "sourceUrl": "https://www.berenloopterschelling.nl/programma/",
-        "note": "Official programme explicitly dates 5/10 km on 31 October 2026 (10:30/11:30) and half/marathon on 1 November (12:00/12:40). Current organiser programme supersedes secondary 10K listings at 10:40. Page was originally created in 2023 but its programme headings explicitly specify 2026."
+        "note": "Official programme explicitly dates 5/10 km on 31 October 2026 (10:30/11:30) and half/marathon on 1 November (12:00/12:40). Current organiser programme supersedes secondary 10K listings at 10:40. Page was originally created in 2023 but its programme headings explicitly specify 2026.",
+        "publicNote": ""
       }
     }
   },
@@ -739,7 +813,8 @@
       "Marathon": {
         "time": "06:30",
         "sourceUrl": "https://vegasmarathon.com/info?tab=quick-info",
-        "note": "Official quick-information page explicitly gives Sunday 10 January 2027 marathon start 06:30."
+        "note": "Official quick-information page explicitly gives Sunday 10 January 2027 marathon start 06:30.",
+        "publicNote": ""
       }
     }
   },
@@ -767,7 +842,8 @@
       "Marathon": {
         "time": "07:00",
         "sourceUrl": "https://www.enduranzevents.co.nz/race-information",
-        "note": "Current 31 October 2026 race information gives the marathon start 07:00 at Staveley Hall, separately from registration 06:00–06:40 and briefing 06:45."
+        "note": "Current 31 October 2026 race information gives the marathon start 07:00 at Staveley Hall, separately from registration 06:00–06:40 and briefing 06:45.",
+        "publicNote": ""
       }
     }
   },
@@ -780,7 +856,8 @@
       "10K": {
         "time": "14:30",
         "sourceUrl": "https://athleticsni.org/Fixtures/Road-Running/Podium4Sport-Seeley-Cup-10K",
-        "note": "Athletics Northern Ireland 28 November 2026 fixture explicitly states start time 14:30 at Ormeau Embankment."
+        "note": "Athletics Northern Ireland 28 November 2026 fixture explicitly states start time 14:30 at Ormeau Embankment.",
+        "publicNote": ""
       }
     }
   },
@@ -793,7 +870,8 @@
       "5K": {
         "time": "11:00",
         "sourceUrl": "https://eventmaster.ie/event/lReDHV8HPO",
-        "note": "Authorised single-distance 5 km entry explicitly dates Sunday 3 January 2027 at 11:00. Page heading is 2027; an event-name string retains 2026, but full calendar date and ticket refer to 2027."
+        "note": "Authorised single-distance 5 km entry explicitly dates Sunday 3 January 2027 at 11:00. Page heading is 2027; an event-name string retains 2026, but full calendar date and ticket refer to 2027.",
+        "publicNote": ""
       }
     }
   },
@@ -806,7 +884,8 @@
       "10K": {
         "time": "11:00",
         "sourceUrl": "https://eventmaster.ie/event/qqYzHP7SQq",
-        "note": "2026 authorised entry description and dated race schedule agree on Sunday 8 November at 11:00."
+        "note": "2026 authorised entry description and dated race schedule agree on Sunday 8 November at 11:00.",
+        "publicNote": ""
       }
     }
   },
@@ -819,7 +898,8 @@
       "10K": {
         "time": "12:00",
         "sourceUrl": "https://eventmaster.ie/event/w2L9hPySRQ",
-        "note": "Organiser entry description explicitly says 31 December 2026 starts at noon; dated event line agrees."
+        "note": "Organiser entry description explicitly says 31 December 2026 starts at noon; dated event line agrees.",
+        "publicNote": ""
       }
     }
   },
@@ -832,7 +912,8 @@
       "Marathon": {
         "time": "06:15",
         "sourceUrl": "https://inmotionevents.com/event/carlsbad-marathon/race-weekend/",
-        "note": "Official full-marathon page and 2027 FAQ programme agree on Sunday 17 January 2027 at 06:15."
+        "note": "Official full-marathon page and 2027 FAQ programme agree on Sunday 17 January 2027 at 06:15.",
+        "publicNote": ""
       }
     }
   },
@@ -845,7 +926,8 @@
       "10K": {
         "time": "11:03",
         "sourceUrl": "https://totalracetiming.co.uk/race/664",
-        "note": "8 November 2026 authorised entry race-options table explicitly gives the 10 km 11:03, following the Remembrance tribute and silence."
+        "note": "8 November 2026 authorised entry race-options table explicitly gives the 10 km 11:03, following the Remembrance tribute and silence.",
+        "publicNote": ""
       }
     }
   },
@@ -902,7 +984,8 @@
       "10K": {
         "time": "10:00",
         "sourceUrl": "https://www.nice-work.org.uk/contents/2825-sherwood-christmas-10k-and-5k-race-information",
-        "note": "Race information linked by the 22 November 2026 organiser page explicitly gives adult 5K and 10K 10:00. Event header 09:30 belongs to juniors; registration opens 08:30."
+        "note": "Race information linked by the 22 November 2026 organiser page explicitly gives adult 5K and 10K 10:00. Event header 09:30 belongs to juniors; registration opens 08:30.",
+        "publicNote": ""
       }
     }
   },
@@ -915,12 +998,14 @@
       "10K": {
         "time": "08:00",
         "sourceUrl": "https://g3series.co.uk/",
-        "note": "Official public race-card data for 9 January 2027 at Newlands Corner gives start 08:00 for 10 km and 15 km; linked RiderHQ event matches the date. Exact public bundle /assets/index-WRA28rI9.js retained in the audit."
+        "note": "Official public race-card data for 9 January 2027 at Newlands Corner gives start 08:00 for 10 km and 15 km; linked RiderHQ event matches the date. Exact public bundle /assets/index-WRA28rI9.js retained in the audit.",
+        "publicNote": ""
       },
       "15K": {
         "time": "08:00",
         "sourceUrl": "https://g3series.co.uk/",
-        "note": "Official public race-card data for 9 January 2027 at Newlands Corner gives start 08:00 for 10 km and 15 km; linked RiderHQ event matches the date. Exact public bundle /assets/index-WRA28rI9.js retained in the audit."
+        "note": "Official public race-card data for 9 January 2027 at Newlands Corner gives start 08:00 for 10 km and 15 km; linked RiderHQ event matches the date. Exact public bundle /assets/index-WRA28rI9.js retained in the audit.",
+        "publicNote": ""
       }
     }
   }
