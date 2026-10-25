@@ -89,7 +89,9 @@ export async function publishCheckedFixtures(sql, publishing, details, review = 
     const staged = await publishing.stageCatalogueBatch(
       {
         sourceKey,
-        sourceUrl: "https://www.athrecs.com/races/places/europe/united-kingdom/england/norfolk",
+        sourceUrl:
+          review.sourceUrl ??
+          "https://www.athrecs.com/races/places/europe/united-kingdom/england/norfolk",
         editions,
       },
       actor,

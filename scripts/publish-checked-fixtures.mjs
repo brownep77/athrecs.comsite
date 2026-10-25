@@ -11,6 +11,8 @@ import { TIMING_DIRECTORY_STARTS_20261023_REVIEW } from "./lib/timing-directory-
 import timingDirectoryStarts from "../src/data/timing-directory-starts-2026-10-23.json" with { type: "json" };
 import { TIMING_DIRECTORY_STARTS_20261024_REVIEW } from "./lib/timing-directory-starts-2026-10-24-review.mjs";
 import timingDirectoryStarts20261024 from "../src/data/timing-directory-starts-2026-10-24.json" with { type: "json" };
+import { ACCRA_START_REVIEW } from "./lib/accra-start-2026-10-25-review.mjs";
+import accraStart from "../src/data/accra-start-2026-10-25.json" with { type: "json" };
 if (process.env.VERCEL_ENV !== "production" || process.env.VERCEL_GIT_COMMIT_REF !== "main") {
   console.log("[fixture-checks] skipping outside production/main");
   process.exit(0);
@@ -82,6 +84,10 @@ try {
       timingDirectoryStarts20261024,
       TIMING_DIRECTORY_STARTS_20261024_REVIEW,
     ),
+  );
+  console.log(
+    "[accra-start-2026-10-25]",
+    await publishCheckedFixtures(await getSql(), publishing, accraStart, ACCRA_START_REVIEW),
   );
 } finally {
   await vite.close();

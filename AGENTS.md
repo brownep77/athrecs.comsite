@@ -10,6 +10,14 @@
 
 ## Fixture dates and start times
 
+- Owner instruction, 25 October 2026: missing starts need active follow-up, not
+  only clearer labels. Read the linked edition-specific schedule, FAQ, race
+  instructions/PDF and authorised entry programme before leaving a start blank.
+  Record whether it is not yet published, inaccessible, conflicting or unchecked,
+  with the pages attempted and check date. Prioritise races within 48 hours,
+  then seven days, then 30 days. Keep unchecked imminent editions visible in the
+  review queue and report the remaining count; never claim completeness from a
+  successful batch alone. Preserve confirmed starts and exact distance/wave scope.
 - Owner instruction, 25 October 2026: never display internal "Other" placeholders
   as race distances or start times. Show the confirmed distance and local start;
   identify first waves, later waves and start windows explicitly. When facts are
