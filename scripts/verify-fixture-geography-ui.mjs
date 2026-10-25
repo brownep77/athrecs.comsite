@@ -104,7 +104,13 @@ try {
         page.locator("#fixtures").getByRole("button", { name: "Search", exact: true }).click(),
       ]);
       const flags = page.locator("#fixtures [data-country-code]");
-      await flags.first().waitFor();
+      // Client navigation updates the URL before replacing the previous fixture
+      // rows. Wait for the filtered result set, still requiring every country
+      // flag to match rather than accepting stale or partially filtered cards.
+      await page.waitForFunction((expected) => {
+        const rendered = [...document.querySelectorAll("#fixtures [data-country-code]")];
+        return rendered.length > 0 && rendered.every((flag) => flag.getAttribute("data-country-code") === expected);
+      }, countryFlag(chosen).code);
       for (const flag of await flags.all())
         assert.equal(await flag.getAttribute("data-country-code"), countryFlag(chosen).code, sport);
       await page.screenshot({ path: `artifacts/${sport}-country-${width}.png` });
