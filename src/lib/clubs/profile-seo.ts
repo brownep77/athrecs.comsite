@@ -31,7 +31,7 @@ export function clubProfileSummary(club: ClubSearchProfile, siteName: string) {
       : [...new Set([club.city, club.county, club.country].map((value) => value.trim()))]
           .filter(Boolean)
           .join(", ");
-  return `${name}${place ? ` (${place})` : ""} club profile on ${siteName}. View available club details and public athlete profiles.`;
+  return `Club profile for ${name}${place ? ` (${place})` : ""} on ${siteName}. View available club details and public athlete profiles.`;
 }
 
 export function clubSearchMetadata(club: ClubSearchProfile, siteUrl: string, siteName: string) {
