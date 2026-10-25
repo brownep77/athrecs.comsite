@@ -3,6 +3,8 @@
 Requested scope: a single example of a concise search title and more precise
 event metadata, on `wa-32-hella-hamburg-half-marathon-7238156`, 25 October 2026.
 No site-wide title change, new photographs, URL change or database rewrite.
+The reviewed half marathon uses the Running/Road page presentation, including
+when a preview seed retains the broader Athletics classification.
 
 Opened and reviewed on 25 October 2026:
 

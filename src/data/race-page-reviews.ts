@@ -83,6 +83,8 @@ export function reviewedRacePage<T extends ReviewedPage>(data: T): T {
     ...data,
     event: {
       ...data.event,
+      sport: "Running",
+      surface: "Road",
       organiser: review.organiser,
       website: review.website,
       description: review.description,

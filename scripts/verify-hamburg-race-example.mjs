@@ -30,7 +30,7 @@ const original = {
     id: 1,
     slug,
     name: "32. hella Hamburg Half Marathon",
-    sport: "Running",
+    sport: "Athletics",
     city: "Hamburg",
     country: "Germany",
     county: "",
@@ -49,6 +49,11 @@ const data = reviewedRacePage(original);
 assert.equal(original.event.organiser, "Steven Richter", "Do not mutate stored values");
 assert.equal(original.upcoming.length, 1);
 assert.equal(data.event.organiser, review.organiser);
+assert.equal(
+  data.event.sport,
+  "Running",
+  "The verified half marathon uses the running-race layout even when imported as generic Athletics",
+);
 assert.equal(
   data.upcoming,
   original.upcoming,
