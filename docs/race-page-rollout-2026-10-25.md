@@ -45,9 +45,11 @@ Opened on 25 October 2026:
 https://www.runthrough.co.uk/event/holkham-half-marathon-10k-may-2027
 
 The live AthRecs page previously showed Half 09:00 BST and an unverified 10K
-start, broad Holkham Estate location and organiser placeholder “See website / TRT”.
+start, broad Holkham Estate location, Mixed surface and organiser placeholder “See website / TRT”.
 The exact-date guide adds RunThrough, 10K 09:40, Holkham Hall venue details and
-separate parking entrance/arrival instructions. The venue postcode NR23 1AB and
+separate parking entrance/arrival instructions. The organiser confirms a road course;
+the selected 2027 page uses Road, retaining the stored Mixed value for other editions.
+The venue postcode NR23 1AB and
 parking entrance postcode NR23 1RH serve different purposes and remain distinct.
 The half-marathon start remains 09:00. No prices or availability are invented.
 RunThrough already exists in the source registry.

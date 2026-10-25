@@ -10,6 +10,8 @@ export type RaceGuide = {
   starts: Record<string, string>;
   venue: string;
   postcode?: string;
+  streetAddress?: string;
+  surface?: string;
   organiser?: { name: string; url: string };
   facts: Array<{ label: string; text: string }>;
   links?: Array<{ label: string; url: string }>;
@@ -28,6 +30,8 @@ export const runRecsRaceGuides: RaceGuide[] = [
     },
     venue: "Holkham Hall, Holkham Road, Wells-next-the-Sea",
     postcode: "NR23 1AB",
+    streetAddress: "Holkham Road",
+    surface: "Road",
     facts: [
       {
         label: "Start and finish",

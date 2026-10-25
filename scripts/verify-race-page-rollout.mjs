@@ -126,7 +126,19 @@ assert.equal(transition.endUtcOffset, "+00:00");
 const holkham = { ...event, slug: "holkham-half-10k" };
 const h = racePageMetadata(holkham, [{ ...row, event_date: "2027-05-16" }]);
 assert.equal(h.venue.postalCode, "NR23 1AB");
+assert.equal(h.venue.streetAddress, "Holkham Road");
 assert.equal(h.organiser, "RunThrough");
+const holkhamPage = data({
+  event: { ...holkham, surface: "Mixed" },
+  upcoming: [{ ...row, event_date: "2027-05-16" }],
+});
+assert.equal(reviewedRacePage(holkhamPage).event.surface, "Road");
+assert.equal(holkhamPage.event.surface, "Mixed", "Preserve the original stored surface");
+assert.equal(
+  reviewedRacePage({ ...holkhamPage, upcoming: [{ ...row, event_date: "2028-05-16" }] }).event
+    .surface,
+  "Mixed",
+);
 assert.equal(
   racePageMetadata(holkham, [{ ...row, event_date: "2028-05-16" }]).venue.postalCode,
   undefined,

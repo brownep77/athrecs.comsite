@@ -83,7 +83,12 @@ export function reviewedRacePage<T extends ReviewedPage>(data: T): T {
       return data;
     return {
       ...data,
-      event: { ...data.event, organiser: guide.organiser.name, website: guide.website },
+      event: {
+        ...data.event,
+        organiser: guide.organiser.name,
+        website: guide.website,
+        ...(guide.surface ? { surface: guide.surface } : {}),
+      },
     };
   }
   const hasHalf = data.upcoming.some(

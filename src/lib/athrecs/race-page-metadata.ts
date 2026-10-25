@@ -87,6 +87,7 @@ export function racePageMetadata<T extends Edition>(event: Event, upcoming: T[])
         event.name ||
         "Location to be confirmed",
       postalCode: guide?.postcode,
+      streetAddress: guide?.streetAddress,
       countryCode: /^[A-Z]{2}$/.test(country.iso) && country.iso !== "UN" ? country.iso : undefined,
     },
     // A general event-directory URL does not identify an organiser's own website.
