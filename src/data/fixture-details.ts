@@ -13,6 +13,10 @@ import imminentStarts from "./imminent-starts-2026-10-25.json" with { type: "jso
 
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
+  /** Reviewed race-day name; the canonical event and edition IDs stay unchanged. */
+  displayName?: string;
+  /** Shared event-page heading when one weekend contains different race days. */
+  eventPageName?: string;
   place?: { town?: string; city?: string; county?: string; state?: string };
   summary: string;
   timeZone: string;
@@ -26,6 +30,40 @@ export type FixtureDetail = {
 };
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
+  "bucharest-half-marathon|2027-05-08": {
+    displayName: "Bucharest 10K",
+    eventPageName: "OMV Petrom Bucharest Half Marathon & 10K",
+    summary:
+      "Part of the OMV Petrom Bucharest Half Marathon weekend: 10K on Saturday 8 May; half marathon on Sunday 9 May 2027. Both start at 09:00 local time.",
+    timeZone: "Europe/Bucharest",
+    sourceUrl: "https://www.bucuresti21km.ro/en/schedule/",
+    checkedAt: "2026-10-25",
+    starts: {
+      "10K": {
+        time: "09:00",
+        sourceUrl: "https://www.bucuresti21km.ro/en/cursa-10km-10k-bucharest-race/",
+        publicNote:
+          "Saturday's 10K is part of the OMV Petrom Bucharest Half Marathon weekend. The half marathon takes place on Sunday 9 May. The separate wheelchair 10K starts at 08:45.",
+      },
+    },
+  },
+  "bucharest-half-marathon|2027-05-09": {
+    displayName: "Bucharest Half Marathon",
+    eventPageName: "OMV Petrom Bucharest Half Marathon & 10K",
+    summary:
+      "Part of the OMV Petrom Bucharest Half Marathon weekend: 10K on Saturday 8 May; half marathon on Sunday 9 May 2027. Both start at 09:00 local time.",
+    timeZone: "Europe/Bucharest",
+    sourceUrl: "https://www.bucuresti21km.ro/en/schedule/",
+    checkedAt: "2026-10-25",
+    starts: {
+      Half: {
+        time: "09:00",
+        sourceUrl: "https://www.bucuresti21km.ro/en/cursa-21km-half-marathon-bucharest/",
+        publicNote:
+          "Sunday's half marathon is part of the OMV Petrom Bucharest Half Marathon weekend. The companion 10K takes place on Saturday 8 May.",
+      },
+    },
+  },
   ...imminentStarts,
   ...accraStart,
   "wa-32-hella-hamburg-half-marathon-7238156|2026-10-25": {

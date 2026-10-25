@@ -197,7 +197,7 @@ export async function readSportFixtures(
         return {
           eventId: row.event_id,
           slug,
-          name: row.name,
+          name: detail?.displayName ?? row.name,
           eventDate: row.event_date,
           town: detail?.place?.town ?? null,
           city,
@@ -229,7 +229,7 @@ export async function readSportFixtures(
               const calendarRace: CalendarRace | null = slug
                 ? {
                     id: `edition-${start.editionId}-${start.distance}`,
-                    name: row.name,
+                    name: checked ? (detail.displayName ?? row.name) : row.name,
                     date: row.event_date,
                     distance: formatDistanceWithUnits(start.distance, start.distanceKm),
                     startTime: time,

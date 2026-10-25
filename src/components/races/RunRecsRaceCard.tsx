@@ -26,6 +26,7 @@ export function RunRecsRaceCard({
   localized?: { language: string; country: string };
 }) {
   const date = race.next_date;
+  const fixtureDetail = FIXTURE_DETAILS[`${race.slug}|${date}`];
   const status = date && race.next_status ? effectiveStatus(date, race.next_status) : null;
   const venue = venueForEvent(race);
   const location = compactFixtureLocation({ ...race, area: null, country: venue.nation }).text;
@@ -77,7 +78,7 @@ export function RunRecsRaceCard({
         <div className="min-w-0 space-y-2">
           <h2 className="font-display text-base font-semibold leading-snug text-fg sm:text-lg">
             <Link {...detailLink} className="no-underline hover:text-accent">
-              {race.name}
+              {fixtureDetail?.eventPageName ?? race.name}
             </Link>
           </h2>
           <p className="flex flex-wrap items-start gap-1.5 text-sm text-muted">
@@ -100,7 +101,9 @@ export function RunRecsRaceCard({
             ) : null}
           </div>
           {race.summary && race.summary.trim() !== race.name.trim() ? (
-            <p className="line-clamp-2 text-sm leading-relaxed text-muted">{race.summary}</p>
+            <p className="line-clamp-2 text-sm leading-relaxed text-muted">
+              {fixtureDetail?.summary ?? race.summary}
+            </p>
           ) : null}
           <RaceGroupBadges groups={race.groups} />
         </div>

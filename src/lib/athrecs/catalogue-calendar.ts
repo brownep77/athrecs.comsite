@@ -82,7 +82,7 @@ export function catalogueCalendarRace(
   const details = FIXTURE_DETAILS[`${event.slug}|${edition.event_date}`];
   return {
     id: `edition-${edition.id}-${edition.distance_code}`,
-    name: event.name,
+    name: details?.starts[edition.distance_code] ? (details.displayName ?? event.name) : event.name,
     date: edition.event_date,
     distance: formatDistanceWithUnits(edition.distance_code, edition.distance_km),
     startTime: supplementedStart(

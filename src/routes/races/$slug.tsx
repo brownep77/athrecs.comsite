@@ -51,7 +51,7 @@ import { EntryOptions } from "@/components/races/EntryOptions";
 import { RaceGroupBadges, RaceGroupDetails } from "@/components/races/RaceGroupBadges";
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
-import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
+import { distanceDisplayLabel, formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { resolveCountry, filterCountryName } from "@/lib/athrecs/countries";
 import { timeZoneAbbr, timeZoneForPlace } from "@/lib/athrecs/timezone";
 import { buildRaceBriefing, sportLabel } from "@/lib/athrecs/race-briefing";
@@ -292,6 +292,7 @@ export function RacePageContent({
   });
   const location = compactFixtureLocation({ ...event, country: filterCountryName(country) });
   const next = nextRaceEdition(upcoming);
+  const nextFixtureDetail = FIXTURE_DETAILS[`${event.slug}|${next?.event_date}`];
   const archived = !next && past.length > 0;
   const nextStart = raceEditionStart(event, next);
   const zone = timeZoneForPlace({
@@ -400,6 +401,9 @@ export function RacePageContent({
               <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-fg md:text-4xl">
                 {event.name}
               </h1>
+              {nextFixtureDetail?.eventPageName ? (
+                <p className="text-sm leading-relaxed text-muted">{nextFixtureDetail.summary}</p>
+              ) : null}
               <p className="flex items-start gap-2 text-sm text-muted">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-subtle" />
                 <span>
@@ -413,6 +417,9 @@ export function RacePageContent({
               <div className="rounded-xl border border-border bg-elevated px-4 py-3 text-left lg:min-w-44 lg:text-right">
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-subtle">
                   Next race day
+                  {nextFixtureDetail?.eventPageName && nextDayEditions.length === 1
+                    ? ` · ${distanceDisplayLabel(next.distance_code, next.distance_km)}`
+                    : ""}
                 </p>
                 <p className="font-display text-xl font-semibold text-fg">
                   {formatRaceDateShort(next.event_date)}
