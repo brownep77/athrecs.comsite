@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 931 unique sources as of 24 October 2026. Only 36 are enabled; the other 895 remain
+The registry contains 937 unique sources as of 24 October 2026. Only 36 are enabled; the other 901 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -81,7 +81,7 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 931 sources create exactly one source job;
+- all 937 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
 - the other 895 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
@@ -421,3 +421,8 @@ The source registry and wider repository event inventory were checked for
 duplicates. Private participant records remain outside this repository.
 
 The registry now contains 931 sources: 36 enabled and 895 disabled.
+
+
+### Brentwood historical results research — 24 October 2026
+
+Six disabled manual references register the organiser archive, archived JAND timing tables, Sporting Roots index-only leads, Witham RC, Brentwood Beagles and Bakers reports. Existing FR Systems and Sporthive identities are reused. Named rows and timing headings were inspected; the 2026 club reports are partial and the Sporting Roots transcripts remain inaccessible. The 2010 and 2013 source versions disagree on some positions; disputed positions and unresolved identities are not verified. Collection remains disabled for all six additions.
