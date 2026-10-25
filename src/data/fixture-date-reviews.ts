@@ -3,6 +3,11 @@ export const FIXTURE_DATE_REVIEWS: Record<
   string,
   { sourceUrl: string; checkedAt: string; note: string }
 > = {
+  "changsha-marathon|2026-10-25": {
+    sourceUrl: "https://www.marathonchangsha.com/Detail/30",
+    checkedAt: "2026-10-25",
+    note: "The organiser’s current 2026 regulations and news confirm 15 November, with the event first gun at 07:00 CST (UTC+8). The older AIMS-based 25 October record is retained for audit only. Later wave clocks must be checked separately.",
+  },
   "toulouse-metropole-run-experience|2026-10-31": {
     sourceUrl: "https://harmonie-mutuelle.toulouserunexperience.fr/marathon/",
     checkedAt: "2026-10-25",

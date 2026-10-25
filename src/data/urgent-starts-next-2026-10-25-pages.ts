@@ -1,4 +1,7 @@
-import details from "./urgent-starts-next-2026-10-25.json" with { type: "json" };
+import thirdDetails from "./urgent-starts-third-2026-10-25.json" with { type: "json" };
+import nextDetails from "./urgent-starts-next-2026-10-25.json" with { type: "json" };
+
+const details = { ...nextDetails, ...thirdDetails };
 
 type Page = {
   event: { slug: string };
