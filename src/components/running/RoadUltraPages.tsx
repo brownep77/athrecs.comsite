@@ -1,3 +1,4 @@
+import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
 import { RaceActions } from "@/components/races/RaceActions";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
@@ -462,6 +463,7 @@ export function RoadUltraDetail({ race, today }: { race: RoadUltra; today: strin
       >
         Explore all UK road ultra guides <ArrowRight size={16} aria-hidden="true" />
       </Link>
+      <SuggestRaceEdit key={race.slug} slug={race.slug} name={race.name} pageType="ultra" />
     </article>
   );
 }

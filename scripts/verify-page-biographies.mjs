@@ -168,7 +168,7 @@ const race = {
 const bio = raceSearchContent(race);
 assert.match(bio.biography.join(" "), /Norwich, Norfolk, England/);
 assert.match(bio.biography.join(" "), /half marathon, 10K/);
-assert.match(bio.biography.join(" "), /next listed date is 4 April 2027/);
+assert.match(bio.biography.join(" "), /next listed date is Sunday, 4 April 2027/);
 assert.match(bio.biography.join(" "), /editions from 2025/);
 assert.match(bio.description, /Norwich, Norfolk, England/);
 assert(bio.description.length <= 175);

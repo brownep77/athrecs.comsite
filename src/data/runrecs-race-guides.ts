@@ -10,11 +10,47 @@ export type RaceGuide = {
   starts: Record<string, string>;
   venue: string;
   postcode?: string;
+  streetAddress?: string;
+  surface?: string;
+  organiser?: { name: string; url: string };
   facts: Array<{ label: string; text: string }>;
   links?: Array<{ label: string; url: string }>;
 };
 
 export const runRecsRaceGuides: RaceGuide[] = [
+  {
+    slugs: ["holkham-half-10k"],
+    website: "https://www.runthrough.co.uk/event/holkham-half-marathon-10k-may-2027",
+    date: "2027-05-16",
+    checked: "2026-10-25",
+    starts: { Half: "09:00", "10K": "09:40" },
+    organiser: {
+      name: "RunThrough",
+      url: "https://www.runthrough.co.uk/event/holkham-half-marathon-10k-may-2027",
+    },
+    venue: "Holkham Hall, Holkham Road, Wells-next-the-Sea",
+    postcode: "NR23 1AB",
+    streetAddress: "Holkham Road",
+    surface: "Road",
+    facts: [
+      {
+        label: "Start and finish",
+        text: "Both races start and finish in front of Holkham Hall. The half marathon starts at 09:00 and the 10K at 09:40.",
+      },
+      {
+        label: "Race headquarters",
+        text: "The event village opens at 07:30. Collect your race pack there with your booking confirmation and photo ID.",
+      },
+      {
+        label: "Arrival and parking",
+        text: "Enter via Park Road off the A149, using NR23 1RH for the main gate. Parking opens at 07:00; the organiser asks runners to be parked before 08:30. Bring proof of entry. Parking charges apply from 09:00.",
+      },
+      {
+        label: "Course",
+        text: "An undulating road course through the estate and surrounding countryside. The half marathon has a three-hour cut-off.",
+      },
+    ],
+  },
   {
     slugs: ["bure-valley-10-miles"],
     website: "https://totalracetiming.co.uk/race/695",

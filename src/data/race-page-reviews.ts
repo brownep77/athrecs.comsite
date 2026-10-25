@@ -1,4 +1,4 @@
-import type { RaceGuide } from "./runrecs-race-guides.ts";
+import { raceGuideFor, type RaceGuide } from "./runrecs-race-guides.ts";
 
 /** A single, edition-scoped search/page example. Source review: 25 October 2026. */
 const hamburg = {
@@ -71,7 +71,26 @@ type ReviewedPage = {
 export function reviewedRacePage<T extends ReviewedPage>(data: T): T {
   const next = data.upcoming.find((edition) => edition.status !== "Cancelled");
   const review = racePageReviewFor(data.event.slug, next?.event_date);
-  if (!review) return data;
+  if (!review) {
+    const guide = raceGuideFor(data.event, next?.event_date);
+    const programme = data.upcoming.filter(
+      (row) => row.event_date === next?.event_date && row.status !== "Cancelled",
+    );
+    if (
+      !guide?.organiser ||
+      !programme.every((row) => Object.hasOwn(guide.starts, row.distance_code))
+    )
+      return data;
+    return {
+      ...data,
+      event: {
+        ...data.event,
+        organiser: guide.organiser.name,
+        website: guide.website,
+        ...(guide.surface ? { surface: guide.surface } : {}),
+      },
+    };
+  }
   const hasHalf = data.upcoming.some(
     (edition) =>
       edition.event_date === review.date &&

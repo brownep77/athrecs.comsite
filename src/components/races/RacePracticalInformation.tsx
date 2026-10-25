@@ -1,22 +1,19 @@
 import { RaceActions } from "./RaceActions";
 import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
-import { SITE_URL } from "@/lib/athrecs/seo";
+import { publicOrganiserName, SITE_URL } from "@/lib/athrecs/seo";
 import { useState } from "react";
 import { ArrowUpRight, CalendarDays, MapPin, Ticket } from "lucide-react";
 import type { getEventBySlug } from "@/lib/athrecs/api";
 import { editionEntry, raceLink } from "@/lib/athrecs/race-information";
-import {
-  effectiveStatus,
-  formatRaceDateShort,
-  formatStartTime,
-  statusLabel,
-} from "@/lib/athrecs/format";
+import { effectiveStatus, formatRaceDateShort, statusLabel } from "@/lib/athrecs/format";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import type { EntryStatus } from "@/lib/athrecs/types";
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
-import { raceGuideFor, supplementedStart } from "@/data/runrecs-race-guides";
+import { nextRaceEdition } from "@/lib/athrecs/race-search-content";
+import { raceEditionStart } from "@/lib/athrecs/race-page-metadata";
+import { raceGuideFor } from "@/data/runrecs-race-guides";
 import { FIXTURE_DETAILS } from "@/data/fixture-details";
 import { racePageReviewFor } from "@/data/race-page-reviews";
 
@@ -29,8 +26,10 @@ export function RacePracticalInformation({
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? upcoming : upcoming.slice(0, event.sport === "Parkrun" ? 6 : 12);
   const venue = venueForEvent(event);
-  const review = racePageReviewFor(event.slug, upcoming[0]?.event_date);
-  const guide = review?.guide ?? raceGuideFor(event, upcoming[0]?.event_date);
+  const next = nextRaceEdition(upcoming);
+  const review = racePageReviewFor(event.slug, next?.event_date);
+  const guide = review?.guide ?? raceGuideFor(event, next?.event_date);
+  const organiser = publicOrganiserName(guide?.organiser?.name ?? event.organiser);
   const address = guide?.venue || venue.address;
   const postcode = guide?.postcode || venue.postcode;
   const place = compactFixtureLocation({
@@ -71,20 +70,12 @@ export function RacePracticalInformation({
         {visible.length ? (
           <ul className="divide-y divide-border">
             {visible.map((edition) => {
-              const start =
-                edition.start_label ??
-                formatStartTime(
-                  supplementedStart(
-                    event,
-                    edition.event_date,
-                    edition.distance_code,
-                    edition.start_time,
-                  ),
-                  { ...event, date: edition.event_date },
-                );
+              const start = raceEditionStart(event, edition);
               const entry = editionEntry(edition);
               const source = raceLink(edition.source_url);
-              const editionGuide = raceGuideFor(event, edition.event_date);
+              const editionGuide =
+                racePageReviewFor(event.slug, edition.event_date)?.guide ??
+                raceGuideFor(event, edition.event_date);
               const notes =
                 FIXTURE_DETAILS[`${event.slug}|${edition.event_date}`]?.starts[
                   edition.distance_code
@@ -107,11 +98,10 @@ export function RacePracticalInformation({
                           (start ? `Starts ${start}` : "Start time not yet verified")}
                       </p>
                       <p className="mt-1 text-sm text-muted">
-                        {review &&
-                        edition.event_date === review.date &&
-                        edition.distance_code === "Half" &&
-                        edition.status === "TBC"
-                          ? "Date confirmed · Check entry availability with the organiser"
+                        {edition.status === "TBC"
+                          ? editionGuide || FIXTURE_DETAILS[`${event.slug}|${edition.event_date}`]
+                            ? "Date confirmed · Check entry availability with the organiser"
+                            : "Confirm date and entry availability with the organiser"
                           : statusLabel(
                               effectiveStatus(edition.event_date, edition.status as EntryStatus),
                             )}
@@ -264,16 +254,16 @@ export function RacePracticalInformation({
             </p>
           )}
           <dl className="space-y-2 text-sm">
-            {event.surface ? (
+            {event.surface && !/^(other|tbc|unknown)$/i.test(event.surface) ? (
               <div>
                 <dt className="inline font-semibold">Surface: </dt>
                 <dd className="inline text-muted">{event.surface}</dd>
               </div>
             ) : null}
-            {event.organiser ? (
+            {organiser ? (
               <div>
                 <dt className="inline font-semibold">Organiser: </dt>
-                <dd className="inline text-muted">{event.organiser}</dd>
+                <dd className="inline text-muted">{organiser}</dd>
               </div>
             ) : null}
           </dl>

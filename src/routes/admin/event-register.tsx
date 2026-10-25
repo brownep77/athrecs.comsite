@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Database, Download, Search, RefreshCw, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { RaceEditReviewQueue } from "@/components/races/RaceEditReviewQueue";
 import {
   getEventRegister,
   getRegisterCollection,
@@ -105,7 +106,7 @@ function exportPage(rows: RegisterRow[]) {
   URL.revokeObjectURL(url);
 }
 function EventRegister() {
-  const [view, setView] = useState<"records" | "sources" | "catalogue">("records");
+  const [view, setView] = useState<"records" | "sources" | "catalogue" | "suggestions">("records");
   return (
     <div className="space-y-6">
       <nav className="flex flex-wrap gap-2" aria-label="Register views">
@@ -114,6 +115,7 @@ function EventRegister() {
             ["records", "Collected records"],
             ["sources", "Source coverage"],
             ["catalogue", "Catalogue and contacts"],
+            ["suggestions", "Suggested race edits"],
           ] as const
         ).map(([key, label]) => (
           <Button
@@ -126,7 +128,13 @@ function EventRegister() {
           </Button>
         ))}
       </nav>
-      {view === "catalogue" ? <CatalogueRegister /> : <CollectedRegister key={view} view={view} />}
+      {view === "suggestions" ? (
+        <RaceEditReviewQueue />
+      ) : view === "catalogue" ? (
+        <CatalogueRegister />
+      ) : (
+        <CollectedRegister key={view} view={view} />
+      )}
     </div>
   );
 }

@@ -1,0 +1,60 @@
+name: Race pages and suggested edits
+on:
+  pull_request:
+    paths:
+      - "src/components/races/**"
+      - "src/components/running/Road*Pages.tsx"
+      - "src/lib/running/road-*-seo.ts"
+      - "src/lib/athrecs/race-*"
+      - "src/lib/athrecs/seo.ts"
+      - "src/runrecs/seo.ts"
+      - "src/data/runrecs-race-guides.ts"
+      - "src/data/race-page-reviews.ts"
+      - "src/routes/races/$slug.tsx"
+      - "src/routes/$language/$country/races/$slug.tsx"
+      - "src/routes/admin/event-register.tsx"
+      - "migrations/*race_edit*"
+      - "scripts/verify-race-page-rollout.mjs"
+      - "scripts/verify-race-edit*"
+      - ".github/workflows/race-page-rollout.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: race-page-rollout-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: node scripts/verify-race-page-rollout.mjs
+      - run: node scripts/verify-race-page-schema.mjs
+      - run: node scripts/verify-page-biographies.mjs
+      - run: node scripts/verify-hamburg-race-example.mjs
+      - run: node scripts/verify-road-marathon-guides.mjs
+      - run: node scripts/verify-road-half-marathon-guides.mjs
+      - run: node scripts/verify-road-ultras.mjs
+      - run: node scripts/verify-race-edit-suggestions.mjs
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - name: Test suggestion form in three browsers
+        run: |
+          set -e
+          for browser in chromium firefox webkit; do
+            ATHRECS_BROWSER_ENGINE="$browser" node scripts/verify-race-edits-browser.mjs
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: race-page-rollout-evidence
+          path: |
+            artifacts/race-edit-*.png
+            artifacts/race-page-rollout-audit.json
+          if-no-files-found: warn

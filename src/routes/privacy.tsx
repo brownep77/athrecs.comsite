@@ -353,11 +353,12 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
-        <NoticeSection title="Suggested profile edits">
+        <NoticeSection title="Suggested profile and race edits">
           <p>
             Signed-in visitors can submit factual corrections and supporting links for staff review.
             Suggestions and the submitting account reference stay in the staff review queue; they do
-            not change a public profile automatically.
+            not change a public profile or race page automatically. Race suggestions also retain
+            the race reference and staff review status so we can check and handle the correction.
           </p>
         </NoticeSection>
 

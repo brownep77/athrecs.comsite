@@ -1,3 +1,4 @@
+import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
 import { RaceActions } from "@/components/races/RaceActions";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
@@ -841,6 +842,7 @@ export function RoadMarathonPage({
         More road {half ? "half marathons" : "marathons"} in {country.name}{" "}
         <ArrowRight className="size-4" aria-hidden="true" />
       </CountryLink>
+      <SuggestRaceEdit key={race.slug} slug={race.slug} name={race.name} pageType="road" />
     </article>
   );
 }

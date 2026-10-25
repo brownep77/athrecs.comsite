@@ -67,70 +67,27 @@ export function organizationJsonLd() {
   };
 }
 
-export function sportsEventJsonLd(input: {
-  name: string;
-  slug: string;
-  description?: string;
-  city?: string | null;
-  country?: string | null;
-  startDate?: string | null;
-  startTime?: string | null;
-  sport?: string | null;
-  website?: string | null;
-}) {
-  const url = absoluteUrl(`/races/${input.slug}`);
-  const description =
-    input.description ??
-    `${input.name} running-event details on RunRecs — date, local start, venue and distances. Confirm entry on the official site.`;
-  const date = input.startDate;
-  const parsedDate = date && /^\d{4}-\d{2}-\d{2}$/.test(date) ? new Date(date) : null;
-  const hasDate =
-    parsedDate &&
-    Number.isFinite(parsedDate.getTime()) &&
-    parsedDate.toISOString().slice(0, 10) === date;
+export { publicOrganiserName } from "../lib/athrecs/seo.ts";
+import { sportsEventJsonLd as sharedSportsEventJsonLd } from "../lib/athrecs/seo.ts";
 
-  // This module replaces the AthRecs helper in specialist builds. Preserve the
-  // same archive fallback: Google requires a real startDate on every event.
-  if (!hasDate) {
-    return {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: input.name,
-      description,
-      url,
-      inLanguage: "en-GB",
-    };
-  }
-
-  // Keep the known date when a legacy local-time value is unknown or invalid.
-  const start =
-    input.startTime && /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.startTime)
-      ? `${date}T${input.startTime}`
-      : date;
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "SportsEvent",
-    name: input.name,
-    description,
-    url,
-    image: DEFAULT_OG_IMAGE,
-    startDate: start,
-    eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: {
-      "@type": "Place",
-      name: [input.city, input.country].filter(Boolean).join(", ") || input.name,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: input.city || undefined,
-        addressCountry: input.country || undefined,
-      },
+export function sportsEventJsonLd(
+  input: Parameters<typeof sharedSportsEventJsonLd>[0],
+  now = new Date(),
+) {
+  const schema = sharedSportsEventJsonLd(
+    {
+      ...input,
+      sport: input.sport || "Running",
+      description:
+        input.description ??
+        `${input.name} running-event details on RunRecs — date, local start, venue and distances. Confirm entry on the race website.`,
     },
-    sport: input.sport || "Running",
-    organizer: input.website
-      ? { "@type": "Organization", url: input.website }
-      : undefined,
+    now,
+  );
+  return {
+    ...schema,
+    url: absoluteUrl(`/races/${input.slug}`),
+    ...(schema["@type"] === "SportsEvent" ? { image: DEFAULT_OG_IMAGE } : {}),
   };
 }
 
