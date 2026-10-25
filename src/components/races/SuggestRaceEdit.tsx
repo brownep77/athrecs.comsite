@@ -5,8 +5,17 @@ import { Button } from "@/components/ui/button";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { submitRaceEdit } from "@/lib/athrecs/race-edit-suggestions-api";
+import { raceEditPath, type RaceEditPageType } from "@/lib/athrecs/race-edit-target";
 
-export function SuggestRaceEdit({ slug, name }: { slug: string; name: string }) {
+export function SuggestRaceEdit({
+  slug,
+  name,
+  pageType = "catalogue",
+}: {
+  slug: string;
+  name: string;
+  pageType?: RaceEditPageType;
+}) {
   const { user, isPending } = useCurrentUserState();
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -15,7 +24,7 @@ export function SuggestRaceEdit({ slug, name }: { slug: string; name: string }) 
   const [suggestion, setSuggestion] = useState("");
   const [evidenceUrl, setEvidenceUrl] = useState("");
   const save = useMutation({
-    mutationFn: () => submitRaceEdit({ data: { slug, suggestion, evidenceUrl } }),
+    mutationFn: () => submitRaceEdit({ data: { slug, pageType, suggestion, evidenceUrl } }),
     onSuccess: () => {
       setSuggestion("");
       setEvidenceUrl("");
@@ -58,8 +67,8 @@ export function SuggestRaceEdit({ slug, name }: { slug: string; name: string }) 
             onClick={() =>
               openAthleteAuth({
                 mode: "signin",
-                callbackURL: `/races/${slug}#suggest-edit`,
-                errorCallbackURL: `/races/${slug}`,
+                callbackURL: `${raceEditPath(slug, pageType)}#suggest-edit`,
+                errorCallbackURL: raceEditPath(slug, pageType),
               })
             }
           >

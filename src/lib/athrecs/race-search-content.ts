@@ -1,6 +1,7 @@
 import { compactFixtureLocation } from "./fixture-presentation.ts";
 import { sanitizeDistances } from "./filters.ts";
 import { publicOrganiserName } from "./seo.ts";
+import { raceSearchTitle } from "./race-search-title.ts";
 import { searchSnippet } from "./search-text.ts";
 import { raceGuideFor } from "../../data/runrecs-race-guides.ts";
 import { racePageReviewFor } from "../../data/race-page-reviews.ts";
@@ -102,18 +103,12 @@ export function raceSearchContent(data: Race) {
     : years.length
       ? `Recorded editions: ${years[0]}${years.length > 1 ? `–${years.at(-1)}` : ""}.`
       : "Race details and recorded editions.";
-  const titleName = `${event.name}${next && !new RegExp(`\\b${next.event_date.slice(0, 4)}\\b`).test(event.name) ? ` ${next.event_date.slice(0, 4)}` : ""}`;
-  const titleSuffix = next ? "Date & Entry" : years.length ? "Results & History" : "Race Details";
-  const standardTitle = `${titleName} | ${titleSuffix} | AthRecs`;
   return {
     biography: review
       ? [...review.biography, ...facts.filter((fact) => fact.startsWith("The ATHRECS archive"))]
       : facts,
     title:
-      review?.title ??
-      (standardTitle.length <= 80
-        ? standardTitle
-        : `${titleName}${!next && years.length ? " | Results" : ""} | AthRecs`),
+      review?.title ?? raceSearchTitle(event.name, next?.event_date.slice(0, 4), years.length > 0),
     description:
       review?.description ??
       searchSnippet(

@@ -41,7 +41,7 @@ export function RaceEditReviewQueue() {
         <article key={item.id} className="space-y-3 border-t border-border pt-4 text-sm">
           <a
             className="font-semibold text-accent underline"
-            href={`${SITE_URL}/races/${encodeURIComponent(item.race_slug)}`}
+            href={`${item.race_path.startsWith("/running/") ? "https://www.athrecs.com" : SITE_URL}${item.race_path}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -50,7 +50,7 @@ export function RaceEditReviewQueue() {
           <p className="text-xs text-muted">
             Submitted{" "}
             {new Date(item.created_at).toLocaleDateString("en-GB", { timeZone: "Europe/London" })} ·
-            Event {item.event_id}
+            {item.event_id ? `Event ${item.event_id}` : "Race guide"}
           </p>
           <p className="whitespace-pre-wrap break-words">{item.suggestion}</p>
           {item.evidence_url ? (

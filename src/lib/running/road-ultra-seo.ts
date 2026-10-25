@@ -1,3 +1,4 @@
+import { raceSearchTitle } from "../athrecs/race-search-title.ts";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { roadGuideModifiedAt } from "./guide-modified";
 import {
@@ -12,8 +13,13 @@ import {
 
 export function roadUltraHead(today: string, race?: RoadUltra) {
   const url = `${SITE_URL}${race ? ultraPath(race.slug) : ULTRA_GUIDE_PATH}`;
+  const dates = race ? upcomingEditions(race, today) : [];
   const title = race
-    ? `${race.name}: course, dates & entry | AthRecs`
+    ? raceSearchTitle(
+        race.name,
+        dates.find((edition) => !edition.provisional)?.date.slice(0, 4),
+        !dates.length && Boolean(race.previousEdition),
+      )
     : "UK road ultramarathons: races, dates & entry guides | AthRecs";
   const description = race
     ? `${race.distance}. ${race.surface}. Explore ${race.name}, with course information, published dates and official entry links.`

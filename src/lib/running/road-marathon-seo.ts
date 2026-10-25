@@ -1,3 +1,4 @@
+import { raceSearchTitle } from "../athrecs/race-search-title.ts";
 import type { MarathonCountryGuide, RoadMarathon } from "@/data/road-marathons/types";
 import { halfMarathonCountry } from "@/data/road-half-marathons/countries";
 import { countryGuide } from "@/data/road-marathons/countries";
@@ -223,7 +224,7 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
   const url = `${SITE_URL}${path}`;
   const nextEdition = upcomingRoadEditions(race, now)[0];
   const year = nextEdition?.date.slice(0, 4);
-  const title = `${race.name}${year && !race.name.includes(year) ? ` ${year}` : ""}: Date, Route & Entry | ATHRECS`;
+  const title = raceSearchTitle(race.name, year, race.pastEditions.length > 0);
   const dateSummary = nextEdition
     ? roadMarathonDate(nextEdition.date, nextEdition.endDate)
     : "Next date TBC";

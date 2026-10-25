@@ -6,6 +6,12 @@ routes, and adds a Suggest an edit panel at the bottom. Existing URLs, aliases,
 canonical targets and indexing controls are retained. No indexing submission is
 part of this release.
 
+The separate 141 marathon, 40 half-marathon and 18 ultra guide pages also use
+the concise title rule and suggestion panel. Their existing sourced event graphs,
+provisional-date safeguards and canonical guide URLs are preserved. Guide edits
+are validated against the appropriate guide catalogue and retain their actual
+page path; no guessed mapping to a similarly named database event is used.
+
 ## Behaviour
 
 - Upcoming titles use the race name, edition year and Date & Entry. Repeated years

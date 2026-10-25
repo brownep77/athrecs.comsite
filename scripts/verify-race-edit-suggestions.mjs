@@ -103,6 +103,22 @@ try {
   assert.equal(reviewed.reviewed_by, "race-edits-staff");
   const dismiss = await rpc("submitRaceEdit", { ...suggestion, evidenceUrl: "" }, owner);
   await rpc("reviewRaceEdit", { id: dismiss.id, status: "dismissed" }, staff);
+  const { ROAD_MARATHONS } = await server.ssrLoadModule("/src/data/road-marathons/index.ts");
+  const { ROAD_ULTRAS } = await server.ssrLoadModule("/src/lib/running/road-ultras.ts");
+  for (const [pageType, guide, prefix] of [
+    ["road", ROAD_MARATHONS[0], "/running/races/"],
+    ["ultra", ROAD_ULTRAS[0], "/running/ultramarathons/"],
+  ]) {
+    await assert.rejects(() =>
+      rpc("submitRaceEdit", { ...suggestion, pageType, slug: "missing-editorial-race" }, owner),
+    );
+    const edit = await rpc("submitRaceEdit", { ...suggestion, pageType, slug: guide.slug }, owner);
+    const record = (await rpc("getRaceEdits", {}, staff)).items.find((item) => item.id === edit.id);
+    assert.equal(record.event_id, null);
+    assert.equal(record.race_name, guide.name);
+    assert.equal(record.race_path, `${prefix}${guide.slug}`);
+    await rpc("reviewRaceEdit", { id: edit.id, status: "reviewed" }, staff);
+  }
   const concurrent = await Promise.allSettled(
     Array.from({ length: 7 }, () => rpc("submitRaceEdit", suggestion, other)),
   );

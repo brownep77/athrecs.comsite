@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - "src/components/races/**"
+      - "src/components/running/Road*Pages.tsx"
+      - "src/lib/running/road-*-seo.ts"
       - "src/lib/athrecs/race-*"
       - "src/lib/athrecs/seo.ts"
       - "src/runrecs/seo.ts"
@@ -37,6 +39,9 @@ jobs:
       - run: node scripts/verify-race-page-schema.mjs
       - run: node scripts/verify-page-biographies.mjs
       - run: node scripts/verify-hamburg-race-example.mjs
+      - run: node scripts/verify-road-marathon-guides.mjs
+      - run: node scripts/verify-road-half-marathon-guides.mjs
+      - run: node scripts/verify-road-ultras.mjs
       - run: node scripts/verify-race-edit-suggestions.mjs
       - run: npx playwright install --with-deps chromium firefox webkit
       - name: Test suggestion form in three browsers

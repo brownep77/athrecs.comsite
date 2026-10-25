@@ -36,7 +36,7 @@ const api = write(
 );
 write(
   "main.tsx",
-  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{SuggestRaceEdit}from'/@fs/${path.resolve("src/components/races/SuggestRaceEdit.tsx")}';import'./style.css';const client=new QueryClient({defaultOptions:{mutations:{retry:false}}});createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1000,margin:'40px auto',padding:16}}><h1 style={{fontSize:28,marginBottom:24}}>Example Half Marathon</h1><SuggestRaceEdit slug="example-half" name="Example Half Marathon"/></main></QueryClientProvider>);`,
+  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{SuggestRaceEdit}from'/@fs/${path.resolve("src/components/races/SuggestRaceEdit.tsx")}';import'./style.css';const client=new QueryClient({defaultOptions:{mutations:{retry:false}}});createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1000,margin:'40px auto',padding:16}}><h1 style={{fontSize:28,marginBottom:24}}>Example Half Marathon</h1><SuggestRaceEdit slug="example-half" name="Example Half Marathon" pageType={new URLSearchParams(location.search).get("type") || "catalogue"}/></main></QueryClientProvider>);`,
 );
 const server = await createServer({
   configFile: false,
@@ -68,6 +68,18 @@ try {
     await page.evaluate(() => window.signinOptions.callbackURL),
     "/races/example-half#suggest-edit",
   );
+  for (const [type, prefix] of [
+    ["road", "/running/races"],
+    ["ultra", "/running/ultramarathons"],
+  ]) {
+    await page.goto(`http://127.0.0.1:18218?type=${type}`);
+    await page.getByRole("button", { name: "Suggest an edit", exact: true }).click();
+    await page.getByRole("button", { name: "Sign in to suggest an edit" }).click();
+    assert.equal(
+      await page.evaluate(() => window.signinOptions.callbackURL),
+      `${prefix}/example-half#suggest-edit`,
+    );
+  }
   await page.goto("http://127.0.0.1:18218?signed-in#suggest-edit");
   const field = page.getByRole("textbox", { name: "What needs changing?" });
   await field.waitFor({ state: "visible" });
@@ -98,6 +110,7 @@ try {
   assert.equal(await page.evaluate(() => window.calls.length), 2);
   assert.deepEqual(await page.evaluate(() => window.calls[1]), {
     slug: "example-half",
+    pageType: "catalogue",
     suggestion,
     evidenceUrl: "https://example.test/race",
   });

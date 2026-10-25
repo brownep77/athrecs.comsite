@@ -4,8 +4,11 @@ import { authMiddleware } from "@/lib/auth/middleware";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { getSql } from "@/lib/db";
 import { eventByPublicSlug } from "./event-slug.server";
+import { raceEditPath } from "./race-edit-target";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 const suggestionSchema = z.object({
+  pageType: z.enum(["catalogue", "road", "ultra"]).default("catalogue"),
   slug: z
     .string()
     .trim()
@@ -33,13 +36,30 @@ export const submitRaceEdit = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
   .validator((input: z.input<typeof suggestionSchema>) => suggestionSchema.parse(input))
   .handler(async ({ data, context }) => {
+    if (IS_RUNRECS_SITE && data.pageType !== "catalogue")
+      throw new Error("Open the AthRecs race guide to suggest this edit.");
     const sql = await getSql();
-    const [race] = (await eventByPublicSlug(sql, data.slug)) as Array<{
-      id: number;
-      slug: string;
-      name: string;
-    }>;
+    let race: { id: number | null; slug: string; name: string } | undefined;
+    if (data.pageType === "catalogue") {
+      [race] = (await eventByPublicSlug(sql, data.slug)) as Array<{
+        id: number;
+        slug: string;
+        name: string;
+      }>;
+    } else if (data.pageType === "road") {
+      const [{ roadHalfMarathonBySlug }, { roadMarathonBySlug }] = await Promise.all([
+        import("@/data/road-half-marathons"),
+        import("@/data/road-marathons"),
+      ]);
+      const guide = roadHalfMarathonBySlug(data.slug) ?? roadMarathonBySlug(data.slug);
+      if (guide) race = { id: null, slug: guide.slug, name: guide.name };
+    } else {
+      const { ROAD_ULTRAS } = await import("@/lib/running/road-ultras");
+      const guide = ROAD_ULTRAS.find((item) => item.slug === data.slug);
+      if (guide) race = { id: null, slug: guide.slug, name: guide.name };
+    }
     if (!race) throw new Error("This race page is no longer available.");
+    const target = race;
     return sql.transaction(async (tx) => {
       await tx`select id from "user" where id=${context.userId} for update`;
       const [count] = await tx<{ count: number }>`select count(*)::int as count
@@ -48,9 +68,9 @@ export const submitRaceEdit = createServerFn({ method: "POST" })
       if (count.count >= 5)
         throw new Error("You have submitted five race edits this hour. Please try again later.");
       const [row] = await tx<{ id: number }>`insert into race_edit_suggestions
-        (user_id, event_id, race_slug, race_name, suggestion, evidence_url)
-        values (${context.userId}, ${race.id}, ${race.slug}, ${race.name},
-          ${data.suggestion}, ${data.evidenceUrl}) returning id`;
+        (user_id, event_id, race_slug, race_name, suggestion, evidence_url, page_type, race_path)
+        values (${context.userId}, ${target.id}, ${target.slug}, ${target.name},
+          ${data.suggestion}, ${data.evidenceUrl}, ${data.pageType}, ${raceEditPath(target.slug, data.pageType)}) returning id`;
       return { id: row.id };
     });
   });
@@ -65,14 +85,15 @@ export const getRaceEdits = createServerFn({ method: "GET" })
     const [items, counts] = await Promise.all([
       sql<{
         id: number;
-        event_id: number;
+        event_id: number | null;
         race_slug: string;
+        race_path: string;
         race_name: string;
         suggestion: string;
         evidence_url: string;
         created_at: string;
       }>`
-        select id, event_id, race_slug, race_name, suggestion, evidence_url, created_at::text
+        select id, event_id, race_slug, race_path, race_name, suggestion, evidence_url, created_at::text
         from race_edit_suggestions where status='pending'
         order by created_at, id limit 50 offset ${data.page * 50}`,
       sql<{
