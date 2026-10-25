@@ -201,6 +201,70 @@ class LondonPlanTests(unittest.TestCase):
         self.assertNotIn("history", group)
         self.assertNotIn("athleteDraft", group)
 
+    def test_linked_plan_rejects_changed_athlete_id(self):
+        row = pace()
+        existing, manifest, approval = reviewed_fixture([row])
+        for method, original in [
+            ("exact_locator", plan([row], snapshot(row))),
+            ("reviewed", reviewed_plan([row], existing, manifest, approval)),
+        ]:
+            with self.subTest(method=method):
+                changed = copy.deepcopy(original)
+                changed["groups"][0]["athleteId"] = 8
+                with self.assertRaisesRegex(ValueError, "Linked group targets"):
+                    planner.validate_plan(changed)
+
+    def test_linked_plan_rejects_changed_result_ids(self):
+        row = pace()
+        existing, manifest, approval = reviewed_fixture([row])
+        for method, original in [
+            ("exact_locator", plan([row], snapshot(row))),
+            ("reviewed", reviewed_plan([row], existing, manifest, approval)),
+        ]:
+            for result_ids in (["history:99:0"], [], ["history:57:0", "history:57:0"]):
+                with self.subTest(method=method, result_ids=result_ids):
+                    changed = copy.deepcopy(original)
+                    changed["groups"][0]["resultIds"] = result_ids
+                    with self.assertRaisesRegex(ValueError, "Linked group targets"):
+                        planner.validate_plan(changed)
+
+    def test_linked_plan_requires_one_athlete_and_ordered_unique_results(self):
+        row = pace()
+        existing = snapshot(row)
+        existing["results"].append({**existing["results"][0], "id": "history:58:0"})
+        original = plan([row], existing)
+        self.assertEqual(original["groups"][0]["resultIds"], ["history:57:0", "history:58:0"])
+        self.assertTrue(planner.validate_plan(original, snapshot=existing))
+        for tamper in ("reverse_targets", "different_match_owner", "duplicate_match"):
+            with self.subTest(tamper=tamper):
+                changed = copy.deepcopy(original)
+                group = changed["groups"][0]
+                if tamper == "reverse_targets":
+                    group["resultIds"].reverse()
+                elif tamper == "different_match_owner":
+                    group["existingMatches"][1]["athleteId"] = 8
+                else:
+                    group["existingMatches"][1] = copy.deepcopy(group["existingMatches"][0])
+                    group["resultIds"][1] = group["resultIds"][0]
+                with self.assertRaisesRegex(ValueError, "Linked group targets"):
+                    planner.validate_plan(changed)
+
+    def test_linked_plan_targets_must_match_frozen_snapshot_ownership(self):
+        row = pace()
+        existing = snapshot(row)
+        original = plan([row], existing)
+        for tamper in ("different_owner", "unknown_result"):
+            with self.subTest(tamper=tamper):
+                changed = copy.deepcopy(original)
+                group = changed["groups"][0]
+                if tamper == "different_owner":
+                    group["athleteId"] = group["existingMatches"][0]["athleteId"] = 8
+                else:
+                    group["resultIds"] = ["history:99:0"]
+                    group["existingMatches"][0]["resultId"] = "history:99:0"
+                with self.assertRaisesRegex(ValueError, "Linked target.*frozen snapshot"):
+                    planner.validate_plan(changed, snapshot=existing)
+
     def test_generic_time_can_corroborate_explicit_existing_chip_or_gun(self):
         row = pace()
         existing = snapshot(row, finishSeconds=row["finishSeconds"] + 30, timeSeconds=[row["finishSeconds"], row["finishSeconds"] + 30], editionId=102, id=20)
