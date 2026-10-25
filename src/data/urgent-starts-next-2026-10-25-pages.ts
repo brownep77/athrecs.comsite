@@ -5,7 +5,13 @@ const details = { ...nextDetails, ...thirdDetails };
 
 type Page = {
   event: { slug: string };
-  upcoming: Array<{ event_date: string; distance_code: string; status: string }>;
+  distances?: string[];
+  upcoming: Array<{
+    event_date: string;
+    distance_code: string;
+    status: string;
+    entry_options?: Array<{ entry_type: string; status: string }>;
+  }>;
   past?: Array<{ event_date: string }>;
 };
 
@@ -31,6 +37,22 @@ export function reviewedUrgentRacePage<T extends Page>(data: T): T {
       if (data.event.slug === "les-foulees-mamertines") return data;
       return {
         ...data,
+        ...(Object.hasOwn(thirdDetails, key) ? { distances: Object.keys(detail.starts) } : {}),
+        ...(key === "maule-corre|2026-10-25"
+          ? {
+              upcoming: data.upcoming.map((row) =>
+                row.event_date === edition.event_date &&
+                Object.hasOwn(detail.starts, row.distance_code)
+                  ? {
+                      ...row,
+                      entry_options: row.entry_options?.map((option) =>
+                        option.entry_type === "official" ? { ...option, status: "closed" } : option,
+                      ),
+                    }
+                  : row,
+              ),
+            }
+          : {}),
         event: {
           ...data.event,
           ...detail.place,
