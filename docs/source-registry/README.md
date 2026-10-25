@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 937 unique sources as of 24 October 2026. Only 36 are enabled; the other 901 remain
+The registry contains 939 unique sources as of 25 October 2026. Only 36 are enabled; the other 903 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -426,3 +426,7 @@ The registry now contains 931 sources: 36 enabled and 895 disabled.
 ### Brentwood historical results research — 24 October 2026
 
 Six disabled manual references register the organiser archive, archived JAND timing tables, Sporting Roots index-only leads, Witham RC, Brentwood Beagles and Bakers reports. Existing FR Systems and Sporthive identities are reused. Named rows and timing headings were inspected; the 2026 club reports are partial and the Sporting Roots transcripts remain inaccessible. The 2010 and 2013 source versions disagree on some positions; disputed positions and unresolved identities are not verified. Collection remains disabled for all six additions.
+
+### Brentwood held-result resolution — 25 October 2026
+
+Added East End Road Runners' historic results and the Saffron Striders 2011 archive as two disabled manual research references after checking the registry for existing URLs. Opened club tables corroborate selected Brentwood performances and the 2011 edition date. Recovered headed organiser pages for 2010 and 2011 remain part of the existing Brentwood organiser source. Conflicting times and placings remain held or omitted; no collectors were enabled.

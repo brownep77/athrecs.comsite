@@ -187,7 +187,7 @@ def performance(r):
     if r.get('status')=='Provisional':labels.append('Provisional source result')
     p={'year':r['year'],'date':r.get('date',''),'sourceDate':r.get('date') or str(r['year']),'yearLabel':str(r['year']),'ageGroup':r.get('category',''),'discipline':'Half Marathon','performance':r.get('chip_time') or r.get('gun_time') or r['recorded_time'],'timing':timing,'wind':'','place':r.get('overall_position',''),'places':{'overall':integer(r.get('overall_position')),'gender':integer(r.get('gender_position')),'category':integer(r.get('category_position'))},'bib':r.get('bib',''),'venue':'Brentwood, Essex','meeting':'Brentwood Half Marathon','eventSlug':'brentwood-half-marathon','country':'United Kingdom','sourceUrls':[r['source_url']],'sourceKeys':[r['key']],'labels':labels,'providerName':r['provider'],'verificationStatus':'unverified','notes':'Source row compared by labelled fields. Identity and account ownership are separate; identity is not independently verified. Historical club is retained as evidence, not asserted as current membership.','archiveReference':{'batchId':BATCH,'original':r,'sourceCompared':True,'identityVerified':False}}
     return p
-def plan(data,snapshot,archive_rows):
+def plan(data,snapshot,archive_rows,resolve_partial_clubs=False):
     rows=data['rows'];held=list(data['held']);reasons=collections.Counter();groups=collections.defaultdict(list)
     all_names=collections.defaultdict(list)
     for r in [*archive_rows,*rows]:all_names[norm(r['name']).replace(' ','')].append(r)
@@ -217,9 +217,9 @@ def plan(data,snapshot,archive_rows):
     profiles=[];links=[];reused=[];paul=[]
     for key,rs in groups.items():
         years=collections.Counter(r['year'] for r in rs)
-        if max(years.values())>1:
-            held.extend({**r,'hold':'Multiple same-name performances in one edition'} for r in rs);continue
         candidates=set().union(*(set(snapshot['index'].get(k,[])) for r in rs for k in prep.name_keys(r['name'])))
+        if max(years.values())>1 and not (resolve_partial_clubs and candidates):
+            held.extend({**r,'hold':'Multiple same-name performances in one edition'} for r in rs);continue
         if key in {norm('Paul Browne').replace(' ',''),norm('Paul Wagner').replace(' ','')}:
             for r in rs:
                 if (r['year'],r['bib']) in {(2007,'2002'),(2008,'964')}:paul.append(r)
@@ -259,6 +259,18 @@ def plan(data,snapshot,archive_rows):
             continue
         if nearby:
             held.extend({**r,'hold':'Potential source name/nickname/spelling duplicate','otherSourceNames':sorted(nearby)} for r in rs);continue
+        if resolve_partial_clubs and len(rs)>1:
+            club_groups=collections.defaultdict(list)
+            for r in rs:
+                if club_key(r.get('club')):club_groups[club_key(r['club'])].append(r)
+            if len(club_groups)>1:
+                ranked=sorted(club_groups.values(),key=len,reverse=True)
+                # Seed at most one corroborated identity for this exact name.
+                # Do not infer that appearances at another club are the same person.
+                if len(ranked[0])>=2 and len(ranked[0])>len(ranked[1]):
+                    selected={r['key'] for r in ranked[0]}
+                    held.extend({**r,'hold':'Other club or name-only appearance remains unresolved'} for r in rs if r['key'] not in selected)
+                    rs=ranked[0]
         genders={r.get('gender') for r in rs if r.get('gender')}
         observed_genders={gender(r.get('original',{}).get('gender')) for r in rs}-{''}
         observed_years=[r['year']-int(r['original']['age']) for r in rs if str(r.get('original',{}).get('age','')).isdigit()]
@@ -281,5 +293,11 @@ def plan(data,snapshot,archive_rows):
         profiles.append({'externalId':external,'slug':slug,'displayName':name,'givenName':name.split()[0],'familyName':' '.join(name.split()[1:]),'gender':next(iter(genders),'U'),'sourceUrl':rs[0]['source_url'],'capturedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'years':sorted({r['year'] for r in rs}),'performances':[performance(r) for r in rs],'rows':[r['key'] for r in rs],'details':{'aliases':sorted({r['name'] for r in rs}),'athlete_verified':False,'identity_review_status':'provisional_source_profile','currentClubAssociationConfirmed':False,'archiveCreation':{'batchId':BATCH,'sourceRowsCompared':True,'identityVerified':False,'sourceKeys':[r['key'] for r in rs],'identityBasis':'Single source-located result; or exact name and matching specific historical club across distinct editions'}}})
     grouped_links=collections.defaultdict(list)
     for x in links:grouped_links[x['athleteId']].append(x)
+    if resolve_partial_clubs:
+        for aid,xs in list(grouped_links.items()):
+            counts=collections.Counter(x['row']['year'] for x in xs)
+            held.extend({**x['row'],'hold':'Multiple proposed results for the same athlete and edition','athleteId':aid} for x in xs if counts[x['row']['year']]>1)
+            grouped_links[aid]=[x for x in xs if counts[x['row']['year']]==1]
+            if not grouped_links[aid]:del grouped_links[aid]
     histories=[{'athleteId':aid,'externalId':'brentwood:existing:'+str(aid),'sourceUrl':xs[0]['row']['source_url'],'years':sorted({x['row']['year'] for x in xs}),'performances':[performance(x['row']) for x in xs],'identityEvidence':[x['identityEvidence'] for x in xs],'expectedName':snapshot['entities'][str(aid)]['display_name'],'expectedDetails':snapshot['entities'][str(aid)]['profile_details']} for aid,xs in grouped_links.items()]
-    return {'batch':BATCH,'profiles':profiles,'existingHistories':histories,'reused':reused,'paulCorrections':paul,'held':held,'sourceChecks':data['checks'],'summary':{'newProfiles':len(profiles),'newProfileResults':sum(len(p['performances']) for p in profiles),'existingProfilesEnriched':len(histories),'existingProfileResults':len(links),'existingResultsReused':len(reused),'paulCorrections':len(paul),'heldRows':len(held),'heldReasons':dict(collections.Counter(h['hold'] for h in held))}}
+    return {'batch':BATCH,'profiles':profiles,'existingHistories':histories,'reused':reused,'paulCorrections':paul,'held':held,'sourceChecks':data['checks'],'summary':{'newProfiles':len(profiles),'newProfileResults':sum(len(p['performances']) for p in profiles),'existingProfilesEnriched':len(histories),'existingProfileResults':sum(len(h['performances']) for h in histories),'existingResultsReused':len(reused),'paulCorrections':len(paul),'heldRows':len(held),'heldReasons':dict(collections.Counter(h['hold'] for h in held))}}
