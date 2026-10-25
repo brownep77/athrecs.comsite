@@ -6004,12 +6004,17 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       territories: ["Chinese Taipei"],
       sports: ["track-and-field"],
       summary: "National athletics body for Chinese Taipei, listed by Asian Athletics.",
-      website: "https://asianathletics.com/member-federations",
-      sources: ["https://asianathletics.com/member-federations"],
+      website: "https://www.athletics.org.tw",
+      sources: [
+        "https://asianathletics.com/member-federations",
+        "https://www.athletics.org.tw",
+        "https://www.athletics.org.tw/public/Events.aspx?type=100",
+      ],
       related: ["world-athletics"],
-      websiteKind: "member-directory",
+      detail:
+        "Asian Athletics links this association website. The events calendar contains dated 2026 competitions and results links; check the edition and local calendar labels.",
     },
-    "2026-10-23",
+    "2026-10-25",
   ),
   record(
     {
@@ -6201,28 +6206,28 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     },
     "2026-10-23",
   ),
-  record({
-  "slug": "bahrain-athletics",
-  "name": "Bahrain Athletics Association",
-  "type": "national",
-  "country": "Bahrain",
-  "jurisdiction": "Bahrain",
-  "territories": [
-    "Bahrain"
-  ],
-  "sports": [
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Bahrain, listed by Asian Athletics.",
-  "website": "https://asianathletics.com/member-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://asianathletics.com/member-federations"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "bahrain-athletics",
+      name: "Bahrain Athletics Association",
+      type: "national",
+      country: "Bahrain",
+      jurisdiction: "Bahrain",
+      territories: ["Bahrain"],
+      sports: ["track-and-field"],
+      summary: "National athletics body for Bahrain, listed by Asian Athletics.",
+      website: "https://www.baa.bh",
+      sources: [
+        "https://asianathletics.com/member-federations",
+        "https://www.baa.bh",
+        "https://www.baa.bh/event-details/west-asia-athletics-championships",
+      ],
+      related: ["world-athletics"],
+      detail:
+        "Asian Athletics links this national association website. Its events pages explicitly mark the West Asia Championships as postponed until further notice.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "bahrain-cycling",
   "name": "Bahrain Cycling Association",
@@ -6421,28 +6426,24 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "kazakhstan-athletics",
-  "name": "Athletic Federation of the Republic of Kazakhstan",
-  "type": "national",
-  "country": "Kazakhstan",
-  "jurisdiction": "Kazakhstan",
-  "territories": [
-    "Kazakhstan"
-  ],
-  "sports": [
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Kazakhstan, listed by Asian Athletics.",
-  "website": "https://asianathletics.com/member-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://asianathletics.com/member-federations"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "kazakhstan-athletics",
+      name: "Athletic Federation of the Republic of Kazakhstan",
+      type: "national",
+      country: "Kazakhstan",
+      jurisdiction: "Kazakhstan",
+      territories: ["Kazakhstan"],
+      sports: ["track-and-field"],
+      summary: "National athletics body for Kazakhstan, listed by Asian Athletics.",
+      website: "https://qazathletics.kz/kz/",
+      sources: ["https://asianathletics.com/member-federations", "https://qazathletics.kz/kz/"],
+      related: ["world-athletics"],
+      detail:
+        "Asian Athletics links this federation website. Its national results index links 2026 documents; the homepage also contains older rankings, so check the season shown.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "kazakhstan-cycling",
   "name": "Kazakhstan Cycling Federation",
@@ -6553,28 +6554,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "maldives-athletics",
-  "name": "Athletics Association of Maldives",
-  "type": "national",
-  "country": "Maldives",
-  "jurisdiction": "Maldives",
-  "territories": [
-    "Maldives"
-  ],
-  "sports": [
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Maldives, listed by Asian Athletics.",
-  "website": "https://asianathletics.com/member-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://asianathletics.com/member-federations"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "maldives-athletics",
+      name: "Athletics Association of Maldives",
+      type: "national",
+      country: "Maldives",
+      jurisdiction: "Maldives",
+      territories: ["Maldives"],
+      sports: ["track-and-field"],
+      summary: "National athletics body for Maldives, listed by Asian Athletics.",
+      website: "https://www.athletics.org.mv/",
+      sources: [
+        "https://asianathletics.com/member-federations",
+        "https://www.athletics.org.mv/",
+        "https://results.athletics.org.mv/",
+        "https://athletics.org.mv/events/events.html",
+      ],
+      related: ["world-athletics"],
+      detail:
+        "Asian Athletics links this federation website. The homepage has a launch notice, with working links to a 2026 events calendar and a results archive.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "maldives-cycling",
   "name": "Bicycle Association of Maldives",
@@ -6685,28 +6687,24 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "united-arab-emirates-athletics",
-  "name": "UAE Athletics Federation",
-  "type": "national",
-  "country": "United Arab Emirates",
-  "jurisdiction": "United Arab Emirates",
-  "territories": [
-    "United Arab Emirates"
-  ],
-  "sports": [
-    "track-and-field"
-  ],
-  "summary": "National athletics body for United Arab Emirates, listed by Asian Athletics.",
-  "website": "https://asianathletics.com/member-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://asianathletics.com/member-federations"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "united-arab-emirates-athletics",
+      name: "UAE Athletics Federation",
+      type: "national",
+      country: "United Arab Emirates",
+      jurisdiction: "United Arab Emirates",
+      territories: ["United Arab Emirates"],
+      sports: ["track-and-field"],
+      summary: "National athletics body for United Arab Emirates, listed by Asian Athletics.",
+      website: "https://www.uaeaf.ae",
+      sources: ["https://asianathletics.com/member-federations", "https://www.uaeaf.ae"],
+      related: ["world-athletics"],
+      detail:
+        "Asian Athletics links this federation website. The athlete, event and result sections did not return records during the 25 October 2026 review; individual details need confirmation.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "united-arab-emirates-cycling",
   "name": "U.A.E. Cycling Federation",
@@ -6773,28 +6771,24 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "iraq-athletics",
-  "name": "Iraqi Athletics Federation",
-  "type": "national",
-  "country": "Iraq",
-  "jurisdiction": "Iraq",
-  "territories": [
-    "Iraq"
-  ],
-  "sports": [
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Iraq, listed by Asian Athletics.",
-  "website": "https://asianathletics.com/member-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://asianathletics.com/member-federations"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "iraq-athletics",
+      name: "Iraqi Athletics Federation",
+      type: "national",
+      country: "Iraq",
+      jurisdiction: "Iraq",
+      territories: ["Iraq"],
+      sports: ["track-and-field"],
+      summary: "National athletics body for Iraq, listed by Asian Athletics.",
+      website: "https://www.iraqiaf-iq.org/",
+      sources: ["https://asianathletics.com/member-federations", "https://www.iraqiaf-iq.org/"],
+      related: ["world-athletics"],
+      detail:
+        "Asian Athletics links this federation website. Event articles include meetings and participation activities; a publication date is not necessarily the activity date.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "iraq-cycling",
   "name": "Iraqi Cycling Federation",
@@ -6905,28 +6899,28 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "lebanon-athletics",
-  "name": "Fédération Libanaise d'Athlétisme",
-  "type": "national",
-  "country": "Lebanon",
-  "jurisdiction": "Lebanon",
-  "territories": [
-    "Lebanon"
-  ],
-  "sports": [
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Lebanon, listed by Asian Athletics.",
-  "website": "https://asianathletics.com/member-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://asianathletics.com/member-federations"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "lebanon-athletics",
+      name: "Fédération Libanaise d'Athlétisme",
+      type: "national",
+      country: "Lebanon",
+      jurisdiction: "Lebanon",
+      territories: ["Lebanon"],
+      sports: ["track-and-field"],
+      summary: "National athletics body for Lebanon, listed by Asian Athletics.",
+      website: "https://flalbn.org/",
+      sources: [
+        "https://asianathletics.com/member-federations",
+        "https://flalbn.org/",
+        "https://flalbn.org/calendar-2026/",
+      ],
+      related: ["world-athletics"],
+      detail:
+        "Asian Athletics links this federation website. Its 2026 calendar includes dates, venues and results references; confirm the event edition because the calendar also includes a December 2025 entry.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "lebanon-cycling",
   "name": "Federation Libanaise De Cyclisme",
@@ -6949,28 +6943,24 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "myanmar-athletics",
-  "name": "Myanmar Track & Field Federation",
-  "type": "national",
-  "country": "Myanmar",
-  "jurisdiction": "Myanmar",
-  "territories": [
-    "Myanmar"
-  ],
-  "sports": [
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Myanmar, listed by Asian Athletics.",
-  "website": "https://asianathletics.com/member-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://asianathletics.com/member-federations"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "myanmar-athletics",
+      name: "Myanmar Track & Field Federation",
+      type: "national",
+      country: "Myanmar",
+      jurisdiction: "Myanmar",
+      territories: ["Myanmar"],
+      sports: ["track-and-field"],
+      summary: "National athletics body for Myanmar, listed by Asian Athletics.",
+      website: "https://mafmm.org",
+      sources: ["https://asianathletics.com/member-federations", "https://mafmm.org"],
+      related: ["world-athletics"],
+      detail:
+        "Asian Athletics links this federation website. Its events archive includes historical competitions and results articles; the historical athlete section is not a current team roster.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "myanmar-cycling",
   "name": "Myanmar Cycling Federation",
@@ -7037,28 +7027,24 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "qatar-athletics",
-  "name": "Qatar Athletics Federation",
-  "type": "national",
-  "country": "Qatar",
-  "jurisdiction": "Qatar",
-  "territories": [
-    "Qatar"
-  ],
-  "sports": [
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Qatar, listed by Asian Athletics.",
-  "website": "https://asianathletics.com/member-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://asianathletics.com/member-federations"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "qatar-athletics",
+      name: "Qatar Athletics Federation",
+      type: "national",
+      country: "Qatar",
+      jurisdiction: "Qatar",
+      territories: ["Qatar"],
+      sports: ["track-and-field"],
+      summary: "National athletics body for Qatar, listed by Asian Athletics.",
+      website: "https://qaf.qa/",
+      sources: ["https://asianathletics.com/member-federations", "https://qaf.qa/"],
+      related: ["world-athletics"],
+      detail:
+        "Asian Athletics links this federation website. Its competitions page includes indicative plans; the performance page explains athlete development rather than listing athlete biographies.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "qatar-cycling",
   "name": "Qatar Cycling & Triathlon Federation",
@@ -7213,28 +7199,28 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "uci"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "uzbekistan-athletics",
-  "name": "The Athletic Federation of Uzbekistan",
-  "type": "national",
-  "country": "Uzbekistan",
-  "jurisdiction": "Uzbekistan",
-  "territories": [
-    "Uzbekistan"
-  ],
-  "sports": [
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Uzbekistan, listed by Asian Athletics.",
-  "website": "https://asianathletics.com/member-federations",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://asianathletics.com/member-federations"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "uzbekistan-athletics",
+      name: "The Athletic Federation of Uzbekistan",
+      type: "national",
+      country: "Uzbekistan",
+      jurisdiction: "Uzbekistan",
+      territories: ["Uzbekistan"],
+      sports: ["track-and-field"],
+      summary: "National athletics body for Uzbekistan, listed by Asian Athletics.",
+      website: "https://uzathletics.uz/",
+      sources: [
+        "https://asianathletics.com/member-federations",
+        "https://uzathletics.uz/",
+        "https://uzathletics.uz/kalendar",
+      ],
+      related: ["world-athletics"],
+      detail:
+        "Asian Athletics links this federation website. A 2026 results index is available, while the calendar also shows older programme information; check the year on each event.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "uzbekistan-cycling",
   "name": "Uzbekistan Cycling Federation",
@@ -8905,30 +8891,30 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-athletics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "morocco-athletics",
-  "name": "Fédération Royale Marocaine d’Athlétisme",
-  "type": "national",
-  "country": "Morocco",
-  "jurisdiction": "Morocco",
-  "territories": [
-    "Morocco"
-  ],
-  "sports": [
-    "road-running",
-    "trail-running",
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Morocco, listed in the Confederation of African Athletics member directory.",
-  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/marocco-maroc",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/marocco-maroc"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "morocco-athletics",
+      name: "Fédération Royale Marocaine d’Athlétisme",
+      type: "national",
+      country: "Morocco",
+      jurisdiction: "Morocco",
+      territories: ["Morocco"],
+      sports: ["road-running", "trail-running", "track-and-field"],
+      summary:
+        "National athletics body for Morocco, listed in the Confederation of African Athletics member directory.",
+      website: "https://frma.ma/",
+      sources: [
+        "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/marocco-maroc",
+        "https://frma.ma/",
+        "https://frma.ma/calendrier-athletisme-maroc/",
+        "https://www.cnom.org.ma/fr/frmath",
+      ],
+      related: ["world-athletics"],
+      detail:
+        "Morocco’s National Olympic Committee links this federation website. It provides competition and record references; check the document year because some records are historical.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "mauritania-athletics",
   "name": "Fédération d’Athlétisme de la République Islamique de Mauritanie (FAIM)",
@@ -8953,30 +8939,29 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
     "world-athletics"
   ]
 }, "2026-10-23"),
-  record({
-  "slug": "namibia-athletics",
-  "name": "Athletics Namibia",
-  "type": "national",
-  "country": "Namibia",
-  "jurisdiction": "Namibia",
-  "territories": [
-    "Namibia"
-  ],
-  "sports": [
-    "road-running",
-    "trail-running",
-    "track-and-field"
-  ],
-  "summary": "National athletics body for Namibia, listed in the Confederation of African Athletics member directory.",
-  "website": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/namibia-namibie",
-  "websiteKind": "member-directory",
-  "sources": [
-    "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/namibia-namibie"
-  ],
-  "related": [
-    "world-athletics"
-  ]
-}, "2026-10-23"),
+  record(
+    {
+      slug: "namibia-athletics",
+      name: "Athletics Namibia",
+      type: "national",
+      country: "Namibia",
+      jurisdiction: "Namibia",
+      territories: ["Namibia"],
+      sports: ["road-running", "trail-running", "track-and-field"],
+      summary:
+        "National athletics body for Namibia, listed in the Confederation of African Athletics member directory.",
+      website: "https://athletics-namibia.com.na/",
+      sources: [
+        "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/namibia-namibie",
+        "https://athletics-namibia.com.na/",
+        "https://olympic.org.na/affiliated-members/athletics-namibia",
+      ],
+      related: ["world-athletics"],
+      detail:
+        "Namibia’s National Olympic Committee links this federation website. Its events and results sections describe their purpose but did not return competition records during the 25 October 2026 review.",
+    },
+    "2026-10-25",
+  ),
   record({
   "slug": "niger-athletics",
   "name": "Federation Nigérienne d’Athlétisme",
