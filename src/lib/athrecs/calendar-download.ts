@@ -16,6 +16,7 @@ const limits = {
   endTime: 30,
   timeZone: 100,
   location: 2000,
+  raceDayInformation: 2000,
   pageUrl: 2000,
   officialUrl: 2000,
   entryUrl: 2000,

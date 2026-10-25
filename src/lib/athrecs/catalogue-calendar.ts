@@ -1,8 +1,59 @@
 import { FIXTURE_DETAILS } from "../../data/fixture-details.ts";
-import { supplementedStart } from "../../data/runrecs-race-guides.ts";
+import { raceGuideFor, supplementedStart } from "../../data/runrecs-race-guides.ts";
 import { calendarTimeZoneForPlace } from "./timezone.ts";
 import { formatDistanceWithUnits } from "./distance.ts";
 import type { CalendarRace } from "./event-calendar.ts";
+
+/** Use only the selected edition's public practical details; HQ is not necessarily the start. */
+export function catalogueCalendarDetails(
+  event: {
+    slug: string;
+    website?: string | null;
+    town?: string | null;
+    city?: string | null;
+    county?: string | null;
+    state?: string | null;
+    country?: string | null;
+  },
+  date: string,
+  distance: string,
+) {
+  const detail = FIXTURE_DETAILS[`${event.slug}|${date}`];
+  const matchedGuide = raceGuideFor(event, date);
+  const guide =
+    matchedGuide && Object.hasOwn(matchedGuide.starts, distance) ? matchedGuide : undefined;
+  const area = [
+    detail?.place?.town ?? event.town,
+    detail?.place?.city ?? event.city,
+    detail?.place?.county ?? event.county,
+    detail?.place?.state ?? event.state,
+    event.country,
+  ];
+  const location = [
+    ...new Set(
+      (guide
+        ? [
+            guide.venue,
+            guide.postcode && !guide.venue.includes(guide.postcode) ? guide.postcode : null,
+            event.country,
+          ]
+        : area
+      ).filter(Boolean),
+    ),
+  ].join(", ");
+  const raceDayInformation = [
+    detail?.starts[distance]?.publicNote,
+    ...(guide?.facts
+      .filter(({ label }) =>
+        /^(Start(?: and finish)?|Race-day schedule|Arrival(?: and parking)?|Parking)$/i.test(label),
+      )
+      .map(({ label, text }) => `${label}: ${text}`) ?? []),
+  ]
+    .filter(Boolean)
+    .join("\n")
+    .slice(0, 2000);
+  return { location, raceDayInformation, officialUrl: guide?.website || event.website };
+}
 
 export function catalogueCalendarRace(
   event: {
@@ -43,9 +94,8 @@ export function catalogueCalendarRace(
     endDate: edition.end_date,
     endTime: edition.end_time,
     timeZone: details?.timeZone ?? calendarTimeZoneForPlace(event),
-    location: [...new Set([event.city, event.county, event.country].filter(Boolean))].join(", "),
+    ...catalogueCalendarDetails(event, edition.event_date, edition.distance_code),
     pageUrl: `${siteUrl}/races/${encodeURIComponent(event.slug)}`,
-    officialUrl: event.website,
     entryUrl: edition.entry_options?.find(
       (option) => option.entry_type === "official" && option.is_verified,
     )?.entry_url,

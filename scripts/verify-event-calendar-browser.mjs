@@ -27,9 +27,10 @@ import React,{useState} from 'react';
 import{RaceActions}from'/@fs/${path.resolve("src/components/races/RaceActions.tsx")}';
 import{RacePracticalInformation}from'/@fs/${path.resolve("src/components/races/RacePracticalInformation.tsx")}';
 import{CompactFixtureRow}from'/@fs/${path.resolve("src/components/discovery/CompactFixtureRow.tsx")}';
+import{useSavedFixtures}from'/@fs/${path.resolve("src/components/discovery/useSavedFixtures.ts")}';
 import './style.css';
-const base={id:'synthetic-half',name:'Calendar test race 🏃',distance:'Half marathon',date:'2027-07-04',startTime:'10:00',timeZone:'Europe/London',pageUrl:'https://www.athrecs.com/races/synthetic',location:'Synthetic venue',officialUrl:'https://example.org'};
-function App(){const[other,setOther]=useState(false);const[later,setLater]=useState(false);const[different,setDifferent]=useState(false);const selected={...base,...(other?{id:'synthetic-full',distance:'Marathon',startTime:'08:30'}:{}),...(different?{id:'other-synthetic',name:'Other synthetic race',pageUrl:'https://www.athrecs.com/races/other-synthetic'}:{}),date:later?'2027-07-05':base.date};return <main style={{maxWidth:900,margin:'auto',padding:16}}>
+const base={id:'synthetic-half',name:'Calendar test race 🏃',distance:'Half marathon',date:'2027-07-04',startTime:'10:00',timeZone:'Europe/London',pageUrl:'https://www.athrecs.com/races/synthetic',location:'Synthetic venue',raceDayInformation:'Start and finish: Use the signed gate. HQ is at the hall.',officialUrl:'https://example.org'};
+function App(){const saved=useSavedFixtures();const[other,setOther]=useState(false);const[later,setLater]=useState(false);const[different,setDifferent]=useState(false);const selected={...base,...(other?{id:'synthetic-full',distance:'Marathon',startTime:'08:30'}:{}),...(different?{id:'other-synthetic',name:'Other synthetic race',pageUrl:'https://www.athrecs.com/races/other-synthetic'}:{}),date:later?'2027-07-05':base.date};return <main style={{maxWidth:900,margin:'auto',padding:16}}>
 <h1>Synthetic calendar regression fixture</h1><div data-case="changing"><RaceActions race={selected}/></div>
 <button onClick={()=>setOther(v=>!v)}>Change selected distance</button>
 <button onClick={()=>setLater(v=>!v)}>Change selected date</button>
@@ -40,7 +41,7 @@ function App(){const[other,setOther]=useState(false);const[later,setLater]=useSt
 <div data-case="provisional"><RaceActions race={{...base,id:'provisional',provisional:true,startTime:null,endDate:'2027-07-06'}}/></div>
 <div data-case="long"><RaceActions race={{...base,id:'long',name:'Very long international race name 東京 '.repeat(8),location:'Long location '.repeat(60)}}/></div>
 <div data-case="integrated"><RacePracticalInformation data={{event:{id:9,slug:'synthetic',name:'Synthetic integrated race',sport:'Running',country:'England',county:'Norfolk',city:'Norwich',website:'https://example.org',description:'Synthetic test',surface:'Road'},upcoming:[{id:91,event_date:'2027-07-04',distance_code:'Half',distance_km:21.0975,start_time:'10:00',status:'Open',entry_options:[],entry_url:null,source_url:null},{id:92,event_date:'2027-07-04',distance_code:'Marathon',distance_km:42.195,start_time:'08:30',status:'Open',entry_options:[],entry_url:null,source_url:null}],past:[],groups:[],distances:[],related:[]}}/></div>
-<div data-case="compact"><CompactFixtureRow fixture={{eventId:9,slug:'synthetic',name:base.name,eventDate:base.date,city:'Norwich',town:null,county:'Norfolk',state:null,country:'England',website:base.officialUrl,summary:'',timeZone:base.timeZone,starts:[{editionId:91,distance:'Half',distanceKm:21.0975,status:'Open',time:'10:00',label:null,note:null,calendarRace:base},{editionId:92,distance:'Marathon',distanceKm:42.195,status:'Open',time:'08:30',label:null,note:null,calendarRace:{...base,id:'synthetic-full',distance:'Marathon',startTime:'08:30'}}]}} saved={false} onToggleSaved={()=>{}}/></div>
+<div data-case="compact"><CompactFixtureRow fixture={{eventId:9,slug:'synthetic',name:base.name,eventDate:base.date,city:'Norwich',town:null,county:'Norfolk',state:null,country:'England',website:base.officialUrl,summary:'',timeZone:base.timeZone,starts:[{editionId:91,distance:'Half',distanceKm:21.0975,status:'Open',time:'10:00',label:null,note:null,calendarRace:base},{editionId:92,distance:'Marathon',distanceKm:42.195,status:'Open',time:'08:30',label:null,note:null,calendarRace:{...base,id:'synthetic-full',distance:'Marathon',startTime:'08:30'}}]}} saved={saved.isSaved({eventId:9,eventDate:base.date})} onToggleSaved={saved.toggleSaved} saveReady={saved.ready}/></div>
 </main>}export{App};
 `,
 );
@@ -121,6 +122,10 @@ try {
     const link = dialog.getByRole("link", { name, exact: true });
     const url = new URL(await link.getAttribute("href"));
     assert.equal(url.hostname, host);
+    assert.match(
+      url.searchParams.get(name === "Google Calendar" ? "details" : "body"),
+      /Use the signed gate/,
+    );
     assert.equal(
       url.searchParams.get(name === "Google Calendar" ? "dates" : "startdt"),
       name === "Google Calendar" ? "20270704T090000Z/20270704T090000Z" : "2027-07-04T09:00:00Z",
@@ -139,6 +144,7 @@ try {
     const text = fs.readFileSync(await download.path(), "utf8");
     assert.match(text, /DTSTART:20270704T090000Z/);
     assert.match(text, /BEGIN:VCALENDAR/);
+    assert.match(text.replace(/\r\n /g, ""), /Use the signed gate/);
     assert(download.suggestedFilename().endsWith(".ics"));
     downloads++;
   }
@@ -514,6 +520,28 @@ try {
   }
   const compact = page.locator('[data-case="compact"]');
   assert.equal(await compact.locator("select").count(), 0, "No duplicate distance dropdown");
+  const saveRace = compact.getByRole("button", { name: /^Save race:/ });
+  assert.equal(await saveRace.innerText(), "Save race");
+  await saveRace.click();
+  const savedRace = compact.getByRole("button", { name: /^Saved race:/ });
+  assert.equal(await savedRace.innerText(), "Saved race");
+  assert.equal(await savedRace.getAttribute("aria-pressed"), "true");
+  await page.reload();
+  await savedRace.waitFor();
+  assert.equal(
+    await page.evaluate(
+      () => JSON.parse(localStorage.getItem("athrecs.saved-fixtures.v1")).fixtures[0].eventId,
+    ),
+    9,
+  );
+  await savedRace.click();
+  await saveRace.waitFor();
+  assert.equal(
+    await page.evaluate(
+      () => JSON.parse(localStorage.getItem("athrecs.saved-fixtures.v1")).fixtures.length,
+    ),
+    0,
+  );
   const compactDate = compact.locator("time");
   assert.equal(await compactDate.getAttribute("aria-label"), "Sunday, 4 July 2027");
   assert.match(await compactDate.innerText(), /Sun · Jul/i);
@@ -527,6 +555,11 @@ try {
   const compactPayload = JSON.parse(await compact.locator('input[name="race"]').inputValue());
   assert.equal(compactPayload.id, "synthetic-full");
   assert.equal(compactPayload.startTime, "08:30");
+  assert.match(compactPayload.raceDayInformation, /Use the signed gate/);
+  assert.equal(
+    await compact.getByRole("link", { name: "Race website", exact: true }).getAttribute("href"),
+    "https://example.org/",
+  );
   assert.equal(
     new URL(
       await compact

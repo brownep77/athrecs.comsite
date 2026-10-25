@@ -2,6 +2,7 @@ import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
 import type { SportFixtureScope, SportFixtureSearch } from "./sport-pages";
 import type { CalendarRace } from "./event-calendar";
+import { catalogueCalendarDetails } from "./catalogue-calendar.ts";
 import {
   ATHLETICS_RUNNING_SURFACES,
   fixtureDistanceCode,
@@ -193,11 +194,6 @@ export async function readSportFixtures(
         const county = detail?.place?.county ?? row.county;
         const countryName = canonicalCountry(row.country);
         const timeZone = detail?.timeZone ?? fixtureTimeZone(row.country);
-        const location = [
-          ...new Set(
-            [detail?.place?.town, city, county, detail?.place?.state, countryName].filter(Boolean),
-          ),
-        ].join(", ");
         return {
           eventId: row.event_id,
           slug,
@@ -241,9 +237,18 @@ export async function readSportFixtures(
                     endDate: start.endDate,
                     endTime: start.endTime,
                     timeZone,
-                    location,
+                    ...catalogueCalendarDetails(
+                      {
+                        slug,
+                        website: publicHttpUrl(row.website),
+                        city,
+                        county,
+                        country: countryName,
+                      },
+                      row.event_date,
+                      start.distance,
+                    ),
                     pageUrl: `https://www.athrecs.com/races/${encodeURIComponent(slug)}`,
-                    officialUrl: publicHttpUrl(row.website),
                     status: start.status,
                   }
                 : null;

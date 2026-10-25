@@ -200,7 +200,8 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
           type="button"
           className={actionClass}
           aria-pressed={saved}
-          aria-label={`${saved ? "Remove" : "Save"} ${fixture.name}${saved ? " from saved races" : " to saved races"}`}
+          aria-label={`${saved ? "Saved race" : "Save race"}: ${fixture.name}${saved ? ". Remove from saved races" : " to saved races"}`}
+          title={saved ? "Remove from saved races" : "Save to your race shortlist in this browser"}
           disabled={!saveReady || !fixture.slug}
           onClick={() => onToggleSaved(fixture)}
         >
@@ -209,7 +210,7 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
           ) : (
             <Bookmark className="size-3.5" aria-hidden="true" />
           )}
-          {saved ? "Saved" : "Save"}
+          {saved ? "Saved race" : "Save race"}
         </button>
         {calendarRace ? (
           <AddToCalendar key={`calendar-${calendarRace.id}`} race={calendarRace} />

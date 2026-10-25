@@ -48,6 +48,36 @@ const input = {
   officialUrl: "https://example.org/race",
 };
 const build = (changes = {}) => buildCalendarEvent({ ...input, ...changes });
+check("calendar details include the distance, listed area, map and official link", () => {
+  const event = build({
+    raceDayInformation: "Start and finish: Use the signed gate, not race HQ.",
+  });
+  assert.match(event.description, /Distance: 10K\./);
+  assert.match(event.description, /Venue \/ race area: Test venue/);
+  assert.match(event.description, /Start and finish: Use the signed gate, not race HQ\./);
+  assert.match(event.description, /query=Test%20venue/);
+  assert.match(event.description, /Race website: https:\/\/example.org\/race/);
+  assert.equal(event.officialUrl, "https://example.org/race");
+  for (const [name, url] of Object.entries(calendarLinks(event))) {
+    const body = new URL(url).searchParams.get(name === "google" ? "details" : "body");
+    assert.match(body, /Use the signed gate/);
+    assert.match(body, /Distance: 10K/);
+  }
+  assert.match(calendarIcs(event).replace(/\r\n /g, ""), /Use the signed gate/);
+});
+check("missing venue never invents a start or map", () => {
+  const event = build({ location: null });
+  assert.equal(event.location, "");
+  assert.doesNotMatch(event.description, /Venue \/ race area:|maps\/search/);
+});
+check("practical notes cannot inject calendar records or withheld references", () => {
+  const event = build({
+    raceDayInformation: "Gate A\r\nBEGIN:VEVENT\r\nrunABC https://runabc.co.uk/private",
+  });
+  const ics = calendarIcs(event);
+  assert.equal(ics.match(/^BEGIN:VEVENT/gm).length, 1);
+  assert.doesNotMatch(ics, /runabc/i);
+});
 check("summer start uses BST", () => assert.equal(build().startUtc, "2027-07-04T09:00:00Z"));
 check("winter start uses GMT", () =>
   assert.equal(build({ date: "2027-02-21" }).startUtc, "2027-02-21T10:00:00Z"),
@@ -177,7 +207,7 @@ for (const officialUrl of [
   "https://runabc.co.uk/race",
 ])
   check("unsafe link excluded " + officialUrl, () =>
-    assert(!build({ officialUrl }).description.includes("Official website:")),
+    assert(!build({ officialUrl }).description.includes("Race website:")),
   );
 const hostile =
   "Race, semi; slash\\\r\nBEGIN:VEVENT\r\nATTENDEE:mailto:unwanted@example.org\r\nEND:VEVENT";
@@ -233,6 +263,67 @@ const fixtureEvent = {
   city: "Norwich",
 };
 const { FIXTURE_DETAILS } = await import("../src/data/fixture-details.ts");
+const { runRecsRaceGuides } = await import("../src/data/runrecs-race-guides.ts");
+check("practical details stay with the checked date and distance and omit private notes", () => {
+  const event = {
+    slug: "synthetic-practical-calendar",
+    name: "Synthetic race",
+    city: "Test town",
+    country: "England",
+  };
+  const edition = {
+    id: 900,
+    event_date: "2027-07-04",
+    distance_code: "10K",
+    distance_km: 10,
+    status: "Open",
+    start_time: "10:00",
+  };
+  const key = `${event.slug}|${edition.event_date}`;
+  runRecsRaceGuides.push({
+    slugs: [event.slug],
+    date: edition.event_date,
+    checked: "2026-10-25",
+    website: "https://example.org/edition",
+    starts: { "10K": "10:00" },
+    venue: "Test race HQ",
+    postcode: "TEST 1",
+    facts: [{ label: "Start and finish", text: "The start is at Gate A, a short walk from HQ." }],
+  });
+  FIXTURE_DETAILS[key] = {
+    summary: "Test",
+    timeZone: "Europe/London",
+    sourceUrl: "https://example.org/edition",
+    checkedAt: "2026-10-25",
+    starts: {
+      "10K": {
+        time: "10:00",
+        publicNote: "Follow your allocated wave.",
+        note: "PRIVATE REVIEW NOTE",
+      },
+    },
+  };
+  try {
+    const matched = catalogueCalendarRace(event, edition, "https://www.athrecs.com");
+    assert.equal(matched.location, "Test race HQ, TEST 1, England");
+    assert.equal(matched.officialUrl, "https://example.org/edition");
+    assert.match(matched.raceDayInformation, /Gate A/);
+    assert.match(matched.raceDayInformation, /allocated wave/);
+    assert.doesNotMatch(matched.raceDayInformation, /PRIVATE/);
+    for (const change of [{ event_date: "2028-07-04" }, { distance_code: "5K" }]) {
+      const other = catalogueCalendarRace(
+        event,
+        { ...edition, ...change },
+        "https://www.athrecs.com",
+      );
+      assert.equal(other.location, "Test town, England");
+      assert.equal(other.raceDayInformation, "");
+    }
+  } finally {
+    runRecsRaceGuides.pop();
+    delete FIXTURE_DETAILS[key];
+  }
+});
 const fixtureKey = Object.keys(FIXTURE_DETAILS).find(
   (key) => key.includes("marriotts") && key.endsWith("|2027-02-21"),
 );
