@@ -7,24 +7,9 @@ import {
   type ColumnMapping,
 } from "./core";
 import { parseBrowserCapture } from "./browser-capture";
+import { resultCollectionScope } from "./collection-provider";
 
-export function collectionScope(address: string) {
-  const url = new URL(address);
-  if (
-    url.origin !== "https://results.tcslondonmarathon.com" ||
-    !/^\/\d{4}\/$/.test(url.pathname) ||
-    url.searchParams.get("pid") !== "list" ||
-    url.username ||
-    url.password ||
-    url.searchParams.has("idp") ||
-    url.searchParams.has("content")
-  )
-    throw new Error("Automatic collection is restricted to this London results listing.");
-  url.searchParams.delete("page");
-  url.searchParams.sort();
-  url.hash = "";
-  return url.href;
-}
+export const collectionScope = resultCollectionScope;
 export const collectionSchema = z
   .object({
     version: z.literal(1),
@@ -45,7 +30,7 @@ export const collectionSchema = z
       )
         throw new Error("Page totals do not match.");
     } catch {
-      ctx.addIssue({ code: "custom", message: "Invalid London collection scope or totals" });
+      ctx.addIssue({ code: "custom", message: "Invalid supported collection scope or totals" });
     }
   });
 export type BrowserCollection = z.infer<typeof collectionSchema>;

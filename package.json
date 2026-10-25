@@ -132,6 +132,8 @@
     "verify:invitation-welcome": "node scripts/verify-invitation-welcome.mjs",
     "verify:claim-invitations": "node --experimental-vm-modules scripts/verify-claim-invitations.mjs",
     "verify:results-archive": "node scripts/verify-results-archive.mjs",
+    "collect:marathon-results": "node scripts/collect-marathon-results.mjs",
+    "verify:marathon-collection": "node scripts/verify-marathon-collection-job.mjs",
     "verify:results-archive-browser": "node scripts/verify-results-archive-browser.mjs",
     "verify:captured-results": "node scripts/verify-captured-results.mjs",
     "verify:private-archive-profiles": "python scripts/verify-private-archive-profiles.py",
@@ -143,7 +145,9 @@
     "verify:search-adversarial": "node --experimental-strip-types scripts/verify-search-adversarial.mjs",
     "verify:intelligent-result-matching": "node --experimental-strip-types scripts/verify-intelligent-result-matching.mjs",
     "verify:test-account": "node scripts/verify-test-account.mjs",
-    "verify:analytics-flags": "node scripts/verify-analytics-flags.mjs"
+    "verify:analytics-flags": "node scripts/verify-analytics-flags.mjs",
+    "collect:brussels-results": "node scripts/collect-brussels-results.mjs",
+    "verify:brussels-collection": "node scripts/verify-brussels-collection.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",
