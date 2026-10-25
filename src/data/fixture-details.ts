@@ -15,6 +15,7 @@ import { isUrgentReviewedPlaceholder } from "./urgent-starts-followup-2026-10-25
 import threeMonthStarts from "./three-month-starts-2026-10-25.json" with { type: "json" };
 import nextUrgentStarts from "./urgent-starts-next-2026-10-25.json" with { type: "json" };
 import { isNextUrgentPlaceholder } from "./urgent-starts-next-2026-10-25.ts";
+import batchFiveStarts from "./three-month-starts-batch5-2026-10-25.json" with { type: "json" };
 
 /** Edition-specific organiser checks. Never carry a start time into another edition. */
 export type FixtureDetail = {
@@ -431,4 +432,13 @@ export function checkedFixtureStartLabel(
       .map((code, index) => `${code}: ${labels[index] ?? "see distance programme"}`)
       .join("; ");
   return null;
+}
+
+// Preserve other reviewed distances when adding this exact-date programme.
+for (const [key, detail] of Object.entries(batchFiveStarts)) {
+  FIXTURE_DETAILS[key] = {
+    ...FIXTURE_DETAILS[key],
+    ...detail,
+    starts: { ...FIXTURE_DETAILS[key]?.starts, ...detail.starts },
+  };
 }

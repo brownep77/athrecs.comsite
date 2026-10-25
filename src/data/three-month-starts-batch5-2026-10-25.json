@@ -1,0 +1,510 @@
+{
+  "course-en-sentier-smh|2026-10-25": {
+    "summary": "Course en sentier SMH. Start times are local to the race venue.",
+    "timeZone": "America/Toronto",
+    "sourceUrl": "https://www.ms1inscription.com/crosscountry-SMH2026",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "10:45",
+        "sourceUrl": "https://www.ms1inscription.com/crosscountry-SMH2026",
+        "note": "Authorised 25 October 2026 category timetable: both U16-U18 5 km and OPEN 5 km start at 10:45; 10 km starts separately at 10:30.",
+        "publicNote": ""
+      }
+    }
+  },
+  "outer-banks-marathon|2026-11-08": {
+    "summary": "Outer Banks Marathon. Start times are local to the race venue.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://obxse.com/outer-banks-marathon/schedule-events",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "sourceUrl": "https://obxse.com/outer-banks-marathon/schedule-events",
+        "note": "Organiser 2026 schedule: Sunday 8 November marathon at 07:00; half marathon separately at 07:15.",
+        "publicNote": ""
+      }
+    }
+  },
+  "saddleback-marathon|2026-11-07": {
+    "summary": "Saddleback Marathon. Start times are local to the race venue.",
+    "timeZone": "America/Los_Angeles",
+    "sourceUrl": "https://otrraces.com/details",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:30",
+        "sourceUrl": "https://otrraces.com/details",
+        "note": "2026 organiser details and authorised UltraSignup programme agree: 7 November marathon main start 07:30, optional early start 06:30.",
+        "publicNote": "The marathon main start is 07:30. Follow the organiser’s instructions if using the optional 06:30 early start.",
+        "label": "Main start 07:30 PST · optional early start 06:30"
+      }
+    }
+  },
+  "chickamauga-battlefield-marathon|2026-11-14": {
+    "summary": "Chickamauga Battlefield Marathon. Start times are local to the race venue.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://www.chattanoogatrackclub.org/calendar/events/chickamauga-battlefield-races-2026",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "07:30",
+        "sourceUrl": "https://www.chattanoogatrackclub.org/calendar/events/chickamauga-battlefield-races-2026",
+        "note": "Organising club dated 14 November 2026 timetable explicitly gives marathon 07:30, consistent with race-day instructions. Wheelchair division starts separately at 07:25.",
+        "publicNote": ""
+      }
+    }
+  },
+  "five-trails-50k-three-trails-half|2026-11-14": {
+    "summary": "Five Trails 50K & Three Trails Half Marathon. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://freedom-racing.co.uk/five-trails-ultra-3-trails-half",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "50K": {
+        "time": "10:00",
+        "sourceUrl": "https://freedom-racing.co.uk/five-trails-ultra-3-trails-half",
+        "note": "Organiser Saturday 14 November 2026 programme: 50 km starts 10:00; registration begins 08:30 and is not the race start.",
+        "publicNote": ""
+      },
+      "Half": {
+        "time": "11:00",
+        "sourceUrl": "https://freedom-racing.co.uk/five-trails-ultra-3-trails-half",
+        "note": "Organiser Saturday 14 November 2026 programme explicitly gives Three Trails Half start 11:00.",
+        "publicNote": ""
+      }
+    }
+  },
+  "centurion-wendover-woods-50|2026-11-14": {
+    "summary": "Centurion Wendover Woods 50. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.centurionrunning.com/races/wendover-woods-50-2026",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "50mi": {
+        "time": "05:30",
+        "sourceUrl": "https://www.centurionrunning.com/races/wendover-woods-50-2026",
+        "note": "Organiser exact 2026 Wendover Woods 50-mile edition lists 14 November at 05:30.",
+        "publicNote": ""
+      }
+    }
+  },
+  "hadleigh-5-10-mile|2026-11-22": {
+    "summary": "Hadleigh 5 & 10 Mile. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.hadleigh-hares.co.uk/hadleigh-10-and-5-mile-races2026",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10mi": {
+        "time": "11:00",
+        "sourceUrl": "https://www.hadleigh-hares.co.uk/hadleigh-10-and-5-mile-races2026",
+        "note": "Organiser Sunday 22 November 2026 timetable explicitly starts 10 miles at 11:00; 10:00 is the junior 2 km race, not either adult race.",
+        "publicNote": ""
+      },
+      "5mi": {
+        "time": "11:05",
+        "sourceUrl": "https://www.hadleigh-hares.co.uk/hadleigh-10-and-5-mile-races2026",
+        "note": "Organiser Sunday 22 November 2026 timetable explicitly starts 5 miles at 11:05; 10:00 is the junior 2 km race.",
+        "publicNote": ""
+      }
+    }
+  },
+  "rb-adnams-southwold-10k|2026-11-22": {
+    "summary": "Adnams Southwold 10k 2026. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.resultsbase.net/event/7658",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10K": {
+        "time": "11:00",
+        "sourceUrl": "https://www.resultsbase.net/event/7658",
+        "note": "Organiser Adnams authorised entry programme for 22 November 2026 states 10 km starts at 11:00 at the Harbour Inn.",
+        "publicNote": ""
+      }
+    }
+  },
+  "poppies-run|2026-11-22": {
+    "summary": "Poppies’ Run. Start times are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://www.poppiesrun.be/p/index.php/info",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5.5K": {
+        "time": "14:00",
+        "sourceUrl": "https://www.poppiesrun.be/p/index.php/info",
+        "note": "Organiser 22 November 2026 information gives 5.5 km at 14:00, separate from half marathon at 12:30 and 12.9 km at 13:30.",
+        "publicNote": ""
+      }
+    }
+  },
+  "stayen-great-half|2026-11-15": {
+    "summary": "Stayen Great Half Sint-Truiden. Start times are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://www.keeponrunning.be/en/events/stayen-great-half-sint-truiden/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half Marathon": {
+        "time": "10:00",
+        "sourceUrl": "https://www.keeponrunning.be/en/events/stayen-great-half-sint-truiden/",
+        "note": "Organiser 15 November 2026 timetable explicitly gives half-marathon start 10:00. Registration at 07:30 is separate.",
+        "publicNote": ""
+      }
+    }
+  },
+  "toyama-marathon|2026-11-01": {
+    "summary": "Toyama Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://toyamamarathon.com/english/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "sourceUrl": "https://toyamamarathon.com/english/",
+        "note": "Official 2026 English guide states marathon day Sunday 1 November 2026, 09:00 start.",
+        "publicNote": ""
+      }
+    }
+  },
+  "shimonoseki-kaikyo-marathon|2026-11-01": {
+    "summary": "Shimonoseki Kaikyo Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://kaikyomarathon.jp/outline/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "sourceUrl": "https://kaikyomarathon.jp/outline/",
+        "note": "Official 2026 regulations identify 1 November and explicitly give marathon start 08:30. The 2 km fun run is separately at 08:45.",
+        "publicNote": ""
+      }
+    }
+  },
+  "kobe-marathon|2026-11-15": {
+    "summary": "Kobe Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://www.kobe-marathon.net/2026/race/essentials/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "sourceUrl": "https://www.kobe-marathon.net/2026/race/essentials/",
+        "note": "Official 15 November 2026 regulations give first marathon wave 09:00 and second wave 09:15.",
+        "publicNote": "Follow the wave assigned on your race bib. Marathon waves start at 09:00 and 09:15.",
+        "label": "First wave 09:00 JST · second wave 09:15"
+      }
+    }
+  },
+  "gunma-marathon|2026-11-03": {
+    "summary": "Gunma Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://www.g-marathon.com/about-guide/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:55",
+        "sourceUrl": "https://www.g-marathon.com/about-guide/",
+        "note": "Official 3 November 2026 regulations give first marathon wave 08:55 and second wave 09:00.",
+        "publicNote": "Follow your assigned marathon wave: 08:55 or 09:00.",
+        "label": "First wave 08:55 JST · second wave 09:00"
+      }
+    }
+  },
+  "mindovermoors-twin-falls-50k|2027-01-23": {
+    "summary": "MindOverMoors Twin Falls 50K. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.mindovermoors.co.uk/twin-falls-50k",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "50K": {
+        "time": "08:00",
+        "sourceUrl": "https://www.mindovermoors.co.uk/twin-falls-50k",
+        "note": "Organiser page dated 23 January 2027 explicitly distinguishes registration 06:30, briefing 07:45 and race start 08:00. The unrelated refund-date text is inconsistent and is not used as timing evidence.",
+        "publicNote": ""
+      }
+    }
+  },
+  "apocalypse-run|2026-11-01": {
+    "summary": "Apocalypse Run. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.letsdothis.com/gb/e/apocalypse-run-2026-188166",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10mi": {
+        "time": "10:00",
+        "sourceUrl": "https://www.letsdothis.com/gb/e/apocalypse-run-2026-188166",
+        "note": "Authorised entry listing for Sunday 1 November 2026 explicitly gives Apocalypse Run 10 miles start 10:00.",
+        "publicNote": ""
+      }
+    }
+  },
+  "fred-hughes-10-mile-2027|2027-01-17": {
+    "summary": "Fred Hughes 10 Mile 2027. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.atwevents.co.uk/e/fred-hughes-10-mile-10377/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "10mi": {
+        "time": "09:30",
+        "sourceUrl": "https://www.atwevents.co.uk/e/fred-hughes-10-mile-10377/",
+        "note": "Organiser-authorised 17 January 2027 entry programme category 78717 (Fred Hughes 10 Mile 2027) explicitly carries 09:30 local date/time; consistent with event metadata.",
+        "publicNote": ""
+      }
+    }
+  },
+  "atw-bedford-5-and-10-2027|2027-01-24": {
+    "summary": "ATW Bedford 5 & 10 2027. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.atwevents.co.uk/e/atw-bedford-5-and-10-8922",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5mi": {
+        "time": "09:00",
+        "sourceUrl": "https://www.atwevents.co.uk/e/atw-bedford-5-and-10-8922",
+        "note": "Organiser 24 January 2027 entry programme category 67110 explicitly gives 5 Miles at 09:00, independently of the 10-mile category.",
+        "publicNote": ""
+      }
+    }
+  },
+  "mapledurham-10-half|2026-11-29": {
+    "summary": "Mapledurham 10 & Half. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.mstevents.co.uk/e/mapledurham-10-mile-10k-and-half-marathon-14952",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "10:10",
+        "sourceUrl": "https://www.mstevents.co.uk/e/mapledurham-10-mile-10k-and-half-marathon-14952",
+        "note": "Organiser 29 November 2026 distance-specific entry data gives Half Marathon 2026 at 10:10. The 10 km starts separately at 10:00.",
+        "publicNote": ""
+      },
+      "10mi": {
+        "time": "10:10",
+        "sourceUrl": "https://www.mstevents.co.uk/e/mapledurham-10-mile-10k-and-half-marathon-14952",
+        "note": "Organiser 29 November 2026 distance-specific entry data gives 10 Mile 2026 at 10:10, distinct from 10 km at 10:00.",
+        "publicNote": ""
+      },
+      "10K": {
+        "time": "10:00",
+        "sourceUrl": "https://www.mstevents.co.uk/e/mapledurham-10-mile-10k-and-half-marathon-14952",
+        "note": "Organiser 29 November 2026 distance-specific entry data gives 10K 2026 at 10:00.",
+        "publicNote": ""
+      }
+    }
+  },
+  "hartfield-honey-run|2026-11-15": {
+    "summary": "Hartfield Honey Run. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://findarace.com/events/the-hartfield-honey-run",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Half": {
+        "time": "09:30",
+        "sourceUrl": "https://findarace.com/events/the-hartfield-honey-run",
+        "note": "Authorised booking page explicitly identifies organiser Hartfield Honey Run and 15 November 2026. Its distance-specific booking option and organiser FAQ agree: half marathon race 09:30, registration 08:15.",
+        "publicNote": ""
+      },
+      "10K": {
+        "time": "10:30",
+        "sourceUrl": "https://findarace.com/events/the-hartfield-honey-run",
+        "note": "Authorised 15 November 2026 booking programme and organiser FAQ agree: Honey Dash 10 km race 10:30, registration 09:15.",
+        "publicNote": ""
+      }
+    }
+  },
+  "okayama-marathon|2026-11-08": {
+    "summary": "Okayama Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://www.okayamamarathon.jp/en/guideline/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:45",
+        "sourceUrl": "https://www.okayamamarathon.jp/en/guideline/",
+        "note": "Official 2026 competition guidelines explicitly give Sunday 8 November marathon start 08:45.",
+        "publicNote": ""
+      }
+    }
+  },
+  "fukuchiyama-marathon|2026-11-22": {
+    "summary": "Fukuchiyama Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://fukuchiyama-marathon.com/outline/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "10:00",
+        "sourceUrl": "https://fukuchiyama-marathon.com/outline/",
+        "note": "Official 34th Fukuchiyama regulations explicitly give marathon start 10:00. Current official event and entry pages establish the changed 2026 date as Sunday 22 November, matching this canonical edition.",
+        "publicNote": ""
+      }
+    }
+  },
+  "otawara-marathon|2026-11-23": {
+    "summary": "Otawara Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://www.ohtawara-marathon.com/outline/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "10:00",
+        "sourceUrl": "https://www.ohtawara-marathon.com/outline/",
+        "note": "Official 23 November 2026 timetable explicitly gives marathon start 10:00, separate from the 10 km at 10:40.",
+        "publicNote": ""
+      }
+    }
+  },
+  "ibusuki-nanohana-marathon|2027-01-10": {
+    "summary": "Ibusuki Nanohana Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://ibusuki-nanohana.com/essentials/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "sourceUrl": "https://ibusuki-nanohana.com/essentials/",
+        "note": "Official full-marathon regulations explicitly give 10 January 2027 at 09:00. The fun run begins after the full marathon and is not used as timing evidence.",
+        "publicNote": ""
+      }
+    }
+  },
+  "ishigaki-island-marathon|2027-01-17": {
+    "summary": "Ishigaki Island Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://www.ishigakijima-marathon.jp/outline/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "sourceUrl": "https://www.ishigakijima-marathon.jp/outline/",
+        "note": "Official 17 January 2027 timetable distinguishes gathering 08:35, ceremony 08:40 and full marathon start 09:00. The 10 km and half start separately.",
+        "publicNote": ""
+      }
+    }
+  },
+  "chiba-aqua-line-marathon|2026-11-08": {
+    "summary": "Chiba Aqua-Line Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://chiba-aqualine-marathon.com/runner/guidelines.html",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "09:45",
+        "sourceUrl": "https://chiba-aqualine-marathon.com/runner/guidelines.html",
+        "note": "Official 8 November 2026 programme gives marathon start 09:45; official wave-start page confirms three staggered groups. The high-wind shortened-course contingency has a different start and is not the normal marathon.",
+        "publicNote": "Follow your assigned wave. If the organiser activates its high-wind shortened-course plan, follow the revised timetable.",
+        "label": "First wave 09:45 JST · follow your assigned wave"
+      }
+    }
+  },
+  "tsukuba-marathon|2026-11-22": {
+    "summary": "Tsukuba Marathon. Start times are local to the race venue.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://www.tsukuba-marathon.com/page/page000283.html",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "Marathon": {
+        "time": "08:50",
+        "sourceUrl": "https://www.tsukuba-marathon.com/page/page000283.html",
+        "note": "Official 46th Tsukuba regulations for 22 November 2026 explicitly give marathon wave starts from 08:50 to 09:10.",
+        "publicNote": "Marathon waves start between 08:50 and 09:10. Follow the wave assigned on your race bib.",
+        "label": "First wave 08:50 JST · waves until 09:10"
+      }
+    }
+  },
+  "french-riviera-marathon-2|2026-11-08": {
+    "summary": "French Riviera Marathon Nice-Cannes. Start times are local to the race venue.",
+    "timeZone": "Europe/Paris",
+    "sourceUrl": "https://www.marathon06.com/2026/dl/MAM2026_reglement-20km.pdf",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "20K": {
+        "time": "08:00",
+        "sourceUrl": "https://www.marathon06.com/2026/dl/MAM2026_reglement-20km.pdf",
+        "note": "Official 2026 20 km regulations, articles 1 and 3: 8 November; all 20 km runners join the 08:00 start, separately from later marathon waves.",
+        "publicNote": ""
+      }
+    }
+  },
+  "trail-knokke-heist|2026-11-22": {
+    "summary": "Besox Trail Knokke-Heist. Start times are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://trailknokkeheist.be/praktische-info-run/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "25K": {
+        "time": "08:30",
+        "sourceUrl": "https://trailknokkeheist.be/praktische-info-run/",
+        "note": "Organiser Sunday 22 November programme gives 25 km group start 08:30 and free start until 08:44. Other stored distances do not match the current programme and remain held.",
+        "publicNote": "The 25 km group starts at 08:30; participants may also start individually until 08:44.",
+        "label": "Group start 08:30 CET · free start until 08:44"
+      }
+    }
+  },
+  "brita-urban-trail-antwerp|2026-11-15": {
+    "summary": "BRITA Urban Trail Antwerpen. Start times are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://antwerpurbantrail.be/nl/praktische-info/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "13K": {
+        "time": "09:00",
+        "sourceUrl": "https://antwerpurbantrail.be/nl/praktische-info/",
+        "note": "Organiser Sunday 15 November current programme identifies 8 km/13 km and eight chosen waves every 20 minutes from 09:00 through 11:20. Stored 7 km is not supported.",
+        "publicNote": "Choose or follow your booked wave. Waves depart every 20 minutes between 09:00 and 11:20.",
+        "label": "First wave 09:00 CET · waves until 11:20"
+      }
+    }
+  },
+  "atw-mallory-race-circuit-winter-runs-2027|2027-01-17": {
+    "summary": "ATW Mallory Race Circuit Winter Runs 2027. Start times are local to the race venue.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.atwevents.co.uk/e/atw-mallory-race-circuit-winter-runs-half-marathon-10k-5k-and-fun-run-11292",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "5K": {
+        "time": "11:00",
+        "sourceUrl": "https://www.atwevents.co.uk/e/atw-mallory-race-circuit-winter-runs-half-marathon-10k-5k-and-fun-run-11292",
+        "note": "Organiser 17 January 2027 categories 66474 (5 km) and 66473 (10 km) both list 11:00. The 2027 programme explicitly introduces performance-based waves; later wave times are not separately supplied.",
+        "publicNote": "The 5 km and 10 km programme begins at 11:00. Follow your assigned performance wave and the organiser’s final instructions.",
+        "label": "Waves from 11:00 GMT · follow your assigned wave"
+      },
+      "10K": {
+        "time": "11:00",
+        "sourceUrl": "https://www.atwevents.co.uk/e/atw-mallory-race-circuit-winter-runs-half-marathon-10k-5k-and-fun-run-11292",
+        "note": "Organiser 17 January 2027 categories 66474 (5 km) and 66473 (10 km) both list 11:00. The 2027 programme explicitly introduces performance-based waves; later wave times are not separately supplied.",
+        "publicNote": "The 5 km and 10 km programme begins at 11:00. Follow your assigned performance wave and the organiser’s final instructions.",
+        "label": "Waves from 11:00 GMT · follow your assigned wave"
+      }
+    }
+  },
+  "havenwereld-run|2026-11-08": {
+    "summary": "Havenwereld Run. Start times are local to the race venue.",
+    "timeZone": "Europe/Brussels",
+    "sourceUrl": "https://havenwereldrunandwalk.be/praktische-info/",
+    "checkedAt": "2026-10-25",
+    "starts": {
+      "8K": {
+        "time": null,
+        "sourceUrl": "https://havenwereldrunandwalk.be/praktische-info/",
+        "note": "Organiser Sunday 8 November programme gives free-start windows: 21 km 09:00–09:30; 12 km 09:30–10:00; 8 km 10:00–10:15. No single race start is asserted.",
+        "publicNote": "Start at a time within the organiser’s window for your distance.",
+        "label": "Start window 10:00–10:15 CET"
+      },
+      "12K": {
+        "time": null,
+        "sourceUrl": "https://havenwereldrunandwalk.be/praktische-info/",
+        "note": "Organiser Sunday 8 November programme gives free-start windows: 21 km 09:00–09:30; 12 km 09:30–10:00; 8 km 10:00–10:15. No single race start is asserted.",
+        "publicNote": "Start at a time within the organiser’s window for your distance.",
+        "label": "Start window 09:30–10:00 CET"
+      },
+      "Half Marathon": {
+        "time": null,
+        "sourceUrl": "https://havenwereldrunandwalk.be/praktische-info/",
+        "note": "Organiser Sunday 8 November programme gives free-start windows: 21 km 09:00–09:30; 12 km 09:30–10:00; 8 km 10:00–10:15. No single race start is asserted.",
+        "publicNote": "Start at a time within the organiser’s window for your distance.",
+        "label": "Start window 09:00–09:30 CET"
+      }
+    }
+  }
+}

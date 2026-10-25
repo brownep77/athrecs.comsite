@@ -7,7 +7,8 @@
     "starts": {
       "Marathon": {
         "time": "07:00",
-        "note": "The 2026 organiser schedule explicitly places the marathon at 07:00; 07:15 belongs to the half marathon and 5 K."
+        "note": "The 2026 organiser schedule explicitly places the marathon at 07:00; 07:15 belongs to the half marathon and 5 K.",
+        "publicNote": ""
       }
     }
   },
@@ -19,15 +20,18 @@
     "starts": {
       "8K": {
         "time": "10:45",
-        "note": "The dated organiser programme lists 8 K at 10:45, 17 K at 11:00 and 31 K at 10:00. Bib collection is 09:00, not the race start."
+        "note": "The dated organiser programme lists 8 K at 10:45, 17 K at 11:00 and 31 K at 10:00. Bib collection is 09:00, not the race start.",
+        "publicNote": "8K starts at 10:45 CET. Bib collection opens at 09:00."
       },
       "17K": {
         "time": "11:00",
-        "note": "The dated organiser programme lists 8 K at 10:45, 17 K at 11:00 and 31 K at 10:00. Bib collection is 09:00, not the race start."
+        "note": "The dated organiser programme lists 8 K at 10:45, 17 K at 11:00 and 31 K at 10:00. Bib collection is 09:00, not the race start.",
+        "publicNote": "17K starts at 11:00 CET. Bib collection opens at 09:00."
       },
       "31K": {
         "time": "10:00",
-        "note": "The dated organiser programme lists 8 K at 10:45, 17 K at 11:00 and 31 K at 10:00. Bib collection is 09:00, not the race start."
+        "note": "The dated organiser programme lists 8 K at 10:45, 17 K at 11:00 and 31 K at 10:00. Bib collection is 09:00, not the race start.",
+        "publicNote": "31K starts at 10:00 CET. Bib collection opens at 09:00."
       }
     }
   },
@@ -39,7 +43,8 @@
     "starts": {
       "Half": {
         "time": "06:50",
-        "note": "The edition-specific organiser FAQ says half marathon 06:50; 06:30 on the booking header is a generic event time. 05:45 is bib collection. Organiser says times are subject to change."
+        "note": "The edition-specific organiser FAQ says half marathon 06:50; 06:30 on the booking header is a generic event time. 05:45 is bib collection. Organiser says times are subject to change.",
+        "publicNote": ""
       }
     }
   },
@@ -51,11 +56,13 @@
     "starts": {
       "Half": {
         "time": "10:30",
-        "note": "The organiser event header and race-day schedule agree for Half 10:30 and 10 K 11:15. Hold 5 K: header 11:10 versus prose 11:11."
+        "note": "The organiser event header and race-day schedule agree for Half 10:30 and 10 K 11:15. Hold 5 K: header 11:10 versus prose 11:11.",
+        "publicNote": ""
       },
       "10K": {
         "time": "11:15",
-        "note": "The organiser event header and race-day schedule agree for Half 10:30 and 10 K 11:15. Hold 5 K: header 11:10 versus prose 11:11."
+        "note": "The organiser event header and race-day schedule agree for Half 10:30 and 10 K 11:15. Hold 5 K: header 11:10 versus prose 11:11.",
+        "publicNote": ""
       },
       "5K": {
         "time": null,
@@ -73,15 +80,18 @@
     "starts": {
       "10K": {
         "time": "11:00",
-        "note": "The dated Dorset event links to the organiser's category timetable: marathon mass start 09:00, half 10:00, 10 K 11:00. Coach departures and briefings are explicitly separate."
+        "note": "The dated Dorset event links to the organiser's category timetable: marathon mass start 09:00, half 10:00, 10 K 11:00. Coach departures and briefings are explicitly separate.",
+        "publicNote": ""
       },
       "Half": {
         "time": "10:00",
-        "note": "The dated Dorset event links to the organiser's category timetable: marathon mass start 09:00, half 10:00, 10 K 11:00. Coach departures and briefings are explicitly separate."
+        "note": "The dated Dorset event links to the organiser's category timetable: marathon mass start 09:00, half 10:00, 10 K 11:00. Coach departures and briefings are explicitly separate.",
+        "publicNote": ""
       },
       "Marathon": {
         "time": "09:00",
-        "note": "The dated Dorset event links to the organiser's category timetable: marathon mass start 09:00, half 10:00, 10 K 11:00. Coach departures and briefings are explicitly separate."
+        "note": "The dated Dorset event links to the organiser's category timetable: marathon mass start 09:00, half 10:00, 10 K 11:00. Coach departures and briefings are explicitly separate.",
+        "publicNote": ""
       }
     }
   },
@@ -93,15 +103,18 @@
     "starts": {
       "5K": {
         "time": "10:10",
-        "note": "Organiser-linked November 2026 entry page agrees in both start-time section and race-day logistics: Half 09:30, 10 K 10:00, 5 K 10:10. Stored organiser link was an old August edition."
+        "note": "Organiser-linked November 2026 entry page agrees in both start-time section and race-day logistics: Half 09:30, 10 K 10:00, 5 K 10:10. Stored organiser link was an old August edition.",
+        "publicNote": ""
       },
       "10K": {
         "time": "10:00",
-        "note": "Organiser-linked November 2026 entry page agrees in both start-time section and race-day logistics: Half 09:30, 10 K 10:00, 5 K 10:10. Stored organiser link was an old August edition."
+        "note": "Organiser-linked November 2026 entry page agrees in both start-time section and race-day logistics: Half 09:30, 10 K 10:00, 5 K 10:10. Stored organiser link was an old August edition.",
+        "publicNote": ""
       },
       "Half": {
         "time": "09:30",
-        "note": "Organiser-linked November 2026 entry page agrees in both start-time section and race-day logistics: Half 09:30, 10 K 10:00, 5 K 10:10. Stored organiser link was an old August edition."
+        "note": "Organiser-linked November 2026 entry page agrees in both start-time section and race-day logistics: Half 09:30, 10 K 10:00, 5 K 10:10. Stored organiser link was an old August edition.",
+        "publicNote": ""
       }
     }
   },
@@ -113,7 +126,8 @@
     "starts": {
       "Marathon": {
         "time": "08:00",
-        "note": "2026 organiser in-person race page and course-map schedule give marathon 08:00; wheelchair 07:55 is a separate start. Entries sold out."
+        "note": "2026 organiser in-person race page and course-map schedule give marathon 08:00; wheelchair 07:55 is a separate start. Entries sold out.",
+        "publicNote": ""
       }
     }
   },
@@ -125,11 +139,13 @@
     "starts": {
       "5K": {
         "time": "10:00",
-        "note": "Organiser-linked December entry page explicitly lists both 5 K and 10 K at 10:00 in its start section and race-day logistics."
+        "note": "Organiser-linked December entry page explicitly lists both 5 K and 10 K at 10:00 in its start section and race-day logistics.",
+        "publicNote": ""
       },
       "10K": {
         "time": "10:00",
-        "note": "Organiser-linked December entry page explicitly lists both 5 K and 10 K at 10:00 in its start section and race-day logistics."
+        "note": "Organiser-linked December entry page explicitly lists both 5 K and 10 K at 10:00 in its start section and race-day logistics.",
+        "publicNote": ""
       }
     }
   },
@@ -141,7 +157,8 @@
     "starts": {
       "Marathon": {
         "time": "07:00",
-        "note": "The current organiser site confirms 6 December 2026; linked start-line page explicitly says mass start 07:00.07:30 refers to sweep runners."
+        "note": "The current organiser site confirms 6 December 2026; linked start-line page explicitly says mass start 07:00.07:30 refers to sweep runners.",
+        "publicNote": ""
       }
     }
   },
@@ -153,7 +170,8 @@
     "starts": {
       "Marathon": {
         "time": "13:00",
-        "note": "The organiser's dated 9 January 2027 programme puts the marathon start at 13:00 in Sjøtun; 11:30 is the bus departure and 15:00 belongs to the half marathon."
+        "note": "The organiser's dated 9 January 2027 programme puts the marathon start at 13:00 in Sjøtun; 11:30 is the bus departure and 15:00 belongs to the half marathon.",
+        "publicNote": ""
       }
     }
   },
@@ -165,7 +183,8 @@
     "starts": {
       "Marathon": {
         "time": "00:00",
-        "note": "The organiser's edition-specific timetable explicitly dates the marathon start 01.01.27 at 00:00. This is a verified midnight start, not an unknown-time default; the registration header's 31 December is the event weekend start."
+        "note": "The organiser's edition-specific timetable explicitly dates the marathon start 01.01.27 at 00:00. This is a verified midnight start, not an unknown-time default; the registration header's 31 December is the event weekend start.",
+        "publicNote": ""
       }
     }
   },
@@ -177,7 +196,8 @@
     "starts": {
       "Marathon": {
         "time": "00:00",
-        "note": "The current 2027 race page confirms 10 January; its gun-start infographic was visually inspected and gives 42 K at 12:00 AM, half at 03:00, 10 K 04:30 and 5 K 05:30. Marathon is verified midnight."
+        "note": "The current 2027 race page confirms 10 January; its gun-start infographic was visually inspected and gives 42 K at 12:00 AM, half at 03:00, 10 K 04:30 and 5 K 05:30. Marathon is verified midnight.",
+        "publicNote": "The marathon starts at midnight at the beginning of Sunday 10 January, in Cebu local time."
       }
     }
   },
@@ -189,7 +209,8 @@
     "starts": {
       "Marathon": {
         "time": "06:30",
-        "note": "The 2026 organiser event guide explicitly dates the full marathon start Sunday 1 November at 06:30, with half also 06:30 and 5 K/10 K 06:45. Times are venue-local after the daylight-saving change."
+        "note": "The 2026 organiser event guide explicitly dates the full marathon start Sunday 1 November at 06:30, with half also 06:30 and 5 K/10 K 06:45. Times are venue-local after the daylight-saving change.",
+        "publicNote": ""
       }
     }
   },
@@ -229,7 +250,8 @@
     "starts": {
       "Marathon": {
         "time": "11:15",
-        "note": "Organiser regulations verify 25 October 2026, 42.195 km and 11:15 single start for all corrals. Registrations closed. Correct unsupportedOther 0 km in place, preserving canonical IDs and audit."
+        "note": "Organiser regulations verify 25 October 2026, 42.195 km and 11:15 single start for all corrals. Registrations closed. Correct unsupportedOther 0 km in place, preserving canonical IDs and audit.",
+        "publicNote": ""
       }
     }
   },
@@ -241,7 +263,8 @@
     "starts": {
       "Half": {
         "time": "05:45",
-        "note": "The 2026 organiser fact sheet verifies only in-person half marathon, 10 K and 5 K inKingston. Correct the unsupported full-marathon listing to the half at 05:45, preserving its canonical event/edition IDs; do not copy the time to a full marathon."
+        "note": "The 2026 organiser fact sheet verifies only in-person half marathon, 10 K and 5 K inKingston. Correct the unsupported full-marathon listing to the half at 05:45, preserving its canonical event/edition IDs; do not copy the time to a full marathon.",
+        "publicNote": "The half marathon starts at 05:45 in Kingston, Jamaica."
       }
     }
   },
