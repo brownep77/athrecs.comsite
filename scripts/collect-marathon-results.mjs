@@ -9,6 +9,8 @@ import {
 
 const HELP = `Collect a supported marathon results listing into private local files.
 
+Brussels historical PDFs: add --provider brussels (use --provider brussels --help).
+
 New job:
   npm run collect:marathon-results -- --url '<observed page-1 URL>' --job <private-directory> --authority '<authority to retain>'
 Resume:
@@ -80,6 +82,14 @@ async function responseHtml(response) {
 
 /** Dependencies let the real CLI flow be checked against synthetic HTTP responses. */
 export async function runMarathonCollectorCli(argv, dependencies = {}) {
+  // PDF reports use document provenance, not the browser-only capture schema.
+  if (argv.includes('--provider')) {
+    const index = argv.indexOf('--provider');
+    if (argv[index + 1] !== 'brussels' || argv.lastIndexOf('--provider') !== index)
+      throw Error('Supported explicit provider: --provider brussels.');
+    const { runBrusselsCollectorCli } = await import('./collect-brussels-results.mjs');
+    return runBrusselsCollectorCli([...argv.slice(0, index), ...argv.slice(index + 2)], dependencies);
+  }
   const args = argumentsFor(argv);
   const log = dependencies.log ?? console.log;
   if (args['--help']) { log(HELP); return { help: true }; }

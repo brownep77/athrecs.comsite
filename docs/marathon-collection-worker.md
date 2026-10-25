@@ -17,6 +17,12 @@ The files use the existing AthRecs results archive import path. Collection itsel
 does not write to an API/database, create athletes, establish identity or publish
 profiles. Staff selects the exact edition and reviews the import in AthRecs.
 
+**Brussels historical PDFs:** use `--provider brussels` with the same CLI, or
+`npm run collect:brussels-results`. This has a separate document reader and
+truthful PDF provenance, with save/resume/CSV export. See
+[Brussels results collector](brussels-results-collector.md) for Python setup,
+observed-report discovery, supported layouts and held historical data.
+
 ## Setup
 
 Use Node 24 on Linux or macOS with the repository's development dependencies.

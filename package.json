@@ -145,7 +145,9 @@
     "verify:search-adversarial": "node --experimental-strip-types scripts/verify-search-adversarial.mjs",
     "verify:intelligent-result-matching": "node --experimental-strip-types scripts/verify-intelligent-result-matching.mjs",
     "verify:test-account": "node scripts/verify-test-account.mjs",
-    "verify:analytics-flags": "node scripts/verify-analytics-flags.mjs"
+    "verify:analytics-flags": "node scripts/verify-analytics-flags.mjs",
+    "collect:brussels-results": "node scripts/collect-brussels-results.mjs",
+    "verify:brussels-collection": "node scripts/verify-brussels-collection.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",

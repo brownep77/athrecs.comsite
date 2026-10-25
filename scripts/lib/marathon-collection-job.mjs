@@ -38,14 +38,14 @@ export function loadArchiveCaptureTools() {
   return { ...load(resolve(root, 'core.ts')), ...load(resolve(root, 'browser-capture.ts')) };
 }
 
-async function privateDirectory(path) {
+export async function privateDirectory(path) {
   await mkdir(path, { recursive: true, mode: 0o700 });
   const stat = await lstat(path);
   if (!stat.isDirectory() || stat.isSymbolicLink() || (stat.mode & 0o077))
     fail('Use a dedicated private job directory with permissions 0700, not a shared folder.');
 }
 
-async function privateRead(path, limit) {
+export async function privateRead(path, limit) {
   const stat = await lstat(path);
   if (!stat.isFile() || stat.isSymbolicLink() || (stat.mode & 0o077) || stat.size > limit)
     fail(`Unsafe permissions, file type or size: ${path}`);
@@ -53,7 +53,7 @@ async function privateRead(path, limit) {
 }
 
 /** A capture or checkpoint is either wholly replaced or left untouched. */
-async function atomicWrite(path, content) {
+export async function atomicWrite(path, content) {
   const temporary = `${path}.${randomUUID()}.tmp`;
   let handle;
   try {
@@ -71,7 +71,7 @@ async function atomicWrite(path, content) {
   }
 }
 
-async function lockDirectory(directory) {
+export async function lockDirectory(directory) {
   await privateDirectory(directory);
   const path = resolve(directory, 'job.lock');
   const value = json({ pid: process.pid, host: hostname(), nonce: randomUUID() });
