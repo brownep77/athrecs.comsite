@@ -202,7 +202,13 @@ for (const country of [
 ]) {
   const bodies = filterSportsOrganisations({ country, type: "national" });
   assert.equal(bodies.length, 4, `${country}: four national bodies`);
-  assert(bodies.every((body) => body.checkedAt === "2026-10-23"));
+  for (const body of bodies) {
+    assert.equal(
+      body.checkedAt,
+      body.slug === "trinidad-tobago-cycling" ? "2026-10-25" : "2026-10-23",
+      `${body.slug}: preserve the original check date unless a later review is recorded`,
+    );
+  }
   for (const sport of ["track-and-field", "road-cycling", "swimming", "triathlon"]) {
     assert.equal(names({ country, type: "national", sport }).length, 1, `${country}: ${sport}`);
   }
