@@ -50,6 +50,20 @@ try {
   assert.match(results.$('main').text(), /1 performance recorded/);
   assert.match(results.$('main').text(), /may cover only part of the field/);
   assert(!results.html.includes('Synthetic Private Runner'));
+  await sql`update events set slug='synthetic-readable-archive' where id=${eventId}`;
+  const oldArchive = await fetch(`${origin}/races/test-indexing-archive`, { redirect: 'manual' });
+  assert.equal(oldArchive.status, 301);
+  assert.equal(new URL(oldArchive.headers.get('location'), origin).pathname, '/races/synthetic-readable-archive');
+  const renamedArchive = await get('/races/synthetic-readable-archive');
+  assert.equal(renamedArchive.$('link[rel=canonical]').attr('href'), 'https://www.athrecs.com/races/synthetic-readable-archive');
+  assert.match(renamedArchive.$('main').text(), /Synthetic Public Runner/);
+  assert(!renamedArchive.html.includes('Synthetic Private Runner'));
+  const { contentSitemapPageCount } = await server.ssrLoadModule('/src/lib/athrecs/content-sitemap.server.ts');
+  let raceSitemap = '';
+  for (let page = 1, count = await contentSitemapPageCount(sql, 'races'); page <= count; page++)
+    raceSitemap += (await get(`/sitemaps/races-${page}.xml`)).html;
+  assert(raceSitemap.includes('/races/synthetic-readable-archive'));
+  assert(!raceSitemap.includes('/races/test-indexing-archive'));
   const country = await get('/de/montenegro/races');
   assert.match(country.$('main').text(), /Running/);
   assert(country.$('a[href*="/races/"]').length > 1, 'Default country directory shows running fixtures');
@@ -132,7 +146,6 @@ try {
   const [{ id: triathlonClubId }] = await sql`insert into clubs(slug,name,city,county,country,sports)
     values ('test-indexing-triathlon-club','Synthetic Indexing Triathlon Club','Test City','','United Kingdom','Triathlon') returning id`;
   await sql`update athletes set club_id=${triathlonClubId} where slug='synthetic-private'`;
-  const { contentSitemapPageCount } = await server.ssrLoadModule('/src/lib/athrecs/content-sitemap.server.ts');
   for (const [kind, slug] of [['races','test-indexing-triathlon'],['clubs','test-indexing-triathlon-club']]) {
     const path = `/${kind}/${slug}`;
     const page = await get(path);
