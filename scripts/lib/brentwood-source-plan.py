@@ -228,7 +228,7 @@ def plan(data,snapshot,archive_rows):
         nearby=prep.matching(source_index,[r['name'] for r in rs],own=key)
         if candidates:
             for r in rs:
-                matches=[]
+                matches=[];identity_conflicts=[]
                 for ident in candidates:
                     if not ident.startswith('athrecs:'):continue
                     aid=ident.split(':')[1];a=snapshot['entities'][aid]
@@ -236,9 +236,15 @@ def plan(data,snapshot,archive_rows):
                     if key not in {norm(n).replace(' ','') for n in a['names'] if n}:continue
                     if r.get('gender') and gender(a.get('gender')) and r['gender']!=gender(a['gender']):continue
                     c=club_key(r.get('club'))
-                    if c and c in athlete_clubs(a,byhist[aid]):matches.append(aid)
+                    if c and c in athlete_clubs(a,byhist[aid]):
+                        # Unheaded observations cannot establish profile facts,
+                        # but a contradiction is still a reason to stop a match.
+                        original=r.get('original',{});observed_gender=gender(original.get('gender'));observed_age=str(original.get('age',''));birth=a.get('date_of_birth')
+                        if observed_gender and gender(a.get('gender')) and observed_gender!=gender(a['gender']):identity_conflicts.append('Source gender observation conflicts with stored profile');continue
+                        if observed_age.isdigit() and birth and abs(int(str(birth)[:4])-(r['year']-int(observed_age)))>1:identity_conflicts.append('Source age observation conflicts with stored birth year');continue
+                        matches.append(aid)
                 if len(matches)!=1:
-                    held.append({**r,'hold':'Existing name/alias candidate lacks unique corroborating identity evidence','candidates':sorted(candidates)});continue
+                    held.append({**r,'hold':'; '.join(sorted(set(identity_conflicts))) if identity_conflicts else 'Existing name/alias candidate lacks unique corroborating identity evidence','candidates':sorted(candidates)});continue
                 aid=matches[0];existing=[]
                 for h in byhist[aid]:
                     for p in h['performances']:
@@ -254,8 +260,12 @@ def plan(data,snapshot,archive_rows):
         if nearby:
             held.extend({**r,'hold':'Potential source name/nickname/spelling duplicate','otherSourceNames':sorted(nearby)} for r in rs);continue
         genders={r.get('gender') for r in rs if r.get('gender')}
-        if len(genders)>1:
+        observed_genders={gender(r.get('original',{}).get('gender')) for r in rs}-{''}
+        observed_years=[r['year']-int(r['original']['age']) for r in rs if str(r.get('original',{}).get('age','')).isdigit()]
+        if len(genders|observed_genders)>1:
             held.extend({**r,'hold':'Conflicting source genders'} for r in rs);continue
+        if observed_years and max(observed_years)-min(observed_years)>1:
+            held.extend({**r,'hold':'Conflicting cross-year source age observations'} for r in rs);continue
         # One public source-located performance may create an unclaimed profile.
         # Cross-edition consolidation additionally requires a specific shared club.
         if len(rs)>1:

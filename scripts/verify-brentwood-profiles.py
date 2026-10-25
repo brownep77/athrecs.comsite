@@ -34,4 +34,10 @@ class Tests(unittest.TestCase):
         for changes in [{'profile_visibility':'private'},{'active_accounts':1}]:
             snap['entities']['3']={'id':3,'names':[r['name']],'profile_visibility':'public','gender':'F','profile_details':{},'display_name':r['name'],'source_club_name':'Example RC',**changes}
             self.assertFalse(p.plan({'rows':[r],'held':[],'checks':[]},snap,[r])['existingHistories'])
+    def test_unheaded_identity_conflict_still_blocks_match(self):
+        r=row(gender='',original={'gender':'M','age':'35'});snap=snapshot();snap['index']={k:['athrecs:3'] for k in p.prep.name_keys(r['name'])}
+        snap['entities']['3']={'id':3,'names':[r['name']],'profile_visibility':'public','gender':'F','profile_details':{},'display_name':r['name'],'source_club_name':'Example RC'}
+        self.assertFalse(p.plan({'rows':[r],'held':[],'checks':[]},snap,[r])['existingHistories'])
+        snap['entities']['3'].update(gender='M',date_of_birth='2000-01-01')
+        self.assertFalse(p.plan({'rows':[r],'held':[],'checks':[]},snap,[r])['existingHistories'])
 if __name__=='__main__':unittest.main()
