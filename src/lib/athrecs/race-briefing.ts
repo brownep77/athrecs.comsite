@@ -13,15 +13,17 @@ export function eventSourceOf(input: {
   slug: string;
   sport: Sport;
   website?: string | null;
+  sourceUrl?: string | null;
   organiser?: string | null;
 }): EventSource {
   const url = publicCatalogueText(input.website || "");
+  const sourceUrl = publicCatalogueText(input.sourceUrl || "");
   const slug = input.slug.toLowerCase();
   if (slug.startsWith("wt-") || /triathlon\.org/i.test(url)) {
     return { label: "World Triathlon calendar", kind: "world-triathlon", url: url || "https://events.triathlon.org/" };
   }
-  if (slug.startsWith("wa-") || /worldathletics\.org/i.test(url)) {
-    return { label: "World Athletics calendar", kind: "world-athletics", url: url || "https://worldathletics.org/competition/calendar-results" };
+  if (slug.startsWith("wa-") || /worldathletics\.org/i.test(url) || /worldathletics\.org/i.test(sourceUrl)) {
+    return { label: "World Athletics calendar", kind: "world-athletics", url: /worldathletics\.org/i.test(sourceUrl) ? sourceUrl : url || "https://worldathletics.org/competition/calendar-results" };
   }
   if (input.sport === "Parkrun" || /parkrun/i.test(url)) {
     return { label: "parkrun", kind: "parkrun", url: url || "https://www.parkrun.com/" };
@@ -160,6 +162,7 @@ export function buildRaceBriefing(input: {
   surface?: string | null;
   organiser?: string | null;
   website?: string | null;
+  sourceUrl?: string | null;
   nextDate?: string | null;
 }): RaceBriefing {
   const source = eventSourceOf(input);
