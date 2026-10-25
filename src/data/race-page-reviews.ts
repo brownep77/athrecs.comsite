@@ -13,19 +13,14 @@ const hamburg = {
   ],
   organiser: "BMS Die Laufgesellschaft mbH",
   website: "https://www.hamburg-halbmarathon.com/information/",
-  startDate: "2026-10-25T09:30:00+01:00",
+  utcOffset: "+01:00",
   startLabel: "First wave 09:30 CET (UTC+1)",
   notes:
     "Half marathon, 21.0975 km. Wave A 09:30; B 09:45; C 10:00; D 10:15; E 10:30; F 10:45; G 11:00. All times are CET (UTC+1). Follow the start block in your organiser email; clocks change on race morning.",
-  location: {
-    "@type": "Place",
+  venue: {
     name: "Reeperbahn / Glacischaussee — half-marathon start",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Reeperbahn / Glacischaussee",
-      addressLocality: "Hamburg",
-      addressCountry: "DE",
-    },
+    streetAddress: "Reeperbahn / Glacischaussee",
+    countryCode: "DE",
   },
   guide: {
     slugs: ["wa-32-hella-hamburg-half-marathon-7238156"],

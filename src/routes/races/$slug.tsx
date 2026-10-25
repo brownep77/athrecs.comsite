@@ -159,6 +159,7 @@ export const Route = createFileRoute("/races/$slug")({
           `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`
         : searchContent.description;
     const next = upcoming.find((edition) => edition.status !== "Cancelled");
+    const review = racePageReviewFor(event.slug, next?.event_date);
 
     return {
       meta: siteGraphMeta({
@@ -180,6 +181,8 @@ export const Route = createFileRoute("/races/$slug")({
               region: event.county,
               country: event.country,
               startDate: next?.event_date,
+              utcOffset: review?.utcOffset,
+              venue: review?.venue,
               startTime: checkedFixtureEventStart(
                 event.slug,
                 next?.event_date,

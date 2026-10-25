@@ -84,8 +84,25 @@ assert.equal(
   2,
   "Do not hide another distance",
 );
-const schema = sportsEventJsonLd({ ...data.event, startDate: date, startTime: "09:30" });
-assert.equal(schema.startDate, "2026-10-25T09:30:00+01:00");
+const schema = sportsEventJsonLd({
+  ...data.event,
+  startDate: date,
+  startTime: "09:30",
+  utcOffset: review.utcOffset,
+  venue: review.venue,
+});
+assert.equal(schema.startDate, "2026-10-25T09:30+01:00");
+for (const utcOffset of ["invalid", "+25:00", "+01:99", "-14:01"]) {
+  assert.equal(
+    sportsEventJsonLd({ ...data.event, startDate: date, startTime: "09:30", utcOffset }).startDate,
+    "2026-10-25T09:30",
+  );
+}
+assert.equal(
+  sportsEventJsonLd({ ...data.event, startDate: date, utcOffset: review.utcOffset }).startDate,
+  date,
+  "An offset must not invent an unknown start time",
+);
 assert.equal(schema.organizer.name, review.organiser);
 assert.equal(schema.organizer.url, review.website);
 assert.equal(schema.location.address.streetAddress, "Reeperbahn / Glacischaussee");

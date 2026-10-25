@@ -1,5 +1,4 @@
 /** Shared SEO helpers — titles, Open Graph, JSON-LD for traditional + voice search. */
-import { racePageReviewFor } from "../../data/race-page-reviews.ts";
 
 export const SITE_URL = "https://www.athrecs.com";
 export const SITE_NAME = "ATHRECS.com";
@@ -117,6 +116,13 @@ export function sportsEventJsonLd(
     country?: string | null;
     startDate?: string | null;
     startTime?: string | null;
+    utcOffset?: string | null;
+    venue?: {
+      name: string;
+      streetAddress?: string;
+      postalCode?: string;
+      countryCode?: string;
+    };
     sport?: string | null;
     website?: string | null;
     organiser?: string | null;
@@ -161,12 +167,13 @@ export function sportsEventJsonLd(
   }
 
   // An unknown or invalid local time must not corrupt an otherwise known date.
-  const review = racePageReviewFor(input.slug, date);
+  const utcOffset = /^(?:[+-](?:0\d|1[0-3]):[0-5]\d|[+-]14:00)$/.test(input.utcOffset ?? "")
+    ? input.utcOffset
+    : "";
   const start =
-    review?.startDate ??
-    (input.startTime && /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.startTime)
-      ? `${date}T${input.startTime}`
-      : date);
+    input.startTime && /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(input.startTime)
+      ? `${date}T${input.startTime}${utcOffset}`
+      : date;
   // Match todayIso() and visible entry deadlines: the site's calendar day is
   // Europe/London, including daylight saving, rather than the server's UTC day.
   const today = new Intl.DateTimeFormat("en-CA", {
@@ -200,25 +207,27 @@ export function sportsEventJsonLd(
         : undefined,
     eventStatus: start ? "https://schema.org/EventScheduled" : undefined,
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: review?.location ?? {
+    location: {
       "@type": "Place",
-      name: [input.city, input.country].filter(Boolean).join(", ") || input.name,
+      name:
+        input.venue?.name || [input.city, input.country].filter(Boolean).join(", ") || input.name,
       address: {
         "@type": "PostalAddress",
+        streetAddress: input.venue?.streetAddress,
+        postalCode: input.venue?.postalCode,
         addressLocality: input.city || undefined,
         addressRegion: input.region || undefined,
-        addressCountry: input.country || undefined,
+        addressCountry: input.venue?.countryCode || input.country || undefined,
       },
     },
     sport: input.sport || "Athletics",
-    organizer: review
-      ? { "@type": "Organization", name: review.organiser, url: review.website }
-      : input.organiser?.trim() &&
-          // Legacy imports sometimes store source instructions or licensing labels
-          // here. These are not organiser identities; retain them in storage only.
-          !/^(unknown|tbc|n\/a|see (?:official (?:race )?(?:site|website)|runabc \/ organiser|event listing)|not recorded|official event organiser|england athletics licensed competition|world athletics \/ national federation|utmb world series \/ local organiser|park west race organiser \/ eventmaster)$/i.test(
-            input.organiser.trim(),
-          )
+    organizer:
+      input.organiser?.trim() &&
+      // Legacy imports sometimes store source instructions or licensing labels
+      // here. These are not organiser identities; retain them in storage only.
+      !/^(unknown|tbc|n\/a|see (?:official (?:race )?(?:site|website)|runabc \/ organiser|event listing)|not recorded|official event organiser|england athletics licensed competition|world athletics \/ national federation|utmb world series \/ local organiser|park west race organiser \/ eventmaster)$/i.test(
+        input.organiser.trim(),
+      )
         ? { "@type": "Organization", name: input.organiser.trim(), url: input.website || undefined }
         : undefined,
     offers: input.entryOptions?.flatMap((option) => {
