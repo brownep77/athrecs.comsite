@@ -6,6 +6,10 @@ Fifteen edition writes are staged against fresh canonical-event baselines:
 four existing Maule editions and eleven category/date additions. Thirteen clocks
 are confirmed for the stated category or first gun; two remain qualified unknowns.
 The old Changsha date and two generic source rows remain stored for audit.
+Maule’s four clocks were filled concurrently before merge; the refreshed
+baseline preserves those notes and clocks. This pass reconfirms them and adds
+closed-entry status and public schedule clarity. Nine category/first clocks
+are new additions; four are independently reconfirmed.
 
 ## Confirmed programmes
 
@@ -68,8 +72,9 @@ Roraimense's federation website was inaccessible; Tokai searches led to older
 meetings; Chile's Mixto and Sri Lanka Army searches did not supply opened final
 programmes. These remain unchecked, with completed attempts retained. Unvisited
 urgent editions remain visible. SMH's stored 5km was corrected concurrently to
-10:45; its entry page failed in the search reader in this pass. Preserve that work
-without claiming it as this batch's independent verification.
+10:45. The entry page failed in the search reader but direct retrieval succeeded:
+its 2026 timetable confirms both junior and OPEN 5km at 10:45. This is an
+independent recheck of the concurrent correction, with no additional database write.
 
 Four new research sources remain disabled. Existing registrations and historical
 check notes are preserved. No messages were sent to organisers.
