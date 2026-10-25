@@ -15,7 +15,7 @@ import { getClubBySlug } from "@/lib/athrecs/api";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ClubIdentityFlag } from "@/components/clubs/ClubIdentityFlag";
-import { clubSearchMetadata, safeClubJsonLd } from "@/lib/clubs/profile-seo";
+import { clubProfileSummary, clubSearchMetadata, safeClubJsonLd } from "@/lib/clubs/profile-seo";
 import { ClubVerificationBadge } from "@/components/clubs/ClubVerificationBadge";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
@@ -139,7 +139,9 @@ function ClubPage() {
           {location}
         </p>
         <p className="text-xs text-subtle">{locationNote}</p>
-        <p className="max-w-prose text-sm leading-relaxed text-muted">{club.summary}</p>
+        <p className="max-w-prose text-sm leading-relaxed text-muted">
+          {clubProfileSummary(club, SITE_NAME)}
+        </p>
         <div className="flex flex-wrap gap-2">
           {club.website && (
             <Button asChild variant="secondary">
