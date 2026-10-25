@@ -1,0 +1,845 @@
+{
+  "checkedAt": "2026-10-25",
+  "scope": "All 61 remaining athletics-tagged national organisations whose primary link was a member-directory reference after audit D.",
+  "organisationCount": 61,
+  "uniqueMembershipURLs": 29,
+  "membershipChecks": [
+    {
+      "url": "https://olimpicocol.co/web/federaciones/atletismo-2/",
+      "finalUrl": "https://olimpicocol.co/web/federaciones/atletismo-2/",
+      "title": "Atletismo – Comité Olímpico Colombiano",
+      "organisations": [
+        "colombian-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.bahamasolympiccommittee.org/sports",
+      "finalUrl": "https://www.bahamasolympiccommittee.org/sports",
+      "title": "Sports Contacts — Bahamas Olympic Committee",
+      "organisations": [
+        "bahamian-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles. Linked Bahamas Athletics site carries news and placeholder About text; operational federation ownership remains unresolved, so retain this public primary reference."
+    },
+    {
+      "url": "https://nacacathletics.org/nacac-members/",
+      "finalUrl": "https://nacacathletics.org/nacac-members/",
+      "title": "NACAC Members – NACAC Athletics",
+      "organisations": [
+        "dominican-republic-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles. The linked Dominican federation site returned a service-provider/unavailable notice. Retain the membership reference."
+    },
+    {
+      "url": "https://copanama.com/federaciones/",
+      "finalUrl": "https://copanama.com/federaciones/",
+      "title": "Federaciones - COP",
+      "organisations": [
+        "panamanian-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://asianathletics.com/member-federations",
+      "finalUrl": "https://asianathletics.com/member-federations",
+      "title": "Member Federations — Asian Athletics",
+      "organisations": [
+        "chinese-athletics",
+        "chinese-taipei-athletics",
+        "vietnamese-athletics",
+        "bahrain-athletics",
+        "bangladesh-athletics",
+        "bhutan-athletics",
+        "brunei-athletics",
+        "cambodia-athletics",
+        "kazakhstan-athletics",
+        "kyrgyzstan-athletics",
+        "laos-athletics",
+        "maldives-athletics",
+        "mongolia-athletics",
+        "pakistan-athletics",
+        "united-arab-emirates-athletics",
+        "iran-athletics",
+        "iraq-athletics",
+        "jordan-athletics",
+        "kuwait-athletics",
+        "lebanon-athletics",
+        "myanmar-athletics",
+        "oman-athletics",
+        "qatar-athletics",
+        "saudi-arabia-athletics",
+        "tajikistan-athletics",
+        "turkmenistan-athletics",
+        "uzbekistan-athletics",
+        "afghanistan-athletics",
+        "north-korea-athletics",
+        "palestine-athletics",
+        "syria-athletics",
+        "timor-leste-athletics",
+        "yemen-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles. Linked national websites were checked separately; 10 public directory entries now use corroborated national sites. Retain this reference for all 33 reviewed members."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/djibouti",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/djibouti",
+      "title": "DJIBOUTI",
+      "organisations": [
+        "djibouti-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/egypt-egypte",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/egypt-egypte",
+      "title": "EGYPT/ EGYPTE",
+      "organisations": [
+        "egypt-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/erytrea-erithree",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/erytrea-erithree",
+      "title": "ERYTREA / ERITHREE",
+      "organisations": [
+        "eritrea-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/ethiopia-ethiopie",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/ethiopia-ethiopie",
+      "title": "ETHIOPIA / ETHIOPIE",
+      "organisations": [
+        "ethiopia-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles. The eaf.org.et research lead self-identifies as the federation; independent domain corroboration remains pending."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/gabon",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/gabon",
+      "title": "GABON",
+      "organisations": [
+        "gabon-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/guinea-guinee",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/guinea-guinee",
+      "title": "GUINEA / GUINEE",
+      "organisations": [
+        "guinea-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/lesotho",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/lesotho",
+      "title": "LESOTHO",
+      "organisations": [
+        "lesotho-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/liberia",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/liberia",
+      "title": "LIBERIA",
+      "organisations": [
+        "liberia-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/madagascar",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/madagascar",
+      "title": "MADAGASCAR",
+      "organisations": [
+        "madagascar-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/malawi",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/malawi",
+      "title": "MALAWI",
+      "organisations": [
+        "malawi-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/marocco-maroc",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/marocco-maroc",
+      "title": "MAROCCO / MAROC",
+      "organisations": [
+        "morocco-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/mauritania-mauritanie",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/mauritania-mauritanie",
+      "title": "MAURITANIA / MAURITANIE",
+      "organisations": [
+        "mauritania-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/namibia-namibie",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/namibia-namibie",
+      "title": "NAMIBIA / NAMIBIE",
+      "organisations": [
+        "namibia-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/niger",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/niger",
+      "title": "NIGER",
+      "organisations": [
+        "niger-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/senegal",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/senegal",
+      "title": "SENEGAL",
+      "organisations": [
+        "senegal-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/burkina-faso",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/burkina-faso",
+      "title": "BURKINA FASO",
+      "organisations": [
+        "burkina-faso-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/burundi",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/burundi",
+      "title": "BURUNDI",
+      "organisations": [
+        "burundi-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/cameroon-cameroun",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/cameroon-cameroun",
+      "title": "CAMEROON / CAMEROUN",
+      "organisations": [
+        "cameroon-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/central-african-republic-republique-centrafricaine",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/central-african-republic-republique-centrafricaine",
+      "title": "CENTRAL AFRICAN REPUBLIC / REPUBLIQUE CENTRAFRICAINE",
+      "organisations": [
+        "central-african-republic-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/chad-tchad",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/chad-tchad",
+      "title": "CHAD / TCHAD",
+      "organisations": [
+        "chad-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/comoros-comores",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/comoros-comores",
+      "title": "COMOROS / COMORES",
+      "organisations": [
+        "comoros-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/congo",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/congo",
+      "title": "CONGO",
+      "organisations": [
+        "republic-of-the-congo-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/algeria-algerie",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/algeria-algerie",
+      "title": "ALGERIA / ALGERIE",
+      "organisations": [
+        "algeria-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    },
+    {
+      "url": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/botswana",
+      "finalUrl": "https://www.caaweb.org/en/index.php/la-caa/contacts-des-federations-africaines/botswana",
+      "title": "BOTSWANA",
+      "organisations": [
+        "botswana-athletics"
+      ],
+      "status": "membership_reference_confirmed",
+      "note": "Official membership reference opened and named federation entries reviewed. This establishes membership only; it does not verify fixtures, results or athlete profiles."
+    }
+  ],
+  "nationalSiteChecks": [
+    {
+      "url": "https://www.bahamasathletics.com",
+      "finalUrl": "https://www.bahamasathletics.com",
+      "title": "Welcome to the Frontpage",
+      "status": "research_lead"
+    },
+    {
+      "url": "http://www.fedomatle.org",
+      "finalUrl": "http://www.fedomatle.org",
+      "title": "Contactar Proveedor de Servicios",
+      "status": "service_unavailable"
+    },
+    {
+      "url": "https://www.baa.bh",
+      "finalUrl": "https://www.baa.bh",
+      "title": "HOME | Bahrain Athletics Association",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "https://www.athletics.org.tw",
+      "finalUrl": "https://www.athletics.org.tw",
+      "title": "中華民國田徑協會",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "http://iranathletics.ir",
+      "finalUrl": "http://iranathletics.ir",
+      "title": "فدراسیون دو و میدانی جمهوری اسلامی ایران www.IranAthletics.ir",
+      "status": "official_http_site_research_only",
+      "note": "HTTP opened; HTTPS unavailable through two retrieval methods. Public HTTPS membership reference retained."
+    },
+    {
+      "url": "https://iraqiaf-iq.org",
+      "finalUrl": "https://www.iraqiaf-iq.org/",
+      "title": "Iraqi athletics federation",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "https://qazathletics.kz",
+      "finalUrl": "https://qazathletics.kz/kz/",
+      "title": "Қазақстан Республикасының жеңіл атлетика Федерациясы | Негізгі бет",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "https://www.flalbn.org",
+      "finalUrl": "https://flalbn.org/",
+      "title": "Welcome to Lebanese Athletics Federation Site – Lebanese Open Championship 2026 (Open Clubs Athletics Championship",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "https://mafmm.org",
+      "finalUrl": "https://mafmm.org",
+      "title": "Home - MAF",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "http://www.paf.ps",
+      "finalUrl": "http://www.paf.ps",
+      "title": "الرئيسية | الإتحاد الفلسطيني لألعاب القوى",
+      "status": "official_http_site_research_only",
+      "note": "HTTP opened; HTTPS unavailable through two retrieval methods. Public HTTPS membership reference retained."
+    },
+    {
+      "url": "https://www.qaf.qa",
+      "finalUrl": "https://qaf.qa/",
+      "title": "Home",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "https://www.uaeaf.ae",
+      "finalUrl": "https://www.uaeaf.ae",
+      "title": "UAE Athletics Federation",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "https://www.uzathletics.uz",
+      "finalUrl": "https://uzathletics.uz/",
+      "title": "O‘zbekiston yengil atletika federatsiyasi",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "https://eaf.org.et/",
+      "finalUrl": "https://eaf.org.et/",
+      "title": "ኢ አ ፌ",
+      "status": "research_lead"
+    },
+    {
+      "url": "https://frma.ma/",
+      "finalUrl": "https://frma.ma/",
+      "title": "Fédération royale marocaine d'athlétisme - FRMA Maroc",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "https://athletics-namibia.com.na/",
+      "finalUrl": "https://athletics-namibia.com.na/",
+      "title": "Home - Athletics Namibia",
+      "status": "official_homepage_confirmed"
+    },
+    {
+      "url": "https://www.bhutanathletics.org",
+      "status": "unavailable_in_this_review",
+      "retrieval": {
+        "url": "https://www.bhutanathletics.org",
+        "error": "invalid_url"
+      },
+      "note": "Web fallback also unsuccessful; membership reference retained."
+    },
+    {
+      "url": "https://www.cambodiaathletics.org",
+      "status": "unavailable_in_this_review",
+      "retrieval": {
+        "url": "https://www.cambodiaathletics.org",
+        "error": "invalid_url"
+      },
+      "note": "Web fallback also unsuccessful; membership reference retained."
+    },
+    {
+      "url": "https://www.athletics.org.mv",
+      "status": "official_homepage_confirmed_by_web_fallback",
+      "note": "Launch notice; linked events and results pages opened successfully."
+    },
+    {
+      "url": "http://www.athletics.org.cn",
+      "status": "unavailable_in_this_review",
+      "retrieval": {
+        "url": "http://www.athletics.org.cn",
+        "error": "target_http_error",
+        "status": 502
+      },
+      "note": "Web fallback also unsuccessful; membership reference retained."
+    },
+    {
+      "url": "http://www.tjkathletics.tj",
+      "status": "unavailable_in_this_review",
+      "retrieval": {
+        "url": "http://www.tjkathletics.tj",
+        "error": "target_http_error",
+        "status": 403
+      },
+      "note": "Web fallback also unsuccessful; membership reference retained."
+    },
+    {
+      "url": "http://www.dienkinh.vn",
+      "status": "unavailable_in_this_review",
+      "retrieval": {
+        "url": "http://www.dienkinh.vn",
+        "error": "target_http_error",
+        "status": 522
+      },
+      "note": "Web fallback also unsuccessful; membership reference retained."
+    },
+    {
+      "url": "https://www.faa.dz/",
+      "status": "unavailable_in_this_review",
+      "note": "Research candidate unreachable by both methods; CAA reference retained."
+    }
+  ],
+  "detailChecks": [
+    {
+      "slug": "maldives-athletics",
+      "id": "maldives_athletics_results_archive",
+      "name": "Results archive",
+      "url": "https://results.athletics.org.mv/",
+      "note": "Named results editions from 2022 to 2026. Event indexes inspected separately; archive registration does not verify participant performances."
+    },
+    {
+      "slug": "maldives-athletics",
+      "id": "maldives_athletics_calendar",
+      "name": "Events calendar",
+      "url": "https://athletics.org.mv/events/events.html",
+      "note": "Two dated 2026 competitions retrieved, including the June national championships. This is not evidence of complete future fixture coverage."
+    },
+    {
+      "slug": "lebanon-athletics",
+      "id": "lebanon_athletics_calendar_2026",
+      "name": "2026 calendar",
+      "url": "https://flalbn.org/calendar-2026/",
+      "note": "Dated events with venue, organiser and results columns. Includes a December 2025 event under the 2026 calendar; federation reserves programme changes. No race starts imported."
+    },
+    {
+      "slug": "lebanon-athletics",
+      "id": "lebanon_athletics_results_2026",
+      "name": "2026 athletics results section",
+      "url": "https://flalbn.org/results-athletics-2026/",
+      "note": "Page title and navigation retrieved, but no result rows. Keep as a manual review destination, not an established results feed."
+    },
+    {
+      "slug": "lebanon-athletics",
+      "id": "lebanon_athletics_road_results",
+      "name": "Road results section",
+      "url": "https://flalbn.org/results-road-race/",
+      "note": "Page title and navigation retrieved, but no result rows. A linked half-marathon PDF was inspected separately."
+    },
+    {
+      "slug": "bahrain-athletics",
+      "id": "bahrain_athletics_events",
+      "name": "Events and status",
+      "url": "https://www.baa.bh/events",
+      "note": "Dated event windows and explicit postponed status. Multi-day windows do not establish individual race dates or start times."
+    },
+    {
+      "slug": "bahrain-athletics",
+      "id": "bahrain_athletics_west_asia_status",
+      "name": "West Asia championship status",
+      "url": "https://www.baa.bh/event-details/west-asia-athletics-championships",
+      "note": "Explicitly postponed until further notice. No confirmed replacement date; do not publish as a scheduled fixture."
+    },
+    {
+      "slug": "namibia-athletics",
+      "id": "namibia_athletics_events_2026",
+      "name": "Events section",
+      "url": "https://athletics-namibia.com.na/events-new-2026/",
+      "note": "Descriptive events page only; no dated competition rows retrieved. Calendar capability remains unconfirmed."
+    },
+    {
+      "slug": "namibia-athletics",
+      "id": "namibia_athletics_results_2026",
+      "name": "Results section",
+      "url": "https://athletics-namibia.com.na/results-new-2026/",
+      "note": "Descriptive results page only; no result rows retrieved. Results capability remains unconfirmed."
+    },
+    {
+      "slug": "morocco-athletics",
+      "id": "morocco_athletics_calendar",
+      "name": "Calendar section",
+      "url": "https://frma.ma/calendrier-athletisme-maroc/",
+      "note": "Official calendar route opened; navigation only and no dated event rows retrieved."
+    },
+    {
+      "slug": "morocco-athletics",
+      "id": "morocco_athletics_rankings",
+      "name": "Ranking documents",
+      "url": "https://frma.ma/classement-athletisme-au-maroc/",
+      "note": "Links include provisional 2024–25 club rankings and a 9 November 2025 cross-country document. No individual results compared."
+    },
+    {
+      "slug": "morocco-athletics",
+      "id": "morocco_athletics_records",
+      "name": "Historical record documents",
+      "url": "https://frma.ma/calendrier-resultats/resultats/records-nationaux/",
+      "note": "Record document index includes 2017 and 2022/23 references. Historical evidence only; current records not established."
+    },
+    {
+      "slug": "kazakhstan-athletics",
+      "id": "kazakhstan_athletics_results",
+      "name": "National results documents",
+      "url": "https://qazathletics.kz/kz/natijeler/qr",
+      "note": "Named 2026 results documents. Event dates in document titles differ from upload dates; participant rows not compared."
+    },
+    {
+      "slug": "kazakhstan-athletics",
+      "id": "kazakhstan_athletics_national_team",
+      "name": "National team section",
+      "url": "https://qazathletics.kz/kz/qr-quramasy/qazaqstan-respblikasynyn-ulttyq-qurama-komandasy",
+      "note": "National-team title but returned generic calendar content; no named athlete roster retrieved."
+    },
+    {
+      "slug": "united-arab-emirates-athletics",
+      "id": "united_arab_emirates_athletics_results",
+      "name": "Results section",
+      "url": "https://www.uaeaf.ae/Home/Results",
+      "note": "Footer/navigation returned without results. Data availability remains unconfirmed."
+    },
+    {
+      "slug": "united-arab-emirates-athletics",
+      "id": "united_arab_emirates_athletics_athletes",
+      "name": "Athlete search section",
+      "url": "https://www.uaeaf.ae/Home/Athletes",
+      "note": "Filters and country options returned with Total 0 Athletes. No athlete rows; country dropdown choices are not nationality evidence."
+    },
+    {
+      "slug": "united-arab-emirates-athletics",
+      "id": "united_arab_emirates_athletics_events",
+      "name": "Events section",
+      "url": "https://www.uaeaf.ae/Home/Events",
+      "note": "Footer/navigation returned without event rows. Fixture availability remains unconfirmed."
+    },
+    {
+      "slug": "ethiopia-athletics",
+      "id": "ethiopia_athletics_results_candidate",
+      "name": "Results documents research lead",
+      "url": "https://eaf.org.et/%e1%8b%8d%e1%8c%a4%e1%89%b5/",
+      "note": "Self-identifying federation site; independent domain corroboration remains pending. Named results documents use Ethiopian-calendar years 2018 and 2017, not Gregorian years. No date conversion or participant verification performed."
+    },
+    {
+      "slug": "ethiopia-athletics",
+      "id": "ethiopia_athletics_programme_candidate",
+      "name": "Programme research lead",
+      "url": "https://eaf.org.et/%e1%8b%a8%e1%8b%8d%e1%8b%b5%e1%8b%b5%e1%88%ad-%e1%88%98%e1%88%ad%e1%88%83%e1%8c%8d%e1%89%a5%e1%88%ad/",
+      "note": "Self-identifying federation site; independent domain corroboration pending. Programme title/navigation only; no dated fixture rows retrieved."
+    },
+    {
+      "slug": "ethiopia-athletics",
+      "id": "ethiopia_athletics_profiles_candidate",
+      "name": "Athlete profile research lead",
+      "url": "https://eaf.org.et/%e1%8a%a0%e1%89%b5%e1%88%8c%e1%89%b5-%e1%8d%95%e1%88%ae%e1%8d%8b%e1%8b%ad%e1%88%8d/",
+      "note": "Self-identifying federation site; independent domain corroboration pending. Profile title/navigation only; no athlete biographies retrieved."
+    },
+    {
+      "slug": "uzbekistan-athletics",
+      "id": "uzbekistan_athletics_calendar",
+      "name": "Competition programme",
+      "url": "https://uzathletics.uz/kalendar",
+      "note": "Mixed-year page: programme mainly 2025 with other season references. Do not infer future recurrence or current coverage from the page title."
+    },
+    {
+      "slug": "uzbekistan-athletics",
+      "id": "uzbekistan_athletics_results_2026",
+      "name": "2026 results protocols",
+      "url": "https://uzathletics.uz/2026-god-p",
+      "note": "2026 protocol index lists dated events and venues; one event name is blank. Repeated 2025 calendar content appears below. Participant rows not compared."
+    },
+    {
+      "slug": "qatar-athletics",
+      "id": "qatar_athletics_competitions",
+      "name": "Competition information and plans",
+      "url": "https://qaf.qa/competitions/",
+      "note": "Empty event widget plus competition descriptions, a 2025 report and expected 2026–2030 annual matrix. Planning reference, not confirmed fixture dates."
+    },
+    {
+      "slug": "qatar-athletics",
+      "id": "qatar_athletics_performance",
+      "name": "Athlete development information",
+      "url": "https://qaf.qa/performance/",
+      "note": "Explains development pathways. Not an athlete biography directory or evidence of individual nationality."
+    },
+    {
+      "slug": "namibia-athletics",
+      "id": "namibia_athletics_olympic_member",
+      "name": "Olympic membership profile",
+      "url": "https://olympic.org.na/affiliated-members/athletics-namibia",
+      "note": "Namibia National Olympic Committee explicitly names Athletics Namibia and links athletics-namibia.com.na. Membership and domain corroboration only."
+    },
+    {
+      "slug": "chinese-taipei-athletics",
+      "id": "chinese_taipei_athletics_calendar",
+      "name": "Events calendar and results links",
+      "url": "https://www.athletics.org.tw/public/Events.aspx?type=100",
+      "note": "Dated 2026 competitions, locations and results links retrieved. ROC year 115 and Gregorian 2026 labels coexist; do not interpret local year labels as Gregorian dates."
+    },
+    {
+      "slug": "morocco-athletics",
+      "id": "morocco_athletics_competitions",
+      "name": "Competition search",
+      "url": "https://frma.ma/competitions-frma/",
+      "note": "2025–26 season filters and loading message; no competition/result rows retrieved. Search form alone does not establish results availability."
+    },
+    {
+      "slug": "maldives-athletics",
+      "id": "maldives_athletics_nationals_2026",
+      "name": "2026 national championship results index",
+      "url": "https://results.athletics.org.mv/2026/NCS2026/index.html",
+      "note": "MeetPro by DirectAthletics index for 18–20 June 2026 in Male'. Event-round status and results links retrieved. AM times appear inside a PM session: start-time conflict requires organiser confirmation; no starts imported."
+    },
+    {
+      "slug": "lebanon-athletics",
+      "id": "lebanon_athletics_half_marathon_pdf_2026",
+      "name": "Linked half-marathon results PDF",
+      "url": "https://flalbn.org/wp-content/uploads/2026/10/final-results-21k-1.pdf",
+      "note": "Linked result table inspected. Columns distinguish rank, chrono, bib, name, category, club, category rank and sex. No nationality column or confirmed chip/gun label; participant identities and performances not verified."
+    },
+    {
+      "slug": "myanmar-athletics",
+      "id": "myanmar_athletics_events_archive",
+      "name": "Historical events and results articles",
+      "url": "https://mafmm.org/category/events/",
+      "note": "Historical 2023–24 event/result articles and download references. Does not establish a current fixture programme."
+    },
+    {
+      "slug": "myanmar-athletics",
+      "id": "myanmar_athletics_records_men",
+      "name": "Men's records article",
+      "url": "https://mafmm.org/2025/07/27/myanmar-national-records-men/",
+      "note": "Article dated 27 July 2025, but no record table retrieved. Related U18 results download link is a separate document requiring inspection."
+    },
+    {
+      "slug": "myanmar-athletics",
+      "id": "myanmar_athletics_historical_athletes",
+      "name": "Historical athlete archive",
+      "url": "https://mafmm.org/category/golden-era-of-legendary-athletes/",
+      "note": "Archive lists one historical article dated 27 February 2025. Individual biographies not opened; no current roster or nationality evidence established."
+    },
+    {
+      "slug": "iraq-athletics",
+      "id": "iraq_athletics_events",
+      "name": "Activities and event articles",
+      "url": "https://www.iraqiaf-iq.org/events/",
+      "note": "Includes a 2026 Kids' Athletics festival and assembly news. An article published 27 March describes a 13 February activity; distinguish publication dates, meetings and competition dates."
+    },
+    {
+      "slug": "morocco-athletics",
+      "id": "morocco_athletics_olympic_member",
+      "name": "Olympic membership profile",
+      "url": "https://www.cnom.org.ma/fr/frmath",
+      "note": "Morocco's National Olympic Committee names the athletics federation and explicitly links frma.ma. Membership and domain corroboration only."
+    },
+    {
+      "slug": "maldives-athletics",
+      "id": "maldives_athletics_nationals_2026_10000m",
+      "name": "2026 national championships men's 10000m result",
+      "url": "https://results.athletics.org.mv/2026/NCS2026/results_13.html",
+      "note": "MeetPro by DirectAthletics result table opened. Headers distinguish heat place, bib, athlete, age, team, time and points, with DNF statuses. No nationality or exact date of birth. Last-updated timestamp is not the race date; no participant identities or performances verified."
+    }
+  ],
+  "additionalMembershipIndexChecked": "https://olympic.org.na/affiliated-members",
+  "legacyCorrection": {
+    "sourceId": "morocco_frme",
+    "before": "https://www.frme.ma/",
+    "after": "https://frma.ma/",
+    "evidence": "https://www.cnom.org.ma/fr/frmath"
+  },
+  "sourcesAdded": [
+    "bahrain_athletics_official",
+    "chinese_taipei_athletics_official",
+    "iran_athletics_official",
+    "iraq_athletics_official",
+    "kazakhstan_athletics_official",
+    "lebanon_athletics_official",
+    "maldives_athletics_official",
+    "myanmar_athletics_official",
+    "palestine_athletics_official",
+    "united_arab_emirates_athletics_official",
+    "uzbekistan_athletics_official",
+    "namibia_athletics_official",
+    "bahamian_athletics_linked_news",
+    "ethiopia_athletics_website_candidate",
+    "maldives_athletics_results_archive",
+    "maldives_athletics_calendar",
+    "lebanon_athletics_calendar_2026",
+    "lebanon_athletics_results_2026",
+    "lebanon_athletics_road_results",
+    "bahrain_athletics_events",
+    "bahrain_athletics_west_asia_status",
+    "namibia_athletics_events_2026",
+    "namibia_athletics_results_2026",
+    "morocco_athletics_calendar",
+    "morocco_athletics_rankings",
+    "morocco_athletics_records",
+    "kazakhstan_athletics_results",
+    "kazakhstan_athletics_national_team",
+    "united_arab_emirates_athletics_results",
+    "united_arab_emirates_athletics_athletes",
+    "united_arab_emirates_athletics_events",
+    "ethiopia_athletics_results_candidate",
+    "ethiopia_athletics_programme_candidate",
+    "ethiopia_athletics_profiles_candidate",
+    "uzbekistan_athletics_calendar",
+    "uzbekistan_athletics_results_2026",
+    "qatar_athletics_competitions",
+    "qatar_athletics_performance",
+    "namibia_athletics_olympic_member",
+    "chinese_taipei_athletics_calendar",
+    "morocco_athletics_competitions",
+    "maldives_athletics_nationals_2026",
+    "lebanon_athletics_half_marathon_pdf_2026",
+    "myanmar_athletics_events_archive",
+    "myanmar_athletics_records_men",
+    "myanmar_athletics_historical_athletes",
+    "iraq_athletics_events",
+    "morocco_athletics_olympic_member",
+    "maldives_athletics_nationals_2026_10000m"
+  ],
+  "sourcesUpdated": [
+    "morocco_frme",
+    "qatar_athletics",
+    "organisation_colombian_athletics",
+    "organisation_bahamian_athletics",
+    "organisation_dominican_republic_athletics",
+    "organisation_panamanian_athletics",
+    "organisation_chinese_athletics",
+    "organisation_djibouti_athletics",
+    "organisation_egypt_athletics",
+    "organisation_eritrea_athletics",
+    "organisation_ethiopia_athletics",
+    "organisation_gabon_athletics",
+    "organisation_guinea_athletics",
+    "organisation_lesotho_athletics",
+    "organisation_liberia_athletics",
+    "organisation_madagascar_athletics",
+    "organisation_malawi_athletics",
+    "organisation_morocco_athletics",
+    "organisation_mauritania_athletics",
+    "organisation_namibia_athletics",
+    "organisation_niger_athletics",
+    "organisation_senegal_athletics",
+    "organisation_burkina_faso_athletics",
+    "organisation_burundi_athletics",
+    "organisation_cameroon_athletics",
+    "organisation_central_african_republic_athletics",
+    "organisation_chad_athletics",
+    "organisation_comoros_athletics",
+    "organisation_republic_of_the_congo_athletics",
+    "organisation_algeria_athletics",
+    "organisation_botswana_athletics"
+  ],
+  "registryBefore": 1016,
+  "registryAfter": 1065,
+  "enabled": 36,
+  "disabled": 1029,
+  "directoryRecordsUpdated": [
+    "bahrain-athletics",
+    "chinese-taipei-athletics",
+    "iraq-athletics",
+    "kazakhstan-athletics",
+    "lebanon-athletics",
+    "maldives-athletics",
+    "myanmar-athletics",
+    "qatar-athletics",
+    "united-arab-emirates-athletics",
+    "uzbekistan-athletics",
+    "morocco-athletics",
+    "namibia-athletics"
+  ],
+  "limits": "Membership, homepage and page-content review only. No fixture, start-time, athlete-profile, nationality or individual-performance records changed or marked verified. Partial pages, historical editions, local calendars and postponements retain explicit qualifications. All new sources remain disabled manual research references."
+}
