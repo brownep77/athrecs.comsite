@@ -26,12 +26,12 @@ ON CONFLICT(provider,external_id) DO NOTHING RETURNING athlete_id,external_id), 
 INSERT INTO network_audit_log(actor_email,action,entity_type,entity_id,after_value,note)
 SELECT 'paul@athrecs.com','athlete.history_admin_published','athlete_source_history',$2||':'||i.external_id,
 jsonb_build_object('athleteId',i.athlete_id,'batchId',$3::text,'identityEvidence',p->'identityEvidence','captureId',$4::bigint),
-'Owner-authorized Brentwood addition: exact name or stored alias and specific historical club; no profile identity or ownership upgrade.'
+'Owner-authorized Brentwood addition: reviewed name or bounded first-name variant and specific historical club; explicit matching evidence retained; no profile identity or ownership upgrade.'
 FROM inserted i JOIN incoming ON i.external_id=p->>'externalId' RETURNING id)
 SELECT (SELECT count(*) FROM inserted)::int histories,(SELECT count(*) FROM audits)::int audits"""
 def save(path,obj):imp.dump(path,obj)
 def setup(q,plan,compared):
-    evidence={'instruction':'can you go and look for the missing please and then add profiles and merge any duplicates and add any new athletes','requestedBy':'Paul Browne','checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'publicProfilesAuthorizedByOwner':True,'providerPermissionClaimed':False,'scope':'Brentwood Half Marathon, Essex; recovered historical results and 2026 partial reports','planHash':imp.digest(plan)}
+    evidence={'instruction':'can you go and look for the missing please and then add profiles and merge any duplicates and add any new athletes','requestedBy':'Paul Browne','checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'publicProfilesAuthorizedByOwner':True,'providerPermissionClaimed':False,'scope':'Brentwood Half Marathon, Essex; recovered historical and current-edition results described by the retained source checks','planHash':imp.digest(plan)}
     q([("INSERT INTO result_archive_capture_approvals(id,provider,approved_by,approval_basis,scope,evidence) VALUES($1,$2,'Paul Browne','owner_private_import','staff_only',$3::jsonb) ON CONFLICT(id) DO NOTHING",[APPROVAL,PROVIDER,json.dumps(evidence)]),("INSERT INTO result_archive_capture_runs(id,approval_id,provider,inventory,status) VALUES($1::uuid,$2,$3,$4::jsonb,'processing') ON CONFLICT(id) DO NOTHING",[RUN,APPROVAL,PROVIDER,json.dumps(plan['sourceChecks'])])])
     raw=json.dumps(compared,ensure_ascii=False,separators=(',',':')).encode();payload={'format':'brentwood-heading-comparison-v1','publication':'staff_only','sourceChecks':plan['sourceChecks'],'summary':plan['summary'],'planHash':imp.digest(plan),'heldRows':len(plan['held']),'compressedContentType':'application/json','claim':'Compared named fields; headerless/conflicting source rows and ambiguous identities are held, not verified.'}
     ph=hashlib.sha256(raw).hexdigest()
@@ -92,7 +92,7 @@ def apply(args):
         result=q([('LOCK TABLE athletes,athlete_source_histories,athlete_account_links,athlete_profile_history_choices IN SHARE ROW EXCLUSIVE MODE',[]),(LINK,[body,PROVIDER,BATCH,cap])])[-1][0]
         actual=q([('SELECT athlete_id,external_id,jsonb_array_length(performances) n FROM athlete_source_histories WHERE provider=$1 AND external_id=ANY($2::text[])',[PROVIDER,[p['externalId'] for p in batch]])],True)[0]
         receipt['createdHistories']+=result['histories'];receipt['existingProfileResults']+=sum(r['n'] for r in actual);receipt['linkedAthleteIds'] +=[r['athlete_id'] for r in actual]
-        made={r['external_id'] for r in actual};receipt['heldDuringApply'] +=[{'athleteId':p['athleteId'],'reason':'Live identity, privacy or duplicate-history guard rejected addition'} for p in batch if p['externalId'] not in made];save(args.receipt,receipt)
+        made={r['external_id'] for r in actual};receipt['heldDuringApply'] +=[{'athleteId':p['athleteId'],'externalId':p['externalId'],'reason':'Live identity, privacy or duplicate-history guard rejected addition'} for p in batch if p['externalId'] not in made];save(args.receipt,receipt)
     counts=q([("SELECT count(*)::int profiles FROM athletes WHERE profile_details#>>'{archiveCreation,batchId}'=$1",[BATCH]),("SELECT count(*)::int histories,coalesce(sum(jsonb_array_length(performances)),0)::int results FROM athlete_source_histories WHERE provider=$1",[PROVIDER])],True)
     receipt['totals']={'profiles':counts[0][0]['profiles'],**counts[1][0]};receipt['validated']=True
     q([("UPDATE result_archive_capture_runs SET status='completed',summary=$2::jsonb,updated_at=now() WHERE id=$1::uuid",[RUN,json.dumps({'plan':plan['summary'],'receipt':receipt})])]);save(args.receipt,receipt);print(json.dumps(receipt['totals']),flush=True)

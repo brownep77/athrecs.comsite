@@ -187,7 +187,28 @@ def performance(r):
     if r.get('status')=='Provisional':labels.append('Provisional source result')
     p={'year':r['year'],'date':r.get('date',''),'sourceDate':r.get('date') or str(r['year']),'yearLabel':str(r['year']),'ageGroup':r.get('category',''),'discipline':'Half Marathon','performance':r.get('chip_time') or r.get('gun_time') or r['recorded_time'],'timing':timing,'wind':'','place':r.get('overall_position',''),'places':{'overall':integer(r.get('overall_position')),'gender':integer(r.get('gender_position')),'category':integer(r.get('category_position'))},'bib':r.get('bib',''),'venue':'Brentwood, Essex','meeting':'Brentwood Half Marathon','eventSlug':'brentwood-half-marathon','country':'United Kingdom','sourceUrls':[r['source_url']],'sourceKeys':[r['key']],'labels':labels,'providerName':r['provider'],'verificationStatus':'unverified','notes':'Source row compared by labelled fields. Identity and account ownership are separate; identity is not independently verified. Historical club is retained as evidence, not asserted as current membership.','archiveReference':{'batchId':BATCH,'original':r,'sourceCompared':True,'identityVerified':False}}
     return p
-def plan(data,snapshot,archive_rows,resolve_partial_clubs=False):
+NAME_VARIANT_PAIRS={frozenset(x.split()) for x in [
+    'robert rob','robert bob','david dave','james jim','michael mike',
+    'michael mick','peter pete','stephen steve','steven steve','andrew andy',
+    'anthony tony','benjamin ben','jonathan jon','matthew matt','nicholas nick',
+    'richard rick','richard rich','daniel dan','daniel danny','william will','william bill',
+    'christopher chris','alexander alex','alexandra alex','elizabeth liz','elizabeth beth']}
+def name_match_basis(row,athlete,allow_name_variants=False):
+    source=norm(row['name']).split()
+    for name in athlete['names']:
+        if not name:continue
+        target=norm(name).split()
+        if ''.join(source)==''.join(target):return 'Exact full name or stored alias'
+    # A bounded first-name variant is only a candidate. The caller still requires
+    # a unique specific club match, privacy checks and conflict-free histories.
+    # Explicit, compatible gender is required; missing gender cannot corroborate it.
+    if allow_name_variants and row.get('gender') in {'M','F'} and row['gender']==gender(athlete.get('gender')):
+        for name in athlete['names']:
+            target=norm(name).split() if name else []
+            if len(source)==len(target) and len(source)>1 and source[1:]==target[1:] and frozenset((source[0],target[0])) in NAME_VARIANT_PAIRS:
+                return 'Bounded first-name variant and identical remaining name tokens'
+    return ''
+def plan(data,snapshot,archive_rows,resolve_partial_clubs=False,allow_name_variants=False):
     rows=data['rows'];held=list(data['held']);reasons=collections.Counter();groups=collections.defaultdict(list)
     all_names=collections.defaultdict(list)
     for r in [*archive_rows,*rows]:all_names[norm(r['name']).replace(' ','')].append(r)
@@ -233,7 +254,7 @@ def plan(data,snapshot,archive_rows,resolve_partial_clubs=False):
                     if not ident.startswith('athrecs:'):continue
                     aid=ident.split(':')[1];a=snapshot['entities'][aid]
                     if a.get('parent_athlete_id') or a.get('profile_visibility')!='public' or int(a.get('active_accounts',0)):continue
-                    if key not in {norm(n).replace(' ','') for n in a['names'] if n}:continue
+                    if not name_match_basis(r,a,allow_name_variants):continue
                     if r.get('gender') and gender(a.get('gender')) and r['gender']!=gender(a['gender']):continue
                     c=club_key(r.get('club'))
                     if c and c in athlete_clubs(a,byhist[aid]):
@@ -255,7 +276,7 @@ def plan(data,snapshot,archive_rows,resolve_partial_clubs=False):
                     target=seconds(r.get('chip_time') or r.get('gun_time') or r.get('recorded_time'))
                     if all((seconds(e['performance'].get('performance')) if e['kind']=='history' else e['row'].get('finish_time_seconds'))==target for e in existing):reused.append({'athleteId':int(aid),'row':r,'existing':existing})
                     else:held.append({**r,'hold':'Existing Brentwood result needs conflict review','athleteId':int(aid)})
-                else:links.append({'athleteId':int(aid),'row':r,'identityEvidence':{'basis':'Exact full name or stored alias, specific source-reported club, compatible supplied gender, unique candidate','clubKey':club_key(r.get('club')),'candidateIds':sorted(candidates)}})
+                else:links.append({'athleteId':int(aid),'row':r,'identityEvidence':{'basis':name_match_basis(r,snapshot['entities'][aid],allow_name_variants)+', specific source-reported club, compatible supplied gender, unique candidate','clubKey':club_key(r.get('club')),'candidateIds':sorted(candidates)}})
             continue
         if nearby:
             held.extend({**r,'hold':'Potential source name/nickname/spelling duplicate','otherSourceNames':sorted(nearby)} for r in rs);continue

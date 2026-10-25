@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 939 unique sources as of 25 October 2026. Only 36 are enabled; the other 903 remain
+The registry contains 941 unique sources as of 25 October 2026. Only 36 are enabled; the other 905 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -430,3 +430,5 @@ Six disabled manual references register the organiser archive, archived JAND tim
 ### Brentwood held-result resolution — 25 October 2026
 
 Added East End Road Runners' historic results and the Saffron Striders 2011 archive as two disabled manual research references after checking the registry for existing URLs. Opened club tables corroborate selected Brentwood performances and the 2011 edition date. Recovered headed organiser pages for 2010 and 2011 remain part of the existing Brentwood organiser source. Conflicting times and placings remain held or omitted; no collectors were enabled.
+
+Manual Brentwood continuation sources: Serpentine club results and Northbrook AC historic race reports. Both remain disabled; FR Systems already has a canonical source, so no duplicate provider was registered.

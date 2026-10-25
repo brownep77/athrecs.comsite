@@ -8,7 +8,13 @@ a=load('resolution_apply','apply-brentwood-profiles.py')
 BATCH='brentwood-resolution-20261025';ORIGINAL_BATCH=a.BATCH;OLD_FP=a.imp.NAME_FP
 PREFIX='brentwood:resolution:20261025:'
 HISTORY="""coalesce((SELECT jsonb_agg(jsonb_build_object('provider',h.provider,'externalId',h.external_id,'performances',h.performances) ORDER BY h.provider,h.external_id) FROM athlete_source_histories h WHERE h.athlete_id=a.id AND h.external_id NOT LIKE 'brentwood:resolution:20261025:%'),'[]'::jsonb)"""
-def configure():
+def configure(batch=None):
+    global BATCH,PREFIX,HISTORY
+    if batch:
+        import re
+        if not re.fullmatch(r'brentwood-[a-z0-9-]+',batch):raise ValueError('Invalid batch identifier')
+        BATCH=batch;PREFIX=batch.replace('brentwood-','brentwood:',1)+':'
+        HISTORY="coalesce((SELECT jsonb_agg(jsonb_build_object('provider',h.provider,'externalId',h.external_id,'performances',h.performances) ORDER BY h.provider,h.external_id) FROM athlete_source_histories h WHERE h.athlete_id=a.id AND h.external_id NOT LIKE '"+PREFIX+"%'),'[]'::jsonb)"
     a.BATCH=a.imp.BATCH=BATCH;a.APPROVAL=BATCH+'-owner';a.RUN=str(uuid.uuid5(uuid.NAMESPACE_URL,'https://www.brentwoodhalf.org/results#'+BATCH))
     a.imp.NAME_FP=OLD_FP.replace(ORIGINAL_BATCH,BATCH)
     guard="""
@@ -29,12 +35,17 @@ def fingerprint(args):
     if cfg['projectId']!=a.imp.PROJECT or args.branch!=a.imp.PROD:raise ValueError('Fingerprint refresh must use designated production project')
     snap=json.loads(args.snapshot.read_text());plan=json.loads(args.plan.read_text())
     original_sql=a.imp.wmm.ATH.replace('ORDER BY a.id',"AND a.profile_details#>>'{archiveCreation,batchId}'='"+ORIGINAL_BATCH+"' ORDER BY a.id")
-    old,original,current=q([(OLD_FP,[snap['maxid']]),(original_sql,[snap['maxid']]),(a.imp.NAME_FP,[snap['maxid']])],True)
-    expected=snap.get('originalNameFingerprint',snap['nameFingerprint'])
-    if old[0]['fingerprint']!=expected:raise ValueError('Directory changed since snapshot')
-    for row in original:
-        prior=snap['entities'].get(str(row['id']))
-        if not prior or any(row[k]!=prior.get(k) for k in row):raise ValueError('Original batch identity changed since snapshot')
+    if snap.get('batch')==BATCH:
+        current=q([(a.imp.NAME_FP,[snap['maxid']])],True)[0]
+        expected=snap['nameFingerprint'];original=[]
+        if current[0]['fingerprint']!=expected:raise ValueError('Directory changed since snapshot')
+    else:
+        old,original,current=q([(OLD_FP,[snap['maxid']]),(original_sql,[snap['maxid']]),(a.imp.NAME_FP,[snap['maxid']])],True)
+        expected=snap.get('originalNameFingerprint',snap['nameFingerprint'])
+        if old[0]['fingerprint']!=expected:raise ValueError('Directory changed since snapshot')
+        for row in original:
+            prior=snap['entities'].get(str(row['id']))
+            if not prior or any(row[k]!=prior.get(k) for k in row):raise ValueError('Original batch identity changed since snapshot')
     snap['originalNameFingerprint']=expected;snap['nameFingerprint']=current[0]['fingerprint'];snap['batch']=BATCH
     byid={}
     for history in snap['histories']:
@@ -73,7 +84,7 @@ if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('action',choices=['fingerprint','apply'])
     for key in ['connection','snapshot','plan']:ap.add_argument('--'+key,type=pathlib.Path,required=True)
     for key in ['compared','receipt','rehearsal']:ap.add_argument('--'+key,type=pathlib.Path)
-    ap.add_argument('--branch',required=True);ap.add_argument('--publish',action='store_true');args=ap.parse_args();configure()
+    ap.add_argument('--batch');ap.add_argument('--branch',required=True);ap.add_argument('--publish',action='store_true');args=ap.parse_args();configure(args.batch)
     if args.action=='fingerprint':fingerprint(args)
     else:
         if not args.compared or not args.receipt:raise ValueError('Apply needs compared data and receipt paths')
