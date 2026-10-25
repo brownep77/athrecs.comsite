@@ -8,6 +8,13 @@ event IDs. The previous PR #940 broad quality run 40174751216 completed successf
 
 ## Reviewed corrections
 
+Production revision 373 published all 18 edition writes (14 inserts, four updates).
+Live verification also found stale event-level prose and a cancellation hidden by
+the upcoming-race filter. The page projection now uses the reviewed edition's
+venue, description and organiser URL; it does not carry these into a later edition
+or overwrite source records. Nishida's Sunday cancellation remains visible as a
+dated notice, with Saturday unaffected.
+
 - **Kyiv Unbroken, 25 October:** the organiser's current
   [programme](https://kyivmarathon.org/programa-zahodu/) and
   [regulations](https://kyivmarathon.org/polozhennya/) confirm Khmelnytskyi,

@@ -13,6 +13,39 @@ const { checkedFixtureStart, checkedFixtureStartLabel, isReviewedFixturePlacehol
 const { fixtureDateIsWithheld } = await import("../src/data/fixture-date-reviews.ts");
 const { editions, seriesList } = await import("../src/data/catalogue.ts");
 const { nextUrgentAdditions } = await import("../src/data/urgent-starts-next-2026-10-25.ts");
+const { reviewedRacePage } = await import("../src/data/race-page-reviews.ts");
+const { URGENT_RACE_PAGE_NOTICES } =
+  await import("../src/data/urgent-starts-next-2026-10-25-pages.ts");
+for (const [key, detail] of Object.entries(details)) {
+  const [slug, event_date] = key.split("|");
+  if (slug === "les-foulees-mamertines") continue;
+  const original = {
+    event: { slug, city: "Old venue", area: "Old venue", description: "Old date", website: "" },
+    upcoming: [{ event_date, distance_code: Object.keys(detail.starts)[0], status: "TBC" }],
+    past: [],
+  };
+  const page = reviewedRacePage(original);
+  assert.equal(page.event.city, detail.place.city);
+  assert.equal(page.event.description, detail.summary);
+  assert.equal(page.event.website, detail.sourceUrl);
+  assert.equal(original.event.city, "Old venue", "Preserve stored evidence");
+  assert.equal(page.upcoming, original.upcoming, "Preserve edition IDs and programme");
+  assert.equal(
+    reviewedRacePage({
+      ...original,
+      upcoming: [{ ...original.upcoming[0], event_date: "2027-10-25" }],
+    }).event.city,
+    "Old venue",
+    "Never carry a 2026 venue into another edition",
+  );
+}
+const serbia = reviewedRacePage({
+  event: { slug: "wa-serbian-cross-country-championships-7240001", description: "25 OCT 2026" },
+  upcoming: [],
+  past: [{ event_date: "2026-10-24" }],
+});
+assert.match(serbia.event.description, /24 October 2026/);
+assert.match(Object.values(URGENT_RACE_PAGE_NOTICES)[0].note, /remaining programme was cancelled/);
 for (const edition of nextUrgentAdditions) {
   assert.equal(
     seriesList.filter((s) => s.slug === edition.seriesSlug).length,
