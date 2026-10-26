@@ -1,4 +1,5 @@
 import { hasConfirmedFixtureDistance } from "./fixture-distance-policy.ts";
+import { automatedStartTimeError } from "./catalogue-automation-policy.ts";
 import { createHash, randomUUID } from "node:crypto";
 import { isDeepStrictEqual } from "node:util";
 import { dbSource, getSql, type Sql } from "@/lib/db";
@@ -525,6 +526,20 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
       if (slug && !eventSlugSet.has(slug) && !(await eventExists(tx, slug))) {
         errors.push(`Referenced event does not exist: ${slug}`);
       }
+      if (!errors.length && batch.source_key.startsWith("athrecs-holding:delta:")) {
+        const existing = await tx<{ start_time: string | null }>`
+          select edition.start_time::text as start_time
+          from editions edition
+          join events event on event.id = edition.event_id
+          where event.slug = ${slug}
+            and edition.event_date = ${edition.date}::date
+            and edition.distance_code = ${edition.distance}
+        `;
+        const startError = automatedStartTimeError(
+          batch.source_key, existing[0]?.start_time, edition.startTime,
+        );
+        if (startError) errors.push(startError);
+      }
       if (errors.length) {
         invalidRows += 1;
         allErrors.push(...errors.map((error) => `Edition ${index + 1}: ${error}`));
@@ -658,6 +673,17 @@ export async function publishCatalogueBatch(
           editionKey(edition),
           await snapshotEdition(tx, editionSlug(edition), edition.date, edition.distance),
         );
+      }
+
+      // Recheck under the existing row locks: a verified start may have been
+      // added or corrected after validation. Never clear it during a scan retry.
+      for (const edition of editionInputs) {
+        const startError = automatedStartTimeError(
+          batch.source_key,
+          beforeEditions.get(editionKey(edition))?.record.start_time,
+          edition.startTime,
+        );
+        if (startError) throw new Error(`${editionKey(edition)}: ${startError}`);
       }
 
       const revisionRows = await tx<{ id: number }>`
@@ -1147,3 +1173,4 @@ export async function getCataloguePublishingDashboard() {
     })),
   };
 }
+

@@ -22,8 +22,8 @@ const TRUSTED_WORKFLOWS = [
     workflowName: "Refresh Athrecs race data",
   },
   {
-    audience: RUNRECS_CATALOGUE_OIDC_AUDIENCE,
-    siteBrand: "runrecs",
+    audience: ATHRECS_CATALOGUE_OIDC_AUDIENCE,
+    siteBrand: "athrecs",
     workflowRef:
       "brownep77/athrecs-holding/.github/workflows/weekly-uk-ireland-races.yml@refs/heads/main",
     workflowName: "Weekly UK and Ireland race expansion",
@@ -264,3 +264,4 @@ export async function verifyGitHubActionsOidcToken(
     runner_environment: "github-hosted",
   };
 }
+
