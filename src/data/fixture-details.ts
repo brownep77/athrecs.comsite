@@ -5,6 +5,7 @@ import countyExpansionMore from "./county-expansion-more-2026-10-21.json" with {
 import countyExpansionChecked from "./county-expansion-checked-2026-10-21.json" with { type: "json" };
 import countyTbcReview from "./county-tbc-review-2026-10-21.json" with { type: "json" };
 import batch6ThreeMonthStarts from "./three-month-starts-batch6-2026-10-25.json" with { type: "json" };
+import batch7ThreeMonthStarts from "./three-month-starts-batch7-2026-10-25.json" with { type: "json" };
 
 import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type: "json" };
 import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
@@ -406,6 +407,16 @@ export function isReviewedFixturePlaceholder(slug: string, date: string, distanc
 
 // Apply this exact-edition review without replacing other checked distances.
 for (const [key, reviewed] of Object.entries(batch6ThreeMonthStarts)) {
+  const existing = FIXTURE_DETAILS[key];
+  FIXTURE_DETAILS[key] = {
+    ...existing,
+    ...reviewed,
+    starts: { ...existing?.starts, ...reviewed.starts },
+  };
+}
+
+// Preserve other distances when adding this edition-specific programme review.
+for (const [key, reviewed] of Object.entries(batch7ThreeMonthStarts)) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {
     ...existing,
