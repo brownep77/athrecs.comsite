@@ -272,7 +272,7 @@ export async function readSportFixtures(
                 endTime: start.endTime,
                 sourceUrl,
                 checkedAt: checked ? detail.checkedAt : null,
-                note: checked?.note ?? null,
+                note: checked?.publicNote ?? checked?.note ?? null,
                 label,
                 calendarRace,
               };
