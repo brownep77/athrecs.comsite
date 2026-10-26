@@ -1,4 +1,5 @@
 import duplicateProgrammeStarts from "./duplicate-programme-starts-2026-10-26.json" with { type: "json" };
+import thirdDuplicateProgrammeStarts from "./duplicate-programme-starts-third-2026-10-26.json" with { type: "json" };
 import confirmedDistances from "./confirmed-distances-2026-10-26.json" with { type: "json" };
 import largeThreeMonthStarts from "./three-month-starts-batch-2026-10-25.json" with { type: "json" };
 import moreThreeMonthStarts from "./three-month-starts-more-2026-10-25.json" with { type: "json" };
@@ -382,6 +383,15 @@ for (const [key, reviewed] of Object.entries(batch5ThreeMonthStarts)) {
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
+  // The organiser confirms this imported placeholder is the junior 2K.
+  if (
+    slug === "ea-runevents-hadleigh-10-5-2-hadleigh" &&
+    date === "2026-11-22" &&
+    distance === "Fun Run"
+  )
+    return true;
+  // The TC 10K governing-body programme already has its confirmed 10K edition.
+  if (slug === "wa-tc-10k-7245303" && date === "2026-10-03" && distance === "Other") return true;
   if (isThirdUrgentPlaceholder(slug, date, distance)) return true;
   if (isNextUrgentPlaceholder(slug, date, distance)) return true;
   if (isUrgentReviewedPlaceholder(slug, date, distance)) return true;
@@ -496,7 +506,10 @@ for (const [key, reviewed] of Object.entries(confirmedDistances)) {
 }
 
 // Retained duplicate programmes keep the edition-specific organiser timetable.
-for (const [key, reviewed] of Object.entries(duplicateProgrammeStarts)) {
+for (const [key, reviewed] of [
+  ...Object.entries(duplicateProgrammeStarts),
+  ...Object.entries(thirdDuplicateProgrammeStarts),
+]) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {
     ...existing,
