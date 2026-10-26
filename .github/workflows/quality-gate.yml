@@ -51,6 +51,11 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Race weather timezones, missing data and compact layout
+        run: |
+          python scripts/verify-race-weather.py
+          node scripts/verify-race-weather.mjs
+
       - name: Verify profile setup, former clubs and staff alerts on mobile and desktop
         run: node --experimental-strip-types scripts/verify-profile-setup.mjs --browser
 

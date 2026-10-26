@@ -37,6 +37,8 @@ import {
   reportedResultSortDate,
 } from "@/lib/athrecs/profile-result-presentation";
 import { ResultVerificationBadge } from "./ResultVerificationBadge";
+import { ResultWeather } from "./ResultWeather";
+import { raceDayWeather } from "@/lib/athrecs/race-weather";
 
 const NO_HISTORY_RESULTS: readonly HistoryResult[] = [];
 const NO_REPORTED_RECORDS: readonly ReportedRaceRecord[] = [];
@@ -76,13 +78,17 @@ export function CompactResultsTable({
         ? entry.result.eventDate
         : entry.result.performance.date || String(entry.result.performance.year);
   rows.sort((a, b) => sortDate(b).localeCompare(sortDate(a)));
+  const hasWeather = rows.some(
+    (entry) =>
+      entry.kind === "recorded" && raceDayWeather(entry.result.eventSlug, entry.result.eventDate),
+  );
   return (
     <div
       className={`${showEvidence ? "" : "profile-table-wrap"} overflow-x-auto rounded-lg border border-border bg-surface`}
     >
       <table
         role="table"
-        className={`${showEvidence ? "" : "profile-card-table"} w-full text-left text-sm`}
+        className={`${showEvidence ? "" : "profile-card-table"} ${hasWeather && !showEvidence ? "profile-weather-table" : ""} ${hasWeather && !showEvidence && !action && !claimable ? "profile-weather-fixed" : ""} w-full text-left text-sm`}
       >
         <caption className="sr-only">Athlete results history</caption>
         <thead role="rowgroup" className="bg-elevated text-xs text-subtle">
@@ -157,6 +163,7 @@ export function CompactResultsTable({
                     </ProfileEventLink>
                   </span>
                   <CompetitionTierBadge context={recordedCompetition(result)} />
+                  <ResultWeather eventSlug={result.eventSlug} eventDate={result.eventDate} />
                   <ResultDisqualification
                     showEvidence={showEvidence}
                     decision={result.details?.disqualification}
