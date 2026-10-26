@@ -1,6 +1,8 @@
 import { createServer } from "vite";
 import { publishCheckedFixtures } from "./lib/checked-fixture-publication.mjs";
 import { HADLEIGH_PROGRAMME_REVIEW } from "./lib/hadleigh-programme-2026-10-26-review.mjs";
+import { NOVEMBER_NIGHTMARE_PROGRAMME_REVIEW } from "./lib/november-nightmare-programme-2026-10-26-review.mjs";
+import fourthDuplicateProgrammeStarts from "../src/data/duplicate-programme-starts-fourth-2026-10-26.json" with { type: "json" };
 import thirdDuplicateProgrammeStarts from "../src/data/duplicate-programme-starts-third-2026-10-26.json" with { type: "json" };
 import { START_TIME_REVIEW } from "./lib/official-start-time-review.mjs";
 import { OFFICIAL_START_TIME_DETAILS } from "./lib/official-start-time-details.mjs";
@@ -142,6 +144,15 @@ try {
       publishing,
       thirdDuplicateProgrammeStarts,
       HADLEIGH_PROGRAMME_REVIEW,
+    ),
+  );
+  console.log(
+    "[november-nightmare-programme]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      fourthDuplicateProgrammeStarts,
+      NOVEMBER_NIGHTMARE_PROGRAMME_REVIEW,
     ),
   );
 } finally {
