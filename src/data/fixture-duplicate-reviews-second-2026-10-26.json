@@ -1,0 +1,228 @@
+[
+  {
+    "duplicateSlug": "leeds-5k-series-august",
+    "canonicalSlug": "evensplits-leeds-5k-series-2026",
+    "date": "2026-10-28",
+    "duplicateEventId": 3060734,
+    "canonicalEventId": 3059589,
+    "duplicateDistances": [
+      "5K"
+    ],
+    "retainedDistances": [
+      "5K"
+    ],
+    "sourceUrl": "https://racebest.com/races/xt975",
+    "checkedAt": "2026-10-26",
+    "note": "Same EvenSplits 5K at the Brownlee Centre. The dated authorised entry programme confirms the October race; retain the series identity."
+  },
+  {
+    "duplicateSlug": "leeds-5k-series-august",
+    "canonicalSlug": "evensplits-leeds-5k-series-2026",
+    "date": "2026-11-25",
+    "duplicateEventId": 3060734,
+    "canonicalEventId": 3059589,
+    "duplicateDistances": [
+      "5K"
+    ],
+    "retainedDistances": [
+      "5K"
+    ],
+    "sourceUrl": "https://racebest.com/races/64t79",
+    "checkedAt": "2026-10-26",
+    "note": "Same EvenSplits 5K at the Brownlee Centre. The dated authorised entry programme confirms the November race; retain the series identity."
+  },
+  {
+    "duplicateSlug": "leigh-on-sea-striders-10k",
+    "canonicalSlug": "ea-runevents-leigh-on-sea-10k-leigh-on-sea",
+    "date": "2026-11-01",
+    "duplicateEventId": 4375864,
+    "canonicalEventId": 3148012,
+    "duplicateDistances": [
+      "10K",
+      "5K"
+    ],
+    "retainedDistances": [
+      "10K",
+      "5K"
+    ],
+    "sourceUrl": "https://www.entrycentral.com/Leigh10k",
+    "checkedAt": "2026-10-26",
+    "note": "The organiser-authorised programme confirms both open 5K and 10K at Two Tree Island, plus junior 5K entry. Retain the existing combined programme; no separate junior event is merged."
+  },
+  {
+    "duplicateSlug": "tweed-valley-forest-ultra-trail",
+    "canonicalSlug": "rb-tweed-valley-ultra",
+    "date": "2026-11-15",
+    "duplicateEventId": 3061582,
+    "canonicalEventId": 3061782,
+    "duplicateDistances": [
+      "Ultra"
+    ],
+    "retainedDistances": [
+      "Ultra"
+    ],
+    "sourceUrl": "https://www.highterrainevents.co.uk/tweed-valley-ultra",
+    "checkedAt": "2026-10-26",
+    "note": "Same 50K at Glentress. Both records contain only the 50K option; the separately advertised longer ultra is not collapsed into it or added by this correction."
+  },
+  {
+    "duplicateSlug": "pednor-10",
+    "canonicalSlug": "ea-runevents-pednor-10-and-pednor-relay-chesham",
+    "date": "2026-12-27",
+    "duplicateEventId": 3060983,
+    "canonicalEventId": 3148044,
+    "duplicateDistances": [
+      "10mi"
+    ],
+    "retainedDistances": [
+      "10mi"
+    ],
+    "sourceUrl": "https://www.chilternharriers.com/pednor-10.html",
+    "checkedAt": "2026-10-26",
+    "note": "The organiser confirms the solo 10-mile race and a separate two-person relay. Both stored records represent the solo 10 miles; the relay is not treated as an individual 5-mile race."
+  },
+  {
+    "duplicateSlug": "athens-classic-marathon",
+    "canonicalSlug": "athens-authentic-marathon",
+    "date": "2026-11-08",
+    "duplicateEventId": 3059917,
+    "canonicalEventId": 4077462,
+    "duplicateDistances": [
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://www.athensauthenticmarathon.gr/en/c/agones-2-26/authentic-marathon-1/marathonios-dromos-33",
+    "checkedAt": "2026-10-26",
+    "note": "Same authentic marathon from Marathon to the Panathenaic Stadium. The 42.2 km import is the rounded equivalent of the retained 42.195 km marathon."
+  },
+  {
+    "duplicateSlug": "baltimore-marathon",
+    "canonicalSlug": "baltimore-running-festival-marathon",
+    "date": "2026-10-17",
+    "duplicateEventId": 4338272,
+    "canonicalEventId": 3580924,
+    "duplicateDistances": [
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://www.thebaltimoremarathon.com/Race/TheBaltimoreRunningFestival/Page/Marathon",
+    "checkedAt": "2026-10-26",
+    "note": "Same 2026 Baltimore Running Festival marathon from Paca and Camden Streets. Retain the record linked to the organiser."
+  },
+  {
+    "duplicateSlug": "blickling-half-marathon-autumn",
+    "canonicalSlug": "autumn-blickling-half",
+    "date": "2026-10-18",
+    "duplicateEventId": 3060028,
+    "canonicalEventId": 5,
+    "duplicateDistances": [
+      "Half"
+    ],
+    "retainedDistances": [
+      "Half"
+    ],
+    "sourceUrl": "https://epicnorfolk.com/autumn-blickling-half-marathon/",
+    "checkedAt": "2026-10-26",
+    "note": "Same autumn half marathon in Aylsham/Blickling. The organiser links its 2026 results to Total Race Timing event 669, confirming the retained canonical record and date. Other years remain unchanged."
+  },
+  {
+    "duplicateSlug": "ea-runevents-runthrough-haltemprice-10k-nr-hull",
+    "canonicalSlug": "haltemprice-10k",
+    "date": "2026-10-25",
+    "duplicateEventId": 3148007,
+    "canonicalEventId": 3060526,
+    "duplicateDistances": [
+      "10K"
+    ],
+    "retainedDistances": [
+      "10K"
+    ],
+    "sourceUrl": "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+    "checkedAt": "2026-10-26",
+    "note": "Same RunThrough 10K starting on South Ella Way, Kirk Ella; federation and organiser records describe the same date and distance."
+  },
+  {
+    "duplicateSlug": "helsinki-city-run-marathon",
+    "canonicalSlug": "saucony-helsinki-city-marathon",
+    "date": "2027-05-08",
+    "duplicateEventId": 3066313,
+    "canonicalEventId": 4059579,
+    "duplicateDistances": [
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://helsinkicityrun.fi/en/helsinkicitymarathon/",
+    "checkedAt": "2026-10-26",
+    "note": "Same Saucony Helsinki City Marathon within the Valio Helsinki City Run weekend. Retain the specific marathon identity; the half, relay, 5K and double remain distinct."
+  },
+  {
+    "duplicateSlug": "valio-helsinki-city-run",
+    "canonicalSlug": "saucony-helsinki-city-marathon",
+    "date": "2027-05-08",
+    "duplicateEventId": 3669011,
+    "canonicalEventId": 4059579,
+    "duplicateDistances": [
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://helsinkicityrun.fi/en/helsinkicitymarathon/",
+    "checkedAt": "2026-10-26",
+    "note": "The organiser identifies Valio Helsinki City Run as the umbrella weekend. This stored umbrella record contains only the same 42.195 km marathon; retain the specific marathon identity. Do not merge the separately advertised half, relay, 5K or double."
+  },
+  {
+    "duplicateSlug": "ottawa-international-marathon",
+    "canonicalSlug": "tamarack-ottawa-international-marathon",
+    "date": "2027-05-30",
+    "duplicateEventId": 3642558,
+    "canonicalEventId": 3899157,
+    "duplicateDistances": [
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://www.runottawa.ca/races-and-events/ottawa-marathon/",
+    "checkedAt": "2026-10-26",
+    "note": "Same Run Ottawa marathon at Ottawa City Hall. Retain the record with the dedicated organiser marathon page."
+  },
+  {
+    "duplicateSlug": "tulsa-route-66-marathon",
+    "canonicalSlug": "williams-route-66-marathon",
+    "date": "2026-11-22",
+    "duplicateEventId": 4338283,
+    "canonicalEventId": 3836976,
+    "duplicateDistances": [
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://organizations.hakuapp.com/sites/organization_sites/4e4a1babfb986f62bd16/pages/get_involved",
+    "checkedAt": "2026-10-26",
+    "note": "The organiser confirms the Williams Route 66 Marathon in Tulsa on 22 November 2026. The distances page confirms the solo marathon. This does not affect the separate Route 66 Ultrarun in Arizona."
+  },
+  {
+    "duplicateSlug": "ottawa-marathon",
+    "canonicalSlug": "tamarack-ottawa-international-marathon",
+    "date": "2027-05-30",
+    "duplicateEventId": 3066385,
+    "canonicalEventId": 3899157,
+    "duplicateDistances": [
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://www.runottawa.ca/races-and-events/ottawa-marathon/",
+    "checkedAt": "2026-10-26",
+    "note": "Same 30 May 2027 Ottawa marathon. The older directory record is marked TBC but the organiser confirms this exact date and distance on the retained programme."
+  }
+]

@@ -98,5 +98,157 @@
         "note": "The edition-specific organiser race-day timetable gives 10K at 08:45 and 5K at 09:05; race-pack collection closes at 08:15/08:35. This specific timetable takes precedence over the generic 09:00 summary and older entry clocks. Check the final organiser instructions before race day."
       }
     }
+  },
+  "evensplits-leeds-5k-series-2026|2026-10-28": {
+    "summary": "EvenSplits Leeds 5K Series 2026.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://racebest.com/races/xt975",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "19:30",
+        "note": "The opened edition-specific organiser or authorised entry programme confirms this local start for this distance."
+      }
+    }
+  },
+  "evensplits-leeds-5k-series-2026|2026-11-25": {
+    "summary": "EvenSplits Leeds 5K Series 2026.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://racebest.com/races/64t79",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "19:30",
+        "note": "The opened edition-specific organiser or authorised entry programme confirms this local start for this distance."
+      }
+    }
+  },
+  "ea-runevents-leigh-on-sea-10k-leigh-on-sea|2026-11-01": {
+    "summary": "Leigh-on-Sea 10k.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.entrycentral.com/Leigh10k",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "18:00",
+        "note": "The opened edition-specific organiser or authorised entry programme confirms this local start for this distance."
+      },
+      "5K": {
+        "time": "18:00",
+        "note": "The opened edition-specific organiser or authorised entry programme confirms this local start for this distance."
+      }
+    }
+  },
+  "rb-tweed-valley-ultra|2026-11-15": {
+    "summary": "Tweed Valley 50K from Glentress.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.highterrainevents.co.uk/tweed-valley-ultra",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Ultra": {
+        "time": "08:00",
+        "note": "The organiser gives 50 km at 08:00 and the separate longer ultra at 07:30. This review applies only to the stored 50 km option."
+      }
+    }
+  },
+  "ea-runevents-pednor-10-and-pednor-relay-chesham|2026-12-27": {
+    "summary": "Pednor 10 & Pednor Relay.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.chilternharriers.com/pednor-10.html",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10mi": {
+        "time": "10:00",
+        "note": "The opened edition-specific organiser or authorised entry programme confirms this local start for this distance."
+      }
+    }
+  },
+  "athens-authentic-marathon|2026-11-08": {
+    "summary": "Athens Marathon The Authentic.",
+    "timeZone": "Europe/Athens",
+    "sourceUrl": "https://www.athensauthenticmarathon.gr/en/c/agones-2-26/authentic-marathon-1/marathonios-dromos-33",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "note": "The 8 November 2026 organiser marathon programme starts block 1 at 08:30, followed by consecutive starts. Later block clocks are described as indicative, with the second group from 09:45. This is not every runner’s assigned start.",
+        "label": "First wave 08:30 EET · later blocks follow",
+        "publicNote": "Check your assigned block. The organiser lists consecutive starts from 08:30 and describes later block clocks as indicative."
+      }
+    }
+  },
+  "baltimore-running-festival-marathon|2026-10-17": {
+    "summary": "Baltimore Running Festival Marathon.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://www.thebaltimoremarathon.com/Race/TheBaltimoreRunningFestival/Page/Marathon",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:00",
+        "note": "The opened edition-specific organiser or authorised entry programme confirms this local start for this distance."
+      }
+    }
+  },
+  "autumn-blickling-half|2026-10-18": {
+    "summary": "Autumn Blickling Half Marathon.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://totalracetiming.co.uk/raceresults/669",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": "09:00",
+        "note": "The organiser links this exact 2026 results page, which records the half-marathon start on 18 October at 09:00. The duplicate import’s 08:00 is superseded by this edition-specific evidence."
+      }
+    }
+  },
+  "haltemprice-10k|2026-10-25": {
+    "summary": "Haltemprice 10K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "09:00",
+        "note": "The opened edition-specific organiser or authorised entry programme confirms this local start for this distance."
+      }
+    }
+  },
+  "saucony-helsinki-city-marathon|2027-05-08": {
+    "summary": "Saucony Helsinki City Marathon.",
+    "timeZone": "Europe/Helsinki",
+    "sourceUrl": "https://helsinkicityrun.fi/en/helsinkicitymarathon/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "09:30",
+        "note": "The organiser’s 8 May 2027 marathon page lists first wave 09:30 (target under four hours) and second wave 09:40 (target over four hours). This is not every runner’s individual start.",
+        "label": "First wave 09:30 EEST · second wave 09:40",
+        "publicNote": "09:30 for target times under four hours; 09:40 for target times over four hours."
+      }
+    }
+  },
+  "tamarack-ottawa-international-marathon|2027-05-30": {
+    "summary": "Tamarack Ottawa International Marathon.",
+    "timeZone": "America/Toronto",
+    "sourceUrl": "https://www.runottawa.ca/races-and-events/ottawa-marathon/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "note": "The opened edition-specific organiser or authorised entry programme confirms this local start for this distance."
+      }
+    }
+  },
+  "williams-route-66-marathon|2026-11-22": {
+    "summary": "Williams Route 66 Marathon.",
+    "timeZone": "America/Chicago",
+    "sourceUrl": "https://organizations.hakuapp.com/sites/organization_sites/4e4a1babfb986f62bd16/pages/distances",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:00",
+        "note": "The organiser’s 2026 event pages confirm Sunday 22 November; its distances page and FAQ give the Sunday marathon start at 08:00. The 2026 participant guide is not yet published; do not copy the linked 2025 guide."
+      }
+    }
   }
 }
