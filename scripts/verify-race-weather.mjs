@@ -20,6 +20,8 @@ try {
   assert.equal(helpers.raceDayWeather("run-norwich", "2023-07-17"), null);
   assert.equal(helpers.raceWeatherCondition([]), "Conditions unavailable");
   assert.equal(helpers.raceWeatherCondition([1, 3, 7]), "Rain at times");
+  assert.equal(helpers.raceWeatherSummary({ cloudCover: { minOktas: 0, maxOktas: 8, hours: 20 } }), "Cloud reported · limited data");
+  assert.equal(helpers.raceWeatherSummary({ cloudCover: { minOktas: 0, maxOktas: 0, hours: 20 } }), "Conditions unavailable");
   assert.equal(helpers.raceWeatherTemperature({ minC: -4, maxC: 0 }), "-4–0°C");
   const snapshots = JSON.parse(await readFile("src/data/race-day-weather.json", "utf8"));
   for (const [key, weather] of Object.entries(snapshots)) {
@@ -30,6 +32,12 @@ try {
     assert(weather.minC <= weather.maxC);
     if (weather.precipitationMm != null)
       assert.equal(weather.precipitationHours, weather.expectedHours);
+    if (weather.precipitationEstimate) {
+      assert.equal(weather.precipitationMm ?? null, null, "Keep existing precipitation separate");
+      assert.equal(weather.precipitationEstimate.hours, weather.expectedHours);
+      assert.equal(weather.precipitationEstimate.timeStandard, "UTC");
+      assert(weather.precipitationEstimate.archive.sha256);
+    }
   }
   const { CompactResultsTable } = await server.ssrLoadModule(
     "/src/components/athletes/CompactResultsTable.tsx",
@@ -39,6 +47,7 @@ try {
     ["run-norwich", "2023-07-16"],
     ["norfolk-marathon-half", "2025-04-13"],
     ["cebu-marathon", "2011-01-09"],
+    ["helsinki-marathon", "2019-08-24"],
     ["uncollected-race", "2024-01-01"],
   ].map(([eventSlug, eventDate], index) => ({
     resultId: index + 1,
@@ -62,8 +71,12 @@ try {
     history: { key: `synthetic-${index}` },
   }));
   const html = renderToStaticMarkup(createElement(CompactResultsTable, { results }));
-  assert(html.includes("Weather unavailable"));
+  assert(html.includes("regional model estimate"));
+  assert(html.includes("Cloud reported · limited data"));
+  assert(html.includes("NASA POWER / MERRA-2"));
+  assert(html.includes("Iowa Environmental Mesonet"));
   assert(html.includes("CC BY 4.0"));
+  assert.equal(snapshots["cebu-marathon|2011-01-09"].status, "available");
   const css = await (await fetch(`${origin}/src/styles.css?direct`)).text();
   browser = await chromium.launch({
     executablePath: process.env.ATHRECS_CHROMIUM_EXECUTABLE || undefined,
@@ -87,9 +100,18 @@ try {
     const disclosure = page.locator(".result-weather summary").first();
     await disclosure.focus();
     await page.keyboard.press("Enter");
+    // Open the new model/METAR disclosure and the cloud-only caveat too.
+    for (const index of [2, 3]) {
+      const extra = page.locator(".result-weather summary").nth(index);
+      await extra.click();
+      await checkWidth();
+      await extra.click();
+    }
     assert.equal(await page.locator(".result-weather[open]").count(), 1);
     await checkWidth();
+    await disclosure.focus();
     await page.keyboard.press("Enter");
+    assert.equal(await page.locator(".result-weather[open]").count(), 0);
     await page.screenshot({ path: `artifacts/race-weather-${width}.png`, fullPage: true });
   }
   console.log(

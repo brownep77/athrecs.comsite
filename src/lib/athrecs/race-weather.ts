@@ -21,6 +21,27 @@ export type RaceDayWeather = {
   hours?: number;
   expectedHours?: number;
   modelFilled?: boolean;
+  temperatureSource?: "iem";
+  cloudCover?: { minOktas: number; maxOktas: number; hours: number };
+  metarSupplement?: {
+    station: string;
+    name: string;
+    latitude: number;
+    longitude: number;
+    fields: string[];
+    reports: number;
+    conditionReports: number;
+    retrievedOn: string;
+  };
+  precipitationEstimate?: {
+    mm: number;
+    trace?: boolean;
+    hours: number;
+    expectedHours: number;
+    queryCoordinates: number[];
+    sources: string[];
+    retrievedOn: string;
+  };
 };
 
 const weather = snapshots as Record<string, RaceDayWeather>;
@@ -47,4 +68,10 @@ export function raceWeatherTemperature(weather: RaceDayWeather): string {
   const low = Math.round(weather.minC);
   const high = Math.round(weather.maxC);
   return low === high ? `${low}°C` : `${low}–${high}°C`;
+}
+
+export function raceWeatherSummary(weather: RaceDayWeather): string {
+  if (weather.conditionCodes?.length) return raceWeatherCondition(weather.conditionCodes);
+  if (weather.cloudCover && weather.cloudCover.maxOktas > 0) return "Cloud reported · limited data";
+  return "Conditions unavailable";
 }

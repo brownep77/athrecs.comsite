@@ -12,13 +12,14 @@ import {
 } from "lucide-react";
 import {
   raceDayWeather,
-  raceWeatherCondition,
+  raceWeatherSummary,
   raceWeatherTemperature,
 } from "@/lib/athrecs/race-weather";
 
 const conditionIcons: Record<string, { icon: LucideIcon; colour: string }> = {
   "Clear / fair reported": { icon: Sun, colour: "text-amber-600 fill-amber-100" },
   "Cloud at times": { icon: Cloud, colour: "text-sky-600 fill-sky-100" },
+  "Cloud reported · limited data": { icon: Cloud, colour: "text-sky-600 fill-sky-100" },
   "Rain at times": { icon: CloudRain, colour: "text-blue-600 fill-blue-100" },
   "Fog at times": { icon: CloudFog, colour: "text-slate-500 fill-slate-100" },
   "Snow at times": { icon: Snowflake, colour: "text-cyan-600" },
@@ -33,7 +34,7 @@ export function ResultWeather({ eventSlug, eventDate }: { eventSlug: string; eve
   if (!weather) return null;
   if (weather.status === "unavailable")
     return <span className="block text-[11px] font-normal text-subtle">Weather unavailable</span>;
-  const condition = raceWeatherCondition(weather.conditionCodes);
+  const condition = raceWeatherSummary(weather);
   const { icon: WeatherIcon, colour } = conditionIcons[condition] ?? temperatureIcon;
   return (
     <details className="result-weather mt-1 min-w-0 text-[11px] font-normal leading-4 text-muted">
@@ -64,15 +65,55 @@ export function ResultWeather({ eventSlug, eventDate }: { eventSlug: string; eve
           Mean humidity: {weather.humidityPct == null ? "Unavailable" : `${weather.humidityPct}%`}.
           <br />
           Day precipitation:{" "}
-          {weather.precipitationMm == null ? "Incomplete data" : `${weather.precipitationMm} mm`}.
+          {weather.precipitationMm != null
+            ? `${weather.precipitationMm} mm`
+            : weather.precipitationEstimate
+              ? `${weather.precipitationEstimate.trace ? "<0.1" : weather.precipitationEstimate.mm} mm (regional model estimate)`
+              : "Incomplete data"}.
         </p>
         <p>
           {weather.stationName} station ({weather.stationLatitude}, {weather.stationLongitude}).
           Nearby-area weather; conditions on the course may differ, especially on coasts and hills.{" "}
-          {weather.modelFilled ? "Includes model estimates." : "Station observations."} Conditions
+          {weather.modelFilled || weather.precipitationEstimate
+            ? "Includes model estimates."
+            : "Station observations."} Conditions
           describe reports during the day, not the whole race. Averages use available hours; missing
           observations are not treated as dry weather.
         </p>
+        {weather.cloudCover && !weather.conditionCodes?.length && (
+          <p>
+            Cloud cover was reported in {weather.cloudCover.hours} hours. Cloud reports alone do not
+            establish whether rain, fog or other weather occurred; those details remain unavailable.
+          </p>
+        )}
+        {weather.metarSupplement && weather.metarSupplement.fields.length > 0 && (
+          <p>
+            Additional {weather.metarSupplement.fields.join(", ")} from{" "}
+            {weather.metarSupplement.name} ({weather.metarSupplement.station};{" "}
+            {weather.metarSupplement.latitude}, {weather.metarSupplement.longitude}):{" "}
+            {weather.metarSupplement.reports} archived reports within this local day. Source:{" "}
+            <a className="text-accent underline" href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noreferrer">
+              Iowa Environmental Mesonet, Iowa State University
+            </a>{" "}
+            (METAR archive; limited quality control). Retrieved {weather.metarSupplement.retrievedOn}.
+          </p>
+        )}
+        {weather.precipitationEstimate && (
+          <p>
+            Precipitation estimate:{" "}
+            <a className="text-accent underline" href="https://power.larc.nasa.gov/docs/methodology/meteorology/precipitation/" target="_blank" rel="noreferrer">
+              NASA POWER / MERRA-2
+            </a>
+            , summed over {weather.precipitationEstimate.hours} hours of the local day. This model
+            covers a broad 0.5° × 0.625° area around the station; it is not a course rain-gauge
+            measurement and cannot confirm whether it rained during the race. Summed and rounded by
+            AthRecs;{" "}
+            <a className="text-accent underline" href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">
+              CC BY 4.0
+            </a>
+            . Retrieved {weather.precipitationEstimate.retrievedOn}.
+          </p>
+        )}
         <p className="text-[11px]">
           Weather:{" "}
           <a
