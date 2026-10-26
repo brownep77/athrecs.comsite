@@ -3,6 +3,7 @@ import { Bookmark, Check, ChevronRight, ExternalLink, MapPin } from "lucide-reac
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { AddToCalendar } from "@/components/races/AddToCalendar";
 import { ShareRaceButton } from "@/components/races/ShareRaceButton";
+import { DistanceBadge } from "@/components/races/EventBadges";
 import { useHomepageTheme } from "@/components/running/HomepageAppearance";
 import { compactFixtureLocation, formatFixtureStart } from "@/lib/athrecs/fixture-presentation";
 import { distanceDisplayLabel } from "@/lib/athrecs/distance";
@@ -102,9 +103,11 @@ export function CompactFixtureRow({ fixture, saved, onToggleSaved, saveReady = t
               const status = statusLabel(start.status);
               const description = (
                 <>
-                  <span className="font-semibold text-accent">
-                    {distanceDisplayLabel(start.distance, start.distanceKm)}
-                  </span>
+                  <DistanceBadge
+                    distance={start.distance}
+                    label={start.distance}
+                    distanceKm={start.distanceKm}
+                  />
                   <span aria-hidden="true"> · </span>
                   <span>
                     {start.label ??
