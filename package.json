@@ -42,6 +42,7 @@
     "verify:club-registration-browser": "node scripts/verify-club-registration-browser.mjs",
     "verify:race-groups": "node --experimental-strip-types scripts/verify-race-groups.mjs",
     "source-importer": "node scripts/source-importer/run.mjs",
+    "source-render": "node scripts/source-importer/render.mjs",
     "verify:source-importer": "node scripts/verify-source-importer.mjs",
     "verify:sources": "node scripts/verify-source-registry.mjs && node --experimental-strip-types scripts/verify-organisation-sources.mjs",
     "verify:bulk-source-run": "node --experimental-strip-types scripts/verify-bulk-source-run.mjs",
