@@ -1,7 +1,7 @@
 # Confirmed fixture distances — 26 October 2026
 
 The owner requires a confirmed distance before a race fixture is announced.
-The publication gate rejects unresolved upcoming race distances, including
+The public visibility gate withholds unresolved upcoming race distances, including
 `Other`, `Ultra`, `Cross Country`, blank labels and invalid kilometre values.
 Confirmed timed races retain their duration. Track-and-field and pool meetings
 can retain an explicit programme type; a generic `Other` is not a programme.
@@ -10,8 +10,10 @@ Public fixture queries omit unresolved upcoming editions before pagination.
 The same hold applies to event pages, home updates, location pages, running
 discovery, athletics calendars and direct calendar subscriptions. Other known
 distances at the same event remain visible, and original records and historical
-results are retained. Both staged publishing and the legacy importer reject new
-unresolved future editions; publish rechecks batches that were previously ready.
+results are retained. Imports can retain incomplete records for staff research;
+validation and publication record explicit distance-hold warnings, and public
+readers enforce the hold against current data even for older ready batches and
+legacy imports. Saving a research record does not announce its fixture.
 
 ## Source-checked changes
 
@@ -79,7 +81,7 @@ an uninspected source as verified.
 
 The distance regression uses an isolated PostgreSQL-compatible database to check
 timed events, mixed confirmed/unconfirmed siblings, historical retention,
-staged validation, stale-ready publish rejection and legacy imports. Existing
+staged review warnings, stale-ready visibility holds and legacy imports. Existing
 sport-fixture pagination, start clarity, location-page and calendar-subscription
 checks cover the public read paths. Type checking and the development production
 bundle build pass without running live publication scripts locally.

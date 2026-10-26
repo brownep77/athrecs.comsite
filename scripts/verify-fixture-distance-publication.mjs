@@ -89,16 +89,20 @@ try {
     sql,
   );
   const result = await publishing.validateCatalogueBatch(staged.batchId, sql);
-  assert.equal(result.status, "invalid");
-  assert.match(result.errors.join(" "), /Confirmed race distance/);
-  // A batch validated before this policy cannot bypass the fresh publish check.
-  await sql.query("update catalogue_import_batches set status='ready' where id=$1", [
-    staged.batchId,
-  ]);
-  await assert.rejects(
-    publishing.publishCatalogueBatch(staged.batchId, "reviewer@example.org", sql),
-    /Confirmed race distance/,
+  assert.equal(result.status, "ready");
+  assert.equal(result.withheldDistanceCount, 1);
+  assert.match(result.distanceHolds.join(" "), /Withheld from public fixtures/);
+  // An older ready batch without the new warning still cannot bypass the public hold.
+  await sql.query(
+    "update catalogue_import_batches set validation_summary='{}'::jsonb where id=$1",
+    [staged.batchId],
   );
+  const published = await publishing.publishCatalogueBatch(
+    staged.batchId,
+    "reviewer@example.org",
+    sql,
+  );
+  assert.equal(published.withheldDistanceCount, 1);
   const imported = await applyImportBundle(
     {
       editions: [
@@ -107,20 +111,23 @@ try {
     },
     { sqlOverride: sql },
   );
-  assert.ok(imported.errors.some((e) => e.includes("Confirmed race distance")));
+  assert.deepEqual(imported.errors, []);
+  const held = await unconfirmedFixtureEditionIds(sql, "2099-01-01");
+  assert.equal(held.length, 3, "Both import paths retain research records behind the public hold");
+  for (const visible of [901002, 901003, 901004]) assert(!held.includes(visible));
   assert.equal(
     (await sql.query("select count(*)::int as n from editions where event_date>='2099-02-01'"))[0]
       .n,
-    0,
+    2,
   );
   assert.equal(
     (await sql.query("select count(*)::int as n from editions where event_id=901001"))[0].n,
-    4,
+    6,
     "Original records and history survive the hold",
   );
 } finally {
   await pg.close();
 }
 console.log(
-  "Distance holds, timed formats, historical retention, validation, stale-ready rejection and legacy-import guards passed.",
+  "Distance holds, timed formats, historical retention, staff review warnings, stale-ready and legacy-import visibility guards passed.",
 );

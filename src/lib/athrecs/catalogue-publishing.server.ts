@@ -129,8 +129,9 @@ function editionKey(edition: ImportEditionInput): string {
   return `${editionSlug(edition)}|${edition.date}|${edition.distance}`;
 }
 
-async function fixtureDistanceErrors(sql: Sql, payload: ImportBundle, edition: ImportEditionInput) {
-  // Historical result/meeting imports remain available. All future race uploads are checked again at publish.
+async function fixtureDistanceHolds(sql: Sql, payload: ImportBundle, edition: ImportEditionInput) {
+  // Keep incomplete source records for staff research. Public readers always hold them,
+  // including imports and older batches, until the live edition has a usable distance.
   if (edition.date < new Date().toISOString().slice(0, 10)) return [];
   const slug = editionSlug(edition);
   const supplied = payload.events?.find((event) => eventSlug(event) === slug);
@@ -141,7 +142,7 @@ async function fixtureDistanceErrors(sql: Sql, payload: ImportBundle, edition: I
   return hasConfirmedFixtureDistance(sport, edition.distance, edition.distanceKm)
     ? []
     : [
-        "Confirmed race distance is required before publication; retain this edition for source review",
+        "Withheld from public fixtures until its race distance is confirmed; retained for source review",
       ];
 }
 
@@ -489,6 +490,7 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
 
     const eventSlugSet = new Set((payload.events ?? []).map(eventSlug));
     const allErrors: string[] = [];
+    const distanceHolds: string[] = [];
     let invalidRows = 0;
 
     for (const [index, event] of (payload.events ?? []).entries()) {
@@ -513,10 +515,10 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
     for (const [index, edition] of (payload.editions ?? []).entries()) {
       const slug = editionSlug(edition);
       const key = editionKey(edition);
-      const errors = [
-        ...editionErrors(edition),
-        ...(await fixtureDistanceErrors(tx, payload, edition)),
-      ];
+      const errors = editionErrors(edition);
+      distanceHolds.push(
+        ...(await fixtureDistanceHolds(tx, payload, edition)).map((reason) => `${key}: ${reason}`),
+      );
       if ((editionCounts.get(key) ?? 0) > 1) {
         errors.push(`Duplicate edition in batch: ${key}`);
       }
@@ -540,6 +542,8 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
       editions: payload.editions?.length ?? 0,
       invalidRows,
       errors: allErrors.slice(0, 100),
+      withheldDistanceCount: distanceHolds.length,
+      distanceHolds,
     };
     await tx.query(
       `update catalogue_import_batches
@@ -586,9 +590,13 @@ export async function publishCatalogueBatch(
         throw new Error("Only a validated, ready batch can be published");
       }
       const payload = bundleFromRow(batch);
+      const distanceHolds: string[] = [];
       for (const edition of payload.editions ?? []) {
-        const errors = await fixtureDistanceErrors(tx, payload, edition);
-        if (errors.length) throw new Error(`${editionKey(edition)}: ${errors.join("; ")}`);
+        distanceHolds.push(
+          ...(await fixtureDistanceHolds(tx, payload, edition)).map(
+            (reason) => `${editionKey(edition)}: ${reason}`,
+          ),
+        );
       }
       if (batch.source_key.startsWith("runrecs:collector:")) {
         const { assertCollectorPublication } =
@@ -757,6 +765,8 @@ export async function publishCatalogueBatch(
         editionsUpserted: result.editionsUpserted,
         entryOptionsUpserted: result.entryOptionsUpserted,
         revisionId,
+        withheldDistanceCount: distanceHolds.length,
+        distanceHolds,
       };
 
       await tx.query(

@@ -28,7 +28,7 @@ await db.exec(
   "alter table events add column surface text; update events set surface='Road' where sport='Running'",
 );
 await db.exec(
-  "alter table editions add column id serial primary key; alter table editions add column distance_km double precision;",
+  "alter table editions add column id serial primary key; alter table editions add column distance_km double precision; alter table editions add column end_time text; alter table events add column website text;",
 );
 const sql = async (strings, ...values) => {
   let query = strings[0];
