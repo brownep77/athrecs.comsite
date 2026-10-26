@@ -15,7 +15,7 @@ assert.ok(has(run({ city: "Anywhere" }), "place", "error"), "non-place city");
 assert.ok(has(run({ sourceUrl: "https://www.runabc.com/x" }), "source", "error"), "discovery calendar");
 assert.ok(has(run({ sourceUrl: "https://example.org/results/2026" }), "source", "error"), "results page");
 assert.ok(has(run({ entryStatus: "Sold out" }), "entry", "error"), "bad entry status");
-assert.ok(has(run({ name: "Town 10K 5K" }), "name", "warn"), "name ends in distance");
+assert.ok(has(run({}, [{ ...base, name: "Town 5K", distance: "5" }]), "name", "warn"), "distance-specific names for one event");
 assert.ok(has(run({ date: "2027-03-17" }), "date", "warn"), "weekday daytime start");
 assert.ok(!has(run({ date: "2027-01-01", name: "New Year 10K" }), "date", "warn"), "holiday weekday ok");
 assert.ok(has(run({}, [{ ...base, city: "York" }]), "conflict", "warn"), "same event different towns");

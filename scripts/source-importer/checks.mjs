@@ -100,7 +100,6 @@ export function checkRows(rows, { today, allowedDomains = {}, windowEnd } = {}) 
     else {
       if (r.name === r.name.toUpperCase() && /[A-Z]{4}/.test(r.name)) add(i, "warn", "name", "ALL CAPS name - tidy before publishing");
       if (/\s{2,}|^\s|\s$/.test(r.name)) add(i, "info", "name", "stray whitespace");
-      if (/\b(\d+(\.\d+)?\s?(k|km|mi|miles?))$/i.test(r.name.trim())) add(i, "warn", "name", "name ends in a distance - one event with several distances should share one name");
       if (/test|tbc|tba|virtual|anywhere|your own/i.test(r.name)) add(i, "warn", "name", "looks like a virtual, placeholder or test event");
     }
     if (!r.city) add(i, "error", "place", "city missing");
@@ -155,6 +154,18 @@ export function checkRows(rows, { today, allowedDomains = {}, windowEnd } = {}) 
       seen.add(k);
     });
     if (times.size > 3) idx.forEach((i) => add(i, "info", "time", "more than three different start times for one event"));
+  }
+  const byPlace = new Map();
+  rows.forEach((r, i) => byPlace.set(`${r.date}|${norm(r.city)}`, [...(byPlace.get(`${r.date}|${norm(r.city)}`) ?? []), i]));
+  for (const idx of byPlace.values()) {
+    const dists = new Set(idx.map((i) => KM(rows[i]).toFixed(1)));
+    const names = new Set(idx.map((i) => norm(rows[i].name)));
+    if (dists.size > 1 && names.size > 1)
+      idx.forEach((i) => {
+        const others = idx.filter((j) => j !== i && norm(rows[j].name) !== norm(rows[i].name) && jaccard(rows[i].name, rows[j].name) >= 0.5);
+        if (others.length && /\b\d+(\.\d+)?\s?(k|km|mi|miles?)$/i.test(rows[i].name.trim()))
+          add(i, "warn", "name", "same event, date and town listed under several distance-specific names - use one shared name");
+      });
   }
   const sorted = rows.map((r, i) => ({ r, i })).sort((a, b) => a.r.date.localeCompare(b.r.date));
   for (let a = 0; a < sorted.length; a++)
