@@ -7,15 +7,18 @@
     "starts": {
       "8K": {
         "time": "19:00",
-        "note": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately."
+        "note": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately.",
+        "publicNote": "8K night trail race from Aboyne, starting at 19:00 local time."
       },
       "15K": {
         "time": "18:45",
-        "note": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately."
+        "note": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately.",
+        "publicNote": "15K night trail race from Aboyne, starting at 18:45 local time."
       },
       "15mi": {
         "time": "18:30",
-        "note": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately."
+        "note": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately.",
+        "publicNote": "15-mile night trail race from Aboyne, starting at 18:30 local time."
       }
     },
     "displayName": "Illuminator Night Trail Race",
@@ -32,11 +35,13 @@
     "starts": {
       "10K": {
         "time": "09:15",
-        "note": "LOROS organiser news dated 6 October 2026 confirms both distances on Sunday 11 October and the 09:15 festival start from Victoria Park. The current generic event page has rolled to 2027."
+        "note": "LOROS organiser news dated 6 October 2026 confirms both distances on Sunday 11 October and the 09:15 festival start from Victoria Park. The current generic event page has rolled to 2027.",
+        "publicNote": "10K from Victoria Park, starting at 09:15 local time."
       },
       "Half": {
         "time": "09:15",
-        "note": "LOROS organiser news dated 6 October 2026 confirms both distances on Sunday 11 October and the 09:15 festival start from Victoria Park. The current generic event page has rolled to 2027."
+        "note": "LOROS organiser news dated 6 October 2026 confirms both distances on Sunday 11 October and the 09:15 festival start from Victoria Park. The current generic event page has rolled to 2027.",
+        "publicNote": "Half marathon from Victoria Park, starting at 09:15 local time."
       }
     }
   },
