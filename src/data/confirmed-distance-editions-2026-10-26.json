@@ -737,5 +737,38 @@
     "notes": "Organiser programme checked 26 October 2026: junior 2K 10:00, ten miles 11:00, five miles 11:05. Original federation values remain in the audit.",
     "publishAllDistances": true,
     "startTime": "11:00"
+  },
+  {
+    "seriesSlug": "november-nightmare",
+    "date": "2026-11-01",
+    "distance": "8mi",
+    "distanceKm": 12.874752,
+    "status": "Open",
+    "source": "https://www.codrc.co.uk/e/the-november-nightmare-12273",
+    "notes": "Organiser entry programme checked 26 October 2026: 8 miles, 16 miles and marathon on 1 November at 09:00. This does not verify later daily starts.",
+    "publishAllDistances": true,
+    "startTime": "09:00"
+  },
+  {
+    "seriesSlug": "november-nightmare",
+    "date": "2026-11-01",
+    "distance": "16mi",
+    "distanceKm": 25.749504,
+    "status": "Open",
+    "source": "https://www.codrc.co.uk/e/the-november-nightmare-12273",
+    "notes": "Organiser entry programme checked 26 October 2026: 8 miles, 16 miles and marathon on 1 November at 09:00. This does not verify later daily starts.",
+    "publishAllDistances": true,
+    "startTime": "09:00"
+  },
+  {
+    "seriesSlug": "november-nightmare",
+    "date": "2026-11-01",
+    "distance": "Marathon",
+    "distanceKm": 42.2,
+    "status": "Open",
+    "source": "https://www.codrc.co.uk/e/the-november-nightmare-12273",
+    "notes": "Organiser entry programme checked 26 October 2026: 8 miles, 16 miles and marathon on 1 November at 09:00. This does not verify later daily starts.",
+    "publishAllDistances": true,
+    "startTime": "09:00"
   }
 ]

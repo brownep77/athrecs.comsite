@@ -1,5 +1,6 @@
 import duplicateProgrammeStarts from "./duplicate-programme-starts-2026-10-26.json" with { type: "json" };
 import thirdDuplicateProgrammeStarts from "./duplicate-programme-starts-third-2026-10-26.json" with { type: "json" };
+import fourthDuplicateProgrammeStarts from "./duplicate-programme-starts-fourth-2026-10-26.json" with { type: "json" };
 import confirmedDistances from "./confirmed-distances-2026-10-26.json" with { type: "json" };
 import largeThreeMonthStarts from "./three-month-starts-batch-2026-10-25.json" with { type: "json" };
 import moreThreeMonthStarts from "./three-month-starts-more-2026-10-25.json" with { type: "json" };
@@ -509,6 +510,7 @@ for (const [key, reviewed] of Object.entries(confirmedDistances)) {
 for (const [key, reviewed] of [
   ...Object.entries(duplicateProgrammeStarts),
   ...Object.entries(thirdDuplicateProgrammeStarts),
+  ...Object.entries(fourthDuplicateProgrammeStarts),
 ]) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {
