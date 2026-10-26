@@ -16,6 +16,10 @@ const COUNTIES = new Set(
     " ",
   ),
 );
+// Counties that are also real towns or cities, so the name alone is fine as a start town.
+const COUNTY_TOWNS = new Set(
+  "kildare durham cork limerick galway kilkenny armagh londonderry derry carlow sligo wexford waterford wicklow monaghan cavan longford tipperary louth antrim down lancaster newry ennis navan tralee".split(" "),
+);
 const DISCOVERY = /runabc|findarace|racecalendar|runningintheusa|raceplace/i;
 const norm = (s) =>
   s
@@ -104,7 +108,7 @@ export function checkRows(rows, { today, allowedDomains = {}, windowEnd } = {}) 
     }
     if (!r.city) add(i, "error", "place", "city missing");
     else {
-      if (COUNTIES.has(norm(r.city))) add(i, "warn", "place", `"${r.city}" is a county, not a town - the start town is needed`);
+      if (COUNTIES.has(norm(r.city)) && !COUNTY_TOWNS.has(norm(r.city))) add(i, "warn", "place", `"${r.city}" is a county, not a town - the start town is needed`);
       if (/^(anywhere|various|tbc|uk|united kingdom|ireland|england|scotland|wales)$/i.test(r.city)) add(i, "error", "place", `city "${r.city}" is not a place`);
       if (r.country && norm(r.city) === norm(r.country)) add(i, "warn", "place", "city is the same as the country");
     }
