@@ -28,3 +28,22 @@ export function hasConfirmedFixtureDistance(sport: string, code: string, km?: nu
   // This does not source-verify the programme or invent distances for its disciplines.
   return !DISTANCE_SPORTS.includes(sport);
 }
+
+/** Do not resurrect an obsolete unknown-distance badge after an edition is corrected. */
+export function fixtureDistanceBadges(
+  sport: string,
+  storedCodes: string[],
+  editions: { distance_code: string; distance_km?: number | null }[],
+): string[] {
+  return [
+    ...new Set(
+      storedCodes.flatMap((code) => {
+        const matching = editions.filter((edition) => edition.distance_code === code);
+        if (!matching.length) return hasConfirmedFixtureDistance(sport, code) ? [code] : [];
+        return matching
+          .filter((edition) => hasConfirmedFixtureDistance(sport, code, edition.distance_km))
+          .map((edition) => fixtureDistanceLabel(code, edition.distance_km));
+      }),
+    ),
+  ];
+}

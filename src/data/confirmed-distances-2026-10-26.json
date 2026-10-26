@@ -239,5 +239,134 @@
         "sourceUrl": "https://mallorca.utmb.world/races/memorial"
       }
     }
+  },
+  "east-anglian-xc-league-race-1|2026-10-28": {
+    "summary": "Cross-country at Chilton Fields, Stowmarket: approximately 4-mile and 5.6-mile courses.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://eaccl.org.uk/winter-events/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "4mi (approx.)": {
+        "time": "14:00",
+        "note": "Distance and programme checked 2026-10-26: Short course approximately 4 miles. Long course is a separate approximately 5.6-mile option. Both start 14:00 Europe/London. Distances are approximate, not certified measurements. Source: https://eaccl.org.uk/winter-events/.",
+        "publicNote": "Short course approximately 4 miles. Long course is a separate approximately 5.6-mile option. Both start 14:00 Europe/London. Distances are approximate, not certified measurements."
+      },
+      "5.6mi (approx.)": {
+        "time": "14:00",
+        "note": "Distance and programme checked 2026-10-26: Long course approximately 5.6 miles. Short course is a separate approximately 4-mile option. Both start 14:00 Europe/London. Distances are approximate, not certified measurements. Source: https://eaccl.org.uk/winter-events/.",
+        "publicNote": "Long course approximately 5.6 miles. Short course is a separate approximately 4-mile option. Both start 14:00 Europe/London. Distances are approximate, not certified measurements."
+      }
+    },
+    "place": {
+      "city": "Stowmarket",
+      "county": "Suffolk"
+    }
+  },
+  "north-district-xc-league-race-1-grantown|2026-10-31": {
+    "summary": "Cross-country at Anagach Woods, Grantown-on-Spey, with five course distances by age group.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://sites.google.com/view/the-northleague/31st-of-october-26-grantown",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "1.7K": {
+        "time": "13:15",
+        "note": "Distance and programme checked 2026-10-26: U12 girls start 13:15; U12 boys start 13:20. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "U12 girls start 13:15; U12 boys start 13:20. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "U12 girls 13:15; boys 13:20"
+      },
+      "3.4K": {
+        "time": "13:25",
+        "note": "Distance and programme checked 2026-10-26: U14 girls start 13:25; U14 boys start 13:35. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "U14 girls start 13:25; U14 boys start 13:35. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "U14 girls 13:25; boys 13:35"
+      },
+      "4.3K": {
+        "time": "13:45",
+        "note": "Distance and programme checked 2026-10-26: U16 girls and U18 women start 13:45; U16 boys start 14:00. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "U16 girls and U18 women start 13:45; U16 boys start 14:00. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "U16 girls / U18 women 13:45; U16 boys 14:00"
+      },
+      "5.7K": {
+        "time": "14:15",
+        "note": "Distance and programme checked 2026-10-26: U18 men start 14:15. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "U18 men start 14:15. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "U18 men 14:15"
+      },
+      "8K": {
+        "time": "14:15",
+        "note": "Distance and programme checked 2026-10-26: Senior men and women start 14:15. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "Senior men and women start 14:15. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "Senior men and women 14:15"
+      }
+    },
+    "place": {
+      "city": "Grantown-on-Spey",
+      "county": "Highland"
+    }
+  },
+  "ea-uk-fixtures-north-yorkshire-and-south-durham-harrier-league|2026-10-31": {
+    "summary": "NYSD cross-country at Fox Rush Community Woodland, Redcar; distances and starts vary by age group.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "2K": {
+        "time": "11:00",
+        "note": "UK Fixtures fully licensed listing checked 2026-08-26.\n\nDistance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U10/U12 boys and girls. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U10/U12 boys and girls. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      },
+      "2.8K": {
+        "time": "11:10",
+        "note": "Distance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U14 boys and girls. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U14 boys and girls. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      },
+      "3.2K": {
+        "time": "11:20",
+        "note": "Distance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U16 boys and girls; one lap. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U16 boys and girls; one lap. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      },
+      "5.8K": {
+        "time": "11:35",
+        "note": "Distance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U18/senior/veteran women and U18/veteran 65 men; two laps. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U18/senior/veteran women and U18/veteran 65 men; two laps. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      },
+      "8.6K": {
+        "time": "12:15",
+        "note": "Distance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U20/senior/veteran men; three laps. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U20/senior/veteran men; three laps. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      }
+    },
+    "place": {
+      "city": "Redcar",
+      "county": "North Yorkshire"
+    }
+  },
+  "phoenix-manchester-hoofs-horns-and-paws-charity-run|2026-10-31": {
+    "summary": "A seven-hour timed trail event at Hardy Farm, Manchester.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.phoenixrunning.co.uk/events/manchester-hoofs-horns-and-paws-charity-run",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "7H": {
+        "time": "08:30",
+        "note": "Distance and programme checked 2026-10-26: Seven-hour timed event, 08:30–15:30 Europe/London. Total distance varies. Lap length remains conflicting: organiser states 2.91 miles, authorised EventEntry page states 3.28 miles/5.3 km. Do not claim a fixed total or confirmed lap distance; retry 2026-10-27 against the final race briefing. Source: https://www.phoenixrunning.co.uk/events/manchester-hoofs-horns-and-paws-charity-run.",
+        "publicNote": "Seven-hour timed event, 08:30–15:30 Europe/London. Total distance varies. Lap length remains conflicting: organiser states 2.91 miles, authorised EventEntry page states 3.28 miles/5.3 km. Do not claim a fixed total or confirmed lap distance; retry 2026-10-27 against the final race briefing.",
+        "label": "7-hour window: 08:30–15:30"
+      }
+    }
+  },
+  "wt-2026-world-triathlon-para-cup-san-pedro-de-la-paz|2026-10-31": {
+    "summary": "Paratriathlon: 750 m swim, 20 km bike and 5 km run.",
+    "timeZone": "America/Santiago",
+    "sourceUrl": "https://www.wcsanpedro.cl/noticias/24466",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "750m swim / 20K bike / 5K run": {
+        "time": "07:30",
+        "note": "Start time checked 2026-10-25: 07:30 local. Official 2026 athlete guide, visually checked page 19: 31 October World Para Cup first category PTS5 men starts 07:30; other para waves continue to PTWC2 women at 08:53. Source: https://cms.triathlon.org/assets/bd9f1ecb-5835-4501-9cba-d7a27c712504.pdf. Previous start time: TBC.\n\nDistance and programme checked 2026-10-26: Organiser's 2026 technical course programme: 750 m swim, 20 km bike, 5 km run. Stored kilometres are the combined 25.75 km, not the run leg. Prior source-checked 07:30 first para wave is retained; individual waves vary (America/Santiago). Source: https://www.wcsanpedro.cl/noticias/24466.",
+        "publicNote": "Organiser's 2026 technical course programme: 750 m swim, 20 km bike, 5 km run. Stored kilometres are the combined 25.75 km, not the run leg. Prior source-checked 07:30 first para wave is retained; individual waves vary (America/Santiago).",
+        "label": "First para wave 07:30; category starts vary"
+      }
+    }
   }
 }
