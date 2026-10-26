@@ -225,6 +225,69 @@
   }
 }
 
+/* Weather stays under the race name; no extra column or horizontal scrolling. */
+.result-weather summary::-webkit-details-marker {
+  display: none;
+}
+.result-weather[open] summary > svg:last-child {
+  transform: rotate(180deg);
+}
+@media (min-width: 1024px) {
+  .profile-weather-fixed {
+    table-layout: fixed;
+  }
+  .profile-weather-table th,
+  .profile-weather-table td {
+    padding: 8px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+  .profile-weather-fixed th:nth-child(1) {
+    width: 9%;
+  }
+  .profile-weather-fixed th:nth-child(2) {
+    width: 30%;
+  }
+  .profile-weather-fixed th:nth-child(3) {
+    width: 7%;
+  }
+  .profile-weather-fixed th:nth-child(4) {
+    width: 9%;
+  }
+  .profile-weather-fixed th:nth-child(5) {
+    width: 13%;
+  }
+  .profile-weather-fixed th:nth-child(6) {
+    width: 15%;
+  }
+  .profile-weather-fixed th:nth-child(7) {
+    width: 7%;
+  }
+  .profile-weather-fixed th:nth-child(8) {
+    width: 10%;
+  }
+}
+@media (max-width: 1023px) {
+  .profile-weather-table tbody {
+    gap: 8px;
+  }
+  .profile-weather-table tbody tr {
+    padding: 12px;
+    gap: 6px 12px;
+  }
+  .profile-weather-table td::before {
+    display: inline;
+    margin-right: 6px;
+  }
+  .profile-weather-table td[data-label="Race name"]::before {
+    display: none;
+  }
+  .profile-weather-table td {
+    font-size: 13px;
+  }
+}
+
 /* The same distance tint follows a result from claiming to profile history. */
 .distance-result,
 .profile-card-table tbody tr.distance-result {
