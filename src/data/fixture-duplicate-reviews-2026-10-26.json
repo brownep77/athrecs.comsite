@@ -276,18 +276,6 @@
     "note": "The organiser 13 October 2026 race-weekend briefing confirms the Saturday 5K at 09:00. Retain the organiser-sourced 5K record; the junior and Sunday 10-mile races are distinct. Original records and dependants remain in storage."
   },
   {
-    "duplicateSlug": "blickling-half-marathon-autumn",
-    "canonicalSlug": "autumn-blickling-half",
-    "date": "2026-10-18",
-    "duplicateEventId": 3060028,
-    "canonicalEventId": 5,
-    "duplicateDistances": ["Half"],
-    "retainedDistances": ["Half"],
-    "sourceUrl": "https://totalracetiming.co.uk/raceresults/669",
-    "checkedAt": "2026-10-26",
-    "note": "The organiser-linked 2026 results confirm the Autumn Blickling half marathon on 18 October at 09:00. Retain the permanent results-linked page, preserving all results and the separate spring event. Original records and dependants remain in storage."
-  },
-  {
     "duplicateSlug": "fleet-10k-5k",
     "canonicalSlug": "fleet-10k5k-peter-driver-memorial",
     "date": "2026-10-25",
@@ -298,29 +286,5 @@
     "sourceUrl": "https://fleet10k.co.uk/",
     "checkedAt": "2026-10-26",
     "note": "The organiser confirms both 5K and 10K at 09:30 on 25 October 2026 at the Harlington Centre. Both listings contain both distances; retain the original organiser-linked programme. Original records and dependants remain in storage."
-  },
-  {
-    "duplicateSlug": "ea-runevents-runthrough-haltemprice-10k-nr-hull",
-    "canonicalSlug": "haltemprice-10k",
-    "date": "2026-10-25",
-    "duplicateEventId": 3148007,
-    "canonicalEventId": 3060526,
-    "duplicateDistances": ["10K"],
-    "retainedDistances": ["10K"],
-    "sourceUrl": "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
-    "checkedAt": "2026-10-26",
-    "note": "Both records link the identical organiser programme: 25 October 2026, 10K, 09:00. Retain the permanent organiser-linked event page. Original records and dependants remain in storage."
-  },
-  {
-    "duplicateSlug": "evensplits-leeds-5k-series-2026",
-    "canonicalSlug": "leeds-5k-series-august",
-    "date": "2026-10-28",
-    "duplicateEventId": 3059589,
-    "canonicalEventId": 3060734,
-    "duplicateDistances": ["5K"],
-    "retainedDistances": ["5K"],
-    "sourceUrl": "https://racebest.com/races/xt975",
-    "checkedAt": "2026-10-26",
-    "note": "The organiser series calendar and authorised RaceBest listing confirm the same 28 October 2026 5K at the Brownlee Centre, 19:30. Retain the edition-specific entry route; other monthly editions remain unchanged. Original records and dependants remain in storage."
   }
 ]

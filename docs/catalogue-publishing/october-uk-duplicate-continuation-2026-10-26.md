@@ -6,9 +6,9 @@ Continue the owner's request to retain the complete programme when the same race
 
 After excluding the previously reviewed date-specific duplicates, broad name, token-subset and specific-source comparisons produced 65 candidate pairs. These are screening matches, not 65 confirmed duplicates. A separate database check found no repeated event/date/distance-code keys in the UK October scope.
 
-## Seven additional corrections
+## Seven reviewed corrections; four additional publication changes
 
-The shared publication filter suppresses seven redundant event/date listings, containing eight distance rows. Every suppressed distance remains on its retained programme. No database records, results, registrations, entry options or other dependants are deleted or moved. Only the reviewed October date is affected; other dates remain unchanged.
+During release, PR #998 independently resolved Blickling, Haltemprice and Leeds. This change preserves those decisions and adds the remaining **four** redundant event/date suppressions, containing **five** distance rows. All **seven** reviewed programmes are therefore covered, without counting the three overlaps twice. The combined review files contain 38 date-specific suppressions. Every suppressed distance remains on its retained programme. No database records, results, registrations, entry options or other dependants are deleted or moved. Only the reviewed October date is affected; other dates remain unchanged.
 
 | Date | Suppressed event | Retained event | Distances retained | Opened source |
 | --- | --- | --- | --- | --- |
@@ -18,9 +18,9 @@ The shared publication filter suppresses seven redundant event/date listings, co
 | 18 Oct | `blickling-half-marathon-autumn` | `autumn-blickling-half` | Half marathon | [Organiser-linked 2026 results](https://totalracetiming.co.uk/raceresults/669) |
 | 25 Oct | `fleet-10k-5k` | `fleet-10k5k-peter-driver-memorial` | 5K and 10K | [Organiser](https://fleet10k.co.uk/) |
 | 25 Oct | `ea-runevents-runthrough-haltemprice-10k-nr-hull` | `haltemprice-10k` | 10K | [Organiser's dated programme](https://www.runthrough.co.uk/event/haltemprice-10k-october-2026) |
-| 28 Oct | `evensplits-leeds-5k-series-2026` | `leeds-5k-series-august` | 5K | [Authorised October entry](https://racebest.com/races/xt975) |
+| 28 Oct | `leeds-5k-series-august` | `evensplits-leeds-5k-series-2026` | 5K | [Authorised October entry](https://racebest.com/races/xt975) |
 
-Live event IDs, source URLs, original distance codes and checked date are stored in the seven appended review records. Isle of Wight's stored 42.2/42.195 km values are the same marathon with five metres of rounding difference. All other suppressed distances match the retained stored distances exactly.
+Live event IDs, source URLs, original distance codes and checked date are stored in the four appended review records and three existing second-pass records. Isle of Wight's stored 42.2/42.195 km values are the same marathon with five metres of rounding difference. All other suppressed distances match the retained stored distances exactly.
 
 ## Starts and source qualifications
 
@@ -29,10 +29,10 @@ Live event IDs, source URLs, original distance codes and checked date are stored
 - Blickling: [the organiser](https://epicnorfolk.com/autumn-blickling-half-marathon/) explicitly links the 2026 results used above. Those results record 18 October 2026 at 09:00. [Race-day instructions](https://epicnorfolk.com/autumn-blickling-half-marathon-race-information/) independently give 09:00. The retained record previously had no start, while the duplicate stored 08:00. Only the reviewed 2026 retained edition receives 09:00.
 - Fleet: both organiser-listed distances start at 09:30; both are retained together.
 - Haltemprice: the exact-edition organiser page confirms 25 October and 09:00. Its results page status also identifies that date.
-- Leeds: [organiser calendar and FAQ](https://evensplits.events/leeds5k) and RaceBest both identify 28 October 2026 at the Brownlee Centre. RaceBest explicitly confirms 5 km and 19:30. The organiser's linked participant-instructions PDF points to a **2024** file and returned 403; it is not evidence for a different 2026 clock. No later wave is advertised in the opened October entry. Reconfirm on race day, 28 October, through the existing start-time process; no new automation is created. The retained October display name is corrected from its legacy August slug to “Leeds 5K Series — October”.
+- Leeds: [organiser calendar and FAQ](https://evensplits.events/leeds5k) and RaceBest both identify 28 October 2026 at the Brownlee Centre. RaceBest explicitly confirms 5 km and 19:30. The organiser's linked participant-instructions PDF points to a **2024** file and returned 403; it is not evidence for a different 2026 clock. No later wave is advertised in the opened October entry. Reconfirm on race day, 28 October, through the existing start-time process; no new automation is created. Retain the EvenSplits series identity selected by PR #998. Do not apply the opposite suppression proposed before that release: it would hide both listings.
 - Isle of Wight: date, marathon distance and Cowes identity are confirmed. Historical time remains conflicting: the indexed 2026 entry description says 11:00, while the opened organiser results archive lists 10:00; the current entry page has advanced to 2027. The retained 2026 start is explicitly unconfirmed, without guessing a timezone conversion. Stored source values remain intact. The organiser website and linked results page timed out. Further resolution requires its 2026 race-day instructions.
 
-The edition-specific projection confirms seven distance starts across six programmes and withholds the conflicting Isle of Wight start. No start is copied to a different date.
+The combined edition-specific projection confirms seven distance starts across six reviewed programmes and withholds the conflicting Isle of Wight start. This change adds four confirmed distance starts across three programmes; the other three starts are preserved from PR #998. No start is copied to a different date.
 
 ## Held and distinct cases
 
@@ -48,8 +48,8 @@ The edition-specific projection confirms seven distance starts across six progra
 ## Verification
 
 - Compared the exact live event IDs, dates and distance values for all seven pairs before release.
-- Checked shared date-filter suppression and retained-programme visibility, all eight retained distance rows, unchanged unrelated dates and idempotent filtering.
-- Checked reviewed starts, including the explicit Isle of Wight conflict and the October Leeds display name.
+- Checked all 38 combined review records for unique suppression keys, no reciprocal suppression and visible retained programmes. Checked all seven reviewed programmes, all eight retained distance rows, unchanged unrelated dates and idempotent filtering.
+- Checked reviewed starts, including the explicit Isle of Wight conflict and the retained EvenSplits Leeds series identity.
 - Ran TypeScript, public-catalogue and calendar verification. No database migration is needed for this reversible publication review.
 
 This pass adds no new fixtures and does not claim that every possible October alias or programme conflict has been resolved.
