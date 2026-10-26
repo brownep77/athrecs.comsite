@@ -1,8 +1,20 @@
+import duplicateReviews from "./fixture-duplicate-reviews-2026-10-26.json" with { type: "json" };
+
 /** Reviewed unsupported or duplicate dates stay in storage, outside public listings. */
 export const FIXTURE_DATE_REVIEWS: Record<
   string,
   { sourceUrl: string; checkedAt: string; note: string }
 > = {
+  ...Object.fromEntries(
+    duplicateReviews.map((review) => [
+      `${review.duplicateSlug}|${review.date}`,
+      {
+        sourceUrl: review.sourceUrl,
+        checkedAt: review.checkedAt,
+        note: `Duplicate programme. Use /races/${review.canonicalSlug} for ${review.date}; all confirmed distances remain on that listing. Original records remain available for audit.`,
+      },
+    ]),
+  ),
   "changsha-marathon|2026-10-25": {
     sourceUrl: "https://www.marathonchangsha.com/Detail/30",
     checkedAt: "2026-10-25",
