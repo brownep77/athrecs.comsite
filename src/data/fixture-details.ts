@@ -1,3 +1,4 @@
+import sixthDuplicateProgrammeStarts from "./duplicate-programme-starts-sixth-2026-10-26.json" with { type: "json" };
 import fifthDuplicateProgrammeStarts from "./duplicate-programme-starts-fifth-2026-10-26.json" with { type: "json" };
 import duplicateProgrammeStarts from "./duplicate-programme-starts-2026-10-26.json" with { type: "json" };
 import thirdDuplicateProgrammeStarts from "./duplicate-programme-starts-third-2026-10-26.json" with { type: "json" };
@@ -515,6 +516,7 @@ for (const [key, reviewed] of [
   ...Object.entries(thirdDuplicateProgrammeStarts),
   ...Object.entries(fourthDuplicateProgrammeStarts),
   ...Object.entries(fifthDuplicateProgrammeStarts),
+  ...Object.entries(sixthDuplicateProgrammeStarts),
 ]) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {

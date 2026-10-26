@@ -1,0 +1,187 @@
+{
+  "ljubljana-marathon|2026-10-17": {
+    "summary": "Ljubljana 10K starts at 16:30 on Saturday 17 October.",
+    "timeZone": "Europe/Ljubljana",
+    "sourceUrl": "https://ljubljanskimaraton.si/en/schedule",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "16:30",
+        "note": "The organiser’s 2026 schedule separates Saturday’s 10K from Sunday’s half and full marathon. Preserve both dates and all three existing distances.",
+        "publicNote": "Saturday 10K starts at 16:30 local time."
+      }
+    }
+  },
+  "ljubljana-marathon|2026-10-18": {
+    "summary": "Ljubljana half marathon and marathon start at 09:00 on Sunday 18 October.",
+    "timeZone": "Europe/Ljubljana",
+    "sourceUrl": "https://ljubljanskimaraton.si/en/schedule",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": "09:00",
+        "note": "The dated organiser schedule confirms both Sunday distances at 09:00. The original blank marathon start remains in storage; this review applies only to 18 October 2026.",
+        "publicNote": "Sunday half marathon starts at 09:00 local time."
+      },
+      "Marathon": {
+        "time": "09:00",
+        "note": "The dated organiser schedule confirms both Sunday distances at 09:00. The original blank marathon start remains in storage; this review applies only to 18 October 2026.",
+        "publicNote": "Sunday marathon starts at 09:00 local time."
+      }
+    }
+  },
+  "amazing-thailand-marathon-bangkok|2026-11-28": {
+    "summary": "Bangkok half marathon starts in waves from 04:00 to 04:30 on Saturday 28 November.",
+    "timeZone": "Asia/Bangkok",
+    "sourceUrl": "https://amazingthailandmarathon.com/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": "04:00",
+        "note": "The current 2026 organiser page and detailed timetable confirm the Saturday half marathon. Its start window qualifies the generic 04:00 summary; Sunday’s races remain separate.",
+        "publicNote": "Follow your assigned half-marathon wave on Saturday 28 November, between 04:00 and 04:30.",
+        "label": "Waves 04:00–04:30"
+      }
+    }
+  },
+  "amazing-thailand-marathon-bangkok|2026-11-29": {
+    "summary": "Bangkok marathon waves run from 02:00 to 02:30; the 10K has separate elite/fast and public starts.",
+    "timeZone": "Asia/Bangkok",
+    "sourceUrl": "https://amazingthailandmarathon.com/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "02:00",
+        "note": "The dated 2026 organiser timetable confirms 42.195km and 10km on Sunday. Retain both existing distances and their distinct wave scopes. The separately advertised 4.5km is outside this duplicate consolidation.",
+        "publicNote": "Follow your assigned marathon wave on Sunday 29 November, between 02:00 and 02:30.",
+        "label": "Waves 02:00–02:30"
+      },
+      "10K": {
+        "time": "06:00",
+        "note": "The dated 2026 organiser timetable confirms 42.195km and 10km on Sunday. Retain both existing distances and their distinct wave scopes. The separately advertised 4.5km is outside this duplicate consolidation.",
+        "publicNote": "10K elite and fast runners start at 06:00; public runners start between 06:15 and 06:30. Follow your assigned wave.",
+        "label": "Elite/fast 06:00 · Public 06:15–06:30"
+      }
+    }
+  },
+  "florence-marathon|2026-11-29": {
+    "summary": "Florence marathon starts at 08:30 on 29 November 2026.",
+    "timeZone": "Europe/Rome",
+    "sourceUrl": "https://www.firenzemarathon.it/en/marathon-regulation/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "note": "The 2026 organiser regulations confirm 29 November, 42.195km and 08:30. The separate Florence 10K record is not part of this duplicate pair.",
+        "publicNote": "Marathon starts at 08:30 local time; be in your assigned starting grid by 08:00."
+      }
+    }
+  },
+  "oberbank-linz-donau-marathon|2027-04-11": {
+    "summary": "Linz marathon is scheduled for 09:30 on 11 April 2027.",
+    "timeZone": "Europe/Vienna",
+    "sourceUrl": "https://www.linzmarathon.at/en/competitions/oberbank-marathon",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "09:30",
+        "note": "The organiser’s 2027 marathon page explicitly confirms 42.195km, 11 April and 09:30. The full timetable is not yet published; the race page marks its scheduled start subject to change.",
+        "publicNote": "Marathon is scheduled for 09:30 local time, subject to organiser changes."
+      }
+    }
+  },
+  "hofu-yomiuri-marathon|2026-12-06": {
+    "summary": "Hofu Yomiuri Marathon starts at 10:40 on 6 December 2026.",
+    "timeZone": "Asia/Tokyo",
+    "sourceUrl": "https://www.hofu-yomiuri.jp/english_guidelines/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "10:40",
+        "note": "The 57th edition guidelines and both elite application PDFs agree on 6 December 2026, 42.195km and 10:40. Certified intermediate splits are not additional race distances.",
+        "publicNote": "Marathon starts at 10:40 local time. Registration closes at 10:00."
+      }
+    }
+  },
+  "byd-singapore-international-marathon|2026-12-06": {
+    "summary": "Singapore marathon flags off at 04:30 on 6 December 2026; follow your assigned start pen.",
+    "timeZone": "Asia/Singapore",
+    "sourceUrl": "https://singaporeinternationalmarathon.com/events/byd-marathon/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "04:30",
+        "note": "The 2026 race page confirms 42.195km on 6 December at 04:30. The FAQ and September regulations require assigned pens; later pen clocks are not supplied. Entry status is qualified publicly because the race page says sold out while the FAQ describes limited international places; no blanket status correction is inferred.",
+        "publicNote": "Follow your assigned start pen. The race page says marathon entries are sold out; the organiser FAQ lists limited international places, so check eligibility and availability with the organiser.",
+        "label": "From 04:30 · Assigned start pen"
+      }
+    }
+  },
+  "marathon-comar-tunis-carthage|2026-12-06": {
+    "summary": "COMAR Tunis-Carthage marathon starts at 08:00 on 6 December 2026.",
+    "timeZone": "Africa/Tunis",
+    "sourceUrl": "https://marathon.comar.tn/fr/le-programme",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:00",
+        "note": "The 39th edition programme and regulations confirm 6 December 2026 and the 42.195km marathon at 08:00. The half marathon at 08:05 is a different distance and is not merged into the full marathon.",
+        "publicNote": "Marathon starts at 08:00 local time; the half marathon and shorter races have separate starts."
+      }
+    }
+  },
+  "gyeongju-marathon|2026-10-17": {
+    "summary": "Gyeongju marathon starts from 08:00 on 17 October 2026 in assigned pace groups.",
+    "timeZone": "Asia/Seoul",
+    "sourceUrl": "https://en.gyeongjumarathon.com/53",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:00",
+        "note": "The 2026 organiser participant terms and overseas registration notice confirm Saturday 17 October, full-marathon category and start from 08:00. Assembly at 07:00 is not the race start.",
+        "publicNote": "Follow your assigned pace group. Marathon and half-marathon runners start in pace groups from 08:00.",
+        "label": "From 08:00 · Assigned pace group"
+      }
+    }
+  },
+  "estepona-garden-marathon|2026-10-11": {
+    "summary": "Estepona marathon runners start at 08:30; wheelchair runners start at 08:20 on 11 October 2026.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://deporticket.blob.core.windows.net/awebs/maraton-costa-del-sol-estepona/guia-del-corredor-estepona-2026-639269763394362630.pdf",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "note": "The linked 2026 organiser runner guide confirms 11 October, the 42.195km finish and distinct runner/wheelchair starts on page 9. The current homepage has rolled to 2027; that date is not reused.",
+        "publicNote": "Marathon runners start at 08:30; wheelchair runners start at 08:20, from the municipal athletics stadium.",
+        "label": "Runners 08:30 · Wheelchairs 08:20"
+      }
+    }
+  },
+  "casablanca-international-marathon|2026-10-25": {
+    "summary": "Casablanca marathon starts at 07:00 on 25 October 2026.",
+    "timeZone": "Africa/Casablanca",
+    "sourceUrl": "https://www.casablancamarathon.com/en/actualite/programme-17e-edition-casablanca-marathon",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "note": "The organiser’s dated 22 October 2026 programme confirms 25 October, 42.195km and a single 07:00 marathon start. The runner guide agrees on the full-marathon clock; the half marathon and relay remain separate.",
+        "publicNote": "Marathon starts at 07:00 local time. Join the corral shown on your bib."
+      }
+    }
+  },
+  "amman-international-marathon|2026-10-02": {
+    "summary": "Amman marathon took place on 2 October 2026; its start time is not yet verified.",
+    "timeZone": "Asia/Amman",
+    "sourceUrl": "https://registration.runjordan.com/Event/Details/7",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": null,
+        "note": "Run Jordan’s dated entry programme explicitly lists the individual marathon on 2 October 2026; AIMS agrees on the date. Neither opened page supplies a start clock, and the organiser main site is inaccessible as readable content. Preserve the blank clock and the separate half/10K programme with its results.",
+        "publicNote": "Start time not yet verified for the 2 October 2026 marathon."
+      }
+    }
+  }
+}
