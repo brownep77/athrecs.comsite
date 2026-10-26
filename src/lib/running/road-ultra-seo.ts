@@ -1,4 +1,5 @@
 import { raceSearchTitle } from "../athrecs/race-search-title.ts";
+import { verifiedGuideOrganiser } from "../athrecs/race-organiser.ts";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { roadGuideModifiedAt } from "./guide-modified";
 import {
@@ -57,6 +58,7 @@ export function roadUltraHead(today: string, race?: RoadUltra) {
           name: `${race.name}${edition.label ? ` — ${edition.label}` : ""}`,
           sport: "Running",
           description: race.summary,
+          organizer: verifiedGuideOrganiser(race.slug, edition.url),
           startDate: edition.date,
           ...(edition.endDate ? { endDate: edition.endDate } : {}),
           eventStatus: "https://schema.org/EventScheduled",
