@@ -974,6 +974,7 @@ export function RacePageContent({
 
       <EditionList
         title="Past races"
+        eventSlug={event.slug}
         items={pastPreview}
         hidden={pastHidden}
         onResults={(id) => {
@@ -1307,6 +1308,7 @@ function EditionList({
   title,
   items,
   calendarEvent,
+  eventSlug = calendarEvent?.slug,
   hidden = 0,
   onResults,
   country,
@@ -1315,6 +1317,7 @@ function EditionList({
   title: string;
   items: EditionRow[];
   calendarEvent?: Parameters<typeof catalogueCalendarRace>[0];
+  eventSlug?: string;
   hidden?: number;
   onResults?: (id: number) => void;
   country?: string;
@@ -1333,8 +1336,8 @@ function EditionList({
         <div className="grid gap-2">
           {visibleItems.map((ed) => {
             const st = effectiveStatus(ed.event_date, ed.status as EntryStatus);
-            const publicNote = calendarEvent
-              ? (FIXTURE_DETAILS[`${calendarEvent.slug}|${ed.event_date}`]?.starts[ed.distance_code]
+            const publicNote = eventSlug
+              ? (FIXTURE_DETAILS[`${eventSlug}|${ed.event_date}`]?.starts[ed.distance_code]
                   ?.publicNote ?? ed.notes)
               : ed.notes;
             const start =
