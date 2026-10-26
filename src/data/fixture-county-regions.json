@@ -1,0 +1,3810 @@
+{
+  "alderley-edge-bypass-10k-alderley-edge": {
+    "country": "England",
+    "city": "Alderley Edge",
+    "area": "",
+    "oldCounty": "",
+    "county": "Cheshire",
+    "region": "North West"
+  },
+  "bourne-valley-half": {
+    "country": "England",
+    "city": "Andover",
+    "area": "Bourne Valley PYO",
+    "oldCounty": "South of England",
+    "county": "Hampshire",
+    "region": "South of England"
+  },
+  "pewsey-vale-ultra": {
+    "country": "England",
+    "city": "Andover",
+    "area": "Linkenholt Activity Center",
+    "oldCounty": "South of England",
+    "county": "Hampshire",
+    "region": "South of England"
+  },
+  "tough-mudder-south-west-spartan": {
+    "country": "England",
+    "city": "Badminton",
+    "area": "Badminton Estate, Badminton",
+    "oldCounty": "",
+    "county": "Gloucestershire",
+    "region": "South West"
+  },
+  "basildon-half-marathon-juniors-september": {
+    "country": "England",
+    "city": "Basildon",
+    "area": "Cranes Farm Road",
+    "oldCounty": "South of England",
+    "county": "Essex",
+    "region": "South of England"
+  },
+  "summer-series-5k-august": {
+    "country": "England",
+    "city": "Basildon",
+    "area": "Langdon Nature Discovery Park",
+    "oldCounty": "South of England",
+    "county": "Essex",
+    "region": "South of England"
+  },
+  "bath-two-tunnels-race-august": {
+    "country": "England",
+    "city": "Bath",
+    "area": "Brickfields Park",
+    "oldCounty": "Midlands",
+    "county": "Somerset",
+    "region": "South West"
+  },
+  "the-drop-bath": {
+    "country": "England",
+    "city": "Bath",
+    "area": "Lulu Caffe",
+    "oldCounty": "South of England",
+    "county": "Somerset",
+    "region": "South of England"
+  },
+  "bexley-10k": {
+    "country": "England",
+    "city": "Bexleyheath",
+    "area": "Danson Park",
+    "oldCounty": "South of England",
+    "county": "Greater London",
+    "region": "South of England"
+  },
+  "hyrox-birmingham": {
+    "country": "England",
+    "city": "Birmingham",
+    "area": "",
+    "oldCounty": "",
+    "county": "West Midlands",
+    "region": "West Midlands"
+  },
+  "junior-mini-great-birmingham-run": {
+    "country": "England",
+    "city": "Birmingham",
+    "area": "Alexander Stadium",
+    "oldCounty": "Midlands",
+    "county": "West Midlands",
+    "region": "Midlands"
+  },
+  "world-and-british-rowing-indoor-championships": {
+    "country": "England",
+    "city": "Birmingham",
+    "area": "",
+    "oldCounty": "",
+    "county": "West Midlands",
+    "region": "West Midlands"
+  },
+  "run-durham-hamsterley-10-miler-2019": {
+    "country": "England",
+    "city": "Bishop Auckland",
+    "area": "Hamsterley Forest",
+    "oldCounty": "North of England",
+    "county": "County Durham",
+    "region": "North of England"
+  },
+  "solstice-saunter": {
+    "country": "England",
+    "city": "Bolton Abbey",
+    "area": "",
+    "oldCounty": "",
+    "county": "North Yorkshire",
+    "region": "Yorkshire and the Humber"
+  },
+  "bournemouth-coastal-ten": {
+    "country": "England",
+    "city": "Bournemouth",
+    "area": "Hengistbury Head",
+    "oldCounty": "South of England",
+    "county": "Dorset",
+    "region": "South of England"
+  },
+  "step-into-christmas": {
+    "country": "England",
+    "city": "Bournemouth",
+    "area": "Southbourne Beach",
+    "oldCounty": "South of England",
+    "county": "Dorset",
+    "region": "South of England"
+  },
+  "weald-country-park-10k": {
+    "country": "England",
+    "city": "Brentwood",
+    "area": "Weald Country Park",
+    "oldCounty": "South of England",
+    "county": "Essex",
+    "region": "South of England"
+  },
+  "community-canal-run": {
+    "country": "England",
+    "city": "Bridgwater",
+    "area": "YMCA Bridgwater",
+    "oldCounty": "South of England",
+    "county": "Somerset",
+    "region": "South of England"
+  },
+  "farmmageddon": {
+    "country": "England",
+    "city": "Buntingford",
+    "area": "Hyde Hall Farm",
+    "oldCounty": "Midlands",
+    "county": "Hertfordshire",
+    "region": "East of England"
+  },
+  "moo-light-challenge": {
+    "country": "England",
+    "city": "Buntingford",
+    "area": "Hyde Hall Farm",
+    "oldCounty": "South of England",
+    "county": "Hertfordshire",
+    "region": "South of England"
+  },
+  "moo-rathon-calf-henk": {
+    "country": "England",
+    "city": "Buntingford",
+    "area": "Hyde Hall Farm",
+    "oldCounty": "Midlands",
+    "county": "Hertfordshire",
+    "region": "East of England"
+  },
+  "tarpley-20": {
+    "country": "England",
+    "city": "Bury St Edmunds",
+    "area": "",
+    "oldCounty": "",
+    "county": "Suffolk",
+    "region": "East of England"
+  },
+  "carlisle-resolution-5k-10k-carlisle": {
+    "country": "England",
+    "city": "Carlisle",
+    "area": "",
+    "oldCounty": "",
+    "county": "Cumbria",
+    "region": "North West"
+  },
+  "running-tribe-races-november": {
+    "country": "England",
+    "city": "Chalfont St Peter",
+    "area": "Chalfont St Peter Cricket Club",
+    "oldCounty": "South of England",
+    "county": "Buckinghamshire",
+    "region": "South of England"
+  },
+  "gb-ultras-chester-100": {
+    "country": "England",
+    "city": "Chester",
+    "area": "Chester",
+    "oldCounty": "",
+    "county": "Cheshire",
+    "region": "North West"
+  },
+  "gb-ultras-chester-50": {
+    "country": "England",
+    "city": "Chester",
+    "area": "Chester",
+    "oldCounty": "",
+    "county": "Cheshire",
+    "region": "North West"
+  },
+  "mbna-chester-10k": {
+    "country": "England",
+    "city": "Chester",
+    "area": "Chester",
+    "oldCounty": "",
+    "county": "Cheshire",
+    "region": "North West"
+  },
+  "west-wittering-beach-run": {
+    "country": "England",
+    "city": "Chichester",
+    "area": "West Wittering",
+    "oldCounty": "South of England",
+    "county": "West Sussex",
+    "region": "South of England"
+  },
+  "the-chislehurst-half-marathon": {
+    "country": "England",
+    "city": "Chislehurst",
+    "area": "Glebe Football Club",
+    "oldCounty": "South of England",
+    "county": "Greater London",
+    "region": "South of England"
+  },
+  "cleethorpes-ac-new-years-day-10k-cleethorpes": {
+    "country": "England",
+    "city": "Cleethorpes",
+    "area": "",
+    "oldCounty": "",
+    "county": "Lincolnshire",
+    "region": "Yorkshire and the Humber"
+  },
+  "north-lakes-half-marathon": {
+    "country": "England",
+    "city": "Cockermouth",
+    "area": "Town Centre",
+    "oldCounty": "North of England",
+    "county": "Cumbria",
+    "region": "North of England"
+  },
+  "colchester-10k": {
+    "country": "England",
+    "city": "Colchester",
+    "area": "Abbey Fields",
+    "oldCounty": "South of England",
+    "county": "Essex",
+    "region": "South of England"
+  },
+  "flycarb-autumn-classic": {
+    "country": "England",
+    "city": "Colchester",
+    "area": "Colchester Sports Park",
+    "oldCounty": "South of England",
+    "county": "Essex",
+    "region": "South of England"
+  },
+  "run-rabbit-trail-festival": {
+    "country": "England",
+    "city": "Corby",
+    "area": "Deene Park",
+    "oldCounty": "Midlands",
+    "county": "Northamptonshire",
+    "region": "Midlands"
+  },
+  "the-drop-darlington": {
+    "country": "England",
+    "city": "Darlington",
+    "area": "Up & Running",
+    "oldCounty": "North of England",
+    "county": "County Durham",
+    "region": "North of England"
+  },
+  "dentdale-run": {
+    "country": "England",
+    "city": "Dent",
+    "area": "",
+    "oldCounty": "",
+    "county": "Cumbria",
+    "region": "North West"
+  },
+  "durham-parkrun": {
+    "country": "England",
+    "city": "Durham",
+    "area": "Graham Sports Centre, Durham",
+    "oldCounty": "Durham",
+    "county": "County Durham",
+    "region": "North East"
+  },
+  "the-drop-durham": {
+    "country": "England",
+    "city": "Durham",
+    "area": "The Cartologist",
+    "oldCounty": "North of England",
+    "county": "County Durham",
+    "region": "North of England"
+  },
+  "mid-sussex-east-grinstead-10-mile": {
+    "country": "England",
+    "city": "East Grinstead",
+    "area": "East Grinstead RC",
+    "oldCounty": "South of England",
+    "county": "West Sussex",
+    "region": "South of England"
+  },
+  "ea-uk-fixtures-downs-league": {
+    "country": "England",
+    "city": "Epsom Downs",
+    "area": "Epsom Downs",
+    "oldCounty": "England",
+    "county": "Surrey",
+    "region": "South East"
+  },
+  "exeter-city-10k": {
+    "country": "England",
+    "city": "Exeter",
+    "area": "Clip 'n' Climb",
+    "oldCounty": "South of England",
+    "county": "Devon",
+    "region": "South of England"
+  },
+  "great-west-run": {
+    "country": "England",
+    "city": "Exeter",
+    "area": "",
+    "oldCounty": "",
+    "county": "Devon",
+    "region": "South West"
+  },
+  "green-lantern": {
+    "country": "England",
+    "city": "Exeter",
+    "area": "The Quay Climbing Centre",
+    "oldCounty": "South of England",
+    "county": "Devon",
+    "region": "South of England"
+  },
+  "haldon-halloween-twilight-run": {
+    "country": "England",
+    "city": "Exeter",
+    "area": "Haldon Forest",
+    "oldCounty": "South of England",
+    "county": "Devon",
+    "region": "South of England"
+  },
+  "exe-to-axe-20-mile-coastal-run": {
+    "country": "England",
+    "city": "Exmouth",
+    "area": "Heydays Restaurant",
+    "oldCounty": "South of England",
+    "county": "Devon",
+    "region": "South of England"
+  },
+  "the-brave-5k-10k": {
+    "country": "England",
+    "city": "Exmouth",
+    "area": "Sideshore",
+    "oldCounty": "South of England",
+    "county": "Devon",
+    "region": "South of England"
+  },
+  "folkestone-coastal-10k": {
+    "country": "England",
+    "city": "Folkestone",
+    "area": "Coastal Park",
+    "oldCounty": "South of England",
+    "county": "Kent",
+    "region": "South of England"
+  },
+  "rb-the-readymoney-ramble": {
+    "country": "England",
+    "city": "Fowey",
+    "area": "Fowey",
+    "oldCounty": "England",
+    "county": "Cornwall",
+    "region": "South West"
+  },
+  "chopwell-woods-christmas-trail-run": {
+    "country": "England",
+    "city": "Gateshead",
+    "area": "Chopwell Woods",
+    "oldCounty": "North of England",
+    "county": "Tyne and Wear",
+    "region": "North of England"
+  },
+  "gloucester-10k": {
+    "country": "England",
+    "city": "Gloucester",
+    "area": "Gloucester Park",
+    "oldCounty": "Midlands",
+    "county": "Gloucestershire",
+    "region": "South West"
+  },
+  "silverbacktrails-goarhland-v-trigs-challenge-ultra": {
+    "country": "England",
+    "city": "Goathland",
+    "area": "Village Hall",
+    "oldCounty": "North of England",
+    "county": "North Yorkshire",
+    "region": "North of England"
+  },
+  "st-andrews-day-run": {
+    "country": "England",
+    "city": "Gosport",
+    "area": "Alexandra Sports",
+    "oldCounty": "South of England",
+    "county": "Hampshire",
+    "region": "South of England"
+  },
+  "malvern-hills-18-miler": {
+    "country": "England",
+    "city": "Great Malvern",
+    "area": "North Quarry Car Park",
+    "oldCounty": "Midlands",
+    "county": "Worcestershire",
+    "region": "Midlands"
+  },
+  "rb-rsted-great-grimsby-10k-and-family-fun-run": {
+    "country": "England",
+    "city": "Grimsby",
+    "area": "Grimsby",
+    "oldCounty": "England",
+    "county": "Lincolnshire",
+    "region": "Yorkshire and the Humber"
+  },
+  "burton-leonard-10k": {
+    "country": "England",
+    "city": "Harrogate",
+    "area": "Burton Leonard",
+    "oldCounty": "North of England",
+    "county": "North Yorkshire",
+    "region": "North of England"
+  },
+  "the-drop-harrogate": {
+    "country": "England",
+    "city": "Harrogate",
+    "area": "Up & Running",
+    "oldCounty": "North of England",
+    "county": "North Yorkshire",
+    "region": "North of England"
+  },
+  "haxby-10k-haxby": {
+    "country": "England",
+    "city": "Haxby",
+    "area": "",
+    "oldCounty": "",
+    "county": "North Yorkshire",
+    "region": "Yorkshire and the Humber"
+  },
+  "mid-sussex-haywards-heath-10-mile": {
+    "country": "England",
+    "city": "Haywards Heath",
+    "area": "Victoria Park",
+    "oldCounty": "South of England",
+    "county": "West Sussex",
+    "region": "South of England"
+  },
+  "far-inflatable-5k-huntingdon": {
+    "country": "England",
+    "city": "Huntingdon",
+    "area": "Huntingdon, Brampton, Cambridgeshire",
+    "oldCounty": "England",
+    "county": "Cambridgeshire",
+    "region": "East of England"
+  },
+  "hardmoors-farndale-trail-races": {
+    "country": "England",
+    "city": "Hutton-le-Hole",
+    "area": "Village Hall",
+    "oldCounty": "North of England",
+    "county": "North Yorkshire",
+    "region": "North of England"
+  },
+  "ipswich-town-10k-charity-fun-run": {
+    "country": "England",
+    "city": "Ipswich",
+    "area": "Christchurch Park",
+    "oldCounty": "South of England",
+    "county": "Suffolk",
+    "region": "South of England"
+  },
+  "the-drop-kendal": {
+    "country": "England",
+    "city": "Kendal",
+    "area": "Podda & Wren Coffee Roasters",
+    "oldCounty": "North of England",
+    "county": "Cumbria",
+    "region": "North of England"
+  },
+  "beyond-the-lune-winter-ultra": {
+    "country": "England",
+    "city": "Kirkby Lonsdale",
+    "area": "The Royal Barn",
+    "oldCounty": "North West",
+    "county": "Cumbria",
+    "region": "North West"
+  },
+  "yorkshire-weekend-saunter-series-kirkstall-november": {
+    "country": "England",
+    "city": "Kirkstall",
+    "area": "Leeds/Liverpool Canal",
+    "oldCounty": "North of England",
+    "county": "West Yorkshire",
+    "region": "North of England"
+  },
+  "hertfordshire-half-marathon": {
+    "country": "England",
+    "city": "Knebworth",
+    "area": "Old Knebworth Lane",
+    "oldCounty": "Midlands",
+    "county": "Hertfordshire",
+    "region": "East of England"
+  },
+  "aberdeen-parkrun": {
+    "country": "Scotland",
+    "city": "Aberdeen",
+    "area": "Aberdeen Beach Esplanade",
+    "oldCounty": "Aberdeen",
+    "county": "Aberdeen City",
+    "region": null
+  },
+  "aberdeen-santa-run": {
+    "country": "Scotland",
+    "city": "Aberdeen",
+    "area": "Aberdeen Beach Front (Footdee end)",
+    "oldCounty": "Scotland",
+    "county": "Aberdeen City",
+    "region": null
+  },
+  "brewdog-christmas-run": {
+    "country": "Scotland",
+    "city": "Aberdeen",
+    "area": "Brewdog Castlegate",
+    "oldCounty": "Scotland",
+    "county": "Aberdeen City",
+    "region": null
+  },
+  "duthie-park-5k-10k-2026": {
+    "country": "Scotland",
+    "city": "Aberdeen",
+    "area": "Duthie Park",
+    "oldCounty": "Aberdeen",
+    "county": "Aberdeen City",
+    "region": null
+  },
+  "lindsays-national-masters-xc-championships-2027": {
+    "country": "Scotland",
+    "city": "Aberdeen",
+    "area": "Balgownie, Aberdeen",
+    "oldCounty": "Aberdeen",
+    "county": "Aberdeen City",
+    "region": null
+  },
+  "auchterarder-chilli-trail-race": {
+    "country": "Scotland",
+    "city": "Auchterarder",
+    "area": "Community School",
+    "oldCounty": "Scotland",
+    "county": "Perth and Kinross",
+    "region": null
+  },
+  "blair-castle-trail-weekender-saturday": {
+    "country": "Scotland",
+    "city": "Blair Atholl",
+    "area": "Blair Castle",
+    "oldCounty": "Scotland",
+    "county": "Perth and Kinross",
+    "region": null
+  },
+  "outrun-the-night-ultra": {
+    "country": "Scotland",
+    "city": "Dalkeith",
+    "area": "Dalkeith Country Park",
+    "oldCounty": "Scotland",
+    "county": "Midlothian",
+    "region": null
+  },
+  "foxtrail-5k-series-race-5": {
+    "country": "Scotland",
+    "city": "Dunbar",
+    "area": "Foxlake Adventures",
+    "oldCounty": "Scotland",
+    "county": "East Lothian",
+    "region": null
+  },
+  "foxtrailwinter-series-race-1": {
+    "country": "Scotland",
+    "city": "Dunbar",
+    "area": "Foxlake Adventures",
+    "oldCounty": "Scotland",
+    "county": "East Lothian",
+    "region": null
+  },
+  "templeton-10-mile-road-race": {
+    "country": "Scotland",
+    "city": "Dundee",
+    "area": "Clatto Country Park",
+    "oldCounty": "Scotland",
+    "county": "Dundee City",
+    "region": null
+  },
+  "blast-meadows-5km-october": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "The Meadows",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "edinburgh-christmas-run-5k-10k": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Inverleith Park",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "edinburgh-marathon": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Potterow",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "edinburgh-marathon-festival-10k": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Holyrood Park",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "edinburgh-marathon-festival-5k": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Holyrood Park",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "edinburgh-marathon-festival-junior-races": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Holyrood Park",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "edinburgh-marathon-festival-team-relay": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Holyrood Park Road",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "edinburgh-morun-10k": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Holyrood Park",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "edinburgh-parkrun": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Edinburgh Promenade",
+    "oldCounty": "Edinburgh",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "hot-chocolate-5k-10k-edinburgh": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Gypsy Brae Recreation Ground",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "kilomathon-262k": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "BT Murrayfield Stadium",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "kilomathon-655k": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Clark Road Cycle Path",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "kilomathon-scotland-131k": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Ocean Terminal",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "scottish-national-short-course-open-swimming-championships": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Edinburgh",
+    "oldCounty": "Edinburgh",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "the-drop-edinburgh": {
+    "country": "Scotland",
+    "city": "Edinburgh",
+    "area": "Up & Running",
+    "oldCounty": "Scotland",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "the-chilled-20-mile-race": {
+    "country": "Scotland",
+    "city": "Elgin",
+    "area": "Morriston Playing Fields",
+    "oldCounty": "Scotland",
+    "county": "Moray",
+    "region": null
+  },
+  "falkirk-ultra-race": {
+    "country": "Scotland",
+    "city": "Falkirk",
+    "area": "Callendar Park",
+    "oldCounty": "Scotland",
+    "county": "Falkirk",
+    "region": null
+  },
+  "kelpies-half-marathon": {
+    "country": "Scotland",
+    "city": "Falkirk",
+    "area": "Helix Park",
+    "oldCounty": "Scotland",
+    "county": "Falkirk",
+    "region": null
+  },
+  "kelpies-supernova-5k-saturday": {
+    "country": "Scotland",
+    "city": "Falkirk",
+    "area": "Helix Park & The Kelpies",
+    "oldCounty": "Scotland",
+    "county": "Falkirk",
+    "region": null
+  },
+  "supernova-kelpies-5k-friday": {
+    "country": "Scotland",
+    "city": "Falkirk",
+    "area": "Helix Park & The Kelpies",
+    "oldCounty": "Scotland",
+    "county": "Falkirk",
+    "region": null
+  },
+  "sidlaw-ultra": {
+    "country": "Scotland",
+    "city": "Forfar",
+    "area": "Glamis Castle",
+    "oldCounty": "Scotland",
+    "county": "Angus",
+    "region": null
+  },
+  "fraserburgh-half-marathon": {
+    "country": "Scotland",
+    "city": "Fraserburgh",
+    "area": "South Links Pavilion",
+    "oldCounty": "Scotland",
+    "county": "Aberdeenshire",
+    "region": null
+  },
+  "3k-on-the-green-august": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Glasgow Green",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "acorn-south-by-five-kings-park": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "King's Park",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "acorn-south-by-five-linn-park": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Linn Park",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "barclays-hampden-running-festival-2026": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Hampden Park",
+    "oldCounty": "Glasgow",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "christmas-cracker-glasgow": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Kelvingrove Park",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "glasgow-morun-10k": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Glasgow Green",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "glasgow-to-edinburgh-double-marathon-sums-2": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Riverside Museum",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "hyrox-glasgow": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "",
+    "oldCounty": "",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "jimmy-irvine-achilles-heel-bella-10k": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Bellahouston Park",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "mens-10k-glasgow": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Riverside Transport Museum",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "pollok-park-5k-10k-august": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Pollok Park",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "pollok-parkrun": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Pollok Park, Glasgow",
+    "oldCounty": "Glasgow",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "queens-park-5k-10k-october-4ho": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Queen's Park",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "scottish-inter-district-xc-championships-2027": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Alexandra Park, Glasgow",
+    "oldCounty": "Glasgow",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "victoria-park-glasgow-5k-10k": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "",
+    "oldCounty": "",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "womens-10k-glasgow": {
+    "country": "Scotland",
+    "city": "Glasgow",
+    "area": "Riverside Transport Museum",
+    "oldCounty": "Scotland",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "8-hour-gullane-challenge-nu-limits-running": {
+    "country": "Scotland",
+    "city": "Gullane",
+    "area": "Gullane Beach",
+    "oldCounty": "Scotland",
+    "county": "East Lothian",
+    "region": null
+  },
+  "cluny-castle-running-festival": {
+    "country": "Scotland",
+    "city": "Inverurie",
+    "area": "Cluny Castle",
+    "oldCounty": "Scotland",
+    "county": "Aberdeenshire",
+    "region": null
+  },
+  "kilmacolm-running-festival": {
+    "country": "Scotland",
+    "city": "Kilmacolm",
+    "area": "Birkmyre Park Fitness Gym",
+    "oldCounty": "Scotland",
+    "county": "Inverclyde",
+    "region": null
+  },
+  "culbin-forest-8-hour-challenge-nu-limits-running": {
+    "country": "Scotland",
+    "city": "Kintessack",
+    "area": "Culbin Forest",
+    "oldCounty": "Scotland",
+    "county": "Moray",
+    "region": null
+  },
+  "scottish-short-course-cross-country-championships": {
+    "country": "Scotland",
+    "city": "Kirkcaldy",
+    "area": "Kirkcaldy High School",
+    "oldCounty": "Scotland",
+    "county": "Fife",
+    "region": null
+  },
+  "east-grinstead-triathlon-2027": {
+    "country": "United Kingdom",
+    "city": "East Grinstead",
+    "area": "Kings Centre",
+    "oldCounty": "",
+    "county": "West Sussex",
+    "region": "South East"
+  },
+  "tour-de-france-2027-stage-1": {
+    "country": "United Kingdom",
+    "city": "Edinburgh",
+    "area": "",
+    "oldCounty": "",
+    "county": "City of Edinburgh",
+    "region": null
+  },
+  "the-glasgow-ultra-gb": {
+    "country": "United Kingdom",
+    "city": "Glasgow",
+    "area": "",
+    "oldCounty": "",
+    "county": "Glasgow City",
+    "region": null
+  },
+  "run4all-neath-santa-run-gb": {
+    "country": "Wales",
+    "city": "Aberavon",
+    "area": "",
+    "oldCounty": "",
+    "county": "Neath Port Talbot",
+    "region": null
+  },
+  "caerphilly-5k-gb": {
+    "country": "Wales",
+    "city": "Caerphilly",
+    "area": "",
+    "oldCounty": "",
+    "county": "Caerphilly",
+    "region": null
+  },
+  "big-moose-ultra-fun-run": {
+    "country": "Wales",
+    "city": "Cardiff",
+    "area": "Bute Park",
+    "oldCounty": "Wales",
+    "county": "Cardiff",
+    "region": null
+  },
+  "hyrox-cardiff": {
+    "country": "Wales",
+    "city": "Cardiff",
+    "area": "",
+    "oldCounty": "",
+    "county": "Cardiff",
+    "region": null
+  },
+  "inflatable-5k-cardiff": {
+    "country": "Wales",
+    "city": "Cardiff",
+    "area": "Heath Park",
+    "oldCounty": "Wales",
+    "county": "Cardiff",
+    "region": null
+  },
+  "wa-national-juvenile-championships-day-1-2-u16-7240613": {
+    "country": "Ireland",
+    "city": "AIT International Arena, Athlone",
+    "area": "AIT International Arena, Athlone (IRL)",
+    "oldCounty": "",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-national-juvenile-championships-day-1-2-u18-7246692": {
+    "country": "Ireland",
+    "city": "AIT International Arena, Athlone",
+    "area": "AIT International Arena, Athlone (IRL)",
+    "oldCounty": "",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-national-juvenile-championships-day-3-u16-7240612": {
+    "country": "Ireland",
+    "city": "AIT International Arena, Athlone",
+    "area": "AIT International Arena, Athlone (IRL)",
+    "oldCounty": "",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-national-juvenile-indoor-championships-day-3-u18-7246797": {
+    "country": "Ireland",
+    "city": "AIT International Arena, Athlone",
+    "area": "AIT International Arena, Athlone (IRL)",
+    "oldCounty": "AIT International Arena, Athlone",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-national-juvenile-indoor-championships-day-3-u20-7246796": {
+    "country": "Ireland",
+    "city": "AIT International Arena, Athlone",
+    "area": "AIT International Arena, Athlone (IRL)",
+    "oldCounty": "AIT International Arena, Athlone",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-aai-games-7217447": {
+    "country": "Ireland",
+    "city": "National Indoor Arena, Abbotstown, Dublin",
+    "area": "National Indoor Arena, Abbotstown, Dublin (IRL)",
+    "oldCounty": "",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "wa-irish-indoor-combined-events-championships-7217448": {
+    "country": "Ireland",
+    "city": "National Indoor Arena, Abbotstown, Dublin",
+    "area": "National Indoor Arena, Abbotstown, Dublin (IRL)",
+    "oldCounty": "",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "wa-irish-senior-indoor-championships-7234198": {
+    "country": "Ireland",
+    "city": "National Indoor Arena, Abbotstown, Dublin",
+    "area": "National Indoor Arena, Abbotstown, Dublin (IRL)",
+    "oldCounty": "",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "wa-national-indoor-league-final-7246791": {
+    "country": "Ireland",
+    "city": "National Indoor Arena, Abbotstown, Dublin",
+    "area": "National Indoor Arena, Abbotstown, Dublin (IRL)",
+    "oldCounty": "National Indoor Arena, Abbotstown, Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "wa-national-indoor-league-r1-7246757": {
+    "country": "Ireland",
+    "city": "National Indoor Arena, Abbotstown, Dublin",
+    "area": "National Indoor Arena, Abbotstown, Dublin (IRL)",
+    "oldCounty": "National Indoor Arena, Abbotstown, Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "wa-track-field-live-3-7246327": {
+    "country": "Ireland",
+    "city": "National Indoor Arena, Abbotstown, Dublin",
+    "area": "National Indoor Arena, Abbotstown, Dublin (IRL)",
+    "oldCounty": "National Indoor Arena, Abbotstown, Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "wa-track-field-live-5-7246367": {
+    "country": "Ireland",
+    "city": "National Indoor Arena, Abbotstown, Dublin",
+    "area": "National Indoor Arena, Abbotstown, Dublin (IRL)",
+    "oldCounty": "National Indoor Arena, Abbotstown, Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "wa-track-field-live-meet-2-7244803": {
+    "country": "Ireland",
+    "city": "National Indoor Arena, Abbotstown, Dublin",
+    "area": "National Indoor Arena, Abbotstown, Dublin (IRL)",
+    "oldCounty": "National Indoor Arena, Abbotstown, Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "wa-track-field-live-nia-7245417": {
+    "country": "Ireland",
+    "city": "National Indoor Arena, Abbotstown, Dublin",
+    "area": "National Indoor Arena, Abbotstown, Dublin (IRL)",
+    "oldCounty": "National Indoor Arena, Abbotstown, Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "wa-irish-u20-indoor-championships-7246789": {
+    "country": "Ireland",
+    "city": "TUS Athlone Track, Athlone",
+    "area": "TUS Athlone Track, Athlone (IRL)",
+    "oldCounty": "TUS Athlone Track, Athlone",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-irish-u23-indoor-championships-7246790": {
+    "country": "Ireland",
+    "city": "TUS Athlone Track, Athlone",
+    "area": "TUS Athlone Track, Athlone (IRL)",
+    "oldCounty": "",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-national-indoor-league-rd-2-7234201": {
+    "country": "Ireland",
+    "city": "TUS Athlone Track, Athlone",
+    "area": "TUS Athlone Track, Athlone (IRL)",
+    "oldCounty": "",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-national-juveniles-day-1-2-u20-7246792": {
+    "country": "Ireland",
+    "city": "TUS Athlone Track, Athlone",
+    "area": "TUS Athlone Track, Athlone (IRL)",
+    "oldCounty": "TUS Athlone Track, Athlone",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-track-field-live-jumps-jamboree-7244855": {
+    "country": "Ireland",
+    "city": "TUS Athlone Track, Athlone",
+    "area": "TUS Athlone Track, Athlone (IRL)",
+    "oldCounty": "TUS Athlone Track, Athlone",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "wa-irish-combined-event-championships-7247194": {
+    "country": "Ireland",
+    "city": "Tullamore Harriers AC Stadium, Tullamore",
+    "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+    "oldCounty": "",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "wa-irish-u20-championships-7242397": {
+    "country": "Ireland",
+    "city": "Tullamore Harriers AC Stadium, Tullamore",
+    "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+    "oldCounty": "",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "wa-irish-u23-championships-7242411": {
+    "country": "Ireland",
+    "city": "Tullamore Harriers AC Stadium, Tullamore",
+    "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+    "oldCounty": "",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "wa-irish-winter-throwing-championships-7217553": {
+    "country": "Ireland",
+    "city": "Tullamore Harriers AC Stadium, Tullamore",
+    "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+    "oldCounty": "",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "wa-national-juvenile-championships-7242299": {
+    "country": "Ireland",
+    "city": "Tullamore Harriers AC Stadium, Tullamore",
+    "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+    "oldCounty": "",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "wa-national-juvenile-championships-day-1-u18-7247193": {
+    "country": "Ireland",
+    "city": "Tullamore Harriers AC Stadium, Tullamore",
+    "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+    "oldCounty": "",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "wa-national-juvenile-championships-u18-7246829": {
+    "country": "Ireland",
+    "city": "Tullamore Harriers AC Stadium, Tullamore",
+    "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+    "oldCounty": "",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "wa-national-juvenile-championships-u20-7247542": {
+    "country": "Ireland",
+    "city": "Tullamore Harriers AC Stadium, Tullamore",
+    "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+    "oldCounty": "",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "wa-national-league-preliminary-round-7242409": {
+    "country": "Ireland",
+    "city": "Tullamore Harriers AC Stadium, Tullamore",
+    "area": "Tullamore Harriers AC Stadium, Tullamore (IRL)",
+    "oldCounty": "",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "abbeyknockmoy-5k-10k-half-marathon-2027": {
+    "country": "Ireland",
+    "city": "Abbeyknockmoy",
+    "area": "Abbeyknockmoy and surrounding certified road routes",
+    "oldCounty": "County Galway",
+    "county": "County Galway",
+    "region": "Connacht"
+  },
+  "abbott-longford-marathon-2026": {
+    "country": "Ireland",
+    "city": "Longford",
+    "area": "Longford",
+    "oldCounty": "County Longford",
+    "county": "County Longford",
+    "region": "Leinster"
+  },
+  "achill-half-marathon-10k": {
+    "country": "Ireland",
+    "city": "Keel",
+    "area": "Achill Island",
+    "oldCounty": "County Mayo",
+    "county": "County Mayo",
+    "region": "Connacht"
+  },
+  "achillgreenway-parkrun": {
+    "country": "Ireland",
+    "city": "Achill Greenway",
+    "area": "Achill Greenway",
+    "oldCounty": "Mayo",
+    "county": "Mayo",
+    "region": "Connacht"
+  },
+  "albertcollege-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Albert College juniors",
+    "area": "Albert College Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "annaloughan-loop-10k-trail-run": {
+    "country": "Ireland",
+    "city": "Jenkinstown",
+    "area": "Jenkinstown",
+    "oldCounty": "Louth",
+    "county": "Louth",
+    "region": "Leinster"
+  },
+  "antrim-coast-half-marathon": {
+    "country": "Northern Ireland",
+    "city": "Larne",
+    "area": "Larne",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "antrim-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Antrim",
+    "area": "Loughshore Park",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "antrimcastlegardens-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Antrim Castle Gardens juniors",
+    "area": "Antrim Castle Gardens juniors",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "ardgillan-parkrun": {
+    "country": "Ireland",
+    "city": "Ardgillan",
+    "area": "Ardgillan Castle and Demesne",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "ardsforestpark-parkrun": {
+    "country": "Ireland",
+    "city": "Ards Forest Park",
+    "area": "Ards Forest Park",
+    "oldCounty": "Donegal",
+    "county": "Donegal",
+    "region": "Ulster"
+  },
+  "arklowduckpond-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Arklow Duck Pond juniors",
+    "area": "Arklow Duck Pond",
+    "oldCounty": "Wicklow",
+    "county": "Wicklow",
+    "region": "Leinster"
+  },
+  "armagh-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Armagh",
+    "area": "Palace Demesne Public Park",
+    "oldCounty": "Armagh",
+    "county": "Armagh",
+    "region": "Ulster"
+  },
+  "art-oneill-challenge": {
+    "country": "Ireland",
+    "city": "Dublin",
+    "area": "Dublin",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "athlonersc-parkrun": {
+    "country": "Ireland",
+    "city": "Athlone RSC",
+    "area": "Athlone RSC",
+    "oldCounty": "Offaly",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "athy-half-marathon-10k-5k": {
+    "country": "Ireland",
+    "city": "Athy",
+    "area": "Athy",
+    "oldCounty": "Kildare",
+    "county": "Kildare",
+    "region": "Leinster"
+  },
+  "avondaleforest-parkrun": {
+    "country": "Ireland",
+    "city": "Avondale Forest",
+    "area": "Avondale Forest Park",
+    "oldCounty": "Wicklow",
+    "county": "Wicklow",
+    "region": "Leinster"
+  },
+  "balbriggan-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Balbriggan juniors",
+    "area": "Bremore Castle Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "ballina-parkrun": {
+    "country": "Ireland",
+    "city": "Ballina",
+    "area": "Belleek",
+    "oldCounty": "Mayo",
+    "county": "Mayo",
+    "region": "Connacht"
+  },
+  "ballinamoregreenway-parkrun": {
+    "country": "Ireland",
+    "city": "Ballinamore Greenway",
+    "area": "Ballinamore Greenway",
+    "oldCounty": "Cavan",
+    "county": "Cavan",
+    "region": "Ulster"
+  },
+  "ballincollig-parkrun": {
+    "country": "Ireland",
+    "city": "Ballincollig",
+    "area": "The Regional Park",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "ballincolligregional-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Ballincollig Regional juniors",
+    "area": "Ballincollig Regional Park",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "ballycastle-to-waterfoot-trail-marathon": {
+    "country": "Northern Ireland",
+    "city": "Ballycastle",
+    "area": "Ballycastle",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "ballygunner-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Ballygunner juniors",
+    "area": "Ballygunner juniors",
+    "oldCounty": "Waterford",
+    "county": "Waterford",
+    "region": "Munster"
+  },
+  "ballymount-parkrun": {
+    "country": "Ireland",
+    "city": "Ballymount",
+    "area": "Ballymount",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "baltinglasspark-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Baltinglass Park juniors",
+    "area": "Baltinglass Park juniors",
+    "oldCounty": "Wicklow",
+    "county": "Wicklow",
+    "region": "Leinster"
+  },
+  "beara-eyeries-5-mile-2026": {
+    "country": "Ireland",
+    "city": "Eyeries",
+    "area": "Eyeries",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "beechpark-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Beechpark juniors",
+    "area": "Beechpark",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "belcamp-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Belcamp juniors",
+    "area": "Belcamp juniors",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "bereisland-parkrun": {
+    "country": "Ireland",
+    "city": "Bere Island",
+    "area": "Bere Island",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "blarney-stone-mad-half-marathon-2027": {
+    "country": "Ireland",
+    "city": "Blarney",
+    "area": "Blarney and the north Cork countryside",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "bluestack-way-ultra": {
+    "country": "Ireland",
+    "city": "Donegal / Letterbarrow",
+    "area": "Donegal / Letterbarrow",
+    "oldCounty": "Donegal",
+    "county": "Donegal",
+    "region": "Ulster"
+  },
+  "bobby-rea-xc-ni-ulster-even-age-championships": {
+    "country": "Northern Ireland",
+    "city": "Belfast",
+    "area": "Belfast",
+    "oldCounty": "Down",
+    "county": "Down",
+    "region": "Ulster"
+  },
+  "borrisokanetown-parkrun": {
+    "country": "Ireland",
+    "city": "Borrisokane Town",
+    "area": "Borrisokane Town Park",
+    "oldCounty": "Offaly",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "brandon-bay-run-5k-2027": {
+    "country": "Ireland",
+    "city": "Fahamore",
+    "area": "Brandon Bay",
+    "oldCounty": "County Kerry",
+    "county": "County Kerry",
+    "region": "Munster"
+  },
+  "bray-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Bray juniors",
+    "area": "People’s park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "brickfields-parkrun": {
+    "country": "Ireland",
+    "city": "Brickfields",
+    "area": "Brickfields Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "broadmeadow-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Broadmeadow juniors",
+    "area": "Lakeland Forum",
+    "oldCounty": "Fermanagh",
+    "county": "Fermanagh",
+    "region": "Ulster"
+  },
+  "broadmeadowlinear-parkrun": {
+    "country": "Ireland",
+    "city": "Broadmeadow Linear",
+    "area": "Broadmeadow Linear",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "buncrana-parkrun": {
+    "country": "Ireland",
+    "city": "Buncrana",
+    "area": "Aileach Rd, Buncrana",
+    "oldCounty": "Donegal",
+    "county": "Donegal",
+    "region": "Ulster"
+  },
+  "bundoran-10-mile-2027": {
+    "country": "Ireland",
+    "city": "Bundoran",
+    "area": "Bundoran seafront and Wild Atlantic Way",
+    "oldCounty": "County Donegal",
+    "county": "County Donegal",
+    "region": "Ulster"
+  },
+  "bundoran-5k-fun-run-2027": {
+    "country": "Ireland",
+    "city": "Bundoran",
+    "area": "Bundoran",
+    "oldCounty": "County Donegal",
+    "county": "County Donegal",
+    "region": "Ulster"
+  },
+  "bundoranpromenade-parkrun": {
+    "country": "Ireland",
+    "city": "Bundoran Promenade",
+    "area": "Bundoran Promenade",
+    "oldCounty": "Sligo",
+    "county": "Sligo",
+    "region": "Connacht"
+  },
+  "bushydublin-parkrun": {
+    "country": "Ireland",
+    "city": "Bushy, Dublin",
+    "area": "Bushy Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "cabinteely-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Cabinteely juniors",
+    "area": "Cabinteely juniors",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "cabinteely-parkrun": {
+    "country": "Ireland",
+    "city": "Cabinteely",
+    "area": "Cabinteely Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "camrosscommunitypark-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Camross Community Park juniors",
+    "area": "Camross Community Park juniors",
+    "oldCounty": "Laois",
+    "county": "Laois",
+    "region": "Leinster"
+  },
+  "cape-clear-island-races-2027": {
+    "country": "Ireland",
+    "city": "Cape Clear Island",
+    "area": "Cape Clear Island and the West Cork coast",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "carlowtown-parkrun": {
+    "country": "Ireland",
+    "city": "Carlow Town",
+    "area": "Barrow Trail",
+    "oldCounty": "Carlow",
+    "county": "Carlow",
+    "region": "Leinster"
+  },
+  "castle-to-castle": {
+    "country": "Northern Ireland",
+    "city": "Carrickfergus / Belfast",
+    "area": "Carrickfergus / Belfast",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "castlebar-parkrun": {
+    "country": "Ireland",
+    "city": "Castlebar",
+    "area": "Castlebar Tennis Club",
+    "oldCounty": "Mayo",
+    "county": "Mayo",
+    "region": "Connacht"
+  },
+  "castleblayney-parkrun": {
+    "country": "Ireland",
+    "city": "Castleblayney",
+    "area": "Castleblayney",
+    "oldCounty": "Monaghan",
+    "county": "Monaghan",
+    "region": "Ulster"
+  },
+  "castlehaven-parkrun": {
+    "country": "Ireland",
+    "city": "Castlehaven",
+    "area": "Rineen Woods",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "castlerea-parkrun": {
+    "country": "Ireland",
+    "city": "Castlerea",
+    "area": "The Demesne",
+    "oldCounty": "Roscommon",
+    "county": "Roscommon",
+    "region": "Connacht"
+  },
+  "castlewellan-christmas-cracker": {
+    "country": "Northern Ireland",
+    "city": "Castlewellan",
+    "area": "Castlewellan",
+    "oldCounty": "County Down",
+    "county": "County Down",
+    "region": "Ulster"
+  },
+  "castlewellan-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Castlewellan",
+    "area": "Castlewellan Forest Park",
+    "oldCounty": "Down",
+    "county": "Down",
+    "region": "Ulster"
+  },
+  "celtic-warrior-running-races": {
+    "country": "Ireland",
+    "city": "Mullingar",
+    "area": "Lilliput Adventure Centre, Lough Ennell",
+    "oldCounty": "County Westmeath",
+    "county": "County Westmeath",
+    "region": "Leinster"
+  },
+  "cherryorchard-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Cherry Orchard juniors",
+    "area": "Cherry Orchard Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "christie-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Christie",
+    "area": "Christie",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "citypark-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Craigavon",
+    "area": "Citypark Park, Craigavon",
+    "oldCounty": "Armagh",
+    "county": "Armagh",
+    "region": "Ulster"
+  },
+  "clane-gaa-5k-10k-2026": {
+    "country": "Ireland",
+    "city": "Clane",
+    "area": "Clane GAA",
+    "oldCounty": "County Kildare",
+    "county": "County Kildare",
+    "region": "Leinster"
+  },
+  "clare-burren-marathon-challenge-2027": {
+    "country": "Ireland",
+    "city": "Ballyvaughan",
+    "area": "The Burren",
+    "oldCounty": "County Clare",
+    "county": "County Clare",
+    "region": "Munster"
+  },
+  "claremorris-parkrun": {
+    "country": "Ireland",
+    "city": "Claremorris",
+    "area": "McMahon Park",
+    "oldCounty": "Mayo",
+    "county": "Mayo",
+    "region": "Connacht"
+  },
+  "clarisford-parkrun": {
+    "country": "Ireland",
+    "city": "Clarisford",
+    "area": "Clarisford Park",
+    "oldCounty": "Limerick",
+    "county": "Limerick",
+    "region": "Munster"
+  },
+  "clashduv-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Clashduv juniors",
+    "area": "Clashduv Park",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "claudycountrypark-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Claudy Country Park",
+    "area": "Claudy Country Park",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "clearstream-celebration-of-life-5k-2026": {
+    "country": "Ireland",
+    "city": "Cork",
+    "area": "The Marina",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "cleveragh-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Cleveragh juniors",
+    "area": "Cleveragh juniors",
+    "oldCounty": "Sligo",
+    "county": "Sligo",
+    "region": "Connacht"
+  },
+  "clonakilty-parkrun": {
+    "country": "Ireland",
+    "city": "Clonakilty",
+    "area": "The Show Grounds",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "clonburwoods-parkrun": {
+    "country": "Ireland",
+    "city": "Clonbur Woods",
+    "area": "Clonbur Woods",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "clonmel-parkrun": {
+    "country": "Ireland",
+    "city": "Clonmel",
+    "area": "Gas House Bridge",
+    "oldCounty": "Tipperary",
+    "county": "Tipperary",
+    "region": "Munster"
+  },
+  "clontarf-half-marathon-autumn-2026": {
+    "country": "Ireland",
+    "city": "Dublin",
+    "area": "EastPoint Business Park, Clontarf Promenade and Bull Island",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "cobh-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Cobh juniors",
+    "area": "John Murphy Park",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "connemara-international-marathon": {
+    "country": "Ireland",
+    "city": "Connemara",
+    "area": "Maam Cross, Leenane and the Connemara landscape",
+    "oldCounty": "County Galway",
+    "county": "County Galway",
+    "region": "Connacht"
+  },
+  "consmith-parkrun": {
+    "country": "Ireland",
+    "city": "Con Smith",
+    "area": "Con Smith Park",
+    "oldCounty": "Cavan",
+    "county": "Cavan",
+    "region": "Ulster"
+  },
+  "coole-parkrun": {
+    "country": "Ireland",
+    "city": "Coole",
+    "area": "Coole Park",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "cootehill-parkrun": {
+    "country": "Ireland",
+    "city": "Cootehill",
+    "area": "Haltons Amenity Park",
+    "oldCounty": "Monaghan",
+    "county": "Monaghan",
+    "region": "Ulster"
+  },
+  "cork-half-marathon": {
+    "country": "Ireland",
+    "city": "Cork",
+    "area": "Cork",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "cork-simon-christmas-run-5k-2026": {
+    "country": "Ireland",
+    "city": "Cork",
+    "area": "Blackrock Hurling Club",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "corkagh-parkrun": {
+    "country": "Ireland",
+    "city": "Corkagh",
+    "area": "Corkagh Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "corofin-loops": {
+    "country": "Ireland",
+    "city": "Corofin",
+    "area": "",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "darndale-parkrun": {
+    "country": "Ireland",
+    "city": "Darndale",
+    "area": "Darndale",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "deerpark-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Deerpark juniors",
+    "area": "Deerpark",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "deerparkcarlanstown-parkrun": {
+    "country": "Ireland",
+    "city": "Deerpark, Carlanstown",
+    "area": "Deerpark Park",
+    "oldCounty": "Meath",
+    "county": "Meath",
+    "region": "Leinster"
+  },
+  "deerparkforest-parkrun": {
+    "country": "Ireland",
+    "city": "Deerpark Forest",
+    "area": "Deerpark Forest Park",
+    "oldCounty": "Cavan",
+    "county": "Cavan",
+    "region": "Ulster"
+  },
+  "deka-wellfit-belfast": {
+    "country": "Northern Ireland",
+    "city": "Carryduff",
+    "area": "Carryduff",
+    "oldCounty": "County Down",
+    "county": "County Down",
+    "region": "Ulster"
+  },
+  "delphi-half-marathon-10k": {
+    "country": "Ireland",
+    "city": "Glenkeen / Delphi",
+    "area": "Glenkeen / Delphi",
+    "oldCounty": "Mayo",
+    "county": "Mayo",
+    "region": "Connacht"
+  },
+  "derry-londonderry-to-belfast-ultra": {
+    "country": "Northern Ireland",
+    "city": "Derry/Londonderry",
+    "area": "Derry/Londonderry",
+    "oldCounty": "Derry",
+    "county": "Derry",
+    "region": "Ulster"
+  },
+  "derrycity-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Derry City juniors",
+    "area": "Foyle Arena",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "derrycity-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Derry City",
+    "area": "Derry City Centre",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "derrynoidforest-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Derrynoid Forest",
+    "area": "Derrynoid Forest",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "dingle-marathon-half-2026": {
+    "country": "Ireland",
+    "city": "Dingle",
+    "area": "Dingle Peninsula",
+    "oldCounty": "County Kerry",
+    "county": "County Kerry",
+    "region": "Munster"
+  },
+  "doddervalley-parkrun": {
+    "country": "Ireland",
+    "city": "Dodder Valley",
+    "area": "Dodder Valley Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "donabate-parkrun": {
+    "country": "Ireland",
+    "city": "Donabate",
+    "area": "Newbridge House",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "donadea-50k": {
+    "country": "Ireland",
+    "city": "Donadea",
+    "area": "Donadea Forest Park",
+    "oldCounty": "County Kildare",
+    "county": "County Kildare",
+    "region": "Leinster"
+  },
+  "donegal-town-eamon-harvey-10k-2027": {
+    "country": "Ireland",
+    "city": "Donegal Town",
+    "area": "Abbey Vocational School",
+    "oldCounty": "County Donegal",
+    "county": "County Donegal",
+    "region": "Ulster"
+  },
+  "drogheda-christmas-5k-2026": {
+    "country": "Ireland",
+    "city": "Drogheda",
+    "area": "Drogheda",
+    "oldCounty": "County Louth",
+    "county": "County Louth",
+    "region": "Leinster"
+  },
+  "dromleenalawn-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Dromleena Lawn juniors",
+    "area": "Dromlena Lawn Racecourse",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "dublin-marathon": {
+    "country": "Ireland",
+    "city": "Dublin",
+    "area": "Dublin",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "duhallow-ac-5k-classic-2026": {
+    "country": "Ireland",
+    "city": "Newmarket",
+    "area": "Newmarket",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "dundalk-half-marathon-10k-2027": {
+    "country": "Ireland",
+    "city": "Dundalk",
+    "area": "Market Square and the Dundalk countryside",
+    "oldCounty": "County Louth",
+    "county": "County Louth",
+    "region": "Leinster"
+  },
+  "dundalk-parkrun": {
+    "country": "Ireland",
+    "city": "Dundalk",
+    "area": "Dundalk Institute of Technology",
+    "oldCounty": "Louth",
+    "county": "Louth",
+    "region": "Leinster"
+  },
+  "dundalkit-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Dundalk IT juniors",
+    "area": "Dundalk Institute of Technology",
+    "oldCounty": "Louth",
+    "county": "Louth",
+    "region": "Leinster"
+  },
+  "dungannonpark-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Dungannon Park",
+    "area": "Dungannon Park",
+    "oldCounty": "Armagh",
+    "county": "Armagh",
+    "region": "Ulster"
+  },
+  "dungloe-parkrun": {
+    "country": "Ireland",
+    "city": "Dungloe",
+    "area": "Dungloe",
+    "oldCounty": "Donegal",
+    "county": "Donegal",
+    "region": "Ulster"
+  },
+  "dunleathplayingfields-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Dunleath Playing Fields",
+    "area": "Dunleath Playing Fields",
+    "oldCounty": "Down",
+    "county": "Down",
+    "region": "Ulster"
+  },
+  "ecos-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Ballymena",
+    "area": "Ecos Park, Ballymena",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "edwincarolancommunity-parkrun": {
+    "country": "Ireland",
+    "city": "Edwin Carolan Community",
+    "area": "Edwin Carolan Community Park",
+    "oldCounty": "Meath",
+    "county": "Meath",
+    "region": "Leinster"
+  },
+  "endurancelife-giants-causeway": {
+    "country": "Northern Ireland",
+    "city": "Portrush",
+    "area": "Portrush",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "enniskillen-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Enniskillen",
+    "area": "Enniskillen",
+    "oldCounty": "Fermanagh",
+    "county": "Fermanagh",
+    "region": "Ulster"
+  },
+  "erris-parkrun": {
+    "country": "Ireland",
+    "city": "Erris",
+    "area": "Cross Loop",
+    "oldCounty": "Mayo",
+    "county": "Mayo",
+    "region": "Connacht"
+  },
+  "fairview-parkrun": {
+    "country": "Ireland",
+    "city": "Fairview",
+    "area": "Fairview Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "falcarragh-parkrun": {
+    "country": "Ireland",
+    "city": "Falcarragh",
+    "area": "Ballyconnel Estate",
+    "oldCounty": "Donegal",
+    "county": "Donegal",
+    "region": "Ulster"
+  },
+  "fastlane-summer-edition": {
+    "country": "Ireland",
+    "city": "Clondalkin",
+    "area": "Clondalkin",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "fathercollins-parkrun": {
+    "country": "Ireland",
+    "city": "Father Collins",
+    "area": "Father Collins Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "fenitgreenway-parkrun": {
+    "country": "Ireland",
+    "city": "Fenit Greenway",
+    "area": "Fenit Greenway",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "fethard-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Fethard juniors",
+    "area": "Fethard juniors",
+    "oldCounty": "Tipperary",
+    "county": "Tipperary",
+    "region": "Munster"
+  },
+  "fethardtown-parkrun": {
+    "country": "Ireland",
+    "city": "Fethard Town",
+    "area": "Fethard Town Park",
+    "oldCounty": "Tipperary",
+    "county": "Tipperary",
+    "region": "Munster"
+  },
+  "fields-of-athenry-10km": {
+    "country": "Ireland",
+    "city": "",
+    "area": "",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "fota-cheetah-run-5k-2027": {
+    "country": "Ireland",
+    "city": "Carrigtwohill",
+    "area": "Fota Wildlife Park",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "gaelforce-10k-bray": {
+    "country": "Ireland",
+    "city": "Bray",
+    "area": "Bray",
+    "oldCounty": "Wicklow",
+    "county": "Wicklow",
+    "region": "Leinster"
+  },
+  "galway-womens-mini-marathon-2027": {
+    "country": "Ireland",
+    "city": "Craughwell",
+    "area": "Craughwell AC and the Galway countryside",
+    "oldCounty": "County Galway",
+    "county": "County Galway",
+    "region": "Connacht"
+  },
+  "garvaghforest-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Garvagh Forest",
+    "area": "Garvagh Forest",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "glendalough-lap-of-the-gap-marathon": {
+    "country": "Ireland",
+    "city": "Glendalough",
+    "area": "Glendalough",
+    "oldCounty": "Wicklow",
+    "county": "Wicklow",
+    "region": "Leinster"
+  },
+  "glenfarnewood-parkrun": {
+    "country": "Ireland",
+    "city": "Glenfarne Wood",
+    "area": "Glenfarne Wood",
+    "oldCounty": "Sligo",
+    "county": "Sligo",
+    "region": "Connacht"
+  },
+  "glengarriff-parkrun": {
+    "country": "Ireland",
+    "city": "Glengarriff",
+    "area": "Glengarriff Nature Reserve",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "glenmore-challenge-running-festival-2027": {
+    "country": "Ireland",
+    "city": "Omeath",
+    "area": "Mullaghbuoy Community Centre, Glenmore Valley and the Cooley Peninsula",
+    "oldCounty": "County Louth",
+    "county": "County Louth",
+    "region": "Leinster"
+  },
+  "glenriver-parkrun": {
+    "country": "Ireland",
+    "city": "Glen River",
+    "area": "Glen River Park",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "gorey-parkrun": {
+    "country": "Ireland",
+    "city": "Gorey",
+    "area": "Gorey District Park",
+    "oldCounty": "Wicklow",
+    "county": "Wicklow",
+    "region": "Leinster"
+  },
+  "great-limerick-run-2027": {
+    "country": "Ireland",
+    "city": "Limerick",
+    "area": "Limerick city",
+    "oldCounty": "County Limerick",
+    "county": "County Limerick",
+    "region": "Munster"
+  },
+  "griffeen-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Griffeen juniors",
+    "area": "Griffeen Valley Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "griffeen-parkrun": {
+    "country": "Ireland",
+    "city": "Griffeen",
+    "area": "Griffeen Valley Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "half-on-the-head": {
+    "country": "Ireland",
+    "city": "Ballyheigue",
+    "area": "Ballyheigue",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "hartstown-parkrun": {
+    "country": "Ireland",
+    "city": "Hartstown",
+    "area": "Hartstown Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "haulbowlineisland-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Haulbowline Island juniors",
+    "area": "Haulbowline Island juniors",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "heritagepark-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Heritage Park juniors",
+    "area": "The Irish National Heritage Park",
+    "oldCounty": "Wexford",
+    "county": "Wexford",
+    "region": "Leinster"
+  },
+  "hillsborough-castle-gardens-running-festival": {
+    "country": "Northern Ireland",
+    "city": "Hillsborough",
+    "area": "Hillsborough Castle and Gardens",
+    "oldCounty": "County Down",
+    "county": "County Down",
+    "region": "Ulster"
+  },
+  "holycrosscollege-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Holy Cross College",
+    "area": "Holy Cross College",
+    "oldCounty": "Tyrone",
+    "county": "Tyrone",
+    "region": "Ulster"
+  },
+  "illaunmanagh-parkrun": {
+    "country": "Ireland",
+    "city": "Illaunmanagh",
+    "area": "Illaunmanagh",
+    "oldCounty": "Clare",
+    "county": "Clare",
+    "region": "Munster"
+  },
+  "inchbeach-parkrun": {
+    "country": "Ireland",
+    "city": "Inch Beach",
+    "area": "Inch Beach",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "inismeain-parkrun": {
+    "country": "Ireland",
+    "city": "Inis Meáin",
+    "area": "Inis Meáin Community Centre",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "irish-life-dublin-half-marathon": {
+    "country": "Ireland",
+    "city": "Dublin",
+    "area": "Phoenix Park",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "irish-life-fingal-10k": {
+    "country": "Ireland",
+    "city": "Swords",
+    "area": "Balheary Road",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "irish-life-frank-duffy-10-mile": {
+    "country": "Ireland",
+    "city": "Dublin",
+    "area": "Phoenix Park",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "iveaghsportsground-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Iveagh Sports Ground juniors",
+    "area": "Iveagh Sports Ground juniors",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "january-blues-runs": {
+    "country": "Northern Ireland",
+    "city": "Carrickfergus",
+    "area": "Carrickfergus",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "jerry-kiernan-tralee-10k": {
+    "country": "Ireland",
+    "city": "Tralee",
+    "area": "Tralee",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "john-treacy-dungarvan-10-mile-2027": {
+    "country": "Ireland",
+    "city": "Dungarvan",
+    "area": "Youghal Road and Dungarvan town",
+    "oldCounty": "County Waterford",
+    "county": "County Waterford",
+    "region": "Munster"
+  },
+  "kilkenny-parkrun": {
+    "country": "Ireland",
+    "city": "Kilkenny",
+    "area": "Castle Park",
+    "oldCounty": "Kilkenny",
+    "county": "Kilkenny",
+    "region": "Leinster"
+  },
+  "kilkennycountrysidepark-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Kilkenny Countryside Park juniors",
+    "area": "Kilkenny Countryside Park juniors",
+    "oldCounty": "Kilkenny",
+    "county": "Kilkenny",
+    "region": "Leinster"
+  },
+  "killarneyhouse-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Killarney House juniors",
+    "area": "Killarney House",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "killarneyhouse-parkrun": {
+    "country": "Ireland",
+    "city": "Killarney House",
+    "area": "Killarney House",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "kinsale-10-mile-2027": {
+    "country": "Ireland",
+    "city": "Kinsale",
+    "area": "Kinsale Community School and the roads around Kinsale",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "kinvara-rock-and-road-2027": {
+    "country": "Ireland",
+    "city": "Kinvara",
+    "area": "Kinvara Quay and the Burren coast",
+    "oldCounty": "County Galway",
+    "county": "County Galway",
+    "region": "Connacht"
+  },
+  "knockanacreewoods-parkrun": {
+    "country": "Ireland",
+    "city": "Knockanacree Woods",
+    "area": "Knockanacree Woods",
+    "oldCounty": "Offaly",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "knocknacarra-parkrun": {
+    "country": "Ireland",
+    "city": "Knocknacarra",
+    "area": "Knocknacarra Community Centre",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "larne-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Larne",
+    "area": "Carnfunnock Country Park",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "laytownbeach-parkrun": {
+    "country": "Ireland",
+    "city": "Laytown Beach",
+    "area": "Laytown Beach",
+    "oldCounty": "Meath",
+    "county": "Meath",
+    "region": "Leinster"
+  },
+  "leesroad-parkrun": {
+    "country": "Ireland",
+    "city": "Lees Road",
+    "area": "Lees Road Sport and Amenity Park",
+    "oldCounty": "Clare",
+    "county": "Clare",
+    "region": "Munster"
+  },
+  "letterkenny-parkrun": {
+    "country": "Ireland",
+    "city": "Letterkenny",
+    "area": "St Conals Hospital Campus",
+    "oldCounty": "Donegal",
+    "county": "Donegal",
+    "region": "Ulster"
+  },
+  "limavady-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Limavady",
+    "area": "Blackburn Park",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "limeparkplayingfields-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Limepark Playing Fields",
+    "area": "Limepark Playing Fields",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "limerick-half-marathon-10k-2027": {
+    "country": "Ireland",
+    "city": "Limerick",
+    "area": "Limerick City",
+    "oldCounty": "County Limerick",
+    "county": "County Limerick",
+    "region": "Munster"
+  },
+  "limerick-night-run": {
+    "country": "Ireland",
+    "city": "",
+    "area": "",
+    "oldCounty": "Limerick",
+    "county": "Limerick",
+    "region": "Munster"
+  },
+  "limerick-parkrun": {
+    "country": "Ireland",
+    "city": "Limerick",
+    "area": "University of Limerick",
+    "oldCounty": "Limerick",
+    "county": "Limerick",
+    "region": "Munster"
+  },
+  "listowel-parkrun": {
+    "country": "Ireland",
+    "city": "Listowel",
+    "area": "Listowel Town Park",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "longford-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Longford juniors",
+    "area": "The Mall Park",
+    "oldCounty": "Roscommon",
+    "county": "Roscommon",
+    "region": "Connacht"
+  },
+  "longford-parkrun": {
+    "country": "Ireland",
+    "city": "Longford",
+    "area": "Mall Park",
+    "oldCounty": "Roscommon",
+    "county": "Roscommon",
+    "region": "Connacht"
+  },
+  "lough-cutra-castle-running-races": {
+    "country": "Ireland",
+    "city": "Gort",
+    "area": "Gort",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "loughhead-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Lough Head",
+    "area": "Lough Head",
+    "oldCounty": "Fermanagh",
+    "county": "Fermanagh",
+    "region": "Ulster"
+  },
+  "loughkey-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Lough Key juniors",
+    "area": "Lough Key Forest and Activity Park",
+    "oldCounty": "Roscommon",
+    "county": "Roscommon",
+    "region": "Connacht"
+  },
+  "loughkey-parkrun": {
+    "country": "Ireland",
+    "city": "Lough Key",
+    "area": "Lough Key Forest Park",
+    "oldCounty": "Roscommon",
+    "county": "Roscommon",
+    "region": "Connacht"
+  },
+  "loughmacrory-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Loughmacrory",
+    "area": "Loughmacrory",
+    "oldCounty": "Tyrone",
+    "county": "Tyrone",
+    "region": "Ulster"
+  },
+  "lurgan-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Lurgan juniors",
+    "area": "Lurgan Park",
+    "oldCounty": "Armagh",
+    "county": "Armagh",
+    "region": "Ulster"
+  },
+  "lurganpark-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Lurgan Park",
+    "area": "Lurgan Park",
+    "oldCounty": "Armagh",
+    "county": "Armagh",
+    "region": "Ulster"
+  },
+  "lusksportshub-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Lusk Sports Hub juniors",
+    "area": "Lusk Sports Hub",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "macroomcastledemesne-parkrun": {
+    "country": "Ireland",
+    "city": "Macroom Castle Demesne",
+    "area": "The Castle Demense",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "magherafelt-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Magherafelt juniors",
+    "area": "Polepatrick",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "malahide-parkrun": {
+    "country": "Ireland",
+    "city": "Malahide",
+    "area": "Malahide Castle grounds",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "malahidecastle-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Malahide Castle juniors",
+    "area": "Malahide Castle Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "mallow-10-mile-road-race-2027": {
+    "country": "Ireland",
+    "city": "Mallow",
+    "area": "Mallow and the north Cork countryside",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "mallowcastle-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Mallow Castle juniors",
+    "area": "Mallow Castle Park",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "mallowcastle-parkrun": {
+    "country": "Ireland",
+    "city": "Mallow Castle",
+    "area": "Mallow Castle",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "marlay-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Marlay juniors",
+    "area": "Marlay Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "marlay-parkrun": {
+    "country": "Ireland",
+    "city": "Marlay",
+    "area": "Marlay Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "mcconnell-shield-xc": {
+    "country": "Northern Ireland",
+    "city": "Ballyclare",
+    "area": "Ballyclare",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "mellowespark-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Mellowes Park juniors",
+    "area": "Mellowes Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "midleton-greenway-10-mile-2027": {
+    "country": "Ireland",
+    "city": "Midleton",
+    "area": "Midleton GAA Club and Midleton–Mogeely Greenway",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "midletongreenway-parkrun": {
+    "country": "Ireland",
+    "city": "Midleton Greenway",
+    "area": "Midleton Greenway",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "monaghantown-parkrun": {
+    "country": "Ireland",
+    "city": "Monaghan Town",
+    "area": "Rossmore Forest Park",
+    "oldCounty": "Monaghan",
+    "county": "Monaghan",
+    "region": "Ulster"
+  },
+  "montaltoestate-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Montalto Estate",
+    "area": "Montalto Estate",
+    "oldCounty": "Down",
+    "county": "Down",
+    "region": "Ulster"
+  },
+  "mountbellewforest-parkrun": {
+    "country": "Ireland",
+    "city": "Mountbellew Forest",
+    "area": "Mountbellew Forest",
+    "oldCounty": "Roscommon",
+    "county": "Roscommon",
+    "region": "Connacht"
+  },
+  "mountlucas-parkrun": {
+    "country": "Ireland",
+    "city": "Mountlucas",
+    "area": "Mount Lucas Wind Farm",
+    "oldCounty": "Kildare",
+    "county": "Kildare",
+    "region": "Leinster"
+  },
+  "mourne-way-marathon": {
+    "country": "Northern Ireland",
+    "city": "Newcastle",
+    "area": "Newcastle",
+    "oldCounty": "County Down",
+    "county": "County Down",
+    "region": "Ulster"
+  },
+  "mullingar-parkrun": {
+    "country": "Ireland",
+    "city": "Mullingar",
+    "area": "Mullingar",
+    "oldCounty": "Westmeath",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "mungret-parkrun": {
+    "country": "Ireland",
+    "city": "Mungret",
+    "area": "Mungret Park",
+    "oldCounty": "Limerick",
+    "county": "Limerick",
+    "region": "Munster"
+  },
+  "musacookstown-parkrun": {
+    "country": "Northern Ireland",
+    "city": "MUSA Cookstown",
+    "area": "Mid Ulster Sports Arena",
+    "oldCounty": "Armagh",
+    "county": "Armagh",
+    "region": "Ulster"
+  },
+  "naas-10-mile-half-marathon-2027": {
+    "country": "Ireland",
+    "city": "Naas",
+    "area": "Naas GAA",
+    "oldCounty": "Kildare",
+    "county": "Kildare",
+    "region": "Leinster"
+  },
+  "naas-parkrun": {
+    "country": "Ireland",
+    "city": "Naas",
+    "area": "Naas Racecourse",
+    "oldCounty": "Kildare",
+    "county": "Kildare",
+    "region": "Leinster"
+  },
+  "narinbeach-parkrun": {
+    "country": "Ireland",
+    "city": "Narin Beach",
+    "area": "Narin Beach",
+    "oldCounty": "Donegal",
+    "county": "Donegal",
+    "region": "Ulster"
+  },
+  "navan-parkrun": {
+    "country": "Ireland",
+    "city": "Navan",
+    "area": "Blackwater Park",
+    "oldCounty": "Meath",
+    "county": "Meath",
+    "region": "Leinster"
+  },
+  "nenagh-half-marathon-10k": {
+    "country": "Ireland",
+    "city": "Nenagh",
+    "area": "Nenagh",
+    "oldCounty": "Tipperary",
+    "county": "Tipperary",
+    "region": "Munster"
+  },
+  "new-year-s-eve-10k-road-race": {
+    "country": "Ireland",
+    "city": "",
+    "area": "",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "newbridgehouse-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Newbridge House juniors",
+    "area": "Newbridge House Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "newcastle-way-marathon-half": {
+    "country": "Northern Ireland",
+    "city": "Newcastle / Castlewellan",
+    "area": "Newcastle / Castlewellan",
+    "oldCounty": "Down",
+    "county": "Down",
+    "region": "Ulster"
+  },
+  "newcastlewest-parkrun": {
+    "country": "Ireland",
+    "city": "Newcastle West",
+    "area": "Newcastle West",
+    "oldCounty": "Limerick",
+    "county": "Limerick",
+    "region": "Munster"
+  },
+  "newross-parkrun": {
+    "country": "Ireland",
+    "city": "New Ross",
+    "area": "J F Kennedy Arboretum",
+    "oldCounty": "Waterford",
+    "county": "Waterford",
+    "region": "Munster"
+  },
+  "newrygreenway-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Newry Greenway",
+    "area": "Newry Greenway",
+    "oldCounty": "Armagh",
+    "county": "Armagh",
+    "region": "Ulster"
+  },
+  "ni-ulster-50k-100k-championships": {
+    "country": "Northern Ireland",
+    "city": "Belfast",
+    "area": "Belfast",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "nimra-run-for-rescue-trail-race": {
+    "country": "Northern Ireland",
+    "city": "Newcastle",
+    "area": "Newcastle",
+    "oldCounty": "County Down",
+    "county": "County Down",
+    "region": "Ulster"
+  },
+  "noreen-mccarthy-memorial-10-mile-2027": {
+    "country": "Ireland",
+    "city": "Skibbereen",
+    "area": "O'Donovan Rossa GAA Club, Skibbereen",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "norn-iron-100": {
+    "country": "Northern Ireland",
+    "city": "Ballintoy",
+    "area": "Ballintoy",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "nurserydrive-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Nursery Drive juniors",
+    "area": "Nursery Drive Park",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "oldbridge-parkrun": {
+    "country": "Ireland",
+    "city": "Oldbridge",
+    "area": "Battle of the Boyne Visitor Centre",
+    "oldCounty": "Meath",
+    "county": "Meath",
+    "region": "Leinster"
+  },
+  "omagh-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Omagh",
+    "area": "Omagh",
+    "oldCounty": "Tyrone",
+    "county": "Tyrone",
+    "region": "Ulster"
+  },
+  "omaghleisurecomplex-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Omagh Leisure Complex juniors",
+    "area": "Omagh Leisure Complex juniors",
+    "oldCounty": "Tyrone",
+    "county": "Tyrone",
+    "region": "Ulster"
+  },
+  "oranmore-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Oranmore juniors",
+    "area": "Rinville Park",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "oranmore-parkrun": {
+    "country": "Ireland",
+    "city": "Oranmore",
+    "area": "Renville Park",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "oughterard-parkrun": {
+    "country": "Ireland",
+    "city": "Oughterard",
+    "area": "Corribdale Park",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "park-west-5k-2027": {
+    "country": "Ireland",
+    "city": "Dublin",
+    "area": "Park West",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "pobalscoilnatrionoide-parkrun": {
+    "country": "Ireland",
+    "city": "Pobalscoil na Tríonóide",
+    "area": "Pobalscoil na Tríonóide",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "podium4sport-seeley-cup-10k": {
+    "country": "Northern Ireland",
+    "city": "Belfast",
+    "area": "Ormeau Embankment",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "pomeroyforest-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Pomeroy Forest",
+    "area": "Pomeroy Forest",
+    "oldCounty": "Tyrone",
+    "county": "Tyrone",
+    "region": "Ulster"
+  },
+  "poolbeg-parkrun": {
+    "country": "Ireland",
+    "city": "Poolbeg",
+    "area": "Sean Moore Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "poppintree-parkrun": {
+    "country": "Ireland",
+    "city": "Poppintree",
+    "area": "Poppintree Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "porchfield-parkrun": {
+    "country": "Ireland",
+    "city": "Porch Field",
+    "area": "Porch Field",
+    "oldCounty": "Meath",
+    "county": "Meath",
+    "region": "Leinster"
+  },
+  "portadown-running-festival": {
+    "country": "Northern Ireland",
+    "city": "Portadown",
+    "area": "Portadown Rugby Club",
+    "oldCounty": "County Armagh",
+    "county": "County Armagh",
+    "region": "Ulster"
+  },
+  "porterstown-parkrun": {
+    "country": "Ireland",
+    "city": "Porterstown",
+    "area": "Porterstown Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "portrush-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Portrush juniors",
+    "area": "East Strand Beach",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "portrush-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Portrush",
+    "area": "East Strand Beach, Portrush",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "portumna-forest-marathon": {
+    "country": "Ireland",
+    "city": "Portumna",
+    "area": "Portumna",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "portumna-parkrun": {
+    "country": "Ireland",
+    "city": "Portumna",
+    "area": "Portumna Forest Park",
+    "oldCounty": "Offaly",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "quadrathon-challenge-half-marathon-2027": {
+    "country": "Ireland",
+    "city": "Moville",
+    "area": "Inishowen Peninsula and the Wild Atlantic Way",
+    "oldCounty": "County Donegal",
+    "county": "County Donegal",
+    "region": "Ulster"
+  },
+  "rabbit-run-ballypatrick": {
+    "country": "Northern Ireland",
+    "city": "Ballycastle",
+    "area": "Ballycastle",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "remembrance-run-5k-2026": {
+    "country": "Ireland",
+    "city": "Dublin",
+    "area": "Phoenix Park",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "ringsend-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Ringsend juniors",
+    "area": "Ringsend Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "riversideballymoney-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Riverside juniors, Ballymoney",
+    "area": "Riverside Park",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "riversideballymoney-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Ballymoney",
+    "area": "Riverside, Ballymoney",
+    "oldCounty": "Londonderry",
+    "county": "Londonderry",
+    "region": "Ulster"
+  },
+  "rivervalley-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "River Valley juniors",
+    "area": "River Valley Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "rivervalley-parkrun": {
+    "country": "Ireland",
+    "city": "River Valley",
+    "area": "River Valley Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "rockfield-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Rockfield juniors",
+    "area": "Rockfield Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "rostrevor-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Rostrevor",
+    "area": "Kilbroney Park",
+    "oldCounty": "Down",
+    "county": "Down",
+    "region": "Ulster"
+  },
+  "roundlake-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Round Lake juniors",
+    "area": "Round Lake juniors",
+    "oldCounty": "Fermanagh",
+    "county": "Fermanagh",
+    "region": "Ulster"
+  },
+  "royalcanalkilcock-parkrun": {
+    "country": "Ireland",
+    "city": "Royal Canal, Kilcock",
+    "area": "Royal Canal",
+    "oldCounty": "Meath",
+    "county": "Meath",
+    "region": "Leinster"
+  },
+  "run-clare-10-mile": {
+    "country": "Ireland",
+    "city": "",
+    "area": "Clare",
+    "oldCounty": "Clare",
+    "county": "Clare",
+    "region": "Munster"
+  },
+  "run-clare-eamon-moloney-10k": {
+    "country": "Ireland",
+    "city": "Ennis",
+    "area": "Ennis",
+    "oldCounty": "Clare",
+    "county": "Clare",
+    "region": "Munster"
+  },
+  "run-clare-quin-5-mile": {
+    "country": "Ireland",
+    "city": "Quin",
+    "area": "Quin",
+    "oldCounty": "Clare",
+    "county": "Clare",
+    "region": "Munster"
+  },
+  "run-forest-run-antrim-castle-gardens-5k-2027": {
+    "country": "Northern Ireland",
+    "city": "Antrim",
+    "area": "Antrim Castle Gardens",
+    "oldCounty": "County Antrim",
+    "county": "County Antrim",
+    "region": "Ulster"
+  },
+  "run-forest-run-castlewellan-5k-2027": {
+    "country": "Northern Ireland",
+    "city": "Castlewellan",
+    "area": "Castlewellan Forest Park",
+    "oldCounty": "County Down",
+    "county": "County Down",
+    "region": "Ulster"
+  },
+  "run-forest-run-gosford-5k-2026": {
+    "country": "Northern Ireland",
+    "city": "Markethill",
+    "area": "Gosford Forest Park",
+    "oldCounty": "County Armagh",
+    "county": "County Armagh",
+    "region": "Ulster"
+  },
+  "run-forest-run-loughgall-5k-2027": {
+    "country": "Northern Ireland",
+    "city": "Loughgall",
+    "area": "Loughgall Country Park",
+    "oldCounty": "County Armagh",
+    "county": "County Armagh",
+    "region": "Ulster"
+  },
+  "run-forest-run-tollymore-5k-2026": {
+    "country": "Northern Ireland",
+    "city": "Newcastle",
+    "area": "Tollymore Forest Park",
+    "oldCounty": "County Down",
+    "county": "County Down",
+    "region": "Ulster"
+  },
+  "run-the-night-cork-2027": {
+    "country": "Ireland",
+    "city": "Cork",
+    "area": "Marina Market",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "run-the-night-dublin-2027": {
+    "country": "Ireland",
+    "city": "Dublin",
+    "area": "North Quays",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "run-valentia-half-marathon-10k": {
+    "country": "Ireland",
+    "city": "Knightstown",
+    "area": "Knightstown",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "runcork-half-marathon-2027": {
+    "country": "Ireland",
+    "city": "Cork",
+    "area": "Marina Market, Cork City, the Marina and River Lee",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "rush-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Rush juniors",
+    "area": "Kenure Woods",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "russborough-parkrun": {
+    "country": "Ireland",
+    "city": "Russborough",
+    "area": "Russborough House & Parklands",
+    "oldCounty": "Wicklow",
+    "county": "Wicklow",
+    "region": "Leinster"
+  },
+  "sallins-community-run-5k-2026": {
+    "country": "Ireland",
+    "city": "Sallins",
+    "area": "Sallins Scout Den",
+    "oldCounty": "County Kildare",
+    "county": "County Kildare",
+    "region": "Leinster"
+  },
+  "santa-dash-dublin-5k-2026": {
+    "country": "Ireland",
+    "city": "Clontarf",
+    "area": "St Anne's Park",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "savills-sandymount-night-run-5k-2027": {
+    "country": "Ireland",
+    "city": "Dublin",
+    "area": "Sandymount",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "setuarena-parkrun": {
+    "country": "Ireland",
+    "city": "SETU Arena",
+    "area": "SETU Arena West Campus",
+    "oldCounty": "Waterford",
+    "county": "Waterford",
+    "region": "Munster"
+  },
+  "shanganagh-parkrun": {
+    "country": "Ireland",
+    "city": "Shanganagh",
+    "area": "Shanganagh Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "shelbourne-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Shelbourne juniors",
+    "area": "Shelbourne Park",
+    "oldCounty": "Limerick",
+    "county": "Limerick",
+    "region": "Munster"
+  },
+  "sixmilewater-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Sixmilewater",
+    "area": "Sixmilewater Park",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "sligo-parkrun": {
+    "country": "Ireland",
+    "city": "Sligo",
+    "area": "Doorly Park",
+    "oldCounty": "Sligo",
+    "county": "Sligo",
+    "region": "Connacht"
+  },
+  "spar-omagh-half-marathon-5k-2027": {
+    "country": "Northern Ireland",
+    "city": "Omagh",
+    "area": "Omagh",
+    "oldCounty": "County Tyrone",
+    "county": "County Tyrone",
+    "region": "Ulster"
+  },
+  "sportirelandcampus-parkrun": {
+    "country": "Ireland",
+    "city": "Sport Ireland Campus",
+    "area": "Sport Ireland Campus",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "stannes-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "St Anne’s juniors",
+    "area": "St Anne’s Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "stannes-parkrun": {
+    "country": "Ireland",
+    "city": "St Anne’s",
+    "area": "St Anne’s Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "stmaryscampus-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "St Mary’s Campus juniors",
+    "area": "St Mary’s Health Campus",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "strokestown-parkrun": {
+    "country": "Ireland",
+    "city": "Strokestown",
+    "area": "Strokestown House Park",
+    "oldCounty": "Roscommon",
+    "county": "Roscommon",
+    "region": "Connacht"
+  },
+  "tallaght-ac-5k-road-race-2027": {
+    "country": "Ireland",
+    "city": "Tallaght",
+    "area": "Tallaght",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "templemore-parkrun": {
+    "country": "Ireland",
+    "city": "Templemore",
+    "area": "Templemore Park",
+    "oldCounty": "Tipperary",
+    "county": "Tipperary",
+    "region": "Munster"
+  },
+  "the-felt-5-miler": {
+    "country": "Northern Ireland",
+    "city": "Magherafelt",
+    "area": "Magherafelt",
+    "oldCounty": "County Londonderry",
+    "county": "County Londonderry",
+    "region": "Ulster"
+  },
+  "the-fianna-5": {
+    "country": "Northern Ireland",
+    "city": "Coalisland",
+    "area": "Coalisland",
+    "oldCounty": "Tyrone",
+    "county": "Tyrone",
+    "region": "Ulster"
+  },
+  "the-heartlands-athlone-2027": {
+    "country": "Ireland",
+    "city": "Athlone",
+    "area": "Athlone Town Football Stadium, Lissywollen",
+    "oldCounty": "Westmeath",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "thefishermanswalk-parkrun": {
+    "country": "Northern Ireland",
+    "city": "The Fisherman’s Walk",
+    "area": "The Fisherman’s Walk",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "thegrandcanalway-parkrun": {
+    "country": "Ireland",
+    "city": "The Grand Canal Way",
+    "area": "The Grand Canal Way",
+    "oldCounty": "Offaly",
+    "county": "Offaly",
+    "region": "Leinster"
+  },
+  "themanorfields-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "The Manor Fields juniors",
+    "area": "The Manor Fields juniors",
+    "oldCounty": "Limerick",
+    "county": "Limerick",
+    "region": "Munster"
+  },
+  "theoldrailtrail-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "The Old Rail Trail juniors",
+    "area": "The Old Rail Trail Park",
+    "oldCounty": "Westmeath",
+    "county": "Westmeath",
+    "region": "Leinster"
+  },
+  "thepeoplesparkballymena-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Ballymena",
+    "area": "The People’s Park juniors, Ballymena",
+    "oldCounty": "Antrim",
+    "county": "Antrim",
+    "region": "Ulster"
+  },
+  "thomas-kent-10k": {
+    "country": "Ireland",
+    "city": "",
+    "area": "",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "thoroughbred-run-kildare": {
+    "country": "Ireland",
+    "city": "Kildare",
+    "area": "Kildare",
+    "oldCounty": "Kildare",
+    "county": "Kildare",
+    "region": "Leinster"
+  },
+  "togher-ac-5k": {
+    "country": "Ireland",
+    "city": "",
+    "area": "",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "tolkavalley-parkrun": {
+    "country": "Ireland",
+    "city": "Tolka Valley",
+    "area": "Tolka Valley park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "tom-brennan-memorial-5k-2027": {
+    "country": "Ireland",
+    "city": "Castleknock",
+    "area": "Phoenix Park",
+    "oldCounty": "County Dublin",
+    "county": "County Dublin",
+    "region": "Leinster"
+  },
+  "tommy-ryan-memorial-carrigaline-5-mile-2027": {
+    "country": "Ireland",
+    "city": "Carrigaline",
+    "area": "Carrigaline",
+    "oldCounty": "County Cork",
+    "county": "County Cork",
+    "region": "Munster"
+  },
+  "tourmakeadywood-parkrun": {
+    "country": "Ireland",
+    "city": "Tourmakeady Wood",
+    "area": "Tourmakeady Wood",
+    "oldCounty": "Mayo",
+    "county": "Mayo",
+    "region": "Connacht"
+  },
+  "tralee-10-mile-road-race": {
+    "country": "Ireland",
+    "city": "Tralee",
+    "area": "Tralee",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "tralee-100k-ultra-marathon": {
+    "country": "Ireland",
+    "city": "Tralee",
+    "area": "Tralee",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "tralee-40-mile-road-race": {
+    "country": "Ireland",
+    "city": "Tralee",
+    "area": "Tralee",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "tralee-50k-ultra-marathon": {
+    "country": "Ireland",
+    "city": "Tralee",
+    "area": "Tralee",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "tralee-half-marathon-2026": {
+    "country": "Ireland",
+    "city": "Tralee",
+    "area": "Tralee",
+    "oldCounty": "County Kerry",
+    "county": "County Kerry",
+    "region": "Munster"
+  },
+  "tralee-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Tralee juniors",
+    "area": "Tralee Town Park",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "tralee-parkrun": {
+    "country": "Ireland",
+    "city": "Tralee",
+    "area": "Tralee Town Park",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "tramore-parkrun": {
+    "country": "Ireland",
+    "city": "Tramore",
+    "area": "The promenade",
+    "oldCounty": "Waterford",
+    "county": "Waterford",
+    "region": "Munster"
+  },
+  "tramorevalley-parkrun": {
+    "country": "Ireland",
+    "city": "Tramore Valley",
+    "area": "Tramore Valley Park",
+    "oldCounty": "Cork",
+    "county": "Cork",
+    "region": "Munster"
+  },
+  "trilakes-half-marathon-10k-2026": {
+    "country": "Ireland",
+    "city": "Ballinrobe",
+    "area": "Ballinrobe and the TriLakes region",
+    "oldCounty": "County Galway",
+    "county": "County Galway",
+    "region": "Connacht"
+  },
+  "trim-10-mile-road-race-2027": {
+    "country": "Ireland",
+    "city": "Trim",
+    "area": "Eamonn Duggan Industrial Estate and roads around Trim",
+    "oldCounty": "County Meath",
+    "county": "County Meath",
+    "region": "Leinster"
+  },
+  "tubbercurrytrail-parkrun": {
+    "country": "Ireland",
+    "city": "Tubbercurry Trail",
+    "area": "Tubbercurry Trail",
+    "oldCounty": "Sligo",
+    "county": "Sligo",
+    "region": "Connacht"
+  },
+  "tullaroan-festival-of-running": {
+    "country": "Ireland",
+    "city": "Tullaroan",
+    "area": "Tullaroan",
+    "oldCounty": "Kilkenny",
+    "county": "Kilkenny",
+    "region": "Leinster"
+  },
+  "tullow-parkrun": {
+    "country": "Ireland",
+    "city": "Tullow",
+    "area": "Rathwood Rath",
+    "oldCounty": "Carlow",
+    "county": "Carlow",
+    "region": "Leinster"
+  },
+  "tymon-parkrun": {
+    "country": "Ireland",
+    "city": "Tymon",
+    "area": "Tymon Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "ultra-trail-na-mban": {
+    "country": "Ireland",
+    "city": "Laragh",
+    "area": "Laragh",
+    "oldCounty": "Wicklow",
+    "county": "Wicklow",
+    "region": "Leinster"
+  },
+  "universityofgalway-parkrun": {
+    "country": "Ireland",
+    "city": "University of Galway",
+    "area": "University of Galway",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "vandeleur-parkrun": {
+    "country": "Ireland",
+    "city": "Vandeleur",
+    "area": "Vandeleur Walled garden",
+    "oldCounty": "Clare",
+    "county": "Clare",
+    "region": "Munster"
+  },
+  "vicarstown-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Vicarstown juniors",
+    "area": "Vicarstown",
+    "oldCounty": "Laois",
+    "county": "Laois",
+    "region": "Leinster"
+  },
+  "vicarstown-parkrun": {
+    "country": "Ireland",
+    "city": "Vicarstown",
+    "area": "Vicarstown",
+    "oldCounty": "Laois",
+    "county": "Laois",
+    "region": "Leinster"
+  },
+  "walled-city-10-mile-road-race": {
+    "country": "Northern Ireland",
+    "city": "Derry",
+    "area": "Derry",
+    "oldCounty": "County Londonderry",
+    "county": "County Londonderry",
+    "region": "Ulster"
+  },
+  "waltonpark-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Walton Park juniors",
+    "area": "Walton Park juniors",
+    "oldCounty": "Waterford",
+    "county": "Waterford",
+    "region": "Munster"
+  },
+  "washingbaywetlands-juniors-parkrun": {
+    "country": "Northern Ireland",
+    "city": "Washingbay Wetlands juniors",
+    "area": "Washingbay Wetlands juniors",
+    "oldCounty": "Armagh",
+    "county": "Armagh",
+    "region": "Ulster"
+  },
+  "waterstown-parkrun": {
+    "country": "Ireland",
+    "city": "Waterstown",
+    "area": "Waterstown Park",
+    "oldCounty": "Dublin",
+    "county": "Dublin",
+    "region": "Leinster"
+  },
+  "waterville-trail-running-festival": {
+    "country": "Ireland",
+    "city": "Waterville",
+    "area": "Waterville",
+    "oldCounty": "Kerry",
+    "county": "Kerry",
+    "region": "Munster"
+  },
+  "westport-parkrun": {
+    "country": "Ireland",
+    "city": "Westport",
+    "area": "Westport",
+    "oldCounty": "Mayo",
+    "county": "Mayo",
+    "region": "Connacht"
+  },
+  "westsideplayingfields-juniors-parkrun": {
+    "country": "Ireland",
+    "city": "Westside Playing Fields juniors",
+    "area": "Westside Playing Fields",
+    "oldCounty": "Galway",
+    "county": "Galway",
+    "region": "Connacht"
+  },
+  "wexford-half-marathon-10k-2027": {
+    "country": "Ireland",
+    "city": "Wexford",
+    "area": "Wexford town",
+    "oldCounty": "County Wexford",
+    "county": "County Wexford",
+    "region": "Leinster"
+  },
+  "wexfordracecourse-parkrun": {
+    "country": "Ireland",
+    "city": "Wexford Racecourse",
+    "area": "Johnstown Castle",
+    "oldCounty": "Wexford",
+    "county": "Wexford",
+    "region": "Leinster"
+  },
+  "wicklow-half-marathon-10k-2027": {
+    "country": "Ireland",
+    "city": "Wicklow",
+    "area": "Wicklow town and coast",
+    "oldCounty": "County Wicklow",
+    "county": "County Wicklow",
+    "region": "Leinster"
+  },
+  "wild-atlantic-ultra": {
+    "country": "Ireland",
+    "city": "Louisburgh",
+    "area": "Louisburgh",
+    "oldCounty": "Mayo",
+    "county": "Mayo",
+    "region": "Connacht"
+  },
+  "world-half-marathon-festival": {
+    "country": "Ireland",
+    "city": "Donadea",
+    "area": "Donadea",
+    "oldCounty": "Kildare",
+    "county": "Kildare",
+    "region": "Leinster"
+  }
+}

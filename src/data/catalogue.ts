@@ -14,6 +14,7 @@ export type {
   EntryOptionStatus,
   EntryOptionType,
 } from "./types";
+import { reviewedFixtureCountyRegion } from "./fixture-county-regions";
 import { legacyRaceGeography } from "./legacy-race-geography";
 import { reviewConfirmedDistances } from "./confirmed-distance-editions";
 import { imminentReviewedAdditions, reviewImminentEdition } from "./imminent-starts-2026-10-25";
@@ -474,7 +475,7 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
   ...urgentReviewedSeriesOverrides[series.slug],
   ...nextUrgentSeriesOverrides[series.slug],
   ...thirdUrgentSeriesOverrides[series.slug],
-}));
+})).map(reviewedFixtureCountyRegion);
 
 const mergedEditions = [
   ...imminentReviewedAdditions,

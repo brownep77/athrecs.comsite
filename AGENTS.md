@@ -176,3 +176,15 @@ publication and personal-best calculations in this repository.
   Apply the public catalogue projection before returning fixture or result data;
   never treat a directory URL as an official entry/results fallback. Keep the
   primary-source publication guard in force.
+
+## Fixture counties and regions
+
+- Owner instruction, 26 October 2026: show county/local administrative area before
+  the broader region on fixtures, with both searchable. Start with UK and Ireland
+  and support equivalent county/state/province hierarchies elsewhere. Keep country,
+  county and region distinct. Do not put source-directory regions into county.
+- Follow `docs/fixture-geography/county-region-process.md`. Exact recorded-locality
+  enrichment is not a fresh venue check. Inspect the actual venue when the marketed
+  city differs, boundaries are involved, or an event uses several starts/venues.
+  Do not guess a county from a title, fuzzy place match, organiser HQ or first
+  geocoder result. Preserve sources, original fields and unresolved review reasons.

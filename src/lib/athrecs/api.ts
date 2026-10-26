@@ -190,7 +190,7 @@ export const listEventRegions = createServerFn({ method: "GET" })
           country,
         ),
       )
-      .map((row) => row.region?.trim() || row.county?.trim())
+      .flatMap((row) => [row.county?.trim(), row.region?.trim()])
       .filter((value): value is string => Boolean(value))
       .filter((value) => value.toLowerCase() !== country.toLowerCase());
 
@@ -270,7 +270,7 @@ export const listEvents = createServerFn({ method: "GET" })
           and (${distance}::text is null or distance_code = ${distance})
       )
       select
-        e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
+        e.id, e.slug, e.name, e.sport, e.country, e.county, e.region, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
         (
           select string_agg(d.distance_code, ',' order by d.distance_code)
@@ -343,6 +343,7 @@ export const listEvents = createServerFn({ method: "GET" })
           or lower(e.city) like ${q}
           or lower(e.sport) like ${q}
           or lower(e.county) like ${q}
+          or lower(e.region) like ${q}
           or lower(e.country) like ${q}
           or lower(e.surface) like ${q}
           or exists (
@@ -676,7 +677,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       }
     >`
       select
-        e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
+        e.id, e.slug, e.name, e.sport, e.country, e.county, e.region, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
         (
           select string_agg(d.distance_code, ',' order by d.distance_code)
@@ -1845,6 +1846,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       sport: string;
       city: string;
       county: string;
+      region: string | null;
       country: string;
       area: string;
       surface: string;
@@ -1862,6 +1864,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         e.sport,
         e.city,
         e.county,
+        e.region,
         e.country,
         e.area,
         e.surface,
@@ -1891,6 +1894,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           or lower(e.name) like ${q}
           or lower(e.city) like ${q}
           or lower(e.county) like ${q}
+          or lower(e.region) like ${q}
           or lower(e.country) like ${q}
           or lower(e.area) like ${q}
           or lower(e.surface) like ${q}
