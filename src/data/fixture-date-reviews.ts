@@ -1,4 +1,5 @@
 import duplicateReviews from "./fixture-duplicate-reviews-2026-10-26.json" with { type: "json" };
+import secondDuplicateReviews from "./fixture-duplicate-reviews-second-2026-10-26.json" with { type: "json" };
 
 /** Reviewed unsupported or duplicate dates stay in storage, outside public listings. */
 export const FIXTURE_DATE_REVIEWS: Record<
@@ -6,7 +7,7 @@ export const FIXTURE_DATE_REVIEWS: Record<
   { sourceUrl: string; checkedAt: string; note: string }
 > = {
   ...Object.fromEntries(
-    duplicateReviews.map((review) => [
+    [...duplicateReviews, ...secondDuplicateReviews].map((review) => [
       `${review.duplicateSlug}|${review.date}`,
       {
         sourceUrl: review.sourceUrl,
