@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { CollectorPage } from "@/components/admin/race-collector";
+import { COLLECTOR_COUNTRIES } from "@/lib/race-collector/core";
 import { previewFixtureFile, saveFixtureFile } from "@/lib/race-collector/fixture-upload-api";
 import {
   FIXTURE_UPLOAD_BYTES,
@@ -143,19 +144,28 @@ export function FixtureImportPage({
               Start countries
               <select
                 className={field}
-                value={input.scope.countries.join(",")}
+                value={input.scope.countries.length > 3 ? "ALL" : input.scope.countries.join(",")}
                 onChange={(e) =>
-                  update({ scope: { ...input.scope, countries: e.target.value.split(",") } })
+                  update({
+                    scope: {
+                      ...input.scope,
+                      countries:
+                        e.target.value === "ALL"
+                          ? COLLECTOR_COUNTRIES.map((c) => c.code)
+                          : e.target.value.split(","),
+                    },
+                  })
                 }
               >
                 <option value="GB">United Kingdom</option>
                 <option value="GB,IE">United Kingdom and Ireland</option>
                 <option value="IE">Republic of Ireland</option>
+                <option value="ALL">Worldwide (all countries)</option>
               </select>
             </label>
           </div>
           <p className="text-xs text-muted">
-            Northern Ireland is included in the UK. Distances from above zero through 500 miles, in
+            Northern Ireland is included in the UK. Choose Worldwide for fixtures outside the UK and Ireland. Distances from above zero through 500 miles, in
             miles or kilometres. Parkrun uses its separate verified fixture workflow.
           </p>
           <label className="block space-y-2 text-sm font-medium">
