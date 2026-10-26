@@ -33,10 +33,10 @@ a county or invent one where none is recorded.
 
 ## 26 October release scope
 
-The ledger `county-region-2026-10-26.json` contains 476 guarded changes: 155 county
+The ledger `county-region-2026-10-26.json` contains 469 guarded changes: 148 county
 changes and 321 province/region additions without changing the existing county.
 It records source dates, OS exact matches and response hashes, previous values,
-method distinctions and 611 unresolved records. The starting inventory was events
+method distinctions and 618 unresolved records. The starting inventory was events
 with upcoming editions on 26 October; this is not a verification of every race or
 of the dates/distances in the inventory. A number of later geographic requests
 returned access errors, which are recorded rather than treated as evidence.

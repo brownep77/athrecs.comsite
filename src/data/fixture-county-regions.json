@@ -55,14 +55,6 @@
     "county": "Somerset",
     "region": "South West"
   },
-  "the-drop-bath": {
-    "country": "England",
-    "city": "Bath",
-    "area": "Lulu Caffe",
-    "oldCounty": "South of England",
-    "county": "Somerset",
-    "region": "South of England"
-  },
   "bexley-10k": {
     "country": "England",
     "city": "Bexleyheath",
@@ -271,14 +263,6 @@
     "county": "Northamptonshire",
     "region": "Midlands"
   },
-  "the-drop-darlington": {
-    "country": "England",
-    "city": "Darlington",
-    "area": "Up & Running",
-    "oldCounty": "North of England",
-    "county": "County Durham",
-    "region": "North of England"
-  },
   "dentdale-run": {
     "country": "England",
     "city": "Dent",
@@ -294,14 +278,6 @@
     "oldCounty": "Durham",
     "county": "County Durham",
     "region": "North East"
-  },
-  "the-drop-durham": {
-    "country": "England",
-    "city": "Durham",
-    "area": "The Cartologist",
-    "oldCounty": "North of England",
-    "county": "County Durham",
-    "region": "North of England"
   },
   "mid-sussex-east-grinstead-10-mile": {
     "country": "England",
@@ -439,14 +415,6 @@
     "county": "North Yorkshire",
     "region": "North of England"
   },
-  "the-drop-harrogate": {
-    "country": "England",
-    "city": "Harrogate",
-    "area": "Up & Running",
-    "oldCounty": "North of England",
-    "county": "North Yorkshire",
-    "region": "North of England"
-  },
   "haxby-10k-haxby": {
     "country": "England",
     "city": "Haxby",
@@ -486,14 +454,6 @@
     "oldCounty": "South of England",
     "county": "Suffolk",
     "region": "South of England"
-  },
-  "the-drop-kendal": {
-    "country": "England",
-    "city": "Kendal",
-    "area": "Podda & Wren Coffee Roasters",
-    "oldCounty": "North of England",
-    "county": "Cumbria",
-    "region": "North of England"
   },
   "beyond-the-lune-winter-ultra": {
     "country": "England",
@@ -716,14 +676,6 @@
     "city": "Edinburgh",
     "area": "Edinburgh",
     "oldCounty": "Edinburgh",
-    "county": "City of Edinburgh",
-    "region": null
-  },
-  "the-drop-edinburgh": {
-    "country": "Scotland",
-    "city": "Edinburgh",
-    "area": "Up & Running",
-    "oldCounty": "Scotland",
     "county": "City of Edinburgh",
     "region": null
   },
@@ -965,14 +917,6 @@
     "area": "",
     "oldCounty": "",
     "county": "City of Edinburgh",
-    "region": null
-  },
-  "the-glasgow-ultra-gb": {
-    "country": "United Kingdom",
-    "city": "Glasgow",
-    "area": "",
-    "oldCounty": "",
-    "county": "Glasgow City",
     "region": null
   },
   "run4all-neath-santa-run-gb": {

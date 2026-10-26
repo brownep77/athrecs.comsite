@@ -36,6 +36,10 @@ assert.ok(
   "Marketing city is not its start venue",
 );
 assert.ok(held.every((h) => h.reason));
+assert.ok(
+  !corrections.some((c) => c.slug.startsWith("the-drop-") || c.slug === "the-glasgow-ultra-gb"),
+  "Undisclosed starts need separate venue review",
+);
 const db = new PGlite();
 try {
   await db.exec(

@@ -902,39 +902,6 @@
       ]
     },
     {
-      "id": "os-3ea1e80b128f",
-      "sourceUrl": "https://api.postcodes.io/places?q=Darlington&limit=100",
-      "checkedAt": "2026-10-26T17:39:46.344862+00:00",
-      "sha256": "393df9667d8b9e6be3aa0e62070b89976f99b6ee41ea46b07e09f25b6c68f06f",
-      "query": "Darlington",
-      "resultCount": 1,
-      "exactMatches": [
-        {
-          "code": "osgb4000000074555966",
-          "name_1": "Darlington",
-          "name_1_lang": null,
-          "name_2": null,
-          "name_2_lang": null,
-          "local_type": "Town",
-          "outcode": "DL1",
-          "county_unitary": "Darlington",
-          "county_unitary_type": "UnitaryAuthority",
-          "district_borough": null,
-          "district_borough_type": null,
-          "region": "North East",
-          "country": "England",
-          "longitude": -1.553611492023698,
-          "latitude": 54.523273598643435,
-          "eastings": 428991,
-          "northings": 514312,
-          "min_eastings": 425181,
-          "min_northings": 512341,
-          "max_eastings": 432573,
-          "max_northings": 518665
-        }
-      ]
-    },
-    {
       "id": "os-ead195fc8241",
       "sourceUrl": "https://api.postcodes.io/places?q=Dent&limit=100",
       "checkedAt": "2026-10-26T17:39:53.546893+00:00",
@@ -1591,39 +1558,6 @@
           "min_northings": 241152,
           "max_eastings": 622157,
           "max_northings": 248258
-        }
-      ]
-    },
-    {
-      "id": "os-afbba89fd635",
-      "sourceUrl": "https://api.postcodes.io/places?q=Kendal&limit=100",
-      "checkedAt": "2026-10-26T17:42:01.501463+00:00",
-      "sha256": "8360c06a6e8b27af79ce31c5941ba5dc05ad97094f0e52eec9814ed8dae4600d",
-      "query": "Kendal",
-      "resultCount": 3,
-      "exactMatches": [
-        {
-          "code": "osgb4000000074568278",
-          "name_1": "Kendal",
-          "name_1_lang": null,
-          "name_2": null,
-          "name_2_lang": null,
-          "local_type": "Town",
-          "outcode": "LA9",
-          "county_unitary": "Westmorland and Furness",
-          "county_unitary_type": "UnitaryAuthority",
-          "district_borough": null,
-          "district_borough_type": null,
-          "region": "North West",
-          "country": "England",
-          "longitude": -2.7473819983907033,
-          "latitude": 54.33041093731614,
-          "eastings": 351495,
-          "northings": 493018,
-          "min_eastings": 350181,
-          "min_northings": 490029,
-          "max_eastings": 353404,
-          "max_northings": 495056
         }
       ]
     },
@@ -2436,6 +2370,24 @@
       "sourceUrl": "https://tullamoreharriers.squarespace.com/",
       "checkedAt": "2026-10-26",
       "note": "Club track address is Spollanstown, Tullamore, Co Offaly R35 CK22."
+    },
+    {
+      "id": "pewsey-start",
+      "sourceUrl": "https://andovertrailrunning.eventrac.co.uk/e/pewsey-vale-ultra-10911/results",
+      "checkedAt": "2026-10-26",
+      "note": "Organiser lists Linkenholt Activity Center, Linkenholt, Andover, Hampshire SP11 0EA. County is the start venue, not the Wiltshire course."
+    },
+    {
+      "id": "emf-venues",
+      "sourceUrl": "https://www.edinburghmarathon.com/news/courses-routes/ultimate-spectator-guide-EMF",
+      "checkedAt": "2026-10-26",
+      "note": "Organiser confirms city starts and Holyrood Park for 5K, 10K and junior races; marathon continues into East Lothian. Starting area does not describe all course counties."
+    },
+    {
+      "id": "drop-undisclosed",
+      "sourceUrl": "https://www.thedropuk.co.uk/e/the-drop-harrogate-13242",
+      "checkedAt": "2026-10-26",
+      "note": "Organiser distinguishes registration/event centre from undisclosed start; Drop races held for venue-specific treatment."
     }
   ],
   "corrections": [
@@ -2454,10 +2406,7 @@
         "county": "Cheshire",
         "region": "North West"
       },
-      "evidenceIds": [
-        "os-728b8011515f",
-        "county-law"
-      ],
+      "evidenceIds": ["os-728b8011515f", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2475,9 +2424,7 @@
         "county": "Hampshire",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-704cb4325043"
-      ],
+      "evidenceIds": ["os-704cb4325043"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2495,10 +2442,8 @@
         "county": "Hampshire",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-704cb4325043"
-      ],
-      "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
+      "evidenceIds": ["os-704cb4325043", "pewsey-start"],
+      "method": "Recorded start venue county confirmed by organiser address; OS geography supplies the broader region"
     },
     {
       "slug": "tough-mudder-south-west-spartan",
@@ -2515,10 +2460,7 @@
         "county": "Gloucestershire",
         "region": "South West"
       },
-      "evidenceIds": [
-        "os-e29e9f9c8590",
-        "county-law"
-      ],
+      "evidenceIds": ["os-e29e9f9c8590", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2536,9 +2478,7 @@
         "county": "Essex",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-8a3dcd85d2da"
-      ],
+      "evidenceIds": ["os-8a3dcd85d2da"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2556,9 +2496,7 @@
         "county": "Essex",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-8a3dcd85d2da"
-      ],
+      "evidenceIds": ["os-8a3dcd85d2da"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2576,31 +2514,7 @@
         "county": "Somerset",
         "region": "South West"
       },
-      "evidenceIds": [
-        "os-1b4e390dcd79",
-        "county-law"
-      ],
-      "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
-    },
-    {
-      "slug": "the-drop-bath",
-      "before": {
-        "country": "England",
-        "city": "Bath",
-        "county": "South of England",
-        "region": null,
-        "area": "Lulu Caffe",
-        "website": "https://runabc.co.uk/the-drop-bath",
-        "source_url": null
-      },
-      "after": {
-        "county": "Somerset",
-        "region": "South of England"
-      },
-      "evidenceIds": [
-        "os-1b4e390dcd79",
-        "county-law"
-      ],
+      "evidenceIds": ["os-1b4e390dcd79", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2618,9 +2532,7 @@
         "county": "Greater London",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-7b0f9f0d30c5"
-      ],
+      "evidenceIds": ["os-7b0f9f0d30c5"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2638,10 +2550,7 @@
         "county": "West Midlands",
         "region": "West Midlands"
       },
-      "evidenceIds": [
-        "os-810c069040f6",
-        "retained-geo-268"
-      ],
+      "evidenceIds": ["os-810c069040f6", "retained-geo-268"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2659,10 +2568,7 @@
         "county": "West Midlands",
         "region": "Midlands"
       },
-      "evidenceIds": [
-        "os-810c069040f6",
-        "retained-geo-268"
-      ],
+      "evidenceIds": ["os-810c069040f6", "retained-geo-268"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2680,10 +2586,7 @@
         "county": "West Midlands",
         "region": "West Midlands"
       },
-      "evidenceIds": [
-        "os-810c069040f6",
-        "retained-geo-268"
-      ],
+      "evidenceIds": ["os-810c069040f6", "retained-geo-268"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2701,9 +2604,7 @@
         "county": "County Durham",
         "region": "North of England"
       },
-      "evidenceIds": [
-        "os-97b6ca9de0c2"
-      ],
+      "evidenceIds": ["os-97b6ca9de0c2"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2721,9 +2622,7 @@
         "county": "North Yorkshire",
         "region": "Yorkshire and the Humber"
       },
-      "evidenceIds": [
-        "os-f6c125d2317b"
-      ],
+      "evidenceIds": ["os-f6c125d2317b"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2741,10 +2640,7 @@
         "county": "Dorset",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-0fa4720e8f52",
-        "county-law"
-      ],
+      "evidenceIds": ["os-0fa4720e8f52", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2762,10 +2658,7 @@
         "county": "Dorset",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-0fa4720e8f52",
-        "county-law"
-      ],
+      "evidenceIds": ["os-0fa4720e8f52", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2783,9 +2676,7 @@
         "county": "Essex",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-b26c5c357fda"
-      ],
+      "evidenceIds": ["os-b26c5c357fda"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2803,9 +2694,7 @@
         "county": "Somerset",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-448678a4b4b4"
-      ],
+      "evidenceIds": ["os-448678a4b4b4"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2823,9 +2712,7 @@
         "county": "Hertfordshire",
         "region": "East of England"
       },
-      "evidenceIds": [
-        "os-7aa502b783e7"
-      ],
+      "evidenceIds": ["os-7aa502b783e7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2843,9 +2730,7 @@
         "county": "Hertfordshire",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-7aa502b783e7"
-      ],
+      "evidenceIds": ["os-7aa502b783e7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2863,9 +2748,7 @@
         "county": "Hertfordshire",
         "region": "East of England"
       },
-      "evidenceIds": [
-        "os-7aa502b783e7"
-      ],
+      "evidenceIds": ["os-7aa502b783e7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2883,9 +2766,7 @@
         "county": "Suffolk",
         "region": "East of England"
       },
-      "evidenceIds": [
-        "os-7b1e10105681"
-      ],
+      "evidenceIds": ["os-7b1e10105681"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2903,10 +2784,7 @@
         "county": "Cumbria",
         "region": "North West"
       },
-      "evidenceIds": [
-        "os-381c4a770678",
-        "county-law"
-      ],
+      "evidenceIds": ["os-381c4a770678", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2924,9 +2802,7 @@
         "county": "Buckinghamshire",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-66579fc138ad"
-      ],
+      "evidenceIds": ["os-66579fc138ad"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2944,10 +2820,7 @@
         "county": "Cheshire",
         "region": "North West"
       },
-      "evidenceIds": [
-        "os-618738f7143c",
-        "county-law"
-      ],
+      "evidenceIds": ["os-618738f7143c", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2965,10 +2838,7 @@
         "county": "Cheshire",
         "region": "North West"
       },
-      "evidenceIds": [
-        "os-618738f7143c",
-        "county-law"
-      ],
+      "evidenceIds": ["os-618738f7143c", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -2986,10 +2856,7 @@
         "county": "Cheshire",
         "region": "North West"
       },
-      "evidenceIds": [
-        "os-618738f7143c",
-        "county-law"
-      ],
+      "evidenceIds": ["os-618738f7143c", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3007,9 +2874,7 @@
         "county": "West Sussex",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-4e2755d4ce33"
-      ],
+      "evidenceIds": ["os-4e2755d4ce33"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3027,9 +2892,7 @@
         "county": "Greater London",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-499bfb16f02a"
-      ],
+      "evidenceIds": ["os-499bfb16f02a"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3047,10 +2910,7 @@
         "county": "Lincolnshire",
         "region": "Yorkshire and the Humber"
       },
-      "evidenceIds": [
-        "os-11aa937abc77",
-        "county-law"
-      ],
+      "evidenceIds": ["os-11aa937abc77", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3068,10 +2928,7 @@
         "county": "Cumbria",
         "region": "North of England"
       },
-      "evidenceIds": [
-        "os-33564ef63ed5",
-        "county-law"
-      ],
+      "evidenceIds": ["os-33564ef63ed5", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3089,9 +2946,7 @@
         "county": "Essex",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-6b33d27be13e"
-      ],
+      "evidenceIds": ["os-6b33d27be13e"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3109,9 +2964,7 @@
         "county": "Essex",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-6b33d27be13e"
-      ],
+      "evidenceIds": ["os-6b33d27be13e"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3129,31 +2982,7 @@
         "county": "Northamptonshire",
         "region": "Midlands"
       },
-      "evidenceIds": [
-        "os-cb40b946e7e1",
-        "county-law"
-      ],
-      "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
-    },
-    {
-      "slug": "the-drop-darlington",
-      "before": {
-        "country": "England",
-        "city": "Darlington",
-        "county": "North of England",
-        "region": null,
-        "area": "Up & Running",
-        "website": "https://runabc.co.uk/the-drop-darlington",
-        "source_url": null
-      },
-      "after": {
-        "county": "County Durham",
-        "region": "North of England"
-      },
-      "evidenceIds": [
-        "os-3ea1e80b128f",
-        "county-law"
-      ],
+      "evidenceIds": ["os-cb40b946e7e1", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3171,10 +3000,7 @@
         "county": "Cumbria",
         "region": "North West"
       },
-      "evidenceIds": [
-        "os-ead195fc8241",
-        "county-law"
-      ],
+      "evidenceIds": ["os-ead195fc8241", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3192,29 +3018,7 @@
         "county": "County Durham",
         "region": "North East"
       },
-      "evidenceIds": [
-        "os-cda115aaa794"
-      ],
-      "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
-    },
-    {
-      "slug": "the-drop-durham",
-      "before": {
-        "country": "England",
-        "city": "Durham",
-        "county": "North of England",
-        "region": null,
-        "area": "The Cartologist",
-        "website": "https://runabc.co.uk/the-drop-durham",
-        "source_url": null
-      },
-      "after": {
-        "county": "County Durham",
-        "region": "North of England"
-      },
-      "evidenceIds": [
-        "os-cda115aaa794"
-      ],
+      "evidenceIds": ["os-cda115aaa794"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3232,9 +3036,7 @@
         "county": "West Sussex",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-f690ef790bad"
-      ],
+      "evidenceIds": ["os-f690ef790bad"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3252,9 +3054,7 @@
         "county": "Surrey",
         "region": "South East"
       },
-      "evidenceIds": [
-        "os-21b1bcc4aa72"
-      ],
+      "evidenceIds": ["os-21b1bcc4aa72"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3272,9 +3072,7 @@
         "county": "Devon",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-3ef7e995c2ca"
-      ],
+      "evidenceIds": ["os-3ef7e995c2ca"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3292,9 +3090,7 @@
         "county": "Devon",
         "region": "South West"
       },
-      "evidenceIds": [
-        "os-3ef7e995c2ca"
-      ],
+      "evidenceIds": ["os-3ef7e995c2ca"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3312,9 +3108,7 @@
         "county": "Devon",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-3ef7e995c2ca"
-      ],
+      "evidenceIds": ["os-3ef7e995c2ca"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3332,9 +3126,7 @@
         "county": "Devon",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-3ef7e995c2ca"
-      ],
+      "evidenceIds": ["os-3ef7e995c2ca"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3352,9 +3144,7 @@
         "county": "Devon",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-17d301ca0232"
-      ],
+      "evidenceIds": ["os-17d301ca0232"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3372,9 +3162,7 @@
         "county": "Devon",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-17d301ca0232"
-      ],
+      "evidenceIds": ["os-17d301ca0232"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3392,9 +3180,7 @@
         "county": "Kent",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-ac344ebabde5"
-      ],
+      "evidenceIds": ["os-ac344ebabde5"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3412,9 +3198,7 @@
         "county": "Cornwall",
         "region": "South West"
       },
-      "evidenceIds": [
-        "os-30c3cc26add9"
-      ],
+      "evidenceIds": ["os-30c3cc26add9"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3432,10 +3216,7 @@
         "county": "Tyne and Wear",
         "region": "North of England"
       },
-      "evidenceIds": [
-        "os-edfd576def16",
-        "retained-geo-275"
-      ],
+      "evidenceIds": ["os-edfd576def16", "retained-geo-275"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3453,9 +3234,7 @@
         "county": "Gloucestershire",
         "region": "South West"
       },
-      "evidenceIds": [
-        "os-3799194a2428"
-      ],
+      "evidenceIds": ["os-3799194a2428"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3473,9 +3252,7 @@
         "county": "North Yorkshire",
         "region": "North of England"
       },
-      "evidenceIds": [
-        "os-6f0f1c0c9a3d"
-      ],
+      "evidenceIds": ["os-6f0f1c0c9a3d"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3493,9 +3270,7 @@
         "county": "Hampshire",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-b0beeebd0c1d"
-      ],
+      "evidenceIds": ["os-b0beeebd0c1d"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3513,9 +3288,7 @@
         "county": "Worcestershire",
         "region": "Midlands"
       },
-      "evidenceIds": [
-        "os-de0d541392fd"
-      ],
+      "evidenceIds": ["os-de0d541392fd"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3533,10 +3306,7 @@
         "county": "Lincolnshire",
         "region": "Yorkshire and the Humber"
       },
-      "evidenceIds": [
-        "os-c2210d86a894",
-        "county-law"
-      ],
+      "evidenceIds": ["os-c2210d86a894", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3554,29 +3324,7 @@
         "county": "North Yorkshire",
         "region": "North of England"
       },
-      "evidenceIds": [
-        "os-f96cdd31b974"
-      ],
-      "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
-    },
-    {
-      "slug": "the-drop-harrogate",
-      "before": {
-        "country": "England",
-        "city": "Harrogate",
-        "county": "North of England",
-        "region": null,
-        "area": "Up & Running",
-        "website": "https://runabc.co.uk/the-drop-harrogate",
-        "source_url": null
-      },
-      "after": {
-        "county": "North Yorkshire",
-        "region": "North of England"
-      },
-      "evidenceIds": [
-        "os-f96cdd31b974"
-      ],
+      "evidenceIds": ["os-f96cdd31b974"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3594,10 +3342,7 @@
         "county": "North Yorkshire",
         "region": "Yorkshire and the Humber"
       },
-      "evidenceIds": [
-        "os-8739e27b9245",
-        "county-law"
-      ],
+      "evidenceIds": ["os-8739e27b9245", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3615,9 +3360,7 @@
         "county": "West Sussex",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-da99fe39ee42"
-      ],
+      "evidenceIds": ["os-da99fe39ee42"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3635,9 +3378,7 @@
         "county": "Cambridgeshire",
         "region": "East of England"
       },
-      "evidenceIds": [
-        "os-76616ac57473"
-      ],
+      "evidenceIds": ["os-76616ac57473"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3655,9 +3396,7 @@
         "county": "North Yorkshire",
         "region": "North of England"
       },
-      "evidenceIds": [
-        "os-9343f8c676d2"
-      ],
+      "evidenceIds": ["os-9343f8c676d2"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3675,30 +3414,7 @@
         "county": "Suffolk",
         "region": "South of England"
       },
-      "evidenceIds": [
-        "os-f85b65964d0c"
-      ],
-      "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
-    },
-    {
-      "slug": "the-drop-kendal",
-      "before": {
-        "country": "England",
-        "city": "Kendal",
-        "county": "North of England",
-        "region": null,
-        "area": "Podda & Wren Coffee Roasters",
-        "website": "https://runabc.co.uk/the-drop-kendal",
-        "source_url": null
-      },
-      "after": {
-        "county": "Cumbria",
-        "region": "North of England"
-      },
-      "evidenceIds": [
-        "os-afbba89fd635",
-        "county-law"
-      ],
+      "evidenceIds": ["os-f85b65964d0c"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3716,10 +3432,7 @@
         "county": "Cumbria",
         "region": "North West"
       },
-      "evidenceIds": [
-        "os-24c715c0dcf2",
-        "county-law"
-      ],
+      "evidenceIds": ["os-24c715c0dcf2", "county-law"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3737,10 +3450,7 @@
         "county": "West Yorkshire",
         "region": "North of England"
       },
-      "evidenceIds": [
-        "os-051662e39e3b",
-        "retained-geo-145"
-      ],
+      "evidenceIds": ["os-051662e39e3b", "retained-geo-145"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3758,9 +3468,7 @@
         "county": "Hertfordshire",
         "region": "East of England"
       },
-      "evidenceIds": [
-        "os-018057173685"
-      ],
+      "evidenceIds": ["os-018057173685"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3778,9 +3486,7 @@
         "county": "Aberdeen City",
         "region": null
       },
-      "evidenceIds": [
-        "os-2baa70fa9608"
-      ],
+      "evidenceIds": ["os-2baa70fa9608"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3798,9 +3504,7 @@
         "county": "Aberdeen City",
         "region": null
       },
-      "evidenceIds": [
-        "os-2baa70fa9608"
-      ],
+      "evidenceIds": ["os-2baa70fa9608"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3818,9 +3522,7 @@
         "county": "Aberdeen City",
         "region": null
       },
-      "evidenceIds": [
-        "os-2baa70fa9608"
-      ],
+      "evidenceIds": ["os-2baa70fa9608"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3838,9 +3540,7 @@
         "county": "Aberdeen City",
         "region": null
       },
-      "evidenceIds": [
-        "os-2baa70fa9608"
-      ],
+      "evidenceIds": ["os-2baa70fa9608"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3858,9 +3558,7 @@
         "county": "Aberdeen City",
         "region": null
       },
-      "evidenceIds": [
-        "os-2baa70fa9608"
-      ],
+      "evidenceIds": ["os-2baa70fa9608"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3878,9 +3576,7 @@
         "county": "Perth and Kinross",
         "region": null
       },
-      "evidenceIds": [
-        "os-c03aa3bad952"
-      ],
+      "evidenceIds": ["os-c03aa3bad952"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3898,9 +3594,7 @@
         "county": "Perth and Kinross",
         "region": null
       },
-      "evidenceIds": [
-        "os-27f04e727fb4"
-      ],
+      "evidenceIds": ["os-27f04e727fb4"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3918,9 +3612,7 @@
         "county": "Midlothian",
         "region": null
       },
-      "evidenceIds": [
-        "os-2e7cb8885603"
-      ],
+      "evidenceIds": ["os-2e7cb8885603"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3938,9 +3630,7 @@
         "county": "East Lothian",
         "region": null
       },
-      "evidenceIds": [
-        "os-d41e3d0cd299"
-      ],
+      "evidenceIds": ["os-d41e3d0cd299"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3958,9 +3648,7 @@
         "county": "East Lothian",
         "region": null
       },
-      "evidenceIds": [
-        "os-d41e3d0cd299"
-      ],
+      "evidenceIds": ["os-d41e3d0cd299"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3978,9 +3666,7 @@
         "county": "Dundee City",
         "region": null
       },
-      "evidenceIds": [
-        "os-28cbd370a512"
-      ],
+      "evidenceIds": ["os-28cbd370a512"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -3998,9 +3684,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4018,9 +3702,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4038,9 +3720,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1", "emf-venues"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4058,9 +3738,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1", "emf-venues"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4078,9 +3756,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1", "emf-venues"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4098,9 +3774,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1", "emf-venues"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4118,9 +3792,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4138,9 +3810,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4158,9 +3828,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4178,9 +3846,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4198,9 +3864,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4218,9 +3882,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4238,9 +3900,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4258,29 +3918,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
-      "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
-    },
-    {
-      "slug": "the-drop-edinburgh",
-      "before": {
-        "country": "Scotland",
-        "city": "Edinburgh",
-        "county": "Scotland",
-        "region": null,
-        "area": "Up & Running",
-        "website": "https://runabc.co.uk/the-drop-edinburgh",
-        "source_url": null
-      },
-      "after": {
-        "county": "City of Edinburgh",
-        "region": null
-      },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4298,9 +3936,7 @@
         "county": "Moray",
         "region": null
       },
-      "evidenceIds": [
-        "os-80ad1218e7cf"
-      ],
+      "evidenceIds": ["os-80ad1218e7cf"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4318,9 +3954,7 @@
         "county": "Falkirk",
         "region": null
       },
-      "evidenceIds": [
-        "os-fdd769fc1042"
-      ],
+      "evidenceIds": ["os-fdd769fc1042"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4338,9 +3972,7 @@
         "county": "Falkirk",
         "region": null
       },
-      "evidenceIds": [
-        "os-fdd769fc1042"
-      ],
+      "evidenceIds": ["os-fdd769fc1042"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4358,9 +3990,7 @@
         "county": "Falkirk",
         "region": null
       },
-      "evidenceIds": [
-        "os-fdd769fc1042"
-      ],
+      "evidenceIds": ["os-fdd769fc1042"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4378,9 +4008,7 @@
         "county": "Falkirk",
         "region": null
       },
-      "evidenceIds": [
-        "os-fdd769fc1042"
-      ],
+      "evidenceIds": ["os-fdd769fc1042"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4398,9 +4026,7 @@
         "county": "Angus",
         "region": null
       },
-      "evidenceIds": [
-        "os-ec67f50d7855"
-      ],
+      "evidenceIds": ["os-ec67f50d7855"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4418,9 +4044,7 @@
         "county": "Aberdeenshire",
         "region": null
       },
-      "evidenceIds": [
-        "os-2550fbde0a8b"
-      ],
+      "evidenceIds": ["os-2550fbde0a8b"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4438,9 +4062,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4458,9 +4080,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4478,9 +4098,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4498,9 +4116,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4518,9 +4134,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4538,9 +4152,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4558,9 +4170,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4578,9 +4188,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4598,9 +4206,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4618,9 +4224,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4638,9 +4242,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4658,9 +4260,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4678,9 +4278,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4698,9 +4296,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4718,9 +4314,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4738,9 +4332,7 @@
         "county": "Glasgow City",
         "region": null
       },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-9edff2628ff7"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4758,9 +4350,7 @@
         "county": "East Lothian",
         "region": null
       },
-      "evidenceIds": [
-        "os-1b48d7073b1f"
-      ],
+      "evidenceIds": ["os-1b48d7073b1f"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4778,9 +4368,7 @@
         "county": "Aberdeenshire",
         "region": null
       },
-      "evidenceIds": [
-        "os-3a46a33c1eb1"
-      ],
+      "evidenceIds": ["os-3a46a33c1eb1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4798,9 +4386,7 @@
         "county": "Inverclyde",
         "region": null
       },
-      "evidenceIds": [
-        "os-0fee9a326fd4"
-      ],
+      "evidenceIds": ["os-0fee9a326fd4"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4818,9 +4404,7 @@
         "county": "Moray",
         "region": null
       },
-      "evidenceIds": [
-        "os-291c5129eadf"
-      ],
+      "evidenceIds": ["os-291c5129eadf"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4838,9 +4422,7 @@
         "county": "Fife",
         "region": null
       },
-      "evidenceIds": [
-        "os-40d66c2545f5"
-      ],
+      "evidenceIds": ["os-40d66c2545f5"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4858,9 +4440,7 @@
         "county": "West Sussex",
         "region": "South East"
       },
-      "evidenceIds": [
-        "os-f690ef790bad"
-      ],
+      "evidenceIds": ["os-f690ef790bad"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4878,29 +4458,7 @@
         "county": "City of Edinburgh",
         "region": null
       },
-      "evidenceIds": [
-        "os-4f00c4593da1"
-      ],
-      "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
-    },
-    {
-      "slug": "the-glasgow-ultra-gb",
-      "before": {
-        "country": "United Kingdom",
-        "city": "Glasgow",
-        "county": "",
-        "region": null,
-        "area": "",
-        "website": "https://www.letsdothis.com/gb/e/the-glasgow-ultra-268881",
-        "source_url": null
-      },
-      "after": {
-        "county": "Glasgow City",
-        "region": null
-      },
-      "evidenceIds": [
-        "os-9edff2628ff7"
-      ],
+      "evidenceIds": ["os-4f00c4593da1"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4918,9 +4476,7 @@
         "county": "Neath Port Talbot",
         "region": null
       },
-      "evidenceIds": [
-        "os-00cda87c3fd4"
-      ],
+      "evidenceIds": ["os-00cda87c3fd4"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4938,9 +4494,7 @@
         "county": "Caerphilly",
         "region": null
       },
-      "evidenceIds": [
-        "os-6cf5ade7afdb"
-      ],
+      "evidenceIds": ["os-6cf5ade7afdb"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4958,9 +4512,7 @@
         "county": "Cardiff",
         "region": null
       },
-      "evidenceIds": [
-        "os-5372372f3bf5"
-      ],
+      "evidenceIds": ["os-5372372f3bf5"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4978,9 +4530,7 @@
         "county": "Cardiff",
         "region": null
       },
-      "evidenceIds": [
-        "os-5372372f3bf5"
-      ],
+      "evidenceIds": ["os-5372372f3bf5"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -4998,9 +4548,7 @@
         "county": "Cardiff",
         "region": null
       },
-      "evidenceIds": [
-        "os-5372372f3bf5"
-      ],
+      "evidenceIds": ["os-5372372f3bf5"],
       "method": "Exact recorded locality, all exact OS matches agree; geographic enrichment, not a fresh race venue check"
     },
     {
@@ -5018,10 +4566,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5039,10 +4584,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5060,10 +4602,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5081,10 +4620,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5102,10 +4638,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5123,10 +4656,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-dublin",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-dublin", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5144,10 +4674,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-dublin",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-dublin", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5165,10 +4692,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-dublin",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-dublin", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5186,10 +4710,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-dublin",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-dublin", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5207,10 +4728,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-dublin",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-dublin", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5228,10 +4746,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-dublin",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-dublin", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5249,10 +4764,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-dublin",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-dublin", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5270,10 +4782,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-dublin",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-dublin", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5291,10 +4800,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-dublin",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-dublin", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5312,10 +4818,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5333,10 +4836,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5354,10 +4854,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5375,10 +4872,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5396,10 +4890,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-westmeath",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-westmeath", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5417,10 +4908,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-offaly",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-offaly", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5438,10 +4926,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-offaly",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-offaly", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5459,10 +4944,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-offaly",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-offaly", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5480,10 +4962,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-offaly",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-offaly", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5501,10 +4980,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-offaly",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-offaly", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5522,10 +4998,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-offaly",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-offaly", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5543,10 +5016,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-offaly",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-offaly", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5564,10 +5034,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-offaly",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-offaly", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5585,10 +5052,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "venue-offaly",
-        "ie-provinces"
-      ],
+      "evidenceIds": ["venue-offaly", "ie-provinces"],
       "method": "Exact recorded venue matched to venue-owner address"
     },
     {
@@ -5606,9 +5070,7 @@
         "county": "County Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5626,9 +5088,7 @@
         "county": "County Longford",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5646,9 +5106,7 @@
         "county": "County Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5666,9 +5124,7 @@
         "county": "Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5686,9 +5142,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5706,9 +5160,7 @@
         "county": "Louth",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5726,9 +5178,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5746,9 +5196,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5766,9 +5214,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5786,9 +5232,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5806,9 +5250,7 @@
         "county": "Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5826,9 +5268,7 @@
         "county": "Wicklow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5846,9 +5286,7 @@
         "county": "Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5866,9 +5304,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5886,9 +5322,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5906,9 +5340,7 @@
         "county": "Kildare",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5926,9 +5358,7 @@
         "county": "Wicklow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5946,9 +5376,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5966,9 +5394,7 @@
         "county": "Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -5986,9 +5412,7 @@
         "county": "Cavan",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6006,9 +5430,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6026,9 +5448,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6046,9 +5466,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6066,9 +5484,7 @@
         "county": "Waterford",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6086,9 +5502,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6106,9 +5520,7 @@
         "county": "Wicklow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6126,9 +5538,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6146,9 +5556,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6166,9 +5574,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6186,9 +5592,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6206,9 +5610,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6226,9 +5628,7 @@
         "county": "Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6246,9 +5646,7 @@
         "county": "Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6266,9 +5664,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6286,9 +5682,7 @@
         "county": "County Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6306,9 +5700,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6326,9 +5718,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6346,9 +5736,7 @@
         "county": "Fermanagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6366,9 +5754,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6386,9 +5772,7 @@
         "county": "Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6406,9 +5790,7 @@
         "county": "County Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6426,9 +5808,7 @@
         "county": "County Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6446,9 +5826,7 @@
         "county": "Sligo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6466,9 +5844,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6486,9 +5862,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6506,9 +5880,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6526,9 +5898,7 @@
         "county": "Laois",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6546,9 +5916,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6566,9 +5934,7 @@
         "county": "Carlow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6586,9 +5952,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6606,9 +5970,7 @@
         "county": "Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6626,9 +5988,7 @@
         "county": "Monaghan",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6646,9 +6006,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6666,9 +6024,7 @@
         "county": "Roscommon",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6686,9 +6042,7 @@
         "county": "County Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6706,9 +6060,7 @@
         "county": "Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6726,9 +6078,7 @@
         "county": "County Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6746,9 +6096,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6766,9 +6114,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6786,9 +6132,7 @@
         "county": "Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6806,9 +6150,7 @@
         "county": "County Kildare",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6826,9 +6168,7 @@
         "county": "County Clare",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6846,9 +6186,7 @@
         "county": "Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6866,9 +6204,7 @@
         "county": "Limerick",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6886,9 +6222,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6906,9 +6240,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6926,9 +6258,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6946,9 +6276,7 @@
         "county": "Sligo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6966,9 +6294,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -6986,9 +6312,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7006,9 +6330,7 @@
         "county": "Tipperary",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7026,9 +6348,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7046,9 +6366,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7066,9 +6384,7 @@
         "county": "County Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7086,9 +6402,7 @@
         "county": "Cavan",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7106,9 +6420,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7126,9 +6438,7 @@
         "county": "Monaghan",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7146,9 +6456,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7166,9 +6474,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7186,9 +6492,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7206,9 +6510,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7226,9 +6528,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7246,9 +6546,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7266,9 +6564,7 @@
         "county": "Meath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7286,9 +6582,7 @@
         "county": "Cavan",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7306,9 +6600,7 @@
         "county": "County Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7326,9 +6618,7 @@
         "county": "Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7346,9 +6636,7 @@
         "county": "Derry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7366,9 +6654,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7386,9 +6672,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7406,9 +6690,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7426,9 +6708,7 @@
         "county": "County Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7446,9 +6726,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7466,9 +6744,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7486,9 +6762,7 @@
         "county": "County Kildare",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7506,9 +6780,7 @@
         "county": "County Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7526,9 +6798,7 @@
         "county": "County Louth",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7546,9 +6816,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7566,9 +6834,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7586,9 +6852,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7606,9 +6870,7 @@
         "county": "County Louth",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7626,9 +6888,7 @@
         "county": "Louth",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7646,9 +6906,7 @@
         "county": "Louth",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7666,9 +6924,7 @@
         "county": "Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7686,9 +6942,7 @@
         "county": "Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7706,9 +6960,7 @@
         "county": "Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7726,9 +6978,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7746,9 +6996,7 @@
         "county": "Meath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7766,9 +7014,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7786,9 +7032,7 @@
         "county": "Fermanagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7806,9 +7050,7 @@
         "county": "Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7826,9 +7068,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7846,9 +7086,7 @@
         "county": "Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7866,9 +7104,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7886,9 +7122,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7906,9 +7140,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7926,9 +7158,7 @@
         "county": "Tipperary",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7946,9 +7176,7 @@
         "county": "Tipperary",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7966,9 +7194,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -7986,9 +7212,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8006,9 +7230,7 @@
         "county": "Wicklow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8026,9 +7248,7 @@
         "county": "County Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8046,9 +7266,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8066,9 +7284,7 @@
         "county": "Wicklow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8086,9 +7302,7 @@
         "county": "Sligo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8106,9 +7320,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8126,9 +7338,7 @@
         "county": "County Louth",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8146,9 +7356,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8166,9 +7374,7 @@
         "county": "Wicklow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8186,9 +7392,7 @@
         "county": "County Limerick",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8206,9 +7410,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8226,9 +7428,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8246,9 +7446,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8266,9 +7464,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8286,9 +7482,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8306,9 +7500,7 @@
         "county": "Wexford",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8326,9 +7518,7 @@
         "county": "County Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8346,9 +7536,7 @@
         "county": "Tyrone",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8366,9 +7554,7 @@
         "county": "Clare",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8386,9 +7572,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8406,9 +7590,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8426,9 +7608,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8446,9 +7626,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8466,9 +7644,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8486,9 +7662,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8506,9 +7680,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8526,9 +7698,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8546,9 +7716,7 @@
         "county": "County Waterford",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8566,9 +7734,7 @@
         "county": "Kilkenny",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8586,9 +7752,7 @@
         "county": "Kilkenny",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8606,9 +7770,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8626,9 +7788,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8646,9 +7806,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8666,9 +7824,7 @@
         "county": "County Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8686,9 +7842,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8706,9 +7860,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8726,9 +7878,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8746,9 +7896,7 @@
         "county": "Meath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8766,9 +7914,7 @@
         "county": "Clare",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8786,9 +7932,7 @@
         "county": "Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8806,9 +7950,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8826,9 +7968,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8846,9 +7986,7 @@
         "county": "County Limerick",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8866,9 +8004,7 @@
         "county": "Limerick",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8886,9 +8022,7 @@
         "county": "Limerick",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8906,9 +8040,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8926,9 +8058,7 @@
         "county": "Roscommon",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8946,9 +8076,7 @@
         "county": "Roscommon",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8966,9 +8094,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -8986,9 +8112,7 @@
         "county": "Fermanagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9006,9 +8130,7 @@
         "county": "Roscommon",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9026,9 +8148,7 @@
         "county": "Roscommon",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9046,9 +8166,7 @@
         "county": "Tyrone",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9066,9 +8184,7 @@
         "county": "Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9086,9 +8202,7 @@
         "county": "Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9106,9 +8220,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9126,9 +8238,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9146,9 +8256,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9166,9 +8274,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9186,9 +8292,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9206,9 +8310,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9226,9 +8328,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9246,9 +8346,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9266,9 +8364,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9286,9 +8382,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9306,9 +8400,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9326,9 +8418,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9346,9 +8436,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9366,9 +8454,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9386,9 +8472,7 @@
         "county": "Monaghan",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9406,9 +8490,7 @@
         "county": "Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9426,9 +8508,7 @@
         "county": "Roscommon",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9446,9 +8526,7 @@
         "county": "Kildare",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9466,9 +8544,7 @@
         "county": "County Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9486,9 +8562,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9506,9 +8580,7 @@
         "county": "Limerick",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9526,9 +8598,7 @@
         "county": "Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9546,9 +8616,7 @@
         "county": "Kildare",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9566,9 +8634,7 @@
         "county": "Kildare",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9586,9 +8652,7 @@
         "county": "Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9606,9 +8670,7 @@
         "county": "Meath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9626,9 +8688,7 @@
         "county": "Tipperary",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9646,9 +8706,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9666,9 +8724,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9686,9 +8742,7 @@
         "county": "Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9706,9 +8760,7 @@
         "county": "Limerick",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9726,9 +8778,7 @@
         "county": "Waterford",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9746,9 +8796,7 @@
         "county": "Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9766,9 +8814,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9786,9 +8832,7 @@
         "county": "County Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9806,9 +8850,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9826,9 +8868,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9846,9 +8886,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9866,9 +8904,7 @@
         "county": "Meath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9886,9 +8922,7 @@
         "county": "Tyrone",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9906,9 +8940,7 @@
         "county": "Tyrone",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9926,9 +8958,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9946,9 +8976,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9966,9 +8994,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -9986,9 +9012,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10006,9 +9030,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10026,9 +9048,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10046,9 +9066,7 @@
         "county": "Tyrone",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10066,9 +9084,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10086,9 +9102,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10106,9 +9120,7 @@
         "county": "Meath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10126,9 +9138,7 @@
         "county": "County Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10146,9 +9156,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10166,9 +9174,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10186,9 +9192,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10206,9 +9210,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10226,9 +9228,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10246,9 +9246,7 @@
         "county": "County Donegal",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10266,9 +9264,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10286,9 +9282,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10306,9 +9300,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10326,9 +9318,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10346,9 +9336,7 @@
         "county": "Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10366,9 +9354,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10386,9 +9372,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10406,9 +9390,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10426,9 +9408,7 @@
         "county": "Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10446,9 +9426,7 @@
         "county": "Fermanagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10466,9 +9444,7 @@
         "county": "Meath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10486,9 +9462,7 @@
         "county": "Clare",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10506,9 +9480,7 @@
         "county": "Clare",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10526,9 +9498,7 @@
         "county": "Clare",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10546,9 +9516,7 @@
         "county": "County Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10566,9 +9534,7 @@
         "county": "County Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10586,9 +9552,7 @@
         "county": "County Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10606,9 +9570,7 @@
         "county": "County Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10626,9 +9588,7 @@
         "county": "County Down",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10646,9 +9606,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10666,9 +9624,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10686,9 +9642,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10706,9 +9660,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10726,9 +9678,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10746,9 +9696,7 @@
         "county": "Wicklow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10766,9 +9714,7 @@
         "county": "County Kildare",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10786,9 +9732,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10806,9 +9750,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10826,9 +9768,7 @@
         "county": "Waterford",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10846,9 +9786,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10866,9 +9804,7 @@
         "county": "Limerick",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10886,9 +9822,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10906,9 +9840,7 @@
         "county": "Sligo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10926,9 +9858,7 @@
         "county": "County Tyrone",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10946,9 +9876,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10966,9 +9894,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -10986,9 +9912,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11006,9 +9930,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11026,9 +9948,7 @@
         "county": "Roscommon",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11046,9 +9966,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11066,9 +9984,7 @@
         "county": "Tipperary",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11086,9 +10002,7 @@
         "county": "County Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11106,9 +10020,7 @@
         "county": "Tyrone",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11126,9 +10038,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11146,9 +10056,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11166,9 +10074,7 @@
         "county": "Offaly",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11186,9 +10092,7 @@
         "county": "Limerick",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11206,9 +10110,7 @@
         "county": "Westmeath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11226,9 +10128,7 @@
         "county": "Antrim",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11246,9 +10146,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11266,9 +10164,7 @@
         "county": "Kildare",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11286,9 +10182,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11306,9 +10200,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11326,9 +10218,7 @@
         "county": "County Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11346,9 +10236,7 @@
         "county": "County Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11366,9 +10254,7 @@
         "county": "Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11386,9 +10272,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11406,9 +10290,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11426,9 +10308,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11446,9 +10326,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11466,9 +10344,7 @@
         "county": "County Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11486,9 +10362,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11506,9 +10380,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11526,9 +10398,7 @@
         "county": "Waterford",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11546,9 +10416,7 @@
         "county": "Cork",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11566,9 +10434,7 @@
         "county": "County Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11586,9 +10452,7 @@
         "county": "County Meath",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11606,9 +10470,7 @@
         "county": "Sligo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11626,9 +10488,7 @@
         "county": "Kilkenny",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11646,9 +10506,7 @@
         "county": "Carlow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11666,9 +10524,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11686,9 +10542,7 @@
         "county": "Wicklow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11706,9 +10560,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11726,9 +10578,7 @@
         "county": "Clare",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11746,9 +10596,7 @@
         "county": "Laois",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11766,9 +10614,7 @@
         "county": "Laois",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11786,9 +10632,7 @@
         "county": "County Londonderry",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11806,9 +10650,7 @@
         "county": "Waterford",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11826,9 +10668,7 @@
         "county": "Armagh",
         "region": "Ulster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11846,9 +10686,7 @@
         "county": "Dublin",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11866,9 +10704,7 @@
         "county": "Kerry",
         "region": "Munster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11886,9 +10722,7 @@
         "county": "Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11906,9 +10740,7 @@
         "county": "Galway",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11926,9 +10758,7 @@
         "county": "County Wexford",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11946,9 +10776,7 @@
         "county": "Wexford",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11966,9 +10794,7 @@
         "county": "County Wicklow",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -11986,9 +10812,7 @@
         "county": "Mayo",
         "region": "Connacht"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     },
     {
@@ -12006,9 +10830,7 @@
         "county": "Kildare",
         "region": "Leinster"
       },
-      "evidenceIds": [
-        "ie-provinces"
-      ],
+      "evidenceIds": ["ie-provinces"],
       "method": "Province from existing exact county label; existing county evidence not reverified"
     }
   ],
@@ -12117,6 +10939,19 @@
       "area": "Bamburgh Castle, Northumberland",
       "reason": "No usable exact-place source response; needs venue research",
       "sourceAttempt": null
+    },
+    {
+      "slug": "the-drop-bath",
+      "country": "England",
+      "city": "Bath",
+      "county": "South of England",
+      "area": "Lulu Caffe",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
+      "sourceAttempt": {
+        "url": "https://api.postcodes.io/places?q=Bath&limit=100",
+        "checkedAt": "2026-10-26T17:37:52.868439+00:00",
+        "error": null
+      }
     },
     {
       "slug": "cockbain-the-tunnel",
@@ -12586,7 +11421,7 @@
       "city": "Cambridge",
       "county": "Midlands",
       "area": "Up & Running",
-      "reason": "Conflicting exact places or unmapped administrative area",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Cambridge&limit=100",
         "checkedAt": "2026-10-26T17:38:48.946456+00:00",
@@ -12942,6 +11777,19 @@
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Cumbria&limit=100",
         "checkedAt": "2026-10-26T17:39:38.970233+00:00",
+        "error": null
+      }
+    },
+    {
+      "slug": "the-drop-darlington",
+      "country": "England",
+      "city": "Darlington",
+      "county": "North of England",
+      "area": "Up & Running",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
+      "sourceAttempt": {
+        "url": "https://api.postcodes.io/places?q=Darlington&limit=100",
+        "checkedAt": "2026-10-26T17:39:46.344862+00:00",
         "error": null
       }
     },
@@ -13330,6 +12178,19 @@
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Dunstable+Downs&limit=100",
         "checkedAt": "2026-10-26T17:40:08.076526+00:00",
+        "error": null
+      }
+    },
+    {
+      "slug": "the-drop-durham",
+      "country": "England",
+      "city": "Durham",
+      "county": "North of England",
+      "area": "The Cartologist",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
+      "sourceAttempt": {
+        "url": "https://api.postcodes.io/places?q=Durham&limit=100",
+        "checkedAt": "2026-10-26T17:40:08.127331+00:00",
         "error": null
       }
     },
@@ -13723,7 +12584,7 @@
       "city": "Halifax",
       "county": "North of England",
       "area": "Dukes Bar",
-      "reason": "Conflicting exact places or unmapped administrative area",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Halifax&limit=100",
         "checkedAt": "2026-10-26T17:41:17.953435+00:00",
@@ -13805,6 +12666,19 @@
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Hampshire&limit=100",
         "checkedAt": "2026-10-26T17:41:25.347144+00:00",
+        "error": null
+      }
+    },
+    {
+      "slug": "the-drop-harrogate",
+      "country": "England",
+      "city": "Harrogate",
+      "county": "North of England",
+      "area": "Up & Running",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
+      "sourceAttempt": {
+        "url": "https://api.postcodes.io/places?q=Harrogate&limit=100",
+        "checkedAt": "2026-10-26T17:41:25.297305+00:00",
         "error": null
       }
     },
@@ -13954,7 +12828,7 @@
       "city": "Horsham",
       "county": "South of England",
       "area": "Up & Running",
-      "reason": "Conflicting exact places or unmapped administrative area",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Horsham&limit=100",
         "checkedAt": "2026-10-26T17:41:39.567573+00:00",
@@ -14091,6 +12965,19 @@
       "area": "Kempston, near Bedford",
       "reason": "No usable exact-place source response; needs venue research",
       "sourceAttempt": null
+    },
+    {
+      "slug": "the-drop-kendal",
+      "country": "England",
+      "city": "Kendal",
+      "county": "North of England",
+      "area": "Podda & Wren Coffee Roasters",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
+      "sourceAttempt": {
+        "url": "https://api.postcodes.io/places?q=Kendal&limit=100",
+        "checkedAt": "2026-10-26T17:42:01.501463+00:00",
+        "error": null
+      }
     },
     {
       "slug": "ashford-district-christmas-10k",
@@ -14542,7 +13429,7 @@
       "city": "Leeds",
       "county": "North of England",
       "area": "Up & Running",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Leeds&limit=100",
         "checkedAt": null,
@@ -14759,7 +13646,7 @@
       "city": "Liverpool",
       "county": "North of England",
       "area": "Watersports Centre",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Liverpool&limit=100",
         "checkedAt": null,
@@ -15289,7 +14176,7 @@
       "city": "Newcastle",
       "county": "North of England",
       "area": "The Cosy Dove",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Newcastle&limit=100",
         "checkedAt": null,
@@ -15663,7 +14550,7 @@
       "city": "Norwich",
       "county": "Midlands",
       "area": "Harriets's Cafe Tearooms",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Norwich&limit=100",
         "checkedAt": null,
@@ -15689,7 +14576,7 @@
       "city": "Nottingham",
       "county": "Midlands",
       "area": "Up & Running",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Nottingham&limit=100",
         "checkedAt": null,
@@ -15785,7 +14672,7 @@
       "city": "Oxford",
       "county": "Midlands",
       "area": "Up & Running",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Oxford&limit=100",
         "checkedAt": null,
@@ -16111,7 +14998,7 @@
       "city": "Richmond",
       "county": "South of England",
       "area": "Up & Running",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Richmond&limit=100",
         "checkedAt": null,
@@ -16290,7 +15177,7 @@
       "city": "Sheffield",
       "county": "North of England",
       "area": "Up & Running",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Sheffield&limit=100",
         "checkedAt": null,
@@ -16373,7 +15260,7 @@
       "city": "Skipton",
       "county": "North of England",
       "area": "TBC",
-      "reason": "Multiple or unconfirmed venues; edition-specific venue needed",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Skipton&limit=100",
         "checkedAt": null,
@@ -17508,7 +16395,7 @@
       "city": "Winchester",
       "county": "South of England",
       "area": "The Handlebar Cafe",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Winchester&limit=100",
         "checkedAt": null,
@@ -17721,7 +16608,7 @@
       "city": "York",
       "county": "North of England",
       "area": "Up & Running",
-      "reason": "No usable exact-place source response; needs venue research",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=York&limit=100",
         "checkedAt": null,
@@ -17922,6 +16809,19 @@
       "county": "Scotland",
       "area": "Forth Road Bridge",
       "reason": "Venue may differ from marketed city or cross a county boundary; exact venue review required",
+      "sourceAttempt": {
+        "url": "https://api.postcodes.io/places?q=Edinburgh&limit=100",
+        "checkedAt": "2026-10-26T17:40:21.050608+00:00",
+        "error": null
+      }
+    },
+    {
+      "slug": "the-drop-edinburgh",
+      "country": "Scotland",
+      "city": "Edinburgh",
+      "county": "Scotland",
+      "area": "Up & Running",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
       "sourceAttempt": {
         "url": "https://api.postcodes.io/places?q=Edinburgh&limit=100",
         "checkedAt": "2026-10-26T17:40:21.050608+00:00",
@@ -18501,6 +17401,19 @@
       "area": "",
       "reason": "No usable exact-place source response; needs venue research",
       "sourceAttempt": null
+    },
+    {
+      "slug": "the-glasgow-ultra-gb",
+      "country": "United Kingdom",
+      "city": "Glasgow",
+      "county": "",
+      "area": "",
+      "reason": "Undisclosed start or no specific start venue; event-centre city must not imply a start county",
+      "sourceAttempt": {
+        "url": "https://api.postcodes.io/places?q=Glasgow&limit=100",
+        "checkedAt": "2026-10-26T17:40:56.300681+00:00",
+        "error": null
+      }
     },
     {
       "slug": "tour-de-france-2027-stage-2",
