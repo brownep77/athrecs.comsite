@@ -53,6 +53,21 @@ The Southampton organiser PDF was downloaded and its text inspected: it identifi
 - TypeScript and existing public-catalogue/calendar verification are run before release.
 - Production inventory comparison checks both event IDs, exact dates, distance-code equivalents and stored kilometre values (within five metres to accommodate existing 8.05/8.0467 and 21.1/21.0975 rounding). Every removed distance remains on its retained programme.
 - For Tatton on 7 November, retain the later authorised-entry record: both records contain 5K/10K, but only the later record currently publishes the verified 08:45 10K start. Suppress only the earlier record’s November date; its December programme remains public.
-- The later Gainsborough record is retained because it contains both distances with their separate organiser-confirmed start times. Start-time disagreements on other source records were not changed by this identity review.
+- The later Gainsborough record is retained because it contains both distances with their separate organiser-confirmed start times. The subsequent live check also reviewed the retained upcoming programmes’ start times, as detailed below.
 - Explicit checks preserve Hampton Court October 2027, Carsington October 2027 and Tatton December 2027 on their original records.
 - No database write or destructive identity merge is included. This is a reversible publication correction, not a claim that the full catalogue is duplicate-free.
+
+## Retained programme start-time preservation
+
+Live checks found that complete imported programmes could carry older clocks than their single-distance duplicates. The exact-date projection now applies the opened organiser schedule to 13 distances across six retained programmes. Raw database and seed values are preserved; both projections use the shared fixture detail review. No times are copied into other dates or junior categories.
+
+| Programme/date         | Previous retained stored values                    | Reviewed starts (Europe/London) | Evidence                                                                                                                            |
+| ---------------------- | -------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Chase the Moon, 28 Oct | 5K 19:00; 10K 19:00 stored but publicly unverified | 5K and 10K 19:00                | Explicit organiser race-day schedule                                                                                                |
+| Dorney, 8 Nov          | 5K, 10K, half 09:00                                | All three 09:10                 | Explicit organiser race-day schedule; preserves duplicate half’s 09:10                                                              |
+| Monsal, 5 Dec          | 5K and 10K 10:00                                   | Both 10:30                      | Nice Work’s dated programme; preserves duplicate 5K’s 10:30                                                                         |
+| Salcey, 13 Dec         | 5K and 10K 09:30                                   | Both 10:00                      | Nice Work’s dated programme; preserves duplicate 5K’s 10:00                                                                         |
+| Tatton, 7 Nov          | 10K 08:45; 5K blank on retained entry record       | 10K 08:45; 5K 09:05             | Explicit organiser race-day schedule                                                                                                |
+| Tatton, 12 Dec         | Both 09:00                                         | 10K 08:45; 5K 09:05             | Specific organiser race-day timetable and race-pack collection times take precedence over its generic 09:00 header and entry clocks |
+
+Sources and checked dates are embedded in `duplicate-programme-starts-2026-10-26.json`. The November Tatton organiser source is https://www.runthrough.co.uk/event/tatton-park-5k-10k-november-2026; other source URLs appear in the correction table above. December Tatton’s conflicting summary is recorded rather than silently treated as agreement.
