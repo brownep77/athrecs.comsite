@@ -34,6 +34,7 @@ import { findPersonalBests, timingBasis } from "@/lib/athrecs/profile-records";
 import { isDisqualified } from "@/lib/athrecs/result-details";
 import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 import { ResultDisqualification } from "./ResultDisqualification";
+import { normalizeDistanceCode } from "@/lib/athrecs/distance";
 
 type AthleteResult = AthleteAccountData["claimedResults"][number];
 type ResultViewMode = "list" | "cards";
@@ -63,7 +64,9 @@ export function AthleteResultsSection({
     .filter(Boolean)
     .sort()
     .reverse();
-  const distances = [...new Set(results.map((result) => result.distanceCode))].sort();
+  const distances = [
+    ...new Set(results.map((result) => normalizeDistanceCode(result.distanceCode))),
+  ].sort();
   const surfaces = [...new Set(results.map((result) => result.surface))].filter(Boolean).sort();
   const countries = [...new Set(results.map((result) => result.country))].filter(Boolean).sort();
   const filtered = results.filter(
@@ -71,7 +74,7 @@ export function AthleteResultsSection({
       (!query ||
         `${result.eventName} ${result.athleteName}`.toLowerCase().includes(query.toLowerCase())) &&
       (year === "All years" || result.eventDate.match(/\b(?:19|20)\d{2}\b/)?.[0] === year) &&
-      (distance === "All distances" || result.distanceCode === distance) &&
+      (distance === "All distances" || normalizeDistanceCode(result.distanceCode) === distance) &&
       (surface === "All surfaces" || result.surface === surface) &&
       (country === "All countries" || result.country === country),
   );
@@ -386,8 +389,8 @@ export function AthleteResultsSection({
                   <p className="truncate text-sm font-semibold text-fg">{result.eventName}</p>
                   <ResultDisqualification decision={result.details?.disqualification} />
                   <p className="mt-0.5 text-xs text-muted">
-                    {formatRaceDateShort(result.eventDate)} · {result.distanceCode} ·{" "}
-                    {result.athleteName}
+                    {formatRaceDateShort(result.eventDate)} ·{" "}
+                    {normalizeDistanceCode(result.distanceCode)} · {result.athleteName}
                   </p>
                 </div>
                 <p className="font-semibold tabular-nums text-fg">
@@ -484,7 +487,8 @@ function ResultCardGrid(props: ResultCollectionProps) {
                   {result.eventName}
                 </ProfileEventLink>
                 <p className="mt-1 text-xs text-muted">
-                  {formatRaceDateShort(result.eventDate)} · {result.sport} · {result.distanceCode} ·{" "}
+                  {formatRaceDateShort(result.eventDate)} · {result.sport} ·{" "}
+                  {normalizeDistanceCode(result.distanceCode)} ·{" "}
                   <CountryFlag country={result.country} />
                   {result.category ? ` · ${result.category}` : ""}
                 </p>
