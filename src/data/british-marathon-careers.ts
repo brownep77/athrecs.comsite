@@ -923,7 +923,7 @@ export const britishMarathonCareers = [
     "slug": "paula-radcliffe",
     "name": "Paula Radcliffe",
     "gender": "F",
-    "bio": "Paula Radcliffe is a British distance runner whose 2:15:25 victory at the 2003 London Marathon became a defining world-record performance. The organiser’s honours list records London victories in 2002, 2003 and 2005. Her career also includes track, cross-country and half-marathon racing, as well as four Olympic appearances.",
+    "bio": "Paula Radcliffe OBE is a British running legend, four-time Olympian, world marathon champion and former women’s marathon world-record holder. Across track, road and cross-country, she won six senior individual world titles and seven major-city marathons. Her fearless racing and extraordinary endurance made her one of the defining figures in British athletics.\n\nBorn in Northwich, Cheshire, in 1973, Radcliffe developed through Bedford & County Athletics Club before making her international breakthrough as the world junior cross-country champion in Boston in 1992. On the track, she finished seventh over 3,000 metres at the 1993 World Championships in Stuttgart, fifth over 5,000 metres in Gothenburg in 1995 and fourth over 5,000 metres in Athens in 1997. She won World Championship silver over 10,000 metres in Seville in 1999, running 30:27.13, and finished fourth over the same distance in Edmonton in 2001.\n\nCross-country brought some of her greatest championship successes. Radcliffe won the senior women’s long-course World Cross Country Championships in Ostend, Belgium, in 2001 and Dublin, Ireland, in 2002. She also collected long-course silver medals in Turin in 1997 and Marrakech in 1998, bronze in Belfast in 1999, and short-course silver in Ostend in 2001. Her European Cross Country Championship titles came in Ferrara, Italy, in 1998 and Edinburgh, Scotland, in 2003.\n\nHer exceptional 2002 season included Commonwealth Games gold for England over 5,000 metres in Manchester, in 14:31.42, and European Championship gold over 10,000 metres in Munich, in a European record of 30:01.09. She later set her 5,000-metre personal best of 14:29.11 in Bydgoszcz, Poland, in 2004, demonstrating the track speed behind her marathon success.\n\nRadcliffe won the London Marathon three times, in 2002, 2003 and 2005; the New York City Marathon three times, in 2004, 2007 and 2008; and the Chicago Marathon in 2002. Her marathon debut in London produced a winning 2:18:56. Chicago brought a world record of 2:17:18, followed by her landmark London performance on 13 April 2003: 2 hours, 15 minutes and 25 seconds. That 2:15:25 women’s marathon world record stood until 2019. She became world marathon champion in Helsinki, Finland, in 2005, winning in a championship record of 2:20:57, eight days after finishing ninth in the World Championship 10,000 metres.\n\nShe was also a three-time World Half Marathon champion, winning in Veracruz, Mexico, in 2000; Bristol, England, in 2001; and Vilamoura, Portugal, in 2003. Her Bristol victory in 1:06:47 remains her personal best on a record-eligible half-marathon course. Her road successes also included Great North Run wins in 2000 and 2003, a 30:21 world 10-kilometre record in San Juan, Puerto Rico, in 2003, and victory at the 2008 Great South Run in Portsmouth in 51:11 for 10 miles. She won New York’s Fifth Avenue Mile in 1996 and 1997 and the New York City Half Marathon in 2009, and finished third at the 2011 Berlin Marathon.\n\nRadcliffe represented Great Britain at four consecutive Olympic Games. She finished fifth in the 5,000 metres at Atlanta 1996 and fourth in the 10,000 metres at Sydney 2000. At Athens 2004 she started both the marathon and 10,000 metres but did not finish either race. Her final Olympic appearance came at Beijing 2008, where she finished 23rd in the marathon. Those appearances form an important part of a career distinguished by world titles, records and remarkable resilience.\n\nHer honours include BBC Sports Personality of the Year and the IAAF World Athlete of the Year award in 2002, the Laureus World Comeback of the Year award in 2008, and induction into the New York Road Runners Hall of Fame in 2015. Appointed MBE in 2002, she received an OBE in the 2026 New Year Honours. In 2025, aged 51, she completed the Tokyo and Boston marathons, extending a running story spanning more than three decades. Her achievements and lasting connection with runners have secured her place among the legends of British running.",
     "sources": [
       {
         "label": "London Marathon official medallists",
@@ -931,9 +931,74 @@ export const britishMarathonCareers = [
         "locator": "Named athlete row under Men or Women; edition date, placing and time."
       },
       {
-        "label": "Team GB Paula Radcliffe profile",
+        "label": "Team GB Paula Radcliffe",
         "url": "https://www.teamgb.com/athlete/paula-radcliffe/66Nj0LCaGIkH5htNhJFGdi",
-        "locator": "Indexed sporting biography; opened page returned navigation only; London wins verified against organiser table."
+        "locator": "Indexed official Games Breakdown: Atlanta 1996 fifth; Sydney 2000 fourth; Athens 2004 two DNFs; Beijing 2008 23rd; 2026 OBE. Direct open returned navigation only."
+      },
+      {
+        "label": "NYRR Hall of Fame",
+        "url": "https://www.nyrr.org/about/hall-of-fame/paula-radcliffe",
+        "locator": "Indexed organiser biography and career table: early life, seven London/New York/Chicago wins, marathon records, honours. Direct open entered waiting room; no access bypass."
+      },
+      {
+        "label": "World Athletics World Half icons",
+        "url": "https://worldathletics.org/heritage/news/paula-radcliffe-world-half-marathon-champions",
+        "locator": "Opened article: Veracruz 2000, Bristol 2001 and Vilamoura 2003 titles; Bristol 1:06:47; Seville 1999 silver."
+      },
+      {
+        "label": "World Athletics cross-country statistics",
+        "url": "https://iaafmedia.s3.amazonaws.com/competitioninfo/a7f6728d-3619-4652-9727-4bfcac244440.pdf",
+        "locator": "2015 Facts and Figures PDF: page 3 host cities; page 6 senior women medallists; page 7 junior medallists. Boston 1992; Turin 1997; Marrakech 1998; Belfast 1999; Ostend 2001; Dublin 2002."
+      },
+      {
+        "label": "Paula Radcliffe official international placings",
+        "url": "https://www.paularadcliffe.com/stats-major-international-placings/",
+        "locator": "Opened career-year entries: track finals, European/Commonwealth titles, European cross-country wins and Berlin 2011 third. Historical results only; outdated current-record headline not reused."
+      },
+      {
+        "label": "World Athletics European Cross Country 2003",
+        "url": "https://worldathletics.org/competition/calendar-results/results/7125870%3FeventId%3D10230007",
+        "locator": "Official competition heading identifies Edinburgh, 14 December 2003; win confirmed by athlete official career list."
+      },
+      {
+        "label": "FIDAL Ferrara 1998 retrospective",
+        "url": "https://www.fidal.it/content/Ferrara-1998-agli-azzurri-l-Europeo-di-campestre/44772",
+        "locator": "Opened European cross-country account: senior women first Paula Radcliffe 18:07, Ferrara."
+      },
+      {
+        "label": "World Athletics 2002 Athlete of the Year",
+        "url": "https://worldathletics.org/news/news/hicham-el-guerrouj-and-paula-radcliffe-are-20",
+        "locator": "Opened award report; Commonwealth and European track gold, 30:01.09 European record, London and Chicago records."
+      },
+      {
+        "label": "World Athletics Helsinki 2005 final day",
+        "url": "https://worldathletics.org/competitions/world-athletics-championships/10th-iaaf-world-championships-in-athletics-6937596/news/news/helsinki-2005-highlights-day-9-final-sess",
+        "locator": "Opened report: marathon gold in 2:20:57, championship record."
+      },
+      {
+        "label": "World Athletics San Juan record",
+        "url": "https://worldathletics.org/news/news/radcliffe-heads-to-puerto-rico-with-brussels",
+        "locator": "Opened 2004 report: 30:21 world road 10km record in San Juan on 23 February 2003."
+      },
+      {
+        "label": "Laureus 2008 Comeback award",
+        "url": "https://www.laureus.com/world-sports-awards/2008/laureus-world-comeback-of-the-year/paula-radcliffe",
+        "locator": "Opened official winner page and 2007 New York comeback account."
+      },
+      {
+        "label": "Team GB 2026 New Year Honours",
+        "url": "https://www.teamgb.com/article/kings-new-year-honours-list-2026-torvill-and-dean-to-receive-top-honours/42BqZyI9wHox8xQHWezxBJ",
+        "locator": "OBE; Tokyo and Boston marathon return in 2025. Article Atlanta/Athens typo not reused; Olympic cities taken from Games Breakdown."
+      },
+      {
+        "label": "NYRR 2025 media guide",
+        "url": "https://webassets.nyrr.org/nyrrwebsiteassets/TCSNYCM25_Media%20Guide_DIGITAL_M2_2.pdf",
+        "locator": "Printed page 31: 2015 Hall of Fame inductees include Paula Radcliffe."
+      },
+      {
+        "label": "NYRR Fifth Avenue Mile champions",
+        "url": "https://webassets.nyrr.org/nyrrwebsiteassets/2025_New_Balance_5th_Avenue_Mile_Race_Notes.pdf",
+        "locator": "Women champions table: Radcliffe 1996, 4:26.69; 1997, 4:22.96."
       }
     ],
     "achievements": [
@@ -984,7 +1049,14 @@ export const britishMarathonCareers = [
       }
     ],
     "biography": [
-      "Paula Radcliffe is a British distance runner whose 2:15:25 victory at the 2003 London Marathon became a defining world-record performance. The organiser’s honours list records London victories in 2002, 2003 and 2005. Her career also includes track, cross-country and half-marathon racing, as well as four Olympic appearances."
+      "Paula Radcliffe OBE is a British running legend, four-time Olympian, world marathon champion and former women’s marathon world-record holder. Across track, road and cross-country, she won six senior individual world titles and seven major-city marathons. Her fearless racing and extraordinary endurance made her one of the defining figures in British athletics.",
+      "Born in Northwich, Cheshire, in 1973, Radcliffe developed through Bedford & County Athletics Club before making her international breakthrough as the world junior cross-country champion in Boston in 1992. On the track, she finished seventh over 3,000 metres at the 1993 World Championships in Stuttgart, fifth over 5,000 metres in Gothenburg in 1995 and fourth over 5,000 metres in Athens in 1997. She won World Championship silver over 10,000 metres in Seville in 1999, running 30:27.13, and finished fourth over the same distance in Edmonton in 2001.",
+      "Cross-country brought some of her greatest championship successes. Radcliffe won the senior women’s long-course World Cross Country Championships in Ostend, Belgium, in 2001 and Dublin, Ireland, in 2002. She also collected long-course silver medals in Turin in 1997 and Marrakech in 1998, bronze in Belfast in 1999, and short-course silver in Ostend in 2001. Her European Cross Country Championship titles came in Ferrara, Italy, in 1998 and Edinburgh, Scotland, in 2003.",
+      "Her exceptional 2002 season included Commonwealth Games gold for England over 5,000 metres in Manchester, in 14:31.42, and European Championship gold over 10,000 metres in Munich, in a European record of 30:01.09. She later set her 5,000-metre personal best of 14:29.11 in Bydgoszcz, Poland, in 2004, demonstrating the track speed behind her marathon success.",
+      "Radcliffe won the London Marathon three times, in 2002, 2003 and 2005; the New York City Marathon three times, in 2004, 2007 and 2008; and the Chicago Marathon in 2002. Her marathon debut in London produced a winning 2:18:56. Chicago brought a world record of 2:17:18, followed by her landmark London performance on 13 April 2003: 2 hours, 15 minutes and 25 seconds. That 2:15:25 women’s marathon world record stood until 2019. She became world marathon champion in Helsinki, Finland, in 2005, winning in a championship record of 2:20:57, eight days after finishing ninth in the World Championship 10,000 metres.",
+      "She was also a three-time World Half Marathon champion, winning in Veracruz, Mexico, in 2000; Bristol, England, in 2001; and Vilamoura, Portugal, in 2003. Her Bristol victory in 1:06:47 remains her personal best on a record-eligible half-marathon course. Her road successes also included Great North Run wins in 2000 and 2003, a 30:21 world 10-kilometre record in San Juan, Puerto Rico, in 2003, and victory at the 2008 Great South Run in Portsmouth in 51:11 for 10 miles. She won New York’s Fifth Avenue Mile in 1996 and 1997 and the New York City Half Marathon in 2009, and finished third at the 2011 Berlin Marathon.",
+      "Radcliffe represented Great Britain at four consecutive Olympic Games. She finished fifth in the 5,000 metres at Atlanta 1996 and fourth in the 10,000 metres at Sydney 2000. At Athens 2004 she started both the marathon and 10,000 metres but did not finish either race. Her final Olympic appearance came at Beijing 2008, where she finished 23rd in the marathon. Those appearances form an important part of a career distinguished by world titles, records and remarkable resilience.",
+      "Her honours include BBC Sports Personality of the Year and the IAAF World Athlete of the Year award in 2002, the Laureus World Comeback of the Year award in 2008, and induction into the New York Road Runners Hall of Fame in 2015. Appointed MBE in 2002, she received an OBE in the 2026 New Year Honours. In 2025, aged 51, she completed the Tokyo and Boston marathons, extending a running story spanning more than three decades. Her achievements and lasting connection with runners have secured her place among the legends of British running."
     ],
     "biographySources": [
       {
@@ -993,12 +1065,78 @@ export const britishMarathonCareers = [
         "locator": "Named athlete row under Men or Women; edition date, placing and time."
       },
       {
-        "label": "Team GB Paula Radcliffe profile",
+        "label": "Team GB Paula Radcliffe",
         "url": "https://www.teamgb.com/athlete/paula-radcliffe/66Nj0LCaGIkH5htNhJFGdi",
-        "locator": "Indexed sporting biography; opened page returned navigation only; London wins verified against organiser table."
+        "locator": "Indexed official Games Breakdown: Atlanta 1996 fifth; Sydney 2000 fourth; Athens 2004 two DNFs; Beijing 2008 23rd; 2026 OBE. Direct open returned navigation only."
+      },
+      {
+        "label": "NYRR Hall of Fame",
+        "url": "https://www.nyrr.org/about/hall-of-fame/paula-radcliffe",
+        "locator": "Indexed organiser biography and career table: early life, seven London/New York/Chicago wins, marathon records, honours. Direct open entered waiting room; no access bypass."
+      },
+      {
+        "label": "World Athletics World Half icons",
+        "url": "https://worldathletics.org/heritage/news/paula-radcliffe-world-half-marathon-champions",
+        "locator": "Opened article: Veracruz 2000, Bristol 2001 and Vilamoura 2003 titles; Bristol 1:06:47; Seville 1999 silver."
+      },
+      {
+        "label": "World Athletics cross-country statistics",
+        "url": "https://iaafmedia.s3.amazonaws.com/competitioninfo/a7f6728d-3619-4652-9727-4bfcac244440.pdf",
+        "locator": "2015 Facts and Figures PDF: page 3 host cities; page 6 senior women medallists; page 7 junior medallists. Boston 1992; Turin 1997; Marrakech 1998; Belfast 1999; Ostend 2001; Dublin 2002."
+      },
+      {
+        "label": "Paula Radcliffe official international placings",
+        "url": "https://www.paularadcliffe.com/stats-major-international-placings/",
+        "locator": "Opened career-year entries: track finals, European/Commonwealth titles, European cross-country wins and Berlin 2011 third. Historical results only; outdated current-record headline not reused."
+      },
+      {
+        "label": "World Athletics European Cross Country 2003",
+        "url": "https://worldathletics.org/competition/calendar-results/results/7125870%3FeventId%3D10230007",
+        "locator": "Official competition heading identifies Edinburgh, 14 December 2003; win confirmed by athlete official career list."
+      },
+      {
+        "label": "FIDAL Ferrara 1998 retrospective",
+        "url": "https://www.fidal.it/content/Ferrara-1998-agli-azzurri-l-Europeo-di-campestre/44772",
+        "locator": "Opened European cross-country account: senior women first Paula Radcliffe 18:07, Ferrara."
+      },
+      {
+        "label": "World Athletics 2002 Athlete of the Year",
+        "url": "https://worldathletics.org/news/news/hicham-el-guerrouj-and-paula-radcliffe-are-20",
+        "locator": "Opened award report; Commonwealth and European track gold, 30:01.09 European record, London and Chicago records."
+      },
+      {
+        "label": "World Athletics Helsinki 2005 final day",
+        "url": "https://worldathletics.org/competitions/world-athletics-championships/10th-iaaf-world-championships-in-athletics-6937596/news/news/helsinki-2005-highlights-day-9-final-sess",
+        "locator": "Opened report: marathon gold in 2:20:57, championship record."
+      },
+      {
+        "label": "World Athletics San Juan record",
+        "url": "https://worldathletics.org/news/news/radcliffe-heads-to-puerto-rico-with-brussels",
+        "locator": "Opened 2004 report: 30:21 world road 10km record in San Juan on 23 February 2003."
+      },
+      {
+        "label": "Laureus 2008 Comeback award",
+        "url": "https://www.laureus.com/world-sports-awards/2008/laureus-world-comeback-of-the-year/paula-radcliffe",
+        "locator": "Opened official winner page and 2007 New York comeback account."
+      },
+      {
+        "label": "Team GB 2026 New Year Honours",
+        "url": "https://www.teamgb.com/article/kings-new-year-honours-list-2026-torvill-and-dean-to-receive-top-honours/42BqZyI9wHox8xQHWezxBJ",
+        "locator": "OBE; Tokyo and Boston marathon return in 2025. Article Atlanta/Athens typo not reused; Olympic cities taken from Games Breakdown."
+      },
+      {
+        "label": "NYRR 2025 media guide",
+        "url": "https://webassets.nyrr.org/nyrrwebsiteassets/TCSNYCM25_Media%20Guide_DIGITAL_M2_2.pdf",
+        "locator": "Printed page 31: 2015 Hall of Fame inductees include Paula Radcliffe."
+      },
+      {
+        "label": "NYRR Fifth Avenue Mile champions",
+        "url": "https://webassets.nyrr.org/nyrrwebsiteassets/2025_New_Balance_5th_Avenue_Mile_Race_Notes.pdf",
+        "locator": "Women champions table: Radcliffe 1996, 4:26.69; 1997, 4:22.96."
       }
     ],
-    "reportedHighlights": []
+    "reportedHighlights": [],
+    "biographyCheckedAt": "2026-10-26"
   },
   {
     "slug": "mara-yamauchi",
