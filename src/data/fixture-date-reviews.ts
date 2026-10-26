@@ -1,3 +1,4 @@
+import sixthDuplicateReviews from "./fixture-duplicate-reviews-sixth-2026-10-26.json" with { type: "json" };
 import fifthDuplicateReviews from "./fixture-duplicate-reviews-fifth-2026-10-26.json" with { type: "json" };
 import duplicateReviews from "./fixture-duplicate-reviews-2026-10-26.json" with { type: "json" };
 import secondDuplicateReviews from "./fixture-duplicate-reviews-second-2026-10-26.json" with { type: "json" };
@@ -16,6 +17,7 @@ export const FIXTURE_DATE_REVIEWS: Record<
       ...thirdDuplicateReviews,
       ...fourthDuplicateReviews,
       ...fifthDuplicateReviews,
+      ...sixthDuplicateReviews,
     ].map((review) => [
       `${review.duplicateSlug}|${review.date}`,
       {
