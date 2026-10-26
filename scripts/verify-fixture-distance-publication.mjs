@@ -170,6 +170,60 @@ try {
     6,
     "Original records and history survive the hold",
   );
+  const reviewed = await publishing.stageCatalogueBatch(
+    {
+      sourceKey: "test:source-programme-conflict",
+      editions: [
+        { eventSlug: "distance-review-test", date: "2099-04-01", distance: "10K", distanceKm: 10 },
+      ],
+    },
+    "reviewer@example.org",
+    sql,
+  );
+  assert.equal((await publishing.validateCatalogueBatch(reviewed.batchId, sql)).status, "ready");
+  const original = await sql.query(
+    "select payload,payload_hash from catalogue_import_batches where id=$1",
+    [reviewed.batchId],
+  );
+  await sql.query(
+    `update catalogue_import_batches set status='invalid',
+       validation_summary=validation_summary || $2::jsonb where id=$1`,
+    [
+      reviewed.batchId,
+      JSON.stringify({ sourceReviewHold: { reason: "Duplicate course in two units" } }),
+    ],
+  );
+  const heldBatch = await sql.query("select * from catalogue_import_batches where id=$1", [
+    reviewed.batchId,
+  ]);
+  const revision = await sql.query("select * from catalogue_publish_state");
+  await assert.rejects(
+    publishing.validateCatalogueBatch(reviewed.batchId, sql),
+    /Source review hold/,
+  );
+  assert.deepEqual(
+    await sql.query("select * from catalogue_import_batches where id=$1", [reviewed.batchId]),
+    heldBatch,
+  );
+  // An old caller or stale status update cannot make reviewed evidence publishable.
+  await sql.query("update catalogue_import_batches set status='ready' where id=$1", [
+    reviewed.batchId,
+  ]);
+  await assert.rejects(
+    publishing.publishCatalogueBatch(reviewed.batchId, "reviewer@example.org", sql),
+    /Source review hold/,
+  );
+  assert.deepEqual(
+    await sql.query("select payload,payload_hash from catalogue_import_batches where id=$1", [
+      reviewed.batchId,
+    ]),
+    original,
+  );
+  assert.deepEqual(await sql.query("select * from catalogue_publish_state"), revision);
+  assert.equal(
+    (await sql.query("select count(*)::int as n from editions where event_date='2099-04-01'"))[0].n,
+    0,
+  );
 } finally {
   await pg.close();
 }
