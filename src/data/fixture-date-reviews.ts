@@ -1,3 +1,4 @@
+import fifthDuplicateReviews from "./fixture-duplicate-reviews-fifth-2026-10-26.json" with { type: "json" };
 import duplicateReviews from "./fixture-duplicate-reviews-2026-10-26.json" with { type: "json" };
 import secondDuplicateReviews from "./fixture-duplicate-reviews-second-2026-10-26.json" with { type: "json" };
 import thirdDuplicateReviews from "./fixture-duplicate-reviews-third-2026-10-26.json" with { type: "json" };
@@ -14,6 +15,7 @@ export const FIXTURE_DATE_REVIEWS: Record<
       ...secondDuplicateReviews,
       ...thirdDuplicateReviews,
       ...fourthDuplicateReviews,
+      ...fifthDuplicateReviews,
     ].map((review) => [
       `${review.duplicateSlug}|${review.date}`,
       {
@@ -23,6 +25,17 @@ export const FIXTURE_DATE_REVIEWS: Record<
       },
     ]),
   ),
+  "milano-city-marathon|2027-04-03": {
+    sourceUrl: "https://www.milanomarathon.it/en/practical-info/",
+    checkedAt: "2026-10-26",
+    note: "The exact organiser programme confirms 2027-04-04. This prior-day record and its unsupported 23:00 start remain in storage for audit; the confirmed edition is retained.",
+  },
+  "prague-half-marathon|2027-04-02": {
+    sourceUrl:
+      "https://www.runczech.com/en/events/generali-prague-half-marathon-2027-2/races/generali-prague-half-marathon",
+    checkedAt: "2026-10-26",
+    note: "The exact organiser programme confirms 2027-04-03. This prior-day record and its unsupported 23:00 start remain in storage for audit; the confirmed edition is retained.",
+  },
   "changsha-marathon|2026-10-25": {
     sourceUrl: "https://www.marathonchangsha.com/Detail/30",
     checkedAt: "2026-10-25",

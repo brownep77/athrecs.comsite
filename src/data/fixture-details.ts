@@ -1,3 +1,4 @@
+import fifthDuplicateProgrammeStarts from "./duplicate-programme-starts-fifth-2026-10-26.json" with { type: "json" };
 import duplicateProgrammeStarts from "./duplicate-programme-starts-2026-10-26.json" with { type: "json" };
 import thirdDuplicateProgrammeStarts from "./duplicate-programme-starts-third-2026-10-26.json" with { type: "json" };
 import fourthDuplicateProgrammeStarts from "./duplicate-programme-starts-fourth-2026-10-26.json" with { type: "json" };
@@ -384,6 +385,8 @@ for (const [key, reviewed] of Object.entries(batch5ThreeMonthStarts)) {
 
 /** Keep legacy generic rows in the audit, but show the reviewed distance programme. */
 export function isReviewedFixturePlaceholder(slug: string, date: string, distance: string) {
+  // The exact 2026 Illuminator guide confirms three distances, replacing this generic row.
+  if (slug === "illuminator-run-2017" && date === "2026-10-24" && distance === "Other") return true;
   // The organiser confirms this imported placeholder is the junior 2K.
   if (
     slug === "ea-runevents-hadleigh-10-5-2-hadleigh" &&
@@ -511,6 +514,7 @@ for (const [key, reviewed] of [
   ...Object.entries(duplicateProgrammeStarts),
   ...Object.entries(thirdDuplicateProgrammeStarts),
   ...Object.entries(fourthDuplicateProgrammeStarts),
+  ...Object.entries(fifthDuplicateProgrammeStarts),
 ]) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {

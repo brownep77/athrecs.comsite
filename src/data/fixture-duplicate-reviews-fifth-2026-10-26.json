@@ -1,0 +1,86 @@
+[
+  {
+    "duplicateSlug": "rb-illuminator-night-run",
+    "canonicalSlug": "illuminator-run-2017",
+    "date": "2026-10-24",
+    "duplicateEventId": 3061776,
+    "canonicalEventId": 3060603,
+    "duplicateDistances": ["Other"],
+    "retainedDistances": ["8K", "15K", "15mi"],
+    "sourceUrl": "https://illuminatorrun.co.uk/wp-content/uploads/2026/10/illuminator-AG_26_2.pdf",
+    "checkedAt": "2026-10-26",
+    "note": "Same Aboyne night programme. Preserve all three confirmed options under the Scotland event; the imported zero-distance rows remain private."
+  },
+  {
+    "duplicateSlug": "rb-run-leicester-festival",
+    "canonicalSlug": "run-leicester-half-marathon",
+    "date": "2026-10-11",
+    "duplicateEventId": 3061774,
+    "canonicalEventId": 3061178,
+    "duplicateDistances": ["Other"],
+    "retainedDistances": ["10K", "Half"],
+    "sourceUrl": "https://loros.co.uk/about-loros/news/2026/10/06/loros-nurses-among-record-5000-running-to-support-loros-at-run-leicester",
+    "checkedAt": "2026-10-26",
+    "note": "Same Victoria Park programme; add the half marathon before withholding this generic placeholder."
+  },
+  {
+    "duplicateSlug": "run-leicester-october",
+    "canonicalSlug": "run-leicester-half-marathon",
+    "date": "2026-10-11",
+    "duplicateEventId": 4372659,
+    "canonicalEventId": 3061178,
+    "duplicateDistances": ["Half"],
+    "retainedDistances": ["10K", "Half"],
+    "sourceUrl": "https://loros.co.uk/about-loros/news/2026/10/06/loros-nurses-among-record-5000-running-to-support-loros-at-run-leicester",
+    "checkedAt": "2026-10-26",
+    "note": "Consolidate the half-only duplicate with the existing 10K; retain both distances."
+  },
+  {
+    "duplicateSlug": "irish-life-dublin-marathon-83da4699",
+    "canonicalSlug": "dublin-marathon",
+    "date": "2026-10-25",
+    "duplicateEventId": 4380420,
+    "canonicalEventId": 3060325,
+    "duplicateDistances": ["Other"],
+    "retainedDistances": ["Marathon"],
+    "sourceUrl": "https://irishlifedublinmarathon.ie/wave-allocation/",
+    "checkedAt": "2026-10-26",
+    "note": "Same 2026 Irish Life Dublin Marathon. Preserve other years and all historical results on both event records."
+  },
+  {
+    "duplicateSlug": "milan-city-marathon",
+    "canonicalSlug": "milano-city-marathon",
+    "date": "2027-04-04",
+    "duplicateEventId": 3066301,
+    "canonicalEventId": 3060856,
+    "duplicateDistances": ["Marathon"],
+    "retainedDistances": ["Marathon"],
+    "sourceUrl": "https://www.milanomarathon.it/en/practical-info/",
+    "checkedAt": "2026-10-26",
+    "note": "Same Milan full marathon. Retain the organiser-linked event on its confirmed 4 April date."
+  },
+  {
+    "duplicateSlug": "prague-half-marathon",
+    "canonicalSlug": "generali-prague-half-marathon",
+    "date": "2027-04-03",
+    "duplicateEventId": 3061347,
+    "canonicalEventId": 3961454,
+    "duplicateDistances": ["Half"],
+    "retainedDistances": ["Half"],
+    "sourceUrl": "https://www.runczech.com/en/events/generali-prague-half-marathon-2027-2/races/generali-prague-half-marathon",
+    "checkedAt": "2026-10-26",
+    "note": "Same Prague half marathon under an older sponsor name. Retain the dated organiser event."
+  },
+  {
+    "duplicateSlug": "first-light-marathon",
+    "canonicalSlug": "mobile-marathon",
+    "date": "2027-01-10",
+    "duplicateEventId": 4347383,
+    "canonicalEventId": 3881362,
+    "duplicateDistances": ["Marathon"],
+    "retainedDistances": ["Marathon"],
+    "sourceUrl": "https://runsignup.com/Race/MobileALMarathon/Page-2",
+    "checkedAt": "2026-10-26",
+    "note": "First Light is the former name of the Mobile, Alabama marathon. The current organiser entry programme confirms 10 January. This is unrelated to the New Zealand First Light Marathon."
+  }
+]

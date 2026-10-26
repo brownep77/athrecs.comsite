@@ -770,5 +770,50 @@
     "notes": "Organiser entry programme checked 26 October 2026: 8 miles, 16 miles and marathon on 1 November at 09:00. This does not verify later daily starts.",
     "publishAllDistances": true,
     "startTime": "09:00"
+  },
+  {
+    "seriesSlug": "illuminator-run-2017",
+    "date": "2026-10-24",
+    "distance": "8K",
+    "distanceKm": 8,
+    "status": "Open",
+    "source": "https://illuminatorrun.co.uk/wp-content/uploads/2026/10/illuminator-AG_26_2.pdf",
+    "notes": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately.",
+    "publishAllDistances": true,
+    "startTime": "19:00",
+    "replacesDistance": "Other"
+  },
+  {
+    "seriesSlug": "illuminator-run-2017",
+    "date": "2026-10-24",
+    "distance": "15K",
+    "distanceKm": 15,
+    "status": "Open",
+    "source": "https://illuminatorrun.co.uk/wp-content/uploads/2026/10/illuminator-AG_26_2.pdf",
+    "notes": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately.",
+    "publishAllDistances": true,
+    "startTime": "18:45"
+  },
+  {
+    "seriesSlug": "illuminator-run-2017",
+    "date": "2026-10-24",
+    "distance": "15mi",
+    "distanceKm": 24.14016,
+    "status": "Open",
+    "source": "https://illuminatorrun.co.uk/wp-content/uploads/2026/10/illuminator-AG_26_2.pdf",
+    "notes": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately.",
+    "publishAllDistances": true,
+    "startTime": "18:30"
+  },
+  {
+    "seriesSlug": "run-leicester-half-marathon",
+    "date": "2026-10-11",
+    "distance": "Half",
+    "distanceKm": 21.0975,
+    "status": "Open",
+    "source": "https://loros.co.uk/about-loros/news/2026/10/06/loros-nurses-among-record-5000-running-to-support-loros-at-run-leicester",
+    "notes": "LOROS organiser news dated 6 October 2026 confirms both distances on Sunday 11 October and the 09:15 festival start from Victoria Park. The current generic event page has rolled to 2027.",
+    "publishAllDistances": true,
+    "startTime": "09:15"
   }
 ]
