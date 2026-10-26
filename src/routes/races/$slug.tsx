@@ -1340,16 +1340,10 @@ function EditionList({
               ? (FIXTURE_DETAILS[`${eventSlug}|${ed.event_date}`]?.starts[ed.distance_code]
                   ?.publicNote ?? ed.notes)
               : ed.notes;
-            const start =
-              ed.start_label ??
-              formatStartTime(ed.start_time, {
-                timeZone: calendarEvent
-                  ? FIXTURE_DETAILS[`${calendarEvent.slug}|${ed.event_date}`]?.timeZone
-                  : undefined,
-                country,
-                county,
-                date: ed.event_date,
-              });
+            const start = eventSlug
+              ? raceEditionStart({ ...calendarEvent, slug: eventSlug, country, county }, ed)
+              : (ed.start_label ??
+                formatStartTime(ed.start_time, { country, county, date: ed.event_date }));
             return (
               <div
                 key={`${ed.id}-${ed.event_date}`}
