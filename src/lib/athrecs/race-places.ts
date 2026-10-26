@@ -31,6 +31,7 @@ export type PlaceEdition = {
   endDate: string | null;
   status: string;
   distance: string;
+  distanceKm?: number | null;
   entryUrl?: string | null;
   startTime?: string | null;
   startNote?: string | null;

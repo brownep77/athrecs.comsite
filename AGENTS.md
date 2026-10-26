@@ -10,6 +10,14 @@
 
 ## Fixture dates and start times
 
+- Owner instruction, 26 October 2026: all published race fixtures need a confirmed
+  distance. Research each edition against its organiser, authorised entry programme
+  or governing body. Do not infer distance from a race name. Keep unresolved
+  upcoming race editions in staff review and out of public fixtures, announcements
+  and calendar exports. Split multi-distance and age-category programmes accurately.
+  Timed races retain their confirmed duration; never invent a fixed total.
+  Review source evidence separately from automated completeness screening.
+
 - Owner instruction, 25 October 2026: every race within the next **three calendar
   months** requires exhaustive reasonable start-time research. Follow
   `docs/fixture-geography/start-time-process.md` for all sports/countries and

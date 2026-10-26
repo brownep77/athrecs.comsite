@@ -248,7 +248,7 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
           seriesSlug: resolvedSlug,
           date: effectiveDate,
           distance: effectiveDistance,
-          distanceKm: distanceKmFor(effectiveDistance),
+          distanceKm: override.distanceKm ?? distanceKmFor(effectiveDistance),
           status: override.status ?? (override.entryUrl ? "Open" : "TBC"),
           ...override,
           source: override.source ?? series.source_url ?? series.website,
@@ -360,9 +360,11 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
       .digest("hex");
     const published = await sql.query(
       `select id from catalogue_import_batches
-       where source_key=$1 and payload_hash=$2 and status='published'
+       where source_key=$1 and (payload_hash=$2 or source_key=$3) and status='published'
        order by submitted_at desc limit 1`,
-      [batch.sourceKey, originalHash],
+      // The August non-standard release has later audited distance corrections.
+      // Seed repairs must not replay its old rows over those reviewed live values.
+      [batch.sourceKey, originalHash, NON_STANDARD_SOURCE_KEY],
     );
     if (published[0]) {
       console.log(

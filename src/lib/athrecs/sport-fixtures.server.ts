@@ -1,3 +1,4 @@
+import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
 import type { SportFixtureScope, SportFixtureSearch } from "./sport-pages";
@@ -54,6 +55,7 @@ export async function readSportFixtures(
   input: SportFixtureScope & SportFixtureSearch,
   today: string,
 ) {
+  const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
   const q = input.q ? `%${input.q.replace(/[\\%_]/g, "\\$&")}%` : null;
   const page = input.page ?? 1;
   const month = parseSportFixtureSearch({ month: input.month }).month;
@@ -75,6 +77,7 @@ export async function readSportFixtures(
        to_char(ed.event_date, 'YYYY-MM') as month
      from events e join editions ed on ed.event_id = e.id
      where e.sport = any($1::text[]) and ed.event_date >= $2::date
+       and not (ed.id = any($8::int[]))
        and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($5::text[]))
        and not (coalesce(e.slug, '') = any($4::text[]))
        and ($3::text[] is null or e.surface = any($3::text[]))
@@ -88,6 +91,7 @@ export async function readSportFixtures(
       withheldFixtureDateKeys,
       input.broadRunning === true,
       ATHLETICS_RUNNING_SURFACES,
+      heldDistanceIds,
     ],
   );
   const distanceCodes = [
@@ -130,6 +134,7 @@ export async function readSportFixtures(
         order by ed.start_time nulls last, ed.distance_code, ed.id)::text as starts_json
     from events e join editions ed on ed.event_id = e.id
     where e.sport = any($1::text[]) and ed.event_date >= $2::date
+      and not (ed.id = any($14::int[]))
       and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($10::text[]))
       and not (coalesce(e.slug, '') = any($9::text[]))
       and ($3::text is null or e.name ilike $3 or e.city ilike $3 or e.county ilike $3 or e.country ilike $3)
@@ -157,6 +162,7 @@ export async function readSportFixtures(
       month ? `${month}-01` : null,
       input.broadRunning === true,
       ATHLETICS_RUNNING_SURFACES,
+      heldDistanceIds,
     ],
   );
   // Options cover the whole upcoming sport catalogue, not just the current page

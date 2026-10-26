@@ -751,10 +751,13 @@ export const nonStandardDistanceEditionOverrides: Record<string, Partial<Edition
     notes: "Held as TBC because public sources disagree on the September 2026 date.",
   },
   "allithwaite-8|2026-11-07|Other": {
+    distance: "8mi (approx.)",
+    distanceKm: 12.874752,
+    startTime: "11:00",
     status: "TBC",
     entryUrl: undefined,
-    source: "https://www.allithwaiterunningclub.org.uk/our-races/",
-    notes: "Held as TBC because the club page has not confirmed a 2026 date.",
+    source: "https://www.sientries.co.uk/event.php?elid=Y&event_id=18334",
+    notes: "Checked 26 October 2026: authorised 2026 entry confirms 7 November, 11:00 and approximately eight miles / 13 km; not a certified measured distance.",
   },
 };
 
@@ -989,7 +992,7 @@ export const nonStandardDistanceSeriesOverrides: Record<string, Partial<Series>>
   "harbour-wallbanger-7k": { distances: ["7K"] },
   "allithwaite-8": {
     name: "Allithwaite 8 Mile",
-    distances: ["8mi"],
+    distances: ["8mi (approx.)"],
     organiser: "Allithwaite Running Club",
     website: "https://www.allithwaiterunningclub.org.uk/our-races/",
     source_url: "https://www.allithwaiterunningclub.org.uk/our-races/",
@@ -1021,13 +1024,5 @@ export const nonStandardDistanceResearchQueue = [
     distance: "7K",
     reason: "Public sources conflict between 5 September and 20 September 2026.",
     sourceUrl: "https://runabc.co.uk/harbour-wallbanger-7k",
-  },
-  {
-    slug: "allithwaite-8",
-    publishedDate: "2026-11-07",
-    distance: "8mi",
-    reason:
-      "The club confirms the 8-mile route but has not published a 2026 date on its race page.",
-    sourceUrl: "https://www.allithwaiterunningclub.org.uk/our-races/",
   },
 ] as const;

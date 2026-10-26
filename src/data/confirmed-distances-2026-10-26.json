@@ -1,0 +1,243 @@
+{
+  "wa-abbott-dash-to-the-finish-line-5k-7232364|2026-10-31": {
+    "summary": "Abbott Dash to the Finish Line 5K.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://prod.nyrr.org/races-and-events/2026/abbott-dash-to-the-finish-line-5k",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "08:30",
+        "note": "Official 2026 distance is 5K. First elite start 08:30; general runners from 08:45. Existing wave information retained.",
+        "sourceUrl": "https://prod.nyrr.org/races-and-events/2026/abbott-dash-to-the-finish-line-5k",
+        "label": "First elite start 08:30; general field from 08:45"
+      }
+    }
+  },
+  "wa-hamilton-marathon-road2hope-mizuno-elite-5km-7244346|2026-10-31": {
+    "summary": "Hamilton Road2Hope Mizuno Elite 5K.",
+    "timeZone": "America/Toronto",
+    "sourceUrl": "https://www.hamiltonmarathon.ca/the-races",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "09:30",
+        "note": "Elite 5K only; the separate mass-participation 5K starts at 10:00.",
+        "sourceUrl": "https://www.hamiltonmarathon.ca/the-races"
+      }
+    }
+  },
+  "ea-uk-fixtures-liddiard-trophy|2026-10-31": {
+    "summary": "Liddiard Trophy senior cross-country race.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5mi": {
+        "time": "14:15",
+        "note": "Senior men and women race five miles. U18 athletes run a separate 5K course in the junior league.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      }
+    }
+  },
+  "ea-uk-fixtures-north-west-london-cross-country-young-athletes-league|2026-10-31": {
+    "summary": "North West London junior cross-country league at Fryent Country Park.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "2K": {
+        "time": "13:00",
+        "note": "U12: 2,000 m.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      },
+      "3K": {
+        "time": "13:15",
+        "note": "U14: 3,000 m.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      },
+      "4K": {
+        "time": "13:45",
+        "note": "U16: 4,000 m.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      },
+      "5K": {
+        "time": "14:15",
+        "note": "U18: 5,000 m; a separate course from the simultaneous senior Liddiard Trophy.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      }
+    }
+  },
+  "ea-uk-fixtures-ecca-national-cross-country-relay-championships|2026-10-31": {
+    "summary": "English Cross Country Relays at Berry Hill Park, Mansfield.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "3x2.5K relay - U18/U20 women": {
+        "time": "10:50",
+        "note": "Three legs of 2.5 km; U18 and U20 run together with separate classifications. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x2K relay - U14 boys": {
+        "time": "11:26",
+        "note": "Three legs of 2 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x2K relay - U14 girls": {
+        "time": "11:50",
+        "note": "Three legs of 2 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "4x1.6K mixed relay": {
+        "time": "12:15",
+        "note": "Four legs of 1.6 km; two men and two women. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x3K relay - U18/U20 men": {
+        "time": "12:40",
+        "note": "Three legs of 3 km; U18 and U20 run together with separate classifications. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x2K relay - U16 girls": {
+        "time": "13:06",
+        "note": "Three legs of 2 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x2K relay - U16 boys": {
+        "time": "13:30",
+        "note": "Three legs of 2 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x3K relay - senior women": {
+        "time": "13:50",
+        "note": "Three legs of 3 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "4x5K relay - senior men": {
+        "time": "14:40",
+        "note": "Four legs of 5 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      }
+    }
+  },
+  "the-petzl-night-runner-delamere|2026-10-31": {
+    "summary": "Petzl Night Runner at Delamere Forest.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://epicevents.co.uk/events/night-runner-delamere-forest/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "19:00",
+        "note": "Organiser advertises 10K, one lap, at 19:00.",
+        "sourceUrl": "https://epicevents.co.uk/events/night-runner-delamere-forest/"
+      },
+      "Half": {
+        "time": "18:00",
+        "note": "Organiser-advertised half marathon, two laps, at 18:00; not a certified-course assertion.",
+        "sourceUrl": "https://epicevents.co.uk/events/night-runner-delamere-forest/"
+      },
+      "1K": {
+        "time": null,
+        "note": "Epic Kidz 1K; event-day registration. Start remains unverified: organiser page and FAQ checked; competitor-notes link redirected to the same page; authorised ResultsBase page returned 403. Retry 2026-10-27.",
+        "sourceUrl": "https://epicevents.co.uk/events/night-runner-delamere-forest/"
+      }
+    }
+  },
+  "allithwaite-8|2026-11-07": {
+    "summary": "Allithwaite 8: approximately eight miles of mixed terrain.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.sientries.co.uk/event.php?elid=Y&event_id=18334",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "8mi (approx.)": {
+        "time": "11:00",
+        "note": "Authorised 2026 entry describes approximately eight miles / 13 km. This is an approximate route, not a measured eight-mile certification.",
+        "sourceUrl": "https://www.sientries.co.uk/event.php?elid=Y&event_id=18334"
+      }
+    }
+  },
+  "balexert-20km-de-geneve-1fcdaf97|2026-11-01": {
+    "summary": "Balexert 20km de Geneve, adult and junior running programme.",
+    "timeZone": "Europe/Zurich",
+    "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "20K": {
+        "time": "08:30",
+        "note": "20 km solo and relay options share the programme start; no duplicate relay distance row. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection"
+      },
+      "10K": {
+        "time": "12:00",
+        "note": "10 km solo and relay options; walking categories start separately and are not represented as running races. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection"
+      },
+      "2K": {
+        "time": "14:30",
+        "note": "Junior 2K waves: Ecoliers/Ecolieres 14:30; Poussins/Poussines A 14:45. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection",
+        "label": "Junior 2K waves: Ecoliers/Ecolieres 14:30; Poussins/Poussines A 14:45."
+      },
+      "1K": {
+        "time": "15:00",
+        "note": "Junior 1K waves: Poussins/Poussines B 15:00; Parents-Enfants A 15:10. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection",
+        "label": "Junior 1K waves: Poussins/Poussines B 15:00; Parents-Enfants A 15:10."
+      },
+      "500m": {
+        "time": "15:20",
+        "note": "Parents-Enfants B: 500 m. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection"
+      }
+    }
+  },
+  "utmb-world-series-mallorca|2026-10-30": {
+    "summary": "Mallorca by UTMB, 30 October to 1 November 2026.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://mallorca.utmb.world/races/100M",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "138K": {
+        "time": "22:00",
+        "note": "Serra de Tramuntana. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/100M"
+      }
+    }
+  },
+  "utmb-world-series-mallorca|2026-10-31": {
+    "summary": "Mallorca by UTMB, 30 October to 1 November 2026.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://mallorca.utmb.world/races/100K",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "104K": {
+        "time": "06:00",
+        "note": "Camins de pedra en sec. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/100K"
+      },
+      "56K": {
+        "time": "08:00",
+        "note": "Els Tres Mils. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/50K"
+      }
+    }
+  },
+  "utmb-world-series-mallorca|2026-11-01": {
+    "summary": "Mallorca by UTMB, 30 October to 1 November 2026.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://mallorca.utmb.world/races/20K",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "26K": {
+        "time": "09:00",
+        "note": "Camins de s’Arxiduc. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/20K"
+      },
+      "7K": {
+        "time": "09:00",
+        "note": "Memorial Guiem Sec. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/memorial"
+      }
+    }
+  }
+}

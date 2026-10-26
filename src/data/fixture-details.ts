@@ -1,3 +1,4 @@
+import confirmedDistances from "./confirmed-distances-2026-10-26.json" with { type: "json" };
 import largeThreeMonthStarts from "./three-month-starts-batch-2026-10-25.json" with { type: "json" };
 import moreThreeMonthStarts from "./three-month-starts-more-2026-10-25.json" with { type: "json" };
 import countyExpansion from "./county-expansion-2026-10-21.json" with { type: "json" };
@@ -475,6 +476,16 @@ export function checkedFixtureStartLabel(
 
 // Apply exact-edition reviewed starts while preserving other confirmed distances.
 for (const [key, reviewed] of Object.entries(largeThreeMonthStarts)) {
+  const existing = FIXTURE_DETAILS[key];
+  FIXTURE_DETAILS[key] = {
+    ...existing,
+    ...reviewed,
+    starts: { ...existing?.starts, ...reviewed.starts },
+  };
+}
+
+// Reviewed distance replacements retain their own category and wave evidence.
+for (const [key, reviewed] of Object.entries(confirmedDistances)) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {
     ...existing,

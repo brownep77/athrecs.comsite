@@ -15,6 +15,7 @@ export type {
   EntryOptionType,
 } from "./types";
 import { legacyRaceGeography } from "./legacy-race-geography";
+import { reviewConfirmedDistances } from "./confirmed-distance-editions";
 import { imminentReviewedAdditions, reviewImminentEdition } from "./imminent-starts-2026-10-25";
 import { urgentReviewedAdditions, urgentReviewedSeriesOverrides, reviewUrgentEdition } from "./urgent-starts-followup-2026-10-25";
 import { thirdUrgentAdditions, thirdUrgentSeriesOverrides, reviewThirdUrgentEdition } from "./urgent-starts-third-2026-10-25";
@@ -654,7 +655,7 @@ export const editions: Edition[] = (() => {
     pushEdition(edition);
   }
 
-  return unique.map(reviewParkrunEdition).map(reviewImminentEdition).map(reviewUrgentEdition).map(reviewNextUrgentEdition).map(reviewThirdUrgentEdition);
+  return reviewConfirmedDistances(unique.map(reviewParkrunEdition).map(reviewImminentEdition).map(reviewUrgentEdition).map(reviewNextUrgentEdition).map(reviewThirdUrgentEdition), new Set(seriesList.map((series) => series.slug)));
 })();
 
 export { raceGroupDefinitions, raceGroupMemberships };
