@@ -1,3 +1,4 @@
+import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
 import { fixtureTimeZone } from "./fixture-presentation";
@@ -39,6 +40,7 @@ export async function queryRacePlaceRows(
   options: { compact?: boolean; eventIds?: number[] } = {},
 ): Promise<PlaceRace[]> {
   if (options.eventIds?.length === 0) return [];
+  const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, now.slice(0, 10));
   // The shared index needs dates for filters and rollover, but not descriptions,
   // entry links or source links for every future edition in the world.
   // Tuples also avoid repeating JSON property names for recurring fixtures.
@@ -65,9 +67,10 @@ export async function queryRacePlaceRows(
       coalesce((select json_agg(${editionJson}
         order by ed.event_date, ed.distance_code) from editions ed
       where ed.event_id=e.id and coalesce(ed.end_date, ed.event_date) >= $1::date - interval '2 days'
+        and not (ed.id = any($5::int[]))
         and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($4::text[]))), '[]') as editions
     from events e where e.sport in ('Running','Athletics','Triathlon','Parkrun','Cycling','Swimming','Duathlon')
-      ${options.eventIds ? "and e.id = any($5::int[])" : ""}
+      ${options.eventIds ? "and e.id = any($6::int[])" : ""}
       and not (e.slug = any($2::text[]))
       and not exists (select 1 from jsonb_to_recordset($3::jsonb) a(old_slug text, current_slug text)
         join events target on target.slug = coalesce((select current_slug from slug_redirects
@@ -79,6 +82,7 @@ export async function queryRacePlaceRows(
       retainedFixtureAliasSlugs,
       aliases,
       withheldFixtureDateKeys,
+      heldDistanceIds,
       ...(options.eventIds ? [options.eventIds] : []),
     ],
   );

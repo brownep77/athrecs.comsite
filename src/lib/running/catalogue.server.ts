@@ -1,3 +1,4 @@
+import { unconfirmedFixtureEditionIds } from "../athrecs/fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "../athrecs/public-catalogue-content.ts";
 import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews";
 import { getSql } from "../db";
@@ -149,6 +150,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
   const rawQ = data.q?.trim() ?? "";
   const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
   const today = todayIso();
+  const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
   const upcomingOnly = data.upcomingOnly === true;
   const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
   const offset = Math.min(Math.max(Math.floor(data.offset ?? 0), 0), 10_000);
@@ -171,7 +173,8 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
   const rows = await sql<RawEventRow>`
       with display_editions as not materialized (
         select ed.* from editions ed
-        where not exists (select 1 from events reviewed where reviewed.id=ed.event_id and (reviewed.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
+        where not (ed.id = any(${heldDistanceIds}::int[]))
+          and not exists (select 1 from events reviewed where reviewed.id=ed.event_id and (reviewed.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           and ed.status <> 'Cancelled' and (${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date)
           and (${dateTo}::date is null or ed.event_date <= ${dateTo}::date)
           and ((${dateFrom}::date is not null or ${dateTo}::date is not null) or ed.event_date >= ${today}::date)
@@ -184,6 +187,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
         (
           select string_agg(d.distance_code, ',' order by d.distance_code)
           from event_distances d where d.event_id = e.id
+            and exists (select 1 from display_editions visible where visible.event_id=e.id and visible.distance_code=d.distance_code)
         ) as distances_csv,
         (
           select coalesce(

@@ -79,6 +79,8 @@ jobs:
       - name: Verify public catalogue source policy and reviewed duplicates
         run: node --experimental-strip-types scripts/verify-public-catalogue-content.mjs
 
+      - name: Reject unconfirmed fixture distances
+        run: node scripts/verify-fixture-distance-publication.mjs
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
 

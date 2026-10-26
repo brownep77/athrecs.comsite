@@ -376,6 +376,9 @@ await db.exec(`create table events(id int, slug text, name text, sport text, cou
 await db.exec(
   "alter table events add column surface text; update events set surface='Road' where sport='Running'",
 );
+await db.exec(
+  "alter table editions add column id serial primary key; alter table editions add column distance_km double precision;",
+);
 const sql = { query: async (text, values) => (await db.query(text, values)).rows };
 const loaded = await queryRacePlaceRows(sql, now);
 assert.equal(loaded.length, 1, "public sport boundary");
@@ -426,12 +429,13 @@ assert.deepEqual(racePlaceSitemapPaths(compactRows), racePlaceSitemapPaths(fullR
 let detailReads = [];
 const boundedSql = {
   query: async (text, params) => {
+    if (text.includes("select ed.id from editions ed")) return sql.query(text, params);
     assert(
-      text.includes("e.id = any($5::int[])"),
+      text.includes("e.id = any($6::int[])"),
       "detail query must be scoped before aggregation",
     );
-    assert(params[4].length > 0 && params[4].length <= 43, "bounded visible event IDs");
-    detailReads.push(params[4]);
+    assert(params[5].length > 0 && params[5].length <= 43, "bounded visible event IDs");
+    detailReads.push(params[5]);
     return sql.query(text, params);
   },
 };

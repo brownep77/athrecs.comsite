@@ -66,8 +66,8 @@ try {
     "Wave programmes remain date-only until the runner knows their assigned block");
   assert.equal(
     result.fixtures.find((item) => item.slug === "unrelated-race").starts.length,
-    2,
-    "Do not assume an unrelated unknown distance is a duplicate",
+    1,
+    "Unconfirmed distance is held without deleting it or suppressing the confirmed sibling",
   );
   assert.equal(
     (await db.query("select count(*)::int n from editions")).rows[0].n,

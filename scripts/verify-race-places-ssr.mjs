@@ -27,6 +27,9 @@ await db.exec(`insert into events values
 await db.exec(
   "alter table events add column surface text; update events set surface='Road' where sport='Running'",
 );
+await db.exec(
+  "alter table editions add column id serial primary key; alter table editions add column distance_km double precision;",
+);
 const sql = async (strings, ...values) => {
   let query = strings[0];
   for (let i = 0; i < values.length; i++) query += `$${i + 1}` + strings[i + 1];

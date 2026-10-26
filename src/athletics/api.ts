@@ -1,3 +1,4 @@
+import { unconfirmedFixtureEditionIds } from "../lib/athrecs/fixture-distance-policy.server.ts";
 import { ATHRECS_PUBLIC_SPORTS, isAthrecsPublicSport } from "../lib/athrecs/public-sports.ts";
 import { withheldFixtureDateKeys } from "../data/fixture-date-reviews";
 import { createServerFn } from "@tanstack/react-start";
@@ -337,6 +338,7 @@ async function queryAthleticsCalendarPage(
   const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
   const region = data.region?.trim() || null;
   const today = todayIso();
+  const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
   const upcomingOnly = data.upcomingOnly !== false;
   const limit = Math.min(Math.max(data.limit ?? 40, 1), 100);
   const offset = Math.min(Math.max(data.offset ?? 0, 0), 100_000);
@@ -392,6 +394,7 @@ async function queryAthleticsCalendarPage(
         join events event on event.id = edition.event_id
         left join edition_spectator_access spectator on spectator.edition_id = edition.id
         where event.sport = ${calendarSport}
+          and not (edition.id = any(${heldDistanceIds}::int[]))
           and not ((coalesce(event.slug, '') || '|' || edition.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           and (${trackAndFieldOnly}::boolean is false or event.surface = 'Track')
           and (${upcomingOnly}::boolean is false or edition.event_date >= ${today}::date)

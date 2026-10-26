@@ -128,6 +128,7 @@ try {
       (4,2,'2026-09-27','1500m',null),
       (5,3,'2026-09-27','Road',null),
       (6,4,'2026-09-27','10K',null);
+    update editions set distance_km=100 where id=5;
     update editions set distance_km=10, status='Open', end_date='2026-09-27', end_time='10:00',
       end_source_url='https://example.com/schedule', end_checked_at='2026-09-01' where id=2;
     update editions set distance_km=5, status='Cancelled', end_date='2026-09-27', end_time='13:00' where id=3;
@@ -213,7 +214,7 @@ try {
       (27, 'XC Athletics', 'Athletics', 'XC'),
       (28, 'Field Meet', 'Athletics', 'Field'),
       (29, 'Example parkrun', 'Parkrun', 'Road');
-    insert into editions (id, event_id, event_date, distance_code, start_time) select id, id, '2026-10-01', 'Other', null from events where id >= 10;
+    insert into editions (id, event_id, event_date, distance_code, distance_km, start_time) select id, id, '2026-10-01', '5K', 5, null from events where id >= 10;
   `);
   const namesFor = async (slug) =>
     (await readSportFixtures(sql, getSportPage(slug), "2026-09-26")).fixtures
@@ -272,7 +273,7 @@ try {
       [id, `synthetic-${slug}`, `Synthetic ${sport}`, sport],
     );
     await db.query(
-      "insert into editions(id,event_id,event_date,distance_code) values($1,$1,'2027-01-15','Other')",
+      "insert into editions(id,event_id,event_date,distance_code,distance_km) values($1,$1,'2027-01-15','5K',5)",
       [id],
     );
     const page = await readSportFixtures(

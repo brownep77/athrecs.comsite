@@ -1,3 +1,4 @@
+import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { withheldFixtureDateKeys } from "@/data/fixture-date-reviews";
 import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
@@ -224,6 +225,7 @@ export const listEvents = createServerFn({ method: "GET" })
     const rawQ = data.q?.trim() ?? "";
     const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
     const today = todayIso();
+    const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
     const upcomingOnly = data.upcomingOnly === true;
     const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
     const offset = Math.min(Math.max(Math.floor(data.offset ?? 0), 0), 10_000);
@@ -249,7 +251,8 @@ export const listEvents = createServerFn({ method: "GET" })
     >`
       with scoped_editions as not materialized (
         select * from editions
-        where not exists (select 1 from events reviewed where reviewed.id=editions.event_id and (reviewed.slug || '|' || editions.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
+        where not (id = any(${heldDistanceIds}::int[]))
+          and not exists (select 1 from events reviewed where reviewed.id=editions.event_id and (reviewed.slug || '|' || editions.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           and (${shortRaces}::boolean is false or (
           event_date between '2026-09-10'::date and '2027-01-31'::date
           and distance_code in ('5K', '10K')
@@ -457,6 +460,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data: slug }) => {
     const sql = await ready();
     const today = todayIso();
+    const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
     const events = await eventByPublicSlug(sql, twoOceansSourceSlug(slug));
     const event = events[0] as
       | {
@@ -605,6 +609,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ) as spectator_access_json
       from editions ed
       where ed.event_id = ${event.id}
+        and not (ed.id = any(${heldDistanceIds}::int[]))
         and not ((${event.slug} || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
       order by
         ed.event_date desc,
@@ -676,30 +681,35 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         (
           select ed.event_date::text from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_date,
         (
           select ed.distance_code from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_distance,
         (
           select ed.status from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_status,
         (
           select ed.start_time from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_start_time,
         (
           select count(*)::int from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         ) as upcoming_count,
         (
@@ -720,6 +730,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         (
           select min(ed.event_date) from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         ) asc nulls last
       limit 8
@@ -1502,6 +1513,7 @@ export const getHomeStats = createServerFn({ method: "GET" }).handler(async () =
 export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(async () => {
   const sql = await ready();
   const today = todayIso();
+  const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
   const rows = await sql<{
     id: string;
     kind: "fixture" | "results";
@@ -1536,6 +1548,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       from events event
       join editions edition on edition.event_id = event.id
       where edition.event_date >= ${today}::date
+        and not (edition.id = any(${heldDistanceIds}::int[]))
         and not ((event.slug || '|' || edition.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         and not (event.slug = any(${retainedFixtureAliasSlugs}::text[]))
     ),
@@ -1792,6 +1805,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
     const region = data.region?.trim() || null;
     const today = todayIso();
+    const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
     const upcomingOnly = data.upcomingOnly !== false;
     const limit = Math.min(Math.max(data.limit ?? 24, 1), 80);
     const fetchLimit = Math.min(limit * 3, 120);
@@ -1856,6 +1870,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       join events e on e.id = ed.event_id
       where
         (${upcomingOnly}::boolean is false or ed.event_date >= ${today}::date)
+        and not (ed.id = any(${heldDistanceIds}::int[]))
         and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
         and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         and (

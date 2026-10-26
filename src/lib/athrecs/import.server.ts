@@ -1,3 +1,4 @@
+import { hasConfirmedFixtureDistance } from "./fixture-distance-policy.ts";
 import { getSql, type Sql } from "@/lib/db";
 import type { EntryOptionStatus, EntryOptionType, EntryStatus, Sport } from "./types";
 
@@ -65,9 +66,7 @@ export function slugify(input: string): string {
 /** A supplied public identifier is not a display name to truncate or regenerate. */
 export function importEventSlug(supplied: string | undefined, name = ""): string {
   const explicit = supplied?.trim();
-  return explicit && /^[a-z0-9][a-z0-9-]*$/.test(explicit)
-    ? explicit
-    : slugify(explicit || name);
+  return explicit && /^[a-z0-9][a-z0-9-]*$/.test(explicit) ? explicit : slugify(explicit || name);
 }
 
 function parseSport(raw: string): Sport {
@@ -437,10 +436,16 @@ export async function applyImportBundle(
           { ...importOptions, sqlOverride: sql },
         );
       }
-      const again = await sql<{ id: number }>`
-        select id from events where slug = ${slug} limit 1
+      const again = await sql<{ id: number; sport: string }>`
+        select id, sport from events where slug = ${slug} limit 1
       `;
       if (!again[0]) throw new Error(`Could not resolve event ${slug}`);
+      if (
+        raw.date >= new Date().toISOString().slice(0, 10) &&
+        !hasConfirmedFixtureDistance(again[0].sport, raw.distance, raw.distanceKm)
+      ) {
+        throw new Error("Confirmed race distance is required before publication");
+      }
       const status = parseStatus(raw.status);
       const hasExplicitPrimary = (raw.entryOptions ?? []).some(
         (option) => option.isPrimary === true,
