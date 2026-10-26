@@ -703,5 +703,39 @@
     "notes": "Shepherds Show hill race: 6.5 km. The opened 2026 organiser programme gives 12:45, superseding the earlier stored 11:45 and stale search text. Source checked 26 October 2026.",
     "publishAllDistances": true,
     "replacesDistance": "Other"
+  },
+  {
+    "seriesSlug": "ea-runevents-hadleigh-10-5-2-hadleigh",
+    "date": "2026-11-22",
+    "distance": "2K",
+    "distanceKm": 2,
+    "status": "Open",
+    "source": "https://www.hadleigh-hares.co.uk/hadleigh-10-and-5-mile-races2026",
+    "notes": "Organiser programme checked 26 October 2026: junior 2K 10:00, ten miles 11:00, five miles 11:05. Original federation values remain in the audit.",
+    "publishAllDistances": true,
+    "startTime": "10:00",
+    "replacesDistance": "Fun Run"
+  },
+  {
+    "seriesSlug": "ea-runevents-hadleigh-10-5-2-hadleigh",
+    "date": "2026-11-22",
+    "distance": "5mi",
+    "distanceKm": 8.0467,
+    "status": "Open",
+    "source": "https://www.hadleigh-hares.co.uk/hadleigh-10-and-5-mile-races2026",
+    "notes": "Organiser programme checked 26 October 2026: junior 2K 10:00, ten miles 11:00, five miles 11:05. Original federation values remain in the audit.",
+    "publishAllDistances": true,
+    "startTime": "11:05"
+  },
+  {
+    "seriesSlug": "ea-runevents-hadleigh-10-5-2-hadleigh",
+    "date": "2026-11-22",
+    "distance": "10mi",
+    "distanceKm": 16.0934,
+    "status": "Open",
+    "source": "https://www.hadleigh-hares.co.uk/hadleigh-10-and-5-mile-races2026",
+    "notes": "Organiser programme checked 26 October 2026: junior 2K 10:00, ten miles 11:00, five miles 11:05. Original federation values remain in the audit.",
+    "publishAllDistances": true,
+    "startTime": "11:00"
   }
 ]

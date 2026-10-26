@@ -1,5 +1,7 @@
 import { createServer } from "vite";
 import { publishCheckedFixtures } from "./lib/checked-fixture-publication.mjs";
+import { HADLEIGH_PROGRAMME_REVIEW } from "./lib/hadleigh-programme-2026-10-26-review.mjs";
+import thirdDuplicateProgrammeStarts from "../src/data/duplicate-programme-starts-third-2026-10-26.json" with { type: "json" };
 import { START_TIME_REVIEW } from "./lib/official-start-time-review.mjs";
 import { OFFICIAL_START_TIME_DETAILS } from "./lib/official-start-time-details.mjs";
 import { NORFOLK_CLARIFICATION_REVIEW } from "./lib/norfolk-start-clarification-review.mjs";
@@ -131,6 +133,15 @@ try {
       publishing,
       thirdUrgentStarts,
       URGENT_STARTS_THIRD_REVIEW,
+    ),
+  );
+  console.log(
+    "[hadleigh-programme]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      thirdDuplicateProgrammeStarts,
+      HADLEIGH_PROGRAMME_REVIEW,
     ),
   );
 } finally {
