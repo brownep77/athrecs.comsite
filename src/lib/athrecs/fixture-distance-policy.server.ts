@@ -1,4 +1,5 @@
 import type { Sql } from "../db";
+import seventhDistanceHolds from "../../data/fixture-distance-holds-seventh-2026-10-26.json" with { type: "json" };
 import {
   FIXED_DISTANCE,
   TIMED_DISTANCE,
@@ -13,10 +14,11 @@ export async function unconfirmedFixtureEditionIds(sql: Sql, today: string): Pro
     `
     select ed.id from editions ed join events e on e.id=ed.event_id
     where ed.event_date >= $1::date
-      and (ed.distance_km is null or ed.distance_km <= 0 or ed.distance_km = 'NaN'::float8 or ed.distance_km = 'Infinity'::float8)
+      and ((coalesce(e.slug, '') || '|' || ed.event_date::text || '|' || ed.distance_code) = any($7::text[])
+        or ((ed.distance_km is null or ed.distance_km <= 0 or ed.distance_km = 'NaN'::float8 or ed.distance_km = 'Infinity'::float8)
       and (ed.distance_km < 0 or ed.distance_km = 'NaN'::float8 or ed.distance_km = 'Infinity'::float8
         or (not (coalesce(btrim(ed.distance_code),'') ~* $2 or coalesce(btrim(ed.distance_code),'') ~* $3)
-          and (e.sport = any($4::text[]) or coalesce(btrim(ed.distance_code),'') ~* $5 or coalesce(btrim(ed.distance_code),'') ~* $6)))`,
+          and (e.sport = any($4::text[]) or coalesce(btrim(ed.distance_code),'') ~* $5 or coalesce(btrim(ed.distance_code),'') ~* $6)))))`,
     [
       today,
       FIXED_DISTANCE.source,
@@ -24,6 +26,7 @@ export async function unconfirmedFixtureEditionIds(sql: Sql, today: string): Pro
       DISTANCE_SPORTS,
       PLACEHOLDER.source,
       RACE_FORMAT.source,
+      seventhDistanceHolds.map((review) => `${review.slug}|${review.date}|${review.distance}`),
     ],
   );
   return rows.map((row) => row.id);
