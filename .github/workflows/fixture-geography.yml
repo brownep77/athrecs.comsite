@@ -5,6 +5,12 @@ on:
     paths:
       - "src/components/discovery/CompactDiscoveryPage.tsx"
       - "src/lib/athrecs/import.server.ts"
+      - "src/lib/athrecs/fixture-presentation.ts"
+      - "src/lib/athrecs/sport-fixtures.server.ts"
+      - "src/data/fixture-county-regions*"
+      - "migrations/20261026_fixture_county_regions.sql"
+      - "docs/fixture-geography/county-region*"
+      - "scripts/verify-fixture-county-regions.mjs"
       - "scripts/verify-import-geography.mjs"
       - "scripts/verify-fixture-geography-ui.mjs"
       - ".github/workflows/fixture-geography.yml"
@@ -41,6 +47,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node scripts/verify-import-geography.mjs
+      - run: node scripts/verify-fixture-county-regions.mjs
+      - run: node scripts/verify-sport-fixture-pages.mjs
+      - run: node scripts/verify-fixture-presentation.mjs
       - run: npx playwright install --with-deps chromium
       - name: Start disposable seeded site
         run: |

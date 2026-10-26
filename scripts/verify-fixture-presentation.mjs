@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  compactFixtureLocation,
   formatFixtureStart,
   fixtureSummary,
   fixtureTimeZone,
@@ -64,3 +65,36 @@ for (const [key, detail] of Object.entries(FIXTURE_DETAILS)) {
 console.log(
   "Fixture presentation: DST boundaries, ambiguous clocks, offsets, unknown venues, summaries and source records passed.",
 );
+
+for (const [place, expected] of [
+  [
+    { city: "Andover", county: "Hampshire", region: "South of England", country: "England" },
+    "Andover, Hampshire, South of England",
+  ],
+  [
+    { city: "Athlone", county: "Westmeath", region: "Leinster", country: "Ireland" },
+    "Athlone, Westmeath, Leinster",
+  ],
+  [
+    {
+      city: "Sacramento",
+      county: "Sacramento County",
+      region: "California",
+      country: "United States",
+    },
+    "Sacramento, Sacramento County, California",
+  ],
+  [
+    { city: "Toronto", county: "", region: "Ontario", state: "Ontario", country: "Canada" },
+    "Toronto, Ontario",
+  ],
+  [
+    { city: "Unknown", county: "TBC", region: "South of England", country: "England" },
+    "South of England",
+  ],
+  [
+    { city: "Dublin", county: "Dublin", region: "Leinster", country: "Ireland" },
+    "Dublin, Leinster",
+  ],
+])
+  assert.equal(compactFixtureLocation(place).text, expected);

@@ -7,6 +7,7 @@ export function compactFixtureLocation(place: {
   city?: string | null;
   county?: string | null;
   state?: string | null;
+  region?: string | null;
   country?: string | null;
 }) {
   const country = countryFlag(place.country);
@@ -17,7 +18,14 @@ export function compactFixtureLocation(place: {
       .map((part) => part.trim().toLocaleLowerCase("en")),
   );
   const parts: string[] = [];
-  for (const value of [place.town, place.city, place.county, place.state, place.area]) {
+  for (const value of [
+    place.town,
+    place.city,
+    place.county,
+    place.state,
+    place.region,
+    place.area,
+  ]) {
     for (const part of (value ?? "")
       .split(",")
       .map((item) => item.trim())

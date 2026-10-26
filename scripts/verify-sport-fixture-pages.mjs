@@ -133,7 +133,29 @@ try {
       end_source_url='https://example.com/schedule', end_checked_at='2026-09-01' where id=2;
     update editions set distance_km=5, status='Cancelled', end_date='2026-09-27', end_time='13:00' where id=3;
   `);
+  await db.exec("alter table events add column region text");
   const sql = { query: async (query, params) => (await db.query(query, params)).rows };
+  await db.exec("update events set county='Norfolk',region='East of England' where id=1");
+  const countySearch = await readSportFixtures(
+    sql,
+    { ...getSportPage("road-running"), q: "Norfolk" },
+    "2026-09-26",
+  );
+  const regionSearch = await readSportFixtures(
+    sql,
+    { ...getSportPage("road-running"), q: "East of England" },
+    "2026-09-26",
+  );
+  assert.deepEqual(
+    countySearch.fixtures.map((r) => r.eventId),
+    [1],
+  );
+  assert.deepEqual(
+    regionSearch.fixtures.map((r) => r.eventId),
+    [1],
+  );
+  assert.equal(regionSearch.fixtures[0].county, "Norfolk");
+  assert.equal(regionSearch.fixtures[0].region, "East of England");
   const running = await readSportFixtures(sql, { ...getSportPage("road-running") }, "2026-09-26");
   assert.deepEqual(
     running.fixtures.map((row) => row.eventDate),

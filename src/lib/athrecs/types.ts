@@ -81,6 +81,7 @@ export type RaceGroupInfo = {
 };
 
 export type EventListItem = {
+  region?: string | null;
   id: number;
   slug: string;
   name: string;

@@ -81,7 +81,7 @@ export async function queryRunningRegions(data: NonNullable<EventRegionInput>) {
         country,
       ),
     )
-    .map((row) => row.region?.trim() || row.county?.trim())
+    .flatMap((row) => [row.county?.trim(), row.region?.trim()])
     .filter((value): value is string => Boolean(value))
     .filter((value) => value.toLowerCase() !== country.toLowerCase());
 
@@ -122,6 +122,7 @@ export type ListEventsInput =
   | undefined;
 
 type RawEventRow = {
+  region?: string | null;
   id: number;
   slug: string;
   name: string;
@@ -189,7 +190,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
           and (${distance}::text is null or ed.distance_code = ${distance})
       )
       select
-        e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
+        e.id, e.slug, e.name, e.sport, e.country, e.county, e.region, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
         (
           select string_agg(d.distance_code, ',' order by d.distance_code)
@@ -281,6 +282,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
           or lower(e.city) like ${q}
           or lower(e.sport) like ${q}
           or lower(e.county) like ${q}
+          or lower(e.region) like ${q}
           or lower(e.country) like ${q}
           or lower(e.surface) like ${q}
           or exists (

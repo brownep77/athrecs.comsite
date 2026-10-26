@@ -7,6 +7,7 @@ import { sportColourClass } from "@/lib/athrecs/event-colours";
 import { distanceColourClass } from "@/lib/athrecs/profile-colours";
 import { sportGuideText } from "@/lib/athrecs/sport-guide-text";
 import { fixtureSummary, formatFixtureStart } from "@/lib/athrecs/fixture-presentation";
+import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import type { RacePlacePageData } from "@/lib/athrecs/race-places";
 import { placeEntryUrl } from "@/lib/athrecs/race-place-facets";
 import { racePlaceUrl } from "@/lib/athrecs/race-places-seo";
@@ -66,10 +67,7 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
           </h3>
           <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-muted">
             <CountryFlag country={race.country} showCode />
-            {[race.city, race.region || race.county]
-              .filter(Boolean)
-              .filter((value, index, values) => values.indexOf(value) === index)
-              .join(", ")}
+            {compactFixtureLocation(race).text}
           </p>
           <p className="mt-3 text-sm leading-6">
             {fixtureSummary(race.summary, race.sport, race.city)}
