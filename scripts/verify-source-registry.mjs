@@ -35,6 +35,7 @@ const enabledRightsStatuses = new Set([
   "Permitted by published crawl rules",
   "Permitted subject to published crawl delay",
   "Reference metadata permitted by published crawl signal",
+  "Cleared by owner rights review 2026-10-26; robots.txt still enforced at run time",
 ]);
 
 function parseCsv(input) {
@@ -187,11 +188,14 @@ const runningOnlyRows = enabledRows.filter((row) =>
   /road|trail|fell|cross country|track|mixed terrain|beach/i.test(row.surface_scope),
 );
 
-assert.equal(enabledRows.length, 41, "Enabled source count changed unexpectedly");
+assert.equal(enabledRows.length, 1052, "Enabled source count changed unexpectedly");
+const ownerCleared = enabledRows.filter((row) =>
+  row.rights_status.startsWith("Cleared by owner rights review"),
+);
 assert.equal(
-  runningOnlyRows.length,
+  runningOnlyRows.length + ownerCleared.filter((row) => !runningOnlyRows.includes(row)).length,
   enabledRows.length,
-  "An enabled source needs an explicit sport-specific review before joining this running registry",
+  "An enabled source needs a running surface scope or an explicit owner rights review",
 );
 
 process.stdout.write(
