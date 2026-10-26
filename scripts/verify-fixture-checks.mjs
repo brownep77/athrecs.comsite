@@ -11,6 +11,7 @@ assert.ok(has(run({ startTime: "03:00" }), "time", "warn"), "early start");
 assert.ok(has(run({ distance: "5" }), "distance", "warn"), "name says 10K, distance 5");
 assert.ok(!has(run({ name: "Pudding Run 5K & 10K", distance: "5" }), "distance", "warn"), "two-distance name ok");
 assert.ok(has(run({ city: "Kent" }), "place", "warn"), "county as city");
+assert.ok(!has(run({ city: "Kildare" }), "place", "warn"), "Kildare is a town");
 assert.ok(has(run({ city: "Anywhere" }), "place", "error"), "non-place city");
 assert.ok(has(run({ sourceUrl: "https://www.runabc.com/x" }), "source", "error"), "discovery calendar");
 assert.ok(has(run({ sourceUrl: "https://example.org/results/2026" }), "source", "error"), "results page");
