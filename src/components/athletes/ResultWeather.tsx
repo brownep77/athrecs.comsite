@@ -1,9 +1,31 @@
-import { CloudSun, ChevronDown } from "lucide-react";
+import {
+  ChevronDown,
+  Cloud,
+  CloudFog,
+  CloudLightning,
+  CloudRain,
+  CloudSnow,
+  Snowflake,
+  Sun,
+  Thermometer,
+  type LucideIcon,
+} from "lucide-react";
 import {
   raceDayWeather,
   raceWeatherCondition,
   raceWeatherTemperature,
 } from "@/lib/athrecs/race-weather";
+
+const conditionIcons: Record<string, { icon: LucideIcon; colour: string }> = {
+  "Clear / fair reported": { icon: Sun, colour: "text-amber-600 fill-amber-100" },
+  "Cloud at times": { icon: Cloud, colour: "text-sky-600 fill-sky-100" },
+  "Rain at times": { icon: CloudRain, colour: "text-blue-600 fill-blue-100" },
+  "Fog at times": { icon: CloudFog, colour: "text-slate-500 fill-slate-100" },
+  "Snow at times": { icon: Snowflake, colour: "text-cyan-600" },
+  "Wintry mix": { icon: CloudSnow, colour: "text-cyan-700 fill-cyan-100" },
+  "Storms at times": { icon: CloudLightning, colour: "text-violet-600 fill-violet-100" },
+};
+const temperatureIcon = { icon: Thermometer, colour: "text-rose-600" };
 
 /** A short disclosure keeps weather inside the existing race-name column. */
 export function ResultWeather({ eventSlug, eventDate }: { eventSlug: string; eventDate: string }) {
@@ -11,15 +33,17 @@ export function ResultWeather({ eventSlug, eventDate }: { eventSlug: string; eve
   if (!weather) return null;
   if (weather.status === "unavailable")
     return <span className="block text-[11px] font-normal text-subtle">Weather unavailable</span>;
+  const condition = raceWeatherCondition(weather.conditionCodes);
+  const { icon: WeatherIcon, colour } = conditionIcons[condition] ?? temperatureIcon;
   return (
     <details className="result-weather mt-1 min-w-0 text-[11px] font-normal leading-4 text-muted">
       <summary
         className="flex min-h-7 cursor-pointer list-none items-start gap-1 rounded focus-visible:outline-2 focus-visible:outline-accent"
-        aria-label={`Race-day weather: ${raceWeatherTemperature(weather)}, ${raceWeatherCondition(weather.conditionCodes)}. Show details`}
+        aria-label={`Race-day weather: ${raceWeatherTemperature(weather)}, ${condition}. Show details`}
       >
-        <CloudSun className="mt-0.5 size-3 shrink-0" aria-hidden="true" />
+        <WeatherIcon className={`mt-0.5 size-3.5 shrink-0 ${colour}`} aria-hidden="true" />
         <span>
-          Day {raceWeatherTemperature(weather)} · {raceWeatherCondition(weather.conditionCodes)}
+          Day {raceWeatherTemperature(weather)} · {condition}
         </span>
         <ChevronDown className="mt-0.5 size-3 shrink-0" aria-hidden="true" />
       </summary>
