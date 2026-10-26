@@ -368,5 +368,190 @@
         "label": "First para wave 07:30; category starts vary"
       }
     }
+  },
+  "buttermere-shepherds-meet|2026-10-25": {
+    "summary": "Buttermere Shepherds' Meet: 5K, 1K, 2K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.fellrunner.org.uk/races/f1455974-a939-4423-a5c3-b5cc6682b5ec",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "11:30",
+        "note": "Buttermere Shepherds’ Meet: 5 km fell race; 600 m climb. U16 and older on the senior course. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/f1455974-a939-4423-a5c3-b5cc6682b5ec"
+      },
+      "1K": {
+        "time": "10:30",
+        "note": "U10: 1 km, 80 m climb. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/f1455974-a939-4423-a5c3-b5cc6682b5ec"
+      },
+      "2K": {
+        "time": "",
+        "note": "U12/U14: 2 km, 200 m climb. The governing-body programme does not give a separate start time. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/f1455974-a939-4423-a5c3-b5cc6682b5ec"
+      }
+    }
+  },
+  "curbar-commotion|2026-10-03": {
+    "summary": "Curbar Commotion: 16.9K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.fellrunner.org.uk/races/098dd646-9845-4b30-b03d-ad6bc5731b96",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "16.9K": {
+        "time": "10:00",
+        "note": "Curbar Commotion: 16.9 km (10.5 miles rounded), one course. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/098dd646-9845-4b30-b03d-ad6bc5731b96"
+      }
+    }
+  },
+  "dalesrunner-40|2026-10-04": {
+    "summary": "DalesRunner 40: 42K (approx.).",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.sientries.co.uk/event.php?event_id=16437",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "42K (approx.)": {
+        "time": "10:00",
+        "note": "Cancelled due to low entry numbers, as stated on the authorised entry programme. The organiser describes the planned course as roughly 42 km. Planned main start 10:00; early start 09:30. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.sientries.co.uk/event.php?event_id=16437",
+        "label": "Cancelled; planned main start 10:00, early start 09:30"
+      }
+    }
+  },
+  "foto-thornbridge-outdoors-20|2026-10-03": {
+    "summary": "FOTO Thornbridge Outdoors 20: 20.3mi.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.sientries.co.uk/event/foto-thornbridge-outdoors-20-2026?elid=Y",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "20.3mi": {
+        "time": "10:00",
+        "note": "20.3-mile course. Mass start for runners at 10:00; runners not competing for prizes (except V70) may start 08:00–09:30. The 07:00–08:00 window is for walkers. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.sientries.co.uk/event/foto-thornbridge-outdoors-20-2026?elid=Y",
+        "label": "Mass start 10:00; noncompetitive runners 08:00–09:30"
+      }
+    }
+  },
+  "grewelthorpe-multiterrain-race|2026-10-11": {
+    "summary": "Grewelthorpe Multiterrain Race: 13K (approx.).",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://racebest.com/races/azhts",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "13K (approx.)": {
+        "time": "11:00",
+        "note": "Grewelthorpe multiterrain course: approximately 13 km, as described by the organiser; authorised entry programme confirms 11:00 on 11 October 2026. Source checked 26 October 2026.",
+        "sourceUrl": "https://racebest.com/races/azhts"
+      }
+    }
+  },
+  "keynsham-dandy|2026-10-18": {
+    "summary": "Keynsham Dandy: 12.5mi.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.sientries.co.uk/event/keynsham-dandy-2026-2026?pid=GoogleEvents",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "12.5mi": {
+        "time": "10:00",
+        "note": "12.5-mile trail course. Main race starts at 10:00; three canicross waves depart beforehand, with no exact wave times supplied. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.sientries.co.uk/event/keynsham-dandy-2026-2026?pid=GoogleEvents",
+        "label": "Main race 10:00; canicross waves beforehand"
+      }
+    }
+  },
+  "langdale-horseshoe|2026-10-10": {
+    "summary": "Langdale Horseshoe: 21K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.fellrunner.org.uk/races/f261c925-3294-440e-8881-eb28f86fad10",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "21K": {
+        "time": "11:00",
+        "note": "Langdale Horseshoe: 21 km (13 miles rounded), with 1,450 m climb. The governing-body distance is 21 km, not a certified half marathon. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/f261c925-3294-440e-8881-eb28f86fad10"
+      }
+    }
+  },
+  "mendip-muddle|2026-10-25": {
+    "summary": "Mendip Muddle: 20K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.fellrunner.org.uk/races/86d29062-78ca-4852-912c-aabf00d279ff",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "20K": {
+        "time": "10:30",
+        "note": "Mendip Muddle: 20 km (12.4 miles rounded), one course with 420 m climb. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/86d29062-78ca-4852-912c-aabf00d279ff"
+      }
+    }
+  },
+  "morven-hill-race|2026-10-03": {
+    "summary": "Morven Hill Race: 8.8K, 4K, 1.8K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.deesiderunners.com/races/morven/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "8.8K": {
+        "time": "13:00",
+        "note": "Full Morven: 8.8 km. The organiser’s edition-specific 2026 programme supersedes the older 8 km calendar description. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.deesiderunners.com/races/morven/"
+      },
+      "4K": {
+        "time": "13:00",
+        "note": "Half Morven: 4 km for seniors, U18 and U16. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.deesiderunners.com/races/morven/"
+      },
+      "1.8K": {
+        "time": "13:10",
+        "note": "Mini Morven: 1.8 km for U14 and U12. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.deesiderunners.com/races/morven/"
+      }
+    }
+  },
+  "tavy-7|2026-10-25": {
+    "summary": "Tavy 7: 7mi, 1mi (approx.).",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.entrycentral.com/tavy7",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "7mi": {
+        "time": "11:00",
+        "note": "Tavy 7: seven-mile road race, 11:00 on 25 October 2026. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.entrycentral.com/tavy7"
+      },
+      "1mi (approx.)": {
+        "time": "",
+        "note": "Approximately one-mile family fun run, starting after the main race has cleared the field. No exact clock time is confirmed. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.entrycentral.com/tavy7fun",
+        "label": "After the 11:00 main race has cleared the field"
+      }
+    }
+  },
+  "the-stickler|2026-10-25": {
+    "summary": "The Stickler: 10.1mi.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.dorsetdoddlers.org/the-stickler",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10.1mi": {
+        "time": "10:30",
+        "note": "The Stickler: 10.1-mile off-road course; organiser’s 2026 welcome confirms 25 October, 10:30. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.dorsetdoddlers.org/the-stickler"
+      }
+    }
+  },
+  "yetholm-shepherds-show-race|2026-10-03": {
+    "summary": "Yetholm Shepherds Show Race: 6.5K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.yetholmshow.co.uk/enter-the-show",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "6.5K": {
+        "time": "12:45",
+        "note": "Shepherds Show hill race: 6.5 km. The opened 2026 organiser programme gives 12:45, superseding the earlier stored 11:45 and stale search text. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.yetholmshow.co.uk/enter-the-show"
+      }
+    }
   }
 }
