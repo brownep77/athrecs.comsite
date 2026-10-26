@@ -1,3 +1,4 @@
+import { fixtureDistanceLabel } from "./fixture-distance-policy.ts";
 import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
@@ -44,13 +45,13 @@ export async function queryRacePlaceRows(
   // The shared index needs dates for filters and rollover, but not descriptions,
   // entry links or source links for every future edition in the world.
   // Tuples also avoid repeating JSON property names for recurring fixtures.
-  type EditionTuple = [string, string, string, string | null];
+  type EditionTuple = [string, string, string, string | null, number | null];
   const endDate = `case when ed.end_source_url is not null and ed.end_checked_at is not null
           and ed.end_date >= ed.event_date then ed.end_date::text end`;
   const editionJson = options.compact
-    ? `json_build_array(ed.event_date::text, ed.distance_code, ed.status, ${endDate})`
+    ? `json_build_array(ed.event_date::text, ed.distance_code, ed.status, ${endDate}, ed.distance_km)`
     : `json_build_object(
-        'date', ed.event_date::text, 'distance', ed.distance_code, 'status', ed.status, 'entryUrl', ed.entry_url,
+        'date', ed.event_date::text, 'distance', ed.distance_code, 'distanceKm', ed.distance_km, 'status', ed.status, 'entryUrl', ed.entry_url,
         'startTime', ed.start_time, 'sourceUrl', ed.source_url, 'endDate', ${endDate})`;
   const rows = await sql.query<
     Omit<PlaceRace, "timeZone" | "editions"> & { editions: (PlaceEdition | EditionTuple)[] }
@@ -92,7 +93,13 @@ export async function queryRacePlaceRows(
       editions: race.editions
         .map((edition): PlaceEdition =>
           Array.isArray(edition)
-            ? { date: edition[0], distance: edition[1], status: edition[2], endDate: edition[3] }
+            ? {
+                date: edition[0],
+                distance: edition[1],
+                status: edition[2],
+                endDate: edition[3],
+                distanceKm: edition[4],
+              }
             : edition,
         )
         .filter(
@@ -103,6 +110,7 @@ export async function queryRacePlaceRows(
           const checked = detail?.starts[edition.distance];
           return {
             ...edition,
+            distance: fixtureDistanceLabel(edition.distance, edition.distanceKm),
             startTime: checked
               ? checked.time
               : edition.sourceUrl && !/runabc\.co\.uk/i.test(edition.sourceUrl)

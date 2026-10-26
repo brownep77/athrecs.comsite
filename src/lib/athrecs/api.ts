@@ -1,4 +1,5 @@
 import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
+import { fixtureDistanceLabel, PLACEHOLDER, RACE_FORMAT } from "./fixture-distance-policy.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { withheldFixtureDateKeys } from "@/data/fixture-date-reviews";
 import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
@@ -246,6 +247,7 @@ export const listEvents = createServerFn({ method: "GET" })
     const rows = await sql<
       Omit<EventListItem, "groups"> & {
         distances_csv: string | null;
+        next_distance_km: number | null;
         groups_json: string | RaceGroupInfo[] | null;
       }
     >`
@@ -297,6 +299,11 @@ export const listEvents = createServerFn({ method: "GET" })
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_distance,
+        (
+          select ed.distance_km from scoped_editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+          order by ed.event_date asc limit 1
+        ) as next_distance_km,
         (
           select ed.status from scoped_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
@@ -412,7 +419,11 @@ export const listEvents = createServerFn({ method: "GET" })
         const { groups_json, ...r } = rawRow;
         const distances = sanitizeDistances(
           r.name,
-          r.distances_csv ? r.distances_csv.split(",") : [],
+          (r.distances_csv ? r.distances_csv.split(",") : [])
+            .map((code) =>
+              fixtureDistanceLabel(code, code === r.next_distance ? r.next_distance_km : null),
+            )
+            .filter((code) => !PLACEHOLDER.test(code) && !RACE_FORMAT.test(code)),
         );
         return {
           ...r,
@@ -423,7 +434,9 @@ export const listEvents = createServerFn({ method: "GET" })
           next_distance:
             r.next_distance === "Marathon" && !distances.includes("Marathon")
               ? (distances[0] ?? r.next_distance)
-              : r.next_distance,
+              : r.next_distance
+                ? fixtureDistanceLabel(r.next_distance, r.next_distance_km)
+                : null,
         };
       })
       .filter((row): row is NonNullable<typeof row> => row !== null);
@@ -1539,7 +1552,9 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
         event.county,
         event.city,
         edition.event_date,
-        edition.distance_code,
+        case when edition.distance_km > 0 and
+          (btrim(edition.distance_code) ~* ${PLACEHOLDER.source} or btrim(edition.distance_code) ~* ${RACE_FORMAT.source})
+          then edition.distance_km::text || 'K' else edition.distance_code end as distance_code,
         edition.status,
         row_number() over (
           partition by event.id
@@ -1826,6 +1841,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       id: number;
       event_date: string;
       distance_code: string;
+      distance_km: number;
       status: string;
       start_time: string | null;
       event_slug: string;
@@ -1842,6 +1858,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         ed.id,
         ed.event_date::text as event_date,
         ed.distance_code,
+        ed.distance_km,
         ed.status,
         ed.start_time,
         e.slug as event_slug,
@@ -1956,7 +1973,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
             row.distance_code,
             row.start_time,
           ),
-          distance_code: labels.join(" · ") || distanceCode,
+          distance_code: fixtureDistanceLabel(labels.join(" · ") || distanceCode, row.distance_km),
           groups: parseRaceGroups(groups_json),
         };
       });

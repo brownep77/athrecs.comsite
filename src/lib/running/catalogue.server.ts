@@ -1,3 +1,8 @@
+import {
+  fixtureDistanceLabel,
+  PLACEHOLDER,
+  RACE_FORMAT,
+} from "../athrecs/fixture-distance-policy.ts";
 import { unconfirmedFixtureEditionIds } from "../athrecs/fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "../athrecs/public-catalogue-content.ts";
 import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews";
@@ -133,10 +138,12 @@ type RawEventRow = {
   groups_json: string | RaceGroupInfo[] | null;
   next_date: string | null;
   next_distance: string | null;
+  next_distance_km: number | null;
   next_status: string | null;
   next_start_time: string | null;
   next_entry_url: string | null;
-  next_starts_json: string | Array<{ distance: string; time: string | null }> | null;
+  next_starts_json:
+    string | Array<{ distance: string; distanceKm?: number | null; time: string | null }> | null;
   upcoming_count: number;
   past_count: number;
   edition_count: number;
@@ -214,6 +221,11 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
           order by ed.event_date asc, ed.distance_km asc, ed.id asc limit 1
         ) as next_distance,
         (
+          select ed.distance_km from display_editions ed
+          where ed.event_id = e.id
+          order by ed.event_date asc, ed.distance_km asc, ed.id asc limit 1
+        ) as next_distance_km,
+        (
           select ed.status from display_editions ed
           where ed.event_id = e.id
           order by ed.event_date asc, ed.distance_km asc, ed.id asc limit 1
@@ -238,7 +250,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
           order by option.is_primary desc, option.checked_at desc, option.id limit 1
         ) as next_entry_url,
         (
-          select json_agg(json_build_object('distance', ed.distance_code, 'time', ed.start_time)
+          select json_agg(json_build_object('distance', ed.distance_code, 'distanceKm', ed.distance_km, 'time', ed.start_time)
             order by ed.distance_km, ed.id)::text
           from display_editions ed where ed.event_id = e.id and ed.event_date = (
             select min(first_ed.event_date) from display_editions first_ed
@@ -246,7 +258,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
           )
         ) as next_starts_json,
         (
-          select count(*)::int from editions ed
+          select count(*)::int from display_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) as upcoming_count,
         (
@@ -350,11 +362,22 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
       const { groups_json, distances_csv, next_starts_json, ...row } = rawRow;
       const nextStarts =
         typeof next_starts_json === "string"
-          ? (JSON.parse(next_starts_json) as Array<{ distance: string; time: string | null }>)
+          ? (JSON.parse(next_starts_json) as Array<{
+              distance: string;
+              distanceKm?: number | null;
+              time: string | null;
+            }>)
           : (next_starts_json ?? []);
       const distances = sanitizeDistances(
         row.name,
-        distances_csv ? distances_csv.split(",") : [],
+        (distances_csv ? distances_csv.split(",") : [])
+          .map((code) =>
+            fixtureDistanceLabel(
+              code,
+              nextStarts.find((start) => start.distance === code)?.distanceKm,
+            ),
+          )
+          .filter((code) => !PLACEHOLDER.test(code) && !RACE_FORMAT.test(code)),
       ).filter((code) => !isReviewedFixturePlaceholder(row.slug, row.next_date ?? "", code));
       return {
         ...row,
@@ -370,7 +393,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
             (start) => !isReviewedFixturePlaceholder(row.slug, row.next_date ?? "", start.distance),
           )
           .map((start) => ({
-            distance: start.distance,
+            distance: fixtureDistanceLabel(start.distance, start.distanceKm),
             label: checkedFixtureStartLabel(row.slug, row.next_date, start.distance),
             time:
               row.sport === "Parkrun"
@@ -381,7 +404,9 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
         next_distance:
           row.next_distance === "Marathon" && !distances.includes("Marathon")
             ? (distances[0] ?? row.next_distance)
-            : row.next_distance,
+            : row.next_distance
+              ? fixtureDistanceLabel(row.next_distance, row.next_distance_km)
+              : null,
       } satisfies EventListItem;
     })
     .filter((row): row is EventListItem => row !== null);

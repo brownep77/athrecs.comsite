@@ -2,6 +2,15 @@ export const PLACEHOLDER =
   /^(?:other|unknown|tbc|tbd|n\/?a|unspecified|distance not yet confirmed)?$/i;
 export const RACE_FORMAT =
   /^(?:ultra(?:marathon)?|cross[ -]country|xc|fun run|road|trail|fell|mountain|running|triathlon|duathlon|aquathlon|aquabike|swim bike run)$/i;
+/** Display only; keep original codes for source matching and calendar IDs. */
+export function fixtureDistanceLabel(code: string, km?: number | null): string {
+  return km != null &&
+    Number.isFinite(km) &&
+    km > 0 &&
+    (PLACEHOLDER.test(code.trim()) || RACE_FORMAT.test(code.trim()))
+    ? `${km}K`
+    : code;
+}
 export const DISTANCE_SPORTS = ["Running", "Parkrun", "Walking", "OCR", "Swimrun"];
 export const FIXED_DISTANCE =
   /^(?:(?:[1-9]\d*(?:\.\d+)?|0\.\d*[1-9]\d*)\s*(?:k(?:m)?|mi(?:le)?s?|m)|half(?:[ -]marathon)?|marathon|quarter)$/i;

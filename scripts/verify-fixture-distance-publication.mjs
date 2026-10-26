@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import { bulkFixture } from "./collector-bulk-fixture.mjs";
-import { hasConfirmedFixtureDistance } from "../src/lib/athrecs/fixture-distance-policy.ts";
+import {
+  hasConfirmedFixtureDistance,
+  fixtureDistanceLabel,
+} from "../src/lib/athrecs/fixture-distance-policy.ts";
 import { unconfirmedFixtureEditionIds } from "../src/lib/athrecs/fixture-distance-policy.server.ts";
 import corrections from "../src/data/confirmed-distance-editions-2026-10-26.json" with { type: "json" };
 const { editions, seriesList } = await import("../src/data/catalogue.ts");
@@ -39,6 +42,9 @@ assert.equal(hasConfirmedFixtureDistance("Running", "Ultra", Infinity), false);
 assert.equal(hasConfirmedFixtureDistance("Athletics", "Track & field", 0), true);
 assert.equal(hasConfirmedFixtureDistance("Swimming", "Pool meet", 0), true);
 assert.equal(hasConfirmedFixtureDistance("Cycling", "Other", 0), false);
+assert.equal(fixtureDistanceLabel("Other", 12), "12K");
+assert.equal(fixtureDistanceLabel("Ultra", 104), "104K");
+assert.equal(fixtureDistanceLabel("3x2K relay", 6), "3x2K relay");
 for (const correction of corrections) {
   const knownEvent = seriesList.some((event) => event.slug === correction.seriesSlug);
   const exact = editions.filter(
