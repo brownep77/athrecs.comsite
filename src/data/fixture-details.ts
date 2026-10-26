@@ -1,3 +1,4 @@
+import duplicateProgrammeStarts from "./duplicate-programme-starts-2026-10-26.json" with { type: "json" };
 import confirmedDistances from "./confirmed-distances-2026-10-26.json" with { type: "json" };
 import largeThreeMonthStarts from "./three-month-starts-batch-2026-10-25.json" with { type: "json" };
 import moreThreeMonthStarts from "./three-month-starts-more-2026-10-25.json" with { type: "json" };
@@ -486,6 +487,16 @@ for (const [key, reviewed] of Object.entries(largeThreeMonthStarts)) {
 
 // Reviewed distance replacements retain their own category and wave evidence.
 for (const [key, reviewed] of Object.entries(confirmedDistances)) {
+  const existing = FIXTURE_DETAILS[key];
+  FIXTURE_DETAILS[key] = {
+    ...existing,
+    ...reviewed,
+    starts: { ...existing?.starts, ...reviewed.starts },
+  };
+}
+
+// Retained duplicate programmes keep the edition-specific organiser timetable.
+for (const [key, reviewed] of Object.entries(duplicateProgrammeStarts)) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {
     ...existing,

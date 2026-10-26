@@ -1,4 +1,5 @@
 import { buildProfileTimeline } from "./profile-timeline";
+import type { BiographyPresentation } from "./biography-presentation";
 import {
   buildProfileAchievementSummary,
   type ProfileAchievementSummary,
@@ -48,6 +49,7 @@ export type PublicAthletePreview = {
   details?: PublicProfileDetails;
   sports: string[];
   biography: string[];
+  biographyPresentation?: BiographyPresentation;
   biographySources: { label: string; url: string }[];
   careerSummary: PublicCareerSummary | null;
   achievements?: ProfileAchievementSummary;
@@ -75,6 +77,7 @@ export function buildPublicAthletePreview(input: {
   details?: PublicProfileDetails;
   sports?: readonly string[];
   biography?: readonly string[];
+  biographyPresentation?: BiographyPresentation;
   biographySources?: readonly { label: string; url: string }[];
   results: readonly ProfileResult[];
   histories: readonly SourceHistory[];
@@ -146,6 +149,9 @@ export function buildPublicAthletePreview(input: {
           }),
         ],
     biographySources: [],
+    ...(input.biography?.length && input.biographyPresentation
+      ? { biographyPresentation: input.biographyPresentation }
+      : {}),
     careerSummary:
       input.biography?.length === 0
         ? null

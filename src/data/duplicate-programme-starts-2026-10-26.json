@@ -1,0 +1,102 @@
+{
+  "chase-the-moon-olympic-park-5k-10k-october|2026-10-28": {
+    "summary": "Chase the Moon 5K and 10K at Queen Elizabeth Olympic Park.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.runthrough.co.uk/event/chase-the-moon-queen-elizabeth-olympic-park-halloween-5k-10k-october-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "19:00",
+        "note": "The organiser race-day schedule explicitly starts both 5K and 10K at 19:00."
+      },
+      "10K": {
+        "time": "19:00",
+        "note": "The organiser race-day schedule explicitly starts both 5K and 10K at 19:00."
+      }
+    }
+  },
+  "dorney-5k-10k-half-marathon-august-1|2026-11-08": {
+    "summary": "Dorney Lake 5K, 10K and half marathon.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "09:10",
+        "note": "The organiser race-day schedule explicitly starts all three distances at 09:10, superseding the older 09:00 federation import."
+      },
+      "10K": {
+        "time": "09:10",
+        "note": "The organiser race-day schedule explicitly starts all three distances at 09:10, superseding the older 09:00 federation import."
+      },
+      "Half": {
+        "time": "09:10",
+        "note": "The organiser race-day schedule explicitly starts all three distances at 09:10, superseding the older 09:00 federation import."
+      }
+    }
+  },
+  "ea-runevents-monsal-tinsel-trail-christmas-10k-5k-and-junior-run-bakewell|2026-12-05": {
+    "summary": "Christmas 5K and 10K on the Monsal Trail from Bakewell Station.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.nice-work.org.uk/e/monsal-tinsel-trail-christmas-10k-5k-and-junior-run-15346",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "10:30",
+        "note": "The organiser publishes 5 December at 10:30 for the 5K/10K programme; this supersedes the older federation 10:00. No junior start is inferred."
+      },
+      "10K": {
+        "time": "10:30",
+        "note": "The organiser publishes 5 December at 10:30 for the 5K/10K programme; this supersedes the older federation 10:00. No junior start is inferred."
+      }
+    }
+  },
+  "ea-runevents-salcey-forest-christmas-10k-5k-and-junior-fun-run-northampton|2026-12-13": {
+    "summary": "Christmas 5K and 10K on Salcey Forest trails.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.nice-work.org.uk/e/salcey-forest-christmas-10k-5k-and-junior-fun-run-9702",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "10:00",
+        "note": "The organiser publishes 13 December at 10:00 for the 5K/10K programme; this supersedes the older federation 09:30. No junior start is inferred."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "The organiser publishes 13 December at 10:00 for the 5K/10K programme; this supersedes the older federation 09:30. No junior start is inferred."
+      }
+    }
+  },
+  "runthrough-tatton-november-10k-gb|2026-11-07": {
+    "summary": "Tatton Park 5K and 10K, starting separately.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.runthrough.co.uk/event/tatton-park-5k-10k-november-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "08:45",
+        "note": "The organiser race-day schedule explicitly gives 10K at 08:45 and 5K at 09:05. Retains the already verified 10K start and adds the separately confirmed 5K start."
+      },
+      "5K": {
+        "time": "09:05",
+        "note": "The organiser race-day schedule explicitly gives 10K at 08:45 and 5K at 09:05. Retains the already verified 10K start and adds the separately confirmed 5K start."
+      }
+    }
+  },
+  "run-tatton-5k-10k-november|2026-12-12": {
+    "summary": "Tatton Park 5K and 10K, starting separately.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.runthrough.co.uk/event/tatton-park-5k-10k-december-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "08:45",
+        "note": "The edition-specific organiser race-day timetable gives 10K at 08:45 and 5K at 09:05; race-pack collection closes at 08:15/08:35. This specific timetable takes precedence over the generic 09:00 summary and older entry clocks. Check the final organiser instructions before race day."
+      },
+      "5K": {
+        "time": "09:05",
+        "note": "The edition-specific organiser race-day timetable gives 10K at 08:45 and 5K at 09:05; race-pack collection closes at 08:15/08:35. This specific timetable takes precedence over the generic 09:00 summary and older entry clocks. Check the final organiser instructions before race day."
+      }
+    }
+  }
+}
