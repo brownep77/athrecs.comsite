@@ -81,6 +81,70 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   ...nextUrgentStarts,
   ...thirdUrgentStarts,
   ...accraStart,
+  "attack-of-the-zombie-cows|2026-10-31": {
+    summary: "An eight-hour challenge on a weather-dependent 3.28-mile loop at Samphire Hoe.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://runbelievablechallenges.co.uk/attack-of-the-zombie-cows-1",
+    checkedAt: "2026-10-25",
+    starts: {
+      Half: {
+        time: "08:30",
+        note: "Shared challenge start; half marathon is a lap target, not a separate wave.",
+      },
+      "10mi": {
+        time: "08:30",
+        note: "Shared challenge start; 10 miles is a lap target, not a separate wave.",
+      },
+    },
+  },
+  "anglesey-trail-half-marathon|2026-11-01": {
+    summary: "A trail half marathon through Newborough Forest and Traeth Llanddwyn.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://alwaysaimhighevents.com/content/files/Anglesey-Trail-Final-Instructions-2026.pdf",
+    checkedAt: "2026-10-25",
+    starts: {
+      Half: {
+        time: "08:15",
+        note: "Final instructions: compulsory half-marathon safety brief 08:00; race start 08:15. The 10K starts separately at 08:45.",
+      },
+    },
+  },
+  "corofin-loops|2026-11-01": {
+    summary: "The Corofin Loop offers sold-out 8K and 10-mile road races.",
+    timeZone: "Europe/Dublin",
+    sourceUrl: "https://eventmaster.ie/event/oOlbck3tLm",
+    checkedAt: "2026-10-25",
+    starts: {
+      "10M": {
+        time: "09:00",
+        note: "The approved Eventmaster programme gives one 09:00 event start for its 8K and 10-mile ticket categories; no separate wave is published.",
+      },
+    },
+  },
+  "november-nightmare|2026-11-01": {
+    summary: "Day one of an eight-day challenge with 8-mile, 16-mile and marathon choices.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://www.codrc.co.uk/e/the-november-nightmare-12273",
+    checkedAt: "2026-10-25",
+    starts: {
+      Half: {
+        time: "09:00",
+        note: "Shared 09:00 start. The organiser calls this category a half but states it is approximately 16 miles; do not present it as a standard 13.1-mile half.",
+      },
+    },
+  },
+  "rosliston-rumble-autumn|2026-11-01": {
+    summary: "A six-hour trail challenge on 5.275km loops in Rosliston Forest.",
+    timeZone: "Europe/London",
+    sourceUrl: "https://rasselbock.co.uk/event/rosliston-rumble-weekend-edition-autumn-2026/",
+    checkedAt: "2026-10-25",
+    starts: {
+      Half: {
+        time: "09:00",
+        note: "Shared challenge start. Four laps form the organiser's 21.1km half target; there is no separate half wave.",
+      },
+    },
+  },
   "wa-32-hella-hamburg-half-marathon-7238156|2026-10-25": {
     place: { city: "Hamburg" },
     summary: "A half marathon from the Reeperbahn to Hamburg Messe.",

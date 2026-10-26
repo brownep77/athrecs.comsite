@@ -158,6 +158,8 @@ import {
 import {
   dailyHalfTenMileEditions,
   dailyHalfTenMileExistingSeriesEditions,
+  dailyHalfTenMileRetiredEditionKeys,
+  dailyHalfTenMileRetiredSeriesSlugs,
   dailyHalfTenMileSeries,
   dailyHalfTenMileSeriesOverrides,
 } from "./half-ten-mile-races-uk-ireland-daily-followup";
@@ -462,18 +464,26 @@ for (const series of [
   extraSeries.push(series);
 }
 const extraSlugs = new Set(extraSeries.map((series) => series.slug));
+const retiredDailySeriesSlugs = new Set<string>(dailyHalfTenMileRetiredSeriesSlugs);
+const retiredDailyEditionKeys = new Set(
+  dailyHalfTenMileRetiredEditionKeys.map(
+    (edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`,
+  ),
+);
 
-export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series) => ({
-  ...series,
-  ...seriesOverrides[series.slug],
-  ...aimsEuropeSeriesOverrides[series.slug],
-  ...dailyHalfTenMileSeriesOverrides[series.slug],
-  ...reviewedParkrunSeriesOverrides[series.slug],
-  ...legacyRaceGeography[series.slug],
-  ...urgentReviewedSeriesOverrides[series.slug],
-  ...nextUrgentSeriesOverrides[series.slug],
-  ...thirdUrgentSeriesOverrides[series.slug],
-}));
+export const seriesList: Series[] = [...coreSeries, ...extraSeries]
+  .filter((series) => !retiredDailySeriesSlugs.has(series.slug))
+  .map((series) => ({
+    ...series,
+    ...seriesOverrides[series.slug],
+    ...aimsEuropeSeriesOverrides[series.slug],
+    ...dailyHalfTenMileSeriesOverrides[series.slug],
+    ...reviewedParkrunSeriesOverrides[series.slug],
+    ...legacyRaceGeography[series.slug],
+    ...urgentReviewedSeriesOverrides[series.slug],
+    ...nextUrgentSeriesOverrides[series.slug],
+    ...thirdUrgentSeriesOverrides[series.slug],
+  }));
 
 const mergedEditions = [
   ...imminentReviewedAdditions,
@@ -627,6 +637,12 @@ export const editions: Edition[] = (() => {
 
   for (const sourceEdition of mergedEditions) {
     const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
+    if (
+      retiredDailySeriesSlugs.has(sourceEdition.seriesSlug) ||
+      retiredDailyEditionKeys.has(sourceKey)
+    ) {
+      continue;
+    }
     const edition = {
       ...sourceEdition,
       ...editionOverrides[sourceKey],
@@ -644,6 +660,12 @@ export const editions: Edition[] = (() => {
   // distance cannot be discarded merely because another distance shares its date.
   for (const sourceEdition of mergedEditions) {
     const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
+    if (
+      retiredDailySeriesSlugs.has(sourceEdition.seriesSlug) ||
+      retiredDailyEditionKeys.has(sourceKey)
+    ) {
+      continue;
+    }
     const edition = {
       ...sourceEdition,
       ...editionOverrides[sourceKey],

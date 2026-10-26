@@ -33,6 +33,13 @@ const CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT = "2026-10-10";
 const CURRENT_IRISH_PERMIT_SCAN_CHECKED_AT = "2026-10-11";
 const CURRENT_IRISH_APPROVAL_SCAN_CHECKED_AT = "2026-10-12";
 const CURRENT_ENTRY_STATE_SCAN_CHECKED_AT = "2026-10-14";
+const CURRENT_NORFOLK_REFRESH_CHECKED_AT = "2026-10-16";
+const CURRENT_PENDING_SCAN_CHECKED_AT = "2026-10-18";
+const CURRENT_ENTRYCENTRAL_SCAN_CHECKED_AT = "2026-10-21";
+const CURRENT_OFFICIAL_ENTRY_SCAN_CHECKED_AT = "2026-10-22";
+const CURRENT_DORNEY_REFRESH_CHECKED_AT = "2026-10-23";
+const CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT = "2026-10-24";
+const CURRENT_START_AND_DISCOVERY_CHECKED_AT = "2026-10-25";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -63,6 +70,87 @@ type RaceSeed = {
 };
 
 const seeds: RaceSeed[] = [
+  {
+    slug: "corofin-loops",
+    name: "The Corofin Loop 2026",
+    date: "2026-11-01",
+    distance: "10mi",
+    startTime: "09:00",
+    country: "Ireland",
+    county: "County Galway",
+    city: "Corofin",
+    area: "Corofin village and surrounding County Galway roads",
+    surface: "Road",
+    distances: ["10mi", "8K"],
+    organiser: "Corofin A.C. / Eventmaster",
+    url: "https://eventmaster.ie/event/oOlbck3tLm",
+    status: "Closed",
+    hasEntry: false,
+    priceAmount: 35,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_START_AND_DISCOVERY_CHECKED_AT,
+    notes:
+      "The approved Eventmaster programme and Athletics Ireland calendar consistently confirm the 1 November 2026 road race, permit 26/433 and one shared 09:00 start for the 8K and 10-mile categories. Both categories are sold out, so no checkout is advertised; both distances remain on one canonical card.",
+  },
+  {
+    slug: "run-falmouth-half-marathon-2027",
+    name: "Run Falmouth Half Marathon 2027",
+    date: "2027-04-04",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "Cornwall",
+    city: "Falmouth",
+    area: "Princess Pavilion, Falmouth coast and surrounding Cornish roads",
+    surface: "Road",
+    organiser: "intoTRI / SiEntries",
+    url: "https://www.sientries.co.uk/event/run-falmouth-half-marathon-2027",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18976",
+    priceAmount: 24,
+    checkedAt: CURRENT_OFFICIAL_ENTRY_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 4 April 2027 road half marathon, 10:00 start and open event-specific checkout. Affiliated entry starts at £24 and non-affiliated entry is £26.",
+  },
+  {
+    slug: "run-barra-2027",
+    name: "Run Barra 2027",
+    date: "2027-05-29",
+    distance: "Half",
+    startTime: "09:40",
+    country: "Scotland",
+    county: "Na h-Eileanan Siar",
+    city: "Castlebay",
+    area: "Isle of Barra",
+    surface: "Road",
+    distances: ["Half", "10K", "5K", "Other"],
+    organiser: "Kayleigh's Wee Stars / EntryCentral",
+    url: "https://www.kayleighsweestars.co.uk/events/run-barra-2027",
+    entryUrl: "https://www.entrycentral.com/form/130961",
+    priceAmount: 30,
+    checkedAt: CURRENT_OFFICIAL_ENTRY_SCAN_CHECKED_AT,
+    notes:
+      "The organiser and authorised registration pages consistently confirm the 29 May 2027 festival, 09:40 Ocean Installer Half Barrathon start and open £30 event-specific checkout. The half marathon, 10K, 5K and junior fun runs remain on one canonical card.",
+  },
+  {
+    slug: "dirtrun-wyre-wizard-trail-half-marathon-spring",
+    name: "DirtRun Wyre Wizard Trail Half Marathon — Spring",
+    date: "2027-04-18",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "Worcestershire",
+    city: "Kidderminster",
+    area: "Wyre Forest Visitor Centre, Callow Hill",
+    surface: "Trail",
+    distances: ["Half", "Other"],
+    organiser: "Pulse Events / EntryCentral",
+    url: "https://www.entrycentral.com/wyrewizard2024spring",
+    entryUrl: "https://www.entrycentral.com/form/114815",
+    priceAmount: 20,
+    checkedAt: CURRENT_ENTRYCENTRAL_SCAN_CHECKED_AT,
+    notes:
+      "The organiser-authorised EntryCentral page consistently confirms the Spring 2027 trail half marathon on 18 April at 10:00, open entry from £20 and a separate 7.6-mile Super Seven. The half uses the event-specific direct checkout and both distances remain on one canonical card.",
+  },
   {
     slug: "glenmore-challenge-running-festival-2027",
     name: "Glenmore Challenge Running Festival 2027",
@@ -1488,6 +1576,25 @@ const seeds: RaceSeed[] = [
     notes:
       "The official organiser page consistently confirms the 2 May 2027 half marathon, 10K, 5K and junior programme, the 10:00 half-marathon start and open direct entry.",
   },
+  {
+    slug: "epic-norwich-city-half-marathon",
+    name: "EPIC Norwich City Half Marathon",
+    date: "2027-05-03",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Norfolk",
+    city: "Norwich",
+    area: "Norwich city centre",
+    surface: "Road",
+    organiser: "EPIC Norfolk / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/729",
+    entryUrl: "https://totalracetiming.co.uk/race/729",
+    priceAmount: 49.5,
+    checkedAt: CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+    notes:
+      "The official organiser and event-specific registration pages consistently confirm this new Norwich city-centre road half marathon on Bank Holiday Monday 3 May 2027 at 09:30. General entries are sold out, but official charity entries remain open at £49.50.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -1549,6 +1656,7 @@ export const dailyHalfTenMileEditions: Edition[] = seeds.flatMap((seed) => {
 type ExistingSeriesEditionSeed = {
   seriesSlug: string;
   date: string;
+  distance?: "Half" | "10mi";
   startTime?: string;
   organiser: string;
   url: string;
@@ -1563,6 +1671,95 @@ type ExistingSeriesEditionSeed = {
 };
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
+  {
+    seriesSlug: "belfast-half",
+    date: "2027-09-19",
+    startTime: "09:00",
+    organiser: "Belfast City Marathon / Eventmaster",
+    url: "https://eventmaster.ie/event/81ZZS7qTV1",
+    entryUrl: "https://eventmaster.ie/event/81ZZS7qTV1",
+    priceAmount: 48,
+    checkedAt: CURRENT_START_AND_DISCOVERY_CHECKED_AT,
+    notes:
+      "The official event-specific registration page confirms the Phoenix Energy Belfast City Half Marathon on 19 September 2027, a 09:00 start at Ormeau Park and open affiliated entry from £48. The established Belfast half-marathon card is enriched rather than duplicated.",
+  },
+  {
+    seriesSlug: "gisburn-forest-10k-trail-race",
+    date: "2027-08-07",
+    startTime: "13:00",
+    organiser: "Pendle Trail Running Club / SiEntries",
+    url: "https://www.sientries.co.uk/event/gisburn-forest-10km-trail-race-2027-2",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18415",
+    publishAllDistances: true,
+    priceAmount: 35,
+    checkedAt: CURRENT_START_AND_DISCOVERY_CHECKED_AT,
+    notes:
+      "The organiser-authorised registration page confirms the Trail Running Association-licensed 10K and half marathon on 7 August 2027. The 10K starts at 11:00 and the half marathon at 13:00; affiliated half entry is open from £35. The existing Gisburn Forest card is enriched rather than duplicated.",
+  },
+  {
+    seriesSlug: "aj-bell-great-scottish-run",
+    date: "2027-10-03",
+    startTime: "10:10",
+    organiser: "The Great Run Company",
+    url: "https://www.greatrun.org/events/great-scottish-run/",
+    entryUrl:
+      "https://www.letsdothis.com/gb/o/26391/checkout/ticket?eventId=235876&occurrenceId=21111178979&preferred=true",
+    publishAllDistances: true,
+    priceAmount: 43,
+    checkedAt: CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT,
+    notes:
+      "The official organiser page and Scottish Athletics consistently confirm the 3 October 2027 Glasgow event. The half marathon starts at 10:10, earlybird half entry is open at £43 through the organiser-authorised event-specific checkout, and the 10K remains on the same canonical card.",
+  },
+  {
+    seriesSlug: "reedham-ten",
+    date: "2027-01-17",
+    distance: "10mi",
+    startTime: "10:00",
+    organiser: "Great Yarmouth & District Athletic Club / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/730",
+    entryUrl: "https://totalracetiming.co.uk/race/730",
+    priceAmount: 28.1,
+    checkedAt: "2026-10-15",
+    notes:
+      "The official event-specific registration page confirms the 17 January 2027 road race, 10:00 start, open entry, race licence 30222 and course-accuracy certificate 22/475; the established Reedham Ten card is enriched instead of duplicated.",
+  },
+  {
+    seriesSlug: "great-eastern-run",
+    date: "2027-10-10",
+    startTime: "10:30",
+    organiser: "Good Running Events / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/747",
+    entryUrl: "https://totalracetiming.co.uk/race/747",
+    publishAllDistances: true,
+    priceAmount: 41,
+    checkedAt: CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+    notes:
+      "The official organiser and event-specific registration pages consistently confirm the 10 October 2027 Peterborough half marathon and Anna's Hope 5K, the 10:30 half start, open entry and course-measurement reference 26-447. The established Great Eastern Run card is enriched instead of duplicated.",
+  },
+  {
+    seriesSlug: "southwold-half-marathon",
+    date: "2027-02-28",
+    startTime: "09:00",
+    organiser: "EPIC Norfolk / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/719",
+    entryUrl: "https://totalracetiming.co.uk/race/719",
+    priceAmount: 42.1,
+    checkedAt: CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+    notes:
+      "The event-specific official registration page confirms the 28 February 2027 multi-terrain half marathon and 09:00 start. General entry is sold out, but official charity entry remains open at £42.10; the established Southwold card is refreshed in place.",
+  },
+  {
+    seriesSlug: "spring-blickling-half",
+    date: "2027-03-14",
+    startTime: "08:45",
+    organiser: "EPIC Norfolk / Total Race Timing",
+    url: "https://totalracetiming.co.uk/race/727",
+    entryUrl: "https://totalracetiming.co.uk/race/727",
+    priceAmount: 36.5,
+    checkedAt: CURRENT_NORFOLK_REFRESH_CHECKED_AT,
+    notes:
+      "The event-specific official registration page confirms the 14 March 2027 multi-terrain half marathon, 08:45 start and open £36.50 entry; the established Spring Blickling card is refreshed in place rather than duplicated.",
+  },
   {
     seriesSlug: "tonbridge-half-marathon",
     date: "2027-10-03",
@@ -1714,19 +1911,28 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The official organiser page consistently confirms the 14 February 2027 multi-distance programme, 11:00 half-marathon start and open entry; the established Oulton Park card is enriched rather than duplicated. The downstream checkout redirects to an unrelated Blackburn race, so the verified organiser page remains the entry destination.",
   },
-  {
-    seriesSlug: "dorney-5k-10k-half-marathon-august-1",
-    date: "2027-04-03",
-    startTime: "09:10",
-    organiser: "RunThrough Events / Dorney Lake Events",
-    url: "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027",
-    entryUrl: "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027",
-    publishAllDistances: true,
-    priceAmount: 34,
-    checkedAt: CURRENT_ENTRY_STATE_SCAN_CHECKED_AT,
-    notes:
-      "RunThrough has corrected the former stale date and midnight placeholder: the official page now consistently confirms 3 April 2027, a 09:10 all-distance start and open entry. The established Dorney Lake card is reused. The downstream checkout redirects to an unrelated Blackburn race, so the verified organiser page remains the entry destination.",
-  },
+  ...[
+    ["2027-01-17", "january"],
+    ["2027-02-06", "february"],
+    ["2027-03-13", "march"],
+    ["2027-04-03", "april"],
+  ].map(([date, month]) => {
+    const url = `https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-${month}-2027`;
+    return {
+      seriesSlug: "dorney-5k-10k-half-marathon-august-1",
+      date,
+      startTime: "09:10",
+      organiser: "RunThrough Events / Dorney Lake Events",
+      url,
+      entryUrl: url,
+      publishAllDistances: true,
+      priceAmount: 34,
+      checkedAt:
+        month === "april" ? CURRENT_ENTRY_STATE_SCAN_CHECKED_AT : CURRENT_DORNEY_REFRESH_CHECKED_AT,
+      notes:
+        "RunThrough has corrected the former stale date and midnight placeholder: the official page now consistently confirms this 2027 date, a 09:10 all-distance start and open entry. The established Dorney Lake card is reused. The downstream checkout redirects to an unrelated Blackburn race, so the verified organiser page remains the entry destination.",
+    };
+  }),
   {
     seriesSlug: "tatton-half-marathon-november",
     date: "2027-11-07",
@@ -1963,11 +2169,12 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     date: "2027-09-12",
     startTime: "09:00",
     organiser: "RunThrough Events",
-    url: "https://www.runthrough.co.uk/event/basildon-half-marathon-and-juniors-september-2027",
+    url: "https://www.runthrough.co.uk/event/basildon-half-marathon-september-2027",
+    publishAllDistances: true,
     priceAmount: 36,
-    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    checkedAt: CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT,
     notes:
-      "The official organiser page consistently confirms the road-closed Basildon half marathon on 12 September 2027, its 09:00 start and open direct entry; the established Basildon card is reused.",
+      "The renamed official organiser page consistently confirms the road-closed Basildon half marathon, 10K and junior races on 12 September 2027, the 09:00 half start and open event-page entry. All distances remain on the established Basildon card.",
   },
   {
     seriesSlug: "cheshire-autumn-half",
@@ -2194,11 +2401,12 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
 export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesEditionSeeds.map(
   (seed) => {
     const hasEntry = seed.hasEntry ?? seed.status !== "TBC";
+    const distance = seed.distance ?? "Half";
     return {
       seriesSlug: seed.seriesSlug,
       date: seed.date,
-      distance: "Half",
-      distanceKm: 21.0975,
+      distance,
+      distanceKm: distance === "Half" ? 21.0975 : 16.09,
       status: seed.status ?? "Open",
       ...(hasEntry ? { entryUrl: seed.entryUrl ?? seed.url } : {}),
       ...(seed.startTime ? { startTime: seed.startTime } : {}),
@@ -2231,6 +2439,38 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
 
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
 export const dailyHalfTenMileResearchQueue = [
+  {
+    slug: "kirkcudbright-half-marathon-buckland-burn-up-2027",
+    date: "2027-05-29",
+    country: "Scotland",
+    reason:
+      "The event-specific EntryCentral page consistently describes the half marathon, five-mile Buckland Burn Up and junior race on 29 May 2027, but explicitly says the festival is still in a testing state and has not been launched for public sign-ups. Keep it unpublished until the organiser launches the record and its entry state is no longer internally contradictory.",
+    sourceUrl: "https://www.entrycentral.com/kirkcudbrighthalfmarathon",
+  },
+  {
+    slug: "gullane-8-hour-challenge-2027",
+    date: "2027-02-27",
+    country: "Scotland",
+    reason:
+      "The EntryCentral record is headed 27 February 2027 and describes three 4.367-mile laps as a half marathon within an open-ended eight-hour challenge, but the organiser copy twice labels the event 27 February 2026. Keep the existing timed-event card unchanged until the organiser corrects the year and confirms whether the half is a distinct race option rather than only a lap milestone.",
+    sourceUrl: "https://www.entrycentral.com/Gullanechallenge27",
+  },
+  {
+    slug: "dorking-10-mile-2027",
+    date: "2027-06-06",
+    country: "England",
+    reason:
+      "England Athletics lists a licensed 10-mile race on 6 June 2027, but the organising club's event page still identifies the latest Dorking Tens edition as 7 June 2026. Hold publication until the organiser publishes internally consistent 2027 details.",
+    sourceUrl: "https://www.dmvac.org/dorking-tens/",
+  },
+  {
+    slug: "ferriby-10-mile-road-race-2027",
+    date: "2027-01-31",
+    country: "England",
+    reason:
+      "England Athletics lists a licensed 10-mile race on 31 January 2027, but the organising club currently exposes only its generic homepage and no event-specific official page or direct 2027 registration URL. Hold publication until unique source provenance is available.",
+    sourceUrl: "https://www.cityofhullac.co.uk/",
+  },
   {
     slug: "macclesfield-running-festival-october-2027",
     date: "2027-10-31",
@@ -2300,6 +2540,13 @@ export const dailyHalfTenMileResearchQueue = [
     country: "England",
     reason: "The direct entry page is live but still marks the race licence as pending.",
     sourceUrl: "https://racebest.com/races/63vtr",
+  },
+  {
+    slug: "vale-of-york-5m-10m-2027",
+    date: "2027-03-21",
+    country: "England",
+    reason: `Checked ${CURRENT_PENDING_SCAN_CHECKED_AT}: the official RaceBest registration page consistently confirms the 09:30 five- and ten-mile road races with open entry, but the required England Athletics licence is still only marked "Applied For". Keep both distances on one held event until a licence number is published.`,
+    sourceUrl: "https://racebest.com/races/h9a6e",
   },
   {
     slug: "corvedale-cake-walk-2027",
@@ -2391,18 +2638,6 @@ export const dailyHalfTenMileResearchQueue = [
       "The official title and structured date say 26 September 2027, but the race-day copy still says 27 September 2026 and the structured start field says 00:00, so the established Swindon card is not enriched until both conflicts are corrected.",
     sourceUrl: "https://www.runthrough.co.uk/event/swindon-half-marathon-september-2027",
   },
-  ...[
-    ["january", "2027-01-17"],
-    ["february", "2027-02-06"],
-    ["march", "2027-03-13"],
-  ].map(([month, date]) => ({
-    slug: `run-dorney-lake-half-marathon-10k-5k-${month}-2027`,
-    date,
-    country: "England" as const,
-    reason:
-      "The official page advertises a 2027 date but still opens with the 26 September 2026 race date and exposes 00:00 as its first start, so it remains unpublished until the organiser corrects both placeholders.",
-    sourceUrl: `https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-${month}-2027`,
-  })),
   {
     slug: "delphi-half-marathon-10k-2027",
     date: "2027-05-15",
@@ -2551,38 +2786,91 @@ export const dailyHalfTenMileResearchQueue = [
     slug: "bohermeen-half-marathon-2027",
     date: "2027-03-07",
     country: "Ireland",
-    reason:
-      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon.",
-    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
-  },
-  {
-    slug: "dublin-city-half-marathon-2027",
-    date: "2027-05-02",
-    country: "Ireland",
-    reason:
-      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon; once approved, this should enrich the existing Dublin City Half card.",
+    reason: `Checked ${CURRENT_PENDING_SCAN_CHECKED_AT}: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon.`,
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
   {
     slug: "irish-life-frank-duffy-10-mile-2027",
     date: "2027-08-14",
     country: "Ireland",
-    reason:
-      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the 10-mile date but still labels the permit as pending approval and registration as Open Soon.",
+    reason: `Checked ${CURRENT_PENDING_SCAN_CHECKED_AT}: the official Athletics Ireland calendar confirms the 10-mile date but still labels the permit as pending approval and registration as Open Soon.`,
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
   {
     slug: "irish-life-dublin-half-marathon-2027",
     date: "2027-09-19",
     country: "Ireland",
-    reason:
-      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon.",
+    reason: `Checked ${CURRENT_PENDING_SCAN_CHECKED_AT}: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon.`,
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "mullingar-half-marathon-2027",
+    date: "2027-03-17",
+    country: "Ireland",
+    reason: `Checked ${CURRENT_PENDING_SCAN_CHECKED_AT}: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon.`,
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "dooneen-10-mile-michal-rejmar-2027",
+    date: "2027-04-18",
+    country: "Ireland",
+    reason: `Checked ${CURRENT_PENDING_SCAN_CHECKED_AT}: the official Athletics Ireland calendar confirms the 10-mile road-race date but still labels the permit as pending approval and registration as Open Soon.`,
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "wexford-festival-of-running-2027",
+    date: "2027-05-15",
+    country: "Ireland",
+    reason: `Checked ${CURRENT_PENDING_SCAN_CHECKED_AT}: the event-specific official registration page confirms the half marathon and date but still labels its Athletics Ireland permit as pending approval.`,
+    sourceUrl: "https://eventmaster.ie/event/3x5vUx4tZW",
+  },
+  {
+    slug: "lahinch-half-marathon-6-mile-2027",
+    date: "2027-09-12",
+    country: "Ireland",
+    reason: `Checked ${CURRENT_PENDING_SCAN_CHECKED_AT}: the event-specific official registration page confirms the half marathon, 6-mile race, date and 09:00 start but still labels its Athletics Ireland permit as pending approval.`,
+    sourceUrl: "https://eventmaster.ie/event/7BA0CyeFdv",
+  },
+  {
+    slug: "brecons-fell-running-trail-and-yoga-camp",
+    date: "2026-10-30",
+    country: "Wales",
+    reason:
+      "Checked 2026-10-25: the organiser describes a residential fell-running, trail and yoga camp, while the authorised listing offers a 12K activity rather than a public 10-mile race. The imported 10-mile card is retired; re-add only if a current organiser programme announces a qualifying public race.",
+    sourceUrl: "https://www.wildrunning.co.uk/",
+  },
+  {
+    slug: "november-nightmare",
+    date: "2026-11-01",
+    country: "England",
+    reason:
+      "Checked 2026-10-25: the organiser calls the middle category a half but explicitly says it is approximately 16 miles. The standard Half edition is retired while the event's valid marathon record remains public.",
+    sourceUrl: "https://www.codrc.co.uk/e/the-november-nightmare-12273",
+  },
+  {
+    slug: "apocalypse-run",
+    date: "2026-11-01",
+    country: "England",
+    reason:
+      "Checked 2026-10-25: the organiser describes an approximately 10-mile trail race, while the authorised entry title and category say 10 Mile but its event copy also says 11 miles and 9-ish miles plus a 1-ish-mile climb. Keep the static catalogue addition held until the current distance is internally consistent. The authorised schedule still verifies the runners' 10:10 Europe/London start after the 10:00 canicross wave, recorded in the start-time checkpoint.",
+    sourceUrl: "https://www.active.com/gloucestershire/running/races/apocalypse-10-mile-trail-run-2026",
   },
 ] as const;
 
 /** Public seed records retired after current official evidence invalidated the canonical distance. */
-export const dailyHalfTenMileRetiredSeriesSlugs = ["pagan-midwinter-half-marathon-2027"] as const;
+export const dailyHalfTenMileRetiredSeriesSlugs = [
+  "pagan-midwinter-half-marathon-2027",
+  "brecons-fell-running-trail-and-yoga-camp",
+] as const;
+
+/** Result-free imported distance rows invalidated by current organiser evidence. */
+export const dailyHalfTenMileRetiredEditionKeys = [
+  {
+    seriesSlug: "november-nightmare",
+    date: "2026-11-01",
+    distance: "Half",
+  },
+] as const;
 
 const BRIGHTEN_MARINA_URL =
   "https://www.ukrunningevents.co.uk/events/trail-runs/brighten-brighton-marina-run-2027";
@@ -2600,6 +2888,74 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "belfast-half": {
+    name: "Phoenix Energy Belfast City Half Marathon",
+    country: "Northern Ireland",
+    county: "County Antrim",
+    city: "Belfast",
+    area: "Ormeau Park",
+    surface: "Road",
+    distances: ["Half"],
+    organiser: "Belfast City Marathon",
+    website: "https://eventmaster.ie/event/81ZZS7qTV1",
+    source_url: "https://eventmaster.ie/event/81ZZS7qTV1",
+    defaultStartTime: "09:00",
+    summary: "Phoenix Energy Belfast City Half Marathon — a city road half from Ormeau Park.",
+    description:
+      "Belfast City Marathon's official half marathon starts and finishes at Ormeau Park and tours the city's principal landmarks.",
+  },
+  "gisburn-forest-10k-trail-race": {
+    name: "Gisburn Forest Trail Races",
+    country: "England",
+    county: "Lancashire",
+    city: "Slaidburn",
+    area: "Gisburn Forest Hub",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    organiser: "Pendle Trail Running Club",
+    website: "https://www.sientries.co.uk/event/gisburn-forest-10km-trail-race-2027-2",
+    source_url: "https://www.sientries.co.uk/event/gisburn-forest-10km-trail-race-2027-2",
+    defaultStartTime: "13:00",
+    summary: "Gisburn Forest Trail Races — half marathon and 10K from Gisburn Forest Hub.",
+    description:
+      "Pendle Trail Running Club stages Trail Running Association-licensed half-marathon and 10K races on Gisburn Forest's flagged and marshalled trails.",
+  },
+  "reedham-ten": {
+    organiser: "Great Yarmouth & District Athletic Club",
+    website: "https://totalracetiming.co.uk/race/730",
+    source_url: "https://totalracetiming.co.uk/race/730",
+    defaultStartTime: "10:00",
+  },
+  "great-eastern-run": {
+    name: "AEPG Great Eastern Run",
+    country: "England",
+    county: "Cambridgeshire",
+    city: "Peterborough",
+    area: "Peterborough Embankment",
+    surface: "Road",
+    distances: ["Half", "5K"],
+    summary:
+      "AEPG Great Eastern Run — a half marathon and Anna's Hope 5K from Peterborough Embankment.",
+    description:
+      "Good Running Events stages the AEPG Great Eastern Run half marathon and Anna's Hope 5K from Peterborough Embankment; the established card carries the verified 2027 edition.",
+    organiser: "Good Running Events",
+    website: "https://www.greateastern.run/",
+    source_url: "https://totalracetiming.co.uk/race/747",
+    defaultStartTime: "10:30",
+  },
+  "southwold-half-marathon": {
+    surface: "Mixed",
+    organiser: "EPIC Norfolk",
+    website: "https://totalracetiming.co.uk/race/719",
+    source_url: "https://totalracetiming.co.uk/race/719",
+    defaultStartTime: "09:00",
+  },
+  "spring-blickling-half": {
+    organiser: "EPIC Norfolk",
+    website: "https://totalracetiming.co.uk/race/727",
+    source_url: "https://totalracetiming.co.uk/race/727",
+    defaultStartTime: "08:45",
+  },
   "tonbridge-half-marathon": {
     website: "https://www.runthrough.co.uk/event/run-kent-october-2027",
     source_url: "https://www.runthrough.co.uk/event/run-kent-october-2027",
@@ -3028,11 +3384,19 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     defaultStartTime: "10:00",
   },
   "basildon-half": {
+    distances: ["Half", "10K", "Other"],
     organiser: "RunThrough Events",
-    website: "https://www.runthrough.co.uk/event/basildon-half-marathon-and-juniors-september-2027",
-    source_url:
-      "https://www.runthrough.co.uk/event/basildon-half-marathon-and-juniors-september-2027",
+    website: "https://www.runthrough.co.uk/event/basildon-half-marathon-september-2027",
+    source_url: "https://www.runthrough.co.uk/event/basildon-half-marathon-september-2027",
     defaultStartTime: "09:00",
+  },
+  "aj-bell-great-scottish-run": {
+    name: "AJ Bell Great Scottish Run",
+    distances: ["Half", "10K"],
+    organiser: "The Great Run Company",
+    website: "https://www.greatrun.org/events/great-scottish-run/",
+    source_url: "https://www.greatrun.org/events/great-scottish-run/",
+    defaultStartTime: "10:10",
   },
   "cheshire-autumn-half": {
     organiser: "RunThrough Events",
@@ -3228,6 +3592,36 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
     source: "https://www.sientries.co.uk/event/ultra-trails-tibthorpe-loop-2027",
     notes:
       "The direct official registration page confirms the 20 February 2027 trail half marathon at Field House Farm, open entry and a five-hour cut-off.",
+  },
+  "canterbury-trail-marathon-half-marathon|2026-10-25|Half": {
+    startTime: "09:00",
+    source: "https://www.sportingeventsuk.com/e/canterbury-trail-marathon-and-half-marathon-14990",
+    notes:
+      "Start checked 25 October 2026: the organiser's current distance-specific entry programme gives the half marathon a 09:00 Europe/London start and the marathon a separate 08:30 start. The unsupported stored 10:00 half time is corrected.",
+  },
+  "attack-of-the-zombie-cows|2026-10-31|Half": {
+    startTime: "08:30",
+    source: "https://runbelievablechallenges.co.uk/attack-of-the-zombie-cows-1",
+    notes:
+      "Start checked 25 October 2026: the whole eight-hour loop challenge starts at 08:30 Europe/London. Half marathon is a lap target, not a separate wave.",
+  },
+  "attack-of-the-zombie-cows|2026-10-31|10mi": {
+    startTime: "08:30",
+    source: "https://runbelievablechallenges.co.uk/attack-of-the-zombie-cows-1",
+    notes:
+      "Start checked 25 October 2026: the whole eight-hour loop challenge starts at 08:30 Europe/London. Ten miles is a lap target, not a separate wave.",
+  },
+  "anglesey-trail-half-marathon|2026-11-01|Half": {
+    startTime: "08:15",
+    source: "https://alwaysaimhighevents.com/content/files/Anglesey-Trail-Final-Instructions-2026.pdf",
+    notes:
+      "Start checked 25 October 2026 in the current final instructions: half-marathon safety briefing 08:00 and race start 08:15 Europe/London. The 10K starts separately at 08:45.",
+  },
+  "corofin-loops|2026-11-01|10mi": {
+    startTime: "09:00",
+    source: "https://eventmaster.ie/event/oOlbck3tLm",
+    notes:
+      "Start checked 25 October 2026: the approved Eventmaster programme gives one 09:00 Europe/Dublin event start for the sold-out 8K and 10-mile ticket categories; no separate wave is published.",
   },
 };
 

@@ -223,7 +223,7 @@ for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
 
 for (const replacement of verifiedFixtureEditionReplacements) {
   assert(
-    editions.some(
+    assembledCatalogue.editions.some(
       (edition) =>
         edition.seriesSlug === replacement.seriesSlug &&
         edition.date === replacement.toDate &&
@@ -232,7 +232,7 @@ for (const replacement of verifiedFixtureEditionReplacements) {
     `Corrected fixture is missing: ${replacement.seriesSlug}|${replacement.toDate}`,
   );
   assert(
-    !editions.some(
+    !assembledCatalogue.editions.some(
       (edition) =>
         edition.seriesSlug === replacement.seriesSlug &&
         edition.date === replacement.fromDate &&

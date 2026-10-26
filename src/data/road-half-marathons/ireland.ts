@@ -11,7 +11,7 @@ export const RACES: readonly RoadHalfMarathon[] = [
     timeZone: "Europe/Dublin",
     officialUrl: "https://dublincityhalfmarathon.ie/",
     description:
-      "Dublin City’s half marathon takes the capital’s streets at a rather different pace from the usual city-centre stroll. Its own event sits separately from the Dublin Marathon and Race Series. Check the organiser’s next entry announcement before putting a date in the diary.",
+      "Dublin City’s half marathon takes the capital’s streets at a rather different pace from the usual city-centre stroll. Its own event sits separately from the Dublin Marathon and Race Series. The organiser and Athletics Ireland now agree on the 2 May 2027 return date.",
     course: {
       summary:
         "The organiser describes a city-centre start on O’Connell Street, a route through north Dublin and a return to the city centre. Use the edition’s final map for the exact route.",
@@ -28,11 +28,16 @@ export const RACES: readonly RoadHalfMarathon[] = [
       {
         name: "Next-edition entry information",
         description:
-          "The organiser says information on 2027 entries will be released in early 2027. The next race date remains TBC.",
+          "The organiser says information on 2027 entries will be released in early 2027, so no checkout is advertised yet.",
         url: "https://dublincityhalfmarathon.ie/",
       },
     ],
-    editions: [],
+    editions: [
+      {
+        date: "2027-05-02",
+        sourceUrl: "https://dublincityhalfmarathon.ie/",
+      },
+    ],
     media: [],
     resultsUrl: "https://dublincityhalfmarathon.ie/results/",
     resultsLabel: "Official results archive",
@@ -69,7 +74,7 @@ export const RACES: readonly RoadHalfMarathon[] = [
         url: "https://dublincityhalfmarathon.ie/results/",
       },
     ],
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-20",
   },
   {
     distanceKm: 21.0975,

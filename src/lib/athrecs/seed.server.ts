@@ -13,7 +13,10 @@ import {
   clubSlugAliases,
 } from "@/data/catalogue";
 import { catalogueSeedEventSlugAliases, editionReplacements } from "@/data/entry-options";
-import { dailyHalfTenMileRetiredSeriesSlugs } from "@/data/half-ten-mile-races-uk-ireland-daily-followup";
+import {
+  dailyHalfTenMileRetiredEditionKeys,
+  dailyHalfTenMileRetiredSeriesSlugs,
+} from "@/data/half-ten-mile-races-uk-ireland-daily-followup";
 import {
   publicFigureAthletes,
   publicFigureEditions,
@@ -28,7 +31,7 @@ import { parkrunDates, parkrunDistance } from "./parkrun-dates";
 import { runCatalogueTransaction } from "./catalogue-transaction";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-14-v2-world-athletics-track-field-2026-10-19-79064b5939";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-25-v1-world-athletics-track-field-2026-10-19-79064b5939";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 export const CLUB_CATALOGUE_SEED_VERSION = `${SEED_VERSION}:${CLUB_PROFILE_VERSION}`;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
@@ -950,6 +953,31 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       throw new Error(`Cannot retire invalidated event ${retiredSlug}: it has stored results`);
     }
     await sql`delete from events where id = ${retiredEvent.id}`;
+  }
+
+  for (const retiredEdition of dailyHalfTenMileRetiredEditionKeys) {
+    const retiredEventId = (
+      await sql<{ id: number }>`select id from events where slug = ${retiredEdition.seriesSlug}`
+    )[0]?.id;
+    if (!retiredEventId) continue;
+    await sql.query(
+      `delete from editions stale_edition
+       where stale_edition.event_id = $1::int
+         and stale_edition.event_date = $2::date
+         and stale_edition.distance_code = $3::text
+         and not exists (select 1 from results where edition_id = stale_edition.id)
+         and not exists (
+           select 1 from event_register_source_records
+           where catalogue_edition_id = stale_edition.id
+         )
+         and not exists (
+           select 1 from result_archive_datasets where edition_id = stale_edition.id
+         )
+         and not exists (
+           select 1 from result_ingestion_editions where edition_id = stale_edition.id
+         )`,
+      [retiredEventId, retiredEdition.date, retiredEdition.distance],
+    );
   }
 
   const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
