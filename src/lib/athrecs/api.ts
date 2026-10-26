@@ -332,6 +332,13 @@ export const listEvents = createServerFn({ method: "GET" })
       where
         (${sport}::text is null or e.sport = ${sport})
         and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
+        and (
+          not exists (select 1 from editions recorded where recorded.event_id = e.id)
+          or exists (
+            select 1 from editions visible where visible.event_id = e.id
+              and not ((e.slug || '|' || visible.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
+          )
+        )
         and (${shortRaces}::boolean is false or (
           e.sport = 'Running'
           and e.country in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland', 'Ireland')
@@ -739,6 +746,13 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       from events e
       where e.id <> ${event.id}
         and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
+        and (
+          not exists (select 1 from editions recorded where recorded.event_id = e.id)
+          or exists (
+            select 1 from editions visible where visible.event_id = e.id
+              and not ((e.slug || '|' || visible.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
+          )
+        )
         and e.sport = ${event.sport}
         and (
           lower(coalesce(e.city, '')) = lower(${event.city})

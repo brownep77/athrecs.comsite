@@ -105,3 +105,19 @@ Bath/Bristol, Run Leicester and other complementary-distance splits remain
 separate until their unique options can be preserved. Mobile's organiser page
 returned 503. These holds are not assertions that the remaining catalogue is
 duplicate-free.
+
+## Live release and recommendation follow-up
+
+PR #1001 deployed commit `612147c5aaaf6d5199f3536ccc39de6df8ee17e6`.
+Publication batch `4f175a7e-28ce-403a-981c-523b0e2bb715`, revision 396,
+is published with three audited changes. The new 8-mile and 16-mile edition IDs
+are 109710392 and 109710393. All 21 baseline IDs survive; only the existing
+Nightmare marathon's evidence note changed. There are now 23 rows in this scope.
+
+The live race-detail inspection also exposed a related-card gap: an event whose
+only edition is withheld could still be recommended as “Date TBC”. The follow-up
+filters both general event cards and nearby recommendations only when every
+recorded edition is withheld. Genuinely undated events, other unreviewed dates
+and valid historical editions stay available; direct records remain untouched.
+The regression runs both actual SQL queries against a disposable database and
+checks each of those cases, including that all stored rows remain unchanged.
