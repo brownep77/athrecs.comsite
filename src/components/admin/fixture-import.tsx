@@ -23,8 +23,8 @@ export function FixtureImportPage({
   const [input, setInput] = useState<FixtureUploadInput>({
     content: "",
     format: "csv",
-    label: "UK running fixtures 2026–2027",
-    scope: UK_FIXTURE_SCOPE,
+    label: "Running fixtures 2026–2027",
+    scope: { ...UK_FIXTURE_SCOPE, countries: COLLECTOR_COUNTRIES.map((c) => c.code) },
   });
   const [preview, setPreview] = useState<Awaited<ReturnType<typeof previewFixtureFile>>>();
   const [notice, setNotice] = useState("");
@@ -157,15 +157,15 @@ export function FixtureImportPage({
                   })
                 }
               >
+                <option value="ALL">Worldwide (all countries)</option>
                 <option value="GB">United Kingdom</option>
                 <option value="GB,IE">United Kingdom and Ireland</option>
                 <option value="IE">Republic of Ireland</option>
-                <option value="ALL">Worldwide (all countries)</option>
               </select>
             </label>
           </div>
           <p className="text-xs text-muted">
-            Northern Ireland is included in the UK. Choose Worldwide for fixtures outside the UK and Ireland. Distances from above zero through 500 miles, in
+            Worldwide is the default; each row's country says where it starts. Northern Ireland is included in the UK. Distances from above zero through 500 miles, in
             miles or kilometres. Parkrun uses its separate verified fixture workflow.
           </p>
           <label className="block space-y-2 text-sm font-medium">
