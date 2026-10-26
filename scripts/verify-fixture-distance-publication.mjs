@@ -3,6 +3,7 @@ import { bulkFixture } from "./collector-bulk-fixture.mjs";
 import {
   hasConfirmedFixtureDistance,
   fixtureDistanceLabel,
+  fixtureDistanceBadges,
 } from "../src/lib/athrecs/fixture-distance-policy.ts";
 import { unconfirmedFixtureEditionIds } from "../src/lib/athrecs/fixture-distance-policy.server.ts";
 import corrections from "../src/data/confirmed-distance-editions-2026-10-26.json" with { type: "json" };
@@ -45,6 +46,44 @@ assert.equal(hasConfirmedFixtureDistance("Cycling", "Other", 0), false);
 assert.equal(fixtureDistanceLabel("Other", 12), "12K");
 assert.equal(fixtureDistanceLabel("Ultra", 104), "104K");
 assert.equal(fixtureDistanceLabel("3x2K relay", 6), "3x2K relay");
+
+// Corrected editions must not retain stale placeholders from event_distances.
+assert.deepEqual(
+  fixtureDistanceBadges(
+    "Running",
+    ["Other", "Cross Country", "4mi (approx.)", "7H"],
+    [
+      { distance_code: "4mi (approx.)", distance_km: 6.437376 },
+      { distance_code: "7H", distance_km: 0 },
+    ],
+  ),
+  ["4mi (approx.)", "7H"],
+);
+assert.deepEqual(
+  fixtureDistanceBadges(
+    "Running",
+    ["Other"],
+    [
+      { distance_code: "Other", distance_km: 0 },
+      { distance_code: "Other", distance_km: 12 },
+      { distance_code: "Other", distance_km: 12 },
+    ],
+  ),
+  ["12K"],
+);
+assert.deepEqual(fixtureDistanceBadges("Athletics", ["Other", "Track & field"], []), [
+  "Track & field",
+]);
+assert.deepEqual(
+  fixtureDistanceBadges(
+    "Triathlon",
+    ["Other", "750m swim / 20K bike / 5K run"],
+    [{ distance_code: "750m swim / 20K bike / 5K run", distance_km: 25.75 }],
+  ),
+  ["750m swim / 20K bike / 5K run"],
+);
+assert.deepEqual(fixtureDistanceBadges("Running", ["10K"], []), ["10K"]);
+
 for (const correction of corrections) {
   const knownEvent = seriesList.some((event) => event.slug === correction.seriesSlug);
   const exact = editions.filter(
