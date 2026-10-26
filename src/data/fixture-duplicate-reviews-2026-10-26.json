@@ -178,5 +178,65 @@
     "sourceUrl": "https://www.nice-work.org.uk/e/monsal-tinsel-trail-christmas-10k-5k-and-junior-run-15346",
     "checkedAt": "2026-10-26",
     "note": "Same organiser programme, date and venue. Retain the complete multi-distance listing; preserve the duplicate record and its dependants in storage."
+  },
+  {
+    "duplicateSlug": "runthrough-tatton-december-10k-gb",
+    "canonicalSlug": "run-tatton-5k-10k-november",
+    "date": "2026-12-12",
+    "duplicateEventId": 4394378,
+    "canonicalEventId": 3061431,
+    "duplicateDistances": ["5K"],
+    "retainedDistances": ["10K", "5K"],
+    "sourceUrl": "https://www.runthrough.co.uk/event/tatton-park-5k-10k-december-2026",
+    "checkedAt": "2026-10-26",
+    "note": "Same organiser programme, date and venue. Retain the complete multi-distance listing; preserve the duplicate record and its dependants in storage."
+  },
+  {
+    "duplicateSlug": "southampton-half-october",
+    "canonicalSlug": "southampton-half-10k",
+    "date": "2026-10-04",
+    "duplicateEventId": 4372654,
+    "canonicalEventId": 4375855,
+    "duplicateDistances": ["Half"],
+    "retainedDistances": ["10K", "Half"],
+    "sourceUrl": "https://www.runthrough.co.uk/api/guide/southampton-half-marathon-10k--junior-october-2026",
+    "checkedAt": "2026-10-26",
+    "note": "Same organiser programme, date and venue. Retain the complete multi-distance listing; preserve the duplicate record and its dependants in storage."
+  },
+  {
+    "duplicateSlug": "ea-runevents-carsington-water-2026-series-ashbourne",
+    "canonicalSlug": "carsington-water-10k-half-marathon-december",
+    "date": "2026-12-05",
+    "duplicateEventId": 3148003,
+    "canonicalEventId": 3060130,
+    "duplicateDistances": ["10K", "Half"],
+    "retainedDistances": ["10K", "Half"],
+    "sourceUrl": "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-december-2026",
+    "checkedAt": "2026-10-26",
+    "note": "Same organiser programme, date and venue. Retain the complete multi-distance listing; preserve the duplicate record and its dependants in storage."
+  },
+  {
+    "duplicateSlug": "runthrough-tatton-november-10k-gb",
+    "canonicalSlug": "run-tatton-5k-10k-november",
+    "date": "2026-11-07",
+    "duplicateEventId": 4394382,
+    "canonicalEventId": 3061431,
+    "duplicateDistances": ["10K", "5K"],
+    "retainedDistances": ["10K", "5K"],
+    "sourceUrl": "https://www.runthrough.co.uk/event/tatton-park-5k-10k-november-2026",
+    "checkedAt": "2026-10-26",
+    "note": "Same organiser programme, date and venue. Retain the complete multi-distance listing; preserve the duplicate record and its dependants in storage."
+  },
+  {
+    "duplicateSlug": "gainsborough-and-morton-10k",
+    "canonicalSlug": "runthrough-gainsborough-gb",
+    "date": "2026-11-01",
+    "duplicateEventId": 3060445,
+    "canonicalEventId": 4394395,
+    "duplicateDistances": ["10K", "Half"],
+    "retainedDistances": ["10K", "Half"],
+    "sourceUrl": "https://www.runthrough.co.uk/event/gainsborough-10k-half-marathon-november-2026",
+    "checkedAt": "2026-10-26",
+    "note": "Same organiser programme, date and venue. Retain the complete multi-distance listing; preserve the duplicate record and its dependants in storage."
   }
 ]
