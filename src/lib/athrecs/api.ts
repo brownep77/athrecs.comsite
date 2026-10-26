@@ -1,5 +1,10 @@
 import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
-import { fixtureDistanceLabel, PLACEHOLDER, RACE_FORMAT } from "./fixture-distance-policy.ts";
+import {
+  fixtureDistanceLabel,
+  fixtureDistanceBadges,
+  PLACEHOLDER,
+  RACE_FORMAT,
+} from "./fixture-distance-policy.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { withheldFixtureDateKeys } from "@/data/fixture-date-reviews";
 import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
@@ -767,20 +772,11 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         {
           event,
           groups,
-          distances: distances
-            .filter((d) => {
-              const matching = editionRows.filter(
-                (edition) => edition.distance_code === d.distance_code,
-              );
-              return (
-                !matching.length ||
-                matching.some(
-                  (edition) =>
-                    !isReviewedFixturePlaceholder(slug, edition.event_date, d.distance_code),
-                )
-              );
-            })
-            .map((d) => d.distance_code),
+          distances: fixtureDistanceBadges(
+            event.sport,
+            distances.map((distance) => distance.distance_code),
+            editions,
+          ),
           upcoming,
           past: editions.filter((e) => e.event_date < today),
           related,
