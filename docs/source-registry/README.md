@@ -455,3 +455,12 @@ restriction that covers event metadata. Realtime Racing's Content-Signal forbids
 and AI input, so its content is used only as event reference metadata. ChampionChip's
 results are client-rendered and may need a dedicated profile. Participant result rows remain
 excluded for all five. The registry now has 41 enabled sources and 1222 disabled.
+
+## Owner-cleared sources (26 October 2026)
+
+The owner confirmed the rights review for the remaining fixture directories and asked for them to be switched on. 1,011 sources now carry the status "Cleared by owner rights review 2026-10-26; robots.txt still enforced at run time", so the registry has 1,052 enabled sources and 261 off.
+
+- Still off: sources marked blocked by site terms or crawl rules, "automated collection not enabled", supervised-review-only, the two race-calendar discovery sites, results archives and athlete-profile sources.
+- The source importer (`npm run source-importer`) reads every enabled source but still honours each site's robots.txt, crawl delay and page budget on every run; a site that disallows a path is skipped, never worked around.
+- The site's own bulk run (`bulk-source-run`) queues only sources whose status is in `RUNNABLE_SOURCE_RIGHTS_STATUSES`. The new status is deliberately not in that list, so enabling these sources does not queue them there; that is a separate decision.
+- Event metadata only. Participant result rows stay excluded.
