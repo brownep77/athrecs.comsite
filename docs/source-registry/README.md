@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1263 unique sources as of 25 October 2026. Only 36 are enabled; the other 1227 remain
+The registry contains 1263 unique sources as of 25 October 2026. Only 41 are enabled; the other 1222 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -86,8 +86,8 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
 - all 1263 sources create exactly one source job;
-- the 36 enabled and rights-approved sources are queued;
-- the other 1227 sources are retained as blocked jobs with their reason;
+- the 41 enabled and rights-approved sources are queued;
+- the other 1222 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -445,3 +445,13 @@ The existing Brașov 21K source supplied four explicit 09:00 starts for 18 April
 2027; children’s wave times remain unverified. Registration never enables automated
 collection or verifies athlete results. Counts above include intervening registry
 additions from other research.
+
+## UK and Ireland timing-provider rights review, 25 October 2026
+
+Five held UK and Ireland timing providers were checked against their published robots.txt
+and website terms and enabled for event-level collection: Ready Set Go Timing, Tri and Enter
+Wales, ChampionChip Ireland, Realtime Racing and RideTiming. None publishes a crawl or reuse
+restriction that covers event metadata. Realtime Racing's Content-Signal forbids AI training
+and AI input, so its content is used only as event reference metadata. ChampionChip's
+results are client-rendered and may need a dedicated profile. Participant result rows remain
+excluded for all five. The registry now has 41 enabled sources and 1222 disabled.
