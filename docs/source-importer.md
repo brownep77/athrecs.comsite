@@ -25,3 +25,9 @@ Rules it enforces
 
 Adding a source: add or enable it in the registry (with its rights review); the importer picks it up.
 Run `npm run verify:source-importer` for the offline checks.
+
+## Reading JavaScript pages for free
+
+`npm run source-render -- --adapter racebest --from 2026-10-27 --to 2027-12-31 --out dir`
+
+Some sites build their calendar with JavaScript, so the plain importer sees an empty page. `render.mjs` loads the page in a local headless browser (Playwright; no paid scraping credits), checks robots.txt first, waits the crawl delay between pages, and writes the same `fixtures.csv` / `skipped.csv` / `report.md`. It only trusts what is unambiguous: a listed distance is used as is, a range is itemised only when the race's own headline names the distances inside it, and a date that differs between the list and the race page is skipped. Skipped races are listed with the reason. Virtual events are left out. `racebest` is the first adapter; add another by giving `adapters` a `listUrl`, a row reader and (optionally) a detail reader.

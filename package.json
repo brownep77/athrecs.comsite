@@ -52,6 +52,7 @@
     "source-importer": "node scripts/source-importer/run.mjs",
     "sources:score": "node scripts/source-registry/score-sources.mjs",
     "verify:source-scorecard": "node scripts/verify-source-scorecard.mjs",
+    "source-render": "node scripts/source-importer/render.mjs",
     "verify:source-importer": "node scripts/verify-source-importer.mjs",
     "verify:fixture-checks": "node scripts/verify-fixture-checks.mjs",
     "fixture-check": "node scripts/source-importer/check.mjs",
