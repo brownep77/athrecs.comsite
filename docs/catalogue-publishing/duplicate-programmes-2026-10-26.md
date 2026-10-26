@@ -31,7 +31,7 @@ Screened 6,088 non-parkrun event records containing 11,866 dated distance rows f
 | 2026-12-12 | `runthrough-tatton-december-10k-gb` | `run-tatton-5k-10k-november` | 10K, 5K | [Programme](https://www.runthrough.co.uk/event/tatton-park-5k-10k-december-2026) |
 | 2026-10-04 | `southampton-half-october` | `southampton-half-10k` | 10K, Half | [Programme](https://www.runthrough.co.uk/api/guide/southampton-half-marathon-10k--junior-october-2026) |
 | 2026-12-05 | `ea-runevents-carsington-water-2026-series-ashbourne` | `carsington-water-10k-half-marathon-december` | 10K, Half | [Programme](https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-december-2026) |
-| 2026-11-07 | `runthrough-tatton-november-10k-gb` | `run-tatton-5k-10k-november` | 10K, 5K | [Programme](https://www.runthrough.co.uk/event/tatton-park-5k-10k-november-2026) |
+| 2026-11-07 | `run-tatton-5k-10k-november` | `runthrough-tatton-november-10k-gb` | 10K, 5K | [Programme](https://www.runthrough.co.uk/event/tatton-park-5k-10k-november-2026) |
 | 2026-11-01 | `gainsborough-and-morton-10k` | `runthrough-gainsborough-gb` | 10K, Half | [Programme](https://www.runthrough.co.uk/event/gainsborough-10k-half-marathon-november-2026) |
 
 The Southampton organiser PDF was downloaded and its text inspected: it identifies Southampton FC, St Mary’s Stadium, 4 October 2026, and the 5K/10K/half/junior programme. The retained current catalogue has 10K and half; this change does not claim to add all optional races. The Town Moor indexed organiser document contains the edition date, venue and all three adult distances; its current URL now redirects to a regional page. Hampton Court’s still-live dedicated organiser site confirms the date and both distances. Yorkshire Coast is confirmed by the organiser’s dated race report.
@@ -52,6 +52,7 @@ The Southampton organiser PDF was downloaded and its text inspected: it identifi
 
 - TypeScript and existing public-catalogue/calendar verification are run before release.
 - Production inventory comparison checks both event IDs, exact dates, distance-code equivalents and stored kilometre values (within five metres to accommodate existing 8.05/8.0467 and 21.1/21.0975 rounding). Every removed distance remains on its retained programme.
+- For Tatton on 7 November, retain the later authorised-entry record: both records contain 5K/10K, but only the later record currently publishes the verified 08:45 10K start. Suppress only the earlier record’s November date; its December programme remains public.
 - The later Gainsborough record is retained because it contains both distances with their separate organiser-confirmed start times. Start-time disagreements on other source records were not changed by this identity review.
 - Explicit checks preserve Hampton Court October 2027, Carsington October 2027 and Tatton December 2027 on their original records.
 - No database write or destructive identity merge is included. This is a reversible publication correction, not a claim that the full catalogue is duplicate-free.

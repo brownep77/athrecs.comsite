@@ -216,16 +216,16 @@
     "note": "Same organiser programme, date and venue. Retain the complete multi-distance listing; preserve the duplicate record and its dependants in storage."
   },
   {
-    "duplicateSlug": "runthrough-tatton-november-10k-gb",
-    "canonicalSlug": "run-tatton-5k-10k-november",
+    "duplicateSlug": "run-tatton-5k-10k-november",
+    "canonicalSlug": "runthrough-tatton-november-10k-gb",
     "date": "2026-11-07",
-    "duplicateEventId": 4394382,
-    "canonicalEventId": 3061431,
+    "duplicateEventId": 3061431,
+    "canonicalEventId": 4394382,
     "duplicateDistances": ["10K", "5K"],
     "retainedDistances": ["10K", "5K"],
     "sourceUrl": "https://www.runthrough.co.uk/event/tatton-park-5k-10k-november-2026",
     "checkedAt": "2026-10-26",
-    "note": "Same organiser programme, date and venue. Retain the complete multi-distance listing; preserve the duplicate record and its dependants in storage."
+    "note": "Same organiser programme, date and venue. Both listings contain 5K and 10K; retain the later authorised-entry record to preserve its publicly verified 10K start time. Preserve the duplicate record and its other dates in storage."
   },
   {
     "duplicateSlug": "gainsborough-and-morton-10k",
