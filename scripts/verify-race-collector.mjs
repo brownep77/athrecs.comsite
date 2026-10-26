@@ -313,6 +313,28 @@ assert.equal(
   core.reconcile({ ...tenK, city: "Belfast" }, [festival], festivalEditions).status,
   "held",
 );
+// A county stored as the existing event's city does not hold a specific town on the same dated
+// edition: a new distance is reviewable and an equivalent one is a duplicate. A different town
+// (above) and a county on a different date still hold.
+const countyEvent = { ...festival, city: "Suffolk" };
+const countyCandidate = { ...tenK, city: "Bury St Edmunds" };
+assert.equal(
+  core.reconcile(countyCandidate, [countyEvent], festivalEditions).status,
+  "duplicate",
+);
+assert.equal(
+  core.reconcile(
+    { ...countyCandidate, distance: 21.0975, distanceKm: 21.0975, distanceLabel: "Half" },
+    [countyEvent],
+    festivalEditions,
+  ).status,
+  "review",
+);
+assert.equal(
+  core.reconcile({ ...countyCandidate, date: "2027-12-12" }, [countyEvent], festivalEditions)
+    .status,
+  "held",
+);
 assert.equal(
   core.reconcile({ ...tenK, countryCode: "GB", country: "Scotland" }, [festival], festivalEditions)
     .status,
