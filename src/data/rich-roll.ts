@@ -1,3 +1,4 @@
+import { athleteBiographyReviews } from "./athlete-biography-reviews.ts";
 import type { AthleteSeed, Edition, ResultSeed, Series } from "./types";
 
 const RICH_ROLL_BIO = "https://richroll.com/bio/";
@@ -31,7 +32,9 @@ export const publicFigureAthletes: AthleteSeed[] = [
     nationality: "American",
     nation: "United States",
     continent: "North America",
-    bio: "American ultra-endurance athlete, author and host of the Rich Roll Podcast. His documented race history includes the 2007 Long Beach Marathon, two Ultraman World Championship finishes, the 2017 ÖTILLÖ Swimrun World Championship and a Miami 5K. His own race reports also document non-finishes at Wildflower in 2007 and Ultraman in 2011.",
+    bio: athleteBiographyReviews
+      .find((review) => review.slug === "rich-roll")!
+      .paragraphs.join("\n\n"),
     race_entry_name: "Richard Roll",
     preferred_distance: "Ultra endurance",
     athrecs_id: "ATH-US-PF-0001",

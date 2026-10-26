@@ -1,3 +1,8 @@
+import { athleteBiographyReviews } from "./athlete-biography-reviews.ts";
+const paulaBiography = athleteBiographyReviews.find(
+  (review) => review.slug === "paula-radcliffe",
+)!.paragraphs;
+
 // Public sporting biographies checked 6 October 2026. Partial career coverage.
 // Editorial highlights never create canonical results, verified PBs or rankings.
 export const britishMarathonCareers = [
@@ -923,7 +928,7 @@ export const britishMarathonCareers = [
     "slug": "paula-radcliffe",
     "name": "Paula Radcliffe",
     "gender": "F",
-    "bio": "Paula Radcliffe is a British distance runner whose 2:15:25 victory at the 2003 London Marathon became a defining world-record performance. The organiser’s honours list records London victories in 2002, 2003 and 2005. Her career also includes track, cross-country and half-marathon racing, as well as four Olympic appearances.",
+    "bio": paulaBiography.join("\n\n"),
     "sources": [
       {
         "label": "London Marathon official medallists",
@@ -983,9 +988,7 @@ export const britishMarathonCareers = [
         ]
       }
     ],
-    "biography": [
-      "Paula Radcliffe is a British distance runner whose 2:15:25 victory at the 2003 London Marathon became a defining world-record performance. The organiser’s honours list records London victories in 2002, 2003 and 2005. Her career also includes track, cross-country and half-marathon racing, as well as four Olympic appearances."
-    ],
+    "biography": paulaBiography,
     "biographySources": [
       {
         "label": "London Marathon official medallists",

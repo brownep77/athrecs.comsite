@@ -1287,6 +1287,8 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
       const { getEditorialAthleteCareer } = await import("@/data/freddy-richardson");
       const career = getEditorialAthleteCareer(profile.athlete.slug);
       const { athleteSearchContent } = await import("./athlete-search-content");
+      const { biographyParagraphs } = await import("./biography-presentation");
+      const { reviewedBiographyPresentation } = await import("./reviewed-biography.server");
       return buildPublicAthletePreview({
         slug: profile.athlete.slug,
         displayName: profile.athlete.display_name,
@@ -1305,8 +1307,13 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
           : undefined,
         sports: profile.athlete.sports,
         biography: profile.shareBiography
-          ? (career?.biography ?? [profile.publishedBiography || athleteSearchContent(profile).bio])
+          ? profile.publishedBiography
+            ? biographyParagraphs(profile.publishedBiography)
+            : (career?.biography ?? [athleteSearchContent(profile).bio])
           : [],
+        biographyPresentation: profile.shareBiography
+          ? reviewedBiographyPresentation(profile.athlete.slug, profile.publishedBiography)
+          : undefined,
         biographySources: profile.shareBiography ? career?.biographySources : [],
         results: profile.profileResults,
         histories: profile.sourceHistories,
