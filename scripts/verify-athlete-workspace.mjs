@@ -124,7 +124,7 @@ try{
   const safeBatch=await service.getBatch(ownDraft.id,owner);assert.equal(safeBatch.evidence_for,'');assert.equal(safeBatch.evidence_against,'');assert.equal('responseBy' in safeBatch.entries[0],false);
   assert((await service.workspace(null,staff)).batches.some(b=>b.id===ownDraft.id),'Unassigned member submissions are available for staff review');
   assert.equal((await publication.reviewBatch(request(ownDraft.id,1,other.id,[1]),staff)).added,1,'Staff can link a reviewed unassigned proposal to a selected athlete');
-  const records=load('src/lib/athrecs/profile-records.ts',{'./parkrun-timing.ts':parkrun,'./result-details.ts':details,'./road-performance-conditions.ts':{roadPerformanceCondition:()=>null}});
+  const records=load('src/lib/athrecs/profile-records.ts',{'./distance.ts':load('src/lib/athrecs/distance.ts'),'./parkrun-timing.ts':parkrun,'./result-details.ts':details,'./road-performance-conditions.ts':{roadPerformanceCondition:()=>null}});
   const publicDetails=details.readResultDetails(storedResult.result_details);assert.equal('staffApproval' in publicDetails,false,'Public result details strip staff approval metadata');
   assert.equal(JSON.stringify(publicDetails).includes(originalApproval.note),false,'The approval reason is not a public result note');
   const perf={resultId:1,editionId:1,sport:'Running',surface:'Road',distanceCode:'10K',distanceKm:10,status:'finished',finishTimeSeconds:2400,chipTimeSeconds:2400,gunTimeSeconds:null,overallPlace:1,category:null,sourceUrls:[source],details:details.readResultDetails({profileExcluded:true,privateReason:'not exposed'})};
