@@ -1,3 +1,5 @@
+import seventhDuplicateReviews from "./fixture-duplicate-reviews-seventh-2026-10-26.json" with { type: "json" };
+import seventhDateCorrections from "./fixture-date-corrections-seventh-2026-10-26.json" with { type: "json" };
 import sixthDuplicateReviews from "./fixture-duplicate-reviews-sixth-2026-10-26.json" with { type: "json" };
 import fifthDuplicateReviews from "./fixture-duplicate-reviews-fifth-2026-10-26.json" with { type: "json" };
 import duplicateReviews from "./fixture-duplicate-reviews-2026-10-26.json" with { type: "json" };
@@ -18,6 +20,7 @@ export const FIXTURE_DATE_REVIEWS: Record<
       ...fourthDuplicateReviews,
       ...fifthDuplicateReviews,
       ...sixthDuplicateReviews,
+      ...seventhDuplicateReviews,
     ].map((review) => [
       `${review.duplicateSlug}|${review.date}`,
       {
@@ -27,6 +30,7 @@ export const FIXTURE_DATE_REVIEWS: Record<
       },
     ]),
   ),
+  ...seventhDateCorrections,
   "milano-city-marathon|2027-04-03": {
     sourceUrl: "https://www.milanomarathon.it/en/practical-info/",
     checkedAt: "2026-10-26",
