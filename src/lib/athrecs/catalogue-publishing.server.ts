@@ -102,6 +102,19 @@ function bundleFromRow(row: StoredBatchRow): ImportBundle {
   };
 }
 
+function assertNoSourceReviewHold(batch: StoredBatchRow): void {
+  const summary = jsonValue<Record<string, unknown>>(batch.validation_summary);
+  if (!summary?.sourceReviewHold) return;
+  const hold = summary.sourceReviewHold;
+  const reason =
+    typeof hold === "object" && hold !== null && "reason" in hold
+      ? String(hold.reason)
+      : "The source programme needs reconciliation";
+  throw new Error(
+    `Source review hold: ${reason}. Restage the reconciled payload; the original evidence is retained.`,
+  );
+}
+
 function isHttpUrl(value: string | undefined): boolean {
   if (!value?.trim()) return false;
   try {
@@ -466,6 +479,7 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
     if (batch.status === "published" || batch.status === "rolled_back") {
       throw new Error(`A ${batch.status} batch cannot be validated again`);
     }
+    assertNoSourceReviewHold(batch);
     await tx`
       update catalogue_import_batches
       set status = 'validating', error = null
@@ -536,7 +550,9 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
             and edition.distance_code = ${edition.distance}
         `;
         const startError = automatedStartTimeError(
-          batch.source_key, existing[0]?.start_time, edition.startTime,
+          batch.source_key,
+          existing[0]?.start_time,
+          edition.startTime,
         );
         if (startError) errors.push(startError);
       }
@@ -601,6 +617,7 @@ export async function publishCatalogueBatch(
       `;
       const previousRevisionId = stateRows[0]?.current_revision_id ?? null;
       const batch = await loadBatch(tx, batchId, true);
+      assertNoSourceReviewHold(batch);
       if (batch.status !== "ready") {
         throw new Error("Only a validated, ready batch can be published");
       }
@@ -1173,4 +1190,3 @@ export async function getCataloguePublishingDashboard() {
     })),
   };
 }
-
