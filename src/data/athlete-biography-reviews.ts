@@ -9,11 +9,12 @@ export const athleteBiographyReviews = [
     paragraphs: [
       "Rich Roll is an American ultra-endurance athlete, vegan advocate, author and host of the Rich Roll Podcast. His sporting achievements include finishing the Ultraman World Championships in Hawaii and completing EPIC5 with Jason Lester in 2010. Through his books and long-form interviews, he explores endurance, plant-based living, recovery and personal change.",
       "Roll's competitive swimming career included a silver medal in the men's 200-metre butterfly at the 1985 National Sports Festival in Baton Rouge, where he recorded 2:05.30. He was a member of Stanford University's men's swimming team from 1985 to 1988. In November 1985, he placed third in the 200 butterfly during Stanford's 77–36 dual-meet victory over Texas. Swimming would later become one of his strongest disciplines in long-distance triathlon.",
+      "Roll also represented the United States at the 1996 CMAS World Finswimming Championships in Dunaújváros, Hungary. His individual surface-finswimming heat results were 46.32 seconds for 100 metres and 1:39.49 for 200 metres. He competed in the USA men's 4×200-metre relay, which finished 14th in 6:42.63, and the 4×100-metre relay, which finished 15th in 2:58.86, marked as a national record at the meet. His opening 100-metre relay leg was 45.02 seconds. These are finswimming performances, a separate discipline from conventional swimming.",
       "After Stanford, Roll graduated from Cornell Law School and worked as an entertainment lawyer. His memoir Finding Ultra, first published in 2012, recounts his return to fitness around his fortieth birthday and the move towards a plant-based diet that accompanied his transition into endurance sport. His early triathlon finishes included the Santa Barbara Long Course in 2007 and 2008; he also recorded 2:15:43 at the 2008 Malibu Olympic-distance triathlon in his own race account.",
       "Roll finished the 2008 Ultraman World Championships in 11th place overall in 26:33:42. The three-day race in Hawaii combines a long ocean swim, two days of cycling and a double-marathon run. His 2008 swim took 2:41:28, the second-fastest swim split in the field. He completed the final day's run in 9:00:32, establishing the first of his two Ultraman World Championship finishes.",
       "At the 2009 Ultraman World Championships, Roll won the opening day in 7:57:18, combining the fastest swim of 2:21:56 with a 5:35:22 bike leg. A crash on the second day's ride interrupted his challenge, but he continued and completed the final double marathon in 7:51:40. His final overall result was sixth in 24:30:31, an improvement of more than two hours on 2008. The opening-day victory was a stage win; he did not win the overall championship. In 2011, he again led the opening swim but withdrew during the second day and did not finish.",
       "In May 2010, Roll and Jason Lester completed EPIC5: five iron-distance triathlons on five Hawaiian islands in under a week. They travelled between Kauai, Oahu, Molokai, Maui and Hawaii's Big Island to complete the challenge. Their goal was to finish the challenge together, with travel and recovery forming part of the undertaking. It remains one of the defining achievements of Roll's athletic career.",
-      "Roll's endurance racing also includes swimrun, in which pairs alternate between swimming and running along a continuous course. At the 2017 Ötillö Swimrun World Championship in Sweden, he teamed up with coach Chris Hauth. They finished in 10:44:46 and placed 41st overall as a team. The result adds a different kind of endurance achievement to his Ultraman finishes and EPIC5 challenge, with teamwork central to the race.",
+      "Roll's endurance racing also includes swimrun, in which pairs alternate between swimming and running along a continuous course. At the 2017 Ötillö Swimrun World Championship in Sweden, he teamed up with coach Chris Hauth. They finished in 10:44:46 and placed 42nd overall and 33rd in the men’s team category. On 29 February 2020, Roll and Mark Hancock raced as Finding Ultra in the ÖTILLÖ Catalina Sprint in California. They completed the 14.9-kilometre swimrun in 2:01:35.0, sixth in the men’s team category.",
       "Roll is known for advocating a vegan, whole-food, plant-based way of eating. He discusses food, training and daily habits in his writing and podcast, drawing on his own experience as an endurance athlete. With Julie Piatt, he co-authored The Plantpower Way, published in 2015, which brings together plant-based recipes and their approach to family meals and everyday living. Finding Ultra focuses on his personal and athletic journey, while his Voicing Change books draw on conversations from the podcast.",
       "The Rich Roll Podcast launched on 27 November 2012 with Julie Piatt as its first guest. Its long-form conversations feature athletes, authors, researchers and other guests discussing subjects such as performance, nutrition, creativity, recovery and purpose. Listeners can find episodes and show notes on Rich Roll's official website, listen through Apple Podcasts or Spotify, and watch video interviews on his YouTube channel.",
       "Community living forms part of Roll's story. In a 2014 account, he described a three-month family stay at Common Ground on Kauai's north shore, living communally in yurts connected with an organic farm and permaculture project. The podcast began during that period in Hawaii. He also described returning to Los Angeles afterwards, so the Common Ground experience is a historical chapter rather than a statement about his current residence.",
@@ -21,11 +22,12 @@ export const athleteBiographyReviews = [
     headings: [
       "",
       "Swimming silver and Stanford University",
+      "USA finswimming at the 1996 world championships",
       "From law to endurance sport",
       "The 2008 Ultraman World Championships",
       "2009 Ultraman stage win and sixth place",
       "The EPIC5 challenge",
-      "Ötillö Swimrun World Championship",
+      "Ötillö world championship and Catalina Sprint",
       "Veganism and books",
       "The Rich Roll Podcast",
       "Community living on Kauai",
@@ -60,7 +62,7 @@ export const athleteBiographyReviews = [
       {
         question: "What was Rich Roll's Ötillö result?",
         answer:
-          "Rich Roll and Chris Hauth finished the 2017 Ötillö Swimrun World Championship in Sweden in 10:44:46, placing 41st overall as a team.",
+          "Rich Roll and Chris Hauth finished the 2017 Ötillö Swimrun World Championship in Sweden in 10:44:46, placing 42nd overall and 33rd in the men’s team category.",
       },
       {
         question: "Where can I listen to the Rich Roll Podcast?",
