@@ -250,5 +250,57 @@
         "note": "The organiser’s 2026 event pages confirm Sunday 22 November; its distances page and FAQ give the Sunday marathon start at 08:00. The 2026 participant guide is not yet published; do not copy the linked 2025 guide."
       }
     }
+  },
+  "isle-of-wight-marathon|2026-10-04": {
+    "summary": "Isle of Wight Marathon.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://rydeharriers.eventrac.co.uk/e/the-isle-of-wight-marathon-10323/results",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": null,
+        "note": "The organiser results archive confirms the same 4 October 2026 marathon in Cowes. Retain the existing permanent event page. Stored 42.2 km and 42.195 km are rounding equivalents. The conflicting 10:00/11:00 historical starts remain unresolved; do not promote either to verified."
+      }
+    }
+  },
+  "alcester-10k|2026-10-11": {
+    "summary": "Alcester 10K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.alcester10k.com/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "10:00",
+        "note": "The organiser confirms 11 October 2026, 10K and 10:00 in Alcester. Retain the original page with its organiser and entry links."
+      }
+    }
+  },
+  "aj-bell-great-south-5k-2026|2026-10-17": {
+    "summary": "AJ Bell Great South 5K 2026.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.greatrun.org/news/what-to-expect-this-weekend-at-the-great-south-run/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "09:00",
+        "note": "The organiser 13 October 2026 race-weekend briefing confirms the Saturday 5K at 09:00. Retain the organiser-sourced 5K record; the junior and Sunday 10-mile races are distinct."
+      }
+    }
+  },
+  "fleet-10k5k-peter-driver-memorial|2026-10-25": {
+    "summary": "Fleet 5K & 10K — Peter Driver Memorial.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://fleet10k.co.uk/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "09:30",
+        "note": "The organiser confirms both 5K and 10K at 09:30 on 25 October 2026 at the Harlington Centre. Both listings contain both distances; retain the original organiser-linked programme."
+      },
+      "5K": {
+        "time": "09:30",
+        "note": "The organiser confirms both 5K and 10K at 09:30 on 25 October 2026 at the Harlington Centre. Both listings contain both distances; retain the original organiser-linked programme."
+      }
+    }
   }
 }
