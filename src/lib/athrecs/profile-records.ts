@@ -1,6 +1,7 @@
 import { roadPerformanceCondition } from "./road-performance-conditions.ts";
 import { isDisqualified, type ResultDetails } from "./result-details.ts";
 import { isParkrunResult, type ParkrunContext } from "./parkrun-timing.ts";
+import { normalizeDistanceCode } from "./distance.ts";
 
 export type ProfileResult = {
   city?: string;
@@ -80,7 +81,7 @@ function comparisonDistanceKm(result: Pick<ProfileResult, "distanceCode" | "dist
 export function performanceGroup(result: ProfileResult): string {
   return [
     isParkrunResult(result) ? "Parkrun" : result.sport,
-    result.distanceCode,
+    normalizeDistanceCode(result.distanceCode),
     comparisonDistanceKm(result),
     isParkrunResult(result) ? "Parkrun" : result.surface,
     timingBasis(result),
@@ -101,7 +102,7 @@ export function personalBestGroup(result: PerformanceCategory): string {
   // alongside it. Progress uses performanceGroup for comparisons by timing basis.
   return [
     personalBestSport(result),
-    result.distanceCode,
+    normalizeDistanceCode(result.distanceCode),
     comparisonDistanceKm(result),
     isParkrunResult(result) ? "Parkrun" : result.surface,
   ].join("|");
@@ -124,7 +125,7 @@ export function combineProfileResults<T extends ProfileResult>(
           result.eventSlug || result.eventName || `result:${result.resultId}`,
           result.eventDate || `result:${result.resultId}`,
           result.sport,
-          result.distanceCode,
+          normalizeDistanceCode(result.distanceCode),
           result.distanceKm,
           result.surface,
         ]);

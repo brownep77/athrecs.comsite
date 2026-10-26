@@ -30,6 +30,7 @@ import {
 } from "@/lib/athrecs/achievement-verification";
 import { buildProfileAchievementSummary } from "@/lib/athrecs/profile-achievement-summary";
 import { CalendarYearList } from "./CalendarYearList";
+import { normalizeDistanceCode } from "@/lib/athrecs/distance";
 
 type BoardHighlight = {
   id: string;
@@ -93,7 +94,8 @@ export function PersonalBestStrip({
                 title={best.note}
               >
                 <span className="block text-xs text-muted">
-                  {isParkrunResult(best) ? "Parkrun" : best.sport} · {best.distanceCode}
+                  {isParkrunResult(best) ? "Parkrun" : best.sport} ·{" "}
+                  {normalizeDistanceCode(best.distanceCode)}
                 </span>
                 <strong className="text-lg tabular-nums text-fg">
                   {best.displayMark ?? formatDuration(best.finishTimeSeconds)}
@@ -130,7 +132,8 @@ export function PersonalBestStrip({
               className="achievement-label min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
             >
               <span className="block text-xs text-muted">
-                {isParkrunResult(best) ? "Parkrun" : best.sport} · {best.distanceCode}
+                {isParkrunResult(best) ? "Parkrun" : best.sport} ·{" "}
+                {normalizeDistanceCode(best.distanceCode)}
               </span>
               <strong className="text-lg tabular-nums text-fg">
                 {best.history?.performance.performance ?? formatDuration(best.finishTimeSeconds)}
@@ -186,7 +189,8 @@ function AchievementEvidence({
           </ProfileEventLink>
           {result.history ? (
             <span>
-              {result.distanceCode} · {result.history.performance.performance || "Recorded finish"}
+              {normalizeDistanceCode(result.distanceCode)} ·{" "}
+              {result.history.performance.performance || "Recorded finish"}
             </span>
           ) : null}
 
