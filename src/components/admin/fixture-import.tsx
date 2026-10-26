@@ -93,6 +93,9 @@ export function FixtureImportPage({
           ← Staff tools
         </Link>
         <h1 className="text-3xl font-semibold text-fg">Import running fixtures</h1>
+        <p className="text-xs font-medium uppercase tracking-wide text-muted">
+          File importer · built in ChatGPT
+        </p>
         <p className="max-w-3xl text-sm text-muted">
           Upload a CSV or JSON file, check the preview, then review and publish the ready races.
           Imports work even while automated research is paused. Up to 500 distance listings per

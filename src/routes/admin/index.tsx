@@ -285,7 +285,7 @@ function AdminPage() {
             </p>
           </div>
           <Button asChild>
-            <Link to="/admin/fixture-import">Import running fixtures</Link>
+            <Link to="/admin/fixture-import">Import running fixtures (built in ChatGPT)</Link>
           </Button>
         </div>
         <Button asChild variant="secondary">
@@ -486,7 +486,7 @@ function AdminPage() {
       <section className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="space-y-1">
-            <h2 className="font-display text-lg font-semibold text-fg">Import running fixtures</h2>
+            <h2 className="font-display text-lg font-semibold text-fg">Import running fixtures (built in ChatGPT)</h2>
             <p className="max-w-2xl text-sm text-muted">
               Upload verified fixture files, preview duplicate checks and publish reviewed races in
               batches. The source registry helps organise research; its legacy queue does not fetch
