@@ -1,3 +1,5 @@
+import { FIFTH_DUPLICATE_PROGRAMMES_REVIEW } from "./lib/duplicate-programmes-fifth-2026-10-26-review.mjs";
+import fifthDuplicateProgrammeStarts from "../src/data/duplicate-programme-starts-fifth-2026-10-26.json" with { type: "json" };
 import { createServer } from "vite";
 import { publishCheckedFixtures } from "./lib/checked-fixture-publication.mjs";
 import { HADLEIGH_PROGRAMME_REVIEW } from "./lib/hadleigh-programme-2026-10-26-review.mjs";
@@ -153,6 +155,15 @@ try {
       publishing,
       fourthDuplicateProgrammeStarts,
       NOVEMBER_NIGHTMARE_PROGRAMME_REVIEW,
+    ),
+  );
+  console.log(
+    "[duplicate-programmes-fifth]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      fifthDuplicateProgrammeStarts,
+      FIFTH_DUPLICATE_PROGRAMMES_REVIEW,
     ),
   );
 } finally {
