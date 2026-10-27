@@ -41,6 +41,7 @@ const CURRENT_DORNEY_REFRESH_CHECKED_AT = "2026-10-23";
 const CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT = "2026-10-24";
 const CURRENT_START_AND_DISCOVERY_CHECKED_AT = "2026-10-25";
 const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
+const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -71,6 +72,26 @@ type RaceSeed = {
 };
 
 const seeds: RaceSeed[] = [
+  {
+    slug: "darwen-roller-coaster-half-marathon-2027",
+    name: "Darwen 'Roller Coaster' Half Marathon 2027",
+    date: "2027-04-04",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "Lancashire",
+    city: "Darwen",
+    area: "Blacksnape Playing Fields and the Darwen countryside",
+    surface: "Road",
+    distances: ["Half", "1.5mi"],
+    organiser: "Darwen Dashers Running Club / RunningSpec Events",
+    url: "https://bookitzone.com/lee_passco/NPjFFX",
+    entryUrl: "https://bookitzone.com/lee_passco/NPjFFX",
+    priceAmount: 28.84,
+    checkedAt: CURRENT_BOOKITZONE_SCAN_CHECKED_AT,
+    notes:
+      "The organiser-authorised entry page consistently confirms the measured, chipped and UKA-licensed half marathon on 4 April 2027, its 10:00 start, open entry from £28.84 and separate 10:15 junior fun run on the same card.",
+  },
   {
     slug: "st-annes-10-mile-run-2027",
     name: "St Annes 10 Mile Run 2027",

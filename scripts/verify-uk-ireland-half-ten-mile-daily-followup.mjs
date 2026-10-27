@@ -44,9 +44,10 @@ const CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT = "2026-10-24";
 const CURRENT_START_AND_DISCOVERY_CHECKED_AT = "2026-10-25";
 const CURRENT_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-27";
 const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
+const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 87;
-const NEW_EDITION_COUNT = 90;
+const NEW_SERIES_COUNT = 88;
+const NEW_EDITION_COUNT = 91;
 const EXISTING_SERIES_EDITION_COUNT = 67;
 
 async function loadModule(input) {
@@ -81,7 +82,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  70,
+  71,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -220,6 +221,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT,
         CURRENT_START_AND_DISCOVERY_CHECKED_AT,
         CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+        CURRENT_BOOKITZONE_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -877,6 +879,25 @@ for (const [slug, date, distance, startTime, source] of [
     `${slug} lost its 27 October source check`,
   );
 }
+
+const darwenEdition = dailyHalfTenMileEditions.find(
+  (candidate) =>
+    candidate.seriesSlug === "darwen-roller-coaster-half-marathon-2027" &&
+    candidate.date === "2027-04-04" &&
+    candidate.distance === "Half",
+);
+assert(darwenEdition, "Darwen Roller Coaster is missing its verified 2027 half marathon");
+assert.equal(darwenEdition.startTime, "10:00");
+assert.equal(darwenEdition.source, "https://bookitzone.com/lee_passco/NPjFFX");
+assert.equal(darwenEdition.entryUrl, "https://bookitzone.com/lee_passco/NPjFFX");
+assert.equal(darwenEdition.entryOptions?.[0]?.checkedAt, CURRENT_BOOKITZONE_SCAN_CHECKED_AT);
+assert.deepEqual(
+  dailyHalfTenMileSeries.find(
+    (candidate) => candidate.slug === "darwen-roller-coaster-half-marathon-2027",
+  )?.distances,
+  ["Half", "1.5mi"],
+  "Darwen must retain its junior fun run on the same canonical card",
+);
 
 for (const [slug, date, startTime, source] of [
   ["williamson-park-half-marathon-10k", "2027-08-15", "11:30", "https://bookitzone.com/helen_mcgregor_2/YcEFFX"],
@@ -2839,5 +2860,5 @@ assert.equal(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (70 half-marathon editions and 20 ten-mile editions), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid cards, ${dailyHalfTenMileRetiredEditionKeys.length} retired invalid distance row and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (71 half-marathon editions and 20 ten-mile editions), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid cards, ${dailyHalfTenMileRetiredEditionKeys.length} retired invalid distance row and catalogue-level duplicate protection.`,
 );
