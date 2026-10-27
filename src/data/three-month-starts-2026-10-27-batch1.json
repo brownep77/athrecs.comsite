@@ -1,0 +1,90 @@
+{
+  "hyrox-birmingham|2026-10-27": {
+    "summary": "The first day of the six-day HYROX Birmingham programme at the NEC.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://hyroxjapan.com/event/hyrox-birmingham/",
+    "checkedAt": "2026-10-27",
+    "starts": {
+      "HYROX": {
+        "time": "08:00",
+        "label": "First Tuesday waves 08:00 GMT · division windows until 20:30",
+        "note": "The current organiser programme explicitly dates Tuesday 27 October 2026 and lists HYROX Men and Adaptive Men from 08:00, followed by Doubles Men 10:40, Doubles Women 13:30, Women and Adaptive Women 15:40, and Doubles Mixed 18:10. These are division wave windows, not one common start.",
+        "publicNote": "Tuesday division wave windows begin at 08:00. Follow the individual start time linked by HYROX."
+      }
+    }
+  },
+  "bobby-rea-xc-ni-ulster-even-age-championships|2026-11-01": {
+    "summary": "Postponed NI & Ulster Even Age Group Cross Country Championships and Bobby Rea XC programme at Billy Neill MBE Country Park.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://athleticsni.org/Download/Files/NI%20%26%20Ulster%20Even%20Age%20Group%20XC%20Championships%20%26%20Bobby%20Rea%20XC%281%29.pdf",
+    "checkedAt": "2026-10-27",
+    "starts": {
+      "1K": {
+        "time": "11:00",
+        "label": "Girls U10 11:00 GMT · boys U10 11:10",
+        "note": "Athletics NI's current fixture page says the event is postponed to 1 November 2026 and links this provisional timetable. The 1K races are Girls U10 11:00 and Boys U10 11:10.",
+        "publicNote": "Girls U10 start at 11:00; boys U10 at 11:10."
+      },
+      "1.5K": {
+        "time": "11:20",
+        "label": "Girls U12 11:20 GMT · boys U12 11:35",
+        "note": "The linked Athletics NI provisional timetable lists Girls U12 1500m at 11:20 and Boys U12 1500m at 11:35.",
+        "publicNote": "Girls U12 start at 11:20; boys U12 at 11:35."
+      },
+      "2.5K": {
+        "time": "11:50",
+        "label": "Girls U14 11:50 GMT · check boys U14 instructions",
+        "note": "The linked timetable lists Girls U14 2500m at 11:50. Its Boys U14 row displays 12:10am, which is internally inconsistent with the daytime sequence, so only the confirmed first category clock is recorded.",
+        "publicNote": "Girls U14 start at 11:50. The published boys U14 clock is internally inconsistent; follow Athletics NI instructions."
+      },
+      "3.5K": {
+        "time": "13:15",
+        "label": "Girls U16 13:15 GMT · boys U16 13:35",
+        "note": "The linked Athletics NI provisional timetable lists Girls U16 3500m at 13:15 and Boys U16 3500m at 13:35.",
+        "publicNote": "Girls U16 start at 13:15; boys U16 at 13:35."
+      },
+      "4K": {
+        "time": "13:55",
+        "label": "Girls U18 start 13:55 GMT",
+        "note": "The linked Athletics NI provisional timetable lists Girls U18 4000m at 13:55.",
+        "publicNote": "Girls U18 4K starts at 13:55."
+      },
+      "5K": {
+        "time": "14:20",
+        "label": "Boys U18 start 14:20 GMT",
+        "note": "The linked Athletics NI provisional timetable lists Boys U18 5000m at 14:20.",
+        "publicNote": "Boys U18 5K starts at 14:20."
+      },
+      "6K": {
+        "time": "12:40",
+        "label": "Senior/U20 women and M60+ start 12:40 GMT",
+        "note": "The linked Athletics NI provisional timetable lists the Senior/U20 Women and M60+ 6000m race at 12:40.",
+        "publicNote": "Senior/U20 women and M60+ 6K starts at 12:40."
+      },
+      "8K": {
+        "time": "14:50",
+        "label": "Senior/U20 men start 14:50 GMT",
+        "note": "The linked Athletics NI provisional timetable lists the Senior/U20 Men 8000m race at 14:50.",
+        "publicNote": "Senior/U20 men 8K starts at 14:50."
+      }
+    }
+  },
+  "corofin-loops|2026-11-01": {
+    "summary": "The Corofin Loop 8K and 10-mile races in Corofin.",
+    "timeZone": "Europe/Dublin",
+    "sourceUrl": "https://eventmaster.ie/event/oOlbck3tLm",
+    "checkedAt": "2026-10-27",
+    "starts": {
+      "8K": {
+        "time": "09:00",
+        "note": "The organiser-authorised Eventmaster entry page explicitly dates Sunday 1 November 2026 and displays 09:00 for the event while listing both 8K and 10-mile tickets.",
+        "publicNote": "8K starts at 09:00 local time."
+      },
+      "10M": {
+        "time": "09:00",
+        "note": "The organiser-authorised Eventmaster entry page explicitly dates Sunday 1 November 2026 and displays 09:00 for the event while listing both 8K and 10-mile tickets.",
+        "publicNote": "10-mile race starts at 09:00 local time."
+      }
+    }
+  }
+}
