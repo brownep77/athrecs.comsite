@@ -981,6 +981,40 @@ try {
   console.log(
     "PASS: approved history renders anonymously in the main results table; unapproved/private profiles, personal fields, owner withdrawals and removed marks remain protected.",
   );
+  // A signed-in refresh must retain the preview's editorial badge styling.
+  const [statusAthlete] = await sql`insert into athletes
+    (slug,display_name,profile_visibility,profile_roles)
+    values ('status-badge-fixture','Status Badge Athlete','public',
+      'Professional athlete,Running legend,Running legend,Coach') returning id`;
+  await sql`insert into network_audit_log(action,entity_type,entity_id,after_value)
+    values ('athlete.profile_admin_published','athlete',${String(statusAthlete.id)},
+      ${JSON.stringify({ athleteId: statusAthlete.id, profile_visibility: "public" })}::jsonb)`;
+  const statusMarkup = [];
+  for (const headers of [{}, { authorization: `Bearer ${token}` }]) {
+    const response = await fetch(origin + "/athletes/status-badge-fixture", { headers });
+    assert.equal(response.status, 200);
+    const $ = load(await response.text());
+    const overview = $("#profile-overview");
+    const statuses = overview.find('[aria-label="Profile status"]');
+    assert.equal(statuses.length, 1);
+    assert.equal(statuses.prev("h1").text(), "Status Badge Athlete");
+    const legend = statuses.find("span").filter((_, el) => $(el).text() === "Running legend");
+    assert.equal(legend.length, 1);
+    assert(legend.hasClass("border-amber-300"));
+    assert(legend.hasClass("bg-amber-50"));
+    assert.equal(legend.find('svg.lucide-trophy[aria-hidden="true"]').length, 1);
+    assert.equal(overview.text().match(/Running legend/g)?.length, 1);
+    assert.equal(
+      overview.text().match(/Professional athlete/g)?.length,
+      headers.authorization ? 2 : 1,
+    );
+    assert.equal(overview.text().includes("Coach"), Boolean(headers.authorization));
+    statusMarkup.push(statuses.toString());
+  }
+  assert.equal(statusMarkup[0], statusMarkup[1], "Preview and member status badges stay identical");
+  console.log(
+    "PASS: public-to-member profile transition retains one gold trophy badge beneath the name.",
+  );
   await post("sign-out", {}, token);
   await assert.rejects(
     () => rpc("athrecs/api", "getAthleteBySlug", "view-login-fixture", token),

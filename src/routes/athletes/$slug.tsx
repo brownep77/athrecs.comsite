@@ -4,6 +4,8 @@ import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOver
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { PublicAthletePreview } from "@/components/athletes/PublicAthletePreview";
+import { AthleteProfileStatuses } from "@/components/athletes/AthleteProfileStatuses";
+import { publicProfileStatuses } from "@/lib/athrecs/athlete-profile-roles";
 import { AthleteBiography } from "@/components/athletes/AthleteBiography";
 import { biographyParagraphs } from "@/lib/athrecs/biography-presentation";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
@@ -411,6 +413,7 @@ function AthleteContent() {
   const isProfessionalAthlete = athlete.profile_roles?.some(
     (role: string) => role.toLowerCase() === "professional athlete",
   );
+  const profileStatuses = publicProfileStatuses(athlete.profile_roles);
   const locationLabel = isPublicFigure
     ? ""
     : [athlete.city, athlete.county].filter(Boolean).join(" · ");
@@ -454,6 +457,7 @@ function AthleteContent() {
         <h1 className="font-display text-3xl font-semibold text-fg sm:text-4xl">
           {athlete.display_name}
         </h1>
+        <AthleteProfileStatuses roles={profileStatuses} />
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />
           <span className="text-xs text-muted">
@@ -493,9 +497,7 @@ function AthleteContent() {
               Claimed profile
             </Badge>
           ) : null}
-          {isProfessionalAthlete ? (
-            <Badge variant="accent">Professional athlete</Badge>
-          ) : isPublicFigure ? (
+          {isPublicFigure && !isProfessionalAthlete ? (
             <Badge variant="accent">Public figure</Badge>
           ) : null}
           <Badge
@@ -514,7 +516,9 @@ function AthleteContent() {
           {athlete.profile_roles
             ?.filter(
               (role: string) =>
-                !isProfessionalAthlete || role.toLowerCase() !== "professional athlete",
+                !profileStatuses.some(
+                  (status) => status.toLowerCase() === role.trim().toLowerCase(),
+                ),
             )
             .map((role: string) => (
               <Badge key={role} variant="outline">
