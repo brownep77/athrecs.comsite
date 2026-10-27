@@ -8,6 +8,7 @@ const SOURCE_KEYS = [
   "athrecs-code:uk-ireland-non-standard-distances:2026-08-28",
   "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints:2026-08-28",
   "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints-overflow:2026-09-05",
+  "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints-overflow-2:2026-10-27",
 ];
 
 assert(process.env.DATABASE_URL?.trim(), "DATABASE_URL is required for publication verification");
@@ -70,6 +71,7 @@ const firstOutput = runNode(
 assert.match(firstOutput, /published non-standard-distances revision \d+:/);
 assert.match(firstOutput, /published half-ten-mile-and-10k-checkpoints-part-1 revision \d+:/);
 assert.match(firstOutput, /published half-ten-mile-and-10k-checkpoints-part-2 revision \d+:/);
+assert.match(firstOutput, /published half-ten-mile-and-10k-checkpoints-part-3 revision \d+:/);
 assert.match(firstOutput, /retired 1 duplicate event aliases/);
 
 const client = new pg.Client({ connectionString: process.env.DATABASE_URL });
@@ -88,7 +90,7 @@ try {
      order by source_key`,
     [SOURCE_KEYS],
   );
-  assert.equal(batches.rows.length, 3, "All reviewed catalogue batches must be recorded");
+  assert.equal(batches.rows.length, 4, "All reviewed catalogue batches must be recorded");
   for (const batch of batches.rows) {
     assert.equal(batch.status, "published", `${batch.source_key} did not publish`);
     assert(batch.publish_summary.eventsUpserted > 0, `${batch.source_key} published no events`);
@@ -262,7 +264,7 @@ try {
     "scripts/publish-remaining-uk-ireland-race-additions.mjs",
     publisherEnv,
   );
-  assert.equal((redirectedOutput.match(/was already published; no database change needed/g) ?? []).length, 3);
+  assert.equal((redirectedOutput.match(/was already published; no database change needed/g) ?? []).length, 4);
   assert.deepEqual(await one("select count(*)::int as n from catalogue_revisions"), publishedCountBefore,
     "An already published source revision stays untouched after later URL changes");
   assert.deepEqual(await one("select * from events where id=$1", [sourceEvent.id]), canonicalBefore);
@@ -290,7 +292,7 @@ try {
   assert.deepEqual((await client.query("select * from results order by id")).rows, resultsBefore);
   assert.equal((await one("select event_id from editions where id=$1", [sourceEdition.id])).event_id, sourceEvent.id);
   const replayOutput = runNode("scripts/publish-remaining-uk-ireland-race-additions.mjs", publisherEnv);
-  assert.equal((replayOutput.match(/was already published; no database change needed/g) ?? []).length, 3);
+  assert.equal((replayOutput.match(/was already published; no database change needed/g) ?? []).length, 4);
 } finally {
   await client.end();
 }
