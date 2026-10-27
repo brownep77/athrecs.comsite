@@ -204,7 +204,11 @@ try {
      where batch_id = any($1::text[])`,
     [batches.rows.map((batch) => batch.id)],
   );
-  assert.equal(revisionsBefore.count, 3, "Expected one revision per reviewed batch");
+  assert.equal(
+    revisionsBefore.count,
+    SOURCE_KEYS.length,
+    "Expected one revision per reviewed batch",
+  );
 
   const secondOutput = runNode(
     "scripts/publish-remaining-uk-ireland-race-additions.mjs",
@@ -212,7 +216,7 @@ try {
   );
   assert.equal(
     (secondOutput.match(/was already published; no database change needed/g) ?? []).length,
-    3,
+    SOURCE_KEYS.length,
     "Repeat publication did not reuse all existing batches",
   );
 
