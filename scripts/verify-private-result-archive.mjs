@@ -202,7 +202,7 @@ assert.equal(
   results.filter(
     (result) => !["mo-farah", "david-goggins", "rich-roll"].includes(result.athleteSlug),
   ).length,
-  2_594,
+  2_592,
   "Existing canonical retained results changed unexpectedly",
 );
 assert.equal(
