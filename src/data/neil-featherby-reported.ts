@@ -410,12 +410,17 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     event: "Leicester Marathon",
     distance: "Marathon",
     location: "Leicester, England",
-    reportedDate: "Year not established",
-    reportedTime: "Time not supplied",
-    reportedPlace: "1st",
-    evidenceLabel: "Biography-reported",
-    uncertainty: "Biography reports this result; date and time not supplied.",
+    reportedDate: "23 September 1984",
+    reportedTime: "2:25:01",
+    reportedPlace: "1st male",
+    evidenceLabel: "Contemporary newspaper report",
+    uncertainty:
+      "A contemporary newspaper report supplies the date, winning time and Norfolk Olympiads affiliation. The original organiser result sheet and timing method remain unverified.",
     sources: [
+      {
+        label: "Leicester Mercury report reproduced in The Harrier, issue 222, page 16",
+        url: "https://www.huncoteharriersac.co.uk/wp-content/uploads/2025/01/222_2024_Nov_Newsletter.pdf",
+      },
       {
         label: "Sportlink biography",
         url: "https://www.sportlink.co.uk/pages/neil-featherby",
