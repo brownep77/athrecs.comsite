@@ -1320,6 +1320,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
             ) ?? undefined)
           : undefined,
         sports: profile.athlete.sports,
+        profileRoles: !identity.has_account_link ? profile.athlete.profile_roles : [],
         biography: profile.shareBiography
           ? profile.publishedBiography
             ? biographyParagraphs(profile.publishedBiography)
