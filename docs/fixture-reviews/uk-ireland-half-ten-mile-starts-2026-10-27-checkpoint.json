@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "generatedOn": "2026-10-26",
+  "generatedOn": "2026-10-27",
   "window": {
-    "from": "2026-10-26",
-    "through": "2027-01-26",
+    "from": "2026-10-27",
+    "through": "2027-01-27",
     "rule": "Three calendar months inclusive; month-end clamped."
   },
   "scope": "Live UK and Ireland editions offering a half-marathon or approximately 10-mile distance.",
   "sourceSnapshot": {
     "project": "lively-resonance-04577945",
     "branch": "br-flat-unit-aydbwlfk",
-    "capturedOn": "2026-10-26",
-    "recordCount": 264
+    "capturedOn": "2026-10-27",
+    "recordCount": 265
   },
   "handoff": "Existing daily AthRecs fixtures, results and athletes checkpoint. No additional scheduler or organiser contact is authorised.",
   "summary": {
     "invalidated": 2,
-    "confirmed": 20,
+    "confirmed": 22,
     "confirmed-existing": 55,
     "corrected": 1,
-    "unresolved": 2,
+    "unresolved": 1,
     "duplicate-alias": 2,
     "open": 182
   },
@@ -423,16 +423,18 @@
       "distance": "10mi",
       "localTime": "12:00",
       "timeZone": "Europe/London",
-      "waveScope": "The official club page confirms the 1 November 2026 edition but does not publish a start time; secondary pages showing 12:00 are not accepted as current-edition proof.",
-      "reviewStatus": "unresolved",
-      "checkedOn": "2026-10-26",
+      "waveScope": "Official current-edition race information confirms one 12:00 Europe/London start for the 10-mile road race near George Fisher's outdoor shop.",
+      "reviewStatus": "confirmed",
+      "checkedOn": "2026-10-27",
       "attemptedSources": [
         "https://www.keswickac.org.uk/races1",
-        "https://runabc.co.uk/derwentwater-10"
+        "https://derwentwater10.weebly.com/",
+        "https://derwentwater10.weebly.com/race-information.html",
+        "https://www.eventsupnorth.co.uk/event/1846"
       ],
-      "sourceOutcome": "The official Keswick AC race page confirms the edition/date but exposes no start time. The RunABC listing displays 12:00, but it is secondary evidence and cannot confirm the current official clock.",
-      "nextAction": "Inspect any newly published Keswick AC race instructions, current authorised entry programme or governing-body race licence; keep the stored clock unconfirmed until an official current-edition source states it.",
-      "retryOn": "2026-10-27"
+      "sourceOutcome": "Keswick AC's official races page links the current 1 November edition. The linked official event homepage confirms the 2026 10-mile race, and its Race Information page states a 12:00 start near George Fisher's outdoor shop. The linked Events Up North entry endpoint returned HTTP 403, so no claim is drawn from that page.",
+      "nextAction": "Recheck the official race-information page at the two-day threshold and preserve 12:00 unless the organiser publishes a correction.",
+      "retryOn": "2026-10-30"
     },
     {
       "key": "flying-fox-10|2026-11-01|10mi",
@@ -4729,6 +4731,25 @@
       "sourceOutcome": "Start time checked 25 October 2026: 10:00 local time. Organiser race listing dated 2027-01-24 publishes 10:00 local for the advertised race programme; current edition date and distance checked. Source: https://www.nice-work.org.uk/e/tissington-trail-january-half-marathon-and-10k-weekend-13430",
       "nextAction": "No further start-time action unless the organiser publishes a correction.",
       "retryOn": null
+    },
+    {
+      "key": "st-annes-10-mile-run-2027|2027-01-24|10mi",
+      "editionId": null,
+      "name": "St Annes 10 Mile Run 2027",
+      "country": "England",
+      "date": "2027-01-24",
+      "distance": "10mi",
+      "localTime": "10:30",
+      "timeZone": "Europe/London",
+      "waveScope": "The authorised current-edition entry page confirms one 10:30 Europe/London start for both affiliated and unaffiliated 10-mile categories from the Dalmeny Hotel.",
+      "reviewStatus": "confirmed",
+      "checkedOn": "2026-10-27",
+      "attemptedSources": [
+        "https://bookitzone.com/tim_armit/dYjFFX"
+      ],
+      "sourceOutcome": "The authorised current-edition entry page identifies the officially measured 10-mile road race on 24 January 2027 and gives 10:30 in the event schedule and both open entry categories.",
+      "nextAction": "Recheck the authorised entry programme at the seven-day threshold and replace the null edition ID after the persistent seed assigns the canonical database row.",
+      "retryOn": "2027-01-17"
     }
   ]
 }

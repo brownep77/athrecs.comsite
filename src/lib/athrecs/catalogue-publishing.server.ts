@@ -1,3 +1,5 @@
+import { hasConfirmedFixtureDistance } from "./fixture-distance-policy.ts";
+import { automatedStartTimeError } from "./catalogue-automation-policy.ts";
 import { createHash, randomUUID } from "node:crypto";
 import { isDeepStrictEqual } from "node:util";
 import { dbSource, getSql, type Sql } from "@/lib/db";
@@ -100,6 +102,19 @@ function bundleFromRow(row: StoredBatchRow): ImportBundle {
   };
 }
 
+function assertNoSourceReviewHold(batch: StoredBatchRow): void {
+  const summary = jsonValue<Record<string, unknown>>(batch.validation_summary);
+  if (!summary?.sourceReviewHold) return;
+  const hold = summary.sourceReviewHold;
+  const reason =
+    typeof hold === "object" && hold !== null && "reason" in hold
+      ? String(hold.reason)
+      : "The source programme needs reconciliation";
+  throw new Error(
+    `Source review hold: ${reason}. Restage the reconciled payload; the original evidence is retained.`,
+  );
+}
+
 function isHttpUrl(value: string | undefined): boolean {
   if (!value?.trim()) return false;
   try {
@@ -126,6 +141,23 @@ function editionSlug(edition: ImportEditionInput): string {
 
 function editionKey(edition: ImportEditionInput): string {
   return `${editionSlug(edition)}|${edition.date}|${edition.distance}`;
+}
+
+async function fixtureDistanceHolds(sql: Sql, payload: ImportBundle, edition: ImportEditionInput) {
+  // Keep incomplete source records for staff research. Public readers always hold them,
+  // including imports and older batches, until the live edition has a usable distance.
+  if (edition.date < new Date().toISOString().slice(0, 10)) return [];
+  const slug = editionSlug(edition);
+  const supplied = payload.events?.find((event) => eventSlug(event) === slug);
+  const rows = supplied
+    ? []
+    : await sql.query<{ sport: string }>("select sport from events where slug=$1", [slug]);
+  const sport = supplied?.sport ?? rows[0]?.sport ?? "Running";
+  return hasConfirmedFixtureDistance(sport, edition.distance, edition.distanceKm)
+    ? []
+    : [
+        "Withheld from public fixtures until its race distance is confirmed; retained for source review",
+      ];
 }
 
 async function loadBatch(sql: Sql, batchId: string, lock = false): Promise<StoredBatchRow> {
@@ -447,6 +479,7 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
     if (batch.status === "published" || batch.status === "rolled_back") {
       throw new Error(`A ${batch.status} batch cannot be validated again`);
     }
+    assertNoSourceReviewHold(batch);
     await tx`
       update catalogue_import_batches
       set status = 'validating', error = null
@@ -472,6 +505,7 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
 
     const eventSlugSet = new Set((payload.events ?? []).map(eventSlug));
     const allErrors: string[] = [];
+    const distanceHolds: string[] = [];
     let invalidRows = 0;
 
     for (const [index, event] of (payload.events ?? []).entries()) {
@@ -497,11 +531,30 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
       const slug = editionSlug(edition);
       const key = editionKey(edition);
       const errors = editionErrors(edition);
+      distanceHolds.push(
+        ...(await fixtureDistanceHolds(tx, payload, edition)).map((reason) => `${key}: ${reason}`),
+      );
       if ((editionCounts.get(key) ?? 0) > 1) {
         errors.push(`Duplicate edition in batch: ${key}`);
       }
       if (slug && !eventSlugSet.has(slug) && !(await eventExists(tx, slug))) {
         errors.push(`Referenced event does not exist: ${slug}`);
+      }
+      if (!errors.length && batch.source_key.startsWith("athrecs-holding:delta:")) {
+        const existing = await tx<{ start_time: string | null }>`
+          select edition.start_time::text as start_time
+          from editions edition
+          join events event on event.id = edition.event_id
+          where event.slug = ${slug}
+            and edition.event_date = ${edition.date}::date
+            and edition.distance_code = ${edition.distance}
+        `;
+        const startError = automatedStartTimeError(
+          batch.source_key,
+          existing[0]?.start_time,
+          edition.startTime,
+        );
+        if (startError) errors.push(startError);
       }
       if (errors.length) {
         invalidRows += 1;
@@ -520,6 +573,8 @@ export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql)
       editions: payload.editions?.length ?? 0,
       invalidRows,
       errors: allErrors.slice(0, 100),
+      withheldDistanceCount: distanceHolds.length,
+      distanceHolds,
     };
     await tx.query(
       `update catalogue_import_batches
@@ -562,10 +617,19 @@ export async function publishCatalogueBatch(
       `;
       const previousRevisionId = stateRows[0]?.current_revision_id ?? null;
       const batch = await loadBatch(tx, batchId, true);
+      assertNoSourceReviewHold(batch);
       if (batch.status !== "ready") {
         throw new Error("Only a validated, ready batch can be published");
       }
       const payload = bundleFromRow(batch);
+      const distanceHolds: string[] = [];
+      for (const edition of payload.editions ?? []) {
+        distanceHolds.push(
+          ...(await fixtureDistanceHolds(tx, payload, edition)).map(
+            (reason) => `${editionKey(edition)}: ${reason}`,
+          ),
+        );
+      }
       if (batch.source_key.startsWith("runrecs:collector:")) {
         const { assertCollectorPublication } =
           await import("../race-collector/publication-guard.server");
@@ -626,6 +690,17 @@ export async function publishCatalogueBatch(
           editionKey(edition),
           await snapshotEdition(tx, editionSlug(edition), edition.date, edition.distance),
         );
+      }
+
+      // Recheck under the existing row locks: a verified start may have been
+      // added or corrected after validation. Never clear it during a scan retry.
+      for (const edition of editionInputs) {
+        const startError = automatedStartTimeError(
+          batch.source_key,
+          beforeEditions.get(editionKey(edition))?.record.start_time,
+          edition.startTime,
+        );
+        if (startError) throw new Error(`${editionKey(edition)}: ${startError}`);
       }
 
       const revisionRows = await tx<{ id: number }>`
@@ -733,6 +808,8 @@ export async function publishCatalogueBatch(
         editionsUpserted: result.editionsUpserted,
         entryOptionsUpserted: result.entryOptionsUpserted,
         revisionId,
+        withheldDistanceCount: distanceHolds.length,
+        distanceHolds,
       };
 
       await tx.query(

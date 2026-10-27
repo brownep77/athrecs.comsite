@@ -1,0 +1,527 @@
+[
+  {
+    "eventSlug": "st-albans-half-marathon",
+    "date": "2026-06-14",
+    "locality": "St Albans",
+    "stationId": "03673",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "norwich-parkrun",
+    "date": "2026-05-23",
+    "locality": "Norwich",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "great-yarmouth-promenade-5m",
+    "date": "2026-04-15",
+    "locality": "Great Yarmouth",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "norwich-parkrun",
+    "date": "2025-12-20",
+    "locality": "Norwich",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "larking-gowen-norwich-half",
+    "date": "2025-11-23",
+    "locality": "Norwich",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "east-coast-10k",
+    "date": "2025-11-02",
+    "locality": "Great Yarmouth",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "norwich-parkrun",
+    "date": "2025-10-18",
+    "locality": "Norwich",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "bure-valley-10-miles",
+    "date": "2025-09-28",
+    "locality": "Banningham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "norwich-parkrun",
+    "date": "2025-08-23",
+    "locality": "Norwich",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "clacton-half-marathon-10k",
+    "date": "2025-08-17",
+    "locality": "Clacton-on-Sea",
+    "stationId": "03590",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "reepham-summer-10k",
+    "date": "2025-08-01",
+    "locality": "Reepham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "lotus-tt-running-evening",
+    "date": "2025-06-20",
+    "locality": "Hethel",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "bucharest-half-marathon",
+    "date": "2025-05-11",
+    "locality": "Bucharest",
+    "stationId": "15420",
+    "timezone": "Europe/Bucharest"
+  },
+  {
+    "eventSlug": "norfolk-marathon-half",
+    "date": "2025-04-13",
+    "locality": "Cromer",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "bure-valley-10-miles",
+    "date": "2024-09-29",
+    "locality": "Banningham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "reepham-summer-10k",
+    "date": "2024-08-08",
+    "locality": "Reepham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "run-snetterton",
+    "date": "2024-07-31",
+    "locality": "Snetterton",
+    "stationId": "03583",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "bungay-black-dog-summer-10k",
+    "date": "2024-07-10",
+    "locality": "Bungay",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "norfolk-marathon-half",
+    "date": "2024-04-28",
+    "locality": "Cromer",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "wymondham-20",
+    "date": "2024-03-24",
+    "locality": "Wymondham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "bure-valley-10-miles",
+    "date": "2023-09-24",
+    "locality": "Banningham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "run-norwich",
+    "date": "2023-07-16",
+    "locality": "Norwich",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "lotus-tt-running-evening",
+    "date": "2023-06-16",
+    "locality": "Hethel",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "bungay-festival-of-running",
+    "date": "2023-04-16",
+    "locality": "Bungay",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "trowse-10k",
+    "date": "2023-04-09",
+    "locality": "Trowse",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "wymondham-nyd-10k",
+    "date": "2023-01-02",
+    "locality": "Wymondham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "run-sandringham",
+    "date": "2022-11-13",
+    "locality": "Sandringham",
+    "stationId": "03482",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "run-norwich",
+    "date": "2022-10-23",
+    "locality": "Norwich",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "bure-valley-10-miles",
+    "date": "2022-09-25",
+    "locality": "Banningham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "clacton-half-marathon-10k",
+    "date": "2022-08-21",
+    "locality": "Clacton-on-Sea",
+    "stationId": "03590",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "bucharest-half-marathon",
+    "date": "2022-05-08",
+    "locality": "Bucharest",
+    "stationId": "15420",
+    "timezone": "Europe/Bucharest"
+  },
+  {
+    "eventSlug": "bungay-festival-of-running",
+    "date": "2022-04-10",
+    "locality": "Bungay",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "manchester-marathon",
+    "date": "2022-04-03",
+    "locality": "Manchester",
+    "stationId": "03334",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "great-yarmouth-seafront-half-marathon",
+    "date": "2022-03-20",
+    "locality": "Great Yarmouth",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "wymondham-20",
+    "date": "2022-03-06",
+    "locality": "Wymondham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "tarpley-20",
+    "date": "2022-02-27",
+    "locality": "Bury St Edmunds",
+    "stationId": "03590",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "watford-half-marathon",
+    "date": "2022-02-06",
+    "locality": "Watford",
+    "stationId": "03672",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "wymondham-nyd-10k",
+    "date": "2022-01-01",
+    "locality": "Wymondham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "love-luton-half-marathon-10k",
+    "date": "2021-10-31",
+    "locality": "Luton",
+    "stationId": "03673",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "manchester-marathon",
+    "date": "2021-10-10",
+    "locality": "Manchester",
+    "stationId": "03334",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "bure-valley-10-miles",
+    "date": "2021-09-26",
+    "locality": "Banningham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "wymondham-20",
+    "date": "2021-09-12",
+    "locality": "Wymondham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "abp-southampton-marathon-festival",
+    "date": "2021-09-05",
+    "locality": "Southampton, Hampshire",
+    "stationId": "03865",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "woldingham-half-and-full-marathon-2016",
+    "date": "2021-08-29",
+    "locality": "Woldingham",
+    "stationId": "03781",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "clacton-half-marathon-10k",
+    "date": "2021-08-22",
+    "locality": "Clacton-on-Sea",
+    "stationId": "03590",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "milton-keynes-marathon",
+    "date": "2021-06-27",
+    "locality": "Milton Keynes",
+    "stationId": "EGTC0",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "city-of-norwich-half-marathon",
+    "date": "2021-06-13",
+    "locality": "Easton",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "valentines-10k",
+    "date": "2021-05-23",
+    "locality": "Easton",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "dead-sea-marathon-israel",
+    "date": "2020-02-07",
+    "locality": "Ein Bokek",
+    "stationId": "40296",
+    "timezone": "Asia/Jerusalem"
+  },
+  {
+    "eventSlug": "marrakech-marathon",
+    "date": "2020-01-26",
+    "locality": "Marrakesh",
+    "stationId": "60230",
+    "timezone": "Africa/Casablanca"
+  },
+  {
+    "eventSlug": "wymondham-nyd-10k",
+    "date": "2020-01-01",
+    "locality": "Wymondham",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "helsinki-marathon",
+    "date": "2019-08-24",
+    "locality": "Helsinki",
+    "stationId": "02978",
+    "timezone": "Europe/Helsinki"
+  },
+  {
+    "eventSlug": "great-yarmouth-half",
+    "date": "2019-08-11",
+    "locality": "Great Yarmouth",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "run-aintree",
+    "date": "2019-07-21",
+    "locality": "Liverpool",
+    "stationId": "03321",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "hackney-half-marathon",
+    "date": "2019-05-19",
+    "locality": "London",
+    "stationId": "EGLC0",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "geneva-marathon",
+    "date": "2019-05-12",
+    "locality": "Geneva",
+    "stationId": "06700",
+    "timezone": "Europe/Zurich"
+  },
+  {
+    "eventSlug": "madrid-marathon",
+    "date": "2019-04-27",
+    "locality": "Madrid",
+    "stationId": "08221",
+    "timezone": "Europe/Madrid"
+  },
+  {
+    "eventSlug": "city-of-norwich-half-marathon",
+    "date": "2019-04-07",
+    "locality": "Easton",
+    "stationId": "03492",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "wimborne-20",
+    "date": "2019-03-03",
+    "locality": "Wimborne",
+    "stationId": "03862",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "cebu-marathon",
+    "date": "2011-01-09",
+    "locality": "Cebu",
+    "stationId": "98646",
+    "timezone": "Asia/Manila"
+  },
+  {
+    "eventSlug": "brussels-airport-marathon",
+    "date": "2009-10-04",
+    "locality": "Brussels",
+    "stationId": "06451",
+    "timezone": "Europe/Brussels"
+  },
+  {
+    "eventSlug": "wa-adidas-stockholm-half-marathon-7236393",
+    "date": "2008-09-06",
+    "locality": "Stockholm",
+    "stationId": "02464",
+    "timezone": "Europe/Stockholm"
+  },
+  {
+    "eventSlug": "brentwood-half-marathon",
+    "date": "2008-03-09",
+    "locality": "Brentwood",
+    "stationId": "EGLC0",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "roding-valley-half-marathon",
+    "date": "2008-03-02",
+    "locality": "Woodford Green",
+    "stationId": "03772",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "ea-runevents-great-bentley-half-marathon-great-bentley",
+    "date": "2008-02-03",
+    "locality": "Great Bentley",
+    "stationId": "03590",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "burnham-beeches-half-marathon",
+    "date": "2007-08-19",
+    "locality": "Slough",
+    "stationId": "03772",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "ostersund-marathon",
+    "date": "2007-07-21",
+    "locality": "Östersund",
+    "stationId": "02226",
+    "timezone": "Europe/Stockholm"
+  },
+  {
+    "eventSlug": "brentwood-half-marathon",
+    "date": "2007-03-25",
+    "locality": "Brentwood",
+    "stationId": "03772",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "benfleet-15-historic",
+    "date": "2007-01-28",
+    "locality": "Benfleet",
+    "stationId": "03691",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "dartford-10-les-witton-memorial",
+    "date": "2007-01-21",
+    "locality": "Dartford",
+    "stationId": "03772",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "firstenergy-akron-marathon",
+    "date": "2006-09-30",
+    "locality": "Akron",
+    "stationId": "KAKR0",
+    "timezone": "America/New_York"
+  },
+  {
+    "eventSlug": "toronto-waterfront-marathon",
+    "date": "2006-09-24",
+    "locality": "Toronto",
+    "stationId": "71624",
+    "timezone": "America/Toronto"
+  },
+  {
+    "eventSlug": "burnham-beeches-half-marathon",
+    "date": "2006-08-20",
+    "locality": "Slough",
+    "stationId": "03772",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "london-marathon",
+    "date": "2006-04-23",
+    "locality": "London",
+    "stationId": "03772",
+    "timezone": "Europe/London"
+  },
+  {
+    "eventSlug": "brentwood-half-marathon",
+    "date": "2006-03-12",
+    "locality": "Brentwood",
+    "stationId": "03772",
+    "timezone": "Europe/London"
+  }
+]

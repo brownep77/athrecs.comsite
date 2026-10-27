@@ -51,6 +51,11 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Race weather timezones, missing data and compact layout
+        run: |
+          python scripts/verify-race-weather.py
+          node scripts/verify-race-weather.mjs
+
       - name: Verify profile setup, former clubs and staff alerts on mobile and desktop
         run: node --experimental-strip-types scripts/verify-profile-setup.mjs --browser
 
@@ -74,6 +79,8 @@ jobs:
       - name: Verify public catalogue source policy and reviewed duplicates
         run: node --experimental-strip-types scripts/verify-public-catalogue-content.mjs
 
+      - name: Withhold unconfirmed fixture distances
+        run: node scripts/verify-fixture-distance-publication.mjs
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
 

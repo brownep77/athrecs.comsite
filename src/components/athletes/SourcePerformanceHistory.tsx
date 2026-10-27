@@ -8,6 +8,7 @@ import { ResultDisqualification } from "./ResultDisqualification";
 import { HistoricalTiming } from "./ResultTiming";
 import { resultCredit } from "@/lib/athrecs/result-credit";
 import { publicProfileResultNotes } from "@/lib/athrecs/profile-source-presentation";
+import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
 
 export function SourcePerformanceHistory({
   histories,
@@ -43,11 +44,13 @@ export function SourcePerformanceHistory({
     .filter((row) => !row.profileExcluded)
     .sort((a, b) => b.year - a.year || b.date.localeCompare(a.date));
   const years = [...new Set(rows.map((row) => row.yearLabel || String(row.year)))].sort().reverse();
-  const disciplines = [...new Set(rows.map((row) => row.discipline))].sort();
+  const disciplines = [
+    ...new Set(rows.map((row) => profileDisciplineLabel(row.discipline))),
+  ].sort();
   const filtered = rows.filter(
     (row) =>
       (!year || (row.yearLabel || String(row.year)) === year) &&
-      (!discipline || row.discipline === discipline) &&
+      (!discipline || profileDisciplineLabel(row.discipline) === discipline) &&
       (!query ||
         [row.meeting, row.venue, row.discipline, row.performance]
           .join(" ")

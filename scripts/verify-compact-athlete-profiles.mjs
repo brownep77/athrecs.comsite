@@ -7,6 +7,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
+import { createMemoryHistory, createRootRoute, createRouter, RouterProvider } from "@tanstack/react-router";
+import { distanceAliasResults } from "./verify-profile-distance-aliases.mjs";
 process.env.DATABASE_URL = "";
 process.env.RESEND_API_KEY = "";
 process.env.VITE_AUTH_ENABLED = "true";
@@ -57,9 +59,19 @@ try {
   assert(!uncertainMarkup.includes('href="https://example.test/history"'), "Do not imply a missing row source links to an unrelated result");
   // Render the actual source cell with synthetic evidence. Provider credit must
   // retain the exact result URL and its fragment without creating permissions.
-  const { CompactResultsTable } = await server.ssrLoadModule(
+  const { CompactResultsTable, CompactResults } = await server.ssrLoadModule(
     "/src/components/athletes/CompactResultsTable.tsx",
   );
+  const aliasRouter = createRouter({
+    routeTree: createRootRoute({ component: () => createElement(CompactResults, { results: distanceAliasResults }) }),
+    history: createMemoryHistory({ initialEntries: ["/"] }),
+  });
+  await aliasRouter.load();
+  const aliasesMarkup = load(renderToStaticMarkup(createElement(RouterProvider, { router: aliasRouter })));
+  assert.deepEqual(aliasesMarkup('select[aria-label="Discipline"] option').map((_, el) => aliasesMarkup(el).text()).get(), ["All disciplines", "10K"]);
+  assert.equal(aliasesMarkup('tbody tr').length, 3, "All distinct races remain visible");
+  assert.equal(aliasesMarkup('[aria-label="PB"]').length, 1, "One PB across spellings");
+  assert.deepEqual(aliasesMarkup('td[data-label="Distance"]').map((_, el) => aliasesMarkup(el).text().trim()).get(), ["10KRoad", "10KRoad", "10KRoad"]);
   const originalResultUrl = "https://example.test/original-results.pdf#page=17";
   const corroboratingUrl = "https://example.test/corroborating-results#bib=42";
   const sourceRow = {

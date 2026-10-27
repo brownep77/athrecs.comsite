@@ -298,7 +298,17 @@ export function CompactDiscoveryPage({
               key={`${pathname}-${JSON.stringify(search)}`}
               className="mb-4 space-y-3"
             >
-              {search.q && <input type="hidden" name="q" value={search.q} />}
+              <label className="block space-y-1.5 text-xs font-semibold" htmlFor="compact-location-search">
+                <span>Race, town, county or region</span>
+                <input
+                  id="compact-location-search"
+                  name="q"
+                  type="search"
+                  defaultValue={search.q ?? ""}
+                  placeholder="Try Norfolk, Leinster or California"
+                  className={`${field} w-full`}
+                />
+              </label>
               <div className="grid grid-cols-2 items-end gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]">
                 <label
                   className="col-span-2 space-y-1.5 text-xs font-semibold sm:col-span-1"

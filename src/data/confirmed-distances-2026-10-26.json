@@ -1,0 +1,557 @@
+{
+  "wa-abbott-dash-to-the-finish-line-5k-7232364|2026-10-31": {
+    "summary": "Abbott Dash to the Finish Line 5K.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://prod.nyrr.org/races-and-events/2026/abbott-dash-to-the-finish-line-5k",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "08:30",
+        "note": "Official 2026 distance is 5K. First elite start 08:30; general runners from 08:45. Existing wave information retained.",
+        "sourceUrl": "https://prod.nyrr.org/races-and-events/2026/abbott-dash-to-the-finish-line-5k",
+        "label": "First elite start 08:30; general field from 08:45"
+      }
+    }
+  },
+  "wa-hamilton-marathon-road2hope-mizuno-elite-5km-7244346|2026-10-31": {
+    "summary": "Hamilton Road2Hope Mizuno Elite 5K.",
+    "timeZone": "America/Toronto",
+    "sourceUrl": "https://www.hamiltonmarathon.ca/the-races",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "09:30",
+        "note": "Elite 5K only; the separate mass-participation 5K starts at 10:00.",
+        "sourceUrl": "https://www.hamiltonmarathon.ca/the-races"
+      }
+    }
+  },
+  "ea-uk-fixtures-liddiard-trophy|2026-10-31": {
+    "summary": "Liddiard Trophy senior cross-country race.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5mi": {
+        "time": "14:15",
+        "note": "Senior men and women race five miles. U18 athletes run a separate 5K course in the junior league.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      }
+    }
+  },
+  "ea-uk-fixtures-north-west-london-cross-country-young-athletes-league|2026-10-31": {
+    "summary": "North West London junior cross-country league at Fryent Country Park.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "2K": {
+        "time": "13:00",
+        "note": "U12: 2,000 m.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      },
+      "3K": {
+        "time": "13:15",
+        "note": "U14: 3,000 m.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      },
+      "4K": {
+        "time": "13:45",
+        "note": "U16: 4,000 m.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      },
+      "5K": {
+        "time": "14:15",
+        "note": "U18: 5,000 m; a separate course from the simultaneous senior Liddiard Trophy.",
+        "sourceUrl": "https://www.queensparkharriers.org.uk/liddiard-2026"
+      }
+    }
+  },
+  "ea-uk-fixtures-ecca-national-cross-country-relay-championships|2026-10-31": {
+    "summary": "English Cross Country Relays at Berry Hill Park, Mansfield.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "3x2.5K relay - U18/U20 women": {
+        "time": "10:50",
+        "note": "Three legs of 2.5 km; U18 and U20 run together with separate classifications. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x2K relay - U14 boys": {
+        "time": "11:26",
+        "note": "Three legs of 2 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x2K relay - U14 girls": {
+        "time": "11:50",
+        "note": "Three legs of 2 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "4x1.6K mixed relay": {
+        "time": "12:15",
+        "note": "Four legs of 1.6 km; two men and two women. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x3K relay - U18/U20 men": {
+        "time": "12:40",
+        "note": "Three legs of 3 km; U18 and U20 run together with separate classifications. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x2K relay - U16 girls": {
+        "time": "13:06",
+        "note": "Three legs of 2 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x2K relay - U16 boys": {
+        "time": "13:30",
+        "note": "Three legs of 2 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "3x3K relay - senior women": {
+        "time": "13:50",
+        "note": "Three legs of 3 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      },
+      "4x5K relay - senior men": {
+        "time": "14:40",
+        "note": "Four legs of 5 km. Stored kilometres describe the total relay distance.",
+        "sourceUrl": "https://www.englishcrosscountry.co.uk/the-saucony-english-cross-country-relays/info/"
+      }
+    }
+  },
+  "the-petzl-night-runner-delamere|2026-10-31": {
+    "summary": "Petzl Night Runner at Delamere Forest.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://epicevents.co.uk/events/night-runner-delamere-forest/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "19:00",
+        "note": "Organiser advertises 10K, one lap, at 19:00.",
+        "sourceUrl": "https://epicevents.co.uk/events/night-runner-delamere-forest/"
+      },
+      "Half": {
+        "time": "18:00",
+        "note": "Organiser-advertised half marathon, two laps, at 18:00; not a certified-course assertion.",
+        "sourceUrl": "https://epicevents.co.uk/events/night-runner-delamere-forest/"
+      },
+      "1K": {
+        "time": null,
+        "note": "Epic Kidz 1K; event-day registration. Start remains unverified: organiser page and FAQ checked; competitor-notes link redirected to the same page; authorised ResultsBase page returned 403. Retry 2026-10-27.",
+        "sourceUrl": "https://epicevents.co.uk/events/night-runner-delamere-forest/"
+      }
+    }
+  },
+  "allithwaite-8|2026-11-07": {
+    "summary": "Allithwaite 8: approximately eight miles of mixed terrain.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.sientries.co.uk/event.php?elid=Y&event_id=18334",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "8mi (approx.)": {
+        "time": "11:00",
+        "note": "Authorised 2026 entry describes approximately eight miles / 13 km. This is an approximate route, not a measured eight-mile certification.",
+        "sourceUrl": "https://www.sientries.co.uk/event.php?elid=Y&event_id=18334"
+      }
+    }
+  },
+  "balexert-20km-de-geneve-1fcdaf97|2026-11-01": {
+    "summary": "Balexert 20km de Geneve, adult and junior running programme.",
+    "timeZone": "Europe/Zurich",
+    "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "20K": {
+        "time": "08:30",
+        "note": "20 km solo and relay options share the programme start; no duplicate relay distance row. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection"
+      },
+      "10K": {
+        "time": "12:00",
+        "note": "10 km solo and relay options; walking categories start separately and are not represented as running races. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection"
+      },
+      "2K": {
+        "time": "14:30",
+        "note": "Junior 2K waves: Ecoliers/Ecolieres 14:30; Poussins/Poussines A 14:45. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection",
+        "label": "Junior 2K waves: Ecoliers/Ecolieres 14:30; Poussins/Poussines A 14:45."
+      },
+      "1K": {
+        "time": "15:00",
+        "note": "Junior 1K waves: Poussins/Poussines B 15:00; Parents-Enfants A 15:10. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection",
+        "label": "Junior 1K waves: Poussins/Poussines B 15:00; Parents-Enfants A 15:10."
+      },
+      "500m": {
+        "time": "15:20",
+        "note": "Parents-Enfants B: 500 m. Latest dated 2026 programme used; old 2025 footer and generic junior start range are superseded by this timetable.",
+        "sourceUrl": "https://www.balexert20kmgeneve.com/bibcollection"
+      }
+    }
+  },
+  "utmb-world-series-mallorca|2026-10-30": {
+    "summary": "Mallorca by UTMB, 30 October to 1 November 2026.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://mallorca.utmb.world/races/100M",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "138K": {
+        "time": "22:00",
+        "note": "Serra de Tramuntana. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/100M"
+      }
+    }
+  },
+  "utmb-world-series-mallorca|2026-10-31": {
+    "summary": "Mallorca by UTMB, 30 October to 1 November 2026.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://mallorca.utmb.world/races/100K",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "104K": {
+        "time": "06:00",
+        "note": "Camins de pedra en sec. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/100K"
+      },
+      "56K": {
+        "time": "08:00",
+        "note": "Els Tres Mils. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/50K"
+      }
+    }
+  },
+  "utmb-world-series-mallorca|2026-11-01": {
+    "summary": "Mallorca by UTMB, 30 October to 1 November 2026.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://mallorca.utmb.world/races/20K",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "26K": {
+        "time": "09:00",
+        "note": "Camins de s’Arxiduc. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/20K"
+      },
+      "7K": {
+        "time": "09:00",
+        "note": "Memorial Guiem Sec. Actual advertised route distance used; UTMB category is not a measured race distance.",
+        "sourceUrl": "https://mallorca.utmb.world/races/memorial"
+      }
+    }
+  },
+  "east-anglian-xc-league-race-1|2026-10-28": {
+    "summary": "Cross-country at Chilton Fields, Stowmarket: approximately 4-mile and 5.6-mile courses.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://eaccl.org.uk/winter-events/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "4mi (approx.)": {
+        "time": "14:00",
+        "note": "Distance and programme checked 2026-10-26: Short course approximately 4 miles. Long course is a separate approximately 5.6-mile option. Both start 14:00 Europe/London. Distances are approximate, not certified measurements. Source: https://eaccl.org.uk/winter-events/.",
+        "publicNote": "Short course approximately 4 miles. Long course is a separate approximately 5.6-mile option. Both start 14:00 Europe/London. Distances are approximate, not certified measurements."
+      },
+      "5.6mi (approx.)": {
+        "time": "14:00",
+        "note": "Distance and programme checked 2026-10-26: Long course approximately 5.6 miles. Short course is a separate approximately 4-mile option. Both start 14:00 Europe/London. Distances are approximate, not certified measurements. Source: https://eaccl.org.uk/winter-events/.",
+        "publicNote": "Long course approximately 5.6 miles. Short course is a separate approximately 4-mile option. Both start 14:00 Europe/London. Distances are approximate, not certified measurements."
+      }
+    },
+    "place": {
+      "city": "Stowmarket",
+      "county": "Suffolk"
+    }
+  },
+  "north-district-xc-league-race-1-grantown|2026-10-31": {
+    "summary": "Cross-country at Anagach Woods, Grantown-on-Spey, with five course distances by age group.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://sites.google.com/view/the-northleague/31st-of-october-26-grantown",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "1.7K": {
+        "time": "13:15",
+        "note": "Distance and programme checked 2026-10-26: U12 girls start 13:15; U12 boys start 13:20. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "U12 girls start 13:15; U12 boys start 13:20. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "U12 girls 13:15; boys 13:20"
+      },
+      "3.4K": {
+        "time": "13:25",
+        "note": "Distance and programme checked 2026-10-26: U14 girls start 13:25; U14 boys start 13:35. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "U14 girls start 13:25; U14 boys start 13:35. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "U14 girls 13:25; boys 13:35"
+      },
+      "4.3K": {
+        "time": "13:45",
+        "note": "Distance and programme checked 2026-10-26: U16 girls and U18 women start 13:45; U16 boys start 14:00. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "U16 girls and U18 women start 13:45; U16 boys start 14:00. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "U16 girls / U18 women 13:45; U16 boys 14:00"
+      },
+      "5.7K": {
+        "time": "14:15",
+        "note": "Distance and programme checked 2026-10-26: U18 men start 14:15. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "U18 men start 14:15. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "U18 men 14:15"
+      },
+      "8K": {
+        "time": "14:15",
+        "note": "Distance and programme checked 2026-10-26: Senior men and women start 14:15. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London. Source: https://sites.google.com/view/the-northleague/31st-of-october-26-grantown.",
+        "publicNote": "Senior men and women start 14:15. Organiser Event Info 2026 V1 PDF, page 2, visually checked. All times Europe/London.",
+        "label": "Senior men and women 14:15"
+      }
+    },
+    "place": {
+      "city": "Grantown-on-Spey",
+      "county": "Highland"
+    }
+  },
+  "ea-uk-fixtures-north-yorkshire-and-south-durham-harrier-league|2026-10-31": {
+    "summary": "NYSD cross-country at Fox Rush Community Woodland, Redcar; distances and starts vary by age group.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "2K": {
+        "time": "11:00",
+        "note": "UK Fixtures fully licensed listing checked 2026-08-26.\n\nDistance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U10/U12 boys and girls. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U10/U12 boys and girls. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      },
+      "2.8K": {
+        "time": "11:10",
+        "note": "Distance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U14 boys and girls. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U14 boys and girls. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      },
+      "3.2K": {
+        "time": "11:20",
+        "note": "Distance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U16 boys and girls; one lap. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U16 boys and girls; one lap. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      },
+      "5.8K": {
+        "time": "11:35",
+        "note": "Distance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U18/senior/veteran women and U18/veteran 65 men; two laps. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U18/senior/veteran women and U18/veteran 65 men; two laps. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      },
+      "8.6K": {
+        "time": "12:15",
+        "note": "Distance and programme checked 2026-10-26: Fox Rush Community Woodland, Redcar. U20/senior/veteran men; three laps. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London. Source: https://docs.google.com/document/d/1XJHsvP1WBxlgQyrswPc9hr2jLzctENAaVWITJbe-EtE/edit.",
+        "publicNote": "Fox Rush Community Woodland, Redcar. U20/senior/veteran men; three laps. Official race instructions linked by participating club Thirsk and Sowerby Harriers; date and category-route tables checked, including PDF page 5. All starts Europe/London."
+      }
+    },
+    "place": {
+      "city": "Redcar",
+      "county": "North Yorkshire"
+    }
+  },
+  "phoenix-manchester-hoofs-horns-and-paws-charity-run|2026-10-31": {
+    "summary": "A seven-hour timed trail event at Hardy Farm, Manchester.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.phoenixrunning.co.uk/events/manchester-hoofs-horns-and-paws-charity-run",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "7H": {
+        "time": "08:30",
+        "note": "Distance and programme checked 2026-10-26: Seven-hour timed event, 08:30–15:30 Europe/London. Total distance varies. Lap length remains conflicting: organiser states 2.91 miles, authorised EventEntry page states 3.28 miles/5.3 km. Do not claim a fixed total or confirmed lap distance; retry 2026-10-27 against the final race briefing. Source: https://www.phoenixrunning.co.uk/events/manchester-hoofs-horns-and-paws-charity-run.",
+        "publicNote": "Seven-hour timed event, 08:30–15:30 Europe/London. Total distance varies. Lap length remains conflicting: organiser states 2.91 miles, authorised EventEntry page states 3.28 miles/5.3 km. Do not claim a fixed total or confirmed lap distance; retry 2026-10-27 against the final race briefing.",
+        "label": "7-hour window: 08:30–15:30"
+      }
+    }
+  },
+  "wt-2026-world-triathlon-para-cup-san-pedro-de-la-paz|2026-10-31": {
+    "summary": "Paratriathlon: 750 m swim, 20 km bike and 5 km run.",
+    "timeZone": "America/Santiago",
+    "sourceUrl": "https://www.wcsanpedro.cl/noticias/24466",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "750m swim / 20K bike / 5K run": {
+        "time": "07:30",
+        "note": "Start time checked 2026-10-25: 07:30 local. Official 2026 athlete guide, visually checked page 19: 31 October World Para Cup first category PTS5 men starts 07:30; other para waves continue to PTWC2 women at 08:53. Source: https://cms.triathlon.org/assets/bd9f1ecb-5835-4501-9cba-d7a27c712504.pdf. Previous start time: TBC.\n\nDistance and programme checked 2026-10-26: Organiser's 2026 technical course programme: 750 m swim, 20 km bike, 5 km run. Stored kilometres are the combined 25.75 km, not the run leg. Prior source-checked 07:30 first para wave is retained; individual waves vary (America/Santiago). Source: https://www.wcsanpedro.cl/noticias/24466.",
+        "publicNote": "Organiser's 2026 technical course programme: 750 m swim, 20 km bike, 5 km run. Stored kilometres are the combined 25.75 km, not the run leg. Prior source-checked 07:30 first para wave is retained; individual waves vary (America/Santiago).",
+        "label": "First para wave 07:30; category starts vary"
+      }
+    }
+  },
+  "buttermere-shepherds-meet|2026-10-25": {
+    "summary": "Buttermere Shepherds' Meet: 5K, 1K, 2K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.fellrunner.org.uk/races/f1455974-a939-4423-a5c3-b5cc6682b5ec",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "11:30",
+        "note": "Buttermere Shepherds’ Meet: 5 km fell race; 600 m climb. U16 and older on the senior course. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/f1455974-a939-4423-a5c3-b5cc6682b5ec"
+      },
+      "1K": {
+        "time": "10:30",
+        "note": "U10: 1 km, 80 m climb. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/f1455974-a939-4423-a5c3-b5cc6682b5ec"
+      },
+      "2K": {
+        "time": "",
+        "note": "U12/U14: 2 km, 200 m climb. The governing-body programme does not give a separate start time. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/f1455974-a939-4423-a5c3-b5cc6682b5ec"
+      }
+    }
+  },
+  "curbar-commotion|2026-10-03": {
+    "summary": "Curbar Commotion: 16.9K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.fellrunner.org.uk/races/098dd646-9845-4b30-b03d-ad6bc5731b96",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "16.9K": {
+        "time": "10:00",
+        "note": "Curbar Commotion: 16.9 km (10.5 miles rounded), one course. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/098dd646-9845-4b30-b03d-ad6bc5731b96"
+      }
+    }
+  },
+  "dalesrunner-40|2026-10-04": {
+    "summary": "DalesRunner 40: 42K (approx.).",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.sientries.co.uk/event.php?event_id=16437",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "42K (approx.)": {
+        "time": "10:00",
+        "note": "Cancelled due to low entry numbers, as stated on the authorised entry programme. The organiser describes the planned course as roughly 42 km. Planned main start 10:00; early start 09:30. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.sientries.co.uk/event.php?event_id=16437",
+        "label": "Cancelled; planned main start 10:00, early start 09:30"
+      }
+    }
+  },
+  "foto-thornbridge-outdoors-20|2026-10-03": {
+    "summary": "FOTO Thornbridge Outdoors 20: 20.3mi.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.sientries.co.uk/event/foto-thornbridge-outdoors-20-2026?elid=Y",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "20.3mi": {
+        "time": "10:00",
+        "note": "20.3-mile course. Mass start for runners at 10:00; runners not competing for prizes (except V70) may start 08:00–09:30. The 07:00–08:00 window is for walkers. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.sientries.co.uk/event/foto-thornbridge-outdoors-20-2026?elid=Y",
+        "label": "Mass start 10:00; noncompetitive runners 08:00–09:30"
+      }
+    }
+  },
+  "grewelthorpe-multiterrain-race|2026-10-11": {
+    "summary": "Grewelthorpe Multiterrain Race: 13K (approx.).",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://racebest.com/races/azhts",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "13K (approx.)": {
+        "time": "11:00",
+        "note": "Grewelthorpe multiterrain course: approximately 13 km, as described by the organiser; authorised entry programme confirms 11:00 on 11 October 2026. Source checked 26 October 2026.",
+        "sourceUrl": "https://racebest.com/races/azhts"
+      }
+    }
+  },
+  "keynsham-dandy|2026-10-18": {
+    "summary": "Keynsham Dandy: 12.5mi.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.sientries.co.uk/event/keynsham-dandy-2026-2026?pid=GoogleEvents",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "12.5mi": {
+        "time": "10:00",
+        "note": "12.5-mile trail course. Main race starts at 10:00; three canicross waves depart beforehand, with no exact wave times supplied. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.sientries.co.uk/event/keynsham-dandy-2026-2026?pid=GoogleEvents",
+        "label": "Main race 10:00; canicross waves beforehand"
+      }
+    }
+  },
+  "langdale-horseshoe|2026-10-10": {
+    "summary": "Langdale Horseshoe: 21K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.fellrunner.org.uk/races/f261c925-3294-440e-8881-eb28f86fad10",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "21K": {
+        "time": "11:00",
+        "note": "Langdale Horseshoe: 21 km (13 miles rounded), with 1,450 m climb. The governing-body distance is 21 km, not a certified half marathon. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/f261c925-3294-440e-8881-eb28f86fad10"
+      }
+    }
+  },
+  "mendip-muddle|2026-10-25": {
+    "summary": "Mendip Muddle: 20K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.fellrunner.org.uk/races/86d29062-78ca-4852-912c-aabf00d279ff",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "20K": {
+        "time": "10:30",
+        "note": "Mendip Muddle: 20 km (12.4 miles rounded), one course with 420 m climb. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.fellrunner.org.uk/races/86d29062-78ca-4852-912c-aabf00d279ff"
+      }
+    }
+  },
+  "morven-hill-race|2026-10-03": {
+    "summary": "Morven Hill Race: 8.8K, 4K, 1.8K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.deesiderunners.com/races/morven/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "8.8K": {
+        "time": "13:00",
+        "note": "Full Morven: 8.8 km. The organiser’s edition-specific 2026 programme supersedes the older 8 km calendar description. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.deesiderunners.com/races/morven/"
+      },
+      "4K": {
+        "time": "13:00",
+        "note": "Half Morven: 4 km for seniors, U18 and U16. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.deesiderunners.com/races/morven/"
+      },
+      "1.8K": {
+        "time": "13:10",
+        "note": "Mini Morven: 1.8 km for U14 and U12. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.deesiderunners.com/races/morven/"
+      }
+    }
+  },
+  "tavy-7|2026-10-25": {
+    "summary": "Tavy 7: 7mi, 1mi (approx.).",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.entrycentral.com/tavy7",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "7mi": {
+        "time": "11:00",
+        "note": "Tavy 7: seven-mile road race, 11:00 on 25 October 2026. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.entrycentral.com/tavy7"
+      },
+      "1mi (approx.)": {
+        "time": "",
+        "note": "Approximately one-mile family fun run, starting after the main race has cleared the field. No exact clock time is confirmed. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.entrycentral.com/tavy7fun",
+        "label": "After the 11:00 main race has cleared the field"
+      }
+    }
+  },
+  "the-stickler|2026-10-25": {
+    "summary": "The Stickler: 10.1mi.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.dorsetdoddlers.org/the-stickler",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10.1mi": {
+        "time": "10:30",
+        "note": "The Stickler: 10.1-mile off-road course; organiser’s 2026 welcome confirms 25 October, 10:30. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.dorsetdoddlers.org/the-stickler"
+      }
+    }
+  },
+  "yetholm-shepherds-show-race|2026-10-03": {
+    "summary": "Yetholm Shepherds Show Race: 6.5K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.yetholmshow.co.uk/enter-the-show",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "6.5K": {
+        "time": "12:45",
+        "note": "Shepherds Show hill race: 6.5 km. The opened 2026 organiser programme gives 12:45, superseding the earlier stored 11:45 and stale search text. Source checked 26 October 2026.",
+        "sourceUrl": "https://www.yetholmshow.co.uk/enter-the-show"
+      }
+    }
+  }
+}

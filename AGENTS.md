@@ -10,6 +10,14 @@
 
 ## Fixture dates and start times
 
+- Owner instruction, 26 October 2026: all published race fixtures need a confirmed
+  distance. Research each edition against its organiser, authorised entry programme
+  or governing body. Do not infer distance from a race name. Keep unresolved
+  upcoming race editions in staff review and out of public fixtures, announcements
+  and calendar exports. Split multi-distance and age-category programmes accurately.
+  Timed races retain their confirmed duration; never invent a fixed total.
+  Review source evidence separately from automated completeness screening.
+
 - Owner instruction, 25 October 2026: every race within the next **three calendar
   months** requires exhaustive reasonable start-time research. Follow
   `docs/fixture-geography/start-time-process.md` for all sports/countries and
@@ -168,3 +176,15 @@ publication and personal-best calculations in this repository.
   Apply the public catalogue projection before returning fixture or result data;
   never treat a directory URL as an official entry/results fallback. Keep the
   primary-source publication guard in force.
+
+## Fixture counties and regions
+
+- Owner instruction, 26 October 2026: show county/local administrative area before
+  the broader region on fixtures, with both searchable. Start with UK and Ireland
+  and support equivalent county/state/province hierarchies elsewhere. Keep country,
+  county and region distinct. Do not put source-directory regions into county.
+- Follow `docs/fixture-geography/county-region-process.md`. Exact recorded-locality
+  enrichment is not a fresh venue check. Inspect the actual venue when the marketed
+  city differs, boundaries are involved, or an event uses several starts/venues.
+  Do not guess a county from a title, fuzzy place match, organiser HQ or first
+  geocoder result. Preserve sources, original fields and unresolved review reasons.

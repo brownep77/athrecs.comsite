@@ -1,3 +1,4 @@
+import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
 import type { SportFixtureScope, SportFixtureSearch } from "./sport-pages";
@@ -28,6 +29,7 @@ export type SportFixture = {
   town: string | null;
   county: string | null;
   state: string | null;
+  region?: string | null;
   country: string | null;
   website: string | null;
   summary: string;
@@ -54,6 +56,7 @@ export async function readSportFixtures(
   input: SportFixtureScope & SportFixtureSearch,
   today: string,
 ) {
+  const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
   const q = input.q ? `%${input.q.replace(/[\\%_]/g, "\\$&")}%` : null;
   const page = input.page ?? 1;
   const month = parseSportFixtureSearch({ month: input.month }).month;
@@ -75,6 +78,7 @@ export async function readSportFixtures(
        to_char(ed.event_date, 'YYYY-MM') as month
      from events e join editions ed on ed.event_id = e.id
      where e.sport = any($1::text[]) and ed.event_date >= $2::date
+       and not (ed.id = any($8::int[]))
        and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($5::text[]))
        and not (coalesce(e.slug, '') = any($4::text[]))
        and ($3::text[] is null or e.surface = any($3::text[]))
@@ -88,6 +92,7 @@ export async function readSportFixtures(
       withheldFixtureDateKeys,
       input.broadRunning === true,
       ATHLETICS_RUNNING_SURFACES,
+      heldDistanceIds,
     ],
   );
   const distanceCodes = [
@@ -115,13 +120,14 @@ export async function readSportFixtures(
     event_date: string;
     city: string | null;
     county: string | null;
+    region: string | null;
     country: string | null;
     website: string | null;
     starts_json: string;
   }>(
     `
     select e.id as event_id, e.slug, e.summary, e.sport, e.name, ed.event_date::text as event_date,
-      e.city, e.county, e.country, e.website,
+      e.city, e.county, e.region, e.country, e.website,
       json_agg(json_build_object(
           'editionId', ed.id, 'distance', ed.distance_code, 'distanceKm', ed.distance_km,
           'status', ed.status, 'time', ed.start_time, 'sourceUrl', ed.source_url,
@@ -130,16 +136,17 @@ export async function readSportFixtures(
         order by ed.start_time nulls last, ed.distance_code, ed.id)::text as starts_json
     from events e join editions ed on ed.event_id = e.id
     where e.sport = any($1::text[]) and ed.event_date >= $2::date
+      and not (ed.id = any($14::int[]))
       and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($10::text[]))
       and not (coalesce(e.slug, '') = any($9::text[]))
-      and ($3::text is null or e.name ilike $3 or e.city ilike $3 or e.county ilike $3 or e.country ilike $3)
+      and ($3::text is null or e.name ilike $3 or e.city ilike $3 or e.county ilike $3 or e.region ilike $3 or e.country ilike $3)
       and ($6::text[] is null or e.surface = any($6::text[]))
       and ($7::text[] is null or btrim(e.country) = any($7::text[]))
       and ($8::text[] is null or btrim(ed.distance_code) = any($8::text[]))
       and ($11::date is null or (ed.event_date >= $11::date and ed.event_date < $11::date + interval '1 month'))
       and (not $12::boolean or e.sport = 'Running'
         or (e.sport = 'Athletics' and e.surface = any($13::text[])))
-    group by e.id, e.slug, e.summary, e.sport, e.name, ed.event_date, e.city, e.county, e.country, e.website
+    group by e.id, e.slug, e.summary, e.sport, e.name, ed.event_date, e.city, e.county, e.region, e.country, e.website
     order by ed.event_date, e.name, e.id
     limit $4 offset $5
   `,
@@ -157,6 +164,7 @@ export async function readSportFixtures(
       month ? `${month}-01` : null,
       input.broadRunning === true,
       ATHLETICS_RUNNING_SURFACES,
+      heldDistanceIds,
     ],
   );
   // Options cover the whole upcoming sport catalogue, not just the current page
@@ -202,6 +210,7 @@ export async function readSportFixtures(
           town: detail?.place?.town ?? null,
           city,
           county,
+          region: row.region,
           state: detail?.place?.state ?? null,
           country: countryName,
           website: publicHttpUrl(detail?.sourceUrl ?? row.website),
@@ -243,6 +252,7 @@ export async function readSportFixtures(
                         website: publicHttpUrl(row.website),
                         city,
                         county,
+                        region: row.region,
                         country: countryName,
                       },
                       row.event_date,
@@ -262,7 +272,7 @@ export async function readSportFixtures(
                 endTime: start.endTime,
                 sourceUrl,
                 checkedAt: checked ? detail.checkedAt : null,
-                note: checked?.note ?? null,
+                note: checked?.publicNote ?? checked?.note ?? null,
                 label,
                 calendarRace,
               };

@@ -4,7 +4,8 @@ import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOver
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { PublicAthletePreview } from "@/components/athletes/PublicAthletePreview";
-import { AthleteBusinessLink } from "@/components/athletes/AthleteBusinessLink";
+import { AthleteBiography } from "@/components/athletes/AthleteBiography";
+import { biographyParagraphs } from "@/lib/athrecs/biography-presentation";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
@@ -521,19 +522,15 @@ function AthleteContent() {
               </Badge>
             ))}
         </div>
-        {career ? (
-          <div className="space-y-2">
-            <h2 className="text-sm font-semibold">Biography</h2>
-            {career.biography.map((paragraph) => (
-              <p key={paragraph} className="text-sm leading-relaxed text-muted">
-                {paragraph}
-              </p>
-            ))}
-            <AthleteBusinessLink slug={athlete.slug} />
-          </div>
-        ) : (
-          <p className="text-sm leading-relaxed text-muted">{bio}</p>
-        )}
+        <AthleteBiography
+          slug={athlete.slug}
+          paragraphs={
+            data.kind === "published-history" && data.publishedBiography
+              ? biographyParagraphs(data.publishedBiography)
+              : (career?.biography ?? biographyParagraphs(bio))
+          }
+          presentation={data.preview?.biographyPresentation}
+        />
         {athlete.slug === "mo-farah" && !athlete.is_claimed ? (
           <p className="text-xs text-subtle">
             Independent ATHRECS profile. Not athlete-claimed; no endorsement is implied.

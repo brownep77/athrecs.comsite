@@ -11,7 +11,7 @@ import { ProfileDetails } from "./ProfileDetails";
 import { Badge } from "@/components/ui/badge";
 import { ShareProfileButton } from "./ShareProfileButton";
 import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
-import { AthleteBusinessLink } from "./AthleteBusinessLink";
+import { AthleteBiography } from "./AthleteBiography";
 import { AchievementSummary } from "./AchievementSummary";
 import { AchievementVerification } from "./AchievementVerification";
 import { AnzChampionshipMedals } from "./AnzChampionshipMedals";
@@ -68,17 +68,11 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             nationality={profile.nationality ?? undefined}
           />
         ) : null}
-        {biography.length ? (
-          <div className="space-y-2">
-            <h2 className="text-sm font-semibold">Biography</h2>
-            {biography.map((paragraph, index) => (
-              <p key={index} className="text-sm leading-relaxed text-muted">
-                {paragraph}
-              </p>
-            ))}
-            <AthleteBusinessLink slug={profile.slug} />
-          </div>
-        ) : null}
+        <AthleteBiography
+          slug={profile.slug}
+          paragraphs={biography}
+          presentation={profile.biographyPresentation}
+        />
         <ShareProfileButton
           path={`/athletes/${encodeURIComponent(profile.slug)}`}
           title={profile.displayName}

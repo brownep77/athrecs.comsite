@@ -14,6 +14,14 @@ A failed publication is rolled back by Postgres, so an import cannot leave only
 some companion files or rows live. Each successful batch creates a revision
 with before/after snapshots.
 
+Source review may mark an unpublished batch `invalid` and retain a
+`sourceReviewHold` object in its validation summary, with the reason, reviewer,
+checked date, affected natural keys and resolving batch. Validation and publication
+both refuse that batch, even if its status is changed back to `ready`. Preserve its
+payload, hash and staged rows; restage reviewed, reconciled rows as a new batch.
+This keeps confirmed duplicate courses or wrong canonical identities from returning
+through an older queued import.
+
 ## Rollback limits
 
 Only the latest revision may be rolled back. The rollback refuses to delete an

@@ -15,6 +15,7 @@ on:
       - "src/routes/admin/event-register.tsx"
       - "migrations/*race_edit*"
       - "scripts/verify-race-page-rollout.mjs"
+      - "scripts/verify-race-organiser-urls.mjs"
       - "scripts/verify-race-edit*"
       - ".github/workflows/race-page-rollout.yml"
   workflow_dispatch:
@@ -37,6 +38,7 @@ jobs:
       - run: npx tsc --noEmit
       - run: node scripts/verify-race-page-rollout.mjs
       - run: node scripts/verify-race-page-schema.mjs
+      - run: node scripts/verify-race-organiser-urls.mjs
       - run: node scripts/verify-page-biographies.mjs
       - run: node scripts/verify-hamburg-race-example.mjs
       - run: node scripts/verify-road-marathon-guides.mjs

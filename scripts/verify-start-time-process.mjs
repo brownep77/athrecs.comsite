@@ -10,6 +10,7 @@ import { parseResearch, buildResearchPrompt } from "../src/lib/race-collector/re
 for (const [today, end] of [
   ["2026-10-25", "2027-01-25"],
   ["2026-10-26", "2027-01-26"],
+  ["2026-10-27", "2027-01-27"],
   ["2026-01-31", "2026-04-30"],
   ["2027-11-30", "2028-02-29"],
   ["2026-11-30", "2027-02-28"],
@@ -20,18 +21,18 @@ for (const bad of ["2026-02-30", "2026-13-01", "2026-1-01", ""])
   assert.throws(() => startTimeReviewThrough(bad));
 assert.equal(startTimeReviewToday(new Date("2026-06-01T23:30:00Z")), "2026-06-02");
 assert.equal(startTimeReviewToday(new Date("2026-12-01T23:30:00Z")), "2026-12-01");
-const today = "2026-10-26";
+const today = "2026-10-27";
 for (const [date, priority] of [
-  ["2026-10-25", null],
+  ["2026-10-26", null],
   [today, 0],
-  ["2026-10-28", 0],
-  ["2026-10-29", 1],
-  ["2026-11-02", 1],
-  ["2026-11-03", 2],
-  ["2026-11-25", 2],
-  ["2026-11-26", 3],
-  ["2027-01-26", 3],
-  ["2027-01-27", null],
+  ["2026-10-29", 0],
+  ["2026-10-30", 1],
+  ["2026-11-03", 1],
+  ["2026-11-04", 2],
+  ["2026-11-26", 2],
+  ["2026-11-27", 3],
+  ["2027-01-27", 3],
+  ["2027-01-28", null],
   ["2026-02-30", null],
 ])
   assert.equal(startTimeReviewPriority(date, today), priority);
@@ -59,8 +60,8 @@ const candidate = {
   entryStatus: "Closed",
 };
 const candidates = [
-  { ...candidate, name: "Beyond window", date: "2027-01-27" },
-  { ...candidate, name: "Boundary", date: "2027-01-26" },
+  { ...candidate, name: "Beyond window", date: "2027-01-28" },
+  { ...candidate, name: "Boundary", date: "2027-01-27" },
   { ...candidate, name: "Invalid start", startTime: "Other" },
   { ...candidate, name: "Known start", startTime: "09:30" },
 ];
@@ -92,7 +93,7 @@ const prompt = buildResearchPrompt(
   [],
   today,
 );
-assert(prompt.includes("2026-10-26 through 2027-01-26 inclusive"));
+assert(prompt.includes("2026-10-27 through 2027-01-27 inclusive"));
 assert(prompt.includes("athlete guide and linked PDFs"));
 assert(prompt.includes("attempted URL with its outcome"));
 assert(prompt.includes("retry date"));

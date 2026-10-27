@@ -1,3 +1,10 @@
+import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
+import {
+  fixtureDistanceLabel,
+  fixtureDistanceBadges,
+  PLACEHOLDER,
+  RACE_FORMAT,
+} from "./fixture-distance-policy.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { withheldFixtureDateKeys } from "@/data/fixture-date-reviews";
 import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
@@ -183,7 +190,7 @@ export const listEventRegions = createServerFn({ method: "GET" })
           country,
         ),
       )
-      .map((row) => row.region?.trim() || row.county?.trim())
+      .flatMap((row) => [row.county?.trim(), row.region?.trim()])
       .filter((value): value is string => Boolean(value))
       .filter((value) => value.toLowerCase() !== country.toLowerCase());
 
@@ -224,6 +231,7 @@ export const listEvents = createServerFn({ method: "GET" })
     const rawQ = data.q?.trim() ?? "";
     const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
     const today = todayIso();
+    const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
     const upcomingOnly = data.upcomingOnly === true;
     const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
     const offset = Math.min(Math.max(Math.floor(data.offset ?? 0), 0), 10_000);
@@ -244,12 +252,14 @@ export const listEvents = createServerFn({ method: "GET" })
     const rows = await sql<
       Omit<EventListItem, "groups"> & {
         distances_csv: string | null;
+        next_distance_km: number | null;
         groups_json: string | RaceGroupInfo[] | null;
       }
     >`
       with scoped_editions as not materialized (
         select * from editions
-        where not exists (select 1 from events reviewed where reviewed.id=editions.event_id and (reviewed.slug || '|' || editions.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
+        where not (id = any(${heldDistanceIds}::int[]))
+          and not exists (select 1 from events reviewed where reviewed.id=editions.event_id and (reviewed.slug || '|' || editions.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           and (${shortRaces}::boolean is false or (
           event_date between '2026-09-10'::date and '2027-01-31'::date
           and distance_code in ('5K', '10K')
@@ -260,7 +270,7 @@ export const listEvents = createServerFn({ method: "GET" })
           and (${distance}::text is null or distance_code = ${distance})
       )
       select
-        e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
+        e.id, e.slug, e.name, e.sport, e.country, e.county, e.region, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
         (
           select string_agg(d.distance_code, ',' order by d.distance_code)
@@ -295,6 +305,11 @@ export const listEvents = createServerFn({ method: "GET" })
           order by ed.event_date asc limit 1
         ) as next_distance,
         (
+          select ed.distance_km from scoped_editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+          order by ed.event_date asc limit 1
+        ) as next_distance_km,
+        (
           select ed.status from scoped_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
@@ -317,6 +332,13 @@ export const listEvents = createServerFn({ method: "GET" })
       where
         (${sport}::text is null or e.sport = ${sport})
         and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
+        and (
+          not exists (select 1 from editions recorded where recorded.event_id = e.id)
+          or exists (
+            select 1 from editions visible where visible.event_id = e.id
+              and not ((e.slug || '|' || visible.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
+          )
+        )
         and (${shortRaces}::boolean is false or (
           e.sport = 'Running'
           and e.country in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland', 'Ireland')
@@ -328,6 +350,7 @@ export const listEvents = createServerFn({ method: "GET" })
           or lower(e.city) like ${q}
           or lower(e.sport) like ${q}
           or lower(e.county) like ${q}
+          or lower(e.region) like ${q}
           or lower(e.country) like ${q}
           or lower(e.surface) like ${q}
           or exists (
@@ -409,7 +432,11 @@ export const listEvents = createServerFn({ method: "GET" })
         const { groups_json, ...r } = rawRow;
         const distances = sanitizeDistances(
           r.name,
-          r.distances_csv ? r.distances_csv.split(",") : [],
+          (r.distances_csv ? r.distances_csv.split(",") : [])
+            .map((code) =>
+              fixtureDistanceLabel(code, code === r.next_distance ? r.next_distance_km : null),
+            )
+            .filter((code) => !PLACEHOLDER.test(code) && !RACE_FORMAT.test(code)),
         );
         return {
           ...r,
@@ -420,7 +447,9 @@ export const listEvents = createServerFn({ method: "GET" })
           next_distance:
             r.next_distance === "Marathon" && !distances.includes("Marathon")
               ? (distances[0] ?? r.next_distance)
-              : r.next_distance,
+              : r.next_distance
+                ? fixtureDistanceLabel(r.next_distance, r.next_distance_km)
+                : null,
         };
       })
       .filter((row): row is NonNullable<typeof row> => row !== null);
@@ -457,6 +486,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data: slug }) => {
     const sql = await ready();
     const today = todayIso();
+    const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
     const events = await eventByPublicSlug(sql, twoOceansSourceSlug(slug));
     const event = events[0] as
       | {
@@ -605,6 +635,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ) as spectator_access_json
       from editions ed
       where ed.event_id = ${event.id}
+        and not (ed.id = any(${heldDistanceIds}::int[]))
         and not ((${event.slug} || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
       order by
         ed.event_date desc,
@@ -653,7 +684,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       }
     >`
       select
-        e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
+        e.id, e.slug, e.name, e.sport, e.country, e.county, e.region, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
         (
           select string_agg(d.distance_code, ',' order by d.distance_code)
@@ -676,30 +707,35 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         (
           select ed.event_date::text from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_date,
         (
           select ed.distance_code from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_distance,
         (
           select ed.status from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_status,
         (
           select ed.start_time from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
           order by ed.event_date asc limit 1
         ) as next_start_time,
         (
           select count(*)::int from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         ) as upcoming_count,
         (
@@ -710,6 +746,13 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       from events e
       where e.id <> ${event.id}
         and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
+        and (
+          not exists (select 1 from editions recorded where recorded.event_id = e.id)
+          or exists (
+            select 1 from editions visible where visible.event_id = e.id
+              and not ((e.slug || '|' || visible.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
+          )
+        )
         and e.sport = ${event.sport}
         and (
           lower(coalesce(e.city, '')) = lower(${event.city})
@@ -720,6 +763,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         (
           select min(ed.event_date) from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
+            and not (ed.id = any(${heldDistanceIds}::int[]))
             and not ((e.slug || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         ) asc nulls last
       limit 8
@@ -743,20 +787,11 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         {
           event,
           groups,
-          distances: distances
-            .filter((d) => {
-              const matching = editionRows.filter(
-                (edition) => edition.distance_code === d.distance_code,
-              );
-              return (
-                !matching.length ||
-                matching.some(
-                  (edition) =>
-                    !isReviewedFixturePlaceholder(slug, edition.event_date, d.distance_code),
-                )
-              );
-            })
-            .map((d) => d.distance_code),
+          distances: fixtureDistanceBadges(
+            event.sport,
+            distances.map((distance) => distance.distance_code),
+            editions,
+          ),
           upcoming,
           past: editions.filter((e) => e.event_date < today),
           related,
@@ -1266,6 +1301,8 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
       const { getEditorialAthleteCareer } = await import("@/data/freddy-richardson");
       const career = getEditorialAthleteCareer(profile.athlete.slug);
       const { athleteSearchContent } = await import("./athlete-search-content");
+      const { biographyParagraphs } = await import("./biography-presentation");
+      const { reviewedBiographyPresentation } = await import("./reviewed-biography.server");
       return buildPublicAthletePreview({
         slug: profile.athlete.slug,
         displayName: profile.athlete.display_name,
@@ -1284,8 +1321,13 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
           : undefined,
         sports: profile.athlete.sports,
         biography: profile.shareBiography
-          ? (career?.biography ?? [profile.publishedBiography || athleteSearchContent(profile).bio])
+          ? profile.publishedBiography
+            ? biographyParagraphs(profile.publishedBiography)
+            : (career?.biography ?? [athleteSearchContent(profile).bio])
           : [],
+        biographyPresentation: profile.shareBiography
+          ? reviewedBiographyPresentation(profile.athlete.slug, profile.publishedBiography)
+          : undefined,
         biographySources: profile.shareBiography ? career?.biographySources : [],
         results: profile.profileResults,
         histories: profile.sourceHistories,
@@ -1502,6 +1544,7 @@ export const getHomeStats = createServerFn({ method: "GET" }).handler(async () =
 export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(async () => {
   const sql = await ready();
   const today = todayIso();
+  const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
   const rows = await sql<{
     id: string;
     kind: "fixture" | "results";
@@ -1527,7 +1570,9 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
         event.county,
         event.city,
         edition.event_date,
-        edition.distance_code,
+        case when edition.distance_km > 0 and
+          (btrim(edition.distance_code) ~* ${PLACEHOLDER.source} or btrim(edition.distance_code) ~* ${RACE_FORMAT.source})
+          then edition.distance_km::text || 'K' else edition.distance_code end as distance_code,
         edition.status,
         row_number() over (
           partition by event.id
@@ -1536,6 +1581,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       from events event
       join editions edition on edition.event_id = event.id
       where edition.event_date >= ${today}::date
+        and not (edition.id = any(${heldDistanceIds}::int[]))
         and not ((event.slug || '|' || edition.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         and not (event.slug = any(${retainedFixtureAliasSlugs}::text[]))
     ),
@@ -1792,6 +1838,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
     const region = data.region?.trim() || null;
     const today = todayIso();
+    const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, today);
     const upcomingOnly = data.upcomingOnly !== false;
     const limit = Math.min(Math.max(data.limit ?? 24, 1), 80);
     const fetchLimit = Math.min(limit * 3, 120);
@@ -1812,6 +1859,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       id: number;
       event_date: string;
       distance_code: string;
+      distance_km: number;
       status: string;
       start_time: string | null;
       event_slug: string;
@@ -1819,6 +1867,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       sport: string;
       city: string;
       county: string;
+      region: string | null;
       country: string;
       area: string;
       surface: string;
@@ -1828,6 +1877,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         ed.id,
         ed.event_date::text as event_date,
         ed.distance_code,
+        ed.distance_km,
         ed.status,
         ed.start_time,
         e.slug as event_slug,
@@ -1835,6 +1885,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         e.sport,
         e.city,
         e.county,
+        e.region,
         e.country,
         e.area,
         e.surface,
@@ -1856,6 +1907,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       join events e on e.id = ed.event_id
       where
         (${upcomingOnly}::boolean is false or ed.event_date >= ${today}::date)
+        and not (ed.id = any(${heldDistanceIds}::int[]))
         and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
         and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any(${withheldFixtureDateKeys}::text[]))
         and (
@@ -1863,6 +1915,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           or lower(e.name) like ${q}
           or lower(e.city) like ${q}
           or lower(e.county) like ${q}
+          or lower(e.region) like ${q}
           or lower(e.country) like ${q}
           or lower(e.area) like ${q}
           or lower(e.surface) like ${q}
@@ -1941,7 +1994,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
             row.distance_code,
             row.start_time,
           ),
-          distance_code: labels.join(" · ") || distanceCode,
+          distance_code: fixtureDistanceLabel(labels.join(" · ") || distanceCode, row.distance_km),
           groups: parseRaceGroups(groups_json),
         };
       });

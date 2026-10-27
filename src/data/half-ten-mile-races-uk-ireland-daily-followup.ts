@@ -40,6 +40,7 @@ const CURRENT_OFFICIAL_ENTRY_SCAN_CHECKED_AT = "2026-10-22";
 const CURRENT_DORNEY_REFRESH_CHECKED_AT = "2026-10-23";
 const CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT = "2026-10-24";
 const CURRENT_START_AND_DISCOVERY_CHECKED_AT = "2026-10-25";
+const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -70,6 +71,105 @@ type RaceSeed = {
 };
 
 const seeds: RaceSeed[] = [
+  {
+    slug: "st-annes-10-mile-run-2027",
+    name: "St Annes 10 Mile Run 2027",
+    date: "2027-01-24",
+    distance: "10mi",
+    startTime: "10:30",
+    country: "England",
+    county: "Lancashire",
+    city: "Lytham St Annes",
+    area: "The Dalmeny Hotel, South Promenade",
+    surface: "Road",
+    organiser: "Tim Armit / BookitZone",
+    url: "https://bookitzone.com/tim_armit/dYjFFX",
+    entryUrl: "https://bookitzone.com/tim_armit/dYjFFX",
+    priceAmount: 30.12,
+    checkedAt: CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The authorised direct-entry page consistently confirms the officially measured 10-mile road race on 24 January 2027, its 10:30 start at the Dalmeny Hotel and open affiliated entry from £30.12.",
+  },
+  {
+    slug: "morecambe-series-half-marathon-5k-2027",
+    name: "Morecambe Series Half Marathon & 5K 2027",
+    date: "2027-05-02",
+    distance: "Half",
+    startTime: "11:00",
+    country: "England",
+    county: "Lancashire",
+    city: "Morecambe",
+    area: "Bare Methodist Church Hall, St Margaret's Road",
+    surface: "Road",
+    distances: ["Half", "5K"],
+    organiser: "Lancaster Race Series / BookitZone",
+    url: "https://bookitzone.com/helen_mcgregor_2/BPjFFX",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/BPjFFX",
+    priceAmount: 34.84,
+    checkedAt: CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The organiser calendar and authorised direct-entry page consistently confirm the half marathon and 5K on 2 May 2027, their shared 11:00 start and open affiliated half-marathon entry from £34.84.",
+  },
+  {
+    slug: "3-1-5-father-s-day-10k-half-marathon-lancaster",
+    name: "3-1-5 Father's Day 10K & Half Marathon",
+    date: "2027-06-20",
+    distance: "Half",
+    startTime: "11:00",
+    country: "England",
+    county: "Lancashire",
+    city: "Lancaster",
+    area: "3-1-5 Health Club, Caton Road",
+    surface: "Road",
+    distances: ["Half", "10K", "1K"],
+    organiser: "Lancaster Race Series / BookitZone",
+    url: "https://bookitzone.com/helen_mcgregor_2/qcEFFX",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/qcEFFX",
+    priceAmount: 34.84,
+    checkedAt: CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The organiser calendar and authorised direct-entry page consistently confirm the half marathon, 10K and fun run on 20 June 2027. The half marathon and 10K share the 11:00 start; open affiliated half entry starts at £34.84. The established live canonical slug is reused.",
+  },
+  {
+    slug: "george-and-dragon-riverside-half-marathon-10k-2027",
+    name: "George & Dragon Riverside Half Marathon & 10K 2027",
+    date: "2027-08-01",
+    distance: "Half",
+    startTime: "11:00",
+    country: "England",
+    county: "Lancashire",
+    city: "Lancaster",
+    area: "George & Dragon, St George's Quay",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    organiser: "Lancaster Race Series / BookitZone",
+    url: "https://bookitzone.com/helen_mcgregor_2/LcEFFX",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/LcEFFX",
+    priceAmount: 34.84,
+    checkedAt: CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The organiser calendar and authorised direct-entry page consistently confirm the half marathon and 10K on 1 August 2027, their shared 11:00 start and open affiliated half-marathon entry from £34.84.",
+  },
+  {
+    slug: "george-and-dragon-20-mile-10-mile-2027",
+    name: "George & Dragon 20 Mile & 10 Mile 2027",
+    date: "2027-08-29",
+    distance: "10mi",
+    startTime: "11:00",
+    country: "England",
+    county: "Lancashire",
+    city: "Lancaster",
+    area: "George & Dragon, St George's Quay",
+    surface: "Road",
+    distances: ["20mi", "10mi"],
+    organiser: "Lancaster Race Series / BookitZone",
+    url: "https://bookitzone.com/helen_mcgregor_2/mGEFFX",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/mGEFFX",
+    priceAmount: 29.12,
+    checkedAt: CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The organiser calendar and authorised direct-entry page consistently confirm the 20-mile and 10-mile road races on 29 August 2027, their shared 11:00 start and open affiliated 10-mile entry from £29.12.",
+  },
   {
     slug: "corofin-loops",
     name: "The Corofin Loop 2026",
@@ -1672,6 +1772,32 @@ type ExistingSeriesEditionSeed = {
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
   {
+    seriesSlug: "williamson-park-half-marathon-10k",
+    date: "2027-08-15",
+    startTime: "11:30",
+    organiser: "Lancaster Race Series / BookitZone",
+    url: "https://bookitzone.com/helen_mcgregor_2/YcEFFX",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/YcEFFX",
+    publishAllDistances: true,
+    priceAmount: 34.84,
+    checkedAt: CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The organiser calendar and authorised direct-entry categories consistently confirm the half marathon and 10K on 15 August 2027. The 10:30 page-level time belongs to the family walk/run; both competitive distances start at 11:30. Open affiliated half entry starts at £34.84, and the established Williamson Park card is enriched.",
+  },
+  {
+    seriesSlug: "morecambe-marathon",
+    date: "2027-09-19",
+    startTime: "11:00",
+    organiser: "Lancaster Race Series / BookitZone",
+    url: "https://bookitzone.com/helen_mcgregor_2/EGEFFX",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/EGEFFX",
+    publishAllDistances: true,
+    priceAmount: 34.84,
+    checkedAt: CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The organiser calendar and authorised direct-entry page consistently confirm the marathon, half marathon and 10K on 19 September 2027, their shared 11:00 start and open affiliated half-marathon entry from £34.84. The established Morecambe Marathon card is enriched.",
+  },
+  {
     seriesSlug: "belfast-half",
     date: "2027-09-19",
     startTime: "09:00",
@@ -2926,6 +3052,21 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     source_url: "https://totalracetiming.co.uk/race/730",
     defaultStartTime: "10:00",
   },
+  "williamson-park-half-marathon-10k": {
+    organiser: "Lancaster Race Series",
+    website: "https://bookitzone.com/helen_mcgregor_2/YcEFFX",
+    source_url: "https://bookitzone.com/helen_mcgregor_2/YcEFFX",
+  },
+  "morecambe-marathon": {
+    organiser: "Lancaster Race Series",
+    website: "https://bookitzone.com/helen_mcgregor_2/EGEFFX",
+    source_url: "https://bookitzone.com/helen_mcgregor_2/EGEFFX",
+  },
+  "derwentwater-10": {
+    organiser: "Keswick Athletic Club",
+    website: "https://derwentwater10.weebly.com/",
+    source_url: "https://derwentwater10.weebly.com/race-information.html",
+  },
   "great-eastern-run": {
     name: "AEPG Great Eastern Run",
     country: "England",
@@ -3530,6 +3671,14 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
 };
 
 export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
+  "derwentwater-10|2026-11-01|10mi": {
+    status: "Open",
+    entryUrl: "https://derwentwater10.weebly.com/",
+    startTime: "12:00",
+    source: "https://derwentwater10.weebly.com/race-information.html",
+    notes:
+      "Keswick Athletic Club's current race page links the official 2026 event site. Its Race Information page confirms the 10-mile road race starts at 12:00 near George Fisher's outdoor shop; the linked Events Up North endpoint returned HTTP 403 when checked on 27 October 2026, so the official event homepage remains the safe entry destination.",
+  },
   "ea-runevents-haweswater-half-marathon-penrith|2027-03-07|Half": {
     status: "Open",
     entryUrl: HAWESWATER_HALF_ENTRY_URL,
@@ -3626,6 +3775,22 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
 };
 
 export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
+  "derwentwater-10|2026-11-01|10mi": [
+    {
+      providerCode: "official-derwentwater-10-2026",
+      providerName: "Keswick Athletic Club",
+      entryUrl: "https://derwentwater10.weebly.com/",
+      entryType: "official",
+      status: "open",
+      priceCurrency: "GBP",
+      checkedAt: CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+      sourceUrl: "https://derwentwater10.weebly.com/race-information.html",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Official current-edition event homepage; its linked registration endpoint returned HTTP 403 when checked.",
+    },
+  ],
   "ea-runevents-haweswater-half-marathon-penrith|2027-03-07|Half": [
     {
       providerCode: "official-haweswater-half-marathon-2027",

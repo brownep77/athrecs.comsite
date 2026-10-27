@@ -31,7 +31,7 @@ import { parkrunDates, parkrunDistance } from "./parkrun-dates";
 import { runCatalogueTransaction } from "./catalogue-transaction";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-25-v1-world-athletics-track-field-2026-10-19-79064b5939";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-27-v2-world-athletics-track-field-2026-10-19-79064b5939";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 export const CLUB_CATALOGUE_SEED_VERSION = `${SEED_VERSION}:${CLUB_PROFILE_VERSION}`;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
@@ -866,6 +866,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       "sport",
       "country",
       "county",
+      "region",
       "city",
       "area",
       "surface",
@@ -883,6 +884,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       series.sport,
       series.country,
       series.county,
+      series.region ?? null,
       series.city,
       series.area,
       series.surface,
@@ -899,6 +901,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       sport = excluded.sport,
       country = excluded.country,
       county = excluded.county,
+      region = coalesce(events.region, excluded.region),
       city = excluded.city,
       area = excluded.area,
       surface = excluded.surface,
@@ -2840,6 +2843,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
       "sport",
       "country",
       "county",
+      "region",
       "city",
       "area",
       "surface",
@@ -2857,6 +2861,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
       series.sport,
       series.country,
       series.county,
+      series.region ?? null,
       series.city,
       series.area,
       series.surface,
@@ -2873,6 +2878,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
       sport = excluded.sport,
       country = excluded.country,
       county = excluded.county,
+      region = coalesce(events.region, excluded.region),
       city = excluded.city,
       area = excluded.area,
       surface = excluded.surface,

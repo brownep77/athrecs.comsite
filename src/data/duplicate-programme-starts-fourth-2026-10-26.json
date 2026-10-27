@@ -1,0 +1,113 @@
+{
+  "november-nightmare|2026-11-01": {
+    "summary": "November Nightmare on 1 November: 8 miles, 16 miles and marathon, all starting at 09:00.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.codrc.co.uk/e/the-november-nightmare-12273",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "8mi": {
+        "time": "09:00",
+        "note": "Dated organiser entry categories explicitly start on 1 November 2026 at 09:00. The 16-mile option is not a standard half marathon."
+      },
+      "16mi": {
+        "time": "09:00",
+        "note": "Dated organiser entry categories explicitly start on 1 November 2026 at 09:00. The 16-mile option is not a standard half marathon."
+      },
+      "Marathon": {
+        "time": "09:00",
+        "note": "Dated organiser entry categories explicitly start on 1 November 2026 at 09:00. The 16-mile option is not a standard half marathon."
+      }
+    }
+  },
+  "seattle-marathon|2026-11-29": {
+    "summary": "Seattle full marathon starts at 07:00 local time.",
+    "timeZone": "America/Los_Angeles",
+    "sourceUrl": "https://www.seattlemarathon.org/marathon-and-half-marathon",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "note": "2026 organiser race-day timetable and linked Race Roster entry agree. Half marathon has its own 08:30 start."
+      }
+    }
+  },
+  "ea-runevents-even-splits-york-5k-series-york|2026-11-13": {
+    "summary": "York 5K: Open race 19:30; qualifying Super Sprint race 20:00.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://racebest.com/races/r4ag4",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "19:30",
+        "label": "Open 19:30 · Super Sprint 20:00",
+        "note": "The exact 13 November 2026 organiser entry programme supersedes the generic series page's one-wave text. Linked participant PDF is from February 2024 and returned 403.",
+        "publicNote": "Use your entered race: Open at 19:30 or qualifying Super Sprint at 20:00."
+      }
+    }
+  },
+  "dead-sea-marathon-israel|2027-02-05": {
+    "summary": "Dead Sea marathon starts at 06:15 on 5 February 2027.",
+    "timeZone": "Asia/Jerusalem",
+    "sourceUrl": "https://deadsea.run/en/event/42km/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "06:15",
+        "note": "Exact 2027 marathon course programme. Gate opening at 06:00 is not the start."
+      }
+    }
+  },
+  "bmo-vancouver-marathon|2027-05-02": {
+    "summary": "BMO Vancouver Marathon starts at 08:30 on 2 May 2027.",
+    "timeZone": "America/Vancouver",
+    "sourceUrl": "https://bmovanmarathon.ca/marathon",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "note": "Organiser marathon page explicitly states 2 May 2027 and 08:30."
+      }
+    }
+  },
+  "laguna-phuket-marathon|2027-06-13": {
+    "summary": "Laguna Phuket Marathon starts at 03:00 on 13 June 2027.",
+    "timeZone": "Asia/Bangkok",
+    "sourceUrl": "https://phuketmarathon.com/race-information/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "03:00",
+        "note": "2027 race-day timetable explicitly marks the marathon's new 03:00 start; half marathon starts separately at 04:30."
+      }
+    }
+  },
+  "detroit-free-press-marathon|2026-10-18": {
+    "summary": "Detroit full marathon starts from 07:00, with waves at three-minute intervals.",
+    "timeZone": "America/Detroit",
+    "sourceUrl": "https://www.freepmarathon.com/marathon/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "07:00",
+        "label": "From 07:00 · waves every three minutes",
+        "note": "Organiser's 18 October 2026 marathon programme; previous duplicate's 06:00 is unsupported."
+      }
+    }
+  },
+  "palma-de-mallorca-marathon-half-10k|2026-10-18": {
+    "summary": "Palma's 18 October 2026 half and full marathon are retained. Distance-specific start times are not yet verified.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://www.avaibooksports.com/inscripcion/tui-palma-marathon-mallorca-2026/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": null,
+        "note": "2026 authorised entry confirms the date and offered categories. Its 08:00 event summary is not a distance-specific clock. Current organiser pages have rolled to 2027; linked 2026 athlete guide was inaccessible. Stored Half 07:00 and blank Marathon remain in the audit; no recurrence time is inferred."
+      },
+      "Marathon": {
+        "time": null,
+        "note": "2026 authorised entry confirms the date and offered categories. Its 08:00 event summary is not a distance-specific clock. Current organiser pages have rolled to 2027; linked 2026 athlete guide was inaccessible. Stored Half 07:00 and blank Marathon remain in the audit; no recurrence time is inferred."
+      }
+    }
+  }
+}
