@@ -68,23 +68,5 @@
         "publicNote": "Senior/U20 men 8K starts at 14:50."
       }
     }
-  },
-  "corofin-loops|2026-11-01": {
-    "summary": "The Corofin Loop 8K and 10-mile races in Corofin.",
-    "timeZone": "Europe/Dublin",
-    "sourceUrl": "https://eventmaster.ie/event/oOlbck3tLm",
-    "checkedAt": "2026-10-27",
-    "starts": {
-      "8K": {
-        "time": "09:00",
-        "note": "The organiser-authorised Eventmaster entry page explicitly dates Sunday 1 November 2026 and displays 09:00 for the event while listing both 8K and 10-mile tickets.",
-        "publicNote": "8K starts at 09:00 local time."
-      },
-      "10M": {
-        "time": "09:00",
-        "note": "The organiser-authorised Eventmaster entry page explicitly dates Sunday 1 November 2026 and displays 09:00 for the event while listing both 8K and 10-mile tickets.",
-        "publicNote": "10-mile race starts at 09:00 local time."
-      }
-    }
   }
 }
