@@ -21,3 +21,19 @@ export function parseProfileRoles(seedRoles: unknown, raw: unknown): string[] {
 
   return seeded ?? [];
 }
+
+/** Editorial profile labels, independent of ownership and result verification. */
+export const PROFILE_STATUSES = [
+  "Running legend",
+  "Professional athlete",
+  "Running creator",
+  "Ultrarunner",
+  "Endurance runner",
+  "Endurance fundraiser",
+  "Community inspiration",
+] as const;
+
+export function publicProfileStatuses(roles: readonly string[] = []): string[] {
+  const selected = new Set(roles.map((role) => role.trim().toLowerCase()));
+  return PROFILE_STATUSES.filter((status) => selected.has(status.toLowerCase()));
+}

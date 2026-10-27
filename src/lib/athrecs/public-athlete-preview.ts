@@ -1,4 +1,5 @@
 import { buildProfileTimeline } from "./profile-timeline";
+import { publicProfileStatuses } from "./athlete-profile-roles";
 import type { BiographyPresentation } from "./biography-presentation";
 import {
   buildProfileAchievementSummary,
@@ -48,6 +49,7 @@ export type PublicAthletePreview = {
   nationalitySource: SourceNationality | null;
   details?: PublicProfileDetails;
   sports: string[];
+  profileStatuses?: string[];
   biography: string[];
   biographyPresentation?: BiographyPresentation;
   biographySources: { label: string; url: string }[];
@@ -76,6 +78,7 @@ export function buildPublicAthletePreview(input: {
   nationalitySource?: SourceNationality | null;
   details?: PublicProfileDetails;
   sports?: readonly string[];
+  profileRoles?: readonly string[];
   biography?: readonly string[];
   biographyPresentation?: BiographyPresentation;
   biographySources?: readonly { label: string; url: string }[];
@@ -127,6 +130,7 @@ export function buildPublicAthletePreview(input: {
     publicLicenceCredits: profileResultLicenceCredits(input.histories),
     ...(input.details ? { details: input.details } : {}),
     sports,
+    profileStatuses: publicProfileStatuses(input.profileRoles),
     achievements: buildProfileAchievementSummary(timeline.results, input.histories),
     personalBests: profilePersonalBestSummary(timeline.results, input.histories),
     championshipMedals: (input.anzMedals ?? []).map(
