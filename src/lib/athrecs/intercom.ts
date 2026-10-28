@@ -24,6 +24,35 @@ let activeIdentity: MessengerIdentity | null = null;
 let sessionVersion = 0;
 let lastUpdateAt = 0;
 
+export type IntercomDisplayState = Readonly<{ ready: boolean; isOpen: boolean }>;
+const HIDDEN_DISPLAY: IntercomDisplayState = Object.freeze({ ready: false, isOpen: false });
+let displayState = HIDDEN_DISPLAY;
+let displayGeneration = 0;
+let displayCallbacksBound = false;
+const displayListeners = new Set<() => void>();
+
+/** Stable snapshots for React's useSyncExternalStore; no identity data is exposed. */
+export const getIntercomDisplayState = (): IntercomDisplayState => displayState;
+export const getIntercomServerDisplayState = (): IntercomDisplayState => HIDDEN_DISPLAY;
+export function subscribeIntercomDisplay(listener: () => void): () => void {
+  displayListeners.add(listener);
+  return () => {
+    displayListeners.delete(listener);
+  };
+}
+
+function setDisplayState(ready: boolean, isOpen: boolean): void {
+  if (displayState.ready === ready && displayState.isOpen === isOpen) return;
+  displayState = ready || isOpen ? Object.freeze({ ready, isOpen }) : HIDDEN_DISPLAY;
+  displayListeners.forEach((listener) => listener());
+}
+
+function invalidateDisplay(): void {
+  displayGeneration += 1;
+  displayCallbacksBound = false;
+  setDisplayState(false, false);
+}
+
 type IntercomFn = ((...args: unknown[]) => void) & {
   q?: unknown[][];
   c?: (args: unknown[]) => void;
@@ -83,6 +112,8 @@ function clearIntercomCookies(): void {
 export function shutdownIntercom(clearAccountMarker = true): void {
   if (!INTERCOM_ENABLED || typeof window === "undefined") return;
   sessionVersion += 1;
+  // Invalidate callbacks before shutdown can synchronously emit onHide.
+  invalidateDisplay();
   window.Intercom?.("shutdown");
   clearIntercomCookies();
   window.intercomSettings = settings();
@@ -99,6 +130,7 @@ export function endIntercomSession(preserveAnonymous = false): void {
     // A first member token may still be in flight even before a marker exists.
     // Invalidate it while retaining a genuine visitor's conversation for login.
     sessionVersion += 1;
+    invalidateDisplay();
     window.dispatchEvent(new Event(INTERCOM_RESET_EVENT));
     return;
   }
@@ -118,6 +150,7 @@ export function intercomSessionVersion(): number {
 /** Initial hydration must not erase a visitor conversation waiting to become a member. */
 export function suspendIntercom(): void {
   if (activeUserId) shutdownIntercom(false);
+  else if (displayCallbacksBound) invalidateDisplay();
 }
 
 /** Reset a different/expired account before any asynchronous identity request. */
@@ -149,6 +182,38 @@ function loadIntercom(): void {
   document.head.appendChild(script);
 }
 
+function hasLiveSession(): boolean {
+  if (
+    !INTERCOM_ENABLED ||
+    typeof window === "undefined" ||
+    !window.Intercom ||
+    activeUserId === undefined
+  )
+    return false;
+  if (activeIdentity && activeIdentity.expiresAt <= Date.now() / 1000) {
+    shutdownIntercom();
+    return false;
+  }
+  return true;
+}
+
+function bindDisplayCallbacks(): void {
+  const generation = displayGeneration;
+  displayCallbacksBound = true;
+  const isCurrent = () => generation === displayGeneration && hasLiveSession();
+  window.Intercom!("onShow", () => {
+    if (isCurrent()) setDisplayState(displayState.ready, true);
+  });
+  window.Intercom!("onHide", () => {
+    if (isCurrent()) setDisplayState(displayState.ready, false);
+  });
+  // Register after boot so an already-ready anonymous session cannot certify a
+  // new member's boot. This callback only fires when the SDK accepts that boot.
+  window.Intercom!("ready", () => {
+    if (isCurrent()) setDisplayState(true, displayState.isOpen);
+  });
+}
+
 /** A signed token is the only way to identify an account; null preserves visitor chat. */
 export function bootIntercom(identity: MessengerIdentity | null = null): void {
   if (!INTERCOM_ENABLED || typeof window === "undefined") return;
@@ -161,12 +226,15 @@ export function bootIntercom(identity: MessengerIdentity | null = null): void {
   loadIntercom();
   const sameUser = activeUserId === userId;
   const sameToken = activeIdentity?.jwt === identity?.jwt;
+  const bindDisplay = !sameUser || !displayCallbacksBound;
+  if (bindDisplay) invalidateDisplay();
   window.intercomSettings = settings(identity);
+  activeUserId = userId;
+  activeIdentity = identity;
   if (!sameUser) window.Intercom!("boot", window.intercomSettings);
   else if (!sameToken) window.Intercom!("update", window.intercomSettings);
   if (!sameUser || !sameToken) lastUpdateAt = Date.now();
-  activeUserId = userId;
-  activeIdentity = identity;
+  if (bindDisplay) bindDisplayCallbacks();
   rememberAccount(userId);
 }
 
@@ -190,15 +258,16 @@ export function updateIntercomPage(): void {
   lastUpdateAt = Date.now();
 }
 
-/** Opens a new Messenger conversation with the visitor's first message pre-filled (not sent). */
+/** Opens the existing Messenger only after its current authenticated boot succeeds. */
+export function openIntercom(): boolean {
+  if (!hasLiveSession() || !displayState.ready) return false;
+  window.Intercom!("show");
+  return true;
+}
+
+/** Opens a composer with the visitor's first message pre-filled, never sent. */
 export function openIntercomMessage(prefill: string): boolean {
-  if (
-    !INTERCOM_ENABLED ||
-    typeof window === "undefined" ||
-    !window.Intercom ||
-    activeUserId === undefined
-  )
-    return false;
-  window.Intercom("showNewMessage", prefill);
+  if (!hasLiveSession() || !displayState.ready) return false;
+  window.Intercom!("showNewMessage", prefill);
   return true;
 }

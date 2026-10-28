@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
 import {
   bootIntercom,
@@ -159,16 +159,31 @@ export function ChatPrompt({
   kind: keyof typeof PROMPTS;
   className?: string;
 }) {
+  const [chatUnavailable, setChatUnavailable] = useState(false);
   if (!INTERCOM_ENABLED) return null;
   const prompt = PROMPTS[kind];
   return (
-    <button
-      type="button"
-      onClick={() => openIntercomMessage(prompt.prefill)}
-      className={`inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-left text-sm font-semibold text-accent shadow-card hover:bg-accent/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${className}`}
-    >
-      <MessageCircle className="size-4 shrink-0" aria-hidden="true" />
-      {prompt.label}
-    </button>
+    <span className={`inline-flex flex-col items-start gap-2 ${className}`}>
+      <button
+        type="button"
+        onClick={() => setChatUnavailable(!openIntercomMessage(prompt.prefill))}
+        className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-left text-sm font-semibold text-accent shadow-card hover:bg-accent/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        <MessageCircle className="size-4 shrink-0" aria-hidden="true" />
+        {prompt.label}
+      </button>
+      {chatUnavailable ? (
+        <span role="status" className="text-sm text-muted">
+          Chat isn’t ready yet. Try again, or{" "}
+          <a
+            href={`mailto:support@athrecs.com?subject=${encodeURIComponent(prompt.prefill)}`}
+            className="font-semibold text-accent underline"
+          >
+            email AthRecs
+          </a>
+          .
+        </span>
+      ) : null}
+    </span>
   );
 }

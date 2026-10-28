@@ -9,7 +9,7 @@ and no unsigned account identity is sent.
 
 1. In Intercom, open **Settings → Channels → Messenger → Overview → Website**.
    Complete **Signed-in users, visitors & leads → Connect your customer data**.
-2. Under **Settings → Data → People**, create the seven custom attributes in the
+2. Under **Settings → Data → People**, create the six custom attributes in the
    table below with the stated types. Intercom requires the definitions to exist
    before the Messenger can populate them. Enable **Require verified updates**
    for these new fields.
