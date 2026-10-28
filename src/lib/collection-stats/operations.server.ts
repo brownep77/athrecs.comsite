@@ -357,8 +357,8 @@ function gaps(f: OperationInput): QuerySpec {
   const p = `select a.id,a.display_name,a.gender,a.country,a.county,
  coalesce(nullif(${known("private.nationality")},'Unknown'),${statedNationalitySql},${sourceNationalitySql("a.profile_details")},nullif(${known("a.nation")},'Unknown'),'Unknown') nationality,
  (exists(select 1 from r where r.athlete_id=a.id and ${known("r.sport")}<>'Unknown')
- or exists(select 1 from histories h where h.athlete_id=a.id and cardinality(athlete_history_sports_v4(h.provider,h.performances))>0)
- or (${profileSportEvidencePredicateSql()} and cardinality(athlete_profile_sports_v2(a.profile_details))>0)
+ or exists(select 1 from histories h where h.athlete_id=a.id and cardinality(athlete_history_sports_v5(h.provider,h.performances))>0)
+ or (${profileSportEvidencePredicateSql()} and cardinality(athlete_profile_sports_v3(a.profile_details))>0)
  or exists(select 1 from athlete_account_links l join athlete_sport_profiles sp on sp.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and ${known("sp.sport_code")}<>'Unknown')) has_sport
  from a left join athlete_account_links owner on owner.athlete_id=a.id and owner.status='active'
  left join athlete_private_profiles private on private.user_id=owner.user_id`;

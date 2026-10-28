@@ -18,7 +18,9 @@ export type Sport =
   | "Swimrun"
   | "Indoor Rowing"
   | "Orienteering"
-  | "Walking";
+  | "Walking"
+  | "Cross-country Skiing"
+  | "Roller Skiing";
 
 export type EntryStatus = "Open" | "ClosingSoon" | "Closed" | "Finished" | "Cancelled" | "TBC";
 
