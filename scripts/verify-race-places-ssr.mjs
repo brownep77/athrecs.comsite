@@ -258,6 +258,14 @@ if (process.argv.includes("--browser")) {
         .getByRole("link", { name: "United Kingdom", exact: true })
         .click();
       await page.waitForURL((url) => url.pathname === "/" && url.searchParams.get("country") === "United Kingdom" && url.hash === "#fixtures");
+      // Client navigation updates the URL before the loader commits its form and fixtures.
+      await page.waitForFunction(() => {
+        const fixtures = document.querySelector("#fixtures");
+        const country = fixtures?.querySelector('select[name="country"]');
+        return country?.value === "United Kingdom"
+          && fixtures.textContent.includes("Synthetic Norfolk 10K")
+          && !fixtures.textContent.includes("Synthetic California 10K");
+      });
       assert.equal(await page.getByLabel("Country", { exact: true }).inputValue(), "United Kingdom");
       assert((await page.locator("#fixtures").textContent()).includes("Synthetic Norfolk 10K"));
       assert(!(await page.locator("#fixtures").textContent()).includes("Synthetic California 10K"));
