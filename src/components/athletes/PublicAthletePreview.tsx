@@ -1,6 +1,7 @@
 import { isParkrunResult, PARKRUN_TIMING_LABEL } from "@/lib/athrecs/parkrun-timing";
 import { SportBadge } from "@/components/races/EventBadges";
 import { Link } from "@tanstack/react-router";
+import { AthleteProfileStatuses } from "./AthleteProfileStatuses";
 import type { PublicAthletePreview as Preview } from "@/lib/athrecs/public-athlete-preview";
 import { CompactResultsTable } from "./CompactResultsTable";
 import { PublicResultLicenceCredits } from "./PublicResultLicenceCredits";
@@ -39,6 +40,7 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
         className="space-y-4 rounded-xl border border-border bg-surface p-5 sm:p-6"
       >
         <h1 className="font-display text-3xl font-semibold sm:text-4xl">{profile.displayName}</h1>
+        <AthleteProfileStatuses roles={profile.profileStatuses} />
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={profile.athleteNumber} />
           {profile.club ? (

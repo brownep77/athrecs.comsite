@@ -1,29 +1,150 @@
 {
   "schemaVersion": 1,
-  "generatedOn": "2026-10-27",
+  "generatedOn": "2026-10-28",
   "window": {
-    "from": "2026-10-27",
-    "through": "2027-01-27",
+    "from": "2026-10-28",
+    "through": "2027-01-28",
     "rule": "Three calendar months inclusive; month-end clamped."
   },
-  "scope": "Live UK and Ireland editions offering a half-marathon or approximately 10-mile distance.",
+  "scope": "Live UK and Ireland editions offering a half-marathon or approximately 10-mile distance, plus verified current-branch candidates awaiting persistent publication.",
   "sourceSnapshot": {
     "project": "lively-resonance-04577945",
     "branch": "br-flat-unit-aydbwlfk",
-    "capturedOn": "2026-10-27",
-    "recordCount": 265
+    "capturedOn": "2026-10-28",
+    "recordCount": 271,
+    "liveRecordCount": 270,
+    "pendingSeedCount": 1
   },
   "handoff": "Existing daily AthRecs fixtures, results and athletes checkpoint. No additional scheduler or organiser contact is authorised.",
   "summary": {
     "invalidated": 2,
-    "confirmed": 22,
+    "confirmed": 26,
     "confirmed-existing": 55,
     "corrected": 1,
     "unresolved": 1,
-    "duplicate-alias": 2,
+    "duplicate-alias": 4,
     "open": 182
   },
   "records": [
+    {
+      "key": "the-petzl-night-runner-delamere|2026-10-31|Half",
+      "editionId": 109710365,
+      "name": "Petzl Night Runner Delamere",
+      "country": "England",
+      "date": "2026-10-31",
+      "distance": "Half",
+      "localTime": "18:00",
+      "timeZone": "Europe/London",
+      "waveScope": "The current-edition competitor notes identify the advertised half marathon as Trail 13 and give one 18:00 Europe/London start after the compulsory 17:50 briefing; the Trail 10 starts separately at 19:00.",
+      "reviewStatus": "confirmed",
+      "checkedOn": "2026-10-28",
+      "attemptedSources": [
+        "https://epicevents.co.uk/events/night-runner-delamere-forest/",
+        "https://epicevents.co.uk/wp-content/uploads/2026/10/Delamere-Night-Runner-Race-Notes-2026.pdf"
+      ],
+      "sourceOutcome": "Epic Events' dated event page advertises the half marathon on 31 October 2026 and links the 2026 competitor notes. The PDF schedule and START section both confirm Trail 13 at 18:00 and Trail 10 at 19:00, with the half route described as two laps.",
+      "nextAction": "Recheck the organiser page and competitor notes at the two-day threshold; preserve the distance-specific 18:00 start unless Epic Events issues a correction.",
+      "retryOn": "2026-10-29"
+    },
+    {
+      "key": "running-gp-croft-motor-circuit-november|2026-11-01|10mi",
+      "editionId": 109710408,
+      "name": "Running GP Croft Motor Circuit November",
+      "country": "England",
+      "date": "2026-11-01",
+      "distance": "10mi",
+      "localTime": "10:00",
+      "timeZone": "Europe/London",
+      "waveScope": "The current organiser starting grid confirms the 10-mile wave at 10:00 Europe/London. This imported row is an alias of the canonical Croft Running Festival edition and must not create a second public card.",
+      "reviewStatus": "duplicate-alias",
+      "checkedOn": "2026-10-28",
+      "attemptedSources": [
+        "https://www.runninggrandprix.com/event/croft-running-festival-november-2026"
+      ],
+      "sourceOutcome": "The dated Running Grand Prix programme lists the 10-mile distance at 10:00 and the half marathon separately at 09:45. Live catalogue matching found the same 1 November programme on the canonical Croft Running Festival card.",
+      "nextAction": "Keep this row mapped to the canonical Croft Running Festival edition; recheck that card's official programme at the two-day threshold.",
+      "retryOn": "2026-10-30"
+    },
+    {
+      "key": "runthrough-gainsborough-gb|2026-11-01|Half",
+      "editionId": 109710346,
+      "name": "RunThrough Gainsborough",
+      "country": "England",
+      "date": "2026-11-01",
+      "distance": "Half",
+      "localTime": "09:00",
+      "timeZone": "Europe/London",
+      "waveScope": "The current-edition organiser page and race-day schedule confirm the half marathon at 09:00 Europe/London and the 10K at 09:15. This imported row aliases the canonical Gainsborough Morton card.",
+      "reviewStatus": "duplicate-alias",
+      "checkedOn": "2026-10-28",
+      "attemptedSources": [
+        "https://www.runthrough.co.uk/event/gainsborough-10k-half-marathon-november-2026",
+        "https://ogphybuho2txgsbq.public.blob.vercel-storage.com/event-guides/gainsborough/2026-11-01/gainsborough-event-guide-new-1-zvgmZDig4DKCrr7j5souOUNXb9UkVe.pdf",
+        "https://www.runthrough.co.uk/api/guide/gainsborough-10k-half-marathon-november-2026"
+      ],
+      "sourceOutcome": "RunThrough's dated event page confirms 1 November 2026, half marathon 09:00, 10K 09:15 and open distance categories. The linked guide PDF and guide API were attempted but exceeded the crawler size limit, so no additional claim is drawn from them. Live matching found the same half edition already represented by the canonical Gainsborough Morton card.",
+      "nextAction": "Keep this row mapped to the canonical Gainsborough Morton card and recheck the organiser schedule at the two-day threshold.",
+      "retryOn": "2026-10-30"
+    },
+    {
+      "key": "london-morun|2026-11-08|Half",
+      "editionId": 109710410,
+      "name": "London MoRun",
+      "country": "England",
+      "date": "2026-11-08",
+      "distance": "Half",
+      "localTime": "09:30",
+      "timeZone": "Europe/London",
+      "waveScope": "The current-edition organiser timings give the half marathon one 09:30 Europe/London start; the 5K and 10K start separately at 10:00 and the Mini MoRun at 11:45.",
+      "reviewStatus": "confirmed",
+      "checkedOn": "2026-10-28",
+      "attemptedSources": [
+        "https://www.mo-running.com/london"
+      ],
+      "sourceOutcome": "MoRunning's current London page consistently identifies 8 November 2026 and its Timings section explicitly states Half Marathon MoRun 09:30, 5K and 10K 10:00, and Mini MoRun 11:45.",
+      "nextAction": "Recheck the organiser timings at the seven-day and two-day thresholds; preserve 09:30 unless an official update changes the half-marathon wave.",
+      "retryOn": "2026-11-01"
+    },
+    {
+      "key": "london-riverside-morun|2026-11-29|Half",
+      "editionId": 109710412,
+      "name": "London Riverside MoRun",
+      "country": "England",
+      "date": "2026-11-29",
+      "distance": "Half",
+      "localTime": "09:30",
+      "timeZone": "Europe/London",
+      "waveScope": "The current-edition organiser timings give the half marathon one 09:30 Europe/London start; the 10K starts separately at 10:00 and the Mini MoRun at 11:45.",
+      "reviewStatus": "confirmed",
+      "checkedOn": "2026-10-28",
+      "attemptedSources": [
+        "https://www.mo-running.com/london-richmond-riverside"
+      ],
+      "sourceOutcome": "MoRunning's current Richmond Riverside page consistently identifies 29 November 2026 and its Timings section explicitly states Half Marathon MoRun 09:30, 10K 10:00 and Mini MoRun 11:45.",
+      "nextAction": "Recheck the organiser timings at the seven-day and two-day thresholds; preserve 09:30 unless an official update changes the half-marathon wave.",
+      "retryOn": "2026-11-22"
+    },
+    {
+      "key": "beccles-turkey-trot|2026-12-06|10mi",
+      "editionId": 109710345,
+      "name": "Beccles Turkey Trot",
+      "country": "England",
+      "date": "2026-12-06",
+      "distance": "10mi",
+      "localTime": "11:00",
+      "timeZone": "Europe/London",
+      "waveScope": "The authorised current-edition entry record gives one 11:00 Europe/London start for the 10-mile road race from Sir John Leman High School.",
+      "reviewStatus": "confirmed",
+      "checkedOn": "2026-10-28",
+      "attemptedSources": [
+        "https://totalracetiming.co.uk/race/749",
+        "https://www.waveneyvalley.org/turkey-trot-2/",
+        "https://www.becclesandbungayharriers.org.uk/"
+      ],
+      "sourceOutcome": "The live current-edition record captured the authorised Total Race Timing page on 26 October with 6 December 2026, 10 miles, open entry and 11:00. A fresh direct crawler attempt on 28 October could not render that page; exact-year search corroborated the date, distance and 11:00, while the club pages did not publish a conflicting 2026 timetable. The previously confirmed current-edition start is preserved rather than guessed or copied from 2025.",
+      "nextAction": "Retry the authorised Total Race Timing page and seek a club-issued 2026 race-information sheet; do not replace 11:00 unless a current official source publishes a correction.",
+      "retryOn": "2026-11-29"
+    },
     {
       "key": "brecons-fell-running-trail-and-yoga-camp|2026-10-30|10mi",
       "editionId": 71613790,

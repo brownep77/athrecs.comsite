@@ -42,13 +42,14 @@ const CURRENT_OFFICIAL_ENTRY_SCAN_CHECKED_AT = "2026-10-22";
 const CURRENT_DORNEY_REFRESH_CHECKED_AT = "2026-10-23";
 const CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT = "2026-10-24";
 const CURRENT_START_AND_DISCOVERY_CHECKED_AT = "2026-10-25";
-const CURRENT_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-27";
+const CURRENT_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-28";
 const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
+const CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT = "2026-10-28";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 88;
 const NEW_EDITION_COUNT = 91;
-const EXISTING_SERIES_EDITION_COUNT = 67;
+const EXISTING_SERIES_EDITION_COUNT = 68;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -926,6 +927,7 @@ assert.equal(
 );
 const currentMainSeriesSlugsMaintainedInThisModule = new Set([
   "croft-running-festival-november-2026",
+  "runthrough-battersea-park-5k-10k-september",
   "southampton-running-festival-may-2027",
 ]);
 const existingEditionKeys = new Set();
@@ -996,6 +998,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT,
         CURRENT_START_AND_DISCOVERY_CHECKED_AT,
         CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
+        CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -2138,11 +2141,29 @@ assert(
   "The date-conflicted Carsington Water August candidate must remain held",
 );
 assert(
-  dailyHalfTenMileResearchQueue.some(
+  !dailyHalfTenMileResearchQueue.some(
     (candidate) => candidate.slug === "battersea-park-half-marathon-10k-5k-april-2027",
   ),
-  "The internally conflicted Battersea Park April candidate must remain held",
+  "Battersea Park April must leave research after RunThrough corrected the date conflict",
 );
+const batterseaAprilEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) =>
+    edition.seriesSlug === "runthrough-battersea-park-5k-10k-september" &&
+    edition.date === "2027-04-03" &&
+    edition.distance === "Half",
+);
+assert(batterseaAprilEdition, "Battersea Park April lost its canonical edition enrichment");
+assert.equal(batterseaAprilEdition.startTime, "10:30");
+assert.equal(
+  batterseaAprilEdition.entryUrl,
+  "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027",
+);
+assert.equal(batterseaAprilEdition.publishAllDistances, true);
+assert.equal(
+  batterseaAprilEdition.entryOptions?.[0]?.checkedAt,
+  CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT,
+);
+assert.match(batterseaAprilEdition.notes ?? "", /Blackburn race/);
 assert(
   dailyHalfTenMileResearchQueue.some(
     (candidate) => candidate.slug === "finsbury-park-half-marathon-5k-10k-half-marathon-april-2027",
@@ -2729,7 +2750,7 @@ const packageSource = await fs.readFile(new URL("../package.json", import.meta.u
 const startCheckpoint = JSON.parse(
   await fs.readFile(
     new URL(
-      "../docs/fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-27-checkpoint.json",
+      "../docs/fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-28-checkpoint.json",
       import.meta.url,
     ),
     "utf8",
@@ -2771,13 +2792,13 @@ assert(
 assert.deepEqual(
   startCheckpoint.window,
   {
-    from: "2026-10-27",
-    through: "2027-01-27",
+    from: "2026-10-28",
+    through: "2027-01-28",
     rule: "Three calendar months inclusive; month-end clamped.",
   },
   "The start-time checkpoint lost the required inclusive three-calendar-month window",
 );
-assert.equal(startCheckpoint.records.length, 265, "The start-time checkpoint is incomplete");
+assert.equal(startCheckpoint.records.length, 271, "The start-time checkpoint is incomplete");
 assert.equal(
   new Set(startCheckpoint.records.map((record) => record.key)).size,
   startCheckpoint.records.length,
@@ -2792,7 +2813,7 @@ assert(
 assert(
   startCheckpoint.records.every(
     (record) =>
-      ["2026-10-25", "2026-10-26", CURRENT_ROLLING_START_REVIEW_CHECKED_AT].includes(
+      ["2026-10-25", "2026-10-26", "2026-10-27", CURRENT_ROLLING_START_REVIEW_CHECKED_AT].includes(
         record.checkedOn,
       ) &&
       ["Europe/London", "Europe/Dublin"].includes(record.timeZone),
@@ -2811,7 +2832,7 @@ assert(
 const reviewedOnCurrentRun = startCheckpoint.records.filter(
   (record) => record.checkedOn === CURRENT_ROLLING_START_REVIEW_CHECKED_AT,
 );
-assert.equal(reviewedOnCurrentRun.length, 2, "The due 27 October start-review batch is incomplete");
+assert.equal(reviewedOnCurrentRun.length, 6, "The due 28 October start-review batch is incomplete");
 assert(
   reviewedOnCurrentRun.every(
     (record) =>
@@ -2843,9 +2864,22 @@ assert.match(stAnnesStartReview?.sourceOutcome ?? "", /authorised current-editio
 for (const aliasKey of [
   "ea-runevents-lmac-salt-ayre-series-lancaster|2026-11-01|Half",
   "ea-runevents-marlow-half-marathon-the-frankenstein-and-marlow-7-marlow|2026-11-01|Half",
+  "running-gp-croft-motor-circuit-november|2026-11-01|10mi",
+  "runthrough-gainsborough-gb|2026-11-01|Half",
 ]) {
   const alias = startCheckpoint.records.find((record) => record.key === aliasKey);
   assert.equal(alias?.reviewStatus, "duplicate-alias", `${aliasKey} lost its alias guard`);
+}
+for (const [key, localTime] of [
+  ["the-petzl-night-runner-delamere|2026-10-31|Half", "18:00"],
+  ["london-morun|2026-11-08|Half", "09:30"],
+  ["london-riverside-morun|2026-11-29|Half", "09:30"],
+  ["beccles-turkey-trot|2026-12-06|10mi", "11:00"],
+]) {
+  const review = startCheckpoint.records.find((record) => record.key === key);
+  assert.equal(review?.reviewStatus, "confirmed", `${key} lost its confirmed review`);
+  assert.equal(review?.localTime, localTime, `${key} lost its current-edition local start`);
+  assert.equal(review?.checkedOn, CURRENT_ROLLING_START_REVIEW_CHECKED_AT);
 }
 assert(
   startCheckpoint.records

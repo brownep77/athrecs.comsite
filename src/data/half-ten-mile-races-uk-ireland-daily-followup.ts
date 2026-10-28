@@ -42,6 +42,7 @@ const CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT = "2026-10-24";
 const CURRENT_START_AND_DISCOVERY_CHECKED_AT = "2026-10-25";
 const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
+const CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT = "2026-10-28";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1793,6 +1794,20 @@ type ExistingSeriesEditionSeed = {
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
   {
+    seriesSlug: "runthrough-battersea-park-5k-10k-september",
+    date: "2027-04-03",
+    startTime: "10:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027",
+    publishAllDistances: true,
+    priceAmount: 40,
+    checkedAt: CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT,
+    notes:
+      "RunThrough corrected the former July copy error. The official page now consistently confirms Saturday 3 April 2027, the half marathon at 10:30 and the 10K at 11:15. The established Battersea Park multi-distance card is enriched; no second card is created. All visible checkout buttons currently redirect to an unrelated Blackburn race, so the exact organiser event page remains the safe official entry destination.",
+  },
+  {
     seriesSlug: "williamson-park-half-marathon-10k",
     date: "2027-08-15",
     startTime: "11:30",
@@ -2720,14 +2735,6 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-august-2027",
   },
   {
-    slug: "battersea-park-half-marathon-10k-5k-april-2027",
-    date: "2027-04-03",
-    country: "England",
-    reason:
-      "The official page's structured date, title and summary say 3 April 2027, but its opening race-day sentence says 3 July 2027, so the edition remains unpublished until RunThrough corrects the conflict.",
-    sourceUrl: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027",
-  },
-  {
     slug: "finsbury-park-half-marathon-5k-10k-half-marathon-april-2027",
     date: "2027-04-11",
     country: "England",
@@ -3035,6 +3042,25 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "runthrough-battersea-park-5k-10k-september": {
+    name: "Battersea Park 5K, 10K & Half Marathon — Series 1",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Battersea Park Bandstand",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027",
+    defaultStartTime: "10:30",
+    summary:
+      "Battersea Park 5K, 10K & Half Marathon — flat traffic-free road races in Battersea Park.",
+    description:
+      "RunThrough's established Battersea Park card carries the verified 3 April 2027 half marathon, 10K and 5K programme rather than creating a duplicate event.",
+  },
   "belfast-half": {
     name: "Phoenix Energy Belfast City Half Marathon",
     country: "Northern Ireland",
