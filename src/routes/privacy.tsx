@@ -68,6 +68,16 @@ function AthletePrivacyPage() {
                 create an AthRecs account or change your profile.
               </p>
               <p className="mt-3">
+                When the signed-in chat connection is enabled, we send Intercom your account ID,
+                name, email address and signup date so your conversation is linked to your account.
+                We also share the number of linked athlete profiles, their available result count
+                and outstanding ownership requests. If you have one linked athlete profile, we
+                include its ID and page link. This helps us provide relevant support. Signing out
+                clears the chat session on this browser. A browser-stored account identifier helps
+                keep accounts separate on shared devices; viewing another athlete’s page does not
+                identify you as that athlete.
+              </p>
+              <p className="mt-3">
                 If you ask us to research missing results or tell us about a race, the chat may ask
                 for your name, an email address for our reply and details about the races. We use
                 these only to research your request, update AthRecs after review and contact you
