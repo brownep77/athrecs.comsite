@@ -9,6 +9,7 @@ import {
 } from "./auth-methods";
 import { GROK_PROVIDERS } from "./providers";
 import { reportBrowserDiagnostic } from "../browser-diagnostics";
+import { endIntercomSession } from "../athrecs/intercom";
 
 /** Same-origin Better Auth client. Preview sessions use a bearer token. */
 export const authClient = createAuthClient({
@@ -110,6 +111,7 @@ export async function signInWithProvider(
 
   const hadBearer = Boolean(getBearerToken());
   if (hadBearer || !preview) {
+    endIntercomSession(true);
     try {
       await authClient.signOut();
     } catch {
@@ -213,6 +215,7 @@ function waitForPopupToken(popup: Window): Promise<string | null> {
 }
 
 export async function signOut(redirectTo = "/"): Promise<void> {
+  endIntercomSession();
   try {
     await authClient.signOut();
   } finally {
