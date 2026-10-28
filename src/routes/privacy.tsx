@@ -1,4 +1,5 @@
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { INTERCOM_ENABLED } from "@/lib/athrecs/intercom";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { EyeOff, LockKeyhole, RefreshCw, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -55,32 +56,59 @@ function AthletePrivacyPage() {
 
       <section className="space-y-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-8">
         <div id="assistant-chat">
-          <NoticeSection title="AI assistant and chat transcripts">
-            <p>
-              When you send a message to the AthRecs AI assistant, we save the conversation,
-              selected language, timestamps and starting public page so authorised staff can review
-              support enquiries and improve the service. Recent messages are processed by our
-              hosting provider Vercel and OpenAI to generate a reply. AI answers may be incorrect;
-              the assistant cannot verify your identity, claim results or change your account. This
-              is not a live human chat, and staff monitoring or a reply is not guaranteed.
-            </p>
-            <p className="mt-3">
-              Chats are anonymous unless you identify yourself in your messages. Do not send
-              passwords, sign-in codes, payment details or sensitive documents. A secure browser
-              cookie keeps your conversation available for up to seven days. Chat records expire
-              after 90 days and are removed on the next chat or staff history visit. Staff can
-              download or delete a transcript. We use these records to provide requested support and
-              prevent abuse; sending a message does not sign you up for marketing. A short-lived
-              hashed network identifier may be used for rate limits. Contact paul@athrecs.com to
-              request access or deletion, including the approximate time and topic of your
-              conversation so we can locate it.
-            </p>
-            <p className="mt-3">
-              If an Open WhatsApp link is available, it opens a separate conversation in WhatsApp.
-              Your website chat is not forwarded automatically, and WhatsApp messages are not
-              included in these website transcripts.
-            </p>
-          </NoticeSection>
+          {INTERCOM_ENABLED ? (
+            <NoticeSection title="Website chat (Intercom) and AI assistant">
+              <p>
+                Website chat is provided by Intercom, our customer messaging provider, in its United
+                States region. When you use the chat, Intercom processes your messages, the page you
+                started from, basic device and browser information and a cookie that recognises your
+                chat session, so that the conversation can continue and authorised AthRecs staff can
+                review and reply. First replies come from Fin, Intercom’s AI assistant. AI answers
+                may be incorrect, and the assistant cannot verify your identity, claim results,
+                create an AthRecs account or change your profile.
+              </p>
+              <p className="mt-3">
+                If you ask us to research missing results or tell us about a race, the chat may ask
+                for your name, an email address for our reply and details about the races. We use
+                these only to research your request, update AthRecs after review and contact you
+                about it. Sending a request does not create an AthRecs account or publish anything,
+                and it does not sign you up for marketing. Do not send passwords, sign-in codes,
+                payment details, identity documents or your full date of birth in the chat.
+              </p>
+              <p className="mt-3">
+                Contact paul@athrecs.com to request access to or deletion of your chat messages and
+                request details.
+              </p>
+            </NoticeSection>
+          ) : (
+            <NoticeSection title="AI assistant and chat transcripts">
+              <p>
+                When you send a message to the AthRecs AI assistant, we save the conversation,
+                selected language, timestamps and starting public page so authorised staff can
+                review support enquiries and improve the service. Recent messages are processed by
+                our hosting provider Vercel and OpenAI to generate a reply. AI answers may be
+                incorrect; the assistant cannot verify your identity, claim results or change your
+                account. This is not a live human chat, and staff monitoring or a reply is not
+                guaranteed.
+              </p>
+              <p className="mt-3">
+                Chats are anonymous unless you identify yourself in your messages. Do not send
+                passwords, sign-in codes, payment details or sensitive documents. A secure browser
+                cookie keeps your conversation available for up to seven days. Chat records expire
+                after 90 days and are removed on the next chat or staff history visit. Staff can
+                download or delete a transcript. We use these records to provide requested support
+                and prevent abuse; sending a message does not sign you up for marketing. A
+                short-lived hashed network identifier may be used for rate limits. Contact
+                paul@athrecs.com to request access or deletion, including the approximate time and
+                topic of your conversation so we can locate it.
+              </p>
+              <p className="mt-3">
+                If an Open WhatsApp link is available, it opens a separate conversation in WhatsApp.
+                Your website chat is not forwarded automatically, and WhatsApp messages are not
+                included in these website transcripts.
+              </p>
+            </NoticeSection>
+          )}
         </div>
         <div id="club-registration">
           <NoticeSection title="Club registration and representative verification">
@@ -214,15 +242,15 @@ function AthletePrivacyPage() {
         <NoticeSection title="Sign-in and recognised browser records">
           <p className="mb-3">
             We also record failed authentication requests, verification and recovery requests,
-            sign-out requests and technical error categories to help resolve access problems.
-            An email entered during a failed attempt is unverified and does not prove who made it.
-            Diagnostics include the website and page category, response status and duration,
-            browser version, release reference, and a support reference. Browser error reports
-            include a broad screen-size category and whether the browser reports being online.
-            We do not store passwords, verification codes, session tokens, request bodies,
-            page query strings, raw error messages or stack traces in these diagnostics.
-            Browser reports are limited to five per page load and rate-limited using a short-lived,
-            keyed network reference; raw IP addresses are not stored in this log.
+            sign-out requests and technical error categories to help resolve access problems. An
+            email entered during a failed attempt is unverified and does not prove who made it.
+            Diagnostics include the website and page category, response status and duration, browser
+            version, release reference, and a support reference. Browser error reports include a
+            broad screen-size category and whether the browser reports being online. We do not store
+            passwords, verification codes, session tokens, request bodies, page query strings, raw
+            error messages or stack traces in these diagnostics. Browser reports are limited to five
+            per page load and rate-limited using a short-lived, keyed network reference; raw IP
+            addresses are not stored in this log.
           </p>
           <p>
             To support your account and investigate access problems, authorised staff can see your
@@ -239,12 +267,12 @@ function AthletePrivacyPage() {
             recognised browser records expire after 90 days and are removed on the next sign-in or
             staff client-data visit. Overall counts remain while the account exists. Deleting the
             account also deletes its login history and recognised browser records. These records are
-            private and are not used for marketing. Failed-attempt and error diagnostics also
-            expire after 90 days and are removed on the next diagnostic capture or staff log
-            visit. Short-lived rate-limit references are removed after a day on the next such
-            request. Account deletion removes associated diagnostics and failed attempts using
-            that account's current email. Browser reports can be missing if the network is
-            unavailable, the page cannot start, or reporting limits are reached.
+            private and are not used for marketing. Failed-attempt and error diagnostics also expire
+            after 90 days and are removed on the next diagnostic capture or staff log visit.
+            Short-lived rate-limit references are removed after a day on the next such request.
+            Account deletion removes associated diagnostics and failed attempts using that account's
+            current email. Browser reports can be missing if the network is unavailable, the page
+            cannot start, or reporting limits are reached.
           </p>
         </NoticeSection>
 
@@ -357,8 +385,8 @@ function AthletePrivacyPage() {
           <p>
             Signed-in visitors can submit factual corrections and supporting links for staff review.
             Suggestions and the submitting account reference stay in the staff review queue; they do
-            not change a public profile or race page automatically. Race suggestions also retain
-            the race reference and staff review status so we can check and handle the correction.
+            not change a public profile or race page automatically. Race suggestions also retain the
+            race reference and staff review status so we can check and handle the correction.
           </p>
         </NoticeSection>
 

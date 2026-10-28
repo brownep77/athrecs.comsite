@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -284,6 +285,7 @@ export function CompactDiscoveryPage({
                 ? (disciplineIntros[sport.slug] ?? sportGuideText(sport.sport).intro)
                 : "Your next start line, all in one place. Find races, compare dates and save your favourites."}
             </p>
+            <ChatPrompt kind="race" className="mt-3" />
           </header>
 
           <section id="fixtures" className="scroll-mt-44" aria-labelledby="fixtures-heading">
