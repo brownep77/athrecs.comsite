@@ -6,6 +6,8 @@ on:
       - "src/components/running/Road*Pages.tsx"
       - "src/lib/running/road-*-seo.ts"
       - "src/lib/athrecs/race-*"
+      - "src/lib/auth/signup-alerts.server.ts"
+      - "src/routes/api/signup-alerts.ts"
       - "src/lib/athrecs/seo.ts"
       - "src/runrecs/seo.ts"
       - "src/data/runrecs-race-guides.ts"
