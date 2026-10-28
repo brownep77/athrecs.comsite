@@ -455,9 +455,12 @@ function AthleteContent() {
               : "Athlete profile"}
         </p>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <h1 className="min-w-0 font-display text-3xl font-semibold text-fg sm:text-4xl">
-            {athlete.display_name}
-          </h1>
+          <div className="min-w-0 space-y-4">
+            <h1 className="font-display text-3xl font-semibold text-fg sm:text-4xl">
+              {athlete.display_name}
+            </h1>
+            <AthleteProfileStatuses roles={profileStatuses} />
+          </div>
           {!athlete.is_claimed ? (
             <div className="space-y-2 sm:shrink-0">
               <p className="text-sm font-medium text-muted">Is this you?</p>
@@ -472,7 +475,6 @@ function AthleteContent() {
             </div>
           ) : null}
         </div>
-        <AthleteProfileStatuses roles={profileStatuses} />
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />
           <span className="text-xs text-muted">
