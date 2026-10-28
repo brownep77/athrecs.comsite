@@ -33,7 +33,7 @@ import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage
 import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
 import { createFileRoute, Link, notFound, redirect, useRouter } from "@tanstack/react-router";
-import { ArrowLeft, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
 import {
   getAthleteBySlug,
   getPrivateAthleteBySlug,
@@ -454,9 +454,24 @@ function AthleteContent() {
               ? "Public figure athlete profile"
               : "Athlete profile"}
         </p>
-        <h1 className="font-display text-3xl font-semibold text-fg sm:text-4xl">
-          {athlete.display_name}
-        </h1>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <h1 className="min-w-0 font-display text-3xl font-semibold text-fg sm:text-4xl">
+            {athlete.display_name}
+          </h1>
+          {!athlete.is_claimed ? (
+            <div className="space-y-2 sm:shrink-0">
+              <p className="text-sm font-medium text-muted">Is this you?</p>
+              <Link
+                to="/claim-results"
+                search={{ resultId: profileResults[0]?.resultId }}
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#c2410c] px-5 py-3 text-base font-semibold text-white no-underline shadow-sm transition-colors hover:bg-[#9a3412] focus-visible:ring-2 focus-visible:ring-[#c2410c] focus-visible:ring-offset-2 sm:w-auto"
+              >
+                Claim your profile
+                <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
+              </Link>
+            </div>
+          ) : null}
+        </div>
         <AthleteProfileStatuses roles={profileStatuses} />
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />
@@ -546,15 +561,6 @@ function AthleteContent() {
             title={`${athlete.display_name} athlete profile`}
             compact
           />
-          {!athlete.is_claimed ? (
-            <Link
-              to="/claim-results"
-              search={{ resultId: profileResults[0]?.resultId }}
-              className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 text-sm font-medium text-accent"
-            >
-              Is this you? Claim profile
-            </Link>
-          ) : null}
         </div>
         {aliases.length > 0 && (
           <div className="space-y-1.5 border-t border-border pt-3">
