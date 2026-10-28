@@ -29,6 +29,10 @@ export function isTrailHistoryResult(row: SourcePerformance): boolean {
 
 const crossCountryDiscipline = /\b(?:cross[ -]country|xc)\b/i;
 export function isCrossCountryHistoryResult(row: SourcePerformance): boolean {
+  if (
+    /\b(?:ski(?:ing)?|rollerski(?:ing)?|langrenn)\b/i.test(`${row.discipline} ${row.meeting ?? ""}`)
+  )
+    return false;
   return (
     crossCountryDiscipline.test(row.discipline) ||
     crossCountryDiscipline.test(row.meeting ?? "") ||

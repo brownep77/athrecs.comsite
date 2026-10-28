@@ -13,6 +13,13 @@ const word = (value: string) => `(^|[^a-z0-9_])(${value})([^a-z0-9_]|$)`;
  * Unknown category/wave labels must not silently create an Athletics membership.
  */
 export const sourceHistorySportRules: readonly SportRule[] = [
+  // Explicit ski disciplines precede cross-country, road and kilometre running rules.
+  { field: "discipline", pattern: word("roller[ -]?ski(ing)?"), sport: "Roller Skiing" },
+  {
+    field: "discipline",
+    pattern: word("cross[ -]country ski(ing)?|nordic ski(ing)?|xc ski(ing)?|langrenn"),
+    sport: "Cross-country Skiing",
+  },
   ...(
     [
       "HYROX",
@@ -130,6 +137,13 @@ export const sourceHistorySportRules: readonly SportRule[] = [
     ),
     sport: "Running",
   },
+  // Specific ski titles precede generic cross-country titles when discipline is unknown.
+  { field: "meeting", pattern: word("roller[ -]?ski(ing)?"), sport: "Roller Skiing" },
+  {
+    field: "meeting",
+    pattern: word("cross[ -]country ski(ing)?|nordic ski(ing)?|xc ski(ing)?|langrenn"),
+    sport: "Cross-country Skiing",
+  },
   // Event titles can identify a sport when the discipline contains only an age group or wave.
   // Explicit discipline/provider evidence always wins over the meeting title.
   ...(
@@ -218,23 +232,23 @@ export function sourceHistorySportSql(
 export function sourceHistorySportMigration(): string {
   return `-- Generated from source-history-sport.ts; checked by verify-source-history-sport.mjs.
 -- Derived classification only: original performances, identity and visibility stay intact.
-create or replace function athlete_source_sport_v4(provider text, discipline text, meeting text default '')
+create or replace function athlete_source_sport_v5(provider text, discipline text, meeting text default '')
 returns text language sql immutable parallel safe as $function$
   select ${sourceHistorySportSql()}
 $function$;
 
-create or replace function athlete_history_sports_v4(provider text, performances jsonb)
+create or replace function athlete_history_sports_v5(provider text, performances jsonb)
 returns text[] language sql immutable parallel safe as $function$
   select coalesce(array_agg(distinct sport order by sport) filter (where sport is not null),array[]::text[])
   from (
-    select public.athlete_source_sport_v4(provider,p->>'discipline',p->>'meeting') as sport
+    select public.athlete_source_sport_v5(provider,p->>'discipline',p->>'meeting') as sport
     from jsonb_array_elements(case when jsonb_typeof(performances)='array' then performances else '[]'::jsonb end) p
     where coalesce(p->>'profileExcluded','false')<>'true'
   ) classified
 $function$;
 
 -- Full index supports staff review of unpublished histories as well as public discovery.
-create index if not exists source_history_sports_v4_lookup
-  on athlete_source_histories using gin (athlete_history_sports_v4(provider,performances));
+create index if not exists source_history_sports_v5_lookup
+  on athlete_source_histories using gin (athlete_history_sports_v5(provider,performances));
 `;
 }
