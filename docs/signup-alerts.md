@@ -28,3 +28,24 @@ Run `npm run verify:signup-alerts` for disposable database, real OTP signup,
 notification content, per-recipient retry, concurrency, rollback, repeat-login,
 preview and worker authorization checks. All provider calls are intercepted;
 no real email is sent by this test.
+
+## Fixture correction alerts
+
+New race-page suggestions also notify both addresses from `paul@athrecs.com`.
+The email includes the race and page, correction, supporting URL, submitted name
+and account email, London submission time, and the private event-register review
+queue. Catalogue, road-race and ultra guide suggestions use the same process.
+Alerts do not approve corrections or contact the person submitting them.
+
+`race_edit_alert_deliveries` is queued in the submission transaction, with a
+snapshot of the submitted information. Delivery starts after commit and the
+existing `/api/signup-alerts` cron retries it. Each recipient has an independent
+receipt, frozen email and stable provider idempotency key, with the same 23-hour
+review cutoff. Fictional test accounts notify only `paul@athrecs.com` and are
+clearly labelled. Historical suggestions are not backfilled; reviewing an old
+suggestion does not send another alert.
+
+Run `node scripts/verify-race-edit-suggestions.mjs` for real authenticated
+submission, transaction rollback, two-recipient queueing, failed-recipient retry,
+concurrent reservation, frozen retry content, safe HTML and test-account isolation.
+Provider delivery is intercepted; the test never sends real emails.
