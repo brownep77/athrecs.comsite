@@ -601,6 +601,8 @@ export async function publishCatalogueBatch(
   options: {
     eventIdentityCorrections?: { slug: string; expectedWebsite: string }[];
     reviewedEventMetadata?: { slug: string; expected: Record<string, unknown> }[];
+    preserveConfirmedStartTimes?: boolean;
+    expectedAbsentEvents?: string[];
   } = {},
 ) {
   if (dbSource !== "neon") {
@@ -683,6 +685,11 @@ export async function publishCatalogueBatch(
 
       const beforeEvents = new Map<string, EventSnapshot | null>();
       for (const slug of eventSlugs) beforeEvents.set(slug, await snapshotEvent(tx, slug));
+      for (const slug of options.expectedAbsentEvents ?? []) {
+        if (!suppliedEventSlugs.has(slug) || beforeEvents.get(slug)) {
+          throw new Error(`Reviewed new event identity changed: ${slug}`);
+        }
+      }
 
       const beforeEditions = new Map<string, EditionSnapshot | null>();
       for (const edition of editionInputs) {
@@ -695,9 +702,17 @@ export async function publishCatalogueBatch(
       // Recheck under the existing row locks: a verified start may have been
       // added or corrected after validation. Never clear it during a scan retry.
       for (const edition of editionInputs) {
+        const storedStart = beforeEditions.get(editionKey(edition))?.record.start_time;
+        if (options.preserveConfirmedStartTimes && storedStart) {
+          const normalizeClock = (value: unknown) =>
+            typeof value === "string" && value.length === 5 ? `${value}:00` : value;
+          if (normalizeClock(storedStart) !== normalizeClock(edition.startTime)) {
+            throw new Error(`Reviewed edition start changed: ${editionKey(edition)}`);
+          }
+        }
         const startError = automatedStartTimeError(
           batch.source_key,
-          beforeEditions.get(editionKey(edition))?.record.start_time,
+          storedStart,
           edition.startTime,
         );
         if (startError) throw new Error(`${editionKey(edition)}: ${startError}`);

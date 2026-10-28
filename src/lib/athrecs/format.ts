@@ -61,7 +61,7 @@ export function statusLabel(status: EntryStatus): string {
     case "Cancelled":
       return "Cancelled";
     case "TBC":
-      return "Date TBC";
+      return "Status TBC";
   }
 }
 

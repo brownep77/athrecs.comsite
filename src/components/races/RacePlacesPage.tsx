@@ -12,6 +12,8 @@ import type { RacePlacePageData } from "@/lib/athrecs/race-places";
 import { placeEntryUrl } from "@/lib/athrecs/race-place-facets";
 import { racePlaceUrl } from "@/lib/athrecs/race-places-seo";
 import { racePlaceCopy, type RaceCopyParagraph } from "@/lib/athrecs/race-places-copy";
+import { isColombiaRunningGuide } from "@/lib/athrecs/colombia-race-guide";
+import { ColombiaRaceHero, ColombiaRacePlanning } from "./ColombiaRaceGuide";
 
 const link = "text-accent underline underline-offset-4 hover:text-fg";
 const monthLabel = (value: string) =>
@@ -48,6 +50,7 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
   }, [router]);
   const { place } = data;
   const copy = racePlaceCopy(data);
+  const colombia = isColombiaRunningGuide(data);
   const renderRaces = (races: RacePlacePageData["races"]) => (
     <div className="grid gap-4 md:grid-cols-2">
       {races.map((race) => (
@@ -203,28 +206,32 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
           </span>
         ))}
       </nav>
-      <header className="border-b border-border pb-6">
-        {place.country ? (
-          <CountryFlag country={place.country} showName showCode />
-        ) : (
-          <p className="text-sm font-semibold text-accent">Explore by location</p>
-        )}
-        <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
-          {copy.heading}
-        </h1>
-        <div className="mt-4 max-w-3xl space-y-3 leading-7 text-muted">
-          {copy.intro.map((paragraph, index) => (
-            <p key={index}>{copyParagraph(paragraph)}</p>
-          ))}
-        </div>
-        <p className="mt-3 text-sm text-muted">
-          {data.total.toLocaleString("en-GB")} listed events ·{" "}
-          {data.upcomingCount.toLocaleString("en-GB")} with upcoming dates
-          {data.featuredCount
-            ? ` · ${data.featuredCount.toLocaleString("en-GB")} upcoming featured races`
-            : ""}
-        </p>
-      </header>
+      {colombia ? (
+        <ColombiaRaceHero data={data} />
+      ) : (
+        <header className="border-b border-border pb-6">
+          {place.country ? (
+            <CountryFlag country={place.country} showName showCode />
+          ) : (
+            <p className="text-sm font-semibold text-accent">Explore by location</p>
+          )}
+          <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+            {copy.heading}
+          </h1>
+          <div className="mt-4 max-w-3xl space-y-3 leading-7 text-muted">
+            {copy.intro.map((paragraph, index) => (
+              <p key={index}>{copyParagraph(paragraph)}</p>
+            ))}
+          </div>
+          <p className="mt-3 text-sm text-muted">
+            {data.total.toLocaleString("en-GB")} listed events ·{" "}
+            {data.upcomingCount.toLocaleString("en-GB")} with upcoming dates
+            {data.featuredCount
+              ? ` · ${data.featuredCount.toLocaleString("en-GB")} upcoming featured races`
+              : ""}
+          </p>
+        </header>
+      )}
       <div
         className={
           data.nearby.length ? "grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_16rem]" : ""
@@ -513,6 +520,7 @@ export function RacePlacesPage({ data }: { data: RacePlacePageData }) {
               </nav>
             ) : null}
           </section>
+          {colombia && data.page === 1 ? <ColombiaRacePlanning data={data} /> : null}
           {data.featuredRaces.length ? (
             <section aria-labelledby="featured-races-heading" className="space-y-4">
               <h2 id="featured-races-heading" className="font-display text-2xl font-semibold">
