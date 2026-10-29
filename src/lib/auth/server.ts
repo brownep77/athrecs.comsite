@@ -1,4 +1,5 @@
 import { betterAuth } from "better-auth";
+import { APIError, getOAuthState } from "better-auth/api";
 import { bearer, emailOTP, genericOAuth } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { getCookie } from "@tanstack/react-start/server";
@@ -11,6 +12,7 @@ import { emailAndPasswordEnabled } from "./email-password";
 import { GROK_PROVIDERS } from "./providers";
 import { pgliteDialect } from "./pglite-dialect";
 import { captureCreatedSession } from "./access-diagnostics.server";
+import { normalizeSignupDetails, signupDetailsError, signupUserFields } from "./signup-details";
 import {
   GROK_ISSUER_DEFAULT,
   PREVIEW_ALLOWED_HOSTS,
@@ -332,6 +334,7 @@ export const auth = betterAuth({
   baseURL,
   secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
   database,
+  user: { additionalFields: signupUserFields },
   databaseHooks: {
     session: {
       create: {
@@ -351,6 +354,18 @@ export const auth = betterAuth({
     },
     user: {
       create: {
+        before: async (user) => {
+          // OAuth carries the form through Better Auth's protected state, never
+          // through callback query parameters. Direct email requests use fields
+          // parsed by Better Auth. Existing sign-ins do not enter this hook.
+          const state = await getOAuthState();
+          const details = normalizeSignupDetails(state?.athrecsSignup ?? user);
+          const invalid = signupDetailsError(details);
+          if (invalid) throw new APIError("BAD_REQUEST", invalid);
+          return {
+            data: { ...user, ...details, name: `${details.firstName} ${details.lastName}` },
+          };
+        },
         after: async (user) => {
           const { notifyNewSignup } = await import("./signup-alerts.server");
           await notifyNewSignup(user.id);

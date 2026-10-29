@@ -1,3 +1,4 @@
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { get as httpGet } from "node:http";
@@ -99,7 +100,7 @@ try {
   }
   console.log("Anonymous SSR blocked and uncached.");
   const signup = await post("sign-up/email", {
-    name: "Profile Viewer Test",
+    ...signupDetails("Profile Viewer Test"),
     email: "profile-viewer@example.test",
     password: "Test-only-password-123!",
   });

@@ -82,16 +82,30 @@ try {
   const signUpDialog = page.getByRole("dialog", { name: "Create an Athlete Account" });
   await signUpDialog.waitFor({ state: "visible", timeout: timeoutMs });
 
-  const fullName = signUpDialog.locator('input[autocomplete="name"]');
+  const firstName = signUpDialog.getByLabel("First name", { exact: true });
+  const lastName = signUpDialog.getByLabel("Last name", { exact: true });
+  const country = signUpDialog.getByLabel("Country", { exact: true });
+  const location = signUpDialog.getByLabel("Town, city, postcode or ZIP code", { exact: true });
   const email = signUpDialog.locator('input[autocomplete="email"]');
   const newPasswords = signUpDialog.locator('input[autocomplete="new-password"]');
   const createWithEmail = signUpDialog.getByRole("button", {
     name: "Create account with email",
   });
-  for (const field of [fullName, email, newPasswords.first(), createWithEmail]) {
+  for (const field of [
+    firstName,
+    lastName,
+    country,
+    location,
+    email,
+    newPasswords.first(),
+    createWithEmail,
+  ]) {
     await field.waitFor({ state: "visible", timeout: timeoutMs });
   }
-  record("full name field is present", true);
+  record("first name, last name, country and one location field are present", true);
+  for (const field of [firstName, lastName, country, location]) {
+    record("registration detail is required", await field.evaluate((input) => input.required));
+  }
   record("email field is present", true);
   record("password field is present", (await newPasswords.count()) >= 1);
   record("password is entered once on AthRecs sign-up", (await newPasswords.count()) === 1);

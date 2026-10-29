@@ -1,10 +1,11 @@
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { generateKeyPairSync } from "node:crypto";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
 
-// Real auth endpoints and profile RPCs; only email delivery is intercepted.
+// Real auth endpoints and profile RPCs; email and Google's token endpoint are mocked.
 // Never send a test email or use a configured external database.
 const delivery = !process.argv.includes("--no-email");
 process.env.DATABASE_URL = "";
@@ -32,9 +33,22 @@ process.env.APPLE_PRIVATE_KEY = generateKeyPairSync("ec", {
   publicKeyEncoding: { type: "spki", format: "pem" },
 }).privateKey;
 const sent = [];
+const oauthProfiles = new Map();
 const realFetch = globalThis.fetch;
 globalThis.fetch = async (input, init) => {
   const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+  if (url === "https://oauth2.googleapis.com/token") {
+    const body = new URLSearchParams(init?.body ?? (await input.text()));
+    const profile = oauthProfiles.get(body.get("code"));
+    assert(profile, "Only explicitly issued synthetic OAuth codes can be exchanged");
+    const encode = (value) => Buffer.from(JSON.stringify(value)).toString("base64url");
+    return Response.json({
+      access_token: "synthetic-google-access-token",
+      token_type: "Bearer",
+      expires_in: 3600,
+      id_token: `${encode({ alg: "none" })}.${encode(profile)}.synthetic`,
+    });
+  }
   if (url === "https://api.resend.com/emails") {
     assert(delivery, "Disabled email delivery must never be called");
     const email = JSON.parse(init.body);
@@ -97,6 +111,38 @@ async function sendCode(email) {
   assert(code, "A six-digit code must reach the email adapter");
   return code;
 }
+function responseCookies(response) {
+  return response.headers
+    .getSetCookie()
+    .map((cookie) => cookie.split(";")[0])
+    .join("; ");
+}
+async function startGoogle(details) {
+  const response = await post("sign-in/social", {
+    provider: "google",
+    callbackURL: "/athlete-account",
+    errorCallbackURL: "/athlete-account?auth=1&authMode=signup",
+    disableRedirect: true,
+    ...(details ? { additionalData: { athrecsSignup: details } } : {}),
+  });
+  assert.equal(response.status, 200, await response.clone().text());
+  const url = new URL((await response.json()).url);
+  // The provider receives an opaque state, never the submitted private location.
+  assert(!url.href.includes("Norwich") && !url.href.includes("signupLocation"));
+  return { state: url.searchParams.get("state"), cookie: responseCookies(response) };
+}
+async function finishGoogle(flow, email, extraQuery = {}) {
+  const code = `synthetic-oauth-${oauthProfiles.size + 1}`;
+  oauthProfiles.set(code, {
+    sub: email,
+    email,
+    email_verified: true,
+    name: "Provider Nickname",
+  });
+  const url = new URL(`${origin}/api/auth/callback/google`);
+  url.search = new URLSearchParams({ state: flow.state, code, ...extraQuery }).toString();
+  return fetch(url, { headers: { origin, cookie: flow.cookie }, redirect: "manual" });
+}
 try {
   await server.listen();
   const db = await server.ssrLoadModule("/src/lib/db.ts");
@@ -112,6 +158,59 @@ try {
       ? ["google", "apple", "microsoft", "facebook", "twitter", "linkedin"]
       : ["google", "apple"],
   );
+  const invalidDetails = [
+    ["full-name-only", { name: "Full Name" }, "SIGNUP_NAME_REQUIRED"],
+    ["missing-first", { ...signupDetails(), firstName: undefined }, "SIGNUP_NAME_REQUIRED"],
+    ["blank-first", { ...signupDetails(), firstName: " \u00a0\u200b " }, "SIGNUP_NAME_REQUIRED"],
+    ["missing-last", { ...signupDetails(), lastName: undefined }, "SIGNUP_NAME_REQUIRED"],
+    ["blank-last", { ...signupDetails(), lastName: " \t " }, "SIGNUP_NAME_REQUIRED"],
+    [
+      "missing-country",
+      { ...signupDetails(), signupCountry: undefined },
+      "SIGNUP_COUNTRY_REQUIRED",
+    ],
+    ["blank-country", { ...signupDetails(), signupCountry: "   " }, "SIGNUP_COUNTRY_REQUIRED"],
+    [
+      "invalid-country",
+      { ...signupDetails(), signupCountry: "Not a country" },
+      "SIGNUP_COUNTRY_REQUIRED",
+    ],
+    [
+      "missing-location",
+      { ...signupDetails(), signupLocation: undefined },
+      "SIGNUP_LOCATION_REQUIRED",
+    ],
+    [
+      "blank-location",
+      { ...signupDetails(), signupLocation: " \u00a0\u200b " },
+      "SIGNUP_LOCATION_REQUIRED",
+    ],
+    ["long-first", { ...signupDetails(), firstName: "A".repeat(61) }, "SIGNUP_DETAILS_INVALID"],
+    ["long-last", { ...signupDetails(), lastName: "B".repeat(61) }, "SIGNUP_DETAILS_INVALID"],
+    [
+      "long-full-name",
+      { ...signupDetails(), firstName: "A".repeat(60), lastName: "B".repeat(60) },
+      "SIGNUP_DETAILS_INVALID",
+    ],
+    [
+      "long-location",
+      { ...signupDetails(), signupLocation: "C".repeat(121) },
+      "SIGNUP_DETAILS_INVALID",
+    ],
+  ];
+  for (const [label, details, expectedCode] of invalidDetails) {
+    const email = `invalid-password-${label}@example.test`;
+    const before = sent.length;
+    const response = await post("sign-up/email", {
+      ...details,
+      email,
+      password: "Test-password-123!",
+    });
+    assert.equal(response.status, 400, `${label}: ${await response.clone().text()}`);
+    assert.equal((await response.json()).code, expectedCode, label);
+    assert.equal((await sql`select count(*)::int as n from "user" where email=${email}`)[0].n, 0);
+    assert.equal(sent.length, before, "Rejected signup sends no verification or welcome message");
+  }
   if (!delivery) {
     assert.equal(
       (
@@ -125,9 +224,10 @@ try {
     const created = await post("sign-up/email", {
       email: "password-only@example.test",
       password: "Test-password-123!",
-      name: "Password Test",
+      ...signupDetails("Password Test"),
     });
     assert.equal(created.status, 200, await created.clone().text());
+    await sql`update "user" set name='',"firstName"=null,"lastName"=null,"signupCountry"=null,"signupLocation"=null where email='password-only@example.test'`;
     const login = await post("sign-in/email", {
       email: "password-only@example.test",
       password: "Test-password-123!",
@@ -135,6 +235,11 @@ try {
     assert.equal(login.status, 200, await login.clone().text());
     const body = await login.json();
     assert.equal(body.user.emailVerified, false);
+    assert.equal(
+      body.user.name,
+      "",
+      "A legacy account without registration details can still sign in",
+    );
     const account = await rpc(
       "athrecs/athlete-account-api",
       "getMyAthleteAccount",
@@ -200,6 +305,50 @@ try {
       "No-email mode passed: passwords work; codes, recovery and unverified profile saving stay unavailable.",
     );
   } else {
+    for (const [label, details, expectedCode] of invalidDetails) {
+      const email = `invalid-otp-${label}@example.test`;
+      const code = await sendCode(email);
+      const response = await post("sign-in/email-otp", { ...details, email, otp: code });
+      assert.equal(response.status, 400, `${label}: ${await response.clone().text()}`);
+      assert.equal((await response.json()).code, expectedCode, label);
+      assert.equal((await sql`select count(*)::int as n from "user" where email=${email}`)[0].n, 0);
+      assert(
+        (await post("sign-in/email-otp", { ...signupDetails(), email, otp: code })).status >= 400,
+        "A rejected new account does not make a consumed code reusable",
+      );
+    }
+    const recoveredEmail = "invalid-otp-full-name-only@example.test";
+    const recovered = await post("sign-in/email-otp", {
+      email: recoveredEmail,
+      otp: await sendCode(recoveredEmail),
+      name: "Ignored Full Name",
+      firstName: "  Ana\u00a0María  ",
+      lastName: " O’Neill-Smith ",
+      signupCountry: " england ",
+      signupLocation: "  NR1  2AB  ",
+    });
+    assert.equal(recovered.status, 200, await recovered.clone().text());
+    const recoveredUser = (await recovered.json()).user;
+    assert.equal(recoveredUser.name, "Ana María O’Neill-Smith");
+    for (const key of ["firstName", "lastName", "signupCountry", "signupLocation"])
+      assert(!(key in recoveredUser), `${key} stays out of the auth response`);
+    const [storedDetails] =
+      await sql`select "firstName","lastName","signupCountry","signupLocation" from "user" where id=${recoveredUser.id}`;
+    assert.deepEqual(storedDetails, {
+      firstName: "Ana María",
+      lastName: "O’Neill-Smith",
+      signupCountry: "England",
+      signupLocation: "NR1 2AB",
+    });
+    // Synthetic legacy data explicitly represents registrations made before this requirement.
+    await sql`update "user" set name='',"firstName"=null,"lastName"=null,"signupCountry"=null,"signupLocation"=null where id=${recoveredUser.id}`;
+    const legacyOtp = await post("sign-in/email-otp", {
+      email: recoveredEmail,
+      otp: await sendCode(recoveredEmail),
+    });
+    assert.equal(legacyOtp.status, 200, await legacyOtp.clone().text());
+    assert.equal((await legacyOtp.json()).user.id, recoveredUser.id);
+
     const email = "code-runner@example.test";
     const code = await sendCode(email);
     const stored = await sql`select value from verification where identifier like ${`%${email}%`}`;
@@ -208,10 +357,15 @@ try {
       stored.every((row) => !row.value.includes(code)),
       "Only a hash of the code is stored",
     );
-    const login = await post("sign-in/email-otp", { email, otp: code });
+    const login = await post("sign-in/email-otp", {
+      email,
+      otp: code,
+      ...signupDetails("Code Runner"),
+    });
     assert.equal(login.status, 200, await login.clone().text());
     const user = await login.json();
     assert.equal(user.user.emailVerified, true);
+    assert.equal(user.user.name, "Code Runner");
     assert(
       (await post("sign-in/email-otp", { email, otp: code })).status >= 400,
       "Codes are single-use",
@@ -224,7 +378,11 @@ try {
     );
     assert.equal(account.dateOfBirth, "");
     assert.equal(account.postcode, "");
-    assert.equal(account.exists, false, "Email-only sign-up does not require a completed profile");
+    assert.equal(
+      account.exists,
+      false,
+      "Signup details do not publish or complete an athlete profile",
+    );
     const saved = await rpc(
       "athrecs/athlete-account-api",
       "saveMyAthleteAccount",
@@ -356,7 +514,7 @@ try {
     const signup = await post("sign-up/email", {
       email: passwordEmail,
       password,
-      name: "Password Runner",
+      ...signupDetails("Password Runner"),
       callbackURL: "/athlete-account",
     });
     assert.equal(signup.status, 200, await signup.clone().text());
@@ -374,7 +532,7 @@ try {
     const unverified = await post("sign-up/email", {
       email: hijackEmail,
       password: attackerPassword,
-      name: "Unverified Name",
+      ...signupDetails("Unverified Name"),
     });
     assert.equal(unverified.status, 200, await unverified.clone().text());
     const ownerLogin = await post("sign-in/email-otp", {
@@ -421,8 +579,68 @@ try {
       assert.equal(url.protocol, "https:");
       assert.equal(url.searchParams.get("redirect_uri"), `${origin}/api/auth/callback/${provider}`);
     }
+    const missingOAuthEmail = "oauth-missing-details@example.test";
+    const deniedOAuth = await finishGoogle(await startGoogle(), missingOAuthEmail, {
+      firstName: "Query",
+      lastName: "Spoof",
+      signupCountry: "England",
+      signupLocation: "Norwich",
+    });
+    assert.equal(deniedOAuth.status, 302);
+    assert(
+      new URL(deniedOAuth.headers.get("location"), origin).searchParams.has("error"),
+      "OAuth cannot bypass required details with a provider display name or callback query",
+    );
+    assert.equal(
+      (await sql`select count(*)::int as n from "user" where email=${missingOAuthEmail}`)[0].n,
+      0,
+    );
+    const validOAuth = await startGoogle(signupDetails("OAuth Test Runner"));
+    const oauthEmail = "oauth-complete-details@example.test";
+    const missingCookie = await finishGoogle({ ...validOAuth, cookie: "" }, oauthEmail);
+    assert.equal(missingCookie.status, 302);
+    assert(new URL(missingCookie.headers.get("location"), origin).searchParams.has("error"));
+    assert.equal(
+      (await sql`select count(*)::int as n from "user" where email=${oauthEmail}`)[0].n,
+      0,
+    );
+    const completedOAuth = await finishGoogle(validOAuth, oauthEmail);
+    assert.equal(completedOAuth.status, 302);
+    assert.equal(
+      new URL(completedOAuth.headers.get("location"), origin).pathname,
+      "/athlete-account",
+    );
+    assert(!new URL(completedOAuth.headers.get("location"), origin).searchParams.has("error"));
+    const [oauthUser] =
+      await sql`select id,name,"firstName","lastName","signupCountry","signupLocation" from "user" where email=${oauthEmail}`;
+    assert.deepEqual(
+      { ...oauthUser, id: undefined },
+      {
+        id: undefined,
+        name: "OAuth Test Runner",
+        firstName: "OAuth",
+        lastName: "Test Runner",
+        signupCountry: "England",
+        signupLocation: "Norwich",
+      },
+    );
+    const oauthSession = await fetch(`${origin}/api/auth/get-session`, {
+      headers: { origin, cookie: responseCookies(completedOAuth) },
+    });
+    assert.equal(oauthSession.status, 200);
+    const sessionUser = (await oauthSession.json()).user;
+    assert.equal(sessionUser.id, oauthUser.id);
+    for (const key of ["firstName", "lastName", "signupCountry", "signupLocation"])
+      assert(!(key in sessionUser), `${key} stays out of the session response`);
+    const existingOAuth = await finishGoogle(await startGoogle(), oauthEmail);
+    assert.equal(existingOAuth.status, 302);
+    assert(!new URL(existingOAuth.headers.get("location"), origin).searchParams.has("error"));
+    assert.equal(
+      (await sql`select count(*)::int as n from "user" where email=${oauthEmail}`)[0].n,
+      1,
+    );
     console.log(
-      "Email login flow passed: delivery adapter, password verification, hashed one-time codes, expiry, attempts, stable profile IDs, DOB validation, scoped name writes, cross-site/unauthenticated rejection, pre-registration attack prevention, logout revocation, privacy and six OAuth redirects.",
+      "Email login flow passed: required names/country/location, normalized private signup details, fresh-code recovery, legacy login, delivery adapter, password verification, hashed one-time codes, expiry, attempts, stable profile IDs, DOB validation, scoped name writes, cross-site/unauthenticated rejection, pre-registration attack prevention, logout revocation, OAuth protected-state signup and six OAuth redirects.",
     );
   }
 } finally {

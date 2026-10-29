@@ -1,5 +1,6 @@
 // Real TanStack RPCs, authenticated browser screens and disposable PGlite.
 // No production database, external requests or emails are used.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { createServer } from "vite";
@@ -67,7 +68,7 @@ async function signup(name, email) {
   const response = await fetch(`${origin}/api/auth/sign-up/email`, {
     method: "POST",
     headers: { origin, "content-type": "application/json" },
-    body: JSON.stringify({ name, email, password: "Synthetic-club-password!" }),
+    body: JSON.stringify({ ...signupDetails(name), email, password: "Synthetic-club-password!" }),
   });
   assert.equal(response.status, 200);
   return response.json();

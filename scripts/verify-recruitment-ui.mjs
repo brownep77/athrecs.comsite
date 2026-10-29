@@ -51,6 +51,10 @@ try {
   assert.equal(await page.getByText("Follow along", { exact: false }).count(), 0);
   await page.getByRole("button", { name: "Create my account with email", exact: true }).click();
   const dialog = page.getByRole("dialog");
+  await dialog.getByLabel("First name", { exact: true }).fill("Fictional");
+  await dialog.getByLabel("Last name", { exact: true }).fill("Recruitment Runner");
+  await dialog.getByLabel("Country", { exact: true }).selectOption("England");
+  await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Norwich");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
   await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
   await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();

@@ -1,3 +1,4 @@
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { generateKeyPairSync } from "node:crypto";
@@ -117,7 +118,11 @@ try {
   const sql = await (await server.ssrLoadModule("/src/lib/db.ts")).getSql();
   await rpc("auth/auth-methods-api", "getAvailableAuthMethods");
   const login = async (email) => {
-    const r = await post("sign-in/email-otp", { email, otp: await sendCode(email) });
+    const r = await post("sign-in/email-otp", {
+      email,
+      otp: await sendCode(email),
+      ...signupDetails(),
+    });
     assert.equal(r.status, 200, await r.clone().text());
     return r.json();
   };

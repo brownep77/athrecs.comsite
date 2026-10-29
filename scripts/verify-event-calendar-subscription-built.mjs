@@ -1,3 +1,4 @@
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import http from "node:http";
@@ -94,7 +95,7 @@ try {
   const email = "calendar-runner@example.test";
   const password = "Calendar-test-only-123!";
   const signup = await context.request.post(origin + "/api/auth/sign-up/email", {
-    data: { email, password, name: "Calendar Test Runner" },
+    data: { email, password, ...signupDetails("Calendar Test Runner") },
     headers: { origin },
   });
   assert.equal(signup.status(), 200, await signup.text());
@@ -205,7 +206,11 @@ try {
 
   const second = await browser.newContext();
   const signup2 = await second.request.post(origin + "/api/auth/sign-up/email", {
-    data: { email: "other-calendar-runner@example.test", password, name: "Other Test Runner" },
+    data: {
+      email: "other-calendar-runner@example.test",
+      password,
+      ...signupDetails("Other Test Runner"),
+    },
     headers: { origin },
   });
   assert.equal(signup2.status(), 200, await signup2.text());
