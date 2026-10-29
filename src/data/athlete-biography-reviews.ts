@@ -12,6 +12,7 @@ export const athleteBiographyReviews = [
       "In July 2021, Matthews completed the 100 km Race to the Stones in 16:15:04. Later that year, he finished the Marathon des Sables in Morocco in 39:49:44, placing 69th overall. He achieved a podium finish at the five-stage Jungle Ultra in Peru in 2023, finishing third overall in 39:05:00. His wider race history includes the 2022 Ice Ultra in Sweden, where he completed two stages before withdrawing and was recorded as a non-finisher.",
       "From 29 July to 27 August 2024, Matthews completed 30 marathon distances on sand in Jordan in 30 consecutive days. The challenge earned the Guinness World Records title for the most marathon distances completed on sand in one month by a male runner. He undertook the challenge in support of Global's Make Some Noise. These consecutive desert efforts were an endurance record attempt, distinct from a conventional road marathon.",
       "Project Se7en extended that ambition into triathlon. Between 13 November and 4 December 2025, Matthews completed a 140.6-mile triathlon on each of the seven continents in 21 days, 9 hours and 18 minutes. The route took him through London, Arizona, Cape Town, Perth, Dubai, Rio de Janeiro and Antarctica. The overall challenge earned a Guinness record, while his Antarctic triathlon on 3–4 December, completed in 28:51:11, earned another. The project raised awareness and funds for James' Place.",
+      "On 21–22 May 2026, Matthews completed six ascents and descents of Snowdon (Yr Wyddfa) in 22 hours and 41 minutes. The mountain challenge, supported by O2 Satellite, brought together members of his Project Se7en team and required him to continue through darkness, strong winds and a knee injury. It added a sustained mountain effort to a sporting record already spanning desert ultramarathons, road marathons and long-distance triathlon.",
       "His road-running progression includes 3:07:25 at the 2025 London Marathon and 3:06:14 at Berlin that September. He broke three hours for the first time at the Tokyo Marathon in March 2026, then ran 3:00:04 in London the following month. At The Big Half in London on 6 September 2026, he recorded 1:23:05 for the half marathon. His 2:49:46 at the Berlin Marathon on 27 September 2026 became his marathon personal best, as he continued his pursuit of a sub-2:45 finish.",
       "UNTAPPED with Spencer Matthews launched in January 2025 with the team behind High Performance. The show explores running, endurance, training and the habits behind sporting performance. Guests include Paula Radcliffe, Holly Archer, Sir Mo Farah, Alistair Brownlee, Stephen Scullion, Georgia Hunter Bell, Amanal Petros and Iwan Thomas. Its wider interviews include climber Alex Honnold, while physiologist Oli Patrick joins Matthews for discussions about subjects such as sleep, training zones and recovery. The guest list connects British and international elite sport with the questions faced by everyday runners.",
       "Holly Archer gives the podcast a particular connection to East Anglian running. A Cambridge & Coleridge athlete, she won the women's race at Run Norwich in Norfolk in 2025 and the 2025 Ipswich Half Marathon in Suffolk, where she ran 1:15:55. Her UNTAPPED appearance brings that regional racing background into a wider discussion of performance and training.",
@@ -23,6 +24,7 @@ export const athleteBiographyReviews = [
       "Marathon des Sables and Jungle Ultra podium",
       "30 desert marathons in 30 days",
       "Project Se7en and Antarctic triathlon records",
+      "Six Snowdon ascents in under 24 hours",
       "Marathon times and half-marathon progress",
       "UNTAPPED podcast and notable guests",
       "Connections to Norfolk, Suffolk and Cambridgeshire",
@@ -114,6 +116,11 @@ export const athleteBiographyReviews = [
         question: "What Guinness records has Spencer Matthews achieved?",
         answer:
           "He completed 30 marathon distances on sand in one month in 2024. In 2025, he set records for completing a 140.6-mile triathlon on seven continents in 21 days, 9 hours and 18 minutes, and for an Antarctic 140.6-mile triathlon in 28:51:11.",
+      },
+      {
+        question: "What was Spencer Matthews' Snowdon challenge?",
+        answer:
+          "On 21–22 May 2026, he completed six ascents and descents of Snowdon (Yr Wyddfa) in 22 hours and 41 minutes, supported by O2 Satellite.",
       },
       {
         question: "Who has appeared on UNTAPPED with Spencer Matthews?",
