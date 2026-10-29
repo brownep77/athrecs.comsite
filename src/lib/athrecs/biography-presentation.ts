@@ -2,6 +2,7 @@ export type BiographyPresentation = {
   title: string;
   description: string;
   headings: string[];
+  mentions?: { text: string; url: string }[];
   links?: { label: string; url: string }[];
   questions?: { question: string; answer: string }[];
   alternateName?: string[];
