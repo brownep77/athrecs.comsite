@@ -1,3 +1,4 @@
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import { readFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 import { randomUUID, generateKeyPairSync } from "node:crypto";
@@ -109,7 +110,11 @@ try {
   globalThis.__athrecsFullSeedPromise__ = Promise.resolve();
   const email = "paul@athrecs.com";
   const code = await sendCode(email);
-  const response = await post("sign-in/email-otp", { email, otp: code });
+  const response = await post("sign-in/email-otp", {
+    email,
+    otp: code,
+    ...signupDetails("Test Test"),
+  });
   assert.equal(response.status, 200, await response.clone().text());
   const user = await response.json();
   const token = user.token;
@@ -239,7 +244,11 @@ try {
   );
   const outsiderCode = await sendCode("outsider@example.test");
   const outsider = await (
-    await post("sign-in/email-otp", { email: "outsider@example.test", otp: outsiderCode })
+    await post("sign-in/email-otp", {
+      email: "outsider@example.test",
+      otp: outsiderCode,
+      ...signupDetails("Synthetic Outsider"),
+    })
   ).json();
   await assert.rejects(
     () => call("test-account-api", "getMyTestHub", undefined, outsider.token),

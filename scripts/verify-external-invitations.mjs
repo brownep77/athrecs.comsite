@@ -1,4 +1,5 @@
 // Real registration, staff RPC, token binding and claims. Only outgoing email is intercepted.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
@@ -85,7 +86,7 @@ async function signup(email) {
     .findLast((mail) => mail.to.includes(email))
     ?.text.match(/\b([0-9]{6})\b/)?.[1];
   assert(otp, "A real verification code reaches the intercepted email boundary");
-  const login = await post("sign-in/email-otp", { email, otp });
+  const login = await post("sign-in/email-otp", { email, otp, ...signupDetails() });
   assert.equal(login.status, 200);
   assert.equal(login.body.user.emailVerified, true);
   return { id: login.body.user.id, token: login.body.token, email };

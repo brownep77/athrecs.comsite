@@ -82,6 +82,11 @@ try {
   });
   await page.getByRole("button", { name: "Sign in or create account", exact: true }).click();
   const dialog = page.getByRole("dialog");
+  await dialog.getByRole("tab", { name: "Create account", exact: true }).click();
+  await dialog.getByLabel("First name", { exact: true }).fill("Avery");
+  await dialog.getByLabel("Last name", { exact: true }).fill("Invitation Athlete");
+  await dialog.getByLabel("Country", { exact: true }).selectOption("England");
+  await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Norwich");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
   await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
   await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();

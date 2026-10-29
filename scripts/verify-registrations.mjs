@@ -1,4 +1,5 @@
 // Complete staff registrations flow using synthetic data and disposable PGlite.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { createServer } from "vite";
@@ -79,7 +80,7 @@ try {
   database = await db.getPglite();
   const sql = await db.getSql();
   const staff = await post("sign-up/email", {
-    name: "Synthetic Staff",
+    ...signupDetails("Synthetic Staff"),
     email: "staff@example.test",
     password: "Registration-test-password!",
   });
@@ -101,6 +102,12 @@ try {
     "Account without completed profile is visible",
   );
   assert.equal(before.accounts[0].signInCount, 1, "Signup session counted once");
+  assert.equal(before.accounts[0].name, "Synthetic Staff");
+  assert.equal(
+    before.accounts[0].location,
+    "Norwich, England",
+    "Staff can see the required signup location before an athlete profile is completed",
+  );
   assert.equal(lastHeaders.get("cache-control"), "private, no-store");
   assert(lastHeaders.get("vary").includes("Authorization"));
   assert.equal(before.accounts[0].signedUpAt.slice(0, 10), new Date().toISOString().slice(0, 10));
@@ -153,7 +160,7 @@ try {
   );
   await assert.rejects(() => read({ page: 0 }, token));
   const ordinary = await post("sign-up/email", {
-    name: "Synthetic Ordinary",
+    ...signupDetails("Synthetic Ordinary"),
     email: "ordinary@example.test",
     password: "Registration-test-password!",
   });
@@ -176,6 +183,21 @@ try {
   await sql`insert into athlete_account_links(athlete_id,user_id,user_email,status) values(991201,'registration-1','athlete-1@example.test','active'),(991203,'registration-1','athlete-1@example.test','revoked')`;
   const one = (await read({ q: "Synthetic Club" }, token)).accounts[0];
   assert.equal(one.userId, "registration-1");
+  assert.equal(one.location, "", "Legacy accounts without location data retain an empty location");
+  await sql`update "user" set "signupCountry"='England',"signupLocation"='Norwich' where id='registration-1'`;
+  assert.equal(
+    (await read({ q: "Synthetic Club" }, token)).accounts[0].location,
+    "Norwich, England",
+    "A profile with blank address fields retains the registration location fallback",
+  );
+  await sql`update athlete_private_profiles set city='Cambridge',region='Cambridgeshire',postcode='CB2 1TN',country='England' where user_id='registration-1'`;
+  assert.equal(
+    (await read({ q: "Synthetic Club" }, token)).accounts[0].location,
+    "Cambridge, Cambridgeshire, CB2 1TN, England",
+    "Later profile address details take precedence over the original registration location",
+  );
+  await sql`update athlete_private_profiles set city='',region='',postcode='',country='' where user_id='registration-1'`;
+  await sql`update "user" set "signupCountry"=null,"signupLocation"=null where id='registration-1'`;
   assert.equal(one.signInCount, 0, "No historical login total is fabricated");
   assert.equal(one.lastSignInAt, null);
   assert.equal(

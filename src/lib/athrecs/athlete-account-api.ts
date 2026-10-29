@@ -104,6 +104,8 @@ export type AthleteAccountData = {
   region: string;
   city: string;
   postcode: string;
+  /** Private free-form sign-up location; never infer a city or postcode from it. */
+  signupLocation?: string;
   profileDetails?: AthleteProfileDetails;
   nationality: string;
   clubOrTeam: string;
@@ -165,6 +167,8 @@ type UserRow = {
   email: string;
   email_verified: boolean;
   image: string | null;
+  signup_country?: string | null;
+  signup_location?: string | null;
 };
 
 type ProfileRow = {
@@ -538,7 +542,9 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       account_user."name" as name,
       lower(account_user."email") as email,
       account_user."emailVerified" as email_verified,
-      account_user."image" as image
+      account_user."image" as image,
+      account_user."signupCountry" as signup_country,
+      account_user."signupLocation" as signup_location
     from "user" account_user
     join athlete_identifiers identifier on identifier.user_id = account_user."id"
     where account_user."id" = ${userId}
@@ -628,10 +634,11 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     fullName: profile?.full_name ?? user.name ?? "",
     displayName: profile?.display_name ?? "",
     dateOfBirth: profile?.date_of_birth ?? "",
-    country: profile?.country ?? "",
+    country: profile?.country ?? user.signup_country ?? "",
     region: profile?.region ?? "",
     city: profile?.city ?? "",
     postcode: profile?.postcode ?? "",
+    signupLocation: user.signup_location ?? "",
     profileDetails: readProfileDetails(profile?.profile_details),
     nationality: profile?.nationality ?? "",
     clubOrTeam: profile?.club_or_team ?? "",
@@ -986,6 +993,8 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
             auth_name: string;
             auth_email: string;
             email_verified: boolean;
+            signup_country: string | null;
+            signup_location: string | null;
           }
         >`
           select
@@ -1016,7 +1025,9 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
             profile.updated_at::text as updated_at,
             account_user."name" as auth_name,
             lower(account_user."email") as auth_email,
-            account_user."emailVerified" as email_verified
+            account_user."emailVerified" as email_verified,
+            account_user."signupCountry" as signup_country,
+            account_user."signupLocation" as signup_location
           from athlete_private_profiles profile
           join "user" account_user on account_user."id" = profile.user_id
           join athlete_identifiers identifier on identifier.user_id = profile.user_id
@@ -1070,10 +1081,11 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
         fullName: profile.full_name,
         displayName: profile.display_name ?? "",
         dateOfBirth: profile.date_of_birth ?? "",
-        country: profile.country ?? "",
+        country: profile.country ?? profile.signup_country ?? "",
         region: profile.region ?? "",
         city: profile.city ?? "",
         postcode: profile.postcode ?? "",
+        signupLocation: profile.signup_location ?? "",
         nationality: profile.nationality ?? "",
         clubOrTeam: profile.club_or_team ?? "",
         preferredLanguage: profile.preferred_language ?? "",

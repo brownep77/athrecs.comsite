@@ -1,4 +1,5 @@
 // Real authenticated RPCs and migrated disposable database. No external traffic.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
@@ -61,7 +62,7 @@ try {
       method: "POST",
       headers: { origin, "content-type": "application/json" },
       body: JSON.stringify({
-        name: "Synthetic Runner",
+        ...signupDetails("Synthetic Runner"),
         email,
         password: "Synthetic-Password-123!",
       }),

@@ -1,4 +1,5 @@
 // Real auth endpoints and disposable Postgres-compatible DB. Every email is intercepted.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -83,7 +84,7 @@ try {
     "Requesting a code is not a signup",
   );
   const otp = sends.at(-1).body.text.match(/\b\d{6}\b/)[0];
-  r = await post("sign-in/email-otp", { email, otp, name: "Synthetic <Athlete>" });
+  r = await post("sign-in/email-otp", { email, otp, ...signupDetails("Synthetic <Athlete>") });
   assert.equal(r.status, 200, await r.clone().text());
   const result = await r.json();
   const id = result.user.id;

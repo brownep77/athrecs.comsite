@@ -160,6 +160,14 @@ try {
   const consent = page.getByRole("button", { name: "No thanks", exact: true });
   if (await consent.isVisible()) await consent.click();
   await page.getByRole("button", { name: "Sign in or create account", exact: true }).click();
+  const signupDialog = page.getByRole("dialog");
+  await signupDialog.getByRole("tab", { name: "Create account", exact: true }).click();
+  await signupDialog.getByLabel("First name", { exact: true }).fill("Test");
+  await signupDialog.getByLabel("Last name", { exact: true }).fill("Runner");
+  await signupDialog.getByLabel("Country", { exact: true }).selectOption("England");
+  await signupDialog
+    .getByLabel("Town, city, postcode or ZIP code", { exact: true })
+    .fill("Norwich");
   await page
     .getByRole("dialog")
     .getByRole("button", { name: "Continue with Google", exact: true })

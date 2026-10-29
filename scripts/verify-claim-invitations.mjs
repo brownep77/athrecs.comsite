@@ -1,4 +1,5 @@
 // Complete staff registrations flow using synthetic data and disposable PGlite.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
@@ -97,7 +98,11 @@ try {
   database = await db.getPglite();
   const sql = await db.getSql();
   const signup = async (name, email) => {
-    const r = await post("sign-up/email", { name, email, password: "Synthetic-password-123!" });
+    const r = await post("sign-up/email", {
+      ...signupDetails(name),
+      email,
+      password: "Synthetic-password-123!",
+    });
     assert.equal(r.status, 200);
     await sql`update "user" set "emailVerified"=true where id=${r.body.user.id}`;
     return { id: r.body.user.id, token: r.body.token, email };
