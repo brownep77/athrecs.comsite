@@ -288,6 +288,15 @@
   }
 }
 
+/* Account results share the available width with a sidebar and action controls.
+   Keep whole words together; the table wrapper can scroll when columns need room. */
+#account-section-content .profile-card-table th,
+#account-section-content .profile-card-table td {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
 /* The same distance tint follows a result from claiming to profile history. */
 .distance-result,
 .profile-card-table tbody tr.distance-result {
