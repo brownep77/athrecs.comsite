@@ -28,6 +28,64 @@ export const athleteBiographyReviews = [
       "Connections to Norfolk, Suffolk and Cambridgeshire",
       "Follow Spencer Matthews and UNTAPPED",
     ],
+    mentions: [
+      {
+        text: "Paula Radcliffe",
+        url: "/athletes/paula-radcliffe",
+      },
+      {
+        text: "Holly Archer",
+        url: "/athletes/holly-archer",
+      },
+      {
+        text: "Mo Farah",
+        url: "/athletes/mo-farah",
+      },
+      {
+        text: "Alistair Brownlee",
+        url: "/athletes/alistair-brownlee-wa-14367424",
+      },
+      {
+        text: "Stephen Scullion",
+        url: "/athletes/stephen-scullion",
+      },
+      {
+        text: "Georgia Hunter Bell",
+        url: "/athletes/georgia-hunter-bell-wa-14329797",
+      },
+      {
+        text: "Race to the Stones",
+        url: "/races/race-to-the-stones",
+      },
+      {
+        text: "Marathon des Sables",
+        url: "/races/utmb-index-192",
+      },
+      {
+        text: "London Marathon",
+        url: "/races/london-marathon",
+      },
+      {
+        text: "Tokyo Marathon",
+        url: "/races/tokyo-marathon",
+      },
+      {
+        text: "The Big Half",
+        url: "/races/vitality-big-half",
+      },
+      {
+        text: "Berlin Marathon",
+        url: "/races/berlin-marathon",
+      },
+      {
+        text: "Run Norwich",
+        url: "/races/run-norwich",
+      },
+      {
+        text: "Ipswich Half Marathon",
+        url: "/races/ipswich-half-marathon",
+      },
+    ],
     links: [
       {
         label: "Spencer Matthews on Instagram",

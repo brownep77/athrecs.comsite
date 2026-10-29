@@ -1,6 +1,29 @@
 import type { BiographyPresentation } from "@/lib/athrecs/biography-presentation";
 import { AthleteBusinessLink } from "./AthleteBusinessLink";
 
+function biographyText(text: string, mentions: BiographyPresentation["mentions"]) {
+  const links = new Map(
+    (mentions ?? [])
+      .filter((link) => link.text.trim() && /^\/(?:athletes|races)\/[a-z0-9-]+$/.test(link.url))
+      .map((link) => [link.text, link.url]),
+  );
+  if (!links.size) return text;
+  const names = [...links.keys()]
+    .sort((a, b) => b.length - a.length)
+    .map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const pattern = new RegExp(`(?<![\\p{L}\\p{N}])(${names.join("|")})(?![\\p{L}\\p{N}])`, "gu");
+  return text.split(pattern).map((part, index) => {
+    const href = links.get(part);
+    return href ? (
+      <a key={index} href={href} className="text-accent underline underline-offset-4">
+        {part}
+      </a>
+    ) : (
+      part
+    );
+  });
+}
+
 export function AthleteBiography({
   slug,
   paragraphs,
@@ -19,7 +42,9 @@ export function AthleteBiography({
           {presentation?.headings[index] ? (
             <h3 className="text-sm font-semibold">{presentation.headings[index]}</h3>
           ) : null}
-          <p className="text-sm leading-relaxed text-muted">{paragraph}</p>
+          <p className="text-sm leading-relaxed text-muted">
+            {biographyText(paragraph, presentation?.mentions)}
+          </p>
         </div>
       ))}
       {presentation?.links?.length ? (
@@ -44,7 +69,9 @@ export function AthleteBiography({
           {presentation.questions.map(({ question, answer }) => (
             <div key={question} className="space-y-1">
               <h4 className="text-sm font-medium">{question}</h4>
-              <p className="text-sm leading-relaxed text-muted">{answer}</p>
+              <p className="text-sm leading-relaxed text-muted">
+                {biographyText(answer, presentation.mentions)}
+              </p>
             </div>
           ))}
         </section>
