@@ -51,6 +51,13 @@ try {
   assert.equal(await page.getByText("Follow along", { exact: false }).count(), 0);
   await page.getByRole("button", { name: "Create my account with email", exact: true }).click();
   const dialog = page.getByRole("dialog");
+  assert.equal(
+    await dialog
+      .getByRole("tab", { name: "Create account", exact: true })
+      .getAttribute("aria-selected"),
+    "true",
+    "The create-account button opens the required details immediately",
+  );
   await dialog.getByLabel("First name", { exact: true }).fill("Fictional");
   await dialog.getByLabel("Last name", { exact: true }).fill("Recruitment Runner");
   await dialog.getByLabel("Country", { exact: true }).selectOption("England");
