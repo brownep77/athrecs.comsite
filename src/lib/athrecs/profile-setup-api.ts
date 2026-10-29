@@ -35,7 +35,7 @@ export const saveMyProfileSetup = createServerFn({ method: "POST" })
         values(${context.userId},${snapshot}::jsonb,md5((${snapshot}::jsonb)::text))
         on conflict(user_id,fingerprint) do update set fingerprint=excluded.fingerprint returning id`;
       await tx`insert into athlete_profile_setup_alerts(request_id,recipient)
-        select ${request.id},recipient from (values('paul@athrecs.com'),('paultwbrowne@gmail.com')) r(recipient)
+        select ${request.id},recipient from athrecs_notification_recipients('support',athrecs_is_test_user(${context.userId}))
         on conflict(request_id,recipient) do nothing`;
     });
     const { notifyProfileSetup } = await import("./profile-setup-alerts.server");

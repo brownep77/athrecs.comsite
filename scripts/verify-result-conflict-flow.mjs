@@ -108,7 +108,7 @@ const receipts = [];
 const mail = {
   authEmailConfigured: () => configured,
   sendAthrecsAuthEmail: async (email, options) => {
-    if (postgres) {
+    if (postgres && options?.idempotencyKey) {
       const deliveryId = Number(options.idempotencyKey.split("-").at(-1));
       const [marker] =
         await sql`select first_attempt_at,attempts from result_claim_alert_deliveries where id=${deliveryId}`;
@@ -121,14 +121,19 @@ const mail = {
     if (failEmail) throw Error("Synthetic email failure");
   },
 };
+const notificationRoutes = load("src/lib/auth/staff-notifications.server.ts");
 const emails = load("src/lib/athrecs/result-claim-email.server.ts", {
   "@/lib/auth/email.server": mail,
+  "@/lib/auth/staff-notifications.server": notificationRoutes,
+  "@/lib/db": connection,
+  "@/lib/site-scope": scope,
 });
 const alerts = load("src/lib/athrecs/result-claim-alerts.server.ts", {
   "node:crypto": crypto,
   "@/lib/db": connection,
   "@/lib/site-scope": scope,
   "@/lib/auth/email.server": mail,
+  "@/lib/auth/staff-notifications.server": notificationRoutes,
   "./result-claim-email.server": emails,
 });
 const auth = { authMiddleware: "authenticated" };
@@ -266,8 +271,15 @@ try {
     .sort())
     await db.exec(readFileSync(`migrations/${name}`, "utf8"));
   process.env.VERCEL_ENV = "production";
-  process.env.ATHRECS_STAFF_EMAILS = "staff@example.test,STAFF@example.test,invalid";
+  process.env.ATHRECS_STAFF_EMAILS = "auth-only@example.test";
   delete process.env.ATHRECS_CLAIMS_EMAILS;
+  await sql`update staff_notification_routes set enabled=(recipient='results@athrecs.com') where category='results'`;
+  assert.deepEqual(await emails.claimNotificationRecipients(sql), ["results@athrecs.com"], "Staff authentication addresses do not determine mail routing");
+  process.env.ATHRECS_CLAIMS_EMAILS = "invalid, header\r\ninjection@example.test";
+  assert.deepEqual(await emails.claimNotificationRecipients(sql), ["results@athrecs.com"], "An invalid override cannot inject email headers");
+  process.env.ATHRECS_CLAIMS_EMAILS = "staff@example.test,STAFF@example.test,invalid";
+  assert.deepEqual(await emails.claimNotificationRecipients(sql), ["staff@example.test"]);
+  assert.deepEqual(await emails.claimNotificationRecipients(sql, true), ["paul@athrecs.com"], "Synthetic alerts ignore configured recipients");
   process.env.CRON_SECRET = "synthetic-worker-key";
   await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values
     ('one','Avery Test Athlete','one@example.test',true,now(),now()),
@@ -897,14 +909,16 @@ try {
   const completionSend = sends.at(-1);
   assert.equal(sends.length, beforeCompletionSend + 1);
   assert.match(completionSend.email.subject, /result claimed/);
-  assert.equal(completionSend.email.to, "info@athrecs.com");
+  assert.equal(completionSend.email.to, "results@athrecs.com", "Completed claims use the results route even when a conflict override is set");
   assert.match(completionSend.email.message, /without waiting for staff approval/);
   assert.match(completionSend.email.actionUrl, new RegExp(`claimId=${self.claimId}$`));
   assert.doesNotMatch(completionSend.email.heading, /needs review/);
   await sql`update result_claim_alert_deliveries set next_attempt_at=now() where claim_id=${self.claimId}`;
+  await sql`update staff_notification_routes set enabled=(recipient='paul@athrecs.com') where category='results'`;
   failEmail = false;
   assert.equal((await alerts.deliverClaimAlerts(sql, self.claimId)).sent, 1);
-  assert.deepEqual(sends.at(-1), completionSend, "Completed-claim retries retain payload and key");
+  assert.deepEqual(sends.at(-1), completionSend, "Completed-claim retries retain recipient, payload and key despite a routing change");
+  await sql`update staff_notification_routes set enabled=(recipient='results@athrecs.com') where category='results'`;
   await alerts.deliverClaimAlerts(sql, self.claimId);
   assert.equal(sends.length, beforeCompletionSend + 2, "A successful completion alert sends once");
   configured = false;
@@ -1601,6 +1615,43 @@ try {
   console.log(
     "Whole-profile confirmation passed: complete result list, additions/removals/restores, one email, replay, changed snapshots, source preservation and competing-owner isolation.",
   );
+
+  // The legacy pending-claim path shares routing, but never sends staff mail
+  // from a preview or embedded local database. It remains best-effort.
+  configured = true;
+  failEmail = false;
+  delete process.env.ATHRECS_CLAIMS_EMAILS;
+  const pendingEmail = {
+    claimId: conflict.claimId,
+    resultId: 2,
+    claimantEmail: "two@example.test",
+    athleteName: "Avery Test Athlete",
+    eventName: "Synthetic Race",
+    eventDate: "2026-05-04",
+    distanceCode: "10K",
+  };
+  const beforePending = sends.length;
+  process.env.VERCEL_ENV = "preview";
+  await emails.notifyResultClaimSubmitted(pendingEmail, { notifyAthlete: false });
+  process.env.VERCEL_ENV = "production";
+  connection.dbSource = "pglite";
+  await emails.notifyResultClaimSubmitted(pendingEmail, { notifyAthlete: false });
+  connection.dbSource = "neon";
+  scope.IS_RUNRECS_SITE = true;
+  await emails.notifyResultClaimSubmitted(pendingEmail, { notifyAthlete: false });
+  scope.IS_RUNRECS_SITE = false;
+  assert.equal(sends.length, beforePending, "Preview, local and sibling-site pending claims cannot notify staff");
+  await emails.notifyResultClaimSubmitted(pendingEmail, { notifyAthlete: false });
+  assert.equal(sends.length, beforePending + 1);
+  assert.equal(sends.at(-1).email.to, "results@athrecs.com");
+  process.env.ATHRECS_CLAIMS_EMAILS = "staff@example.test";
+  await emails.notifyResultClaimSubmitted(pendingEmail, { notifyAthlete: false });
+  assert.equal(sends.at(-1).email.to, "staff@example.test");
+  const frozenLegacy = { ...sends[0].email, to: "info@athrecs.com" };
+  await sql`insert into result_claim_alert_deliveries(claim_id,recipient,email_payload)
+    values(${conflict.claimId},'info@athrecs.com',${JSON.stringify(frozenLegacy)}::jsonb)`;
+  assert.equal((await alerts.deliverClaimAlerts(sql, conflict.claimId)).sent, 1);
+  assert.deepEqual(sends.at(-1).email, frozenLegacy, "Legacy frozen recipients are not rewritten when category routing changes");
 
   // Validate the real email transport header without network access.
   const transport = load("src/lib/auth/email.server.ts");

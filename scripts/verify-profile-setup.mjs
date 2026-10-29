@@ -56,6 +56,20 @@ try {
   const db = await server.ssrLoadModule("/src/lib/db.ts");
   database = await db.getPglite();
   const sql = await db.getSql();
+  await assert.rejects(
+    () => sql`insert into staff_notification_routes(category,recipient,enabled)
+      values('support','fixtures@athrecs.com',true)`,
+    /check constraint/,
+    "A mismatched department route is rejected before it can break signup",
+  );
+  // Enable the department mailbox only in this disposable test database.
+  await sql`insert into staff_notification_routes(category,recipient,enabled)
+    values('support','support@athrecs.com',true)
+    on conflict(category,recipient) do update set enabled=excluded.enabled`;
+  const recipients = (
+    await sql`select recipient from athrecs_notification_recipients('support') order by recipient`
+  ).map((row) => row.recipient);
+  assert(recipients.includes("support@athrecs.com"), "Profile setup routes to athlete support");
   const signup = async (email) => {
     const response = await fetch(`${origin}/api/auth/sign-up/email`, {
       method: "POST",
@@ -71,6 +85,13 @@ try {
   };
   const a = await signup("setup-a@example.test"),
     b = await signup("setup-b@example.test");
+  assert.deepEqual(
+    (
+      await sql`select recipient from signup_alert_deliveries where user_id=${a.user.id} order by recipient`
+    ).map((row) => row.recipient),
+    recipients,
+    "A rejected route configuration does not prevent valid account signup and alerts",
+  );
   const data = {
     fullName: "Synthetic Runner",
     currentClub: "Synthetic Current AC",
@@ -130,7 +151,13 @@ try {
     1,
     "Repeated save must not duplicate requests",
   );
-  assert.equal((await sql`select count(*)::int as n from athlete_profile_setup_alerts`)[0].n, 2);
+  assert.deepEqual(
+    (
+      await sql`select recipient from athlete_profile_setup_alerts where request_id=${status.id} order by recipient`
+    ).map((row) => row.recipient),
+    recipients,
+    "Each distinct profile submission queues the configured support recipients once",
+  );
   for (const link of [
     "http://example.com/a",
     "https://127.0.0.1/a",
@@ -149,10 +176,24 @@ try {
     return "synthetic";
   };
   assert.deepEqual(await service.deliverProfileSetupAlerts(sql, a.user.id, send), {
-    sent: 1,
+    sent: recipients.length - 1,
     failed: 1,
   });
   assert(sent.every((s) => s.email.text.includes(data.sourceUrls[0])));
+  assert(
+    sent.every(
+      (s) =>
+        s.email.text.includes(`Request: #${status.id}`) &&
+        s.email.reply_to === a.user.email &&
+        s.email.text.includes("Submitted:") &&
+        s.email.text.includes(data.currentClub) &&
+        data.previousClubs.every((club) => s.email.text.includes(club)) &&
+        data.previousNames.every((name) => s.email.text.includes(name)) &&
+        !s.email.text.includes(a.token) &&
+        !s.email.text.includes("Only name and email supplied"),
+    ),
+  );
+  await sql`update athlete_profile_setup_requests set details=details||'{"currentClub":"Changed after first send"}'::jsonb where id=${status.id}`;
   await sql`update athlete_profile_setup_alerts set next_attempt_at=now() where sent_at is null`;
   const retry = [];
   assert.deepEqual(
@@ -163,12 +204,190 @@ try {
     { sent: 1, failed: 0 },
   );
   assert.equal(retry.length, 1);
-  assert.equal(retry[0].key, sent[1].key);
-  assert.deepEqual(retry[0].email, sent[1].email, "Retries must freeze email payload");
+  const failed = sent.find((s) => s.email.to[0] === "paultwbrowne@gmail.com");
+  assert.equal(retry[0].key, failed.key);
+  assert.deepEqual(retry[0].email, failed.email, "Retries must freeze email payload");
   assert.deepEqual(await service.deliverProfileSetupAlerts(sql, a.user.id, send), {
     sent: 0,
     failed: 0,
   });
+  const minimal = await signup("setup-minimal@example.test");
+  await sql`update "user" set "emailVerified"=true where id=${minimal.user.id}`;
+  await save({ fullName: "Synthetic <Minimal>", privacyAcknowledged: true }, minimal.token);
+  const minimalEmails = [];
+  assert.deepEqual(
+    await service.deliverProfileSetupAlerts(sql, minimal.user.id, async (email, key) => {
+      minimalEmails.push({ email, key });
+      return "synthetic-minimal";
+    }),
+    { sent: recipients.length, failed: 0 },
+  );
+  assert(
+    minimalEmails.every(
+      ({ email }) =>
+        email.text.includes(
+          "Only name and email supplied; no club, previous names or profile links supplied.",
+        ) &&
+        email.text.includes("Current club: Not supplied") &&
+        email.text.includes("Previous clubs: Not supplied") &&
+        email.text.includes("Previous names: Not supplied") &&
+        email.text.includes("Profile links:\nNone supplied") &&
+        email.subject.includes("profile details saved") &&
+        !email.html.includes("<Minimal>"),
+    ),
+    "Name-only setup emails must describe the actual submission and escape user text",
+  );
+  // Exercise the explicit full account-save RPC, not just the queue helper.
+  const accountData = {
+    fullName: "Synthetic Full Account",
+    displayName: "Synthetic Athlete",
+    dateOfBirth: "1986-03-17",
+    postcode: "ZZ11 9ZZ",
+    country: "England",
+    city: "Synthetic First City",
+    nationality: "British",
+    clubOrTeam: "Synthetic First AC",
+    previousNames: ["Synthetic Prior Name"],
+    parkrunId: "A9876543",
+    fingerprintEvent: "Synthetic Example 10K",
+    fingerprintYear: "2025",
+    fingerprintDistance: "10K",
+    fingerprintTime: "45:00",
+    privacyAcknowledged: true,
+    profileDetails: { manager: "PRIVATE_MANAGER_SENTINEL" },
+    sports: [
+      {
+        sportCode: "Running",
+        isPrimary: true,
+        experienceLevel: "club",
+        goals: "PRIVATE_TRAINING_SENTINEL",
+      },
+    ],
+    preferences: { equipmentNotes: "PRIVATE_PREFERENCE_SENTINEL" },
+    consents: { marketing: false },
+    // Unexpected client keys must not make their way into notification snapshots.
+    password: "PRIVATE_AUTH_SENTINEL",
+    sessionToken: minimal.token,
+  };
+  const saveAccount = (input = accountData) =>
+    rpc("athrecs/athlete-account-api", "saveMyAthleteAccount", input, minimal.token);
+  const readAccountAlerts = () => sql`select event_key,recipient,submission,attempts,sent_at
+    from staff_submission_alert_deliveries
+    where event_kind='private_profile_save' and actor_user_id=${minimal.user.id}
+    order by id`;
+  assert.equal(
+    (await readAccountAlerts()).length,
+    0,
+    "Setup and reads do not emit full-account save notices",
+  );
+  const savedAccount = await saveAccount();
+  assert.equal(savedAccount.city, accountData.city);
+  let accountAlerts = await readAccountAlerts();
+  assert.equal(accountAlerts.length, recipients.length);
+  assert.deepEqual(accountAlerts.map((row) => row.recipient).sort(), recipients);
+  assert(
+    accountAlerts.every((row) => row.attempts === 0 && !row.sent_at),
+    "Preview queues without sending",
+  );
+  await saveAccount();
+  assert.equal(
+    (await readAccountAlerts()).length,
+    recipients.length,
+    "An identical full-account save is deduplicated",
+  );
+  const changedAccount = {
+    ...accountData,
+    city: "Synthetic Changed City",
+    clubOrTeam: "Synthetic Changed AC",
+  };
+  await saveAccount(changedAccount);
+  accountAlerts = await readAccountAlerts();
+  assert.equal(accountAlerts.length, recipients.length * 2);
+  let accountKeys = [...new Set(accountAlerts.map((row) => row.event_key))];
+  assert.equal(
+    accountKeys.length,
+    2,
+    "A genuine two-field change creates a new immutable submission",
+  );
+  await saveAccount(accountData);
+  accountAlerts = await readAccountAlerts();
+  assert.equal(
+    accountAlerts.length,
+    recipients.length * 3,
+    "Reverting A to B to A is a genuine third submitted change",
+  );
+  accountKeys = [...new Set(accountAlerts.map((row) => row.event_key))];
+  assert.equal(accountKeys.length, 3);
+  assert.notEqual(accountKeys[0], accountKeys[2], "A reverted snapshot has a new event identity");
+  await saveAccount(accountData);
+  assert.equal(
+    (await readAccountAlerts()).length,
+    recipients.length * 3,
+    "Only the consecutive identical save after the revert is deduplicated",
+  );
+  const hiddenValues = [
+    accountData.dateOfBirth,
+    accountData.postcode,
+    "PRIVATE_MANAGER_SENTINEL",
+    "PRIVATE_TRAINING_SENTINEL",
+    "PRIVATE_PREFERENCE_SENTINEL",
+    "PRIVATE_AUTH_SENTINEL",
+    minimal.token,
+    process.env.BETTER_AUTH_SECRET,
+  ];
+  const snapshots = JSON.stringify(accountAlerts.map((row) => row.submission));
+  assert(
+    hiddenValues.every((value) => !snapshots.includes(value)),
+    "Only curated support fields enter the outbox",
+  );
+  const generic = await server.ssrLoadModule("/src/lib/athrecs/staff-submission-alerts.server.ts");
+  const accountEmails = [];
+  for (const key of accountKeys) {
+    assert.deepEqual(
+      await generic.deliverStaffSubmissionAlerts(
+        sql,
+        "private_profile_save",
+        key,
+        async (email, idempotencyKey) => {
+          accountEmails.push({ email, idempotencyKey });
+          return "synthetic-account-save";
+        },
+      ),
+      { sent: recipients.length, failed: 0 },
+    );
+  }
+  assert.equal(accountEmails.length, recipients.length * 3);
+  assert(
+    accountEmails.every(
+      ({ email }) =>
+        email.text.includes(accountData.fullName) &&
+        email.text.includes(accountData.fingerprintEvent) &&
+        email.text.includes("Date of birth supplied:\nYes") &&
+        email.text.includes("Postcode supplied:\nYes") &&
+        email.text.includes("/admin/athlete-accounts") &&
+        email.reply_to === minimal.user.email &&
+        hiddenValues.every((value) => !JSON.stringify(email).includes(value)),
+    ),
+    "Account emails include useful saved details while keeping DOB, postcode and authentication/private fields out",
+  );
+  assert(
+    accountEmails.some(
+      ({ email }) =>
+        email.text.includes(accountData.city) && email.text.includes(accountData.clubOrTeam),
+    ),
+  );
+  assert(
+    accountEmails.some(
+      ({ email }) =>
+        email.text.includes(changedAccount.city) && email.text.includes(changedAccount.clubOrTeam),
+    ),
+  );
+  assert.deepEqual(
+    await generic.deliverStaffSubmissionAlerts(sql, "private_profile_save", undefined, async () => {
+      throw Error("Completed account notifications must not be resent");
+    }),
+    { sent: 0, failed: 0 },
+  );
   const matching = await server.ssrLoadModule("/src/lib/athrecs/result-match.ts");
   assert.equal(
     matching.scorePotentialResultNameMatch(["Synthetic Runner"], "S Runner", {}, {}),
@@ -261,9 +480,10 @@ try {
     }
   }
   console.log(
-    "Profile setup verified: authenticated save, preservation, private staff queue, deduplication, link validation, mail retry and former-club matching.",
+    "Profile setup verified: authenticated setup and full-account saves, preservation, private staff queue, category routing, invalid-route rejection, identical-save deduplication, genuine-change notifications, curated private-data exclusions, link validation, complete submitted details, name-only disclosure, safe HTML, immutable mail retry and former-club matching.",
   );
 } finally {
+  globalThis.fetch = realFetch;
   await server.close();
   await database?.close();
 }

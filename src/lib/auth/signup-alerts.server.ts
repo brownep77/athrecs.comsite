@@ -1,9 +1,16 @@
 import { dbSource, getSql, type Sql } from "@/lib/db";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { isStaffNotificationRecipient } from "./staff-notifications.server";
 
-const RECIPIENTS = ["paul@athrecs.com", "paultwbrowne@gmail.com"];
 const SIGNUPS_URL = "https://update.athrecs.com/admin/athlete-accounts";
-type SignupEmail = { from: string; to: string[]; subject: string; text: string; html: string };
+type SignupEmail = {
+  from: string;
+  to: string[];
+  subject: string;
+  text: string;
+  html: string;
+  reply_to?: string;
+};
 type Delivery = {
   id: number;
   recipient: string;
@@ -45,7 +52,7 @@ function emailFor(row: Delivery): SignupEmail {
     timeZoneName: "short",
   });
   const name = row.signup_name.replace(/\s+/g, " ").trim().slice(0, 200) || "Not supplied";
-  const text = `Someone has just signed up to AthRecs.\n\nName: ${name}\nEmail: ${row.signup_email}\nSigned up: ${joined}\nEmail verification: ${row.email_verified ? "Verified" : "Pending"}\n\nView signups: ${SIGNUPS_URL}`;
+  const text = `Someone has just signed up to AthRecs.\n\nName: ${name}\nEmail: ${row.signup_email}\nSigned up: ${joined}\nEmail verification: ${row.email_verified ? "Verified" : "Pending"}\n\nThis alert confirms account creation. Any profile details, results or race corrections they submit are sent in separate notifications with the submitted information.\n\nView signups: ${SIGNUPS_URL}`;
   return {
     from: "paul@athrecs.com",
     to: [row.recipient],
@@ -64,7 +71,8 @@ export async function sendSignupEmail(email: SignupEmail, idempotencyKey: string
   if (
     email.from !== "paul@athrecs.com" ||
     email.to.length !== 1 ||
-    !RECIPIENTS.includes(email.to[0])
+    !isStaffNotificationRecipient(email.to[0]) ||
+    (email.reply_to !== undefined && !/^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/.test(email.reply_to))
   )
     throw new Error("Invalid signup notification recipient");
   // Internal staff notifications must not be recorded as correspondence with an athlete.
@@ -92,7 +100,7 @@ export async function deliverSignupAlerts(sql: Sql, userId?: string, send = send
       from signup_alert_deliveries
       where sent_at is null and not needs_review and next_attempt_at<=now()
         and (${userId ?? null}::text is null or user_id=${userId ?? null})
-      order by next_attempt_at,id limit 2 for update skip locked`;
+      order by next_attempt_at,id limit 10 for update skip locked`;
     const ready: Array<Delivery & { email_payload: SignupEmail }> = [];
     for (const row of pending) {
       if (row.retry_expired) {

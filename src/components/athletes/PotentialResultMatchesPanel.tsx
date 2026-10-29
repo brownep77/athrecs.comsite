@@ -603,9 +603,9 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
             I confirm these selected results belong to me.
           </label>
           <p className="text-xs text-muted">
-            Suitable results go straight to your linked athlete profile. Staff are notified at
-            info@athrecs.com afterwards. Uncertain matches stay in the claims queue. Up to 30 per
-            day.
+            Suitable results go straight to your linked athlete profile. The AthRecs team is
+            notified when your claim is complete. Uncertain matches stay in the claims queue. Up to
+            30 per day.
           </p>
           <div className="flex flex-wrap gap-2">
             <Button

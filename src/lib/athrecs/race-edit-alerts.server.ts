@@ -7,6 +7,7 @@ type Delivery = {
   id: number;
   recipient: string;
   submission: {
+    submissionId?: number;
     name: string;
     email: string;
     createdAt: string;
@@ -37,10 +38,11 @@ function emailFor(row: Delivery): AlertEmail {
   });
   const name = submission.name.replace(/\s+/g, " ").trim() || "Not supplied";
   const raceName = submission.raceName.replace(/\s+/g, " ").trim();
-  const text = `A fixture correction has been submitted to AthRecs and is awaiting review.\n\nRace: ${raceName}\nRace page: https://www.athrecs.com${submission.racePath}\nSubmitted: ${submittedAt}\nName: ${name}\nEmail: ${submission.email}\n\nSuggested correction:\n${submission.suggestion}\n\nSupporting link: ${submission.evidenceUrl || "Not supplied"}\n\nReview suggested race edits: ${REVIEW_URL}`;
+  const text = `A fixture correction has been submitted to AthRecs and is awaiting review.\n\n${submission.submissionId ? `Submission: #${submission.submissionId}\n` : ""}Race: ${raceName}\nRace page: https://www.athrecs.com${submission.racePath}\nSubmitted: ${submittedAt}\nName: ${name}\nEmail: ${submission.email}\n\nSuggested correction:\n${submission.suggestion}\n\nSupporting link: ${submission.evidenceUrl || "Not supplied"}\n\nReview suggested race edits: ${REVIEW_URL}`;
   return {
     from: "paul@athrecs.com",
     to: [row.recipient],
+    reply_to: submission.email,
     subject: `${submission.syntheticTest ? "[FICTIONAL TEST] " : ""}AthRecs fixture correction — ${raceName.slice(0, 150)}`,
     text,
     html: `<div style="font-family:Arial,sans-serif;color:#17212b;max-width:560px"><h1 style="font-size:24px">AthRecs fixture correction</h1><p style="white-space:pre-line;line-height:1.6">${escapeHtml(text)}</p><a href="${REVIEW_URL}">Review suggested race edits</a></div>`,
@@ -59,7 +61,7 @@ export async function deliverRaceEditAlerts(
       from race_edit_alert_deliveries
       where sent_at is null and not needs_review and next_attempt_at<=now()
         and (${suggestionId ?? null}::bigint is null or suggestion_id=${suggestionId ?? null})
-      order by next_attempt_at,id limit 2 for update skip locked`;
+      order by next_attempt_at,id limit 10 for update skip locked`;
     const ready: Array<Delivery & { email_payload: AlertEmail }> = [];
     for (const row of pending) {
       if (row.retry_expired) {
