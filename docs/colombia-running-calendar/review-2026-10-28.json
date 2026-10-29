@@ -1,0 +1,2419 @@
+{
+  "checkedAt": "2026-10-28",
+  "scope": "18 Colombian running events; 2026-11-01 through 2027-07-25",
+  "seriesCount": 18,
+  "distanceEditions": 52,
+  "timeZone": "America/Bogota",
+  "road": {
+    "researchedAt": "2026-10-28",
+    "scope": "Colombia road races after 2026-10-28 through 2027; organiser-led confirmation",
+    "timezone": "America/Bogota",
+    "publicationNotes": [
+      "Keep edition-specific local starts. Do not reuse 2026 times for 2027.",
+      "Race labels such as 21K are retained as advertised; distinguish canonical Half Marathon distance from an exact measured course length.",
+      "No newly discovered 2027 Medellín or Barranquilla date is confirmed by its organiser.",
+      "Confirmed date-and-distance fixtures may be published with unknown starts after reasonable research, with attempt log and retry; missing times alone are not a publication hold.",
+      "The new Café and Frontera records retain advertised 21K (21 km), not an inferred certified 21.0975 km. No exact measured half-marathon course length was found for either."
+    ],
+    "events": [
+      {
+        "name": "Media Maratón de Cúcuta 2026",
+        "date": "2026-11-15",
+        "city": "Cúcuta",
+        "region": "Norte de Santander",
+        "country": "Colombia",
+        "officialUrl": "https://mediamaratoncucuta.com/",
+        "registrationUrl": "https://app.spikessystem.com/registro/media-maraton-de-cucuta",
+        "organiserName": "Fundación Corazón de Atleta",
+        "organiserUrl": "https://corazondeatleta.org",
+        "distances": [
+          {
+            "label": "21K",
+            "startTime": "05:30"
+          },
+          {
+            "label": "10K",
+            "startTime": "06:15"
+          },
+          {
+            "label": "5K",
+            "startTime": "06:20"
+          }
+        ],
+        "sourceUrls": [
+          "https://mediamaratoncucuta.com/reglamento-terminos-y-condiciones/",
+          "https://app.spikessystem.com/registro/media-maraton-de-cucuta",
+          "https://mediamaratoncucuta.com/consentimiento-informado/"
+        ],
+        "sourceRefs": [
+          "turn3search1",
+          "turn13view7",
+          "turn3search15"
+        ],
+        "evidenceSummary": "Organiser rules confirm Sunday 15 November 2026 in Cúcuta, Norte de Santander; its linked official registration page provides separate starts for each distance.",
+        "venue": null,
+        "registrationStatus": "Registration offered; availability subject to organiser"
+      },
+      {
+        "name": "Media Maratón Urabá Corre 2026",
+        "date": "2026-11-22",
+        "city": "Apartadó",
+        "region": "Antioquia",
+        "country": "Colombia",
+        "officialUrl": "https://urabacorre.com.co/",
+        "registrationUrl": "https://welcu.com/timesporturaba/urabacorre2026",
+        "organiserName": "Comfenalco Antioquia, C.A.F. Vital Health and Corporación Run Urabá",
+        "organiserUrl": "https://urabacorre.com.co/",
+        "distances": [
+          {
+            "label": "21K",
+            "startTime": "05:35"
+          },
+          {
+            "label": "13K",
+            "startTime": "05:35"
+          },
+          {
+            "label": "7.5K",
+            "startTime": "05:50"
+          }
+        ],
+        "venue": "C.A.F. Vital Health, Carrera 106 No. 104C-14, Apartadó",
+        "sourceUrls": [
+          "https://urabacorre.com.co/wp-content/uploads/2026/06/REGLAMENTO-MEDIA-MARATON-URABA-CORRE-2026-REGLAMENTO.pdf",
+          "https://urabacorre.com.co/"
+        ],
+        "sourceRefs": [
+          "turn15view2",
+          "turn15view3",
+          "turn11view2"
+        ],
+        "evidenceSummary": "Edition-specific regulations confirm date, distances, start location and starts in articles 7–9. Homepage lists a general event time of 05:30; use the explicit distance starts from the rules.",
+        "surface": "Road; urban and semi-rural route",
+        "registrationStatus": "Registration offered; availability subject to organiser"
+      },
+      {
+        "name": "Media Maratón de Manizales 2026",
+        "date": "2026-11-29",
+        "city": "Manizales",
+        "region": "Caldas",
+        "country": "Colombia",
+        "officialUrl": "https://mediamaratonmanizales.com/",
+        "registrationUrl": "https://mediamaratonmanizales.com/",
+        "organiserName": "Media Maratón de Manizales",
+        "organiserUrl": "https://mediamaratonmanizales.com/",
+        "distances": [
+          {
+            "label": "21K",
+            "startTime": "06:00"
+          },
+          {
+            "label": "10K",
+            "startTime": "07:30"
+          },
+          {
+            "label": "5K",
+            "startTime": "08:30"
+          }
+        ],
+        "venue": null,
+        "sourceUrls": [
+          "https://mediamaratonmanizales.com/wp-content/uploads/2026/09/reglamentommm.pdf",
+          "https://mediamaratonmanizales.com/"
+        ],
+        "sourceRefs": [
+          "turn11view6",
+          "turn8view3"
+        ],
+        "evidenceSummary": "2026 official PDF confirms date in article 2 and separate starts in article 7. Ignore directory claims of 06:30/07:00 for shorter races: the official rules say 07:30/08:30.",
+        "registrationStatus": "Registration links offered on organiser website"
+      },
+      {
+        "name": "VCHALLENGES — Maratón de Bogotá 2026",
+        "date": "2026-11-29",
+        "city": "Bogotá",
+        "region": "Bogotá D.C.",
+        "country": "Colombia",
+        "officialUrl": "https://www.vchallenges.co/2026/challenge/details/vchallenges42k",
+        "registrationUrl": "https://www.vchallenges.co/2026/challenge/details/vchallenges42k",
+        "organiserName": "Ergofitness S.A.S.",
+        "organiserUrl": "https://www.vchallenges.co/",
+        "distances": [
+          {
+            "label": "Marathon",
+            "distanceKm": 42.195,
+            "startTime": "06:30"
+          },
+          {
+            "label": "32K",
+            "distanceKm": 32,
+            "startTime": "06:30"
+          },
+          {
+            "label": "21K",
+            "distanceKm": 21,
+            "startTime": "06:30"
+          }
+        ],
+        "venue": "Parque Obelisco, Avenida Esperanza at Carrera 57, Bogotá",
+        "sourceUrls": [
+          "https://www.vchallenges.co/2026/challenge/details/vchallenges42k",
+          "https://www.vchallenges.co/2026/challenge/details/vchallenges32k",
+          "https://www.vchallenges.co/2026/challenge/details/vchallenges21k"
+        ],
+        "sourceRefs": [
+          "turn3search0",
+          "turn3search5",
+          "turn13view0"
+        ],
+        "evidenceSummary": "Each individual official distance page explicitly states 29 November 2026 and 06:30. Full marathon page states measured 42.195 km, 5h30 finish limit and World Athletics course certification. Final route and starts remain subject to city permits.",
+        "registrationStatus": "Registration offered"
+      },
+      {
+        "name": "Media Maratón del Mar Sistecrédito 2027",
+        "date": "2027-02-21",
+        "city": "Cartagena de Indias",
+        "region": "Bolívar",
+        "country": "Colombia",
+        "officialUrl": "https://mediamaratondelmar.com/",
+        "registrationUrl": "https://mediamaratondelmar.com/",
+        "organiserName": "MCM Operador de Eventos and MOTIVVA Sport Logistics",
+        "organiserUrl": "https://mcmeventos.com/",
+        "distances": [
+          {
+            "label": "21K",
+            "startTime": "05:20"
+          },
+          {
+            "label": "10K",
+            "startTime": "05:50"
+          }
+        ],
+        "venue": "Sociedad Portuaria de Cartagena",
+        "sourceUrls": [
+          "https://mediamaratondelmar.com/pages/informacion-2027",
+          "https://mediamaratondelmar.com/pages/preguntas-frecuentes"
+        ],
+        "sourceRefs": [
+          "turn13view3",
+          "turn1search9"
+        ],
+        "evidenceSummary": "2027 information page supplies date, both starts and port departure point. Access to start is by organiser transport. Do not state a 21K cutoff: the same page inconsistently says 3h and 3h30.",
+        "registrationStatus": "Registration offered",
+        "separateChildrenEvent": {
+          "date": "2027-02-20",
+          "labels": [
+            "1K",
+            "2K"
+          ],
+          "startTime": null,
+          "publicationNote": "Not included as adult fixture distances because separate day and no start researched"
+        }
+      },
+      {
+        "name": "Cristal RUN FEST 2027",
+        "date": "2027-04-04",
+        "city": "Medellín",
+        "region": "Antioquia",
+        "country": "Colombia",
+        "officialUrl": "https://mcmeventos.com/pages/cristal-run-fest",
+        "registrationUrl": "https://www.app.spikessystem.com/registro/carrera-cristal-runfest",
+        "organiserName": "MCM Operador de Eventos",
+        "organiserUrl": "https://mcmeventos.com/",
+        "distances": [
+          {
+            "label": "15K",
+            "startTime": null
+          },
+          {
+            "label": "7K",
+            "startTime": null
+          },
+          {
+            "label": "3K",
+            "startTime": null
+          }
+        ],
+        "venue": "Parque Norte, Medellín",
+        "sourceUrls": [
+          "https://mcmeventos.com/pages/cristal-run-fest",
+          "https://www.app.spikessystem.com/registro/carrera-cristal-runfest"
+        ],
+        "sourceRefs": [
+          "turn9view0",
+          "turn13view5"
+        ],
+        "evidenceSummary": "Organiser page confirms Sunday 4 April 2027, Parque Norte and all three distances. Its linked registration page has no race start times; 09:00–17:00 refers to kit collection on 3 April.",
+        "registrationStatus": "Registration offered",
+        "startStatus": "Awaiting organiser announcement"
+      },
+      {
+        "name": "Maratón de Cali 2027",
+        "date": "2027-04-25",
+        "city": "Cali",
+        "region": "Valle del Cauca",
+        "country": "Colombia",
+        "officialUrl": "https://maratondecali.co/",
+        "registrationUrl": "https://www.eventrid.com.co/l/fundacioncampeonesdelfuturo",
+        "organiserName": "Fundación Campeones del Futuro / Juancho Correlón",
+        "organiserUrl": "https://maratondecali.co/",
+        "distances": [
+          {
+            "label": "Marathon",
+            "distanceKm": 42.195,
+            "startTime": null
+          },
+          {
+            "label": "15K",
+            "distanceKm": 15,
+            "startTime": null
+          }
+        ],
+        "otherAdvertisedDistances": [
+          {
+            "label": "4.2K",
+            "date": null,
+            "startTime": null
+          },
+          {
+            "label": "1.6K Kids",
+            "date": null,
+            "startTime": null
+          }
+        ],
+        "venue": "Cali — detailed 2027 start venue awaiting confirmation",
+        "sourceUrls": [
+          "https://maratondecali.co/",
+          "https://maratondecali.co/la-carrera/",
+          "https://aims-worldrunning.org/races/10431.html"
+        ],
+        "sourceRefs": [
+          "turn19search3",
+          "turn8view0",
+          "turn0search8"
+        ],
+        "evidenceSummary": "Organiser homepage and AIMS confirm 25 April 2027. Homepage advertises 42.195K, 15K, 4.2K and children’s 1.6K; linked regulations still concern May 2026, with shorter events on prior day. Safest publication includes full marathon and 15K; hold exact date/time for mini and kids.",
+        "registrationStatus": "Organiser links to registration portal",
+        "startStatus": "2027 start times awaiting confirmation"
+      },
+      {
+        "name": "21K Coveñas 2027",
+        "date": "2027-05-30",
+        "city": "Coveñas",
+        "region": "Sucre",
+        "country": "Colombia",
+        "officialUrl": "https://mcmeventos.com/pages/21k-covenas-2027",
+        "registrationUrl": "https://www.app.spikessystem.com/registro/21k-covenas-2027",
+        "organiserName": "MCM Operador de Eventos",
+        "organiserUrl": "https://mcmeventos.com/",
+        "distances": [
+          {
+            "label": "21K",
+            "startTime": null
+          },
+          {
+            "label": "10K",
+            "startTime": null
+          }
+        ],
+        "venue": "Coveñas, Sucre",
+        "sourceUrls": [
+          "https://mcmeventos.com/pages/21k-covenas-2027",
+          "https://www.app.spikessystem.com/registro/21k-covenas-2027"
+        ],
+        "sourceRefs": [
+          "turn9view1",
+          "turn13view6"
+        ],
+        "evidenceSummary": "Organiser confirms Sunday 30 May 2027 in Coveñas and 10K/21K. Registration page does not publish race starts. It labels 29 May Friday despite 2027 being Saturday; do not reuse kit-collection weekday as edition evidence.",
+        "registrationStatus": "Registration offered",
+        "startStatus": "Awaiting organiser announcement"
+      },
+      {
+        "name": "Media Maratón Regiones Colombia 2027",
+        "date": "2027-07-11",
+        "city": "Cartagena de Indias",
+        "region": "Bolívar",
+        "country": "Colombia",
+        "officialUrl": "https://www.mmregionescolombia.com/",
+        "registrationUrl": "https://www.mmregionescolombia.com/",
+        "organiserName": "Fundación Interregiones Colombia",
+        "organiserUrl": "https://www.mmregionescolombia.com/",
+        "distances": [
+          {
+            "label": "21K",
+            "startTime": null
+          },
+          {
+            "label": "10K",
+            "startTime": null
+          },
+          {
+            "label": "5K",
+            "startTime": null
+          }
+        ],
+        "venue": "Barrio Crespo, Avenida Santander, Cartagena de Indias",
+        "sourceUrls": [
+          "https://www.mmregionescolombia.com/reglamento.html",
+          "https://www.mmregionescolombia.com/"
+        ],
+        "sourceRefs": [
+          "turn8view2",
+          "turn19view0"
+        ],
+        "evidenceSummary": "2027 regulations explicitly confirm 11 July 2027, adult distances and organiser. Homepage describes start/finish in Crespo. Some dynamically populated homepage fields render blank or 'Por anunciar', so regulations are the date source.",
+        "registrationStatus": "Registration offered",
+        "startStatus": "Awaiting organiser announcement"
+      },
+      {
+        "name": "Media Maratón de Bogotá 2027",
+        "date": "2027-07-25",
+        "city": "Bogotá",
+        "region": "Bogotá D.C.",
+        "country": "Colombia",
+        "officialUrl": "https://www.mediamaratonbogota.com/",
+        "registrationUrl": "https://www.mediamaratonbogota.com/",
+        "organiserName": "Correcaminos de Colombia",
+        "organiserUrl": "https://www.mediamaratonbogota.com/",
+        "distances": [
+          {
+            "label": "21K / Half Marathon",
+            "startTime": "08:30",
+            "waves": [
+              "08:30",
+              "08:38",
+              "08:46",
+              "08:54"
+            ]
+          },
+          {
+            "label": "10K",
+            "distanceKm": 10,
+            "startTime": "10:00",
+            "waves": [
+              "10:00",
+              "10:08",
+              "10:16",
+              "10:24"
+            ]
+          }
+        ],
+        "venue": "Carrera 60, western carriageway between Calle 63 and Calle 53; assembly at Parque Simón Bolívar events plaza",
+        "sourceUrls": [
+          "https://www.mediamaratonbogota.com/reglamento",
+          "https://www.mediamaratonbogota.com/faq"
+        ],
+        "sourceRefs": [
+          "turn6view0",
+          "turn0search0"
+        ],
+        "evidenceSummary": "2027 regulations confirm 25 July, organiser, distances and wave starts. 06:00 is the assembly-area opening, not race start. 21K first/elite wave 08:30; 10K first/elite wave 10:00.",
+        "registrationStatus": "Registration offered until 24 July 2027 or capacity"
+      },
+      {
+        "country": "Colombia",
+        "timezone": "America/Bogota",
+        "currentStatus": "Scheduled; future edition confirmed by organiser",
+        "startStatus": "Start time not yet confirmed",
+        "publicationRecommendation": "Research-ready; publish confirmed date/distances with null starts and retry",
+        "name": "Media Maratón del Café 2026",
+        "date": "2026-11-01",
+        "city": "Pereira",
+        "region": "Risaralda",
+        "officialUrl": "https://www.mediamaratoncafe.com.co/",
+        "registrationUrl": "https://www.eventrid.com.co/eventos/mediamaratoncafe/media-maraton-del-cafe-2026",
+        "organiserName": "Media Maratón del Café",
+        "organiserUrl": "https://www.mediamaratoncafe.com.co/",
+        "distances": [
+          {
+            "label": "21K",
+            "distanceKm": 21,
+            "startTime": null,
+            "measurementStatus": "Advertised distance; no course measurement certificate found"
+          },
+          {
+            "label": "10K",
+            "distanceKm": 10,
+            "startTime": null,
+            "measurementStatus": "Advertised distance; no course measurement certificate found"
+          },
+          {
+            "label": "5K",
+            "distanceKm": 5,
+            "startTime": null,
+            "measurementStatus": "Advertised distance; no course measurement certificate found"
+          }
+        ],
+        "venue": "Villa Olímpica de Pereira",
+        "registrationStatus": "Official entry link present; current availability not independently readable",
+        "sourceUrls": [
+          "https://www.mediamaratoncafe.com.co/",
+          "https://organizer.eventrid.com.co/mediamaratoncafe/",
+          "https://www.mediamaratoncafe.com.co/hoteles/"
+        ],
+        "sourceRefs": [
+          "turn27view0",
+          "turn15view0",
+          "turn35view0"
+        ],
+        "routeMapUrls": [
+          "https://www.mediamaratoncafe.com.co/wp-content/uploads/2026/10/RUTA-5K-MMCAFE-2026REC-scaled.jpg",
+          "https://www.mediamaratoncafe.com.co/wp-content/uploads/2026/10/RUTA-10K-MMCAFE-2026REC-scaled.jpg",
+          "https://www.mediamaratoncafe.com.co/wp-content/uploads/2026/10/RUTA-21K-MMCAFE-2026REC-scaled.jpg"
+        ],
+        "evidenceSummary": "Organiser homepage announces 1 November in Pereira and links 2026 maps for 5K, 10K and 21K. Official Eventrid organiser index confirms 1 November 2026. Organiser hotels page identifies Villa Olímpica as start/finish. General entry-list time 05:00 cannot be assigned to every race.",
+        "startTimeResearch": {
+          "checkedOn": "2026-10-28",
+          "nextRetryDate": "2026-10-29",
+          "reasonForRetry": "Event is on 1 November; check daily until race day for distance-specific schedule.",
+          "attempts": [
+            {
+              "url": "https://www.mediamaratoncafe.com.co/",
+              "kind": "official-event-page",
+              "outcome": "Date and three route map links confirmed; no per-distance race starts in readable text."
+            },
+            {
+              "url": "https://www.mediamaratoncafe.com.co/hoteles/",
+              "kind": "official-logistics-page",
+              "outcome": "Villa Olímpica is explicitly start/finish; no race schedule."
+            },
+            {
+              "url": "https://www.eventrid.com.co/eventos/mediamaratoncafe/media-maraton-del-cafe-2026",
+              "kind": "official-linked-entry",
+              "outcome": "Page returned no readable text to web retrieval. Current entry availability and distance starts unverified."
+            },
+            {
+              "url": "https://organizer.eventrid.com.co/mediamaratoncafe/",
+              "kind": "entry-organiser-index",
+              "outcome": "Confirms 1 November 2026 with general event time 05:00; not proven distance starts."
+            },
+            {
+              "url": "https://www.mediamaratoncafe.com.co/mmcafe-kids/",
+              "kind": "linked-additional-information",
+              "outcome": "This rules page concerns separate 12 July 2026 kids event; discarded for November start-time evidence."
+            },
+            {
+              "url": "https://www.mediamaratoncafe.com.co/wp-content/uploads/2026/10/RUTA-21K-MMCAFE-2026REC-scaled.jpg",
+              "kind": "official-course-map",
+              "outcome": "Official homepage links 21K,10K,5K map files; image retrieval did not provide inspectable image and later returned bot check. No time extracted."
+            },
+            {
+              "query": "site:mediamaratoncafe.com.co 2026 reglamento horario",
+              "kind": "official-domain-schedule-search",
+              "outcome": "No adult November rules or timetable retrieved."
+            },
+            {
+              "query": "\"Media Maratón del Café\" \"2026\" \"hora de salida\"",
+              "kind": "exact-spanish-start-time-search",
+              "outcome": "Only third-party 05:50 claim and general Eventrid05:00 found; neither treated as verified per-distance race start."
+            },
+            {
+              "query": "site:instagram.com/mediamaratondelcafe \"2026\" \"salida\"",
+              "kind": "organiser-social-search",
+              "outcome": "No retrievable edition-specific organiser race timetable found."
+            }
+          ]
+        }
+      },
+      {
+        "country": "Colombia",
+        "timezone": "America/Bogota",
+        "currentStatus": "Scheduled; future edition confirmed by organiser",
+        "startStatus": "Start time not yet confirmed",
+        "publicationRecommendation": "Research-ready; publish confirmed date/distances with null starts and retry",
+        "name": "Media Maratón de la Frontera 2026",
+        "date": "2026-11-29",
+        "city": "Ipiales",
+        "region": "Nariño",
+        "officialUrl": "https://mediamaratonfrontera.com/",
+        "registrationUrl": "https://mediamaratonfrontera.com/informacion/",
+        "organiserName": "Ordepi and Alcaldía Municipal de Ipiales",
+        "organiserUrl": "https://mediamaratonfrontera.com/",
+        "distances": [
+          {
+            "label": "21K",
+            "distanceKm": 21,
+            "startTime": null,
+            "measurementStatus": "Advertised distance; no course measurement certificate found"
+          },
+          {
+            "label": "10K",
+            "distanceKm": 10,
+            "startTime": null,
+            "measurementStatus": "Advertised distance; no course measurement certificate found"
+          },
+          {
+            "label": "5K",
+            "distanceKm": 5,
+            "startTime": null,
+            "measurementStatus": "Advertised distance; no course measurement certificate found"
+          }
+        ],
+        "venue": "Ipiales; exact start/finish details await final organiser guidance",
+        "registrationStatus": "Registration requests accepted for organiser review and payment; submission alone does not confirm a place",
+        "sourceUrls": [
+          "https://mediamaratonfrontera.com/",
+          "https://mediamaratonfrontera.com/informacion/",
+          "https://mediamaratonfrontera.com/faq/",
+          "https://mediamaratonfrontera.com/distancias/",
+          "https://mediamaratonfrontera.com/recorrido/",
+          "https://mediamaratonfrontera.com/reglamento/"
+        ],
+        "sourceRefs": [
+          "turn27view1",
+          "turn29view8",
+          "turn27view2",
+          "turn29view6",
+          "turn29view7",
+          "turn29view5"
+        ],
+        "evidenceSummary": "Official homepage, distance page and information page confirm 29 November2026, Ipiales and 5/10/21km; official course page explicitly identifies Ipiales,Nariño,Colombia. FAQ states timetable awaits announcement and rules page says regulations pending. No race-start time published.",
+        "startTimeResearch": {
+          "checkedOn": "2026-10-28",
+          "nextRetryDate": "2026-10-31",
+          "reasonForRetry": "Earlier follow-up on 31 October; recheck at least every three days once within 30 days of the race.",
+          "attempts": [
+            {
+              "url": "https://mediamaratonfrontera.com/",
+              "kind": "official-event-page",
+              "outcome": "Confirms edition date,5/10/21km and Ordepi/Alcaldía organisers."
+            },
+            {
+              "url": "https://mediamaratonfrontera.com/informacion/",
+              "kind": "official-schedule-and-entry",
+              "outcome": "Explicitly states hora por anunciar; accepts registration requests pending review/payment; no race time."
+            },
+            {
+              "url": "https://mediamaratonfrontera.com/faq/",
+              "kind": "official-faq",
+              "outcome": "Explicitly says timetable pending official announcement."
+            },
+            {
+              "url": "https://mediamaratonfrontera.com/reglamento/",
+              "kind": "official-regulations",
+              "outcome": "Official regulations document not yet published; no PDF or start times available."
+            },
+            {
+              "url": "https://mediamaratonfrontera.com/distancias/",
+              "kind": "official-distance-and-entry-information",
+              "outcome": "Confirms advertised21km,10km,5km; request-only registration stage; no measured half length or starts."
+            },
+            {
+              "url": "https://mediamaratonfrontera.com/recorrido/",
+              "kind": "official-route",
+              "outcome": "Identifies Ipiales,Nariño; no times. Dynamic map references Ordepi departure and municipal stadium finish, but FAQ/info still say exact start/finish pending; kept conservative venue."
+            },
+            {
+              "url": "https://mediamaratonfrontera.com/consulta/",
+              "kind": "entry-status-page",
+              "outcome": "Public lookup form; no timing information. No personal data entered."
+            },
+            {
+              "query": "\"Media Maratón de la Frontera\" \"2026\" \"horario de salida\"",
+              "kind": "exact-spanish-start-time-search",
+              "outcome": "No official start announcement found; avoid similarly named Spanish races."
+            }
+          ]
+        }
+      }
+    ],
+    "held": [
+      {
+        "name": "Maratón Medellín 2027",
+        "officialUrl": "https://maratonmedellin.com/",
+        "sourceUrls": [
+          "https://maratonmedellin.com/",
+          "https://aims-worldrunning.org/directory.html"
+        ],
+        "sourceRefs": [
+          "turn1search4",
+          "turn1search6"
+        ],
+        "reason": "Official website still 2026; AIMS next edition TBC. Third-party 5 Sep 2027 is not enough."
+      },
+      {
+        "name": "Maratón de Barranquilla 2027",
+        "officialUrl": "https://maratonbarranquilla.com/",
+        "reason": "No 2027 organiser confirmation retrieved. Third-party directory states 14 March 2027 but conflicts with another directory; do not publish guessed annual recurrence."
+      }
+    ],
+    "distanceMeasurementNotes": {
+      "all21KRecords": "Unless an exact measured distance is quoted separately, keep advertised21K/21km labels; no blanket21.0975 substitution or certification claim.",
+      "bogotaHalf2027": "Official regulation describes21K as Distancia Oficial21.097metros. This is21097m as written, not explicit21097.5m; preserve source wording and half-marathon identity without silently assigning extra0.5m.",
+      "regionesColombia2027": "Regulations use21K; homepage display also shows21.1K. Neither establishes certified21.0975km.",
+      "marathons": "Cali homepage and VCHALLENGES42K page explicitly state42.195km."
+    }
+  },
+  "trail": {
+    "researchedAt": "2026-10-28",
+    "scope": "Colombia trail and ultra races after 2026-10-28; official organiser evidence",
+    "timezone": "America/Bogota",
+    "offset": "-05:00",
+    "events": [
+      {
+        "name": "Salento Trail Challenge",
+        "editionYear": 2026,
+        "municipality": "Salento",
+        "department": "Quindío",
+        "country": "Colombia",
+        "eventDate": "2026-11-01",
+        "website": "https://www.salentotrailchallenge.com/",
+        "organizerName": "Salento Trail Challenge",
+        "venue": "Parque principal de Salento",
+        "registrationUrl": "https://www.salentotrailchallenge.com/",
+        "registrationNote": "Official Biciq registration link returned 404 in web fetch; use official homepage rather than claiming registration availability.",
+        "races": [
+          {
+            "label": "5K",
+            "distanceKm": 5,
+            "date": "2026-11-01",
+            "startTime": "07:30",
+            "surface": "trail",
+            "sourceUrl": "https://www.salentotrailchallenge.com/5k"
+          },
+          {
+            "label": "10K",
+            "distanceKm": 10,
+            "date": "2026-11-01",
+            "startTime": "07:30",
+            "surface": "trail",
+            "sourceUrl": "https://www.salentotrailchallenge.com/10k"
+          },
+          {
+            "label": "21K",
+            "distanceKm": 21,
+            "date": "2026-11-01",
+            "startTime": "07:30",
+            "surface": "trail",
+            "sourceUrl": "https://www.salentotrailchallenge.com/21k"
+          },
+          {
+            "label": "42K",
+            "distanceKm": 42,
+            "date": "2026-11-01",
+            "startTime": "07:30",
+            "surface": "trail",
+            "sourceUrl": "https://www.salentotrailchallenge.com/42k"
+          }
+        ],
+        "dateSource": "https://www.salentotrailchallenge.com/",
+        "evidence": "2026 homepage states 1 November; all four distance pages linked by current homepage publish 07:30 start from Salento's main park.",
+        "caveats": [
+          "Route downloads on 5K/10K explicitly have not yet been updated; do not import their GPX or elevation as edition-confirmed.",
+          "Distance-page start times are current published route-page values, not an independently dated 2026 timetable."
+        ],
+        "refs": [
+          "turn12view1",
+          "turn14view1",
+          "turn14view2",
+          "turn16view1",
+          "turn16view2"
+        ]
+      },
+      {
+        "name": "Pitalito Trail Tour",
+        "editionYear": 2026,
+        "municipality": "Pitalito",
+        "department": "Huila",
+        "country": "Colombia",
+        "eventDate": "2026-11-08",
+        "organizerName": "SABICANN / Macizo Challenge",
+        "website": "https://sabicann.com/pitalito-trail-tour/",
+        "registrationUrl": "https://sabicann.com/pitalito-trail-tour/",
+        "registrationStatus": "closed",
+        "venue": "Pitalito (precise start venue not established from official page)",
+        "races": [
+          {
+            "label": "42K",
+            "distanceKm": 42,
+            "date": "2026-11-08",
+            "startTime": "05:00",
+            "surface": "trail"
+          },
+          {
+            "label": "21K",
+            "distanceKm": 21,
+            "date": "2026-11-08",
+            "startTime": "07:00",
+            "surface": "trail"
+          },
+          {
+            "label": "10K",
+            "distanceKm": 10,
+            "date": "2026-11-08",
+            "startTime": "07:00",
+            "surface": "trail"
+          }
+        ],
+        "sources": [
+          "https://sabicann.com/pitalito-trail-tour/",
+          "https://sabicann.com/macizo-challenge/"
+        ],
+        "evidence": "Official edition page states 8 November 2026 and route-specific starts 05:00 for 42K and 07:00 for 21K/10K; header says registrations closed.",
+        "caveats": [
+          "Some directories give 05:30; organiser directly states 05:00.",
+          "Do not duplicate the Bruselas Trail Tour directory entry: official Macizo series describes Bruselas as part of this Pitalito event."
+        ],
+        "refs": [
+          "turn12view0",
+          "turn14view5",
+          "turn10search4"
+        ]
+      },
+      {
+        "name": "Columbia Trail Challenge",
+        "editionYear": 2026,
+        "municipality": "Choachí",
+        "department": "Cundinamarca",
+        "country": "Colombia",
+        "eventDate": "2026-11-15",
+        "organizerName": "Aire Libre y Aventura (Quintana Sosa y Compañía S.A.S.)",
+        "website": "https://columbiatrailchallenge.com/",
+        "registrationUrl": "https://columbiatrailchallenge.com/pago/",
+        "venue": "Parque principal de Choachí",
+        "races": [
+          {
+            "label": "21K",
+            "distanceKm": null,
+            "marketedDistanceKm": 21,
+            "reportedCourseDistancesKm": [
+              21.3,
+              23.3
+            ],
+            "date": "2026-11-15",
+            "startTime": "08:30",
+            "surface": "trail",
+            "distanceStatus": "branded 21K confirmed; exact course length conflicting"
+          },
+          {
+            "label": "10K",
+            "distanceKm": 11,
+            "marketedDistanceKm": 10,
+            "date": "2026-11-15",
+            "startTime": "09:00",
+            "surface": "trail",
+            "distanceStatus": "branded 10K; technical section says actual 11 km"
+          }
+        ],
+        "sources": [
+          "https://columbiatrailchallenge.com/",
+          "https://columbiatrailchallenge.com/rutasdecarrera/",
+          "https://columbiatrailchallenge.com/reglamento/"
+        ],
+        "evidence": "Official homepage confirms second edition 15 November 2026. Routes page specifies 08:30 and 09:00 starts at the main park.",
+        "caveats": [
+          "21K exact route length, ascent and maximum elevation conflict within the same official route page. Publish branded race names only or hold exact-length enrichment; never imply certified half-marathon.",
+          "10K is a branded name; published technical distance is 11 km."
+        ],
+        "refs": [
+          "turn4view2",
+          "turn7view5",
+          "turn23view5"
+        ]
+      },
+      {
+        "name": "Del Mar a la Cima",
+        "editionYear": 2026,
+        "municipality": "Santa Marta / Guachaca–Buritaca",
+        "department": "Magdalena",
+        "country": "Colombia",
+        "eventStartDate": "2026-11-28",
+        "eventEndDate": "2026-11-29",
+        "organizerName": "Aire Libre y Aventura (Quintana Sosa y Compañía S.A.S.)",
+        "website": "https://delmaralacima.com/",
+        "registrationUrl": "https://delmaralacima.com/boleteria-dmalc/",
+        "venue": "Santuario Playa Bonita, Buritaca coastal area, Santa Marta",
+        "races": [
+          {
+            "label": "110K Teyuna",
+            "distanceKm": 110,
+            "marketedDistanceKm": 110,
+            "date": "2026-11-28",
+            "startTime": "07:00",
+            "surface": "trail",
+            "sourceUrl": "https://delmaralacima.com/ficha-tecnica-110k/"
+          },
+          {
+            "label": "80K",
+            "distanceKm": 81.2,
+            "marketedDistanceKm": 80,
+            "date": "2026-11-28",
+            "startTime": "07:00",
+            "surface": "trail",
+            "sourceUrl": "https://delmaralacima.com/ficha-tecnica-80k/"
+          },
+          {
+            "label": "42K",
+            "distanceKm": 42.4,
+            "marketedDistanceKm": 42,
+            "date": "2026-11-29",
+            "startTime": "03:00",
+            "surface": "trail",
+            "sourceUrl": "https://delmaralacima.com/ficha-tecnica-42k/"
+          },
+          {
+            "label": "24K",
+            "distanceKm": 25.5,
+            "marketedDistanceKm": 24,
+            "date": "2026-11-29",
+            "startTime": "05:45",
+            "surface": "trail",
+            "sourceUrl": "https://delmaralacima.com/ficha-tecnica-24k/"
+          },
+          {
+            "label": "13K",
+            "distanceKm": 14.5,
+            "marketedDistanceKm": 13,
+            "date": "2026-11-29",
+            "startTime": "06:00",
+            "surface": "trail",
+            "sourceUrl": "https://delmaralacima.com/ficha-tecnica-13k/"
+          }
+        ],
+        "sources": [
+          "https://delmaralacima.com/",
+          "https://delmaralacima.com/planea-tu-viaje-dmalc/"
+        ],
+        "evidence": "Official event 28–29 November 2026; each technical page provides date, clock start and field explicitly labelled DISTANCIA OFICIAL.",
+        "caveats": [
+          "Branded distance names differ from current published technical lengths; preserve both rather than converting trail 42K into a standard 42.195-km marathon.",
+          "Old control-point tables on some technical pages have inconsistent totals; avoid importing those tables/elevation or exact GPX without further reconciliation.",
+          "Transport times are TBC but race starts above are explicitly published. Do not mistake a bus time for race start.",
+          "Kids event exists; no timed fixture record prepared."
+        ],
+        "refs": [
+          "turn4search0",
+          "turn12view2",
+          "turn12view3",
+          "turn10view2",
+          "turn10view3",
+          "turn12view4",
+          "turn4search4"
+        ]
+      },
+      {
+        "name": "The Desert Marathon",
+        "editionYear": 2027,
+        "editionNumber": 10,
+        "municipality": "Cabo de la Vela",
+        "department": "La Guajira",
+        "country": "Colombia",
+        "eventStartDate": "2027-05-27",
+        "eventEndDate": "2027-05-31",
+        "raceStartDate": "2027-05-28",
+        "raceEndDate": "2027-05-30",
+        "organizerName": "The Desert Marathon",
+        "website": "https://tdmrace.com/",
+        "registrationUrl": "https://tdmrace.com/",
+        "registrationStatus": "sold_out",
+        "venue": "Cabo de la Vela / La Guajira desert; kit collection in Riohacha",
+        "races": [
+          {
+            "label": "100K — 3 stages",
+            "distanceKm": 100,
+            "date": "2027-05-28",
+            "endDate": "2027-05-30",
+            "startTime": null,
+            "surface": "trail",
+            "stageDistancesKm": [
+              15,
+              40,
+              45
+            ]
+          },
+          {
+            "label": "76K — 3 stages",
+            "distanceKm": 76,
+            "date": "2027-05-28",
+            "endDate": "2027-05-30",
+            "startTime": null,
+            "surface": "trail",
+            "stageDistancesKm": [
+              15,
+              40,
+              21
+            ]
+          },
+          {
+            "label": "50K — 3 stages",
+            "distanceKm": 50,
+            "date": "2027-05-28",
+            "endDate": "2027-05-30",
+            "startTime": null,
+            "surface": "trail",
+            "stageDistancesKm": [
+              15,
+              14,
+              21
+            ]
+          }
+        ],
+        "sources": [
+          "https://tdmrace.com/reglamento/",
+          "https://tdmrace.com/100-km/",
+          "https://tdmrace.com/"
+        ],
+        "evidence": "Rules confirm full event 27–31 May 2027 and 50/76/100-km totals in three stages. Detailed page identifies Friday 28 May transfer and first night stage, Saturday 29 and Sunday 30 racing; homepage official Instagram feed says sold out.",
+        "caveats": [
+          "Exact first-stage clock start is unpublished. Do not enter 12:30 (bus meeting time) or 27 May (kit day) as race start.",
+          "Introductory paragraph has typo 'Friday 27' while dated day-by-day schedule gives Friday 28; use dated schedule.",
+          "Stage distances are approximate trail distances; route GPX is supplied shortly before race."
+        ],
+        "refs": [
+          "turn18view1",
+          "turn18view0",
+          "turn21view2"
+        ]
+      },
+      {
+        "name": "Chicamocha Canyon Race",
+        "editionYear": 2027,
+        "editionNumber": 15,
+        "municipality": "San Gil / Jordán / Barichara",
+        "department": "Santander",
+        "country": "Colombia",
+        "eventStartDate": "2027-06-04",
+        "eventEndDate": "2027-06-07",
+        "raceStartDate": "2027-06-05",
+        "organizerName": "Corporación Deporteza",
+        "website": "https://chicamochacanyonrace.com/es",
+        "registrationUrl": "https://chicamochacanyonrace.com/es/inscripciones",
+        "registrationStatus": "open_until_capacity",
+        "venue": "Centro Comercial El Puente, San Gil; 24K/46K start in Jordán",
+        "races": [
+          {
+            "label": "100 miles",
+            "distanceKm": 167,
+            "marketedDistanceMiles": 100,
+            "date": "2027-06-05",
+            "startTime": "08:00",
+            "surface": "trail",
+            "startVenue": "Centro Comercial El Puente, San Gil",
+            "finishVenue": "Centro Comercial El Puente, San Gil",
+            "cutoffHours": 49,
+            "sourceUrl": "https://chicamochacanyonrace.com/es/distancias/100-millas"
+          },
+          {
+            "label": "80K",
+            "distanceKm": 81,
+            "marketedDistanceKm": 80,
+            "date": "2027-06-06",
+            "startTime": "06:00",
+            "surface": "trail",
+            "startVenue": "Centro Comercial El Puente, San Gil",
+            "finishVenue": "Centro Comercial El Puente, San Gil",
+            "cutoffHours": 24,
+            "sourceUrl": "https://chicamochacanyonrace.com/es/distancias/80-kilometros"
+          },
+          {
+            "label": "Maratón 46K",
+            "distanceKm": 46,
+            "date": "2027-06-06",
+            "startTime": "07:00",
+            "surface": "trail",
+            "startVenue": "Jordán",
+            "finishVenue": "Centro Comercial El Puente, San Gil",
+            "cutoffHours": 13,
+            "sourceUrl": "https://chicamochacanyonrace.com/es/distancias/maraton"
+          },
+          {
+            "label": "Media maratón 24K",
+            "distanceKm": 24,
+            "date": "2027-06-06",
+            "startTime": "08:00",
+            "surface": "trail",
+            "startVenue": "Jordán",
+            "finishVenue": "Parque principal, Barichara",
+            "cutoffHours": 8.5,
+            "sourceUrl": "https://chicamochacanyonrace.com/es/distancias/media-maraton"
+          }
+        ],
+        "sources": [
+          "https://chicamochacanyonrace.com/es/la-carrera",
+          "https://chicamochacanyonrace.com/es/cronograma",
+          "https://chicamochacanyonrace.com/es/inscripciones"
+        ],
+        "evidence": "Official 2027 schedule gives each date/time/start/finish. Official course cards publish 24/46/81/167 km. Festival 4–7 June, competitive starts 5–6 June.",
+        "caveats": [
+          "Do not import directory dates of 22 June or 18 July; these contradict the official 2027 edition.",
+          "24K and 46K are trail race names (media maratón/maratón), not certified standard road lengths.",
+          "The 5K coffee run is a supporting activity, not one of the four competitive races."
+        ],
+        "refs": [
+          "turn4view0",
+          "turn5view0",
+          "turn2search3",
+          "turn23view0",
+          "turn23view1",
+          "turn23view2",
+          "turn23view3"
+        ]
+      }
+    ],
+    "heldCandidates": [
+      {
+        "name": "Merrell Trail Tour 2027",
+        "reason": "Directories infer 23 May 2027 but no official edition confirmation found; do not publish inferred date."
+      },
+      {
+        "name": "Sunset Race 2027",
+        "reason": "Directories conflict between 27 and 31 January 2027; no official source found."
+      },
+      {
+        "name": "Bacatá Trail Series Guataquí 2026",
+        "candidateDate": "2026-11-22",
+        "officialUrl": "https://eventos.bodytech.co/event/info/bacata-athletic-trail-guataquidepotosi-2026",
+        "reason": "Official JS page text does not expose event facts; third-party dates/distances not sufficient. Official start time not verified."
+      },
+      {
+        "name": "Guamal Trail Race 2026",
+        "candidateDate": "2026-12-13",
+        "reason": "Only secondary calendar seen; no official start-time evidence."
+      },
+      {
+        "name": "Trail Rey de los Vientos 2026",
+        "candidateDate": "2026-12-06",
+        "reason": "Secondary listings only, no organiser-confirmed date/time."
+      },
+      {
+        "name": "Carrera del Café Trail 2026",
+        "candidateDate": "2026-12-06",
+        "reason": "Conflicting directory distances/organisers and no official date/start evidence retrieved."
+      },
+      {
+        "name": "Quindío Trail Colombia by UTMB",
+        "officialUrl": "https://quindio.utmb.world/",
+        "reason": "Official homepage has no scheduled race edition; 2025 cancellation reported, no future edition independently confirmed. Do not roll 2025/2026 listings into 2027."
+      }
+    ]
+  },
+  "startReview": [
+    {
+      "editionKey": "media-maraton-de-cucuta|2026-11-15|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-15",
+      "distance": "21K",
+      "localStart": "05:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://app.spikessystem.com/registro/media-maraton-de-cucuta",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-de-cucuta|2026-11-15|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "localStart": "06:15",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://app.spikessystem.com/registro/media-maraton-de-cucuta",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-de-cucuta|2026-11-15|5K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-15",
+      "distance": "5K",
+      "localStart": "06:20",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://app.spikessystem.com/registro/media-maraton-de-cucuta",
+      "publicNote": "Recreational 5K.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-uraba-corre|2026-11-22|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-22",
+      "distance": "21K",
+      "localStart": "05:35",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://urabacorre.com.co/wp-content/uploads/2026/06/REGLAMENTO-MEDIA-MARATON-URABA-CORRE-2026-REGLAMENTO.pdf",
+      "publicNote": "Race start from the edition-specific regulations; the general 05:30 event time is not this distance’s start.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-uraba-corre|2026-11-22|13K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-22",
+      "distance": "13K",
+      "localStart": "05:35",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://urabacorre.com.co/wp-content/uploads/2026/06/REGLAMENTO-MEDIA-MARATON-URABA-CORRE-2026-REGLAMENTO.pdf",
+      "publicNote": "Race start from the edition-specific regulations; the general 05:30 event time is not this distance’s start.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-uraba-corre|2026-11-22|7.5K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-22",
+      "distance": "7.5K",
+      "localStart": "05:50",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://urabacorre.com.co/wp-content/uploads/2026/06/REGLAMENTO-MEDIA-MARATON-URABA-CORRE-2026-REGLAMENTO.pdf",
+      "publicNote": "Race start from the edition-specific regulations; the general 05:30 event time is not this distance’s start.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-de-manizales|2026-11-29|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "21K",
+      "localStart": "06:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://mediamaratonmanizales.com/wp-content/uploads/2026/09/reglamentommm.pdf",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-de-manizales|2026-11-29|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "10K",
+      "localStart": "07:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://mediamaratonmanizales.com/wp-content/uploads/2026/09/reglamentommm.pdf",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-de-manizales|2026-11-29|5K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "5K",
+      "localStart": "08:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://mediamaratonmanizales.com/wp-content/uploads/2026/09/reglamentommm.pdf",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "vchallenges-maraton-de-bogota|2026-11-29|Marathon",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "Marathon",
+      "localStart": "06:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://www.vchallenges.co/2026/challenge/details/vchallenges42k",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "vchallenges-maraton-de-bogota|2026-11-29|32K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "32K",
+      "localStart": "06:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://www.vchallenges.co/2026/challenge/details/vchallenges32k",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "vchallenges-maraton-de-bogota|2026-11-29|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "21K",
+      "localStart": "06:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://www.vchallenges.co/2026/challenge/details/vchallenges21k",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-del-mar-cartagena|2027-02-21|Half",
+      "checkedAt": "2026-10-28",
+      "date": "2027-02-21",
+      "distance": "Half",
+      "localStart": "05:20",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://mediamaratondelmar.com/pages/informacion-2027",
+      "publicNote": "Advertised as 21K. Use the organiser’s transport to access the Sociedad Portuaria start.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-del-mar-cartagena|2027-02-21|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-02-21",
+      "distance": "10K",
+      "localStart": "05:50",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://mediamaratondelmar.com/pages/informacion-2027",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "cristal-run-fest|2027-04-04|15K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-04-04",
+      "distance": "15K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://mcmeventos.com/pages/cristal-run-fest",
+      "publicNote": "Start time not yet verified for this edition.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://mcmeventos.com/pages/cristal-run-fest",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "The 4 April 2027 date, venue and three distances are published; no race start times appear on this page."
+        },
+        {
+          "url": "https://www.app.spikessystem.com/registro/carrera-cristal-runfest",
+          "kind": "official-linked-entry",
+          "checkedAt": "2026-10-28",
+          "outcome": "All three distance options were inspected. No race starts were shown; 09:00 to 17:00 refers to kit collection on 3 April."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "cristal-run-fest|2027-04-04|7K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-04-04",
+      "distance": "7K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://mcmeventos.com/pages/cristal-run-fest",
+      "publicNote": "Start time not yet verified for this edition.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://mcmeventos.com/pages/cristal-run-fest",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "The 4 April 2027 date, venue and three distances are published; no race start times appear on this page."
+        },
+        {
+          "url": "https://www.app.spikessystem.com/registro/carrera-cristal-runfest",
+          "kind": "official-linked-entry",
+          "checkedAt": "2026-10-28",
+          "outcome": "All three distance options were inspected. No race starts were shown; 09:00 to 17:00 refers to kit collection on 3 April."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "cristal-run-fest|2027-04-04|3K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-04-04",
+      "distance": "3K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://mcmeventos.com/pages/cristal-run-fest",
+      "publicNote": "Start time not yet verified for this edition.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://mcmeventos.com/pages/cristal-run-fest",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "The 4 April 2027 date, venue and three distances are published; no race start times appear on this page."
+        },
+        {
+          "url": "https://www.app.spikessystem.com/registro/carrera-cristal-runfest",
+          "kind": "official-linked-entry",
+          "checkedAt": "2026-10-28",
+          "outcome": "All three distance options were inspected. No race starts were shown; 09:00 to 17:00 refers to kit collection on 3 April."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "maraton-de-cali|2027-04-25|Marathon",
+      "checkedAt": "2026-10-28",
+      "date": "2027-04-25",
+      "distance": "Marathon",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://maratondecali.co/",
+      "publicNote": "Start time not yet verified for this edition.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://maratondecali.co/",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "The homepage announces 25 April 2027 and advertised distances. It also contains older price sections; it does not verify a 2027 race start time or current entry availability."
+        },
+        {
+          "url": "https://maratondecali.co/la-carrera/",
+          "kind": "official-event-information",
+          "checkedAt": "2026-10-28",
+          "outcome": "Page confirms the 2027 date but linked rules are for the previous edition."
+        },
+        {
+          "url": "https://maratondecali.co/wp-content/uploads/2026/04/Reglamento-Maraton-de-cali-2026.pdf",
+          "kind": "linked-official-regulations",
+          "checkedAt": "2026-10-28",
+          "outcome": "Opened PDF is explicitly for May 2026. Its race starts and short-race dates were not carried into 2027."
+        },
+        {
+          "url": "https://www.eventrid.com.co/l/fundacioncampeonesdelfuturo",
+          "kind": "official-linked-entry",
+          "checkedAt": "2026-10-28",
+          "outcome": "Registration portal returned no readable text to the web reader; 2027 entry availability and race starts remain unverified."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "maraton-de-cali|2027-04-25|15K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-04-25",
+      "distance": "15K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://maratondecali.co/",
+      "publicNote": "Start time not yet verified for this edition.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://maratondecali.co/",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "The homepage announces 25 April 2027 and advertised distances. It also contains older price sections; it does not verify a 2027 race start time or current entry availability."
+        },
+        {
+          "url": "https://maratondecali.co/la-carrera/",
+          "kind": "official-event-information",
+          "checkedAt": "2026-10-28",
+          "outcome": "Page confirms the 2027 date but linked rules are for the previous edition."
+        },
+        {
+          "url": "https://maratondecali.co/wp-content/uploads/2026/04/Reglamento-Maraton-de-cali-2026.pdf",
+          "kind": "linked-official-regulations",
+          "checkedAt": "2026-10-28",
+          "outcome": "Opened PDF is explicitly for May 2026. Its race starts and short-race dates were not carried into 2027."
+        },
+        {
+          "url": "https://www.eventrid.com.co/l/fundacioncampeonesdelfuturo",
+          "kind": "official-linked-entry",
+          "checkedAt": "2026-10-28",
+          "outcome": "Registration portal returned no readable text to the web reader; 2027 entry availability and race starts remain unverified."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "21k-covenas|2027-05-30|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-05-30",
+      "distance": "21K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://mcmeventos.com/pages/21k-covenas-2027",
+      "publicNote": "Start time not yet verified for this edition.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://mcmeventos.com/pages/21k-covenas-2027",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "The organiser confirms 30 May 2027 and 10K/21K; no race starts are published on this page."
+        },
+        {
+          "url": "https://www.app.spikessystem.com/registro/21k-covenas-2027",
+          "kind": "official-linked-entry",
+          "checkedAt": "2026-10-28",
+          "outcome": "Distance options were inspected without race starts. Displayed kit-collection hours are not race starts, and its weekday wording is inconsistent."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "21k-covenas|2027-05-30|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-05-30",
+      "distance": "10K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://mcmeventos.com/pages/21k-covenas-2027",
+      "publicNote": "Start time not yet verified for this edition.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://mcmeventos.com/pages/21k-covenas-2027",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "The organiser confirms 30 May 2027 and 10K/21K; no race starts are published on this page."
+        },
+        {
+          "url": "https://www.app.spikessystem.com/registro/21k-covenas-2027",
+          "kind": "official-linked-entry",
+          "checkedAt": "2026-10-28",
+          "outcome": "Distance options were inspected without race starts. Displayed kit-collection hours are not race starts, and its weekday wording is inconsistent."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "media-maraton-regiones-colombia|2027-07-11|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-07-11",
+      "distance": "21K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://www.mmregionescolombia.com/reglamento.html",
+      "publicNote": "Start time not yet verified for this edition.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://www.mmregionescolombia.com/reglamento.html",
+          "kind": "official-edition-regulations",
+          "checkedAt": "2026-10-28",
+          "outcome": "The regulations explicitly confirm 11 July 2027, distances and organiser. No race start times are stated in the retrieved rules."
+        },
+        {
+          "url": "https://www.mmregionescolombia.com/",
+          "kind": "official-event-and-entry-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "Homepage offers entry links and describes the course, but the dynamically populated date/start fields render blank or unannounced. No start time was taken from those fields."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "media-maraton-regiones-colombia|2027-07-11|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-07-11",
+      "distance": "10K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://www.mmregionescolombia.com/reglamento.html",
+      "publicNote": "Start time not yet verified for this edition.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://www.mmregionescolombia.com/reglamento.html",
+          "kind": "official-edition-regulations",
+          "checkedAt": "2026-10-28",
+          "outcome": "The regulations explicitly confirm 11 July 2027, distances and organiser. No race start times are stated in the retrieved rules."
+        },
+        {
+          "url": "https://www.mmregionescolombia.com/",
+          "kind": "official-event-and-entry-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "Homepage offers entry links and describes the course, but the dynamically populated date/start fields render blank or unannounced. No start time was taken from those fields."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "media-maraton-regiones-colombia|2027-07-11|5K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-07-11",
+      "distance": "5K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://www.mmregionescolombia.com/reglamento.html",
+      "publicNote": "Recreational 5K.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://www.mmregionescolombia.com/reglamento.html",
+          "kind": "official-edition-regulations",
+          "checkedAt": "2026-10-28",
+          "outcome": "The regulations explicitly confirm 11 July 2027, distances and organiser. No race start times are stated in the retrieved rules."
+        },
+        {
+          "url": "https://www.mmregionescolombia.com/",
+          "kind": "official-event-and-entry-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "Homepage offers entry links and describes the course, but the dynamically populated date/start fields render blank or unannounced. No start time was taken from those fields."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "media-maraton-de-bogota-2026-ad1d6f7a|2027-07-25|Half",
+      "checkedAt": "2026-10-28",
+      "date": "2027-07-25",
+      "distance": "Half",
+      "localStart": "08:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://www.mediamaratonbogota.com/reglamento",
+      "publicNote": "Half marathon / 21K. The official rules state 21,097 metres. First wave 08:30; later waves 08:38, 08:46 and 08:54. Follow your assigned wave.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-de-bogota-2026-ad1d6f7a|2027-07-25|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-07-25",
+      "distance": "10K",
+      "localStart": "10:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://www.mediamaratonbogota.com/reglamento",
+      "publicNote": "First wave 10:00; later waves 10:08, 10:16 and 10:24. Follow your assigned wave.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "media-maraton-del-cafe-pereira|2026-11-01|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-01",
+      "distance": "21K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "inaccessible",
+      "sourceUrl": "https://www.mediamaratoncafe.com.co/",
+      "publicNote": "Start time not yet verified. The entry index’s 05:00 is a general event time, not a confirmed distance start.",
+      "nextCheck": "2026-10-29",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://www.mediamaratoncafe.com.co/",
+          "kind": "official-event-page",
+          "outcome": "Date and three route map links confirmed; no per-distance race starts in readable text.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.mediamaratoncafe.com.co/hoteles/",
+          "kind": "official-logistics-page",
+          "outcome": "Villa Olímpica is explicitly start/finish; no race schedule.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.eventrid.com.co/eventos/mediamaratoncafe/media-maraton-del-cafe-2026",
+          "kind": "official-linked-entry",
+          "outcome": "Page returned no readable text to web retrieval. Current entry availability and distance starts unverified.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://organizer.eventrid.com.co/mediamaratoncafe/",
+          "kind": "entry-organiser-index",
+          "outcome": "Confirms 1 November 2026 with general event time 05:00; not proven distance starts.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.mediamaratoncafe.com.co/mmcafe-kids/",
+          "kind": "linked-additional-information",
+          "outcome": "This rules page concerns separate 12 July 2026 kids event; discarded for November start-time evidence.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.mediamaratoncafe.com.co/wp-content/uploads/2026/10/RUTA-21K-MMCAFE-2026REC-scaled.jpg",
+          "kind": "official-course-map",
+          "outcome": "Official homepage links 21K,10K,5K map files; image retrieval did not provide inspectable image and later returned bot check. No time extracted.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "site:mediamaratoncafe.com.co 2026 reglamento horario",
+          "kind": "official-domain-schedule-search",
+          "outcome": "No adult November rules or timetable retrieved.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "\"Media Maratón del Café\" \"2026\" \"hora de salida\"",
+          "kind": "exact-spanish-start-time-search",
+          "outcome": "Only third-party 05:50 claim and general Eventrid05:00 found; neither treated as verified per-distance race start.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "site:instagram.com/mediamaratondelcafe \"2026\" \"salida\"",
+          "kind": "organiser-social-search",
+          "outcome": "No retrievable edition-specific organiser race timetable found.",
+          "checkedAt": "2026-10-28"
+        }
+      ],
+      "retryReason": "Event is on 1 November; check daily until race day for distance-specific schedule.",
+      "nextAction": "Recheck the official event page, route information and authorised entry programme daily for distance-specific race starts."
+    },
+    {
+      "editionKey": "media-maraton-del-cafe-pereira|2026-11-01|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-01",
+      "distance": "10K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "inaccessible",
+      "sourceUrl": "https://www.mediamaratoncafe.com.co/",
+      "publicNote": "Start time not yet verified. The entry index’s 05:00 is a general event time, not a confirmed distance start.",
+      "nextCheck": "2026-10-29",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://www.mediamaratoncafe.com.co/",
+          "kind": "official-event-page",
+          "outcome": "Date and three route map links confirmed; no per-distance race starts in readable text.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.mediamaratoncafe.com.co/hoteles/",
+          "kind": "official-logistics-page",
+          "outcome": "Villa Olímpica is explicitly start/finish; no race schedule.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.eventrid.com.co/eventos/mediamaratoncafe/media-maraton-del-cafe-2026",
+          "kind": "official-linked-entry",
+          "outcome": "Page returned no readable text to web retrieval. Current entry availability and distance starts unverified.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://organizer.eventrid.com.co/mediamaratoncafe/",
+          "kind": "entry-organiser-index",
+          "outcome": "Confirms 1 November 2026 with general event time 05:00; not proven distance starts.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.mediamaratoncafe.com.co/mmcafe-kids/",
+          "kind": "linked-additional-information",
+          "outcome": "This rules page concerns separate 12 July 2026 kids event; discarded for November start-time evidence.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.mediamaratoncafe.com.co/wp-content/uploads/2026/10/RUTA-21K-MMCAFE-2026REC-scaled.jpg",
+          "kind": "official-course-map",
+          "outcome": "Official homepage links 21K,10K,5K map files; image retrieval did not provide inspectable image and later returned bot check. No time extracted.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "site:mediamaratoncafe.com.co 2026 reglamento horario",
+          "kind": "official-domain-schedule-search",
+          "outcome": "No adult November rules or timetable retrieved.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "\"Media Maratón del Café\" \"2026\" \"hora de salida\"",
+          "kind": "exact-spanish-start-time-search",
+          "outcome": "Only third-party 05:50 claim and general Eventrid05:00 found; neither treated as verified per-distance race start.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "site:instagram.com/mediamaratondelcafe \"2026\" \"salida\"",
+          "kind": "organiser-social-search",
+          "outcome": "No retrievable edition-specific organiser race timetable found.",
+          "checkedAt": "2026-10-28"
+        }
+      ],
+      "retryReason": "Event is on 1 November; check daily until race day for distance-specific schedule.",
+      "nextAction": "Recheck the official event page, route information and authorised entry programme daily for distance-specific race starts."
+    },
+    {
+      "editionKey": "media-maraton-del-cafe-pereira|2026-11-01|5K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-01",
+      "distance": "5K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "inaccessible",
+      "sourceUrl": "https://www.mediamaratoncafe.com.co/",
+      "publicNote": "Start time not yet verified. The entry index’s 05:00 is a general event time, not a confirmed distance start.",
+      "nextCheck": "2026-10-29",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://www.mediamaratoncafe.com.co/",
+          "kind": "official-event-page",
+          "outcome": "Date and three route map links confirmed; no per-distance race starts in readable text.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.mediamaratoncafe.com.co/hoteles/",
+          "kind": "official-logistics-page",
+          "outcome": "Villa Olímpica is explicitly start/finish; no race schedule.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.eventrid.com.co/eventos/mediamaratoncafe/media-maraton-del-cafe-2026",
+          "kind": "official-linked-entry",
+          "outcome": "Page returned no readable text to web retrieval. Current entry availability and distance starts unverified.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://organizer.eventrid.com.co/mediamaratoncafe/",
+          "kind": "entry-organiser-index",
+          "outcome": "Confirms 1 November 2026 with general event time 05:00; not proven distance starts.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.mediamaratoncafe.com.co/mmcafe-kids/",
+          "kind": "linked-additional-information",
+          "outcome": "This rules page concerns separate 12 July 2026 kids event; discarded for November start-time evidence.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://www.mediamaratoncafe.com.co/wp-content/uploads/2026/10/RUTA-21K-MMCAFE-2026REC-scaled.jpg",
+          "kind": "official-course-map",
+          "outcome": "Official homepage links 21K,10K,5K map files; image retrieval did not provide inspectable image and later returned bot check. No time extracted.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "site:mediamaratoncafe.com.co 2026 reglamento horario",
+          "kind": "official-domain-schedule-search",
+          "outcome": "No adult November rules or timetable retrieved.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "\"Media Maratón del Café\" \"2026\" \"hora de salida\"",
+          "kind": "exact-spanish-start-time-search",
+          "outcome": "Only third-party 05:50 claim and general Eventrid05:00 found; neither treated as verified per-distance race start.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "site:instagram.com/mediamaratondelcafe \"2026\" \"salida\"",
+          "kind": "organiser-social-search",
+          "outcome": "No retrievable edition-specific organiser race timetable found.",
+          "checkedAt": "2026-10-28"
+        }
+      ],
+      "retryReason": "Event is on 1 November; check daily until race day for distance-specific schedule.",
+      "nextAction": "Recheck the official event page, route information and authorised entry programme daily for distance-specific race starts."
+    },
+    {
+      "editionKey": "media-maraton-de-la-frontera-ipiales|2026-11-29|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "21K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "organiser-not-yet-published",
+      "sourceUrl": "https://mediamaratonfrontera.com/",
+      "publicNote": "The organiser says the timetable is to be announced. Start time not yet verified.",
+      "nextCheck": "2026-10-31",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://mediamaratonfrontera.com/",
+          "kind": "official-event-page",
+          "outcome": "Confirms edition date,5/10/21km and Ordepi/Alcaldía organisers.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/informacion/",
+          "kind": "official-schedule-and-entry",
+          "outcome": "Explicitly states hora por anunciar; accepts registration requests pending review/payment; no race time.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/faq/",
+          "kind": "official-faq",
+          "outcome": "Explicitly says timetable pending official announcement.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/reglamento/",
+          "kind": "official-regulations",
+          "outcome": "Official regulations document not yet published; no PDF or start times available.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/distancias/",
+          "kind": "official-distance-and-entry-information",
+          "outcome": "Confirms advertised21km,10km,5km; request-only registration stage; no measured half length or starts.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/recorrido/",
+          "kind": "official-route",
+          "outcome": "Identifies Ipiales,Nariño; no times. Dynamic map references Ordepi departure and municipal stadium finish, but FAQ/info still say exact start/finish pending; kept conservative venue.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/consulta/",
+          "kind": "entry-status-page",
+          "outcome": "Public lookup form; no timing information. No personal data entered.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "\"Media Maratón de la Frontera\" \"2026\" \"horario de salida\"",
+          "kind": "exact-spanish-start-time-search",
+          "outcome": "No official start announcement found; avoid similarly named Spanish races.",
+          "checkedAt": "2026-10-28"
+        }
+      ],
+      "retryReason": "Earlier follow-up on 31 October; recheck at least every three days once within 30 days of the race.",
+      "nextAction": "Reopen official information, FAQ, regulations and distance-entry pages for an announced timetable."
+    },
+    {
+      "editionKey": "media-maraton-de-la-frontera-ipiales|2026-11-29|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "10K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "organiser-not-yet-published",
+      "sourceUrl": "https://mediamaratonfrontera.com/",
+      "publicNote": "The organiser says the timetable is to be announced. Start time not yet verified.",
+      "nextCheck": "2026-10-31",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://mediamaratonfrontera.com/",
+          "kind": "official-event-page",
+          "outcome": "Confirms edition date,5/10/21km and Ordepi/Alcaldía organisers.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/informacion/",
+          "kind": "official-schedule-and-entry",
+          "outcome": "Explicitly states hora por anunciar; accepts registration requests pending review/payment; no race time.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/faq/",
+          "kind": "official-faq",
+          "outcome": "Explicitly says timetable pending official announcement.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/reglamento/",
+          "kind": "official-regulations",
+          "outcome": "Official regulations document not yet published; no PDF or start times available.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/distancias/",
+          "kind": "official-distance-and-entry-information",
+          "outcome": "Confirms advertised21km,10km,5km; request-only registration stage; no measured half length or starts.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/recorrido/",
+          "kind": "official-route",
+          "outcome": "Identifies Ipiales,Nariño; no times. Dynamic map references Ordepi departure and municipal stadium finish, but FAQ/info still say exact start/finish pending; kept conservative venue.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/consulta/",
+          "kind": "entry-status-page",
+          "outcome": "Public lookup form; no timing information. No personal data entered.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "\"Media Maratón de la Frontera\" \"2026\" \"horario de salida\"",
+          "kind": "exact-spanish-start-time-search",
+          "outcome": "No official start announcement found; avoid similarly named Spanish races.",
+          "checkedAt": "2026-10-28"
+        }
+      ],
+      "retryReason": "Earlier follow-up on 31 October; recheck at least every three days once within 30 days of the race.",
+      "nextAction": "Reopen official information, FAQ, regulations and distance-entry pages for an announced timetable."
+    },
+    {
+      "editionKey": "media-maraton-de-la-frontera-ipiales|2026-11-29|5K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "5K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "organiser-not-yet-published",
+      "sourceUrl": "https://mediamaratonfrontera.com/",
+      "publicNote": "The organiser says the timetable is to be announced. Start time not yet verified.",
+      "nextCheck": "2026-10-31",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://mediamaratonfrontera.com/",
+          "kind": "official-event-page",
+          "outcome": "Confirms edition date,5/10/21km and Ordepi/Alcaldía organisers.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/informacion/",
+          "kind": "official-schedule-and-entry",
+          "outcome": "Explicitly states hora por anunciar; accepts registration requests pending review/payment; no race time.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/faq/",
+          "kind": "official-faq",
+          "outcome": "Explicitly says timetable pending official announcement.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/reglamento/",
+          "kind": "official-regulations",
+          "outcome": "Official regulations document not yet published; no PDF or start times available.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/distancias/",
+          "kind": "official-distance-and-entry-information",
+          "outcome": "Confirms advertised21km,10km,5km; request-only registration stage; no measured half length or starts.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/recorrido/",
+          "kind": "official-route",
+          "outcome": "Identifies Ipiales,Nariño; no times. Dynamic map references Ordepi departure and municipal stadium finish, but FAQ/info still say exact start/finish pending; kept conservative venue.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "url": "https://mediamaratonfrontera.com/consulta/",
+          "kind": "entry-status-page",
+          "outcome": "Public lookup form; no timing information. No personal data entered.",
+          "checkedAt": "2026-10-28"
+        },
+        {
+          "query": "\"Media Maratón de la Frontera\" \"2026\" \"horario de salida\"",
+          "kind": "exact-spanish-start-time-search",
+          "outcome": "No official start announcement found; avoid similarly named Spanish races.",
+          "checkedAt": "2026-10-28"
+        }
+      ],
+      "retryReason": "Earlier follow-up on 31 October; recheck at least every three days once within 30 days of the race.",
+      "nextAction": "Reopen official information, FAQ, regulations and distance-entry pages for an announced timetable."
+    },
+    {
+      "editionKey": "salento-trail-challenge|2026-11-01|5K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-01",
+      "distance": "5K",
+      "localStart": "07:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://www.salentotrailchallenge.com/5k",
+      "publicNote": "07:30 is the current linked route-page start. Reconfirm the final 2026 instructions; route downloads are being updated.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "salento-trail-challenge|2026-11-01|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-01",
+      "distance": "10K",
+      "localStart": "07:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://www.salentotrailchallenge.com/10k",
+      "publicNote": "07:30 is the current linked route-page start. Reconfirm the final 2026 instructions; route downloads are being updated.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "salento-trail-challenge|2026-11-01|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-01",
+      "distance": "21K",
+      "localStart": "07:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://www.salentotrailchallenge.com/21k",
+      "publicNote": "07:30 is the current linked route-page start. Reconfirm the final 2026 instructions; route downloads are being updated.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "salento-trail-challenge|2026-11-01|42K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-01",
+      "distance": "42K",
+      "localStart": "07:30",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://www.salentotrailchallenge.com/42k",
+      "publicNote": "07:30 is the current linked route-page start. Reconfirm the final 2026 instructions; route downloads are being updated.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "pitalito-trail-tour|2026-11-08|42K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-08",
+      "distance": "42K",
+      "localStart": "05:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://sabicann.com/pitalito-trail-tour/",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "pitalito-trail-tour|2026-11-08|21K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-08",
+      "distance": "21K",
+      "localStart": "07:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://sabicann.com/pitalito-trail-tour/",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "pitalito-trail-tour|2026-11-08|10K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "localStart": "07:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://sabicann.com/pitalito-trail-tour/",
+      "publicNote": "",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "columbia-trail-challenge|2026-11-15|11K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-15",
+      "distance": "11K",
+      "localStart": "09:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://columbiatrailchallenge.com/rutasdecarrera/",
+      "publicNote": "The organiser markets this as 10K and publishes a technical route distance of 11 km.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "del-mar-a-la-cima|2026-11-28|110K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-28",
+      "distance": "110K",
+      "localStart": "07:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://delmaralacima.com/ficha-tecnica-110k/",
+      "publicNote": "Organiser’s race name: 110K Teyuna. Published trail distance: approximately 110 km.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "del-mar-a-la-cima|2026-11-28|81.2K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-28",
+      "distance": "81.2K",
+      "localStart": "07:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://delmaralacima.com/ficha-tecnica-80k/",
+      "publicNote": "Organiser’s race name: 80K. Published trail distance: approximately 81.2 km.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "del-mar-a-la-cima|2026-11-29|42.4K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "42.4K",
+      "localStart": "03:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://delmaralacima.com/ficha-tecnica-42k/",
+      "publicNote": "Organiser’s race name: 42K. Published trail distance: approximately 42.4 km.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "del-mar-a-la-cima|2026-11-29|25.5K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "25.5K",
+      "localStart": "05:45",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://delmaralacima.com/ficha-tecnica-24k/",
+      "publicNote": "Organiser’s race name: 24K. Published trail distance: approximately 25.5 km.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "del-mar-a-la-cima|2026-11-29|14.5K",
+      "checkedAt": "2026-10-28",
+      "date": "2026-11-29",
+      "distance": "14.5K",
+      "localStart": "06:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://delmaralacima.com/ficha-tecnica-13k/",
+      "publicNote": "Organiser’s race name: 13K. Published trail distance: approximately 14.5 km.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "the-desert-marathon-colombia|2027-05-28|100K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-05-28",
+      "distance": "100K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://tdmrace.com/reglamento/",
+      "publicNote": "Total distance over three stages, 28–30 May 2027. Kit collection is on 27 May. First-stage start time not yet verified.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://tdmrace.com/reglamento/",
+          "kind": "official-edition-regulations",
+          "checkedAt": "2026-10-28",
+          "outcome": "Batch trail research inspected rules confirming the 2027 programme and three-stage distance options; an exact first-stage clock start was not published."
+        },
+        {
+          "url": "https://tdmrace.com/100-km/",
+          "kind": "official-stage-programme",
+          "checkedAt": "2026-10-28",
+          "outcome": "Batch trail research inspected the day-by-day programme: stages run 28 to 30 May. The 12:30 time is a bus meeting, not the first-stage race start."
+        },
+        {
+          "url": "https://tdmrace.com/",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "Batch trail research recorded the official feed showing sold-out registration. No verified first-stage clock start was recorded."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "the-desert-marathon-colombia|2027-05-28|76K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-05-28",
+      "distance": "76K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://tdmrace.com/reglamento/",
+      "publicNote": "Total distance over three stages, 28–30 May 2027. Kit collection is on 27 May. First-stage start time not yet verified.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://tdmrace.com/reglamento/",
+          "kind": "official-edition-regulations",
+          "checkedAt": "2026-10-28",
+          "outcome": "Batch trail research inspected rules confirming the 2027 programme and three-stage distance options; an exact first-stage clock start was not published."
+        },
+        {
+          "url": "https://tdmrace.com/100-km/",
+          "kind": "official-stage-programme",
+          "checkedAt": "2026-10-28",
+          "outcome": "Batch trail research inspected the day-by-day programme: stages run 28 to 30 May. The 12:30 time is a bus meeting, not the first-stage race start."
+        },
+        {
+          "url": "https://tdmrace.com/",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "Batch trail research recorded the official feed showing sold-out registration. No verified first-stage clock start was recorded."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "the-desert-marathon-colombia|2027-05-28|50K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-05-28",
+      "distance": "50K",
+      "localStart": null,
+      "timeZone": "America/Bogota",
+      "status": "unchecked",
+      "sourceUrl": "https://tdmrace.com/reglamento/",
+      "publicNote": "Total distance over three stages, 28–30 May 2027. Kit collection is on 27 May. First-stage start time not yet verified.",
+      "nextCheck": "2026-11-04",
+      "previousStart": null,
+      "attempts": [
+        {
+          "url": "https://tdmrace.com/reglamento/",
+          "kind": "official-edition-regulations",
+          "checkedAt": "2026-10-28",
+          "outcome": "Batch trail research inspected rules confirming the 2027 programme and three-stage distance options; an exact first-stage clock start was not published."
+        },
+        {
+          "url": "https://tdmrace.com/100-km/",
+          "kind": "official-stage-programme",
+          "checkedAt": "2026-10-28",
+          "outcome": "Batch trail research inspected the day-by-day programme: stages run 28 to 30 May. The 12:30 time is a bus meeting, not the first-stage race start."
+        },
+        {
+          "url": "https://tdmrace.com/",
+          "kind": "official-event-page",
+          "checkedAt": "2026-10-28",
+          "outcome": "Batch trail research recorded the official feed showing sold-out registration. No verified first-stage clock start was recorded."
+        }
+      ],
+      "reviewReason": "The listed primary-source checks are complete; the full start-time checklist remains incomplete. Do not treat absence from these pages as a completed exhaustive search.",
+      "nextAction": "Recheck the opened sources and complete remaining available schedule, FAQ/guide, governing-body and official-update searches; retain unknown starts until edition-specific evidence appears.",
+      "retryReason": "Early follow-up before the event enters the mandatory three-calendar-month window."
+    },
+    {
+      "editionKey": "chicamocha-canyon-race|2027-06-05|167K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-06-05",
+      "distance": "167K",
+      "localStart": "08:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+      "publicNote": "Organiser’s race name: 100 miles. Published trail distance: approximately 167 km. Start: Centro Comercial El Puente, San Gil. Finish: Centro Comercial El Puente, San Gil.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "chicamocha-canyon-race|2027-06-06|81K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-06-06",
+      "distance": "81K",
+      "localStart": "06:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+      "publicNote": "Organiser’s race name: 80K. Published trail distance: approximately 81 km. Start: Centro Comercial El Puente, San Gil. Finish: Centro Comercial El Puente, San Gil.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "chicamocha-canyon-race|2027-06-06|46K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-06-06",
+      "distance": "46K",
+      "localStart": "07:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+      "publicNote": "Organiser’s race name: Maratón 46K. Published trail distance: approximately 46 km. Start: Jordán. Finish: Centro Comercial El Puente, San Gil.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    },
+    {
+      "editionKey": "chicamocha-canyon-race|2027-06-06|24K",
+      "checkedAt": "2026-10-28",
+      "date": "2027-06-06",
+      "distance": "24K",
+      "localStart": "08:00",
+      "timeZone": "America/Bogota",
+      "status": "confirmed",
+      "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+      "publicNote": "Organiser’s race name: Media maratón 24K. Published trail distance: approximately 24 km. Start: Jordán. Finish: Parque principal, Barichara.",
+      "nextCheck": null,
+      "previousStart": null,
+      "attempts": []
+    }
+  ],
+  "heldDistance": {
+    "event": "Columbia Trail Challenge",
+    "label": "21K",
+    "reason": "Same official 2026 route page gives 21.3 km and 23.3 km; hold this distance until reconciled.",
+    "sourceUrl": "https://columbiatrailchallenge.com/rutasdecarrera/",
+    "nextCheck": "2026-10-31"
+  },
+  "deduplication": {
+    "reusedSlugs": [
+      "maraton-de-cali",
+      "media-maraton-del-mar-cartagena",
+      "media-maraton-de-bogota-2026-ad1d6f7a"
+    ],
+    "note": "Cúcuta Metropolitana is a separate March event; the new Cúcuta half is the organiser-confirmed November event. Bogotá 2027 reuses its latest historical event identity and preserves results. Earlier result-specific Bogotá records are not merged by this fixture import."
+  },
+  "entryAvailabilityReview": {
+    "checkedAt": "2026-10-28",
+    "event": "Maratón de Cali 2027",
+    "dateConfirmed": "2027-04-25",
+    "previousEntryStatus": "open",
+    "entryStatus": "unknown",
+    "reason": "The official event date and entry link are confirmed, but current availability was not readable from the linked registration portal. Old pricing sections do not establish 2027 availability.",
+    "sourceUrl": "https://www.eventrid.com.co/l/fundacioncampeonesdelfuturo"
+  }
+}

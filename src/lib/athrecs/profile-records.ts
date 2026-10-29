@@ -207,6 +207,8 @@ export function eligiblePerformance(result: ProfileResult): boolean {
       "Parkrun",
       "Athletics",
       "Walking",
+      "Cross-country Skiing",
+      "Roller Skiing",
       "Cycling",
       "Swimming",
       "Rowing",

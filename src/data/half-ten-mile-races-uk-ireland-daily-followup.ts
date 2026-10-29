@@ -43,6 +43,7 @@ const CURRENT_START_AND_DISCOVERY_CHECKED_AT = "2026-10-25";
 const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT = "2026-10-28";
+const CURRENT_LIMERICK_PERMIT_SCAN_CHECKED_AT = "2026-10-29";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -356,6 +357,27 @@ const seeds: RaceSeed[] = [
     checkedAt: CURRENT_IRISH_PERMIT_SCAN_CHECKED_AT,
     notes:
       "The direct official registration page and Athletics Ireland calendar consistently confirm the 1 August 2027 half marathon and 10K, 09:00 half-marathon start, open €55 half entry and approved permit 26/590.",
+  },
+  {
+    slug: "limerick-runs-race-series-2027",
+    name: "Limerick Runs Race Series 2027",
+    date: "2027-04-18",
+    distance: "10mi",
+    startTime: "09:00",
+    country: "Ireland",
+    county: "County Limerick",
+    city: "Castleconnell",
+    area: "Castleconnell and surrounding County Limerick roads",
+    surface: "Road",
+    distances: ["10mi", "10K", "5K", "4mi"],
+    organiser: "Limerick Runs / Just Race Events / Eventmaster",
+    url: "https://eventmaster.ie/event/wZeLhPySRQ",
+    entryUrl: "https://eventmaster.ie/event/wZeLhPySRQ/P3wdhwQTd",
+    priceAmount: 30,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_LIMERICK_PERMIT_SCAN_CHECKED_AT,
+    notes:
+      "The current official series page and distance-specific registration page consistently confirm the 18 April 2027 10-mile road race, 09:00 start, open €30 entry and approved Athletics Ireland permit 26/591. The January 5K, February 10K, March 4-mile and April 10-mile races remain together on one canonical series card.",
   },
   {
     slug: "settle-saunter-2027",
@@ -2918,14 +2940,6 @@ export const dailyHalfTenMileResearchQueue = [
     country: "Ireland",
     reason:
       "The official Athletics Ireland calendar lists the half-marathon date but still labels the permit as pending approval; its displayed event title also contains a spelling error that should be corrected before publication.",
-    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
-  },
-  {
-    slug: "limerick-runs-10-mile-2027",
-    date: "2027-04-18",
-    country: "Ireland",
-    reason:
-      "The official Athletics Ireland calendar confirms the 10-mile date but still labels the permit as pending approval.",
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
   {

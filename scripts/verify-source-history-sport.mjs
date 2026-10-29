@@ -16,6 +16,17 @@ import {
 } from "../src/lib/athrecs/profile-history-results.ts";
 
 const examples = [
+  ["15 km classic cross-country skiing", "", "Cross-country Skiing"],
+  ["Cross-country skiing sprint", "", "Cross-country Skiing"],
+  ["Nordic skiing 10 km", "", "Cross-country Skiing"],
+  ["15 km langrenn", "", "Cross-country Skiing"],
+  ["Roller-ski sprint", "", "Roller Skiing"],
+  ["10 km road roller skiing", "", "Roller Skiing"],
+  ["Rollerski sprint", "", "Roller Skiing"],
+  ["Senior", "timer", "Cross-country Skiing", "Example cross-country skiing championship"],
+  ["Senior", "timer", "Roller Skiing", "Example roller-ski sprint"],
+  ["5 km running", "ski school", "Running", "Ski school running test"],
+  ["Senior", "ski club", null, "Example meeting"],
   ["parkrun", "", "Parkrun"],
   ["5 km parkrun", "", "Parkrun"],
   ["parkrunCX", "", "Parkrun"],
@@ -110,7 +121,7 @@ try {
     "create table athlete_source_histories(provider text,performances jsonb); create table athletes(profile_details jsonb)",
   );
   const migration = await readFile(
-    new URL("../migrations/20261024_athlete_sport_classification_v4.sql", import.meta.url),
+    new URL("../migrations/20261028_athlete_sport_classification_v5.sql", import.meta.url),
     "utf8",
   );
   assert.equal(
@@ -121,7 +132,7 @@ try {
   // Building the expression index also exercises PostgreSQL's restricted search path.
   await db.exec(migration);
   const profileMigration = await readFile(
-    new URL("../migrations/20261024_athlete_sport_profile_evidence_v2.sql", import.meta.url),
+    new URL("../migrations/20261028_athlete_sport_profile_evidence_v3.sql", import.meta.url),
     "utf8",
   );
   assert.equal(profileMigration, profileSportEvidenceMigration());
@@ -182,14 +193,14 @@ try {
     [{ directorySource: [], publishedRaceHistory: { entries: {} }, user_supplied_sports: {} }, []],
   ]) {
     assert.deepEqual(profileEvidenceSports(details), expected);
-    const { rows } = await db.query("select athlete_profile_sports_v2($1) sports", [
+    const { rows } = await db.query("select athlete_profile_sports_v3($1) sports", [
       JSON.stringify(details),
     ]);
     assert.deepEqual(rows[0].sports, expected, "Profile evidence JS/SQL parity");
   }
   for (const [discipline, provider, expected, meeting = ""] of examples) {
     assert.equal(sourceHistorySport(discipline, provider, meeting), expected, discipline);
-    const { rows } = await db.query("select athlete_source_sport_v4($1,$2,$3) as sport", [
+    const { rows } = await db.query("select athlete_source_sport_v5($1,$2,$3) as sport", [
       provider,
       discipline,
       meeting,
@@ -204,7 +215,7 @@ try {
     JSON.stringify(history),
   ]);
   const { rows } = await db.query(
-    "select athlete_history_sports_v4(provider,performances) as sports from athlete_source_histories",
+    "select athlete_history_sports_v5(provider,performances) as sports from athlete_source_histories",
   );
   assert.deepEqual(
     rows[0].sports,
@@ -212,7 +223,7 @@ try {
     "Keep supported multi-sport memberships, exclude unknown and hidden performances",
   );
   const { rows: empty } = await db.query(
-    "select athlete_history_sports_v4('fixture',null) as sports",
+    "select athlete_history_sports_v5('fixture',null) as sports",
   );
   assert.deepEqual(empty[0].sports, []);
   const timeline = buildProfileTimeline(
@@ -241,6 +252,10 @@ try {
   );
   assert.equal(timeline.count, 1, "Unknown sport cannot delete an existing performance");
   assert.equal(timeline.history[0].sport, "Unclassified");
+  assert(!isCrossCountryHistoryResult({ discipline: "15 km cross-country skiing", labels: [] }));
+  assert(
+    !isCrossCountryHistoryResult({ discipline: "Senior", meeting: "Nordic skiing", labels: [] }),
+  );
   assert(isCrossCountryHistoryResult({ discipline: "10KXC", labels: [] }));
   assert(isCrossCountryHistoryResult({ discipline: "ZXCL", labels: [] }));
   assert(isTrailHistoryResult({ discipline: "5 mile trail", labels: [] }));

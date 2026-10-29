@@ -14,6 +14,9 @@ import {
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import { AssistantLauncher } from "@/components/assistant/AssistantLauncher";
+import { IntercomMessenger } from "@/components/assistant/IntercomMessenger";
+import { IntercomWelcome } from "@/components/assistant/IntercomWelcome";
+import { INTERCOM_ENABLED } from "@/lib/athrecs/intercom";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 import { cn } from "@/lib/utils";
@@ -247,6 +250,7 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
         </nav>
       ) : null}
       <SiteAnalytics featureFlags={featureFlags} />
+      {IS_ATHRECS_SITE && INTERCOM_ENABLED ? <IntercomWelcome pathname={pathname} /> : null}
       <main
         id="main-content"
         data-athrecs-main=""
@@ -304,7 +308,13 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
           </Link>
         </div>
       </footer>
-      {IS_ATHRECS_SITE ? <AssistantLauncher pathname={pathname} /> : null}
+      {IS_ATHRECS_SITE ? (
+        INTERCOM_ENABLED ? (
+          <IntercomMessenger pathname={pathname} />
+        ) : (
+          <AssistantLauncher pathname={pathname} />
+        )
+      ) : null}
       <nav
         className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md lg:hidden"
         aria-label="Primary"

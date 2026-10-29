@@ -16,9 +16,15 @@ try {
     "/src/components/athletes/UnverifiedRaceHistory.tsx",
   );
   const neil = getReportedRaceHistory("neil-featherby");
-  assert.equal(neil.records.length, 34);
-  assert.equal(new Set(neil.records.map((row) => row.id)).size, 34);
-  assert.equal(neil.records.filter((row) => row.id.startsWith("great-race-")).length, 20);
+  const expectedNeilRecordCount = 34;
+  const expectedGreatRaceStageIds = new Set(
+    Array.from({ length: 20 }, (_, index) => `great-race-1990-stage-${index + 1}`),
+  );
+  assert.equal(neil.records.length, expectedNeilRecordCount);
+  assert.equal(new Set(neil.records.map((row) => row.id)).size, expectedNeilRecordCount);
+  const greatRaceStages = neil.records.filter((row) => row.id.startsWith("great-race-"));
+  assert.deepEqual(new Set(greatRaceStages.map((row) => row.id)), expectedGreatRaceStageIds);
+  assert(greatRaceStages.every((row) => row.entryKind === "stage"));
   assert(neil.records.every((row) => row.uncertainty && row.sources.length));
   assert(
     neil.records.every((row) =>
@@ -53,8 +59,8 @@ try {
       showEvidence: true,
     }),
   );
-  assert.equal((html.match(/id="reported-result-/g) ?? []).length, 34);
-  assert.equal((html.match(/>Not verified by chip time</g) ?? []).length, 34);
+  assert.equal((html.match(/id="reported-result-/g) ?? []).length, expectedNeilRecordCount);
+  assert.equal((html.match(/>Not verified by chip time</g) ?? []).length, expectedNeilRecordCount);
   assert.match(html, /Organiser archive/);
   assert.match(html, /Stage/);
   assert.match(html, /Grouped race record/);
@@ -73,9 +79,9 @@ try {
   const publicRows = renderToStaticMarkup(
     createElement(CompactResults, { results: [], reportedHistory: neil }),
   );
-  assert.equal((publicRows.match(/id="reported-result-/g) ?? []).length, 34);
+  assert.equal((publicRows.match(/id="reported-result-/g) ?? []).length, expectedNeilRecordCount);
   assert(!publicRows.includes("Not verified by chip time"));
-  assert.equal((publicRows.match(/>Unverified</g) ?? []).length, 34);
+  assert.equal((publicRows.match(/>Unverified</g) ?? []).length, expectedNeilRecordCount);
   assert(!publicRows.includes('data-label="Source"'));
   assert(!publicRows.includes("Organiser archive"));
   assert(html.includes('data-label="Source"'), "Staff retain the source field");
@@ -228,7 +234,7 @@ try {
   assert(!murakamiHtml.includes("UltraSignup"));
   assert(!murakamiHtml.includes("1 January"));
   console.log(
-    "Reported history: Neil 34, Murakami 9 and Goggins 7 entries render with isolated policies; opted-in PBs retain timing caveats.",
+    "Reported history: Neil 34 (including 20 Great Race stages), Murakami 9 and Goggins 7 entries render with isolated policies; opted-in PBs retain timing caveats.",
   );
 } finally {
   await server.close();

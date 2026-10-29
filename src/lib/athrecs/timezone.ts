@@ -51,6 +51,7 @@ const COUNTRY_TZ: Record<string, string> = {
   moldova: "Europe/Chisinau",
   romania: "Europe/Bucharest",
   peru: "America/Lima",
+  colombia: "America/Bogota",
   algeria: "Africa/Algiers",
   "saudi arabia": "Asia/Riyadh",
   tunisia: "Africa/Tunis",
@@ -285,7 +286,7 @@ export function calendarTimeZoneForPlace(place?: PlaceTime | null): string | nul
     "namibia", "eswatini", "singapore", "malaysia", "moldova", "romania", "peru", "algeria", "saudi arabia",
     "tunisia", "senegal", "mozambique", "turkey", "egypt", "china", "united arab emirates",
     "iran", "jordan", "bermuda", "costa rica", "venezuela", "uruguay", "kyrgyzstan", "benin",
-    "argentina", "taiwan", "south korea", "hong kong", "qatar", "philippines", "malta", "latvia",
+    "argentina", "taiwan", "south korea", "hong kong", "qatar", "philippines", "malta", "latvia", "colombia",
   ]);
   if (singleZone.has(country)) return COUNTRY_TZ[country] ?? null;
   // Only unambiguous, country-qualified regions. Split states/provinces need an explicit zone.

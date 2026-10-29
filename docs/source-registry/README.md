@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1263 unique sources as of 25 October 2026. Only 41 are enabled; the other 1222 remain
+The registry contains 1344 unique sources as of 28 October 2026. Only 41 are enabled; the other 1303 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -85,9 +85,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 1263 sources create exactly one source job;
+- all 1344 sources create exactly one source job;
 - the 41 enabled and rights-approved sources are queued;
-- the other 1222 sources are retained as blocked jobs with their reason;
+- the other 1303 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -455,3 +455,28 @@ restriction that covers event metadata. Realtime Racing's Content-Signal forbids
 and AI input, so its content is used only as event reference metadata. ChampionChip's
 results are client-rendered and may need a dedicated profile. Participant result rows remain
 excluded for all five. The registry now has 41 enabled sources and 1222 disabled.
+
+
+## Colombia running programmes — checked 28 October 2026
+
+Registered 25 disabled organiser and authorised-entry research references for the
+Colombia fixture review. Coverage records only the event pages, edition-specific
+rules, route sheets and entry programmes actually inspected. Unavailable or
+uninspected entry pages, absent future editions and conflicting route lengths
+remain explicitly identified as research references. No athlete-result or
+participant-data capability was established by this batch.
+
+The registry and sports-organisation inventory were checked for matching domains
+before adding records. Existing Medellín and Media Maratón del Mar event-catalogue
+links are retained without creating duplicate events. The existing global AIMS and
+UTMB Index records remain unchanged; the Quindío event-host reference does not
+claim that a future edition is scheduled. Eventrid Colombia is registered as a
+country front end alongside the existing Peru source, not as a new provider
+identity. MCM's Cristal RUN FEST and Coveñas programme pages share one source.
+
+All 25 additions use `enabled=0` and require rights and crawl review. Manual
+research does not enable automatic collection. Source-specific notes preserve the
+2026-10-28 check date, actual evidence URLs, local-start scope, festival versus
+race-day distinction, stale route data, retrieval failures and unresolved edition
+announcements. The complete registry now has 1,344 sources: 41 enabled and 1,303
+disabled. Existing bulk-run count assertions were reconciled to this inventory.

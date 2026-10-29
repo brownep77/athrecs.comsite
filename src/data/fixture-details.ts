@@ -1,3 +1,4 @@
+import colombiaFixtureDetails from "./colombia-fixture-details-2026-10-28.json" with { type: "json" };
 import seventhFixtureQuality from "./fixture-quality-seventh-2026-10-26.json" with { type: "json" };
 import seventhDistanceHolds from "./fixture-distance-holds-seventh-2026-10-26.json" with { type: "json" };
 import sixthDuplicateProgrammeStarts from "./duplicate-programme-starts-sixth-2026-10-26.json" with { type: "json" };
@@ -50,6 +51,7 @@ export type FixtureDetail = {
 };
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
+  ...colombiaFixtureDetails,
   "bucharest-half-marathon|2027-05-08": {
     displayName: "Bucharest 10K",
     eventPageName: "OMV Petrom Bucharest Half Marathon & 10K",

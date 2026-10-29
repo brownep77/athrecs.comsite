@@ -21,6 +21,8 @@ export const ATHRECS_PUBLIC_SPORTS = [
   "CrossFit",
   "Swimrun",
   "Orienteering",
+  "Cross-country Skiing",
+  "Roller Skiing",
 ] as const satisfies readonly Sport[];
 
 export const HYBRID_FITNESS_SPORTS = ["Functional Fitness", "HYROX", "DEKA", "CrossFit"] as const;

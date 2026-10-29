@@ -42,13 +42,15 @@ const CURRENT_OFFICIAL_ENTRY_SCAN_CHECKED_AT = "2026-10-22";
 const CURRENT_DORNEY_REFRESH_CHECKED_AT = "2026-10-23";
 const CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT = "2026-10-24";
 const CURRENT_START_AND_DISCOVERY_CHECKED_AT = "2026-10-25";
-const CURRENT_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-28";
+const PREVIOUS_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-28";
+const CURRENT_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-29";
 const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT = "2026-10-28";
+const CURRENT_LIMERICK_PERMIT_SCAN_CHECKED_AT = "2026-10-29";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 88;
-const NEW_EDITION_COUNT = 91;
+const NEW_SERIES_COUNT = 89;
+const NEW_EDITION_COUNT = 92;
 const EXISTING_SERIES_EDITION_COUNT = 68;
 
 async function loadModule(input) {
@@ -88,7 +90,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "10mi").length,
-  20,
+  21,
   "The 10-mile total changed unexpectedly",
 );
 
@@ -223,6 +225,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_START_AND_DISCOVERY_CHECKED_AT,
         CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT,
         CURRENT_BOOKITZONE_SCAN_CHECKED_AT,
+        CURRENT_LIMERICK_PERMIT_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -2531,10 +2534,49 @@ assert(
   ),
   "Glenmore Challenge must leave research after approval",
 );
+
+const limerickRunsSeries = dailyHalfTenMileSeries.find(
+  (series) => series.slug === "limerick-runs-race-series-2027",
+);
+const limerickRunsEdition = dailyHalfTenMileEditions.find(
+  (edition) =>
+    edition.seriesSlug === "limerick-runs-race-series-2027" &&
+    edition.date === "2027-04-18" &&
+    edition.distance === "10mi",
+);
+assert(limerickRunsSeries, "Limerick Runs approved series is missing");
+assert(limerickRunsEdition, "Limerick Runs approved 10-mile edition is missing");
+assert.deepEqual(
+  limerickRunsSeries.distances,
+  ["10mi", "10K", "5K", "4mi"],
+  "Limerick Runs split its multi-distance programme across cards",
+);
+assert.equal(limerickRunsEdition.startTime, "09:00", "Limerick Runs lost its official start");
+assert.equal(
+  limerickRunsEdition.source,
+  "https://eventmaster.ie/event/wZeLhPySRQ",
+  "Limerick Runs lost its canonical official source",
+);
+assert.equal(
+  limerickRunsEdition.entryUrl,
+  "https://eventmaster.ie/event/wZeLhPySRQ/P3wdhwQTd",
+  "Limerick Runs must use its distance-specific checkout",
+);
+assert.equal(
+  limerickRunsEdition.entryOptions?.[0]?.priceAmount,
+  30,
+  "Limerick Runs lost its verified €30 entry",
+);
+assert.match(limerickRunsEdition.notes ?? "", /26\/591/, "Limerick Runs lost its permit");
+assert(
+  !dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "limerick-runs-10-mile-2027",
+  ),
+  "Limerick Runs must leave research after permit approval",
+);
 for (const slug of [
   "sonia-osullivan-cobh-10-mile-2027",
   "sixmilebridge-half-marathon-2027",
-  "limerick-runs-10-mile-2027",
   "ennis-half-marathon-2027",
 ]) {
   const candidate = dailyHalfTenMileResearchQueue.find((item) => item.slug === slug);
@@ -2750,7 +2792,7 @@ const packageSource = await fs.readFile(new URL("../package.json", import.meta.u
 const startCheckpoint = JSON.parse(
   await fs.readFile(
     new URL(
-      "../docs/fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-28-checkpoint.json",
+      "../docs/fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-29-checkpoint.json",
       import.meta.url,
     ),
     "utf8",
@@ -2792,8 +2834,8 @@ assert(
 assert.deepEqual(
   startCheckpoint.window,
   {
-    from: "2026-10-28",
-    through: "2027-01-28",
+    from: "2026-10-29",
+    through: "2027-01-29",
     rule: "Three calendar months inclusive; month-end clamped.",
   },
   "The start-time checkpoint lost the required inclusive three-calendar-month window",
@@ -2813,9 +2855,13 @@ assert(
 assert(
   startCheckpoint.records.every(
     (record) =>
-      ["2026-10-25", "2026-10-26", "2026-10-27", CURRENT_ROLLING_START_REVIEW_CHECKED_AT].includes(
-        record.checkedOn,
-      ) &&
+      [
+        "2026-10-25",
+        "2026-10-26",
+        "2026-10-27",
+        PREVIOUS_ROLLING_START_REVIEW_CHECKED_AT,
+        CURRENT_ROLLING_START_REVIEW_CHECKED_AT,
+      ].includes(record.checkedOn) &&
       ["Europe/London", "Europe/Dublin"].includes(record.timeZone),
   ),
   "Every start review must retain its check date and local timezone",
@@ -2832,7 +2878,7 @@ assert(
 const reviewedOnCurrentRun = startCheckpoint.records.filter(
   (record) => record.checkedOn === CURRENT_ROLLING_START_REVIEW_CHECKED_AT,
 );
-assert.equal(reviewedOnCurrentRun.length, 6, "The due 28 October start-review batch is incomplete");
+assert.equal(reviewedOnCurrentRun.length, 1, "The due 29 October start-review batch is incomplete");
 assert(
   reviewedOnCurrentRun.every(
     (record) =>
@@ -2870,16 +2916,24 @@ for (const aliasKey of [
   const alias = startCheckpoint.records.find((record) => record.key === aliasKey);
   assert.equal(alias?.reviewStatus, "duplicate-alias", `${aliasKey} lost its alias guard`);
 }
-for (const [key, localTime] of [
-  ["the-petzl-night-runner-delamere|2026-10-31|Half", "18:00"],
-  ["london-morun|2026-11-08|Half", "09:30"],
-  ["london-riverside-morun|2026-11-29|Half", "09:30"],
-  ["beccles-turkey-trot|2026-12-06|10mi", "11:00"],
+for (const [key, localTime, checkedOn] of [
+  [
+    "the-petzl-night-runner-delamere|2026-10-31|Half",
+    "18:00",
+    CURRENT_ROLLING_START_REVIEW_CHECKED_AT,
+  ],
+  ["london-morun|2026-11-08|Half", "09:30", PREVIOUS_ROLLING_START_REVIEW_CHECKED_AT],
+  [
+    "london-riverside-morun|2026-11-29|Half",
+    "09:30",
+    PREVIOUS_ROLLING_START_REVIEW_CHECKED_AT,
+  ],
+  ["beccles-turkey-trot|2026-12-06|10mi", "11:00", PREVIOUS_ROLLING_START_REVIEW_CHECKED_AT],
 ]) {
   const review = startCheckpoint.records.find((record) => record.key === key);
   assert.equal(review?.reviewStatus, "confirmed", `${key} lost its confirmed review`);
   assert.equal(review?.localTime, localTime, `${key} lost its current-edition local start`);
-  assert.equal(review?.checkedOn, CURRENT_ROLLING_START_REVIEW_CHECKED_AT);
+  assert.equal(review?.checkedOn, checkedOn);
 }
 assert(
   startCheckpoint.records
@@ -2894,5 +2948,5 @@ assert.equal(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (71 half-marathon editions and 20 ten-mile editions), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid cards, ${dailyHalfTenMileRetiredEditionKeys.length} retired invalid distance row and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (71 half-marathon editions and 21 ten-mile editions), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid cards, ${dailyHalfTenMileRetiredEditionKeys.length} retired invalid distance row and catalogue-level duplicate protection.`,
 );

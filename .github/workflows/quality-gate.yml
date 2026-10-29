@@ -48,8 +48,14 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Verify Intercom identity and account session isolation
+        run: npm run verify:intercom
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+
+      - name: Verify Intercom welcome displays on desktop and mobile
+        run: npm run verify:intercom-welcome
 
       - name: Race weather timezones, missing data and compact layout
         run: |
@@ -181,6 +187,11 @@ jobs:
         run: |
           node scripts/verify-combined-result-groups.mjs
           node scripts/verify-result-conflict-flow.mjs
+
+      - name: Verify Colombia calendar and audited publication
+        run: |
+          npm run verify:colombia-running-calendar
+          npm run verify:colombia-publication
 
       - name: Type-check, lint and verify
         run: npm run ci:verify
