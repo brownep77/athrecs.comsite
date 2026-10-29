@@ -806,7 +806,41 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
     if (!user.email_verified)
       throw new Error("Verify your email before saving your athlete profile");
 
-    await sql.transaction(async (tx) => {
+    const { createHash } = await import("node:crypto");
+    const { queuePrivateProfileSave, notifyStaffSubmission } =
+      await import("./staff-submission-alerts.server");
+    // Hash the validated save to suppress repeated identical submissions, while
+    // only projecting the useful support fields into email. Full private details
+    // remain behind staff authentication rather than being copied into inboxes.
+    const notificationFingerprint = createHash("sha256").update(JSON.stringify(data)).digest("hex");
+    const notificationFields = [
+      { label: "Racing name", value: data.fullName },
+      { label: "Display name", value: data.displayName || null },
+      { label: "Club or team", value: data.clubOrTeam || null },
+      { label: "Previous names", value: data.previousNames ?? [] },
+      { label: "Nationality", value: data.nationality || null },
+      { label: "Country", value: data.country || null },
+      { label: "Town or city", value: data.city || null },
+      { label: "Parkrun ID", value: data.parkrunId || null },
+      { label: "Athletics URN", value: data.athleticsUrn || null },
+      { label: "Power of 10 profile", value: data.powerOf10Url || null },
+      { label: "World Athletics profile", value: data.worldAthleticsUrl || null },
+      { label: "Example race", value: data.fingerprintEvent || null },
+      { label: "Example race year", value: data.fingerprintYear || null },
+      { label: "Example race distance", value: data.fingerprintDistance || null },
+      { label: "Example race time", value: data.fingerprintTime || null },
+      { label: "Sports", value: data.sports.map((sport) => sport.sportCode) },
+      { label: "Date of birth supplied", value: Boolean(data.dateOfBirth) },
+      { label: "Postcode supplied", value: Boolean(data.postcode) },
+      {
+        label: "Other saved sections",
+        value:
+          "Profile details, sport/training preferences, product preferences and consent choices are available in the private staff account record.",
+      },
+    ];
+
+    const notificationKey = await sql.transaction(async (tx) => {
+      await tx`select id from "user" where id=${context.userId} for update`;
       await tx`
         insert into athlete_private_profiles (
           user_id, verified_email, full_name, display_name, date_of_birth,
@@ -948,8 +982,15 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
             updated_at = now()
         `;
       }
+      return queuePrivateProfileSave(
+        tx,
+        context.userId,
+        notificationFields,
+        notificationFingerprint,
+      );
     });
 
+    await notifyStaffSubmission("private_profile_save", notificationKey);
     await syncAthleteAnalytics(context.userId);
     return loadAccount(sql, context.userId);
   });

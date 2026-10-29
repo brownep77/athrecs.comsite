@@ -23,7 +23,13 @@ export const Route = createFileRoute("/api/signup-alerts")({
         const profileSetups = await deliverProfileSetupAlerts(sql);
         const { deliverRaceEditAlerts } = await import("@/lib/athrecs/race-edit-alerts.server");
         const raceEdits = await deliverRaceEditAlerts(sql);
-        return Response.json({ ...alerts, welcomes, profileSetups, raceEdits }, { headers });
+        const { deliverStaffSubmissionAlerts } =
+          await import("@/lib/athrecs/staff-submission-alerts.server");
+        const submissions = await deliverStaffSubmissionAlerts(sql);
+        return Response.json(
+          { ...alerts, welcomes, profileSetups, raceEdits, submissions },
+          { headers },
+        );
       },
     },
   },

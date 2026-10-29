@@ -30,7 +30,8 @@ export function ArchiveClaimRequests() {
       <h2 className="font-semibold">Archive result claims</h2>
       <p className="text-sm text-muted">
         Archive requests and profile claims are managed here together. Completed archive claims
-        appear in the Complete list below. Notifications go to info@athrecs.com.
+        appear in the Complete list below. Notifications go to the configured results notification
+        inboxes.
       </p>
       {requests.isPending ? (
         <p role="status">Loading archive requests…</p>
