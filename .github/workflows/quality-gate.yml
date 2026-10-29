@@ -54,6 +54,9 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Verify Intercom welcome displays on desktop and mobile
+        run: npm run verify:intercom-welcome
+
       - name: Race weather timezones, missing data and compact layout
         run: |
           python scripts/verify-race-weather.py

@@ -31,6 +31,7 @@ function harness({ storedAccount = null, storageDenied = false, mobile = false }
   let responder = async () => ({ status: "disabled" });
   const timers = new Map();
   const sdk = [];
+  const sdkCallbacks = { ready: [], onShow: [], onHide: [] };
   const cookieWrites = [];
   const cookies = new Map();
   const stored = new Map();
@@ -65,7 +66,11 @@ function harness({ storedAccount = null, storageDenied = false, mobile = false }
     appendChild(node) {
       nodes.set(node.id, node);
       const queued = window.Intercom?.q ?? [];
-      window.Intercom = (...args) => sdk.push(plain(args));
+      window.Intercom = (...args) => {
+        sdk.push(plain(args));
+        if (args[0] in sdkCallbacks && typeof args[1] === "function")
+          sdkCallbacks[args[0]].push(args[1]);
+      };
       queued.forEach((args) => window.Intercom(...args));
     },
   };
@@ -223,6 +228,8 @@ function harness({ storedAccount = null, storageDenied = false, mobile = false }
       responder = fn;
     },
     calls: (method) => sdk.filter(([name]) => name === method),
+    callbacks: (method) => [...sdkCallbacks[method]],
+    emit: (method) => sdkCallbacks[method].at(-1)?.(),
     requestCount: () => requests,
     jump: (ms) => {
       now += ms;
@@ -582,6 +589,174 @@ test("unmount clears the member session while retaining the non-authenticating a
   assert.equal(h.intercom.openIntercomMessage("test"), false);
   assert.equal(h.stored.get(h.intercom.INTERCOM_ACCOUNT_KEY), "athlete-a");
   assert.equal(h.timers.size, 0);
+});
+
+test("display snapshots stay stable and helpers wait for the SDK's successful boot", async () => {
+  const h = harness();
+  const initial = h.intercom.getIntercomDisplayState();
+  assert.strictEqual(initial, h.intercom.getIntercomServerDisplayState());
+  assert.strictEqual(initial, h.intercom.getIntercomDisplayState());
+  assert.equal(Object.isFrozen(initial), true);
+  assert.deepEqual(plain(initial), { ready: false, isOpen: false });
+  assert.equal(h.intercom.openIntercom(), false);
+  assert.equal(h.intercom.openIntercomMessage("find my profile"), false);
+  assert.equal(h.calls("boot").length, 0, "display helpers must never create a session");
+
+  let notifications = 0;
+  const unsubscribe = h.intercom.subscribeIntercomDisplay(() => {
+    notifications += 1;
+  });
+  h.render(guest);
+  assert.equal(h.intercom.openIntercom(), false, "a queued boot is not a successful boot");
+  assert.equal(h.intercom.openIntercomMessage("find my profile"), false);
+  assert.equal(h.calls("show").length, 0);
+  h.emit("ready");
+  const ready = h.intercom.getIntercomDisplayState();
+  assert.deepEqual(plain(ready), { ready: true, isOpen: false });
+  assert.equal(Object.isFrozen(ready), true);
+  assert.strictEqual(h.intercom.getIntercomServerDisplayState(), initial);
+  assert.equal(h.intercom.openIntercom(), true);
+  assert.equal(h.intercom.openIntercomMessage("find my profile"), true);
+  assert.equal(h.calls("show").length, 1);
+  assert.deepEqual(h.calls("showNewMessage"), [["showNewMessage", "find my profile"]]);
+  assert.equal(h.calls("startConversation").length, 0, "opening must never send a message");
+  h.emit("onShow");
+  const opened = h.intercom.getIntercomDisplayState();
+  assert.deepEqual(plain(opened), { ready: true, isOpen: true });
+  h.emit("onShow");
+  h.emit("ready");
+  assert.strictEqual(h.intercom.getIntercomDisplayState(), opened);
+  assert.equal(notifications, 2, "repeated SDK events must not re-render the welcome UI");
+  h.emit("onHide");
+  assert.deepEqual(plain(h.intercom.getIntercomDisplayState()), { ready: true, isOpen: false });
+  assert.equal(notifications, 3);
+  unsubscribe();
+  h.emit("onShow");
+  assert.equal(notifications, 3);
+});
+
+test("shutdown and account switching reject delayed display callbacks from the old session", async () => {
+  const h = harness();
+  h.respond(async () => h.identity("athlete-a"));
+  h.render(signed("athlete-a"));
+  await flush();
+  const old = Object.fromEntries(
+    ["ready", "onShow", "onHide"].map((key) => [key, h.callbacks(key)[0]]),
+  );
+  h.emit("ready");
+  h.emit("onShow");
+  h.intercom.endIntercomSession();
+  assert.deepEqual(plain(h.intercom.getIntercomDisplayState()), { ready: false, isOpen: false });
+  old.ready();
+  old.onShow();
+  assert.equal(h.intercom.openIntercom(), false);
+  assert.equal(h.intercom.openIntercomMessage("old account"), false);
+  assert.equal(h.calls("show").length, 0);
+
+  h.respond(async () => h.identity("athlete-b"));
+  h.render(signed("athlete-b"));
+  await flush();
+  old.ready();
+  assert.equal(h.intercom.getIntercomDisplayState().ready, false);
+  h.emit("ready");
+  h.emit("onShow");
+  const newState = h.intercom.getIntercomDisplayState();
+  old.onHide();
+  old.onShow();
+  old.ready();
+  assert.strictEqual(h.intercom.getIntercomDisplayState(), newState);
+  assert.equal(h.intercom.openIntercom(), true);
+});
+
+test("a visitor's late readiness cannot certify the succeeding signed-in boot", async () => {
+  const h = harness();
+  h.render(guest);
+  const oldReady = h.callbacks("ready")[0];
+  const oldShow = h.callbacks("onShow")[0];
+  h.respond(async () => h.identity("athlete-a"));
+  h.render(signed("athlete-a"));
+  await flush();
+  oldReady();
+  oldShow();
+  assert.deepEqual(plain(h.intercom.getIntercomDisplayState()), { ready: false, isOpen: false });
+  assert.equal(h.intercom.openIntercom(), false);
+  h.emit("ready");
+  assert.equal(h.intercom.openIntercom(), true);
+  assert.equal(h.calls("shutdown").length, 0, "the genuine visitor conversation stays intact");
+});
+
+test("a same-user token refresh preserves visibility without duplicating SDK subscriptions", async () => {
+  const h = harness();
+  let serial = 0;
+  h.respond(async () => h.identity("athlete-a", String(++serial)));
+  h.render(signed("athlete-a"));
+  await flush();
+  h.emit("ready");
+  h.emit("onShow");
+  const displayed = h.intercom.getIntercomDisplayState();
+  await h.advance(5 * 60_000);
+  assert.strictEqual(h.intercom.getIntercomDisplayState(), displayed);
+  for (const method of ["ready", "onShow", "onHide"])
+    assert.equal(h.callbacks(method).length, 1, "token refresh must retain the current callbacks");
+  assert.equal(h.calls("boot").length, 1);
+  assert.equal(h.calls("update").at(-1)[1].intercom_user_jwt, "synthetic-athlete-a-2");
+  h.emit("onHide");
+  assert.deepEqual(plain(h.intercom.getIntercomDisplayState()), { ready: true, isOpen: false });
+});
+
+test("display commands and delayed callbacks fail closed when their identity has expired", async () => {
+  for (const action of ["open", "prefill", "callback"]) {
+    const h = harness();
+    h.respond(async () => h.identity("athlete-a"));
+    h.render(signed("athlete-a"));
+    await flush();
+    h.emit("ready");
+    const oldReady = h.callbacks("ready")[0];
+    h.jump(60 * 60_000);
+    if (action === "open") assert.equal(h.intercom.openIntercom(), false);
+    else if (action === "prefill") assert.equal(h.intercom.openIntercomMessage("expired"), false);
+    else h.emit("onShow");
+    assert.equal(h.calls("shutdown").length, 1);
+    assert.equal(h.calls("show").length, 0);
+    assert.equal(h.calls("showNewMessage").length, 0);
+    oldReady();
+    assert.deepEqual(plain(h.intercom.getIntercomDisplayState()), { ready: false, isOpen: false });
+  }
+});
+
+test("pending auth suspends visitor display but can restore it without losing the conversation", async () => {
+  const h = harness();
+  h.render(guest);
+  h.emit("ready");
+  h.addCookie("intercom-id-testapp1", "visitor-history", "athrecs.com");
+  const oldReady = h.callbacks("ready")[0];
+  h.render({ user: null, isPending: true });
+  oldReady();
+  assert.equal(h.intercom.openIntercom(), false);
+  assert.equal(h.calls("shutdown").length, 0);
+  assert.equal(h.cookies.get("intercom-id-testapp1|athrecs.com"), "visitor-history");
+  h.render(guest);
+  assert.equal(h.calls("boot").length, 1, "resuming the same visitor does not reboot");
+  assert.equal(h.callbacks("ready").length, 2);
+  assert.equal(h.intercom.openIntercom(), false);
+  h.emit("ready");
+  assert.equal(h.intercom.openIntercom(), true);
+});
+
+test("preserved visitor session resumes readiness after a cancelled provider sign-in", async () => {
+  const h = harness();
+  h.render(guest);
+  h.emit("ready");
+  const oldReady = h.callbacks("ready")[0];
+  h.intercom.endIntercomSession(true);
+  oldReady();
+  assert.equal(h.intercom.openIntercom(), false);
+  h.render({ user: null, isPending: true });
+  h.render(guest);
+  h.emit("ready");
+  assert.equal(h.intercom.openIntercom(), true);
+  assert.equal(h.calls("boot").length, 1);
+  assert.equal(h.calls("shutdown").length, 0);
 });
 
 let failed = 0;
