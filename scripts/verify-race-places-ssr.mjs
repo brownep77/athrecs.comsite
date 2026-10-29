@@ -19,9 +19,10 @@ update editions set entry_url='https://example.org/synthetic-entry' where event_
 await db.exec(`insert into events values
   (3,'synthetic-wymondham','Synthetic Wymondham 10K','Running','England','Norfolk',null,'Wymondham','Fictional test event.',false),
   (4,'synthetic-triathlon','Synthetic Triathlon','Triathlon','England','Norfolk',null,'Norwich','Fictional multisport event.',false),
-  (5,'synthetic-suffolk','Synthetic Suffolk 10K','Running','England','Suffolk',null,'Bury St Edmunds','Fictional nearby event.',false);
+  (5,'synthetic-suffolk','Synthetic Suffolk 10K','Running','England','Suffolk',null,'Bury St Edmunds','Fictional nearby event.',false),
+  (6,'synthetic-california','Synthetic California 10K','Running','United States','California',null,'Sacramento','Fictional country-filter event.',false);
   insert into editions(event_id,event_date,distance_code,status) values
-  (3,'2040-06-01','10K','Open'),(4,'2040-05-01','10K','Open'),(5,'2040-06-01','10K','Open');
+  (3,'2040-06-01','10K','Open'),(4,'2040-05-01','10K','Open'),(5,'2040-06-01','10K','Open'),(6,'2040-06-01','10K','Open');
   insert into events select id,'synthetic-extra-'||id,'Synthetic Extra '||id,'Running','England','Norfolk',null,'Norwich','Fictional pagination event.',false from generate_series(10,40) id;
   insert into editions(event_id,event_date,distance_code,status) select id,'2040-07-01','10K','Closed' from generate_series(10,40) id;`);
 await db.exec(
@@ -144,6 +145,7 @@ assert(!xml.includes("/norfolk/triathlon</loc>"), "small sport pages stay outsid
 console.log("Built SSR route → server function → local SQL → HTML/metadata/sitemap checks passed.");
 for (const path of [
   "/",
+  "/?country=United%20Kingdom",
   "/en/united-kingdom",
   "/en/ireland",
   "/running",
@@ -158,16 +160,36 @@ for (const path of [
   const html = await response.text();
   const $ = cheerio.load(html);
   assert.equal($("main h1").length, 1, path);
-  if (path === "/") {
-    assert($("#choose-sport").length && $("#sport-countries").length);
+  if (path === "/" || path.startsWith("/?")) {
+    assert.equal($("main h1").text(), "Find your next running race");
+    assert.equal($("#fixtures").length, 1, "the homepage exposes its live fixture calendar");
+    const form = $('#fixtures form[role="search"]');
+    assert.equal(form.attr("method"), "get");
+    assert.equal(form.attr("action"), "/");
+    for (const name of ["country", "month", "distance"])
+      assert.equal(form.find(`select[name="${name}"]`).length, 1, `${name} filter is server-rendered`);
+    assert.equal($('nav[aria-label="Running disciplines"]').length, 1);
+    const countryLinks = $('nav[aria-label="Explore running by country"] a');
+    assert(countryLinks.toArray().some((link) => {
+      const url = new URL($(link).attr("href"), "https://www.athrecs.com");
+      return url.pathname === "/" && url.searchParams.get("country") === "United Kingdom" && url.hash === "#fixtures";
+    }), "country shortcuts filter the same homepage calendar");
+    assert($("#fixtures").text().includes("Synthetic Norfolk 10K"));
+    assert(!$("#fixtures").text().includes("Synthetic Triathlon"));
+    assert.equal($("#fixtures").text().includes("Synthetic California 10K"), path === "/",
+      "UK selection excludes a confirmed race in another country");
+    assert($('main a[href="/running/guides"]').length);
     assert(!$("main").text().includes("Road marathons by country"));
-    assert($('main a[href="/en/united-kingdom"]').length);
+    if (path.startsWith("/?")) {
+      assert.equal(form.find('select[name="country"] option[selected]').attr("value"), "United Kingdom");
+      assert($("meta[name=robots]").attr("content").startsWith("noindex"));
+    }
   }
   if (path.startsWith("/en/")) {
     assert($('main a[href="/running?country=' + path.split("/").at(-1) + '"]').length);
     assert(!$("main h1").text().includes("athletics"));
   }
-  if (path.includes("?country=")) {
+  if (path.startsWith("/running?country=")) {
     assert($('main a[href="/races/places/europe/united-kingdom/running/road"]').length);
     assert($("meta[name=robots]").attr("content").startsWith("noindex"));
   }
@@ -228,8 +250,28 @@ if (process.argv.includes("--browser")) {
       const base = `${origin}${root}/europe/united-kingdom/england/norfolk`;
       await page.goto(origin);
       await page.screenshot({ path: `artifacts/sport-home-${width}.png`, fullPage: false });
-      await page.locator('main a[href="/en/united-kingdom"]').first().click();
-      await page.waitForURL("**/en/united-kingdom");
+      if (width < 1024)
+        await page.getByRole("button", { name: "Explore running & guides", exact: true }).click();
+      await page
+        .getByRole("navigation", { name: "Explore running by country", exact: true })
+        .getByRole("list", { name: "Featured countries", exact: true })
+        .getByRole("link", { name: "United Kingdom", exact: true })
+        .click();
+      await page.waitForURL((url) => url.pathname === "/" && url.searchParams.get("country") === "United Kingdom" && url.hash === "#fixtures");
+      // Client navigation updates the URL before the loader commits its form and fixtures.
+      await page.waitForFunction(() => {
+        const fixtures = document.querySelector("#fixtures");
+        const country = fixtures?.querySelector('select[name="country"]');
+        return country?.value === "United Kingdom"
+          && fixtures.textContent.includes("Synthetic Norfolk 10K")
+          && !fixtures.textContent.includes("Synthetic California 10K");
+      });
+      assert.equal(await page.getByLabel("Country", { exact: true }).inputValue(), "United Kingdom");
+      assert((await page.locator("#fixtures").textContent()).includes("Synthetic Norfolk 10K"));
+      assert(!(await page.locator("#fixtures").textContent()).includes("Synthetic California 10K"));
+      // Retained country landing pages have their own discovery route. They are
+      // tested directly now that homepage shortcuts filter the current calendar.
+      await page.goto(`${origin}/en/united-kingdom`);
       await page.locator('main a[href="/running?country=united-kingdom"]').click();
       await page.waitForURL("**/running?country=united-kingdom");
       await page.locator('main a[href="/races/places/europe/united-kingdom/running/road"]').click();

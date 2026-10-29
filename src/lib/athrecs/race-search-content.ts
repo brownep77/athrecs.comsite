@@ -33,14 +33,20 @@ const validDate = (value: string) =>
   /^\d{4}-\d{2}-\d{2}$/.test(value) &&
   Number.isFinite(Date.parse(value)) &&
   new Date(value).toISOString().slice(0, 10) === value;
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("en-GB", {
+const formatDate = (value: string) => {
+  const parts = new Intl.DateTimeFormat("en-GB", {
     weekday: "long",
     day: "numeric",
     month: "long",
     year: "numeric",
     timeZone: "UTC",
-  }).format(new Date(`${value}T00:00:00Z`));
+  }).formatToParts(new Date(`${value}T00:00:00Z`));
+  const part = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((item) => item.type === type)?.value ?? "";
+  // ICU versions differ on the comma after the weekday. Keep SSR and browser
+  // text identical while retaining the explicit UTC date boundary.
+  return `${part("weekday")}, ${part("day")} ${part("month")} ${part("year")}`;
+};
 const distanceName = (value: string) => (value === "Half" ? "half marathon" : value);
 
 /** Share the same next edition across the visible header, title and event metadata. */

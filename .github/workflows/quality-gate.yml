@@ -188,6 +188,11 @@ jobs:
           node scripts/verify-combined-result-groups.mjs
           node scripts/verify-result-conflict-flow.mjs
 
+      - name: Verify Colombia calendar and audited publication
+        run: |
+          npm run verify:colombia-running-calendar
+          npm run verify:colombia-publication
+
       - name: Type-check, lint and verify
         run: npm run ci:verify
 

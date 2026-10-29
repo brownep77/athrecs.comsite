@@ -13,6 +13,9 @@ if (isRunRecs) {
 }
 
 const publishers = [
+  // The reviewed batch must validate and commit before general catalogue seeding
+  // can encounter its static records. Migrations have already created the ledger.
+  "scripts/publish-colombia-running.mjs",
   "scripts/publish-athrecs-catalogue.mjs",
   "scripts/publish-uk-ireland-prominent-races.mjs",
   "scripts/publish-remaining-uk-ireland-race-additions.mjs",

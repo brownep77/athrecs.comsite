@@ -34,6 +34,12 @@ try {
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle", timeout: 120000 });
   if (runrecs) {
     await page.getByRole("heading", { name: "Identity and Entry Passport", exact: true }).waitFor();
+    // The matching query settles independently of the account form.
+    for (const name of ["Potential results matching your name", "Public result sites"])
+      await page.getByRole("heading", { name, exact: true }).waitFor({
+        state: "visible",
+        timeout: 120000,
+      });
     assert.equal(
       await page.getByRole("navigation", { name: "Athlete profile sections" }).count(),
       0,

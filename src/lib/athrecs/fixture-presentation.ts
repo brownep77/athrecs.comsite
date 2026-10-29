@@ -97,6 +97,7 @@ const COUNTRY_ZONES: Record<string, string> = {
   Kenya: "Africa/Nairobi",
   Ethiopia: "Africa/Addis_Ababa",
   Guatemala: "America/Guatemala",
+  Colombia: "America/Bogota",
   Qatar: "Asia/Qatar",
   "United Arab Emirates": "Asia/Dubai",
 };

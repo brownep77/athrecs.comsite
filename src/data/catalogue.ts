@@ -94,6 +94,7 @@ import {
 import { verifiedUkEditions, verifiedUkSeries } from "./verified-races-uk";
 import { verifiedAllSportEditions, verifiedAllSportSeries } from "./verified-all-sport";
 import { verifiedGlobalEditions, verifiedGlobalSeries } from "./verified-global-fixtures";
+import { colombiaRaceEditions, colombiaRaceSeries, colombiaSeriesOverrides } from "./colombia-races";
 import { afghanistanRaceEditions, afghanistanRaceSeries } from "./afghanistan-races";
 import { albaniaRaceEditions, albaniaRaceSeries } from "./albania-races";
 import { westernBalkansRaceEditions, westernBalkansRaceSeries } from "./western-balkans-races";
@@ -376,6 +377,7 @@ const coreNameKeys = new Set(coreSeries.map((series) => normName(series.name)));
 const usedSlugs = new Set(coreSeries.map((series) => series.slug));
 const extraSeries: Series[] = [];
 for (const series of [
+  ...colombiaRaceSeries,
   ...nextUrgentSeries,
   ...(raceCollectionSeries as Series[]),
   ...(marathonDesSablesSeries as Series[]),
@@ -475,9 +477,11 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
   ...urgentReviewedSeriesOverrides[series.slug],
   ...nextUrgentSeriesOverrides[series.slug],
   ...thirdUrgentSeriesOverrides[series.slug],
+  ...colombiaSeriesOverrides[series.slug],
 })).map(reviewedFixtureCountyRegion);
 
 const mergedEditions = [
+  ...colombiaRaceEditions,
   ...imminentReviewedAdditions,
   ...urgentReviewedAdditions,
   ...nextUrgentAdditions,

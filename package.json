@@ -27,6 +27,8 @@
     "verify:mrd-marathons": "node --experimental-strip-types scripts/verify-mrd-marathons.mjs",
     "verify:aims-europe-road-races": "node --experimental-strip-types scripts/verify-aims-europe-road-races.mjs",
     "verify:albania-running-calendar": "node --experimental-strip-types scripts/verify-albania-running-calendar.mjs",
+    "verify:colombia-running-calendar": "node --experimental-strip-types scripts/verify-colombia-running-calendar.mjs",
+    "verify:colombia-publication": "node scripts/verify-colombia-publication.mjs",
     "verify:western-balkans-running-calendar": "node --experimental-strip-types scripts/verify-western-balkans-running-calendar.mjs",
     "verify:france-spain-portugal-running-calendar": "node --experimental-strip-types scripts/verify-france-spain-portugal-running-calendar.mjs",
     "verify:belgium-netherlands-running-calendar": "node --experimental-strip-types scripts/verify-belgium-netherlands-running-calendar.mjs",
