@@ -15,6 +15,7 @@ import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import { AssistantLauncher } from "@/components/assistant/AssistantLauncher";
 import { IntercomMessenger } from "@/components/assistant/IntercomMessenger";
+import { IntercomWelcome } from "@/components/assistant/IntercomWelcome";
 import { INTERCOM_ENABLED } from "@/lib/athrecs/intercom";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
@@ -249,6 +250,7 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
         </nav>
       ) : null}
       <SiteAnalytics featureFlags={featureFlags} />
+      {IS_ATHRECS_SITE && INTERCOM_ENABLED ? <IntercomWelcome pathname={pathname} /> : null}
       <main
         id="main-content"
         data-athrecs-main=""
