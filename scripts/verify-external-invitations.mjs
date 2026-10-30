@@ -98,6 +98,37 @@ try {
   const db = await server.ssrLoadModule("/src/lib/db.ts");
   database = await db.getPglite();
   const sql = await db.getSql();
+  const { requireClaimIdentity } = await server.ssrLoadModule(
+    "/src/lib/athrecs/claim-identity.server.ts",
+  );
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
+    values('claim-name-fixture','Signup Fixture Runner','claim-name@example.test',true,now(),now())`;
+  await requireClaimIdentity(sql, "claim-name-fixture");
+  assert.equal(
+    (await sql`select user_id from athlete_private_profiles where user_id='claim-name-fixture'`)
+      .length,
+    0,
+    "Checking a registration name does not create a private profile",
+  );
+  await sql`update "user" set "emailVerified"=false where id='claim-name-fixture'`;
+  await assert.rejects(() => requireClaimIdentity(sql, "claim-name-fixture"), /verified email/);
+  await sql`update "user" set "emailVerified"=true,name='' where id='claim-name-fixture'`;
+  await assert.rejects(() => requireClaimIdentity(sql, "claim-name-fixture"), /add your name/);
+  await assert.rejects(
+    () => requireClaimIdentity(sql, "missing-claim-account"),
+    /name, verified email/,
+  );
+  await sql`insert into athlete_private_profiles(user_id,verified_email,full_name,privacy_notice_version,privacy_acknowledged_at)
+    values('claim-name-fixture','claim-name@example.test','Saved Racing Name','synthetic-test',now())`;
+  await requireClaimIdentity(sql, "claim-name-fixture");
+  await sql`update "user" set name='Signup Fixture Runner' where id='claim-name-fixture'`;
+  await sql`update athlete_private_profiles set full_name='12' where user_id='claim-name-fixture'`;
+  await assert.rejects(
+    () => requireClaimIdentity(sql, "claim-name-fixture"),
+    /add your name/,
+    "A saved racing name retains precedence over the registration fallback",
+  );
+  await sql`delete from "user" where id='claim-name-fixture'`;
   const staff = await signup("staff@example.test");
   const wrong = await signup("wrong@example.test");
   await sql`insert into account(id,"accountId","providerId","userId","createdAt","updatedAt") values('external-google','external-google','google',${staff.id},now(),now())`;
