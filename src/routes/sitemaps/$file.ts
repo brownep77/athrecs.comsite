@@ -21,6 +21,10 @@ export const Route = createFileRoute("/sitemaps/$file")({
                 editorialPath(article),
                 article.modifiedAt ?? article.publishedAt ?? article.date,
               );
+            const { PODCASTS, PODCASTS_CHECKED_AT } = await import("@/data/podcasts");
+            modified.set("/podcasts", PODCASTS_CHECKED_AT);
+            for (const podcast of PODCASTS)
+              modified.set(`/podcasts/${podcast.slug}`, podcast.checkedAt);
             const { MARATHON_COUNTRIES } = await import("@/data/road-marathons/countries");
             const { ROAD_MARATHONS } = await import("@/data/road-marathons");
             const { HALF_MARATHON_COUNTRIES } =

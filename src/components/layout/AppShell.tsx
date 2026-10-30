@@ -198,7 +198,10 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
           </header>
         </>
       )}
-      {!compact && (pathname.startsWith("/race-reports") || pathname.startsWith("/news")) ? (
+      {!compact &&
+      (pathname.startsWith("/race-reports") ||
+        pathname.startsWith("/news") ||
+        pathname.startsWith("/podcasts")) ? (
         <nav
           aria-label="Browse by sport"
           className="border-b border-accent/20 bg-accent-soft px-4 md:px-6"
@@ -226,6 +229,7 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
               [
                 { to: "/race-reports", label: "Race Reports" },
                 { to: "/news", label: "News" },
+                { to: "/podcasts", label: "Podcasts" },
               ] as const
             ).map((item) => (
               <li key={item.to}>
@@ -284,6 +288,9 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
           </Link>
           <Link to="/news" search={{}} className="hover:text-accent">
             News
+          </Link>
+          <Link to="/podcasts" className="hover:text-accent">
+            Podcasts
           </Link>
           <Link to="/brands" className="hover:text-accent">
             Brands & Partners

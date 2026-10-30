@@ -5,6 +5,7 @@ import { editorialPath } from "./editorial";
 import { SPORTS_ORGANISATIONS } from "../../data/sports-organisations";
 import { SUPERHALFS_PATH } from "../../data/superhalfs";
 import { RUNNING_GUIDES_PATH } from "../running/guide-directory";
+import { PODCASTS } from "../../data/podcasts";
 
 /** One list for the HTML directory and the XML sitemap. Account tools stay private. */
 export const PUBLIC_PAGES = [
@@ -15,6 +16,8 @@ export const PUBLIC_PAGES = [
   { path: "/race-reports", name: "Race Reports" },
   { path: "/news", name: "News" },
   ...EDITORIAL_ARTICLES.map((article) => ({ path: editorialPath(article), name: article.title })),
+  { path: "/podcasts", name: "Athletes' podcasts" },
+  ...PODCASTS.map((podcast) => ({ path: `/podcasts/${podcast.slug}`, name: podcast.name })),
   { path: "/results/berlin-marathon-2026", name: "Berlin Marathon 2026 results" },
   { path: "/results/bure-valley-10-2026", name: "Bure Valley 10 2026 winners summary" },
   { path: "/races", name: "Races and events" },
