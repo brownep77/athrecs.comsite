@@ -8,6 +8,8 @@ import {
 } from "../src/data/public-figures.ts";
 
 const expectedProfiles = [
+  "david-goggins",
+  "mo-farah",
   "keely-hodgkinson",
   "noah-lyles",
   "dina-asher-smith",
@@ -74,6 +76,13 @@ const expectedProfiles = [
   "jenson-button",
   "james-cracknell",
   "nell-mcandrew",
+  "daryll-neita",
+  "meb-keflezighi",
+  "dathan-ritzenhein",
+  "william-goodge",
+  "cole-brauer",
+  "terry-bradshaw",
+  "colin-kaepernick",
 ];
 
 assert.deepEqual(

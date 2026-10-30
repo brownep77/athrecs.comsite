@@ -33,6 +33,7 @@ import {
   moFarahRoadEditions,
   moFarahRoadResults,
 } from "./mo-farah-road-results.ts";
+import { podcastGuestAthletes } from "./public-figures-podcast-guests.ts";
 
 const CHECKED_AT = "2026-08-22";
 
@@ -422,6 +423,7 @@ export const publicFigureAthletes: AthleteSeed[] = [
   ...publicFigureWave3Batch4Athletes,
   ...publicFigureWave3Batch5Athletes,
   ...publicFigureWave3Batch6Athletes,
+  ...podcastGuestAthletes,
 ];
 
 export const publicFigureSeries: Series[] = [
