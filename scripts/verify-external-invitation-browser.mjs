@@ -58,7 +58,8 @@ try {
     headless: true,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
   });
-  page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const width = process.argv.includes("--desktop") ? 1280 : 390;
+  page = await browser.newPage({ viewport: { width, height: 844 } });
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.route("**/*", (route) =>
@@ -85,6 +86,11 @@ try {
   await dialog.getByRole("tab", { name: "Create account", exact: true }).click();
   await dialog.getByLabel("First name", { exact: true }).fill("Avery");
   await dialog.getByLabel("Last name", { exact: true }).fill("Invitation Athlete");
+  assert.equal(await dialog.getByLabel("First name", { exact: true }).inputValue(), "Avery");
+  assert.equal(
+    await dialog.getByLabel("Last name", { exact: true }).inputValue(),
+    "Invitation Athlete",
+  );
   await dialog.getByLabel("Country", { exact: true }).selectOption("England");
   await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Norwich");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
@@ -94,11 +100,8 @@ try {
   assert(code, "Real email-code signup delivery is intercepted");
   await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
   await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
-  await page.getByLabel("Full name").fill("Avery Invitation Athlete");
-  await page.getByLabel("Date of birth").fill("1984-01-01");
-  await page.getByLabel("Nationality", { exact: false }).fill("British");
-  await page.getByRole("checkbox", { name: /I have read/ }).check();
-  await page.getByRole("button", { name: "Save details and continue", exact: true }).click();
+  // Signup already supplies the claim name. A verified account proceeds directly
+  // to explicit result confirmation; optional DOB/nationality are not a gate.
   await page.getByText("Synthetic Invitation 10K", { exact: true }).waitFor();
   assert.equal(
     new URL(page.url()).searchParams.get("invitation"),
@@ -117,12 +120,68 @@ try {
     })
     .waitFor();
   const [user] =
-    await sql`select id,"emailVerified" from "user" where email='onboarding-runner@example.test'`;
+    await sql`select id,name,"firstName","lastName","signupCountry","signupLocation","emailVerified" from "user" where email='onboarding-runner@example.test'`;
   assert.equal(user.emailVerified, true);
+  assert.deepEqual(
+    { ...user, id: undefined },
+    {
+      id: undefined,
+      name: "Avery Invitation Athlete",
+      firstName: "Avery",
+      lastName: "Invitation Athlete",
+      signupCountry: "England",
+      signupLocation: "Norwich",
+      emailVerified: true,
+    },
+    "Registration stores the required details before invitation confirmation",
+  );
   assert.equal(
     (await sql`select user_id from athlete_private_profiles where user_id=${user.id}`).length,
-    1,
-    "Required claim identity is saved; contact details remain optional",
+    0,
+    "Optional private-profile details are not required for this invitation",
+  );
+  assert.equal(
+    (await sql`select id from result_claims where result_id=993401`).length,
+    0,
+    "Registration and viewing an invitation do not confirm ownership",
+  );
+  assert.equal(
+    (await sql`select user_id from athlete_account_links where athlete_id=993401`).length,
+    0,
+  );
+
+  // Return through existing-account sign-in without supplying registration fields.
+  const signedOut = await page.request.post(`${origin}/api/auth/sign-out`, {
+    headers: { origin },
+    data: {},
+  });
+  assert.equal(signedOut.status(), 200);
+  await page.context().clearCookies();
+  await page.goto(origin + path, { waitUntil: "networkidle" });
+  await page.getByRole("button", { name: "Sign in or create account", exact: true }).click();
+  assert.equal(await dialog.getByLabel("First name", { exact: true }).count(), 0);
+  await dialog.getByLabel("Email address", { exact: true }).fill("ONBOARDING-RUNNER@EXAMPLE.TEST");
+  await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
+  await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
+  const returningCode = sent.at(-1)?.text.match(/\b([0-9]{6})\b/)?.[1];
+  assert(returningCode);
+  await dialog.getByLabel("Six-digit code", { exact: true }).fill(returningCode);
+  await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
+  await page
+    .getByRole("heading", {
+      name: "Are these your results, Avery Invitation Athlete?",
+      exact: true,
+    })
+    .waitFor();
+  assert.equal(new URL(page.url()).search, new URL(origin + path).search);
+  assert.deepEqual(
+    await sql`select id from "user" where lower(email)='onboarding-runner@example.test'`,
+    [{ id: user.id }],
+    "Existing login reuses the account without duplicating it",
+  );
+  assert.equal(
+    (await sql`select user_id from athlete_account_links where athlete_id=993401`).length,
+    0,
   );
   await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
   await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
@@ -138,6 +197,17 @@ try {
     1,
     "Matching invitation recipient self-confirms the existing profile",
   );
+  await page.reload({ waitUntil: "networkidle" });
+  await page.getByText(/Claim complete — your profile is linked/).waitFor();
+  assert.equal((await sql`select id from result_claims where result_id=993401`).length, 1);
+  assert.equal(
+    (await sql`select user_id from athlete_account_links where athlete_id=993401`).length,
+    1,
+  );
+  assert.equal(
+    (await sql`select profile_visibility from athletes where id=993401`)[0].profile_visibility,
+    "private",
+  );
   for (const width of [390, 1280]) {
     await page.setViewportSize({ width, height: 900 });
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
@@ -148,7 +218,7 @@ try {
   }
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: real browser private invitation → email-code signup → exact selected profile → completed self-confirmed claim, with mobile/desktop layout. Synthetic data only.",
+    "PASS: real browser private invitation → required-details email-code signup → existing-account login → exact selected profile → explicit self-confirmed claim without duplicates or publication, with mobile/desktop layout. Synthetic data only.",
   );
 } catch (error) {
   await mkdir("artifacts", { recursive: true });

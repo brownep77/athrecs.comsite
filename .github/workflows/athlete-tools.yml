@@ -10,6 +10,7 @@ on:
       - "src/components/staff/*Invite*.tsx"
       - "src/components/staff/ClaimInvitationSharing.tsx"
       - "src/lib/athrecs/claim-invit*"
+      - "src/lib/athrecs/claim-identity.server.ts"
       - "src/lib/athrecs/athlete-messages*"
       - "src/lib/athrecs/athlete-inbox*"
       - "src/components/staff/AthleteInboxConnection.tsx"
@@ -30,6 +31,9 @@ on:
       - "src/routes/admin/athlete-tools.tsx"
       - "src/lib/athrecs/result-claim*"
       - "src/lib/auth/email.server.ts"
+      - "src/components/auth/AthleteAuthDialog.tsx"
+      - "src/lib/auth/signup-details.ts"
+      - "src/lib/auth/auth-methods.ts"
       - "src/lib/auth/server.ts"
       - "src/lib/auth/signup-alerts.server.ts"
       - "src/lib/auth/signup-welcome.server.ts"
@@ -146,7 +150,9 @@ jobs:
       - name: New athlete invitation through real email signup and claim
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
-        run: node scripts/verify-external-invitation-browser.mjs
+        run: |
+          node scripts/verify-external-invitation-browser.mjs
+          node scripts/verify-external-invitation-browser.mjs --desktop
       - name: Conflict review and email retry interface
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
