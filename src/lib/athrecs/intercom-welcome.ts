@@ -1,7 +1,7 @@
 /** Non-identifying preferences for the once-only Messenger introduction. */
 export const INTERCOM_WELCOME_SEEN_KEY = "athrecs.intercom.welcome.seen.v1";
 export const INTERCOM_BANNER_DISMISSED_KEY = "athrecs.intercom.welcome.banner-dismissed.v1";
-export const INTERCOM_WELCOME_DELAY = 10_000;
+export const INTERCOM_WELCOME_DELAY = 5_000;
 
 export type IntercomWelcomePreferences = Readonly<{
   hydrated: boolean;
