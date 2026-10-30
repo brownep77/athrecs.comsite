@@ -26,33 +26,39 @@ import { cn } from "@/lib/utils";
 const choices = [
   {
     key: "profile",
-    label: "Find my athlete profile",
-    prefill: "Can you help me find my athlete profile on AthRecs?",
-    href: "/athletes",
+    label: "Create my athlete profile",
+    prefill: "Can you help me create my athlete profile on AthRecs?",
+    href: "/join",
     icon: UserRound,
+    colours:
+      "border-violet-700 bg-violet-700 text-white hover:border-violet-800 hover:bg-violet-800",
   },
   {
     key: "results",
-    label: "Report missing results",
+    label: "Report missing fixtures or results",
     prefill:
-      "Some of my results are missing from AthRecs. Can you help me report them for research?",
-    href: "mailto:support@athrecs.com?subject=Missing%20AthRecs%20results",
+      "I would like to report missing fixtures or results on AthRecs. Can you help me submit the details?",
+    href: "mailto:support@athrecs.com?subject=Missing%20AthRecs%20fixtures%20or%20results",
     icon: Trophy,
+    colours: "border-teal-300 bg-teal-50 text-teal-900 hover:border-teal-500 hover:bg-teal-100",
   },
   {
     key: "race",
-    label: "Find a race",
-    prefill: "Can you help me find a race on AthRecs?",
+    label: "Find an event",
+    prefill: "Can you help me find an event on AthRecs?",
     href: "/races",
     icon: Search,
+    colours: "border-sky-300 bg-sky-50 text-sky-900 hover:border-sky-500 hover:bg-sky-100",
   },
   {
     key: "correction",
-    label: "Suggest a correction",
+    label: "Suggest an amendment or update",
     prefill:
-      "I would like to suggest a correction to an athlete profile, race or result on AthRecs.",
-    href: "mailto:support@athrecs.com?subject=AthRecs%20correction",
+      "I would like to suggest an amendment or update to an athlete profile, event or result on AthRecs.",
+    href: "mailto:support@athrecs.com?subject=AthRecs%20amendment%20or%20update",
     icon: Flag,
+    colours:
+      "border-amber-300 bg-amber-50 text-amber-900 hover:border-amber-500 hover:bg-amber-100",
   },
 ] as const;
 
@@ -97,7 +103,7 @@ export function IntercomAskButton({ className = "" }: { className?: string }) {
 function WelcomeChoices({ compact = false }: { compact?: boolean }) {
   return (
     <div className={cn("grid gap-2", compact ? "grid-cols-1" : "grid-cols-2 xl:grid-cols-4")}>
-      {choices.map(({ key, label, prefill, href, icon: Icon }) => (
+      {choices.map(({ key, label, prefill, href, icon: Icon, colours }) => (
         <a
           key={key}
           href={href}
@@ -108,13 +114,14 @@ function WelcomeChoices({ compact = false }: { compact?: boolean }) {
             if (openIntercomMessage(prefill)) event.preventDefault();
           }}
           className={cn(
-            "inline-flex min-h-11 min-w-0 items-center gap-2 rounded-xl border border-accent/15 bg-surface px-3 py-2 text-sm font-semibold text-fg no-underline hover:border-accent/50 hover:bg-primary/20",
+            "inline-flex min-h-12 min-w-0 items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold leading-snug no-underline shadow-sm transition-colors hover:shadow-md motion-reduce:transition-none",
+            colours,
             focusRing,
           )}
         >
-          <Icon className="size-4 shrink-0 text-accent" aria-hidden="true" />
-          <span className="min-w-0 flex-1">{label}</span>
-          <ArrowUpRight className="size-3.5 shrink-0 text-muted" aria-hidden="true" />
+          <Icon className="size-4 shrink-0" aria-hidden="true" />
+          <span className="min-w-0 flex-1 whitespace-normal break-normal">{label}</span>
+          <ArrowUpRight className="size-3.5 shrink-0" aria-hidden="true" />
         </a>
       ))}
     </div>
@@ -270,7 +277,7 @@ export function IntercomWelcome({ pathname }: { pathname: string }) {
         </div>
       ) : (
         <section
-          aria-label="Help with AthRecs profiles, results and races"
+          aria-label="Help with AthRecs profiles, fixtures and results"
           className="relative mx-4 mt-4 rounded-2xl border border-accent/20 bg-primary/15 p-4 pr-14 shadow-card sm:mx-6 sm:p-5 sm:pr-16 lg:mx-8"
           data-intercom-welcome="banner"
         >
@@ -293,10 +300,11 @@ export function IntercomWelcome({ pathname }: { pathname: string }) {
               <p className="text-sm font-bold leading-snug text-fg sm:text-base">
                 {signedIn
                   ? "Need help with your profile or results?"
-                  : "Find your athlete profile. Bring your results together."}
+                  : "Create your athlete profile. Bring your results together."}
               </p>
               <p className="mt-1 hidden text-sm leading-relaxed text-muted sm:block">
-                Get help finding a profile, reporting missing results or choosing your next race.
+                Create a profile, report missing fixtures or results, find an event or suggest an
+                update.
               </p>
             </div>
             <IntercomAskButton />
@@ -327,7 +335,7 @@ export function IntercomWelcome({ pathname }: { pathname: string }) {
             <X className="size-4" aria-hidden="true" />
           </button>
           <p className="shrink-0 pr-9 text-sm font-bold leading-snug text-fg">
-            Looking for your athlete profile or missing a result?
+            Create your athlete profile or help us fill in the gaps.
           </p>
           <p className="mb-3 mt-2 shrink-0 pr-2 text-xs leading-relaxed text-muted">
             Ask AthRecs for a hand.

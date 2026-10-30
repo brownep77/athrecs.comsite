@@ -330,7 +330,7 @@ try {
         await page.evaluate(
           () => window.fixture.calls.find(([method]) => method === "showNewMessage")[1],
         ),
-        /find my athlete profile/,
+        /create my athlete profile/,
       );
       await page.evaluate(() => window.fixture.hide());
       await page.setViewportSize({ width: 1280, height: 900 });
@@ -363,10 +363,10 @@ try {
       "mailto:support@athrecs.com",
     );
     const expected = {
-      profile: "/athletes",
-      results: "mailto:support@athrecs.com?subject=Missing%20AthRecs%20results",
+      profile: "/join",
+      results: "mailto:support@athrecs.com?subject=Missing%20AthRecs%20fixtures%20or%20results",
       race: "/races",
-      correction: "mailto:support@athrecs.com?subject=AthRecs%20correction",
+      correction: "mailto:support@athrecs.com?subject=AthRecs%20amendment%20or%20update",
     };
     for (const [key, href] of Object.entries(expected)) {
       assert.equal(
@@ -375,7 +375,7 @@ try {
       );
     }
     await page.locator('[data-intercom-choice="profile"]').click();
-    assert.equal(new URL(page.url()).pathname, "/athletes");
+    assert.equal(new URL(page.url()).pathname, "/join");
   });
 
   await withPage(
