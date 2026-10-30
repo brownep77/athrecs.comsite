@@ -21,12 +21,58 @@ visitor-controlled addresses becoming staff notification destinations.
 The routing-table constraint rejects a department address placed in the wrong
 category before that configuration can affect account or submission transactions.
 
+### Production activation check — 30 October 2026
+
+Both notification migrations were applied to the production database on
+29 October at 13:43:56 UTC. The live `www.athrecs.com` deployment includes #1031.
+The initial migration remains conservative; mailbox activation is operational
+configuration in `staff_notification_routes`, not a change to its defaults.
+
+Four separate controlled messages were sent from the owner's Gmail account at
+06:28 UTC on 30 October, with reference `ATHRECS-ROUTING-20261030-A` and a distinct
+category suffix. The existing read-only Private Email IMAP sync recorded receipt
+in `paul@athrecs.com` for fixtures at 06:28:36 and results/partnerships at 06:28:38.
+Each received RFC Message-ID was matched to the corresponding singly addressed
+Gmail message. These are working delivery paths into a shared receiving mailbox;
+the mailbox administration screen was not available to distinguish aliases from
+forwarding or catch-all configuration.
+
+| Category       | Department address enabled | Delivery evidence                                                 |
+| -------------- | -------------------------- | ----------------------------------------------------------------- |
+| `support`      | No                         | Test sent; receipt not confirmed. Private Email sign-in required. |
+| `fixtures`     | Yes                        | Exact controlled message received by the connected owner inbox.   |
+| `results`      | Yes                        | Exact controlled message received by the connected owner inbox.   |
+| `partnerships` | Yes                        | Exact controlled message received by the connected owner inbox.   |
+
+Both owner recipients remain enabled for every category. New routing applies
+to future queued messages; old frozen deliveries are not replayed. Do not claim
+these checks establish ongoing reliability, separate department inboxes, or
+end-to-end delivery from the website's Resend sender. Application routing and
+email content are separately exercised in disposable-database tests below.
+
+To enable support after checking its receiving mailbox, update only its existing
+row and read back the complete configuration. No redeploy or staff-access change
+is needed:
+
+```sql
+-- Run only after the support test is located in the receiving mailbox.
+update staff_notification_routes
+set enabled = true
+where category = 'support' and recipient = 'support@athrecs.com';
+
+select category, recipient, enabled
+from staff_notification_routes
+order by category, recipient;
+```
+
 ## New account registrations
 
 Each new account queues a separate notification for each enabled `support`
 recipient. The sender remains the bare address `paul@athrecs.com`.
 The message includes the supplied name, email, signup time in Europe/London,
-email verification status at creation, and a link to the private signup list.
+email verification status at creation, the stable `signup/<account ID>` reference,
+and a link to the private signup list. Reply-To points to the submitted account
+email; its verification status remains explicit.
 It contains no authentication codes, session tokens or password links.
 
 The database queues the deliveries atomically when a new account is inserted.
