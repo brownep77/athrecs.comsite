@@ -95,6 +95,7 @@ const PUBLIC_BROWSE_ROOTS = new Set([
   "directory",
   "news",
   "race-reports",
+  "podcasts",
   "sports",
   "parkrun",
   "triathlon",
