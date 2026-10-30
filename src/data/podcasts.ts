@@ -106,7 +106,7 @@ export const PODCASTS: Podcast[] = [
         date: "2026-10-26",
         displayDate: "26 October 2026",
         url: "https://shows.acast.com/untapped/episodes/emily-jane-fairs-on-marathon-underfuelling-risks-running-men",
-        guests: [{ name: "Emily Jane Fairs" }],
+        guests: [{ name: "Emily Jane Fairs", slug: "emily-fairs-fairs-london-2026-mass-12476" }],
         guestBio:
           "Emily Jane Fairs never thought of herself as a runner, yet within two years of starting she had completed marathons and 100 km ultras.",
         summary:
@@ -163,7 +163,7 @@ export const PODCASTS: Podcast[] = [
         date: "2026-10-05",
         displayDate: "5 October 2026",
         url: "https://shows.acast.com/untapped/episodes/how-to-run-like-an-olympic-medallist-daryll-neita",
-        guests: [{ name: "Daryll Neita" }],
+        guests: [{ name: "Daryll Neita", slug: "daryll-neita" }],
         guestBio:
           "Daryll Neita is a British Olympic medallist sprinter who trains five days a week in Florida.",
         summary:
@@ -182,7 +182,7 @@ export const PODCASTS: Podcast[] = [
         date: "2026-09-28",
         displayDate: "28 September 2026",
         url: "https://shows.acast.com/untapped/episodes/5-rules-not-to-break-in-a-marathon-sub-245-training-tips-nic",
-        guests: [{ name: "Nick Bester" }],
+        guests: [{ name: "Nick Bester", slug: "nick-bester" }],
         guestBio:
           "Nick Bester's running career is a lesson in patience: two years to break 20 minutes for 5K, and a first marathon of 3:17 that he lowered to 2:19:45 thirteen years later.",
         summary:
@@ -201,7 +201,7 @@ export const PODCASTS: Podcast[] = [
         date: "2026-09-21",
         displayDate: "21 September 2026",
         url: "https://shows.acast.com/untapped/episodes/how-to-run-a-247-marathon-hack-your-endurance-and-recover-qu",
-        guests: [{ name: "Will Goodge" }],
+        guests: [{ name: "Will Goodge", slug: "william-goodge" }],
         guestBio:
           "Will Goodge is a British ultra-endurance runner who went from a 2:47 marathon to running across entire countries. His Mission America project set out to run 50 marathons in all 50 US states in 24 days, in memory of his mother and in support of Stand Up To Cancer.",
         summary:
@@ -287,7 +287,7 @@ export const PODCASTS: Podcast[] = [
         date: "2026-10-28",
         displayDate: "28 October 2026",
         url: "https://podcasts.apple.com/gb/podcast/taking-on-new-york-and-giving-back-meb-keflezighi-bonus-pod/id1786774007?i=1000798467812",
-        guests: [{ name: "Meb Keflezighi" }],
+        guests: [{ name: "Meb Keflezighi", slug: "meb-keflezighi" }],
         guestBio:
           "Meb Keflezighi is a retired American marathon runner who won Olympic silver in 2004, the New York City Marathon in 2009 and the Boston Marathon in 2014. He competed at four Olympic Games.",
         summary:
@@ -306,7 +306,7 @@ export const PODCASTS: Podcast[] = [
         date: "2026-10-26",
         displayDate: "26 October 2026",
         url: "https://podcasts.apple.com/gb/podcast/going-big-in-the-big-apple-dathan-ritzenheins-new/id1786774007?i=1000798115559",
-        guests: [{ name: "Dathan Ritzenhein" }],
+        guests: [{ name: "Dathan Ritzenhein", slug: "dathan-ritzenhein" }],
         guestBio:
           "Dathan Ritzenhein is a former US 5,000m record holder and 2008 Olympian who now coaches the OAC Boulder group.",
         summary:
@@ -431,7 +431,7 @@ export const PODCASTS: Podcast[] = [
         date: "2026-10-29",
         displayDate: "29 October 2026 · Episode 1023",
         url: "https://richroll.com/podcast/cole-brauer-1023/",
-        guests: [{ name: "Cole Brauer" }],
+        guests: [{ name: "Cole Brauer", slug: "cole-brauer" }],
         guestBio:
           "Cole Brauer is an American professional ocean-racing sailor. In 2023 she won both legs of the Bermuda 1-2, then sailed her boat First Light around 27,000 nautical miles in a 130-day race to become the first American woman to race solo and nonstop around the globe.",
         summary:
@@ -451,7 +451,7 @@ export const PODCASTS: Podcast[] = [
         date: "2026-10-26",
         displayDate: "26 October 2026 · Episode 1022",
         url: "https://richroll.com/podcast/terry-bradshaw-1022/",
-        guests: [{ name: "Terry Bradshaw" }],
+        guests: [{ name: "Terry Bradshaw", slug: "terry-bradshaw" }],
         guestBio:
           "Terry Bradshaw quarterbacked the Pittsburgh Steelers to four Super Bowl wins in six seasons in the 1970s. He is a Hall of Famer, a two-time Super Bowl MVP and a long-serving FOX NFL Sunday analyst.",
         summary: "An NFL great on fear, self-worth and his mental and physical health battles.",
@@ -469,7 +469,7 @@ export const PODCASTS: Podcast[] = [
         date: "2026-09-28",
         displayDate: "28 September 2026 · Episode 1016",
         url: "https://richroll.com/podcast/colin-kaepernick-1016/",
-        guests: [{ name: "Colin Kaepernick" }],
+        guests: [{ name: "Colin Kaepernick", slug: "colin-kaepernick" }],
         guestBio:
           "Colin Kaepernick is a former Super Bowl quarterback and activist. He discusses his new book, The Perilous Fight, and says he still trains every day.",
         summary:
@@ -488,9 +488,9 @@ export const PODCASTS: Podcast[] = [
         date: "2026-09-17",
         displayDate: "17 September 2026 · Episode 1014",
         url: "https://richroll.com/podcast/william-goodge-1014/",
-        guests: [{ name: "Will Goodge" }],
+        guests: [{ name: "Will Goodge", slug: "william-goodge" }],
         guestBio:
-          "Will Goodge is a British ultra-endurance runner who has run the length of the UK and across both America and Australia. This was his second appearance on the show, following his 50 marathons in 50 US states in 24 days.",
+          "Will Goodge is a British ultra-endurance runner who has run the length of the UK and across both America and Australia. This was his second appearance on the show, ahead of his attempt to run a marathon in all 50 US states in 24 days.",
         summary: "The logistics and the emotion behind 50 marathons in 50 states in 24 days.",
         takeaways: [
           "Planning a challenge across all 50 US states in 24 days.",

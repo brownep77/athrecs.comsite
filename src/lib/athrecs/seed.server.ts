@@ -31,7 +31,7 @@ import { runCatalogueTransaction } from "./catalogue-transaction";
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-14-v2-world-athletics-track-field-2026-10-19-79064b5939";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 export const CLUB_CATALOGUE_SEED_VERSION = `${SEED_VERSION}:${CLUB_PROFILE_VERSION}`;
-const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
+const PUBLIC_FIGURE_SEED_VERSION = "athrecs-podcast-guest-profiles-2026-10-30-v1";
 const FEATURED_RACE_RESULTS_VERSION = "berlin-london-2026-09-27-v1";
 const FEATURED_WA_HISTORIES_VERSION = "featured-wa-histories-2026-09-30-v1";
 const FEATURED_GBR_IRL_AGE_VERSION = "gbr-irl-age-berlin-2026-10-01-v1";

@@ -220,7 +220,7 @@ try {
   assert.equal(refreshed[0].bio, moFarahAthlete.bio);
   const version =
     await sql`select value from app_meta where key='public_figures_catalogue_version'`;
-  assert.equal(version[0].value, "athrecs-rich-roll-additional-records-2026-09-19-v1");
+  assert.equal(version[0].value, "athrecs-podcast-guest-profiles-2026-10-30-v1");
   assert.deepEqual(
     await sql`select key, value from app_meta where key <> 'public_figures_catalogue_version' order by key`,
     markers,
