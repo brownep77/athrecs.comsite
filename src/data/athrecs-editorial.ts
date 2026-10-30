@@ -1,5 +1,6 @@
 import { NEWS_ARTICLES } from "./runrecs-news";
 import { BURE_REPORT } from "./bure-valley-2026";
+import { NEW_YORK_MARATHON_2026 } from "./new-york-marathon-2026";
 import type { EditorialArticle } from "../lib/athrecs/editorial";
 
 // Reuse the already-published report without changing its text or the RunRecs feed.
@@ -9,6 +10,7 @@ const publishedReport = NEWS_ARTICLES.find(
 );
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  NEW_YORK_MARATHON_2026,
   BURE_REPORT,
   ...(publishedReport
     ? [
