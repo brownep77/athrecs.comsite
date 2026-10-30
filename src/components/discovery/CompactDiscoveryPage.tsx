@@ -31,6 +31,7 @@ import {
 } from "@/lib/athrecs/sport-pages";
 import type { SportFixture } from "@/lib/athrecs/sport-fixtures.server";
 import type { SportBroadcast } from "@/data/sport-broadcasts";
+import { DiamondLeagueGuide } from "./DiamondLeagueGuide";
 import { CompactFixtureRow } from "./CompactFixtureRow";
 import { DiscoveryCountryList } from "./DiscoveryCountryList";
 import { useSavedFixtures } from "./useSavedFixtures";
@@ -299,6 +300,8 @@ export function CompactDiscoveryPage({
             <ChatPrompt kind="race" className="mt-3" />
           </header>
 
+          {sport?.slug === "track-and-field" ? <DiamondLeagueGuide /> : null}
+
           <section id="fixtures" className="scroll-mt-44" aria-labelledby="fixtures-heading">
             <h2 id="fixtures-heading" className="sr-only">
               Upcoming {sportName.toLowerCase()} fixtures
@@ -546,7 +549,9 @@ export function CompactDiscoveryPage({
                 <Tv className="size-4 text-accent" aria-hidden="true" />
                 TV & live streams
               </h2>
-              {broadcasts.length ? (
+              {sport.slug === "track-and-field" ? (
+                <a href="#diamond-league" className={actionLink}>Diamond League fixtures & TV by country</a>
+              ) : broadcasts.length ? (
                 <div className="mt-2 divide-y divide-border">
                   {broadcasts.map((broadcast) => (
                     <article key={broadcast.id} className="py-3">

@@ -17,6 +17,7 @@ const publishers = [
   // can encounter its static records. Migrations have already created the ledger.
   "scripts/publish-colombia-running.mjs",
   "scripts/publish-athrecs-catalogue.mjs",
+  "scripts/publish-diamond-league.mjs",
   "scripts/publish-uk-ireland-prominent-races.mjs",
   "scripts/publish-remaining-uk-ireland-race-additions.mjs",
   "scripts/publish-germany-belgium-catalogues.mjs",

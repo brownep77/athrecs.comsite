@@ -108,6 +108,10 @@ function AthleticsCalendarPage() {
         </button>
       </header>
 
+      <a href="/sports/track-and-field#diamond-league" className="block rounded-xl border border-accent/25 bg-accent-soft p-4 text-sm font-semibold text-accent no-underline hover:underline">
+        Diamond League 2027 · All 15 meetings and TV coverage by country →
+      </a>
+
       <div className="grid gap-5 lg:grid-cols-[minmax(280px,330px)_1fr] lg:items-start">
         <div
           className={
