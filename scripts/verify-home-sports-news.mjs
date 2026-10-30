@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PGlite } from "@electric-sql/pglite";
+import { isAthrecsPublicSport } from "../src/lib/athrecs/public-sports.ts";
 import {
   homeRegionLabel,
   PRIORITY_HOME_SPORTS,
@@ -89,6 +90,28 @@ const updatesSource = api.slice(updatesStart, nextExport === -1 ? undefined : ne
 assert.match(updatesSource, /from edition_result_links/);
 assert.match(updatesSource, /from events event/);
 assert.doesNotMatch(updatesSource, /fetch\(|rss|newsapi/i);
+
+// The production build aliases the shared API to this public-sport wrapper.
+// Exercise that actual wrapper so a legacy Athletics-only gate cannot silently
+// remove Running, Triathlon and Cycling from an otherwise correct base feed.
+const scopedApi = await readFile(resolve(root, "src/athletics/api.ts"), "utf8");
+const wrapper = scopedApi.match(/export const getHomeSportUpdates = ([\s\S]*?\n\}\));/)?.[1];
+assert.ok(wrapper);
+const wrappedFeed = new Function(
+  "createServerFn",
+  "base",
+  "isAthrecsPublicSport",
+  `return ${wrapper}`,
+)(
+  () => ({ handler: (fn) => fn }),
+  { getHomeSportUpdates: async () => [...feed, update("unsupported", "Unpublished sport")] },
+  isAthrecsPublicSport,
+);
+assert.deepEqual(
+  (await wrappedFeed()).map(({ id }) => id),
+  feed.map(({ id }) => id),
+  "Production feed must retain supported public sports and exclude unsupported sports",
+);
 
 // Execute the real feed query against a disposable catalogue. Future, held,
 // unverified and alias result links must never become public results updates.
