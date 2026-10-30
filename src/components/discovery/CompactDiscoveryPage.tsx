@@ -1,4 +1,6 @@
 import { useState, type FormEvent } from "react";
+import { HomeUpdatesFeed } from "@/components/editorial/HomeUpdatesFeed";
+import type { HomeSportUpdate } from "@/lib/athrecs/home-updates";
 import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
@@ -49,6 +51,8 @@ type Props = {
   page: number;
   hasMore: boolean;
   broadcasts?: SportBroadcast[];
+  updates?: HomeSportUpdate[];
+  updatesUnavailable?: boolean;
 };
 
 const sideLink =
@@ -80,6 +84,8 @@ export function CompactDiscoveryPage({
   page,
   hasMore,
   broadcasts = [],
+  updates,
+  updatesUnavailable = false,
 }: Props) {
   const theme = useHomepageTheme();
   const currentColours = theme === "colourful";
@@ -461,6 +467,8 @@ export function CompactDiscoveryPage({
             )}
           </section>
 
+          {updates ? <HomeUpdatesFeed updates={updates} unavailable={updatesUnavailable} /> : null}
+
           {running && (
             <section
               className="flex flex-wrap items-center gap-3 rounded-lg border border-accent/20 bg-accent-soft/60 p-4"
@@ -599,6 +607,11 @@ export function CompactDiscoveryPage({
                 New York Marathon 2026 preview
                 <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
               </Link>
+              {updates ? (
+                <a href="#sport-updates" className={actionLink}>
+                  Sport & regional updates
+                </a>
+              ) : null}
               <Link to="/news" search={editorialSearch} className={actionLink}>
                 Browse news
                 <ArrowRight className="size-4" aria-hidden="true" />
