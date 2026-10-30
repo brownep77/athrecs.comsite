@@ -10,6 +10,7 @@ import {
   ChevronDown,
   Handshake,
   MapPin,
+  Newspaper,
   Search,
   Trophy,
   Tv,
@@ -91,6 +92,8 @@ export function CompactDiscoveryPage({
   const hasFilters = Boolean(search.q || search.country || search.month || search.distance);
   const resultPath = sport ? `/results?category=${sport.slug}` : "/results?category=all-running";
   const directoryPath = `/clubs?sport=${encodeURIComponent(sportName)}`;
+  const editorialSearch = sport ? { sport: sport.slug } : {};
+  const editorialQuery = sport ? `?sport=${sport.slug}` : "";
   const options = {
     countries:
       search.country && !countries.includes(search.country)
@@ -126,12 +129,14 @@ export function CompactDiscoveryPage({
     >
       <nav
         aria-label={`${sportName} sections`}
-        className={`overflow-x-auto px-2 sm:px-5 lg:px-7 ${currentColours ? "bg-[#075667] text-white" : "bg-primary text-primary-fg"}`}
+        className={`px-2 sm:px-5 lg:px-7 ${currentColours ? "bg-[#075667] text-white" : "bg-primary text-primary-fg"}`}
       >
-        <ul className="flex min-w-max items-stretch gap-1">
+        <ul className="flex flex-wrap items-stretch gap-x-1">
           {[
             { label: "Fixtures", path: "#fixtures", active: true },
             { label: "Results", path: resultPath },
+            { label: "News", path: `/news${editorialQuery}` },
+            { label: "Race Reports", path: `/race-reports${editorialQuery}` },
             { label: "Athletes", path: `/athletes?sport=${encodeURIComponent(sportName)}` },
             { label: "Clubs", path: directoryPath },
             {
@@ -568,6 +573,28 @@ export function CompactDiscoveryPage({
         </div>
 
         <aside aria-label="Your AthRecs" className="space-y-4 lg:col-start-2 xl:col-start-auto">
+          <section
+            className="rounded-lg border border-border bg-surface p-4"
+            aria-labelledby="discovery-stories-heading"
+          >
+            <h2 id="discovery-stories-heading" className="flex items-center gap-2 text-sm font-bold">
+              <Newspaper className="size-5 shrink-0 text-accent" aria-hidden="true" />
+              News & race reports
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              Sporting news, event announcements and stories from the finish line.
+            </p>
+            <div className="mt-2 flex flex-col items-start">
+              <Link to="/news" search={editorialSearch} className={actionLink}>
+                Browse news
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+              <Link to="/race-reports" search={editorialSearch} className={actionLink}>
+                Read race reports
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </section>
           <section className="rounded-lg border border-border bg-surface p-4">
             <h2 className="flex items-center gap-2 text-sm font-bold">
               <UserRound className="size-5 text-accent" aria-hidden="true" />
