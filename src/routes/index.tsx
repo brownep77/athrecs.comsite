@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CompactDiscoveryPage } from "@/components/discovery/CompactDiscoveryPage";
 import { DISCOVERY_COUNTRIES } from "@/components/discovery/discovery-navigation";
 import { Button } from "@/components/ui/button";
+import { getHomeSportUpdates } from "@/lib/athrecs/api";
 import { getRunningFixtures } from "@/lib/athrecs/sport-fixtures-api";
 import { parseSportFixtureSearch, type SportFixtureSearch } from "@/lib/athrecs/sport-pages";
 import { discoveryJsonLd } from "@/lib/running/discovery";
@@ -16,7 +17,15 @@ export const Route = createFileRoute("/")({
     board?: "upcoming" | "results" | "regional";
   } => parseSportFixtureSearch(raw),
   loaderDeps: ({ search }) => search,
-  loader: ({ deps }) => getRunningFixtures({ data: deps }),
+  loader: async ({ deps }) => {
+    const [fixtures, feed] = await Promise.all([
+      getRunningFixtures({ data: deps }),
+      getHomeSportUpdates()
+        .then((updates) => ({ updates, updatesUnavailable: false }))
+        .catch(() => ({ updates: [], updatesUnavailable: true })),
+    ]);
+    return { ...fixtures, ...feed };
+  },
   staleTime: 60_000,
   head: ({ match }) => ({
     meta: [

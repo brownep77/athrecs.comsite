@@ -1559,6 +1559,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
     distance: string;
     status: string;
     provider_name: string | null;
+    results_url: string | null;
     published_at: string;
   }>`
     with upcoming_editions as (
@@ -1600,6 +1601,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
         distance_code,
         status,
         null::text as provider_name,
+        null::text as results_url,
         event_date::timestamptz as published_at,
         row_number() over (
           partition by sport
@@ -1612,6 +1614,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       select
         link.id,
         link.provider_name,
+        link.results_url,
         link.checked_at,
         event.slug as event_slug,
         event.name as event_name,
@@ -1631,6 +1634,8 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       join events event on event.id = edition.event_id
       where link.status = 'approved'
         and link.is_verified = true
+        and edition.event_date <= ${today}::date
+        and not (event.slug = any(${retainedFixtureAliasSlugs}::text[]))
     ),
     result_updates as (
       select
@@ -1646,6 +1651,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
         distance_code,
         'Finished'::text as status,
         provider_name,
+        results_url,
         checked_at as published_at,
         row_number() over (
           partition by sport
@@ -1667,6 +1673,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       distance_code as distance,
       status,
       provider_name,
+      results_url,
       published_at::text as published_at
     from (
       select * from fixture_updates where sport_rank <= 8
@@ -1682,6 +1689,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
         else 4
       end,
       kind,
+      case when kind = 'fixture' then event_date end asc,
       published_at desc
   `;
 
@@ -1699,6 +1707,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       distance: row.distance,
       status: row.status,
       providerName: row.provider_name,
+      resultsUrl: row.results_url,
       publishedAt: row.published_at,
     }))
     .map(publicCatalogueContent);
