@@ -4,6 +4,7 @@ import { EDITORIAL_ARTICLES } from "@/data/athrecs-editorial";
 import { EditorialArticlePage } from "@/components/editorial/EditorialArticlePage";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { editorialJsonLd } from "@/lib/athrecs/editorial";
 
 export const Route = createFileRoute("/news/$slug")({
   loader: ({ params }) => {
@@ -28,11 +29,24 @@ export const Route = createFileRoute("/news/$slug")({
         ? {
             links: [{ rel: "canonical", href: `${SITE_URL}/news/${loaderData.article.slug}` }],
             meta: siteGraphMeta({
-              title: `${loaderData.article.title} | ATHRECS.com`,
-              description: loaderData.article.standfirst,
+              title: `${loaderData.editorial?.seoTitle ?? loaderData.article.title} | AthRecs`,
+              description: loaderData.editorial?.description ?? loaderData.article.standfirst,
               url: `${SITE_URL}/news/${loaderData.article.slug}`,
               type: "article",
+              image: loaderData.editorial?.image
+                ? `${SITE_URL}${loaderData.editorial.image.src}`
+                : undefined,
             }),
+            scripts: loaderData.editorial
+              ? [
+                  {
+                    type: "application/ld+json",
+                    children: JSON.stringify(
+                      editorialJsonLd(loaderData.editorial, SITE_URL),
+                    ).replace(/</g, "\\u003c"),
+                  },
+                ]
+              : [],
           }
         : {
             links: [

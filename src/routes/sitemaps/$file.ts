@@ -14,6 +14,13 @@ export const Route = createFileRoute("/sitemaps/$file")({
           const runningPaths: string[] = [];
           const modified = new Map<string, string>();
           if (!IS_RUNRECS_SITE) {
+            const { EDITORIAL_ARTICLES } = await import("@/data/athrecs-editorial");
+            const { editorialPath } = await import("@/lib/athrecs/editorial");
+            for (const article of EDITORIAL_ARTICLES)
+              modified.set(
+                editorialPath(article),
+                article.modifiedAt ?? article.publishedAt ?? article.date,
+              );
             const { MARATHON_COUNTRIES } = await import("@/data/road-marathons/countries");
             const { ROAD_MARATHONS } = await import("@/data/road-marathons");
             const { HALF_MARATHON_COUNTRIES } =

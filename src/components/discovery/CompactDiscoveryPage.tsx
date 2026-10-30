@@ -305,7 +305,10 @@ export function CompactDiscoveryPage({
               key={`${pathname}-${JSON.stringify(search)}`}
               className="mb-4 space-y-3"
             >
-              <label className="block space-y-1.5 text-xs font-semibold" htmlFor="compact-location-search">
+              <label
+                className="block space-y-1.5 text-xs font-semibold"
+                htmlFor="compact-location-search"
+              >
                 <span>Race, town, county or region</span>
                 <input
                   id="compact-location-search"
@@ -577,7 +580,10 @@ export function CompactDiscoveryPage({
             className="rounded-lg border border-border bg-surface p-4"
             aria-labelledby="discovery-stories-heading"
           >
-            <h2 id="discovery-stories-heading" className="flex items-center gap-2 text-sm font-bold">
+            <h2
+              id="discovery-stories-heading"
+              className="flex items-center gap-2 text-sm font-bold"
+            >
               <Newspaper className="size-5 shrink-0 text-accent" aria-hidden="true" />
               News & race reports
             </h2>
@@ -585,6 +591,14 @@ export function CompactDiscoveryPage({
               Sporting news, event announcements and stories from the finish line.
             </p>
             <div className="mt-2 flex flex-col items-start">
+              <Link
+                to="/news/$slug"
+                params={{ slug: "new-york-city-marathon-2026-preview" }}
+                className={actionLink}
+              >
+                New York Marathon 2026 preview
+                <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
+              </Link>
               <Link to="/news" search={editorialSearch} className={actionLink}>
                 Browse news
                 <ArrowRight className="size-4" aria-hidden="true" />
