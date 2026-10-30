@@ -247,7 +247,7 @@ export const getHomeStats = createServerFn({ method: "GET" }).handler(async () =
 
 export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(async () => {
   const updates = await base.getHomeSportUpdates();
-  return updates.filter((update) => isAthleticsSport(update.sport));
+  return updates.filter((update) => isAthrecsPublicSport(update.sport));
 });
 
 type CalendarInput =
