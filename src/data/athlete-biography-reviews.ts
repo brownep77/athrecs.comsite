@@ -2,6 +2,99 @@
 // A matching slug alone never publishes this text: exact-text approval is required.
 export const athleteBiographyReviews = [
   {
+    slug: "russ-cook",
+    title: "Russ Cook (Hardest Geezer): biography, Africa run & results",
+    description:
+      "Russ Cook, the Hardest Geezer: his 352-day Africa run, earlier challenges, London Marathon results, charity work and rise to international recognition.",
+    paragraphs: [
+      "Russ Cook, known as the Hardest Geezer and also as Russell Cook, is a British endurance runner, adventurer and author from Worthing, West Sussex. His defining achievement is Project Africa: running from Cape Agulhas in South Africa to Ras Angela in Tunisia between 22 April 2023 and 7 April 2024. The 352-day expedition covered approximately 16,300 kilometres through 16 countries, linking the African mainland's southernmost and northernmost points. His account of that journey brought an international audience to a runner whose earlier challenges had already attracted an online following.",
+      "Cook's route into endurance sport began with a search for direction. He has described feeling dissatisfied with nights out and spontaneously running home to Worthing from Brighton. A friend then encouraged him to train for the Brighton Half Marathon. Completing it led to the Brighton Marathon and further running challenges. In his account, training offered something he had been missing: a routine, measurable progress and growing confidence in what he could achieve. These early Brighton appearances are part of his reported running story; their editions and finishing times have not been established here.",
+      "In 2019, Cook ran from the Asian side of Istanbul to London without a support crew, carrying essentials in a backpack and sleeping in a hammock. A contemporary interview records 66 days to London, covering roughly 71 marathon distances through 11 countries. He then continued home to Worthing, bringing the full journey to 68 days and approximately 73 marathon distances. The challenge supported The Running Charity and established his interest in journeys measured in weeks rather than hours. Those marathon equivalents describe cumulative distance, not entries in 71 or 73 separate organised races.",
+      "In 2020, Cook completed a marathon-distance challenge while pulling a car, in a reported nine hours and 56 minutes. The effort combined sustained running and pulling resistance, so its time belongs to that particular challenge rather than a conventional road-marathon comparison. Before Project Africa, he also documented a seven-day buried-alive endurance stunt. These unusual challenges helped establish the Hardest Geezer persona and an audience for his attempts to test physical and mental limits; the stunt is not a running result.",
+      "Project Africa took that ambition onto a different scale. Approximately 16,300 kilometres is more than 10,000 miles and about 386 standard marathon distances. Dividing the rounded distance by 352 gives roughly 46 kilometres per calendar day across about 50 weeks, including interruptions. That is a way to understand the accumulated workload, not a claim that every day had the same distance or that he never rested. Success required repeatedly recovering enough to continue while a support team managed the practical demands of an expedition across borders and changing terrain.",
+      "The journey passed through rainforest, mountains and the Sahara, exposing Cook and his team to very different conditions. Armed robbery, illness, injury and visa problems repeatedly disrupted their progress, while the Algerian border threatened the final approach to Tunisia. The physical challenge was inseparable from the uncertainty of keeping the expedition moving. His recollections also emphasise hospitality: he has spoken warmly about sharing a meal and staying with a Nigerian family. The people who helped along the route are part of the achievement, alongside the distances and setbacks.",
+      "Cook is widely credited as the first known person to run between Africa's southernmost and northernmost points. That precise route matters. The broader description of him as the first person to run the length of Africa was contested by the World Runners Association, which recognises Jesper Kenn Olsen's earlier Taba-to-Cape of Good Hope journey, completed in 2010. The association did not dispute Cook's claim for the southernmost-to-northernmost route. Recognising those different endpoints preserves the significance of his achievement and the history of earlier trans-African running.",
+      "His fame grew as people followed Project Africa while it was happening. Video episodes and social updates gave the journey a continuing story, with progress, setbacks and the finish unfolding in public. Steven Bartlett's publishing company describes Bartlett discovering Cook's updates during the first week of the expedition; their subsequent connection led to a Diary of a CEO appearance and a publishing relationship. By the finish in Tunisia, supporters had travelled to join him and international news coverage had taken the story beyond his existing online audience. The combination of sustained endurance, candid storytelling and a finish people could share explains much of his wider recognition.",
+      "Project Africa went on to raise more than £1 million for The Running Charity and Sandblast. The Running Charity uses running and ongoing support to help young people experiencing homelessness or complex needs. Cook worked for the organisation before the expedition and now supports it as an ambassador. Sandblast works with Saharawi communities through education, arts and cultural programmes and lists Cook as a patron from 2024. His fundraising gives the expedition an impact beyond the sporting accomplishment, supporting organisations with which he has maintained a continuing connection.",
+      "Cook also takes part in conventional road races. On 21 April 2024, just two weeks after finishing Project Africa, he completed the London Marathon in 4:25:40, a time confirmed in the organiser's finish-line report. At the 2026 London Marathon, he recorded 2:46:59 and discussed the result publicly after targeting 2:35. His 2026 time is listed as an unverified result on AthRecs. His progression in road racing adds another dimension to a career best known for long expeditions.",
+      "In 2025, Cook completed a run along the length of New Zealand in 73 days. This extended his expedition running beyond Africa and brought another sustained challenge through varied landscapes. The University of Chichester recognised his achievements with an Honorary Master of Sport at its 2025 graduation ceremony. His memoir first appeared in October 2024, with the paperback Mind over Miles following in July 2025, taking his story of endurance and personal change to readers as well as viewers.",
+      "Cook subsequently co-founded Hardest Adventures. Its origin story traces the idea to meeting his co-founder at the finish of Project Africa in Tunisia. The company combines group adventures with filmed missions, while his work with The Running Charity includes talks, support for coaches and opportunities for young people to experience adventure. Together, his running, books and community projects show how the visibility earned on the road has developed into a wider public role. Project Africa remains the achievement that connects these strands: almost a year of sustained effort made visible to people around the world.",
+    ],
+    headings: [
+      "",
+      "How Russ Cook started running",
+      "2019: running from Istanbul to London and Worthing",
+      "2020: a marathon while pulling a car",
+      "Project Africa: the scale of 352 days",
+      "Terrain, setbacks and the people along the way",
+      "Was he the first person to run across Africa?",
+      "How the Hardest Geezer became famous",
+      "Fundraising and charity work",
+      "London Marathon results in 2024 and 2026",
+      "New Zealand, his memoir and public recognition",
+      "Hardest Adventures and his continuing influence",
+    ],
+    mentions: [
+      {
+        text: "London Marathon",
+        url: "/races/london-marathon",
+      },
+    ],
+    links: [
+      {
+        label: "Hardest Adventures",
+        url: "https://www.hardestadventures.com/about-us",
+      },
+      {
+        label: "Mind over Miles — official book page",
+        url: "https://www.penguin.co.uk/books/467785/mind-over-miles-by-geezer-russ-cook-aka-hardest/9781529945935",
+      },
+    ],
+    questions: [
+      {
+        question: "Who is the Hardest Geezer?",
+        answer:
+          "The Hardest Geezer is Russ Cook, also known as Russell Cook, a British endurance runner and author from Worthing, West Sussex. He is best known for Project Africa, his 352-day run between Africa's southernmost and northernmost points.",
+      },
+      {
+        question: "How far did Russ Cook run in Africa?",
+        answer:
+          "He covered approximately 16,300 kilometres, or more than 10,000 miles, through 16 countries. That is about 386 standard marathon distances accumulated during one expedition.",
+      },
+      {
+        question: "When did the Hardest Geezer start and finish Project Africa?",
+        answer:
+          "Russ Cook began at Cape Agulhas, South Africa, on 22 April 2023 and finished at Ras Angela, Tunisia, on 7 April 2024. The expedition took 352 days.",
+      },
+      {
+        question: "Was Russ Cook the first person to run the length of Africa?",
+        answer:
+          "His first-known claim concerns running between Africa's southernmost and northernmost points. Earlier runners crossed Africa by different routes, including Jesper Kenn Olsen, whose Taba-to-Cape of Good Hope run finished in 2010.",
+      },
+      {
+        question: "What running challenges did Russ Cook complete before Africa?",
+        answer:
+          "His earlier story includes the Brighton Half Marathon and Brighton Marathon, a 2019 run from Istanbul to London and onward to Worthing, and a 2020 car-pulling marathon completed in a reported nine hours and 56 minutes.",
+      },
+      {
+        question: "Which charities did Project Africa support?",
+        answer:
+          "Project Africa went on to raise more than £1 million for The Running Charity and Sandblast. Their work supports young people experiencing homelessness or complex needs and Saharawi communities respectively.",
+      },
+      {
+        question: "What are Russ Cook's London Marathon times?",
+        answer:
+          "London Marathon Events confirmed 4:25:40 in 2024. His reported 2026 finish was 2:46:59; that entry remains unverified on AthRecs.",
+      },
+      {
+        question: "Did the Hardest Geezer run the length of New Zealand?",
+        answer: "Yes. Russ Cook completed his New Zealand expedition in 2025 in 73 days.",
+      },
+    ],
+    alternateName: ["Hardest Geezer", "The Hardest Geezer", "Russell Cook"],
+    sameAs: ["https://www.penguin.co.uk/authors/308688/russ-cook"],
+  },
+  {
     slug: "spencer-matthews-untapped",
     title: "Spencer Matthews biography, running records & UNTAPPED",
     description:
