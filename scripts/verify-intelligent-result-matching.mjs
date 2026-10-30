@@ -201,7 +201,17 @@ try {
   const a = await signup("matching-a@example.test"),
     b = await signup("matching-b@example.test");
   await sql`update "user" set "emailVerified"=true where id=${a.user.id} or id=${b.user.id}`;
-  await rpc("athrecs/athlete-account-api", "getMyAthleteAccount", undefined, a.token);
+  // A legacy account without a private profile must lack its registration name
+  // too: new registrations already supply a usable fallback for claiming.
+  await sql`update "user" set name='',"firstName"=null,"lastName"=null where id=${a.user.id}`;
+  const unnamed = await rpc(
+    "athrecs/athlete-account-api",
+    "getMyAthleteAccount",
+    undefined,
+    a.token,
+  );
+  assert.equal(unnamed.exists, false, "Missing-name fixture has no saved private profile");
+  assert.deepEqual(missingClaimIdentity(unnamed), ["name"]);
   const claim = () =>
     rpc(
       "athrecs/result-claims-api",
@@ -215,8 +225,9 @@ try {
       },
       a.token,
     );
-  await sql`update athlete_private_profiles set full_name='123' where user_id=${a.user.id}`;
   await assert.rejects(claim, /Before claiming/);
+  const registration = signupDetails("Synthetic Runner");
+  await sql`update "user" set name=${registration.name},"firstName"=${registration.firstName},"lastName"=${registration.lastName} where id=${a.user.id}`;
   const identity = {
     fullName: "Synthetic Runner",
     dateOfBirth: "1984-09-02",
