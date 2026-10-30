@@ -149,6 +149,12 @@ try {
     ),
   );
   assert(first.every((s) => !s.body.text.includes(otp) && !s.body.text.includes(result.token)));
+  assert(
+    first.every(
+      (s) => s.body.reply_to === email && s.body.text.includes(`Reference: signup/${id}`),
+    ),
+    "Each signup recipient gets the account reference and can reply to the registrant",
+  );
   assert(first.every((s) => !s.body.html.includes("<Athlete>")));
   const count = sends.length;
   await svc.notifyNewSignup(id);

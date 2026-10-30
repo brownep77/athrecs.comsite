@@ -13,6 +13,7 @@ type SignupEmail = {
 };
 type Delivery = {
   id: number;
+  user_id: string;
   recipient: string;
   signup_name: string;
   signup_email: string;
@@ -52,10 +53,13 @@ function emailFor(row: Delivery): SignupEmail {
     timeZoneName: "short",
   });
   const name = row.signup_name.replace(/\s+/g, " ").trim().slice(0, 200) || "Not supplied";
-  const text = `Someone has just signed up to AthRecs.\n\nName: ${name}\nEmail: ${row.signup_email}\nSigned up: ${joined}\nEmail verification: ${row.email_verified ? "Verified" : "Pending"}\n\nThis alert confirms account creation. Any profile details, results or race corrections they submit are sent in separate notifications with the submitted information.\n\nView signups: ${SIGNUPS_URL}`;
+  const text = `Someone has just signed up to AthRecs.\n\nReference: signup/${row.user_id}\nName: ${name}\nEmail: ${row.signup_email}\nSigned up: ${joined}\nEmail verification: ${row.email_verified ? "Verified" : "Pending"}\n\nThis alert confirms account creation. Any profile details, results or race corrections they submit are sent in separate notifications with the submitted information.\n\nView signups: ${SIGNUPS_URL}`;
   return {
     from: "paul@athrecs.com",
     to: [row.recipient],
+    ...(/^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/.test(row.signup_email)
+      ? { reply_to: row.signup_email }
+      : {}),
     subject:
       row.signup_email.toLowerCase() === "paul@athrecs.com"
         ? "[FICTIONAL TEST] New AthRecs signup"
