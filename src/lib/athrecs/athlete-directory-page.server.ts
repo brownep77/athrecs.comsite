@@ -1,3 +1,4 @@
+import { athleteBiographyReviews } from "../../data/athlete-biography-reviews.ts";
 import { profileSportEvidencePredicateSql } from "./profile-sport-evidence";
 import type { Sql } from "../db";
 import type { AthleteDirectory, AthleteDirectorySearch } from "./athlete-directory";
@@ -94,6 +95,19 @@ export async function readAthleteDirectoryPage(
     );
     if (probe.length < probeLimit) sportCandidates = [...new Set(probe.map((row) => row.id))];
   }
+  // Search only aliases from the exact biography currently approved for public display.
+  // Raw source aliases can be private and must never become discovery evidence.
+  const fold = (value: string) =>
+    value
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  const aliasQuery = fold(search.q?.trim() ?? "");
+  const aliasReviews = aliasQuery
+    ? athleteBiographyReviews
+        .filter((review) => review.alternateName?.some((alias) => fold(alias).includes(aliasQuery)))
+        .map((review) => ({ slug: review.slug, biography: review.paragraphs.join("\n\n") }))
+    : [];
   const values = [
     search.q || null,
     athleteNumber,
@@ -104,6 +118,7 @@ export async function readAthleteDirectoryPage(
     search.sport || null,
     sportCandidates,
     pageSize,
+    JSON.stringify(aliasReviews),
   ];
   const sourcePermission = `(not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
     or exists (select 1 from network_audit_log approval where approval.action='athlete.history_admin_published'
@@ -123,7 +138,20 @@ export async function readAthleteDirectoryPage(
     ) or (${publicProfileSportsSql}) @> array[$7]::text[])`;
   const selectedJoin = `${pattern ? "join search_candidates selected on selected.id=a.id" : ""}
     ${sportCandidates !== null ? "join unnest($8::int[]) sport_member(id) on sport_member.id=a.id" : ""}`;
-  const candidateCte = `search_candidates as materialized (
+  const candidateCte = `published_alias_matches as materialized (
+    select a.id from athletes a
+    join jsonb_to_recordset($10::jsonb) reviewed(slug text, biography text)
+      on reviewed.slug=a.slug and reviewed.biography=a.bio
+    where a.profile_visibility='public' and a.bio<>''
+      and not exists(select 1 from athlete_account_links l where l.athlete_id=a.id)
+      and exists(select 1 from network_audit_log approval
+        where approval.action='athlete.biography_admin_published'
+          and approval.entity_type='athlete' and approval.entity_id=a.id::text
+          and approval.after_value->>'athleteId'=a.id::text
+          and approval.after_value->>'biography'=a.bio)
+  ), search_candidates as materialized (
+    select id from published_alias_matches
+    union
     select a.id from athletes a where $6::text is not null
       and (a.profile_visibility='public' or a.profile_type='Public figure')
       and ${documentSql} like athlete_directory_search_fold($6)
@@ -138,7 +166,7 @@ export async function readAthleteDirectoryPage(
       where i.number=($2::text)::bigint and l.status='active'
   )`;
   const matches = `($1::text is null or (
-      (btrim(athlete_directory_search_fold($1))<>'' and position(athlete_directory_search_fold($1) in athlete_directory_search_fold(concat_ws(' ',a.display_name,${clubSql},${citySql},${publicCountrySql},a.profile_roles)))>0
+      (a.id in (select id from published_alias_matches) or btrim(athlete_directory_search_fold($1))<>'' and position(athlete_directory_search_fold($1) in athlete_directory_search_fold(concat_ws(' ',a.display_name,${clubSql},${citySql},${publicCountrySql},a.profile_roles)))>0
         or ($2::text is not null and exists (select 1 from athlete_resolved_ids i where i.athlete_id=a.id
           and (i.athlete_number::text=$2 or i.source_number::text=$2))))))
     and ($3::text is null or ((${countrySql})=$3 and (${publicCountrySql})=$3))
