@@ -30,7 +30,7 @@ export function DiamondLeagueGuide() {
         </h2>
         <p className="mt-2 text-sm leading-6 text-muted">
           15 meetings from Doha to the Zurich final. Meeting dates are local; competition and TV
-          start times are still to be announced.
+          start times will be shown when verified.
         </p>
       </div>
       <details>

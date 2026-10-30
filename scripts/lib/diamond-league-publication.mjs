@@ -49,7 +49,7 @@ export async function publishDiamondLeagueEditions(sql, publishing, meetings) {
           distanceKm: 0,
           status: "TBC",
           source: meeting.sourceUrl,
-          notes: `Diamond League 2027 calendar reviewed 30 October 2026. ${meeting.note ?? ""} Start time not yet announced.`,
+          notes: `Diamond League 2027 calendar reviewed 30 October 2026. ${meeting.note ?? ""} Start time not yet verified.`,
         });
     }
     if (!editions.length) return { added: 0 };
