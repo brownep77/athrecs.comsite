@@ -2,6 +2,76 @@
 // A matching slug alone never publishes this text: exact-text approval is required.
 export const athleteBiographyReviews = [
   {
+    slug: "chelsea-clinton-wmm-d9a12c39-5ec7-11ed-9b3c-02848444c773",
+    title: "Chelsea Clinton marathon results, Boston time & biography",
+    description:
+      "Chelsea Clinton’s running biography and marathon history: New York City, Boston 3:40:52 and Chicago, with race dates, results and clear verification labels.",
+    paragraphs: [
+      "Chelsea Clinton is an American marathon runner, author and vice chair of the Clinton Foundation. Her recorded running history includes the New York City Marathon, Boston Marathon and Chicago Marathon. Her fastest reported marathon is 3:40:52 at Boston on 20 April 2026. She is the daughter of former US president Bill Clinton and former secretary of state Hillary Rodham Clinton.",
+      "Born Chelsea Victoria Clinton in Little Rock, Arkansas, on 27 February 1980, she studied at Stanford before completing postgraduate degrees at Oxford and Columbia. Alongside her writing and foundation work, she teaches at Columbia University's Mailman School of Public Health. She began running regularly at Stanford and made her marathon debut after turning 40.",
+      "Clinton's first New York City Marathon in 2021 ended in 3:59:09, taking her below four hours on debut. She ran in support of City Harvest, the New York food-rescue charity. Her return in 2022 brought a 4:20:34 finish. She subsequently improved to 3:45:51 in 2024 and 3:44:22 in 2025.",
+      "Her 2025 New York race showed particularly consistent pacing: she reached halfway in 1:52:27 and ran the second half in 1:51:55. That is a negative split of 32 seconds, meaning the second half was quicker than the first. It was also 14 minutes and 47 seconds faster than her 2021 debut.",
+      "On Monday 20 April 2026, Clinton completed her first Boston Marathon in 3:40:52. Bill and Hillary greeted her at the finish on Boylston Street. Contemporary reporting described her initial entry name as Margaret Smith and said the results were subsequently updated to Chelsea Clinton. Hillary attended as a supporter; the Boston performance belongs to Chelsea.",
+      "Reports from the Boston finish also describe police officers running alongside Clinton and receiving medals from her parents. The accounts reviewed for this biography do not name those officers. They do not establish individual official results or identify the officers as Secret Service agents, so no names or separate athlete performances are attributed to them here.",
+      "On Sunday 11 October 2026, Clinton completed her first Chicago Marathon in a reported 3:47:55. Chicago added another major city marathon to her running history after New York and Boston. Her parents were again present at the finish.",
+      "This profile brings together six identified marathon finishes through October 2026. It is a documented selection, not a confirmed lifetime total. Verification labels beside the individual results show which performances have been checked against an official result row; a published biography does not itself verify a race time. Additional shorter-distance races remain open to research.",
+    ],
+    headings: [
+      "",
+      "Background and the start of her running",
+      "New York City Marathon: 2021 to 2025",
+      "A negative split in New York",
+      "Boston Marathon 2026: 3:40:52",
+      "The police officers at the Boston finish",
+      "Chicago Marathon 2026",
+      "Race-history coverage and verification",
+    ],
+    mentions: [
+      {
+        text: "New York City Marathon",
+        url: "/races/new-york-city-marathon",
+      },
+      {
+        text: "Boston Marathon",
+        url: "/races/boston-marathon",
+      },
+      {
+        text: "Chicago Marathon",
+        url: "/races/chicago-marathon",
+      },
+    ],
+    links: [],
+    questions: [
+      {
+        question: "Did Hillary Clinton run the 2026 Boston Marathon?",
+        answer:
+          "Chelsea Clinton ran the race on 20 April 2026, finishing in 3:40:52. Her parents, Hillary and Bill Clinton, greeted her at the finish.",
+      },
+      {
+        question: "What is Chelsea Clinton's fastest reported marathon time?",
+        answer:
+          "Her fastest reported marathon is 3 hours, 40 minutes and 52 seconds at the 2026 Boston Marathon. The result's verification label is shown in her race history.",
+      },
+      {
+        question: "What are Chelsea Clinton's New York City Marathon times?",
+        answer:
+          "Her reported New York City Marathon finishes are 3:59:09 in 2021, 4:20:34 in 2022, 3:45:51 in 2024 and 3:44:22 in 2025.",
+      },
+      {
+        question: "Did Chelsea Clinton run the Chicago Marathon?",
+        answer:
+          "Yes. Chelsea Clinton completed the Chicago Marathon on 11 October 2026 in a reported 3:47:55.",
+      },
+      {
+        question: "Were the police officers who ran with Chelsea Clinton at Boston named?",
+        answer:
+          "The reports reviewed by AthRecs describe police officers receiving medals but do not name them or establish their individual official race results.",
+      },
+    ],
+    alternateName: ["Chelsea Victoria Clinton"],
+    sameAs: ["https://www.clintonlibrary.gov/research/clinton-biographies"],
+  },
+  {
     slug: "russ-cook",
     title: "Russ Cook (Hardest Geezer): biography, Africa run & results",
     description:
