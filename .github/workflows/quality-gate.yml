@@ -85,6 +85,9 @@ jobs:
       - name: Verify World Athletics refresh preservation
         run: node scripts/verify-world-athletics-refresh.mjs
 
+      - name: Verify Diamond League dates and country coverage
+        run: npm run verify:diamond-league
+
       - name: Verify public catalogue source policy and reviewed duplicates
         run: node --experimental-strip-types scripts/verify-public-catalogue-content.mjs
 

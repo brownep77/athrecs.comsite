@@ -72,6 +72,8 @@ import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
 import { racePageMetadata, raceEditionStart } from "@/lib/athrecs/race-page-metadata";
 import { publicOrganiserName } from "@/lib/athrecs/seo";
 import { reviewedRacePage } from "@/data/race-page-reviews";
+import { diamondLeagueMeetingForSlug } from "@/data/diamond-league";
+import { DiamondLeagueTv } from "@/components/discovery/DiamondLeagueGuide";
 
 type EditionRow = {
   id: number;
@@ -268,6 +270,7 @@ export function RacePageContent({
   athleteLinks?: Awaited<ReturnType<typeof getEventAthleteLinks>>;
 }) {
   const { event, groups, distances, upcoming, past, related } = data;
+  const diamondLeagueMeeting = diamondLeagueMeetingForSlug(event.slug);
   const raceBiography = raceSearchContent(data).biography;
   const isRunningEvent = event.sport === "Running" || event.sport === "Parkrun";
   const qualification = raceQualifications[event.slug];
@@ -852,6 +855,8 @@ export function RacePageContent({
           county={event.county}
         />
       )}
+
+      {diamondLeagueMeeting ? <DiamondLeagueTv meeting={diamondLeagueMeeting} /> : null}
 
       <EditionResultsLinks
         items={pastWithResults}
