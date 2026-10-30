@@ -2,7 +2,8 @@ import { timingSafeEqual } from "node:crypto";
 import { dbSource, type Sql } from "@/lib/db";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { authEmailConfigured, sendAthrecsAuthEmail } from "@/lib/auth/email.server";
-import { staffRecipients } from "./result-claim-email.server";
+import { staffNotificationRecipients } from "@/lib/auth/staff-notifications.server";
+import { claimNotificationRecipients } from "./result-claim-email.server";
 
 type Email = Parameters<typeof sendAthrecsAuthEmail>[0];
 
@@ -11,7 +12,6 @@ export function claimAlertReadiness() {
     production: process.env.VERCEL_ENV === "production" && !IS_RUNRECS_SITE,
     persistent: dbSource === "neon",
     emailConfigured: authEmailConfigured(),
-    recipientCount: new Set([...staffRecipients(), "info@athrecs.com"]).size,
     retriesConfigured: Boolean(process.env.CRON_SECRET?.trim()),
   };
 }
@@ -71,20 +71,28 @@ async function prepareDeliveries(sql: Sql, claimId?: number) {
       claim_id: number;
       summary: string;
       event_kind: "ownership_conflict" | "claim_completed";
+      synthetic: boolean;
     }>`
-      select alert.claim_id, alert.summary, alert.event_kind from result_claim_alerts alert
+      select alert.claim_id, alert.summary, alert.event_kind,
+        athrecs_is_test_user(claim.claimant_user_id) or exists(
+          select 1 from athrecs_test_athletes t where t.athlete_id=claim.athlete_id
+        ) as synthetic
+      from result_claim_alerts alert join result_claims claim on claim.id=alert.claim_id
       where (${claimId ?? null}::bigint is null or alert.claim_id = ${claimId ?? null})
         and not exists (select 1 from result_claim_alert_deliveries delivery
           where delivery.claim_id = alert.claim_id)
-      order by alert.created_at limit 10 for update skip locked
+      order by alert.created_at limit 10 for update of alert skip locked
     `;
     for (const row of rows) {
       const recipients =
-        row.event_kind === "claim_completed" ? ["info@athrecs.com"] : staffRecipients();
+        row.event_kind === "claim_completed"
+          ? await staffNotificationRecipients(tx, "results", row.synthetic)
+          : await claimNotificationRecipients(tx, row.synthetic);
       const staffHost = process.env.ATHRECS_STAFF_HOST?.trim() || "update.athrecs.com";
       for (const to of recipients) {
         const payload: Email = {
           to,
+          testOnly: row.synthetic,
           subject:
             row.event_kind === "claim_completed"
               ? `ATHRECS result claimed — claim #${row.claim_id}`
@@ -111,7 +119,7 @@ async function prepareDeliveries(sql: Sql, claimId?: number) {
 
 export async function deliverClaimAlerts(sql: Sql, claimId?: number) {
   const ready = claimAlertReadiness();
-  if (!ready.production || !ready.persistent || !ready.emailConfigured || !ready.recipientCount)
+  if (!ready.production || !ready.persistent || !ready.emailConfigured)
     return { sent: 0, failed: 0, paused: true };
   // Pick up unresolved historical conflicts too, including a request interrupted
   // before immediate delivery. Do not alert merely because two names match.
@@ -193,5 +201,13 @@ export async function claimAlertSummary(sql: Sql) {
         select 1 from result_claim_alert_deliveries delivery where delivery.claim_id = alert.claim_id
       )) as awaiting_setup
   `;
-  return { ...claimAlertReadiness(), ...rows[0] };
+  const [pendingRecipients, completedRecipients] = await Promise.all([
+    claimNotificationRecipients(sql),
+    staffNotificationRecipients(sql, "results"),
+  ]);
+  return {
+    ...claimAlertReadiness(),
+    recipientCount: new Set([...pendingRecipients, ...completedRecipients]).size,
+    ...rows[0],
+  };
 }

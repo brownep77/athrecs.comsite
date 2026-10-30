@@ -2,6 +2,138 @@
 // A matching slug alone never publishes this text: exact-text approval is required.
 export const athleteBiographyReviews = [
   {
+    slug: "spencer-matthews-untapped",
+    title: "Spencer Matthews biography, running records & UNTAPPED",
+    description:
+      "Spencer Matthews’ running biography: 2:49:46 Berlin marathon, Jungle Ultra podium, three Guinness World Records, Project Se7en and UNTAPPED podcast guests.",
+    paragraphs: [
+      "Spencer Matthews is a British endurance athlete, marathon runner, ultrarunner and host of UNTAPPED with Spencer Matthews. His achievements include a 2:49:46 marathon at Berlin in 2026, third place at the 2023 Jungle Ultra, and three Guinness World Records across desert running and long-distance triathlon. He combines his own sporting challenges with conversations about training, recovery and performance.",
+      "Matthews first became widely known through Made in Chelsea and later founded the alcohol-free spirits brand CleanCo. Endurance sport has become a major part of his public work, from multi-stage ultramarathons to ambitious fundraising challenges. His experience as an improving runner also shapes the questions he brings to UNTAPPED.",
+      "In July 2021, Matthews completed the 100 km Race to the Stones in 16:15:04. Later that year, he finished the Marathon des Sables in Morocco in 39:49:44, placing 69th overall. He achieved a podium finish at the five-stage Jungle Ultra in Peru in 2023, finishing third overall in 39:05:00. His wider race history includes the 2022 Ice Ultra in Sweden, where he completed two stages before withdrawing and was recorded as a non-finisher.",
+      "From 29 July to 27 August 2024, Matthews completed 30 marathon distances on sand in Jordan in 30 consecutive days. The challenge earned the Guinness World Records title for the most marathon distances completed on sand in one month by a male runner. He undertook the challenge in support of Global's Make Some Noise. These consecutive desert efforts were an endurance record attempt, distinct from a conventional road marathon.",
+      "Project Se7en extended that ambition into triathlon. Between 13 November and 4 December 2025, Matthews completed a 140.6-mile triathlon on each of the seven continents in 21 days, 9 hours and 18 minutes. The route took him through London, Arizona, Cape Town, Perth, Dubai, Rio de Janeiro and Antarctica. The overall challenge earned a Guinness record, while his Antarctic triathlon on 3–4 December, completed in 28:51:11, earned another. The project raised awareness and funds for James' Place.",
+      "His road-running progression includes 3:07:25 at the 2025 London Marathon and 3:06:14 at Berlin that September. He broke three hours for the first time at the Tokyo Marathon in March 2026, then ran 3:00:04 in London the following month. At The Big Half in London on 6 September 2026, he recorded 1:23:05 for the half marathon. His 2:49:46 at the Berlin Marathon on 27 September 2026 became his marathon personal best, as he continued his pursuit of a sub-2:45 finish.",
+      "UNTAPPED with Spencer Matthews launched in January 2025 with the team behind High Performance. The show explores running, endurance, training and the habits behind sporting performance. Guests include Paula Radcliffe, Holly Archer, Sir Mo Farah, Alistair Brownlee, Stephen Scullion, Georgia Hunter Bell, Amanal Petros and Iwan Thomas. Its wider interviews include climber Alex Honnold, while physiologist Oli Patrick joins Matthews for discussions about subjects such as sleep, training zones and recovery. The guest list connects British and international elite sport with the questions faced by everyday runners.",
+      "Holly Archer gives the podcast a particular connection to East Anglian running. A Cambridge & Coleridge athlete, she won the women's race at Run Norwich in Norfolk in 2025 and the 2025 Ipswich Half Marathon in Suffolk, where she ran 1:15:55. Her UNTAPPED appearance brings that regional racing background into a wider discussion of performance and training.",
+      "Matthews shares his training and endurance challenges on Instagram as @spencermatthews. The podcast's Instagram account is @untapped.podcast, and episodes are available through the official UNTAPPED page and podcast feed.",
+    ],
+    headings: [
+      "",
+      "From television and business to endurance sport",
+      "Marathon des Sables and Jungle Ultra podium",
+      "30 desert marathons in 30 days",
+      "Project Se7en and Antarctic triathlon records",
+      "Marathon times and half-marathon progress",
+      "UNTAPPED podcast and notable guests",
+      "Connections to Norfolk, Suffolk and Cambridgeshire",
+      "Follow Spencer Matthews and UNTAPPED",
+    ],
+    mentions: [
+      {
+        text: "Paula Radcliffe",
+        url: "/athletes/paula-radcliffe",
+      },
+      {
+        text: "Holly Archer",
+        url: "/athletes/holly-archer",
+      },
+      {
+        text: "Mo Farah",
+        url: "/athletes/mo-farah",
+      },
+      {
+        text: "Alistair Brownlee",
+        url: "/athletes/alistair-brownlee-wa-14367424",
+      },
+      {
+        text: "Stephen Scullion",
+        url: "/athletes/stephen-scullion",
+      },
+      {
+        text: "Georgia Hunter Bell",
+        url: "/athletes/georgia-hunter-bell-wa-14329797",
+      },
+      {
+        text: "Race to the Stones",
+        url: "/races/race-to-the-stones",
+      },
+      {
+        text: "Marathon des Sables",
+        url: "/races/utmb-index-192",
+      },
+      {
+        text: "London Marathon",
+        url: "/races/london-marathon",
+      },
+      {
+        text: "Tokyo Marathon",
+        url: "/races/tokyo-marathon",
+      },
+      {
+        text: "The Big Half",
+        url: "/races/vitality-big-half",
+      },
+      {
+        text: "Berlin Marathon",
+        url: "/races/berlin-marathon",
+      },
+      {
+        text: "Run Norwich",
+        url: "/races/run-norwich",
+      },
+      {
+        text: "Ipswich Half Marathon",
+        url: "/races/ipswich-half-marathon",
+      },
+    ],
+    links: [
+      {
+        label: "Spencer Matthews on Instagram",
+        url: "https://www.instagram.com/spencermatthews/",
+      },
+      {
+        label: "Official UNTAPPED podcast",
+        url: "https://www.thehighperformancepodcast.com/untapped",
+      },
+      {
+        label: "Listen to UNTAPPED episodes",
+        url: "https://shows.acast.com/untapped",
+      },
+      {
+        label: "UNTAPPED on Instagram",
+        url: "https://www.instagram.com/untapped.podcast/",
+      },
+    ],
+    questions: [
+      {
+        question: "What is Spencer Matthews' marathon best?",
+        answer:
+          "His recorded marathon personal best is 2:49:46 at the Berlin Marathon on 27 September 2026. He first broke three hours at Tokyo earlier that year.",
+      },
+      {
+        question: "What Guinness records has Spencer Matthews achieved?",
+        answer:
+          "He completed 30 marathon distances on sand in one month in 2024. In 2025, he set records for completing a 140.6-mile triathlon on seven continents in 21 days, 9 hours and 18 minutes, and for an Antarctic 140.6-mile triathlon in 28:51:11.",
+      },
+      {
+        question: "Who has appeared on UNTAPPED with Spencer Matthews?",
+        answer:
+          "Guests include Paula Radcliffe, Holly Archer, Mo Farah, Alistair Brownlee, Stephen Scullion, Georgia Hunter Bell, Amanal Petros, Iwan Thomas and Alex Honnold. Physiologist Oli Patrick also appears on the show.",
+      },
+      {
+        question: "Did Spencer Matthews finish on the Jungle Ultra podium?",
+        answer:
+          "Yes. He finished third overall at the 2023 Jungle Ultra in Peru, recording 39:05:00 across five stages.",
+      },
+    ],
+    sameAs: ["https://www.instagram.com/spencermatthews/"],
+    podcast: {
+      name: "UNTAPPED with Spencer Matthews",
+      url: "https://www.thehighperformancepodcast.com/untapped",
+      datePublished: "2025-01-27",
+    },
+  },
+  {
     slug: "rich-roll",
     title: "Rich Roll biography, podcast & endurance achievements",
     description:

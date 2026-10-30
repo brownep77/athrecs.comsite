@@ -1,4 +1,5 @@
 // Real auth endpoints and disposable Postgres-compatible DB. Every email is intercepted.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -25,7 +26,7 @@ globalThis.fetch = async (input, init) => {
       body.to.every(
         (to) =>
           to.endsWith("@example.test") ||
-          ["paul@athrecs.com", "paultwbrowne@gmail.com"].includes(to),
+          ["paul@athrecs.com", "paultwbrowne@gmail.com", "support@athrecs.com"].includes(to),
       ),
     );
     sends.push({ body, key: new Headers(init.headers).get("Idempotency-Key") });
@@ -57,12 +58,33 @@ try {
   const database = await server.ssrLoadModule("/src/lib/db.ts");
   db = await database.getPglite();
   const sql = await database.getSql();
+  assert(
+    !(await sql`select recipient from athrecs_notification_recipients('support')`).some(
+      (row) => row.recipient === "support@athrecs.com",
+    ),
+    "Unconfirmed department mailboxes start disabled",
+  );
+  await sql`insert into staff_notification_routes(category,recipient,enabled)
+    values('support','support@athrecs.com',true)
+    on conflict(category,recipient) do update set enabled=excluded.enabled`;
+  const recipients = (
+    await sql`select recipient from athrecs_notification_recipients('support') order by recipient`
+  ).map((row) => row.recipient);
+  assert.deepEqual(recipients, [
+    "paul@athrecs.com",
+    "paultwbrowne@gmail.com",
+    "support@athrecs.com",
+  ]);
   const actual = await server.ssrLoadModule("/src/lib/auth/signup-alerts.server.ts");
   const connection = { dbSource: "neon", getSql: async () => sql };
   const scope = { IS_RUNRECS_SITE: false };
+  const notifications = load("src/lib/auth/staff-notifications.server.ts", {
+    "@/lib/db": connection,
+  });
   const svc = load("src/lib/auth/signup-alerts.server.ts", {
     "@/lib/db": connection,
     "@/lib/site-scope": scope,
+    "./staff-notifications.server": notifications,
   });
   // Use the identical notifier with an injected disposable database connection.
   // The actual auth hook is exercised separately by the real HTTP signup below.
@@ -83,16 +105,16 @@ try {
     "Requesting a code is not a signup",
   );
   const otp = sends.at(-1).body.text.match(/\b\d{6}\b/)[0];
-  r = await post("sign-in/email-otp", { email, otp, name: "Synthetic <Athlete>" });
+  r = await post("sign-in/email-otp", { email, otp, ...signupDetails("Synthetic <Athlete>") });
   assert.equal(r.status, 200, await r.clone().text());
   const result = await r.json();
   const id = result.user.id;
   let rows =
     await sql`select * from signup_alert_deliveries where user_id=${id} order by recipient`;
-  assert.equal(rows.length, 2);
+  assert.equal(rows.length, recipients.length);
   assert.deepEqual(
     rows.map((x) => x.recipient),
-    ["paul@athrecs.com", "paultwbrowne@gmail.com"],
+    recipients,
   );
   assert(rows.every((x) => x.email_verified));
   // Preview/local safeguards remain active even when provider keys exist.
@@ -110,9 +132,12 @@ try {
   failRecipient = "paultwbrowne@gmail.com";
   await svc.notifyNewSignup(id);
   rows = await sql`select * from signup_alert_deliveries where user_id=${id} order by recipient`;
-  assert(rows[0].sent_at && !rows[1].sent_at, "One recipient failing does not block the other");
+  assert(
+    rows.every((row) => Boolean(row.sent_at) === (row.recipient !== failRecipient)),
+    "One recipient failing does not block the other recipients, including support",
+  );
   const first = sends.filter((s) => s.key?.startsWith("athrecs-signup-alert-"));
-  assert.equal(first.length, 2);
+  assert.equal(first.length, recipients.length);
   assert(
     first.every(
       (s) => s.body.from === "paul@athrecs.com" && s.body.subject === "New AthRecs signup",
@@ -124,6 +149,12 @@ try {
     ),
   );
   assert(first.every((s) => !s.body.text.includes(otp) && !s.body.text.includes(result.token)));
+  assert(
+    first.every(
+      (s) => s.body.reply_to === email && s.body.text.includes(`Reference: signup/${id}`),
+    ),
+    "Each signup recipient gets the account reference and can reply to the registrant",
+  );
   assert(first.every((s) => !s.body.html.includes("<Athlete>")));
   const count = sends.length;
   await svc.notifyNewSignup(id);
@@ -139,7 +170,7 @@ try {
   );
   assert.equal(
     (
-      await sql`select count(*)::int n from athlete_messages where contact in ('paul@athrecs.com','paultwbrowne@gmail.com')`
+      await sql`select count(*)::int n from athlete_messages where contact=any(${recipients}::text[])`
     )[0].n,
     0,
     "Internal alerts do not enter athlete conversations",
@@ -151,14 +182,14 @@ try {
   assert.equal(r.status, 200, await r.text());
   assert.equal(
     (await sql`select count(*)::int n from signup_alert_deliveries where user_id=${id}`)[0].n,
-    2,
+    recipients.length,
     "Repeat sign-in does not create another signup notification",
   );
   await sql`update "user" set name='Changed Name' where id=${id}`;
   assert.equal(
     (await sql`select count(*)::int n from signup_alert_deliveries where user_id=${id}`)[0].n,
-    2,
-    "Profile edits do not notify",
+    recipients.length,
+    "Changing an account name does not create another signup notification",
   );
   await assert.rejects(() =>
     sql.transaction(async (tx) => {
@@ -192,7 +223,7 @@ try {
     (
       await sql`select count(*)::int n from signup_alert_deliveries where user_id='signup-failure' and needs_review`
     )[0].n,
-    2,
+    recipients.length,
   );
   failAll = false;
   scope.IS_RUNRECS_SITE = true;
@@ -207,7 +238,7 @@ try {
   const cron = await fetch(origin + "/api/signup-alerts");
   assert.equal(cron.status, 401);
   console.log(
-    "PASS: real OTP signup queues exactly two alerts; immediate notifier, sender/recipients, safe content, independent retry, concurrency, unchanged idempotency payload, repeat login, rollback, outage survival, expired retry review, private history isolation, preview/sibling guards and cron authorization. No real emails sent.",
+    "PASS: real OTP signup queues category-routed support and owner alerts; immediate notifier, sender/recipients, safe content, independent retry, concurrency, unchanged idempotency payload, repeat login, rollback, outage survival, expired retry review, private history isolation, preview/sibling guards and cron authorization. No real emails sent.",
   );
 } finally {
   globalThis.fetch = fetchOriginal;

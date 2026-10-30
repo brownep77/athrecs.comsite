@@ -43,7 +43,8 @@ const CURRENT_DORNEY_REFRESH_CHECKED_AT = "2026-10-23";
 const CURRENT_GREAT_SCOTTISH_REFRESH_CHECKED_AT = "2026-10-24";
 const CURRENT_START_AND_DISCOVERY_CHECKED_AT = "2026-10-25";
 const PREVIOUS_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-28";
-const CURRENT_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-29";
+const PRIOR_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-29";
+const CURRENT_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-30";
 const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT = "2026-10-28";
@@ -2792,7 +2793,7 @@ const packageSource = await fs.readFile(new URL("../package.json", import.meta.u
 const startCheckpoint = JSON.parse(
   await fs.readFile(
     new URL(
-      "../docs/fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-29-checkpoint.json",
+      "../docs/fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-30-checkpoint.json",
       import.meta.url,
     ),
     "utf8",
@@ -2834,13 +2835,16 @@ assert(
 assert.deepEqual(
   startCheckpoint.window,
   {
-    from: "2026-10-29",
-    through: "2027-01-29",
+    from: "2026-10-30",
+    through: "2027-01-30",
     rule: "Three calendar months inclusive; month-end clamped.",
   },
   "The start-time checkpoint lost the required inclusive three-calendar-month window",
 );
-assert.equal(startCheckpoint.records.length, 271, "The start-time checkpoint is incomplete");
+assert.equal(startCheckpoint.records.length, 284, "The start-time checkpoint is incomplete");
+assert.equal(startCheckpoint.sourceSnapshot.liveRecordCount, 282);
+assert.equal(startCheckpoint.sourceSnapshot.pendingSeedCount, 1);
+assert.equal(startCheckpoint.sourceSnapshot.invalidatedResearchCount, 1);
 assert.equal(
   new Set(startCheckpoint.records.map((record) => record.key)).size,
   startCheckpoint.records.length,
@@ -2860,6 +2864,7 @@ assert(
         "2026-10-26",
         "2026-10-27",
         PREVIOUS_ROLLING_START_REVIEW_CHECKED_AT,
+        PRIOR_ROLLING_START_REVIEW_CHECKED_AT,
         CURRENT_ROLLING_START_REVIEW_CHECKED_AT,
       ].includes(record.checkedOn) &&
       ["Europe/London", "Europe/Dublin"].includes(record.timeZone),
@@ -2878,7 +2883,7 @@ assert(
 const reviewedOnCurrentRun = startCheckpoint.records.filter(
   (record) => record.checkedOn === CURRENT_ROLLING_START_REVIEW_CHECKED_AT,
 );
-assert.equal(reviewedOnCurrentRun.length, 1, "The due 29 October start-review batch is incomplete");
+assert.equal(reviewedOnCurrentRun.length, 17, "The due 30 October start-review batch is incomplete");
 assert(
   reviewedOnCurrentRun.every(
     (record) =>
@@ -2894,12 +2899,37 @@ const derwentwaterStartReview = startCheckpoint.records.find(
 );
 assert.equal(derwentwaterStartReview?.reviewStatus, "confirmed");
 assert.equal(derwentwaterStartReview?.localTime, "12:00");
-assert.equal(derwentwaterStartReview?.retryOn, "2026-10-30");
+assert.equal(derwentwaterStartReview?.checkedOn, CURRENT_ROLLING_START_REVIEW_CHECKED_AT);
+assert.equal(derwentwaterStartReview?.retryOn, null);
 assert.match(
   derwentwaterStartReview?.sourceOutcome ?? "",
-  /official event homepage.*Race Information page states a 12:00 start/i,
+  /official event homepage.*Race Information page still states a 12:00 start/i,
   "Derwentwater must retain its current official 12:00 evidence",
 );
+const loggerheadsStartReview = startCheckpoint.records.find(
+  (record) => record.key === "loggerheads-half-marathon|2026-11-28|Half Marathon",
+);
+assert.equal(loggerheadsStartReview?.reviewStatus, "unresolved");
+assert.equal(loggerheadsStartReview?.localTime, null);
+assert.equal(loggerheadsStartReview?.retryOn, "2026-11-02");
+assert.match(loggerheadsStartReview?.sourceOutcome ?? "", /08:15.*08:45/i);
+for (const [key, localTime] of [
+  ["lee-valley-velo-park-january-2027|2027-01-30|Half", "09:30"],
+  ["lee-valley-velo-park-january-2027|2027-01-30|10mi", "09:45"],
+  ["queen-elizabeth-off-road-half-marathon-march|2027-01-30|Half", "09:30"],
+  ["winter-lucky-dip-run-2027|2027-01-30|Half", "09:00"],
+]) {
+  const boundaryReview = startCheckpoint.records.find((record) => record.key === key);
+  assert.equal(boundaryReview?.reviewStatus, "confirmed", `${key} lost its boundary review`);
+  assert.equal(boundaryReview?.localTime, localTime, `${key} lost its current-edition start`);
+  assert.equal(boundaryReview?.checkedOn, CURRENT_ROLLING_START_REVIEW_CHECKED_AT);
+}
+const paganStartReview = startCheckpoint.records.find(
+  (record) => record.key === "pagan-midwinter-half-marathon-2027|2027-01-30|Half",
+);
+assert.equal(paganStartReview?.reviewStatus, "invalidated");
+assert.equal(paganStartReview?.localTime, null);
+assert.match(paganStartReview?.sourceOutcome ?? "", /well over 14 miles/i);
 const stAnnesStartReview = startCheckpoint.records.find(
   (record) => record.key === "st-annes-10-mile-run-2027|2027-01-24|10mi",
 );

@@ -149,6 +149,7 @@
     "verify:athlete-messages": "node scripts/verify-athlete-messages.mjs",
     "verify:athlete-inbox": "node scripts/verify-athlete-inbox.mjs",
     "verify:signup-alerts": "node scripts/verify-signup-alerts.mjs",
+    "verify:submission-alerts": "node scripts/verify-staff-submission-alerts.mjs",
     "verify:signup-welcome": "node scripts/verify-signup-welcome.mjs",
     "verify:search-adversarial": "node --experimental-strip-types scripts/verify-search-adversarial.mjs",
     "verify:intelligent-result-matching": "node --experimental-strip-types scripts/verify-intelligent-result-matching.mjs",

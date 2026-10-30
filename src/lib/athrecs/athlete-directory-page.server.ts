@@ -10,12 +10,12 @@ import { countryNames } from "./country-flags.ts";
 import { readSourceNationality } from "./source-nationality.ts";
 import { withDiscoveryRead } from "./discovery-read.server.ts";
 
-// Keep this expression aligned with the public_athlete_search_trgm index.
+// Keep this expression aligned with public_athlete_search_folded_trgm.
 const countrySql = `case
   when lower(trim(a.country)) in ('england','scotland','wales','northern ireland','united kingdom','uk','gb','gbr','great britain') then 'United Kingdom'
   when lower(trim(a.country)) in ('ireland','republic of ireland','ie','irl') then 'Ireland'
   else trim(coalesce(a.country,'')) end`;
-const documentSql = `lower(coalesce(a.display_name,'')||' '||coalesce(a.city,'')||' '||(${countrySql})||' '||coalesce(a.profile_roles,''))`;
+const documentSql = `athlete_directory_search_fold(coalesce(a.display_name,'')||' '||coalesce(a.city,'')||' '||(${countrySql})||' '||coalesce(a.profile_roles,''))`;
 const citySql = `case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
   where l.athlete_id=a.id and l.status='active' and s.share_location=false) then a.city end`;
 const publicCountrySql = `case when exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
@@ -58,7 +58,13 @@ export async function readAthleteDirectoryPage(
   // A literal match of the full query must contain its longest word. This
   // index prefilter preserves substring/cross-field matching; the final match
   // below uses only currently visible fields, so hidden attributes cannot leak.
-  const token = search.q?.split(/\s+/).sort((a, b) => b.length - a.length)[0];
+  // Count characters after the same canonical accent removal as the SQL fold;
+  // a decomposed accent must not turn a one-letter term into a trigram search.
+  const token = search.q
+    ?.normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .split(/\s+/)
+    .sort((a, b) => b.length - a.length)[0];
   const pattern = token && token.length >= 3 ? `%${token.replace(/[\\%_]/g, "\\$&")}%` : null;
   const parsedNumber = parseAthleteId(search.q);
   const athleteNumber =
@@ -120,10 +126,10 @@ export async function readAthleteDirectoryPage(
   const candidateCte = `search_candidates as materialized (
     select a.id from athletes a where $6::text is not null
       and (a.profile_visibility='public' or a.profile_type='Public figure')
-      and ${documentSql} like lower($6)
+      and ${documentSql} like athlete_directory_search_fold($6)
     union
     select a.id from athletes a join clubs c on c.id=a.club_id
-      where $6::text is not null and lower(c.name) like lower($6)
+      where $6::text is not null and athlete_directory_search_fold(c.name) like athlete_directory_search_fold($6)
         and (a.profile_visibility='public' or a.profile_type='Public figure')
     union
     select i.athlete_id from athlete_identifiers i where i.number=($2::text)::bigint and i.athlete_id is not null
@@ -132,7 +138,7 @@ export async function readAthleteDirectoryPage(
       where i.number=($2::text)::bigint and l.status='active'
   )`;
   const matches = `($1::text is null or (
-      (position(lower($1) in lower(concat_ws(' ',a.display_name,${clubSql},${citySql},${publicCountrySql},a.profile_roles)))>0
+      (btrim(athlete_directory_search_fold($1))<>'' and position(athlete_directory_search_fold($1) in athlete_directory_search_fold(concat_ws(' ',a.display_name,${clubSql},${citySql},${publicCountrySql},a.profile_roles)))>0
         or ($2::text is not null and exists (select 1 from athlete_resolved_ids i where i.athlete_id=a.id
           and (i.athlete_number::text=$2 or i.source_number::text=$2))))))
     and ($3::text is null or ((${countrySql})=$3 and (${publicCountrySql})=$3))

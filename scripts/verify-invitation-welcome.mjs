@@ -1,4 +1,5 @@
 // Disposable database, real Better Auth endpoints and intercepted delivery only.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import * as crypto from "node:crypto";
@@ -55,11 +56,11 @@ async function afterHours(hours, run) {
   }
 }
 let ip = 1;
-async function login(email, otp) {
+async function login(email, otp, details = {}) {
   return fetch(`${origin}/api/auth/sign-in/email-otp`, {
     method: "POST",
     headers: { "content-type": "application/json", origin, "x-forwarded-for": `127.2.0.${ip++}` },
-    body: JSON.stringify({ email, otp }),
+    body: JSON.stringify({ ...details, email, otp }),
   });
 }
 try {
@@ -248,10 +249,39 @@ try {
   await sql`update athlete_claim_invitations set claim_url=${url},user_id=null,invitation_kind='email',recipient_key='email:new-welcome@example.test',recipient_email='new-welcome@example.test',recipient_name='Avery Example' where id='synthetic-welcome'`;
   assert.deepEqual(await send(), { status: "sent" });
   assert(sent.at(-1).payload.text.includes("Hi Avery,"));
+  const missingDetails = await login("new-welcome@example.test", code());
+  assert.equal(missingDetails.status, 400);
   assert.equal(
-    (await login("new-welcome@example.test", code())).status,
+    (await missingDetails.json()).code,
+    "SIGNUP_NAME_REQUIRED",
+    "An invitation code does not bypass the required new-account details",
+  );
+  assert.equal(
+    (await sql`select count(*)::int as n from "user" where email='new-welcome@example.test'`)[0].n,
+    0,
+  );
+  // As in the public dialog, complete the details and request a fresh code after
+  // the valid original code has been consumed by the rejected registration.
+  await allowAgain();
+  assert.deepEqual(await send(), { status: "sent" });
+  const invitedSignup = await login(
+    "new-welcome@example.test",
+    code(),
+    signupDetails("Avery Example"),
+  );
+  assert.equal(
+    invitedSignup.status,
     200,
-    "Email-bound invitation also supports a new account",
+    "Email-bound invitation supports a new account after required details are supplied",
+  );
+  const invitedUser = (await invitedSignup.json()).user;
+  assert.equal(invitedUser.name, "Avery Example");
+  assert.equal(invitedUser.emailVerified, true);
+  assert.equal((await row()).claim_url, url, "Registration retains the exact private invitation");
+  assert.equal(
+    (await sql`select * from athlete_account_links where athlete_id=992401`).length,
+    0,
+    "Invited registration does not grant profile ownership",
   );
   const normalEmail = "ordinary-login@example.test";
   await authModule.auth.api.createVerificationOTP({

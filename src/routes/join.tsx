@@ -151,13 +151,13 @@ function JoinPage() {
                 One email. Your sporting story.
               </h2>
               <p className="mt-3 text-sm leading-6 text-muted">
-                We’ll email you a six-digit sign-in code. Then add your name and sport to start your
-                private profile. No password needed.
+                Add your name, country and location, then verify your email with a six-digit code to
+                create your account. No password needed.
               </p>
               <Button
                 className="mt-5 w-full sm:w-auto"
                 onClick={() =>
-                  openAthleteAuth({ mode: "code", callbackURL, errorCallbackURL: callbackURL })
+                  openAthleteAuth({ mode: "signup", callbackURL, errorCallbackURL: callbackURL })
                 }
               >
                 Create my account with email <ArrowRight className="size-4" aria-hidden="true" />

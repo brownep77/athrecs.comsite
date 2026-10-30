@@ -65,6 +65,9 @@ jobs:
       - name: Verify profile setup, former clubs and staff alerts on mobile and desktop
         run: node --experimental-strip-types scripts/verify-profile-setup.mjs --browser
 
+      - name: Verify submission notification routing and retries
+        run: npm run verify:submission-alerts
+
       - name: Quick sign-up and default result discovery
         run: |
           node scripts/verify-quick-signin-ui.mjs

@@ -104,6 +104,8 @@ export type AthleteAccountData = {
   region: string;
   city: string;
   postcode: string;
+  /** Private free-form sign-up location; never infer a city or postcode from it. */
+  signupLocation?: string;
   profileDetails?: AthleteProfileDetails;
   nationality: string;
   clubOrTeam: string;
@@ -165,6 +167,8 @@ type UserRow = {
   email: string;
   email_verified: boolean;
   image: string | null;
+  signup_country?: string | null;
+  signup_location?: string | null;
 };
 
 type ProfileRow = {
@@ -538,7 +542,9 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       account_user."name" as name,
       lower(account_user."email") as email,
       account_user."emailVerified" as email_verified,
-      account_user."image" as image
+      account_user."image" as image,
+      account_user."signupCountry" as signup_country,
+      account_user."signupLocation" as signup_location
     from "user" account_user
     join athlete_identifiers identifier on identifier.user_id = account_user."id"
     where account_user."id" = ${userId}
@@ -628,10 +634,11 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     fullName: profile?.full_name ?? user.name ?? "",
     displayName: profile?.display_name ?? "",
     dateOfBirth: profile?.date_of_birth ?? "",
-    country: profile?.country ?? "",
+    country: profile?.country ?? user.signup_country ?? "",
     region: profile?.region ?? "",
     city: profile?.city ?? "",
     postcode: profile?.postcode ?? "",
+    signupLocation: user.signup_location ?? "",
     profileDetails: readProfileDetails(profile?.profile_details),
     nationality: profile?.nationality ?? "",
     clubOrTeam: profile?.club_or_team ?? "",
@@ -806,7 +813,41 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
     if (!user.email_verified)
       throw new Error("Verify your email before saving your athlete profile");
 
-    await sql.transaction(async (tx) => {
+    const { createHash } = await import("node:crypto");
+    const { queuePrivateProfileSave, notifyStaffSubmission } =
+      await import("./staff-submission-alerts.server");
+    // Hash the validated save to suppress repeated identical submissions, while
+    // only projecting the useful support fields into email. Full private details
+    // remain behind staff authentication rather than being copied into inboxes.
+    const notificationFingerprint = createHash("sha256").update(JSON.stringify(data)).digest("hex");
+    const notificationFields = [
+      { label: "Racing name", value: data.fullName },
+      { label: "Display name", value: data.displayName || null },
+      { label: "Club or team", value: data.clubOrTeam || null },
+      { label: "Previous names", value: data.previousNames ?? [] },
+      { label: "Nationality", value: data.nationality || null },
+      { label: "Country", value: data.country || null },
+      { label: "Town or city", value: data.city || null },
+      { label: "Parkrun ID", value: data.parkrunId || null },
+      { label: "Athletics URN", value: data.athleticsUrn || null },
+      { label: "Power of 10 profile", value: data.powerOf10Url || null },
+      { label: "World Athletics profile", value: data.worldAthleticsUrl || null },
+      { label: "Example race", value: data.fingerprintEvent || null },
+      { label: "Example race year", value: data.fingerprintYear || null },
+      { label: "Example race distance", value: data.fingerprintDistance || null },
+      { label: "Example race time", value: data.fingerprintTime || null },
+      { label: "Sports", value: data.sports.map((sport) => sport.sportCode) },
+      { label: "Date of birth supplied", value: Boolean(data.dateOfBirth) },
+      { label: "Postcode supplied", value: Boolean(data.postcode) },
+      {
+        label: "Other saved sections",
+        value:
+          "Profile details, sport/training preferences, product preferences and consent choices are available in the private staff account record.",
+      },
+    ];
+
+    const notificationKey = await sql.transaction(async (tx) => {
+      await tx`select id from "user" where id=${context.userId} for update`;
       await tx`
         insert into athlete_private_profiles (
           user_id, verified_email, full_name, display_name, date_of_birth,
@@ -948,8 +989,15 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
             updated_at = now()
         `;
       }
+      return queuePrivateProfileSave(
+        tx,
+        context.userId,
+        notificationFields,
+        notificationFingerprint,
+      );
     });
 
+    await notifyStaffSubmission("private_profile_save", notificationKey);
     await syncAthleteAnalytics(context.userId);
     return loadAccount(sql, context.userId);
   });
@@ -986,6 +1034,8 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
             auth_name: string;
             auth_email: string;
             email_verified: boolean;
+            signup_country: string | null;
+            signup_location: string | null;
           }
         >`
           select
@@ -1016,7 +1066,9 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
             profile.updated_at::text as updated_at,
             account_user."name" as auth_name,
             lower(account_user."email") as auth_email,
-            account_user."emailVerified" as email_verified
+            account_user."emailVerified" as email_verified,
+            account_user."signupCountry" as signup_country,
+            account_user."signupLocation" as signup_location
           from athlete_private_profiles profile
           join "user" account_user on account_user."id" = profile.user_id
           join athlete_identifiers identifier on identifier.user_id = profile.user_id
@@ -1070,10 +1122,11 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
         fullName: profile.full_name,
         displayName: profile.display_name ?? "",
         dateOfBirth: profile.date_of_birth ?? "",
-        country: profile.country ?? "",
+        country: profile.country ?? profile.signup_country ?? "",
         region: profile.region ?? "",
         city: profile.city ?? "",
         postcode: profile.postcode ?? "",
+        signupLocation: profile.signup_location ?? "",
         nationality: profile.nationality ?? "",
         clubOrTeam: profile.club_or_team ?? "",
         preferredLanguage: profile.preferred_language ?? "",

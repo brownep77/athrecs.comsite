@@ -3,12 +3,27 @@ import assert from "node:assert/strict";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
-process.env.DATABASE_URL = "";
-process.env.RESEND_API_KEY = "";
-process.env.VITE_AUTH_ENABLED = "true";
-process.env.ATHRECS_STAFF_EMAILS = "race-edits-staff@example.test";
 const origin = "http://127.0.0.1:18217";
-process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
+Object.assign(process.env, {
+  DATABASE_URL: "",
+  DATABASE_URL_UNPOOLED: "",
+  POSTGRES_URL: "",
+  POSTGRES_URL_NON_POOLING: "",
+  RESEND_API_KEY: "",
+  ATHRECS_INVITATION_RESEND_API_KEY: "",
+  VITE_AUTH_ENABLED: "true",
+  ATHRECS_STAFF_EMAILS: "race-edits-staff@example.test",
+  BETTER_AUTH_URL: origin,
+  BETTER_AUTH_SECRET: "synthetic-race-edit-secret-at-least-32-characters",
+  TSS_SERVER_FN_BASE: `${origin}/_serverFn/`,
+  VERCEL_ENV: "",
+});
+const realFetch = globalThis.fetch;
+globalThis.fetch = async (input, init) => {
+  const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+  assert(url.startsWith(origin), `Unexpected external traffic: ${new URL(url).origin}`);
+  return realFetch(input, init);
+};
 const server = await createServer({ server: { host: "127.0.0.1", port: 18217, strictPort: true } });
 let database;
 let source;
@@ -36,6 +51,18 @@ try {
   const db = await server.ssrLoadModule("/src/lib/db.ts");
   database = await db.getPglite();
   const sql = await db.getSql();
+  // Department inboxes are explicitly enabled only in this disposable test database.
+  await sql`insert into staff_notification_routes(category,recipient,enabled)
+    values('fixtures','fixtures@athrecs.com',true),('results','results@athrecs.com',true)
+    on conflict(category,recipient) do update set enabled=excluded.enabled`;
+  const recipients = (
+    await sql`select recipient from athrecs_notification_recipients('fixtures') order by recipient`
+  ).map((row) => row.recipient);
+  assert(recipients.includes("fixtures@athrecs.com"));
+  assert(
+    !recipients.includes("results@athrecs.com"),
+    "Fixture submissions do not use the results inbox",
+  );
   await sql`insert into events (slug,name,sport,country,county,city,area,surface,summary,description,organiser,website)
     values ('synthetic-race-edit','Synthetic race edit','Running','England','Norfolk','Norwich','','Road','','','Synthetic AC','https://example.test/race')`;
   for (const role of ["owner", "other", "staff"]) {
@@ -82,7 +109,7 @@ try {
     await sql`select * from race_edit_alert_deliveries where suggestion_id=${submitted.id} order by recipient`;
   assert.deepEqual(
     queued.map((row) => row.recipient),
-    ["paul@athrecs.com", "paultwbrowne@gmail.com"],
+    recipients,
   );
   assert(
     queued.every((row) => row.attempts === 0 && !row.sent_at),
@@ -141,7 +168,7 @@ try {
   assert.equal(concurrent.filter((result) => result.status === "rejected").length, 2);
   assert.equal(
     (await sql`select count(*)::int n from race_edit_alert_deliveries`)[0].n,
-    18,
+    9 * recipients.length,
     "Only nine accepted suggestions queue alerts; reviews and rejected submissions do not",
   );
   assert.deepEqual(
@@ -176,7 +203,10 @@ try {
     if (email.to.includes(failRecipient)) throw Error("Synthetic provider outage");
     return `synthetic-${sends.length}`;
   };
-  assert.deepEqual(await deliverRaceEditAlerts(sql, submitted.id, send), { sent: 1, failed: 1 });
+  assert.deepEqual(await deliverRaceEditAlerts(sql, submitted.id, send), {
+    sent: recipients.length - 1,
+    failed: 1,
+  });
   const firstSends = structuredClone(sends);
   assert(
     firstSends.every(({ email }) => email.from === "paul@athrecs.com" && email.to.length === 1),
@@ -188,6 +218,7 @@ try {
         email.text.includes(suggestion.suggestion) &&
         email.text.includes(suggestion.evidenceUrl) &&
         email.text.includes("race-edits-owner@example.test") &&
+        email.reply_to === "race-edits-owner@example.test" &&
         email.text.includes("/admin/event-register"),
     ),
   );
@@ -200,15 +231,19 @@ try {
     deliverRaceEditAlerts(sql, submitted.id, send),
     deliverRaceEditAlerts(sql, submitted.id, send),
   ]);
-  assert.equal(sends.length, 3, "Concurrent workers only retry the failed recipient");
+  assert.equal(
+    sends.length,
+    recipients.length + 1,
+    "Concurrent workers only retry the failed recipient",
+  );
   assert.deepEqual(
-    sends[2],
+    sends.at(-1),
     firstSends.find(({ email }) => email.to.includes("paultwbrowne@gmail.com")),
     "Retry keeps the same payload and idempotency key",
   );
   assert.equal(
     (
-      await sql`select count(*)::int n from athlete_messages where contact in ('paul@athrecs.com','paultwbrowne@gmail.com')`
+      await sql`select count(*)::int n from athlete_messages where contact=any(${recipients}::text[])`
     )[0].n,
     0,
     "Internal alerts do not enter athlete conversations",
@@ -231,7 +266,7 @@ try {
     (
       await sql`select count(*)::int n from race_edit_alert_deliveries where suggestion_id=${dismiss.id} and needs_review`
     )[0].n,
-    2,
+    recipients.length,
     "Ambiguous deliveries stop before provider idempotency expires",
   );
   await sql`insert into athletes(id,slug,display_name,profile_visibility) values(992463,'synthetic-alert-test','Synthetic alert test','private')`;
@@ -250,9 +285,10 @@ try {
   assert(sends.at(-1).email.subject.startsWith("[FICTIONAL TEST]"));
   assert(!sends.at(-1).email.html.includes("<script>"));
   console.log(
-    "PASS: real race suggestion RPC, authentication, validation, rate limits, staff review and pagination; atomic two-recipient alerts, rollback, independent retries, concurrency, frozen idempotency payload, expiry review, safe HTML and fictional-test isolation. No real emails sent.",
+    "PASS: real race suggestion RPC, authentication, validation, rate limits, staff review and pagination; category-routed fixture alerts, rollback, independent retries, concurrency, frozen idempotency payload, expiry review, safe HTML and fictional-test isolation. No real emails sent.",
   );
 } finally {
+  globalThis.fetch = realFetch;
   await server.close();
   await database?.close();
 }

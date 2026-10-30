@@ -1,4 +1,5 @@
 // Actual browser -> authenticated RPC -> disposable PGlite. Never production data or email.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdir } from "node:fs/promises";
@@ -44,7 +45,7 @@ try {
     const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
     const response = await context.request.post(`${origin}/api/auth/sign-up/email`, {
       headers: { origin },
-      data: { name: "Temporary Name", email, password: "Synthetic-password-123!" },
+      data: { ...signupDetails("Temporary Name"), email, password: "Synthetic-password-123!" },
     });
     assert.equal(response.status(), 200, await response.text());
     const { user } = await response.json();

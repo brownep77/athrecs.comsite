@@ -152,11 +152,19 @@ function AthletePrivacyPage() {
         </div>
         <NoticeSection title="Information required to operate the account">
           <p>
-            When email codes are available, you can sign in or create an account with just your
-            email and a one-time code. A name is requested for password sign-up or when you save
-            your athlete details. Saving athlete details requires a verified email and
-            acknowledgement of this notice. These details help authenticate you, protect result
-            claims, prevent duplicate ownership and support your account.
+            Creating a new account requires your first name, last name, country and one location:
+            your town or city, or your postcode or ZIP code. You can choose a town or city without
+            supplying a postal code. We collect these details with your email address, whether you
+            register using an email code, password or another sign-in provider. Existing members can
+            continue to sign in without supplying these details again.
+          </p>
+          <p className="mt-3">
+            We store these registration details in your private account. The free-form location
+            supplied at sign-up is available to you and authorised AthRecs staff, is not published
+            on your athlete profile and is not sent to external result-search or AI providers. These
+            details help us distinguish accounts and support you. Saving additional athlete details
+            requires a verified email and acknowledgement of this notice. Creating an account does
+            not grant marketing or optional research consent.
           </p>
         </NoticeSection>
 
@@ -288,10 +296,10 @@ function AthletePrivacyPage() {
 
         <NoticeSection title="Optional Entry Passport information">
           <p>
-            You can add location, club, sports, disciplines, training patterns, goals and coach
-            name. You can also record equipment, nutrition, technology, clothing, recovery and
-            purchasing preferences. These questions are optional. Do not add medical diagnoses or
-            other information you do not want ATHRECS to hold.
+            You can add further location details, club, sports, disciplines, training patterns,
+            goals and coach name. You can also record equipment, nutrition, technology, clothing,
+            recovery and purchasing preferences. These questions are optional. Do not add medical
+            diagnoses or other information you do not want ATHRECS to hold.
           </p>
         </NoticeSection>
 
