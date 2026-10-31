@@ -17,13 +17,51 @@ export const athleteBiographyReviews = [
   },
   {
     slug: "karen-sarahi-gonzalez-london-2025-fc604f093e5df9f2",
-    title: "Karen Sarahi Gonzalez (iluvsarahii) marathon results & biography",
+    title: "Karen Sarahi Gonzalez (iluvsarahii) marathon times & biography",
     description:
-      "Karen Sarahi Gonzalez’s running biography and results, including London 3:24:53 and New York marathon finishes in 2024 and 2025.",
-    alternateName: ["iluvsarahii", "Karen Sarahi Robles", "Karen Sarahi Gonzalez"],
-    headings: ["Karen Sarahi Gonzalez"],
+      "Karen Sarahi Gonzalez, known as iluvsarahii, ran London in 3:24:53 and New York in 3:34:00. Read about her running, from Team Maybelline to Boston and Chicago.",
+    alternateName: ["iluvsarahii", "Karen Sarahi Robles"],
+    sameAs: ["https://www.instagram.com/iluvsarahii/", "https://www.strava.com/athletes/128554991"],
+    headings: [
+      "",
+      "From freelance makeup artist to founder of LYBRE Lashes",
+      "New York and London marathon times",
+      "Boston and Chicago in 2026",
+      "Running for Team Maybelline",
+    ],
     paragraphs: [
-      "Karen Sarahi Gonzalez, known online as iluvsarahii, is a beauty creator, makeup artist and founder of LYBRE Lashes. She describes herself as a Mexican Latina and has built a community around beauty and self-expression. Running has become another sustained commitment: she completed the 2024 New York City Marathon in 3:37:47, ran London in 3:24:53 in April 2025, and returned to New York that November to finish in 3:34:00. She is listed for the 2026 New York City Marathon with Team Maybelline.",
+      "Karen Sarahi Gonzalez is a marathon runner and makeup artist known online as iluvsarahii. She also uses the name Karen Sarahi Robles. After finishing the Boston Marathon in 2026, she wrote about the surprise of becoming a distance runner as an adult. Sport had played little part in her childhood, yet Boston was already her sixth marathon.",
+      "Gonzalez traces her interest in makeup to getting ready with her mother. She went on to spend more than a decade working with clients and built a following for her beauty tutorials on Instagram and YouTube. Years of trimming and reshaping false lashes by hand gave her the idea for LYBRE Lashes. Gonzalez, who describes herself as Mexican Latina, chose the name for its connection to the Spanish word libre, meaning free.",
+      "At the New York City Marathon on 3 November 2024, Gonzalez finished in 3:37:47. The following spring she broke three and a half hours at the London Marathon, running 3:24:53 on 27 April 2025. When she returned to New York on 2 November, she reached halfway in 1:44:08 and crossed the finish in 3:34:00, taking 3 minutes 47 seconds off her time on the same course.",
+      "Gonzalez ran the Boston Marathon in 3:29:42 on 20 April 2026. In late July she began training for the Chicago Marathon, sharing the early starts and long runs with her followers. On 11 October she finished in 3:26:26. Chicago was her seventh marathon and her fourth World Marathon Major by her own count. Looking back on the race, she singled out the cheers through Pilsen as the moment she felt like a front-runner.",
+      "Gonzalez ran in New York for Team Maybelline in 2024, when the brand partnered with the National Alliance on Mental Illness to encourage conversations about mental health. In October 2026, New York Road Runners named her to Team Maybelline again for the New York City Marathon on 1 November.",
+    ],
+    mentions: [
+      { text: "New York City Marathon", url: "/races/new-york-city-marathon" },
+      { text: "London Marathon", url: "/races/london-marathon" },
+      { text: "Boston Marathon", url: "/races/boston-marathon" },
+      { text: "Chicago Marathon", url: "/races/chicago-marathon" },
+    ],
+    questions: [
+      {
+        question: "Who is the marathon runner iluvsarahii?",
+        answer:
+          "Karen Sarahi Gonzalez, also known as Karen Sarahi Robles, is the runner and beauty creator behind iluvsarahii. She founded LYBRE Lashes.",
+      },
+      {
+        question: "What was Karen Sarahi Gonzalez’s London Marathon time?",
+        answer: "She finished the 2025 London Marathon in 3 hours, 24 minutes and 53 seconds.",
+      },
+      {
+        question: "How fast has iluvsarahii run the New York City Marathon?",
+        answer:
+          "She ran 3:37:47 in 2024 and improved to 3:34:00 in 2025, an average of 8 minutes 10 seconds per mile in her second race.",
+      },
+      {
+        question: "How many marathons had Karen Sarahi Robles run by October 2026?",
+        answer:
+          "She counted Boston as her sixth marathon and Chicago as her seventh. Chicago was the fourth different World Marathon Major she had completed.",
+      },
     ],
   },
   {
