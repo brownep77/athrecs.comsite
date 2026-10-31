@@ -5,17 +5,6 @@ import type { ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
 // expedition, team total or support appearance is not an individual race finish.
 const entries: readonly Omit<ReportedRaceRecord, "uncertainty" | "sources">[] = [
   {
-    id: "russ-brighton-half",
-    event: "Brighton Half Marathon",
-    distance: "Half marathon",
-    location: "Brighton, England",
-    reportedDate: "",
-    reportedTime: "",
-    reportedPlace: "",
-    summary:
-      "Cook describes completing this race before his first Brighton Marathon. The edition, finish time and bib have not been established.",
-  },
-  {
     id: "russ-istanbul-worthing-2019",
     event: "Istanbul to London and Worthing",
     distance: "Multi-country expedition",
@@ -31,13 +20,13 @@ const entries: readonly Omit<ReportedRaceRecord, "uncertainty" | "sources">[] = 
     id: "russ-car-pull-2020",
     event: "Car-pulling marathon challenge",
     distance: "Marathon-distance challenge",
-    location: "",
+    location: "Worthing seafront, West Sussex, England",
     reportedDate: "2020",
     reportedTime: "9h 56m (reported)",
     reportedPlace: "",
     entryKind: "challenge",
     summary:
-      "Completed while pulling a car. This is a strength and endurance challenge, with a reported time to the minute, rather than a certified road-marathon result.",
+      "Cook pulled a Suzuki Alto along the Worthing seafront. The reported time covers the car-pulling challenge.",
   },
   {
     id: "russ-turning-tides-2020",
@@ -113,6 +102,30 @@ const entries: readonly Omit<ReportedRaceRecord, "uncertainty" | "sources">[] = 
     entryKind: "expedition",
     summary:
       "Completed the run from Africa's southernmost mainland point to its northernmost mainland point, from 22 April 2023 to 7 April 2024. The duration covers the whole expedition, including rest and interruptions; it is not a continuous race time.",
+  },
+  {
+    id: "russ-downing-street-2024",
+    event: "Downing Street run with Rishi Sunak",
+    distance: "",
+    location: "Westminster, London, England",
+    reportedDate: "25 April 2024",
+    reportedTime: "",
+    reportedPlace: "",
+    entryKind: "effort",
+    summary:
+      "Cook and the prime minister ran past Horse Guards Parade and Buckingham Palace and finished at Downing Street. Their filmed run has no published distance or time.",
+  },
+  {
+    id: "russ-experian-sports-day-2025",
+    event: "Experian UK Sports Day team run",
+    distance: "5 km (team run)",
+    location: "United Kingdom",
+    reportedDate: "2025",
+    reportedTime: "",
+    reportedPlace: "",
+    entryKind: "effort",
+    summary:
+      "Cook described running 5 km with Experian staff at their sports day. No individual time or placing was recorded in the event account.",
   },
   {
     id: "russ-marcus-skeet-april-2024",
@@ -215,13 +228,13 @@ const entries: readonly Omit<ReportedRaceRecord, "uncertainty" | "sources">[] = 
     id: "russ-mackyard-2026",
     event: "Mackyard backyard ultra",
     distance: "20 laps completed",
-    location: "Near London, England",
-    reportedDate: "May 2026",
+    location: "Redbridge Cycling Centre, Ilford, England",
+    reportedDate: "30 May 2026",
     reportedTime: "Stopped during lap 21",
     reportedPlace: "",
     entryKind: "attempt",
     summary:
-      "Completed 20 hourly laps before stopping during the 21st with stomach problems. No official elapsed result or confirmed total distance is assigned.",
+      "The event started on 30 May. Cook completed 20 hourly laps before stopping during his 21st with stomach problems.",
   },
   {
     id: "russ-southwark-1736",
@@ -263,15 +276,15 @@ const entries: readonly Omit<ReportedRaceRecord, "uncertainty" | "sources">[] = 
   {
     id: "russ-colombia-lost-city",
     event: "Colombia Lost City trek — Hardest Adventures",
-    distance: "48 km planned route; completed distance unknown",
+    distance: "48 km planned route",
     location: "Ciudad Perdida, Colombia",
     reportedDate: "",
-    reportedTime: "Participation documented; completion unconfirmed",
+    reportedTime: "",
     reportedPlace: "",
     entryKind: "expedition",
     sport: "Hiking",
     summary:
-      "Cook and the team were documented undertaking the planned Lost City trek. A final completion, event date and elapsed time are not established; this is a participation entry.",
+      "Cook and the group reached Ciudad Perdida. His film records their arrival. The exact distance they travelled, elapsed time and trek date remain unknown.",
   },
 ];
 

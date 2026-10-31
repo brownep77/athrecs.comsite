@@ -17,7 +17,11 @@ export function ChannelFlags({ flags }: { flags: ChannelFlag[] }) {
       {flags.map((f) => (
         <span key={f.code} className="inline-flex items-center gap-1">
           <img
-            src={`https://flagcdn.com/${f.code.toLowerCase()}.svg`}
+            src={
+              f.code === "GB-NIR"
+                ? "/flags/gb-nir.svg"
+                : `https://flagcdn.com/${f.code.toLowerCase()}.svg`
+            }
             width={24}
             height={16}
             alt={f.label}
