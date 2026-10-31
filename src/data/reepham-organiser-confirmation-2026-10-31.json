@@ -1,0 +1,20 @@
+{
+  "reepham-cross-country|2027-01-31": {
+    "summary": "One- and two-lap cross-country races from Whitwell Station near Reepham. Juniors start 10:00; both senior distances start together at 10:15.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://totalracetiming.co.uk/race/746",
+    "checkedAt": "2026-10-31",
+    "starts": {
+      "5K": {
+        "time": "10:15",
+        "note": "Senior one lap (approximately 5K) starts 10:15; juniors start 10:00. Organiser Leona confirmed juniors 10:00 and seniors 10:15 in her 31 October 2026 13:51 UTC reply. Fresh review of the authorised Total Race Timing page on 31 October shows both Seniors (1 lap) and Seniors (2 laps) at 10:15, agreeing with its programme. This supersedes the 21 October owner clarification; no separate 10:30 senior wave remains advertised.",
+        "publicNote": "Seniors: one lap (approximately 5K), 10:15. Both senior distances start together. Juniors (one lap) start 10:00. All times local (Europe/London)."
+      },
+      "10K": {
+        "time": "10:15",
+        "note": "Senior two laps (approximately 10K) starts 10:15; juniors start 10:00. Organiser Leona confirmed juniors 10:00 and seniors 10:15 in her 31 October 2026 13:51 UTC reply. Fresh review of the authorised Total Race Timing page on 31 October shows both Seniors (1 lap) and Seniors (2 laps) at 10:15, agreeing with its programme. This supersedes the 21 October owner clarification; no separate 10:30 senior wave remains advertised.",
+        "publicNote": "Seniors: two laps (approximately 10K), 10:15. Both senior distances start together. Juniors (one lap) start 10:00. All times local (Europe/London)."
+      }
+    }
+  }
+}
