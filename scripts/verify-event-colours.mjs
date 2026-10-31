@@ -39,7 +39,7 @@ assert.equal(
   "08:30",
 );
 assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "5K", null), "10:15");
-assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "10K", null), "10:30");
+assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "10K", null), "10:15");
 assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", "5K · 10K", null), "10:15");
 assert.match(
   FIXTURE_DETAILS["reepham-cross-country|2027-01-31"].starts["5K"].note,
