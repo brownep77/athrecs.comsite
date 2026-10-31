@@ -1,3 +1,4 @@
+import { FIXTURE_DETAILS } from "@/data/fixture-details";
 import { useState } from "react";
 import type { getEventBySlug } from "@/lib/athrecs/api";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
@@ -13,6 +14,10 @@ export function RaceEntryOptions({
   const selected =
     editions.find((edition) => `${edition.id}-${edition.event_date}` === selectedKey) ??
     editions[0];
+  const publicNote =
+    selected &&
+    FIXTURE_DETAILS[`${data.event.slug}|${selected.event_date}`]?.starts[selected.distance_code]
+      ?.publicNote;
   if (data.event.sport === "Parkrun") return null;
   return (
     <div className="space-y-3">
@@ -39,7 +44,9 @@ export function RaceEntryOptions({
         </div>
       ) : null}
       <EntryOptions
-        options={selected?.entry_options ?? []}
+        options={(selected?.entry_options ?? []).map((option) =>
+          publicNote ? { ...option, notes: publicNote } : option,
+        )}
         editionDate={selected?.event_date}
         officialWebsite={data.event.website}
       />
