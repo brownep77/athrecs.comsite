@@ -1,3 +1,6 @@
+import { REEPHAM_LAP_STARTS_DETAILS } from "./lib/reepham-lap-starts-details.mjs";
+import { REEPHAM_CONFIRMATION_REVIEW } from "./lib/reepham-organiser-confirmation-2026-10-31-review.mjs";
+import reephamConfirmation from "../src/data/reepham-organiser-confirmation-2026-10-31.json" with { type: "json" };
 import { SEVENTH_FIXTURE_QUALITY_REVIEW } from "./lib/fixture-quality-seventh-2026-10-26-review.mjs";
 import seventhFixtureQuality from "../src/data/fixture-quality-seventh-2026-10-26.json" with { type: "json" };
 import { FIFTH_DUPLICATE_PROGRAMMES_REVIEW } from "./lib/duplicate-programmes-fifth-2026-10-26-review.mjs";
@@ -70,7 +73,7 @@ try {
     await publishCheckedFixtures(
       await getSql(),
       publishing,
-      { "reepham-cross-country|2027-01-31": FIXTURE_DETAILS["reepham-cross-country|2027-01-31"] },
+      REEPHAM_LAP_STARTS_DETAILS,
       REEPHAM_LAP_STARTS_REVIEW,
     ),
   );
@@ -175,6 +178,15 @@ try {
       publishing,
       seventhFixtureQuality,
       SEVENTH_FIXTURE_QUALITY_REVIEW,
+    ),
+  );
+  console.log(
+    "[reepham-organiser-confirmation]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      reephamConfirmation,
+      REEPHAM_CONFIRMATION_REVIEW,
     ),
   );
 } finally {
