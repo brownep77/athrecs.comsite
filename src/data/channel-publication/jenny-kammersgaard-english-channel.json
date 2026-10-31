@@ -1,0 +1,976 @@
+{
+  "slug": "jenny-kammersgaard-english-channel",
+  "name": "Jenny Kammersgaard",
+  "country": "Denmark",
+  "aliases": [
+    "Jenny Marie Ingeborg Kammersgaard"
+  ],
+  "highlight": "Danish breaststroke swimmer in the 1950 and 1951 Daily Mail Channel races",
+  "biography": [
+    "Jenny Marie Ingeborg Kammersgaard grew up in Dagnæs, near Horsens in Denmark. She used a slow breaststroke with her head above the water and trained for long swims in Horsens Fjord. In 1937 she tried to cross the Kattegat from Sjællands Odde to Jutland. The doctor on her escort boat stopped her first attempt. On her return she reached the Danish coast north of Grenå after more than 29 hours in the water.",
+    "Kammersgaard and journalist Niels Anesen wrote a book about the swim and travelled around Denmark giving talks. She crossed the Baltic from Gedser towards Warnemünde in 1938, and later trained as a swimming teacher in Berlin. She also earned her living as a seamstress.",
+    "In August 1950 she was one of two women to finish the first Daily Mail Channel race from France to England. The federation's historical entry gives 16 hours 30 minutes, while the following year's press dossier gives 16 hours 27 minutes. In 1951 she returned for the second race and finished in 15 hours 38 minutes.",
+    "Her later swims included Læsø to Frederikshavn in 1959 and shorter swims in icy water in the 1970s. Her daughter and granddaughter brought her scrapbooks, letters and awards back to Horsens in 2013 for the local sports archive."
+  ],
+  "flags": [
+    {
+      "code": "DK",
+      "abbr": "DEN",
+      "label": "Denmark"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Full name",
+      "value": "Jenny Marie Ingeborg Kammersgaard"
+    },
+    {
+      "label": "Born",
+      "value": "24 July 1918 in Horsens, Denmark"
+    },
+    {
+      "label": "Country in the federation records",
+      "value": "Denmark"
+    },
+    {
+      "label": "Stroke",
+      "value": "Head-up breaststroke, described in Dansk Kvindebiografisk Leksikon"
+    },
+    {
+      "label": "Working life",
+      "value": "Seamstress and swimming teacher"
+    },
+    {
+      "label": "Family collection",
+      "value": "Horsens Sports Archive received her swimming memorabilia from her daughter and granddaughter in 2013."
+    },
+    {
+      "label": "Died",
+      "value": "29 November 1997 in Herlev, Denmark"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "jenny-kammersgaard-1950",
+      "title": "First Daily Mail race, France to England",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CS&PF and the race results give 16:30. The following year's press dossier gives 16:27. Dover Museum and contemporary reporting support 22 August, while a Dover archive narrative says 23 August.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Tuesday, 22 August 1950 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "16h 30m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Tuesday, 22 August 1950 · 19:04:00 · CS&PF arrival clock. The London dispatch of 23 August places the nine finishes on 22 August, and the named race table identifies Kammersgaard as the ninth finisher.",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF prints 02:34:00 departure and 19:04:00 arrival with the year only. The 23 August London dispatch says all nine swimmers had finished the previous day. The public race accounts disagree on the start day, so the 02:34 departure is retained here. The clock standard is unspecified.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "Dover area, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Breaststroke",
+          "label": "Stroke"
+        },
+        {
+          "text": "Butlins, as recorded by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual 442844 identifies Kammersgaard, Jenny, Denmark, one way F-E in 16:30:00. The 1950 Daily Mail race table names her ninth in 16:30. Its narrative puts the race on 23 August, while the Dover Museum exhibition and the London dispatch support 22 August. The 1951 entrants' dossier and a Dover archive caption both give 16:27. The source's Butlins label is retained alongside the documented Daily Mail race sponsorship."
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation — Jenny Kammersgaard, 1950",
+          "url": "https://cspf.co.uk/swim/442844"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual 442844 lists Denmark, one way from France to England, 16:30:00 elapsed, 02:34:00 departure and 19:04:00 arrival. The ratifying-organisation field reads Butlins.",
+          "label": "Supports"
+        },
+        {
+          "text": "The date field gives the year only. The museum and contemporary sources identify the race sponsor as the Daily Mail.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming Dover — 1950 Daily Mail race results",
+          "url": "https://www.channelswimmingdover.org.uk/content/history/channel-races/daily-mail-races/1950-daily-mail-cross-channel-race"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The finishing list places Jenny Kammersgaard of Denmark ninth in 16:30, among seven men and two women who finished.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its text dates the start and finishes to 23 August. Dover Museum's exhibition and contemporary race coverage support 22 August.",
+          "label": "Limitations"
+        },
+        {
+          "text": "News on Screen — Daily Mail race entrants' press dossier",
+          "url": "https://media.learningonscreen.ac.uk/newsonscreen2/Pathe/104300/NoS_104300_other.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Jenny Eileen James entry identifies Pontypridd, Bristol Channel swims in opposite directions and 8 hours 21 minutes for the 1950 return. The Jenny Kammersgaard entry gives 16:27 for her 1950 Channel race.",
+          "label": "Supports"
+        },
+        {
+          "text": "Pre-race background material. Kammersgaard's 16:27 differs from the 16:30 in her historical federation result.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming Dover — group of women in the 1951 Daily Mail race",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/a-group-of-female-channel-swimmers-1951-daily-mail-race"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The named archive caption describes Kammersgaard's breaststroke, gives 16:27 in 1950 and 15:38 in 1951, and distinguishes two unsuccessful attempts in 1952 and one in 1954.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dover Museum — 1950s Channel races",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Exhibition sections identify the first Daily Mail race on 22 August 1950 and the second on 16 August 1951. The lists name Jenny Kammersgaard at both and Jenny James in 1951.",
+          "label": "Supports"
+        },
+        {
+          "text": "Le Monde — 1950 race finishes reported from London",
+          "url": "https://www.lemonde.fr/archives/article/1950/08/24/l-anglaise-eileen-fenton-s-est-classee-premiere-de-sa-categorie_2057858_1819218.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The 23 August London dispatch says the race had ended the previous day with nine successful crossings from Cap Gris-Nez to Dover, including two women.",
+          "label": "Supports"
+        },
+        {
+          "text": "The article was published on 24 August. The named nine-finisher list is provided by the Dover archive.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "id": "jenny-kammersgaard-1951",
+      "title": "Second Daily Mail race, France to England",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "The contemporary race reports and Dover Museum place this 15:38 swim on 16 August. A 1995 profile gives 30 July. CS&PF labels the race Butlins, while contemporary sources name the Daily Mail.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Thursday, 16 August 1951 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "15h 38m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Thursday, 16 August 1951 · 07:30:00 · Individual departure in record 442865. Le Monde's 16 August dispatch gives 07:30 for the mass start.",
+          "label": "Started"
+        },
+        {
+          "text": "Thursday, 16 August 1951 · 23:08:00 · Individual arrival in record 442865. Le Monde's 17 August London dispatch places the 18 finishers' landings the previous evening.",
+          "label": "Finished"
+        },
+        {
+          "text": "The federation gives the year and both clocks. Le Monde reported the 16 August mass start at 07:30, with the signal rocket at 07:29, and dated the field's finish to that evening. The race clocks have no stated time zone.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Plage des Sirènes, near Cap Gris-Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "Dover area, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Butlins, as recorded by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historic individual 442865 identifies Kammersgaard, Jenny, Denmark, one way F-E and 15:38:00. Dover Museum names her among the 16 August race finishers and the group photograph caption confirms 15:38. The contemporary French dispatches independently date the start and landings. The 1995 Horsens interview article gives a different swim date. No separate July performance is established."
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation — Jenny Kammersgaard, 1951",
+          "url": "https://cspf.co.uk/swim/442865"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual 442865 lists Denmark, one way from France to England, 15:38:00 elapsed, 07:30:00 departure and 23:08:00 arrival. The ratifying-organisation field reads Butlins.",
+          "label": "Supports"
+        },
+        {
+          "text": "The entry supplies the year and calls the event a Butlins race. Contemporary race coverage identifies the Daily Mail.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum — 1950s Channel races",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Exhibition sections identify the first Daily Mail race on 22 August 1950 and the second on 16 August 1951. The lists name Jenny Kammersgaard at both and Jenny James in 1951.",
+          "label": "Supports"
+        },
+        {
+          "text": "Channel Swimming Dover — group of women in the 1951 Daily Mail race",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/a-group-of-female-channel-swimmers-1951-daily-mail-race"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The named archive caption describes Kammersgaard's breaststroke, gives 16:27 in 1950 and 15:38 in 1951, and distinguishes two unsuccessful attempts in 1952 and one in 1954.",
+          "label": "Supports"
+        },
+        {
+          "text": "Le Monde — Calais dispatch on the 1951 race start",
+          "url": "https://www.lemonde.fr/archives/article/1951/08/17/le-francais-le-morvan-precede-les-trois-egyptiens_2069028_1819218.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The 16 August Calais dispatch reports a 07:30 mass start for all twenty Daily Mail swimmers near Cap Gris-Nez and separately times the signal rocket at 07:29.",
+          "label": "Supports"
+        },
+        {
+          "text": "The report was published on 17 August. It does not specify a time zone.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Le Monde — London dispatch on the 1951 race finishes",
+          "url": "https://www.lemonde.fr/archives/article/1951/08/18/l-egyptien-mareeh-hassan-hammad-bat-le-francais-le-morvan-dans-la-traversee-internationale-de-la-manche_2069384_1819218.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dated in London on 17 August, the report says the 12 male and six female finishers reached the Dover area the previous evening.",
+          "label": "Supports"
+        },
+        {
+          "text": "Group finish evidence. Individual names, times and clock readings come from the federation and museum.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Horsens archive — 1995 interview with Jenny Kammersgaard",
+          "url": "https://horsensleksikon.dk/wp-content/uploads/Jenny-Kammersgaard-08-07-1995ocr.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The profile recalls her factory work, teaching and Kattegat swim and gives 22 August 1950 for her first Channel success.",
+          "label": "Supports"
+        },
+        {
+          "text": "The article dates her second Channel swim to 30 July 1951. Contemporary coverage and the Dover exhibition identify 16 August.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "jenny-kammersgaard-horsens-fjord-1936",
+      "title": "Horsens Fjord, Snaptun to Horsens Harbour",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1936 · exact day not confirmed"
+        },
+        {
+          "text": "Horsens Fjord, Denmark"
+        },
+        {
+          "text": "Completed the swim to Horsens Harbour."
+        },
+        {
+          "text": "17 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "7h 2m",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The Horsens Sports Archive's selected-swims table, 1936 Horsens Fjord row, gives Snaptun to Horsens Havn, 17 km, 7 hours 2 minutes. The archive supplies year precision."
+        },
+        {
+          "text": "Horsens Sports Archive — swimming in Horsens, 1916–2020",
+          "url": "https://horsensidraetsarkiv.dk/wp-content/uploads/2020/10/Svoemmesporten-i-Horsens-1916-2020-1.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The table of Kammersgaard's swims records the 1936 Horsens Fjord and Great Belt routes, distances and times. The archive also documents the English Channel swims.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "id": "jenny-kammersgaard-oresund-1937",
+      "title": "Øresund, Viken to Hornbæk",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1937 · exact day not confirmed"
+        },
+        {
+          "text": "Øresund, Sweden to Denmark"
+        },
+        {
+          "text": "Completed the crossing from Sweden to Denmark."
+        },
+        {
+          "text": "22 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "7h 30m",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The Horsens Sports Archive's selected-swims table, 1937 Øresund row, names Viken in Sweden and Hornbæk, with 22 km and 7 hours 30 minutes."
+        },
+        {
+          "text": "Horsens Sports Archive — swimming in Horsens, 1916–2020",
+          "url": "https://horsensidraetsarkiv.dk/wp-content/uploads/2020/10/Svoemmesporten-i-Horsens-1916-2020-1.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The table of Kammersgaard's swims records the 1936 Horsens Fjord and Great Belt routes, distances and times. The archive also documents the English Channel swims.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Horsens Fjord",
+      "lines": [
+        {
+          "text": "1936"
+        },
+        {
+          "text": "Swam from Snaptun to Horsens Harbour in 7 hours 2 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Crossed the Kattegat",
+      "lines": [
+        {
+          "text": "1937"
+        },
+        {
+          "text": "Reached the Jutland coast on her second attempt after more than 29 hours."
+        }
+      ]
+    },
+    {
+      "title": "Baltic crossing",
+      "lines": [
+        {
+          "text": "1938"
+        },
+        {
+          "text": "Swam from Gedser in Denmark to the German coast near Warnemünde."
+        }
+      ]
+    },
+    {
+      "title": "First Daily Mail Channel race",
+      "lines": [
+        {
+          "text": "1950-08-22"
+        },
+        {
+          "text": "Recorded as the ninth finisher in the Dover race table. The dating and elapsed-time differences are detailed with the result."
+        }
+      ]
+    },
+    {
+      "title": "Second English Channel solo",
+      "lines": [
+        {
+          "text": "1951-08-16"
+        },
+        {
+          "text": "Completed the second Daily Mail race in 15:38."
+        }
+      ]
+    },
+    {
+      "title": "Læsø to Frederikshavn",
+      "lines": [
+        {
+          "text": "1959"
+        },
+        {
+          "text": "The Danish biographical dictionary records this later open-water crossing."
+        }
+      ]
+    },
+    {
+      "title": "Swimming archive returned to Horsens",
+      "lines": [
+        {
+          "text": "2013"
+        },
+        {
+          "text": "Her family delivered memorabilia, including letters and scrapbooks, to the sports archive."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Jenny Kammersgaard in the Danish Women's Biographical Dictionary",
+      "lines": [
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://kvindebiografiskleksikon.lex.dk/Jenny_Kammersgaard"
+        },
+        {
+          "text": "Named biography by Ole Skjerk with family, career and sporting chronology."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Jenny Kammersgaard's collection in Horsens",
+      "lines": [
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://horsensidraetsarkiv.dk/arkivet/udstillingen/jenny-kammersgaard"
+        },
+        {
+          "text": "The sports archive describes and illustrates her personal swimming collection."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "1995 interview with Jenny Kammersgaard",
+      "lines": [
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://horsensleksikon.dk/wp-content/uploads/Jenny-Kammersgaard-08-07-1995ocr.pdf"
+        },
+        {
+          "text": "Written retrospective interview in Danish. Its 1951 Channel date differs from the race reports."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Jenny Kammersgaard?",
+      "value": "The profile includes 2 selected solo performances. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was the first listed Channel swim?",
+      "value": "The recorded swim date is Tuesday, 22 August 1950. Completion is recorded on Tuesday, 22 August 1950."
+    },
+    {
+      "label": "How long did that swim take?",
+      "value": "The recorded 1-way solo time is 16h 30m 0s. Results give 16h 30m, while a later press dossier gives 16h 27m. Historical accounts also differ between 22 and 23 August 1950."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming & Piloting Federation — Jenny Kammersgaard, 1950",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442844"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual 442844 lists Denmark, one way from France to England, 16:30:00 elapsed, 02:34:00 departure and 19:04:00 arrival. The ratifying-organisation field reads Butlins.",
+          "label": "Supports"
+        },
+        {
+          "text": "The date field gives the year only. The museum and contemporary sources identify the race sponsor as the Daily Mail.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming & Piloting Federation — Jenny Kammersgaard, 1951",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442865"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual 442865 lists Denmark, one way from France to England, 15:38:00 elapsed, 07:30:00 departure and 23:08:00 arrival. The ratifying-organisation field reads Butlins.",
+          "label": "Supports"
+        },
+        {
+          "text": "The entry supplies the year and calls the event a Butlins race. Contemporary race coverage identifies the Daily Mail.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dansk Kvindebiografisk Leksikon — Jenny Kammersgaard",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://kvindebiografiskleksikon.lex.dk/Jenny_Kammersgaard"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Ole Skjerk's biography gives Jenny Marie Ingeborg Kammersgaard's birth and death, head-up breaststroke, Kattegat and Baltic crossings, publications, teaching and later cold-water swims.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Horsens Sports Archive — Jenny Kammersgaard collection",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://horsensidraetsarkiv.dk/arkivet/udstillingen/jenny-kammersgaard"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The archive describes her origins in Dagnæs, her Baltic and two Channel crossings and the family's 2013 donation of her swimming collection.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Horsens Sports Archive — swimming in Horsens, 1916–2020",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://horsensidraetsarkiv.dk/wp-content/uploads/2020/10/Svoemmesporten-i-Horsens-1916-2020-1.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The table of Kammersgaard's swims records the 1936 Horsens Fjord and Great Belt routes, distances and times. The archive also documents the English Channel swims.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "News on Screen — Daily Mail race entrants' press dossier",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://media.learningonscreen.ac.uk/newsonscreen2/Pathe/104300/NoS_104300_other.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Jenny Eileen James entry identifies Pontypridd, Bristol Channel swims in opposite directions and 8 hours 21 minutes for the 1950 return. The Jenny Kammersgaard entry gives 16:27 for her 1950 Channel race.",
+          "label": "Supports"
+        },
+        {
+          "text": "Pre-race background material. Kammersgaard's 16:27 differs from the 16:30 in her historical federation result.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Dover — group of women in the 1951 Daily Mail race",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/a-group-of-female-channel-swimmers-1951-daily-mail-race"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The named archive caption describes Kammersgaard's breaststroke, gives 16:27 in 1950 and 15:38 in 1951, and distinguishes two unsuccessful attempts in 1952 and one in 1954.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Dover — 1950 Daily Mail race results",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/history/channel-races/daily-mail-races/1950-daily-mail-cross-channel-race"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The finishing list places Jenny Kammersgaard of Denmark ninth in 16:30, among seven men and two women who finished.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its text dates the start and finishes to 23 August. Dover Museum's exhibition and contemporary race coverage support 22 August.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum — 1950s Channel races",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Exhibition sections identify the first Daily Mail race on 22 August 1950 and the second on 16 August 1951. The lists name Jenny Kammersgaard at both and Jenny James in 1951.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Le Monde — 1950 race finishes reported from London",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.lemonde.fr/archives/article/1950/08/24/l-anglaise-eileen-fenton-s-est-classee-premiere-de-sa-categorie_2057858_1819218.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The 23 August London dispatch says the race had ended the previous day with nine successful crossings from Cap Gris-Nez to Dover, including two women.",
+          "label": "Supports"
+        },
+        {
+          "text": "The article was published on 24 August. The named nine-finisher list is provided by the Dover archive.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Le Monde — Calais dispatch on the 1951 race start",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.lemonde.fr/archives/article/1951/08/17/le-francais-le-morvan-precede-les-trois-egyptiens_2069028_1819218.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The 16 August Calais dispatch reports a 07:30 mass start for all twenty Daily Mail swimmers near Cap Gris-Nez and separately times the signal rocket at 07:29.",
+          "label": "Supports"
+        },
+        {
+          "text": "The report was published on 17 August. It does not specify a time zone.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Le Monde — London dispatch on the 1951 race finishes",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.lemonde.fr/archives/article/1951/08/18/l-egyptien-mareeh-hassan-hammad-bat-le-francais-le-morvan-dans-la-traversee-internationale-de-la-manche_2069384_1819218.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dated in London on 17 August, the report says the 12 male and six female finishers reached the Dover area the previous evening.",
+          "label": "Supports"
+        },
+        {
+          "text": "Group finish evidence. Individual names, times and clock readings come from the federation and museum.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Horsens archive — 1995 interview with Jenny Kammersgaard",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://horsensleksikon.dk/wp-content/uploads/Jenny-Kammersgaard-08-07-1995ocr.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The profile recalls her factory work, teaching and Kattegat swim and gives 22 August 1950 for her first Channel success.",
+          "label": "Supports"
+        },
+        {
+          "text": "The article dates her second Channel swim to 30 July 1951. Contemporary coverage and the Dover exhibition identify 16 August.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "jenny-kammersgaard-1950",
+      "title": "First Daily Mail race, France to England",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "Tuesday, 22 August 1950 (recorded swim date)"
+        },
+        {
+          "text": "Tuesday, 22 August 1950 (completion)"
+        },
+        {
+          "text": "16h 30m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "19:04:00 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Results give 16h 30m, while a later press dossier gives 16h 27m. Historical accounts also differ between 22 and 23 August 1950.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    },
+    {
+      "id": "jenny-kammersgaard-1951",
+      "title": "Second Daily Mail race, France to England",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "Thursday, 16 August 1951 (recorded swim date)"
+        },
+        {
+          "text": "Thursday, 16 August 1951 (departure)"
+        },
+        {
+          "text": "Thursday, 16 August 1951 (completion)"
+        },
+        {
+          "text": "15h 38m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "07:30:00 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "23:08:00 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "The selected 15h 38m crossing is recorded on 16 August 1951. A later profile gives 30 July, and published race names differ.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "jenny-kammersgaard-horsens-fjord-1936",
+      "title": "Horsens Fjord, Snaptun to Horsens Harbour",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1936 · exact day not confirmed"
+        },
+        {
+          "text": "Horsens Fjord, Denmark"
+        },
+        {
+          "text": "Completed the swim to Horsens Harbour."
+        },
+        {
+          "text": "17 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "7h 2m",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ]
+    },
+    {
+      "id": "jenny-kammersgaard-oresund-1937",
+      "title": "Øresund, Viken to Hornbæk",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1937 · exact day not confirmed"
+        },
+        {
+          "text": "Øresund, Sweden to Denmark"
+        },
+        {
+          "text": "Completed the crossing from Sweden to Denmark."
+        },
+        {
+          "text": "22 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "7h 30m",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-79e4dd56c8d62fa3010a"
+}
