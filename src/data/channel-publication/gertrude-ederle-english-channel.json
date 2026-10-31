@@ -5,8 +5,9 @@
   "aliases": [],
   "highlight": "First woman across the Channel · Friday 6 August 1926",
   "biography": [
-    "Gertrude Caroline “Trudy” Ederle was born in New York City on 23 October 1905. A member of the Women’s Swimming Association, she developed into a leading freestyle swimmer before turning to long-distance challenges. At the 1924 Paris Olympics she won gold in the 4 × 100 metres freestyle relay and bronze in both the 100 and 400 metres freestyle.",
-    "Ederle turned professional in 1925. On Friday 6 August 1926 she swam from Cap Gris-Nez to Kingsdown, becoming the first woman to cross the English Channel. Her front-crawl crossing was faster than the previous men’s record. The CSA records 14 hours 39 minutes, although some historical accounts give 14 hours 34 minutes.",
+    "Gertrude Caroline “Trudy” Ederle was born in New York City on 23 October 1905. A member of the Women’s Swimming Association, she developed into a leading freestyle swimmer before turning to long-distance challenges. At the 1924 Paris Olympics she won gold in the 4 × 100 metres freestyle relay and bronze in both the 100 and 400 metres freestyle. Her bronze in the 400 metres came in 6 minutes 4.8 seconds, behind her American teammates Martha Norelius and Helen Wainwright. She had already set long-course world records in the 400 metres in 1922 and the 200 metres in 1923.",
+    "On Friday 6 August 1926 Ederle became the first woman to swim the English Channel. She swam front crawl from Cap Gris-Nez to Kingsdown and beat the previous fastest crossing by a man. Her registered time is 14 hours 39 minutes.",
+    "The detailed Dover crossing log gives 07:05 at Cap Gris-Nez and 21:44 at Kingsdown. A second historical register gives 06:09 and 20:48. Both clock pairs span 14 hours 39 minutes, and neither entry names its time standard. Dover Museum gives 14 hours 34 minutes in Between Wars and 14 hours 33 minutes in Records & Firsts. The log lists Joe Costa with Thomas Burgess aboard Alsace, accompanied by the press tug La Morinie. It records retrospective recognition on 16 August 1928.",
     "On 27 August 1926, she returned to New York aboard the Berengaria and was welcomed with a ticker-tape parade. City records preserve the reception committee’s minutes, letters and photographs, including her reception aboard the municipal steamer Macom. The welcome carried her sporting achievement into the city’s civic history.",
     "Later in life, she taught swimming to deaf children, extending her contribution to swimming beyond her competitive achievements."
   ],
@@ -72,7 +73,7 @@
           "label": "Finished"
         },
         {
-          "text": "CSA’s 14h39m remains displayed. The museum’s specific entry gives 07:05–21:44 on 6 August 1926; the contemporaneous Capital Journal AP report gives 07:09–21:40 the same day and 14h31m, also reported by TIME. Other historical summaries give 14h34m, and Dover Museum’s general Records and Firsts page prints 14h33m. No signed timing sheet was inspected and no time-standard conversion is inferred.",
+          "text": "The CSA gives 14h39. The detailed Dover record gives 07:05–21:44. The CS&PF historical database also gives 14h39 but prints 06:09–20:48. Both pairs span 14h39. Neither entry specifies its time standard, and the difference between the two pairs is 56 minutes. The signed timing sheet has not been located in this review.",
           "label": "Timing note"
         },
         {
@@ -112,11 +113,23 @@
           "label": "Conditions"
         },
         {
+          "label": "Dover Museum accounts",
+          "text": "Between Wars gives 14h34. Records & Firsts gives 14h33. Both identify Ederle as the first woman to cross."
+        },
+        {
+          "label": "Contemporary reports",
+          "text": "The Associated Press account preserved in the Capital Journal gives 07:09–21:40 and 14h31. TIME also reported 14h31. The Manchester Guardian’s report of 7 August instead printed 14h45."
+        },
+        {
+          "label": "French archival account",
+          "text": "The Pas-de-Calais departmental archive gives 14h32. Its narrative gives 07:05 and 21:33, which span 14h28 on one clock. The elapsed figure and the clock pair are retained separately."
+        },
+        {
           "text": "How this record was checked",
           "heading": true
         },
         {
-          "text": "CSA record 2236 and the specific Dover Museum swim entry publish 14:39. The museum supplies 07:05 and 21:44 on 6 August. The original Capital Journal front page of 6 August 1926, in its named Associated Press report, instead gives departure 07:09, landing 21:40 and 14:31. This independently documents a contemporary timing alternative; it does not reconcile the record. The displayed duration and structured clocks retain their CSA/museum attribution, and the result remains disputed."
+          "text": "CSA record 2236 identifies Ederle, United States, solo France to England and 14h39. CS&PF historical entry 442807 names the CSA as ratifier and gives the same elapsed time. The Dover swim entry records independent observation followed by CSA recognition on 16 August 1928. These sources establish the crossing and its registered duration. Accounts disagree on the clocks."
         },
         {
           "text": "Channel Swimming Association: Gertrude Ederle, 1926",
@@ -183,6 +196,25 @@
         {
           "text": "Original newspaper scan visually inspected through University of Oregon Libraries. These clocks and duration conflict with the museum record; this is press reporting, not an original timing log.",
           "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical database, Ederle 442807",
+          "url": "https://cspf.co.uk/swim/442807"
+        },
+        {
+          "text": "Dover Museum, Between Wars",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Archives départementales du Pas-de-Calais",
+          "url": "https://www.archivespasdecalais.fr/layout/set/print/Decouvrir/Anniversaires/Anniversaires/Premiere-traversee-feminine-de-la-Manche-a-la-nage"
+        },
+        {
+          "text": "Manchester Guardian, original report of 7 August 1926",
+          "url": "https://www.theguardian.com/sport/2015/aug/07/first-woman-to-swim-the-english-channel-1926"
+        },
+        {
+          "text": "The four linked accounts above were checked on 31 October 2026."
         }
       ],
       "id": "ederle-1926"
@@ -304,6 +336,94 @@
         }
       ],
       "id": "gertrude-ederle-event-2-paris-olympics-womens-4-100-m-freestyle-relay"
+    },
+    {
+      "title": "Paris Olympics — women’s 400 m freestyle",
+      "lines": [
+        {
+          "label": "Final",
+          "text": "Tuesday 15 July 1924, Paris, France"
+        },
+        {
+          "label": "Result",
+          "text": "Bronze for the United States, 6:04.8"
+        },
+        {
+          "label": "Podium",
+          "text": "Martha Norelius won in 6:02.2. Helen Wainwright took silver in 6:03.8."
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "Olympedia, women’s 400 m freestyle final, third row",
+          "url": "https://www.olympedia.org/results/4805"
+        },
+        {
+          "text": "International Swimming Hall of Fame, Gertrude Ederle",
+          "url": "https://ishof.org/honoree/honoree-gertrude-ederle/"
+        },
+        {
+          "text": "The final row names Trudy Ederle for the USA. The Hall of Fame identifies the same swimmer and medal. The heat and semifinal times are separate performances."
+        }
+      ]
+    },
+    {
+      "title": "400 m freestyle world record, 4 August 1922",
+      "lines": [
+        {
+          "label": "Mark",
+          "text": "05:53.20"
+        },
+        {
+          "label": "Pool",
+          "text": "50 m, United States"
+        },
+        {
+          "label": "Historical distinction",
+          "text": "World record at the time of the swim"
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "World Aquatics personal-best table, Gertrude Ederle",
+          "url": "https://www.worldaquatics.com/athletes/1165709/gertrude-ederle"
+        },
+        {
+          "text": "The row gives the date, time, pool length, competition country and WR flag. The competition name and placing are blank."
+        }
+      ]
+    },
+    {
+      "title": "200 m freestyle world record, 4 April 1923",
+      "lines": [
+        {
+          "label": "Mark",
+          "text": "02:45.20"
+        },
+        {
+          "label": "Pool",
+          "text": "50 m, United States"
+        },
+        {
+          "label": "Historical distinction",
+          "text": "World record at the time of the swim"
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "World Aquatics personal-best table, Gertrude Ederle",
+          "url": "https://www.worldaquatics.com/athletes/1165709/gertrude-ederle"
+        },
+        {
+          "text": "The row gives the date, time, pool length, competition country and WR flag. The competition name and placing are blank."
+        }
+      ]
     }
   ],
   "milestones": [
@@ -411,8 +531,8 @@
       "value": "The featured swim started on Friday, 6 August 1926 and finished on Friday, 6 August 1926. Conflicting details are identified in the crossing record."
     },
     {
-      "label": "How long did Gertrude Ederle’s featured Channel swim take?",
-      "value": "The featured solo crossing has a published elapsed time of 14 hours and 39 minutes. CSA and the specific museum record give 14h39m; historical durations and clock times conflict."
+      "label": "How long did Gertrude Ederle take to swim the English Channel?",
+      "value": "Her registered time on 6 August 1926 is 14 hours 39 minutes. Two Dover Museum summaries give 14 hours 34 minutes and 14 hours 33 minutes. The crossing record explains the differences."
     }
   ],
   "sources": [
@@ -619,6 +739,18 @@
           "label": "Limitations"
         }
       ]
+    },
+    {
+      "title": "World Aquatics",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.worldaquatics.com/athletes/1165709/gertrude-ederle"
+        },
+        {
+          "text": "Official athlete 1165709 represents the USA. The personal-best table gives both long-course world-record marks."
+        }
+      ]
     }
   ],
   "nativeCrossings": [
@@ -642,11 +774,11 @@
           "label": "Elapsed time"
         },
         {
-          "text": "07:05 · Time zone not specified",
+          "text": "07:05 in the detailed Dover archive. Other records give different clocks. Time standard unspecified.",
           "label": "Start clock"
         },
         {
-          "text": "21:44 · Time zone not specified",
+          "text": "21:44 in the detailed Dover archive. Other records give different clocks. Time standard unspecified.",
           "label": "Finish clock"
         },
         {
@@ -714,8 +846,59 @@
         }
       ],
       "id": "gertrude-ederle-event-2-paris-olympics-womens-4-100-m-freestyle-relay"
+    },
+    {
+      "title": "Paris Olympics — women’s 400 m freestyle",
+      "lines": [
+        {
+          "label": "Final",
+          "text": "Tuesday 15 July 1924, Paris, France"
+        },
+        {
+          "label": "Result",
+          "text": "Bronze for the United States, 6:04.8"
+        },
+        {
+          "label": "Podium",
+          "text": "Martha Norelius won in 6:02.2. Helen Wainwright took silver in 6:03.8."
+        }
+      ]
+    },
+    {
+      "title": "400 m freestyle world record, 4 August 1922",
+      "lines": [
+        {
+          "label": "Mark",
+          "text": "05:53.20"
+        },
+        {
+          "label": "Pool",
+          "text": "50 m, United States"
+        },
+        {
+          "label": "Historical distinction",
+          "text": "World record at the time of the swim"
+        }
+      ]
+    },
+    {
+      "title": "200 m freestyle world record, 4 April 1923",
+      "lines": [
+        {
+          "label": "Mark",
+          "text": "02:45.20"
+        },
+        {
+          "label": "Pool",
+          "text": "50 m, United States"
+        },
+        {
+          "label": "Historical distinction",
+          "text": "World record at the time of the swim"
+        }
+      ]
     }
   ],
   "checkedAt": "2026-10-31",
-  "revision": "channel-8e40157f89cbab0ac7c8"
+  "revision": "channel-abfb580400591b7b87b5"
 }

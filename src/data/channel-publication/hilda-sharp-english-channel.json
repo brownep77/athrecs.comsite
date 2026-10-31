@@ -1,0 +1,214 @@
+{
+  "slug": "hilda-sharp-english-channel",
+  "name": "Hilda Sharp",
+  "country": "England",
+  "aliases": [
+    "Hilda Winifred Sharp",
+    "Laddie Sharp"
+  ],
+  "highlight": "From Cap Gris-Nez to the cliffs below Dover in 14 hours 58 minutes, August 1928.",
+  "biography": [
+    "Hilda Winifred Sharp, known as Laddie, lived in Hither Green in south-east London. She trained at Brighton with Jabez Wolffe, who had made repeated attempts on the Channel himself. Sharp succeeded on her first attempt at the age of 18.",
+    "In August 1928 Sharp swam from Cap Gris-Nez to Lydden Spout on the English coast. She used the trudgen stroke. William Burgess and Joe Costa accompanied her on the Alsace, and Wolffe was aboard as her trainer. Her recorded crossing time was 14 hours 58 minutes.",
+    "The dated swim log records a 00:50 departure and a 15:48 finish on Friday 24 August 1928. The archive’s introduction gives 28 August and a 16:48 finish. The dated entry is the one whose clocks agree with the registered duration. Neither entry gives a time zone."
+  ],
+  "flags": [
+    {
+      "code": "gb-eng",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sport",
+      "value": "Open-water swimming"
+    },
+    {
+      "label": "Trainer",
+      "value": "Jabez Wolffe"
+    },
+    {
+      "label": "Age at crossing",
+      "value": "18"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Cap Gris-Nez to Lydden Spout, August 1928",
+      "lines": [
+        {
+          "label": "Swim",
+          "text": "Solo, one way from France to England"
+        },
+        {
+          "label": "Elapsed time",
+          "text": "14 hours 58 minutes"
+        },
+        {
+          "label": "Departure",
+          "text": "00:50 on Friday 24 August, Cap Gris-Nez"
+        },
+        {
+          "label": "Arrival",
+          "text": "15:48 on 24 August, Lydden Spout, near Dover. These are the detailed archive entry’s clocks. Its time standard is unspecified."
+        },
+        {
+          "label": "Historical discrepancy",
+          "text": "The archive’s biographical introduction instead gives 28 August and a 16:48 finish. The dated swim entry agrees with the registered elapsed time. The precise clock readings remain qualified."
+        },
+        {
+          "label": "Escort",
+          "text": "William Burgess and Joe Costa, aboard Alsace. The archive also names Costa as timekeeper."
+        },
+        {
+          "label": "Recognition",
+          "text": "The crossing appears in the CSA register. The detailed historical entry classifies it as independent."
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2242",
+          "url": "https://www.channelswimmingassociation.com/swim/2242/hilda-sharp"
+        },
+        {
+          "text": "CS&PF historical database, swim 442816",
+          "url": "https://cspf.co.uk/swim/442816"
+        },
+        {
+          "text": "Channel Swimming Dover, dated swim entry and biographical introduction",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/sharp-miss-hilda-laddie"
+        },
+        {
+          "text": "Dover.UK historical swim record",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1928-08-24/hilda-winifred-sharp"
+        },
+        {
+          "text": "The two registers agree on year, direction and duration. The historical database attributes recognition to the CSA and gives no clocks. The dated archive entry and Dover.UK agree on 24 August. The archive spells the landing “Lyddon Spout” in the swim entry and “Lydden Spout” in its introduction."
+        }
+      ],
+      "id": "sharp-1928"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [],
+  "media": [
+    {
+      "title": "Sharp and Peggy Duncan with their trainer",
+      "lines": [
+        {
+          "text": "View the archive photograph",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/channel-swimmer-jabez-wolffe"
+        },
+        {
+          "text": "Channel Swimming Dover catalogues this photograph as 1932. It shows the swimmers with Jabez Wolffe after their Channel successes."
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "How long did Hilda Sharp take to swim the English Channel?",
+      "value": "She crossed from France to England in 14 hours 58 minutes in August 1928."
+    },
+    {
+      "label": "Where did Hilda Sharp finish?",
+      "value": "She landed at Lydden Spout, on the English coast near Dover."
+    },
+    {
+      "label": "Who trained Hilda Sharp?",
+      "value": "She trained with Jabez Wolffe, who accompanied her successful 1928 crossing."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Dover",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/sharp-miss-hilda-laddie"
+        },
+        {
+          "text": "Full name, hometown, crew, stroke and the two versions of the crossing."
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Dover photograph",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/channel-swimmer-jabez-wolffe"
+        },
+        {
+          "text": "Its caption identifies Sharp, Wolffe and Peggy Duncan and describes Sharp’s first-attempt success."
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1928-08-24/hilda-winifred-sharp"
+        },
+        {
+          "text": "Training at Brighton and the 24 August date."
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical swim database",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/442816"
+        },
+        {
+          "text": "Age, sporting country, duration and CSA attribution."
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Cap Gris-Nez to Lydden Spout, August 1928",
+      "lines": [
+        {
+          "label": "Swim",
+          "text": "Solo, one way from France to England"
+        },
+        {
+          "label": "Elapsed time",
+          "text": "14 hours 58 minutes"
+        },
+        {
+          "label": "Departure",
+          "text": "00:50 on Friday 24 August, Cap Gris-Nez"
+        },
+        {
+          "label": "Arrival",
+          "text": "15:48 on 24 August, Lydden Spout, near Dover. These are the detailed archive entry’s clocks. Its time standard is unspecified."
+        },
+        {
+          "label": "Historical discrepancy",
+          "text": "The archive’s biographical introduction instead gives 28 August and a 16:48 finish. The dated swim entry agrees with the registered elapsed time. The precise clock readings remain qualified."
+        },
+        {
+          "label": "Escort",
+          "text": "William Burgess and Joe Costa, aboard Alsace. The archive also names Costa as timekeeper."
+        },
+        {
+          "label": "Recognition",
+          "text": "The crossing appears in the CSA register. The detailed historical entry classifies it as independent."
+        }
+      ],
+      "id": "sharp-1928"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-7210930ee26bfce9f4ac"
+}
