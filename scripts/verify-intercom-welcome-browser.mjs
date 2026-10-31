@@ -159,8 +159,8 @@ try {
       await page.clock.runFor(20_000);
       assert.equal(await showCount(page), 0, "No ready callback means no automatic open");
       await markReady(page);
-      await page.clock.runFor(9999);
-      assert.equal(await showCount(page), 0, "Wait the full ten seconds");
+      await page.clock.runFor(4999);
+      assert.equal(await showCount(page), 0, "Wait the full five seconds");
       await page.screenshot({ path: resolve(screenshots, "desktop-banner.png"), fullPage: true });
       await page.clock.runFor(1);
       assert.equal(await showCount(page), 1);
@@ -202,7 +202,7 @@ try {
     {},
     async (page) => {
       await markReady(page);
-      await page.clock.runFor(9999);
+      await page.clock.runFor(4999);
       await page.evaluate(() => window.fixture.setAuth({ isPending: true }));
       await page.clock.runFor(30_000);
       assert.equal(await showCount(page), 0);
@@ -244,7 +244,7 @@ try {
     await page.clock.runFor(30_000);
     assert.equal(await showCount(page), 0);
     await page.locator("#fixture-neutral").focus();
-    await page.clock.runFor(5000);
+    await page.clock.runFor(2500);
     await page.evaluate(() => {
       document.querySelector("#fixture-dialog").hidden = false;
     });
@@ -259,7 +259,7 @@ try {
 
   await withPage("manual Messenger opening cancels the pending introduction", {}, async (page) => {
     await markReady(page);
-    await page.clock.runFor(5000);
+    await page.clock.runFor(2500);
     await page.evaluate(() => {
       window.fixture.nativeOpen();
       window.fixture.hide();
@@ -330,7 +330,7 @@ try {
         await page.evaluate(
           () => window.fixture.calls.find(([method]) => method === "showNewMessage")[1],
         ),
-        /find my athlete profile/,
+        /create my athlete profile/,
       );
       await page.evaluate(() => window.fixture.hide());
       await page.setViewportSize({ width: 1280, height: 900 });
@@ -363,10 +363,10 @@ try {
       "mailto:support@athrecs.com",
     );
     const expected = {
-      profile: "/athletes",
-      results: "mailto:support@athrecs.com?subject=Missing%20AthRecs%20results",
+      profile: "/join",
+      results: "mailto:support@athrecs.com?subject=Missing%20AthRecs%20fixtures%20or%20results",
       race: "/races",
-      correction: "mailto:support@athrecs.com?subject=AthRecs%20correction",
+      correction: "mailto:support@athrecs.com?subject=AthRecs%20amendment%20or%20update",
     };
     for (const [key, href] of Object.entries(expected)) {
       assert.equal(
@@ -375,7 +375,7 @@ try {
       );
     }
     await page.locator('[data-intercom-choice="profile"]').click();
-    assert.equal(new URL(page.url()).pathname, "/athletes");
+    assert.equal(new URL(page.url()).pathname, "/join");
   });
 
   await withPage(

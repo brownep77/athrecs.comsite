@@ -297,8 +297,8 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
           <Link to="/sportsrecs" className="hover:text-accent">
             SportsRecs network
           </Link>
-          <Link to="/about-us" className="hover:text-accent">
-            About us
+          <Link to="/about-us" className="font-semibold hover:text-accent">
+            About AthRecs
           </Link>
           <Link to="/site-map" className="hover:text-accent">
             Browse AthRecs

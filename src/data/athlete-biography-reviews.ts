@@ -2,6 +2,248 @@
 // A matching slug alone never publishes this text: exact-text approval is required.
 export const athleteBiographyReviews = [
   {
+    slug: "matt-james-television",
+    title: "Matt James marathon times, running results & biography",
+    description:
+      "Matt James’s running history, including his 3:00:20 New York marathon, London, Boston, Chicago, Sydney and half-marathon results.",
+    alternateName: ["Matthew James"],
+    headings: ["Matt James", "Marathon progression", "More running results", "Training and goals"],
+    paragraphs: [
+      "Matt James is a television personality, entrepreneur and distance runner, best known for leading the 2021 season of The Bachelor. Raised in North Carolina, he studied economics and played college football at Wake Forest University. His sporting life has continued through regular marathon training and racing.",
+      "His recorded marathon history begins with Chicago in 2019, completed in 4:45:32. He ran the New York City Marathon in 5:02:23 in 2021, improved to 3:46:45 in 2022 and then to 3:04:50 in 2023. In 2024 he finished London in 3:00:41 before improving again to 3:00:20 in New York, just 20 seconds beyond three hours. He returned to New York in 2025 to finish in 3:31:10.",
+      "His wider results include Boston in 3:49:38 in 2022 and 3:36:54 in 2025, and Sydney in 3:30:15 in 2026. Over the half-marathon distance, he ran 1:49:18 in San Francisco in 2023, 1:27:32 at the 2024 Disney Princess Half Marathon and 1:24:32 at the 2025 Brooklyn Half. His 2025 Fifth Avenue Mile was 5:14.",
+      "James has spoken about wanting to break three hours and about learning to pace races with coach Julia Lucas. His progression reflects years of training across several distances. He is among the announced runners for the New York City Marathon on 1 November 2026.",
+    ],
+  },
+  {
+    slug: "karen-sarahi-gonzalez-london-2025-fc604f093e5df9f2",
+    title: "Karen Sarahi Gonzalez (iluvsarahii) marathon results & biography",
+    description:
+      "Karen Sarahi Gonzalez’s running biography and results, including London 3:24:53 and New York marathon finishes in 2024 and 2025.",
+    alternateName: ["iluvsarahii", "Karen Sarahi Robles", "Karen Sarahi Gonzalez"],
+    headings: ["Karen Sarahi Gonzalez"],
+    paragraphs: [
+      "Karen Sarahi Gonzalez, known online as iluvsarahii, is a beauty creator, makeup artist and founder of LYBRE Lashes. She describes herself as a Mexican Latina and has built a community around beauty and self-expression. Running has become another sustained commitment: she completed the 2024 New York City Marathon in 3:37:47, ran London in 3:24:53 in April 2025, and returned to New York that November to finish in 3:34:00. She is listed for the 2026 New York City Marathon with Team Maybelline.",
+    ],
+  },
+  {
+    slug: "chelsea-clinton-wmm-d9a12c39-5ec7-11ed-9b3c-02848444c773",
+    title: "Chelsea Clinton marathon results, Boston time & biography",
+    description:
+      "Chelsea Clinton’s running biography and marathon history: New York City, Boston 3:40:52 and Chicago, with race dates, results and clear verification labels.",
+    paragraphs: [
+      "Chelsea Clinton is an American marathon runner, author and vice chair of the Clinton Foundation. Her recorded running history includes the New York City Marathon, Boston Marathon and Chicago Marathon. Her fastest reported marathon is 3:40:52 at Boston on 20 April 2026. She is the daughter of former US president Bill Clinton and former secretary of state Hillary Rodham Clinton.",
+      "Born Chelsea Victoria Clinton in Little Rock, Arkansas, on 27 February 1980, she studied at Stanford before completing postgraduate degrees at Oxford and Columbia. Alongside her writing and foundation work, she teaches at Columbia University's Mailman School of Public Health. She began running regularly at Stanford and made her marathon debut after turning 40.",
+      "Clinton's first New York City Marathon in 2021 ended in 3:59:09, taking her below four hours on debut. She ran in support of City Harvest, the New York food-rescue charity. Her return in 2022 brought a 4:20:34 finish. She subsequently improved to 3:45:51 in 2024 and 3:44:22 in 2025.",
+      "Her 2025 New York race showed particularly consistent pacing: she reached halfway in 1:52:27 and ran the second half in 1:51:55. That is a negative split of 32 seconds, meaning the second half was quicker than the first. It was also 14 minutes and 47 seconds faster than her 2021 debut.",
+      "On Monday 20 April 2026, Clinton completed her first Boston Marathon in 3:40:52. Bill and Hillary greeted her at the finish on Boylston Street. Contemporary reporting described her initial entry name as Margaret Smith and said the results were subsequently updated to Chelsea Clinton. Hillary attended as a supporter; the Boston performance belongs to Chelsea.",
+      "Reports from the Boston finish also describe police officers running alongside Clinton and receiving medals from her parents. The accounts reviewed for this biography do not name those officers. They do not establish individual official results or identify the officers as Secret Service agents, so no names or separate athlete performances are attributed to them here.",
+      "On Sunday 11 October 2026, Clinton completed her first Chicago Marathon in a reported 3:47:55. Chicago added another major city marathon to her running history after New York and Boston. Her parents were again present at the finish.",
+      "This profile brings together six identified marathon finishes through October 2026. It is a documented selection, not a confirmed lifetime total. Verification labels beside the individual results show which performances have been checked against an official result row; a published biography does not itself verify a race time. Additional shorter-distance races remain open to research.",
+    ],
+    headings: [
+      "",
+      "Background and the start of her running",
+      "New York City Marathon: 2021 to 2025",
+      "A negative split in New York",
+      "Boston Marathon 2026: 3:40:52",
+      "The police officers at the Boston finish",
+      "Chicago Marathon 2026",
+      "Race-history coverage and verification",
+    ],
+    mentions: [
+      {
+        text: "New York City Marathon",
+        url: "/races/new-york-city-marathon",
+      },
+      {
+        text: "Boston Marathon",
+        url: "/races/boston-marathon",
+      },
+      {
+        text: "Chicago Marathon",
+        url: "/races/chicago-marathon",
+      },
+    ],
+    links: [],
+    questions: [
+      {
+        question: "Did Hillary Clinton run the 2026 Boston Marathon?",
+        answer:
+          "Chelsea Clinton ran the race on 20 April 2026, finishing in 3:40:52. Her parents, Hillary and Bill Clinton, greeted her at the finish.",
+      },
+      {
+        question: "What is Chelsea Clinton's fastest reported marathon time?",
+        answer:
+          "Her fastest reported marathon is 3 hours, 40 minutes and 52 seconds at the 2026 Boston Marathon. The result's verification label is shown in her race history.",
+      },
+      {
+        question: "What are Chelsea Clinton's New York City Marathon times?",
+        answer:
+          "Her reported New York City Marathon finishes are 3:59:09 in 2021, 4:20:34 in 2022, 3:45:51 in 2024 and 3:44:22 in 2025.",
+      },
+      {
+        question: "Did Chelsea Clinton run the Chicago Marathon?",
+        answer:
+          "Yes. Chelsea Clinton completed the Chicago Marathon on 11 October 2026 in a reported 3:47:55.",
+      },
+      {
+        question: "Were the police officers who ran with Chelsea Clinton at Boston named?",
+        answer:
+          "The reports reviewed by AthRecs describe police officers receiving medals but do not name them or establish their individual official race results.",
+      },
+    ],
+    alternateName: ["Chelsea Victoria Clinton"],
+    sameAs: ["https://www.clintonlibrary.gov/research/clinton-biographies"],
+  },
+  {
+    slug: "russ-cook",
+    title: "Russ Cook (Hardest Geezer): biography, Africa run & results",
+    description:
+      "Russ Cook, the Hardest Geezer: his 352-day Africa run, Brighton and London Marathon results, Sahara Marathon, earlier challenges and rise to fame.",
+    paragraphs: [
+      "Russ Cook, known as the Hardest Geezer and also as Russell Cook, is a British endurance runner, adventurer and author from Worthing, West Sussex. His defining achievement is Project Africa: running from Cape Agulhas in South Africa to Ras Angela in Tunisia between 22 April 2023 and 7 April 2024. The 352-day expedition covered approximately 16,300 kilometres through 16 countries, linking the African mainland's southernmost and northernmost points. His account of that journey brought an international audience to a runner whose earlier challenges had already attracted an online following.",
+      "Cook's route into endurance sport began with a search for direction. He has described feeling dissatisfied with nights out and spontaneously running home to Worthing from Brighton. A friend then encouraged him to train for the Brighton Half Marathon. Completing it led to the Brighton Marathon and further running challenges. In his account, training offered something he had been missing: a routine, measurable progress and growing confidence in what he could achieve. His Brighton Marathon finish on 15 April 2018 is now documented at 3:42:59 chip time. He wore bib 16177 at the race, an early milestone before the expeditions that would bring him wider recognition.",
+      "In 2019, Cook ran from the Asian side of Istanbul to London without a support crew, carrying essentials in a backpack and sleeping in a hammock. A contemporary interview records 66 days to London, covering roughly 71 marathon distances through 11 countries. He then continued home to Worthing, bringing the full journey to 68 days and approximately 73 marathon distances. The challenge supported The Running Charity and established his interest in journeys measured in weeks rather than hours. Those marathon equivalents describe cumulative distance, not entries in 71 or 73 separate organised races.",
+      "In 2020, Cook completed a marathon-distance challenge while pulling a car, in a reported nine hours and 56 minutes. The effort combined sustained running and pulling resistance, so its time belongs to that particular challenge rather than a conventional road-marathon comparison. Before Project Africa, he also documented a seven-day buried-alive endurance stunt. These unusual challenges helped establish the Hardest Geezer persona and an audience for his attempts to test physical and mental limits; the stunt is not a running result.",
+      "His earlier fundraising also included a 68-mile run for West Sussex homelessness charity Turning Tides in 2020. Contemporary coverage reported that he completed the effort in 13 hours and raised more than £1,200 as part of the 2.6 Challenge.",
+      "Before Project Africa, Cook also climbed car-park stairs until he had accumulated the equivalent height of Mount Everest, a challenge described in his June 2022 Bad Boy Running interview. This was a repeated staircase ascent rather than an expedition to Everest. Contemporary coverage also reported a marathon on crutches and a separate beer-marathon stunt. Alongside the car pull, these unconventional efforts help explain how the Hardest Geezer identity developed before his international breakthrough.",
+      "Project Africa took that ambition onto a different scale. Approximately 16,300 kilometres is more than 10,000 miles and about 386 standard marathon distances. Dividing the rounded distance by 352 gives roughly 46 kilometres per calendar day across about 50 weeks, including interruptions. That is a way to understand the accumulated workload, not a claim that every day had the same distance or that he never rested. Success required repeatedly recovering enough to continue while a support team managed the practical demands of an expedition across borders and changing terrain.",
+      "The journey passed through rainforest, mountains and the Sahara, exposing Cook and his team to very different conditions. Armed robbery, illness, injury and visa problems repeatedly disrupted their progress, while the Algerian border threatened the final approach to Tunisia. The physical challenge was inseparable from the uncertainty of keeping the expedition moving. His recollections also emphasise hospitality: he has spoken warmly about sharing a meal and staying with a Nigerian family. The people who helped along the route are part of the achievement, alongside the distances and setbacks.",
+      "Cook is widely credited as the first known person to run between Africa's southernmost and northernmost points. That precise route matters. The broader description of him as the first person to run the length of Africa was contested by the World Runners Association, which recognises Jesper Kenn Olsen's earlier Taba-to-Cape of Good Hope journey, completed in 2010. The association did not dispute Cook's claim for the southernmost-to-northernmost route. Recognising those different endpoints preserves the significance of his achievement and the history of earlier trans-African running.",
+      "His fame grew as people followed Project Africa while it was happening. Video episodes and social updates gave the journey a continuing story, with progress, setbacks and the finish unfolding in public. Steven Bartlett's publishing company describes Bartlett discovering Cook's updates during the first week of the expedition; their subsequent connection led to a Diary of a CEO appearance and a publishing relationship. By the finish in Tunisia, supporters had travelled to join him and international news coverage had taken the story beyond his existing online audience. The combination of sustained endurance, candid storytelling and a finish people could share explains much of his wider recognition.",
+      "Project Africa went on to raise more than £1 million for The Running Charity and Sandblast. The Running Charity uses running and ongoing support to help young people experiencing homelessness or complex needs. Cook worked for the organisation before the expedition and now supports it as an ambassador. Sandblast works with Saharawi communities through education, arts and cultural programmes and lists Cook as a patron from 2024. His fundraising gives the expedition an impact beyond the sporting accomplishment, supporting organisations with which he has maintained a continuing connection.",
+      "Cook also takes part in conventional road races. On 21 April 2024, just two weeks after finishing Project Africa, he completed the London Marathon in 4:25:40 while supporting young runners from The Running Charity. On 2 November 2025, he ran the New York City Marathon in 2:53:05 net time, taking him below three hours. At the London Marathon on 26 April 2026, he improved to 2:46:59 net, six minutes and six seconds quicker than New York. He discussed his disappointment after targeting 2:35, alongside the lessons and progress he took from the race. These performances show his development in road racing alongside the long expeditions for which he became known.",
+      "After Project Africa, Cook brought his running to another large sporting audience during Euro 2024. He left Wembley on 11 June 2024 and reached Gelsenkirchen for England's opening match against Serbia, then continued running between host cities. The journey included a ferry crossing from Harwich to the Netherlands. Supported by Sports Direct and Score Draw, he directed his sponsorship towards The Running Charity. A recurrence of a back injury stopped him running the final leg to Berlin; he announced that change on 11 July. The challenge connected endurance running, football supporters and fundraising, while falling short of his original aim to run to every England match.",
+      "In January 2025, Cook climbed Mount Kilimanjaro in Tanzania as part of the first Hardest Adventures group mission. Five selected participants joined the expedition free of charge. The 5,895-metre mountain introduced a different challenge from his long-distance running: altitude and the reduced oxygen available as the team climbed. Cook described struggling above 5,000 metres and credited the local guides and porters for their care. The resulting film followed the group's progress and the fact that not everyone reached the summit.",
+      "On 25 February 2025, Cook completed the Sahara Marathon in 4:34:45, placing 21st overall. Held in the Saharawi refugee camps in southwest Algeria, the event combines desert running with support for the refugee community. Its published 42 km distance and desert setting distinguish this result from his road-marathon performances. The Sahara Marathon is a separate event from the multi-stage Marathon des Sables.",
+      "Cook has also tried backyard ultrarunning, where runners repeatedly start a new loop on the hour. Fellow competitor Sam Bodoano described racing alongside him at a Mackyard event on a hilly cycling circuit near London in May 2026. Cook's own video records 20 completed laps before he stopped during the 21st, struggling with stomach problems. His account shows how the repeated hourly starts, overnight running and limited recovery create a different test from a continuous road race.",
+      "In 2025, Cook completed a run along the length of New Zealand in 73 days, travelling from Bluff to Cape Reinga. During the expedition he also attempted a faster 100 km effort. His account, reported in April 2025, recorded 100.3 km in 10 hours and 59 minutes of moving time, with 11 hours and 19 minutes elapsed including stops. This was an effort within his expedition; the moving time is not an official 100 km race result. Storms, difficult trails and injury made the wider journey a different test from his African road expedition.",
+      "Cook also documented an outing with Rarámuri runner Arnulfo Quimare on the Caballo Blanco route in Mexico's Copper Canyon. The video follows an independent attempt on the route, with Cook eventually stopping before completing the full distance. It adds to his experience of ultrarunning terrain and culture, without establishing a finish in the organised Caballo Blanco race.",
+      "In August 2025, Cook joined 247 Mission: Iceland, a relay from Hraunhafnartangi to Reykjavik. The seven-athlete team collectively covered 607 kilometres in a reported two days, with Cook sharing the running in relay legs. The University of Chichester recognised his achievements with an Honorary Master of Sport at its 2025 graduation ceremony. His memoir first appeared in October 2024, with the paperback Mind over Miles following in July 2025, taking his story of endurance and personal change to readers as well as viewers.",
+      "Cook's Southwark parkrun films show him developing speed over 5 km as well as endurance over much longer distances. In a film released in October 2025, he describes a 30-day training block and reports finishing tenth in 17:36, paced by Olympic marathon runner Stephen Scullion. A follow-up released in June 2026 shows a 17:06 watch reading and Cook reporting second place. That later figure is a watch time rather than a published parkrun finish time. These shorter efforts brought intervals, pacing and faster running into the story of an athlete best known for crossing continents.",
+      "On 16 August 2026, Cook completed IRONMAN Leeds in 12:04:47. The swim was cancelled, so his result records the modified bike-and-run event. His published splits were 7:13:59 for the bike, 17:22 in transition and 4:33:27 for the run. The marathon split was part of the multisport event and is separate from his road-marathon personal best. On 12 September 2026, he also took first place at Great Yarmouth North Beach parkrun in 22:00, tackling its sand-and-shingle course. That is a parkrun finish time, which is not chip timed.",
+      "Cook also completed the National Three Peaks Challenge, climbing Ben Nevis in Scotland, Scafell Pike in England and Yr Wyddfa, also called Snowdon, in Wales. His film, released in August 2026, records a finish in 23 hours and nine minutes, leaving 51 minutes inside the 24-hour target. Road transfers connected the three climbs. The challenge brought together mountain endurance and his community work, with a group from The Running Charity taking part. The time describes the filmed challenge, rather than a classified running-race result.",
+      "His running has also helped others take on their own challenges. In 2024, he supported Marcus Skeet, known online as The Hull Boy, during the teenager's fundraising for Mind. He joined the final day of Skeet's April mile-a-day challenge and later supported his first marathon in London that September. This was a charity running project, rather than an additional timed London Marathon result for Cook.",
+      "Cook subsequently co-founded Hardest Adventures. Its origin story traces the idea to meeting his co-founder at the finish of Project Africa in Tunisia. The company combines group adventures with filmed missions. Its Colombia mission took Cook and a team into the jungle to document a trek towards Ciudad Perdida, the Lost City, on a planned 48 km route. His work with The Running Charity also includes talks, support for coaches and opportunities for young people to experience adventure. Together, his running, books and community projects show how the visibility earned on the road has developed into a wider public role. Project Africa remains the achievement that connects these strands: almost a year of sustained effort made visible to people around the world.",
+    ],
+    headings: [
+      "",
+      "How Russ Cook started running",
+      "2019: running from Istanbul to London and Worthing",
+      "2020: a marathon while pulling a car",
+      "2020: a 68-mile charity challenge",
+      "Before Africa: stairs, crutches and unconventional challenges",
+      "Project Africa: the scale of 352 days",
+      "Terrain, setbacks and the people along the way",
+      "Was he the first person to run across Africa?",
+      "How the Hardest Geezer became famous",
+      "Fundraising and charity work",
+      "London and New York City Marathon results",
+      "Euro 2024: running to support England",
+      "January 2025: climbing Mount Kilimanjaro",
+      "Sahara Marathon 2025: 4:34:45 and 21st overall",
+      "Mackyard backyard ultra: 20 completed laps",
+      "New Zealand and a 100 km expedition effort",
+      "Copper Canyon: running with Arnulfo Quimare",
+      "Iceland, his memoir and public recognition",
+      "Southwark parkrun: developing his 5 km speed",
+      "IRONMAN Leeds and Great Yarmouth parkrun in 2026",
+      "National Three Peaks Challenge: 23 hours and nine minutes",
+      "Supporting Marcus Skeet and charity running",
+      "Hardest Adventures and his continuing influence",
+    ],
+    mentions: [
+      {
+        text: "London Marathon",
+        url: "/races/london-marathon",
+      },
+    ],
+    links: [
+      {
+        label: "Hardest Adventures",
+        url: "https://www.hardestadventures.com/about-us",
+      },
+      {
+        label: "Mind over Miles — official book page",
+        url: "https://www.penguin.co.uk/books/467785/mind-over-miles-by-geezer-russ-cook-aka-hardest/9781529945935",
+      },
+    ],
+    questions: [
+      {
+        question: "Who is the Hardest Geezer?",
+        answer:
+          "The Hardest Geezer is Russ Cook, also known as Russell Cook, a British endurance runner and author from Worthing, West Sussex. He is best known for Project Africa, his 352-day run between Africa's southernmost and northernmost points.",
+      },
+      {
+        question: "How far did Russ Cook run in Africa?",
+        answer:
+          "He covered approximately 16,300 kilometres, or more than 10,000 miles, through 16 countries. That is about 386 standard marathon distances accumulated during one expedition.",
+      },
+      {
+        question: "When did the Hardest Geezer start and finish Project Africa?",
+        answer:
+          "Russ Cook began at Cape Agulhas, South Africa, on 22 April 2023 and finished at Ras Angela, Tunisia, on 7 April 2024. The expedition took 352 days.",
+      },
+      {
+        question: "Was Russ Cook the first person to run the length of Africa?",
+        answer:
+          "His first-known claim concerns running between Africa's southernmost and northernmost points. Earlier runners crossed Africa by different routes, including Jesper Kenn Olsen, whose Taba-to-Cape of Good Hope run finished in 2010.",
+      },
+      {
+        question: "What running challenges did Russ Cook complete before Africa?",
+        answer:
+          "His earlier story includes the Brighton Half Marathon and Brighton Marathon, a 2019 run from Istanbul to London and onward to Worthing, and a 2020 car-pulling marathon completed in a reported nine hours and 56 minutes.",
+      },
+      {
+        question: "Which charities did Project Africa support?",
+        answer:
+          "Project Africa went on to raise more than £1 million for The Running Charity and Sandblast. Their work supports young people experiencing homelessness or complex needs and Saharawi communities respectively.",
+      },
+      {
+        question: "What was the Hardest Geezer's Brighton Marathon time?",
+        answer:
+          "Russ Cook completed the Brighton Marathon on 15 April 2018 in 3 hours, 42 minutes and 59 seconds chip time, wearing bib 16177.",
+      },
+      {
+        question: "What was Russ Cook's New York City Marathon time?",
+        answer:
+          "Russ Cook ran the New York City Marathon on 2 November 2025 in 2 hours, 53 minutes and 5 seconds net time.",
+      },
+      {
+        question: "Did Russ Cook finish IRONMAN Leeds?",
+        answer:
+          "Yes. Russ Cook completed the modified IRONMAN Leeds event on 16 August 2026 in 12 hours, 4 minutes and 47 seconds. The swim was cancelled, so this was a bike-and-run result.",
+      },
+      {
+        question: "What are Russ Cook's London Marathon times?",
+        answer:
+          "His verified London Marathon finishes are 4:25:40 on 21 April 2024 and 2:46:59 on 26 April 2026. The 2026 result is a net time.",
+      },
+      {
+        question: "Did the Hardest Geezer run the length of New Zealand?",
+        answer: "Yes. Russ Cook completed his New Zealand expedition in 2025 in 73 days.",
+      },
+      {
+        question: "Has the Hardest Geezer climbed Kilimanjaro?",
+        answer:
+          "Yes. Russ Cook climbed Mount Kilimanjaro in Tanzania in January 2025 during the first Hardest Adventures group mission. The mountain reaches 5,895 metres above sea level.",
+      },
+      {
+        question: "How long did Russ Cook take to complete the Three Peaks Challenge?",
+        answer:
+          "His film records a National Three Peaks Challenge finish in 23 hours and nine minutes, including road transfers between Ben Nevis, Scafell Pike and Yr Wyddfa (Snowdon). The film was released in August 2026.",
+      },
+      {
+        question: "How fast has Russ Cook run at Southwark parkrun?",
+        answer:
+          "In his films, Russ Cook reports 17:36 and tenth place at Southwark parkrun, followed by a 17:06 watch reading and second place in a later outing. The latter is a watch time; parkruns are not chip timed.",
+      },
+    ],
+    alternateName: ["Hardest Geezer", "The Hardest Geezer", "Russell Cook"],
+    sameAs: ["https://www.penguin.co.uk/authors/308688/russ-cook"],
+  },
+  {
     slug: "spencer-matthews-untapped",
     title: "Spencer Matthews biography, running records & UNTAPPED",
     description:
@@ -12,6 +254,7 @@ export const athleteBiographyReviews = [
       "In July 2021, Matthews completed the 100 km Race to the Stones in 16:15:04. Later that year, he finished the Marathon des Sables in Morocco in 39:49:44, placing 69th overall. He achieved a podium finish at the five-stage Jungle Ultra in Peru in 2023, finishing third overall in 39:05:00. His wider race history includes the 2022 Ice Ultra in Sweden, where he completed two stages before withdrawing and was recorded as a non-finisher.",
       "From 29 July to 27 August 2024, Matthews completed 30 marathon distances on sand in Jordan in 30 consecutive days. The challenge earned the Guinness World Records title for the most marathon distances completed on sand in one month by a male runner. He undertook the challenge in support of Global's Make Some Noise. These consecutive desert efforts were an endurance record attempt, distinct from a conventional road marathon.",
       "Project Se7en extended that ambition into triathlon. Between 13 November and 4 December 2025, Matthews completed a 140.6-mile triathlon on each of the seven continents in 21 days, 9 hours and 18 minutes. The route took him through London, Arizona, Cape Town, Perth, Dubai, Rio de Janeiro and Antarctica. The overall challenge earned a Guinness record, while his Antarctic triathlon on 3–4 December, completed in 28:51:11, earned another. The project raised awareness and funds for James' Place.",
+      "On 21–22 May 2026, Matthews completed six ascents and descents of Snowdon (Yr Wyddfa) in 22 hours and 41 minutes. The mountain challenge, supported by O2 Satellite, brought together members of his Project Se7en team and required him to continue through darkness, strong winds and a knee injury. It added a sustained mountain effort to a sporting record already spanning desert ultramarathons, road marathons and long-distance triathlon.",
       "His road-running progression includes 3:07:25 at the 2025 London Marathon and 3:06:14 at Berlin that September. He broke three hours for the first time at the Tokyo Marathon in March 2026, then ran 3:00:04 in London the following month. At The Big Half in London on 6 September 2026, he recorded 1:23:05 for the half marathon. His 2:49:46 at the Berlin Marathon on 27 September 2026 became his marathon personal best, as he continued his pursuit of a sub-2:45 finish.",
       "UNTAPPED with Spencer Matthews launched in January 2025 with the team behind High Performance. The show explores running, endurance, training and the habits behind sporting performance. Guests include Paula Radcliffe, Holly Archer, Sir Mo Farah, Alistair Brownlee, Stephen Scullion, Georgia Hunter Bell, Amanal Petros and Iwan Thomas. Its wider interviews include climber Alex Honnold, while physiologist Oli Patrick joins Matthews for discussions about subjects such as sleep, training zones and recovery. The guest list connects British and international elite sport with the questions faced by everyday runners.",
       "Holly Archer gives the podcast a particular connection to East Anglian running. A Cambridge & Coleridge athlete, she won the women's race at Run Norwich in Norfolk in 2025 and the 2025 Ipswich Half Marathon in Suffolk, where she ran 1:15:55. Her UNTAPPED appearance brings that regional racing background into a wider discussion of performance and training.",
@@ -23,6 +266,7 @@ export const athleteBiographyReviews = [
       "Marathon des Sables and Jungle Ultra podium",
       "30 desert marathons in 30 days",
       "Project Se7en and Antarctic triathlon records",
+      "Six Snowdon ascents in under 24 hours",
       "Marathon times and half-marathon progress",
       "UNTAPPED podcast and notable guests",
       "Connections to Norfolk, Suffolk and Cambridgeshire",
@@ -114,6 +358,11 @@ export const athleteBiographyReviews = [
         question: "What Guinness records has Spencer Matthews achieved?",
         answer:
           "He completed 30 marathon distances on sand in one month in 2024. In 2025, he set records for completing a 140.6-mile triathlon on seven continents in 21 days, 9 hours and 18 minutes, and for an Antarctic 140.6-mile triathlon in 28:51:11.",
+      },
+      {
+        question: "What was Spencer Matthews' Snowdon challenge?",
+        answer:
+          "On 21–22 May 2026, he completed six ascents and descents of Snowdon (Yr Wyddfa) in 22 hours and 41 minutes, supported by O2 Satellite.",
       },
       {
         question: "Who has appeared on UNTAPPED with Spencer Matthews?",

@@ -1,0 +1,28 @@
+{
+  "goyt-valley-wild-trail-runs|2026-10-31": {
+    "summary": "Goyt Valley Wild Trail Runs at The Street car park in Fernilee, Derbyshire. Choose from 11K and 7K.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.wilddeerevents.co.uk/e/goyt-valley-wild-trail-runs-2026-11km-and-7km-15893",
+    "checkedAt": "2026-10-30",
+    "starts": {
+      "7K": {
+        "time": "10:05",
+        "note": "The current organiser programme lists the 11K at 10:00 and the 7K at 10:05.",
+        "publicNote": "7K starts at 10:05 local time. The separate 11K starts at 10:00."
+      }
+    }
+  },
+  "nl-drechtstadloop-1bb8cc|2026-11-01": {
+    "summary": "DrechtStadLoop race programme in Dordrecht, including the 400 m puppy run.",
+    "timeZone": "Europe/Amsterdam",
+    "sourceUrl": "https://drechtstadloop.nl/programma/",
+    "checkedAt": "2026-10-30",
+    "starts": {
+      "400m": {
+        "time": "12:50",
+        "note": "The organiser programme updated 28 October lists the active 400 m puppy run at 12:50; the separate frame-runners race is cancelled.",
+        "publicNote": "The 400 m puppy run starts at 12:50 local time. The separate frame-runners race is cancelled."
+      }
+    }
+  }
+}

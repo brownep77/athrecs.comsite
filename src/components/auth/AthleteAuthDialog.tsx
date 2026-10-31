@@ -180,6 +180,10 @@ export function AthleteAuthDialog() {
   useEffect(() => {
     if (!open) return;
     const timer = window.setTimeout(() => {
+      // Do not interrupt someone who has already started entering details while
+      // the dialog or available methods finish loading.
+      const active = document.activeElement;
+      if (active instanceof HTMLInputElement || active instanceof HTMLSelectElement) return;
       if (mode === "signup") firstNameInput.current?.focus();
       else emailInput.current?.focus();
     }, 80);

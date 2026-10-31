@@ -15,6 +15,7 @@ import countyExpansionChecked from "./county-expansion-checked-2026-10-21.json" 
 import countyTbcReview from "./county-tbc-review-2026-10-21.json" with { type: "json" };
 import batch6ThreeMonthStarts from "./three-month-starts-batch6-2026-10-25.json" with { type: "json" };
 import batch7ThreeMonthStarts from "./three-month-starts-batch7-2026-10-25.json" with { type: "json" };
+import weekendStartCorrections from "./weekend-start-corrections-2026-10-30.json" with { type: "json" };
 
 import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type: "json" };
 import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
@@ -591,6 +592,16 @@ for (const [key, reviewed] of [
   ...Object.entries(sixthDuplicateProgrammeStarts),
   ...Object.entries(seventhFixtureQuality),
 ]) {
+  const existing = FIXTURE_DETAILS[key];
+  FIXTURE_DETAILS[key] = {
+    ...existing,
+    ...reviewed,
+    starts: { ...existing?.starts, ...reviewed.starts },
+  };
+}
+
+// Apply the 30 October public-readback corrections last so stale earlier reviews cannot override them.
+for (const [key, reviewed] of Object.entries(weekendStartCorrections)) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {
     ...existing,

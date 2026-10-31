@@ -84,6 +84,108 @@ try {
   const { withoutProfileEvidence } = await server.ssrLoadModule(
     "/src/lib/athrecs/profile-evidence.ts",
   );
+  const { ReportedRaceResultRows } = await server.ssrLoadModule(
+    "/src/components/athletes/ReportedRaceResultRows.tsx",
+  );
+  const { buildPublicAthletePreview } = await server.ssrLoadModule(
+    "/src/lib/athrecs/public-athlete-preview.ts",
+  );
+  const { reportedResultSortDate } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-result-presentation.ts",
+  );
+  const nonRaceRecords = ["challenge", "expedition", "relay", "support", "attempt", "effort"].map(
+    (entryKind) => ({
+      id: `synthetic-${entryKind}`,
+      event: `Synthetic ${entryKind}`,
+      distance: "5K",
+      location: "",
+      reportedDate: "2025",
+      reportedTime: "17:06",
+      reportedPlace: "1st",
+      entryKind,
+      sport: "Hiking",
+      summary: "Team duration; individual completion is not established.",
+      uncertainty: "Private research sentinel",
+      sources: [{ label: "Private source", url: "https://example.org/private-research" }],
+    }),
+  );
+  const unknownDateRecord = {
+    ...nonRaceRecords[0],
+    id: "synthetic-unknown-date",
+    entryKind: "effort",
+    event: "Synthetic parkrun watch reading",
+    reportedTime: "17:06 (watch time)",
+    reportedDate: "",
+    summary: "Film released in 2026; event date is not established.",
+  };
+  assert.equal(reportedResultSortDate(unknownDateRecord), "", "A film date is not a result date");
+  const publicAccounts = withoutProfileEvidence([...nonRaceRecords, unknownDateRecord]);
+  const accountsMarkup = renderToStaticMarkup(
+    createElement(
+      "table",
+      null,
+      createElement(
+        "tbody",
+        null,
+        createElement(ReportedRaceResultRows, {
+          records: publicAccounts,
+          bestIds: new Set(),
+          hasActions: false,
+        }),
+      ),
+    ),
+  );
+  const accounts = load(accountsMarkup);
+  assert.equal(accounts("tbody tr").length, 7);
+  assert.equal(accounts("[data-result-qualification]").length, 7);
+  assert.equal(
+    accounts("[data-profile-award]").length,
+    0,
+    "Non-race accounts never imply race medals",
+  );
+  assert.equal(accounts('[data-label="Sport"]').first().text(), "Hiking");
+  assert.equal(accounts('[data-label="Category"]').eq(2).text(), "Team relay");
+  assert.equal(accounts('[data-label="Category"]').eq(4).text(), "Unfinished attempt");
+  assert.equal(accounts('[data-label="Race date"]').last().text(), "Date not recorded");
+  assert.equal(
+    accounts("#reported-result-synthetic-unknown-date [data-result-timing]").length,
+    0,
+    "A watch reading is not labelled as a published parkrun finish time",
+  );
+  assert(accounts.text().includes("Team duration; individual completion is not established."));
+  assert(!accountsMarkup.includes("Private research sentinel"));
+  assert(!accountsMarkup.includes("example.org"));
+  assert(!JSON.stringify(publicAccounts).includes("private-research"));
+  const accountInput = {
+    slug: "synthetic-challenges",
+    displayName: "Synthetic",
+    athleteNumber: "1",
+    searchIndexable: true,
+    results: [],
+    histories: [],
+    allowResultPagination: true,
+  };
+  const baselineAccounts = buildPublicAthletePreview(accountInput);
+  const accountPages = [1, 2].map((resultPage) =>
+    buildPublicAthletePreview({
+      ...accountInput,
+      reportedRecords: publicAccounts,
+      resultPage,
+    }),
+  );
+  assert.equal(accountPages[0].totalResults, 7);
+  assert.equal(accountPages[0].resultPages, 2);
+  assert.deepEqual(
+    accountPages.map((page) => page.reportedRecords.length),
+    [5, 2],
+  );
+  assert.equal(
+    new Set(accountPages.flatMap((page) => page.reportedRecords.map((row) => row.id))).size,
+    7,
+  );
+  assert.equal(accountPages[1].reportedRecords.at(-1).id, "synthetic-unknown-date");
+  assert.deepEqual(accountPages[0].personalBests, baselineAccounts.personalBests);
+  assert.deepEqual(accountPages[0].achievements, baselineAccounts.achievements);
   const { historyPerformanceSchema } = await server.ssrLoadModule(
     "/src/lib/athrecs/source-performance-history.ts",
   );

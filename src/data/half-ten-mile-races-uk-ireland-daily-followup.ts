@@ -44,6 +44,7 @@ const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT = "2026-10-28";
 const CURRENT_LIMERICK_PERMIT_SCAN_CHECKED_AT = "2026-10-29";
+const CURRENT_FERRIBY_SCAN_CHECKED_AT = "2026-10-31";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1739,6 +1740,25 @@ const seeds: RaceSeed[] = [
     notes:
       "The official organiser and event-specific registration pages consistently confirm this new Norwich city-centre road half marathon on Bank Holiday Monday 3 May 2027 at 09:30. General entries are sold out, but official charity entries remain open at £49.50.",
   },
+  {
+    slug: "ferriby-10-mile-road-race",
+    name: "Ferriby 10 Mile Road Race",
+    date: "2027-01-31",
+    distance: "10mi",
+    startTime: "09:00",
+    country: "England",
+    county: "East Riding of Yorkshire",
+    city: "Cottingham",
+    area: "Cottingham High School and Skidby",
+    surface: "Road",
+    organiser: "City of Hull Athletic Club",
+    url: "https://theentrypoint.co.uk/events/ferriby-10-2027-5oMzQOkpngeZl7p",
+    entryUrl: "https://theentrypoint.co.uk/events/ferriby-10-2027-5oMzQOkpngeZl7p",
+    priceAmount: 30,
+    checkedAt: CURRENT_FERRIBY_SCAN_CHECKED_AT,
+    notes:
+      "The organiser-authorised current-edition registration and race-information pages confirm the 31 January 2027 road 10-mile race, 09:00 start and open £30 entry. The former generic-source research hold is cleared.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -2648,14 +2668,6 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://www.dmvac.org/dorking-tens/",
   },
   {
-    slug: "ferriby-10-mile-road-race-2027",
-    date: "2027-01-31",
-    country: "England",
-    reason:
-      "England Athletics lists a licensed 10-mile race on 31 January 2027, but the organising club currently exposes only its generic homepage and no event-specific official page or direct 2027 registration URL. Hold publication until unique source provenance is available.",
-    sourceUrl: "https://www.cityofhullac.co.uk/",
-  },
-  {
     slug: "macclesfield-running-festival-october-2027",
     date: "2027-10-31",
     country: "England",
@@ -3056,6 +3068,22 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "ferriby-10-mile-road-race": {
+    name: "Ferriby 10 Mile Road Race",
+    country: "England",
+    county: "East Riding of Yorkshire",
+    city: "Cottingham",
+    area: "Cottingham High School and Skidby",
+    surface: "Road",
+    distances: ["10mi"],
+    organiser: "City of Hull Athletic Club",
+    website: "https://theentrypoint.co.uk/events/ferriby-10-2027-5oMzQOkpngeZl7p",
+    source_url: "https://theentrypoint.co.uk/events/ferriby-10-2027-5oMzQOkpngeZl7p",
+    defaultStartTime: "09:00",
+    summary: "Ferriby 10 Mile Road Race — an established road race from Skidby.",
+    description:
+      "City of Hull Athletic Club's Ferriby 10 starts on Beverley Road in Skidby and follows an undulating measured road course before finishing near Skidby Mill.",
+  },
   "runthrough-battersea-park-5k-10k-september": {
     name: "Battersea Park 5K, 10K & Half Marathon — Series 1",
     country: "England",
@@ -3732,6 +3760,32 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
 };
 
 export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
+  "ferriby-10-mile-road-race|2027-01-31|10mi": {
+    status: "Open",
+    entryUrl: "https://theentrypoint.co.uk/events/ferriby-10-2027-5oMzQOkpngeZl7p",
+    startTime: "09:00",
+    source: "https://theentrypoint.co.uk/events/ferriby-10-2027-5oMzQOkpngeZl7p",
+    notes:
+      "The organiser-authorised current-edition registration page confirms the 31 January 2027 road 10-mile race, 09:00 start and open £30 entry; its race-information page identifies City of Hull Athletic Club and the Skidby start.",
+  },
+  "ea-runevents-gbr-run-bexhill-remembrance-run-bexhill-on-sea|2026-11-07|Half": {
+    status: "Open",
+    entryUrl: "https://register.enthuse.com/ps/event/GBRRunBexhillRemembranceRun2026",
+    startTime: "10:10",
+    source: "https://register.enthuse.com/ps/event/GBRRunBexhillRemembranceRun2026",
+    notes:
+      "The authorised current-edition registration programme confirms the 7 November 2026 half marathon starts at 10:10. The 09:30 event opening belongs to the Youth Mile and is not the half-marathon wave.",
+  },
+  "runthrough-victoria-park-may-2027|2026-11-07|Half": {
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-november-2026",
+    startTime: "09:30",
+    source:
+      "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-november-2026",
+    notes:
+      "The exact current-edition organiser page confirms the 7 November 2026 half marathon and its 09:30 start; the 10K and 5K use separate later waves.",
+  },
   "derwentwater-10|2026-11-01|10mi": {
     status: "Open",
     entryUrl: "https://derwentwater10.weebly.com/",

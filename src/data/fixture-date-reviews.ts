@@ -31,6 +31,11 @@ export const FIXTURE_DATE_REVIEWS: Record<
     ]),
   ),
   ...seventhDateCorrections,
+  "wa-meeting-de-paris-7220881|2027-06-18": {
+    sourceUrl: "https://paris.diamondleague.com/le-menu-sera-copieux/",
+    checkedAt: "2026-10-30",
+    note: "The organiser's 19 October 2026 programme and the Diamond League 2027 calendar confirm 25 June. The superseded 18 June edition remains in storage for audit only.",
+  },
   "milano-city-marathon|2027-04-03": {
     sourceUrl: "https://www.milanomarathon.it/en/practical-info/",
     checkedAt: "2026-10-26",
