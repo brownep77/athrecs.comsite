@@ -60,6 +60,17 @@
 These rules apply to athlete profiles, race histories, imports, catalogue seeds,
 publication and personal-best calculations in this repository.
 
+- Owner instruction, 31 October 2026: actively pursue result verification when
+  adding or reviewing athlete histories. A secondary finish report is a lead:
+  follow the organiser's edition-specific results link and search the official
+  timing provider by full name, surname/aliases and bib where available. Use the
+  public interactive results or permitted exports when search indexing omits the
+  athlete. Do not stop at a news report or search snippet when an official result
+  is reasonably accessible. Compare the actual row and identity evidence before
+  marking `source_verified`; retain published timing precision and separate ranks.
+  If verification remains unresolved, record the sources attempted and the
+  specific missing evidence or conflict in the private audit. Never replace
+  missing evidence with an automatic verification tick.
 - Owner instruction, 25 October 2026: loosen held-result identity review sensibly
   using `docs/reviewed-source-identity-policy.md`. A fixed ten-year age separation
   or opposite recorded sex is not required for a source-supported distinct-person
