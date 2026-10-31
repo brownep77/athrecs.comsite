@@ -6,7 +6,7 @@ export const NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS: EditorialArticle = {
   date: "2026-10-31",
   displayDate: "31 October 2026",
   publishedAt: "2026-10-31T00:10:52Z",
-  modifiedAt: "2026-10-31T02:36:06.224366Z",
+  modifiedAt: "2026-10-31T09:37:58Z",
   author: "AthRecs Editorial",
   title: "New York Marathon 2026: famous faces, first-timers and a world of stories",
   seoTitle: "NYC Marathon 2026: 86 famous faces and inspiring runners",
@@ -110,6 +110,7 @@ export const NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS: EditorialArticle = {
     "Dave Obelkevich": "dave-obelkevich-wmm-beb1a70f-5d67-11eb-a712-02848444c773",
     "Fred Abramowitz": "fred-abramowitz-wmm-b2eec5ff-5d67-11eb-a712-02848444c773",
     "Karen Sarahi Gonzalez": "karen-sarahi-gonzalez-london-2025-fc604f093e5df9f2",
+    "Nicole Ver Kuilen": "nicole-ver-kuilen-london-2025-741b19ff4f04058e",
     "Errol Barnett": "errol-barnett-wmm-6d9fe265-9b49-11ef-bbec-06cd92543711",
   },
   links: [
@@ -117,13 +118,17 @@ export const NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS: EditorialArticle = {
       label: "Race preview: professional field, route and start times",
       url: "/news/new-york-city-marathon-2026-preview",
     },
+    {
+      label: "Find a runner in NYRR’s official race-day tracker",
+      url: "https://liveresults.nyrr.org/",
+    },
   ],
   sections: [
     {
       id: "britain",
       heading: "From English football to the long road across America",
       paragraphs: [
-        "James Milner brings a remarkable football career to a new kind of Sunday challenge. The former England midfielder retired with 658 Premier League appearances, three league titles and a Champions League winner’s medal. His longevity was built on preparation and consistency, qualities that will serve him well on New York’s bridges. He is running for the James Milner Foundation.",
+        "James Milner brings a remarkable football career to a new kind of Sunday challenge. The former England midfielder retired with 658 Premier League appearances, three league titles and a Champions League winner’s medal. His longevity was built on preparation and consistency, qualities that will serve him well on New York’s bridges. He is running in New York to raise funds for his foundation.",
         "William Goodge has made long journeys his calling card. The British endurance runner plans to use New York as the finale of Mission America: 50 marathon distances across 50 states in 24 days, supporting Stand Up To Cancer in memory of his mother. Reaching the start after such an undertaking would give his final 26.2 miles a very different meaning. His experience includes completing the multistage Marathon des Sables in 2022 in 35:23:55, useful perspective for another demanding journey.",
         "Hannah Frankson brings a track athlete’s background to the road. The London-based Peloton instructor was a competitive triple jumper before becoming familiar to an international fitness audience. She completed London in 2024; New York gives her another opportunity to turn the encouragement she offers others into a personal achievement.",
         "Giles Ashton-Roberts is celebrating turning 50 with seven marathons across four continents for the Motor Neurone Disease Association. The Leicester-based fundraiser has already completed Paris, Boston, London, Sydney and Chicago this year; New York is next, with Mumbai planned for January 2027. Sustaining that effort across a year deserves admiration as much as any single finishing time. His 2026 results include 4:06:54 in Paris and 3:56:37 in Chicago, two more milestones in that ambitious fundraising year.",
@@ -179,7 +184,7 @@ export const NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS: EditorialArticle = {
         "Kieran Read earned 127 caps for the All Blacks and won two Rugby World Cups. The former New Zealand captain now joins a five-person team running for Te Tahi Youth. His rugby honours are extraordinary, but the appeal here is simple: an established champion accepting another demanding challenge to help young people at home. He has already been racing on the road this year: Christchurch’s official April results record a 1:48:40 half marathon. The trails have tested him too: he completed the Old Ghost Ultra’s 85 km course in 12:52:00 in 2024 and 11:30:56 in 2025.",
         "Ryan Crotty, the former All Black and long-serving Crusader, is part of the same Te Tahi Youth team. His contribution brings the commitment of a professional rugby career to a shared fundraising effort. His road preparation includes a 1:51:44 finish at the 2026 Christchurch Half Marathon, alongside Read in the same event.",
         "Colin Slade, the former All Blacks and Crusaders fly-half, completes the trio of familiar rugby names in the group. New York will ask something different of him than a match: hours of steady effort with the team’s cause waiting beyond the finish.",
-        "Aaron Webb is the Crusaders team manager known as Webby. He has already used running to support children and families: his club documents a lockdown marathon and a later 102 km fundraising effort. This time he joins Read, Crotty, Slade and Thrower for Te Tahi Youth, extending a sustained commitment to community sport.",
+        "Aaron Webb is the Crusaders team manager known as Webby. During lockdown he invited academy players to run a marathon with him for the Child Cancer Foundation. A later 102 km effort around Rugby and Malvern Parks raised NZ$20,000 for the same charity. This time he joins Read, Crotty, Slade and Thrower for Te Tahi Youth, extending a sustained commitment to community sport.",
         "Shane Thrower’s place in the group deserves attention in its own right. After a serious cycling collision in 2003, he rebuilt his life through rehabilitation and returned to endurance sport. His subsequent adventure-running experience and work supporting young people give the Te Tahi Youth challenge a deeply personal foundation. His race history reaches well beyond the marathon, including 7:15:51 over the recorded 72.8 km Tarawera course in 2014.",
         "Callan Ward, the former GWS Giants captain, is running for Rio’s Legacy, which supports access to children’s hospice care in Australia. After an 18-year football career and knee rehabilitation, he has put together a fresh training block for New York. It is a generous use of a new chapter in his sporting life.",
         "James Tobin is familiar to Australian viewers as Weekend Sunrise’s weather presenter. In an October interview he described training for New York alongside work and new parenthood, including runs with a running pram. Anyone fitting marathon preparation around family life will recognise the effort behind that apparently simple sentence.",
@@ -924,7 +929,7 @@ export const NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS: EditorialArticle = {
         "Liz Cho is preparing for her first New York City Marathon, according to her own station’s coverage. The WABC-TV anchor is fundraising for the Alzheimer’s Association in honour of colleague Bill Ritter.",
         "Mike Marza ran his first marathon in New York in 2025, finishing in 3:53:42. He returns for a second attempt alongside Liz Cho in support of the Alzheimer’s Association. His experience of the full distance adds a useful perspective to their shared preparation and fundraising.",
         "Errol Barnett, the British-born CBS News anchor and correspondent, has steadily developed his distance running alongside an international reporting career. His New York marathon debut brought 3:33:25 in 2024, followed by 3:17:01 in 2025. A 1:29:37 NYC Half this March adds another encouraging milestone. Returning to the five boroughs lets viewers celebrate the preparation behind that progress as well as the familiar face on screen.",
-        "Brian Cheung, NBC News’ business and data correspondent, previously worked at Yahoo Finance. The marathon turns the focus from reporting other people’s stories to undertaking a personal sporting challenge. His career began as a Federal Reserve analyst, and his reporting has included Silicon Valley Bank and the 2023 banking crisis.",
+        "Brian Cheung usually explains the economy to NBC News viewers. On Sunday the business and data correspondent is one of the journalists NYRR has announced for the marathon. A Syracuse graduate, Cheung worked as a Federal Reserve analyst and reported for Yahoo Finance before joining NBC News.",
         "Matt Brickman followed a path from journalism into meteorology and now presents the weather on NBC 4 New York. This weekend viewers can offer a different kind of support from the roadside as he takes on the city’s marathon. He has already finished New York in 4:01:38 in 2021 and the Brooklyn Half in 1:51:04 in 2024; his 5:51 Fifth Avenue Mile this September shows another side of his running.",
         "T.J. Holmes has already experienced a long day on this course: NYRR records his 2024 finish at 4:41:41. The journalist’s return adds another chapter to that history, with the familiar challenge of managing an effort across all five boroughs. His earlier results include 4:25:31 at New York in 2022 and 1:46:02 at that year’s Brooklyn Half, alongside further half-marathon finishes in 2023 and 2024.",
         "Meredith Kopit Levien has led The New York Times Company as chief executive since 2020. For this weekend she is part of the Run for Reporting campaign, supporting journalism education. A shared professional cause is becoming a very personal physical commitment.",
@@ -1025,7 +1030,7 @@ export const NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS: EditorialArticle = {
         "Dave Obelkevich is aiming for his 50th New York City Marathon finish. NYRR identifies him as the only runner to have finished every edition held since the race first crossed all five boroughs in 1976. A streak like that is built from thousands of ordinary training days, and returning once more is an achievement worth celebrating before the clock even starts. The archive puts the scale of that commitment in perspective: 4:20:27 at his first New York finish in 1974, 2:40:34 in 1982 and 8:29:15 in 2025, with decades of shorter races in between.",
         "Fred Abramowitz also ran the first five-borough marathon in 1976. The Fort Collins-based runner has since completed more than 100 marathons and ultramarathons and directs the Run Rabbit Run 50- and 100-mile races. Coming back to New York connects a long personal running history with a lifetime of helping others enjoy the sport. His first New York finish was 3:59:46 in 1976; a year later he ran 3:06:34. His return in 2025 brought another finish in 6:18:20, nearly half a century after that beginning.",
         "Kyle Stepp is a US paratriathlete and access-to-sport advocate running for NYRR’s Team for Climate. His 2026 season includes the Americas PTS2 title and sixth place at the World Para Championships in Pontevedra. He describes New York as his first marathon as an athlete with a disability, another ambitious step in a sporting life that also works to open doors for others. His federation record also includes third in the men’s PTS2 category at the 2026 World Triathlon Para Series in Devonport, in 1:16:18 across the full triathlon.",
-        "Nicole Ver Kuilen knows how powerful access to sport can be. The Forrest Stump founder is an endurance athlete whose experiences include four marathons, two 50 km ultras and a 1,500-mile West Coast triathlon journey. Her advocacy seeks to make those opportunities available to more people with disabilities, giving her New York effort a purpose shared by many beyond the course.",
+        "Nicole Ver Kuilen, the founder of Forrest Stump, is running with NYRR’s Team Inspire to advocate for access to athletic prostheses. In the Boston Marathon’s women’s lower-limb para division, she placed second in both 2023 and 2024, improving from 4:23:40 to 4:13:18. Her endurance story also includes the journey that gave her charity its name. In 2017 she swam, cycled and ran 1,500 miles down the West Coast to draw attention to the barriers she faced getting a running prosthesis.",
         "Caleb Prewitt arrives at 19 with Chicago and London marathon finishes already behind him. The Jacksonville athlete, who has Down syndrome, is running in support of the USA Triathlon Foundation. New York will be another substantial challenge, and his growing endurance record is a fine reason to cheer him on. His half-marathon progress deserves recognition too: 3:35:48 at Disney in January 2025 and 3:24:58 at Orlando that December, followed the next day by the Lake Eola 5K.",
         "Jackie Corin, cofounder and chief executive of March for Our Lives, joins NYRR’s Team Inspire. The Washington-based campaigner brings the patience and commitment of public advocacy to a different personal test. Her announced entry adds another story of someone making space for a demanding goal alongside work that matters to them. She already has half-marathon experience from Barcelona, where she finished in 2:49:48 in February 2024.",
         "Shaunta-Maé Alexander is making her marathon debut. The Los Angeles adaptive athlete advocates for people with disabilities, and her place in the field helps widen the picture of who a marathon runner can be. Preparing for a first 26.2 miles takes courage as well as consistency; she deserves every encouraging voice along the route. Her preparation has included the 2025 NYC Half in 3:20:34 and the 2024 Achilles Hope & Possibility four-mile race in 48:38, meaningful steps towards this first marathon.",
@@ -1058,6 +1063,18 @@ export const NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS: EditorialArticle = {
         {
           label: "Amputee Coalition: Nicole Ver Kuilen",
           url: "https://amputee-coalition.org/team-member/nicole-ver-kuilen/",
+        },
+        {
+          label: "Boston Athletic Association: Nicole’s 2023 marathon result",
+          url: "https://www.baa.org/races/boston-marathon/results/?runner=76381",
+        },
+        {
+          label: "Boston Athletic Association: Nicole’s 2024 marathon result",
+          url: "https://www.baa.org/races/boston-marathon/results/?runner=46712",
+        },
+        {
+          label: "Forrest Stump: the 1,500-mile advocacy journey",
+          url: "https://forreststump.org/",
         },
         {
           label: "NYRR Team Inspire: Caleb Prewitt",
