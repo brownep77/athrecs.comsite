@@ -1,0 +1,556 @@
+{
+  "slug": "david-meca-english-channel",
+  "name": "David Meca",
+  "country": "Spain",
+  "aliases": [
+    "David Meca Medina"
+  ],
+  "highlight": "Two Channel solos below eight hours · world open water champion",
+  "biography": [
+    "David Meca Medina is a Spanish open water swimmer born in Sabadell on 1 February 1974. His own biography describes taking up swimming as a child on medical advice, then moving to the United States and studying at the University of Southern California. His competitive career included championship races as well as separately organised endurance challenges.",
+    "World Aquatics records Meca's 10-kilometre gold at the 2000 open water world championships in Honolulu, alongside silver medals over five and 25 kilometres. He won the 25-kilometre title at the 2005 World Championships in Montreal. These dated results provide a firmer account of his championship achievements than the broad title totals sometimes used in promotional biographies.",
+    "Meca's England-to-France Channel crossings are recorded on 10 August 2004 and 29 August 2005. The Channel Swimming Association records 7 hours 46 minutes and 7 hours 22 minutes respectively, with fastest-solo and fastest-man awards in both seasons. The historical records name Reg Brickell Jr as pilot. Meca's website publishes different times in places; those discrepancies remain visible with the two crossings.",
+    "His ambitions also extended beyond the Channel. His own account describes swimming from Jávea on mainland Spain to Ibiza over 4–5 January 2006. That challenge belongs to his wider endurance career and is kept separate from his two ratified Channel solos."
+  ],
+  "flags": [
+    {
+      "code": "ES",
+      "label": "Spain",
+      "abbr": "ESP"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Full name",
+      "value": "David Meca Medina"
+    },
+    {
+      "label": "Born",
+      "value": "1 February 1974, Sabadell, according to his official biography"
+    },
+    {
+      "label": "Education",
+      "value": "University of Southern California"
+    },
+    {
+      "label": "World titles",
+      "value": "2000 open water 10 km; 2005 World Championships 25 km"
+    },
+    {
+      "label": "Channel solos",
+      "value": "2004 · 7:46; 2005 · 7:22, as recorded by CSA"
+    },
+    {
+      "label": "Channel pilot",
+      "value": "Reg Brickell Jr for both selected swims"
+    },
+    {
+      "label": "CSA season awards",
+      "value": "Fastest solo and fastest man in 2004 and 2005"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "2004 England-to-France solo",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CSA records 7:46; Meca's challenges page gives 7:40 for 2004. Both values are retained."
+        },
+        {
+          "text": "Tuesday, 10 August 2004 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "7h 46m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful individual record 3159, Name through Awards, matches David Meca, Spain, solo one-way E-F, 2004 and 07:46. CS&PF record 443923 supplies 10 August and Reg Brickell Jr, agreeing at 07:46:00. Meca's own Canal de la Mancha section instead gives 7:40. The CSA result was inspected, but the conflicting narrative time remains unresolved."
+        },
+        {
+          "text": "Channel Swimming Association: David Meca, 2004",
+          "url": "https://www.channelswimmingassociation.com/swim/3159/david-meca"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful individual record 3159: Spain, solo one-way England to France, 07:46 and 2004 fastest-solo/fastest-man awards.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA page gives year only; the precise date comes from the CS&PF historical record. Athlete website has a conflicting elapsed time.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical record: David Meca, 10 August 2004",
+          "url": "https://cspf.co.uk/swim/443923"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443923: generic date, E-F, 07:46:00, Reg Brickell Jr, CSA attribution and Rolex Trophy comment.",
+          "label": "Supports"
+        },
+        {
+          "text": "David Meca: challenges",
+          "url": "https://davidmeca.com/retos/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel section and January 2006 mainland-to-Ibiza account.",
+          "label": "Supports"
+        },
+        {
+          "text": "Channel section gives 7:40 for 2004, conflicting with CSA's 7:46. Its exclusive two-sub-eight-hour-swims claim is not adopted as a current claim.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "meca-2004"
+    },
+    {
+      "title": "2005 England-to-France solo",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CSA records 7:22, also used on Meca's challenges page; his biography instead gives 7:21."
+        },
+        {
+          "text": "Monday, 29 August 2005 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "7h 22m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful individual record 3185 matches David Meca, Spain, solo one-way E-F, 2005 and 07:22. CS&PF record 444009 supplies 29 August and Reg Brickell Jr. The athlete biography's career bullet gives 7:21, while his separate challenges page agrees with 7:22. The published CSA result was inspected and both narrative alternatives are retained."
+        },
+        {
+          "text": "Channel Swimming Association: David Meca, 2005",
+          "url": "https://www.channelswimmingassociation.com/swim/3185/david-meca"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful individual record 3185: Spain, solo one-way England to France, 07:22 and 2005 fastest-solo/fastest-man awards.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA page gives year only; the precise date comes from the CS&PF historical record. Athlete biography has a conflicting elapsed time.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical record: David Meca, 29 August 2005",
+          "url": "https://cspf.co.uk/swim/444009"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 444009: generic date, E-F, 07:22:00, Reg Brickell Jr and CSA attribution.",
+          "label": "Supports"
+        },
+        {
+          "text": "David Meca: official biography",
+          "url": "https://davidmeca.com/biografia/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Full name David Meca Medina, birth date and place, early swimming and University of Southern California studies.",
+          "label": "Supports"
+        },
+        {
+          "text": "Promotional biography. Its 2005 Channel time is 7:21, conflicting with CSA's 7:22; broad honours and superlatives are not adopted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "David Meca: challenges",
+          "url": "https://davidmeca.com/retos/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel section and January 2006 mainland-to-Ibiza account.",
+          "label": "Supports"
+        },
+        {
+          "text": "Channel section gives 7:40 for 2004, conflicting with CSA's 7:46. Its exclusive two-sub-eight-hour-swims claim is not adopted as a current claim.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "meca-2005"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "World 10 km champion",
+      "lines": [
+        {
+          "text": "Thursday, 2 November 2000"
+        },
+        {
+          "text": "World Aquatics lists his Honolulu open water gold medal."
+        }
+      ]
+    },
+    {
+      "title": "First selected Channel solo",
+      "lines": [
+        {
+          "text": "Tuesday, 10 August 2004"
+        },
+        {
+          "text": "CSA records a 7:46 England-to-France crossing; the athlete's challenges page gives a conflicting 7:40."
+        }
+      ]
+    },
+    {
+      "title": "World 25 km champion",
+      "lines": [
+        {
+          "text": "Saturday, 23 July 2005"
+        },
+        {
+          "text": "Won the Montreal World Championships gold, as recorded by World Aquatics."
+        }
+      ]
+    },
+    {
+      "title": "Second Channel solo",
+      "lines": [
+        {
+          "text": "Monday, 29 August 2005"
+        },
+        {
+          "text": "CSA records 7:22; the official biography gives a conflicting 7:21."
+        }
+      ]
+    },
+    {
+      "title": "Mainland Spain to Ibiza",
+      "lines": [
+        {
+          "text": "January 2006"
+        },
+        {
+          "text": "His website recounts the crossing over 4–5 January 2006."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "David Meca: official biography",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://davidmeca.com/biografia/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Athlete's Spanish-language biography and photographs; conflicting Channel times are qualified separately."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for David Meca?",
+      "value": "This profile includes 2 selected solo performances for David Meca. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was David Meca’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Tuesday, 10 August 2004. The source does not establish whether that date means departure or arrival. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did David Meca’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 7 hours and 46 minutes. CSA records 7:46; Meca's challenges page gives 7:40 for 2004. Both values are retained."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: David Meca, 2004",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3159/david-meca"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful individual record 3159: Spain, solo one-way England to France, 07:46 and 2004 fastest-solo/fastest-man awards.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA page gives year only; the precise date comes from the CS&PF historical record. Athlete website has a conflicting elapsed time.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: David Meca, 2005",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3185/david-meca"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful individual record 3185: Spain, solo one-way England to France, 07:22 and 2005 fastest-solo/fastest-man awards.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA page gives year only; the precise date comes from the CS&PF historical record. Athlete biography has a conflicting elapsed time.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: David Meca, 10 August 2004",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443923"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443923: generic date, E-F, 07:46:00, Reg Brickell Jr, CSA attribution and Rolex Trophy comment.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: David Meca, 29 August 2005",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444009"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 444009: generic date, E-F, 07:22:00, Reg Brickell Jr and CSA attribution.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "David Meca: official biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://davidmeca.com/biografia/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Full name David Meca Medina, birth date and place, early swimming and University of Southern California studies.",
+          "label": "Supports"
+        },
+        {
+          "text": "Promotional biography. Its 2005 Channel time is 7:21, conflicting with CSA's 7:22; broad honours and superlatives are not adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "David Meca: challenges",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://davidmeca.com/retos/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel section and January 2006 mainland-to-Ibiza account.",
+          "label": "Supports"
+        },
+        {
+          "text": "Channel section gives 7:40 for 2004, conflicting with CSA's 7:46. Its exclusive two-sub-eight-hour-swims claim is not adopted as a current claim.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "World Aquatics: David Meca Medina medals",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.worldaquatics.com/athletes/1026646/david-meca-medina/medals"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named medal rows: Honolulu 2000 10 km gold and 5/25 km silvers; Montreal 2005 25 km gold.",
+          "label": "Supports"
+        },
+        {
+          "text": "Medal table checked; no structured non-Channel race result is imported.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "2004 England-to-France solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 10 August 2004 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "CSA records 7:46; Meca's challenges page gives 7:40 for 2004. Both values are retained."
+        },
+        {
+          "text": "7h 46m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "meca-2004"
+    },
+    {
+      "title": "2005 England-to-France solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 29 August 2005 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "CSA records 7:22, also used on Meca's challenges page; his biography instead gives 7:21."
+        },
+        {
+          "text": "7h 22m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "meca-2005"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-5ad5d83f6ab37b4ebce2"
+}

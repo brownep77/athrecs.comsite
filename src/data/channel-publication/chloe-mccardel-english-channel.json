@@ -1,0 +1,1917 @@
+{
+  "slug": "chloe-mccardel-english-channel",
+  "name": "Chloë McCardel",
+  "country": "Australia",
+  "aliases": [],
+  "highlight": "44 career crossings · record-breaking swim on 13 October 2021",
+  "biography": [
+    "Chloë McCardel is an Australian marathon swimmer and coach, raised in Melbourne. Her Channel career began on 21 September 2009 and developed through repeated solo and multi-way crossings. In August 2015 she completed a non-stop triple, and in 2016 she made eight Channel crossings in one year.",
+    "On Wednesday 13 October 2021 she completed her 44th career crossing, overtaking Alison Streeter’s total of 43. The final swim, from England to France, took 10 hours and one minute. Her 44 crossings comprise 35 single swims, three doubles and one triple; the legs of each multi-way swim count towards that career total.",
+    "McCardel has also coached swimmers preparing for solo and relay Channel attempts, with her official biography recording more than 150 participants. Her wider endurance achievements include a long ocean swim in the Bahamas in 2014, and she has spoken about encouraging more women and girls to pursue ambitious sporting goals."
+  ],
+  "flags": [
+    {
+      "code": "AU",
+      "label": "Australia",
+      "abbr": "AUS"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Career Channel crossings",
+      "value": "44 · achieved 13 October 2021"
+    },
+    {
+      "label": "First Channel crossing",
+      "value": "21 September 2009"
+    },
+    {
+      "label": "Career breakdown",
+      "value": "35 singles, 3 doubles and 1 triple"
+    },
+    {
+      "label": "Featured crossing time",
+      "value": "10h 01m"
+    },
+    {
+      "label": "Background",
+      "value": "Raised in Melbourne, Australia"
+    },
+    {
+      "label": "Other role",
+      "value": "English Channel swimming coach"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "44th Channel crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The swim took her overall career total to 44 Channel crossings. The CSA’s organisation-specific count was 43, which is why the two totals appear in different records."
+        },
+        {
+          "text": "10h 1m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Wednesday, 13 October 2021 · 14:16 · CSA published clock; time zone not specified",
+          "label": "Finished"
+        },
+        {
+          "text": "The CSA publishes completion at 14:16 and an elapsed time of 10h 01m, without naming the clock’s time zone. A start clock has not been inferred by subtraction.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Kent, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Near Pointe de la Courte Dune, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Reg and Ray Brickell",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess II",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "R. Brickell",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 5380 supplies the date, completion clock, time, route, pilots, vessel and observer. Guinness confirms the 44th overall crossing and CSA ratification. The CSA announcement explains its separate 43-crossing total; this is a difference in counting scope, not a duplicate person."
+        },
+        {
+          "text": "Channel Swimming Association: Chloë McCardel, 13 October 2021",
+          "url": "https://www.channelswimmingassociation.com/swim/5380/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Guinness World Records: 44 English Channel crossings",
+          "url": "https://www.guinnessworldrecords.com/world-records/681643-most-crossings-of-the-english-channel-swimming-by-an-individual"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Channel Swimming Association: Queen of the Channel announcement",
+          "url": "https://www.channelswimmingassociation.com/news/185/chloe-mccardel-queen-channel"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "mccardel-2021"
+    },
+    {
+      "title": "First completed Channel crossing",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "The federation describes a two-way attempt that ended after 25 hours. This record covers only the completed England-to-France leg, not a completed double."
+        },
+        {
+          "text": "Completed first crossing of an unfinished double. Published dates differ between 20 and 21 September."
+        },
+        {
+          "text": "Monday, 21 September 2009 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 3m 36s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The sources disagree between 20 and 21 September. No departure or finish date is established. The database repeats 12:03:36 in its arrival field as well as elapsed time; this is not treated as a reliable clock.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Eddie Spelling",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Anastasia",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Laura Austin; Nathan Cox",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual entry 444332 and the 2009 successful-swim row identify the completed one-way. Both and Guinness give 21 September; Dover’s matching performance gives 20 September. The day remains disputed, while the successful width and elapsed time agree. No committee decision was inspected."
+        },
+        {
+          "text": "CS&PF: Chloë McCardel, 21 September 2009",
+          "url": "https://cspf.co.uk/swim/444332"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "12:03:36 England–France solo; Eddie Spelling, Anastasia, observers Laura Austin and Nathan Cox; unfinished two-way context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CS&PF database entry; the ratifying-body label is not an inspected committee decision. Generic Date and separate clocks do not explicitly date the phases.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: 2009 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2009"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Chloë McCardel row: 21 September, 12:03:36, Eddie Spelling / Anastasia.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list retains the disclaimer that results are unofficial until committee ratification. No separate decision or observer log was inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover: Chloë McCardel, 20 September 2009",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2009-09-20/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Matching 12:03:36 solo and support boat, but an alternative calendar day.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; its Date field does not establish the departure or arrival phase.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Guinness: Chloë McCardel Channel career",
+          "url": "https://www.guinnessworldrecords.com/world-records/63413-most-crossings-of-the-english-channel-swimming-by-an-individual-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First crossing dated 21 September 2009 and continuous triple dated 8–9 August 2015.",
+          "label": "Supports"
+        },
+        {
+          "text": "A retrospective record summary; the first-swim day differs from Dover’s 20 September entry.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Chloë McCardel: official career biography",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge: the 2009 single, 2010 double and 2015 triple belong to the athlete whose 44th crossing was in 2021.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete biography rounds the 2009 duration to minutes; the federation’s precise time is used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mccardel-2009-first"
+    },
+    {
+      "title": "First continuous Channel double",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "A completed outward crossing followed by a completed return, recorded as one continuous two-way solo."
+        },
+        {
+          "text": "Thursday, 22 July 2010 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "21h 48m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "22 July is the historical database’s generic swim date; no departure/arrival clock or phase date is supplied.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France–England",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr; Ray Brickell",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "10h 37m 0s",
+          "label": "Leg 1 · England–France"
+        },
+        {
+          "text": "11h 11m 0s",
+          "label": "Leg 2 · France–England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual entry 2459 confirms a successful two-way in 2010. CS&PF historical entry 444373 supplies 22 July and the crew; its Doubles table, row 31, supplies the two splits. The single combined performance is counted once."
+        },
+        {
+          "text": "CSA: Chloë McCardel, 2010 double",
+          "url": "https://www.channelswimmingassociation.com/swim/2459/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed two-way solo, England–France first leg, 21:48 in 2010.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: McCardel 2010 double",
+          "url": "https://cspf.co.uk/swim/444373"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "22 July 2010; combined England–France–England, 21:48:00; Reg Brickell Jr/Ray Brickell and Viking Princess.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: selected historical multiple-crossing rows",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected double-crossing rows: Streeter 1983 and 1995, Murphy 1970 and 1987, McCardel 2010; published leg splits.",
+          "label": "Supports"
+        },
+        {
+          "text": "A compiled historical table, not observer paperwork. Other rows contain apparent column errors; only the specified coherent rows are used.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Chloë McCardel: official career biography",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge: the 2009 single, 2010 double and 2015 triple belong to the athlete whose 44th crossing was in 2021.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete biography rounds the 2009 duration to minutes; the federation’s precise time is used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mccardel-2010-double"
+    },
+    {
+      "title": "Continuous three-way Channel crossing",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Three widths formed one uninterrupted performance. Guinness identifies McCardel as the fourth person to achieve a non-stop triple."
+        },
+        {
+          "text": "CSA explicitly records completion on 9 August; a separate archive dates the swim to 7 August."
+        },
+        {
+          "text": "36h 12m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Sunday, 9 August 2015 · 17:30 · CSA Completed field: 9th August 2015 5:30pm; time zone not stated",
+          "label": "Finished"
+        },
+        {
+          "text": "CSA explicitly records completion on 9 August at 17:30, with no time zone. Guinness dates the swim 8–9 August; Dover’s directory instead prints 7 August. No departure date or clock is inferred from these conflicting calendar entries.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 3-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France–England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "G Heath R Brickell (as printed)",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 3-way swim."
+        },
+        {
+          "text": "11h 34m",
+          "label": "Leg 1 · England–France"
+        },
+        {
+          "text": "11h 8m",
+          "label": "Leg 2 · France–England"
+        },
+        {
+          "text": "13h 30m",
+          "label": "Leg 3 · England–France"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual entry 4374 explicitly confirms the completed 36:12 triple, finish date and time, and three splits. Guinness dates it to 8–9 August. Dover’s career directory instead dates the matching triple 7 August. The explicit CSA completion is displayed; the conflicting archive calendar entry remains a metadata dispute. The original observer log was not inspected."
+        },
+        {
+          "text": "CSA: Chloë McCardel, 2015 triple",
+          "url": "https://www.channelswimmingassociation.com/swim/4374/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed 9 August 2015 at 5:30pm; 36:12; three leg splits, pilot, vessel and observer field.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Guinness: Chloë McCardel Channel career",
+          "url": "https://www.guinnessworldrecords.com/world-records/63413-most-crossings-of-the-english-channel-swimming-by-an-individual-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First crossing dated 21 September 2009 and continuous triple dated 8–9 August 2015.",
+          "label": "Supports"
+        },
+        {
+          "text": "A retrospective record summary; the first-swim day differs from Dover’s 20 September entry.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Chloë McCardel: official career biography",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge: the 2009 single, 2010 double and 2015 triple belong to the athlete whose 44th crossing was in 2021.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete biography rounds the 2009 duration to minutes; the federation’s precise time is used.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover: Chloë McCardel career directory",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The directory gives the matching 36:12 triple an alternative date of 7 August 2015.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical secondary directory with an outdated career total; this date differs from Guinness’s 8–9 August range and does not identify a phase.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mccardel-2015-triple"
+    },
+    {
+      "title": "Continuous Channel double with conflicting published times",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Completed double; elapsed time disputed. CSA publishes 19:21, while the athlete reports 19:20 and the historical leg times total 19:20."
+        },
+        {
+          "text": "Saturday, 8 September 2012 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "19h 21m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "No departure or completion clocks are supplied. The 9:50:00 and 9:30:00 reported legs are retained here, rather than displayed as reconciled splits against the conflicting 19:21 total.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual entry 2460 and historical combined entry 444627 both publish 19:21. The athlete’s 2012 achievements table publishes 19:20; CS&PF Doubles row 36 prints 9:50:00 and 9:30:00 legs, which sum to 19:20. This is one successful double; its one-minute total discrepancy remains unresolved."
+        },
+        {
+          "text": "CSA: Chloë McCardel, 2012 double",
+          "url": "https://www.channelswimmingassociation.com/swim/2460/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful two-way solo, published total 19:21; Fastest 2 Way Swim award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful individual result inspected; original observer documents were not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: Chloë McCardel, 8 September 2012",
+          "url": "https://cspf.co.uk/swim/444627"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Combined England–France–England performance, 19:21:00, Reg Brickell Jr/Viking Princess; reports CSA ratification.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Chloë McCardel: athlete achievements",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The athlete’s 2012 achievements list a double in 19:20; her 2017 double is 20:34.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete-published career summary. The 2012 total differs from the CSA individual result and remains unresolved.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: selected multiple-crossing and record statistics",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Streeter 1992 double, row 18; McCardel 2012 double, row 36; Cox 20 July 1972 record row.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical compilation. McCardel’s displayed 2012 splits sum to 19:20 although the total column says 19:21; that disagreement remains unresolved.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mccardel-2012-double"
+    },
+    {
+      "title": "Channel double completed after midnight",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The CSA awarded this performance its 2017 Fastest 2 Way Swim award."
+        },
+        {
+          "text": "20h 34m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Tuesday, 29 August 2017 · 00:09 · CSA Completed field: 29 August 2017, 12:09am; time zone not stated",
+          "label": "Finished"
+        },
+        {
+          "text": "The finish phase is explicitly labelled Completed by CSA. No departure date or clock is calculated from the total.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "R Brickell",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "10h 26m",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "10h 8m",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful individual entry 4724 explicitly supplies the two-way completion date and clock, total, two splits, pilot, vessel and observer. Its 10:26 plus 10:08 equals 20:34, also the total in the athlete’s achievements."
+        },
+        {
+          "text": "CSA: Chloë McCardel, 2017 double",
+          "url": "https://www.channelswimmingassociation.com/swim/4724/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed 29 August 2017 at 12:09am; 20:34; 10:26 and 10:08 splits; Reg Brickell/Viking Princess; observer R Brickell.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful individual result inspected; original observer documents were not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Chloë McCardel: athlete achievements",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The athlete’s 2012 achievements list a double in 19:20; her 2017 double is 20:34.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete-published career summary. The 2012 total differs from the CSA individual result and remains unresolved.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mccardel-2017-double"
+    },
+    {
+      "id": "mccardel-2011-july-single",
+      "title": "2011 CSA fastest solo swim",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The association awarded McCardel both its fastest solo swim and fastest swim by a woman for 2011."
+        },
+        {
+          "text": "Monday, 25 July 2011 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "9h 3m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The historical record supplies a generic swim date without departure or arrival clocks.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual result 3329 confirms the one-way completion and lists the 2011 Fastest Solo Swim and Fastest Swim by a Lady awards. CS&PF entry 444460 supplies the swim date and pilot. The 2011 entry in McCardel’s career list independently gives the one-way format and time."
+        },
+        {
+          "text": "Channel Swimming Association • Chloe McCardel, 2011 (3329)",
+          "url": "https://www.channelswimmingassociation.com/swim/3329/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published completed one-way solo, England to France, 09:03.",
+          "label": "Supports"
+        },
+        {
+          "text": "The individual result gives the year and minute-precision time. The original observer report was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical record • Chloë McCardel, 25 July 2011 (444460)",
+          "url": "https://cspf.co.uk/swim/444460"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England–France one-way in 09:03:00, piloted by Reg Brickell Jr aboard Viking Princess.",
+          "label": "Supports"
+        },
+        {
+          "text": "The compiled individual entry names CSA as ratifying organisation. Its date field gives a swim date without separately dated departure and arrival.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Chloë McCardel • career swim list",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The athlete lists the 2011 English Channel solo in 09:03 and the 2010 Manhattan race in 07:53.",
+          "label": "Supports"
+        },
+        {
+          "text": "The career table rounds the Manhattan time to minutes and describes the course as 48 km.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Bahamas — Eleuthera to Nassau",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 20 October 2014 – Wednesday, 22 October 2014"
+        },
+        {
+          "text": "Bahamas"
+        },
+        {
+          "text": "Completed the ocean swim from Lighthouse Beach across Exuma Sound to Nassau."
+        },
+        {
+          "text": "41h 21m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "124.4 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Guinness reports MSF ratification for 20–22 October and 41:21. McCardel’s official 2014 achievements row agrees on distance and duration and connects this result with her Channel career."
+        },
+        {
+          "text": "Guinness World Records — Chloë McCardel’s Bahamas swim",
+          "url": "https://guinnessworldrecords.de/world-records/627889-longest-distance-ocean-swim-marathon-swimming-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dates, distance, duration, route and reported MSF ratification.",
+          "label": "Supports"
+        },
+        {
+          "text": "MSF’s original observation documentation was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Chloë McCardel — official biography and achievements",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "English Channel career identity; Bahamas and Rottnest rows.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete-published achievements; opening prose rounds the Bahamas duration, so the detailed row is used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "chloe-mccardel-event-1-bahamas-eleuthera-to-nassau"
+    },
+    {
+      "title": "Rottnest Channel crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2012 · exact day not confirmed"
+        },
+        {
+          "text": "Completed the single crossing listed in her 2012 achievements."
+        },
+        {
+          "text": "4h 59m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "19.7 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "McCardel’s own achievements table lists 19.7 km and 4:59 beside the 2012 Rottnest entry. No exact day, event placing or independently inspected timing sheet is asserted."
+        },
+        {
+          "text": "Chloë McCardel — official biography and achievements",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "English Channel career identity; Bahamas and Rottnest rows.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete-published achievements; opening prose rounds the Bahamas duration, so the detailed row is used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "chloe-mccardel-event-2-rottnest-channel-crossing"
+    },
+    {
+      "id": "mccardel-2010-manhattan",
+      "title": "Manhattan Island Marathon Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 12 June 2010 (event date)"
+        },
+        {
+          "text": "Pier A, Battery, Manhattan, New York, USA"
+        },
+        {
+          "text": "Won the solo race around Manhattan, finishing five seconds ahead of Jaime Caballero Echeverría. A five-person relay finished ahead of the solo field."
+        },
+        {
+          "text": "28.5 miles (race report)",
+          "label": "Published distance"
+        },
+        {
+          "text": "1st, solo swimmers",
+          "label": "Placing / category"
+        },
+        {
+          "text": "7h 53m 54s",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "New York Open Water solo registry rows 661–662 give the date, counterclockwise course, times and rankings. The contemporary race report reproduces NYC Swim’s results and describes the course as 28.5 miles. McCardel’s career list describes it as 48 km."
+        },
+        {
+          "text": "New York Open Water • Manhattan solo results, row 661",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "On 12 June 2010 the counterclockwise Pier A, Battery solo is listed first in 7:53:54. Row 662 gives second-placed Jaime Caballero Echeverría in 7:53:59.",
+          "label": "Supports"
+        },
+        {
+          "text": "The historical register lists solo placings and leaves the sanctioning body blank for this row.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Daily News of Open Water Swimming • 2010 Manhattan race report and NYC Swim results",
+          "url": "https://dailynewsofopenwaterswimming.com/long-line-of-australian-champions-in-new-york/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The contemporary report reproduces NYC Swim’s solo results, identifies the 28.5-mile course and records that a relay finished ahead of the solo field.",
+          "label": "Supports"
+        },
+        {
+          "text": "Distance follows the race report. McCardel’s own career list describes the course as 48 km.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Chloë McCardel • career swim list",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The athlete lists the 2011 English Channel solo in 09:03 and the 2010 Manhattan race in 07:53.",
+          "label": "Supports"
+        },
+        {
+          "text": "The career table rounds the Manhattan time to minutes and describes the course as 48 km.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First Channel crossing",
+      "lines": [
+        {
+          "text": "21 September 2009"
+        },
+        {
+          "text": "The beginning of her 44-crossing career."
+        }
+      ]
+    },
+    {
+      "title": "Bahamas ocean swim",
+      "lines": [
+        {
+          "text": "2014"
+        },
+        {
+          "text": "Completed a 124.4-km swim documented by Guinness."
+        }
+      ]
+    },
+    {
+      "title": "Non-stop triple Channel crossing",
+      "lines": [
+        {
+          "text": "8–9 August 2015"
+        },
+        {
+          "text": "Became the fourth person to complete a continuous triple."
+        }
+      ]
+    },
+    {
+      "title": "Eight crossings in one year",
+      "lines": [
+        {
+          "text": "2016"
+        },
+        {
+          "text": "A prolific season in her build-up to the career milestone."
+        }
+      ]
+    },
+    {
+      "title": "44th career crossing",
+      "lines": [
+        {
+          "text": "13 October 2021"
+        },
+        {
+          "text": "Surpassed Alison Streeter’s total of 43."
+        }
+      ]
+    },
+    {
+      "title": "Another completed Channel double",
+      "lines": [
+        {
+          "text": "Saturday, 8 September 2012"
+        },
+        {
+          "text": "The successful two-way swim has a one-minute discrepancy between CSA’s total and the athlete’s account, retained on the crossing record."
+        }
+      ]
+    },
+    {
+      "title": "Third completed Channel double",
+      "lines": [
+        {
+          "text": "Tuesday, 29 August 2017"
+        },
+        {
+          "text": "CSA records a 00:09 completion and 20:34 elapsed time, with matching 10:26 and 10:08 legs."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Chloë McCardel?",
+      "value": "This profile includes 7 selected solo performances for Chloë McCardel. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Chloë McCardel’s featured English Channel swim?",
+      "value": "The featured swim finished on Wednesday, 13 October 2021. Its exact start date is not confirmed here."
+    },
+    {
+      "label": "How long did Chloë McCardel’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 10 hours and 1 minute."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Chloë McCardel: official biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://chloemccardel.com/pages/about/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Chloë McCardel, 13 October 2021",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/5380/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: 44 English Channel crossings",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/681643-most-crossings-of-the-english-channel-swimming-by-an-individual"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Queen of the Channel announcement",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/185/chloe-mccardel-queen-channel"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records — Chloë McCardel’s Bahamas swim",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://guinnessworldrecords.de/world-records/627889-longest-distance-ocean-swim-marathon-swimming-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dates, distance, duration, route and reported MSF ratification.",
+          "label": "Supports"
+        },
+        {
+          "text": "MSF’s original observation documentation was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Chloë McCardel — official biography and achievements",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://chloemccardel.com/pages/about"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "English Channel career identity; Bahamas and Rottnest rows. Career identity bridge: the 2009 single, 2010 double and 2015 triple belong to the athlete whose 44th crossing was in 2021.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete-published achievements; opening prose rounds the Bahamas duration, so the detailed row is used. Athlete biography rounds the 2009 duration to minutes; the federation’s precise time is used.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Chloë McCardel, 21 September 2009",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444332"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "12:03:36 England–France solo; Eddie Spelling, Anastasia, observers Laura Austin and Nathan Cox; unfinished two-way context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CS&PF database entry; the ratifying-body label is not an inspected committee decision. Generic Date and separate clocks do not explicitly date the phases.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2009 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2009"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Chloë McCardel row: 21 September, 12:03:36, Eddie Spelling / Anastasia.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list retains the disclaimer that results are unofficial until committee ratification. No separate decision or observer log was inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Chloë McCardel, 20 September 2009",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2009-09-20/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Matching 12:03:36 solo and support boat, but an alternative calendar day.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; its Date field does not establish the departure or arrival phase.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness: Chloë McCardel Channel career",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/63413-most-crossings-of-the-english-channel-swimming-by-an-individual-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First crossing dated 21 September 2009 and continuous triple dated 8–9 August 2015.",
+          "label": "Supports"
+        },
+        {
+          "text": "A retrospective record summary; the first-swim day differs from Dover’s 20 September entry.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Chloë McCardel, 2010 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2459/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed two-way solo, England–France first leg, 21:48 in 2010.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: McCardel 2010 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444373"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "22 July 2010; combined England–France–England, 21:48:00; Reg Brickell Jr/Ray Brickell and Viking Princess.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: selected historical multiple-crossing rows",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected double-crossing rows: Streeter 1983 and 1995, Murphy 1970 and 1987, McCardel 2010; published leg splits.",
+          "label": "Supports"
+        },
+        {
+          "text": "A compiled historical table, not observer paperwork. Other rows contain apparent column errors; only the specified coherent rows are used.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Chloë McCardel, 2015 triple",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/4374/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed 9 August 2015 at 5:30pm; 36:12; three leg splits, pilot, vessel and observer field.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Chloë McCardel career directory",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The directory gives the matching 36:12 triple an alternative date of 7 August 2015.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical secondary directory with an outdated career total; this date differs from Guinness’s 8–9 August range and does not identify a phase.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Chloë McCardel, 2012 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2460/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful two-way solo, published total 19:21; Fastest 2 Way Swim award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful individual result inspected; original observer documents were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Chloë McCardel, 8 September 2012",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444627"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Combined England–France–England performance, 19:21:00, Reg Brickell Jr/Viking Princess; reports CSA ratification.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Chloë McCardel, 2017 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/4724/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed 29 August 2017 at 12:09am; 20:34; 10:26 and 10:08 splits; Reg Brickell/Viking Princess; observer R Brickell.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful individual result inspected; original observer documents were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association • Chloe McCardel, 2011 (3329)",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3329/chloe-mccardel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published completed one-way solo, England to France, 09:03.",
+          "label": "Supports"
+        },
+        {
+          "text": "The individual result gives the year and minute-precision time. The original observer report was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record • Chloë McCardel, 25 July 2011 (444460)",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444460"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England–France one-way in 09:03:00, piloted by Reg Brickell Jr aboard Viking Princess.",
+          "label": "Supports"
+        },
+        {
+          "text": "The compiled individual entry names CSA as ratifying organisation. Its date field gives a swim date without separately dated departure and arrival.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water • Manhattan solo results, row 661",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "On 12 June 2010 the counterclockwise Pier A, Battery solo is listed first in 7:53:54. Row 662 gives second-placed Jaime Caballero Echeverría in 7:53:59.",
+          "label": "Supports"
+        },
+        {
+          "text": "The historical register lists solo placings and leaves the sanctioning body blank for this row.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Daily News of Open Water Swimming • 2010 Manhattan race report and NYC Swim results",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://dailynewsofopenwaterswimming.com/long-line-of-australian-champions-in-new-york/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The contemporary report reproduces NYC Swim’s solo results, identifies the 28.5-mile course and records that a relay finished ahead of the solo field.",
+          "label": "Supports"
+        },
+        {
+          "text": "Distance follows the race report. McCardel’s own career list describes the course as 48 km.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "44th Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 13 October 2021 (completion)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "10h 1m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "14:16 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mccardel-2021"
+    },
+    {
+      "title": "First completed Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 21 September 2009 (recorded swim date)"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "Completed first crossing of an unfinished double. Published dates differ between 20 and 21 September."
+        },
+        {
+          "text": "12h 3m 36s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mccardel-2009-first"
+    },
+    {
+      "title": "First continuous Channel double",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 22 July 2010 (recorded swim date)"
+        },
+        {
+          "text": "England–France–England"
+        },
+        {
+          "text": "21h 48m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mccardel-2010-double"
+    },
+    {
+      "title": "Continuous three-way Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 9 August 2015 (completion)"
+        },
+        {
+          "text": "England–France–England–France"
+        },
+        {
+          "text": "CSA explicitly records completion on 9 August; a separate archive dates the swim to 7 August."
+        },
+        {
+          "text": "36h 12m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "17:30 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mccardel-2015-triple"
+    },
+    {
+      "title": "Continuous Channel double with conflicting published times",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 8 September 2012 (recorded swim date)"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "Completed double; elapsed time disputed. CSA publishes 19:21, while the athlete reports 19:20 and the historical leg times total 19:20."
+        },
+        {
+          "text": "19h 21m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mccardel-2012-double"
+    },
+    {
+      "title": "Channel double completed after midnight",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 29 August 2017 (completion)"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "20h 34m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "00:09 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mccardel-2017-double"
+    },
+    {
+      "id": "mccardel-2011-july-single",
+      "title": "2011 CSA fastest solo swim",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "Monday, 25 July 2011 (recorded swim date)"
+        },
+        {
+          "text": "9h 3m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Bahamas — Eleuthera to Nassau",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 20 October 2014 – Wednesday, 22 October 2014"
+        },
+        {
+          "text": "Bahamas"
+        },
+        {
+          "text": "Completed the ocean swim from Lighthouse Beach across Exuma Sound to Nassau."
+        },
+        {
+          "text": "41h 21m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "124.4 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Ratification reported by source · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "chloe-mccardel-event-1-bahamas-eleuthera-to-nassau"
+    },
+    {
+      "title": "Rottnest Channel crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2012 · exact day not confirmed"
+        },
+        {
+          "text": "Completed the single crossing listed in her 2012 achievements."
+        },
+        {
+          "text": "4h 59m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "19.7 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "chloe-mccardel-event-2-rottnest-channel-crossing"
+    },
+    {
+      "id": "mccardel-2010-manhattan",
+      "title": "Manhattan Island Marathon Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 12 June 2010 (event date)"
+        },
+        {
+          "text": "Pier A, Battery, Manhattan, New York, USA"
+        },
+        {
+          "text": "Won the solo race around Manhattan, finishing five seconds ahead of Jaime Caballero Echeverría. A five-person relay finished ahead of the solo field."
+        },
+        {
+          "text": "28.5 miles (race report)",
+          "label": "Published distance"
+        },
+        {
+          "text": "1st, solo swimmers",
+          "label": "Placing / category"
+        },
+        {
+          "text": "7h 53m 54s",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-7ead580ac1c02fdc3f67"
+}

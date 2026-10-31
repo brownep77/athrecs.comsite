@@ -1,0 +1,394 @@
+{
+  "slug": "prabhat-koli-english-channel",
+  "name": "Prabhat Koli",
+  "country": "India",
+  "aliases": [
+    "Prabhat Raju Koli"
+  ],
+  "highlight": "English Channel at sixteen · Triple Crown · Oceans Seven completed in 2023",
+  "biography": [
+    "Prabhat Koli, also identified as Prabhat Raju Koli, is an Indian open water swimmer based in Mumbai. In a 2023 interview he recalled discovering his aptitude for long distances at eleven, when a 14-kilometre river swim drew his coach's attention to his patience and endurance. His later international programme brought together Channel swimming, other major sea passages and continued work with younger swimmers.",
+    "On 20 September 2015, aged sixteen, Koli completed an England-to-France Channel solo in 13 hours 14 minutes. The federation's historical record names Reg Brickell Jr aboard Viking Princess, observer Phil Collins, and trainers Kishore Patil and Sally Minty Gravett. It attributes the swim's ratification to the Channel Swimming Association. His English Channel success subsequently formed part of the Triple Crown, completed with Catalina and Manhattan swims by 2017.",
+    "Koli received the 2018 Tenzing Norgay National Adventure Award for Water Adventure at the national awards ceremony on 29 August 2019. On 1 March 2023 he completed the Oceans Seven by crossing Cook Strait. Guinness records that achievement at 23 years 217 days; Caitlin O'Reilly surpassed his overall youngest-person mark in October 2024. Later in 2023, Koli described studying sports business administration while helping around twenty younger swimmers improve their strokes."
+  ],
+  "flags": [
+    {
+      "code": "IN",
+      "label": "India",
+      "abbr": "IND"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Also known as",
+      "value": "Prabhat Raju Koli"
+    },
+    {
+      "label": "Home city",
+      "value": "Mumbai, India"
+    },
+    {
+      "label": "Date of birth",
+      "value": "27 July 1999, according to Guinness World Records"
+    },
+    {
+      "label": "Channel debut",
+      "value": "20 September 2015, age 16 · 13:14:00"
+    },
+    {
+      "label": "Channel trainers",
+      "value": "Kishore Patil and Sally Minty Gravett, as named in the federation record"
+    },
+    {
+      "label": "National honour",
+      "value": "2018 Tenzing Norgay National Adventure Award for Water Adventure; presented in 2019"
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed 1 March 2023; the overall youngest-person record was surpassed in October 2024"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo at sixteen",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Sunday, 20 September 2015 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 14m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Individual record 444962 reports departure 02:54:00 and arrival 16:08:00. Its date is a generic swim date; the phases and clock standard are not separately dated or specified.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Phil Collins",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association — reported by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical individual record 444962, Name through Trainer fields, matches Prabhat Koli, India, age 16, 20 September 2015, one-way E-F and 13:14:00, and explicitly attributes ratification to CSA. Named crew and trainers support the athlete-specific match. This is reported CSA ratification, not inspection of a direct CSA decision or original observer log."
+        },
+        {
+          "text": "CS&PF: Prabhat Koli, 20 September 2015",
+          "url": "https://cspf.co.uk/swim/444962"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444962: India, age 16, date, 13:14:00, E-F, clocks, Reg Brickell Jr, Viking Princess, Phil Collins and trainers Kishore Patil and Sally Minty Gravett; ratifier CSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical attribution to CSA; direct CSA decision and observer log were not inspected. No separately dated departure or arrival.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "koli-2015"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "English Channel at sixteen",
+      "lines": [
+        {
+          "text": "Sunday, 20 September 2015"
+        },
+        {
+          "text": "Completed the one-way England-to-France swim in 13:14:00."
+        }
+      ]
+    },
+    {
+      "title": "Triple Crown completion",
+      "lines": [
+        {
+          "text": "2017"
+        },
+        {
+          "text": "WOWSA's coach-attributed report connects his Channel and Catalina crossings with the Manhattan swim."
+        }
+      ]
+    },
+    {
+      "title": "National adventure award presented",
+      "lines": [
+        {
+          "text": "Thursday, 29 August 2019"
+        },
+        {
+          "text": "Received the 2018 Tenzing Norgay award for Water Adventure at Rashtrapati Bhavan."
+        }
+      ]
+    },
+    {
+      "title": "Completed the Oceans Seven",
+      "lines": [
+        {
+          "text": "Wednesday, 1 March 2023"
+        },
+        {
+          "text": "Guinness records his completion at 23 years 217 days after Cook Strait."
+        }
+      ]
+    },
+    {
+      "title": "Overall age record surpassed",
+      "lines": [
+        {
+          "text": "Thursday, 24 October 2024"
+        },
+        {
+          "text": "Guinness records Caitlin O'Reilly as the younger overall Oceans Seven completer."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Prabhat Koli: sponsored-athlete profile",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://airavatindia.com/pages/prabhat-koli"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Airavat's named athlete biography identifying Koli and its sponsorship relationship."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Prabhat Koli discusses his Oceans Seven journey",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://dailynewsofopenwaterswimming.com/prabhat-koli-talks-about-his-oceans-seven-journey/"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Written interview published 31 August 2023; no video or audio playback is claimed."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Prabhat Koli?",
+      "value": "This profile includes 1 selected solo performance for Prabhat Koli. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Prabhat Koli’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Sunday, 20 September 2015. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Prabhat Koli’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 13 hours, 14 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF: Prabhat Koli, 20 September 2015",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444962"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444962: India, age 16, date, 13:14:00, E-F, clocks, Reg Brickell Jr, Viking Princess, Phil Collins and trainers Kishore Patil and Sally Minty Gravett; ratifier CSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical attribution to CSA; direct CSA decision and observer log were not inspected. No separately dated departure or arrival.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Airavat: Prabhat Koli athlete profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://airavatindia.com/pages/prabhat-koli"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named sponsored-athlete page identifies Prabhat Raju Koli as a Mumbai-based Indian open water swimmer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Promotional profile; broad first/youngest claims are not used without separate evidence.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Daily News of Open Water Swimming: Prabhat Koli interview",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://dailynewsofopenwaterswimming.com/prabhat-koli-talks-about-his-oceans-seven-journey/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Interview dated 31 August 2023: first long-distance experience, training, studies and helping younger swimmers.",
+          "label": "Supports"
+        },
+        {
+          "text": "The closing Cook Strait list contains an incorrect year and contradicts the introductory direction. Those fields are excluded; exact Oceans Seven age is taken from Guinness.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA: Prabhat Koli achieves the Triple Crown",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/prabhat-koli-achieves-triple-crown/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Coach-attributed report dated 28 June 2017: Triple Crown completion, Sally Minty-Gravett and component swims.",
+          "label": "Supports"
+        },
+        {
+          "text": "The report alternates between ages 18 and 17; neither figure is adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Government of India: 2019 presentation of 2018 adventure awards",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1583528&lang=2&reg=48"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Release 1583528, 29 August 2019: Tenzing Norgay National Adventure Awards 2018 table, row 4, Prabhat Raju Koli, Water Adventure.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: Oceans Seven age-record history",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/536846-youngest-person-to-swim-the-oceans-seven"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical paragraph identifies Koli, India, birth 27 July 1999, and Oceans Seven completion on 1 March 2023; Caitlin O'Reilly surpassed the overall youngest record on 24 October 2024.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page marks the record category inactive. The 2023 overall record is described as historical, not current.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo at sixteen",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 20 September 2015 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "13h 14m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "koli-2015"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-5115f139d34d3f7bf171"
+}

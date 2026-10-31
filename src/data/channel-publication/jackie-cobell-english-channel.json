@@ -1,0 +1,653 @@
+{
+  "slug": "jackie-cobell-english-channel",
+  "name": "Jackie Cobell",
+  "country": "England",
+  "aliases": [],
+  "highlight": "More than a day in the Channel · 28 hours 44 minutes",
+  "biography": [
+    "Jackie Cobell is an English marathon and ice swimmer whose 2010 Channel crossing lasted more than a day. She had prepared for five years, including two Channel relays and a solo swim along Windermere. Her Channel fundraising supported the Huntington’s Disease Association, giving the challenge a purpose beyond reaching the French coast.",
+    "Aged 56, Cobell set off from Shakespeare Beach on 24 July 2010 with pilot Lance Oram and the escort boat Sea Satin. The tides repeatedly changed her progress towards France. She continued through the night and eventually reached a beach near Calais the following day, completing the crossing in 28 hours 44 minutes. That duration made her successful swim an unusual landmark in Channel history: a crossing remembered for the length of time she kept swimming.",
+    "Cobell subsequently developed an extensive ice-swimming career. In December 2012 she completed Great Britain’s first certified Ice Mile at Holborough Lake in Kent. Her winter competitions brought international podium finishes, including an age-category success at the 2017 world championships in Burghausen. She also helped other swimmers prepare at Holborough and Dover and took part in international relay projects. In 2020 she became a swimmer honoree of the International Ice Swimming Hall of Fame."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Discipline",
+      "value": "Marathon swimming and ice swimming"
+    },
+    {
+      "label": "Age at Channel swim",
+      "value": "56 in July 2010"
+    },
+    {
+      "label": "Channel duration",
+      "value": "28 hours 44 minutes"
+    },
+    {
+      "label": "Channel escort",
+      "value": "Lance Oram aboard Sea Satin"
+    },
+    {
+      "label": "Fundraising",
+      "value": "Huntington’s Disease Association"
+    },
+    {
+      "label": "Recognition",
+      "value": "International Ice Swimming Hall of Fame, 2020"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo lasting 28 hours 44 minutes",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Cobell continued through a night at sea while the tides carried her along the French coast before her landing near Calais."
+        },
+        {
+          "text": "28h 44m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Saturday, 24 July 2010 · About 07:30 · Contemporary remote-tracking account: approximately 07:30, described as continental time; no UTC offset specified.",
+          "label": "Started"
+        },
+        {
+          "text": "Sunday, 25 July 2010 · 12:13 · Published in the contemporary remote-tracking account; finish clock standard not explicitly identified.",
+          "label": "Finished"
+        },
+        {
+          "text": "The CS&PF row gives 24 July and 28:44:00; the duration is displayed to minutes. Dover gives 24/25 July. The two clocks come from a remote account rather than an observer log; no time-zone conversion or calculated clock has been applied.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Sandy beach west of Calais harbour, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Lance Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Sea Satin",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "The contemporary tracking account reports south-westerly winds and water around 15–16°C during the night and morning.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The individual CS&PF successful-swim row and its Channel facts page were checked. Dover corroborates route, dates, pilot and boat. The federation page has a general committee-ratification notice; no individual certificate or observer log was inspected. The departure and landing account supplies the clock details with the limitations stated above."
+        },
+        {
+          "text": "CS&PF: Jackie Cobell, 24 July 2010",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2010"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual solo row: 24 July, Lance Oram / Sea Satin, 28:44:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The page carries a general notice that results are unofficial until committee ratification; no individual ratification document was inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: Channel facts",
+          "url": "https://cspf.co.uk/channel-facts"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Cobell's 2010 single crossing at 28 hours 44 minutes.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dover swimming archive: Jackie Cobell, 2010",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2010-07-24/jackie-cobell"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Date span, England-to-France route, pilot and boat.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective record; observer is explicitly unknown.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Contemporary account of Jackie Cobell's crossing",
+          "url": "https://www.channel-triathlon.com/2010/07/27/epic-swims/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Departure, landing, published clocks and reported conditions.",
+          "label": "Supports"
+        },
+        {
+          "text": "The writer followed remotely using AIS; this is not an observer's log. Clock standards are not defined sufficiently for a time-zone conversion.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "cobell-2010"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Holborough Lake Ice Mile",
+      "lines": [
+        {
+          "text": "Ice swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 10 December 2012 (event date)"
+        },
+        {
+          "text": "Holborough Lake, Kent, England"
+        },
+        {
+          "text": "Completed an IISA-listed Ice Mile in water recorded at 4.75°C."
+        },
+        {
+          "text": "0h 42m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1 statute mile",
+          "label": "Published distance"
+        },
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "IISA athlete record, Ice Miles row 1, supplies date, distance and time. Ice Hall of Fame biography matches this event to the English Channel swimmer."
+        },
+        {
+          "text": "International Ice Swimming Association: Jackie Cobell athlete record",
+          "url": "https://internationaliceswimming.com/member-bio/?user=36"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual Ice Mile and 1 km swim dates and times.",
+          "label": "Supports"
+        },
+        {
+          "text": "International Ice Swimming Hall of Fame: Jackie Cobell",
+          "url": "https://iishof.com/honoree/jackie-cobell/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identity bridge between English Channel and ice-swimming careers.",
+          "label": "Supports"
+        },
+        {
+          "text": "2017 day and water-temperature summary differ from the IISA record; IISA controls the event entry.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "jackie-cobell-event-1-holborough-lake-ice-mile"
+    },
+    {
+      "title": "IISA World Championships — 1000 m freestyle",
+      "lines": [
+        {
+          "text": "Ice swimming · Race"
+        },
+        {
+          "text": "Friday, 6 January 2017 (event date)"
+        },
+        {
+          "text": "Burghausen, Bavaria, Germany"
+        },
+        {
+          "text": "Won the women’s 60–64 category in 23:13.09 (minutes:seconds.centiseconds); finished 39th among women overall."
+        },
+        {
+          "text": "1000 m",
+          "label": "Published distance"
+        },
+        {
+          "text": "1st women 60–64; 39th women overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "IISA athlete row 3 dates the swim 6 January. Event row 95 and PDF pages 2/6 confirm time and category. Hall of Fame’s 5 January summary differs; the specific IISA swim date controls."
+        },
+        {
+          "text": "International Ice Swimming Association: Jackie Cobell athlete record",
+          "url": "https://internationaliceswimming.com/member-bio/?user=36"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual Ice Mile and 1 km swim dates and times.",
+          "label": "Supports"
+        },
+        {
+          "text": "International Ice Swimming Association: 2017 World Championships results",
+          "url": "https://internationaliceswimming.com/view-iisa-event/?event=4"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1000 m freestyle, Jackie Cobell result; MM:SS:CC heading.",
+          "label": "Supports"
+        },
+        {
+          "text": "International Ice Swimming Association: 2017 results PDF",
+          "url": "https://internationaliceswimming.com/wp-content/uploads/otherswims/otherswim_award_user527_swim1.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Pages 2 and 6: women’s overall and 60–64 category results.",
+          "label": "Supports"
+        },
+        {
+          "text": "International Ice Swimming Hall of Fame: Jackie Cobell",
+          "url": "https://iishof.com/honoree/jackie-cobell/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identity bridge between English Channel and ice-swimming careers.",
+          "label": "Supports"
+        },
+        {
+          "text": "2017 day and water-temperature summary differ from the IISA record; IISA controls the event entry.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "jackie-cobell-event-2-iisa-world-championships-1000-m-freestyle"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "English Channel crossing",
+      "lines": [
+        {
+          "text": "24–25 July 2010"
+        },
+        {
+          "text": "Swam from England to France in 28 hours 44 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Certified Ice Mile",
+      "lines": [
+        {
+          "text": "December 2012"
+        },
+        {
+          "text": "Completed Great Britain’s first certified Ice Mile at Holborough Lake."
+        }
+      ]
+    },
+    {
+      "title": "Supporting ice swimmers",
+      "lines": [
+        {
+          "text": "10 February 2013"
+        },
+        {
+          "text": "Helped organise the first UK Ice Mile event at Holborough Lake."
+        }
+      ]
+    },
+    {
+      "title": "World-championship age-category success",
+      "lines": [
+        {
+          "text": "January 2017"
+        },
+        {
+          "text": "Won age-category gold over one kilometre in Burghausen."
+        }
+      ]
+    },
+    {
+      "title": "Ice Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "2020"
+        },
+        {
+          "text": "Recognised as a swimmer honoree."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Jackie Cobell?",
+      "value": "This profile includes 1 selected solo performance for Jackie Cobell. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Jackie Cobell’s featured English Channel swim?",
+      "value": "The featured swim started on Saturday, 24 July 2010 and finished on Sunday, 25 July 2010."
+    },
+    {
+      "label": "How long did Jackie Cobell’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 28 hours and 44 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "International Ice Swimming Hall of Fame: Jackie Cobell",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://iishof.com/honoree/jackie-cobell/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England, 2020 honour, Ice Mile, winter competition and coaching history. Identity bridge between English Channel and ice-swimming careers.",
+          "label": "Supports"
+        },
+        {
+          "text": "2017 day and water-temperature summary differ from the IISA record; IISA controls the event entry.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Jackie Cobell: Channel-swim fundraising account",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.justgiving.com/fundraising/jackiecobell"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Her own preparation account, age 56, two earlier relays, Windermere swim and fundraising purpose.",
+          "label": "Supports"
+        },
+        {
+          "text": "The fundraiser's 18 July event label is a planned date, not the successful Channel swim date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Jackie Cobell, 24 July 2010",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2010"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual solo row: 24 July, Lance Oram / Sea Satin, 28:44:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The page carries a general notice that results are unofficial until committee ratification; no individual ratification document was inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Channel facts",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/channel-facts"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Cobell's 2010 single crossing at 28 hours 44 minutes.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Dover swimming archive: Jackie Cobell, 2010",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2010-07-24/jackie-cobell"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Date span, England-to-France route, pilot and boat.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective record; observer is explicitly unknown.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Contemporary account of Jackie Cobell's crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channel-triathlon.com/2010/07/27/epic-swims/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Departure, landing, published clocks and reported conditions.",
+          "label": "Supports"
+        },
+        {
+          "text": "The writer followed remotely using AIS; this is not an observer's log. Clock standards are not defined sufficiently for a time-zone conversion.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Ice Swimming Association: Jackie Cobell athlete record",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://internationaliceswimming.com/member-bio/?user=36"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual Ice Mile and 1 km swim dates and times.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "International Ice Swimming Association: 2017 World Championships results",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://internationaliceswimming.com/view-iisa-event/?event=4"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1000 m freestyle, Jackie Cobell result; MM:SS:CC heading.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "International Ice Swimming Association: 2017 results PDF",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://internationaliceswimming.com/wp-content/uploads/otherswims/otherswim_award_user527_swim1.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Pages 2 and 6: women’s overall and 60–64 category results.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo lasting 28 hours 44 minutes",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 24 July 2010 – Sunday, 25 July 2010"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "28h 44m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "About 07:30 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "12:13 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "cobell-2010"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Holborough Lake Ice Mile",
+      "lines": [
+        {
+          "text": "Ice swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 10 December 2012 (event date)"
+        },
+        {
+          "text": "Holborough Lake, Kent, England"
+        },
+        {
+          "text": "Completed an IISA-listed Ice Mile in water recorded at 4.75°C."
+        },
+        {
+          "text": "0h 42m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1 statute mile",
+          "label": "Published distance"
+        },
+        {
+          "text": "Ratifying body's record checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "jackie-cobell-event-1-holborough-lake-ice-mile"
+    },
+    {
+      "title": "IISA World Championships — 1000 m freestyle",
+      "lines": [
+        {
+          "text": "Ice swimming · Race"
+        },
+        {
+          "text": "Friday, 6 January 2017 (event date)"
+        },
+        {
+          "text": "Burghausen, Bavaria, Germany"
+        },
+        {
+          "text": "Won the women’s 60–64 category in 23:13.09 (minutes:seconds.centiseconds); finished 39th among women overall."
+        },
+        {
+          "text": "1000 m",
+          "label": "Published distance"
+        },
+        {
+          "text": "1st women 60–64; 39th women overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Ratifying body's record checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "jackie-cobell-event-2-iisa-world-championships-1000-m-freestyle"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-00d452a25294a7c3cd5c"
+}

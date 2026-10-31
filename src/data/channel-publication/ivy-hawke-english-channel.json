@@ -1,0 +1,307 @@
+{
+  "slug": "ivy-hawke-english-channel",
+  "name": "Ivy Hawke",
+  "country": "England",
+  "aliases": [],
+  "highlight": "Interwar Channel pioneer · France to England in 19:16",
+  "biography": [
+    "Ivy Hawke grew up in Surbiton, Surrey, where her mother ran the Spread Eagle Coffee Tavern. Born on 12 April 1903, she developed her endurance in the Thames and won the 1917 Thames Race at fourteen. She represented Surrey Ladies Swimming Club, combining her swimming with work in the family business before becoming a swimming instructor and superintendent at the local baths.",
+    "The English Channel became a longer project. Attempts in 1922 and 1927 ended without a crossing, but in August 1928 she completed the France-to-England route. The Channel Swimming Association records 19 hours 16 minutes. A contemporary Eugene Guard report also gives that duration and describes her as twenty-five. The selected performance is dated 19 August in the later historical attempt table.",
+    "Hawke subsequently tried the opposite direction in 1929, but that attempt was abandoned and is not counted as another success. Her story links the women’s Thames swimming clubs with the interwar Channel pioneers: substantial river experience preceded the successful sea crossing. She married Edward Crocker in 1931 and died at Kingston upon Thames in 1970."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "12 April 1903"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Surbiton, Surrey, England"
+    },
+    {
+      "label": "Club",
+      "value": "Surrey Ladies Swimming Club"
+    },
+    {
+      "label": "Occupation",
+      "value": "Swimming instructor and local baths superintendent"
+    },
+    {
+      "label": "Selected Channel crossing",
+      "value": "France to England · 1928 · 19:16"
+    },
+    {
+      "label": "Died",
+      "value": "1970, Kingston upon Thames"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Successful France-to-England crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Sunday, 19 August 1928 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "19h 16m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "19 August is retained as the historical record date. No structured departure or arrival clock is asserted from the secondary narrative.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association — published historical record",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2241 names Ivy Hawke of England and supplies solo, one way, France to England, 1928 and 19:16. The dated 19 August row is in the secondary biographical attempt table; the Eugene Guard of 24 August 1928, page 10, final paragraph of Channel Conquered By English Girl, independently reports her 19:16 success. The published CSA entry was inspected, not the original observer log."
+        },
+        {
+          "text": "Channel Swimming Association: Ivy Hawke, 1928",
+          "url": "https://www.channelswimmingassociation.com/swim/2241/ivy-hawke"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful-swim record 2241: England; solo, one way, France to England; 1928; 19:16.",
+          "label": "Supports"
+        },
+        {
+          "text": "Publishes the year only; no departure or arrival clock.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Ivy Hawke: biographical reference and newspaper bibliography",
+          "url": "https://en.wikipedia.org/wiki/Ivy_Hawke"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Biographical account and successful-attempt table dated 19 August 1928; earlier unsuccessful attempts and 1929 return attempt.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary synthesis. Its failed-attempt prose and table disagree; precise clocks and failed-attempt durations are not adopted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "University of Oregon: Eugene Guard, 24 August 1928, page 10",
+          "url": "https://oregonnews.uoregon.edu/lccn/sn96088108/1928-08-24/ed-1/seq-10.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel Conquered By English Girl article, final paragraph: Ivy Hawke, aged 25, had completed the Channel in 19 hours 16 minutes.",
+          "label": "Supports"
+        },
+        {
+          "text": "Contemporary newspaper account; the five-days-earlier phrase is corroboration, not an independently transcribed swim date.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "ivy-hawke-1928-fe"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Thames race success",
+      "lines": [
+        {
+          "text": "1917"
+        },
+        {
+          "text": "Won the Thames Race at fourteen, before her Channel campaigns."
+        }
+      ]
+    },
+    {
+      "title": "Successful English Channel swim",
+      "lines": [
+        {
+          "text": "Sunday, 19 August 1928"
+        },
+        {
+          "text": "Completed France to England; the CSA records 19 hours 16 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Opposite-direction attempt",
+      "lines": [
+        {
+          "text": "1929"
+        },
+        {
+          "text": "Attempted England to France but did not complete the crossing."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Ivy Hawke?",
+      "value": "This profile includes 1 selected solo performance for Ivy Hawke. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Ivy Hawke’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Sunday, 19 August 1928. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Ivy Hawke’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 19 hours and 16 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Dover Museum / Channel Swimming Dover: Ivy Hawke",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/hawke-miss-ivy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named biography: birth, Surbiton upbringing, Surrey Ladies club, Thames racing, employment, marriage and death.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Ivy Hawke, 1928",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2241/ivy-hawke"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful-swim record 2241: England; solo, one way, France to England; 1928; 19:16.",
+          "label": "Supports"
+        },
+        {
+          "text": "Publishes the year only; no departure or arrival clock.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Ivy Hawke: biographical reference and newspaper bibliography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://en.wikipedia.org/wiki/Ivy_Hawke"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Biographical account and successful-attempt table dated 19 August 1928; earlier unsuccessful attempts and 1929 return attempt.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary synthesis. Its failed-attempt prose and table disagree; precise clocks and failed-attempt durations are not adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "University of Oregon: Eugene Guard, 24 August 1928, page 10",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://oregonnews.uoregon.edu/lccn/sn96088108/1928-08-24/ed-1/seq-10.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel Conquered By English Girl article, final paragraph: Ivy Hawke, aged 25, had completed the Channel in 19 hours 16 minutes.",
+          "label": "Supports"
+        },
+        {
+          "text": "Contemporary newspaper account; the five-days-earlier phrase is corroboration, not an independently transcribed swim date.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Successful France-to-England crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 19 August 1928 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "19h 16m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "ivy-hawke-1928-fe"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-1aedbe81d1357933051a"
+}

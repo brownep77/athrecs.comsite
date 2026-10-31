@@ -1,0 +1,402 @@
+{
+  "slug": "adrian-sarchet-english-channel",
+  "name": "Adrian Sarchet",
+  "country": "UK [Guernsey]",
+  "aliases": [
+    "Ady",
+    "Sea Donkey"
+  ],
+  "highlight": "English Channel in 14:02 · Oceans Seven completed in 2020",
+  "biography": [
+    "Adrian Sarchet is a Guernsey marathon swimmer known as Sea Donkey. His film biography describes a former junior pool swimmer and rugby player who became a lawyer before returning to sustained exercise through open water. In his own account, the turning point was an invitation from his brother at Christmas 2009 to join a charity sea swim. He began swimming in Guernsey waters the following January.",
+    "Channel swimmer Roger Allsopp helped turn that local challenge into a larger ambition. Sarchet joined part of Allsopp’s qualifying swim at Dover, earned a qualifying certificate himself and committed to a Channel attempt. On 10 August 2012, he completed the England-to-France route in 14:02:00 with Neil Streeter aboard Suva and observer Mike Ball. Family, friends and an ITV filmmaker accompanied the swim.",
+    "The English Channel began an Oceans Seven journey that concluded with Cook Strait in 2020; ITV reported him as its twenty-first finisher. James Harrison’s documentary Sea Donkey follows his North Channel challenge, giving the nickname a wider audience. Sarchet also used swimming to support access to the water at home: in August 2022 he completed a 24-hour swim at Guernsey’s La Vallette pools to help fund improved accessibility."
+  ],
+  "flags": [
+    {
+      "code": "GG",
+      "label": "Guernsey",
+      "abbr": "GGY"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Source-reported nationality",
+      "value": "UK [Guernsey]"
+    },
+    {
+      "label": "Known as",
+      "value": "Sea Donkey; Ady"
+    },
+    {
+      "label": "Professional background",
+      "value": "Lawyer"
+    },
+    {
+      "label": "First selected Channel solo",
+      "value": "10 August 2012 · 14:02:00"
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed in 2020; ITV reported twenty-first finisher"
+    },
+    {
+      "label": "Documentary",
+      "value": "Sea Donkey, directed by James Harrison"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Sarchet describes support from his father, brother Ian, friends Giles Newark and Tellervo Maukonen, and ITV filmmaker Michael Ogden."
+        },
+        {
+          "text": "Friday, 10 August 2012 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "14h 2m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Detail 444574 publishes departure 03:54:00 and arrival 17:56:00 alongside the generic swim date. No phase date or time-zone assumption has been added.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Neil Streeter",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Suva",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Mike Ball",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Matched CS&PF detail 444574 and the 2012 annual Solo Swims row dated 10th August: Adrian Sarchet, Neil Streeter / Suva, 14:02:00. The detail supplies the England-to-France route and Mike Ball as observer, corroborated by Sarchet’s first-person account. The annual list retains its ratification disclaimer; no committee decision or observer log was inspected."
+        },
+        {
+          "text": "CS&PF: Adrian Sarchet, record 444574",
+          "url": "https://cspf.co.uk/swim/444574"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "UK [Guernsey] nationality, solo date and route, 14:02:00, crew and reported clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "The date is a generic swim date; clock phase dates and time zone are not separately stated.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: 2012 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2012"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "10th August Solo Swims row: Adrian Sarchet, Neil Streeter / Suva, 14:02:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list says results remain unofficial until committee ratification; no committee decision or observer log was inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Adrian Sarchet: first-person Oceans Seven account, published by WOWSA",
+          "url": "https://www.openwaterswimming.com/village-of-enablers-helps-adrian-sarchet-achieve-the-oceans-seven/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete’s account of his 2009 invitation, early Guernsey swims, Roger Allsopp’s influence, 2012 Channel crew and later Oceans Seven progression.",
+          "label": "Supports"
+        }
+      ],
+      "id": "sarchet-2012"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Invitation to a charity sea swim",
+      "lines": [
+        {
+          "text": "2009"
+        },
+        {
+          "text": "Sarchet dates the invitation that redirected his sporting life to Christmas dinner 2009."
+        }
+      ]
+    },
+    {
+      "title": "Open-water swimming in Guernsey",
+      "lines": [
+        {
+          "text": "2010"
+        },
+        {
+          "text": "His first-person account dates his initial local sea swim to January 2010."
+        }
+      ]
+    },
+    {
+      "title": "English Channel completed",
+      "lines": [
+        {
+          "text": "Friday, 10 August 2012"
+        },
+        {
+          "text": "CS&PF lists his one-way solo at 14:02:00."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven completed",
+      "lines": [
+        {
+          "text": "2020"
+        },
+        {
+          "text": "Cook Strait concluded the seven-channel project; ITV reported the achievement on 1 March."
+        }
+      ]
+    },
+    {
+      "title": "Twenty-four hours for accessible swimming",
+      "lines": [
+        {
+          "text": "August 2022"
+        },
+        {
+          "text": "Completed a La Vallette pool swim supporting improved access to the water."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Sea Donkey",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://seadonkeyfilm.com/"
+        },
+        {
+          "text": "Trailer and media"
+        },
+        {
+          "text": "Official documentary site with an Adrian Sarchet biography, trailer and film purchase links. The film concerns his North Channel swim; full playback was not reviewed."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Adrian Sarchet?",
+      "value": "This profile includes 1 selected solo performance for Adrian Sarchet. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Adrian Sarchet’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Friday, 10 August 2012. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Adrian Sarchet’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 14 hours, 2 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF: Adrian Sarchet, record 444574",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444574"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "UK [Guernsey] nationality, solo date and route, 14:02:00, crew and reported clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "The date is a generic swim date; clock phase dates and time zone are not separately stated.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2012 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2012"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "10th August Solo Swims row: Adrian Sarchet, Neil Streeter / Suva, 14:02:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list says results remain unofficial until committee ratification; no committee decision or observer log was inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Adrian Sarchet: first-person Oceans Seven account, published by WOWSA",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/village-of-enablers-helps-adrian-sarchet-achieve-the-oceans-seven/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete’s account of his 2009 invitation, early Guernsey swims, Roger Allsopp’s influence, 2012 Channel crew and later Oceans Seven progression.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Sea Donkey: official film and Adrian Sarchet profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://seadonkeyfilm.com/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "About Ady biography, legal career, nickname, North Channel documentary and filmmaker credit.",
+          "label": "Supports"
+        },
+        {
+          "text": "The website was inspected; documentary playback was not reviewed.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "ITV News: Sarchet completes Oceans Seven",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.itv.com/news/channel/2020-03-01/sea-donkey-adrian-sarchet-completes-oceans-seven-challenge"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Report dated 1 March 2020 identifies Oceans Seven completion and twenty-first finisher.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its reference to the North Channel crossing as 2017 conflicts with Sarchet’s own 2015 account; that year is not adopted from ITV.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Outdoor Swimmer: 24-hour sea-pool swim",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://outdoorswimmer.com/featured/adrian-sarchet-completes-24-hour-sea-pool-swim/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Report dated 24 August 2022 describes completed 24-hour La Vallette swim and accessibility fundraising.",
+          "label": "Supports"
+        },
+        {
+          "text": "The article calls 41 miles a target; no achieved distance is adopted.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 10 August 2012 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "14h 2m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "sarchet-2012"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-7935f9a10c608cafce23"
+}

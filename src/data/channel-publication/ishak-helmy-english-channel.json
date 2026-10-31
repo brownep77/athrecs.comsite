@@ -1,0 +1,392 @@
+{
+  "slug": "ishak-helmy-english-channel",
+  "name": "Ishak Helmy",
+  "country": "Egypt",
+  "aliases": [
+    "Ishak Helmi"
+  ],
+  "highlight": "First Egyptian Channel swimmer · 1928 · 23 hours 40 minutes",
+  "biography": [
+    "Ishak Helmy was an Egyptian swimmer whose long Channel campaign made him a familiar figure among the swimmers and support crews gathering on the English and French coasts in the 1920s. He is also recorded as Ishak Helmi. His own attempts were only part of that involvement: the International Marathon Swimming Hall of Fame describes his work assisting other swimmers, including Gertrude Ederle, and his participation in the crew for her successful crossing.",
+    "The Dover collections record unsuccessful attempts in several seasons before his 1928 success. He trained with Thomas William Burgess, whose experience linked many of the period’s Channel swimmers. For Helmy’s successful effort, Dover Museum names the French tug Alsace and places his landing at Folkestone.",
+    "His recognised France-to-England solo crossing took 23 hours and 40 minutes. Both Dover sources date the successful swim to 31 August 1928, although they do not clearly label that date as departure or arrival. The Channel Swimming Association independently publishes his name, Egyptian nationality, route, year and duration. Dover identifies him as the first Egyptian to complete the Channel and describes the enthusiasm his achievement generated in Egypt. In 1953 he shared an honorary leadership role in the new international long-distance swimming association with Georges Michel. IMSHOF honoured him as an Honor Swimmer in 1980."
+  ],
+  "flags": [
+    {
+      "code": "EG",
+      "label": "Egypt",
+      "abbr": "EGY"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country in CSA record",
+      "value": "Egypt"
+    },
+    {
+      "label": "Also recorded as",
+      "value": "Ishak Helmi"
+    },
+    {
+      "label": "Channel distinction",
+      "value": "First Egyptian, according to the Dover archive"
+    },
+    {
+      "label": "Coach",
+      "value": "Thomas William Burgess"
+    },
+    {
+      "label": "Escort vessel",
+      "value": "Alsace"
+    },
+    {
+      "label": "Reported landing",
+      "value": "Folkestone"
+    },
+    {
+      "label": "Hall of fame",
+      "value": "IMSHOF Honor Swimmer · 1980"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "France to England",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Dover Museum identifies Burgess as his trainer and Alsace as escort. Published attempt totals and one erroneous date in the IMSHOF biography are not used."
+        },
+        {
+          "text": "Friday, 31 August 1928 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "23h 40m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "31 August is the published swim date, without a verified departure/arrival phase. Start and finish clocks were not established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France to England",
+          "label": "Direction"
+        },
+        {
+          "text": "Folkestone",
+          "label": "Arrival"
+        },
+        {
+          "text": "Alsace",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record /swim/2243 identifies Ishak Helmy, Egypt, solo one-way France–England in 1928 at 23:40. Dover’s named Helmi museum caption and Between Wars section supply 31 August and the historical career bridge; the museum identifies Folkestone and Alsace. The public successful record was inspected, not original observer papers or the date of ratification."
+        },
+        {
+          "text": "CSA: Ishak Helmy, 1928",
+          "url": "https://www.channelswimmingassociation.com/swim/2243/ishak-helmy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful record: Egypt, solo France–England, 1928, 23:40.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only; no phase date, clock or observer supplied.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming Dover: Ishak Helmi with Veronica",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/ishak-helmy-with-veronica"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named museum caption: first Egyptian, 31 August 1928 success, 23:40 and earlier/later attempts.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its prose calls the unsuccessful attempts five but lists six. No total attempt count is adopted; image is not reproduced.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Between Wars",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named historical sections for Toth, Michel, Helmi and Temme, including selected dates, routes, coaches and support vessels.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective collection research. Several timings, attempt counts and landing descriptions differ from other sources; disagreements are retained or the uncertain detail omitted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Ishak Helmy biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_fc9518d264064bc1a08974087fa57613.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named Egyptian 1980 honoree; Channel time and work supporting Gertrude Ederle and other swimmers.",
+          "label": "Supports"
+        },
+        {
+          "text": "The document’s ninth-person rank and 1924 date for Ederle’s first attempt are not adopted. Original observer evidence was not inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "ishak-helmy-1928"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Continuing the Channel campaign",
+      "lines": [
+        {
+          "text": "1925"
+        },
+        {
+          "text": "Dover records an unsuccessful France-to-England attempt in September."
+        }
+      ]
+    },
+    {
+      "title": "Supporting other swimmers",
+      "lines": [
+        {
+          "text": "1926"
+        },
+        {
+          "text": "IMSHOF records him in the crew for Gertrude Ederle’s successful crossing."
+        }
+      ]
+    },
+    {
+      "title": "Another attempt",
+      "lines": [
+        {
+          "text": "1927"
+        },
+        {
+          "text": "The Dover record includes an unsuccessful attempt that August."
+        }
+      ]
+    },
+    {
+      "title": "Recognised Channel success",
+      "lines": [
+        {
+          "text": "31 August 1928"
+        },
+        {
+          "text": "France to England in 23h40m; source date is not assigned a departure or arrival phase."
+        }
+      ]
+    },
+    {
+      "title": "International association",
+      "lines": [
+        {
+          "text": "1953"
+        },
+        {
+          "text": "Shared the honorary co-presidency of the new international long-distance swimming association with Georges Michel, according to Michel’s IMSHOF biography."
+        }
+      ]
+    },
+    {
+      "title": "Hall-of-fame recognition",
+      "lines": [
+        {
+          "text": "1980"
+        },
+        {
+          "text": "Named an IMSHOF Honor Swimmer representing Egypt."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Ishak Helmy?",
+      "value": "This profile includes 1 selected solo performance for Ishak Helmy. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Ishak Helmy’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Friday, 31 August 1928. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Ishak Helmy’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 23 hours and 40 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Ishak Helmy, 1928",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2243/ishak-helmy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful record: Egypt, solo France–England, 1928, 23:40.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only; no phase date, clock or observer supplied.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "IMSHOF: Ishak Helmy biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_fc9518d264064bc1a08974087fa57613.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named Egyptian 1980 honoree; Channel time and work supporting Gertrude Ederle and other swimmers.",
+          "label": "Supports"
+        },
+        {
+          "text": "The document’s ninth-person rank and 1924 date for Ederle’s first attempt are not adopted. Original observer evidence was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Dover: Ishak Helmi with Veronica",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/ishak-helmy-with-veronica"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named museum caption: first Egyptian, 31 August 1928 success, 23:40 and earlier/later attempts.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its prose calls the unsuccessful attempts five but lists six. No total attempt count is adopted; image is not reproduced.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Between Wars",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named historical sections for Toth, Michel, Helmi and Temme, including selected dates, routes, coaches and support vessels.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective collection research. Several timings, attempt counts and landing descriptions differ from other sources; disagreements are retained or the uncertain detail omitted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "IMSHOF: Georges Michel biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_c74841f9625e4316bf2e43cb464b303e.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named French honoree: 1926 Channel record, professional career, 1953 organising roles and 2022 induction.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its ten unsuccessful attempts differ from Dover Museum’s account; no precise attempt total is adopted.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "France to England",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 31 August 1928 (recorded swim date)"
+        },
+        {
+          "text": "France to England"
+        },
+        {
+          "text": "23h 40m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "ishak-helmy-1928"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-7b087fac5fc4772571a2"
+}

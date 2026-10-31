@@ -1,0 +1,586 @@
+{
+  "slug": "otto-thaning-english-channel",
+  "name": "Otto Thaning",
+  "country": "South Africa",
+  "aliases": [],
+  "highlight": "Channel solos in 1994 and 2014 · Guinness age record at 73",
+  "biography": [
+    "Otto Thaning is a South African heart surgeon and open water swimmer whose Channel career spans twenty years between two successful solos. Guinness gives his birth date as 13 March 1941. In a published account of his career, he described training under Christiaan Barnard and combining medical practice in Cape Town with a lasting interest in swimming.",
+    "His route to a Channel finish included an unsuccessful swim in 1992 and a weather-disrupted return in 1993. The federation's historical record confirms that on 30 August 1994 he completed England to France in 10 hours 29 minutes, aged 53, with Michael Oram piloting Aegean Blue. The record attributes ratification to the Channel Swimming Association.",
+    "Thaning returned on 6 September 2014 and finished in 12 hours 52 minutes, landing at Wissant Bay. Guinness recognised the oldest male Channel crossing at 73 years 177 days. A CS&PF summary instead prints 73 years four months; the differing age descriptions remain explicit. This was the next age-record milestone after Cyril Baldock's crossing that August.",
+    "His swimming continued into his eighties. In April 2021, the Cape Long Distance Swimming Association reported an age-80 Robben Island crossing in 2 hours 52 minutes. The same association records that he and Lewis Pugh made a pioneering Lake Malawi crossing in 1992."
+  ],
+  "flags": [
+    {
+      "code": "ZA",
+      "label": "South Africa",
+      "abbr": "RSA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Date of birth",
+      "value": "13 March 1941, according to Guinness World Records"
+    },
+    {
+      "label": "Profession",
+      "value": "Heart surgeon in Cape Town"
+    },
+    {
+      "label": "First Channel solo",
+      "value": "30 August 1994 · 10:29:00"
+    },
+    {
+      "label": "2014 age record",
+      "value": "Guinness: 73 years 177 days; CS&PF summary: 73 years four months"
+    },
+    {
+      "label": "Channel career span",
+      "value": "Successful solos in 1994 and 2014"
+    },
+    {
+      "label": "Later endurance swimming",
+      "value": "Robben Island crossing at age 80, reported by CLDSA in April 2021"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First successful English Channel solo",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Tuesday, 30 August 1994 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 29m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF record 443600 reports departure 06:00:00 and arrival 16:29:00 with a generic swim date only. No separate phase dates or time-zone basis were established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "K. Coombes",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association — reported by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical individual record 443600 matches Otto Thaning, South Africa, age 53, 30 August 1994, one-way E-F and 10:29:00, and explicitly names CSA as ratifying organisation. Crew fields name Michael Oram, Aegean Blue and K. Coombes. This is reported CSA ratification; the direct CSA decision was not inspected."
+        },
+        {
+          "text": "CS&PF: Otto Thaning, 30 August 1994",
+          "url": "https://cspf.co.uk/swim/443600"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 443600: South Africa, age 53, date, 10:29:00, E-F, clocks, Michael Oram, Aegean Blue and K. Coombes; ratifying organisation CSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical attribution to CSA, not direct inspection of the CSA decision. Phase dates are not separately supplied.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "thaning-1994"
+    },
+    {
+      "title": "2014 Guinness age-record Channel crossing",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Age descriptions differ: Guinness gives 73 years 177 days; CS&PF's facts page gives 73 years four months. The sources agree on the successful 12:52 crossing."
+        },
+        {
+          "text": "Saturday, 6 September 2014 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 52m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Individual record 444845 reports departure 09:48:00 and arrival 22:40:00. Because its date is a generic swim date, neither clock is assigned a phase date or time zone.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Wissant Bay, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Mike Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Seafarer II",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Laura Austin",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual record 444845 and its annual solo row '6th September | Otto Thaning' match the date, 12:52:00 and crew; the season review identifies observer Laura Austin. Guinness independently recognises the dated age record and route. The precise age differs from CS&PF's facts-page summary, so the discrepancy remains visible. No committee decision or observer log was inspected."
+        },
+        {
+          "text": "CS&PF: Otto Thaning, 6 September 2014",
+          "url": "https://cspf.co.uk/swim/444845"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444845: country, date, 12:52:00, clocks, Michael Oram, Sea Farer II, Laura Austin and Wissant Bay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic swim date does not separately establish departure and arrival dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: 2014 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2014"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo rows for Cyril Baldock on 20 August and Otto Thaning on 6 September.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page retains a general pending-committee-ratification disclaimer. Baldock's boat differs from his individual record.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: review of the 2014 season",
+          "url": "https://cspf.co.uk/article/87/review-of-2014-season"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Secretary Kevin Murphy's review dated 27 January 2015: Baldock's route and observer, Thaning's observer, times and age-record context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Narrative season report, not an inspected committee ratification decision.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Guinness World Records: oldest man to swim the English Channel",
+          "url": "https://www.guinnessworldrecords.com/world-records/oldest-person-to-swim-the-english-channel-male"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record panel and narrative: 6 September 2014, South Africa, birth 13 March 1941, age 73 years 177 days, 12:52 and Shakespeare Beach to Wissant Bay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Guinness warns records may change before the website is updated. Its exact age differs from the CS&PF facts-page summary.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: facts about the Channel",
+          "url": "https://cspf.co.uk/channel-facts"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Age section lists Otto Thaning [2014] at 73 years 4 months.",
+          "label": "Supports"
+        },
+        {
+          "text": "Several headline records on this page are historical. Its age wording differs from Guinness's 73 years 177 days.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "thaning-2014"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Lake Malawi crossing",
+      "lines": [
+        {
+          "text": "1992"
+        },
+        {
+          "text": "CLDSA credits Thaning and Lewis Pugh with a pioneering crossing."
+        }
+      ]
+    },
+    {
+      "title": "First successful Channel solo",
+      "lines": [
+        {
+          "text": "Tuesday, 30 August 1994"
+        },
+        {
+          "text": "Completed England to France in 10:29:00."
+        }
+      ]
+    },
+    {
+      "title": "Guinness age-record crossing",
+      "lines": [
+        {
+          "text": "Saturday, 6 September 2014"
+        },
+        {
+          "text": "Finished at Wissant Bay in 12:52:00; Guinness reports an age of 73 years 177 days."
+        }
+      ]
+    },
+    {
+      "title": "Robben Island at eighty",
+      "lines": [
+        {
+          "text": "2021"
+        },
+        {
+          "text": "CLDSA's April report describes a 2:52 crossing at age 80."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Dr Otto Thaning: CLDSA profile",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://cldsa.co.za/news/dr-otto-thaning/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Association profile and photograph accompanying its April 2021 report on Thaning's swimming at age eighty."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Otto Thaning?",
+      "value": "This profile includes 2 selected solo performances for Otto Thaning. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Otto Thaning’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Tuesday, 30 August 1994. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Otto Thaning’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 10 hours, 29 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF: Otto Thaning, 30 August 1994",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443600"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 443600: South Africa, age 53, date, 10:29:00, E-F, clocks, Michael Oram, Aegean Blue and K. Coombes; ratifying organisation CSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical attribution to CSA, not direct inspection of the CSA decision. Phase dates are not separately supplied.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Otto Thaning, 6 September 2014",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444845"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444845: country, date, 12:52:00, clocks, Michael Oram, Sea Farer II, Laura Austin and Wissant Bay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic swim date does not separately establish departure and arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: oldest man to swim the English Channel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/oldest-person-to-swim-the-english-channel-male"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record panel and narrative: 6 September 2014, South Africa, birth 13 March 1941, age 73 years 177 days, 12:52 and Shakespeare Beach to Wissant Bay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Guinness warns records may change before the website is updated. Its exact age differs from the CS&PF facts-page summary.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: facts about the Channel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/channel-facts"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Age section lists Otto Thaning [2014] at 73 years 4 months.",
+          "label": "Supports"
+        },
+        {
+          "text": "Several headline records on this page are historical. Its age wording differs from Guinness's 73 years 177 days.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Cape Long Distance Swimming Association: Dr Otto Thaning",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cldsa.co.za/news/dr-otto-thaning/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete feature dated 9 April 2021: heart surgeon, age-80 Robben Island swim and 1992 Lake Malawi crossing with Lewis Pugh.",
+          "label": "Supports"
+        },
+        {
+          "text": "Reports the Robben Island performance as his 13th; a later DNOWS feature counts 14. No career total is adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Daily News of Open Water Swimming: Otto Thaning profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://dailynewsofopenwaterswimming.com/dr-otto-thaning-a-south-african-swimmer-with-a-huge-heart-and-an-impressive-legacy/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Feature dated 17 December 2023: Thaning's account of training under Christiaan Barnard and unsuccessful Channel preparations before 1994.",
+          "label": "Supports"
+        },
+        {
+          "text": "Calls him both 53 and 54 for 1994, whereas the federation record says 53; no exact age is taken from this feature. It also differs from CLDSA on the Robben Island career count.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2014 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2014"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo rows for Cyril Baldock on 20 August and Otto Thaning on 6 September.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page retains a general pending-committee-ratification disclaimer. Baldock's boat differs from his individual record.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: review of the 2014 season",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/article/87/review-of-2014-season"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Secretary Kevin Murphy's review dated 27 January 2015: Baldock's route and observer, Thaning's observer, times and age-record context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Narrative season report, not an inspected committee ratification decision.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First successful English Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 30 August 1994 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "10h 29m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "thaning-1994"
+    },
+    {
+      "title": "2014 Guinness age-record Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 6 September 2014 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Age descriptions differ: Guinness gives 73 years 177 days; CS&PF's facts page gives 73 years four months. The sources agree on the successful 12:52 crossing."
+        },
+        {
+          "text": "12h 52m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "thaning-2014"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-866aecbc45679770d62a"
+}

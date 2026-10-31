@@ -1,0 +1,806 @@
+{
+  "slug": "stella-taylor-english-channel",
+  "name": "Stella Taylor",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "Two England-to-France solos and a women's age record in 1975",
+  "biography": [
+    "Stella Taylor worked as a pool manager in Fort Lauderdale and raced on the professional marathon swimming circuit. Born in England in 1929, she lived in Canada and Buffalo before settling in Florida. The International Marathon Swimming Hall of Fame credits her with the outstanding newcomer award in her first professional season, 1969.",
+    "In August 1973 she set out from Shakespeare Cliff and reached Cap Blanc Nez in 15 hours 45 minutes. She told an interviewer that the current swept her past the landing she had expected. On returning to Florida, she was already talking about swimming to France and back. She went to Dover again in 1974, but spent eleven weeks waiting for a break in the weather and never entered the water.",
+    "In August 1975 Taylor waited another 45 days before starting. In waves that she estimated at four feet, she reached France in 18 hours 15 minutes. The round trip ended there. The federation and the Hall of Fame credit the 45-year-old with the women's age record, which stood until 1994.",
+    "Taylor went on to swim the length of Lake George in 1977 and to cross Loch Ness and Lake Okeechobee in 1981. In April 1982 she spent 65 consecutive hours swimming in the Hall of Fame pool in Fort Lauderdale. The Marathon Swimming Hall of Fame inducted her that year."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "abbr": "USA",
+      "label": "United States"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country in the federation records",
+      "value": "USA"
+    },
+    {
+      "label": "Home swimming base",
+      "value": "Fort Lauderdale, Florida"
+    },
+    {
+      "label": "Occupation in 1973",
+      "value": "Pool manager at Coral Ridge Country Club"
+    },
+    {
+      "label": "Professional racing",
+      "value": "Recognised as the outstanding newcomer on the professional marathon circuit in 1969"
+    },
+    {
+      "label": "Channel age record",
+      "value": "CS&PF and IMSHOF credit her 1975 solo at age 45 and date the end of the record to 1994."
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Marathon Swimming Hall of Fame, Honor Swimmer, 1982"
+    },
+    {
+      "label": "Died",
+      "value": "11 February 2003 in Fort Lauderdale, Florida"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "stella-taylor-1973",
+      "title": "First England-to-France solo",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CSA, CS&PF and Taylor's contemporary interview give 15:45. A later Wikipedia entry gives 15:25. CS&PF lists age 43 and the interview gives 38.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Friday, 10 August 1973 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "15h 45m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF gives 10 August as the swim date. Taylor's contemporary interview gives a 10 p.m. departure and an early-afternoon arrival the following day without calendar dates or a clock standard.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Cliff, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Cap Blanc Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "J. Heyes",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Dark Moon",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "D. Khatau",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Taylor recalled that the current carried her beyond her intended landing point.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2527 prints the surname as Tayor and lists United States, one-way solo, England to France, 1973 and 15:45. CS&PF individual record 443052 matches those fields under Stella Taylor and supplies 10 August, the crew and 15:45:00. The named IMSHOF citation and 1973 interview agree on 15:45. The later 15:25 and differing reported ages are retained in the qualification."
+        },
+        {
+          "text": "Channel Swimming Association — Stella Tayor, 1973",
+          "url": "https://www.channelswimmingassociation.com/swim/2527/stella-tayor"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 2527 lists United States, a one-way solo from England to France and 15:45 in 1973.",
+          "label": "Supports"
+        },
+        {
+          "text": "The displayed name is Stella Tayor and the page gives the year only.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical record — Stella Taylor, 10 August 1973",
+          "url": "https://cspf.co.uk/swim/443052"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443052 gives USA, age 43, 10 August 1973, one way from England to France in 15:45:00, pilot J. Heyes, Dark Moon and observer D. Khatau.",
+          "label": "Supports"
+        },
+        {
+          "text": "CS&PF attributes ratification to CSA. Its date has no departure or arrival label and both clock fields are empty.",
+          "label": "Limitations"
+        },
+        {
+          "text": "U.S. Masters Swimming archive — Taylor's 1973 post-swim interview",
+          "url": "https://www.usms.org/hist/swimmaster/1973_swimmaster_v2n5_10.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The interview reproduces Taylor's account of the current and her return-trip ambition. It gives her work at Coral Ridge, both named shores, a 10 p.m. departure and an early-afternoon landing the following day.",
+          "label": "Supports"
+        },
+        {
+          "text": "It calls Taylor 38. CS&PF records 43. The interview provides no calendar date for either clock.",
+          "label": "Limitations"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame — Stella Taylor",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_7faf59a9d2a949618019f3f0ebe4800c.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Her individual 1982 Honor Swimmer citation names the United States, her first professional season, both Channel times, the 1975 age record and swims in Lake George, Loch Ness and Lake Okeechobee.",
+          "label": "Supports"
+        },
+        {
+          "text": "Wikipedia — discrepancy in Stella Taylor's 1973 elapsed time",
+          "url": "https://en.wikipedia.org/wiki/Stella_Taylor"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The lead and selected-swims paragraphs print 15:25 for 1973.",
+          "label": "Supports"
+        },
+        {
+          "text": "Both federations, the Hall of Fame citation and the contemporary interview give 15:45. This entry is cited only to identify the differing figure.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "id": "stella-taylor-1975",
+      "title": "England-to-France solo during a round-trip attempt",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Taylor completed the outward leg of a planned round trip. CS&PF and IMSHOF give age 45 and date the age record to 1975–1994. A contemporary article gives age 40.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Tuesday, 26 August 1975 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "18h 15m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The federation supplies 26 August as a general swim date and leaves the departure and arrival clocks blank.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "B. Charnick",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "St. Claire",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "M. Gill",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association, as reported by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Taylor described waves of about four feet after a 45-day wait in Dover.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual record 443090 identifies Stella Taylor, USA, one way from England to France, 18:15:00 on 26 August 1975, with CSA as ratifier. Al Levine's interview and the named IMSHOF citation both give 18:15. The interview documents the unsuccessful round-trip plan. The federation and Hall of Fame support the age-record description."
+        },
+        {
+          "text": "CS&PF historical record — Stella Taylor, 26 August 1975",
+          "url": "https://cspf.co.uk/swim/443090"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443090 lists USA, age 45, 26 August 1975, one way from England to France in 18:15:00 and CSA ratification. Crew fields name B. Charnick, St. Claire and M. Gill.",
+          "label": "Supports"
+        },
+        {
+          "text": "The printed age-record comment gives 45 years 249 days and an end year of 1994. Departure and arrival are blank.",
+          "label": "Limitations"
+        },
+        {
+          "text": "U.S. Masters Swimming archive — Taylor's 1975 post-swim interview",
+          "url": "https://www.usms.org/hist/swimmaster/1975_swimmaster_v4n7_09.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Al Levine's interview records a completed England-to-France leg in 18:15, an uncompleted round trip, the wait in Dover and Taylor's description of the waves.",
+          "label": "Supports"
+        },
+        {
+          "text": "It gives her age as 40. The federation record and Hall of Fame citation give 45.",
+          "label": "Limitations"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame — Stella Taylor",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_7faf59a9d2a949618019f3f0ebe4800c.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Her individual 1982 Honor Swimmer citation names the United States, her first professional season, both Channel times, the 1975 age record and swims in Lake George, Loch Ness and Lake Okeechobee.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "stella-taylor-lake-george-1977",
+      "title": "Length of Lake George",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1977 · exact day not confirmed"
+        },
+        {
+          "text": "Lake George, New York, United States"
+        },
+        {
+          "text": "Completed the length of the lake."
+        },
+        {
+          "text": "32 miles",
+          "label": "Published distance"
+        },
+        {
+          "text": "26h 51m 0s",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Lake George Open Water Swim's 32-mile crossings table, 1977 Stella Taylor row, gives 26:51:00. Her individual Hall of Fame citation confirms the lake, year and 26:51. The selected table gives the year only."
+        },
+        {
+          "text": "Lake George Open Water Swim — historical crossings",
+          "url": "https://lakegeorgeswim.com/marathon/crossings/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The 1977 Stella Taylor row in the table of 32-mile length swims gives 26:51:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "A curated historical list. Its age of 45 differs from the chronology in the Channel records. The row supplies the year only.",
+          "label": "Limitations"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame — Stella Taylor",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_7faf59a9d2a949618019f3f0ebe4800c.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Her individual 1982 Honor Swimmer citation names the United States, her first professional season, both Channel times, the 1975 age record and swims in Lake George, Loch Ness and Lake Okeechobee.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First professional season",
+      "lines": [
+        {
+          "text": "1969"
+        },
+        {
+          "text": "Earned the marathon circuit's first-year swimming award."
+        }
+      ]
+    },
+    {
+      "title": "First recorded Channel solo",
+      "lines": [
+        {
+          "text": "1973-08-10"
+        },
+        {
+          "text": "The federation dates her 15:45 England-to-France crossing to 10 August."
+        }
+      ]
+    },
+    {
+      "title": "One leg of a planned round trip",
+      "lines": [
+        {
+          "text": "1975-08-26"
+        },
+        {
+          "text": "Reached France in 18:15 and set the women's age mark credited by the Hall of Fame."
+        }
+      ]
+    },
+    {
+      "title": "Length of Lake George",
+      "lines": [
+        {
+          "text": "1977"
+        },
+        {
+          "text": "Swam the 32-mile length in 26 hours 51 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Loch Ness and Lake Okeechobee",
+      "lines": [
+        {
+          "text": "1981"
+        },
+        {
+          "text": "The Hall of Fame lists both swims, including 18 hours 58 minutes in Loch Ness."
+        }
+      ]
+    },
+    {
+      "title": "Fort Lauderdale pool swim",
+      "lines": [
+        {
+          "text": "1982-04-06"
+        },
+        {
+          "text": "Began the effort she described in her own account as a 65-hour continuous swim."
+        }
+      ]
+    },
+    {
+      "title": "Marathon Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "1982"
+        },
+        {
+          "text": "Inducted as an Honor Swimmer for the United States."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Stella Taylor's Marathon Swimming Hall of Fame profile",
+      "lines": [
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_7faf59a9d2a949618019f3f0ebe4800c.pdf"
+        },
+        {
+          "text": "Her individual Honor Swimmer citation covers both Channel solos and selected lake swims."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Taylor recalls the 1975 Channel crossing",
+      "lines": [
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://www.usms.org/hist/swimmaster/1975_swimmaster_v4n7_09.pdf"
+        },
+        {
+          "text": "Al Levine's written interview in the U.S. Masters Swimming archive covers the wait in Dover, the waves and the unfinished round trip."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Stella Taylor?",
+      "value": "This profile includes 2 selected solo performances. A continuous multi-way crossing counts as one performance."
+    },
+    {
+      "label": "When was Stella Taylor’s first listed Channel swim?",
+      "value": "The recorded swim date is Friday, 10 August 1973. Departure and arrival dates are unconfirmed."
+    },
+    {
+      "label": "How long did the first listed swim take?",
+      "value": "The recorded 1-way solo lasted 15h 45m. The selected duration is 15h 45m. A later account gives 15h 25m. Reported ages also differ between 38 and 43."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical record — Stella Taylor, 10 August 1973",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443052"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443052 gives USA, age 43, 10 August 1973, one way from England to France in 15:45:00, pilot J. Heyes, Dark Moon and observer D. Khatau.",
+          "label": "Supports"
+        },
+        {
+          "text": "CS&PF attributes ratification to CSA. Its date has no departure or arrival label and both clock fields are empty.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association — Stella Tayor, 1973",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2527/stella-tayor"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 2527 lists United States, a one-way solo from England to France and 15:45 in 1973.",
+          "label": "Supports"
+        },
+        {
+          "text": "The displayed name is Stella Tayor and the page gives the year only.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record — Stella Taylor, 26 August 1975",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443090"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443090 lists USA, age 45, 26 August 1975, one way from England to France in 18:15:00 and CSA ratification. Crew fields name B. Charnick, St. Claire and M. Gill.",
+          "label": "Supports"
+        },
+        {
+          "text": "The printed age-record comment gives 45 years 249 days and an end year of 1994. Departure and arrival are blank.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame — Stella Taylor",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_7faf59a9d2a949618019f3f0ebe4800c.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Her individual 1982 Honor Swimmer citation names the United States, her first professional season, both Channel times, the 1975 age record and swims in Lake George, Loch Ness and Lake Okeechobee.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "U.S. Masters Swimming archive — Taylor's 1973 post-swim interview",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.usms.org/hist/swimmaster/1973_swimmaster_v2n5_10.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The interview reproduces Taylor's account of the current and her return-trip ambition. It gives her work at Coral Ridge, both named shores, a 10 p.m. departure and an early-afternoon landing the following day.",
+          "label": "Supports"
+        },
+        {
+          "text": "It calls Taylor 38. CS&PF records 43. The interview provides no calendar date for either clock.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "U.S. Masters Swimming archive — Taylor's 1975 post-swim interview",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.usms.org/hist/swimmaster/1975_swimmaster_v4n7_09.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Al Levine's interview records a completed England-to-France leg in 18:15, an uncompleted round trip, the wait in Dover and Taylor's description of the waves.",
+          "label": "Supports"
+        },
+        {
+          "text": "It gives her age as 40. The federation record and Hall of Fame citation give 45.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Lake George Open Water Swim — historical crossings",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://lakegeorgeswim.com/marathon/crossings/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The 1977 Stella Taylor row in the table of 32-mile length swims gives 26:51:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "A curated historical list. Its age of 45 differs from the chronology in the Channel records. The row supplies the year only.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "U.S. Masters Swimming archive — Stella Taylor's account of her 65-hour pool swim",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.usms.org/hist/swimmaster/1982_swimmaster_v11n4_05.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Taylor's first-person account identifies the Hall of Fame pool in Fort Lauderdale, the start on 6 April and the duration. An adjacent contemporary feature reports the finish.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Dictionary of Women Worldwide — Stella Taylor",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.encyclopedia.com/women/dictionaries-thesauruses-pictures-and-press-releases/taylor-stella-1929-2003"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The biographical entry gives birth in England in 1929, her move through Canada and Buffalo to Florida, and her death in Fort Lauderdale on 11 February 2003.",
+          "label": "Supports"
+        },
+        {
+          "text": "The distance estimate for the pool swim is excluded because contemporary accounts differ.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Wikipedia — discrepancy in Stella Taylor's 1973 elapsed time",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://en.wikipedia.org/wiki/Stella_Taylor"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The lead and selected-swims paragraphs print 15:25 for 1973.",
+          "label": "Supports"
+        },
+        {
+          "text": "Both federations, the Hall of Fame citation and the contemporary interview give 15:45. This entry is cited only to identify the differing figure.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "stella-taylor-1973",
+      "title": "First England-to-France solo",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Friday, 10 August 1973 (recorded swim date)"
+        },
+        {
+          "text": "15h 45m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "The selected duration is 15h 45m. A later account gives 15h 25m. Reported ages also differ between 38 and 43.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    },
+    {
+      "id": "stella-taylor-1975",
+      "title": "England-to-France solo during a round-trip attempt",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Tuesday, 26 August 1975 (recorded swim date)"
+        },
+        {
+          "text": "18h 15m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Taylor completed the outward leg of a planned round trip. Published ages differ between 40 and 45.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "stella-taylor-lake-george-1977",
+      "title": "Length of Lake George",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1977 · exact day not confirmed"
+        },
+        {
+          "text": "Lake George, New York, United States"
+        },
+        {
+          "text": "Completed the length of the lake."
+        },
+        {
+          "text": "32 miles",
+          "label": "Published distance"
+        },
+        {
+          "text": "26h 51m 0s",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-8ee80a7e0c92a5007ff6"
+}

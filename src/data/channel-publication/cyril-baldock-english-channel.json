@@ -1,0 +1,568 @@
+{
+  "slug": "cyril-baldock-english-channel",
+  "name": "Cyril Baldock",
+  "country": "Australia",
+  "aliases": [],
+  "highlight": "Channel solos in 1985 and 2014 · Bondi lifesaver · OAM",
+  "biography": [
+    "Cyril Baldock is an Australian swimmer and longstanding member of Bondi Surf Bathers' Life Saving Club. Surf Life Saving NSW dates his membership to 1958 and his life membership to 1977. He earned his Bronze Medallion in 1959 and served the club in roles including captain, vice-president and president, alongside organising carnivals and managing touring teams. Swimming competition and volunteer lifesaving have both been central to his career.",
+    "His first successful English Channel solo came in 1985. The Channel Swimming Association records a France-to-England crossing in 10 hours 44 minutes and its oldest-successful-swimmer award for that season. He returned in 2014, this time swimming from Shakespeare Beach towards Cap Gris Nez. His 12-hour-45-minute crossing on 20 August set an age record at 70 years and nine months, as reported in the CS&PF's season review. Otto Thaning surpassed the mark that September.",
+    "Baldock received the Medal of the Order of Australia in 2020 for service to surf lifesaving. In its June 2023 podcast profile, Bondi described him as a life member and club patron, with a patrol named in his honour. That club account also highlights his rescue work, coaching, charity fundraising and success in masters and world lifesaving competition."
+  ],
+  "flags": [
+    {
+      "code": "AU",
+      "label": "Australia",
+      "abbr": "AUS"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Club",
+      "value": "Bondi Surf Bathers' Life Saving Club; member since 1958"
+    },
+    {
+      "label": "Lifesaving qualification",
+      "value": "Bronze Medallion, 1959"
+    },
+    {
+      "label": "Club recognition",
+      "value": "Life membership, 1977"
+    },
+    {
+      "label": "Channel solos",
+      "value": "1985 France → England; 2014 England → France"
+    },
+    {
+      "label": "Dated age record",
+      "value": "70 years and nine months in August 2014; surpassed that September"
+    },
+    {
+      "label": "National honour",
+      "value": "Medal of the Order of Australia, 2020, for service to surf lifesaving"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Sunday, 18 August 1985 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 44m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful individual record 2393 matches Cyril Baldock, Australia, solo one-way F-E, 1985 and 10:44, and lists the season's oldest-successful-swimmer award. CS&PF's 1985 table, row '18th August | Baldock, Cyril', supplies the precise generic swim date. This checks the published CSA result, not the original observer log."
+        },
+        {
+          "text": "Channel Swimming Association: Cyril Baldock, 1985",
+          "url": "https://www.channelswimmingassociation.com/swim/2393/cyril-baldock"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful individual record 2393: Australia, solo France-to-England, 10:44 and 1985 oldest-successful-swimmer award.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA page supplies year only; precise swim date comes from the separately inspected CS&PF historical row.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: 1985 solo swims",
+          "url": "https://cspf.co.uk/swims-database/1985"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Row '18th August | Baldock, Cyril | 10:44:00 | F-E | 1-way, 1st | CSA'.",
+          "label": "Supports"
+        },
+        {
+          "text": "A historical listing attributed to CSA; no phase dates or clocks.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "baldock-1985"
+    },
+    {
+      "title": "2014 age-record Channel crossing",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Escort boat unresolved: CS&PF's annual list names Seafarer II; its individual record names Gallivant. Both agree on 12:45:00."
+        },
+        {
+          "text": "Wednesday, 20 August 2014 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 45m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Wednesday, 20 August 2014 · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Individual record 444820 reports departure 03:06:00 and arrival 15:51:00 without separately dated phases or a clock standard. Clocks remain unstructured. Its Gallivant entry conflicts with Seafarer II in the annual solo row.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Cap Gris Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Mike Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Loretta Cox",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF's 2014 Solo Swims row '20th August | Cyril Baldock' and individual record 444820 agree on the named swimmer, date, E-F route and 12:45:00. The secretary's season review supplies departure location/date, French landing and observer Loretta Cox. The boat conflict is retained; the annual page also retains its general pending-ratification disclaimer."
+        },
+        {
+          "text": "CS&PF: Cyril Baldock, 20 August 2014",
+          "url": "https://cspf.co.uk/swim/444820"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444820: Australia, date, E-F, 12:45:00, reported clocks and Michael Oram.",
+          "label": "Supports"
+        },
+        {
+          "text": "Lists Gallivant; the 2014 annual list names Seafarer II. The discrepancy remains unresolved.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: 2014 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2014"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo rows for Cyril Baldock on 20 August and Otto Thaning on 6 September.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page retains a general pending-committee-ratification disclaimer. Baldock's boat differs from his individual record.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: review of the 2014 season",
+          "url": "https://cspf.co.uk/article/87/review-of-2014-season"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Secretary Kevin Murphy's review dated 27 January 2015: Baldock's route and observer, Thaning's observer, times and age-record context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Narrative season report, not an inspected committee ratification decision.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "baldock-2014"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Joined Bondi",
+      "lines": [
+        {
+          "text": "1958"
+        },
+        {
+          "text": "Began his membership of Bondi Surf Bathers' Life Saving Club."
+        }
+      ]
+    },
+    {
+      "title": "Bronze Medallion",
+      "lines": [
+        {
+          "text": "1959"
+        },
+        {
+          "text": "Qualified for the lifesaving award, according to the club's 2023 profile."
+        }
+      ]
+    },
+    {
+      "title": "Life membership",
+      "lines": [
+        {
+          "text": "1977"
+        },
+        {
+          "text": "Received Bondi club life membership."
+        }
+      ]
+    },
+    {
+      "title": "First Channel solo",
+      "lines": [
+        {
+          "text": "Sunday, 18 August 1985"
+        },
+        {
+          "text": "Completed France to England in 10:44."
+        }
+      ]
+    },
+    {
+      "title": "Then-oldest Channel swimmer",
+      "lines": [
+        {
+          "text": "Wednesday, 20 August 2014"
+        },
+        {
+          "text": "Completed the reverse direction in 12:45:00 at 70 years and nine months."
+        }
+      ]
+    },
+    {
+      "title": "Order of Australia Medal",
+      "lines": [
+        {
+          "text": "2020"
+        },
+        {
+          "text": "Honoured for service to surf lifesaving."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Bondi Patrol Podcast: Cyril Baldock OAM",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://bondipatrolpodcast.buzzsprout.com/2070685/episodes/13035196-bondi-patrol-podcast-episode-12-interview-with-cyril-baldock-oam"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Club-owned interview episode dated 14 June 2023. The episode page and written show notes were inspected; audio was not played."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Cyril Baldock?",
+      "value": "This profile includes 2 selected solo performances for Cyril Baldock. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Cyril Baldock’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Sunday, 18 August 1985. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Cyril Baldock’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 10 hours and 44 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Cyril Baldock, 1985",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2393/cyril-baldock"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful individual record 2393: Australia, solo France-to-England, 10:44 and 1985 oldest-successful-swimmer award.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA page supplies year only; precise swim date comes from the separately inspected CS&PF historical row.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 1985 solo swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swims-database/1985"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Row '18th August | Baldock, Cyril | 10:44:00 | F-E | 1-way, 1st | CSA'.",
+          "label": "Supports"
+        },
+        {
+          "text": "A historical listing attributed to CSA; no phase dates or clocks.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Cyril Baldock, 20 August 2014",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444820"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444820: Australia, date, E-F, 12:45:00, reported clocks and Michael Oram.",
+          "label": "Supports"
+        },
+        {
+          "text": "Lists Gallivant; the 2014 annual list names Seafarer II. The discrepancy remains unresolved.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2014 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2014"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo rows for Cyril Baldock on 20 August and Otto Thaning on 6 September.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page retains a general pending-committee-ratification disclaimer. Baldock's boat differs from his individual record.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: review of the 2014 season",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/article/87/review-of-2014-season"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Secretary Kevin Murphy's review dated 27 January 2015: Baldock's route and observer, Thaning's observer, times and age-record context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Narrative season report, not an inspected committee ratification decision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Bondi Patrol Podcast: Cyril Baldock OAM",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://bondipatrolpodcast.buzzsprout.com/2070685/episodes/13035196-bondi-patrol-podcast-episode-12-interview-with-cyril-baldock-oam"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Club-owned episode page and show notes dated 14 June 2023: Bronze Medallion, club offices, Channel swims and OAM.",
+          "label": "Supports"
+        },
+        {
+          "text": "Show notes inspected; audio was not played. Its age-record language is historical and does not establish a current record.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Surf Life Saving NSW: 2020 Queen's Birthday Honours",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.surflifesaving.com.au/news/lifesavers-recognised-queens-birthday-honours/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Cyril Baldock subsection: OAM for surf lifesaving, Bondi membership since 1958, life membership in 1977 and club service.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: oldest man to swim the English Channel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/oldest-person-to-swim-the-english-channel-male"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record panel and narrative: 6 September 2014, South Africa, birth 13 March 1941, age 73 years 177 days, 12:52 and Shakespeare Beach to Wissant Bay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Guinness warns records may change before the website is updated. Its exact age differs from the CS&PF facts-page summary.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 18 August 1985 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "10h 44m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "baldock-1985"
+    },
+    {
+      "title": "2014 age-record Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 20 August 2014 (start)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Escort boat unresolved: CS&PF's annual list names Seafarer II; its individual record names Gallivant. Both agree on 12:45:00."
+        },
+        {
+          "text": "12h 45m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "baldock-2014"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-b618eabfac10a8ac4e17"
+}

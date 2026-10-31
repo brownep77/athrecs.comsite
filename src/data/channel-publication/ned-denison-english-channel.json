@@ -1,0 +1,414 @@
+{
+  "slug": "ned-denison-english-channel",
+  "name": "Ned Denison",
+  "country": "Ireland",
+  "aliases": [],
+  "highlight": "2005 Channel solo · Cork Distance Week founder",
+  "biography": [
+    "Ned Denison is a marathon swimmer and organiser recognised under Ireland by the International Marathon Swimming Hall of Fame. Kinsale's community profile describes him as an American expatriate who moved to Cork in 2001 and later to Kinsale in 2013. His own swimming and his work building a local endurance community developed around Sandycove Island.",
+    "His successful English Channel crossing came on his second attempt in 2005. The Channel Swimming and Piloting Federation's annual table records 12 hours 47 minutes with pilot Dave Whyte and Ocean Breeze. Its separate account describes leaving Shakespeare's Beach before dawn and reaching a French beach. The published dates disagree: the annual register gives 11 September, while the story's heading and introduction give 14 September. The profile retains that uncertainty.",
+    "Denison's contribution extended to organising other swimmers' Channel projects and developing events at home. He hosted a Champion of Champions event in 2008 and introduced Cork Distance Week in 2009. The latter brought swimmers together for concentrated preparation in Irish sea conditions.",
+    "His Hall of Fame recognition in 2012 was as an Honor Administrator. He subsequently received the 2013 Irving Davids/Captain Roger W. Wheeler Memorial Award. Alongside this organisational career, he completed the Triple Crown of Open Water Swimming; Kinsale's 2023 account described fifty-five marathon swims and more than three thousand Sandycove laps."
+  ],
+  "flags": [
+    {
+      "code": "IE",
+      "label": "Ireland",
+      "abbr": "IRL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Source country",
+      "value": "Ireland in the International Marathon Swimming Hall of Fame."
+    },
+    {
+      "label": "Alternate source description",
+      "value": "American expatriate in Kinsale's profile; USA in Dover's 2005 swim row."
+    },
+    {
+      "label": "Selected Channel result",
+      "value": "12:47:00 in 2005; published date disagreement retained."
+    },
+    {
+      "label": "Training community",
+      "value": "Sandycove Island, County Cork."
+    },
+    {
+      "label": "Organising milestone",
+      "value": "Introduced Cork Distance Week in 2009."
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "Honor Administrator, 2012."
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Successful second Channel attempt",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "The federation-hosted story describes a completed second attempt, leaving Shakespeare's Beach and reaching a French beach."
+        },
+        {
+          "text": "The annual register dates this swim 11 September 2005; the hosted story says 14 September. Both report 12 hours 47 minutes."
+        },
+        {
+          "text": "Sunday, 11 September 2005 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 47m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The narrative describes entering the water at 03:00 on a Sunday, without a numeric date or stated time zone. Because the published dates conflict, this is retained as an account detail rather than a structured start clock. No finish clock is inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare's Beach, Dover",
+          "label": "Departure"
+        },
+        {
+          "text": "French beach (not named in the account)",
+          "label": "Arrival"
+        },
+        {
+          "text": "Dave Whyte",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Ocean Breeze",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF 2005 Solo Swims table, Ned Denison row under Date / Swimmer / Pilot/Boat / Time / Track: 11th September, Dave Whyte / Ocean Breeze, 12:47:00. Dover.UK.com's 2005 row 48 corroborates 11 September and 12:47. CS&PF story 16, heading and opening sentence, instead gives 14 September 2005, while its narrative says Sunday. The register date is retained without resolving the contradiction. CS&PF's annual pending-ratification disclaimer does not establish a committee decision."
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation: 2005 swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2005"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo Swims row for Ned Denison: 11th September, Dave Whyte / Ocean Breeze, 12:47:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page says results remain unofficial until committee ratification; no subsequent decision inspected. Separate hosted story gives a different date.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation: Ned Denison 2",
+          "url": "https://cspf.co.uk/swim-story/16/ned-denison-2"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named account of successful second attempt in 12 hours 47 minutes; route from Shakespeare's Beach to France and early-morning departure.",
+          "label": "Supports"
+        },
+        {
+          "text": "Heading and introductory sentence give 14 September 2005, unlike 11 September in the annual table; narrative says Sunday without a numeric date.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover.UK.com: successful swims in 2005",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2005"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected row 48 lists Ned Denison, 11 September 2005, 12:47 and USA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary country label differs from IMSHOF's Ireland designation; neither establishes concurrent citizenship.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "denison-2005-solo"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Successful second Channel attempt",
+      "lines": [
+        {
+          "text": "2005"
+        },
+        {
+          "text": "The federation's annual row and hosted account agree on the 12:47 completion but differ on the September date."
+        }
+      ]
+    },
+    {
+      "title": "Champion of Champions",
+      "lines": [
+        {
+          "text": "2008"
+        },
+        {
+          "text": "Hosted the multi-distance swimming event described in Kinsale's profile."
+        }
+      ]
+    },
+    {
+      "title": "Cork Distance Week",
+      "lines": [
+        {
+          "text": "2009"
+        },
+        {
+          "text": "Introduced the concentrated open-water training gathering."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame recognition",
+      "lines": [
+        {
+          "text": "2012"
+        },
+        {
+          "text": "Inducted as an Honor Administrator under Ireland."
+        }
+      ]
+    },
+    {
+      "title": "Administration award",
+      "lines": [
+        {
+          "text": "2013"
+        },
+        {
+          "text": "Received the Irving Davids/Captain Roger W. Wheeler Memorial Award."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Ned Denison — Kinsale athlete and community profile",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.kinsale.ie/2023/03/08/characters-of-kinsale-ned-denison/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Named written profile of his swimming and work around Sandycove Island; includes a dated 2023 career snapshot."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Ned Denison?",
+      "value": "This profile includes 1 selected solo performance for Ned Denison. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Ned Denison’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Sunday, 11 September 2005. The source does not establish whether that date means departure or arrival. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Ned Denison’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 12 hours, 47 minutes and 0 seconds. The annual register dates this swim 11 September 2005; the hosted story says 14 September. Both report 12 hours 47 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming & Piloting Federation: 2005 swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2005"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo Swims row for Ned Denison: 11th September, Dave Whyte / Ocean Breeze, 12:47:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page says results remain unofficial until committee ratification; no subsequent decision inspected. Separate hosted story gives a different date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming & Piloting Federation: Ned Denison 2",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim-story/16/ned-denison-2"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named account of successful second attempt in 12 hours 47 minutes; route from Shakespeare's Beach to France and early-morning departure.",
+          "label": "Supports"
+        },
+        {
+          "text": "Heading and introductory sentence give 14 September 2005, unlike 11 September in the annual table; narrative says Sunday without a numeric date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Ned Denison biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_eb1729c3ab6e4d2a95b147e4545959e6.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "PDF page 1 explicitly identifies Ireland and 2012 Honor Administrator; pages 1–2 document organising, Triple Crown and 2013 administration award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Career totals and leadership dates vary between revisions and other profiles; no undated current total is asserted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: executive committee",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/executive-committee"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Ned Denison section identifies Ireland, 2012 induction and service on the executive committee from 2014.",
+          "label": "Supports"
+        },
+        {
+          "text": "Chair-start year differs from the PDF biography; that year is omitted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Kinsale Chamber: Characters of Kinsale — Ned Denison",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.kinsale.ie/2023/03/08/characters-of-kinsale-ned-denison/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named profile describes an American expatriate, Cork move in 2001, Kinsale move in 2013, Sandycove swimming, 2008 Champion of Champions and 2009 Cork Distance Week.",
+          "label": "Supports"
+        },
+        {
+          "text": "55 marathon swims and 3,000 island laps are explicitly a 2023 snapshot. Channel-group participant count differs from the Hall of Fame PDF and is not repeated.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: successful swims in 2005",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2005"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected row 48 lists Ned Denison, 11 September 2005, 12:47 and USA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary country label differs from IMSHOF's Ireland designation; neither establishes concurrent citizenship.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Successful second Channel attempt",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 11 September 2005 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "The annual register dates this swim 11 September 2005; the hosted story says 14 September. Both report 12 hours 47 minutes."
+        },
+        {
+          "text": "12h 47m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "denison-2005-solo"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-b72416e1b0d0cc7b6694"
+}

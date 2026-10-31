@@ -1,0 +1,528 @@
+{
+  "slug": "eileen-fenton-english-channel",
+  "name": "Eileen Fenton",
+  "country": "England",
+  "aliases": [],
+  "highlight": "1950 Daily Mail race · first woman home in 15:31",
+  "biography": [
+    "Eileen Fenton combined an international swimming achievement with decades of work helping other people swim. A schoolteacher from Dewsbury, she was supported by her Yorkshire community when she entered the first Daily Mail Channel race in 1950. Her distance-swimming experience already included Morecambe Bay: a Dover Museum photograph records her finishing second there in 1948, in three hours and 44 minutes.",
+    "On 22 August 1950, Fenton joined the race from France to England. Nine of the 24 entrants finished. She reached Shakespeare Beach as the first woman home, with an elapsed time of 15 hours and 31 minutes, and received the women’s £1,000 prize. The museum preserves a photograph of her exhausted arrival, while the Channel Swimming Association maintains her successful swim entry.",
+    "Her subsequent contribution extended well beyond that finish. She coached at Dewsbury Swimming Club and helped develop both sprint and long-distance swimmers, including Jean Oldroyd and Wendy Brook. She also supported the British Long Distance Swimming Association as a committee member and vice-president. An MBE in 2019 recognised her voluntary service to swimming. The CSA’s memorial account in August 2026 emphasised that teaching and mentorship alongside her place in Channel history."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "England — explicitly recorded by the CSA"
+    },
+    {
+      "label": "Home swimming community",
+      "value": "Dewsbury, Yorkshire"
+    },
+    {
+      "label": "Occupation",
+      "value": "Schoolteacher and swimming coach"
+    },
+    {
+      "label": "Channel race",
+      "value": "First woman to finish the 1950 Daily Mail race"
+    },
+    {
+      "label": "Recorded Channel time",
+      "value": "15 hours 31 minutes"
+    },
+    {
+      "label": "Other distance result",
+      "value": "Morecambe Bay, 1948: second in 3:44; placing category unspecified"
+    },
+    {
+      "label": "Honour",
+      "value": "MBE, 2019"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Daily Mail Channel race — women’s winner",
+      "lines": [
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "Tuesday, 22 August 1950 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "15h 31m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The museum supplies the race date. CS&PF’s year-only historical row prints departure 02:34:00 and arrival 18:05:00 without phase dates or clock standard; these are preserved as reported clocks only.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "Shakespeare Beach, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "R. Davidson (CS&PF historical entry)",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Jane",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "J. Cleaver (CS&PF historical entry)",
+          "label": "Official observers"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual entry 2250 confirms the successful one-way route and 15:31. Dover Museum’s race history and landing photograph d17661 establish 22 August 1950, the start and finish places, and women’s victory. No original observer manuscript was inspected. CS&PF historical row 442841 adds crew and clock details, but its Butlins comment conflicts with the primary historical race identification; that comment is not adopted."
+        },
+        {
+          "text": "CSA: Eileen Fenton, 1950",
+          "url": "https://www.channelswimmingassociation.com/swim/2250/eileen-fenton"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful row: England; 1950; solo one way, France to England; 15:31.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective published register; original observer report not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: 1950s Channel swimming",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "22 August 1950 Daily Mail race, Cap Gris Nez start, 24 entrants and nine finishers; Fenton sixth in arrival order.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dover Museum: Fenton landing, item d17661",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/photograph-of-the-1950-daily-mail-channel-swimming-race-shakespere-beach"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Photograph catalogue dated 22 August 1950; Shakespeare Beach finish, first woman, 15:31.",
+          "label": "Supports"
+        },
+        {
+          "text": "Archive age differs from CSA biography; no age adopted. Copyright is explicitly unresolved on the catalogue; link only.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical database: Eileen Fenton, 1950",
+          "url": "https://cspf.co.uk/swim/442841"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published year-only entry supplies 02:34:00 departure, 18:05:00 arrival, pilot R. Davidson, vessel Jane and observer J. Cleaver.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical database comment calls it a Butlins race, whereas the CSA and Dover Museum identify the 1950 Daily Mail race. Crew and clocks are reported database details, not an independently inspected observer log; phase dates and clock standard are absent.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "fenton-1950"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Morecambe Bay race",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1948 · exact day not confirmed"
+        },
+        {
+          "text": "Morecambe Bay, England"
+        },
+        {
+          "text": "Finished second, in the placing category left unspecified by the museum."
+        },
+        {
+          "text": "3h 44m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Second — category not stated",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Dover Museum item d30456 identifies the same Eileen Fenton through her later Channel achievement and records the 1948 race, second place and 3:44. No exact day or category has been inferred."
+        },
+        {
+          "text": "Dover Museum: Eileen Fenton, item d30456",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/eileen-fenton"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1948 Morecambe Bay race: second in 3 hours 44 minutes.",
+          "label": "Supports"
+        },
+        {
+          "text": "No calendar day or placing category supplied.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "eileen-fenton-event-1-morecambe-bay-race"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Morecambe Bay result",
+      "lines": [
+        {
+          "text": "1948"
+        },
+        {
+          "text": "The museum records second place in 3:44; the exact day is not supplied."
+        }
+      ]
+    },
+    {
+      "title": "Channel race victory",
+      "lines": [
+        {
+          "text": "Tuesday, 22 August 1950"
+        },
+        {
+          "text": "First woman home in the Daily Mail race, finishing at Shakespeare Beach in 15:31."
+        }
+      ]
+    },
+    {
+      "title": "A pupil reaches the Empire Games",
+      "lines": [
+        {
+          "text": "1958"
+        },
+        {
+          "text": "CSA’s career account identifies Jean Oldroyd among her successful pupils."
+        }
+      ]
+    },
+    {
+      "title": "Channel coaching legacy",
+      "lines": [
+        {
+          "text": "1976"
+        },
+        {
+          "text": "Wendy Brook, another pupil identified by the CSA, made her record Channel swim."
+        }
+      ]
+    },
+    {
+      "title": "MBE",
+      "lines": [
+        {
+          "text": "2019"
+        },
+        {
+          "text": "Recognised for voluntary service to swimming."
+        }
+      ]
+    },
+    {
+      "title": "CSA memorial published",
+      "lines": [
+        {
+          "text": "Tuesday, 25 August 2026"
+        },
+        {
+          "text": "The association published its remembrance of her swimming and coaching career; this is the article date, not a claimed date of death."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "1950 Channel finish photograph — Dover Museum",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/photograph-of-the-1950-daily-mail-channel-swimming-race-shakespere-beach"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "External museum photograph and catalogue of the Shakespeare Beach finish. This is a still photograph, not a complete swim recording or observer log; no image is reproduced here."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Eileen Fenton?",
+      "value": "This profile includes 1 selected solo performance for Eileen Fenton. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Eileen Fenton’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Tuesday, 22 August 1950. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Eileen Fenton’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 15 hours and 31 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Eileen Fenton, 1950",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2250/eileen-fenton"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful row: England; 1950; solo one way, France to England; 15:31.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective published register; original observer report not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Eileen Fenton MBE",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/160/eileen-fenton-mbe"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dewsbury schoolteacher, 1950 women’s race winner, coaching career and 2019 MBE.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Remembering Eileen Fenton, 25 August 2026",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/217/remembering-eileen-fenton-mbe-from-channel-champion-master-mentor"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Coaching pupils, BLDSA service and legacy.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Morecambe chronology is not used to date the separate museum-documented 1948 swim.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Eileen Fenton, item d30456",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/eileen-fenton"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1948 Morecambe Bay race: second in 3 hours 44 minutes.",
+          "label": "Supports"
+        },
+        {
+          "text": "No calendar day or placing category supplied.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Fenton landing, item d17661",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/photograph-of-the-1950-daily-mail-channel-swimming-race-shakespere-beach"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Photograph catalogue dated 22 August 1950; Shakespeare Beach finish, first woman, 15:31.",
+          "label": "Supports"
+        },
+        {
+          "text": "Archive age differs from CSA biography; no age adopted. Copyright is explicitly unresolved on the catalogue; link only.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: 1950s Channel swimming",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "22 August 1950 Daily Mail race, Cap Gris Nez start, 24 entrants and nine finishers; Fenton sixth in arrival order.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical database: Eileen Fenton, 1950",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442841"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published year-only entry supplies 02:34:00 departure, 18:05:00 arrival, pilot R. Davidson, vessel Jane and observer J. Cleaver.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical database comment calls it a Butlins race, whereas the CSA and Dover Museum identify the 1950 Daily Mail race. Crew and clocks are reported database details, not an independently inspected observer log; phase dates and clock standard are absent.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Daily Mail Channel race — women’s winner",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 22 August 1950 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "15h 31m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Historical account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "fenton-1950"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Morecambe Bay race",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1948 · exact day not confirmed"
+        },
+        {
+          "text": "Morecambe Bay, England"
+        },
+        {
+          "text": "Finished second, in the placing category left unspecified by the museum."
+        },
+        {
+          "text": "3h 44m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Second — category not stated",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "eileen-fenton-event-1-morecambe-bay-race"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-eda3d47c00c41733c62d"
+}

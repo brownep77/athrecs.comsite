@@ -1,0 +1,488 @@
+{
+  "slug": "penny-lee-dean-english-channel",
+  "name": "Penny Lee Dean",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "1978 Channel speed record · 7 hours 40 minutes",
+  "biography": [
+    "Penny Lee Dean is an American marathon swimmer, coach and author whose career spans pool competition, ocean records and university sport. A six-time All-American at Pomona College, she graduated in 1977. Her open-water achievements included a Catalina Channel crossing in 1976 and a double crossing the following year.",
+    "On 29 July 1978, Dean completed the English Channel from England to France in 7 hours 40 minutes. The performance established an England-to-France speed record. In 1979 she became the women’s world professional marathon-swimming champion.",
+    "Dean later coached and taught at Pomona for 26 years. Her teams won 17 conference championships in women’s swimming and a national women’s water-polo title in 1993. She also coached American open-water swimmers and wrote books on marathon swimming and Catalina crossings. The International Swimming Hall of Fame inducted her in 1996."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Discipline",
+      "value": "Marathon and open-water swimming"
+    },
+    {
+      "label": "College",
+      "value": "Pomona College, class of 1977"
+    },
+    {
+      "label": "College distinction",
+      "value": "Six-time All-American"
+    },
+    {
+      "label": "1978 Channel time",
+      "value": "7 hours 40 minutes"
+    },
+    {
+      "label": "Professional title",
+      "value": "Women’s world champion, 1979"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Swimming Hall of Fame, 1996"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "1978 England-to-France record swim",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "7h 40m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Saturday, 29 July 1978 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "29 July is the completed-swim date printed in the contemporary federation bulletin. The inspected sources do not supply separate start and finish clocks or establish a start date.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2604 confirms the solo route, year and 7:40 elapsed time. Page 1 of the World Professional Marathon Swimming Federation’s December 1978 bulletin independently gives 29 July 1978. This checks published records, not the original observer paperwork."
+        },
+        {
+          "text": "Channel Swimming Association: Penny Lee Dean, 1978",
+          "url": "https://www.channelswimmingassociation.com/swim/2604/penny-lee-dean"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "World Professional Marathon Swimming Federation, Bulletin 38, December 1978, page 1; archived scan",
+          "url": "https://nyadfactcheck.com/documents/wpmsf/bulletins/38-december-1978.pdf#page=1"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "dean-1978"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 1 September 1976 (event date)"
+        },
+        {
+          "text": "Completed mainland → Catalina Island."
+        },
+        {
+          "text": "7h 15m 55s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF row 31 and individual-records table agree. ISHOF connects her Catalina career to the English Channel record-holder."
+        },
+        {
+          "text": "CCSF: successful Catalina Channel solo swims",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named individual rows: swim date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "The register date is not labelled departure or arrival; original observer paperwork was not inspected. Pre-1981 swims are retrospective entries.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CCSF: individual records",
+          "url": "https://swimcatalina.org/individuals-records/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Penny Lee Dean’s 1976 one-way and 1977 two-way record rows.",
+          "label": "Supports"
+        },
+        {
+          "text": "1977 total of 20:03:01 conflicts with 20:03:17 on CCSF’s successful-swims register.",
+          "label": "Limitations"
+        },
+        {
+          "text": "ISHOF: Penny Lee Dean",
+          "url": "https://ishof.org/happy-birthday-penny-lee-dean/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge between the 1978 English Channel swim and Catalina crossings in 1976–1977.",
+          "label": "Supports"
+        }
+      ],
+      "id": "penny-lee-dean-event-1-catalina-channel"
+    },
+    {
+      "title": "Catalina Channel two-way",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 4 September 1977 (event date)"
+        },
+        {
+          "text": "Completed Catalina Island → mainland → Catalina Island. Total time unresolved: CCSF pages publish 20:03:17 and 20:03:01."
+        },
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The successful-swims row gives 8:33 / 20:03:17; the records page gives 20:03:01 for the same date and two-way route. No single elapsed value is selected. This is one completed double, not two independent events."
+        },
+        {
+          "text": "CCSF: successful Catalina Channel solo swims",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named individual rows: swim date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "The register date is not labelled departure or arrival; original observer paperwork was not inspected. Pre-1981 swims are retrospective entries.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CCSF: individual records",
+          "url": "https://swimcatalina.org/individuals-records/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Penny Lee Dean’s 1976 one-way and 1977 two-way record rows.",
+          "label": "Supports"
+        },
+        {
+          "text": "1977 total of 20:03:01 conflicts with 20:03:17 on CCSF’s successful-swims register.",
+          "label": "Limitations"
+        },
+        {
+          "text": "ISHOF: Penny Lee Dean",
+          "url": "https://ishof.org/happy-birthday-penny-lee-dean/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge between the 1978 English Channel swim and Catalina crossings in 1976–1977.",
+          "label": "Supports"
+        }
+      ],
+      "id": "penny-lee-dean-event-2-catalina-channel-two-way"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Catalina crossing",
+      "lines": [
+        {
+          "text": "1976"
+        },
+        {
+          "text": "Completed a mainland-to-island Catalina Channel swim."
+        }
+      ]
+    },
+    {
+      "title": "Catalina double",
+      "lines": [
+        {
+          "text": "1977"
+        },
+        {
+          "text": "Completed a continuous double crossing of the Catalina Channel."
+        }
+      ]
+    },
+    {
+      "title": "Channel speed record",
+      "lines": [
+        {
+          "text": "29 July 1978"
+        },
+        {
+          "text": "Swam England to France in 7 hours 40 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Professional champion",
+      "lines": [
+        {
+          "text": "1979"
+        },
+        {
+          "text": "Won the women’s world professional marathon-swimming title."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame induction",
+      "lines": [
+        {
+          "text": "1996"
+        },
+        {
+          "text": "Inducted into the International Swimming Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Penny Lee Dean?",
+      "value": "This profile includes 1 selected solo performance for Penny Lee Dean. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Penny Lee Dean’s featured English Channel swim?",
+      "value": "The featured swim finished on Saturday, 29 July 1978. Its exact start date is not confirmed here."
+    },
+    {
+      "label": "How long did Penny Lee Dean’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 7 hours and 40 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Penny Lee Dean, 1978",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2604/penny-lee-dean"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "World Professional Marathon Swimming Federation, Bulletin 38, December 1978, page 1; archived scan",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://nyadfactcheck.com/documents/wpmsf/bulletins/38-december-1978.pdf#page=1"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame: Penny Lee Dean",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/happy-birthday-penny-lee-dean/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge between the 1978 English Channel swim and Catalina crossings in 1976–1977.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Pomona College Magazine: 2023 commencement speakers",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://magazine.pomona.edu/2023/summer/2023-commencement-speakers/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "CCSF: successful Catalina Channel solo swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named individual rows: swim date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "The register date is not labelled departure or arrival; original observer paperwork was not inspected. Pre-1981 swims are retrospective entries.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CCSF: individual records",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/individuals-records/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Penny Lee Dean’s 1976 one-way and 1977 two-way record rows.",
+          "label": "Supports"
+        },
+        {
+          "text": "1977 total of 20:03:01 conflicts with 20:03:17 on CCSF’s successful-swims register.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "1978 England-to-France record swim",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 29 July 1978 (completion)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "7h 40m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "dean-1978"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 1 September 1976 (event date)"
+        },
+        {
+          "text": "Completed mainland → Catalina Island."
+        },
+        {
+          "text": "7h 15m 55s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "penny-lee-dean-event-1-catalina-channel"
+    },
+    {
+      "title": "Catalina Channel two-way",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 4 September 1977 (event date)"
+        },
+        {
+          "text": "Completed Catalina Island → mainland → Catalina Island. Total time unresolved: CCSF pages publish 20:03:17 and 20:03:01."
+        },
+        {
+          "text": "Sources disagree · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "penny-lee-dean-event-2-catalina-channel-two-way"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-d172e336229b44a2d079"
+}

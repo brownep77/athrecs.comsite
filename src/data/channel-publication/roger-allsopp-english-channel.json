@@ -1,0 +1,581 @@
+{
+  "slug": "roger-allsopp-english-channel",
+  "name": "Roger Allsopp",
+  "country": "United Kingdom (England)",
+  "aliases": [],
+  "highlight": "Two Channel solos · cancer-research fundraising · age record in 2011",
+  "biography": [
+    "Roger Allsopp is a British open water swimmer and retired breast-cancer surgeon whose Channel swims supported medical research. Based in Guernsey, he prepared in the island's outdoor bathing pools and at Cobo Bay. He also trained with the Guernsey Masters under Frank Le Conte. His first successful Channel crossing, on 30 August 2006, took 15 hours 30 minutes; the federation records him as 65 and describes it as a British age record at the time.",
+    "Allsopp returned five years later with a larger fundraising aim: equipment and running costs for cancer research at Southampton. After a lengthy wait for suitable conditions, he crossed from England to France over 30–31 August 2011. Guinness confirmed that, at 70 years and four months, he had become the oldest man to complete the swim. The CS&PF records 17:51:00, while Guinness reports 17:51:19; the difference is retained with the crossing.",
+    "He also developed writing as part of his public work. The Association of Distance Learning Colleges records that he joined the Writers Bureau in 2010 and wrote two books combining fact and fiction to explain cancer to younger readers. His 2011 age record is a dated achievement: Cyril Baldock and then Otto Thaning raised the mark in 2014."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Profession",
+      "value": "Retired breast-cancer surgeon"
+    },
+    {
+      "label": "Training base",
+      "value": "Guernsey; Guernsey Masters under Frank Le Conte"
+    },
+    {
+      "label": "First Channel solo",
+      "value": "30 August 2006 · 15:30:00"
+    },
+    {
+      "label": "2011 age milestone",
+      "value": "Guinness recognised the oldest male crossing at 70 years and four months"
+    },
+    {
+      "label": "Fundraising purpose",
+      "value": "Cancer-research equipment and operating costs"
+    },
+    {
+      "label": "Writing",
+      "value": "Joined the Writers Bureau in 2010; wrote two cancer-related books for young readers"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Wednesday, 30 August 2006 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "15h 30m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Record 444074 reports departure 02:13:00 and arrival 17:43:00. It supplies one generic swim date, without separately dated phases or a clock standard; these clocks are not assigned phase dates.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Wissant beach, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Neil Streeter",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Suva",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Robin Hawkins",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual record 444074, fields Name through Comment, matches Allsopp's country, age, solo E-F crossing, 30 August 2006, 15:30:00 and crew. The named 2006 annual solo row independently agrees on date, time, pilot and vessel. No original observer log or explicit committee decision was inspected."
+        },
+        {
+          "text": "CS&PF: Roger Allsopp, 30 August 2006",
+          "url": "https://cspf.co.uk/swim/444074"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444074: country, age 65, date, direction, time, reported clocks, pilot, boat, observer and landing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic swim date does not separately date departure and arrival. Historical record names CS&PF as ratifying organisation; original observation log and committee decision were not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: 2006 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2006"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo row '30th August | Roger Allsopp | Neil Streeter / Suva | 15:30:00'.",
+          "label": "Supports"
+        },
+        {
+          "text": "Annual page carries the general pending-ratification disclaimer.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "allsopp-2006"
+    },
+    {
+      "title": "2011 age-record Channel crossing",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CS&PF records 17:51:00; Guinness reports 17:51:19. The 2011 age record was subsequently surpassed."
+        },
+        {
+          "text": "Tuesday, 30 August 2011 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "17h 51m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Tuesday, 30 August 2011 · 08:00:00 · CS&PF reported departure clock; clock standard unspecified",
+          "label": "Started"
+        },
+        {
+          "text": "Wednesday, 31 August 2011 · 01:51:00 · CS&PF reported arrival clock; clock standard unspecified",
+          "label": "Finished"
+        },
+        {
+          "text": "The federation's 08:00:00 and 01:51:00 clocks are retained without time-zone conversion. The contemporary dated report establishes departure on 30 August and completion on 31 August; no overnight date was calculated from elapsed time.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Petite Blanc Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Neil Streeter",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Suva",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Irene Wakeham",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual record 444508 supplies the named solo, generic date, 17:51:00, clocks and crew. Guinness's September 2011 announcement confirms the age-record achievement but publishes 19 additional seconds. The Independent's 31 August opening dates departure to the previous day and completion to that day. The elapsed-time conflict is unresolved."
+        },
+        {
+          "text": "CS&PF: Roger Allsopp, 30 August 2011",
+          "url": "https://cspf.co.uk/swim/444508"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444508: date, direction, 17:51:00, clocks, Neil Streeter, Suva, Irene Wakeham and Petite Blanc Nez landing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Elapsed seconds differ from Guinness's 17:51:19. Exact day-age in the comment is not used.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Guinness World Records: Allsopp's 2011 record",
+          "url": "https://www.guinnessworldrecords.com/news/2011/9/roger-allsopp-becomes-oldest-man-to-swim-the-english-channel-at-70"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Announcement dated 14 September 2011 confirms the then-oldest male record at 70 years and four months and reports 17:51:19.",
+          "label": "Supports"
+        },
+        {
+          "text": "The CS&PF individual record reports 17:51:00; no attempt is made to reconcile the seconds.",
+          "label": "Limitations"
+        },
+        {
+          "text": "The Independent: Allsopp crossing report, 31 August 2011",
+          "url": "https://www.independent.co.uk/news/uk/home-news/70yearold-oldest-to-swim-the-english-channel-2346748.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Opening paragraphs date departure to the previous day and completion to the report date.",
+          "label": "Supports"
+        },
+        {
+          "text": "CS&PF: Roger Allsopp's swim story",
+          "url": "https://cspf.co.uk/swim-story/11/roger-allsopp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person recollections of the 2011 swim, cancer-research fundraising and Guernsey training.",
+          "label": "Supports"
+        },
+        {
+          "text": "The heading uses 31 August; the account describes the final two days of August. It is a swimmer narrative, not an observation log.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "allsopp-2011"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "First Channel crossing",
+      "lines": [
+        {
+          "text": "Wednesday, 30 August 2006"
+        },
+        {
+          "text": "Swam England to France in 15:30:00 at age 65."
+        }
+      ]
+    },
+    {
+      "title": "Writing studies",
+      "lines": [
+        {
+          "text": "2010"
+        },
+        {
+          "text": "Joined the Writers Bureau to develop writing about his experiences and charitable work."
+        }
+      ]
+    },
+    {
+      "title": "Age-record crossing completed",
+      "lines": [
+        {
+          "text": "Wednesday, 31 August 2011"
+        },
+        {
+          "text": "Completed his second solo; Guinness recognised the then-oldest male Channel swimmer."
+        }
+      ]
+    },
+    {
+      "title": "Age record passed on",
+      "lines": [
+        {
+          "text": "2014"
+        },
+        {
+          "text": "Cyril Baldock and then Otto Thaning established older successful crossings."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Roger Allsopp: swimmer's account",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://cspf.co.uk/swim-story/11/roger-allsopp"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Federation-hosted written account and photograph of Allsopp's 2011 swim and Guernsey preparations."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Roger Allsopp?",
+      "value": "This profile includes 2 selected solo performances for Roger Allsopp. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Roger Allsopp’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Wednesday, 30 August 2006. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Roger Allsopp’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 15 hours, 30 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF: Roger Allsopp, 30 August 2006",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444074"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444074: country, age 65, date, direction, time, reported clocks, pilot, boat, observer and landing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic swim date does not separately date departure and arrival. Historical record names CS&PF as ratifying organisation; original observation log and committee decision were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Roger Allsopp, 30 August 2011",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444508"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 444508: date, direction, 17:51:00, clocks, Neil Streeter, Suva, Irene Wakeham and Petite Blanc Nez landing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Elapsed seconds differ from Guinness's 17:51:19. Exact day-age in the comment is not used.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Roger Allsopp's swim story",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim-story/11/roger-allsopp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person recollections of the 2011 swim, cancer-research fundraising and Guernsey training.",
+          "label": "Supports"
+        },
+        {
+          "text": "The heading uses 31 August; the account describes the final two days of August. It is a swimmer narrative, not an observation log.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: Allsopp's 2011 record",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/news/2011/9/roger-allsopp-becomes-oldest-man-to-swim-the-english-channel-at-70"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Announcement dated 14 September 2011 confirms the then-oldest male record at 70 years and four months and reports 17:51:19.",
+          "label": "Supports"
+        },
+        {
+          "text": "The CS&PF individual record reports 17:51:00; no attempt is made to reconcile the seconds.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Association of Distance Learning Colleges: Roger Allsopp",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://adlc.org.uk/award-winning/roger-allsopp/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete-specific profile: Writers Bureau enrolment in 2010, writing about cancer and two books.",
+          "label": "Supports"
+        },
+        {
+          "text": "Undated profile; its fundraising total is not treated as a current total.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "The Independent: Allsopp crossing report, 31 August 2011",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.independent.co.uk/news/uk/home-news/70yearold-oldest-to-swim-the-english-channel-2346748.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Opening paragraphs date departure to the previous day and completion to the report date.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: review of the 2014 season",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/article/87/review-of-2014-season"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Secretary Kevin Murphy's review dated 27 January 2015: Baldock's route and observer, Thaning's observer, times and age-record context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Narrative season report, not an inspected committee ratification decision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: oldest man to swim the English Channel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/oldest-person-to-swim-the-english-channel-male"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record panel and narrative: 6 September 2014, South Africa, birth 13 March 1941, age 73 years 177 days, 12:52 and Shakespeare Beach to Wissant Bay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Guinness warns records may change before the website is updated. Its exact age differs from the CS&PF facts-page summary.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 30 August 2006 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "15h 30m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "allsopp-2006"
+    },
+    {
+      "title": "2011 age-record Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 30 August 2011 – Wednesday, 31 August 2011"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "CS&PF records 17:51:00; Guinness reports 17:51:19. The 2011 age record was subsequently surpassed."
+        },
+        {
+          "text": "17h 51m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "08:00:00 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "01:51:00 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "allsopp-2011"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-553aaaf61774638ef0e7"
+}

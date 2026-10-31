@@ -1,3 +1,4 @@
+import type { ChannelNative } from "./english-channel";
 import { buildProfileTimeline } from "./profile-timeline";
 import { publicProfileStatuses } from "./athlete-profile-roles";
 import type { BiographyPresentation } from "./biography-presentation";
@@ -52,6 +53,7 @@ export type PublicAthletePreview = {
   profileStatuses?: string[];
   biography: string[];
   biographyPresentation?: BiographyPresentation;
+  channelArchive?: ChannelNative;
   biographySources: { label: string; url: string }[];
   careerSummary: PublicCareerSummary | null;
   achievements?: ProfileAchievementSummary;
@@ -81,6 +83,7 @@ export function buildPublicAthletePreview(input: {
   profileRoles?: readonly string[];
   biography?: readonly string[];
   biographyPresentation?: BiographyPresentation;
+  channelArchive?: ChannelNative;
   biographySources?: readonly { label: string; url: string }[];
   results: readonly ProfileResult[];
   histories: readonly SourceHistory[];
@@ -127,6 +130,7 @@ export function buildPublicAthletePreview(input: {
     clubSlug: input.club ? (input.clubSlug ?? null) : null,
     nationality: input.nationality ?? null,
     nationalitySource: null,
+    ...(input.channelArchive ? { channelArchive: input.channelArchive } : {}),
     publicLicenceCredits: profileResultLicenceCredits(input.histories),
     ...(input.details ? { details: input.details } : {}),
     sports,

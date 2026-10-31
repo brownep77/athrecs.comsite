@@ -1,0 +1,413 @@
+{
+  "slug": "david-yudovin-english-channel",
+  "name": "David Yudovin",
+  "country": "United States",
+  "aliases": [
+    "David Kenneth Yudovin"
+  ],
+  "highlight": "1996 Channel solo · pioneering international channel swimmer",
+  "biography": [
+    "David Yudovin was an American channel swimmer from California whose career centred on exploring difficult sea passages. His website describes joining a swim team as a child and developing his long-distance swimming while attending Northern Arizona University. His first Catalina crossing came in 1976. After a serious medical emergency during an Anacapa attempt in 1978, he returned to complete that route in 1982, as recorded by the International Swimming Hall of Fame.",
+    "Yudovin's English Channel success came on 20 August 1996, aged 45. The federation's historical entry records an England-to-France solo in 13 hours 37 minutes, piloted by Reg Brickell Jr aboard Helen Ann Marie, with J. Woodward observing. A contemporary newspaper report preserved on his website describes a month of preparation in Dover, an initially calm sea and worsening weather after roughly eight hours.",
+    "His wife Beth served as coach and manager and helped plan his overseas swims. Their wider itinerary included passages in Japan, Indonesia, New Zealand and the Atlantic islands. The Hall of Fame's career summary covers more than forty solo channel swims between 1976 and 2014, rather than forty English Channel crossings.",
+    "Away from swimming, Yudovin built a seafood business and later devoted time to volunteering and fundraising. His website records the sale of Ocean Crystal Seafood to its employees in 2005 and his selection for the International Swimming Hall of Fame in 2014."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Full name",
+      "value": "David Kenneth Yudovin"
+    },
+    {
+      "label": "Home region",
+      "value": "California, United States"
+    },
+    {
+      "label": "First Catalina crossing",
+      "value": "1976"
+    },
+    {
+      "label": "English Channel",
+      "value": "20 August 1996 · 13:37:00 · age 45"
+    },
+    {
+      "label": "Coach and manager",
+      "value": "Beth Yudovin"
+    },
+    {
+      "label": "Career scope",
+      "value": "ISHOF describes over forty solo channel swims worldwide, 1976–2014"
+    },
+    {
+      "label": "Recognition",
+      "value": "Selected as an ISHOF Honor Open Water Swimmer in 2014"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Successful English Channel solo",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Tuesday, 20 August 1996 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 37m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Tuesday, 20 August 1996 · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The article is dated 31 August 1996 but describes the departure on 20 August. It gives no precise departure or arrival clock; none is inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Helen Ann Marie",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "J. Woodward",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association — reported by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "A contemporary report describes calm water initially, followed by rain and choppy conditions after about eight hours.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical individual record 443660, Name through Observer fields, matches David Yudovin, USA, age 45, 20 August 1996, solo E-F and 13:37:00, explicitly attributed to CSA. The athlete website's 1996 England-to-France table row agrees at 13 hours 37 minutes. Kathe Tanner's contemporary report explicitly describes the 20 August departure. Direct CSA ratification and the original observer log were not inspected."
+        },
+        {
+          "text": "CS&PF historical record: David Yudovin, 20 August 1996",
+          "url": "https://cspf.co.uk/swim/443660"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443660: USA, age 45, generic date, E-F, 13:37:00, Reg Brickell Jr, Helen Ann Marie, J. Woodward and ratifier CSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical record hosted by CS&PF and attributed to CSA; direct CSA decision and original observer log were not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "David Yudovin: About David",
+          "url": "https://davidyudovinchannelswimmer.com/about-david/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete website biography: American identity, early swimming, Catalina career, Beth's role, seafood business and 2005 sale.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective biography and swim list; broad firsts are not independently established here.",
+          "label": "Limitations"
+        },
+        {
+          "text": "David Yudovin archive: The English Channel, UK",
+          "url": "https://davidyudovinchannelswimmer.com/english-channel-england-to-france-1996/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Kathe Tanner's Telegram-Tribune report dated 31 August 1996, reproduced on the athlete site: August 20 departure, Dover preparation and conditions.",
+          "label": "Supports"
+        },
+        {
+          "text": "31 August is the article date, not the swim date. Describes prior attempts differently from later summary articles; no attempt count is adopted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "yudovin-1996"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Catalina debut",
+      "lines": [
+        {
+          "text": "1976"
+        },
+        {
+          "text": "Completed his first Catalina Island-to-mainland crossing."
+        }
+      ]
+    },
+    {
+      "title": "Successful Anacapa return",
+      "lines": [
+        {
+          "text": "1982"
+        },
+        {
+          "text": "The Hall of Fame records his completion after the interrupted 1978 attempt."
+        }
+      ]
+    },
+    {
+      "title": "English Channel success",
+      "lines": [
+        {
+          "text": "Tuesday, 20 August 1996"
+        },
+        {
+          "text": "Completed England to France in 13:37:00."
+        }
+      ]
+    },
+    {
+      "title": "Business transition",
+      "lines": [
+        {
+          "text": "2005"
+        },
+        {
+          "text": "His biography records the sale of Ocean Crystal Seafood to its employees."
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "2014"
+        },
+        {
+          "text": "Selected as an Honor Open Water Swimmer."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "David Yudovin: athlete biography",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://davidyudovinchannelswimmer.com/about-david/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Biographical account and selected swim history maintained on Yudovin's website."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "The English Channel, UK",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://davidyudovinchannelswimmer.com/english-channel-england-to-france-1996/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Contemporary newspaper account reproduced on the swimmer's website; a written archive, not footage."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for David Yudovin?",
+      "value": "This profile includes 1 selected solo performance for David Yudovin. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was David Yudovin’s featured English Channel swim?",
+      "value": "The featured swim started on Tuesday, 20 August 1996. Its exact completion date is not confirmed here."
+    },
+    {
+      "label": "How long did David Yudovin’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 13 hours, 37 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical record: David Yudovin, 20 August 1996",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443660"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443660: USA, age 45, generic date, E-F, 13:37:00, Reg Brickell Jr, Helen Ann Marie, J. Woodward and ratifier CSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical record hosted by CS&PF and attributed to CSA; direct CSA decision and original observer log were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "David Yudovin: About David",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://davidyudovinchannelswimmer.com/about-david/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete website biography: American identity, early swimming, Catalina career, Beth's role, seafood business and 2005 sale.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective biography and swim list; broad firsts are not independently established here.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame: David Kenneth Yudovin",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-david-kenneth-yudovin/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Full name, USA, channel career, 1978 Anacapa attempt and 1982 success, Beth's coaching and selected wider crossings.",
+          "label": "Supports"
+        },
+        {
+          "text": "Induction-era biography; its career count is explicitly limited to 1976–2014.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "David Yudovin archive: The English Channel, UK",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://davidyudovinchannelswimmer.com/english-channel-england-to-france-1996/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Kathe Tanner's Telegram-Tribune report dated 31 August 1996, reproduced on the athlete site: August 20 departure, Dover preparation and conditions.",
+          "label": "Supports"
+        },
+        {
+          "text": "31 August is the article date, not the swim date. Describes prior attempts differently from later summary articles; no attempt count is adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "David Yudovin: 2014 Hall of Fame selection announcement",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://davidyudovinchannelswimmer.com/david-yudovin-voted-in-international-swimming-hall-of-fame/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Reproduced March 2014 announcement of selection as an ISHOF Honor Open Water Swimmer and his fundraising work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Website posting date differs from the reproduced announcement date; milestone retained at year precision.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Successful English Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 20 August 1996 (start)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "13h 37m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "yudovin-1996"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-b3d0ee011f8bbe6de086"
+}

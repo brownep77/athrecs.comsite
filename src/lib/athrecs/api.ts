@@ -1303,7 +1303,15 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
       const { athleteSearchContent } = await import("./athlete-search-content");
       const { biographyParagraphs } = await import("./biography-presentation");
       const { reviewedBiographyPresentation } = await import("./reviewed-biography.server");
+      const channelArchive =
+        !identity.has_account_link &&
+        profile.shareBiography &&
+        profile.publishedBiography &&
+        profile.athlete.slug.endsWith("-english-channel")
+          ? await (await import("./english-channel.server")).nativeChannel(profile.athlete.slug)
+          : undefined;
       return buildPublicAthletePreview({
+        channelArchive,
         slug: profile.athlete.slug,
         displayName: profile.athlete.display_name,
         athleteNumber: profile.athlete.athlete_number,
