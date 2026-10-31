@@ -1,0 +1,522 @@
+{
+  "slug": "henry-sullivan-english-channel",
+  "name": "Henry Sullivan",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "First American across the Channel · 5–6 August 1923",
+  "biography": [
+    "Henry Sullivan was an American endurance swimmer from Lowell, Massachusetts, whose Channel ambitions stretched across a decade. He first attempted the crossing in 1913. Another planned attempt was interrupted in August 1914 when the outbreak of war forced him to return to the United States, and further unsuccessful swims followed in 1920 and 1921.",
+    "On 5–6 August 1923 he finally reached France from England, becoming the third successful Channel swimmer and the first American. He left Shakespeare Cliff and landed on the Calais sands, accompanied by the Folkestone lugger Day Spring and two Dover rowing boats. The Channel record and contemporary reports published on 7 August give 26 hours and 50 minutes. A later Associated Press report gives 27 hours and 25 minutes, so the historical discrepancy remains alongside the record.",
+    "Sullivan’s achievement brought the Alexander Channel Swimming Cup and a £1,000 newspaper prize. His trophy’s inscription commemorates the dates, route and breaststroke endurance performance, preserving unusually direct material evidence of an early Channel success.",
+    "After reaching France, Sullivan told a reporter that he wanted sleep and had asked for ice cream on finishing. The Daily Sketch awarded its £1,000 prize despite the absence of its representative from the escort boat, recognising the completed crossing."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Home city",
+      "value": "Lowell, Massachusetts, United States"
+    },
+    {
+      "label": "Discipline",
+      "value": "Marathon swimming"
+    },
+    {
+      "label": "Channel distinction",
+      "value": "First American; third successful swimmer"
+    },
+    {
+      "label": "Crossing stroke",
+      "value": "Breaststroke"
+    },
+    {
+      "label": "First Channel attempt",
+      "value": "1913"
+    },
+    {
+      "label": "Historic award",
+      "value": "Alexander Channel Swimming Cup · 1923"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First successful Channel swim by an American",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Sullivan completed his crossing after repeated attempts over ten years. The Alexander Cup commemorates a breaststroke performance on 5–6 August 1923. A contemporary report describes a difficult tide near France and says the Daily Sketch paid its prize despite having no newspaper representative in the escort boat."
+        },
+        {
+          "text": "Contemporary reports disagree: 7 August papers give 26h50m, while an 8 August AP report gives 27h25m. The selected CSA and trophy time remains 26h50m."
+        },
+        {
+          "text": "26h 50m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "26h50m in CSA, the Alexander Cup inscription and contemporary 7 August reports"
+        },
+        {
+          "text": "Sunday, 5 August 1923 · 17:15 · Dover Museum departure-photo caption; time zone not specified",
+          "label": "Started"
+        },
+        {
+          "text": "Monday, 6 August 1923 · 20:05 · Contemporary Exchange Telegraph account and Associated Press reports; clock standard not stated",
+          "label": "Finished"
+        },
+        {
+          "text": "The departure-photo caption gives 17:15 on 5 August. A London dispatch dated 6 August, printed in the Daily Mail on 7 August and attributed to Exchange Telegraph, explicitly gives a 20:05 finish that evening and 26h50m. The Oregon Statesman’s 7 August Dover AP report also gives 26h50m. The Morning Register’s 8 August AP report gives 20:05 but 27h25m. Contemporary reports therefore disagree; the selected duration is not merely retrospective. No clock-standard adjustment or original-log reconciliation is inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Cliff, Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Calais sands, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Breaststroke",
+          "label": "Stroke"
+        },
+        {
+          "text": "Day Spring (Folkestone lugger) and two Dover galleys",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Historical swim; retrospective CSA record and trophy inscription",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2463 and the Alexander Cup inscription supply the selected 26:50; museum captions support the phase dates. Newly inspected original Daily Mail and Oregon Statesman scans, both dated 7 August 1923, publish 26h50m in dispatches dated 6 August. The Daily Mail explicitly gives a 20:05 arrival that evening; the Statesman also carries that Exchange Telegraph clock and a separate Dover AP duration report. The previously inspected Morning Register AP scan of 8 August prints 27h25m. Both durations are contemporary evidence. The newspaper prize award is distinct from a ratification decision, and no original observer log has been inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Henry Sullivan, 1923",
+          "url": "https://www.channelswimmingassociation.com/swim/2463/henry-sullivan"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Dover Museum archive: departure photograph d80307",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/henry-sullivan-channel-swimmer-walking-into-the-sea-at-shakespeare-cliff"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Dover Museum archive: Alexander Cup inscription, d80344",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/mr-sullivan-receiving-his-trophy-for-swimming-the-channel-in-1923"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Morning Register, 8 August 1923: Associated Press report",
+          "url": "https://oregonnews.uoregon.edu/lccn/sn96088115/1923-08-08/ed-1/seq-6/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary account of Sullivan’s breaststroke, 20:05 arrival, 27h 25m report and Daily Sketch prize decision.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original page scan inspected as well as OCR. Reported duration conflicts with the CSA and trophy inscription. Newspaper observers are not an inspected observer log.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Daily Mail, St John’s, 7 August 1923, page 1 — American Swims Across Channel",
+          "url": "https://dai.mun.ca/pdfs/dailymail/DailyMail19230807.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "London dispatch dated 6 August, citing Exchange Telegraph: Sullivan reached Calais at 20:05 that evening in 26h50m.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original scan visually inspected. The subtitle erroneously says Philadelphia; the body identifies Lowell. Press reporting supplies no original timing log or time standard.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Oregon Statesman, 7 August 1923, page 2 — American Swims English Channel",
+          "url": "https://oregonnews.uoregon.edu/lccn/sn85042470/1923-08-07/ed-1/seq-2.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover AP dispatch dated 6 August reports completion that night in 26h50m; a separate London AP item cites Exchange Telegraph for 20:05.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original scan visually inspected. The London item shares the Daily Mail’s Exchange Telegraph attribution and is not independent corroboration of that clock. This earlier AP duration differs from the 8 August Morning Register AP report.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "sullivan-1923"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 30 January 1927 (event date)"
+        },
+        {
+          "text": "Catalina Channel, California, USA"
+        },
+        {
+          "text": "Completed the Catalina-to-mainland crossing; the federation lists him as its second successful solo swimmer."
+        },
+        {
+          "text": "22h 45m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF’s second register row records 30 January and 22:45. Its historical chapter explicitly connects Sullivan’s English and Catalina crossings and describes AAU officials accompanying the swim. Inconsistent clock details in that narrative are withheld. This is retrospective recognition of a swim predating CCSF, not a contemporary CCSF ratification."
+        },
+        {
+          "text": "Catalina Channel Swimming Federation — successful solos",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected historical rows.",
+          "label": "Supports"
+        },
+        {
+          "text": "Register dates are retained as event dates, without inferred start or finish phase.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CCSF — A History of the Catalina Channel Swims, chapter 3",
+          "url": "https://swimcatalina.org/wp-content/uploads/2010/11/catalinachannelhistory_era_of_firsts_thru_1963.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "PDF page 3: Sullivan’s successful 1927 crossing and prior English Channel identity.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published start/finish clock details do not reconcile with duration; no clocks are used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "henry-sullivan-event-1-catalina-channel"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First Channel attempt",
+      "lines": [
+        {
+          "text": "1913"
+        },
+        {
+          "text": "An unsuccessful England-to-France attempt began a decade-long pursuit."
+        }
+      ]
+    },
+    {
+      "title": "Plans interrupted by war",
+      "lines": [
+        {
+          "text": "August 1914"
+        },
+        {
+          "text": "Returned to the United States when the outbreak of war prevented another attempt."
+        }
+      ]
+    },
+    {
+      "title": "Further Channel attempts",
+      "lines": [
+        {
+          "text": "1920–1921"
+        },
+        {
+          "text": "Returned for multiple attempts in both directions before his eventual success."
+        }
+      ]
+    },
+    {
+      "title": "First American crossing",
+      "lines": [
+        {
+          "text": "5–6 August 1923"
+        },
+        {
+          "text": "Completed the England-to-France swim; the recorded duration is 26h 50m, with historical timing differences."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Henry Sullivan?",
+      "value": "This profile includes 1 selected solo performance for Henry Sullivan. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Henry Sullivan’s featured English Channel swim?",
+      "value": "The featured swim started on Sunday, 5 August 1923 and finished on Monday, 6 August 1923. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Henry Sullivan’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 26 hours and 50 minutes. Contemporary reports disagree: 7 August papers give 26h50m, while an 8 August AP report gives 27h25m. The selected CSA and trophy time remains 26h50m."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Henry Sullivan, 1923",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2463/henry-sullivan"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum archive: Henry Sullivan biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/sullivan-henry"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum archive: departure photograph d80307",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/henry-sullivan-channel-swimmer-walking-into-the-sea-at-shakespeare-cliff"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum archive: Alexander Cup inscription, d80344",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/mr-sullivan-receiving-his-trophy-for-swimming-the-channel-in-1923"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Morning Register, 8 August 1923: Associated Press report",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://oregonnews.uoregon.edu/lccn/sn96088115/1923-08-08/ed-1/seq-6/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary account of Sullivan’s breaststroke, 20:05 arrival, 27h 25m report and Daily Sketch prize decision.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original page scan inspected as well as OCR. Reported duration conflicts with the CSA and trophy inscription. Newspaper observers are not an inspected observer log.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation — successful solos",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected historical rows.",
+          "label": "Supports"
+        },
+        {
+          "text": "Register dates are retained as event dates, without inferred start or finish phase.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CCSF — A History of the Catalina Channel Swims, chapter 3",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/wp-content/uploads/2010/11/catalinachannelhistory_era_of_firsts_thru_1963.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "PDF page 3: Sullivan’s successful 1927 crossing and prior English Channel identity.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published start/finish clock details do not reconcile with duration; no clocks are used.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Daily Mail, St John’s, 7 August 1923, page 1 — American Swims Across Channel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://dai.mun.ca/pdfs/dailymail/DailyMail19230807.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "London dispatch dated 6 August, citing Exchange Telegraph: Sullivan reached Calais at 20:05 that evening in 26h50m.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original scan visually inspected. The subtitle erroneously says Philadelphia; the body identifies Lowell. Press reporting supplies no original timing log or time standard.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Oregon Statesman, 7 August 1923, page 2 — American Swims English Channel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://oregonnews.uoregon.edu/lccn/sn85042470/1923-08-07/ed-1/seq-2.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover AP dispatch dated 6 August reports completion that night in 26h50m; a separate London AP item cites Exchange Telegraph for 20:05.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original scan visually inspected. The London item shares the Daily Mail’s Exchange Telegraph attribution and is not independent corroboration of that clock. This earlier AP duration differs from the 8 August Morning Register AP report.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First successful Channel swim by an American",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 5 August 1923 – Monday, 6 August 1923"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Contemporary reports disagree: 7 August papers give 26h50m, while an 8 August AP report gives 27h25m. The selected CSA and trophy time remains 26h50m."
+        },
+        {
+          "text": "26h 50m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "17:15 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "20:05 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "sullivan-1923"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 30 January 1927 (event date)"
+        },
+        {
+          "text": "Catalina Channel, California, USA"
+        },
+        {
+          "text": "Completed the Catalina-to-mainland crossing; the federation lists him as its second successful solo swimmer."
+        },
+        {
+          "text": "22h 45m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "henry-sullivan-event-1-catalina-channel"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-cc5aa02cccee904cf8b2"
+}

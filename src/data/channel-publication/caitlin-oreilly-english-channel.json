@@ -1,0 +1,456 @@
+{
+  "slug": "caitlin-oreilly-english-channel",
+  "name": "Caitlin O'Reilly",
+  "country": "New Zealand",
+  "aliases": [],
+  "highlight": "2023 Channel solo · Oceans Seven completed in October 2024",
+  "biography": [
+    "Caitlin O'Reilly is a New Zealand swimmer whose English Channel crossing formed part of a seven-channel project begun in childhood. Her athlete biography describes taking lessons with Dean Kent at Northern Arena, joining Coast Swim Club and qualifying for junior nationals at ten. She won a national 100-metre butterfly title the following year. Coach John Gatfield's Cook Strait experience helped inspire her own ambition to attempt that crossing.",
+    "O'Reilly completed Cook Strait in February 2017 at twelve. Lake Taupō and Foveaux Strait followed, before a double crossing of Taupō in 2022. These swims developed alongside her pool and surf lifesaving experience.",
+    "On 9 August 2023 she swam the English Channel from England to France in 9 hours 34 minutes. The federation's table names Lance Oram and Sea Satin. Swimming New Zealand describes a dark departure, 16-degree water and choppy conditions; its contemporary report explicitly said ratification was pending. She then completed the North Channel and Gibraltar within the same thirty-three-day period, crediting support from Philip Rush and her wider team.",
+    "The final two channels came in 2024. Finishing Molokai on 24 October completed her Oceans Seven, with Guinness recognising her as the youngest female completer at that date. Swimming New Zealand's subsequent account also described her studying to become a paramedic."
+  ],
+  "flags": [
+    {
+      "code": "NZ",
+      "label": "New Zealand",
+      "abbr": "NZL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Source country",
+      "value": "New Zealand, explicitly identified by Guinness World Records."
+    },
+    {
+      "label": "Born",
+      "value": "11 March 2004."
+    },
+    {
+      "label": "Early club",
+      "value": "Coast Swim Club, in her athlete biography."
+    },
+    {
+      "label": "Early pool achievement",
+      "value": "National 100 m butterfly title at eleven."
+    },
+    {
+      "label": "English Channel",
+      "value": "9 August 2023; 9:34:00 in the CS&PF table."
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed 24 October 2024; youngest-female recognition is dated to that completion."
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel in the 2023 Oceans Seven campaign",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Ratification was pending in the September 2023 report; no later committee decision is established here."
+        },
+        {
+          "text": "Wednesday, 9 August 2023 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "9h 34m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Swimming New Zealand reports a 04:45 departure but does not give a numeric departure date alongside it. The generic 9 August swim date remains recordDate; no structured start clock, time zone or finish clock is inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespear Bay, Dover (athlete's wording)",
+          "label": "Departure"
+        },
+        {
+          "text": "Cap Griz Nez (athlete's wording)",
+          "label": "Arrival"
+        },
+        {
+          "text": "Lance Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Sea Satin",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Swimming New Zealand reported 16°C water and choppy conditions for much of the crossing.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF 2023 Solo Swims table, Caitlin O'Reilly row under Date / Swimmer / Pilot/Boat / Time: 9th August, Lance Oram / Sea Satin, 9:34:00. The athlete's English Channel section, Swimming New Zealand's 2024 table and Guinness identify 9 August 2023 and 9:34. Minute summaries do not replace the annual table's displayed seconds. The 20 September 2023 Swimming New Zealand report explicitly says pending ratification and spells the pilot Orams; the CS&PF spelling Oram is retained. Annual disclaimer plus contemporary pending wording support documented, not ratifier-checked."
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation: 2023 swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2023"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo Swims row for Caitlin O'Reilly: 9th August, Lance Oram / Sea Satin, 9:34:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic pending-ratification disclaimer remains; row alone is not a committee decision.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Caitlin O'Reilly: athlete's Oceans Seven account",
+          "url": "https://www.caitlinoreilly.co.nz/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "English Channel section dated 9 August 2023: start at Shakespear Bay, Dover, finish at Cap Griz Nez, unofficial 9 hours 34 minutes.",
+          "label": "Supports"
+        },
+        {
+          "text": "The athlete's later Catalina and Molokai time summaries differ from Swimming New Zealand; no non-Channel timed results are created.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Swimming New Zealand: 3 Channel Crossings in 33 Days, 20 September 2023",
+          "url": "https://www.swimmingnz.org/post/3-channel-crossings-in-33-days"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France crossing in 9:34, explicitly pending ratification; 04:45 start, 16°C water, choppy conditions and support from Philip Rush.",
+          "label": "Supports"
+        },
+        {
+          "text": "No numeric departure date accompanies the clock. Pilot surname is printed Orams here, but Oram in the CS&PF row.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Swimming New Zealand: youngest Oceans Seven completion, 15 November 2024",
+          "url": "https://www.swimmingnz.org/post/the-youngest-swimmer-ever-to-complete-the-oceans-7"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Retrospective athlete account and dated table: English Channel 9 August 2023; Cook Strait, Taupō, Foveaux and 2024 Oceans Seven completion context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Youngest-completer claim is dated to October 2024. Some non-Channel times differ from the athlete's site and Guinness; none is imported.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Guinness World Records: youngest female Oceans Seven swimmer",
+          "url": "https://www.guinnessworldrecords.de/world-records/754662-youngest-person-to-swim-the-oceans-seven-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicit New Zealand identification and 11 March 2004 birth date; Oceans Seven completion on 24 October 2024; English Channel 9 August 2023 in 9:34.",
+          "label": "Supports"
+        },
+        {
+          "text": "This is a dated record recognition, not a fresh assertion that no younger swimmer has succeeded since.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "oreilly-2023-solo"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Cook Strait",
+      "lines": [
+        {
+          "text": "Friday, 24 February 2017"
+        },
+        {
+          "text": "Completed the first channel in her Oceans Seven sequence at twelve."
+        }
+      ]
+    },
+    {
+      "title": "Lake Taupō",
+      "lines": [
+        {
+          "text": "2019"
+        },
+        {
+          "text": "Swimming New Zealand's later career account records her lake crossing."
+        }
+      ]
+    },
+    {
+      "title": "Foveaux Strait",
+      "lines": [
+        {
+          "text": "2021"
+        },
+        {
+          "text": "Added the southern New Zealand crossing to her endurance experience."
+        }
+      ]
+    },
+    {
+      "title": "Double Taupō",
+      "lines": [
+        {
+          "text": "2022"
+        },
+        {
+          "text": "Completed a double lake crossing before her 2023 international channel campaign."
+        }
+      ]
+    },
+    {
+      "title": "English Channel",
+      "lines": [
+        {
+          "text": "Wednesday, 9 August 2023"
+        },
+        {
+          "text": "Completed the England-to-France swim listed at 9:34:00 by the CS&PF."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven complete",
+      "lines": [
+        {
+          "text": "Thursday, 24 October 2024"
+        },
+        {
+          "text": "Molokai completed the set; Guinness records her youngest-female achievement on this date."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Caitlin O'Reilly — athlete biography",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.caitlinoreilly.co.nz/what-we-do"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Her own named introduction covers pool swimming, early open-water ambitions and surf lifesaving."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Caitlin O'Reilly?",
+      "value": "This profile includes 1 selected solo performance for Caitlin O'Reilly. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Caitlin O'Reilly’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Wednesday, 9 August 2023. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Caitlin O'Reilly’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 9 hours, 34 minutes and 0 seconds. Ratification was pending in the September 2023 report; no later committee decision is established here."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming & Piloting Federation: 2023 swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2023"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo Swims row for Caitlin O'Reilly: 9th August, Lance Oram / Sea Satin, 9:34:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic pending-ratification disclaimer remains; row alone is not a committee decision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Caitlin O'Reilly: athlete's Oceans Seven account",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.caitlinoreilly.co.nz/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "English Channel section dated 9 August 2023: start at Shakespear Bay, Dover, finish at Cap Griz Nez, unofficial 9 hours 34 minutes.",
+          "label": "Supports"
+        },
+        {
+          "text": "The athlete's later Catalina and Molokai time summaries differ from Swimming New Zealand; no non-Channel timed results are created.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Caitlin O'Reilly: An Introduction",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.caitlinoreilly.co.nz/what-we-do"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named athlete biography: swimming lessons with Dean Kent, Coast Swim Club, junior nationals, 100 m butterfly title and inspiration from John Gatfield.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some content is an early-career snapshot; present-tense club activities are not treated as current.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Swimming New Zealand: 3 Channel Crossings in 33 Days, 20 September 2023",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.swimmingnz.org/post/3-channel-crossings-in-33-days"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France crossing in 9:34, explicitly pending ratification; 04:45 start, 16°C water, choppy conditions and support from Philip Rush.",
+          "label": "Supports"
+        },
+        {
+          "text": "No numeric departure date accompanies the clock. Pilot surname is printed Orams here, but Oram in the CS&PF row.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Swimming New Zealand: youngest Oceans Seven completion, 15 November 2024",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.swimmingnz.org/post/the-youngest-swimmer-ever-to-complete-the-oceans-7"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Retrospective athlete account and dated table: English Channel 9 August 2023; Cook Strait, Taupō, Foveaux and 2024 Oceans Seven completion context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Youngest-completer claim is dated to October 2024. Some non-Channel times differ from the athlete's site and Guinness; none is imported.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: youngest female Oceans Seven swimmer",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.de/world-records/754662-youngest-person-to-swim-the-oceans-seven-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicit New Zealand identification and 11 March 2004 birth date; Oceans Seven completion on 24 October 2024; English Channel 9 August 2023 in 9:34.",
+          "label": "Supports"
+        },
+        {
+          "text": "This is a dated record recognition, not a fresh assertion that no younger swimmer has succeeded since.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel in the 2023 Oceans Seven campaign",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 9 August 2023 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Ratification was pending in the September 2023 report; no later committee decision is established here."
+        },
+        {
+          "text": "9h 34m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "oreilly-2023-solo"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-90854ab5341b231d7b4a"
+}

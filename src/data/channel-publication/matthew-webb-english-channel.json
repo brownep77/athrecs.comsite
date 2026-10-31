@@ -1,0 +1,453 @@
+{
+  "slug": "matthew-webb-english-channel",
+  "name": "Matthew Webb",
+  "country": "England",
+  "aliases": [],
+  "highlight": "First successful Channel swim · 21 hours 45 minutes",
+  "biography": [
+    "Captain Matthew Webb was born at Dawley Green, Shropshire, on 19 January 1848. He learned to swim in the River Severn as a child and entered maritime training at twelve. His early life at sea helped develop the endurance that would make him a central figure in the history of marathon swimming.",
+    "After an unsuccessful attempt earlier that August, Webb left Dover on Tuesday 24 August 1875. Swimming principally breaststroke, he continued through strong tides and a jellyfish sting, reaching the Calais sands the following morning. The crossing took 21 hours and 45 minutes.",
+    "His achievement made him the first person to swim the English Channel and demonstrated that the crossing was possible. It preceded the specialist piloting knowledge and formal ratifying organisations that later developed around the sport."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "19 January 1848"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Dawley Green, Shropshire, England"
+    },
+    {
+      "label": "Discipline",
+      "value": "Marathon swimming"
+    },
+    {
+      "label": "Featured achievement",
+      "value": "First successful English Channel swim"
+    },
+    {
+      "label": "Crossing style",
+      "value": "Principally breaststroke"
+    },
+    {
+      "label": "Historical period",
+      "value": "1848–1883"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First successful English Channel swim",
+      "lines": [
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "Webb completed the first successful Channel crossing with the lugger Ann and rowing boats. Dover Museum’s d11201 caption identifies George Toms as pilot; crew surnames Dodd, Bowles, Jell, Gates, Decent and Stanley; Webb’s cousin G.H. Ward; and Charles Baker as diver and pacemaker."
+        },
+        {
+          "text": "21h 45m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Tuesday, 24 August 1875 · 12:56 · Published clock; time zone not specified",
+          "label": "Started"
+        },
+        {
+          "text": "Wednesday, 25 August 1875 · 10:41 · Published clock; time zone not specified",
+          "label": "Finished"
+        },
+        {
+          "text": "The Hall of Fame supplies the historical departure and arrival clocks. It does not identify their clock standard; no modern time-zone conversion has been applied.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Admiralty Pier, Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Calais sands, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Principally breaststroke",
+          "label": "Stroke"
+        },
+        {
+          "text": "George Toms",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Ann — Dover lugger",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Historical swim; predates modern ratifying bodies",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Strong tidal displacement; a jellyfish sting is described in the historical account.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2461 supplies the 21:45 elapsed time and England-to-France route. The Hall of Fame supplies both calendar dates and clock times. Dover Museum item d24491 identifies the pilot and lugger. This is retrospective historical documentation, not a claim of contemporary federation observation. A separate museum catalogue item, d11201, names the escort personnel and Charles Baker’s pacemaker role. This is additional catalogue detail, not independent timing evidence."
+        },
+        {
+          "text": "Channel Swimming Association: Matthew Webb, 1875",
+          "url": "https://www.channelswimmingassociation.com/swim/2461/matthew-webb"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "International Swimming Hall of Fame",
+          "url": "https://ishof.org/honoree/honoree-captain-matthew-webb/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Dover Museum archive: Matthew Webb, item d24491",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/matchbox-capt-mathew-webb-swam-the-channel-in-1875"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Dover Museum archive — Matthew Webb in mid-Channel, d11201",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/matthew-webb-in-mid-channel-during-his-famous-swim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies Ann’s pilot, six crew surnames, cousin G.H. Ward and diver/pacemaker Charles Baker.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective catalogue caption for a print/engraving, not a photograph or original observer log; names are preserved as catalogued.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "webb-1875"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "River Thames: Blackwall to Gravesend",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1875 · exact day not confirmed"
+        },
+        {
+          "text": "River Thames, England"
+        },
+        {
+          "text": "Completed the Thames swim during preparations for his Channel crossing."
+        },
+        {
+          "text": "20 miles reported by Dawley Heritage",
+          "label": "Published distance"
+        },
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Dawley Heritage places the swim in July 1875; Dover Museum independently describes its completion. Both biographies explicitly identify the Channel pioneer. Their durations differ, so no elapsed time or exact day is asserted."
+        },
+        {
+          "text": "Dawley Heritage — Matthew Webb biography by Malcolm Peel",
+          "url": "https://www.dawleyheritage.co.uk/unpublishedarticles/350/biography-of-capt-matthew-webb-by-m-peel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "July 1875 Thames swim and Channel identity.",
+          "label": "Supports"
+        },
+        {
+          "text": "Gives a rounded five hours, inconsistent with Dover Museum’s 4:20.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum — The Pioneers",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/The-Pioneers.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed Blackwall–Gravesend swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 4:20 timing conflicts with the local heritage account; elapsed time withheld.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "matthew-webb-event-1-river-thames-blackwall-to-gravesend"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Born in Shropshire",
+      "lines": [
+        {
+          "text": "1848"
+        },
+        {
+          "text": "Born at Dawley Green on 19 January."
+        }
+      ]
+    },
+    {
+      "title": "First Channel attempt",
+      "lines": [
+        {
+          "text": "12 August 1875"
+        },
+        {
+          "text": "An unsuccessful attempt preceded the historic crossing."
+        }
+      ]
+    },
+    {
+      "title": "First successful crossing",
+      "lines": [
+        {
+          "text": "24–25 August 1875"
+        },
+        {
+          "text": "Dover to Calais in 21 hours 45 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Life and legacy",
+      "lines": [
+        {
+          "text": "1883"
+        },
+        {
+          "text": "Died during an attempted swim of the Niagara rapids."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Matthew Webb?",
+      "value": "This profile includes 1 selected solo performance for Matthew Webb. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Matthew Webb’s featured English Channel swim?",
+      "value": "The featured swim started on Tuesday, 24 August 1875 and finished on Wednesday, 25 August 1875."
+    },
+    {
+      "label": "How long did Matthew Webb’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 21 hours and 45 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "International Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-captain-matthew-webb/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Matthew Webb, 1875",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2461/matthew-webb"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum archive: Matthew Webb, item d24491",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/matchbox-capt-mathew-webb-swam-the-channel-in-1875"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Oxford Dictionary of National Biography: Matthew Webb",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://academic.oup.com/oxford-dictionary-of-national-biography/reference/63486/reference-article-abstract/579332551"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Dawley Heritage — Matthew Webb biography by Malcolm Peel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dawleyheritage.co.uk/unpublishedarticles/350/biography-of-capt-matthew-webb-by-m-peel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "July 1875 Thames swim and Channel identity.",
+          "label": "Supports"
+        },
+        {
+          "text": "Gives a rounded five hours, inconsistent with Dover Museum’s 4:20.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum — The Pioneers",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/The-Pioneers.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed Blackwall–Gravesend swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 4:20 timing conflicts with the local heritage account; elapsed time withheld.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum archive — Matthew Webb in mid-Channel, d11201",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/matthew-webb-in-mid-channel-during-his-famous-swim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies Ann’s pilot, six crew surnames, cousin G.H. Ward and diver/pacemaker Charles Baker.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective catalogue caption for a print/engraving, not a photograph or original observer log; names are preserved as catalogued.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First successful English Channel swim",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 24 August 1875 – Wednesday, 25 August 1875"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "21h 45m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "12:56 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "10:41 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Historical account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "webb-1875"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "River Thames: Blackwall to Gravesend",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1875 · exact day not confirmed"
+        },
+        {
+          "text": "River Thames, England"
+        },
+        {
+          "text": "Completed the Thames swim during preparations for his Channel crossing."
+        },
+        {
+          "text": "20 miles reported by Dawley Heritage",
+          "label": "Published distance"
+        },
+        {
+          "text": "Sources disagree · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "matthew-webb-event-1-river-thames-blackwall-to-gravesend"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-908b8f3cf5da4f06e296"
+}

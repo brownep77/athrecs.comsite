@@ -20,9 +20,11 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
   const sportLabel = sports.length <= 2 ? sports.join(" & ") : "Sport";
   const nationality = publicNationality(profile.nationality);
   const presentation = profile.biography.length ? profile.biographyPresentation : undefined;
-  const title = presentation
-    ? `${presentation.title} | ${SITE_NAME}`
-    : `${profile.displayName} — ${sportLabel ? `${sportLabel} results & biography` : "Biography & latest results"}${nationality ? ` · ${nationality}` : ""} | ${SITE_NAME}`;
+  const title = profile.channelArchive
+    ? `${profile.displayName} — English Channel swims & biography | ${SITE_NAME}`
+    : presentation
+      ? `${presentation.title} | ${SITE_NAME}`
+      : `${profile.displayName} — ${sportLabel ? `${sportLabel} results & biography` : "Biography & latest results"}${nationality ? ` · ${nationality}` : ""} | ${SITE_NAME}`;
   const biography = clean(publicAthleteNarrative(profile).join(" "));
   const career = profile.careerSummary;
   const careerText = career
@@ -62,7 +64,9 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
     ? `${profile.displayName} — ${sportLabel || "Sport"} results${nationality ? `; recorded nationality: ${nationality}` : ""}.`
     : intro;
   const description = searchSnippet(
-    presentation?.description ??
+    (profile.channelArchive
+      ? profile.displayName + "’s English Channel swims. " + profile.channelArchive.highlight
+      : presentation?.description) ??
       `${identity || `${profile.displayName}'s athlete profile.`} ${resultsSummary}`,
   );
   const athleteUrl = absoluteUrl(publicAthleteResultPath(profile.slug));
@@ -78,6 +82,9 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
       name: title,
       description,
       inLanguage: "en-GB",
+      ...(profile.channelArchive
+        ? { relatedLink: absoluteUrl("/swimming/english-channel/" + profile.slug) }
+        : {}),
       mainEntity: {
         "@type": "Person",
         "@id": `${athleteUrl}#athlete`,

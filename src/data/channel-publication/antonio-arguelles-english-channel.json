@@ -1,0 +1,1025 @@
+{
+  "slug": "antonio-arguelles-english-channel",
+  "name": "Antonio Argüelles",
+  "country": "Mexico",
+  "aliases": [
+    "Antonio Arguelles",
+    "Antonio Argüelles Díaz González",
+    "Antonio Arguelles Diaz Gonzalez"
+  ],
+  "highlight": "Mexican Oceans Seven swimmer · Channel, Catalina and Manhattan",
+  "biography": [
+    "Antonio Argüelles is a Mexican marathon swimmer whose life in the water has developed alongside work in education, public service and writing. He learned to swim in his grandfather’s pool in Cuernavaca and recalls watching Felipe Muñoz win Olympic gold in 1968 as a decisive childhood inspiration. After studying German Studies and Economics at Stanford, he returned to Mexico and held public-sector posts, including leadership of Conalep.",
+    "His sporting interests also included marathons and Ironman triathlons before he returned to long-distance swimming. He completed the Triple Crown of Open Water Swimming in 1999 and again in 2009; his English Channel crossing that September is recorded at 12 hours 54 minutes. He completed the Oceans Seven in 2017, taking his career across markedly different seas and conditions.",
+    "Argüelles subsequently pursued longer challenges. His 2019 Catalina swim was a completed double crossing. A 2021 Channel double attempt ended after he had completed its first leg, and must be understood as a single successful crossing within an unfinished attempt. In 2022, a double circuit of Manhattan included the final component of his third Triple Crown. Beyond competition, his Brazada Abrazada programme brings aquatic education to children in public schools, connecting his sporting experience with his longstanding interest in learning."
+  ],
+  "flags": [
+    {
+      "code": "MX",
+      "label": "Mexico",
+      "abbr": "MEX"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Mexico — stated in his own biography"
+    },
+    {
+      "label": "Education",
+      "value": "Stanford: German Studies and Economics"
+    },
+    {
+      "label": "Channel result selected",
+      "value": "6 September 2009 · 12:54"
+    },
+    {
+      "label": "Triple Crown",
+      "value": "Completed in 1999, 2009 and 2022"
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed in 2017"
+    },
+    {
+      "label": "Community project",
+      "value": "Brazada Abrazada aquatic education programme"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Sunday, 6 September 2009 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 54m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The source gives a swim date, without defining departure or arrival. Clock times were not located.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Mike Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Gallivant",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Dover’s individual entry supplies the date, duration, route, pilot and vessel. The athlete’s own career pages connect this crossing to his 2009 Triple Crown. Federation affiliation is reported by Dover; the original observer record was not inspected."
+        },
+        {
+          "text": "Dover: Antonio Arguelles, 6 September 2009",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2009-09-06/antonio-arguelles"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected English Channel result.",
+          "label": "Supports"
+        },
+        {
+          "text": "Compiled record, not the observer report; date phase unspecified.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Antonio Argüelles: Triple Corona",
+          "url": "https://antonioarguelles.com/triple-corona"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Three Triple Crown completions and the 2022 Manhattan double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete account; not an organiser result sheet.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "arguelles-channel-2009"
+    },
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Nora Toledano is listed as trainer for this first Channel success."
+        },
+        {
+          "text": "Friday, 3 September 1999 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "18h 19m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Reported departure 00:54:00 and arrival 19:13:00 accompany a generic swim date, not explicitly dated phases. No time zone or phase dates are inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association (reported by CS&PF)",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "The historical entry’s swimmer comment describes strong currents and high winds.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical entry 443742 identifies the Mexican swimmer by his full name and records the 3 September 1999 solo. It attributes ratification to CSA. Dover’s matching 1999 result corroborates date, route and boat; original CSA paperwork was not inspected."
+        },
+        {
+          "text": "CS&PF historical entry: Antonio Argüelles, 3 September 1999",
+          "url": "https://cspf.co.uk/swim/443742"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "18:19:00 England–France, date, Michael Oram/Aegean Blue, Nora Toledano as trainer and reported clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover: Antonio Arguelles, 3 September 1999",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1999-09-03/antonio-arguelles"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Matching first solo date, route, 18:19 and Mike Oram/Aegean Blue.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; its Date field does not establish the departure or arrival phase.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "arguelles-1999-first"
+    },
+    {
+      "title": "Completed outward leg of the 2021 attempt",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "The planned double stopped before the return to England was finished. His retrospective gives 23:15 for that entire unfinished attempt; it is not used as a completed-double result."
+        },
+        {
+          "text": "Completed outward crossing; the intended return leg was not completed."
+        },
+        {
+          "text": "Wednesday, 4 August 2021 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 58m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The database prints departure 04:54:00 and arrival 17:52:00, without explicit phase dates or time zone. The 12:58:00 result covers the successful first leg only.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "JohnMary Rose",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual entry 445647 and the 2021 successful-solo row record 4 August, 12:58:00 and JohnMary Rose. His first-person retrospective explains that the intended return was not completed. The annual list is subject to its committee-ratification disclaimer."
+        },
+        {
+          "text": "CS&PF: Antonio Argüelles, 4 August 2021",
+          "url": "https://cspf.co.uk/swim/445647"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "12:58:00 England–France solo, date, Michael Oram/JohnMary Rose and reported 04:54/17:52 clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CS&PF database entry; the ratifying-body label is not an inspected committee decision. Generic Date and separate clocks do not explicitly date the phases.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: 2021 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2021"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Antonio Argüelles Díaz González row, 4 August, 12:58:00, Mike Oram / JohnMary Rose.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list retains the disclaimer that results are unofficial until committee ratification. No separate decision or observer log was inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Antonio Argüelles: The Joys and Challenges of Swimming",
+          "url": "https://dailynewsofopenwaterswimming.com/the-joys-and-challenges-of-swimming-by-antonio-arguelles/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original first-person account published 9 October 2024: the 2021 two-way ended short of England and the 2024 plan was postponed.",
+          "label": "Supports"
+        },
+        {
+          "text": "A retrospective athlete narrative; its 23:15 is the whole unfinished attempt, not the successful one-way time.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "arguelles-2021-completed-outward"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Cook Strait",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 19 March 2017 (event date)"
+        },
+        {
+          "text": "New Zealand"
+        },
+        {
+          "text": "Completed North Island to South Island."
+        },
+        {
+          "text": "11h 22m 17s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "NZOWSA recognised-swim row 104; linked to the athlete’s Oceans Seven account."
+        },
+        {
+          "text": "NZOWSA: recognised Cook Strait swims",
+          "url": "https://www.nzowsa.nz/cook-strait"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected recognised-swim rows and their published dates, routes and durations.",
+          "label": "Supports"
+        },
+        {
+          "text": "The selected older rows lack the asterisk reserved for NZOWSA ratification; no new ratification claim is made.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Antonio Argüelles: Siete Mares",
+          "url": "https://antonioarguelles.com/siete-mares"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Oceans Seven career bridge and component years.",
+          "label": "Supports"
+        }
+      ],
+      "id": "antonio-arguelles-event-1-cook-strait"
+    },
+    {
+      "title": "Catalina Channel — double crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 26 August 2019 (event date)"
+        },
+        {
+          "text": "California, United States"
+        },
+        {
+          "text": "Completed mainland–Catalina–mainland; total for both legs."
+        },
+        {
+          "text": "24h 17m 49s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF’s 2019 row publishes MCM and a cumulative total; his own account confirms the double."
+        },
+        {
+          "text": "Catalina Channel Swimming Federation: successful solo swims",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual result rows; CM = Catalina to mainland, MC = reverse, MCM = double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Date of Swim does not by itself specify departure or arrival; clocks and logs not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Antonio Argüelles: Mi historia",
+          "url": "https://antonioarguelles.com/historia"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person biography, nationality, education, swimming background and later challenges.",
+          "label": "Supports"
+        },
+        {
+          "text": "The award-year and single-season claims are not used; the 2021 double was unfinished.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "antonio-arguelles-event-2-catalina-channel-double-crossing"
+    },
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 27 August 2025 (event date)"
+        },
+        {
+          "text": "California, United States"
+        },
+        {
+          "text": "Completed Catalina to mainland."
+        },
+        {
+          "text": "13h 50m 28s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF lists his full name and Mexico in its 2025 results."
+        },
+        {
+          "text": "Catalina Channel Swimming Federation: successful solo swims",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual result rows; CM = Catalina to mainland, MC = reverse, MCM = double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Date of Swim does not by itself specify departure or arrival; clocks and logs not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Antonio Argüelles: Mi historia",
+          "url": "https://antonioarguelles.com/historia"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person biography, nationality, education, swimming background and later challenges.",
+          "label": "Supports"
+        },
+        {
+          "text": "The award-year and single-season claims are not used; the 2021 double was unfinished.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "antonio-arguelles-event-3-catalina-channel"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First Triple Crown",
+      "lines": [
+        {
+          "text": "1999"
+        },
+        {
+          "text": "Completed the three component swims by this year."
+        }
+      ]
+    },
+    {
+      "title": "English Channel return",
+      "lines": [
+        {
+          "text": "Sunday, 6 September 2009"
+        },
+        {
+          "text": "Dover records a solo England-to-France crossing."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven",
+      "lines": [
+        {
+          "text": "2017"
+        },
+        {
+          "text": "Completed the seven-swim challenge."
+        }
+      ]
+    },
+    {
+      "title": "Catalina double",
+      "lines": [
+        {
+          "text": "Monday, 26 August 2019"
+        },
+        {
+          "text": "CCSF records a completed mainland–Catalina–mainland swim."
+        }
+      ]
+    },
+    {
+      "title": "Channel first leg completed",
+      "lines": [
+        {
+          "text": "2021"
+        },
+        {
+          "text": "The intended double ended before a return crossing was completed."
+        }
+      ]
+    },
+    {
+      "title": "Third Triple Crown",
+      "lines": [
+        {
+          "text": "2022"
+        },
+        {
+          "text": "The first circuit of a Manhattan double completed his third set."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Antonio Argüelles?",
+      "value": "This profile includes 3 selected solo performances for Antonio Argüelles. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Antonio Argüelles’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Sunday, 6 September 2009. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Antonio Argüelles’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 12 hours and 54 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Antonio Argüelles: Mi historia",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://antonioarguelles.com/historia"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person biography, nationality, education, swimming background and later challenges.",
+          "label": "Supports"
+        },
+        {
+          "text": "The award-year and single-season claims are not used; the 2021 double was unfinished.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Antonio Argüelles: Triple Corona",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://antonioarguelles.com/triple-corona"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Three Triple Crown completions and the 2022 Manhattan double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete account; not an organiser result sheet.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Antonio Argüelles: Siete Mares",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://antonioarguelles.com/siete-mares"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Oceans Seven career bridge and component years.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Antonio Arguelles, 6 September 2009",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2009-09-06/antonio-arguelles"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected English Channel result.",
+          "label": "Supports"
+        },
+        {
+          "text": "Compiled record, not the observer report; date phase unspecified.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: solo swimmer directory",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published athlete names, countries and Channel career coverage.",
+          "label": "Supports"
+        },
+        {
+          "text": "Julian Critchlow compilation; a directory entry is not individual ratification paperwork.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation: successful solo swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual result rows; CM = Catalina to mainland, MC = reverse, MCM = double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Date of Swim does not by itself specify departure or arrival; clocks and logs not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "NZOWSA: recognised Cook Strait swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nzowsa.nz/cook-strait"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected recognised-swim rows and their published dates, routes and durations.",
+          "label": "Supports"
+        },
+        {
+          "text": "The selected older rows lack the asterisk reserved for NZOWSA ratification; no new ratification claim is made.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Antonio Argüelles, 3 September 1999",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443742"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "18:19:00 England–France, date, Michael Oram/Aegean Blue, Nora Toledano as trainer and reported clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Antonio Arguelles, 3 September 1999",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1999-09-03/antonio-arguelles"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Matching first solo date, route, 18:19 and Mike Oram/Aegean Blue.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; its Date field does not establish the departure or arrival phase.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Antonio Argüelles, 4 August 2021",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/445647"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "12:58:00 England–France solo, date, Michael Oram/JohnMary Rose and reported 04:54/17:52 clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CS&PF database entry; the ratifying-body label is not an inspected committee decision. Generic Date and separate clocks do not explicitly date the phases.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2021 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2021"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Antonio Argüelles Díaz González row, 4 August, 12:58:00, Mike Oram / JohnMary Rose.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list retains the disclaimer that results are unofficial until committee ratification. No separate decision or observer log was inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Antonio Argüelles: The Joys and Challenges of Swimming",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://dailynewsofopenwaterswimming.com/the-joys-and-challenges-of-swimming-by-antonio-arguelles/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original first-person account published 9 October 2024: the 2021 two-way ended short of England and the 2024 plan was postponed.",
+          "label": "Supports"
+        },
+        {
+          "text": "A retrospective athlete narrative; its 23:15 is the whole unfinished attempt, not the successful one-way time.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 6 September 2009 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "12h 54m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "arguelles-channel-2009"
+    },
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 3 September 1999 (recorded swim date)"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "18h 19m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "arguelles-1999-first"
+    },
+    {
+      "title": "Completed outward leg of the 2021 attempt",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 4 August 2021 (recorded swim date)"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "Completed outward crossing; the intended return leg was not completed."
+        },
+        {
+          "text": "12h 58m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "arguelles-2021-completed-outward"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Cook Strait",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 19 March 2017 (event date)"
+        },
+        {
+          "text": "New Zealand"
+        },
+        {
+          "text": "Completed North Island to South Island."
+        },
+        {
+          "text": "11h 22m 17s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "antonio-arguelles-event-1-cook-strait"
+    },
+    {
+      "title": "Catalina Channel — double crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 26 August 2019 (event date)"
+        },
+        {
+          "text": "California, United States"
+        },
+        {
+          "text": "Completed mainland–Catalina–mainland; total for both legs."
+        },
+        {
+          "text": "24h 17m 49s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "antonio-arguelles-event-2-catalina-channel-double-crossing"
+    },
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 27 August 2025 (event date)"
+        },
+        {
+          "text": "California, United States"
+        },
+        {
+          "text": "Completed Catalina to mainland."
+        },
+        {
+          "text": "13h 50m 28s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "antonio-arguelles-event-3-catalina-channel"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-9ce9c3b49e269e8fc0b8"
+}

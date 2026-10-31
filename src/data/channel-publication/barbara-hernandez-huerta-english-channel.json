@@ -1,0 +1,743 @@
+{
+  "slug": "barbara-hernandez-huerta-english-channel",
+  "name": "Bárbara Hernández Huerta",
+  "country": "Chile",
+  "aliases": [
+    "Barbara Hernandez",
+    "Bárbara Hernández"
+  ],
+  "highlight": "Oceans Seven finisher · two-way English Channel in 27:18:48",
+  "biography": [
+    "Bárbara Hernández Huerta is a Chilean marathon and ice swimmer whose career connects long ocean crossings with the cold-water environments behind her nickname, the Ice Mermaid. Her International Marathon Swimming Hall of Fame biography identifies her as an Honor Swimmer in its class of 2026 and recognises her contribution to the visibility of women in Chilean and South American open-water swimming.",
+    "Her Oceans Seven journey included Gibraltar in 2018, followed by Catalina and the English Channel in 2019. The Catalina federation records 10:11:41 on 5 June; the Channel federation lists 12:13:00 on 2 August. She added Molokai in May 2021 and completed the seven-channel challenge with Tsugaru in June 2024. In an interview after that achievement, she described teamwork, ocean conservation and adapting to changing conditions as central to her approach.",
+    "Hernández returned to the English Channel in 2025 for a continuous return crossing. The federation records 27:18:48, comprising 13:20:47 to France and 13:58:01 back to England. In her subsequent account, she described injuring an ankle at the French turn and facing worsening weather on the return. Her profile therefore follows both the progression of her crossings and the people and preparation that made them possible."
+  ],
+  "flags": [
+    {
+      "code": "CL",
+      "label": "Chile",
+      "abbr": "CHI"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country",
+      "value": "Chile"
+    },
+    {
+      "label": "Known as",
+      "value": "The Ice Mermaid"
+    },
+    {
+      "label": "First listed Channel swim",
+      "value": "2 August 2019 · 12:13:00"
+    },
+    {
+      "label": "Two-way Channel swim",
+      "value": "30 July 2025 record date · 27:18:48"
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed in June 2024"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "IMSHOF Honor Swimmer · 2026"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Friday, 2 August 2019 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 13m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The federation supplies a swim date and duration; no departure or arrival clock has been verified.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "Neil Streeter",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Suva",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Personally checked the CS&PF 2019 annual row: 2nd August, Barbara Hernandez, Neil Streeter / Suva, 12:13:00. Her sponsor interview independently dates the same English Channel crossing. No underlying observer report was inspected."
+        },
+        {
+          "text": "CS&PF: successful swims by year",
+          "url": "https://cspf.co.uk/cs-and-pf-swims"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Manually inspected annual rows: Rohan More in 2014; Barbara Hernandez in 2019; Barbara Hernandez Huerta in 2025.",
+          "label": "Supports"
+        },
+        {
+          "text": "Select the relevant year. The page states that times/results remain unofficial until ratified by its committee; the underlying observer report is not reproduced here.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dryrobe: Bárbara Hernández on completing Oceans Seven",
+          "url": "https://us.dryrobe.com/blogs/latest-news/seven-seas-one-dream-barbara-hernandez-huerta-completes-the-oceans-seven-challenge"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original athlete interview, Chilean identity, dated swim chronology and June 2024 completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Sponsor interview rather than a ratification record. The Catalina distance contains a visible typographical inconsistency and is not used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "barbara-hernandez-channel-2019"
+    },
+    {
+      "title": "Two-way English Channel solo",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "In her subsequent written interview, Hernández describes an ankle injury at the French turn and deteriorating weather on the return."
+        },
+        {
+          "text": "Wednesday, 30 July 2025 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "27h 18m 48s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "30 July is the federation record date. Departure, French turn and English finish clocks are not established; the total is not split into separate attempts.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France to England",
+          "label": "Direction"
+        },
+        {
+          "text": "Lance Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Sea Satin",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "13h 20m 47s",
+          "label": "Leg 1 · England to France"
+        },
+        {
+          "text": "13h 58m 1s",
+          "label": "Leg 2 · France to England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Personally checked CS&PF’s 2025 annual row: 30th July, Barbara Hernandez Huerta, Lance Oram / Sea Satin, 13:20:47 + 13:58:01 = 27:18:48. The two legs sum exactly to the published total. Her own interview corroborates the completed return crossing but rounds its duration to 27:19."
+        },
+        {
+          "text": "CS&PF: successful swims by year",
+          "url": "https://cspf.co.uk/cs-and-pf-swims"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Manually inspected annual rows: Rohan More in 2014; Barbara Hernandez in 2019; Barbara Hernandez Huerta in 2025.",
+          "label": "Supports"
+        },
+        {
+          "text": "Select the relevant year. The page states that times/results remain unofficial until ratified by its committee; the underlying observer report is not reproduced here.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dryrobe: Bárbara Hernández on her double English Channel swim",
+          "url": "https://us.dryrobe.com/blogs/latest-news/make-it-a-double-barbara-hernandez-s-on-swimming-the-english-channel-twice"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original account of the 2025 double, ankle injury, changing conditions and teamwork.",
+          "label": "Supports"
+        },
+        {
+          "text": "The narrative rounds the duration to 27:19. The CS&PF annual row supplies 27:18:48; the reported track distance is not treated as a standard course distance.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "barbara-hernandez-channel-double-2025"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 5 June 2019 (event date)"
+        },
+        {
+          "text": "Catalina Island to the California mainland"
+        },
+        {
+          "text": "Completed a solo Catalina-to-mainland crossing."
+        },
+        {
+          "text": "10h 11m 41s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF successful solo register, swimmer 506: Barbara Hernandez, Chile, 5 June 2019, CM, 10:11:41. Her original Oceans Seven interview independently names the same date and event, bridging the shorter register name to Hernández Huerta."
+        },
+        {
+          "text": "Catalina Channel Swimming Federation: successful solo swims",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected successful solo entries; swimmer number, date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "A date of swim does not identify the departure or arrival clock. The register says swimmers are from the USA except where another country is printed.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dryrobe: Bárbara Hernández on completing Oceans Seven",
+          "url": "https://us.dryrobe.com/blogs/latest-news/seven-seas-one-dream-barbara-hernandez-huerta-completes-the-oceans-seven-challenge"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original athlete interview, Chilean identity, dated swim chronology and June 2024 completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Sponsor interview rather than a ratification record. The Catalina distance contains a visible typographical inconsistency and is not used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "barbara-hernandez-huerta-event-1-catalina-channel"
+    },
+    {
+      "title": "Molokai Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 23 May 2021 (event date)"
+        },
+        {
+          "text": "Hawaii"
+        },
+        {
+          "text": "Completed a solo Molokai Channel crossing."
+        },
+        {
+          "text": "15h 41m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "MCSA entry 77 lists Barbara Hernandez-Huerta, 15:41, May 2021. The original athlete interview dates this component of her Oceans Seven campaign to 23 May 2021. The day is an event date, not an established departure or arrival phase."
+        },
+        {
+          "text": "Molokai Channel Swimmers Association: Channel Swimmer Listing",
+          "url": "https://molokaichannelswimmersassociation.blogspot.com/p/channel-swimmer-listing.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named crossings, elapsed time, month and year.",
+          "label": "Supports"
+        },
+        {
+          "text": "The older rows give month and year only; they do not supply daily timing or observer reports.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dryrobe: Bárbara Hernández on completing Oceans Seven",
+          "url": "https://us.dryrobe.com/blogs/latest-news/seven-seas-one-dream-barbara-hernandez-huerta-completes-the-oceans-seven-challenge"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original athlete interview, Chilean identity, dated swim chronology and June 2024 completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Sponsor interview rather than a ratification record. The Catalina distance contains a visible typographical inconsistency and is not used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "barbara-hernandez-huerta-event-2-molokai-channel"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Gibraltar crossing",
+      "lines": [
+        {
+          "text": "Friday, 10 August 2018"
+        },
+        {
+          "text": "The athlete interview dates the Gibraltar swim to 10 August 2018."
+        }
+      ]
+    },
+    {
+      "title": "Catalina completed",
+      "lines": [
+        {
+          "text": "Wednesday, 5 June 2019"
+        },
+        {
+          "text": "CCSF lists a successful solo crossing in 10:11:41."
+        }
+      ]
+    },
+    {
+      "title": "First English Channel crossing",
+      "lines": [
+        {
+          "text": "Friday, 2 August 2019"
+        },
+        {
+          "text": "CS&PF lists 12:13:00 with Neil Streeter aboard Suva."
+        }
+      ]
+    },
+    {
+      "title": "Molokai completed",
+      "lines": [
+        {
+          "text": "Sunday, 23 May 2021"
+        },
+        {
+          "text": "The athlete chronology dates the swim to 23 May; the association lists 15:41 in May 2021."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven completed",
+      "lines": [
+        {
+          "text": "Friday, 14 June 2024"
+        },
+        {
+          "text": "The original athlete interview identifies Tsugaru on 14 June as the final crossing."
+        }
+      ]
+    },
+    {
+      "title": "Two-way English Channel",
+      "lines": [
+        {
+          "text": "Wednesday, 30 July 2025"
+        },
+        {
+          "text": "The annual record gives 27:18:48 for England–France–England."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame recognition",
+      "lines": [
+        {
+          "text": "2026"
+        },
+        {
+          "text": "IMSHOF lists Hernández Huerta as a 2026 Honor Swimmer."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Bárbara Hernández on her double Channel crossing",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://us.dryrobe.com/blogs/latest-news/make-it-a-double-barbara-hernandez-s-on-swimming-the-english-channel-twice"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Written athlete interview about the 2025 two-way swim, with photographs. This is retrospective context, not a continuous recording or an observer log."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Bárbara Hernández Huerta?",
+      "value": "This profile includes 2 selected solo performances for Bárbara Hernández Huerta. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Bárbara Hernández Huerta’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Friday, 2 August 2019. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Bárbara Hernández Huerta’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 12 hours, 13 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "IMSHOF: Bárbara Hernández Huerta athlete biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_9dc06d17b37a4e71bed7f14c46092bb0.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Chilean identity, 2026 Honor Swimmer, Oceans Seven, ice-swimming background and later multi-way achievements.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Catalina 2017 statement conflicts with the CCSF first successful entry in 2019; 2017 is not adopted. Its 2026 Catalina double is not added as a timed result without a checked event record.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dryrobe: Bárbara Hernández on completing Oceans Seven",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://us.dryrobe.com/blogs/latest-news/seven-seas-one-dream-barbara-hernandez-huerta-completes-the-oceans-seven-challenge"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original athlete interview, Chilean identity, dated swim chronology and June 2024 completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Sponsor interview rather than a ratification record. The Catalina distance contains a visible typographical inconsistency and is not used.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dryrobe: Bárbara Hernández on her double English Channel swim",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://us.dryrobe.com/blogs/latest-news/make-it-a-double-barbara-hernandez-s-on-swimming-the-english-channel-twice"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original account of the 2025 double, ankle injury, changing conditions and teamwork.",
+          "label": "Supports"
+        },
+        {
+          "text": "The narrative rounds the duration to 27:19. The CS&PF annual row supplies 27:18:48; the reported track distance is not treated as a standard course distance.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: successful swims by year",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Manually inspected annual rows: Rohan More in 2014; Barbara Hernandez in 2019; Barbara Hernandez Huerta in 2025.",
+          "label": "Supports"
+        },
+        {
+          "text": "Select the relevant year. The page states that times/results remain unofficial until ratified by its committee; the underlying observer report is not reproduced here.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation: successful solo swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected successful solo entries; swimmer number, date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "A date of swim does not identify the departure or arrival clock. The register says swimmers are from the USA except where another country is printed.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Molokai Channel Swimmers Association: Channel Swimmer Listing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://molokaichannelswimmersassociation.blogspot.com/p/channel-swimmer-listing.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named crossings, elapsed time, month and year.",
+          "label": "Supports"
+        },
+        {
+          "text": "The older rows give month and year only; they do not supply daily timing or observer reports.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: solo swimmer index",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named successful swimmers, countries and crossing years.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; individual annual entries provide the selected swim details.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 2 August 2019 (recorded swim date)"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "12h 13m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "barbara-hernandez-channel-2019"
+    },
+    {
+      "title": "Two-way English Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 30 July 2025 (recorded swim date)"
+        },
+        {
+          "text": "England to France to England"
+        },
+        {
+          "text": "27h 18m 48s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "barbara-hernandez-channel-double-2025"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 5 June 2019 (event date)"
+        },
+        {
+          "text": "Catalina Island to the California mainland"
+        },
+        {
+          "text": "Completed a solo Catalina-to-mainland crossing."
+        },
+        {
+          "text": "10h 11m 41s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "barbara-hernandez-huerta-event-1-catalina-channel"
+    },
+    {
+      "title": "Molokai Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 23 May 2021 (event date)"
+        },
+        {
+          "text": "Hawaii"
+        },
+        {
+          "text": "Completed a solo Molokai Channel crossing."
+        },
+        {
+          "text": "15h 41m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "barbara-hernandez-huerta-event-2-molokai-channel"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-71c7dba0ab551a78bfd8"
+}

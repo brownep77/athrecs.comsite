@@ -74,5 +74,19 @@ export const Route = createFileRoute("/sports/$sport")({
 });
 
 function SportPage() {
-  return <CompactDiscoveryPage {...Route.useLoaderData()} search={Route.useSearch()} />;
+  const data = Route.useLoaderData();
+  return (
+    <>
+      {data.sport.slug === "swimming" && (
+        <section className="mx-auto my-5 max-w-6xl rounded-xl border border-border bg-elevated p-5">
+          <h2 className="font-display text-xl font-semibold">English Channel swimmers</h2>
+          <p>Explore athlete biographies, crossing times, recordings and historical evidence.</p>
+          <a className="font-semibold text-accent underline" href="/swimming/english-channel">
+            Explore the Channel archive
+          </a>
+        </section>
+      )}
+      <CompactDiscoveryPage {...data} search={Route.useSearch()} />
+    </>
+  );
 }

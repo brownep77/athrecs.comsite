@@ -1,0 +1,714 @@
+{
+  "slug": "yvetta-hlavacova-english-channel",
+  "name": "Yvetta Hlaváčová",
+  "country": "Czech Republic",
+  "aliases": [
+    "Yvetta Hlavacova",
+    "Yvetta Tulip Hlaváčová"
+  ],
+  "highlight": "CS&PF women’s Channel record · 7:25:15 in 2006",
+  "biography": [
+    "Yvetta Hlaváčová is a Czech swimmer whose career spans elite pool racing, international open-water competition and solo Channel swimming. World Aquatics lists her in both swimming and open-water disciplines. Her 2021 Hall of Fame biography credits nine years on the FINA World Cup circuit and 82 Czech pool titles, placing her Channel performances within a much broader sporting career.",
+    "She first crossed from England to France on 1 August 2005 in 8:42. The Channel Swimming Association’s published record also names her the year’s fastest woman. Returning on 5 August 2006, she completed a one-way swim in 7:25:15 with Michael Oram on Gallivant. That swim was part of an attempted two-way crossing, so the successful one-way record must be kept separate from the intended longer challenge. Guinness recognises the CS&PF women’s record while noting that CSA still acknowledges Penny Lee Dean’s mark.",
+    "Hlaváčová completed a third Channel swim in September 2007 in 7:53. In a later interview she described the appeal of swimming alone and competing against her own limits after years of crowded international races. She also undertook staged Vltava charity swims in 2007 and 2008. Her election to the International Marathon Swimming Hall of Fame’s Class of 2021 recognised achievements across these different forms of endurance swimming."
+  ],
+  "flags": [
+    {
+      "code": "CZ",
+      "label": "Czechia",
+      "abbr": "CZE"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Czech Republic"
+    },
+    {
+      "label": "Disciplines",
+      "value": "Pool and open-water swimming"
+    },
+    {
+      "label": "Selected Channel solos",
+      "value": "2005, 2006 and 2007"
+    },
+    {
+      "label": "2006 Channel time",
+      "value": "7:25:15 · CS&PF women’s record"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "IMSHOF Class of 2021"
+    },
+    {
+      "label": "Career context",
+      "value": "2021 Hall of Fame biography credits 82 Czech pool titles"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First Channel solo and CSA award",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Monday, 1 August 2005 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "8h 42m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful-swim detail 3174 names Hlavacova, Czech Republic, solo one-way England-to-France, completed 2005 in 08:42 and the fastest-woman award. CS&PF historical detail 443976 independently supplies 1 August and Reg Brickell Jr / Viking Princess. Published CSA recognition was inspected; the original observer log was not."
+        },
+        {
+          "text": "CSA: Yvetta Hlavacova, record 3174",
+          "url": "https://www.channelswimmingassociation.com/swim/3174/yvetta-hlavacova"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published successful 2005 Czech one-way England-to-France solo in 08:42 and Fastest Swim by a Lady award.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA page supplies year only; exact date and crew come from the separately inspected CS&PF historical detail.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: Yvetta Hlaváčová, record 443976",
+          "url": "https://cspf.co.uk/swim/443976"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1 August 2005, 08:42:00, England-to-France, CSA, Reg Brickell Jr / Viking Princess.",
+          "label": "Supports"
+        }
+      ],
+      "id": "hlavacova-2005"
+    },
+    {
+      "title": "CS&PF women’s Channel record",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "One completed leg of a two-way attempt. Guinness recognises the CS&PF women’s record and notes that CSA still acknowledges Penny Lee Dean."
+        },
+        {
+          "text": "Saturday, 5 August 2006 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "7h 25m 15s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF publishes departure 08:10:40 and arrival 15:35:55 with a generic swim date. Exact phase dates and a time-zone basis are not separately supplied; clocks remain unstructured.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, England",
+          "label": "Departure"
+        },
+        {
+          "text": "0.3 miles south of Cap Gris Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Gallivant",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Frank Richards",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF detail 444043 identifies the successful first England-to-France leg in 07:25:15 and explicitly says part of a two-way attempt. Guinness record 86355 independently identifies it as the CS&PF women’s record, while noting CSA still acknowledges Penny Lee Dean. The dispute concerns record recognition across bodies, not a conflicting elapsed time."
+        },
+        {
+          "text": "CS&PF: Yvetta Hlaváčová, record 444043",
+          "url": "https://cspf.co.uk/swim/444043"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "5 August 2006 one-way solo, 07:25:15, Michael Oram / Gallivant, Frank Richards, landing south of Cap Gris Nez and attempted two-way scope.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic date and clocks do not independently identify phase dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Guinness World Records: fastest female English Channel crossing",
+          "url": "https://www.guinnessworldrecords.com/world-records/86355-fastest-crossing-of-the-english-channel-swimming-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record holder, Czech nationality, 5 August 2006 and Shakespeare Beach to Cap Gris Nez.",
+          "label": "Supports"
+        },
+        {
+          "text": "Rounds to 7 hours 25 minutes and explicitly monitors the CS&PF record while noting CSA still acknowledges Penny Lee Dean.",
+          "label": "Limitations"
+        },
+        {
+          "text": "ISHOF 2021 Yearbook: Yvetta Hlaváčová",
+          "url": "https://www.ishof.org/wp-content/uploads/2022/07/2021-Yearbook-For-Web.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "PDF page 72 (index 71), IMSHOF section: Channel record, three crossings, nine years of FINA World Cup racing, Czech titles and staged charity swims.",
+          "label": "Supports"
+        },
+        {
+          "text": "Career totals are attributed to the 2021 honouree biography, not independently reconstructed.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "hlavacova-2006"
+    },
+    {
+      "title": "Third Channel solo",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Saturday, 8 September 2007 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "7h 53m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The individual entry reports departure 11:00:00 and arrival 18:53:00. With only a generic swim date supplied, neither clock receives an inferred phase date.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Gallivant",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Billy Beadle; Cliff Golding",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Matched CS&PF detail 444158 and the 8th September row of the 2007 Solo Swims table: 07:53:00, one-way England-to-France, Michael Oram / Gallivant. The detail names Billy Beadle and Cliff Golding as observers. Annual results retain the ratification disclaimer; no committee decision or original observer log was inspected."
+        },
+        {
+          "text": "CS&PF: Yvetta Hlaváčová, record 444158",
+          "url": "https://cspf.co.uk/swim/444158"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "8 September 2007 solo, 07:53:00, route, crew and reported clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "CS&PF: 2007 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2007"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "8th September Solo Swims row: Yvetta Hlavacova, Mike Oram / Gallivant, 7:53:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list says results remain unofficial until committee ratification; no committee decision or observer log was inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "hlavacova-2007"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "First Channel solo",
+      "lines": [
+        {
+          "text": "Monday, 1 August 2005"
+        },
+        {
+          "text": "England to France in 8:42; CSA’s fastest female swim award for 2005."
+        }
+      ]
+    },
+    {
+      "title": "CS&PF women’s record",
+      "lines": [
+        {
+          "text": "Saturday, 5 August 2006"
+        },
+        {
+          "text": "Completed the first leg of a two-way attempt in 7:25:15; Guinness preserves a separate CSA recognition note."
+        }
+      ]
+    },
+    {
+      "title": "Second sub-eight-hour Channel crossing",
+      "lines": [
+        {
+          "text": "Saturday, 8 September 2007"
+        },
+        {
+          "text": "Third selected solo, recorded at 7:53:00."
+        }
+      ]
+    },
+    {
+      "title": "Downstream Vltava charity project",
+      "lines": [
+        {
+          "text": "2007"
+        },
+        {
+          "text": "The Hall of Fame biography records a staged downstream swim."
+        }
+      ]
+    },
+    {
+      "title": "Upstream Vltava charity project",
+      "lines": [
+        {
+          "text": "2008"
+        },
+        {
+          "text": "The Hall of Fame biography records a staged upstream swim."
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "2021"
+        },
+        {
+          "text": "Elected as an Honor Swimmer in the Class of 2021."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Yvetta Hlaváčová on her Channel swims",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.openwaterswimming.com/yvetta-hlavacova-honored-by-the-international-marathon-swimming-hall-of-fame/"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Written English questions and answers accompanying an athlete interview published for her IMSHOF election. Video playback was not reviewed."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Yvetta Hlaváčová?",
+      "value": "This profile includes 3 selected solo performances for Yvetta Hlaváčová. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Yvetta Hlaváčová’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Monday, 1 August 2005. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Yvetta Hlaváčová’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 8 hours and 42 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "World Aquatics: Yvetta Hlavacova athlete profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.worldaquatics.com/athletes/1027740/yvetta-hlavacova"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "CZE nationality and elite pool/open-water background.",
+          "label": "Supports"
+        },
+        {
+          "text": "The displayed personal-best panel is selective and is not a complete career result list.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA / IMSHOF: Yvetta Hlaváčová interview",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/yvetta-hlavacova-honored-by-the-international-marathon-swimming-hall-of-fame/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2021 Honor Swimmer election, Yvetta Tulip Hlaváčová name form and first-person Channel motivation and three-swim narrative.",
+          "label": "Supports"
+        },
+        {
+          "text": "Athlete recollection is distinguished from federation timing; attempted double is not counted as a completed double.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "ISHOF 2021 Yearbook: Yvetta Hlaváčová",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.ishof.org/wp-content/uploads/2022/07/2021-Yearbook-For-Web.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "PDF page 72 (index 71), IMSHOF section: Channel record, three crossings, nine years of FINA World Cup racing, Czech titles and staged charity swims.",
+          "label": "Supports"
+        },
+        {
+          "text": "Career totals are attributed to the 2021 honouree biography, not independently reconstructed.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Yvetta Hlavacova, record 3174",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3174/yvetta-hlavacova"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published successful 2005 Czech one-way England-to-France solo in 08:42 and Fastest Swim by a Lady award.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA page supplies year only; exact date and crew come from the separately inspected CS&PF historical detail.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Yvetta Hlaváčová, record 443976",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443976"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1 August 2005, 08:42:00, England-to-France, CSA, Reg Brickell Jr / Viking Princess.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Yvetta Hlaváčová, record 444043",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444043"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "5 August 2006 one-way solo, 07:25:15, Michael Oram / Gallivant, Frank Richards, landing south of Cap Gris Nez and attempted two-way scope.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic date and clocks do not independently identify phase dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Yvetta Hlaváčová, record 444158",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444158"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "8 September 2007 solo, 07:53:00, route, crew and reported clocks.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2007 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2007"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "8th September Solo Swims row: Yvetta Hlavacova, Mike Oram / Gallivant, 7:53:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list says results remain unofficial until committee ratification; no committee decision or observer log was inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: fastest female English Channel crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/86355-fastest-crossing-of-the-english-channel-swimming-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record holder, Czech nationality, 5 August 2006 and Shakespeare Beach to Cap Gris Nez.",
+          "label": "Supports"
+        },
+        {
+          "text": "Rounds to 7 hours 25 minutes and explicitly monitors the CS&PF record while noting CSA still acknowledges Penny Lee Dean.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First Channel solo and CSA award",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 1 August 2005 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "8h 42m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "hlavacova-2005"
+    },
+    {
+      "title": "CS&PF women’s Channel record",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 5 August 2006 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "One completed leg of a two-way attempt. Guinness recognises the CS&PF women’s record and notes that CSA still acknowledges Penny Lee Dean."
+        },
+        {
+          "text": "7h 25m 15s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "hlavacova-2006"
+    },
+    {
+      "title": "Third Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 8 September 2007 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "7h 53m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "hlavacova-2007"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-168a5c162eee6684b317"
+}

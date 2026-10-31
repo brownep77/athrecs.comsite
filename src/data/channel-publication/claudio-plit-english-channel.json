@@ -1,0 +1,641 @@
+{
+  "slug": "claudio-plit-english-channel",
+  "name": "Claudio Plit",
+  "country": "Argentina",
+  "aliases": [],
+  "highlight": "Won the 1981 international Channel race in 8 hours 58 minutes",
+  "biography": [
+    "Claudio Plit grew up swimming in the Paraná River at Rosario. Three consecutive national long-distance championships took him from Argentine competition to the Nile marathon in Egypt in 1973. He went on to race for three decades. In July 1979 he won the Capri-to-Naples marathon in 7 hours 40 minutes 41 seconds. That summer he also swam in an international race across the English Channel, finishing second to John Kinsella in 9 hours 45 minutes.",
+    "Plit returned to the Channel race in 1981 and won in 8 hours 58 minutes. The Channel Swimming Association recognised it as the fastest swim by a man that year. He also won five editions of the Lac Saint-Jean crossing in Quebec, where his rivalry with New Zealand swimmer Philip Rush lasted a decade. The International Swimming Hall of Fame credits him with four Capri-to-Naples victories across the 1979, 1980, 1981 and 1986 editions.",
+    "After competing, Plit coached professional swimmers and directed international open-water races in Argentina. Fundación Konex, which honoured him in 1990, credits him with coaching 25 swimmers who crossed the English Channel between 1993 and 2009."
+  ],
+  "flags": [
+    {
+      "code": "AR",
+      "abbr": "ARG",
+      "label": "Argentina"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Argentina, as recorded by the Channel Swimming Association"
+    },
+    {
+      "label": "Born",
+      "value": "7 November 1954 in Rosario"
+    },
+    {
+      "label": "Early swimming",
+      "value": "Paraná River"
+    },
+    {
+      "label": "1979 international Channel race",
+      "value": "Second overall in 9 hours 45 minutes"
+    },
+    {
+      "label": "1981 international Channel race",
+      "value": "Winner in 8 hours 58 minutes"
+    },
+    {
+      "label": "Quebec competition",
+      "value": "Five Lac Saint-Jean victories"
+    },
+    {
+      "label": "Channel coaching",
+      "value": "Fundación Konex credits him with 25 successful swimmers between 1993 and 2009"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "plit-1979",
+      "title": "Second in the international Channel race",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Plit placed second behind John Kinsella in the international field."
+        },
+        {
+          "text": "CS&PF records 28 August. Michael Read’s race recollection gives 24 August. The CSA confirms the 9:45 completion.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Tuesday, 28 August 1979 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "9h 45m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF lists departure at 03:15:00 and arrival at 13:00:00. Its 28 August date is a generic record date. The retrospective race account gives 24 August. Neither phase has an independently confirmed date.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "C. Heath",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Good Heart",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "K. Pugh",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "The CSA describes a calm start to the race, with conditions later building to SW4.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful-swim entry 2639 identifies Claudio Plit of Argentina and gives a one-way England-to-France solo in 09:45. CS&PF entry 443193 supplies 28 August and the crew. The CSA’s 1979 race table places him second. WOWSA’s race history attributes a 24 August date to participant Michael Read."
+        },
+        {
+          "text": "Channel Swimming Association · Claudio Plit, 1979",
+          "url": "https://www.channelswimmingassociation.com/swim/2639/claudio-plit"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Argentina, one-way England-to-France solo, 09:45.",
+          "label": "Supports"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation · Plit, 1979",
+          "url": "https://cspf.co.uk/swim/443193"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical entry 443193 supplies the record date, clocks, pilot, vessel, observer and race context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Channel Swimming Association · 1979 international race results",
+          "url": "https://www.channelswimmingassociation.com/news/178/william-stein-sadness"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The retrospective’s 1979 results table places Plit second behind Kinsella. It also describes race conditions.",
+          "label": "Supports"
+        },
+        {
+          "text": "World Open Water Swimming Association · Channel races of the 1970s and 1980s",
+          "url": "https://www.openwaterswimming.com/racing-across-english-channel-in-1970s/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Account drawing on participants Claudio Plit, Michael Read and Sue Guesdon. Gives the race placings and Read’s alternative 1979 race date.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "id": "plit-1981",
+      "title": "International Channel race victory",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Plit won the 1981 race. The CSA awarded him its fastest swim by a man title for that year."
+        },
+        {
+          "text": "Monday, 24 August 1981 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "8h 58m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "B. Wellard",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Polly T",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "A. Ayres",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful-swim entry 2673 records Claudio Plit, Argentina, one way from England to France in 08:58 and the annual award. CS&PF entry 443238 gives a generic date of 24 August and the crew. The 1981 race table in the participant-based WOWSA history lists Plit first."
+        },
+        {
+          "text": "Channel Swimming Association · Claudio Plit, 1981",
+          "url": "https://www.channelswimmingassociation.com/swim/2673/claudio-plit"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Argentina, one-way England-to-France solo, 08:58 and the annual fastest swim by a man award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation · Plit, 1981",
+          "url": "https://cspf.co.uk/swim/443238"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical entry 443238 supplies the record date, pilot, vessel and observer.",
+          "label": "Supports"
+        },
+        {
+          "text": "World Open Water Swimming Association · Channel races of the 1970s and 1980s",
+          "url": "https://www.openwaterswimming.com/racing-across-english-channel-in-1970s/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Account drawing on participants Claudio Plit, Michael Read and Sue Guesdon. Gives the race placings and Read’s alternative 1979 race date.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "plit-capri-napoli-1979",
+      "title": "Maratona del Golfo Capri-Napoli",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Sunday, 8 July 1979 (event date)"
+        },
+        {
+          "text": "Italy"
+        },
+        {
+          "text": "Won the 1979 edition"
+        },
+        {
+          "text": "1st overall and 1st man",
+          "label": "Placing / category"
+        },
+        {
+          "text": "7h 40m 41s",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The organiser’s table for 8 July 1979 places Claudio Plit of Argentina first overall and first among men in 7h 40m 41s."
+        },
+        {
+          "text": "Maratona del Golfo Capri-Napoli · 1979 results",
+          "url": "https://web.caprinapoli.com/capri_napoli_results-1979.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Organiser’s 8 July 1979 overall table. Claudio Plit of Argentina is first in 7h 40m 41s.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First international racing trip",
+      "lines": [
+        {
+          "text": "1973"
+        },
+        {
+          "text": "Competed in the Nile marathon after winning three consecutive national long-distance titles."
+        }
+      ]
+    },
+    {
+      "title": "Capri-to-Naples victory",
+      "lines": [
+        {
+          "text": "1979-07-08"
+        },
+        {
+          "text": "The organiser lists him first overall in 7 hours 40 minutes 41 seconds."
+        }
+      ]
+    },
+    {
+      "title": "Second in the international Channel race",
+      "lines": [
+        {
+          "text": "1979-08"
+        },
+        {
+          "text": "Finished behind John Kinsella in 9 hours 45 minutes. The exact race day is disputed."
+        }
+      ]
+    },
+    {
+      "title": "International Channel race winner",
+      "lines": [
+        {
+          "text": "1981-08"
+        },
+        {
+          "text": "Won the race and earned the CSA’s fastest swim by a man award."
+        }
+      ]
+    },
+    {
+      "title": "Premio Konex",
+      "lines": [
+        {
+          "text": "1990"
+        },
+        {
+          "text": "Fundación Konex recognised his swimming career."
+        }
+      ]
+    },
+    {
+      "title": "Channel coaching through 2009",
+      "lines": [
+        {
+          "text": "2009"
+        },
+        {
+          "text": "Fundación Konex credits him with coaching 25 swimmers who crossed the Channel between 1993 and 2009."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Claudio Plit?",
+      "value": "This profile includes 2 selected solo performances. A continuous multi-way crossing counts as one performance."
+    },
+    {
+      "label": "When was Claudio Plit’s first listed Channel swim?",
+      "value": "The recorded swim date is Tuesday, 28 August 1979. Departure and arrival dates are unconfirmed."
+    },
+    {
+      "label": "How long did the first listed swim take?",
+      "value": "The recorded 1-way solo lasted 9h 45m. Published race dates differ between 24 and 28 August 1979. The recorded 9h 45m and second place agree."
+    }
+  ],
+  "sources": [
+    {
+      "title": "International Swimming Hall of Fame · Claudio Plit",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-claudio-plit/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete honouree biography covering childhood in Rosario, professional racing, Lac Saint-Jean and later work.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Fundación Konex · Claudio Plit",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.fundacionkonex.org/b1752-claudio-plit"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Award recipient’s biography gives date of birth, 1990 recognition and Channel coaching from 1993 to 2009.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association · Claudio Plit, 1979",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2639/claudio-plit"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Argentina, one-way England-to-France solo, 09:45.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association · Claudio Plit, 1981",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2673/claudio-plit"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Argentina, one-way England-to-France solo, 08:58 and the annual fastest swim by a man award.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming & Piloting Federation · Plit, 1979",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443193"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical entry 443193 supplies the record date, clocks, pilot, vessel, observer and race context.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming & Piloting Federation · Plit, 1981",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443238"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical entry 443238 supplies the record date, pilot, vessel and observer.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association · 1979 international race results",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/178/william-stein-sadness"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The retrospective’s 1979 results table places Plit second behind Kinsella. It also describes race conditions.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "World Open Water Swimming Association · Channel races of the 1970s and 1980s",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/racing-across-english-channel-in-1970s/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Account drawing on participants Claudio Plit, Michael Read and Sue Guesdon. Gives the race placings and Read’s alternative 1979 race date.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Maratona del Golfo Capri-Napoli · 1979 results",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://web.caprinapoli.com/capri_napoli_results-1979.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Organiser’s 8 July 1979 overall table. Claudio Plit of Argentina is first in 7h 40m 41s.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "plit-1979",
+      "title": "Second in the international Channel race",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "Tuesday, 28 August 1979 (recorded swim date)"
+        },
+        {
+          "text": "9h 45m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published race dates differ between 24 and 28 August 1979. The recorded 9h 45m and second place agree.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    },
+    {
+      "id": "plit-1981",
+      "title": "International Channel race victory",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "Monday, 24 August 1981 (recorded swim date)"
+        },
+        {
+          "text": "8h 58m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "plit-capri-napoli-1979",
+      "title": "Maratona del Golfo Capri-Napoli",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Sunday, 8 July 1979 (event date)"
+        },
+        {
+          "text": "Italy"
+        },
+        {
+          "text": "Won the 1979 edition"
+        },
+        {
+          "text": "1st overall and 1st man",
+          "label": "Placing / category"
+        },
+        {
+          "text": "7h 40m 41s",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-2cbaaa1a227020903585"
+}

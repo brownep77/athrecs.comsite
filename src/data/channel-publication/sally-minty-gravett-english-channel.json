@@ -1,0 +1,954 @@
+{
+  "slug": "sally-minty-gravett-english-channel",
+  "name": "Sally Minty-Gravett",
+  "country": "Jersey",
+  "aliases": [
+    "Sally Anne Minty",
+    "Sally Anne Minty-Gravett"
+  ],
+  "highlight": "Channel swims in six consecutive decades · continuous double in 2016",
+  "biography": [
+    "Sally Minty-Gravett is a Jersey swimmer and teacher whose English Channel career spans six consecutive decades. Born on 16 July 1957, she began teaching swimming in 1972, according to her own aquatic CV. Her first solo crossing, on 30 August 1975, appears in the CSA register under Sally Anne Minty. The 11-hour-57-minute performance earned the award for the year’s fastest British crossing.",
+    "She returned repeatedly while building a career in swimming instruction. Her 1992 solo travelled in the reverse direction, from France to England, in 12 hours 8 minutes. In August 2016 she completed a continuous out-and-back Channel swim: 15 hours 3 minutes to France followed by 21 hours 23 minutes back, totalling 36 hours 26 minutes. Guinness recognises that achievement in its oldest-female two-way category.",
+    "A further crossing on 7 August 2022, aged sixty-five, extended her record to a sixth decade. Guinness explicitly reports CS&PF ratification of the 15-hour-30-minute swim. The federation’s compiled register lists eight individual crossings, counting both legs of the 2016 double.",
+    "Her contribution also includes teaching and club leadership. IMSHOF records twenty-seven years as president of the Jersey Long Distance Swimming Club. An Honor Swimmer since 2005, she received an MBE in 2016 and the International Swimming Hall of Fame’s administration award in 2023."
+  ],
+  "flags": [
+    {
+      "code": "JE",
+      "label": "Jersey",
+      "abbr": "JER"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country in CSA results",
+      "value": "Jersey"
+    },
+    {
+      "label": "Born",
+      "value": "16 July 1957"
+    },
+    {
+      "label": "Teaching began",
+      "value": "1972, in her own CV"
+    },
+    {
+      "label": "First solo",
+      "value": "30 August 1975 · 11:57"
+    },
+    {
+      "label": "Compiled Channel record",
+      "value": "Eight individual crossings, including a continuous double; 1975–2022"
+    },
+    {
+      "label": "Honours",
+      "value": "IMSHOF 2005 · MBE 2016 · ISHOF administration award 2023"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Saturday, 30 August 1975 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 57m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Exact swim day comes from the historical accounts; CSA supplies only 1975. No departure or arrival clock was found.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful individual record 2559 names Sally Anne Minty of Jersey and confirms 11:57 England–France. Her CV and the CS&PF alias register bridge the later name; WOWSA’s Guinness recap and the Jersey anniversary report supply 30 August."
+        },
+        {
+          "text": "CSA: Sally Anne Minty, 1975, record 2559",
+          "url": "https://www.channelswimmingassociation.com/swim/2559/sally-anne-minty"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Jersey; successful 1975 England–France solo in 11:57; fastest British swimmer award.",
+          "label": "Supports"
+        },
+        {
+          "text": "The result shows only the year. The exact 30 August date is reported in WOWSA’s Guinness recap and the local anniversary account.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Swim With Sal: Sally’s aquatic CV",
+          "url": "https://swimwithsal.com/sals-aquatic-cv/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete’s own biography: full name, birth date, teaching, historic Channel performances, MBE and linked 2016 video.",
+          "label": "Supports"
+        },
+        {
+          "text": "Career CV with mixed update dates; one club-presidency start year is inconsistent, so that year is omitted. Private contact fields are not reproduced.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: named solo-swimmer register",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named country, alias and career-count rows for Nicholas Adams, Howard James [Keech] and Sally Minty-Gravett [Minty].",
+          "label": "Supports"
+        },
+        {
+          "text": "Julian Critchlow compilation hosted by CS&PF; not an original observer log. Counts are the inspected register snapshot.",
+          "label": "Limitations"
+        },
+        {
+          "text": "WOWSA: Sally Minty-Gravett’s Guinness recognition",
+          "url": "https://www.openwaterswimming.com/sally-minty-gravett-mbe-recognized-by/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "13 February 2018 account reproduces Guinness’s historic chronology: 30 August 1975 and 20 September 1992.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary quotation of an earlier Guinness record; minute-level durations are independently supported by the CSA.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Jersey Evening Post: fiftieth-anniversary account",
+          "url": "https://jerseyeveningpost.com/news/2025/08/30/relay-team-aiming-to-celebrate-50th-anniversary-of-landmark-swims/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Local 2025 account corroborates the first solo date, 30 August 1975, and the swimmer’s Jersey identity.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its proposed 2025 relay is not treated as a completed swim; an unrelated Webb date is not adopted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "minty-1975"
+    },
+    {
+      "title": "France–England solo; biography chronology conflict",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CSA and the athlete’s CV say 1992; IMSHOF prints 1975 for this third crossing, an apparent chronology error."
+        },
+        {
+          "text": "Sunday, 20 September 1992 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 8m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CSA and the athlete CV place the 12:08 reverse-direction swim in 1992; the IMSHOF biography instead prints 1975 for the third crossing. This apparent biography error remains visible. The exact day comes from secondary chronology, not a phase-specific field.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful individual record 2414, Sally Minty Gravett, confirms the 1992 reverse-direction solo and 12:08. WOWSA’s 2018 recap of Guinness’s chronology supplies 20 September. The IMSHOF PDF’s conflicting third-crossing year is an apparent transcription error, not a second 1975 performance."
+        },
+        {
+          "text": "CSA: Sally Minty Gravett, 1992, record 2414",
+          "url": "https://www.channelswimmingassociation.com/swim/2414/sally-minty-gravett"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Jersey; successful 1992 France–England solo in 12:08.",
+          "label": "Supports"
+        },
+        {
+          "text": "The exact 20 September day is supplied by WOWSA’s Guinness recap, not by this year-only CSA page.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Swim With Sal: Sally’s aquatic CV",
+          "url": "https://swimwithsal.com/sals-aquatic-cv/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete’s own biography: full name, birth date, teaching, historic Channel performances, MBE and linked 2016 video.",
+          "label": "Supports"
+        },
+        {
+          "text": "Career CV with mixed update dates; one club-presidency start year is inconsistent, so that year is omitted. Private contact fields are not reproduced.",
+          "label": "Limitations"
+        },
+        {
+          "text": "WOWSA: Sally Minty-Gravett’s Guinness recognition",
+          "url": "https://www.openwaterswimming.com/sally-minty-gravett-mbe-recognized-by/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "13 February 2018 account reproduces Guinness’s historic chronology: 30 August 1975 and 20 September 1992.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary quotation of an earlier Guinness record; minute-level durations are independently supported by the CSA.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Sally Anne Minty-Gravett, Honor Swimmer, 2005",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_07a0894c591f4d169e43a890f8cdfc06.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2005 induction; 27 years of club presidency; swimmer mentoring; 2023 administration award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its third-crossing year is printed as 1975, apparently in error; the separate CSA result and athlete CV both say 1992. The discrepancy remains flagged.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "minty-gravett-1992"
+    },
+    {
+      "title": "Continuous two-way English Channel swim",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Monday, 29 August 2016 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "36h 26m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Monday, 29 August 2016 · 08:44 · Guinness two-way record; no time zone specified",
+          "label": "Started"
+        },
+        {
+          "text": "Tuesday, 30 August 2016 · 21:10 · Guinness two-way record; no time zone specified",
+          "label": "Finished"
+        },
+        {
+          "text": "Guinness gives the first-leg turn at 23:47 and the 29–30 August span. The federation table prints seconds as :00; this display is retained without claiming measured sub-minute resolution.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Neil Streeter",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Suva",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "15h 3m 0s",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "21h 23m 0s",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical doubles table row 44 publishes 29 August 2016 and 15:03:00 + 21:23:00 = 36:26:00. Guinness recognises the completed two-way under CS&PF auspices and supplies both phase dates and clocks. Formal committee minutes were not inspected."
+        },
+        {
+          "text": "CS&PF: multiple-crossing statistics",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Doubles table: Nicholas Adams, row 22, 23 July 1995; Sally Minty-Gravett, row 44, 29 August 2016; published leg times.",
+          "label": "Supports"
+        },
+        {
+          "text": "A historical compilation; trailing seconds are retained as displayed, not evidence of stopwatch resolution.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Guinness: oldest female two-way Channel swimmer",
+          "url": "https://www.guinnessworldrecords.com/world-records/713191-oldest-person-to-complete-a-two-way-swim-crossing-of-the-english-channel-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "29–30 August 2016 continuous double, age 59 years 45 days, 36:26, leg clocks, Neil Streeter/Suva and CS&PF auspices.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published Guinness recognition, not direct inspection of CS&PF committee minutes; clock time zones are unstated.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Swim With Sal: Sally’s aquatic CV",
+          "url": "https://swimwithsal.com/sals-aquatic-cv/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete’s own biography: full name, birth date, teaching, historic Channel performances, MBE and linked 2016 video.",
+          "label": "Supports"
+        },
+        {
+          "text": "Career CV with mixed update dates; one club-presidency start year is inconsistent, so that year is omitted. Private contact fields are not reproduced.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "minty-gravett-2016-double"
+    },
+    {
+      "title": "Sixth consecutive decade of Channel swimming",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Sunday, 7 August 2022 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "15h 30m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Guinness provides a swim date and minute-level duration, but no phase-specific clock.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, near Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Guinness’s named consecutive-decades record explicitly reports CS&PF ratification of the 7 August 2022 crossing in 15:30. No original observer log or committee decision was inspected."
+        },
+        {
+          "text": "Guinness: English Channel crossings in six consecutive decades",
+          "url": "https://www.guinnessworldrecords.com/world-records/713200-most-swim-crossings-of-the-english-channel-consecutive-decades"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "7 August 2022, 15:30, Shakespeare Beach to Cap Gris-Nez, aged 65; explicitly reports CS&PF ratification.",
+          "label": "Supports"
+        },
+        {
+          "text": "Ratification is reported by Guinness. The swim date is not separately labelled as departure or arrival.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: named solo-swimmer register",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named country, alias and career-count rows for Nicholas Adams, Howard James [Keech] and Sally Minty-Gravett [Minty].",
+          "label": "Supports"
+        },
+        {
+          "text": "Julian Critchlow compilation hosted by CS&PF; not an original observer log. Counts are the inspected register snapshot.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "minty-gravett-2022"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Began teaching swimming",
+      "lines": [
+        {
+          "text": "1972"
+        },
+        {
+          "text": "Her CV records an ASA club instructor qualification and the start of teaching."
+        }
+      ]
+    },
+    {
+      "title": "First Channel solo",
+      "lines": [
+        {
+          "text": "Saturday, 30 August 1975"
+        },
+        {
+          "text": "11:57 England–France; the CSA lists the fastest British swimmer award."
+        }
+      ]
+    },
+    {
+      "title": "Crossed in the reverse direction",
+      "lines": [
+        {
+          "text": "Sunday, 20 September 1992"
+        },
+        {
+          "text": "CSA confirms 12:08 France–England; the exact date is reported in the Guinness chronology recap."
+        }
+      ]
+    },
+    {
+      "title": "International recognition",
+      "lines": [
+        {
+          "text": "2005"
+        },
+        {
+          "text": "Inducted into the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    },
+    {
+      "title": "MBE for swimming",
+      "lines": [
+        {
+          "text": "2016"
+        },
+        {
+          "text": "The athlete CV and Guinness record identify the honour in 2016."
+        }
+      ]
+    },
+    {
+      "title": "Completed a continuous double",
+      "lines": [
+        {
+          "text": "Tuesday, 30 August 2016"
+        },
+        {
+          "text": "Finished the 29–30 August swim in 36:26, aged 59 years 45 days."
+        }
+      ]
+    },
+    {
+      "title": "Six consecutive decades",
+      "lines": [
+        {
+          "text": "Sunday, 7 August 2022"
+        },
+        {
+          "text": "A 15:30 crossing extended the sequence from the 1970s to the 2020s."
+        }
+      ]
+    },
+    {
+      "title": "Administration award",
+      "lines": [
+        {
+          "text": "2023"
+        },
+        {
+          "text": "Received ISHOF’s Irving Davids/Captain Roger W. Wheeler Memorial Award."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Double English Channel Swim 2016 — Sally Minty-Gravett",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://youtu.be/YAFUXm9DMhE"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Video linked directly from the swimmer’s aquatic CV. Its YouTube title was inspected; playback, completeness and reuse permission were not verified."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Sally Minty-Gravett?",
+      "value": "This profile includes 4 selected solo performances for Sally Minty-Gravett. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Sally Minty-Gravett’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Saturday, 30 August 1975. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Sally Minty-Gravett’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 11 hours and 57 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Swim With Sal: Sally’s aquatic CV",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimwithsal.com/sals-aquatic-cv/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete’s own biography: full name, birth date, teaching, historic Channel performances, MBE and linked 2016 video.",
+          "label": "Supports"
+        },
+        {
+          "text": "Career CV with mixed update dates; one club-presidency start year is inconsistent, so that year is omitted. Private contact fields are not reproduced.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "IMSHOF: Sally Anne Minty-Gravett, Honor Swimmer, 2005",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_07a0894c591f4d169e43a890f8cdfc06.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2005 induction; 27 years of club presidency; swimmer mentoring; 2023 administration award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its third-crossing year is printed as 1975, apparently in error; the separate CSA result and athlete CV both say 1992. The discrepancy remains flagged.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Sally Anne Minty, 1975, record 2559",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2559/sally-anne-minty"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Jersey; successful 1975 England–France solo in 11:57; fastest British swimmer award.",
+          "label": "Supports"
+        },
+        {
+          "text": "The result shows only the year. The exact 30 August date is reported in WOWSA’s Guinness recap and the local anniversary account.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Sally Minty Gravett, 1992, record 2414",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2414/sally-minty-gravett"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Jersey; successful 1992 France–England solo in 12:08.",
+          "label": "Supports"
+        },
+        {
+          "text": "The exact 20 September day is supplied by WOWSA’s Guinness recap, not by this year-only CSA page.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA: Sally Minty-Gravett’s Guinness recognition",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/sally-minty-gravett-mbe-recognized-by/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "13 February 2018 account reproduces Guinness’s historic chronology: 30 August 1975 and 20 September 1992.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary quotation of an earlier Guinness record; minute-level durations are independently supported by the CSA.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Jersey Evening Post: fiftieth-anniversary account",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://jerseyeveningpost.com/news/2025/08/30/relay-team-aiming-to-celebrate-50th-anniversary-of-landmark-swims/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Local 2025 account corroborates the first solo date, 30 August 1975, and the swimmer’s Jersey identity.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its proposed 2025 relay is not treated as a completed swim; an unrelated Webb date is not adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: named solo-swimmer register",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named country, alias and career-count rows for Nicholas Adams, Howard James [Keech] and Sally Minty-Gravett [Minty].",
+          "label": "Supports"
+        },
+        {
+          "text": "Julian Critchlow compilation hosted by CS&PF; not an original observer log. Counts are the inspected register snapshot.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: multiple-crossing statistics",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Doubles table: Nicholas Adams, row 22, 23 July 1995; Sally Minty-Gravett, row 44, 29 August 2016; published leg times.",
+          "label": "Supports"
+        },
+        {
+          "text": "A historical compilation; trailing seconds are retained as displayed, not evidence of stopwatch resolution.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness: oldest female two-way Channel swimmer",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/713191-oldest-person-to-complete-a-two-way-swim-crossing-of-the-english-channel-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "29–30 August 2016 continuous double, age 59 years 45 days, 36:26, leg clocks, Neil Streeter/Suva and CS&PF auspices.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published Guinness recognition, not direct inspection of CS&PF committee minutes; clock time zones are unstated.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness: English Channel crossings in six consecutive decades",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/713200-most-swim-crossings-of-the-english-channel-consecutive-decades"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "7 August 2022, 15:30, Shakespeare Beach to Cap Gris-Nez, aged 65; explicitly reports CS&PF ratification.",
+          "label": "Supports"
+        },
+        {
+          "text": "Ratification is reported by Guinness. The swim date is not separately labelled as departure or arrival.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 30 August 1975 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "11h 57m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "minty-1975"
+    },
+    {
+      "title": "France–England solo; biography chronology conflict",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 20 September 1992 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "CSA and the athlete’s CV say 1992; IMSHOF prints 1975 for this third crossing, an apparent chronology error."
+        },
+        {
+          "text": "12h 8m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "minty-gravett-1992"
+    },
+    {
+      "title": "Continuous two-way English Channel swim",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 29 August 2016 – Tuesday, 30 August 2016"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "36h 26m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "08:44 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "21:10 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "minty-gravett-2016-double"
+    },
+    {
+      "title": "Sixth consecutive decade of Channel swimming",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 7 August 2022 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "15h 30m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "minty-gravett-2022"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-0447926acee50b5151aa"
+}

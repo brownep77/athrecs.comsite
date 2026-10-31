@@ -1,0 +1,444 @@
+{
+  "slug": "bhakti-sharma-english-channel",
+  "name": "Bhakti Sharma",
+  "country": "India",
+  "aliases": [
+    "Bhakti C Sharma"
+  ],
+  "highlight": "2006 Channel solo · 13 hours 55 minutes",
+  "biography": [
+    "Bhakti Sharma is an Indian open-water swimmer associated with Udaipur, Rajasthan. Her mother, Leena Sharma, began teaching her to swim when she was two and a half. After school-level competition, she moved toward longer swims, with her family helping research routes, contact organisations and assemble the resources each challenge required.",
+    "At sixteen she completed the English Channel in 13 hours 55 minutes. The Channel Swimming Association records the successful 2006 England-to-France solo; Dover’s individual entry dates it to 6 July and names Andy King aboard Sea King. In a later interview, Sharma recalled the currents becoming especially demanding after about ten hours and the encouragement of her parents on the support boat.",
+    "She returned to the Channel in a relay in 2008 with her mother and Priyanka Gehlot. That shared crossing forms part of her career story, while her individual solo result remains separately identified. Her wider swimming journey also took her into polar water, including an Antarctic swim in 2015.",
+    "The Indian government recognised her with the 2011 Tenzing Norgay National Adventure Award for Water Adventure, presented on 29 August 2012. She has also discussed the mental demands of endurance swimming in interviews and in a recorded 2019 TED talk about resilience."
+  ],
+  "flags": [
+    {
+      "code": "IN",
+      "label": "India",
+      "abbr": "IND"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country",
+      "value": "India"
+    },
+    {
+      "label": "Home city",
+      "value": "Udaipur, Rajasthan"
+    },
+    {
+      "label": "Early teacher and coach",
+      "value": "Mother, Leena Sharma"
+    },
+    {
+      "label": "Selected solo crossing",
+      "value": "6 July 2006 · 13 hours 55 minutes"
+    },
+    {
+      "label": "Age at solo crossing",
+      "value": "16, according to her interview and Dover entry"
+    },
+    {
+      "label": "National honour",
+      "value": "2011 Tenzing Norgay National Adventure Award · presented 29 August 2012"
+    },
+    {
+      "label": "Channel relay partners in her account",
+      "value": "Leena Sharma and Priyanka Gehlot, 2008"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Sharma’s original interview describes completing the solo at sixteen, with her parents providing support and difficult currents late in the crossing."
+        },
+        {
+          "text": "Thursday, 6 July 2006 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 55m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CSA supplies 2006 and the elapsed time; Dover supplies the swim day. Neither opened record establishes a departure or arrival clock.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Andy King",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Sea King",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA swim 3191 explicitly names Bhakti Sharma, India, Solo, one way, England to France, 2006 and 13:55. Dover’s individual Bhakti C Sharma entry supplies 6 July 2006, Andy King and Sea King and agrees on the time and route. The original athlete interview links the teenage swimmer to that 2006 solo. Ratifier-checked is limited to the published association success; the exact date and crew are supplementary secondary evidence, and no original observer log was inspected."
+        },
+        {
+          "text": "CSA: Bhakti Sharma, 2006 — swim 3191",
+          "url": "https://www.channelswimmingassociation.com/swim/3191/bhakti-sharma"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Bhakti Sharma, country India, a one-way solo England-to-France completion in 2006 and 13:55 elapsed.",
+          "label": "Supports"
+        },
+        {
+          "text": "This association page gives the year only; it does not supply the exact day, crew or clock times.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover.UK.com: Bhakti C Sharma, 6 July 2006",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2006-07-06/bhakti-c-sharma"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Supplies the swim date 6 July 2006, 13:55, India, England-to-France route, Andy King and Sea King; additional information states age 16.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation supplements the CSA’s year-only entry. Its date is not labelled departure or arrival; observer unknown.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Femina: A chat with open-water swimmer Bhakti Sharma",
+          "url": "https://www.femina.in/achievers/a-chat-with-open-water-swimmer-bhakti-sharma-53589.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original 2017 interview: mother Leena taught her from age two and a half; Channel solo at sixteen in 2006; 2008 Channel relay with Leena and Priyanka Gehlot; mental preparation and Antarctic swimming.",
+          "label": "Supports"
+        },
+        {
+          "text": "The interview supports relay participation but does not identify a published team result or precise relay day. No second solo swim is inferred.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "bhakti-sharma-2006"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Solo English Channel crossing",
+      "lines": [
+        {
+          "text": "Thursday, 6 July 2006"
+        },
+        {
+          "text": "Completed the England-to-France swim in 13:55; the CSA establishes the success and Dover supplies the day."
+        }
+      ]
+    },
+    {
+      "title": "Channel relay with her mother and friend",
+      "lines": [
+        {
+          "text": "2008"
+        },
+        {
+          "text": "Her original interview identifies Leena Sharma and Priyanka Gehlot as her partners. This is contextual biography, not a second solo or an independently matched relay-result entry."
+        }
+      ]
+    },
+    {
+      "title": "National adventure award presented",
+      "lines": [
+        {
+          "text": "Wednesday, 29 August 2012"
+        },
+        {
+          "text": "The government records presentation of the 2011 Tenzing Norgay National Adventure Award for Water Adventure."
+        }
+      ]
+    },
+    {
+      "title": "Antarctic swimming",
+      "lines": [
+        {
+          "text": "2015"
+        },
+        {
+          "text": "Her TED profile and original interview describe her Antarctic swim, extending a career that already included the Channel."
+        }
+      ]
+    },
+    {
+      "title": "Recorded TED talk on resilience",
+      "lines": [
+        {
+          "text": "November 2019"
+        },
+        {
+          "text": "TED Talks India Nayi Baat published her account of lessons from open-water swimming."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "What open water swimming taught me about resilience",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.ted.com/talks/bhakti_sharma_what_open_water_swimming_taught_me_about_resilience"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "An actual recorded TED talk by Bhakti Sharma, filmed for TED Talks India Nayi Baat in November 2019. It is an athlete’s account, not a recording of the full Channel crossing."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "A chat with open-water swimmer Bhakti Sharma",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.femina.in/achievers/a-chat-with-open-water-swimmer-bhakti-sharma-53589.html"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Original written interview covering her childhood, solo Channel crossing, relay with her mother and polar swimming."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Bhakti Sharma?",
+      "value": "This profile includes 1 selected solo performance for Bhakti Sharma. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Bhakti Sharma’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Thursday, 6 July 2006. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Bhakti Sharma’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 13 hours and 55 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Bhakti Sharma, 2006 — swim 3191",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3191/bhakti-sharma"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Bhakti Sharma, country India, a one-way solo England-to-France completion in 2006 and 13:55 elapsed.",
+          "label": "Supports"
+        },
+        {
+          "text": "This association page gives the year only; it does not supply the exact day, crew or clock times.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Bhakti C Sharma, 6 July 2006",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2006-07-06/bhakti-c-sharma"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Supplies the swim date 6 July 2006, 13:55, India, England-to-France route, Andy King and Sea King; additional information states age 16.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation supplements the CSA’s year-only entry. Its date is not labelled departure or arrival; observer unknown.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "TED: Bhakti Sharma — actual speaker profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.ted.com/speakers/bhakti_sharma"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies Sharma as an Indian open-water swimmer and describes her 2015 Antarctic swim. Links directly to her recorded talk.",
+          "label": "Supports"
+        },
+        {
+          "text": "The page’s 2010 award-year claim conflicts with the Indian government’s 2011 award and 2012 presentation records. The government dates are used.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Femina: A chat with open-water swimmer Bhakti Sharma",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.femina.in/achievers/a-chat-with-open-water-swimmer-bhakti-sharma-53589.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original 2017 interview: mother Leena taught her from age two and a half; Channel solo at sixteen in 2006; 2008 Channel relay with Leena and Priyanka Gehlot; mental preparation and Antarctic swimming.",
+          "label": "Supports"
+        },
+        {
+          "text": "The interview supports relay participation but does not identify a published team result or precise relay day. No second solo swim is inferred.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "UdaipurBlog: In Conversation With Bhakti Sharma",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://udaipurblog.com/in-conversation-with-bhakti-sharma.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original 2012 interview describes her transition from school competition to long-distance swimming, family research and financial support, communications-management MBA and national adventure award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Future plans reported in 2012 are not treated as later completed events.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Government of India: President Gives Away National Sports and Adventure Awards",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.pib.gov.in/newsite/PrintRelease.aspx?lang=2&reg=48&relid=86988"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Ministry of Youth Affairs and Sports release dated 29 August 2012 explicitly records Bhakti Sharma receiving the 2011 Tenzing Norgay National Adventure Award for Water Adventure.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "TED: What open water swimming taught me about resilience",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.ted.com/talks/bhakti_sharma_what_open_water_swimming_taught_me_about_resilience"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "An actual recorded Bhakti Sharma talk from TED Talks India Nayi Baat, November 2019, discussing the swimming journey.",
+          "label": "Supports"
+        },
+        {
+          "text": "The talk page was inspected; this is not presented as continuous crossing footage or a ratification document.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 6 July 2006 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "13h 55m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "bhakti-sharma-2006"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-a8371816dbba3c6fb4f4"
+}

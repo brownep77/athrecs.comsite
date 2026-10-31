@@ -1,0 +1,711 @@
+{
+  "slug": "florence-chadwick-english-channel",
+  "name": "Florence Chadwick",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "First woman to swim the Channel in both directions, on separate swims",
+  "biography": [
+    "Florence Chadwick was an American ocean swimmer from San Diego whose career connected local rough-water racing with international marathon swimming. Before attempting the Channel, she spent years competing off the California coast, then trained in the Persian Gulf while working for the Arabian American Oil Company. Employment helped finance an ambition that required boats, navigation and sustained preparation as well as swimming ability.",
+    "After an unsuccessful attempt in July 1950, she crossed from France to England on 8 August in 13 hours and 23 minutes, lowering the women’s record. The following September she completed the reverse route, from St. Margaret’s Bay to Sangatte. These were separate crossings: together they made her the first woman to succeed in both directions, rather than a continuous return swim.",
+    "Her later achievements ranged well beyond the Channel. On 21 September 1952 she completed the Catalina Channel in 13 hours 47 minutes 32 seconds. The next year she swam Gibraltar, the Bosporus and the Dardanelles, alongside another successful English Channel crossing. A further England-to-France success followed in October 1955. Her work as a swimming coach and her repeated attempts place those records within a longer career of preparation, teaching and persistence."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Home city",
+      "value": "San Diego, California"
+    },
+    {
+      "label": "Lifespan",
+      "value": "1918–1995"
+    },
+    {
+      "label": "Occupations",
+      "value": "Typist and swimming coach"
+    },
+    {
+      "label": "Earlier employer",
+      "value": "Arabian American Oil Company"
+    },
+    {
+      "label": "Channel distinction",
+      "value": "First woman successful in both directions"
+    },
+    {
+      "label": "Catalina milestone",
+      "value": "Successful crossing · 21 September 1952"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First Channel success",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "13h 23m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Tuesday, 8 August 1950 · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Tuesday, 8 August 1950 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Both dates are explicit in the biography. No inspected source establishes clocks or their time standard.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "Dover coast, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Hall of Fame and museum agree; CSA explicitly says this swim was not CSA-observed."
+        },
+        {
+          "text": "International Swimming Hall of Fame: Florence Chadwick",
+          "url": "https://ishof.org/honoree/honoree-florence-chadwick/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum: Florence Chadwick biography",
+          "url": "https://www.dovermuseum.co.uk/Information-Resources/HPAC-Biographical/Florence-Chadwick-Biography.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel Swimming Association: Brenda Fisher historical record",
+          "url": "https://www.channelswimmingassociation.com/news/195/brenda-fisher-bem-induction-imshof-2023"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicit statement that Chadwick’s 1950 crossing was not CSA-observed.",
+          "label": "Supports"
+        },
+        {
+          "text": "A retrospective account, not an original observer report.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "chadwick-1950"
+    },
+    {
+      "title": "First woman England to France",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "16h 19m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Monday, 10 September 1951 · 22:30 · Museum photograph 2019-324 caption; clock standard unspecified",
+          "label": "Started"
+        },
+        {
+          "text": "Tuesday, 11 September 1951 · 14:40 · Same caption; clock standard unspecified",
+          "label": "Finished"
+        },
+        {
+          "text": "The caption’s clocks also fail to reconcile with either elapsed time if treated on one clock standard. No timezone conversion or correction is inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "St. Margaret’s Bay, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Sangatte, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA lists 16:19; museum caption supplies dates and clocks but states 16:22. No original observer log inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Chadwick 1951, record 2466",
+          "url": "https://www.channelswimmingassociation.com/swim/2466/florence-chadwick"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Recorded country, route and 1951 elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "The 16:19 time differs from the museum’s 16:22; no original observer log inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum photograph 2019-324: Chadwick, September 1951",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/chadwick-is-congratulated-by-her-father-at-dover-on-sept-11-1951-after-their-return-by-launch-from-sangatte"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published departure and arrival dates, clocks and shores.",
+          "label": "Supports"
+        },
+        {
+          "text": "Clock standard unstated; clocks and elapsed time are internally unreconciled.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Florence Chadwick biography",
+          "url": "https://www.dovermuseum.co.uk/Information-Resources/HPAC-Biographical/Florence-Chadwick-Biography.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "chadwick-1951"
+    },
+    {
+      "title": "Third England-to-France success",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Wednesday, 12 October 1955 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 55m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The source lists a swim date without identifying departure or arrival; clocks remain unconfirmed.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record corroborates route and duration; museum supplies the swim date."
+        },
+        {
+          "text": "Channel Swimming Association: Chadwick 1955, record 2472",
+          "url": "https://www.channelswimmingassociation.com/swim/2472/florence-chadwick"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum: Florence Chadwick biography",
+          "url": "https://www.dovermuseum.co.uk/Information-Resources/HPAC-Biographical/Florence-Chadwick-Biography.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "chadwick-1955"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 21 September 1952 (event date)"
+        },
+        {
+          "text": "Completed Catalina Island → mainland."
+        },
+        {
+          "text": "13h 47m 32s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF row 10 confirms her completion. She was not the first woman: the same register lists Myrtle Huddleston in 1927. ISHOF links this swimmer to the English Channel but its erroneous first-woman Catalina claim is excluded."
+        },
+        {
+          "text": "CCSF: successful Catalina Channel solo swims",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named individual rows: swim date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "The register date is not labelled departure or arrival; original observer paperwork was not inspected. Pre-1981 swims are retrospective entries.",
+          "label": "Limitations"
+        },
+        {
+          "text": "ISHOF: Florence Chadwick",
+          "url": "https://ishof.org/honoree/honoree-florence-chadwick/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identity bridge from her English Channel swims to Catalina and Gibraltar.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its first-woman Catalina claim is incorrect and is not adopted; CCSF lists Myrtle Huddleston in 1927.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "florence-chadwick-event-1-catalina-channel"
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1953 · exact day not confirmed"
+        },
+        {
+          "text": "Completed the Strait of Gibraltar swim."
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "ISHOF’s named career record explicitly lists Gibraltar in 1953 alongside her English Channel history. No exact day, time, route direction or original observer paperwork was established."
+        },
+        {
+          "text": "ISHOF: Florence Chadwick",
+          "url": "https://ishof.org/honoree/honoree-florence-chadwick/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identity bridge from her English Channel swims to Catalina and Gibraltar.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its first-woman Catalina claim is incorrect and is not adopted; CCSF lists Myrtle Huddleston in 1927.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "florence-chadwick-event-2-strait-of-gibraltar"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First Channel success",
+      "lines": [
+        {
+          "text": "8 August 1950"
+        },
+        {
+          "text": "France to England; women’s record."
+        }
+      ]
+    },
+    {
+      "title": "Reverse crossing",
+      "lines": [
+        {
+          "text": "10–11 September 1951"
+        },
+        {
+          "text": "First woman successful England to France."
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "1952"
+        },
+        {
+          "text": "Completed Catalina to the mainland in 13:47:32."
+        }
+      ]
+    },
+    {
+      "title": "International swims",
+      "lines": [
+        {
+          "text": "1953"
+        },
+        {
+          "text": "Channel, Gibraltar, Bosporus and Dardanelles."
+        }
+      ]
+    },
+    {
+      "title": "Another Channel record",
+      "lines": [
+        {
+          "text": "12 October 1955"
+        },
+        {
+          "text": "England-to-France time of 13h 55m."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Florence Chadwick?",
+      "value": "This profile includes 3 selected solo performances for Florence Chadwick. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Florence Chadwick’s featured English Channel swim?",
+      "value": "The featured swim started on Tuesday, 8 August 1950 and finished on Tuesday, 8 August 1950."
+    },
+    {
+      "label": "How long did Florence Chadwick’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 13 hours and 23 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "International Swimming Hall of Fame: Florence Chadwick",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-florence-chadwick/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identity bridge from her English Channel swims to Catalina and Gibraltar.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its first-woman Catalina claim is incorrect and is not adopted; CCSF lists Myrtle Huddleston in 1927.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Florence Chadwick biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Information-Resources/HPAC-Biographical/Florence-Chadwick-Biography.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Chadwick 1951, record 2466",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2466/florence-chadwick"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Recorded country, route and 1951 elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "The 16:19 time differs from the museum’s 16:22; no original observer log inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Chadwick 1955, record 2472",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2472/florence-chadwick"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum photograph 2019-324: Chadwick, September 1951",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/chadwick-is-congratulated-by-her-father-at-dover-on-sept-11-1951-after-their-return-by-launch-from-sangatte"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published departure and arrival dates, clocks and shores.",
+          "label": "Supports"
+        },
+        {
+          "text": "Clock standard unstated; clocks and elapsed time are internally unreconciled.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Brenda Fisher historical record",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/195/brenda-fisher-bem-induction-imshof-2023"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicit statement that Chadwick’s 1950 crossing was not CSA-observed.",
+          "label": "Supports"
+        },
+        {
+          "text": "A retrospective account, not an original observer report.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CCSF: successful Catalina Channel solo swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named individual rows: swim date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "The register date is not labelled departure or arrival; original observer paperwork was not inspected. Pre-1981 swims are retrospective entries.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First Channel success",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 8 August 1950"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "13h 23m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "chadwick-1950"
+    },
+    {
+      "title": "First woman England to France",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 10 September 1951 – Tuesday, 11 September 1951"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "16h 19m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "22:30 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "14:40 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "chadwick-1951"
+    },
+    {
+      "title": "Third England-to-France success",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 12 October 1955 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "13h 55m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "chadwick-1955"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 21 September 1952 (event date)"
+        },
+        {
+          "text": "Completed Catalina Island → mainland."
+        },
+        {
+          "text": "13h 47m 32s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "florence-chadwick-event-1-catalina-channel"
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1953 · exact day not confirmed"
+        },
+        {
+          "text": "Completed the Strait of Gibraltar swim."
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "florence-chadwick-event-2-strait-of-gibraltar"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-a359956e94487549f5a2"
+}

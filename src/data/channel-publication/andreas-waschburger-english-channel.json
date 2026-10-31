@@ -1,0 +1,553 @@
+{
+  "slug": "andreas-waschburger-english-channel",
+  "name": "Andreas Waschburger",
+  "country": "Germany",
+  "aliases": [],
+  "highlight": "England–France in 6:45:25 · 8 September 2023",
+  "biography": [
+    "Andreas Waschburger is a German open-water swimmer, born in Saarbrücken on 6 January 1987. His competitive career includes eighth place in the 10-kilometre marathon swim at the London 2012 Olympics. In the same year he won European silver medals at 5 and 10 kilometres, as well as a team bronze. His official biography lists SSG Saar Max Ritter as his club.",
+    "On Friday 8 September 2023 he swam from Shakespeare Beach in Kent to Cap Gris-Nez in France in 6 hours, 45 minutes and 25 seconds. Guinness records the performance and its ratification by the Channel Swimming & Piloting Federation. The swim was escorted by Michael Oram aboard Gallivant.",
+    "Waschburger subsequently continued his long-distance channel programme. His official September 2025 announcement records completion of Ocean’s Seven with a North Channel swim, extending a career that also includes ice-swimming competition."
+  ],
+  "flags": [
+    {
+      "code": "DE",
+      "label": "Germany",
+      "abbr": "GER"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "6 January 1987"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Saarbrücken, Germany"
+    },
+    {
+      "label": "Club",
+      "value": "SSG Saar Max Ritter"
+    },
+    {
+      "label": "Olympic result",
+      "value": "8th · 10km · London 2012"
+    },
+    {
+      "label": "Featured Channel time",
+      "value": "6h 45m 25s"
+    },
+    {
+      "label": "Ocean’s Seven",
+      "value": "Completed 4 September 2025 · athlete-reported"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "England-to-France crossing",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "The 2023 crossing improved on the 6h 55m men’s mark set by Trent Grimsey in 2012. This page records the dated performance rather than assuming a record can never change."
+        },
+        {
+          "text": "6h 45m 25s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Friday, 8 September 2023 · 07:02 · Guinness published clock; time zone not specified",
+          "label": "Started"
+        },
+        {
+          "text": "Friday, 8 September 2023 · 13:47 · Guinness published clock; time zone not specified",
+          "label": "Finished"
+        },
+        {
+          "text": "Guinness publishes start and arrival clocks to the minute without a time zone. They are reproduced as source clocks, not labelled as French local time. The 6:45:25 elapsed performance retains its separate second-level precision.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, Kent, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Gallivant",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "CS&PF ratification reported by Guinness and the athlete",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Water temperature of 18.3°C reported in the athlete’s announcement.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Guinness supplies the date, start and finish locations, elapsed time, minute-level clocks, pilot, escort boat and reported CS&PF ratification. The athlete’s announcement confirms the time and gives the water temperature. No original observer report has been inspected."
+        },
+        {
+          "text": "Guinness World Records: Andreas Waschburger’s 2023 crossing",
+          "url": "https://www.guinnessworldrecords.com/world-records/63415-fastest-crossing-of-the-english-channel-swimming-male"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Andreas Waschburger: official ratification announcement",
+          "url": "https://andreas-waschburger.de/index.php/2023/11/07/weltrekord-offiziell-bestatigt/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "waschburger-2023"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "London Olympics — men’s 10 km marathon",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Friday, 10 August 2012 (event date)"
+        },
+        {
+          "text": "The Serpentine, Hyde Park, London"
+        },
+        {
+          "text": "Finished eighth in 1:50:44.4."
+        },
+        {
+          "text": "10 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "8th — men’s final",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Olympedia’s final table, bib 10, records the result. Its athlete profile matches the birth date, Saarbrücken birthplace and SSG Saar Max Ritter club on Waschburger’s official Channel website; this is a substantive identity match."
+        },
+        {
+          "text": "Olympedia — London 2012 men’s 10 km",
+          "url": "https://www.olympedia.org/results/322372"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Final date, location and eighth-place result.",
+          "label": "Supports"
+        },
+        {
+          "text": "Olympedia — Andreas Waschburger",
+          "url": "https://www.olympedia.org/athletes/125918"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Biographical and club identity match.",
+          "label": "Supports"
+        },
+        {
+          "text": "Andreas Waschburger — official website",
+          "url": "https://andreas-waschburger.de/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel career; birth date, birthplace and club matching the Olympedia athlete.",
+          "label": "Supports"
+        }
+      ],
+      "id": "andreas-waschburger-event-1-london-olympics-mens-10-km-marathon"
+    },
+    {
+      "title": "North Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 4 September 2025 (event date)"
+        },
+        {
+          "text": "The Gobbins, Northern Ireland, to Knock Bay, Scotland"
+        },
+        {
+          "text": "Completed the Gobbins-to-Knock Bay crossing in a time his team reported as a course record."
+        },
+        {
+          "text": "8h 11m 12s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Infinity row 182 corroborates the date and time. His official account describes ILDSA observation and a 03:20 local start; no observation log was inspected."
+        },
+        {
+          "text": "Infinity Channel Swimming — solo register",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected dated rows, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "Operator register; no observer manuscript inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Andreas Waschburger — North Channel completion account",
+          "url": "https://andreas-waschburger.de/index.php/2025/09/08/andreas-waschburger-schreibt-doppelt-geschichte-streckenrekord-im-nordkanal-und-gesamtweltrekord-der-oceans-seven/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "4 September 2025 swim, route, time and reported ILDSA observation.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published 8 September; the swim itself is explicitly dated 4 September.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "andreas-waschburger-event-2-north-channel"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "London Olympic Games",
+      "lines": [
+        {
+          "text": "2012"
+        },
+        {
+          "text": "Finished eighth in the men’s 10km marathon swim."
+        }
+      ]
+    },
+    {
+      "title": "European championship medals",
+      "lines": [
+        {
+          "text": "2012"
+        },
+        {
+          "text": "Silver at 5km and 10km, plus team bronze."
+        }
+      ]
+    },
+    {
+      "title": "English Channel performance",
+      "lines": [
+        {
+          "text": "8 September 2023"
+        },
+        {
+          "text": "England to France in 6h 45m 25s."
+        }
+      ]
+    },
+    {
+      "title": "Ice-swimming success",
+      "lines": [
+        {
+          "text": "2024"
+        },
+        {
+          "text": "His official timeline records European titles at 500m and 1,000m freestyle."
+        }
+      ]
+    },
+    {
+      "title": "Ocean’s Seven complete",
+      "lines": [
+        {
+          "text": "4 September 2025"
+        },
+        {
+          "text": "His official announcement reports a North Channel time of 8h 11m 12s."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Through High & Low: the Channel swim documentary",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://andreas-waschburger.de/index.php/2025/03/20/neuer-film-online-trough-high-low-a-swimmers-record-breaking-english-channel-journey/"
+        },
+        {
+          "text": "Documentary"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Andreas Waschburger?",
+      "value": "This profile includes 1 selected solo performance for Andreas Waschburger. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Andreas Waschburger’s featured English Channel swim?",
+      "value": "The featured swim started on Friday, 8 September 2023 and finished on Friday, 8 September 2023."
+    },
+    {
+      "label": "How long did Andreas Waschburger’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 6 hours, 45 minutes and 25 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Andreas Waschburger: official ratification announcement",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://andreas-waschburger.de/index.php/2023/11/07/weltrekord-offiziell-bestatigt/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: Andreas Waschburger’s 2023 crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/63415-fastest-crossing-of-the-english-channel-swimming-male"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Andreas Waschburger: official biography and career timeline",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://andreas-waschburger.de/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel career; birth date, birthplace and club matching the Olympedia athlete.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Andreas Waschburger: Ocean’s Seven completion announcement",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://andreas-waschburger.de/index.php/2025/09/08/andreas-waschburger-schreibt-doppelt-geschichte-streckenrekord-im-nordkanal-und-gesamtweltrekord-der-oceans-seven/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "4 September 2025 swim, route, time and reported ILDSA observation.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published 8 September; the swim itself is explicitly dated 4 September.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Olympedia — London 2012 men’s 10 km",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.olympedia.org/results/322372"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Final date, location and eighth-place result.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Olympedia — Andreas Waschburger",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.olympedia.org/athletes/125918"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Biographical and club identity match.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Infinity Channel Swimming — solo register",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected dated rows, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "Operator register; no observer manuscript inspected.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "England-to-France crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 8 September 2023"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "6h 45m 25s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "07:02 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "13:47 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "waschburger-2023"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "London Olympics — men’s 10 km marathon",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Friday, 10 August 2012 (event date)"
+        },
+        {
+          "text": "The Serpentine, Hyde Park, London"
+        },
+        {
+          "text": "Finished eighth in 1:50:44.4."
+        },
+        {
+          "text": "10 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "8th — men’s final",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "andreas-waschburger-event-1-london-olympics-mens-10-km-marathon"
+    },
+    {
+      "title": "North Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 4 September 2025 (event date)"
+        },
+        {
+          "text": "The Gobbins, Northern Ireland, to Knock Bay, Scotland"
+        },
+        {
+          "text": "Completed the Gobbins-to-Knock Bay crossing in a time his team reported as a course record."
+        },
+        {
+          "text": "8h 11m 12s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "andreas-waschburger-event-2-north-channel"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-2357057f4d5ed6735a3c"
+}

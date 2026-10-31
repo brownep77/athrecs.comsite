@@ -1,0 +1,703 @@
+{
+  "slug": "susie-maroney-english-channel",
+  "name": "Susie Maroney",
+  "country": "Australia",
+  "aliases": [
+    "Susan Jean Maroney",
+    "Suzie Maroney"
+  ],
+  "highlight": "Channel soloist at fifteen · 1991 women’s double-crossing record",
+  "biography": [
+    "Susie Maroney emerged from Sydney swimming as a teenager with an appetite for long distances. Born in 1974, she was competing in swimming carnivals at seven and finished second in an Australian 16-kilometre marathon at fourteen. Her early international career soon included the English Channel and major professional open-water races.",
+    "In 1990, aged fifteen, she swam from England to France in eight hours twenty-nine minutes. Her performance earned the season’s fastest-solo and fastest-woman awards from the Channel Swimming Association. She returned in 1991 for a continuous England–France–England swim, completing the double in the association’s recorded seventeen hours fourteen minutes and setting the women’s record.",
+    "Maroney’s swimming also took her around Manhattan and onto the international marathon circuit. Later, her ambitions expanded to much longer Caribbean routes. She completed Cuba to Florida in 1997 and Mexico to Cuba in 1998 using a protective shark cage; the latter also involved a stinger suit. These assisted ocean projects form a separate part of her career from her Channel performances.",
+    "Awarded the Medal of the Order of Australia in 1993, she retired from marathon swimming in 2003. Her later public work has included speaking and charitable ambassador roles. She entered the International Marathon Swimming Hall of Fame in 2005, recognising a career that combined fast competitive swims with unusually long ocean expeditions."
+  ],
+  "flags": [
+    {
+      "code": "AU",
+      "label": "Australia",
+      "abbr": "AUS"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Recorded full name",
+      "value": "Susan Jean Maroney"
+    },
+    {
+      "label": "Birth year",
+      "value": "1974"
+    },
+    {
+      "label": "First Channel age",
+      "value": "15, in 1990"
+    },
+    {
+      "label": "1990 solo",
+      "value": "England to France, 8:29"
+    },
+    {
+      "label": "1991 double",
+      "value": "England–France–England, CSA time 17:14"
+    },
+    {
+      "label": "National honour",
+      "value": "Medal of the Order of Australia, 1993"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Marathon Swimming Hall of Fame, class of 2005"
+    },
+    {
+      "label": "Ocean-swim distinction",
+      "value": "Her later Caribbean swims used protective equipment, including a shark cage."
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First Channel solo, aged fifteen",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Earned CSA’s fastest-solo and fastest-woman awards for 1990. ABC later republished archival footage of her French landing."
+        },
+        {
+          "text": "Tuesday, 31 July 1990 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "8h 29m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover.UK.com supplies the swim date without identifying its start/finish role. No departure or arrival clock was located.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2855 confirms Australia, the one-way route, 1990 and 8:29. Dover.UK.com supplies 31 July. ABC’s 2016 programme identifies archival coverage of the fifteen-year-old finishing in 8:29. Pilot, escort boat and observer remain unverified."
+        },
+        {
+          "text": "Channel Swimming Association: Susie Maroney, 1990",
+          "url": "https://www.channelswimmingassociation.com/swim/2855/susie-maroney"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.UK.com: Susie Maroney, 31 July 1990",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1990-07-31/susie-maroney"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "ABC 7.30: Susie Maroney interview and archival Channel footage, 11 March 2016",
+          "url": "https://www.abc.net.au/news/2016-03-11/susie-maroney-encourages-positive-health-messages/7241606"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "maroney-1990"
+    },
+    {
+      "title": "Women’s double-crossing record",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "A single continuous two-way attempt; its two legs are not counted as separate attempts."
+        },
+        {
+          "text": "17h 14m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover.UK.com dates the swim 22 July 1991; Guinness gives 23 July. Neither establishes start and finish phases, so no exact calendar day is assigned here. CSA and Guinness give 17:14; the Hall of Fame biography gives 17:15. No clock times or leg splits were verified.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2449 confirms the successful two-way swim and 17:14, also supported by Guinness. The conflicting day and Hall of Fame minute remain explicit. This is a source reconciliation, not a new ratification. No original observer log or pilot details were located."
+        },
+        {
+          "text": "Channel Swimming Association: Susie Maroney, 1991",
+          "url": "https://www.channelswimmingassociation.com/swim/2449/susie-maroney"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.UK.com: Susie Maroney, 22 July 1991",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1991-07-22/susie-maroney"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Guinness World Records: fastest female double Channel crossing",
+          "url": "https://www.guinnessworldrecords.com/world-records/86245-fastest-crossing-of-the-english-channel-swimming-double-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Susie Maroney",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_38197538d0bc42b8af5ed10a89bad841.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "maroney-1991-double"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Manhattan Island Marathon Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Sunday, 19 August 1990 (event date)"
+        },
+        {
+          "text": "Manhattan, New York, USA"
+        },
+        {
+          "text": "Won the overall race."
+        },
+        {
+          "text": "7h 0m 27s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1st overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "NYOW row 239 agrees with the IMSHOF biography’s 1990 overall win and Channel identity. A conflicting secondary summary is excluded."
+        },
+        {
+          "text": "New York Open Water: historical Manhattan results",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Retrospective table; selected historical rows have no sanctioning-body entry.",
+          "label": "Limitations"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Susie Maroney",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_38197538d0bc42b8af5ed10a89bad841.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel swimmer and overall Manhattan wins in 1990 and 1994.",
+          "label": "Supports"
+        }
+      ],
+      "id": "susie-maroney-event-1-manhattan-island-marathon-swim"
+    },
+    {
+      "title": "Manhattan Island Marathon Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 20 August 1994 (event date)"
+        },
+        {
+          "text": "Manhattan, New York, USA"
+        },
+        {
+          "text": "Won the overall race."
+        },
+        {
+          "text": "7h 8m 10s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1st overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "NYOW row 331; IMSHOF independently identifies the 1994 overall win and the same Australian Channel swimmer. No historical sanction entry."
+        },
+        {
+          "text": "New York Open Water: historical Manhattan results",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Retrospective table; selected historical rows have no sanctioning-body entry.",
+          "label": "Limitations"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Susie Maroney",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_38197538d0bc42b8af5ed10a89bad841.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel swimmer and overall Manhattan wins in 1990 and 1994.",
+          "label": "Supports"
+        }
+      ],
+      "id": "susie-maroney-event-2-manhattan-island-marathon-swim"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First Channel solo",
+      "lines": [
+        {
+          "text": "31 July 1990"
+        },
+        {
+          "text": "Published swim record dates her 8:29 England-to-France crossing to this day."
+        }
+      ]
+    },
+    {
+      "title": "Women’s double-crossing record",
+      "lines": [
+        {
+          "text": "July 1991"
+        },
+        {
+          "text": "Completed England–France–England in the CSA-listed 17:14; sources disagree on the calendar day."
+        }
+      ]
+    },
+    {
+      "title": "Australian honour",
+      "lines": [
+        {
+          "text": "1993"
+        },
+        {
+          "text": "Received the Medal of the Order of Australia for services to sport."
+        }
+      ]
+    },
+    {
+      "title": "Cuba to Florida",
+      "lines": [
+        {
+          "text": "1997"
+        },
+        {
+          "text": "Completed the route using a protective shark cage."
+        }
+      ]
+    },
+    {
+      "title": "Mexico to Cuba",
+      "lines": [
+        {
+          "text": "1998"
+        },
+        {
+          "text": "Completed an assisted ocean swim reported at 38:33, using a shark cage and stinger suit."
+        }
+      ]
+    },
+    {
+      "title": "Marathon retirement",
+      "lines": [
+        {
+          "text": "2003"
+        },
+        {
+          "text": "Retired after a career spanning Channel swims, international races and Caribbean expeditions."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame induction",
+      "lines": [
+        {
+          "text": "2005"
+        },
+        {
+          "text": "Recognised by the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "ABC 7.30 (2016) — interview including archival Channel landing footage",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.abc.net.au/news/2016-03-11/susie-maroney-encourages-positive-health-messages/7241606"
+        },
+        {
+          "text": "Trailer and media"
+        },
+        {
+          "text": "Publisher or archive page inspected. This link is not an original continuous observer recording; video playback was not independently checked."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Susie Is A Fish (1996) — Screen Australia documentary catalogue, not a playback link",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.screenaustralia.gov.au/screen-guide/susie-is-a-fish-11110/"
+        },
+        {
+          "text": "Documentary"
+        },
+        {
+          "text": "Publisher or archive page inspected. This link is not an original continuous observer recording; video playback was not independently checked."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Susie Maroney?",
+      "value": "This profile includes 2 selected solo performances for Susie Maroney. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Susie Maroney’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Tuesday, 31 July 1990. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Susie Maroney’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 8 hours and 29 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Susie Maroney, 1990",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2855/susie-maroney"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Susie Maroney, 1991",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2449/susie-maroney"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Susie Maroney",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_38197538d0bc42b8af5ed10a89bad841.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel swimmer and overall Manhattan wins in 1990 and 1994.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Australian Women's Register: Susan Jean Maroney",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.womenaustralia.info/entries/maroney-susan-jean-susie/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "ICMI: Susie Maroney biography and honours",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.icmi.com.au/susie-maroney/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: fastest female double Channel crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/86245-fastest-crossing-of-the-english-channel-swimming-double-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "ABC 7.30: Susie Maroney interview and archival Channel footage, 11 March 2016",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.abc.net.au/news/2016-03-11/susie-maroney-encourages-positive-health-messages/7241606"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Screen Australia: Susie Is A Fish, documentary catalogue",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.screenaustralia.gov.au/screen-guide/susie-is-a-fish-11110/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water: historical Manhattan results",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Retrospective table; selected historical rows have no sanctioning-body entry.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First Channel solo, aged fifteen",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 31 July 1990 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "8h 29m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "maroney-1990"
+    },
+    {
+      "title": "Women’s double-crossing record",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1991 · exact day not recorded here"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "17h 14m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "maroney-1991-double"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Manhattan Island Marathon Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Sunday, 19 August 1990 (event date)"
+        },
+        {
+          "text": "Manhattan, New York, USA"
+        },
+        {
+          "text": "Won the overall race."
+        },
+        {
+          "text": "7h 0m 27s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1st overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "susie-maroney-event-1-manhattan-island-marathon-swim"
+    },
+    {
+      "title": "Manhattan Island Marathon Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 20 August 1994 (event date)"
+        },
+        {
+          "text": "Manhattan, New York, USA"
+        },
+        {
+          "text": "Won the overall race."
+        },
+        {
+          "text": "7h 8m 10s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1st overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "susie-maroney-event-2-manhattan-island-marathon-swim"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-3126f5d8d8fec1ac6f0e"
+}

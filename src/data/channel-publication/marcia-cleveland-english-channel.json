@@ -1,0 +1,687 @@
+{
+  "slug": "marcia-cleveland-english-channel",
+  "name": "Marcia Cleveland",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "1994 Dover Solo author · 2003 two-way relay · Oceans Seven in 2025",
+  "biography": [
+    "Marcia Cleveland swam for Greenwich High School in Connecticut and continued swimming at Yale. She turned to open water in her twenties. Manhattan Island gave her an early opportunity to race a marathon distance. To prepare for the English Channel, she trained around her working day in New York and spent ten hours in Lake Sunapee, New Hampshire, in September 1993.",
+    "On 29 July 1994, Cleveland entered the water beneath Abbot Cliff before dawn. She reached the rocks at Cap Gris Nez in 9 hours 44 minutes. Her book Dover Solo grew out of the preparations as well as the crossing itself. Cleveland later returned to the Channel as a crew member and relay swimmer. In 2003 she and five teammates took 20 hours 18 minutes to swim from England to France and back.",
+    "Her Catalina Channel swim in 2005 completed the Triple Crown with Manhattan and the English Channel. Twenty years later she finished the Oceans Seven by crossing the Strait of Gibraltar alongside her daughter, Julia Cleveland Green. Cleveland has also coached masters swimmers, taught adults to swim and organised safety swimmers and clinics for open-water events in Chicago."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "abbr": "USA",
+      "label": "United States"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Source country",
+      "value": "United States in the CSA's individual swim record."
+    },
+    {
+      "label": "Channel preparation",
+      "value": "Ten-hour training swim in Lake Sunapee in September 1993."
+    },
+    {
+      "label": "1994 crossing",
+      "value": "England to France in 9:44 at age 30 in the individual archive."
+    },
+    {
+      "label": "Author",
+      "value": "Dover Solo: Swimming the English Channel."
+    },
+    {
+      "label": "Coaching",
+      "value": "US Masters Swimming Level 4 coach and Illinois Masters' 2022 Coach of the Year."
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed at Gibraltar on 20 May 2025."
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cleveland-1994-english-channel-solo",
+      "title": "Abbot Cliff to Cap Gris Nez",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "9h 44m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Friday, 29 July 1994 · 04:09:00 · Departure field of CS&PF record 443576.",
+          "label": "Started"
+        },
+        {
+          "text": "Friday, 29 July 1994 · 13:53:00 · Arrival field of CS&PF record 443576.",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Below Abbot Cliff, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Cap Gris Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "N. Trusty",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful individual result 2930 gives United States, one-way England to France, 1994 and 09:44. CS&PF archive record 443576 credits CSA and labels the departure and arrival readings. USMS explicitly dates Cleveland's entry below Abbot Cliff to 29 July. Her retrospective dates the completed swim to 29 July and identifies the landing at Cap Gris Nez. No time zone is stated."
+        },
+        {
+          "text": "CSA: Marcia Cleveland, 1994",
+          "url": "https://www.channelswimmingassociation.com/swim/2930/marcia-cleveland"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful result 2930 names the United States swimmer, solo England to France, 1994, 09:44.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year and minute elapsed precision.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF archive: Marcia Cleveland, 29 July 1994",
+          "url": "https://cspf.co.uk/swim/443576"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443576 names the swimmer aged 30, the CSA, departure 04:09:00, arrival 13:53:00, Michael Oram, Aegean Blue and N. Trusty.",
+          "label": "Supports"
+        },
+        {
+          "text": "The archive displays elapsed time as 09:44:00. CSA publishes 09:44.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Marcia Cleveland: The English Channel",
+          "url": "https://www.doversolo.com/writeups/1994-the-english-channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Cleveland dates her successful swim to 29 July 1994 and identifies the landing at Cap Gris Nez.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical ordinal differs from USMS. Neither ordinal is used.",
+          "label": "Limitations"
+        },
+        {
+          "text": "United States Masters Swimming: A Portrait in Teamwork",
+          "url": "https://www.usms.org/fitness-and-training/articles-and-videos/articles/a-portrait-in-teamwork?Oldid=1589"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Swimmer interview dates her departure below Abbot Cliff to 29 July 1994 and describes training, the dark start and her finish in France.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical ordinal and graduation-year wording are omitted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "id": "cleveland-2003-force-six-america-relay",
+      "title": "Force Six America two-way relay",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Six-person relay. The 20:18:00 is the team's combined time for both legs.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Sunday, 20 July 2003 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "20h 18m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Team elapsed time"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Relay · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Mike Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Frank Richards",
+          "label": "Official observers"
+        },
+        {
+          "text": "Force Six America",
+          "label": "Relay team"
+        },
+        {
+          "text": "Scott Lautman · Marcia Cleveland · Marcella MacDonald · Cristian Vergara · Henry Eckstein · Vince Herring",
+          "label": "Team members"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "10h 26m 0s",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "9h 52m 0s",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF's 2003 relay row names Force 6 America (6), 20 July, Mike Oram / Aegean Blue and both team legs. Dover's individual Force Six America entry names all six, with Cleveland second and Marcella MacDonald third on its roster. Cleveland's own swim list separately identifies her 2003 two-way relay. The annual list is subject to a general ratification disclaimer."
+        },
+        {
+          "text": "CS&PF successful swims: 2003 relay results",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2003"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "20 July two-way relay row lists Force 6 America (6), Mike Oram / Aegean Blue, 10:26:00 outbound and 9:52:00 return, 20:18:00 combined.",
+          "label": "Supports"
+        },
+        {
+          "text": "This annual table does not supply a committee ratification decision.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover.UK.com: Force Six America, 20 July 2003",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2003-07-20/force-six-america"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual relay entry identifies the complete six-person roster, both legs, pilot, boat and observer Frank Richards.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dover spells out Six. The CS&PF prints Force 6 America.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Marcia Cleveland: selected swims",
+          "url": "https://www.doversolo.com/swims.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete lists solo, relay and crewing roles separately. Her 2003 two-way relay is 20:18. Manhattan, Catalina and 20 May 2025 Gibraltar supply career milestones.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some ranking and record descriptions are dated. Only supported achievements are used.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Lake Sunapee preparation",
+      "lines": [
+        {
+          "text": "1993-09"
+        },
+        {
+          "text": "Swam for ten hours in preparation for the Channel."
+        }
+      ]
+    },
+    {
+      "title": "English Channel solo",
+      "lines": [
+        {
+          "text": "1994-07-29"
+        },
+        {
+          "text": "Reached Cap Gris Nez after leaving England below Abbot Cliff."
+        }
+      ]
+    },
+    {
+      "title": "Two-way Channel relay",
+      "lines": [
+        {
+          "text": "2003-07-20"
+        },
+        {
+          "text": "Swam with the six members of Force Six America on the return crossing."
+        }
+      ]
+    },
+    {
+      "title": "Triple Crown",
+      "lines": [
+        {
+          "text": "2005"
+        },
+        {
+          "text": "Her Catalina crossing completed the set with Manhattan and the English Channel."
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "2020"
+        },
+        {
+          "text": "Selected as an Honor Swimmer in the class of 2020."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven",
+      "lines": [
+        {
+          "text": "2025-05-20"
+        },
+        {
+          "text": "Completed the series in the Strait of Gibraltar alongside her daughter."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Marcia Cleveland — author and swimmer",
+      "lines": [
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://www.doversolo.com/about.html"
+        },
+        {
+          "text": "Cleveland's biographical page on her Dover Solo website."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Marcia Cleveland's English Channel account",
+      "lines": [
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://www.doversolo.com/writeups/1994-the-english-channel"
+        },
+        {
+          "text": "Her account includes labelled photographs of the crossing and finish."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Marcia Cleveland?",
+      "value": "The profile includes 1 selected solo performance and 1 selected relay performance. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was the first listed Channel swim?",
+      "value": "Departure is recorded on Friday, 29 July 1994. Completion is recorded on Friday, 29 July 1994."
+    },
+    {
+      "label": "How long did that swim take?",
+      "value": "The recorded 1-way solo time is 9h 44m."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Marcia Cleveland, 1994",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2930/marcia-cleveland"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful result 2930 names the United States swimmer, solo England to France, 1994, 09:44.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year and minute elapsed precision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF archive: Marcia Cleveland, 29 July 1994",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443576"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443576 names the swimmer aged 30, the CSA, departure 04:09:00, arrival 13:53:00, Michael Oram, Aegean Blue and N. Trusty.",
+          "label": "Supports"
+        },
+        {
+          "text": "The archive displays elapsed time as 09:44:00. CSA publishes 09:44.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Marcia Cleveland: The English Channel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.doversolo.com/writeups/1994-the-english-channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Cleveland dates her successful swim to 29 July 1994 and identifies the landing at Cap Gris Nez.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical ordinal differs from USMS. Neither ordinal is used.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "United States Masters Swimming: A Portrait in Teamwork",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.usms.org/fitness-and-training/articles-and-videos/articles/a-portrait-in-teamwork?Oldid=1589"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Swimmer interview dates her departure below Abbot Cliff to 29 July 1994 and describes training, the dark start and her finish in France.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical ordinal and graduation-year wording are omitted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Solo: About Marcia Cleveland",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.doversolo.com/about.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete biography describes age-group and college swimming, the transition to open water, coaching and induction in the 2020 IMSHOF class.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Marcia Cleveland: selected swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.doversolo.com/swims.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete lists solo, relay and crewing roles separately. Her 2003 two-way relay is 20:18. Manhattan, Catalina and 20 May 2025 Gibraltar supply career milestones.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some ranking and record descriptions are dated. Only supported achievements are used.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Illinois Masters Swimming Association: 2024 Hall of Fame biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ilmsa.com/hall-of-fame/2024-2/marcia-cleveland/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Documents open-water coaching and safety programmes, Level 4 USMS certification, 2022 coach award and 2024 Illinois recognition.",
+          "label": "Supports"
+        },
+        {
+          "text": "The profile's record labels refer to its induction period.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF successful swims: 2003 relay results",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2003"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "20 July two-way relay row lists Force 6 America (6), Mike Oram / Aegean Blue, 10:26:00 outbound and 9:52:00 return, 20:18:00 combined.",
+          "label": "Supports"
+        },
+        {
+          "text": "This annual table does not supply a committee ratification decision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Force Six America, 20 July 2003",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2003-07-20/force-six-america"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual relay entry identifies the complete six-person roster, both legs, pilot, boat and observer Frank Richards.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dover spells out Six. The CS&PF prints Force 6 America.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cleveland-1994-english-channel-solo",
+      "title": "Abbot Cliff to Cap Gris Nez",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Friday, 29 July 1994 (departure)"
+        },
+        {
+          "text": "Friday, 29 July 1994 (completion)"
+        },
+        {
+          "text": "9h 44m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "04:09:00 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "13:53:00 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    },
+    {
+      "id": "cleveland-2003-force-six-america-relay",
+      "title": "Force Six America two-way relay",
+      "lines": [
+        {
+          "text": "Relay · 2-way"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "Sunday, 20 July 2003 (recorded swim date)"
+        },
+        {
+          "text": "20h 18m 0s",
+          "label": "Team elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Scott Lautman · Marcia Cleveland · Marcella MacDonald · Cristian Vergara · Henry Eckstein · Vince Herring",
+          "label": "Force Six America"
+        },
+        {
+          "text": "Six swimmers shared both legs. The 20h 18m 0s is the team’s elapsed time.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "10h 26m 0s",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "9h 52m 0s",
+          "label": "Leg 2 · France → England"
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-bb8aa3653a60b190a64c"
+}

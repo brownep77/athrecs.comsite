@@ -1,0 +1,407 @@
+{
+  "slug": "attila-manyoki-english-channel",
+  "name": "Attila Mányoki",
+  "country": "Hungary",
+  "aliases": [
+    "Attila Manyoki",
+    "Mányoki Attila"
+  ],
+  "highlight": "2013 Channel solo · CSA fastest-man season award",
+  "biography": [
+    "Attila Mányoki is a Hungarian marathon swimmer, born in Zalaegerszeg on 3 September 1973. He joined his local swimming club in 1980, discovered open-water racing at a Balatonfüred-to-Siófok event in 1989 and began international competition in 1991. From 1993 his career included World Cup races across a wide range of conditions. He later trained under Nikos Gemelos and completed a 79.6-kilometre lengthwise swim of Lake Balaton in 2008.",
+    "The English Channel became the first stage of his Oceans Seven programme on 20 August 2013. The CSA's successful-swim entry records an England-to-France solo in 10 hours 47 minutes and its Fastest Swim by a Man award for that season. The Hungarian Olympic Committee's contemporary report agrees with that time and identifies Dover and Tardinghen as the endpoints. Mányoki's own biography reports 10 hours 48 minutes, so the difference is preserved rather than silently corrected.",
+    "His subsequent channel programme included Tsugaru, Molokai and Catalina before completion of the Oceans Seven in 2019. IMSHOF describes the combined speed record he established then as lasting until 2023. Its updated biography also records a Triple Crown completion in 2024. Mányoki had already entered the Hall of Fame as an Honor Swimmer in the Class of 2016."
+  ],
+  "flags": [
+    {
+      "code": "HU",
+      "label": "Hungary",
+      "abbr": "HUN"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Hungary — CSA individual record"
+    },
+    {
+      "label": "Born",
+      "value": "3 September 1973, Zalaegerszeg"
+    },
+    {
+      "label": "Open-water beginnings",
+      "value": "Balatonfüred-to-Siófok race, 1989"
+    },
+    {
+      "label": "Channel honour",
+      "value": "CSA Fastest Swim by a Man, 2013 season"
+    },
+    {
+      "label": "Selected Channel time",
+      "value": "CSA 10:47; athlete biography 10:48"
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed in 2019"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "IMSHOF Honor Swimmer, Class of 2016"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo starting Oceans Seven",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CSA and the Hungarian Olympic Committee report 10:47; Mányoki's own biography reports 10:48."
+        },
+        {
+          "text": "Tuesday, 20 August 2013 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 47m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The date is supplied by the athlete's Oceans Seven account and the Hungarian Olympic Committee report. CSA displays only 2013. No start or finish clock is established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Tardinghen, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 3433, Attila Manyoki 2013, supplies Hungary, solo one-way England to France, 10:47 and the CSA season award. The Hungarian Olympic Committee's 5 November 2013 report, final factual paragraph, supplies 20 August and Dover–Tardinghen with 10:47. The athlete's Magamról paragraph beginning 2013 augusztus 20-án gives 10:48. Published CSA recognition was checked, but the alternative athlete time remains unresolved."
+        },
+        {
+          "text": "CSA: Attila Manyoki, 2013, record 3433",
+          "url": "https://www.channelswimmingassociation.com/swim/3433/attila-manyoki"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful result: Hungary, solo England to France, 2013, 10:47 and Fastest Swim by a Man award.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA supplies only the year; the full swim date comes from the athlete and Hungarian Olympic Committee. Published decision inspected, not an observer log.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Mányoki Attila: Magamról, athlete biography",
+          "url": "https://manyokiattila.hu/magamrol.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person biography: birth on 3 September 1973 in Zalaegerszeg, swimming development, 2008 Balaton crossing, 20 August 2013 Channel swim, 2016 Hall of Fame and 2019 Oceans Seven completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Reports the English Channel time as 10 hours 48 minutes, differing from CSA's 10:47.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Mányoki Attila: Ocean's Seven",
+          "url": "https://manyokiattila.hu/kihivasok/ocean-s-seven.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel section identifies 20 August 2013 as the first successful stage and scopes the fastest-man honour to CSA's 2013 season.",
+          "label": "Supports"
+        },
+        {
+          "text": "Hungarian Olympic Committee: Mányoki's 2013 Channel award",
+          "url": "https://olimpia.hu/manyoki-attila-az-ev-leggyorsabb-csatorna-atuszoja"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "5 November 2013 report, paragraphs 1–3: Hungarian athlete, CSA season award, 20 August swim from Dover to Tardinghen in 10:47.",
+          "label": "Supports"
+        },
+        {
+          "text": "Committee-hosted MTI report; corroboration, not an original CSA observer log.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "attila-manyoki-2013"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Open-water racing begins",
+      "lines": [
+        {
+          "text": "1989"
+        },
+        {
+          "text": "His own biography identifies the Balatonfüred-to-Siófok race as the turning point."
+        }
+      ]
+    },
+    {
+      "title": "Length of Lake Balaton",
+      "lines": [
+        {
+          "text": "2008"
+        },
+        {
+          "text": "Completed the Balatonkenese-to-Keszthely swim."
+        }
+      ]
+    },
+    {
+      "title": "English Channel solo",
+      "lines": [
+        {
+          "text": "Tuesday, 20 August 2013"
+        },
+        {
+          "text": "Completed the first stage of his Oceans Seven; the CSA and athlete times differ by one minute."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame class",
+      "lines": [
+        {
+          "text": "2016"
+        },
+        {
+          "text": "Recognised as an IMSHOF Honor Swimmer."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven completed",
+      "lines": [
+        {
+          "text": "2019"
+        },
+        {
+          "text": "Completed the seven-channel programme; IMSHOF credits him with the combined speed record that lasted until 2023."
+        }
+      ]
+    },
+    {
+      "title": "Triple Crown completed",
+      "lines": [
+        {
+          "text": "2024"
+        },
+        {
+          "text": "The updated IMSHOF biography records this further milestone."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Mányoki Attila — athlete biography",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://manyokiattila.hu/magamrol.html"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "External first-person career biography in Hungarian."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Attila Mányoki?",
+      "value": "This profile includes 1 selected solo performance for Attila Mányoki. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Attila Mányoki’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Tuesday, 20 August 2013. The source does not establish whether that date means departure or arrival. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Attila Mányoki’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 10 hours and 47 minutes. CSA and the Hungarian Olympic Committee report 10:47; Mányoki's own biography reports 10:48."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Attila Manyoki, 2013, record 3433",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3433/attila-manyoki"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful result: Hungary, solo England to France, 2013, 10:47 and Fastest Swim by a Man award.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA supplies only the year; the full swim date comes from the athlete and Hungarian Olympic Committee. Published decision inspected, not an observer log.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Mányoki Attila: Magamról, athlete biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://manyokiattila.hu/magamrol.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person biography: birth on 3 September 1973 in Zalaegerszeg, swimming development, 2008 Balaton crossing, 20 August 2013 Channel swim, 2016 Hall of Fame and 2019 Oceans Seven completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Reports the English Channel time as 10 hours 48 minutes, differing from CSA's 10:47.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Mányoki Attila: Ocean's Seven",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://manyokiattila.hu/kihivasok/ocean-s-seven.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel section identifies 20 August 2013 as the first successful stage and scopes the fastest-man honour to CSA's 2013 season.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "IMSHOF: Attila Mányoki biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_e6e70540ea87478998158aae3f72af81.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Pages 1–2: Hungary, Class of 2016, international racing, Oceans Seven completed in 2019 and Triple Crown in 2024; record durations are historical.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Hungarian Olympic Committee: Mányoki's 2013 Channel award",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://olimpia.hu/manyoki-attila-az-ev-leggyorsabb-csatorna-atuszoja"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "5 November 2013 report, paragraphs 1–3: Hungarian athlete, CSA season award, 20 August swim from Dover to Tardinghen in 10:47.",
+          "label": "Supports"
+        },
+        {
+          "text": "Committee-hosted MTI report; corroboration, not an original CSA observer log.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo starting Oceans Seven",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 20 August 2013 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "CSA and the Hungarian Olympic Committee report 10:47; Mányoki's own biography reports 10:48."
+        },
+        {
+          "text": "10h 47m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "attila-manyoki-2013"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-0b7a02febf5919b0bb93"
+}

@@ -112,6 +112,8 @@ import { Route as RacesPlacesSplatRouteImport } from './routes/races/places/$'
 import { Route as RunningRacesSlugRouteImport } from './routes/running/races/$slug'
 import { Route as RunningSeriesSeriesRouteImport } from './routes/running/series/$series'
 import { Route as RunningUltramarathonsSlugRouteImport } from './routes/running/ultramarathons/$slug'
+import { Route as SwimmingEnglishChannelIndexRouteImport } from './routes/swimming/english-channel/index'
+import { Route as SwimmingEnglishChannelSlugRouteImport } from './routes/swimming/english-channel/$slug'
 import { Route as LanguageCountryRacesIndexRouteImport } from './routes/$language/$country/races/index'
 import { Route as LanguageCountryRacesSlugRouteImport } from './routes/$language/$country/races/$slug'
 import { Route as ApiEventsSlugOfficialEntryRouteImport } from './routes/api/events/$slug/official-entry'
@@ -638,6 +640,18 @@ const RunningUltramarathonsSlugRoute =
     path: '/running/ultramarathons/$slug',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SwimmingEnglishChannelIndexRoute =
+  SwimmingEnglishChannelIndexRouteImport.update({
+    id: '/swimming/english-channel/',
+    path: '/swimming/english-channel/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SwimmingEnglishChannelSlugRoute =
+  SwimmingEnglishChannelSlugRouteImport.update({
+    id: '/swimming/english-channel/$slug',
+    path: '/swimming/english-channel/$slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LanguageCountryRacesIndexRoute =
   LanguageCountryRacesIndexRouteImport.update({
     id: '/$language/$country/races/',
@@ -759,8 +773,10 @@ export interface FileRoutesByFullPath {
   '/running/races/$slug': typeof RunningRacesSlugRoute
   '/running/series/$series': typeof RunningSeriesSeriesRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
+  '/swimming/english-channel/$slug': typeof SwimmingEnglishChannelSlugRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/races/places/': typeof RacesPlacesIndexRoute
+  '/swimming/english-channel/': typeof SwimmingEnglishChannelIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
   '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/$language/$country/races/': typeof LanguageCountryRacesIndexRoute
@@ -867,8 +883,10 @@ export interface FileRoutesByTo {
   '/running/races/$slug': typeof RunningRacesSlugRoute
   '/running/series/$series': typeof RunningSeriesSeriesRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
+  '/swimming/english-channel/$slug': typeof SwimmingEnglishChannelSlugRoute
   '/$language/$country': typeof LanguageCountryIndexRoute
   '/races/places': typeof RacesPlacesIndexRoute
+  '/swimming/english-channel': typeof SwimmingEnglishChannelIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
   '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/$language/$country/races': typeof LanguageCountryRacesIndexRoute
@@ -976,8 +994,10 @@ export interface FileRoutesById {
   '/running/races/$slug': typeof RunningRacesSlugRoute
   '/running/series/$series': typeof RunningSeriesSeriesRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
+  '/swimming/english-channel/$slug': typeof SwimmingEnglishChannelSlugRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/races/places/': typeof RacesPlacesIndexRoute
+  '/swimming/english-channel/': typeof SwimmingEnglishChannelIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
   '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/$language/$country/races/': typeof LanguageCountryRacesIndexRoute
@@ -1086,8 +1106,10 @@ export interface FileRouteTypes {
     | '/running/races/$slug'
     | '/running/series/$series'
     | '/running/ultramarathons/$slug'
+    | '/swimming/english-channel/$slug'
     | '/$language/$country/'
     | '/races/places/'
+    | '/swimming/english-channel/'
     | '/$language/$country/races/$slug'
     | '/api/events/$slug/official-entry'
     | '/$language/$country/races/'
@@ -1194,8 +1216,10 @@ export interface FileRouteTypes {
     | '/running/races/$slug'
     | '/running/series/$series'
     | '/running/ultramarathons/$slug'
+    | '/swimming/english-channel/$slug'
     | '/$language/$country'
     | '/races/places'
+    | '/swimming/english-channel'
     | '/$language/$country/races/$slug'
     | '/api/events/$slug/official-entry'
     | '/$language/$country/races'
@@ -1302,8 +1326,10 @@ export interface FileRouteTypes {
     | '/running/races/$slug'
     | '/running/series/$series'
     | '/running/ultramarathons/$slug'
+    | '/swimming/english-channel/$slug'
     | '/$language/$country/'
     | '/races/places/'
+    | '/swimming/english-channel/'
     | '/$language/$country/races/$slug'
     | '/api/events/$slug/official-entry'
     | '/$language/$country/races/'
@@ -1411,8 +1437,10 @@ export interface RootRouteChildren {
   RunningRacesSlugRoute: typeof RunningRacesSlugRoute
   RunningSeriesSeriesRoute: typeof RunningSeriesSeriesRoute
   RunningUltramarathonsSlugRoute: typeof RunningUltramarathonsSlugRoute
+  SwimmingEnglishChannelSlugRoute: typeof SwimmingEnglishChannelSlugRoute
   LanguageCountryIndexRoute: typeof LanguageCountryIndexRoute
   RacesPlacesIndexRoute: typeof RacesPlacesIndexRoute
+  SwimmingEnglishChannelIndexRoute: typeof SwimmingEnglishChannelIndexRoute
   LanguageCountryRacesSlugRoute: typeof LanguageCountryRacesSlugRoute
   ApiEventsSlugOfficialEntryRoute: typeof ApiEventsSlugOfficialEntryRoute
   LanguageCountryRacesIndexRoute: typeof LanguageCountryRacesIndexRoute
@@ -2141,6 +2169,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RunningUltramarathonsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/swimming/english-channel/': {
+      id: '/swimming/english-channel/'
+      path: '/swimming/english-channel'
+      fullPath: '/swimming/english-channel/'
+      preLoaderRoute: typeof SwimmingEnglishChannelIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/swimming/english-channel/$slug': {
+      id: '/swimming/english-channel/$slug'
+      path: '/swimming/english-channel/$slug'
+      fullPath: '/swimming/english-channel/$slug'
+      preLoaderRoute: typeof SwimmingEnglishChannelSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$language/$country/races/': {
       id: '/$language/$country/races/'
       path: '/$language/$country/races'
@@ -2267,8 +2309,10 @@ const rootRouteChildren: RootRouteChildren = {
   RunningRacesSlugRoute: RunningRacesSlugRoute,
   RunningSeriesSeriesRoute: RunningSeriesSeriesRoute,
   RunningUltramarathonsSlugRoute: RunningUltramarathonsSlugRoute,
+  SwimmingEnglishChannelSlugRoute: SwimmingEnglishChannelSlugRoute,
   LanguageCountryIndexRoute: LanguageCountryIndexRoute,
   RacesPlacesIndexRoute: RacesPlacesIndexRoute,
+  SwimmingEnglishChannelIndexRoute: SwimmingEnglishChannelIndexRoute,
   LanguageCountryRacesSlugRoute: LanguageCountryRacesSlugRoute,
   ApiEventsSlugOfficialEntryRoute: ApiEventsSlugOfficialEntryRoute,
   LanguageCountryRacesIndexRoute: LanguageCountryRacesIndexRoute,

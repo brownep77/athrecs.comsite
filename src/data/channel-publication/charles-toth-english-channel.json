@@ -1,0 +1,474 @@
+{
+  "slug": "charles-toth-english-channel",
+  "name": "Charles Toth",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "1923 France–England crossing · historical timing conflict",
+  "biography": [
+    "Charles Toth was a Boston hotel waiter whose swimming career connected the waters of Massachusetts with the English Channel. The Dover archive describes an immigrant who first reached the United States in 1904, worked in the brass trade in Los Angeles and settled in Boston in 1912. His published birth accounts disagree, so a precise birthplace and birth date remain unresolved here. The Boston Light organiser’s history records him as the only finisher of its 1921 race, in five hours and 37 minutes.",
+    "Toth’s Channel campaign included unsuccessful efforts before his eventual crossing in September 1923. He trained with Thomas William Burgess, the successful Channel swimmer who also coached other leading swimmers of the period. Dover Museum identifies the Boulogne tug Alsace as his escort and places his landing on the coast between St Margaret’s and Kingsdown.",
+    "The Dover biographical archive dates his completion to 9 September, just after the Daily Sketch prize offer had expired. His achievement is recognised by the Channel Swimming Association as a solo France-to-England crossing. The surviving summaries disagree about elapsed time: CSA publishes 16:58, Dover Museum 16:54 and the separate Dover biography 16:40. The successful crossing is retained with that uncertainty visible."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Home base",
+      "value": "Boston, Massachusetts"
+    },
+    {
+      "label": "Occupation",
+      "value": "Hotel waiter; earlier brass worker"
+    },
+    {
+      "label": "Country in CSA record",
+      "value": "United States"
+    },
+    {
+      "label": "Channel coach",
+      "value": "Thomas William Burgess"
+    },
+    {
+      "label": "Escort vessel",
+      "value": "Alsace"
+    },
+    {
+      "label": "Birth details",
+      "value": "Conflicting published accounts; unresolved"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "France to England",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Trained by Thomas William Burgess; accompanied by the Boulogne tug Alsace, according to Dover Museum."
+        },
+        {
+          "text": "Successful completion supported; published durations differ: 16h 58m, 16h 54m and 16h 40m."
+        },
+        {
+          "text": "16h 58m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Sunday, 9 September 1923 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Displayed elapsed follows CSA at 16h58m. Dover Museum gives 16h54m. Dover’s biography and the contemporary Sherman County Observer give 16h40m. The original newspaper prints 16, although its OCR says 18. No departure date or phase clocks are established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France to England",
+          "label": "Direction"
+        },
+        {
+          "text": "Between St Margaret’s and Kingsdown",
+          "label": "Arrival"
+        },
+        {
+          "text": "Alsace",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2235 identifies Charles Toth, United States, successful solo France–England in 1923 at 16:58. Dover’s named biography explicitly dates completion to 9 September and gives 16:40; Dover Museum gives 16:54. The original Sherman County Observer, 14 September 1923, page 1, independently prints 16h40m for the Boston swimmer and reports the crossing on Sunday. The scan was checked against its faulty OCR. Completion is recognised; the three elapsed accounts remain unresolved. No original observer log was inspected."
+        },
+        {
+          "text": "CSA: Charles Toth, 1923",
+          "url": "https://www.channelswimmingassociation.com/swim/2235/charles-toth"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful record: United States, solo France–England, 1923, 16:58.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only; no phase dates, clocks, pilot or observer supplied. Historical swim predates CSA formation; this is later published recognition.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming Dover: Charles Toth biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/toth-charles"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named biographical profile: Boston hotel waiter, earlier life, attempts and 9 September 1923 completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Birth accounts conflict within the profile; it reports 16:40, differing from CSA 16:58 and Dover Museum 16:54. Underlying civil documents were not independently inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Between Wars",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named historical sections for Toth, Michel, Helmi and Temme, including selected dates, routes, coaches and support vessels.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective collection research. Several timings, attempt counts and landing descriptions differ from other sources; disagreements are retained or the uncertain detail omitted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Sherman County Observer, 14 September 1923, page 1",
+          "url": "https://oregonnews.uoregon.edu/lccn/sn96088415/1923-09-14/ed-1/seq-1.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named Boston swimmer Charles Toth; report of Sunday Channel completion and 16h40m elapsed.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original scan visually inspected through University of Oregon Libraries / Sherman County Historical Museum. OCR misreads 16 as 18; the printed number is 16. Does not reconcile CSA 16h58m or museum 16h54m.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "charles-toth-1923"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Boston Light Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1921 · exact day not confirmed"
+        },
+        {
+          "text": "Boston, Massachusetts"
+        },
+        {
+          "text": "Won; the only finisher recorded in the organiser’s history."
+        },
+        {
+          "text": "5h 37m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1st",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "MOWSA’s historical 1921 line names Charles Toth and 5:37; the Boston setting and named archive material agree with the Dover Channel biography. No exact race day, distance for that edition or original result sheet was established."
+        },
+        {
+          "text": "Massachusetts Open Water Swimming Association: Boston Light history",
+          "url": "https://www.massowsa.org/bls-history"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The organiser’s historical 1921 entry names Charles Toth as the only finisher in 5:37; accompanying archive caption identifies him at L Street Bathhouse.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective event history; no exact 1921 day or original result sheet inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming Dover: Charles Toth biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/toth-charles"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named biographical profile: Boston hotel waiter, earlier life, attempts and 9 September 1923 completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Birth accounts conflict within the profile; it reports 16:40, differing from CSA 16:58 and Dover Museum 16:54. Underlying civil documents were not independently inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "charles-toth-event-1-boston-light-swim"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Arrival in the United States",
+      "lines": [
+        {
+          "text": "1904"
+        },
+        {
+          "text": "The Dover biography places his first arrival in the year of the St Louis Exposition."
+        }
+      ]
+    },
+    {
+      "title": "Boston",
+      "lines": [
+        {
+          "text": "1912"
+        },
+        {
+          "text": "Settled in Boston after living in the western United States."
+        }
+      ]
+    },
+    {
+      "title": "Boston Light success",
+      "lines": [
+        {
+          "text": "1921"
+        },
+        {
+          "text": "MOWSA records him as the only finisher, in 5h37m."
+        }
+      ]
+    },
+    {
+      "title": "Channel campaign",
+      "lines": [
+        {
+          "text": "1922–1923"
+        },
+        {
+          "text": "Unsuccessful attempts preceded his eventual crossing; published attempt lists differ."
+        }
+      ]
+    },
+    {
+      "title": "Successful Channel crossing",
+      "lines": [
+        {
+          "text": "9 September 1923"
+        },
+        {
+          "text": "France to England; elapsed-time accounts conflict."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Charles Toth?",
+      "value": "This profile includes 1 selected solo performance for Charles Toth. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Charles Toth’s featured English Channel swim?",
+      "value": "The featured swim finished on Sunday, 9 September 1923. Its exact start date is not confirmed here. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Charles Toth’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 16 hours and 58 minutes. Successful completion supported; published durations differ: 16h 58m, 16h 54m and 16h 40m."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Charles Toth, 1923",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2235/charles-toth"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful record: United States, solo France–England, 1923, 16:58.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only; no phase dates, clocks, pilot or observer supplied. Historical swim predates CSA formation; this is later published recognition.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Dover: Charles Toth biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/toth-charles"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named biographical profile: Boston hotel waiter, earlier life, attempts and 9 September 1923 completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Birth accounts conflict within the profile; it reports 16:40, differing from CSA 16:58 and Dover Museum 16:54. Underlying civil documents were not independently inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Between Wars",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named historical sections for Toth, Michel, Helmi and Temme, including selected dates, routes, coaches and support vessels.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective collection research. Several timings, attempt counts and landing descriptions differ from other sources; disagreements are retained or the uncertain detail omitted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Massachusetts Open Water Swimming Association: Boston Light history",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.massowsa.org/bls-history"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The organiser’s historical 1921 entry names Charles Toth as the only finisher in 5:37; accompanying archive caption identifies him at L Street Bathhouse.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective event history; no exact 1921 day or original result sheet inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Sherman County Observer, 14 September 1923, page 1",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://oregonnews.uoregon.edu/lccn/sn96088415/1923-09-14/ed-1/seq-1.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named Boston swimmer Charles Toth; report of Sunday Channel completion and 16h40m elapsed.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original scan visually inspected through University of Oregon Libraries / Sherman County Historical Museum. OCR misreads 16 as 18; the printed number is 16. Does not reconcile CSA 16h58m or museum 16h54m.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "France to England",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 9 September 1923 (completion)"
+        },
+        {
+          "text": "France to England"
+        },
+        {
+          "text": "Successful completion supported; published durations differ: 16h 58m, 16h 54m and 16h 40m."
+        },
+        {
+          "text": "16h 58m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "charles-toth-1923"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Boston Light Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1921 · exact day not confirmed"
+        },
+        {
+          "text": "Boston, Massachusetts"
+        },
+        {
+          "text": "Won; the only finisher recorded in the organiser’s history."
+        },
+        {
+          "text": "5h 37m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1st",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "charles-toth-event-1-boston-light-swim"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-a65b24ac0373cb6974b1"
+}

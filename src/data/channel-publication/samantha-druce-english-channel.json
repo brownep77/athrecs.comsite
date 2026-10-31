@@ -1,0 +1,368 @@
+{
+  "slug": "samantha-druce-english-channel",
+  "name": "Samantha Druce",
+  "country": "England",
+  "aliases": [],
+  "highlight": "Youngest female Channel swimmer · 1983",
+  "biography": [
+    "Samantha Druce is an English Channel swimmer whose 1983 crossing became the youngest-female record. Born on 22 April 1971, she swam for Poole Swimming Club and prepared with Channel coach Tom Watch. Watch later recalled that she contacted him in February to ask for help and was eager to attempt the crossing. He remembered a determined trainee who sometimes needed persuading to leave the water.",
+    "On 18 August 1983, at twelve years and 118 days old, Druce completed an England-to-France solo. The Channel Swimming Association and Guinness record 15 hours 27 minutes; Poole’s history prints 15 hours 26 minutes. The federation’s historical entry names Fred Mardle as pilot, Pierre Nelly as the escort boat and J. Comben as observer. Her Poole teammate Marc Newman accompanied her as a companion swimmer. Watch recalled worsening weather toward the finish.",
+    "Druce displaced Jacqui Hampson’s youngest-female mark and received the CSA’s youngest successful swimmer award for 1983. Guinness retains her achievement as a historical record that cannot now be attempted under its minimum age of sixteen. Her story connects a junior club swimmer’s ambition with the coaching, piloting and companionship behind a Channel crossing."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "22 April 1971 — Guinness athlete record"
+    },
+    {
+      "label": "Source-reported country",
+      "value": "England — CSA; UK [England] — CS&PF"
+    },
+    {
+      "label": "Club",
+      "value": "Poole Swimming Club"
+    },
+    {
+      "label": "Channel coach",
+      "value": "Tom Watch"
+    },
+    {
+      "label": "Age at record crossing",
+      "value": "12 years 118 days"
+    },
+    {
+      "label": "1983 award",
+      "value": "CSA youngest successful swimmer"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Youngest-female record crossing",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CSA and Guinness give 15:27; Poole Swimming Club’s history gives 15:26. Youngest-female record at 12 years 118 days."
+        },
+        {
+          "text": "Thursday, 18 August 1983 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "15h 27m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Fred Mardle",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Pierre Nelly",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "J. Comben",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful individual entry 2713 identifies Samantha Druce, England, the 1983 England-to-France solo, 15:27 and age award. CS&PF historical entry 443299 supplies 18 August and the named escort crew, explicitly attributing the swim to CSA. Guinness independently gives the same date, age and 15:27. Poole history, Champions All paragraph, supplies 15:26; the one-minute conflict is retained. No phase-specific dates or clocks were established."
+        },
+        {
+          "text": "Channel Swimming Association: Samantha Druce, swim 2713",
+          "url": "https://www.channelswimmingassociation.com/swim/2713/samantha-druce"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named England-to-France solo; England; 1983; 15:27; youngest lady aged 12 years 118 days and 1983 youngest successful swimmer award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published successful entry inspected; original observer log not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical record: Samantha Druce, swim 443299",
+          "url": "https://cspf.co.uk/swim/443299"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "18 August 1983; UK [England]; 15:27:00; CSA attribution; Fred Mardle, Pierre Nelly and observer J. Comben.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical record hosted by a different federation; generic Date does not establish departure or arrival.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Guinness World Records: youngest female Channel swimmer, Samantha Druce",
+          "url": "https://www.guinnessworldrecords.com/world-records/youngest-person-to-swim-the-english-channel-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named athlete record; UK; birth 22 April 1971; 18 August 1983; age 12 years 118 days; 15 hours 27 minutes; record retained for reference under changed minimum-age rules.",
+          "label": "Supports"
+        },
+        {
+          "text": "Poole Swimming Club: club history, Champions All",
+          "url": "https://uk.gomotionapp.com/team/swrpsc/page/about-us/history"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Poole swimmer Samantha Druce, her 1983 age record and companion swimmer Marc Newman.",
+          "label": "Supports"
+        },
+        {
+          "text": "Prints 15:26, differing from CSA and Guinness at 15:27.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "druce-1983-solo"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Born",
+      "lines": [
+        {
+          "text": "Thursday, 22 April 1971"
+        },
+        {
+          "text": "Birth date supplied by Guinness World Records."
+        }
+      ]
+    },
+    {
+      "title": "Youngest female Channel swimmer",
+      "lines": [
+        {
+          "text": "Thursday, 18 August 1983"
+        },
+        {
+          "text": "Completed an England-to-France solo at 12 years 118 days."
+        }
+      ]
+    },
+    {
+      "title": "CSA age award",
+      "lines": [
+        {
+          "text": "1983"
+        },
+        {
+          "text": "Named the association’s youngest successful swimmer of the year."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Samantha Druce?",
+      "value": "This profile includes 1 selected solo performance for Samantha Druce. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Samantha Druce’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Thursday, 18 August 1983. The source does not establish whether that date means departure or arrival. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Samantha Druce’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 15 hours and 27 minutes. CSA and Guinness give 15:27; Poole Swimming Club’s history gives 15:26. Youngest-female record at 12 years 118 days."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Samantha Druce, swim 2713",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2713/samantha-druce"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named England-to-France solo; England; 1983; 15:27; youngest lady aged 12 years 118 days and 1983 youngest successful swimmer award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published successful entry inspected; original observer log not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Samantha Druce, swim 443299",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443299"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "18 August 1983; UK [England]; 15:27:00; CSA attribution; Fred Mardle, Pierre Nelly and observer J. Comben.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical record hosted by a different federation; generic Date does not establish departure or arrival.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: youngest female Channel swimmer, Samantha Druce",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/youngest-person-to-swim-the-english-channel-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named athlete record; UK; birth 22 April 1971; 18 August 1983; age 12 years 118 days; 15 hours 27 minutes; record retained for reference under changed minimum-age rules.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Poole Swimming Club: club history, Champions All",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://uk.gomotionapp.com/team/swrpsc/page/about-us/history"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Poole swimmer Samantha Druce, her 1983 age record and companion swimmer Marc Newman.",
+          "label": "Supports"
+        },
+        {
+          "text": "Prints 15:26, differing from CSA and Guinness at 15:27.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Tom Watch, John Goodbody profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/article/156/tom-watch"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Watch recalls Druce asking for help in February, her determination in training and deteriorating weather late in her successful 1983 swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective coach recollection; not an observer log.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Tom Watch obituary",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/164/tom-watch-great-sadness"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies Watch as coach of Samantha Druce, who at twelve broke Jacqui Hampson’s youngest-female record in 1983.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Youngest-female record crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 18 August 1983 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "CSA and Guinness give 15:27; Poole Swimming Club’s history gives 15:26. Youngest-female record at 12 years 118 days."
+        },
+        {
+          "text": "15h 27m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "druce-1983-solo"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-39cceed254ec787b0674"
+}

@@ -1,0 +1,663 @@
+{
+  "slug": "marilyn-bell-english-channel",
+  "name": "Marilyn Bell",
+  "country": "Canada",
+  "aliases": [
+    "Marilyn Bell Di Lascio"
+  ],
+  "highlight": "Youngest Channel swimmer at the time · 31 July 1955",
+  "biography": [
+    "Marilyn Bell was born in Toronto on 19 October 1937 and became one of Canada’s best-known endurance swimmers while still at school. Her coach, Gus Ryder, recognised her capacity to keep swimming over long distances. Winning an amateur mile race at the Canadian National Exhibition in 1952 helped her progress towards the demanding professional events that soon defined her career.",
+    "In 1954 she competed at Atlantic City before becoming the first person to swim across Lake Ontario. Her arrival in Toronto after a long swim from the American shore brought enormous public attention. She had entered without the financial offer made to Florence Chadwick, but her successful crossing earned recognition and a prize from the exhibition organisers.",
+    "On 31 July 1955 Bell reached the Warren at Folkestone after swimming from Cap Gris-Nez in 14 hours and 36 minutes. At seventeen she became the youngest successful Channel swimmer of that time. Ryder accompanied her and experienced Channel pilot Jack Burwill guided the crossing.",
+    "Bell completed the Strait of Juan de Fuca in 1956 and then retired from professional swimming. Her honours include Canada’s Sports Hall of Fame and the Order of Ontario. She is also known by her married name, Marilyn Bell Di Lascio."
+  ],
+  "flags": [
+    {
+      "code": "CA",
+      "label": "Canada",
+      "abbr": "CAN"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "19 October 1937"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Toronto, Ontario, Canada"
+    },
+    {
+      "label": "Coach",
+      "value": "Gus Ryder"
+    },
+    {
+      "label": "Channel age",
+      "value": "17 · youngest successful swimmer at the time"
+    },
+    {
+      "label": "1954 award",
+      "value": "Lou Marsh Trophy"
+    },
+    {
+      "label": "National honour",
+      "value": "Order of Ontario · 2003"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Teenage Channel crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Coach Gus Ryder accompanied Bell."
+        },
+        {
+          "text": "14h 36m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Sunday, 31 July 1955 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The photograph identifies the landing date. No reconciled start/finish clocks or named observer were established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "The Warren, East Wear Bay, Folkestone, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Jack “Pop” Burwill (also recorded as Burvill)",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record and museum landing photograph agree. The caption explicitly reports CSA ratification; the original observer report was not inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Marilyn Bell, record 2265",
+          "url": "https://www.channelswimmingassociation.com/swim/2265/marilyn-bell"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum photograph d60028: Bell landing and ratification",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/photograph-of-marilyn-bells-channel-swim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Bell’s landing date, pilot, coach and reported CSA ratification.",
+          "label": "Supports"
+        },
+        {
+          "text": "Photograph catalogue inspected; no original log or named observer established.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Marilyn Bell route and escort",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/bell-marilyn"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "bell-1955"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Lake Ontario",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 8 September 1954 – Thursday, 9 September 1954"
+        },
+        {
+          "text": "Youngstown, New York → Toronto, Ontario"
+        },
+        {
+          "text": "Completed Youngstown → Toronto; first person across the lake. Published durations differ: SSO 20h55m; ISHOF 20h59m."
+        },
+        {
+          "text": "51.5 km planned route",
+          "label": "Published distance"
+        },
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "SSO row 1 and its detailed athlete biography give 8–9 September and 20h55m. Parks Canada independently confirms the 9 September finish. ISHOF gives 20h59m. Ontario Sports Hall of Fame also gives 20h59m but shifts the dates a day; its dates are not adopted. Completion is supported; exact duration remains unresolved."
+        },
+        {
+          "text": "Solo Swims of Ontario: successful Lake Ontario swims",
+          "url": "https://www.soloswims.com/swims.htm"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual register rows: Marilyn Bell no. 1 and Vicki Keith no. 24, including route legend and two-way flag.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective register. Bell’s elapsed time conflicts with ISHOF; original observer paperwork was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Solo Swims of Ontario: Marilyn Bell DiLascio",
+          "url": "https://www.soloswims.org/marilyn-bell-dilascio"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Detailed named career bridges English Channel identity with Ontario and Juan de Fuca, including dates, route and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective biography, not original timing documentation. Ontario’s 20h55m conflicts with ISHOF’s 20h59m.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Parks Canada: Marilyn Bell national historic event",
+          "url": "https://www.pc.gc.ca/apps/dfhd/page_nhs_eng.aspx?i=90468&id=12511"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Official plaque text explicitly identifies the Ontario completion on the evening of 9 September 1954.",
+          "label": "Supports"
+        },
+        {
+          "text": "Only approximate elapsed duration; no original timing log.",
+          "label": "Limitations"
+        },
+        {
+          "text": "ISHOF: Marilyn Bell",
+          "url": "https://ishof.org/honoree/honoree-marilyn-bell/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Lake Ontario duration, route scale and identity bridge to English Channel and Juan de Fuca.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical biography; not a timing certificate.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Ontario Sports Hall of Fame: Marilyn Bell",
+          "url": "https://ontariosportshalloffame.com/inductees/sports-specialties/swimming/marilyn-bell/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Corroborates the Ontario completion and 20h59m version.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its sentence dating departure 9 September and arrival the next day conflicts with SSO and Parks Canada; those date statements are not adopted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "marilyn-bell-event-1-lake-ontario"
+    },
+    {
+      "title": "Strait of Juan de Fuca",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 23 August 1956 (event date)"
+        },
+        {
+          "text": "Port Angeles, Washington → Clover Point, Victoria"
+        },
+        {
+          "text": "Completed her second attempt across the strait."
+        },
+        {
+          "text": "11h 35m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "18.3 miles",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "SSO’s detailed Bell biography explicitly gives 23 August 1956, 18.3 miles and 11h35m, and distinguishes the failed 10 August attempt. Etobicoke independently corroborates the successful date. The exact event date is not labelled departure or arrival."
+        },
+        {
+          "text": "Solo Swims of Ontario: Marilyn Bell DiLascio",
+          "url": "https://www.soloswims.org/marilyn-bell-dilascio"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Detailed named career bridges English Channel identity with Ontario and Juan de Fuca, including dates, route and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective biography, not original timing documentation. Ontario’s 20h55m conflicts with ISHOF’s 20h59m.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Etobicoke Sports Hall of Fame: Marilyn Bell",
+          "url": "https://etobicokesports.ca/sport/swimming/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Marilyn Bell section explicitly dates the Ontario departure 8 September and arrival 9 September 1954, and Juan de Fuca 23 August 1956.",
+          "label": "Supports"
+        },
+        {
+          "text": "No Juan de Fuca elapsed time supplied. Original observer logs were not inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "marilyn-bell-event-2-strait-of-juan-de-fuca"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Early race victory",
+      "lines": [
+        {
+          "text": "1952"
+        },
+        {
+          "text": "Canadian National Exhibition amateur mile."
+        }
+      ]
+    },
+    {
+      "title": "Lake Ontario breakthrough",
+      "lines": [
+        {
+          "text": "1954"
+        },
+        {
+          "text": "First person to complete the crossing."
+        }
+      ]
+    },
+    {
+      "title": "English Channel",
+      "lines": [
+        {
+          "text": "31 July 1955"
+        },
+        {
+          "text": "Successful France-to-England swim."
+        }
+      ]
+    },
+    {
+      "title": "Juan de Fuca",
+      "lines": [
+        {
+          "text": "1956"
+        },
+        {
+          "text": "Crossed the strait; retired from professional swimming."
+        }
+      ]
+    },
+    {
+      "title": "National recognition",
+      "lines": [
+        {
+          "text": "1958"
+        },
+        {
+          "text": "Inducted into Canada’s Sports Hall of Fame."
+        }
+      ]
+    },
+    {
+      "title": "Order of Ontario",
+      "lines": [
+        {
+          "text": "2003"
+        },
+        {
+          "text": "Honoured for her achievements."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Marilyn Bell?",
+      "value": "This profile includes 1 selected solo performance for Marilyn Bell. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Marilyn Bell’s featured English Channel swim?",
+      "value": "The featured swim finished on Sunday, 31 July 1955. Its exact start date is not confirmed here."
+    },
+    {
+      "label": "How long did Marilyn Bell’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 14 hours and 36 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Marilyn Bell, record 2265",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2265/marilyn-bell"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Canada’s Sports Hall of Fame: Marilyn Bell",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://halloffamers.sportshall.ca/?language=EN&marilyn_bell="
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame: Marilyn Bell",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-marilyn-bell/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Lake Ontario duration, route scale and identity bridge to English Channel and Juan de Fuca.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical biography; not a timing certificate.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Ontario Sports Hall of Fame: Marilyn Bell Di Lascio",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ontariosportshalloffame.com/inductees/sports-specialties/swimming/marilyn-bell/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Corroborates the Ontario completion and 20h59m version.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its sentence dating departure 9 September and arrival the next day conflicts with SSO and Parks Canada; those date statements are not adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum photograph d60028: Bell landing and ratification",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/photograph-of-marilyn-bells-channel-swim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Bell’s landing date, pilot, coach and reported CSA ratification.",
+          "label": "Supports"
+        },
+        {
+          "text": "Photograph catalogue inspected; no original log or named observer established.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Marilyn Bell route and escort",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/bell-marilyn"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Solo Swims of Ontario: successful Lake Ontario swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.soloswims.com/swims.htm"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual register rows: Marilyn Bell no. 1 and Vicki Keith no. 24, including route legend and two-way flag.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective register. Bell’s elapsed time conflicts with ISHOF; original observer paperwork was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Solo Swims of Ontario: Marilyn Bell DiLascio",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.soloswims.org/marilyn-bell-dilascio"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Detailed named career bridges English Channel identity with Ontario and Juan de Fuca, including dates, route and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective biography, not original timing documentation. Ontario’s 20h55m conflicts with ISHOF’s 20h59m.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Parks Canada: Marilyn Bell national historic event",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.pc.gc.ca/apps/dfhd/page_nhs_eng.aspx?i=90468&id=12511"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Official plaque text explicitly identifies the Ontario completion on the evening of 9 September 1954.",
+          "label": "Supports"
+        },
+        {
+          "text": "Only approximate elapsed duration; no original timing log.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Etobicoke Sports Hall of Fame: Marilyn Bell",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://etobicokesports.ca/sport/swimming/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Marilyn Bell section explicitly dates the Ontario departure 8 September and arrival 9 September 1954, and Juan de Fuca 23 August 1956.",
+          "label": "Supports"
+        },
+        {
+          "text": "No Juan de Fuca elapsed time supplied. Original observer logs were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Teenage Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 31 July 1955 (completion)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "14h 36m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "bell-1955"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Lake Ontario",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 8 September 1954 – Thursday, 9 September 1954"
+        },
+        {
+          "text": "Youngstown, New York → Toronto, Ontario"
+        },
+        {
+          "text": "Completed Youngstown → Toronto; first person across the lake. Published durations differ: SSO 20h55m; ISHOF 20h59m."
+        },
+        {
+          "text": "51.5 km planned route",
+          "label": "Published distance"
+        },
+        {
+          "text": "Sources disagree · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "marilyn-bell-event-1-lake-ontario"
+    },
+    {
+      "title": "Strait of Juan de Fuca",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 23 August 1956 (event date)"
+        },
+        {
+          "text": "Port Angeles, Washington → Clover Point, Victoria"
+        },
+        {
+          "text": "Completed her second attempt across the strait."
+        },
+        {
+          "text": "11h 35m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "18.3 miles",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "marilyn-bell-event-2-strait-of-juan-de-fuca"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-c3ae2eca73e1f27857bf"
+}

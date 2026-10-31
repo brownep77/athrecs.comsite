@@ -1,0 +1,539 @@
+{
+  "slug": "charlotte-brynn-english-channel",
+  "name": "Charlotte Brynn",
+  "country": "New Zealand",
+  "aliases": [
+    "Charlotte J Brynn"
+  ],
+  "highlight": "2024 England-to-France solo in 11:43 on her sixth attempt",
+  "biography": [
+    "Charlotte Brynn grew up swimming in New Zealand's lakes and coastal waters. After moving to Vermont in 1998, she began exploring the Green River Reservoir. She became executive director of the Swimming Hole in Stowe in 2001 and entered an eight-mile Lake Champlain event in 2006. Open-water coaching and racing became part of the same working life. As New England's masters open-water chair, she helped host two national championships at Lake Willoughby.",
+    "The English Channel took her twelve years. Cold ended her 2012 attempt, seasickness interrupted another in 2015, and her crew stopped her 2016 swim within sight of France. In the intervening years she swam the Catalina Channel and around Manhattan. Her New England Hall of Fame profile also credits her with two ice miles and work developing endurance swimming at Lake Memphremagog.",
+    "On 17 August 2024, her sixth attempt brought her to France in 11 hours 43 minutes. Eddie Spelling piloted Anastasia, with Garry Salter observing. Crew chief Elaine Howley names Liz Fry as support swimmer and Janine Serell as crew. Brynn later described how the training swims had become objectives in their own right during the years she spent returning to Dover."
+  ],
+  "flags": [
+    {
+      "code": "NZ",
+      "abbr": "NZL",
+      "label": "New Zealand"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Source nationality",
+      "value": "New Zealand in her CS&PF individual record."
+    },
+    {
+      "label": "Also recorded as",
+      "value": "Charlotte J Brynn in United States Masters Swimming."
+    },
+    {
+      "label": "Vermont",
+      "value": "Moved there in 1998 and began directing the Swimming Hole in Stowe in 2001."
+    },
+    {
+      "label": "Successful Channel swim",
+      "value": "17 August 2024, aged 58 in the federation register."
+    },
+    {
+      "label": "Cold-water swimming",
+      "value": "Two International Ice Swimming Association miles."
+    },
+    {
+      "label": "Regional recognition",
+      "value": "Inducted into the New England LMSC Hall of Fame for open-water and long-distance swimming in 2022."
+    }
+  ],
+  "crossings": [
+    {
+      "id": "brynn-2024-solo",
+      "title": "Sixth attempt reaches France",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Elaine Howley's crew caption identifies Liz Fry as support swimmer, Janine Serell as crew and Howley as crew chief."
+        },
+        {
+          "text": "Saturday, 17 August 2024 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 43m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The individual register labels 07:40:00 as departure and 19:23:00 as arrival. Its single date field gives 17 August 2024. Separate phase dates and a time zone are unspecified.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Eddie Spelling",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Anastasia",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Garry Salter",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual record 446067, Brynn, Charlotte, gives age 58, New Zealand, 1-way E–F, 11:43:00, both clocks, observer and pilot. The CS&PF 2024 Solo Swims row for 17th August independently lists Eddie Spelling / Anastasia and the same elapsed time. NZ Ultra Marathon Swim Awards includes her matching entry in its ratified-swims register. Recognition is independently reported. The annual listing retains its generic committee disclaimer."
+        },
+        {
+          "text": "CS&PF solo archive: Charlotte Brynn, 17 August 2024",
+          "url": "https://cspf.co.uk/swim/446067/charlotte-brynn-swim-on-17-august-2024"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 446067 identifies Brynn, New Zealand, age 58, E–F, elapsed and phase clocks, pilot, boat, observer and CSPF as ratifying organisation.",
+          "label": "Supports"
+        },
+        {
+          "text": "The Date field does not label a departure or arrival date. The archive is a compilation and does not reproduce a committee decision.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF successful swims: 2024",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2024"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo Swims table, 17th August, Charlotte Brynn, Eddie Spelling / Anastasia, 11:43:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Annual table carries a committee-ratification disclaimer.",
+          "label": "Limitations"
+        },
+        {
+          "text": "NZ Ultra Marathon Swim Awards: For the Record",
+          "url": "https://www.nzultramarathonswimawards.co.nz/for-the-record.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The register of ratified swims by New Zealanders lists Charlotte Brynn in the English Channel section on 17/08/2024, age 58, E–F, 11:43:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Independent reporting of ratification. No signed Channel committee record is reproduced.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Elaine K. Howley: Channel Support Services",
+          "url": "https://www.elainekhowley.com/css"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dated crew caption credits Brynn as swimmer, Liz Fry as support swimmer, Janine Serell as crew and Howley as crew chief.",
+          "label": "Supports"
+        },
+        {
+          "text": "A launch photograph names Mike Spelling assisting. The federation's designated pilot field names Eddie Spelling.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Stowe community pool",
+      "lines": [
+        {
+          "text": "2001"
+        },
+        {
+          "text": "Became executive director of the Swimming Hole, where she coached local swimmers."
+        }
+      ]
+    },
+    {
+      "title": "Lake Champlain event",
+      "lines": [
+        {
+          "text": "2006"
+        },
+        {
+          "text": "Entered the eight-mile swim from Willsboro Point to Burlington."
+        }
+      ]
+    },
+    {
+      "title": "First Channel attempt",
+      "lines": [
+        {
+          "text": "2012"
+        },
+        {
+          "text": "Cold ended the attempt before she reached France."
+        }
+      ]
+    },
+    {
+      "title": "Frank Wuest Open Water Swimming Award",
+      "lines": [
+        {
+          "text": "2019"
+        },
+        {
+          "text": "Received New England LMSC recognition for contributions to the sport."
+        }
+      ]
+    },
+    {
+      "title": "New England Hall of Fame",
+      "lines": [
+        {
+          "text": "2022"
+        },
+        {
+          "text": "Inducted in the open-water and long-distance category."
+        }
+      ]
+    },
+    {
+      "title": "English Channel solo",
+      "lines": [
+        {
+          "text": "2024-08-17"
+        },
+        {
+          "text": "Reached France on her sixth attempt and completed the Triple Crown sequence alongside Catalina and Manhattan."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Charlotte Brynn — New England Hall of Fame profile",
+      "lines": [
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://nelmsc.squarespace.com/hof/2022/6/21/charlotte-brynn"
+        },
+        {
+          "text": "Regional masters swimming biography with her coaching history and selected marathon swims."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "BrynnSwim — Charlotte Brynn's athlete site",
+      "lines": [
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://brynnswim.com/"
+        },
+        {
+          "text": "Her own account of marathon and ice swimming."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Charlotte Brynn on twelve years of Channel attempts",
+      "lines": [
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://www.buzzsprout.com/2300423/episodes/17977976-the-longest-battle-hard-earned-lessons-from-crossing-the-english-channel-at-59"
+        },
+        {
+          "text": "Episode page and written transcript of her 2025 Ageless Athlete interview."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Charlotte Brynn?",
+      "value": "This profile includes 1 selected solo performance. A continuous multi-way crossing counts as one performance."
+    },
+    {
+      "label": "When was Charlotte Brynn’s first listed Channel swim?",
+      "value": "The recorded swim date is Saturday, 17 August 2024. Departure and arrival dates are unconfirmed."
+    },
+    {
+      "label": "How long did the first listed swim take?",
+      "value": "The recorded 1-way solo lasted 11h 43m 0s."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF solo archive: Charlotte Brynn, 17 August 2024",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/446067/charlotte-brynn-swim-on-17-august-2024"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual record 446067 identifies Brynn, New Zealand, age 58, E–F, elapsed and phase clocks, pilot, boat, observer and CSPF as ratifying organisation.",
+          "label": "Supports"
+        },
+        {
+          "text": "The Date field does not label a departure or arrival date. The archive is a compilation and does not reproduce a committee decision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF successful swims: 2024",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2024"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo Swims table, 17th August, Charlotte Brynn, Eddie Spelling / Anastasia, 11:43:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Annual table carries a committee-ratification disclaimer.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "NZ Ultra Marathon Swim Awards: For the Record",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nzultramarathonswimawards.co.nz/for-the-record.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The register of ratified swims by New Zealanders lists Charlotte Brynn in the English Channel section on 17/08/2024, age 58, E–F, 11:43:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Independent reporting of ratification. No signed Channel committee record is reproduced.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "New England LMSC Hall of Fame: Charlotte Brynn",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://nelmsc.squarespace.com/hof/2022/6/21/charlotte-brynn"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Open-water/long-distance induction, 2019 Frank Wuest award, ice miles, Catalina and Manhattan swims, coaching and hosting national championships.",
+          "label": "Supports"
+        },
+        {
+          "text": "The induction profile dates to 2022, before her successful English Channel crossing.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "United States Masters Swimming: Charlotte J Brynn",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.usms.org/people/034BA"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named USMS athlete profile linked by the Hall of Fame, providing her middle initial, New England Masters affiliation and coaching recognition.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "VTDigger: Wild swimming helps Vermonters connect to nature",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://vtdigger.org/2025/08/20/wild-swimming-helps-vermonters-connect-to-nature/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2025 interview report describes her New Zealand upbringing, 1998 move to Vermont, Stowe work, Lake Champlain event and completed 11:43 Channel swim.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Stowe Reporter / VTDigger: third Channel attempt, September 2016",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://vtdigger.org/2016/09/08/english-channel-stings-stowe-woman-third-cross-attempt/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporaneous account identifies the 2012, 2015 and August 2016 attempts as unfinished.",
+          "label": "Supports"
+        },
+        {
+          "text": "The 2016 distance, route and early-morning clock relate to an unsuccessful attempt.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Ageless Athlete: Charlotte Brynn interview and transcript",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.buzzsprout.com/2300423/episodes/17977976-the-longest-battle-hard-earned-lessons-from-crossing-the-english-channel-at-59"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Episode 95, published October 2025. The show notes describe a sixth attempt, and Brynn recalls reaching France in 2024 after twelve years.",
+          "label": "Supports"
+        },
+        {
+          "text": "The episode title says age 59. The federation record and New Zealand register both give age 58 for the swim.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Elaine K. Howley: Channel Support Services",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.elainekhowley.com/css"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dated crew caption credits Brynn as swimmer, Liz Fry as support swimmer, Janine Serell as crew and Howley as crew chief.",
+          "label": "Supports"
+        },
+        {
+          "text": "A launch photograph names Mike Spelling assisting. The federation's designated pilot field names Eddie Spelling.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "BrynnSwim: Charlotte Brynn",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://brynnswim.com/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The swimmer's own site identifies her as a marathon swimmer, ice swimmer and exercise specialist and records her two ice miles.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "brynn-2024-solo",
+      "title": "Sixth attempt reaches France",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Saturday, 17 August 2024 (recorded swim date)"
+        },
+        {
+          "text": "11h 43m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-2b54974049466b88a2cc"
+}

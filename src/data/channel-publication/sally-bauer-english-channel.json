@@ -1,0 +1,651 @@
+{
+  "slug": "sally-bauer-english-channel",
+  "name": "Sally Bauer",
+  "country": "Sweden",
+  "aliases": [
+    "Sally Viola Bauer"
+  ],
+  "highlight": "Swedish Channel pioneer · successful crossings in 1939 and 1951",
+  "biography": [
+    "Sally Viola Bauer was born in Halmstad on 29 July 1908 and grew up in Helsingborg. She began swimming with the local swimming society and later competed for Malmö. Her ability extended beyond endurance: during the 1930s she set seventeen Swedish freestyle records across distances from 200 metres to a mile and won national championship gold.",
+    "Open-water crossings became the defining achievements of her career. She swam across the Öresund in 1931, then completed the Kattegat and the Sea of Åland in 1938. The Channel had captured her imagination after Gertrude Ederle’s success. Commercial and newspaper sponsorship helped her travel to France for her own attempt.",
+    "On 27 August 1939 she left Cap Gris-Nez and reached England that evening, completing the crossing in 15 hours and 22 minutes. The achievement came only days before the Second World War. She returned to Sweden and received a public welcome, then published an account of her distance swims.",
+    "Bauer returned to the Channel for the Daily Mail race in 1951. Her working life included secretarial work, swimming instruction and national coaching. She died in Lund on 15 June 2001. Her sporting life later inspired both literary fiction and a film, extending public interest in her achievements beyond swimming."
+  ],
+  "flags": [
+    {
+      "code": "SE",
+      "label": "Sweden",
+      "abbr": "SWE"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Full name",
+      "value": "Sally Viola Bauer"
+    },
+    {
+      "label": "Born",
+      "value": "29 July 1908 · Halmstad, Sweden"
+    },
+    {
+      "label": "Grew up in",
+      "value": "Helsingborg"
+    },
+    {
+      "label": "Swedish freestyle records",
+      "value": "17 during 1934–1937"
+    },
+    {
+      "label": "Occupations",
+      "value": "Secretary, swimming instructor and national coach"
+    },
+    {
+      "label": "Died",
+      "value": "15 June 2001 · Lund, Sweden"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First Channel success",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "15h 22m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Sunday, 27 August 1939 · 05:50 · SKBL biography; time standard unspecified",
+          "label": "Started"
+        },
+        {
+          "text": "Sunday, 27 August 1939 · 21:12 · SKBL biography; time standard unspecified",
+          "label": "Finished"
+        },
+        {
+          "text": "Clocks are explicitly published, not calculated. No timezone offset or contemporary observer identity is established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA now lists the swim. Museum says inclusion was delayed until 1975; SKBL supplies dates and clocks."
+        },
+        {
+          "text": "Channel Swimming Association: Sally Bauer, record 2248",
+          "url": "https://www.channelswimmingassociation.com/swim/2248/sally-bauer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Biographical Dictionary of Swedish Women: Sally Viola Bauer",
+          "url": "https://www.skbl.se/en/article/SallyBauer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Bauer’s identity, occupations, autobiography and published 1939 clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Clock standard unstated. Obvious travel-year typo and unsupported historical totals are excluded.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Sally Bauer biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/bauer-sally"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "bauer-1939"
+    },
+    {
+      "title": "Daily Mail Channel race",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Thursday, 16 August 1951 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "14h 40m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Event date is retained without a start/finish role. Some secondary listings give 14:04 and reverse the route; these remain unresolved rather than silently merged.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Museum race context supports France-to-England; Bauer biography and SKBL agree 14:40. No individual CSA row was located."
+        },
+        {
+          "text": "Dover Museum: Sally Bauer biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/bauer-sally"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Biographical Dictionary of Swedish Women: Sally Viola Bauer",
+          "url": "https://www.skbl.se/en/article/SallyBauer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Bauer’s identity, occupations, autobiography and published 1939 clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Clock standard unstated. Obvious travel-year typo and unsupported historical totals are excluded.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: 16 August 1951 Daily Mail race",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.UK.com: conflicting Bauer 1951 entry",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1951-08-16/sally-bauer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Documents the alternative 1951 duration, route and sponsor.",
+          "label": "Supports"
+        },
+        {
+          "text": "Conflicts with museum race context and Swedish biography; not used as preferred timing evidence.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "bauer-1951"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Kattegat",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1938 · exact day not confirmed"
+        },
+        {
+          "text": "Completed the crossing on her second attempt."
+        },
+        {
+          "text": "17h 5m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "48 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Helena Tolvhed’s authored SKBL biography distinguishes the unsuccessful attempt from the completed 48km swim in 17h05m and connects this career with Bauer’s English Channel swims. Exact day was not established."
+        },
+        {
+          "text": "Swedish Women’s Biographical Dictionary: Sally Bauer, by Helena Tolvhed",
+          "url": "https://www.skbl.se/en/article/SallyBauer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Authored biography identifies Bauer’s Channel career and distinct 1938 Kattegat and Sea of Åland completions.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical scholarly biography; exact event days and original timing records were not inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "sally-bauer-event-1-kattegat"
+    },
+    {
+      "title": "Sea of Åland",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1938 · exact day not confirmed"
+        },
+        {
+          "text": "Grisslehamn → Signilskär"
+        },
+        {
+          "text": "Completed Grisslehamn → Signilskär."
+        },
+        {
+          "text": "13h 6m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "30 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "SKBL’s named scholarly biography describes this completed 30km swim in 13h06m, eight days after Kattegat. The relative interval is not converted into an invented exact date."
+        },
+        {
+          "text": "Swedish Women’s Biographical Dictionary: Sally Bauer, by Helena Tolvhed",
+          "url": "https://www.skbl.se/en/article/SallyBauer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Authored biography identifies Bauer’s Channel career and distinct 1938 Kattegat and Sea of Åland completions.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical scholarly biography; exact event days and original timing records were not inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "sally-bauer-event-2-sea-of-aland"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Öresund crossing",
+      "lines": [
+        {
+          "text": "1931"
+        },
+        {
+          "text": "Helsingborg to Helsingør."
+        }
+      ]
+    },
+    {
+      "title": "Pool records",
+      "lines": [
+        {
+          "text": "1934–1937"
+        },
+        {
+          "text": "Seventeen Swedish freestyle records."
+        }
+      ]
+    },
+    {
+      "title": "Two sea crossings",
+      "lines": [
+        {
+          "text": "1938"
+        },
+        {
+          "text": "Kattegat and Sea of Åland."
+        }
+      ]
+    },
+    {
+      "title": "First Channel success",
+      "lines": [
+        {
+          "text": "27 August 1939"
+        },
+        {
+          "text": "France to England in 15h 22m."
+        }
+      ]
+    },
+    {
+      "title": "Autobiography",
+      "lines": [
+        {
+          "text": "1939"
+        },
+        {
+          "text": "Published Kattegat, Ålandshav, Kanalen."
+        }
+      ]
+    },
+    {
+      "title": "Channel return",
+      "lines": [
+        {
+          "text": "16 August 1951"
+        },
+        {
+          "text": "Completed the Daily Mail race."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "The Swedish Torpedo (2024) — official film page; dramatisation, not verification footage",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.laskfilm.se/the-swedish-torpedo"
+        },
+        {
+          "text": "Trailer and media"
+        },
+        {
+          "text": "Official production page for the 2024 fictional drama inspired by Bauer. This is not a recording of her historical swim."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Sally Bauer?",
+      "value": "This profile includes 2 selected solo performances for Sally Bauer. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Sally Bauer’s featured English Channel swim?",
+      "value": "The featured swim started on Sunday, 27 August 1939 and finished on Sunday, 27 August 1939."
+    },
+    {
+      "label": "How long did Sally Bauer’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 15 hours and 22 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Sally Bauer, record 2248",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2248/sally-bauer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Biographical Dictionary of Swedish Women: Sally Viola Bauer",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.skbl.se/en/article/SallyBauer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Bauer’s identity, occupations, autobiography and published 1939 clocks. Authored biography identifies Bauer’s Channel career and distinct 1938 Kattegat and Sea of Åland completions.",
+          "label": "Supports"
+        },
+        {
+          "text": "Clock standard unstated. Obvious travel-year typo and unsupported historical totals are excluded. Historical scholarly biography; exact event days and original timing records were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "City of Helsingborg: Sally Bauer",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://stadslexikon.helsingborg.se/Sally-Bauer/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Sally Bauer biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/bauer-sally"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: 16 August 1951 Daily Mail race",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "LÄSK: The Swedish Torpedo, official production page",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.laskfilm.se/the-swedish-torpedo"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Official production details for the 2024 drama.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dramatisation, not documentary evidence; its family chronology is not used in the biography.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: conflicting Bauer 1951 entry",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1951-08-16/sally-bauer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Documents the alternative 1951 duration, route and sponsor.",
+          "label": "Supports"
+        },
+        {
+          "text": "Conflicts with museum race context and Swedish biography; not used as preferred timing evidence.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First Channel success",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 27 August 1939"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "15h 22m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "05:50 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "21:12 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "bauer-1939"
+    },
+    {
+      "title": "Daily Mail Channel race",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 16 August 1951 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "14h 40m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "bauer-1951"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Kattegat",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1938 · exact day not confirmed"
+        },
+        {
+          "text": "Completed the crossing on her second attempt."
+        },
+        {
+          "text": "17h 5m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "48 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "sally-bauer-event-1-kattegat"
+    },
+    {
+      "title": "Sea of Åland",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1938 · exact day not confirmed"
+        },
+        {
+          "text": "Grisslehamn → Signilskär"
+        },
+        {
+          "text": "Completed Grisslehamn → Signilskär."
+        },
+        {
+          "text": "13h 6m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "30 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "sally-bauer-event-2-sea-of-aland"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-40c0d3809f9a8ad1d528"
+}

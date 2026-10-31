@@ -1,0 +1,695 @@
+{
+  "slug": "abdel-latif-abou-heif-english-channel",
+  "name": "Abdel Latif Abou Heif",
+  "country": "Egypt",
+  "aliases": [
+    "Abdellatief Abouheif",
+    "Abd el Latif Abou Heif",
+    "Abdel Latif Abdu Heif",
+    "Crocodile of the Nile"
+  ],
+  "highlight": "1955 Butlins Channel race winner · three historical solos",
+  "biography": [
+    "Abdel Latif Abou Heif was an Egyptian marathon swimmer whose name appears in English-language records in several forms, including Abdellatief Abouheif. Born in 1929, he became a leading professional open-water competitor and was widely known as the Crocodile of the Nile. His Channel history belongs to the era when international races and independent attempts brought swimmers from many countries to Dover.",
+    "Dover Museum describes his first success in 1951 as a swim from Cap Gris Nez to Fan Bay. The surviving summaries disagree over the July calendar date, although the historical CS&PF database records the elapsed time as 15:43:00. His next crossing, on 2 August 1953, had an unusual beginning: he swam the first leg of an Egyptian relay, then stayed in the water and completed the Channel himself. The museum records this as an independent one-way success in 13:45, and IMSHOF credits it as an England-to-France speed record.",
+    "In 1955 he won the Butlins race from France to England in 11:44. His later professional career included World Professional Marathon Swimming Federation championships in 1964, 1965 and 1968. Recognition followed across generations: IMSHOF lists him as a 1964 Honor Swimmer and records his induction into the International Swimming Hall of Fame in 1998."
+  ],
+  "flags": [
+    {
+      "code": "EG",
+      "label": "Egypt",
+      "abbr": "EGY"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Egypt"
+    },
+    {
+      "label": "Born",
+      "value": "1929"
+    },
+    {
+      "label": "Also known as",
+      "value": "Crocodile of the Nile"
+    },
+    {
+      "label": "Selected Channel solos",
+      "value": "1951, 1953 and 1955"
+    },
+    {
+      "label": "1955 Channel race",
+      "value": "Butlins winner · 11:44:00"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "IMSHOF 1964; ISHOF 1998"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First historical Channel solo",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Historical date discrepancy: Dover Museum lists 28 July 1951; another compilation lists 29 July. Elapsed time: 15:43:00."
+        },
+        {
+          "text": "Saturday, 28 July 1951 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "15h 43m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The selected recordDate follows Dover Museum. The alternative date is preserved; no overnight departure/arrival explanation is inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "Fan Bay, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical detail 442846 supplies the successful one-way France-to-England swim and elapsed time, attributed to It’s Cold in the Channel. Dover Museum’s Abdel Latif Abdu Heif section gives 28 July and Cap Gris Nez to Fan Bay; Openwaterpedia’s 1951–1960 list item 44 instead gives 29 July. No start/finish-date explanation was established."
+        },
+        {
+          "text": "CS&PF historical database: Abd el Latif Abou Heif, 442846",
+          "url": "https://cspf.co.uk/swim/442846"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Egyptian nationality, 1951 one-way France-to-England swim, 15:43:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Attributes the historical record to the book It’s Cold in the Channel; no exact date, original observer log or federation decision appears on this page.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: 1950s Heyday",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Egyptians and Abdel Latif Abdu Heif sections describe three successful crossings, routes, dates, relay context and 1955 race.",
+          "label": "Supports"
+        },
+        {
+          "text": "Lists the 1951 swim on 28 July; an alternative historical compilation gives 29 July.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Openwaterpedia: selected historical Channel entries",
+          "url": "https://www.openwaterpedia.com/wiki/English_Channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1951–1960 list item 44 gives Abdel Latif Abou Heif, 29 July 1951, 15:43:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary compilation used only to preserve the alternative date, not as proof of federation ratification.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abou-heif-1951"
+    },
+    {
+      "title": "Independent solo following the opening relay leg",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Dover Museum describes a personal solo completion alongside the Egyptian relay attempt; this entry records only his continuous individual swim."
+        },
+        {
+          "text": "Independent solo: he continued swimming after his opening relay leg. CS&PF’s historical comment instead calls it a Butlins race; the event classification conflicts."
+        },
+        {
+          "text": "Sunday, 2 August 1953 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 45m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Independent (Dover Museum archive classification)",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Channel Swimming Dover successful swim number 75 supplies date, 13:45, one-way England–France and Independent recognition, with the note that Abouheif continued after the first relay leg. CS&PF historical detail 442875 agrees on time and direction but labels its comment Butlins race. The museum’s specific account is retained without erasing that classification conflict."
+        },
+        {
+          "text": "Channel Swimming Dover: Abouheif, 2 August 1953",
+          "url": "https://www.channelswimmingdover.org.uk/content/swim/abouheif-abdel-latif-02081953"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful swim number 75, 13:45, England–France, one way, Independent; continued after the first relay leg.",
+          "label": "Supports"
+        },
+        {
+          "text": "CS&PF historical database: Abd el Latif Abou Heif, 442875",
+          "url": "https://cspf.co.uk/swim/442875"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1953 one-way England-to-France swim, 13:45:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Attributes the record to It’s Cold in the Channel and comments “Butlins race”, conflicting with the museum’s independent relay-started solo description.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: 1950s Heyday",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Egyptians and Abdel Latif Abdu Heif sections describe three successful crossings, routes, dates, relay context and 1955 race.",
+          "label": "Supports"
+        },
+        {
+          "text": "Lists the 1951 swim on 28 July; an alternative historical compilation gives 29 July.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Abdellatief Abou Heif, Honor Swimmer, Egypt, 1964",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_32e70eec73ac4c09a2effc28b2b33855.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Pages 1–2: 1964 honour, 1953 Channel speed record, 1955 race win, Crocodile of the Nile nickname and 1998 ISHOF induction.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Lake Michigan elapsed time conflicts with ISHOF; omitted here.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abou-heif-1953"
+    },
+    {
+      "title": "Butlins International Channel race victory",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Dover Museum records four finishers from sixteen starters; Abou Heif won the race."
+        },
+        {
+          "text": "Monday, 15 August 1955 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 44m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "Butlins (reported by CS&PF historical database)",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Matched CS&PF historical detail 442888: one-way France-to-England, 11:44:00, Butlins organisation. Dover Museum dates the successful Butlins race to 15 August 1955, and ISHOF’s 1955 Channel entry identifies first place. This is retrospective organiser recognition reported in a federation-hosted database; no original race log was inspected."
+        },
+        {
+          "text": "CS&PF historical database: Abd el Latif Abou Heif, 442888",
+          "url": "https://cspf.co.uk/swim/442888"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1955 one-way France-to-England swim, 11:44:00, organisation Butlins.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective federation-hosted record reporting another organiser; original race documentation was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: 1950s Heyday",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Egyptians and Abdel Latif Abdu Heif sections describe three successful crossings, routes, dates, relay context and 1955 race.",
+          "label": "Supports"
+        },
+        {
+          "text": "Lists the 1951 swim on 28 July; an alternative historical compilation gives 29 July.",
+          "label": "Limitations"
+        },
+        {
+          "text": "International Swimming Hall of Fame: Abdellatief Abouheif athlete biography",
+          "url": "https://ishof.org/honoree/honoree-abdellatief-abouheif/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Egyptian nationality, birth year 1929, professional career and 1955 Channel race win.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Lake Michigan time differs from IMSHOF’s PDF; no exact Lake Michigan result is adopted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abou-heif-1955"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "First historical Channel success",
+      "lines": [
+        {
+          "text": "1951"
+        },
+        {
+          "text": "France to England in 15:43:00; 28 and 29 July appear in the inspected accounts."
+        }
+      ]
+    },
+    {
+      "title": "Independent solo after a relay start",
+      "lines": [
+        {
+          "text": "Sunday, 2 August 1953"
+        },
+        {
+          "text": "Continued beyond his first relay leg and completed England to France in 13:45."
+        }
+      ]
+    },
+    {
+      "title": "Butlins Channel race winner",
+      "lines": [
+        {
+          "text": "Monday, 15 August 1955"
+        },
+        {
+          "text": "France-to-England winning performance recorded at 11:44:00."
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "1964"
+        },
+        {
+          "text": "Listed as an Honor Swimmer."
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "1998"
+        },
+        {
+          "text": "Induction year supplied by IMSHOF’s biography."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Abdel Latif Abou Heif?",
+      "value": "This profile includes 3 selected solo performances for Abdel Latif Abou Heif. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Abdel Latif Abou Heif’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Saturday, 28 July 1951. The source does not establish whether that date means departure or arrival. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Abdel Latif Abou Heif’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 15 hours, 43 minutes and 0 seconds. Historical date discrepancy: Dover Museum lists 28 July 1951; another compilation lists 29 July. Elapsed time: 15:43:00."
+    }
+  ],
+  "sources": [
+    {
+      "title": "International Swimming Hall of Fame: Abdellatief Abouheif athlete biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-abdellatief-abouheif/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Egyptian nationality, birth year 1929, professional career and 1955 Channel race win.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Lake Michigan time differs from IMSHOF’s PDF; no exact Lake Michigan result is adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "IMSHOF: Abdellatief Abou Heif, Honor Swimmer, Egypt, 1964",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_32e70eec73ac4c09a2effc28b2b33855.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Pages 1–2: 1964 honour, 1953 Channel speed record, 1955 race win, Crocodile of the Nile nickname and 1998 ISHOF induction.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Lake Michigan elapsed time conflicts with ISHOF; omitted here.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: 1950s Heyday",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Egyptians and Abdel Latif Abdu Heif sections describe three successful crossings, routes, dates, relay context and 1955 race.",
+          "label": "Supports"
+        },
+        {
+          "text": "Lists the 1951 swim on 28 July; an alternative historical compilation gives 29 July.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical database: Abd el Latif Abou Heif, 442846",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442846"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Egyptian nationality, 1951 one-way France-to-England swim, 15:43:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Attributes the historical record to the book It’s Cold in the Channel; no exact date, original observer log or federation decision appears on this page.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical database: Abd el Latif Abou Heif, 442875",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442875"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1953 one-way England-to-France swim, 13:45:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Attributes the record to It’s Cold in the Channel and comments “Butlins race”, conflicting with the museum’s independent relay-started solo description.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Dover: Abouheif, 2 August 1953",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swim/abouheif-abdel-latif-02081953"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful swim number 75, 13:45, England–France, one way, Independent; continued after the first relay leg.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical database: Abd el Latif Abou Heif, 442888",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442888"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1955 one-way France-to-England swim, 11:44:00, organisation Butlins.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective federation-hosted record reporting another organiser; original race documentation was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Openwaterpedia: selected historical Channel entries",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterpedia.com/wiki/English_Channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1951–1960 list item 44 gives Abdel Latif Abou Heif, 29 July 1951, 15:43:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary compilation used only to preserve the alternative date, not as proof of federation ratification.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First historical Channel solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 28 July 1951 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "Historical date discrepancy: Dover Museum lists 28 July 1951; another compilation lists 29 July. Elapsed time: 15:43:00."
+        },
+        {
+          "text": "15h 43m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abou-heif-1951"
+    },
+    {
+      "title": "Independent solo following the opening relay leg",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 2 August 1953 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Independent solo: he continued swimming after his opening relay leg. CS&PF’s historical comment instead calls it a Butlins race; the event classification conflicts."
+        },
+        {
+          "text": "13h 45m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abou-heif-1953"
+    },
+    {
+      "title": "Butlins International Channel race victory",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 15 August 1955 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "11h 44m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abou-heif-1955"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-9e0e3ffc2f318a3e6d7c"
+}
