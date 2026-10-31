@@ -11,6 +11,18 @@ import { ResultEvidence } from "./ResultEvidence";
 import { countryFlag } from "@/lib/athrecs/country-flags";
 import { HistoricalTiming } from "./ResultTiming";
 
+const entryLabels: Record<NonNullable<ReportedRaceRecord["entryKind"]>, string> = {
+  race: "Race",
+  stage: "Stage",
+  grouped: "Grouped race record",
+  challenge: "Challenge",
+  expedition: "Expedition",
+  relay: "Team relay",
+  support: "Support participation",
+  attempt: "Unfinished attempt",
+  effort: "Reported effort",
+};
+
 export function ReportedRaceResultRows({
   records,
   bestIds,
@@ -31,13 +43,18 @@ export function ReportedRaceResultRows({
       style={distanceResultStyle(record.distance)}
     >
       <td role="cell" data-label="Race date" className="min-w-36 px-3 py-2 text-xs">
-        {record.reportedDate}
+        {record.reportedDate || "Date not recorded"}
       </td>
       <td role="cell" data-label="Race name" className="min-w-64 px-3 py-2">
         <span className="inline-flex items-center gap-1.5 font-medium">
           {hasReportedFinish(record) ? <CompletionMedal place={record.reportedPlace} /> : null}
           {record.event}
         </span>
+        {record.summary ? (
+          <p className="mt-1 text-xs text-muted" data-result-qualification>
+            {record.summary}
+          </p>
+        ) : null}
         <ResultEvidence
           notes={record.uncertainty}
           urls={record.sources.map((source) => source.url)}
@@ -49,18 +66,18 @@ export function ReportedRaceResultRows({
         {reportedResultSport(record)}
       </td>
       <td role="cell" data-label="Distance" className="whitespace-nowrap px-3 py-2 text-xs">
-        <ResultDistance distance={record.distance} />
+        <ResultDistance distance={record.distance || "Distance not recorded"} />
       </td>
       <td role="cell" data-label="Location" className="min-w-32 px-3 py-2 text-xs">
         <span className="inline-flex flex-wrap items-center gap-1.5">
-          {record.location}
+          {record.location || "—"}
           <CountryFlag
             country={countryFlag(record.location.split(",").at(-1)?.trim()).code || ""}
           />
         </span>
       </td>
       <td role="cell" data-label="Time" className="min-w-40 px-3 py-2">
-        <span className="font-semibold tabular-nums">{record.reportedTime}</span>
+        <span className="font-semibold tabular-nums">{record.reportedTime || "—"}</span>
         {bestIds.has(record.id) ? (
           <span
             className="ml-2 text-xs font-semibold text-accent"
@@ -74,12 +91,14 @@ export function ReportedRaceResultRows({
           </span>
         ) : null}
         <ResultVerificationBadge status="unverified" />
-        <HistoricalTiming
-          performance={record.reportedTime}
-          discipline={record.distance}
-          eventName={record.event}
-          sport={reportedResultSport(record)}
-        />
+        {!record.entryKind || record.entryKind === "race" || record.entryKind === "stage" ? (
+          <HistoricalTiming
+            performance={record.reportedTime}
+            discipline={record.distance}
+            eventName={record.event}
+            sport={reportedResultSport(record)}
+          />
+        ) : null}
         {showEvidence ? (
           <span className="block text-xs text-muted">
             {isParkrunResult({ event: record.event, distanceCode: record.distance })
@@ -89,14 +108,10 @@ export function ReportedRaceResultRows({
         ) : null}
       </td>
       <td role="cell" data-label="Place" className="px-3 py-2 text-xs">
-        {record.reportedPlace}
+        {record.reportedPlace || "—"}
       </td>
       <td role="cell" data-label="Category" className="px-3 py-2 text-xs">
-        {record.entryKind === "stage"
-          ? "Stage"
-          : record.entryKind === "grouped"
-            ? "Grouped race record"
-            : "Race"}
+        {entryLabels[record.entryKind ?? "race"]}
       </td>
       {showEvidence ? (
         <td role="cell" data-label="Source" className="min-w-40 px-3 py-2 text-xs">
