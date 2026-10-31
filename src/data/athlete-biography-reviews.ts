@@ -90,7 +90,7 @@ export const athleteBiographyReviews = [
       "Cook also takes part in conventional road races. On 21 April 2024, just two weeks after finishing Project Africa, he completed the London Marathon in 4:25:40, a time confirmed in the organiser's finish-line report. At the 2026 London Marathon, he recorded 2:46:59 and discussed the result publicly after targeting 2:35. The official 2026 results confirm his 2:46:59 net time. His progression in road racing adds another dimension to a career best known for long expeditions.",
       "On 25 February 2025, Cook completed the Sahara Marathon in 4:34:45, placing 21st overall. Held in the Saharawi refugee camps in southwest Algeria, the event combines desert running with support for the refugee community. Its published 42 km distance and desert setting distinguish this result from his road-marathon performances. The Sahara Marathon is a separate event from the multi-stage Marathon des Sables.",
       "Cook has also tried backyard ultrarunning. In a July 2026 interview, he reported completing 21 laps before stopping because of stomach problems, and said he wanted to return to the format.",
-      "In 2025, Cook completed a run along the length of New Zealand in 73 days. This extended his expedition running beyond Africa and brought another sustained challenge through varied landscapes. The University of Chichester recognised his achievements with an Honorary Master of Sport at its 2025 graduation ceremony. His memoir first appeared in October 2024, with the paperback Mind over Miles following in July 2025, taking his story of endurance and personal change to readers as well as viewers.",
+      "In 2025, Cook completed a run along the length of New Zealand in 73 days. This extended his expedition running beyond Africa and brought another sustained challenge through varied landscapes. In August 2025, he also joined 247 Mission: Iceland, a relay from Hraunhafnartangi to Reykjavik. The seven-athlete team collectively covered 607 kilometres in a reported two days, with Cook sharing the running in relay legs. The University of Chichester recognised his achievements with an Honorary Master of Sport at its 2025 graduation ceremony. His memoir first appeared in October 2024, with the paperback Mind over Miles following in July 2025, taking his story of endurance and personal change to readers as well as viewers.",
       "Cook subsequently co-founded Hardest Adventures. Its origin story traces the idea to meeting his co-founder at the finish of Project Africa in Tunisia. The company combines group adventures with filmed missions, while his work with The Running Charity includes talks, support for coaches and opportunities for young people to experience adventure. Together, his running, books and community projects show how the visibility earned on the road has developed into a wider public role. Project Africa remains the achievement that connects these strands: almost a year of sustained effort made visible to people around the world.",
     ],
     headings: [
@@ -107,7 +107,7 @@ export const athleteBiographyReviews = [
       "London Marathon results in 2024 and 2026",
       "Sahara Marathon 2025: 4:34:45 and 21st overall",
       "Backyard ultrarunning: a reported 21 laps",
-      "New Zealand, his memoir and public recognition",
+      "New Zealand, Iceland, his memoir and public recognition",
       "Hardest Adventures and his continuing influence",
     ],
     mentions: [
