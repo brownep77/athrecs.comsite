@@ -319,14 +319,27 @@ try {
   console.log(
     "Historical batches and Marriott organiser confirmation passed: exact scope, guarded replacements, rollback, source history, structured starts and replay safety.",
   );
-  // Rehearse the new organiser confirmation against the captured production baseline.
+  // Rehearse the organiser correction with raw notes, never public decorated notes.
+  const reephamBefore = new Map();
   for (const row of Object.values(REEPHAM_CONFIRMATION_REVIEW.baseline)) {
     const [current] = await sql.query("select * from editions where id=$1", [row.id]);
     assert.equal(current.start_time, row.start_time);
-    assert(row.notes.startsWith(current.notes));
-    // Production retained a duplicate legacy note suffix; seed that captured history exactly.
-    await sql.query("update editions set notes=$1 where id=$2", [row.notes, row.id]);
+    assert(!Object.hasOwn(row, "notes"), "public annotations are not a raw database baseline");
+    reephamBefore.set(row.id, current.notes);
   }
+  await sql.query("update editions set start_time='10:45' where id=109456642");
+  await assert.rejects(
+    publishCheckedFixtures(sql, publishing, reephamConfirmation, REEPHAM_CONFIRMATION_REVIEW),
+    /Reviewed baseline changed/,
+  );
+  await sql.query("update editions set start_time='10:30' where id=109456642");
+  await assert.rejects(
+    publishCheckedFixtures(sql, publishing, reephamConfirmation, {
+      ...REEPHAM_CONFIRMATION_REVIEW,
+      startCorrections: undefined,
+    }),
+    /Start changed since review/,
+  );
   const reephamConfirmed = await publishCheckedFixtures(
     sql,
     publishing,
@@ -336,7 +349,7 @@ try {
   for (const before of Object.values(REEPHAM_CONFIRMATION_REVIEW.baseline)) {
     const [row] = await sql.query("select * from editions where id=$1", [before.id]);
     assert.equal(row.start_time, "10:15");
-    assert(row.notes.startsWith(before.notes));
+    assert(row.notes.startsWith(reephamBefore.get(before.id)));
     assert.match(row.notes, /31 October 2026 13:51 UTC/);
   }
   assert(
