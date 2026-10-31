@@ -1,11 +1,11 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 14 October 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 31 October 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
-- The accumulated follow-up contains 77 source-backed series with 80 editions: 63 half-marathon editions and 17 ten-mile editions across England, Scotland, Wales, Northern Ireland and Ireland. These are cumulative totals, not additions from the latest release check.
-- Added 55 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
+- The accumulated follow-up contains 90 source-backed series with 93 editions: 71 half-marathon editions and 22 ten-mile editions across England, Scotland, Wales, Northern Ireland and Ireland. These are cumulative totals, not additions from the latest release check.
+- Added 68 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
 - Burnsall, Kettlewell and Malham now use the live official Due North series checkout.
@@ -20,7 +20,23 @@ Oxford Half Marathon is also retained on its established permanent card. The off
 
 ## Held candidates
 
-The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, RunClare, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs and Ennis races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Dorney Lake January–March, Brixton, Nantwich, Swindon, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
+The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, RunClare, Sonia O'Sullivan Cobh, Sixmilebridge and Ennis races, plus the provisional Tom Scott 10; date- or timetable-conflicted Dorking, Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Brixton, Nantwich, Swindon, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. Kirkcudbright remains held while its event-specific page is explicitly in an unlaunched testing state. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
+
+## 15 October 2026 scan
+
+Reedham Ten was attached to its established canonical card for 17 January 2027 rather than duplicated. The direct official Total Race Timing page confirms the road 10-mile race, 10:00 start, open registration, race licence 30222 and course-accuracy certificate 22/475; affiliated entry is £28.10 including the registration fee.
+
+England Athletics also lists licensed 2027 editions of Dorking 10 Mile and Ferriby 10 Mile. Dorking remains in research because the organising club's event page still identifies 7 June 2026 as its latest edition, conflicting with the governing-body date of 6 June 2027. Ferriby remains in research because the organiser currently supplies only a generic club homepage and no unique event-specific official page or direct 2027 checkout.
+
+## 16 October 2026 scan
+
+The official EPIC Norfolk and Total Race Timing pages announced the new EPIC Norwich City Half Marathon for Bank Holiday Monday 3 May 2027 at 09:30. General entries are sold out, but official charity entries remain available at £49.50, so the new canonical card uses the event-specific registration page and accurately describes the remaining entry route.
+
+Three current Total Race Timing records were attached to established canonical cards rather than duplicated. AEPG Great Eastern Run is confirmed for 10 October 2027 at 10:30 with open half-marathon entry from £41 and Anna's Hope 5K on the same card. Southwold Half Marathon on 28 February at 09:00 has sold out its general allocation but retains £42.10 charity entry. Spring Blickling Half on 14 March at 08:45 has open £36.50 entry. All three now use their exact event-specific official sources.
+
+Athletics Ireland's live calendar exposed four additional permit-pending fixtures: Mullingar Half Marathon on 17 March, Dooneen 10 Mile on 18 April, Wexford Festival of Running Half Marathon on 15 May and Lahinch Half Marathon & 6 Mile on 12 September. All remain unpublished in research until their permits are approved; Wexford and Lahinch retain their unique Eventmaster pages as provenance. Midleton Greenway 10 remains represented but without checkout because its official sales window does not open until 1 November 2026.
+
+The RunThrough sitemap contained no other missing in-scope race after canonical slug, normalized yearless name, normalized source URL and series-date matching. Thirsk and Clowne remain held with licences marked `TBC`, and Ripon remains held with licence `#Pending`.
 
 ## 29 August 2026 scan
 
@@ -230,6 +246,128 @@ The following current-source findings supersede earlier scan notes:
 - [Run Gatwick](https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027) currently lists its half at £41 plus a 5% booking fee. The earlier £38 figure is replaced.
 - The half-marathon checkout links from [Oulton Park on 14 February](https://www.runthrough.co.uk/event/oulton-park-gp-5k-10k-half-marathon-marathon-20-mile-metric-marathon-february-2027) and [Dorney Lake on 3 April](https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027) currently redirect to an unrelated Blackburn event. Their exact verified organiser pages now serve as entry destinations. Regression checks require those same-event URLs.
 
-The fixture verifier checks all 77 accumulated series, 80 new-series editions, 55 editions on existing cards, 45 held candidates and the retired invalid card. Separate catalogue duplicate, publication and archive-preservation checks also pass locally. Held permit/date conflicts remain held, and this release contains no athlete performances or result imports.
+The fixture verifier checks all 78 accumulated series, 81 new-series editions, 59 editions on existing cards, 52 held candidates and the retired invalid card. Separate catalogue duplicate, publication and archive-preservation checks also pass locally. Held permit/date conflicts remain held, and this release contains no athlete performances or result imports.
 
 The results-archive failure was traced to this branch removing both seed conflict guards for results with archive metadata. Both guards are restored. Expanded regression coverage checks the complete reviewed result, athlete identity, references and correction history after each seed conflict and an import conflict, while confirming ordinary unreviewed updates and cross-provider conflict protection still work. The PostgreSQL archive workflow passed after restoration; the combined release commit must also pass its full CI gates before merge.
+
+## 18 October 2026 scan
+
+[Vale of York 5M & 10M](https://racebest.com/races/h9a6e) is a newly listed 21 March 2027 road event with a 09:30 start and open entry. It remains unpublished because RaceBest still marks its required England Athletics licence as `Applied For`; both distances are retained on one research record pending an approved licence number.
+
+Athletics Ireland's live calendar was rechecked for every 2027 half-marathon and 10-mile listing. The previously published RunCork, Limerick, Abbeyknockmoy and other approved events are already represented. Bohermeen, Frank Duffy, Irish Life Dublin, Mullingar, Dooneen, Wexford and Lahinch remain permit-pending and therefore stay in research. Midleton Greenway's calendar row says `Register Now`, but its event-specific page states that online ticket sales do not begin until 1 November 2026 at 08:00, so its checkout remains hidden.
+
+## 20 October 2026 scan
+
+[Dublin City Council Dublin City Half Marathon](https://dublincityhalfmarathon.ie/) is now verified for 2 May 2027. The organiser's official page and the Athletics Ireland calendar agree on the date, and the governing-body record has moved to approved permit 26/614. The 2027 edition enriches the existing Dublin City Half card; it remains `TBC` with no checkout or asserted start time because the organiser says entry information will not be released until early 2027.
+
+[Vale of York 5M & 10M](https://racebest.com/races/h9a6e) remains in research because its direct official registration page still shows only `EA Licence Applied For`. All other 2027 half-marathon and 10-mile permit holds were rechecked against the live Athletics Ireland calendar; no other pending fixture cleared publication today.
+
+## 21 October 2026 scan
+
+[DirtRun Wyre Wizard Trail Half Marathon — Spring](https://www.entrycentral.com/wyrewizard2024spring) is verified for 18 April 2027 at 10:00 from the organiser-authorised registration page. The new canonical trail card retains the separate 7.6-mile Super Seven and uses the [event-specific half-marathon checkout](https://www.entrycentral.com/form/114815), with open entry from £20.
+
+[Gullane 8-hour Challenge](https://www.entrycentral.com/Gullanechallenge27) remains unpublished as a half marathon. Its 2027 registration header describes three 4.367-mile laps as a half-marathon milestone inside an open-ended timed challenge, while the organiser copy twice labels the event 27 February 2026. The existing timed-event card remains unchanged until both the year and distinct-distance semantics are resolved.
+
+Athletics Ireland's 2027 half-marathon and 10-mile filters were rechecked. Dublin City remains approved under permit `26/614`; John Treacy Dungarvan, Sonia O'Sullivan Cobh, RunClare Kilkee, Limerick Runs, Dooneen, Frank Duffy, Nenagh, Bohermeen, Mullingar, Sixmilebridge, Wexford, Ennis, Lahinch and Irish Life Dublin remain pending. RaceBest still marks Thirsk `TBC`, Ripon `#Pending` and Vale of York `EA Licence Applied For`.
+
+## 22 October 2026 scan
+
+[Run Falmouth Half Marathon](https://www.sientries.co.uk/event/run-falmouth-half-marathon-2027) is verified for 4 April 2027 at 10:00. Its event-specific SiEntries checkout is open, with affiliated entry from £24.
+
+[Run Barra](https://www.kayleighsweestars.co.uk/events/run-barra-2027) is verified for 29 May 2027. The Ocean Installer Half Barrathon starts at 09:40 and has open £30 [event-specific entry](https://www.entrycentral.com/form/130961); the 10K, 5K and junior fun runs stay on the same canonical festival card.
+
+Canonical-slug, normalized yearless-name, normalized official-source and series-date checks found no match for either race. Run Kilkee's official page now confirms its 24 July 2027 half marathon and 10K timetable, but it remains unpublished while the Athletics Ireland permit is pending and the live checkout exposes only a 10K ticket. Other permit and date-conflicted research holds are unchanged.
+
+## 23 October 2026 scan
+
+RunThrough has corrected the three remaining held Dorney Lake pages. The official organiser pages now consistently confirm half marathon, 10K and 5K programmes on [17 January](https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-january-2027), [6 February](https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-february-2027) and [13 March 2027](https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-march-2027), each starting at 09:10 with open half-marathon entry at £34 plus the booking fee. All three editions enrich the established Dorney Lake card alongside its verified 3 April edition.
+
+The downstream half-marathon checkout links still redirect to an unrelated Blackburn event. Each exact organiser page is therefore retained as the safe open-entry destination until RunThrough fixes those links. Current UK licence and Irish permit holds remain unpublished.
+
+## 24 October 2026 scan
+
+[AJ Bell Great Scottish Run](https://www.greatrun.org/events/great-scottish-run/) is verified for 3 October 2027. The organiser and Scottish Athletics agree on the date, the half marathon starts at 10:10, and organiser-authorised earlybird half entry is open at £43. The verified edition enriches the established Glasgow card and retains the 10K on that same canonical series.
+
+RunThrough's renamed [Basildon Half Marathon, 10K and Juniors](https://www.runthrough.co.uk/event/basildon-half-marathon-september-2027) page consistently confirms the existing 12 September 2027 edition and 09:00 half start. The canonical Basildon card now uses that current source and retains all three distances rather than exposing a second series.
+
+[Kirkcudbright Half Marathon & Buckland Burn Up](https://www.entrycentral.com/kirkcudbrighthalfmarathon) remains unpublished. Its event-specific page consistently gives 29 May 2027, but explicitly says the festival is still in a testing state and has not been launched for public sign-ups; it stays in research until that status is resolved.
+
+## 25 October 2026 start-time and catalogue review
+
+[Phoenix Energy Belfast City Half Marathon](https://eventmaster.ie/event/81ZZS7qTV1) is verified for 19 September 2027 at 09:00. Open affiliated entry starts at £48; the edition enriches the established Belfast half-marathon card.
+
+[Gisburn Forest Trail Races](https://www.sientries.co.uk/event/gisburn-forest-10km-trail-race-2027-2) is verified for 7 August 2027. The licensed 10K starts at 11:00 and the half marathon at 13:00, with open affiliated half entry from £35 through the event-specific checkout. Both distances remain on the existing Gisburn Forest card.
+
+[The Corofin Loop](https://eventmaster.ie/event/oOlbck3tLm) is verified for 1 November 2026 at 09:00 with approved Athletics Ireland permit `26/433`. The sold-out 8K and 10-mile categories remain together on one canonical card, with no stale checkout advertised.
+
+The inclusive 25 October 2026–25 January 2027 window contains 283 live half-marathon or approximately 10-mile edition rows. The complete snapshot is recorded in [`fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-25-checkpoint.json`](fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-25-checkpoint.json). Every row has a check date and local timezone. Confirmed rows retain the attempted current-edition URL and wave scope; open rows retain an unresolved reason, exact next action and retry date for the existing daily AthRecs fixtures, results and athletes checkpoint. Existing clocks were preserved unless current-edition evidence justified a correction.
+
+All 19 editions held on 25 October were checked against official organiser, club, council or authorised registration material. Their stored starts were confirmed except Canterbury Trail Half, whose organiser entry programme gives 09:00 rather than the unsupported 10:00. Five further imminent clocks were resolved: Attack of the Zombie Cows uses one shared 08:30 eight-hour-challenge start; Anglesey Trail Half starts at 08:15 after its 08:00 brief; Apocalypse runners start at 10:10 after the 10:00 canicross wave; Corofin's 8K and 10-mile categories share 09:00; and Rosliston Rumble Autumn is Sunday 1 November at 09:00, not 31 October. Apocalypse remains outside the static catalogue because its authorised entry title and category say 10 Mile while the current event copy also describes 11 miles and “9-ish” plus a “1-ish” climb; its confirmed wave evidence remains in the checkpoint pending a consistent published distance.
+
+Two imported listings fail the catalogue distance gate. Brecons Fell Running, Trail and Yoga Camp is a camp whose authorised listing offers 12K, not a public 10-mile race, so its event card is retired while its research evidence remains. November Nightmare's organiser says its advertised “half” is approximately 16 miles; only that invalid Half edition is retired, preserving the marathon event and the 09:00 shared-challenge evidence. No organiser messages or additional scheduler were created.
+
+## 26 October 2026 rolling start review
+
+The inclusive rolling window is now 26 October 2026–26 January 2027. Removing the elapsed 25 October rows leaves 264 live half-marathon or approximately 10-mile edition rows in [`fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-26-checkpoint.json`](fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-26-checkpoint.json). Existing confirmed evidence and check dates are preserved; the 18 reviews due today were opened against current-edition sources and now record exact attempted URLs, source outcomes, local timezone, distance or wave scope and follow-up state.
+
+Seventeen due rows are confirmed. Dalmeny is 10:30; Devon's standard half is 11:00 and canicross half 11:10; Elan Valley is 12:30; Radcliffe Thirteen Arches is 09:30; Bideford is 10:30; Birmingham is 09:30; Cirencester is 09:00; Croft's 10-mile wave is 10:00; Flying Fox and Guy Fawkes are 10:30; Lancaster is 11:00; Marlow is 09:30; Richmond is 09:00; Oulton Park's half is 11:00; and Tentsmuir's half is 09:30. The England Athletics Lancaster and Marlow rows are explicitly recorded as aliases of their canonical cards. Previously confirmed Attack of the Zombie Cows and Apocalypse checkpoint rows now expose their evidenced 08:30 shared-challenge and 10:10 runner-wave times instead of leaving the local-time field blank.
+
+Derwentwater 10 remains unresolved. Keswick AC's current race page confirms the 1 November 2026 edition but does not publish a start time; the secondary 12:00 listing is not accepted as official current-edition proof. The existing daily checkpoint will retry on 27 October against any new club instructions, authorised entry programme or governing-body material. No organiser contact or additional scheduler was created.
+
+The current source scan also found Naas 10 Mile & Half Marathon on 28 February 2027 and Tralee's 2027 10-mile and half-marathon editions. Live catalogue matching rejected both as additions: Naas already has both distance rows on one canonical card, while Tralee already has its 10-mile card and its half edition on the existing Tralee card. The Athletics Ireland calendar returned no matching Naas or Tralee permit record in exact-name searches, so no replacement catalogue row or duplicate checkout was introduced.
+
+## 27 October 2026 official calendar and start review
+
+The inclusive rolling start window is now 28 October 2026–28 January 2027. The checkpoint contains 271 half-marathon or approximately 10-mile edition rows in [`fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-28-checkpoint.json`](fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-28-checkpoint.json): 270 live rows plus the verified St Annes 10 Mile awaiting persistent publication. Earlier checked evidence remains intact; open reviews retain their attempted-source state, reason, next action and retry date for the existing daily AthRecs fixtures, results and athletes checkpoint.
+
+Six live rows added since the prior snapshot were reviewed from their current-edition sources. Petzl Night Runner Delamere's linked competitor-notes PDF confirms the half-marathon Trail 13 wave at 18:00, London and London Riverside MoRun confirm their half-marathons at 09:30, and the authorised Beccles Turkey Trot record retains its 11:00 start after a fresh direct-source retry was recorded. The separate Croft and Gainsborough imports were classified as duplicate aliases of their existing canonical cards, with their 10:00 and 09:00 starts preserved. All times are local Europe/London; their source attempts, outcomes, wave scope and retry dates are recorded in the checkpoint.
+
+Derwentwater 10 is resolved at 12:00 Europe/London. Keswick Athletic Club's official races page links the current 1 November 2026 edition, the official event homepage confirms the 2026 10-mile road race, and its Race Information page states the 12:00 start near George Fisher's outdoor shop. The linked Events Up North endpoint returned HTTP 403; that failed attempt is recorded without relying on it. The confirmed start is scheduled for the required two-day recheck on 30 October.
+
+Lancaster Race Series' organiser calendar and authorised BookitZone pages add five missing canonical cards: St Annes 10 Mile on 24 January at 10:30; Morecambe Series Half Marathon & 5K on 2 May at 11:00; Father's Day Half Marathon & 10K on 20 June at 11:00 using the established live canonical slug; George & Dragon Riverside Half Marathon & 10K on 1 August at 11:00; and George & Dragon 20 Mile & 10 Mile on 29 August at 11:00. The existing Williamson Park card gains its 15 August half-marathon and 10K edition at 11:30—the page-level 10:30 clock belongs only to the family walk/run—and the existing Morecambe Marathon card gains its 19 September marathon, half-marathon and 10K edition at 11:00. Each open edition uses its event-specific authorised entry page.
+
+Live catalogue matching rejected Morecambe Festival of Running on 10 January and Calder Vale Good Friday 10 Mile on 26 March as additions because their canonical 2027 editions already exist. Ripon 10 Mile remains in research while its direct official page continues to mark the race licence pending. No additional scheduler or organiser message was created.
+
+## 27 October 2026 BookitZone rescan
+
+[Darwen 'Roller Coaster' Half Marathon](https://bookitzone.com/lee_passco/NPjFFX) is verified for 4 April 2027 at 10:00 from the organiser-authorised entry programme. Darwen Dashers Running Club and RunningSpec Events advertise a measured, chipped and UKA-licensed road half marathon under licence `28677`, with open entry from £28.84. The separate 1.5-mile junior fun run starts at 10:15 and remains on the same canonical event card.
+
+Canonical-slug, normalized yearless-name, normalized official-source and series-date checks found no static or live catalogue match. Retford, Hereford, Wiltshire, Hastings, Liversedge, Great North West and Merthyr discoveries were rejected as additions because their verified 2027 editions already exist. The start-time checkpoint is unchanged because Darwen falls beyond the inclusive 27 October 2026–27 January 2027 review window.
+
+## 28 October 2026 official-source rescan
+
+[Battersea Park Half Marathon, 10K & 5K](https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027) is now internally consistent for Saturday 3 April 2027. RunThrough corrected the opening copy that previously said July; the official title, date summary and race-day copy now agree. The half marathon starts at 10:30 and the 10K at 11:15. The live catalogue already carries this date on `runthrough-battersea-park-5k-10k-september`, so the existing multi-distance card is enriched instead of creating a duplicate. RunThrough's visible checkout buttons currently redirect to an unrelated Blackburn race, so the exact organiser event page remains the published official entry destination.
+
+The live match was checked by canonical slug, normalized yearless and punctuation-free name, normalized official source URL and series/date. The fresh official scan also rejected Lossiemouth, Scurry Vogrie, Ironbridge, Blarney Stone Mad Half, Glenmore Challenge, Great North West, Shakespeare, Norwich, Marriott's Way, Wimbledon, Windsor, Dorney and Carsington as additions because their verified editions already exist. Vale of York remains held while its governing-body licence is only marked applied for.
+
+## 29 October 2026 permit and rolling-start review
+
+[Limerick Runs Race Series](https://eventmaster.ie/event/wZeLhPySRQ) is now verified under approved Athletics Ireland permit `26/591`. Its 10-mile finale is on 18 April 2027 at 09:00 in Castleconnell, with open €30 [distance-specific entry](https://eventmaster.ie/event/wZeLhPySRQ/P3wdhwQTd). The January 5K, February 10K, March 4-mile and April 10-mile programme remains on one canonical card. Live and static matching found no collision by canonical slug, normalized yearless and punctuation-free name, normalized official source URL or series/date, so the former permit-pending research record is promoted rather than duplicated.
+
+The inclusive rolling start-time window is now 29 October 2026–29 January 2027. The live catalogue still contains 270 in-scope rows, with no 29 January boundary additions; the verified St Annes 10 Mile seed keeps the complete checkpoint at 271 records in [`fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-29-checkpoint.json`](fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-29-checkpoint.json). Existing checked evidence, unresolved reasons, next actions and retry dates remain open for the existing daily AthRecs fixtures, results and athletes checkpoint.
+
+Petzl Night Runner Delamere received its required two-day start review. The current organiser page still identifies the half marathon as two laps and explicitly publishes the half at 18:00 and 10K at 19:00, Europe/London. The linked 2026 competitor-notes PDF was attempted again but the crawler could not access it; the live organiser timetable independently confirms the preserved distance-specific start. No organiser message or additional scheduler was created.
+
+## 30 October 2026 rolling-start and official-source review
+
+The inclusive rolling start-time window is now 30 October 2026–30 January 2027. The live catalogue contains 282 qualifying half-marathon or approximately 10-mile rows; the verified St Annes 10 Mile seed and the guarded Pagan Midwinter retirement bring the complete checkpoint to 284 records in [`fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-30-checkpoint.json`](fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-30-checkpoint.json). All prior evidence remains open through the existing daily AthRecs fixtures, results and athletes checkpoint.
+
+The four imminent reviews due today were reopened against current-edition official material. Petzl Night Runner Delamere remains 18:00 on 31 October. On 1 November, Croft's 10-mile wave remains 10:00, Gainsborough's half remains 09:00 and Derwentwater 10 remains 12:00. Their due retries are closed unless an organiser publishes a race-day correction.
+
+Eight newly live rows were reviewed. Dark Skies Wooler starts its half at 19:00 on 31 October; Kilpatrick Hills is advertised at 08:00 on 14 November; Monument Run and Silverstone Runfest start their half-marathon programmes at 09:00 and 10:00 respectively on 22 November; Edinburgh and Glasgow MoRun start their half marathons at 09:30; and Cluny Castle starts its half at 10:00. Loggerheads remains unresolved: the authorised category feed publishes 08:15 while the organiser-linked logistics page publishes 08:45, and the organiser's own event description does not reconcile them. Both real attempts, the unresolved reason, next action and 2 November retry are recorded without guessing.
+
+The new 30 January boundary adds Lee Valley VeloPark half at 09:30 and 10-mile at 09:45, Queen Elizabeth Country Park's 21.6K half at 09:30, and Winter Lucky Dip's seven-hour challenge at 09:00. Pagan Midwinter remains a guarded research retirement: its authorised page calls the course a half and gives 11:00, but also states that it is well over 14 miles, so neither the fixture nor its clock qualifies for public half-marathon publication.
+
+The official organiser, registration, governing-body and club scan found no newly announced qualifying race absent from the canonical catalogue. Glenmore Challenge is approved and opens entry on 1 November but is already published; Irish permit-pending, UK licence-pending and date-conflicted candidates remain held. No organiser message or additional scheduler was created.
+
+## 31 October 2026 rolling-start and official-source review
+
+[Ferriby 10 Mile Road Race](https://theentrypoint.co.uk/events/ferriby-10-2027-5oMzQOkpngeZl7p) has cleared its former provenance hold. The organiser-authorised registration and race-information pages consistently confirm 31 January 2027, a 09:00 start and open £30 entry. The verified edition enriches the existing Ferriby card and replaces its generic England Athletics search provenance; no duplicate card is created.
+
+The inclusive rolling start-time window is now 31 October 2026–31 January 2027. The live catalogue contains 291 qualifying rows; the verified St Annes 10 Mile seed and guarded Pagan Midwinter retirement bring the checkpoint to 293 records in [`fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-31-checkpoint.json`](fixture-reviews/uk-ireland-half-ten-mile-starts-2026-10-31-checkpoint.json). The 31 current-run reviews record real official or authorised URLs, outcomes, local timezone and wave scope. Open records retain an unresolved reason, next action and retry date for the existing daily AthRecs fixtures, results and athletes checkpoint.
+
+Every 31 October race was attempted again. Ten starts remain directly visible in current organiser or authorised programmes; Dalmeny's elapsed URL now redirects to the organiser index and Rosliston's machine-readable page no longer exposes its timetable, so their previously confirmed current-edition evidence is preserved without inventing a new clock. The corrected Rosliston date remains 1 November. Seven due 7 November records were resolved: Beacons 09:30, Coldwell 09:30, Dirt Half 10:00, Bexhill half 10:10, Phoenix Lest We Forget 08:30 flexible start, South Downs 09:00 and Victoria Park half 09:30. ATW remains open because the official page links final information but its accessible text does not expose a distance-specific start; its imported 10:00 clock is preserved without being labelled newly confirmed.
+
+The ten new 31 January boundary rows were inspected from current-edition official material. Crystal Palace is 10:00, Warwick 09:00, Windsor 09:20, Running Tribe 09:00, Dungarvan 11:00, Dundalk half 10:20, Ferriby 09:00 and Trim 12:00. RUN Battersea's official page confirms the date and entry but does not expose its start in accessible event text, while the Bingley Saunter page combines a 31 January 2027 header with a stale 30 May 2026 timetable; both clocks remain unresolved with retries instead of copying imported or prior-edition times. Dungarvan's start is confirmed, but catalogue publication remains held because its governing-body permit conflict is unresolved and the organiser's linked Eventmaster URL still resolves to the closed 2026 edition.
+
+The wider official scan found no other newly announced qualifying event absent from the canonical catalogue. Irish permit-pending, UK licence-pending and date-conflicted candidates remain held. No organiser message or additional scheduler was created.

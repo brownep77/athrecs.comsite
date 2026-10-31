@@ -131,6 +131,12 @@ export const allFixtureAliases: Readonly<Record<string, string>> = {
 /** Incorrect second-day dates found during the all-sport duplicate audit. */
 export const verifiedFixtureEditionReplacements: VerifiedEditionReplacement[] = [
   {
+    seriesSlug: "rosliston-rumble-autumn",
+    distance: "Half",
+    fromDate: "2026-10-31",
+    toDate: "2026-11-01",
+  },
+  {
     seriesSlug: "isle-of-wight-fell-series-sunday",
     distance: "Other",
     fromDate: "2026-09-12",
