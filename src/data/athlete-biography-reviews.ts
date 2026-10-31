@@ -96,6 +96,7 @@ export const athleteBiographyReviews = [
       "In 2025, Cook completed a run along the length of New Zealand in 73 days, travelling from Bluff to Cape Reinga. During the expedition he also attempted a faster 100 km effort. His account, reported in April 2025, recorded 100.3 km in 10 hours and 59 minutes of moving time, with 11 hours and 19 minutes elapsed including stops. This was an effort within his expedition; the moving time is not an official 100 km race result. Storms, difficult trails and injury made the wider journey a different test from his African road expedition.",
       "Cook also documented an outing with Rarámuri runner Arnulfo Quimare on the Caballo Blanco route in Mexico's Copper Canyon. The video follows an independent attempt on the route, with Cook eventually stopping before completing the full distance. It adds to his experience of ultrarunning terrain and culture, without establishing a finish in the organised Caballo Blanco race.",
       "In August 2025, Cook joined 247 Mission: Iceland, a relay from Hraunhafnartangi to Reykjavik. The seven-athlete team collectively covered 607 kilometres in a reported two days, with Cook sharing the running in relay legs. The University of Chichester recognised his achievements with an Honorary Master of Sport at its 2025 graduation ceremony. His memoir first appeared in October 2024, with the paperback Mind over Miles following in July 2025, taking his story of endurance and personal change to readers as well as viewers.",
+      "Cook's Southwark parkrun films show him developing speed over 5 km as well as endurance over much longer distances. In a film released in October 2025, he describes a 30-day training block and reports finishing tenth in 17:36, paced by Olympic marathon runner Stephen Scullion. A follow-up released in June 2026 shows a 17:06 watch reading and Cook reporting second place. That later figure is a watch time rather than a published parkrun finish time. These shorter efforts brought intervals, pacing and faster running into the story of an athlete best known for crossing continents.",
       "On 16 August 2026, Cook completed IRONMAN Leeds in 12:04:47. The swim was cancelled, so his result records the modified bike-and-run event. His published splits were 7:13:59 for the bike, 17:22 in transition and 4:33:27 for the run. The marathon split was part of the multisport event and is separate from his road-marathon personal best. On 12 September 2026, he also took first place at Great Yarmouth North Beach parkrun in 22:00, tackling its sand-and-shingle course. That is a parkrun finish time, which is not chip timed.",
       "Cook also completed the National Three Peaks Challenge, climbing Ben Nevis in Scotland, Scafell Pike in England and Yr Wyddfa, also called Snowdon, in Wales. His film, released in August 2026, records a finish in 23 hours and nine minutes, leaving 51 minutes inside the 24-hour target. Road transfers connected the three climbs. The challenge brought together mountain endurance and his community work, with a group from The Running Charity taking part. The time describes the filmed challenge, rather than a classified running-race result.",
       "His running has also helped others take on their own challenges. In 2024, he supported Marcus Skeet, known online as The Hull Boy, during the teenager's fundraising for Mind. He joined the final day of Skeet's April mile-a-day challenge and later supported his first marathon in London that September. This was a charity running project, rather than an additional timed London Marathon result for Cook.",
@@ -121,6 +122,7 @@ export const athleteBiographyReviews = [
       "New Zealand and a 100 km expedition effort",
       "Copper Canyon: running with Arnulfo Quimare",
       "Iceland, his memoir and public recognition",
+      "Southwark parkrun: developing his 5 km speed",
       "IRONMAN Leeds and Great Yarmouth parkrun in 2026",
       "National Three Peaks Challenge: 23 hours and nine minutes",
       "Supporting Marcus Skeet and charity running",
@@ -206,6 +208,11 @@ export const athleteBiographyReviews = [
         question: "How long did Russ Cook take to complete the Three Peaks Challenge?",
         answer:
           "His film records a National Three Peaks Challenge finish in 23 hours and nine minutes, including road transfers between Ben Nevis, Scafell Pike and Yr Wyddfa (Snowdon). The film was released in August 2026.",
+      },
+      {
+        question: "How fast has Russ Cook run at Southwark parkrun?",
+        answer:
+          "In his films, Russ Cook reports 17:36 and tenth place at Southwark parkrun, followed by a 17:06 watch reading and second place in a later outing. The latter is a watch time; parkruns are not chip timed.",
       },
     ],
     alternateName: ["Hardest Geezer", "The Hardest Geezer", "Russell Cook"],
