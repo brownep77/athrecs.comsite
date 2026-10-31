@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { HomeUpdatesFeed } from "@/components/editorial/HomeUpdatesFeed";
 import type { HomeSportUpdate } from "@/lib/athrecs/home-updates";
+import type { EditorialArticle } from "@/lib/athrecs/editorial";
 import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
@@ -54,6 +55,7 @@ type Props = {
   broadcasts?: SportBroadcast[];
   updates?: HomeSportUpdate[];
   updatesUnavailable?: boolean;
+  news?: Pick<EditorialArticle, "slug" | "title" | "standfirst" | "date" | "displayDate">[];
 };
 
 const sideLink =
@@ -87,6 +89,7 @@ export function CompactDiscoveryPage({
   broadcasts = [],
   updates,
   updatesUnavailable = false,
+  news = [],
 }: Props) {
   const theme = useHomepageTheme();
   const currentColours = theme === "colourful";
@@ -164,6 +167,67 @@ export function CompactDiscoveryPage({
           ))}
         </ul>
       </nav>
+      {!sport && news.length > 0 ? (
+        <section
+          id="homepage-news"
+          aria-labelledby="homepage-news-heading"
+          className="scroll-mt-44 border-b border-border bg-surface px-3 py-5 sm:px-5 lg:px-6 2xl:px-8"
+        >
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <h2
+              id="homepage-news-heading"
+              className="flex items-center gap-2 font-display text-2xl font-semibold"
+            >
+              <Newspaper className="size-6 text-accent" aria-hidden="true" />
+              Latest news
+            </h2>
+            <div className="flex flex-wrap gap-x-5">
+              <Link to="/news" search={{}} className={actionLink}>
+                All news <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+              <Link to="/race-reports" search={{}} className={actionLink}>
+                Race reports
+              </Link>
+              {updates ? (
+                <a href="#sport-updates" className={actionLink}>
+                  Sport & regional updates
+                </a>
+              ) : null}
+            </div>
+          </div>
+          <ul className="grid gap-3 md:grid-cols-3">
+            {news.map((article) => (
+              <li key={article.slug} className="min-w-0">
+                <article className="flex h-full flex-col rounded-lg border border-border bg-accent-soft/30 p-4 sm:p-5">
+                  <time dateTime={article.date} className="text-xs font-semibold text-accent">
+                    {article.displayDate}
+                  </time>
+                  <h3 className="mt-2 font-display text-xl font-semibold leading-snug">
+                    <Link
+                      to="/news/$slug"
+                      params={{ slug: article.slug }}
+                      className="text-fg no-underline hover:text-accent"
+                    >
+                      {article.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted">
+                    {article.standfirst}
+                  </p>
+                  <Link
+                    to="/news/$slug"
+                    params={{ slug: article.slug }}
+                    aria-label={`Read ${article.title}`}
+                    className={`${actionLink} mt-auto pt-3`}
+                  >
+                    Read story <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
       <div
         className={`grid items-start gap-5 px-3 py-5 sm:px-5 lg:grid-cols-[190px_minmax(0,1fr)] lg:px-6 xl:grid-cols-[205px_minmax(0,1fr)_245px] xl:gap-6 2xl:px-8 ${currentColours ? "bg-[#f5f8f9]" : "bg-bg"}`}
       >
@@ -550,7 +614,9 @@ export function CompactDiscoveryPage({
                 TV & live streams
               </h2>
               {sport.slug === "track-and-field" ? (
-                <a href="#diamond-league" className={actionLink}>Diamond League fixtures & TV by country</a>
+                <a href="#diamond-league" className={actionLink}>
+                  Diamond League fixtures & TV by country
+                </a>
               ) : broadcasts.length ? (
                 <div className="mt-2 divide-y divide-border">
                   {broadcasts.map((broadcast) => (
