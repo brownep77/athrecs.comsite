@@ -6,7 +6,19 @@ export type ReportedRaceRecord = {
   reportedDate: string;
   reportedTime: string;
   reportedPlace: string;
-  entryKind?: "race" | "stage" | "grouped";
+  entryKind?:
+    | "race"
+    | "stage"
+    | "grouped"
+    | "challenge"
+    | "expedition"
+    | "relay"
+    | "support"
+    | "attempt"
+    | "effort";
+  sport?: string;
+  /** Public result qualifications; never put private source or review notes here. */
+  summary?: string;
   evidenceLabel?: string;
   uncertainty: string;
   sources: readonly { label: string; url: string }[];
@@ -22,6 +34,16 @@ export type ReportedRaceHistory = {
 };
 
 export function getReportedRaceHistory(slug: string): ReportedRaceHistory | null {
+  if (slug === "russ-cook") {
+    return {
+      title: "Results and challenges",
+      countLabel: "reported entries",
+      includeInResults: true,
+      description:
+        "Reported races, expeditions, challenges and support efforts appear alongside race results. Each row preserves partial dates, timing qualifications and finish status. These entries are not verified race results and do not contribute to race PBs or rankings.",
+      records: russCookReportedRecords,
+    };
+  }
   if (slug === "haruki-murakami") {
     return {
       title: "Unverified results",
@@ -62,4 +84,5 @@ import {
   neilFeatherbyReportedPersonalBests,
 } from "@/data/neil-featherby-reported";
 import { harukiMurakamiUnverifiedRecords } from "@/data/haruki-murakami-unverified";
+import { russCookReportedRecords } from "@/data/russ-cook-reported";
 import type { ReportedPersonalBest } from "./reported-personal-bests";
