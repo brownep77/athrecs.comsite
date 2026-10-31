@@ -2,6 +2,31 @@
 // A matching slug alone never publishes this text: exact-text approval is required.
 export const athleteBiographyReviews = [
   {
+    slug: "matt-james-television",
+    title: "Matt James marathon times, running results & biography",
+    description:
+      "Matt James’s running history, including his 3:00:20 New York marathon, London, Boston, Chicago, Sydney and half-marathon results.",
+    alternateName: ["Matthew James"],
+    headings: ["Matt James", "Marathon progression", "More running results", "Training and goals"],
+    paragraphs: [
+      "Matt James is a television personality, entrepreneur and distance runner, best known for leading the 2021 season of The Bachelor. Raised in North Carolina, he studied economics and played college football at Wake Forest University. His sporting life has continued through regular marathon training and racing.",
+      "His recorded marathon history begins with Chicago in 2019, completed in 4:45:32. He ran the New York City Marathon in 5:02:23 in 2021, improved to 3:46:45 in 2022 and then to 3:04:50 in 2023. In 2024 he finished London in 3:00:41 before improving again to 3:00:20 in New York, just 20 seconds beyond three hours. He returned to New York in 2025 to finish in 3:31:10.",
+      "His wider results include Boston in 3:49:38 in 2022 and 3:36:54 in 2025, and Sydney in 3:30:15 in 2026. Over the half-marathon distance, he ran 1:49:18 in San Francisco in 2023, 1:27:32 at the 2024 Disney Princess Half Marathon and 1:24:32 at the 2025 Brooklyn Half. His 2025 Fifth Avenue Mile was 5:14.",
+      "James has spoken about wanting to break three hours and about learning to pace races with coach Julia Lucas. His progression reflects years of training across several distances. He is among the announced runners for the New York City Marathon on 1 November 2026.",
+    ],
+  },
+  {
+    slug: "karen-sarahi-gonzalez-london-2025-fc604f093e5df9f2",
+    title: "Karen Sarahi Gonzalez (iluvsarahii) marathon results & biography",
+    description:
+      "Karen Sarahi Gonzalez’s running biography and results, including London 3:24:53 and New York marathon finishes in 2024 and 2025.",
+    alternateName: ["iluvsarahii", "Karen Sarahi Robles", "Karen Sarahi Gonzalez"],
+    headings: ["Karen Sarahi Gonzalez"],
+    paragraphs: [
+      "Karen Sarahi Gonzalez, known online as iluvsarahii, is a beauty creator, makeup artist and founder of LYBRE Lashes. She describes herself as a Mexican Latina and has built a community around beauty and self-expression. Running has become another sustained commitment: she completed the 2024 New York City Marathon in 3:37:47, ran London in 3:24:53 in April 2025, and returned to New York that November to finish in 3:34:00. She is listed for the 2026 New York City Marathon with Team Maybelline.",
+    ],
+  },
+  {
     slug: "chelsea-clinton-wmm-d9a12c39-5ec7-11ed-9b3c-02848444c773",
     title: "Chelsea Clinton marathon results, Boston time & biography",
     description:
