@@ -75,10 +75,10 @@ export const athleteBiographyReviews = [
     slug: "russ-cook",
     title: "Russ Cook (Hardest Geezer): biography, Africa run & results",
     description:
-      "Russ Cook, the Hardest Geezer: his 352-day Africa run, earlier challenges, London Marathon results, charity work and rise to international recognition.",
+      "Russ Cook, the Hardest Geezer: his 352-day Africa run, Brighton and London Marathon results, Sahara Marathon, earlier challenges and rise to fame.",
     paragraphs: [
       "Russ Cook, known as the Hardest Geezer and also as Russell Cook, is a British endurance runner, adventurer and author from Worthing, West Sussex. His defining achievement is Project Africa: running from Cape Agulhas in South Africa to Ras Angela in Tunisia between 22 April 2023 and 7 April 2024. The 352-day expedition covered approximately 16,300 kilometres through 16 countries, linking the African mainland's southernmost and northernmost points. His account of that journey brought an international audience to a runner whose earlier challenges had already attracted an online following.",
-      "Cook's route into endurance sport began with a search for direction. He has described feeling dissatisfied with nights out and spontaneously running home to Worthing from Brighton. A friend then encouraged him to train for the Brighton Half Marathon. Completing it led to the Brighton Marathon and further running challenges. In his account, training offered something he had been missing: a routine, measurable progress and growing confidence in what he could achieve. These early Brighton appearances are part of his reported running story; their editions and finishing times have not been established here.",
+      "Cook's route into endurance sport began with a search for direction. He has described feeling dissatisfied with nights out and spontaneously running home to Worthing from Brighton. A friend then encouraged him to train for the Brighton Half Marathon. Completing it led to the Brighton Marathon and further running challenges. In his account, training offered something he had been missing: a routine, measurable progress and growing confidence in what he could achieve. His Brighton Marathon finish on 15 April 2018 is now documented at 3:42:59 chip time. He wore bib 16177 at the race, an early milestone before the expeditions that would bring him wider recognition.",
       "In 2019, Cook ran from the Asian side of Istanbul to London without a support crew, carrying essentials in a backpack and sleeping in a hammock. A contemporary interview records 66 days to London, covering roughly 71 marathon distances through 11 countries. He then continued home to Worthing, bringing the full journey to 68 days and approximately 73 marathon distances. The challenge supported The Running Charity and established his interest in journeys measured in weeks rather than hours. Those marathon equivalents describe cumulative distance, not entries in 71 or 73 separate organised races.",
       "In 2020, Cook completed a marathon-distance challenge while pulling a car, in a reported nine hours and 56 minutes. The effort combined sustained running and pulling resistance, so its time belongs to that particular challenge rather than a conventional road-marathon comparison. Before Project Africa, he also documented a seven-day buried-alive endurance stunt. These unusual challenges helped establish the Hardest Geezer persona and an audience for his attempts to test physical and mental limits; the stunt is not a running result.",
       "His earlier fundraising also included a 68-mile run for West Sussex homelessness charity Turning Tides in 2020. Contemporary coverage reported that he completed the effort in 13 hours and raised more than £1,200 as part of the 2.6 Challenge.",
@@ -87,10 +87,14 @@ export const athleteBiographyReviews = [
       "Cook is widely credited as the first known person to run between Africa's southernmost and northernmost points. That precise route matters. The broader description of him as the first person to run the length of Africa was contested by the World Runners Association, which recognises Jesper Kenn Olsen's earlier Taba-to-Cape of Good Hope journey, completed in 2010. The association did not dispute Cook's claim for the southernmost-to-northernmost route. Recognising those different endpoints preserves the significance of his achievement and the history of earlier trans-African running.",
       "His fame grew as people followed Project Africa while it was happening. Video episodes and social updates gave the journey a continuing story, with progress, setbacks and the finish unfolding in public. Steven Bartlett's publishing company describes Bartlett discovering Cook's updates during the first week of the expedition; their subsequent connection led to a Diary of a CEO appearance and a publishing relationship. By the finish in Tunisia, supporters had travelled to join him and international news coverage had taken the story beyond his existing online audience. The combination of sustained endurance, candid storytelling and a finish people could share explains much of his wider recognition.",
       "Project Africa went on to raise more than £1 million for The Running Charity and Sandblast. The Running Charity uses running and ongoing support to help young people experiencing homelessness or complex needs. Cook worked for the organisation before the expedition and now supports it as an ambassador. Sandblast works with Saharawi communities through education, arts and cultural programmes and lists Cook as a patron from 2024. His fundraising gives the expedition an impact beyond the sporting accomplishment, supporting organisations with which he has maintained a continuing connection.",
-      "Cook also takes part in conventional road races. On 21 April 2024, just two weeks after finishing Project Africa, he completed the London Marathon in 4:25:40, a time confirmed in the organiser's finish-line report. At the 2026 London Marathon, he recorded 2:46:59 and discussed the result publicly after targeting 2:35. The official 2026 results confirm his 2:46:59 net time. His progression in road racing adds another dimension to a career best known for long expeditions.",
+      "Cook also takes part in conventional road races. On 21 April 2024, just two weeks after finishing Project Africa, he completed the London Marathon in 4:25:40 while supporting young runners from The Running Charity. On 2 November 2025, he ran the New York City Marathon in 2:53:05 net time, taking him below three hours. At the London Marathon on 26 April 2026, he improved to 2:46:59 net, six minutes and six seconds quicker than New York. He discussed his disappointment after targeting 2:35, alongside the lessons and progress he took from the race. These performances show his development in road racing alongside the long expeditions for which he became known.",
       "On 25 February 2025, Cook completed the Sahara Marathon in 4:34:45, placing 21st overall. Held in the Saharawi refugee camps in southwest Algeria, the event combines desert running with support for the refugee community. Its published 42 km distance and desert setting distinguish this result from his road-marathon performances. The Sahara Marathon is a separate event from the multi-stage Marathon des Sables.",
-      "Cook has also tried backyard ultrarunning. In a July 2026 interview, he reported completing 21 laps before stopping because of stomach problems, and said he wanted to return to the format.",
-      "In 2025, Cook completed a run along the length of New Zealand in 73 days. This extended his expedition running beyond Africa and brought another sustained challenge through varied landscapes. In August 2025, he also joined 247 Mission: Iceland, a relay from Hraunhafnartangi to Reykjavik. The seven-athlete team collectively covered 607 kilometres in a reported two days, with Cook sharing the running in relay legs. The University of Chichester recognised his achievements with an Honorary Master of Sport at its 2025 graduation ceremony. His memoir first appeared in October 2024, with the paperback Mind over Miles following in July 2025, taking his story of endurance and personal change to readers as well as viewers.",
+      "Cook has also tried backyard ultrarunning, where runners repeatedly start a new loop on the hour. Fellow competitor Sam Bodoano described racing alongside him at a Mackyard event on a hilly cycling circuit near London in May 2026. Cook's own video records 20 completed laps before he stopped during the 21st, struggling with stomach problems. His account shows how the repeated hourly starts, overnight running and limited recovery create a different test from a continuous road race.",
+      "In 2025, Cook completed a run along the length of New Zealand in 73 days, travelling from Bluff to Cape Reinga. During the expedition he also attempted a faster 100 km effort. His account, reported in April 2025, recorded 100.3 km in 10 hours and 59 minutes of moving time, with 11 hours and 19 minutes elapsed including stops. This was an effort within his expedition; the moving time is not an official 100 km race result. Storms, difficult trails and injury made the wider journey a different test from his African road expedition.",
+      "Cook also documented an outing with Rarámuri runner Arnulfo Quimare on the Caballo Blanco route in Mexico's Copper Canyon. The video follows an independent attempt on the route, with Cook eventually stopping before completing the full distance. It adds to his experience of ultrarunning terrain and culture, without establishing a finish in the organised Caballo Blanco race.",
+      "In August 2025, Cook joined 247 Mission: Iceland, a relay from Hraunhafnartangi to Reykjavik. The seven-athlete team collectively covered 607 kilometres in a reported two days, with Cook sharing the running in relay legs. The University of Chichester recognised his achievements with an Honorary Master of Sport at its 2025 graduation ceremony. His memoir first appeared in October 2024, with the paperback Mind over Miles following in July 2025, taking his story of endurance and personal change to readers as well as viewers.",
+      "On 16 August 2026, Cook completed IRONMAN Leeds in 12:04:47. The swim was cancelled, so his result records the modified bike-and-run event. His published splits were 7:13:59 for the bike, 17:22 in transition and 4:33:27 for the run. The marathon split was part of the multisport event and is separate from his road-marathon personal best. On 12 September 2026, he also took first place at Great Yarmouth North Beach parkrun in 22:00, tackling its sand-and-shingle course. That is a parkrun finish time, which is not chip timed.",
+      "His running has also helped others take on their own challenges. In 2024, he supported Marcus Skeet, known online as The Hull Boy, during the teenager's fundraising for Mind. He joined the final day of Skeet's April mile-a-day challenge and later supported his first marathon in London that September. This was a charity running project, rather than an additional timed London Marathon result for Cook.",
       "Cook subsequently co-founded Hardest Adventures. Its origin story traces the idea to meeting his co-founder at the finish of Project Africa in Tunisia. The company combines group adventures with filmed missions, while his work with The Running Charity includes talks, support for coaches and opportunities for young people to experience adventure. Together, his running, books and community projects show how the visibility earned on the road has developed into a wider public role. Project Africa remains the achievement that connects these strands: almost a year of sustained effort made visible to people around the world.",
     ],
     headings: [
@@ -104,10 +108,14 @@ export const athleteBiographyReviews = [
       "Was he the first person to run across Africa?",
       "How the Hardest Geezer became famous",
       "Fundraising and charity work",
-      "London Marathon results in 2024 and 2026",
+      "London and New York City Marathon results",
       "Sahara Marathon 2025: 4:34:45 and 21st overall",
-      "Backyard ultrarunning: a reported 21 laps",
-      "New Zealand, Iceland, his memoir and public recognition",
+      "Mackyard backyard ultra: 20 completed laps",
+      "New Zealand and a 100 km expedition effort",
+      "Copper Canyon: running with Arnulfo Quimare",
+      "Iceland, his memoir and public recognition",
+      "IRONMAN Leeds and Great Yarmouth parkrun in 2026",
+      "Supporting Marcus Skeet and charity running",
       "Hardest Adventures and his continuing influence",
     ],
     mentions: [
@@ -156,6 +164,21 @@ export const athleteBiographyReviews = [
         question: "Which charities did Project Africa support?",
         answer:
           "Project Africa went on to raise more than £1 million for The Running Charity and Sandblast. Their work supports young people experiencing homelessness or complex needs and Saharawi communities respectively.",
+      },
+      {
+        question: "What was the Hardest Geezer's Brighton Marathon time?",
+        answer:
+          "Russ Cook completed the Brighton Marathon on 15 April 2018 in 3 hours, 42 minutes and 59 seconds chip time, wearing bib 16177.",
+      },
+      {
+        question: "What was Russ Cook's New York City Marathon time?",
+        answer:
+          "Russ Cook ran the New York City Marathon on 2 November 2025 in 2 hours, 53 minutes and 5 seconds net time.",
+      },
+      {
+        question: "Did Russ Cook finish IRONMAN Leeds?",
+        answer:
+          "Yes. Russ Cook completed the modified IRONMAN Leeds event on 16 August 2026 in 12 hours, 4 minutes and 47 seconds. The swim was cancelled, so this was a bike-and-run result.",
       },
       {
         question: "What are Russ Cook's London Marathon times?",
