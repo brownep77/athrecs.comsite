@@ -43,7 +43,7 @@ ROWS = [
     row("SYNTH0000000004", "Corin", "Vale", "04:12:00", place=4),
     row("SYNTH0000000005", "Delphine", "Marsh", "03:43:00", place=5),      # existing same-name athlete
     row("SYNTH0000000006", "Emrys", "Tallow", "04:01:00", place=6),        # existing Pace Notes history
-    row("SYNTH0000000007", "Fenna", "Rook", "01:35:00", event="VLMW", label="Wheelchair", gender="W", nat="", place=1, half=""),
+    {**row("SYNTH0000000007", "Fenna", "Rook", "01:35:00", event="VLMW", label="Wheelchair", gender="W", nat="", place=1, half=""), "bib": "W7"},
 ]
 
 
@@ -92,17 +92,25 @@ def main():
             "athletes": [
                 {"id": 11, "displayName": "Delphine Marsh", "aliases": [], "gender": "F"},
                 {"id": 12, "displayName": "Emrys Tallow", "aliases": [], "gender": "M"},
+                {"id": 13, "displayName": "Aster Quill", "aliases": [], "gender": "M"},
             ],
             "accounts": [],
             "results": [{"id": "history:pace-emrys", "athleteId": 12, "editionId": EDITION["id"], "date": DATE, "year": YEAR,
                          "distanceKm": 42.195, "finishSeconds": 14460, "timeSeconds": [14460],
                          "sourceUrls": [pace_url], "sourceKind": "history", "provider": "Pace Notes",
-                         "gender": "M", "category": "18-39"}],
+                         "gender": "M", "category": "18-39"},
+                        # A year-only ranking history with London event text and the same bib.
+                        {"id": "history:ranking-aster", "athleteId": 13, "editionId": None, "date": "", "year": YEAR,
+                         "distanceKm": 42.195, "finishSeconds": 13200, "timeSeconds": [13200], "bib": "1001",
+                         "meetingIsLondon": True, "overallPlace": 999, "sourceUrls": ["https://example.test/rankings"],
+                         "sourceKind": "history", "provider": "Synthetic rankings", "gender": "M"}],
             "metadata": {"editionContextDigest": plan._hash(plan.EDITION_CONTEXT), "fingerprint": "synthetic"},
         }
         built = plan.build_plan(observations, snapshot, EDITION, ctx["batchId"], CREATED)
         by_id = {g["sourceResultId"]: g for g in built["groups"]}
-        assert by_id["SYNTH0000000001"]["disposition"] == "new"
+        aster = by_id["SYNTH0000000001"]
+        assert aster["disposition"] == "linked" and aster["athleteId"] == 13
+        assert aster["existingMatches"][0]["method"] == "same_edition_bib"
         assert by_id["SYNTH0000000003"]["disposition"] == by_id["SYNTH0000000004"]["disposition"] == "held"
         assert "repeated_source_display_name" in by_id["SYNTH0000000003"]["reasons"]
         assert by_id["SYNTH0000000005"]["reasons"] == ["existing_name_or_alias_requires_review"]
@@ -111,6 +119,7 @@ def main():
         assert linked["existingMatches"][0]["method"] == "exact_official_result_locator"
         assert linked["existingMatches"][0]["matchedUrls"] == [pace_url]
         new = by_id["SYNTH0000000002"]
+        assert new["disposition"] == "new"
         perf = new["history"]["performances"][0]
         assert new["history"]["provider"] == "TCS London Marathon results"
         assert perf["verificationStatus"] == "source_verified" and perf["timing"]["basis"] == "chip"
@@ -123,8 +132,19 @@ def main():
         assert wheel_group["history"]["performances"][0]["discipline"] == "Marathon (wheelchair)"
         assert "Wheelchair race" in wheel_group["history"]["performances"][0]["labels"]
         assert "sourceNationalityObservation" not in wheel_group["athleteDraft"]["profileDetails"]
-        assert [built["summary"][k] for k in ("new", "linked", "held")] == [3, 1, 3]
+        assert [built["summary"][k] for k in ("new", "linked", "held")] == [2, 2, 3]
 
+        # A bib repeated across this year's events is never used as a locator.
+        dup = [dict(o) for o in observations]
+        dup_wheel = next(o for o in dup if o["sourceScope"] == "VLMW"); dup_wheel["bib"] = "1001"
+        assert {g["sourceResultId"]: g for g in plan.build_plan(dup, snapshot, EDITION, ctx["batchId"], CREATED)["groups"]}["SYNTH0000000001"]["disposition"] == "held"
+        # A bib match in another year, or with a different time, is never linked.
+        other = copy.deepcopy(snapshot)
+        other["results"][1]["year"] = YEAR - 1
+        assert {g["sourceResultId"]: g for g in plan.build_plan(observations, other, EDITION, ctx["batchId"], CREATED)["groups"]}["SYNTH0000000001"]["disposition"] == "held"
+        other = copy.deepcopy(snapshot)
+        other["results"][1]["finishSeconds"], other["results"][1]["timeSeconds"] = 13201, [13201]
+        assert "existing_locator_time_conflict" in {g["sourceResultId"]: g for g in plan.build_plan(observations, other, EDITION, ctx["batchId"], CREATED)["groups"]}["SYNTH0000000001"]["reasons"]
         # A time conflict on the same locator is held, not linked.
         conflict = copy.deepcopy(snapshot)
         conflict["results"][0]["finishSeconds"], conflict["results"][0]["timeSeconds"] = 14461, [14461]

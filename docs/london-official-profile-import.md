@@ -25,9 +25,13 @@ capture inbox, freshness locks and rehearsal-before-production rule.
     for staff evidence). Date of birth, residence and county are never inferred.
 - Wheelchair and para-wheelchair results use the discipline
   `Marathon (wheelchair)`, so they never count as running marathon PBs.
-- A finisher whose official locator (same year and `idp`) already appears on an
-  existing result or source history (e.g. a 2025 Pace Notes history) is
-  `linked`: evidence is appended to the audit log and the existing profile,
+- A finisher whose official locator (same year and `idp`) or bib (unique within
+  this year's captured events) already appears on an existing result or source
+  history of the same London edition (Pace Notes, mika:timing supplied results,
+  World Marathon Majors rankings with London event text and this year) is
+  `linked`, provided name, time, gender, nationality and age category agree.
+  Ranking "place" values are not official overall places and are never used
+  as a locator. On link: evidence is appended to the audit log and the existing profile,
   result, history, visibility and claims are unchanged.
 - Everything else is held for staff review: repeated names within the race,
   possible name variants, any existing athlete or account with a matching
@@ -77,6 +81,14 @@ new snapshot, plan and rehearsal. Do not weaken the guards to continue.
 Run editions sequentially and take a fresh snapshot for the next one, so the
 profiles created for one year are screened as existing names for the next.
 Repeat runners therefore appear as held for review rather than as duplicates.
+
+## Snapshot size
+
+The database HTTP endpoint caps a response at 64 MB. The official snapshot reads
+only the history performance fields the planner uses plus an md5 of each full
+performance (so the fingerprint still changes if anything changes) and reads
+that part in keyset pages of 5,000 rows in its own order, so the part digest
+equals the fingerprint's. The directory is already streamed in 20,000-row pages.
 
 ## Reference race dates
 

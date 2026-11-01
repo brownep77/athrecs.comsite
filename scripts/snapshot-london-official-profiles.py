@@ -24,6 +24,7 @@ import argparse
 import importlib.util
 import json
 import pathlib
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parent
 
@@ -57,10 +58,57 @@ def configure(context):
     snap.BATCH, snap.YEAR, snap.DATE = context["batchId"], context["year"], context["date"]
     snap.EDITION_IDS = tuple([context["edition"]["id"], *context["edition"]["equivalentIds"]])
     snap.RESULTS_SQL = snap._RESULTS_SQL_TEMPLATE.replace("__LONDON_EDITION_IDS__", ",".join(str(v) for v in snap.EDITION_IDS))
-    snap.HISTORIES_SQL = snap._HISTORIES_SQL_TEMPLATE.replace("__LONDON_YEAR__", str(snap.YEAR))
+    snap.HISTORIES_SQL = _slim_histories_sql().replace("__LONDON_YEAR__", str(snap.YEAR))
     snap.PARTS = tuple((name, {"results": snap.RESULTS_SQL, "histories": snap.HISTORIES_SQL}.get(name, sql), order)
                        for name, sql, order in snap.PARTS)
     return context
+
+
+# Only the performance fields the planner reads, plus an md5 of the complete
+# performance so any other change still alters the fingerprint. The full rows
+# exceed the database HTTP endpoint's 64 MB response cap for London editions.
+SLIM_PERFORMANCE = """jsonb_strip_nulls(jsonb_build_object(
+ 'discipline',p.performance->'discipline','meeting',p.performance->'meeting','eventSlug',p.performance->'eventSlug',
+ 'date',p.performance->'date','year',p.performance->'year','yearLabel',p.performance->'yearLabel',
+ 'performance',p.performance->'performance','timing',p.performance->'timing','ageGroup',p.performance->'ageGroup',
+ 'profileExcluded',p.performance->'profileExcluded','syntheticTest',p.performance->'syntheticTest',
+ 'disqualification',p.performance->'disqualification','status',p.performance->'status',
+ 'sourceUrls',p.performance->'sourceUrls','bib',p.performance->'bib','place',p.performance->'place',
+ 'places',p.performance->'places','archiveReference',jsonb_strip_nulls(jsonb_build_object(
+   'bib',p.performance#>'{archiveReference,bib}','sourceUrl',p.performance#>'{archiveReference,sourceUrl}',
+   'sourceKey',p.performance#>'{archiveReference,sourceKey}')))) performance,
+ md5(p.performance::text) performance_md5"""
+HISTORY_PAGE = 5000
+
+
+def _slim_histories_sql():
+    template = snap._HISTORIES_SQL_TEMPLATE
+    if template.count("p.ordinal,p.performance\n FROM") != 1:
+        raise ValueError("Unexpected shared history snapshot SQL")
+    return template.replace("p.ordinal,p.performance\n FROM", "p.ordinal," + SLIM_PERFORMANCE + "\n FROM")
+
+
+def _bib(value):
+    text = str(value or "").strip()
+    return text.upper() if re.fullmatch(r"[A-Za-z0-9-]{1,12}", text) else None
+
+
+def normalize_result(row, kind):
+    """Shared normalization plus the bib and overall place the official planner may match on."""
+    result = _legacy_normalize_result(row, kind)
+    if kind == "canonical":
+        result["bib"] = _bib(row.get("bib"))
+        result["overallPlace"] = row.get("overall_place")
+    else:
+        performance = row["performance"]
+        result["bib"] = _bib(performance.get("bib")) or _bib((performance.get("archiveReference") or {}).get("bib"))
+        place = str(performance.get("place") or "").strip()
+        result["overallPlace"] = int(place) if place.isdigit() else None
+        result["meetingIsLondon"] = bool(re.search(r"\blondon\s+marathon\b", str(performance.get("meeting") or ""), re.I)) or performance.get("eventSlug") == "london-marathon"
+    return result
+
+
+_legacy_normalize_result = snap.normalize_result
 
 
 def _bound_configure(context=None):
@@ -73,6 +121,46 @@ def _bound_configure(context=None):
 # time: give it this adapter's planner and configuration, never the Pace Notes one.
 snap.plan = plan
 snap.configure = _bound_configure
+snap.normalize_result = normalize_result
+
+
+def _paged(query, sql, order, params, keys, page=HISTORY_PAGE):
+    """Keyset pages in the part's own order, so the digest equals the fingerprint's."""
+    rows, last = [], None
+    columns = ",".join("t." + k for k in keys)
+    placeholders = ",".join(f"${len(params) + i + 1}" for i in range(len(keys)))
+    while True:
+        where = f" WHERE ({columns})>({placeholders})" if last else ""
+        page_sql = "SELECT t.*,md5(to_jsonb(t)::text) row_hash FROM (" + sql + ") t" + where + " ORDER BY " + order + f" LIMIT {page}"
+        batch = query([(page_sql, params + ([last[k] for k in keys] if last else []))], True)[0]
+        rows.extend(batch)
+        if len(batch) < page:
+            return rows
+        last = batch[-1]
+
+
+def snapshot(args):
+    """The shared snapshot, with the large history part read in keyset pages."""
+    original_query_builder = snap.base.connection
+
+    def connection(path, branch, timeout=60):
+        cfg, query = original_query_builder(path, branch, timeout)
+
+        def paged_query(statements, readonly=False):
+            out = []
+            for sql, params in statements:
+                if sql == snap.hashed_rows_sql(snap.HISTORIES_SQL, "athlete_id,provider,external_id,ordinal"):
+                    out.append(_paged(query, snap.HISTORIES_SQL, "athlete_id,provider,external_id,ordinal", list(params),
+                                      ["athlete_id", "provider", "external_id", "ordinal"]))
+                else:
+                    out.extend(query([(sql, params)], readonly))
+            return out
+        return cfg, paged_query
+    snap.base.connection = connection
+    try:
+        return snap.snapshot(args)
+    finally:
+        snap.base.connection = original_query_builder
 
 
 def fingerprint_sql():
@@ -138,4 +226,4 @@ if __name__ == "__main__":
     else:
         if not (args.source and args.output and args.edition_config):
             parser.error("--source, --output and --edition-config are required for a snapshot")
-        snap.snapshot(args)
+        snapshot(args)

@@ -14,8 +14,10 @@ not the athlete's identity: every profile remains provisional and unclaimed.
 
 The duplicate screen reuses the Pace Notes London planner's helpers and hold
 rules. Snapshot results (canonical or source histories, including earlier
-Pace Notes London histories) are matched by the official result locator: the
-same year and idp on the official results host. Names never establish identity.
+Pace Notes, mika:timing and World Marathon Majors London histories) are matched
+by the official result locator (same year and idp on the official results host)
+or by the same bib within this London edition. Any name, time, gender,
+nationality or age-category conflict holds the row. Names never establish identity.
 """
 
 from __future__ import annotations
@@ -49,6 +51,7 @@ RECORD_KEYS = {
     "last_name", "first_name", "nationality", "club", "bib", "category", "half", "finish", "idp",
 }
 WHEELCHAIR_LABELS = {"Wheelchair", "Para wheelchair"}
+MATCH_METHODS = {"exact_official_result_locator", "same_edition_bib"}
 
 YEAR = None
 DATE = None
@@ -320,6 +323,18 @@ def build_plan(observations, snapshot, edition, batch_id, created_at):
             for key in screening_name_keys(n) & allowed_keys:
                 directory_index[key].add("account:" + account_id)
     locator_index, performance_index, result_ids = defaultdict(list), defaultdict(list), set()
+    bib_index = defaultdict(list)
+    source_bibs = Counter(o["bib"].upper() for o in observations if o["bib"])
+
+    def in_edition(result):
+        if str(result.get("editionId")) in accepted_editions:
+            return True
+        # Year-only histories (e.g. ranking imports) count only with explicit London
+        # marathon event text, this year and no conflicting date.
+        return (result.get("editionId") is None and result.get("meetingIsLondon") is True
+                and str(result.get("year")) == str(YEAR) and result.get("date") in (None, "", edition["date"])
+                and result.get("distanceKm") in (None, edition["distanceKm"]))
+
     for result in snapshot.get("results", []):
         result_id = _entity_id(result["id"])
         if result_id in result_ids:
@@ -332,7 +347,12 @@ def build_plan(observations, snapshot, edition, batch_id, created_at):
         for locator in sorted({official_locator(u) for u in result["sourceUrls"]} - {None}):
             if locator[0] == YEAR:
                 locator_index[locator[1]].append(result)
-        if str(result.get("editionId")) in accepted_editions:
+        if in_edition(result) and result.get("bib"):
+            bib_index[str(result["bib"]).upper()].append(result)
+        # Ranking places were checked against 2026 and are not the official
+        # overall place, so they are never used as a locator. Same-name,
+        # same-time performances in this edition are review candidates only.
+        if in_edition(result):
             for seconds in _result_times(result):
                 performance_index[seconds].append(result)
     for group in groups:
@@ -342,9 +362,15 @@ def build_plan(observations, snapshot, edition, batch_id, created_at):
         for n in group["names"]:
             for key in screening_name_keys(n):
                 candidates.update(directory_index.get(key, ()))
+        found = {}
+        for result in locator_index.get(group["sourceResultId"], []):
+            found.setdefault(_entity_id(result["id"]), (result, "exact_official_result_locator"))
+        # A bib repeated across this year's events (e.g. elite and wheelchair) is not a locator.
+        if o["bib"] and source_bibs[o["bib"].upper()] == 1:
+            for result in bib_index.get(o["bib"].upper(), []):
+                found.setdefault(_entity_id(result["id"]), (result, "same_edition_bib"))
         existing_matches, matched_athlete_ids = [], set()
-        for result in sorted({_entity_id(r["id"]): r for r in locator_index.get(group["sourceResultId"], [])}.items()):
-            result = result[1]
+        for _, (result, method) in sorted(found.items()):
             athlete_id = _entity_id(result["athleteId"])
             matched_athlete_ids.add(athlete_id)
             athlete = athlete_by_id.get(athlete_id)
@@ -367,10 +393,14 @@ def build_plan(observations, snapshot, edition, batch_id, created_at):
             existing_matches.append({
                 "resultId": result["id"], "athleteId": result["athleteId"], "editionId": result.get("editionId"),
                 "matchedUrls": sorted(u for u in result["sourceUrls"] if official_locator(u) == (YEAR, group["sourceResultId"])),
+                "matchedBib": o["bib"] if method == "same_edition_bib" else None,
                 "matchedTimeSeconds": group["finishSeconds"] if group["finishSeconds"] in _result_times(result) else None,
                 "sourceKind": result.get("sourceKind"), "provider": result.get("provider"),
-                "conflicts": sorted(set(mismatch)), "method": "exact_official_result_locator",
-                "basis": "Same official result locator (year and idp), reviewed edition, known full name/alias and compatible recorded time/facts.",
+                "conflicts": sorted(set(mismatch)), "method": method,
+                "basis": {
+                    "exact_official_result_locator": "Same official result locator (year and idp)",
+                    "same_edition_bib": "Same bib in the same London edition",
+                }[method] + ", known full name/alias and compatible recorded time/facts.",
             })
         if len(matched_athlete_ids) > 1:
             reasons.add("same_result_locator_on_multiple_athletes")
@@ -498,7 +528,7 @@ def validate_plan(plan, *, snapshot=None):
         if g["disposition"] == "linked":
             if "history" in g or "athleteDraft" in g or not g["existingMatches"]:
                 raise ValueError("A linked group reuses an existing performance only")
-            if any(m["method"] != "exact_official_result_locator" or m["conflicts"] for m in g["existingMatches"]):
+            if any(m["method"] not in MATCH_METHODS or m["conflicts"] for m in g["existingMatches"]):
                 raise ValueError("A linked group needs a conflict-free official locator match")
             if len({str(m["athleteId"]) for m in g["existingMatches"]}) != 1 or str(g["athleteId"]) != str(g["existingMatches"][0]["athleteId"]):
                 raise ValueError("A linked group must resolve to one existing athlete")
