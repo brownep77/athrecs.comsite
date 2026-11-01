@@ -2,6 +2,7 @@ import { useId, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { MessageSquare, ArrowDownLeft, ArrowUpRight, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { IntercomContactDialog } from "./IntercomContactDialog";
 import {
   getStaffAthleteMessages,
   saveStaffAthleteMessage,
@@ -60,7 +61,8 @@ function MessageHistory({ target }: { target: MessageTarget }) {
   const [direction, setDirection] = useState<"all" | "sent" | "received">("all");
   const [page, setPage] = useState(1);
   const [adding, setAdding] = useState(false);
-  const [composing, setComposing] = useState(false);
+  const [composing, setComposing] = useState<"intercom" | "athrecs" | null>(null);
+  const [chatOpen, setChatOpen] = useState(false);
   const [notice, setNotice] = useState("");
   const query = useQuery({
     queryKey: ["staff-athlete-messages", target, direction, page],
@@ -69,14 +71,51 @@ function MessageHistory({ target }: { target: MessageTarget }) {
     refetchInterval: 60000,
   });
   const data = query.isError ? undefined : query.data;
+  const intercomContact = data
+    ? { userId: data.recipientUserId, email: data.recipientEmail }
+    : null;
+  const intercomContactKey = JSON.stringify([data?.recipientUserId, data?.recipientEmail]);
+  const canOpenIntercom = Boolean(intercomContact?.userId || intercomContact?.email);
   return (
     <div className="space-y-4 pt-3">
       <p className="text-sm text-muted">
-        Private correspondence for staff. Site emails appear automatically.{" "}
+        Send email and Messenger messages in Intercom, where you can read and reply to those
+        conversations. This history contains AthRecs emails, connected mailbox replies and messages
+        recorded by staff. Intercom conversations are not automatically copied here.
+      </p>
+      <div className="flex flex-wrap gap-2" aria-label="Contact in Intercom">
+        <Button
+          size="sm"
+          disabled={!canOpenIntercom}
+          onClick={() => {
+            setComposing(composing === "intercom" ? null : "intercom");
+            setNotice("");
+          }}
+          aria-expanded={composing === "intercom"}
+        >
+          {composing === "intercom" ? "Close Intercom email draft" : "Email in Intercom"}
+        </Button>
+        <Button size="sm" disabled={!canOpenIntercom} onClick={() => setChatOpen(true)}>
+          Message in Intercom
+        </Button>
+      </div>
+      {composing === "intercom" && intercomContact && canOpenIntercom ? (
+        <IntercomEmailDraft key={intercomContactKey} contact={intercomContact} />
+      ) : null}
+      {chatOpen && intercomContact && canOpenIntercom ? (
+        <IntercomContactDialog
+          key={intercomContactKey}
+          contact={intercomContact}
+          channel="chat"
+          onClose={() => setChatOpen(false)}
+        />
+      ) : null}
+      <p className="text-sm text-muted">
         <a href="/admin/email-inbox" className="text-accent underline">
           Connect your inbox
         </a>{" "}
-        to add athlete replies automatically. Use Record a message for other conversations.
+        to add replies received at paul@athrecs.com. Use Record a message to save a copy of another
+        conversation.
       </p>
       <div className="flex flex-wrap items-center gap-2">
         <div className="flex flex-wrap gap-1" aria-label="Message filters">
@@ -119,20 +158,21 @@ function MessageHistory({ target }: { target: MessageTarget }) {
           size="sm"
           disabled={!data?.recipientEmail}
           onClick={() => {
-            setComposing(!composing);
+            setComposing(composing === "athrecs" ? null : "athrecs");
             setNotice("");
           }}
-          aria-expanded={composing}
+          variant="secondary"
+          aria-expanded={composing === "athrecs"}
         >
-          {composing ? "Close email" : "Compose email"}
+          {composing === "athrecs" ? "Close AthRecs email" : "Send using AthRecs email"}
         </Button>
       </div>
-      {composing && data?.recipientEmail ? (
+      {composing === "athrecs" && data?.recipientEmail ? (
         <SendEmailForm
           target={target}
           recipient={data.recipientEmail}
           onSaved={() => {
-            setComposing(false);
+            setComposing(null);
             setDirection("sent");
             setPage(1);
             setNotice("Email sent to the provider and saved to this athlete’s record.");
@@ -237,9 +277,65 @@ function MessageHistory({ target }: { target: MessageTarget }) {
       <p className="text-xs leading-5 text-muted">
         Dates use UK time. Earlier invitation emails are included where a send was recorded. Other
         site email tracking starts with this feature. Provider acceptance does not confirm delivery
-        or reading. Athlete replies sync after you connect paul@athrecs.com.
+        or reading. Opening Intercom or copying a draft does not add a sent-message record.
       </p>
     </div>
+  );
+}
+
+function IntercomEmailDraft({
+  contact,
+}: {
+  contact: { userId: string | null; email: string | null };
+}) {
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const [handoffOpen, setHandoffOpen] = useState(false);
+  return (
+    <form
+      className="space-y-3 rounded-lg border border-border bg-elevated p-4"
+      onSubmit={(event) => {
+        event.preventDefault();
+        setHandoffOpen(true);
+      }}
+    >
+      <h3 className="font-semibold">Email in Intercom</h3>
+      <p className="text-sm">
+        {contact.email ? `To: ${contact.email}. ` : "Open this athlete’s Intercom contact. "}
+        Prepare an optional draft here, then copy it into Intercom. You can also write it there.
+        Choose the sender and send the email in Intercom.
+      </p>
+      <label className="block text-sm">
+        Subject (optional)
+        <input
+          aria-label="Intercom email subject"
+          className={fieldClass}
+          maxLength={200}
+          value={subject}
+          onChange={(event) => setSubject(event.target.value)}
+        />
+      </label>
+      <label className="block text-sm">
+        Message draft (optional)
+        <textarea
+          aria-label="Intercom email draft"
+          className={fieldClass}
+          rows={8}
+          maxLength={20000}
+          value={body}
+          onChange={(event) => setBody(event.target.value)}
+        />
+      </label>
+      <Button type="submit">Continue in Intercom</Button>
+      {handoffOpen ? (
+        <IntercomContactDialog
+          contact={contact}
+          channel="email"
+          draft={subject.trim() || body.trim() ? { subject, body } : undefined}
+          onClose={() => setHandoffOpen(false)}
+        />
+      ) : null}
+    </form>
   );
 }
 
@@ -269,7 +365,11 @@ function SendEmailForm({
         mutation.mutate();
       }}
     >
-      <h3 className="font-semibold">Compose email</h3>
+      <h3 className="font-semibold">Send using AthRecs email</h3>
+      <p className="text-xs text-muted">
+        This sends through AthRecs’ email provider and records the email here. Replies go to
+        paul@athrecs.com.
+      </p>
       <p className="text-sm">
         From: paul@athrecs.com
         <br />
@@ -308,7 +408,7 @@ function SendEmailForm({
         </p>
       ) : null}
       <Button type="submit" disabled={mutation.isPending}>
-        {mutation.isPending ? "Sending…" : "Send email"}
+        {mutation.isPending ? "Sending…" : "Send using AthRecs email"}
       </Button>
     </form>
   );

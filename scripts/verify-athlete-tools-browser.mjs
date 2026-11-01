@@ -218,7 +218,7 @@ try {
   await page.getByRole("button", { name: "Find signup", exact: true }).click();
   await page.getByRole("button", { name: "Choose recipient", exact: true }).click();
   const shareInvite = page.getByRole("button", {
-    name: "Create WhatsApp / Viber / Telegram invitation",
+    name: "Create invitation for Intercom or another app",
     exact: true,
   });
   await shareInvite.waitFor();
@@ -246,6 +246,34 @@ try {
     "Creating a social invitation does not send email",
   );
   const privateUrl = await page.getByLabel("Private claim link").inputValue();
+  for (const label of ["Email invitation in Intercom", "Message invitation in Intercom"]) {
+    await page.getByRole("button", { name: label, exact: true }).click();
+    const handoff = page.getByRole("dialog").filter({
+      has: page.getByRole("link", { name: "Open athlete in Intercom", exact: true }),
+    });
+    const destination = new URL(
+      await handoff
+        .getByRole("link", { name: "Open athlete in Intercom", exact: true })
+        .getAttribute("href"),
+    );
+    assert.equal(destination.origin, "https://app.intercom.com");
+    assert.deepEqual([...destination.searchParams], [["user_id", "synthetic-runner"]]);
+    assert(
+      !destination.href.includes("invitation"),
+      "The private claim token stays out of Intercom URLs",
+    );
+    assert(
+      (await handoff.getByLabel("Draft to paste in Intercom").inputValue()).includes(privateUrl),
+    );
+    await handoff.getByRole("button", { name: "Close", exact: true }).click();
+    await handoff.waitFor({ state: "hidden" });
+  }
+  assert.equal((await page.evaluate(() => window.invitationCreates)).length, 1);
+  assert.equal(
+    (await page.evaluate(() => window.invitationEmails)).length,
+    0,
+    "Intercom handoff does not email the invitation",
+  );
   assert.equal(
     new URL(
       await page.getByRole("link", { name: "Open Telegram invitation" }).getAttribute("href"),

@@ -148,7 +148,10 @@ try {
   }
   const initial = await call("getStaffAthleteMessages", filters);
   assert.equal(initial.total, 0);
+  assert.equal(initial.recipientUserId, athlete.id, "Intercom uses the protected account identity");
+  assert.equal(initial.recipientEmail, athlete.email);
   assert.equal(lastHeaders.get("cache-control"), "private, no-store");
+  assert(lastHeaders.get("vary").includes("Authorization"));
   const deliveryCount = deliveries.length;
   await call("saveStaffAthleteMessage", message);
   await call("saveStaffAthleteMessage", message);
@@ -156,10 +159,13 @@ try {
   let history = await call("getStaffAthleteMessages", filters);
   assert.equal(history.received, 1, "Retry is idempotent");
   assert.equal(history.messages[0].body, message.body, "Plain text retained, not evaluated");
-  assert.equal(
-    (await call("getStaffAthleteMessages", { ...filters, target: { userId: other.id } })).total,
-    0,
-  );
+  const otherHistory = await call("getStaffAthleteMessages", {
+    ...filters,
+    target: { userId: other.id },
+  });
+  assert.equal(otherHistory.total, 0);
+  assert.equal(otherHistory.recipientUserId, other.id, "Another account resolves only its own ID");
+  assert.equal(otherHistory.recipientEmail, other.email);
   await assert.rejects(
     () => call("getStaffAthleteMessages", { ...filters, target: { userId: "missing" } }),
     /not found/,
@@ -240,10 +246,13 @@ try {
     channel: "whatsapp",
     subject: "Source reply",
   });
-  assert.equal(
-    (await call("getStaffAthleteMessages", { ...filters, target: sourceTarget })).total,
-    1,
-  );
+  const unclaimedHistory = await call("getStaffAthleteMessages", {
+    ...filters,
+    target: sourceTarget,
+  });
+  assert.equal(unclaimedHistory.total, 1);
+  assert.equal(unclaimedHistory.recipientUserId, null, "An unclaimed athlete is not an account ID");
+  assert.equal(unclaimedHistory.recipientEmail, null);
   assert.equal(
     (
       await call("getStaffAthleteMessages", {
@@ -255,6 +264,12 @@ try {
     "Same name does not join correspondence",
   );
   await sql`insert into athlete_account_links(user_id,user_email,athlete_id,status) values(${athlete.id},${athlete.email},998901,'active')`;
+  const linkedHistory = await call("getStaffAthleteMessages", {
+    ...filters,
+    target: sourceTarget,
+  });
+  assert.equal(linkedHistory.recipientUserId, athlete.id, "An approved link resolves its account");
+  assert.equal(linkedHistory.recipientEmail, athlete.email);
   assert.equal(
     (await call("getStaffAthleteMessages", filters)).received,
     2,
@@ -275,6 +290,12 @@ try {
   const inviteFilters = { ...filters, target: { athleteNumber: unrelated.number } };
   const earlier = await call("getStaffAthleteMessages", inviteFilters);
   assert.equal(earlier.sent, 1);
+  assert.equal(earlier.recipientUserId, null, "An invitation is not an approved account link");
+  assert.equal(
+    earlier.recipientEmail,
+    null,
+    "An invitation email is not a verified account mailbox",
+  );
   assert(!JSON.stringify(earlier).includes("hidden-token"));
   await sendAthrecsAuthEmail(payload, {
     from: "paul@athrecs.com",
@@ -382,6 +403,20 @@ try {
   await assert.rejects(() => call("sendStaffAthleteEmail", uncertainSend), /already recorded/);
   assert.equal(deliveries.length, afterUncertain, "Uncertain delivery is not automatically resent");
   await sql`update "user" set "emailVerified"=false where id=${other.id}`;
+  const unverifiedHistory = await call("getStaffAthleteMessages", {
+    ...filters,
+    target: { userId: other.id },
+  });
+  assert.equal(
+    unverifiedHistory.recipientUserId,
+    other.id,
+    "Staff can still open the exact account",
+  );
+  assert.equal(
+    unverifiedHistory.recipientEmail,
+    null,
+    "The handoff does not verify an email address",
+  );
   await assert.rejects(
     () =>
       call("sendStaffAthleteEmail", {
@@ -393,7 +428,7 @@ try {
     /recipient/,
   );
   console.log(
-    "PASS: private staff RPC, athlete binding, correspondence send and exact-body log, recipient verification, duplicate/uncertain-send protection, history, pagination, legacy invitations and code/link redaction. Synthetic recipients only.",
+    "PASS: private staff RPC, exact Intercom recipient identity, athlete binding, correspondence send and exact-body log, recipient verification, duplicate/uncertain-send protection, history, pagination, legacy invitations and code/link redaction. Synthetic recipients only.",
   );
 } finally {
   await server.close();
