@@ -74,6 +74,26 @@ The candidate evidence is bound to the snapshot digest. At apply time the guarde
 append re-checks that the athlete is still public, an athlete profile, not derived
 and not account-linked, and the snapshot fingerprint still covers the directory.
 
+## Publish-leaning policy (owner instruction, 1 November 2026, 13:14)
+
+`plan --policy publish-leaning` (default `conservative`) resolves remaining soft
+holds by creating provisional profiles: repeated or similar names inside one race
+(different official result IDs), and existing-name candidates where evidence picks
+no single athlete. Those profiles carry staff-only `possibleDuplicateOf`
+(candidate IDs, scores, breakdowns) and `identity_review_status:
+provisional_possible_duplicate`; query `profile_details->>'identity_review_status'`
+to review them (no staff queue page exists yet). A chain-bridged single candidate
+links unless gender, nationality or age disagree (a different time in another year
+is expected). Still held: account candidates, account-linked/claimed, private,
+derived or protected compatible candidates, and candidates already holding this
+edition (after the same-name, same-time evidence link).
+
+**Top-up batches.** For an edition already published, take a fresh snapshot and
+candidate evidence, give the config a new batch ID (for example
+`london-official-2026-topup-20261101`) and pass `--previous-plan` with the
+published plan: its new/linked/appended groups become `already_imported` and are
+neither captured nor applied again.
+
 ## Inputs (all private, outside the repository)
 
 | Input | What it is |

@@ -270,6 +270,13 @@ def _history_and_athlete(group, observation, edition, batch_id):
             "sourceResultKeys": group["sourceKeys"],
         },
     }
+    ie = group.get("identityEvidence") or {}
+    if ie.get("decision") == "create_possible_duplicate":
+        # Staff-only (profile_details is never projected publicly beyond its allow-list).
+        details["identity_review_status"] = evidence.DUPLICATE_REVIEW_STATUS
+        details["possibleDuplicateOf"] = ie["possibleDuplicateOf"]
+        details["possibleDuplicateReview"] = {"queue": "athlete_possible_duplicates", "policy": ie["policy"],
+                                              "policyVersion": ie["policyVersion"], "batchId": batch_id}
     if o["nationality"]:
         details["sourceNationalityObservation"] = {"value": o["nationality"], "provider": PROVIDER_NAME, "sourceUrl": o["sourceUrl"]}
     draft = {
@@ -282,7 +289,14 @@ def _history_and_athlete(group, observation, edition, batch_id):
     return history, draft
 
 
-def build_plan(observations, snapshot, edition, batch_id, created_at, *, candidate_evidence=None, chains=None):
+def build_plan(observations, snapshot, edition, batch_id, created_at, *, candidate_evidence=None, chains=None,
+               policy=None, already_imported=None):
+    """already_imported: {groupId: disposition} from an earlier published plan of this edition (top-up batches)."""
+    policy = policy or evidence.CONSERVATIVE
+    if policy not in evidence.POLICIES:
+        raise ValueError("Unknown identity policy")
+    if policy == evidence.PUBLISH_LEANING and candidate_evidence is None:
+        raise ValueError("The publish-leaning policy needs candidate evidence")
     """Prepare an immutable, fully accounted plan. Creates nothing."""
     _require_configured()
     if edition != EDITION_CONTEXT["edition"] or batch_id != EDITION_CONTEXT["batchId"]:
@@ -360,7 +374,7 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, candida
         meta = candidate_evidence.get("metadata") or {}
         if meta.get("snapshotDigest") != snapshot_digest or meta.get("digest") != _hash(candidate_evidence["athletes"]):
             raise ValueError("Candidate evidence was not read for this snapshot")
-    if chains is not None and chains.get("policyVersion") != evidence.POLICY_VERSION:
+    if chains is not None and chains.get("policyVersion") != evidence.CHAIN_VERSION:
         raise ValueError("Unexpected cross-year chain index")
     exact_directory = defaultdict(set)
     for athlete_id, athlete in athlete_by_id.items():
@@ -459,7 +473,7 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, candida
         group["existingMatches"] = existing_matches
         group["samePerformanceCandidates"] = sorted(same_performance, key=lambda r: str(r["resultId"]))
         group["reasons"] = sorted(reasons)
-        if candidate_evidence is not None and reasons and reasons <= evidence.SOFT_REASONS:
+        if candidate_evidence is not None and reasons and reasons <= evidence.soft_reasons(policy):
             athlete_tokens = sorted(c for c in candidates if c.startswith("athlete:"))
             account_tokens = sorted(c for c in candidates if c.startswith("account:"))
             incoming = evidence.birth_interval(YEAR, o["category"])
@@ -475,7 +489,7 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, candida
                     o, facts, incoming, chain, rare and athlete_id in exact_directory.get(exact, ()), YEAR))
             decision, details = evidence.decide(
                 o, group, scores, account_candidates=account_tokens, field_name_count=field_names[exact],
-                same_edition_athletes=same_edition_athletes, incoming_interval=incoming)
+                same_edition_athletes=same_edition_athletes, incoming_interval=incoming, policy=policy)
             # A same-name, same-time record of this edition on the single compatible
             # candidate is the same performance: add evidence, never a second row.
             if (len(same_performance) == 1 and details.get("holdReason") == "candidate_already_has_this_edition"):
@@ -501,7 +515,7 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, candida
                 }]
                 group["existingMatches"] = existing_matches
                 group["resolvedReasons"], reasons = sorted(reasons), set()
-            elif decision in ("append_history", "distinct_person", "create_no_candidates"):
+            elif decision in ("append_history", "distinct_person", "create_no_candidates", "create_possible_duplicate"):
                 group["resolvedReasons"], reasons = sorted(reasons), set()
             group["reasons"] = sorted(reasons)
         if reasons:
@@ -517,12 +531,22 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, candida
         else:
             group["disposition"], group["action"] = "new", "create_unclaimed_profile_with_one_performance"
             group["history"], group["athleteDraft"] = _history_and_athlete(group, o, edition, batch_id)
+    for group in groups:
+        earlier = (already_imported or {}).get(group["groupId"])
+        if earlier in ("new", "linked", "evidence_linked"):
+            # Published by an earlier batch of this edition: nothing to do again.
+            for key in ("history", "athleteDraft"):
+                group.pop(key, None)
+            group["previousDisposition"] = earlier
+            group["disposition"], group["action"] = "already_imported", "none"
     dispositions = Counter(g["disposition"] for g in groups)
     summary = {
         "sourceObservations": len(observations),
         "observationsByEvent": dict(sorted(Counter(o["sourceScope"] for o in observations).items())),
         "performanceGroups": len(groups), "new": dispositions["new"], "linked": dispositions["linked"],
         "held": dispositions["held"], "evidenceLinked": dispositions["evidence_linked"],
+        "alreadyImported": dispositions["already_imported"], "policy": policy,
+        "possibleDuplicateCreated": sum(g["disposition"] == "new" and (g.get("identityEvidence") or {}).get("decision") == "create_possible_duplicate" for g in groups),
         "linkedByMethod": dict(sorted(Counter(g["existingMatches"][0]["method"] for g in groups if g["disposition"] == "linked").items())),
         "distinctPersonCreated": sum(g["disposition"] == "new" and (g.get("identityEvidence") or {}).get("decision") == "distinct_person" for g in groups),
         "evidenceHoldReasons": dict(sorted(Counter((g.get("identityEvidence") or {}).get("holdReason") for g in groups if g["disposition"] == "held" and g.get("identityEvidence")).items())),
@@ -541,8 +565,9 @@ def build_plan(observations, snapshot, edition, batch_id, created_at, *, candida
             "coverage": "All placed finishers in the captured race-day events; counts equal the site's own totals.",
         }],
         "inputDigest": _hash(observations), "snapshotDigest": snapshot_digest,
+        "previousPlanGroups": len(already_imported or {}),
         "identityEvidence": {
-            "policyVersion": evidence.POLICY_VERSION,
+            "policyVersion": evidence.POLICY_VERSION, "policy": policy,
             "candidateEvidenceDigest": (candidate_evidence or {}).get("metadata", {}).get("digest"),
             "candidateEvidenceReadAt": (candidate_evidence or {}).get("metadata", {}).get("readAt"),
             "chainIndexDigest": _hash(chains) if chains is not None else None,
@@ -598,6 +623,7 @@ def validate_plan(plan, *, snapshot=None):
     if len({g["groupId"] for g in plan["groups"]}) != len(plan["groups"]):
         raise ValueError("Plan repeats a performance group")
     slugs, histories = set(), set()
+    policy = (plan.get("identityEvidence") or {}).get("policy") or evidence.CONSERVATIVE
     for g in plan["groups"]:
         if len(g["observationKeys"]) != 1 or g["primaryObservationKey"] != g["observationKeys"][0]:
             raise ValueError("Each official group has exactly one observation")
@@ -609,6 +635,10 @@ def validate_plan(plan, *, snapshot=None):
         if g["disposition"] == "held":
             if not g["reasons"] or "history" in g or "athleteDraft" in g:
                 raise ValueError("A held group cannot create a profile or history")
+            continue
+        if g["disposition"] == "already_imported":
+            if "history" in g or "athleteDraft" in g or g.get("previousDisposition") not in ("new", "linked", "evidence_linked"):
+                raise ValueError("An already imported group cannot create anything")
             continue
         if g["reasons"] or o["qualityFlags"]:
             raise ValueError("Unresolved source or identity flags must remain held")
@@ -624,7 +654,7 @@ def validate_plan(plan, *, snapshot=None):
                 raise ValueError("A same-name, same-time link needs its recorded evidence decision")
             continue
         decision = (g.get("identityEvidence") or {}).get("decision")
-        if decision and not set(g.get("resolvedReasons", [])) <= evidence.SOFT_REASONS:
+        if decision and not set(g.get("resolvedReasons", [])) <= evidence.soft_reasons(policy):
             raise ValueError("Evidence may only resolve soft identity reasons")
         if g["disposition"] == "evidence_linked":
             ev = g["identityEvidence"]
@@ -644,7 +674,13 @@ def validate_plan(plan, *, snapshot=None):
             raise ValueError("Only an unmatched clean group may create a profile")
         if g["existingCandidateCount"]:
             ev = g.get("identityEvidence") or {}
-            if (decision != "distinct_person" or ev.get("accountCandidates") or ev.get("candidateCount") != g["existingCandidateCount"]
+            if decision == "create_possible_duplicate":
+                compatible = [c for c in ev.get("rankedCandidates", []) if not c["hardContradictions"]]
+                if (policy != evidence.PUBLISH_LEANING or ev.get("accountCandidates") or not ev.get("possibleDuplicateOf")
+                        or ev.get("candidateCount") != g["existingCandidateCount"]
+                        or any(c["privacyFlags"] or c["accountLinked"] for c in compatible)):
+                    raise ValueError("A possible-duplicate profile needs the publish-leaning policy and no protected candidate")
+            elif (decision != "distinct_person" or ev.get("accountCandidates") or ev.get("candidateCount") != g["existingCandidateCount"]
                     or not ev.get("rankedCandidates") or any(not c["hardContradictions"] for c in ev["rankedCandidates"])):
                 raise ValueError("A profile beside existing candidates needs every candidate excluded by a hard contradiction")
         expected = _history_and_athlete(g, o, plan["edition"], plan["batchId"])
@@ -659,6 +695,7 @@ def validate_plan(plan, *, snapshot=None):
         histories.add(g["history"]["externalId"])
     counts = Counter(g["disposition"] for g in plan["groups"])
     summary = plan["summary"]
-    if [summary["new"], summary["linked"], summary["held"], summary.get("evidenceLinked", 0)] != [counts["new"], counts["linked"], counts["held"], counts["evidence_linked"]]:
+    if ([summary["new"], summary["linked"], summary["held"], summary.get("evidenceLinked", 0), summary.get("alreadyImported", 0)]
+            != [counts["new"], counts["linked"], counts["held"], counts["evidence_linked"], counts["already_imported"]]):
         raise ValueError("Plan summary differs from its groups")
     return True

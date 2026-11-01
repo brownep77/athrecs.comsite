@@ -165,6 +165,22 @@ publication and personal-best calculations in this repository.
   Hold everything else with a ranked candidate list and per-signal evidence. Account
   links, claims, private or derived profiles, hidden results and existing
   verification force a hold or remain unchanged; this rule never merges profiles.
+- Owner instruction, 1 November 2026 (13:14), for London 2025 and later official
+  imports: "yes please [do 2025] but do it intelligently too so we can try to get as
+  many published as reasonable. we don't have to be cautious." Apply the importer's
+  publish-leaning policy: a wrong merge is worse than a duplicate profile, which
+  staff can merge later. Separate official result IDs or bibs in one race are separate
+  entries, so repeated or similar names within a field each get their own provisional
+  profile. When evidence does not pick one existing athlete, create a provisional
+  profile and record the compatible candidates and scores in staff-only
+  `profileDetails.possibleDuplicateOf` with `identity_review_status:
+  provisional_possible_duplicate` for merge review. An official cross-year bridge
+  (the same official runner already on an athlete by exact result locator or bib in
+  another year) may link with fewer corroborating facts, never across a gender,
+  nationality or age disagreement. Still hold when any compatible candidate is
+  account-linked, claimed, private, derived or protected, or already has a result in
+  the same edition; apply the same-name, same-time evidence link first. Hard
+  contradictions, verification, privacy and merge safeguards are unchanged.
 - Keep private athlete audits and database exports out of source-control changes
   intended for external publication. Use synthetic examples in regression tests.
 - Always credit the chip-timing/results provider by name when publishing results

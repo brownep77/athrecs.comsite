@@ -250,6 +250,54 @@ def evidence_checks():
         expect_error(lambda: plan.build_plan(observations, snapshot, EDITION, ctx["batchId"], CREATED,
                                              candidate_evidence={**candidate, "metadata": {**candidate["metadata"], "snapshotDigest": "x"}}, chains=chains),
                      "Candidate evidence")
+        # Publish-leaning policy (owner instruction, 1 November 2026, 13:14).
+        lean = plan.build_plan(observations, snapshot, EDITION, ctx["batchId"], CREATED, candidate_evidence=candidate,
+                               chains=chains, policy=ev.PUBLISH_LEANING)
+        by = {g["name"]: g for g in lean["groups"]}
+        kit = by["Kit Marlow"]
+        assert kit["disposition"] == "new" and kit["identityEvidence"]["decision"] == "create_possible_duplicate"
+        details = kit["athleteDraft"]["profileDetails"]
+        assert details["identity_review_status"] == ev.DUPLICATE_REVIEW_STATUS
+        assert sorted(c["athleteId"] for c in details["possibleDuplicateOf"]) == ["23", "24"]
+        assert by["Ione Farrow"]["disposition"] == "evidence_linked"
+        assert by["Lark Vance"]["disposition"] == "held" and by["Nell Quarry"]["disposition"] == "held"
+        assert lean["summary"]["possibleDuplicateCreated"] == 1
+        plan.validate_plan(lean)
+        t = copy.deepcopy(lean)
+        t["identityEvidence"]["policy"] = ev.CONSERVATIVE
+        expect_error(lambda: plan.validate_plan(t), "")
+        # Top-up: groups published by an earlier plan of this edition are skipped.
+        top = plan.build_plan(observations, snapshot, EDITION, ctx["batchId"], CREATED, candidate_evidence=candidate, chains=chains,
+                              policy=ev.PUBLISH_LEANING, already_imported={by["Ione Farrow"]["groupId"]: "evidence_linked"})
+        assert {g["name"]: g for g in top["groups"]}["Ione Farrow"]["disposition"] == "already_imported"
+        assert top["summary"]["alreadyImported"] == 1
+
+    # Publish-leaning: a repeated name in one race creates separate profiles; a
+    # candidate already holding this edition still holds.
+    rows2 = [row("SYNTH0000000201", "Quin", "Ashby", "03:30:00", place=21), row("SYNTH0000000202", "Quin", "Ashby", "04:30:00", place=22),
+             row("SYNTH0000000203", "Rue", "Calder", "03:31:00", place=23)]
+    with tempfile.TemporaryDirectory() as private:
+        folder = pathlib.Path(private)
+        (folder / f"london_{YEAR}.json").write_text(json.dumps(rows2))
+        ctx2 = context(folder / f"london_{YEAR}.json")
+        ctx2["expectedRows"], ctx2["expectedByEvent"] = 3, {"MAS": 3}
+        plan.configure(ctx2)
+        obs2 = plan.load_sources(folder)
+        snap2 = {"athletes": [{"id": 31, "displayName": "Rue Calder", "aliases": [], "gender": "M", "nationality": "GBR", "visibility": "public", "profileType": "Athlete"}],
+                 "results": [{"id": "history:x", "athleteId": 31, "editionId": EDITION["id"], "date": DATE, "year": YEAR, "distanceKm": 42.195,
+                              "finishSeconds": 15000, "timeSeconds": [15000], "sourceUrls": [], "sourceKind": "history", "provider": "Synthetic"}],
+                 "accounts": [], "metadata": {"editionContextDigest": plan._hash(plan.EDITION_CONTEXT), "fingerprint": "synthetic"}}
+        ev2 = {"31": {"clubs": [], "performances": [], "sourceNationality": None, "privacyFlags": []}}
+        cand2 = {"metadata": {"snapshotDigest": plan._hash(snap2), "digest": plan._hash(ev2)}, "athletes": ev2}
+        lean2 = plan.build_plan(obs2, snap2, EDITION, ctx2["batchId"], CREATED, candidate_evidence=cand2,
+                                chains=ev.build_chains({YEAR: rows2}), policy=ev.PUBLISH_LEANING)
+        quins = [g for g in lean2["groups"] if g["name"] == "Quin Ashby"]
+        assert [g["disposition"] for g in quins] == ["new", "new"] and quins[0]["athleteDraft"]["slug"] != quins[1]["athleteDraft"]["slug"]
+        rue = next(g for g in lean2["groups"] if g["name"] == "Rue Calder")
+        assert rue["disposition"] == "held" and rue["identityEvidence"]["holdReason"] == "candidate_already_has_this_edition"
+        conservative2 = plan.build_plan(obs2, snap2, EDITION, ctx2["batchId"], CREATED, candidate_evidence=cand2, chains=ev.build_chains({YEAR: rows2}))
+        assert all(g["disposition"] == "held" for g in conservative2["groups"] if g["name"] == "Quin Ashby")
+
     # Cross-year chains: compatible age progression chains; an impossible one does not.
     def r(year, first, last, cat):
         return {**row("SYNTH%010d" % (year * 10 + len(first)), first, last, "04:00:00"), "year": year, "category": cat}

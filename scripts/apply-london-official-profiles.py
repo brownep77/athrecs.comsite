@@ -135,7 +135,9 @@ def captured_row(observation, group):
 def capture_parts(plan, selected=None):
     assert_plan_context(plan)
     groups = {key: group for group in plan['groups'] for key in group['observationKeys']}
-    observations = [o for o in plan['observations'] if selected is None or o['observationKey'] in selected]
+    # Rows already published by an earlier batch of this edition are not captured again.
+    observations = [o for o in plan['observations'] if (selected is None or o['observationKey'] in selected)
+                    and groups[o['observationKey']]['disposition'] != 'already_imported']
     observations.sort(key=lambda o: (groups[o['observationKey']]['groupId'], o['observationKey']))
     for offset in range(0, len(observations), 500):
         part = observations[offset:offset + 500]
@@ -570,9 +572,18 @@ def plan_command(args):
             raise ValueError('Private evidence files must remain outside the repository')
     candidate_evidence = read_json(args.candidate_evidence) if args.candidate_evidence else None
     chains = read_json(args.chains) if args.chains else None
+    already = None
+    if args.previous_plan:
+        if args.previous_plan.resolve().is_relative_to(ROOT.parent):
+            raise ValueError('Private plans must remain outside the repository')
+        previous = read_json(args.previous_plan)
+        if previous.get('edition') != context['edition'] or previous.get('batchId') == context['batchId']:
+            raise ValueError('The previous plan must be an earlier batch of this same edition')
+        already = {g['groupId']: g['disposition'] for g in previous['groups'] if g['disposition'] in ('new', 'linked', 'evidence_linked')}
     plan = planner.build_plan(observations, snapshot, context['edition'], context['batchId'],
                               dt.datetime.now(dt.timezone.utc).isoformat(),
-                              candidate_evidence=candidate_evidence, chains=chains)
+                              candidate_evidence=candidate_evidence, chains=chains,
+                              policy=args.policy, already_imported=already)
     dump(args.output, plan)
     print(json.dumps(plan['summary'], ensure_ascii=False), flush=True)
 
@@ -585,6 +596,9 @@ if __name__ == '__main__':
         p.add_argument('--' + name, type=Path, required=True)
     p.add_argument('--candidate-evidence', type=Path, help='read-only candidate facts (snapshot --candidate-evidence)')
     p.add_argument('--chains', type=Path, help='private cross-year chain index (snapshot --build-chains)')
+    p.add_argument('--policy', choices=['conservative', 'publish-leaning'], default='conservative',
+                   help="publish-leaning: owner instruction of 1 November 2026 (create possible-duplicate profiles instead of holding)")
+    p.add_argument('--previous-plan', type=Path, help='published plan of an earlier batch of this edition (top-up: skip its groups)')
     a = sub.add_parser('apply')
     for name in ('connection', 'plan', 'snapshot', 'receipt'):
         a.add_argument('--' + name, type=Path, required=True)

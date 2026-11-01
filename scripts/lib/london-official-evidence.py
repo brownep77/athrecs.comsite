@@ -44,12 +44,19 @@ import re
 import unicodedata
 from collections import Counter, defaultdict
 
-POLICY_VERSION = "london-official-evidence/v1"
+POLICY_VERSION = "london-official-evidence/v2"
+CHAIN_VERSION = "london-official-evidence/v1"   # chain index format (unchanged)
+CONSERVATIVE = "conservative"
+# Owner instruction, 1 November 2026 13:14: "do it intelligently too so we can try
+# to get as many published as reasonable. we don't have to be cautious."
+PUBLISH_LEANING = "publish-leaning"
+POLICIES = {CONSERVATIVE, PUBLISH_LEANING}
+DUPLICATE_REVIEW_STATUS = "provisional_possible_duplicate"
 
 # Explicit thresholds.
 RARE_NAME_MAX_DIRECTORY = 1      # exact-name profiles in the directory (the candidate itself)
 RARE_NAME_MAX_FIELD = 1          # exact-name rows in this edition's field
-TIME_BAND = (1.2, 1.4)           # incoming within [fastest/1.2, fastest*1.4] of the candidate's fastest (predicted) marathon
+TIME_BAND = (1.3, 1.4)           # incoming within [fastest/1.3, fastest*1.4] of the candidate's fastest (predicted) marathon
 RIEGEL_EXPONENT = 1.06           # marathon prediction from other road distances (no marathon on record)
 RIEGEL_DISTANCES = {"5 kilometres": 5, "5k": 5, "5.0": 5, "5000": 5, "5000m": 5, "10 kilometres": 10, "10k": 10, "10.0": 10,
                     "10000": 10, "10000m": 10, "10km": 10, "half marathon 21.0975": 21.0975,
@@ -67,6 +74,13 @@ SOFT_REASONS = {
     "possible_source_name_variant",
     "same_performance_without_matching_locator_requires_review",
 }
+# Different official result IDs in one race are different entries: a repeated
+# display name is resolvable under the publish-leaning policy.
+LEANING_SOFT_REASONS = SOFT_REASONS | {"repeated_source_display_name"}
+
+
+def soft_reasons(policy):
+    return LEANING_SOFT_REASONS if policy == PUBLISH_LEANING else SOFT_REASONS
 GENERIC_CLUBS = {"", "none", "n a", "na", "unattached", "una", "independent", "no club", "-", "private"}
 
 
@@ -192,7 +206,7 @@ def build_chains(rows_by_year):
             members[f"{year}:{row['idp']}"] = chain_id
         stats["chains"] += 1
         stats[f"length_{len(years)}"] += 1
-    return {"policyVersion": POLICY_VERSION, "chains": chains, "members": members, "nameRows": dict(name_rows), "stats": dict(stats)}
+    return {"policyVersion": CHAIN_VERSION, "chains": chains, "members": members, "nameRows": dict(name_rows), "stats": dict(stats)}
 
 
 def corpus_consistent(name_rows, o, incoming):
@@ -388,41 +402,70 @@ def score_candidate(o, facts, incoming_interval, chain, name_rarity, edition_yea
             "ageFacts": facts["ageFacts"][:12], "candidateBirthInterval": list(facts["birthInterval"]) if facts["birthInterval"] else None}
 
 
-def decide(o, group, candidate_scores, *, account_candidates, field_name_count, same_edition_athletes, incoming_interval):
-    """Return (decision, details). Decisions: append_history, distinct_person, hold."""
+def decide(o, group, candidate_scores, *, account_candidates, field_name_count, same_edition_athletes, incoming_interval,
+           policy=CONSERVATIVE):
+    """Return (decision, details).
+
+    Decisions: append_history, distinct_person, create_no_candidates,
+    create_possible_duplicate (publish-leaning policy only) and hold.
+    """
+    if policy not in POLICIES:
+        raise ValueError("Unknown identity policy")
+    lean = policy == PUBLISH_LEANING
     ranked = sorted(candidate_scores, key=lambda c: (-c["score"], c["athleteId"]))
-    details = {"policyVersion": POLICY_VERSION, "incomingBirthInterval": list(incoming_interval) if incoming_interval else None,
+    details = {"policyVersion": POLICY_VERSION, "policy": policy,
+               "incomingBirthInterval": list(incoming_interval) if incoming_interval else None,
                "fieldExactNameCount": field_name_count, "rankedCandidates": ranked[:10], "candidateCount": len(ranked),
                "accountCandidates": sorted(account_candidates)}
     if account_candidates:
         return "hold", {**details, "holdReason": "account_candidate_requires_owner_review"}
-    if field_name_count > 1:
+    if field_name_count > 1 and not lean:
         return "hold", {**details, "holdReason": "repeated_name_in_field"}
     if not ranked:
-        # Only an in-field name variant was flagged: separate rows of one race are
-        # separate entries, and nobody in the directory shares the name.
-        return "create_no_candidates", {**details, "decisionBasis": "No existing candidate; the only flag was a similar name elsewhere in this race."}
+        # Separate rows of one race are separate entries, and nobody in the
+        # directory shares the name.
+        return "create_no_candidates", {**details, "decisionBasis": "No existing candidate; only similar or repeated names within this race."}
     compatible = [c for c in ranked if not c["hardContradictions"]]
-    if ranked and not compatible:
+    if not compatible:
         if any(c["privacyFlags"] for c in ranked):
             return "hold", {**details, "holdReason": "protected_candidate_requires_review"}
         return "distinct_person", {**details, "decisionBasis": "Every candidate excluded by a hard source-supported contradiction."}
-    if len(compatible) != 1:
-        return "hold", {**details, "holdReason": "multiple_compatible_candidates" if compatible else "no_candidates"}
-    best = compatible[0]
-    if best["privacyFlags"] or best["accountLinked"]:
+    if any(c["privacyFlags"] or c["accountLinked"] for c in compatible):
         return "hold", {**details, "holdReason": "protected_candidate_requires_review"}
-    if best["athleteId"] in same_edition_athletes:
+    if any(c["athleteId"] in same_edition_athletes for c in compatible):
         return "hold", {**details, "holdReason": "candidate_already_has_this_edition"}
-    if best["softConflicts"]:
-        return "hold", {**details, "holdReason": "candidate_soft_conflict:" + ",".join(best["softConflicts"])}
-    s = best["signals"]
-    core = s["gender"] == "match" and s["nationality"] == "match" and s["age"] == "compatible"
-    positive = bool(s["bridges"]) or s["club"] == "match" or s["rareName"]
-    if core and positive and best["score"] >= AUTO_LINK_MIN_SCORE:
-        return "append_history", {**details, "chosenAthleteId": best["athleteId"], "score": best["score"],
-                                  "decisionBasis": "Single compatible candidate: gender, nationality and age progression agree, plus "
-                                  + ", ".join(k for k, ok in (("an official cross-year bridge", bool(s["bridges"])),
-                                                              ("the same club", s["club"] == "match"),
-                                                              ("a rare exact name", s["rareName"])) if ok) + "."}
+    time_only = {"marathon_time_implausible"}
+    if len(compatible) == 1 and field_name_count == 1 and (
+            not compatible[0]["softConflicts"]
+            or (lean and compatible[0]["signals"]["bridges"] and set(compatible[0]["softConflicts"]) <= time_only)):
+        best = compatible[0]
+        s = best["signals"]
+        core = (s["gender"] == "match" and s["nationality"] == "match" and s["age"] == "compatible"
+                and not best["softConflicts"])
+        positive = bool(s["bridges"]) or s["club"] == "match" or s["rareName"]
+        # Publish-leaning: an official cross-year bridge (the same official runner
+        # already on this athlete in another year) needs only the absence of any
+        # gender, nationality or age disagreement; a different marathon time in
+        # another year is expected and is not a disagreement here.
+        bridged = lean and bool(s["bridges"]) and s["gender"] != "conflict" and s["nationality"] != "conflict" \
+            and s["age"] in ("compatible", "unknown", "uncertain_category_semantics")
+        if (core and positive and best["score"] >= AUTO_LINK_MIN_SCORE) or bridged:
+            return "append_history", {**details, "chosenAthleteId": best["athleteId"], "score": best["score"],
+                                      "decisionBasis": ("Single compatible candidate bridged by the same official runner in another year."
+                                                        if bridged and not (core and positive) else
+                                                        "Single compatible candidate: gender, nationality and age progression agree, plus "
+                                                        + ", ".join(k for k, ok in (("an official cross-year bridge", bool(s["bridges"])),
+                                                                                    ("the same club", s["club"] == "match"),
+                                                                                    ("a rare exact name", s["rareName"])) if ok) + ".")}
+    if lean:
+        return "create_possible_duplicate", {
+            **details,
+            "possibleDuplicateOf": [{"athleteId": c["athleteId"], "score": c["score"], "breakdown": c["breakdown"],
+                                     "softConflicts": c["softConflicts"]} for c in compatible[:10]],
+            "decisionBasis": "Publish-leaning policy: evidence does not pick one existing athlete, so a provisional profile is created and flagged as a possible duplicate for staff merge review.",
+        }
+    if len(compatible) != 1:
+        return "hold", {**details, "holdReason": "multiple_compatible_candidates"}
+    if compatible[0]["softConflicts"]:
+        return "hold", {**details, "holdReason": "candidate_soft_conflict:" + ",".join(compatible[0]["softConflicts"])}
     return "hold", {**details, "holdReason": "insufficient_positive_evidence"}
