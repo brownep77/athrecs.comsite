@@ -435,6 +435,23 @@ def prepare_append(group, evidence, plan):
     return row
 
 
+
+def _retrying(query, attempts=6):
+    """Retry dropped HTTP connections. Every write here is replay-safe (ON CONFLICT /
+    NOT EXISTS guards and post-write verification), so a lost response is re-sent."""
+    import http.client, time, urllib.error
+    def wrapped(statements, readonly=False):
+        delay = 5
+        for attempt in range(attempts):
+            try:
+                return query(statements, readonly)
+            except (ConnectionError, http.client.RemoteDisconnected, urllib.error.URLError, TimeoutError) as exc:
+                if attempt == attempts - 1:
+                    raise
+                print(json.dumps({'phase': 'retry', 'attempt': attempt + 1, 'error': type(exc).__name__}), flush=True)
+                time.sleep(delay); delay = min(delay * 2, 60)
+    return wrapped
+
 def apply(args):
     validate_private_paths(args)
     plan = read_json(args.plan)
@@ -451,6 +468,7 @@ def apply(args):
         raise ValueError('Identity snapshot changed after planning')
     fingerprint_sql = snapshotter.fingerprint_sql()
     cfg, query = base.connection(args.connection, args.confirm_branch, timeout=180)
+    query = _retrying(query)
     if cfg['projectId'] != PROJECT or (args.review and cfg['branchId'] == PRODUCTION) or (not args.review and cfg['branchId'] != PRODUCTION):
         raise ValueError('Explicit review/production target does not match connection')
     if not args.review:
