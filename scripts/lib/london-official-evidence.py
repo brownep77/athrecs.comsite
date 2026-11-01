@@ -65,6 +65,7 @@ OTHER_PROVIDER_AGE_WIDEN = 1     # years added to each side for non-London categ
 MIN_AGE_GAP_FOR_CONTRADICTION = 2  # widened birth intervals must be separated by at least this many years
 MIN_STRICT_OVERLAP_YEARS = 2     # compatible only if the strict birth intervals share >= 2 years (or a DOB fits)
 AUTO_LINK_MIN_SCORE = 6
+BRIDGE_LEAD_MARGIN = 5           # publish-leaning: bridged best candidate must lead the next by this many points
 SCORE = {
     "gender_match": 1, "nationality_match": 2, "age_compatible": 2, "club_match": 2,
     "rare_name": 2, "time_plausible": 1, "chain_bridge": 6, "same_edition_record": 6,
@@ -458,6 +459,29 @@ def decide(o, group, candidate_scores, *, account_candidates, field_name_count, 
                                                                                     ("the same club", s["club"] == "match"),
                                                                                     ("a rare exact name", s["rareName"])) if ok) + ".")}
     if lean:
+        best = compatible[0]
+        s = best["signals"]
+        agreeable = (s["gender"] != "conflict" and s["nationality"] != "conflict"
+                     and s["age"] in ("compatible", "unknown", "uncertain_category_semantics"))
+        # Publish-leaning (owner instruction, 1 November 2026): one candidate
+        # carries the same official runner from another London year, no other
+        # candidate does, and it leads clearly on evidence.
+        if (len(compatible) > 1 and agreeable and s["bridges"]
+                and not any(c["signals"]["bridges"] for c in compatible[1:])
+                and best["score"] - compatible[1]["score"] >= BRIDGE_LEAD_MARGIN
+                and set(best["softConflicts"]) <= time_only):
+            return "append_history", {**details, "chosenAthleteId": best["athleteId"], "score": best["score"],
+                                      "decisionRule": "bridge_clear_lead",
+                                      "decisionBasis": "Only candidate bridged by the same official runner in another year, leading the next candidate by at least "
+                                                       f"{BRIDGE_LEAD_MARGIN} evidence points."}
+        # Publish-leaning: a rare exact name (one profile in the directory, one
+        # row in this race) with matching gender and nothing disagreeing.
+        if (len(compatible) == 1 and field_name_count == 1 and s["rareName"] and s["gender"] == "match"
+                and agreeable and not best["softConflicts"]
+                and (s["time"] == "plausible" or s["nationality"] == "match")):
+            return "append_history", {**details, "chosenAthleteId": best["athleteId"], "score": best["score"],
+                                      "decisionRule": "rare_name_no_disagreement",
+                                      "decisionBasis": "Single candidate with a rare exact name, matching gender, a plausible marathon time or matching nationality, and no disagreement."}
         return "create_possible_duplicate", {
             **details,
             "possibleDuplicateOf": [{"athleteId": c["athleteId"], "score": c["score"], "breakdown": c["breakdown"],

@@ -663,10 +663,21 @@ def validate_plan(plan, *, snapshot=None):
         if g["disposition"] == "evidence_linked":
             ev = g["identityEvidence"]
             ranked = [c for c in ev["rankedCandidates"] if not c["hardContradictions"]]
+            rule = ev.get("decisionRule")
+            if rule == "bridge_clear_lead":
+                supported = (policy == evidence.PUBLISH_LEANING and len(ranked) > 1 and ranked[0]["signals"]["bridges"]
+                             and not any(c["signals"]["bridges"] for c in ranked[1:])
+                             and ranked[0]["score"] - ranked[1]["score"] >= evidence.BRIDGE_LEAD_MARGIN)
+            elif rule == "rare_name_no_disagreement":
+                supported = (policy == evidence.PUBLISH_LEANING and len(ranked) == 1 and ranked[0]["signals"]["rareName"]
+                             and ranked[0]["signals"]["gender"] == "match" and not ranked[0]["softConflicts"]
+                             and (ranked[0]["signals"]["time"] == "plausible" or ranked[0]["signals"]["nationality"] == "match"))
+            else:
+                supported = len(ranked) == 1 and ranked[0]["score"] >= evidence.AUTO_LINK_MIN_SCORE
             if (decision != "append_history" or "athleteDraft" in g or g["existingMatches"] or ev["accountCandidates"]
-                    or str(g["athleteId"]) != str(ev["chosenAthleteId"]) or len(ranked) != 1
-                    or ranked[0]["athleteId"] != str(ev["chosenAthleteId"]) or ranked[0]["privacyFlags"] or ranked[0]["accountLinked"]
-                    or ranked[0]["score"] < evidence.AUTO_LINK_MIN_SCORE):
+                    or str(g["athleteId"]) != str(ev["chosenAthleteId"]) or not supported
+                    or ranked[0]["athleteId"] != str(ev["chosenAthleteId"])
+                    or any(c["privacyFlags"] or c["accountLinked"] for c in ranked)):
                 raise ValueError("An evidence link needs one compatible, unprotected, strongly supported candidate")
             if g["history"] != _history_and_athlete(g, o, plan["edition"], plan["batchId"])[0]:
                 raise ValueError("Appended history differs from its source observation")

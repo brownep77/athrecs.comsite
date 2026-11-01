@@ -427,7 +427,7 @@ def prepare_append(group, evidence, plan):
     row['captureIds'] = caps
     chosen = next(c for c in ev['rankedCandidates'] if c['athleteId'] == str(ev['chosenAthleteId']))
     row['identityEvidence'] = {'policyVersion': ev['policyVersion'], 'score': chosen['score'], 'breakdown': chosen['breakdown'],
-                               'signals': chosen['signals'], 'decisionBasis': ev['decisionBasis'], 'chainId': ev.get('chainId'),
+                               'signals': chosen['signals'], 'decisionBasis': ev['decisionBasis'], 'decisionRule': ev.get('decisionRule'), 'chainId': ev.get('chainId'),
                                'otherCandidates': [{'athleteId': c['athleteId'], 'hardContradictions': c['hardContradictions']}
                                                    for c in ev['rankedCandidates'] if c['athleteId'] != chosen['athleteId']]}
     for performance in row['history']['performances']:
