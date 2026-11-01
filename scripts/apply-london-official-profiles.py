@@ -445,8 +445,9 @@ def _retrying(query, attempts=6):
         for attempt in range(attempts):
             try:
                 return query(statements, readonly)
-            except (ConnectionError, http.client.RemoteDisconnected, urllib.error.URLError, TimeoutError) as exc:
-                if attempt == attempts - 1:
+            except (ConnectionError, http.client.RemoteDisconnected, urllib.error.URLError, TimeoutError, RuntimeError) as exc:
+                # A statement timeout (SQLSTATE 57014) rolls the whole request back, so it is safe to resend.
+                if attempt == attempts - 1 or (isinstance(exc, RuntimeError) and 'SQLSTATE 57014' not in str(exc)):
                     raise
                 print(json.dumps({'phase': 'retry', 'attempt': attempt + 1, 'error': type(exc).__name__}), flush=True)
                 time.sleep(delay); delay = min(delay * 2, 60)
