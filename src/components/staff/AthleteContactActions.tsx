@@ -3,7 +3,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import type { RegisteredAthlete } from "@/lib/athrecs/registrations.server";
 import { contactLinks } from "@/lib/athrecs/athlete-contact";
+import type { IntercomContactChannel } from "@/lib/athrecs/intercom-contact";
 import { saveStaffAthleteContact } from "@/lib/athrecs/athlete-contact-api";
+import { IntercomContactDialog } from "./IntercomContactDialog";
 import {
   SOCIAL_PLATFORMS,
   SOCIAL_LABELS,
@@ -15,6 +17,7 @@ const fieldClass = "w-full rounded border border-border bg-surface px-3 py-2 tex
 export function AthleteContactActions({ account }: { account: RegisteredAthlete }) {
   const [editing, setEditing] = useState(false);
   const [copyStatus, setCopyStatus] = useState("");
+  const [intercomChannel, setIntercomChannel] = useState<IntercomContactChannel | null>(null);
   const links = contactLinks(account.email, account.contact);
   const social = SOCIAL_PLATFORMS.flatMap((platform) => {
     const value =
@@ -30,34 +33,57 @@ export function AthleteContactActions({ account }: { account: RegisteredAthlete 
   return (
     <div className="mt-4 space-y-3 border-t border-border pt-3">
       <div className="flex flex-wrap gap-2" aria-label={`Contact ${account.name}`}>
-        {Object.entries(links).map(([channel, href]) => {
-          const label = { email: "Email", sms: "SMS", whatsapp: "WhatsApp", telegram: "Telegram" }[
-            channel
-          ];
-          return href ? (
-            <a
-              key={channel}
-              href={href}
-              target={channel === "whatsapp" || channel === "telegram" ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              className="rounded-lg border border-border px-3 py-2 text-sm font-medium text-accent"
-            >
-              {label}
-            </a>
-          ) : (
-            <Button
-              key={channel}
-              variant="secondary"
-              disabled
-              title="Add the athlete’s contact details first"
-            >
-              {label}
-            </Button>
-          );
-        })}
         <Button
+          type="button"
+          disabled={!links.email}
+          onClick={() => setIntercomChannel("email")}
+          aria-haspopup="dialog"
+        >
+          Email in Intercom
+        </Button>
+        <Button
+          type="button"
           variant="secondary"
-          disabled={!account.contact.phone}
+          onClick={() => setIntercomChannel("chat")}
+          aria-haspopup="dialog"
+        >
+          Message in Intercom
+        </Button>
+        {(["sms", "whatsapp"] as const).map((channel) => (
+          <Button
+            key={channel}
+            type="button"
+            variant="secondary"
+            disabled={!links[channel]}
+            title={
+              links[channel]
+                ? "Available channels are shown in Intercom"
+                : "Add the athlete’s phone number first"
+            }
+            onClick={() => setIntercomChannel(channel)}
+            aria-haspopup="dialog"
+          >
+            {channel === "sms" ? "SMS" : "WhatsApp"} in Intercom
+          </Button>
+        ))}
+        {links.telegram ? (
+          <a
+            href={links.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+          >
+            Telegram app
+          </a>
+        ) : (
+          <Button variant="secondary" disabled title="Add the athlete’s Telegram contact first">
+            Telegram app
+          </Button>
+        )}
+        <Button
+          type="button"
+          variant="secondary"
+          disabled={!links.sms}
           onClick={async () => {
             try {
               await navigator.clipboard.writeText(account.contact.phone!);
@@ -70,20 +96,60 @@ export function AthleteContactActions({ account }: { account: RegisteredAthlete 
           Viber: copy number
         </Button>
         {social.map((link) => (
-          <a
-            key={link.platform}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-lg border border-border px-3 py-2 text-sm font-medium text-accent"
-          >
-            {SOCIAL_LABELS[link.platform]}
-          </a>
+          <span key={link.platform} className="inline-flex flex-wrap gap-2">
+            {link.platform === "facebook" || link.platform === "instagram" ? (
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => setIntercomChannel(link.platform as "facebook" | "instagram")}
+                aria-haspopup="dialog"
+                title="Reply to an existing conversation on your connected channel"
+              >
+                {SOCIAL_LABELS[link.platform]} reply in Intercom
+              </Button>
+            ) : null}
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+            >
+              View {SOCIAL_LABELS[link.platform]} profile
+            </a>
+          </span>
         ))}
-        <Button variant="secondary" onClick={() => setEditing(!editing)}>
+        <Button type="button" variant="secondary" onClick={() => setEditing(!editing)}>
           {editing ? "Close contact details" : "Edit contact details"}
         </Button>
       </div>
+      <p className="text-xs leading-5 text-muted">
+        Compose and send in Intercom. SMS, WhatsApp and social replies depend on your connected
+        channels and the athlete’s existing contact or conversation.
+      </p>
+      <details className="text-sm">
+        <summary className="cursor-pointer text-muted">Other contact apps</summary>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {(
+            [
+              ["email", "Email in mail app"],
+              ["sms", "SMS in phone app"],
+              ["whatsapp", "WhatsApp app"],
+            ] as const
+          ).map(([channel, label]) =>
+            links[channel] ? (
+              <a
+                key={channel}
+                href={links[channel]}
+                target={channel === "whatsapp" ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 py-2 font-medium text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+              >
+                {label}
+              </a>
+            ) : null,
+          )}
+        </div>
+      </details>
       <p className="text-xs text-muted">
         Marketing consent: {account.marketingConsent ? "granted" : "not granted"}.{" "}
         {account.contact.phone ? `Phone: ${account.contact.phone}. ` : "No phone supplied. "}
@@ -95,6 +161,18 @@ export function AthleteContactActions({ account }: { account: RegisteredAthlete 
         </p>
       ) : null}
       {editing ? <ContactEditor account={account} onSaved={() => setEditing(false)} /> : null}
+      {intercomChannel ? (
+        <IntercomContactDialog
+          channel={intercomChannel}
+          contact={{
+            userId: account.userId,
+            email: account.email,
+            name: account.name,
+            phone: account.contact.phone,
+          }}
+          onClose={() => setIntercomChannel(null)}
+        />
+      ) : null}
     </div>
   );
 }

@@ -91,6 +91,7 @@ export async function loadAthleteMessages(sql: Sql, input: z.infer<typeof messag
       p.occurred_at::text as "occurredAt",t.sent,t.received,(select count(*)::int from filtered) as total
     from totals t left join page p on true order by p.occurred_at desc,p.id desc`;
   return {
+    recipientUserId: target.userId,
     recipientEmail: target.verifiedEmail,
     messages: rows
       .filter((row) => row.id)

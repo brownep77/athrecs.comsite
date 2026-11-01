@@ -12,12 +12,17 @@ on:
       - "src/lib/athrecs/claim-invit*"
       - "src/lib/athrecs/claim-identity.server.ts"
       - "src/lib/athrecs/athlete-messages*"
+      - "src/lib/athrecs/intercom-contact.ts"
+      - "src/lib/athrecs/athlete-contact*"
       - "src/lib/athrecs/athlete-inbox*"
       - "src/components/staff/AthleteInboxConnection.tsx"
       - "src/routes/admin/email-inbox.tsx"
       - "src/routes/api/athlete-inbox-sync.ts"
       - "scripts/verify-athlete-inbox*.mjs"
       - "src/components/staff/AthleteMessages.tsx"
+      - "src/components/staff/IntercomContactDialog.tsx"
+      - "src/components/staff/AthleteContactActions.tsx"
+      - "scripts/verify-intercom-contact.mjs"
       - "migrations/*athlete_messages*.sql"
       - "scripts/verify-athlete-messages*.mjs"
       - "src/lib/athrecs/invitation-welcome*"
@@ -113,6 +118,8 @@ jobs:
       - run: npm ci
       - name: Private creation, matching, access and transaction checks
         run: node scripts/verify-athlete-link.mjs
+      - name: Safe Intercom contact destinations
+        run: npm run verify:intercom-contact
       - name: Collected results, registration matching and durable conflict alerts
         run: node scripts/verify-result-conflict-flow.mjs
       - name: Welcome invitation, real OTP authentication and delivery failures
