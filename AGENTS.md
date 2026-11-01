@@ -146,6 +146,25 @@ publication and personal-best calculations in this repository.
   capture date from the review date and never claim a fresh live check.
   Source verification does not verify account ownership or resolve conflicting
   identities. Keep unresolved matches held and preserve publication controls.
+- Owner instruction, 1 November 2026: "can you make it more intelligent please"
+  (matching official London results to existing athletes). For official-source
+  imports, identity matching uses several independent signals: gender, explicit
+  nationality, age-category progression across dated results (never an inferred
+  birth date), club, marathon-time plausibility, name rarity in the directory, the
+  field and the source corpus, and scoped performance bridges (the same official
+  result locator, bib or same-name same-time record of that edition, or an official
+  cross-year chain already bridged to the athlete). A name, alone or with one
+  compatible fact, is never sufficient. Attach a result to an existing athlete only
+  when exactly one candidate is compatible and strongly supported under the
+  importer's recorded thresholds; append the source performance without changing
+  any other profile field, and audit the score and evidence. Create a distinct
+  provisional profile only when every candidate is excluded by a hard,
+  source-supported contradiction (an impossible age progression or explicitly
+  source-supplied differing nationalities), following
+  `docs/reviewed-source-identity-policy.md`; profile gender alone never decides.
+  Hold everything else with a ranked candidate list and per-signal evidence. Account
+  links, claims, private or derived profiles, hidden results and existing
+  verification force a hold or remain unchanged; this rule never merges profiles.
 - Keep private athlete audits and database exports out of source-control changes
   intended for external publication. Use synthetic examples in regression tests.
 - Always credit the chip-timing/results provider by name when publishing results

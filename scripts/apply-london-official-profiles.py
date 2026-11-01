@@ -48,7 +48,7 @@ PRODUCTION = snapshotter.PRODUCTION_BRANCH
 PROVIDER = planner.PROVIDER_NAME
 
 YEAR = EDITION_DATE = BATCH = INSTRUCTION = SOURCE_SHA256 = EDITION_CONTEXT = None
-NEW_PROFILES = VERIFY_NEW = LINK_EVIDENCE = VERIFY_LINKED = None
+NEW_PROFILES = VERIFY_NEW = LINK_EVIDENCE = VERIFY_LINKED = APPEND_HISTORY = VERIFY_APPEND = None
 
 
 def encoded(value):
@@ -93,11 +93,12 @@ def validate_private_paths(args):
 def select_groups(plan, review, limit, linked_limit=100):
     if isinstance(linked_limit, bool) or not isinstance(linked_limit, int) or not 1 <= linked_limit <= 1000:
         raise ValueError('Review linked limit must be between 1 and 1000')
-    chosen = [g for g in plan['groups'] if g['disposition'] in ('new', 'linked')]
+    chosen = [g for g in plan['groups'] if g['disposition'] in ('new', 'linked', 'evidence_linked')]
     if not review or not limit:
         return chosen, None
     chosen = ([g for g in chosen if g['disposition'] == 'new'][:limit]
-              + [g for g in chosen if g['disposition'] == 'linked'][:linked_limit])
+              + [g for g in chosen if g['disposition'] == 'linked'][:linked_limit]
+              + [g for g in chosen if g['disposition'] == 'evidence_linked'][:linked_limit])
     held = [g for g in plan['groups'] if g['disposition'] == 'held'][:50]
     return chosen, {key for g in [*chosen, *held] for key in g['observationKeys']}
 
@@ -308,6 +309,32 @@ _VERIFY_LINKED_SQL = """INSERT INTO london_import_guard SELECT count(*)=jsonb_ar
  'ownerInstruction',$4::text,'identityVerified',false,'existingPerformancePreserved',true)"""
 
 
+_APPEND_HISTORY_SQL = """WITH incoming AS (SELECT value p FROM jsonb_array_elements($1::jsonb)), added AS (
+ INSERT INTO athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+ SELECT a.id,'__PROVIDER__',p#>>'{history,externalId}',p#>>'{history,sourceUrl}',(p#>>'{history,capturedAt}')::timestamptz,false,ARRAY[__LONDON_YEAR__],ARRAY[__LONDON_YEAR__],p#>'{history,performances}',now()
+ FROM incoming JOIN athletes a ON a.id=(p->>'athleteId')::int
+ WHERE a.profile_visibility='public' AND a.profile_type='Athlete' AND a.parent_athlete_id IS NULL
+ AND NOT EXISTS(SELECT 1 FROM athlete_account_links l WHERE l.athlete_id=a.id)
+ AND NOT EXISTS(SELECT 1 FROM athlete_source_histories h WHERE h.provider='__PROVIDER__' AND h.external_id=p#>>'{history,externalId}')
+ RETURNING athlete_id,external_id
+), audits AS (
+ INSERT INTO network_audit_log(action,entity_type,entity_id,after_value,note)
+ SELECT 'athlete.london_official__LONDON_YEAR___evidence_history_appended','athlete_source_history','__PROVIDER__:'||h.external_id,
+ jsonb_build_object('athleteId',h.athlete_id,'batchId',$2::text,'planHash',$3::text,'groupId',p->>'groupId','sourceCaptureIds',p->'captureIds',
+ 'identityEvidence',p->'identityEvidence','identityVerified',false,'ownerInstruction',$4::text,'existingProfileFieldsUnchanged',true),
+ 'Official London result appended to an existing athlete on multi-signal evidence (owner instruction, 1 November 2026). Identity remains unverified; no other profile field, result, claim or privacy choice changed.'
+ FROM added h JOIN incoming ON h.external_id=p#>>'{history,externalId}' RETURNING id
+) SELECT (SELECT count(*) FROM added)::int appended,(SELECT count(*) FROM audits)::int audits"""
+
+_VERIFY_APPEND_SQL = """INSERT INTO london_import_guard SELECT count(*)=jsonb_array_length($1::jsonb)
+ FROM jsonb_array_elements($1::jsonb) p JOIN athlete_source_histories h
+ ON h.provider='__PROVIDER__' AND h.external_id=p#>>'{history,externalId}'
+ WHERE h.athlete_id=(p->>'athleteId')::int AND h.performances=p#>'{history,performances}'
+ AND h.captured_at=(p#>>'{history,capturedAt}')::timestamptz AND h.published_at IS NOT NULL
+ AND EXISTS(SELECT 1 FROM network_audit_log l WHERE l.action='athlete.london_official__LONDON_YEAR___evidence_history_appended'
+ AND l.entity_id='__PROVIDER__:'||h.external_id AND l.after_value->>'athleteId'=h.athlete_id::text)"""
+
+
 def configure(context):
     """Bind one validated official edition; transport, integrity and publication rules stay fixed."""
     global YEAR, EDITION_DATE, BATCH, INSTRUCTION, SOURCE_SHA256, EDITION_CONTEXT
@@ -320,7 +347,9 @@ def configure(context):
     # Substitutions are only the validated integer year and the fixed provider constant.
     def bind(template):
         return template.replace('__LONDON_YEAR__', str(YEAR)).replace('__PROVIDER__', PROVIDER)
+    global APPEND_HISTORY, VERIFY_APPEND
     NEW_PROFILES, VERIFY_NEW = bind(_NEW_PROFILES_SQL), bind(_VERIFY_NEW_SQL)
+    APPEND_HISTORY, VERIFY_APPEND = bind(_APPEND_HISTORY_SQL), bind(_VERIFY_APPEND_SQL)
     LINK_EVIDENCE, VERIFY_LINKED = bind(_LINK_EVIDENCE_SQL), bind(_VERIFY_LINKED_SQL)
     return copy.deepcopy(EDITION_CONTEXT)
 
@@ -368,9 +397,39 @@ def prepare_new(group, evidence, plan):
         'profileIdentityVerified': False, 'sourceRowsCompared': True, 'primarySourceChecked': True,
         'captureIds': sorted(caps), 'retainedSourceSha256': SOURCE_SHA256,
     }
+    if (group.get('identityEvidence') or {}).get('decision') == 'distinct_person':
+        details['archiveCreation']['distinctPersonDecision'] = {
+            'policyVersion': group['identityEvidence']['policyVersion'],
+            'basis': group['identityEvidence']['decisionBasis'],
+            'excludedCandidates': [{'athleteId': c['athleteId'], 'hardContradictions': c['hardContradictions']}
+                                   for c in group['identityEvidence']['rankedCandidates']],
+        }
     for performance in row['history']['performances']:
         performance['archiveReference']['captureIds'] = sorted(caps)
         performance['archiveReference']['sourceRow'] = group['primaryObservationKey']
+    if row['history']['provider'] != PROVIDER:
+        raise ValueError('Unexpected history provider')
+    return row
+
+
+def prepare_append(group, evidence, plan):
+    """An evidence-linked group: one official history appended to the chosen existing athlete."""
+    assert_plan_context(plan)
+    ev = group['identityEvidence']
+    if group['disposition'] != 'evidence_linked' or ev.get('decision') != 'append_history' or str(group['athleteId']) != str(ev['chosenAthleteId']):
+        raise ValueError('Only an evidence-linked group can append a history')
+    row = {'groupId': group['groupId'], 'athleteId': int(group['athleteId']), 'history': copy.deepcopy(group['history'])}
+    caps = sorted({int(evidence[k]['id']) for k in group['observationKeys']})
+    row['captureIds'] = caps
+    chosen = next(c for c in ev['rankedCandidates'] if c['athleteId'] == str(ev['chosenAthleteId']))
+    row['identityEvidence'] = {'policyVersion': ev['policyVersion'], 'score': chosen['score'], 'breakdown': chosen['breakdown'],
+                               'signals': chosen['signals'], 'decisionBasis': ev['decisionBasis'], 'chainId': ev.get('chainId'),
+                               'otherCandidates': [{'athleteId': c['athleteId'], 'hardContradictions': c['hardContradictions']}
+                                                   for c in ev['rankedCandidates'] if c['athleteId'] != chosen['athleteId']]}
+    for performance in row['history']['performances']:
+        performance['archiveReference']['captureIds'] = caps
+        performance['archiveReference']['sourceRow'] = group['primaryObservationKey']
+        performance['archiveReference']['identityBasis'] = 'Appended on multi-signal evidence; identity not verified.'
     if row['history']['provider'] != PROVIDER:
         raise ValueError('Unexpected history provider')
     return row
@@ -419,12 +478,12 @@ def apply(args):
     save()
     parts = list(capture_parts(plan, selected))
     setup(query, plan, parts)
-    evidence = retain_captures(query, parts, receipt, save)
-    for kind in ('new', 'linked'):
+    evidence = retain_captures(query, parts, receipt, save, workers=int(os.environ.get('LONDON_CAPTURE_WORKERS', '4')))
+    for kind in ('new', 'linked', 'evidence_linked'):
         selected_groups = [g for g in chosen if g['disposition'] == kind]
         for offset in range(0, len(selected_groups), args.batch_size):
             groups = selected_groups[offset:offset + args.batch_size]
-            rows = [prepare_new(g, evidence, plan) if kind == 'new' else {
+            rows = [prepare_new(g, evidence, plan) if kind == 'new' else prepare_append(g, evidence, plan) if kind == 'evidence_linked' else {
                 'groupId': g['groupId'], 'athleteId': g['athleteId'], 'resultIds': g['resultIds'],
                 'existingMatches': g['existingMatches'], 'sourceKeys': g['sourceKeys'], 'sourceUrls': g['sourceUrls'],
                 'captureIds': sorted({int(evidence[k]['id']) for k in g['observationKeys']}),
@@ -445,6 +504,14 @@ def apply(args):
                 receipt['created'] += inserted['created']
                 receipt['alreadyPresent'] += len(rows) - inserted['created']
                 receipt['profiles'].extend(verified)
+            elif kind == 'evidence_linked':
+                statements.extend([
+                    (APPEND_HISTORY, [payload, BATCH, plan_hash, INSTRUCTION]),
+                    (VERIFY_APPEND, [payload]),
+                ])
+                result = query(statements)
+                receipt['evidenceAppended'] = receipt.get('evidenceAppended', 0) + result[-2][0]['appended']
+                receipt.setdefault('appendedGroups', []).extend({'groupId': r['groupId'], 'athleteId': r['athleteId']} for r in rows)
             else:
                 statements.extend([
                     (LINK_EVIDENCE, [payload, BATCH, plan_hash, INSTRUCTION]),
@@ -479,8 +546,14 @@ def plan_command(args):
     context = configure(json.loads(args.edition_config.read_text(encoding='utf-8')))
     snapshot = read_json(args.snapshot / 'snapshot.json')
     observations = planner.load_sources(args.source)
+    for path in (args.candidate_evidence, args.chains):
+        if path is not None and path.resolve().is_relative_to(ROOT.parent):
+            raise ValueError('Private evidence files must remain outside the repository')
+    candidate_evidence = read_json(args.candidate_evidence) if args.candidate_evidence else None
+    chains = read_json(args.chains) if args.chains else None
     plan = planner.build_plan(observations, snapshot, context['edition'], context['batchId'],
-                              dt.datetime.now(dt.timezone.utc).isoformat())
+                              dt.datetime.now(dt.timezone.utc).isoformat(),
+                              candidate_evidence=candidate_evidence, chains=chains)
     dump(args.output, plan)
     print(json.dumps(plan['summary'], ensure_ascii=False), flush=True)
 
@@ -491,6 +564,8 @@ if __name__ == '__main__':
     p = sub.add_parser('plan')
     for name in ('edition-config', 'source', 'snapshot', 'output'):
         p.add_argument('--' + name, type=Path, required=True)
+    p.add_argument('--candidate-evidence', type=Path, help='read-only candidate facts (snapshot --candidate-evidence)')
+    p.add_argument('--chains', type=Path, help='private cross-year chain index (snapshot --build-chains)')
     a = sub.add_parser('apply')
     for name in ('connection', 'plan', 'snapshot', 'receipt'):
         a.add_argument('--' + name, type=Path, required=True)

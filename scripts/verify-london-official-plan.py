@@ -177,7 +177,86 @@ def main():
         expect_error(lambda: plan.configure(bad), "Batch ID")
         bad = copy.deepcopy(ctx); bad["expectedByEvent"]["MAS"] += 1
         expect_error(lambda: plan.configure(bad), "add up")
+    evidence_checks()
     print("London official-results planner verified: normalization, wheelchair labelling, holds, exact-locator reuse, tamper rejection (synthetic data only).")
+
+
+def evidence_checks():
+    """Multi-signal identity decisions (owner instruction, 1 November 2026), synthetic only."""
+    ev = plan.evidence
+    rows = [
+        row("SYNTH0000000101", "Ione", "Farrow", "03:40:00", gender="W", place=11),   # auto-link
+        row("SYNTH0000000102", "Jory", "Penhale", "03:50:00", place=12),               # distinct person
+        row("SYNTH0000000103", "Kit", "Marlow", "03:55:00", place=13),                 # two compatible
+        row("SYNTH0000000104", "Lark", "Vance", "03:56:00", gender="W", place=14),     # account-linked
+        row("SYNTH0000000105", "Nell", "Quarry", "03:57:00", gender="W", place=15),    # protected (private)
+    ]
+    with tempfile.TemporaryDirectory() as private:
+        folder = pathlib.Path(private)
+        source = folder / f"london_{YEAR}.json"
+        source.write_text(json.dumps(rows))
+        ctx = context(source)
+        ctx["expectedRows"], ctx["expectedByEvent"] = len(rows), {"MAS": len(rows)}
+        plan.configure(ctx)
+        observations = plan.load_sources(folder)
+        athletes = [
+            {"id": 21, "displayName": "Ione Farrow", "aliases": [], "gender": "F", "nationality": "GBR", "visibility": "public", "profileType": "Athlete"},
+            {"id": 22, "displayName": "Jory Penhale", "aliases": [], "gender": "M", "nationality": None, "visibility": "public", "profileType": "Athlete"},
+            {"id": 23, "displayName": "Kit Marlow", "aliases": [], "gender": "M", "nationality": "GBR", "visibility": "public", "profileType": "Athlete"},
+            {"id": 24, "displayName": "Kit Marlow", "aliases": [], "gender": "M", "nationality": "GBR", "visibility": "public", "profileType": "Athlete"},
+            {"id": 25, "displayName": "Lark Vance", "aliases": [], "gender": "F", "nationality": "GBR", "visibility": "public", "profileType": "Athlete"},
+            {"id": 26, "displayName": "Nell Quarry", "aliases": [], "gender": "F", "nationality": "GBR", "visibility": "private", "profileType": "Athlete"},
+        ]
+        snapshot = {"athletes": athletes, "results": [],
+                    "accounts": [{"id": "acct-1", "names": ["Unrelated Person"], "linkedAthleteIds": [25]}],
+                    "metadata": {"editionContextDigest": plan._hash(plan.EDITION_CONTEXT), "fingerprint": "synthetic"}}
+        half = {"provider": "Synthetic", "year": 2025, "discipline": "Half Marathon", "performance": "1:40:00", "ageGroup": "30-34"}
+        perf = {"21": [half], "22": [{**half, "ageGroup": "60-64"}], "23": [half], "24": [half], "25": [half], "26": [half]}
+        athletes_ev = {k: {"clubs": [], "performances": v, "sourceNationality": None, "privacyFlags": []} for k, v in perf.items()}
+        candidate = {"metadata": {"snapshotDigest": plan._hash(snapshot), "digest": plan._hash(athletes_ev)}, "athletes": athletes_ev}
+        chains = ev.build_chains({YEAR: rows})
+        built = plan.build_plan(observations, snapshot, EDITION, ctx["batchId"], CREATED, candidate_evidence=candidate, chains=chains)
+        by_name = {g["name"]: g for g in built["groups"]}
+        ione = by_name["Ione Farrow"]
+        assert ione["disposition"] == "evidence_linked" and str(ione["athleteId"]) == "21", ione.get("identityEvidence")
+        assert ione["history"]["provider"] == "TCS London Marathon results" and "athleteDraft" not in ione
+        top = ione["identityEvidence"]["rankedCandidates"][0]
+        assert top["signals"]["age"] == "compatible" and top["signals"]["time"] == "plausible" and top["signals"]["rareName"] is True
+        jory = by_name["Jory Penhale"]
+        assert jory["disposition"] == "new" and jory["identityEvidence"]["decision"] == "distinct_person"
+        assert jory["identityEvidence"]["rankedCandidates"][0]["hardContradictions"] == ["age_progression_impossible"]
+        kit = by_name["Kit Marlow"]
+        assert kit["disposition"] == "held" and kit["identityEvidence"]["holdReason"] in ("multiple_compatible_candidates", "repeated_name_in_field")
+        assert kit["identityEvidence"]["holdReason"] == "multiple_compatible_candidates"
+        lark = by_name["Lark Vance"]
+        assert lark["disposition"] == "held" and lark["identityEvidence"]["holdReason"] == "protected_candidate_requires_review"
+        nell = by_name["Nell Quarry"]
+        assert nell["disposition"] == "held" and nell["identityEvidence"]["holdReason"] == "protected_candidate_requires_review"
+        assert built["summary"]["evidenceLinked"] == 1 and built["summary"]["distinctPersonCreated"] == 1
+        # A gender difference alone never creates a distinct person (profile gender is not source sex evidence).
+        g_snap = copy.deepcopy(snapshot); g_snap["athletes"][1]["gender"] = "F"
+        g_cand = {"metadata": {"snapshotDigest": plan._hash(g_snap), "digest": plan._hash({**athletes_ev, "22": {**athletes_ev["22"], "performances": [half]}})},
+                  "athletes": {**athletes_ev, "22": {**athletes_ev["22"], "performances": [half]}}}
+        g_plan = plan.build_plan(observations, g_snap, EDITION, ctx["batchId"], CREATED, candidate_evidence=g_cand, chains=chains)
+        assert {g["name"]: g for g in g_plan["groups"]}["Jory Penhale"]["disposition"] == "held"
+        # Tampering with an evidence link is rejected.
+        t = copy.deepcopy(built)
+        next(g for g in t["groups"] if g["disposition"] == "evidence_linked")["athleteId"] = 23
+        expect_error(lambda: plan.validate_plan(t), "evidence link")
+        t = copy.deepcopy(built)
+        next(g for g in t["groups"] if g["name"] == "Kit Marlow").update(disposition="new", reasons=[])
+        expect_error(lambda: plan.validate_plan(t), "")
+        # Evidence read for another snapshot is refused.
+        expect_error(lambda: plan.build_plan(observations, snapshot, EDITION, ctx["batchId"], CREATED,
+                                             candidate_evidence={**candidate, "metadata": {**candidate["metadata"], "snapshotDigest": "x"}}, chains=chains),
+                     "Candidate evidence")
+    # Cross-year chains: compatible age progression chains; an impossible one does not.
+    def r(year, first, last, cat):
+        return {**row("SYNTH%010d" % (year * 10 + len(first)), first, last, "04:00:00"), "year": year, "category": cat}
+    chains = ev.build_chains({2010: [r(2010, "Odo", "Brant", "18-39"), r(2010, "Pim", "Selby", "60-64")],
+                              2020: [r(2020, "Odo", "Brant", "40-44"), r(2020, "Pim", "Selby", "18-39")]})
+    assert chains["stats"]["chains"] == 1 and chains["stats"]["age_progression_conflict"] == 1
+    assert next(iter(chains["chains"].values()))["name"] == "odo brant"
 
 
 if __name__ == "__main__":

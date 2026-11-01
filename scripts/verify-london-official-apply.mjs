@@ -140,3 +140,104 @@ try {
 } finally {
   await db.close();
 }
+
+// Evidence-linked append path (owner instruction, 1 November 2026): one official
+// history appended to an existing public athlete; nothing else on the athlete changes.
+const evidenceFixture = JSON.parse(execFileSync("python3", ["-c", String.raw`
+import contextlib, io, json, pathlib, tempfile, importlib.util
+root=pathlib.Path.cwd()
+def load(name,path):
+    spec=importlib.util.spec_from_file_location(name,path)
+    mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod);return mod
+a=load('synthetic_official_apply_ev',root/'scripts/apply-london-official-profiles.py')
+v=load('synthetic_official_rows_ev',root/'scripts/verify-london-official-plan.py')
+rows=[v.row('SYNTH0000000101','Ione','Farrow','03:40:00',gender='W',place=11)]
+with tempfile.TemporaryDirectory() as d:
+    folder=pathlib.Path(d);src=folder/'london_2025.json';src.write_text(json.dumps(rows))
+    ctx=v.context(src);ctx['expectedRows'],ctx['expectedByEvent']=1,{'MAS':1};a.configure(ctx);obs=a.planner.load_sources(folder)
+snapshot={'athletes':[{'id':21,'displayName':'Ione Farrow','aliases':[],'gender':'F','nationality':'GBR','visibility':'public','profileType':'Athlete'}],
+ 'results':[],'accounts':[],'metadata':{'editionContextDigest':a.planner._hash(a.EDITION_CONTEXT),'batchId':a.BATCH}}
+evid={'21':{'clubs':[],'performances':[{'provider':'Synthetic','year':2025,'discipline':'Half Marathon','performance':'1:40:00','ageGroup':'30-34'}],'sourceNationality':None,'privacyFlags':[]}}
+cand={'metadata':{'snapshotDigest':a.planner._hash(snapshot),'digest':a.planner._hash(evid)},'athletes':evid}
+plan=a.planner.build_plan(obs,snapshot,v.EDITION,a.BATCH,v.CREATED,candidate_evidence=cand,chains=a.planner.evidence.build_chains({2025:rows}))
+a.configure_from_plan(plan)
+assert plan['summary']['evidenceLinked']==1,plan['summary']
+chosen,_=a.select_groups(plan,False,0)
+parts=list(a.capture_parts(plan));setup=[];retention=[]
+a.setup(lambda q:setup.append(q),plan,parts)
+def retain(q):
+    retention.append(q);part=parts[len(retention)-1]
+    return [[] for _ in q[:-1]]+[[{'id':len(retention),'payload_hash':part['payloadHash'],'html_sha256':part['rawSha256'],'row_count':part['rowCount'],'source_check':'compared','integrity_hash':'PENDING'}]]
+with contextlib.redirect_stdout(io.StringIO()):
+    evidence=a.retain_captures(retain,parts,{'planHash':a.digest(plan)},lambda:None,workers=1)
+rows=[a.prepare_append(g,evidence,plan) for g in chosen]
+caps=list({c['id']:c for c in evidence.values()}.values())
+guard=a.guard_statements(a.snapshotter.fingerprint_sql(),'PENDING',caps,a.snapshotter.FINGERPRINT_TABLES)
+print(json.dumps({'batch':a.BATCH,'instruction':a.INSTRUCTION,'planHash':a.digest(plan),'setup':setup,'retention':retention,'guard':guard,
+ 'rows':rows,'append':a.APPEND_HISTORY,'verify':a.VERIFY_APPEND,'fingerprint':a.snapshotter.fingerprint_sql()}))
+`], { cwd: root, encoding: "utf8", maxBuffer: 8 * 1024 * 1024 }));
+{
+  const db = new PGlite();
+  const q = async (statements) => db.transaction(async (tx) => {
+    const out = [];
+    for (const [sql, params] of statements) out.push((await tx.query(sql, params)).rows);
+    return out;
+  });
+  try {
+    await db.exec(`
+      CREATE TABLE athletes(id serial PRIMARY KEY,slug text UNIQUE,display_name text,given_name text,family_name text,
+        race_entry_name text,gender text,city text,county text,country text,nation text,bio text,source_url text,
+        profile_type text,profile_visibility text,profile_roles text,profile_details jsonb,
+        profile_source_checked_at timestamptz,date_of_birth date,parent_athlete_id int,club_id int);
+      CREATE TABLE "user"(id text PRIMARY KEY,name text);
+      CREATE TABLE athlete_private_profiles(user_id text PRIMARY KEY,full_name text,display_name text,previous_names text[]);
+      CREATE TABLE athlete_account_links(athlete_id int,user_id text,status text);
+      CREATE TABLE athlete_public_shares(user_id text,enabled boolean,share_bio boolean,share_results boolean,share_club boolean,share_location boolean);
+      CREATE TABLE athlete_profile_history_choices(user_id text,athlete_id int,provider text,external_id text,performance_hash text,excluded boolean);
+      CREATE TABLE source_history_claim_results(id int,athlete_id int,provider text,external_id text,source_key text);
+      CREATE TABLE athlete_profile_hidden_source_results(user_id text,source_result_id int);
+      CREATE TABLE events(id int PRIMARY KEY,name text,slug text);
+      CREATE TABLE editions(id int PRIMARY KEY,event_id int,event_date date,distance_code text,distance_km numeric);
+      CREATE TABLE results(id int PRIMARY KEY,athlete_id int,edition_id int,status text,finish_time_seconds numeric,
+        chip_time_seconds numeric,gun_time_seconds numeric,bib text,overall_place int,gender_place int,category_place int,
+        category text,source_url text,result_source text,result_visibility text,result_details jsonb);
+      CREATE TABLE result_source_references(result_id int,source_url text,source_name text);
+      CREATE TABLE network_audit_log(id serial PRIMARY KEY,action text,entity_type text,entity_id text,after_value jsonb,note text);
+      INSERT INTO athletes(id,slug,display_name,gender,nation,profile_type,profile_visibility,profile_details)
+        VALUES(21,'ione-farrow-synthetic','Ione Farrow','F','GBR','Athlete','public','{"athlete_verified":false}');
+    `);
+    for (const file of ["0035_athlete_source_histories.sql", "0036_source_history_publication.sql",
+      "0030_athlete_identifiers.sql", "20261009_private_source_captures.sql"])
+      await db.exec(readFileSync(new URL(`../migrations/${file}`, import.meta.url), "utf8"));
+    const before = (await db.query("SELECT to_jsonb(a) row FROM athletes a WHERE id=21")).rows;
+    const fingerprint = (await db.query(evidenceFixture.fingerprint, [evidenceFixture.batch])).rows[0].fingerprint;
+    for (const statements of evidenceFixture.setup) await q(statements);
+    for (const statements of evidenceFixture.retention) await q(statements);
+    const captures = (await db.query("SELECT id,md5((to_jsonb(c)-'last_seen_at')::text) integrity_hash FROM result_archive_source_captures c")).rows;
+    evidenceFixture.guard[4][1][1] = fingerprint;
+    const caps = JSON.parse(evidenceFixture.guard.at(-1)[1][0]);
+    for (const cap of caps) cap.integrity_hash = captures.find((c) => Number(c.id) === Number(cap.id)).integrity_hash;
+    evidenceFixture.guard.at(-1)[1][0] = JSON.stringify(caps);
+    const batch = () => [...evidenceFixture.guard,
+      [evidenceFixture.append, [JSON.stringify(evidenceFixture.rows), evidenceFixture.batch, evidenceFixture.planHash, evidenceFixture.instruction]],
+      [evidenceFixture.verify, [JSON.stringify(evidenceFixture.rows)]]];
+    assert.deepEqual((await q(batch())).at(-2)[0], { appended: 1, audits: 1 });
+    assert.deepEqual((await q(batch())).at(-2)[0], { appended: 0, audits: 0 }, "Replay appends nothing");
+    const history = (await db.query("SELECT athlete_id,provider,performances FROM athlete_source_histories")).rows;
+    assert.equal(history.length, 1);
+    assert.equal(history[0].athlete_id, 21);
+    assert.equal(history[0].performances[0].verificationStatus, "source_verified");
+    assert.deepEqual((await db.query("SELECT to_jsonb(a) row FROM athletes a WHERE id=21")).rows, before, "Existing athlete fields unchanged");
+    const audit = (await db.query("SELECT after_value FROM network_audit_log WHERE action LIKE '%evidence_history_appended'")).rows[0].after_value;
+    assert.ok(audit.identityEvidence.score >= 6 && audit.identityVerified === false);
+    // A protected athlete is never appended to: the guard rolls the batch back.
+    await db.exec("DELETE FROM network_audit_log; DELETE FROM athlete_source_histories; UPDATE athletes SET profile_visibility='private' WHERE id=21");
+    const fp2 = (await db.query(evidenceFixture.fingerprint, [evidenceFixture.batch])).rows[0].fingerprint;
+    evidenceFixture.guard[4][1][1] = fp2;
+    await assert.rejects(() => q(batch()), /check constraint/);
+    assert.equal((await db.query("SELECT count(*)::int n FROM athlete_source_histories")).rows[0].n, 0);
+    console.log("London official-results evidence append verified: guarded append, audit with score, idempotent replay, protected athlete refused (synthetic in-memory data only).");
+  } finally {
+    await db.close();
+  }
+}

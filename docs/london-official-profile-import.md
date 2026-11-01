@@ -38,6 +38,42 @@ capture inbox, freshness locks and rehearsal-before-production rule.
   name/alias, locator conflicts, same-time same-name performances, unparsed
   names or times. No name-only merge is ever made.
 
+## Multi-signal identity evidence (owner instruction, 1 November 2026)
+
+`scripts/lib/london-official-evidence.py` resolves held rows whose only reasons
+are soft (an existing same/similar name, an in-race name variant, or a same-name,
+same-time record) using independent signals: gender, explicit nationality, age
+progression (birth-year intervals from dated categories; other providers widened
+a year each way, and compatibility needs two strictly shared years), club,
+marathon time against the candidate's fastest actual or predicted (Riegel)
+marathon, name rarity (directory, field and all 17 London years), and bridges
+(official locator, bib, or a provisional cross-year chain). Thresholds are module
+constants and are copied into each plan with every candidate's score breakdown.
+
+| Decision | Disposition | Effect |
+| --- | --- | --- |
+| Same-name, same-time record of this edition on the single compatible candidate | `linked` (`same_name_time_edition_evidence`) | Evidence only, no second row |
+| One compatible, unprotected candidate; gender, nationality and age agree; plus a bridge, club or corpus-rare name; score ≥ 6 | `evidence_linked` | The official history is appended to that athlete; nothing else changes; audit records the score |
+| Every candidate excluded by an age gap ≥ 2 widened years or both-sides source nationality | `new` (`distinct_person`) | Provisional profile; excluded candidates recorded |
+| No candidate at all; only an in-race variant flag | `new` (`create_no_candidates`) | Provisional profile |
+| Anything else | `held` | Ranked candidates with per-signal evidence |
+
+Account links, private/derived profiles and a candidate already holding a record
+of this edition force a hold. Read-only inputs:
+
+```sh
+python3 scripts/snapshot-london-official-profiles.py --build-chains --source /private/london-official \
+  --output /private/chains.json
+python3 scripts/snapshot-london-official-profiles.py --candidate-evidence --connection /private/prod.json \
+  --confirm-branch br-flat-unit-aydbwlfk --snapshot /private/snap-2026 --output /private/candidate-evidence-2026.json
+python3 scripts/apply-london-official-profiles.py plan ... --candidate-evidence /private/candidate-evidence-2026.json \
+  --chains /private/chains.json
+```
+
+The candidate evidence is bound to the snapshot digest. At apply time the guarded
+append re-checks that the athlete is still public, an athlete profile, not derived
+and not account-linked, and the snapshot fingerprint still covers the directory.
+
 ## Inputs (all private, outside the repository)
 
 | Input | What it is |

@@ -41,6 +41,7 @@ def _load(name, filename):
 # Definitions only; importing performs no network or database work.
 base = _load("london_official_base_plan", "london-profile-plan.py")
 _context = _load("london_official_context", "london-official-context.py")
+evidence = _load("london_official_evidence", "london-official-evidence.py")
 _screen = base._screen
 
 OFFICIAL = "london-official"
@@ -51,7 +52,7 @@ RECORD_KEYS = {
     "last_name", "first_name", "nationality", "club", "bib", "category", "half", "finish", "idp",
 }
 WHEELCHAIR_LABELS = {"Wheelchair", "Para wheelchair"}
-MATCH_METHODS = {"exact_official_result_locator", "same_edition_bib"}
+MATCH_METHODS = {"exact_official_result_locator", "same_edition_bib", "same_name_time_edition_evidence"}
 
 YEAR = None
 DATE = None
@@ -281,7 +282,7 @@ def _history_and_athlete(group, observation, edition, batch_id):
     return history, draft
 
 
-def build_plan(observations, snapshot, edition, batch_id, created_at):
+def build_plan(observations, snapshot, edition, batch_id, created_at, *, candidate_evidence=None, chains=None):
     """Prepare an immutable, fully accounted plan. Creates nothing."""
     _require_configured()
     if edition != EDITION_CONTEXT["edition"] or batch_id != EDITION_CONTEXT["batchId"]:
@@ -355,6 +356,28 @@ def build_plan(observations, snapshot, edition, batch_id, created_at):
         if in_edition(result):
             for seconds in _result_times(result):
                 performance_index[seconds].append(result)
+    if candidate_evidence is not None:
+        meta = candidate_evidence.get("metadata") or {}
+        if meta.get("snapshotDigest") != snapshot_digest or meta.get("digest") != _hash(candidate_evidence["athletes"]):
+            raise ValueError("Candidate evidence was not read for this snapshot")
+    if chains is not None and chains.get("policyVersion") != evidence.POLICY_VERSION:
+        raise ValueError("Unexpected cross-year chain index")
+    exact_directory = defaultdict(set)
+    for athlete_id, athlete in athlete_by_id.items():
+        for n in _names(athlete):
+            exact_directory[name_key(n)].add(athlete_id)
+    field_names = Counter(name_key(o["name"]) for o in observations)
+    linked_athletes = {a for links in account_links.values() for a in links}
+    same_edition_athletes = {_entity_id(r["athleteId"]) for r in snapshot.get("results", []) if in_edition(r)}
+    facts_cache = {}
+
+    def facts_for(athlete_id):
+        if athlete_id not in facts_cache:
+            facts = evidence.candidate_facts(athlete_by_id[athlete_id], (candidate_evidence or {}).get("athletes", {}).get(athlete_id))
+            facts["accountLinked"] = athlete_id in linked_athletes
+            facts_cache[athlete_id] = facts
+        return facts_cache[athlete_id]
+
     for group in groups:
         o = by_observation[group["primaryObservationKey"]]
         reasons = set(group["reasons"]) | source_reasons.get(group["groupId"], set())
@@ -436,12 +459,61 @@ def build_plan(observations, snapshot, edition, batch_id, created_at):
         group["existingMatches"] = existing_matches
         group["samePerformanceCandidates"] = sorted(same_performance, key=lambda r: str(r["resultId"]))
         group["reasons"] = sorted(reasons)
+        if candidate_evidence is not None and reasons and reasons <= evidence.SOFT_REASONS:
+            athlete_tokens = sorted(c for c in candidates if c.startswith("athlete:"))
+            account_tokens = sorted(c for c in candidates if c.startswith("account:"))
+            incoming = evidence.birth_interval(YEAR, o["category"])
+            chain = (chains or {}).get("chains", {}).get((chains or {}).get("members", {}).get(f"{YEAR}:{o['sourceResultId']}"))
+            exact = name_key(o["name"])
+            rare = (len(exact_directory.get(exact, ())) <= evidence.RARE_NAME_MAX_DIRECTORY and field_names[exact] <= evidence.RARE_NAME_MAX_FIELD
+                    and chains is not None and evidence.corpus_consistent(chains.get("nameRows", {}).get(exact), o, incoming))
+            scores = []
+            for token in athlete_tokens:
+                athlete_id = token[len("athlete:"):]
+                facts = facts_for(athlete_id)
+                scores.append(evidence.score_candidate(
+                    o, facts, incoming, chain, rare and athlete_id in exact_directory.get(exact, ()), YEAR))
+            decision, details = evidence.decide(
+                o, group, scores, account_candidates=account_tokens, field_name_count=field_names[exact],
+                same_edition_athletes=same_edition_athletes, incoming_interval=incoming)
+            # A same-name, same-time record of this edition on the single compatible
+            # candidate is the same performance: add evidence, never a second row.
+            if (len(same_performance) == 1 and details.get("holdReason") == "candidate_already_has_this_edition"):
+                only = [c for c in scores if not c["hardContradictions"]]
+                chosen = only[0] if len(only) == 1 else None
+                if (chosen and chosen["athleteId"] == _entity_id(same_performance[0]["athleteId"]) and not chosen["softConflicts"]
+                        and not chosen["privacyFlags"] and not chosen["accountLinked"]
+                        and chosen["signals"]["gender"] != "conflict" and chosen["signals"]["nationality"] != "conflict"):
+                    decision = "link_existing_performance"
+                    details = {**details, "chosenAthleteId": chosen["athleteId"],
+                               "decisionBasis": "Single compatible candidate holds a same-name, same-time record of this London edition."}
+            if chain:
+                details["chainId"] = (chains or {}).get("members", {}).get(f"{YEAR}:{o['sourceResultId']}")
+            group["identityEvidence"] = {"decision": decision, **details}
+            if decision == "link_existing_performance":
+                sp = same_performance[0]
+                existing_matches = [{
+                    "resultId": sp["resultId"], "athleteId": sp["athleteId"], "editionId": sp.get("editionId"),
+                    "matchedUrls": [], "matchedBib": None, "matchedTimeSeconds": group["finishSeconds"],
+                    "sourceKind": sp.get("sourceKind"), "provider": None, "conflicts": [],
+                    "method": "same_name_time_edition_evidence",
+                    "basis": "Same exact name and time in this London edition on the single compatible candidate; multi-signal evidence recorded.",
+                }]
+                group["existingMatches"] = existing_matches
+                group["resolvedReasons"], reasons = sorted(reasons), set()
+            elif decision in ("append_history", "distinct_person", "create_no_candidates"):
+                group["resolvedReasons"], reasons = sorted(reasons), set()
+            group["reasons"] = sorted(reasons)
         if reasons:
             group["disposition"], group["action"] = "held", "hold_for_review"
         elif existing_matches:
             group["disposition"], group["action"] = "linked", "reuse_existing_performance"
             group["athleteId"] = existing_matches[0]["athleteId"]
             group["resultIds"] = [m["resultId"] for m in existing_matches]
+        elif (group.get("identityEvidence") or {}).get("decision") == "append_history":
+            group["disposition"], group["action"] = "evidence_linked", "append_official_performance_to_existing_athlete"
+            group["athleteId"] = group["identityEvidence"]["chosenAthleteId"]
+            group["history"] = _history_and_athlete(group, o, edition, batch_id)[0]
         else:
             group["disposition"], group["action"] = "new", "create_unclaimed_profile_with_one_performance"
             group["history"], group["athleteDraft"] = _history_and_athlete(group, o, edition, batch_id)
@@ -450,11 +522,14 @@ def build_plan(observations, snapshot, edition, batch_id, created_at):
         "sourceObservations": len(observations),
         "observationsByEvent": dict(sorted(Counter(o["sourceScope"] for o in observations).items())),
         "performanceGroups": len(groups), "new": dispositions["new"], "linked": dispositions["linked"],
-        "held": dispositions["held"],
+        "held": dispositions["held"], "evidenceLinked": dispositions["evidence_linked"],
+        "linkedByMethod": dict(sorted(Counter(g["existingMatches"][0]["method"] for g in groups if g["disposition"] == "linked").items())),
+        "distinctPersonCreated": sum(g["disposition"] == "new" and (g.get("identityEvidence") or {}).get("decision") == "distinct_person" for g in groups),
+        "evidenceHoldReasons": dict(sorted(Counter((g.get("identityEvidence") or {}).get("holdReason") for g in groups if g["disposition"] == "held" and g.get("identityEvidence")).items())),
         "heldReasons": dict(sorted(Counter(r for g in groups if g["disposition"] == "held" for r in g["reasons"]).items())),
         "qualityFlaggedObservations": sum(bool(o["qualityFlags"]) for o in observations),
         "newWithSourceNationality": sum(bool(g.get("athleteDraft", {}).get("nationality")) for g in groups),
-        "officialResultsVerified": dispositions["new"], "athleteIdentitiesVerified": 0,
+        "officialResultsVerified": dispositions["new"] + dispositions["evidence_linked"], "athleteIdentitiesVerified": 0,
     }
     plan = {
         "schemaVersion": "london-official-profile-plan/v1", "batchId": batch_id, "createdAt": created_at,
@@ -466,6 +541,18 @@ def build_plan(observations, snapshot, edition, batch_id, created_at):
             "coverage": "All placed finishers in the captured race-day events; counts equal the site's own totals.",
         }],
         "inputDigest": _hash(observations), "snapshotDigest": snapshot_digest,
+        "identityEvidence": {
+            "policyVersion": evidence.POLICY_VERSION,
+            "candidateEvidenceDigest": (candidate_evidence or {}).get("metadata", {}).get("digest"),
+            "candidateEvidenceReadAt": (candidate_evidence or {}).get("metadata", {}).get("readAt"),
+            "chainIndexDigest": _hash(chains) if chains is not None else None,
+            "thresholds": {"RARE_NAME_MAX_DIRECTORY": evidence.RARE_NAME_MAX_DIRECTORY, "RARE_NAME_MAX_FIELD": evidence.RARE_NAME_MAX_FIELD,
+                           "TIME_BAND": list(evidence.TIME_BAND), "OTHER_PROVIDER_AGE_WIDEN": evidence.OTHER_PROVIDER_AGE_WIDEN,
+                           "MIN_AGE_GAP_FOR_CONTRADICTION": evidence.MIN_AGE_GAP_FOR_CONTRADICTION,
+                           "MIN_STRICT_OVERLAP_YEARS": evidence.MIN_STRICT_OVERLAP_YEARS,
+                           "RIEGEL_EXPONENT": evidence.RIEGEL_EXPONENT,
+                           "AUTO_LINK_MIN_SCORE": evidence.AUTO_LINK_MIN_SCORE, "SCORE": evidence.SCORE},
+        } if candidate_evidence is not None else None,
         "snapshotFingerprint": (snapshot.get("metadata") or {}).get("fingerprint"),
         "observations": observations, "groups": groups, "summary": summary,
         "accounting": {"inputObservations": len(observations), "assignedObservations": len(groups), "unassignedObservations": 0, "multiplyAssignedObservations": 0},
@@ -525,6 +612,7 @@ def validate_plan(plan, *, snapshot=None):
             continue
         if g["reasons"] or o["qualityFlags"]:
             raise ValueError("Unresolved source or identity flags must remain held")
+        decision = (g.get("identityEvidence") or {}).get("decision")
         if g["disposition"] == "linked":
             if "history" in g or "athleteDraft" in g or not g["existingMatches"]:
                 raise ValueError("A linked group reuses an existing performance only")
@@ -532,9 +620,33 @@ def validate_plan(plan, *, snapshot=None):
                 raise ValueError("A linked group needs a conflict-free official locator match")
             if len({str(m["athleteId"]) for m in g["existingMatches"]}) != 1 or str(g["athleteId"]) != str(g["existingMatches"][0]["athleteId"]):
                 raise ValueError("A linked group must resolve to one existing athlete")
+            if any(m["method"] == "same_name_time_edition_evidence" for m in g["existingMatches"]) and decision != "link_existing_performance":
+                raise ValueError("A same-name, same-time link needs its recorded evidence decision")
             continue
-        if g["disposition"] != "new" or g["existingMatches"] or g["samePerformanceCandidates"] or g["existingCandidateCount"]:
+        decision = (g.get("identityEvidence") or {}).get("decision")
+        if decision and not set(g.get("resolvedReasons", [])) <= evidence.SOFT_REASONS:
+            raise ValueError("Evidence may only resolve soft identity reasons")
+        if g["disposition"] == "evidence_linked":
+            ev = g["identityEvidence"]
+            ranked = [c for c in ev["rankedCandidates"] if not c["hardContradictions"]]
+            if (decision != "append_history" or "athleteDraft" in g or g["existingMatches"] or ev["accountCandidates"]
+                    or str(g["athleteId"]) != str(ev["chosenAthleteId"]) or len(ranked) != 1
+                    or ranked[0]["athleteId"] != str(ev["chosenAthleteId"]) or ranked[0]["privacyFlags"] or ranked[0]["accountLinked"]
+                    or ranked[0]["score"] < evidence.AUTO_LINK_MIN_SCORE):
+                raise ValueError("An evidence link needs one compatible, unprotected, strongly supported candidate")
+            if g["history"] != _history_and_athlete(g, o, plan["edition"], plan["batchId"])[0]:
+                raise ValueError("Appended history differs from its source observation")
+            if g["history"]["externalId"] in histories:
+                raise ValueError("Repeated history ID")
+            histories.add(g["history"]["externalId"])
+            continue
+        if g["disposition"] != "new" or g["existingMatches"] or g["samePerformanceCandidates"]:
             raise ValueError("Only an unmatched clean group may create a profile")
+        if g["existingCandidateCount"]:
+            ev = g.get("identityEvidence") or {}
+            if (decision != "distinct_person" or ev.get("accountCandidates") or ev.get("candidateCount") != g["existingCandidateCount"]
+                    or not ev.get("rankedCandidates") or any(not c["hardContradictions"] for c in ev["rankedCandidates"])):
+                raise ValueError("A profile beside existing candidates needs every candidate excluded by a hard contradiction")
         expected = _history_and_athlete(g, o, plan["edition"], plan["batchId"])
         if [g["history"], g["athleteDraft"]] != list(expected):
             raise ValueError("Profile draft differs from its source observation")
@@ -547,6 +659,6 @@ def validate_plan(plan, *, snapshot=None):
         histories.add(g["history"]["externalId"])
     counts = Counter(g["disposition"] for g in plan["groups"])
     summary = plan["summary"]
-    if [summary["new"], summary["linked"], summary["held"]] != [counts["new"], counts["linked"], counts["held"]]:
+    if [summary["new"], summary["linked"], summary["held"], summary.get("evidenceLinked", 0)] != [counts["new"], counts["linked"], counts["held"], counts["evidence_linked"]]:
         raise ValueError("Plan summary differs from its groups")
     return True

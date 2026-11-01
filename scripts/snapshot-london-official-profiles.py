@@ -193,6 +193,106 @@ OWNER_INSTRUCTION = ("Paul Browne, 1 November 2026: \"can you just copy and past
                      "them to athrecs ?\" … \"and create profiles\" … \"so change and adapt it\" (London Marathon official results, 2010–2026).")
 
 
+CANDIDATE_ATHLETES_SQL = """SELECT a.id,a.source_club_name,c.name club_name,
+ (SELECT coalesce(jsonb_agg(DISTINCT ac2.name),'[]'::jsonb) FROM athlete_clubs x JOIN clubs ac2 ON ac2.id=x.club_id WHERE x.athlete_id=a.id) member_clubs,
+ a.profile_details#>>'{sourceNationalityObservation,value}' source_nationality,
+ a.profile_details->>'nationality' stated_nationality
+ FROM athletes a LEFT JOIN clubs c ON c.id=a.club_id WHERE a.id = ANY($1::int[]) ORDER BY a.id"""
+
+CANDIDATE_HISTORIES_SQL = """SELECT h.athlete_id,h.provider,p.ordinal,
+ jsonb_strip_nulls(jsonb_build_object('year',p.performance->'year','date',p.performance->'date',
+ 'meeting',p.performance->'meeting','eventSlug',p.performance->'eventSlug','discipline',p.performance->'discipline',
+ 'performance',p.performance->'performance','ageGroup',p.performance->'ageGroup','bib',coalesce(p.performance->'bib',p.performance#>'{archiveReference,bib}'),
+ 'sourceClub',coalesce(p.performance->'sourceClub',p.performance#>'{archiveReference,club}'),
+ 'sourceReportedNationality',coalesce(p.performance->'sourceReportedNationality',p.performance#>'{archiveReference,nationality}'),
+ 'profileExcluded',p.performance->'profileExcluded',
+ 'sourceUrls',(SELECT jsonb_agg(u) FROM jsonb_array_elements_text(CASE WHEN jsonb_typeof(p.performance->'sourceUrls')='array' THEN p.performance->'sourceUrls' ELSE '[]'::jsonb END) u
+   WHERE u ~* 'londonmarathon\\.com/'))) perf
+ FROM athlete_source_histories h CROSS JOIN LATERAL jsonb_array_elements(h.performances) WITH ORDINALITY p(performance,ordinal)
+ WHERE h.athlete_id = ANY($1::int[]) ORDER BY h.athlete_id,h.provider,h.external_id,p.ordinal"""
+
+CANDIDATE_RESULTS_SQL = """SELECT r.athlete_id,r.category,r.finish_time_seconds,r.chip_time_seconds,r.bib,r.source_url,
+ r.result_details->>'clubAtRace' club_at_race,d.event_date::text event_date,d.distance_km,e.name event_name,e.slug event_slug
+ FROM results r JOIN editions d ON d.id=r.edition_id JOIN events e ON e.id=d.event_id
+ WHERE r.athlete_id = ANY($1::int[]) ORDER BY r.athlete_id,r.id"""
+
+
+def _hms(value):
+    if value is None:
+        return None
+    total = int(round(float(value)))
+    return f"{total // 3600:02}:{total % 3600 // 60:02}:{total % 60:02}"
+
+
+def candidate_evidence(args):
+    """Read-only: other facts of every snapshot athlete, for multi-signal identity scoring."""
+    import datetime as dt
+    if args.output.resolve().is_relative_to(ROOT.parent.resolve()):
+        raise ValueError("Private candidate evidence must remain outside the repository")
+    snapshot_data = json.loads((args.snapshot / "snapshot.json").read_text(encoding="utf-8"))
+    ids = sorted({int(a["id"]) for a in snapshot_data["athletes"]})
+    _, query = snap.base.connection(args.connection, args.confirm_branch, timeout=180)
+    started = dt.datetime.now(dt.timezone.utc).isoformat()
+    out = {str(i): {"clubs": [], "performances": [], "sourceNationality": None, "privacyFlags": []} for i in ids}
+    for offset in range(0, len(ids), 4000):
+        chunk = ids[offset:offset + 4000]
+        athletes, histories, results = query([(CANDIDATE_ATHLETES_SQL, [chunk]), (CANDIDATE_HISTORIES_SQL, [chunk]), (CANDIDATE_RESULTS_SQL, [chunk])], True)
+        for row in athletes:
+            rec = out[str(row["id"])]
+            rec["clubs"] = sorted({c for c in [row.get("source_club_name"), row.get("club_name"), *(row.get("member_clubs") or [])] if c})
+            rec["sourceNationality"] = row.get("source_nationality")
+            if row.get("stated_nationality"):
+                rec["statedNationality"] = row["stated_nationality"]
+        for row in histories:
+            perf = dict(row["perf"] or {})
+            perf["provider"] = row["provider"]
+            perf["officialSemantics"] = row["provider"] in OFFICIAL_LONDON_PROVIDERS
+            rec = out[str(row["athlete_id"])]
+            rec["performances"].append(perf)
+            if perf.get("sourceClub"):
+                rec["clubs"] = sorted(set(rec["clubs"]) | {perf["sourceClub"]})
+        for row in results:
+            rec = out[str(row["athlete_id"])]
+            date = row.get("event_date") or ""
+            london = row.get("event_slug") == "london-marathon"
+            rec["performances"].append({
+                "provider": "canonical", "year": int(date[:4]) if date[:4].isdigit() else None, "date": date,
+                "meeting": row.get("event_name"), "eventSlug": row.get("event_slug"),
+                "discipline": "Marathon" if row.get("distance_km") and abs(float(row["distance_km"]) - 42.195) < 0.1 else str(row.get("distance_km")),
+                "performance": _hms(row.get("chip_time_seconds") or row.get("finish_time_seconds")), "ageGroup": row.get("category"),
+                "bib": row.get("bib"), "sourceUrls": [row["source_url"]] if london and row.get("source_url") else [],
+                "officialSemantics": False})
+            if row.get("club_at_race"):
+                rec["clubs"] = sorted(set(rec["clubs"]) | {row["club_at_race"]})
+        snap.progress(phase="candidate_evidence", athletes=min(offset + 4000, len(ids)), total=len(ids))
+    document = {"metadata": {"readAt": started, "branchId": args.confirm_branch, "snapshotFingerprint": snapshot_data["metadata"]["fingerprint"],
+                             "snapshotDigest": plan._hash(snapshot_data), "athletes": len(ids)}, "athletes": out}
+    document["metadata"]["digest"] = plan._hash(out)
+    target = args.output
+    target.write_text(json.dumps(document, ensure_ascii=False, separators=(",", ":")))
+    target.chmod(0o600)
+    snap.progress(phase="candidate_evidence_complete", **document["metadata"])
+
+
+# Same-source London providers whose age categories use race-day semantics.
+OFFICIAL_LONDON_PROVIDERS = {"TCS London Marathon results", "mika:timing (London Marathon supplied results)"}
+
+
+def build_chain_index(args):
+    """Private provisional cross-year chain index from all retained official year files."""
+    if args.output.resolve().is_relative_to(ROOT.parent.resolve()):
+        raise ValueError("Private chain index must remain outside the repository")
+    rows = {}
+    for path in sorted(args.source.glob("london_*.json")):
+        year = int(path.stem.split("_")[1])
+        rows[year] = json.loads(path.read_text(encoding="utf-8"))
+    index = plan.evidence.build_chains(rows)
+    index["sourceSha256"] = {str(y): plan._file_hash(args.source / f"london_{y}.json") for y in rows}
+    args.output.write_text(json.dumps(index, ensure_ascii=False, separators=(",", ":")))
+    args.output.chmod(0o600)
+    print(json.dumps(index["stats"], indent=2))
+
+
 def list_editions(args):
     _, query = snap.base.connection(args.connection, args.confirm_branch, timeout=60)
     rows = query([(LIST_EDITIONS_SQL, [])], True)[0]
@@ -214,8 +314,15 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=pathlib.Path)
     parser.add_argument("--edition-config", type=pathlib.Path)
     parser.add_argument("--batch")
+    parser.add_argument("--candidate-evidence", action="store_true", help="read-only: candidate athletes' other facts")
+    parser.add_argument("--snapshot", type=pathlib.Path)
+    parser.add_argument("--build-chains", action="store_true", help="write the private cross-year chain index (no database access)")
     args = parser.parse_args()
-    if args.make_config:
+    if args.build_chains:
+        if not (args.source and args.output):
+            parser.error("--build-chains needs --source and --output")
+        build_chain_index(args)
+    elif args.make_config:
         if not (args.source and args.output and args.year and args.date and args.edition_id and args.batch):
             parser.error("--make-config needs --source --output --year --date --edition-id --batch")
         make_config(args)
@@ -223,6 +330,10 @@ if __name__ == "__main__":
         parser.error("--connection and --confirm-branch are required")
     elif args.list_editions:
         list_editions(args)
+    elif args.candidate_evidence:
+        if not (args.snapshot and args.output):
+            parser.error("--candidate-evidence needs --snapshot and --output")
+        candidate_evidence(args)
     else:
         if not (args.source and args.output and args.edition_config):
             parser.error("--source, --output and --edition-config are required for a snapshot")
