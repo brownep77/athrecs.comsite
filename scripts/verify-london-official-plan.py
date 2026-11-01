@@ -178,7 +178,34 @@ def main():
         bad = copy.deepcopy(ctx); bad["expectedByEvent"]["MAS"] += 1
         expect_error(lambda: plan.configure(bad), "add up")
     evidence_checks()
+    scoped_guard_checks()
     print("London official-results planner verified: normalization, wheelchair labelling, holds, exact-locator reuse, tamper rejection (synthetic data only).")
+
+
+def scoped_guard_checks():
+    """Name-collision screening used by the scoped publish guard (synthetic)."""
+    guard = load("verify_official_guard", "lib/london-official-guard.py")
+    snap = load("verify_official_snapshot", "snapshot-london-official-profiles.py").snap
+    keys = set().union(*(plan.screening_name_keys(n) for n in ["Aster Quill", "Bramble Okonkwo-Lane"]))
+    def row(i, name):
+        return {"id": i, "slug": f"s{i}", "display_name": name, "given_name": None, "family_name": None, "race_entry_name": None,
+                "gender": "M", "nation": None, "date_of_birth": None, "profile_visibility": "public", "profile_type": "Athlete",
+                "parent_athlete_id": None, "name_review_mode": None, "name_details": {}}
+    snapshot_athletes = {"7": snap.athlete_record(row(7, "Aster Quill"))}
+    screen = lambda rows: guard.screen_rows(rows, keys, snapshot_athletes, snap.athlete_record, plan.snapshot_name_keys)
+    assert screen([row(900, "Wendell Ombrage")]) == [], "An unrelated new athlete does not block"
+    assert [c["athleteId"] for c in screen([row(901, "Aster Quill")])] == [901], "A colliding new athlete blocks"
+    assert [c["athleteId"] for c in screen([row(902, "Bramble Okonkwo Lane")])] == [902], "A screening-key variant blocks"
+    assert screen([row(7, "Aster Quill")]) == [], "An unchanged snapshot athlete is not a new collision"
+    assert [c["athleteId"] for c in screen([row(55, "Aster Quill")])] == [55], "A rename into a colliding name blocks"
+    accounts = lambda rows, before: guard.screen_accounts(rows, keys, before, plan._screen.finder.names_from, plan.screening_name_keys)
+    assert accounts([{"id": "u1", "name": "Wendell Ombrage"}], {}) == []
+    assert accounts([{"id": "u2", "name": "Aster Quill"}], {}) == [{"accountId": "u2"}]
+    built = {"groups": [{"disposition": "linked", "athleteId": 3, "existingMatches": [{"athleteId": 3}], "names": ["X Y"]},
+                        {"disposition": "new", "names": ["Aster Quill"], "existingCandidates": ["athlete:4", "account:z"],
+                         "identityEvidence": {"rankedCandidates": [{"athleteId": "5"}], "possibleDuplicateOf": [{"athleteId": "6"}]}}]}
+    assert set().union(*(guard.referenced_ids(g) for g in built["groups"])) == {3, 4, 5, 6}
+    assert guard.batch_name_keys(built, plan) == plan.screening_name_keys("Aster Quill")
 
 
 def evidence_checks():

@@ -100,9 +100,26 @@ histories this batch already wrote; the snapshot already excludes the batch's ow
 athletes and histories, so they are never screened as other people. Plan with
 `--committed <listing>`: those groups become `already_imported` (never re-held,
 relinked or recreated), and the plan refuses if any committed history does not map
-to one. Then rehearse and publish the new plan as usual. Per-batch transactions
-re-check the fingerprint, so a change by another writer stops the run safely; to
-avoid repeats, pause other imports for the publish window.
+to one. Then rehearse and publish the new plan as usual (see the scoped publish guard below).
+
+## Scoped publish guard
+
+Other automations write to production continuously, so the applier no longer
+requires the whole-directory fingerprint to stay fixed
+(`scripts/lib/london-official-guard.py`). At start it certifies, against the
+snapshot, every athlete the plan's decisions reference (link/attach targets,
+ranked, possible-duplicate and existing candidates: names/aliases, gender, nation,
+date of birth, visibility, profile type, parent, active account links), this
+edition's scoped results/histories and privacy rows, and screens the whole live
+directory and accounts for names colliding (planner screening keys) with any name
+the plan creates or attaches. Each batch transaction locks the tables and asserts
+the batch's referenced-athlete digest, the scoped-part digest, the certified
+directory-name digest and maximum athlete ID, and the account digest. Unrelated
+inserts or renames only trip the name/account assertion: the applier re-screens the
+changed rows, re-baselines when nothing collides and retries. A collision, or any
+change to a referenced athlete or this edition's scoped data, stops the run for a
+new snapshot and plan. Production requires a rehearsal receipt from this guard
+version with the same plan hash and scoped-part fingerprint.
 
 ## Inputs (all private, outside the repository)
 

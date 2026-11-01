@@ -9,6 +9,18 @@ import { fileURLToPath } from "node:url";
 import { PGlite } from "@electric-sql/pglite";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+
+/** Fill the scoped-guard expectations from the database, as the applier's start-up certification does. */
+async function baseline(db, fx, { refs = true } = {}) {
+  const g = fx.guard;
+  const at = g.findIndex(([sql]) => sql.startsWith("INSERT INTO london_guard_parts"));
+  g[at][1][1] = (await db.query(fx.scoped.parts, [fx.batch])).rows[0].fp;
+  if (refs) g[at + 1][1][2] = (await db.query(fx.scoped.refs, [fx.batch, fx.scoped.refIds])).rows[0].v;
+  const max = Number((await db.query(fx.scoped.max, [fx.batch])).rows[0].max_id);
+  g[at + 2][1][1] = max;
+  g[at + 2][1][2] = (await db.query(fx.scoped.names, [fx.batch, max])).rows[0].fp;
+  g[at + 3][1][0] = (await db.query(fx.scoped.accounts)).rows[0].fp;
+}
 const fixture = JSON.parse(execFileSync("python3", ["-c", String.raw`
 import contextlib, hashlib, io, json, pathlib, tempfile, importlib.util
 root=pathlib.Path.cwd()
@@ -46,9 +58,13 @@ linked=[{'groupId':g['groupId'],'athleteId':g['athleteId'],'resultIds':g['result
  'existingMatches':g['existingMatches'],'sourceKeys':g['sourceKeys'],'sourceUrls':g['sourceUrls'],
  'captureIds':sorted({int(evidence[k]['id']) for k in g['observationKeys']})} for g in chosen if g['disposition']=='linked']
 caps=list({c['id']:c for c in evidence.values()}.values())
-guard=a.guard_statements(a.snapshotter.fingerprint_sql(),'PENDING',caps,a.snapshotter.FINGERPRINT_TABLES)
+g=a.scoped_guard.ScopedGuard(a.snapshotter.snap,a.planner,plan,snapshot,{'partHashes':{n:'x' for n in a.scoped_guard.SCOPED_PARTS}},a.BATCH)
+refs=sorted(set().union(*(a.scoped_guard.referenced_ids(x) for x in chosen)))
+g.ref_hash={i:'x' for i in refs};g.accounts_fp='x'
+guard=a.guard_statements(g.statements(refs),caps,a.snapshotter.FINGERPRINT_TABLES)
+scoped={'parts':g.parts_sql,'refs':"SELECT md5(coalesce(string_agg(r.h,'' ORDER BY r.id),'')) v FROM ("+g.refs_sql+") r",'refIds':refs,'names':g.names_fp_sql,'max':g.max_sql,'accounts':g.accounts_sql}
 print(json.dumps({'editionId':v.EDITION['id'],'date':v.DATE,'batch':a.BATCH,'instruction':a.INSTRUCTION,'planHash':a.digest(plan),
- 'setup':setup,'retention':retention,'guard':guard,'new':new,'linked':linked,'existingUrl':existing,
+ 'setup':setup,'retention':retention,'guard':guard,'scoped':scoped,'new':new,'linked':linked,'existingUrl':existing,
  'insertNew':a.NEW_PROFILES,'verifyNew':a.VERIFY_NEW,'linkEvidence':a.LINK_EVIDENCE,'verifyLinked':a.VERIFY_LINKED,
  'fingerprint':a.snapshotter.fingerprint_sql()}))
 `], { cwd: root, encoding: "utf8", maxBuffer: 8 * 1024 * 1024 }));
@@ -102,7 +118,7 @@ try {
   assert.deepEqual((await db.query("SELECT count(*)::int captures,sum(row_count)::int observations FROM result_archive_source_captures")).rows[0], { captures: 1, observations: 3 });
   const captures = (await db.query("SELECT id,md5((to_jsonb(c)-'last_seen_at')::text) integrity_hash FROM result_archive_source_captures c")).rows;
   const hashes = new Map(captures.map((c) => [Number(c.id), c.integrity_hash]));
-  fixture.guard[4][1][1] = originalFingerprint;
+  await baseline(db, fixture);
   const caps = JSON.parse(fixture.guard.at(-1)[1][0]);
   for (const cap of caps) cap.integrity_hash = hashes.get(Number(cap.id));
   fixture.guard.at(-1)[1][0] = JSON.stringify(caps);
@@ -134,6 +150,34 @@ try {
   assert.equal(wheel.performances[0].discipline, "Marathon (wheelchair)");
 
   assert.equal(await fp(), originalFingerprint, "Existing screened data is unchanged");
+
+  // Scoped guard: an unrelated concurrent athlete and a non-London history do not
+  // touch the scoped parts or referenced athletes; only the directory-name check
+  // trips, and after the applier re-screens (no collision) the batch proceeds.
+  await db.exec(`INSERT INTO athletes(id,slug,display_name,gender,profile_type,profile_visibility,profile_details)
+    VALUES(500,'unrelated-reepham-synthetic','Wendell Ombrage','M','Athlete','public','{}');
+    INSERT INTO athlete_source_histories VALUES(500,'Synthetic club','reepham-1','https://example.test/reepham',now(),false,
+      ARRAY[2026],ARRAY[2026],'[{"year":2026,"date":"2026-10-30","meeting":"Reepham 10k","discipline":"10K","performance":"00:40:00"}]',now())`);
+  await assert.rejects(() => query(linkedBatch()), /london_guard_names/);
+  await baseline(db, fixture, { refs: false });
+  assert.equal((await query(linkedBatch())).at(-2)[0].linked, 0, "Unrelated insert no longer blocks after re-screening");
+  // A colliding-name athlete appearing after the snapshot is caught by the same
+  // name check before any write (the applier's re-screen then refuses: see the
+  // Python screen_rows test).
+  await db.exec(`INSERT INTO athletes(id,slug,display_name,gender,profile_type,profile_visibility,profile_details)
+    VALUES(501,'aster-quill-copy','Aster Quill','M','Athlete','public','{}')`);
+  await assert.rejects(() => query(newBatch()), /london_guard_names/);
+  await db.exec("DELETE FROM athletes WHERE id=501");
+  await baseline(db, fixture, { refs: false });
+  // A change to a referenced candidate (the link target) blocks, and is not retried.
+  await db.exec("UPDATE athletes SET profile_visibility='public' WHERE id=7");
+  await assert.rejects(() => query(linkedBatch()), /london_guard_refs/);
+  await db.exec("UPDATE athletes SET profile_visibility='private' WHERE id=7");
+  assert.equal((await query(linkedBatch())).at(-2)[0].linked, 0);
+  // A change to this edition's scoped results blocks.
+  await db.exec("UPDATE results SET category='40-44' WHERE id=77");
+  await assert.rejects(() => query(linkedBatch()), /london_guard_parts/);
+  await db.exec("UPDATE results SET category='18-39' WHERE id=77");
   assert.deepEqual((await db.query("SELECT to_jsonb(a) row FROM athletes a WHERE id=7")).rows, originalAthlete);
   assert.deepEqual((await db.query("SELECT to_jsonb(r) row FROM results r")).rows, originalResults);
   console.log("London official-results apply verified: private capture, profile creation with source nationality, replay idempotence, evidence-only reuse and existing data preserved (synthetic in-memory data only).");
@@ -172,8 +216,12 @@ with contextlib.redirect_stdout(io.StringIO()):
     evidence=a.retain_captures(retain,parts,{'planHash':a.digest(plan)},lambda:None,workers=1)
 rows=[a.prepare_append(g,evidence,plan) for g in chosen]
 caps=list({c['id']:c for c in evidence.values()}.values())
-guard=a.guard_statements(a.snapshotter.fingerprint_sql(),'PENDING',caps,a.snapshotter.FINGERPRINT_TABLES)
-print(json.dumps({'batch':a.BATCH,'instruction':a.INSTRUCTION,'planHash':a.digest(plan),'setup':setup,'retention':retention,'guard':guard,
+g=a.scoped_guard.ScopedGuard(a.snapshotter.snap,a.planner,plan,snapshot,{'partHashes':{n:'x' for n in a.scoped_guard.SCOPED_PARTS}},a.BATCH)
+refs=sorted(set().union(*(a.scoped_guard.referenced_ids(x) for x in chosen)))
+g.ref_hash={i:'x' for i in refs};g.accounts_fp='x'
+guard=a.guard_statements(g.statements(refs),caps,a.snapshotter.FINGERPRINT_TABLES)
+scoped={'parts':g.parts_sql,'refs':"SELECT md5(coalesce(string_agg(r.h,'' ORDER BY r.id),'')) v FROM ("+g.refs_sql+") r",'refIds':refs,'names':g.names_fp_sql,'max':g.max_sql,'accounts':g.accounts_sql}
+print(json.dumps({'batch':a.BATCH,'instruction':a.INSTRUCTION,'planHash':a.digest(plan),'setup':setup,'retention':retention,'guard':guard,'scoped':scoped,
  'rows':rows,'append':a.APPEND_HISTORY,'verify':a.VERIFY_APPEND,'fingerprint':a.snapshotter.fingerprint_sql()}))
 `], { cwd: root, encoding: "utf8", maxBuffer: 8 * 1024 * 1024 }));
 {
@@ -210,11 +258,10 @@ print(json.dumps({'batch':a.BATCH,'instruction':a.INSTRUCTION,'planHash':a.diges
       "0030_athlete_identifiers.sql", "20261009_private_source_captures.sql"])
       await db.exec(readFileSync(new URL(`../migrations/${file}`, import.meta.url), "utf8"));
     const before = (await db.query("SELECT to_jsonb(a) row FROM athletes a WHERE id=21")).rows;
-    const fingerprint = (await db.query(evidenceFixture.fingerprint, [evidenceFixture.batch])).rows[0].fingerprint;
     for (const statements of evidenceFixture.setup) await q(statements);
     for (const statements of evidenceFixture.retention) await q(statements);
     const captures = (await db.query("SELECT id,md5((to_jsonb(c)-'last_seen_at')::text) integrity_hash FROM result_archive_source_captures c")).rows;
-    evidenceFixture.guard[4][1][1] = fingerprint;
+    await baseline(db, evidenceFixture);
     const caps = JSON.parse(evidenceFixture.guard.at(-1)[1][0]);
     for (const cap of caps) cap.integrity_hash = captures.find((c) => Number(c.id) === Number(cap.id)).integrity_hash;
     evidenceFixture.guard.at(-1)[1][0] = JSON.stringify(caps);
@@ -232,8 +279,8 @@ print(json.dumps({'batch':a.BATCH,'instruction':a.INSTRUCTION,'planHash':a.diges
     assert.ok(audit.identityEvidence.score >= 6 && audit.identityVerified === false);
     // A protected athlete is never appended to: the guard rolls the batch back.
     await db.exec("DELETE FROM network_audit_log; DELETE FROM athlete_source_histories; UPDATE athletes SET profile_visibility='private' WHERE id=21");
-    const fp2 = (await db.query(evidenceFixture.fingerprint, [evidenceFixture.batch])).rows[0].fingerprint;
-    evidenceFixture.guard[4][1][1] = fp2;
+    await assert.rejects(() => q(batch()), /london_guard_refs/, "A referenced athlete's visibility change blocks");
+    await baseline(db, evidenceFixture);
     await assert.rejects(() => q(batch()), /check constraint/);
     assert.equal((await db.query("SELECT count(*)::int n FROM athlete_source_histories")).rows[0].n, 0);
     console.log("London official-results evidence append verified: guarded append, audit with score, idempotent replay, protected athlete refused (synthetic in-memory data only).");

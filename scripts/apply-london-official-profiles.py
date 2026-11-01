@@ -43,6 +43,7 @@ base = load('london_official_apply_base', ROOT / 'create-private-archive-profile
 snapshotter = load('london_official_apply_snapshot', ROOT / 'snapshot-london-official-profiles.py')
 # One planner instance: configuring the snapshot binding also configures the planner.
 planner = snapshotter.plan
+scoped_guard = load('london_official_scoped_guard', ROOT / 'lib/london-official-guard.py')
 PROJECT = snapshotter.PROJECT
 PRODUCTION = snapshotter.PRODUCTION_BRANCH
 PROVIDER = planner.PROVIDER_NAME
@@ -367,7 +368,8 @@ def configure_from_plan(plan):
     assert_plan_context(plan)
 
 
-def guard_statements(fingerprint_sql, fingerprint, caps, fingerprint_tables):
+def guard_statements(scoped, caps, fingerprint_tables):
+    """Locks, the scoped freshness assertions (london-official-guard.py) and the capture check."""
     tables = list(dict.fromkeys((*fingerprint_tables, 'result_archive_capture_approvals',
                                 'result_archive_source_captures', 'network_audit_log')))
     if not tables or any(not re.fullmatch(r'"?[A-Za-z_][A-Za-z_0-9]*"?', table) for table in tables):
@@ -376,7 +378,7 @@ def guard_statements(fingerprint_sql, fingerprint, caps, fingerprint_tables):
         ("SET LOCAL lock_timeout='8s'", []), ("SET LOCAL statement_timeout='55s'", []),
         ('LOCK TABLE ' + ','.join(tables) + ' IN SHARE ROW EXCLUSIVE MODE', []),
         ('CREATE TEMP TABLE london_import_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP', []),
-        ('INSERT INTO london_import_guard SELECT fingerprint=$2 FROM (' + fingerprint_sql + ') checked', [BATCH, fingerprint]),
+        *scoped,
         ("""INSERT INTO london_import_guard SELECT count(*)=jsonb_array_length($1::jsonb)
         FROM jsonb_array_elements($1::jsonb) expected JOIN result_archive_source_captures c ON c.id=(expected->>'id')::bigint
         JOIN result_archive_capture_approvals a ON a.id=c.approval_id
@@ -469,31 +471,33 @@ def apply(args):
         raise ValueError('Identity snapshot belongs to a different London edition context')
     if planner._hash(snapshot) != plan['snapshotDigest']:
         raise ValueError('Identity snapshot changed after planning')
-    fingerprint_sql = snapshotter.fingerprint_sql()
     cfg, query = base.connection(args.connection, args.confirm_branch, timeout=180)
     query = _retrying(query)
     if cfg['projectId'] != PROJECT or (args.review and cfg['branchId'] == PRODUCTION) or (not args.review and cfg['branchId'] != PRODUCTION):
         raise ValueError('Explicit review/production target does not match connection')
+    guard = scoped_guard.ScopedGuard(snapshotter.snap, planner, plan, snapshot, metadata, BATCH)
     if not args.review:
         proof = read_json(args.rehearsal_receipt) if args.rehearsal_receipt else {}
         if not (proof.get('planHash') == plan_hash and proof.get('completed') is True
                 and proof.get('replayVerified') is True and proof.get('projectId') == PROJECT
                 and proof.get('snapshotFingerprint') == metadata['fingerprint']
                 and proof.get('editionContextDigest') == context_digest
-                and proof.get('existingDataFingerprintUnchanged') is True
+                and (proof.get('guard') or {}).get('version') == scoped_guard.GUARD_VERSION
+                and (proof.get('guard') or {}).get('scopedPartsFingerprint') == guard.parts_expected
+                and proof.get('scopedChecksPassed') is True
                 and proof.get('branchId') and proof.get('branchId') != PRODUCTION
                 and proof.get('mode') == 'review'):
-            raise ValueError('Production requires a successful same-plan rehearsal and replay receipt')
-    current = query([(fingerprint_sql, [BATCH])], True)[0][0]['fingerprint']
-    if current != metadata['fingerprint']:
-        raise ValueError('Live identity data changed; take a new snapshot and re-review the plan')
+            raise ValueError('Production requires a successful same-plan rehearsal (scoped guard) and replay receipt')
     linked_limit = getattr(args, 'review_linked_limit', 100)
     chosen, selected = select_groups(plan, args.review, args.limit, linked_limit)
+    all_refs = set().union(*(scoped_guard.referenced_ids(g) for g in chosen)) if chosen else set()
+    guard.certify(query, all_refs)
     receipt = {'batchId': BATCH, 'projectId': PROJECT, 'branchId': cfg['branchId'], 'mode': 'review' if args.review else 'production',
                'planHash': plan_hash, 'snapshotFingerprint': metadata['fingerprint'], 'editionContextDigest': context_digest, 'planSummary': plan['summary'],
                'selectedGroups': dict(collections.Counter(g['disposition'] for g in chosen)), 'reviewNewLimit': args.limit if args.review else None,
                'reviewLinkedLimit': linked_limit if args.review else None,
                'startedAt': dt.datetime.now(dt.timezone.utc).isoformat(),
+               'guard': guard.receipt(len(all_refs)),
                'created': 0, 'reused': 0, 'alreadyPresent': 0, 'profiles': [], 'reusedGroups': [], 'completed': False}
     save = lambda: dump(args.receipt, receipt)
     save()
@@ -511,14 +515,25 @@ def apply(args):
             } for g in groups]
             caps = {int(evidence[k]['id']): evidence[k] for g in groups for k in g['observationKeys']}
             payload = encoded(rows)
-            statements = guard_statements(fingerprint_sql, metadata['fingerprint'], list(caps.values()), snapshotter.FINGERPRINT_TABLES)
+            batch_refs = set().union(*(scoped_guard.referenced_ids(g) for g in groups))
+
+            def guarded(extra):
+                """Re-screen and retry only when an unrelated directory/account change tripped the guard."""
+                for attempt in range(6):
+                    guard.refresh(query)
+                    statements = guard_statements(guard.statements(batch_refs), list(caps.values()), snapshotter.FINGERPRINT_TABLES) + extra
+                    try:
+                        return extra, query(statements)
+                    except RuntimeError as exc:
+                        if attempt == 5 or not any(table in str(exc) for table in scoped_guard.RETRYABLE):
+                            raise
+                        print(json.dumps({'phase': 'guard_refresh', 'attempt': attempt + 1}), flush=True)
             if kind == 'new':
-                statements.extend([
+                statements, result = guarded([
                     (NEW_PROFILES, [payload, BATCH, plan_hash, INSTRUCTION]),
                     ('INSERT INTO london_import_guard SELECT count(*)=jsonb_array_length($1::jsonb) FROM (' + VERIFY_NEW + ') verified', [payload]),
                     (VERIFY_NEW, [payload]),
                 ])
-                result = query(statements)
                 inserted, verified = result[-3][0], result[-1]
                 if inserted['created'] != inserted['histories'] or inserted['created'] != inserted['audits'] or len(verified) != len(rows):
                     raise ValueError('Unexpected profile transaction receipt')
@@ -526,33 +541,32 @@ def apply(args):
                 receipt['alreadyPresent'] += len(rows) - inserted['created']
                 receipt['profiles'].extend(verified)
             elif kind == 'evidence_linked':
-                statements.extend([
+                statements, result = guarded([
                     (APPEND_HISTORY, [payload, BATCH, plan_hash, INSTRUCTION]),
                     (VERIFY_APPEND, [payload]),
                 ])
-                result = query(statements)
                 receipt['evidenceAppended'] = receipt.get('evidenceAppended', 0) + result[-2][0]['appended']
                 receipt.setdefault('appendedGroups', []).extend({'groupId': r['groupId'], 'athleteId': r['athleteId']} for r in rows)
             else:
-                statements.extend([
+                statements, result = guarded([
                     (LINK_EVIDENCE, [payload, BATCH, plan_hash, INSTRUCTION]),
                     (VERIFY_LINKED, [payload, BATCH, plan_hash, INSTRUCTION]),
                 ])
-                result = query(statements)
                 receipt['reused'] += result[-2][0]['linked']
                 receipt['reusedGroups'].extend(rows)
             save()
             print(json.dumps({'phase': 'profiles' if kind == 'new' else 'existing_performance_evidence', 'created': receipt['created'], 'reused': receipt['reused'], 'alreadyPresent': receipt['alreadyPresent']}), flush=True)
             if args.review:
-                replay = query(statements)
+                replay = guarded(statements)[1]
                 values = replay[-3][0] if kind == 'new' else replay[-2][0]
                 if any(values.values()):
                     raise ValueError('Idempotence failure: an identical replay inserted data')
-    ending = query([(fingerprint_sql, [BATCH])], True)[0][0]['fingerprint']
-    if ending != metadata['fingerprint']:
-        raise ValueError('Existing screened data changed during the import; inspect before completion')
+    guard.refresh(query)
+    if query([(guard.parts_sql, [BATCH])], True)[0][0]['fp'] != guard.parts_expected:
+        raise ValueError("This edition's scoped data changed during the import; inspect before completion")
+    receipt['guard'] = guard.receipt(len(all_refs))
     receipt.update({'completed': True, 'replayVerified': bool(args.review), 'finishedAt': dt.datetime.now(dt.timezone.utc).isoformat(),
-                    'retainedObservations': len(evidence), 'newProfileResults': len(receipt['profiles']), 'existingDataFingerprintUnchanged': True})
+                    'retainedObservations': len(evidence), 'newProfileResults': len(receipt['profiles']), 'scopedChecksPassed': True})
     for run in sorted({p['runId'] for p in parts}):
         query([("UPDATE result_archive_capture_runs SET status='completed',summary=$2::jsonb,updated_at=now() WHERE id=$1::uuid", [run, encoded({key: value for key, value in receipt.items() if key not in ('profiles', 'reusedGroups', 'captures')})])])
     save()
