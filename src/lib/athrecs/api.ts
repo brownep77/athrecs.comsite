@@ -792,10 +792,15 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       };
     });
 
+    const eastCoast = event.slug === "east-coast-10k";
+    const isTimingLink = (url: string | null) =>
+      Boolean(url && /^https?:\/\/(?:www\.)?totalracetiming\.co\.uk(?:\/|$)/i.test(url));
     return publicCatalogueContent(
       twoOceansRacePresentation(
         {
-          event,
+          event: eastCoast && isTimingLink(event.website)
+            ? { ...event, website: "https://www.gyrr.co.uk/" }
+            : event,
           groups,
           distances: fixtureDistanceBadges(
             event.sport,
@@ -803,8 +808,17 @@ export const getEventBySlug = createServerFn({ method: "GET" })
             editions,
           ),
           upcoming,
-          past,
-          related,
+          past: eastCoast ? past.map((edition) => ({
+            ...edition,
+            results_official_url: isTimingLink(edition.results_official_url) ? null : edition.results_official_url,
+            result_links: edition.result_links.filter((link) => !isTimingLink(link.results_url)),
+            notes: edition.notes?.split(/(?<=[.!?])\s+|\n+/)
+              .filter((note) => !/total\s*race\s*timing|\bTRT (timed event|verified finish list)/i.test(note))
+              .join(" ").trim() || null,
+          })) : past,
+          related: eastCoast ? related.map((race) =>
+            isTimingLink(race.website) ? { ...race, website: "" } : race,
+          ) : related,
         },
         slug,
       ),

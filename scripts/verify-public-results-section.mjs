@@ -314,6 +314,20 @@ try {
   route.useLoaderData = () => resultPage1;
   const roadTable = load(renderToStaticMarkup(route.component()));
   assert(roadTable("th").toArray().some((cell) => roadTable(cell).text() === "Chip"));
+  await db.exec(`
+    insert into editions values (71609612, 10, '2026-09-20', '10K');
+    insert into results (id, athlete_id, edition_id, status, result_visibility, source_url, result_source)
+      values (910001, 1, 71609612, 'Finished', 'public', 'https://totalracetiming.co.uk/raceresults/721/result/example', 'Total Race Timing');
+  `);
+  const eastCoast = await api.getPublicRaceResults({ data: { editionId: 71609612 } });
+  route.useLoaderData = () => eastCoast;
+  const eastCoastTable = load(renderToStaticMarkup(route.component()));
+  assert.equal((eastCoastTable.text().match(/Total Race Timing/g) || []).length, 1);
+  assert.equal(eastCoastTable('a[href*="totalracetiming"]').length, 0);
+  assert.equal(eastCoastTable('tbody a[href="/athletes/$slug"]').length, 1);
+  assert.equal(eastCoast.results[0].source_url, null);
+  assert.match((await db.query("select source_url from results where id=910001")).rows[0].source_url, /raceresults/);
+  await db.exec("delete from results where id=910001; delete from editions where id=71609612");
   const parkrunEdition = { ...resultPage1.edition, sport: "Parkrun", event_name: "Synthetic parkrun", distance_code: "5K" };
   route.useLoaderData = () => ({ ...resultPage1, edition: parkrunEdition });
   const parkrunTable = load(renderToStaticMarkup(route.component()));
