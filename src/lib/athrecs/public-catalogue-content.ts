@@ -1,5 +1,3 @@
-import { completedRacePresentation } from "./completed-race-presentation.ts";
-
 /** Owner's publication policy. Original source evidence stays in server storage. */
 export function hasWithheldCatalogueReference(value: unknown): boolean {
   return typeof value === "string" && /run\s*abc/i.test(value);
@@ -43,9 +41,9 @@ export function publicCatalogueContent<T>(value: T): T {
     return value.filter((item) => !withheldLink(item)).map(publicCatalogueContent) as T;
   if (!value || typeof value !== "object" || Object.getPrototypeOf(value) !== Object.prototype)
     return value;
-  return completedRacePresentation(Object.fromEntries(
+  return Object.fromEntries(
     Object.entries(value)
       .filter(([key]) => !hasWithheldCatalogueReference(key))
       .map(([key, item]) => [key, publicCatalogueContent(item)]),
-  )) as T;
+  ) as T;
 }

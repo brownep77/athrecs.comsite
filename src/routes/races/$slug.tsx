@@ -860,6 +860,7 @@ export function RacePageContent({
 
       <EditionResultsLinks
         items={pastWithResults}
+        eventName={event.name}
         onAthrecsResults={(id) => {
           setResultsEditionId(id);
           requestAnimationFrame(() => {
@@ -1171,9 +1172,11 @@ function canonicalResultUrl(url: string): string {
 
 function EditionResultsLinks({
   items,
+  eventName,
   onAthrecsResults,
 }: {
   items: EditionRow[];
+  eventName: string;
   onAthrecsResults: (id: number) => void;
 }) {
   const [showAll, setShowAll] = useState(false);
@@ -1258,6 +1261,27 @@ function EditionResultsLinks({
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
+                  {!IS_RUNRECS_SITE &&
+                    editions
+                      .filter((edition) => edition.result_count > 0)
+                      .map((edition) => (
+                        <Link
+                          key={edition.id}
+                          to="/results/$editionId"
+                          params={{
+                            editionId: resultSlug({
+                              edition_id: edition.id,
+                              event_name: eventName,
+                              event_date: edition.event_date,
+                              distance_code: edition.distance_code,
+                            }),
+                          }}
+                          className="inline-flex min-h-11 items-center rounded-md border border-accent/40 px-3 text-xs font-medium text-accent"
+                        >
+                          Full AthRecs results ·{" "}
+                          {formatDistanceWithUnits(edition.distance_code, edition.distance_km)}
+                        </Link>
+                      ))}
                   {editions
                     .filter((edition) => edition.result_count > 0)
                     .map((edition) => (
