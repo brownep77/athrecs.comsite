@@ -861,6 +861,7 @@ export function RacePageContent({
       <EditionResultsLinks
         items={pastWithResults}
         eventName={event.name}
+        timingCredit={event.slug === "east-coast-10k" ? "Total Race Timing" : undefined}
         onAthrecsResults={(id) => {
           setResultsEditionId(id);
           requestAnimationFrame(() => {
@@ -1173,10 +1174,12 @@ function canonicalResultUrl(url: string): string {
 function EditionResultsLinks({
   items,
   eventName,
+  timingCredit,
   onAthrecsResults,
 }: {
   items: EditionRow[];
   eventName: string;
+  timingCredit?: string;
   onAthrecsResults: (id: number) => void;
 }) {
   const [showAll, setShowAll] = useState(false);
@@ -1204,7 +1207,7 @@ function EditionResultsLinks({
             </h2>
           </div>
           <p className="mt-1 text-xs text-subtle">
-            Public-figure or athlete-approved ATHRECS results, plus verified organiser links.
+            {timingCredit ? `Timing by ${timingCredit}` : "Public-figure or athlete-approved ATHRECS results, plus verified organiser links."}
           </p>
         </div>
         {grouped.length > 0 ? (
@@ -1364,7 +1367,7 @@ function EditionList({
       ) : (
         <div className="grid gap-2">
           {visibleItems.map((ed) => {
-            const st = effectiveStatus(ed.event_date, ed.status as EntryStatus);
+            const st = ed.status === "Finished" && !calendarEvent ? "Finished" : effectiveStatus(ed.event_date, ed.status as EntryStatus);
             const publicNote = eventSlug
               ? (FIXTURE_DETAILS[`${eventSlug}|${ed.event_date}`]?.starts[ed.distance_code]
                   ?.publicNote ?? ed.notes)

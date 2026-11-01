@@ -199,9 +199,14 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
         r.finish_time_seconds asc nulls last, r.id asc
       limit ${RESULT_PAGE_SIZE + 1} offset ${offset}
     `;
+    // This edition credits its timer once. Keep the original row URLs in staff evidence.
+    const timingCredit = edition.edition_id === 71609612 ? "Total Race Timing" : null;
     return {
       edition,
-      results: rows.slice(0, RESULT_PAGE_SIZE).map(publicCatalogueContent),
+      timingCredit,
+      results: rows.slice(0, RESULT_PAGE_SIZE).map((row) =>
+        publicCatalogueContent(timingCredit ? { ...row, source_url: null, result_source: null } : row),
+      ),
       hasMore: rows.length > RESULT_PAGE_SIZE,
     };
   });
