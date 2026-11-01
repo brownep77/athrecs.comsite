@@ -142,7 +142,7 @@ export function IntercomMessenger({ pathname }: { pathname: string }) {
 
 const PROMPTS = {
   results: {
-    label: "Can’t find your results? Ask Paul to research them.",
+    label: "Can’t find your results? Ask AthRecs to research them.",
     prefill: "I can’t find my results. Can you help me find my missing results?",
   },
   race: {
