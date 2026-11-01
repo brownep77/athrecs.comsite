@@ -141,6 +141,7 @@
     "verify:external-invitations": "node scripts/verify-external-invitations.mjs",
     "verify:invitation-welcome": "node scripts/verify-invitation-welcome.mjs",
     "verify:claim-invitations": "node --experimental-vm-modules scripts/verify-claim-invitations.mjs",
+    "verify:results-archive-bulk-match": "node scripts/verify-results-archive-bulk-match.mjs",
     "verify:results-archive": "node scripts/verify-results-archive.mjs",
     "collect:marathon-results": "node scripts/collect-marathon-results.mjs",
     "verify:marathon-collection": "node scripts/verify-marathon-collection-job.mjs",

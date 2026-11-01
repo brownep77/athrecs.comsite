@@ -78,3 +78,24 @@ export const findCanonicalResults = createServerFn({ method: "GET" })
       .parse(input),
   )
   .handler(async ({ data }) => service.searchCanonicalResults(await getSql(), data));
+
+const bulkMatchSchema = z
+  .object({
+    datasetId: z.string().uuid(),
+    after: z.number().int().nonnegative().optional(),
+    limit: z.number().int().min(1).max(1000).optional(),
+    apply: z.boolean(),
+  })
+  .strict();
+/** Bulk-links one bounded chunk of a dataset to existing athletes. Preview when apply is false. */
+export const bulkMatchArchive = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((input: z.input<typeof bulkMatchSchema>) => bulkMatchSchema.parse(input))
+  .handler(async ({ data, context }) => {
+    const { bulkMatchArchiveDataset } = await import("./bulk-match.server");
+    return bulkMatchArchiveDataset(
+      data.apply ? await writableSql() : await getSql(),
+      data,
+      actor(context),
+    );
+  });

@@ -74,6 +74,8 @@ jobs:
         run: npm run verify:results-archive
         env:
           ATHRECS_ARCHIVE_TEST_POSTGRES: "1"
+      - name: Bulk archive matching to existing athletes
+        run: npm run verify:results-archive-bulk-match
       - name: Athlete finder, source coverage and supported URL checks
         run: |
           npm run verify:athlete-source-finder

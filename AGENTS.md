@@ -62,6 +62,20 @@
 These rules apply to athlete profiles, race histories, imports, catalogue seeds,
 publication and personal-best calculations in this repository.
 
+- Owner instruction, 1 November 2026 (override of the existing-profile rule below
+  for bulk archive matching only): the staff "Bulk match to existing athletes" tool
+  (`src/lib/results-archive/bulk-match.server.ts`) may auto-link an unmatched
+  archive row to an existing profile when (a) exactly one profile already holds
+  that edition's performance in a source history with the same bib and normalised
+  name, or (b) the normalised name occurs exactly once in the whole directory and
+  once in the race and the club, or failing that the nationality, agrees. It never
+  creates, merges or edits profiles, never links athlete-managed accounts, never
+  overwrites or adds a second result for an edition, and skips recorded-gender
+  conflicts. Linked results stay private with a `bulk_archive_match:<tier>`
+  verification method and a per-entry decision in the archive audit. Everything
+  else remains for manual review. Do not widen these tiers without a new owner
+  instruction.
+
 - Owner instruction, 31 October 2026: actively pursue result verification when
   adding or reviewing athlete histories. A secondary finish report is a lead:
   follow the organiser's edition-specific results link and search the official

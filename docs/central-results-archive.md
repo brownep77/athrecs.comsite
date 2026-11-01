@@ -130,3 +130,22 @@ results and linking result IDs to an athlete account. This supports the broad
 product model, not a claim about their private database schema:
 https://api.athlinks.com/results and https://api.athlinks.com/races (checked
 9 October 2026).
+
+## Bulk matching to existing athletes
+
+Staff can select archived race datasets under **Bulk match to existing athletes** on
+the private result archive page, preview the outcome, and then link matches. The tool
+works in chunks of 500 rows and can be stopped and re-run safely: linked rows are
+skipped on the next run.
+
+| Tier | Rule |
+| --- | --- |
+| Same bib already on the profile | Exactly one profile's source history already holds this edition's performance with the same bib and the same normalised name. |
+| Unique name + same club | Owner override (1 November 2026): the normalised name is unique in the directory and in the race, and the club agrees. |
+| Unique name + same nationality | Owner override: as above, with nationality agreeing instead of club. |
+
+Rows are left for manual review when several profiles share the name or hold the
+result, the name repeats within the race, the profile is athlete-managed, the profile
+already has a result for the edition, or the recorded gender conflicts. Linked results
+are private, carry `bulk_archive_match:<tier>` as their verification method and are
+audited per entry. Regression coverage: `npm run verify:results-archive-bulk-match`.
