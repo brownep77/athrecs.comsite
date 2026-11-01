@@ -94,6 +94,16 @@ candidate evidence, give the config a new batch ID (for example
 published plan: its new/linked/appended groups become `already_imported` and are
 neither captured nor applied again.
 
+**Resuming a partly applied batch** (for example after another import changed the
+fingerprint): keep the same batch ID. `--list-committed` (read-only) lists the
+histories this batch already wrote; the snapshot already excludes the batch's own
+athletes and histories, so they are never screened as other people. Plan with
+`--committed <listing>`: those groups become `already_imported` (never re-held,
+relinked or recreated), and the plan refuses if any committed history does not map
+to one. Then rehearse and publish the new plan as usual. Per-batch transactions
+re-check the fingerprint, so a change by another writer stops the run safely; to
+avoid repeats, pause other imports for the publish window.
+
 ## Inputs (all private, outside the repository)
 
 | Input | What it is |

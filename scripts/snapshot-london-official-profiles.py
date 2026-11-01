@@ -293,6 +293,30 @@ def build_chain_index(args):
     print(json.dumps(index["stats"], indent=2))
 
 
+COMMITTED_SQL = """SELECT h.external_id,a.id athlete_id,a.slug
+ FROM athlete_source_histories h JOIN athletes a ON a.id=h.athlete_id
+ WHERE h.provider=$1 AND h.external_id LIKE $2
+ AND (a.profile_details#>>'{archiveCreation,batchId}'=$3
+      OR EXISTS(SELECT 1 FROM jsonb_array_elements(h.performances) p(performance) WHERE p.performance#>>'{archiveReference,batchId}'=$3))
+ ORDER BY h.external_id"""
+
+
+def list_committed(args):
+    """Read-only: histories this batch has already written (for resuming a partly applied batch)."""
+    import datetime as dt
+    if args.output.resolve().is_relative_to(ROOT.parent.resolve()):
+        raise ValueError("Private committed listing must remain outside the repository")
+    context = configure(json.loads(args.edition_config.read_text(encoding="utf-8")))
+    _, query = snap.base.connection(args.connection, args.confirm_branch, timeout=180)
+    rows = query([(COMMITTED_SQL, [plan.PROVIDER_NAME, f"london-official-{context['year']}:%", context["batchId"]])], True)[0]
+    document = {"batchId": context["batchId"], "readAt": dt.datetime.now(dt.timezone.utc).isoformat(),
+                "branchId": args.confirm_branch, "externalIds": [r["external_id"] for r in rows],
+                "athletes": {r["external_id"]: {"id": r["athlete_id"], "slug": r["slug"]} for r in rows}}
+    args.output.write_text(json.dumps(document, ensure_ascii=False))
+    args.output.chmod(0o600)
+    print(json.dumps({"batchId": document["batchId"], "committed": len(rows)}))
+
+
 def list_editions(args):
     _, query = snap.base.connection(args.connection, args.confirm_branch, timeout=60)
     rows = query([(LIST_EDITIONS_SQL, [])], True)[0]
@@ -317,6 +341,7 @@ if __name__ == "__main__":
     parser.add_argument("--candidate-evidence", action="store_true", help="read-only: candidate athletes' other facts")
     parser.add_argument("--snapshot", type=pathlib.Path)
     parser.add_argument("--build-chains", action="store_true", help="write the private cross-year chain index (no database access)")
+    parser.add_argument("--list-committed", action="store_true", help="read-only: histories this batch already wrote")
     args = parser.parse_args()
     if args.build_chains:
         if not (args.source and args.output):
@@ -330,6 +355,10 @@ if __name__ == "__main__":
         parser.error("--connection and --confirm-branch are required")
     elif args.list_editions:
         list_editions(args)
+    elif args.list_committed:
+        if not (args.edition_config and args.output):
+            parser.error("--list-committed needs --edition-config and --output")
+        list_committed(args)
     elif args.candidate_evidence:
         if not (args.snapshot and args.output):
             parser.error("--candidate-evidence needs --snapshot and --output")

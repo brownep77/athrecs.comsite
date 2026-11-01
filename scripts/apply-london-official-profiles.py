@@ -572,7 +572,7 @@ def plan_command(args):
             raise ValueError('Private evidence files must remain outside the repository')
     candidate_evidence = read_json(args.candidate_evidence) if args.candidate_evidence else None
     chains = read_json(args.chains) if args.chains else None
-    already = None
+    already = committed_ids = None
     if args.previous_plan:
         if args.previous_plan.resolve().is_relative_to(ROOT.parent):
             raise ValueError('Private plans must remain outside the repository')
@@ -580,10 +580,30 @@ def plan_command(args):
         if previous.get('edition') != context['edition'] or previous.get('batchId') == context['batchId']:
             raise ValueError('The previous plan must be an earlier batch of this same edition')
         already = {g['groupId']: g['disposition'] for g in previous['groups'] if g['disposition'] in ('new', 'linked', 'evidence_linked')}
+    if args.committed:
+        # Resume of a partly applied batch: histories this same batch already wrote
+        # (read from the database) are never planned, held or relinked again.
+        if args.committed.resolve().is_relative_to(ROOT.parent):
+            raise ValueError('Private listings must remain outside the repository')
+        committed = read_json(args.committed)
+        if committed.get('batchId') != context['batchId']:
+            raise ValueError('The committed listing belongs to a different batch')
+        ids = set(committed['externalIds'])
+        by_external = {f"london-official-{context['year']}:{o['sourceScope'].lower()}:{o['sourceResultId']}": o for o in observations}
+        if ids - set(by_external):
+            raise ValueError('Committed histories that are not in this edition source')
+        already = dict(already or {})
+        for external_id in ids:
+            already[planner._group_id(by_external[external_id])] = 'new'
+        committed_ids = ids
     plan = planner.build_plan(observations, snapshot, context['edition'], context['batchId'],
                               dt.datetime.now(dt.timezone.utc).isoformat(),
                               candidate_evidence=candidate_evidence, chains=chains,
                               policy=args.policy, already_imported=already)
+    if committed_ids is not None:
+        plan['committedBeforeResume'] = {'count': len(committed_ids), 'readAt': read_json(args.committed)['readAt']}
+        if plan['summary']['alreadyImported'] != len(committed_ids):
+            raise ValueError('Every committed history must map to an already imported group')
     dump(args.output, plan)
     print(json.dumps(plan['summary'], ensure_ascii=False), flush=True)
 
@@ -598,6 +618,7 @@ if __name__ == '__main__':
     p.add_argument('--chains', type=Path, help='private cross-year chain index (snapshot --build-chains)')
     p.add_argument('--policy', choices=['conservative', 'publish-leaning'], default='conservative',
                    help="publish-leaning: owner instruction of 1 November 2026 (create possible-duplicate profiles instead of holding)")
+    p.add_argument('--committed', type=Path, help='--list-committed output for this same batch (resume after a partial apply)')
     p.add_argument('--previous-plan', type=Path, help='published plan of an earlier batch of this edition (top-up: skip its groups)')
     a = sub.add_parser('apply')
     for name in ('connection', 'plan', 'snapshot', 'receipt'):

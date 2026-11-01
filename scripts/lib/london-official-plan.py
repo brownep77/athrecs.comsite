@@ -204,9 +204,13 @@ def load_sources(input_dir):
     return observations
 
 
+def _group_id(observation):
+    return f"london-official-{YEAR}-performance-" + _hash(observation["sourceKey"])[:24]
+
+
 def _group(observation):
     return {
-        "groupId": f"london-official-{YEAR}-performance-" + _hash(observation["sourceKey"])[:24],
+        "groupId": _group_id(observation),
         "primaryObservationKey": observation["observationKey"],
         "observationKeys": [observation["observationKey"]], "sourceKeys": [observation["sourceKey"]],
         "sourceUrls": [observation["sourceUrl"]], "sourceResultId": observation["sourceResultId"],
