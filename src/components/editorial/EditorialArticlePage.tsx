@@ -76,10 +76,10 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
       ) : null}
       {article.sections?.length ? (
         <nav
-          aria-label="In this preview"
+          aria-label="In this article"
           className="rounded-xl border border-border bg-surface p-5"
         >
-          <p className="mb-2 font-semibold">In this preview</p>
+          <p className="mb-2 font-semibold">In this article</p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
             {article.sections.map((section) => (
               <li key={section.id}>
@@ -142,11 +142,11 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
                       {row.map((cell, i) =>
                         i === 0 ? (
                           <th key={i} scope="row" className="p-3 font-medium">
-                            {cell}
+                            <ArticleText text={cell} links={article.athleteLinks} />
                           </th>
                         ) : (
                           <td key={i} className="p-3">
-                            {cell}
+                            <ArticleText text={cell} links={article.athleteLinks} />
                           </td>
                         ),
                       )}
