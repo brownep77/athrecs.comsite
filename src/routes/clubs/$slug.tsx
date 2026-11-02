@@ -106,7 +106,7 @@ function ClubPage() {
           {IS_ATHRECS_SITE && (
             <Button asChild>
               <Link to="/clubs/register" search={{ club: club.slug }}>
-                Register this club
+                {club.managed ? "Request club access" : "Claim this club profile"}
               </Link>
             </Button>
           )}
@@ -167,10 +167,37 @@ function ClubPage() {
 
       {IS_ATHRECS_SITE && (
         <p className="text-sm text-muted">
-          Represent this club? Registration checks your identity and authority before club access is
-          approved. Being listed here does not mean the club has registered.
+          Represent this club? Apply to manage its AthRecs profile. We’ll confirm your role with the
+          club before granting access.
         </p>
       )}
+
+      {club.clubUpdate &&
+        (club.clubUpdate.biography || club.clubUpdate.training || club.clubUpdate.contact_url) && (
+          <section className="space-y-4 rounded-xl border border-border bg-surface p-5 md:p-7">
+            <h2 className="font-display text-xl font-semibold">From the club</h2>
+            {club.clubUpdate.biography && (
+              <p className="whitespace-pre-line break-words text-sm">{club.clubUpdate.biography}</p>
+            )}
+            {club.clubUpdate.training && (
+              <div>
+                <h3 className="font-semibold">Training sessions</h3>
+                <p className="whitespace-pre-line break-words text-sm">
+                  {club.clubUpdate.training}
+                </p>
+              </div>
+            )}
+            {club.clubUpdate.contact_url && (
+              <a
+                className="text-accent underline"
+                href={club.clubUpdate.contact_url}
+                rel="noopener noreferrer nofollow"
+              >
+                Contact the club
+              </a>
+            )}
+          </section>
+        )}
 
       {club.profile && (
         <section

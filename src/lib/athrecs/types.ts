@@ -112,6 +112,7 @@ export type EventListItem = {
 };
 
 export type ClubListItem = {
+  managed?: boolean;
   id: number;
   slug: string;
   name: string;

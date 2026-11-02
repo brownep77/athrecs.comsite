@@ -31,10 +31,16 @@ function ClubRegistrationPage() {
         <Link to="/clubs" className="text-accent underline">
           ← Club directory
         </Link>
-        <h1 className="font-display text-3xl font-semibold">Register your club</h1>
+        <h1 className="font-display text-3xl font-semibold">
+          {club
+            ? club.managed
+              ? "Request club access"
+              : "Claim this club profile"
+            : "Register your club"}
+        </h1>
         <p className="text-muted">
-          Choose your club first, then identify yourself and show your authority to represent it.
-          Club registration takes a few more steps than an athlete account. You can save and return
+          Tell us your name and role. We’ll ask a current officer to confirm your appointment
+          through an independently sourced club contact. You can save your application and return
           later.
         </p>
         <Link to="/clubs/account" className="inline-block text-accent underline">

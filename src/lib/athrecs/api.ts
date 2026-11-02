@@ -1417,6 +1417,7 @@ export const listClubs = createServerFn({ method: "GET" })
         c.id, c.slug, c.name, c.city, c.county, c.country,
         c.sports as sports_csv,
         c.website, c.official_source, c.summary,
+        exists(select 1 from club_representatives r where r.club_id=c.id and r.status='active') as managed,
         (
           select count(*)::int from athletes a
           where a.club_id = c.id
@@ -1467,11 +1468,20 @@ export const getClubBySlug = createServerFn({ method: "GET" })
       contact_url: string | null;
       contacts_json: string;
       socials_json: string;
+      managed: boolean;
     }>`
-      select * from clubs where slug = ${slug} limit 1
+      select c.*,exists(select 1 from club_representatives r where r.club_id=c.id and r.status='active') as managed
+      from clubs c where c.slug = ${slug} limit 1
     `;
     const club = rows[0];
     if (!club) return null;
+    const [clubUpdate] = await sql<{
+      biography: string;
+      training: string;
+      contact_url: string;
+      revision: number;
+    }>`
+      select biography,training,contact_url,revision from club_profile_updates where club_id=${club.id}`;
     const editorial = clubProfiles[club.slug];
     const profile = editorial
       ? {
@@ -1517,6 +1527,7 @@ export const getClubBySlug = createServerFn({ method: "GET" })
     return {
       club: {
         ...club,
+        clubUpdate: clubUpdate ?? null,
         profile,
         address_kind:
           editorial?.corrections?.address_kind ??

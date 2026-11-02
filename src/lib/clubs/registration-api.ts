@@ -3,7 +3,12 @@ import { z } from "zod";
 import { authMiddleware } from "../auth/middleware";
 import { staffMiddleware } from "../auth/staff-middleware";
 import { IS_ATHRECS_SITE } from "../site-scope";
-import { clubSaveSchema, clubReviewSchema } from "./registration";
+import {
+  clubSaveSchema,
+  clubReviewSchema,
+  clubConfirmationSchema,
+  clubContentSchema,
+} from "./registration";
 
 const clubArea = createMiddleware({ type: "function" }).server(async ({ next }) => {
   const { setResponseHeader } = await import("@tanstack/react-start/server");
@@ -72,4 +77,42 @@ export const reviewClubRegistration = createServerFn({ method: "POST" })
     const { getSql } = await import("../db");
     const { reviewClubApplication } = await import("./registration.server");
     return reviewClubApplication(await getSql(), context.userId, data);
+  });
+
+export const confirmClubOfficer = createServerFn({ method: "POST" })
+  .middleware([clubArea, staffMiddleware])
+  .validator((v: unknown) => clubConfirmationSchema.parse(v))
+  .handler(async ({ context, data }) => {
+    const { getSql } = await import("../db");
+    const { startClubConfirmation } = await import("./confirmation.server");
+    const { sendAthrecsAuthEmail } = await import("../auth/email.server");
+    return startClubConfirmation(await getSql(), context.userId, data, async (mail) => {
+      if (process.env.VERCEL_ENV !== "production")
+        throw new Error("External verification email requires production.");
+      await sendAthrecsAuthEmail(mail);
+    });
+  });
+export const reportClubAccessRequest = createServerFn({ method: "POST" })
+  .middleware([clubArea, authMiddleware])
+  .validator((v: unknown) =>
+    z
+      .object({
+        id: z.uuid(),
+        revision: z.number().int().positive(),
+        clubId: z.number().int().positive(),
+      })
+      .parse(v),
+  )
+  .handler(async ({ context, data }) => {
+    const { getSql } = await import("../db");
+    const { disputeClubNotice } = await import("./registration.server");
+    return disputeClubNotice(await getSql(), context.userId, data.id, data.revision, data.clubId);
+  });
+export const publishClubDetails = createServerFn({ method: "POST" })
+  .middleware([clubArea, authMiddleware])
+  .validator((v: unknown) => clubContentSchema.parse(v))
+  .handler(async ({ context, data }) => {
+    const { getSql } = await import("../db");
+    const { saveClubContent } = await import("./registration.server");
+    return saveClubContent(await getSql(), context.userId, data);
   });

@@ -30,6 +30,11 @@ jobs:
       - run: node --experimental-strip-types scripts/verify-club-profiles.mjs
       - run: npx playwright install chromium --with-deps
       - run: node scripts/verify-club-profiles-browser.mjs
+      - name: Verify club claims and representative access
+        run: |
+          npm run verify:club-registration
+          npm run verify:club-registration-browser
+          npm run verify:club-registration-flow
       - uses: actions/upload-artifact@v4
         if: always()
         with:

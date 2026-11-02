@@ -7,6 +7,8 @@ import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 import {
   getMyClubRegistrations,
+  publishClubDetails,
+  reportClubAccessRequest,
   saveClubRegistration,
   withdrawClubRegistration,
 } from "@/lib/clubs/registration-api";
@@ -18,6 +20,7 @@ import {
   type ClubApplication,
   type ClubDetails,
 } from "@/lib/clubs/registration";
+import { getClubBySlug } from "@/lib/athrecs/api";
 import type { ClubListItem } from "@/lib/athrecs/types";
 
 export const clubPanel =
@@ -562,8 +565,8 @@ function ApplicationSummary({ app }: { app: ClubApplication }) {
       {app.review_message && <p>{app.review_message}</p>}
       {app.status === "approved" && (
         <p className="text-sm text-muted">
-          Your authority to represent this club has been approved. Athlete uploads are a separate
-          facility and are not enabled by this registration step.
+          Your club has authorised you to manage its public profile. Open My club registrations to
+          update club information.
         </p>
       )}
       {app.club_slug && (
@@ -583,6 +586,12 @@ export function MyClubRegistrations() {
     retry: false,
     gcTime: 0,
   });
+  const [editClub, setEditClub] = useState<number | null>(null);
+  const dispute = useMutation({
+    mutationFn: (data: { id: string; revision: number; clubId: number }) =>
+      reportClubAccessRequest({ data }),
+    onSuccess: () => query.refetch(),
+  });
   const withdraw = useMutation({
     mutationFn: (app: ClubApplication) =>
       withdrawClubRegistration({ data: { id: app.id, revision: app.revision } }),
@@ -594,7 +603,25 @@ export function MyClubRegistrations() {
   if (!user) return <ClubSignIn path="/clubs/account" />;
   return (
     <div className="space-y-4">
-      <ClubError error={query.error || withdraw.error} />
+      <ClubError error={query.error || withdraw.error || dispute.error} />
+      {query.data?.notices?.map((n) => (
+        <section className={clubPanel} key={n.id}>
+          <h2 className="font-semibold">Access request for {n.club_name}</h2>
+          <p>
+            {n.applicant} has requested access as {n.role}.{" "}
+            {n.disputed ? "Your report is with AthRecs staff." : CLUB_STATUS_LABELS[n.status]}
+          </p>
+          {n.status === "pending" && !n.disputed && (
+            <Button
+              variant="secondary"
+              disabled={dispute.isPending}
+              onClick={() => dispute.mutate({ id: n.id, revision: n.revision, clubId: n.club_id })}
+            >
+              Report an unexpected request
+            </Button>
+          )}
+        </section>
+      ))}
       {query.isError && <Button onClick={() => void query.refetch()}>Retry</Button>}
       {query.isPending && <p role="status">Loading registrations…</p>}
       {query.data?.applications.length === 0 && (
@@ -605,6 +632,17 @@ export function MyClubRegistrations() {
       {query.data?.applications.map((app) => (
         <div key={app.id}>
           <ApplicationSummary app={app} />
+          {app.status === "approved" && app.club_id && app.club_slug && (
+            <div className="my-3 space-y-3">
+              <Button
+                variant="secondary"
+                onClick={() => setEditClub(editClub === app.club_id ? null : app.club_id)}
+              >
+                {editClub === app.club_id ? "Close editor" : "Edit club profile"}
+              </Button>
+              {editClub === app.club_id && <ClubEditor clubId={app.club_id} slug={app.club_slug} />}
+            </div>
+          )}
           {["draft", "pending", "needs_changes"].includes(app.status) && (
             <div className="my-3 flex flex-wrap gap-3">
               <Button asChild>
@@ -631,5 +669,94 @@ export function MyClubRegistrations() {
         </div>
       ))}
     </div>
+  );
+}
+
+function ClubEditor({ clubId, slug }: { clubId: number; slug: string }) {
+  const [published, setPublished] = useState(false);
+  const query = useQuery({
+    queryKey: ["club-editor", clubId],
+    queryFn: () => getClubBySlug({ data: slug }),
+    gcTime: 0,
+    refetchOnWindowFocus: false,
+  });
+  if (query.isError) return <ClubError error={query.error} />;
+  if (!query.data) return <p role="status">Loading club details…</p>;
+  const content = query.data.club.clubUpdate;
+  return (
+    <>
+      {published && <p role="status">Club details published.</p>}
+      <ClubContentForm
+        key={content?.revision ?? 0}
+        clubId={clubId}
+        revision={content?.revision ?? 0}
+        biography={content?.biography ?? ""}
+        training={content?.training ?? ""}
+        contactUrl={content?.contact_url ?? ""}
+        refresh={async () => {
+          await query.refetch();
+          setPublished(true);
+        }}
+      />
+    </>
+  );
+}
+function ClubContentForm(props: {
+  clubId: number;
+  revision: number;
+  biography: string;
+  training: string;
+  contactUrl: string;
+  refresh: () => unknown;
+}) {
+  const [bio, setBio] = useState(props.biography),
+    [training, setTraining] = useState(props.training),
+    [contact, setContact] = useState(props.contactUrl);
+  const save = useMutation({
+    mutationFn: () =>
+      publishClubDetails({
+        data: {
+          clubId: props.clubId,
+          revision: props.revision,
+          biography: bio,
+          training,
+          contactUrl: contact,
+        },
+      }),
+    onSuccess: props.refresh,
+  });
+  return (
+    <form
+      className={clubPanel}
+      onSubmit={(e) => {
+        e.preventDefault();
+        save.mutate();
+      }}
+    >
+      <h3 className="font-semibold">Public club information</h3>
+      <p className="text-sm text-muted">
+        These details appear under “From the club” on the public profile. Use an official public
+        contact page.
+      </p>
+      <ClubField label="Club biography" value={bio} onChange={setBio} max={3000} multiline />
+      <ClubField
+        label="Training sessions"
+        value={training}
+        onChange={setTraining}
+        max={1600}
+        multiline
+      />
+      <ClubField
+        label="Public contact page"
+        value={contact}
+        onChange={setContact}
+        type="url"
+        max={1000}
+      />
+      <ClubError error={save.error} />
+      <Button type="submit" disabled={save.isPending}>
+        Publish club details
+      </Button>
+    </form>
   );
 }
