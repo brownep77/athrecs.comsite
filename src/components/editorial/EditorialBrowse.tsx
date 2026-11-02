@@ -48,7 +48,7 @@ export function EditorialBrowse({
   const sport = getSportPage(search.sport);
   const activeLevel = EDITORIAL_LEVELS.find((item) => item.value === search.level);
   const articles = filterEditorialArticles(EDITORIAL_ARTICLES, kind, search);
-  const locations = editorialLocationOptions(EDITORIAL_ARTICLES, search);
+  const locations = editorialLocationOptions(EDITORIAL_ARTICLES, kind, search);
   const countries = [
     ...new Set([
       ...EDITORIAL_PRIORITY_COUNTRIES,

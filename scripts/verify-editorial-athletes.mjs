@@ -119,7 +119,8 @@ try {
     );
     create table athlete_identifiers(number bigint primary key,athlete_id integer unique,user_id text unique);
     create table athlete_account_links(athlete_id integer,user_id text,status text not null);
-    create table athlete_public_shares(user_id text primary key,enabled boolean,share_results boolean);
+    create table athlete_public_shares(user_id text primary key,enabled boolean,share_results boolean,search_indexable boolean);
+    create table athlete_source_histories(athlete_id integer,provider text,external_id text,published_at timestamptz);
     create table athlete_private_profiles(user_id text primary key,display_name text,full_name text,club_or_team text,country text);
     create table network_audit_log(
       id bigserial primary key,actor_user_id text,action text,entity_type text,entity_id text,
@@ -143,6 +144,7 @@ try {
     [10, "Synthetic Céline Runner", "synthetic-celine-runner", "public", "Athlete", 1],
     [11, "Synthetic Sole Match", "synthetic-sole-match", "public", "Athlete", 2],
     [12, "Synthetic Reviewed Alias", "synthetic-reviewed-alias", "public", "Athlete", 2],
+    [13, "Synthetic Unapproved", "synthetic-unapproved", "public", "Athlete", 1],
   ];
   for (const profile of profiles) {
     await sql.query(
@@ -160,8 +162,11 @@ try {
       (2007,'synthetic-claimed'),(2008,'synthetic-inactive'),(2010,'synthetic-private-account');
     insert into athlete_account_links values(3,'synthetic-disabled','active'),(4,'synthetic-hidden','active'),
       (7,'synthetic-claimed','active'),(8,'synthetic-inactive','revoked');
-    insert into athlete_public_shares values('synthetic-disabled',false,true),('synthetic-hidden',true,false),
-      ('synthetic-claimed',true,true),('synthetic-inactive',false,false);
+    insert into athlete_public_shares values('synthetic-disabled',false,true,true),('synthetic-hidden',true,false,true),
+      ('synthetic-claimed',true,true,true),('synthetic-inactive',false,false,false);
+    insert into network_audit_log(action,entity_type,entity_id,after_value)
+      select 'athlete.bulk_publish','athlete',id::text,'{"profile_visibility":"public"}'::jsonb
+      from athletes where id < 13;
     insert into athlete_private_profiles values
       ('synthetic-claimed','Synthetic Claimed Runner','Synthetic Claimed Runner','Synthetic Private Club','Canada'),
       ('synthetic-private-account','Synthetic Account Display','Synthetic Account Only','Synthetic Private Club','Australia');
@@ -189,13 +194,13 @@ try {
       "Synthetic Hidden Results": "synthetic-hidden-results",
       "Synthetic Inactive Share": "synthetic-inactive-share",
       "Synthetic Public Figure": "synthetic-public-figure",
+      "Synthetic Unapproved": "synthetic-unapproved",
     },
   });
   const firstLinks = await readPublicEditorialAthleteLinks(sql, article);
   assert.deepEqual(firstLinks, {
     "Synthetic Reviewed Runner": "synthetic-reviewed-runner",
     "Synthetic Inactive Share": "synthetic-inactive-share",
-    "Synthetic Public Figure": "synthetic-public-figure",
   });
   assert(Object.values(firstLinks).every((value) => typeof value === "string"));
   assert.doesNotMatch(
@@ -212,6 +217,27 @@ try {
     undefined,
     "Ambiguous names never link automatically",
   );
+
+  for (const [name, athleteId] of [
+    ["Synthetic Public Figure", 9],
+    ["Synthetic Unapproved", 13],
+  ]) {
+    await assert.rejects(
+      saveEditorialAthleteLink(sql, article, { name, athleteId, sourceUrl, note }, actor),
+      /unavailable for a public article link/,
+    );
+  }
+  const claimedArticle = {
+    ...article,
+    athleteLinks: { "Synthetic Claimed Runner": "synthetic-claimed-runner" },
+  };
+  assert.equal(
+    (await readPublicEditorialAthleteLinks(sql, claimedArticle))["Synthetic Claimed Runner"],
+    "synthetic-claimed-runner",
+  );
+  await sql.query("update athlete_public_shares set search_indexable=false where user_id='synthetic-claimed'");
+  assert.deepEqual(await readPublicEditorialAthleteLinks(sql, claimedArticle), {});
+  await sql.query("update athlete_public_shares set search_indexable=true where user_id='synthetic-claimed'");
 
   const initialReview = await readEditorialAthleteReview(sql, article);
   const row = (name, review = initialReview) => review.rows.find((item) => item.name === name);
@@ -486,6 +512,13 @@ try {
       actor,
     ),
     /unavailable for a public article link/,
+  );
+
+  await sql.query("delete from athletes where id=12");
+  assert.equal(
+    row("Synthetic Sole Match", await readEditorialAthleteReview(sql, article)).status,
+    "link-unavailable",
+    "A removed profile needs its previous link reviewed before creating a replacement",
   );
 
   const cappedCandidates = Array.from({ length: 14 }, (_, index) => ({

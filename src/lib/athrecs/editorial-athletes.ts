@@ -56,7 +56,7 @@ export type EditorialAthleteReviewRow = {
 export function editorialAthleteReviewRow(
   name: string,
   candidates: EditorialAthleteCandidate[],
-  reviewedSlug?: string,
+  reviewedSlug?: string | null,
 ): EditorialAthleteReviewRow {
   // A matching name is only a candidate. Only an explicitly reviewed mapping
   // can become a public link, and private profiles stay in the staff queue.
@@ -67,7 +67,7 @@ export function editorialAthleteReviewRow(
     name,
     status: linked
       ? "linked"
-      : reviewedSlug
+      : reviewedSlug !== undefined
         ? "link-unavailable"
         : candidates.length
           ? "review"

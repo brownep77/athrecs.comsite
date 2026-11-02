@@ -255,6 +255,9 @@ jobs:
       - name: Fixture geography on desktop and mobile
         run: node scripts/verify-fixture-geography-ui.mjs
 
+      - name: Editorial navigation and mobile article layout
+        run: node scripts/verify-editorial-navigation-browser.mjs
+
       - name: Catalogue automation authentication smoke test
         run: |
           status=$(curl \

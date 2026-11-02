@@ -41,6 +41,13 @@ for (const article of reports) {
   }
   const graph = editorialJsonLd(article, "https://www.athrecs.com")["@graph"][0];
   assert.equal(graph.url, `https://www.athrecs.com${editorialPath(article)}`);
+  assert.deepEqual(
+    filterEditorialArticles(reports, "race-reports", {
+      level: "local",
+      ...article.locations[0],
+    }).map(editorialPath),
+    [`/news/${article.slug}`],
+  );
   assert.equal(graph.wordCount, editorialWordCount(article));
   assert(!("candidates" in graph) && !("reviewNotes" in graph));
   assert.equal(

@@ -43,11 +43,11 @@ assert.deepEqual(find("race-reports", { country: "United Kingdom", county: "Norf
 ]);
 assert.deepEqual(find("news", { country: "United Kingdom" }), [], "Ireland is not part of the UK");
 assert.deepEqual(
-  editorialLocationOptions(stories, { country: "United Kingdom", area: "East of England" })
+  editorialLocationOptions(stories, "race-reports", { country: "United Kingdom", area: "East of England" })
     .counties,
   ["Norfolk"],
 );
-assert.deepEqual(editorialLocationOptions(stories, { country: "United Kingdom" }).areas, [
+assert.deepEqual(editorialLocationOptions(stories, "race-reports", { country: "United Kingdom" }).areas, [
   "East of England",
   "London",
 ]);
@@ -72,11 +72,12 @@ assert.deepEqual(
   "Unknown filters must not widen the search",
 );
 assert.deepEqual(
-  editorialLocationOptions(stories, { country: "England", area: "East of England" }).counties,
+  editorialLocationOptions(stories, "race-reports", { country: "England", area: "East of England" }).counties,
   ["Norfolk"],
 );
-assert.deepEqual(editorialLocationOptions(stories, { country: "Ireland" }).areas, ["Leinster"]);
-assert.deepEqual(editorialLocationOptions(stories, {}).counties, []);
+assert.deepEqual(editorialLocationOptions(stories, "news", { country: "Ireland" }).areas, ["Leinster"]);
+assert.deepEqual(editorialLocationOptions(stories, "race-reports", {}).counties, []);
+assert.deepEqual(editorialLocationOptions(stories, "race-reports", { country: "Ireland" }).areas, []);
 assert.deepEqual(parseEditorialSearch({ country: " England ", area: [], county: "", sport: 1 }), {
   country: "England",
 });
@@ -136,12 +137,12 @@ assert.equal(findCoverage({ continent: "Europe" }).includes("europe-championship
 assert.deepEqual(findCoverage({ continent: "Atlantis" }), []);
 assert.deepEqual(findCoverage(parseEditorialSearch({ level: "unknown" })), []);
 assert.deepEqual(findCoverage(parseEditorialSearch({ continent: "unknown" })), []);
-assert.deepEqual(editorialLocationOptions(coverageStories, { continent: "Oceania" }).countries, [
+assert.deepEqual(editorialLocationOptions(coverageStories, "news", { continent: "Oceania" }).countries, [
   "Australia",
   "New Zealand",
 ]);
 assert.deepEqual(
-  editorialLocationOptions(coverageStories, { continent: "Europe", country: "United States" })
+  editorialLocationOptions(coverageStories, "news", { continent: "Europe", country: "United States" })
     .areas,
   [],
 );
