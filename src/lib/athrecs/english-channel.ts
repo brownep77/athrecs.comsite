@@ -23,6 +23,32 @@ export type ChannelProfile = {
   revision: string;
 };
 export const channelPath = "/swimming/english-channel";
+function isRelay(card: ChannelCard) {
+  return card.lines.some(
+    (line) =>
+      /relay.*team performance|team elapsed time/i.test([line.label, line.text].join(" ")) ||
+      (/\brelay\b/i.test(card.title) && /^team (performance|result)$/i.test(line.label ?? "")),
+  );
+}
+
+export function channelQuestions(p: ChannelProfile) {
+  const relays = p.nativeCrossings.filter(isRelay).length;
+  const solos = p.nativeCrossings.length - relays;
+  return p.questions.map((q) => {
+    if (q.label !== `Which English Channel swims are included for ${p.name}?`) return q;
+    const events = [
+      solos && `${solos} selected solo performance${solos === 1 ? "" : "s"}`,
+      relays && `${relays} named relay participation${relays === 1 ? "" : "s"}`,
+    ]
+      .filter(Boolean)
+      .join(" and ");
+    return {
+      ...q,
+      value: `This profile includes ${events} for ${p.name}. Each continuous multi-way swim counts as one performance.`,
+    };
+  });
+}
+
 export function channelListing(p: ChannelProfile) {
   return {
     slug: p.slug,
@@ -35,13 +61,7 @@ export function channelListing(p: ChannelProfile) {
     events: p.otherEvents.length,
     checkedAt: p.checkedAt,
     eventNames: p.otherEvents.map((c) => c.title),
-    relay: p.nativeCrossings.some((card) =>
-      card.lines.some(
-        (line) =>
-          /relay.*team performance|team elapsed time/i.test([line.label, line.text].join(" ")) ||
-          (/\brelay\b/i.test(card.title) && /^team (performance|result)$/i.test(line.label ?? "")),
-      ),
-    ),
+    relay: p.nativeCrossings.some(isRelay),
   };
 }
 export type ChannelListing = ReturnType<typeof channelListing>;
