@@ -105,8 +105,8 @@ try{
   const yes=matches.getByRole('button',{name:'Mine',exact:true}),no=matches.getByRole('button',{name:'Not mine',exact:true});
   await yes.first().waitFor();assert.equal(await yes.count(),2);assert(await yes.nth(0).isEnabled());assert(await yes.nth(1).isEnabled());
   await yes.first().click();await matches.getByText('Marked as mine',{exact:true}).waitFor();
-  assert(await yes.isDisabled(),'The second alternative cannot be confirmed');assert(await no.isEnabled());
-  await no.click();await matches.getByText('Not mine',{exact:true}).waitFor();assert.equal(await yes.count(),0);
+  assert(await yes.isDisabled(),'The second alternative cannot be confirmed');
+  await no.click();await no.waitFor({state:'detached'});await matches.getByText('Not mine',{exact:true}).waitFor();assert.equal(await yes.count(),0);
   const storedPanel=page.getByRole('heading',{name:'Stored races on this profile',exact:true}).locator('..');
   const unverifiedRace=storedPanel.getByRole('row').filter({hasText:'Existing Synthetic 10K'});
   await unverifiedRace.getByRole('button',{name:'Verify result',exact:true}).click();
