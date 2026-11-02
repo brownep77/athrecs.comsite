@@ -463,7 +463,7 @@ function AthleteContent() {
             <AthleteProfileStatuses roles={profileStatuses} />
           </div>
           {!athlete.is_claimed ? (
-            <div className="w-full min-w-0 space-y-3 rounded-xl border border-orange-200/80 bg-orange-50/60 p-4 lg:w-80 lg:shrink-0">
+            <div className="w-full min-w-0 space-y-4 rounded-xl border border-orange-200/80 bg-orange-50/60 p-5 lg:w-[22rem] lg:shrink-0">
               <p className="text-sm font-semibold text-fg">Is this you?</p>
               <Link
                 to="/claim-results"
@@ -474,7 +474,10 @@ function AthleteContent() {
                 Claim your profile
                 <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
               </Link>
-              <p id="profile-claim-message" className="text-sm leading-6 text-muted">
+              <p
+                id="profile-claim-message"
+                className="text-lg font-bold leading-snug text-fg sm:text-xl"
+              >
                 Record all of your sporting achievements here forever.
               </p>
             </div>
