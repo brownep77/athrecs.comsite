@@ -28,6 +28,38 @@ assert.equal(bests([row()])[0].value.finishTimeSeconds, 1082);
 assert.equal(bests([row({ verificationStatus: "unverified" })]).length, 1);
 assert.equal(bests([row({ verificationStatus: "unverified" })])[0].verified, false);
 assert.equal(bests([row()])[0].verified, true);
+const legacyMarathon = row({ discipline: "Marathon", performance: "2:45:12" });
+const legacyHalf = row({ discipline: "Half Marathon", performance: "1:18:45" });
+delete legacyMarathon.verificationStatus;
+delete legacyHalf.verificationStatus;
+const legacyHistories = [
+  { ...histories([legacyMarathon, legacyHalf])[0], provider: "World Athletics" },
+];
+const legacyBefore = JSON.stringify(legacyHistories);
+const legacyBests = selectProfilePersonalBests([], [], legacyHistories);
+assert.deepEqual(
+  legacyBests.map(({ value, verified }) => [value.distanceCode, value.finishTimeSeconds, verified]),
+  [
+    ["Half", 4725, true],
+    ["Marathon", 9912, true],
+  ],
+  "Published legacy World Athletics marks count without an explicit verification field",
+);
+assert.equal(
+  bests([legacyMarathon])[0].verified,
+  false,
+  "Missing verification on an ordinary source never acquires a verification tick",
+);
+assert.deepEqual(
+  profilePersonalBestSummary([], withoutProfileEvidence(legacyHistories)),
+  profilePersonalBestSummary([], legacyHistories),
+  "Legacy PBs and verification survive the public evidence projection",
+);
+assert.equal(
+  JSON.stringify(legacyHistories),
+  legacyBefore,
+  "PB selection does not write verification statuses or change source history",
+);
 const fasterPending = [
   row(),
   row({ date: "2021-05-10", performance: "17:59", verificationStatus: "unverified" }),
@@ -147,6 +179,11 @@ for (const extra of [
 ]) {
   assert.equal(bests([row(extra)]).length, 0, JSON.stringify(extra));
   assert.equal(bests([{ ...reported, ...extra }]).length, 0, `reported ${JSON.stringify(extra)}`);
+  assert.equal(
+    bests([row({ ...extra, verificationStatus: undefined })]).length,
+    0,
+    `legacy ${JSON.stringify(extra)}`,
+  );
 }
 assert.equal(
   bests([row(), row({ performance: "17:59" })]).length,
